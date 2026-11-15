@@ -9,6 +9,10 @@ import {
 import { cn } from 'cn';
 import { arc, pie } from 'd3-shape';
 import {
+  type ScChartAnimationEasing,
+  scChartEntrance,
+} from '../chart/chart-animation';
+import {
   SC_CHART_SERIES,
   type ScChartLabelPoint,
   type ScChartLabelPosition,
@@ -78,6 +82,23 @@ export class ScChartPie implements ScChartSeriesLabels {
   readonly strokeWidth = input(2);
   /** How far the slice pointed at grows, in px. */
   readonly activeOffset = input(6);
+  /** It sweeps round from its start angle when it appears (Recharts'); not with reduced motion. */
+  readonly isAnimationActive = input(true);
+  /** The wait before it sweeps, in ms. */
+  readonly animationBegin = input(400);
+  /** How long it sweeps, in ms. */
+  readonly animationDuration = input(1500);
+  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+
+  /** Its entrance: 0 to 1 once, after its first render. */
+  private readonly entrance = scChartEntrance({
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+  });
+  private readonly swept = computed(() =>
+    this.isAnimationActive() ? this.entrance() : 1,
+  );
 
   protected readonly transform = computed(() => {
     const { cx, cy } = this.state.circle();
@@ -88,7 +109,9 @@ export class ScChartPie implements ScChartSeriesLabels {
     const rows = this.state.data();
     const key = this.key();
     const categories = this.state.categories();
-    const [start, end] = this.state.angles();
+    const [start, full] = this.state.angles();
+    // Sweeping: the slices share the arc drawn so far.
+    const end = start + (full - start) * this.swept();
     const { radius } = this.state.circle();
     const active = this.state.activeIndex();
     const arcs = pie<number>()
@@ -140,6 +163,8 @@ export class ScChartPie implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
+    // Once it's whole (Recharts').
+    if (this.swept() < 1) return [];
     const rows = this.state.data();
     return this.slices().map((slice) => {
       const value = numberOf(rows[slice.index]?.[this.key()]);

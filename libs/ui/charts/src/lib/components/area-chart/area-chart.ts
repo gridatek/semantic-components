@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
   DestroyRef,
@@ -9,6 +10,10 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { area, line } from 'd3-shape';
+import {
+  type ScChartAnimationEasing,
+  scChartEntrance,
+} from '../chart/chart-animation';
 import { curveOf } from '../chart/chart-curve';
 import {
   SC_CHART_SERIES,
@@ -37,16 +42,28 @@ interface ScAreaChartPoint {
   selector: 'g[scChartArea]',
   providers: [{ provide: SC_CHART_SERIES, useExisting: ScChartArea }],
   template: `
+    @if (reveal(); as r) {
+      <svg:clipPath [attr.id]="clipId">
+        <svg:rect
+          [attr.x]="r.x"
+          [attr.y]="r.y"
+          [attr.width]="r.width"
+          [attr.height]="r.height"
+        />
+      </svg:clipPath>
+    }
     <svg:path
       [attr.d]="areaPath()"
       [attr.fill]="fill() || color()"
       [attr.fill-opacity]="fillOpacity()"
+      [attr.clip-path]="reveal() ? 'url(#' + clipId + ')' : null"
     />
     <svg:path
       [attr.d]="edgePath()"
       [attr.stroke]="color()"
       stroke-width="2"
       fill="none"
+      [attr.clip-path]="reveal() ? 'url(#' + clipId + ')' : null"
     />
     @if (activePoint(); as p) {
       <svg:circle
@@ -81,6 +98,24 @@ export class ScChartArea implements ScChartSeriesLabels {
   readonly fillOpacity = input(0.4);
   /** A dot where the pointer is. */
   readonly activeDot = input(true, { transform: booleanAttribute });
+  /** It unveils itself from its first category when it appears (Recharts'); not with reduced motion. */
+  readonly isAnimationActive = input(true);
+  /** The wait before it unveils, in ms. */
+  readonly animationBegin = input(0);
+  /** How long it unveils, in ms. */
+  readonly animationDuration = input(1500);
+  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+
+  /** Its entrance: 0 to 1 once, after its first render. */
+  private readonly entrance = scChartEntrance({
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+  });
+  private readonly shown = computed(() =>
+    this.isAnimationActive() ? this.entrance() : 1,
+  );
+  private readonly clipId = inject(_IdGenerator).getId('sc-chart-area-clip-');
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
@@ -115,6 +150,30 @@ export class ScChartArea implements ScChartSeriesLabels {
       '',
   );
 
+  /**
+   * While it unveils: the clip's box, from its first category towards its
+   * last (down, vertical; leftwards, right to left), across everything.
+   */
+  private readonly reveal = computed(() => {
+    const shown = this.shown();
+    const points = this.points();
+    if (shown >= 1 || points.length === 0) return null;
+    const vertical = this.state.vertical();
+    const along = (p: ScAreaChartPoint) => (vertical ? p.y : p.x);
+    const first = along(points[0]);
+    const last = along(points[points.length - 1]);
+    // Past the ends by the edge's width: its round caps show whole.
+    const pad = Math.sign(last - first || 1) * 2;
+    const from = first - pad;
+    const to = from + (last + pad - from) * shown;
+    const start = Math.min(from, to);
+    const length = Math.abs(to - from);
+    const across = { start: -1e5, length: 2e5 };
+    return vertical
+      ? { x: across.start, y: start, width: across.length, height: length }
+      : { x: start, y: across.start, width: length, height: across.length };
+  });
+
   protected readonly activePoint = computed(() => {
     const index = this.state.activeIndex();
     return this.activeDot() && index !== null ? this.points()[index] : null;
@@ -135,6 +194,8 @@ export class ScChartArea implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
+    // Once it's whole (Recharts').
+    if (this.shown() < 1) return [];
     const rows = this.state.data();
     const vertical = this.state.vertical();
     return this.points().map((p, index) => {

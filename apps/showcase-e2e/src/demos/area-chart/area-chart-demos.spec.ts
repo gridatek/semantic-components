@@ -39,6 +39,34 @@ test('Area: the keyboard moves through the months; the tooltip says them', async
   await expect(tooltip(page)).toHaveCount(0);
 });
 
+test('Entrance: unveiled from its first month, then whole', async ({
+  page,
+}) => {
+  await page.goto(demo('area'));
+  const area = page.locator('[data-slot=chart-area]').first();
+  // Unveiling: clipped to a box widening from January.
+  await expect(area.locator('path').first()).toHaveAttribute(
+    'clip-path',
+    /^url\(#/,
+  );
+  await expect(area.locator('clipPath rect')).toHaveCount(1);
+  // Whole: no clip left.
+  await expect(area.locator('clipPath')).toHaveCount(0);
+  await expect(area.locator('path').first()).not.toHaveAttribute('clip-path');
+});
+
+test.describe('reduced motion', () => {
+  test.use({ reducedMotion: 'reduce' });
+
+  test('Entrance: none — whole from the start', async ({ page }) => {
+    await page.goto(demo('area'));
+    const area = page.locator('[data-slot=chart-area]').first();
+    await expect(area.locator('path').first()).toBeAttached();
+    await expect(area.locator('clipPath')).toHaveCount(0);
+    await expect(area.locator('path').first()).not.toHaveAttribute('clip-path');
+  });
+});
+
 test('Expanded area: shares, to 100%', async ({ page }) => {
   await page.goto(demo('expanded-area'));
   const axis = page.locator('[data-slot=chart-value-axis]');

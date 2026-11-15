@@ -30,16 +30,24 @@ A series as an area: its values filled down to 0 — or onto the series under it
 
 ## ScChartArea — `g[scChartArea]`
 
-| Input         | Type                                             | Default                                |
-| ------------- | ------------------------------------------------ | -------------------------------------- |
-| `key`         | `string` (required): the series' key in the rows | —                                      |
-| `curve`       | `'natural'                                       | 'linear'                               | 'step' | 'monotone'` | `'natural'` |
-| `stack`       | `string                                          | null`: areas of a stack on one another | `null` |
-| `fill`        | `string`: instead of its color, `url(#gradient)` | `''`                                   |
-| `fillOpacity` | `number`                                         | `0.4`                                  |
-| `activeDot`   | `boolean`: a dot where the pointer is            | `true`                                 |
+| Input               | Type                                                                                      | Default                                |
+| ------------------- | ----------------------------------------------------------------------------------------- | -------------------------------------- |
+| `key`               | `string` (required): the series' key in the rows                                          | —                                      |
+| `curve`             | `'natural'                                                                                | 'linear'                               | 'step' | 'monotone'` | `'natural'` |
+| `stack`             | `string                                                                                   | null`: areas of a stack on one another | `null` |
+| `fill`              | `string`: instead of its color, `url(#gradient)`                                          | `''`                                   |
+| `fillOpacity`       | `number`                                                                                  | `0.4`                                  |
+| `activeDot`         | `boolean`: a dot where the pointer is                                                     | `true`                                 |
+| `isAnimationActive` | `boolean`: it unveils itself from its first category when it appears (Recharts' entrance) | `true`                                 |
+| `animationBegin`    | `number`: the wait before it starts, in ms                                                | `0`                                    |
+| `animationDuration` | `number`: how long it lasts, in ms                                                        | `1500`                                 |
+| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                                    | `ease`                                 |
 
 Its color: `--color-<key>`, from the chart's `config` — usable in a gradient of yours (`stop-color="var(--color-desktop)"`). With the plot's `stackOffset="expand"`, each category's stack fills to 100%.
+
+## Entrance
+
+As Recharts', the area is unveiled from its first category to its last when the chart appears (a clip that widens, down when vertical): 1500ms, `ease`. Its labels come once it's whole. Not on the server (it draws it whole), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once.
 
 ## Labels
 

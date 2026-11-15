@@ -27,6 +27,31 @@ test('Line: a dot on each month; the keyboard moves through them', async ({
   await expect(tooltip(page)).toContainText('305');
 });
 
+test('Entrance: the line draws itself, then its dots come', async ({
+  page,
+}) => {
+  await page.goto(demo('line'));
+  const path = page.locator('[data-slot=chart-line] path').first();
+  // Drawing: a share of its length (pathLength 1), the dots not yet there.
+  await expect(path).toHaveAttribute('stroke-dasharray', /^0\.\d+ 1$/);
+  await expect(page.locator('[data-slot=chart-line] circle')).toHaveCount(0);
+  // Drawn: whole, its dots on it.
+  await expect(path).not.toHaveAttribute('stroke-dasharray');
+  await expect(page.locator('[data-slot=chart-line] circle')).toHaveCount(6);
+});
+
+test.describe('reduced motion', () => {
+  test.use({ reducedMotion: 'reduce' });
+
+  test('Entrance: none — the line whole from the start', async ({ page }) => {
+    await page.goto(demo('line'));
+    await expect(page.locator('[data-slot=chart-line] circle')).toHaveCount(6);
+    await expect(
+      page.locator('[data-slot=chart-line] path').first(),
+    ).not.toHaveAttribute('stroke-dasharray');
+  });
+});
+
 test('Two lines: a legend; the tooltip has both', async ({ page }) => {
   await page.goto(demo('multiple-line'));
   await expect(page.locator('[data-slot=chart-legend]')).toHaveText(

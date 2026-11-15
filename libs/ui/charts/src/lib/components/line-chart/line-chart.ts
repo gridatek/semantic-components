@@ -9,6 +9,10 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { line } from 'd3-shape';
+import {
+  type ScChartAnimationEasing,
+  scChartEntrance,
+} from '../chart/chart-animation';
 import { curveOf } from '../chart/chart-curve';
 import {
   SC_CHART_SERIES,
@@ -33,9 +37,11 @@ interface ScLineChartPoint {
       [attr.d]="path()"
       [attr.stroke]="color()"
       [attr.stroke-width]="strokeWidth()"
+      [attr.pathLength]="drawn() < 1 ? 1 : null"
+      [attr.stroke-dasharray]="drawn() < 1 ? drawn() + ' 1' : null"
       fill="none"
     />
-    @if (dots()) {
+    @if (dots() && drawn() === 1) {
       @for (p of points(); track $index) {
         <svg:circle
           [attr.cx]="p.x"
@@ -76,6 +82,24 @@ export class ScChartLine implements ScChartSeriesLabels {
   readonly dots = input(false, { transform: booleanAttribute });
   /** A dot where the pointer is. */
   readonly activeDot = input(true, { transform: booleanAttribute });
+  /** Its line draws itself when it appears (Recharts'); not with reduced motion. */
+  readonly isAnimationActive = input(true);
+  /** The wait before it draws, in ms. */
+  readonly animationBegin = input(0);
+  /** How long it draws, in ms. */
+  readonly animationDuration = input(1500);
+  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+
+  /** Its entrance: 0 to 1 once, after its first render. */
+  private readonly entrance = scChartEntrance({
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+  });
+  /** How much of the line is drawn: its dots once all of it is (Recharts'). */
+  private readonly drawn = computed(() =>
+    this.isAnimationActive() ? this.entrance() : 1,
+  );
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
@@ -114,6 +138,8 @@ export class ScChartLine implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
+    // Once the line is drawn, as its dots (Recharts').
+    if (this.drawn() < 1) return [];
     const rows = this.state.data();
     const vertical = this.state.vertical();
     return this.points().map((p, index) => {

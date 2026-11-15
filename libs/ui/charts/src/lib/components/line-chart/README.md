@@ -39,13 +39,21 @@ A series as a line through its values, in `--color-<key>`. Made with [the chart'
 
 ## ScChartLine — `g[scChartLine]`
 
-| Input         | Type                                             | Default  |
-| ------------- | ------------------------------------------------ | -------- |
-| `key`         | `string` (required): the series' key in the rows | —        |
-| `curve`       | `'natural'                                       | 'linear' | 'step' | 'monotone'` | `'natural'` |
-| `strokeWidth` | `number`                                         | `2`      |
-| `dots`        | `boolean`: a dot at each value                   | `false`  |
-| `activeDot`   | `boolean`: a dot where the pointer is            | `true`   |
+| Input               | Type                                                                  | Default  |
+| ------------------- | --------------------------------------------------------------------- | -------- |
+| `key`               | `string` (required): the series' key in the rows                      | —        |
+| `curve`             | `'natural'                                                            | 'linear' | 'step' | 'monotone'` | `'natural'` |
+| `strokeWidth`       | `number`                                                              | `2`      |
+| `dots`              | `boolean`: a dot at each value                                        | `false`  |
+| `activeDot`         | `boolean`: a dot where the pointer is                                 | `true`   |
+| `isAnimationActive` | `boolean`: its line draws itself when it appears (Recharts' entrance) | `true`   |
+| `animationBegin`    | `number`: the wait before it starts, in ms                            | `0`      |
+| `animationDuration` | `number`: how long it lasts, in ms                                    | `1500`   |
+| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                | `ease`   |
+
+## Entrance
+
+As Recharts', the line draws itself from its first category to its last when the chart appears: 1500ms, `ease`. Its dots and its labels come once it's drawn. Not on the server (it draws it whole), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once.
 
 ## Labels
 

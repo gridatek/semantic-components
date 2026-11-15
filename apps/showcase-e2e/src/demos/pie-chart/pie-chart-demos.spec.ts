@@ -56,3 +56,34 @@ test('Labels: each value beyond its slice', async ({ page }) => {
   await expect(labels).toHaveCount(5);
   await expect(labels.first()).toHaveText('275');
 });
+
+test('Entrance: it sweeps round, then its labels come', async ({ page }) => {
+  await page.goto(demo('label-pie'));
+  const pie = page.locator('[data-slot=chart-pie]').first();
+  // Sweeping: part of the circle drawn (narrower than tall), no labels.
+  await expect
+    .poll(
+      () =>
+        pie.evaluate((g) => {
+          const box = (g as SVGGElement).getBBox();
+          return box.width > 0 && box.width < box.height - 1;
+        }),
+      { intervals: [50] },
+    )
+    .toBe(true);
+  await expect(page.locator('[data-slot=chart-labels] text')).toHaveCount(0);
+  // Whole: round, its labels around it.
+  await expect(page.locator('[data-slot=chart-labels] text')).toHaveCount(5);
+});
+
+test.describe('reduced motion', () => {
+  test.use({ reducedMotion: 'reduce' });
+
+  test('Entrance: none — whole, labelled, from the start', async ({ page }) => {
+    await page.goto(demo('label-pie'));
+    const pie = page.locator('[data-slot=chart-pie]').first();
+    await expect(page.locator('[data-slot=chart-labels] text')).toHaveCount(5);
+    const box = await pie.evaluate((g) => (g as SVGGElement).getBBox());
+    expect(Math.round(box.width)).toBe(Math.round(box.height));
+  });
+});
