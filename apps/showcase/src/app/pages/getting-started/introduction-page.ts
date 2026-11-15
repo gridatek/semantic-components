@@ -226,7 +226,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <div scItemBody>
               <div scItemTitle>Charts</div>
               <p scItemDescription class="line-clamp-none">
-                Area, bar, line, pie, radar and radial charts to copy.
+                Area, bar, line, pie, radar, radial, scatter, funnel, treemap,
+                sunburst and sankey charts to copy.
               </p>
             </div>
           </a>

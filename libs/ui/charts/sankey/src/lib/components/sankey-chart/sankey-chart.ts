@@ -59,8 +59,9 @@ interface ScSankeyChartNode {
       />
     }
     @for (node of nodes(); track node.name) {
+      <!-- Its corners: the style's, as the bars' (the preset sets --chart-bar-radius). -->
       <svg:rect
-        rx="2"
+        class="[rx:var(--chart-bar-radius,0px)]"
         [attr.x]="node.x"
         [attr.y]="node.y"
         [attr.width]="node.width"
@@ -147,18 +148,17 @@ export class ScChartSankey implements ScChartSeriesLabels {
 
   protected readonly flows = computed<ScSankeyChartFlow[]>(() => {
     const across = this.across();
-    const sourceX = (link: { source: unknown }) =>
-      across(
-        typeof link.source === 'object' && link.source
-          ? ((link.source as { x1?: number }).x1 ?? 0)
-          : 0,
-      );
-    const targetX = (link: { target: unknown }) =>
-      across(
-        typeof link.target === 'object' && link.target
-          ? ((link.target as { x0?: number }).x0 ?? 0)
-          : 0,
-      );
+    // A node's middle: a flow starts and ends there, under it (the nodes are
+    // drawn over the flows) — out from behind it, no square end beside its
+    // rounded corners.
+    const middle = (node: unknown) =>
+      typeof node === 'object' && node
+        ? (((node as { x0?: number }).x0 ?? 0) +
+            ((node as { x1?: number }).x1 ?? 0)) /
+          2
+        : 0;
+    const sourceX = (link: { source: unknown }) => across(middle(link.source));
+    const targetX = (link: { target: unknown }) => across(middle(link.target));
     return this.layout()
       .links.map((link) => {
         // From its source's side to its target's (as d3-sankey's link).

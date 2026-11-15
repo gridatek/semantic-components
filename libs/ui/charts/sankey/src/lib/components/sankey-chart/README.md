@@ -38,6 +38,8 @@ Its own entry point, so the other charts don't need `d3-sankey`: `import { ScCha
 
 Each row's category (`categoryKey`) names its flow in the tooltip (`Search → Pricing`). The nodes' names come from the config's labels, or are the names themselves; the legend lists the nodes.
 
+Its nodes' corners are the style's, as the bars': the preset sets `--chart-bar-radius` (square in Lyra and Sera, rounded in the others; never more than half a node's width).
+
 ## Entrance
 
 None: it draws whole at once. Recharts' `Sankey` has no animation, and our charts animate as Recharts' do — so it has no `isAnimationActive` or other animation inputs.
