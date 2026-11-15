@@ -61,7 +61,7 @@ Open work found along the way, kept for later — tick an item when it's done. N
 - [ ] **Calendar: other calendar systems** (shadcn's Hijri example, 2026-11-06) — Temporal has them (`withCalendar('islamic-umalqura')`, `'persian'`…): months of other lengths, their names from Intl; not before a design note.
 - [ ] **SSR: 16 components still throw on the server**; the CI `ssr` job may fail because of them.
 - [ ] **Charts** (see [reference-libraries.md](reference-libraries.md#charts)):
-  - [ ] Animations, as Recharts: series appearing and changing data (`isAnimationActive`, duration, easing); honour `prefers-reduced-motion`. Appearing done for bar, line, area and pie (2026-11-15); still to do: the other types, and changing data for all.
+  - [ ] Animations, as Recharts: series appearing and changing data (`isAnimationActive`, duration, easing); honour `prefers-reduced-motion`. Appearing done for every type Recharts animates (2026-11-15; Sunburst and Sankey have none); still to do: changing data.
   - [ ] Recharts parts we don't have: `Brush`, `ReferenceLine`, `ReferenceArea`, `ErrorBar`, axis `domain`. Checked 2026-11-13: none is used in shadcn's chart examples (78 files) nor in its Create cards — later, only if a real need comes (the shadcn scope). The two Create used, `barSize` and `maxBarSize` on the bar, are done.
   - [ ] Treemap and sankey without `d3-hierarchy` / `d3-sankey` (their own layouts, as Recharts) — or keep their entry points.
 - [ ] **Tree Table** (see [reference-libraries.md](reference-libraries.md#tree-table)):
