@@ -16,6 +16,20 @@ import type {
 } from './chart-types';
 
 /**
+ * The preset's corner radius (`--chart-bar-radius`) in px: a length only the
+ * browser resolves (calc(var(--radius) - 4px)…), read through a probe as wide.
+ */
+function radiusOf(chart: Element): number {
+  const probe = chart.ownerDocument.createElement('div');
+  probe.style.cssText =
+    'position:absolute;visibility:hidden;width:var(--chart-bar-radius,0px)';
+  chart.append(probe);
+  const width = parseFloat(getComputedStyle(probe).width);
+  probe.remove();
+  return Number.isFinite(width) ? width : 0;
+}
+
+/**
  * The chart's drawing (`svg`): a category per row (`categoryKey`), and inside
  * it, in drawing order, a grid, axes, a cursor and the series. Points with the
  * pointer and with the keyboard — focus it, then the arrow keys, Home and End
@@ -103,6 +117,9 @@ export class ScChartPlot {
         const box = this.host.getBoundingClientRect();
         if (box.width > 0) this.state.width.set(box.width);
         if (box.height > 0) this.state.height.set(box.height);
+        // Laid out at last (a chart rendered before it was in the page has
+        // no styles to read until then): the preset's corner radius in px.
+        if (box.width > 0 && chart) this.state.barRadius.set(radiusOf(chart));
         const around = chart?.getBoundingClientRect();
         if (around)
           this.state.offset.set({

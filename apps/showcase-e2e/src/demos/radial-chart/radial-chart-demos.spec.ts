@@ -166,3 +166,45 @@ test('Labels at the start: each along its own ring, none on another', async ({
   for (let i = 1; i < distances.length; i++)
     expect(distances[i] - distances[i - 1]).toBeGreaterThan(10);
 });
+
+test("Corners: the style's — square ends in Lyra, rounded in Nova", async ({
+  page,
+  baseURL,
+}) => {
+  // An arc's path: its two edges, and a small arc at each rounded corner.
+  const arcsIn = async (preset: string) => {
+    await page.context().addCookies([
+      {
+        name: 'sc-preset',
+        value: preset,
+        url: baseURL ?? 'http://localhost:4200',
+      },
+    ]);
+    await page.goto(demo('radial'));
+    const bar = page
+      .locator('[data-slot=chart-radial-bar] path:not(.fill-muted)')
+      // The second: the first, the largest, is a whole ring (no ends).
+      .nth(1);
+    // Once measured and grown: still.
+    await expect
+      .poll(async () => (await bar.getAttribute('d'))?.split('A').length ?? 0, {
+        intervals: [200],
+      })
+      .toBeGreaterThan(1);
+    let last = '';
+    await expect
+      .poll(
+        async () => {
+          const d = (await bar.getAttribute('d')) ?? '';
+          const still = d === last;
+          last = d;
+          return still;
+        },
+        { intervals: [300] },
+      )
+      .toBe(true);
+    return last.split('A').length - 1;
+  };
+  expect(await arcsIn('lyra')).toBe(2);
+  expect(await arcsIn('nova')).toBeGreaterThan(2);
+});

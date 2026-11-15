@@ -44,20 +44,8 @@ import {
         [endAngle]="180"
         aria-label="Visitors in January, by device"
       >
-        <g
-          scChartRadialBar
-          key="desktop"
-          stack="a"
-          [innerRadius]="0.75"
-          [cornerRadius]="5"
-        />
-        <g
-          scChartRadialBar
-          key="mobile"
-          stack="a"
-          [innerRadius]="0.75"
-          [cornerRadius]="5"
-        />
+        <g scChartRadialBar key="desktop" stack="a" [innerRadius]="0.75" />
+        <g scChartRadialBar key="mobile" stack="a" [innerRadius]="0.75" />
         <g scChartCenter>
           <text
             text-anchor="middle"

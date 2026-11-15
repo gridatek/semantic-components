@@ -37,13 +37,7 @@ import {
       [data]="data"
     >
       <svg scChartPlot categoryKey="browser" aria-label="Visitors by browser">
-        <g
-          scChartRadialBar
-          key="visitors"
-          colorBy="category"
-          track
-          [cornerRadius]="6"
-        />
+        <g scChartRadialBar key="visitors" colorBy="category" track />
       </svg>
       <div scChartTooltipProvider>
         <ng-template scChartTooltipPortal>

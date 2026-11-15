@@ -181,6 +181,13 @@ export class ScChartState {
   /** Polar charts: the room the labels around them take, set by them. */
   readonly polarPadding = signal(0);
 
+  /**
+   * The preset's corner radius (`--chart-bar-radius`), in px: for shapes
+   * drawn as paths (radial bars), which can't take it from CSS. Measured with
+   * the plot's size, once it's laid out; 0 until then (and on the server).
+   */
+  readonly barRadius = signal(0);
+
   /** The category pointed at, or reached by the keyboard. */
   readonly activeIndex = signal<number | null>(null);
   /** Where the pointer is, on the screen (client px); null with the keyboard. */

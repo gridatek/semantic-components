@@ -175,8 +175,9 @@ export default class RadialChartPage {
     {
       name: 'cornerRadius',
       type: 'number',
-      default: '0',
-      description: '',
+      default: '—',
+      description:
+        "Its ends' rounding, in px — unset, the style's (--chart-bar-radius, as the bars'; square in Lyra and Sera).",
     },
     {
       name: 'track',

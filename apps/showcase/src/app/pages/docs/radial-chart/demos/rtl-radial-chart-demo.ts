@@ -40,13 +40,7 @@ import {
       [data]="data"
     >
       <svg scChartPlot categoryKey="browser" aria-label="الزوار حسب المتصفح">
-        <g
-          scChartRadialBar
-          key="visitors"
-          colorBy="category"
-          track
-          [cornerRadius]="6"
-        />
+        <g scChartRadialBar key="visitors" colorBy="category" track />
       </svg>
       <div scChartTooltipProvider>
         <ng-template scChartTooltipPortal>

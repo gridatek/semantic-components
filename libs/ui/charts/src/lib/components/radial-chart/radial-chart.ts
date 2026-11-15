@@ -105,7 +105,8 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
   readonly innerRadius = input(0.3);
   /** Where they end, as a share of the radius. */
   readonly outerRadius = input(1);
-  readonly cornerRadius = input(0);
+  /** Its ends' rounding, in px. Unset: the style's (the preset's `--chart-bar-radius`, as the bars'). */
+  readonly cornerRadius = input<number | undefined>(undefined);
   /** Each ring's full length behind it. */
   readonly track = input(false, { transform: booleanAttribute });
   /**
@@ -194,7 +195,7 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
       const shape = arc()
         .innerRadius(inner + index * step + gap / 2)
         .outerRadius(inner + (index + 1) * step - gap / 2)
-        .cornerRadius(this.cornerRadius());
+        .cornerRadius(this.cornerRadius() ?? this.state.barRadius());
       const angles = { innerRadius: 0, outerRadius: 0, padAngle: 0 };
       // Growing in: its end on the way from its start to its value.
       const to = between(from, value, grown);

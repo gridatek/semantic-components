@@ -5,8 +5,8 @@ A series as radial bars: a ring per row, the first innermost, its value as an ar
 ```html
 <div scChart class="mx-auto aspect-square max-h-64" [config]="config" [data]="data">
   <svg scChartPlot categoryKey="month" [endAngle]="180" aria-label="Visitors in January, by device">
-    <g scChartRadialBar key="desktop" stack="a" [innerRadius]="0.75" [cornerRadius]="5" />
-    <g scChartRadialBar key="mobile" stack="a" [innerRadius]="0.75" [cornerRadius]="5" />
+    <g scChartRadialBar key="desktop" stack="a" [innerRadius]="0.75" />
+    <g scChartRadialBar key="mobile" stack="a" [innerRadius]="0.75" />
     <g scChartCenter>
       <text text-anchor="middle" class="fill-foreground text-2xl font-bold">{{ total }}</text>
     </g>
@@ -36,7 +36,7 @@ A series as radial bars: a ring per row, the first innermost, its value as an ar
 | `colorBy`           | `'key' \| 'category'`: its key's color, or each row's                                                                                                               | `'key'`    |
 | `innerRadius`       | `number`: where the rings start, a share of the radius                                                                                                              | `0.3`      |
 | `outerRadius`       | `number`: where they end                                                                                                                                            | `1`        |
-| `cornerRadius`      | `number`                                                                                                                                                            | `0`        |
+| `cornerRadius`      | `number`: its ends' rounding, in px — unset, the style's (`--chart-bar-radius`, as the bars'; square in Lyra and Sera)                                              | —          |
 | `track`             | `boolean`: each ring's full length behind it                                                                                                                        | `false`    |
 | `isAnimationActive` | `boolean`: its arcs grow along their rings when it appears (Recharts' entrance)                                                                                     | `true`     |
 | `animationBegin`    | `number`: the wait before it starts, in ms                                                                                                                          | `0`        |
