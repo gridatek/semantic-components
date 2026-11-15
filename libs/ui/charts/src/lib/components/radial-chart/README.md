@@ -4,7 +4,7 @@ A series as radial bars: a ring per row, the first innermost, its value as an ar
 
 ```html
 <div scChart class="mx-auto aspect-square max-h-64" [config]="config" [data]="data">
-  <svg scChartPlot categoryKey="month" [startAngle]="-90" [endAngle]="90" aria-label="Visitors in January, by device">
+  <svg scChartPlot categoryKey="month" [endAngle]="180" aria-label="Visitors in January, by device">
     <g scChartRadialBar key="desktop" stack="a" [innerRadius]="0.75" [cornerRadius]="5" />
     <g scChartRadialBar key="mobile" stack="a" [innerRadius]="0.75" [cornerRadius]="5" />
     <g scChartCenter>
@@ -52,4 +52,4 @@ As Recharts', each arc grows along its ring from its start when the chart appear
 
 ## Labels
 
-`<g scChartLabels />` inside the radial bars writes each ring's value at its arc's start (`start`), beyond its end (`outside`) or in its middle (`inside`); its `formatter` can write the category instead.
+`<g scChartLabels />` inside the radial bars writes each ring's value along its ring from its arc's start (`start`: curved, the way the ring grows, as Recharts' `insideStart` — the names don't pile up where the rings begin), beyond its end (`outside`) or in its middle (`inside`); its `formatter` can write the category instead.
