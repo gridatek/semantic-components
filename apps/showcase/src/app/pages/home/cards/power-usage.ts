@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
@@ -7,16 +8,42 @@ import {
   ScCardTitle,
   ScSeparator,
 } from '@semantic-components/ui';
+import {
+  ScChart,
+  ScChartBar,
+  ScChartCategoryAxis,
+  type ScChartConfig,
+  ScChartPlot,
+  ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipPortal,
+  ScChartTooltipProvider,
+  ScChartTooltipValue,
+} from '@semantic-components/ui/charts';
 
-/** Bars by hour, then two figures. */
+/** Usage by hour as a bar chart (the preset's corners), then two figures. */
 @Component({
   selector: 'app-home-power-usage',
   imports: [
+    DecimalPipe,
     ScCard,
     ScCardBody,
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
+    ScChart,
+    ScChartBar,
+    ScChartCategoryAxis,
+    ScChartPlot,
+    ScChartTooltip,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipPortal,
+    ScChartTooltipProvider,
+    ScChartTooltipValue,
     ScSeparator,
   ],
   template: `
@@ -26,22 +53,29 @@ import {
         <p scCardDescription>Whole Home</p>
       </div>
       <div scCardBody class="flex flex-col gap-4">
-        <div
-          class="flex h-[140px] w-full items-end gap-2"
-          role="img"
-          aria-label="Power usage by hour"
-        >
-          @for (item of hours; track item.hour) {
-            <div class="flex h-full flex-1 flex-col justify-end gap-1.5">
-              <div
-                class="bg-chart-2 min-h-2 rounded-t"
-                [style.height.%]="(item.usage / max) * 100"
-              ></div>
-              <span class="text-muted-foreground text-center text-xs">{{
-                item.hour
-              }}</span>
-            </div>
-          }
+        <div scChart class="h-[140px] w-full" [config]="config" [data]="data">
+          <svg
+            scChartPlot
+            categoryKey="hour"
+            aria-label="Power usage by hour, 6am to 8pm"
+            [margin]="{ left: 0, right: 0, top: 4, bottom: 0 }"
+          >
+            <g scChartCategoryAxis class="text-xs" />
+            <g scChartBar key="usage" corners="end" />
+          </svg>
+          <div scChartTooltipProvider>
+            <ng-template scChartTooltipPortal>
+              <div scChartTooltip #tooltip="scChartTooltip">
+                @for (item of tooltip.payload(); track item.dataKey) {
+                  <div scChartTooltipItem [item]="item">
+                    <span scChartTooltipIndicator></span>
+                    <span scChartTooltipName>{{ item.name }}</span>
+                    <span scChartTooltipValue>{{ item.value | number }}</span>
+                  </div>
+                }
+              </div>
+            </ng-template>
+          </div>
         </div>
         <div scSeparator aria-hidden="true"></div>
         <div class="grid grid-cols-2 gap-4">
@@ -61,7 +95,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class HomePowerUsage {
-  protected readonly hours = [
+  protected readonly data = [
     { hour: '6a', usage: 1.2 },
     { hour: '8a', usage: 2.8 },
     { hour: '10a', usage: 3.1 },
@@ -71,5 +105,7 @@ export class HomePowerUsage {
     { hour: '6p', usage: 3.8 },
     { hour: '8p', usage: 3.2 },
   ];
-  protected readonly max = Math.max(...this.hours.map((h) => h.usage));
+  protected readonly config: ScChartConfig = {
+    usage: { label: 'Usage (kW)', color: 'var(--chart-2)' },
+  };
 }
