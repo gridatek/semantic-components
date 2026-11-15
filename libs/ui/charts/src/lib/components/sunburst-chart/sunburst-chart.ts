@@ -85,6 +85,8 @@ export class ScChartSunburst implements ScChartSeriesLabels {
   readonly splitRadius = input(0.65);
   /** The line between slices, in px (0: none). */
   readonly strokeWidth = input(2);
+  /** Its arcs' corners' rounding, in px. Unset: the style's (the preset's `--chart-bar-radius`, as the bars'). */
+  readonly cornerRadius = input<number | undefined>(undefined);
 
   protected readonly active = this.state.activeIndex;
 
@@ -116,8 +118,12 @@ export class ScChartSunburst implements ScChartSeriesLabels {
     const per = (end - start) / total;
     const inner = radius * this.innerRadius();
     const split = radius * this.splitRadius();
+    // Its corners: yours, else the style's (measured: a path can't take CSS).
+    const corners = arc().cornerRadius(
+      this.cornerRadius() ?? this.state.barRadius(),
+    );
     const path = (a0: number, a1: number, r0: number, r1: number) =>
-      arc()({
+      corners({
         innerRadius: r0,
         outerRadius: r1,
         startAngle: a0,

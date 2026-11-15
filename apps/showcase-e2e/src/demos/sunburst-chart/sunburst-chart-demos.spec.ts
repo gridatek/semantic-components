@@ -75,3 +75,38 @@ test('RTL: in Arabic, mirrored — ← to the next', async ({ page }) => {
   await press(page, 'ArrowLeft');
   await expect(tooltip(page)).toContainText('ألمانيا');
 });
+
+test("Corners: its arcs the style's — square in Lyra, rounded in Nova", async ({
+  page,
+  baseURL,
+}) => {
+  const arcsIn = async (preset: string) => {
+    await page.context().addCookies([
+      {
+        name: 'sc-preset',
+        value: preset,
+        url: baseURL ?? 'http://localhost:4200',
+      },
+    ]);
+    // Drawn whole at once: its corners, not its growth.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(demo('sunburst'));
+    const arc = page.locator('[data-slot=chart-sunburst] path').nth(1);
+    let last = '';
+    await expect
+      .poll(
+        async () => {
+          const d = (await arc.getAttribute('d')) ?? '';
+          const still = d !== '' && d === last;
+          last = d;
+          return still;
+        },
+        { intervals: [300] },
+      )
+      .toBe(true);
+    // Its two edges' arcs, and a small one at each rounded corner.
+    return last.split('A').length - 1;
+  };
+  expect(await arcsIn('lyra')).toBe(2);
+  expect(await arcsIn('nova')).toBeGreaterThan(2);
+});

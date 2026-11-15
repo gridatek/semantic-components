@@ -26,13 +26,14 @@ A series as a sunburst: its rows' groups (`groupKey`) as an inner ring, each its
 
 ## ScChartSunburst — `g[scChartSunburst]`
 
-| Input         | Type                                                         | Default |
-| ------------- | ------------------------------------------------------------ | ------- |
-| `key`         | `string` (required): each row's value                        | —       |
-| `groupKey`    | `string` (required): each row's group, the inner ring        | —       |
-| `innerRadius` | `number`: its hole, a share of the radius                    | `0.3`   |
-| `splitRadius` | `number`: where the groups' ring ends, a share of the radius | `0.65`  |
-| `strokeWidth` | `number`: the line between slices (0: none)                  | `2`     |
+| Input          | Type                                                                                                                            | Default |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `key`          | `string` (required): each row's value                                                                                           | —       |
+| `groupKey`     | `string` (required): each row's group, the inner ring                                                                           | —       |
+| `innerRadius`  | `number`: its hole, a share of the radius                                                                                       | `0.3`   |
+| `splitRadius`  | `number`: where the groups' ring ends, a share of the radius                                                                    | `0.65`  |
+| `strokeWidth`  | `number`: the line between slices (0: none)                                                                                     | `2`     |
+| `cornerRadius` | `number`: its arcs' corners' rounding, in px — unset, the style's (`--chart-bar-radius`, as the bars'; square in Lyra and Sera) | —       |
 
 Give the groups their colors in the config; the legend lists them. The plot's `startAngle` and `endAngle` bound it. The rows' ring takes the pointer; the tooltip names each row, in its group's color.
 
