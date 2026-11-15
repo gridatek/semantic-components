@@ -78,8 +78,11 @@ function cornersIn(
   outer: boolean,
   inner: boolean,
 ): ScChartBarCorners {
-  const end = (corners === 'all' || corners === 'end') && outer;
-  const base = (corners === 'all' || corners === 'base') && inner;
+  // With all, each piece rounded all round (touching: the corners show the
+  // join);
+  // else only where the stack ends: its end, or its base.
+  const end = corners === 'all' || (corners === 'end' && outer);
+  const base = corners === 'all' || (corners === 'base' && inner);
   return end && base ? 'all' : end ? 'end' : base ? 'base' : 'none';
 }
 
@@ -183,7 +186,9 @@ export class ScChartBar implements ScChartSeriesLabels {
    * Its rounded corners: all, its end's two (`end`: the top of a column),
    * its base's two (`base`), or none — turned with it below 0 or across.
    * In a `stack`, the stack's: rounded as one bar, wherever it ends in each
-   * category (a series at 0 there leaves its corners to the next).
+   * category (a series at 0 there leaves its corners to the next); and where
+   * a bar sits on another, with `all`, each piece rounded all round,
+   * touching: the join shows in their corners.
    * How round is the style's: the preset sets `--chart-bar-radius`.
    */
   readonly corners = input<ScChartBarCorners>('all');
@@ -297,7 +302,7 @@ export class ScChartBar implements ScChartSeriesLabels {
     const grown = this.isAnimationActive() ? this.entrance() : 1;
     return this.moving.items().map((bar) => {
       const a = bar.base;
-      const b = between(bar.base, bar.end, grown);
+      const b = between(a, bar.end, grown);
       const box = vertical
         ? {
             x: Math.min(a, b),

@@ -53,8 +53,8 @@ import {
         <g scChartGrid />
         <g scChartCategoryAxis [tickFormatter]="short" />
         <g scChartCursor />
-        <g scChartBar key="desktop" stack="a" corners="base" />
-        <g scChartBar key="mobile" stack="a" corners="end" />
+        <g scChartBar key="desktop" stack="a" />
+        <g scChartBar key="mobile" stack="a" />
       </svg>
       <div scChartTooltipProvider>
         <ng-template scChartTooltipPortal>

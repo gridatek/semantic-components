@@ -88,11 +88,10 @@ test('Stacked bar: each month, one on the other; a legend', async ({
     }));
   const below = await geometry(desktop.first());
   const above = await geometry(mobile.first());
-  // Mobile on Desktop: same column, ending where it starts.
+  // Mobile on Desktop: same column, ending where Desktop starts.
   expect(Math.round(above?.x ?? 0)).toBe(Math.round(below?.x ?? 1));
-  expect(
-    Math.abs((above?.y ?? 0) + (above?.height ?? 0) - (below?.y ?? 0)),
-  ).toBeLessThan(1);
+  const reach = (above?.y ?? 0) + (above?.height ?? 0) - (below?.y ?? 0);
+  expect(Math.abs(reach)).toBeLessThan(0.5);
   await expect(page.locator('[data-slot=chart-legend]')).toHaveText(
     /Desktop\s*Mobile/,
   );
@@ -228,4 +227,73 @@ test('RTL: mirrored — the months from the right, the values on the right; ← 
   await expect(tooltip(page)).toContainText('يناير');
   await press(page, 'ArrowLeft');
   await expect(tooltip(page)).toContainText('فبراير');
+});
+
+test('Stacked, rounded: the pieces touch, each rounded on its own', async ({
+  page,
+  baseURL,
+}) => {
+  await page.context().addCookies([
+    {
+      name: 'sc-preset',
+      value: 'nova',
+      url: baseURL ?? 'http://localhost:4200',
+    },
+  ]);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(demo('stacked-bar'));
+  const boxes = (key: string) =>
+    page
+      .locator(`[data-slot=chart-bar][data-key=${key}] > svg`)
+      .evaluateAll((all) =>
+        all.map((box) => ({
+          top: Number(box.getAttribute('y')),
+          bottom:
+            Number(box.getAttribute('y')) + Number(box.getAttribute('height')),
+        })),
+      );
+  // Mobile on Desktop: touching (no px lost), in each month.
+  await expect
+    .poll(async () => {
+      const desktop = await boxes('desktop');
+      const mobile = await boxes('mobile');
+      return mobile.map((m, i) => {
+        const gap = desktop[i].top - m.bottom;
+        return Math.abs(gap) < 0.5;
+      });
+    })
+    .toEqual([true, true, true, true, true, true]);
+});
+
+test('Stacked, rounded: the piece under another is rounded all round too', async ({
+  page,
+  baseURL,
+}) => {
+  await page.context().addCookies([
+    {
+      name: 'sc-preset',
+      value: 'nova',
+      url: baseURL ?? 'http://localhost:4200',
+    },
+  ]);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(demo('stacked-bar'));
+  // Rounded on one side only, a bar's rect runs past its square side (hidden
+  // by its box); rounded all round, the rect is its box.
+  await expect
+    .poll(() =>
+      page
+        .locator('[data-slot=chart-bar][data-key=desktop] > svg')
+        .evaluateAll((boxes) =>
+          boxes.map((box) => {
+            const rect = box.querySelector('rect');
+            return (
+              Number(rect?.getAttribute('height')) ===
+                Number(box.getAttribute('height')) &&
+              parseFloat(getComputedStyle(rect as Element).rx) > 0
+            );
+          }),
+        ),
+    )
+    .toEqual([true, true, true, true, true, true]);
 });
