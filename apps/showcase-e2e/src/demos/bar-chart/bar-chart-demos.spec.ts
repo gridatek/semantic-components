@@ -4,6 +4,24 @@ import { type Locator, type Page, expect, test } from '../../test';
 const demo = (name: string) => `/demos/bar-chart/${name}-chart-demo`;
 const tooltip = (page: Page) => page.locator('[data-slot=chart-tooltip]');
 
+/** How many values an attribute of the first match takes, frame by frame, for a while. */
+function framesOf(page: Page, selector: string, attribute: string) {
+  return page.evaluate(
+    async ([selector, attribute]) => {
+      const seen = new Set<string | null>();
+      const end = performance.now() + 900;
+      while (performance.now() < end) {
+        seen.add(
+          document.querySelector(selector)?.getAttribute(attribute) ?? null,
+        );
+        await new Promise((done) => requestAnimationFrame(done));
+      }
+      return seen.size;
+    },
+    [selector, attribute],
+  );
+}
+
 /** The bars grow when they appear (Recharts' entrance): wait until they stand still. */
 async function settled(page: Page): Promise<void> {
   const sizes = () =>
@@ -166,4 +184,17 @@ test('Custom labels: the month inside its bar, the value beyond', async ({
       }),
     )
     .toBe(true);
+});
+
+test('Update: a new size moves the bars there, not at once', async ({
+  page,
+}) => {
+  await page.goto(demo('bar'));
+  await settled(page);
+  // Narrower: the bars move to their new places over a few frames.
+  const size = page.viewportSize() ?? { width: 1280, height: 720 };
+  await page.setViewportSize({ width: 400, height: size.height });
+  expect(
+    await framesOf(page, '[data-slot=chart-bar] > svg', 'width'),
+  ).toBeGreaterThan(2);
 });

@@ -4,6 +4,24 @@ import { type Page, expect, test } from '../../test';
 const demo = (name: string) => `/demos/line-chart/${name}-chart-demo`;
 const tooltip = (page: Page) => page.locator('[data-slot=chart-tooltip]');
 
+/** How many values an attribute of the first match takes, frame by frame, for a while. */
+function framesOf(page: Page, selector: string, attribute: string) {
+  return page.evaluate(
+    async ([selector, attribute]) => {
+      const seen = new Set<string | null>();
+      const end = performance.now() + 900;
+      while (performance.now() < end) {
+        seen.add(
+          document.querySelector(selector)?.getAttribute(attribute) ?? null,
+        );
+        await new Promise((done) => requestAnimationFrame(done));
+      }
+      return seen.size;
+    },
+    [selector, attribute],
+  );
+}
+
 let errors: string[];
 
 test.beforeEach(({ page }) => {
@@ -67,4 +85,18 @@ test('Labels: each value above its point', async ({ page }) => {
   const labels = page.locator('[data-slot=chart-labels] text');
   await expect(labels).toHaveCount(6);
   await expect(labels.first()).toHaveText('186');
+});
+
+test('Update: a new size moves the line there, not at once', async ({
+  page,
+}) => {
+  await page.goto(demo('line'));
+  // Drawn: its dots are there.
+  await expect(page.locator('[data-slot=chart-line] circle')).toHaveCount(6);
+  const size = page.viewportSize() ?? { width: 1280, height: 720 };
+  await page.setViewportSize({ width: 400, height: size.height });
+  expect(
+    // The last dot: the first stays at the start.
+    await framesOf(page, '[data-slot=chart-line] circle:last-of-type', 'cx'),
+  ).toBeGreaterThan(2);
 });

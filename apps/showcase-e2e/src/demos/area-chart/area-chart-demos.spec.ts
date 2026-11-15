@@ -4,6 +4,24 @@ import { type Page, expect, test } from '../../test';
 const demo = (name: string) => `/demos/area-chart/${name}-chart-demo`;
 const tooltip = (page: Page) => page.locator('[data-slot=chart-tooltip]');
 
+/** How many values an attribute of the first match takes, frame by frame, for a while. */
+function framesOf(page: Page, selector: string, attribute: string) {
+  return page.evaluate(
+    async ([selector, attribute]) => {
+      const seen = new Set<string | null>();
+      const end = performance.now() + 900;
+      while (performance.now() < end) {
+        seen.add(
+          document.querySelector(selector)?.getAttribute(attribute) ?? null,
+        );
+        await new Promise((done) => requestAnimationFrame(done));
+      }
+      return seen.size;
+    },
+    [selector, attribute],
+  );
+}
+
 let errors: string[];
 
 test.beforeEach(({ page }) => {
@@ -88,4 +106,29 @@ test('Interactive: a time range; dates in the locale', async ({ page }) => {
   await expect(tooltip(page)).toContainText('Jun 24');
   await press(page, 'End');
   await expect(tooltip(page)).toContainText('Jun 30');
+});
+
+test('Update: a new time range moves the areas there, not at once', async ({
+  page,
+}) => {
+  await page.goto(demo('interactive-area'));
+  // Unveiled: no clip left.
+  await expect(page.locator('[data-slot=chart-area] clipPath')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Last 7 days' }).click();
+  expect(
+    await framesOf(page, '[data-slot=chart-area] path', 'd'),
+  ).toBeGreaterThan(2);
+});
+
+test.describe('reduced motion', () => {
+  test.use({ reducedMotion: 'reduce' });
+
+  test('Update: at once', async ({ page }) => {
+    await page.goto(demo('interactive-area'));
+    await page.getByRole('button', { name: 'Last 7 days' }).click();
+    // One step: from 90 days to 7, nothing between (the old one, if read first).
+    expect(
+      await framesOf(page, '[data-slot=chart-area] path', 'd'),
+    ).toBeLessThanOrEqual(2);
+  });
 });
