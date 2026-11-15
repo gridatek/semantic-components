@@ -222,7 +222,7 @@ export default class ChartPage {
     {
       selector: 'svg[scChartPlot]',
       description:
-        'categoryKey (required), margin (as Recharts: 5 on each side without one; the sides a given one leaves out are 0), layout (horizontal | vertical: categories down the side, bars across), stackOffset (none | expand: to 100%); polar charts: startAngle, endAngle (degrees, 0 at the top, clockwise); name it (aria-label)',
+        "categoryKey (required), margin (as Recharts: 5 on each side without one; the sides a given one leaves out are 0), layout (horizontal | vertical: categories down the side, bars across), stackOffset (none | expand: to 100%); polar charts: startAngle, endAngle (Recharts': degrees, 0 at 3 o'clock, counterclockwise; unset, 0 to 360 — a radar's 90 to −270, from the top clockwise); name it (aria-label)",
     },
     {
       selector: 'g[scChartGrid]',

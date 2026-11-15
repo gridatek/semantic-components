@@ -51,7 +51,7 @@ A series as a pie: a slice per row, its share of the total, in its category's co
 | `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                                                                                                              | `ease`     |
 | `animationMatchBy`  | `'index'` (by position, stretched), `'append'` (the first with the first) or `(row, index) => key`: how its shapes before and after a change are paired (Recharts') | `'append'` |
 
-The plot's `startAngle` and `endAngle` (degrees, 0 at the top, clockwise) bound it: 0 and 360 by default. The tooltip and the legend name and color each slice by its category.
+The plot's `startAngle` and `endAngle` bound it — Recharts': degrees, 0 at 3 o'clock, counterclockwise; 0 and 360 by default, so it starts at 3 o'clock. The tooltip and the legend name and color each slice by its category.
 
 ## Entrance
 

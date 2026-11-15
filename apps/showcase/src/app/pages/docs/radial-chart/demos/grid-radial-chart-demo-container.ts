@@ -58,14 +58,7 @@ import {
       [config]="config"
       [data]="data"
     >
-      <!-- As Recharts' angles: from 3 o'clock, counterclockwise. -->
-      <svg
-        scChartPlot
-        categoryKey="browser"
-        aria-label="Visitors by browser"
-        [startAngle]="90"
-        [endAngle]="-270"
-      >
+      <svg scChartPlot categoryKey="browser" aria-label="Visitors by browser">
         <g scChartPolarGrid shape="circle" />
         <g
           scChartRadialBar

@@ -57,10 +57,13 @@ export class ScChartPlot {
   readonly stackOffset = input<ScChartStackOffset>('none');
   /** `vertical`: the categories down the side, the bars across. */
   readonly layout = input<ScChartLayout>('horizontal');
-  /** Polar charts: where they start, in degrees (0 at the top, clockwise). */
-  readonly startAngle = input(0);
-  /** Polar charts: where they end (180: a half circle). */
-  readonly endAngle = input(360);
+  /**
+   * Polar charts: where they start, in degrees — Recharts': 0 at 3 o'clock,
+   * counterclockwise. Unset, Recharts' default: 0 (a radar's: 90, the top).
+   */
+  readonly startAngle = input<number | undefined>(undefined);
+  /** Polar charts: where they end (180: a half circle over the top). Unset: 360 (a radar's: −270). */
+  readonly endAngle = input<number | undefined>(undefined);
 
   protected readonly viewBox = computed(
     () => `0 0 ${this.state.width()} ${this.state.height()}`,

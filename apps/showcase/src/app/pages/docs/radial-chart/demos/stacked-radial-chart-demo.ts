@@ -41,8 +41,7 @@ import {
       <svg
         scChartPlot
         categoryKey="month"
-        [startAngle]="-90"
-        [endAngle]="90"
+        [endAngle]="180"
         aria-label="Visitors in January, by device"
       >
         <g

@@ -93,8 +93,8 @@ export interface ScChartPlotSource {
   /** `horizontal`: categories along the bottom; `vertical`: down the side (bars across). */
   readonly layout: Signal<ScChartLayout>;
   /** Polar charts: where they start and end, in degrees (0 at the top, clockwise). */
-  readonly startAngle: Signal<number>;
-  readonly endAngle: Signal<number>;
+  readonly startAngle: Signal<number | undefined>;
+  readonly endAngle: Signal<number | undefined>;
 }
 
 /** A value, as a number (`NaN` and the rest as 0). */
@@ -488,13 +488,18 @@ export class ScChartState {
     };
   });
 
-  /** Polar charts: their angles, in radians. */
+  /**
+   * Polar charts: their angles, in radians — 0 at the top, clockwise, as the
+   * parts draw them. The plot gives Recharts' (degrees, 0 at 3 o'clock,
+   * counterclockwise), and its defaults: 0 to 360, a radar's 90 to −270.
+   */
   readonly angles = computed(() => {
     const plot = this.plot();
-    const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
+    const radar = this.series().some((s) => s.kind === 'radar');
+    const drawn = (degrees: number) => ((90 - degrees) * Math.PI) / 180;
     return [
-      toRadians(plot?.startAngle() ?? 0),
-      toRadians(plot?.endAngle() ?? 360),
+      drawn(plot?.startAngle() ?? (radar ? 90 : 0)),
+      drawn(plot?.endAngle() ?? (radar ? -270 : 360)),
     ] as const;
   });
 
