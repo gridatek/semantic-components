@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading } from '@semantic-components/ui';
+import { ScFrame, ScHeading } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -9,6 +9,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
 @Component({
   selector: 'app-chart-page',
   imports: [
+    ScFrame,
     RouterLink,
     TooltipChartDemoContainer,
     TocHeading,
@@ -59,8 +60,9 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           @for (type of types; track type.path) {
             <a
+              scFrame
               [routerLink]="'/docs/components/' + type.path"
-              class="hover:bg-accent rounded-lg border p-6 transition-colors"
+              class="hover:bg-accent p-6 transition-colors"
             >
               <h3 class="leading-none font-semibold tracking-tight">
                 {{ type.name }}
