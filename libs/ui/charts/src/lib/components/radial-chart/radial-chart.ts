@@ -10,6 +10,10 @@ import {
 import { cn } from 'cn';
 import { arc } from 'd3-shape';
 import {
+  type ScChartAnimationEasing,
+  scChartEntrance,
+} from '../chart/chart-animation';
+import {
   SC_CHART_SERIES,
   type ScChartLabelPoint,
   type ScChartLabelPosition,
@@ -87,6 +91,23 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
   readonly cornerRadius = input(0);
   /** Each ring's full length behind it. */
   readonly track = input(false, { transform: booleanAttribute });
+  /** Its arcs grow along their rings when it appears (Recharts'); not with reduced motion. */
+  readonly isAnimationActive = input(true);
+  /** The wait before they grow, in ms. */
+  readonly animationBegin = input(0);
+  /** How long they grow, in ms. */
+  readonly animationDuration = input(1500);
+  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+
+  /** Its entrance: 0 to 1 once, after its first render. */
+  private readonly entrance = scChartEntrance({
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+  });
+  private readonly grown = computed(() =>
+    this.isAnimationActive() ? this.entrance() : 1,
+  );
 
   protected readonly transform = computed(() => {
     const { cx, cy } = this.state.circle();
@@ -103,6 +124,7 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
     const step = (outer - inner) / Math.max(1, extent.length);
     const gap = extent.length > 1 ? step * 0.2 : 0;
     const categories = this.state.categories();
+    const grown = this.grown();
     return extent.map(([low, high], index) => {
       const shape = arc()
         .innerRadius(inner + index * step + gap / 2)
@@ -110,13 +132,15 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
         .cornerRadius(this.cornerRadius());
       const at = (value: number) => start + (end - start) * share(value);
       const angles = { innerRadius: 0, outerRadius: 0, padAngle: 0 };
+      // Growing: its end on the way from its start to its value.
+      const from = at(low);
+      const to = from + (at(high) - from) * grown;
       return {
         index,
-        from: at(low),
-        to: at(high),
+        from,
+        to,
         radius: inner + (index + 0.5) * step,
-        path:
-          shape({ ...angles, startAngle: at(low), endAngle: at(high) }) ?? '',
+        path: shape({ ...angles, startAngle: from, endAngle: to }) ?? '',
         track: shape({ ...angles, startAngle: start, endAngle: end }) ?? '',
         color: `var(--color-${this.colorBy() === 'category' ? categories[index] : this.key()})`,
       };
@@ -143,6 +167,8 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
+    // Once they've grown (Recharts').
+    if (this.grown() < 1) return [];
     const rows = this.state.data();
     return this.rings().map((ring) => {
       const value = numberOf(rows[ring.index]?.[this.key()]);

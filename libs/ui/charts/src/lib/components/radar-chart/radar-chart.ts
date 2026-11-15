@@ -8,6 +8,10 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
+import {
+  type ScChartAnimationEasing,
+  scChartEntrance,
+} from '../chart/chart-animation';
 import { ScChartState } from '../chart/chart-state';
 
 /**
@@ -66,14 +70,30 @@ export class ScChartRadar {
   readonly dots = input(false, { transform: booleanAttribute });
   /** A dot on the spoke pointed at. */
   readonly activeDot = input(true, { transform: booleanAttribute });
+  /** Its points move out from the center when it appears (Recharts'); not with reduced motion. */
+  readonly isAnimationActive = input(true);
+  /** The wait before they move, in ms. */
+  readonly animationBegin = input(0);
+  /** How long they move, in ms. */
+  readonly animationDuration = input(1500);
+  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+
+  /** Its entrance: 0 to 1 once, after its first render. */
+  private readonly entrance = scChartEntrance({
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+  });
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
   protected readonly points = computed(() => {
     const share = this.state.share();
     const { radius } = this.state.circle();
+    // Moving out from the center: on the way to their values.
+    const out = this.isAnimationActive() ? this.entrance() : 1;
     return (this.state.extents().get(this.key()) ?? []).map(([, value], i) =>
-      this.state.point(this.state.spokeAngle(i), radius * share(value)),
+      this.state.point(this.state.spokeAngle(i), radius * share(value) * out),
     );
   });
 

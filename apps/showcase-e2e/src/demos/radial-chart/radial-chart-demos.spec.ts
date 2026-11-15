@@ -38,12 +38,17 @@ test('Stacked radial: a half circle, both series in one ring', async ({
     name: 'Visitors in January, by device',
   });
   const box = await plot.boundingBox();
-  const arcs = await page
-    .locator('[data-slot=chart-radial-bar] path')
-    .evaluateAll((paths) => paths.map((p) => p.getBoundingClientRect().bottom));
-  // A half circle: above its center, which is low in the plot.
-  for (const bottom of arcs)
-    expect(bottom).toBeGreaterThan((box?.y ?? 0) + (box?.height ?? 0) / 2);
+  const lowest = () =>
+    page
+      .locator('[data-slot=chart-radial-bar] path')
+      .evaluateAll((paths) =>
+        Math.min(...paths.map((p) => p.getBoundingClientRect().bottom)),
+      );
+  // A half circle: above its center, which is low in the plot — once the
+  // arcs have grown round to it.
+  await expect
+    .poll(lowest)
+    .toBeGreaterThan((box?.y ?? 0) + (box?.height ?? 0) / 2);
   await plot.focus();
   await expect(tooltip(page)).toContainText('1,260');
 });
@@ -53,4 +58,20 @@ test('Labels: each browser on its ring', async ({ page }) => {
   const labels = page.locator('[data-slot=chart-labels] text');
   await expect(labels).toHaveCount(5);
   await expect(labels.first()).toHaveText('chrome');
+});
+
+test('Entrance: the arcs grow along their rings, then the labels come', async ({
+  page,
+}) => {
+  await page.goto(demo('label-radial'));
+  const labels = page.locator('[data-slot=chart-labels] text');
+  const arc = page
+    // Its value's arc, not its track behind.
+    .locator('[data-slot=chart-radial-bar] path:not(.fill-muted)')
+    .first();
+  // Growing: its shape changes, the labels not there yet.
+  const first = await arc.getAttribute('d');
+  await expect(labels).toHaveCount(0);
+  await expect(arc).not.toHaveAttribute('d', first ?? '');
+  await expect(labels).toHaveCount(5);
 });

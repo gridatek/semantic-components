@@ -8,11 +8,13 @@ import {
 } from '@angular/core';
 import {
   SC_CHART_SERIES,
+  type ScChartAnimationEasing,
   type ScChartLabelPoint,
   type ScChartLabelPosition,
   type ScChartSeriesLabels,
   ScChartState,
   numberOf,
+  scChartEntrance,
 } from '@semantic-components/ui/charts';
 import { cn } from 'cn';
 import { hierarchy, treemap, treemapSquarify } from 'd3-hierarchy';
@@ -96,6 +98,28 @@ export class ScChartTreemap implements ScChartSeriesLabels {
   readonly groupKey = input('');
   /** The space between boxes, in px. */
   readonly gap = input(2);
+  /** Its boxes slide in from the left when it appears (Recharts'); not with reduced motion. */
+  readonly isAnimationActive = input(true);
+  /** The wait before they slide, in ms. */
+  readonly animationBegin = input(0);
+  /** How long they slide, in ms. */
+  readonly animationDuration = input(1500);
+  readonly animationEasing = input<ScChartAnimationEasing>('linear');
+
+  /** Its entrance: 0 to 1 once, after its first render. */
+  private readonly entrance = scChartEntrance({
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+  });
+  /**
+   * How far a box still is from its place, given its x (in the plot) and its
+   * width: sliding in, from just past the plot's left edge (Recharts').
+   */
+  private readonly away = computed(() => {
+    const left = 1 - (this.isAnimationActive() ? this.entrance() : 1);
+    return (x: number, width: number) => -(x + width) * left;
+  });
 
   protected readonly active = this.state.activeIndex;
 
@@ -136,6 +160,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     const { left, top } = this.state.area();
     const groupKey = this.groupKey();
     const rows = this.state.data();
+    const away = this.away();
     return this.layout()
       .leaves()
       .filter((leaf) => leaf.data.index !== undefined)
@@ -146,7 +171,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
           : leaf.data.name;
         return {
           index,
-          x: left + leaf.x0,
+          x: left + leaf.x0 + away(leaf.x0, leaf.x1 - leaf.x0),
           y: top + leaf.y0,
           width: Math.max(0, leaf.x1 - leaf.x0),
           height: Math.max(0, leaf.y1 - leaf.y0),
@@ -161,9 +186,10 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     if (!this.groupKey()) return [];
     const { left, top } = this.state.area();
     const config = this.state.config();
+    const away = this.away();
     return (this.layout().children ?? []).map((group) => ({
       name: config[group.data.name]?.label ?? group.data.name,
-      x: left + group.x0 + 2,
+      x: left + group.x0 + 2 + away(group.x0, group.x1 - group.x0),
       y: top + group.y0 + 4,
     }));
   });

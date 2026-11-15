@@ -29,17 +29,25 @@ A series as radial bars: a ring per row, the first innermost, its value as an ar
 
 ## ScChartRadialBar — `g[scChartRadialBar]`
 
-| Input          | Type                                                   | Default |
-| -------------- | ------------------------------------------------------ | ------- |
-| `key`          | `string` (required): the series' key in the rows       | —       |
-| `stack`        | `string \| null`: along the ring, one after the other  | `null`  |
-| `colorBy`      | `'key' \| 'category'`: its key's color, or each row's  | `'key'` |
-| `innerRadius`  | `number`: where the rings start, a share of the radius | `0.3`   |
-| `outerRadius`  | `number`: where they end                               | `1`     |
-| `cornerRadius` | `number`                                               | `0`     |
-| `track`        | `boolean`: each ring's full length behind it           | `false` |
+| Input               | Type                                                                            | Default |
+| ------------------- | ------------------------------------------------------------------------------- | ------- |
+| `key`               | `string` (required): the series' key in the rows                                | —       |
+| `stack`             | `string \| null`: along the ring, one after the other                           | `null`  |
+| `colorBy`           | `'key' \| 'category'`: its key's color, or each row's                           | `'key'` |
+| `innerRadius`       | `number`: where the rings start, a share of the radius                          | `0.3`   |
+| `outerRadius`       | `number`: where they end                                                        | `1`     |
+| `cornerRadius`      | `number`                                                                        | `0`     |
+| `track`             | `boolean`: each ring's full length behind it                                    | `false` |
+| `isAnimationActive` | `boolean`: its arcs grow along their rings when it appears (Recharts' entrance) | `true`  |
+| `animationBegin`    | `number`: the wait before it starts, in ms                                      | `0`     |
+| `animationDuration` | `number`: how long it lasts, in ms                                              | `1500`  |
+| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                          | `ease`  |
 
 An arc's length is its value's share of the largest one. A grid of circles behind: `<g scChartPolarGrid shape="circle" [spokes]="false" />`.
+
+## Entrance
+
+As Recharts', each arc grows along its ring from its start when the chart appears: 1500ms, `ease`. Its labels come once they've grown. Not on the server (it draws it whole), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once.
 
 ## Labels
 

@@ -42,3 +42,12 @@ test('Groups: boxes under their folders; the keyboard moves through them', async
   await press(page, 'End');
   await expect(tooltip(page)).toContainText('api');
 });
+
+test('Entrance: the boxes slide in from the left', async ({ page }) => {
+  await page.goto(demo('treemap'));
+  const box = page.locator('[data-slot=chart-treemap] rect').first();
+  const x = () => box.evaluate((rect) => Number(rect.getAttribute('x')));
+  // Past the left edge at first, then at its place.
+  const first = await x();
+  await expect.poll(x).toBeGreaterThan(first + 20);
+});

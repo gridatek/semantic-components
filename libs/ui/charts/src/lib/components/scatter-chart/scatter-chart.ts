@@ -9,6 +9,10 @@ import {
 import { cn } from 'cn';
 import { scaleSqrt } from 'd3-scale';
 import {
+  type ScChartAnimationEasing,
+  scChartEntrance,
+} from '../chart/chart-animation';
+import {
   SC_CHART_SERIES,
   type ScChartLabelPoint,
   type ScChartLabelPosition,
@@ -73,6 +77,23 @@ export class ScChartScatter implements ScChartSeriesLabels {
   /** Its points' radius, in px — the largest's, with a `sizeKey`. */
   readonly radius = input(5);
   readonly fillOpacity = input(0.7);
+  /** Its points grow when it appears (Recharts'); not with reduced motion. */
+  readonly isAnimationActive = input(true);
+  /** The wait before they grow, in ms. */
+  readonly animationBegin = input(0);
+  /** How long they grow, in ms. */
+  readonly animationDuration = input(400);
+  readonly animationEasing = input<ScChartAnimationEasing>('linear');
+
+  /** Its entrance: 0 to 1 once, after its first render. */
+  private readonly entrance = scChartEntrance({
+    begin: this.animationBegin,
+    duration: this.animationDuration,
+    easing: this.animationEasing,
+  });
+  private readonly grown = computed(() =>
+    this.isAnimationActive() ? this.entrance() : 1,
+  );
 
   protected readonly color = computed(() => `var(--color-${this.key()})`);
 
@@ -83,10 +104,12 @@ export class ScChartScatter implements ScChartSeriesLabels {
     const size = scaleSqrt()
       .domain([0, Math.max(1, ...rows.map((row) => numberOf(row[sizeKey])))])
       .range([2, radius]);
+    // Growing: their area on the way to its own (Recharts' size).
+    const grown = Math.sqrt(this.grown());
     return rows.map((row, index) => ({
       index,
       ...this.state.at(index, numberOf(row[this.key()])),
-      r: sizeKey ? size(numberOf(row[sizeKey])) : radius,
+      r: (sizeKey ? size(numberOf(row[sizeKey])) : radius) * grown,
     }));
   });
 
@@ -111,6 +134,8 @@ export class ScChartScatter implements ScChartSeriesLabels {
     position: ScChartLabelPosition,
     offset: number,
   ): ScChartLabelPoint[] {
+    // Once they've grown (Recharts').
+    if (this.grown() < 1) return [];
     const rows = this.state.data();
     return this.dots().map((dot) => ({
       index: dot.index,

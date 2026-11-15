@@ -35,5 +35,24 @@ test('Bubbles: sized by population', async ({ page }) => {
   const dots = page.locator('[data-slot=chart-scatter] circle');
   await expect(dots).toHaveCount(7);
   const r = (i: number) => dots.nth(i).getAttribute('r').then(Number);
-  expect(await r(2)).toBeGreaterThan(await r(6));
+  // Growing or grown, all in proportion: once there at all.
+  await expect
+    .poll(async () => (await r(6)) > 0 && (await r(2)) > (await r(6)))
+    .toBe(true);
+});
+
+test('Entrance: its points grow from nothing', async ({ page }) => {
+  await page.goto(demo('scatter'));
+  const point = page.locator('[data-slot=chart-scatter] circle').first();
+  // Caught growing (its radius, 5, not yet reached), then whole.
+  await expect
+    .poll(
+      async () => {
+        const r = Number(await point.getAttribute('r'));
+        return r > 0 && r < 5;
+      },
+      { intervals: [20] },
+    )
+    .toBe(true);
+  await expect(point).toHaveAttribute('r', '5');
 });

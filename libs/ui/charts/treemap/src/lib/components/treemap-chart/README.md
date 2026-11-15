@@ -30,13 +30,21 @@ Its own entry point, so the other charts don't need `d3-hierarchy`: `import { Sc
 
 ## ScChartTreemap — `g[scChartTreemap]`
 
-| Input      | Type                                     | Default |
-| ---------- | ---------------------------------------- | ------- |
-| `key`      | `string` (required): each box's value    | —       |
-| `groupKey` | `string`: each row's group               | `''`    |
-| `gap`      | `number`: the space between boxes, in px | `2`     |
+| Input               | Type                                                                             | Default  |
+| ------------------- | -------------------------------------------------------------------------------- | -------- |
+| `key`               | `string` (required): each box's value                                            | —        |
+| `groupKey`          | `string`: each row's group                                                       | `''`     |
+| `gap`               | `number`: the space between boxes, in px                                         | `2`      |
+| `isAnimationActive` | `boolean`: its boxes slide in from the left when it appears (Recharts' entrance) | `true`   |
+| `animationBegin`    | `number`: the wait before it starts, in ms                                       | `0`      |
+| `animationDuration` | `number`: how long it lasts, in ms                                               | `1500`   |
+| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                           | `linear` |
 
 With a `groupKey`, the legend lists the groups: give them their colors in the config (`folder name: { label, color }`).
+
+## Entrance
+
+As Recharts', each box slides in from just past the plot's left edge to its place when the chart appears — each its own distance, in the same time — with its label and its group's name: 1500ms, `linear`. Not on the server (it draws it whole), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once.
 
 ## Labels
 

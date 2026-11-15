@@ -49,3 +49,13 @@ test('Two radars: a legend; the pointer finds the nearest spoke', async ({
   );
   await expect(tooltip(page)).toContainText('April');
 });
+
+test('Entrance: its points move out from the center', async ({ page }) => {
+  await page.goto(demo('radar'));
+  const radar = page.locator('[data-slot=chart-radar] path').first();
+  const width = () =>
+    radar.evaluate((path) => (path as SVGPathElement).getBBox().width);
+  // Small at first, then out to its values.
+  const first = await width();
+  await expect.poll(width).toBeGreaterThan(first + 40);
+});

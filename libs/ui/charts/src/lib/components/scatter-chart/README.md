@@ -29,15 +29,23 @@ A series as a scatter: a point per row at its x (`xKey`) and y (`key`) values, b
 
 ## ScChartScatter — `g[scChartScatter]`
 
-| Input         | Type                                                           | Default |
-| ------------- | -------------------------------------------------------------- | ------- |
-| `key`         | `string` (required): each point's y value                      | —       |
-| `xKey`        | `string` (required): each point's x value                      | —       |
-| `sizeKey`     | `string`: a third value, each point's size (area)              | `''`    |
-| `radius`      | `number`: its points' radius — the largest's, with a `sizeKey` | `5`     |
-| `fillOpacity` | `number`                                                       | `0.7`   |
+| Input               | Type                                                            | Default  |
+| ------------------- | --------------------------------------------------------------- | -------- |
+| `key`               | `string` (required): each point's y value                       | —        |
+| `xKey`              | `string` (required): each point's x value                       | —        |
+| `sizeKey`           | `string`: a third value, each point's size (area)               | `''`     |
+| `radius`            | `number`: its points' radius — the largest's, with a `sizeKey`  | `5`      |
+| `fillOpacity`       | `number`                                                        | `0.7`    |
+| `isAnimationActive` | `boolean`: its points grow when it appears (Recharts' entrance) | `true`   |
+| `animationBegin`    | `number`: the wait before it starts, in ms                      | `0`      |
+| `animationDuration` | `number`: how long it lasts, in ms                              | `400`    |
+| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`          | `linear` |
 
 Each row still has its category (`categoryKey`): the tooltip's title. Both axes span the values themselves (not from 0), a tenth wider each way. The x axis (`scChartCategoryAxis`) and the grid's vertical lines take the x values' ticks. The pointer and the keyboard go to the nearest point; several scatters in a plot share its x key.
+
+## Entrance
+
+As Recharts', the points grow from nothing when the chart appears (their area, as Recharts' size): 400ms, `linear`. Their labels come once they've grown. Not on the server (it draws it whole), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once.
 
 ## Labels
 

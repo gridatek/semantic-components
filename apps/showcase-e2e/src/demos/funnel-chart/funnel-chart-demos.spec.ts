@@ -38,3 +38,18 @@ test('Labels: each stage named inside, its value beside it', async ({
   await press(page, 'End');
   await expect(tooltip(page)).toContainText('Paid');
 });
+
+test('Entrance: the stages grow out of their centers, then the labels come', async ({
+  page,
+}) => {
+  await page.goto(demo('label-funnel'));
+  const stage = page.locator('[data-slot=chart-funnel] path').first();
+  const height = () =>
+    stage.evaluate((path) => (path as SVGPathElement).getBBox().height);
+  const labels = page.locator('[data-slot=chart-labels] text');
+  // It waits 400ms, then grows: flat, unlabelled at first.
+  expect(await height()).toBeLessThan(5);
+  await expect(labels).toHaveCount(0);
+  await expect.poll(height).toBeGreaterThan(20);
+  await expect(labels).toHaveCount(8);
+});

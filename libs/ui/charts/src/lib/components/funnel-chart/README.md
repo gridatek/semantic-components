@@ -27,12 +27,20 @@ A series as a funnel: a stage per row, top to bottom, each as wide as its value 
 
 ## ScChartFunnel — `g[scChartFunnel]`
 
-| Input | Type                                      | Default |
-| ----- | ----------------------------------------- | ------- |
-| `key` | `string` (required): each stage's value   | —       |
-| `gap` | `number`: the space between stages, in px | `2`     |
+| Input               | Type                                                                                 | Default |
+| ------------------- | ------------------------------------------------------------------------------------ | ------- |
+| `key`               | `string` (required): each stage's value                                              | —       |
+| `gap`               | `number`: the space between stages, in px                                            | `2`     |
+| `isAnimationActive` | `boolean`: its stages grow out of their centers when it appears (Recharts' entrance) | `true`  |
+| `animationBegin`    | `number`: the wait before it starts, in ms                                           | `400`   |
+| `animationDuration` | `number`: how long it lasts, in ms                                                   | `1500`  |
+| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                               | `ease`  |
 
 The tooltip and the legend name and color each stage by its category. The last stage narrows to 60% of its width.
+
+## Entrance
+
+As Recharts', each stage grows out of its own center when the chart appears, its widths and its height: after 400ms, for 1500ms, `ease`. Its labels come once they've grown. Not on the server (it draws it whole), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once.
 
 ## Labels
 
