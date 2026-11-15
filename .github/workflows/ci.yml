@@ -99,6 +99,11 @@ jobs:
           echo "showcase=$(echo "$projects" | grep -qw showcase-e2e && echo true || echo false)" >> "$GITHUB_OUTPUT"
           echo "blocks=$(echo "$projects" | grep -qw blocks-e2e && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
+      # The showcase's settings aren't in git (.gitignore): the tests' own,
+      # every page listed, hidden ones too.
+      - name: Create showcase config
+        run: echo '{"devMode":true,"showHidden":true}' > apps/showcase/public/config.json
+
       - name: Build
         if: steps.affected.outputs.showcase == 'true' || (matrix.blocks && steps.affected.outputs.blocks == 'true')
         run: npx nx run-many -t build -p showcase blocks
@@ -169,6 +174,11 @@ jobs:
 
       - name: Install dependencies
         run: npm i
+
+      # The showcase's settings aren't in git (.gitignore): the tests' own,
+      # every page listed, hidden ones too.
+      - name: Create showcase config
+        run: echo '{"devMode":true,"showHidden":true}' > apps/showcase/public/config.json
 
       - name: Build (SSR)
         run: npx nx run-many -t build -p showcase blocks -c ssr
