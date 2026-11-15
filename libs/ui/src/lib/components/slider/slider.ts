@@ -122,6 +122,7 @@ export class ScSlider implements FormValueControl<number> {
    * arrows right to left by themselves; Safari (WebKit) doesn't, its arrows
    * stay left to right. Check again with each WebKit release; drop it once
    * Safari flips them (specs: "RTL" in the slider and range slider demos).
+   * See docs/webkit-workarounds.md.
    */
   protected onKeydown(event: KeyboardEvent): void {
     if (
