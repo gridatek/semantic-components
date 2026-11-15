@@ -132,3 +132,42 @@ test('RTL: in Arabic, mirrored — ← to the next', async ({ page }) => {
   await press(page, 'ArrowLeft');
   await expect(tooltip(page)).toContainText('Safari');
 });
+
+test("Corners: a donut's slices the style's — square in Lyra, rounded in Nova; a pie's crisp", async ({
+  page,
+  baseURL,
+}) => {
+  const shapeIn = async (preset: string, name: string) => {
+    await page.context().addCookies([
+      {
+        name: 'sc-preset',
+        value: preset,
+        url: baseURL ?? 'http://localhost:4200',
+      },
+    ]);
+    // Drawn whole at once (no entrance): its corners, not its growth.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(demo(name));
+    const shape = page.locator('[data-slot=chart-pie] path').nth(1);
+    // Once grown and still: the same outline twice in a row.
+    let last = '';
+    await expect
+      .poll(
+        async () => {
+          const d = (await shape.getAttribute('d')) ?? '';
+          const still = d !== '' && d === last;
+          last = d;
+          return still;
+        },
+        { intervals: [300] },
+      )
+      .toBe(true);
+    return last;
+  };
+  // A slice's outline: its two edges' arcs, and a small one at each rounded corner.
+  const arcs = (d: string) => d.split('A').length - 1;
+  expect(arcs(await shapeIn('lyra', 'donut'))).toBe(2);
+  expect(arcs(await shapeIn('nova', 'donut'))).toBeGreaterThan(2);
+  // A whole pie: its slices meet in the middle, wedges in every style.
+  expect(arcs(await shapeIn('nova', 'pie'))).toBe(1);
+});

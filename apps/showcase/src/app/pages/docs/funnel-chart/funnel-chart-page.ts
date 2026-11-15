@@ -150,6 +150,13 @@ export default class FunnelChartPage {
       description: 'the space between stages, in px',
     },
     {
+      name: 'cornerRadius',
+      type: 'number',
+      default: '—',
+      description:
+        "its stages' corners' rounding, in px — unset, the style's (--chart-bar-radius, as the bars'; square in Lyra and Sera)",
+    },
+    {
       name: 'isAnimationActive',
       type: 'boolean',
       default: 'true',

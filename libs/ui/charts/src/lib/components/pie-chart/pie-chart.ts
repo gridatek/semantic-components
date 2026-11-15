@@ -113,7 +113,12 @@ export class ScChartPie implements ScChartSeriesLabels {
   readonly outerRadius = input(1);
   /** The gap between slices, in degrees. */
   readonly padAngle = input(0);
-  readonly cornerRadius = input(0);
+  /**
+   * Its slices' corners' rounding, in px. Unset: a donut's or a ring's the
+   * style's (the preset's `--chart-bar-radius`); a whole pie's none — its
+   * slices meet in the middle.
+   */
+  readonly cornerRadius = input<number | undefined>(undefined);
   /** The line between slices, in px (0: none). */
   readonly strokeWidth = input(2);
   /** How far the slice pointed at grows, in px. */
@@ -209,7 +214,10 @@ export class ScChartPie implements ScChartSeriesLabels {
             radius * this.outerRadius() +
               (a.data === active ? this.activeOffset() : 0),
           )
-          .cornerRadius(this.cornerRadius())({
+          .cornerRadius(
+            this.cornerRadius() ??
+              (this.innerRadius() > 0 ? this.state.barRadius() : 0),
+          )({
           innerRadius: 0,
           outerRadius: 0,
           startAngle: a.startAngle,

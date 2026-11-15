@@ -36,6 +36,52 @@ interface ScFunnelChartStage {
 }
 
 /**
+ * A closed outline through points, its corners rounded (a curve through each,
+ * at most half its shorter side): square at 0.
+ */
+function roundedPath(
+  points: readonly [number, number][],
+  radius: number,
+): string {
+  if (radius <= 0) return `M${points.map(([x, y]) => `${x},${y}`).join('L')}Z`;
+  const n = points.length;
+  const toward = (
+    [ax, ay]: readonly [number, number],
+    [bx, by]: readonly [number, number],
+    length: number,
+  ): [number, number] => {
+    const d = Math.hypot(bx - ax, by - ay) || 1;
+    return [ax + ((bx - ax) * length) / d, ay + ((by - ay) * length) / d];
+  };
+  const parts = points.map((point, i) => {
+    const before = points[(i + n - 1) % n];
+    const after = points[(i + 1) % n];
+    const r = Math.min(
+      radius,
+      Math.hypot(point[0] - before[0], point[1] - before[1]) / 2,
+      Math.hypot(point[0] - after[0], point[1] - after[1]) / 2,
+    );
+    return {
+      point,
+      from: toward(point, before, r),
+      to: toward(point, after, r),
+    };
+  });
+  return (
+    `M${parts[0].to[0]},${parts[0].to[1]}` +
+    parts
+      .slice(1)
+      .concat(parts[0])
+      .map(
+        ({ point, from, to }) =>
+          `L${from[0]},${from[1]}Q${point[0]},${point[1]} ${to[0]},${to[1]}`,
+      )
+      .join('') +
+    'Z'
+  );
+}
+
+/**
  * A series as a funnel: a stage per row, top to bottom, each as wide as its
  * value (the largest, the plot's width) narrowing to the next one's, in its
  * category's color (`--color-<category>`).
@@ -69,6 +115,8 @@ export class ScChartFunnel implements ScChartSeriesLabels {
   readonly key = input.required<string>();
   /** The space between stages, in px. */
   readonly gap = input(2);
+  /** Its stages' corners' rounding, in px. Unset: the style's (the preset's `--chart-bar-radius`, as the bars'). */
+  readonly cornerRadius = input<number | undefined>(undefined);
   /**
    * Its stages grow out of their centers when it appears, and move to their
    * new places when its data changes (Recharts'); not with reduced motion.
@@ -156,6 +204,8 @@ export class ScChartFunnel implements ScChartSeriesLabels {
     const categories = this.state.categories();
     // Growing in: each stage out of its own center, its widths and height.
     const grown = this.grown();
+    // Its corners: yours, else the style's (measured: a path can't take CSS).
+    const radius = this.cornerRadius() ?? this.state.barRadius();
     return this.moving.items().map((stage) => {
       const { index, cx, cy } = stage;
       const half = stage.half * grown;
@@ -170,7 +220,15 @@ export class ScChartFunnel implements ScChartSeriesLabels {
         top: y0,
         bottom: y1,
         color: `var(--color-${categories[index]})`,
-        path: `M${cx - half},${y0}H${cx + half}L${cx + narrow},${y1}H${cx - narrow}Z`,
+        path: roundedPath(
+          [
+            [cx - half, y0],
+            [cx + half, y0],
+            [cx + narrow, y1],
+            [cx - narrow, y1],
+          ],
+          radius,
+        ),
       };
     });
   });

@@ -31,6 +31,7 @@ A series as a funnel: a stage per row, top to bottom, each as wide as its value 
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | `key`               | `string` (required): each stage's value                                                                                                                             | —          |
 | `gap`               | `number`: the space between stages, in px                                                                                                                           | `2`        |
+| `cornerRadius`      | `number`: its stages' corners' rounding, in px — unset, the style's (`--chart-bar-radius`, as the bars'; square in Lyra and Sera)                                   | —          |
 | `isAnimationActive` | `boolean`: its stages grow out of their centers when it appears (Recharts' entrance)                                                                                | `true`     |
 | `animationBegin`    | `number`: the wait before it starts, in ms                                                                                                                          | `400`      |
 | `animationDuration` | `number`: how long it lasts, in ms                                                                                                                                  | `1500`     |

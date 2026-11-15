@@ -90,3 +90,40 @@ test('RTL: in Arabic, symmetric, its arrows mirrored — ← to the next', async
   await press(page, 'ArrowLeft');
   await expect(tooltip(page)).toContainText('تسجيل');
 });
+
+test("Corners: the stages' the style's — square in Lyra, rounded in Nova", async ({
+  page,
+  baseURL,
+}) => {
+  const shapeIn = async (preset: string, name: string) => {
+    await page.context().addCookies([
+      {
+        name: 'sc-preset',
+        value: preset,
+        url: baseURL ?? 'http://localhost:4200',
+      },
+    ]);
+    // Drawn whole at once (no entrance): its corners, not its growth.
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto(demo(name));
+    const shape = page.locator('[data-slot=chart-funnel] path').nth(1);
+    // Once grown and still: the same outline twice in a row.
+    let last = '';
+    await expect
+      .poll(
+        async () => {
+          const d = (await shape.getAttribute('d')) ?? '';
+          const still = d !== '' && d === last;
+          last = d;
+          return still;
+        },
+        { intervals: [300] },
+      )
+      .toBe(true);
+    return last;
+  };
+  // A rounded corner: a curve in its outline.
+  const curves = (d: string) => (d.match(/[QA]/g) ?? []).length;
+  expect(curves(await shapeIn('lyra', 'funnel'))).toBe(0);
+  expect(curves(await shapeIn('nova', 'funnel'))).toBe(4);
+});
