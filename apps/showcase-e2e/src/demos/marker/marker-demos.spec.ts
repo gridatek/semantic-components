@@ -33,6 +33,8 @@ test('Variants: each one marked; the separator draws a line each side', async ({
   page,
 }) => {
   await page.goto(demo('variants'));
+  // Rendered first: read at once, they may not be there yet.
+  await expect(markers(page)).toHaveCount(3);
   const variants = await markers(page).evaluateAll((all) =>
     all.map((m) => m.getAttribute('data-variant')),
   );

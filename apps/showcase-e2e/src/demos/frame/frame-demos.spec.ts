@@ -31,6 +31,14 @@ test('Aspect Ratio: the photo clipped to the frame’s corners', async ({
   await page.goto(demo('aspect-ratio'));
   const frame = page.locator('[scFrame]');
   await expect(frame).toHaveCSS('overflow', 'hidden');
+  // Once at its ratio: in WebKit it may take it a moment late
+  // (ScAspectRatio's FIXME(webkit), docs/webkit-workarounds.md).
+  await expect
+    .poll(async () => {
+      const b = await box(frame);
+      return b.width / b.height;
+    })
+    .toBeCloseTo(16 / 9, 1);
   const [f, i] = [
     await box(frame),
     await box(page.getByRole('img', { name: 'A rocky coast' })),

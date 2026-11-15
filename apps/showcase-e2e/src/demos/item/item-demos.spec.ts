@@ -30,6 +30,8 @@ test('Usage: an item with its action; a link item named by its text', async ({
 
 test('Variant and Size: each marked; smaller each time', async ({ page }) => {
   await page.goto(demo('variant'));
+  // Rendered first: read at once, they may not be there yet.
+  await expect(items(page)).toHaveCount(3);
   const variants = await items(page).evaluateAll((all) =>
     all.map((i) => i.getAttribute('data-variant')),
   );

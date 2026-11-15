@@ -52,6 +52,8 @@ test('States: each one marked; the title shimmers while uploading or processing'
   page,
 }) => {
   await page.goto(demo('states'));
+  // Rendered first: read at once, they may not be there yet.
+  await expect(attachments(page)).toHaveCount(5);
   const states = await attachments(page).evaluateAll((all) =>
     all.map((a) => a.getAttribute('data-state')),
   );
@@ -67,6 +69,7 @@ test('States: each one marked; the title shimmers while uploading or processing'
 
 test('Sizes: each smaller than the last', async ({ page }) => {
   await page.goto(demo('sizes'));
+  await expect(attachments(page).first()).toBeVisible();
   const heights = await attachments(page).evaluateAll((all) =>
     all.map((a) => a.getBoundingClientRect().height),
   );

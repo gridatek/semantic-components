@@ -49,6 +49,27 @@ Safari behaves like the others, and remove its section here.
   [Mozilla bug 842158](https://bugzilla.mozilla.org/show_bug.cgi?id=842158).
 - **Specs:** "RTL" in the slider and range slider demos.
 
+### A late `aspect-ratio` isn't applied to a stretched flex item
+
+- **Where:** `fixWebKitLayout()` in
+  `libs/ui/src/lib/components/aspect-ratio/aspect-ratio.ts`.
+- **What:** a flex item stretched in a row (`align-items: stretch`, the
+  default) that has been laid out once ignores an `aspect-ratio` it gets
+  afterwards. That can be a stylesheet loading late, a breakpoint, or a new
+  `ratio`. WebKit computes the ratio in its style (`getComputedStyle` has
+  it), but its box keeps its old height (a photo's frame 25px high instead
+  of 216px). Through `--ratio` or set directly, it's the same. Block, grid,
+  a flex column and a flex item with its own `align-self` are fine. Chrome
+  and Firefox apply it every time. Only a new box fixes it (`display: none`,
+  then back), so `ScAspectRatio` compares its height to its computed ratio
+  (once drawn, on a new `ratio`, on a resize, on the page's `load`) and makes
+  a new box when they differ. That never happens outside WebKit.
+- **Links:** no WebKit bug found for this yet (worth filing). The smallest
+  page that shows it: a `display: flex` row, a child with `width: 100%;
+max-width: 384px`, its `offsetHeight` read, then `aspect-ratio: 16 / 9`
+  set: its height stays 0.
+- **Specs:** the aspect ratio demos, and "Aspect Ratio" in the frame demos.
+
 ## In the tests only
 
 Playwright's WebKit, not Safari: the specs work around these, the lib

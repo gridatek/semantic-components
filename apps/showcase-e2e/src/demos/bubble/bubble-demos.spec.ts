@@ -43,6 +43,8 @@ test('Variants: each one marked; ghost takes the full width, the rest at most 80
   page,
 }) => {
   await page.goto(demo('variants'));
+  // Rendered first: read at once, they may not be there yet.
+  await expect(bubbles(page)).toHaveCount(7);
   const variants = await bubbles(page).evaluateAll((all) =>
     all.map((b) => b.getAttribute('data-variant')),
   );
@@ -66,6 +68,8 @@ test('Group: the bubbles in it closer than those around it', async ({
   page,
 }) => {
   await page.goto(demo('group'));
+  // Rendered first: read at once, they may not be there yet.
+  await expect(bubbles(page).first()).toBeVisible();
   const rects = await bubbles(page).evaluateAll((all) =>
     all.map((b) => {
       const r = b.getBoundingClientRect();
@@ -94,6 +98,8 @@ test('Reactions: on the side and at the end asked for, over the edge', async ({
   page,
 }) => {
   await page.goto(demo('reactions'));
+  // Rendered first: read at once, they may not be there yet.
+  await expect(reactions(page)).toHaveCount(4);
   const sides = await reactions(page).evaluateAll((all) =>
     all.map((r) => [r.getAttribute('data-side'), r.getAttribute('data-align')]),
   );
