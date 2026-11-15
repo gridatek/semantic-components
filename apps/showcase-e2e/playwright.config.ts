@@ -77,7 +77,19 @@ export default defineConfig({
       ).map(([suffix, device]) => ({
         name: kind + suffix,
         testDir: './src/' + kind,
-        use: { ...device },
+        use: {
+          ...device,
+          // Firefox's bounce-tracker guess: localhost sets its cookies (a
+          // preset, a theme) with no click first — a warning in the console
+          // about the browser, not the page.
+          ...(suffix === '-firefox' && {
+            launchOptions: {
+              firefoxUserPrefs: {
+                'privacy.bounceTrackingProtection.mode': 0,
+              },
+            },
+          }),
+        },
         grepInvert: /@mobile/,
       })),
     ),

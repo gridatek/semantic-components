@@ -18,7 +18,11 @@ test.describe('Presets Page', () => {
       page.getByRole('menuitemradio', { name: 'Nova' }),
     ).toHaveAttribute('aria-checked', 'true');
     await page.getByRole('menuitemradio', { name: 'Maia' }).click();
-    await expect(style).toContainText('maia', { ignoreCase: true });
+    // The page loads again, in it: a heavy page, slower in Firefox and WebKit.
+    await expect(style).toContainText('maia', {
+      ignoreCase: true,
+      timeout: 20_000,
+    });
     await expect(
       page.getByRole('heading', { name: 'Contribution History' }),
     ).toBeVisible();

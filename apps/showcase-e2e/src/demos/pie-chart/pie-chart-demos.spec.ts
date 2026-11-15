@@ -18,6 +18,15 @@ test('Pie: a slice per browser; the pointer names it', async ({ page }) => {
   await page.goto(demo('pie'));
   const slices = page.locator('[data-slot=chart-pie] path');
   await expect(slices).toHaveCount(5);
+  // Swept in (after its 400ms wait, once seen): each slice its own wedge,
+  // not yet all at nothing on top of one another.
+  await expect
+    .poll(() =>
+      slices
+        .nth(1)
+        .evaluate((path) => (path as SVGPathElement).getBBox().width),
+    )
+    .toBeGreaterThan(20);
   await slices.nth(1).hover();
   await expect(tooltip(page)).toBeVisible();
   await expect(tooltip(page)).toContainText('Safari');
