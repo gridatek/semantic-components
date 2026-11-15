@@ -134,3 +134,35 @@ test('Grid: a circle through the middle of each ring, as Recharts', async ({
   // The first through the first ring: half a ring out from the hole.
   expect(radii[0]).toBeGreaterThan(step / 2);
 });
+
+test('Labels at the start: each along its own ring, none on another', async ({
+  page,
+}) => {
+  await page.goto(demo('label-radial'));
+  const labels = page.locator('[data-slot=chart-labels] text');
+  await expect(labels).toHaveCount(5);
+  // Along their rings (curved text), not in a row where the rings begin.
+  await expect(labels.locator('textPath')).toHaveCount(5);
+  // The center: the middle of a ring's full track.
+  const center = await page
+    .locator('[data-slot=chart-radial-bar] path.fill-muted')
+    .first()
+    .evaluate((path) => {
+      const box = path.getBoundingClientRect();
+      return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+    });
+  // Each label at its own ring's distance from it: a ring apart, outwards.
+  const distances = await labels.evaluateAll(
+    (texts, c) =>
+      texts.map((text) => {
+        const box = text.getBoundingClientRect();
+        return Math.hypot(
+          box.x + box.width / 2 - c.x,
+          box.y + box.height / 2 - c.y,
+        );
+      }),
+    center,
+  );
+  for (let i = 1; i < distances.length; i++)
+    expect(distances[i] - distances[i - 1]).toBeGreaterThan(10);
+});

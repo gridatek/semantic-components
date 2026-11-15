@@ -11,6 +11,8 @@ export interface ScChartLabelPoint {
   y: number;
   anchor: 'start' | 'middle' | 'end';
   baseline: 'auto' | 'middle' | 'hanging';
+  /** A path its text follows, from its start (a ring's arc: Recharts' insideStart). */
+  path?: string;
 }
 
 /** What a series tells its labels (`scChartLabels`, inside it). */

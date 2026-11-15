@@ -35,6 +35,20 @@ interface ScRadialChartRing {
   radius: number;
 }
 
+/**
+ * An arc's path at a radius, from one angle to another (0 at the top,
+ * clockwise; either way round), around (0, 0) — short of a whole turn.
+ */
+function arcPath(radius: number, from: number, to: number): string {
+  const turn = Math.PI * 2 - 0.01;
+  const end = from + Math.max(-turn, Math.min(turn, to - from));
+  const a = around(from, radius);
+  const b = around(end, radius);
+  const large = Math.abs(end - from) > Math.PI ? 1 : 0;
+  const clockwise = end > from ? 1 : 0;
+  return `M${a.x},${a.y}A${radius},${radius} 0 ${large} ${clockwise} ${b.x},${b.y}`;
+}
+
 /** A point at an angle (0 at the top, clockwise) and a radius, around (0, 0). */
 const around = (angle: number, radius: number) => ({
   x: radius * Math.sin(angle),
@@ -228,16 +242,28 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
     // Once they've grown and are still (Recharts').
     if (this.grown() < 1 || this.moving.animating()) return [];
     const rows = this.state.data();
+    const [, last] = this.state.angles();
     return this.rings().map((ring) => {
       const value = numberOf(rows[ring.index]?.[this.key()]);
       // Along the ring: at its arc's start, beyond its end, or in its middle.
-      const nudge = offset / Math.max(1, ring.radius);
+      const way =
+        Math.sign(ring.to - ring.from) || Math.sign(last - ring.from) || 1;
+      const nudge = (offset / Math.max(1, ring.radius)) * way;
+      if (position === 'start') {
+        // Along its ring, from its start, the way it grows (Recharts'
+        // insideStart): the names don't pile up where the rings begin.
+        const from = ring.from + nudge;
+        return {
+          index: ring.index,
+          value,
+          ...around(from, ring.radius),
+          anchor: 'start',
+          baseline: 'middle',
+          path: arcPath(ring.radius, from, from + way * Math.PI * 2),
+        };
+      }
       const angle =
-        position === 'start'
-          ? ring.from + nudge
-          : position === 'outside'
-            ? ring.to + nudge
-            : (ring.from + ring.to) / 2;
+        position === 'outside' ? ring.to + nudge : (ring.from + ring.to) / 2;
       return {
         index: ring.index,
         value,

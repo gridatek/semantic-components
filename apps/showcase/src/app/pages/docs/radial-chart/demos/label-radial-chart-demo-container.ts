@@ -58,7 +58,14 @@ import {
       [config]="config"
       [data]="data"
     >
-      <svg scChartPlot categoryKey="browser" aria-label="Visitors by browser">
+      <!-- As shadcn's: from the bottom, a little past a whole turn. -->
+      <svg
+        scChartPlot
+        categoryKey="browser"
+        aria-label="Visitors by browser"
+        [startAngle]="-90"
+        [endAngle]="380"
+      >
         <g scChartRadialBar key="visitors" colorBy="category" track>
           <g
             scChartLabels

@@ -1,3 +1,4 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
   LOCALE_ID,
@@ -24,14 +25,31 @@ import { ScChartState } from './chart-state';
   selector: 'g[scChartLabels]',
   template: `
     @for (label of labels(); track label.index) {
-      <svg:text
-        [attr.x]="label.x"
-        [attr.y]="label.y"
-        [attr.text-anchor]="label.anchor"
-        [attr.dominant-baseline]="label.baseline"
-      >
-        {{ label.text }}
-      </svg:text>
+      @if (label.path) {
+        <!-- Along its path (a ring's arc), from its start. -->
+        <svg:path
+          [attr.id]="id + '-' + label.index"
+          [attr.d]="label.path"
+          fill="none"
+        />
+        <svg:text
+          [attr.text-anchor]="label.anchor"
+          [attr.dominant-baseline]="label.baseline"
+        >
+          <svg:textPath [attr.href]="'#' + id + '-' + label.index">
+            {{ label.text }}
+          </svg:textPath>
+        </svg:text>
+      } @else {
+        <svg:text
+          [attr.x]="label.x"
+          [attr.y]="label.y"
+          [attr.text-anchor]="label.anchor"
+          [attr.dominant-baseline]="label.baseline"
+        >
+          {{ label.text }}
+        </svg:text>
+      }
     }
   `,
   host: {
@@ -45,6 +63,8 @@ export class ScChartLabels {
   private readonly series = inject(SC_CHART_SERIES);
   private readonly state = inject(ScChartState);
   private readonly numbers = new Intl.NumberFormat(inject(LOCALE_ID));
+  /** The paths' ids' prefix: unique in the page. */
+  private readonly id = inject(_IdGenerator).getId('sc-chart-labels-');
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly position = input<ScChartLabelPosition>('outside');
