@@ -38,6 +38,10 @@ Its own entry point, so the other charts don't need `d3-sankey`: `import { ScCha
 
 Each row's category (`categoryKey`) names its flow in the tooltip (`Search → Pricing`). The nodes' names come from the config's labels, or are the names themselves; the legend lists the nodes.
 
+## Entrance
+
+None: it draws whole at once. Recharts' `Sankey` has no animation, and our charts animate as Recharts' do — so it has no `isAnimationActive` or other animation inputs.
+
 ## Labels
 
 `<g scChartLabels />` inside it writes each flow's value in its middle.

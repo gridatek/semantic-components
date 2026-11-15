@@ -180,6 +180,18 @@ export class ScChartSankey implements ScChartSeriesLabels {
       colorBy: computed(() => 'category' as const),
       colorOf: (index) => `var(--color-${this.sourceOf(index)})`,
       legend: computed(() => this.layout().nodes.map((node) => node.name)),
+      // The keyboard's item: across its flow's middle, as thick as it.
+      anchor: (index) => {
+        const flow = this.flows().find((f) => f.index === index);
+        return flow
+          ? {
+              x: flow.x,
+              y: flow.y - flow.width / 2,
+              width: 0,
+              height: flow.width,
+            }
+          : null;
+      },
     });
     inject(DestroyRef).onDestroy(unregister);
   }

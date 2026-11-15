@@ -36,6 +36,10 @@ A series as a sunburst: its rows' groups (`groupKey`) as an inner ring, each its
 
 Give the groups their colors in the config; the legend lists them. The plot's `startAngle` and `endAngle` bound it. The rows' ring takes the pointer; the tooltip names each row, in its group's color.
 
+## Entrance
+
+None: it draws whole at once. Recharts' `SunburstChart` has no animation, and our charts animate as Recharts' do — so it has no `isAnimationActive` or other animation inputs.
+
 ## Labels
 
 `<g scChartLabels />` inside it writes each row's value beyond its edge (`outside`) or in its middle (`inside`).

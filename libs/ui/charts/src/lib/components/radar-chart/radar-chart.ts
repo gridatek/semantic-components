@@ -116,6 +116,11 @@ export class ScChartRadar {
       key: this.key,
       kind: 'radar',
       stack: computed(() => null),
+      // The keyboard's item: its point on the spoke.
+      anchor: (index) => {
+        const p = this.points()[index];
+        return p ? { x: p.x, y: p.y, width: 0, height: 0 } : null;
+      },
     });
     inject(DestroyRef).onDestroy(unregister);
   }

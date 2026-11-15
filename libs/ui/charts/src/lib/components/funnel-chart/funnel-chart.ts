@@ -27,6 +27,9 @@ interface ScFunnelChartStage {
   cy: number;
   /** Half its top's width. */
   half: number;
+  /** Its top and bottom edges. */
+  top: number;
+  bottom: number;
 }
 
 /**
@@ -108,6 +111,8 @@ export class ScChartFunnel implements ScChartSeriesLabels {
         cx,
         cy,
         half,
+        top: y0,
+        bottom: y1,
         color: `var(--color-${categories[index]})`,
         path: `M${cx - half},${y0}H${cx + half}L${cx + narrow},${y1}H${cx - narrow}Z`,
       };
@@ -122,6 +127,18 @@ export class ScChartFunnel implements ScChartSeriesLabels {
       kind: 'funnel',
       stack: computed(() => null),
       colorBy: computed(() => 'category' as const),
+      // The keyboard's item: its stage.
+      anchor: (index) => {
+        const stage = this.stages().find((s) => s.index === index);
+        return stage
+          ? {
+              x: stage.cx - stage.half,
+              y: stage.top,
+              width: stage.half * 2,
+              height: stage.bottom - stage.top,
+            }
+          : null;
+      },
     });
     inject(DestroyRef).onDestroy(unregister);
   }

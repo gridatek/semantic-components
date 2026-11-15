@@ -209,6 +209,13 @@ export class ScChartTreemap implements ScChartSeriesLabels {
           ? `var(--color-${String(row?.[groupKey] ?? '')})`
           : `var(--color-${this.state.categories()[index]})`;
       },
+      // The keyboard's item: its box.
+      anchor: (index) => {
+        const box = this.boxes().find((b) => b.index === index);
+        return box
+          ? { x: box.x, y: box.y, width: box.width, height: box.height }
+          : null;
+      },
       legend: computed(() =>
         this.groupKey()
           ? (this.layout().children ?? []).map((group) => group.data.name)

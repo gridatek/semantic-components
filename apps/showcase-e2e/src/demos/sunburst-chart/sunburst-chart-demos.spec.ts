@@ -40,3 +40,23 @@ test('Labels: each country beyond its slice; the keyboard moves through them', a
   await press(page, 'End');
   await expect(tooltip(page)).toContainText('Japan');
 });
+
+test.describe('keyboard', () => {
+  // Placed at once (no glide), to read where it is.
+  test.use({ reducedMotion: 'reduce' });
+
+  test('Keyboard: the tooltip beside the item reached, not the middle', async ({
+    page,
+  }) => {
+    await page.goto(demo('sunburst'));
+    await page.locator('[data-slot=chart-plot]').first().focus();
+    await expect(tooltip(page)).toBeVisible();
+    const at = async () => {
+      const box = await tooltip(page).boundingBox();
+      return `${Math.round(box?.x ?? 0)},${Math.round(box?.y ?? 0)}`;
+    };
+    const first = await at();
+    await press(page, 'ArrowRight');
+    await expect.poll(at).not.toBe(first);
+  });
+});

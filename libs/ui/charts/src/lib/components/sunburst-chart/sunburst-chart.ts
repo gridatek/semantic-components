@@ -167,6 +167,14 @@ export class ScChartSunburst implements ScChartSeriesLabels {
       stack: computed(() => null),
       colorBy: computed(() => 'category' as const),
       colorOf: (index) => `var(--color-${this.groupOf(index)})`,
+      // The keyboard's item: its arc's outer edge, at its middle.
+      anchor: (index) => {
+        const leaf = this.leaves().find((l) => l.index === index);
+        if (!leaf) return null;
+        const { cx, cy } = this.state.circle();
+        const p = around(leaf.middle, leaf.outer);
+        return { x: cx + p.x, y: cy + p.y, width: 0, height: 0 };
+      },
       legend: computed(() => this.order().map((group) => group.name)),
     });
     inject(DestroyRef).onDestroy(unregister);

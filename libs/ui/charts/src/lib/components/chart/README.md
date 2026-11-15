@@ -102,11 +102,33 @@ You write what they show, from their state — Recharts' `content`, as parts: `l
 </div>
 ```
 
-- **Where it goes**: in a CDK overlay (the end of the page), so it can leave a small card — beside the pointer, 10px from the arrow's drawing (Recharts' offset, so it doesn't touch the cursor); above a finger with touch, centred; with the keyboard, beside the item reached (a bar's end, a point; a series can give its own box). It flips and stays in the window where there is no room, and closes on scroll. Its box carries the series' colors (`--color-<key>`), which the chart sets on itself.
+- **Where it goes**: in a CDK overlay (the end of the page), so it can leave a small card — beside the pointer, 10px from the arrow's drawing (Recharts' offset, so it doesn't touch the cursor); above a finger with touch, centred; with the keyboard, beside the item reached — a bar's end, a point; in a pie, radial or sunburst the slice's or arc's outer edge, a radar's point, a funnel's stage, a treemap's box, a sankey's flow (a series's `anchor`). It flips and stays in the window where there is no room, and closes on scroll. Its box carries the series' colors (`--color-<key>`), which the chart sets on itself.
 - **Closed, it is not there**; `label()` and `payload()` keep the last category shown (the first before any), so what you write from them always has one to format.
 - **The values are raw numbers**: `| number` writes them in the app's locale (its `LOCALE_ID`).
 - **The tooltip's box** is the preset's (`chart.tooltip`): its corners, border or ring, shadow — shadcn's, style by style. Your `class` adds to it.
 - **Names and colours** come from the chart's `config`; a pie's slice, a radial bar are named and coloured by their category.
+
+## Animation
+
+Each series enters as Recharts' does, with its names: `isAnimationActive`, `animationBegin`, `animationDuration`, `animationEasing` (`ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`) — and Recharts' defaults:
+
+| Series  | Its entrance                              | Begin, duration, easing |
+| ------- | ----------------------------------------- | ----------------------- |
+| Bar     | its bars grow from their base             | 0, 400ms, `ease`        |
+| Line    | it draws itself, then its dots and labels | 0, 1500ms, `ease`       |
+| Area    | unveiled from its first category          | 0, 1500ms, `ease`       |
+| Pie     | it sweeps round from its start angle      | 400ms, 1500ms, `ease`   |
+| Radar   | its points move out from the center       | 0, 1500ms, `ease`       |
+| Radial  | its arcs grow along their rings           | 0, 1500ms, `ease`       |
+| Scatter | its points grow                           | 0, 400ms, `linear`      |
+| Funnel  | its stages grow out of their centers      | 400ms, 1500ms, `ease`   |
+| Treemap | its boxes slide in from the left          | 0, 1500ms, `linear`     |
+
+- **Sunburst and Sankey don't animate**: Recharts' have no animation, so ours have none — and no animation inputs.
+- **Labels** come once their series is whole (Recharts'); a bar's grow with it, a treemap's slide with their boxes.
+- **Not on the server** (it draws everything whole), **nor with reduced motion** (`prefers-reduced-motion`): whole at once.
+- **Only the first appearance**: new data is drawn at once — Recharts moves the shapes to their new places; not yet here.
+- `scChartEntrance()` gives the same progress (0 to 1, eased) to a series of your own.
 
 ## Keyboard and screen readers
 

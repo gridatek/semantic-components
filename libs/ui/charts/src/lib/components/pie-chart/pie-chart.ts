@@ -151,6 +151,14 @@ export class ScChartPie implements ScChartSeriesLabels {
       kind: 'pie',
       stack: computed(() => null),
       colorBy: computed(() => 'category' as const),
+      // The keyboard's item: its slice's outer edge, at its middle.
+      anchor: (index) => {
+        const slice = this.slices().find((s) => s.index === index);
+        if (!slice) return null;
+        const { cx, cy } = this.state.circle();
+        const p = around(slice.middle, slice.outer);
+        return { x: cx + p.x, y: cy + p.y, width: 0, height: 0 };
+      },
     });
     inject(DestroyRef).onDestroy(unregister);
   }
