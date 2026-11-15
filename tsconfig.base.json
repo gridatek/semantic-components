@@ -17,9 +17,6 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@semantic-components/ui/animated-counter": [
-        "libs/ui/animated-counter/src/index.ts"
-      ],
       "@semantic-components/ui/confetti": ["libs/ui/confetti/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"],
       "@semantic-components/ui/code-block": ["libs/ui/code-block/src/index.ts"],

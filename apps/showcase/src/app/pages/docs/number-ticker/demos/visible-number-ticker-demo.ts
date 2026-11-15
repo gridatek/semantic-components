@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
+import { ScNumberTicker } from '@semantic-components/ui';
 
 /** start="visible": landing-page figures that count up from zero when they are first scrolled into view. */
 @Component({
-  selector: 'app-visible-animated-counter-demo',
-  imports: [ScAnimatedCounter],
+  selector: 'app-visible-number-ticker-demo',
+  imports: [ScNumberTicker],
   template: `
     <div
       class="h-64 w-full max-w-lg overflow-y-auto rounded-xl border"
@@ -22,7 +22,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
           <dt class="text-muted-foreground text-xs">Customers</dt>
           <dd>
             <span
-              scAnimatedCounter
+              scNumberTicker
               start="visible"
               [value]="12500"
               [duration]="1500"
@@ -34,7 +34,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
           <dt class="text-muted-foreground text-xs">Countries</dt>
           <dd>
             <span
-              scAnimatedCounter
+              scNumberTicker
               start="visible"
               [value]="48"
               [duration]="1500"
@@ -46,7 +46,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
           <dt class="text-muted-foreground text-xs">Uptime</dt>
           <dd>
             <span
-              scAnimatedCounter
+              scNumberTicker
               start="visible"
               [value]="0.9995"
               [format]="{ style: 'percent', minimumFractionDigits: 2 }"
@@ -61,4 +61,4 @@ import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class VisibleAnimatedCounterDemo {}
+export class VisibleNumberTickerDemo {}

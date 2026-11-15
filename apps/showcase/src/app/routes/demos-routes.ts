@@ -568,41 +568,41 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/animated-counter',
+    path: 'demos/number-ticker',
     children: [
       {
-        path: 'count-animated-counter-demo',
+        path: 'count-number-ticker-demo',
         loadComponent: () =>
-          import('../pages/docs/animated-counter/demos/count-animated-counter-demo').then(
-            (m) => m.CountAnimatedCounterDemo,
+          import('../pages/docs/number-ticker/demos/count-number-ticker-demo').then(
+            (m) => m.CountNumberTickerDemo,
           ),
       },
       {
-        path: 'roll-animated-counter-demo',
+        path: 'roll-number-ticker-demo',
         loadComponent: () =>
-          import('../pages/docs/animated-counter/demos/roll-animated-counter-demo').then(
-            (m) => m.RollAnimatedCounterDemo,
+          import('../pages/docs/number-ticker/demos/roll-number-ticker-demo').then(
+            (m) => m.RollNumberTickerDemo,
           ),
       },
       {
-        path: 'formats-animated-counter-demo',
+        path: 'formats-number-ticker-demo',
         loadComponent: () =>
-          import('../pages/docs/animated-counter/demos/formats-animated-counter-demo').then(
-            (m) => m.FormatsAnimatedCounterDemo,
+          import('../pages/docs/number-ticker/demos/formats-number-ticker-demo').then(
+            (m) => m.FormatsNumberTickerDemo,
           ),
       },
       {
-        path: 'visible-animated-counter-demo',
+        path: 'visible-number-ticker-demo',
         loadComponent: () =>
-          import('../pages/docs/animated-counter/demos/visible-animated-counter-demo').then(
-            (m) => m.VisibleAnimatedCounterDemo,
+          import('../pages/docs/number-ticker/demos/visible-number-ticker-demo').then(
+            (m) => m.VisibleNumberTickerDemo,
           ),
       },
       {
-        path: 'card-animated-counter-demo',
+        path: 'card-number-ticker-demo',
         loadComponent: () =>
-          import('../pages/docs/animated-counter/demos/card-animated-counter-demo').then(
-            (m) => m.CardAnimatedCounterDemo,
+          import('../pages/docs/number-ticker/demos/card-number-ticker-demo').then(
+            (m) => m.CardNumberTickerDemo,
           ),
       },
     ],

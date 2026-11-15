@@ -20,10 +20,10 @@ import { StackedRadialChartDemo } from './stacked-radial-chart-demo';
 export class StackedRadialChartDemoContainer {
   readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ScNumberTicker } from '@semantic-components/ui';
 import {
   ScChart,
   ScChartCenter,
-  ScChartCenterValue,
   type ScChartConfig,
   ScChartPlot,
   ScChartRadialBar,
@@ -43,7 +43,7 @@ import {
     ScChartPlot,
     ScChartRadialBar,
     ScChartCenter,
-    ScChartCenterValue,
+    ScNumberTicker,
     ScChartTooltip,
     ScChartTooltipPortal,
     ScChartTooltipProvider,
@@ -71,12 +71,15 @@ import {
         <g scChartCenter>
           <!-- Counting up as the arcs grow (a radial's: at once). -->
           <text
-            scChartCenterValue
+            scNumberTicker
             text-anchor="middle"
             dy="-1.2em"
             class="fill-foreground text-2xl font-bold"
             [value]="total"
-            [animationBegin]="0"
+            start="visible"
+            easing="ease"
+            [delay]="0"
+            [duration]="1500"
           ></text>
           <text text-anchor="middle" dy="0.2em" class="fill-muted-foreground">
             Visitors

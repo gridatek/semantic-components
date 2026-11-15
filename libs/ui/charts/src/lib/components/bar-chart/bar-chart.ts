@@ -6,9 +6,9 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { type ScEasing } from '@semantic-components/ui';
 import { cn } from 'cn';
 import {
-  type ScChartAnimationEasing,
   type ScChartAnimationItem,
   type ScChartAnimationMatchBy,
   scChartInterpolate as between,
@@ -235,7 +235,7 @@ export class ScChartBar implements ScChartSeriesLabels {
   readonly animationBegin = input(0);
   /** How long they grow or move, in ms. */
   readonly animationDuration = input(400);
-  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  readonly animationEasing = input<ScEasing>('ease');
   /** How its bars before and after a change are paired (Recharts'): the first with the first. */
   readonly animationMatchBy = input<ScChartAnimationMatchBy>('append');
 

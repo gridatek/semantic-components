@@ -9,6 +9,7 @@ import {
   ScCardFooter,
   ScCardHeader,
   ScCardTitle,
+  ScNumberTicker,
   ScProgress,
   ScProgressRange,
   ScProgressTrack,
@@ -16,7 +17,6 @@ import {
 import {
   ScChart,
   ScChartCenter,
-  ScChartCenterValue,
   type ScChartConfig,
   ScChartLegend,
   ScChartLegendIndicator,
@@ -57,7 +57,7 @@ const TOP = DATA.reduce((max, row) =>
     ScCardTitle,
     ScChart,
     ScChartCenter,
-    ScChartCenterValue,
+    ScNumberTicker,
     ScChartLegend,
     DecimalPipe,
     ScChartTooltipIndicator,
@@ -104,12 +104,16 @@ const TOP = DATA.reduce((max, row) =>
             />
             <g scChartCenter>
               <text
-                scChartCenterValue
+                scNumberTicker
                 text-anchor="middle"
                 dominant-baseline="middle"
                 y="-8"
                 class="fill-foreground text-2xl font-bold"
                 [value]="total"
+                start="visible"
+                easing="ease"
+                [delay]="400"
+                [duration]="1500"
               ></text>
               <text
                 text-anchor="middle"

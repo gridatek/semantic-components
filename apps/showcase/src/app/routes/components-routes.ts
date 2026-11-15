@@ -28,10 +28,10 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/alert-dialog/alert-dialog-page'),
       },
       {
-        path: 'animated-counter',
-        title: 'Animated Counter - Semantic Components',
+        path: 'number-ticker',
+        title: 'Number Ticker - Semantic Components',
         loadComponent: () =>
-          import('../pages/docs/animated-counter/animated-counter-page'),
+          import('../pages/docs/number-ticker/number-ticker-page'),
       },
       {
         path: 'area-chart',

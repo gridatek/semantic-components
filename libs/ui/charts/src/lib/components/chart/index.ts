@@ -1,20 +1,17 @@
 export { ScChart } from './chart';
 export {
-  type ScChartAnimationEasing,
   type ScChartAnimationItem,
   type ScChartAnimationMatchBy,
   type ScChartEntranceOptions,
   type ScChartMatchable,
   type ScChartTransition,
   type ScChartTransitionOptions,
-  scChartEasing,
   scChartEntrance,
   scChartInterpolate,
   scChartMatchItems,
   scChartTransition,
 } from './chart-animation';
 export { ScChartCategoryAxis } from './chart-category-axis';
-export { ScChartCenterValue } from './chart-center-value';
 export type { ScChartsConfig } from './chart-config';
 export { ScChartCenter } from './chart-center';
 export { ScChartCursor } from './chart-cursor';

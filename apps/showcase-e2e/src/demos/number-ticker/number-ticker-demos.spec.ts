@@ -2,11 +2,11 @@ import { collectErrors } from '../../interaction';
 import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) =>
-  `/demos/animated-counter/${name}-animated-counter-demo`;
-const counters = (page: Page) => page.locator('[data-slot="animated-counter"]');
+  `/demos/number-ticker/${name}-number-ticker-demo`;
+const counters = (page: Page) => page.locator('[data-slot="number-ticker"]');
 /** What is seen: the moving number. */
 const seen = (page: Page, n = 0) =>
-  counters(page).nth(n).locator('[data-slot="animated-counter-visual"]');
+  counters(page).nth(n).locator('[data-slot="number-ticker-visual"]');
 /** What screen readers get: the value. */
 const said = (page: Page, n = 0) => counters(page).nth(n).locator('.sr-only');
 

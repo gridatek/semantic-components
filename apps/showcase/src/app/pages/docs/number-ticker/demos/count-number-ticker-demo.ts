@@ -1,20 +1,16 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
+import { ScNumberTicker } from '@semantic-components/ui';
 
 /** The number counts to its new value, easing out. Screen readers get only the value; with reduced motion, it is there at once. */
 @Component({
-  selector: 'app-count-animated-counter-demo',
-  imports: [ScAnimatedCounter, ScButton],
+  selector: 'app-count-number-ticker-demo',
+  imports: [ScNumberTicker, ScButton],
   template: `
     <div
       class="bg-muted/30 grid h-32 w-64 place-items-center rounded-xl border"
     >
-      <span
-        scAnimatedCounter
-        [value]="count()"
-        class="text-5xl font-bold"
-      ></span>
+      <span scNumberTicker [value]="count()" class="text-5xl font-bold"></span>
     </div>
     <div class="flex gap-2">
       <button scButton (click)="count.set(count() + 100)">+100</button>
@@ -24,6 +20,6 @@ import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CountAnimatedCounterDemo {
+export class CountNumberTickerDemo {
   readonly count = signal(0);
 }

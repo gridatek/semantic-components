@@ -24,15 +24,6 @@
     "category": "Feedback"
   },
   {
-    "name": "Animated Counter",
-    "path": "animated-counter",
-    "description": "Counting or rolling to a new value, in the reader’s language; motion only where it is used.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Data Display",
-    "hidden": true
-  },
-  {
     "name": "Area Chart",
     "path": "area-chart",
     "description": "Series as areas, filled down to 0 or stacked — to 100% if you like — with natural, linear, step or monotone edges; gradients of your own.",
@@ -703,6 +694,15 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
+  },
+  {
+    "name": "Number Ticker",
+    "path": "number-ticker",
+    "description": "Counting or rolling to a new value, in the reader’s language — on an SVG text too; no animation library.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Org Chart",

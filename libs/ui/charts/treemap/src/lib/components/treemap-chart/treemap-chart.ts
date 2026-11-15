@@ -7,9 +7,9 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { type ScEasing } from '@semantic-components/ui';
 import {
   SC_CHART_SERIES,
-  type ScChartAnimationEasing,
   type ScChartLabelPoint,
   type ScChartLabelPosition,
   type ScChartSeriesLabels,
@@ -120,7 +120,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
   readonly animationBegin = input(0);
   /** How long they slide, in ms. */
   readonly animationDuration = input(1500);
-  readonly animationEasing = input<ScChartAnimationEasing>('linear');
+  readonly animationEasing = input<ScEasing>('linear');
 
   /** Its entrance: 0 to 1 once, after its first render. */
   private readonly entrance = scChartEntrance({

@@ -14,61 +14,71 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
-import { type AnimationPlaybackControls, animate } from 'motion';
+import { type ScEasing, scEasing } from '../../utils/easing';
 
 /** How a change is shown: the number counting, or each digit rolling. */
-export type ScAnimatedCounterEffect = 'count' | 'roll';
+export type ScNumberTickerEffect = 'count' | 'roll';
 
 /**
- * A number that moves to its new value — counting there (`count`, by the
- * `motion` library), or each digit rolling (`roll`). Written by
- * `Intl.NumberFormat` in the app's language. Screen readers get the value,
- * never the numbers on the way; reduced motion gets it at once.
+ * A number that moves to its new value — counting there (`count`), or each
+ * digit rolling (`roll`). Written by `Intl.NumberFormat` in the app's
+ * language. On any element, an SVG `<text>` too (a chart's center): counting
+ * there. Screen readers get the value, never the numbers on the way; reduced
+ * motion gets it at once. No library: frame by frame, with CSS's easing.
  */
 @Component({
-  selector: '[scAnimatedCounter]',
-  exportAs: 'scAnimatedCounter',
+  selector: '[scNumberTicker]',
+  exportAs: 'scNumberTicker',
   template: `
-    <span class="sr-only">{{ text() }}</span>
-    <span
-      aria-hidden="true"
-      data-slot="animated-counter-visual"
-      class="inline-flex"
-    >
-      @if (effect() === 'roll') {
-        @for (part of parts(); track parts().length - $index) {
-          @if (part.digit === null) {
-            <span>{{ part.char }}</span>
-          } @else {
-            <span class="inline-block h-[1em] overflow-hidden leading-none">
-              <span
-                class="flex flex-col transition-transform ease-out motion-reduce:transition-none"
-                [style.transition-duration.ms]="duration()"
-                [style.transform]="'translateY(-' + part.digit + 'em)'"
-              >
-                @for (glyph of glyphs(); track $index) {
-                  <span class="h-[1em]">{{ glyph }}</span>
-                }
+    @if (svg) {
+      {{ shownText() }}
+    } @else {
+      <span class="sr-only">{{ text() }}</span>
+      <span
+        aria-hidden="true"
+        data-slot="number-ticker-visual"
+        class="inline-flex"
+      >
+        @if (effect() === 'roll') {
+          @for (part of parts(); track parts().length - $index) {
+            @if (part.digit === null) {
+              <span>{{ part.char }}</span>
+            } @else {
+              <span class="inline-block h-[1em] overflow-hidden leading-none">
+                <span
+                  class="flex flex-col transition-transform ease-out motion-reduce:transition-none"
+                  [style.transition-duration.ms]="duration()"
+                  [style.transform]="'translateY(-' + part.digit + 'em)'"
+                >
+                  @for (glyph of glyphs(); track $index) {
+                    <span class="h-[1em]">{{ glyph }}</span>
+                  }
+                </span>
               </span>
-            </span>
+            }
           }
+        } @else {
+          {{ shownText() }}
         }
-      } @else {
-        {{ shownText() }}
-      }
-    </span>
+      </span>
+    }
   `,
   host: {
-    'data-slot': 'animated-counter',
+    'data-slot': 'number-ticker',
     '[attr.data-effect]': 'effect()',
+    // In SVG (no spans there): named by its value, the numbers on the way unread.
+    '[attr.role]': "svg ? 'img' : null",
+    '[attr.aria-label]': 'svg ? text() : null',
     '[class]': 'class()',
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScAnimatedCounter {
-  private readonly host =
-    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+export class ScNumberTicker {
+  private readonly host = inject<ElementRef<Element>>(ElementRef).nativeElement;
   private readonly document = inject(DOCUMENT);
+  /** On an SVG element (a chart's `<text>`): its text only, counting. */
+  private readonly svg =
+    this.host.namespaceURI === 'http://www.w3.org/2000/svg';
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = input.required<number>();
@@ -76,9 +86,13 @@ export class ScAnimatedCounter {
   readonly format = input<Intl.NumberFormatOptions>({});
   /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
   private readonly locale = inject(LOCALE_ID);
-  readonly effect = input<ScAnimatedCounterEffect>('count');
+  readonly effect = input<ScNumberTickerEffect>('count');
   /** How long a change takes, in milliseconds. */
   readonly duration = input(1000);
+  /** The wait before it moves, in milliseconds (a chart's: its series'). */
+  readonly delay = input(0);
+  /** How it moves: CSS's timing names. */
+  readonly easing = input<ScEasing>('ease-out');
   /** Where the first move starts from. */
   readonly from = input(0);
   /** When the first move starts: at once, or when it is first seen. */
@@ -88,32 +102,30 @@ export class ScAnimatedCounter {
   private readonly shown = signal<number | null>(null);
   /** Moving yet: started, and in the browser. */
   private readonly started = signal(false);
-  private controls: AnimationPlaybackControls | null = null;
+  private frame = 0;
 
   private readonly formatter = computed(
     () => new Intl.NumberFormat(this.locale, this.format()),
   );
 
   /** The value, as written — what screen readers get. */
-  protected readonly text = computed(() =>
-    this.formatter().format(this.value()),
-  );
+  private readonly text = computed(() => this.formatter().format(this.value()));
 
   /** The number on its way, as written: with the value's decimals. */
-  protected readonly shownText = computed(() => {
+  private readonly shownText = computed(() => {
     const shown = this.shown() ?? this.from();
     const places = Math.max(decimals(this.value()), decimals(this.from()));
     return this.formatter().format(round(shown, places));
   });
 
   /** The digits 0–9, in the app's language. */
-  protected readonly glyphs = computed(() => {
+  private readonly glyphs = computed(() => {
     const format = new Intl.NumberFormat(this.locale);
     return Array.from({ length: 10 }, (_, digit) => format.format(digit));
   });
 
   /** Rolling: the written value, each digit with its place 0–9. */
-  protected readonly parts = computed(() => {
+  private readonly parts = computed(() => {
     const glyphs = this.glyphs();
     return [...this.shownText()].map((char) => {
       const digit = glyphs.indexOf(char);
@@ -122,7 +134,7 @@ export class ScAnimatedCounter {
   });
 
   protected readonly class = computed(() =>
-    cn('inline-flex tabular-nums', this.classInput()),
+    cn(this.svg ? '' : 'inline-flex tabular-nums', this.classInput()),
   );
 
   constructor() {
@@ -147,25 +159,33 @@ export class ScAnimatedCounter {
       seen.observe(this.host);
       destroyRef.onDestroy(() => seen.disconnect());
     });
-    destroyRef.onDestroy(() => this.controls?.stop());
+    destroyRef.onDestroy(() =>
+      this.document.defaultView?.cancelAnimationFrame(this.frame),
+    );
   }
 
   private moveTo(value: number): void {
-    this.controls?.stop();
+    const view = this.document.defaultView;
+    view?.cancelAnimationFrame(this.frame);
     const from = this.shown() ?? this.from();
-    const still = this.document.defaultView?.matchMedia?.(
+    const still = view?.matchMedia?.(
       '(prefers-reduced-motion: reduce)',
     )?.matches;
     // Rolling, the digits move by themselves (CSS); still, at once.
-    if (this.effect() === 'roll' || still || from === value) {
+    if (!view || this.effect() === 'roll' || still || from === value) {
       this.shown.set(value);
       return;
     }
-    this.controls = animate(from, value, {
-      duration: this.duration() / 1000,
-      ease: 'easeOut',
-      onUpdate: (shown) => this.shown.set(shown),
-    });
+    const ease = scEasing(this.easing());
+    const duration = Math.max(0, this.duration());
+    const start = view.performance.now() + Math.max(0, this.delay());
+    const step = (now: number) => {
+      const time = duration ? (now - start) / duration : 1;
+      const progress = ease(Math.min(1, Math.max(0, time)));
+      this.shown.set(from + (value - from) * progress);
+      if (time < 1) this.frame = view.requestAnimationFrame(step);
+    };
+    this.frame = view.requestAnimationFrame(step);
   }
 }
 

@@ -6,9 +6,9 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { type ScEasing } from '@semantic-components/ui';
 import { cn } from 'cn';
 import {
-  type ScChartAnimationEasing,
   type ScChartAnimationMatchBy,
   scChartInterpolate as between,
   scChartEntrance,
@@ -126,7 +126,7 @@ export class ScChartFunnel implements ScChartSeriesLabels {
   readonly animationBegin = input(400);
   /** How long they grow, in ms. */
   readonly animationDuration = input(1500);
-  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  readonly animationEasing = input<ScEasing>('ease');
   /** How its stages before and after a change are paired (Recharts'): the first with the first. */
   readonly animationMatchBy = input<ScChartAnimationMatchBy>('append');
 

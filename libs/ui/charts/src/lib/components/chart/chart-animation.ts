@@ -10,48 +10,13 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-
-/** How a series' entrance runs (Recharts' `animationEasing`). */
-export type ScChartAnimationEasing =
-  'ease' | 'ease-in' | 'ease-out' | 'ease-in-out' | 'linear';
-
-/** CSS's curves for those names. */
-const CURVES: Record<ScChartAnimationEasing, [number, number, number, number]> =
-  {
-    ease: [0.25, 0.1, 0.25, 1],
-    'ease-in': [0.42, 0, 1, 1],
-    'ease-out': [0, 0, 0.58, 1],
-    'ease-in-out': [0.42, 0, 0.58, 1],
-    linear: [0, 0, 1, 1],
-  };
-
-/** A cubic Bézier timing curve, as CSS's: the progress at a share of the time. */
-export function scChartEasing(
-  easing: ScChartAnimationEasing,
-): (time: number) => number {
-  const [x1, y1, x2, y2] = CURVES[easing];
-  const at = (a: number, b: number, t: number) =>
-    3 * a * t * (1 - t) ** 2 + 3 * b * t ** 2 * (1 - t) + t ** 3;
-  return (time) => {
-    if (time <= 0) return 0;
-    if (time >= 1) return 1;
-    // The curve's parameter whose x is the time: bisection, plenty for a frame.
-    let low = 0;
-    let high = 1;
-    for (let i = 0; i < 20; i++) {
-      const mid = (low + high) / 2;
-      if (at(x1, x2, mid) < time) low = mid;
-      else high = mid;
-    }
-    return at(y1, y2, (low + high) / 2);
-  };
-}
+import { type ScEasing, scEasing } from '@semantic-components/ui';
 
 /** The entrance's settings: Recharts' names, read when it starts. */
 export interface ScChartEntranceOptions {
   begin: () => number;
   duration: () => number;
-  easing: () => ScChartAnimationEasing;
+  easing: () => ScEasing;
   /**
    * When it may start (the chart's `seen`: first in view) — at once after
    * the first render without one.
@@ -78,7 +43,7 @@ export function scChartEntrance(
 
   let frame = 0;
   const run = () => {
-    const ease = scChartEasing(options.easing());
+    const ease = scEasing(options.easing());
     const duration = Math.max(0, options.duration());
     const start = view.performance.now() + Math.max(0, options.begin());
     const step = (now: number) => {
@@ -251,7 +216,7 @@ export function scChartTransition<T extends ScChartMatchable>(
         ),
       );
       time.set(0);
-      const ease = scChartEasing(options.easing());
+      const ease = scEasing(options.easing());
       const duration = Math.max(0, options.duration());
       const start = view.performance.now() + Math.max(0, options.begin());
       const step = (now: number) => {

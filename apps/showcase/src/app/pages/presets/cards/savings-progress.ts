@@ -4,12 +4,12 @@ import {
   ScCard,
   ScCardBody,
   ScCardFooter,
+  ScNumberTicker,
   ScSeparator,
 } from '@semantic-components/ui';
 import {
   ScChart,
   ScChartCenter,
-  ScChartCenterValue,
   type ScChartConfig,
   ScChartPie,
   ScChartPlot,
@@ -31,7 +31,7 @@ import {
     ScCardFooter,
     ScChart,
     ScChartCenter,
-    ScChartCenterValue,
+    ScNumberTicker,
     ScChartPie,
     ScChartPlot,
     ScChartTooltip,
@@ -66,12 +66,16 @@ import {
             />
             <g scChartCenter>
               <text
-                scChartCenterValue
+                scNumberTicker
                 text-anchor="middle"
                 dominant-baseline="middle"
                 y="-12"
                 class="fill-foreground text-2xl font-bold"
                 [value]="24000"
+                start="visible"
+                easing="ease"
+                [delay]="400"
+                [duration]="1500"
                 [format]="dollars"
               ></text>
               <text

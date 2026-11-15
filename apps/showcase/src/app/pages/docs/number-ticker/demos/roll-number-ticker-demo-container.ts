@@ -1,37 +1,37 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RollAnimatedCounterDemo } from './roll-animated-counter-demo';
+import { RollNumberTickerDemo } from './roll-number-ticker-demo';
 
 @Component({
-  selector: 'app-roll-animated-counter-demo-container',
-  imports: [DemoContainer, RollAnimatedCounterDemo],
+  selector: 'app-roll-number-ticker-demo-container',
+  imports: [DemoContainer, RollNumberTickerDemo],
   template: `
     <app-demo-container
       title="Roll"
       [code]="code"
-      demoUrl="/demos/animated-counter/roll-animated-counter-demo"
+      demoUrl="/demos/number-ticker/roll-number-ticker-demo"
     >
-      <app-roll-animated-counter-demo />
+      <app-roll-number-ticker-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RollAnimatedCounterDemoContainer {
+export class RollNumberTickerDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
+import { ScNumberTicker } from '@semantic-components/ui';
 
 /** effect="roll": each digit rolls to its new place, like an odometer — the separators and the currency stay still. */
 @Component({
-  selector: 'app-roll-animated-counter-demo',
-  imports: [ScAnimatedCounter, ScButton],
+  selector: 'app-roll-number-ticker-demo',
+  imports: [ScNumberTicker, ScButton],
   template: \`
     <div
       class="bg-muted/30 grid h-32 w-72 place-items-center rounded-xl border"
     >
       <span
-        scAnimatedCounter
+        scNumberTicker
         effect="roll"
         [value]="price()"
         [format]="{ style: 'currency', currency: 'USD' }"
@@ -48,7 +48,7 @@ import { ScAnimatedCounter } from '@semantic-components/ui/animated-counter';
   host: { class: 'flex w-full flex-col items-center gap-4' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RollAnimatedCounterDemo {
+export class RollNumberTickerDemo {
   readonly price = signal(1249.99);
 }`;
 }

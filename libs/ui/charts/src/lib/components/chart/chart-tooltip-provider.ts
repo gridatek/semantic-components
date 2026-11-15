@@ -16,6 +16,7 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
+import { type ScEasing } from '@semantic-components/ui';
 import {
   type ScOverlayAlign,
   type ScOverlayLogicalSide,
@@ -25,7 +26,6 @@ import {
   placedSide,
 } from '@semantic-components/ui';
 import { cn } from 'cn';
-import { type ScChartAnimationEasing } from './chart-animation';
 import { ScChartState, numberOf } from './chart-state';
 import type { ScChartBox } from './chart-state';
 import { ScChartTooltipPortal } from './chart-tooltip-portal';
@@ -91,7 +91,7 @@ export class ScChartTooltipProvider {
   readonly isAnimationActive = input(true);
   /** How long a glide takes, in ms. */
   readonly animationDuration = input(400);
-  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  readonly animationEasing = input<ScEasing>('ease');
 
   protected readonly portal = contentChild.required(ScChartTooltipPortal);
 

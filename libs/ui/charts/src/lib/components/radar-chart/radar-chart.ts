@@ -7,9 +7,9 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { type ScEasing } from '@semantic-components/ui';
 import { cn } from 'cn';
 import {
-  type ScChartAnimationEasing,
   type ScChartAnimationMatchBy,
   type ScChartMatchable,
   scChartInterpolate as between,
@@ -83,7 +83,7 @@ export class ScChartRadar {
   readonly animationBegin = input(0);
   /** How long they move, in ms. */
   readonly animationDuration = input(1500);
-  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  readonly animationEasing = input<ScEasing>('ease');
   /** How its points before and after a change are paired (Recharts'): by position, stretched. */
   readonly animationMatchBy = input<ScChartAnimationMatchBy>('index');
 

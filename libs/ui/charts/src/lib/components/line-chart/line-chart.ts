@@ -7,10 +7,10 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { type ScEasing } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { line } from 'd3-shape';
 import {
-  type ScChartAnimationEasing,
   type ScChartAnimationItem,
   type ScChartAnimationMatchBy,
   scChartInterpolate as between,
@@ -129,7 +129,7 @@ export class ScChartLine implements ScChartSeriesLabels {
   readonly animationBegin = input(0);
   /** How long it draws or moves, in ms. */
   readonly animationDuration = input(1500);
-  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  readonly animationEasing = input<ScEasing>('ease');
   /** How its points before and after a change are paired (Recharts'): by position, stretched. */
   readonly animationMatchBy = input<ScChartAnimationMatchBy>('index');
 

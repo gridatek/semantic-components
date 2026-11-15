@@ -6,10 +6,10 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { type ScEasing } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { arc, pie } from 'd3-shape';
 import {
-  type ScChartAnimationEasing,
   type ScChartAnimationItem,
   type ScChartAnimationMatchBy,
   scChartInterpolate as between,
@@ -129,7 +129,7 @@ export class ScChartPie implements ScChartSeriesLabels {
   readonly animationBegin = input(400);
   /** How long it sweeps or changes, in ms. */
   readonly animationDuration = input(1500);
-  readonly animationEasing = input<ScChartAnimationEasing>('ease');
+  readonly animationEasing = input<ScEasing>('ease');
   /** How its slices before and after a change are paired (Recharts'): the first with the first. */
   readonly animationMatchBy = input<ScChartAnimationMatchBy>('append');
 

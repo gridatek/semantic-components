@@ -20,10 +20,10 @@ import { DonutChartDemo } from './donut-chart-demo';
 export class DonutChartDemoContainer {
   readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ScNumberTicker } from '@semantic-components/ui';
 import {
   ScChart,
   ScChartCenter,
-  ScChartCenterValue,
   type ScChartConfig,
   ScChartPie,
   ScChartPlot,
@@ -43,7 +43,7 @@ import {
     ScChartPlot,
     ScChartPie,
     ScChartCenter,
-    ScChartCenterValue,
+    ScNumberTicker,
     ScChartTooltip,
     ScChartTooltipPortal,
     ScChartTooltipProvider,
@@ -71,10 +71,14 @@ import {
         <g scChartCenter>
           <!-- Counting up as the donut sweeps in. -->
           <text
-            scChartCenterValue
+            scNumberTicker
             text-anchor="middle"
             class="fill-foreground text-3xl font-bold"
             [value]="total"
+            start="visible"
+            easing="ease"
+            [delay]="400"
+            [duration]="1500"
           ></text>
           <text text-anchor="middle" dy="1.6em" class="fill-muted-foreground">
             Visitors

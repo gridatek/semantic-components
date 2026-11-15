@@ -23,12 +23,11 @@ import { cn } from 'cn';
 The components built on another library have their own entry point, and that
 library is an optional peer: install it only for the entry point you use.
 
-| Entry point                                | Needs                     |
-| ------------------------------------------ | ------------------------- |
-| `@semantic-components/ui/animated-counter` | `motion`                  |
-| `@semantic-components/ui/carousel`         | `embla-carousel`          |
-| `@semantic-components/ui/confetti`         | `canvas-confetti`         |
-| `@semantic-components/ui/data-table`       | `@tanstack/angular-table` |
-| `@semantic-components/ui/pdf-viewer`       | `pdfjs-dist`              |
-| `@semantic-components/ui/phone-input`      | `libphonenumber-js`       |
-| `@semantic-components/ui/qr-code`          | `uqr`                     |
+| Entry point                           | Needs                     |
+| ------------------------------------- | ------------------------- |
+| `@semantic-components/ui/carousel`    | `embla-carousel`          |
+| `@semantic-components/ui/confetti`    | `canvas-confetti`         |
+| `@semantic-components/ui/data-table`  | `@tanstack/angular-table` |
+| `@semantic-components/ui/pdf-viewer`  | `pdfjs-dist`              |
+| `@semantic-components/ui/phone-input` | `libphonenumber-js`       |
+| `@semantic-components/ui/qr-code`     | `uqr`                     |

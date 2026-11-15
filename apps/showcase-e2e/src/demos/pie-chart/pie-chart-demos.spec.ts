@@ -177,7 +177,9 @@ test('Donut: its total counts up with the sweep — read as the total all along'
   page,
 }) => {
   await page.goto(demo('donut'));
-  const total = page.locator('[data-slot=chart-center-value]');
+  const total = page.locator(
+    '[data-slot=chart-center] [data-slot=number-ticker]',
+  );
   // On its way: under 925, its name the total all along.
   await expect(total).toHaveAttribute('aria-label', '925');
   await expect
@@ -194,8 +196,8 @@ test.describe('reduced motion, the total', () => {
 
   test('Donut: its total there at once', async ({ page }) => {
     await page.goto(demo('donut'));
-    await expect(page.locator('[data-slot=chart-center-value]')).toHaveText(
-      '925',
-    );
+    await expect(
+      page.locator('[data-slot=chart-center] [data-slot=number-ticker]'),
+    ).toHaveText('925');
   });
 });
