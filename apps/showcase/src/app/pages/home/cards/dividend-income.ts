@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
@@ -13,12 +14,26 @@ import {
   ScItemGroup,
   ScItemTitle,
 } from '@semantic-components/ui';
+import {
+  ScChart,
+  ScChartBar,
+  type ScChartConfig,
+  ScChartPlot,
+  ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipName,
+  ScChartTooltipPortal,
+  ScChartTooltipProvider,
+  ScChartTooltipValue,
+} from '@semantic-components/ui/charts';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
-/** Holdings, each with its quarters as small bars. */
+/** Holdings, each with its quarters as a small bar chart (the preset's corners). */
 @Component({
   selector: 'app-home-dividend-income',
   imports: [
+    DecimalPipe,
     ScButton,
     ScCard,
     ScCardAction,
@@ -26,6 +41,16 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScCardDescription,
     ScCardHeader,
     ScCardTitle,
+    ScChart,
+    ScChartBar,
+    ScChartPlot,
+    ScChartTooltip,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipName,
+    ScChartTooltipPortal,
+    ScChartTooltipProvider,
+    ScChartTooltipValue,
     ScItem,
     ScItemBody,
     ScItemDescription,
@@ -56,16 +81,34 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
                 <p scItemDescription>{{ holding.shares }}</p>
               </div>
               <div
-                class="hidden h-8 w-24 items-end gap-1 md:flex"
-                role="img"
-                [attr.aria-label]="holding.name + ' quarterly dividends'"
+                scChart
+                class="hidden h-8 w-24 md:flex"
+                [config]="config"
+                [data]="holding.data"
               >
-                @for (q of holding.data; track $index) {
-                  <div
-                    class="bg-chart-2 min-h-1 flex-1 rounded-t-sm"
-                    [style.height.%]="(q / max(holding.data)) * 100"
-                  ></div>
-                }
+                <svg
+                  scChartPlot
+                  categoryKey="q"
+                  [attr.aria-label]="holding.name + ' dividends by quarter'"
+                  [margin]="{ top: 0, right: 0, bottom: 0, left: 0 }"
+                >
+                  <g scChartBar key="value" corners="end" />
+                </svg>
+                <div scChartTooltipProvider>
+                  <ng-template scChartTooltipPortal>
+                    <div scChartTooltip #tooltip="scChartTooltip">
+                      @for (item of tooltip.payload(); track item.dataKey) {
+                        <div scChartTooltipItem [item]="item">
+                          <span scChartTooltipIndicator></span>
+                          <span scChartTooltipName>{{ item.name }}</span>
+                          <span scChartTooltipValue>{{
+                            item.value | number
+                          }}</span>
+                        </div>
+                      }
+                    </div>
+                  </ng-template>
+                </div>
               </div>
             </div>
           }
@@ -77,14 +120,33 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeDividendIncome {
+  protected readonly config: ScChartConfig = {
+    value: { label: 'Dividend', color: 'var(--chart-2)' },
+  };
   protected readonly holdings = [
-    { name: 'Vanguard', shares: '450 Shares', data: [380, 420, 390, 652] },
-    { name: 'S&P 500 VOO', shares: '112 Shares', data: [180, 210, 320, 218] },
-    { name: 'Apple AAPL', shares: '85 Shares', data: [60, 70, 120, 90] },
-    { name: 'Realty Income', shares: '320 Shares', data: [240, 260, 280, 360] },
+    {
+      name: 'Vanguard',
+      shares: '450 Shares',
+      data: this.quarters([380, 420, 390, 652]),
+    },
+    {
+      name: 'S&P 500 VOO',
+      shares: '112 Shares',
+      data: this.quarters([180, 210, 320, 218]),
+    },
+    {
+      name: 'Apple AAPL',
+      shares: '85 Shares',
+      data: this.quarters([60, 70, 120, 90]),
+    },
+    {
+      name: 'Realty Income',
+      shares: '320 Shares',
+      data: this.quarters([240, 260, 280, 360]),
+    },
   ];
 
-  protected max(values: number[]): number {
-    return Math.max(...values);
+  private quarters(values: number[]): { q: string; value: number }[] {
+    return values.map((value, i) => ({ q: 'Q' + (i + 1), value }));
   }
 }
