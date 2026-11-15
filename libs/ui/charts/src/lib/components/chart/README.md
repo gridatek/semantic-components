@@ -110,7 +110,7 @@ You write what they show, from their state — Recharts' `content`, as parts: `l
 
 ## Animation
 
-Each series enters as Recharts' does, with its names: `isAnimationActive`, `animationBegin`, `animationDuration`, `animationEasing` (`ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`) — and Recharts' defaults:
+Each series enters, and moves when its data or its size changes, as Recharts' does — with its names: `isAnimationActive`, `animationBegin`, `animationDuration`, `animationEasing` (`ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`) — and Recharts' defaults:
 
 | Series  | Its entrance                              | Begin, duration, easing |
 | ------- | ----------------------------------------- | ----------------------- |
@@ -125,9 +125,10 @@ Each series enters as Recharts' does, with its names: `isAnimationActive`, `anim
 | Treemap | its boxes slide in from the left          | 0, 1500ms, `linear`     |
 
 - **Sunburst and Sankey don't animate**: Recharts' have no animation, so ours have none — and no animation inputs.
-- **Labels** come once their series is whole (Recharts'); a bar's grow with it, a treemap's slide with their boxes.
+- **Labels** come once their series is whole and still (Recharts'); a treemap's slide with their boxes.
 - **Not on the server** (it draws everything whole), **nor with reduced motion** (`prefers-reduced-motion`): whole at once.
-- **Only the first appearance**: new data is drawn at once — Recharts moves the shapes to their new places; not yet here.
+- **Changes**: when the data or the size changes, the shapes move from where they are drawn to their new places, with the same timing (a change mid-way starts from there). Each series pairs its shapes before and after as Recharts' does — `animationMatchBy`: by position, stretched (`'index'`: line, area, radar), the first with the first (`'append'`: bar, pie, radial, scatter, funnel), or by a key of your rows (`(row, index) => row.id`); new shapes come in and gone ones leave as that series' do in Recharts. The treemap, sunburst and sankey are redrawn at once, as Recharts' are.
+- `scChartTransition()` is that engine, for a series of your own.
 - `scChartEntrance()` gives the same progress (0 to 1, eased) to a series of your own.
 
 ## Keyboard and screen readers

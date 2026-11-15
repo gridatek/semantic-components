@@ -37,20 +37,21 @@ Series as polygons over the categories, each value on its category's spoke, fill
 
 ## ScChartRadar — `g[scChartRadar]`
 
-| Input               | Type                                                                                | Default |
-| ------------------- | ----------------------------------------------------------------------------------- | ------- |
-| `key`               | `string` (required): the series' key in the rows                                    | —       |
-| `fillOpacity`       | `number` (0: outline only, with `stroke`)                                           | `0.6`   |
-| `stroke`            | `boolean`: its outline                                                              | `false` |
-| `dots`              | `boolean`: a dot at each value                                                      | `false` |
-| `activeDot`         | `boolean`: a dot on the spoke pointed at                                            | `true`  |
-| `isAnimationActive` | `boolean`: its points move out from the center when it appears (Recharts' entrance) | `true`  |
-| `animationBegin`    | `number`: the wait before it starts, in ms                                          | `0`     |
-| `animationDuration` | `number`: how long it lasts, in ms                                                  | `1500`  |
-| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                              | `ease`  |
+| Input               | Type                                                                                                                                                                | Default   |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `key`               | `string` (required): the series' key in the rows                                                                                                                    | —         |
+| `fillOpacity`       | `number` (0: outline only, with `stroke`)                                                                                                                           | `0.6`     |
+| `stroke`            | `boolean`: its outline                                                                                                                                              | `false`   |
+| `dots`              | `boolean`: a dot at each value                                                                                                                                      | `false`   |
+| `activeDot`         | `boolean`: a dot on the spoke pointed at                                                                                                                            | `true`    |
+| `isAnimationActive` | `boolean`: its points move out from the center when it appears (Recharts' entrance)                                                                                 | `true`    |
+| `animationBegin`    | `number`: the wait before it starts, in ms                                                                                                                          | `0`       |
+| `animationDuration` | `number`: how long it lasts, in ms                                                                                                                                  | `1500`    |
+| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                                                                                                              | `ease`    |
+| `animationMatchBy`  | `'index'` (by position, stretched), `'append'` (the first with the first) or `(row, index) => key`: how its shapes before and after a change are paired (Recharts') | `'index'` |
 
 The pointer points at the nearest spoke; the keyboard moves from one to the next.
 
 ## Entrance
 
-As Recharts', each point moves out from the center to its value when the chart appears: 1500ms, `ease`. Not on the server (it draws it whole), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once.
+As Recharts', each point moves out from the center to its value when the chart appears: 1500ms, `ease`. Not on the server (it draws it whole), nor when the user asks for reduced motion. When its data or its size changes, its points move to their new places — new ones from the center — with the same timing.

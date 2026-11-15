@@ -120,7 +120,7 @@ test('Update: a new time range moves the areas there, not at once', async ({
   ).toBeGreaterThan(2);
 });
 
-test.describe('reduced motion', () => {
+test.describe('reduced motion, on a change', () => {
   test.use({ reducedMotion: 'reduce' });
 
   test('Update: at once', async ({ page }) => {

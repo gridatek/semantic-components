@@ -51,6 +51,7 @@ A series as bars: one per category, side by side with the other series' — or o
 | `animationBegin`    | `number`: the wait before they grow, in ms                                                                                                                            | `0`        |
 | `animationDuration` | `number`: how long they grow, in ms                                                                                                                                   | `400`      |
 | `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                                                                                                                | `ease`     |
+| `animationMatchBy`  | `'index'` (by position, stretched), `'append'` (the first with the first) or `(row, index) => key`: how its shapes before and after a change are paired (Recharts')   | `'append'` |
 
 With bars in the plot, each category is a band: the cursor fills it, and the areas and lines of the same plot sit in its middle.
 
@@ -66,4 +67,4 @@ Each bar is an `<svg>` of its size holding a `<rect>` whose `rx` is that variabl
 
 ## Entrance
 
-As Recharts', the bars grow from their base when the chart appears: 400ms, `ease`, the corners whole as they grow, the labels with them. Not on the server (it draws them grown), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once. `scChartEntrance()` in the charts entry is the same progress for a series of your own.
+As Recharts', the bars grow from their base when the chart appears: 400ms, `ease`, the corners whole as they grow; the labels come once they are grown. Not on the server (it draws them grown), nor when the user asks for reduced motion. When its data or its size changes, the bars move to their new places — new ones grow from their base, gone ones shrink to it — with the same timing; the labels come once they are still. `scChartEntrance()` in the charts entry is the same progress for a series of your own.

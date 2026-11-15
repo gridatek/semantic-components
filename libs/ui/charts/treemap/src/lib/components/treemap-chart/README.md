@@ -44,7 +44,7 @@ With a `groupKey`, the legend lists the groups: give them their colors in the co
 
 ## Entrance
 
-As Recharts', each box slides in from just past the plot's left edge to its place when the chart appears — each its own distance, in the same time — with its label and its group's name: 1500ms, `linear`. Not on the server (it draws it whole), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once.
+As Recharts', each box slides in from just past the plot's left edge to its place when the chart appears — each its own distance, in the same time — with its label and its group's name: 1500ms, `linear`. Not on the server (it draws it whole), nor when the user asks for reduced motion. Only the first appearance: new data is drawn at once, as Recharts' treemap does.
 
 ## Labels
 
