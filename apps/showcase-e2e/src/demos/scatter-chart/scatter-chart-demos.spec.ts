@@ -61,6 +61,13 @@ test('RTL: mirrored — the heights growing leftwards, the values on the right; 
   page,
 }) => {
   await page.goto(demo('rtl-scatter'));
+  // Drawn once measured: both axes' labels there.
+  await expect(
+    page.locator('[data-slot=chart-category-axis] text').first(),
+  ).toBeVisible();
+  await expect(
+    page.locator('[data-slot=chart-value-axis] text').first(),
+  ).toBeVisible();
   // Where each label of an axis is, left to right on the screen.
   const xs = (slot: string) =>
     page
