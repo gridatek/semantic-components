@@ -259,6 +259,11 @@ export default class ChartPage {
         "A polar chart's center: your SVG at (0, 0) — a donut's total",
     },
     {
+      selector: 'text[scChartCenterValue]',
+      description:
+        "A number in a chart's center, counting up to its value as the chart enters (when first seen; a pie's timing: after 400ms, for 1500ms): value (required), format (Intl's options), isAnimationActive, animationBegin, animationDuration, animationEasing. Screen readers get the value, never the numbers on the way; on the server and with reduced motion, there at once.",
+    },
+    {
       selector: 'g[scChartLabels]',
       description:
         'Inside a series: its values written on the chart — position (outside | inside | start), offset (8), formatter(value, category, index)',
