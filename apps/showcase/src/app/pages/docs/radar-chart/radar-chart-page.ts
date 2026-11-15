@@ -79,8 +79,9 @@ import { RtlRadarChartDemoContainer } from './demos/rtl-radar-chart-demo-contain
             through the CDK&apos;s LiveAnnouncer (politely).
           </li>
           <li>
-            Right to left, it isn&apos;t mirrored: a radar reads the same both
-            ways, so the arrows keep their way.
+            Right to left, with the app following the direction
+            (charts.followDirection), it is mirrored — its spokes
+            counterclockwise from the top — and ← goes to the next.
           </li>
           <li>
             With reduced motion (prefers-reduced-motion), it appears and changes

@@ -14,7 +14,8 @@ import {
   numberOf,
 } from '@semantic-components/ui/charts';
 import { cn } from 'cn';
-import { sankey, sankeyLinkHorizontal } from 'd3-sankey';
+import { sankey } from 'd3-sankey';
+import { linkHorizontal } from 'd3-shape';
 
 interface ScSankeyChartFlow {
   index: number;
@@ -33,8 +34,9 @@ interface ScSankeyChartNode {
   width: number;
   height: number;
   color: string;
-  /** Its name's side: after it, or before it (the last column's). */
-  end: boolean;
+  /** Its name: beside it, towards the middle of the chart. */
+  labelX: number;
+  anchor: 'start' | 'end';
 }
 
 /**
@@ -68,9 +70,9 @@ interface ScSankeyChartNode {
       <svg:text
         class="fill-foreground"
         dominant-baseline="middle"
-        [attr.x]="node.end ? node.x - 6 : node.x + node.width + 6"
+        [attr.x]="node.labelX"
         [attr.y]="node.y + node.height / 2"
-        [attr.text-anchor]="node.end ? 'end' : 'start'"
+        [attr.text-anchor]="node.anchor"
       >
         {{ node.label }}
       </svg:text>
@@ -134,38 +136,71 @@ export class ScChartSankey implements ScChartSeriesLabels {
     });
   });
 
+  /** Mirrored (right to left, the app following it): flowing from the right. */
+  private readonly mirrored = this.state.mirrored;
+
+  /** An x as laid out, or flipped across the plot when mirrored. */
+  private readonly across = computed(() => {
+    const { left, right } = this.state.area();
+    return this.mirrored() ? (x: number) => left + right - x : (x: number) => x;
+  });
+
   protected readonly flows = computed<ScSankeyChartFlow[]>(() => {
-    const path = sankeyLinkHorizontal<{ name: string }, { index: number }>();
+    const across = this.across();
+    const sourceX = (link: { source: unknown }) =>
+      across(
+        typeof link.source === 'object' && link.source
+          ? ((link.source as { x1?: number }).x1 ?? 0)
+          : 0,
+      );
+    const targetX = (link: { target: unknown }) =>
+      across(
+        typeof link.target === 'object' && link.target
+          ? ((link.target as { x0?: number }).x0 ?? 0)
+          : 0,
+      );
     return this.layout()
-      .links.map((link) => ({
-        index: link.index,
-        path: path(link) ?? '',
-        color: `var(--color-${this.sourceOf(link.index)})`,
-        width: Math.max(1, link.width ?? 0),
-        x:
-          ((typeof link.source === 'object' ? (link.source.x1 ?? 0) : 0) +
-            (typeof link.target === 'object' ? (link.target.x0 ?? 0) : 0)) /
-          2,
-        y: ((link.y0 ?? 0) + (link.y1 ?? 0)) / 2,
-      }))
+      .links.map((link) => {
+        // From its source's side to its target's (as d3-sankey's link).
+        const path = linkHorizontal<typeof link, [number, number]>()
+          .source((l) => [sourceX(l), l.y0 ?? 0])
+          .target((l) => [targetX(l), l.y1 ?? 0]);
+        return {
+          index: link.index,
+          path: path(link) ?? '',
+          color: `var(--color-${this.sourceOf(link.index)})`,
+          width: Math.max(1, link.width ?? 0),
+          x: (sourceX(link) + targetX(link)) / 2,
+          y: ((link.y0 ?? 0) + (link.y1 ?? 0)) / 2,
+        };
+      })
       .sort((a, b) => a.index - b.index);
   });
 
   protected readonly nodes = computed<ScSankeyChartNode[]>(() => {
     const config = this.state.config();
     const { right } = this.state.area();
+    const across = this.across();
+    const mirrored = this.mirrored();
     return this.layout().nodes.map((node) => {
       const x0 = node.x0 ?? 0;
       const x1 = node.x1 ?? 0;
+      // The last column's names go inside, the others' outside: towards the
+      // middle — the other way round when mirrored.
+      const last = x1 >= right - 1;
+      const x = Math.min(across(x0), across(x1));
+      const width = x1 - x0;
+      const before = last !== mirrored;
       return {
         name: node.name,
         label: config[node.name]?.label ?? node.name,
-        x: x0,
+        x,
         y: node.y0 ?? 0,
-        width: x1 - x0,
+        width,
         height: Math.max(1, (node.y1 ?? 0) - (node.y0 ?? 0)),
         color: `var(--color-${node.name})`,
-        end: x1 >= right - 1,
+        labelX: before ? x - 6 : x + width + 6,
+        anchor: before ? 'end' : 'start',
       };
     });
   });

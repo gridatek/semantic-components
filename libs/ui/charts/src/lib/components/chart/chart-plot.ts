@@ -176,7 +176,9 @@ export class ScChartPlot {
     const current = this.state.activeIndex() ?? 0;
     // The arrows go the way the categories are drawn: from the right when
     // they run backwards across (mirrored), up when backwards down the side.
-    const backwards = this.state.categoryReversed();
+    const backwards =
+      this.state.categoryReversed() ||
+      (this.state.mirrored() && this.state.shaped());
     const across = !this.state.vertical();
     const forward =
       event.key === (across && backwards ? 'ArrowLeft' : 'ArrowRight') ||

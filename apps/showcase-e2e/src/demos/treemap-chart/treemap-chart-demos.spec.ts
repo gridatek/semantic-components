@@ -72,7 +72,7 @@ test.describe('keyboard', () => {
   });
 });
 
-test('RTL: in Arabic, not mirrored — → still to the next', async ({ page }) => {
+test('RTL: in Arabic, mirrored — ← to the next', async ({ page }) => {
   await page.goto(demo('rtl-treemap'));
   await expect(page.locator('[data-slot=chart]')).toHaveAttribute('dir', 'rtl');
   // Named in Arabic.
@@ -80,10 +80,16 @@ test('RTL: in Arabic, not mirrored — → still to the next', async ({ page }) 
     'aria-label',
     /[\u0600-\u06FF]/,
   );
-  // A shape reads the same both ways: the arrows as drawn.
+  // Laid out from the right: the largest (Chrome) top right, right of Safari.
+  const xOf = (name: string) =>
+    page
+      .locator('[data-slot=chart-labels] text', { hasText: name })
+      .evaluate((text) => text.getBoundingClientRect().right);
+  expect(await xOf('Chrome')).toBeGreaterThan(await xOf('Edge'));
+  // The app follows the direction: the arrows mirrored, as its text.
   await page.locator('[data-slot=chart-plot]').focus();
   await expect(tooltip(page)).toContainText('Chrome');
-  await press(page, 'ArrowRight');
+  await press(page, 'ArrowLeft');
   await expect(tooltip(page)).toContainText('Safari');
 });
 

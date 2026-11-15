@@ -138,7 +138,7 @@ Not mirrored by default, as in Recharts: the legend and the tooltip follow the d
 - **The whole app**: `provideSemanticComponents({ charts: { followDirection: true } })` — a chart mirrors itself when its direction is right to left (the CDK's `Directionality`): the categories from the right and the axis beside the plot on the right (in a `vertical` layout, the values from the right). A bilingual app gets its charts mirrored in Arabic, not in English.
 - **One chart**: an axis's own `reversed` and `orientation` (Recharts' names) — they win over the app's setting: `reversed="false"` keeps a chart left to right in a mirrored app.
 
-What follows what's drawn: the arrow keys (← to the next category when they run from the right), the area's unveiling (from its first category), the labels beyond a bar's end. Charts with axes only: pies, radial bars, radars, funnels, treemaps, sunbursts and sankeys read the same both ways. The plot's text is anchored as placed (`direction: ltr` on the plot; Arabic still shapes and orders itself).
+What follows what's drawn: the arrow keys (← to the next category when they run from the right), the area's unveiling (from its first category), the labels beyond a bar's end. Shapes too: pies, radial bars and sunbursts turn from 9 o'clock clockwise (Recharts' default angles mirrored: θ → 180 − θ), a radar's spokes counterclockwise from the top, treemaps are laid out from the right and sankeys flow from the right; a funnel, symmetric, only gets its arrows mirrored (← to the next). A plot's own `startAngle` and `endAngle` win, as an axis's `reversed`. The plot's text is anchored as placed (`direction: ltr` on the plot; Arabic still shapes and orders itself).
 
 ## Keyboard and screen readers
 

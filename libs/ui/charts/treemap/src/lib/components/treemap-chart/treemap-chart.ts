@@ -39,6 +39,7 @@ interface ScTreemapChartGroup {
   name: string;
   x: number;
   y: number;
+  anchor: 'start' | 'end';
 }
 
 /** The room a group's name takes above its boxes, in px. */
@@ -62,6 +63,7 @@ const MIN_LABEL_HEIGHT = 24;
         class="fill-muted-foreground"
         [attr.x]="group.x"
         [attr.y]="group.y"
+        [attr.text-anchor]="group.anchor"
         dominant-baseline="hanging"
       >
         {{ group.name }}
@@ -113,13 +115,33 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     duration: this.animationDuration,
     easing: this.animationEasing,
   });
+  /** Mirrored (right to left, the app following it): laid out from the right. */
+  private readonly mirrored = this.state.mirrored;
+
+  /**
+   * Where a box goes across, from its layout's x0 and x1 (in the plot): as
+   * laid out, or mirrored — from the right.
+   */
+  private readonly across = computed(() => {
+    const { left, right } = this.state.area();
+    const width = right - left;
+    return this.mirrored()
+      ? (x0: number, x1: number) => ({ x0: width - x1, x1: width - x0 })
+      : (x0: number, x1: number) => ({ x0, x1 });
+  });
+
   /**
    * How far a box still is from its place, given its x (in the plot) and its
-   * width: sliding in, from just past the plot's left edge (Recharts').
+   * width: sliding in, from just past the plot's left edge (Recharts') — its
+   * right edge, mirrored.
    */
   private readonly away = computed(() => {
     const left = 1 - (this.isAnimationActive() ? this.entrance() : 1);
-    return (x: number, width: number) => -(x + width) * left;
+    const { left: start, right } = this.state.area();
+    const width = right - start;
+    return this.mirrored()
+      ? (x: number) => (width - x) * left
+      : (x: number, size: number) => -(x + size) * left;
   });
 
   protected readonly active = this.state.activeIndex;
@@ -162,6 +184,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     const groupKey = this.groupKey();
     const rows = this.state.data();
     const away = this.away();
+    const across = this.across();
     return this.layout()
       .leaves()
       .filter((leaf) => leaf.data.index !== undefined)
@@ -170,9 +193,10 @@ export class ScChartTreemap implements ScChartSeriesLabels {
         const name = groupKey
           ? String(rows[index][groupKey] ?? '')
           : leaf.data.name;
+        const { x0, x1 } = across(leaf.x0, leaf.x1);
         return {
           index,
-          x: left + leaf.x0 + away(leaf.x0, leaf.x1 - leaf.x0),
+          x: left + x0 + away(x0, x1 - x0),
           y: top + leaf.y0,
           width: Math.max(0, leaf.x1 - leaf.x0),
           height: Math.max(0, leaf.y1 - leaf.y0),
@@ -188,11 +212,18 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     const { left, top } = this.state.area();
     const config = this.state.config();
     const away = this.away();
-    return (this.layout().children ?? []).map((group) => ({
-      name: config[group.data.name]?.label ?? group.data.name,
-      x: left + group.x0 + 2 + away(group.x0, group.x1 - group.x0),
-      y: top + group.y0 + 4,
-    }));
+    const across = this.across();
+    const mirrored = this.mirrored();
+    return (this.layout().children ?? []).map((group) => {
+      const { x0, x1 } = across(group.x0, group.x1);
+      // At its start: its left, or its right when mirrored.
+      return {
+        name: config[group.data.name]?.label ?? group.data.name,
+        x: left + (mirrored ? x1 - 2 : x0 + 2) + away(x0, x1 - x0),
+        y: top + group.y0 + 4,
+        anchor: mirrored ? ('end' as const) : ('start' as const),
+      };
+    });
   });
 
   protected readonly class = computed(() => cn(this.classInput()));
@@ -241,14 +272,15 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     );
     return roomy.map((box) => {
       const value = numberOf(rows[box.index]?.[this.key()]);
-      // Start: its top start corner; else its middle.
+      // Start: its top start corner (the right one, mirrored); else its middle.
+      const mirrored = this.mirrored();
       return position === 'start'
         ? {
             index: box.index,
             value,
-            x: box.x + offset,
+            x: mirrored ? box.x + box.width - offset : box.x + offset,
             y: box.y + offset,
-            anchor: 'start',
+            anchor: mirrored ? 'end' : 'start',
             baseline: 'hanging',
           }
         : {

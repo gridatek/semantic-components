@@ -35,7 +35,7 @@ import {
 } from '@semantic-components/ui/charts';
 import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';
 
-/** In a right-to-left page: the text, the tooltip and the legend in Arabic, right to left; the chart itself reads the same both ways, so it is not mirrored. */
+/** In a right-to-left page: the text, the tooltip and the legend in Arabic, right to left; the app following the direction (charts.followDirection), it is mirrored — laid out from the right; ← to the next. */
 @Component({
   selector: 'app-rtl-treemap-chart-demo',
   imports: [

@@ -77,8 +77,9 @@ import { TreemapChartUsageDemoContainer } from './demos/treemap-chart-usage-demo
             through the CDK&apos;s LiveAnnouncer (politely).
           </li>
           <li>
-            Right to left, it isn&apos;t mirrored: a treemap reads the same both
-            ways, so the arrows keep their way.
+            Right to left, with the app following the direction
+            (charts.followDirection), it is mirrored — laid out from the right —
+            and ← goes to the next.
           </li>
           <li>
             With reduced motion (prefers-reduced-motion), it appears and changes

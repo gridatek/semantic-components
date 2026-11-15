@@ -150,8 +150,9 @@ export class ScChartState {
     inject(SC_CONFIG).charts?.followDirection ?? false;
   /**
    * Mirrored by default: the app follows the direction
-   * (`charts.followDirection`) and this chart's is right to left. Charts
-   * with axes only: shapes (pies, radars, funnels…) read the same both ways.
+   * (`charts.followDirection`) and this chart's is right to left: axes from
+   * the right, circles from 9 o'clock clockwise (a radar counterclockwise),
+   * treemaps and sankeys from the right, the arrows the way it's drawn.
    */
   readonly mirrored = computed(
     () => this.followDirection && this.direction.valueSignal() === 'rtl',
@@ -505,10 +506,15 @@ export class ScChartState {
   readonly angles = computed(() => {
     const plot = this.plot();
     const radar = this.series().some((s) => s.kind === 'radar');
+    // Mirrored (right to left, the app following it): the defaults turned
+    // the other way — from 9 o'clock clockwise, a radar counterclockwise.
+    // Angles of the plot's own win.
+    const mirror = (degrees: number) =>
+      this.mirrored() ? 180 - degrees : degrees;
     const drawn = (degrees: number) => ((90 - degrees) * Math.PI) / 180;
     return [
-      drawn(plot?.startAngle() ?? (radar ? 90 : 0)),
-      drawn(plot?.endAngle() ?? (radar ? -270 : 360)),
+      drawn(plot?.startAngle() ?? mirror(radar ? 90 : 0)),
+      drawn(plot?.endAngle() ?? mirror(radar ? -270 : 360)),
     ] as const;
   });
 

@@ -61,7 +61,7 @@ test.describe('keyboard', () => {
   });
 });
 
-test('RTL: in Arabic, not mirrored — → still to the next', async ({ page }) => {
+test('RTL: in Arabic, mirrored — ← to the next', async ({ page }) => {
   await page.goto(demo('rtl-sunburst'));
   await expect(page.locator('[data-slot=chart]')).toHaveAttribute('dir', 'rtl');
   // Named in Arabic.
@@ -69,9 +69,9 @@ test('RTL: in Arabic, not mirrored — → still to the next', async ({ page }) 
     'aria-label',
     /[\u0600-\u06FF]/,
   );
-  // A shape reads the same both ways: the arrows as drawn.
+  // The app follows the direction: the arrows mirrored, as its text.
   await page.locator('[data-slot=chart-plot]').focus();
   await expect(tooltip(page)).toContainText('فرنسا');
-  await press(page, 'ArrowRight');
+  await press(page, 'ArrowLeft');
   await expect(tooltip(page)).toContainText('ألمانيا');
 });

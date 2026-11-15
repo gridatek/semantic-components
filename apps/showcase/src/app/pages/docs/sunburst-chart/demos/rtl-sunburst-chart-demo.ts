@@ -17,7 +17,7 @@ import {
   ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
-/** In a right-to-left page: the text, the tooltip and the legend in Arabic, right to left; the chart itself reads the same both ways, so it is not mirrored. */
+/** In a right-to-left page: the text, the tooltip and the legend in Arabic, right to left; the app following the direction (charts.followDirection), it is mirrored — from 9 o’clock, clockwise; ← to the next. */
 @Component({
   selector: 'app-rtl-sunburst-chart-demo',
   imports: [

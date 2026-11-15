@@ -108,7 +108,7 @@ test.describe('keyboard', () => {
   });
 });
 
-test('RTL: in Arabic, not mirrored — → still to the next', async ({ page }) => {
+test('RTL: in Arabic, mirrored — ← to the next', async ({ page }) => {
   await page.goto(demo('rtl-pie'));
   await expect(page.locator('[data-slot=chart]')).toHaveAttribute('dir', 'rtl');
   // Named in Arabic.
@@ -116,9 +116,19 @@ test('RTL: in Arabic, not mirrored — → still to the next', async ({ page }) 
     'aria-label',
     /[\u0600-\u06FF]/,
   );
-  // A shape reads the same both ways: the arrows as drawn.
+  // From 9 o'clock, clockwise: the first slice (Chrome) on the left.
+  const plot = await page.locator('[data-slot=chart-plot]').boundingBox();
+  const first = await page
+    .locator('[data-slot=chart-pie] path')
+    .first()
+    .evaluate((path) => {
+      const box = path.getBoundingClientRect();
+      return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+    });
+  expect(first.x).toBeLessThan((plot?.x ?? 0) + (plot?.width ?? 0) / 2);
+  // The app follows the direction: the arrows mirrored, as its text.
   await page.locator('[data-slot=chart-plot]').focus();
   await expect(tooltip(page)).toContainText('Chrome');
-  await press(page, 'ArrowRight');
+  await press(page, 'ArrowLeft');
   await expect(tooltip(page)).toContainText('Safari');
 });

@@ -271,8 +271,9 @@ class RtlWithoutDir {}
           <li>
             Charts are not mirrored by default, as in Recharts: their legend and
             tooltip follow the direction, their plot doesn't. To mirror them —
-            the categories from the right, the values on the right, the arrows
-            the way they're drawn — set
+            the categories from the right, the values on the right, pies and
+            rings from 9 o'clock clockwise, treemaps and sankeys from the right,
+            the arrows the way they're drawn — set
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
               >charts: &#123; followDirection: true &#125;</code
             >

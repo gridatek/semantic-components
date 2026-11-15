@@ -81,8 +81,9 @@ import { StackedRadialChartDemoContainer } from './demos/stacked-radial-chart-de
             through the CDK&apos;s LiveAnnouncer (politely).
           </li>
           <li>
-            Right to left, it isn&apos;t mirrored: a ring reads the same both
-            ways, so the arrows keep their way.
+            Right to left, with the app following the direction
+            (charts.followDirection), it is mirrored — from 9 o’clock, clockwise
+            — and ← goes to the next.
           </li>
           <li>
             With reduced motion (prefers-reduced-motion), it appears and changes
