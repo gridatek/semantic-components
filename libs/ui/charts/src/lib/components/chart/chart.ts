@@ -21,7 +21,7 @@ import type { ScChartConfig, ScChartDatum } from './chart-types';
 })
 export class ScChart {
   readonly state = inject(ScChartState);
-  /** The preset's: how round the bars, treemap boxes, radial bars' ends, donut slices and funnel stages are (`--chart-bar-radius`). */
+  /** The preset's: how round the bars, treemap boxes, radial bars' ends, pie slices and funnel stages are (`--chart-bar-radius`). */
   private readonly chartStyles = injectPreset().chart.chart;
 
   readonly classInput = input<string>('', { alias: 'class' });

@@ -177,7 +177,7 @@ export default class PieChartPage {
       type: 'number',
       default: '—',
       description:
-        "its slices' corners' rounding, in px — unset, a donut's or a ring's the style's (--chart-bar-radius; square in Lyra and Sera), a whole pie's none (its slices meet in the middle)",
+        "Its slices' corners' rounding, in px — unset, the style's (--chart-bar-radius, as the bars'; square in Lyra and Sera). A whole pie's outer corners only: its slices meet in the middle.",
     },
     {
       name: 'strokeWidth',

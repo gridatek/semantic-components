@@ -36,20 +36,20 @@ A series as a pie: a slice per row, its share of the total, in its category's co
 
 ## ScChartPie — `g[scChartPie]`
 
-| Input               | Type                                                                                                                                                                                          | Default    |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| `key`               | `string` (required): each slice's value                                                                                                                                                       | —          |
-| `innerRadius`       | `number`: its hole, a share of the radius                                                                                                                                                     | `0`        |
-| `outerRadius`       | `number`: its edge, a share of the radius                                                                                                                                                     | `1`        |
-| `padAngle`          | `number`: the gap between slices, in degrees                                                                                                                                                  | `0`        |
-| `cornerRadius`      | `number`: its slices' corners' rounding, in px — unset, a donut's or a ring's the style's (`--chart-bar-radius`; square in Lyra and Sera), a whole pie's none (its slices meet in the middle) | —          |
-| `strokeWidth`       | `number`: the line between slices (0: none)                                                                                                                                                   | `2`        |
-| `activeOffset`      | `number`: how far the slice pointed at grows                                                                                                                                                  | `6`        |
-| `isAnimationActive` | `boolean`: it sweeps round from its start angle when it appears (Recharts' entrance)                                                                                                          | `true`     |
-| `animationBegin`    | `number`: the wait before it starts, in ms                                                                                                                                                    | `400`      |
-| `animationDuration` | `number`: how long it lasts, in ms                                                                                                                                                            | `1500`     |
-| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                                                                                                                                        | `ease`     |
-| `animationMatchBy`  | `'index'` (by position, stretched), `'append'` (the first with the first) or `(row, index) => key`: how its shapes before and after a change are paired (Recharts')                           | `'append'` |
+| Input               | Type                                                                                                                                                                                               | Default    |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `key`               | `string` (required): each slice's value                                                                                                                                                            | —          |
+| `innerRadius`       | `number`: its hole, a share of the radius                                                                                                                                                          | `0`        |
+| `outerRadius`       | `number`: its edge, a share of the radius                                                                                                                                                          | `1`        |
+| `padAngle`          | `number`: the gap between slices, in degrees                                                                                                                                                       | `0`        |
+| `cornerRadius`      | `number`: its slices' corners' rounding, in px — unset, the style's (`--chart-bar-radius`, as the bars'; square in Lyra and Sera). A whole pie's outer corners only: its slices meet in the middle | —          |
+| `strokeWidth`       | `number`: the line between slices (0: none)                                                                                                                                                        | `2`        |
+| `activeOffset`      | `number`: how far the slice pointed at grows                                                                                                                                                       | `6`        |
+| `isAnimationActive` | `boolean`: it sweeps round from its start angle when it appears (Recharts' entrance)                                                                                                               | `true`     |
+| `animationBegin`    | `number`: the wait before it starts, in ms                                                                                                                                                         | `400`      |
+| `animationDuration` | `number`: how long it lasts, in ms                                                                                                                                                                 | `1500`     |
+| `animationEasing`   | `ease`, `ease-in`, `ease-out`, `ease-in-out`, `linear`                                                                                                                                             | `ease`     |
+| `animationMatchBy`  | `'index'` (by position, stretched), `'append'` (the first with the first) or `(row, index) => key`: how its shapes before and after a change are paired (Recharts')                                | `'append'` |
 
 The plot's `startAngle` and `endAngle` bound it — Recharts': degrees, 0 at 3 o'clock, counterclockwise; 0 and 360 by default, so it starts at 3 o'clock. The tooltip and the legend name and color each slice by its category.
 

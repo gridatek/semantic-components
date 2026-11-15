@@ -133,7 +133,7 @@ test('RTL: in Arabic, mirrored — ← to the next', async ({ page }) => {
   await expect(tooltip(page)).toContainText('Safari');
 });
 
-test("Corners: a donut's slices the style's — square in Lyra, rounded in Nova; a pie's crisp", async ({
+test("Corners: a pie's and a donut's slices the style's — square in Lyra, rounded in Nova", async ({
   page,
   baseURL,
 }) => {
@@ -168,6 +168,7 @@ test("Corners: a donut's slices the style's — square in Lyra, rounded in Nova;
   const arcs = (d: string) => d.split('A').length - 1;
   expect(arcs(await shapeIn('lyra', 'donut'))).toBe(2);
   expect(arcs(await shapeIn('nova', 'donut'))).toBeGreaterThan(2);
-  // A whole pie: its slices meet in the middle, wedges in every style.
-  expect(arcs(await shapeIn('nova', 'pie'))).toBe(1);
+  // A whole pie too: its outer corners (its slices still meet in the middle).
+  expect(arcs(await shapeIn('lyra', 'pie'))).toBe(1);
+  expect(arcs(await shapeIn('nova', 'pie'))).toBeGreaterThan(1);
 });
