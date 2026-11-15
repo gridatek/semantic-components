@@ -1,15 +1,13 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton, ScFrame } from '@semantic-components/ui';
 import { ScNumberTicker } from '@semantic-components/ui';
 
 /** effect="roll": each digit rolls to its new place, like an odometer — the separators and the currency stay still. */
 @Component({
   selector: 'app-roll-number-ticker-demo',
-  imports: [ScNumberTicker, ScButton],
+  imports: [ScFrame, ScNumberTicker, ScButton],
   template: `
-    <div
-      class="bg-muted/30 grid h-32 w-72 place-items-center rounded-xl border"
-    >
+    <div scFrame class="bg-muted/30 grid h-32 w-72 place-items-center">
       <span
         scNumberTicker
         effect="roll"

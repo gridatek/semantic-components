@@ -15,17 +15,15 @@ import { NumberTickerUsageDemo } from './number-ticker-usage-demo';
 })
 export class NumberTickerUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton, ScFrame } from '@semantic-components/ui';
 import { ScNumberTicker } from '@semantic-components/ui';
 
 /** The number counts to its new value, easing out. Screen readers get only the value; with reduced motion, it is there at once. */
 @Component({
   selector: 'app-number-ticker-usage-demo',
-  imports: [ScNumberTicker, ScButton],
+  imports: [ScFrame, ScNumberTicker, ScButton],
   template: \`
-    <div
-      class="bg-muted/30 grid h-32 w-64 place-items-center rounded-xl border"
-    >
+    <div scFrame class="bg-muted/30 grid h-32 w-64 place-items-center">
       <span scNumberTicker [value]="count()" class="text-5xl font-bold"></span>
     </div>
     <div class="flex gap-2">

@@ -1,14 +1,14 @@
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton } from '@semantic-components/ui';
+import { ScButton, ScFrame } from '@semantic-components/ui';
 import { ScNumberTicker } from '@semantic-components/ui';
 
 /** Any Intl.NumberFormat options, in LOCALE_ID — provided here as German: euros, a percent, compact. */
 @Component({
   selector: 'app-formats-number-ticker-demo',
-  imports: [ScNumberTicker, ScButton],
+  imports: [ScFrame, ScNumberTicker, ScButton],
   template: `
     <div class="grid w-full max-w-lg grid-cols-3 gap-3 text-center">
-      <div class="rounded-xl border p-4">
+      <div scFrame class="p-4">
         <span
           scNumberTicker
           [value]="sales()"
@@ -17,7 +17,7 @@ import { ScNumberTicker } from '@semantic-components/ui';
         ></span>
         <p class="text-muted-foreground text-xs">Umsatz</p>
       </div>
-      <div class="rounded-xl border p-4">
+      <div scFrame class="p-4">
         <span
           scNumberTicker
           [value]="share()"
@@ -26,7 +26,7 @@ import { ScNumberTicker } from '@semantic-components/ui';
         ></span>
         <p class="text-muted-foreground text-xs">Anteil</p>
       </div>
-      <div class="rounded-xl border p-4">
+      <div scFrame class="p-4">
         <span
           scNumberTicker
           [value]="views()"

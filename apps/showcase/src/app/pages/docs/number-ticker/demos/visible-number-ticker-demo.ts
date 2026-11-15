@@ -1,13 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScNumberTicker } from '@semantic-components/ui';
+import { ScFrame, ScNumberTicker } from '@semantic-components/ui';
 
 /** start="visible": landing-page figures that count up from zero when they are first scrolled into view. */
 @Component({
   selector: 'app-visible-number-ticker-demo',
-  imports: [ScNumberTicker],
+  imports: [ScFrame, ScNumberTicker],
   template: `
     <div
-      class="h-64 w-full max-w-lg overflow-y-auto rounded-xl border"
+      scFrame
+      class="h-64 w-full max-w-lg overflow-y-auto"
       tabindex="0"
       role="region"
       aria-label="About us"
