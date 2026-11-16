@@ -20,6 +20,7 @@ import { HiddenUntilFoundCollapsibleDemoContainer } from './demos/hidden-until-f
 import { OpenCollapsibleDemoContainer } from './demos/open-collapsible-demo-container';
 import { RtlCollapsibleDemoContainer } from './demos/rtl-collapsible-demo-container';
 import { SettingsCollapsibleDemoContainer } from './demos/settings-collapsible-demo-container';
+import { TriggerElsewhereCollapsibleDemoContainer } from './demos/trigger-elsewhere-collapsible-demo-container';
 
 @Component({
   selector: 'app-collapsible-page',
@@ -32,6 +33,7 @@ import { SettingsCollapsibleDemoContainer } from './demos/settings-collapsible-d
     HiddenUntilFoundCollapsibleDemoContainer,
     DisabledCollapsibleDemoContainer,
     OpenCollapsibleDemoContainer,
+    TriggerElsewhereCollapsibleDemoContainer,
     RtlCollapsibleDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -94,6 +96,7 @@ import { SettingsCollapsibleDemoContainer } from './demos/settings-collapsible-d
         <app-hidden-until-found-collapsible-demo-container />
         <app-disabled-collapsible-demo-container />
         <app-open-collapsible-demo-container />
+        <app-trigger-elsewhere-collapsible-demo-container />
         <app-rtl-collapsible-demo-container />
       </section>
 

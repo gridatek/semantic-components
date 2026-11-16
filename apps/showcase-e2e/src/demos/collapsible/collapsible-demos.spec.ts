@@ -77,3 +77,60 @@ test('Open by default: shown, then closed by its trigger', async ({ page }) => {
   await page.getByRole('button', { name: 'Release notes' }).click();
   await expect(page.getByText('Open: false')).toBeVisible();
 });
+
+test('Trigger elsewhere: a button outside the collapsible opens and closes the one it names', async ({
+  page,
+}) => {
+  await page.goto(demo('trigger-elsewhere'));
+  const trigger = page.getByRole('button', { name: 'Filters' });
+  const panel = page.locator('[scCollapsiblePanel]');
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  await expect(panel).toBeHidden();
+  await trigger.click();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+  await expect(panel).toBeVisible();
+  await expect(panel).toContainText('Status: any');
+  // Wired to its panel, though not inside its collapsible.
+  await expect(trigger).toHaveAttribute(
+    'aria-controls',
+    (await panel.getAttribute('id')) ?? '',
+  );
+  await trigger.click();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+});
+
+test('Closing: the panel shrinks to nothing and stays there — no flash of its full height before it hides', async ({
+  page,
+}) => {
+  await page.goto('/demos/collapsible/collapsible-usage-demo');
+  const trigger = page.getByRole('button', { name: 'Toggle details' });
+  await trigger.click();
+  const panel = page.locator(`#${await trigger.getAttribute('aria-controls')}`);
+  await expect(panel).toBeVisible();
+  // Settled open, then every frame of its close.
+  await expect
+    .poll(() => panel.evaluate((el) => el.getAnimations().length))
+    .toBe(0);
+  await panel.evaluate((el) => {
+    const w = window as unknown as { heights: number[] };
+    w.heights = [];
+    const start = performance.now();
+    const tick = () => {
+      w.heights.push(el.getBoundingClientRect().height);
+      if (performance.now() - start < 600) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+  await trigger.click();
+  await expect(panel).toBeHidden();
+  // eslint-disable-next-line playwright/no-wait-for-timeout
+  await page.waitForTimeout(650);
+  const heights = await page.evaluate(
+    () => (window as unknown as { heights: number[] }).heights,
+  );
+  // Never taller than the frame before.
+  for (let i = 1; i < heights.length; i++)
+    expect(heights[i], `frame ${i}: ${heights.join(', ')}`).toBeLessThanOrEqual(
+      heights[i - 1] + 0.5,
+    );
+});

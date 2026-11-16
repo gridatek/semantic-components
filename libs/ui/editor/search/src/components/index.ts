@@ -1,6 +1,5 @@
 export * from './with-search';
 export type { ScEditorSearchFlag } from './editor-search-state';
-export * from './editor-search';
 export * from './editor-search-bar';
 export * from './editor-search-input';
 export * from './editor-search-option';

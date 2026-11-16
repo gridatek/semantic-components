@@ -1,16 +1,17 @@
 import { computed, signal } from '@angular/core';
+import type { ScCollapsible } from '@semantic-components/ui';
 import type { ScEditor } from '@semantic-components/ui/editor';
 
 export type ScEditorSearchFlag = 'caseSensitive' | 'wholeWord' | 'useRegex';
 
 /** An editor's search: the bar's state and what it does. */
 export class ScEditorSearchState {
-  /** Whether the search bar is open (`scEditorSearch`, Ctrl / ⌘ + F). */
-  readonly open = signal(false);
+  /** The collapsible the search bar is in (`scEditorSearchBar` sets it). */
+  private readonly collapsible = signal<ScCollapsible | null>(null);
+  /** Whether the search bar is open: its collapsible's `open`. */
+  readonly open = computed(() => this.collapsible()?.open() ?? false);
   /** Asks the search input for focus (it moves on with each request). */
   readonly focusRequest = signal(0);
-  /** Ctrl / ⌘ + F opens the search bar only when there is one to open. */
-  private readonly controls = signal(0);
 
   // The same object, changed in place: never equal to itself, so what reads
   // it reads it again.
@@ -35,28 +36,33 @@ export class ScEditorSearchState {
 
   constructor(readonly editor: ScEditor) {}
 
+  /** Opens the search bar, focus in its input. */
   show(): void {
-    this.open.set(true);
+    this.collapsible()?.open.set(true);
     this.focusRequest.update((n) => n + 1);
   }
 
-  /** Closes the search bar, clears its matches, and goes back to the text. */
+  /**
+   * Closes the search bar and goes back to the text — where it is: focus
+   * without scrolling (Tiptap's focus() scrolls to the selection, which can be
+   * far from what is on screen).
+   */
   close(): void {
     if (!this.open()) return;
-    this.open.set(false);
-    const editor = this.editor.editorInstance();
-    editor?.commands.clearSearch();
-    editor?.commands.focus();
+    this.collapsible()?.open.set(false);
+    this.editor
+      .editorInstance()
+      ?.commands.focus(null, { scrollIntoView: false });
   }
 
-  toggle(): void {
-    if (this.open()) this.close();
-    else this.show();
+  /** Its matches cleared: when the bar closes, however it closes. */
+  clear(): void {
+    this.editor.editorInstance()?.commands.clearSearch();
   }
 
   /** Ctrl / ⌘ + F: opens the bar when there is one. */
   shortcut(): boolean {
-    if (!this.controls()) return false;
+    if (!this.collapsible()) return false;
     this.show();
     return true;
   }
@@ -99,10 +105,12 @@ export class ScEditorSearchState {
     }
   }
 
-  /** Called by `scEditorSearch`: there is a search bar to open. */
-  register(): () => void {
-    this.controls.update((n) => n + 1);
-    return () => this.controls.update((n) => n - 1);
+  /** Called by `scEditorSearchBar`: the collapsible it opens and closes in. */
+  register(collapsible: ScCollapsible): () => void {
+    this.collapsible.set(collapsible);
+    return () => {
+      if (this.collapsible() === collapsible) this.collapsible.set(null);
+    };
   }
 }
 

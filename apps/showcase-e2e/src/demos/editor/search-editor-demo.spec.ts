@@ -13,7 +13,9 @@ test.describe('Search Editor Demo', () => {
   test('finds, steps through and replaces every match', async ({ page }) => {
     const search = page.getByRole('button', { name: 'Search and replace' });
     await search.click();
-    await expect(search).toHaveAttribute('aria-pressed', 'true');
+    // A disclosure: expanded, wired to the bar's panel.
+    await expect(search).toHaveAttribute('aria-expanded', 'true');
+    await expect(search).not.toHaveAttribute('aria-pressed');
     const input = bar(page).getByRole('searchbox', { name: 'Search' });
     await expect(input).toBeFocused();
 
@@ -39,8 +41,34 @@ test.describe('Search Editor Demo', () => {
     const input = bar(page).getByRole('searchbox', { name: 'Search' });
     await expect(input).toBeFocused();
 
+    await input.fill('colour');
+    await expect(
+      draft(page).locator('.find-and-replace-result').first(),
+    ).toBeVisible();
     await input.press('Escape');
     await expect(bar(page)).toBeHidden();
     await expect(draft(page)).toBeFocused();
+    // Closed: its matches cleared.
+    await expect(draft(page).locator('.find-and-replace-result')).toHaveCount(
+      0,
+    );
+  });
+
+  test('its button closes it too: collapsed, the matches cleared', async ({
+    page,
+  }) => {
+    const search = page.getByRole('button', { name: 'Search and replace' });
+    await search.click();
+    const input = bar(page).getByRole('searchbox', { name: 'Search' });
+    await input.fill('colour');
+    await expect(
+      draft(page).locator('.find-and-replace-result').first(),
+    ).toBeVisible();
+    await search.click();
+    await expect(search).toHaveAttribute('aria-expanded', 'false');
+    await expect(bar(page)).toBeHidden();
+    await expect(draft(page).locator('.find-and-replace-result')).toHaveCount(
+      0,
+    );
   });
 });

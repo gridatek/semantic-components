@@ -73,16 +73,16 @@ export class NoteEditor {
 }
 ```
 
-| Entry point                                  | Provide                                               | Parts                                                                     | Package                                                        |
-| -------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| `@semantic-components/ui/editor/tables`      | `withTables()`                                        | `scEditorTable`                                                           | `@tiptap/extension-table`                                      |
-| `@semantic-components/ui/editor/images`      | `withImages()`                                        | `scEditorUploads`, `scEditorImage`; drop, paste                           | `@tiptap/extension-image`, `@tiptap/extension-file-handler`    |
-| `@semantic-components/ui/editor/search`      | `withSearch()`                                        | `scEditorSearch`, `scEditorSearchBar` and its parts; **Ctrl / ⌘ + F**     | `@tiptap/extension-find-and-replace`                           |
-| `@semantic-components/ui/editor/highlight`   | `withHighlight()`                                     | `scEditorHighlight`, `scEditorHighlightColor`, `scEditorRemoveHighlight`  | `@tiptap/extension-highlight`                                  |
-| `@semantic-components/ui/editor/scripts`     | `withScripts()`                                       | the commands `superscript`, `subscript`                                   | `@tiptap/extension-superscript`, `@tiptap/extension-subscript` |
-| `@semantic-components/ui/editor/align`       | `withAlign()`                                         | the commands `align-left`, `align-center`, `align-right`, `align-justify` | `@tiptap/extension-text-align`                                 |
-| `@semantic-components/ui/editor/markdown`    | `withMarkdown()`                                      | `format="markdown"`                                                       | `@tiptap/markdown`                                             |
-| `@semantic-components/ui/editor/bubble-menu` | none (`scEditorBubbleMenu` adds itself to the editor) | `scEditorBubbleMenu`                                                      | `@tiptap/extension-bubble-menu`                                |
+| Entry point                                  | Provide                                               | Parts                                                                      | Package                                                        |
+| -------------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `@semantic-components/ui/editor/tables`      | `withTables()`                                        | `scEditorTable`                                                            | `@tiptap/extension-table`                                      |
+| `@semantic-components/ui/editor/images`      | `withImages()`                                        | `scEditorUploads`, `scEditorImage`; drop, paste                            | `@tiptap/extension-image`, `@tiptap/extension-file-handler`    |
+| `@semantic-components/ui/editor/search`      | `withSearch()`                                        | `scEditorSearchBar` (in a `scCollapsible`) and its parts; **Ctrl / ⌘ + F** | `@tiptap/extension-find-and-replace`                           |
+| `@semantic-components/ui/editor/highlight`   | `withHighlight()`                                     | `scEditorHighlight`, `scEditorHighlightColor`, `scEditorRemoveHighlight`   | `@tiptap/extension-highlight`                                  |
+| `@semantic-components/ui/editor/scripts`     | `withScripts()`                                       | the commands `superscript`, `subscript`                                    | `@tiptap/extension-superscript`, `@tiptap/extension-subscript` |
+| `@semantic-components/ui/editor/align`       | `withAlign()`                                         | the commands `align-left`, `align-center`, `align-right`, `align-justify`  | `@tiptap/extension-text-align`                                 |
+| `@semantic-components/ui/editor/markdown`    | `withMarkdown()`                                      | `format="markdown"`                                                        | `@tiptap/markdown`                                             |
+| `@semantic-components/ui/editor/bubble-menu` | none (`scEditorBubbleMenu` adds itself to the editor) | `scEditorBubbleMenu`                                                       | `@tiptap/extension-bubble-menu`                                |
 
 - **Provided, not found from the buttons**: the document's schema is set when the editor starts, and a saved document can hold a table with no table button in sight — without `withTables()` it would be dropped. `provideEditor` goes in a component's `providers` (or the app's); the editors and `scEditorView`s below read it.
 - **The same features for the editor and the display**, so they hold the same documents.
@@ -172,7 +172,6 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 | `ScEditorRemoveHighlight` (`/highlight`)    | `button[scEditorRemoveHighlight]`             | Removes the highlight (disabled when there is none).                                                                                                                                                                                                                    |
 | `ScEditorUploads` (`/images`)               | `[scEditor][upload]`                          | The image uploads: `[upload]` on the editor, `imageTypes`, `uploads()`, `cancel(id)` (see [Images](#images)).                                                                                                                                                           |
 | `ScEditorImage` (`/images`)                 | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `[upload]` (disabled without one).                                                                                                                                                                                      |
-| `ScEditorSearch` (`/search`)                | `button[scEditorSearch]`                      | Opens and closes the search bar (`open()`, `aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                                                                                                                                     |
 | `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar (`/search`).                                                                                                                                                                                                                                  |
 | `ScEditorView`                              | `[scEditorView]`                              | Displays the editor's HTML in its styles, without an editor (see [Displaying the document](#displaying-the-document)).                                                                                                                                                  |
 | `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`               | `wordCount()`, `charCount()`, `limit()`, `remaining()` (`exportAs`) — write the text around them. `data-limit-reached` at the limit.                                                                                                                                    |
@@ -361,35 +360,37 @@ The actions (`ScEditorTableAction`): `insertTable` (3 × 3, with a header row), 
 `withSearch()` and the parts, from `@semantic-components/ui/editor/search`.
 
 ```html
-<button scToolbarWidget scToggle scEditorSearch #search="scEditorSearch">…</button>
+<button scToolbarWidget scButton variant="ghost" [scCollapsibleTrigger]="search">…</button>
 
-@if (search.open()) {
-<div scEditorSearchBar aria-label="Search and replace">
-  <input scInput scEditorSearchInput aria-label="Search" />
-  <span scEditorSearchResults #results="scEditorSearchResults"> @if (results.state() === 'found') { {{ (results.index() ?? 0) + 1 }} of {{ results.count() }} } @else if (results.state() === 'none') { No results } </span>
-  <button scEditorSearchPrevious>…</button>
-  <button scEditorSearchNext>…</button>
-  <button scEditorSearchOption="caseSensitive">…</button>
-  <button scEditorSearchOption="wholeWord">…</button>
-  <button scEditorSearchOption="useRegex">…</button>
-  <input scInput scEditorReplaceInput aria-label="Replace with" />
-  <button scEditorReplace>Replace</button>
-  <button scEditorReplaceAll>Replace all</button>
-  <button scEditorSearchClose>…</button>
+<div scCollapsible #search="scCollapsible">
+  <div scCollapsiblePanel scEditorSearchBar aria-label="Search and replace">
+    <input scInput scEditorSearchInput aria-label="Search" />
+    <span scEditorSearchResults #results="scEditorSearchResults"> @if (results.state() === 'found') { {{ (results.index() ?? 0) + 1 }} of {{ results.count() }} } @else if (results.state() === 'none') { No results } </span>
+    <button scEditorSearchPrevious>…</button>
+    <button scEditorSearchNext>…</button>
+    <button scEditorSearchOption="caseSensitive">…</button>
+    <button scEditorSearchOption="wholeWord">…</button>
+    <button scEditorSearchOption="useRegex">…</button>
+    <input scInput scEditorReplaceInput aria-label="Replace with" />
+    <button scEditorReplace>Replace</button>
+    <button scEditorReplaceAll>Replace all</button>
+    <button scEditorSearchClose>…</button>
+  </div>
 </div>
-}
 ```
 
-| Part                              | Does                                                                                                                                                        |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `scEditorSearchBar`               | A `search` landmark (name it); Escape closes it and goes back to the text.                                                                                  |
-| `scEditorSearchInput`             | Searches as you type (after a pause); Enter / Shift+Enter go to the next / previous match. `aria-invalid` when nothing matches. Focused when the bar opens. |
-| `scEditorSearchResults`           | `role="status"`: write "2 of 5", "No results" from `index()`, `count()`, `state()` (`idle`, `found`, `none` — styled destructive).                          |
-| `scEditorSearchOption`            | `caseSensitive`, `wholeWord`, `useRegex` (RE2 syntax), on and off (`aria-pressed`).                                                                         |
-| `scEditorSearchPrevious`, `…Next` | Step through the matches, wrapping around.                                                                                                                  |
-| `scEditorReplaceInput`            | What matches become; Enter replaces the current one.                                                                                                        |
-| `scEditorReplace`, `…ReplaceAll`  | Replace the current match (and go to the next) or every one, in one undoable step.                                                                          |
-| `scEditorSearchClose`             | Closes the bar, clears the matches, goes back to the text.                                                                                                  |
+The search area is a Collapsible (`scCollapsible`), its panel the bar; its trigger anywhere — in the toolbar, naming it (`[scCollapsibleTrigger]="search"`): `aria-expanded`, `aria-controls`, the open and close animation, two-way `[(open)]` on the collapsible. The trigger is a `scButton` (ghost: the toggles' size), not a toggle: it expands, it isn't pressed.
+
+| Part                              | Does                                                                                                                                                                                                                   |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scEditorSearchBar`               | A `search` landmark (name it), in a collapsible's panel. Opened — its trigger, or **Ctrl / ⌘ + F** in the document — focus in the search; Escape closes it and goes back to the text; closed, its matches are cleared. |
+| `scEditorSearchInput`             | Searches as you type (after a pause); Enter / Shift+Enter go to the next / previous match. `aria-invalid` when nothing matches. Focused when the bar opens.                                                            |
+| `scEditorSearchResults`           | `role="status"`: write "2 of 5", "No results" from `index()`, `count()`, `state()` (`idle`, `found`, `none` — styled destructive).                                                                                     |
+| `scEditorSearchOption`            | `caseSensitive`, `wholeWord`, `useRegex` (RE2 syntax), on and off (`aria-pressed`).                                                                                                                                    |
+| `scEditorSearchPrevious`, `…Next` | Step through the matches, wrapping around.                                                                                                                                                                             |
+| `scEditorReplaceInput`            | What matches become; Enter replaces the current one.                                                                                                                                                                   |
+| `scEditorReplace`, `…ReplaceAll`  | Replace the current match (and go to the next) or every one, in one undoable step.                                                                                                                                     |
+| `scEditorSearchClose`             | Closes the bar, clears the matches, goes back to the text.                                                                                                                                                             |
 
 The matches are highlighted in the document; the current one is selected and scrolled to. Read-only documents can be searched, not replaced.
 
@@ -441,7 +442,7 @@ readonly noteForm = form(signal<{ body: ScEditorValue }>({ body: null }), (path)
 
 ## Keyboard
 
-Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E** inline code, **Shift + H** highlight (with `withHighlight()`), **.** superscript, **,** subscript (with `withScripts()`), **Alt + C** code block, **Shift + 7 / 8 / 9** numbered, bulleted and task list, **Z** undo, **Shift + Z** or **Y** redo; **Ctrl / ⌘ + F** search (with `scEditorSearch`). Markdown shortcuts as you type: `# ` headings, `- ` lists, `[ ] ` tasks, `> ` quotes, ` ``` ` code blocks. In the toolbar, **← / →** move between buttons and **Tab** leaves it.
+Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E** inline code, **Shift + H** highlight (with `withHighlight()`), **.** superscript, **,** subscript (with `withScripts()`), **Alt + C** code block, **Shift + 7 / 8 / 9** numbered, bulleted and task list, **Z** undo, **Shift + Z** or **Y** redo; **Ctrl / ⌘ + F** search (with a `scEditorSearchBar`). Markdown shortcuts as you type: `# ` headings, `- ` lists, `[ ] ` tasks, `> ` quotes, ` ``` ` code blocks. In the toolbar, **← / →** move between buttons and **Tab** leaves it.
 
 ## Styling
 

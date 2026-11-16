@@ -201,6 +201,21 @@ test.describe('Full Featured Editor Demo', () => {
     await expect(superscript).toHaveAttribute('aria-pressed', 'true');
   });
 
+  test('the search’s close button: back to the text, which doesn’t move', async ({
+    page,
+  }) => {
+    await page.getByRole('button', { name: 'Search and replace' }).click();
+    const close = page.getByRole('button', { name: 'Close search' });
+    await expect(close).toBeVisible();
+    // The document's own scroll box (it scrolls past its height).
+    const scrolled = () =>
+      article(page).evaluate((el) => el.parentElement?.scrollTop ?? 0);
+    const before = await scrolled();
+    await close.click();
+    await expect(article(page)).toBeFocused();
+    expect(await scrolled()).toBe(before);
+  });
+
   test('the link popover adds and removes a link', async ({ page }) => {
     const link = toolbar(page).getByRole('button', {
       name: 'Link',

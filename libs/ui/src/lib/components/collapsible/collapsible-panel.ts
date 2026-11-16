@@ -74,6 +74,9 @@ export class ScCollapsiblePanel {
       // global interpolate-size: allow-keywords).
       this.rendered() &&
         'data-open:animate-collapsible-down data-closed:animate-collapsible-up motion-reduce:animate-none',
+      // Closing: it keeps its last frame (no height) until it is hidden — not
+      // its full height for a frame in between.
+      !this.collapsible.open() && 'fill-mode-forwards',
       this.classInput(),
     ),
   );

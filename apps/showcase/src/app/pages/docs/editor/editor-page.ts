@@ -802,10 +802,12 @@ export class NoteEditor {
       entry: '@semantic-components/ui/editor/search',
       items: [
         {
-          name: 'button[scEditorSearch]',
-          inputs: ['disabled'],
-          read: ['open()'],
-          do: [],
+          name: 'div[scEditorSearchBar]',
+          inputs: [],
+          read: [],
+          do: [
+            'In a scCollapsible (its panel), its trigger anywhere: [scCollapsibleTrigger]="search". Opened (the trigger, Ctrl / ⌘ + F): focus in the search; Escape: closed, back to the text; closed: matches cleared',
+          ],
         },
         {
           name: '[scEditorSearchResults]',
@@ -974,7 +976,7 @@ export class NoteEditor {
     {
       entry: '/search',
       provide: 'withSearch()',
-      parts: ['scEditorSearch', 'scEditorSearchBar', 'Ctrl / ⌘ + F'],
+      parts: ['scEditorSearchBar (in a scCollapsible)', 'Ctrl / ⌘ + F'],
       packages: ['@tiptap/extension-find-and-replace'],
     },
     {

@@ -7882,6 +7882,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/collapsible',
     children: [
       {
+        path: 'trigger-elsewhere-collapsible-demo',
+        loadComponent: () =>
+          import('../pages/docs/collapsible/demos/trigger-elsewhere-collapsible-demo').then(
+            (m) => m.TriggerElsewhereCollapsibleDemo,
+          ),
+      },
+      {
         path: 'collapsible-usage-demo',
         loadComponent: () =>
           import('../pages/docs/collapsible/demos/collapsible-usage-demo').then(
