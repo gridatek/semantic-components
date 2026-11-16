@@ -24,12 +24,13 @@ test.describe('Basic Mention Input Demo', () => {
       'aria-controls',
       (await listbox.getAttribute('id')) as string,
     );
-    const first = (await activeDescendantText(textarea)) as string;
-    expect(first).toBeTruthy();
+    // Read as they come: the active suggestion is set, then moved by the key,
+    // a render later — later still in WebKit under load.
+    await expect.poll(() => activeDescendantText(textarea)).toBeTruthy();
+    const first = await activeDescendantText(textarea);
 
     await press(page, 'ArrowDown');
-    const second = (await activeDescendantText(textarea)) as string;
-    expect(second).not.toBe(first);
+    await expect.poll(() => activeDescendantText(textarea)).not.toBe(first);
     await expect(textarea).toBeFocused();
 
     await press(page, 'Enter');
