@@ -44,7 +44,12 @@ test('Text: the paragraph, quote, code and rule set by Typeset with no container
   // Inline code: on a box, smaller.
   const code = page.locator('code[scTypeset]');
   await expect(code).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
-  await expect(code).toHaveCSS('font-size', '13.6px');
+  // 0.85em of 16px: 13.6px — Firefox keeps font sizes in 1/64 px (13.5938px).
+  await expect
+    .poll(async () =>
+      parseFloat(await code.evaluate((el) => getComputedStyle(el).fontSize)),
+    )
+    .toBeCloseTo(13.6, 1);
   // A rule: its line, the space above it.
   const rule = page.locator('hr[scTypeset]');
   await expect(rule).toHaveCSS('border-top-width', '1px');

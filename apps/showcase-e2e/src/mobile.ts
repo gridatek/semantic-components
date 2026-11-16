@@ -12,7 +12,11 @@ import { type Locator, type Page, expect } from '@playwright/test';
  * then logs "Importing a module script failed".
  */
 export async function expectNoHorizontalScroll(page: Page): Promise<void> {
-  await page.locator('app-root > router-outlet + *').waitFor();
+  // Not the command palette: it follows the outlet until the route comes in
+  // between them.
+  await page
+    .locator('app-root > router-outlet + :not(app-command-palette)')
+    .waitFor();
   await expect
     .poll(() =>
       page.evaluate(
