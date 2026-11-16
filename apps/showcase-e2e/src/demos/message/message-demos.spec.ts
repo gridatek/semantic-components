@@ -55,6 +55,8 @@ test('Group: the earlier messages in line with the last one’s avatar', async (
   const contents = page
     .locator('[data-slot="message-group"]')
     .locator('[data-slot="message-content"]');
+  // Rendered first: evaluateAll doesn't wait (the built app draws after load).
+  await expect(contents.first()).toBeVisible();
   const xs = await contents.evaluateAll((all) =>
     all.map((c) => Math.round(c.getBoundingClientRect().x)),
   );

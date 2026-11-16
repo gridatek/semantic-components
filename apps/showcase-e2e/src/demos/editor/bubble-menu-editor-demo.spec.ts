@@ -2,16 +2,28 @@ import { type Page, expect, test } from '../../test';
 
 const comment = (page: Page) => page.getByRole('textbox', { name: 'Comment' });
 const bubble = (page: Page) => page.getByRole('toolbar', { name: 'Selection' });
+/**
+ * The bubble menu listening: its plugin, once registered with the editor,
+ * takes the toolbar out of the demo (to place it itself). A selection made
+ * before is missed — under load, WebKit's first double-click came first.
+ */
+const listening = (page: Page) =>
+  expect(
+    page.locator('app-bubble-menu-editor-demo [aria-label=Selection]'),
+  ).toHaveCount(0);
 
 test.describe('Bubble Menu Editor Demo', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/demos/editor/bubble-menu-editor-demo');
     await expect(comment(page)).toContainText('Select some of this text');
+    await listening(page);
   });
 
   test('shows by selected text and formats it', async ({ page }) => {
     await expect(bubble(page)).toBeHidden();
     await comment(page).click();
+    // Focused before the keys: one typed while the editor takes the focus is lost.
+    await expect(comment(page)).toBeFocused();
     await page.keyboard.press('End');
     await expect(bubble(page)).toBeHidden();
 
@@ -27,6 +39,8 @@ test.describe('Bubble Menu Editor Demo', () => {
 
   test('hides when the selection is empty', async ({ page }) => {
     await comment(page).click();
+    // Focused before the keys: one typed while the editor takes the focus is lost.
+    await expect(comment(page)).toBeFocused();
     await page.keyboard.press('End');
     await page.keyboard.press('Shift+Home');
     await expect(bubble(page)).toBeVisible();
@@ -46,10 +60,16 @@ test('on a scrolled page, the first selection shows it by the text', async ({
     .getByTitle('A comment with a floating toolbar', { exact: true })
     .getByRole('textbox', { name: 'Comment' });
   await editor.scrollIntoViewIfNeeded();
-  await editor.getByText('Select some of this text').dblclick({
-    position: { x: 10, y: 8 },
-  });
+  await listening(page);
   const toolbar = bubble(page);
+  // Again if the word wasn't kept: under load, WebKit's double-click focuses
+  // the editor but its selection is lost (the editor's late focus handling).
+  await expect(async () => {
+    await editor.getByText('Select some of this text').dblclick({
+      position: { x: 10, y: 8 },
+    });
+    await expect(toolbar).toBeVisible({ timeout: 2000 });
+  }).toPass();
   await expect(toolbar).toBeInViewport({ ratio: 1 });
   const text = await editor.boundingBox();
   const box = await toolbar.boundingBox();

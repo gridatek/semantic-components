@@ -4,16 +4,27 @@ import { type Locator, type Page, expect, test } from '../../test';
 const demo = (name: string) => `/demos/bar-chart/${name}-chart-demo`;
 const tooltip = (page: Page) => page.locator('[data-slot=chart-tooltip]');
 
-/** How many values an attribute of the first match takes, frame by frame, for a while. */
+/**
+ * How many values an attribute of the first match takes, frame by frame, for
+ * a while: 900 ms from its first change (under load, WebKit starts the
+ * animation late — up to 3 s waited for it).
+ */
 function framesOf(page: Page, selector: string, attribute: string) {
   return page.evaluate(
     async ([selector, attribute]) => {
-      const seen = new Set<string | null>();
-      const end = performance.now() + 900;
+      const value = () =>
+        document.querySelector(selector)?.getAttribute(attribute) ?? null;
+      const first = value();
+      const seen = new Set([first]);
+      let end = performance.now() + 3000;
+      let moved = false;
       while (performance.now() < end) {
-        seen.add(
-          document.querySelector(selector)?.getAttribute(attribute) ?? null,
-        );
+        const now = value();
+        seen.add(now);
+        if (!moved && now !== first) {
+          moved = true;
+          end = performance.now() + 900;
+        }
         await new Promise((done) => requestAnimationFrame(done));
       }
       return seen.size;
@@ -86,12 +97,19 @@ test('Stacked bar: each month, one on the other; a legend', async ({
       y: Number(svg.getAttribute('y')),
       height: Number(svg.getAttribute('height')),
     }));
-  const below = await geometry(desktop.first());
-  const above = await geometry(mobile.first());
-  // Mobile on Desktop: same column, ending where Desktop starts.
-  expect(Math.round(above?.x ?? 0)).toBe(Math.round(below?.x ?? 1));
-  const reach = (above?.y ?? 0) + (above?.height ?? 0) - (below?.y ?? 0);
-  expect(Math.abs(reach)).toBeLessThan(0.5);
+  // Mobile on Desktop: same column, ending where Desktop starts. Polled: the
+  // bars grow frame by frame (not a CSS animation settled() waits for), late
+  // under load in WebKit.
+  await expect
+    .poll(async () => {
+      const below = await geometry(desktop.first());
+      const above = await geometry(mobile.first());
+      const reach = above.y + above.height - below.y;
+      return (
+        Math.round(above.x) === Math.round(below.x) && Math.abs(reach) < 0.5
+      );
+    })
+    .toBe(true);
   await expect(page.locator('[data-slot=chart-legend]')).toHaveText(
     /Desktop\s*Mobile/,
   );
@@ -258,7 +276,8 @@ test('Stacked, rounded: the pieces touch, each rounded on its own', async ({
       const desktop = await boxes('desktop');
       const mobile = await boxes('mobile');
       return mobile.map((m, i) => {
-        const gap = desktop[i].top - m.bottom;
+        // Not drawn yet (undefined): asked again.
+        const gap = (desktop[i]?.top ?? Infinity) - m.bottom;
         return Math.abs(gap) < 0.5;
       });
     })

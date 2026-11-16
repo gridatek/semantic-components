@@ -10,6 +10,11 @@ test.describe('Presets Page', () => {
   test.beforeEach(({ browserName }) => {
     test.slow(browserName !== 'chromium');
   });
+  // One after the other, in one worker (the preset runs a file's tests side
+  // by side): four of this page at once, beside other pages, froze WebKit's
+  // pages for more than the 90 s of a test. 'default', not 'serial': a
+  // failure doesn't skip the rest.
+  test.describe.configure({ mode: 'default' });
 
   // To show, and to close (its leave animation, on WebKit's lagging clock).
   const shown = { timeout: 30_000 };
@@ -93,30 +98,32 @@ test.describe('Presets Page', () => {
     const plot = page.getByRole('group', {
       name: 'Sleep stages by hour, 10pm to 6am',
     });
-    await plot.waitFor(shown);
+    await plot.waitFor({ state: 'attached', ...shown });
     // Seen, it enters: scrolled to, as a reader would.
     await plot.scrollIntoViewIfNeeded();
     await expect(plot).toBeVisible();
     // Per hour, the topmost drawn segment (the highest on screen): rounded.
     await expect
-      .poll(() =>
-        plot.evaluate((svg) => {
-          const tops = new Map<string, { y: number; rx: string }>();
-          for (const box of svg.querySelectorAll(
-            '[data-slot=chart-bar] > svg',
-          )) {
-            const height = Number(box.getAttribute('height'));
-            if (height <= 0) continue;
-            const x = box.getAttribute('x') ?? '';
-            const y = Number(box.getAttribute('y'));
-            const rect = box.querySelector('rect');
-            const rx = rect ? getComputedStyle(rect).rx : '0px';
-            const top = tops.get(x);
-            if (!top || y < top.y) tops.set(x, { y, rx });
-          }
-          // Square: no rx (auto) or 0px.
-          return [...tops.values()].map((top) => parseFloat(top.rx) > 0);
-        }),
+      .poll(
+        () =>
+          plot.evaluate((svg) => {
+            const tops = new Map<string, { y: number; rx: string }>();
+            for (const box of svg.querySelectorAll(
+              '[data-slot=chart-bar] > svg',
+            )) {
+              const height = Number(box.getAttribute('height'));
+              if (height <= 0) continue;
+              const x = box.getAttribute('x') ?? '';
+              const y = Number(box.getAttribute('y'));
+              const rect = box.querySelector('rect');
+              const rx = rect ? getComputedStyle(rect).rx : '0px';
+              const top = tops.get(x);
+              if (!top || y < top.y) tops.set(x, { y, rx });
+            }
+            // Square: no rx (auto) or 0px.
+            return [...tops.values()].map((top) => parseFloat(top.rx) > 0);
+          }),
+        shown,
       )
       .toEqual([true, true, true, true, true, true, true, true, true]);
   });
@@ -129,7 +136,7 @@ test.describe('Presets Page', () => {
     const plot = page.getByRole('group', {
       name: 'Workout load by day, Monday to Sunday',
     });
-    await plot.waitFor(shown);
+    await plot.waitFor({ state: 'attached', ...shown });
     await plot.scrollIntoViewIfNeeded();
     // A bar per day, each over its track (the whole 0 to 100).
     const chart = page.locator('[data-slot=chart]', { has: plot });

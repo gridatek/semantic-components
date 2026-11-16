@@ -28,6 +28,8 @@ test('Usage: a named status, announced (no longer hidden by its icon)', async ({
 
 test('Size: its size-* class', async ({ page }) => {
   await page.goto(demo('size'));
+  // Rendered first: evaluateAll doesn't wait (the built app draws after load).
+  await expect(page.getByRole('status')).toHaveCount(4);
   // Its layout width: the bounding box of a turning spinner is wider.
   const widths = await page
     .getByRole('status')

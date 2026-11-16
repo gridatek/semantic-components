@@ -12,6 +12,8 @@ test.describe('Basic Scheduler Demo', () => {
   });
 
   test('previous, next and today move the week', async ({ page }) => {
+    // Its text first: the element is there before its week is written.
+    await expect(title(page)).toHaveText(/\d{4}/);
     const shown = await title(page).textContent();
     await page.getByRole('button', { name: 'Next' }).click();
     await expect(title(page)).not.toHaveText(shown ?? '');

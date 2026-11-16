@@ -78,11 +78,17 @@ test('Conversation: the keyboard reaches and scrolls it', async ({ page }) => {
   await page.goto('/demos/message-scroller/message-scroller-usage-demo');
   await atEnd(page);
   await viewport(page).focus();
-  await press(page, 'Home');
-  await expect.poll(async () => (await scroll(page)).top).toBe(0);
+  // Pressed again if lost: under load, WebKit drops a scroll key that comes
+  // while the scroll to the end still runs (1 in ~16 runs, nothing moves).
+  await expect(async () => {
+    await press(page, 'Home');
+    await expect.poll(async () => (await scroll(page)).top).toBe(0);
+  }).toPass();
   await expect(jump(page)).toHaveAttribute('data-active', 'true');
-  await press(page, 'End');
-  await atEnd(page);
+  await expect(async () => {
+    await press(page, 'End');
+    await atEnd(page);
+  }).toPass();
 });
 
 test('Streaming: the question near the top, then the end followed', async ({
