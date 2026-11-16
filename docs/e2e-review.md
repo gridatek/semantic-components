@@ -1,6 +1,6 @@
 # E2E suite review (2026-11-16)
 
-A review of `apps/showcase-e2e`: what is done well, what is wrong or risky, and what to do about it, in order of value. First written at commit `54dbbae3e`, then checked and corrected at `ee3130826` (the first all-green Nightly E2E, run 43884598710). Nothing in this review has been changed in the code.
+A review of `apps/showcase-e2e`: what is done well, what is wrong or risky, and what to do about it, in order of value. First written at commit `54dbbae3e`, checked and corrected at `ee3130826` (the first all-green Nightly E2E, run 43884598710), then corrected again on 2026-11-17 while carrying out its first recommendations on the branch `e2e-review-fixes` — each finding says what is done.
 
 Every count comes from a `grep` or a short script over `apps/showcase-e2e/src` (see _How this was measured_). Where the first version was wrong, the correction says so.
 
@@ -33,7 +33,9 @@ Playwright lists 3,422 tests for two projects alone; the nightly runs the suite 
 
 The nightly keeps 2 retries, so a test that fails once and passes on retry is reported as "flaky" and the job stays green. The runs of 2026-11-15 had 5 to 7 flaky tests each that nobody saw until the hard failures were investigated. A flaky test is a failing test with a delay.
 
-It is cheap to fix: Playwright (1.64, the version here) has a `failOnFlakyTests` option — one line in the config for the nightly. Listing them in the job summary first is a gentler start.
+It is cheap to fix: Playwright (1.64, the version here) has a `failOnFlakyTests` option — one line in the config for the nightly.
+
+**Done** (branch `e2e-review-fixes`): `failOnFlakyTests: !!process.env['CI'] && !!process.env['ALL_BROWSERS']` in `playwright.config.ts` — the nightly fails on a flaky test; CI's own Chromium jobs keep their retries as they are. Checked with Playwright's resolved config (on only with both variables set).
 
 ### 2. The same boilerplate in over 100 files — and a gap in what it checks
 
@@ -53,22 +55,24 @@ The cost is real: the `framesOf` fix on 2026-11-16 had to be applied three times
 
 `evaluateAll`, `page.evaluate` and `count()` read the page **as it is now** and wait for nothing. The built app renders after `load`, so right after `goto` they can read `[]` or `0`. Four of the WebKit failures fixed on 2026-11-16 were this kind (spinner, message, scheduler — `textContent()` on an element still empty — and bar-chart).
 
-**Corrected:** the first version counted 82 such reads and asked to fix "about 60". That was about ten times too many. Of the 82 reads found between a `goto` and the first `expect` or action, 73 are single-element reads (`box()`, `boundingBox()`, `locator.evaluate`), which **do** wait for their element. Only 9 wait for nothing:
+**Corrected (twice):** the first version counted 82 such reads and asked to fix "about 60". Of the 82 reads found between a `goto` and the first `expect` or action, 73 are single-element reads (`box()`, `boundingBox()`, `locator.evaluate`), which **do** wait for their element. Only 9 wait for nothing — and read one by one, only one of them was really at risk:
 
-| Read                                                                                                                                                                                              | Verdict                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `demos/timeline/timeline-demos.spec.ts:65` — `evaluateAll` on the markers, then `expect(new Set(xs).size).toBe(1)`                                                                                | **Risky**: not drawn yet → `[]` → size 0 → fails                                        |
-| `demos/line-chart/line-chart-demos.spec.ts:151` — samples the line for 800 ms from `goto`                                                                                                         | **Risky**: the same late start `framesOf` had (fixed there, not here)                   |
-| `demos/tags-input/tags-input-demos.spec.ts:116`, `demos/timeline/timeline-demos.spec.ts:90`, `demos/virtual-list/virtual-list-demos.spec.ts:131` — set `dir="rtl"` on `<html>` right after `goto` | **To check**: may race with the app's own start-up                                      |
-| `demos/bar-chart/bar-chart-demos.spec.ts:266`, `demos/command/command-demos.spec.ts:162`, `demos/link/link-demos.spec.ts:84`, `demos/resizable/resizable-demos.spec.ts:112`                       | Safe: inside a poll, `navigator.userAgent`, a flag on `window`, clearing `localStorage` |
+| Read                                                                                                                                                                                              | Verdict                                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `demos/timeline/timeline-demos.spec.ts:65` — `evaluateAll` on the markers, then `expect(new Set(xs).size).toBe(1)`                                                                                | Safe: the `side()` reads just before it (`boundingBox()`) wait for the items' markers — they are drawn when it runs                                               |
+| `demos/line-chart/line-chart-demos.spec.ts:151` — samples the line for 800 ms from `goto`                                                                                                         | **Was risky — done**: the window now starts at the line's first frame (up to 3 s waited), as `framesOf` does; 24/24 in each of Chromium, Firefox and WebKit (SSR) |
+| `demos/tags-input/tags-input-demos.spec.ts:116`, `demos/timeline/timeline-demos.spec.ts:90`, `demos/virtual-list/virtual-list-demos.spec.ts:131` — set `dir="rtl"` on `<html>` right after `goto` | Safe: the app never sets `dir` itself, and these parts read the direction when a key is pressed (`getComputedStyle(…).direction`) — the timeline's is CSS only    |
+| `demos/bar-chart/bar-chart-demos.spec.ts:266`, `demos/command/command-demos.spec.ts:162`, `demos/link/link-demos.spec.ts:84`, `demos/resizable/resizable-demos.spec.ts:112`                       | Safe: inside a poll, `navigator.userAgent`, a flag on `window`, clearing `localStorage`                                                                           |
 
-**Fix:** the two risky ones (assert first — `await expect(markers).toHaveCount(n)` — or `expect.poll`), check the three RTL ones, and a lint rule (`no-restricted-syntax`) against `evaluateAll` / `count()` outside an `expect.poll` so new ones don't come.
+**No lint rule, after all:** a `no-restricted-syntax` selector can express "`evaluateAll` / `count()` not inside `expect.poll`" (tried), but not "after an assertion" — it flags **40** places, mostly safe ones, among them the reads fixed on 2026-11-16 by an assertion just before (`spinner:34`, `message:60`). Forty `eslint-disable` comments on correct code would teach nothing. The rule went to `.claude/CLAUDE.md` instead ("write every spec to hold in Firefox and WebKit": assert first, or `expect.poll`), and the skill `e2e-webkit`, which now loads when a test is written.
 
 ### 4. Timeouts are tuned by hand, test by test
 
 34 explicit `timeout:` values in 25 files, 8 `test.slow()`, one `describe.configure`. The cause is general — Firefox and WebKit are 2–3× slower on a 4-core runner — and is now partly handled in one place (60 s for the `-firefox`/`-webkit` projects). The `expect` timeout is still the default 5 s for every engine.
 
-A per-project `expect: { timeout }` is supported. **Corrected:** the gain is smaller than the first version implied — of the 34, only 9 are the `10_000` kind it would replace; 8 are deliberately short (100–500 ms, 2–6 s: checks that something does _not_ happen in time), and the others (15–30 s) are genuinely slow operations (a reload, a PDF).
+A per-project `expect: { timeout }` is supported. **Corrected (twice):** the first version proposed deleting the 9 `10_000` values once the projects had a longer default. They stay: read one by one, all 9 wait for operations slow **by design, in every browser** — infinite scroll loading 40 articles page by page, PDF pages moved and pasted, a trace demo streaming on a timer. Deleting them would break Chromium too. Of the others, 8 are deliberately short (100–500 ms, 2–6 s: checks that something does _not_ happen in time) and the rest (15–30 s) are slow operations as well.
+
+**Done** (branch `e2e-review-fixes`): `expect: { timeout: 10_000 }` for the `-firefox` and `-webkit` projects and `mobile-webkit`; Chromium keeps 5 s. Checked by timing a never-passing `expect.poll`: 5 s in `demos`, 10 s in `demos-firefox` and `demos-webkit`.
 
 ### 5. Duplicate work
 
@@ -90,12 +94,21 @@ Two fixes of 2026-11-16 retry the user's action with `toPass` because WebKit und
 - **No visual tests** (`toHaveScreenshot`: 0). The docs list them as "coming"; class checks per preset cover the look only indirectly.
 - _Dropped from the first version:_ "`page.goto` is monkey-patched in `test.ts`, so `openStill` and `expectHydrated` must remember it". They call `page.goto`, so they get the patch by themselves.
 
+### 8. What the later nightlies added
+
+Two WebKit failures of 2026-11-16's evening run (`43932846651`) are worth keeping as lessons for new tests:
+
+- **A frame count is not a duration.** `canvas-confetti` ends a burst after 200 frames (about 3 s at 60 a second); in the busiest WebKit job the frame rate fell so low that the test's 25 s weren't enough. Fixed by a 60 s wait — the check that it ends is kept.
+- **Focus can scroll in WebKit.** Closing the editor's search gave the focus back to the text; ProseMirror wrote its selection back (`Selection.collapse`), and WebKit scrolled to that caret — 253 px in the demo — where Chromium and Firefox don't. Tiptap's `scrollIntoView: false` can't prevent it. A real bug, fixed in the component (`editor-search-state.ts`: the scroll boxes around the text kept across the focus), found because a test checked "doesn't move".
+
+Both are now in `.claude/CLAUDE.md`'s rules for writing tests that hold in Firefox and WebKit.
+
 ## Recommendations, in order of value
 
-1. **Report flaky tests**: `failOnFlakyTests` for the nightly, or a list in the job summary first.
+1. ~~**Report flaky tests**~~ — **done**: `failOnFlakyTests` for the nightly.
 2. **Make the console check a fixture** in `test.ts`: automatic, with an opt-out for the few specs that expect an error, and a policy for Angular's `NG0…` warnings. Removes the block from 103 files and covers the 33 specs without it.
-3. **Fix the two risky reads** (`timeline:65`, `line-chart:151`), check the three RTL ones, and add a lint rule against `evaluateAll` / `count()` outside `expect.poll`.
-4. **Raise `expect.timeout` for Firefox and WebKit** in the config (for example 10 s), then delete the 9 per-test `10_000` values that only exist for that.
+3. ~~**Fix the risky reads**~~ — **done**: `line-chart:151` fixed; `timeline:65` and the three RTL ones checked and safe; no lint rule (it would flag 40 places, mostly correct) — the rule is in `.claude/CLAUDE.md` instead.
+4. ~~**Raise `expect.timeout` for Firefox and WebKit**~~ — **done**: 10 s there, 5 s in Chromium; the 9 per-test `10_000` stay (slow by design in every browser).
 5. **Move the copies into helpers**: `framesOf`, `settled`, `expectClasses`, and a `preset` fixture option for the cookie.
 6. **Clear the 60 lint warnings**, then turn warnings into errors for the e2e project so they stay at 0.
 7. **One load per page for axe** (light then dark in one test), and drop the nova duplicate between `pages` and `presets-nova` — only if CI time demands it.
