@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AuthLayoutUsageDemoContainer } from './demos/auth-layout-usage-demo-container';
@@ -9,13 +9,13 @@ import { AuthLayoutUsageDemoContainer } from './demos/auth-layout-usage-demo-con
   imports: [
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     AuthLayoutUsageDemoContainer,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Auth Layout</h1>
+        <h1 scTypeset>Auth Layout</h1>
         <p class="text-muted-foreground">
           A page frame for sign-in, sign-up and password pages: the routed page
           alone, without the navbar and footer of the rest of the site.
@@ -24,12 +24,12 @@ import { AuthLayoutUsageDemoContainer } from './demos/auth-layout-usage-demo-con
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-auth-layout-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>How It Works</h2>
+        <h2 scTypeset appToc>How It Works</h2>
         <ul class="text-muted-foreground list-inside list-disc space-y-1">
           <li>
             The routed page goes in its <code>router-outlet</code>: make the

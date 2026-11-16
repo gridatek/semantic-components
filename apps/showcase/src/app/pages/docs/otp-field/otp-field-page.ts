@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -49,7 +49,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
     RtlOtpFieldDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -61,7 +61,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>OTP Field</h1>
+        <h1 scTypeset>OTP Field</h1>
         <p class="text-muted-foreground">
           A one-time code, one input per character, in the look of the
           app&apos;s preset.
@@ -70,12 +70,12 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-otp-field-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Base UI&apos;s OTP Field: one real input per character, in chunks
           (groups, each a joined box) with separators between them, in a row
@@ -86,7 +86,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Real inputs: typing moves on, Backspace back; Left and Right move
@@ -108,7 +108,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-digits-only-otp-field-demo-container />
         <app-alphanumeric-otp-field-demo-container />
         <app-four-digits-otp-field-demo-container />
@@ -126,7 +126,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { InlineCitationUsageDemoContainer } from './demos/inline-citation-usage-demo-container';
@@ -14,21 +14,21 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
     InlineCitationUsageDemoContainer,
     RouterLink,
     RtlInlineCitationDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     TocHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Inline Citation</h1>
+        <h1 scTypeset>Inline Citation</h1>
         <p class="text-muted-foreground">
           A source that sits in the sentence it supports, and opens on hover.
         </p>
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-inline-citation-usage-demo-container />
         <p class="text-muted-foreground">
           A <a scLink routerLink="/docs/components/link">Link</a> in a small
@@ -40,12 +40,12 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <p class="text-muted-foreground">
           Not shadcn&apos;s: there, the citation is a button, and the link to
           the source sits in the card. A preview card is for the eyes only — not
@@ -57,12 +57,12 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-rtl-inline-citation-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/preview-card">Preview Card</a>

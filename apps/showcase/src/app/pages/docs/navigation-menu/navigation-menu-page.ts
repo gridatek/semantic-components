@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -29,7 +29,7 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
     RtlNavigationMenuDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -41,7 +41,7 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Navigation Menu</h1>
+        <h1 scTypeset>Navigation Menu</h1>
         <p class="text-muted-foreground">
           Site navigation with panels of links: opened by hover, click or
           keyboard, in one box that moves from item to item.
@@ -50,12 +50,12 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-navigation-menu-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A named nav and its list of items. An item holds a link, or a trigger
           and its panel — written inside the item, so Tab reaches its links
@@ -65,7 +65,7 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A disclosure navigation (WAI-ARIA), not a menu: a nav you name
@@ -93,7 +93,7 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-open-item-navigation-menu-demo-container />
         <app-separate-navigation-menu-demo-container />
         <app-align-navigation-menu-demo-container />
@@ -101,7 +101,7 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

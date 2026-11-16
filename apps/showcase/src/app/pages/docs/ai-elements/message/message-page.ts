@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { MessagePatternUsageDemoContainer } from './demos/message-pattern-usage-demo-container';
@@ -14,14 +14,14 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
     MessagePatternUsageDemoContainer,
     RouterLink,
     RtlMessagePatternDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     TocHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Message</h1>
+        <h1 scTypeset>Message</h1>
         <p class="text-muted-foreground">
           One turn: the person&apos;s message, and the agent&apos;s reply with
           its actions.
@@ -29,7 +29,7 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-message-pattern-usage-demo-container />
         <p class="text-muted-foreground">
           The person&apos;s text is a
@@ -42,12 +42,12 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Actions</h2>
+        <h2 scTypeset appToc>Actions</h2>
         <p class="text-muted-foreground">
           Actions go in the message&apos;s footer, which follows its alignment:
           on the person&apos;s turn they sit at the end. Ghost icon buttons,
@@ -74,7 +74,7 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Markdown</h2>
+        <h2 scTypeset appToc>Markdown</h2>
         <p class="text-muted-foreground">
           The reply streams as markdown. The library has no Markdown renderer
           yet: here the reply is written out, its code in a
@@ -83,12 +83,12 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-rtl-message-pattern-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the <a scLink routerLink="/docs/components/message">Message</a>,
           the <a scLink routerLink="/docs/components/bubble">Bubble</a> and the

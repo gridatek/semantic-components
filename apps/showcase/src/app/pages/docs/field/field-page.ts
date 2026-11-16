@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -49,7 +49,7 @@ import { TextareaFieldDemoContainer } from './demos/textarea-field-demo-containe
     RtlFieldDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -61,7 +61,7 @@ import { TextareaFieldDemoContainer } from './demos/textarea-field-demo-containe
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Field</h1>
+        <h1 scTypeset>Field</h1>
         <p class="text-muted-foreground">
           A control with its label, description and errors; fields in groups and
           fieldsets. In the look of the app&apos;s preset.
@@ -70,12 +70,12 @@ import { TextareaFieldDemoContainer } from './demos/textarea-field-demo-containe
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-field-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element. A field links its label,
           its description and its errors to its control by itself. Horizontal,
@@ -88,7 +88,7 @@ import { TextareaFieldDemoContainer } from './demos/textarea-field-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A field names its control by its label (for) and describes it by its
@@ -107,7 +107,7 @@ import { TextareaFieldDemoContainer } from './demos/textarea-field-demo-containe
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-input-field-demo-container />
         <app-textarea-field-demo-container />
         <app-select-field-demo-container />
@@ -125,7 +125,7 @@ import { TextareaFieldDemoContainer } from './demos/textarea-field-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

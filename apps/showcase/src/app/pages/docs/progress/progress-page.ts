@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -35,7 +35,7 @@ import { StepsProgressDemoContainer } from './demos/steps-progress-demo-containe
     RtlProgressDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -47,7 +47,7 @@ import { StepsProgressDemoContainer } from './demos/steps-progress-demo-containe
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Progress</h1>
+        <h1 scTypeset>Progress</h1>
         <p class="text-muted-foreground">
           How far a task has gone, as a bar or a circle. In the look of the
           app&apos;s preset.
@@ -56,12 +56,12 @@ import { StepsProgressDemoContainer } from './demos/steps-progress-demo-containe
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-progress-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element; the label and the value as
           text are yours. A bar has a track and a range; a circle, an svg.
@@ -70,7 +70,7 @@ import { StepsProgressDemoContainer } from './demos/steps-progress-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A progressbar (role=&quot;progressbar&quot;, aria-valuenow, -min,
@@ -88,7 +88,7 @@ import { StepsProgressDemoContainer } from './demos/steps-progress-demo-containe
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-progress-demo-container />
         <app-controlled-progress-demo-container />
         <app-circle-progress-demo-container />
@@ -99,7 +99,7 @@ import { StepsProgressDemoContainer } from './demos/steps-progress-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

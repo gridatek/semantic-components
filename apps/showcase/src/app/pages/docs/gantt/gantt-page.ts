@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicGanttDemoContainer } from './demos/basic-gantt-demo-container';
@@ -16,12 +16,12 @@ import { ScalesGanttDemoContainer } from './demos/scales-gantt-demo-container';
     RtlGanttDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Gantt</h1>
+        <h1 scTypeset>Gantt</h1>
         <p class="text-muted-foreground">
           A Data Table with a timeline column: each row's bar from its start to
           its end, its progress, arrows to the tasks that follow. Drag a bar,
@@ -33,7 +33,7 @@ import { ScalesGanttDemoContainer } from './demos/scales-gantt-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-gantt-demo-container />
         <app-scales-gantt-demo-container />
         <app-milestones-gantt-demo-container />

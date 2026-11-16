@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -31,7 +31,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
     RtlMenubarDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -43,7 +43,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Menubar</h1>
+        <h1 scTypeset>Menubar</h1>
         <p class="text-muted-foreground">
           A row of menus, as at the top of a desktop app: File, Edit, View. In
           the look of the app&apos;s preset.
@@ -52,12 +52,12 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-menubar-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           The bar and its items are the Menubar&apos;s; each item&apos;s menu is
           made of the Menu&apos;s parts — groups, checkbox and radio items,
@@ -68,7 +68,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Keyboard</h2>
+        <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The bar is one tab stop: ArrowLeft and ArrowRight move along it
@@ -92,7 +92,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-checkbox-menubar-demo-container />
         <app-radio-menubar-demo-container />
         <app-submenu-menubar-demo-container />
@@ -101,7 +101,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { EditorImageAnnotatorDemoContainer } from './demos/editor-image-annotator-demo-container';
@@ -14,12 +14,12 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
     ReadOnlyImageAnnotatorDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Image Annotator</h1>
+        <h1 scTypeset>Image Annotator</h1>
         <p class="text-muted-foreground">
           Annotate an image: annotations are shapes over it, not pixels —
           selected, moved, resized, restyled and deleted, with the pointer or
@@ -29,7 +29,7 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Editor</h2>
+        <h2 scTypeset appToc>Editor</h2>
         <p class="text-muted-foreground">
           Every tool. Select an annotation to move it, resize it by its handles,
           or restyle it with a colour or the width. From the keyboard: Enter on
@@ -40,7 +40,7 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Review a screenshot</h2>
+        <h2 scTypeset appToc>Review a screenshot</h2>
         <p class="text-muted-foreground">
           A few tools, and annotations given as data — to save, send and show
           again.
@@ -49,7 +49,7 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Read only</h2>
+        <h2 scTypeset appToc>Read only</h2>
         <p class="text-muted-foreground">
           The same annotations, shown: each one is still named and reached with
           Tab.

@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -41,7 +41,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
     RtlContextMenuDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -53,7 +53,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Context Menu</h1>
+        <h1 scTypeset>Context Menu</h1>
         <p class="text-muted-foreground">
           A menu at the pointer, opened by a right-click on an area — a long
           press on touch, Shift+F10 or the Menu key on the focused area. In the
@@ -63,12 +63,12 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-context-menu-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           The context menu holds the area (the trigger) and the menu, in a
           portal as the Menu&apos;s: rendered while it is open. The menu is made
@@ -79,7 +79,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Keyboard</h2>
+        <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The area is focusable: Shift+F10 or the Menu key opens the menu on
@@ -98,7 +98,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-context-menu-demo-container />
         <app-submenu-context-menu-demo-container />
         <app-shortcuts-context-menu-demo-container />
@@ -112,7 +112,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

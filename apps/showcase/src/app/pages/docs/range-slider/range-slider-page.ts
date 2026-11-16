@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicRangeSliderDemoContainer } from './demos/basic-range-slider-demo-container';
@@ -14,12 +14,12 @@ import { FormRangeSliderDemoContainer } from './demos/form-range-slider-demo-con
     FormRangeSliderDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Range Slider</h1>
+        <h1 scTypeset>Range Slider</h1>
         <p class="text-muted-foreground">
           A dual-thumb range slider for selecting a numeric range between a
           minimum and maximum value.
@@ -28,7 +28,7 @@ import { FormRangeSliderDemoContainer } from './demos/form-range-slider-demo-con
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-range-slider-demo-container />
         <app-custom-color-range-slider-demo-container />
         <app-form-range-slider-demo-container />

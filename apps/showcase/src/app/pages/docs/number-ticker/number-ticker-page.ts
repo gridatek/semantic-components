@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import {
   type ApiInput,
@@ -29,12 +29,12 @@ import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-
     ApiTable,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Number Ticker</h1>
+        <h1 scTypeset>Number Ticker</h1>
         <p class="text-muted-foreground">
           A number that moves to its new value — counting, or each digit rolling
           — written in the reader’s language. No animation library: it runs
@@ -44,12 +44,12 @@ import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-number-ticker-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One part, on the element that holds the number — a span, a heading, an
           SVG text. It writes the number; you style it.
@@ -58,7 +58,7 @@ import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Screen readers get the value, never the numbers on the way: a hidden
@@ -77,7 +77,7 @@ import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-roll-number-ticker-demo-container />
         <app-formats-number-ticker-demo-container />
         <app-visible-number-ticker-demo-container />
@@ -87,7 +87,7 @@ import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <app-api-table label="ScNumberTicker inputs" [inputs]="inputs" />
       </section>
     </div>

@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -28,14 +28,14 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
     ScTableRow,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     FocusTrapUsageDemoContainer,
     BasicFocusTrapDemoContainer,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Focus Trap</h1>
+        <h1 scTypeset>Focus Trap</h1>
         <p class="text-muted-foreground">
           A directive that keeps focus inside an element while it is shown — the
           dialog, alert dialog, drawer, sheet and popover use it.
@@ -44,12 +44,12 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-focus-trap-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive on the element shown — a dialog, a panel: focus moves
           in, Tab stays inside, and focus goes back where it came from when it
@@ -59,7 +59,7 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>How It Works</h2>
+        <h2 scTypeset appToc>How It Works</h2>
         <ul class="text-muted-foreground list-inside list-disc space-y-1">
           <li>
             Once rendered, focuses the element's first focusable child (or the
@@ -80,7 +80,7 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Why not cdkTrapFocus</h2>
+        <h2 scTypeset appToc>Why not cdkTrapFocus</h2>
         <p class="text-muted-foreground">
           It is the CDK&apos;s focus trap underneath (FocusTrapFactory), with
           two changes:
@@ -119,12 +119,12 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-focus-trap-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">A behaviour only, on any element.</p>
         <div
           scTableContainer

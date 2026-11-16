@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicTransferListDemoContainer } from './demos/basic-transfer-list-demo-container';
@@ -16,12 +16,12 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
     ManyTransferListDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Transfer List</h1>
+        <h1 scTypeset>Transfer List</h1>
         <p class="text-muted-foreground">
           One value — the chosen ids, in order, a form field — and two sides
           that are listboxes: select with the keys, move with Enter or a
@@ -31,7 +31,7 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Basic</h2>
+        <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           Two sides, one value: the chosen ids. Each side a listbox — ↑ ↓, Space
           selects, Shift extends, Ctrl+A all, Enter (or a double-click) moves
@@ -41,7 +41,7 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Form</h2>
+        <h2 scTypeset appToc>Form</h2>
         <p class="text-muted-foreground">
           A [formField]: the chosen ids; at least two, in the schema — left
           short, the error shows.
@@ -50,7 +50,7 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Ordered</h2>
+        <h2 scTypeset appToc>Ordered</h2>
         <p class="text-muted-foreground">
           The value keeps its order: choose a table's columns, then move them up
           and down.
@@ -59,7 +59,7 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Many</h2>
+        <h2 scTypeset appToc>Many</h2>
         <p class="text-muted-foreground">
           Two hundred items: search to narrow a side; Add all moves what the
           search shows.

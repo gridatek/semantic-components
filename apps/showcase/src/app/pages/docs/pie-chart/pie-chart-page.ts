@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import {
   type ApiInput,
@@ -29,12 +29,12 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
     TocHeading,
     ComponentBadges,
     EntryInstall,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Pie Chart</h1>
+        <h1 scTypeset>Pie Chart</h1>
         <p class="text-muted-foreground">
           A series as slices of a whole, each in its category's color: a pie, a
           donut with your text in its center, rings. Names and colors come from
@@ -45,7 +45,7 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <app-entry-install
           entry="charts"
           library="d3-scale d3-shape"
@@ -55,12 +55,12 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-pie-chart-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A chart (its rows and config), its plot with the series, and the
           tooltip and legend you write from their state.
@@ -69,7 +69,7 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: the arrow
@@ -93,7 +93,7 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-donut-chart-demo-container />
         <app-stacked-pie-chart-demo-container />
         <app-label-pie-chart-demo-container />
@@ -101,7 +101,7 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           The series&apos; inputs. The chart, its plot, axes, tooltip and legend
           are on the

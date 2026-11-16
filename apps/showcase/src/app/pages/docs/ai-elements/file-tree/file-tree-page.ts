@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { FileTreeUsageDemoContainer } from './demos/file-tree-usage-demo-container';
@@ -14,21 +14,21 @@ import { RtlFileTreeDemoContainer } from './demos/rtl-file-tree-demo-container';
     FileTreeUsageDemoContainer,
     RouterLink,
     RtlFileTreeDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     TocHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>File Tree</h1>
+        <h1 scTypeset>File Tree</h1>
         <p class="text-muted-foreground">
           The files the agent changed, shown as folders you can open.
         </p>
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-file-tree-usage-demo-container />
         <p class="text-muted-foreground">
           A folder is a
@@ -46,7 +46,7 @@ import { RtlFileTreeDemoContainer } from './demos/rtl-file-tree-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           The nodes render themselves: an
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -58,12 +58,12 @@ import { RtlFileTreeDemoContainer } from './demos/rtl-file-tree-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-rtl-file-tree-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/collapsible">Collapsible</a>

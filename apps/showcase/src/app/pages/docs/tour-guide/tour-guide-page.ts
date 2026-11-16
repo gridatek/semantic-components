@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ControlledTourGuideDemoContainer } from './demos/controlled-tour-guide-demo-container';
@@ -16,12 +16,12 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
     ControlledTourGuideDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Tour Guide</h1>
+        <h1 scTypeset>Tour Guide</h1>
         <p class="text-muted-foreground">
           Your steps as markup on their targets, one at a time in a native modal
           dialog — a spotlight on the target, the card beside it, flipping to
@@ -32,7 +32,7 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Tour</h2>
+        <h2 scTypeset appToc>Tour</h2>
         <p class="text-muted-foreground">
           A welcome (centred, no target), three steps on their targets — the
           page dimmed but for each — and a farewell. ← → step; Escape, or the ×,
@@ -42,7 +42,7 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Minimal</h2>
+        <h2 scTypeset appToc>Minimal</h2>
         <p class="text-muted-foreground">
           Three steps, Next and Done — no progress, no Back.
         </p>
@@ -50,7 +50,7 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Scrolling</h2>
+        <h2 scTypeset appToc>Scrolling</h2>
         <p class="text-muted-foreground">
           Targets far apart in a long page: each is scrolled into view (smoothly
           — at once for reduced motion), and the card follows.
@@ -59,7 +59,7 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Controlled</h2>
+        <h2 scTypeset appToc>Controlled</h2>
         <p class="text-muted-foreground">
           Open and step are two-way: start at any step from outside; (finished)
           at Done — closed is not finished.

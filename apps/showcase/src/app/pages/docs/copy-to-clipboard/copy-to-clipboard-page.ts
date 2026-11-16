@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -30,12 +30,12 @@ import { CopyToClipboardUsageDemoContainer } from './demos/copy-to-clipboard-usa
     CopyToClipboardUsageDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Copy to Clipboard</h1>
+        <h1 scTypeset>Copy to Clipboard</h1>
         <p class="text-muted-foreground">
           A composable directive for copying text to the clipboard with visual
           feedback.
@@ -44,12 +44,12 @@ import { CopyToClipboardUsageDemoContainer } from './demos/copy-to-clipboard-usa
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-copy-to-clipboard-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive on your button: it copies its text (the CDK’s
           clipboard), and says for a moment that it did, so you can switch the
@@ -59,12 +59,12 @@ import { CopyToClipboardUsageDemoContainer } from './demos/copy-to-clipboard-usa
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-copy-to-clipboard-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           A behaviour only: style the button as you like (scButton here).
         </p>

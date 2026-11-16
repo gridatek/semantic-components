@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScHeading,
   ScLink,
   ScTable,
   ScTableBody,
@@ -10,6 +9,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -30,7 +30,7 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
     RouterLink,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScLink,
     ScTable,
     ScTableBody,
@@ -43,7 +43,7 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Table</h1>
+        <h1 scTypeset>Table</h1>
         <p class="text-muted-foreground">
           A table of data: the native table elements, in the look of the
           app&apos;s preset. For sorting, filtering, selection and pages, use a
@@ -55,12 +55,12 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-table-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on the native element, so the table stays a
           table to screen readers: its caption names it, its header cells name
@@ -70,7 +70,7 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Notes</h2>
+        <h2 scTypeset appToc>Notes</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The container scrolls a wide table sideways instead of the page.
@@ -106,14 +106,14 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-footer-table-demo-container />
         <app-scrolling-table-demo-container />
         <app-rtl-table-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

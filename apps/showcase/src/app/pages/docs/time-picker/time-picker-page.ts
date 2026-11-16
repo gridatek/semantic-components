@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicTimePickerDemoContainer } from './demos/basic-time-picker-demo-container';
@@ -16,12 +16,12 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
     FormTimePickerDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Time Picker</h1>
+        <h1 scTypeset>Time Picker</h1>
         <p class="text-muted-foreground">
           A time input with a list of times in a popover — every interval,
           within its limits, written in the app’s language. Type the time, or
@@ -31,7 +31,7 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Basic</h2>
+        <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           The button in the field opens the times, every 30 minutes — focus on
           the value, or the time before it. A pick closes them, focus back on
@@ -41,7 +41,7 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Interval and limits</h2>
+        <h2 scTypeset appToc>Interval and limits</h2>
         <p class="text-muted-foreground">
           interval: 15 minutes between the times; the input’s minTime and
           maxTime bound the list too.
@@ -50,7 +50,7 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Locale</h2>
+        <h2 scTypeset appToc>Locale</h2>
         <p class="text-muted-foreground">
           LOCALE_ID and the input’s hour cycle write the list too: here French,
           24 hours.
@@ -59,7 +59,7 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>In a form</h2>
+        <h2 scTypeset appToc>In a form</h2>
         <p class="text-muted-foreground">
           The [formField] is on the time input; the list fills it. Required —
           marked once the list closes or the input is left.

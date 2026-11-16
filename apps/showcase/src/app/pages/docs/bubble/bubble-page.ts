@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -39,7 +39,7 @@ import { VariantsBubbleDemoContainer } from './demos/variants-bubble-demo-contai
     RtlBubbleDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -51,7 +51,7 @@ import { VariantsBubbleDemoContainer } from './demos/variants-bubble-demo-contai
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Bubble</h1>
+        <h1 scTypeset>Bubble</h1>
         <p class="text-muted-foreground">
           A message&apos;s surface in a conversation: at the start or the end,
           in a variant, with reactions. In the look of the app&apos;s preset.
@@ -60,12 +60,12 @@ import { VariantsBubbleDemoContainer } from './demos/variants-bubble-demo-contai
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-bubble-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element; the text, the reactions and
           their names are yours. A message&apos;s avatar, name and time belong
@@ -75,7 +75,7 @@ import { VariantsBubbleDemoContainer } from './demos/variants-bubble-demo-contai
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A row of emoji is one image: give it role=&quot;img&quot; and an
@@ -99,7 +99,7 @@ import { VariantsBubbleDemoContainer } from './demos/variants-bubble-demo-contai
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-variants-bubble-demo-container />
         <app-alignment-bubble-demo-container />
         <app-group-bubble-demo-container />
@@ -112,7 +112,7 @@ import { VariantsBubbleDemoContainer } from './demos/variants-bubble-demo-contai
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

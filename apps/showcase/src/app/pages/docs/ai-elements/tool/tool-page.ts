@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScHeading,
   ScLink,
   ScTable,
   ScTableBody,
@@ -10,6 +9,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
@@ -25,7 +25,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
     Anatomy,
     RouterLink,
     RtlToolDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     ScTable,
     ScTableBody,
@@ -42,14 +42,14 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Tool</h1>
+        <h1 scTypeset>Tool</h1>
         <p class="text-muted-foreground">
           A tool call the agent makes, from input to output.
         </p>
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-tool-usage-demo-container />
         <p class="text-muted-foreground">
           A <a scLink routerLink="/docs/components/trace">Trace</a> line: plain
@@ -60,12 +60,12 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>States</h2>
+        <h2 scTypeset appToc>States</h2>
         <p class="text-muted-foreground">
           The Trace doesn&apos;t read tool calls: map each call&apos;s state to
           a status and a title.
@@ -100,7 +100,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Approval</h2>
+        <h2 scTypeset appToc>Approval</h2>
         <p class="text-muted-foreground">
           A pending approval is a question for the person, not a step the agent
           took, so it sits outside the Trace as an Item with Deny and Approve;
@@ -111,7 +111,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
           <p class="text-muted-foreground">
             Long output in a sheet: the line is the
@@ -124,7 +124,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

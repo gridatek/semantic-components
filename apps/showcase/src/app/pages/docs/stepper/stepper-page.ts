@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { HorizontalStepperDemoContainer } from './demos/horizontal-stepper-demo-container';
@@ -16,12 +16,12 @@ import { VerticalStepperDemoContainer } from './demos/vertical-stepper-demo-cont
     SimpleStepperDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Stepper</h1>
+        <h1 scTypeset>Stepper</h1>
         <p class="text-muted-foreground">
           A multi-step wizard component for guiding users through a process.
         </p>
@@ -29,7 +29,7 @@ import { VerticalStepperDemoContainer } from './demos/vertical-stepper-demo-cont
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-horizontal-stepper-demo-container />
         <app-vertical-stepper-demo-container />
         <app-simple-stepper-demo-container />

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { DurationReasoningDemoContainer } from './demos/duration-reasoning-demo-container';
@@ -18,14 +18,14 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
     ReasoningUsageDemoContainer,
     RouterLink,
     RtlReasoningDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     TocHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Reasoning</h1>
+        <h1 scTypeset>Reasoning</h1>
         <p class="text-muted-foreground">
           The agent&apos;s thinking as it streams. A line that reads
           &quot;Thinking&quot; and opens while the model thinks, then reads
@@ -35,7 +35,7 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-reasoning-usage-demo-container />
         <p class="text-muted-foreground">
           A pattern, not a component: it is built with the
@@ -47,12 +47,12 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Open state</h2>
+        <h2 scTypeset appToc>Open state</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Until the first words arrive, it is a plain line: nothing to open
@@ -77,7 +77,7 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
           <p class="text-muted-foreground">
             How long it thought, in a description after the title: measure it on
@@ -96,7 +96,7 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { RtlSuggestionDemoContainer } from './demos/rtl-suggestion-demo-container';
@@ -13,7 +13,7 @@ import { SuggestionUsageDemoContainer } from './demos/suggestion-usage-demo-cont
     Anatomy,
     RouterLink,
     RtlSuggestionDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     SuggestionUsageDemoContainer,
     TocHeading,
@@ -21,14 +21,14 @@ import { SuggestionUsageDemoContainer } from './demos/suggestion-usage-demo-cont
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Suggestion</h1>
+        <h1 scTypeset>Suggestion</h1>
         <p class="text-muted-foreground">
           A short prompt you can send to the agent in one click.
         </p>
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-suggestion-usage-demo-container />
         <p class="text-muted-foreground">
           Each one is a
@@ -41,12 +41,12 @@ import { SuggestionUsageDemoContainer } from './demos/suggestion-usage-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Scrolling</h2>
+        <h2 scTypeset appToc>Scrolling</h2>
         <p class="text-muted-foreground">
           The row scrolls sideways when the suggestions do not fit.
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -59,12 +59,12 @@ import { SuggestionUsageDemoContainer } from './demos/suggestion-usage-demo-cont
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-rtl-suggestion-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the <a scLink routerLink="/docs/components/button">Button</a>.
         </p>

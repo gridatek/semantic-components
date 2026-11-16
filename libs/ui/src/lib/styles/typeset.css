@@ -15,7 +15,7 @@
 }
 
 /*
- * Ours, not shadcn's: an element marked `data-typeset` (scHeading's) is set
+ * Ours, not shadcn's: an element marked `data-typeset` (scTypeset's) is set
  * as in a container without one — its own rules, by its tag (below). Outside
  * a container nothing sets the variables, so the page has the container's
  * defaults, at zero specificity: your own on :root, body or a section win, and

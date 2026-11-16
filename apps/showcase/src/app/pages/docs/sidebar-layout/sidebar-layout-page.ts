@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { SidebarLayoutUsageDemoContainer } from './demos/sidebar-layout-usage-demo-container';
@@ -9,13 +9,13 @@ import { SidebarLayoutUsageDemoContainer } from './demos/sidebar-layout-usage-de
   imports: [
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     SidebarLayoutUsageDemoContainer,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Sidebar Layout</h1>
+        <h1 scTypeset>Sidebar Layout</h1>
         <p class="text-muted-foreground">
           A page frame: a sidebar beside the routed page, which scrolls on its
           own.
@@ -24,12 +24,12 @@ import { SidebarLayoutUsageDemoContainer } from './demos/sidebar-layout-usage-de
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-sidebar-layout-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>How It Works</h2>
+        <h2 scTypeset appToc>How It Works</h2>
         <ul class="text-muted-foreground list-inside list-disc space-y-1">
           <li>
             The element marked <code>scSidebar</code> goes first, beside the

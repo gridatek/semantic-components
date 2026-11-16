@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicVirtualListDemoContainer } from './demos/basic-virtual-list-demo-container';
@@ -22,12 +22,12 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
     InfiniteVirtualListDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Virtual List</h1>
+        <h1 scTypeset>Virtual List</h1>
         <p class="text-muted-foreground">
           A long list rendered only where it is seen — rows measured as they
           render, in a scrolling box or the page, down, along or in lanes.
@@ -36,7 +36,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Basic</h2>
+        <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           10,000 rows, a few dozen rendered: those in view, and five more each
           way. Each row is measured as it renders; its place in the whole list
@@ -46,7 +46,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Variable heights</h2>
+        <h2 scTypeset appToc>Variable heights</h2>
         <p class="text-muted-foreground">
           Rows of any height — messages, long and short: estimated first, then
           measured; the list and its scrollbar follow, and the reader keeps
@@ -56,7 +56,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Horizontal</h2>
+        <h2 scTypeset appToc>Horizontal</h2>
         <p class="text-muted-foreground">
           Along a row: days of a year, as a strip. Right to left, it starts at
           the right.
@@ -65,7 +65,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Grid</h2>
+        <h2 scTypeset appToc>Grid</h2>
         <p class="text-muted-foreground">
           In lanes: photos in three columns, each placed in the lane that ends
           first.
@@ -74,7 +74,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Page scroll</h2>
+        <h2 scTypeset appToc>Page scroll</h2>
         <p class="text-muted-foreground">
           Without a size of its own, it takes its full height, and the page — or
           the box around it — scrolls.
@@ -83,7 +83,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Scroll to</h2>
+        <h2 scTypeset appToc>Scroll to</h2>
         <p class="text-muted-foreground">
           scrollToIndex(index, with an alignment): row 5,000 at the start, the
           centre, the end — or, auto, only as far as needed.
@@ -92,7 +92,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>With the infinite scroll</h2>
+        <h2 scTypeset appToc>With the infinite scroll</h2>
         <p class="text-muted-foreground">
           Long, and longer: the infinite scroll asks for 100 more near the end;
           the virtual list renders only what is seen.

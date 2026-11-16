@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScHeading,
   ScLink,
   ScTable,
   ScTableBody,
@@ -10,6 +9,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
@@ -24,7 +24,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
     Anatomy,
     RouterLink,
     RtlTaskDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     ScTable,
     ScTableBody,
@@ -40,7 +40,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Task</h1>
+        <h1 scTypeset>Task</h1>
         <p class="text-muted-foreground">
           A piece of work the agent is doing, such as finding the project files
           or updating a page. Each step — a search, a read, an edit — appears
@@ -49,7 +49,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-task-usage-demo-container />
         <p class="text-muted-foreground">
           A <a scLink routerLink="/docs/components/trace">Trace</a> with a
@@ -59,12 +59,12 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Task or Plan</h2>
+        <h2 scTypeset appToc>Task or Plan</h2>
         <p class="text-muted-foreground">
           Both are a list of steps under a collapsible line; they differ in when
           the steps are known. Use a
@@ -100,7 +100,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Status</h2>
+        <h2 scTypeset appToc>Status</h2>
         <p class="text-muted-foreground">
           The task&apos;s status comes from its steps. Its title is in the
           present tense while it runs, in the past tense once it is done:
@@ -110,7 +110,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
           <p class="text-muted-foreground">
             Steps with icons, a read linking to its file.
@@ -121,7 +121,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicFileUploadDemoContainer } from './demos/basic-file-upload-demo-container';
@@ -18,12 +18,12 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
     FormFileUploadDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>File Upload</h1>
+        <h1 scTypeset>File Upload</h1>
         <p class="text-muted-foreground">
           Files picked or dropped — only chosen, never uploaded — as a File[]
           for Signal Forms; those that break a rule kept out, with the reason.
@@ -32,7 +32,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Basic</h2>
+        <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           Files dropped on the zone, or picked — a click on it, or its button by
           keyboard. They are only chosen: the value is a File[], yours to
@@ -42,7 +42,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Single image</h2>
+        <h2 scTypeset appToc>Single image</h2>
         <p class="text-muted-foreground">
           One image, from a button: without multiple, a new one replaces it.
           Images get a thumbnail.
@@ -51,7 +51,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Rejections</h2>
+        <h2 scTypeset appToc>Rejections</h2>
         <p class="text-muted-foreground">
           Images only, 1 MB at most, three at most: those that break a rule are
           kept out, and said — in your words — from rejections().
@@ -60,7 +60,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Upload progress</h2>
+        <h2 scTypeset appToc>Upload progress</h2>
         <p class="text-muted-foreground">
           Uploading is yours, and so is its progress — here, kept per File and
           shown with the lib’s progress bar.
@@ -69,7 +69,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Form</h2>
+        <h2 scTypeset appToc>Form</h2>
         <p class="text-muted-foreground">
           A [formField]: at least one file, and 5 MB in all, checked by the
           form’s schema; the errors shown once it is touched.

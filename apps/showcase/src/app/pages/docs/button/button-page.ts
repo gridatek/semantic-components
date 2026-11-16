@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -9,6 +8,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -67,7 +67,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
     SubmitButtonDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -79,7 +79,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Button</h1>
+        <h1 scTypeset>Button</h1>
         <p class="text-muted-foreground">
           A native button for an action: submit, open, delete. Six variants and
           eight sizes, in the look of the app&apos;s preset, with room for icons
@@ -90,12 +90,12 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-button-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One part, on a native button. An icon may go at either side, marked
           with its side; a spinner in place of the first while it is busy.
@@ -104,7 +104,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Cursor</h2>
+        <h2 scTypeset appToc>Cursor</h2>
         <p class="text-muted-foreground">
           Buttons keep the default cursor, as native buttons and Tailwind do: a
           pointer is for links. To show one on buttons anyway, add to your
@@ -116,7 +116,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Groups</h2>
+        <h2 scTypeset appToc>Groups</h2>
         <p class="text-muted-foreground">
           Buttons are joined with a
           <a
@@ -131,7 +131,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-size-button-demo-container />
         <app-default-button-demo-container />
         <app-outline-button-demo-container />
@@ -157,7 +157,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScButton</code>
           is a directive on a native

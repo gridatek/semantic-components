@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicCompareDemoContainer } from './demos/basic-compare-demo-container';
@@ -18,12 +18,12 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
     ContentCompareDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Compare</h1>
+        <h1 scTypeset>Compare</h1>
         <p class="text-muted-foreground">
           Two things compared, one over the other, split by a divider you drag:
           photos before and after an edit, two themes, two versions — any
@@ -33,7 +33,7 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Basic</h2>
+        <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           Two photos, before and after an edit. Drag the divider, click anywhere
           to move it there, or focus it: the arrows move it (Shift: by 10), Home
@@ -43,13 +43,13 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Vertical</h2>
+        <h2 scTypeset appToc>Vertical</h2>
         <p class="text-muted-foreground">Top and bottom.</p>
         <app-vertical-compare-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Hover</h2>
+        <h2 scTypeset appToc>Hover</h2>
         <p class="text-muted-foreground">
           With
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">hover</code>, the
@@ -59,7 +59,7 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Handle only</h2>
+        <h2 scTypeset appToc>Handle only</h2>
         <p class="text-muted-foreground">
           With
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">handleOnly</code
@@ -73,7 +73,7 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Any content</h2>
+        <h2 scTypeset appToc>Any content</h2>
         <p class="text-muted-foreground">
           Before and after are any content, not only images: the same card in
           the light and the dark theme.

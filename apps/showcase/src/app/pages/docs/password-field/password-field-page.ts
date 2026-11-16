@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -44,12 +44,12 @@ import { VisiblePasswordFieldDemoContainer } from './demos/visible-password-fiel
     RtlPasswordFieldDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Password Field</h1>
+        <h1 scTypeset>Password Field</h1>
         <p class="text-muted-foreground">
           A password field: its label, the input and a button to show or hide
           the password — the caret stays in the input — on your Signal Form. A
@@ -60,12 +60,12 @@ import { VisiblePasswordFieldDemoContainer } from './demos/visible-password-fiel
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-password-field-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           The field holds its label, the group (the input and the toggle) and
           its descriptions. A Caps Lock warning, a strength meter, the rules and
@@ -75,7 +75,7 @@ import { VisiblePasswordFieldDemoContainer } from './demos/visible-password-fiel
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-visible-password-field-demo-container />
         <app-disabled-password-field-demo-container />
         <app-form-password-field-demo-container />
@@ -87,7 +87,7 @@ import { VisiblePasswordFieldDemoContainer } from './demos/visible-password-fiel
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes class, merged over its own (cn: a later class wins).
           The field is a scField underneath: label, descriptions and Signal

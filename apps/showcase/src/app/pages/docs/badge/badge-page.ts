@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -33,7 +33,7 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
     RtlBadgeDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -45,7 +45,7 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Badge</h1>
+        <h1 scTypeset>Badge</h1>
         <p class="text-muted-foreground">
           A short label — a status, a count, a tag — in the look of the
           app&apos;s preset.
@@ -54,12 +54,12 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-badge-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive, on a
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">span</code> or a
@@ -78,7 +78,7 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-variants-badge-demo-container />
         <app-icon-badge-demo-container />
         <app-spinner-badge-demo-container />
@@ -88,7 +88,7 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <h3 class="font-heading text-base font-medium">
           ScBadge —
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"

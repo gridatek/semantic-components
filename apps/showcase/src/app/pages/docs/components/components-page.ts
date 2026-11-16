@@ -9,9 +9,9 @@ import { RouterLink } from '@angular/router';
 import {
   ScBadge,
   ScFrame,
-  ScHeading,
   ScToggleGroup,
   ScToggleGroupItem,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
 import { ComponentCategory } from '../../../data/components';
@@ -26,12 +26,12 @@ import { ComponentsService } from '../../../services/components-service';
     ScFrame,
     ScToggleGroup,
     ScToggleGroupItem,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Components</h1>
+        <h1 scTypeset>Components</h1>
         <p class="text-muted-foreground">
           Beautifully designed components built with Angular ARIA and Tailwind
           CSS.

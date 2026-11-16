@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import {
   ScCodeBlock,
@@ -66,7 +66,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
     ComponentBadges,
     EntryInstall,
     TocHeading,
-    ScHeading,
+    ScTypeset,
     ScCodeBlock,
     ScCodeBlockActions,
     ScCodeBlockContent,
@@ -86,7 +86,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Code Block</h1>
+        <h1 scTypeset>Code Block</h1>
         <p class="text-muted-foreground">
           Code to read and copy: a header (title, actions), the code —
           highlighted, numbered, wrapped, its lines marked — and a footer. In
@@ -96,12 +96,12 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-code-block-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <app-entry-install
           entry="code-block"
           library="shiki"
@@ -138,7 +138,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element; the title, the buttons and
           their names are yours. The code is an input, highlighted in its
@@ -148,7 +148,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Highlighting</h2>
+        <h2 scTypeset appToc>Highlighting</h2>
         <p class="text-muted-foreground">
           Shiki, loaded with the first block; each language the first time it is
           used: typescript, angular-ts, angular-html, javascript, html, css,
@@ -159,7 +159,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-code-block-demo-container />
         <app-header-code-block-demo-container />
         <app-actions-code-block-demo-container />
@@ -180,7 +180,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

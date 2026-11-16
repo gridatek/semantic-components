@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScHeading,
   ScLink,
   ScTable,
   ScTableBody,
@@ -10,6 +9,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
@@ -27,7 +27,7 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
     RouterLink,
     RtlSubagentDemoContainer,
     RunningSubagentDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     ScTable,
     ScTableBody,
@@ -42,7 +42,7 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Subagent</h1>
+        <h1 scTypeset>Subagent</h1>
         <p class="text-muted-foreground">
           A line for work the agent hands to a subagent. The run is the title,
           like &quot;Ran the research agent&quot;; open it for the tool calls
@@ -51,7 +51,7 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-subagent-usage-demo-container />
         <p class="text-muted-foreground">
           A <a scLink routerLink="/docs/components/trace">Trace</a> line,
@@ -62,12 +62,12 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>States</h2>
+        <h2 scTypeset appToc>States</h2>
         <p class="text-muted-foreground">
           The subagent streams what it has done so far, then its final result,
           which replaces it: show &quot;Ran&quot; only once the result is final.
@@ -95,7 +95,7 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
           <p class="text-muted-foreground">
             While it runs, the line is running and its content shows the tool
@@ -114,7 +114,7 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

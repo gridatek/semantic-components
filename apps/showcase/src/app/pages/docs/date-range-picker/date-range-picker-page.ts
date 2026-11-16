@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicDateRangePickerDemoContainer } from './demos/basic-date-range-picker-demo-container';
@@ -20,12 +20,12 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
     FormDateRangePickerDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Date Range Picker</h1>
+        <h1 scTypeset>Date Range Picker</h1>
         <p class="text-muted-foreground">
           The date picker in range mode (mode="range"): a range picked in the
           calendar, typed end by end, or a preset; kept at once, or on Apply.
@@ -34,7 +34,7 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Basic</h2>
+        <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           mode="range" on the date picker, two months: written as one span ("Oct
           12 – 18, 2026"); it closes once both ends are picked.
@@ -43,7 +43,7 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Presets</h2>
+        <h2 scTypeset appToc>Presets</h2>
         <p class="text-muted-foreground">
           scDatePickerPreset buttons beside the calendar: a preset is picked as
           the calendar’s pick would be — and pressed while it is the value.
@@ -53,7 +53,7 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Typed</h2>
+        <h2 scTypeset appToc>Typed</h2>
         <p class="text-muted-foreground">
           Each end typed — part="start" and part="end" in one input group: the
           locale’s numeric order or ISO; an end before the start is marked. The
@@ -63,7 +63,7 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Apply</h2>
+        <h2 scTypeset appToc>Apply</h2>
         <p class="text-muted-foreground">
           confirm: picks and presets are a draft, kept by scDatePickerApply —
           Cancel, Escape or a click outside drop it. Two months and presets, as
@@ -73,7 +73,7 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Constraints</h2>
+        <h2 scTypeset appToc>Constraints</h2>
         <p class="text-muted-foreground">
           minDate and maxDate on the picker and its calendar: from today, up to
           90 days ahead.
@@ -82,7 +82,7 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>In a form</h2>
+        <h2 scTypeset appToc>In a form</h2>
         <p class="text-muted-foreground">
           A [formField]: a whole range required, by a validator in the schema;
           marked once the calendar has closed.

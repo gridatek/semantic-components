@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { LogosMarqueeDemoContainer } from './demos/logos-marquee-demo-container';
@@ -18,12 +18,12 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
     SpeedMarqueeDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Marquee</h1>
+        <h1 scTypeset>Marquee</h1>
         <p class="text-muted-foreground">
           Your content written once and repeated to fill, at a speed in pixels a
           second, in four directions; it waits under the pointer and with focus,
@@ -33,7 +33,7 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Logos</h2>
+        <h2 scTypeset appToc>Logos</h2>
         <p class="text-muted-foreground">
           Links, written once: the copies are out of reach. It waits under the
           pointer and with focus inside — Tab into it — and the button pauses
@@ -43,13 +43,13 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Testimonials</h2>
+        <h2 scTypeset appToc>Testimonials</h2>
         <p class="text-muted-foreground">Two rows, going opposite ways.</p>
         <app-testimonials-marquee-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Vertical</h2>
+        <h2 scTypeset appToc>Vertical</h2>
         <p class="text-muted-foreground">
           A column, going up: give it a height.
         </p>
@@ -57,7 +57,7 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Ticker</h2>
+        <h2 scTypeset appToc>Ticker</h2>
         <p class="text-muted-foreground">
           Headlines, with your separators — text is content like any other.
         </p>
@@ -65,7 +65,7 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Speed</h2>
+        <h2 scTypeset appToc>Speed</h2>
         <p class="text-muted-foreground">
           In pixels a second: short and long content move at the same pace.
         </p>

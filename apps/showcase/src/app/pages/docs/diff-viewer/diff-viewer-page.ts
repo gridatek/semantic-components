@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -20,12 +20,12 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
     TocHeading,
     ComponentBadges,
     EntryInstall,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Diff Viewer</h1>
+        <h1 scTypeset>Diff Viewer</h1>
         <p class="text-muted-foreground">
           The differences between two texts, line by line and word by word
           (jsdiff) — split or unified, highlighted like a code block, long
@@ -35,7 +35,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <app-entry-install
           entry="diff-viewer"
           library="diff"
@@ -48,7 +48,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Split</h2>
+        <h2 scTypeset appToc>Split</h2>
         <p class="text-muted-foreground">
           Side by side: the old text facing the new, rows aligned, long lines
           wrapped. Your header holds the title, the counts and a switch for the
@@ -58,7 +58,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Unified</h2>
+        <h2 scTypeset appToc>Unified</h2>
         <p class="text-muted-foreground">
           One column, both line numbers, + and − — the words changed in a
           changed line marked.
@@ -67,7 +67,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Folded</h2>
+        <h2 scTypeset appToc>Folded</h2>
         <p class="text-muted-foreground">
           context: unchanged lines kept around each change; the rest folded —
           your scDiffViewerFold template writes the button, a click shows them.
@@ -76,7 +76,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Ignore whitespace</h2>
+        <h2 scTypeset appToc>Ignore whitespace</h2>
         <p class="text-muted-foreground">
           ignoreWhitespace: lines that differ only in spaces and tabs count as
           unchanged (ignoreCase, the same for letter case).
@@ -85,7 +85,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Identical</h2>
+        <h2 scTypeset appToc>Identical</h2>
         <p class="text-muted-foreground">
           identical(): nothing changed — show your own words.
         </p>

@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -37,7 +37,7 @@ import { VariantsMarkerDemoContainer } from './demos/variants-marker-demo-contai
     RtlMarkerDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -49,7 +49,7 @@ import { VariantsMarkerDemoContainer } from './demos/variants-marker-demo-contai
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Marker</h1>
+        <h1 scTypeset>Marker</h1>
         <p class="text-muted-foreground">
           A note between messages: a status, a labeled divider, an action. In
           the look of the app&apos;s preset.
@@ -58,12 +58,12 @@ import { VariantsMarkerDemoContainer } from './demos/variants-marker-demo-contai
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-marker-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element — a div, a link or a button;
           the icon and the words are yours.
@@ -72,7 +72,7 @@ import { VariantsMarkerDemoContainer } from './demos/variants-marker-demo-contai
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A marker is text by default. Streaming or in progress
@@ -92,7 +92,7 @@ import { VariantsMarkerDemoContainer } from './demos/variants-marker-demo-contai
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-variants-marker-demo-container />
         <app-status-marker-demo-container />
         <app-shimmer-marker-demo-container />
@@ -104,7 +104,7 @@ import { VariantsMarkerDemoContainer } from './demos/variants-marker-demo-contai
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

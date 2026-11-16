@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { RtlSourcesDemoContainer } from './demos/rtl-sources-demo-container';
@@ -13,7 +13,7 @@ import { SourcesUsageDemoContainer } from './demos/sources-usage-demo-container'
     Anatomy,
     RouterLink,
     RtlSourcesDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     SourcesUsageDemoContainer,
     TocHeading,
@@ -21,7 +21,7 @@ import { SourcesUsageDemoContainer } from './demos/sources-usage-demo-container'
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Sources</h1>
+        <h1 scTypeset>Sources</h1>
         <p class="text-muted-foreground">
           The links the agent used for a reply: a line that says how many there
           are, like &quot;Used 3 sources&quot;, and opens into a link for each.
@@ -29,7 +29,7 @@ import { SourcesUsageDemoContainer } from './demos/sources-usage-demo-container'
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-sources-usage-demo-container />
         <p class="text-muted-foreground">
           A <a scLink routerLink="/docs/components/trace">Trace</a> with a
@@ -44,12 +44,12 @@ import { SourcesUsageDemoContainer } from './demos/sources-usage-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Each source is a plain link in the list. It opens in a new tab: say
@@ -64,12 +64,12 @@ import { SourcesUsageDemoContainer } from './demos/sources-usage-demo-container'
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-rtl-sources-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

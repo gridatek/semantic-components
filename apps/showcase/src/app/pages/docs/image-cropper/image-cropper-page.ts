@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AvatarImageCropperDemoContainer } from './demos/avatar-image-cropper-demo-container';
@@ -14,12 +14,12 @@ import { CoverImageCropperDemoContainer } from './demos/cover-image-cropper-demo
     CoverImageCropperDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Image Cropper</h1>
+        <h1 scTypeset>Image Cropper</h1>
         <p class="text-muted-foreground">
           Crop an image, put together from parts — both ways: a box you resize
           over the image, or a frame the image moves under — with the keyboard,
@@ -29,7 +29,7 @@ import { CoverImageCropperDemoContainer } from './demos/cover-image-cropper-demo
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Crop box</h2>
+        <h2 scTypeset appToc>Crop box</h2>
         <p class="text-muted-foreground">
           Handles in the selection make it a box resized over the image. The
           slider and the zoom buttons share one
@@ -40,7 +40,7 @@ import { CoverImageCropperDemoContainer } from './demos/cover-image-cropper-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Avatar</h2>
+        <h2 scTypeset appToc>Avatar</h2>
         <p class="text-muted-foreground">
           A circle with handles: resize it, zoom with the wheel, a pinch or the
           slider, and drag around it to move the image.
@@ -51,7 +51,7 @@ import { CoverImageCropperDemoContainer } from './demos/cover-image-cropper-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Cover</h2>
+        <h2 scTypeset appToc>Cover</h2>
         <p class="text-muted-foreground">
           Without handles, the selection is a frame that stays put and the image
           moves under it: drag, wheel or pinch — or, focused, the arrows and + /

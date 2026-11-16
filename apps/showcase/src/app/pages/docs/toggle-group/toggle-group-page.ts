@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -39,7 +39,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
     RtlToggleGroupDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -51,7 +51,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Toggle Group</h1>
+        <h1 scTypeset>Toggle Group</h1>
         <p class="text-muted-foreground">
           Toggles sharing one value: one pressed at a time, or several. In the
           look of the app&apos;s preset.
@@ -60,12 +60,12 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-toggle-group-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A group round your buttons, each with its value; the group holds the
           pressed ones — a [formField] or [(value)], an array. Inside a toolbar,
@@ -76,7 +76,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             One Tab stop: the arrow keys move between the items (Left and Right
@@ -100,7 +100,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-outline-toggle-group-demo-container />
         <app-sizes-toggle-group-demo-container />
         <app-spacing-toggle-group-demo-container />
@@ -113,7 +113,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

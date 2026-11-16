@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import {
   type ApiInput,
@@ -25,12 +25,12 @@ import { RtlFunnelChartDemoContainer } from './demos/rtl-funnel-chart-demo-conta
     TocHeading,
     ComponentBadges,
     EntryInstall,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Funnel Chart</h1>
+        <h1 scTypeset>Funnel Chart</h1>
         <p class="text-muted-foreground">
           A series as stages, top to bottom, each as wide as its value and
           narrowing to the next, in its category's color. Names and colors come
@@ -41,7 +41,7 @@ import { RtlFunnelChartDemoContainer } from './demos/rtl-funnel-chart-demo-conta
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <app-entry-install
           entry="charts"
           library="d3-scale d3-shape"
@@ -51,12 +51,12 @@ import { RtlFunnelChartDemoContainer } from './demos/rtl-funnel-chart-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-funnel-chart-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A chart (its rows and config), its plot with the series, and the
           tooltip and legend you write from their state.
@@ -65,7 +65,7 @@ import { RtlFunnelChartDemoContainer } from './demos/rtl-funnel-chart-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: the arrow
@@ -89,13 +89,13 @@ import { RtlFunnelChartDemoContainer } from './demos/rtl-funnel-chart-demo-conta
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-label-funnel-chart-demo-container />
         <app-rtl-funnel-chart-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           The series&apos; inputs. The chart, its plot, axes, tooltip and legend
           are on the

@@ -1,1 +1,1 @@
-export { ScHeading } from './heading';
+export { ScTypeset } from './typeset';

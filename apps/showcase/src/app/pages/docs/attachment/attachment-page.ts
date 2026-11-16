@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -33,7 +33,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
     RtlAttachmentDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -45,7 +45,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Attachment</h1>
+        <h1 scTypeset>Attachment</h1>
         <p class="text-muted-foreground">
           A file and its upload state, on its own or in a scrolling row. In the
           look of the app&apos;s preset.
@@ -54,12 +54,12 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-attachment-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element; the icons, images, text and
           names are yours.
@@ -68,7 +68,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Name each action after what it does and to which file — &quot;Remove
@@ -91,7 +91,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-image-attachment-demo-container />
         <app-states-attachment-demo-container />
         <app-sizes-attachment-demo-container />
@@ -101,7 +101,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

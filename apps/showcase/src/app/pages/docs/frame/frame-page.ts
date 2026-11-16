@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -25,7 +25,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
     TableFrameDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -37,7 +37,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Frame</h1>
+        <h1 scTypeset>Frame</h1>
         <p class="text-muted-foreground">
           A frame round a box, in the app&apos;s preset: the style&apos;s card
           radius, ring and shadow — for an aspect ratio, a table, any box that
@@ -47,12 +47,12 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-frame-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive, beside another part or on a plain box. Only the look:
           clipping is the box&apos;s (the aspect ratio clips, the table&apos;s
@@ -65,13 +65,13 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-aspect-ratio-frame-demo-container />
         <app-table-frame-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <h3 class="font-heading text-base font-medium">
           ScFrame —
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[scFrame]</code>

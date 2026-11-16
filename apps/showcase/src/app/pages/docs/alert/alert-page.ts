@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -35,7 +35,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
     RtlAlertDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -47,7 +47,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Alert</h1>
+        <h1 scTypeset>Alert</h1>
         <p class="text-muted-foreground">
           A callout for something to notice — a success, a warning, an error —
           with an icon, a title, a description and an action. In the look of the
@@ -57,12 +57,12 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-alert-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element; the icon is yours, the
           first child: it sits beside the title and the description.
@@ -71,7 +71,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Announcing</h2>
+        <h2 scTypeset appToc>Announcing</h2>
         <p class="text-muted-foreground">
           An alert has no role of its own: one that is on the page when it loads
           is read in its place, like the rest of the page. Announce one only
@@ -128,7 +128,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-alert-demo-container />
         <app-destructive-alert-demo-container />
         <app-status-alert-demo-container />
@@ -139,7 +139,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

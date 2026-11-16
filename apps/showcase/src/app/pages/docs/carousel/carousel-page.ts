@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -39,7 +39,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
     RtlCarouselDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -51,7 +51,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Carousel</h1>
+        <h1 scTypeset>Carousel</h1>
         <p class="text-muted-foreground">
           A slideshow with motion and swipe, built on Embla.
         </p>
@@ -59,7 +59,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <app-entry-install
           entry="carousel"
           library="embla-carousel"
@@ -69,12 +69,12 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-carousel-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A region holding a viewport, its track of slides, and the previous and
           next buttons. You write the slides, the icons and every name.
@@ -83,7 +83,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The root is a region: name it (aria-label) and give it your word for
@@ -110,7 +110,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-sizes-carousel-demo-container />
         <app-spacing-carousel-demo-container />
         <app-orientation-carousel-demo-container />
@@ -122,7 +122,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

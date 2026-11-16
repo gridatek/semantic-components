@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ByDayNotificationCenterDemoContainer } from './demos/by-day-notification-center-demo-container';
@@ -14,12 +14,12 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
     EmptyNotificationCenterDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Notification Center</h1>
+        <h1 scTypeset>Notification Center</h1>
         <p class="text-muted-foreground">
           Notifications you put together from parts: the center holds them and
           their filter, the parts read and change it, and you write the rest —
@@ -29,7 +29,7 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Inbox</h2>
+        <h2 scTypeset appToc>Inbox</h2>
         <p class="text-muted-foreground">
           A bell with the unread count (<code
             class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -43,7 +43,7 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>By day</h2>
+        <h2 scTypeset appToc>By day</h2>
         <p class="text-muted-foreground">
           Sections by day, as most apps show them:
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">days()</code>
@@ -58,7 +58,7 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Empty</h2>
+        <h2 scTypeset appToc>Empty</h2>
         <p class="text-muted-foreground">
           When nothing matches the filter,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"

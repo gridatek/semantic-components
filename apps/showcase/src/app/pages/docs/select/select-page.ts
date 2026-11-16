@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -38,7 +38,7 @@ interface ScApiRow {
     RtlSelectDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -50,7 +50,7 @@ interface ScApiRow {
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Select</h1>
+        <h1 scTypeset>Select</h1>
         <p class="text-muted-foreground">
           A choice among a short list of options: a trigger showing the value,
           the options in a popup below it. In the look of the app&apos;s preset,
@@ -61,12 +61,12 @@ interface ScApiRow {
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-select-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           The select round its label and trigger; the popup in a template,
           rendered while it is open. Every part is a directive on your element;
@@ -78,7 +78,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Keyboard</h2>
+        <h2 scTypeset appToc>Keyboard</h2>
         <p class="text-muted-foreground">
           Focus stays on the trigger. Enter, Space or the arrow keys open the
           list; the arrows, Home and End move through it; Enter or Space
@@ -88,7 +88,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-groups-select-demo-container />
         <app-scrollable-select-demo-container />
         <app-disabled-select-demo-container />
@@ -97,7 +97,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         @for (part of parts; track part.name) {
           <h3 class="font-heading text-base font-medium">
             {{ part.name }} —

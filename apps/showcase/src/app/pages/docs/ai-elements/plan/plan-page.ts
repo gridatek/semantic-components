@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { DetailsPlanDemoContainer } from './demos/details-plan-demo-container';
@@ -16,14 +16,14 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
     PlanUsageDemoContainer,
     RouterLink,
     RtlPlanDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     TocHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Plan</h1>
+        <h1 scTypeset>Plan</h1>
         <p class="text-muted-foreground">
           The steps the agent decides on before it starts, and how far it has
           got. Each step is done, running or pending, and the title counts how
@@ -32,7 +32,7 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-plan-usage-demo-container />
         <p class="text-muted-foreground">
           A <a scLink routerLink="/docs/components/trace">Trace</a> whose
@@ -43,12 +43,12 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Updating in place</h2>
+        <h2 scTypeset appToc>Updating in place</h2>
         <p class="text-muted-foreground">
           The plan streams as one piece of data, sent again whenever a step
           moves on: the page replaces it rather than adding a new one, so the
@@ -57,7 +57,7 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
           <p class="text-muted-foreground">
             A description above the steps, inside the plan.
@@ -68,7 +68,7 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

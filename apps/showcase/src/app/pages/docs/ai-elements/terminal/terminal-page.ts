@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScHeading,
   ScLink,
   ScTable,
   ScTableBody,
@@ -10,6 +9,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
@@ -25,7 +25,7 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
     ExitCodeTerminalDemoContainer,
     RouterLink,
     RtlTerminalDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     ScTable,
     ScTableBody,
@@ -40,7 +40,7 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Terminal</h1>
+        <h1 scTypeset>Terminal</h1>
         <p class="text-muted-foreground">
           A shell command the agent runs — a lint, a test run, a build. The line
           shows the command, and its output streams in underneath while it runs.
@@ -48,7 +48,7 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-terminal-usage-demo-container />
         <p class="text-muted-foreground">
           A <a scLink routerLink="/docs/components/trace">Trace</a> with a
@@ -58,12 +58,12 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Exit code</h2>
+        <h2 scTypeset appToc>Exit code</h2>
         <p class="text-muted-foreground">
           A command that exits with any code other than 0 failed: an error
           status. It is a tool call, so its states map as in
@@ -94,7 +94,7 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Open while running</h2>
+        <h2 scTypeset appToc>Open while running</h2>
         <p class="text-muted-foreground">
           The line opens once the first output arrives, so the output shows
           while the command runs; after that it stays as it is, or as the person
@@ -104,13 +104,13 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-exit-code-terminal-demo-container />
         <app-rtl-terminal-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

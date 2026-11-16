@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -39,7 +39,7 @@ import { SubmenuMenuDemoContainer } from './demos/submenu-menu-demo-container';
     RtlMenuDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -51,7 +51,7 @@ import { SubmenuMenuDemoContainer } from './demos/submenu-menu-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Menu</h1>
+        <h1 scTypeset>Menu</h1>
         <p class="text-muted-foreground">
           A menu of actions from a button: groups, checkbox and radio items,
           submenus, shortcuts. In the look of the app&apos;s preset.
@@ -60,12 +60,12 @@ import { SubmenuMenuDemoContainer } from './demos/submenu-menu-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-menu-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element; the text, the icons and the
           trigger&apos;s name are yours. The menu is in a template, rendered
@@ -75,7 +75,7 @@ import { SubmenuMenuDemoContainer } from './demos/submenu-menu-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Keyboard</h2>
+        <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             On the trigger, Enter, Space or ArrowDown opens the menu on its
@@ -102,7 +102,7 @@ import { SubmenuMenuDemoContainer } from './demos/submenu-menu-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-menu-demo-container />
         <app-submenu-menu-demo-container />
         <app-shortcuts-menu-demo-container />
@@ -115,7 +115,7 @@ import { SubmenuMenuDemoContainer } from './demos/submenu-menu-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

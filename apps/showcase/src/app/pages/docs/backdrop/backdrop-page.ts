@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScHeading,
   ScLink,
   ScTable,
   ScTableBody,
@@ -10,6 +9,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -26,7 +26,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
     RouterLink,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScLink,
     ScTable,
     ScTableBody,
@@ -39,7 +39,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Backdrop</h1>
+        <h1 scTypeset>Backdrop</h1>
         <p class="text-muted-foreground">
           The dimmed, blurred layer behind an overlay, in the look of the
           app&apos;s preset. The
@@ -54,12 +54,12 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-backdrop-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive, on an empty
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">div</code>, shown
@@ -71,7 +71,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Notes</h2>
+        <h2 scTypeset appToc>Notes</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             It fades in when shown and out when it goes (<code
@@ -114,12 +114,12 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-custom-backdrop-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <h3 class="font-heading text-base font-medium">
           ScBackdrop —
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"

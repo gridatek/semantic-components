@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading, ScSeparator } from '@semantic-components/ui';
+import { ScSeparator, ScTypeset } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -25,20 +25,20 @@ import { TocHeading } from '../../components/toc/toc-heading';
     SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
-    ScHeading,
+    ScTypeset,
     PackageManagerInstall,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Prerequisites</h1>
+        <h1 scTypeset>Prerequisites</h1>
         <p class="text-muted-foreground">
           Common dependencies required by all Semantic Components packages.
         </p>
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>1. Install Angular Aria and CDK</h2>
+        <h2 scTypeset appToc>1. Install Angular Aria and CDK</h2>
         <p class="text-muted-foreground">
           Semantic Components depends on Angular Aria and Angular CDK.
         </p>
@@ -48,7 +48,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>2. Set up Tailwind CSS</h2>
+        <h2 scTypeset appToc>2. Set up Tailwind CSS</h2>
         <p class="text-muted-foreground">
           Tailwind CSS v4 is required. Follow these steps if not already
           installed:
@@ -110,7 +110,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>3. Install utilities</h2>
+        <h2 scTypeset appToc>3. Install utilities</h2>
         <p class="text-muted-foreground">
           Install the required utility libraries for class management and
           animations.
@@ -123,7 +123,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>4. Install the font</h2>
+        <h2 scTypeset appToc>4. Install the font</h2>
         <p class="text-muted-foreground">
           The theme's font is Geist, as in shadcn/ui:
         </p>
@@ -141,7 +141,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>5. Install icons</h2>
+        <h2 scTypeset appToc>5. Install icons</h2>
         <p class="text-muted-foreground">
           The examples use
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -159,7 +159,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>6. Polyfill Temporal</h2>
+        <h2 scTypeset appToc>6. Polyfill Temporal</h2>
         <p class="text-muted-foreground">
           The date components use the browser's
           <a

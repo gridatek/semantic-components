@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScFrame, ScHeading, ScSeparator } from '@semantic-components/ui';
+import { ScFrame, ScSeparator, ScTypeset } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -34,13 +34,13 @@ interface Step {
     SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
-    ScHeading,
+    ScTypeset,
     PackageManagerInstall,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Internationalization</h1>
+        <h1 scTypeset>Internationalization</h1>
         <p class="text-muted-foreground">
           The components have no text of their own: your templates hold it, so
           they translate with the rest of your app, whichever way you translate
@@ -65,7 +65,7 @@ interface Step {
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>1. Install Angular's localize</h2>
+        <h2 scTypeset appToc>1. Install Angular's localize</h2>
         <p class="text-muted-foreground">
           Then add
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -89,7 +89,7 @@ interface Step {
       @for (step of steps; track step.file; let i = $index) {
         <div scSeparator></div>
         <section class="space-y-4">
-          <h2 scHeading appToc>{{ i + 2 }}. {{ step.title }}</h2>
+          <h2 scTypeset appToc>{{ i + 2 }}. {{ step.title }}</h2>
           <p class="text-muted-foreground">{{ step.text }}</p>
           <div scCodeBlock>
             <div scCodeBlockHeader>
@@ -117,7 +117,7 @@ interface Step {
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>How the locale is chosen</h2>
+        <h2 scTypeset appToc>How the locale is chosen</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The one chosen before (kept in a cookie), if it is still offered.
@@ -161,7 +161,7 @@ interface Step {
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>ScI18n</h2>
+        <h2 scTypeset appToc>ScI18n</h2>
         <div scFrame class="overflow-x-auto">
           <table class="w-full text-sm">
             <thead class="bg-muted/50">
@@ -189,7 +189,7 @@ interface Step {
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Limits</h2>
+        <h2 scTypeset appToc>Limits</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Switching reloads the page: Angular translates a template once, when

@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -9,6 +8,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -42,7 +42,7 @@ interface ScApiRow {
     RtlControlGroupDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -54,7 +54,7 @@ interface ScApiRow {
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Control Group</h1>
+        <h1 scTypeset>Control Group</h1>
         <p class="text-muted-foreground">
           An input or a select joined with its buttons into one control: shared
           borders, the outer corners rounded, in the look of the app&apos;s
@@ -64,12 +64,12 @@ interface ScApiRow {
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-control-group-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A group on a
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">div</code>, its
@@ -82,7 +82,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>shadcn&apos;s Button Group</h2>
+        <h2 scTypeset appToc>shadcn&apos;s Button Group</h2>
         <p class="text-muted-foreground">
           This is shadcn&apos;s
           <a
@@ -108,7 +108,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-input-control-group-demo-container />
         <app-text-control-group-demo-container />
         <app-select-control-group-demo-container />
@@ -118,7 +118,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         @for (part of parts; track part.name) {
           <h3 class="font-heading text-base font-medium">
             {{ part.name }} —

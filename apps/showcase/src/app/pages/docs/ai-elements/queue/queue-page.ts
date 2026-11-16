@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScHeading,
   ScLink,
   ScTable,
   ScTableBody,
@@ -10,6 +9,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
@@ -26,7 +26,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
     QueueUsageDemoContainer,
     RouterLink,
     RtlQueueDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     ScTable,
     ScTableBody,
@@ -40,7 +40,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Queue</h1>
+        <h1 scTypeset>Queue</h1>
         <p class="text-muted-foreground">
           The agent&apos;s todo list, split into what is left and what is done.
           A todo moves from one section to the other when it is done.
@@ -48,7 +48,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-queue-usage-demo-container />
         <p class="text-muted-foreground">
           A <a scLink routerLink="/docs/components/trace">Trace</a> with a
@@ -58,12 +58,12 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Statuses</h2>
+        <h2 scTypeset appToc>Statuses</h2>
         <p class="text-muted-foreground">
           The agent sends the whole list each time it updates it: render the
           latest. Mark the todo in progress as running only while the chat
@@ -98,7 +98,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
           <p class="text-muted-foreground">
             A todo with a description opens to show it; one without stays a
@@ -110,7 +110,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

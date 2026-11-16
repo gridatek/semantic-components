@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ControlledAudioPlayerDemoContainer } from './demos/controlled-audio-player-demo-container';
@@ -14,12 +14,12 @@ import { PlayerAudioPlayerDemoContainer } from './demos/player-audio-player-demo
     ControlledAudioPlayerDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Audio Player</h1>
+        <h1 scTypeset>Audio Player</h1>
         <p class="text-muted-foreground">
           Your audio, a playlist of your own tracks, controls as parts, its
           state two ways — with a waveform, shuffle and repeat, keyboard
@@ -43,7 +43,7 @@ import { PlayerAudioPlayerDemoContainer } from './demos/player-audio-player-demo
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Player</h2>
+        <h2 scTypeset appToc>Player</h2>
         <p class="text-muted-foreground">
           A playlist of three tracks: the waveform seeks (click, drag, or the
           arrows), the next track plays when one ends, shuffle and repeat.
@@ -54,7 +54,7 @@ import { PlayerAudioPlayerDemoContainer } from './demos/player-audio-player-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Minimal</h2>
+        <h2 scTypeset appToc>Minimal</h2>
         <p class="text-muted-foreground">
           One file, no playlist — the audio's own src — on one line.
         </p>
@@ -62,7 +62,7 @@ import { PlayerAudioPlayerDemoContainer } from './demos/player-audio-player-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Controlled</h2>
+        <h2 scTypeset appToc>Controlled</h2>
         <p class="text-muted-foreground">
           Its state is two-way: the track, played, paused, timed and repeated
           from outside.

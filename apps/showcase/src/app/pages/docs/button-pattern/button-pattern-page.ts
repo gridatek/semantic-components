@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -29,13 +29,13 @@ import { ConditionalButtonPatternDemoContainer } from './demos/conditional-butto
     ConditionalButtonPatternDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ButtonPatternUsageDemoContainer,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Button Pattern</h1>
+        <h1 scTypeset>Button Pattern</h1>
         <p class="text-muted-foreground">
           A directive that adds button behavior to non-button elements.
         </p>
@@ -43,12 +43,12 @@ import { ConditionalButtonPatternDemoContainer } from './demos/conditional-butto
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-button-pattern-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive on an element that must act as a button but cannot be
           one: it gets the role, a place in the Tab order and the keys. A real
@@ -58,7 +58,7 @@ import { ConditionalButtonPatternDemoContainer } from './demos/conditional-butto
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>What It Does</h2>
+        <h2 scTypeset appToc>What It Does</h2>
         <ul class="text-muted-foreground list-inside list-disc space-y-1">
           <li>
             Adds
@@ -81,12 +81,12 @@ import { ConditionalButtonPatternDemoContainer } from './demos/conditional-butto
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-conditional-button-pattern-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">A behaviour only, on any element.</p>
         <div
           scTableContainer

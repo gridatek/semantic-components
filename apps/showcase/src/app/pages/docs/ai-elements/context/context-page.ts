@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { ContextUsageDemoContainer } from './demos/context-usage-demo-container';
@@ -14,21 +14,21 @@ import { RtlContextDemoContainer } from './demos/rtl-context-demo-container';
     ContextUsageDemoContainer,
     RouterLink,
     RtlContextDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     TocHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Context</h1>
+        <h1 scTypeset>Context</h1>
         <p class="text-muted-foreground">
           How much of the model&apos;s context window the conversation has used.
         </p>
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-context-usage-demo-container />
         <p class="text-muted-foreground">
           A
@@ -40,12 +40,12 @@ import { RtlContextDemoContainer } from './demos/rtl-context-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <p class="text-muted-foreground">
           A preview card is for the eyes only: it opens on hover and focus, but
           it is not announced. The button&apos;s own text carries what matters
@@ -57,7 +57,7 @@ import { RtlContextDemoContainer } from './demos/rtl-context-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Limit</h2>
+        <h2 scTypeset appToc>Limit</h2>
         <p class="text-muted-foreground">
           The usage comes with the agent&apos;s message, once its stream ends;
           the limit is the model&apos;s context window, which the stream does
@@ -66,12 +66,12 @@ import { RtlContextDemoContainer } from './demos/rtl-context-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-rtl-context-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/preview-card">Preview Card</a>

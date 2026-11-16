@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -49,7 +49,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
     RtlInputDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -61,7 +61,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Input</h1>
+        <h1 scTypeset>Input</h1>
         <p class="text-muted-foreground">
           A native text field, in the look of the app&apos;s preset. In a Field
           it takes the field&apos;s label and description; with Signal Forms it
@@ -72,12 +72,12 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-input-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One part, on a native
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">input</code>. It
@@ -89,7 +89,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Forms</h2>
+        <h2 scTypeset appToc>Forms</h2>
         <p class="text-muted-foreground">
           With
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[formField]</code
@@ -106,7 +106,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-input-demo-container />
         <app-field-input-demo-container />
         <app-field-group-input-demo-container />
@@ -124,7 +124,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScInput</code>
           is a directive on a native

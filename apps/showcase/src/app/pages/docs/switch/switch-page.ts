@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -39,7 +39,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
     RtlSwitchDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -51,7 +51,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Switch</h1>
+        <h1 scTypeset>Switch</h1>
         <p class="text-muted-foreground">
           A native checkbox shown as a switch, drawn by itself, in the look of
           the app&apos;s preset.
@@ -60,12 +60,12 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-switch-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A native checkbox with role="switch" that draws its track and thumb:
           alone, or in a horizontal field beside its text — the field is the
@@ -77,7 +77,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A native checkbox with role="switch": announced as a switch, on or
@@ -96,7 +96,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-description-switch-demo-container />
         <app-choice-card-switch-demo-container />
         <app-disabled-switch-demo-container />
@@ -109,7 +109,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

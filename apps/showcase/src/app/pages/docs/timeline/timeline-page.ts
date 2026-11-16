@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ActivityTimelineDemoContainer } from './demos/activity-timeline-demo-container';
@@ -18,12 +18,12 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
     PendingTimelineDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Timeline</h1>
+        <h1 scTypeset>Timeline</h1>
         <p class="text-muted-foreground">
           An ordered list of events, the line drawn between their markers;
           progress by status; times written from Temporal values; down one side,
@@ -33,7 +33,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Activity</h2>
+        <h2 scTypeset appToc>Activity</h2>
         <p class="text-muted-foreground">
           A feed: an icon in each marker, and when — written in the app's
           language from a Temporal value, its datetime set.
@@ -42,7 +42,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Tracking</h2>
+        <h2 scTypeset appToc>Tracking</h2>
         <p class="text-muted-foreground">
           Progress: done (filled, solid line), current (a ring —
           aria-current="step"), to come (outlined, dashed). The status is said
@@ -52,7 +52,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Alternate</h2>
+        <h2 scTypeset appToc>Alternate</h2>
         <p class="text-muted-foreground">
           A history down a centred line, the events in turn on each side, their
           dates facing them.
@@ -61,7 +61,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Horizontal</h2>
+        <h2 scTypeset appToc>Horizontal</h2>
         <p class="text-muted-foreground">
           Across, for a roadmap: the date above each marker, the content below;
           it scrolls sideways when narrow.
@@ -70,7 +70,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Pending</h2>
+        <h2 scTypeset appToc>Pending</h2>
         <p class="text-muted-foreground">
           The last step still under way: a spinner in its marker, and a failure
           in the destructive colour.

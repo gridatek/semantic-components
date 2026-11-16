@@ -1,16 +1,16 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { NativeDialogDemoContainer } from './demos/native-dialog-demo-container';
 
 @Component({
   selector: 'app-native-dialog-page',
-  imports: [NativeDialogDemoContainer, TocHeading, ComponentBadges, ScHeading],
+  imports: [NativeDialogDemoContainer, TocHeading, ComponentBadges, ScTypeset],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Native Dialog</h1>
+        <h1 scTypeset>Native Dialog</h1>
         <p class="text-muted-foreground">
           A modal dialog built on the native HTML dialog element with built-in
           backdrop, focus trapping, and keyboard handling.
@@ -19,7 +19,7 @@ import { NativeDialogDemoContainer } from './demos/native-dialog-demo-container'
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-native-dialog-demo-container />
       </section>
     </div>

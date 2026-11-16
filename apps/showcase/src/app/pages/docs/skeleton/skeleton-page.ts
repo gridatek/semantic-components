@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -33,7 +33,7 @@ import { TextSkeletonDemoContainer } from './demos/text-skeleton-demo-container'
     RtlSkeletonDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -45,7 +45,7 @@ import { TextSkeletonDemoContainer } from './demos/text-skeleton-demo-container'
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Skeleton</h1>
+        <h1 scTypeset>Skeleton</h1>
         <p class="text-muted-foreground">
           A placeholder while content loads. In the look of the app&apos;s
           preset.
@@ -54,12 +54,12 @@ import { TextSkeletonDemoContainer } from './demos/text-skeleton-demo-container'
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-skeleton-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A directive on your div; its size and shape are yours (h-4 w-48,
           rounded-full…), its look the preset&apos;s.
@@ -68,7 +68,7 @@ import { TextSkeletonDemoContainer } from './demos/text-skeleton-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A skeleton is empty and silent. Say the region is loading with
@@ -83,7 +83,7 @@ import { TextSkeletonDemoContainer } from './demos/text-skeleton-demo-container'
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-avatar-skeleton-demo-container />
         <app-card-skeleton-demo-container />
         <app-text-skeleton-demo-container />
@@ -93,7 +93,7 @@ import { TextSkeletonDemoContainer } from './demos/text-skeleton-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

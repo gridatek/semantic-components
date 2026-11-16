@@ -7383,10 +7383,52 @@ export const demosRoutes: Route[] = [
     path: 'demos/typeset',
     children: [
       {
+        path: 'typeset-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/typeset/demos/typeset-usage-demo').then(
+            (m) => m.TypesetUsageDemo,
+          ),
+      },
+      {
+        path: 'tuning-typeset-demo',
+        loadComponent: () =>
+          import('../pages/docs/typeset/demos/tuning-typeset-demo').then(
+            (m) => m.TuningTypesetDemo,
+          ),
+      },
+      {
+        path: 'components-typeset-demo',
+        loadComponent: () =>
+          import('../pages/docs/typeset/demos/components-typeset-demo').then(
+            (m) => m.ComponentsTypesetDemo,
+          ),
+      },
+      {
+        path: 'table-typeset-demo',
+        loadComponent: () =>
+          import('../pages/docs/typeset/demos/table-typeset-demo').then(
+            (m) => m.TableTypesetDemo,
+          ),
+      },
+      {
+        path: 'rtl-typeset-demo',
+        loadComponent: () =>
+          import('../pages/docs/typeset/demos/rtl-typeset-demo').then(
+            (m) => m.RtlTypesetDemo,
+          ),
+      },
+      {
         path: 'headings-typeset-demo',
         loadComponent: () =>
           import('../pages/docs/typeset/demos/headings-typeset-demo').then(
             (m) => m.HeadingsTypesetDemo,
+          ),
+      },
+      {
+        path: 'text-typeset-demo',
+        loadComponent: () =>
+          import('../pages/docs/typeset/demos/text-typeset-demo').then(
+            (m) => m.TextTypesetDemo,
           ),
       },
     ],

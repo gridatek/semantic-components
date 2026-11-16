@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSortableListDemoContainer } from './demos/basic-sortable-list-demo-container';
@@ -20,12 +20,12 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
     DisabledSortableListDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Sortable List</h1>
+        <h1 scTypeset>Sortable List</h1>
         <p class="text-muted-foreground">
           Your array, reordered — dragged by mouse, touch or pen, or lifted and
           moved by the keyboard, each step announced in your words; down, along,
@@ -35,7 +35,7 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Basic</h2>
+        <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           Your array, reordered: drag an item with the mouse, a finger (hold,
           then move) or a pen — or lift it with Space, move it with ↑ ↓, drop it
@@ -46,7 +46,7 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Handle</h2>
+        <h2 scTypeset appToc>Handle</h2>
         <p class="text-muted-foreground">
           With a handle, only the grip drags — the rest of the item is free for
           a checkbox and its label. The keyboard still lifts the whole item.
@@ -55,7 +55,7 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Horizontal</h2>
+        <h2 scTypeset appToc>Horizontal</h2>
         <p class="text-muted-foreground">
           Along a row — tags, tabs, steps: ← → move a lifted item, in the
           reading direction (reversed right to left).
@@ -64,7 +64,7 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Grid</h2>
+        <h2 scTypeset appToc>Grid</h2>
         <p class="text-muted-foreground">
           As a grid — photos: the place follows the reading order; ← → move a
           lifted item by one, ↑ ↓ by a row.
@@ -73,7 +73,7 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Move buttons</h2>
+        <h2 scTypeset appToc>Move buttons</h2>
         <p class="text-muted-foreground">
           move(item, index) — for Move up and Move down buttons, the simplest
           way for those who neither drag nor lift.
@@ -82,7 +82,7 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Disabled</h2>
+        <h2 scTypeset appToc>Disabled</h2>
         <p class="text-muted-foreground">
           disabled: shown in order, but not moved — the items are not Tab stops
           then.

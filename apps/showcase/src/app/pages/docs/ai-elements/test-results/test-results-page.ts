@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { RtlTestResultsDemoContainer } from './demos/rtl-test-results-demo-container';
@@ -14,7 +14,7 @@ import { TestResultsUsageDemoContainer } from './demos/test-results-usage-demo-c
     Anatomy,
     RouterLink,
     RtlTestResultsDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     SuitesTestResultsDemoContainer,
     TestResultsUsageDemoContainer,
@@ -23,7 +23,7 @@ import { TestResultsUsageDemoContainer } from './demos/test-results-usage-demo-c
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Test Results</h1>
+        <h1 scTypeset>Test Results</h1>
         <p class="text-muted-foreground">
           A test run by the agent. The summary line counts what passed and
           failed; open it to see each suite, its tests, and the error for each
@@ -32,7 +32,7 @@ import { TestResultsUsageDemoContainer } from './demos/test-results-usage-demo-c
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-test-results-usage-demo-container />
         <p class="text-muted-foreground">
           A <a scLink routerLink="/docs/components/trace">Trace</a> with a
@@ -43,12 +43,12 @@ import { TestResultsUsageDemoContainer } from './demos/test-results-usage-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
           <p class="text-muted-foreground">
             Tests grouped by file: each suite a collapsible line with its tests,
@@ -60,7 +60,7 @@ import { TestResultsUsageDemoContainer } from './demos/test-results-usage-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

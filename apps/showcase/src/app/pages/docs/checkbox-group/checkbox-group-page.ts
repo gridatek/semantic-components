@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -31,7 +31,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
     RtlCheckboxGroupDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -43,7 +43,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Checkbox Group</h1>
+        <h1 scTypeset>Checkbox Group</h1>
         <p class="text-muted-foreground">
           Checkboxes sharing one value — the ticked ones — with an optional
           parent checkbox that ticks them all.
@@ -52,12 +52,12 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-checkbox-group-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A group round your checkboxes, each with its value; the group holds
           the ticked ones — a [formField] or [(value)] on the group. A parent
@@ -67,7 +67,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Native checkboxes: each a Tab stop, Space ticks it; a parent is
@@ -82,7 +82,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-parent-checkbox-group-demo-container />
         <app-nested-parent-checkbox-group-demo-container />
         <app-form-checkbox-group-demo-container />
@@ -91,7 +91,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

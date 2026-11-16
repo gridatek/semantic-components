@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -44,7 +44,7 @@ interface ScApiRow {
     RtlPaginationDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -56,7 +56,7 @@ interface ScApiRow {
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Pagination</h1>
+        <h1 scTypeset>Pagination</h1>
         <p class="text-muted-foreground">
           Moves through pages of results: the pages, previous and next, in the
           look of the app&apos;s preset. It counts the pages from the number of
@@ -66,12 +66,12 @@ interface ScApiRow {
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-pagination-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A navigation round a list; every part is a directive on your element,
           the icons and the text are yours. Name the navigation with
@@ -91,7 +91,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Notes</h2>
+        <h2 scTypeset appToc>Notes</h2>
         <p class="text-muted-foreground">
           Use buttons when the page changes in place, links when each page has
           its own URL: the href is yours (?page=2, a routerLink) and the link
@@ -111,7 +111,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-simple-pagination-demo-container />
         <app-icons-only-pagination-demo-container />
         <app-ellipsis-pagination-demo-container />
@@ -123,7 +123,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         @for (part of parts; track part.name) {
           <h3 class="font-heading text-base font-medium">
             {{ part.name }} —

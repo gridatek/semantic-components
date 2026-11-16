@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -20,12 +20,12 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
     PdfViewerReadingDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Pdf Viewer</h1>
+        <h1 scTypeset>Pdf Viewer</h1>
         <p class="text-muted-foreground">
           A document viewer for PDF files — navigation, zoom, find, annotations,
           forms, presentation mode and page organisation — assembled from parts.
@@ -43,7 +43,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <app-entry-install
           entry="pdf-viewer"
           library="pdfjs-dist"
@@ -53,7 +53,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <p class="text-muted-foreground">
           The complete viewer: sidebar (pages, outline, attachments, layers,
           comments), find, annotation tools, signatures, view options and the
@@ -63,7 +63,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Forms</h2>
+        <h2 scTypeset appToc>Forms</h2>
         <p class="text-muted-foreground">
           Form fields are real inputs. The document's own scripts run in
           pdf.js's sandbox — here the total is computed by the PDF. Download and
@@ -73,7 +73,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Open parameters</h2>
+        <h2 scTypeset appToc>Open parameters</h2>
         <p class="text-muted-foreground">
           pdf.js's open parameters in the fragment of
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">src</code>
@@ -90,7 +90,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Presentation mode</h2>
+        <h2 scTypeset appToc>Presentation mode</h2>
         <p class="text-muted-foreground">
           One page at a time, fitted to the screen, in fullscreen. Click, the
           arrow keys, the wheel or a swipe turn the page; Escape leaves and
@@ -100,7 +100,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Reading</h2>
+        <h2 scTypeset appToc>Reading</h2>
         <p class="text-muted-foreground">
           Jumps — a link, a bookmark, a thumbnail, the page field — are
           remembered:
@@ -135,7 +135,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Saving and page organisation</h2>
+        <h2 scTypeset appToc>Saving and page organisation</h2>
         <p class="text-muted-foreground">
           Download writes the annotations, comments and form data into the PDF.
           In the full example's Pages sidebar, select pages to move, copy, cut,

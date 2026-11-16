@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { ConfirmationUsageDemoContainer } from './demos/confirmation-usage-demo-container';
@@ -14,21 +14,21 @@ import { RtlConfirmationDemoContainer } from './demos/rtl-confirmation-demo-cont
     ConfirmationUsageDemoContainer,
     RouterLink,
     RtlConfirmationDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     TocHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Confirmation</h1>
+        <h1 scTypeset>Confirmation</h1>
         <p class="text-muted-foreground">
           Asks the person for a yes or no before a tool runs.
         </p>
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-confirmation-usage-demo-container />
         <p class="text-muted-foreground">
           The question is an
@@ -41,17 +41,17 @@ import { RtlConfirmationDemoContainer } from './demos/rtl-confirmation-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-rtl-confirmation-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the <a scLink routerLink="/docs/components/item">Item</a> and the
           <a scLink routerLink="/docs/components/trace">Trace</a>.

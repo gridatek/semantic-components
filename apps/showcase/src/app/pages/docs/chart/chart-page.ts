@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScFrame,
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -10,6 +9,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -36,12 +36,12 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
     TocHeading,
     ComponentBadges,
     EntryInstall,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Chart</h1>
+        <h1 scTypeset>Chart</h1>
         <p class="text-muted-foreground">
           The parts every chart is made of, as shadcn/ui's: the chart, with its
           rows and its series' names and colors (its config); the plot, with a
@@ -53,7 +53,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <app-entry-install
           entry="charts"
           library="d3-scale d3-shape"
@@ -63,12 +63,12 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-chart-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           The chart holds the rows and the config; the plot draws the grid, the
           axes, the cursor and the series; the tooltip and the legend are yours
@@ -78,7 +78,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: on focus,
@@ -102,7 +102,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Tooltip and legend</h2>
+        <h2 scTypeset appToc>Tooltip and legend</h2>
         <p class="text-muted-foreground">
           Each series' name and color come from the chart's config; its color is
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -116,7 +116,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Chart types</h2>
+        <h2 scTypeset appToc>Chart types</h2>
         <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           @for (type of types; track type.path) {
             <a
@@ -136,7 +136,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           The parts every chart shares, and their inputs; each series&apos; are
           on its own page. Each part takes

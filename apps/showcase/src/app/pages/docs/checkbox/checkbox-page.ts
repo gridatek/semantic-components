@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -43,7 +43,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
     RtlCheckboxDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -55,7 +55,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Checkbox</h1>
+        <h1 scTypeset>Checkbox</h1>
         <p class="text-muted-foreground">
           A native checkbox that draws itself, in the look of the app&apos;s
           preset.
@@ -64,12 +64,12 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-checkbox-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A native checkbox input that draws its own box and mark: alone (a
           table row), or in a horizontal field beside its text — the field is
@@ -81,7 +81,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A native checkbox: Tab reaches it, Space toggles it; its box and
@@ -100,7 +100,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-description-checkbox-demo-container />
         <app-group-checkbox-demo-container />
         <app-disabled-checkbox-demo-container />
@@ -115,7 +115,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

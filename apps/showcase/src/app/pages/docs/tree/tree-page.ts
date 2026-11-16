@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { FileExplorerTreeDemoContainer } from './demos/file-explorer-tree-demo-container';
@@ -14,12 +14,12 @@ import { SimpleTreeDemoContainer } from './demos/simple-tree-demo-container';
     SimpleTreeDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Tree</h1>
+        <h1 scTypeset>Tree</h1>
         <p class="text-muted-foreground">
           A hierarchical collapsible tree for displaying nested data.
         </p>
@@ -27,7 +27,7 @@ import { SimpleTreeDemoContainer } from './demos/simple-tree-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-file-explorer-tree-demo-container />
         <app-navigation-tree-demo-container />
         <app-simple-tree-demo-container />

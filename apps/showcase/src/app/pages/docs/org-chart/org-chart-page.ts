@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AcrossOrgChartDemoContainer } from './demos/across-org-chart-demo-container';
@@ -20,12 +20,12 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
     DataOrgChartDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Org Chart</h1>
+        <h1 scTypeset>Org Chart</h1>
         <p class="text-muted-foreground">
           Your people as nested lists, laid out as a chart and joined by lines —
           a tree for the keyboard and screen readers, collapsible and
@@ -35,7 +35,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Basic</h2>
+        <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           People and their reports, as nested lists — one Tab stop, then ↑ ↓
           between people, → ← to open and close, Home and End, or type a name.
@@ -44,7 +44,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Avatars</h2>
+        <h2 scTypeset appToc>Avatars</h2>
         <p class="text-muted-foreground">
           A card is yours to fill: here, the lib’s avatar beside the name.
         </p>
@@ -52,7 +52,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Across</h2>
+        <h2 scTypeset appToc>Across</h2>
         <p class="text-muted-foreground">
           direction="across": reports at the inline end — on the right, or on
           the left in a right-to-left page.
@@ -61,7 +61,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Collapsible</h2>
+        <h2 scTypeset appToc>Collapsible</h2>
         <p class="text-muted-foreground">
           A click, or → and ←, opens and closes a person. Your chevron
           (scOrgChartExpandIcon) turns; [expanded]="false" starts closed.
@@ -70,7 +70,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Selection</h2>
+        <h2 scTypeset appToc>Selection</h2>
         <p class="text-muted-foreground">
           The selected person, two-way through [(value)] — Enter, Space or a
           click — and their details beside the chart.
@@ -79,7 +79,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>From data</h2>
+        <h2 scTypeset appToc>From data</h2>
         <p class="text-muted-foreground">
           From your own data: a template that writes a person, then — for each
           report — itself, with the outlet’s injector (so each report finds its

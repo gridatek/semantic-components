@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -37,7 +37,7 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
     RtlLinkDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -49,7 +49,7 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Link</h1>
+        <h1 scTypeset>Link</h1>
         <p class="text-muted-foreground">
           A link: it goes somewhere, so it stays a link — opened in a new tab,
           copied, announced as a link. A link in text by default — underlined,
@@ -59,12 +59,12 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-link-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One part, on a native link: its
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">href</code> (or
@@ -80,7 +80,7 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-in-text-link-demo-container />
         <app-variants-link-demo-container />
         <app-size-link-demo-container />
@@ -92,7 +92,7 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScLink</code>
           is a directive on a native

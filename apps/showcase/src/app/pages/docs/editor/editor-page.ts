@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import {
   ScCodeBlock,
@@ -60,7 +60,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
     TocHeading,
     ComponentBadges,
     PackageManagerInstall,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -74,7 +74,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Editor</h1>
+        <h1 scTypeset>Editor</h1>
         <p class="text-muted-foreground">
           Composable WYSIWYG editor powered by Tiptap: block types, lists and
           task lists, code blocks and links in its core; tables, images, search
@@ -86,7 +86,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <p class="text-muted-foreground">
           It has its own entry point,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -137,12 +137,12 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-editor-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc id="features">Features</h2>
+        <h2 scTypeset appToc id="features">Features</h2>
         <p class="text-muted-foreground">
           The core,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -243,7 +243,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <p class="text-muted-foreground">
           The complete editor, after Tiptap's Simple Editor: undo and redo, the
           block type and list menus (with task lists), blockquotes and code
@@ -261,7 +261,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Tables</h2>
+        <h2 scTypeset appToc>Tables</h2>
         <p class="text-muted-foreground">
           The core and one feature,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -274,7 +274,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Images</h2>
+        <h2 scTypeset appToc>Images</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >withImages()</code
@@ -292,7 +292,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Search and replace</h2>
+        <h2 scTypeset appToc>Search and replace</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >withSearch()</code
@@ -303,7 +303,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Floating toolbar</h2>
+        <h2 scTypeset appToc>Floating toolbar</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scEditorBubbleMenu</code
@@ -315,7 +315,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Signal Forms</h2>
+        <h2 scTypeset appToc>Signal Forms</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >[formField]</code
@@ -338,7 +338,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Displaying the document</h2>
+        <h2 scTypeset appToc>Displaying the document</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scEditorView</code
@@ -352,7 +352,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Formats</h2>
+        <h2 scTypeset appToc>Formats</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">format</code>
           picks what the form holds:
@@ -376,7 +376,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Layout</h2>
+        <h2 scTypeset appToc>Layout</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">layout</code> on
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -392,7 +392,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Initial content</h2>
+        <h2 scTypeset appToc>Initial content</h2>
         <p class="text-muted-foreground">
           The form's value is the document to start with: any HTML the editor
           knows — headings, lists, quotes, marks.
@@ -401,7 +401,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Read-only</h2>
+        <h2 scTypeset appToc>Read-only</h2>
         <p class="text-muted-foreground">
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">readonly</code>
           from the schema: the document can be read, selected and searched, not
@@ -411,7 +411,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Without counts</h2>
+        <h2 scTypeset appToc>Without counts</h2>
         <p class="text-muted-foreground">
           Every part is optional: leave out the footer and its word and
           character counts.
@@ -420,7 +420,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Keyboard</h2>
+        <h2 scTypeset appToc>Keyboard</h2>
         <p class="text-muted-foreground">
           Tiptap&apos;s shortcuts, and Markdown as you type:
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"># </code>
@@ -477,7 +477,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Every part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>, and
@@ -557,7 +557,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Loading</h2>
+        <h2 scTypeset appToc>Loading</h2>
         <p class="text-muted-foreground">
           The features are loaded with the editor, not on their own: a
           feature&apos;s package is small next to what every editor needs (<code
@@ -626,7 +626,7 @@ import {
   SiSuperscriptIcon,
 } from '@semantic-icons/lucide-icons';
 import { ScCodeBlock, ScCodeBlockHeader, ScCodeBlockTitle, ScCodeBlockActions, ScCodeBlockCopy, ScCodeBlockContent } from '@semantic-components/ui/code-block';
-import { ScHeading, ScTable, ScTableBody, ScTableCell, ScTableContainer, ScTableHeader, ScTableHeaderCell, ScTableRow } from '@semantic-components/ui';
+import { ScTypeset, ScTable, ScTableBody, ScTableCell, ScTableContainer, ScTableHeader, ScTableHeaderCell, ScTableRow } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-note-editor',

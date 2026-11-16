@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicJsonViewerDemoContainer } from './demos/basic-json-viewer-demo-container';
@@ -20,12 +20,12 @@ import { TypesJsonViewerDemoContainer } from './demos/types-json-viewer-demo-con
     RtlJsonViewerDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>JSON Viewer</h1>
+        <h1 scTypeset>JSON Viewer</h1>
         <p class="text-muted-foreground">
           A JSON value as a tree: keys and values coloured by type, objects and
           arrays that open and close, long arrays split into ranges. One Tab
@@ -36,7 +36,7 @@ import { TypesJsonViewerDemoContainer } from './demos/types-json-viewer-demo-con
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-json-viewer-demo-container />
         <app-summary-json-viewer-demo-container />
         <app-large-json-viewer-demo-container />

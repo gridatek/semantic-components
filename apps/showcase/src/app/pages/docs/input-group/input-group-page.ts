@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -56,7 +56,7 @@ interface ScApiRow {
     RtlInputGroupDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -68,7 +68,7 @@ interface ScApiRow {
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Input Group</h1>
+        <h1 scTypeset>Input Group</h1>
         <p class="text-muted-foreground">
           An input or a textarea with icons, text and buttons in one box: beside
           it, above or below. In the look of the app&apos;s preset; a click on
@@ -79,12 +79,12 @@ interface ScApiRow {
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-input-group-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           The group on a
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">div</code>, the
@@ -103,7 +103,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-inline-start-input-group-demo-container />
         <app-inline-end-input-group-demo-container />
         <app-block-start-input-group-demo-container />
@@ -121,7 +121,7 @@ interface ScApiRow {
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         @for (part of parts; track part.name) {
           <h3 class="font-heading text-base font-medium">
             {{ part.name }} —

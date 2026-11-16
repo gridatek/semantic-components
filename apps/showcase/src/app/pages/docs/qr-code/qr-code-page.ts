@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -26,12 +26,12 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
     UseCasesQrCodeDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>QR Code</h1>
+        <h1 scTypeset>QR Code</h1>
         <p class="text-muted-foreground">
           Generate QR codes from text or URLs with customizable styles. Powered
           by
@@ -49,7 +49,7 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <app-entry-install
           entry="qr-code"
           library="uqr"
@@ -59,7 +59,7 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-qr-code-demo-container />
         <app-interactive-qr-code-demo-container />
         <app-sizes-qr-code-demo-container />

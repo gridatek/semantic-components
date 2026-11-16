@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
-  ScHeading,
   ScLink,
   ScTable,
   ScTableBody,
@@ -10,6 +9,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
@@ -26,7 +26,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
     ChainOfThoughtUsageDemoContainer,
     RouterLink,
     RtlChainOfThoughtDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     ScTable,
     ScTableBody,
@@ -42,7 +42,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Chain of Thought</h1>
+        <h1 scTypeset>Chain of Thought</h1>
         <p class="text-muted-foreground">
           A summary line that expands into the steps an agent took. The summary
           says what happened, like &quot;Researched in 3 steps&quot;; the steps
@@ -51,7 +51,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-chain-of-thought-usage-demo-container />
         <p class="text-muted-foreground">
           A pattern, not a component: a
@@ -65,12 +65,12 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Steps</h2>
+        <h2 scTypeset appToc>Steps</h2>
         <p class="text-muted-foreground">
           Each step is a line: set its status, and write its title in the
           matching tense.
@@ -105,7 +105,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Open state</h2>
+        <h2 scTypeset appToc>Open state</h2>
         <p class="text-muted-foreground">
           The summary is researching while the steps run and before the reply
           starts: it opens then and closes when the reply begins, unless the
@@ -116,7 +116,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-steps-chain-of-thought-demo-container />
         <div class="space-y-4">
           <p class="text-muted-foreground">
@@ -129,7 +129,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -46,12 +46,12 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
     NumberFieldUsageDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Number Field</h1>
+        <h1 scTypeset>Number Field</h1>
         <p class="text-muted-foreground">
           A number field assembled from parts, as Base UI's NumberField: typed
           and read in the locale (currencies, percents, units), stepped with the
@@ -62,12 +62,12 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-number-field-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           The field holds the value and is a field itself (its label,
           description and errors tied to the input). A group joins the input and
@@ -78,7 +78,7 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-number-field-demo-container />
         <app-scrubbing-number-field-demo-container />
         <app-steps-number-field-demo-container />
@@ -91,7 +91,7 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes class, merged over the preset (cn: a later class
           wins). The field is a scField too: it takes its id, orientation and

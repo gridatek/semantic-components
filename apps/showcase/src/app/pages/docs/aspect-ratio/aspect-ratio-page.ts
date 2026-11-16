@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -31,7 +31,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
     RtlAspectRatioDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -43,7 +43,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Aspect Ratio</h1>
+        <h1 scTypeset>Aspect Ratio</h1>
         <p class="text-muted-foreground">
           Keeps its content to a ratio of width to height — a photo, a video, a
           map — whatever its width.
@@ -52,12 +52,12 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-aspect-ratio-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive, on your element; its content fills it (an image with
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">fill</code>, a
@@ -69,7 +69,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Notes</h2>
+        <h2 scTypeset appToc>Notes</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Its width is yours — a class (<code
@@ -104,7 +104,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-square-aspect-ratio-demo-container />
         <app-portrait-aspect-ratio-demo-container />
         <app-video-aspect-ratio-demo-container />
@@ -113,7 +113,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <h3 class="font-heading text-base font-medium">
           ScAspectRatio —
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"

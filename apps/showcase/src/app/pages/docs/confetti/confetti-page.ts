@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -24,12 +24,12 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
     EventConfettiDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Confetti</h1>
+        <h1 scTypeset>Confetti</h1>
         <p class="text-muted-foreground">
           A burst, two cannons or fireworks, in the theme’s colours — on a
           click, or from code. Decorative only, and none for reduced motion.
@@ -38,7 +38,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <app-entry-install
           entry="confetti"
           library="canvas-confetti"
@@ -48,7 +48,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Burst</h2>
+        <h2 scTypeset appToc>Burst</h2>
         <p class="text-muted-foreground">
           scConfettiTrigger on a button: a click bursts from it, in the theme’s
           colours. Decorative — hidden from screen readers, never in the way,
@@ -58,7 +58,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>From the element</h2>
+        <h2 scTypeset appToc>From the element</h2>
         <p class="text-muted-foreground">
           Each burst starts at the centre of what was clicked — wherever it is.
         </p>
@@ -66,7 +66,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Sides</h2>
+        <h2 scTypeset appToc>Sides</h2>
         <p class="text-muted-foreground">
           confettiEffect="sides": two cannons, from the edges of the screen.
         </p>
@@ -74,7 +74,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Fireworks</h2>
+        <h2 scTypeset appToc>Fireworks</h2>
         <p class="text-muted-foreground">
           confettiEffect="fireworks": bursts here and there, for three seconds —
           or the duration you give.
@@ -83,7 +83,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Colours and shapes</h2>
+        <h2 scTypeset appToc>Colours and shapes</h2>
         <p class="text-muted-foreground">
           Any CSS colours, circles and squares, bigger pieces, a wider spread.
         </p>
@@ -91,7 +91,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>After a form</h2>
+        <h2 scTypeset appToc>After a form</h2>
         <p class="text-muted-foreground">
           The service, from code: when the form is sent, sides() — and your
           words for screen readers.
@@ -100,7 +100,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>On an event</h2>
+        <h2 scTypeset appToc>On an event</h2>
         <p class="text-muted-foreground">
           The service, on an event — no button: when the last task is ticked, an
           effect calls burst() from the list.

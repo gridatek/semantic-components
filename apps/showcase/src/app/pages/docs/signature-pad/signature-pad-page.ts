@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSignaturePadDemoContainer } from './demos/basic-signature-pad-demo-container';
@@ -18,12 +18,12 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
     ExportSignaturePadDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Signature Pad</h1>
+        <h1 scTypeset>Signature Pad</h1>
         <p class="text-muted-foreground">
           Ink that follows the pen, a signature drawn or typed, its value plain
           data to store and draw again, and exports trimmed to the ink.
@@ -32,7 +32,7 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Basic</h2>
+        <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           Sign with a mouse, a finger or a pen: the ink follows its speed, or
           the pen's pressure. Undo, redo, clear — or, focused, Ctrl+Z,
@@ -42,7 +42,7 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Pens</h2>
+        <h2 scTypeset appToc>Pens</h2>
         <p class="text-muted-foreground">
           The pen's colour and width — two-way, here picked with buttons.
         </p>
@@ -50,7 +50,7 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Draw or type</h2>
+        <h2 scTypeset appToc>Draw or type</h2>
         <p class="text-muted-foreground">
           Without a pointer, type your name: the text is the signature, in the
           input's font. One pad, two ways in.
@@ -59,7 +59,7 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Form</h2>
+        <h2 scTypeset appToc>Form</h2>
         <p class="text-muted-foreground">
           A [formField]: required() in the schema; left unsigned, the field
           shows its error.
@@ -68,7 +68,7 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Export</h2>
+        <h2 scTypeset appToc>Export</h2>
         <p class="text-muted-foreground">
           The value is data — drawn again here, read-only and smaller. Exported,
           the image is trimmed to the ink: PNG or SVG.

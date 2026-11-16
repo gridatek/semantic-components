@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -49,7 +49,7 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
     RtlQuestionnaireDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -61,7 +61,7 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Questionnaire</h1>
+        <h1 scTypeset>Questionnaire</h1>
         <p class="text-muted-foreground">
           Questions one at a time, on your Signal Form: each answer checked
           against your schema before moving on, optional ones skipped, the last
@@ -71,12 +71,12 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-questionnaire-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element; the questions, the choices
           and every word are yours. Your Signal Form holds the answers, its
@@ -86,7 +86,7 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Keyboard</h2>
+        <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Enter on a chosen answer (or a filled text field) moves on — or
@@ -105,7 +105,7 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Each question is a named group (a fieldset and its legend, or
@@ -128,7 +128,7 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-multiple-questionnaire-demo-container />
         <app-freeform-questionnaire-demo-container />
         <app-skip-questionnaire-demo-container />
@@ -146,7 +146,7 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

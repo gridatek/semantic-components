@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -39,7 +39,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
     RtlDatePickerDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -51,7 +51,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Date Picker</h1>
+        <h1 scTypeset>Date Picker</h1>
         <p class="text-muted-foreground">
           A day — or days, or a range — picked in the calendar, or typed;
           written in the app’s language; a [formField].
@@ -60,12 +60,12 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-date-picker-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           The picker holds the value; a popover holds the calendar, opened by
           the trigger — a button showing the day, or an icon button in an input
@@ -76,7 +76,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The trigger opens a dialog (the popover) holding the calendar, a
@@ -105,7 +105,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-typed-date-picker-demo-container />
         <app-segmented-date-picker-demo-container />
         <app-birth-date-picker-demo-container />
@@ -118,7 +118,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

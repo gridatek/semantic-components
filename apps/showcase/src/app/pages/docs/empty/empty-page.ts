@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -35,7 +35,7 @@ import { RtlEmptyDemoContainer } from './demos/rtl-empty-demo-container';
     RtlEmptyDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -47,7 +47,7 @@ import { RtlEmptyDemoContainer } from './demos/rtl-empty-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Empty</h1>
+        <h1 scTypeset>Empty</h1>
         <p class="text-muted-foreground">
           What to show where there is nothing yet: what is empty, why, and what
           to do. In the look of the app&apos;s preset.
@@ -56,12 +56,12 @@ import { RtlEmptyDemoContainer } from './demos/rtl-empty-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-empty-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element; the icon, the words and the
           actions are yours.
@@ -70,7 +70,7 @@ import { RtlEmptyDemoContainer } from './demos/rtl-empty-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Make the title a heading (h2–h6, at the page&apos;s level), so it
@@ -84,7 +84,7 @@ import { RtlEmptyDemoContainer } from './demos/rtl-empty-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-outline-empty-demo-container />
         <app-background-empty-demo-container />
         <app-avatar-empty-demo-container />
@@ -95,7 +95,7 @@ import { RtlEmptyDemoContainer } from './demos/rtl-empty-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

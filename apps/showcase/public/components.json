@@ -1240,7 +1240,7 @@
   {
     "name": "Typeset",
     "path": "typeset",
-    "description": "Styles for headings, paragraphs, lists, and other text elements.",
+    "description": "Styles for content you don't write the markup of — rendered markdown, a chat answer — in a typeset container, and the same look for a heading, a paragraph or a quote on its own. shadcn's one CSS file, tuned by three variables; components inside keep their look, your classes win.",
     "status": "Experimental",
     "library": "ui",
     "category": "Data Display",

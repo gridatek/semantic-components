@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading, ScSeparator } from '@semantic-components/ui';
+import { ScSeparator, ScTypeset } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -24,12 +24,12 @@ import { TocHeading } from '../../components/toc/toc-heading';
     SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>MCP Server</h1>
+        <h1 scTypeset>MCP Server</h1>
         <p class="text-muted-foreground">
           Set up the
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -41,7 +41,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Setup</h2>
+        <h2 scTypeset appToc>Setup</h2>
         <p class="text-muted-foreground">
           Add the following to your project's
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">.mcp.json</code>
@@ -73,7 +73,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Available Tools</h2>
+        <h2 scTypeset appToc>Available Tools</h2>
         <ul class="text-muted-foreground list-disc space-y-2 pl-6">
           <li>
             <strong>list_components</strong>

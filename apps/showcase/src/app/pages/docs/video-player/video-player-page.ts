@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ControlledVideoPlayerDemoContainer } from './demos/controlled-video-player-demo-container';
@@ -14,12 +14,12 @@ import { PlayerVideoPlayerDemoContainer } from './demos/player-video-player-demo
     ControlledVideoPlayerDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Video Player</h1>
+        <h1 scTypeset>Video Player</h1>
         <p class="text-muted-foreground">
           Your video and its tracks, controls as parts, its state two ways —
           with captions, chapters, a seek preview, keyboard shortcuts and the
@@ -42,7 +42,7 @@ import { PlayerVideoPlayerDemoContainer } from './demos/player-video-player-demo
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Player</h2>
+        <h2 scTypeset appToc>Player</h2>
         <p class="text-muted-foreground">
           Captions in two languages — shown by the player, above its controls —
           chapters and a preview on the seek bar, speeds, picture-in-picture and
@@ -57,13 +57,13 @@ import { PlayerVideoPlayerDemoContainer } from './demos/player-video-player-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Minimal</h2>
+        <h2 scTypeset appToc>Minimal</h2>
         <p class="text-muted-foreground">Only the parts you put in.</p>
         <app-minimal-video-player-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Controlled</h2>
+        <h2 scTypeset appToc>Controlled</h2>
         <p class="text-muted-foreground">
           Its state is two-way: here played, paused and timed from outside, its
           chapters as a list that jumps.

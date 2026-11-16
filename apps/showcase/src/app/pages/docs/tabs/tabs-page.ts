@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -31,7 +31,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
     RtlTabsDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -43,7 +43,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Tabs</h1>
+        <h1 scTypeset>Tabs</h1>
         <p class="text-muted-foreground">
           Tabs and their panels, one shown at a time. In the look of the
           app&apos;s preset.
@@ -52,12 +52,12 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-tabs-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element; the tabs&apos; text and
           icons are yours. A panel&apos;s content goes in an ng-template
@@ -67,7 +67,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Limitation: panel content</h2>
+        <h2 scTypeset appToc>Limitation: panel content</h2>
         <p class="text-muted-foreground">
           Angular Aria, which the tabs are built on, renders a panel only
           through its template: content written straight in a panel is not
@@ -89,7 +89,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Keyboard</h2>
+        <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Tab enters the list on the selected tab, then goes on to its panel.
@@ -108,7 +108,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-line-tabs-demo-container />
         <app-vertical-tabs-demo-container />
         <app-disabled-tabs-demo-container />
@@ -117,7 +117,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

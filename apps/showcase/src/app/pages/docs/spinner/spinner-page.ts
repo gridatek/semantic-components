@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -35,7 +35,7 @@ import { SpinnerUsageDemoContainer } from './demos/spinner-usage-demo-container'
     RtlSpinnerDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -47,7 +47,7 @@ import { SpinnerUsageDemoContainer } from './demos/spinner-usage-demo-container'
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Spinner</h1>
+        <h1 scTypeset>Spinner</h1>
         <p class="text-muted-foreground">
           Something loading: your icon, turning, read as a status.
         </p>
@@ -55,12 +55,12 @@ import { SpinnerUsageDemoContainer } from './demos/spinner-usage-demo-container'
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-spinner-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A directive on your icon&apos;s svg; the icon and its name are yours.
         </p>
@@ -68,7 +68,7 @@ import { SpinnerUsageDemoContainer } from './demos/spinner-usage-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A spinner is a status (role=&quot;status&quot;): name it
@@ -83,7 +83,7 @@ import { SpinnerUsageDemoContainer } from './demos/spinner-usage-demo-container'
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-size-spinner-demo-container />
         <app-button-spinner-demo-container />
         <app-badge-spinner-demo-container />
@@ -94,7 +94,7 @@ import { SpinnerUsageDemoContainer } from './demos/spinner-usage-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

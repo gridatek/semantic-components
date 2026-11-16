@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -33,7 +33,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
     StackedToastDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -45,7 +45,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Toast</h1>
+        <h1 scTypeset>Toast</h1>
         <p class="text-muted-foreground">
           A succinct message that is displayed temporarily.
         </p>
@@ -53,12 +53,12 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-toast-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Toasts are shown from code, with ScToaster. How one looks is written
           once, in your app: an ng-template whose root is a scToast, its parts
@@ -69,7 +69,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The stack is one polite live region: each new toast is announced as
@@ -97,7 +97,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-types-toast-demo-container />
         <app-promise-toast-demo-container />
         <app-position-toast-demo-container />
@@ -113,7 +113,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

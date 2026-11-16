@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading, ScLink, ScSeparator } from '@semantic-components/ui';
+import { ScLink, ScSeparator, ScTypeset } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -29,7 +29,7 @@ interface ScCodeSample {
     ScCodeBlockCopy,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
-    ScHeading,
+    ScTypeset,
     ScLink,
     ScSeparator,
     SiCheckIcon,
@@ -58,7 +58,7 @@ interface ScCodeSample {
 
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Custom preset</h1>
+        <h1 scTypeset>Custom preset</h1>
         <p class="text-muted-foreground">
           A preset is a plain object: every component's classes, typed by
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScPreset</code>.
@@ -69,7 +69,7 @@ interface ScCodeSample {
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>1. Copy a preset</h2>
+        <h2 scTypeset appToc>1. Copy a preset</h2>
         <p class="text-muted-foreground">
           Pick the style closest to what you want and copy its folder from
           <a scLink [href]="sourceUrl" target="_blank" rel="noopener noreferrer"
@@ -90,7 +90,7 @@ interface ScCodeSample {
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>2. Name it</h2>
+        <h2 scTypeset appToc>2. Name it</h2>
         <p class="text-muted-foreground">
           Rename the file that puts the parts together, and its export — the
           name is yours:
@@ -108,7 +108,7 @@ interface ScCodeSample {
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>3. Use it</h2>
+        <h2 scTypeset appToc>3. Use it</h2>
         <p class="text-muted-foreground">
           Give it to
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -143,7 +143,7 @@ interface ScCodeSample {
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>4. Change it</h2>
+        <h2 scTypeset appToc>4. Change it</h2>
         <p class="text-muted-foreground">
           Each file holds one component's classes, in Tailwind. Change a file,
           and every component that reads it follows — the cards and every framed
@@ -171,7 +171,7 @@ interface ScCodeSample {
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Only a few changes?</h2>
+        <h2 scTypeset appToc>Only a few changes?</h2>
         <p class="text-muted-foreground">
           Then no copy: spread one of ours and replace the keys you change. It
           keeps our updates for the rest — and its
@@ -189,7 +189,7 @@ interface ScCodeSample {
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Good to know</h2>
+        <h2 scTypeset appToc>Good to know</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A preset is set when the app starts: switching it means reloading.

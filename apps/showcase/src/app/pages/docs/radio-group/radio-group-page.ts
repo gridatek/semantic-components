@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -39,7 +39,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
     RtlRadioGroupDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -51,7 +51,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Radio Group</h1>
+        <h1 scTypeset>Radio Group</h1>
         <p class="text-muted-foreground">
           One choice among several, as native radios. In the look of the
           app&apos;s preset.
@@ -60,12 +60,12 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-radio-group-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Native radio inputs in your labels, each with its value; the group
           holds the choice — a [formField] or [(value)] on the group. A radio
@@ -75,7 +75,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Native radios: one Tab stop for the group, the arrows move the
@@ -93,7 +93,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Why the group holds the choice</h2>
+        <h2 scTypeset appToc>Why the group holds the choice</h2>
         <p class="text-muted-foreground">
           Signal Forms can also bind each native radio itself — a [formField] on
           each, the Angular way. That still works, but each radio then needs
@@ -107,7 +107,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-description-radio-group-demo-container />
         <app-choice-card-radio-group-demo-container />
         <app-fieldset-radio-group-demo-container />
@@ -120,7 +120,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

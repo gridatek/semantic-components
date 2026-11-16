@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -41,7 +41,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
     RtlCommandDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -53,7 +53,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Command</h1>
+        <h1 scTypeset>Command</h1>
         <p class="text-muted-foreground">
           A search over commands: typing filters them, the arrows move the
           highlight, Enter runs it.
@@ -62,12 +62,12 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-command-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A search and a list of your items, in groups. It filters them itself —
           their text, value and keywords — and keeps your order; a group with no
@@ -78,7 +78,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The search is a combo box and the items a list box: focus stays in
@@ -107,7 +107,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-command-demo-container />
         <app-shortcuts-command-demo-container />
         <app-groups-command-demo-container />
@@ -121,7 +121,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

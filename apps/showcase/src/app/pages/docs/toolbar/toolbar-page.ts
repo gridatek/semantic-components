@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -33,7 +33,7 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
     RtlToolbarDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -45,7 +45,7 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Toolbar</h1>
+        <h1 scTypeset>Toolbar</h1>
         <p class="text-muted-foreground">
           A row of controls of any kind — buttons, toggles, selects, links, an
           input — with one Tab stop and the arrow keys between them.
@@ -54,12 +54,12 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-toolbar-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Angular Aria&apos;s Toolbar, with its names: a widget is any of your
           parts made a stop in the toolbar (scToolbarWidget beside scButton,
@@ -70,7 +70,7 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             role=&quot;toolbar&quot;: one Tab stop; the arrow keys move between
@@ -97,7 +97,7 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-menu-toolbar-demo-container />
         <app-tooltip-toolbar-demo-container />
         <app-input-toolbar-demo-container />
@@ -107,7 +107,7 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

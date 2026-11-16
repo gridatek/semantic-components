@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { MutedFramesStackTraceDemoContainer } from './demos/muted-frames-stack-trace-demo-container';
@@ -15,7 +15,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
     MutedFramesStackTraceDemoContainer,
     RouterLink,
     RtlStackTraceDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     StackTraceUsageDemoContainer,
     TocHeading,
@@ -23,7 +23,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Stack Trace</h1>
+        <h1 scTypeset>Stack Trace</h1>
         <p class="text-muted-foreground">
           A line for a tool call that failed. The error is the title, like
           &quot;Failed: TypeError&quot;; open it for the stack frames, which can
@@ -32,7 +32,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-stack-trace-usage-demo-container />
         <p class="text-muted-foreground">
           A <a scLink routerLink="/docs/components/trace">Trace</a> line with an
@@ -43,7 +43,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
         <p class="text-muted-foreground">
           The title truncates, so the content repeats the whole error at its
@@ -52,7 +52,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Sending the stack</h2>
+        <h2 scTypeset appToc>Sending the stack</h2>
         <p class="text-muted-foreground">
           A failed tool sends only its error message by default; the server has
           to send the stack for the frames. A stack shows file paths from your
@@ -61,7 +61,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
           <p class="text-muted-foreground">
             Every frame in one block: the framework&apos;s stay muted, so your
@@ -73,7 +73,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"

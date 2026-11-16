@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -45,7 +45,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
     RtlComboboxDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -57,7 +57,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Combobox</h1>
+        <h1 scTypeset>Combobox</h1>
         <p class="text-muted-foreground">
           A select to filter: an input over a list of options, one or several of
           which are its value.
@@ -66,12 +66,12 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-combobox-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Base UI&apos;s Combobox, on Angular Aria&apos;s Combobox and Listbox.
           Its value is one of its options, never free text (that is an
@@ -95,7 +95,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The input is a combo box, the options a list box: focus stays in the
@@ -132,7 +132,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-multiple-combobox-demo-container />
         <app-clear-combobox-demo-container />
         <app-groups-combobox-demo-container />
@@ -148,7 +148,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

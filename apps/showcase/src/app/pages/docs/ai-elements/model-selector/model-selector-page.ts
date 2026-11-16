@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { ModelSelectorUsageDemoContainer } from './demos/model-selector-usage-demo-container';
@@ -14,14 +14,14 @@ import { RtlModelSelectorDemoContainer } from './demos/rtl-model-selector-demo-c
     ModelSelectorUsageDemoContainer,
     RouterLink,
     RtlModelSelectorDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     TocHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Model Selector</h1>
+        <h1 scTypeset>Model Selector</h1>
         <p class="text-muted-foreground">
           Two menus: one picks the model the agent runs, the other picks how
           hard it thinks.
@@ -29,7 +29,7 @@ import { RtlModelSelectorDemoContainer } from './demos/rtl-model-selector-demo-c
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-model-selector-usage-demo-container />
         <p class="text-muted-foreground">
           Two <a scLink routerLink="/docs/components/menu">Menus</a> with radio
@@ -46,12 +46,12 @@ import { RtlModelSelectorDemoContainer } from './demos/rtl-model-selector-demo-c
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Sending</h2>
+        <h2 scTypeset appToc>Sending</h2>
         <p class="text-muted-foreground">
           Send the model and the effort with the message; the server maps them
           to a model and its provider&apos;s options.
@@ -59,12 +59,12 @@ import { RtlModelSelectorDemoContainer } from './demos/rtl-model-selector-demo-c
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-rtl-model-selector-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the <a scLink routerLink="/docs/components/menu">Menu</a> and the
           <a scLink routerLink="/docs/components/input-group">Input Group</a>.

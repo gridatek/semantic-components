@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -29,7 +29,7 @@ import { ScrollFadeScrollAreaNext2DemoContainer } from './demos/scroll-fade-scro
     RtlScrollAreaNext2DemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -41,7 +41,7 @@ import { ScrollFadeScrollAreaNext2DemoContainer } from './demos/scroll-fade-scro
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Scroll Area Next2</h1>
+        <h1 scTypeset>Scroll Area Next2</h1>
         <p class="text-muted-foreground">
           A box that scrolls with the browser&apos;s own scrollbar, in the look
           of the app&apos;s preset.
@@ -50,12 +50,12 @@ import { ScrollFadeScrollAreaNext2DemoContainer } from './demos/scroll-fade-scro
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-scroll-area-next2-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive on your box: it scrolls, the browser draws its
           scrollbar. Tailwind&apos;s scrollbar-* classes change its look
@@ -65,7 +65,7 @@ import { ScrollFadeScrollAreaNext2DemoContainer } from './demos/scroll-fade-scro
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The browser scrolls it — the wheel, touch, the keyboard — with its
@@ -80,7 +80,7 @@ import { ScrollFadeScrollAreaNext2DemoContainer } from './demos/scroll-fade-scro
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-horizontal-scroll-area-next2-demo-container />
         <app-both-scroll-area-next2-demo-container />
         <app-scroll-fade-scroll-area-next2-demo-container />
@@ -88,7 +88,7 @@ import { ScrollFadeScrollAreaNext2DemoContainer } from './demos/scroll-fade-scro
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

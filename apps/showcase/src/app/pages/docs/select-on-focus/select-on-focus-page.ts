@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -29,13 +29,13 @@ import { SelectOnFocusUsageDemoContainer } from './demos/select-on-focus-usage-d
     KeyboardSelectOnFocusDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     SelectOnFocusUsageDemoContainer,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Select On Focus</h1>
+        <h1 scTypeset>Select On Focus</h1>
         <p class="text-muted-foreground">
           A directive that automatically selects input text on focus.
           Configurable to respond to specific focus origins.
@@ -44,12 +44,12 @@ import { SelectOnFocusUsageDemoContainer } from './demos/select-on-focus-usage-d
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-select-on-focus-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive on an input: its text is selected when it gets focus —
           from the keyboard, the mouse, a touch or the program, as you choose.
@@ -58,7 +58,7 @@ import { SelectOnFocusUsageDemoContainer } from './demos/select-on-focus-usage-d
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>How It Works</h2>
+        <h2 scTypeset appToc>How It Works</h2>
         <ul class="text-muted-foreground list-inside list-disc space-y-1">
           <li>
             Uses
@@ -79,12 +79,12 @@ import { SelectOnFocusUsageDemoContainer } from './demos/select-on-focus-usage-d
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-keyboard-select-on-focus-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">A behaviour only, on an input.</p>
         <div
           scTableContainer

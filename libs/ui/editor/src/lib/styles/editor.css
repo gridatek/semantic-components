@@ -1,6 +1,6 @@
 /*
  * The document's styles — in the editor and in `scEditorView` — in the
- * library's own styles: the typography of `scHeading` and shadcn/ui's
+ * library's own styles: the typography of `scTypeset` and shadcn/ui's
  * typography, the box of `scCheckbox`, the theme's tokens.
  */
 
@@ -46,7 +46,7 @@
   @apply mt-6;
 }
 
-/* Headings: as `scHeading` */
+/* Headings: as `scTypeset` */
 [data-slot='editor-document'] :is(h1, h2, h3, h4, h5, h6) {
   @apply scroll-m-20 tracking-tight;
 }

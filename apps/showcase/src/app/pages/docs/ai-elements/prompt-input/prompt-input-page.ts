@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScHeading, ScLink } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { PromptInputUsageDemoContainer } from './demos/prompt-input-usage-demo-container';
@@ -14,14 +14,14 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
     PromptInputUsageDemoContainer,
     RouterLink,
     RtlPromptInputDemoContainer,
-    ScHeading,
+    ScTypeset,
     ScLink,
     TocHeading,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Prompt Input</h1>
+        <h1 scTypeset>Prompt Input</h1>
         <p class="text-muted-foreground">
           The field the person types into to message the agent, with attachments
           and a send button.
@@ -29,7 +29,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-prompt-input-usage-demo-container />
         <p class="text-muted-foreground">
           An
@@ -45,12 +45,12 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Attachments</h2>
+        <h2 scTypeset appToc>Attachments</h2>
         <p class="text-muted-foreground">
           The attach button opens a hidden file input. Each file shows as an
           Attachment in an addon on top, with a button to remove it, named by
@@ -59,7 +59,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Model and effort</h2>
+        <h2 scTypeset appToc>Model and effort</h2>
         <p class="text-muted-foreground">
           The two Model Selector menus go in the bottom addon, between the
           attach and send buttons: the first menu&apos;s
@@ -69,7 +69,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Keyboard</h2>
+        <h2 scTypeset appToc>Keyboard</h2>
         <p class="text-muted-foreground">
           Enter sends the message; Shift+Enter adds a new line. Send is disabled
           while the field is empty.
@@ -77,12 +77,12 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-rtl-prompt-input-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           See the
           <a scLink routerLink="/docs/components/input-group">Input Group</a>,

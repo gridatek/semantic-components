@@ -10,13 +10,13 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScFrame,
-  ScHeading,
   ScItem,
   ScItemBody,
   ScItemDescription,
   ScItemMedia,
   ScItemTitle,
   ScLink,
+  ScTypeset,
 } from '@semantic-components/ui';
 import {
   ScCodeBlock,
@@ -53,7 +53,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScCodeBlock,
     ScCodeBlockContent,
     ScFrame,
-    ScHeading,
+    ScTypeset,
     ScItem,
     ScItemBody,
     ScItemDescription,
@@ -77,7 +77,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
   template: `
     <div class="space-y-12">
       <div class="space-y-4">
-        <h1 scHeading>Introduction</h1>
+        <h1 scTypeset>Introduction</h1>
         <p class="text-muted-foreground text-lg text-balance">
           The missing piece in the Angular world: beautifully crafted UI
           components for modern Angular, built with Tailwind CSS on Angular Aria
@@ -100,7 +100,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>A part on your element</h2>
+        <h2 scTypeset appToc>A part on your element</h2>
         <p class="text-muted-foreground">
           Every part is a directive on an element you write: the markup, the
           text and the icons stay yours, and the part brings the behaviour, the
@@ -137,7 +137,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Features</h2>
+        <h2 scTypeset appToc>Features</h2>
         <div class="grid gap-3 sm:grid-cols-2">
           @for (feature of features; track feature.title) {
             <div scItem variant="outline" class="items-start">
@@ -181,7 +181,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Explore</h2>
+        <h2 scTypeset appToc>Explore</h2>
         <div class="grid gap-3 sm:grid-cols-2">
           <a
             scItem
@@ -235,7 +235,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Packages</h2>
+        <h2 scTypeset appToc>Packages</h2>
         <div class="grid gap-3">
           @for (pkg of packages; track pkg.name) {
             <div scItem variant="outline" class="items-start">
@@ -260,7 +260,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Next steps</h2>
+        <h2 scTypeset appToc>Next steps</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           @for (step of nextSteps; track step.path) {
             <li>

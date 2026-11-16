@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ArticleLightboxDemoContainer } from './demos/article-lightbox-demo-container';
@@ -16,12 +16,12 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
     ControlledLightboxDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Lightbox</h1>
+        <h1 scTypeset>Lightbox</h1>
         <p class="text-muted-foreground">
           Your gallery of links, opened in the native dialog — the thumbnail
           growing into the photo — with zoom, pan, swipes and the keys.
@@ -38,7 +38,7 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Gallery</h2>
+        <h2 scTypeset appToc>Gallery</h2>
         <p class="text-muted-foreground">
           A grid of links to the full photos — links still, without the
           lightbox. Opened, the thumbnail grows into the photo; ← → or a swipe
@@ -48,7 +48,7 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Zoom</h2>
+        <h2 scTypeset appToc>Zoom</h2>
         <p class="text-muted-foreground">
           One photo: the wheel, a double-click or a pinch zooms where you point;
           drag to pan.
@@ -57,7 +57,7 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>In an article</h2>
+        <h2 scTypeset appToc>In an article</h2>
         <p class="text-muted-foreground">
           One image in the text, opened in place — no thumbnails, no counter
           needed.
@@ -66,7 +66,7 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Controlled</h2>
+        <h2 scTypeset appToc>Controlled</h2>
         <p class="text-muted-foreground">
           Open and the index are two-way — here from outside; it stops at the
           ends (no loop).

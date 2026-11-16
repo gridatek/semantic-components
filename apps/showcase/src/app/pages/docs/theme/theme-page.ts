@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicThemeToggleDemoContainer } from './demos/basic-theme-toggle-demo-container';
@@ -18,12 +18,12 @@ import { ThemeSelectDemoContainer } from './demos/theme-select-demo-container';
     SettingsPanelThemeToggleDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Theme</h1>
+        <h1 scTypeset>Theme</h1>
         <p class="text-muted-foreground">
           Light, dark or the system&apos;s: the theme manager, with a button or
           a menu of your own.
@@ -32,7 +32,7 @@ import { ThemeSelectDemoContainer } from './demos/theme-select-demo-container';
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-theme-toggle-demo-container />
         <app-menu-theme-demo-container />
         <app-theme-select-demo-container />

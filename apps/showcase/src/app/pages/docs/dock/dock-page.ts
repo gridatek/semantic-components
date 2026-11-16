@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AppsDockDemoContainer } from './demos/apps-dock-demo-container';
@@ -16,12 +16,12 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
     PlainDockDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Dock</h1>
+        <h1 scTypeset>Dock</h1>
         <p class="text-muted-foreground">
           Your links and buttons in a bar, magnified by their distance to the
           pointer — and when focused — with labels, counts, dots and separators.
@@ -30,7 +30,7 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Apps</h2>
+        <h2 scTypeset appToc>Apps</h2>
         <p class="text-muted-foreground">
           A launcher: the items near the pointer grow, their neighbours move
           aside. Dots for open apps, a count on Mail, a separator before the
@@ -41,7 +41,7 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Navigation</h2>
+        <h2 scTypeset appToc>Navigation</h2>
         <p class="text-muted-foreground">
           Links in a nav: the current page marked (aria-current), its dot shown.
         </p>
@@ -49,7 +49,7 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Vertical</h2>
+        <h2 scTypeset appToc>Vertical</h2>
         <p class="text-muted-foreground">
           On a side: items grow outward, their labels beside them.
         </p>
@@ -57,7 +57,7 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Plain</h2>
+        <h2 scTypeset appToc>Plain</h2>
         <p class="text-muted-foreground">
           Without magnification: magnification set to 1. Under reduced motion,
           the dock is always so.

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CardsMasonryGridDemoContainer } from './demos/cards-masonry-grid-demo-container';
@@ -16,12 +16,12 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
     OrderMasonryGridDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Masonry Grid</h1>
+        <h1 scTypeset>Masonry Grid</h1>
         <p class="text-muted-foreground">
           Items of any height packed into columns by width, the source order
           kept for reading and Tab; laid out again whenever anything changes
@@ -31,7 +31,7 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Photos</h2>
+        <h2 scTypeset appToc>Photos</h2>
         <p class="text-muted-foreground">
           Photos of different heights, each into the shortest column — as many
           columns of at least 200 px as fit. In a list: the order is the
@@ -41,7 +41,7 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Cards</h2>
+        <h2 scTypeset appToc>Cards</h2>
         <p class="text-muted-foreground">
           Text of any length — measured, never guessed; resize the window and it
           lays out again. The first card spans two columns.
@@ -50,7 +50,7 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Load more</h2>
+        <h2 scTypeset appToc>Load more</h2>
         <p class="text-muted-foreground">
           Items added, or removed: the grid lays out again, and the others move
           into place (not under reduced motion).
@@ -59,7 +59,7 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Order</h2>
+        <h2 scTypeset appToc>Order</h2>
         <p class="text-muted-foreground">
           Into the shortest column (balanced) — or in turn, column after column
           (predictable): the same tiles, both ways.

@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -35,7 +35,7 @@ import { SettingsCollapsibleDemoContainer } from './demos/settings-collapsible-d
     RtlCollapsibleDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -47,7 +47,7 @@ import { SettingsCollapsibleDemoContainer } from './demos/settings-collapsible-d
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Collapsible</h1>
+        <h1 scTypeset>Collapsible</h1>
         <p class="text-muted-foreground">
           A trigger that shows and hides a panel of content.
         </p>
@@ -55,12 +55,12 @@ import { SettingsCollapsibleDemoContainer } from './demos/settings-collapsible-d
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-collapsible-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Base UI&apos;s Collapsible: a root holding open, a trigger on your
           button, a panel with its content written inside.
@@ -69,7 +69,7 @@ import { SettingsCollapsibleDemoContainer } from './demos/settings-collapsible-d
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Accessibility</h2>
+        <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The disclosure pattern: a native button, aria-expanded, and
@@ -87,7 +87,7 @@ import { SettingsCollapsibleDemoContainer } from './demos/settings-collapsible-d
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-collapsible-demo-container />
         <app-settings-collapsible-demo-container />
         <app-file-tree-collapsible-demo-container />
@@ -98,7 +98,7 @@ import { SettingsCollapsibleDemoContainer } from './demos/settings-collapsible-d
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

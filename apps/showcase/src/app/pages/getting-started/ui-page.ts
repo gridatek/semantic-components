@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScHeading, ScSeparator } from '@semantic-components/ui';
+import { ScButton, ScSeparator, ScTypeset } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -34,14 +34,14 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
     SiCheckIcon,
     SiCopyIcon,
     ScSeparator,
-    ScHeading,
+    ScTypeset,
     PackageManagerInstall,
     ButtonUsageDemoContainer,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>UI</h1>
+        <h1 scTypeset>UI</h1>
         <p class="text-muted-foreground">
           Install and configure the
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -52,7 +52,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>1. Install the packages</h2>
+        <h2 scTypeset appToc>1. Install the packages</h2>
         <p class="text-muted-foreground">
           The components, and their classes in shadcn's styles (the presets):
         </p>
@@ -64,7 +64,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>2. Configure styles</h2>
+        <h2 scTypeset appToc>2. Configure styles</h2>
         <p class="text-muted-foreground">
           As in shadcn/ui, the theme is your app's. Copy this into your
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
@@ -146,7 +146,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <p class="text-muted-foreground">
           Import and use components in your Angular templates:
         </p>

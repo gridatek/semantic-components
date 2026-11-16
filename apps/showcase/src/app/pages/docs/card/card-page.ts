@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -31,7 +31,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
     RtlCardDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -43,7 +43,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Card</h1>
+        <h1 scTypeset>Card</h1>
         <p class="text-muted-foreground">
           A box of related content: a header with its title, description and
           action, the content, a footer. In the look of the app&apos;s preset.
@@ -52,12 +52,12 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-card-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           Every part is a directive on your element. The title is the heading
           you choose (an
@@ -69,7 +69,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Notes</h2>
+        <h2 scTypeset appToc>Notes</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The spacing between the sections and the inset of every part is one
@@ -98,7 +98,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-size-card-demo-container />
         <app-spacing-card-demo-container />
         <app-edge-to-edge-card-demo-container />
@@ -107,7 +107,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScHeading,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -8,6 +7,7 @@ import {
   ScTableHeader,
   ScTableHeaderCell,
   ScTableRow,
+  ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -32,12 +32,12 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
     FeaturedDataTableDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Data Table</h1>
+        <h1 scTypeset>Data Table</h1>
         <p class="text-muted-foreground">
           Styled, accessible parts for data tables powered by TanStack Table:
           sorting, filtering, column visibility, row selection, pinning and
@@ -47,7 +47,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Installation</h2>
+        <h2 scTypeset appToc>Installation</h2>
         <app-entry-install
           entry="data-table"
           library="@tanstack/angular-table"
@@ -57,12 +57,12 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Usage</h2>
+        <h2 scTypeset appToc>Usage</h2>
         <app-data-table-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Anatomy</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           TanStack Table builds the table (its columns, rows and state); the
           table parts render it, and a data table part on a header cell, a cell
@@ -74,7 +74,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
       </section>
 
       <section class="space-y-3">
-        <h2 scHeading appToc>How it works</h2>
+        <h2 scTypeset appToc>How it works</h2>
         <p class="text-sm">
           <a
             href="https://tanstack.com/table"
@@ -131,12 +131,12 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
       </section>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-featured-data-table-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>API reference</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes class, merged over its own (cn: a later class wins).
           The parts are typed structurally: pass TanStack&apos;s own table,

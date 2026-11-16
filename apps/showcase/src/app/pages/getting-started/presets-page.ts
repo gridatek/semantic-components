@@ -13,9 +13,9 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScFrame,
-  ScHeading,
   ScInput,
   ScLink,
+  ScTypeset,
 } from '@semantic-components/ui';
 import {
   ScCodeBlock,
@@ -77,7 +77,7 @@ const STYLES: { name: ScPresetName; description: string }[] = [
     ScCodeBlockHeader,
     ScCodeBlockTitle,
     ScFrame,
-    ScHeading,
+    ScTypeset,
     ScInput,
     ScLink,
     SiCheckIcon,
@@ -131,7 +131,7 @@ const STYLES: { name: ScPresetName; description: string }[] = [
 
     <div class="space-y-12">
       <div class="space-y-4">
-        <h1 scHeading>Presets</h1>
+        <h1 scTypeset>Presets</h1>
         <p class="text-muted-foreground text-lg text-balance">
           A preset is the look of the components: shadcn/ui&apos;s eight styles,
           one entry point each. It holds every component&apos;s classes —
@@ -154,7 +154,7 @@ const STYLES: { name: ScPresetName; description: string }[] = [
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>The eight styles</h2>
+        <h2 scTypeset appToc>The eight styles</h2>
         <p class="text-muted-foreground">
           The same card, field, badges and buttons in each. The app picks one
           when it starts; without one, the components use nova.
@@ -193,7 +193,7 @@ const STYLES: { name: ScPresetName; description: string }[] = [
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Presets and themes</h2>
+        <h2 scTypeset appToc>Presets and themes</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             <strong class="text-foreground">The preset</strong> says how things
@@ -224,7 +224,7 @@ const STYLES: { name: ScPresetName; description: string }[] = [
       </section>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Setup</h2>
+        <h2 scTypeset appToc>Setup</h2>
         <h3 class="text-lg font-medium tracking-tight">
           1. Install the package
         </h3>

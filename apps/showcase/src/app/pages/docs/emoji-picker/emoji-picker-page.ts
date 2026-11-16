@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScHeading } from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicEmojiPickerDemoContainer } from './demos/basic-emoji-picker-demo-container';
@@ -24,12 +24,12 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
     MessageReactionsEmojiPickerDemoContainer,
     TocHeading,
     ComponentBadges,
-    ScHeading,
+    ScTypeset,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Emoji Picker</h1>
+        <h1 scTypeset>Emoji Picker</h1>
         <p class="text-muted-foreground">
           A searchable emoji picker, assembled from parts: one scrolling list of
           every category with sticky headers — virtualised — through which the
@@ -56,7 +56,7 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
       </div>
 
       <section class="space-y-8">
-        <h2 scHeading appToc>Examples</h2>
+        <h2 scTypeset appToc>Examples</h2>
         <app-basic-emoji-picker-demo-container />
         <app-trigger-emoji-picker-demo-container />
         <app-categories-emoji-picker-demo-container />

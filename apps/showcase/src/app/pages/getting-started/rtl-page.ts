@@ -4,13 +4,13 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScFrame,
-  ScHeading,
   ScSeparator,
   ScTooltip,
   ScTooltipArrow,
   ScTooltipPortal,
   ScTooltipProvider,
   ScTooltipTrigger,
+  ScTypeset,
 } from '@semantic-components/ui';
 import {
   ScCodeBlock,
@@ -100,7 +100,7 @@ class RtlWithoutDir {}
     ScCodeBlockHeader,
     ScCodeBlockTitle,
     ScFrame,
-    ScHeading,
+    ScTypeset,
     ScSeparator,
     SiCheckIcon,
     SiCopyIcon,
@@ -128,7 +128,7 @@ class RtlWithoutDir {}
 
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scHeading>Right to left</h1>
+        <h1 scTypeset>Right to left</h1>
         <p class="text-muted-foreground">
           The components follow the direction of the page: set it once, on
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -142,7 +142,7 @@ class RtlWithoutDir {}
       </div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>One direction</h2>
+        <h2 scTypeset appToc>One direction</h2>
         <p class="text-muted-foreground">
           An app in Arabic, Hebrew or Persian: the direction goes on the
           document. Nothing else to do — the components read it (through CDK's
@@ -167,7 +167,7 @@ class RtlWithoutDir {}
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Mixed directions</h2>
+        <h2 scTypeset appToc>Mixed directions</h2>
         <p class="text-muted-foreground">
           A
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">dir="rtl"</code>
@@ -214,7 +214,7 @@ class RtlWithoutDir {}
       <div scSeparator></div>
 
       <section class="space-y-4">
-        <h2 scHeading appToc>Good to know</h2>
+        <h2 scTypeset appToc>Good to know</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Our right-to-left examples import
