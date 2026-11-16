@@ -16,20 +16,40 @@ export async function expectNoA11yViolations(
   // Settled: the page's code loaded (its route is lazy) — network idle, but
   // not forever: a page loading images (or Firefox) may never get there —
   // the page shown (its heading), its fonts in, and what fades or slides in
-  // arrived: colours measured mid-fade fail contrast.
+  // arrived: colours measured mid-fade fail contrast. Asked again until none
+  // runs: WebKit starts some of a theme switch's transitions (an input's
+  // colour) after the first look, which then measured the light theme's
+  // text on the dark one's background. What still runs at the deadline is
+  // taken to its end: under load, WebKit's clock lags (a 150 ms transition
+  // lasting seconds), and axe checks the colours the page settles on.
   await page
     .waitForLoadState('networkidle', { timeout: 10_000 })
     .catch(() => undefined);
   await page.locator('h1').first().waitFor();
   await page.evaluate(async () => {
     await document.fonts.ready;
-    const finite = document
-      .getAnimations()
-      .filter((a) => a.effect?.getComputedTiming().iterations !== Infinity);
-    await Promise.race([
-      Promise.allSettled(finite.map((a) => a.finished)),
-      new Promise((resolve) => setTimeout(resolve, 3000)),
-    ]);
+    const deadline = performance.now() + 3000;
+    const running = () =>
+      document
+        .getAnimations()
+        .filter(
+          (a) =>
+            a.playState === 'running' &&
+            a.effect?.getComputedTiming().iterations !== Infinity,
+        );
+    for (
+      let left = running();
+      left.length && performance.now() < deadline;
+      left = running()
+    ) {
+      await Promise.race([
+        Promise.allSettled(left.map((a) => a.finished)),
+        new Promise((resolve) =>
+          setTimeout(resolve, deadline - performance.now()),
+        ),
+      ]);
+    }
+    running().forEach((a) => a.finish());
   });
   const results = await new AxeBuilder({ page })
     .exclude('[inert]')
