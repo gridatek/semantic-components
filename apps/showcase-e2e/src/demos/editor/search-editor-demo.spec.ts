@@ -22,6 +22,10 @@ test.describe('Search Editor Demo', () => {
     await input.fill('colour');
     const results = bar(page).getByRole('status');
     await expect(results).toHaveText('1 of 5');
+    // Typing moves nothing; the first Enter goes to the current match, the
+    // next one steps on (Tiptap's).
+    await input.press('Enter');
+    await expect(results).toHaveText('1 of 5');
     await input.press('Enter');
     await expect(results).toHaveText('2 of 5');
     await input.press('Shift+Enter');

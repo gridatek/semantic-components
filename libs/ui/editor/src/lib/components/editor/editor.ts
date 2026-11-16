@@ -99,6 +99,14 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
   /** The content's layout (`scEditorContent` sets it): the toolbar follows. */
   readonly layout = signal<ScEditorContentLayout>('default');
 
+  /**
+   * The value the document was last made from. Its HTML never reads back as
+   * the same string, so without this the first run of the value's effect
+   * would load it again — and loading moves the cursor to the end (into a
+   * table, a list, a quote that ends the document).
+   */
+  private loaded: ScEditorValue | undefined;
+
   readonly editable = computed(() => !this.disabled() && !this.readonly());
   /** Invalid once touched: the document's `aria-invalid`, `data-invalid`. */
   readonly showInvalid = computed(() => this.invalid() && this.touched());
@@ -116,7 +124,8 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
       const value = this.value();
       const editor = this.editorInstance();
       untracked(() => {
-        if (editor && !this.holds(editor, value)) {
+        if (editor && value !== this.loaded && !this.holds(editor, value)) {
+          this.loaded = value;
           editor
             .chain()
             .setMeta('addToHistory', false)
@@ -189,7 +198,7 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
         CharacterCount.configure({ limit: this.characterLimit() }),
         ...this.features.flatMap((feature) => feature.behaviour?.(this) ?? []),
       ],
-      content: this.toContent(this.value()),
+      content: this.toContent((this.loaded = this.value())),
       editable: this.editable(),
       onTransaction: () => this.contentVersion.update((v) => v + 1),
       onUpdate: ({ editor }) => {

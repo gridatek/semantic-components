@@ -281,6 +281,9 @@ test.describe('Full Featured Editor Demo', () => {
     await input.fill('list');
     const results = bar.getByRole('status');
     await expect(results).toHaveText(/1 of \d+/);
+    // The first Enter goes to the current match, the next one steps on.
+    await input.press('Enter');
+    await expect(results).toHaveText(/1 of \d+/);
     await input.press('Enter');
     await expect(results).toHaveText(/2 of \d+/);
 

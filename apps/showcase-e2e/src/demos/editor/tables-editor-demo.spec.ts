@@ -19,6 +19,15 @@ test.describe('Tables Editor Demo', () => {
     ]);
   });
 
+  test('opened, the cursor is at the start (not in the table that ends the document)', async ({
+    page,
+  }) => {
+    await expect(tableButton(page)).toHaveAttribute('data-state', 'off');
+    await plans(page).focus();
+    await page.keyboard.type('Hi ');
+    await expect(plans(page).locator('p').first()).toHaveText('Hi Our plans:');
+  });
+
   test('outside a table, only inserting one applies', async ({ page }) => {
     await plans(page).getByText('Our plans:').click();
     await tableButton(page).click();

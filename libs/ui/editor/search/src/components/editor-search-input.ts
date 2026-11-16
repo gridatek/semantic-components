@@ -12,8 +12,9 @@ import { cn } from 'cn';
 import { editorSearch } from './editor-search-state';
 
 /**
- * Searches the document as you type; Enter goes to the next match,
- * Shift+Enter to the previous one. Use on an `input[scInput]` and name it
+ * Searches the document as you type — the current match highlighted, your
+ * cursor where it is; the first Enter goes to it, then Enter goes to the next
+ * match, Shift+Enter to the previous one. Use on an `input[scInput]` and name it
  * (`aria-label`, and a placeholder if you want one). Marked `aria-invalid`
  * when nothing matches. Opening the bar puts the cursor here.
  */
