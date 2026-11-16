@@ -169,8 +169,14 @@
  * borders are separate (collapsed ones can't be rounded) and each cell draws
  * only its end and bottom lines: none doubled with the frame.
  */
+/*
+ * Its box scrolls sideways only (a wide table): never a vertical scrollbar —
+ * from a row's fraction of a pixel or the resize line, it would narrow the
+ * table, re-wrap its text and come and go as you drag.
+ */
 [data-slot='editor-document'] .tableWrapper {
   overflow-x: auto;
+  overflow-y: hidden;
   margin-block-start: var(--typeset-flow);
 }
 
@@ -236,15 +242,25 @@
   pointer-events: none;
 }
 
-/* Dragging a column's border resizes it */
+/*
+ * Dragging a column's border resizes it: the border, shown in the focus
+ * ring's colour as you near it — a 2px line centred on the 1px one.
+ */
 [data-slot='editor-document'] .column-resize-handle {
   position: absolute;
-  top: 0;
-  right: -0.125rem;
-  bottom: -1px;
-  width: 0.25rem;
-  background-color: var(--primary);
+  inset-block: 0 -1px;
+  inset-inline-end: -1.5px;
+  width: 2px;
+  background-color: var(--ring);
   pointer-events: none;
+}
+
+/*
+ * The last column's: on the table's frame, not half past it — past it, the
+ * table's box would scroll, and the scrollbar come and go under the pointer.
+ */
+[data-slot='editor-document'] :last-child > .column-resize-handle {
+  inset-inline-end: -1px;
 }
 
 .ProseMirror.resize-cursor {

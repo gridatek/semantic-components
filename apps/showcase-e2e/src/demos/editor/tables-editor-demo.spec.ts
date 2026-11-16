@@ -48,3 +48,31 @@ test.describe('Tables Editor Demo', () => {
     await expect(plans(page).locator('table')).toHaveCount(0);
   });
 });
+
+test('a column border’s resize line stays in the table: no scrollbar (it would come and go under the pointer)', async ({
+  page,
+}) => {
+  await page.goto('/demos/editor/tables-editor-demo');
+  const table = plans(page).locator('table');
+  await expect(table).toBeVisible();
+  const overflow = () =>
+    table.evaluate((el) => {
+      const box = el.parentElement as HTMLElement;
+      return [
+        box.scrollWidth - box.clientWidth,
+        box.scrollHeight - box.clientHeight,
+      ];
+    });
+  const cells = table.locator('tr').first().locator('th, td');
+  const count = await cells.count();
+  for (let i = 0; i < count; i++) {
+    const cell = await cells.nth(i).boundingBox();
+    expect(cell).not.toBeNull();
+    await page.mouse.move(
+      (cell?.x ?? 0) + (cell?.width ?? 0) - 1,
+      (cell?.y ?? 0) + 10,
+    );
+    await expect(table.locator('.column-resize-handle').first()).toBeAttached();
+    expect(await overflow(), `column ${i + 1}`).toEqual([0, 0]);
+  }
+});
