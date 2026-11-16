@@ -33,6 +33,15 @@ test.describe('Full Featured Editor Demo', () => {
     expect(errors).toEqual([]);
   });
 
+  test('its groups are separated by lines, in a toolbar that wraps', async ({
+    page,
+  }) => {
+    const separators = toolbar(page).getByRole('separator');
+    await expect(separators.first()).toBeAttached();
+    for (const line of await separators.all())
+      expect((await line.boundingBox())?.height ?? 0).toBeGreaterThan(12);
+  });
+
   test('the toolbar is one tab stop', async ({ page }) => {
     await expect(toolbar(page).locator('[tabindex="0"]')).toHaveCount(1);
   });

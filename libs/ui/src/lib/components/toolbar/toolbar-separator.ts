@@ -24,7 +24,8 @@ export class ScToolbarSeparator {
     const isVertical = this.separatorOrientation() === 'vertical';
     return cn(
       'shrink-0 bg-border',
-      isVertical ? 'mx-1 h-full w-px' : 'my-1 h-px w-full',
+      // As tall as its row: a wrapping toolbar has no set height for h-full.
+      isVertical ? 'mx-1 w-px self-stretch' : 'my-1 h-px w-full',
       this.classInput(),
     );
   });

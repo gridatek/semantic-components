@@ -2,6 +2,7 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/libs/presets",
   "assets": [
+    "./src/editor-base.css",
     "./nova/src/typeset-variables.css",
     "./nova/src/editor.css",
     "./lyra/src/typeset-variables.css",

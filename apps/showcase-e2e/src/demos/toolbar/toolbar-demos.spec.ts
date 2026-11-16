@@ -104,3 +104,17 @@ test('RTL: Left moves to the next widget', async ({ page }) => {
     page.getByRole('button', { name: 'محاذاة النهاية' }),
   ).toBeFocused();
 });
+
+test('Usage: a separator is as tall as its row (the toolbar has no set height)', async ({
+  page,
+}) => {
+  await page.goto('/demos/toolbar/toolbar-usage-demo');
+  const toolbar = page.getByRole('toolbar', { name: 'Spreadsheet formatting' });
+  const separator = toolbar.getByRole('separator').first();
+  const [row, line] = [
+    await toolbar.boundingBox(),
+    await separator.boundingBox(),
+  ];
+  // Shown: a line across most of the row's height, not zero.
+  expect(line?.height ?? 0).toBeGreaterThan((row?.height ?? 0) / 2);
+});
