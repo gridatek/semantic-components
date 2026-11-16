@@ -1,8 +1,8 @@
 # E2E suite review (2026-11-16)
 
-A review of `apps/showcase-e2e` at commit `54dbbae3e`: what is done well, what is wrong or risky, and what to do about it, in order of value.
+A review of `apps/showcase-e2e`: what is done well, what is wrong or risky, and what to do about it, in order of value. First written at commit `54dbbae3e`, then checked and corrected at `ee3130826` (the first all-green Nightly E2E, run 43884598710). Nothing in this review has been changed in the code.
 
-**For the reviewer (Opus):** every count below comes from a `grep` or a short script over `apps/showcase-e2e/src`; the command or pattern is given so each claim can be rechecked. Findings marked **(verify)** are inferred from reading the code and were not reproduced as failures. Nothing in this review has been changed in the code.
+Every count comes from a `grep` or a short script over `apps/showcase-e2e/src` (see _How this was measured_). Where the first version was wrong, the correction says so.
 
 ## The suite in numbers
 
@@ -13,7 +13,7 @@ A review of `apps/showcase-e2e` at commit `54dbbae3e`: what is done well, what i
 | `src/presets`        | 65    | 65 × 8 presets                            | 2,213  |
 | helpers (`src/*.ts`) | 7     |                                           | 500    |
 
-Playwright lists 3,422 tests for two projects alone; the nightly runs the suite in three engines, CSR and SSR.
+Playwright lists 3,422 tests for two projects alone; the nightly runs the suite in Firefox and WebKit, CSR and SSR, and CI runs it in Chromium.
 
 ## What is done well
 
@@ -29,22 +29,13 @@ Playwright lists 3,422 tests for two projects alone; the nightly runs the suite 
 
 ## What is wrong or risky
 
-### 1. Reads that don't wait, right after `goto` — the main source of flakes
+### 1. Flaky tests are invisible
 
-`evaluateAll`, `page.evaluate`, `count()`, `textContent()` and `boundingBox()` read the page **as it is now**; they are not retried like `expect(locator)`. The built app renders after `load`, so under load they read `[]`, `""` or a half-laid-out box. Five of the WebKit failures fixed on 2026-11-16 were exactly this (spinner, message, scheduler, bar-chart, navbar).
+The nightly keeps 2 retries, so a test that fails once and passes on retry is reported as "flaky" and the job stays green. The runs of 2026-11-15 had 5 to 7 flaky tests each that nobody saw until the hard failures were investigated. A flaky test is a failing test with a delay.
 
-A script that looks for such a read between a `goto` and the first awaited `expect`/action finds **82 places in 51 files**, 81 of them in `demos/`. Examples:
+It is cheap to fix: Playwright (1.64, the version here) has a `failOnFlakyTests` option — one line in the config for the nightly. Listing them in the job summary first is a gentler start.
 
-- `demos/bar-chart/bar-chart-demos.spec.ts:266` — `evaluateAll` straight after `goto`
-- `demos/avatar/avatar-demos.spec.ts:79` — three `box()` reads in a loop
-- `demos/input-group/input-group-demos.spec.ts:54,63,78,161` — `box()` comparisons
-- `demos/kbd/kbd-demos.spec.ts:31,42,51`
-
-Not all 82 are equally risky **(verify)**: a single-element `locator.evaluate` or `boundingBox` waits for the element to be attached, so it fails only when read before styles, fonts or an entrance animation settle. The dangerous ones are `evaluateAll`, `count()` and `page.evaluate` (35 `evaluateAll` in 24 files, 28 `textContent()/count()/getAttribute()` style reads in 18 files), which wait for nothing.
-
-**Fix:** assert first, then read (`await expect(items).toHaveCount(4)` before `evaluateAll`), or wrap the read in `expect.poll`. A lint rule would stop new ones — see recommendation 2.
-
-### 2. The same boilerplate in over 100 files
+### 2. The same boilerplate in over 100 files — and a gap in what it checks
 
 | Repeated                                                                             | Where                                                                  | Should be                                          |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- | -------------------------------------------------- |
@@ -56,44 +47,59 @@ Not all 82 are equally risky **(verify)**: a single-element `locator.evaluate` o
 
 The cost is real: the `framesOf` fix on 2026-11-16 had to be applied three times. Because the console check is opt-in, **33 of 161 demo specs have none**, and nobody decided that.
 
-### 3. Timeouts are tuned by hand, test by test
+**The gap (missing from the first version):** `collectErrors` records console **errors** only. Warnings are checked only on docs pages (`console-clean.spec.ts`), and on demo routes only when they arrive as errors during SSR hydration (`expectHydrated`). This is how removing `priority` from the item demos broke the nightly on 2026-11-16: Angular's `NG02955` on the demo route was caught only by `ssr.spec.ts` in Firefox. The fixture should decide a policy for Angular's `NG0…` warnings too.
 
-35 explicit `timeout:` values in 25 files, 8 `test.slow()`, one `describe.configure`. Each was added after a failure on CI. The cause is general — Firefox and WebKit are 2–3× slower on a 4-core runner — and is now partly handled in one place (60 s for the `-firefox`/`-webkit` projects). The `expect` timeout is still the default 5 s for every engine, which is what most of the per-test `timeout: 10_000` work around **(verify)**.
+### 3. A few reads that don't wait, right after `goto`
 
-### 4. Flaky tests are invisible
+`evaluateAll`, `page.evaluate` and `count()` read the page **as it is now** and wait for nothing. The built app renders after `load`, so right after `goto` they can read `[]` or `0`. Four of the WebKit failures fixed on 2026-11-16 were this kind (spinner, message, scheduler — `textContent()` on an element still empty — and bar-chart).
 
-The nightly keeps 2 retries, so a test that fails once and passes on retry is reported as "flaky" and the job stays green. The runs of 2026-11-15 had 5 to 7 flaky tests each that nobody saw until the hard failures were investigated. A flaky test is a failing test with a delay.
+**Corrected:** the first version counted 82 such reads and asked to fix "about 60". That was about ten times too many. Of the 82 reads found between a `goto` and the first `expect` or action, 73 are single-element reads (`box()`, `boundingBox()`, `locator.evaluate`), which **do** wait for their element. Only 9 wait for nothing:
 
-### 5. Duplicate work (verify)
+| Read                                                                                                                                                                                              | Verdict                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `demos/timeline/timeline-demos.spec.ts:65` — `evaluateAll` on the markers, then `expect(new Set(xs).size).toBe(1)`                                                                                | **Risky**: not drawn yet → `[]` → size 0 → fails                                        |
+| `demos/line-chart/line-chart-demos.spec.ts:151` — samples the line for 800 ms from `goto`                                                                                                         | **Risky**: the same late start `framesOf` had (fixed there, not here)                   |
+| `demos/tags-input/tags-input-demos.spec.ts:116`, `demos/timeline/timeline-demos.spec.ts:90`, `demos/virtual-list/virtual-list-demos.spec.ts:131` — set `dir="rtl"` on `<html>` right after `goto` | **To check**: may race with the app's own start-up                                      |
+| `demos/bar-chart/bar-chart-demos.spec.ts:266`, `demos/command/command-demos.spec.ts:162`, `demos/link/link-demos.spec.ts:84`, `demos/resizable/resizable-demos.spec.ts:112`                       | Safe: inside a poll, `navigator.userAgent`, a flag on `window`, clearing `localStorage` |
+
+**Fix:** the two risky ones (assert first — `await expect(markers).toHaveCount(n)` — or `expect.poll`), check the three RTL ones, and a lint rule (`no-restricted-syntax`) against `evaluateAll` / `count()` outside an `expect.poll` so new ones don't come.
+
+### 4. Timeouts are tuned by hand, test by test
+
+34 explicit `timeout:` values in 25 files, 8 `test.slow()`, one `describe.configure`. The cause is general — Firefox and WebKit are 2–3× slower on a 4-core runner — and is now partly handled in one place (60 s for the `-firefox`/`-webkit` projects). The `expect` timeout is still the default 5 s for every engine.
+
+A per-project `expect: { timeout }` is supported. **Corrected:** the gain is smaller than the first version implied — of the 34, only 9 are the `10_000` kind it would replace; 8 are deliberately short (100–500 ms, 2–6 s: checks that something does _not_ happen in time), and the others (15–30 s) are genuinely slow operations (a reload, a PDF).
+
+### 5. Duplicate work
 
 - Each docs page spec loads its page 3 or 4 times: axe light and axe dark are separate tests with separate loads (185 axe tests in `pages/`). `presets/pages.spec.ts` does both in one load.
-- A visible page's axe in nova runs in the `pages` project **and** in `presets-nova` (`presets/pages.spec.ts`). The `pages` project also covers hidden pages and the other engines, so only the Chromium nova run of visible pages is a true duplicate.
+- A visible page's axe in nova runs in the `pages` project **and** in `presets-nova` — in Chromium, in `ci.yml` only (the nightly doesn't run the presets projects).
 
-With over 3,000 tests and CI jobs near their 30 minutes (per `docs/e2e-testing.md`), this is the cheapest time to win back.
+Merging light and dark into one test saves loads but loses the clear "dark mode failed" test name: worth it only if CI time gets tight (`docs/e2e-testing.md`: jobs near their 30 minutes).
 
-### 6. Tests retried where the app may be at fault (verify)
+### 6. Interactions retried where the app may be at fault
 
-Three fixes of 2026-11-16 retry the user's action with `toPass` because WebKit under load dropped it: a scroll key during a smooth scroll (message-scroller), a double-click's selection (editor bubble menu), a click's focus (editor). The tests now pass, but each hides a question about the component: does a real Safari user on a slow device lose that key or selection too? Not investigated.
+Two fixes of 2026-11-16 retry the user's action with `toPass` because WebKit under load dropped it: a scroll key during a smooth scroll (message-scroller: Home, End) and a double-click's selection (editor bubble menu). The tests pass, but each hides a question about the component: does a real Safari user on a slow device lose that key or selection too? Not investigated. **Corrected:** the first version listed a third, the editor's focus — that fix waits (`toBeFocused()`), it doesn't retry.
 
 ### 7. Smaller points
 
 - **60 lint warnings left standing**: 50 `no-non-null-assertion` (`(await x.boundingBox())!.x` — the `box()` helper exists for this), 4 `no-conditional-in-test`, 2 `no-wait-for-timeout` without a reason comment (`carousel-demos.spec.ts:145`, `sidebar-demos.spec.ts:189`).
-- **487 `.first()` / `.nth()` / `.last()`** in 152 files and 472 `data-slot` selectors: fine for parts with no role, but worth a look where a role and name would do **(verify, sample only)**.
-- **Long loops in one test**: 50 `for (const … of …)` loops, many of them `goto` per demo inside one `@mobile` test. One failure hides the rest, and the test's time grows with the list.
+- **487 `.first()` / `.nth()` / `.last()`** in 152 files and 472 `data-slot` selectors: fine for parts with no role, but worth a look where a role and name would do (sample only).
+- **Long loops in one test**: 50 `for (const … of …)` loops, many of them a `goto` per demo inside one `@mobile` test. One failure hides the rest, and the failure doesn't say which demo. Splitting them costs a page load each; wrapping each item in `test.step(name)` names the failing demo for free.
 - **`networkidle`** in `axe.ts` and `console-clean.spec.ts` (the lint rule is switched off for it). Bounded to 10 s and caught, so it costs time, not correctness.
 - **No visual tests** (`toHaveScreenshot`: 0). The docs list them as "coming"; class checks per preset cover the look only indirectly.
-- **`page.goto` is monkey-patched** in `test.ts` for SSR. It works, but a second `goto`-like path (`openStill`, `expectHydrated`) has to remember it. A `gotoReady` fixture would be explicit.
+- _Dropped from the first version:_ "`page.goto` is monkey-patched in `test.ts`, so `openStill` and `expectHydrated` must remember it". They call `page.goto`, so they get the patch by themselves.
 
 ## Recommendations, in order of value
 
-1. **Make the console check a fixture** in `test.ts` (automatic, with an opt-out for the few specs that expect an error). Removes the block from 103 files and covers the 33 specs without it.
-2. **Stop unwaited reads**: fix the `evaluateAll` / `count()` / `page.evaluate` cases first (about 60), and add a lint rule (`no-restricted-syntax` on `evaluateAll`/`count` not inside `expect.poll`, or a small custom rule).
-3. **Raise `expect.timeout` for Firefox and WebKit** in the config (for example 10 s), then delete the per-test `timeout:` values that only exist for that.
-4. **Report flaky tests**: fail the nightly, or post the list, when the "flaky" count is not 0.
+1. **Report flaky tests**: `failOnFlakyTests` for the nightly, or a list in the job summary first.
+2. **Make the console check a fixture** in `test.ts`: automatic, with an opt-out for the few specs that expect an error, and a policy for Angular's `NG0…` warnings. Removes the block from 103 files and covers the 33 specs without it.
+3. **Fix the two risky reads** (`timeline:65`, `line-chart:151`), check the three RTL ones, and add a lint rule against `evaluateAll` / `count()` outside `expect.poll`.
+4. **Raise `expect.timeout` for Firefox and WebKit** in the config (for example 10 s), then delete the 9 per-test `10_000` values that only exist for that.
 5. **Move the copies into helpers**: `framesOf`, `settled`, `expectClasses`, and a `preset` fixture option for the cookie.
-6. **One load per page for axe** (light then dark in one test), and drop the nova duplicate between `pages` and `presets-nova` if it is confirmed.
-7. **Clear the 60 lint warnings**, then turn warnings into errors for the e2e project so they stay at 0.
-8. **Look at the three retried interactions in a real Safari** before treating them as test-only problems.
+6. **Clear the 60 lint warnings**, then turn warnings into errors for the e2e project so they stay at 0.
+7. **One load per page for axe** (light then dark in one test), and drop the nova duplicate between `pages` and `presets-nova` — only if CI time demands it.
+8. **Try the two retried interactions in a real Safari** before treating them as test-only problems.
 
 ## How this was measured
 
@@ -102,6 +108,8 @@ cd apps/showcase-e2e
 grep -rE '<pattern>' src --include=*.ts | wc -l          # each count above
 npx eslint apps/showcase-e2e/src                          # 0 errors, 60 warnings (from the repo root)
 ALL_BROWSERS=1 npx playwright test --list --project=pages --project=pages-webkit   # 3,422 tests
+grep -rhoE "timeout: [0-9_]+" src --include=*.spec.ts | sort | uniq -c             # the 34 timeouts
+grep -c failOnFlakyTests ../../node_modules/playwright/types/test.d.ts             # the option exists
 ```
 
-The "82 unwaited reads" script: for each `page.goto(` / `openStill(`, scan the next 14 lines; stop at the first `await expect`, `.poll(`, `.waitFor(`, an `expect…` helper or an action (`click`, `hover`, `fill`, `press`, `check`); report if a read (`evaluateAll(`, `.evaluate(`, `boundingBox()`, `box(`, `textContent()`, `count()`, `getAttribute(`, `corners(`, `computed(`) comes first. It is a heuristic: it misses reads later in a test and counts some safe single-element reads.
+The reads after `goto` (finding 3): for each `page.goto(` / `openStill(`, scan the next 14 lines; stop at the first `await expect`, `.poll(`, `.waitFor(`, an `expect…` helper or an action (`click`, `hover`, `fill`, `press`, `check`); record the first read (`evaluateAll(`, `page.evaluate(`, `count()`, `.evaluate(`, `boundingBox()`, `box(`, `textContent()`, `getAttribute(`, `computed(`). By kind: 38 `box(`, 20 `.evaluate(`, 12 `boundingBox()`, 7 `page.evaluate(`, 2 `evaluateAll(`, 2 `getAttribute(`, 1 `computed(`. The 9 that wait for nothing were then read one by one. It is a heuristic: it misses reads later in a test.

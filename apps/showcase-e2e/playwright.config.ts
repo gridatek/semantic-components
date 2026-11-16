@@ -34,6 +34,10 @@ export default defineConfig({
   // is one worker: the showcase's suite then outgrew the csr job's 30 minutes,
   // and the html report alone printed nothing while it ran.
   workers: process.env['CI'] ? 4 : undefined,
+  // The nightly (CI with ALL_BROWSERS) fails on a flaky test — one that
+  // failed, then passed on a retry — instead of reporting it green: it's a
+  // failing test with a delay. CI's own jobs keep their retries as they are.
+  failOnFlakyTests: !!process.env['CI'] && !!process.env['ALL_BROWSERS'],
   reporter: process.env['CI']
     ? [...(Array.isArray(preset.reporter) ? preset.reporter : []), ['line']]
     : preset.reporter,
@@ -78,8 +82,9 @@ export default defineConfig({
         name: kind + suffix,
         testDir: './src/' + kind,
         // Firefox and WebKit, twice the time: a docs page's axe run takes
-        // 10–30 s on a 12-core machine, more on CI's 4 cores.
-        ...(suffix && { timeout: 60_000 }),
+        // 10–30 s on a 12-core machine, more on CI's 4 cores — and an expect
+        // twice its 5 s, for the same reason.
+        ...(suffix && { timeout: 60_000, expect: { timeout: 10_000 } }),
         use: {
           ...device,
           // Firefox's bounce-tracker guess: localhost sets its cookies (a
@@ -113,6 +118,8 @@ export default defineConfig({
       testDir: './src',
       testMatch: /(demos|pages)[/\\].*\.spec\.ts$/,
       use: { ...device },
+      // The iPhone (WebKit): an expect twice its 5 s, as the -webkit projects.
+      ...(name === 'mobile-webkit' && { expect: { timeout: 10_000 } }),
       grep: /@mobile/,
     })),
   ],

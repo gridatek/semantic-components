@@ -147,15 +147,20 @@ test('RTL entrance: drawn from the right, in place — not moved there as the ch
   page,
 }) => {
   await page.goto(demo('rtl-line'));
-  // Where the line starts (January, on the right), frame by frame, as it draws.
+  // Where the line starts (January, on the right), frame by frame, as it
+  // draws: 800 ms from its first frame (the built app draws after `load` —
+  // up to 3 s waited for it).
   const starts = await page.evaluate(async () => {
     const xs: number[] = [];
-    const end = performance.now() + 800;
+    let end = performance.now() + 3000;
     while (performance.now() < end) {
       const path = document.querySelector<SVGPathElement>(
         '[data-slot=chart-line] path',
       );
-      if (path?.getAttribute('d')) xs.push(path.getPointAtLength(0).x);
+      if (path?.getAttribute('d')) {
+        if (!xs.length) end = performance.now() + 800;
+        xs.push(path.getPointAtLength(0).x);
+      }
       await new Promise((done) => requestAnimationFrame(done));
     }
     return xs;
