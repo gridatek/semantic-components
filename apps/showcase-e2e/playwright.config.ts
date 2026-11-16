@@ -77,6 +77,9 @@ export default defineConfig({
       ).map(([suffix, device]) => ({
         name: kind + suffix,
         testDir: './src/' + kind,
+        // Firefox and WebKit, twice the time: a docs page's axe run takes
+        // 10–30 s on a 12-core machine, more on CI's 4 cores.
+        ...(suffix && { timeout: 60_000 }),
         use: {
           ...device,
           // Firefox's bounce-tracker guess: localhost sets its cookies (a

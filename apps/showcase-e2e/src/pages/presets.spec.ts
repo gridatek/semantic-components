@@ -10,6 +10,7 @@ test.describe('Presets Page', () => {
   test.beforeEach(({ browserName }) => {
     test.slow(browserName !== 'chromium');
   });
+
   // One after the other, in one worker (the preset runs a file's tests side
   // by side): four of this page at once, beside other pages, froze WebKit's
   // pages for more than the 90 s of a test. 'default', not 'serial': a
