@@ -165,9 +165,12 @@
 /*
  * Tables: in a frame with the style's corners (the code block's), lines
  * between the cells to write in (Typeset's have row lines only), cells that
- * wrap. The frame is on the table — in scEditorView there is no wrapper — so
- * borders are separate (collapsed ones can't be rounded) and each cell draws
- * only its end and bottom lines: none doubled with the frame.
+ * wrap. The frame is on the table — in scEditorView there is no wrapper — and
+ * takes no width: an outline inside its edge, not a border, so a resized table
+ * is exactly its columns (Tiptap sets its width to their sum; a border would
+ * make it 2px wider than its box). Borders are separate (collapsed ones can't
+ * be rounded) and each cell draws only its end and bottom lines: none doubled
+ * with the frame.
  */
 /*
  * Its box scrolls sideways only (a wide table): never a vertical scrollbar —
@@ -185,8 +188,10 @@
   table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
-  border: 1px solid var(--border);
+  border: 0;
   border-radius: var(--typeset-radius);
+  outline: 1px solid var(--border);
+  outline-offset: -1px;
 }
 
 [data-slot='editor-document'] .tableWrapper table {
@@ -213,19 +218,19 @@
 
 /* The corner cells follow the frame's corners (their tint, their selection). */
 [data-slot='editor-document'] tr:first-child > :first-child {
-  border-start-start-radius: calc(var(--typeset-radius) - 1px);
+  border-start-start-radius: var(--typeset-radius);
 }
 
 [data-slot='editor-document'] tr:first-child > :last-child {
-  border-start-end-radius: calc(var(--typeset-radius) - 1px);
+  border-start-end-radius: var(--typeset-radius);
 }
 
 [data-slot='editor-document'] tr:last-child > :first-child {
-  border-end-start-radius: calc(var(--typeset-radius) - 1px);
+  border-end-start-radius: var(--typeset-radius);
 }
 
 [data-slot='editor-document'] tr:last-child > :last-child {
-  border-end-end-radius: calc(var(--typeset-radius) - 1px);
+  border-end-end-radius: var(--typeset-radius);
 }
 
 [data-slot='editor-document'] th {
@@ -256,11 +261,17 @@
 }
 
 /*
- * The last column's: on the table's frame, not half past it — past it, the
- * table's box would scroll, and the scrollbar come and go under the pointer.
+ * The last column's: inside the table, against its frame — at its edge, a
+ * fraction of a pixel (your screen's scaling) would make the table's box
+ * scroll as you hover.
  */
 [data-slot='editor-document'] :last-child > .column-resize-handle {
-  inset-inline-end: -1px;
+  inset-inline-end: 0;
+}
+
+/* The last row's: down to the table's edge, not past it. */
+[data-slot='editor-document'] tr:last-child .column-resize-handle {
+  inset-block-end: 0;
 }
 
 .ProseMirror.resize-cursor {

@@ -129,3 +129,41 @@ for (const [border, index] of [
     }
     await page.mouse.up();
   });
+
+test('a table dragged to its box’s edge fits it: its frame takes no width (no scrollbar, no frame cut off)', async ({
+  page,
+}) => {
+  await page.goto('/demos/editor/tables-editor-demo');
+  const table = plans(page).locator('table');
+  await expect(table).toBeVisible();
+  const box = await table.evaluate((el) => {
+    const rect = (el.parentElement as HTMLElement).getBoundingClientRect();
+    return { right: rect.right };
+  });
+  const last = await table
+    .locator('tr')
+    .first()
+    .locator('th, td')
+    .last()
+    .boundingBox();
+  const y = (last?.y ?? 0) + 10;
+  const x = (last?.x ?? 0) + (last?.width ?? 0) - 1;
+  // Narrower first (its columns get widths), then back out to the edge.
+  await page.mouse.move(x - 3, y);
+  await page.mouse.move(x, y, { steps: 2 });
+  await expect(table.locator('.column-resize-handle').first()).toBeAttached();
+  await page.mouse.down();
+  await page.mouse.move(x - 60, y, { steps: 3 });
+  await page.mouse.move(box.right - 1, y, { steps: 6 });
+  await page.mouse.up();
+  const fit = await table.evaluate((el) => {
+    const wrap = el.parentElement as HTMLElement;
+    return {
+      overflow: wrap.scrollWidth - wrap.clientWidth,
+      past:
+        el.getBoundingClientRect().right - wrap.getBoundingClientRect().right,
+    };
+  });
+  expect(fit.overflow).toBe(0);
+  expect(fit.past).toBeLessThanOrEqual(0);
+});
