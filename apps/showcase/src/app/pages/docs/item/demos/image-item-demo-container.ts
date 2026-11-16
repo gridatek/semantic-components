@@ -46,7 +46,7 @@ import {
       <div scItemGroup class="gap-4">
         <a scItem variant="outline" href="#image">
           <div scItemMedia variant="image" class="relative">
-            <img ngSrc="/images/gallery/cafe-thumb.jpg" fill alt="" />
+            <img ngSrc="/images/gallery/cafe-thumb.jpg" fill alt="" priority />
           </div>
           <div scItemBody>
             <div scItemTitle>Midnight City Lights</div>
@@ -58,7 +58,7 @@ import {
         </a>
         <a scItem variant="outline" href="#image">
           <div scItemMedia variant="image" class="relative">
-            <img ngSrc="/images/gallery/coast-thumb.jpg" fill alt="" />
+            <img ngSrc="/images/gallery/summit-thumb.jpg" fill alt="" />
           </div>
           <div scItemBody>
             <div scItemTitle>Coffee Shop Conversations</div>
