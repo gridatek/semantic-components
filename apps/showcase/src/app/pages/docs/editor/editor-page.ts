@@ -299,6 +299,18 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           >: the search button, or Ctrl / ⌘ + F in the document, opens the bar.
           Enter and Shift + Enter step through the matches, Escape closes it.
         </p>
+        <p class="text-muted-foreground">
+          Whether the bar is open is yours: one signal, bound to what shows it
+          and to the bar's
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[(open)]</code>.
+          Here a Collapsible, its trigger in the toolbar. The editor isn't tied
+          to it: where a search shows is a layout choice — a panel that pushes
+          the text down, a box over a corner, a dialog — and editors make it
+          differently. The editor does the search (its keys, focus and matches);
+          a Popover, a Sheet or an
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&#64;if</code>
+          work as well.
+        </p>
         <app-search-editor-demo-container />
       </section>
 
@@ -803,10 +815,10 @@ export class NoteEditor {
       items: [
         {
           name: 'div[scEditorSearchBar]',
-          inputs: [],
+          inputs: ['open (two-way)'],
           read: [],
           do: [
-            'In a scCollapsible (its panel), its trigger anywhere: [scCollapsibleTrigger]="search". Opened (the trigger, Ctrl / ⌘ + F): focus in the search; Escape: closed, back to the text; closed: matches cleared',
+            'Open is yours: bind [(open)] to the signal that shows it (a collapsible, a popover…). Opened (by you, Ctrl / ⌘ + F): focus in the search; Escape: closed, back to the text; closed: matches cleared',
           ],
         },
         {
@@ -828,7 +840,7 @@ export class NoteEditor {
           do: [],
         },
         {
-          name: 'scEditorSearchBar scEditorSearchInput scEditorSearchPrevious scEditorSearchNext scEditorReplaceInput scEditorReplace scEditorReplaceAll scEditorSearchClose',
+          name: 'scEditorSearchInput scEditorSearchPrevious scEditorSearchNext scEditorReplaceInput scEditorReplace scEditorReplaceAll scEditorSearchClose',
           inputs: [],
           read: [],
           do: [],
@@ -976,7 +988,7 @@ export class NoteEditor {
     {
       entry: '/search',
       provide: 'withSearch()',
-      parts: ['scEditorSearchBar (in a scCollapsible)', 'Ctrl / ⌘ + F'],
+      parts: ['scEditorSearchBar ([(open)])', 'Ctrl / ⌘ + F'],
       packages: ['@tiptap/extension-find-and-replace'],
     },
     {

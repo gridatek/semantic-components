@@ -600,13 +600,19 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
           </div>
         </div>
 
-        <div scCollapsible #search="scCollapsible" class="contents">
+        <div
+          scCollapsible
+          #search="scCollapsible"
+          [(open)]="searchOpen"
+          class="contents"
+        >
           <!-- The panel only animates: the gap above is inside it. -->
           <div scCollapsiblePanel class="-mt-2">
             <div class="pt-2">
               <div
                 scFrame
                 scEditorSearchBar
+                [(open)]="searchOpen"
                 aria-label="Search and replace"
                 class="flex flex-wrap items-center gap-x-2 gap-y-1.5 p-2"
               >
@@ -753,6 +759,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
   encapsulation: ViewEncapsulation.None,
 })
 export class FullFeaturedEditorDemo {
+  readonly searchOpen = signal(false);
   private readonly model = signal({ body: SAMPLE });
   readonly editorForm = form(this.model);
 

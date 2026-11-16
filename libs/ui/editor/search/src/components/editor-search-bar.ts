@@ -5,9 +5,9 @@ import {
   effect,
   inject,
   input,
+  model,
   untracked,
 } from '@angular/core';
-import { ScCollapsible } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
@@ -16,12 +16,12 @@ import { cn } from 'cn';
 import { editorSearch } from './editor-search-state';
 
 /**
- * The search bar, in a collapsible's panel (`scCollapsible` around it, its
- * trigger anywhere: `[scCollapsibleTrigger]="search"` in the toolbar).
- * Holds the search and replace inputs, their buttons and the results. Opening
- * it — the trigger, or Ctrl / ⌘ + F in the document — puts focus in the
- * search; Escape closes it and goes back to the text; closed, its matches are
- * cleared. A `search` landmark: name it. Needs `withSearch()`.
+ * The search bar: the search and replace inputs, their buttons and the
+ * results. Whether it is open is yours: `[(open)]`, bound to the same signal
+ * as what shows it (a collapsible, a popover…). Opened — by you, or Ctrl / ⌘ +
+ * F in the document — focus in the search; Escape or `scEditorSearchClose`
+ * close it and go back to the text; closed, its matches are cleared. A
+ * `search` landmark: name it. Needs `withSearch()`.
  */
 @Directive({
   selector: 'div[scEditorSearchBar]',
@@ -35,24 +35,22 @@ import { editorSearch } from './editor-search-state';
 export class ScEditorSearchBar {
   private readonly search = editorSearch(inject(SC_EDITOR));
   readonly classInput = input<string>('', { alias: 'class' });
+  /** Whether it is open: bind the signal that shows it. */
+  readonly open = model(false);
 
   protected readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     ɵassertEditorFeature('withSearch', 'scEditorSearchBar');
-    const collapsible = inject(ScCollapsible, { optional: true });
-    if (!collapsible) {
-      if (typeof ngDevMode !== 'undefined' && ngDevMode)
-        console.warn('scEditorSearchBar goes in a scCollapsible (its panel).');
-      return;
-    }
-    inject(DestroyRef).onDestroy(this.search.register(collapsible));
-    // Opened (by its trigger too): focus in the search. Closed: cleared.
-    let wasOpen = collapsible.open();
+    inject(DestroyRef).onDestroy(this.search.register(this.open));
+    // Opened: focus in the search. Closed: cleared. Not its first value.
+    let first = true;
     effect(() => {
-      const open = collapsible.open();
-      if (open === wasOpen) return;
-      wasOpen = open;
+      const open = this.open();
+      if (first) {
+        first = false;
+        return;
+      }
       untracked(() =>
         open
           ? this.search.focusRequest.update((n) => n + 1)

@@ -1,15 +1,14 @@
-import { computed, signal } from '@angular/core';
-import type { ScCollapsible } from '@semantic-components/ui';
+import { type ModelSignal, computed, signal } from '@angular/core';
 import type { ScEditor } from '@semantic-components/ui/editor';
 
 export type ScEditorSearchFlag = 'caseSensitive' | 'wholeWord' | 'useRegex';
 
 /** An editor's search: the bar's state and what it does. */
 export class ScEditorSearchState {
-  /** The collapsible the search bar is in (`scEditorSearchBar` sets it). */
-  private readonly collapsible = signal<ScCollapsible | null>(null);
-  /** Whether the search bar is open: its collapsible's `open`. */
-  readonly open = computed(() => this.collapsible()?.open() ?? false);
+  /** The search bar's `open` (`scEditorSearchBar` registers it). */
+  private readonly bar = signal<ModelSignal<boolean> | null>(null);
+  /** Whether the search bar is open. */
+  readonly open = computed(() => this.bar()?.() ?? false);
   /** Asks the search input for focus (it moves on with each request). */
   readonly focusRequest = signal(0);
 
@@ -38,7 +37,7 @@ export class ScEditorSearchState {
 
   /** Opens the search bar, focus in its input. */
   show(): void {
-    this.collapsible()?.open.set(true);
+    this.bar()?.set(true);
     this.focusRequest.update((n) => n + 1);
   }
 
@@ -51,7 +50,7 @@ export class ScEditorSearchState {
    */
   close(): void {
     if (!this.open()) return;
-    this.collapsible()?.open.set(false);
+    this.bar()?.set(false);
     const editor = this.editor.editorInstance();
     if (!editor) return;
     withScrollKept(editor.view.dom, () => editor.view.focus());
@@ -64,7 +63,7 @@ export class ScEditorSearchState {
 
   /** Ctrl / ⌘ + F: opens the bar when there is one. */
   shortcut(): boolean {
-    if (!this.collapsible()) return false;
+    if (!this.bar()) return false;
     this.show();
     return true;
   }
@@ -107,11 +106,11 @@ export class ScEditorSearchState {
     }
   }
 
-  /** Called by `scEditorSearchBar`: the collapsible it opens and closes in. */
-  register(collapsible: ScCollapsible): () => void {
-    this.collapsible.set(collapsible);
+  /** Called by `scEditorSearchBar`: its `open`. */
+  register(open: ModelSignal<boolean>): () => void {
+    this.bar.set(open);
     return () => {
-      if (this.collapsible() === collapsible) this.collapsible.set(null);
+      if (this.bar() === open) this.bar.set(null);
     };
   }
 }

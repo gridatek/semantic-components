@@ -122,6 +122,18 @@ This also composes across components. A button can be a drawer trigger, a toolti
 
 One element. Three responsibilities. No wrappers.
 
+Parts don't choose their containers either. The editor's search bar does the search — Ctrl / ⌘ + F, focus, Escape, its matches — but whether it is open is a signal you own, bound with `[(open)]`:
+
+```html
+<div scCollapsible [(open)]="searchOpen">
+  <div scCollapsiblePanel>
+    <div scEditorSearchBar [(open)]="searchOpen" aria-label="Search and replace">…</div>
+  </div>
+</div>
+```
+
+A panel that pushes the text down, a popover over a corner, a dialog: that is a layout choice, so it stays in your template. The editor imports no Collapsible, and swapping it for a Popover changes no editor code.
+
 The tradeoff is verbosity. Because you own the structure, you write more template code than you would with a batteries-included component that hides everything behind inputs. That's a deliberate choice — explicit over implicit. You always know what's in the DOM because you put it there.
 
 ### Tailwind + CVA for Variants
