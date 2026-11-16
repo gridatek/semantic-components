@@ -17,29 +17,29 @@
   },
   "sideEffects": false,
   "exports": {
-    "./nova/typeset.css": {
-      "default": "./nova/src/typeset.css"
+    "./nova/typeset-variables.css": {
+      "default": "./nova/src/typeset-variables.css"
     },
-    "./lyra/typeset.css": {
-      "default": "./lyra/src/typeset.css"
+    "./lyra/typeset-variables.css": {
+      "default": "./lyra/src/typeset-variables.css"
     },
-    "./maia/typeset.css": {
-      "default": "./maia/src/typeset.css"
+    "./maia/typeset-variables.css": {
+      "default": "./maia/src/typeset-variables.css"
     },
-    "./vega/typeset.css": {
-      "default": "./vega/src/typeset.css"
+    "./vega/typeset-variables.css": {
+      "default": "./vega/src/typeset-variables.css"
     },
-    "./mira/typeset.css": {
-      "default": "./mira/src/typeset.css"
+    "./mira/typeset-variables.css": {
+      "default": "./mira/src/typeset-variables.css"
     },
-    "./luma/typeset.css": {
-      "default": "./luma/src/typeset.css"
+    "./luma/typeset-variables.css": {
+      "default": "./luma/src/typeset-variables.css"
     },
-    "./rhea/typeset.css": {
-      "default": "./rhea/src/typeset.css"
+    "./rhea/typeset-variables.css": {
+      "default": "./rhea/src/typeset-variables.css"
     },
-    "./sera/typeset.css": {
-      "default": "./sera/src/typeset.css"
+    "./sera/typeset-variables.css": {
+      "default": "./sera/src/typeset-variables.css"
     }
   }
 }

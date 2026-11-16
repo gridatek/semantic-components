@@ -9,7 +9,7 @@
 @import '@fontsource-variable/noto-sans-arabic';
 @import '../../../libs/ui/src/lib/styles/reduced-motion.css';
 @import '../../../libs/ui/src/lib/styles/typeset.css';
-@import '../../../libs/presets/nova/src/typeset.css';
+@import '../../../libs/presets/nova/src/typeset-variables.css';
 
 /*
  * The theme: shadcn's nova (from a generated app, see shadcn-reference), with

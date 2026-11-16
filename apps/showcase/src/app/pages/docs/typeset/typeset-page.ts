@@ -74,7 +74,8 @@ interface Row {
           >
           and
           <code scTypeset
-            >@import '@semantic-components/presets/nova/typeset.css';</code
+            >@import
+            '@semantic-components/presets/nova/typeset-variables.css';</code
           >
           (your style's). Then put your content in a
           <code scTypeset>typeset</code> container.

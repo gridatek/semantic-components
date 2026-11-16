@@ -8,7 +8,7 @@ Import the file in your global stylesheet, after Tailwind:
 
 ```css
 @import '@semantic-components/ui/styles/typeset.css';
-@import '@semantic-components/presets/nova/typeset.css';
+@import '@semantic-components/presets/nova/typeset-variables.css';
 ```
 
 ## Two ways
@@ -66,7 +66,7 @@ export class MyComponent {}
 | `h5`  | `0.875em`  | `1.5`       | 500    | muted                    |
 | `h6`  | `0.8125em` | `1.5`       | 500    | muted, uppercase, spaced |
 
-**Variables** — in your preset's file (`@semantic-components/presets/<style>/typeset.css`, on `:where(:root)`): `--typeset-size`, `--typeset-leading`, `--typeset-flow` (space between blocks), `--typeset-font-body`, `--typeset-font-heading`, `--typeset-font-mono`, `--typeset-muted`, `--typeset-rule`, and the style's corners: `--typeset-radius` (code blocks, images: its Code Block's) and `--typeset-radius-inline` (inline code, keys: its Kbd's). Override them on `:root`, any ancestor, or a container's preset class: yours win.
+**Variables** — in your preset's file (`@semantic-components/presets/<style>/typeset-variables.css`, on `:where(:root)`): `--typeset-size`, `--typeset-leading`, `--typeset-flow` (space between blocks), `--typeset-font-body`, `--typeset-font-heading`, `--typeset-font-mono`, `--typeset-muted`, `--typeset-rule`, and the style's corners: `--typeset-radius` (code blocks, images: its Code Block's) and `--typeset-radius-inline` (inline code, keys: its Kbd's). Override them on `:root`, any ancestor, or a container's preset class: yours win.
 
 **Classes:** `typeset` (the container), `not-typeset` (opts an element out; `data-not-typeset` too), `typeset-scroll` (a wide table scrolls in its own box).
 

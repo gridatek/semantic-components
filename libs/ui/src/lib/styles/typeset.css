@@ -6,7 +6,7 @@
  * corners — are your preset's file, so import both:
  *
  *   @import '@semantic-components/ui/styles/typeset.css';
- *   @import '@semantic-components/presets/<style>/typeset.css';
+ *   @import '@semantic-components/presets/<style>/typeset-variables.css';
  *
  * Ours, not shadcn's: its variables, on `.typeset` in shadcn's file, are the
  * preset's (on `:root`); an element marked `data-typeset` (scTypeset's) is

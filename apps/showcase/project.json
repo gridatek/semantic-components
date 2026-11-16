@@ -29,43 +29,43 @@
         "styles": [
           "apps/showcase/src/styles.css",
           {
-            "input": "libs/presets/nova/src/typeset.css",
-            "bundleName": "typeset-nova",
+            "input": "libs/presets/nova/src/typeset-variables.css",
+            "bundleName": "typeset-variables-nova",
             "inject": false
           },
           {
-            "input": "libs/presets/lyra/src/typeset.css",
-            "bundleName": "typeset-lyra",
+            "input": "libs/presets/lyra/src/typeset-variables.css",
+            "bundleName": "typeset-variables-lyra",
             "inject": false
           },
           {
-            "input": "libs/presets/maia/src/typeset.css",
-            "bundleName": "typeset-maia",
+            "input": "libs/presets/maia/src/typeset-variables.css",
+            "bundleName": "typeset-variables-maia",
             "inject": false
           },
           {
-            "input": "libs/presets/vega/src/typeset.css",
-            "bundleName": "typeset-vega",
+            "input": "libs/presets/vega/src/typeset-variables.css",
+            "bundleName": "typeset-variables-vega",
             "inject": false
           },
           {
-            "input": "libs/presets/mira/src/typeset.css",
-            "bundleName": "typeset-mira",
+            "input": "libs/presets/mira/src/typeset-variables.css",
+            "bundleName": "typeset-variables-mira",
             "inject": false
           },
           {
-            "input": "libs/presets/luma/src/typeset.css",
-            "bundleName": "typeset-luma",
+            "input": "libs/presets/luma/src/typeset-variables.css",
+            "bundleName": "typeset-variables-luma",
             "inject": false
           },
           {
-            "input": "libs/presets/rhea/src/typeset.css",
-            "bundleName": "typeset-rhea",
+            "input": "libs/presets/rhea/src/typeset-variables.css",
+            "bundleName": "typeset-variables-rhea",
             "inject": false
           },
           {
-            "input": "libs/presets/sera/src/typeset.css",
-            "bundleName": "typeset-sera",
+            "input": "libs/presets/sera/src/typeset-variables.css",
+            "bundleName": "typeset-variables-sera",
             "inject": false
           }
         ]

@@ -2,14 +2,14 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/libs/presets",
   "assets": [
-    "./nova/src/typeset.css",
-    "./lyra/src/typeset.css",
-    "./maia/src/typeset.css",
-    "./vega/src/typeset.css",
-    "./mira/src/typeset.css",
-    "./luma/src/typeset.css",
-    "./rhea/src/typeset.css",
-    "./sera/src/typeset.css"
+    "./nova/src/typeset-variables.css",
+    "./lyra/src/typeset-variables.css",
+    "./maia/src/typeset-variables.css",
+    "./vega/src/typeset-variables.css",
+    "./mira/src/typeset-variables.css",
+    "./luma/src/typeset-variables.css",
+    "./rhea/src/typeset-variables.css",
+    "./sera/src/typeset-variables.css"
   ],
   "lib": {
     "entryFile": "src/index.ts"

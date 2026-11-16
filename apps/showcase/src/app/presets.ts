@@ -49,8 +49,8 @@ export function storePreset(name: ScPresetName): void {
 }
 
 /**
- * The preset's Typeset variables: its typeset.css, a stylesheet of its own
- * (the `typeset-<name>` bundles in project.json, not injected), linked in the
+ * The preset's Typeset variables: its typeset-variables.css, a stylesheet of its own
+ * (the `typeset-variables-<name>` bundles in project.json, not injected), linked in the
  * head at start — on the server too, from the request's cookie, so the page
  * is drawn with them. An app with one preset imports its file instead.
  */
@@ -58,13 +58,13 @@ export function provideTypesetStyles(): EnvironmentProviders {
   return provideEnvironmentInitializer(() => {
     const document = inject(DOCUMENT);
     const name = presetFrom(inject(ScStorage));
-    let link = document.head.querySelector('link#typeset-preset');
+    let link = document.head.querySelector('link#typeset-variables');
     if (!link) {
       link = document.createElement('link');
-      link.setAttribute('id', 'typeset-preset');
+      link.setAttribute('id', 'typeset-variables');
       link.setAttribute('rel', 'stylesheet');
       document.head.appendChild(link);
     }
-    link.setAttribute('href', `typeset-${name}.css`);
+    link.setAttribute('href', `typeset-variables-${name}.css`);
   });
 }

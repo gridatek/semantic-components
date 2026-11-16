@@ -8,9 +8,9 @@ test.describe('Typeset in its preset', () => {
     const preset = presetName();
     await page.goto('/typeset');
     // The preset's file, linked at start.
-    await expect(page.locator('link#typeset-preset')).toHaveAttribute(
+    await expect(page.locator('link#typeset-variables')).toHaveAttribute(
       'href',
-      `typeset-${preset}.css`,
+      `typeset-variables-${preset}.css`,
     );
     const content = page.locator('article.typeset');
     await expect(content.locator('pre').first()).toBeVisible();
