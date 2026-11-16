@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
-  ScButton,
   ScFrame,
   ScMenu,
   ScMenuContent,
@@ -46,7 +45,6 @@ const PLANS = `<p>Our plans:</p>
   selector: 'app-tables-editor-demo',
   providers: [provideEditor(withTables())],
   imports: [
-    ScButton,
     ScToolbar,
     ScToolbarWidget,
     ScToolbarWidgetGroup,
@@ -91,9 +89,7 @@ const PLANS = `<p>Our plans:</p>
             <div scMenuProvider>
               <button
                 scToolbarWidget
-                scButton
-                variant="ghost"
-                size="icon"
+                scToggle
                 scMenuTrigger
                 scEditorTable
                 #table="scEditorTable"

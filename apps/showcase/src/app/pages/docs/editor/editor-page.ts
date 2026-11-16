@@ -749,7 +749,7 @@ export class NoteEditor {
           inputs: ['disabled'],
           read: [],
           do: [
-            'Behaviour only: beside scToggle (one that can be on) or scButton (one that runs once), and scToolbarWidget in a toolbar',
+            'Behaviour only: beside scToggle in a toolbar (every command the same size; pressed as the document says, off for one with no state) or scButton elsewhere, and scToolbarWidget in a toolbar',
           ],
         },
         {

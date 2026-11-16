@@ -86,13 +86,7 @@ import {
           <div scToolbarSeparator></div>
 
           <div scToolbarWidgetGroup>
-            <button
-              scToolbarWidget
-              scButton
-              variant="ghost"
-              size="icon"
-              scEditorImage
-            >
+            <button scToolbarWidget scToggle scEditorImage>
               <svg siImagePlusIcon></svg>
               <span class="sr-only">Add image</span>
             </button>

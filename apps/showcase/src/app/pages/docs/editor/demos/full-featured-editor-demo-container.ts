@@ -313,23 +313,11 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
       >
         <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
           <div scToolbarWidgetGroup>
-            <button
-              scToolbarWidget
-              scButton
-              variant="ghost"
-              size="icon"
-              scEditorUndo
-            >
+            <button scToolbarWidget scToggle scEditorUndo>
               <svg siUndoIcon></svg>
               <span class="sr-only">Undo</span>
             </button>
-            <button
-              scToolbarWidget
-              scButton
-              variant="ghost"
-              size="icon"
-              scEditorRedo
-            >
+            <button scToolbarWidget scToggle scEditorRedo>
               <svg siRedoIcon></svg>
               <span class="sr-only">Redo</span>
             </button>
@@ -341,9 +329,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
             <div scMenuProvider>
               <button
                 scToolbarWidget
-                scButton
-                variant="ghost"
-                size="sm"
+                scToggle
                 scMenuTrigger
                 scEditorBlock
                 #block="scEditorBlock"
@@ -404,9 +390,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
             <div scMenuProvider>
               <button
                 scToolbarWidget
-                scButton
-                variant="ghost"
-                size="icon"
+                scToggle
                 scMenuTrigger
                 scEditorTable
                 #table="scEditorTable"
@@ -588,13 +572,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
           <div scToolbarSeparator></div>
 
           <div scToolbarWidgetGroup>
-            <button
-              scToolbarWidget
-              scButton
-              variant="ghost"
-              size="icon"
-              scEditorImage
-            >
+            <button scToolbarWidget scToggle scEditorImage>
               <svg siImagePlusIcon></svg>
               Add
               <span class="sr-only">image</span>
@@ -604,23 +582,11 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
           <div scToolbarSeparator></div>
 
           <div scToolbarWidgetGroup>
-            <button
-              scToolbarWidget
-              scButton
-              variant="ghost"
-              size="icon"
-              scEditorHorizontalRule
-            >
+            <button scToolbarWidget scToggle scEditorHorizontalRule>
               <svg siMinusIcon></svg>
               <span class="sr-only">Horizontal rule</span>
             </button>
-            <button
-              scToolbarWidget
-              scButton
-              variant="ghost"
-              size="icon"
-              scEditorClearFormatting
-            >
+            <button scToolbarWidget scToggle scEditorClearFormatting>
               <svg siRemoveFormattingIcon></svg>
               <span class="sr-only">Clear formatting</span>
             </button>

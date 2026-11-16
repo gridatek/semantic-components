@@ -164,6 +164,22 @@ test.describe('Full Featured Editor Demo', () => {
     await expect(article(page).locator('mark')).toHaveCount(0);
   });
 
+  test('a toggle shows the editor’s state, not its own: Link opens its popover, not pressed', async ({
+    page,
+  }) => {
+    const link = toolbar(page).getByRole('button', {
+      name: 'Link',
+      exact: true,
+    });
+    await startEmpty(page);
+    await page.keyboard.type('Docs');
+    await page.keyboard.press('ControlOrMeta+a');
+    await link.click();
+    await expect(page.getByRole('textbox', { name: 'Address' })).toBeVisible();
+    // No link in the text: not pressed, though it was clicked.
+    await expect(link).toHaveAttribute('aria-pressed', 'false');
+  });
+
   test('the link popover adds and removes a link', async ({ page }) => {
     const link = toolbar(page).getByRole('button', {
       name: 'Link',

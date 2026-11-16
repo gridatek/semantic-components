@@ -144,9 +144,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <div scMenuProvider>
           <button
             scToolbarWidget
-            scButton
-            variant="ghost"
-            size="sm"
+            scToggle
             scMenuTrigger
             scEditorBlock
             #block="scEditorBlock"
@@ -303,9 +301,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         </div>
         <button
           scToolbarWidget
-          scButton
-          variant="ghost"
-          size="icon"
+          scToggle
           scEditorImage
           class="size-8 min-w-8 px-0"
         >
@@ -315,9 +311,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
       <div scToolbarWidgetGroup class="ms-auto">
         <button
           scToolbarWidget
-          scButton
-          variant="ghost"
-          size="icon"
+          scToggle
           scEditorUndo
           class="size-8 min-w-8 px-0"
         >
@@ -325,9 +319,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         </button>
         <button
           scToolbarWidget
-          scButton
-          variant="ghost"
-          size="icon"
+          scToggle
           scEditorRedo
           class="size-8 min-w-8 px-0"
         >
