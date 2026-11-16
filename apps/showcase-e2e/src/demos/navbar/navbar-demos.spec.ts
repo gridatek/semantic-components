@@ -62,6 +62,20 @@ test.describe('wide', () => {
     await expect(banner).not.toHaveAttribute('data-hidden');
     await page.mouse.wheel(0, 600);
     await expect(banner).toHaveAttribute('data-hidden', '');
+    // The scroll down settled first: WebKit's wheel scroll, still running
+    // (hidden halfway), took the scroll up with it.
+    let last = -1;
+    await expect
+      .poll(
+        async () => {
+          const y = await page.evaluate(() => Math.round(scrollY));
+          const settled = y === last;
+          last = y;
+          return settled;
+        },
+        { intervals: [250] },
+      )
+      .toBe(true);
     await page.mouse.wheel(0, -200);
     await expect(banner).not.toHaveAttribute('data-hidden');
     // Stuck at the top of the scrolled page.
