@@ -1,6 +1,6 @@
 # Typeset
 
-Styles for content you don't write the markup of — rendered markdown, a chat answer — in a typeset container, and the same look for a heading, a paragraph or a quote on its own. shadcn's one CSS file, tuned by three variables; components inside keep their look, your classes win.
+Styles for content you don't write the markup of — rendered markdown, a chat answer — in a typeset container, and the same look for a heading, a paragraph or a quote on its own. One CSS file, started from shadcn's and tuned by variables; components inside keep their look, your classes win.
 
 ## Setup
 
@@ -10,6 +10,19 @@ Import the file in your global stylesheet, after Tailwind:
 @import '@semantic-components/ui/styles/typeset.css';
 @import '@semantic-components/presets/nova/typeset-variables.css';
 ```
+
+The second file is optional: your preset's values. Without it, set every variable yourself (the list: **Variables**, under [Components](#components)).
+
+## Not shadcn's Typeset
+
+We started from shadcn's `typeset.css` and no longer follow it exactly. What's ours:
+
+- **The variables are the preset's**, on `:root` (shadcn sets them on `.typeset` in its file): each style's own `typeset-variables.css`, or your values.
+- **An element on its own** is set like one in a container: `scTypeset` marks it (`data-typeset`).
+- **The style's corners**: code blocks and images as its Code Block (`--typeset-radius`); inline code, keys and highlights as its Kbd (`--typeset-radius-inline`). shadcn's highlight has a fixed `0.2em`.
+- **Headings h1 to h4 take the style's weight, tracking and case**: `--typeset-heading-weight`, `--typeset-heading-tracking`, `--typeset-heading-case`. shadcn's Typeset has no such variables. They're 600, `normal` and `none` in every style but sera (uppercase, `0.05em`: its titles). **Writing your own values?** Set these three too: they have no fallback, and without `--typeset-heading-weight` headings lose their bold.
+
+The full list: "Deliberate divergences" in `docs/shadcn-style-reference.md`.
 
 ## Two ways
 

@@ -57,9 +57,9 @@ interface Row {
         <p class="text-muted-foreground">
           Styles for content you don't write the markup of — rendered markdown,
           a chat answer — in a typeset container, and the same look for a
-          heading, a paragraph or a quote on its own. shadcn's one CSS file,
-          tuned by three variables; components inside keep their look, your
-          classes win.
+          heading, a paragraph or a quote on its own. One CSS file, started from
+          shadcn's and tuned by variables; components inside keep their look,
+          your classes win.
         </p>
         <app-component-badges path="typeset" />
       </div>
@@ -165,6 +165,49 @@ interface Row {
           In rendered markdown you can rarely put a class on one element: a hook
           in your renderer adds it, or <code scTypeset>not-typeset</code> goes
           on a wrapper around the region.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Not shadcn's Typeset</h2>
+        <p class="text-muted-foreground">
+          We started from shadcn's <code scTypeset>typeset.css</code> and no
+          longer follow it exactly. What's ours:
+        </p>
+        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+          <li>
+            <strong class="text-foreground"
+              >The variables are the preset's</strong
+            >, on <code scTypeset>:root</code> (shadcn sets them on
+            <code scTypeset>.typeset</code> in its file): each style's own
+            <code scTypeset>typeset-variables.css</code> — optional — or your
+            values.
+          </li>
+          <li>
+            <strong class="text-foreground">An element on its own</strong> is
+            set like one in a container: <code scTypeset>scTypeset</code> marks
+            it.
+          </li>
+          <li>
+            <strong class="text-foreground">The style's corners:</strong> code
+            blocks and images as its Code Block; inline code, keys and
+            highlights as its Kbd (shadcn's highlight has a fixed 0.2em).
+          </li>
+          <li>
+            <strong class="text-foreground">Headings h1 to h4</strong> take the
+            style's weight, tracking and case —
+            <code scTypeset>--typeset-heading-weight</code>,
+            <code scTypeset>--typeset-heading-tracking</code>,
+            <code scTypeset>--typeset-heading-case</code>; shadcn's Typeset has
+            none. 600, normal and none in every style but sera (uppercase,
+            0.05em: its titles).
+          </li>
+        </ul>
+        <p class="text-muted-foreground">
+          <strong class="text-foreground">Writing your own values?</strong> Set
+          the three heading variables too: they have no fallback, and without
+          <code scTypeset>--typeset-heading-weight</code> headings lose their
+          bold.
         </p>
       </section>
 
