@@ -36,29 +36,29 @@ npm install @tiptap/extension-superscript @tiptap/extension-subscript @tiptap/ma
 import { Component, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScToggle, ScToolbar, ScToolbarWidget, ScToolbarWidgetGroup } from '@semantic-components/ui';
-import { ScEditor, ScEditorBold, ScEditorContent, provideEditor } from '@semantic-components/ui/editor';
+import { ScEditor, ScEditorCommand, ScEditorContent, provideEditor } from '@semantic-components/ui/editor';
 import { withMarkdown } from '@semantic-components/ui/editor/markdown';
-import { ScEditorSubscript, ScEditorSuperscript, withScripts } from '@semantic-components/ui/editor/scripts';
+import { withScripts } from '@semantic-components/ui/editor/scripts';
 import { SiBoldIcon, SiSubscriptIcon, SiSuperscriptIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-note-editor',
-  imports: [FormField, ScEditor, ScEditorBold, ScEditorContent, ScEditorSubscript, ScEditorSuperscript, ScToggle, ScToolbar, ScToolbarWidget, ScToolbarWidgetGroup, SiBoldIcon, SiSubscriptIcon, SiSuperscriptIcon],
+  imports: [FormField, ScEditor, ScEditorCommand, ScEditorContent, ScToggle, ScToolbar, ScToolbarWidget, ScToolbarWidgetGroup, SiBoldIcon, SiSubscriptIcon, SiSuperscriptIcon],
   // The features of the editors in this component.
   providers: [provideEditor(withScripts(), withMarkdown())],
   template: `
     <div scEditor [formField]="noteForm.body" format="markdown">
       <div scToolbar aria-label="Formatting">
         <div scToolbarWidgetGroup>
-          <button scToolbarWidget scToggle scEditorBold>
+          <button scToolbarWidget scToggle scEditorCommand="bold">
             <svg siBoldIcon></svg>
             <span class="sr-only">Bold</span>
           </button>
-          <button scToolbarWidget scToggle scEditorSuperscript>
+          <button scToolbarWidget scToggle scEditorCommand="superscript">
             <svg siSuperscriptIcon></svg>
             <span class="sr-only">Superscript</span>
           </button>
-          <button scToolbarWidget scToggle scEditorSubscript>
+          <button scToolbarWidget scToggle scEditorCommand="subscript">
             <svg siSubscriptIcon></svg>
             <span class="sr-only">Subscript</span>
           </button>
@@ -73,16 +73,16 @@ export class NoteEditor {
 }
 ```
 
-| Entry point                                  | Provide                                               | Parts                                                                                    | Package                                                        |
-| -------------------------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| `@semantic-components/ui/editor/tables`      | `withTables()`                                        | `scEditorTable`                                                                          | `@tiptap/extension-table`                                      |
-| `@semantic-components/ui/editor/images`      | `withImages()`                                        | `scEditorUploads`, `scEditorImage`; drop, paste                                          | `@tiptap/extension-image`, `@tiptap/extension-file-handler`    |
-| `@semantic-components/ui/editor/search`      | `withSearch()`                                        | `scEditorSearch`, `scEditorSearchBar` and its parts; **Ctrl / ⌘ + F**                    | `@tiptap/extension-find-and-replace`                           |
-| `@semantic-components/ui/editor/highlight`   | `withHighlight()`                                     | `scEditorHighlight`, `scEditorHighlightColor`, `scEditorRemoveHighlight`                 | `@tiptap/extension-highlight`                                  |
-| `@semantic-components/ui/editor/scripts`     | `withScripts()`                                       | `scEditorSuperscript`, `scEditorSubscript`                                               | `@tiptap/extension-superscript`, `@tiptap/extension-subscript` |
-| `@semantic-components/ui/editor/align`       | `withAlign()`                                         | `scEditorAlignLeft`, `scEditorAlignCenter`, `scEditorAlignRight`, `scEditorAlignJustify` | `@tiptap/extension-text-align`                                 |
-| `@semantic-components/ui/editor/markdown`    | `withMarkdown()`                                      | `format="markdown"`                                                                      | `@tiptap/markdown`                                             |
-| `@semantic-components/ui/editor/bubble-menu` | none (`scEditorBubbleMenu` adds itself to the editor) | `scEditorBubbleMenu`                                                                     | `@tiptap/extension-bubble-menu`                                |
+| Entry point                                  | Provide                                               | Parts                                                                     | Package                                                        |
+| -------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `@semantic-components/ui/editor/tables`      | `withTables()`                                        | `scEditorTable`                                                           | `@tiptap/extension-table`                                      |
+| `@semantic-components/ui/editor/images`      | `withImages()`                                        | `scEditorUploads`, `scEditorImage`; drop, paste                           | `@tiptap/extension-image`, `@tiptap/extension-file-handler`    |
+| `@semantic-components/ui/editor/search`      | `withSearch()`                                        | `scEditorSearch`, `scEditorSearchBar` and its parts; **Ctrl / ⌘ + F**     | `@tiptap/extension-find-and-replace`                           |
+| `@semantic-components/ui/editor/highlight`   | `withHighlight()`                                     | `scEditorHighlight`, `scEditorHighlightColor`, `scEditorRemoveHighlight`  | `@tiptap/extension-highlight`                                  |
+| `@semantic-components/ui/editor/scripts`     | `withScripts()`                                       | the commands `superscript`, `subscript`                                   | `@tiptap/extension-superscript`, `@tiptap/extension-subscript` |
+| `@semantic-components/ui/editor/align`       | `withAlign()`                                         | the commands `align-left`, `align-center`, `align-right`, `align-justify` | `@tiptap/extension-text-align`                                 |
+| `@semantic-components/ui/editor/markdown`    | `withMarkdown()`                                      | `format="markdown"`                                                       | `@tiptap/markdown`                                             |
+| `@semantic-components/ui/editor/bubble-menu` | none (`scEditorBubbleMenu` adds itself to the editor) | `scEditorBubbleMenu`                                                      | `@tiptap/extension-bubble-menu`                                |
 
 - **Provided, not found from the buttons**: the document's schema is set when the editor starts, and a saved document can hold a table with no table button in sight — without `withTables()` it would be dropped. `provideEditor` goes in a component's `providers` (or the app's); the editors and `scEditorView`s below read it.
 - **The same features for the editor and the display**, so they hold the same documents.
@@ -121,11 +121,11 @@ A lazy route (`loadComponent`) does the same for a page with an editor.
 <div scEditor [formField]="postForm.body" class="flex flex-col gap-2">
   <div scToolbar aria-label="Formatting">
     <div scToolbarWidgetGroup>
-      <button scToolbarWidget scToggle scEditorBold>
+      <button scToolbarWidget scToggle scEditorCommand="bold">
         <svg siBoldIcon></svg>
         <span class="sr-only">Bold</span>
       </button>
-      <button scToolbarWidget scToggle scEditorItalic>
+      <button scToolbarWidget scToggle scEditorCommand="italic">
         <svg siItalicIcon></svg>
         <span class="sr-only">Italic</span>
       </button>
@@ -158,41 +158,45 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 
 ## Parts
 
-| Part                                        | Selector                                      | Does                                                                                                                                                                                                                                                                         |
-| ------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScEditor`                                  | `[scEditor]`                                  | The document and its commands; a Signal Forms control (`exportAs: 'scEditor'`). `data-disabled`, `data-readonly`, `data-invalid`.                                                                                                                                            |
-| `ScEditorContent`                           | `div[scEditorContent]`                        | Where it's written: a multi-line `textbox`. `ariaLabel` (name it — no default), `placeholder` (none by default), `layout` (`default` or `page`, see [Styling](#styling)).                                                                                                    |
-| `ScEditorBold` … (see below)                | `button[scEditorBold]`…                       | A command, behaviour only: put it beside its look — `scToggle` in a toolbar, every command the same size (off for one with no state), or `scButton` elsewhere — and `scToolbarWidget` in a toolbar. It feeds them its state (pressed, disabled). Write its icon and name it. |
-| `ScEditorBlock`                             | `[scEditorBlock]`                             | The selection's block for a control of yours (a menu, a select): `value()` (`'paragraph'`, `'heading-1'`…`'heading-6'`, `'bullet-list'`, `'ordered-list'`, `'task-list'`, `'quote'`, `'code-block'`), `select(block)` (`exportAs`).                                          |
-| `ScEditorTable` (`/tables`)                 | `button[scEditorTable]`                       | Tables: `select(action)`, `can(action)`, `inTable()` (`data-state="on"` in one) — a menu trigger (see [Tables](#tables)).                                                                                                                                                    |
-| `ScEditorBubbleMenu` (`/bubble-menu`)       | `div[scEditorBubbleMenu]`                     | A floating toolbar by the selected text (see [Floating toolbar](#floating-toolbar)).                                                                                                                                                                                         |
-| `ScEditorLink`                              | `button[scEditorLink]`                        | Pressed inside a link; the trigger of your link popover: `href()`, `set(href, text?)`, `remove()` (`exportAs`).                                                                                                                                                              |
-| `ScEditorHighlight` (`/highlight`)          | `button[scEditorHighlight]`                   | Pressed inside a highlight; the trigger of your highlight popover.                                                                                                                                                                                                           |
-| `ScEditorHighlightColor` (`/highlight`)     | `button[scEditorHighlightColor]`              | A swatch in that popover: `[scEditorHighlightColor]="color"` highlights in it, or removes it; pressed when it's the colour. Name it.                                                                                                                                         |
-| `ScEditorRemoveHighlight` (`/highlight`)    | `button[scEditorRemoveHighlight]`             | Removes the highlight (disabled when there is none).                                                                                                                                                                                                                         |
-| `ScEditorUploads` (`/images`)               | `[scEditor][upload]`                          | The image uploads: `[upload]` on the editor, `imageTypes`, `uploads()`, `cancel(id)` (see [Images](#images)).                                                                                                                                                                |
-| `ScEditorImage` (`/images`)                 | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `[upload]` (disabled without one).                                                                                                                                                                                           |
-| `ScEditorSearch` (`/search`)                | `button[scEditorSearch]`                      | Opens and closes the search bar (`open()`, `aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                                                                                                                                          |
-| `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar (`/search`).                                                                                                                                                                                                                                       |
-| `ScEditorView`                              | `[scEditorView]`                              | Displays the editor's HTML in its styles, without an editor (see [Displaying the document](#displaying-the-document)).                                                                                                                                                       |
-| `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`               | `wordCount()`, `charCount()`, `limit()`, `remaining()` (`exportAs`) — write the text around them. `data-limit-reached` at the limit.                                                                                                                                         |
+| Part                                        | Selector                                      | Does                                                                                                                                                                                                                                                                    |
+| ------------------------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScEditor`                                  | `[scEditor]`                                  | The document and its commands; a Signal Forms control (`exportAs: 'scEditor'`). `data-disabled`, `data-readonly`, `data-invalid`.                                                                                                                                       |
+| `ScEditorContent`                           | `div[scEditorContent]`                        | Where it's written: a multi-line `textbox`. `ariaLabel` (name it — no default), `placeholder` (none by default), `layout` (`default` or `page`, see [Styling](#styling)).                                                                                               |
+| `ScEditorCommand`                           | `button[scEditorCommand]`                     | Runs a command by name — `scEditorCommand="bold"` (see below). Behaviour only: beside `scToggle` in a toolbar (every command the same size) or `scButton`, and `scToolbarWidget`; pressed as the document says, disabled when it can't run. Write its icon and name it. |
+| `ScEditorBlock`                             | `[scEditorBlock]`                             | The selection's block for a control of yours (a menu, a select): `value()` (`'paragraph'`, `'heading-1'`…`'heading-6'`, `'bullet-list'`, `'ordered-list'`, `'task-list'`, `'quote'`, `'code-block'`), `select(block)` (`exportAs`).                                     |
+| `ScEditorTable` (`/tables`)                 | `button[scEditorTable]`                       | Tables: `select(action)`, `can(action)`, `inTable()` (`data-state="on"` in one) — a menu trigger (see [Tables](#tables)).                                                                                                                                               |
+| `ScEditorBubbleMenu` (`/bubble-menu`)       | `div[scEditorBubbleMenu]`                     | A floating toolbar by the selected text (see [Floating toolbar](#floating-toolbar)).                                                                                                                                                                                    |
+| `ScEditorLink`                              | `button[scEditorLink]`                        | Pressed inside a link; the trigger of your link popover: `href()`, `set(href, text?)`, `remove()` (`exportAs`).                                                                                                                                                         |
+| `ScEditorHighlight` (`/highlight`)          | `button[scEditorHighlight]`                   | Pressed inside a highlight; the trigger of your highlight popover.                                                                                                                                                                                                      |
+| `ScEditorHighlightColor` (`/highlight`)     | `button[scEditorHighlightColor]`              | A swatch in that popover: `[scEditorHighlightColor]="color"` highlights in it, or removes it; pressed when it's the colour. Name it.                                                                                                                                    |
+| `ScEditorRemoveHighlight` (`/highlight`)    | `button[scEditorRemoveHighlight]`             | Removes the highlight (disabled when there is none).                                                                                                                                                                                                                    |
+| `ScEditorUploads` (`/images`)               | `[scEditor][upload]`                          | The image uploads: `[upload]` on the editor, `imageTypes`, `uploads()`, `cancel(id)` (see [Images](#images)).                                                                                                                                                           |
+| `ScEditorImage` (`/images`)                 | `button[scEditorImage]`                       | Picks images and uploads them with the editor's `[upload]` (disabled without one).                                                                                                                                                                                      |
+| `ScEditorSearch` (`/search`)                | `button[scEditorSearch]`                      | Opens and closes the search bar (`open()`, `aria-pressed`); with it, **Ctrl / ⌘ + F** in the document opens it too.                                                                                                                                                     |
+| `ScEditorSearchBar` and its parts           | see [Search and replace](#search-and-replace) | The bar under the toolbar (`/search`).                                                                                                                                                                                                                                  |
+| `ScEditorView`                              | `[scEditorView]`                              | Displays the editor's HTML in its styles, without an editor (see [Displaying the document](#displaying-the-document)).                                                                                                                                                  |
+| `ScEditorCount`, `…WordCount`, `…CharCount` | `div[scEditorCount]`, `span[…]`               | `wordCount()`, `charCount()`, `limit()`, `remaining()` (`exportAs`) — write the text around them. `data-limit-reached` at the limit.                                                                                                                                    |
 
-The commands, `scEditor` + its name — behaviour only, beside `scToggle` or `scButton`:
+The commands, by name (`scEditorCommand="…"`, typed: a misspelt name doesn't compile):
 
-- **With a state** — beside `scToggle`, pressed as the document says: `Bold`, `Italic`, `Underline`, `Strikethrough`, `Code`, `Superscript`, `Subscript` (each turns the other off; `/scripts`), `BulletList`, `OrderedList`, `TaskList`, `Blockquote`, `CodeBlock`, `AlignLeft`, `AlignCenter`, `AlignRight`, `AlignJustify` (`/align`), `Link`, `Highlight`, `Search`.
-- **Run once** — beside `scToggle` too in a toolbar (never pressed), or `scButton`: `HorizontalRule`, `ClearFormatting`, `Image`, `Undo`, `Redo` (disabled when there is nothing to undo / redo).
+| Commands                                                          | Pressed when                                               | From                         |
+| ----------------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------- |
+| `bold`, `italic`, `underline`, `strikethrough`, `code`            | the mark is at the selection                               | core                         |
+| `bullet-list`, `ordered-list`, `task-list`, `quote`, `code-block` | the selection is in it                                     | core                         |
+| `horizontal-rule`, `clear-formatting`, `undo`, `redo`             | never (Undo and Redo disabled with nothing to undo / redo) | core                         |
+| `align-left`, `align-center`, `align-right`, `align-justify`      | the paragraph has it                                       | `withAlign()` (`/align`)     |
+| `superscript`, `subscript` (each turns the other off)             | the mark is at the selection                               | `withScripts()` (`/scripts`) |
 
-The parts of a feature come from its entry point and need it provided: see [Features](#features).
+A feature's commands are typed once its entry point is imported, and need it provided: in development, `scEditorCommand="align-center"` without `withAlign()` warns. The parts with behaviour of their own stay parts: the block (`scEditorBlock`), the link, the highlight, the image, the table, the search — see [Features](#features).
 
 All are disabled when the editor is disabled or read-only — except `Search`, which read-only documents keep.
 
-### Why no `Toggle` suffix
+### One directive, by name
 
-These were `scEditorBoldToggle`, `scEditorUndoToggle`… But Undo, Redo, Horizontal rule and Clear formatting aren't toggles — they have no state — and a `Toggle` / `Button` split would be a second thing to remember for each one. So every button is named the same way, after its command:
+These were one directive each (`scEditorBold`, `scEditorUndo`… twenty of them), and before that `scEditorBoldToggle`… One directive with the command's name is one thing to learn, and a feature adds its commands without parts of its own:
 
-- The selector already says it's a button (`button[scEditorBold]`); a suffix adds nothing.
 - Whether it's pressed is the editor's to say: beside `scToggle`, a command with a state presses it as the document does, one without keeps it off.
-- It matches the other parts: `scEditorBlock`, `scEditorContent`, `scEditorWordCount`.
+- The name is typed (`ScEditorCommandName`): core's commands, and a feature's once its entry point is imported (`ScEditorCommands`, extended by module augmentation).
 
 Their group is the Toolbar's `scToolbarWidgetGroup`, without a `value`: it groups them for the arrow keys; which are pressed — one alignment, any number of marks — is the document's to say, not the group's.
 
@@ -332,8 +336,8 @@ The actions (`ScEditorTableAction`): `insertTable` (3 × 3, with a header row), 
   …
   <div scEditorBubbleMenu scToolbar aria-label="Selection" class="shadow-md">
     <div scToolbarWidgetGroup>
-      <button scToolbarWidget scToggle scEditorBold>…</button>
-      <button scToolbarWidget scToggle scEditorItalic>…</button>
+      <button scToolbarWidget scToggle scEditorCommand="bold">…</button>
+      <button scToolbarWidget scToggle scEditorCommand="italic">…</button>
     </div>
   </div>
 </div>

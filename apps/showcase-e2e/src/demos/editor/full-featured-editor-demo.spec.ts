@@ -180,6 +180,27 @@ test.describe('Full Featured Editor Demo', () => {
     await expect(link).toHaveAttribute('aria-pressed', 'false');
   });
 
+  test('a feature’s commands, by name: align-center and superscript pressed as the text is', async ({
+    page,
+  }) => {
+    await startEmpty(page);
+    await page.keyboard.type('Centred');
+    const center = toolbar(page).getByRole('button', { name: 'Align center' });
+    const left = toolbar(page).getByRole('button', { name: 'Align left' });
+    await center.click();
+    await expect(article(page).locator('p')).toHaveCSS('text-align', 'center');
+    await expect(center).toHaveAttribute('aria-pressed', 'true');
+    await expect(left).toHaveAttribute('aria-pressed', 'false');
+
+    await page.keyboard.press('ControlOrMeta+a');
+    const superscript = toolbar(page).getByRole('button', {
+      name: 'Superscript',
+    });
+    await superscript.click();
+    await expect(article(page).locator('sup')).toHaveText('Centred');
+    await expect(superscript).toHaveAttribute('aria-pressed', 'true');
+  });
+
   test('the link popover adds and removes a link', async ({ page }) => {
     const link = toolbar(page).getByRole('button', {
       name: 'Link',

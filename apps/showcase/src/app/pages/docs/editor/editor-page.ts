@@ -618,16 +618,12 @@ import {
 } from '@semantic-components/ui';
 import {
   ScEditor,
-  ScEditorBold,
+  ScEditorCommand,
   ScEditorContent,
   provideEditor,
 } from '@semantic-components/ui/editor';
 import { withMarkdown } from '@semantic-components/ui/editor/markdown';
-import {
-  ScEditorSubscript,
-  ScEditorSuperscript,
-  withScripts,
-} from '@semantic-components/ui/editor/scripts';
+import { withScripts } from '@semantic-components/ui/editor/scripts';
 import {
   SiBoldIcon,
   SiSubscriptIcon,
@@ -636,36 +632,22 @@ import {
 
 @Component({
   selector: 'app-note-editor',
-  imports: [
-    FormField,
-    ScEditor,
-    ScEditorBold,
-    ScEditorContent,
-    ScEditorSubscript,
-    ScEditorSuperscript,
-    ScToggle,
-    ScToolbar,
-    ScToolbarWidget,
-    ScToolbarWidgetGroup,
-    SiBoldIcon,
-    SiSubscriptIcon,
-    SiSuperscriptIcon,
-  ],
+  imports: [FormField, ScEditor, ScEditorCommand, ScEditorContent, ScToggle, ScToolbar, ScToolbarWidget, ScToolbarWidgetGroup, SiBoldIcon, SiSubscriptIcon, SiSuperscriptIcon],
   // The features of the editors in this component.
   providers: [provideEditor(withScripts(), withMarkdown())],
   template: \`
     <div scEditor [formField]="noteForm.body" format="markdown">
       <div scToolbar aria-label="Formatting">
         <div scToolbarWidgetGroup>
-          <button scToolbarWidget scToggle scEditorBold>
+          <button scToolbarWidget scToggle scEditorCommand="bold">
             <svg siBoldIcon></svg>
             <span class="sr-only">Bold</span>
           </button>
-          <button scToolbarWidget scToggle scEditorSuperscript>
+          <button scToolbarWidget scToggle scEditorCommand="superscript">
             <svg siSuperscriptIcon></svg>
             <span class="sr-only">Superscript</span>
           </button>
-          <button scToolbarWidget scToggle scEditorSubscript>
+          <button scToolbarWidget scToggle scEditorCommand="subscript">
             <svg siSubscriptIcon></svg>
             <span class="sr-only">Subscript</span>
           </button>
@@ -745,8 +727,11 @@ export class NoteEditor {
           do: [],
         },
         {
-          name: 'scEditorBold scEditorItalic scEditorUnderline scEditorStrikethrough scEditorCode scEditorBulletList scEditorOrderedList scEditorTaskList scEditorBlockquote scEditorCodeBlock scEditorHorizontalRule scEditorClearFormatting scEditorUndo scEditorRedo',
-          inputs: ['disabled'],
+          name: 'button[scEditorCommand]',
+          inputs: [
+            "scEditorCommand: 'bold' | 'italic' | 'underline' | 'strikethrough' | 'code' | 'bullet-list' | 'ordered-list' | 'task-list' | 'quote' | 'code-block' | 'horizontal-rule' | 'clear-formatting' | 'undo' | 'redo' — and a feature's: 'align-…', 'superscript', 'subscript'",
+            'disabled',
+          ],
           read: [],
           do: [
             'Behaviour only: beside scToggle in a toolbar (every command the same size; pressed as the document says, off for one with no state) or scButton elsewhere, and scToolbarWidget in a toolbar',
@@ -876,16 +861,12 @@ export class NoteEditor {
       entry: '@semantic-components/ui/editor/scripts',
       items: [
         {
-          name: 'scEditorSuperscript scEditorSubscript',
-          inputs: ['disabled'],
-          read: [],
-          do: [],
-        },
-        {
           name: 'withScripts()',
           inputs: [],
           read: [],
-          do: ['Superscript and subscript'],
+          do: [
+            'Superscript and subscript: the commands superscript, subscript (scEditorCommand)',
+          ],
         },
       ],
     },
@@ -893,12 +874,13 @@ export class NoteEditor {
       entry: '@semantic-components/ui/editor/align',
       items: [
         {
-          name: 'scEditorAlignLeft scEditorAlignCenter scEditorAlignRight scEditorAlignJustify',
-          inputs: ['disabled'],
+          name: 'withAlign()',
+          inputs: [],
           read: [],
-          do: [],
+          do: [
+            'Alignment: the commands align-left, align-center, align-right, align-justify (scEditorCommand)',
+          ],
         },
-        { name: 'withAlign()', inputs: [], read: [], do: ['Alignment'] },
       ],
     },
     {
@@ -1008,7 +990,7 @@ export class NoteEditor {
     {
       entry: '/scripts',
       provide: 'withScripts()',
-      parts: ['scEditorSuperscript', 'scEditorSubscript'],
+      parts: ['scEditorCommand="superscript" / "subscript"'],
       packages: [
         '@tiptap/extension-superscript',
         '@tiptap/extension-subscript',
@@ -1018,10 +1000,7 @@ export class NoteEditor {
       entry: '/align',
       provide: 'withAlign()',
       parts: [
-        'scEditorAlignLeft',
-        'scEditorAlignCenter',
-        'scEditorAlignRight',
-        'scEditorAlignJustify',
+        'scEditorCommand="align-left" / "align-center" / "align-right" / "align-justify"',
       ],
       packages: ['@tiptap/extension-text-align'],
     },

@@ -12,7 +12,7 @@ Rich text editor components built on Tiptap: an entry point of `@semantic-compon
 
 ```ts
 import { ScToggle, ScToolbar, ScToolbarWidget } from '@semantic-components/ui';
-import { ScEditor, ScEditorBold, ScEditorContent, provideEditor } from '@semantic-components/ui/editor';
+import { ScEditor, ScEditorCommand, ScEditorContent, provideEditor } from '@semantic-components/ui/editor';
 import { ScEditorTable, withTables } from '@semantic-components/ui/editor/tables';
 ```
 
