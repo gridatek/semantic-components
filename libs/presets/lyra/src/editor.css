@@ -5,8 +5,8 @@
  * rules, images), so what you write looks as it will once published. Here,
  * only what Typeset doesn't know: writing (placeholder, selection, search,
  * selected nodes), Tiptap's task lists — their box as lyra's scCheckbox —
- * tables with cells to write in, and highlights (editor-variables.css has their
- * colours). Plain CSS, on the theme's tokens: imported or linked as it is.
+ * tables with cells to write in, and highlights (their colours,
+ * --editor-highlight-1 to -5, are the theme's: your styles.css). Plain CSS, on the theme's tokens: imported or linked as it is.
  */
 
 [data-slot='editor-document'] {
@@ -213,7 +213,7 @@
 
 /* Highlights: yellow unless a colour is given, across line breaks */
 [data-slot='editor-document'] mark {
-  background-color: var(--editor-highlight-yellow);
+  background-color: var(--editor-highlight-1);
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
@@ -229,12 +229,12 @@
   border-radius: calc(var(--radius) * 0.6);
   background-color: color-mix(
     in oklch,
-    var(--editor-highlight-yellow) 60%,
+    var(--editor-highlight-1) 60%,
     transparent
   );
 }
 
 [data-slot='editor-document'] .find-and-replace-result-current {
   outline: 1px solid var(--foreground);
-  background-color: var(--editor-highlight-yellow);
+  background-color: var(--editor-highlight-1);
 }

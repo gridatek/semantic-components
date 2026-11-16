@@ -128,7 +128,7 @@ import {
 export class ViewEditorDemo {
   private readonly model = signal({
     body: \`<h1>Release notes</h1>
-<p>This week's update makes <strong>writing</strong> faster and <em>reading</em> easier, with <u>underline</u>, <s>strike</s>, <code>inline code</code>, a <a href="https://tiptap.dev">link</a>, <mark data-color="var(--editor-highlight-yellow)" style="background-color: var(--editor-highlight-yellow)">yellow</mark> and <mark data-color="var(--editor-highlight-green)" style="background-color: var(--editor-highlight-green)">green</mark> highlights, E = mc<sup>2</sup> and H<sub>2</sub>O.</p>
+<p>This week's update makes <strong>writing</strong> faster and <em>reading</em> easier, with <u>underline</u>, <s>strike</s>, <code>inline code</code>, a <a href="https://tiptap.dev">link</a>, <mark data-color="var(--editor-highlight-1)" style="background-color: var(--editor-highlight-1)">yellow</mark> and <mark data-color="var(--editor-highlight-2)" style="background-color: var(--editor-highlight-2)">green</mark> highlights, E = mc<sup>2</sup> and H<sub>2</sub>O.</p>
 <h2>What's new</h2>
 <p>Every block the editor can hold, so the two sides can be compared.</p>
 <h3>Lists</h3>

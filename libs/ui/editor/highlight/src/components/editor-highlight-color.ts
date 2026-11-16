@@ -8,7 +8,7 @@ import { cn } from 'cn';
 /**
  * A highlight swatch, in your highlight popover: highlights the selection in
  * `color` (any CSS colour — the editor's styles have
- * `var(--editor-highlight-yellow)`, `-green`, `-blue`, `-purple`, `-red`,
+ * `var(--editor-highlight-1)` to `var(--editor-highlight-5)`,
  * light and dark), or removes it when it's on. Name it (the colour's name).
  */
 @Directive({

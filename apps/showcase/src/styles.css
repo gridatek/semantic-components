@@ -97,6 +97,12 @@
      even at 90% opacity. */
   --success: oklch(0.49 0.14 150);
   --warning: oklch(0.52 0.15 49);
+  /* The editor's highlight colours (scEditorHighlightColor values). */
+  --editor-highlight-1: oklch(0.945 0.12 100);
+  --editor-highlight-2: oklch(0.93 0.08 150);
+  --editor-highlight-3: oklch(0.92 0.06 240);
+  --editor-highlight-4: oklch(0.92 0.06 300);
+  --editor-highlight-5: oklch(0.92 0.07 20);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -140,6 +146,11 @@
   --destructive: oklch(0.704 0.191 22.216);
   --success: oklch(0.792 0.209 151.711);
   --warning: oklch(0.828 0.189 84.429);
+  --editor-highlight-1: oklch(0.45 0.09 95);
+  --editor-highlight-2: oklch(0.42 0.08 150);
+  --editor-highlight-3: oklch(0.42 0.08 250);
+  --editor-highlight-4: oklch(0.42 0.09 300);
+  --editor-highlight-5: oklch(0.42 0.1 20);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);

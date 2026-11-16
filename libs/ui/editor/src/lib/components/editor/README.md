@@ -18,7 +18,6 @@ Then its styles, in your `styles.css` — your preset's, after Typeset's (the ed
 @import '@semantic-components/ui/styles/typeset.css';
 @import '@semantic-components/presets/nova/typeset-variables.css';
 @import '@semantic-components/presets/nova/editor.css';
-@import '@semantic-components/presets/nova/editor-variables.css';
 ```
 
 That is the core: text, headings, lists and task lists, quotes, code blocks, links, undo and redo, the counts and `scEditorView`, in HTML, JSON or text. Everything else is a [feature](#features), with its own package.
@@ -257,8 +256,8 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
   </button>
   <ng-template scPopoverPortal>
     <div scPopover aria-label="Highlight colours" class="flex w-auto items-center gap-2 p-2">
-      <button scEditorHighlightColor="var(--editor-highlight-yellow)"><span class="sr-only">Yellow</span></button>
-      <button scEditorHighlightColor="var(--editor-highlight-green)"><span class="sr-only">Green</span></button>
+      <button scEditorHighlightColor="var(--editor-highlight-1)"><span class="sr-only">Yellow</span></button>
+      <button scEditorHighlightColor="var(--editor-highlight-2)"><span class="sr-only">Green</span></button>
       <button scEditorRemoveHighlight>
         <svg siBanIcon></svg>
         <span class="sr-only">Remove highlight</span>
@@ -268,7 +267,7 @@ For the same reason the editor's group is `scEditorToolbarGroup`, not a toggle g
 </div>
 ```
 
-A popover keeps the selection — still shown while it has focus — so the link or colour goes where it was. The editor's styles have five highlight colours, for light and dark: `var(--editor-highlight-yellow)`, `-green`, `-blue`, `-purple`, `-red`; any CSS colour works.
+A popover keeps the selection — still shown while it has focus — so the link or colour goes where it was. The editor's styles have five highlight colours, for light and dark: `var(--editor-highlight-1)` to `var(--editor-highlight-5)`; any CSS colour works.
 
 ## Images
 
@@ -449,7 +448,25 @@ Its `layout` sets how it sits in the box (`data-layout`):
 <div scEditorContent ariaLabel="Article" layout="page" class="max-h-[600px] min-h-[400px]"></div>
 ```
 
-The editor's styles are your preset's, in two files: `editor.css` (the rules: the placeholder, task lists — their box as the style's `scCheckbox` — tables with cells to write in, highlights, search matches, the kept selection; plain CSS on `--border`, `--input`, `--muted`, `--muted-foreground`, `--primary`, `--ring`, `--accent`, `--radius`) and `editor-variables.css` (the `--editor-highlight-*` colours).
+The editor's styles are your preset's `editor.css`: the placeholder, task lists — their box as the style's `scCheckbox` — tables with cells to write in, highlights, search matches and the kept selection, in plain CSS on the theme's `--border`, `--input`, `--muted`, `--muted-foreground`, `--primary`, `--ring`, `--accent` and `--radius`. The highlight colours are your theme's too — add them to your `styles.css`, beside the other tokens:
+
+```css
+:root {
+  --editor-highlight-1: oklch(0.945 0.12 100);
+  --editor-highlight-2: oklch(0.93 0.08 150);
+  --editor-highlight-3: oklch(0.92 0.06 240);
+  --editor-highlight-4: oklch(0.92 0.06 300);
+  --editor-highlight-5: oklch(0.92 0.07 20);
+}
+
+.dark {
+  --editor-highlight-1: oklch(0.45 0.09 95);
+  --editor-highlight-2: oklch(0.42 0.08 150);
+  --editor-highlight-3: oklch(0.42 0.08 250);
+  --editor-highlight-4: oklch(0.42 0.09 300);
+  --editor-highlight-5: oklch(0.42 0.1 20);
+}
+```
 
 ## Accessibility
 

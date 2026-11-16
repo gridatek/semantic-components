@@ -9,7 +9,6 @@
 @import '../../../../libs/ui/src/lib/styles/typeset.css';
 @import '../../../../libs/presets/sera/src/typeset-variables.css';
 @import '../../../../libs/presets/sera/src/editor.css';
-@import '../../../../libs/presets/sera/src/editor-variables.css';
 
 /*
  * Sera as shadcn shows it (shadcn-ui/ui, apps/v4/app/(app)/(styles)/sera,
@@ -92,6 +91,12 @@
 
 /* shadcn's `theme-taupe`, light and dark, as the whole app's theme. */
 :root {
+  /* The editor's highlight colours (scEditorHighlightColor values). */
+  --editor-highlight-1: oklch(0.945 0.12 100);
+  --editor-highlight-2: oklch(0.93 0.08 150);
+  --editor-highlight-3: oklch(0.92 0.06 240);
+  --editor-highlight-4: oklch(0.92 0.06 300);
+  --editor-highlight-5: oklch(0.92 0.07 20);
   --radius: 0;
   --background: oklch(1 0 0);
   --foreground: oklch(0.147 0.004 49.3);
@@ -130,6 +135,11 @@
 }
 
 .dark {
+  --editor-highlight-1: oklch(0.45 0.09 95);
+  --editor-highlight-2: oklch(0.42 0.08 150);
+  --editor-highlight-3: oklch(0.42 0.08 250);
+  --editor-highlight-4: oklch(0.42 0.09 300);
+  --editor-highlight-5: oklch(0.42 0.1 20);
   --background: oklch(0.147 0.004 49.3);
   --foreground: oklch(0.986 0.002 67.8);
   --card: oklch(0.214 0.009 43.1);

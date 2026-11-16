@@ -157,7 +157,7 @@ import {
 
 const SAMPLE = \`<h1>Getting started</h1>
 <p>Welcome to the editor: a <strong>rich text editor</strong> built on <a href="https://tiptap.dev">Tiptap</a>, with every part written in your own template.</p>
-<p>Write in <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <s>strike</s> or <code>code</code>, and <mark data-color="var(--editor-highlight-yellow)" style="background-color: var(--editor-highlight-yellow)">highlight</mark> what matters. Superscript and subscript: E = mc<sup>2</sup>, H<sub>2</sub>O.</p>
+<p>Write in <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <s>strike</s> or <code>code</code>, and <mark data-color="var(--editor-highlight-1)" style="background-color: var(--editor-highlight-1)">highlight</mark> what matters. Superscript and subscript: E = mc<sup>2</sup>, H<sub>2</sub>O.</p>
 <h2>Lists</h2>
 <ul data-type="taskList">
   <li data-type="taskItem" data-checked="true"><p>Pick a block type from the heading menu</p></li>
@@ -819,11 +819,11 @@ export class FullFeaturedEditorDemo {
   };
 
   readonly highlightColors = [
-    { label: 'Yellow', value: 'var(--editor-highlight-yellow)' },
-    { label: 'Green', value: 'var(--editor-highlight-green)' },
-    { label: 'Blue', value: 'var(--editor-highlight-blue)' },
-    { label: 'Purple', value: 'var(--editor-highlight-purple)' },
-    { label: 'Red', value: 'var(--editor-highlight-red)' },
+    { label: 'Yellow', value: 'var(--editor-highlight-1)' },
+    { label: 'Green', value: 'var(--editor-highlight-2)' },
+    { label: 'Blue', value: 'var(--editor-highlight-3)' },
+    { label: 'Purple', value: 'var(--editor-highlight-4)' },
+    { label: 'Red', value: 'var(--editor-highlight-5)' },
   ];
 
   /**

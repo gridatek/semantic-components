@@ -4,28 +4,20 @@
   "assets": [
     "./nova/src/typeset-variables.css",
     "./nova/src/editor.css",
-    "./nova/src/editor-variables.css",
     "./lyra/src/typeset-variables.css",
     "./lyra/src/editor.css",
-    "./lyra/src/editor-variables.css",
     "./maia/src/typeset-variables.css",
     "./maia/src/editor.css",
-    "./maia/src/editor-variables.css",
     "./vega/src/typeset-variables.css",
     "./vega/src/editor.css",
-    "./vega/src/editor-variables.css",
     "./mira/src/typeset-variables.css",
     "./mira/src/editor.css",
-    "./mira/src/editor-variables.css",
     "./luma/src/typeset-variables.css",
     "./luma/src/editor.css",
-    "./luma/src/editor-variables.css",
     "./rhea/src/typeset-variables.css",
     "./rhea/src/editor.css",
-    "./rhea/src/editor-variables.css",
     "./sera/src/typeset-variables.css",
-    "./sera/src/editor.css",
-    "./sera/src/editor-variables.css"
+    "./sera/src/editor.css"
   ],
   "lib": {
     "entryFile": "src/index.ts"

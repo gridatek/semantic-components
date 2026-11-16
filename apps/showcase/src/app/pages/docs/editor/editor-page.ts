@@ -606,7 +606,6 @@ export default class EditorPage {
     '@import "@semantic-components/ui/styles/typeset.css";',
     '@import "@semantic-components/presets/nova/typeset-variables.css";',
     '@import "@semantic-components/presets/nova/editor.css";',
-    '@import "@semantic-components/presets/nova/editor-variables.css";',
   ].join('\n');
 
   readonly featuresCode = `import { Component, signal } from '@angular/core';
