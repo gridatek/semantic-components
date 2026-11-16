@@ -14,6 +14,33 @@
   }
 }
 
+/*
+ * Ours, not shadcn's: an element marked `data-typeset` (scHeading's) is set
+ * as in a container without one — its own rules, by its tag (below). Outside
+ * a container nothing sets the variables, so the page has the container's
+ * defaults, at zero specificity: your own on :root, body or a section win, and
+ * a container's preset still sets its own. See "Deliberate divergences" in
+ * docs/shadcn-style-reference.md.
+ */
+@layer components {
+  :where(:root) {
+    --typeset-font-body: inherit;
+    --typeset-font-heading: var(--font-heading);
+    --typeset-font-mono: var(--font-mono);
+    --typeset-size: 1em;
+    --typeset-leading: 1.75;
+    --typeset-flow: 1.25em;
+    --typeset-muted: var(
+      --color-muted-foreground,
+      color-mix(in oklab, currentColor 60%, transparent)
+    );
+    --typeset-rule: var(
+      --color-border,
+      color-mix(in oklab, currentColor 20%, transparent)
+    );
+  }
+}
+
 @layer components {
   .typeset {
     font-family: var(--typeset-font-body);
@@ -37,55 +64,60 @@
     );
   }
 
-  /*
-   * Headings: in a container, and scHeading's anywhere — one definition.
-   * Outside a container, the variables fall back to the container's
-   * defaults.
-   */
-  .typeset
-    *:not(
-      :where(
-        .not-typeset,
-        [data-not-typeset],
-        .not-typeset *,
-        [data-not-typeset] *,
-        .typeset [data-slot],
-        .typeset [data-slot] *
-      )
-    ),
-  :where(h1, h2, h3, h4, h5, h6)[scHeading] {
+  /* Ours: `:is(…, [data-typeset])` — shadcn's selector is the first. */
+  :is(
+    .typeset
+      *:not(
+        :where(
+          .not-typeset,
+          [data-not-typeset],
+          .not-typeset *,
+          [data-not-typeset] *,
+          .typeset [data-slot],
+          .typeset [data-slot] *
+        )
+      ),
+    [data-typeset]
+  ) {
+    /* Paragraphs. */
+    &:where(p) {
+      margin-block-start: var(--typeset-flow);
+      margin-block-end: 0;
+    }
+
+    /* Headings. */
     &:where(h1, h2, h3, h4, h5, h6) {
       color: var(--color-foreground, currentColor);
-      font-family: var(--typeset-font-heading, var(--font-heading));
+      font-family: var(--typeset-font-heading);
       font-weight: 600;
       margin-block-end: 0;
     }
     &:where(h1) {
       font-size: 1.75em;
       line-height: 1.3;
-      margin-block-start: var(--typeset-flow, 1.25em);
+      margin-block-start: var(--typeset-flow);
     }
     &:where(h2) {
       font-size: 1.25em;
       line-height: 1.4;
-      margin-block-start: calc(var(--typeset-flow, 1.25em) * 1.4);
+      margin-block-start: calc(var(--typeset-flow) * 1.4);
     }
     &:where(h3) {
       font-size: 1.125em;
       line-height: 1.45;
-      margin-block-start: var(--typeset-flow, 1.25em);
+      margin-block-start: var(--typeset-flow);
     }
     &:where(h4) {
       font-size: 1em;
       line-height: 1.5;
-      margin-block-start: var(--typeset-flow, 1.25em);
+      margin-block-start: var(--typeset-flow);
     }
     &:where(h5) {
       font-size: 0.875em;
       line-height: 1.5;
       font-weight: 500;
-      color: var(--typeset-muted, var(--color-muted-foreground));
-      margin-block-start: calc(var(--typeset-flow, 1.25em) / 0.875);
+      color: var(--typeset-muted);
+      margin-block-start: calc(var(--typeset-flow) / 0.875);
     }
     &:where(h6) {
       font-size: 0.8125em;
@@ -93,28 +125,9 @@
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--typeset-muted, var(--color-muted-foreground));
-      margin-block-start: calc(var(--typeset-flow, 1.25em) / 0.8125);
+      color: var(--typeset-muted);
+      margin-block-start: calc(var(--typeset-flow) / 0.8125);
     }
-  }
-
-  .typeset
-    *:not(
-      :where(
-        .not-typeset,
-        [data-not-typeset],
-        .not-typeset *,
-        [data-not-typeset] *,
-        .typeset [data-slot],
-        .typeset [data-slot] *
-      )
-    ) {
-    /* Paragraphs. */
-    &:where(p) {
-      margin-block-start: var(--typeset-flow);
-      margin-block-end: 0;
-    }
-
     /* Anchors. */
     &:where([id]) {
       scroll-margin-block-start: var(--typeset-flow);

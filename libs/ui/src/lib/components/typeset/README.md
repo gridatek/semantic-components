@@ -18,7 +18,7 @@ export class MyComponent {}
 
 ### `ScHeading`
 
-A directive on `h1`–`h6`. Its look comes from `typeset.css`, which your global stylesheet imports (`@import '@semantic-components/ui/styles/typeset.css';`): the same rules as a heading in a `typeset` container (rendered markdown, a chat answer), so a heading you write and one in rendered content look the same. No Tailwind classes of its own.
+A directive on `h1`–`h6`, for a heading with no `typeset` container around it (a page title, a section). It marks itself `data-typeset`, and `typeset.css` — which your global stylesheet imports (`@import '@semantic-components/ui/styles/typeset.css';`) — sets it by its tag: the same rules as a heading in a container (rendered markdown, a chat answer), so a heading you write and one in rendered content look the same. In a container, a plain `h2` is enough. No Tailwind classes of its own.
 
 **Selector:** `h1[scHeading]` … `h6[scHeading]`
 
@@ -39,7 +39,7 @@ A directive on `h1`–`h6`. Its look comes from `typeset.css`, which your global
 | `h5`  | `0.875em`  | `1.5`       | 500    | muted                    |
 | `h6`  | `0.8125em` | `1.5`       | 500    | muted, uppercase, spaced |
 
-**Variables** (set them on any ancestor, or on a `typeset` container's preset class): `--typeset-flow` (space above; `1.25em` when unset), `--typeset-font-heading` (`--font-heading` when unset), `--typeset-muted` (`--color-muted-foreground` when unset).
+**Variables** (set them on `:root`, any ancestor, or a `typeset` container's preset class): `--typeset-size`, `--typeset-leading`, `--typeset-flow` (space above), `--typeset-font-heading`, `--typeset-muted`. `typeset.css` gives the page the container's defaults at zero specificity, so yours win.
 
 **Your classes win:** the rules are in `@layer components` with `:where()` selectors, so a utility on the heading (`text-2xl`, `mt-0`) beats them.
 
