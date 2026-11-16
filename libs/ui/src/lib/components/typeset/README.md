@@ -39,6 +39,23 @@ export class MyComponent {}
 
 **Our recommendation:** a container for reading text — content you don't write the markup of (markdown, a CMS, a chat answer) and long-form pages (an article, a blog post, a docs page): one class, and every element in it follows, lists and all. The directive for a few pieces of text placed among UI — a dashboard's title, a settings section's heading, a paragraph in a card — where a container would also set the layout's own lists and links. In a container, the directive changes nothing.
 
+## Leaving something out
+
+In a container, every plain element is set. To keep one as it is — a link, a list, a block:
+
+- **All of it:** `class="not-typeset"` (or `data-not-typeset`, where your renderer can't add a class). The element and everything in it lose Typeset's rules — a link its underline, weight, hover and focus outline — and keep only your classes. On a wrapper, a whole region is left out.
+
+  ```html
+  <article class="typeset">
+    <p>Read the <a href="/guide" class="not-typeset">guide</a> first.</p>
+  </article>
+  ```
+
+- **Part of it:** a utility on the element (`class="no-underline font-normal"`). The rules are in `@layer components` with `:where()`, so your classes win; the rest of Typeset's look stays.
+- **Components:** anything with a `data-slot` keeps its own look with nothing to add — a button, a card, a link with a button's look (`scLink variant="button"`). A plain text link (`scLink`) has none: it's set as a link in the text, as it should be.
+
+In rendered markdown you can rarely put a class on one element: a hook in your renderer adds it, or `not-typeset` goes on a wrapper around the region.
+
 ## Components
 
 ### `ScTypeset`

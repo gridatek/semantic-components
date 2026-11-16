@@ -130,6 +130,45 @@ interface Row {
       </section>
 
       <section class="space-y-4">
+        <h2 scTypeset appToc>Leaving something out</h2>
+        <p class="text-muted-foreground">
+          In a container, every plain element is set. To keep one as it is — a
+          link, a list, a block:
+        </p>
+        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+          <li>
+            <strong class="text-foreground">All of it:</strong>
+            <code scTypeset>class="not-typeset"</code> (or
+            <code scTypeset>data-not-typeset</code>, where your renderer can't
+            add a class). The element and everything in it lose Typeset's rules
+            — a link its underline, weight, hover and focus outline — and keep
+            only your classes. On a wrapper, a whole region is left out.
+          </li>
+          <li>
+            <strong class="text-foreground">Part of it:</strong> a utility on
+            the element —
+            <code scTypeset>class="no-underline font-normal"</code>. The rules
+            are in <code scTypeset>&#64;layer components</code> with
+            <code scTypeset>:where()</code>, so your classes win; the rest of
+            Typeset's look stays.
+          </li>
+          <li>
+            <strong class="text-foreground">Components:</strong> anything with a
+            <code scTypeset>data-slot</code> keeps its own look with nothing to
+            add — a button, a card, a link with a button's look (<code scTypeset
+              >scLink variant="button"</code
+            >). A plain text link (<code scTypeset>scLink</code>) has none: it's
+            set as a link in the text, as it should be.
+          </li>
+        </ul>
+        <p class="text-muted-foreground">
+          In rendered markdown you can rarely put a class on one element: a hook
+          in your renderer adds it, or <code scTypeset>not-typeset</code> goes
+          on a wrapper around the region.
+        </p>
+      </section>
+
+      <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
