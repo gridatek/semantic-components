@@ -448,7 +448,7 @@ Its `layout` sets how it sits in the box (`data-layout`):
 <div scEditorContent ariaLabel="Article" layout="page" class="max-h-[600px] min-h-[400px]"></div>
 ```
 
-The editor's styles are your preset's `editor.css`: the placeholder, task lists — their box as the style's `scCheckbox` — tables with cells to write in, highlights, search matches and the kept selection, in plain CSS on the theme's `--border`, `--input`, `--muted`, `--muted-foreground`, `--primary`, `--ring`, `--accent` and `--radius`. The highlight colours are your theme's too — add them to your `styles.css`, beside the other tokens:
+The editor's styles are your preset's `editor.css`: the placeholder, task lists — their box as the style's `scCheckbox` — tables with cells to write in, highlights, search matches and the kept selection, in plain CSS on the theme's `--border`, `--input`, `--muted`, `--muted-foreground`, `--primary`, `--ring`, `--accent` and `--radius`. The highlight colours are your theme's too — add them at the end of your `styles.css`, a section of their own after shadcn's tokens:
 
 ```css
 :root {
