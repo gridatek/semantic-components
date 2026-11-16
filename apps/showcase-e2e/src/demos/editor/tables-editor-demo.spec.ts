@@ -76,3 +76,56 @@ test('a column border’s resize line stays in the table: no scrollbar (it would
     expect(await overflow(), `column ${i + 1}`).toEqual([0, 0]);
   }
 });
+
+// The dragged border's index: the last of three, or the first (between columns).
+for (const [border, index] of [
+  ['last', 2],
+  ['middle', 0],
+] as const)
+  test(`dragging the ${border} column border: it follows the pointer, the others stay, no scrollbar while the table fits`, async ({
+    page,
+  }) => {
+    await page.goto('/demos/editor/tables-editor-demo');
+    const table = plans(page).locator('table');
+    await expect(table).toBeVisible();
+    const state = () =>
+      table.evaluate((el) => ({
+        borders: [...el.querySelectorAll('tr:first-child > *')].map(
+          (cell) => cell.getBoundingClientRect().right,
+        ),
+        overflow:
+          (el.parentElement as HTMLElement).scrollWidth -
+          (el.parentElement as HTMLElement).clientWidth,
+      }));
+    const start = await state();
+    expect(start.borders).toHaveLength(3);
+    const cell = await table
+      .locator('tr')
+      .first()
+      .locator('th, td')
+      .nth(index)
+      .boundingBox();
+    const x = (cell?.x ?? 0) + (cell?.width ?? 0) - 1;
+    const y = (cell?.y ?? 0) + 10;
+    await page.mouse.move(x - 3, y);
+    await page.mouse.move(x, y, { steps: 2 });
+    await expect(table.locator('.column-resize-handle').first()).toBeAttached();
+    await page.mouse.down();
+    for (const dx of [0, -40, -80, -20]) {
+      await page.mouse.move(x + dx, y, { steps: 2 });
+      const now = await state();
+      expect(now.overflow, `at ${dx}`).toBe(0);
+      // The dragged border: at the pointer (within its line's width).
+      expect(
+        Math.abs(now.borders[index] - start.borders[index] - dx),
+        `at ${dx}: ${now.borders.join(', ')}`,
+      ).toBeLessThanOrEqual(2);
+      // The ones before it: where they were.
+      for (let i = 0; i < index; i++)
+        expect(
+          Math.abs(now.borders[i] - start.borders[i]),
+          `border ${i + 1} at ${dx}`,
+        ).toBeLessThanOrEqual(1);
+    }
+    await page.mouse.up();
+  });
