@@ -12,10 +12,13 @@ An entry point of ui, `@semantic-components/ui/editor`, with Tiptap as optional 
 npm install @tiptap/core @tiptap/pm @tiptap/starter-kit
 ```
 
-Then its styles, in your `styles.css`:
+Then its styles, in your `styles.css` — your preset's, after Typeset's (the editor's document is a Typeset container):
 
 ```css
-@import '@semantic-components/ui/editor/styles';
+@import '@semantic-components/ui/styles/typeset.css';
+@import '@semantic-components/presets/nova/typeset-variables.css';
+@import '@semantic-components/presets/nova/editor.css';
+@import '@semantic-components/presets/nova/editor-variables.css';
 ```
 
 That is the core: text, headings, lists and task lists, quotes, code blocks, links, undo and redo, the counts and `scEditorView`, in HTML, JSON or text. Everything else is a [feature](#features), with its own package.
@@ -435,7 +438,7 @@ Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E*
 
 ## Styling
 
-The editor is styled as the rest of the library: the toolbar's buttons are toggles (`toggleVariants`), and the document is written in the library's typography — headings as `scTypeset`, paragraphs, lists, quotes and inline code as shadcn/ui's typography, task checkboxes as `scCheckbox`, rules as `scSeparator` — with `@apply` and the theme's tokens, so it follows your theme. Tiptap's Simple Editor is the model for what the editor does and how it is laid out, not for how it looks. The document box has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px]`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…).
+The editor is styled as the rest of the library: the toolbar's buttons are toggles (`toggleVariants`), and the document — in the editor and in `scEditorView` — is a Typeset container: headings, paragraphs, lists, code, quotes, rules and images as in rendered content (ui's `typeset.css` and your preset's `typeset-variables.css`, so its corners follow the preset), and what you write looks as it will once published. `editor.css` adds only what Typeset doesn't know: the placeholder, the selection and search, selected nodes, task lists (the box as `scCheckbox`), tables with cells to write in, the highlight colours. Tiptap's Simple Editor is the model for what the editor does and how it is laid out, not for how it looks. The document box has `block outline-none overflow-y-auto min-h-[150px] max-h-[400px]`; a `class` on `scEditorContent` changes it (`min-h-[300px] max-h-[500px]`, `font-serif`…).
 
 Its `layout` sets how it sits in the box (`data-layout`):
 
@@ -446,7 +449,7 @@ Its `layout` sets how it sits in the box (`data-layout`):
 <div scEditorContent ariaLabel="Article" layout="page" class="max-h-[600px] min-h-[400px]"></div>
 ```
 
-The editor's styles (`@semantic-components/ui/editor/styles`) cover task lists, code blocks, images, highlights, search matches and the kept selection, with `--border`, `--muted`, `--muted-foreground`, `--primary`, `--ring` and the `--editor-highlight-*` colours.
+The editor's styles are your preset's, in two files: `editor.css` (the rules: the placeholder, task lists — their box as the style's `scCheckbox` — tables with cells to write in, highlights, search matches, the kept selection; plain CSS on `--border`, `--input`, `--muted`, `--muted-foreground`, `--primary`, `--ring`, `--accent`, `--radius`) and `editor-variables.css` (the `--editor-highlight-*` colours).
 
 ## Accessibility
 

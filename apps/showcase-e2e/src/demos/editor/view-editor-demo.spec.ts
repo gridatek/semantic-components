@@ -167,4 +167,36 @@ test.describe('View Editor Demo', () => {
       view(page).getByRole('checkbox', { name: 'Write the docs' }),
     ).not.toBeChecked();
   });
+
+  test('both documents are Typeset containers: its headings, the preset’s corners', async ({
+    page,
+  }) => {
+    for (const document of [editor(page), view(page)]) {
+      const look = await document.evaluate((element) => {
+        const probe = window.document.createElement('div');
+        window.document.body.append(probe);
+        probe.style.borderTopLeftRadius = 'var(--typeset-radius)';
+        const corners = getComputedStyle(probe).borderTopLeftRadius;
+        probe.remove();
+        const h1 = element.querySelector('h1') as Element;
+        const parent = h1.parentElement as Element;
+        return {
+          container: !!element.closest('.typeset'),
+          weight: getComputedStyle(h1).fontWeight,
+          ratio:
+            parseFloat(getComputedStyle(h1).fontSize) /
+            parseFloat(getComputedStyle(parent).fontSize),
+          pre: getComputedStyle(element.querySelector('pre') as Element)
+            .borderTopLeftRadius,
+          corners,
+        };
+      });
+      // In a typeset container; an h1 1.75em of the text, weight 600.
+      expect(look.container).toBe(true);
+      expect(look.weight).toBe('600');
+      expect(look.ratio).toBeCloseTo(1.75, 2);
+      // A code block's corners: the preset's (typeset-variables.css).
+      expect(look.pre).toBe(look.corners);
+    }
+  });
 });

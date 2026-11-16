@@ -64,9 +64,6 @@
     },
     "./styles/typeset.css": {
       "default": "./src/lib/styles/typeset.css"
-    },
-    "./editor/styles": {
-      "default": "./editor/src/lib/styles/index.css"
     }
   },
   "sideEffects": false,

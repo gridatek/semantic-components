@@ -1,0 +1,240 @@
+/*
+ * The editor's document in rhea — in the editor and in `scEditorView`. The
+ * document is a Typeset container (ui's typeset.css and this style's
+ * typeset-variables.css: headings, paragraphs, links, lists, code, quotes,
+ * rules, images), so what you write looks as it will once published. Here,
+ * only what Typeset doesn't know: writing (placeholder, selection, search,
+ * selected nodes), Tiptap's task lists — their box as rhea's scCheckbox —
+ * tables with cells to write in, and highlights (editor-variables.css has their
+ * colours). Plain CSS, on the theme's tokens: imported or linked as it is.
+ */
+
+[data-slot='editor-document'] {
+  outline: none;
+  white-space: pre-wrap;
+}
+
+/* In the editor: it fills its box */
+.ProseMirror {
+  min-height: inherit;
+}
+
+/* Placeholder */
+[data-slot='editor-document'] p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: inline-start;
+  height: 0;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+
+/*
+ * Task lists: the box is drawn on the label, as rhea's scCheckbox (in the
+ * editor the span is the checkbox's hidden name; in scEditorView it is empty).
+ * The checkbox covers the box, invisible, to take the clicks.
+ */
+[data-slot='editor-document'] ul[data-type='taskList'] {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+[data-slot='editor-document'] ul[data-type='taskList'] li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-inline-start: 0;
+}
+
+[data-slot='editor-document'] ul[data-type='taskList'] li > div {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+/* The item's text: no space above, beside its box */
+[data-slot='editor-document'] ul[data-type='taskList'] li > div > :first-child {
+  margin-top: 0;
+}
+
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li[data-checked='true']
+  > div
+  > p {
+  color: var(--muted-foreground);
+  text-decoration-line: line-through;
+}
+
+[data-slot='editor-document'] ul[data-type='taskList'] li label {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.375rem;
+}
+
+[data-slot='editor-document'] ul[data-type='taskList'] li label::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--input);
+  border-radius: 5px;
+  transition-property: color, background-color, border-color;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark [data-slot='editor-document'] ul[data-type='taskList'] li label::before {
+  background-color: color-mix(in oklab, var(--input) 30%, transparent);
+}
+
+[data-slot='editor-document'] ul[data-type='taskList'] li label::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 0.875rem;
+  height: 0.875rem;
+  margin: auto;
+  background-color: var(--primary-foreground);
+  opacity: 0;
+  pointer-events: none;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li
+  label:has(input:checked)::before {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li
+  label:has(input:checked)::after {
+  opacity: 1;
+}
+
+[data-slot='editor-document']
+  ul[data-type='taskList']
+  li
+  label:has(input:focus-visible)::before {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+}
+
+[data-slot='editor-document'] ul[data-type='taskList'] li label input {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+[data-slot='editor-document'] ul[data-type='taskList'] li label input:disabled {
+  cursor: default;
+}
+
+[data-slot='editor-document'] ul[data-type='taskList'] li label > span:empty {
+  display: none;
+}
+
+/* A selected image */
+[data-slot='editor-document'] img.ProseMirror-selectednode {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
+}
+
+/* Selected nodes other than images and code blocks */
+[data-slot='editor-document'] .ProseMirror-selectednode:not(img):not(pre) {
+  border-radius: calc(var(--radius) * 0.8);
+  background-color: var(--accent);
+}
+
+/*
+ * Tables: with cell borders to write in (Typeset's have row lines only),
+ * cells that wrap, and no line under the table.
+ */
+[data-slot='editor-document'] .tableWrapper {
+  overflow-x: auto;
+  margin-block-start: var(--typeset-flow);
+}
+
+[data-slot='editor-document'] table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-bottom-width: 0;
+}
+
+[data-slot='editor-document'] .tableWrapper table {
+  margin-top: 0;
+}
+
+[data-slot='editor-document'] :is(th, td) {
+  position: relative;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--border);
+  vertical-align: top;
+  white-space: normal;
+}
+
+[data-slot='editor-document'] th {
+  background-color: color-mix(in oklab, var(--muted) 50%, transparent);
+}
+
+/* Selected cells */
+[data-slot='editor-document'] .selectedCell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: color-mix(in oklab, var(--primary) 10%, transparent);
+  pointer-events: none;
+}
+
+/* Dragging a column's border resizes it */
+[data-slot='editor-document'] .column-resize-handle {
+  position: absolute;
+  top: 0;
+  right: -0.125rem;
+  bottom: -1px;
+  width: 0.25rem;
+  background-color: var(--primary);
+  pointer-events: none;
+}
+
+.ProseMirror.resize-cursor {
+  cursor: col-resize;
+}
+
+/* Highlights: yellow unless a colour is given, across line breaks */
+[data-slot='editor-document'] mark {
+  background-color: var(--editor-highlight-yellow);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* The selection, kept visible while focus is in a popover or the search */
+[data-slot='editor-document'] .selection {
+  display: inline;
+  background-color: color-mix(in oklab, var(--primary) 20%, transparent);
+}
+
+/* Search matches; the current one stronger */
+[data-slot='editor-document'] .find-and-replace-result {
+  border-radius: calc(var(--radius) * 0.6);
+  background-color: color-mix(
+    in oklch,
+    var(--editor-highlight-yellow) 60%,
+    transparent
+  );
+}
+
+[data-slot='editor-document'] .find-and-replace-result-current {
+  outline: 1px solid var(--foreground);
+  background-color: var(--editor-highlight-yellow);
+}

@@ -59,7 +59,7 @@ export class ScEditorView {
 
   protected readonly class = computed(() =>
     cn(
-      'block text-foreground',
+      'typeset block text-foreground',
       this.layout() === 'page' &&
         'mx-auto max-w-[648px] p-12 max-[480px]:px-6 max-[480px]:py-4',
       this.classInput(),

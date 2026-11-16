@@ -48,23 +48,29 @@ export function storePreset(name: ScPresetName): void {
   writeStorage(KEY, name);
 }
 
+/** The preset's stylesheets: Typeset's variables, the editor's rules and variables. */
+const PRESET_STYLES = ['typeset-variables', 'editor', 'editor-variables'];
+
 /**
- * The preset's Typeset variables: its typeset-variables.css, a stylesheet of its own
- * (the `typeset-variables-<name>` bundles in project.json, not injected), linked in the
- * head at start — on the server too, from the request's cookie, so the page
- * is drawn with them. An app with one preset imports its file instead.
+ * The preset's stylesheets (its typeset-variables.css, editor.css and
+ * editor-variables.css), each a stylesheet of its own — the `<file>-<name>`
+ * bundles in project.json, not injected — linked in the head at start: on the
+ * server too, from the request's cookie, so the page is drawn with them. An
+ * app with one preset imports its files instead.
  */
-export function provideTypesetStyles(): EnvironmentProviders {
+export function providePresetStyles(): EnvironmentProviders {
   return provideEnvironmentInitializer(() => {
     const document = inject(DOCUMENT);
     const name = presetFrom(inject(ScStorage));
-    let link = document.head.querySelector('link#typeset-variables');
-    if (!link) {
-      link = document.createElement('link');
-      link.setAttribute('id', 'typeset-variables');
-      link.setAttribute('rel', 'stylesheet');
-      document.head.appendChild(link);
+    for (const file of PRESET_STYLES) {
+      let link = document.head.querySelector(`link#${file}`);
+      if (!link) {
+        link = document.createElement('link');
+        link.setAttribute('id', file);
+        link.setAttribute('rel', 'stylesheet');
+        document.head.appendChild(link);
+      }
+      link.setAttribute('href', `${file}-${name}.css`);
     }
-    link.setAttribute('href', `typeset-variables-${name}.css`);
   });
 }

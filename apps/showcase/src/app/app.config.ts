@@ -20,7 +20,7 @@ import {
 } from '@semantic-components/ui';
 import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 import { appRoutes } from './app-routes';
-import { PRESETS, presetFrom, provideTypesetStyles } from './presets';
+import { PRESETS, presetFrom, providePresetStyles } from './presets';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -46,8 +46,8 @@ export const appConfig: ApplicationConfig = {
         preset: PRESETS[presetFrom(inject(ScStorage))],
       }),
     },
-    // Typeset's variables: the preset's file, linked at start.
-    provideTypesetStyles(),
+    // The preset's stylesheets (Typeset's variables, the editor), linked at start.
+    providePresetStyles(),
     // Keyboard shortcuts (the docs search, Mod+K): TanStack Hotkeys.
     provideHotkeys(),
     // Overlays (dialogs, menus, tooltips) stay visible in fullscreen, e.g. in

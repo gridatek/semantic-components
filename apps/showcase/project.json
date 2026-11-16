@@ -67,6 +67,86 @@
             "input": "libs/presets/sera/src/typeset-variables.css",
             "bundleName": "typeset-variables-sera",
             "inject": false
+          },
+          {
+            "input": "libs/presets/nova/src/editor.css",
+            "bundleName": "editor-nova",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/nova/src/editor-variables.css",
+            "bundleName": "editor-variables-nova",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/lyra/src/editor.css",
+            "bundleName": "editor-lyra",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/lyra/src/editor-variables.css",
+            "bundleName": "editor-variables-lyra",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/maia/src/editor.css",
+            "bundleName": "editor-maia",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/maia/src/editor-variables.css",
+            "bundleName": "editor-variables-maia",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/vega/src/editor.css",
+            "bundleName": "editor-vega",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/vega/src/editor-variables.css",
+            "bundleName": "editor-variables-vega",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/mira/src/editor.css",
+            "bundleName": "editor-mira",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/mira/src/editor-variables.css",
+            "bundleName": "editor-variables-mira",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/luma/src/editor.css",
+            "bundleName": "editor-luma",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/luma/src/editor-variables.css",
+            "bundleName": "editor-variables-luma",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/rhea/src/editor.css",
+            "bundleName": "editor-rhea",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/rhea/src/editor-variables.css",
+            "bundleName": "editor-variables-rhea",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/sera/src/editor.css",
+            "bundleName": "editor-sera",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/sera/src/editor-variables.css",
+            "bundleName": "editor-variables-sera",
+            "inject": false
           }
         ]
       },

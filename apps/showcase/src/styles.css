@@ -8,7 +8,6 @@
 @import '@fontsource-variable/noto-sans-arabic';
 @import '../../../libs/ui/src/lib/styles/reduced-motion.css';
 @import '../../../libs/ui/src/lib/styles/typeset.css';
-@import '../../../libs/ui/editor/src/lib/styles/index.css';
 
 /* Playwright selectors such as `[role=treeitem]:visible` look like arbitrary
    variants and would be compiled into invalid CSS. */

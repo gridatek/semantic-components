@@ -602,7 +602,12 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class EditorPage {
-  readonly stylesCode = '@import "@semantic-components/ui/editor/styles";';
+  readonly stylesCode = [
+    '@import "@semantic-components/ui/styles/typeset.css";',
+    '@import "@semantic-components/presets/nova/typeset-variables.css";',
+    '@import "@semantic-components/presets/nova/editor.css";',
+    '@import "@semantic-components/presets/nova/editor-variables.css";',
+  ].join('\n');
 
   readonly featuresCode = `import { Component, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';

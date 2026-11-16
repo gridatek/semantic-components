@@ -52,8 +52,10 @@ export class ScEditorContent {
   /** The document's ARIA: its name, description, state. */
   private readonly attributes = computed(() => {
     const attributes: Record<string, string> = {
-      // Styled as the document, here and in scEditorView.
+      // Styled as the document, here and in scEditorView: a Typeset
+      // container (on the document itself: Typeset skips a data-slot inside).
       'data-slot': 'editor-document',
+      class: 'typeset',
       role: 'textbox',
       'aria-multiline': 'true',
     };

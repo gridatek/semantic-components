@@ -8,7 +8,8 @@
 @import '../../../../libs/ui/src/lib/styles/reduced-motion.css';
 @import '../../../../libs/ui/src/lib/styles/typeset.css';
 @import '../../../../libs/presets/sera/src/typeset-variables.css';
-@import '../../../../libs/ui/editor/src/lib/styles/index.css';
+@import '../../../../libs/presets/sera/src/editor.css';
+@import '../../../../libs/presets/sera/src/editor-variables.css';
 
 /*
  * Sera as shadcn shows it (shadcn-ui/ui, apps/v4/app/(app)/(styles)/sera,

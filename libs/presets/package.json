@@ -20,26 +20,74 @@
     "./nova/typeset-variables.css": {
       "default": "./nova/src/typeset-variables.css"
     },
+    "./nova/editor.css": {
+      "default": "./nova/src/editor.css"
+    },
+    "./nova/editor-variables.css": {
+      "default": "./nova/src/editor-variables.css"
+    },
     "./lyra/typeset-variables.css": {
       "default": "./lyra/src/typeset-variables.css"
+    },
+    "./lyra/editor.css": {
+      "default": "./lyra/src/editor.css"
+    },
+    "./lyra/editor-variables.css": {
+      "default": "./lyra/src/editor-variables.css"
     },
     "./maia/typeset-variables.css": {
       "default": "./maia/src/typeset-variables.css"
     },
+    "./maia/editor.css": {
+      "default": "./maia/src/editor.css"
+    },
+    "./maia/editor-variables.css": {
+      "default": "./maia/src/editor-variables.css"
+    },
     "./vega/typeset-variables.css": {
       "default": "./vega/src/typeset-variables.css"
+    },
+    "./vega/editor.css": {
+      "default": "./vega/src/editor.css"
+    },
+    "./vega/editor-variables.css": {
+      "default": "./vega/src/editor-variables.css"
     },
     "./mira/typeset-variables.css": {
       "default": "./mira/src/typeset-variables.css"
     },
+    "./mira/editor.css": {
+      "default": "./mira/src/editor.css"
+    },
+    "./mira/editor-variables.css": {
+      "default": "./mira/src/editor-variables.css"
+    },
     "./luma/typeset-variables.css": {
       "default": "./luma/src/typeset-variables.css"
+    },
+    "./luma/editor.css": {
+      "default": "./luma/src/editor.css"
+    },
+    "./luma/editor-variables.css": {
+      "default": "./luma/src/editor-variables.css"
     },
     "./rhea/typeset-variables.css": {
       "default": "./rhea/src/typeset-variables.css"
     },
+    "./rhea/editor.css": {
+      "default": "./rhea/src/editor.css"
+    },
+    "./rhea/editor-variables.css": {
+      "default": "./rhea/src/editor-variables.css"
+    },
     "./sera/typeset-variables.css": {
       "default": "./sera/src/typeset-variables.css"
+    },
+    "./sera/editor.css": {
+      "default": "./sera/src/editor.css"
+    },
+    "./sera/editor-variables.css": {
+      "default": "./sera/src/editor-variables.css"
     }
   }
 }
