@@ -3,12 +3,23 @@ import { fromOtherSite } from '../interaction';
 import { expect, test } from '../test';
 
 test.describe('Presets Page', () => {
+  // The largest page: in Firefox and WebKit, beside the other workers, it
+  // takes more than the 5 s of an expect to show, and its tests more than 30 s.
+  // (In a beforeEach: test.slow(callback) at the describe level marks the test
+  // slow without tripling its timeout.)
+  test.beforeEach(({ browserName }) => {
+    test.slow(browserName !== 'chromium');
+  });
+
+  // To show, and to close (its leave animation, on WebKit's lagging clock).
+  const shown = { timeout: 30_000 };
+
   test('the style card picks a preset, which reloads in it', async ({
     page,
   }) => {
     await page.goto('/presets');
     const style = page.getByRole('button', { name: /Style/ });
-    await expect(style).toContainText('nova', { ignoreCase: true });
+    await expect(style).toContainText('nova', { ignoreCase: true, ...shown });
     // The options still to come are there, not usable yet.
     await expect(
       page.getByRole('button', { name: /Base Color/ }),
@@ -19,10 +30,7 @@ test.describe('Presets Page', () => {
     ).toHaveAttribute('aria-checked', 'true');
     await page.getByRole('menuitemradio', { name: 'Maia' }).click();
     // The page loads again, in it: a heavy page, slower in Firefox and WebKit.
-    await expect(style).toContainText('maia', {
-      ignoreCase: true,
-      timeout: 20_000,
-    });
+    await expect(style).toContainText('maia', { ignoreCase: true, ...shown });
     await expect(
       page.getByRole('heading', { name: 'Contribution History' }),
     ).toBeVisible();
@@ -40,7 +48,7 @@ test.describe('Presets Page', () => {
     // A card from each page of shadcn's preview.
     await expect(
       page.getByRole('heading', { name: 'Recent Transactions' }),
-    ).toBeVisible();
+    ).toBeVisible(shown);
     await expect(
       page.getByRole('heading', { name: 'Invoice #INV-2847' }),
     ).toBeVisible();
@@ -58,14 +66,13 @@ test.describe('Presets Page', () => {
     await page.getByRole('button', { name: 'Share Feedback' }).click();
     await expect(page.getByRole('dialog')).toBeVisible();
     await page.keyboard.press('Escape');
-    await expect(page.getByRole('dialog')).toHaveCount(0);
+    await expect(page.getByRole('dialog')).toHaveCount(0, shown);
     expect(messages).toEqual([]);
   });
 
   test('no accessibility violations, light and dark', async ({ page }) => {
     // The largest page, checked twice: more than 30 s on CI in Firefox and
-    // WebKit.
-    test.slow();
+    // WebKit (slow there, above).
     await page.goto('/presets');
     await expectNoA11yViolations(page);
     await expectNoA11yViolations(page, { dark: true });
@@ -86,6 +93,7 @@ test.describe('Presets Page', () => {
     const plot = page.getByRole('group', {
       name: 'Sleep stages by hour, 10pm to 6am',
     });
+    await plot.waitFor(shown);
     // Seen, it enters: scrolled to, as a reader would.
     await plot.scrollIntoViewIfNeeded();
     await expect(plot).toBeVisible();
@@ -121,6 +129,7 @@ test.describe('Presets Page', () => {
     const plot = page.getByRole('group', {
       name: 'Workout load by day, Monday to Sunday',
     });
+    await plot.waitFor(shown);
     await plot.scrollIntoViewIfNeeded();
     // A bar per day, each over its track (the whole 0 to 100).
     const chart = page.locator('[data-slot=chart]', { has: plot });
