@@ -17,12 +17,17 @@ export class EditorUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScFrame,
+  ScToggle,
+  ScToolbar,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBold,
   ScEditorContent,
   ScEditorItalic,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
   ScEditorUnderline,
 } from '@semantic-components/ui/editor';
 import {
@@ -35,10 +40,13 @@ import {
   selector: 'app-editor-usage-demo',
   imports: [
     FormField,
+    ScFrame,
+    ScToggle,
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
     ScEditor,
     ScEditorContent,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScEditorBold,
     ScEditorItalic,
     ScEditorUnderline,
@@ -47,35 +55,33 @@ import {
     SiUnderlineIcon,
   ],
   template: \`
-    <div class="w-full max-w-lg">
-      <div
-        scEditor
-        [formField]="editorForm.body"
-        class="overflow-hidden rounded-lg border"
-      >
-        <div scEditorToolbar>
-          <div scEditorToolbarGroup>
-            <button scEditorBold value="bold">
-              <svg siBoldIcon></svg>
-              <span class="sr-only">Bold</span>
-            </button>
-            <button scEditorItalic value="italic">
-              <svg siItalicIcon></svg>
-              <span class="sr-only">Italic</span>
-            </button>
-            <button scEditorUnderline value="underline">
-              <svg siUnderlineIcon></svg>
-              <span class="sr-only">Underline</span>
-            </button>
-          </div>
+    <div
+      scEditor
+      [formField]="editorForm.body"
+      class="flex w-full max-w-lg flex-col gap-2"
+    >
+      <div scToolbar aria-label="Formatting">
+        <div scToolbarWidgetGroup aria-label="Marks">
+          <button scToolbarWidget scToggle scEditorBold>
+            <svg siBoldIcon></svg>
+            <span class="sr-only">Bold</span>
+          </button>
+          <button scToolbarWidget scToggle scEditorItalic>
+            <svg siItalicIcon></svg>
+            <span class="sr-only">Italic</span>
+          </button>
+          <button scToolbarWidget scToggle scEditorUnderline>
+            <svg siUnderlineIcon></svg>
+            <span class="sr-only">Underline</span>
+          </button>
         </div>
-
-        <div
-          scEditorContent
-          ariaLabel="Message"
-          placeholder="Start writing..."
-        ></div>
       </div>
+      <div
+        scFrame
+        scEditorContent
+        ariaLabel="Message"
+        placeholder="Start writing..."
+      ></div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

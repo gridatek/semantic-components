@@ -34,10 +34,5 @@ export class ScEditorSearchResults {
     return this.count() ? 'found' : 'none';
   });
 
-  protected readonly class = computed(() =>
-    cn(
-      'text-muted-foreground text-sm tabular-nums whitespace-nowrap data-[state=none]:text-destructive',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 }

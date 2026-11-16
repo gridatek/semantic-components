@@ -1,35 +1,31 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, readonly } from '@angular/forms/signals';
+import { ScFrame } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorCharCount,
   ScEditorContent,
   ScEditorCount,
-  ScEditorFooter,
   ScEditorWordCount,
 } from '@semantic-components/ui/editor';
 
 @Component({
   selector: 'app-readonly-editor-demo',
   imports: [
+    ScFrame,
     FormField,
     ScEditor,
     ScEditorContent,
-    ScEditorFooter,
     ScEditorCount,
     ScEditorWordCount,
     ScEditorCharCount,
   ],
   template: `
     <div class="w-full">
-      <div
-        scEditor
-        [formField]="editorForm.body"
-        class="overflow-hidden rounded-lg border"
-      >
-        <div scEditorContent ariaLabel="Article"></div>
+      <div scEditor [formField]="editorForm.body" class="flex flex-col gap-2">
+        <div scFrame scEditorContent ariaLabel="Article"></div>
 
-        <div scEditorFooter>
+        <div class="text-muted-foreground px-1 text-xs">
           <div scEditorCount>
             <span scEditorWordCount #wc="scEditorWordCount">
               {{ wc.wordCount() }} words

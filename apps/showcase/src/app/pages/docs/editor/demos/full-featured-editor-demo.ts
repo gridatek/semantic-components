@@ -3,6 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScField,
+  ScFrame,
   ScInput,
   ScLabel,
   ScLink,
@@ -20,9 +21,16 @@ import {
   ScProgressRange,
   ScProgressTrack,
   ScSeparator,
+  ScToggle,
+  ScToolbar,
+  ScToolbarSeparator,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
 } from '@semantic-components/ui';
 import {
   ScEditor,
+  ScEditorBlock,
+  type ScEditorBlockType,
   ScEditorBlockquote,
   ScEditorBold,
   ScEditorCharCount,
@@ -31,19 +39,11 @@ import {
   ScEditorCodeBlock,
   ScEditorContent,
   ScEditorCount,
-  ScEditorFooter,
-  ScEditorHeading,
-  type ScEditorHeadingLevel,
   ScEditorHorizontalRule,
   ScEditorItalic,
   ScEditorLink,
-  ScEditorList,
-  type ScEditorListType,
   ScEditorRedo,
-  ScEditorSeparator,
   ScEditorStrikethrough,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
   ScEditorUnderline,
   ScEditorUndo,
   ScEditorWordCount,
@@ -174,6 +174,12 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     ),
   ],
   imports: [
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
+    ScToolbarSeparator,
+    ScToggle,
+    ScFrame,
     FormField,
     ScButton,
     ScField,
@@ -203,17 +209,12 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     ScEditorCodeBlock,
     ScEditorContent,
     ScEditorCount,
-    ScEditorFooter,
-    ScEditorHeading,
+    ScEditorBlock,
     ScEditorHorizontalRule,
     ScEditorItalic,
     ScEditorLink,
-    ScEditorList,
     ScEditorRedo,
-    ScEditorSeparator,
     ScEditorStrikethrough,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScEditorUnderline,
     ScEditorUndo,
     ScEditorWordCount,
@@ -288,58 +289,82 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
         #images="scEditorUploads"
         [formField]="editorForm.body"
         [upload]="upload"
-        class="overflow-hidden rounded-lg border"
+        class="flex flex-col gap-2"
       >
-        <div scEditorToolbar aria-label="Formatting">
-          <div scEditorToolbarGroup>
-            <button scEditorUndo value="undo">
+        <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
+          <div scToolbarWidgetGroup>
+            <button
+              scToolbarWidget
+              scButton
+              variant="ghost"
+              size="icon"
+              scEditorUndo
+            >
               <svg siUndoIcon></svg>
               <span class="sr-only">Undo</span>
             </button>
-            <button scEditorRedo value="redo">
+            <button
+              scToolbarWidget
+              scButton
+              variant="ghost"
+              size="icon"
+              scEditorRedo
+            >
               <svg siRedoIcon></svg>
               <span class="sr-only">Redo</span>
             </button>
           </div>
 
-          <div scEditorSeparator></div>
+          <div scToolbarSeparator></div>
 
-          <div scEditorToolbarGroup>
+          <div scToolbarWidgetGroup>
             <div scMenuProvider>
               <button
+                scToolbarWidget
+                scButton
+                variant="ghost"
+                size="sm"
                 scMenuTrigger
-                scEditorHeading
-                value="heading"
-                #heading="scEditorHeading"
+                scEditorBlock
+                #block="scEditorBlock"
               >
-                @switch (heading.level()) {
-                  @case ('h1') {
+                @switch (block.value()) {
+                  @case ('heading-1') {
                     <svg siHeading1Icon></svg>
                   }
-                  @case ('h2') {
+                  @case ('heading-2') {
                     <svg siHeading2Icon></svg>
                   }
-                  @case ('h3') {
+                  @case ('heading-3') {
                     <svg siHeading3Icon></svg>
                   }
-                  @case ('h4') {
+                  @case ('heading-4') {
                     <svg siHeading4Icon></svg>
+                  }
+                  @case ('bullet-list') {
+                    <svg siListIcon></svg>
+                  }
+                  @case ('ordered-list') {
+                    <svg siListOrderedIcon></svg>
+                  }
+                  @case ('task-list') {
+                    <svg siListTodoIcon></svg>
                   }
                   @default {
                     <svg siHeadingIcon></svg>
                   }
                 }
-                <span class="sr-only">{{
-                  headingLabels[heading.level()]
-                }}</span>
+                <span class="sr-only"
+                  >Text style: {{ blockLabels[block.value()] }}</span
+                >
                 <svg siChevronDownIcon></svg>
               </button>
               <ng-template scMenuPortal>
-                <div scMenu (itemSelected)="heading.select($event)">
+                <div scMenu (itemSelected)="block.select($event)">
                   <ng-template scMenuContent>
-                    @for (level of headingLevels; track level) {
-                      <div scMenuItem [value]="level">
-                        {{ headingLabels[level] }}
+                    @for (item of blocks; track item) {
+                      <div scMenuItem [value]="item">
+                        {{ blockLabels[item] }}
                       </div>
                     }
                   </ng-template>
@@ -347,54 +372,23 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
               </ng-template>
             </div>
 
-            <div scMenuProvider>
-              <button
-                scMenuTrigger
-                scEditorList
-                value="list"
-                #list="scEditorList"
-              >
-                @switch (list.type()) {
-                  @case ('orderedList') {
-                    <svg siListOrderedIcon></svg>
-                  }
-                  @case ('taskList') {
-                    <svg siListTodoIcon></svg>
-                  }
-                  @default {
-                    <svg siListIcon></svg>
-                  }
-                }
-                <span class="sr-only">List</span>
-                <svg siChevronDownIcon></svg>
-              </button>
-              <ng-template scMenuPortal>
-                <div scMenu (itemSelected)="list.select($event)">
-                  <ng-template scMenuContent>
-                    @for (type of listTypes; track type) {
-                      <div scMenuItem [value]="type">
-                        {{ listLabels[type] }}
-                      </div>
-                    }
-                  </ng-template>
-                </div>
-              </ng-template>
-            </div>
-
-            <button scEditorBlockquote value="blockquote">
+            <button scToolbarWidget scToggle scEditorBlockquote>
               <svg siTextQuoteIcon></svg>
               <span class="sr-only">Blockquote</span>
             </button>
-            <button scEditorCodeBlock value="code-block">
+            <button scToolbarWidget scToggle scEditorCodeBlock>
               <svg siCodeXmlIcon></svg>
               <span class="sr-only">Code block</span>
             </button>
 
             <div scMenuProvider>
               <button
+                scToolbarWidget
+                scButton
+                variant="ghost"
+                size="icon"
                 scMenuTrigger
                 scEditorTable
-                value="table"
                 #table="scEditorTable"
               >
                 <svg siTable2Icon></svg>
@@ -419,32 +413,37 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
             </div>
           </div>
 
-          <div scEditorSeparator></div>
+          <div scToolbarSeparator></div>
 
-          <div scEditorToolbarGroup>
-            <button scEditorBold value="bold">
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorBold>
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalic value="italic">
+            <button scToolbarWidget scToggle scEditorItalic>
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scEditorStrikethrough value="strikethrough">
+            <button scToolbarWidget scToggle scEditorStrikethrough>
               <svg siStrikethroughIcon></svg>
               <span class="sr-only">Strikethrough</span>
             </button>
-            <button scEditorCode value="code">
+            <button scToolbarWidget scToggle scEditorCode>
               <svg siCodeIcon></svg>
               <span class="sr-only">Code</span>
             </button>
-            <button scEditorUnderline value="underline">
+            <button scToolbarWidget scToggle scEditorUnderline>
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
 
             <div scPopoverProvider>
-              <button scEditorHighlight scPopoverTrigger value="highlight">
+              <button
+                scToolbarWidget
+                scToggle
+                scEditorHighlight
+                scPopoverTrigger
+              >
                 <svg siHighlighterIcon></svg>
                 <span class="sr-only">Highlight</span>
               </button>
@@ -460,7 +459,13 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                     </button>
                   }
                   <div scSeparator orientation="vertical"></div>
-                  <button scEditorRemoveHighlight>
+                  <button
+                    scButton
+                    variant="ghost"
+                    size="icon-sm"
+                    class="rounded-full"
+                    scEditorRemoveHighlight
+                  >
                     <svg siBanIcon></svg>
                     <span class="sr-only">Remove highlight</span>
                   </button>
@@ -470,10 +475,11 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
 
             <div scPopoverProvider [(open)]="linkOpen">
               <button
+                scToolbarWidget
+                scToggle
                 scEditorLink
                 #link="scEditorLink"
                 scPopoverTrigger
-                value="link"
                 (click)="editLink(link.href())"
               >
                 <svg siLinkIcon></svg>
@@ -525,87 +531,115 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
             </div>
           </div>
 
-          <div scEditorSeparator></div>
+          <div scToolbarSeparator></div>
 
-          <div scEditorToolbarGroup>
-            <button scEditorSuperscript value="superscript">
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorSuperscript>
               <svg siSuperscriptIcon></svg>
               <span class="sr-only">Superscript</span>
             </button>
-            <button scEditorSubscript value="subscript">
+            <button scToolbarWidget scToggle scEditorSubscript>
               <svg siSubscriptIcon></svg>
               <span class="sr-only">Subscript</span>
             </button>
           </div>
 
-          <div scEditorSeparator></div>
+          <div scToolbarSeparator></div>
 
-          <div scEditorToolbarGroup>
-            <button scEditorAlignLeft value="align-left">
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorAlignLeft>
               <svg siTextAlignStartIcon></svg>
               <span class="sr-only">Align left</span>
             </button>
-            <button scEditorAlignCenter value="align-center">
+            <button scToolbarWidget scToggle scEditorAlignCenter>
               <svg siTextAlignCenterIcon></svg>
               <span class="sr-only">Align center</span>
             </button>
-            <button scEditorAlignRight value="align-right">
+            <button scToolbarWidget scToggle scEditorAlignRight>
               <svg siTextAlignEndIcon></svg>
               <span class="sr-only">Align right</span>
             </button>
-            <button scEditorAlignJustify value="align-justify">
+            <button scToolbarWidget scToggle scEditorAlignJustify>
               <svg siTextAlignJustifyIcon></svg>
               <span class="sr-only">Align justify</span>
             </button>
           </div>
 
-          <div scEditorSeparator></div>
+          <div scToolbarSeparator></div>
 
-          <div scEditorToolbarGroup>
-            <button scEditorImage value="image">
+          <div scToolbarWidgetGroup>
+            <button
+              scToolbarWidget
+              scButton
+              variant="ghost"
+              size="icon"
+              scEditorImage
+            >
               <svg siImagePlusIcon></svg>
               Add
               <span class="sr-only">image</span>
             </button>
           </div>
 
-          <div scEditorSeparator></div>
+          <div scToolbarSeparator></div>
 
-          <div scEditorToolbarGroup>
-            <button scEditorHorizontalRule value="horizontal-rule">
+          <div scToolbarWidgetGroup>
+            <button
+              scToolbarWidget
+              scButton
+              variant="ghost"
+              size="icon"
+              scEditorHorizontalRule
+            >
               <svg siMinusIcon></svg>
               <span class="sr-only">Horizontal rule</span>
             </button>
-            <button scEditorClearFormatting value="clear-formatting">
+            <button
+              scToolbarWidget
+              scButton
+              variant="ghost"
+              size="icon"
+              scEditorClearFormatting
+            >
               <svg siRemoveFormattingIcon></svg>
               <span class="sr-only">Clear formatting</span>
             </button>
-            <button scEditorSearch #search="scEditorSearch" value="search">
+            <button
+              scToolbarWidget
+              scToggle
+              scEditorSearch
+              #search="scEditorSearch"
+            >
               <svg siSearchIcon></svg>
               <span class="sr-only">Search and replace</span>
             </button>
           </div>
         </div>
 
-        <div scEditorBubbleMenu aria-label="Selection">
-          <div scEditorToolbarGroup>
-            <button scEditorBold value="bold">
+        <div
+          scEditorBubbleMenu
+          scToolbar
+          aria-label="Selection"
+          class="shadow-md"
+        >
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorBold>
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalic value="italic">
+            <button scToolbarWidget scToggle scEditorItalic>
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scEditorStrikethrough value="strikethrough">
+            <button scToolbarWidget scToggle scEditorStrikethrough>
               <svg siStrikethroughIcon></svg>
               <span class="sr-only">Strikethrough</span>
             </button>
-            <button scEditorCode value="code">
+            <button scToolbarWidget scToggle scEditorCode>
               <svg siCodeIcon></svg>
               <span class="sr-only">Code</span>
             </button>
-            <button scEditorUnderline value="underline">
+            <button scToolbarWidget scToggle scEditorUnderline>
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
@@ -613,7 +647,12 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
         </div>
 
         @if (search.open()) {
-          <div scEditorSearchBar aria-label="Search and replace">
+          <div
+            scFrame
+            scEditorSearchBar
+            aria-label="Search and replace"
+            class="flex flex-wrap items-center gap-x-2 gap-y-1.5 p-2"
+          >
             <input
               scInput
               scEditorSearchInput
@@ -624,7 +663,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
             <span
               scEditorSearchResults
               #results="scEditorSearchResults"
-              class="min-w-16"
+              class="text-muted-foreground data-[state=none]:text-destructive min-w-16 text-sm whitespace-nowrap tabular-nums"
             >
               @if (results.state() === 'found') {
                 {{ (results.index() ?? 0) + 1 }} of {{ results.count() }}
@@ -632,23 +671,28 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                 No results
               }
             </span>
-            <button scEditorSearchPrevious>
+            <button
+              scButton
+              variant="ghost"
+              size="icon-sm"
+              scEditorSearchPrevious
+            >
               <svg siChevronUpIcon></svg>
               <span class="sr-only">Previous match</span>
             </button>
-            <button scEditorSearchNext>
+            <button scButton variant="ghost" size="icon-sm" scEditorSearchNext>
               <svg siChevronDownIcon></svg>
               <span class="sr-only">Next match</span>
             </button>
-            <button scEditorSearchOption="caseSensitive">
+            <button scToggle size="sm" scEditorSearchOption="caseSensitive">
               <svg siCaseSensitiveIcon></svg>
               <span class="sr-only">Match case</span>
             </button>
-            <button scEditorSearchOption="wholeWord">
+            <button scToggle size="sm" scEditorSearchOption="wholeWord">
               <svg siWholeWordIcon></svg>
               <span class="sr-only">Whole word</span>
             </button>
-            <button scEditorSearchOption="useRegex">
+            <button scToggle size="sm" scEditorSearchOption="useRegex">
               <svg siRegexIcon></svg>
               <span class="sr-only">Regular expression</span>
             </button>
@@ -659,9 +703,19 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
               placeholder="Replace with…"
               class="h-8 w-48"
             />
-            <button scEditorReplace>Replace</button>
-            <button scEditorReplaceAll>Replace all</button>
-            <button scEditorSearchClose class="ms-auto">
+            <button scButton variant="outline" size="sm" scEditorReplace>
+              Replace
+            </button>
+            <button scButton variant="outline" size="sm" scEditorReplaceAll>
+              Replace all
+            </button>
+            <button
+              scButton
+              variant="ghost"
+              size="icon-sm"
+              scEditorSearchClose
+              class="ms-auto"
+            >
               <svg siXIcon></svg>
               <span class="sr-only">Close search</span>
             </button>
@@ -669,6 +723,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
         }
 
         <div
+          scFrame
           scEditorContent
           ariaLabel="Article"
           layout="page"
@@ -676,7 +731,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
           placeholder="Start writing…"
         ></div>
 
-        <div scEditorFooter>
+        <div class="text-muted-foreground px-1 text-xs">
           @for (upload of images.uploads(); track upload.id) {
             <div class="mb-1.5 flex items-center gap-2">
               <span class="truncate">Uploading {{ upload.file.name }}</span>
@@ -741,32 +796,30 @@ export class FullFeaturedEditorDemo {
   private readonly linkModel = signal({ href: '' });
   readonly linkForm = form(this.linkModel);
 
-  readonly headingLevels: ScEditorHeadingLevel[] = [
-    'p',
-    'h1',
-    'h2',
-    'h3',
-    'h4',
+  /** The block menu's items, and every block's name (the trigger's too). */
+  private readonly blocks: ScEditorBlockType[] = [
+    'paragraph',
+    'heading-1',
+    'heading-2',
+    'heading-3',
+    'heading-4',
+    'bullet-list',
+    'ordered-list',
+    'task-list',
   ];
-  readonly headingLabels: Record<ScEditorHeadingLevel, string> = {
-    p: 'Paragraph',
-    h1: 'Heading 1',
-    h2: 'Heading 2',
-    h3: 'Heading 3',
-    h4: 'Heading 4',
-    h5: 'Heading 5',
-    h6: 'Heading 6',
-  };
-
-  readonly listTypes: ScEditorListType[] = [
-    'bulletList',
-    'orderedList',
-    'taskList',
-  ];
-  readonly listLabels: Record<ScEditorListType, string> = {
-    bulletList: 'Bullet list',
-    orderedList: 'Numbered list',
-    taskList: 'Task list',
+  private readonly blockLabels: Record<ScEditorBlockType, string> = {
+    paragraph: 'Paragraph',
+    'heading-1': 'Heading 1',
+    'heading-2': 'Heading 2',
+    'heading-3': 'Heading 3',
+    'heading-4': 'Heading 4',
+    'heading-5': 'Heading 5',
+    'heading-6': 'Heading 6',
+    'bullet-list': 'Bullet list',
+    'ordered-list': 'Numbered list',
+    'task-list': 'Task list',
+    quote: 'Quote',
+    'code-block': 'Code block',
   };
 
   readonly tableActions: ScEditorTableAction[] = [

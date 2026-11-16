@@ -20,6 +20,7 @@ import {
   ScFileUploadItemSize,
   ScFileUploadList,
   ScFileUploadTrigger,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiFileIcon,
@@ -31,6 +32,7 @@ import {
 @Component({
   selector: 'app-form-file-upload-demo',
   imports: [
+    ScFrame,
     FormField,
     FormRoot,
     ScFileUpload,
@@ -85,7 +87,7 @@ import {
         Send application
       </button>
       @if (sent()) {
-        <p class="bg-muted rounded-md p-4 text-sm" role="status">
+        <p scFrame class="bg-muted p-4 text-sm" role="status">
           Sent: {{ sent() }}
         </p>
       }

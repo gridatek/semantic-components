@@ -10,6 +10,7 @@ import {
   ScButton,
   ScField,
   ScFieldErrors,
+  ScFrame,
   ScLabel,
   ScTagsInput,
   ScTagsInputControl,
@@ -22,6 +23,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-form-tags-input-demo',
   imports: [
+    ScFrame,
     FormField,
     FormRoot,
     ScTagsInput,
@@ -54,7 +56,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       </div>
       <button scButton type="submit" class="justify-self-end">Publish</button>
       @if (published()) {
-        <p class="bg-muted rounded-md p-4 text-sm" role="status">
+        <p scFrame class="bg-muted p-4 text-sm" role="status">
           Published with {{ published() }}.
         </p>
       }

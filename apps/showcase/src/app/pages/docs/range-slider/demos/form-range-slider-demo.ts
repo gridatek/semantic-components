@@ -4,6 +4,7 @@ import { FormField, form, max, min } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldErrors,
+  ScFrame,
   ScLabel,
   ScRangeSlider,
   ScRangeSliderEndThumb,
@@ -18,6 +19,7 @@ interface PriceRangeFormModel {
 @Component({
   selector: 'app-form-range-slider-demo',
   imports: [
+    ScFrame,
     ScRangeSlider,
     ScRangeSliderStartThumb,
     ScRangeSliderEndThumb,
@@ -49,7 +51,7 @@ interface PriceRangeFormModel {
         <p scFieldErrors></p>
       </div>
 
-      <div class="bg-muted rounded-md p-4">
+      <div scFrame class="bg-muted p-4">
         <p class="text-sm font-medium">Form Values:</p>
         <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>

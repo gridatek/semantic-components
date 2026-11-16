@@ -26,12 +26,7 @@ export class ScEditorSearchBar {
   private readonly search = editorSearch(inject(SC_EDITOR));
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn(
-      'flex flex-wrap items-center gap-x-2 gap-y-1.5 border-b bg-muted/30 px-2 py-1.5',
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     ɵassertEditorFeature('withSearch', 'scEditorSearchBar');

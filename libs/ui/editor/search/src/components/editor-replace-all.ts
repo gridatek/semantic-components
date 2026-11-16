@@ -1,6 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { type ScButtonVariants, injectPreset } from '@semantic-components/ui';
-import { SC_EDITOR } from '@semantic-components/ui/editor';
+import { SC_EDITOR, ɵeditorControl } from '@semantic-components/ui/editor';
 import { cn } from 'cn';
 import { editorSearch } from './editor-search-state';
 
@@ -14,22 +13,19 @@ import { editorSearch } from './editor-search-state';
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': '!search.editor.editable() || !search.count()',
     '(click)': 'search.replaceAll()',
   },
 })
 export class ScEditorReplaceAll {
-  private readonly buttonStyles = injectPreset().button;
-
   protected readonly search = editorSearch(inject(SC_EDITOR));
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScButtonVariants['variant']>('outline');
-  readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
-    cn(
-      this.buttonStyles({ variant: this.variant(), size: this.size() }),
-      this.classInput(),
-    ),
+  protected readonly class = computed(() => cn(this.classInput()));
+  protected readonly disabled = computed(
+    () => !this.search.editor.editable() || !this.search.count(),
   );
+
+  constructor() {
+    ɵeditorControl({ disabled: this.disabled });
+  }
 }

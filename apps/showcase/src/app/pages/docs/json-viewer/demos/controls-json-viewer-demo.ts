@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScJsonViewer } from '@semantic-components/ui';
+import { ScButton, ScFrame, ScJsonViewer } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-controls-json-viewer-demo',
-  imports: [ScButton, ScJsonViewer],
+  imports: [ScFrame, ScButton, ScJsonViewer],
   template: `
     <div class="flex flex-wrap gap-2">
       <button
@@ -34,7 +34,7 @@ import { ScButton, ScJsonViewer } from '@semantic-components/ui';
       [maxStringLength]="40"
       [data]="pkg"
     ></ul>
-    <p class="bg-muted rounded-md p-4 font-mono text-sm" aria-live="polite">
+    <p scFrame class="bg-muted p-4 font-mono text-sm" aria-live="polite">
       Focused: {{ viewer.focusedPath() ?? '—' }}
     </p>
   `,

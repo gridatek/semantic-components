@@ -1,10 +1,4 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
@@ -21,20 +15,21 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScPopoverTrigger,
+  ScToggle,
+  ScToolbar,
+  ScToolbarSeparator,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
 } from '@semantic-components/ui';
 import {
-  SC_EDITOR,
+  ScEditorBlock,
+  type ScEditorBlockType,
   ScEditorBold,
   ScEditorCode,
-  ScEditorHeading,
-  type ScEditorHeadingLevel,
   ScEditorItalic,
   ScEditorLink,
   ScEditorRedo,
-  ScEditorSeparator,
   ScEditorStrikethrough,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
   ScEditorUnderline,
   ScEditorUndo,
 } from '@semantic-components/ui/editor';
@@ -67,15 +62,14 @@ import {
   SiUnlinkIcon,
 } from '@semantic-icons/lucide-icons';
 
-type Block = ScEditorHeadingLevel | 'bulletList' | 'orderedList';
-
-const BLOCK_LABEL: Partial<Record<Block, string>> = {
-  p: 'Normal Text',
-  h1: 'Heading 1',
-  h2: 'Heading 2',
-  h3: 'Heading 3',
-  bulletList: 'Bullet List',
-  orderedList: 'Numbered List',
+/** The block menu's labels; another block (a quote, code) reads as text. */
+const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
+  paragraph: 'Normal Text',
+  'heading-1': 'Heading 1',
+  'heading-2': 'Heading 2',
+  'heading-3': 'Heading 3',
+  'bullet-list': 'Bullet List',
+  'ordered-list': 'Numbered List',
 };
 
 /**
@@ -93,15 +87,12 @@ const BLOCK_LABEL: Partial<Record<Block, string>> = {
     ScEditorAlignRight,
     ScEditorBold,
     ScEditorCode,
-    ScEditorHeading,
+    ScEditorBlock,
     ScEditorImage,
     ScEditorItalic,
     ScEditorLink,
     ScEditorRedo,
-    ScEditorSeparator,
     ScEditorStrikethrough,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScEditorUnderline,
     ScEditorUndo,
     ScField,
@@ -117,6 +108,11 @@ const BLOCK_LABEL: Partial<Record<Block, string>> = {
     ScPopoverPortal,
     ScPopoverProvider,
     ScPopoverTrigger,
+    ScToggle,
+    ScToolbar,
+    ScToolbarSeparator,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
     SiBoldIcon,
     SiChevronDownIcon,
     SiCodeXmlIcon,
@@ -140,41 +136,44 @@ const BLOCK_LABEL: Partial<Record<Block, string>> = {
   ],
   template: `
     <div
-      scEditorToolbar
+      scToolbar
       aria-label="Formatting"
       class="flex-nowrap justify-start gap-0 bg-transparent"
     >
-      <div scEditorToolbarGroup>
+      <div scToolbarWidgetGroup>
         <div scMenuProvider>
           <button
-            scEditorHeading
+            scToolbarWidget
+            scButton
+            variant="ghost"
+            size="sm"
             scMenuTrigger
-            value="block"
-            #heading="scEditorHeading"
-            class="w-auto gap-1.5 px-2.5"
+            scEditorBlock
+            #block="scEditorBlock"
+            class="gap-1.5 px-2.5"
           >
-            {{ blockLabel() }}
+            {{ labels[block.value()] ?? labels.paragraph }}
             <svg siChevronDownIcon data-icon="inline-end"></svg>
           </button>
           <ng-template scMenuPortal>
-            <div scMenu (itemSelected)="choose($event, heading)">
+            <div scMenu (itemSelected)="block.select($event)">
               <ng-template scMenuContent>
-                <div scMenuItem value="p">
+                <div scMenuItem value="paragraph">
                   <svg siTypeIcon></svg> Normal Text
                 </div>
-                <div scMenuItem value="h1">
+                <div scMenuItem value="heading-1">
                   <svg siHeading1Icon></svg> Heading 1
                 </div>
-                <div scMenuItem value="h2">
+                <div scMenuItem value="heading-2">
                   <svg siHeading2Icon></svg> Heading 2
                 </div>
-                <div scMenuItem value="h3">
+                <div scMenuItem value="heading-3">
                   <svg siHeading3Icon></svg> Heading 3
                 </div>
-                <div scMenuItem value="bulletList">
+                <div scMenuItem value="bullet-list">
                   <svg siListIcon></svg> Bullet List
                 </div>
-                <div scMenuItem value="orderedList">
+                <div scMenuItem value="ordered-list">
                   <svg siListOrderedIcon></svg> Numbered List
                 </div>
               </ng-template>
@@ -182,67 +181,88 @@ const BLOCK_LABEL: Partial<Record<Block, string>> = {
           </ng-template>
         </div>
       </div>
-      <div scEditorSeparator class="mx-2"></div>
-      <div scEditorToolbarGroup>
-        <button scEditorBold value="bold" class="size-8 min-w-8 px-0">
+      <div scToolbarSeparator class="mx-2"></div>
+      <div scToolbarWidgetGroup>
+        <button
+          scToolbarWidget
+          scToggle
+          scEditorBold
+          class="size-8 min-w-8 px-0"
+        >
           <svg siBoldIcon></svg><span class="sr-only">Bold</span>
         </button>
-        <button scEditorItalic value="italic" class="size-8 min-w-8 px-0">
+        <button
+          scToolbarWidget
+          scToggle
+          scEditorItalic
+          class="size-8 min-w-8 px-0"
+        >
           <svg siItalicIcon></svg><span class="sr-only">Italic</span>
         </button>
-        <button scEditorUnderline value="underline" class="size-8 min-w-8 px-0">
+        <button
+          scToolbarWidget
+          scToggle
+          scEditorUnderline
+          class="size-8 min-w-8 px-0"
+        >
           <svg siUnderlineIcon></svg><span class="sr-only">Underline</span>
         </button>
         <button
+          scToolbarWidget
+          scToggle
           scEditorStrikethrough
-          value="strikethrough"
           class="size-8 min-w-8 px-0 max-md:hidden"
         >
           <svg siStrikethroughIcon></svg
           ><span class="sr-only">Strikethrough</span>
         </button>
         <button
+          scToolbarWidget
+          scToggle
           scEditorCode
-          value="code"
           class="size-8 min-w-8 px-0 max-md:hidden"
         >
           <svg siCodeXmlIcon></svg><span class="sr-only">Code</span>
         </button>
       </div>
-      <div scEditorSeparator class="mx-2 max-md:hidden"></div>
-      <div scEditorToolbarGroup class="max-md:hidden">
+      <div scToolbarSeparator class="mx-2 max-md:hidden"></div>
+      <div scToolbarWidgetGroup class="max-md:hidden">
         <button
+          scToolbarWidget
+          scToggle
           scEditorAlignLeft
-          value="align-left"
           class="size-8 min-w-8 px-0"
         >
           <svg siTextAlignStartIcon></svg
           ><span class="sr-only">Align Left</span>
         </button>
         <button
+          scToolbarWidget
+          scToggle
           scEditorAlignCenter
-          value="align-center"
           class="size-8 min-w-8 px-0"
         >
           <svg siTextAlignCenterIcon></svg
           ><span class="sr-only">Align Center</span>
         </button>
         <button
+          scToolbarWidget
+          scToggle
           scEditorAlignRight
-          value="align-right"
           class="size-8 min-w-8 px-0"
         >
           <svg siTextAlignEndIcon></svg><span class="sr-only">Align Right</span>
         </button>
       </div>
-      <div scEditorSeparator class="mx-2 max-md:hidden"></div>
-      <div scEditorToolbarGroup class="max-md:hidden">
+      <div scToolbarSeparator class="mx-2 max-md:hidden"></div>
+      <div scToolbarWidgetGroup class="max-md:hidden">
         <div scPopoverProvider [(open)]="linkOpen">
           <button
+            scToolbarWidget
+            scToggle
             scEditorLink
             scPopoverTrigger
             class="size-8 min-w-8 px-0"
-            value="link"
             #link="scEditorLink"
             (click)="editLink(link.href())"
           >
@@ -281,15 +301,36 @@ const BLOCK_LABEL: Partial<Record<Block, string>> = {
             </div>
           </ng-template>
         </div>
-        <button scEditorImage value="image" class="size-8 min-w-8 px-0">
+        <button
+          scToolbarWidget
+          scButton
+          variant="ghost"
+          size="icon"
+          scEditorImage
+          class="size-8 min-w-8 px-0"
+        >
           <svg siImageIcon></svg><span class="sr-only">Image</span>
         </button>
       </div>
-      <div scEditorToolbarGroup class="ms-auto">
-        <button scEditorUndo value="undo" class="size-8 min-w-8 px-0">
+      <div scToolbarWidgetGroup class="ms-auto">
+        <button
+          scToolbarWidget
+          scButton
+          variant="ghost"
+          size="icon"
+          scEditorUndo
+          class="size-8 min-w-8 px-0"
+        >
           <svg siUndoIcon></svg><span class="sr-only">Undo</span>
         </button>
-        <button scEditorRedo value="redo" class="size-8 min-w-8 px-0">
+        <button
+          scToolbarWidget
+          scButton
+          variant="ghost"
+          size="icon"
+          scEditorRedo
+          class="size-8 min-w-8 px-0"
+        >
           <svg siRedoIcon></svg><span class="sr-only">Redo</span>
         </button>
       </div>
@@ -299,33 +340,10 @@ const BLOCK_LABEL: Partial<Record<Block, string>> = {
   encapsulation: ViewEncapsulation.None,
 })
 export class EditorToolbar {
-  private readonly editor = inject(SC_EDITOR);
-
-  /** The selection's block: the menu's label. */
-  private readonly blockLabel = computed(() => {
-    if (this.editor.isActive('bulletList')) return BLOCK_LABEL.bulletList;
-    if (this.editor.isActive('orderedList')) return BLOCK_LABEL.orderedList;
-    for (const level of [1, 2, 3] as const) {
-      if (this.editor.isActive('heading', { level })) {
-        return BLOCK_LABEL[`h${level}`];
-      }
-    }
-    return BLOCK_LABEL.p;
-  });
+  private readonly labels = BLOCK_LABEL;
 
   private readonly linkOpen = signal(false);
   private readonly linkForm = form(signal({ href: '' }));
-
-  /** A text style, or a list: lists on and off, as the editor's own menu. */
-  private choose(value: unknown, heading: ScEditorHeading): void {
-    if (value === 'bulletList') {
-      this.editor.run((chain) => chain.toggleBulletList());
-    } else if (value === 'orderedList') {
-      this.editor.run((chain) => chain.toggleOrderedList());
-    } else if (typeof value === 'string' && value in BLOCK_LABEL) {
-      heading.select(value as ScEditorHeadingLevel);
-    }
-  }
 
   private editLink(href: string | null): void {
     this.linkForm.href().value.set(href ?? '');

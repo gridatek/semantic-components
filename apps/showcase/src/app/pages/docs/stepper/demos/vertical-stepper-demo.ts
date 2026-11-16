@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScStepper,
   ScStepperDescription,
   ScStepperIndicator,
@@ -17,6 +18,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-vertical-stepper-demo',
   imports: [
+    ScFrame,
     ScStepper,
     ScStepperList,
     ScStepperIndicator,
@@ -92,7 +94,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
         <div class="flex flex-1 flex-col">
           @for (step of steps; track step) {
             <div scStepperPanel [step]="$index">
-              <div class="bg-muted rounded-lg p-4">
+              <div scFrame class="bg-muted p-4">
                 <p class="text-sm">{{ step }}</p>
               </div>
             </div>

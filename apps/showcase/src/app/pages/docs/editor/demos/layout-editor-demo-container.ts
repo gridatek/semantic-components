@@ -20,15 +20,21 @@ import { LayoutEditorDemo } from './layout-editor-demo';
 export class LayoutEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
+import {
+  ScFrame,
+  ScToggle,
+  ScToggleGroup,
+  ScToggleGroupItem,
+  ScToolbar,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
+} from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
   ScEditorContent,
   type ScEditorContentLayout,
   ScEditorItalic,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
 } from '@semantic-components/ui/editor';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 
@@ -42,13 +48,16 @@ const LAYOUTS: ScEditorContentLayout[] = ['default', 'page'];
 @Component({
   selector: 'app-layout-editor-demo',
   imports: [
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
+    ScToggle,
+    ScFrame,
     FormField,
     ScEditor,
     ScEditorBold,
     ScEditorContent,
     ScEditorItalic,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScToggleGroup,
     ScToggleGroupItem,
     SiBoldIcon,
@@ -68,18 +77,14 @@ const LAYOUTS: ScEditorContentLayout[] = ['default', 'page'];
         }
       </div>
 
-      <div
-        scEditor
-        [formField]="editorForm.body"
-        class="overflow-hidden rounded-lg border"
-      >
-        <div scEditorToolbar aria-label="Formatting">
-          <div scEditorToolbarGroup>
-            <button scEditorBold value="bold">
+      <div scEditor [formField]="editorForm.body" class="flex flex-col gap-2">
+        <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorBold>
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalic value="italic">
+            <button scToolbarWidget scToggle scEditorItalic>
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
@@ -87,6 +92,7 @@ const LAYOUTS: ScEditorContentLayout[] = ['default', 'page'];
         </div>
 
         <div
+          scFrame
           scEditorContent
           ariaLabel="Letter"
           [layout]="layout()"

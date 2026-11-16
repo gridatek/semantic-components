@@ -1,12 +1,12 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScIntersectionObserver } from '@semantic-components/ui';
+import { ScFrame, ScIntersectionObserver } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-basic-intersection-observer-demo',
-  imports: [ScIntersectionObserver],
+  imports: [ScFrame, ScIntersectionObserver],
   template: `
     <div class="w-full max-w-md space-y-4">
-      <div class="bg-muted rounded-md p-4 text-sm">
+      <div scFrame class="bg-muted p-4 text-sm">
         The target is
         <span class="font-medium">
           {{ target.isIntersecting() ? 'visible' : 'hidden' }}

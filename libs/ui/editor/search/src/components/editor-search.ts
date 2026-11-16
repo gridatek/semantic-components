@@ -1,9 +1,8 @@
-import { ToolbarWidget } from '@angular/aria/toolbar';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
-import { bindInput, injectPreset } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
+  ɵeditorControl,
 } from '@semantic-components/ui/editor';
 import { cn } from 'cn';
 import { editorSearch } from './editor-search-state';
@@ -17,17 +16,13 @@ import { editorSearch } from './editor-search-state';
 @Directive({
   selector: 'button[scEditorSearch]',
   exportAs: 'scEditorSearch',
-  hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': 'open()',
     '(click)': 'search.toggle()',
   },
 })
 export class ScEditorSearch {
-  private readonly toggleStyles = injectPreset().toggle;
   private readonly editor = inject(SC_EDITOR);
   private readonly search = editorSearch(this.editor);
 
@@ -37,12 +32,7 @@ export class ScEditorSearch {
   /** Whether the search bar is open. */
   readonly open = this.search.open.asReadonly();
 
-  protected readonly class = computed(() =>
-    cn(
-      this.toggleStyles({ variant: 'default', size: 'default' }),
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 
   // Searching doesn't change the document: read-only can search too.
   protected readonly disabled = computed(
@@ -50,7 +40,7 @@ export class ScEditorSearch {
   );
 
   constructor() {
-    bindInput(inject(ToolbarWidget).disabled, this.disabled);
+    ɵeditorControl({ disabled: this.disabled, pressed: this.open });
     ɵassertEditorFeature('withSearch', 'scEditorSearch');
     inject(DestroyRef).onDestroy(this.search.register());
   }

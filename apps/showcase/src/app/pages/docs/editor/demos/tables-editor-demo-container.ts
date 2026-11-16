@@ -21,21 +21,25 @@ export class TablesEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScButton,
+  ScFrame,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
   ScMenuProvider,
   ScMenuTrigger,
+  ScToggle,
+  ScToolbar,
+  ScToolbarSeparator,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
 } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
   ScEditorContent,
   ScEditorItalic,
-  ScEditorSeparator,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
   provideEditor,
 } from '@semantic-components/ui/editor';
 import {
@@ -62,15 +66,19 @@ const PLANS = \`<p>Our plans:</p>
   selector: 'app-tables-editor-demo',
   providers: [provideEditor(withTables())],
   imports: [
+    ScButton,
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
+    ScToolbarSeparator,
+    ScToggle,
+    ScFrame,
     FormField,
     ScEditor,
     ScEditorBold,
     ScEditorContent,
     ScEditorItalic,
-    ScEditorSeparator,
     ScEditorTable,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScMenu,
     ScMenuContent,
     ScMenuItem,
@@ -84,31 +92,30 @@ const PLANS = \`<p>Our plans:</p>
   ],
   template: \`
     <div class="w-full">
-      <div
-        scEditor
-        [formField]="editorForm.body"
-        class="overflow-hidden rounded-lg border"
-      >
-        <div scEditorToolbar aria-label="Formatting">
-          <div scEditorToolbarGroup>
-            <button scEditorBold value="bold">
+      <div scEditor [formField]="editorForm.body" class="flex flex-col gap-2">
+        <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorBold>
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalic value="italic">
+            <button scToolbarWidget scToggle scEditorItalic>
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
           </div>
 
-          <div scEditorSeparator></div>
+          <div scToolbarSeparator></div>
 
-          <div scEditorToolbarGroup>
+          <div scToolbarWidgetGroup>
             <div scMenuProvider>
               <button
+                scToolbarWidget
+                scButton
+                variant="ghost"
+                size="icon"
                 scMenuTrigger
                 scEditorTable
-                value="table"
                 #table="scEditorTable"
               >
                 <svg siTable2Icon></svg>
@@ -134,7 +141,7 @@ const PLANS = \`<p>Our plans:</p>
           </div>
         </div>
 
-        <div scEditorContent ariaLabel="Plans"></div>
+        <div scFrame scEditorContent ariaLabel="Plans"></div>
       </div>
     </div>
   \`,

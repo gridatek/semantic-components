@@ -2703,6 +2703,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/editor',
     children: [
       {
+        path: 'editor-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/editor/demos/editor-usage-demo').then(
+            (m) => m.EditorUsageDemo,
+          ),
+      },
+      {
         path: 'prefilled-editor-demo',
         loadComponent: () =>
           import('../pages/docs/editor/demos/prefilled-editor-demo').then(

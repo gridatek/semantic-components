@@ -1,9 +1,8 @@
-import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { bindInput, injectPreset } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
+  ɵeditorControl,
 } from '@semantic-components/ui/editor';
 import { cn } from 'cn';
 import { editorAlignment } from './editor-alignment';
@@ -14,29 +13,20 @@ import { editorAlignment } from './editor-alignment';
  */
 @Directive({
   selector: 'button[scEditorAlignLeft]',
-  hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'disabled()',
-    '[attr.aria-pressed]': "alignment() === 'left'",
     '(click)': 'onClick()',
   },
 })
 export class ScEditorAlignLeft {
-  private readonly toggleStyles = injectPreset().toggle;
   protected readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
 
   protected readonly alignment = computed(() => editorAlignment(this.editor));
 
-  protected readonly class = computed(() =>
-    cn(
-      this.toggleStyles({ variant: 'default', size: 'default' }),
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 
   protected readonly disabled = computed(
     () => this.disabledInput() || !this.editor.editable(),
@@ -44,7 +34,10 @@ export class ScEditorAlignLeft {
 
   constructor() {
     ɵassertEditorFeature('withAlign', 'scEditorAlignLeft');
-    bindInput(inject(ToolbarWidget).disabled, this.disabled);
+    ɵeditorControl({
+      disabled: this.disabled,
+      pressed: computed(() => this.alignment() === 'left'),
+    });
   }
 
   protected onClick(): void {

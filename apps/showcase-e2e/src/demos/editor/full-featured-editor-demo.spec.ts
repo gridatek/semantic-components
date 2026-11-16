@@ -81,28 +81,38 @@ test.describe('Full Featured Editor Demo', () => {
     await expect(output(page)).toHaveText('<p>x<sub>2</sub></p>');
   });
 
-  test('the heading menu sets the block type', async ({ page }) => {
+  test('the block menu sets a heading; its trigger says which', async ({
+    page,
+  }) => {
     await startEmpty(page);
     await page.keyboard.type('Title');
-    await toolbar(page).getByRole('button', { name: 'Paragraph' }).click();
+    await toolbar(page)
+      .getByRole('button', { name: 'Text style: Paragraph', exact: true })
+      .click();
     await page.getByRole('menuitem', { name: 'Heading 2' }).click();
     // Tiptap keeps a paragraph after a heading at the end, to write on.
     await expect(output(page)).toHaveText('<h2>Title</h2><p></p>');
     await expect(
-      toolbar(page).getByRole('button', { name: 'Heading 2' }),
+      toolbar(page).getByRole('button', {
+        name: 'Text style: Heading 2',
+        exact: true,
+      }),
     ).toBeVisible();
   });
 
-  test('the list menu makes a task list', async ({ page }) => {
+  test('the block menu makes a task list', async ({ page }) => {
     await startEmpty(page);
     await page.keyboard.type('Buy milk');
-    const list = toolbar(page).getByRole('button', {
-      name: 'List',
-      exact: true,
-    });
-    await list.click();
+    await toolbar(page)
+      .getByRole('button', { name: 'Text style: Paragraph', exact: true })
+      .click();
     await page.getByRole('menuitem', { name: 'Task list' }).click();
-    await expect(list).toHaveAttribute('data-state', 'on');
+    await expect(
+      toolbar(page).getByRole('button', {
+        name: 'Text style: Task list',
+        exact: true,
+      }),
+    ).toBeVisible();
     const task = article(page).getByRole('checkbox', { name: 'Buy milk' });
     await expect(task).not.toBeChecked();
     // The checkbox is hidden behind the box its label draws: click that.
@@ -114,7 +124,10 @@ test.describe('Full Featured Editor Demo', () => {
   test('the code block button makes a code block', async ({ page }) => {
     await startEmpty(page);
     await page.keyboard.type('let a = 1;');
-    const codeBlock = toolbar(page).getByRole('button', { name: 'Code block' });
+    const codeBlock = toolbar(page).getByRole('button', {
+      name: 'Code block',
+      exact: true,
+    });
     await codeBlock.click();
     await expect(codeBlock).toHaveAttribute('aria-pressed', 'true');
     await expect(article(page).locator('pre code')).toHaveText('let a = 1;');

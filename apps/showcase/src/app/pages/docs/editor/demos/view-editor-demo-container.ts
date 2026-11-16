@@ -21,6 +21,13 @@ export class ViewEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScFrame,
+  ScToggle,
+  ScToolbar,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBlockquote,
   ScEditorBold,
@@ -29,8 +36,6 @@ import {
   ScEditorContent,
   ScEditorItalic,
   ScEditorTaskList,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
   ScEditorView,
   provideEditor,
 } from '@semantic-components/ui/editor';
@@ -57,6 +62,11 @@ import {
     provideEditor(withAlign(), withHighlight(), withImages(), withScripts()),
   ],
   imports: [
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
+    ScToggle,
+    ScFrame,
     FormField,
     ScEditor,
     ScEditorBlockquote,
@@ -66,8 +76,6 @@ import {
     ScEditorContent,
     ScEditorItalic,
     ScEditorTaskList,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScEditorView,
     SiBoldIcon,
     SiCodeXmlIcon,
@@ -78,47 +86,44 @@ import {
   ],
   template: \`
     <div class="grid w-full gap-6 lg:grid-cols-2">
-      <div
-        scEditor
-        [formField]="postForm.body"
-        class="overflow-hidden rounded-lg border"
-      >
-        <div scEditorToolbar aria-label="Formatting">
-          <div scEditorToolbarGroup>
-            <button scEditorBold value="bold">
+      <div scEditor [formField]="postForm.body" class="flex flex-col gap-2">
+        <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorBold>
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalic value="italic">
+            <button scToolbarWidget scToggle scEditorItalic>
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scEditorBulletList value="bullet-list">
+            <button scToolbarWidget scToggle scEditorBulletList>
               <svg siListIcon></svg>
               <span class="sr-only">Bullet list</span>
             </button>
-            <button scEditorTaskList value="task-list">
+            <button scToolbarWidget scToggle scEditorTaskList>
               <svg siListTodoIcon></svg>
               <span class="sr-only">Task list</span>
             </button>
-            <button scEditorBlockquote value="blockquote">
+            <button scToolbarWidget scToggle scEditorBlockquote>
               <svg siTextQuoteIcon></svg>
               <span class="sr-only">Blockquote</span>
             </button>
-            <button scEditorCodeBlock value="code-block">
+            <button scToolbarWidget scToggle scEditorCodeBlock>
               <svg siCodeXmlIcon></svg>
               <span class="sr-only">Code block</span>
             </button>
           </div>
         </div>
         <!-- Grows with its text, as the display does: no scrollbar to narrow it. -->
-        <div scEditorContent ariaLabel="Post" class="max-h-none"></div>
+        <div scFrame scEditorContent ariaLabel="Post" class="max-h-none"></div>
       </div>
 
       <article
         [scEditorView]="postForm.body().value()"
         aria-label="Published post"
-        class="rounded-lg border p-4 lg:mt-[49px]"
+        scFrame
+        class="p-4 lg:mt-[49px]"
       ></article>
     </div>
   \`,

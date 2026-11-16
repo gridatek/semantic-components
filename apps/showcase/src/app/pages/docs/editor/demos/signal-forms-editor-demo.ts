@@ -6,7 +6,12 @@ import {
   ScField,
   ScFieldDescription,
   ScFieldErrors,
+  ScFrame,
   ScLabel,
+  ScToggle,
+  ScToolbar,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
 } from '@semantic-components/ui';
 import {
   ScEditor,
@@ -14,10 +19,7 @@ import {
   ScEditorCharCount,
   ScEditorContent,
   ScEditorCount,
-  ScEditorFooter,
   ScEditorItalic,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
 } from '@semantic-components/ui/editor';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 
@@ -35,6 +37,11 @@ interface PostModel {
 @Component({
   selector: 'app-signal-forms-editor-demo',
   imports: [
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
+    ScToggle,
+    ScFrame,
     FormField,
     ScButton,
     ScCheckbox,
@@ -46,11 +53,8 @@ interface PostModel {
     ScEditorBold,
     ScEditorContent,
     ScEditorItalic,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScEditorCharCount,
     ScEditorCount,
-    ScEditorFooter,
     SiBoldIcon,
     SiItalicIcon,
   ],
@@ -61,26 +65,27 @@ interface PostModel {
           scEditor
           [formField]="postForm.body"
           [characterLimit]="280"
-          class="overflow-hidden rounded-lg border"
+          class="flex flex-col gap-2"
         >
-          <div scEditorToolbar aria-label="Formatting">
-            <div scEditorToolbarGroup>
-              <button scEditorBold value="bold">
+          <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
+            <div scToolbarWidgetGroup>
+              <button scToolbarWidget scToggle scEditorBold>
                 <svg siBoldIcon></svg>
                 <span class="sr-only">Bold</span>
               </button>
-              <button scEditorItalic value="italic">
+              <button scToolbarWidget scToggle scEditorItalic>
                 <svg siItalicIcon></svg>
                 <span class="sr-only">Italic</span>
               </button>
             </div>
           </div>
           <div
+            scFrame
             scEditorContent
             ariaLabel="Post"
             placeholder="What's on your mind?"
           ></div>
-          <div scEditorFooter>
+          <div class="text-muted-foreground px-1 text-xs">
             <div scEditorCount>
               <span scEditorCharCount #count="scEditorCharCount">
                 {{ count.charCount() }} / {{ count.limit() }}
@@ -104,7 +109,7 @@ interface PostModel {
         <button scButton type="button" (click)="fill()">Fill</button>
       </div>
 
-      <div class="bg-muted rounded-md p-4">
+      <div scFrame class="bg-muted p-4">
         <p class="text-sm font-medium">Form state</p>
         <pre class="text-muted-foreground mt-2 text-xs whitespace-pre-wrap">{{
           formState()

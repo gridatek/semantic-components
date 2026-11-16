@@ -19,6 +19,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScField,
+  ScFrame,
   ScLabel,
   ScRating,
   ScRatingGroup,
@@ -36,6 +37,7 @@ interface ReviewForm {
 @Component({
   selector: 'app-form-rating-demo',
   imports: [
+    ScFrame,
     ScRating,
     ScRatingGroup,
     ScRatingItem,
@@ -79,7 +81,7 @@ interface ReviewForm {
       <button scButton (click)="onSubmit()" class="w-fit">Submit Review</button>
 
       @if (submitted) {
-        <div class="bg-muted rounded-md p-4">
+        <div scFrame class="bg-muted p-4">
           <p class="text-sm font-medium">Form Value:</p>
           <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
         </div>

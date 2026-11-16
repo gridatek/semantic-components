@@ -1,6 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { injectPreset } from '@semantic-components/ui';
-import { SC_EDITOR } from '@semantic-components/ui/editor';
+import { SC_EDITOR, ɵeditorControl } from '@semantic-components/ui/editor';
 import { cn } from 'cn';
 import {
   type ScEditorSearchFlag as Option,
@@ -18,12 +17,10 @@ import {
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[attr.aria-pressed]': 'pressed()',
     '(click)': 'search.setOption(option(), !pressed())',
   },
 })
 export class ScEditorSearchOption {
-  private readonly toggleStyles = injectPreset().toggle;
   protected readonly search = editorSearch(inject(SC_EDITOR));
 
   readonly option = input.required<Option>({ alias: 'scEditorSearchOption' });
@@ -40,10 +37,8 @@ export class ScEditorSearchOption {
     }
   });
 
-  protected readonly class = computed(() =>
-    cn(
-      this.toggleStyles({ variant: 'default', size: 'sm' }),
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
+  constructor() {
+    ɵeditorControl({ disabled: computed(() => false), pressed: this.pressed });
+  }
 }

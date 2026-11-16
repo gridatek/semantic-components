@@ -1,4 +1,5 @@
 import { MenuTrigger } from '@angular/aria/menu';
+import { ToolbarWidget } from '@angular/aria/toolbar';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
@@ -14,6 +15,7 @@ import { SC_MENU } from './menu-context';
   hostDirectives: [MenuTrigger, CdkOverlayOrigin],
   host: {
     '[class]': 'class()',
+    '[attr.tabindex]': 'tabIndex()',
     '(pointerdown)': 'context?.quiet.set(true)',
     '(keydown)': 'context?.quiet.set(false)',
   },
@@ -23,8 +25,22 @@ export class ScMenuTrigger {
   readonly trigger = inject(MenuTrigger);
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   readonly expanded = this.trigger.expanded;
+  /** In a toolbar (`scToolbarWidget` beside it): the toolbar's widget. */
+  private readonly widget = inject(ToolbarWidget, {
+    self: true,
+    optional: true,
+  });
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   protected readonly class = computed(() => cn(this.classInput()));
+
+  /**
+   * In a toolbar, its Tab stop is the toolbar's (one for all its widgets),
+   * not the trigger's: both Aria directives bind `tabindex`, and which one
+   * wins would depend on the order the component imports them.
+   */
+  protected readonly tabIndex = computed(() =>
+    this.widget ? this.widget._pattern.tabIndex() : this.trigger.tabIndex(),
+  );
 }

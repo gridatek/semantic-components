@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScTree,
   ScTreeItem,
   ScTreeItemGroup,
@@ -17,6 +18,7 @@ import {
 @Component({
   selector: 'app-navigation-tree-demo',
   imports: [
+    ScFrame,
     ScTree,
     ScTreeItem,
     ScTreeItemTrigger,
@@ -113,7 +115,7 @@ import {
           </ul>
         </li>
       </ul>
-      <div class="bg-muted rounded-md p-4 text-sm">
+      <div scFrame class="bg-muted p-4 text-sm">
         Current page: {{ current()[0] ?? 'none' }}
       </div>
     </div>

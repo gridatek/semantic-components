@@ -21,18 +21,22 @@ export class PrefilledEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScFrame,
+  ScToggle,
+  ScToolbar,
+  ScToolbarSeparator,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBold,
   ScEditorBulletList,
   ScEditorCharCount,
   ScEditorContent,
   ScEditorCount,
-  ScEditorFooter,
   ScEditorItalic,
   ScEditorOrderedList,
-  ScEditorSeparator,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
   ScEditorUnderline,
   ScEditorWordCount,
 } from '@semantic-components/ui/editor';
@@ -47,18 +51,20 @@ import {
 @Component({
   selector: 'app-prefilled-editor-demo',
   imports: [
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
+    ScToolbarSeparator,
+    ScToggle,
+    ScFrame,
     FormField,
     ScEditor,
     ScEditorContent,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScEditorBold,
     ScEditorItalic,
     ScEditorUnderline,
-    ScEditorSeparator,
     ScEditorBulletList,
     ScEditorOrderedList,
-    ScEditorFooter,
     ScEditorCount,
     ScEditorWordCount,
     ScEditorCharCount,
@@ -70,44 +76,40 @@ import {
   ],
   template: \`
     <div class="w-full">
-      <div
-        scEditor
-        [formField]="editorForm.body"
-        class="overflow-hidden rounded-lg border"
-      >
-        <div scEditorToolbar>
-          <div scEditorToolbarGroup>
-            <button scEditorBold value="bold">
+      <div scEditor [formField]="editorForm.body" class="flex flex-col gap-2">
+        <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorBold>
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalic value="italic">
+            <button scToolbarWidget scToggle scEditorItalic>
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scEditorUnderline value="underline">
+            <button scToolbarWidget scToggle scEditorUnderline>
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
           </div>
 
-          <div scEditorSeparator></div>
+          <div scToolbarSeparator></div>
 
-          <div scEditorToolbarGroup>
-            <button scEditorBulletList value="bullet-list">
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorBulletList>
               <svg siListIcon></svg>
               <span class="sr-only">Bullet list</span>
             </button>
-            <button scEditorOrderedList value="numbered-list">
+            <button scToolbarWidget scToggle scEditorOrderedList>
               <svg siListOrderedIcon></svg>
               <span class="sr-only">Numbered list</span>
             </button>
           </div>
         </div>
 
-        <div scEditorContent ariaLabel="Article"></div>
+        <div scFrame scEditorContent ariaLabel="Article"></div>
 
-        <div scEditorFooter>
+        <div class="text-muted-foreground px-1 text-xs">
           <div scEditorCount>
             <span scEditorWordCount #wc="scEditorWordCount">
               {{ wc.wordCount() }} words

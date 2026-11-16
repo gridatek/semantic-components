@@ -2,19 +2,21 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
+  ScFrame,
   ScProgress,
   ScProgressRange,
   ScProgressTrack,
+  ScToggle,
+  ScToolbar,
+  ScToolbarSeparator,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
 } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
   ScEditorContent,
-  ScEditorFooter,
   ScEditorItalic,
-  ScEditorSeparator,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
   provideEditor,
 } from '@semantic-components/ui/editor';
 import {
@@ -38,18 +40,20 @@ import {
   selector: 'app-images-editor-demo',
   providers: [provideEditor(withImages())],
   imports: [
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
+    ScToolbarSeparator,
+    ScToggle,
+    ScFrame,
     FormField,
     ScButton,
     ScEditor,
     ScEditorBold,
     ScEditorContent,
-    ScEditorFooter,
     ScEditorImage,
     ScEditorUploads,
     ScEditorItalic,
-    ScEditorSeparator,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScProgress,
     ScProgressRange,
     ScProgressTrack,
@@ -65,24 +69,30 @@ import {
         #images="scEditorUploads"
         [formField]="editorForm.body"
         [upload]="upload"
-        class="overflow-hidden rounded-lg border"
+        class="flex flex-col gap-2"
       >
-        <div scEditorToolbar aria-label="Formatting">
-          <div scEditorToolbarGroup>
-            <button scEditorBold value="bold">
+        <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorBold>
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalic value="italic">
+            <button scToolbarWidget scToggle scEditorItalic>
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
           </div>
 
-          <div scEditorSeparator></div>
+          <div scToolbarSeparator></div>
 
-          <div scEditorToolbarGroup>
-            <button scEditorImage value="image">
+          <div scToolbarWidgetGroup>
+            <button
+              scToolbarWidget
+              scButton
+              variant="ghost"
+              size="icon"
+              scEditorImage
+            >
               <svg siImagePlusIcon></svg>
               <span class="sr-only">Add image</span>
             </button>
@@ -90,13 +100,14 @@ import {
         </div>
 
         <div
+          scFrame
           scEditorContent
           ariaLabel="Story"
           placeholder="Write, or drop an image here…"
         ></div>
 
         @if (images.uploads().length) {
-          <div scEditorFooter>
+          <div class="text-muted-foreground px-1 text-xs">
             @for (upload of images.uploads(); track upload.id) {
               <div class="flex items-center gap-2">
                 <span class="truncate">Uploading {{ upload.file.name }}</span>

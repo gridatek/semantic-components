@@ -29,6 +29,7 @@ import {
   ScComboboxValue,
   ScField,
   ScFieldErrors,
+  ScFrame,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
@@ -47,6 +48,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-country-selector-phone-input-demo',
   imports: [
+    ScFrame,
     FormField,
     ScCombobox,
     ScComboboxEmpty,
@@ -129,7 +131,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
         <div scFieldErrors></div>
       </div>
 
-      <p class="bg-muted rounded-md p-4 text-sm">
+      <p scFrame class="bg-muted p-4 text-sm">
         Value: {{ model().phone || '—' }}
       </p>
     </div>

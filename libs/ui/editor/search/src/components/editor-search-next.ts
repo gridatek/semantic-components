@@ -1,6 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { type ScButtonVariants, injectPreset } from '@semantic-components/ui';
-import { SC_EDITOR } from '@semantic-components/ui/editor';
+import { SC_EDITOR, ɵeditorControl } from '@semantic-components/ui/editor';
 import { cn } from 'cn';
 import { editorSearch } from './editor-search-state';
 
@@ -13,22 +12,17 @@ import { editorSearch } from './editor-search-state';
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': '!search.count()',
     '(click)': 'search.next()',
   },
 })
 export class ScEditorSearchNext {
-  private readonly buttonStyles = injectPreset().button;
-
   protected readonly search = editorSearch(inject(SC_EDITOR));
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly variant = input<ScButtonVariants['variant']>('ghost');
-  readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
-    cn(
-      this.buttonStyles({ variant: this.variant(), size: this.size() }),
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
+  protected readonly disabled = computed(() => !this.search.count());
+
+  constructor() {
+    ɵeditorControl({ disabled: this.disabled });
+  }
 }

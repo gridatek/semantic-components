@@ -1,10 +1,9 @@
 import type { ChainedCommands } from '@tiptap/core';
-import { ToolbarWidget } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
-import { bindInput, injectPreset } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
+  ɵeditorControl,
 } from '@semantic-components/ui/editor';
 import { cn } from 'cn';
 
@@ -36,16 +35,13 @@ export type ScEditorTableAction =
 @Directive({
   selector: 'button[scEditorTable]',
   exportAs: 'scEditorTable',
-  hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'disabled()',
     '[attr.data-state]': 'inTable() ? "on" : "off"',
   },
 })
 export class ScEditorTable {
-  private readonly toggleStyles = injectPreset().toggle;
   private readonly editor = inject(SC_EDITOR);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -54,12 +50,7 @@ export class ScEditorTable {
   /** Whether the selection is in a table. */
   readonly inTable = computed(() => this.editor.isActive('table'));
 
-  protected readonly class = computed(() =>
-    cn(
-      this.toggleStyles({ variant: 'default', size: 'default' }),
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 
   protected readonly disabled = computed(
     () => this.disabledInput() || !this.editor.editable(),
@@ -67,7 +58,7 @@ export class ScEditorTable {
 
   constructor() {
     ɵassertEditorFeature('withTables', 'scEditorTable');
-    bindInput(inject(ToolbarWidget).disabled, this.disabled);
+    ɵeditorControl({ disabled: this.disabled });
   }
 
   /** Whether this action can run now. */

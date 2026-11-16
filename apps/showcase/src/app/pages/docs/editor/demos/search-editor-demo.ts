@@ -1,14 +1,20 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
-import { ScInput } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScFrame,
+  ScInput,
+  ScToggle,
+  ScToolbar,
+  ScToolbarSeparator,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
+} from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorBold,
   ScEditorContent,
   ScEditorItalic,
-  ScEditorSeparator,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
   provideEditor,
 } from '@semantic-components/ui/editor';
 import {
@@ -41,6 +47,13 @@ const DRAFT = `<p>The colour of the sky changes with the hour: the colour of daw
   selector: 'app-search-editor-demo',
   providers: [provideEditor(withSearch())],
   imports: [
+    ScButton,
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
+    ScToolbarSeparator,
+    ScToggle,
+    ScFrame,
     FormField,
     ScEditor,
     ScEditorBold,
@@ -56,9 +69,6 @@ const DRAFT = `<p>The colour of the sky changes with the hour: the colour of daw
     ScEditorSearchNext,
     ScEditorSearchPrevious,
     ScEditorSearchResults,
-    ScEditorSeparator,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScInput,
     SiBoldIcon,
     SiChevronDownIcon,
@@ -69,27 +79,28 @@ const DRAFT = `<p>The colour of the sky changes with the hour: the colour of daw
   ],
   template: `
     <div class="w-full">
-      <div
-        scEditor
-        [formField]="editorForm.body"
-        class="overflow-hidden rounded-lg border"
-      >
-        <div scEditorToolbar aria-label="Formatting">
-          <div scEditorToolbarGroup>
-            <button scEditorBold value="bold">
+      <div scEditor [formField]="editorForm.body" class="flex flex-col gap-2">
+        <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorBold>
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalic value="italic">
+            <button scToolbarWidget scToggle scEditorItalic>
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
           </div>
 
-          <div scEditorSeparator></div>
+          <div scToolbarSeparator></div>
 
-          <div scEditorToolbarGroup>
-            <button scEditorSearch #search="scEditorSearch" value="search">
+          <div scToolbarWidgetGroup>
+            <button
+              scToolbarWidget
+              scToggle
+              scEditorSearch
+              #search="scEditorSearch"
+            >
               <svg siSearchIcon></svg>
               <span class="sr-only">Search and replace</span>
             </button>
@@ -97,7 +108,12 @@ const DRAFT = `<p>The colour of the sky changes with the hour: the colour of daw
         </div>
 
         @if (search.open()) {
-          <div scEditorSearchBar aria-label="Search and replace">
+          <div
+            scFrame
+            scEditorSearchBar
+            aria-label="Search and replace"
+            class="flex flex-wrap items-center gap-x-2 gap-y-1.5 p-2"
+          >
             <input
               scInput
               scEditorSearchInput
@@ -108,7 +124,7 @@ const DRAFT = `<p>The colour of the sky changes with the hour: the colour of daw
             <span
               scEditorSearchResults
               #results="scEditorSearchResults"
-              class="min-w-16"
+              class="text-muted-foreground data-[state=none]:text-destructive min-w-16 text-sm whitespace-nowrap tabular-nums"
             >
               @if (results.state() === 'found') {
                 {{ (results.index() ?? 0) + 1 }} of {{ results.count() }}
@@ -116,11 +132,16 @@ const DRAFT = `<p>The colour of the sky changes with the hour: the colour of daw
                 No results
               }
             </span>
-            <button scEditorSearchPrevious>
+            <button
+              scButton
+              variant="ghost"
+              size="icon-sm"
+              scEditorSearchPrevious
+            >
               <svg siChevronUpIcon></svg>
               <span class="sr-only">Previous match</span>
             </button>
-            <button scEditorSearchNext>
+            <button scButton variant="ghost" size="icon-sm" scEditorSearchNext>
               <svg siChevronDownIcon></svg>
               <span class="sr-only">Next match</span>
             </button>
@@ -131,16 +152,26 @@ const DRAFT = `<p>The colour of the sky changes with the hour: the colour of daw
               placeholder="Replace with…"
               class="h-8 w-40"
             />
-            <button scEditorReplace>Replace</button>
-            <button scEditorReplaceAll>Replace all</button>
-            <button scEditorSearchClose class="ms-auto">
+            <button scButton variant="outline" size="sm" scEditorReplace>
+              Replace
+            </button>
+            <button scButton variant="outline" size="sm" scEditorReplaceAll>
+              Replace all
+            </button>
+            <button
+              scButton
+              variant="ghost"
+              size="icon-sm"
+              scEditorSearchClose
+              class="ms-auto"
+            >
               <svg siXIcon></svg>
               <span class="sr-only">Close search</span>
             </button>
           </div>
         }
 
-        <div scEditorContent ariaLabel="Draft"></div>
+        <div scFrame scEditorContent ariaLabel="Draft"></div>
       </div>
     </div>
   `,

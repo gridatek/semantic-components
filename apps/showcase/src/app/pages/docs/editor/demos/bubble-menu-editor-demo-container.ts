@@ -21,13 +21,19 @@ export class BubbleMenuEditorDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScFrame,
+  ScToggle,
+  ScToolbar,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBold,
   ScEditorCode,
   ScEditorContent,
   ScEditorItalic,
   ScEditorStrikethrough,
-  ScEditorToolbarGroup,
   ScEditorUnderline,
 } from '@semantic-components/ui/editor';
 import { ScEditorBubbleMenu } from '@semantic-components/ui/editor/bubble-menu';
@@ -49,6 +55,11 @@ const COMMENT =
 @Component({
   selector: 'app-bubble-menu-editor-demo',
   imports: [
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
+    ScToggle,
+    ScFrame,
     FormField,
     ScEditor,
     ScEditorBold,
@@ -57,7 +68,6 @@ const COMMENT =
     ScEditorContent,
     ScEditorItalic,
     ScEditorStrikethrough,
-    ScEditorToolbarGroup,
     ScEditorUnderline,
     SiBoldIcon,
     SiCodeIcon,
@@ -67,37 +77,38 @@ const COMMENT =
   ],
   template: \`
     <div class="w-full">
-      <div
-        scEditor
-        [formField]="editorForm.body"
-        class="overflow-hidden rounded-lg border"
-      >
-        <div scEditorBubbleMenu aria-label="Selection">
-          <div scEditorToolbarGroup>
-            <button scEditorBold value="bold">
+      <div scEditor [formField]="editorForm.body" class="flex flex-col gap-2">
+        <div
+          scEditorBubbleMenu
+          scToolbar
+          aria-label="Selection"
+          class="shadow-md"
+        >
+          <div scToolbarWidgetGroup>
+            <button scToolbarWidget scToggle scEditorBold>
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scEditorItalic value="italic">
+            <button scToolbarWidget scToggle scEditorItalic>
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scEditorUnderline value="underline">
+            <button scToolbarWidget scToggle scEditorUnderline>
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
-            <button scEditorStrikethrough value="strikethrough">
+            <button scToolbarWidget scToggle scEditorStrikethrough>
               <svg siStrikethroughIcon></svg>
               <span class="sr-only">Strikethrough</span>
             </button>
-            <button scEditorCode value="code">
+            <button scToolbarWidget scToggle scEditorCode>
               <svg siCodeIcon></svg>
               <span class="sr-only">Code</span>
             </button>
           </div>
         </div>
 
-        <div scEditorContent ariaLabel="Comment"></div>
+        <div scFrame scEditorContent ariaLabel="Comment"></div>
       </div>
     </div>
   \`,

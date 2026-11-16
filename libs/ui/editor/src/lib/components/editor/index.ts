@@ -1,18 +1,12 @@
 // Root directive
 export * from './editor';
 export * from './editor-features';
+export * from './editor-control';
 
 // Content and display
 export * from './editor-content';
 export * from './editor-view';
 export * from './editor-extensions';
-
-// Container components
-export * from './editor-toolbar';
-export * from './editor-toolbar-group';
-export * from './editor-header';
-export * from './editor-footer';
-export * from './editor-separator';
 
 // Buttons with a state (aria-pressed)
 export * from './editor-bold';
@@ -33,9 +27,8 @@ export * from './editor-clear-formatting';
 export * from './editor-undo';
 export * from './editor-redo';
 
-// Menu triggers
-export * from './editor-heading';
-export * from './editor-list';
+// The selection's block, for a menu or a select of yours
+export * from './editor-block';
 
 // Counts
 export * from './editor-count';

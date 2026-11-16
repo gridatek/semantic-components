@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScTree,
   ScTreeItem,
   ScTreeItemGroup,
@@ -11,6 +12,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-simple-tree-demo',
   imports: [
+    ScFrame,
     ScTree,
     ScTreeItem,
     ScTreeItemTrigger,
@@ -74,7 +76,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
           </ul>
         </li>
       </ul>
-      <div class="bg-muted rounded-md p-4 text-sm">
+      <div scFrame class="bg-muted p-4 text-sm">
         Selected: {{ selected().join(', ') || 'none' }}
       </div>
     </div>

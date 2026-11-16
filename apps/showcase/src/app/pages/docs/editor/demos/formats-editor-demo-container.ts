@@ -22,8 +22,13 @@ export class FormatsEditorDemoContainer {
 import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScButton,
+  ScFrame,
+  ScToggle,
   ScToggleGroup,
   ScToggleGroupItem,
+  ScToolbar,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
 } from '@semantic-components/ui';
 import {
   ScEditor,
@@ -33,8 +38,6 @@ import {
   type ScEditorFormat,
   ScEditorItalic,
   ScEditorTaskList,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
   type ScEditorValue,
   ScEditorView,
   provideEditor,
@@ -100,6 +103,11 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
   selector: 'app-formats-editor-demo',
   providers: [provideEditor(withMarkdown())],
   imports: [
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
+    ScToggle,
+    ScFrame,
     FormField,
     ScButton,
     ScEditor,
@@ -108,8 +116,6 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
     ScEditorContent,
     ScEditorItalic,
     ScEditorTaskList,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
     ScEditorView,
     ScToggleGroup,
     ScToggleGroupItem,
@@ -145,29 +151,30 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
           scEditor
           [formField]="noteForm.body"
           [format]="format()"
-          class="overflow-hidden rounded-lg border"
+          class="flex flex-col gap-2"
         >
-          <div scEditorToolbar aria-label="Formatting">
-            <div scEditorToolbarGroup>
-              <button scEditorBold value="bold">
+          <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
+            <div scToolbarWidgetGroup>
+              <button scToolbarWidget scToggle scEditorBold>
                 <svg siBoldIcon></svg>
                 <span class="sr-only">Bold</span>
               </button>
-              <button scEditorItalic value="italic">
+              <button scToolbarWidget scToggle scEditorItalic>
                 <svg siItalicIcon></svg>
                 <span class="sr-only">Italic</span>
               </button>
-              <button scEditorBulletList value="bullet-list">
+              <button scToolbarWidget scToggle scEditorBulletList>
                 <svg siListIcon></svg>
                 <span class="sr-only">Bullet list</span>
               </button>
-              <button scEditorTaskList value="task-list">
+              <button scToolbarWidget scToggle scEditorTaskList>
                 <svg siListTodoIcon></svg>
                 <span class="sr-only">Task list</span>
               </button>
             </div>
           </div>
           <div
+            scFrame
             scEditorContent
             ariaLabel="Note"
             placeholder="Write a note…"
@@ -183,7 +190,7 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
         ></article>
       </div>
 
-      <div class="bg-muted rounded-md p-4">
+      <div scFrame class="bg-muted p-4">
         <p class="text-sm font-medium">
           {{ formatLabels[format()] }} value ({{
             noteForm.body().valid() ? 'valid' : 'empty'

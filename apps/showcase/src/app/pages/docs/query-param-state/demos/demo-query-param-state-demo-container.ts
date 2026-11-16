@@ -22,6 +22,7 @@ export class DemoQueryParamStateDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, linkedSignal } from '@angular/core';
 import { FormField, form, min } from '@angular/forms/signals';
 import {
+  ScFrame,
   injectQueryParam,
   parseAsInteger,
   parseAsString,
@@ -30,7 +31,7 @@ import {
 
 @Component({
   selector: 'app-demo-query-param-state-demo',
-  imports: [FormField],
+  imports: [ScFrame, FormField],
   template: \`
     <div class="w-full max-w-md space-y-4">
       <div class="space-y-2">
@@ -68,7 +69,7 @@ import {
         </div>
       </div>
 
-      <div class="bg-muted rounded-md p-4">
+      <div scFrame class="bg-muted p-4">
         <p class="text-sm font-medium">Current state:</p>
         <pre class="text-muted-foreground mt-1 text-sm">{{ stateJson() }}</pre>
       </div>

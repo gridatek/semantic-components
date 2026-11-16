@@ -1,10 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
+import {
+  ScFrame,
+  ScVirtualList,
+  ScVirtualListRow,
+} from '@semantic-components/ui';
 
 /** Rows of any height — messages, long and short: estimated first, then measured; the list and its scrollbar follow, and the reader keeps their place as rows above settle. */
 @Component({
   selector: 'app-variable-virtual-list-demo',
-  imports: [ScVirtualList, ScVirtualListRow],
+  imports: [ScFrame, ScVirtualList, ScVirtualListRow],
   template: `
     <ol
       scVirtualList
@@ -19,7 +23,7 @@ import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
     >
       @for (row of list.rows(); track row.key) {
         <li [scVirtualListRow]="row" class="px-3">
-          <div class="bg-muted rounded-lg p-3 text-sm">
+          <div scFrame class="bg-muted p-3 text-sm">
             <p class="font-medium">{{ messages[row.index].from }}</p>
             <p>{{ messages[row.index].text }}</p>
           </div>

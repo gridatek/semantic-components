@@ -1,9 +1,8 @@
-import { ToolbarWidget } from '@angular/aria/toolbar';
 import { DOCUMENT, Directive, computed, inject, input } from '@angular/core';
-import { bindInput, injectPreset } from '@semantic-components/ui';
 import {
   SC_EDITOR,
   ɵassertEditorFeature,
+  ɵeditorControl,
 } from '@semantic-components/ui/editor';
 import { cn } from 'cn';
 import { ScEditorUploads } from './editor-uploads';
@@ -17,16 +16,13 @@ import { ScEditorUploads } from './editor-uploads';
  */
 @Directive({
   selector: 'button[scEditorImage]',
-  hostDirectives: [ToolbarWidget],
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[disabled]': 'disabled()',
     '(click)': 'pick()',
   },
 })
 export class ScEditorImage {
-  private readonly toggleStyles = injectPreset().toggle;
   private readonly editor = inject(SC_EDITOR);
   private readonly document = inject(DOCUMENT);
   private readonly uploads = inject(ScEditorUploads, { optional: true });
@@ -34,12 +30,7 @@ export class ScEditorImage {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
 
-  protected readonly class = computed(() =>
-    cn(
-      this.toggleStyles({ variant: 'default', size: 'default' }),
-      this.classInput(),
-    ),
-  );
+  protected readonly class = computed(() => cn(this.classInput()));
 
   protected readonly disabled = computed(
     () => this.disabledInput() || !this.editor.editable() || !this.uploads,
@@ -47,7 +38,7 @@ export class ScEditorImage {
 
   constructor() {
     ɵassertEditorFeature('withImages', 'scEditorImage');
-    bindInput(inject(ToolbarWidget).disabled, this.disabled);
+    ɵeditorControl({ disabled: this.disabled });
   }
 
   /** Opens the device's file picker (the editor's image types, several). */

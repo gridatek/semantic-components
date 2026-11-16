@@ -3,6 +3,7 @@ import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScField,
+  ScFrame,
   ScLabel,
   ScMultiselect,
   ScMultiselectIcon,
@@ -35,6 +36,7 @@ interface FormModel {
 @Component({
   selector: 'app-basic-multiselect-demo',
   imports: [
+    ScFrame,
     ScField,
     ScLabel,
     ScMultiselect,
@@ -110,7 +112,7 @@ interface FormModel {
         </div>
       </div>
 
-      <div class="bg-muted rounded-md p-4">
+      <div scFrame class="bg-muted p-4">
         <p class="text-sm font-medium">Form Values:</p>
         <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
       </div>

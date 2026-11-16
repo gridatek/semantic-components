@@ -29,6 +29,7 @@ Model: `libs/ui/src/lib/components/pagination/pagination-last.ts`.
 These add behaviour to whatever button the consumer writes, `scButton` or another part:
 
 - **Triggers that go on any button** — `scDialogTrigger`, `scSheetTrigger`, `scDrawerTrigger`, `scPopoverTrigger`, `scAlertDialogTrigger`, `scNativeDialogTrigger` (on a `scButton`, a `scSidebarMenuButton`, a menu item…).
+- **The editor's commands** (the user, 2026-11-16) — `scEditorBold`, `scEditorUndo`, `scEditorBlock`… and the search's buttons: behaviour only, beside `scToggle` (one that can be on: the command sets its `pressed`) or `scButton` (one that runs once), and `scToolbarWidget` in a toolbar. The consumer is free to draw them as anything (a toolbar, a menu, a select).
 
 And these keep a look of their own, as they are not buttons to the eye:
 

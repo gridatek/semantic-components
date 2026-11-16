@@ -611,11 +611,15 @@ export default class EditorPage {
   readonly featuresCode = `import { Component, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
+  ScToggle,
+  ScToolbar,
+  ScToolbarWidget,
+  ScToolbarWidgetGroup,
+} from '@semantic-components/ui';
+import {
   ScEditor,
   ScEditorBold,
   ScEditorContent,
-  ScEditorToolbar,
-  ScEditorToolbarGroup,
   provideEditor,
 } from '@semantic-components/ui/editor';
 import { withMarkdown } from '@semantic-components/ui/editor/markdown';
@@ -629,8 +633,6 @@ import {
   SiSubscriptIcon,
   SiSuperscriptIcon,
 } from '@semantic-icons/lucide-icons';
-import { ScCodeBlock, ScCodeBlockHeader, ScCodeBlockTitle, ScCodeBlockActions, ScCodeBlockCopy, ScCodeBlockContent } from '@semantic-components/ui/code-block';
-import { ScTypeset, ScTable, ScTableBody, ScTableCell, ScTableContainer, ScTableHeader, ScTableHeaderCell, ScTableRow } from '@semantic-components/ui';
 
 @Component({
   selector: 'app-note-editor',
@@ -641,8 +643,10 @@ import { ScTypeset, ScTable, ScTableBody, ScTableCell, ScTableContainer, ScTable
     ScEditorContent,
     ScEditorSubscript,
     ScEditorSuperscript,
-    ScEditorToolbar,
-    ScEditorToolbarGroup,
+    ScToggle,
+    ScToolbar,
+    ScToolbarWidget,
+    ScToolbarWidgetGroup,
     SiBoldIcon,
     SiSubscriptIcon,
     SiSuperscriptIcon,
@@ -651,17 +655,17 @@ import { ScTypeset, ScTable, ScTableBody, ScTableCell, ScTableContainer, ScTable
   providers: [provideEditor(withScripts(), withMarkdown())],
   template: \`
     <div scEditor [formField]="noteForm.body" format="markdown">
-      <div scEditorToolbar aria-label="Formatting">
-        <div scEditorToolbarGroup>
-          <button scEditorBold value="bold">
+      <div scToolbar aria-label="Formatting">
+        <div scToolbarWidgetGroup>
+          <button scToolbarWidget scToggle scEditorBold>
             <svg siBoldIcon></svg>
             <span class="sr-only">Bold</span>
           </button>
-          <button scEditorSuperscript value="superscript">
+          <button scToolbarWidget scToggle scEditorSuperscript>
             <svg siSuperscriptIcon></svg>
             <span class="sr-only">Superscript</span>
           </button>
-          <button scEditorSubscript value="subscript">
+          <button scToolbarWidget scToggle scEditorSubscript>
             <svg siSubscriptIcon></svg>
             <span class="sr-only">Subscript</span>
           </button>
@@ -715,22 +719,12 @@ export class NoteEditor {
           do: [],
         },
         {
-          name: 'div[scEditorToolbar]',
-          inputs: ['orientation', 'wrap', 'disabled'],
-          read: [],
-          do: [],
-        },
-        {
-          name: 'button[scEditorHeading]',
-          inputs: [],
-          read: ["level(): 'p' | 'h1' … 'h6'"],
-          do: ['select(level)'],
-        },
-        {
-          name: 'button[scEditorList]',
-          inputs: [],
-          read: ["type(): 'bulletList' | 'orderedList' | 'taskList' | null"],
-          do: ['select(type)'],
+          name: '[scEditorBlock]',
+          inputs: ['disabled'],
+          read: [
+            "value(): 'paragraph' | 'heading-1' … 'heading-6' | 'bullet-list' | 'ordered-list' | 'task-list' | 'quote' | 'code-block'",
+          ],
+          do: ['select(block): out of a list or quote first'],
         },
         {
           name: 'button[scEditorLink]',
@@ -754,10 +748,12 @@ export class NoteEditor {
           name: 'scEditorBold scEditorItalic scEditorUnderline scEditorStrikethrough scEditorCode scEditorBulletList scEditorOrderedList scEditorTaskList scEditorBlockquote scEditorCodeBlock scEditorHorizontalRule scEditorClearFormatting scEditorUndo scEditorRedo',
           inputs: ['disabled'],
           read: [],
-          do: [],
+          do: [
+            'Behaviour only: beside scToggle (one that can be on) or scButton (one that runs once), and scToolbarWidget in a toolbar',
+          ],
         },
         {
-          name: 'scEditorToolbarGroup scEditorSeparator scEditorHeader scEditorFooter scEditorCount',
+          name: 'div[scEditorCount]',
           inputs: [],
           read: [],
           do: [],
