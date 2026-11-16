@@ -44,15 +44,17 @@ export class ScEditorSearchState {
 
   /**
    * Closes the search bar and goes back to the text — where it is: focus
-   * without scrolling (Tiptap's focus() scrolls to the selection, which can be
-   * far from what is on screen).
+   * without scrolling. Tiptap's focus() scrolls to the selection, which can be
+   * far from what is on screen; and WebKit scrolls to the caret when the
+   * editor writes its selection back on focus — so every scroll box around
+   * the text is kept where it was.
    */
   close(): void {
     if (!this.open()) return;
     this.collapsible()?.open.set(false);
-    this.editor
-      .editorInstance()
-      ?.commands.focus(null, { scrollIntoView: false });
+    const editor = this.editor.editorInstance();
+    if (!editor) return;
+    withScrollKept(editor.view.dom, () => editor.view.focus());
   }
 
   /** Its matches cleared: when the bar closes, however it closes. */
@@ -124,4 +126,18 @@ export function editorSearch(editor: ScEditor): ScEditorSearchState {
     states.set(editor, state);
   }
   return state;
+}
+
+/**
+ * Runs `focus` with every box `element` is in — the page too — scrolled where
+ * it was before: in the same task, so nothing is seen to move.
+ */
+function withScrollKept(element: Element, focus: () => void): void {
+  const kept: [Element, number, number][] = [];
+  for (let box = element.parentElement; box; box = box.parentElement)
+    kept.push([box, box.scrollTop, box.scrollLeft]);
+  focus();
+  for (const [box, top, left] of kept)
+    if (box.scrollTop !== top || box.scrollLeft !== left)
+      box.scrollTo({ top, left, behavior: 'instant' });
 }

@@ -56,6 +56,13 @@ async function colored(
   );
 }
 
+/**
+ * Long enough for the last piece to fall: canvas-confetti counts frames, not
+ * time (200 a piece, about 3 s at 60 a second) — in the busiest WebKit job
+ * on CI the frame rate fell so low that 25 s wasn't enough.
+ */
+const fallen = { timeout: 60_000 };
+
 let errors: string[];
 
 test.beforeEach(({ page }) => {
@@ -82,9 +89,7 @@ test('Burst: one canvas, hidden from readers, never in the way', async ({
   await button.click();
   await expect(canvas(page)).toHaveCount(1);
   // Fallen: no longer active.
-  await expect(canvas(page)).not.toHaveAttribute('data-active', {
-    timeout: 25_000,
-  });
+  await expect(canvas(page)).not.toHaveAttribute('data-active', fallen);
 });
 
 test('From the element: the burst starts where the click was', async ({
@@ -142,9 +147,7 @@ test('Fireworks: for three seconds, then done', async ({ page }) => {
   // Still going, well after a single burst would have.
   await new Promise((resolve) => setTimeout(resolve, 2500));
   await expect(canvas(page)).toHaveAttribute('data-active');
-  await expect(canvas(page)).not.toHaveAttribute('data-active', {
-    timeout: 25_000,
-  });
+  await expect(canvas(page)).not.toHaveAttribute('data-active', fallen);
 });
 
 test('Colours: the ones given', async ({ page }) => {
