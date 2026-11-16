@@ -1,6 +1,6 @@
 ---
 name: e2e-webkit
-description: Run, reproduce and fix the showcase's e2e tests in WebKit (and Firefox) — the Nightly E2E's browsers. Use when a nightly-e2e.yml job fails, when a test passes in Chromium but not in WebKit/Firefox, or when asked to run the tests in Safari/WebKit locally (Fedora: in podman).
+description: Run, reproduce and fix the showcase's e2e tests in WebKit (and Firefox) — the Nightly E2E's browsers. Use when writing or changing an e2e test (to write it so it holds in WebKit and Firefox, without running them), when a nightly-e2e.yml job fails, when a test passes in Chromium but not in WebKit/Firefox, or when asked to run the tests in Safari/WebKit locally (Windows/macOS: natively; Fedora: in podman).
 ---
 
 # E2E in WebKit
