@@ -72,3 +72,32 @@ test.describe('Search Editor Demo', () => {
     );
   });
 });
+
+test('the current match: a stronger colour and an underline (not colour alone), no outline', async ({
+  page,
+}) => {
+  await page.goto('/demos/editor/search-editor-demo');
+  await page.getByRole('button', { name: 'Search and replace' }).click();
+  await page.getByRole('searchbox', { name: 'Search' }).fill('the');
+  const current = page.locator('.find-and-replace-result-current');
+  const other = page
+    .locator('.find-and-replace-result:not(.find-and-replace-result-current)')
+    .first();
+  await expect(current).toBeVisible();
+  const look = (el: Element) => {
+    const style = getComputedStyle(el);
+    return {
+      background: style.backgroundColor,
+      shadow: style.boxShadow,
+      outline: style.outlineStyle,
+    };
+  };
+  const [now, rest] = [
+    await current.evaluate(look),
+    await other.evaluate(look),
+  ];
+  expect(now.background).not.toBe(rest.background);
+  expect(now.shadow).toContain('inset');
+  expect(rest.shadow).toBe('none');
+  expect(now.outline).toBe('none');
+});

@@ -37,3 +37,40 @@ test.describe('Editor in its preset', () => {
         .toBe(CHECKBOX_CORNERS[preset]);
   });
 });
+
+test(`search matches have the style's inline corners (its inline code's), not the theme's radius`, async ({
+  page,
+}) => {
+  await page.goto('/demos/editor/search-editor-demo');
+  await page.getByRole('button', { name: 'Search and replace' }).click();
+  await page.getByRole('searchbox', { name: 'Search' }).fill('the');
+  const match = page.locator('.find-and-replace-result').first();
+  await expect(match).toBeVisible();
+  // The style's inline corners, as the document resolves them.
+  const inline = await match.evaluate((el) => {
+    const probe = el.ownerDocument.createElement('span');
+    probe.style.borderRadius = 'var(--typeset-radius-inline)';
+    el.closest('[data-slot=editor-document]')?.append(probe);
+    const corners = getComputedStyle(probe).borderTopLeftRadius;
+    probe.remove();
+    return corners;
+  });
+  await expect(match).toHaveCSS('border-top-left-radius', inline);
+});
+
+test(`a highlight has the style's inline corners (its inline code's)`, async ({
+  page,
+}) => {
+  await page.goto('/demos/editor/full-featured-editor-demo');
+  const mark = page.locator('[data-slot=editor-document] mark').first();
+  await expect(mark).toBeVisible();
+  const inline = await mark.evaluate((el) => {
+    const probe = el.ownerDocument.createElement('span');
+    probe.style.borderRadius = 'var(--typeset-radius-inline)';
+    el.closest('[data-slot=editor-document]')?.append(probe);
+    const corners = getComputedStyle(probe).borderTopLeftRadius;
+    probe.remove();
+    return corners;
+  });
+  await expect(mark).toHaveCSS('border-top-left-radius', inline);
+});

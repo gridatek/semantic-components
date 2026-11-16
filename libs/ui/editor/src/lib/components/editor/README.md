@@ -460,7 +460,7 @@ Its `layout` sets how it sits in the box (`data-layout`):
 <div scEditorContent ariaLabel="Article" layout="page" class="max-h-[600px] min-h-[400px]"></div>
 ```
 
-The editor's styles are your preset's `editor.css`: the placeholder, task lists — their box as the style's `scCheckbox` — tables with cells to write in, highlights, search matches and the kept selection, in plain CSS on the theme's `--border`, `--input`, `--muted`, `--muted-foreground`, `--primary`, `--ring`, `--accent` and `--radius`. The highlight colours are your theme's too — add them at the end of your `styles.css`, a section of their own after shadcn's tokens:
+The editor's styles are your preset's `editor.css`: the placeholder, task lists — their box as the style's `scCheckbox` — tables with cells to write in, highlights, search matches and the kept selection, in plain CSS on the theme's `--border`, `--input`, `--muted`, `--muted-foreground`, `--primary`, `--ring` and `--accent`, with the style's corners (its Typeset variables: tables as its code block, search matches and selected nodes as its inline code). The highlight colours and the search matches' are your theme's too — add them at the end of your `styles.css`, a section of their own after shadcn's tokens. Matches pale yellow, the current one orange (as browsers and code editors do), underlined in a shade of it so it isn't told by colour alone:
 
 ```css
 :root {
@@ -469,6 +469,8 @@ The editor's styles are your preset's `editor.css`: the placeholder, task lists 
   --editor-highlight-3: oklch(0.92 0.06 240);
   --editor-highlight-4: oklch(0.92 0.06 300);
   --editor-highlight-5: oklch(0.92 0.07 20);
+  --editor-search-match: oklch(0.945 0.12 100 / 60%);
+  --editor-search-current: oklch(0.85 0.14 65);
 }
 
 .dark {
@@ -477,6 +479,8 @@ The editor's styles are your preset's `editor.css`: the placeholder, task lists 
   --editor-highlight-3: oklch(0.42 0.08 250);
   --editor-highlight-4: oklch(0.42 0.09 300);
   --editor-highlight-5: oklch(0.42 0.1 20);
+  --editor-search-match: oklch(0.45 0.09 95 / 60%);
+  --editor-search-current: oklch(0.52 0.13 55);
 }
 ```
 

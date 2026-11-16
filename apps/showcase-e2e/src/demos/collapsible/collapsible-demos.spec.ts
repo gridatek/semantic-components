@@ -134,3 +134,16 @@ test('Closing: the panel shrinks to nothing and stays there — no flash of its 
       heights[i - 1] + 0.5,
     );
 });
+
+test('Open, at rest: the panel clips nothing (its content’s rings and shadows show); only its animation clips', async ({
+  page,
+}) => {
+  await page.goto('/demos/collapsible/collapsible-usage-demo');
+  const trigger = page.getByRole('button', { name: 'Toggle details' });
+  await trigger.click();
+  const panel = page.locator(`#${await trigger.getAttribute('aria-controls')}`);
+  await expect(panel).toHaveCSS('overflow', 'hidden');
+  await expect(panel).toHaveCSS('overflow', 'visible');
+  await trigger.click();
+  await expect(panel).toHaveCSS('overflow', 'hidden');
+});

@@ -58,6 +58,13 @@ export class ScCollapsiblePanel {
       !open && previous?.source === true && this.rendered(),
   });
 
+  /** Just opened: its height on the way to its content's. */
+  private readonly opening = linkedSignal<boolean, boolean>({
+    source: () => this.collapsible.open(),
+    computation: (open, previous) =>
+      open && previous?.source === false && this.rendered(),
+  });
+
   /**
    * Closed: the hidden attribute (Tailwind's base keeps it display: none over
    * any display class); searchable, the browser's hidden="until-found".
@@ -69,7 +76,9 @@ export class ScCollapsiblePanel {
 
   protected readonly class = computed(() =>
     cn(
-      'overflow-hidden',
+      // Clipped while its height changes only: at rest, its content's rings,
+      // shadows and focus rings show (shadcn's panel clips nothing).
+      (this.opening() || this.closing()) && 'overflow-hidden',
       // shadcn's: tw-animate's keyframes, to and from height: auto (the
       // global interpolate-size: allow-keywords).
       this.rendered() &&
@@ -85,16 +94,20 @@ export class ScCollapsiblePanel {
     // Its id for the trigger's aria-controls.
     effect(() => this.collapsible.panelId.set(this.id()));
     afterNextRender(() => this.rendered.set(true));
-    // No animation to end it (reduced motion, yours off): hidden anyway.
+    // No animation to end it (reduced motion, yours off): done anyway.
     effect((onCleanup) => {
-      if (!this.closing()) return;
-      const timer = setTimeout(() => this.closing.set(false), 400);
+      if (!this.opening() && !this.closing()) return;
+      const timer = setTimeout(() => {
+        this.opening.set(false);
+        this.closing.set(false);
+      }, 400);
       onCleanup(() => clearTimeout(timer));
     });
   }
 
   protected onAnimationEnd(event: AnimationEvent): void {
-    if (event.target === event.currentTarget && !this.collapsible.open())
-      this.closing.set(false);
+    if (event.target !== event.currentTarget) return;
+    if (this.collapsible.open()) this.opening.set(false);
+    else this.closing.set(false);
   }
 }

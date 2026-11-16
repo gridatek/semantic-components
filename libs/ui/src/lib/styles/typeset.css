@@ -10,8 +10,9 @@
  *
  * Ours, not shadcn's: its variables, on `.typeset` in shadcn's file, are the
  * preset's (on `:root`); an element marked `data-typeset` (scTypeset's) is
- * set as in a container; code blocks, images, inline code and keys take the
- * preset's corners (`--typeset-radius`, `--typeset-radius-inline`). See
+ * set as in a container; code blocks, images, inline code, keys and
+ * highlights take the preset's corners (`--typeset-radius`,
+ * `--typeset-radius-inline`; shadcn's highlight has 0.2em). See
  * "Deliberate divergences" in docs/shadcn-style-reference.md.
  */
 
@@ -140,7 +141,7 @@
       );
       color: inherit;
       padding: 0.05em 0.15em;
-      border-radius: 0.2em;
+      border-radius: var(--typeset-radius-inline);
     }
     &:where(abbr[title]) {
       text-decoration-line: underline;
