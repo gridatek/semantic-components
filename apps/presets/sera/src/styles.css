@@ -5,7 +5,7 @@
 @source not '../../../showcase-e2e';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import '../../../../libs/ui/src/lib/styles/index.css';
+@import '../../../../libs/ui/src/lib/styles/reduced-motion.css';
 @import '../../../../libs/ui/editor/src/lib/styles/index.css';
 
 /*

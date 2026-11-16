@@ -37,6 +37,67 @@
     );
   }
 
+  /*
+   * Headings: in a container, and scHeading's anywhere — one definition.
+   * Outside a container, the variables fall back to the container's
+   * defaults.
+   */
+  .typeset
+    *:not(
+      :where(
+        .not-typeset,
+        [data-not-typeset],
+        .not-typeset *,
+        [data-not-typeset] *,
+        .typeset [data-slot],
+        .typeset [data-slot] *
+      )
+    ),
+  :where(h1, h2, h3, h4, h5, h6)[scHeading] {
+    &:where(h1, h2, h3, h4, h5, h6) {
+      color: var(--color-foreground, currentColor);
+      font-family: var(--typeset-font-heading, var(--font-heading));
+      font-weight: 600;
+      margin-block-end: 0;
+    }
+    &:where(h1) {
+      font-size: 1.75em;
+      line-height: 1.3;
+      margin-block-start: var(--typeset-flow, 1.25em);
+    }
+    &:where(h2) {
+      font-size: 1.25em;
+      line-height: 1.4;
+      margin-block-start: calc(var(--typeset-flow, 1.25em) * 1.4);
+    }
+    &:where(h3) {
+      font-size: 1.125em;
+      line-height: 1.45;
+      margin-block-start: var(--typeset-flow, 1.25em);
+    }
+    &:where(h4) {
+      font-size: 1em;
+      line-height: 1.5;
+      margin-block-start: var(--typeset-flow, 1.25em);
+    }
+    &:where(h5) {
+      font-size: 0.875em;
+      line-height: 1.5;
+      font-weight: 500;
+      color: var(--typeset-muted, var(--color-muted-foreground));
+      margin-block-start: calc(var(--typeset-flow, 1.25em) / 0.875);
+    }
+    &:where(h6) {
+      font-size: 0.8125em;
+      line-height: 1.5;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--typeset-muted, var(--color-muted-foreground));
+      margin-block-start: calc(var(--typeset-flow, 1.25em) / 0.8125);
+    }
+  }
+
   .typeset
     *:not(
       :where(
@@ -54,49 +115,6 @@
       margin-block-end: 0;
     }
 
-    /* Headings. */
-    &:where(h1, h2, h3, h4, h5, h6) {
-      color: var(--color-foreground, currentColor);
-      font-family: var(--typeset-font-heading);
-      font-weight: 600;
-      margin-block-end: 0;
-    }
-    &:where(h1) {
-      font-size: 1.75em;
-      line-height: 1.3;
-      margin-block-start: var(--typeset-flow);
-    }
-    &:where(h2) {
-      font-size: 1.25em;
-      line-height: 1.4;
-      margin-block-start: calc(var(--typeset-flow) * 1.4);
-    }
-    &:where(h3) {
-      font-size: 1.125em;
-      line-height: 1.45;
-      margin-block-start: var(--typeset-flow);
-    }
-    &:where(h4) {
-      font-size: 1em;
-      line-height: 1.5;
-      margin-block-start: var(--typeset-flow);
-    }
-    &:where(h5) {
-      font-size: 0.875em;
-      line-height: 1.5;
-      font-weight: 500;
-      color: var(--typeset-muted);
-      margin-block-start: calc(var(--typeset-flow) / 0.875);
-    }
-    &:where(h6) {
-      font-size: 0.8125em;
-      line-height: 1.5;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--typeset-muted);
-      margin-block-start: calc(var(--typeset-flow) / 0.8125);
-    }
     /* Anchors. */
     &:where([id]) {
       scroll-margin-block-start: var(--typeset-flow);

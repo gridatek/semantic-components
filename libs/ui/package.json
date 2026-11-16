@@ -59,11 +59,8 @@
     "shiki": ">=4.5.0"
   },
   "exports": {
-    "./styles": {
-      "default": "./src/lib/styles/index.css"
-    },
-    "./styles/color-schemes.css": {
-      "default": "./src/lib/styles/color-schemes.css"
+    "./styles/reduced-motion.css": {
+      "default": "./src/lib/styles/reduced-motion.css"
     },
     "./editor/styles": {
       "default": "./editor/src/lib/styles/index.css"
