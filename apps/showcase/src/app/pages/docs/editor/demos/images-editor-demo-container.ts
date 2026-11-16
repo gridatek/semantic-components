@@ -34,9 +34,8 @@ import {
 } from '@semantic-components/ui';
 import {
   ScEditor,
-  ScEditorBold,
+  ScEditorCommand,
   ScEditorContent,
-  ScEditorItalic,
   provideEditor,
 } from '@semantic-components/ui/editor';
 import {
@@ -69,11 +68,10 @@ import {
     FormField,
     ScButton,
     ScEditor,
-    ScEditorBold,
+    ScEditorCommand,
     ScEditorContent,
     ScEditorImage,
     ScEditorUploads,
-    ScEditorItalic,
     ScProgress,
     ScProgressRange,
     ScProgressTrack,
@@ -93,11 +91,11 @@ import {
       >
         <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorBold>
+            <button scToolbarWidget scToggle scEditorCommand="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scToolbarWidget scToggle scEditorItalic>
+            <button scToolbarWidget scToggle scEditorCommand="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>

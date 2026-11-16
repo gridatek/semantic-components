@@ -32,9 +32,8 @@ import {
 } from '@semantic-components/ui';
 import {
   ScEditor,
-  ScEditorBold,
+  ScEditorCommand,
   ScEditorContent,
-  ScEditorItalic,
   provideEditor,
 } from '@semantic-components/ui/editor';
 import {
@@ -76,9 +75,8 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
     ScFrame,
     FormField,
     ScEditor,
-    ScEditorBold,
+    ScEditorCommand,
     ScEditorContent,
-    ScEditorItalic,
     ScEditorReplace,
     ScEditorReplaceAll,
     ScEditorReplaceInput,
@@ -102,11 +100,11 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
       <div scEditor [formField]="editorForm.body" class="flex flex-col gap-2">
         <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorBold>
+            <button scToolbarWidget scToggle scEditorCommand="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scToolbarWidget scToggle scEditorItalic>
+            <button scToolbarWidget scToggle scEditorCommand="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>

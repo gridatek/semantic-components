@@ -43,3 +43,20 @@ test.describe('Editor Usage Demo', () => {
     await expect(bold).toHaveAttribute('aria-pressed', 'false');
   });
 });
+
+test.describe('Editor Usage Demo: a command that runs once', () => {
+  test('Undo: off until there is something to undo, then it undoes; never pressed', async ({
+    page,
+  }) => {
+    await page.goto('/demos/editor/editor-usage-demo');
+    const document = page.getByRole('textbox', { name: 'Message' });
+    const undo = page.getByRole('button', { name: 'Undo' });
+    await expect(undo).toBeDisabled();
+    await document.click();
+    await page.keyboard.type('Hello');
+    await expect(undo).toBeEnabled();
+    await undo.click();
+    await expect(document).toHaveText('');
+    await expect(undo).toHaveAttribute('aria-pressed', 'false');
+  });
+});

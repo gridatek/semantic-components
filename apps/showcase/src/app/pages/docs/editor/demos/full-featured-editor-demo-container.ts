@@ -51,31 +51,15 @@ import {
   ScEditor,
   ScEditorBlock,
   type ScEditorBlockType,
-  ScEditorBlockquote,
-  ScEditorBold,
   ScEditorCharCount,
-  ScEditorClearFormatting,
-  ScEditorCode,
-  ScEditorCodeBlock,
+  ScEditorCommand,
   ScEditorContent,
   ScEditorCount,
-  ScEditorHorizontalRule,
-  ScEditorItalic,
   ScEditorLink,
-  ScEditorRedo,
-  ScEditorStrikethrough,
-  ScEditorUnderline,
-  ScEditorUndo,
   ScEditorWordCount,
   provideEditor,
 } from '@semantic-components/ui/editor';
-import {
-  ScEditorAlignCenter,
-  ScEditorAlignJustify,
-  ScEditorAlignLeft,
-  ScEditorAlignRight,
-  withAlign,
-} from '@semantic-components/ui/editor/align';
+import { withAlign } from '@semantic-components/ui/editor/align';
 import { ScEditorBubbleMenu } from '@semantic-components/ui/editor/bubble-menu';
 import {
   ScEditorHighlight,
@@ -89,11 +73,7 @@ import {
   ScEditorUploads,
   withImages,
 } from '@semantic-components/ui/editor/images';
-import {
-  ScEditorSubscript,
-  ScEditorSuperscript,
-  withScripts,
-} from '@semantic-components/ui/editor/scripts';
+import { withScripts } from '@semantic-components/ui/editor/scripts';
 import {
   ScEditorReplace,
   ScEditorReplaceAll,
@@ -221,35 +201,19 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     ScProgressTrack,
     ScSeparator,
     ScEditor,
-    ScEditorBlockquote,
-    ScEditorBold,
+    ScEditorCommand,
     ScEditorCharCount,
-    ScEditorClearFormatting,
-    ScEditorCode,
-    ScEditorCodeBlock,
     ScEditorContent,
     ScEditorCount,
     ScEditorBlock,
-    ScEditorHorizontalRule,
-    ScEditorItalic,
     ScEditorLink,
-    ScEditorRedo,
-    ScEditorStrikethrough,
-    ScEditorUnderline,
-    ScEditorUndo,
     ScEditorWordCount,
-    ScEditorAlignLeft,
-    ScEditorAlignCenter,
-    ScEditorAlignRight,
-    ScEditorAlignJustify,
     ScEditorBubbleMenu,
     ScEditorHighlight,
     ScEditorHighlightColor,
     ScEditorRemoveHighlight,
     ScEditorImage,
     ScEditorUploads,
-    ScEditorSuperscript,
-    ScEditorSubscript,
     ScEditorTable,
     ScEditorSearch,
     ScEditorSearchBar,
@@ -313,11 +277,11 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
       >
         <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorUndo>
+            <button scToolbarWidget scToggle scEditorCommand="undo">
               <svg siUndoIcon></svg>
               <span class="sr-only">Undo</span>
             </button>
-            <button scToolbarWidget scToggle scEditorRedo>
+            <button scToolbarWidget scToggle scEditorCommand="redo">
               <svg siRedoIcon></svg>
               <span class="sr-only">Redo</span>
             </button>
@@ -378,11 +342,11 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
               </ng-template>
             </div>
 
-            <button scToolbarWidget scToggle scEditorBlockquote>
+            <button scToolbarWidget scToggle scEditorCommand="quote">
               <svg siTextQuoteIcon></svg>
               <span class="sr-only">Blockquote</span>
             </button>
-            <button scToolbarWidget scToggle scEditorCodeBlock>
+            <button scToolbarWidget scToggle scEditorCommand="code-block">
               <svg siCodeXmlIcon></svg>
               <span class="sr-only">Code block</span>
             </button>
@@ -420,23 +384,23 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
           <div scToolbarSeparator></div>
 
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorBold>
+            <button scToolbarWidget scToggle scEditorCommand="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scToolbarWidget scToggle scEditorItalic>
+            <button scToolbarWidget scToggle scEditorCommand="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scToolbarWidget scToggle scEditorStrikethrough>
+            <button scToolbarWidget scToggle scEditorCommand="strikethrough">
               <svg siStrikethroughIcon></svg>
               <span class="sr-only">Strikethrough</span>
             </button>
-            <button scToolbarWidget scToggle scEditorCode>
+            <button scToolbarWidget scToggle scEditorCommand="code">
               <svg siCodeIcon></svg>
               <span class="sr-only">Code</span>
             </button>
-            <button scToolbarWidget scToggle scEditorUnderline>
+            <button scToolbarWidget scToggle scEditorCommand="underline">
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
@@ -538,11 +502,11 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
           <div scToolbarSeparator></div>
 
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorSuperscript>
+            <button scToolbarWidget scToggle scEditorCommand="superscript">
               <svg siSuperscriptIcon></svg>
               <span class="sr-only">Superscript</span>
             </button>
-            <button scToolbarWidget scToggle scEditorSubscript>
+            <button scToolbarWidget scToggle scEditorCommand="subscript">
               <svg siSubscriptIcon></svg>
               <span class="sr-only">Subscript</span>
             </button>
@@ -551,19 +515,19 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
           <div scToolbarSeparator></div>
 
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorAlignLeft>
+            <button scToolbarWidget scToggle scEditorCommand="align-left">
               <svg siTextAlignStartIcon></svg>
               <span class="sr-only">Align left</span>
             </button>
-            <button scToolbarWidget scToggle scEditorAlignCenter>
+            <button scToolbarWidget scToggle scEditorCommand="align-center">
               <svg siTextAlignCenterIcon></svg>
               <span class="sr-only">Align center</span>
             </button>
-            <button scToolbarWidget scToggle scEditorAlignRight>
+            <button scToolbarWidget scToggle scEditorCommand="align-right">
               <svg siTextAlignEndIcon></svg>
               <span class="sr-only">Align right</span>
             </button>
-            <button scToolbarWidget scToggle scEditorAlignJustify>
+            <button scToolbarWidget scToggle scEditorCommand="align-justify">
               <svg siTextAlignJustifyIcon></svg>
               <span class="sr-only">Align justify</span>
             </button>
@@ -582,11 +546,11 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
           <div scToolbarSeparator></div>
 
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorHorizontalRule>
+            <button scToolbarWidget scToggle scEditorCommand="horizontal-rule">
               <svg siMinusIcon></svg>
               <span class="sr-only">Horizontal rule</span>
             </button>
-            <button scToolbarWidget scToggle scEditorClearFormatting>
+            <button scToolbarWidget scToggle scEditorCommand="clear-formatting">
               <svg siRemoveFormattingIcon></svg>
               <span class="sr-only">Clear formatting</span>
             </button>
@@ -609,23 +573,23 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
           class="shadow-md"
         >
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorBold>
+            <button scToolbarWidget scToggle scEditorCommand="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scToolbarWidget scToggle scEditorItalic>
+            <button scToolbarWidget scToggle scEditorCommand="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scToolbarWidget scToggle scEditorStrikethrough>
+            <button scToolbarWidget scToggle scEditorCommand="strikethrough">
               <svg siStrikethroughIcon></svg>
               <span class="sr-only">Strikethrough</span>
             </button>
-            <button scToolbarWidget scToggle scEditorCode>
+            <button scToolbarWidget scToggle scEditorCommand="code">
               <svg siCodeIcon></svg>
               <span class="sr-only">Code</span>
             </button>
-            <button scToolbarWidget scToggle scEditorUnderline>
+            <button scToolbarWidget scToggle scEditorCommand="underline">
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>

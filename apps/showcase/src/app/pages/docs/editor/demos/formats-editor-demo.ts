@@ -12,12 +12,9 @@ import {
 } from '@semantic-components/ui';
 import {
   ScEditor,
-  ScEditorBold,
-  ScEditorBulletList,
+  ScEditorCommand,
   ScEditorContent,
   type ScEditorFormat,
-  ScEditorItalic,
-  ScEditorTaskList,
   type ScEditorValue,
   ScEditorView,
   provideEditor,
@@ -91,11 +88,8 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
     FormField,
     ScButton,
     ScEditor,
-    ScEditorBold,
-    ScEditorBulletList,
+    ScEditorCommand,
     ScEditorContent,
-    ScEditorItalic,
-    ScEditorTaskList,
     ScEditorView,
     ScToggleGroup,
     ScToggleGroupItem,
@@ -135,19 +129,19 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
         >
           <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
             <div scToolbarWidgetGroup>
-              <button scToolbarWidget scToggle scEditorBold>
+              <button scToolbarWidget scToggle scEditorCommand="bold">
                 <svg siBoldIcon></svg>
                 <span class="sr-only">Bold</span>
               </button>
-              <button scToolbarWidget scToggle scEditorItalic>
+              <button scToolbarWidget scToggle scEditorCommand="italic">
                 <svg siItalicIcon></svg>
                 <span class="sr-only">Italic</span>
               </button>
-              <button scToolbarWidget scToggle scEditorBulletList>
+              <button scToolbarWidget scToggle scEditorCommand="bullet-list">
                 <svg siListIcon></svg>
                 <span class="sr-only">Bullet list</span>
               </button>
-              <button scToolbarWidget scToggle scEditorTaskList>
+              <button scToolbarWidget scToggle scEditorCommand="task-list">
                 <svg siListTodoIcon></svg>
                 <span class="sr-only">Task list</span>
               </button>

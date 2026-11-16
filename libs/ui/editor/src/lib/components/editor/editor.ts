@@ -34,7 +34,7 @@ export type ScEditorFormat = 'html' | 'json' | 'text' | 'markdown';
 export type ScEditorValue = string | JSONContent | null;
 
 /** A command, written on Tiptap's chain: `(chain) => chain.toggleBold()`. */
-export type ScEditorCommand = (chain: ChainedCommands) => ChainedCommands;
+export type ScEditorChainCommand = (chain: ChainedCommands) => ChainedCommands;
 
 export const SC_EDITOR = new InjectionToken<ScEditor>('SC_EDITOR');
 
@@ -163,14 +163,14 @@ export class ScEditor implements FormValueControl<ScEditorValue> {
   }
 
   /** Whether a command can run now (undo, redo…). */
-  can(command: ScEditorCommand): boolean {
+  can(command: ScEditorChainCommand): boolean {
     this.contentVersion();
     const editor = this.editorInstance();
     return !!editor && this.editable() && command(editor.can().chain()).run();
   }
 
   /** Runs a command on the document, focused (when it can be edited). */
-  run(command: ScEditorCommand): void {
+  run(command: ScEditorChainCommand): void {
     const editor = this.editorInstance();
     if (!editor || !this.editable()) return;
     command(editor.chain().focus()).run();

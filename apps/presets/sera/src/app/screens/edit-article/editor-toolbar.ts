@@ -24,20 +24,9 @@ import {
 import {
   ScEditorBlock,
   type ScEditorBlockType,
-  ScEditorBold,
-  ScEditorCode,
-  ScEditorItalic,
+  ScEditorCommand,
   ScEditorLink,
-  ScEditorRedo,
-  ScEditorStrikethrough,
-  ScEditorUnderline,
-  ScEditorUndo,
 } from '@semantic-components/ui/editor';
-import {
-  ScEditorAlignCenter,
-  ScEditorAlignLeft,
-  ScEditorAlignRight,
-} from '@semantic-components/ui/editor/align';
 import { ScEditorImage } from '@semantic-components/ui/editor/images';
 import {
   SiBoldIcon,
@@ -82,19 +71,10 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
   imports: [
     FormField,
     ScButton,
-    ScEditorAlignCenter,
-    ScEditorAlignLeft,
-    ScEditorAlignRight,
-    ScEditorBold,
-    ScEditorCode,
+    ScEditorCommand,
     ScEditorBlock,
     ScEditorImage,
-    ScEditorItalic,
     ScEditorLink,
-    ScEditorRedo,
-    ScEditorStrikethrough,
-    ScEditorUnderline,
-    ScEditorUndo,
     ScField,
     ScInput,
     ScLabel,
@@ -184,7 +164,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <button
           scToolbarWidget
           scToggle
-          scEditorBold
+          scEditorCommand="bold"
           class="size-8 min-w-8 px-0"
         >
           <svg siBoldIcon></svg><span class="sr-only">Bold</span>
@@ -192,7 +172,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <button
           scToolbarWidget
           scToggle
-          scEditorItalic
+          scEditorCommand="italic"
           class="size-8 min-w-8 px-0"
         >
           <svg siItalicIcon></svg><span class="sr-only">Italic</span>
@@ -200,7 +180,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <button
           scToolbarWidget
           scToggle
-          scEditorUnderline
+          scEditorCommand="underline"
           class="size-8 min-w-8 px-0"
         >
           <svg siUnderlineIcon></svg><span class="sr-only">Underline</span>
@@ -208,7 +188,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <button
           scToolbarWidget
           scToggle
-          scEditorStrikethrough
+          scEditorCommand="strikethrough"
           class="size-8 min-w-8 px-0 max-md:hidden"
         >
           <svg siStrikethroughIcon></svg
@@ -217,7 +197,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <button
           scToolbarWidget
           scToggle
-          scEditorCode
+          scEditorCommand="code"
           class="size-8 min-w-8 px-0 max-md:hidden"
         >
           <svg siCodeXmlIcon></svg><span class="sr-only">Code</span>
@@ -228,7 +208,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <button
           scToolbarWidget
           scToggle
-          scEditorAlignLeft
+          scEditorCommand="align-left"
           class="size-8 min-w-8 px-0"
         >
           <svg siTextAlignStartIcon></svg
@@ -237,7 +217,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <button
           scToolbarWidget
           scToggle
-          scEditorAlignCenter
+          scEditorCommand="align-center"
           class="size-8 min-w-8 px-0"
         >
           <svg siTextAlignCenterIcon></svg
@@ -246,7 +226,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <button
           scToolbarWidget
           scToggle
-          scEditorAlignRight
+          scEditorCommand="align-right"
           class="size-8 min-w-8 px-0"
         >
           <svg siTextAlignEndIcon></svg><span class="sr-only">Align Right</span>
@@ -312,7 +292,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <button
           scToolbarWidget
           scToggle
-          scEditorUndo
+          scEditorCommand="undo"
           class="size-8 min-w-8 px-0"
         >
           <svg siUndoIcon></svg><span class="sr-only">Undo</span>
@@ -320,7 +300,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
         <button
           scToolbarWidget
           scToggle
-          scEditorRedo
+          scEditorCommand="redo"
           class="size-8 min-w-8 px-0"
         >
           <svg siRedoIcon></svg><span class="sr-only">Redo</span>

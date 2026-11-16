@@ -31,10 +31,9 @@ import {
 } from '@semantic-components/ui';
 import {
   ScEditor,
-  ScEditorBold,
+  ScEditorCommand,
   ScEditorContent,
   type ScEditorContentLayout,
-  ScEditorItalic,
 } from '@semantic-components/ui/editor';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 
@@ -55,9 +54,8 @@ const LAYOUTS: ScEditorContentLayout[] = ['default', 'page'];
     ScFrame,
     FormField,
     ScEditor,
-    ScEditorBold,
+    ScEditorCommand,
     ScEditorContent,
-    ScEditorItalic,
     ScToggleGroup,
     ScToggleGroupItem,
     SiBoldIcon,
@@ -80,11 +78,11 @@ const LAYOUTS: ScEditorContentLayout[] = ['default', 'page'];
       <div scEditor [formField]="editorForm.body" class="flex flex-col gap-2">
         <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorBold>
+            <button scToolbarWidget scToggle scEditorCommand="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scToolbarWidget scToggle scEditorItalic>
+            <button scToolbarWidget scToggle scEditorCommand="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>

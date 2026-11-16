@@ -29,12 +29,8 @@ import {
 } from '@semantic-components/ui';
 import {
   ScEditor,
-  ScEditorBold,
-  ScEditorCode,
+  ScEditorCommand,
   ScEditorContent,
-  ScEditorItalic,
-  ScEditorStrikethrough,
-  ScEditorUnderline,
 } from '@semantic-components/ui/editor';
 import { ScEditorBubbleMenu } from '@semantic-components/ui/editor/bubble-menu';
 import {
@@ -62,13 +58,9 @@ const COMMENT =
     ScFrame,
     FormField,
     ScEditor,
-    ScEditorBold,
+    ScEditorCommand,
     ScEditorBubbleMenu,
-    ScEditorCode,
     ScEditorContent,
-    ScEditorItalic,
-    ScEditorStrikethrough,
-    ScEditorUnderline,
     SiBoldIcon,
     SiCodeIcon,
     SiItalicIcon,
@@ -85,23 +77,23 @@ const COMMENT =
           class="shadow-md"
         >
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorBold>
+            <button scToolbarWidget scToggle scEditorCommand="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scToolbarWidget scToggle scEditorItalic>
+            <button scToolbarWidget scToggle scEditorCommand="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scToolbarWidget scToggle scEditorUnderline>
+            <button scToolbarWidget scToggle scEditorCommand="underline">
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
-            <button scToolbarWidget scToggle scEditorStrikethrough>
+            <button scToolbarWidget scToggle scEditorCommand="strikethrough">
               <svg siStrikethroughIcon></svg>
               <span class="sr-only">Strikethrough</span>
             </button>
-            <button scToolbarWidget scToggle scEditorCode>
+            <button scToolbarWidget scToggle scEditorCommand="code">
               <svg siCodeIcon></svg>
               <span class="sr-only">Code</span>
             </button>

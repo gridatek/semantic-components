@@ -20,20 +20,20 @@ import {
   ScFrame,
   ScToggle,
   ScToolbar,
+  ScToolbarSeparator,
   ScToolbarWidget,
   ScToolbarWidgetGroup,
 } from '@semantic-components/ui';
 import {
   ScEditor,
-  ScEditorBold,
+  ScEditorCommand,
   ScEditorContent,
-  ScEditorItalic,
-  ScEditorUnderline,
 } from '@semantic-components/ui/editor';
 import {
   SiBoldIcon,
   SiItalicIcon,
   SiUnderlineIcon,
+  SiUndoIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
@@ -43,16 +43,16 @@ import {
     ScFrame,
     ScToggle,
     ScToolbar,
+    ScToolbarSeparator,
     ScToolbarWidget,
     ScToolbarWidgetGroup,
     ScEditor,
     ScEditorContent,
-    ScEditorBold,
-    ScEditorItalic,
-    ScEditorUnderline,
+    ScEditorCommand,
     SiBoldIcon,
     SiItalicIcon,
     SiUnderlineIcon,
+    SiUndoIcon,
   ],
   template: \`
     <div
@@ -62,19 +62,24 @@ import {
     >
       <div scToolbar aria-label="Formatting">
         <div scToolbarWidgetGroup aria-label="Marks">
-          <button scToolbarWidget scToggle scEditorBold>
+          <button scToolbarWidget scToggle scEditorCommand="bold">
             <svg siBoldIcon></svg>
             <span class="sr-only">Bold</span>
           </button>
-          <button scToolbarWidget scToggle scEditorItalic>
+          <button scToolbarWidget scToggle scEditorCommand="italic">
             <svg siItalicIcon></svg>
             <span class="sr-only">Italic</span>
           </button>
-          <button scToolbarWidget scToggle scEditorUnderline>
+          <button scToolbarWidget scToggle scEditorCommand="underline">
             <svg siUnderlineIcon></svg>
             <span class="sr-only">Underline</span>
           </button>
         </div>
+        <div scToolbarSeparator></div>
+        <button scToolbarWidget scToggle scEditorCommand="undo">
+          <svg siUndoIcon></svg>
+          <span class="sr-only">Undo</span>
+        </button>
       </div>
       <div
         scFrame

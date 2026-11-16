@@ -15,11 +15,10 @@ import {
 } from '@semantic-components/ui';
 import {
   ScEditor,
-  ScEditorBold,
   ScEditorCharCount,
+  ScEditorCommand,
   ScEditorContent,
   ScEditorCount,
-  ScEditorItalic,
 } from '@semantic-components/ui/editor';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 
@@ -50,9 +49,8 @@ interface PostModel {
     ScFieldErrors,
     ScLabel,
     ScEditor,
-    ScEditorBold,
+    ScEditorCommand,
     ScEditorContent,
-    ScEditorItalic,
     ScEditorCharCount,
     ScEditorCount,
     SiBoldIcon,
@@ -69,11 +67,11 @@ interface PostModel {
         >
           <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
             <div scToolbarWidgetGroup>
-              <button scToolbarWidget scToggle scEditorBold>
+              <button scToolbarWidget scToggle scEditorCommand="bold">
                 <svg siBoldIcon></svg>
                 <span class="sr-only">Bold</span>
               </button>
-              <button scToolbarWidget scToggle scEditorItalic>
+              <button scToolbarWidget scToggle scEditorCommand="italic">
                 <svg siItalicIcon></svg>
                 <span class="sr-only">Italic</span>
               </button>

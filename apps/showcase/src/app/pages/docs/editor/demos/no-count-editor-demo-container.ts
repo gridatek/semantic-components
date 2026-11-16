@@ -30,12 +30,8 @@ import {
 } from '@semantic-components/ui';
 import {
   ScEditor,
-  ScEditorBold,
-  ScEditorBulletList,
+  ScEditorCommand,
   ScEditorContent,
-  ScEditorItalic,
-  ScEditorOrderedList,
-  ScEditorUnderline,
 } from '@semantic-components/ui/editor';
 import {
   SiBoldIcon,
@@ -57,11 +53,7 @@ import {
     FormField,
     ScEditor,
     ScEditorContent,
-    ScEditorBold,
-    ScEditorItalic,
-    ScEditorUnderline,
-    ScEditorBulletList,
-    ScEditorOrderedList,
+    ScEditorCommand,
     SiBoldIcon,
     SiItalicIcon,
     SiUnderlineIcon,
@@ -73,15 +65,15 @@ import {
       <div scEditor [formField]="editorForm.body" class="flex flex-col gap-2">
         <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorBold>
+            <button scToolbarWidget scToggle scEditorCommand="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scToolbarWidget scToggle scEditorItalic>
+            <button scToolbarWidget scToggle scEditorCommand="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scToolbarWidget scToggle scEditorUnderline>
+            <button scToolbarWidget scToggle scEditorCommand="underline">
               <svg siUnderlineIcon></svg>
               <span class="sr-only">Underline</span>
             </button>
@@ -90,11 +82,11 @@ import {
           <div scToolbarSeparator></div>
 
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorBulletList>
+            <button scToolbarWidget scToggle scEditorCommand="bullet-list">
               <svg siListIcon></svg>
               <span class="sr-only">Bullet list</span>
             </button>
-            <button scToolbarWidget scToggle scEditorOrderedList>
+            <button scToolbarWidget scToggle scEditorCommand="ordered-list">
               <svg siListOrderedIcon></svg>
               <span class="sr-only">Numbered list</span>
             </button>

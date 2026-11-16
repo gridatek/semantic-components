@@ -9,13 +9,8 @@ import {
 } from '@semantic-components/ui';
 import {
   ScEditor,
-  ScEditorBlockquote,
-  ScEditorBold,
-  ScEditorBulletList,
-  ScEditorCodeBlock,
+  ScEditorCommand,
   ScEditorContent,
-  ScEditorItalic,
-  ScEditorTaskList,
   ScEditorView,
   provideEditor,
 } from '@semantic-components/ui/editor';
@@ -49,13 +44,8 @@ import {
     ScFrame,
     FormField,
     ScEditor,
-    ScEditorBlockquote,
-    ScEditorBold,
-    ScEditorBulletList,
-    ScEditorCodeBlock,
+    ScEditorCommand,
     ScEditorContent,
-    ScEditorItalic,
-    ScEditorTaskList,
     ScEditorView,
     SiBoldIcon,
     SiCodeXmlIcon,
@@ -69,27 +59,27 @@ import {
       <div scEditor [formField]="postForm.body" class="flex flex-col gap-2">
         <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
           <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorBold>
+            <button scToolbarWidget scToggle scEditorCommand="bold">
               <svg siBoldIcon></svg>
               <span class="sr-only">Bold</span>
             </button>
-            <button scToolbarWidget scToggle scEditorItalic>
+            <button scToolbarWidget scToggle scEditorCommand="italic">
               <svg siItalicIcon></svg>
               <span class="sr-only">Italic</span>
             </button>
-            <button scToolbarWidget scToggle scEditorBulletList>
+            <button scToolbarWidget scToggle scEditorCommand="bullet-list">
               <svg siListIcon></svg>
               <span class="sr-only">Bullet list</span>
             </button>
-            <button scToolbarWidget scToggle scEditorTaskList>
+            <button scToolbarWidget scToggle scEditorCommand="task-list">
               <svg siListTodoIcon></svg>
               <span class="sr-only">Task list</span>
             </button>
-            <button scToolbarWidget scToggle scEditorBlockquote>
+            <button scToolbarWidget scToggle scEditorCommand="quote">
               <svg siTextQuoteIcon></svg>
               <span class="sr-only">Blockquote</span>
             </button>
-            <button scToolbarWidget scToggle scEditorCodeBlock>
+            <button scToolbarWidget scToggle scEditorCommand="code-block">
               <svg siCodeXmlIcon></svg>
               <span class="sr-only">Code block</span>
             </button>

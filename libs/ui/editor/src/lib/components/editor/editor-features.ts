@@ -1,6 +1,7 @@
 import type { Extensions, JSONContent } from '@tiptap/core';
 import { InjectionToken, type Provider, inject } from '@angular/core';
 import type { ScEditor } from './editor';
+import type { ScEditorCommandDefinition } from './editor-command';
 
 /** Reads and writes Markdown (`withMarkdown()`). */
 export interface ScEditorMarkdown {
@@ -22,6 +23,8 @@ export interface ScEditorFeature {
   readonly behaviour?: (editor: ScEditor) => Extensions;
   /** Reads and writes Markdown with the document's extensions. */
   readonly markdown?: (extensions: Extensions) => ScEditorMarkdown;
+  /** Its commands, for `scEditorCommand` (`'align-center'`…). */
+  readonly commands?: Readonly<Record<string, ScEditorCommandDefinition>>;
 }
 
 const NO_FEATURES: readonly ScEditorFeature[] = [];
