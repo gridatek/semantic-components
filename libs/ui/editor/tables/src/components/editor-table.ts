@@ -29,7 +29,8 @@ export type ScEditorTableAction =
  * `addColumnAfter`, `deleteColumn`, `mergeCells`, `splitCell`,
  * `toggleHeaderRow`, `toggleHeaderColumn`, `deleteTable`. `can(action)` says
  * which apply now (disable the others); `inTable()` whether the selection is
- * in a table (`data-state="on"`). Write its icon, name it, write the labels.
+ * in a table. A menu button, not a toggle: no pressed look in a table (as
+ * Tiptap's table trigger). Write its icon, name it, write the labels.
  * Needs `withTables()`.
  */
 @Directive({
@@ -38,7 +39,6 @@ export type ScEditorTableAction =
   host: {
     type: 'button',
     '[class]': 'class()',
-    '[attr.data-state]': 'inTable() ? "on" : "off"',
   },
 })
 export class ScEditorTable {

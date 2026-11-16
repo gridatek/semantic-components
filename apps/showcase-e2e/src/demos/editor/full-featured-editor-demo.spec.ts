@@ -338,8 +338,6 @@ test.describe('Full Featured Editor Demo', () => {
     const inserted = article(page).locator('table');
     await expect(inserted.locator('tr')).toHaveCount(3);
     await expect(inserted.locator('th')).toHaveCount(3);
-    await expect(table).toHaveAttribute('data-state', 'on');
-
     await page.keyboard.type('Name');
     await table.click();
     await page.getByRole('menuitem', { name: 'Add row below' }).click();

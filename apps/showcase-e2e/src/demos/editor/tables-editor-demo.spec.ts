@@ -22,7 +22,6 @@ test.describe('Tables Editor Demo', () => {
   test('opened, the cursor is at the start (not in the table that ends the document)', async ({
     page,
   }) => {
-    await expect(tableButton(page)).toHaveAttribute('data-state', 'off');
     await plans(page).focus();
     await page.keyboard.type('Hi ');
     await expect(plans(page).locator('p').first()).toHaveText('Hi Our plans:');
@@ -40,7 +39,9 @@ test.describe('Tables Editor Demo', () => {
 
   test('in a table, the menu edits it', async ({ page }) => {
     await plans(page).getByText('Team').click();
-    await expect(tableButton(page)).toHaveAttribute('data-state', 'on');
+    // A menu button, not a toggle: no pressed look in a table.
+    await expect(tableButton(page)).toHaveAttribute('data-state', 'off');
+    await expect(tableButton(page)).not.toHaveAttribute('aria-pressed', 'true');
 
     await tableButton(page).click();
     await page.getByRole('menuitem', { name: 'Add row below' }).click();
