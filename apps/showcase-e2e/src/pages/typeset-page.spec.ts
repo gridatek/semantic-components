@@ -32,6 +32,8 @@ test.describe('Typeset Page', () => {
       '--typeset-font-body',
       '--typeset-font-heading',
       '--typeset-font-mono',
+      '--typeset-radius',
+      '--typeset-radius-inline',
     ]);
     await expect(first('Typeset classes')).toHaveText([
       'typeset',

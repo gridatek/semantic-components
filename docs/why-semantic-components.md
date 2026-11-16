@@ -251,6 +251,7 @@ Add the styles to your global stylesheet:
 ```css
 @import '@semantic-components/ui/styles/reduced-motion.css';
 @import '@semantic-components/ui/styles/typeset.css';
+@import '@semantic-components/presets/nova/typeset.css';
 @source '../node_modules/@semantic-components/ui';
 ```
 

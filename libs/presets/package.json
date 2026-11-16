@@ -15,5 +15,31 @@
   "peerDependencies": {
     "class-variance-authority": ">=0.7.1"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    "./nova/typeset.css": {
+      "default": "./nova/src/typeset.css"
+    },
+    "./lyra/typeset.css": {
+      "default": "./lyra/src/typeset.css"
+    },
+    "./maia/typeset.css": {
+      "default": "./maia/src/typeset.css"
+    },
+    "./vega/typeset.css": {
+      "default": "./vega/src/typeset.css"
+    },
+    "./mira/typeset.css": {
+      "default": "./mira/src/typeset.css"
+    },
+    "./luma/typeset.css": {
+      "default": "./luma/src/typeset.css"
+    },
+    "./rhea/typeset.css": {
+      "default": "./rhea/src/typeset.css"
+    },
+    "./sera/typeset.css": {
+      "default": "./sera/src/typeset.css"
+    }
+  }
 }

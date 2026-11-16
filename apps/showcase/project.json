@@ -26,7 +26,49 @@
             "output": "zxing"
           }
         ],
-        "styles": ["apps/showcase/src/styles.css"]
+        "styles": [
+          "apps/showcase/src/styles.css",
+          {
+            "input": "libs/presets/nova/src/typeset.css",
+            "bundleName": "typeset-nova",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/lyra/src/typeset.css",
+            "bundleName": "typeset-lyra",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/maia/src/typeset.css",
+            "bundleName": "typeset-maia",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/vega/src/typeset.css",
+            "bundleName": "typeset-vega",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/mira/src/typeset.css",
+            "bundleName": "typeset-mira",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/luma/src/typeset.css",
+            "bundleName": "typeset-luma",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/rhea/src/typeset.css",
+            "bundleName": "typeset-rhea",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/sera/src/typeset.css",
+            "bundleName": "typeset-sera",
+            "inject": false
+          }
+        ]
       },
       "configurations": {
         "production": {

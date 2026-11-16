@@ -7,6 +7,7 @@
 @import 'shadcn/tailwind.css';
 @import '../../../../libs/ui/src/lib/styles/reduced-motion.css';
 @import '../../../../libs/ui/src/lib/styles/typeset.css';
+@import '../../../../libs/presets/sera/src/typeset.css';
 @import '../../../../libs/ui/editor/src/lib/styles/index.css';
 
 /*

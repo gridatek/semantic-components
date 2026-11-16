@@ -67,11 +67,17 @@ interface Row {
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <p class="text-muted-foreground">
-          Import the file in your global stylesheet, after Tailwind:
+          Import the rules and your preset's variables in your global
+          stylesheet, after Tailwind:
           <code scTypeset
             >@import '@semantic-components/ui/styles/typeset.css';</code
           >
-          Then put your content in a <code scTypeset>typeset</code> container.
+          and
+          <code scTypeset
+            >@import '@semantic-components/presets/nova/typeset.css';</code
+          >
+          (your style's). Then put your content in a
+          <code scTypeset>typeset</code> container.
         </p>
         <app-typeset-usage-demo-container />
       </section>
@@ -314,6 +320,16 @@ export default class TypesetPage {
       name: '--typeset-font-mono',
       value: 'var(--font-mono)',
       description: "Code's font.",
+    },
+    {
+      name: '--typeset-radius',
+      value: "the style's Code Block",
+      description: 'The corners of code blocks and images.',
+    },
+    {
+      name: '--typeset-radius-inline',
+      value: "the style's Kbd",
+      description: 'The corners of inline code and keys.',
     },
   ];
 

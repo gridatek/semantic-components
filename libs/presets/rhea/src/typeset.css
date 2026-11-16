@@ -1,0 +1,27 @@
+/*
+ * Typeset's variables in rhea, for ui's typeset.css (its rules): import
+ * both. shadcn's values, and the corners of the style's own parts — code
+ * blocks and images as its Code Block (rounded-2xl), inline code and keys as its
+ * Kbd (rounded-lg). At zero specificity: yours on :root, or a preset class on a
+ * container (`.typeset-chat`), win.
+ */
+@layer components {
+  :where(:root) {
+    --typeset-font-body: inherit;
+    --typeset-font-heading: var(--font-heading);
+    --typeset-font-mono: var(--font-mono);
+    --typeset-size: 1em;
+    --typeset-leading: 1.75;
+    --typeset-flow: 1.25em;
+    --typeset-muted: var(
+      --color-muted-foreground,
+      color-mix(in oklab, currentColor 60%, transparent)
+    );
+    --typeset-rule: var(
+      --color-border,
+      color-mix(in oklab, currentColor 20%, transparent)
+    );
+    --typeset-radius: var(--radius-2xl);
+    --typeset-radius-inline: var(--radius-lg);
+  }
+}

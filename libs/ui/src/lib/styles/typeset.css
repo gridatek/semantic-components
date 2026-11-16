@@ -1,45 +1,19 @@
 /*
  * shadcn/typeset
  * https://ui.shadcn.com/docs/typeset.
+ *
+ * The rules only: the variables — size, leading, flow, fonts, colors,
+ * corners — are your preset's file, so import both:
+ *
+ *   @import '@semantic-components/ui/styles/typeset.css';
+ *   @import '@semantic-components/presets/<style>/typeset.css';
+ *
+ * Ours, not shadcn's: its variables, on `.typeset` in shadcn's file, are the
+ * preset's (on `:root`); an element marked `data-typeset` (scTypeset's) is
+ * set as in a container; code blocks, images, inline code and keys take the
+ * preset's corners (`--typeset-radius`, `--typeset-radius-inline`). See
+ * "Deliberate divergences" in docs/shadcn-style-reference.md.
  */
-
-@layer components {
-  .typeset {
-    --typeset-font-body: inherit;
-    --typeset-font-heading: var(--font-heading);
-    --typeset-font-mono: var(--font-mono);
-    --typeset-size: 1em;
-    --typeset-leading: 1.75;
-    --typeset-flow: 1.25em;
-  }
-}
-
-/*
- * Ours, not shadcn's: an element marked `data-typeset` (scTypeset's) is set
- * as in a container without one — its own rules, by its tag (below). Outside
- * a container nothing sets the variables, so the page has the container's
- * defaults, at zero specificity: your own on :root, body or a section win, and
- * a container's preset still sets its own. See "Deliberate divergences" in
- * docs/shadcn-style-reference.md.
- */
-@layer components {
-  :where(:root) {
-    --typeset-font-body: inherit;
-    --typeset-font-heading: var(--font-heading);
-    --typeset-font-mono: var(--font-mono);
-    --typeset-size: 1em;
-    --typeset-leading: 1.75;
-    --typeset-flow: 1.25em;
-    --typeset-muted: var(
-      --color-muted-foreground,
-      color-mix(in oklab, currentColor 60%, transparent)
-    );
-    --typeset-rule: var(
-      --color-border,
-      color-mix(in oklab, currentColor 20%, transparent)
-    );
-  }
-}
 
 @layer components {
   .typeset {
@@ -53,15 +27,6 @@
     @media (min-width: 48rem), print {
       font-size: var(--typeset-size);
     }
-
-    --typeset-muted: var(
-      --color-muted-foreground,
-      color-mix(in oklab, currentColor 60%, transparent)
-    );
-    --typeset-rule: var(
-      --color-border,
-      color-mix(in oklab, currentColor 20%, transparent)
-    );
   }
 
   /* Ours: `:is(…, [data-typeset])` — shadcn's selector is the first. */
@@ -279,7 +244,7 @@
       font-weight: 500;
       border: 1px solid var(--typeset-rule);
       border-block-end-width: 2px;
-      border-radius: min(calc(var(--radius, 0.5em) * 0.6), 0.35em);
+      border-radius: var(--typeset-radius-inline);
       padding: 0.0625em 0.35em;
     }
 
@@ -310,7 +275,7 @@
       );
       font-family: var(--typeset-font-mono);
       font-size: 0.85em;
-      border-radius: min(calc(var(--radius, 0.5em) * 0.6), 0.35em);
+      border-radius: var(--typeset-radius-inline);
       padding: 0.125em 0.3em;
     }
 
@@ -325,7 +290,7 @@
       line-height: 1.5;
       tab-size: 2;
       direction: ltr;
-      border-radius: var(--radius, 0.5em);
+      border-radius: var(--typeset-radius);
       padding: 0.75em 1em;
       overflow-x: auto;
       margin-block-start: calc(var(--typeset-flow) / 0.875);
@@ -379,7 +344,7 @@
 
     /* Media. */
     &:where(img, video) {
-      border-radius: var(--radius, 0.5em);
+      border-radius: var(--typeset-radius);
       max-width: 100%;
       height: auto;
       margin-block-start: var(--typeset-flow);

@@ -1,3 +1,9 @@
+import {
+  DOCUMENT,
+  type EnvironmentProviders,
+  inject,
+  provideEnvironmentInitializer,
+} from '@angular/core';
 import type { ScPreset, ScPresetName } from '@semantic-components/presets';
 import { luma } from '@semantic-components/presets/luma';
 import { lyra } from '@semantic-components/presets/lyra';
@@ -7,7 +13,7 @@ import { nova } from '@semantic-components/presets/nova';
 import { rhea } from '@semantic-components/presets/rhea';
 import { sera } from '@semantic-components/presets/sera';
 import { vega } from '@semantic-components/presets/vega';
-import { type ScStorage, writeStorage } from '@semantic-components/ui';
+import { ScStorage, writeStorage } from '@semantic-components/ui';
 
 /**
  * Every preset, for the showcase's /presets page. An app with one preset
@@ -40,4 +46,25 @@ export function presetFrom(storage: ScStorage): ScPresetName {
 /** Saves the preset for the next start. */
 export function storePreset(name: ScPresetName): void {
   writeStorage(KEY, name);
+}
+
+/**
+ * The preset's Typeset variables: its typeset.css, a stylesheet of its own
+ * (the `typeset-<name>` bundles in project.json, not injected), linked in the
+ * head at start — on the server too, from the request's cookie, so the page
+ * is drawn with them. An app with one preset imports its file instead.
+ */
+export function provideTypesetStyles(): EnvironmentProviders {
+  return provideEnvironmentInitializer(() => {
+    const document = inject(DOCUMENT);
+    const name = presetFrom(inject(ScStorage));
+    let link = document.head.querySelector('link#typeset-preset');
+    if (!link) {
+      link = document.createElement('link');
+      link.setAttribute('id', 'typeset-preset');
+      link.setAttribute('rel', 'stylesheet');
+      document.head.appendChild(link);
+    }
+    link.setAttribute('href', `typeset-${name}.css`);
+  });
 }
