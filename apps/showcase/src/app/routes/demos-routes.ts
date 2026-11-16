@@ -6324,6 +6324,7 @@ export const demosRoutes: Route[] = [
     children: [
       {
         path: 'basic-navbar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/navbar/demos/basic-navbar-demo').then(
             (m) => m.BasicNavbarDemo,
@@ -6331,6 +6332,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'mobile-navbar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/navbar/demos/mobile-navbar-demo').then(
             (m) => m.MobileNavbarDemo,
@@ -6338,6 +6340,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'overlay-navbar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/navbar/demos/overlay-navbar-demo').then(
             (m) => m.OverlayNavbarDemo,
@@ -6345,6 +6348,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'navigation-menu-navbar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/navbar/demos/navigation-menu-navbar-demo').then(
             (m) => m.NavigationMenuNavbarDemo,
@@ -6352,6 +6356,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'sticky-navbar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/navbar/demos/sticky-navbar-demo').then(
             (m) => m.StickyNavbarDemo,
@@ -6359,6 +6364,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'rtl-navbar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/navbar/demos/rtl-navbar-demo').then(
             (m) => m.RtlNavbarDemo,
@@ -6411,6 +6417,7 @@ export const demosRoutes: Route[] = [
     children: [
       {
         path: 'sidebar-usage-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/sidebar-usage-demo').then(
             (m) => m.SidebarUsageDemo,
@@ -6418,6 +6425,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'header-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/header-sidebar-demo').then(
             (m) => m.HeaderSidebarDemo,
@@ -6425,6 +6433,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'footer-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/footer-sidebar-demo').then(
             (m) => m.FooterSidebarDemo,
@@ -6432,6 +6441,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'group-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/group-sidebar-demo').then(
             (m) => m.GroupSidebarDemo,
@@ -6439,6 +6449,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'collapsible-group-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/collapsible-group-sidebar-demo').then(
             (m) => m.CollapsibleGroupSidebarDemo,
@@ -6446,6 +6457,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'group-action-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/group-action-sidebar-demo').then(
             (m) => m.GroupActionSidebarDemo,
@@ -6453,6 +6465,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'menu-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/menu-sidebar-demo').then(
             (m) => m.MenuSidebarDemo,
@@ -6460,6 +6473,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'menu-action-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/menu-action-sidebar-demo').then(
             (m) => m.MenuActionSidebarDemo,
@@ -6467,6 +6481,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'sub-menu-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/sub-menu-sidebar-demo').then(
             (m) => m.SubMenuSidebarDemo,
@@ -6474,6 +6489,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'collapsible-menu-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/collapsible-menu-sidebar-demo').then(
             (m) => m.CollapsibleMenuSidebarDemo,
@@ -6481,6 +6497,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'menu-badge-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/menu-badge-sidebar-demo').then(
             (m) => m.MenuBadgeSidebarDemo,
@@ -6488,6 +6505,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'skeleton-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/skeleton-sidebar-demo').then(
             (m) => m.SkeletonSidebarDemo,
@@ -6495,6 +6513,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'controlled-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/controlled-sidebar-demo').then(
             (m) => m.ControlledSidebarDemo,
@@ -6502,6 +6521,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'icon-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/icon-sidebar-demo').then(
             (m) => m.IconSidebarDemo,
@@ -6509,6 +6529,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'floating-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/floating-sidebar-demo').then(
             (m) => m.FloatingSidebarDemo,
@@ -6516,6 +6537,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'inset-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/inset-sidebar-demo').then(
             (m) => m.InsetSidebarDemo,
@@ -6523,6 +6545,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'rtl-sidebar-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar/demos/rtl-sidebar-demo').then(
             (m) => m.RtlSidebarDemo,
@@ -7486,6 +7509,7 @@ export const demosRoutes: Route[] = [
     children: [
       {
         path: 'auth-layout-usage-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/auth-layout/demos/auth-layout-usage-demo').then(
             (m) => m.AuthLayoutUsageDemo,
@@ -7498,6 +7522,7 @@ export const demosRoutes: Route[] = [
     children: [
       {
         path: 'sidebar-layout-usage-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/sidebar-layout/demos/sidebar-layout-usage-demo').then(
             (m) => m.SidebarLayoutUsageDemo,
@@ -7510,6 +7535,7 @@ export const demosRoutes: Route[] = [
     children: [
       {
         path: 'stacked-layout-usage-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/stacked-layout/demos/stacked-layout-usage-demo').then(
             (m) => m.StackedLayoutUsageDemo,

@@ -5,8 +5,14 @@ import { type Locator, type Page, expect } from '@playwright/test';
  * projects: a small screen, touch).
  */
 
-/** The page doesn't scroll sideways: nothing wider than the screen. */
+/**
+ * The page doesn't scroll sideways: nothing wider than the screen. Measured
+ * once the route is there (its component, lazy, next to the app's outlet): an
+ * empty page always fits, and the next `goto` would cancel its chunk — WebKit
+ * then logs "Importing a module script failed".
+ */
 export async function expectNoHorizontalScroll(page: Page): Promise<void> {
+  await page.locator('app-root > router-outlet + *').waitFor();
   await expect
     .poll(() =>
       page.evaluate(
