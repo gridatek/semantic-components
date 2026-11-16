@@ -12,7 +12,8 @@
  * preset's (on `:root`); an element marked `data-typeset` (scTypeset's) is
  * set as in a container; code blocks, images, inline code, keys and
  * highlights take the preset's corners (`--typeset-radius`,
- * `--typeset-radius-inline`; shadcn's highlight has 0.2em). See
+ * `--typeset-radius-inline`; shadcn's highlight has 0.2em); headings h1 to h4
+ * take the preset's weight, tracking and case (`--typeset-heading-*`). See
  * "Deliberate divergences" in docs/shadcn-style-reference.md.
  */
 
@@ -57,6 +58,13 @@
       font-family: var(--typeset-font-heading);
       font-weight: 600;
       margin-block-end: 0;
+    }
+    /* Ours: the style's weight, tracking and case (sera's titles: uppercase,
+       wider) — h5 and h6 keep their own. */
+    &:where(h1, h2, h3, h4) {
+      font-weight: var(--typeset-heading-weight);
+      letter-spacing: var(--typeset-heading-tracking);
+      text-transform: var(--typeset-heading-case);
     }
     &:where(h1) {
       font-size: 1.75em;

@@ -23,5 +23,8 @@
     );
     --typeset-radius: var(--radius-md);
     --typeset-radius-inline: var(--radius-xs);
+    --typeset-heading-weight: 600;
+    --typeset-heading-tracking: normal;
+    --typeset-heading-case: none;
   }
 }

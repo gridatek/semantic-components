@@ -369,7 +369,22 @@ export default class TypesetPage {
     {
       name: '--typeset-radius-inline',
       value: "the style's Kbd",
-      description: 'The corners of inline code and keys.',
+      description: 'The corners of inline code, keys and highlights.',
+    },
+    {
+      name: '--typeset-heading-weight',
+      value: '600',
+      description: 'The weight of headings h1 to h4.',
+    },
+    {
+      name: '--typeset-heading-tracking',
+      value: 'normal (sera: 0.05em, as its titles)',
+      description: 'The letter spacing of headings h1 to h4.',
+    },
+    {
+      name: '--typeset-heading-case',
+      value: 'none (sera: uppercase, as its titles)',
+      description: 'The case of headings h1 to h4 (text-transform).',
     },
   ];
 

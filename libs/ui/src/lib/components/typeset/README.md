@@ -83,7 +83,7 @@ In rendered markdown you can rarely put a class on one element: a hook in your r
 | `h5`  | `0.875em`  | `1.5`       | 500    | muted                    |
 | `h6`  | `0.8125em` | `1.5`       | 500    | muted, uppercase, spaced |
 
-**Variables** — in your preset's file (`@semantic-components/presets/<style>/typeset-variables.css`, on `:where(:root)`): `--typeset-size`, `--typeset-leading`, `--typeset-flow` (space between blocks), `--typeset-font-body`, `--typeset-font-heading`, `--typeset-font-mono`, `--typeset-muted`, `--typeset-rule`, and the style's corners: `--typeset-radius` (code blocks, images: its Code Block's) and `--typeset-radius-inline` (inline code, keys: its Kbd's). Override them on `:root`, any ancestor, or a container's preset class: yours win.
+**Variables** — in your preset's file (`@semantic-components/presets/<style>/typeset-variables.css`, on `:where(:root)`): `--typeset-size`, `--typeset-leading`, `--typeset-flow` (space between blocks), `--typeset-font-body`, `--typeset-font-heading`, `--typeset-font-mono`, `--typeset-muted`, `--typeset-rule`, and the style's corners: `--typeset-radius` (code blocks, images: its Code Block's) and `--typeset-radius-inline`, `--typeset-heading-weight`, `--typeset-heading-tracking`, `--typeset-heading-case` (headings h1 to h4: sera's uppercase and wider, as its titles) (inline code, keys: its Kbd's). Override them on `:root`, any ancestor, or a container's preset class: yours win.
 
 **Classes:** `typeset` (the container), `not-typeset` (opts an element out; `data-not-typeset` too), `typeset-scroll` (a wide table scrolls in its own box).
 

@@ -46,4 +46,34 @@ test.describe('Typeset in its preset', () => {
     expect(corners.pre === '0px').toBe(square);
     expect(corners.code === '0px').toBe(square);
   });
+
+  test(`headings take the style's weight, tracking and case (sera's: uppercase, wider)`, async ({
+    page,
+  }) => {
+    const preset = presetName();
+    await page.goto('/typeset');
+    const heading = page.locator('article.typeset h2').first();
+    await expect(heading).toBeVisible();
+    // Once its stylesheet has loaded: the variables set.
+    await expect
+      .poll(() =>
+        heading.evaluate((el) =>
+          getComputedStyle(el).getPropertyValue('--typeset-heading-case'),
+        ),
+      )
+      .not.toBe('');
+    const look = await heading.evaluate((el) => {
+      const style = getComputedStyle(el);
+      return {
+        weight: style.fontWeight,
+        transform: style.textTransform,
+        tracking:
+          (parseFloat(style.letterSpacing) || 0) / parseFloat(style.fontSize),
+      };
+    });
+    const sera = preset === 'sera';
+    expect(look.weight).toBe('600');
+    expect(look.transform).toBe(sera ? 'uppercase' : 'none');
+    expect(look.tracking).toBeCloseTo(sera ? 0.05 : 0, 3);
+  });
 });

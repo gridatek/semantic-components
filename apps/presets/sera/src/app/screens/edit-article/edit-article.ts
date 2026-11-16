@@ -97,7 +97,7 @@ import { EditorToolbar } from './editor-toolbar';
           >
             <app-editor-toolbar />
             <div
-              class="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-8 px-10 py-10 leading-loose md:px-14 lg:py-18"
+              class="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-8 px-10 py-10 md:px-14 lg:py-18"
             >
               <textarea
                 rows="1"
@@ -110,7 +110,7 @@ import { EditorToolbar } from './editor-toolbar';
                 scEditorContent
                 ariaLabel="Text"
                 placeholder="Start writing…"
-                class="article-text max-h-none min-h-60 overflow-visible p-0"
+                class="max-h-none min-h-60 overflow-visible p-0"
               ></div>
             </div>
           </section>
@@ -138,10 +138,7 @@ import { EditorToolbar } from './editor-toolbar';
               {{ articleForm.title().value() || 'Untitled Article' }}
             </h2>
           </div>
-          <div
-            class="article-text leading-loose"
-            [scEditorView]="articleForm.body().value()"
-          ></div>
+          <div [scEditorView]="articleForm.body().value()"></div>
         </div>
       </ng-template>
     </div>

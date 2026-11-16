@@ -118,7 +118,7 @@ const BLOCK_LABEL: Partial<Record<ScEditorBlockType, string>> = {
     <div
       scToolbar
       aria-label="Formatting"
-      class="flex-nowrap justify-start gap-0 bg-transparent"
+      class="w-full flex-nowrap justify-start gap-0 border-b bg-transparent p-2 shadow-none ring-0"
     >
       <div scToolbarWidgetGroup>
         <div scMenuProvider>

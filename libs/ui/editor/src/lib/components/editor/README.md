@@ -460,7 +460,7 @@ Its `layout` sets how it sits in the box (`data-layout`):
 <div scEditorContent ariaLabel="Article" layout="page" class="max-h-[600px] min-h-[400px]"></div>
 ```
 
-The editor's styles are your preset's `editor.css`: the placeholder, task lists — their box as the style's `scCheckbox` — tables with cells to write in, highlights, search matches and the kept selection, in plain CSS on the theme's `--border`, `--input`, `--muted`, `--muted-foreground`, `--primary`, `--ring` and `--accent`, with the style's corners (its Typeset variables: tables as its code block, search matches and selected nodes as its inline code). The highlight colours and the search matches' are your theme's too — add them at the end of your `styles.css`, a section of their own after shadcn's tokens. Matches pale yellow, the current one orange (as browsers and code editors do), underlined in a shade of it so it isn't told by colour alone:
+The editor's styles are your preset's `editor.css`: the placeholder, task lists — their box as the style's `scCheckbox` — tables with cells to write in, highlights, search matches and the kept selection, in plain CSS on the theme's `--border`, `--input`, `--muted`, `--muted-foreground`, `--primary`, `--ring` and `--accent`, with the style's corners (its Typeset variables: tables as its code block, search matches and selected nodes as its inline code). The highlight colours and the search matches' are your theme's too — add them to your theme, at the end of its own `:root` and `.dark` (your `styles.css`), with its other tokens. Matches pale yellow, the current one orange (as browsers and code editors do), underlined in a shade of it so it isn't told by colour alone:
 
 ```css
 :root {

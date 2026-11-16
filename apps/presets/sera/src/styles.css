@@ -126,6 +126,15 @@
   /* The traffic chart's lines (shadcn's theme: { light, dark }). */
   --traffic-views: var(--chart-5);
   --traffic-unique: var(--chart-1);
+  /* The editor's highlight colours (scEditorHighlightColor values) and search
+     matches: pale yellow, the current one orange (as browsers do). */
+  --editor-highlight-1: oklch(0.945 0.12 100);
+  --editor-highlight-2: oklch(0.93 0.08 150);
+  --editor-highlight-3: oklch(0.92 0.06 240);
+  --editor-highlight-4: oklch(0.92 0.06 300);
+  --editor-highlight-5: oklch(0.92 0.07 20);
+  --editor-search-match: oklch(0.945 0.12 100 / 60%);
+  --editor-search-current: oklch(0.85 0.14 65);
 }
 
 .dark {
@@ -162,6 +171,15 @@
   --sidebar-ring: oklch(0.547 0.021 43.1);
   --traffic-views: var(--chart-1);
   --traffic-unique: var(--chart-2);
+  /* The editor's highlight colours (scEditorHighlightColor values) and search
+     matches: pale yellow, the current one orange (as browsers do). */
+  --editor-highlight-1: oklch(0.45 0.09 95);
+  --editor-highlight-2: oklch(0.42 0.08 150);
+  --editor-highlight-3: oklch(0.42 0.08 250);
+  --editor-highlight-4: oklch(0.42 0.09 300);
+  --editor-highlight-5: oklch(0.42 0.1 20);
+  --editor-search-match: oklch(0.45 0.09 95 / 60%);
+  --editor-search-current: oklch(0.52 0.13 55);
 }
 
 @layer base {
@@ -176,48 +194,4 @@
   html {
     @apply font-sans;
   }
-}
-
-/*
- * An article's text — in Edit Article's editor and its preview — as
- * shadcn's screen sets it: loose lines, wide gaps, Sera's headings.
- */
-.article-text :is(p, li) {
-  line-height: 2;
-}
-
-.article-text p:not(:first-child) {
-  margin-top: 2rem;
-}
-
-.article-text :is(h1, h2, h3, h4) {
-  font-family: var(--font-heading);
-  font-weight: 500;
-  letter-spacing: var(--tracking-wide);
-  text-transform: uppercase;
-}
-
-/*
- * The editor's highlight colours (scEditorHighlightColor values) and search
- * matches (pale yellow; the current one orange, as browsers and code editors
- * do): the theme's own, after shadcn's tokens and base above.
- */
-:root {
-  --editor-highlight-1: oklch(0.945 0.12 100);
-  --editor-highlight-2: oklch(0.93 0.08 150);
-  --editor-highlight-3: oklch(0.92 0.06 240);
-  --editor-highlight-4: oklch(0.92 0.06 300);
-  --editor-highlight-5: oklch(0.92 0.07 20);
-  --editor-search-match: oklch(0.945 0.12 100 / 60%);
-  --editor-search-current: oklch(0.85 0.14 65);
-}
-
-.dark {
-  --editor-highlight-1: oklch(0.45 0.09 95);
-  --editor-highlight-2: oklch(0.42 0.08 150);
-  --editor-highlight-3: oklch(0.42 0.08 250);
-  --editor-highlight-4: oklch(0.42 0.09 300);
-  --editor-highlight-5: oklch(0.42 0.1 20);
-  --editor-search-match: oklch(0.45 0.09 95 / 60%);
-  --editor-search-current: oklch(0.52 0.13 55);
 }
