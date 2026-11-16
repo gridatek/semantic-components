@@ -69,7 +69,7 @@ test('on a scrolled page, the first selection shows it by the text', async ({
       position: { x: 10, y: 8 },
     });
     await expect(toolbar).toBeVisible({ timeout: 2000 });
-  }).toPass();
+  }).toPass({ timeout: 15_000 });
   await expect(toolbar).toBeInViewport({ ratio: 1 });
   const text = await editor.boundingBox();
   const box = await toolbar.boundingBox();

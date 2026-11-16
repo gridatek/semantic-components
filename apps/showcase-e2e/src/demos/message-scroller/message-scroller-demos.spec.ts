@@ -83,12 +83,12 @@ test('Conversation: the keyboard reaches and scrolls it', async ({ page }) => {
   await expect(async () => {
     await press(page, 'Home');
     await expect.poll(async () => (await scroll(page)).top).toBe(0);
-  }).toPass();
+  }).toPass({ timeout: 15_000 });
   await expect(jump(page)).toHaveAttribute('data-active', 'true');
   await expect(async () => {
     await press(page, 'End');
     await atEnd(page);
-  }).toPass();
+  }).toPass({ timeout: 15_000 });
 });
 
 test('Streaming: the question near the top, then the end followed', async ({
