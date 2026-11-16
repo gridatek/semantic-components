@@ -17,19 +17,22 @@ test('Search, on the long page: its close button and Escape go back to the text 
     .getByRole('button', { name: 'Search and replace' })
     .first();
   await trigger.scrollIntoViewIfNeeded();
-  for (const close of ['button', 'Escape'] as const) {
+  const input = page.getByRole('searchbox', { name: 'Search' }).first();
+  const closers = {
+    'close button': () =>
+      page.getByRole('button', { name: 'Close search' }).first().click(),
+    Escape: () => input.press('Escape'),
+  };
+  for (const [name, close] of Object.entries(closers)) {
     await trigger.click();
-    const input = page.getByRole('searchbox', { name: 'Search' }).first();
     await input.fill('the');
     await input.press('Enter');
     // Settled: the match scrolled to, the bar open.
     // eslint-disable-next-line playwright/no-wait-for-timeout
     await page.waitForTimeout(400);
     const before = await page.evaluate(() => scrollY);
-    if (close === 'button')
-      await page.getByRole('button', { name: 'Close search' }).first().click();
-    else await input.press('Escape');
+    await close();
     await expect(input).toBeHidden();
-    expect(await page.evaluate(() => scrollY), close).toBe(before);
+    expect(await page.evaluate(() => scrollY), name).toBe(before);
   }
 });
