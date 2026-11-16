@@ -14,6 +14,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentsTypesetDemoContainer } from './demos/components-typeset-demo-container';
 import { HeadingsTypesetDemoContainer } from './demos/headings-typeset-demo-container';
+import { PageTypesetDemoContainer } from './demos/page-typeset-demo-container';
 import { RtlTypesetDemoContainer } from './demos/rtl-typeset-demo-container';
 import { TableTypesetDemoContainer } from './demos/table-typeset-demo-container';
 import { TextTypesetDemoContainer } from './demos/text-typeset-demo-container';
@@ -32,6 +33,7 @@ interface Row {
     Anatomy,
     TypesetUsageDemoContainer,
     HeadingsTypesetDemoContainer,
+    PageTypesetDemoContainer,
     TextTypesetDemoContainer,
     TuningTypesetDemoContainer,
     ComponentsTypesetDemoContainer,
@@ -84,26 +86,40 @@ interface Row {
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>A container or the directive</h2>
+        <h2 scTypeset appToc>Two ways</h2>
+        <p class="text-muted-foreground">
+          The same rules reach your text in two ways; pick by what the text is.
+        </p>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            In a <code scTypeset>typeset</code> container, plain elements are
-            enough: <code scTypeset>h2</code>, <code scTypeset>p</code>, lists,
-            tables, code. <code scTypeset>scTypeset</code> is for text with no
-            container around it — a website's page title, a section's heading.
+            <strong class="text-foreground">A container</strong>
+            (<code scTypeset>class="typeset"</code>): its plain elements are set
+            — headings, paragraphs, lists, quotes, code, tables — with no
+            directive on any. Components inside keep their look;
+            <code scTypeset>not-typeset</code> opts out the rest.
           </li>
           <li>
-            It marks the element <code scTypeset>data-typeset</code>, set by its
-            tag. What depends on its children isn't — the items of a list, code
-            inside a heading: use a container for those.
-          </li>
-          <li>
-            Tune it with the variables, on the container, on a preset class of
-            yours (<code scTypeset>.typeset-chat</code>) or on
-            <code scTypeset>:root</code> for the whole app — elements on their
-            own follow too.
+            <strong class="text-foreground">The directive</strong>
+            (<code scTypeset>scTypeset</code>): on one element with no container
+            around it, set by its tag. What depends on its children isn't — the
+            items of a list, code inside a heading.
           </li>
         </ul>
+        <p class="text-muted-foreground">
+          <strong class="text-foreground">Our recommendation:</strong> a
+          container for reading text — content you don't write the markup of
+          (markdown, a CMS, a chat answer) and long-form pages (an article, a
+          blog post, a docs page): one class, and every element in it follows,
+          lists and all. The directive for a few pieces of text placed among UI
+          — a dashboard's title, a settings section's heading, a paragraph in a
+          card — where a container would also set the layout's own lists and
+          links. In a container, the directive changes nothing.
+        </p>
+        <p class="text-muted-foreground">
+          Either way, the variables tune it — on the container, on a preset
+          class of yours (<code scTypeset>.typeset-chat</code>) or on
+          <code scTypeset>:root</code> for the whole app.
+        </p>
       </section>
 
       <section class="space-y-4">
@@ -124,6 +140,7 @@ interface Row {
 
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
+        <app-page-typeset-demo-container />
         <app-headings-typeset-demo-container />
         <app-text-typeset-demo-container />
         <app-tuning-typeset-demo-container />

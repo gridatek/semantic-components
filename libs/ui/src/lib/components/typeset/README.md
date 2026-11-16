@@ -10,9 +10,9 @@ Import the file in your global stylesheet, after Tailwind:
 @import '@semantic-components/ui/styles/typeset.css';
 ```
 
-## Usage
+## Two ways
 
-Content you don't write the markup of goes in a container — its plain elements are set:
+**A container** (`class="typeset"`): its plain elements are set — headings, paragraphs, lists, quotes, code, tables — with no directive on any. Components inside keep their look (they have a `data-slot`); `not-typeset` opts out the rest.
 
 ```html
 <article class="typeset">
@@ -21,7 +21,7 @@ Content you don't write the markup of goes in a container — its plain elements
 </article>
 ```
 
-Text that stands on its own — a page title, a section's heading, a paragraph under it — takes `scTypeset`:
+**The directive** (`scTypeset`): on one element with no container around it, set by its tag. What depends on its children isn't (the items of a list, code inside a heading).
 
 ```typescript
 import { ScTypeset } from '@semantic-components/ui';
@@ -35,6 +35,8 @@ import { ScTypeset } from '@semantic-components/ui';
 })
 export class MyComponent {}
 ```
+
+**Our recommendation:** a container for reading text — content you don't write the markup of (markdown, a CMS, a chat answer) and long-form pages (an article, a blog post, a docs page): one class, and every element in it follows, lists and all. The directive for a few pieces of text placed among UI — a dashboard's title, a settings section's heading, a paragraph in a card — where a container would also set the layout's own lists and links. In a container, the directive changes nothing.
 
 ## Components
 

@@ -119,3 +119,20 @@ test('RTL: right to left, the quote’s rule on the right', async ({ page }) => 
   await expect(quote).toHaveCSS('border-right-width', '2px');
   await expect(quote).toHaveCSS('border-left-width', '0px');
 });
+
+test('Whole page: one container — its elements set, a component its own, the nav opted out', async ({
+  page,
+}) => {
+  await page.goto(demo('page'));
+  const main = page.locator('article.typeset');
+  // Set by the container, no directive: a heading's size, a list's bullets.
+  await expect(main.locator('h1')).toHaveCSS('font-weight', '600');
+  await expect(main.locator('ul')).toHaveCSS('list-style-type', 'disc');
+  // A component keeps its look; the nav's links aren't the content's.
+  await expect(
+    page.getByRole('button', { name: 'Read the ending' }),
+  ).toHaveAttribute('data-slot', 'button');
+  await expect(
+    page.getByRole('navigation', { name: 'Blog' }).getByRole('link').first(),
+  ).not.toHaveCSS('text-decoration-line', 'underline');
+});

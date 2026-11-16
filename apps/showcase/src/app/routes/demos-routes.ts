@@ -7383,6 +7383,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/typeset',
     children: [
       {
+        path: 'page-typeset-demo',
+        loadComponent: () =>
+          import('../pages/docs/typeset/demos/page-typeset-demo').then(
+            (m) => m.PageTypesetDemo,
+          ),
+      },
+      {
         path: 'typeset-usage-demo',
         loadComponent: () =>
           import('../pages/docs/typeset/demos/typeset-usage-demo').then(
