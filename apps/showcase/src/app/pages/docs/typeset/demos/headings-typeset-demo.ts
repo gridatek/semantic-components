@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-headings-typography-demo',
+  selector: 'app-headings-typeset-demo',
   imports: [ScHeading],
   template: `
     <div class="space-y-4">
@@ -15,4 +15,4 @@ import { ScHeading } from '@semantic-components/ui';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HeadingsTypographyDemo {}
+export class HeadingsTypesetDemo {}

@@ -7380,20 +7380,13 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/typography',
+    path: 'demos/typeset',
     children: [
       {
-        path: 'headings-typography-demo',
+        path: 'headings-typeset-demo',
         loadComponent: () =>
-          import('../pages/docs/typography/demos/headings-typography-demo').then(
-            (m) => m.HeadingsTypographyDemo,
-          ),
-      },
-      {
-        path: 'underline-typography-demo',
-        loadComponent: () =>
-          import('../pages/docs/typography/demos/underline-typography-demo').then(
-            (m) => m.UnderlineTypographyDemo,
+          import('../pages/docs/typeset/demos/headings-typeset-demo').then(
+            (m) => m.HeadingsTypesetDemo,
           ),
       },
     ],

@@ -804,9 +804,9 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tree/tree-page'),
       },
       {
-        path: 'typography',
-        title: 'Typography - Semantic Components',
-        loadComponent: () => import('../pages/docs/typography/typography-page'),
+        path: 'typeset',
+        title: 'Typeset - Semantic Components',
+        loadComponent: () => import('../pages/docs/typeset/typeset-page'),
       },
       {
         path: 'video-player',

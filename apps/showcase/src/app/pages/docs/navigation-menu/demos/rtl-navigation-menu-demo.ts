@@ -146,7 +146,7 @@ export class RtlNavigationMenuDemo {
       text: 'كيف تثبت المتطلبات وتنظم تطبيقك.',
     },
     {
-      link: '/docs/components/typography',
+      link: '/docs/components/typeset',
       title: 'الطباعة',
       text: 'أنماط العناوين والفقرات والقوائم…',
     },

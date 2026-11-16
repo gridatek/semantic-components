@@ -69,7 +69,7 @@ export * from './toggle-group';
 export * from './toolbar';
 export * from './tooltip';
 export * from './tree';
-export * from './typography';
+export * from './typeset';
 export * from './attachment';
 export * from './audio-player';
 export * from './barcode-scanner';

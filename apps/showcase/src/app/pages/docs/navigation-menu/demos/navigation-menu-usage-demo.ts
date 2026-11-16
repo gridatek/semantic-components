@@ -141,8 +141,8 @@ export class NavigationMenuUsageDemo {
       text: 'How to install dependencies and structure your app.',
     },
     {
-      link: '/docs/components/typography',
-      title: 'Typography',
+      link: '/docs/components/typeset',
+      title: 'Typeset',
       text: 'Styles for headings, paragraphs, lists…',
     },
   ];

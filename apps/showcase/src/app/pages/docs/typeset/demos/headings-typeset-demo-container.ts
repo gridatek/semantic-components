@@ -1,28 +1,28 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { HeadingsTypographyDemo } from './headings-typography-demo';
+import { HeadingsTypesetDemo } from './headings-typeset-demo';
 
 @Component({
-  selector: 'app-headings-typography-demo-container',
-  imports: [DemoContainer, HeadingsTypographyDemo],
+  selector: 'app-headings-typeset-demo-container',
+  imports: [DemoContainer, HeadingsTypesetDemo],
   template: `
     <app-demo-container
       title="Headings"
-      demoUrl="/demos/typography/headings-typography-demo"
+      demoUrl="/demos/typeset/headings-typeset-demo"
       [code]="code"
     >
-      <app-headings-typography-demo />
+      <app-headings-typeset-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HeadingsTypographyDemoContainer {
+export class HeadingsTypesetDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScHeading } from '@semantic-components/ui';
 
 @Component({
-  selector: 'app-headings-typography-demo',
+  selector: 'app-headings-typeset-demo',
   imports: [ScHeading],
   template: \`
     <div class="space-y-4">
@@ -35,5 +35,5 @@ import { ScHeading } from '@semantic-components/ui';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HeadingsTypographyDemo {}`;
+export class HeadingsTypesetDemo {}`;
 }

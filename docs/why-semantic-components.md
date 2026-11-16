@@ -250,10 +250,11 @@ Add the styles to your global stylesheet:
 
 ```css
 @import '@semantic-components/ui/styles/reduced-motion.css';
+@import '@semantic-components/ui/styles/typeset.css';
 @source '../node_modules/@semantic-components/ui';
 ```
 
-The `@import` brings in the reduced-motion rules (the enter and exit animations keep their fades, lose their movement); the theme itself (Tailwind, the CDK overlay styles, the CSS variables) is your own stylesheet, as in shadcn. The `@source` tells Tailwind v4 to scan the library's files so its utility classes are included in your build.
+The `@import`s bring in the reduced-motion rules (the enter and exit animations keep their fades, lose their movement) and Typeset (headings, and rendered markdown in a `typeset` container); the theme itself (Tailwind, the CDK overlay styles, the CSS variables) is your own stylesheet, as in shadcn. The `@source` tells Tailwind v4 to scan the library's files so its utility classes are included in your build.
 
 Then import what you need directly in your standalone component:
 

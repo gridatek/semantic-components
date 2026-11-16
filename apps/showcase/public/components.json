@@ -1238,8 +1238,8 @@
     "hidden": true
   },
   {
-    "name": "Typography",
-    "path": "typography",
+    "name": "Typeset",
+    "path": "typeset",
     "description": "Styles for headings, paragraphs, lists, and other text elements.",
     "status": "Experimental",
     "library": "ui",

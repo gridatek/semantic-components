@@ -166,6 +166,7 @@ export default class UiPage {
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/geist';
 @import '@semantic-components/ui/styles/reduced-motion.css';
+@import '@semantic-components/ui/styles/typeset.css';
 
 /* The library and your preset (its file only): Tailwind skips node_modules.
    Adjust the path to node_modules to your project. */

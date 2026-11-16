@@ -8,6 +8,7 @@
 @import '@fontsource-variable/geist';
 @import '@fontsource-variable/noto-sans-arabic';
 @import '../../../libs/ui/src/lib/styles/reduced-motion.css';
+@import '../../../libs/ui/src/lib/styles/typeset.css';
 
 /*
  * The theme: shadcn's nova (from a generated app, see shadcn-reference), with
