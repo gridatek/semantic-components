@@ -437,10 +437,8 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
         <h2 scTypeset appToc>RTL</h2>
         <p class="text-muted-foreground">
           In a right-to-left page: the toolbar starts at the right and Left
-          moves to the next button; the title and the text run from the right,
-          list markers on the right; between the title and the text, Left at the
-          end of the title goes forward into the text and Right at the text's
-          start comes back.
+          moves to the next button; the text runs from the right, list markers
+          on the right.
         </p>
         <app-rtl-editor-demo-container />
       </section>
