@@ -1,6 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
 import { box } from '../../looks';
+import { expectNoHorizontalScroll } from '../../mobile';
 import { expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/scroll-area/${name}-scroll-area-demo`;
@@ -175,4 +176,21 @@ test('RTL: the scrollbar at the end — the left', async ({ page }) => {
   await page.goto(demo('rtl'));
   const [r, b] = [await box(root(page)), await box(bar(page, 'vertical'))];
   expect(Math.round(b.x)).toBeLessThanOrEqual(Math.round(r.x) + 1);
+});
+
+test('On a phone, 360px wide: the demos fit; touch scrolls the viewport (no touch-action of ours) @mobile', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 740 });
+  for (const url of [
+    '/demos/scroll-area/scroll-area-usage-demo',
+    demo('horizontal'),
+    demo('both'),
+    demo('scroll-fade'),
+    demo('rtl'),
+  ]) {
+    await page.goto(url);
+    await expectNoHorizontalScroll(page);
+    await expect(viewport(page)).toHaveCSS('touch-action', 'auto');
+  }
 });

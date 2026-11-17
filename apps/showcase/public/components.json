@@ -894,8 +894,7 @@
     "description": "A native scroll container with custom scrollbars — in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Layout",
-    "hidden": true
+    "category": "Layout"
   },
   {
     "name": "Select",
