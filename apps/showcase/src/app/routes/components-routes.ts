@@ -760,6 +760,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/toast/toast-page'),
       },
       {
+        path: 'toc',
+        title: 'Table of Contents - Semantic Components',
+        loadComponent: () => import('../pages/docs/toc/toc-page'),
+      },
+      {
         path: 'toggle',
         title: 'Toggle - Semantic Components',
         loadComponent: () => import('../pages/docs/toggle/toggle-page'),

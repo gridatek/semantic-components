@@ -7058,6 +7058,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/toc',
+    children: [
+      {
+        path: 'toc-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/toc/demos/toc-usage-demo').then(
+            (m) => m.TocUsageDemo,
+          ),
+      },
+      {
+        path: 'basic-toc-demo',
+        loadComponent: () =>
+          import('../pages/docs/toc/demos/basic-toc-demo').then(
+            (m) => m.BasicTocDemo,
+          ),
+      },
+      {
+        path: 'levels-toc-demo',
+        loadComponent: () =>
+          import('../pages/docs/toc/demos/levels-toc-demo').then(
+            (m) => m.LevelsTocDemo,
+          ),
+      },
+      {
+        path: 'links-toc-demo',
+        loadComponent: () =>
+          import('../pages/docs/toc/demos/links-toc-demo').then(
+            (m) => m.LinksTocDemo,
+          ),
+      },
+      {
+        path: 'rtl-toc-demo',
+        loadComponent: () =>
+          import('../pages/docs/toc/demos/rtl-toc-demo').then(
+            (m) => m.RtlTocDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/toggle',
     children: [
       {

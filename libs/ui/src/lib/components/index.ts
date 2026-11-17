@@ -62,6 +62,7 @@ export * from './theme';
 export * from './time-input';
 export * from './time-picker';
 export * from './toast';
+export * from './toc';
 export * from './toggle';
 export * from './toggle-group';
 export * from './toolbar';
