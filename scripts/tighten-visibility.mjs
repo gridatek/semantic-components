@@ -19,12 +19,19 @@
  *                                                  # (every project is still checked)
  */
 import { execFile } from 'node:child_process';
-import { dirname, relative, resolve } from 'node:path';
+import { dirname, isAbsolute, relative, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { promisify, stripVTControlCharacters } from 'node:util';
 import { Node, Project, Scope, SyntaxKind } from 'ts-morph';
 
 const run = promisify(execFile);
-const root = resolve(dirname(new URL(import.meta.url).pathname), '..');
+// ngc run by node itself: `npx` can't be spawned without a shell on Windows.
+const NGC = resolve(
+  dirname(fileURLToPath(import.meta.url)),
+  '../node_modules/@angular/compiler-cli/bundles/src/bin/ngc.js',
+);
+// fileURLToPath, not URL.pathname: on Windows that is /D:/… (a doubled drive).
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 const PROJECTS = [
   'apps/showcase/tsconfig.app.json',
@@ -62,9 +69,13 @@ project.addSourceFilesAtPaths(
 );
 
 const scopes = process.argv.slice(2).map((p) => resolve(root, p));
+// Relative paths: ts-morph's use `/`, resolve's `\` on Windows.
 const inScope = (file) =>
   scopes.length === 0 ||
-  scopes.some((s) => file === s || file.startsWith(s + '/'));
+  scopes.some((s) => {
+    const r = relative(s, file);
+    return r === '' || (!r.startsWith('..') && !isAbsolute(r));
+  });
 
 /** className → ClassDeclaration[] (names repeat across demos). */
 const classes = new Map();
@@ -104,13 +115,9 @@ function eligible(m) {
  * class (a ref an app holds, an object handed to a third-party library).
  */
 function isLibraryApi(cls) {
-  if (
-    !cls
-      .getSourceFile()
-      .getFilePath()
-      .startsWith(root + '/libs/')
-  )
-    return false;
+  // ts-morph's paths use `/`; `root` uses `\` on Windows: compare relatively.
+  const path = relative(root, cls.getSourceFile().getFilePath());
+  if (!/^libs[\\/]/.test(path)) return false;
   const decorator = cls
     .getDecorators()
     .find((d) => ['Component', 'Directive', 'Pipe'].includes(d.getName()));
@@ -226,7 +233,7 @@ function classAt(file, line, col) {
 
 async function check(tsconfig) {
   try {
-    await run('npx', ['ngc', '-p', tsconfig, '--noEmit'], {
+    await run(process.execPath, [NGC, '-p', tsconfig, '--noEmit'], {
       cwd: root,
       maxBuffer: 1 << 28,
     });
@@ -238,7 +245,8 @@ async function check(tsconfig) {
     const output = stripVTControlCharacters(e.stdout + e.stderr);
     const diags = [];
     let open = false;
-    for (const line of output.split('\n')) {
+    // \r\n on Windows: `.` stops at the \r, so split on both.
+    for (const line of output.split(/\r?\n/)) {
       const m = /^(.+?):(\d+):(\d+) - error (\w+): (.*)$/.exec(line);
       if (m) {
         diags.push({
