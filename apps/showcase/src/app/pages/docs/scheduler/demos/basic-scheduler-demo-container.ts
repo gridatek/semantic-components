@@ -18,7 +18,7 @@ import { BasicSchedulerDemo } from './basic-scheduler-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicSchedulerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScScheduler,
   ScSchedulerEvent,

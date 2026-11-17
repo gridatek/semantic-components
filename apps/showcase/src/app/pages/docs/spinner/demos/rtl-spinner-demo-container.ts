@@ -18,7 +18,7 @@ import { RtlSpinnerDemo } from './rtl-spinner-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSpinnerDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScBadge, ScButton, ScSpinner } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';

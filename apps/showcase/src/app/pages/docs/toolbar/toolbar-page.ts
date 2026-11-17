@@ -153,7 +153,7 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
   encapsulation: ViewEncapsulation.None,
 })
 export default class ToolbarPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScToolbar, ScToolbarSeparator, ScToolbarWidget, ScToolbarWidgetGroup } from '@semantic-components/ui';",
     markup: [
@@ -167,7 +167,7 @@ export default class ToolbarPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScToolbar',
       selector: 'div[scToolbar]',

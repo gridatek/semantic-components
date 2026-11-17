@@ -134,13 +134,13 @@ export class MediaHeader {
   private readonly accept = UPLOAD_ACCEPT;
 
   /** The toggle group's value: the view, pressed. */
-  protected readonly values = linkedSignal<string[]>(() => {
+  private readonly values = linkedSignal<string[]>(() => {
     const view = this.view();
     return view ? [view] : [];
   });
 
   /** One is always on: pressing the current one again keeps it. */
-  protected choose(values: string[]): void {
+  private choose(values: string[]): void {
     const next = values[0];
     if (next === 'grid' || next === 'table') this.view.set(next);
     else this.values.set([this.view() ?? 'grid']);

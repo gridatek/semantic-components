@@ -64,7 +64,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ActivityTimelineDemo {
-  readonly events = [
+  private readonly events = [
     {
       kind: 'release',
       title: 'Version 2.4 released',

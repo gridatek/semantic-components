@@ -55,19 +55,19 @@ import { isNumberCharacter } from './number-field-format';
 export class ScNumberFieldInput {
   private readonly inputStyles = injectPreset().input;
   private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef);
-  protected readonly number = inject(SC_NUMBER_FIELD);
-  protected readonly field = inject(SC_FIELD, { optional: true });
+  private readonly number = inject(SC_NUMBER_FIELD);
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-number-field-');
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
 
-  readonly id = computed(
+  private readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
-  protected readonly ariaDescribedBy = computed(
+  private readonly ariaDescribedBy = computed(
     () =>
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
@@ -75,19 +75,19 @@ export class ScNumberFieldInput {
   );
 
   /** What's shown: the value formatted, or what's being typed. */
-  protected readonly text = signal('');
-  protected readonly focused = signal(false);
+  private readonly text = signal('');
+  private readonly focused = signal(false);
   /** Typed since the last commit. */
   private editing = false;
 
   /** Whole numbers from 0: a numeric keypad; otherwise one with a separator. */
-  protected readonly inputMode = computed(() =>
+  private readonly inputMode = computed(() =>
     Number.isInteger(this.number.step()) && (this.number.min() ?? -1) >= 0
       ? 'numeric'
       : 'decimal',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.inputStyles, 'text-center tabular-nums', this.classInput()),
   );
 
@@ -106,7 +106,7 @@ export class ScNumberFieldInput {
   }
 
   /** Only what can be part of a number gets typed or pasted. */
-  protected onBeforeInput(event: InputEvent): void {
+  private onBeforeInput(event: InputEvent): void {
     const data = event.data;
     if (!data || !event.inputType.startsWith('insert')) return;
     const formatter = this.number.formatter();
@@ -115,7 +115,7 @@ export class ScNumberFieldInput {
     }
   }
 
-  protected onInput(event: Event): void {
+  private onInput(event: Event): void {
     const text = (event.target as HTMLInputElement).value;
     this.editing = true;
     this.text.set(text);
@@ -125,13 +125,13 @@ export class ScNumberFieldInput {
     else if (!Number.isNaN(parsed)) this.number.value.set(parsed);
   }
 
-  protected onBlur(): void {
+  private onBlur(): void {
     this.focused.set(false);
     this.commit();
     this.number.touch.emit();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (event.ctrlKey || event.metaKey) return;
     const number = this.number;
     switch (event.key) {
@@ -170,7 +170,7 @@ export class ScNumberFieldInput {
   }
 
   /** The wheel steps the value — while focused, and if allowed. */
-  protected onWheel(event: WheelEvent): void {
+  private onWheel(event: WheelEvent): void {
     if (!this.number.allowWheelScrub() || !this.focused() || !event.deltaY) {
       return;
     }

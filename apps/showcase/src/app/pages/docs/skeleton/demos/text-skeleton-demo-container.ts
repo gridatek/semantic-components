@@ -18,7 +18,7 @@ import { TextSkeletonDemo } from './text-skeleton-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TextSkeletonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSkeleton } from '@semantic-components/ui';
 
 /** A paragraph: full lines, the last one shorter. */

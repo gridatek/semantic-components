@@ -47,9 +47,9 @@ import { SiCircleCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class AnnouncedAlertDemo {
-  protected readonly saved = signal(false);
+  private readonly saved = signal(false);
 
-  protected save(): void {
+  private save(): void {
     this.saved.set(true);
   }
 }

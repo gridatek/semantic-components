@@ -18,7 +18,7 @@ import { ControlledTooltipDemo } from './controlled-tooltip-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledTooltipDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScTooltip,

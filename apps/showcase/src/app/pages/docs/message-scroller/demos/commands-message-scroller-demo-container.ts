@@ -18,7 +18,7 @@ import { CommandsMessageScrollerDemo } from './commands-message-scroller-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CommandsMessageScrollerDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   ViewEncapsulation,
   computed,

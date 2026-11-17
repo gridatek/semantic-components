@@ -14,7 +14,7 @@ import { ReadonlyRatingDemo } from './readonly-rating-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ReadonlyRatingDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScRating,
   ScRatingGroup,

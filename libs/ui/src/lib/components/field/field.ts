@@ -93,7 +93,7 @@ export class ScField implements ScFieldContext {
     () => this.ownFormField ?? this.childFormField(),
   );
 
-  protected readonly role = computed(() => {
+  private readonly role = computed(() => {
     const element: HTMLElement = this.elementRef.nativeElement;
     // A label keeps its own semantics. Inside a label (a choice card) it is
     // the label's control and texts, not a group: a group would hide the
@@ -103,7 +103,7 @@ export class ScField implements ScFieldContext {
     return 'group';
   });
 
-  readonly invalid = computed(() => {
+  private readonly invalid = computed(() => {
     if (this.invalidInput()) return true;
     return (
       (this.formField()?.state().touched() &&
@@ -118,7 +118,7 @@ export class ScField implements ScFieldContext {
   });
 
   /** An async validator (a server call) is running for the field. */
-  readonly pending = computed(
+  private readonly pending = computed(
     () => this.formField()?.state().pending() ?? false,
   );
 
@@ -160,7 +160,7 @@ export class ScField implements ScFieldContext {
   private readonly isLabel =
     (this.elementRef.nativeElement as HTMLElement).tagName === 'LABEL';
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.isLabel &&
         cn(

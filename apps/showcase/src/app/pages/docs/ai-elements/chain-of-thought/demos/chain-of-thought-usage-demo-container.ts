@@ -18,7 +18,7 @@ import { ChainOfThoughtUsageDemo } from './chain-of-thought-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChainOfThoughtUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

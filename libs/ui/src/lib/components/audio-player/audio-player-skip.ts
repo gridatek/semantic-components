@@ -18,7 +18,7 @@ import { ScAudioPlayer } from './audio-player';
 export class ScAudioPlayerSkip {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly player = inject(ScAudioPlayer);
+  private readonly player = inject(ScAudioPlayer);
 
   readonly seconds = input.required<number>({
     alias: 'scAudioPlayerSkip',
@@ -27,7 +27,7 @@ export class ScAudioPlayerSkip {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

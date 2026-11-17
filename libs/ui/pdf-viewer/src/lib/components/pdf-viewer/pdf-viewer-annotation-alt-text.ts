@@ -20,7 +20,7 @@ import type { ScPdfEditorAnnotation } from './pdf-viewer-types';
 export class ScPdfViewerAnnotationAltText {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly annotation = input.required<ScPdfEditorAnnotation>({
     alias: 'scPdfViewerAnnotationAltText',
@@ -29,7 +29,7 @@ export class ScPdfViewerAnnotationAltText {
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('xs');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

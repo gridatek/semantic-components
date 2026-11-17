@@ -23,7 +23,7 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesQrCodeDemo {
-  readonly sizes = [
+  private readonly sizes = [
     { class: 'size-20', label: '80px' },
     { class: 'size-32', label: '128px' },
     { class: 'size-52', label: '208px (default)' },

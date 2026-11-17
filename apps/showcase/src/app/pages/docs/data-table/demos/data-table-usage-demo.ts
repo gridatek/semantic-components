@@ -132,12 +132,12 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class DataTableUsageDemo {
-  protected readonly amount = new Intl.NumberFormat('en-US', {
+  private readonly amount = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   });
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: PAYMENTS,

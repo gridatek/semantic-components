@@ -18,7 +18,7 @@ import { PagesCommandDemo } from './pages-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PagesCommandDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCommand,
   ScCommandEmpty,

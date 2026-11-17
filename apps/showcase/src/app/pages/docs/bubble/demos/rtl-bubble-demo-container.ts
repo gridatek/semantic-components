@@ -18,7 +18,7 @@ import { RtlBubbleDemo } from './rtl-bubble-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlBubbleDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,

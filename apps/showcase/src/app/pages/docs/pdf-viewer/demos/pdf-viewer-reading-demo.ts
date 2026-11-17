@@ -158,25 +158,25 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
 })
 export class PdfViewerReadingDemo {
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('block h-dvh w-full', this.classInput()),
   );
 
-  protected readonly readingMode = signal('default');
-  protected readonly pageColors = computed(
+  private readonly readingMode = signal('default');
+  private readonly pageColors = computed(
     () => READING_MODES[this.readingMode()] ?? null,
   );
   /** Turn on with the browser's caret browsing (F7). */
-  protected readonly caretBrowsing = signal(false);
+  private readonly caretBrowsing = signal(false);
 
-  protected setReadingMode(value: unknown): void {
+  private setReadingMode(value: unknown): void {
     const [mode] = Array.isArray(value) ? value : [value];
     if (typeof mode === 'string' && mode in READING_MODES) {
       this.readingMode.set(mode);
     }
   }
 
-  protected setCaretBrowsing(event: Event): void {
+  private setCaretBrowsing(event: Event): void {
     this.caretBrowsing.set((event.target as HTMLInputElement).checked);
   }
 }

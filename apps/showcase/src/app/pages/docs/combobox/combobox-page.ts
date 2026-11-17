@@ -194,7 +194,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class ComboboxPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScCombobox, ScComboboxInput, ScComboboxTrigger, ScComboboxClear,',
@@ -233,7 +233,7 @@ export default class ComboboxPage {
     ].join('\n'),
   };
 
-  protected readonly chips = {
+  private readonly chips = {
     imports:
       "import { ScComboboxMultiple, ScComboboxChips, ScComboboxChip, ScComboboxChipRemove } from '@semantic-components/ui';",
     markup: [
@@ -252,7 +252,7 @@ export default class ComboboxPage {
     ].join('\n'),
   };
 
-  protected readonly inside = {
+  private readonly inside = {
     imports:
       "import { ScComboboxValue, ScComboboxListContent } from '@semantic-components/ui';",
     markup: [
@@ -277,7 +277,7 @@ export default class ComboboxPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScCombobox',
       selector: 'div[scCombobox]',

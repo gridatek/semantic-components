@@ -180,7 +180,7 @@ import { WeekNumbersCalendarDemoContainer } from './demos/week-numbers-calendar-
   encapsulation: ViewEncapsulation.None,
 })
 export default class CalendarPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScCalendar, ScCalendarHeader, ScCalendarPrevious, ScCalendarNext,',
@@ -202,7 +202,7 @@ export default class CalendarPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScCalendar',
       selector: 'div[scCalendar]',

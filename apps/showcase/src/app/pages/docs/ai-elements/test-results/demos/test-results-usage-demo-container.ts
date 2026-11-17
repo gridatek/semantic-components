@@ -18,7 +18,7 @@ import { TestResultsUsageDemo } from './test-results-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TestResultsUsageDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,

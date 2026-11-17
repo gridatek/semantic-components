@@ -18,7 +18,7 @@ import { SecondaryButtonDemo } from './secondary-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SecondaryButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 
 @Component({

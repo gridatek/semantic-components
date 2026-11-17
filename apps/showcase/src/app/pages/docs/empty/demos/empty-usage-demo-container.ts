@@ -14,7 +14,7 @@ import { EmptyUsageDemo } from './empty-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class EmptyUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScEmpty,

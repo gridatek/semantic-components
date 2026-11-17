@@ -79,16 +79,16 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupsSelectDemo {
-  protected readonly fruits = [
+  private readonly fruits = [
     { value: 'apple', label: 'Apple' },
     { value: 'banana', label: 'Banana' },
     { value: 'blueberry', label: 'Blueberry' },
   ];
-  protected readonly vegetables = [
+  private readonly vegetables = [
     { value: 'carrot', label: 'Carrot' },
     { value: 'broccoli', label: 'Broccoli' },
     { value: 'spinach', label: 'Spinach' },
   ];
-  protected readonly all = [...this.fruits, ...this.vegetables];
-  protected readonly food = signal('');
+  private readonly all = [...this.fruits, ...this.vegetables];
+  private readonly food = signal('');
 }

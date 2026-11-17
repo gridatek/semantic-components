@@ -18,7 +18,7 @@ import { BasicCalendarDemo } from './basic-calendar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCalendarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

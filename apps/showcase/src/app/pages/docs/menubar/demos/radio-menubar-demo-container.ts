@@ -18,7 +18,7 @@ import { RadioMenubarDemo } from './radio-menubar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioMenubarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScMenu,
   ScMenuContent,

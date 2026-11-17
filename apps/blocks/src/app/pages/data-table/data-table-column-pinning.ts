@@ -46,7 +46,7 @@ export class DataTableColumnPinning {
   readonly columnPinning = input.required<ColumnPinningState>();
   readonly columnPinningChange = output<ColumnPinningState>();
 
-  togglePin(columnId: string, position: 'start' | 'end'): void {
+  private togglePin(columnId: string, position: 'start' | 'end'): void {
     const prev = this.columnPinning();
     const pinned = prev[position];
     if (pinned.includes(columnId)) {
@@ -62,7 +62,7 @@ export class DataTableColumnPinning {
     }
   }
 
-  reset(): void {
+  private reset(): void {
     this.columnPinningChange.emit({ start: [], end: [] });
   }
 }

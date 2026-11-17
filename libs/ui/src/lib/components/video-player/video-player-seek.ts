@@ -22,7 +22,7 @@ import { ScVideoPlayer } from './video-player';
   },
 })
 export class ScVideoPlayerSeek {
-  protected readonly player = inject(ScVideoPlayer);
+  private readonly player = inject(ScVideoPlayer);
   private readonly slider = inject(ScSlider);
 
   constructor() {
@@ -45,7 +45,7 @@ export class ScVideoPlayerSeek {
     });
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     const target = event.currentTarget as HTMLElement;
     const rect = target.getBoundingClientRect();
     const at = Math.min(

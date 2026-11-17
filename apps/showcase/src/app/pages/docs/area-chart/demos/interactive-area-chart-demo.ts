@@ -151,21 +151,23 @@ export class InteractiveAreaChartDemo {
     desktop: Math.round(250 + 150 * Math.sin(i / 5) + 60 * Math.sin(i / 1.7)),
     mobile: Math.round(200 + 100 * Math.cos(i / 6) + 50 * Math.sin(i / 2.3)),
   }));
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     desktop: { label: 'Desktop', color: 'var(--chart-1)' },
     mobile: { label: 'Mobile', color: 'var(--chart-2)' },
   };
   /** The days shown: the last 90, 30 or 7. */
-  readonly range = signal('90');
-  readonly data = computed(() => this.days.slice(-Number(this.range())));
+  private readonly range = signal('90');
+  private readonly data = computed(() =>
+    this.days.slice(-Number(this.range())),
+  );
   /** 2024-04-01 → Apr 1, in the app's locale. */
-  readonly day = (date: string) =>
+  private readonly day = (date: string) =>
     Temporal.PlainDate.from(date).toLocaleString(this.locale, {
       month: 'short',
       day: 'numeric',
     });
 
-  choose(value: string | string[] | null): void {
+  private choose(value: string | string[] | null): void {
     if (typeof value === 'string') this.range.set(value);
   }
 }

@@ -18,7 +18,7 @@ import { RtlCheckboxGroupDemo } from './rtl-checkbox-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCheckboxGroupDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
 

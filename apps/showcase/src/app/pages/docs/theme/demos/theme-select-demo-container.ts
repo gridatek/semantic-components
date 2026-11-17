@@ -18,7 +18,7 @@ import { ThemeSelectDemo } from './theme-select-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ThemeSelectDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScLabel,
   ScNativeSelect,

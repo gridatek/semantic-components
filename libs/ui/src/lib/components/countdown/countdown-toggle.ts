@@ -18,13 +18,13 @@ import { ScCountdown } from './countdown';
 export class ScCountdownToggle {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly countdown = inject(ScCountdown);
+  private readonly countdown = inject(ScCountdown);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('default');
   readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
@@ -35,7 +35,7 @@ export class ScCountdownToggle {
     ɵwarnIfUnnamed('scCountdownToggle');
   }
 
-  protected toggle(): void {
+  private toggle(): void {
     if (this.countdown.done()) {
       this.countdown.paused.set(false);
       this.countdown.reset();

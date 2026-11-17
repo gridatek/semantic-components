@@ -37,7 +37,7 @@ export class ScTree {
   readonly tree = inject(Tree);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col', this.classInput()),
   );
 }

@@ -28,12 +28,12 @@ import { ScTransferListPane } from './transfer-list-pane';
   },
 })
 export class ScTransferListListbox {
-  protected readonly pane = inject(ScTransferListPane);
+  private readonly pane = inject(ScTransferListPane);
   private readonly listbox = inject<Listbox<string>>(Listbox);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex h-72 flex-col gap-0.5 overflow-y-auto p-1 outline-none',
       'focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:ring-inset',
@@ -67,7 +67,7 @@ export class ScTransferListListbox {
     });
   }
 
-  protected onEnter(event: Event): void {
+  private onEnter(event: Event): void {
     event.preventDefault();
     this.pane.moveSelected();
   }

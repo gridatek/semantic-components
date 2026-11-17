@@ -18,7 +18,7 @@ import { FormatsColorPickerDemo } from './formats-color-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsColorPickerDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {

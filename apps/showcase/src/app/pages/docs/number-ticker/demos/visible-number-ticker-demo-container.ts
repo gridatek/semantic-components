@@ -19,7 +19,7 @@ import { VisibleNumberTickerDemo } from './visible-number-ticker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VisibleNumberTickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScFrame, ScNumberTicker } from '@semantic-components/ui';
 
 /** start="visible": landing-page figures that count up from zero when they are first scrolled into view. */

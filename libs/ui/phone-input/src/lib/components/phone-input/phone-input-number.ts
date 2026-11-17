@@ -53,7 +53,7 @@ function positionAfter(text: string, count: number): number {
 })
 export class ScPhoneInputNumber {
   private readonly inputStyles = injectPreset().input;
-  protected readonly phone = inject(SC_PHONE_INPUT);
+  private readonly phone = inject(SC_PHONE_INPUT);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
@@ -62,14 +62,14 @@ export class ScPhoneInputNumber {
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly id = computed(
+  private readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
-  protected readonly describedBy = computed(
+  private readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.inputStyles, this.classInput()),
   );
 
@@ -85,7 +85,7 @@ export class ScPhoneInputNumber {
     this.element.focus(options);
   }
 
-  protected onInput(): void {
+  private onInput(): void {
     const { value, selectionStart } = this.element;
     const caret = selectionStart ?? value.length;
     // Ends with a separator (one just typed, or left by deleting the digit
@@ -105,7 +105,7 @@ export class ScPhoneInputNumber {
    * character straight back. A character the format wouldn't put back (a
    * separator just typed at the end) is deleted normally.
    */
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const forward = event.key === 'Delete';
     if ((event.key !== 'Backspace' && !forward) || event.ctrlKey) return;
     const { value, selectionStart, selectionEnd } = this.element;

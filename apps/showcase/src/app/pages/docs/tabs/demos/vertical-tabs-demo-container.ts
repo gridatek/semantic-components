@@ -18,7 +18,7 @@ import { VerticalTabsDemo } from './vertical-tabs-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalTabsDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTabs,
   ScTabsList,

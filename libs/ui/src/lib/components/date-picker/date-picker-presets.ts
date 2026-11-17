@@ -14,7 +14,7 @@ import type { ScCalendarRange } from '../calendar';
 export class ScDatePickerPresets {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex min-w-36 flex-col gap-1 border-e p-3', this.classInput()),
   );
 }

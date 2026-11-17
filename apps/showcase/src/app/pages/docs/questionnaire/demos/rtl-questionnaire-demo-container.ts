@@ -18,7 +18,7 @@ import { RtlQuestionnaireDemo } from './rtl-questionnaire-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlQuestionnaireDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {

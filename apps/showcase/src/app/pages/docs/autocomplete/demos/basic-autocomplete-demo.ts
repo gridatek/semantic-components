@@ -80,10 +80,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicAutocompleteDemo {
-  readonly formModel = signal({ query: '' });
-  readonly searchForm = form(this.formModel);
+  private readonly formModel = signal({ query: '' });
+  private readonly searchForm = form(this.formModel);
 
-  readonly countries = computed(() => {
+  private readonly countries = computed(() => {
     const query = this.searchForm.query().value().toLowerCase();
     return ALL_COUNTRIES.filter((country) =>
       country.toLowerCase().startsWith(query),

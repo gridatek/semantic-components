@@ -18,7 +18,7 @@ import { SelectionTreeTableDemo } from './selection-tree-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectionTreeTableDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   createColumnHelper,
   createExpandedRowModel,
   injectTable,

@@ -55,21 +55,21 @@ export class ScToggle {
   private readonly inContainer = computed(
     () => !!this.values && this.value() !== undefined,
   );
-  protected readonly isPressed = computed(() =>
+  private readonly isPressed = computed(() =>
     this.inContainer() ? this.values!.has(this.value()) : this.pressed(),
   );
-  protected readonly isDisabled = computed(
+  private readonly isDisabled = computed(
     () => this.disabled() || (this.inContainer() && this.values!.disabled()),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  protected toggle(): void {
+  private toggle(): void {
     if (this.isDisabled()) return;
     if (this.inContainer()) this.values!.toggle(this.value());
     else this.pressed.update((v) => !v);

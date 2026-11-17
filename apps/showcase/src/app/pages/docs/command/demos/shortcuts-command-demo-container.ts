@@ -18,7 +18,7 @@ import { ShortcutsCommandDemo } from './shortcuts-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShortcutsCommandDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCommand,

@@ -18,7 +18,7 @@ import { FormDateRangePickerDemo } from './form-date-range-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormDateRangePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, validate } from '@angular/forms/signals';
 import {
   ScButton,

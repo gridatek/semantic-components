@@ -18,7 +18,7 @@ import { DisabledCollapsibleDemo } from './disabled-collapsible-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledCollapsibleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCollapsible,

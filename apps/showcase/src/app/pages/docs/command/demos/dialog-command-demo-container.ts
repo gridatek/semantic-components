@@ -24,7 +24,7 @@ import { DialogCommandDemo } from './dialog-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DialogCommandDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   injectFormatForDisplay,
   injectHotkey,
 } from '@tanstack/angular-hotkeys';

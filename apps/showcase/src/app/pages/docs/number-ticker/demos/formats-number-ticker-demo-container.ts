@@ -19,7 +19,7 @@ import { FormatsNumberTickerDemo } from './formats-number-ticker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsNumberTickerDemoContainer {
-  readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScFrame } from '@semantic-components/ui';
 import { ScNumberTicker } from '@semantic-components/ui';
 

@@ -102,7 +102,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewGithubProfile {
-  protected readonly profile = form(
+  private readonly profile = form(
     signal({ name: '', email: 'm@shadcn.com', bio: '' }),
   );
 }

@@ -161,7 +161,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FieldUsageDemo {
-  protected readonly months = [
+  private readonly months = [
     '01',
     '02',
     '03',
@@ -178,11 +178,11 @@ export class FieldUsageDemo {
     value,
     label: value,
   }));
-  protected readonly years = Array.from({ length: 10 }, (_, i) => ({
+  private readonly years = Array.from({ length: 10 }, (_, i) => ({
     value: String(2026 + i),
     label: String(2026 + i),
   }));
-  protected readonly month = signal('');
-  protected readonly year = signal('');
-  protected readonly sameAsShipping = signal(true);
+  private readonly month = signal('');
+  private readonly year = signal('');
+  private readonly sameAsShipping = signal(true);
 }

@@ -18,7 +18,7 @@ import { HorizontalBarChartDemo } from './horizontal-bar-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalBarChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

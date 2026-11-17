@@ -18,7 +18,7 @@ import { InteractiveQrCodeDemo } from './interactive-qr-code-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InteractiveQrCodeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScButton, ScInput } from '@semantic-components/ui';
 import { ScQrCode } from '@semantic-components/ui/qr-code';

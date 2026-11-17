@@ -18,7 +18,7 @@ import { LocaleDateInputDemo } from './locale-date-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleDateInputDemoContainer {
-  readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { ScDateInput, ScField, ScLabel } from '@semantic-components/ui';
 
 /** LOCALE_ID provided as 'fr-FR': typed day first (14/10/2026). */

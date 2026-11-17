@@ -61,5 +61,5 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class StepsNumberFieldDemo {
-  readonly width = signal<number | null>(120);
+  private readonly width = signal<number | null>(120);
 }

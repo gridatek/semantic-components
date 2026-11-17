@@ -69,14 +69,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ThemeMenu {
-  protected readonly theme = inject(ScThemeManager);
-  protected readonly modes: { value: ScThemeMode; label: string }[] = [
+  private readonly theme = inject(ScThemeManager);
+  private readonly modes: { value: ScThemeMode; label: string }[] = [
     { value: 'light', label: $localize`Light` },
     { value: 'dark', label: $localize`Dark` },
     { value: 'system', label: $localize`System` },
   ];
 
-  protected setMode(mode: string | null): void {
+  private setMode(mode: string | null): void {
     if (mode === 'light' || mode === 'dark' || mode === 'system')
       this.theme.setMode(mode);
   }

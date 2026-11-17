@@ -40,6 +40,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SignalFormsSwitchDemo {
-  protected readonly model = signal({ notifications: true, darkMode: false });
-  protected readonly settingsForm = form(this.model);
+  private readonly model = signal({ notifications: true, darkMode: false });
+  private readonly settingsForm = form(this.model);
 }

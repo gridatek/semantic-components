@@ -11,7 +11,7 @@ export type ArticleDraft = Omit<Article, 'id' | 'readership'>;
 @Service()
 export class ArticleStore {
   private readonly items = signal<Article[]>(ARTICLES);
-  readonly articles = this.items.asReadonly();
+  private readonly articles = this.items.asReadonly();
 
   /** The published ones with readers: the dashboard's top editorials. */
   readonly read = computed(() =>

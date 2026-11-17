@@ -18,7 +18,7 @@ import { StackedNumberFieldDemo } from './stacked-number-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export default class StackedNumberFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScLabel,
   ScNumberField,

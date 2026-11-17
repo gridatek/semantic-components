@@ -24,22 +24,22 @@ import type { ScDataTableSelectableRow } from './data-table-types';
   },
 })
 export class ScDataTableSelectRow {
-  protected readonly tree = inject(ScDataTableTreeGrid, { optional: true });
+  private readonly tree = inject(ScDataTableTreeGrid, { optional: true });
 
   readonly row = input.required<ScDataTableSelectableRow>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly selected = computed(() => this.row().getIsSelected());
+  private readonly selected = computed(() => this.row().getIsSelected());
   // As TanStack's examples: half-ticked while only some sub-rows are
   // selected, the row itself selected or not.
-  protected readonly some = computed(() => !!this.row().getIsSomeSelected?.());
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly some = computed(() => !!this.row().getIsSomeSelected?.());
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     syncDataTableCheckbox(this.selected, this.some);
   }
 
-  protected toggle(event: Event): void {
+  private toggle(event: Event): void {
     this.row().toggleSelected((event.target as HTMLInputElement).checked);
   }
 }

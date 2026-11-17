@@ -103,23 +103,23 @@ export class DataTableToolbar {
   readonly grouping = input<string[]>([]);
   readonly groupingChange = output<string[]>();
 
-  readonly groupableColumns = ['role', 'plan'];
+  private readonly groupableColumns = ['role', 'plan'];
 
-  readonly selectedRowCount = computed(
+  private readonly selectedRowCount = computed(
     () => Object.keys(this.table().atoms.rowSelection.get()).length,
   );
 
   /** A column's header, translated in its definition. */
-  columnLabel(columnId: string): string {
+  private columnLabel(columnId: string): string {
     const header = this.table().getColumn(columnId)?.columnDef.header;
     return typeof header === 'string' ? header : columnId;
   }
 
-  isGroupedBy(columnId: string): boolean {
+  private isGroupedBy(columnId: string): boolean {
     return this.grouping().includes(columnId);
   }
 
-  toggleGroup(columnId: string): void {
+  private toggleGroup(columnId: string): void {
     const current = this.grouping();
     const next = current.includes(columnId)
       ? current.filter((id) => id !== columnId)

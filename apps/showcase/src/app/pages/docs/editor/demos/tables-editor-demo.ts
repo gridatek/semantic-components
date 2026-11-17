@@ -124,9 +124,9 @@ const PLANS = `<p>Our plans:</p>
 })
 export class TablesEditorDemo {
   private readonly model = signal({ body: PLANS });
-  readonly editorForm = form(this.model);
+  private readonly editorForm = form(this.model);
 
-  readonly tableActions: ScEditorTableAction[] = [
+  private readonly tableActions: ScEditorTableAction[] = [
     'insertTable',
     'addRowBefore',
     'addRowAfter',
@@ -140,7 +140,7 @@ export class TablesEditorDemo {
     'toggleHeaderColumn',
     'deleteTable',
   ];
-  readonly tableLabels: Record<ScEditorTableAction, string> = {
+  private readonly tableLabels: Record<ScEditorTableAction, string> = {
     insertTable: 'Insert table',
     addRowBefore: 'Add row above',
     addRowAfter: 'Add row below',

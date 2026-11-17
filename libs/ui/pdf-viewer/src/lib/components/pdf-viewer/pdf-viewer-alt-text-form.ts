@@ -22,9 +22,7 @@ export class ScPdfViewerAltTextForm {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn('grid gap-4', this.classInput()),
-  );
+  private readonly class = computed(() => cn('grid gap-4', this.classInput()));
 
   private readonly annotation = this.pdfViewer
     .editorAnnotations()
@@ -35,7 +33,7 @@ export class ScPdfViewerAltTextForm {
   /** Marked as decorative (no description). */
   readonly decorative = signal(this.annotation?.isDecorative ?? false);
 
-  protected submit(event: Event): void {
+  private submit(event: Event): void {
     event.preventDefault();
     if (this.annotation) {
       const isDecorative = this.decorative();

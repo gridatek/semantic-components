@@ -59,14 +59,14 @@ export class ScDialogProvider {
   private readonly overlayTemplate =
     viewChild.required<TemplateRef<unknown>>('overlayTemplate');
 
-  protected readonly dialogPortal = contentChild.required(ScDialogPortal);
+  private readonly dialogPortal = contentChild.required(ScDialogPortal);
 
   /** Shown or not; the dialog and backdrop animate in and out (`animate.enter` / `animate.leave`). */
   readonly open = model<boolean>(false);
 
   private overlayRef: OverlayRef | null = null;
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly class = computed(() => cn('contents', this.classInput()));
 
   constructor() {
     // Detached on close: Angular keeps the parts until they've animated out.

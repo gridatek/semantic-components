@@ -17,7 +17,7 @@ import { cn } from 'cn';
 export class ScInfiniteScrollStatus {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground flex min-h-6 items-center justify-center gap-2 text-sm',
       '[&>svg]:shrink-0 [&>svg]:size-4',

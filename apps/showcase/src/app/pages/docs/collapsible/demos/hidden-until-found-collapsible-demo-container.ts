@@ -18,7 +18,7 @@ import { HiddenUntilFoundCollapsibleDemo } from './hidden-until-found-collapsibl
   encapsulation: ViewEncapsulation.None,
 })
 export class HiddenUntilFoundCollapsibleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCollapsible,

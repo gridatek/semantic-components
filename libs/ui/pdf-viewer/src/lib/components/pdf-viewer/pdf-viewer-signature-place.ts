@@ -20,7 +20,7 @@ import type { ScPdfSignatureData } from './pdf-viewer-types';
 export class ScPdfViewerSignaturePlace {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly signature = input.required<ScPdfSignatureData>({
     alias: 'scPdfViewerSignaturePlace',
   });
@@ -28,7 +28,7 @@ export class ScPdfViewerSignaturePlace {
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

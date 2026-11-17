@@ -74,11 +74,11 @@ export class ScChartCategoryAxis {
   readonly hide = input(false, { transform: booleanAttribute });
 
   /** Along the top: its labels above the plot. */
-  protected readonly above = computed(() => this.orientation() === 'top');
+  private readonly above = computed(() => this.orientation() === 'top');
 
-  protected readonly vertical = this.state.vertical;
+  private readonly vertical = this.state.vertical;
 
-  protected readonly ticks = computed(() => {
+  private readonly ticks = computed(() => {
     if (this.hide()) return [];
     // A scatter's: the x values, at their ticks.
     if (this.state.xKey()) {
@@ -129,7 +129,7 @@ export class ScChartCategoryAxis {
       .filter((tick) => tick.index % every === 0);
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('fill-muted-foreground', this.classInput()),
   );
 

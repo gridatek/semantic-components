@@ -42,7 +42,7 @@ export class ScMenuRadioItem {
   private readonly styles = injectMenuStyles();
   private readonly menuItem = inject<MenuItem<string>>(MenuItem);
   private readonly group = inject(ScMenuRadioGroup);
-  protected readonly highlight = injectMenuHighlight(
+  private readonly highlight = injectMenuHighlight(
     this.menuItem as MenuItem<unknown>,
   );
 
@@ -61,7 +61,7 @@ export class ScMenuRadioItem {
       this.group.value() === this.menuItem.value(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('group/menu-item', this.styles().radioItem, this.classInput()),
   );
 
@@ -71,14 +71,14 @@ export class ScMenuRadioItem {
   }
 
   /** Chooses it, without the menu's own handling (which would close it). */
-  protected choose(event: Event): void {
+  private choose(event: Event): void {
     // Stopped, the menu's own handling doesn't close it.
     if (!this.closeOnClick()) event.stopPropagation();
     if (this.menuItem.disabled()) return;
     this.group.value.set(this.menuItem.value() ?? null);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     this.highlight.keydown(event);
     if (event.key === 'Enter' || event.key === ' ') {
       this.choose(event);

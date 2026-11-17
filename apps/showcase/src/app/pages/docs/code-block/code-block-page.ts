@@ -226,14 +226,14 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
   encapsulation: ViewEncapsulation.None,
 })
 export default class CodeBlockPage {
-  readonly highlighterCode = `import { provideSemanticComponents } from '@semantic-components/ui';
+  private readonly highlighterCode = `import { provideSemanticComponents } from '@semantic-components/ui';
 import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideSemanticComponents({}, withCodeHighlighter())],
 };`;
 
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScCodeBlock, ScCodeBlockHeader, ScCodeBlockTitle, ScCodeBlockActions,',
@@ -254,7 +254,7 @@ export const appConfig: ApplicationConfig = {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScCodeBlock',
       selector: 'div[scCodeBlock]',

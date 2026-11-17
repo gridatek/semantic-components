@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScNavbarActions {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('ms-auto flex items-center gap-2', this.classInput()),
   );
 }

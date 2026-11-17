@@ -60,7 +60,7 @@ The control (e.g. `ScCheckbox`) injects the field context optionally and uses th
 ```typescript
 // checkbox.ts
 export class ScCheckbox {
-  protected readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-checkbox-');
 
   readonly idInput = input('', { alias: 'id' });
@@ -81,7 +81,7 @@ export class ScLabel {
 
   readonly forInput = input<string>('', { alias: 'for' });
 
-  protected readonly for = computed(() => {
+  private readonly for = computed(() => {
     const forValue = this.forInput() || this.field?.id();
     return forValue || null;
   });

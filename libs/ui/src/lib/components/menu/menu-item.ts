@@ -77,7 +77,7 @@ export class ScMenuItem {
   private readonly menuItem = inject(MenuItem);
   private readonly parentMenu = inject(Menu);
   private readonly directionality = inject(Directionality);
-  protected readonly highlight = injectMenuHighlight(
+  private readonly highlight = injectMenuHighlight(
     this.menuItem as MenuItem<unknown>,
   );
 
@@ -89,8 +89,8 @@ export class ScMenuItem {
     transform: booleanAttribute,
   });
 
-  protected readonly submenuPortal = contentChild(ScMenuPortal);
-  protected readonly submenuOpen = computed(
+  private readonly submenuPortal = contentChild(ScMenuPortal);
+  private readonly submenuOpen = computed(
     () => this.parentMenu.visible() && this.menuItem.expanded() !== false,
   );
 
@@ -108,7 +108,7 @@ export class ScMenuItem {
    * CDK mirrors start and end in right to left, not the offsets: they are
    * turned here. Measured as the submenu opens.
    */
-  protected readonly positions = computed(() => {
+  private readonly positions = computed(() => {
     let [right, left] = [SUBMENU_GAP, SUBMENU_GAP];
     const rtl = this.directionality.value === 'rtl';
     if (this.submenuOpen()) {
@@ -137,7 +137,7 @@ export class ScMenuItem {
     ];
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.submenuPortal() ? this.styles().subTrigger : this.styles().item,
       this.classInput(),
@@ -188,7 +188,7 @@ export class ScMenuItem {
     });
   }
 
-  protected keydown(event: KeyboardEvent): void {
+  private keydown(event: KeyboardEvent): void {
     this.highlight.keydown(event);
     if (!this.submenuPortal() || event.defaultPrevented) return;
     // Not from an item of its submenu, rendered inside it.

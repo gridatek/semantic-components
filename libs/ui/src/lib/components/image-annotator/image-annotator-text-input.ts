@@ -44,14 +44,14 @@ export class ScImageAnnotatorTextInput {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly annotation = computed(() => {
+  private readonly annotation = computed(() => {
     const id = this.annotator.editing();
     return id
       ? (this.annotator.annotations().find((a) => a.id === id) ?? null)
       : null;
   });
 
-  protected readonly place = computed(() => {
+  private readonly place = computed(() => {
     const annotation = this.annotation();
     const { width, height } = this.annotator.ɵnatural();
     if (!annotation || !width) return { left: 0, top: 0, size: 16 };
@@ -63,7 +63,7 @@ export class ScImageAnnotatorTextInput {
     };
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute z-10 min-w-24 rounded-sm border border-dashed border-sky-500 bg-white/80 px-0.5 font-semibold leading-tight outline-none dark:bg-black/60',
       this.classInput(),
@@ -84,13 +84,13 @@ export class ScImageAnnotatorTextInput {
     });
   }
 
-  protected onInput(): void {
+  private onInput(): void {
     const id = this.annotator.editing();
     const text = this.element.value;
     if (id) this.annotator.change(id, (a) => ({ ...a, text }));
   }
 
-  protected finish(): void {
+  private finish(): void {
     const annotation = this.annotation();
     if (!annotation) return;
     this.annotator.editing.set(null);

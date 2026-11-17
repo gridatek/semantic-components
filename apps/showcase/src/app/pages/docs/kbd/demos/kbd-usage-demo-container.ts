@@ -14,7 +14,7 @@ import { KbdUsageDemo } from './kbd-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class KbdUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScKbd, ScKbdGroup } from '@semantic-components/ui';
 
 @Component({

@@ -143,7 +143,7 @@ export class ScEditorCommand {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** Its definition: core's, or a provided feature's. */
   private readonly definition = computed<ScEditorCommandDefinition | null>(
@@ -159,7 +159,7 @@ export class ScEditorCommand {
     },
   );
 
-  protected readonly disabled = computed(() => {
+  private readonly disabled = computed(() => {
     const definition = this.definition();
     if (this.disabledInput() || !definition || !this.editor.editable())
       return true;
@@ -189,7 +189,7 @@ export class ScEditorCommand {
     });
   }
 
-  protected onClick(): void {
+  private onClick(): void {
     const definition = this.definition();
     if (definition && !this.disabled()) this.editor.run(definition.run);
   }

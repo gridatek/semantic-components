@@ -82,10 +82,10 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class DialogUsageDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 
   /** Save: your code runs first; the dialog closes when it's done. */
-  protected save(): void {
+  private save(): void {
     // Send the changes, check them…
     this.open.set(false);
   }

@@ -10,7 +10,7 @@ import { cn } from 'cn';
 export class ScTableFooter {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'border-t bg-muted/50 font-medium [&>tr]:last:border-b-0',
       this.classInput(),

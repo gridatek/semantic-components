@@ -166,7 +166,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export default class BackdropPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScBackdrop } from '@semantic-components/ui';",
     markup: ['@if (open()) {', '  <div scBackdrop></div>', '}'].join('\n'),
   };

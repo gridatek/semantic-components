@@ -19,7 +19,7 @@ import { ScDateInput, ScField, ScLabel } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleDateInputDemo {
-  readonly date = signal<Temporal.PlainDate | null>(
+  private readonly date = signal<Temporal.PlainDate | null>(
     Temporal.PlainDate.from('2026-10-14'),
   );
 }

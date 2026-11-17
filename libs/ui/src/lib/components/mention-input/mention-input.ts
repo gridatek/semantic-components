@@ -41,7 +41,7 @@ export class ScMentionInput {
   readonly showSuggestions = this.state.showSuggestions.asReadonly();
   readonly filteredUsers = this.state.filteredUsers;
 
-  protected readonly class = computed(() => cn('relative', this.classInput()));
+  private readonly class = computed(() => cn('relative', this.classInput()));
 
   constructor() {
     this.state.users = this.users;

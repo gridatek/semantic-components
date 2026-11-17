@@ -18,7 +18,7 @@ import { RadioContextMenuDemo } from './radio-context-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioContextMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScContextMenu,
   ScContextMenuTrigger,

@@ -18,7 +18,7 @@ import { StreamingMessageScrollerDemo } from './streaming-message-scroller-demo'
   encapsulation: ViewEncapsulation.None,
 })
 export class StreamingMessageScrollerDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

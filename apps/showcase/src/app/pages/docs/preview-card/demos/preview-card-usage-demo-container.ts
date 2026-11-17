@@ -14,7 +14,7 @@ import { PreviewCardUsageDemo } from './preview-card-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewCardUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScLink,
   ScPreviewCard,

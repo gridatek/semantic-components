@@ -18,7 +18,7 @@ import { DisabledButtonDemo } from './disabled-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 
 @Component({

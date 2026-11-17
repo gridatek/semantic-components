@@ -19,7 +19,7 @@ import { RollNumberTickerDemo } from './roll-number-ticker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RollNumberTickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScFrame } from '@semantic-components/ui';
 import { ScNumberTicker } from '@semantic-components/ui';
 

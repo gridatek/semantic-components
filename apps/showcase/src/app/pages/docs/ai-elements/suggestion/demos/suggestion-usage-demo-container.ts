@@ -18,7 +18,7 @@ import { SuggestionUsageDemo } from './suggestion-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SuggestionUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScBubble,

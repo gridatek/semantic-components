@@ -41,10 +41,10 @@ export class LanguagesCodeEditorDemo {
       'def greet(name: str) -> str:\n    return f"Hello, {name}!"\n\n\nprint(greet("Ada"))',
     sql: 'SELECT name, email\nFROM users\nWHERE active = true\nORDER BY name;',
   };
-  readonly language = signal('css');
-  readonly code = signal(this.samples['css']);
+  private readonly language = signal('css');
+  private readonly code = signal(this.samples['css']);
 
-  show(language: string | string[] | null): void {
+  private show(language: string | string[] | null): void {
     if (typeof language !== 'string') return;
     this.language.set(language);
     this.code.set(this.samples[language]);

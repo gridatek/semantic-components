@@ -588,10 +588,10 @@ const SAMPLE_DATA: User[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class FeaturedDataTableDemo {
-  readonly users = signal<User[]>(SAMPLE_DATA);
-  readonly lastAction = signal('');
+  private readonly users = signal<User[]>(SAMPLE_DATA);
+  private readonly lastAction = signal('');
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: this.users(),
@@ -600,16 +600,16 @@ export class FeaturedDataTableDemo {
   }));
 
   /** Columns the user may hide (TanStack `getCanHide()`). */
-  readonly hideableColumns = computed(() =>
+  private readonly hideableColumns = computed(() =>
     this.table.getAllLeafColumns().filter((column) => column.getCanHide()),
   );
-  readonly columnLabel = dataTableColumnLabel;
+  private readonly columnLabel = dataTableColumnLabel;
 
-  readonly selectedCount = computed(
+  private readonly selectedCount = computed(
     () => Object.keys(this.table.atoms.rowSelection.get()).length,
   );
 
-  onAction(action: unknown, user: User): void {
+  private onAction(action: unknown, user: User): void {
     switch (action) {
       case 'copy':
         void navigator.clipboard?.writeText(user.email);
@@ -632,7 +632,7 @@ export class FeaturedDataTableDemo {
     }
   }
 
-  roleVariant(role: string): 'default' | 'secondary' | 'outline' {
+  private roleVariant(role: string): 'default' | 'secondary' | 'outline' {
     return role === 'Admin'
       ? 'default'
       : role === 'Editor'
@@ -640,7 +640,9 @@ export class FeaturedDataTableDemo {
         : 'outline';
   }
 
-  statusVariant(status: User['status']): 'default' | 'secondary' | 'outline' {
+  private statusVariant(
+    status: User['status'],
+  ): 'default' | 'secondary' | 'outline' {
     return status === 'active'
       ? 'default'
       : status === 'pending'
@@ -648,7 +650,7 @@ export class FeaturedDataTableDemo {
         : 'outline';
   }
 
-  formatDate(date: Temporal.PlainDate): string {
+  private formatDate(date: Temporal.PlainDate): string {
     return date.toLocaleString('en-US', {
       month: 'short',
       day: 'numeric',

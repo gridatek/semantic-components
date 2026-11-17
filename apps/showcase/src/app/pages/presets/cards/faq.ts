@@ -94,7 +94,7 @@ interface ScFaqQuestion {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewFaq {
-  protected readonly topics: {
+  private readonly topics: {
     value: string;
     label: string;
     questions: ScFaqQuestion[];

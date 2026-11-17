@@ -134,7 +134,7 @@ export class ScNumberTicker {
     });
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.svg ? '' : 'inline-flex tabular-nums', this.classInput()),
   );
 

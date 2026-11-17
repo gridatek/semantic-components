@@ -17,13 +17,13 @@ import { SC_STEPPER } from './stepper-types';
 export class ScStepperPrevious {
   private readonly buttonStyles = injectPreset().button;
 
-  readonly stepper = inject(SC_STEPPER);
+  private readonly stepper = inject(SC_STEPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('lg');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

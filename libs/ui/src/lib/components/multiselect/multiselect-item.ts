@@ -30,7 +30,7 @@ export class ScMultiselectItem {
 
   private readonly multiselect = inject(SC_MULTISELECT);
   private readonly option = inject<Option<string>>(Option);
-  protected readonly onPointerMove = useActiveOption(this.option);
+  private readonly onPointerMove = useActiveOption(this.option);
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   constructor() {
@@ -43,7 +43,7 @@ export class ScMultiselectItem {
     });
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'transition-colors duration-100 data-[active=true]:bg-accent data-[active=true]:text-accent-foreground flex cursor-pointer items-center gap-1.5 rounded-md px-2 py-1 text-sm outline-none aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg:not([class*=size-])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0',
       this.classInput(),

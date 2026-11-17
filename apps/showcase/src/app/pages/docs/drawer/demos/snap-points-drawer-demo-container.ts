@@ -18,7 +18,7 @@ import { SnapPointsDrawerDemo } from './snap-points-drawer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SnapPointsDrawerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScDrawer,

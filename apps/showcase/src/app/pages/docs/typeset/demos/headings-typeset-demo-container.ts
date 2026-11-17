@@ -18,7 +18,7 @@ import { HeadingsTypesetDemo } from './headings-typeset-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeadingsTypesetDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScTypeset } from '@semantic-components/ui';
 
 @Component({

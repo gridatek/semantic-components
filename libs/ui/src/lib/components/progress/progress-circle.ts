@@ -56,7 +56,7 @@ import { ScProgress } from './progress';
 })
 export class ScProgressCircle {
   /** The arc: its ends round, or square in a square style (the preset). */
-  protected readonly arcClass = cn(
+  private readonly arcClass = cn(
     'stroke-primary transition-[stroke-dashoffset] duration-300',
     injectPreset().progress.arc,
   );
@@ -86,17 +86,17 @@ export class ScProgressCircle {
         !this.reducedMotion()),
   );
 
-  protected readonly radius = computed(() => 50 - this.thickness() / 2);
+  private readonly radius = computed(() => 50 - this.thickness() / 2);
   /** What is left undrawn, out of 100 — three quarters while turning. */
-  protected readonly offset = computed(() =>
+  private readonly offset = computed(() =>
     this.turning() ? 75 : 100 - this.progress.fraction() * 100,
   );
   /** At 0, nothing: a round cap would draw a dot. */
-  protected readonly empty = computed(
+  private readonly empty = computed(
     () => !this.turning() && this.progress.fraction() === 0,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'size-full rtl:-scale-x-100',
       this.turning() && 'animate-spin motion-reduce:animate-none',

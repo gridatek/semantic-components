@@ -19,7 +19,7 @@ export class ScCodeBlockActions {
 
   private readonly styles = injectPreset().codeBlock;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.actions, this.classInput()),
   );
 }

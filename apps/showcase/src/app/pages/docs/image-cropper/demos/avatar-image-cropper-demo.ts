@@ -84,11 +84,13 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class AvatarImageCropperDemo {
-  readonly zoom = signal(1);
-  readonly result = signal<{ width: number; height: number } | null>(null);
-  readonly percent = computed(() => Math.round(this.zoom() * 100));
+  private readonly zoom = signal(1);
+  private readonly result = signal<{ width: number; height: number } | null>(
+    null,
+  );
+  private readonly percent = computed(() => Math.round(this.zoom() * 100));
 
-  readonly handles = [
+  private readonly handles = [
     'top-left',
     'top',
     'top-right',
@@ -99,13 +101,13 @@ export class AvatarImageCropperDemo {
     'left',
   ] as const;
 
-  readonly sizes = [
+  private readonly sizes = [
     { class: 'size-24', alt: 'Large preview' },
     { class: 'size-16', alt: 'Medium preview' },
     { class: 'size-10', alt: 'Small preview' },
   ];
 
-  async crop(cropper: ScImageCropper): Promise<void> {
+  private async crop(cropper: ScImageCropper): Promise<void> {
     // A 256 px avatar, its corners transparent.
     const blob = await cropper.crop({ type: 'image/png', width: 256 });
     const bitmap = await createImageBitmap(blob);

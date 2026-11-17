@@ -76,19 +76,19 @@ interface ReviewForm {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormRatingDemo {
-  readonly formModel = signal<ReviewForm>({
+  private readonly formModel = signal<ReviewForm>({
     rating: 0,
     comment: '',
   });
 
-  submitted = false;
+  private submitted = false;
 
-  onCommentChange(event: Event): void {
+  private onCommentChange(event: Event): void {
     const value = (event.target as HTMLTextAreaElement).value;
     this.formModel.update((m) => ({ ...m, comment: value }));
   }
 
-  onSubmit(): void {
+  private onSubmit(): void {
     this.submitted = true;
     console.log('Form submitted:', this.formModel());
   }

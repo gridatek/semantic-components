@@ -18,7 +18,7 @@ import { BasicFocusTrapDemo } from './basic-focus-trap-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export default class BasicFocusTrapDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScField,

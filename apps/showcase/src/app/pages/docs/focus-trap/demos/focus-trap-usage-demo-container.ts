@@ -14,7 +14,7 @@ import { FocusTrapUsageDemo } from './focus-trap-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FocusTrapUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScFocusTrap } from '@semantic-components/ui';
 
 @Component({

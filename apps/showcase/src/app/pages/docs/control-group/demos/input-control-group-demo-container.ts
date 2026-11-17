@@ -18,7 +18,7 @@ import { InputControlGroupDemo } from './input-control-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputControlGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScControlGroup, ScInput } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 

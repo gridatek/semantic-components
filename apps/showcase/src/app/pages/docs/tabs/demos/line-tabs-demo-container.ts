@@ -18,7 +18,7 @@ import { LineTabsDemo } from './line-tabs-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LineTabsDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTabs,
   ScTabsList,

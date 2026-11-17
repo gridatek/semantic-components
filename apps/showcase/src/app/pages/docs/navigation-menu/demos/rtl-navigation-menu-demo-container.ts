@@ -18,7 +18,7 @@ import { RtlNavigationMenuDemo } from './rtl-navigation-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlNavigationMenuDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {

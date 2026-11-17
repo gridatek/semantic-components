@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScBubbleGroup {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex min-w-0 flex-col gap-2', this.classInput()),
   );
 }

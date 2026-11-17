@@ -20,7 +20,7 @@ export class ScControlGroupSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScControlGroupSeparatorOrientation>('vertical');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // The separator's own: without them it has no width.
       'bg-border shrink-0 data-horizontal:h-px data-horizontal:w-full data-vertical:w-px data-vertical:self-stretch',

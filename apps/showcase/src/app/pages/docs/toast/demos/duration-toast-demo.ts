@@ -15,7 +15,7 @@ import { ScToaster } from '@semantic-components/ui';
 export class DurationToastDemo {
   private readonly toastService = inject(ScToaster);
 
-  showToast(): void {
+  private showToast(): void {
     this.toastService.show({
       title: 'Long toast',
       description: 'This toast will stay for 10 seconds.',

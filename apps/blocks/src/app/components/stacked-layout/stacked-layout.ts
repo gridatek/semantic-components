@@ -23,7 +23,7 @@ import { cn } from 'cn';
 })
 export class StackedLayout {
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('min-h-screen flex flex-col block', this.classInput()),
   );
 }

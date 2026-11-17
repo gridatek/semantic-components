@@ -97,8 +97,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PresetsDateRangePickerDemo {
-  readonly range = signal<ScCalendarValue>(null);
-  readonly presets = scDateRangePresets({
+  private readonly range = signal<ScCalendarValue>(null);
+  private readonly presets = scDateRangePresets({
     today: 'Today',
     yesterday: 'Yesterday',
     last7Days: 'Last 7 days',

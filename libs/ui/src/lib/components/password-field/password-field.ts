@@ -44,7 +44,7 @@ export class ScPasswordField {
 
   readonly disabled = computed(() => this.field.disabled());
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   toggle(): void {
     this.visible.update((visible) => !visible);

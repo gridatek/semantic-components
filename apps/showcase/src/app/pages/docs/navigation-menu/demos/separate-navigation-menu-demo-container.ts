@@ -18,7 +18,7 @@ import { SeparateNavigationMenuDemo } from './separate-navigation-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SeparateNavigationMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScNavigationMenu,

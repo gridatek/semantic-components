@@ -48,7 +48,7 @@ import { injectMenuStyles } from './menu-styles';
 })
 export class ScMenu<V = string> {
   private readonly styles = injectMenuStyles();
-  protected readonly context = inject(SC_MENU, { optional: true });
+  private readonly context = inject(SC_MENU, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly menu = inject<Menu<V>>(Menu);
@@ -56,11 +56,11 @@ export class ScMenu<V = string> {
 
   // Read when it is created — a dropdown's menu, as it opens — and again once
   // rendered: a context menu's is created with the page, before it is there.
-  protected readonly direction = signal(this.context?.direction() ?? null);
-  protected readonly lang = signal(this.context?.lang() ?? null);
+  private readonly direction = signal(this.context?.direction() ?? null);
+  private readonly lang = signal(this.context?.lang() ?? null);
 
-  protected readonly focused = signal(false);
-  protected readonly pointerInside = signal(false);
+  private readonly focused = signal(false);
+  private readonly pointerInside = signal(false);
 
   /**
    * In use: opened (from a trigger, an item, a menu bar), or — a standalone
@@ -71,7 +71,7 @@ export class ScMenu<V = string> {
     () => !!this.menu.parent() || this.focused() || this.pointerInside(),
   );
 
-  protected focusOut(event: FocusEvent): void {
+  private focusOut(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
     if (!next || !this.menu.element.contains(next)) this.focused.set(false);
   }
@@ -90,7 +90,7 @@ export class ScMenu<V = string> {
     optional: true,
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.submenu() ? this.styles().subPopup : this.styles().popup,
       'z-50 data-[visible=false]:hidden',
@@ -122,7 +122,7 @@ export class ScMenu<V = string> {
    * longer to be found or clicked while the next menu may already be open —
    * then fades out.
    */
-  protected leave(event: AnimationCallbackEvent): void {
+  private leave(event: AnimationCallbackEvent): void {
     const element = event.target as HTMLElement;
     element.inert = true;
     element.setAttribute('aria-hidden', 'true');
@@ -146,7 +146,7 @@ export class ScMenu<V = string> {
    * pattern); `@angular/aria` has no Tab handling, and the popover sits before
    * its trigger in the DOM.
    */
-  protected onTab(event: Event): void {
+  private onTab(event: Event): void {
     const opener = topLevelOpener(this.menu as Menu<unknown>);
     if (!opener) return;
     const menubar = opener instanceof MenuItem ? opener.parent : null;

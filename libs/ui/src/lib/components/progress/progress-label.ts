@@ -20,7 +20,7 @@ export class ScProgressLabel {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-progress-label-'));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.label, this.classInput()),
   );
 

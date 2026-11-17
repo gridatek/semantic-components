@@ -14,7 +14,7 @@ import { DataTableUsageDemo } from './data-table-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DataTableUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   createColumnHelper,
   createSortedRowModel,
   injectTable,

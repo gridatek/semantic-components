@@ -18,7 +18,7 @@ import { WithIconLinkDemo } from './with-icon-link-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class WithIconLinkDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 import {
   SiArrowLeftIcon,

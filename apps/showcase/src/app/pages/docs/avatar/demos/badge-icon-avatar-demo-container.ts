@@ -18,7 +18,7 @@ import { BadgeIconAvatarDemo } from './badge-icon-avatar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BadgeIconAvatarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarBadge,

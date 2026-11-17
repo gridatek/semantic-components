@@ -18,7 +18,7 @@ import { FormTagsInputDemo } from './form-tags-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTagsInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,
   FormRoot,

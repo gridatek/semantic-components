@@ -38,11 +38,11 @@ export class ScEditorHighlightColor {
     return typeof color === 'string' ? color : '';
   });
 
-  protected readonly pressed = computed(() => this.current() === this.color());
+  private readonly pressed = computed(() => this.current() === this.color());
 
-  protected readonly disabled = computed(() => !this.editor.editable());
+  private readonly disabled = computed(() => !this.editor.editable());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'size-7 shrink-0 rounded-full border border-black/10 outline-none transition-shadow dark:border-white/10',
       'hover:ring-2 hover:ring-ring/50 focus-visible:ring-[3px] focus-visible:ring-ring/50',
@@ -56,7 +56,7 @@ export class ScEditorHighlightColor {
     ɵassertEditorFeature('withHighlight', 'scEditorHighlightColor');
   }
 
-  protected onClick(): void {
+  private onClick(): void {
     const color = this.color();
     this.editor.run((chain) =>
       this.pressed() ? chain.unsetHighlight() : chain.setHighlight({ color }),

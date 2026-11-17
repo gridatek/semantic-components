@@ -18,7 +18,7 @@ import { FormOtpFieldDemo } from './form-otp-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormOtpFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, minLength, required } from '@angular/forms/signals';
 import {
   ScButton,

@@ -18,7 +18,7 @@ import { FullFeaturedEditorDemo } from './full-featured-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FullFeaturedEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,

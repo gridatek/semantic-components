@@ -18,7 +18,7 @@ import { ListSeparatorDemo } from './list-separator-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ListSeparatorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSeparator } from '@semantic-components/ui';
 
 /** Lines between the items of a list. */

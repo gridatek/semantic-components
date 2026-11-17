@@ -14,7 +14,7 @@ import { PaginationUsageDemo } from './pagination-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PaginationUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScPagination,
   ScPaginationItem,

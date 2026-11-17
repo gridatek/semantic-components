@@ -18,7 +18,7 @@ import { GroupCheckboxDemo } from './group-checkbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupCheckboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScCheckbox,

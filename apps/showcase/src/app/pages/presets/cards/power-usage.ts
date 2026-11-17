@@ -117,7 +117,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewPowerUsage {
-  protected readonly data = [
+  private readonly data = [
     { hour: '6a', usage: 1.2 },
     { hour: '8a', usage: 2.8 },
     { hour: '10a', usage: 3.1 },
@@ -127,7 +127,7 @@ export class PreviewPowerUsage {
     { hour: '6p', usage: 3.8 },
     { hour: '8p', usage: 3.2 },
   ];
-  protected readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     usage: { label: 'Usage (kW)', color: 'var(--chart-2)' },
   };
 }

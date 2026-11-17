@@ -18,7 +18,7 @@ import { ParentCheckboxGroupDemo } from './parent-checkbox-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ParentCheckboxGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
 
 /** A parent checkbox: ticks all of allValues or none, mixed when only some are. */

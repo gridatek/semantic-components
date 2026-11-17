@@ -18,7 +18,7 @@ import { SizeLinkDemo } from './size-link-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizeLinkDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 import { SiArrowUpRightIcon } from '@semantic-icons/lucide-icons';
 

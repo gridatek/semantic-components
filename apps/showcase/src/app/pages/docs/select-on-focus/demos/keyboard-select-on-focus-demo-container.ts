@@ -19,7 +19,7 @@ import { KeyboardSelectOnFocusDemo } from './keyboard-select-on-focus-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class KeyboardSelectOnFocusDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScInput,

@@ -171,7 +171,7 @@ import { TextareaFieldDemoContainer } from './demos/textarea-field-demo-containe
   encapsulation: ViewEncapsulation.None,
 })
 export default class FieldPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScFieldset, ScLegend, ScFieldGroup, ScField, ScFieldContentWrapper, ScFieldTitle,',
@@ -195,7 +195,7 @@ export default class FieldPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScFieldset, ScLegend',
       selector: 'fieldset[scFieldset], legend[scLegend]',

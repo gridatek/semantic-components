@@ -87,17 +87,17 @@ interface Task {
   encapsulation: ViewEncapsulation.None,
 })
 export class AddKanbanBoardDemo {
-  readonly columns: { id: string; title: string; limit?: number }[] = [
+  private readonly columns: { id: string; title: string; limit?: number }[] = [
     { id: 'todo', title: 'To do' },
     { id: 'doing', title: 'In progress', limit: 3 },
     { id: 'done', title: 'Done' },
   ];
-  readonly titles: Record<string, string> = {
+  private readonly titles: Record<string, string> = {
     todo: 'To do',
     doing: 'In progress',
     done: 'Done',
   };
-  readonly board = signal<ScKanbanBoardValue<Task>>({
+  private readonly board = signal<ScKanbanBoardValue<Task>>({
     todo: [
       { id: 'a1', title: 'Draft the agenda' },
       { id: 'a2', title: 'Book the room' },
@@ -112,12 +112,12 @@ export class AddKanbanBoardDemo {
   private added = 0;
 
   /** A column past its limit. */
-  over(column: string): boolean {
+  private over(column: string): boolean {
     const limit = this.columns.find((c) => c.id === column)?.limit;
     return limit !== undefined && (this.board()[column]?.length ?? 0) > limit;
   }
 
-  add(event: Event, column: string, field: HTMLInputElement): void {
+  private add(event: Event, column: string, field: HTMLInputElement): void {
     event.preventDefault();
     const title = field.value.trim();
     if (!title) return;
@@ -131,7 +131,7 @@ export class AddKanbanBoardDemo {
     field.value = '';
   }
   /** What a keyboard move says, step by step. */
-  readonly announce = ({
+  private readonly announce = ({
     type,
     item,
     column,

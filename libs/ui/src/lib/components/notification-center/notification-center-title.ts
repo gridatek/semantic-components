@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScNotificationCenterTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex items-center gap-2 text-base font-semibold', this.classInput()),
   );
 }

@@ -120,10 +120,10 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeDividendIncome {
-  protected readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     value: { label: 'Dividend', color: 'var(--chart-2)' },
   };
-  protected readonly holdings = [
+  private readonly holdings = [
     {
       name: 'Vanguard',
       shares: '450 Shares',

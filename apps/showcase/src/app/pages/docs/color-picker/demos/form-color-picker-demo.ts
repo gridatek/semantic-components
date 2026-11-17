@@ -102,14 +102,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormColorPickerDemo {
-  readonly model = signal({ brand: '' });
-  readonly saved = signal(false);
-  readonly themeForm = form(
+  private readonly model = signal({ brand: '' });
+  private readonly saved = signal(false);
+  private readonly themeForm = form(
     this.model,
     (path) => required(path.brand, { message: 'Choose a colour.' }),
     { submission: { action: async () => this.saved.set(true) } },
   );
-  readonly presets = [
+  private readonly presets = [
     { color: '#e11d48', name: 'Rose' },
     { color: '#f97316', name: 'Orange' },
     { color: '#eab308', name: 'Yellow' },

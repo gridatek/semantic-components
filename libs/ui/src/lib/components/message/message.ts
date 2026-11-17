@@ -20,7 +20,7 @@ export class ScMessage {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly alignment = input<'start' | 'end'>('start');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.root, this.classInput()),
   );
 }

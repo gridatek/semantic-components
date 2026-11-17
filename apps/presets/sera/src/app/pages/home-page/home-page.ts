@@ -180,12 +180,12 @@ const PRINCIPLES = [
 })
 export default class HomePage {
   private readonly store = inject(ArticleStore);
-  protected readonly pages = PAGES;
-  protected readonly issues = ISSUES;
-  protected readonly principles = PRINCIPLES;
+  private readonly pages = PAGES;
+  private readonly issues = ISSUES;
+  private readonly principles = PRINCIPLES;
 
   /** "4 articles", "1 article", "No articles yet". */
-  protected countText(issue: string): string {
+  private countText(issue: string): string {
     const count = this.store.of(issue).length;
     if (!count) return 'No articles yet';
     return `${count} ${count === 1 ? 'article' : 'articles'}`;

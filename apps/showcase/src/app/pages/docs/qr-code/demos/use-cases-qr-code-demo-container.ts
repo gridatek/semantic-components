@@ -18,7 +18,7 @@ import { UseCasesQrCodeDemo } from './use-cases-qr-code-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class UseCasesQrCodeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScQrCode } from '@semantic-components/ui/qr-code';
 
 @Component({

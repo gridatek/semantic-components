@@ -127,11 +127,11 @@ export class ScDrawerProvider {
 
   private readonly overlayTemplate =
     viewChild.required<TemplateRef<unknown>>('overlayTemplate');
-  protected readonly portal = contentChild.required(ScDrawerPortal);
+  private readonly portal = contentChild.required(ScDrawerPortal);
 
   private overlayRef: OverlayRef | null = null;
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly class = computed(() => cn('contents', this.classInput()));
 
   constructor() {
     // Detached on close: Angular keeps the parts until they've animated out.

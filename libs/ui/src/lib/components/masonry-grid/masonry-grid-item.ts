@@ -24,13 +24,13 @@ import { ScMasonryGrid } from './masonry-grid';
   },
 })
 export class ScMasonryGridItem {
-  protected readonly grid = inject(ScMasonryGrid);
+  private readonly grid = inject(ScMasonryGrid);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** How many columns it spans. */
   readonly span = input(1, { transform: numberAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // Placed by us where the browser can't (`data-native` on the grid):
       // a selector, not a class bound on `native()` — the server renders our

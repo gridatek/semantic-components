@@ -26,7 +26,7 @@ import { SC_EDITOR, type ScEditorContentLayout } from './editor';
   },
 })
 export class ScEditorContent {
-  protected readonly editor = inject(SC_EDITOR);
+  private readonly editor = inject(SC_EDITOR);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -36,7 +36,7 @@ export class ScEditorContent {
   readonly layout = input<ScEditorContentLayout>('default');
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'block outline-none overflow-y-auto min-h-[150px] max-h-[400px]',
       this.layout() === 'page'

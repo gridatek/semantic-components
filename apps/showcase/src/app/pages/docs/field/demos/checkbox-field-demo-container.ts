@@ -18,7 +18,7 @@ import { CheckboxFieldDemo } from './checkbox-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCheckbox,
   ScField,

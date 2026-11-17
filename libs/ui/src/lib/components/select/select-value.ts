@@ -30,11 +30,11 @@ import { SC_SELECT } from './select-tokens';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSelectValue {
-  protected readonly select = inject(SC_SELECT);
+  private readonly select = inject(SC_SELECT);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Shown while nothing is selected. */
   readonly placeholder = input('');
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

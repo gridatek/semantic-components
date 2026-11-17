@@ -235,20 +235,20 @@ const efforts = [
   encapsulation: ViewEncapsulation.None,
 })
 export class PromptInputUsageDemo {
-  protected readonly providers = providers;
-  protected readonly efforts = efforts;
-  protected readonly model = signal<string | null>(models[0].id);
-  protected readonly effort = signal<string | null>(efforts[1].id);
-  protected readonly currentModel = computed(
+  private readonly providers = providers;
+  private readonly efforts = efforts;
+  private readonly model = signal<string | null>(models[0].id);
+  private readonly effort = signal<string | null>(efforts[1].id);
+  private readonly currentModel = computed(
     () => models.find((item) => item.id === this.model()) ?? models[0],
   );
-  protected readonly currentEffort = computed(
+  private readonly currentEffort = computed(
     () => efforts.find((item) => item.id === this.effort()) ?? efforts[1],
   );
-  protected readonly files = signal<readonly AttachedFile[]>([]);
+  private readonly files = signal<readonly AttachedFile[]>([]);
 
   private readonly message = signal({ text: '' });
-  protected readonly composer = form(this.message, () => undefined, {
+  private readonly composer = form(this.message, () => undefined, {
     submission: {
       action: async () => {
         this.message.set({ text: '' });
@@ -256,12 +256,12 @@ export class PromptInputUsageDemo {
       },
     },
   });
-  protected readonly canSend = computed(
+  private readonly canSend = computed(
     () => this.message().text.trim().length > 0,
   );
 
   /** Enter sends; Shift+Enter starts a new line. */
-  protected sendOnEnter(event: Event): void {
+  private sendOnEnter(event: Event): void {
     const key = event as KeyboardEvent;
     if (key.shiftKey || key.isComposing) return;
     key.preventDefault();
@@ -269,7 +269,7 @@ export class PromptInputUsageDemo {
   }
 
   /** The files chosen in the hidden file input, as chips above the text. */
-  protected attach(picker: HTMLInputElement): void {
+  private attach(picker: HTMLInputElement): void {
     const chosen = Array.from(picker.files ?? [], (file) => ({
       id: crypto.randomUUID(),
       name: file.name,
@@ -278,7 +278,7 @@ export class PromptInputUsageDemo {
     picker.value = '';
   }
 
-  protected remove(id: string): void {
+  private remove(id: string): void {
     this.files.update((files) => files.filter((file) => file.id !== id));
   }
 }

@@ -96,7 +96,7 @@ export default class ForgotPasswordPage {
     email: '',
   });
 
-  readonly forgotPasswordForm = form(
+  private readonly forgotPasswordForm = form(
     this.formModel,
     (s) => {
       required(s.email);

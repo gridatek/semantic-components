@@ -18,7 +18,7 @@ import { cn } from 'cn';
 export class ScPaginationStatus {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-muted-foreground text-sm tabular-nums', this.classInput()),
   );
 }

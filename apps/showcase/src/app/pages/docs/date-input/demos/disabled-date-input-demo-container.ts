@@ -18,7 +18,7 @@ import { DisabledDateInputDemo } from './disabled-date-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledDateInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScDateInput, ScField, ScLabel } from '@semantic-components/ui';
 
 /** disabled: shown, not edited. */

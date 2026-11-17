@@ -26,40 +26,40 @@ import { ScScrollAreaNextScrollbar } from './scroll-area-next-scrollbar';
 })
 export class ScScrollAreaNextThumb {
   private readonly styles = injectPreset().scrollArea;
-  protected readonly area = inject(ScScrollAreaNext);
-  protected readonly bar = inject(ScScrollAreaNextScrollbar);
+  private readonly area = inject(ScScrollAreaNext);
+  private readonly bar = inject(ScScrollAreaNextScrollbar);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly vertical = computed(
+  private readonly vertical = computed(
     () => this.bar.orientation() === 'vertical',
   );
   /** Where the pointer took it, from the thumb's start (px). */
   private grip: number | null = null;
 
-  protected readonly transform = computed(() => {
+  private readonly transform = computed(() => {
     const offset = this.bar.thumbOffset();
     if (this.vertical()) return `translate3d(0, ${offset}px, 0)`;
     // A right-to-left bar starts at the right: the thumb moves left.
     return `translate3d(${this.area.isRtl() ? -offset : offset}px, 0, 0)`;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.thumb, this.classInput()),
   );
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (event.button !== 0) return;
     event.preventDefault();
     (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
     this.grip = this.bar.pointerOffset(event) - this.bar.thumbOffset();
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     if (this.grip === null) return;
     this.bar.scrollToThumb(this.bar.pointerOffset(event) - this.grip);
   }
 
-  protected onPointerUp(event: PointerEvent): void {
+  private onPointerUp(event: PointerEvent): void {
     if (this.grip === null) return;
     this.grip = null;
     (event.currentTarget as HTMLElement).releasePointerCapture(event.pointerId);

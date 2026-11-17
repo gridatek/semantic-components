@@ -117,13 +117,13 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCalendarMonth {
-  protected readonly calendar = inject(forwardRef(() => ScCalendar));
+  private readonly calendar = inject(forwardRef(() => ScCalendar));
   private readonly locale = inject(LOCALE_ID);
 
   readonly month = input.required<Temporal.PlainYearMonth>();
 
   /** The week's days, from its first: short, and in full. */
-  protected readonly weekdays = computed(() => {
+  private readonly weekdays = computed(() => {
     const locale = this.locale;
     const start = this.calendar.weekStart();
     return Array.from({ length: 7 }, (_, i) => {
@@ -136,7 +136,7 @@ export class ScCalendarMonth {
   });
 
   /** Its weeks: whole, from the week's first day — six, with fixedWeeks. */
-  protected readonly weeks = computed(() => {
+  private readonly weeks = computed(() => {
     const month = this.month();
     const first = month.toPlainDate({ day: 1 });
     const offset = (first.dayOfWeek - this.calendar.weekStart() + 7) % 7;
@@ -161,24 +161,24 @@ export class ScCalendarMonth {
     );
   });
 
-  protected weekNumber(week: ScCalendarDay[]): number | undefined {
+  private weekNumber(week: ScCalendarDay[]): number | undefined {
     return (week.find((day) => !day.outside) ?? week[0]).date.weekOfYear;
   }
 
-  protected tabIndex(day: ScCalendarDay): number | null {
+  private tabIndex(day: ScCalendarDay): number | null {
     if (this.calendar.disabled() || day.outside) return -1;
     return day.date.equals(this.calendar.focused()) ? 0 : -1;
   }
 
-  protected number(date: Temporal.PlainDate): string {
+  private number(date: Temporal.PlainDate): string {
     return date.toLocaleString(this.locale, { day: 'numeric' });
   }
 
-  protected fullDate(date: Temporal.PlainDate): string {
+  private fullDate(date: Temporal.PlainDate): string {
     return date.toLocaleString(this.locale, { dateStyle: 'full' });
   }
 
-  protected context(day: ScCalendarDay) {
+  private context(day: ScCalendarDay) {
     return {
       $implicit: day.date,
       selected: this.calendar.isSelected(day.date),
@@ -188,17 +188,17 @@ export class ScCalendarMonth {
     };
   }
 
-  protected pick(day: ScCalendarDay): void {
+  private pick(day: ScCalendarDay): void {
     this.calendar.select(day.date);
     // An outside day: its month shown.
     if (day.outside) this.calendar.moveTo(day.date);
   }
 
-  protected preview(day: ScCalendarDay): void {
+  private preview(day: ScCalendarDay): void {
     if (this.calendar.mode() === 'range') this.calendar.hovered.set(day.date);
   }
 
-  protected cellClass(day: ScCalendarDay): string {
+  private cellClass(day: ScCalendarDay): string {
     const calendar = this.calendar;
     const selected = calendar.isSelected(day.date);
     const range = calendar.rangePart(day.date);

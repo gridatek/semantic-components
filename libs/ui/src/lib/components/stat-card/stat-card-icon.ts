@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScStatCardIcon {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-muted-foreground ms-auto size-4 shrink-0', this.classInput()),
   );
 }

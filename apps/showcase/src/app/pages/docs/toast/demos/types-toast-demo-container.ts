@@ -18,7 +18,7 @@ import { TypesToastDemo } from './types-toast-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TypesToastDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScButton,
   type ScToastConfig,

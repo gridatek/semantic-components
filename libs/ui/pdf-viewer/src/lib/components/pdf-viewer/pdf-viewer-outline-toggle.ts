@@ -24,7 +24,7 @@ import type { ScPdfOutlineItem } from './pdf-viewer-types';
 export class ScPdfViewerOutlineToggle {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly item = input.required<ScPdfOutlineItem>({
     alias: 'scPdfViewerOutlineToggle',
@@ -33,10 +33,10 @@ export class ScPdfViewerOutlineToggle {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-xs');
 
-  protected readonly open = computed(() =>
+  private readonly open = computed(() =>
     this.pdfViewer.outlineExpanded().has(this.item().id),
   );
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       '[&_svg]:transition-transform data-[state=open]:[&_svg]:rotate-90 rtl:[&_svg]:-scale-x-100',

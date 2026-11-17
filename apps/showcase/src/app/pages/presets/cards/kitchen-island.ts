@@ -130,19 +130,19 @@ const SCENES: Record<string, Record<ScLightLevel, number>> = {
 })
 export class PreviewKitchenIsland {
   private readonly model = signal({ enabled: true, ...SCENES['cooking'] });
-  protected readonly light = form(this.model, (path) => {
+  private readonly light = form(this.model, (path) => {
     for (const key of ['brightness', 'colorTemp', 'volume', 'fade'] as const)
       disabled(path[key], ({ valueOf }) => !valueOf(path.enabled));
   });
-  protected readonly scene = signal('cooking');
-  protected readonly levels: { key: ScLightLevel; label: string }[] = [
+  private readonly scene = signal('cooking');
+  private readonly levels: { key: ScLightLevel; label: string }[] = [
     { key: 'brightness', label: 'Brightness' },
     { key: 'colorTemp', label: 'Color Temp' },
     { key: 'volume', label: 'Volume' },
     { key: 'fade', label: 'Fade' },
   ];
 
-  protected chooseScene(value: string | undefined): void {
+  private chooseScene(value: string | undefined): void {
     if (!value || !(value in SCENES)) return;
     this.scene.set(value);
     this.model.update((m) => ({ ...m, ...SCENES[value] }));

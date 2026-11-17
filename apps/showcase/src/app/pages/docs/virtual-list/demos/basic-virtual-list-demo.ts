@@ -38,7 +38,7 @@ import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicVirtualListDemo {
-  readonly contacts = Array.from({ length: 10_000 }, (_, i) => {
+  private readonly contacts = Array.from({ length: 10_000 }, (_, i) => {
     const name =
       [
         'Ada',

@@ -529,12 +529,12 @@ export class BlogEditPage {
   /** From the route (:id); none: a new post. */
   readonly id = input<string>();
 
-  protected readonly post = computed(() => {
+  private readonly post = computed(() => {
     const id = this.id();
     return id ? this.store.byId(id) : undefined;
   });
 
-  protected readonly categories = BLOG_CATEGORIES.map((value) => ({
+  private readonly categories = BLOG_CATEGORIES.map((value) => ({
     value,
     label: value,
   }));
@@ -551,27 +551,27 @@ export class BlogEditPage {
       featured: post?.featured ?? false,
     };
   });
-  protected readonly postForm = form(this.model, (path) => {
+  private readonly postForm = form(this.model, (path) => {
     required(path.title);
     required(path.category);
   });
-  protected readonly tags = linkedSignal<string[]>(() => [
+  private readonly tags = linkedSignal<string[]>(() => [
     ...(this.post()?.tags ?? []),
   ]);
-  protected readonly date = linkedSignal<ScCalendarValue>(() =>
+  private readonly date = linkedSignal<ScCalendarValue>(() =>
     Temporal.PlainDate.from(this.post()?.date ?? today()),
   );
-  protected readonly cover = linkedSignal<string | null>(
+  private readonly cover = linkedSignal<string | null>(
     () => this.post()?.cover ?? null,
   );
 
-  protected choose(files: File[]): void {
+  private choose(files: File[]): void {
     const file = files[0];
     // A preview of the chosen file (in the browser, from its event).
     if (file) this.cover.set(URL.createObjectURL(file));
   }
 
-  protected save(event: Event): void {
+  private save(event: Event): void {
     event.preventDefault();
     if (this.postForm().invalid()) {
       this.toaster.show({

@@ -51,7 +51,7 @@ type ScSpeedDialMove = 'next' | 'previous' | 'first' | 'last';
 export class ScSpeedDialAction {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly dial = inject(ScSpeedDial);
+  private readonly dial = inject(ScSpeedDial);
   private readonly element =
     inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
 
@@ -65,12 +65,12 @@ export class ScSpeedDialAction {
   );
 
   /** One after the other, opening. */
-  protected readonly delay = computed(() =>
+  private readonly delay = computed(() =>
     this.dial.open() ? this.index() * 30 : 0,
   );
 
   /** On a quarter circle: its place on it. */
-  protected readonly arcAt = computed(() => {
+  private readonly arcAt = computed(() => {
     const arc = ARCS[this.dial.direction()];
     if (!arc) return null;
     const count = this.dial.ɵactions().length;
@@ -82,7 +82,7 @@ export class ScSpeedDialAction {
     return `calc(-50% + ${x}px) calc(-50% + ${y}px)`;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'relative rounded-full shadow-md transition-[scale,opacity] duration-200 ease-out',
@@ -117,7 +117,7 @@ export class ScSpeedDialAction {
     });
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const move = this.moves()[event.key];
     if (move) {
       this.dial.ɵmove(this.element, move);

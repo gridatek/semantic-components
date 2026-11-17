@@ -10,7 +10,7 @@ import { ScJsonViewer } from '@semantic-components/ui';
 })
 export class TypesJsonViewerDemo {
   /** JSON's types, and a few that aren't JSON. */
-  readonly values = {
+  private readonly values = {
     string: 'text',
     number: 3.14,
     boolean: false,

@@ -18,7 +18,8 @@ export interface ScCalendarDayContext {
  */
 @Directive({ selector: 'ng-template[scCalendarDay]' })
 export class ScCalendarDay {
-  readonly template = inject<TemplateRef<ScCalendarDayContext>>(TemplateRef);
+  private readonly template =
+    inject<TemplateRef<ScCalendarDayContext>>(TemplateRef);
 
   static ngTemplateContextGuard(
     _dir: ScCalendarDay,

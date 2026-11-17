@@ -18,7 +18,7 @@ import { ControlledSliderDemo } from './controlled-slider-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledSliderDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScLabel, ScSlider } from '@semantic-components/ui';
 
 /** Its value shown beside its label: two-way, [(value)]; min, max and step. */

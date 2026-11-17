@@ -152,7 +152,7 @@ import { SidesPopoverDemoContainer } from './demos/sides-popover-demo-container'
   encapsulation: ViewEncapsulation.None,
 })
 export default class PopoverPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScPopoverProvider, ScPopoverTrigger, ScPopoverPortal,',
@@ -177,7 +177,7 @@ export default class PopoverPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScPopoverProvider',
       selector: 'div[scPopoverProvider], span[scPopoverProvider]',

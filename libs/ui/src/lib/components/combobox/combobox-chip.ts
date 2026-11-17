@@ -17,7 +17,7 @@ export class ScComboboxChip<T = unknown> {
   /** The value it shows: what its remove button removes. */
   readonly value = input.required<T>();
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.chip, this.classInput()),
   );
 }

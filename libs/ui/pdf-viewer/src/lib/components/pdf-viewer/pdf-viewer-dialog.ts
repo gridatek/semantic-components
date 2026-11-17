@@ -42,7 +42,7 @@ export class ScPdfViewerDialog {
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** Whether the viewer wants the dialog open. */
   private readonly wanted = computed(() => {

@@ -18,7 +18,7 @@ import { IconItemDemo } from './icon-item-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class IconItemDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScItem,

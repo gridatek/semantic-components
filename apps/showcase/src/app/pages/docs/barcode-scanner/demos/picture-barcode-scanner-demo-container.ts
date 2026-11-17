@@ -18,7 +18,7 @@ import { PictureBarcodeScannerDemo } from './picture-barcode-scanner-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PictureBarcodeScannerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   type ScBarcode,
   ScBarcodeScanner,

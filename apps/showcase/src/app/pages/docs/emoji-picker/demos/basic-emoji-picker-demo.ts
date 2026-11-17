@@ -117,5 +117,5 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicEmojiPickerDemo {
-  readonly selected = signal<ScEmoji | null>(null);
+  private readonly selected = signal<ScEmoji | null>(null);
 }

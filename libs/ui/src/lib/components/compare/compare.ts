@@ -52,7 +52,7 @@ export class ScCompare {
   readonly dragging = signal(false);
   readonly rtl = computed(() => this.direction.valueSignal() === 'rtl');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // Its own stacking context: the handle stays under what covers it (a sticky header).
       'relative isolate block overflow-hidden select-none',
@@ -74,7 +74,7 @@ export class ScCompare {
     );
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (event.button !== 0 || this.hover()) return;
     const onHandle = (event.target as Element).closest(
       '[data-slot="compare-handle"]',
@@ -86,11 +86,11 @@ export class ScCompare {
     if (!onHandle) this.follow(event);
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     if (this.dragging() || this.hover()) this.follow(event);
   }
 
-  protected onPointerUp(event: PointerEvent): void {
+  private onPointerUp(event: PointerEvent): void {
     if (!this.dragging()) return;
     this.dragging.set(false);
     this.element.releasePointerCapture(event.pointerId);

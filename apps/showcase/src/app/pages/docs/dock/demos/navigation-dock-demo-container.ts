@@ -18,7 +18,7 @@ import { NavigationDockDemo } from './navigation-dock-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NavigationDockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScDock,
   ScDockIndicator,

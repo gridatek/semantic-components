@@ -223,7 +223,7 @@ export class AssetGrid {
 
   private readonly isImage = isImage;
 
-  protected tile(selected: boolean): string {
+  private tile(selected: boolean): string {
     return cn(
       'bg-muted/60 ring-border/70 group-hover:ring-foreground/40 relative flex aspect-4/3 items-center justify-center ring-1 transition-shadow ring-inset',
       selected && 'ring-foreground group-hover:ring-foreground ring-2',

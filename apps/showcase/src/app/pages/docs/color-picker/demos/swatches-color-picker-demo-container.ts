@@ -18,7 +18,7 @@ import { SwatchesColorPickerDemo } from './swatches-color-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SwatchesColorPickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScColorPicker,
   ScColorPickerEyeDropper,

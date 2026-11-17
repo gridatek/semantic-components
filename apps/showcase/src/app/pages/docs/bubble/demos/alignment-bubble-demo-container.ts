@@ -18,7 +18,7 @@ import { AlignmentBubbleDemo } from './alignment-bubble-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AlignmentBubbleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScBubble, ScBubbleContent } from '@semantic-components/ui';
 
 /** alignment: start (default) or end, for your own messages. Inline: it follows the direction. */

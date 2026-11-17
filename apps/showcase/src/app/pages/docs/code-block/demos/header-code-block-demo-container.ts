@@ -18,7 +18,7 @@ import { HeaderCodeBlockDemo } from './header-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockActions,

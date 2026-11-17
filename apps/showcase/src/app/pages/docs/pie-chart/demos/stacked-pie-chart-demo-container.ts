@@ -18,7 +18,7 @@ import { StackedPieChartDemo } from './stacked-pie-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StackedPieChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

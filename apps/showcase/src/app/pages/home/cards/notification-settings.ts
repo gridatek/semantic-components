@@ -65,7 +65,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeNotificationSettings {
-  protected readonly notifications = [
+  private readonly notifications = [
     {
       id: 'transactions',
       label: 'Transaction alerts',
@@ -87,7 +87,7 @@ export class HomeNotificationSettings {
       description: 'Daily portfolio summary and price alerts.',
     },
   ] as const;
-  protected readonly settings = form(
+  private readonly settings = form(
     signal({ transactions: true, security: true, goals: false, market: false }),
   );
 }

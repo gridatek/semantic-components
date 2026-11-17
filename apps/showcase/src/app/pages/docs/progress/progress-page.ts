@@ -145,7 +145,7 @@ import { StepsProgressDemoContainer } from './demos/steps-progress-demo-containe
   encapsulation: ViewEncapsulation.None,
 })
 export default class ProgressPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScProgress, ScProgressLabel, ScProgressValueText,',
@@ -166,7 +166,7 @@ export default class ProgressPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScProgress',
       selector: 'div[scProgress]',

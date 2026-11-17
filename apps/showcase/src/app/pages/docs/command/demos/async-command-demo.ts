@@ -79,10 +79,10 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class AsyncCommandDemo {
-  protected readonly query = signal('');
-  protected readonly results = signal<readonly string[]>([]);
-  protected readonly loading = signal(false);
-  protected readonly last = signal('');
+  private readonly query = signal('');
+  private readonly results = signal<readonly string[]>([]);
+  private readonly loading = signal(false);
+  private readonly last = signal('');
 
   private readonly countries = [
     'Algeria',
@@ -132,7 +132,7 @@ export class AsyncCommandDemo {
     });
   }
 
-  protected ran(name: string): void {
+  private ran(name: string): void {
     this.last.set(name);
   }
 }

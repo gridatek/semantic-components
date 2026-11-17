@@ -127,7 +127,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeContributionHistory {
-  protected readonly data = [
+  private readonly data = [
     { month: 'Dec', amount: 800 },
     { month: 'Jan', amount: 1100 },
     { month: 'Feb', amount: 900 },
@@ -135,7 +135,7 @@ export class HomeContributionHistory {
     { month: 'Apr', amount: 750 },
   ];
   /** A colour per month (`colorBy="category"`), each named for the tooltip. */
-  protected readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     Dec: { label: 'December', color: 'var(--chart-1)' },
     Jan: { label: 'January', color: 'var(--chart-2)' },
     Feb: { label: 'February', color: 'var(--chart-3)' },

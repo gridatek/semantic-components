@@ -13,10 +13,10 @@ import { ScAlertDialog } from './alert-dialog';
 export class ScAlertDialogTitle {
   private readonly styles = injectPreset().alertDialog;
 
-  readonly dialog = inject(ScAlertDialog);
+  private readonly dialog = inject(ScAlertDialog);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.title, this.classInput()),
   );
 }

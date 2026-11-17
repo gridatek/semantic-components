@@ -18,7 +18,7 @@ import { DonutChartDemo } from './donut-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DonutChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScNumberTicker } from '@semantic-components/ui';
 import {

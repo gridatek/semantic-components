@@ -30,16 +30,16 @@ import { ScAlertDialogProvider } from './alert-dialog-provider';
 export class ScAlertDialog {
   private readonly styles = injectPreset().alertDialog;
 
-  readonly alertDialogProvider = inject(ScAlertDialogProvider);
+  private readonly alertDialogProvider = inject(ScAlertDialogProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<'default' | 'sm'>('default');
 
-  readonly dialogId = inject(_IdGenerator).getId('sc-alert-dialog-');
+  private readonly dialogId = inject(_IdGenerator).getId('sc-alert-dialog-');
 
   readonly titleId = `${this.dialogId}-title`;
   readonly descriptionId = `${this.dialogId}-description`;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative max-w-[calc(100%-2rem)] text-sm',
       this.styles.content,

@@ -16,5 +16,5 @@ import { ScSlider } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSliderDemo {
-  protected readonly volume = signal(75);
+  private readonly volume = signal(75);
 }

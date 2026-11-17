@@ -21,7 +21,7 @@ export class ScCalendarClear {
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'flex-1',
@@ -29,7 +29,7 @@ export class ScCalendarClear {
     ),
   );
 
-  onClick(): void {
+  private onClick(): void {
     this.calendar.clear();
   }
 }

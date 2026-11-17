@@ -26,10 +26,14 @@ import { UserService } from './user-service';
 export default class DataTablePage {
   private readonly userService = inject(UserService);
 
-  readonly columns = userColumns();
-  readonly data = signal<User[]>(this.userService.getUsers());
+  private readonly columns = userColumns();
+  private readonly data = signal<User[]>(this.userService.getUsers());
 
-  onEditSave(event: { row: User; columnId: string; value: string }): void {
+  private onEditSave(event: {
+    row: User;
+    columnId: string;
+    value: string;
+  }): void {
     this.data.set(
       this.userService.updateUser(event.row.id, {
         [event.columnId]: event.value,

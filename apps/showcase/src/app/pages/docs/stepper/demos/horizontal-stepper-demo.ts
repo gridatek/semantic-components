@@ -172,8 +172,13 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalStepperDemo {
-  readonly selectedIndex = signal(0);
+  private readonly selectedIndex = signal(0);
 
-  readonly model = signal({ email: '', password: '', name: '', bio: '' });
-  readonly signupForm = form(this.model);
+  private readonly model = signal({
+    email: '',
+    password: '',
+    name: '',
+    bio: '',
+  });
+  private readonly signupForm = form(this.model);
 }

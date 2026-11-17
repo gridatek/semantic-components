@@ -106,7 +106,7 @@ export class ScChartScatter implements ScChartSeriesLabels {
     this.isAnimationActive() ? this.entrance() : 1,
   );
 
-  protected readonly color = computed(() => `var(--color-${this.key()})`);
+  private readonly color = computed(() => `var(--color-${this.key()})`);
 
   /** Its points where they belong now. */
   private readonly targets = computed<ScScatterChartDot[]>(() => {
@@ -155,18 +155,18 @@ export class ScChartScatter implements ScChartSeriesLabels {
       }),
   });
 
-  protected readonly dots = computed<ScScatterChartDot[]>(() => {
+  private readonly dots = computed<ScScatterChartDot[]>(() => {
     // Growing in: their area on the way to its own (Recharts' size).
     const grown = Math.sqrt(this.grown());
     return this.moving.items().map((dot) => ({ ...dot, r: dot.r * grown }));
   });
 
-  protected readonly activeDot = computed(() => {
+  private readonly activeDot = computed(() => {
     const index = this.state.activeIndex();
     return index === null ? null : this.dots()[index];
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({

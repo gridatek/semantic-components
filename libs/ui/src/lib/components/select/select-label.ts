@@ -22,7 +22,7 @@ export class ScSelectLabel {
   private readonly styles = injectPreset().label;
   /** In a field: a field's label, as scLabel there (shadcn's FieldLabel). */
   private readonly inField = !!inject(SC_FIELD, { optional: true });
-  protected readonly select = inject(SC_SELECT);
+  private readonly select = inject(SC_SELECT);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input(inject(_IdGenerator).getId('sc-select-label-'), {
@@ -31,7 +31,7 @@ export class ScSelectLabel {
 
   readonly id = computed(() => this.idInput());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // shadcn's Label, in the preset's look.
       this.styles.label,

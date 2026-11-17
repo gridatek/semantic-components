@@ -117,8 +117,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SkeletonSidebarDemo {
-  protected readonly loading = signal(true);
-  protected readonly rows = [1, 2, 3, 4, 5];
+  private readonly loading = signal(true);
+  private readonly rows = [1, 2, 3, 4, 5];
   private timer: ReturnType<typeof setTimeout> | undefined;
 
   constructor() {
@@ -126,7 +126,7 @@ export class SkeletonSidebarDemo {
     inject(DestroyRef).onDestroy(() => clearTimeout(this.timer));
   }
 
-  protected load(): void {
+  private load(): void {
     clearTimeout(this.timer);
     this.loading.set(true);
     this.timer = setTimeout(() => this.loading.set(false), 2000);

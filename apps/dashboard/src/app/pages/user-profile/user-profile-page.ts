@@ -310,14 +310,14 @@ export class UserProfilePage {
 
   private readonly toaster = inject(ScToaster);
 
-  protected readonly personal = signal<Personal>({
+  private readonly personal = signal<Personal>({
     firstName: 'Mathew',
     lastName: 'Anderson',
     email: 'mathew.anderson@gmail.com',
     phone: '(347) 528-1947',
     position: 'Team Leader',
   });
-  protected readonly address = signal<Address>({
+  private readonly address = signal<Address>({
     location: 'United States',
     state: 'San Diego, California, United States',
     pin: '92101',
@@ -325,27 +325,27 @@ export class UserProfilePage {
     taxNo: 'GA45273910',
   });
 
-  protected readonly socials = [
+  private readonly socials = [
     { label: $localize`Facebook`, href: 'https://www.facebook.com/wrappixel' },
     { label: 'X', href: 'https://x.com/shadcndashboard' },
     { label: $localize`GitHub`, href: 'https://github.com/shadcndashboard' },
     { label: $localize`Dribbble`, href: 'https://dribbble.com/wrappixel' },
   ];
 
-  protected readonly editingPersonal = signal(false);
-  protected readonly editingAddress = signal(false);
+  private readonly editingPersonal = signal(false);
+  private readonly editingAddress = signal(false);
 
   // The dialogs edit a copy; Save writes it back, Cancel drops it.
   private readonly personalDraft = signal<Personal>(this.personal());
-  protected readonly personalForm = form(this.personalDraft, (path) => {
+  private readonly personalForm = form(this.personalDraft, (path) => {
     required(path.firstName);
     required(path.email);
     email(path.email);
   });
   private readonly addressDraft = signal<Address>(this.address());
-  protected readonly addressForm = form(this.addressDraft);
+  private readonly addressForm = form(this.addressDraft);
 
-  protected personalItems() {
+  private personalItems() {
     const p = this.personal();
     return [
       { label: $localize`First Name`, value: p.firstName },
@@ -356,7 +356,7 @@ export class UserProfilePage {
     ];
   }
 
-  protected addressItems() {
+  private addressItems() {
     const a = this.address();
     return [
       { label: $localize`Location`, value: a.location },
@@ -367,17 +367,17 @@ export class UserProfilePage {
     ];
   }
 
-  protected editPersonal(): void {
+  private editPersonal(): void {
     this.personalDraft.set({ ...this.personal() });
     this.editingPersonal.set(true);
   }
 
-  protected editAddress(): void {
+  private editAddress(): void {
     this.addressDraft.set({ ...this.address() });
     this.editingAddress.set(true);
   }
 
-  protected savePersonal(event: Event): void {
+  private savePersonal(event: Event): void {
     event.preventDefault();
     if (this.personalForm().invalid()) return;
     this.personal.set({ ...this.personalDraft() });
@@ -388,7 +388,7 @@ export class UserProfilePage {
     });
   }
 
-  protected saveAddress(event: Event): void {
+  private saveAddress(event: Event): void {
     event.preventDefault();
     this.address.set({ ...this.addressDraft() });
     this.editingAddress.set(false);

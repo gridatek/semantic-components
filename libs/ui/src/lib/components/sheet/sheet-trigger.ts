@@ -14,14 +14,14 @@ import { ScSheetProvider } from './sheet-provider';
   },
 })
 export class ScSheetTrigger {
-  protected readonly sheet = inject(ScSheetProvider);
+  private readonly sheet = inject(ScSheetProvider);
   private readonly element =
     inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected openSheet(): void {
+  private openSheet(): void {
     ɵfocusOnPress(this.element);
     this.sheet.open.set(true);
   }

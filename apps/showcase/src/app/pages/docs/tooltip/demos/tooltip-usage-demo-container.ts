@@ -14,7 +14,7 @@ import { TooltipUsageDemo } from './tooltip-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TooltipUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScTooltip,

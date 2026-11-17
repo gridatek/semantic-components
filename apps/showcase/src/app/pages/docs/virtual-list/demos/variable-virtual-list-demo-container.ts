@@ -18,7 +18,7 @@ import { VariableVirtualListDemo } from './variable-virtual-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VariableVirtualListDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScVirtualList,

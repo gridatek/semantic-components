@@ -17,11 +17,11 @@ import { SC_SCHEDULER_EVENT } from './scheduler-types';
   },
 })
 export class ScSchedulerEvent {
-  protected readonly context = inject(SC_SCHEDULER_EVENT);
+  private readonly context = inject(SC_SCHEDULER_EVENT);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex w-full min-w-0 rounded-md text-start text-xs outline-none transition-colors',
       'focus-visible:ring-3 focus-visible:ring-ring/50',

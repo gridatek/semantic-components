@@ -14,7 +14,7 @@ import { SeparatorUsageDemo } from './separator-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SeparatorUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSeparator } from '@semantic-components/ui';
 
 @Component({

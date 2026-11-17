@@ -147,7 +147,7 @@ import { SmallMediaAlertDialogDemoContainer } from './demos/small-media-alert-di
   encapsulation: ViewEncapsulation.None,
 })
 export default class AlertDialogPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScAlertDialogProvider, ScAlertDialogTrigger, ScAlertDialogPortal,',
@@ -176,7 +176,7 @@ export default class AlertDialogPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScAlertDialogProvider',
       selector: 'div[scAlertDialogProvider], span[scAlertDialogProvider]',

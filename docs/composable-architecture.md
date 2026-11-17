@@ -135,7 +135,7 @@ export class ScComponentNameGroup {
   readonly component = inject(SC_COMPONENT_NAME);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('inline-flex items-center rounded-md border border-input', 'focus-within:ring-1 focus-within:ring-ring', 'data-disabled:opacity-50', this.classInput()));
+  private readonly class = computed(() => cn('inline-flex items-center rounded-md border border-input', 'focus-within:ring-1 focus-within:ring-ring', 'data-disabled:opacity-50', this.classInput()));
 }
 ```
 
@@ -174,7 +174,7 @@ export class ScComponentNameAction {
   readonly component = inject(SC_COMPONENT_NAME);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('inline-flex size-9 items-center justify-center', 'hover:bg-accent', 'disabled:opacity-50', this.classInput()));
+  private readonly class = computed(() => cn('inline-flex size-9 items-center justify-center', 'hover:bg-accent', 'disabled:opacity-50', this.classInput()));
 
   onClick(): void {
     this.component.doAction();
@@ -214,7 +214,7 @@ export class ScComponentNameInput {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly placeholder = input<string>('');
 
-  protected readonly class = computed(() => cn('flex h-9 w-full rounded-md border border-input', 'focus-visible:outline-none focus-visible:ring-1', 'disabled:cursor-not-allowed disabled:opacity-50', this.classInput()));
+  private readonly class = computed(() => cn('flex h-9 w-full rounded-md border border-input', 'focus-visible:outline-none focus-visible:ring-1', 'disabled:cursor-not-allowed disabled:opacity-50', this.classInput()));
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;

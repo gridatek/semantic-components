@@ -18,7 +18,7 @@ import { RtlAreaChartDemo } from './rtl-area-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlAreaChartDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

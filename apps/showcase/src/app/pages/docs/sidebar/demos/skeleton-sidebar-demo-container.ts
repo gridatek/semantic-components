@@ -16,7 +16,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export class SkeletonSidebarDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

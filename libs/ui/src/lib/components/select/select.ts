@@ -120,14 +120,14 @@ export class ScSelect implements FormValueControl<string> {
   private readonly label = contentChild(ScSelectLabel);
   /** The label's id: it names the trigger and the list. */
   readonly labelId = computed(() => this.label()?.id() ?? null);
-  protected readonly portal = contentChild.required(ScSelectPortal);
+  private readonly portal = contentChild.required(ScSelectPortal);
 
   readonly open = computed(() => this.trigger()?.combobox.expanded() ?? false);
   readonly hasValue = computed(() => this.value() !== '');
 
   /** Where the popup opened: below the trigger, or above it. */
   readonly side = signal<ScSelectSide>('bottom');
-  protected readonly positions = positions;
+  private readonly positions = positions;
 
   /** Labels of options seen so far, or given by `items`. */
   private readonly labels = signal<ReadonlyMap<string, string>>(new Map());
@@ -140,7 +140,7 @@ export class ScSelect implements FormValueControl<string> {
     );
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     // It sets the width — its content's by default; the trigger fills it,
     // the list matches the trigger. Its label above its trigger.
     cn(
@@ -155,7 +155,7 @@ export class ScSelect implements FormValueControl<string> {
     this.labels.update((labels) => new Map(labels).set(value, label));
   }
 
-  protected onPositionChange(change: ConnectedOverlayPositionChange): void {
+  private onPositionChange(change: ConnectedOverlayPositionChange): void {
     this.side.set(
       change.connectionPair.originY === 'bottom' ? 'bottom' : 'top',
     );

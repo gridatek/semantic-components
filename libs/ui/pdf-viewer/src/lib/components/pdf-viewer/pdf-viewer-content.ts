@@ -26,9 +26,9 @@ export class ScPdfViewerContent {
   /** Open a file dropped on the pages. */
   readonly dropFiles = input(true);
 
-  protected readonly dragging = signal(false);
+  private readonly dragging = signal(false);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex-1 relative min-h-0 overflow-hidden bg-muted/30',
       'data-dragging:after:border-primary data-dragging:after:bg-primary/5 data-dragging:after:pointer-events-none data-dragging:after:absolute data-dragging:after:inset-0 data-dragging:after:z-30 data-dragging:after:border-2 data-dragging:after:border-dashed',
@@ -41,14 +41,14 @@ export class ScPdfViewerContent {
     return this.dropFiles() && !!event.dataTransfer?.types.includes('Files');
   }
 
-  protected onDragOver(event: DragEvent): void {
+  private onDragOver(event: DragEvent): void {
     if (!this.hasFiles(event)) return;
     event.preventDefault();
     if (event.dataTransfer) event.dataTransfer.dropEffect = 'copy';
     this.dragging.set(true);
   }
 
-  protected onDragLeave(event: DragEvent): void {
+  private onDragLeave(event: DragEvent): void {
     const host = event.currentTarget as HTMLElement;
     // Leaving for a child isn't leaving.
     if (!host.contains(event.relatedTarget as Node | null)) {
@@ -56,7 +56,7 @@ export class ScPdfViewerContent {
     }
   }
 
-  protected onDrop(event: DragEvent): void {
+  private onDrop(event: DragEvent): void {
     this.dragging.set(false);
     if (!this.hasFiles(event)) return;
     event.preventDefault();

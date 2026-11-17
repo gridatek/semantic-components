@@ -21,7 +21,7 @@ export class ScSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScSeparatorOrientation>('horizontal');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'shrink-0 bg-border',
       // Plain classes, not data-[orientation=…]: variants: those outrank

@@ -18,7 +18,7 @@ import { NoCloseButtonDialogDemo } from './no-close-button-dialog-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NoCloseButtonDialogDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScDialog,

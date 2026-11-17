@@ -26,11 +26,11 @@ import { SC_TREE_ITEM } from './tree-item';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScTreeItemTrigger {
-  readonly item = inject(SC_TREE_ITEM);
+  private readonly item = inject(SC_TREE_ITEM);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'my-0.5 flex w-full cursor-pointer select-none items-center gap-2 rounded-md py-1.5 pe-2 text-sm transition-colors duration-100',
       // Hover is lighter than selection, so a hovered row next to the selected
@@ -44,7 +44,7 @@ export class ScTreeItemTrigger {
   );
 
   /** 0.5rem, plus 0.75rem per level below the root. */
-  protected readonly indent = computed(
+  private readonly indent = computed(
     () => `calc(${this.item.level() - 1} * 0.75rem + 0.5rem)`,
   );
 }

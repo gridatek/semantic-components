@@ -18,7 +18,7 @@ import { OrientationCarouselDemo } from './orientation-carousel-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class OrientationCarouselDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   ScCarousel,

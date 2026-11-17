@@ -18,7 +18,7 @@ import { MaxlengthTextareaDemo } from './maxlength-textarea-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MaxlengthTextareaDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, maxLength } from '@angular/forms/signals';
 import {
   ScField,

@@ -18,7 +18,7 @@ import { InTextLinkDemo } from './in-text-link-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InTextLinkDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 
 /** A link in a sentence: underlined, in the text's colour and size. */

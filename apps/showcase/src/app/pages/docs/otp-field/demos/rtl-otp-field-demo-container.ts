@@ -18,7 +18,7 @@ import { RtlOtpFieldDemo } from './rtl-otp-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlOtpFieldDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {

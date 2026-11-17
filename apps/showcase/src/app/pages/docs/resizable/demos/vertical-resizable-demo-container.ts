@@ -18,7 +18,7 @@ import { VerticalResizableDemo } from './vertical-resizable-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalResizableDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScResizableHandle,

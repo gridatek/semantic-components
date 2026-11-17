@@ -14,7 +14,7 @@ import { BubbleUsageDemo } from './bubble-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BubbleUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

@@ -41,7 +41,7 @@ import { injectMenuStyles } from './menu-styles';
 export class ScMenuCheckboxItem {
   private readonly styles = injectMenuStyles();
   private readonly menuItem = inject(MenuItem);
-  protected readonly highlight = injectMenuHighlight(
+  private readonly highlight = injectMenuHighlight(
     this.menuItem as MenuItem<unknown>,
   );
 
@@ -56,7 +56,7 @@ export class ScMenuCheckboxItem {
     transform: booleanAttribute,
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('group/menu-item', this.styles().checkboxItem, this.classInput()),
   );
 
@@ -66,14 +66,14 @@ export class ScMenuCheckboxItem {
   }
 
   /** Toggles, without the menu's own handling (which would close it). */
-  protected toggle(event: Event): void {
+  private toggle(event: Event): void {
     // Stopped, the menu's own handling doesn't close it.
     if (!this.closeOnClick()) event.stopPropagation();
     if (this.menuItem.disabled()) return;
     this.checked.update((checked) => !checked);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     this.highlight.keydown(event);
     if (event.key === 'Enter' || event.key === ' ') {
       this.toggle(event);

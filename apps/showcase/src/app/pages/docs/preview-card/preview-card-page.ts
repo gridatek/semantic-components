@@ -139,7 +139,7 @@ import { SidesPreviewCardDemoContainer } from './demos/sides-preview-card-demo-c
   encapsulation: ViewEncapsulation.None,
 })
 export default class PreviewCardPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScPreviewCardProvider, ScPreviewCardTrigger,',
@@ -156,7 +156,7 @@ export default class PreviewCardPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScPreviewCardProvider',
       selector: 'div[scPreviewCardProvider], span[scPreviewCardProvider]',

@@ -18,7 +18,7 @@ import { TriggerAttachmentDemo } from './trigger-attachment-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TriggerAttachmentDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAttachment,
   ScAttachmentAction,

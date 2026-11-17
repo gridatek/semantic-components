@@ -47,8 +47,8 @@ import { presetFrom } from '../../../presets';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewStyleOverview {
-  protected readonly preset = presetFrom(inject(ScStorage));
-  protected readonly variables = [
+  private readonly preset = presetFrom(inject(ScStorage));
+  private readonly variables = [
     '--background',
     '--foreground',
     '--primary',

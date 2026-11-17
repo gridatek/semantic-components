@@ -18,7 +18,7 @@ import { StartLineCodeBlockDemo } from './start-line-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StartLineCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockContent,

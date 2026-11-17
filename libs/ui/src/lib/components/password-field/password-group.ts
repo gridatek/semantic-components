@@ -14,7 +14,7 @@ export class ScPasswordGroup {
   private readonly groupStyles = injectPreset().inputGroup;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.groupStyles, 'pe-1', this.classInput()),
   );
 }

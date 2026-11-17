@@ -18,7 +18,7 @@ import { FeedInfiniteScrollDemo } from './feed-infinite-scroll-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FeedInfiniteScrollDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScInfiniteScroll,
   ScInfiniteScrollStatus,

@@ -14,7 +14,7 @@ import { MessageScrollerUsageDemo } from './message-scroller-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MessageScrollerUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

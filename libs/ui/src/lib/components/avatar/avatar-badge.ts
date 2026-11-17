@@ -10,7 +10,7 @@ import { cn } from 'cn';
 export class ScAvatarBadge {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-primary text-primary-foreground ring-background bg-blend-color absolute end-0 bottom-0 z-10 size-2.5 inline-flex items-center justify-center rounded-full ring-2 select-none [&>svg]:size-2',
       'group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&>svg]:hidden',

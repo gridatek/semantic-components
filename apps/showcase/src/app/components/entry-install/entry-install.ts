@@ -75,13 +75,11 @@ export class EntryInstall {
   /** What to import, e.g. `ScCarousel, ScCarouselItem`. */
   readonly names = input.required<string>();
 
-  protected readonly path = computed(
+  private readonly path = computed(
     () => `@semantic-components/ui/${this.entry()}`,
   );
-  protected readonly code = computed(
+  private readonly code = computed(
     () => `import { ${this.names()} } from '${this.path()}';`,
   );
-  protected readonly class = computed(() =>
-    cn('grid gap-4', this.classInput()),
-  );
+  private readonly class = computed(() => cn('grid gap-4', this.classInput()));
 }

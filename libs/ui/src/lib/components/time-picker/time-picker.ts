@@ -97,7 +97,7 @@ export class ScTimePicker {
     return Math.max(0, next);
   });
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   constructor() {
     // The list closed: touched — and focus back on the trigger if it was in

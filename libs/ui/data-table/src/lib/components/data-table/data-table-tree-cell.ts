@@ -23,7 +23,7 @@ export class ScDataTableTreeCell {
   readonly row = input.required<{ depth: number }>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex min-w-0 items-center gap-1.5 ps-[calc(var(--sc-data-table-depth)*1.5rem)] [&>svg]:size-4 [&>svg]:shrink-0',
       this.classInput(),

@@ -25,15 +25,15 @@ import { ScColorPicker } from './color-picker';
   },
 })
 export class ScColorPickerField {
-  protected readonly picker = inject(ScColorPicker);
+  private readonly picker = inject(ScColorPicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** What is typed, while typing. */
-  protected readonly draft = signal<string | null>(null);
-  protected readonly wrong = signal(false);
+  private readonly draft = signal<string | null>(null);
+  private readonly wrong = signal(false);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 font-mono text-sm shadow-xs outline-none',
       'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
@@ -47,13 +47,13 @@ export class ScColorPickerField {
     ɵwarnIfUnnamed('scColorPickerField');
   }
 
-  protected onInput(event: Event): void {
+  private onInput(event: Event): void {
     const text = (event.target as HTMLInputElement).value;
     this.draft.set(text);
     this.wrong.set(!this.picker.setColor(text));
   }
 
-  protected onBlur(): void {
+  private onBlur(): void {
     this.draft.set(null);
     this.wrong.set(false);
     this.picker.touch.emit();

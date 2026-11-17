@@ -52,19 +52,19 @@ interface Item {
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledSortableListDemo {
-  readonly locked = signal(true);
-  readonly items = signal<Item[]>([
+  private readonly locked = signal(true);
+  private readonly items = signal<Item[]>([
     { id: 'r1', label: 'First' },
     { id: 'r2', label: 'Second' },
     { id: 'r3', label: 'Third' },
   ]);
-  readonly joined = computed(() =>
+  private readonly joined = computed(() =>
     this.items()
       .map((item) => item.label)
       .join(', '),
   );
   /** What a keyboard move says, step by step. */
-  readonly announce = ({
+  private readonly announce = ({
     type,
     item,
     position,

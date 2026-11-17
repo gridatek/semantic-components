@@ -18,7 +18,7 @@ import { ContextUsageDemo } from './context-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ContextUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScPreviewCard,

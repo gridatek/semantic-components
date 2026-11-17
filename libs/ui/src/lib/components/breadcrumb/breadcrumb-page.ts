@@ -13,7 +13,7 @@ import { cn } from 'cn';
 export class ScBreadcrumbPage {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-foreground font-normal', this.classInput()),
   );
 }

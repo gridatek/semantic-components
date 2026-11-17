@@ -18,7 +18,7 @@ import { EmptyNotificationCenterDemo } from './empty-notification-center-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class EmptyNotificationCenterDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   type ScNotification,
   ScNotificationCenter,

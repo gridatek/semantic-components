@@ -19,7 +19,7 @@ export class ScInputButton {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.inputStyles,
       'inline-flex cursor-pointer items-center gap-2 text-start text-muted-foreground select-none',

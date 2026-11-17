@@ -108,7 +108,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewCardOverview {
-  protected readonly data = [
+  private readonly data = [
     { month: 'Jan', amount: 40 },
     { month: 'Feb', amount: 55 },
     { month: 'Mar', amount: 35 },
@@ -122,9 +122,9 @@ export class PreviewCardOverview {
     { month: 'Nov', amount: 45 },
     { month: 'Dec', amount: 80 },
   ];
-  protected readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     amount: { label: 'Activity', color: 'var(--chart-2)' },
   };
 
-  protected readonly initial = (month: string) => month.slice(0, 1);
+  private readonly initial = (month: string) => month.slice(0, 1);
 }

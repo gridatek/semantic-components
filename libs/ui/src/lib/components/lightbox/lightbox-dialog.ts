@@ -19,11 +19,11 @@ import { ScLightbox } from './lightbox';
   },
 })
 export class ScLightboxDialog {
-  protected readonly lightbox = inject(ScLightbox);
+  private readonly lightbox = inject(ScLightbox);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'm-0 h-dvh max-h-none w-dvw max-w-none flex-col overflow-hidden bg-black/95 p-0 text-white open:flex',
       'backdrop:bg-black/80',
@@ -39,12 +39,12 @@ export class ScLightboxDialog {
   }
 
   /** Escape: closed by the lightbox — back into its thumbnail, unzoomed, focus on the one shown. */
-  protected onCancel(event: Event): void {
+  private onCancel(event: Event): void {
     event.preventDefault();
     this.lightbox.close();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     this.lightbox.ɵonKeydown(event);
   }
 }

@@ -18,7 +18,7 @@ import { RouterLinkDemo } from './router-link-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RouterLinkDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScLink } from '@semantic-components/ui';
 

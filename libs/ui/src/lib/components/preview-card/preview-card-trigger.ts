@@ -23,7 +23,7 @@ import { ScPreviewCardProvider } from './preview-card-provider';
   },
 })
 export class ScPreviewCardTrigger {
-  protected readonly card = inject(ScPreviewCardProvider);
+  private readonly card = inject(ScPreviewCardProvider);
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -32,19 +32,19 @@ export class ScPreviewCardTrigger {
   /** How long the card stays once the pointer has left (ms). */
   readonly closeDelay = input(300);
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected onPointerEnter(event: Event): void {
+  private onPointerEnter(event: Event): void {
     if ((event as PointerEvent).pointerType === 'touch') return;
     this.card.timing.openSoon(this.delay());
   }
 
-  protected onPointerLeave(event: Event): void {
+  private onPointerLeave(event: Event): void {
     if ((event as PointerEvent).pointerType === 'touch') return;
     this.card.hideSoon();
   }
 
-  protected onFocus(event: Event): void {
+  private onFocus(event: Event): void {
     // Keyboard focus only: a click's focus is the pointer's.
     const target = event.target as HTMLElement;
     if (!target.matches(':focus-visible')) return;

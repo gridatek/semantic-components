@@ -18,7 +18,7 @@ import { BothScrollAreaNext2Demo } from './both-scroll-area-next2-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BothScrollAreaNext2DemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScFrame, ScScrollAreaNext2 } from '@semantic-components/ui';
 
 /** Content wider and taller than the box: it scrolls both ways. */

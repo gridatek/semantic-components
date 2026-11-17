@@ -18,7 +18,7 @@ import { DisabledNumberFieldDemo } from './disabled-number-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export default class DisabledNumberFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScLabel,
   ScNumberField,

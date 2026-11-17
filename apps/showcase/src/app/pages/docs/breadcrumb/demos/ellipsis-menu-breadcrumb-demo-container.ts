@@ -18,7 +18,7 @@ import { EllipsisMenuBreadcrumbDemo } from './ellipsis-menu-breadcrumb-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class EllipsisMenuBreadcrumbDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScBreadcrumb,

@@ -161,7 +161,7 @@ import { SubmenuMenuDemoContainer } from './demos/submenu-menu-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class MenuPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScMenuProvider, ScMenuTrigger, ScMenuPortal, ScMenu,',
@@ -200,7 +200,7 @@ export default class MenuPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScMenuProvider',
       selector: 'div[scMenuProvider], span[scMenuProvider]',

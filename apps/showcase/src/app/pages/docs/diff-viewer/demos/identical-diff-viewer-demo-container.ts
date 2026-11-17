@@ -18,7 +18,7 @@ import { IdenticalDiffViewerDemo } from './identical-diff-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class IdenticalDiffViewerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockFooter,

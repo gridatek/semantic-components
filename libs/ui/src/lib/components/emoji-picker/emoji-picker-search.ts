@@ -30,11 +30,11 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   },
 })
 export class ScEmojiPickerSearch {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50',
       this.classInput(),
@@ -52,7 +52,7 @@ export class ScEmojiPickerSearch {
     });
   }
 
-  protected onInput(event: Event): void {
+  private onInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this.state.search.set(value);
     // Typing: the first result is active, Enter picks it.

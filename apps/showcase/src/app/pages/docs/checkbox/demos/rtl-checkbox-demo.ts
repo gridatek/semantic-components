@@ -58,7 +58,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCheckboxDemo {
-  protected readonly termsForm = form(
+  private readonly termsForm = form(
     signal({ terms: false, agreed: true, notifications: false }),
   );
 }

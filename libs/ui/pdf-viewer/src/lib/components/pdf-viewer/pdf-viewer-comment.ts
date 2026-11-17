@@ -31,10 +31,10 @@ export class ScPdfViewerComment {
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly active = computed(
+  private readonly active = computed(
     () => this.pdfViewer.activeCommentId() === this.comment().id,
   );
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('data-active:bg-accent', this.classInput()),
   );
 

@@ -23,15 +23,15 @@ import { ScButton, ScToaster } from '@semantic-components/ui';
 })
 export class UpdateToastDemo {
   private readonly toaster = inject(ScToaster);
-  protected readonly toastId = signal<string | null>(null);
+  private readonly toastId = signal<string | null>(null);
 
-  start(): void {
+  private start(): void {
     this.toastId.set(
       this.toaster.show({ variant: 'loading', description: 'Uploading…' }),
     );
   }
 
-  finish(): void {
+  private finish(): void {
     const id = this.toastId();
     if (!id) return;
     this.toaster.update(id, {

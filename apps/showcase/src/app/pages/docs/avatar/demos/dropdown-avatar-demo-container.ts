@@ -18,7 +18,7 @@ import { DropdownAvatarDemo } from './dropdown-avatar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DropdownAvatarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,

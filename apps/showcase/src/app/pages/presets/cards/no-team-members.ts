@@ -68,7 +68,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewNoTeamMembers {
-  protected readonly people = [
+  private readonly people = [
     { handle: 'shadcn', initials: 'CN' },
     { handle: 'maxleiter', initials: 'LR' },
     { handle: 'evilrabbit', initials: 'ER' },

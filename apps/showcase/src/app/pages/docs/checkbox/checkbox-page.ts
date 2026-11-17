@@ -161,7 +161,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
   encapsulation: ViewEncapsulation.None,
 })
 export default class CheckboxPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScCheckbox, ScField, ScFieldContentWrapper, ScFieldDescription, ScFieldTitle, ScLabel } from '@semantic-components/ui';",
     markup: [
@@ -191,7 +191,7 @@ export default class CheckboxPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScCheckbox',
       selector: 'input[scCheckbox]',

@@ -16,8 +16,8 @@ import { editorSearch } from './editor-search-state';
   },
 })
 export class ScEditorSearchClose {
-  protected readonly search = editorSearch(inject(SC_EDITOR));
+  private readonly search = editorSearch(inject(SC_EDITOR));
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

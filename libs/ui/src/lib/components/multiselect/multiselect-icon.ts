@@ -14,7 +14,7 @@ export class ScMultiselectIcon {
 
   private readonly multiselect = inject(SC_MULTISELECT);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-150',
       this.multiselect.open() && 'rotate-180',

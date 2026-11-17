@@ -14,7 +14,7 @@ export class ScSelectIcon {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.icon,
       // Its trigger is aria-expanded while the list is open.

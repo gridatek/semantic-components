@@ -18,7 +18,7 @@ import { SingleCalendarDemo } from './single-calendar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SingleCalendarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarClear,

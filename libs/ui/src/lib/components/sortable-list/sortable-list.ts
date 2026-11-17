@@ -95,7 +95,7 @@ export class ScSortableList<T = unknown> {
   /** What is shown: while an item is moved, the moving order. */
   readonly items = computed(() => this.sortable.items(LIST));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'gap-2',
       this.orientation() === 'vertical' && 'flex flex-col',

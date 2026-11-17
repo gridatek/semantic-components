@@ -87,7 +87,7 @@ import { schedulerEventInjector } from './scheduler-types';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSchedulerMonth {
-  protected readonly scheduler = inject(ScScheduler);
+  private readonly scheduler = inject(ScScheduler);
   private readonly injector = inject(Injector);
   private readonly locale = inject(LOCALE_ID);
 
@@ -95,14 +95,14 @@ export class ScSchedulerMonth {
   /** How many events a day shows; the rest go to your "more". */
   readonly maxEvents = input<number>(3);
 
-  protected readonly template = computed(
+  private readonly template = computed(
     () => this.scheduler.eventTemplate()?.template ?? null,
   );
-  protected readonly moreTemplate = computed(
+  private readonly moreTemplate = computed(
     () => this.scheduler.moreTemplate()?.template ?? null,
   );
 
-  protected readonly weekdays = computed(() =>
+  private readonly weekdays = computed(() =>
     (this.scheduler.weeks()[0] ?? []).map((day) => ({
       short: day.toLocaleString(this.locale, { weekday: 'short' }),
       long: day.toLocaleString(this.locale, { weekday: 'long' }),
@@ -110,7 +110,7 @@ export class ScSchedulerMonth {
   );
 
   /** Each week's days, with their events (and their injectors). */
-  protected readonly weeks = computed(() => {
+  private readonly weeks = computed(() => {
     const events = this.scheduler.events();
     const timeZone = this.scheduler.timeZone();
     const month = this.scheduler.date().month;
@@ -141,14 +141,14 @@ export class ScSchedulerMonth {
     );
   });
 
-  protected readonly dayClass = cn(
+  private readonly dayClass = cn(
     'hover:bg-muted size-7 shrink-0 self-start rounded-full text-xs font-medium outline-none transition-colors',
     'focus-visible:ring-3 focus-visible:ring-ring/50',
     'in-data-outside:text-muted-foreground',
     'aria-[current=date]:bg-primary aria-[current=date]:text-primary-foreground',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col overflow-hidden rounded-lg border', this.classInput()),
   );
 }

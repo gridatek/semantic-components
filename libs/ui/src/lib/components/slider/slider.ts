@@ -48,7 +48,7 @@ export class ScSlider implements FormValueControl<number> {
   private readonly styles = injectPreset().slider;
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
-  protected readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-slider-');
 
   /** The value: two-way, or a [formField]. */
@@ -65,13 +65,13 @@ export class ScSlider implements FormValueControl<number> {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
 
-  readonly id = computed(
+  private readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
-  protected readonly resolvedMin = computed(() => this.min() ?? 0);
-  protected readonly resolvedMax = computed(() => this.max() ?? 100);
+  private readonly resolvedMin = computed(() => this.min() ?? 0);
+  private readonly resolvedMax = computed(() => this.max() ?? 100);
 
-  protected readonly ariaDescribedBy = computed(
+  private readonly ariaDescribedBy = computed(
     () =>
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
@@ -79,17 +79,17 @@ export class ScSlider implements FormValueControl<number> {
   );
 
   // Invalid once touched, as the other controls.
-  protected readonly ariaInvalid = computed(
+  private readonly ariaInvalid = computed(
     () => (this.touched() && this.invalid()) || null,
   );
 
   /** How far along the value is, 0 to 1: Chrome's range is drawn from it. */
-  protected readonly fraction = computed(() => {
+  private readonly fraction = computed(() => {
     const range = this.resolvedMax() - this.resolvedMin();
     return range > 0 ? (this.value() - this.resolvedMin()) / range : 0;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'm-0 cursor-pointer appearance-none bg-transparent focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50',
       // Vertical: the native range turned, its value growing upward.
@@ -124,7 +124,7 @@ export class ScSlider implements FormValueControl<number> {
    * Safari flips them (specs: "RTL" in the slider and range slider demos).
    * See docs/webkit-workarounds.md.
    */
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (
       this.orientation() !== 'horizontal' ||
       this.direction.value !== 'rtl' ||
@@ -148,7 +148,7 @@ export class ScSlider implements FormValueControl<number> {
     this.element.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
-  protected onInput(): void {
+  private onInput(): void {
     this.value.set(this.element.valueAsNumber);
   }
 }

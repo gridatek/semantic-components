@@ -18,7 +18,7 @@ import { StepsTaskDemo } from './steps-task-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StepsTaskDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

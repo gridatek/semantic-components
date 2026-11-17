@@ -74,7 +74,7 @@ export class ScCarousel {
   readonly canScrollPrev = signal(false);
   readonly canScrollNext = signal(false);
 
-  protected readonly class = computed(() => cn('relative', this.classInput()));
+  private readonly class = computed(() => cn('relative', this.classInput()));
 
   constructor() {
     ɵwarnIfUnnamed('scCarousel');
@@ -139,7 +139,7 @@ export class ScCarousel {
     this.apiSignal()?.scrollNext();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
     let step: 1 | -1 | 0 = 0;
     if (this.orientation() === 'vertical') {

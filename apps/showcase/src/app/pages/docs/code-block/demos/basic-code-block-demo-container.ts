@@ -18,7 +18,7 @@ import { BasicCodeBlockDemo } from './basic-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockContent,

@@ -14,7 +14,7 @@ import { SelectUsageDemo } from './select-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSelect,
   ScSelectGroup,

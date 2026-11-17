@@ -18,7 +18,7 @@ import { WithIconButtonDemo } from './with-icon-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class WithIconButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { SiGitBranchIcon, SiGitForkIcon } from '@semantic-icons/lucide-icons';
 

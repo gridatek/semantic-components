@@ -18,7 +18,7 @@ import { SingleToggleGroupDemo } from './single-toggle-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SingleToggleGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   SiTextAlignCenterIcon,

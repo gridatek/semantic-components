@@ -19,13 +19,13 @@ import { scrollWhileHovered } from './select-scroll';
   },
 })
 export class ScSelectScrollDownButton {
-  protected readonly popup = inject(ScSelectPopup);
+  private readonly popup = inject(ScSelectPopup);
   private readonly styles = injectPreset().select;
   private readonly scroll = scrollWhileHovered(this.popup, 1);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('sticky bottom-0', this.styles.scrollDownButton, this.classInput()),
   );
 
@@ -33,11 +33,11 @@ export class ScSelectScrollDownButton {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected start(): void {
+  private start(): void {
     this.scroll.start();
   }
 
-  protected stop(): void {
+  private stop(): void {
     this.scroll.stop();
   }
 }

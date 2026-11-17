@@ -18,7 +18,7 @@ import { PdfViewerPresentationDemo } from './pdf-viewer-presentation-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PdfViewerPresentationDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
   ScButton,
   ScInput,

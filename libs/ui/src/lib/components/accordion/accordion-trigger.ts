@@ -30,7 +30,7 @@ export class ScAccordionTrigger extends AccordionTrigger {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // Focus shown in every style (luma's has none); a style's own wins.
       'focus-visible:ring-3 focus-visible:ring-ring/50',

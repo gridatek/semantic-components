@@ -16,7 +16,7 @@ import { cn } from 'cn';
 export class ScTableContainer {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative w-full overflow-x-auto', this.classInput()),
   );
 }

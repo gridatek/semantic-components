@@ -19,5 +19,5 @@ import { ScNumberTicker } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class NumberTickerUsageDemo {
-  readonly count = signal(0);
+  private readonly count = signal(0);
 }

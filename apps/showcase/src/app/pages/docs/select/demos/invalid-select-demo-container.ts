@@ -18,7 +18,7 @@ import { InvalidSelectDemo } from './invalid-select-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidSelectDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScField,

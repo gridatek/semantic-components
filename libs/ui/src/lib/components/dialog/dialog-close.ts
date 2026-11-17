@@ -29,14 +29,14 @@ export class ScDialogClose {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  protected close(): void {
+  private close(): void {
     this.dialogProvider.open.set(false);
   }
 }

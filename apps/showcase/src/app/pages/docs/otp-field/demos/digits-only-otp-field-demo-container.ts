@@ -18,7 +18,7 @@ import { DigitsOnlyOtpFieldDemo } from './digits-only-otp-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DigitsOnlyOtpFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,

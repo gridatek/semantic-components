@@ -18,7 +18,7 @@ import { FormTimeInputDemo } from './form-time-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTimeInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScButton,

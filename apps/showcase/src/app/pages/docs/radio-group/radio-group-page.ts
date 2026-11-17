@@ -166,7 +166,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
   encapsulation: ViewEncapsulation.None,
 })
 export default class RadioGroupPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScRadioGroup, ScRadio, ScField } from '@semantic-components/ui';",
     markup: [
@@ -179,7 +179,7 @@ export default class RadioGroupPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScRadioGroup',
       selector: 'div[scRadioGroup]',

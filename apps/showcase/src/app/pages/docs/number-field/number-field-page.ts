@@ -137,7 +137,7 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
   encapsulation: ViewEncapsulation.None,
 })
 export default class NumberFieldPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScNumberField, ScNumberFieldGroup, ScNumberFieldInput,',
@@ -160,7 +160,7 @@ export default class NumberFieldPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScNumberField',
       selector: 'div[scNumberField]',

@@ -59,7 +59,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewContributors {
-  protected readonly usernames = [
+  private readonly usernames = [
     'shadcn',
     'vercel',
     'nextjs',

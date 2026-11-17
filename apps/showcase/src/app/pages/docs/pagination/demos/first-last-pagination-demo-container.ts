@@ -18,7 +18,7 @@ import { FirstLastPaginationDemo } from './first-last-pagination-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FirstLastPaginationDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScPagination,
   ScPaginationEllipsis,

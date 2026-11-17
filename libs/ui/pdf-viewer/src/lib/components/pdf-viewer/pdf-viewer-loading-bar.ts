@@ -18,18 +18,18 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   },
 })
 export class ScPdfViewerLoadingBar {
-  readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Download progress in percent, while it's known and not complete. */
-  protected readonly percent = computed(() => {
+  private readonly percent = computed(() => {
     const progress = this.pdfViewer.loadProgress();
     return progress !== null && progress < 1 && !this.pdfViewer.error()
       ? Math.round(progress * 100)
       : null;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-x-0 top-0 z-20 [&>[data-slot=progress-track]]:rounded-none [&>[data-slot=progress-track]]:bg-transparent',
       this.classInput(),

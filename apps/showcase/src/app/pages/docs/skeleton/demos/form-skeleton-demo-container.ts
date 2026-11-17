@@ -18,7 +18,7 @@ import { FormSkeletonDemo } from './form-skeleton-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormSkeletonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSkeleton } from '@semantic-components/ui';
 
 /** A form: each field’s label and input, then its button. */

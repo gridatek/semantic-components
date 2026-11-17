@@ -89,13 +89,13 @@ const POSITIONS: Record<string, number> = { open: 0, half: 50, closed: 100 };
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewRollerShades {
-  protected readonly position = signal(50);
-  protected readonly preset = computed(() => {
+  private readonly position = signal(50);
+  private readonly preset = computed(() => {
     const p = this.position();
     return [p <= 10 ? 'open' : p >= 90 ? 'closed' : 'half'];
   });
 
-  protected choose(value: string[]): void {
+  private choose(value: string[]): void {
     const v = value[0];
     if (v in POSITIONS) this.position.set(POSITIONS[v]);
   }

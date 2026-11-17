@@ -18,7 +18,7 @@ import { SplitButtonDemo } from './split-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SplitButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScControlGroup,

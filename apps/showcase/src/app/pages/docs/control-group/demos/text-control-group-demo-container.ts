@@ -18,7 +18,7 @@ import { TextControlGroupDemo } from './text-control-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TextControlGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScControlGroup,

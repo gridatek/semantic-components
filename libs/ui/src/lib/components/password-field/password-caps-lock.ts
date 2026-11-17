@@ -29,11 +29,11 @@ import { ScPasswordField } from './password-field';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScPasswordCapsLock {
-  protected readonly password = inject(ScPasswordField);
+  private readonly password = inject(ScPasswordField);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground flex items-center gap-1.5 text-sm empty:absolute [&_svg]:size-4 [&_svg]:shrink-0',
       this.classInput(),

@@ -30,10 +30,10 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   },
 })
 export class ScPdfViewerFindInput {
-  readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     // Opening the find bar (or Ctrl+F) puts the cursor here.
@@ -50,17 +50,17 @@ export class ScPdfViewerFindInput {
     });
   }
 
-  protected onInput(event: Event): void {
+  private onInput(event: Event): void {
     this.pdfViewer.find((event.target as HTMLInputElement).value);
   }
 
-  protected onEnter(event: Event): void {
+  private onEnter(event: Event): void {
     if ((event as KeyboardEvent).shiftKey) return;
     event.preventDefault();
     this.pdfViewer.findNext();
   }
 
-  protected onShiftEnter(event: Event): void {
+  private onShiftEnter(event: Event): void {
     event.preventDefault();
     this.pdfViewer.findPrevious();
   }

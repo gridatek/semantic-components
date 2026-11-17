@@ -18,7 +18,7 @@ import { SizeSpinnerDemo } from './size-spinner-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizeSpinnerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSpinner } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 

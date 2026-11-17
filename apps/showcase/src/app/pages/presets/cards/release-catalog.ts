@@ -111,9 +111,9 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewReleaseCatalog {
-  protected readonly type = signal(['etfs']);
+  private readonly type = signal(['etfs']);
 
-  protected readonly holdings = [
+  private readonly holdings = [
     {
       ticker: 'VOO',
       name: 'Vanguard S&P 500 ETF',

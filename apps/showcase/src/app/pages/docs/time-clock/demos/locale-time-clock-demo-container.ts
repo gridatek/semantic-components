@@ -18,7 +18,7 @@ import { LocaleTimeClockDemo } from './locale-time-clock-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleTimeClockDemoContainer {
-  readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTimeClock,
   ScTimeClockDial,

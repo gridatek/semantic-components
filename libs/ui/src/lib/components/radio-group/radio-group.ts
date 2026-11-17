@@ -62,7 +62,7 @@ export class ScRadioGroup<T = unknown> implements FormValueControl<
   /** Invalid once touched, as the other controls. */
   readonly showInvalid = computed(() => this.touched() && this.invalid());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.orientation() === 'horizontal'
         ? 'flex flex-row gap-4'
@@ -86,7 +86,7 @@ export class ScRadioGroup<T = unknown> implements FormValueControl<
     this.value.set(value as T);
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     if (!this.element.contains(event.relatedTarget as Node | null)) {
       this.touch.emit();
     }

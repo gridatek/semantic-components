@@ -49,7 +49,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TableFrameDemo {
-  protected readonly plans = [
+  private readonly plans = [
     { name: 'Starter', seats: '1', price: '$0' },
     { name: 'Team', seats: '10', price: '$49' },
     { name: 'Business', seats: '50', price: '$199' },

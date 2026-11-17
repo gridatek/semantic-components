@@ -62,22 +62,22 @@ export class ScScrollAreaNext2 {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Set only when an edge's distance changes: nothing to redraw otherwise. */
-  protected readonly edges = signal<ScScrollAreaNext2Edges>(
+  private readonly edges = signal<ScScrollAreaNext2Edges>(
     { top: 0, bottom: 0, start: 0, end: 0 },
     { equal: sameEdges },
   );
 
-  protected readonly overflowsX = computed(
+  private readonly overflowsX = computed(
     () => this.edges().start + this.edges().end > 0,
   );
-  protected readonly overflowsY = computed(
+  private readonly overflowsY = computed(
     () => this.edges().top + this.edges().bottom > 0,
   );
-  protected readonly overflows = computed(
+  private readonly overflows = computed(
     () => this.overflowsX() || this.overflowsY(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'overflow-auto',
       // The browser's scrollbar in the preset's look (Chromium, Safari): 10px,

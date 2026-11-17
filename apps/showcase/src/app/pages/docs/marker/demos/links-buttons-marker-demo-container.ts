@@ -18,7 +18,7 @@ import { LinksButtonsMarkerDemo } from './links-buttons-marker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinksButtonsMarkerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScFrame,
   ScMarker,

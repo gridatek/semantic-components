@@ -18,7 +18,7 @@ import { RequirementsPasswordFieldDemo } from './requirements-password-field-dem
   encapsulation: ViewEncapsulation.None,
 })
 export class RequirementsPasswordFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScLabel,

@@ -50,11 +50,11 @@ import { ScTransferListPane } from './transfer-list-pane';
 export class ScTransferListOption {
   private readonly pane = inject(ScTransferListPane);
   private readonly option = inject<Option<string>>(Option);
-  protected readonly onPointerMove = useActiveOption(this.option);
+  private readonly onPointerMove = useActiveOption(this.option);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/option flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none select-none',
       'hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring/50',
@@ -63,7 +63,7 @@ export class ScTransferListOption {
     ),
   );
 
-  protected onDoubleClick(): void {
+  private onDoubleClick(): void {
     if (this.option.disabled()) return;
     const id = this.option.value();
     this.pane.list.move(

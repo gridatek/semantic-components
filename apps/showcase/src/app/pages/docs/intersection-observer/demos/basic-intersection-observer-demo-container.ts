@@ -19,7 +19,7 @@ import { BasicIntersectionObserverDemo } from './basic-intersection-observer-dem
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicIntersectionObserverDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScFrame, ScIntersectionObserver } from '@semantic-components/ui';
 
 @Component({

@@ -42,7 +42,8 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledPasswordFieldDemo {
-  readonly account = form(signal({ password: 'locked-by-admin' }), (s) =>
-    disabled(s.password),
+  private readonly account = form(
+    signal({ password: 'locked-by-admin' }),
+    (s) => disabled(s.password),
   );
 }

@@ -29,7 +29,7 @@ export const SC_RATING = new InjectionToken<ScRating>('SC_RATING');
 export class ScRating {
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
-  protected readonly role = computed(() => {
+  private readonly role = computed(() => {
     const tagName = this.elementRef.nativeElement.tagName;
     return tagName === 'LABEL' ? null : 'group';
   });
@@ -54,7 +54,7 @@ export class ScRating {
     return Math.max(...allItems.map((item) => item.value()));
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('inline-flex items-center', this.classInput()),
   );
 

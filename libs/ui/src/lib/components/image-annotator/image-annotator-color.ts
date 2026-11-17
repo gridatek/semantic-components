@@ -21,18 +21,18 @@ import { ScImageAnnotator } from './image-annotator';
   },
 })
 export class ScImageAnnotatorColor {
-  protected readonly annotator = inject(ScImageAnnotator);
+  private readonly annotator = inject(ScImageAnnotator);
 
   readonly value = input.required<string>({
     alias: 'scImageAnnotatorColor',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly pressed = computed(
+  private readonly pressed = computed(
     () => this.annotator.color().toLowerCase() === this.value().toLowerCase(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'size-6 shrink-0 rounded-full border-2 border-white shadow-[0_0_0_1px_var(--border)] outline-none transition-transform',
       'hover:scale-110 focus-visible:ring-3 focus-visible:ring-ring/50',

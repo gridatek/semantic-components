@@ -95,7 +95,7 @@ export class ScChartRadar {
     easing: this.animationEasing,
   });
 
-  protected readonly color = computed(() => `var(--color-${this.key()})`);
+  private readonly color = computed(() => `var(--color-${this.key()})`);
 
   /** Its points where they belong now. */
   private readonly targets = computed<
@@ -140,7 +140,7 @@ export class ScChartRadar {
   });
 
   /** What is drawn: its points, moving, and moving out from the center as it appears. */
-  protected readonly points = computed(() => {
+  private readonly points = computed(() => {
     const out = this.isAnimationActive() ? this.entrance() : 1;
     const { cx, cy } = this.state.circle();
     return this.moving.items().map((p) => ({
@@ -149,19 +149,19 @@ export class ScChartRadar {
     }));
   });
 
-  protected readonly path = computed(() => {
+  private readonly path = computed(() => {
     const points = this.points();
     return points.length
       ? `M${points.map((p) => `${p.x},${p.y}`).join('L')}Z`
       : '';
   });
 
-  protected readonly activePoint = computed(() => {
+  private readonly activePoint = computed(() => {
     const index = this.state.activeIndex();
     return this.activeDot() && index !== null ? this.points()[index] : null;
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({

@@ -22,5 +22,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SegmentedDateInputDemo {
-  readonly date = signal<Temporal.PlainDate | null>(null);
+  private readonly date = signal<Temporal.PlainDate | null>(null);
 }

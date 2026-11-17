@@ -14,7 +14,7 @@ import { ToastUsageDemo } from './toast-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ToastUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScButton, ScToaster } from '@semantic-components/ui';
 
 /** A toast from code: its title, its description and an Undo action. */

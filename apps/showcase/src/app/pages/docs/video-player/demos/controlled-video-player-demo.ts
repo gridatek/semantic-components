@@ -78,6 +78,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledVideoPlayerDemo {
-  readonly paused = signal(true);
-  readonly time = signal(0);
+  private readonly paused = signal(true);
+  private readonly time = signal(0);
 }

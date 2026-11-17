@@ -19,16 +19,16 @@ import { ScLightbox } from './lightbox';
   },
 })
 export class ScLightboxThumbnail {
-  protected readonly lightbox = inject(ScLightbox);
+  private readonly lightbox = inject(ScLightbox);
 
   readonly index = input.required<number>({ alias: 'scLightboxThumbnail' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly current = computed(
+  private readonly current = computed(
     () => this.index() === this.lightbox.index(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'size-14 shrink-0 overflow-hidden rounded-md opacity-60 outline-none transition-opacity',
       'hover:opacity-100 focus-visible:ring-3 focus-visible:ring-white/60',

@@ -75,7 +75,7 @@ import { TestResultsUsageDemoContainer } from './demos/test-results-usage-demo-c
   encapsulation: ViewEncapsulation.None,
 })
 export default class TestResultsPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle,',

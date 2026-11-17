@@ -182,7 +182,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class DataTablePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScDataTableHeaderCell, ScDataTableCell, ScDataTableRow, ScDataTableSortButton,',
@@ -215,7 +215,7 @@ export default class DataTablePage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScDataTableHeaderCell',
       selector: 'th[scDataTableHeaderCell]',

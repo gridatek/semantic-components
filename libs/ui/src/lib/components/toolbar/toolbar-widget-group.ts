@@ -49,7 +49,7 @@ export class ScToolbarWidgetGroup<T = unknown>
   /** Focus left the group: the field is touched. */
   readonly touch = output<void>();
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex items-center gap-1', this.classInput()),
   );
 
@@ -71,7 +71,7 @@ export class ScToolbarWidgetGroup<T = unknown>
     bindInput(inject(ToolbarWidgetGroup).disabled, this.disabled);
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     if (!this.element.contains(event.relatedTarget as Node | null)) {
       this.touch.emit();
     }

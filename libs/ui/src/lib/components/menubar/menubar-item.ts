@@ -57,7 +57,7 @@ export class ScMenubarItem {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   private readonly menuItem = inject(MenuItem);
-  protected readonly submenuPortal = contentChild(ScMenuPortal);
+  private readonly submenuPortal = contentChild(ScMenuPortal);
   private readonly connectedOverlay = viewChild(CdkConnectedOverlay);
 
   private readonly scMenubar = inject(ScMenubar);
@@ -69,7 +69,7 @@ export class ScMenubarItem {
    * above it if there is no room. The CDK mirrors start and end right to
    * left, not the offsets: turned here, read as the menu opens.
    */
-  protected readonly positions = computed(() => {
+  private readonly positions = computed(() => {
     this.menuItem.expanded();
     const offsetX = this.directionality.value === 'rtl' ? 4 : -4;
     return [
@@ -92,9 +92,9 @@ export class ScMenubarItem {
     ];
   });
 
-  protected readonly rendered = computed(() => this.scMenubar.rendered());
+  private readonly rendered = computed(() => this.scMenubar.rendered());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.trigger,
       // shadcn's has none: a keyboard user sees where focus is.

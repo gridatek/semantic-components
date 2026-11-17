@@ -18,7 +18,7 @@ import { NonModalDrawerDemo } from './non-modal-drawer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NonModalDrawerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScDrawer,

@@ -19,13 +19,13 @@ export class ScColorPickerSwatch {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** No colour (an empty value): the checkerboard alone. */
-  protected readonly background = computed(() =>
+  private readonly background = computed(() =>
     this.picker.value()
       ? `linear-gradient(${this.picker.css()}, ${this.picker.css()}), ${CHECKERBOARD}`
       : CHECKERBOARD,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('inline-block size-9 shrink-0 rounded-md border', this.classInput()),
   );
 }

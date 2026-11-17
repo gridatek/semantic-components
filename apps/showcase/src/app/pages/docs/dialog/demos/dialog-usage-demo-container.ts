@@ -14,7 +14,7 @@ import { DialogUsageDemo } from './dialog-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DialogUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScDialog,

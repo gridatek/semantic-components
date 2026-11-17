@@ -18,7 +18,7 @@ import { cn } from 'cn';
 export class ScVideoPlayerCenter {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-0 z-30 hidden items-center justify-center gap-6 transition-opacity duration-300 *:pointer-events-auto',
       // Small: always; wide: while paused (so before the first play too).

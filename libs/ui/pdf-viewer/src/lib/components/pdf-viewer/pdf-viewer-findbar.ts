@@ -17,9 +17,9 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerFindbar {
-  readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex items-center gap-2', this.classInput()),
   );
 }

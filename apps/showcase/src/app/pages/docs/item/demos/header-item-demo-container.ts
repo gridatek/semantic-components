@@ -18,7 +18,7 @@ import { HeaderItemDemo } from './header-item-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderItemDemoContainer {
-  readonly code = `import { NgOptimizedImage } from '@angular/common';
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScItem,

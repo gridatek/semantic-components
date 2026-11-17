@@ -14,7 +14,7 @@ import { SliderUsageDemo } from './slider-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SliderUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScSlider } from '@semantic-components/ui';
 
 /** A slider, named by aria-label (no label beside it). */

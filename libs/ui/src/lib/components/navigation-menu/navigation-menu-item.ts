@@ -27,7 +27,7 @@ import {
   },
 })
 export class ScNavigationMenuItem implements ScNavigationMenuItemRef {
-  protected readonly menu = inject(ScNavigationMenu);
+  private readonly menu = inject(ScNavigationMenu);
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -56,7 +56,7 @@ export class ScNavigationMenuItem implements ScNavigationMenuItemRef {
   readonly trigger = this.triggerElement.asReadonly();
   readonly content = this.contentElement.asReadonly();
 
-  protected readonly class = computed(() => cn('relative', this.classInput()));
+  private readonly class = computed(() => cn('relative', this.classInput()));
 
   constructor() {
     inject(DestroyRef).onDestroy(this.menu.register(this));

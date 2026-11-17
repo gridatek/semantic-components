@@ -71,16 +71,16 @@ import { LiveWaveformCanvas } from './live-waveform-canvas';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewLiveWaveform {
-  protected readonly active = signal(false);
-  protected readonly processing = signal(true);
-  protected readonly mode = signal<'static' | 'scrolling'>('static');
+  private readonly active = signal(false);
+  private readonly processing = signal(true);
+  private readonly mode = signal<'static' | 'scrolling'>('static');
 
-  protected toggleActive(): void {
+  private toggleActive(): void {
     this.active.update((on) => !on);
     if (this.active()) this.processing.set(false);
   }
 
-  protected toggleProcessing(): void {
+  private toggleProcessing(): void {
     this.processing.update((on) => !on);
     if (this.processing()) this.active.set(false);
   }

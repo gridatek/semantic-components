@@ -21,18 +21,18 @@ import type { ScEmojiListCategory } from './emoji-picker-types';
   },
 })
 export class ScEmojiPickerCategoryButton {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly category = input.required<ScEmojiListCategory>({
     alias: 'scEmojiPickerCategoryButton',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly current = computed(
+  private readonly current = computed(
     () => this.state.currentCategory() === this.category().index,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'hover:bg-accent aria-pressed:bg-accent aria-pressed:text-accent-foreground text-muted-foreground focus-visible:ring-ring/50 flex size-7 shrink-0 items-center justify-center rounded-sm outline-none focus-visible:ring-3 [&_svg]:size-4',
       this.classInput(),

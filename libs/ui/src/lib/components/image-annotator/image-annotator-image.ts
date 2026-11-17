@@ -22,7 +22,7 @@ export class ScImageAnnotatorImage {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none block h-auto w-full select-none',
       this.classInput(),
@@ -35,7 +35,7 @@ export class ScImageAnnotatorImage {
     if (this.element.complete && this.element.naturalWidth) this.onLoad();
   }
 
-  protected onLoad(): void {
+  private onLoad(): void {
     this.annotator.ɵnatural.set({
       width: this.element.naturalWidth,
       height: this.element.naturalHeight,

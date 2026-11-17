@@ -16,8 +16,8 @@ import { ScPdfViewerSignatureForm } from './pdf-viewer-signature-form';
   },
 })
 export class ScPdfViewerSignatureDescription {
-  protected readonly form = inject(ScPdfViewerSignatureForm);
+  private readonly form = inject(ScPdfViewerSignatureForm);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

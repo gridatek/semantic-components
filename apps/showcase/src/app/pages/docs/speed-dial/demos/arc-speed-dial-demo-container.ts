@@ -18,7 +18,7 @@ import { ArcSpeedDialDemo } from './arc-speed-dial-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ArcSpeedDialDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSpeedDial,
   ScSpeedDialAction,

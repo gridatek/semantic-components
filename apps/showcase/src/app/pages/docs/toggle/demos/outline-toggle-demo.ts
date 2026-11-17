@@ -22,6 +22,6 @@ import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class OutlineToggleDemo {
-  protected readonly italic = signal(false);
-  protected readonly bold = signal(false);
+  private readonly italic = signal(false);
+  private readonly bold = signal(false);
 }

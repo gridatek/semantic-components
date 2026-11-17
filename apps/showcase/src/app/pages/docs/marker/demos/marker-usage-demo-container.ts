@@ -14,7 +14,7 @@ import { MarkerUsageDemo } from './marker-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MarkerUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScMarker,
   ScMarkerContent,

@@ -91,18 +91,18 @@ export class ReasoningTraceDemo {
   private readonly text =
     'Image optimization is the bottleneck. Key its cache on the lockfile and the image directory instead of the commit hash.';
   /** The reasoning so far, and whether it is still coming. */
-  protected readonly thought = signal('');
-  protected readonly running = signal(false);
+  private readonly thought = signal('');
+  private readonly running = signal(false);
   /** Your choice, once you open or close it; until then, open while running. */
-  protected readonly choice = signal<boolean | null>(null);
-  protected readonly open = computed(() => this.choice() ?? this.running());
+  private readonly choice = signal<boolean | null>(null);
+  private readonly open = computed(() => this.choice() ?? this.running());
   private timer: ReturnType<typeof setInterval> | undefined;
 
   constructor() {
     inject(DestroyRef).onDestroy(() => clearInterval(this.timer));
   }
 
-  replay(): void {
+  private replay(): void {
     clearInterval(this.timer);
     this.thought.set('');
     this.choice.set(null);

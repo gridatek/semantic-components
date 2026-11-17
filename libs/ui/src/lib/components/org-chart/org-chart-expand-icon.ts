@@ -15,7 +15,7 @@ export class ScOrgChartExpandIcon {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground size-4 shrink-0 transition-transform duration-200 motion-reduce:transition-none',
       this.item.expanded() && 'rotate-180',

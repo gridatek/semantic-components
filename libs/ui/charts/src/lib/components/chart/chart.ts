@@ -28,7 +28,7 @@ export class ScChart {
   readonly data = input<readonly ScChartDatum[]>([]);
   readonly config = input<ScChartConfig>({});
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative flex aspect-video min-h-0 flex-col justify-center text-xs',
       this.chartStyles,

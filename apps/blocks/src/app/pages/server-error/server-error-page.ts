@@ -45,7 +45,7 @@ import { ScButton } from '@semantic-components/ui';
 export default class ServerErrorPage {
   private readonly document = inject(DOCUMENT);
 
-  tryAgain() {
+  private tryAgain() {
     this.document.defaultView?.location.reload();
   }
 }

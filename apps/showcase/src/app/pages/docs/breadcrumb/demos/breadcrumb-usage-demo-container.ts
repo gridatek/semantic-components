@@ -14,7 +14,7 @@ import { BreadcrumbUsageDemo } from './breadcrumb-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BreadcrumbUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScBreadcrumb,

@@ -14,10 +14,10 @@ import { ScScrollAreaNext } from './scroll-area-next';
   },
 })
 export class ScScrollAreaNextCorner {
-  protected readonly area = inject(ScScrollAreaNext);
+  private readonly area = inject(ScScrollAreaNext);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute end-0 bottom-0 size-(--scroll-area-corner-size)',
       this.classInput(),

@@ -18,7 +18,7 @@ import { CircleProgressDemo } from './circle-progress-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CircleProgressDemoContainer {
-  readonly code = `import { PercentPipe } from '@angular/common';
+  private readonly code = `import { PercentPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScProgress,

@@ -147,10 +147,10 @@ export class InputEmojiPickerDemo {
   private readonly message =
     viewChild.required<ElementRef<HTMLInputElement>>('message');
 
-  readonly text = signal('');
+  private readonly text = signal('');
 
   /** Inserts the emoji where the cursor was, and puts it after it. */
-  insert(emoji: ScEmoji): void {
+  private insert(emoji: ScEmoji): void {
     const field = this.message().nativeElement;
     const start = field.selectionStart ?? field.value.length;
     const end = field.selectionEnd ?? start;

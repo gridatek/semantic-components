@@ -14,7 +14,7 @@ export class ScQuestionnaireChoices {
   private readonly styles = injectPreset().questionnaire;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.choices, this.classInput()),
   );
 }

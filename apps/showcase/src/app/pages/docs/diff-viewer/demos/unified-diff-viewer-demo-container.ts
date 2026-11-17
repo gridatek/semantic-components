@@ -18,7 +18,7 @@ import { UnifiedDiffViewerDemo } from './unified-diff-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class UnifiedDiffViewerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockHeader,

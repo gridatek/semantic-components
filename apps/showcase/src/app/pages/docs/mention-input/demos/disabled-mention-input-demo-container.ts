@@ -14,7 +14,7 @@ import { DisabledMentionInputDemo } from './disabled-mention-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledMentionInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScLabel,

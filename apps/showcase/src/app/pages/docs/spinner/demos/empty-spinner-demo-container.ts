@@ -18,7 +18,7 @@ import { EmptySpinnerDemo } from './empty-spinner-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class EmptySpinnerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScEmpty,

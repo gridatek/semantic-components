@@ -30,11 +30,11 @@ import { ScDiffViewer } from '@semantic-components/ui/diff-viewer';
   encapsulation: ViewEncapsulation.None,
 })
 export class WhitespaceDiffViewerDemo {
-  readonly ignore = signal(false);
-  readonly before = `function sum(a, b) {
+  private readonly ignore = signal(false);
+  private readonly before = `function sum(a, b) {
   return a + b;
 }`;
-  readonly after = `function sum(a, b) {
+  private readonly after = `function sum(a, b) {
     return a+b;
 }`;
 }

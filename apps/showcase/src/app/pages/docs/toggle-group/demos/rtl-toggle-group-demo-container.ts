@@ -18,7 +18,7 @@ import { RtlToggleGroupDemo } from './rtl-toggle-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlToggleGroupDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 

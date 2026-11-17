@@ -34,7 +34,7 @@ export class ScRadio {
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   private readonly radioGroup = inject(ScRadioGroup, { optional: true });
-  protected readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-radio-');
 
   readonly idInput = input('', { alias: 'id' });
@@ -49,18 +49,18 @@ export class ScRadio {
     transform: booleanAttribute,
   });
 
-  readonly id = computed(
+  private readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
-  readonly ariaDescribedBy = computed(
+  private readonly ariaDescribedBy = computed(
     () =>
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
       null,
   );
 
-  readonly disabled = computed(
+  private readonly disabled = computed(
     () => this.disabledInput() || (this.radioGroup?.disabled() ?? false),
   );
 
@@ -72,7 +72,7 @@ export class ScRadio {
 
   // Do not surface invalid until the control has been touched: its own
   // [formField] (the Angular way), or the group's.
-  protected readonly ariaInvalid = computed(
+  private readonly ariaInvalid = computed(
     () =>
       (this.touched() && this.invalid()) ||
       this.radioGroup?.showInvalid() ||
@@ -80,7 +80,7 @@ export class ScRadio {
   );
 
   /** The native value: the option, as text. */
-  protected readonly nativeValue = computed(() => {
+  private readonly nativeValue = computed(() => {
     const value = this.value();
     return value === undefined || value === null ? 'on' : String(value);
   });
@@ -96,13 +96,13 @@ export class ScRadio {
     });
   }
 
-  protected onChange(): void {
+  private onChange(): void {
     if (this.element.checked && this.radioGroup?.holdsChoice()) {
       this.radioGroup.select(this.value());
     }
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       "appearance-none before:content-['']",
       this.styles.item,

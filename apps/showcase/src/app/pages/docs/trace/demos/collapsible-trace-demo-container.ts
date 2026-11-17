@@ -18,7 +18,7 @@ import { CollapsibleTraceDemo } from './collapsible-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollapsibleTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

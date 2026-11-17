@@ -26,7 +26,7 @@ export class ScBadge {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScBadgeVariants['variant']>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles({ variant: this.variant() }), this.classInput()),
   );
 }

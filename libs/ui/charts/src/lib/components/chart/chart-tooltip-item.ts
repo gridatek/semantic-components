@@ -15,7 +15,7 @@ export class ScChartTooltipItem {
   readonly item = input.required<ScChartTooltipPayload>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex w-full items-stretch gap-2 leading-none', this.classInput()),
   );
 }

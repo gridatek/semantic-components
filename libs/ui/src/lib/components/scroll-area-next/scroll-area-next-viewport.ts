@@ -29,14 +29,14 @@ import { ScScrollAreaNext } from './scroll-area-next';
   },
 })
 export class ScScrollAreaNextViewport {
-  protected readonly area = inject(ScScrollAreaNext);
+  private readonly area = inject(ScScrollAreaNext);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly overflows = computed(
+  private readonly overflows = computed(
     () => this.area.hasOverflowX() || this.area.hasOverflowY(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'size-full overflow-auto rounded-[inherit] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
       'transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1',

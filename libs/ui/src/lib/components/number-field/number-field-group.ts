@@ -45,7 +45,7 @@ export class ScNumberFieldGroup {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScNumberFieldGroupVariant>('split');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.variant() === 'stacked'
         ? stacked

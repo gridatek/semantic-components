@@ -18,7 +18,7 @@ import { HorizontalSortableListDemo } from './horizontal-sortable-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalSortableListDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScSortableList,
   type ScSortableListAnnouncement,

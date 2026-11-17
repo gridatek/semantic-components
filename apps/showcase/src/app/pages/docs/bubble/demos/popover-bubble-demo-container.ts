@@ -18,7 +18,7 @@ import { PopoverBubbleDemo } from './popover-bubble-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PopoverBubbleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

@@ -53,7 +53,7 @@ export class ScAccordionItem implements ScAccordionItemContext {
   /** Open: its value is in the accordion's. */
   readonly open = computed(() => this.accordion.value().includes(this.value()));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.item, this.classInput()),
   );
 

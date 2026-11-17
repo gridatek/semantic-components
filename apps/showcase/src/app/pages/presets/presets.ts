@@ -207,31 +207,31 @@ import { PreviewCards } from './cards/preview-cards';
 export default class Presets {
   private readonly window = inject(DOCUMENT).defaultView;
 
-  protected readonly names = Object.keys(PRESETS) as ScPresetName[];
-  protected readonly current = presetFrom(inject(ScStorage));
+  private readonly names = Object.keys(PRESETS) as ScPresetName[];
+  private readonly current = presetFrom(inject(ScStorage));
 
-  protected readonly themeManager = inject(ScThemeManager);
-  protected readonly modes: readonly { value: ScThemeMode; label: string }[] = [
+  private readonly themeManager = inject(ScThemeManager);
+  private readonly modes: readonly { value: ScThemeMode; label: string }[] = [
     { value: 'light', label: 'Light' },
     { value: 'dark', label: 'Dark' },
     { value: 'system', label: 'System' },
   ];
-  protected readonly modeLabel = computed(
+  private readonly modeLabel = computed(
     () => this.modes.find((m) => m.value === this.themeManager.mode())?.label,
   );
 
-  protected setMode(value: string | null): void {
+  private setMode(value: string | null): void {
     const mode = this.modes.find((m) => m.value === value);
     if (mode) this.themeManager.setMode(mode.value);
   }
 
   /** An option's card: its name and value, an icon at the end. */
-  protected readonly card =
+  private readonly card =
     'relative flex w-36 shrink-0 items-center justify-between gap-2 px-2.5 py-2 text-start select-none hover:bg-muted focus-visible:ring-ring/50 focus-visible:ring-3 focus-visible:outline-none aria-expanded:bg-muted disabled:pointer-events-none disabled:opacity-50 md:w-full';
-  protected readonly icon = 'size-4 shrink-0';
+  private readonly icon = 'size-4 shrink-0';
 
   /** The options still to come, as shadcn's Create lists them. */
-  protected readonly soon = [
+  private readonly soon = [
     { label: 'Base Color', value: 'Neutral', icon: 'color' },
     { label: 'Theme', value: 'Neutral', icon: 'theme' },
     { label: 'Chart Color', value: 'Neutral', icon: 'chart' },
@@ -242,7 +242,7 @@ export default class Presets {
     { label: 'Menu', value: 'Default / Solid', icon: 'menu' },
   ] as const;
 
-  protected choose(name: string | null): void {
+  private choose(name: string | null): void {
     if (!name || name === this.current) return;
     storePreset(name as ScPresetName);
     this.window?.location.reload();

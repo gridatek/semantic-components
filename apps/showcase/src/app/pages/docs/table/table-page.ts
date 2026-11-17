@@ -159,7 +159,7 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class TablePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTableContainer, ScTable, ScTableCaption, ScTableHeader,',
@@ -185,7 +185,7 @@ export default class TablePage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScTableContainer',
       selector: 'div[scTableContainer]',

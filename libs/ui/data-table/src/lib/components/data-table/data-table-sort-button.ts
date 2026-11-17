@@ -35,7 +35,7 @@ export class ScDataTableSortButton {
   /** `'asc'`, `'desc'` or `false`. */
   readonly direction = computed(() => this.column().getIsSorted());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       '-ms-2 inline-flex h-8 items-center gap-1.5 rounded-md px-2 font-medium outline-none transition-colors',
       'hover:bg-accent hover:text-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50',
@@ -45,7 +45,7 @@ export class ScDataTableSortButton {
     ),
   );
 
-  protected toggle(event: MouseEvent): void {
+  private toggle(event: MouseEvent): void {
     const column = this.column();
     if (!column.getCanSort()) return;
     const multi = event.shiftKey && (column.getCanMultiSort?.() ?? false);

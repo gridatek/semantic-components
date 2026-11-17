@@ -110,10 +110,10 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledTourGuideDemo {
-  readonly labels = ['Search', 'Sections', 'Create'];
-  readonly open = signal(false);
-  readonly step = signal(0);
-  readonly outcome = signal('Not started.');
+  private readonly labels = ['Search', 'Sections', 'Create'];
+  private readonly open = signal(false);
+  private readonly step = signal(0);
+  private readonly outcome = signal('Not started.');
 
   constructor() {
     // Closed without finishing: said so.

@@ -18,7 +18,7 @@ import { GroupSeparatorButtonDemo } from './group-separator-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupSeparatorButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScControlGroup,

@@ -21,13 +21,13 @@ import { ScImageCropper } from './image-cropper';
   },
 })
 export class ScImageCropperImage {
-  protected readonly cropper = inject(ScImageCropper);
+  private readonly cropper = inject(ScImageCropper);
   private readonly element =
     inject<ElementRef<HTMLImageElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute max-w-none origin-center select-none',
       !this.cropper.ready() && 'invisible',
@@ -41,7 +41,7 @@ export class ScImageCropperImage {
     if (this.element.complete && this.element.naturalWidth) this.onLoad();
   }
 
-  protected onLoad(): void {
+  private onLoad(): void {
     this.cropper.ɵnatural.set({
       width: this.element.naturalWidth,
       height: this.element.naturalHeight,

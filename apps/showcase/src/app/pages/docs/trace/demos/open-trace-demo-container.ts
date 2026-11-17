@@ -18,7 +18,7 @@ import { OpenTraceDemo } from './open-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class OpenTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCollapsible,

@@ -59,7 +59,7 @@ import type { ScMentionUser } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomTriggerMentionInputDemo {
-  readonly channelList: ScMentionUser[] = [
+  private readonly channelList: ScMentionUser[] = [
     { id: '1', name: 'General', username: 'general' },
     { id: '2', name: 'Engineering', username: 'engineering' },
     { id: '3', name: 'Design', username: 'design' },

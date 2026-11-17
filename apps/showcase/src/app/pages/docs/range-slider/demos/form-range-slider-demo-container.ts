@@ -18,7 +18,7 @@ import { FormRangeSliderDemo } from './form-range-slider-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormRangeSliderDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
+  private readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, max, min } from '@angular/forms/signals';
 import {

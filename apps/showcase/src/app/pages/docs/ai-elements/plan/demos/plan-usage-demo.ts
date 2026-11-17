@@ -145,18 +145,18 @@ const STEPS = [
   encapsulation: ViewEncapsulation.None,
 })
 export class PlanUsageDemo {
-  protected readonly steps = STEPS;
+  private readonly steps = STEPS;
   private readonly answer =
     'Migrated Dialog and AlertDialog. The type checker passes.';
 
   /** The step running now; all done past the end; null before the plan. */
-  protected readonly current = signal<number | null>(STEPS.length);
-  protected readonly reply = signal(this.answer);
-  protected readonly busy = signal(false);
-  protected readonly done = computed(() =>
+  private readonly current = signal<number | null>(STEPS.length);
+  private readonly reply = signal(this.answer);
+  private readonly busy = signal(false);
+  private readonly done = computed(() =>
     Math.min(this.current() ?? 0, STEPS.length),
   );
-  protected readonly running = computed(
+  private readonly running = computed(
     () => this.busy() && this.done() < STEPS.length,
   );
   private timers: ReturnType<typeof setTimeout>[] = [];
@@ -165,7 +165,7 @@ export class PlanUsageDemo {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected replay(): void {
+  private replay(): void {
     this.stop();
     this.current.set(null);
     this.reply.set('');

@@ -18,7 +18,7 @@ import { InlineSideSheetDemo } from './inline-side-sheet-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InlineSideSheetDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScSheet,

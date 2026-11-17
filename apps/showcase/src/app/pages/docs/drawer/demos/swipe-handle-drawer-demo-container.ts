@@ -18,7 +18,7 @@ import { SwipeHandleDrawerDemo } from './swipe-handle-drawer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SwipeHandleDrawerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScDrawer,

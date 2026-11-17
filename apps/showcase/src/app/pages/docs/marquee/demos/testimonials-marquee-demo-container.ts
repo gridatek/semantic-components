@@ -18,7 +18,7 @@ import { TestimonialsMarqueeDemo } from './testimonials-marquee-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TestimonialsMarqueeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
 
 /** Two rows, going opposite ways. */

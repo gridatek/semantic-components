@@ -54,8 +54,8 @@ import { ScComboboxListContent } from './combobox-list-content';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScComboboxPopup {
-  protected readonly styles = injectPreset().combobox;
-  protected readonly root = inject(ScComboboxBase);
+  private readonly styles = injectPreset().combobox;
+  private readonly root = inject(ScComboboxBase);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -63,15 +63,15 @@ export class ScComboboxPopup {
   /** Its name as a dialog: its trigger's `aria-label`, or its field's label, when not given. */
   readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
-  protected readonly listContent = contentChild(ScComboboxListContent);
+  private readonly listContent = contentChild(ScComboboxListContent);
 
   /** A trigger opened it: the search is inside. */
-  protected readonly withSearch = computed(() => !this.root.field());
-  protected readonly label = computed(
+  private readonly withSearch = computed(() => !this.root.field());
+  private readonly label = computed(
     () => this.ariaLabel() ?? this.root.triggerLabel(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.popup,
       // The CDK overlay's size: its field's width, the room in the viewport.
@@ -83,12 +83,12 @@ export class ScComboboxPopup {
   );
 
   /** Beside the input, a press in the list keeps focus in the input. */
-  protected onMousedown(event: Event): void {
+  private onMousedown(event: Event): void {
     if (!this.withSearch()) event.preventDefault();
   }
 
   /** With the search inside: focus gone elsewhere closes it. */
-  protected onFocusout(event: FocusEvent): void {
+  private onFocusout(event: FocusEvent): void {
     if (!this.withSearch()) return;
     const next = event.relatedTarget as Node | null;
     if (!next || this.element.contains(next)) return;

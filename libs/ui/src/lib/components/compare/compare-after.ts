@@ -21,13 +21,13 @@ export class ScCompareAfter {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** After the divider: the end (the bottom, when vertical). */
-  protected readonly clip = computed(() => {
+  private readonly clip = computed(() => {
     const at = 'var(--sc-compare-position)';
     if (this.compare.orientation() === 'vertical') return `inset(${at} 0 0 0)`;
     return this.compare.rtl() ? `inset(0 ${at} 0 0)` : `inset(0 0 0 ${at})`;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-0 block size-full',
       '[&:is(img,video)]:object-cover',

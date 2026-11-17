@@ -18,7 +18,7 @@ import { CustomDaysCalendarDemo } from './custom-days-calendar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomDaysCalendarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarDay,

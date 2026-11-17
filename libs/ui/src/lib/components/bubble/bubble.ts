@@ -56,7 +56,7 @@ export class ScBubble {
   readonly alignment = input<'start' | 'end'>('start');
   readonly variant = input<ScBubbleVariant>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(bubbleVariants({ variant: this.variant() }), this.classInput()),
   );
 }

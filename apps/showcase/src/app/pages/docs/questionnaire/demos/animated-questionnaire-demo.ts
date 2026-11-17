@@ -168,9 +168,9 @@ import {
 })
 export class AnimatedQuestionnaireDemo {
   private readonly model = signal({ task: '', review: '', delivery: '' });
-  readonly sent = signal<ReturnType<typeof this.model> | null>(null);
+  private readonly sent = signal<ReturnType<typeof this.model> | null>(null);
 
-  readonly survey = form(
+  private readonly survey = form(
     this.model,
     (s) => {
       required(s.task);

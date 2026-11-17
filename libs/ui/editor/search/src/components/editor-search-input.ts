@@ -31,10 +31,10 @@ import { editorSearch } from './editor-search-state';
   },
 })
 export class ScEditorSearchInput {
-  protected readonly search = editorSearch(inject(SC_EDITOR));
+  private readonly search = editorSearch(inject(SC_EDITOR));
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const element =
@@ -50,11 +50,11 @@ export class ScEditorSearchInput {
     });
   }
 
-  protected onInput(event: Event): void {
+  private onInput(event: Event): void {
     this.search.search((event.target as HTMLInputElement).value);
   }
 
-  protected onEnter(event: Event): void {
+  private onEnter(event: Event): void {
     event.preventDefault();
     if ((event as KeyboardEvent).shiftKey) this.search.previous();
     else this.search.next();

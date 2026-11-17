@@ -15,7 +15,7 @@ export class ScButtonPattern {
     transform: booleanAttribute,
   });
 
-  onKeydown(event: Event): void {
+  private onKeydown(event: Event): void {
     if (!this.enabled()) {
       return;
     }

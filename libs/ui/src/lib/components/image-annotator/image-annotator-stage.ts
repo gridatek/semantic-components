@@ -235,42 +235,42 @@ type ScImageAnnotatorGesture =
   encapsulation: ViewEncapsulation.None,
 })
 export class ScImageAnnotatorStage {
-  protected readonly annotator = inject(ScImageAnnotator);
+  private readonly annotator = inject(ScImageAnnotator);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly injector = inject(Injector);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly highlighterWidth = HIGHLIGHTER_WIDTH;
-  protected readonly highlighterOpacity = HIGHLIGHTER_OPACITY;
-  protected readonly fontSize = fontSize;
-  protected readonly bounds = bounds;
+  private readonly highlighterWidth = HIGHLIGHTER_WIDTH;
+  private readonly highlighterOpacity = HIGHLIGHTER_OPACITY;
+  private readonly fontSize = fontSize;
+  private readonly bounds = bounds;
 
   /** The stage's width on screen: for handles that keep their size. */
   private readonly shown = signal(0);
   /** Image pixels per screen pixel. */
-  protected readonly unit = computed(() => {
+  private readonly unit = computed(() => {
     const width = this.annotator.ɵnatural().width;
     return this.shown() ? width / this.shown() : 1;
   });
 
-  protected readonly draft = signal<Annotation | null>(null);
+  private readonly draft = signal<Annotation | null>(null);
   private gesture: ScImageAnnotatorGesture | null = null;
 
-  protected readonly viewBox = computed(() => {
+  private readonly viewBox = computed(() => {
     const { width, height } = this.annotator.ɵnatural();
     return `0 0 ${width} ${height}`;
   });
 
   /** The selected annotation's box, while it can be edited. */
-  protected readonly selection = computed(() => {
+  private readonly selection = computed(() => {
     const annotation = this.annotator.selectedAnnotation();
     return annotation && !this.annotator.readonly() ? bounds(annotation) : null;
   });
 
   /** A line's ends, or a box's corners (none for a text). */
-  protected readonly handles = computed(() => {
+  private readonly handles = computed(() => {
     const annotation = this.annotator.selectedAnnotation();
     const box = this.selection();
     if (!annotation || !box || annotation.kind === 'text') return [];
@@ -319,7 +319,7 @@ export class ScImageAnnotatorStage {
     ];
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative block touch-none select-none overflow-hidden rounded-lg border outline-none',
       'focus-visible:ring-3 focus-visible:ring-ring/50',
@@ -347,7 +347,7 @@ export class ScImageAnnotatorStage {
     });
   }
 
-  protected path(annotation: Annotation): string {
+  private path(annotation: Annotation): string {
     if (annotation.kind === 'line' || annotation.kind === 'arrow') {
       const [a, b] = annotation.points;
       return `M${a.x} ${a.y} L${b.x} ${b.y}`;
@@ -355,33 +355,33 @@ export class ScImageAnnotatorStage {
     return smoothPath(annotation.points);
   }
 
-  protected box(annotation: Annotation) {
+  private box(annotation: Annotation) {
     return boxOf(
       annotation.points[0],
       annotation.points[1] ?? annotation.points[0],
     );
   }
 
-  protected head(annotation: Annotation): string {
+  private head(annotation: Annotation): string {
     return arrowHead(annotation)
       .map((p) => `${p.x},${p.y}`)
       .join(' ');
   }
 
   /** At least 12 screen pixels to aim at. */
-  protected hitWidth(annotation: Annotation): number {
+  private hitWidth(annotation: Annotation): number {
     return Math.max(annotation.width + 6 * this.unit(), 12 * this.unit());
   }
 
-  protected labelOf(annotation: Annotation): string | null {
+  private labelOf(annotation: Annotation): string | null {
     return this.annotator.label()?.(annotation) ?? null;
   }
 
-  protected onFocus(annotation: Annotation): void {
+  private onFocus(annotation: Annotation): void {
     if (!this.annotator.readonly()) this.annotator.selected.set(annotation.id);
   }
 
-  protected onAnnotationKeydown(event: KeyboardEvent, annotation: Annotation) {
+  private onAnnotationKeydown(event: KeyboardEvent, annotation: Annotation) {
     if (this.annotator.readonly()) return;
     const { width, height } = this.annotator.ɵnatural();
     const step = (Math.max(width, height) / 100) * (event.shiftKey ? 10 : 1);
@@ -421,7 +421,7 @@ export class ScImageAnnotatorStage {
   }
 
   /** Enter on the stage: a shape of the current tool, in the middle, focused. */
-  protected onEnter(event: Event): void {
+  private onEnter(event: Event): void {
     if (event.target !== this.element) return;
     event.preventDefault();
     const annotation = this.annotator.placeShape();
@@ -432,7 +432,7 @@ export class ScImageAnnotatorStage {
     }
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (
       event.button !== 0 ||
       this.annotator.readonly() ||
@@ -495,7 +495,7 @@ export class ScImageAnnotatorStage {
     }
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     const gesture = this.gesture;
     if (!gesture) return;
     const point = this.point(event);
@@ -531,7 +531,7 @@ export class ScImageAnnotatorStage {
     }
   }
 
-  protected onPointerUp(): void {
+  private onPointerUp(): void {
     const draft = this.draft();
     if (draft && this.drawn(draft)) this.annotator.add(draft);
     this.draft.set(null);

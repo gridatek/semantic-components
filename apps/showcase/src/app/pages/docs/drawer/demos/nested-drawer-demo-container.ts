@@ -18,7 +18,7 @@ import { NestedDrawerDemo } from './nested-drawer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NestedDrawerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScDrawer,

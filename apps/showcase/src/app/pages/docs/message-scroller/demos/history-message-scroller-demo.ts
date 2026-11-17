@@ -110,11 +110,11 @@ export class HistoryMessageScrollerDemo {
     },
   ];
   /** The two last turns at first; older ones on demand. */
-  readonly messages = signal(this.all.slice(4));
-  readonly older = signal(this.all.slice(0, 4));
+  private readonly messages = signal(this.all.slice(4));
+  private readonly older = signal(this.all.slice(0, 4));
 
   /** Older messages above: the one you were reading stays put. */
-  loadOlder(): void {
+  private loadOlder(): void {
     const older = this.older();
     this.messages.update((messages) => [...older.slice(-2), ...messages]);
     this.older.set(older.slice(0, -2));

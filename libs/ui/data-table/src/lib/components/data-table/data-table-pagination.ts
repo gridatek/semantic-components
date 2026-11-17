@@ -31,7 +31,7 @@ export class ScDataTablePagination {
 
   private readonly state = computed(() => this.table().atoms.pagination.get());
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const pagination = inject(ScPagination, { self: true });

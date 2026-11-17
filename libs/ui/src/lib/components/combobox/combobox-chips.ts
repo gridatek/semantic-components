@@ -33,7 +33,7 @@ export class ScComboboxChips {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.chips, this.classInput()),
   );
 
@@ -47,7 +47,7 @@ export class ScComboboxChips {
    * input): the input keeps its focus — the list stays open — and opens it, as
    * Base UI's chips do.
    */
-  protected onPress(event: MouseEvent): void {
+  private onPress(event: MouseEvent): void {
     const target = event.target as Element;
     const control = target.closest('button, a, input, select, textarea');
     if (control && this.element.contains(control)) return;
@@ -58,7 +58,7 @@ export class ScComboboxChips {
   }
 
   /** On a chip's remove button: the arrows move, Backspace and Delete remove. */
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const target = event.target as HTMLElement;
     if (target.dataset['slot'] !== 'combobox-chip-remove') return;
     const buttons = Array.from(

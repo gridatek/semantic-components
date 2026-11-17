@@ -37,7 +37,7 @@ export class ScEditorCharCount {
 
   readonly limitReached = computed(() => this.remaining() === 0);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('data-[limit-reached]:text-destructive', this.classInput()),
   );
 }

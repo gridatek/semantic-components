@@ -69,9 +69,9 @@ export class ScEditorBlock {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected readonly disabled = computed(
+  private readonly disabled = computed(
     () => this.disabledInput() || !this.editor.editable(),
   );
 

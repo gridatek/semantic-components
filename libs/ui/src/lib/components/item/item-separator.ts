@@ -11,7 +11,7 @@ import { cn } from 'cn';
 export class ScItemSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('bg-border my-2 h-px w-full', this.classInput()),
   );
 }

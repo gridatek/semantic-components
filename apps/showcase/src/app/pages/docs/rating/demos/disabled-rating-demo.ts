@@ -34,5 +34,5 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledRatingDemo {
-  readonly rating = signal(2);
+  private readonly rating = signal(2);
 }

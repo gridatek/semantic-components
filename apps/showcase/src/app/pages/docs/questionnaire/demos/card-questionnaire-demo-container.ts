@@ -18,7 +18,7 @@ import { CardQuestionnaireDemo } from './card-questionnaire-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardQuestionnaireDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
+  private readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {

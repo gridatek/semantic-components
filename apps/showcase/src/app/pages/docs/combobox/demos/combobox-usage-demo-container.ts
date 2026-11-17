@@ -14,7 +14,7 @@ import { ComboboxUsageDemo } from './combobox-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ComboboxUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCombobox,
   ScComboboxEmpty,

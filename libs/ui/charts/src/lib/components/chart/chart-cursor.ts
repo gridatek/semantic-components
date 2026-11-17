@@ -47,7 +47,7 @@ export class ScChartCursor {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly cursor = computed(() => {
+  private readonly cursor = computed(() => {
     const index = this.state.activeIndex();
     // Around a center, nothing to mark across: the slice says it.
     if (index === null || this.state.shaped() || this.state.xKey()) return null;
@@ -62,7 +62,7 @@ export class ScChartCursor {
       : { band, x: start, y: top, width: across, height: bottom - top };
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('pointer-events-none', this.classInput()),
   );
 }

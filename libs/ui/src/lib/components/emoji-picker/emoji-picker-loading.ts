@@ -12,11 +12,11 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   },
 })
 export class ScEmojiPickerLoading {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground absolute inset-0 flex items-center justify-center',
       this.classInput(),

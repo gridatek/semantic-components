@@ -18,7 +18,7 @@ import { MinimalVideoPlayerDemo } from './minimal-video-player-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MinimalVideoPlayerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScVideoPlayer,
   ScVideoPlayerControls,

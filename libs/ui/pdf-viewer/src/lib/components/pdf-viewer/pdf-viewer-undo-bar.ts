@@ -19,10 +19,10 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   },
 })
 export class ScPdfViewerUndoBar {
-  readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-x-0 bottom-4 z-50 mx-auto flex w-fit items-center gap-2 rounded-lg text-sm',
       'data-[state=open]:bg-popover data-[state=open]:text-popover-foreground data-[state=open]:pointer-events-auto data-[state=open]:border data-[state=open]:py-1.5 data-[state=open]:ps-4 data-[state=open]:pe-1.5 data-[state=open]:shadow-lg',

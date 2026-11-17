@@ -43,7 +43,7 @@ export class ScCheckbox implements FormCheckboxControl {
   private readonly styles = injectPreset().checkbox;
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
-  protected readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly group = inject(ScCheckboxGroup, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-checkbox-');
 
@@ -72,7 +72,7 @@ export class ScCheckbox implements FormCheckboxControl {
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
-  protected readonly ariaDescribedBy = computed(
+  private readonly ariaDescribedBy = computed(
     () =>
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
@@ -84,7 +84,7 @@ export class ScCheckbox implements FormCheckboxControl {
     () => !!this.group && (this.parent() || this.valueInput() !== undefined),
   );
 
-  protected readonly isChecked = computed(() => {
+  private readonly isChecked = computed(() => {
     if (!this.inGroup()) return this.checked();
     return this.parent()
       ? this.group!.allTicked()
@@ -99,25 +99,25 @@ export class ScCheckbox implements FormCheckboxControl {
       this.indeterminate(),
   );
 
-  protected readonly isDisabled = computed(
+  private readonly isDisabled = computed(
     () => this.disabled() || (this.inGroup() && this.group!.disabled()),
   );
 
   /** The native value: its option, as text. */
-  protected readonly nativeValue = computed(() => {
+  private readonly nativeValue = computed(() => {
     const value = this.valueInput();
     return value === undefined || value === null ? 'on' : String(value);
   });
 
   // Invalid once touched, as the other controls: its own, or its group's.
-  protected readonly ariaInvalid = computed(
+  private readonly ariaInvalid = computed(
     () =>
       (this.touched() && this.invalid()) ||
       (this.inGroup() && this.group!.showInvalid()) ||
       null,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       "appearance-none before:content-['']",
       this.styles.item,
@@ -133,7 +133,7 @@ export class ScCheckbox implements FormCheckboxControl {
     });
   }
 
-  protected onChange(): void {
+  private onChange(): void {
     const ticked = this.element.checked;
     if (this.inGroup()) {
       if (this.parent()) this.group!.setAll(ticked);

@@ -14,7 +14,7 @@ import { BasicAutocompleteDemo } from './basic-autocomplete-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicAutocompleteDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScAutocomplete,

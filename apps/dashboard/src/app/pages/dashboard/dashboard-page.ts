@@ -263,31 +263,31 @@ export class DashboardPage {
   };
 
   private readonly toaster = inject(ScToaster);
-  protected readonly hello = greeting();
+  private readonly hello = greeting();
   /** The greeting in the reader's words, with the name. */
-  protected readonly helloText = {
+  private readonly helloText = {
     'Good Morning': $localize`Good Morning, Cameron`,
     'Good Afternoon': $localize`Good Afternoon, Cameron`,
     'Good Evening': $localize`Good Evening, Cameron`,
     'Good Night': $localize`Good Night, Cameron`,
   }[this.hello];
-  protected readonly date = day(today());
-  protected readonly assets = ASSETS;
-  protected readonly kpis = KPIS;
-  protected readonly ranges = [
+  private readonly date = day(today());
+  private readonly assets = ASSETS;
+  private readonly kpis = KPIS;
+  private readonly ranges = [
     { value: 'Monthly', label: $localize`Monthly` },
     { value: 'Yearly', label: $localize`Yearly` },
   ];
-  protected readonly range = signal('Monthly');
+  private readonly range = signal('Monthly');
 
-  protected refresh(): void {
+  private refresh(): void {
     this.toaster.show({
       variant: 'success',
       title: $localize`Dashboard refreshed`,
     });
   }
 
-  protected export(): void {
+  private export(): void {
     this.toaster.show({
       variant: 'info',
       title: $localize`Export started`,

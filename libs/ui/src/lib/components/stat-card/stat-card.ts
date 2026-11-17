@@ -18,7 +18,7 @@ export class ScStatCard {
   /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
   private readonly locale = inject(LOCALE_ID);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'ring-foreground/10 bg-card text-card-foreground flex flex-wrap items-baseline gap-x-2 gap-y-1 rounded-xl p-4 text-sm ring-1',
       this.classInput(),

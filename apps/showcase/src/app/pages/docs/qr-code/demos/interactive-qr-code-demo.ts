@@ -63,12 +63,12 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
   encapsulation: ViewEncapsulation.None,
 })
 export class InteractiveQrCodeDemo {
-  readonly formModel = signal({ text: 'https://angular.dev' });
-  readonly qrCodeForm = form(this.formModel);
+  private readonly formModel = signal({ text: 'https://angular.dev' });
+  private readonly qrCodeForm = form(this.formModel);
 
-  protected readonly value = computed(() => this.qrCodeForm.text().value());
+  private readonly value = computed(() => this.qrCodeForm.text().value());
 
-  protected setValue(value: string) {
+  private setValue(value: string) {
     this.qrCodeForm.text().value.set(value);
   }
 }

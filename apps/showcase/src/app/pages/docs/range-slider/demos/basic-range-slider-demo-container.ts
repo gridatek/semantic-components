@@ -18,7 +18,7 @@ import { BasicRangeSliderDemo } from './basic-range-slider-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicRangeSliderDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScLabel,
   ScRangeSlider,

@@ -18,7 +18,7 @@ import { VerticalSeparatorDemo } from './vertical-separator-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalSeparatorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSeparator } from '@semantic-components/ui';
 
 /** orientation="vertical": a line up and down, as tall as its row. */

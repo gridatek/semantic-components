@@ -46,7 +46,7 @@ export class ScPaginationLast {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly disabled = computed(() => {
+  private readonly disabled = computed(() => {
     if (this.disabledInput()) return true;
     if (this.pagination) {
       return this.pagination.nextPage() === null;
@@ -54,11 +54,11 @@ export class ScPaginationLast {
     return false;
   });
 
-  protected readonly isAnchor = computed(
+  private readonly isAnchor = computed(
     () => this.elementRef.nativeElement.tagName === 'A',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       // Balances a text button ("Last »"); icon-only buttons stay centred.
@@ -68,7 +68,7 @@ export class ScPaginationLast {
     ),
   );
 
-  onClick(event: Event): void {
+  private onClick(event: Event): void {
     // A link follows its own href (yours: "?page=2", a routerLink), a button
     // does what its type says; disabled, neither.
     if (this.disabled()) {

@@ -48,8 +48,8 @@ function settings(count: number): Record<string, string> {
   encapsulation: ViewEncapsulation.None,
 })
 export class FoldedDiffViewerDemo {
-  readonly before = JSON.stringify(settings(14), null, 2);
-  readonly after = JSON.stringify(
+  private readonly before = JSON.stringify(settings(14), null, 2);
+  private readonly after = JSON.stringify(
     { ...settings(14), key7: 'changed' },
     null,
     2,

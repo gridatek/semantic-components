@@ -20,7 +20,7 @@ import { ScSignaturePad } from './signature-pad';
 export class ScSignaturePadWidth {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly pad = inject(ScSignaturePad);
+  private readonly pad = inject(ScSignaturePad);
 
   readonly width = input.required<number>({
     alias: 'scSignaturePadWidth',
@@ -29,7 +29,7 @@ export class ScSignaturePadWidth {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'aria-pressed:bg-accent aria-pressed:text-accent-foreground',

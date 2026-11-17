@@ -18,7 +18,7 @@ import { ImageAttachmentDemo } from './image-attachment-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ImageAttachmentDemoContainer {
-  readonly code = `import { NgOptimizedImage } from '@angular/common';
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAttachment,

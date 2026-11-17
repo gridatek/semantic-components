@@ -14,7 +14,7 @@ export class ScSidebarGroupContent {
   private readonly styles = injectPreset().sidebar;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.groupContent, this.classInput()),
   );
 }

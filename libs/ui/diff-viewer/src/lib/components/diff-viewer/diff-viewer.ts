@@ -205,7 +205,7 @@ export class ScDiffViewer {
   /** Unchanged lines kept next to each change; the rest folded (with a `scDiffViewerFold` template). `null`: none folded. */
   readonly context = input<number | null>(null);
 
-  protected readonly foldTemplate = contentChild(ScDiffViewerFold);
+  private readonly foldTemplate = contentChild(ScDiffViewerFold);
 
   private readonly expanded = signal<ReadonlySet<number>>(new Set());
 
@@ -243,11 +243,11 @@ export class ScDiffViewer {
     ),
   );
 
-  protected readonly unified = computed<ScDiffUnifiedRow[]>(() =>
+  private readonly unified = computed<ScDiffUnifiedRow[]>(() =>
     this.rows().map((row) => (row.kind === 'fold' ? row : this.cell(row))),
   );
 
-  protected readonly split = computed<ScDiffSplitRow[]>(() =>
+  private readonly split = computed<ScDiffSplitRow[]>(() =>
     splitRows(this.rows()).map((row) =>
       row.kind === 'fold'
         ? row
@@ -264,29 +264,28 @@ export class ScDiffViewer {
     () =>
       String(Math.max(this.oldLines().length, this.newLines().length)).length,
   );
-  protected readonly unifiedColumns = computed(
+  private readonly unifiedColumns = computed(
     () => `${this.digits() + 2}ch ${this.digits() + 2}ch 2ch 1fr`,
   );
-  protected readonly splitColumns = computed(
+  private readonly splitColumns = computed(
     () => `${this.digits() + 2}ch 2ch 1fr`,
   );
 
-  protected readonly unifiedLineClass = 'grid min-h-lh min-w-max';
-  protected readonly splitLineClass =
+  private readonly unifiedLineClass = 'grid min-h-lh min-w-max';
+  private readonly splitLineClass =
     'grid min-h-lh min-w-0 data-[variant=added]:bg-muted data-[variant=removed]:bg-destructive/10';
-  protected readonly numberClass =
+  private readonly numberClass =
     'select-none pe-2 text-end text-muted-foreground in-data-[variant=removed]:text-destructive';
-  protected readonly signClass =
+  private readonly signClass =
     'select-none text-muted-foreground in-data-[variant=removed]:text-destructive';
-  protected readonly contentClass = 'min-w-0 no-underline';
-  protected readonly tokenClass =
-    'text-(--shiki-light) dark:text-(--shiki-dark)';
-  protected readonly foldClass = cn(
+  private readonly contentClass = 'min-w-0 no-underline';
+  private readonly tokenClass = 'text-(--shiki-light) dark:text-(--shiki-dark)';
+  private readonly foldClass = cn(
     'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground block w-full px-3 py-1 text-start font-sans text-xs outline-none',
     'focus-visible:ring-ring/50 focus-visible:ring-3 focus-visible:ring-inset',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'min-h-0 min-w-0 overflow-auto py-2 text-start font-mono leading-relaxed whitespace-pre outline-none scrollbar-thin',
       'group-has-data-[slot=code-block-header]/code-block:pt-1.5',
@@ -324,11 +323,11 @@ export class ScDiffViewer {
     });
   }
 
-  protected sign(kind: ScDiffLine['kind']): string {
+  private sign(kind: ScDiffLine['kind']): string {
     return kind === 'added' ? '+' : kind === 'removed' ? '−' : '';
   }
 
-  protected pieceClass(piece: ScDiffPiece, kind: 'added' | 'removed'): string {
+  private pieceClass(piece: ScDiffPiece, kind: 'added' | 'removed'): string {
     return cn(
       this.tokenClass,
       piece.changed &&
@@ -338,7 +337,7 @@ export class ScDiffViewer {
     );
   }
 
-  protected expand(id: number): void {
+  private expand(id: number): void {
     this.expanded.update((ids) => new Set([...ids, id]));
   }
 

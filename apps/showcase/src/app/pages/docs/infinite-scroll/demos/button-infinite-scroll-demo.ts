@@ -47,16 +47,16 @@ interface Item {
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonInfiniteScrollDemo {
-  readonly items = signal<Item[]>(
+  private readonly items = signal<Item[]>(
     Array.from({ length: 5 }, (_, i) => ({
       id: i + 1,
       title: 'Result ' + (i + 1),
     })),
   );
-  readonly loading = signal(false);
-  readonly done = signal(false);
+  private readonly loading = signal(false);
+  private readonly done = signal(false);
 
-  async load(): Promise<void> {
+  private async load(): Promise<void> {
     this.loading.set(true);
     const more = await this.fetch();
     this.items.update((items) => [...items, ...more]);

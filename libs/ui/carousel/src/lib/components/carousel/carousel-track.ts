@@ -14,7 +14,7 @@ export class ScCarouselTrack {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const isHorizontal = this.carousel.orientation() === 'horizontal';
     return cn(
       'flex',

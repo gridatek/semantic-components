@@ -97,6 +97,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlModelSelectorDemo {
-  protected readonly efforts = ['منخفض', 'متوسط', 'مرتفع'];
-  protected readonly effort = signal<string | null>('متوسط');
+  private readonly efforts = ['منخفض', 'متوسط', 'مرتفع'];
+  private readonly effort = signal<string | null>('متوسط');
 }

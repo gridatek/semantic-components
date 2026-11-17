@@ -116,7 +116,7 @@ import { ScatterChartUsageDemoContainer } from './demos/scatter-chart-usage-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class ScatterChartPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScChart, ScChartPlot, ScChartCategoryAxis, ScChartCursor, ScChartGrid, ScChartValueAxis, ScChartScatter, ScChartTooltip, ScChartTooltipIndicator, ScChartTooltipItem, ScChartTooltipName, ScChartTooltipPortal, ScChartTooltipProvider, ScChartTooltipValue } from '@semantic-components/ui/charts';",
     markup: [
@@ -144,7 +144,7 @@ export default class ScatterChartPage {
     ].join('\n'),
   };
 
-  protected readonly inputs: ApiInput[] = [
+  private readonly inputs: ApiInput[] = [
     {
       name: 'key',
       type: 'string (required)',

@@ -89,6 +89,6 @@ const REVIEW: ScImageAnnotatorAnnotation[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ReadOnlyImageAnnotatorDemo {
-  readonly annotations = REVIEW;
-  readonly labelOf = labelOf;
+  private readonly annotations = REVIEW;
+  private readonly labelOf = labelOf;
 }

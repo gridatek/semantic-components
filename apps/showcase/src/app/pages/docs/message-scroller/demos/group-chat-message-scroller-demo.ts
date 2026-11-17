@@ -94,7 +94,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupChatMessageScrollerDemo {
-  readonly messages = signal<
+  private readonly messages = signal<
     { id: string; kind: 'message' | 'marker'; author?: string; text: string }[]
   >([
     {
@@ -129,9 +129,9 @@ export class GroupChatMessageScrollerDemo {
       text: 'Then we are on track.',
     },
   ]);
-  readonly joined = signal(false);
+  private readonly joined = signal(false);
 
-  join(): void {
+  private join(): void {
     this.joined.set(true);
     this.messages.update((messages) => [
       ...messages,

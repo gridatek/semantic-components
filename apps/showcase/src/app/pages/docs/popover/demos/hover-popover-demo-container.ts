@@ -18,7 +18,7 @@ import { HoverPopoverDemo } from './hover-popover-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HoverPopoverDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScPopover,

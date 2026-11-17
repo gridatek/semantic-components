@@ -18,7 +18,7 @@ import { BasicTimeInputDemo } from './basic-time-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTimeInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScLabel, ScTimeInput } from '@semantic-components/ui';
 
 /** In a field, named by its label. Type the digits — it moves on by itself — or use the arrows; AM/PM takes a or p. */

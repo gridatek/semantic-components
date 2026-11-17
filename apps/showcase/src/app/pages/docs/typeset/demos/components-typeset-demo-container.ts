@@ -18,7 +18,7 @@ import { ComponentsTypesetDemo } from './components-typeset-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ComponentsTypesetDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 
 /**

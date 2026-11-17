@@ -45,5 +45,5 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTagsInputDemo {
-  readonly skills = signal(['Angular', 'TypeScript', 'Accessibility']);
+  private readonly skills = signal(['Angular', 'TypeScript', 'Accessibility']);
 }

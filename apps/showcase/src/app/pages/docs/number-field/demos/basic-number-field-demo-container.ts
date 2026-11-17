@@ -18,7 +18,7 @@ import { BasicNumberFieldDemo } from './basic-number-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export default class BasicNumberFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScFrame,
   ScLabel,

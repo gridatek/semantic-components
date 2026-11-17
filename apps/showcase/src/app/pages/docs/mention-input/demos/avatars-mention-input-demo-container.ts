@@ -14,7 +14,7 @@ import { AvatarsMentionInputDemo } from './avatars-mention-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AvatarsMentionInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScLabel,

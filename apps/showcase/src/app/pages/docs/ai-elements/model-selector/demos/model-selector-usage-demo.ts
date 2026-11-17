@@ -186,27 +186,27 @@ const efforts = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ModelSelectorUsageDemo {
-  protected readonly providers = providers;
-  protected readonly efforts = efforts;
-  protected readonly model = signal<string | null>(models[0].id);
-  protected readonly effort = signal<string | null>(efforts[1].id);
-  protected readonly currentModel = computed(
+  private readonly providers = providers;
+  private readonly efforts = efforts;
+  private readonly model = signal<string | null>(models[0].id);
+  private readonly effort = signal<string | null>(efforts[1].id);
+  private readonly currentModel = computed(
     () => models.find((item) => item.id === this.model()) ?? models[0],
   );
-  protected readonly currentEffort = computed(
+  private readonly currentEffort = computed(
     () => efforts.find((item) => item.id === this.effort()) ?? efforts[1],
   );
 
   private readonly message = signal({ text: '' });
-  protected readonly composer = form(this.message, () => undefined, {
+  private readonly composer = form(this.message, () => undefined, {
     submission: { action: async () => this.message.set({ text: '' }) },
   });
-  protected readonly canSend = computed(
+  private readonly canSend = computed(
     () => this.message().text.trim().length > 0,
   );
 
   /** Enter sends; Shift+Enter starts a new line. */
-  protected sendOnEnter(event: Event): void {
+  private sendOnEnter(event: Event): void {
     const key = event as KeyboardEvent;
     if (key.shiftKey || key.isComposing) return;
     key.preventDefault();

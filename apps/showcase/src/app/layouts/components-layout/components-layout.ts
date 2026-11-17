@@ -72,17 +72,17 @@ import { ComponentsService } from '../../services/components-service';
 })
 export class ComponentsLayout {
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
-  protected readonly tocService = inject(TocService);
+  private readonly tocService = inject(TocService);
   private readonly componentsService = inject(ComponentsService);
 
   private readonly contentArea =
     viewChild.required<ElementRef<HTMLElement>>('contentArea');
 
-  readonly components = this.componentsService.visibleComponents;
+  private readonly components = this.componentsService.visibleComponents;
 
   constructor() {
     afterNextRender(() => {

@@ -19,7 +19,7 @@ import { RangeDatePickerDemo } from './range-date-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RangeDatePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

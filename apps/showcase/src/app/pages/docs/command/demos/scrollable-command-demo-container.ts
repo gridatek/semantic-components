@@ -18,7 +18,7 @@ import { ScrollableCommandDemo } from './scrollable-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollableCommandDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCommand,

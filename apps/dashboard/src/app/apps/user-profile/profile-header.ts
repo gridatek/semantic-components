@@ -104,7 +104,7 @@ export class ProfileHeader {
     { label: $localize`Friends`, url: '/apps/user-profile/friends' },
     { label: $localize`Gallery`, url: '/apps/user-profile/gallery' },
   ];
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col gap-4', this.classInput()),
   );
 }

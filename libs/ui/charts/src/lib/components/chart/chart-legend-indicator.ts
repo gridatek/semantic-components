@@ -17,9 +17,9 @@ export class ScChartLegendIndicator {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly color = computed(() => this.entry.item().color);
+  private readonly color = computed(() => this.entry.item().color);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('size-2 shrink-0 rounded-[2px]', this.classInput()),
   );
 }

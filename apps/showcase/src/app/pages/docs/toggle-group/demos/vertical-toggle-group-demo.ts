@@ -43,5 +43,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalToggleGroupDemo {
-  protected readonly formatting = signal(['bold', 'italic']);
+  private readonly formatting = signal(['bold', 'italic']);
 }

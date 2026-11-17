@@ -56,5 +56,5 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCollapsibleDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 }

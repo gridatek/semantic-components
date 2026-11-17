@@ -18,7 +18,7 @@ import { BasicContextMenuDemo } from './basic-context-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicContextMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScContextMenu,
   ScContextMenuTrigger,

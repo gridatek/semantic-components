@@ -18,7 +18,7 @@ import { TourTourGuideDemo } from './tour-tour-guide-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TourTourGuideDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScInput,

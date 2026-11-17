@@ -31,7 +31,7 @@ import { SC_FIELD } from '../field';
   },
 })
 export class ScInput {
-  protected readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-input-');
   private readonly styles = injectPreset().input;
 
@@ -45,11 +45,11 @@ export class ScInput {
     transform: booleanAttribute,
   });
 
-  readonly id = computed(
+  private readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
-  readonly ariaDescribedBy = computed(
+  private readonly ariaDescribedBy = computed(
     () =>
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
@@ -57,11 +57,11 @@ export class ScInput {
   );
 
   // Do not surface invalid until the control has been touched.
-  protected readonly ariaInvalid = computed(
+  private readonly ariaInvalid = computed(
     () => (this.touched() && this.invalid()) || null,
   );
 
-  protected readonly class = computed(() => cn(this.styles, this.classInput()));
+  private readonly class = computed(() => cn(this.styles, this.classInput()));
 
   constructor() {
     ɵwarnIfUnnamed('scInput');

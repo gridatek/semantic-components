@@ -185,7 +185,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class InputPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScInput } from '@semantic-components/ui';",
     markup: [
       '<div scField>',
@@ -196,7 +196,7 @@ export default class InputPage {
     ].join('\n'),
   };
 
-  protected readonly inputs = [
+  private readonly inputs = [
     {
       name: 'id',
       type: 'string',

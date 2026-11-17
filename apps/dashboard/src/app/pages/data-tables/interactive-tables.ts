@@ -204,7 +204,7 @@ export class RowSelectionTablePage {
 
   private readonly toaster = inject(ScToaster);
   private readonly data = signal(STAFF.slice(0, 10) as StaffMember[]);
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features: selectFeatures,
     columns: selectHelper.columns([
       selectHelper.display({
@@ -336,7 +336,7 @@ export class ColumnVisibilityTablePage {
     columnVisibility: $localize`Column Visibility`,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features: visibilityFeatures,
     columns: visibilityHelper.columns([
       visibilityHelper.accessor('name', {
@@ -709,7 +709,7 @@ export class ExpandingTablePage {
     expanding: $localize`Expanding`,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features: expandFeatures,
     columns: expandHelper.columns([
       expandHelper.accessor('name', { header: $localize`Name` }),

@@ -18,7 +18,7 @@ import { PartsReasoningDemo } from './parts-reasoning-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PartsReasoningDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,

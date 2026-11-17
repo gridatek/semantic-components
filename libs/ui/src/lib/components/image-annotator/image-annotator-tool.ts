@@ -24,7 +24,7 @@ import type { ScImageAnnotatorToolName } from './image-annotator-types';
 export class ScImageAnnotatorTool {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly annotator = inject(ScImageAnnotator);
+  private readonly annotator = inject(ScImageAnnotator);
 
   readonly value = input.required<ScImageAnnotatorToolName>({
     alias: 'scImageAnnotatorTool',
@@ -32,11 +32,11 @@ export class ScImageAnnotatorTool {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<ScButtonVariants['size']>('icon');
 
-  protected readonly pressed = computed(
+  private readonly pressed = computed(
     () => this.annotator.tool() === this.value(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({
         variant: this.pressed() ? 'secondary' : 'ghost',
@@ -50,7 +50,7 @@ export class ScImageAnnotatorTool {
     ɵwarnIfUnnamed('scImageAnnotatorTool');
   }
 
-  protected pick(): void {
+  private pick(): void {
     this.annotator.tool.set(this.value());
     // Drawing: nothing selected.
     if (this.value() !== 'select') this.annotator.selected.set(null);

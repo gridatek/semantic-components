@@ -21,20 +21,20 @@ import { ScCalendar } from './calendar';
 export class ScCalendarHeading {
   private readonly buttonStyles = injectPreset().button;
 
-  readonly calendar = inject(ScCalendar);
+  private readonly calendar = inject(ScCalendar);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  onClick(): void {
+  private onClick(): void {
     this.calendar.zoomOut();
   }
 }

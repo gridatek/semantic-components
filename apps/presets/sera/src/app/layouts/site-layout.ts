@@ -133,7 +133,7 @@ import { ThemeMenu } from './theme-menu';
   encapsulation: ViewEncapsulation.None,
 })
 export default class SiteLayout {
-  protected readonly pages = [
+  private readonly pages = [
     { path: '/dashboard', label: 'Audience Analytics' },
     { path: '/articles', label: 'Article Directory' },
     { path: '/media', label: 'Media Library' },

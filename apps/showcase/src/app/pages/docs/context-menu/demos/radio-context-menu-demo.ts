@@ -86,6 +86,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioContextMenuDemo {
-  protected readonly user = signal('pedro');
-  protected readonly theme = signal('light');
+  private readonly user = signal('pedro');
+  private readonly theme = signal('light');
 }

@@ -18,7 +18,7 @@ import { IconsMenuDemo } from './icons-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class IconsMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScMenu,

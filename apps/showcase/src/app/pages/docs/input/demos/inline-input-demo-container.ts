@@ -18,7 +18,7 @@ import { InlineInputDemo } from './inline-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InlineInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScField, ScInput } from '@semantic-components/ui';
 
 @Component({

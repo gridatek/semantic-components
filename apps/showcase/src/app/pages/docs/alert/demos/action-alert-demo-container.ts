@@ -18,7 +18,7 @@ import { ActionAlertDemo } from './action-alert-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ActionAlertDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlert,
   ScAlertAction,

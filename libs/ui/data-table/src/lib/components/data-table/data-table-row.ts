@@ -39,30 +39,30 @@ type ScDataTableRowState = Partial<ScDataTableTreeRow>;
   },
 })
 export class ScDataTableRow {
-  protected readonly tree = inject(ScDataTableTreeGrid, { optional: true });
+  private readonly tree = inject(ScDataTableTreeGrid, { optional: true });
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly row = input<ScDataTableRowState>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly position = computed(() => {
+  private readonly position = computed(() => {
     const id = this.row()?.id;
     return this.tree && id ? this.tree.positions().get(id) : undefined;
   });
 
   /** Open or closed — for a row that has children. */
-  protected readonly expanded = computed(() => {
+  private readonly expanded = computed(() => {
     const row = this.row();
     if (!this.tree || !row?.getCanExpand?.()) return null;
     return !!row.getIsExpanded?.();
   });
 
-  protected readonly focused = computed(
+  private readonly focused = computed(
     () => !!this.tree && this.tree.focusedId() === this.row()?.id,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.tree &&
         'focus-visible:outline-ring/50 outline-none focus-visible:outline-2 focus-visible:-outline-offset-2',
@@ -77,7 +77,7 @@ export class ScDataTableRow {
     });
   }
 
-  protected onFocus(): void {
+  private onFocus(): void {
     const id = this.row()?.id;
     if (this.tree && id) this.tree.activate(id);
   }

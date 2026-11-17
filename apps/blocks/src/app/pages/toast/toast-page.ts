@@ -125,7 +125,7 @@ import {
 export default class ToastPage {
   private readonly toaster = inject(ScToaster);
 
-  protected readonly types: { label: string; toast: ScToastConfig }[] = [
+  private readonly types: { label: string; toast: ScToastConfig }[] = [
     {
       label: 'Title and action',
       toast: {
@@ -172,7 +172,7 @@ export default class ToastPage {
   ];
 
   /** Start and end follow the page's direction. */
-  protected readonly positions: ScToastPosition[] = [
+  private readonly positions: ScToastPosition[] = [
     'top-start',
     'top-center',
     'top-end',
@@ -181,7 +181,7 @@ export default class ToastPage {
     'bottom-end',
   ];
 
-  protected show(toast: ScToastConfig): void {
+  private show(toast: ScToastConfig): void {
     this.toaster.show(toast);
   }
 }

@@ -100,7 +100,7 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class MessagePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScMessage, ScMessageContent, ScMessageFooter,',

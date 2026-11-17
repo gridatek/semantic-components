@@ -25,13 +25,13 @@ import { ScOrgChartItem } from './org-chart-item';
   },
 })
 export class ScOrgChartCard {
-  protected readonly item = inject(forwardRef(() => ScOrgChartItem));
+  private readonly item = inject(forwardRef(() => ScOrgChartItem));
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
 
   readonly id = inject(_IdGenerator).getId('sc-org-chart-card-');
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-card text-card-foreground ring-foreground/10 relative flex w-max cursor-pointer items-center gap-3 rounded-xl p-3 text-start text-sm ring-1 transition-[background-color,box-shadow] select-none',
       'hover:bg-accent/50',

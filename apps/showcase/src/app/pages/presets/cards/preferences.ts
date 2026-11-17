@@ -148,13 +148,13 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewPreferences {
-  protected readonly currencies = [
+  private readonly currencies = [
     { label: 'USD — United States Dollar', value: 'usd' },
     { label: 'EUR — Euro', value: 'eur' },
     { label: 'GBP — British Pound', value: 'gbp' },
     { label: 'JPY — Japanese Yen', value: 'jpy' },
   ];
-  protected readonly prefs = form(
+  private readonly prefs = form(
     signal({ currency: 'usd', statistics: true, email: true }),
   );
 }

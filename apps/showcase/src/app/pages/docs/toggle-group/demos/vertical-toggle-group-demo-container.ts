@@ -18,7 +18,7 @@ import { VerticalToggleGroupDemo } from './vertical-toggle-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalToggleGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   SiBoldIcon,

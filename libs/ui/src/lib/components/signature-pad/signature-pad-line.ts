@@ -13,7 +13,7 @@ import { cn } from 'cn';
 export class ScSignaturePadLine {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground pointer-events-none absolute inset-x-6 bottom-6 border-b border-dashed pb-1 text-xs select-none',
       this.classInput(),

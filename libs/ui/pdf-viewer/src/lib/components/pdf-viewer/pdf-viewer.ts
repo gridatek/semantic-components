@@ -263,7 +263,7 @@ export class ScPdfViewer {
   private readonly document = inject(DOCUMENT);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   // Inputs
   readonly src = input<string>('');
@@ -2224,7 +2224,7 @@ export class ScPdfViewer {
    * pdf.js's keyboard shortcuts. Only while focus is in the viewer, and not
    * while typing in a field (apart from Escape and Ctrl/⌘ shortcuts).
    */
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (!this.keyboardShortcuts() || event.defaultPrevented) return;
     const ctrl = event.ctrlKey || event.metaKey;
     const { altKey: alt, shiftKey: shift, key } = event;

@@ -14,7 +14,7 @@ import { CustomTriggerMentionInputDemo } from './custom-trigger-mention-input-de
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomTriggerMentionInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScLabel,

@@ -18,7 +18,7 @@ import { MenuToolbarDemo } from './menu-toolbar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MenuToolbarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScMenu,

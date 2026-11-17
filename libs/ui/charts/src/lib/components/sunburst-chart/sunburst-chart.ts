@@ -88,9 +88,9 @@ export class ScChartSunburst implements ScChartSeriesLabels {
   /** Its arcs' corners' rounding, in px. Unset: the style's (the preset's `--chart-bar-radius`, as the bars'). */
   readonly cornerRadius = input<number | undefined>(undefined);
 
-  protected readonly active = this.state.activeIndex;
+  private readonly active = this.state.activeIndex;
 
-  protected readonly transform = computed(() => {
+  private readonly transform = computed(() => {
     const { cx, cy } = this.state.circle();
     return `translate(${cx},${cy})`;
   });
@@ -161,10 +161,10 @@ export class ScChartSunburst implements ScChartSeriesLabels {
     return { groups, leaves };
   });
 
-  protected readonly groups = computed(() => this.rings().groups);
-  protected readonly leaves = computed(() => this.rings().leaves);
+  private readonly groups = computed(() => this.rings().groups);
+  private readonly leaves = computed(() => this.rings().leaves);
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({
@@ -186,7 +186,7 @@ export class ScChartSunburst implements ScChartSeriesLabels {
     inject(DestroyRef).onDestroy(unregister);
   }
 
-  protected point(index: number): void {
+  private point(index: number): void {
     this.state.activeIndex.set(index);
   }
 

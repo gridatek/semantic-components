@@ -18,7 +18,7 @@ import { RtlGanttDemo } from './rtl-gantt-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlGanttDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   createColumnHelper,
   createExpandedRowModel,
   injectTable,

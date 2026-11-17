@@ -25,7 +25,7 @@ export class ScControlGroup {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScControlGroupOrientation>('horizontal');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles({ orientation: this.orientation() }), this.classInput()),
   );
 }

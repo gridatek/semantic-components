@@ -235,7 +235,7 @@ import { LocalDatePipe } from '../../pipes/local-date';
   encapsulation: ViewEncapsulation.None,
 })
 export default class BlogArticlePage {
-  readonly codeExample = `import { signal, computed } from '@angular/core';
+  private readonly codeExample = `import { signal, computed } from '@angular/core';
 
 // Create a writable signal
 const count = signal(0);

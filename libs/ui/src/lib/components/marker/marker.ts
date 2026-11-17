@@ -36,10 +36,10 @@ export class ScMarker {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScMarkerVariant>('default');
 
-  protected readonly isButton =
+  private readonly isButton =
     inject(ElementRef<HTMLElement>).nativeElement.tagName === 'BUTTON';
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.root,
       variants({ variant: this.variant() }),

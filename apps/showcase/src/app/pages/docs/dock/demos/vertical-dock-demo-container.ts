@@ -18,7 +18,7 @@ import { VerticalDockDemo } from './vertical-dock-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalDockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScDock,
   ScDockBadge,

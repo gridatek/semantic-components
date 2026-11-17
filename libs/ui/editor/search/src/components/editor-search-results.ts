@@ -20,7 +20,7 @@ import { editorSearch } from './editor-search-state';
   },
 })
 export class ScEditorSearchResults {
-  protected readonly search = editorSearch(inject(SC_EDITOR));
+  private readonly search = editorSearch(inject(SC_EDITOR));
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** How many matches there are. */
@@ -34,5 +34,5 @@ export class ScEditorSearchResults {
     return this.count() ? 'found' : 'none';
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

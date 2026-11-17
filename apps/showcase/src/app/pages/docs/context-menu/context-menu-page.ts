@@ -159,7 +159,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
   encapsulation: ViewEncapsulation.None,
 })
 export default class ContextMenuPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScContextMenu, ScContextMenuTrigger, ScMenuPortal, ScMenu,',
@@ -184,7 +184,7 @@ export default class ContextMenuPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScContextMenu',
       selector: 'div[scContextMenu]',

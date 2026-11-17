@@ -18,7 +18,7 @@ import { GroupedTreemapChartDemo } from './grouped-treemap-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupedTreemapChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

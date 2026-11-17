@@ -13,11 +13,11 @@ import { ScTourGuide } from './tour-guide';
   },
 })
 export class ScTourGuideTitle {
-  protected readonly id = inject(_IdGenerator).getId('sc-tour-title-');
+  private readonly id = inject(_IdGenerator).getId('sc-tour-title-');
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('pe-6 leading-tight font-semibold', this.classInput()),
   );
 

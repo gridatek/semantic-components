@@ -113,7 +113,7 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
 
   readonly hasValue = computed(() => this.text() !== '');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex w-full items-center gap-2', this.classInput()),
   );
 

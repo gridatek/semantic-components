@@ -66,7 +66,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class StackedPieChartDemo {
-  readonly data = [
+  private readonly data = [
     { month: 'January', desktop: 186, mobile: 80 },
     { month: 'February', desktop: 305, mobile: 200 },
     { month: 'March', desktop: 237, mobile: 120 },
@@ -74,7 +74,7 @@ export class StackedPieChartDemo {
     { month: 'May', desktop: 209, mobile: 130 },
     { month: 'June', desktop: 214, mobile: 140 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     desktop: { label: 'Desktop' },
     mobile: { label: 'Mobile' },
     January: { label: 'January', color: 'var(--chart-1)' },

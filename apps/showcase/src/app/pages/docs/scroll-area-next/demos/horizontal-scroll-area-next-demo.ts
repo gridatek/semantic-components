@@ -51,7 +51,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalScrollAreaNextDemo {
-  protected readonly places = [
+  private readonly places = [
     'cafe',
     'coast',
     'forest',

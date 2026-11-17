@@ -18,7 +18,7 @@ import { HandleResizableDemo } from './handle-resizable-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HandleResizableDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScResizableHandle,

@@ -18,7 +18,7 @@ import { MenuThemeDemo } from './menu-theme-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MenuThemeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScButton,
   ScMenu,

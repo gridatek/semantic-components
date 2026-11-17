@@ -123,21 +123,21 @@ import {
 })
 export class PreviewSavingsProgress {
   /** Dollars, no cents: $24,000. */
-  protected readonly dollars: Intl.NumberFormatOptions = {
+  private readonly dollars: Intl.NumberFormatOptions = {
     style: 'currency',
     currency: 'USD',
     maximumFractionDigits: 0,
   };
 
-  protected readonly data = [
+  private readonly data = [
     { name: 'saved', value: 24000 },
     { name: 'remaining', value: 6000 },
   ];
-  protected readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     saved: { label: 'Saved', color: 'var(--chart-2)' },
     remaining: { label: 'Remaining', color: 'var(--chart-1)' },
   };
-  protected readonly details = [
+  private readonly details = [
     { label: 'Projected Finish', value: 'October 2024' },
     { label: 'Monthly Average', value: '$1,250' },
     { label: 'Top Contributor', value: 'Auto-Transfer' },

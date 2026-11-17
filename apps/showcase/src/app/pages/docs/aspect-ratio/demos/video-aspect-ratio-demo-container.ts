@@ -18,7 +18,7 @@ import { VideoAspectRatioDemo } from './video-aspect-ratio-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VideoAspectRatioDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 
 /** A video in a 16 / 9 frame, filling it. */

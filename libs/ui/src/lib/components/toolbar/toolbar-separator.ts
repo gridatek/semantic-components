@@ -16,11 +16,11 @@ export class ScToolbarSeparator {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly separatorOrientation = computed(() =>
+  private readonly separatorOrientation = computed(() =>
     this.toolbar.orientation() === 'horizontal' ? 'vertical' : 'horizontal',
   );
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const isVertical = this.separatorOrientation() === 'vertical';
     return cn(
       'shrink-0 bg-border',

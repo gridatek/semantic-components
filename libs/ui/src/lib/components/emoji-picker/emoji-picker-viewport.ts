@@ -25,11 +25,11 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   },
 })
 export class ScEmojiPickerViewport {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative flex-1 overflow-y-auto overscroll-contain outline-hidden [contain:layout_paint] [scrollbar-gutter:stable]',
       this.classInput(),
@@ -39,7 +39,7 @@ export class ScEmojiPickerViewport {
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
-  protected onScroll(): void {
+  private onScroll(): void {
     this.state.scrollTop.set(this.element.scrollTop);
   }
 

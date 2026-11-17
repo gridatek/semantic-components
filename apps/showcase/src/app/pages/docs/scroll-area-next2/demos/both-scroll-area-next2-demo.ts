@@ -22,5 +22,5 @@ import { ScFrame, ScScrollAreaNext2 } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class BothScrollAreaNext2Demo {
-  protected readonly cells = Array.from({ length: 100 }, (_, i) => i + 1);
+  private readonly cells = Array.from({ length: 100 }, (_, i) => i + 1);
 }

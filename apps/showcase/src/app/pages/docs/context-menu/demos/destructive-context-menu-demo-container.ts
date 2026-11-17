@@ -18,7 +18,7 @@ import { DestructiveContextMenuDemo } from './destructive-context-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DestructiveContextMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScContextMenu,
   ScContextMenuTrigger,

@@ -18,7 +18,7 @@ import { RtlMenubarDemo } from './rtl-menubar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlMenubarDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScMenu,

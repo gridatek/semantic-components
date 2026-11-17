@@ -19,9 +19,9 @@ export class ScNativeSelectContainer {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly size = computed(() => this.select()?.size() ?? 'default');
+  private readonly size = computed(() => this.select()?.size() ?? 'default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/native-select relative w-fit has-[select:disabled]:opacity-50',
       this.classInput(),

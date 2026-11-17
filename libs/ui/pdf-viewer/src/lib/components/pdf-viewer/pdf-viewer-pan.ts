@@ -40,15 +40,15 @@ export class ScPdfViewerPan {
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** The hand tool drags the pages (not while an annotation tool is on). */
-  protected readonly handTool = computed(
+  private readonly handTool = computed(
     () =>
       this.pdfViewer.cursorTool() === 'hand' &&
       this.pdfViewer.editorMode() === 'none',
   );
-  protected readonly panning = signal(false);
+  private readonly panning = signal(false);
   private panStart: {
     x: number;
     y: number;
@@ -58,7 +58,7 @@ export class ScPdfViewerPan {
   private pinch: { distance: number } | null = null;
 
   /** Presentation mode: the cursor hides after a few seconds still. */
-  protected readonly cursorIdle = signal(false);
+  private readonly cursorIdle = signal(false);
   private idleTimer: ReturnType<typeof setTimeout> | null = null;
   /** Presentation mode: where a click / swipe started. */
   private presentationPointer: { x: number; y: number } | null = null;
@@ -206,7 +206,7 @@ export class ScPdfViewerPan {
     else this.pdfViewer.goToNextPage();
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (this.pdfViewer.presenting()) {
       const target = event.target as HTMLElement;
       const interactive = target.closest(
@@ -230,7 +230,7 @@ export class ScPdfViewerPan {
     event.preventDefault();
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     if (this.pdfViewer.presenting()) {
       this.onPresentationPointerMove();
       return;
@@ -242,7 +242,7 @@ export class ScPdfViewerPan {
       this.panStart.top - (event.clientY - this.panStart.y);
   }
 
-  protected onPointerUp(event: PointerEvent): void {
+  private onPointerUp(event: PointerEvent): void {
     if (this.pdfViewer.presenting()) {
       this.onPresentationPointerUp(event);
       return;

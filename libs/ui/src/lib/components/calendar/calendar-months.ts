@@ -49,12 +49,12 @@ import { ScCalendar } from './calendar';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCalendarMonths {
-  protected readonly calendar = inject(forwardRef(() => ScCalendar));
+  private readonly calendar = inject(forwardRef(() => ScCalendar));
   private readonly locale = inject(LOCALE_ID);
 
-  protected readonly year = computed(() => this.calendar.focused().year);
+  private readonly year = computed(() => this.calendar.focused().year);
 
-  protected readonly rows = computed(() => {
+  private readonly rows = computed(() => {
     const year = this.year();
     return Array.from({ length: 4 }, (_, r) =>
       Array.from({ length: 3 }, (_, c) =>
@@ -63,16 +63,16 @@ export class ScCalendarMonths {
     );
   });
 
-  protected isFocused(month: Temporal.PlainYearMonth): boolean {
+  private isFocused(month: Temporal.PlainYearMonth): boolean {
     return month.equals(this.calendar.focused().toPlainYearMonth());
   }
 
-  protected isCurrent(month: Temporal.PlainYearMonth): boolean {
+  private isCurrent(month: Temporal.PlainYearMonth): boolean {
     return month.equals(this.calendar.today().toPlainYearMonth());
   }
 
   /** Wholly before min or after max. */
-  protected isOut(month: Temporal.PlainYearMonth): boolean {
+  private isOut(month: Temporal.PlainYearMonth): boolean {
     const min = this.calendar.minDate();
     const max = this.calendar.maxDate();
     return (
@@ -83,26 +83,26 @@ export class ScCalendarMonths {
     );
   }
 
-  protected short(month: Temporal.PlainYearMonth): string {
+  private short(month: Temporal.PlainYearMonth): string {
     return month
       .toPlainDate({ day: 1 })
       .toLocaleString(this.locale, { month: 'short' });
   }
 
-  protected long(month: Temporal.PlainYearMonth): string {
+  private long(month: Temporal.PlainYearMonth): string {
     return month.toPlainDate({ day: 1 }).toLocaleString(this.locale, {
       month: 'long',
       year: 'numeric',
     });
   }
 
-  protected pick(month: Temporal.PlainYearMonth): void {
+  private pick(month: Temporal.PlainYearMonth): void {
     if (this.isOut(month)) return;
     this.calendar.pickMonth(month);
     this.calendar.focusCell();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const rtl =
       getComputedStyle(event.currentTarget as Element).direction === 'rtl';
     const by: Record<string, Temporal.DurationLike> = {
@@ -132,7 +132,7 @@ export class ScCalendarMonths {
     this.calendar.moveTo(focused.add(step), true);
   }
 
-  protected cellClass(month: Temporal.PlainYearMonth): string {
+  private cellClass(month: Temporal.PlainYearMonth): string {
     const picked = this.isFocused(month);
     return cn(
       'flex h-[calc(var(--cell-size)*1.5)] min-w-0 flex-1 cursor-pointer items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',

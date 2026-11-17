@@ -66,11 +66,11 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectFieldDemo {
-  protected readonly departments = [
+  private readonly departments = [
     { value: 'engineering', label: 'Engineering' },
     { value: 'design', label: 'Design' },
     { value: 'marketing', label: 'Marketing' },
     { value: 'sales', label: 'Sales' },
   ];
-  protected readonly department = signal('');
+  private readonly department = signal('');
 }

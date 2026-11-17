@@ -18,7 +18,7 @@ import { FilterTreeTableDemo } from './filter-tree-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FilterTreeTableDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   columnFilteringFeature,
   createColumnHelper,
   createExpandedRowModel,

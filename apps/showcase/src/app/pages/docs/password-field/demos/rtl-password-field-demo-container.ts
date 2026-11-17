@@ -18,7 +18,7 @@ import { RtlPasswordFieldDemo } from './rtl-password-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlPasswordFieldDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import {
   Component,
   LOCALE_ID,

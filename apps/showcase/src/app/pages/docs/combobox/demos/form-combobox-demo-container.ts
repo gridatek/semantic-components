@@ -18,7 +18,7 @@ import { FormComboboxDemo } from './form-combobox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormComboboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScButton,

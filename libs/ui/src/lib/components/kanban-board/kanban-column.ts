@@ -30,9 +30,9 @@ export class ScKanbanColumn {
   readonly id = input.required<string>({ alias: 'scKanbanColumn' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly isOver = computed(() => this.board.over() === this.id());
+  private readonly isOver = computed(() => this.board.over() === this.id());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex min-h-24 flex-col gap-2 overflow-y-auto rounded-lg p-1 transition-colors',
       'data-over:bg-accent/60',

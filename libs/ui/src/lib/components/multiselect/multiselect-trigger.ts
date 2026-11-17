@@ -33,15 +33,15 @@ import { SC_MULTISELECT, SC_MULTISELECT_TRIGGER } from './multiselect-tokens';
 export class ScMultiselectTrigger {
   // The select's trigger, in the app's preset; as wide as its container.
   private readonly triggerStyles = injectPreset().select.trigger;
-  protected readonly multiselect = inject(SC_MULTISELECT);
-  readonly combobox = inject(Combobox);
-  readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly multiselect = inject(SC_MULTISELECT);
+  private readonly combobox = inject(Combobox);
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<'default' | 'sm'>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.triggerStyles, 'w-full', this.classInput()),
   );
 
@@ -51,7 +51,7 @@ export class ScMultiselectTrigger {
   }
 
   /** Type-ahead while closed opens the list at the first match. */
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     openOnTypeahead(
       event,
       this.combobox,

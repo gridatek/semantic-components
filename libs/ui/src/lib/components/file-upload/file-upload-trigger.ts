@@ -19,13 +19,13 @@ import { ScFileUpload } from './file-upload';
 export class ScFileUploadTrigger {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly upload = inject(ScFileUpload);
+  private readonly upload = inject(ScFileUpload);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

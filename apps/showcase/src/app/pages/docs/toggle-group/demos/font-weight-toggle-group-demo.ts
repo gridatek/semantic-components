@@ -50,14 +50,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FontWeightToggleGroupDemo {
-  protected readonly weights = [
+  private readonly weights = [
     { value: 'light', label: 'Light', className: 'font-light' },
     { value: 'normal', label: 'Normal', className: 'font-normal' },
     { value: 'medium', label: 'Medium', className: 'font-medium' },
     { value: 'bold', label: 'Bold', className: 'font-bold' },
   ];
-  protected readonly weight = signal(['normal']);
-  protected readonly className = computed(
+  private readonly weight = signal(['normal']);
+  private readonly className = computed(
     () =>
       this.weights.find((weight) => weight.value === this.weight()[0])
         ?.className ?? 'font-normal',

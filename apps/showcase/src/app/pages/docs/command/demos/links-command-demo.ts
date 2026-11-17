@@ -73,15 +73,15 @@ import { SiFileTextIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinksCommandDemo {
-  protected readonly last = signal('');
-  protected readonly pages = [
+  private readonly last = signal('');
+  private readonly pages = [
     { fragment: 'introduction', label: 'Introduction' },
     { fragment: 'installation', label: 'Installation' },
     { fragment: 'theming', label: 'Theming' },
     { fragment: 'changelog', label: 'Changelog' },
   ];
 
-  protected ran(name: string): void {
+  private ran(name: string): void {
     this.last.set(name);
   }
 }

@@ -52,6 +52,6 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class NormalizationOtpFieldDemo {
-  protected readonly otpForm = form(signal({ code: '' }));
-  protected readonly uppercase = (value: string) => value.toUpperCase();
+  private readonly otpForm = form(signal({ code: '' }));
+  private readonly uppercase = (value: string) => value.toUpperCase();
 }

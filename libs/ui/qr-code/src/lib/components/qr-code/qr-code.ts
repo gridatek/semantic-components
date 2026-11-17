@@ -123,12 +123,12 @@ export class ScQrCode {
   /** The dark modules as an SVG path, in a `modules × modules` box. */
   readonly path = computed(() => modulesPath(this.modules()));
 
-  protected readonly viewBox = computed(() => {
+  private readonly viewBox = computed(() => {
     const size = this.modules().length;
     return `0 0 ${size} ${size}`;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('inline-block size-52 bg-white text-black', this.classInput()),
   );
 }

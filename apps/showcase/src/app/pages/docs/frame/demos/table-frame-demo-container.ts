@@ -18,7 +18,7 @@ import { TableFrameDemo } from './table-frame-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TableFrameDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScTable,

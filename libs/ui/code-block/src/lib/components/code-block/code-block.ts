@@ -26,7 +26,7 @@ export class ScCodeBlock {
 
   private readonly styles = injectPreset().codeBlock;
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const root = this.styles.root({ variant: this.variant() });
     return cn(root, editorStates(root), this.classInput());
   });

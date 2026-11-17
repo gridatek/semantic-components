@@ -18,7 +18,7 @@ import { CustomSpotlightDemo } from './custom-spotlight-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomSpotlightDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScSpotlight,

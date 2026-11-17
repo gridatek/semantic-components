@@ -119,16 +119,16 @@ import { DevOnly } from '../dev-only/dev-only';
   encapsulation: ViewEncapsulation.None,
 })
 export class UsageCode {
-  protected readonly devMode = inject(ConfigService).devMode;
+  private readonly devMode = inject(ConfigService).devMode;
   /** The demo's source, shown and copied. */
   readonly code = input.required<string>();
   /** The demo itself, shown in dev mode. */
-  protected readonly demo = contentChild(TemplateRef);
-  protected readonly id = inject(_IdGenerator).getId('usage-code-');
+  private readonly demo = contentChild(TemplateRef);
+  private readonly id = inject(_IdGenerator).getId('usage-code-');
   /** The whole code, or its first lines. */
-  protected readonly expanded = signal(false);
+  private readonly expanded = signal(false);
   /** Over 20 lines: clipped, with Show more. */
-  protected readonly long = computed(() => this.code().split('\n').length > 20);
+  private readonly long = computed(() => this.code().split('\n').length > 20);
 
   /**
    * The demo on its own route, shown in an iframe — for a page frame (a
@@ -138,7 +138,7 @@ export class UsageCode {
   /** The iframe's name. */
   readonly demoTitle = input('Demo');
   private readonly sanitizer = inject(DomSanitizer);
-  protected readonly frameSrc = computed(() =>
+  private readonly frameSrc = computed(() =>
     // Same-origin route of this showcase, never user input.
     this.sanitizer.bypassSecurityTrustResourceUrl(this.demoUrl() ?? ''),
   );

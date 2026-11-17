@@ -10,7 +10,7 @@ import { cn } from 'cn';
 export class ScAvatarFallback {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-muted text-muted-foreground absolute inset-0 flex size-full items-center justify-center rounded-full text-sm',
       'group-data-[size=sm]/avatar:text-xs',

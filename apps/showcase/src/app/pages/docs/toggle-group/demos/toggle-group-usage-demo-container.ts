@@ -14,7 +14,7 @@ import { ToggleGroupUsageDemo } from './toggle-group-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ToggleGroupUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   SiBoldIcon,

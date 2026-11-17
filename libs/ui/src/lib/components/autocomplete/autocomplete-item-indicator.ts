@@ -11,7 +11,7 @@ import { cn } from 'cn';
 export class ScAutocompleteItemIndicator {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'size-4 shrink-0 opacity-0 aria-selected:opacity-100',
       this.classInput(),

@@ -12,10 +12,10 @@ import { SC_NOTIFICATION_SECTION } from './notification-section';
   },
 })
 export class ScNotificationSectionTitle {
-  protected readonly section = inject(SC_NOTIFICATION_SECTION);
+  private readonly section = inject(SC_NOTIFICATION_SECTION);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground px-3 pt-3 pb-1 text-xs font-medium',
       this.classInput(),

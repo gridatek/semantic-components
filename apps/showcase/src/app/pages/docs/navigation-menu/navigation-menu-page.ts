@@ -147,7 +147,7 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
   encapsulation: ViewEncapsulation.None,
 })
 export default class NavigationMenuPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScNavigationMenu, ScNavigationMenuList, ScNavigationMenuItem,',
@@ -174,7 +174,7 @@ export default class NavigationMenuPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScNavigationMenu',
       selector: 'nav[scNavigationMenu]',

@@ -75,7 +75,7 @@ import { RtlFileTreeDemoContainer } from './demos/rtl-file-tree-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class FileTreePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScCollapsible, ScCollapsibleTrigger, ScCollapsiblePanel, ScButton,',

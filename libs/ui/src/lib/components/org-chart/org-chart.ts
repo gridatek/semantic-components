@@ -33,7 +33,7 @@ export class ScOrgChart {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly direction = input<ScOrgChartDirection>('down');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // A chart larger than its box scrolls; smaller, it is centred.
       'flex max-w-full overflow-auto p-4',

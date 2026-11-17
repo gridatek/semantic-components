@@ -18,7 +18,7 @@ import { FormatsEditorDemo } from './formats-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScButton,

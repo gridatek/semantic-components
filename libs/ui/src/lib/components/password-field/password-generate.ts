@@ -49,7 +49,7 @@ function randomBelow(size: number): number {
 })
 export class ScPasswordGenerate {
   private readonly buttonStyles = injectPreset().button;
-  protected readonly password = inject(ScPasswordField);
+  private readonly password = inject(ScPasswordField);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly length = input(16, { transform: numberAttribute });
@@ -60,7 +60,7 @@ export class ScPasswordGenerate {
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
@@ -71,7 +71,7 @@ export class ScPasswordGenerate {
     ɵwarnIfUnnamed('scPasswordGenerate');
   }
 
-  protected generate(): void {
+  private generate(): void {
     const sets = (
       [
         this.lower() && SETS.lower,

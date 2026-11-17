@@ -18,7 +18,7 @@ import { RowsTextareaDemo } from './rows-textarea-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RowsTextareaDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
 

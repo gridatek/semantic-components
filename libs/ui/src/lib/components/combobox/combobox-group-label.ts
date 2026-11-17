@@ -15,11 +15,11 @@ import { ScComboboxGroup } from './combobox-group';
 })
 export class ScComboboxGroupLabel {
   private readonly styles = injectPreset().combobox;
-  protected readonly id = inject(_IdGenerator).getId('sc-combobox-group-');
+  private readonly id = inject(_IdGenerator).getId('sc-combobox-group-');
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.groupLabel, this.classInput()),
   );
 

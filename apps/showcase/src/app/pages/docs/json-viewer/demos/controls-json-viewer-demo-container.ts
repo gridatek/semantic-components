@@ -18,7 +18,7 @@ import { ControlsJsonViewerDemo } from './controls-json-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlsJsonViewerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScFrame, ScJsonViewer } from '@semantic-components/ui';
 
 @Component({

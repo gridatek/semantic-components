@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScChartTooltipName {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-muted-foreground self-center', this.classInput()),
   );
 }

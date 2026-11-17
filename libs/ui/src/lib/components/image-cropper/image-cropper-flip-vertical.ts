@@ -19,13 +19,13 @@ import { ScImageCropper } from './image-cropper';
 export class ScImageCropperFlipVertical {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly cropper = inject(ScImageCropper);
+  private readonly cropper = inject(ScImageCropper);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('icon');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

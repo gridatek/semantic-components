@@ -109,9 +109,9 @@ export class AnalyticsHeader {
   private readonly store = inject(ArticleStore);
   private readonly toaster = inject(ScToaster);
 
-  protected readonly ranges = DATE_RANGES;
-  protected readonly range = signal('last-30-days');
-  protected readonly rangeLabel = computed(
+  private readonly ranges = DATE_RANGES;
+  private readonly range = signal('last-30-days');
+  private readonly rangeLabel = computed(
     () =>
       DATE_RANGES.find((option) => option.value === this.range())?.label ??
       'Last 30 days',

@@ -18,7 +18,7 @@ import { ReasoningUsageDemo } from './reasoning-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ReasoningUsageDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,

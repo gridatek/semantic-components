@@ -181,7 +181,7 @@ interface ScApiRow {
   encapsulation: ViewEncapsulation.None,
 })
 export default class PaginationPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScPagination, ScPaginationList, ScPaginationItem,',
@@ -250,7 +250,7 @@ export default class PaginationPage {
       'On a button: its type, so by default it never submits a form round it. Not set on a link.',
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScPagination',
       selector: 'nav[scPagination], div[scPagination]',

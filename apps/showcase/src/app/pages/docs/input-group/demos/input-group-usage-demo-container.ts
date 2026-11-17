@@ -14,7 +14,7 @@ import { InputGroupUsageDemo } from './input-group-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputGroupUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScInput,
   ScInputGroup,

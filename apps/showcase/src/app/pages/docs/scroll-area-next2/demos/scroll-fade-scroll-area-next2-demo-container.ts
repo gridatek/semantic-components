@@ -18,7 +18,7 @@ import { ScrollFadeScrollAreaNext2Demo } from './scroll-fade-scroll-area-next2-d
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollFadeScrollAreaNext2DemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScFrame, ScScrollAreaNext2 } from '@semantic-components/ui';
 
 /** The text fades out at an edge it continues past: a mask from its --scroll-area-overflow-y-start / -end. */

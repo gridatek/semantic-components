@@ -30,7 +30,7 @@ export class ScFieldDescription {
   readonly idInput = input('', { alias: 'id' });
 
   // Priority: explicit id  > own fallback id
-  readonly id = computed(() => this.idInput() || this.fallbackId);
+  private readonly id = computed(() => this.idInput() || this.fallbackId);
 
   constructor() {
     effect(() => {
@@ -44,7 +44,7 @@ export class ScFieldDescription {
     });
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.description, this.classInput()),
   );
 }

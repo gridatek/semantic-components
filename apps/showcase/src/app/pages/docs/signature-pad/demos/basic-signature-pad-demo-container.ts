@@ -18,7 +18,7 @@ import { BasicSignaturePadDemo } from './basic-signature-pad-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicSignaturePadDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScSignaturePad,
   ScSignaturePadClear,

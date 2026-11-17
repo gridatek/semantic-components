@@ -14,7 +14,7 @@ export class ScEditorWordCount {
   readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  private readonly class = computed(() => cn('', this.classInput()));
 
   readonly wordCount = computed(() => {
     this.editor.contentVersion();

@@ -15,7 +15,7 @@ export class ScCodeBlockTitle {
 
   private readonly styles = injectPreset().codeBlock;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.title, this.classInput()),
   );
 }

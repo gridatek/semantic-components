@@ -83,7 +83,7 @@ import {
 export class ConfirmationReasoningRow {
   readonly text = input('');
   readonly running = input(false);
-  protected readonly choice = signal<boolean | null>(null);
+  private readonly choice = signal<boolean | null>(null);
 }
 
 /** Where the command stands: waiting for an answer, running, ran, or denied. */
@@ -196,19 +196,19 @@ export class ConfirmationUsageDemo {
   private readonly reasoning =
     'The build output lives in dist. Deleting it cannot be undone, so I should ask before I run the command.';
 
-  protected readonly sent = signal(false);
-  protected readonly thought = signal('');
-  protected readonly thinking = signal(false);
-  protected readonly command = signal<CommandState | null>(null);
-  protected readonly reply = signal('');
-  protected readonly busy = signal(false);
+  private readonly sent = signal(false);
+  private readonly thought = signal('');
+  private readonly thinking = signal(false);
+  private readonly command = signal<CommandState | null>(null);
+  private readonly reply = signal('');
+  private readonly busy = signal(false);
   private timers: ReturnType<typeof setTimeout>[] = [];
 
   constructor() {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected title(): string {
+  private title(): string {
     switch (this.command()) {
       case 'denied':
         return 'Denied';
@@ -219,7 +219,7 @@ export class ConfirmationUsageDemo {
     }
   }
 
-  protected send(): void {
+  private send(): void {
     this.busy.set(true);
     this.sent.set(true);
     let time = 600;
@@ -238,7 +238,7 @@ export class ConfirmationUsageDemo {
   }
 
   /** The person's answer: the command runs, or it is denied; then the agent says so. */
-  protected answer(approved: boolean): void {
+  private answer(approved: boolean): void {
     this.busy.set(true);
     this.command.set(approved ? 'running' : 'denied');
     let time = approved ? 800 : 0;
@@ -256,7 +256,7 @@ export class ConfirmationUsageDemo {
     this.at(time, () => this.busy.set(false));
   }
 
-  protected reset(): void {
+  private reset(): void {
     this.stop();
     this.sent.set(false);
     this.thought.set('');

@@ -180,11 +180,11 @@ export class TicketCreatePage {
   private readonly router = inject(Router);
   private readonly toaster = inject(ScToaster);
 
-  protected readonly agents = AGENTS.map((agent) => ({
+  private readonly agents = AGENTS.map((agent) => ({
     value: agent.name,
     label: agent.name,
   }));
-  protected readonly statuses = TICKET_STATUSES.map((status) => ({
+  private readonly statuses = TICKET_STATUSES.map((status) => ({
     value: status,
     label: status,
   }));
@@ -195,13 +195,13 @@ export class TicketCreatePage {
     agent: '',
     status: 'Open' as TicketStatus,
   });
-  protected readonly ticketForm = form(this.model, (path) => {
+  private readonly ticketForm = form(this.model, (path) => {
     required(path.title);
     required(path.description);
     required(path.agent);
   });
 
-  protected create(event: Event): void {
+  private create(event: Event): void {
     event.preventDefault();
     if (this.ticketForm().invalid()) {
       this.toaster.show({

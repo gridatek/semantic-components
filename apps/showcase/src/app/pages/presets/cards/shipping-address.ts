@@ -177,17 +177,17 @@ interface ScShippingOption {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewShippingAddress {
-  protected readonly states: ScShippingOption[] = [
+  private readonly states: ScShippingOption[] = [
     { label: 'California', value: 'CA' },
     { label: 'New York', value: 'NY' },
     { label: 'Texas', value: 'TX' },
   ];
-  protected readonly countries: ScShippingOption[] = [
+  private readonly countries: ScShippingOption[] = [
     { label: 'United States', value: 'US' },
     { label: 'Canada', value: 'CA' },
     { label: 'United Kingdom', value: 'UK' },
   ];
-  protected readonly address = form(
+  private readonly address = form(
     signal({
       street: '',
       apt: '',

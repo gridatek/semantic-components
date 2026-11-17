@@ -25,7 +25,7 @@ export class ScNotificationDay {
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     const day = this.day();
     const today = this.center
       .now()
@@ -48,7 +48,7 @@ export class ScNotificationDay {
   });
 
   // A title: its first letter up ("today" → "Today"), where the language has one.
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('inline-block first-letter:uppercase', this.classInput()),
   );
 }

@@ -18,7 +18,7 @@ import { BasicOrgChartDemo } from './basic-org-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicOrgChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScOrgChart,
   ScOrgChartCard,

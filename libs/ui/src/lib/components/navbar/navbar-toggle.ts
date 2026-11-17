@@ -40,13 +40,13 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
 })
 export class ScNavbarToggle {
   private readonly buttonStyles = injectPreset().button;
-  protected readonly navbar = inject(ScNavbar);
+  private readonly navbar = inject(ScNavbar);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       '-me-2 ms-auto',

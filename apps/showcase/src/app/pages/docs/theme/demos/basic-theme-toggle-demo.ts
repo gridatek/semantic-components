@@ -31,5 +31,5 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicThemeToggleDemo {
-  protected readonly themeManager = inject(ScThemeManager);
+  private readonly themeManager = inject(ScThemeManager);
 }

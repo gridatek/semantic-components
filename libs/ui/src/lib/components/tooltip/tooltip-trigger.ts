@@ -26,33 +26,33 @@ import { ScTooltipProvider } from './tooltip-provider';
   },
 })
 export class ScTooltipTrigger {
-  protected readonly tooltip = inject(ScTooltipProvider);
+  private readonly tooltip = inject(ScTooltipProvider);
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** After a click, not again until the pointer leaves. */
   private clicked = false;
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected onPointerEnter(event: PointerEvent): void {
+  private onPointerEnter(event: PointerEvent): void {
     if (event.pointerType === 'touch' || this.clicked) return;
     this.tooltip.showSoon();
   }
 
-  protected onPointerLeave(event: PointerEvent): void {
+  private onPointerLeave(event: PointerEvent): void {
     if (event.pointerType === 'touch') return;
     this.clicked = false;
     this.tooltip.hideSoon();
   }
 
-  protected onFocus(event: FocusEvent): void {
+  private onFocus(event: FocusEvent): void {
     // Keyboard focus only: a click's focus is the pointer's, already handled.
     const target = event.target as HTMLElement;
     if (target.matches(':focus-visible')) this.tooltip.show();
   }
 
-  protected onClick(): void {
+  private onClick(): void {
     this.clicked = true;
     this.tooltip.hide();
   }

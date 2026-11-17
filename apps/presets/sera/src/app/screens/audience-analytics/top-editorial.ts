@@ -218,17 +218,17 @@ export class TopEditorial {
   private readonly toaster = inject(ScToaster);
   private readonly router = inject(Router);
 
-  protected readonly metric = signal<string[]>(['views']);
+  private readonly metric = signal<string[]>(['views']);
   private readonly visible = signal(5);
-  protected readonly loading = signal(false);
+  private readonly loading = signal(false);
 
   private readonly ranked = computed(() =>
     ranked(this.store.read(), (this.metric()[0] ?? 'views') as Metric),
   );
-  protected readonly rows = computed(() =>
+  private readonly rows = computed(() =>
     this.ranked().slice(0, this.visible()),
   );
-  protected readonly hasMore = computed(
+  private readonly hasMore = computed(
     () => this.visible() < this.ranked().length,
   );
 
@@ -236,7 +236,7 @@ export class TopEditorial {
   private readonly time = duration;
 
   /** All of them, after a pretend fetch — as shadcn's. */
-  protected loadMore(): void {
+  private loadMore(): void {
     if (!this.hasMore() || this.loading()) return;
     this.loading.set(true);
     setTimeout(() => {

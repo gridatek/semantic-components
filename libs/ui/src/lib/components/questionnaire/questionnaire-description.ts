@@ -20,7 +20,7 @@ export class ScQuestionnaireDescription {
     inject(_IdGenerator).getId('sc-questionnaire-description-'),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.description, this.classInput()),
   );
 

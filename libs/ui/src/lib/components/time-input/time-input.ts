@@ -123,15 +123,15 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   /** Focus left it (Signal Forms marks it touched). */
   readonly touch = output<void>();
 
-  protected readonly id = computed(
+  private readonly id = computed(
     () => this.idInput() || this.field?.id() || null,
   );
-  protected readonly labelledBy = computed(
+  private readonly labelledBy = computed(
     () =>
       this.labelledByInput() ||
       (this.field && !this.ariaLabel ? `${this.field.id()}-label` : null),
   );
-  protected readonly describedBy = computed(
+  private readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
@@ -174,7 +174,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   );
 
   /** Each part's name, in the locale's words. */
-  protected readonly names = computed(() => {
+  private readonly names = computed(() => {
     const names = new Intl.DisplayNames(this.locale, {
       type: 'dateTimeField',
     });
@@ -213,15 +213,15 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   );
 
   /** Digits typed into the focused part. */
-  protected typed = '';
+  private typed = '';
 
-  protected readonly segmentClass = cn(
+  private readonly segmentClass = cn(
     'rounded-sm px-0.5 tabular-nums caret-transparent outline-none select-none',
     'focus:bg-accent focus:text-accent-foreground data-placeholder:text-muted-foreground',
     'aria-invalid:text-destructive',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'dark:bg-input/30 border-input flex h-8 w-full min-w-0 items-center rounded-lg border bg-transparent px-2 py-1 text-base transition-colors md:text-sm',
       'has-[:focus-visible]:border-ring has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50',
@@ -233,25 +233,25 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   );
 
   /** A part's lowest and highest value. */
-  protected range(type: ScTimeSegmentType): [number, number] {
+  private range(type: ScTimeSegmentType): [number, number] {
     if (type === 'hour') return this.twelveHours() ? [1, 12] : [0, 23];
     if (type === 'dayPeriod') return [0, 12];
     return [0, 59];
   }
 
-  protected valueNow(type: ScTimeSegmentType): number | null {
+  private valueNow(type: ScTimeSegmentType): number | null {
     const parts = this.parts();
     if (type === 'dayPeriod')
       return parts.dayPeriod ? (parts.dayPeriod === 'am' ? 0 : 12) : null;
     return parts[type] ?? null;
   }
 
-  protected valueText(type: ScTimeSegmentType): string | null {
+  private valueText(type: ScTimeSegmentType): string | null {
     return this.parts()[type] === undefined ? null : this.text(type);
   }
 
   /** A part as the locale writes it — or the placeholder. */
-  protected text(type: ScTimeSegmentType): string {
+  private text(type: ScTimeSegmentType): string {
     const parts = this.parts();
     if (parts[type] === undefined) return PLACEHOLDER;
     const time = this.join({
@@ -267,7 +267,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
     );
   }
 
-  protected onKeydown(event: KeyboardEvent, type: ScTimeSegmentType): void {
+  private onKeydown(event: KeyboardEvent, type: ScTimeSegmentType): void {
     if (this.disabled()) return;
     const [min, max] = this.range(type);
     const current = this.parts()[type];
@@ -321,7 +321,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
     event.preventDefault();
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
     if (!next || !this.host.contains(next)) this.touch.emit();
   }

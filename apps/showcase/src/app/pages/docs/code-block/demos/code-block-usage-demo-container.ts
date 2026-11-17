@@ -14,7 +14,7 @@ import { CodeBlockUsageDemo } from './code-block-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CodeBlockUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockActions,

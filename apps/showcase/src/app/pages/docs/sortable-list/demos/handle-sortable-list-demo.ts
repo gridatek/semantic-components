@@ -66,20 +66,20 @@ interface Item {
   encapsulation: ViewEncapsulation.None,
 })
 export class HandleSortableListDemo {
-  readonly items = signal<Item[]>([
+  private readonly items = signal<Item[]>([
     { id: 't1', label: 'Write the outline' },
     { id: 't2', label: 'Draft the introduction' },
     { id: 't3', label: 'Collect the figures' },
     { id: 't4', label: 'Ask for a review' },
   ]);
-  readonly done = signal(new Set<string>(['t1']));
-  readonly joined = computed(() =>
+  private readonly done = signal(new Set<string>(['t1']));
+  private readonly joined = computed(() =>
     this.items()
       .map((item) => item.label)
       .join(', '),
   );
 
-  toggle(id: string): void {
+  private toggle(id: string): void {
     this.done.update((done) => {
       const next = new Set(done);
       if (next.has(id)) next.delete(id);
@@ -88,7 +88,7 @@ export class HandleSortableListDemo {
     });
   }
   /** What a keyboard move says, step by step. */
-  readonly announce = ({
+  private readonly announce = ({
     type,
     item,
     position,

@@ -18,7 +18,7 @@ import { NoCloseButtonSheetDemo } from './no-close-button-sheet-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NoCloseButtonSheetDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScSheet,

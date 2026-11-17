@@ -65,6 +65,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TimerCountdownDemo {
-  readonly fiveMinutes = Temporal.Duration.from({ minutes: 5 });
-  readonly paused = signal(true);
+  private readonly fiveMinutes = Temporal.Duration.from({ minutes: 5 });
+  private readonly paused = signal(true);
 }

@@ -18,7 +18,7 @@ import { AvatarImageCropperDemo } from './avatar-image-cropper-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AvatarImageCropperDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScButton,
   ScImageCropper,

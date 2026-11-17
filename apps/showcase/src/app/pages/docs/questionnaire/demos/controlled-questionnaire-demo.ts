@@ -202,15 +202,15 @@ import {
 })
 export class ControlledQuestionnaireDemo {
   private readonly model = signal({ scope: '', checks: '', output: '' });
-  readonly sent = signal<ReturnType<typeof this.model> | null>(null);
-  readonly item = signal('scope');
-  protected readonly labels: Record<string, string> = {
+  private readonly sent = signal<ReturnType<typeof this.model> | null>(null);
+  private readonly item = signal('scope');
+  private readonly labels: Record<string, string> = {
     scope: 'Change scope',
     checks: 'Verification',
     output: 'Final output',
   };
 
-  readonly survey = form(
+  private readonly survey = form(
     this.model,
     (s) => {
       required(s.scope);

@@ -18,7 +18,7 @@ import { HorizontalScrollAreaNextDemo } from './horizontal-scroll-area-next-demo
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalScrollAreaNextDemoContainer {
-  readonly code = `import { NgOptimizedImage } from '@angular/common';
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,

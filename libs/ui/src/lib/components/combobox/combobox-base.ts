@@ -124,10 +124,10 @@ export abstract class ScComboboxBase<T = unknown> {
 
   /** Where the popup opened: below its field, or above it. */
   readonly side = signal<'bottom' | 'top'>('bottom');
-  protected readonly positions = scComboboxPositions;
+  private readonly positions = scComboboxPositions;
 
   /** What the popup hangs from: the chips, the input's group, or the trigger. */
-  protected readonly anchor = computed<HTMLElement | undefined>(() => {
+  private readonly anchor = computed<HTMLElement | undefined>(() => {
     const input = this.field()?.element;
     return (
       this.chipsElement() ??
@@ -173,7 +173,7 @@ export abstract class ScComboboxBase<T = unknown> {
     return value === undefined ? '' : this.labelOf(value);
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative w-fit', this.classInput()),
   );
 
@@ -210,7 +210,7 @@ export abstract class ScComboboxBase<T = unknown> {
   }
 
   /** A value's label: `itemToStringLabel`, its option's text, or its string form. */
-  labelOf(value: T): string {
+  private labelOf(value: T): string {
     const label = this.itemToStringLabel()?.(value);
     if (label !== undefined) return label;
     const equal = this.isItemEqualToValue();
@@ -221,7 +221,7 @@ export abstract class ScComboboxBase<T = unknown> {
   }
 
   /** Whether a value is selected. */
-  isSelected(value: T): boolean {
+  private isSelected(value: T): boolean {
     const equal = this.isItemEqualToValue();
     return this.selected().some((item) => equal(item, value));
   }
@@ -287,7 +287,7 @@ export abstract class ScComboboxBase<T = unknown> {
   }
 
   /** A click outside a popup that a trigger opened. */
-  protected onOutsideClick(event: MouseEvent): void {
+  private onOutsideClick(event: MouseEvent): void {
     if (this.triggerElement()?.contains(event.target as Node)) return;
     this.open.set(false);
   }
@@ -305,7 +305,7 @@ export abstract class ScComboboxBase<T = unknown> {
     this.labels.update((labels) => new Map(labels).set(value, label));
   }
 
-  protected onPositionChange(change: ConnectedOverlayPositionChange): void {
+  private onPositionChange(change: ConnectedOverlayPositionChange): void {
     this.side.set(
       change.connectionPair.originY === 'bottom' ? 'bottom' : 'top',
     );

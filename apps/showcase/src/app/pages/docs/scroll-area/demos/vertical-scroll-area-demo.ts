@@ -28,7 +28,7 @@ interface Tag {
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalScrollAreaDemo {
-  readonly tags: Tag[] = Array.from({ length: 50 }, (_, i) => ({
+  private readonly tags: Tag[] = Array.from({ length: 50 }, (_, i) => ({
     id: `tag-${i + 1}`,
     name: `v1.2.0-beta.${i + 1}`,
   }));

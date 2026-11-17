@@ -18,7 +18,7 @@ import { RtlSliderDemo } from './rtl-slider-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSliderDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { ScSlider } from '@semantic-components/ui';
 

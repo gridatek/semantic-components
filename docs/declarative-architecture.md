@@ -316,7 +316,7 @@ export class ScThemeToggle {
   private readonly _subscription = new Subscription();
 
   // ✅ Protected - for internal use and testing
-  protected readonly ariaLabel = computed(() => (this.isDark() ? 'Switch to light theme' : 'Switch to dark theme'));
+  private readonly ariaLabel = computed(() => (this.isDark() ? 'Switch to light theme' : 'Switch to dark theme'));
 }
 ```
 

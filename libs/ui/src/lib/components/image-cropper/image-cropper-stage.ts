@@ -43,7 +43,7 @@ export class ScImageCropperStage {
   private readonly pointers = new Map<number, { x: number; y: number }>();
   private drag: ScImageCropperDrag | null = null;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-muted relative touch-none overflow-hidden select-none',
       this.cropper.resizable() ? 'cursor-crosshair' : 'cursor-grab',
@@ -67,7 +67,7 @@ export class ScImageCropperStage {
     });
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (event.button !== 0 || !this.cropper.ready()) return;
     this.element.setPointerCapture(event.pointerId);
     this.pointers.set(event.pointerId, this.point(event));
@@ -90,7 +90,7 @@ export class ScImageCropperStage {
     this.cropper.active.set(true);
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     const previous = this.pointers.get(event.pointerId);
     if (!previous || !this.drag) return;
     const point = this.point(event);
@@ -128,7 +128,7 @@ export class ScImageCropperStage {
     }
   }
 
-  protected onPointerUp(event: PointerEvent): void {
+  private onPointerUp(event: PointerEvent): void {
     this.pointers.delete(event.pointerId);
     if (!this.pointers.size) {
       this.drag = null;
@@ -136,7 +136,7 @@ export class ScImageCropperStage {
     }
   }
 
-  protected onWheel(event: WheelEvent): void {
+  private onWheel(event: WheelEvent): void {
     if (!this.cropper.ready()) return;
     event.preventDefault();
     this.cropper.zoomBy(Math.exp(-event.deltaY * 0.002), this.point(event));

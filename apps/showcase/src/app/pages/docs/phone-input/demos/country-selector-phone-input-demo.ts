@@ -127,7 +127,7 @@ export class CountrySelectorPhoneInputDemo {
   private readonly countries = phoneCountries('en');
 
   /** By name, by code ("fr") or by calling code ("+33" or "33"). */
-  protected matching(text: string) {
+  private matching(text: string) {
     const query = text.trim().toLowerCase().replace(/^\+/, '');
     if (!query) return this.countries;
     return this.countries.filter(
@@ -138,8 +138,8 @@ export class CountrySelectorPhoneInputDemo {
     );
   }
 
-  protected readonly model = signal({ phone: '' });
-  protected readonly contactForm = form(this.model, (s) => {
+  private readonly model = signal({ phone: '' });
+  private readonly contactForm = form(this.model, (s) => {
     required(s.phone, { message: 'Enter your phone number' });
     phoneNumber(s.phone, { message: 'Enter a valid phone number' });
   });

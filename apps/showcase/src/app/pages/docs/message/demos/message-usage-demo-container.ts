@@ -14,7 +14,7 @@ import { MessageUsageDemo } from './message-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MessageUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,

@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScStatCardDescription {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-muted-foreground text-xs', this.classInput()),
   );
 }

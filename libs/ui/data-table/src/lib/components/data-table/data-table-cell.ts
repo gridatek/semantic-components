@@ -24,9 +24,9 @@ export class ScDataTableCell {
   readonly column = input<ScDataTableCellColumn>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly pinning = dataTablePinning(this.column);
+  private readonly pinning = dataTablePinning(this.column);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(dataTablePinnedClasses, this.classInput()),
   );
 }

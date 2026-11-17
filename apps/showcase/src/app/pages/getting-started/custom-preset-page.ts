@@ -218,10 +218,10 @@ interface ScCodeSample {
   encapsulation: ViewEncapsulation.None,
 })
 export default class CustomPresetPage {
-  protected readonly sourceUrl =
+  private readonly sourceUrl =
     'https://github.com/gridatek/semantic-components/tree/main/libs/presets/nova/src';
 
-  protected readonly tree: ScCodeSample = {
+  private readonly tree: ScCodeSample = {
     title: 'src/app/my-preset/',
     language: 'bash',
     code: `src/app/my-preset/
@@ -234,7 +234,7 @@ export default class CustomPresetPage {
 └── index.ts`,
   };
 
-  protected readonly rename: ScCodeSample = {
+  private readonly rename: ScCodeSample = {
     title: 'my-preset/my-preset.ts (was nova.ts)',
     language: 'typescript',
     code: `import type { ScPreset } from '@semantic-components/presets';
@@ -247,13 +247,13 @@ export const myPreset: ScPreset = {
 };`,
   };
 
-  protected readonly index: ScCodeSample = {
+  private readonly index: ScCodeSample = {
     title: 'my-preset/index.ts',
     language: 'typescript',
     code: `export * from './my-preset';`,
   };
 
-  protected readonly config: ScCodeSample = {
+  private readonly config: ScCodeSample = {
     title: 'app.config.ts',
     language: 'typescript',
     code: `import { provideSemanticComponents } from '@semantic-components/ui';
@@ -264,7 +264,7 @@ export const appConfig: ApplicationConfig = {
 };`,
   };
 
-  protected readonly frame: ScCodeSample = {
+  private readonly frame: ScCodeSample = {
     title: 'my-preset/frame.ts',
     language: 'typescript',
     code: `// The card's frame: its corners, ring and shadow.
@@ -274,7 +274,7 @@ export const frame = 'rounded-2xl shadow-sm ring-1 ring-foreground/10';
 export const frameSm = 'rounded-md ring-1 ring-border';`,
   };
 
-  protected readonly spread: ScCodeSample = {
+  private readonly spread: ScCodeSample = {
     title: 'my-preset.ts',
     language: 'typescript',
     code: `import type { ScPreset } from '@semantic-components/presets';

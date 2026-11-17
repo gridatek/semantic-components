@@ -182,7 +182,7 @@ import { TurnTraceDemoContainer } from './demos/turn-trace-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class TracePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle, ScTraceDescription,',
@@ -211,7 +211,7 @@ export default class TracePage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScTrace',
       selector: 'div[scTrace]',

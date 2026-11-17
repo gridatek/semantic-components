@@ -32,7 +32,7 @@ export class ScCollapsibleTrigger {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Named, or the one around it. */
-  protected readonly collapsible = computed(() => {
+  private readonly collapsible = computed(() => {
     const collapsible = this.target() || this.around;
     if (!collapsible)
       throw new Error(
@@ -41,5 +41,5 @@ export class ScCollapsibleTrigger {
     return collapsible;
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

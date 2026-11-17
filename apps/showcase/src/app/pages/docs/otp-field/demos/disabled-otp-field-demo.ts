@@ -47,7 +47,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledOtpFieldDemo {
-  protected readonly otpForm = form(signal({ code: '123456' }), (path) => {
+  private readonly otpForm = form(signal({ code: '123456' }), (path) => {
     disabled(path.code);
   });
 }

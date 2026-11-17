@@ -18,7 +18,7 @@ import { FormFileUploadDemo } from './form-file-upload-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormFileUploadDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,
   FormRoot,

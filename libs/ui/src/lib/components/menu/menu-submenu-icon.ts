@@ -15,7 +15,7 @@ import { cn } from 'cn';
 export class ScMenuSubmenuIcon {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('ms-auto rtl:rotate-180', this.classInput()),
   );
 }

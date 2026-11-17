@@ -76,7 +76,7 @@ export class ScChartTooltipProvider {
   private readonly state = inject(ScChartState);
   private readonly direction = inject(Directionality);
   /** Scrolling closes it: its place was the pointer's, or the item's, then. */
-  protected readonly scrollStrategy = inject(Overlay).scrollStrategies.close();
+  private readonly scrollStrategy = inject(Overlay).scrollStrategies.close();
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Which side of the pointer (or item) it goes on; flips when there is no room. */
@@ -93,7 +93,7 @@ export class ScChartTooltipProvider {
   readonly animationDuration = input(400);
   readonly animationEasing = input<ScEasing>('ease');
 
-  protected readonly portal = contentChild.required(ScChartTooltipPortal);
+  private readonly portal = contentChild.required(ScChartTooltipPortal);
 
   /** A category is pointed at or reached, and its row exists: it shows. */
   readonly active = computed(() => {
@@ -182,7 +182,7 @@ export class ScChartTooltipProvider {
   );
 
   /** Beside the pointer (or item) as asked; above a finger, centred: below it, it would be hidden. */
-  protected readonly positions = computed(() =>
+  private readonly positions = computed(() =>
     this.state.pointer()?.type === 'touch'
       ? buildOverlayPositionsWithFallback(
           'top',
@@ -207,7 +207,7 @@ export class ScChartTooltipProvider {
       this.placed() ?? physicalSide(this.side(), this.direction.valueSignal()),
   );
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly class = computed(() => cn('contents', this.classInput()));
 
   /**
    * The item's box in the plot: the series' own (a slice, a box), else the
@@ -249,12 +249,12 @@ export class ScChartTooltipProvider {
       : { x: start, y: reach, width: band, height: 0 };
   }
 
-  protected onPositionChange(change: ConnectedOverlayPositionChange): void {
+  private onPositionChange(change: ConnectedOverlayPositionChange): void {
     this.placed.set(placedSide(change, this.direction.valueSignal()));
   }
 
   /** Closed by a scroll: nothing is pointed at any more. */
-  protected onDetach(): void {
+  private onDetach(): void {
     if (this.active()) this.state.activeIndex.set(null);
   }
 }

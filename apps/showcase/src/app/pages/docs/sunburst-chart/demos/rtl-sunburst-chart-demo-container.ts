@@ -18,7 +18,7 @@ import { RtlSunburstChartDemo } from './rtl-sunburst-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSunburstChartDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

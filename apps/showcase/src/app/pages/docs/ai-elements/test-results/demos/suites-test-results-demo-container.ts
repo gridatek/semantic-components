@@ -18,7 +18,7 @@ import { SuitesTestResultsDemo } from './suites-test-results-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SuitesTestResultsDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,

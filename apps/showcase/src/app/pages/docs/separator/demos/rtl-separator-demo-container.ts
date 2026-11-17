@@ -18,7 +18,7 @@ import { RtlSeparatorDemo } from './rtl-separator-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSeparatorDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScSeparator } from '@semantic-components/ui';
 

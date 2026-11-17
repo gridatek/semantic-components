@@ -21,7 +21,7 @@ export class ScCalendarToday {
   readonly variant = input<ScButtonVariants['variant']>('default');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'flex-1',
@@ -29,7 +29,7 @@ export class ScCalendarToday {
     ),
   );
 
-  onClick(): void {
+  private onClick(): void {
     this.calendar.goToToday();
   }
 }

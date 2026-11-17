@@ -18,7 +18,7 @@ import { SizeCodeBlockDemo } from './size-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizeCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockActions,

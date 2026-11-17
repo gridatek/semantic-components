@@ -18,7 +18,7 @@ import { DisabledToggleDemo } from './disabled-toggle-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledToggleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 
 /** Disabled: dimmed, out of the Tab order. */

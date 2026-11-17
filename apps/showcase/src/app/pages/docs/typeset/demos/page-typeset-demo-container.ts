@@ -18,7 +18,7 @@ import { PageTypesetDemo } from './page-typeset-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PageTypesetDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScBadge, ScButton } from '@semantic-components/ui';
 
 /**

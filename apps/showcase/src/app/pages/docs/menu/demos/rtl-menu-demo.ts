@@ -91,5 +91,5 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlMenuDemo {
-  protected readonly statusBar = signal(true);
+  private readonly statusBar = signal(true);
 }

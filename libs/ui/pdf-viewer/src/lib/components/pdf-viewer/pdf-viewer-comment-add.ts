@@ -24,17 +24,17 @@ export class ScPdfViewerCommentAdd {
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
-  protected readonly placing = computed(
+  private readonly placing = computed(
     () => this.pdfViewer.editorMode() === 'comment',
   );
 
-  protected toggle(): void {
+  private toggle(): void {
     this.pdfViewer.setEditorMode(this.placing() ? 'none' : 'comment');
   }
 }

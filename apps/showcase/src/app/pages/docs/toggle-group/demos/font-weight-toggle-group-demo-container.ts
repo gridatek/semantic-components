@@ -18,7 +18,7 @@ import { FontWeightToggleGroupDemo } from './font-weight-toggle-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FontWeightToggleGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScFrame,
   ScToggleGroup,

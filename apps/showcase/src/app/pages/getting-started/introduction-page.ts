@@ -275,7 +275,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
   encapsulation: ViewEncapsulation.None,
 })
 export default class IntroductionPage {
-  protected readonly example = [
+  private readonly example = [
     '<div scCard>',
     '  <div scCardHeader>',
     '    <h3 scCardTitle>Deploy</h3>',
@@ -290,7 +290,7 @@ export default class IntroductionPage {
     '</div>',
   ].join('\n');
 
-  protected readonly features = [
+  private readonly features = [
     {
       icon: 'puzzle',
       title: 'Semantic and composable',
@@ -341,7 +341,7 @@ export default class IntroductionPage {
     },
   ];
 
-  protected readonly packages = [
+  private readonly packages = [
     {
       name: '@semantic-components/ui',
       description:
@@ -358,7 +358,7 @@ export default class IntroductionPage {
     },
   ];
 
-  protected readonly nextSteps = [
+  private readonly nextSteps = [
     {
       name: 'Prerequisites',
       path: '/docs/getting-started/prerequisites',

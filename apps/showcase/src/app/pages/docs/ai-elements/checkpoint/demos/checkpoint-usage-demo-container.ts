@@ -18,7 +18,7 @@ import { CheckpointUsageDemo } from './checkpoint-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckpointUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

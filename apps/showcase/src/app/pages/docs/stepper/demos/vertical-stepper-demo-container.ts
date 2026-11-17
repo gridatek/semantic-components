@@ -14,7 +14,7 @@ import { VerticalStepperDemo } from './vertical-stepper-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalStepperDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScFrame,
   ScStepper,

@@ -46,7 +46,7 @@ export class Toc {
   private readonly location = inject(Location);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   readonly items = input<TocItem[]>([]);
   readonly activeId = input<string>('');
@@ -55,11 +55,11 @@ export class Toc {
    * This page, at the section — not `#id` alone: relative to `<base href="/">`
    * it is the home page's.
    */
-  protected href(id: string): string {
+  private href(id: string): string {
     return this.location.prepareExternalUrl(this.location.path() + '#' + id);
   }
 
-  scrollToSection(event: Event, id: string): void {
+  private scrollToSection(event: Event, id: string): void {
     event.preventDefault();
     const element = document.getElementById(id);
     if (element) {

@@ -25,6 +25,6 @@ import { ScSlider } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalSliderDemo {
-  protected readonly bass = signal(50);
-  protected readonly treble = signal(25);
+  private readonly bass = signal(50);
+  private readonly treble = signal(25);
 }

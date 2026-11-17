@@ -18,7 +18,7 @@ import { FooterTableDemo } from './footer-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FooterTableDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
   ScTableBody,

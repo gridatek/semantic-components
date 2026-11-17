@@ -48,11 +48,11 @@ interface Item {
   encapsulation: ViewEncapsulation.None,
 })
 export class GridInfiniteScrollDemo {
-  readonly items = signal<Item[]>([]);
-  readonly loading = signal(false);
-  readonly done = signal(false);
+  private readonly items = signal<Item[]>([]);
+  private readonly loading = signal(false);
+  private readonly done = signal(false);
 
-  async load(): Promise<void> {
+  private async load(): Promise<void> {
     this.loading.set(true);
     const more = await this.fetch();
     this.items.update((items) => [...items, ...more]);

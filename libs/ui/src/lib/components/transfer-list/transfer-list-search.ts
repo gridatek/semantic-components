@@ -17,11 +17,11 @@ import { ScTransferListPane } from './transfer-list-pane';
   },
 })
 export class ScTransferListSearch {
-  protected readonly pane = inject(ScTransferListPane);
+  private readonly pane = inject(ScTransferListPane);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'border-input placeholder:text-muted-foreground h-8 w-full min-w-0 rounded-md border bg-transparent px-2.5 text-sm shadow-xs outline-none',
       'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
@@ -34,7 +34,7 @@ export class ScTransferListSearch {
     ɵwarnIfUnnamed('scTransferListSearch');
   }
 
-  protected onInput(event: Event): void {
+  private onInput(event: Event): void {
     this.pane.query.set((event.target as HTMLInputElement).value);
   }
 }

@@ -69,7 +69,7 @@ export class ScProgress {
   readonly labelId = signal<string | null>(null);
   readonly shape = signal<'bar' | 'circle'>('bar');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/progress',
       this.shape() === 'circle'

@@ -18,7 +18,7 @@ import { FieldTextareaDemo } from './field-textarea-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FieldTextareaDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,

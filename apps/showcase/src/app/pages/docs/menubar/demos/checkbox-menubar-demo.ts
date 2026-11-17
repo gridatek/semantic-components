@@ -84,9 +84,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxMenubarDemo {
-  protected readonly bookmarksBar = signal(false);
-  protected readonly fullUrls = signal(true);
-  protected readonly strikethrough = signal(true);
-  protected readonly code = signal(false);
-  protected readonly superscript = signal(false);
+  private readonly bookmarksBar = signal(false);
+  private readonly fullUrls = signal(true);
+  private readonly strikethrough = signal(true);
+  private readonly code = signal(false);
+  private readonly superscript = signal(false);
 }

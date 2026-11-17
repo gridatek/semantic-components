@@ -39,24 +39,24 @@ export class ScStatCardChange {
   /** The way that is good news: `up` (revenue), `down` (costs, errors). */
   readonly good = input<ScStatCardGood>('up');
 
-  readonly trend = computed(() => {
+  private readonly trend = computed(() => {
     const value = this.value();
     return value > 0 ? 'up' : value < 0 ? 'down' : 'none';
   });
   /** Good news, bad news — or neither, unchanged. */
-  readonly isGood = computed(() => {
+  private readonly isGood = computed(() => {
     const trend = this.trend();
     return trend === 'none' ? null : trend === this.good();
   });
 
-  protected readonly text = computed(() =>
+  private readonly text = computed(() =>
     new Intl.NumberFormat(this.locale, {
       ...this.format(),
       signDisplay: 'exceptZero',
     }).format(this.value()),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground inline-flex items-center gap-1 text-xs font-medium tabular-nums data-[good=false]:text-destructive data-[good=true]:text-success [&_svg]:size-3.5 [&_svg]:shrink-0',
       this.classInput(),

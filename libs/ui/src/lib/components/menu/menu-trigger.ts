@@ -21,7 +21,7 @@ import { SC_MENU } from './menu-context';
   },
 })
 export class ScMenuTrigger {
-  protected readonly context = inject(SC_MENU, { optional: true });
+  private readonly context = inject(SC_MENU, { optional: true });
   readonly trigger = inject(MenuTrigger);
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   readonly expanded = this.trigger.expanded;
@@ -33,14 +33,14 @@ export class ScMenuTrigger {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /**
    * In a toolbar, its Tab stop is the toolbar's (one for all its widgets),
    * not the trigger's: both Aria directives bind `tabindex`, and which one
    * wins would depend on the order the component imports them.
    */
-  protected readonly tabIndex = computed(() =>
+  private readonly tabIndex = computed(() =>
     this.widget ? this.widget._pattern.tabIndex() : this.trigger.tabIndex(),
   );
 }

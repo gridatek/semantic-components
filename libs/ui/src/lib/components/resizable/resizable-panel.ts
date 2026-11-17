@@ -27,7 +27,8 @@ import { ScResizablePanelGroup } from './resizable-panel-group';
   },
 })
 export class ScResizablePanel {
-  readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly group = inject(forwardRef(() => ScResizablePanelGroup));
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -43,15 +44,15 @@ export class ScResizablePanel {
 
   /** Its size now (%). */
   readonly size = computed(() => this.group.sizeOf(this));
-  readonly collapsed = computed(
+  private readonly collapsed = computed(
     () => this.collapsible() && this.size() <= this.collapsedSize(),
   );
   /** Its size before it was shut: opened again, it goes back to it. */
   private lastOpen: number | undefined;
 
-  protected readonly flex = computed(() => `${this.size()} 1 0%`);
+  private readonly flex = computed(() => `${this.size()} 1 0%`);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('overflow-hidden', this.classInput()),
   );
 

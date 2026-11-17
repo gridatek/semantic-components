@@ -112,7 +112,7 @@ import { cn } from 'cn';
 })
 export class PdfViewerOpenParametersDemo {
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('block h-dvh w-full', this.classInput()),
   );
 }

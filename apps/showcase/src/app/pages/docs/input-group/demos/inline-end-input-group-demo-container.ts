@@ -18,7 +18,7 @@ import { InlineEndInputGroupDemo } from './inline-end-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InlineEndInputGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,

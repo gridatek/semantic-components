@@ -18,7 +18,7 @@ import { RunningSubagentDemo } from './running-subagent-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RunningSubagentDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

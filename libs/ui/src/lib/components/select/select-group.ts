@@ -18,7 +18,7 @@ export class ScSelectGroup {
   /** Set by its label. */
   readonly labelId = signal<string | null>(null);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.group, this.classInput()),
   );
 }

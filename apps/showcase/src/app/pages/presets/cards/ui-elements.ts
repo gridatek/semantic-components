@@ -237,7 +237,7 @@ import { SiChevronUpIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewUiElements {
-  protected readonly settings = form(
+  private readonly settings = form(
     signal({
       slider: 500,
       fruit: 'apple',

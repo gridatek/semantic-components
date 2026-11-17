@@ -80,5 +80,5 @@ components/chat.tsx
   encapsulation: ViewEncapsulation.None,
 })
 export class ExitCodeTerminalDemo {
-  protected readonly output = LINT_OUTPUT;
+  private readonly output = LINT_OUTPUT;
 }

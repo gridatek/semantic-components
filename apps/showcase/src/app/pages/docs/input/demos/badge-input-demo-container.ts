@@ -18,7 +18,7 @@ import { BadgeInputDemo } from './badge-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BadgeInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScBadge, ScField, ScInput, ScLabel } from '@semantic-components/ui';
 
 @Component({

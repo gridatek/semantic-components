@@ -14,7 +14,7 @@ export class ScNavigationMenuTriggerIcon {
   private readonly item = inject(ScNavigationMenuItem);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative top-px ms-1 size-3 transition duration-300 motion-reduce:transition-none',
       this.item.open() && 'rotate-180',

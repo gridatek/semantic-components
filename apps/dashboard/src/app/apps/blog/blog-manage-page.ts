@@ -320,7 +320,7 @@ export class BlogManagePage {
   private readonly store = inject(BlogStore);
   private readonly toaster = inject(ScToaster);
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: [...this.store.posts()],
@@ -328,10 +328,10 @@ export class BlogManagePage {
     initialState: { pagination: { pageIndex: 0, pageSize: 6 } },
   }));
 
-  protected readonly dayOf = day;
-  protected readonly countOf = count;
+  private readonly dayOf = day;
+  private readonly countOf = count;
 
-  protected remove(post: BlogPost): void {
+  private remove(post: BlogPost): void {
     this.store.remove(post.id);
     this.toaster.show({
       variant: 'success',

@@ -139,14 +139,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MessageReactionsEmojiPickerDemo {
-  protected readonly popover = viewChild.required(ScPopoverProvider);
+  private readonly popover = viewChild.required(ScPopoverProvider);
 
-  readonly reactions = signal<(ScEmoji & { count: number })[]>([
+  private readonly reactions = signal<(ScEmoji & { count: number })[]>([
     { emoji: '👍', label: 'Thumbs up', count: 3 },
     { emoji: '❤️', label: 'Red heart', count: 1 },
   ]);
 
-  add(emoji: ScEmoji): void {
+  private add(emoji: ScEmoji): void {
     this.reactions.update((reactions) =>
       reactions.some((r) => r.emoji === emoji.emoji)
         ? reactions.map((r) =>

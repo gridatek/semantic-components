@@ -37,7 +37,7 @@ import {
   },
 })
 export class ScMessageScroller {
-  protected readonly state = inject(ScMessageScrollerState);
+  private readonly state = inject(ScMessageScrollerState);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Follow the end as messages arrive, until the reader scrolls away. */
@@ -56,12 +56,12 @@ export class ScMessageScroller {
   /** The messages on screen, and the turn being read. */
   readonly visibility = this.state.visibility.asReadonly();
 
-  protected readonly scrollableAttr = computed(() => {
+  private readonly scrollableAttr = computed(() => {
     const { start, end } = this.scrollable();
     return [start && 'start', end && 'end'].filter(Boolean).join(' ') || null;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/message-scroller relative flex size-full min-h-0 flex-col overflow-hidden',
       this.classInput(),

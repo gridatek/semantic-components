@@ -38,7 +38,7 @@ export const SC_NUMBER_FIELD_SCRUB_AREA =
   },
 })
 export class ScNumberFieldScrubArea {
-  protected readonly number = inject(SC_NUMBER_FIELD);
+  private readonly number = inject(SC_NUMBER_FIELD);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -64,7 +64,7 @@ export class ScNumberFieldScrubArea {
   readonly cursorX = signal(0);
   readonly cursorY = signal(0);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // As wide as its label, as Base UI's (a span): only the text scrubs,
       // not the empty row beside it. A max width: the field gives its
@@ -86,7 +86,7 @@ export class ScNumberFieldScrubArea {
     inject(DestroyRef).onDestroy(() => this.end?.());
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     const number = this.number;
     if (event.button !== 0 || number.disabled() || number.readonly()) return;
     event.preventDefault();

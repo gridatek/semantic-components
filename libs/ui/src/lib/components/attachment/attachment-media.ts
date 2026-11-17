@@ -16,7 +16,7 @@ export class ScAttachmentMedia {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScAttachmentMediaVariant>('icon');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.media({ variant: this.variant() }), this.classInput()),
   );
 }

@@ -88,9 +88,9 @@ export class ScMultiselect implements FormValueControl<string[]> {
    */
   readonly displayWith = input<(value: string) => string | undefined>();
 
-  protected readonly positions = positions;
-  protected readonly trigger = contentChild(SC_MULTISELECT_TRIGGER);
-  protected readonly multiselectPortal =
+  private readonly positions = positions;
+  private readonly trigger = contentChild(SC_MULTISELECT_TRIGGER);
+  private readonly multiselectPortal =
     contentChild.required(ScMultiselectPortal);
 
   readonly open = computed(() => this.trigger()?.combobox.expanded() ?? false);
@@ -110,7 +110,7 @@ export class ScMultiselect implements FormValueControl<string[]> {
     );
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative min-w-36 w-fit', this.classInput()),
   );
 

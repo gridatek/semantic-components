@@ -36,7 +36,7 @@ export class ScBubbleReactions {
   readonly side = input<'top' | 'bottom'>('bottom');
   readonly alignment = input<'start' | 'end'>('end');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.reactions,
       position({ side: this.side(), align: this.alignment() }),

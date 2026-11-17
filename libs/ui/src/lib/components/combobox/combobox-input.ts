@@ -39,7 +39,7 @@ import { ScComboboxPopup } from './combobox-popup';
 })
 export class ScComboboxInput {
   private readonly styles = injectPreset().combobox;
-  protected readonly root = inject(ScComboboxBase);
+  private readonly root = inject(ScComboboxBase);
   readonly combobox = inject(Combobox);
   readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
@@ -50,7 +50,7 @@ export class ScComboboxInput {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.inChips && this.styles.chipsInput, this.classInput()),
   );
 
@@ -117,7 +117,7 @@ export class ScComboboxInput {
   }
 
   /** Typed: the text to filter by; emptied, one value is cleared. */
-  protected onInput(): void {
+  private onInput(): void {
     const text = this.element.value;
     this.root.query.set(text);
     if (!this.inPopup && !this.root.multiple && !text && this.root.hasValue()) {
@@ -125,12 +125,12 @@ export class ScComboboxInput {
     }
   }
 
-  protected onClick(): void {
+  private onClick(): void {
     if (this.inPopup || !this.root.openOnInputClick()) return;
     if (!this.root.open()) this.root.show();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (this.inPopup) {
       // Aria's combobox, always open here, keeps Escape to itself: the popup
       // never hears it.
@@ -154,7 +154,7 @@ export class ScComboboxInput {
     }
   }
 
-  protected onFocusout(): void {
+  private onFocusout(): void {
     if (!this.inPopup) this.root.touch.emit();
   }
 

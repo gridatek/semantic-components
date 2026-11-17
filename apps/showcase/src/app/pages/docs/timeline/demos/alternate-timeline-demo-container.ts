@@ -18,7 +18,7 @@ import { AlternateTimelineDemo } from './alternate-timeline-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AlternateTimelineDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTimeline,
   ScTimelineContent,

@@ -30,7 +30,7 @@ import { ScPopoverProvider } from './popover-provider';
   },
 })
 export class ScPopoverTrigger {
-  protected readonly popover = inject(ScPopoverProvider);
+  private readonly popover = inject(ScPopoverProvider);
   readonly overlayOrigin = inject(CdkOverlayOrigin);
   private readonly element =
     inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
@@ -43,9 +43,9 @@ export class ScPopoverTrigger {
   /** How long it stays once the pointer has left, opened on hover (ms). */
   readonly closeDelay = input(0);
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected toggle(): void {
+  private toggle(): void {
     ɵfocusOnPress(this.element);
     this.popover.timing.cancel();
     // Opened by hover, a click keeps it open (it isn't the pointer's any more).
@@ -57,7 +57,7 @@ export class ScPopoverTrigger {
     this.popover.open.update((open) => !open);
   }
 
-  protected onPointerEnter(event: PointerEvent): void {
+  private onPointerEnter(event: PointerEvent): void {
     if (!this.openOnHover() || event.pointerType === 'touch') return;
     if (this.popover.open()) {
       this.popover.timing.cancel();
@@ -67,7 +67,7 @@ export class ScPopoverTrigger {
     this.popover.timing.openSoon(this.delay());
   }
 
-  protected onPointerLeave(event: PointerEvent): void {
+  private onPointerLeave(event: PointerEvent): void {
     if (!this.openOnHover() || event.pointerType === 'touch') return;
     if (this.popover.openedByHover)
       this.popover.timing.closeSoon(this.closeDelay());

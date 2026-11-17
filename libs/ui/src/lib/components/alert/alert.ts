@@ -26,7 +26,7 @@ export class ScAlert {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScAlertVariants['variant']>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.alert({ variant: this.variant() }), this.classInput()),
   );
 }

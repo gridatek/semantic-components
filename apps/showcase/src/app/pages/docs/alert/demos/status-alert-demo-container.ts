@@ -18,7 +18,7 @@ import { StatusAlertDemo } from './status-alert-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StatusAlertDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlert,
   ScAlertDescription,

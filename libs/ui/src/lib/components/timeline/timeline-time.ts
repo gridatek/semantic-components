@@ -30,7 +30,7 @@ export class ScTimelineTime {
   readonly options = input<Intl.DateTimeFormatOptions>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     const value = this.value();
     const dateOnly = value instanceof Temporal.PlainDate;
     return value.toLocaleString(
@@ -43,14 +43,14 @@ export class ScTimelineTime {
   });
 
   /** A valid `datetime`: a zoned moment, as its instant. */
-  protected readonly datetime = computed(() => {
+  private readonly datetime = computed(() => {
     const value = this.value();
     return value instanceof Temporal.ZonedDateTime
       ? value.toInstant().toString()
       : value.toString();
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-muted-foreground text-xs', this.classInput()),
   );
 }

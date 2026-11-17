@@ -18,7 +18,7 @@ import { SpinnerButtonDemo } from './spinner-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SpinnerButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScSpinner } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 

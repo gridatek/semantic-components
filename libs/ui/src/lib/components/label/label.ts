@@ -34,19 +34,19 @@ export class ScLabel {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** In a field, `<field id>-label`: what names a control that is not an input (a group). */
-  protected readonly id = computed(
+  private readonly id = computed(
     () =>
       this.idInput() ||
       (this.field && !this.forInput() ? `${this.field.id()}-label` : null),
   );
 
-  protected readonly for = computed(() => {
+  private readonly for = computed(() => {
     // Priority: explicit for input > field context
     const forValue = this.forInput() || this.field?.id();
     return forValue || null;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.label,
       (this.field || this.wrapped()) && this.styles.field,

@@ -50,9 +50,9 @@ import { ScCodeEditor } from '@semantic-components/ui/code-editor';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormCodeEditorDemo {
-  readonly model = signal({ sql: '' });
-  readonly ran = signal(0);
-  readonly queryForm = form(
+  private readonly model = signal({ sql: '' });
+  private readonly ran = signal(0);
+  private readonly queryForm = form(
     this.model,
     (s) => required(s.sql, { message: 'Write a query.' }),
     {

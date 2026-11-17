@@ -153,7 +153,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class CardPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScCard, ScCardHeader, ScCardTitle, ScCardDescription,',
@@ -173,7 +173,7 @@ export default class CardPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScCard',
       selector: 'div[scCard]',

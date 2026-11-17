@@ -35,11 +35,11 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   },
 })
 export class ScEmojiPickerList {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     // flow-root: the first row's margin (its header's space) stays inside.
     cn('relative box-border flow-root select-none pb-1', this.classInput()),
   );

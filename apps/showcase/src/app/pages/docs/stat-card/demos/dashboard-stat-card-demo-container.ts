@@ -18,7 +18,7 @@ import { DashboardStatCardDemo } from './dashboard-stat-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DashboardStatCardDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScStatCard,
   ScStatCardChange,

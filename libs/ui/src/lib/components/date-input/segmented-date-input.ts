@@ -129,18 +129,18 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
     () => this.disabled() || !!this.picker?.disabled(),
   );
 
-  protected readonly id = computed(
+  private readonly id = computed(
     () =>
       this.idInput() ||
       (this.part() === 'end' ? null : this.field?.id()) ||
       null,
   );
-  protected readonly labelledBy = computed(
+  private readonly labelledBy = computed(
     () =>
       this.labelledByInput() ||
       (this.field && !this.ariaLabel ? `${this.field.id()}-label` : null),
   );
-  protected readonly describedBy = computed(
+  private readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
@@ -175,7 +175,7 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
   );
 
   /** Each part's name, in the locale's words. */
-  protected readonly names = computed(() => {
+  private readonly names = computed(() => {
     const names = new Intl.DisplayNames(this.language, {
       type: 'dateTimeField',
     });
@@ -246,15 +246,15 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
   );
 
   /** Digits typed into the focused part. */
-  protected typed = '';
+  private typed = '';
 
-  protected readonly segmentClass = cn(
+  private readonly segmentClass = cn(
     'rounded-sm px-0.5 tabular-nums caret-transparent outline-none select-none',
     'focus:bg-accent focus:text-accent-foreground data-placeholder:text-muted-foreground',
     'aria-invalid:text-destructive',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'dark:bg-input/30 border-input flex h-8 w-full min-w-0 items-center rounded-lg border bg-transparent px-2 py-1 text-base transition-colors md:text-sm',
       'has-[:focus-visible]:border-ring has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50',
@@ -266,7 +266,7 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
   );
 
   /** A part's lowest and highest value; the day's follows the month and year. */
-  protected range(type: ScDateSegmentType): [number, number] {
+  private range(type: ScDateSegmentType): [number, number] {
     if (type === 'month') return [1, 12];
     if (type === 'year') return [1, 9999];
     const { month, year } = this.parts();
@@ -277,7 +277,7 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
     ];
   }
 
-  protected valueText(type: ScDateSegmentType): string | null {
+  private valueText(type: ScDateSegmentType): string | null {
     const value = this.parts()[type];
     if (value === undefined) return null;
     if (type === 'month')
@@ -288,7 +288,7 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
   }
 
   /** A part as the locale writes it — or the placeholder. */
-  protected text(type: ScDateSegmentType): string {
+  private text(type: ScDateSegmentType): string {
     const value = this.parts()[type];
     if (value === undefined) return PLACEHOLDER[type];
     return (type === 'year' ? this.fourDigits() : this.twoDigits()).format(
@@ -296,7 +296,7 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
     );
   }
 
-  protected onKeydown(event: KeyboardEvent, type: ScDateSegmentType): void {
+  private onKeydown(event: KeyboardEvent, type: ScDateSegmentType): void {
     if (this.isDisabled()) return;
     const [min, max] = this.range(type);
     const current = this.parts()[type];
@@ -341,13 +341,13 @@ export class ScSegmentedDateInput implements FormValueControl<Temporal.PlainDate
   }
 
   /** Leaving the year with two digits typed: this century's. */
-  protected onBlur(type: ScDateSegmentType): void {
+  private onBlur(type: ScDateSegmentType): void {
     if (type === 'year' && this.typed && this.typed.length <= 2)
       this.set('year', 2000 + Number(this.typed));
     this.typed = '';
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
     if (next && this.host.contains(next)) return;
     if (this.picker) this.picker.touch.emit();

@@ -31,6 +31,6 @@ import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class OrderMasonryGridDemo {
-  readonly orders = ['shortest', 'sequential'] as const;
-  readonly heights = [120, 50, 60, 70, 110, 40, 90, 60, 50];
+  private readonly orders = ['shortest', 'sequential'] as const;
+  private readonly heights = [120, 50, 60, 70, 110, 40, 90, 60, 50];
 }

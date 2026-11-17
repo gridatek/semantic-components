@@ -117,9 +117,9 @@ const STAGES: Stage[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class EmptyDirectory {
-  protected readonly stages = STAGES;
+  private readonly stages = STAGES;
 
-  protected dot(stage: Stage): string {
+  private dot(stage: Stage): string {
     return cn('size-1.5 rounded-full', stage.dotClass);
   }
 }

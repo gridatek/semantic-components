@@ -15,7 +15,7 @@ import { UsageCode } from '../../../../components/usage-code/usage-code';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidebarUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSidebar,
   ScSidebarContent,

@@ -107,7 +107,7 @@ import { SankeyChartUsageDemoContainer } from './demos/sankey-chart-usage-demo-c
   encapsulation: ViewEncapsulation.None,
 })
 export default class SankeyChartPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScChart, ScChartPlot, ScChartTooltip, ScChartTooltipIndicator, ScChartTooltipItem, ScChartTooltipName, ScChartTooltipPortal, ScChartTooltipProvider, ScChartTooltipValue, ScChartLegend, ScChartLegendIndicator, ScChartLegendItem } from '@semantic-components/ui/charts';\nimport { ScChartSankey } from '@semantic-components/ui/charts/sankey';",
     markup: [
@@ -135,7 +135,7 @@ export default class SankeyChartPage {
     ].join('\n'),
   };
 
-  protected readonly inputs: ApiInput[] = [
+  private readonly inputs: ApiInput[] = [
     {
       name: 'key',
       type: 'string (required)',

@@ -56,6 +56,11 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidesSpotlightDemo {
-  readonly sides = ['top', 'bottom', 'inline-start', 'inline-end'] as const;
-  readonly side$ = signal<ScSpotlightSide>('bottom');
+  private readonly sides = [
+    'top',
+    'bottom',
+    'inline-start',
+    'inline-end',
+  ] as const;
+  private readonly side$ = signal<ScSpotlightSide>('bottom');
 }

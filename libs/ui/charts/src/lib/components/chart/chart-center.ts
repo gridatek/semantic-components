@@ -19,12 +19,12 @@ export class ScChartCenter {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly transform = computed(() => {
+  private readonly transform = computed(() => {
     const { cx, cy } = this.state.circle();
     return `translate(${cx},${cy})`;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('pointer-events-none', this.classInput()),
   );
 }

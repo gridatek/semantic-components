@@ -30,8 +30,8 @@ export class ScTimePickerTrigger {
   private readonly buttonStyles = injectPreset().button;
   private readonly groupButtonStyles = injectPreset().inputGroupButton;
 
-  protected readonly popover = inject(ScPopoverProvider);
-  protected readonly picker = inject(ScTimePicker);
+  private readonly popover = inject(ScPopoverProvider);
+  private readonly picker = inject(ScTimePicker);
   private readonly group = inject(ScInputGroup, { optional: true });
   readonly overlayOrigin = inject(CdkOverlayOrigin);
 
@@ -41,7 +41,7 @@ export class ScTimePickerTrigger {
   /** In an input group: its size there. */
   readonly buttonSize = input<ScInputGroupButtonSize>('icon-xs');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     this.group
       ? cn(
           this.buttonStyles({ variant: this.variant() ?? 'ghost' }),

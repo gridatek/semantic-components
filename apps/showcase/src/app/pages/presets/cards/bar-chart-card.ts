@@ -135,16 +135,16 @@ const DELTA = Math.round(((DESKTOP - MOBILE) / MOBILE) * 100);
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewBarChartCard {
-  protected readonly data = DATA;
-  protected readonly config: ScChartConfig = {
+  private readonly data = DATA;
+  private readonly config: ScChartConfig = {
     desktop: { label: 'Desktop', color: 'var(--chart-1)' },
     mobile: { label: 'Mobile', color: 'var(--chart-2)' },
   };
-  protected readonly stats = [
+  private readonly stats = [
     { label: 'Desktop', value: DESKTOP.toLocaleString('en-US') },
     { label: 'Mobile', value: MOBILE.toLocaleString('en-US') },
     { label: 'Mix Delta', value: (DELTA > 0 ? '+' : '') + DELTA + '%' },
   ];
 
-  protected readonly short = (month: string) => month.slice(0, 3);
+  private readonly short = (month: string) => month.slice(0, 3);
 }

@@ -78,6 +78,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewBookAppointment {
-  protected readonly times = ['9:00 AM', '10:30 AM', '11:00 AM', '1:30 PM'];
-  protected readonly slot = signal(['slot-0']);
+  private readonly times = ['9:00 AM', '10:30 AM', '11:00 AM', '1:30 PM'];
+  private readonly slot = signal(['slot-0']);
 }

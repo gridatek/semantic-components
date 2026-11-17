@@ -18,7 +18,7 @@ import { StepsChainOfThoughtDemo } from './steps-chain-of-thought-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StepsChainOfThoughtDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

@@ -183,18 +183,18 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewStockPerformance {
-  protected readonly stock = form(signal({ ticker: 'VOO' }));
-  protected readonly config: ScChartConfig = {
+  private readonly stock = form(signal({ ticker: 'VOO' }));
+  private readonly config: ScChartConfig = {
     price: { label: 'Price', color: 'var(--chart-1)' },
   };
-  protected readonly data = computed(() =>
+  private readonly data = computed(() =>
     (PRICES[this.stock.ticker().value()] ?? DEFAULT_PRICES).map((price, i) => ({
       month: MONTHS[i],
       price,
     })),
   );
 
-  protected matching(query: string): string[] {
+  private matching(query: string): string[] {
     return TICKERS.filter((ticker) => scComboboxMatches(ticker, query));
   }
 }

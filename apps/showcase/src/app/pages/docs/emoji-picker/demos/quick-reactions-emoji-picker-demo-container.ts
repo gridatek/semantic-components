@@ -18,7 +18,7 @@ import { QuickReactionsEmojiPickerDemo } from './quick-reactions-emoji-picker-de
   encapsulation: ViewEncapsulation.None,
 })
 export class QuickReactionsEmojiPickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 
 @Component({
   selector: 'app-quick-reactions-emoji-picker-demo',

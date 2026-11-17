@@ -18,7 +18,7 @@ import { CustomThemeCheckboxDemo } from './custom-theme-checkbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomThemeCheckboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScCheckbox, ScField, ScLabel } from '@semantic-components/ui';
 

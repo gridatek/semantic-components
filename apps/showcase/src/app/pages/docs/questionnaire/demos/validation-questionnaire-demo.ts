@@ -131,9 +131,9 @@ import {
 })
 export class ValidationQuestionnaireDemo {
   private readonly model = signal({ detail: '', audience: '' });
-  readonly sent = signal<ReturnType<typeof this.model> | null>(null);
+  private readonly sent = signal<ReturnType<typeof this.model> | null>(null);
 
-  readonly survey = form(
+  private readonly survey = form(
     this.model,
     (s) => {
       required(s.detail, { message: 'Choose an answer to continue.' });

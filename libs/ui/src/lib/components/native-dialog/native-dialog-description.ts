@@ -10,10 +10,10 @@ import { ScNativeDialog } from './native-dialog';
   },
 })
 export class ScNativeDialogDescription {
-  readonly dialog = inject(ScNativeDialog);
+  private readonly dialog = inject(ScNativeDialog);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground *:[a]:hover:text-foreground text-sm *:[a]:underline *:[a]:underline-offset-3',
       this.classInput(),

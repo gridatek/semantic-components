@@ -18,7 +18,7 @@ import { TerminalUsageDemo } from './terminal-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TerminalUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

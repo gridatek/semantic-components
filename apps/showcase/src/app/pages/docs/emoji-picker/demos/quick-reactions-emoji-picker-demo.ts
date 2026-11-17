@@ -28,10 +28,10 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class QuickReactionsEmojiPickerDemo {
-  readonly lastReaction = signal('');
-  readonly quickReactions = ['👍', '❤️', '😂', '😮', '😢', '😡'];
+  private readonly lastReaction = signal('');
+  private readonly quickReactions = ['👍', '❤️', '😂', '😮', '😢', '😡'];
 
-  onQuickReaction(emoji: string): void {
+  private onQuickReaction(emoji: string): void {
     this.lastReaction.set(emoji);
   }
 }

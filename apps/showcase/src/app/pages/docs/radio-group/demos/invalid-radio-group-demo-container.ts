@@ -18,7 +18,7 @@ import { InvalidRadioGroupDemo } from './invalid-radio-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidRadioGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScField,

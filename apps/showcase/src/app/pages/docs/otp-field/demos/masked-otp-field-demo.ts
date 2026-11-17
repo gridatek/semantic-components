@@ -36,5 +36,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MaskedOtpFieldDemo {
-  protected readonly otpForm = form(signal({ pin: '' }));
+  private readonly otpForm = form(signal({ pin: '' }));
 }

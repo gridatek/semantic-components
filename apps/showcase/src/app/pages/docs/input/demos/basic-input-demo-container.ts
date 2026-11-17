@@ -18,7 +18,7 @@ import { BasicInputDemo } from './basic-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScInput } from '@semantic-components/ui';
 
 @Component({

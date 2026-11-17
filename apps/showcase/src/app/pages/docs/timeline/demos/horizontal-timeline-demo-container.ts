@@ -18,7 +18,7 @@ import { HorizontalTimelineDemo } from './horizontal-timeline-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalTimelineDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTimeline,
   ScTimelineContent,

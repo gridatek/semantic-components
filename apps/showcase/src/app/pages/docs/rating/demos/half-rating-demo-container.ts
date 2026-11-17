@@ -14,7 +14,7 @@ import { HalfRatingDemo } from './half-rating-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HalfRatingDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScRating,
   ScRatingGroup,

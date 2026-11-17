@@ -14,7 +14,7 @@ import { SwitchUsageDemo } from './switch-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SwitchUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScField, ScLabel, ScSwitch } from '@semantic-components/ui';
 

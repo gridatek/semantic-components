@@ -32,7 +32,7 @@ import { ScCollapsible } from './collapsible';
   },
 })
 export class ScCollapsiblePanel {
-  protected readonly collapsible = inject(ScCollapsible);
+  private readonly collapsible = inject(ScCollapsible);
   private readonly fallbackId = inject(_IdGenerator).getId(
     'sc-collapsible-panel-',
   );
@@ -42,7 +42,7 @@ export class ScCollapsiblePanel {
   /** Closed, still searched by find-in-page; a match opens it. */
   readonly hiddenUntilFound = input(false, { transform: booleanAttribute });
 
-  protected readonly id = computed(() => this.idInput() || this.fallbackId);
+  private readonly id = computed(() => this.idInput() || this.fallbackId);
 
   /** After its first render: what is open or closed then doesn't animate. */
   private readonly rendered = signal(false);
@@ -69,12 +69,12 @@ export class ScCollapsiblePanel {
    * Closed: the hidden attribute (Tailwind's base keeps it display: none over
    * any display class); searchable, the browser's hidden="until-found".
    */
-  protected readonly hidden = computed(() => {
+  private readonly hidden = computed(() => {
     if (this.collapsible.open() || this.closing()) return null;
     return this.hiddenUntilFound() ? 'until-found' : '';
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // Clipped while its height changes only: at rest, its content's rings,
       // shadows and focus rings show (shadcn's panel clips nothing).
@@ -105,7 +105,7 @@ export class ScCollapsiblePanel {
     });
   }
 
-  protected onAnimationEnd(event: AnimationEvent): void {
+  private onAnimationEnd(event: AnimationEvent): void {
     if (event.target !== event.currentTarget) return;
     if (this.collapsible.open()) this.opening.set(false);
     else this.closing.set(false);

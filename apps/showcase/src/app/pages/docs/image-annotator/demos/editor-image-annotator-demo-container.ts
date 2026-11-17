@@ -18,7 +18,7 @@ import { EditorImageAnnotatorDemo } from './editor-image-annotator-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class EditorImageAnnotatorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScImageAnnotator,

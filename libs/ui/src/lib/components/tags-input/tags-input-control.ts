@@ -33,7 +33,7 @@ import { ScTagsInput } from './tags-input';
   },
 })
 export class ScTagsInputControl {
-  protected readonly tags = inject(ScTagsInput);
+  private readonly tags = inject(ScTagsInput);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
@@ -44,18 +44,18 @@ export class ScTagsInputControl {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input('', { alias: 'id' });
 
-  protected readonly id = computed(
+  private readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
-  protected readonly describedBy = computed(
+  private readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
   );
   /** Its text refused, or the tags invalid once touched. */
-  protected readonly invalid = computed(
+  private readonly invalid = computed(
     () => this.tags.rejected() || (this.tags.invalid() && this.tags.touched()),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'placeholder:text-muted-foreground aria-invalid:text-destructive min-w-24 flex-1 bg-transparent px-1 outline-none disabled:cursor-not-allowed',
       this.classInput(),
@@ -68,7 +68,7 @@ export class ScTagsInputControl {
   }
 
   /** Adds what is typed; refused, it stays — marked — to be edited. */
-  commit(): void {
+  private commit(): void {
     const text = this.element.value;
     if (!text.trim()) return;
     const refused = this.tags.add(text);
@@ -79,7 +79,7 @@ export class ScTagsInputControl {
     }
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const empty = !this.element.value;
     const rtl = getComputedStyle(this.element).direction === 'rtl';
     const back = rtl ? 'ArrowRight' : 'ArrowLeft';
@@ -96,7 +96,7 @@ export class ScTagsInputControl {
     }
   }
 
-  protected onPaste(event: ClipboardEvent): void {
+  private onPaste(event: ClipboardEvent): void {
     const text = event.clipboardData?.getData('text/plain') ?? '';
     const parts = text.split(
       new RegExp(`[\\n\\r${escape(this.tags.delimiter())}]`),

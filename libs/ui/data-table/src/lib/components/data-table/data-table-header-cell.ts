@@ -25,9 +25,9 @@ export class ScDataTableHeaderCell {
   readonly column = input<ScDataTableCellColumn>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly pinning = dataTablePinning(this.column);
+  private readonly pinning = dataTablePinning(this.column);
 
-  protected readonly ariaSort = computed(() => {
+  private readonly ariaSort = computed(() => {
     const column = this.column();
     if (!column?.getCanSort?.()) return null;
     const sorted = column.getIsSorted?.();
@@ -38,7 +38,7 @@ export class ScDataTableHeaderCell {
         : 'none';
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(dataTablePinnedClasses, this.classInput()),
   );
 }

@@ -117,7 +117,7 @@ import { SocialButtons } from './social-buttons';
 export class RegisterPage {
   private readonly router = inject(Router);
   private readonly model = signal({ name: '', email: '', password: '' });
-  protected readonly registerForm = form(this.model, (path) => {
+  private readonly registerForm = form(this.model, (path) => {
     required(path.name);
     required(path.email);
     email(path.email);
@@ -125,7 +125,7 @@ export class RegisterPage {
     minLength(path.password, 8);
   });
 
-  protected signUp(event: Event): void {
+  private signUp(event: Event): void {
     event.preventDefault();
     if (this.registerForm().valid()) void this.router.navigateByUrl('/');
   }

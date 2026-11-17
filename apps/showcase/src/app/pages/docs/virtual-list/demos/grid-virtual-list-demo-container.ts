@@ -18,7 +18,7 @@ import { GridVirtualListDemo } from './grid-virtual-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GridVirtualListDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
 
 /** In lanes: photos in three columns, each placed in the lane that ends first. */

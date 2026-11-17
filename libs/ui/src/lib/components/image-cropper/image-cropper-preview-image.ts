@@ -19,18 +19,18 @@ import { ScImageCropperPreview } from './image-cropper-preview';
   },
 })
 export class ScImageCropperPreviewImage {
-  protected readonly cropper = inject(ScImageCropper);
+  private readonly cropper = inject(ScImageCropper);
   private readonly preview = inject(ScImageCropperPreview);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** The cropper's image (again when another loads). */
-  protected readonly src = computed(() => {
+  private readonly src = computed(() => {
     this.cropper.ɵnatural();
     return this.cropper.ɵimage()?.currentSrc || null;
   });
 
-  protected readonly place = computed(() => {
+  private readonly place = computed(() => {
     const area = this.cropper.area();
     const box = this.preview.size();
     const natural = this.cropper.ɵnatural();
@@ -51,7 +51,7 @@ export class ScImageCropperPreviewImage {
     };
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute max-w-none origin-center select-none',
       !this.cropper.ready() && 'invisible',

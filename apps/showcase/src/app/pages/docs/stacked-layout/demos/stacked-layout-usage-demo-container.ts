@@ -16,7 +16,7 @@ import { UsageCode } from '../../../../components/usage-code/usage-code';
   encapsulation: ViewEncapsulation.None,
 })
 export class StackedLayoutUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScStackedLayout } from '@semantic-components/ui';
 
 @Component({

@@ -18,7 +18,7 @@ import { MessageReactionsEmojiPickerDemo } from './message-reactions-emoji-picke
   encapsulation: ViewEncapsulation.None,
 })
 export class MessageReactionsEmojiPickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 import {
   ScButton,
   type ScEmoji,

@@ -18,7 +18,7 @@ import { InvalidCheckboxDemo } from './invalid-checkbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidCheckboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import { ScCheckbox, ScField, ScLabel } from '@semantic-components/ui';
 

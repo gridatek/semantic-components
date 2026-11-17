@@ -18,7 +18,7 @@ import { FormTimePickerDemo } from './form-time-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTimePickerDemoContainer {
-  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+  private readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {

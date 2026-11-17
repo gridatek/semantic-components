@@ -20,11 +20,11 @@ import {
   },
 })
 export class ScPdfViewerSignatureName {
-  protected readonly form = inject(ScPdfViewerSignatureForm);
+  private readonly form = inject(ScPdfViewerSignatureForm);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly font = SC_PDF_SIGNATURE_FONT;
-  protected readonly class = computed(() =>
+  private readonly font = SC_PDF_SIGNATURE_FONT;
+  private readonly class = computed(() =>
     cn(
       'h-36 bg-white text-center text-4xl text-black italic md:text-4xl dark:bg-white',
       this.classInput(),

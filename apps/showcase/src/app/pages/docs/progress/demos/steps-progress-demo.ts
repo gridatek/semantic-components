@@ -53,9 +53,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class StepsProgressDemo {
-  readonly done = signal(2);
+  private readonly done = signal(2);
 
-  step(by: number): void {
+  private step(by: number): void {
     this.done.update((done) => Math.min(Math.max(done + by, 0), 5));
   }
 }

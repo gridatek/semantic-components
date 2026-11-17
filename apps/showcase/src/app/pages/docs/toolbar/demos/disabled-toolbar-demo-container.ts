@@ -18,7 +18,7 @@ import { DisabledToolbarDemo } from './disabled-toolbar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledToolbarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScToolbar, ScToolbarWidget } from '@semantic-components/ui';
 
 /** A disabled widget stays reachable by the arrows (softDisabled), announced as disabled; a press does nothing. */

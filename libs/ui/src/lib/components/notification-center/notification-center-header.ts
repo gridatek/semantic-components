@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScNotificationCenterHeader {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex items-center justify-between gap-2 border-b px-4 py-3',
       this.classInput(),

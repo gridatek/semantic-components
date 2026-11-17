@@ -18,7 +18,7 @@ import { SidesPreviewCardDemo } from './sides-preview-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidesPreviewCardDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScPreviewCard,

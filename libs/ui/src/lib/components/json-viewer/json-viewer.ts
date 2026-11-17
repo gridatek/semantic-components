@@ -146,20 +146,20 @@ export class ScJsonViewer {
   /** The top value's key; none by default. */
   readonly rootName = input<string>('');
 
-  protected readonly summary = contentChild(ScJsonViewerSummary);
+  private readonly summary = contentChild(ScJsonViewerSummary);
 
   /** The focused row's path, `user.roles[2]` (`''` for the top value). */
   readonly focusedPath = computed(() => this.focused()?.path ?? null);
 
-  protected readonly focused = signal<ScJsonViewerNode | null>(null);
+  private readonly focused = signal<ScJsonViewerNode | null>(null);
 
   /** Open by depth, all open, all closed — then each row the user toggled. */
   private readonly mode = signal<'depth' | 'all' | 'none'>('depth');
   private readonly toggled = signal<ReadonlyMap<string, boolean>>(new Map());
   /** Rows whose children have been drawn: kept when they close. */
-  protected readonly drawn = signal<ReadonlySet<string>>(new Set());
+  private readonly drawn = signal<ReadonlySet<string>>(new Set());
 
-  protected readonly root = computed(() =>
+  private readonly root = computed(() =>
     nodeOf(this.data(), this.rootName() || null, '', 1),
   );
 
@@ -170,7 +170,7 @@ export class ScJsonViewer {
     return new WeakMap<ScJsonViewerNode, ScJsonViewerNode[]>();
   });
 
-  protected readonly class = computed(() => cn('text-sm', this.classInput()));
+  private readonly class = computed(() => cn('text-sm', this.classInput()));
 
   /** Opens every object and array. */
   expandAll(): void {
@@ -184,7 +184,7 @@ export class ScJsonViewer {
     this.toggled.set(new Map());
   }
 
-  protected isOpen(node: ScJsonViewerNode): boolean {
+  private isOpen(node: ScJsonViewerNode): boolean {
     const toggled = this.toggled().get(node.path);
     if (toggled !== undefined) return toggled;
     const mode = this.mode();
@@ -193,17 +193,17 @@ export class ScJsonViewer {
     );
   }
 
-  protected setOpen(node: ScJsonViewerNode, open: boolean): void {
+  private setOpen(node: ScJsonViewerNode, open: boolean): void {
     this.toggled.update((map) => new Map(map).set(node.path, open));
     if (!this.drawn().has(node.path))
       this.drawn.update((set) => new Set(set).add(node.path));
   }
 
-  protected expandable(node: ScJsonViewerNode): boolean {
+  private expandable(node: ScJsonViewerNode): boolean {
     return isExpandable(node);
   }
 
-  protected children(node: ScJsonViewerNode): ScJsonViewerNode[] {
+  private children(node: ScJsonViewerNode): ScJsonViewerNode[] {
     const cache = this.childrenCache();
     let children = cache.get(node);
     if (!children) {
@@ -213,7 +213,7 @@ export class ScJsonViewer {
     return children;
   }
 
-  protected textOf(node: ScJsonViewerNode): string {
+  private textOf(node: ScJsonViewerNode): string {
     switch (node.kind) {
       case 'string': {
         const text = node.value as string;
@@ -232,14 +232,14 @@ export class ScJsonViewer {
   }
 
   /** The whole string, when it is shortened. */
-  protected titleOf(node: ScJsonViewerNode): string | null {
+  private titleOf(node: ScJsonViewerNode): string | null {
     return node.kind === 'string' &&
       (node.value as string).length > this.maxStringLength()
       ? (node.value as string)
       : null;
   }
 
-  protected markerClass(node: ScJsonViewerNode): string {
+  private markerClass(node: ScJsonViewerNode): string {
     return cn(
       // A triangle pointing at the text (inline-start border), turned down when open.
       'mx-1 size-0 shrink-0 border-y-4 border-s-[6px] border-y-transparent border-s-current text-muted-foreground transition-transform duration-200 motion-reduce:transition-none',
@@ -248,7 +248,7 @@ export class ScJsonViewer {
     );
   }
 
-  protected valueClass(node: ScJsonViewerNode): string {
+  private valueClass(node: ScJsonViewerNode): string {
     return cn(
       'min-w-0 truncate',
       node.kind === 'string' && 'text-emerald-700 dark:text-emerald-400',
@@ -262,7 +262,7 @@ export class ScJsonViewer {
   }
 
   /** Ctrl/⌘+C on a row copies its value (a string as itself, the rest as JSON). */
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const node = this.focused();
     if (
       !node ||

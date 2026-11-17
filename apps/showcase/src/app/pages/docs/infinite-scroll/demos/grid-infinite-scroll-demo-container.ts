@@ -18,7 +18,7 @@ import { GridInfiniteScrollDemo } from './grid-infinite-scroll-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GridInfiniteScrollDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScInfiniteScroll,
   ScInfiniteScrollStatus,

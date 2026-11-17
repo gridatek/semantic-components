@@ -18,7 +18,7 @@ import { CustomColorSliderDemo } from './custom-color-slider-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomColorSliderDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
 
 /** The app's colours, changed on a part of the page: --primary, --muted, --ring. */

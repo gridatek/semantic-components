@@ -36,13 +36,13 @@ import { ScCommand } from './command';
 })
 export class ScCommandInput {
   private readonly styles = injectPreset().command;
-  protected readonly command = inject(ScCommand);
+  private readonly command = inject(ScCommand);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The search text. */
   readonly value = model('');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.input, this.classInput()),
   );
 
@@ -52,7 +52,7 @@ export class ScCommandInput {
   }
 
   /** Typed: the list filtered at once, not on the next render. */
-  protected onInput(text: string): void {
+  private onInput(text: string): void {
     this.value.set(text);
     this.command.setSearch(text);
   }

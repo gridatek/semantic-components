@@ -16,5 +16,5 @@ import { SiItalicIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class WithTextToggleDemo {
-  protected readonly italic = signal(false);
+  private readonly italic = signal(false);
 }

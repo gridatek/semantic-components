@@ -11,7 +11,7 @@ import { cn } from 'cn';
 export class ScNavigationMenuList {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group flex flex-1 list-none items-center justify-center gap-0',
       this.classInput(),

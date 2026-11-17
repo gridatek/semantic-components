@@ -18,7 +18,7 @@ import { SpinnerInputGroupDemo } from './spinner-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SpinnerInputGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScInput,
   ScInputGroup,

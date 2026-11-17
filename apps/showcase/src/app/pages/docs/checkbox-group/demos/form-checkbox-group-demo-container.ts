@@ -18,7 +18,7 @@ import { FormCheckboxGroupDemo } from './form-checkbox-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormCheckboxGroupDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
+  private readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, minLength } from '@angular/forms/signals';
 import {

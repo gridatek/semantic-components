@@ -9,7 +9,7 @@ import { now } from './format';
 export class BlogStore {
   private readonly items = signal<readonly BlogPost[]>(BLOG_POSTS);
   readonly posts = this.items.asReadonly();
-  readonly published = computed(() =>
+  private readonly published = computed(() =>
     this.items().filter((post) => post.status === 'published'),
   );
 

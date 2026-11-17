@@ -133,7 +133,7 @@ import { VisiblePasswordFieldDemoContainer } from './demos/visible-password-fiel
   encapsulation: ViewEncapsulation.None,
 })
 export default class PasswordFieldPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScPasswordField, ScPasswordGroup, ScPasswordInput, ScPasswordToggle,',
@@ -160,7 +160,7 @@ export default class PasswordFieldPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScPasswordField',
       selector: 'div[scPasswordField]',

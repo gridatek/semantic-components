@@ -18,7 +18,7 @@ import { SizesNativeSelectDemo } from './sizes-native-select-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesNativeSelectDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScNativeSelect,
   ScNativeSelectContainer,

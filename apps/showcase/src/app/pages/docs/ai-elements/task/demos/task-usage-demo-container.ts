@@ -18,7 +18,7 @@ import { TaskUsageDemo } from './task-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TaskUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

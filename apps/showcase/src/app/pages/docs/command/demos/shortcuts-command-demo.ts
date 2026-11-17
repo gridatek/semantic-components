@@ -109,12 +109,12 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ShortcutsCommandDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 
-  protected ran(name: string): void {
+  private ran(name: string): void {
     this.open.set(false);
     this.last.set(name);
   }
 
-  protected readonly last = signal('');
+  private readonly last = signal('');
 }

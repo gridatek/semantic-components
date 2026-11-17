@@ -139,7 +139,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class ToolPage {
-  protected readonly states = [
+  private readonly states = [
     {
       state: 'Its input arriving, or waiting',
       status: '"running" while the chat streams',
@@ -165,7 +165,7 @@ export default class ToolPage {
     { state: 'Denied', status: 'none', title: 'Denied …' },
   ];
 
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle,',

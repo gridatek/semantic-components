@@ -90,7 +90,7 @@ export class ScToggleGroup<T = unknown> implements FormValueControl<T[]> {
     return items.find((item) => this.has(item.value())) ?? items[0] ?? null;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.group, this.classInput()),
   );
 
@@ -132,7 +132,7 @@ export class ScToggleGroup<T = unknown> implements FormValueControl<T[]> {
     this.tabStop()?.element.focus(options);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     // Read now: the group may sit in a right-to-left part of the page.
     this.keys.withWrap(this.loopFocus());
     if (this.orientation() === 'vertical') {
@@ -146,7 +146,7 @@ export class ScToggleGroup<T = unknown> implements FormValueControl<T[]> {
     this.keys.onKeydown(event);
   }
 
-  protected onFocusIn(event: FocusEvent): void {
+  private onFocusIn(event: FocusEvent): void {
     const item = this.items().find((i) => i.element === event.target);
     if (item) {
       this.keys.updateActiveItem(item);
@@ -154,7 +154,7 @@ export class ScToggleGroup<T = unknown> implements FormValueControl<T[]> {
     }
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     if (!this.element.contains(event.relatedTarget as Node | null)) {
       this.touch.emit();
     }

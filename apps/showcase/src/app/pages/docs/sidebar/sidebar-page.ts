@@ -194,7 +194,7 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
   encapsulation: ViewEncapsulation.None,
 })
 export default class SidebarPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScSidebarProvider, ScSidebar, ScSidebarInset, ScSidebarTrigger, ScSidebarRail,',
@@ -239,7 +239,7 @@ export default class SidebarPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScSidebarProvider',
       selector: 'div[scSidebarProvider]',

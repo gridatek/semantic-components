@@ -18,7 +18,7 @@ import { SC_NUMBER_FIELD_SCRUB_AREA } from './number-field-scrub-area';
   },
 })
 export class ScNumberFieldScrubAreaCursor {
-  protected readonly scrubArea = inject(SC_NUMBER_FIELD_SCRUB_AREA);
+  private readonly scrubArea = inject(SC_NUMBER_FIELD_SCRUB_AREA);
 
   constructor() {
     // Its area locks the pointer only when a cursor part can stand in for it.
@@ -30,7 +30,7 @@ export class ScNumberFieldScrubAreaCursor {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-1/2 drop-shadow-sm [&_svg]:size-4',
       this.classInput(),

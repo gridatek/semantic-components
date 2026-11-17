@@ -18,7 +18,7 @@ import { CustomColorRangeSliderDemo } from './custom-color-range-slider-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomColorRangeSliderDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScLabel,
   ScRangeSlider,

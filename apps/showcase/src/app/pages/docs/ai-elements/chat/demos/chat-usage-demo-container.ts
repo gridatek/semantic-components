@@ -18,7 +18,7 @@ import { ChatUsageDemo } from './chat-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChatUsageDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,

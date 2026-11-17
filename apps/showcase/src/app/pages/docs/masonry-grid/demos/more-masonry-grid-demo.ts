@@ -35,13 +35,13 @@ import {
 })
 export class MoreMasonryGridDemo {
   private next = 1;
-  readonly tiles = signal(this.make(6));
+  private readonly tiles = signal(this.make(6));
 
-  more(): void {
+  private more(): void {
     this.tiles.update((tiles) => [...tiles, ...this.make(4)]);
   }
 
-  removeFirst(): void {
+  private removeFirst(): void {
     this.tiles.update((tiles) => tiles.slice(1));
   }
 

@@ -18,7 +18,7 @@ import { PlacementSwitchDemo } from './placement-switch-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PlacementSwitchDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCard,
   ScCardBody,

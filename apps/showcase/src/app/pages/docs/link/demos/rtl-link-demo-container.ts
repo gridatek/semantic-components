@@ -18,7 +18,7 @@ import { RtlLinkDemo } from './rtl-link-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlLinkDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 import {

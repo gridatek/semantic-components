@@ -18,7 +18,7 @@ import { DescriptionTraceDemo } from './description-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DescriptionTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTrace,
   ScTraceDescription,

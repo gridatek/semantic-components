@@ -18,7 +18,7 @@ import { TurnTraceDemo } from './turn-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TurnTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

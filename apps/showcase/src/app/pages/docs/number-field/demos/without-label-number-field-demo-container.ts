@@ -18,7 +18,7 @@ import { WithoutLabelNumberFieldDemo } from './without-label-number-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export default class WithoutLabelNumberFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScNumberField,
   ScNumberFieldDecrement,

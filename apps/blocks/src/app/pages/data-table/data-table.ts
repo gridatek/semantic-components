@@ -481,19 +481,25 @@ export class DataTable {
     suspended: $localize`:@@dataTable.status.suspended:Suspended`,
   };
 
-  readonly sorting = signal<SortingState>([]);
-  readonly columnFilters = signal<ColumnFiltersState>([]);
-  readonly globalFilter = signal('');
-  readonly columnVisibility = signal<ColumnVisibilityState>({});
-  readonly rowSelection = signal<RowSelectionState>({});
-  readonly pagination = signal<PaginationState>({
+  private readonly sorting = signal<SortingState>([]);
+  private readonly columnFilters = signal<ColumnFiltersState>([]);
+  private readonly globalFilter = signal('');
+  private readonly columnVisibility = signal<ColumnVisibilityState>({});
+  private readonly rowSelection = signal<RowSelectionState>({});
+  private readonly pagination = signal<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
   });
-  readonly expanded = signal<ExpandedState>({});
-  readonly grouping = signal<GroupingState>([]);
-  readonly columnPinning = signal<ColumnPinningState>({ start: [], end: [] });
-  readonly rowPinning = signal<RowPinningState>({ top: [], bottom: [] });
+  private readonly expanded = signal<ExpandedState>({});
+  private readonly grouping = signal<GroupingState>([]);
+  private readonly columnPinning = signal<ColumnPinningState>({
+    start: [],
+    end: [],
+  });
+  private readonly rowPinning = signal<RowPinningState>({
+    top: [],
+    bottom: [],
+  });
 
   readonly columns =
     // eslint-disable-next-line @typescript-eslint/no-explicit-any -- each column has its own value type
@@ -502,14 +508,14 @@ export class DataTable {
 
   readonly editSave = output<{ row: User; columnId: string; value: string }>();
 
-  readonly editingCell = signal<{
+  private readonly editingCell = signal<{
     rowId: string;
     columnId: string;
   } | null>(null);
-  readonly editValue = signal<string>('');
-  readonly pageSizeOptions = [5, 10, 20, 30];
+  private readonly editValue = signal<string>('');
+  private readonly pageSizeOptions = [5, 10, 20, 30];
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     data: this.data(),
     columns: this.columns(),
@@ -583,56 +589,58 @@ export class DataTable {
     getRowCanExpand: () => true,
   }));
 
-  getHeaderLabel(header: Header<DataTableFeatures, User, unknown>): string {
+  private getHeaderLabel(
+    header: Header<DataTableFeatures, User, unknown>,
+  ): string {
     const headerDef = header.column.columnDef.header;
     if (typeof headerDef === 'string') return headerDef;
     return header.column.id;
   }
 
-  asNumber(value: unknown): number {
+  private asNumber(value: unknown): number {
     return Number(value) || 0;
   }
 
-  formatNumber(value: number): string {
+  private formatNumber(value: number): string {
     return new Intl.NumberFormat(this.locale).format(Math.round(value));
   }
 
   /** A role's, plan's or status's name, in the app's locale. */
-  valueLabel(value: unknown): string {
+  private valueLabel(value: unknown): string {
     return this.valueLabels[String(value)] ?? String(value);
   }
 
-  storageColor(value: number): string {
+  private storageColor(value: number): string {
     if (value >= 5000) return 'bg-red-500';
     if (value >= 2000) return 'bg-yellow-500';
     return 'bg-green-500';
   }
 
-  canEditColumn(columnId: string): boolean {
+  private canEditColumn(columnId: string): boolean {
     return columnId === 'username';
   }
 
-  isEditing(rowId: string, columnId: string): boolean {
+  private isEditing(rowId: string, columnId: string): boolean {
     const editing = this.editingCell();
     return editing?.rowId === rowId && editing?.columnId === columnId;
   }
 
-  getEditValue(): string {
+  private getEditValue(): string {
     return this.editValue();
   }
 
-  startEdit(rowId: string, columnId: string, value: unknown): void {
+  private startEdit(rowId: string, columnId: string, value: unknown): void {
     this.editingCell.set({ rowId, columnId });
     this.editValue.set(String(value ?? ''));
   }
 
-  saveEdit(row: User, columnId: string): void {
+  private saveEdit(row: User, columnId: string): void {
     const value = this.editValue();
     this.editSave.emit({ row, columnId, value });
     this.editingCell.set(null);
   }
 
-  cancelEdit(): void {
+  private cancelEdit(): void {
     this.editingCell.set(null);
   }
 }

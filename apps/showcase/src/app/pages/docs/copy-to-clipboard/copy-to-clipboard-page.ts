@@ -108,7 +108,7 @@ import { CopyToClipboardUsageDemoContainer } from './demos/copy-to-clipboard-usa
   encapsulation: ViewEncapsulation.None,
 })
 export default class CopyToClipboardPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       "import { ScCopyToClipboard } from '@semantic-components/ui';",
     ].join('\n'),
@@ -119,7 +119,7 @@ export default class CopyToClipboardPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScCopyToClipboard',
       selector: '[scCopyToClipboard]',

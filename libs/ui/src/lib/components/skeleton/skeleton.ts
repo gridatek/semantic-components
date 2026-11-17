@@ -18,7 +18,7 @@ export class ScSkeleton {
   private readonly styles = injectPreset().skeleton;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles, 'motion-reduce:animate-none', this.classInput()),
   );
 }

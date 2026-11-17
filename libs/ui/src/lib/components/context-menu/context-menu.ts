@@ -108,17 +108,17 @@ export class ScContextMenu implements ScMenuContext {
     this.host.closest('[lang]')?.getAttribute('lang') ?? null;
 
   /** Viewport coordinates of the last right-click. */
-  readonly position = signal({ x: 0, y: 0 });
+  private readonly position = signal({ x: 0, y: 0 });
 
   private readonly trigger = contentChild(ScContextMenuTrigger);
-  protected readonly menuPortal = contentChild.required(ScMenuPortal);
+  private readonly menuPortal = contentChild.required(ScMenuPortal);
   private readonly cursor = viewChild(MenuTrigger);
   private readonly overlay = viewChild(CdkConnectedOverlay);
   private readonly expanded = computed(
     () => this.cursor()?.expanded() ?? false,
   );
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   private readonly document = inject(DOCUMENT);
   private readonly injector = inject(Injector);
@@ -168,7 +168,7 @@ export class ScContextMenu implements ScMenuContext {
    * default. The CDK mirrors start and end right to left, not the offsets:
    * turned here. Each side falls back to the opposite one.
    */
-  protected readonly positions = computed((): ConnectedPosition[] => {
+  private readonly positions = computed((): ConnectedPosition[] => {
     const along = this.direction() === 'rtl' ? -4 : 4;
     const at = (
       overlayX: 'start' | 'end',
@@ -202,7 +202,7 @@ export class ScContextMenu implements ScMenuContext {
       : [start, end, up(start), up(end)];
   });
 
-  protected onContextMenu(event: MouseEvent): void {
+  private onContextMenu(event: MouseEvent): void {
     if (!this.trigger()) return;
     event.preventDefault();
     this.position.set({ x: event.clientX, y: event.clientY });
@@ -213,7 +213,7 @@ export class ScContextMenu implements ScMenuContext {
   }
 
   /** Closes the menu. */
-  close(): void {
+  private close(): void {
     const cursor = this.cursor();
     if (cursor?.expanded()) cursor.close();
   }
@@ -237,7 +237,7 @@ export class ScContextMenu implements ScMenuContext {
     this.cursor()?.open();
   }
 
-  protected onOverlayKeydown(event: KeyboardEvent): void {
+  private onOverlayKeydown(event: KeyboardEvent): void {
     if (event.key === 'Escape') this.close();
   }
 }

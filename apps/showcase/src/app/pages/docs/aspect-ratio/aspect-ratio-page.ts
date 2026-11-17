@@ -164,7 +164,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
   encapsulation: ViewEncapsulation.None,
 })
 export default class AspectRatioPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScAspectRatio, ScFrame } from '@semantic-components/ui';",
     markup: [
@@ -174,7 +174,7 @@ export default class AspectRatioPage {
     ].join('\n'),
   };
 
-  protected readonly inputs = [
+  private readonly inputs = [
     {
       name: 'ratio',
       type: 'number',

@@ -18,7 +18,7 @@ import { CustomLabelBarChartDemo } from './custom-label-bar-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomLabelBarChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

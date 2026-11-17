@@ -32,18 +32,18 @@ const SWIPE = 60;
   },
 })
 export class ScLightboxImage {
-  protected readonly lightbox = inject(ScLightbox);
+  private readonly lightbox = inject(ScLightbox);
   private readonly element =
     inject<ElementRef<HTMLImageElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly transform = computed(() => {
+  private readonly transform = computed(() => {
     const { x, y } = this.lightbox.pan();
     return `translate(${x}px, ${y}px) scale(${this.lightbox.zoom()})`;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'max-h-full max-w-full touch-none object-contain select-none',
       'transition-[transform,opacity] duration-200 ease-out motion-reduce:transition-none',
@@ -66,23 +66,23 @@ export class ScLightboxImage {
     this.lightbox.ɵimage.set(this.element);
   }
 
-  protected onWheel(event: WheelEvent): void {
+  private onWheel(event: WheelEvent): void {
     event.preventDefault();
     this.lightbox.zoomBy(Math.exp(-event.deltaY * 0.002), this.at(event));
   }
 
-  protected onDoubleClick(event: MouseEvent): void {
+  private onDoubleClick(event: MouseEvent): void {
     if (this.lightbox.zoom() > 1) this.lightbox.resetZoom();
     else this.lightbox.zoomTo(2.5, this.at(event));
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     this.element.setPointerCapture(event.pointerId);
     this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     this.begin();
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     if (!this.pointers.has(event.pointerId) || !this.start) return;
     this.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     const [a, b] = [...this.pointers.values()];
@@ -98,7 +98,7 @@ export class ScLightboxImage {
     }
   }
 
-  protected onPointerUp(event: PointerEvent): void {
+  private onPointerUp(event: PointerEvent): void {
     const last = this.pointers.get(event.pointerId);
     this.pointers.delete(event.pointerId);
     const start = this.start;

@@ -18,7 +18,7 @@ import { BasicCopyToClipboardDemo } from './basic-copy-to-clipboard-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCopyToClipboardDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScCopyToClipboard } from '@semantic-components/ui';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';

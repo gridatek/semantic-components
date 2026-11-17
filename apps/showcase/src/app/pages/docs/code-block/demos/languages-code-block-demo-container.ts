@@ -18,7 +18,7 @@ import { LanguagesCodeBlockDemo } from './languages-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LanguagesCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockContent,

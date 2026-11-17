@@ -18,7 +18,7 @@ import { RollCountdownDemo } from './roll-countdown-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RollCountdownDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCountdown,
   ScCountdownText,

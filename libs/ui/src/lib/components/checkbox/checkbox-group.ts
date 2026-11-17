@@ -58,7 +58,7 @@ export class ScCheckboxGroup<T = unknown> implements FormValueControl<T[]> {
       !this.allTicked() && this.allValues().some((value) => this.has(value)),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex w-full flex-col gap-3', this.classInput()),
   );
 
@@ -87,7 +87,7 @@ export class ScCheckboxGroup<T = unknown> implements FormValueControl<T[]> {
       ?.focus(options);
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     if (!this.element.contains(event.relatedTarget as Node | null)) {
       this.touch.emit();
     }

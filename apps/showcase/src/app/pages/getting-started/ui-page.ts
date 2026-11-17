@@ -158,8 +158,8 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
 })
 export default class UiPage {
   /** styles.css: its first lines, or all of it. */
-  protected readonly stylesExpanded = signal(false);
-  readonly stylesCode = `@import url('@angular/cdk/a11y-prebuilt.css');
+  private readonly stylesExpanded = signal(false);
+  private readonly stylesCode = `@import url('@angular/cdk/a11y-prebuilt.css');
 @import url('@angular/cdk/overlay-prebuilt.css');
 @import 'tailwindcss';
 @import 'tw-animate-css';
@@ -336,7 +336,7 @@ export default class UiPage {
 }
 `;
 
-  readonly presetCode = `import { lyra } from '@semantic-components/presets/lyra';
+  private readonly presetCode = `import { lyra } from '@semantic-components/presets/lyra';
 import { provideSemanticComponents } from '@semantic-components/ui';
 
 export const appConfig: ApplicationConfig = {

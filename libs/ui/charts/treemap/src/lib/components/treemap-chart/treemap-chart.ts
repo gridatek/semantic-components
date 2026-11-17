@@ -166,7 +166,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
       : (x: number, size: number) => -(x + size) * left;
   });
 
-  protected readonly active = this.state.activeIndex;
+  private readonly active = this.state.activeIndex;
 
   private readonly layout = computed(() => {
     const rows = this.state.data();
@@ -201,7 +201,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     );
   });
 
-  protected readonly boxes = computed<ScTreemapChartBox[]>(() => {
+  private readonly boxes = computed<ScTreemapChartBox[]>(() => {
     const { left, top } = this.state.area();
     const groupKey = this.groupKey();
     const rows = this.state.data();
@@ -229,7 +229,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
   });
 
   /** The groups' names, above their boxes. */
-  protected readonly groups = computed<ScTreemapChartGroup[]>(() => {
+  private readonly groups = computed<ScTreemapChartGroup[]>(() => {
     if (!this.groupKey()) return [];
     const { left, top } = this.state.area();
     const config = this.state.config();
@@ -248,7 +248,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     });
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({
@@ -279,7 +279,7 @@ export class ScChartTreemap implements ScChartSeriesLabels {
     inject(DestroyRef).onDestroy(unregister);
   }
 
-  protected point(index: number): void {
+  private point(index: number): void {
     this.state.activeIndex.set(index);
   }
 

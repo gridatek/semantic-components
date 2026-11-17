@@ -104,7 +104,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewSleepReport {
-  protected readonly data = [
+  private readonly data = [
     { hour: '10pm', deep: 0, light: 30, rem: 0 },
     { hour: '11pm', deep: 20, light: 10, rem: 0 },
     { hour: '12am', deep: 40, light: 0, rem: 10 },
@@ -115,12 +115,12 @@ export class PreviewSleepReport {
     { hour: '5am', deep: 5, light: 35, rem: 15 },
     { hour: '6am', deep: 0, light: 20, rem: 25 },
   ];
-  protected readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     deep: { label: 'Deep', color: 'var(--chart-1)' },
     light: { label: 'Light', color: 'var(--chart-2)' },
     rem: { label: 'REM', color: 'var(--chart-3)' },
   };
-  protected readonly stats = [
+  private readonly stats = [
     { label: 'Deep', value: '2h 10m' },
     { label: 'Light', value: '3h 48m' },
     { label: 'REM', value: '1h 26m' },

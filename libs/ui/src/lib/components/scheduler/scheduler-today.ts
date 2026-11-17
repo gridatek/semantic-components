@@ -17,13 +17,13 @@ import { ScScheduler } from './scheduler';
 export class ScSchedulerToday {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly scheduler = inject(ScScheduler);
+  private readonly scheduler = inject(ScScheduler);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'rtl:[&_svg]:rotate-180',

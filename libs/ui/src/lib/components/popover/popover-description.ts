@@ -15,9 +15,9 @@ import { ScPopoverProvider } from './popover-provider';
 export class ScPopoverDescription {
   private readonly styles = injectPreset().popover;
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly id = inject(_IdGenerator).getId('sc-popover-desc-');
+  private readonly id = inject(_IdGenerator).getId('sc-popover-desc-');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.description, this.classInput()),
   );
 

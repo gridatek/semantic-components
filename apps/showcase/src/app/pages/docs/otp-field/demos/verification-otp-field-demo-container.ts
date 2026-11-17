@@ -18,7 +18,7 @@ import { VerificationOtpFieldDemo } from './verification-otp-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerificationOtpFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, minLength, required } from '@angular/forms/signals';
 import {
   ScField,

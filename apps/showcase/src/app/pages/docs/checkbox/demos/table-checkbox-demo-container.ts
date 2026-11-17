@@ -18,7 +18,7 @@ import { TableCheckboxDemo } from './table-checkbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TableCheckboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScCheckbox,
   ScTable,

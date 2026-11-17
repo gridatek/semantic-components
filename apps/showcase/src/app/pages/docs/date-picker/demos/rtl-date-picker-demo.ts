@@ -88,5 +88,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlDatePickerDemo {
-  readonly date = signal<ScCalendarValue>(null);
+  private readonly date = signal<ScCalendarValue>(null);
 }

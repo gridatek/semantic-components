@@ -21,15 +21,15 @@ import { ScQuestionnaire } from './questionnaire';
 })
 export class ScQuestionnaireSubmit {
   private readonly buttonStyles = injectPreset().button;
-  protected readonly questionnaire = inject(ScQuestionnaire);
+  private readonly questionnaire = inject(ScQuestionnaire);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('default');
   readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly visible = computed(() => this.questionnaire.last());
+  private readonly visible = computed(() => this.questionnaire.last());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'col-start-3 row-start-1 min-h-11 justify-self-end sm:min-h-0',

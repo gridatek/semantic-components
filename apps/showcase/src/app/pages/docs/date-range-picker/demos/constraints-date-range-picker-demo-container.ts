@@ -18,7 +18,7 @@ import { ConstraintsDateRangePickerDemo } from './constraints-date-range-picker-
   encapsulation: ViewEncapsulation.None,
 })
 export class ConstraintsDateRangePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

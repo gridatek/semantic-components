@@ -22,7 +22,7 @@ export class ScPasswordRequirements {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-password-requirements-'));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('grid gap-1 text-sm', this.classInput()),
   );
 

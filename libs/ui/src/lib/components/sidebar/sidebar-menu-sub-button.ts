@@ -33,11 +33,11 @@ export class ScSidebarMenuSubButton {
   /** The page shown. */
   readonly active = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.menuSubButton, this.classInput()),
   );
 
-  protected onClick(event: Event): void {
+  private onClick(event: Event): void {
     if (
       this.state?.isMobile() &&
       (event.currentTarget as HTMLElement).tagName === 'A'

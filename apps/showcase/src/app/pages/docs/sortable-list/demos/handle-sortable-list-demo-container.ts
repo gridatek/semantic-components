@@ -18,7 +18,7 @@ import { HandleSortableListDemo } from './handle-sortable-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HandleSortableListDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScCheckbox,
   ScField,

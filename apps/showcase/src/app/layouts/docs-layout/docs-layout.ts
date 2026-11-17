@@ -529,13 +529,13 @@ import { DocsNavService } from '../../services/docs-nav-service';
 })
 export class DocsLayout {
   /** A shortcut as this platform writes it (⌘K, Ctrl+K). */
-  protected readonly format = injectFormatForDisplay();
+  private readonly format = injectFormatForDisplay();
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
-  protected readonly tocService = inject(TocService);
+  private readonly tocService = inject(TocService);
   private readonly componentsService = inject(ComponentsService);
   private readonly commandPalette = inject(CommandPaletteService);
   private readonly config = inject(ConfigService);
@@ -543,14 +543,14 @@ export class DocsLayout {
   private readonly contentArea =
     viewChild.required<ElementRef<HTMLElement>>('contentArea');
 
-  readonly components = this.componentsService.visibleComponents;
-  readonly charts = this.componentsService.visibleCharts;
-  readonly utilities = this.componentsService.visibleUtilities;
-  readonly recipes = this.componentsService.visibleRecipes;
+  private readonly components = this.componentsService.visibleComponents;
+  private readonly charts = this.componentsService.visibleCharts;
+  private readonly utilities = this.componentsService.visibleUtilities;
+  private readonly recipes = this.componentsService.visibleRecipes;
   private readonly introductionPages = introductionPages;
   private readonly installationPages = installationPages;
   private readonly aiElementPages = aiElementPages;
-  protected readonly devMode = this.config.devMode;
+  private readonly devMode = this.config.devMode;
 
   /** The page shown: its path, without query or fragment. */
   private readonly url = toSignal(
@@ -562,26 +562,24 @@ export class DocsLayout {
   );
 
   /** The header's breadcrumb: Docs › Components › Button. */
-  protected readonly crumbs = computed<{ name: string; path?: string }[]>(
-    () => {
-      const url = this.url();
-      const docs = { name: 'Docs', path: '/docs/getting-started/introduction' };
-      const components = { name: 'Components', path: '/docs/components' };
-      if (url === components.path) return [docs, components];
-      const named = this.pages().find((page) => page.path === url);
-      if (url.startsWith('/docs/components/')) {
-        const slug = url.slice('/docs/components/'.length);
-        const item = this.componentsService
-          .components()
-          .find((c) => c.path === slug);
-        return [docs, components, { name: named?.name ?? item?.name ?? slug }];
-      }
-      return named ? [docs, { name: named.name }] : [docs];
-    },
-  );
+  private readonly crumbs = computed<{ name: string; path?: string }[]>(() => {
+    const url = this.url();
+    const docs = { name: 'Docs', path: '/docs/getting-started/introduction' };
+    const components = { name: 'Components', path: '/docs/components' };
+    if (url === components.path) return [docs, components];
+    const named = this.pages().find((page) => page.path === url);
+    if (url.startsWith('/docs/components/')) {
+      const slug = url.slice('/docs/components/'.length);
+      const item = this.componentsService
+        .components()
+        .find((c) => c.path === slug);
+      return [docs, components, { name: named?.name ?? item?.name ?? slug }];
+    }
+    return named ? [docs, { name: named.name }] : [docs];
+  });
 
   /** Every docs page, in the sidebar's order: the bottom's previous and next. */
-  protected readonly pages = inject(DocsNavService).pages;
+  private readonly pages = inject(DocsNavService).pages;
 
   constructor() {
     afterNextRender(() => {
@@ -598,7 +596,7 @@ export class DocsLayout {
     });
   }
 
-  openCommandPalette(): void {
+  private openCommandPalette(): void {
     this.commandPalette.open.set(true);
   }
 

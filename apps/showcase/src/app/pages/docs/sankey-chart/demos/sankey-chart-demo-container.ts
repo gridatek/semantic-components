@@ -18,7 +18,7 @@ import { SankeyChartDemo } from './sankey-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SankeyChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

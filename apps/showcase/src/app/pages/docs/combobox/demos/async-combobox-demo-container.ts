@@ -18,7 +18,7 @@ import { AsyncComboboxDemo } from './async-combobox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AsyncComboboxDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   ViewEncapsulation,
   effect,

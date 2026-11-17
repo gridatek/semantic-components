@@ -18,7 +18,7 @@ import { ScalesGanttDemo } from './scales-gantt-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScalesGanttDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   createColumnHelper,
   createExpandedRowModel,
   injectTable,

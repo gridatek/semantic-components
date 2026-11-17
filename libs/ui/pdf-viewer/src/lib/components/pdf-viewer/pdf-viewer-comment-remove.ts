@@ -18,7 +18,7 @@ import type { ScPdfComment } from './pdf-viewer-types';
 export class ScPdfViewerCommentRemove {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly comment = input.required<ScPdfComment>({
     alias: 'scPdfViewerCommentRemove',
   });
@@ -26,7 +26,7 @@ export class ScPdfViewerCommentRemove {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

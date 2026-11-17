@@ -18,7 +18,7 @@ import { StateSwitchDemo } from './state-switch-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StateSwitchDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScSwitch } from '@semantic-components/ui';
 
 /** Its state in its text: two-way, [(checked)]. */

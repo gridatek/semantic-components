@@ -14,7 +14,7 @@ import { BadgeUsageDemo } from './badge-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BadgeUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScBadge } from '@semantic-components/ui';
 
 @Component({

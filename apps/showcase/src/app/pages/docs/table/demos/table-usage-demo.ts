@@ -53,7 +53,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TableUsageDemo {
-  protected readonly invoices = [
+  private readonly invoices = [
     { id: 'INV001', status: 'Paid', method: 'Credit Card', amount: '$250.00' },
     { id: 'INV002', status: 'Pending', method: 'PayPal', amount: '$150.00' },
     {

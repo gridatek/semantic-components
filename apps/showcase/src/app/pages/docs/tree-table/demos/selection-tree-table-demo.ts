@@ -168,7 +168,7 @@ const FILES: FileNode[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectionTreeTableDemo {
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: FILES,

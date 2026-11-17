@@ -12,7 +12,7 @@ export class ScEmpty {
   private readonly styles = injectPreset().empty;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.root, this.classInput()),
   );
 }

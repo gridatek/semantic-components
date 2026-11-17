@@ -24,11 +24,11 @@ export class ScNotificationTime {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly iso = computed(() =>
+  private readonly iso = computed(() =>
     this.item.notification().timestamp.toString(),
   );
 
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     const then = this.item.notification().timestamp;
     const minutes = Math.round(
       (then.epochMilliseconds - this.center.now().epochMilliseconds) / 60000,
@@ -49,7 +49,7 @@ export class ScNotificationTime {
     });
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-muted-foreground text-xs whitespace-nowrap', this.classInput()),
   );
 }

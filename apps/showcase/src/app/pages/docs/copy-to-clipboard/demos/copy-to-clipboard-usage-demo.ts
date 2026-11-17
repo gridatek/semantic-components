@@ -25,5 +25,5 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class CopyToClipboardUsageDemo {
-  readonly text = 'Hello, world!';
+  private readonly text = 'Hello, world!';
 }

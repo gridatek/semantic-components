@@ -88,7 +88,7 @@ export type ScSidebarSide = 'inline-start' | 'inline-end' | 'left' | 'right';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSidebar {
-  protected readonly state = inject(ScSidebarState);
+  private readonly state = inject(ScSidebarState);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /**
@@ -102,13 +102,13 @@ export class ScSidebar {
   /** Names the sheet on phones. */
   readonly label = input<string>('', { alias: 'aria-label' });
 
-  protected readonly id = inject(_IdGenerator).getId('sc-sidebar-');
+  private readonly id = inject(_IdGenerator).getId('sc-sidebar-');
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   /** On an `aside`: a landmark, named by its `aria-label`. */
-  protected readonly aside = this.element.tagName === 'ASIDE';
+  private readonly aside = this.element.tagName === 'ASIDE';
   private readonly direction = inject(Directionality);
-  protected readonly sheetSide = computed(() =>
+  private readonly sheetSide = computed(() =>
     this.side() === 'left' || this.side() === 'right'
       ? this.side()
       : (this.side() === 'inline-start') !==
@@ -121,7 +121,7 @@ export class ScSidebar {
     () => this.variant() === 'floating' || this.variant() === 'inset',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.collapsible() === 'none'
         ? 'contents'
@@ -130,7 +130,7 @@ export class ScSidebar {
     ),
   );
 
-  protected readonly gapClass = computed(() =>
+  private readonly gapClass = computed(() =>
     cn(
       'relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear',
       'group-data-[collapsible=offcanvas]:w-0',
@@ -140,7 +140,7 @@ export class ScSidebar {
     ),
   );
 
-  protected readonly containerClass = computed(() =>
+  private readonly containerClass = computed(() =>
     cn(
       'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[inset-inline-start,inset-inline-end,left,right,width] duration-200 ease-linear md:flex',
       'data-[side=inline-start]:start-0 data-[side=inline-start]:group-data-[collapsible=offcanvas]:start-[calc(var(--sidebar-width)*-1)]',
@@ -153,7 +153,7 @@ export class ScSidebar {
     ),
   );
 
-  protected readonly innerClass = cn(injectPreset().sidebar.inner);
+  private readonly innerClass = cn(injectPreset().sidebar.inner);
 
   constructor() {
     this.state.sidebarId.set(this.id);

@@ -23,12 +23,12 @@ export class ScDataTableGlobalFilter {
   readonly table = input.required<ScDataTableGlobalFilterTable>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly value = computed(() =>
+  private readonly value = computed(() =>
     String(this.table().atoms.globalFilter.get() ?? ''),
   );
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected onInput(event: Event): void {
+  private onInput(event: Event): void {
     this.table().setGlobalFilter((event.target as HTMLInputElement).value);
   }
 }

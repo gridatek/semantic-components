@@ -111,16 +111,18 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsBarcodeScannerDemo {
-  readonly kinds = [
+  private readonly kinds = [
     { id: 'qr', label: 'QR codes' },
     { id: 'products', label: 'Products' },
   ] as const;
-  readonly settings = signal<{ kind: 'qr' | 'products' }>({ kind: 'qr' });
-  readonly settingsForm = form(this.settings);
-  readonly formats = computed<ScBarcodeFormat[]>(() =>
+  private readonly settings = signal<{ kind: 'qr' | 'products' }>({
+    kind: 'qr',
+  });
+  private readonly settingsForm = form(this.settings);
+  private readonly formats = computed<ScBarcodeFormat[]>(() =>
     this.settings().kind === 'qr'
       ? ['qr_code']
       : ['ean_13', 'ean_8', 'upc_a', 'upc_e'],
   );
-  readonly last = signal('');
+  private readonly last = signal('');
 }

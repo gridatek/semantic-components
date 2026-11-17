@@ -22,7 +22,7 @@ export class ScToastAction {
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'shrink-0',
@@ -30,7 +30,7 @@ export class ScToastAction {
     ),
   );
 
-  protected run(): void {
+  private run(): void {
     this.context.toast().action?.onClick();
     this.context.dismiss();
   }

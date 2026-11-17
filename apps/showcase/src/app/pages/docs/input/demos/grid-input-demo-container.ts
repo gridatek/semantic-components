@@ -18,7 +18,7 @@ import { GridInputDemo } from './grid-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GridInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldGroup,

@@ -171,8 +171,8 @@ const TOP = DATA.reduce((max, row) =>
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewPieChartCard {
-  protected readonly data = DATA;
-  protected readonly config: ScChartConfig = {
+  private readonly data = DATA;
+  private readonly config: ScChartConfig = {
     visitors: { label: 'Visitors' },
     chrome: { label: 'Chrome', color: 'var(--chart-1)' },
     safari: { label: 'Safari', color: 'var(--chart-2)' },
@@ -180,7 +180,7 @@ export class PreviewPieChartCard {
     edge: { label: 'Edge', color: 'var(--chart-4)' },
   };
   /** The total: written by its counter, in the app's locale. */
-  protected readonly total = TOTAL;
-  protected readonly topLabel = this.config[TOP.browser]?.label ?? 'Top';
-  protected readonly topShare = Math.round((TOP.visitors / TOTAL) * 100);
+  private readonly total = TOTAL;
+  private readonly topLabel = this.config[TOP.browser]?.label ?? 'Top';
+  private readonly topShare = Math.round((TOP.visitors / TOTAL) * 100);
 }

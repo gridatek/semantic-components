@@ -307,10 +307,10 @@ export default class ChatPage {
   private sent = 0;
 
   /** The reasoning line's title, while it thinks and once done. */
-  protected readonly thinking = $localize`:@@chat.thinking:Thinking`;
-  protected readonly thought = $localize`:@@chat.thought:Thought`;
+  private readonly thinking = $localize`:@@chat.thinking:Thinking`;
+  private readonly thought = $localize`:@@chat.thought:Thought`;
 
-  readonly messages = signal<readonly ChatMessage[]>([
+  private readonly messages = signal<readonly ChatMessage[]>([
     {
       id: 'q1',
       role: 'user',
@@ -338,10 +338,10 @@ export default class ChatPage {
       text: $localize`:@@chat.a1:Trace: a line per step, with a status, a detail and the output it opens on — above the reply, as here.`,
     },
   ]);
-  readonly streaming = signal(false);
+  private readonly streaming = signal(false);
 
   private readonly model = signal({ text: '' });
-  readonly composer = form(this.model, () => undefined, {
+  private readonly composer = form(this.model, () => undefined, {
     submission: {
       action: async () => this.send(),
     },
@@ -352,7 +352,7 @@ export default class ChatPage {
   }
 
   /** Enter sends; Shift+Enter starts a new line. */
-  protected sendOnEnter(event: Event): void {
+  private sendOnEnter(event: Event): void {
     const key = event as KeyboardEvent;
     if (key.shiftKey || key.isComposing) return;
     key.preventDefault();
@@ -440,7 +440,7 @@ export default class ChatPage {
     this.timer = setTimeout(run, time);
   }
 
-  protected updateReasoning(id: string, change: Partial<ChatReasoning>): void {
+  private updateReasoning(id: string, change: Partial<ChatReasoning>): void {
     this.updateReply(id, (message) => ({
       reasoning: { text: '', running: false, ...message.reasoning, ...change },
     }));

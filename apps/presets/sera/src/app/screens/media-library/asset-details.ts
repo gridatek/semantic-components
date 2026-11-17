@@ -227,7 +227,7 @@ export class AssetDetails {
   readonly asset = input.required<Asset>();
   private readonly tagOpen = signal(false);
   private readonly tagForm = form(signal({ tag: '' }));
-  protected readonly typeLabel = TYPE_LABEL;
+  private readonly typeLabel = TYPE_LABEL;
 
   private addTag(): void {
     this.store.addTag(this.asset().id, this.tagForm.tag().value());

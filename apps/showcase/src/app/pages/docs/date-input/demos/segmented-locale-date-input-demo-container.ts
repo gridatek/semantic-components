@@ -18,7 +18,7 @@ import { SegmentedLocaleDateInputDemo } from './segmented-locale-date-input-demo
   encapsulation: ViewEncapsulation.None,
 })
 export class SegmentedLocaleDateInputDemoContainer {
-  readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
   ScLabel,

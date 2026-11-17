@@ -113,7 +113,7 @@ import { TreemapChartUsageDemoContainer } from './demos/treemap-chart-usage-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class TreemapChartPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScChart, ScChartPlot, ScChartTooltip, ScChartTooltipIndicator, ScChartTooltipItem, ScChartTooltipName, ScChartTooltipPortal, ScChartTooltipProvider, ScChartTooltipValue } from '@semantic-components/ui/charts';\nimport { ScChartTreemap } from '@semantic-components/ui/charts/treemap';",
     markup: [
@@ -136,7 +136,7 @@ export default class TreemapChartPage {
     ].join('\n'),
   };
 
-  protected readonly inputs: ApiInput[] = [
+  private readonly inputs: ApiInput[] = [
     {
       name: 'key',
       type: 'string (required)',

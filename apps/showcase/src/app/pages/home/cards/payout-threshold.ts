@@ -154,11 +154,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class HomePayoutThreshold {
-  protected readonly currencies = [
+  private readonly currencies = [
     { label: 'USD — United States Dollar', value: 'usd' },
     { label: 'EUR — Euro', value: 'eur' },
     { label: 'GBP — British Pound', value: 'gbp' },
     { label: 'JPY — Japanese Yen', value: 'jpy' },
   ];
-  protected readonly currency = signal('usd');
+  private readonly currency = signal('usd');
 }

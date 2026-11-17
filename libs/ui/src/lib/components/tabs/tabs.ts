@@ -28,7 +28,7 @@ export class ScTabs {
   /** The list's direction: its arrow keys, and the panels beside or below. */
   readonly orientation = input<ScTabsOrientation>('horizontal');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.root, this.classInput()),
   );
 }

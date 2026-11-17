@@ -18,7 +18,7 @@ import { IconsOnlyPaginationDemo } from './icons-only-pagination-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class IconsOnlyPaginationDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScPagination,
   ScPaginationItem,

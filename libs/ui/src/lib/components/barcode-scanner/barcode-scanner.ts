@@ -70,7 +70,7 @@ export class ScBarcodeScanner {
   /** The camera's picture size. */
   readonly ɵsize = signal({ width: 0, height: 0 });
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   private stream: MediaStream | null = null;
   private detector: ScBarcodeDetector | null = null;

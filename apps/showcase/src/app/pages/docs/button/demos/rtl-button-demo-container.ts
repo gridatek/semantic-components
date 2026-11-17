@@ -18,7 +18,7 @@ import { RtlButtonDemo } from './rtl-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlButtonDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {

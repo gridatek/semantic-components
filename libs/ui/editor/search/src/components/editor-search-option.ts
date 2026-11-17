@@ -21,12 +21,12 @@ import {
   },
 })
 export class ScEditorSearchOption {
-  protected readonly search = editorSearch(inject(SC_EDITOR));
+  private readonly search = editorSearch(inject(SC_EDITOR));
 
   readonly option = input.required<Option>({ alias: 'scEditorSearchOption' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly pressed = computed(() => {
+  private readonly pressed = computed(() => {
     switch (this.option()) {
       case 'caseSensitive':
         return this.search.caseSensitive();
@@ -37,7 +37,7 @@ export class ScEditorSearchOption {
     }
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
   constructor() {
     ɵeditorControl({ disabled: computed(() => false), pressed: this.pressed });
   }

@@ -18,7 +18,7 @@ import { SwitchFieldDemo } from './switch-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SwitchFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScField, ScLabelText, ScSwitch } from '@semantic-components/ui';
 
 /** A switch after its text: the whole row toggles it. */

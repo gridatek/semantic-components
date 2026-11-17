@@ -18,7 +18,7 @@ import { TooltipToolbarDemo } from './tooltip-toolbar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TooltipToolbarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScToolbar,

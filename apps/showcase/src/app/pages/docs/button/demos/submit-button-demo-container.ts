@@ -18,7 +18,7 @@ import { SubmitButtonDemo } from './submit-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SubmitButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScButton,

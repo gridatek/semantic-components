@@ -18,7 +18,7 @@ import { BackgroundEmptyDemo } from './background-empty-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BackgroundEmptyDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScEmpty,

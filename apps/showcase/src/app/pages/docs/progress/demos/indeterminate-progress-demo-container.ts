@@ -18,7 +18,7 @@ import { IndeterminateProgressDemo } from './indeterminate-progress-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class IndeterminateProgressDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScProgress,
   ScProgressCircle,

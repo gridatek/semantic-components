@@ -18,7 +18,7 @@ import { GroupFieldDemo } from './group-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCheckbox,
   ScField,

@@ -66,18 +66,18 @@ const TURN = 8;
   encapsulation: ViewEncapsulation.None,
 })
 export class ScGanttLinks {
-  protected readonly gantt = inject(ScGantt);
+  private readonly gantt = inject(ScGantt);
   private readonly element =
     inject<ElementRef<SVGSVGElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly arrowId = inject(_IdGenerator).getId('sc-gantt-arrow-');
+  private readonly arrowId = inject(_IdGenerator).getId('sc-gantt-arrow-');
 
   /** Each shown bar's middle, from the top of the rows (measured after each render). */
   private readonly middles = signal<ReadonlyMap<string, number>>(new Map());
 
-  protected readonly paths = computed(() => {
+  private readonly paths = computed(() => {
     const middles = this.middles();
     const bars = new Map(
       this.gantt
@@ -112,7 +112,7 @@ export class ScGanttLinks {
     return paths;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground pointer-events-none absolute top-full start-0 overflow-visible',
       // Its x runs with the timeline: mirrored in right-to-left.

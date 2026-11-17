@@ -30,7 +30,7 @@ export class ScAttachmentAction {
     ɵwarnIfUnnamed('scAttachmentAction');
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

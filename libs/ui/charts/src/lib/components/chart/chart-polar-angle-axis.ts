@@ -43,7 +43,7 @@ export class ScChartPolarAngleAxis {
     (category) => category,
   );
 
-  protected readonly ticks = computed(() => {
+  private readonly ticks = computed(() => {
     const { radius } = this.state.circle();
     const format = this.tickFormatter();
     return this.state.categories().map((category, index) => {
@@ -60,7 +60,7 @@ export class ScChartPolarAngleAxis {
     });
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('fill-muted-foreground', this.classInput()),
   );
 

@@ -76,8 +76,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsColorPickerDemo {
-  readonly formats = ['hex', 'rgb', 'hsl', 'oklch'] as const;
-  readonly settings = signal<{ format: ScColorFormat }>({ format: 'oklch' });
-  readonly settingsForm = form(this.settings);
-  readonly color = signal('oklch(62.3% 0.214 259.8)');
+  private readonly formats = ['hex', 'rgb', 'hsl', 'oklch'] as const;
+  private readonly settings = signal<{ format: ScColorFormat }>({
+    format: 'oklch',
+  });
+  private readonly settingsForm = form(this.settings);
+  private readonly color = signal('oklch(62.3% 0.214 259.8)');
 }

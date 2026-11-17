@@ -46,9 +46,9 @@ export class ScFieldErrors {
   readonly ariaAtomic = input('true', { alias: 'aria-atomic' });
 
   // Priority: explicit id > own fallback id
-  readonly id = computed(() => this.idInput() || this.fallbackId);
+  private readonly id = computed(() => this.idInput() || this.fallbackId);
 
-  protected readonly errors = computed(() => {
+  private readonly errors = computed(() => {
     const formField = this.field?.formField();
     if (!formField) return [];
 
@@ -80,7 +80,7 @@ export class ScFieldErrors {
     });
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.error, this.classInput()),
   );
 }

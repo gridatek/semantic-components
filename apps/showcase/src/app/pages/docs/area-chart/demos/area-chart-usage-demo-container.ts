@@ -14,7 +14,7 @@ import { AreaChartUsageDemo } from './area-chart-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AreaChartUsageDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

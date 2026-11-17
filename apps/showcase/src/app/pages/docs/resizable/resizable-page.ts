@@ -139,7 +139,7 @@ import { VerticalResizableDemoContainer } from './demos/vertical-resizable-demo-
   encapsulation: ViewEncapsulation.None,
 })
 export default class ResizablePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScResizablePanelGroup, ScResizablePanel,',
@@ -157,7 +157,7 @@ export default class ResizablePage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScResizablePanelGroup',
       selector: 'div[scResizablePanelGroup]',

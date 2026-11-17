@@ -18,7 +18,7 @@ import { ControlledLightboxDemo } from './controlled-lightbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledLightboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScLightbox,

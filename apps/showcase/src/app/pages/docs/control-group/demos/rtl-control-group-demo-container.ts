@@ -18,7 +18,7 @@ import { RtlControlGroupDemo } from './rtl-control-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlControlGroupDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {

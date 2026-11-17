@@ -17,11 +17,11 @@ import { ScBarcodeScanner } from './barcode-scanner';
   },
 })
 export class ScBarcodeScannerFile {
-  protected readonly scanner = inject(ScBarcodeScanner);
+  private readonly scanner = inject(ScBarcodeScanner);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'border-input file:text-foreground h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-sm shadow-xs outline-none file:me-3 file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium',
       'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
@@ -30,7 +30,7 @@ export class ScBarcodeScannerFile {
     ),
   );
 
-  protected async onChange(event: Event): Promise<void> {
+  private async onChange(event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     if (!file) return;

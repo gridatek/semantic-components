@@ -18,7 +18,7 @@ import { PdfViewerFormDemo } from './pdf-viewer-form-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PdfViewerFormDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
   ScDialog,
   ScDialogClose,

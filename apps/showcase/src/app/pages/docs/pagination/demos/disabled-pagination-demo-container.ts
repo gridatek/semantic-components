@@ -18,7 +18,7 @@ import { DisabledPaginationDemo } from './disabled-pagination-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledPaginationDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScPagination,
   ScPaginationItem,

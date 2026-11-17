@@ -10,5 +10,5 @@ import { cn } from 'cn';
 export class ScPdfViewerSpacer {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('flex-1', this.classInput()));
+  private readonly class = computed(() => cn('flex-1', this.classInput()));
 }

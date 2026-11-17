@@ -58,7 +58,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewEnvironmentVariables {
-  protected readonly variables = [
+  private readonly variables = [
     { key: 'DATABASE_URL', masked: true },
     { key: 'NEXT_PUBLIC_API', masked: false },
     { key: 'STRIPE_SECRET', masked: true },

@@ -18,7 +18,7 @@ import { TypesJsonViewerDemo } from './types-json-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TypesJsonViewerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScJsonViewer } from '@semantic-components/ui';
 
 @Component({

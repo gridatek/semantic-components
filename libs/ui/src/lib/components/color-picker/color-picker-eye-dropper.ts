@@ -22,13 +22,13 @@ import { ScColorPicker } from './color-picker';
 export class ScColorPickerEyeDropper {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly picker = inject(ScColorPicker);
+  private readonly picker = inject(ScColorPicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('icon');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

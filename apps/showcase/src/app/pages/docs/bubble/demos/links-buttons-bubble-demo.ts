@@ -52,5 +52,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LinksButtonsBubbleDemo {
-  protected readonly chosen = signal('');
+  private readonly chosen = signal('');
 }

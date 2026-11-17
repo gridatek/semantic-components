@@ -18,7 +18,7 @@ import { RtlResizableDemo } from './rtl-resizable-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlResizableDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,

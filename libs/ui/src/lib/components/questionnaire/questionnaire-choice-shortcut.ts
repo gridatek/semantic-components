@@ -27,11 +27,11 @@ import { ScQuestionnaireChoice } from './questionnaire-choice';
 })
 export class ScQuestionnaireChoiceShortcut {
   private readonly styles = injectPreset().questionnaire;
-  protected readonly choice = inject(ScQuestionnaireChoice);
+  private readonly choice = inject(ScQuestionnaireChoice);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.shortcut, this.classInput()),
   );
 }

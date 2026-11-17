@@ -192,7 +192,7 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
   encapsulation: ViewEncapsulation.None,
 })
 export default class QuestionnairePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScQuestionnaire, ScQuestionnaireProgress, ScQuestionnaireItem,',
@@ -233,7 +233,7 @@ export default class QuestionnairePage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScQuestionnaire',
       selector: 'form[scQuestionnaire]',

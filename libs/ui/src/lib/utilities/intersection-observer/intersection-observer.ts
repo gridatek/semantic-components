@@ -43,7 +43,7 @@ export class ScIntersectionObserver {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** Visibility ratio(s) at which the observer fires. */
   readonly threshold = input<number | number[]>(0);

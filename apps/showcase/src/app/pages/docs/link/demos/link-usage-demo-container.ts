@@ -14,7 +14,7 @@ import { LinkUsageDemo } from './link-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinkUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 
 @Component({

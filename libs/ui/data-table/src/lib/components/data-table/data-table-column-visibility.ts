@@ -21,14 +21,14 @@ export class ScDataTableColumnVisibility {
   readonly column = input.required<ScDataTableHideableColumn>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly visible = computed(() => this.column().getIsVisible());
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly visible = computed(() => this.column().getIsVisible());
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     syncDataTableCheckbox(this.visible);
   }
 
-  protected toggle(event: Event): void {
+  private toggle(event: Event): void {
     this.column().toggleVisibility((event.target as HTMLInputElement).checked);
   }
 }

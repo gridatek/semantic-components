@@ -23,5 +23,5 @@ import { SiBookmarkIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlToggleDemo {
-  protected readonly bookmarked = signal(false);
+  private readonly bookmarked = signal(false);
 }

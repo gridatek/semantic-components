@@ -133,13 +133,16 @@ import {
 })
 export class ImagesEditorDemo {
   private readonly model = signal({ body: '' });
-  readonly editorForm = form(this.model);
+  private readonly editorForm = form(this.model);
 
   /**
    * A pretend upload: reports progress for a second, then gives the image a
    * local address. A real one would send the file to your server.
    */
-  readonly upload: ScEditorUploadHandler = (file, { onProgress, signal }) =>
+  private readonly upload: ScEditorUploadHandler = (
+    file,
+    { onProgress, signal },
+  ) =>
     new Promise((resolve, reject) => {
       let progress = 0;
       const timer = setInterval(() => {

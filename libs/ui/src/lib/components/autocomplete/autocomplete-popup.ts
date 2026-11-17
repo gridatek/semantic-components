@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScAutocompletePopup {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-popover text-popover-foreground ring-foreground/10 relative z-50 max-h-44 w-full min-w-36 overflow-y-auto rounded-lg p-1 shadow-md ring-1',
       this.classInput(),

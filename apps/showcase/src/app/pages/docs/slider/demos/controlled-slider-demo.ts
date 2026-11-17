@@ -25,5 +25,5 @@ import { ScLabel, ScSlider } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledSliderDemo {
-  protected readonly temperature = signal(0.3);
+  private readonly temperature = signal(0.3);
 }

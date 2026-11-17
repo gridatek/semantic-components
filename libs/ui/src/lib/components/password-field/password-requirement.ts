@@ -18,7 +18,7 @@ export class ScPasswordRequirement {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly met = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground data-met:text-foreground flex items-center gap-1.5 transition-colors [&_svg]:size-4 [&_svg]:shrink-0',
       this.classInput(),

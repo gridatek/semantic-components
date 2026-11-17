@@ -18,7 +18,7 @@ import { PatternMessageDemo } from './pattern-message-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PatternMessageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

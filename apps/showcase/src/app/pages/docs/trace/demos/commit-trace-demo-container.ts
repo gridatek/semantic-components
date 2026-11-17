@@ -18,7 +18,7 @@ import { CommitTraceDemo } from './commit-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CommitTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

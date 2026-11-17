@@ -18,7 +18,7 @@ import { ControlledSpeedDialDemo } from './controlled-speed-dial-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledSpeedDialDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScSpeedDial,

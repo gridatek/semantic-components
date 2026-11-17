@@ -18,7 +18,7 @@ import { SiblingsPaginationDemo } from './siblings-pagination-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SiblingsPaginationDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScPagination,
   ScPaginationEllipsis,

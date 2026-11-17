@@ -32,7 +32,7 @@ import { ScCodeEditor } from '@semantic-components/ui/code-editor';
   encapsulation: ViewEncapsulation.None,
 })
 export class ReadonlyCodeEditorDemo {
-  readonly code = signal(`{
+  private readonly code = signal(`{
   "name": "semantic-components",
   "private": true
 }`);

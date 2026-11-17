@@ -18,7 +18,7 @@ import { ArticleLightboxDemo } from './article-lightbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ArticleLightboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScLightbox,
   ScLightboxClose,

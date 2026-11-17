@@ -18,7 +18,7 @@ import { RtlQueueDemo } from './rtl-queue-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlQueueDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,

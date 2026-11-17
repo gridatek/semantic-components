@@ -18,7 +18,7 @@ import { InlineCountdownDemo } from './inline-countdown-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InlineCountdownDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCountdown,
   ScCountdownText,

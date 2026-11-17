@@ -18,7 +18,7 @@ import { LabelLineChartDemo } from './label-line-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelLineChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

@@ -18,7 +18,7 @@ import { InputFieldDemo } from './input-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,

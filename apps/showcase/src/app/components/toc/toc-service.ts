@@ -135,7 +135,7 @@ export class TocService {
     }
   }
 
-  cleanup(): void {
+  private cleanup(): void {
     this.disconnectObserver();
     this.items.set([]);
     this.activeId.set('');

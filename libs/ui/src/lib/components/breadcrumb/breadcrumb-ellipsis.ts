@@ -15,7 +15,7 @@ export class ScBreadcrumbEllipsis {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.ellipsis, this.classInput()),
   );
 }

@@ -18,13 +18,13 @@ import { ScPopoverProvider } from './popover-provider';
 })
 export class ScPopoverClose {
   private readonly buttonStyles = injectPreset().button;
-  protected readonly popover = inject(ScPopoverProvider);
+  private readonly popover = inject(ScPopoverProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly type = input<'button' | 'submit' | 'reset'>('button');
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-xs');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

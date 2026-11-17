@@ -18,7 +18,7 @@ import { GroupTraceDemo } from './group-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTrace,
   ScTraceIcon,

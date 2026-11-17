@@ -30,7 +30,7 @@ export class ScAspectRatio {
   /** Width over height: `16 / 9`, `1`, `9 / 16`. */
   readonly ratio = input<number>(1);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative aspect-(--ratio) overflow-hidden', this.classInput()),
   );
 

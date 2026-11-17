@@ -24,10 +24,10 @@ import { SC_TOOLTIP_CONTEXT } from './tooltip-context';
 })
 export class ScTooltip {
   private readonly styles = injectPreset().tooltip;
-  protected readonly tooltip = inject(SC_TOOLTIP_CONTEXT);
+  private readonly tooltip = inject(SC_TOOLTIP_CONTEXT);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative duration-100', this.styles.popup, this.classInput()),
   );
 }

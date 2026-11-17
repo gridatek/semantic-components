@@ -14,7 +14,7 @@ import { SelectOnFocusUsageDemo } from './select-on-focus-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectOnFocusUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScInput,

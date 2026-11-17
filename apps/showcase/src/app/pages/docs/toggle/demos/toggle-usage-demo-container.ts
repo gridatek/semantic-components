@@ -14,7 +14,7 @@ import { ToggleUsageDemo } from './toggle-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ToggleUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 import { SiBookmarkIcon } from '@semantic-icons/lucide-icons';
 

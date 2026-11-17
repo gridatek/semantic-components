@@ -13,7 +13,7 @@ export class ScFileUploadItem {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly file = input.required<File>();
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-card flex items-center gap-3 rounded-lg border p-2 pe-1 text-sm',
       this.classInput(),

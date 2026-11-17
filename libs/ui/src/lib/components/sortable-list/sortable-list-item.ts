@@ -32,7 +32,7 @@ import { ScSortableListHandle } from './sortable-list-handle';
   },
 })
 export class ScSortableListItem<T = unknown> {
-  protected readonly list = inject<ScSortableList<T>>(
+  private readonly list = inject<ScSortableList<T>>(
     forwardRef(() => ScSortableList),
   );
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -44,11 +44,9 @@ export class ScSortableListItem<T = unknown> {
     descendants: true,
   });
 
-  protected readonly active = computed(
-    () => this.list.active() === this.item(),
-  );
+  private readonly active = computed(() => this.list.active() === this.item());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-card text-card-foreground ring-foreground/10 relative rounded-lg text-sm ring-1 outline-none select-none',
       'focus-visible:ring-ring/50 focus-visible:ring-3',
@@ -66,7 +64,7 @@ export class ScSortableListItem<T = unknown> {
     this.element.focus();
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     // With a handle, only the handle drags.
     const handle = this.handle()?.element;
     if (handle && !handle.contains(event.target as Node)) return;

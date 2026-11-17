@@ -78,15 +78,15 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeClaimableBalance {
-  protected readonly net = 1248.75;
-  protected readonly fee = 37.46;
-  protected readonly total = this.net - this.fee;
+  private readonly net = 1248.75;
+  private readonly fee = 37.46;
+  private readonly total = this.net - this.fee;
   private readonly money = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
 
-  protected format(amount: number): string {
+  private format(amount: number): string {
     return this.money.format(amount);
   }
 }

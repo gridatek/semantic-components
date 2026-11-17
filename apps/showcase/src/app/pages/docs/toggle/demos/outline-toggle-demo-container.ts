@@ -18,7 +18,7 @@ import { OutlineToggleDemo } from './outline-toggle-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class OutlineToggleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 import { SiBoldIcon, SiItalicIcon } from '@semantic-icons/lucide-icons';
 

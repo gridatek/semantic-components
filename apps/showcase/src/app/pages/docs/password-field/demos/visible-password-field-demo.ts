@@ -52,6 +52,6 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class VisiblePasswordFieldDemo {
-  readonly visible = signal(true);
-  readonly settings = form(signal({ key: 'sk-4f9c2e7a1b8d' }));
+  private readonly visible = signal(true);
+  private readonly settings = form(signal({ key: 'sk-4f9c2e7a1b8d' }));
 }

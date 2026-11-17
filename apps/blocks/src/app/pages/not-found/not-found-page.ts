@@ -45,7 +45,7 @@ import { ScButton } from '@semantic-components/ui';
 export default class NotFoundPage {
   private readonly location = inject(Location);
 
-  goBack() {
+  private goBack() {
     this.location.back();
   }
 }

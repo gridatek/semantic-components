@@ -49,11 +49,11 @@ import { ScCalendar } from './calendar';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCalendarYears {
-  protected readonly calendar = inject(forwardRef(() => ScCalendar));
+  private readonly calendar = inject(forwardRef(() => ScCalendar));
 
-  protected readonly focusedYear = computed(() => this.calendar.focused().year);
+  private readonly focusedYear = computed(() => this.calendar.focused().year);
 
-  protected readonly rows = computed(() => {
+  private readonly rows = computed(() => {
     const start = this.calendar.decadeStart();
     return Array.from({ length: 4 }, (_, r) =>
       Array.from({ length: 3 }, (_, c) => start + r * 3 + c),
@@ -61,26 +61,26 @@ export class ScCalendarYears {
   });
 
   /** The focused year, or — paged away from it — the first shown. */
-  protected tabIndex(year: number): number {
+  private tabIndex(year: number): number {
     const start = this.calendar.decadeStart();
     const focused = this.focusedYear();
     const shown = focused >= start && focused < start + 12;
     return (shown ? year === focused : year === start) ? 0 : -1;
   }
 
-  protected isOut(year: number): boolean {
+  private isOut(year: number): boolean {
     const min = this.calendar.minDate();
     const max = this.calendar.maxDate();
     return (!!min && year < min.year) || (!!max && year > max.year);
   }
 
-  protected pick(year: number): void {
+  private pick(year: number): void {
     if (this.isOut(year)) return;
     this.calendar.pickYear(year);
     this.calendar.focusCell();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const rtl =
       getComputedStyle(event.currentTarget as Element).direction === 'rtl';
     const by: Record<string, number> = {
@@ -103,7 +103,7 @@ export class ScCalendarYears {
     this.calendar.moveTo(focused.add({ years: step }), true);
   }
 
-  protected cellClass(year: number): string {
+  private cellClass(year: number): string {
     const picked = year === this.focusedYear();
     return cn(
       'flex h-[calc(var(--cell-size)*1.5)] min-w-0 flex-1 cursor-pointer items-center justify-center rounded-(--cell-radius) text-sm outline-none select-none',

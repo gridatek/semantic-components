@@ -125,7 +125,7 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
   encapsulation: ViewEncapsulation.None,
 })
 export default class TerminalPage {
-  protected readonly exits = [
+  private readonly exits = [
     { command: 'Running', status: '"running"', title: 'Running pnpm build' },
     { command: 'Exited with 0', status: 'none', title: 'Ran pnpm build' },
     {
@@ -135,7 +135,7 @@ export default class TerminalPage {
     },
   ];
 
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle,',

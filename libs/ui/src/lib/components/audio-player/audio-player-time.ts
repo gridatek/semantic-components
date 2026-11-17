@@ -22,7 +22,7 @@ export class ScAudioPlayerTime {
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     const duration = this.player.duration();
     const current = this.player.currentTime();
     switch (this.which()) {
@@ -35,7 +35,7 @@ export class ScAudioPlayerTime {
     }
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground text-xs whitespace-nowrap tabular-nums',
       this.classInput(),

@@ -16,7 +16,7 @@ import { cn } from 'cn';
 export class ScTraceTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('motion-reduce:shimmer-none min-w-0 truncate', this.classInput()),
   );
 }

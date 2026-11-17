@@ -18,7 +18,7 @@ import { BordersAccordionDemo } from './borders-accordion-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BordersAccordionDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
   ScAccordionHeader,

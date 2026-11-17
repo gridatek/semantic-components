@@ -18,7 +18,7 @@ import { AsLinkButtonDemo } from './as-link-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AsLinkButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 
 @Component({

@@ -32,9 +32,9 @@ import { ScComboboxBase } from './combobox-base';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScComboboxValue {
-  protected readonly root = inject(ScComboboxBase);
+  private readonly root = inject(ScComboboxBase);
   /** Its id: with the field's label, its trigger's name. */
-  protected readonly id = inject(_IdGenerator).getId('sc-combobox-value-');
+  private readonly id = inject(_IdGenerator).getId('sc-combobox-value-');
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Shown while nothing is selected. */
@@ -45,7 +45,7 @@ export class ScComboboxValue {
     inject(DestroyRef).onDestroy(() => this.root.valueId.set(null));
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'truncate',
       !this.root.hasValue() && 'text-muted-foreground',

@@ -18,7 +18,7 @@ import { ByDayNotificationCenterDemo } from './by-day-notification-center-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ByDayNotificationCenterDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   type ScNotification,
   ScNotificationCenter,

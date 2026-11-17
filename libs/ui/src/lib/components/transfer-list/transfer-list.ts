@@ -66,7 +66,7 @@ export class ScTransferList<
     return this.items().filter((item) => !chosen.has(item.id));
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('grid grid-cols-[1fr_auto_1fr] items-stretch gap-3', this.classInput()),
   );
 

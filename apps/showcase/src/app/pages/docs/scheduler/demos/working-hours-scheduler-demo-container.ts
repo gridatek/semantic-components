@@ -18,7 +18,7 @@ import { WorkingHoursSchedulerDemo } from './working-hours-scheduler-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class WorkingHoursSchedulerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScScheduler,
   ScSchedulerEvent,

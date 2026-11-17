@@ -45,7 +45,7 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class LogosMarqueeDemo {
-  readonly brands = [
+  private readonly brands = [
     'Acme',
     'Globex',
     'Initech',

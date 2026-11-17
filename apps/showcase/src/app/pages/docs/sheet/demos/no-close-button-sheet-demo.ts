@@ -40,5 +40,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class NoCloseButtonSheetDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 }

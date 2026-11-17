@@ -190,9 +190,9 @@ export class DemoContainer {
   readonly language = input<string>('angular-ts');
 
   /** Long code shows in part, until Show more. */
-  protected readonly long = computed(() => this.code().split('\n').length > 20);
-  protected readonly expanded = signal(false);
-  protected readonly codeId = inject(_IdGenerator).getId('demo-code-');
+  private readonly long = computed(() => this.code().split('\n').length > 20);
+  private readonly expanded = signal(false);
+  private readonly codeId = inject(_IdGenerator).getId('demo-code-');
   /**
    * Render the preview as an iframe of `demoUrl` instead of projected
    * content. For demos that take over the viewport (fixed positioning, global
@@ -201,7 +201,7 @@ export class DemoContainer {
   readonly framed = input(false, { transform: booleanAttribute });
 
   private readonly sanitizer = inject(DomSanitizer);
-  protected readonly frameSrc = computed(() =>
+  private readonly frameSrc = computed(() =>
     // Same-origin route of this showcase, never user input.
     this.sanitizer.bypassSecurityTrustResourceUrl(this.demoUrl()),
   );
@@ -209,7 +209,7 @@ export class DemoContainer {
   readonly frameWidth = input(1024);
   /** Visible height of a framed demo, in px. */
   readonly frameHeight = input(560);
-  protected readonly frameScale = signal(1);
+  private readonly frameScale = signal(1);
   private readonly frameBox = viewChild<ElementRef<HTMLElement>>('frameBox');
 
   constructor() {
@@ -226,12 +226,12 @@ export class DemoContainer {
     });
   }
 
-  protected readonly previewClass = computed(() =>
+  private readonly previewClass = computed(() =>
     // Framed in the app's style (scFrame): its radius, ring and shadow.
     this.framed()
       ? 'overflow-hidden'
       : 'flex min-h-40 items-center justify-center p-6',
   );
 
-  protected readonly devMode = this.config.devMode;
+  private readonly devMode = this.config.devMode;
 }

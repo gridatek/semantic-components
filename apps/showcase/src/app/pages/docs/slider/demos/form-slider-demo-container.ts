@@ -18,7 +18,7 @@ import { FormSliderDemo } from './form-slider-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormSliderDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
+  private readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, max, min } from '@angular/forms/signals';
 import { ScField, ScFrame, ScLabel, ScSlider } from '@semantic-components/ui';

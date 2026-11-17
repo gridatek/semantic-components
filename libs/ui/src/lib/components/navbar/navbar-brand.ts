@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScNavbarBrand {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-foreground flex h-14 shrink-0 items-center gap-2 rounded-md text-base font-semibold outline-none',
       'focus-visible:ring-ring/50 focus-visible:ring-3',

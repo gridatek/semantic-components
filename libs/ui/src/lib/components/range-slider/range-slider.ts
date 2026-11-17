@@ -33,31 +33,29 @@ export class ScRangeSlider {
   readonly startThumb = contentChild(forwardRef(() => ScRangeSliderStartThumb));
   readonly endThumb = contentChild(forwardRef(() => ScRangeSliderEndThumb));
 
-  readonly min = computed(() => this.startThumb()?.resolvedMin() ?? 0);
-  readonly max = computed(() => this.endThumb()?.resolvedMax() ?? 100);
+  private readonly min = computed(() => this.startThumb()?.resolvedMin() ?? 0);
+  private readonly max = computed(() => this.endThumb()?.resolvedMax() ?? 100);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative flex h-3 w-full items-center', this.classInput()),
   );
 
-  readonly startPercent = computed(() => {
+  private readonly startPercent = computed(() => {
     const range = this.max() - this.min();
     const startVal = this.startThumb()?.value() ?? this.min();
     return range === 0 ? 0 : ((startVal - this.min()) / range) * 100;
   });
 
-  readonly endPercent = computed(() => {
+  private readonly endPercent = computed(() => {
     const range = this.max() - this.min();
     const endVal = this.endThumb()?.value() ?? this.max();
     return range === 0 ? 0 : ((endVal - this.min()) / range) * 100;
   });
 
-  protected readonly startPercentCss = computed(
-    () => `${this.startPercent()}%`,
-  );
-  protected readonly endPercentCss = computed(() => `${this.endPercent()}%`);
+  private readonly startPercentCss = computed(() => `${this.startPercent()}%`);
+  private readonly endPercentCss = computed(() => `${this.endPercent()}%`);
 
-  protected onPointerDown(event: PointerEvent) {
+  private onPointerDown(event: PointerEvent) {
     if (this.disabled()) {
       return;
     }

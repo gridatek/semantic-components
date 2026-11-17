@@ -18,7 +18,7 @@ import { BasicCodeEditorDemo } from './basic-code-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCodeEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockActions,

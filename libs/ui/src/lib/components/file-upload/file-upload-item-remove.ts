@@ -20,14 +20,14 @@ import { ScFileUploadItem } from './file-upload-item';
 export class ScFileUploadItemRemove {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly upload = inject(ScFileUpload);
-  protected readonly item = inject(ScFileUploadItem);
+  private readonly upload = inject(ScFileUpload);
+  private readonly item = inject(ScFileUploadItem);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'text-muted-foreground shrink-0',

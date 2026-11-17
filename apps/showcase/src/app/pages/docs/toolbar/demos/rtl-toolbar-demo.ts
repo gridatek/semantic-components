@@ -50,5 +50,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlToolbarDemo {
-  protected readonly alignment = signal(['start']);
+  private readonly alignment = signal(['start']);
 }

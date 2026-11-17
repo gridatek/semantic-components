@@ -24,14 +24,14 @@ import { ScTagsInputItem } from './tags-input-item';
 export class ScTagsInputItemRemove {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly tags = inject(ScTagsInput);
-  protected readonly item = inject(ScTagsInputItem);
+  private readonly tags = inject(ScTagsInput);
+  private readonly item = inject(ScTagsInputItem);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-xs');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'size-4 rounded-full hover:bg-foreground/10 [&_svg:not([class*=size-])]:size-3',

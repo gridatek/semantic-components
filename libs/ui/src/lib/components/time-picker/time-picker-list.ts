@@ -46,20 +46,20 @@ import { ScTimePicker } from './time-picker';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScTimePickerList {
-  protected readonly picker = inject(ScTimePicker);
+  private readonly picker = inject(ScTimePicker);
   private readonly listbox = inject<Listbox<string>>(Listbox);
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly optionClass = cn(
+  private readonly optionClass = cn(
     'relative flex cursor-pointer items-center rounded-md px-2 py-1.5 text-sm tabular-nums outline-none',
     'hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground',
     'aria-selected:bg-primary aria-selected:text-primary-foreground',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex max-h-72 min-w-32 scroll-py-1 flex-col gap-0.5 overflow-y-auto p-1 outline-none',
       this.classInput(),
@@ -90,7 +90,7 @@ export class ScTimePickerList {
   }
 
   /** Enter or Space: the focused time, picked. */
-  protected pickActive(): void {
+  private pickActive(): void {
     const index = [
       ...this.host.querySelectorAll('[data-slot="time-picker-option"]'),
     ].indexOf(this.host.ownerDocument.activeElement as Element);

@@ -14,7 +14,7 @@ import { ScButton, ScToaster } from '@semantic-components/ui';
 export class PromiseToastDemo {
   private readonly toaster = inject(ScToaster);
 
-  create(): void {
+  private create(): void {
     const creating = new Promise<{ name: string }>((resolve) =>
       setTimeout(() => resolve({ name: 'Event' }), 2000),
     );

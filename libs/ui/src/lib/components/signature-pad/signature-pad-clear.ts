@@ -19,13 +19,13 @@ import { ScSignaturePad } from './signature-pad';
 export class ScSignaturePadClear {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly pad = inject(ScSignaturePad);
+  private readonly pad = inject(ScSignaturePad);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

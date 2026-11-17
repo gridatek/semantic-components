@@ -18,7 +18,7 @@ import { IconInputGroupDemo } from './icon-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class IconInputGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScInput,
   ScInputGroup,

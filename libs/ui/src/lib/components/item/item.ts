@@ -23,7 +23,7 @@ export class ScItem {
   readonly variant = input<ScItemVariant>('default');
   readonly size = input<ScItemSize>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.root({ variant: this.variant(), size: this.size() }),
       '[button]:cursor-pointer [button]:text-start [button]:transition-colors [button]:hover:bg-muted',

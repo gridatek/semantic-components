@@ -14,7 +14,7 @@ import { SpinnerUsageDemo } from './spinner-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SpinnerUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScItem,
   ScItemBody,

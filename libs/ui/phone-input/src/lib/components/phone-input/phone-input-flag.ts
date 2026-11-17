@@ -27,7 +27,7 @@ export class ScPhoneInputFlag {
   /** The country; defaults to the selected one. */
   readonly country = input<ScPhoneCountryCode | undefined>(undefined);
 
-  protected readonly src = computed(() => {
+  private readonly src = computed(() => {
     const country = this.country() ?? this.phone.country();
     if (!country) return null;
     return this.phone
@@ -36,7 +36,7 @@ export class ScPhoneInputFlag {
       .replace(/\{xx\}/g, country.toLowerCase());
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'aspect-[3/2] h-3 w-auto shrink-0 rounded-[2px] object-cover outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10',
       this.classInput(),

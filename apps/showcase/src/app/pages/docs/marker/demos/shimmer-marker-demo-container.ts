@@ -18,7 +18,7 @@ import { ShimmerMarkerDemo } from './shimmer-marker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShimmerMarkerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScMarker, ScMarkerContent } from '@semantic-components/ui';
 
 /** Streaming text: the shimmer utility on the content — stopped when motion is reduced. */

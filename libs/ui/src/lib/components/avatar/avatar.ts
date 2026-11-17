@@ -21,7 +21,7 @@ export class ScAvatar {
   /** Internal state for image loading */
   readonly imageStatus = signal<ScAvatarImageStatus>('idle');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/avatar relative flex size-8 shrink-0 rounded-full select-none',
       'after:border-border after:absolute after:inset-0 after:rounded-full after:border after:mix-blend-darken dark:after:mix-blend-lighten',

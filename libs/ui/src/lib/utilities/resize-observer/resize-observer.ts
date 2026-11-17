@@ -38,7 +38,7 @@ export class ScResizeObserver {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** Emits the latest entry each time the size changes. */
   readonly resizeObserver = output<ResizeObserverEntry>();

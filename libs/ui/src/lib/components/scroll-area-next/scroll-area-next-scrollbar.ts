@@ -35,7 +35,7 @@ const MIN_THUMB = 16;
   },
 })
 export class ScScrollAreaNextScrollbar {
-  protected readonly area = inject(ScScrollAreaNext);
+  private readonly area = inject(ScScrollAreaNext);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
@@ -44,7 +44,7 @@ export class ScScrollAreaNextScrollbar {
   /** Its track's length, less its padding (px). */
   private readonly track = signal(0);
 
-  protected readonly overflows = computed(() =>
+  private readonly overflows = computed(() =>
     this.orientation() === 'vertical'
       ? this.area.hasOverflowY()
       : this.area.hasOverflowX(),
@@ -67,7 +67,7 @@ export class ScScrollAreaNextScrollbar {
     Math.max(0, this.track() - this.thumbLength()),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute flex touch-none p-px transition-colors select-none',
       // Plain classes, not data-[orientation=…]: variants: those outrank
@@ -113,7 +113,7 @@ export class ScScrollAreaNextScrollbar {
     this.area.scrollTo(axis, (offset / room) * this.area.maxScroll(axis));
   }
 
-  protected onTrackPress(event: PointerEvent): void {
+  private onTrackPress(event: PointerEvent): void {
     if (event.button !== 0 || event.target !== this.element) return;
     this.scrollToThumb(this.pointerOffset(event) - this.thumbLength() / 2);
   }

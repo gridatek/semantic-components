@@ -18,7 +18,7 @@ import { DownloadQrCodeDemo } from './download-qr-code-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DownloadQrCodeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScQrCode, ScQrCodeDownload } from '@semantic-components/ui/qr-code';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 

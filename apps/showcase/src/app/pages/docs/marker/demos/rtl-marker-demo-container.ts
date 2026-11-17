@@ -18,7 +18,7 @@ import { RtlMarkerDemo } from './rtl-marker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlMarkerDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScMarker,

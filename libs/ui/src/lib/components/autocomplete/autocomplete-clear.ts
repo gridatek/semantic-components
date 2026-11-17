@@ -28,19 +28,19 @@ import { SC_AUTOCOMPLETE } from './autocomplete-tokens';
 export class ScAutocompleteClear {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly autocomplete = inject(SC_AUTOCOMPLETE);
+  private readonly autocomplete = inject(SC_AUTOCOMPLETE);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-xs');
 
-  protected readonly visible = computed(
+  private readonly visible = computed(
     () =>
       this.autocomplete.value() !== '' &&
       !this.autocomplete.disabled() &&
       !this.autocomplete.readonly(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'text-muted-foreground',

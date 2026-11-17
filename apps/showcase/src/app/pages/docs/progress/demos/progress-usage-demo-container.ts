@@ -14,7 +14,7 @@ import { ProgressUsageDemo } from './progress-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ProgressUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

@@ -15,9 +15,9 @@ import { ScDrawerProvider } from './drawer-provider';
 export class ScDrawerDescription {
   private readonly styles = injectPreset().drawer;
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly id = inject(_IdGenerator).getId('sc-drawer-desc-');
+  private readonly id = inject(_IdGenerator).getId('sc-drawer-desc-');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.description, this.classInput()),
   );
 

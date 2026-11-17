@@ -41,7 +41,7 @@ import { ScComboboxBase } from './combobox-base';
 })
 export class ScComboboxTrigger {
   private readonly preset = injectPreset();
-  protected readonly root = inject(ScComboboxBase);
+  private readonly root = inject(ScComboboxBase);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Ghost beside the input, outline as the field. */
@@ -50,9 +50,9 @@ export class ScComboboxTrigger {
   readonly size = input<ScButtonVariants['size']>();
 
   /** The input is the field: this is the chevron at its end. */
-  protected readonly besideInput = computed(() => !!this.root.field());
+  private readonly besideInput = computed(() => !!this.root.field());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.preset.button({
         variant: this.variant() ?? (this.besideInput() ? 'ghost' : 'outline'),
@@ -112,14 +112,14 @@ export class ScComboboxTrigger {
     destroyRef.onDestroy(() => this.root.triggerElement.set(undefined));
   }
 
-  protected onArrowDown(event: Event): void {
+  private onArrowDown(event: Event): void {
     if (this.besideInput() || this.root.open()) return;
     event.preventDefault();
     this.root.show();
   }
 
   /** The field itself: touched when left, unless for its popup. */
-  protected onFocusout(): void {
+  private onFocusout(): void {
     if (!this.besideInput() && !this.root.open()) this.root.touch.emit();
   }
 }

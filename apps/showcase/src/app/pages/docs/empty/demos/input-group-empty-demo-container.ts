@@ -18,7 +18,7 @@ import { InputGroupEmptyDemo } from './input-group-empty-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputGroupEmptyDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScEmpty,
   ScEmptyBody,

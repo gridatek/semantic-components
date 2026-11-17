@@ -84,7 +84,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewAnalyticsCard {
-  protected readonly data = [
+  private readonly data = [
     { month: 'January', visitors: 186 },
     { month: 'February', visitors: 305 },
     { month: 'March', visitors: 237 },
@@ -92,7 +92,7 @@ export class PreviewAnalyticsCard {
     { month: 'May', visitors: 209 },
     { month: 'June', visitors: 214 },
   ];
-  protected readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     visitors: { label: 'Visitors', color: 'var(--chart-1)' },
   };
 }

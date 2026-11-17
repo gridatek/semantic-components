@@ -17,13 +17,13 @@ import { ScDatePicker } from './date-picker';
 export class ScDatePickerCancel {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly picker = inject(ScDatePicker);
+  private readonly picker = inject(ScDatePicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

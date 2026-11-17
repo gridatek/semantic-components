@@ -18,7 +18,7 @@ import { InputGroupKbdDemo } from './input-group-kbd-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputGroupKbdDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScInput,
   ScInputGroup,

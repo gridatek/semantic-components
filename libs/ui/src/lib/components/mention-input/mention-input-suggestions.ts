@@ -47,12 +47,12 @@ export class ScMentionInputSuggestions {
   /** The list's name: none by default — name it. */
   readonly label = input('', { alias: 'aria-label' });
 
-  protected readonly state = inject(ScMentionInputState);
-  protected readonly scrollStrategy: ScrollStrategy = inject(
+  private readonly state = inject(ScMentionInputState);
+  private readonly scrollStrategy: ScrollStrategy = inject(
     ScrollStrategyOptions,
   ).reposition();
 
-  protected readonly positions = computed((): ConnectedPosition[] => {
+  private readonly positions = computed((): ConnectedPosition[] => {
     const offset = this.state.caretOffset();
     return [
       {
@@ -74,7 +74,7 @@ export class ScMentionInputSuggestions {
     ];
   });
 
-  protected readonly listClass = computed(() =>
+  private readonly listClass = computed(() =>
     cn(
       'bg-popover text-popover-foreground z-50 w-64 rounded-lg ring-1 ring-foreground/10 p-1 text-sm shadow-md outline-hidden',
       'animate-in fade-in-0 zoom-in-95',

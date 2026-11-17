@@ -18,7 +18,7 @@ import { PlayerVideoPlayerDemo } from './player-video-player-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayerVideoPlayerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,

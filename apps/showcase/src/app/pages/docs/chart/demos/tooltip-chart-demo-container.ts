@@ -18,7 +18,7 @@ import { TooltipChartDemo } from './tooltip-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TooltipChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {

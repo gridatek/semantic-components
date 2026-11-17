@@ -18,7 +18,7 @@ import { StatesAttachmentDemo } from './states-attachment-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StatesAttachmentDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAttachment,
   ScAttachmentAction,

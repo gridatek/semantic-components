@@ -127,7 +127,7 @@ import { RtlKbdDemoContainer } from './demos/rtl-kbd-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class KbdPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScKbd, ScKbdGroup } from '@semantic-components/ui';",
     markup: [
       '<kbd scKbdGroup>',
@@ -137,7 +137,7 @@ export default class KbdPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScKbd',
       selector: 'kbd[scKbd]',

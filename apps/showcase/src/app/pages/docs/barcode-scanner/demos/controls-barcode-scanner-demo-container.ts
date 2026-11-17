@@ -18,7 +18,7 @@ import { ControlsBarcodeScannerDemo } from './controls-barcode-scanner-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlsBarcodeScannerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBarcodeScanner,
   ScBarcodeScannerFinder,

@@ -20,7 +20,7 @@ export class ScPdfViewerPageSelect {
   readonly page = input.required<number>({ alias: 'scPdfViewerPageSelect' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const checkbox = inject(ScCheckbox);

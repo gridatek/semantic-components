@@ -69,7 +69,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class IntervalTimePickerDemo {
-  readonly open = Temporal.PlainTime.from('08:00');
-  readonly close = Temporal.PlainTime.from('12:00');
-  readonly time = signal<Temporal.PlainTime | null>(null);
+  private readonly open = Temporal.PlainTime.from('08:00');
+  private readonly close = Temporal.PlainTime.from('12:00');
+  private readonly time = signal<Temporal.PlainTime | null>(null);
 }

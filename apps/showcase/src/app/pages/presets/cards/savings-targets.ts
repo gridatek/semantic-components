@@ -180,11 +180,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewSavingsTargets {
-  protected readonly goals = [
+  private readonly goals = [
     { name: 'Retirement', target: '$420,000', percent: 65, saved: '$273,000' },
     { name: 'Real Estate', target: '$85,000', percent: 32, saved: '$27,200' },
   ];
-  protected readonly order = form(
-    signal({ amount: '1,000.00', type: 'market' }),
-  );
+  private readonly order = form(signal({ amount: '1,000.00', type: 'market' }));
 }

@@ -18,7 +18,7 @@ import { PriceNumberFieldDemo } from './price-number-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export default class PriceNumberFieldDemoContainer {
-  readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScFrame,
   ScLabel,

@@ -18,7 +18,7 @@ import { RtlAlertDemo } from './rtl-alert-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlAlertDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScAlert,

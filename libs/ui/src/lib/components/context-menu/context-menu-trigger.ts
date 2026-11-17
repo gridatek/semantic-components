@@ -18,7 +18,7 @@ export class ScContextMenuTrigger {
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // Its look is yours (the area to right-click); focusable, it shows focus.
       'select-none outline-none focus-visible:ring-3 focus-visible:ring-ring/50',

@@ -18,11 +18,11 @@ export class ScDockSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Across the dock. */
-  protected readonly orientation = computed(() =>
+  private readonly orientation = computed(() =>
     this.dock.orientation() === 'horizontal' ? 'vertical' : 'horizontal',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-border shrink-0 self-stretch',
       this.dock.orientation() === 'horizontal' ? 'mx-1 w-px' : 'my-1 h-px',

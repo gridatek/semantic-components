@@ -18,7 +18,7 @@ import { ShowMoreCodeBlockDemo } from './show-more-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShowMoreCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {
   ScCodeBlock,

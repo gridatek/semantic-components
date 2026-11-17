@@ -96,5 +96,5 @@ export const METRICS: Metric[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class MetricsGrid {
-  protected readonly metrics = METRICS;
+  private readonly metrics = METRICS;
 }

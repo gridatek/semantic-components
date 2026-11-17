@@ -88,12 +88,10 @@ export class ScVirtualList {
   /** The focused row: kept rendered while scrolled away. */
   private readonly focused = signal<number | null>(null);
   /** It does not scroll itself: it takes its full size, and something else scrolls. */
-  protected readonly outer = signal(false);
+  private readonly outer = signal(false);
 
-  protected readonly vertical = computed(
-    () => this.orientation() === 'vertical',
-  );
-  protected readonly spacerTag = signal<'li' | 'div'>(
+  private readonly vertical = computed(() => this.orientation() === 'vertical');
+  private readonly spacerTag = signal<'li' | 'div'>(
     /^(UL|OL)$/.test(this.host.tagName) ? 'li' : 'div',
   );
 
@@ -157,13 +155,13 @@ export class ScVirtualList {
       : null;
   });
 
-  protected readonly spacer = computed(() =>
+  private readonly spacer = computed(() =>
     this.vertical()
       ? `position:absolute;inset-inline-start:0;top:0;width:1px;height:${this.size()}px;visibility:hidden;pointer-events:none`
       : `position:absolute;inset-inline-start:0;top:0;height:1px;width:${this.size()}px;visibility:hidden;pointer-events:none`,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative block [overflow-anchor:none]', this.classInput()),
   );
 
@@ -282,12 +280,12 @@ export class ScVirtualList {
     this.resize?.unobserve(element);
   }
 
-  protected onFocusIn(event: FocusEvent): void {
+  private onFocusIn(event: FocusEvent): void {
     const index = this.indexOf(event.target as Element);
     if (index !== null) this.focused.set(index);
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     const to = event.relatedTarget as Node | null;
     if (!to || !this.host.contains(to)) this.focused.set(null);
   }

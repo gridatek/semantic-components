@@ -70,7 +70,7 @@ export class PageHeader {
   readonly trail = input<readonly Crumb[]>([]);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-wrap items-end justify-between gap-4', this.classInput()),
   );
 }

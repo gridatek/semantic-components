@@ -226,7 +226,7 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
     () => Math.floor(this.focused().year / 12) * 12,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/calendar flex w-fit flex-col gap-4',
       this.styles,
@@ -438,7 +438,7 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
     this.moveTo(move(), true);
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     const to = event.relatedTarget as Node | null;
     if (!to || !this.host.contains(to)) {
       this.hovered.set(null);

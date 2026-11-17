@@ -66,9 +66,9 @@ import { SiArrowUpIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 })
 export class DisabledInputGroupDemo {
   private readonly search = signal({ query: '' });
-  protected readonly searchForm = form(this.search, (s) => disabled(s.query));
+  private readonly searchForm = form(this.search, (s) => disabled(s.query));
 
   private readonly message = signal({ text: '' });
-  protected readonly messageForm = form(this.message);
-  protected readonly empty = computed(() => !this.message().text.trim());
+  private readonly messageForm = form(this.message);
+  private readonly empty = computed(() => !this.message().text.trim());
 }

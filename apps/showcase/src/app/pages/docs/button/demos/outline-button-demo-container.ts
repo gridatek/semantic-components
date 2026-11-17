@@ -18,7 +18,7 @@ import { OutlineButtonDemo } from './outline-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class OutlineButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 
 @Component({

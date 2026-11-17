@@ -18,7 +18,7 @@ import { MediaAlertDialogDemo } from './media-alert-dialog-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MediaAlertDialogDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlertDialog,
   ScAlertDialogAction,

@@ -17,11 +17,11 @@ import { ScSpeedDial } from './speed-dial';
   },
 })
 export class ScSpeedDialList {
-  protected readonly dial = inject(ScSpeedDial);
+  private readonly dial = inject(ScSpeedDial);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly orientation = computed(() => {
+  private readonly orientation = computed(() => {
     if (this.dial.arc()) return null;
     const direction = this.dial.direction();
     return direction === 'up' || direction === 'down'
@@ -29,7 +29,7 @@ export class ScSpeedDialList {
       : 'horizontal';
   });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const placed: Record<string, string> = {
       up: 'bottom-full left-1/2 mb-3 -translate-x-1/2 flex-col-reverse',
       down: 'top-full left-1/2 mt-3 -translate-x-1/2 flex-col',

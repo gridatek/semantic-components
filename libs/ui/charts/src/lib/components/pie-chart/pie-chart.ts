@@ -178,12 +178,12 @@ export class ScChartPie implements ScChartSeriesLabels {
     interpolate: stepSlices,
   });
 
-  protected readonly transform = computed(() => {
+  private readonly transform = computed(() => {
     const { cx, cy } = this.state.circle();
     return `translate(${cx},${cy})`;
   });
 
-  protected readonly slices = computed<ScPieChartSlice[]>(() => {
+  private readonly slices = computed<ScPieChartSlice[]>(() => {
     const categories = this.state.categories();
     const [origin] = this.state.angles();
     // Sweeping in: the slices share the arc drawn so far.
@@ -220,7 +220,7 @@ export class ScChartPie implements ScChartSeriesLabels {
     }));
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({
@@ -240,7 +240,7 @@ export class ScChartPie implements ScChartSeriesLabels {
     inject(DestroyRef).onDestroy(unregister);
   }
 
-  protected point(index: number): void {
+  private point(index: number): void {
     this.state.activeIndex.set(index);
   }
 

@@ -21,11 +21,11 @@ export class ScPdfViewerCommentForm {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   readonly text = signal('');
 
-  protected submit(event: Event): void {
+  private submit(event: Event): void {
     event.preventDefault();
     const text = this.text().trim();
     if (!text) return;

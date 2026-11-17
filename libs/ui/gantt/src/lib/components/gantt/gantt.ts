@@ -94,9 +94,9 @@ export class ScGantt {
   private readonly barsSignal = signal<readonly ScGanttBarRef[]>([]);
   readonly bars = this.barsSignal.asReadonly();
 
-  protected readonly announcement = signal('');
+  private readonly announcement = signal('');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative block w-full overflow-auto', this.classInput()),
   );
 
@@ -147,7 +147,7 @@ export class ScGantt {
     queueMicrotask(() => this.announcement.set(text));
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (!event.altKey || event.ctrlKey || event.metaKey || this.readonly())
       return;
     const row = (event.target as HTMLElement).closest('tr');

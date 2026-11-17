@@ -44,7 +44,7 @@ export class ScSwitch implements FormCheckboxControl {
   private readonly styles = injectPreset().switch;
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
-  protected readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-switch-');
 
   readonly idInput = input('', { alias: 'id' });
@@ -63,7 +63,7 @@ export class ScSwitch implements FormCheckboxControl {
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
-  protected readonly ariaDescribedBy = computed(
+  private readonly ariaDescribedBy = computed(
     () =>
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
@@ -71,11 +71,11 @@ export class ScSwitch implements FormCheckboxControl {
   );
 
   // Invalid once touched, as the other controls.
-  protected readonly ariaInvalid = computed(
+  private readonly ariaInvalid = computed(
     () => (this.touched() && this.invalid()) || null,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'appearance-none',
       this.styles.track,
@@ -88,7 +88,7 @@ export class ScSwitch implements FormCheckboxControl {
     ),
   );
 
-  protected onChange(): void {
+  private onChange(): void {
     this.checked.set(this.element.checked);
   }
 }

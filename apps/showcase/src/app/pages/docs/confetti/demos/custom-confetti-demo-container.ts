@@ -18,7 +18,7 @@ import { CustomConfettiDemo } from './custom-confetti-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomConfettiDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScConfettiTrigger } from '@semantic-components/ui/confetti';
 

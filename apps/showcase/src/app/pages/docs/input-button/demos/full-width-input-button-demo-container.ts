@@ -18,7 +18,7 @@ import { FullWidthInputButtonDemo } from './full-width-input-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FullWidthInputButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScInputButton, ScKbd } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 

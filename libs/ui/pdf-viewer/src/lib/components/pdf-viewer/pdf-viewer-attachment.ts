@@ -20,7 +20,7 @@ import type { ScPdfAttachment } from './pdf-viewer-types';
 export class ScPdfViewerAttachment {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly attachment = input.required<ScPdfAttachment>({
     alias: 'scPdfViewerAttachment',
@@ -29,7 +29,7 @@ export class ScPdfViewerAttachment {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

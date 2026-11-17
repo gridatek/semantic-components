@@ -73,19 +73,19 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelFunnelChartDemo {
-  readonly data = [
+  private readonly data = [
     { stage: 'visit', visitors: 1200 },
     { stage: 'signup', visitors: 860 },
     { stage: 'trial', visitors: 540 },
     { stage: 'paid', visitors: 280 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     visitors: { label: 'Visitors' },
     visit: { label: 'Visit', color: 'var(--chart-2)' },
     signup: { label: 'Sign up', color: 'var(--chart-3)' },
     trial: { label: 'Trial', color: 'var(--chart-4)' },
     paid: { label: 'Paid', color: 'var(--chart-5)' },
   };
-  readonly name = (_: number, stage: string) =>
+  private readonly name = (_: number, stage: string) =>
     this.config[stage]?.label ?? stage;
 }

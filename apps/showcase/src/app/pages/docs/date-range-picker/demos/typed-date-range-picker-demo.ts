@@ -110,7 +110,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TypedDateRangePickerDemo {
-  readonly range = signal<ScCalendarValue>({
+  private readonly range = signal<ScCalendarValue>({
     from: Temporal.PlainDate.from('2026-10-14'),
     to: Temporal.PlainDate.from('2026-10-18'),
   });

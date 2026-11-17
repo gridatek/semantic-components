@@ -105,7 +105,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewWeeklyFitnessSummary {
-  protected readonly week = [
+  private readonly week = [
     { name: 'Monday', load: 84 },
     { name: 'Tuesday', load: 52 },
     { name: 'Wednesday', load: 73 },
@@ -114,9 +114,9 @@ export class PreviewWeeklyFitnessSummary {
     { name: 'Saturday', load: 48 },
     { name: 'Sunday', load: 61 },
   ];
-  protected readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     load: { label: 'Workout load', color: 'var(--chart-3)' },
   };
   /** Monday → M. */
-  protected readonly initial = (day: string) => day.charAt(0);
+  private readonly initial = (day: string) => day.charAt(0);
 }

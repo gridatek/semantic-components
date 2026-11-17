@@ -194,15 +194,15 @@ const saved = () => ({
 })
 export class ResumeQuestionnaireDemo {
   private readonly model = signal(saved());
-  readonly sent = signal<ReturnType<typeof this.model> | null>(null);
-  readonly item = signal('verification');
+  private readonly sent = signal<ReturnType<typeof this.model> | null>(null);
+  private readonly item = signal('verification');
 
-  reset(): void {
+  private reset(): void {
     this.model.set(saved());
     this.item.set('verification');
   }
 
-  readonly survey = form(
+  private readonly survey = form(
     this.model,
     (s) => {
       required(s.change);

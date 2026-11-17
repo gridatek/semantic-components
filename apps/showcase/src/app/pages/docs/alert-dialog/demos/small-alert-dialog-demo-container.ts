@@ -18,7 +18,7 @@ import { SmallAlertDialogDemo } from './small-alert-dialog-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SmallAlertDialogDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlertDialog,
   ScAlertDialogAction,

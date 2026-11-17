@@ -27,11 +27,11 @@ export class ScSchedulerEventTime {
     this.context.event.start.withTimeZone(this.scheduler.timeZone()),
   );
 
-  protected readonly datetime = computed(() =>
+  private readonly datetime = computed(() =>
     this.start().toPlainDateTime().toString({ smallestUnit: 'minute' }),
   );
 
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     const { event } = this.context;
     if (event.allDay) return '';
     const format = new Intl.DateTimeFormat(this.locale, {
@@ -46,7 +46,7 @@ export class ScSchedulerEventTime {
       : format.formatRange(start, end);
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('tabular-nums opacity-80', this.classInput()),
   );
 }

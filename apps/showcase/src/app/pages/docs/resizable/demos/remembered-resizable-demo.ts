@@ -53,7 +53,7 @@ const KEY = 'resizable-demo-layout';
   encapsulation: ViewEncapsulation.None,
 })
 export class RememberedResizableDemo {
-  protected readonly layout = signal<readonly number[]>(this.read());
+  private readonly layout = signal<readonly number[]>(this.read());
 
   constructor() {
     effect(() => {

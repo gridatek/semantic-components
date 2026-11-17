@@ -50,15 +50,15 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleCalendarDemo {
-  readonly date = signal<ScCalendarValue>(
+  private readonly date = signal<ScCalendarValue>(
     Temporal.PlainDate.from('2026-10-14'),
   );
-  readonly previousLabel = {
+  private readonly previousLabel = {
     day: 'Mois précédent',
     month: 'Année précédente',
     year: 'Années précédentes',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Mois suivant',
     month: 'Année suivante',
     year: 'Années suivantes',

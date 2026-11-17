@@ -30,8 +30,8 @@ import { ScRatingIcon } from './rating-icon';
   },
 })
 export class ScRatingItem {
-  protected readonly field = inject(SC_RATING);
-  protected readonly group = inject(SC_RATING_GROUP);
+  private readonly field = inject(SC_RATING);
+  private readonly group = inject(SC_RATING_GROUP);
   private readonly elementRef = inject(ElementRef);
 
   readonly value = input.required<number>();
@@ -73,7 +73,7 @@ export class ScRatingItem {
     return -1;
   });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const base = this.classInput();
     const disabled = this.field.disabled();
     const readonly = this.field.readonly();
@@ -113,7 +113,7 @@ export class ScRatingItem {
     });
   }
 
-  protected onClick(event: MouseEvent): void {
+  private onClick(event: MouseEvent): void {
     if (this.field.readonly() || this.field.disabled()) return;
 
     if (this.field.allowHalf()) {
@@ -126,11 +126,11 @@ export class ScRatingItem {
     }
   }
 
-  protected onMouseEnter(): void {
+  private onMouseEnter(): void {
     this.group.setHoveredValue(this.value());
   }
 
-  protected onMouseMove(event: MouseEvent): void {
+  private onMouseMove(event: MouseEvent): void {
     if (!this.field.allowHalf()) return;
 
     const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
@@ -139,14 +139,14 @@ export class ScRatingItem {
     this.group.setHoveredValue(isLeftHalf ? this.value() - 0.5 : this.value());
   }
 
-  protected onSpace(event: Event): void {
+  private onSpace(event: Event): void {
     event.preventDefault();
     if (!this.field.readonly() && !this.field.disabled()) {
       this.field.setValue(this.value());
     }
   }
 
-  protected onEnter(event: Event): void {
+  private onEnter(event: Event): void {
     event.preventDefault();
     if (!this.field.readonly() && !this.field.disabled()) {
       this.field.setValue(this.value());

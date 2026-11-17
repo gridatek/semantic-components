@@ -18,7 +18,7 @@ import { BasicProgressDemo } from './basic-progress-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicProgressDemoContainer {
-  readonly code = `import { PercentPipe } from '@angular/common';
+  private readonly code = `import { PercentPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScProgress,

@@ -18,13 +18,13 @@ import { ScLightbox } from './lightbox';
 export class ScLightboxClose {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly lightbox = inject(ScLightbox);
+  private readonly lightbox = inject(ScLightbox);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       // On the dark viewer: white.

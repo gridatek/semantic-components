@@ -18,7 +18,7 @@ import { CardEmptyDemo } from './card-empty-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardEmptyDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,

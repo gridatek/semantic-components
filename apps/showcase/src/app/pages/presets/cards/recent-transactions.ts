@@ -161,7 +161,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewRecentTransactions {
-  protected readonly transactions = [
+  private readonly transactions = [
     {
       icon: 'coffee',
       name: 'Blue Bottle Coffee',

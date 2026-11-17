@@ -18,7 +18,7 @@ import { DataOrgChartDemo } from './data-org-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DataOrgChartDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScOrgChart,

@@ -18,7 +18,7 @@ import { AlignmentsPopoverDemo } from './alignments-popover-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AlignmentsPopoverDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScPopover,

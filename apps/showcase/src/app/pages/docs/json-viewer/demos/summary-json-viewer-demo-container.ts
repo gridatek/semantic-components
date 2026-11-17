@@ -18,7 +18,7 @@ import { SummaryJsonViewerDemo } from './summary-json-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SummaryJsonViewerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScJsonViewer, ScJsonViewerSummary } from '@semantic-components/ui';
 
 @Component({

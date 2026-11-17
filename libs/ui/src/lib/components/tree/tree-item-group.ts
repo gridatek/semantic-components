@@ -35,7 +35,7 @@ import { SC_TREE_ITEM_GROUP, type ScTreeItemGroupContext } from './tree-tokens';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScTreeItemGroup implements ScTreeItemGroupContext {
-  readonly item = inject(SC_TREE_ITEM);
+  private readonly item = inject(SC_TREE_ITEM);
   readonly classInput = input<string>('', { alias: 'class' });
 
   get owner(): TreeItem<unknown> {
@@ -55,7 +55,7 @@ export class ScTreeItemGroup implements ScTreeItemGroupContext {
     for (const item of this.pending.splice(0)) setInput(item.parent, group);
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex flex-col',
       // Expand/collapse: height animates between auto and 0 (global

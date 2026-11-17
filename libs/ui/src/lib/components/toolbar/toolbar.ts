@@ -25,11 +25,11 @@ import { injectPreset } from '../../config/preset';
 })
 export class ScToolbar {
   private readonly frame = injectPreset().frame;
-  protected readonly toolbar = inject(Toolbar);
+  private readonly toolbar = inject(Toolbar);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.frame,
       'flex w-fit gap-1 bg-background p-1',

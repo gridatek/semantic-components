@@ -25,18 +25,18 @@ import { ScComboboxBase } from './combobox-base';
 })
 export class ScComboboxClear {
   private readonly preset = injectPreset();
-  protected readonly root = inject(ScComboboxBase);
+  private readonly root = inject(ScComboboxBase);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-xs');
 
-  protected readonly visible = computed(
+  private readonly visible = computed(
     () =>
       this.root.hasValue() && !this.root.disabled() && !this.root.readonly(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.preset.button({ variant: this.variant(), size: this.size() }),
       this.preset.inputGroupButton({ size: 'icon-xs' }),

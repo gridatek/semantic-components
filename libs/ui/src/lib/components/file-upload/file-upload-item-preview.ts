@@ -31,9 +31,9 @@ export class ScFileUploadItemPreview {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly url = signal<string | null>(null);
+  private readonly url = signal<string | null>(null);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-muted text-muted-foreground flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-md [&_svg:not([class*=size-])]:size-5',
       this.classInput(),

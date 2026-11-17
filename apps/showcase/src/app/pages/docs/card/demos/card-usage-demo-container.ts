@@ -14,7 +14,7 @@ import { CardUsageDemo } from './card-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,
   FormRoot,

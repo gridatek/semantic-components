@@ -85,10 +85,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class StackedRadialChartDemo {
-  readonly data = [{ month: 'January', desktop: 1260, mobile: 570 }];
-  readonly config: ScChartConfig = {
+  private readonly data = [{ month: 'January', desktop: 1260, mobile: 570 }];
+  private readonly config: ScChartConfig = {
     desktop: { label: 'Desktop', color: 'var(--chart-1)' },
     mobile: { label: 'Mobile', color: 'var(--chart-2)' },
   };
-  readonly total = this.data[0].desktop + this.data[0].mobile;
+  private readonly total = this.data[0].desktop + this.data[0].mobile;
 }

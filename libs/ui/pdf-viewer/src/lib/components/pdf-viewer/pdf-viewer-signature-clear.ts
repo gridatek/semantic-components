@@ -18,12 +18,12 @@ import { ScPdfViewerSignatureForm } from './pdf-viewer-signature-form';
 export class ScPdfViewerSignatureClear {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly form = inject(ScPdfViewerSignatureForm);
+  private readonly form = inject(ScPdfViewerSignatureForm);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

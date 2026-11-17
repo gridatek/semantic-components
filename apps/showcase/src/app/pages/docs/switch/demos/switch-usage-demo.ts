@@ -16,5 +16,5 @@ import { ScField, ScLabel, ScSwitch } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class SwitchUsageDemo {
-  protected readonly modeForm = form(signal({ airplane: false }));
+  private readonly modeForm = form(signal({ airplane: false }));
 }

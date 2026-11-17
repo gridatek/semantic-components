@@ -29,15 +29,15 @@ import { SC_MULTISELECT } from './multiselect-tokens';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScMultiselectValue {
-  protected readonly multiselect = inject(SC_MULTISELECT);
+  private readonly multiselect = inject(SC_MULTISELECT);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly summary = computed(() => {
+  private readonly summary = computed(() => {
     const [first, ...rest] = this.multiselect.selectedLabels();
     return rest.length ? `${first} + ${rest.length} more` : first;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'line-clamp-1 flex flex-1 items-center gap-1.5 text-start data-placeholder:text-muted-foreground',
       this.classInput(),

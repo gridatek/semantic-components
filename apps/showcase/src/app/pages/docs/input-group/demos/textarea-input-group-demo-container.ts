@@ -18,7 +18,7 @@ import { TextareaInputGroupDemo } from './textarea-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TextareaInputGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScInputGroup,
   ScInputGroupAddon,

@@ -14,7 +14,7 @@ import { ScatterChartUsageDemo } from './scatter-chart-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScatterChartUsageDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

@@ -89,8 +89,8 @@ type FileNode =
   encapsulation: ViewEncapsulation.None,
 })
 export class FileTreeUsageDemo {
-  protected readonly selected = signal('components/ui/button.tsx');
-  protected readonly files: FileNode[] = [
+  private readonly selected = signal('components/ui/button.tsx');
+  private readonly files: FileNode[] = [
     {
       type: 'folder',
       name: 'app',

@@ -111,7 +111,7 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
   encapsulation: ViewEncapsulation.None,
 })
 export default class ReasoningPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle,',

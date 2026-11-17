@@ -18,7 +18,7 @@ import { LinksPaginationDemo } from './links-pagination-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinksPaginationDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {

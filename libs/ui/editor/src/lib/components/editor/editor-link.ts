@@ -18,13 +18,13 @@ import { ɵeditorControl } from './editor-control';
   },
 })
 export class ScEditorLink {
-  protected readonly editor = inject(SC_EDITOR);
+  private readonly editor = inject(SC_EDITOR);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly disabledInput = input(false, { alias: 'disabled' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected readonly disabled = computed(
+  private readonly disabled = computed(
     () => this.disabledInput() || !this.editor.editable(),
   );
 

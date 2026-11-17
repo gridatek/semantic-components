@@ -16,7 +16,7 @@ import { cn } from 'cn';
 export class ScVideoPlayerTimeSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-xs text-white/60', this.classInput()),
   );
 }

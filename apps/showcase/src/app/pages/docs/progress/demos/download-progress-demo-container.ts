@@ -18,7 +18,7 @@ import { DownloadProgressDemo } from './download-progress-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DownloadProgressDemoContainer {
-  readonly code = `import { PercentPipe } from '@angular/common';
+  private readonly code = `import { PercentPipe } from '@angular/common';
 import {
   Component,
   DestroyRef,

@@ -16,7 +16,7 @@ import { cn } from 'cn';
 export class ScCompareBefore {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none block size-full',
       '[&:is(img,video)]:object-cover',

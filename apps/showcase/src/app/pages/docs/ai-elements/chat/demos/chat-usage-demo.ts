@@ -284,7 +284,7 @@ function size(blocks: readonly Block[]): number {
 export class ChatReasoningRow {
   readonly text = input('');
   readonly running = input(false);
-  protected readonly choice = signal<boolean | null>(null);
+  private readonly choice = signal<boolean | null>(null);
 }
 
 /** The thread: scripted turns, the next one waiting in the field; send plays it. */
@@ -598,12 +598,12 @@ export class ChatReasoningRow {
   encapsulation: ViewEncapsulation.None,
 })
 export class ChatUsageDemo {
-  protected readonly messages = signal<readonly ChatMessage[]>([]);
-  protected readonly busy = signal(false);
+  private readonly messages = signal<readonly ChatMessage[]>([]);
+  private readonly busy = signal(false);
 
   private readonly model = signal({ text: TURNS[0].question });
-  protected readonly empty = computed(() => !this.model().text.trim());
-  protected readonly composer = form(this.model, () => undefined, {
+  private readonly empty = computed(() => !this.model().text.trim());
+  private readonly composer = form(this.model, () => undefined, {
     submission: { action: async () => this.send() },
   });
 
@@ -617,14 +617,14 @@ export class ChatUsageDemo {
   }
 
   /** Enter sends; Shift+Enter starts a new line. */
-  protected sendOnEnter(event: Event): void {
+  private sendOnEnter(event: Event): void {
     const key = event as KeyboardEvent;
     if (key.shiftKey || key.isComposing) return;
     key.preventDefault();
     (key.target as HTMLTextAreaElement).form?.requestSubmit();
   }
 
-  protected reset(): void {
+  private reset(): void {
     this.stop();
     this.played = 0;
     this.messages.set([]);

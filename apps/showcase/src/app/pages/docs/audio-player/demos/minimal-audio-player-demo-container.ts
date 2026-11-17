@@ -18,7 +18,7 @@ import { MinimalAudioPlayerDemo } from './minimal-audio-player-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MinimalAudioPlayerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAudioPlayer,
   ScAudioPlayerMedia,

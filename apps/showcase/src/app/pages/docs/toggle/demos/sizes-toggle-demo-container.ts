@@ -18,7 +18,7 @@ import { SizesToggleDemo } from './sizes-toggle-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesToggleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 
 /** size: sm, default, lg. */

@@ -18,7 +18,7 @@ import { MessagePatternUsageDemo } from './message-pattern-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MessagePatternUsageDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,

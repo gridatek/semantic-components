@@ -13,12 +13,12 @@ import { ScNativeDialogProvider } from './native-dialog-provider';
   },
 })
 export class ScNativeDialogTrigger {
-  readonly dialogProvider = inject(ScNativeDialogProvider);
+  private readonly dialogProvider = inject(ScNativeDialogProvider);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  private readonly class = computed(() => cn('', this.classInput()));
 
-  openDialog(): void {
+  private openDialog(): void {
     this.dialogProvider.open.set(true);
   }
 }

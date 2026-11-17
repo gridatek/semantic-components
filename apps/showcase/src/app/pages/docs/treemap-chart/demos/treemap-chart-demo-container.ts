@@ -18,7 +18,7 @@ import { TreemapChartDemo } from './treemap-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TreemapChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

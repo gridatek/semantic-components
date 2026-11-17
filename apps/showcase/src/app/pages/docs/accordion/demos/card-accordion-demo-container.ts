@@ -18,7 +18,7 @@ import { CardAccordionDemo } from './card-accordion-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardAccordionDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
   ScAccordionHeader,

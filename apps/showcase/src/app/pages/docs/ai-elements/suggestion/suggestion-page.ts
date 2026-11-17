@@ -74,7 +74,7 @@ import { SuggestionUsageDemoContainer } from './demos/suggestion-usage-demo-cont
   encapsulation: ViewEncapsulation.None,
 })
 export default class SuggestionPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScButton } from '@semantic-components/ui';",
     markup: [
       '<div class="scroll-fade-x scrollbar-none flex gap-2 overflow-x-auto overscroll-x-contain">',

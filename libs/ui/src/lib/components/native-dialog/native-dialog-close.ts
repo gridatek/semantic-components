@@ -21,7 +21,7 @@ export class ScNativeDialogClose {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'absolute top-2 end-2',
@@ -29,7 +29,7 @@ export class ScNativeDialogClose {
     ),
   );
 
-  protected closeDialog(): void {
+  private closeDialog(): void {
     this.dialogProvider.open.set(false);
   }
 }

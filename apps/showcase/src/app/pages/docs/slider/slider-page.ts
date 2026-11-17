@@ -144,12 +144,12 @@ import { VerticalSliderDemoContainer } from './demos/vertical-slider-demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export default class SliderPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScSlider } from '@semantic-components/ui';",
     markup: ['<input scSlider [formField]="…" aria-label="…" />'].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScSlider',
       selector: 'input[scSlider]',

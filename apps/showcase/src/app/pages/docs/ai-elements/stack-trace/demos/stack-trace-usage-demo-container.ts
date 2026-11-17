@@ -18,7 +18,7 @@ import { StackTraceUsageDemo } from './stack-trace-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StackTraceUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

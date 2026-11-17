@@ -49,10 +49,10 @@ export class ScSidebarMenuTooltip {
   /** The label (the menu button's `tooltip`). */
   readonly tooltip = input('');
 
-  protected readonly id = inject(_IdGenerator).getId('sc-sidebar-tooltip-');
-  protected ref: OverlayRef | null = null;
+  private readonly id = inject(_IdGenerator).getId('sc-sidebar-tooltip-');
+  private ref: OverlayRef | null = null;
   /** Showing: its button is described by it. */
-  protected readonly shown = signal(false);
+  private readonly shown = signal(false);
   private panel: ComponentRef<ScSidebarMenuTooltipPanel> | null = null;
   private timer: ReturnType<typeof setTimeout> | undefined;
 
@@ -75,18 +75,18 @@ export class ScSidebarMenuTooltip {
     });
   }
 
-  protected onPointerEnter(event: PointerEvent): void {
+  private onPointerEnter(event: PointerEvent): void {
     if (event.pointerType === 'touch' || !this.enabled()) return;
     clearTimeout(this.timer);
     this.timer = setTimeout(() => this.show(), this.ref ? 0 : DELAY);
   }
 
-  protected onPointerLeave(event: PointerEvent): void {
+  private onPointerLeave(event: PointerEvent): void {
     if (event.pointerType === 'touch') return;
     this.hideSoon();
   }
 
-  protected onFocus(event: FocusEvent): void {
+  private onFocus(event: FocusEvent): void {
     if ((event.target as HTMLElement).matches(':focus-visible')) this.show();
   }
 
@@ -128,7 +128,7 @@ export class ScSidebarMenuTooltip {
     if (this.ref) this.timer = setTimeout(() => this.hide(), HOVER_BRIDGE);
   }
 
-  hide(): void {
+  private hide(): void {
     clearTimeout(this.timer);
     this.ref?.dispose();
     this.ref = null;

@@ -18,13 +18,13 @@ import { ScSpotlight } from './spotlight';
 export class ScSpotlightClose {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly spotlight = inject(ScSpotlight);
+  private readonly spotlight = inject(ScSpotlight);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'absolute end-2 top-2',

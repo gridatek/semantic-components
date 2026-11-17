@@ -95,10 +95,10 @@ export class PackageManagerInstall {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly packages = input.required<string>();
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
-  protected readonly selected = this.packageManagerService.selected;
+  private readonly class = computed(() => cn('block', this.classInput()));
+  private readonly selected = this.packageManagerService.selected;
 
-  protected readonly commands = computed(() => {
+  private readonly commands = computed(() => {
     const pkg = this.packages();
     return [
       { id: 'pnpm', command: `pnpm add ${pkg}` },
@@ -108,7 +108,7 @@ export class PackageManagerInstall {
     ];
   });
 
-  protected readonly command = computed(
+  private readonly command = computed(
     () =>
       this.commands().find((entry) => entry.id === this.selected())?.command ??
       '',

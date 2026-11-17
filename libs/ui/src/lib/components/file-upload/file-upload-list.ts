@@ -12,7 +12,5 @@ import { cn } from 'cn';
 export class ScFileUploadList {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn('grid gap-2', this.classInput()),
-  );
+  private readonly class = computed(() => cn('grid gap-2', this.classInput()));
 }

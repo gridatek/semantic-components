@@ -74,14 +74,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelRadialChartDemo {
-  readonly data = [
+  private readonly data = [
     { browser: 'chrome', visitors: 275 },
     { browser: 'safari', visitors: 200 },
     { browser: 'firefox', visitors: 187 },
     { browser: 'edge', visitors: 173 },
     { browser: 'other', visitors: 90 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     visitors: { label: 'Visitors' },
     chrome: { label: 'Chrome', color: 'var(--chart-1)' },
     safari: { label: 'Safari', color: 'var(--chart-2)' },
@@ -90,5 +90,5 @@ export class LabelRadialChartDemo {
     other: { label: 'Other', color: 'var(--chart-5)' },
   };
   /** The browser's name, at its ring's start. */
-  readonly name = (_: number, browser: string) => browser;
+  private readonly name = (_: number, browser: string) => browser;
 }

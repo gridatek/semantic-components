@@ -10,7 +10,7 @@ import { cn } from 'cn';
 export class ScItemFooter {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('gap-2 flex basis-full items-center justify-between', this.classInput()),
   );
 }

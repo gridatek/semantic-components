@@ -14,7 +14,7 @@ export class ScCardFooter {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.footer, this.classInput()),
   );
 }

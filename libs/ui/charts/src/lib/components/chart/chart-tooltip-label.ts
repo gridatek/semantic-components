@@ -12,7 +12,5 @@ import { cn } from 'cn';
 export class ScChartTooltipLabel {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn('font-medium', this.classInput()),
-  );
+  private readonly class = computed(() => cn('font-medium', this.classInput()));
 }

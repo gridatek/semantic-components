@@ -47,14 +47,14 @@ export class ScSidebarMenuButton {
   /** The page shown. */
   readonly active = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.menuButton({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  protected onClick(event: Event): void {
+  private onClick(event: Event): void {
     // A link followed on a phone: the sheet goes.
     if (
       this.state?.isMobile() &&

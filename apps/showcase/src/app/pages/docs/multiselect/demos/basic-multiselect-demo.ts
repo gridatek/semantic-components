@@ -151,23 +151,23 @@ interface FormModel {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicMultiselectDemo {
-  readonly formModel = signal<FormModel>({
+  private readonly formModel = signal<FormModel>({
     labels: [],
   });
 
-  readonly labelsForm = form(this.formModel);
+  private readonly labelsForm = form(this.formModel);
 
-  readonly firstOption = computed(() =>
+  private readonly firstOption = computed(() =>
     this.options.find((o) => o.value === this.labelsForm.labels().value()[0]),
   );
 
-  readonly summary = computed(() => {
+  private readonly summary = computed(() => {
     const count = this.labelsForm.labels().value().length;
     const label = this.firstOption()?.label ?? '';
     return count > 1 ? `${label} + ${count - 1} more` : label;
   });
 
-  options = [
+  private options = [
     { value: 'important', label: 'Important', icon: 'tag' },
     { value: 'starred', label: 'Starred', icon: 'star' },
     { value: 'work', label: 'Work', icon: 'briefcase' },

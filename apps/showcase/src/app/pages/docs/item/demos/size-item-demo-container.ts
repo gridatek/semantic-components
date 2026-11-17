@@ -18,7 +18,7 @@ import { SizeItemDemo } from './size-item-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizeItemDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScItem,
   ScItemBody,

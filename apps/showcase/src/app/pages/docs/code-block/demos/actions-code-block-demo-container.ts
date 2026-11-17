@@ -18,7 +18,7 @@ import { ActionsCodeBlockDemo } from './actions-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ActionsCodeBlockDemoContainer {
-  readonly code = `import { DOCUMENT } from '@angular/common';
+  private readonly code = `import { DOCUMENT } from '@angular/common';
 import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import {

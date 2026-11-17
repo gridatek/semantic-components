@@ -27,7 +27,7 @@ export class ScAutocompleteList {
   private readonly listbox = inject<Listbox<string>>(Listbox);
   private readonly widget = inject(ComboboxWidget);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col gap-0.5', this.classInput()),
   );
 

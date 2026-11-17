@@ -19,7 +19,7 @@ export class ScSortableListHandle {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground hover:text-foreground flex shrink-0 cursor-grab touch-manipulation items-center [&_svg:not([class*=size-])]:size-4',
       this.classInput(),

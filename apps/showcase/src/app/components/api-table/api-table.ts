@@ -76,5 +76,5 @@ export class ApiTable {
   readonly label = input.required<string>();
   readonly inputs = input.required<readonly ApiInput[]>();
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 }

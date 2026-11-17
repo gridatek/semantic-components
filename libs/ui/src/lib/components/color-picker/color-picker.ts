@@ -67,7 +67,7 @@ export class ScColorPicker implements FormValueControl<string> {
     'EyeDropper' in (this.document.defaultView ?? {}),
   );
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   /** The value last written: one from outside differs. */
   private written: string | null = null;

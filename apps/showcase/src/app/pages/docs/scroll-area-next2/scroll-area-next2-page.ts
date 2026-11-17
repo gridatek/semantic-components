@@ -134,12 +134,12 @@ import { ScrollFadeScrollAreaNext2DemoContainer } from './demos/scroll-fade-scro
   encapsulation: ViewEncapsulation.None,
 })
 export default class ScrollAreaNext2Page {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScScrollAreaNext2 } from '@semantic-components/ui';",
     markup: '<div scScrollAreaNext2 class="…">…</div>',
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScScrollAreaNext2',
       selector: 'div[scScrollAreaNext2]',

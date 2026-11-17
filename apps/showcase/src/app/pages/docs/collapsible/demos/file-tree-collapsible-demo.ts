@@ -103,7 +103,7 @@ interface ScFileTreeItem {
   encapsulation: ViewEncapsulation.None,
 })
 export class FileTreeCollapsibleDemo {
-  protected readonly tree: ScFileTreeItem[] = [
+  private readonly tree: ScFileTreeItem[] = [
     {
       name: 'components',
       items: [

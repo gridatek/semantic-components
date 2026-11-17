@@ -24,13 +24,13 @@ import { ScGantt } from './gantt';
   },
 })
 export class ScGanttTimeline {
-  protected readonly gantt = inject(ScGantt);
+  private readonly gantt = inject(ScGantt);
   private readonly header =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName === 'TH';
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly lines = computed(() => {
+  private readonly lines = computed(() => {
     const scale = this.gantt.scale();
     if (this.header || scale === 'month') return null;
     const period = this.gantt.dayWidthOrDefault() * (scale === 'week' ? 7 : 1);
@@ -38,13 +38,13 @@ export class ScGanttTimeline {
   });
 
   /** Weeks start on Monday: the lines start at the first one. */
-  protected readonly linesOffset = computed(() => {
+  private readonly linesOffset = computed(() => {
     if (this.header || this.gantt.scale() !== 'week') return null;
     const toMonday = (8 - this.gantt.from().dayOfWeek) % 7;
     return `var(--sc-gantt-start) ${toMonday * this.gantt.dayWidthOrDefault()}px`;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative p-0',
       // The timeline runs with the text: from the right in right-to-left.

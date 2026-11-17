@@ -18,7 +18,7 @@ import { HorizontalVirtualListDemo } from './horizontal-virtual-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalVirtualListDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
 
 /** Along a row: days of a year, as a strip. Right to left, it starts at the right. */

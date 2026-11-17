@@ -145,12 +145,12 @@ interface ScPdfPageLayout {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerCanvas {
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   private readonly editor = inject(ScPdfEditor);
   private readonly destroyRef = inject(DestroyRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('block h-full w-full', this.classInput()),
   );
 
@@ -167,10 +167,10 @@ export class ScPdfViewerCanvas {
     this.watchDevicePixelRatio();
   };
 
-  readonly pageLayouts = signal<ScPdfPageLayout[]>([]);
+  private readonly pageLayouts = signal<ScPdfPageLayout[]>([]);
 
   private readonly pdfDocument = this.pdfViewer.pdfDocument;
-  readonly rotation = this.pdfViewer.rotation;
+  private readonly rotation = this.pdfViewer.rotation;
   private readonly zoom = this.pdfViewer.zoom;
   private readonly navigateTrigger = this.pdfViewer.navigateTrigger;
   private readonly findTrigger = this.pdfViewer.findTrigger;
@@ -209,13 +209,13 @@ export class ScPdfViewerCanvas {
   private scrollTargetTimeout: ReturnType<typeof setTimeout> | undefined;
 
   /** Rotated a quarter turn: the page's width and height swap on screen. */
-  protected readonly sideways = computed(() => this.rotation() % 180 !== 0);
+  private readonly sideways = computed(() => this.rotation() % 180 !== 0);
 
-  protected displayWidth(page: ScPdfPageLayout): number {
+  private displayWidth(page: ScPdfPageLayout): number {
     return this.sideways() ? page.height : page.width;
   }
 
-  protected displayHeight(page: ScPdfPageLayout): number {
+  private displayHeight(page: ScPdfPageLayout): number {
     return this.sideways() ? page.width : page.height;
   }
 
@@ -235,7 +235,7 @@ export class ScPdfViewerCanvas {
     );
   });
 
-  protected pageBox(page: ScPdfPageLayout): ScPdfPageBox {
+  private pageBox(page: ScPdfPageLayout): ScPdfPageBox {
     return (
       this.pageBoxes().get(page.pageNumber) ??
       pageBox(
@@ -247,7 +247,7 @@ export class ScPdfViewerCanvas {
   }
 
   /** The pages grouped into spreads (one or two side by side). */
-  protected readonly spreads = computed((): ScPdfPageLayout[][] => {
+  private readonly spreads = computed((): ScPdfPageLayout[][] => {
     const layouts = this.pageLayouts();
     if (this.pdfViewer.spreadMode() === 'none') return layouts.map((l) => [l]);
     const spreads: ScPdfPageLayout[][] = [];
@@ -259,7 +259,7 @@ export class ScPdfViewerCanvas {
     return spreads;
   });
 
-  protected readonly pagesClass = computed(() => {
+  private readonly pagesClass = computed(() => {
     switch (this.pdfViewer.scrollMode()) {
       case 'horizontal':
         return 'flex min-h-full w-max flex-row items-center gap-2 p-2';
@@ -271,17 +271,17 @@ export class ScPdfViewerCanvas {
   });
 
   /** In page scroll mode, only the current spread shows. */
-  protected isSpreadShown(spread: ScPdfPageLayout[]): boolean {
+  private isSpreadShown(spread: ScPdfPageLayout[]): boolean {
     if (this.pdfViewer.scrollMode() !== 'page') return true;
     const current = this.pdfViewer.currentPage();
     return spread.some((page) => page.pageNumber === current);
   }
 
   /** Your toolbar for the selected annotation, and your comment markers. */
-  protected readonly annotationToolbar = contentChild(
+  private readonly annotationToolbar = contentChild(
     ScPdfViewerAnnotationToolbar,
   );
-  protected readonly commentMarker = contentChild(ScPdfViewerCommentMarker);
+  private readonly commentMarker = contentChild(ScPdfViewerCommentMarker);
 
   /**
    * Each page's accessible name — your words, e.g.
@@ -291,7 +291,7 @@ export class ScPdfViewerCanvas {
     null,
   );
 
-  readonly pageCursor = computed(() => {
+  private readonly pageCursor = computed(() => {
     const mode = this.pdfViewer.editorMode();
     if (mode === 'highlight') return 'text';
     return '';
@@ -301,7 +301,7 @@ export class ScPdfViewerCanvas {
   // scaledValue re-evaluates when the container is laid out.
   private readonly containerSize = signal({ width: 0, height: 0 });
 
-  readonly scaledValue = computed(() => {
+  private readonly scaledValue = computed(() => {
     const z = this.zoom();
     if (typeof z === 'number') {
       return z;
@@ -1060,7 +1060,7 @@ export class ScPdfViewerCanvas {
     }
   }
 
-  protected pageAriaLabel(page: number): string | null {
+  private pageAriaLabel(page: number): string | null {
     const name = this.pageName();
     return name ? name(page, this.pdfViewer.pageLabel(page)) : null;
   }

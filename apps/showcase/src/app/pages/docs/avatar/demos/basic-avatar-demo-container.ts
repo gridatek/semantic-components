@@ -18,7 +18,7 @@ import { BasicAvatarDemo } from './basic-avatar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicAvatarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,

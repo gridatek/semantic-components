@@ -147,11 +147,11 @@ const CITED: Source[] = [
 export class SourcesUsageDemo {
   private readonly answer =
     'Run pnpm create astro@latest and follow the prompts. It scaffolds the project and installs the dependencies.';
-  protected readonly reply = signal(this.answer);
+  private readonly reply = signal(this.answer);
   private readonly cited = signal<Source[]>(CITED);
-  protected readonly busy = signal(false);
+  private readonly busy = signal(false);
   /** Each page once: the agent can cite the same one more than once. */
-  protected readonly sources = computed(() =>
+  private readonly sources = computed(() =>
     this.cited().filter(
       (source, index, all) =>
         all.findIndex((other) => other.url === source.url) === index,
@@ -164,11 +164,11 @@ export class SourcesUsageDemo {
   }
 
   /** A title is optional: fall back to the page's host. */
-  protected hostname(url: string): string {
+  private hostname(url: string): string {
     return new URL(url).hostname;
   }
 
-  protected replay(): void {
+  private replay(): void {
     this.stop();
     this.reply.set('');
     this.cited.set([]);

@@ -200,7 +200,7 @@ export class SortingTablePage {
     sorting: $localize`Sorting`,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
     data: STAFF.slice(0, 12) as StaffMember[],
@@ -319,7 +319,7 @@ export class FilteringTablePage {
     filter: $localize`Filter `,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
     data: STAFF as StaffMember[],
@@ -485,7 +485,7 @@ export class PaginationTablePage {
     pagination: $localize`Pagination`,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
     data: STAFF as StaffMember[],

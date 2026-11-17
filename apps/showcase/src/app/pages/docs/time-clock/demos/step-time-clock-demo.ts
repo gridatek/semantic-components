@@ -25,5 +25,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class StepTimeClockDemo {
-  readonly time = signal<Temporal.PlainTime | null>(null);
+  private readonly time = signal<Temporal.PlainTime | null>(null);
 }

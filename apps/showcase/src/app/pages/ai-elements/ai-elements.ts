@@ -108,7 +108,7 @@ import { ChatUsageDemo } from '../docs/ai-elements/chat/demos/chat-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export default class AiElements {
-  protected readonly patterns = [
+  private readonly patterns = [
     {
       name: 'Chain of Thought',
       path: 'chain-of-thought',

@@ -25,11 +25,11 @@ export class ScGanttMarker {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** The middle of its day. */
-  protected readonly offset = computed(
+  private readonly offset = computed(
     () => this.gantt.offset(this.date()) + this.gantt.dayWidthOrDefault() / 2,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute top-full -translate-x-1/2 rtl:translate-x-1/2',
       // The line, down the body.

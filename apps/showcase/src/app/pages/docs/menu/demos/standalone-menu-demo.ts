@@ -91,5 +91,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class StandaloneMenuDemo {
-  protected readonly chosen = signal<string | null>(null);
+  private readonly chosen = signal<string | null>(null);
 }

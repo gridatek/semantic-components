@@ -21,7 +21,7 @@ export class ScPdfViewerLayer {
   readonly layer = input.required<ScPdfLayer>({ alias: 'scPdfViewerLayer' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const checkbox = inject(ScCheckbox);

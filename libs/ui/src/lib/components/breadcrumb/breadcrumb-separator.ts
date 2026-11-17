@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScBreadcrumbSeparator {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // Its icon turns right to left: a chevron points the reading way (a
       // slash looks the same turned).

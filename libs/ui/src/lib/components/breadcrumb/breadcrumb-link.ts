@@ -10,7 +10,7 @@ import { cn } from 'cn';
 export class ScBreadcrumbLink {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('hover:text-foreground transition-colors', this.classInput()),
   );
 }

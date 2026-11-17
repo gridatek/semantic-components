@@ -18,7 +18,7 @@ import { SheetTraceDemo } from './sheet-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SheetTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScSheet,
   ScSheetDescription,

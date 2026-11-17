@@ -18,7 +18,7 @@ import { TabsCodeBlockDemo } from './tabs-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TabsCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTabs,
   ScTabsList,
