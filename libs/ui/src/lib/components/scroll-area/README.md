@@ -9,20 +9,32 @@ A native scroll container with custom scrollbars — shadcn's Scroll Area (Base 
   <div scScrollAreaViewport>
     <div scScrollAreaViewportContent class="p-4">…</div>
   </div>
-  <div scScrollAreaScrollbar>
-    <div scScrollAreaThumb></div>
-  </div>
 </div>
 ```
 
-Sideways: `<div scScrollAreaScrollbar orientation="horizontal">`. Both ways: both scrollbars, and `<div scScrollAreaCorner></div>` where they meet.
+A vertical scrollbar comes by default. Write your own and it takes its place — any `scScrollAreaScrollbar` or `scScrollAreaCorner` inside the root replaces the default, so write every scrollbar you want:
+
+```html
+<div scScrollArea scFrame class="h-72 w-96">
+  <div scScrollAreaViewport>…</div>
+  <div scScrollAreaScrollbar>
+    <div scScrollAreaThumb></div>
+  </div>
+  <div scScrollAreaScrollbar orientation="horizontal">
+    <div scScrollAreaThumb></div>
+  </div>
+  <div scScrollAreaCorner></div>
+</div>
+```
+
+Sideways only: one `<div scScrollAreaScrollbar orientation="horizontal">`. Your own look: classes on your scrollbar and thumb (`class="w-1.5"`, `class="bg-primary"`).
 
 ## Parts
 
 | Part                          | Selector                           | What it does                                                                                                                                           |
 | ----------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ScScrollArea`                | `div[scScrollArea]`                | The root: `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}`, `data-scrolling`                                                            |
-| `ScScrollAreaViewport`        | `div[scScrollAreaViewport]`        | What scrolls: its own scrollbar hidden, a tab stop while it overflows (focus ring); `--sc-scroll-area-overflow-{x,y}-{start,end}`; a `CdkScrollable`   |
+| `ScScrollArea`                | `div[scScrollArea]`                | The root: a vertical scrollbar by default, replaced by yours; `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}`, `data-scrolling`        |
+| `ScScrollAreaViewport`        | `div[scScrollAreaViewport]`        | What scrolls: its own scrollbar hidden, a tab stop while it overflows (focus ring); `--sc-scroll-area-overflow-{x,y}-{start,end}`; a `CdkScrollable`      |
 | `ScScrollAreaViewportContent` | `div[scScrollAreaViewportContent]` | The content: at least as wide as what it holds, so a wide row overflows sideways                                                                       |
 | `ScScrollAreaScrollbar`       | `div[scScrollAreaScrollbar]`       | `orientation` (`vertical`, `horizontal`); hidden while that axis doesn't overflow; a press on its track jumps there; `data-hovering`, `data-scrolling` |
 | `ScScrollAreaThumb`           | `div[scScrollAreaThumb]`           | In the preset's look; as long as the share in view; dragged, it scrolls                                                                                |
@@ -37,7 +49,8 @@ Sideways: `<div scScrollAreaScrollbar orientation="horizontal">`. Both ways: bot
 
 ## Not shadcn's
 
-- **Every part in your markup**, as Base UI's anatomy: shadcn's ScrollArea renders the viewport, a vertical scrollbar and the corner itself.
+- **The viewport in your markup**: shadcn's ScrollArea renders the viewport, a vertical scrollbar and the corner itself. Ours renders the scrollbar by default, which yours replace (Base UI's anatomy: every part yours); the viewport stays yours — it wraps your content.
+- **Its state is `ScScrollAreaState`**, provided by the root: what the parts inject (the root renders the default scrollbar, which reads it — one class for both would import itself).
 - **`scScrollAreaViewportContent`** is Base UI's `ScrollArea.Content`, named after the viewport it sits in: a part's content takes its parent's name ([content-body-naming.md](../../../../../../docs/content-body-naming.md)).
 - **No `--scroll-area-corner-height` / `-width` measured** (Base UI's): the corner is the scrollbars' size (`--sc-scroll-area-corner-size`, 0.625rem while both overflow).
 - **The variables carry our `--sc-` prefix**: `--sc-scroll-area-overflow-{x,y}-{start,end}` are Base UI's `--scroll-area-overflow-{x,y}-{start,end}` — rename them in a snippet taken from shadcn.

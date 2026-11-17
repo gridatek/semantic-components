@@ -9,7 +9,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScScrollArea } from './scroll-area';
+import { ScScrollAreaState } from './scroll-area-state';
 
 /**
  * The element that scrolls: its own scrollbar hidden (the scroll area draws
@@ -32,7 +32,7 @@ import { ScScrollArea } from './scroll-area';
   },
 })
 export class ScScrollAreaViewport {
-  private readonly area = inject(ScScrollArea);
+  private readonly area = inject(ScScrollAreaState);
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly overflows = computed(

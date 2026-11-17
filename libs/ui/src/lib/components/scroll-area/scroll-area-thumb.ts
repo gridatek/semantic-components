@@ -1,8 +1,8 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectPreset } from '../../config/preset';
-import { ScScrollArea } from './scroll-area';
 import { ScScrollAreaScrollbar } from './scroll-area-scrollbar';
+import { ScScrollAreaState } from './scroll-area-state';
 
 /**
  * The scrollbar's thumb, in the preset's look: as long as the share of the
@@ -26,7 +26,7 @@ import { ScScrollAreaScrollbar } from './scroll-area-scrollbar';
 })
 export class ScScrollAreaThumb {
   private readonly styles = injectPreset().scrollArea;
-  private readonly area = inject(ScScrollArea);
+  private readonly area = inject(ScScrollAreaState);
   private readonly bar = inject(ScScrollAreaScrollbar);
   readonly classInput = input<string>('', { alias: 'class' });
 

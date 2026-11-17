@@ -18,8 +18,6 @@ export class ScrollAreaUsageDemoContainer {
 import {
   ScFrame,
   ScScrollArea,
-  ScScrollAreaScrollbar,
-  ScScrollAreaThumb,
   ScScrollAreaViewport,
   ScScrollAreaViewportContent,
   ScSeparator,
@@ -31,8 +29,6 @@ import {
     ScFrame,
     ScScrollArea,
     ScScrollAreaViewportContent,
-    ScScrollAreaScrollbar,
-    ScScrollAreaThumb,
     ScScrollAreaViewport,
     ScSeparator,
   ],
@@ -46,9 +42,6 @@ import {
             <div scSeparator class="my-2"></div>
           }
         </div>
-      </div>
-      <div scScrollAreaScrollbar>
-        <div scScrollAreaThumb></div>
       </div>
     </div>
   \`,

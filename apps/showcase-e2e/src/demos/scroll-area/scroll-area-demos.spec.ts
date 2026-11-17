@@ -40,6 +40,26 @@ test('Usage: overflows down only; one scrollbar, its thumb as long as the share 
   expect(Math.abs(thumb.height - (track.height - 2) * share)).toBeLessThan(2);
 });
 
+test('Default scrollbar: one vertical scrollbar and its thumb when you write none', async ({
+  page,
+}) => {
+  await page.goto('/demos/scroll-area/scroll-area-usage-demo');
+  await expect(page.locator('[scScrollAreaScrollbar]')).toHaveCount(1);
+  await expect(bar(page, 'vertical')).toBeVisible();
+  await expect(
+    bar(page, 'vertical').locator('[scScrollAreaThumb]'),
+  ).toHaveCount(1);
+});
+
+test('Yours replace the default: the horizontal demo has its scrollbar only, no vertical one', async ({
+  page,
+}) => {
+  await page.goto(demo('horizontal'));
+  await expect(bar(page, 'horizontal')).toBeVisible();
+  await expect(page.locator('[scScrollAreaScrollbar]')).toHaveCount(1);
+  await expect(bar(page, 'vertical')).toHaveCount(0);
+});
+
 test('Keyboard: the viewport is a tab stop while it overflows; the arrow keys scroll it', async ({
   page,
 }) => {

@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { ScScrollArea } from './scroll-area';
+import { ScScrollAreaState } from './scroll-area-state';
 
 /**
  * The square where the two scrollbars meet: shown while both axes overflow.
@@ -14,7 +14,7 @@ import { ScScrollArea } from './scroll-area';
   },
 })
 export class ScScrollAreaCorner {
-  private readonly area = inject(ScScrollArea);
+  private readonly area = inject(ScScrollAreaState);
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

@@ -2,8 +2,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScScrollArea,
-  ScScrollAreaScrollbar,
-  ScScrollAreaThumb,
   ScScrollAreaViewport,
   ScScrollAreaViewportContent,
 } from '@semantic-components/ui';
@@ -15,8 +13,6 @@ import {
     ScFrame,
     ScScrollArea,
     ScScrollAreaViewportContent,
-    ScScrollAreaScrollbar,
-    ScScrollAreaThumb,
     ScScrollAreaViewport,
   ],
   template: `
@@ -46,9 +42,6 @@ import {
             local builders, who were rarely given any attribution for the work.
           </p>
         </div>
-      </div>
-      <div scScrollAreaScrollbar>
-        <div scScrollAreaThumb></div>
       </div>
     </div>
   `,

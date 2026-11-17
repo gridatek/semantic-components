@@ -57,8 +57,10 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
-          Every part is a directive on your element: you write the viewport, the
-          content and each scrollbar you want.
+          Every part is a directive on your element: you write the viewport and
+          its content. A vertical scrollbar comes by default; write your own
+          scrollbars (and the corner) and they take its place — sideways, both
+          ways, or in your look.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -149,6 +151,7 @@ export default class ScrollAreaPage {
       '  <div scScrollAreaViewport>',
       '    <div scScrollAreaViewportContent>…</div>',
       '  </div>',
+      '  <!-- Optional: the default is a vertical scrollbar. -->',
       '  <div scScrollAreaScrollbar orientation="…">',
       '    <div scScrollAreaThumb></div>',
       '  </div>',
@@ -162,7 +165,7 @@ export default class ScrollAreaPage {
       name: 'ScScrollArea',
       selector: 'div[scScrollArea]',
       description:
-        'The root: data-has-overflow-x / -y, data-overflow-{x,y}-{start,end}, data-scrolling.',
+        'The root: a vertical scrollbar by default, replaced by yours (a scrollbar or a corner written inside it); data-has-overflow-x / -y, data-overflow-{x,y}-{start,end}, data-scrolling.',
     },
     {
       name: 'ScScrollAreaViewport',

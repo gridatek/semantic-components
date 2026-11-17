@@ -9,7 +9,10 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScScrollArea, type ScScrollAreaOrientation } from './scroll-area';
+import {
+  type ScScrollAreaOrientation,
+  ScScrollAreaState,
+} from './scroll-area-state';
 
 /** A thumb is never shorter than this (px). */
 const MIN_THUMB = 16;
@@ -32,7 +35,7 @@ const MIN_THUMB = 16;
   },
 })
 export class ScScrollAreaScrollbar {
-  private readonly area = inject(ScScrollArea);
+  private readonly area = inject(ScScrollAreaState);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
