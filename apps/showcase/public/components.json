@@ -891,29 +891,18 @@
   {
     "name": "Scroll Area",
     "path": "scroll-area",
-    "description": "A scrollable area with thin, styled scrollbars that appear on hover.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Layout",
-    "hidden": true
-  },
-  {
-    "name": "Scroll Area Next",
-    "path": "scroll-area-next",
     "description": "A native scroll container with custom scrollbars — in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Layout",
-    "hidden": true
+    "category": "Layout"
   },
   {
-    "name": "Scroll Area Next2",
-    "path": "scroll-area-next2",
-    "description": "A box that scrolls with the browser's own scrollbar, in the look of the app's preset.",
+    "name": "Scrollbar",
+    "path": "scrollbar",
+    "description": "The browser's own scrollbars in your preset's look — every scrollbar of the page, from one CSS file tuned by variables; your classes win.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Layout",
-    "hidden": true
+    "category": "Layout"
   },
   {
     "name": "Select",

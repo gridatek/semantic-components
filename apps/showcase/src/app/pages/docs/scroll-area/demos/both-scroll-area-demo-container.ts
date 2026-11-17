@@ -6,7 +6,11 @@ import { BothScrollAreaDemo } from './both-scroll-area-demo';
   selector: 'app-both-scroll-area-demo-container',
   imports: [DemoContainer, BothScrollAreaDemo],
   template: `
-    <app-demo-container title="Both Scrollbars" [code]="code">
+    <app-demo-container
+      title="Both scrollbars"
+      demoUrl="/demos/scroll-area/both-scroll-area-demo"
+      [code]="code"
+    >
       <app-both-scroll-area-demo />
     </app-demo-container>
   `,
@@ -15,38 +19,57 @@ import { BothScrollAreaDemo } from './both-scroll-area-demo';
 })
 export class BothScrollAreaDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScFrame, ScScrollArea } from '@semantic-components/ui';
+import {
+  ScFrame,
+  ScScrollArea,
+  ScScrollAreaCorner,
+  ScScrollAreaScrollbar,
+  ScScrollAreaThumb,
+  ScScrollAreaViewport,
+  ScScrollAreaViewportContent,
+} from '@semantic-components/ui';
 
+/** Content wider and taller than the box: a scrollbar each way, the corner where they meet. */
 @Component({
   selector: 'app-both-scroll-area-demo',
-  imports: [ScFrame, ScScrollArea],
+  imports: [
+    ScFrame,
+    ScScrollArea,
+    ScScrollAreaViewportContent,
+    ScScrollAreaCorner,
+    ScScrollAreaScrollbar,
+    ScScrollAreaThumb,
+    ScScrollAreaViewport,
+  ],
   template: \`
-    <div scFrame scScrollArea class="h-72 w-72">
-      <div class="p-4" style="width: 500px;">
-        <h4 class="mb-4 text-sm leading-none font-medium">
-          Content with both scrollbars
-        </h4>
-        <p class="text-muted-foreground text-sm leading-relaxed">
-          This content is wider and taller than the container, so both
-          scrollbars are visible. You can scroll both horizontally and
-          vertically to see all the content.
-        </p>
-        <div class="mt-4 space-y-2">
-          @for (i of numbers; track i) {
-            <div class="text-sm whitespace-nowrap">
-              Row {{ i }}: Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua.
+    <div scScrollArea scFrame class="h-64 w-80 max-w-full">
+      <div scScrollAreaViewport>
+        <div
+          scScrollAreaViewportContent
+          class="grid w-max grid-cols-10 gap-3 p-4"
+        >
+          @for (cell of cells; track cell) {
+            <div
+              class="bg-muted text-muted-foreground flex size-16 items-center justify-center rounded-md text-sm"
+            >
+              {{ cell }}
             </div>
           }
         </div>
       </div>
+      <div scScrollAreaScrollbar>
+        <div scScrollAreaThumb></div>
+      </div>
+      <div scScrollAreaScrollbar orientation="horizontal">
+        <div scScrollAreaThumb></div>
+      </div>
+      <div scScrollAreaCorner></div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BothScrollAreaDemo {
-  readonly numbers = Array.from({ length: 20 }, (_, i) => i + 1);
+  protected readonly cells = Array.from({ length: 100 }, (_, i) => i + 1);
 }`;
 }

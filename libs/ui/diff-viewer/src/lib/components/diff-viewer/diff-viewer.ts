@@ -287,7 +287,7 @@ export class ScDiffViewer {
 
   private readonly class = computed(() =>
     cn(
-      'min-h-0 min-w-0 overflow-auto py-2 text-start font-mono leading-relaxed whitespace-pre outline-none scrollbar-thin',
+      'min-h-0 min-w-0 overflow-auto py-2 text-start font-mono leading-relaxed whitespace-pre outline-none',
       'group-has-data-[slot=code-block-header]/code-block:pt-1.5',
       '[&_[data-slot=diff-line][data-variant=added]]:bg-muted [&_[data-slot=diff-line][data-variant=removed]]:bg-destructive/10',
       'data-[view=split]:overflow-x-hidden data-[view=split]:[&_[data-slot=diff-line]>:last-child]:whitespace-pre-wrap data-[view=split]:[&_[data-slot=diff-line]>:last-child]:wrap-break-word',

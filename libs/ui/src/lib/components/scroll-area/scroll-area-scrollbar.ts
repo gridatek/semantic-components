@@ -1,204 +1,120 @@
 import {
-  Component,
+  DestroyRef,
+  Directive,
   ElementRef,
-  ViewEncapsulation,
+  afterNextRender,
   computed,
-  effect,
   inject,
   input,
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { SC_SCROLL_AREA } from './scroll-area-types';
+import {
+  type ScScrollAreaOrientation,
+  ScScrollAreaState,
+} from './scroll-area-state';
 
-const MIN_THUMB_SIZE = 20;
+/** A thumb is never shorter than this (px). */
+const MIN_THUMB = 16;
 
-@Component({
-  selector: 'div[scScrollBar]',
+/**
+ * A scrollbar along one axis (`orientation`: vertical by default), at the
+ * box's end or bottom; hidden while that axis doesn't overflow. A press on
+ * its track jumps there. `data-hovering` while the pointer is over the area,
+ * `data-scrolling` while it scrolls. As Base UI's ScrollArea.Scrollbar.
+ */
+@Directive({
+  selector: 'div[scScrollAreaScrollbar]',
   host: {
-    '[class]': 'class()',
-    '[attr.data-state]': 'visible() ? "visible" : "hidden"',
     '[attr.data-orientation]': 'orientation()',
-    '(pointerdown)': 'onTrackPointerDown($event)',
+    '[attr.data-hovering]': 'area.hovering() ? "" : null',
+    '[attr.data-scrolling]': 'area.scrolling() ? "" : null',
+    '[attr.hidden]': 'overflows() ? null : ""',
+    '[class]': 'class()',
+    '(pointerdown)': 'onTrackPress($event)',
   },
-  template: `
-    <div
-      data-slot="scroll-bar-thumb"
-      [class]="thumbClass()"
-      [style]="thumbStyle()"
-      (pointerdown)="onThumbPointerDown($event)"
-    ></div>
-  `,
-  encapsulation: ViewEncapsulation.None,
 })
-export class ScScrollBar {
-  private readonly scrollArea = inject(SC_SCROLL_AREA);
-  private readonly elementRef = inject(ElementRef<HTMLElement>);
+export class ScScrollAreaScrollbar {
+  private readonly area = inject(ScScrollAreaState);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  readonly classInput = input<string>('', { alias: 'class' });
+  readonly orientation = input<ScScrollAreaOrientation>('vertical');
 
-  readonly orientation = input.required<'vertical' | 'horizontal'>();
+  /** Its track's length, less its padding (px). */
+  private readonly track = signal(0);
 
-  private readonly isVertical = computed(
-    () => this.orientation() === 'vertical',
+  private readonly overflows = computed(() =>
+    this.orientation() === 'vertical'
+      ? this.area.hasOverflowY()
+      : this.area.hasOverflowX(),
   );
 
-  private readonly scrollPos = signal(0);
-  private readonly scrollSize = signal(0);
-  private readonly viewportSize = signal(0);
-  private readonly trackSize = signal(0);
-  private readonly dragging = signal(false);
-
-  private readonly visible = computed(
-    () => this.scrollSize() > this.viewportSize(),
+  /** The thumb's length (px). */
+  readonly thumbLength = computed(() =>
+    Math.max(MIN_THUMB, this.track() * this.area.shown(this.orientation())),
   );
 
-  private readonly thumbSizePx = computed(() => {
-    const ss = this.scrollSize();
-    const vs = this.viewportSize();
-    const ts = this.trackSize();
-    if (ss <= 0 || ts <= 0) return 0;
-    return Math.max(MIN_THUMB_SIZE, (vs / ss) * ts);
+  /** The thumb's distance from the track's start, in the reading direction (px). */
+  readonly thumbOffset = computed(() => {
+    const axis = this.orientation();
+    const max = this.area.maxScroll(axis);
+    if (!max) return 0;
+    return (this.area.position(axis) / max) * this.room();
   });
 
-  private readonly thumbOffsetPx = computed(() => {
-    const maxScroll = this.scrollSize() - this.viewportSize();
-    if (maxScroll <= 0) return 0;
-    const maxOffset = this.trackSize() - this.thumbSizePx();
-    return (this.scrollPos() / maxScroll) * maxOffset;
-  });
-
-  private readonly thumbStyle = computed(() => {
-    const size = this.thumbSizePx();
-    const offset = this.thumbOffsetPx();
-    if (this.isVertical()) {
-      return `height:${size}px;transform:translateY(${offset}px)`;
-    }
-    return `width:${size}px;transform:translateX(${offset}px)`;
-  });
-
-  private dragStartPos = 0;
-  private dragStartScroll = 0;
-
-  constructor() {
-    effect((onCleanup) => {
-      const viewport = this.scrollArea.viewport();
-      if (!viewport) return;
-
-      const el = this.elementRef.nativeElement;
-      const vertical = this.isVertical();
-
-      const update = () => {
-        if (vertical) {
-          this.scrollPos.set(viewport.scrollTop);
-          this.scrollSize.set(viewport.scrollHeight);
-          this.viewportSize.set(viewport.clientHeight);
-          this.trackSize.set(el.clientHeight);
-        } else {
-          this.scrollPos.set(viewport.scrollLeft);
-          this.scrollSize.set(viewport.scrollWidth);
-          this.viewportSize.set(viewport.clientWidth);
-          this.trackSize.set(el.clientWidth);
-        }
-      };
-
-      // Nothing to measure on the server.
-      if (typeof ResizeObserver === 'undefined') return;
-      viewport.addEventListener('scroll', update, { passive: true });
-      const ro = new ResizeObserver(update);
-      ro.observe(viewport);
-      ro.observe(el);
-      if (viewport.firstElementChild) {
-        ro.observe(viewport.firstElementChild);
-      }
-      requestAnimationFrame(update);
-
-      onCleanup(() => {
-        viewport.removeEventListener('scroll', update);
-        ro.disconnect();
-      });
-    });
-  }
-
-  private onTrackPointerDown(event: PointerEvent): void {
-    const viewport = this.scrollArea.viewport();
-    if (!viewport) return;
-
-    const el = this.elementRef.nativeElement;
-    const rect = el.getBoundingClientRect();
-    const clickPos = this.isVertical()
-      ? event.clientY - rect.top
-      : event.clientX - rect.left;
-
-    const thumbSize = this.thumbSizePx();
-    const targetOffset = clickPos - thumbSize / 2;
-    const maxOffset = this.trackSize() - thumbSize;
-    if (maxOffset <= 0) return;
-
-    const scrollRatio = Math.max(0, Math.min(1, targetOffset / maxOffset));
-    const maxScroll = this.scrollSize() - this.viewportSize();
-
-    if (this.isVertical()) {
-      viewport.scrollTop = scrollRatio * maxScroll;
-    } else {
-      viewport.scrollLeft = scrollRatio * maxScroll;
-    }
-  }
-
-  private onThumbPointerDown(event: PointerEvent): void {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const thumb = event.currentTarget as HTMLElement;
-    thumb.setPointerCapture(event.pointerId);
-    this.dragging.set(true);
-
-    this.dragStartPos = this.isVertical() ? event.clientY : event.clientX;
-    this.dragStartScroll = this.scrollPos();
-
-    const onMove = (e: PointerEvent) => {
-      const viewport = this.scrollArea.viewport();
-      if (!viewport) return;
-
-      const delta =
-        (this.isVertical() ? e.clientY : e.clientX) - this.dragStartPos;
-      const maxScroll = this.scrollSize() - this.viewportSize();
-      const maxOffset = this.trackSize() - this.thumbSizePx();
-      if (maxOffset <= 0) return;
-
-      const scrollDelta = delta * (maxScroll / maxOffset);
-
-      if (this.isVertical()) {
-        viewport.scrollTop = this.dragStartScroll + scrollDelta;
-      } else {
-        viewport.scrollLeft = this.dragStartScroll + scrollDelta;
-      }
-    };
-
-    const onUp = () => {
-      this.dragging.set(false);
-      thumb.releasePointerCapture(event.pointerId);
-      thumb.removeEventListener('pointermove', onMove);
-      thumb.removeEventListener('pointerup', onUp);
-    };
-
-    thumb.addEventListener('pointermove', onMove);
-    thumb.addEventListener('pointerup', onUp);
-  }
+  private readonly room = computed(() =>
+    Math.max(0, this.track() - this.thumbLength()),
+  );
 
   private readonly class = computed(() =>
     cn(
-      'absolute touch-none select-none transition-opacity',
-      this.isVertical()
-        ? 'top-0 end-0 h-full w-2.5'
-        : 'bottom-0 start-0 w-full h-2.5',
-      this.dragging()
-        ? '!opacity-100'
-        : this.visible()
-          ? 'opacity-0 group-hover:opacity-100'
-          : 'opacity-0 pointer-events-none',
+      'absolute flex touch-none p-px transition-colors select-none',
+      // Plain classes, not data-[orientation=…]: variants: those outrank
+      // yours in specificity, and cn can't merge them.
+      this.orientation() === 'vertical'
+        ? 'end-0 top-0 bottom-(--sc-scroll-area-corner-size) w-2.5 border-s border-s-transparent'
+        : 'start-0 end-(--sc-scroll-area-corner-size) bottom-0 h-2.5 flex-col border-t border-t-transparent',
+      this.classInput(),
     ),
   );
 
-  private readonly thumbClass = computed(() =>
-    cn('rounded-full bg-border', this.isVertical() ? 'w-full' : 'h-full'),
-  );
+  constructor() {
+    let observer: ResizeObserver | undefined;
+    afterNextRender(() => {
+      observer = new ResizeObserver(() => this.measure());
+      observer.observe(this.element);
+      this.measure();
+    });
+    inject(DestroyRef).onDestroy(() => observer?.disconnect());
+  }
+
+  private measure(): void {
+    const vertical = this.orientation() === 'vertical';
+    // The content box: inside its 1px padding and its transparent border.
+    const size = vertical
+      ? this.element.clientHeight
+      : this.element.clientWidth;
+    this.track.set(Math.max(0, size - 2));
+  }
+
+  /** Pointer distance from the track's start, in the reading direction. */
+  pointerOffset(event: PointerEvent): number {
+    const r = this.element.getBoundingClientRect();
+    if (this.orientation() === 'vertical') return event.clientY - r.top;
+    return this.area.isRtl() ? r.right - event.clientX : event.clientX - r.left;
+  }
+
+  /** Scrolls to where the thumb's start would be at `offset` on the track. */
+  scrollToThumb(offset: number): void {
+    const room = this.room();
+    if (room <= 0) return;
+    const axis = this.orientation();
+    this.area.scrollTo(axis, (offset / room) * this.area.maxScroll(axis));
+  }
+
+  private onTrackPress(event: PointerEvent): void {
+    if (event.button !== 0 || event.target !== this.element) return;
+    this.scrollToThumb(this.pointerOffset(event) - this.thumbLength() / 2);
+  }
 }

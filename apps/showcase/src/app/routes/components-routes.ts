@@ -578,16 +578,9 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/scroll-area/scroll-area-page'),
       },
       {
-        path: 'scroll-area-next',
-        title: 'Scroll Area Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/scroll-area-next/scroll-area-next-page'),
-      },
-      {
-        path: 'scroll-area-next2',
-        title: 'Scroll Area Next2 - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/scroll-area-next2/scroll-area-next2-page'),
+        path: 'scrollbar',
+        title: 'Scrollbar - Semantic Components',
+        loadComponent: () => import('../pages/docs/scrollbar/scrollbar-page'),
       },
       {
         path: 'select',

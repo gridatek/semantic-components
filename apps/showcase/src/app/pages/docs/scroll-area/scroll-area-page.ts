@@ -1,39 +1,196 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import {
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableContainer,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+  ScTypeset,
+} from '@semantic-components/ui';
+import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BothScrollAreaDemoContainer } from './demos/both-scroll-area-demo-container';
+import { CustomScrollAreaDemoContainer } from './demos/custom-scroll-area-demo-container';
 import { HorizontalScrollAreaDemoContainer } from './demos/horizontal-scroll-area-demo-container';
-import { VerticalScrollAreaDemoContainer } from './demos/vertical-scroll-area-demo-container';
+import { RtlScrollAreaDemoContainer } from './demos/rtl-scroll-area-demo-container';
+import { ScrollAreaUsageDemoContainer } from './demos/scroll-area-usage-demo-container';
+import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-area-demo-container';
 
 @Component({
   selector: 'app-scroll-area-page',
   imports: [
-    VerticalScrollAreaDemoContainer,
+    Anatomy,
+    ScrollAreaUsageDemoContainer,
     HorizontalScrollAreaDemoContainer,
     BothScrollAreaDemoContainer,
+    CustomScrollAreaDemoContainer,
+    ScrollFadeScrollAreaDemoContainer,
+    RtlScrollAreaDemoContainer,
     TocHeading,
     ComponentBadges,
     ScTypeset,
+    ScTable,
+    ScTableBody,
+    ScTableCell,
+    ScTableContainer,
+    ScTableHeader,
+    ScTableHeaderCell,
+    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
         <h1 scTypeset>Scroll Area</h1>
         <p class="text-muted-foreground">
-          A scrollable area with thin, styled scrollbars that appear on hover.
+          A native scroll container with custom scrollbars. In the look of the
+          app&apos;s preset.
         </p>
         <app-component-badges path="scroll-area" />
       </div>
 
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Usage</h2>
+        <app-scroll-area-usage-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Anatomy</h2>
+        <p class="text-muted-foreground">
+          Every part is a directive on your element: you write the viewport and
+          its content. A vertical scrollbar comes by default; write your own
+          scrollbars (and the corner) and they take its place — sideways, both
+          ways, or in your look.
+        </p>
+        <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Accessibility</h2>
+        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+          <li>
+            The browser scrolls it — the wheel, touch, the keyboard; its own
+            scrollbar is hidden, the scroll area draws them.
+          </li>
+          <li>
+            While it overflows, its viewport is in the tab order (with a focus
+            ring): the arrow keys, Page Up, Page Down, Home and End scroll it. A
+            box that doesn&apos;t scroll isn&apos;t a stop.
+          </li>
+          <li>
+            The scrollbars are for the pointer only: drag a thumb, or press the
+            track to jump there.
+          </li>
+        </ul>
+      </section>
+
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
-        <app-vertical-scroll-area-demo-container />
         <app-horizontal-scroll-area-demo-container />
         <app-both-scroll-area-demo-container />
+        <app-custom-scroll-area-demo-container />
+        <app-scroll-fade-scroll-area-demo-container />
+        <app-rtl-scroll-area-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>API reference</h2>
+        <p class="text-muted-foreground">
+          Each part takes
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
+          merged over the preset (cn: a later class wins).
+        </p>
+        <div
+          scTableContainer
+          tabindex="0"
+          role="region"
+          aria-label="Scroll Area parts"
+        >
+          <table scTable>
+            <thead scTableHeader>
+              <tr scTableRow>
+                <th scTableHeaderCell>Part</th>
+                <th scTableHeaderCell>Selector</th>
+                <th scTableHeaderCell>Description</th>
+              </tr>
+            </thead>
+            <tbody scTableBody>
+              @for (part of parts; track part.name) {
+                <tr scTableRow>
+                  <td scTableCell>
+                    <code class="font-mono text-sm">{{ part.name }}</code>
+                  </td>
+                  <td scTableCell>
+                    <code class="font-mono text-sm">{{ part.selector }}</code>
+                  </td>
+                  <td
+                    scTableCell
+                    class="text-muted-foreground whitespace-normal"
+                  >
+                    {{ part.description }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class ScrollAreaPage {}
+export default class ScrollAreaPage {
+  private readonly anatomy = {
+    imports: [
+      'import {',
+      '  ScScrollArea, ScScrollAreaViewport, ScScrollAreaViewportContent,',
+      '  ScScrollAreaScrollbar, ScScrollAreaThumb, ScScrollAreaCorner,',
+      "} from '@semantic-components/ui';",
+    ].join('\n'),
+    markup: [
+      '<div scScrollArea>',
+      '  <div scScrollAreaViewport>',
+      '    <div scScrollAreaViewportContent>…</div>',
+      '  </div>',
+      '  <!-- Optional: the default is a vertical scrollbar. -->',
+      '  <div scScrollAreaScrollbar orientation="…">',
+      '    <div scScrollAreaThumb></div>',
+      '  </div>',
+      '  <div scScrollAreaCorner></div>',
+      '</div>',
+    ].join('\n'),
+  };
+
+  private readonly parts = [
+    {
+      name: 'ScScrollArea',
+      selector: 'div[scScrollArea]',
+      description:
+        'The root: a vertical scrollbar by default, replaced by yours (a scrollbar or a corner written inside it); data-has-overflow-x / -y, data-overflow-{x,y}-{start,end}, data-scrolling.',
+    },
+    {
+      name: 'ScScrollAreaViewport',
+      selector: 'div[scScrollAreaViewport]',
+      description:
+        'What scrolls: its own scrollbar hidden, in the tab order while it overflows; --sc-scroll-area-overflow-{x,y}-{start,end}.',
+    },
+    {
+      name: 'ScScrollAreaViewportContent',
+      selector: 'div[scScrollAreaViewportContent]',
+      description: 'The content: at least as wide as what it holds.',
+    },
+    {
+      name: 'ScScrollAreaScrollbar, ScScrollAreaThumb',
+      selector: 'div[…], div[scScrollAreaThumb]',
+      description:
+        "orientation ('vertical', 'horizontal'); hidden while that axis doesn't overflow; data-hovering, data-scrolling. The thumb in the preset's look, dragged to scroll.",
+    },
+    {
+      name: 'ScScrollAreaCorner',
+      selector: 'div[scScrollAreaCorner]',
+      description: 'Where two scrollbars meet: shown while both overflow.',
+    },
+  ];
+}

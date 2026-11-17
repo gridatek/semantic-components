@@ -48,11 +48,12 @@ export function storePreset(name: ScPresetName): void {
   writeStorage(KEY, name);
 }
 
-/** The preset's stylesheets: Typeset's variables, the editor's rules. */
-const PRESET_STYLES = ['typeset-variables', 'editor'];
+/** The preset's stylesheets: Typeset's variables, the editor's rules, the scrollbars' variables. */
+const PRESET_STYLES = ['typeset-variables', 'editor', 'scrollbar-variables'];
 
 /**
- * The preset's stylesheets (its typeset-variables.css and editor.css), each
+ * The preset's stylesheets (its typeset-variables.css, editor.css and
+ * scrollbar-variables.css), each
  * a stylesheet of its own — the `<file>-<name>`
  * bundles in project.json, not injected — linked in the head at start: on the
  * server too, from the request's cookie, so the page is drawn with them. An

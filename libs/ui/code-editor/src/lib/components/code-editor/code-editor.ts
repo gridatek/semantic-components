@@ -137,7 +137,7 @@ export class ScCodeEditor implements FormValueControl<string> {
 
   private readonly class = computed(() =>
     cn(
-      'block min-h-0 min-w-0 overflow-hidden text-sm data-disabled:opacity-50 [&_.cm-editor]:h-full [&_.cm-editor]:max-h-[inherit] [&_.cm-scroller]:scrollbar-thin',
+      'block min-h-0 min-w-0 overflow-hidden text-sm data-disabled:opacity-50 [&_.cm-editor]:h-full [&_.cm-editor]:max-h-[inherit]',
       this.classInput(),
     ),
   );

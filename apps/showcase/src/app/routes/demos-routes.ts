@@ -5129,10 +5129,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/scroll-area',
     children: [
       {
-        path: 'vertical-scroll-area-demo',
+        path: 'scroll-area-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/scroll-area/demos/vertical-scroll-area-demo').then(
-            (m) => m.VerticalScrollAreaDemo,
+          import('../pages/docs/scroll-area/demos/scroll-area-usage-demo').then(
+            (m) => m.ScrollAreaUsageDemo,
           ),
       },
       {
@@ -5143,90 +5143,57 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'custom-scroll-area-demo',
+        loadComponent: () =>
+          import('../pages/docs/scroll-area/demos/custom-scroll-area-demo').then(
+            (m) => m.CustomScrollAreaDemo,
+          ),
+      },
+      {
         path: 'both-scroll-area-demo',
         loadComponent: () =>
           import('../pages/docs/scroll-area/demos/both-scroll-area-demo').then(
             (m) => m.BothScrollAreaDemo,
           ),
       },
-    ],
-  },
-  {
-    path: 'demos/scroll-area-next',
-    children: [
       {
-        path: 'scroll-area-next-usage-demo',
+        path: 'scroll-fade-scroll-area-demo',
         loadComponent: () =>
-          import('../pages/docs/scroll-area-next/demos/scroll-area-next-usage-demo').then(
-            (m) => m.ScrollAreaNextUsageDemo,
+          import('../pages/docs/scroll-area/demos/scroll-fade-scroll-area-demo').then(
+            (m) => m.ScrollFadeScrollAreaDemo,
           ),
       },
       {
-        path: 'horizontal-scroll-area-next-demo',
+        path: 'rtl-scroll-area-demo',
         loadComponent: () =>
-          import('../pages/docs/scroll-area-next/demos/horizontal-scroll-area-next-demo').then(
-            (m) => m.HorizontalScrollAreaNextDemo,
-          ),
-      },
-      {
-        path: 'both-scroll-area-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/scroll-area-next/demos/both-scroll-area-next-demo').then(
-            (m) => m.BothScrollAreaNextDemo,
-          ),
-      },
-      {
-        path: 'scroll-fade-scroll-area-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/scroll-area-next/demos/scroll-fade-scroll-area-next-demo').then(
-            (m) => m.ScrollFadeScrollAreaNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-scroll-area-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/scroll-area-next/demos/rtl-scroll-area-next-demo').then(
-            (m) => m.RtlScrollAreaNextDemo,
+          import('../pages/docs/scroll-area/demos/rtl-scroll-area-demo').then(
+            (m) => m.RtlScrollAreaDemo,
           ),
       },
     ],
   },
   {
-    path: 'demos/scroll-area-next2',
+    path: 'demos/scrollbar',
     children: [
       {
-        path: 'scroll-area-next2-usage-demo',
+        path: 'scrollbar-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/scroll-area-next2/demos/scroll-area-next2-usage-demo').then(
-            (m) => m.ScrollAreaNext2UsageDemo,
+          import('../pages/docs/scrollbar/demos/scrollbar-usage-demo').then(
+            (m) => m.ScrollbarUsageDemo,
           ),
       },
       {
-        path: 'horizontal-scroll-area-next2-demo',
+        path: 'tuning-scrollbar-demo',
         loadComponent: () =>
-          import('../pages/docs/scroll-area-next2/demos/horizontal-scroll-area-next2-demo').then(
-            (m) => m.HorizontalScrollAreaNext2Demo,
+          import('../pages/docs/scrollbar/demos/tuning-scrollbar-demo').then(
+            (m) => m.TuningScrollbarDemo,
           ),
       },
       {
-        path: 'both-scroll-area-next2-demo',
+        path: 'opting-out-scrollbar-demo',
         loadComponent: () =>
-          import('../pages/docs/scroll-area-next2/demos/both-scroll-area-next2-demo').then(
-            (m) => m.BothScrollAreaNext2Demo,
-          ),
-      },
-      {
-        path: 'scroll-fade-scroll-area-next2-demo',
-        loadComponent: () =>
-          import('../pages/docs/scroll-area-next2/demos/scroll-fade-scroll-area-next2-demo').then(
-            (m) => m.ScrollFadeScrollAreaNext2Demo,
-          ),
-      },
-      {
-        path: 'rtl-scroll-area-next2-demo',
-        loadComponent: () =>
-          import('../pages/docs/scroll-area-next2/demos/rtl-scroll-area-next2-demo').then(
-            (m) => m.RtlScrollAreaNext2Demo,
+          import('../pages/docs/scrollbar/demos/opting-out-scrollbar-demo').then(
+            (m) => m.OptingOutScrollbarDemo,
           ),
       },
     ],

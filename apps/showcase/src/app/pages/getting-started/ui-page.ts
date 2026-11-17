@@ -168,6 +168,8 @@ export default class UiPage {
 @import '@semantic-components/ui/styles/reduced-motion.css';
 @import '@semantic-components/ui/styles/typeset.css';
 @import '@semantic-components/presets/nova/typeset-variables.css';
+@import '@semantic-components/ui/styles/scrollbar.css';
+@import '@semantic-components/presets/nova/scrollbar-variables.css';
 
 /* The library and your preset (its file only): Tailwind skips node_modules.
    Adjust the path to node_modules to your project. */

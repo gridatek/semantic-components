@@ -35,7 +35,7 @@ export class ScCommandList {
   private readonly class = computed(() =>
     cn(
       this.styles.list,
-      this.hideScrollbar() ? 'no-scrollbar' : '[scrollbar-width:thin]',
+      this.hideScrollbar() && 'no-scrollbar',
       this.classInput(),
     ),
   );

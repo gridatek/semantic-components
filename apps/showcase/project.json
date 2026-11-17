@@ -107,6 +107,46 @@
             "input": "libs/presets/sera/src/editor.css",
             "bundleName": "editor-sera",
             "inject": false
+          },
+          {
+            "input": "libs/presets/nova/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-nova",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/lyra/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-lyra",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/maia/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-maia",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/vega/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-vega",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/mira/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-mira",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/luma/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-luma",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/rhea/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-rhea",
+            "inject": false
+          },
+          {
+            "input": "libs/presets/sera/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-sera",
+            "inject": false
           }
         ]
       },

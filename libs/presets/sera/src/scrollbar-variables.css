@@ -1,0 +1,15 @@
+/*
+ * The scrollbars' variables in sera, for ui's scrollbar.css (its rules):
+ * import both. shadcn's Scroll Area thumb in sera — the theme's border
+ * colour, its corners square, as its Scroll Area thumb (rounded-none). At zero specificity: yours on :root, or on a box,
+ * win.
+ */
+@layer components {
+  :where(:root) {
+    --sc-scrollbar-thumb: var(
+      --color-border,
+      color-mix(in oklab, currentColor 20%, transparent)
+    );
+    --sc-scrollbar-radius: 0;
+  }
+}

@@ -1,29 +1,49 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScFrame, ScScrollArea } from '@semantic-components/ui';
+import {
+  ScFrame,
+  ScScrollArea,
+  ScScrollAreaScrollbar,
+  ScScrollAreaThumb,
+  ScScrollAreaViewport,
+  ScScrollAreaViewportContent,
+} from '@semantic-components/ui';
 
+/** A row wider than the box: a horizontal scrollbar. */
 @Component({
   selector: 'app-horizontal-scroll-area-demo',
-  imports: [ScFrame, ScScrollArea],
+  imports: [
+    NgOptimizedImage,
+    ScFrame,
+    ScScrollArea,
+    ScScrollAreaViewportContent,
+    ScScrollAreaScrollbar,
+    ScScrollAreaThumb,
+    ScScrollAreaViewport,
+  ],
   template: `
-    <div scFrame scScrollArea class="w-96 whitespace-nowrap">
-      <div class="flex w-max space-x-4 p-4">
-        @for (artwork of artworks; track artwork.artist) {
-          <figure class="shrink-0">
-            <div class="overflow-hidden rounded-md">
-              <div
-                class="bg-muted text-muted-foreground flex h-[150px] w-[150px] items-center justify-center text-xs"
-              >
-                {{ artwork.art }}
-              </div>
-            </div>
-            <figcaption class="text-muted-foreground pt-2 text-xs">
-              Photo by
-              <span class="text-foreground font-semibold">
-                {{ artwork.artist }}
-              </span>
-            </figcaption>
-          </figure>
-        }
+    <div scScrollArea scFrame class="w-96 max-w-full whitespace-nowrap">
+      <div scScrollAreaViewport>
+        <div scScrollAreaViewportContent class="flex w-max gap-4 p-4">
+          @for (place of places; track place) {
+            <figure class="shrink-0">
+              <img
+                [ngSrc]="'/images/gallery/' + place + '-thumb.jpg'"
+                width="192"
+                height="128"
+                priority
+                alt=""
+                class="rounded-md object-cover"
+              />
+              <figcaption class="text-muted-foreground pt-2 text-xs capitalize">
+                {{ place }}
+              </figcaption>
+            </figure>
+          }
+        </div>
+      </div>
+      <div scScrollAreaScrollbar orientation="horizontal">
+        <div scScrollAreaThumb></div>
       </div>
     </div>
   `,
@@ -31,13 +51,14 @@ import { ScFrame, ScScrollArea } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalScrollAreaDemo {
-  private readonly artworks = [
-    { art: 'Artwork 1', artist: 'Ornella Binni' },
-    { art: 'Artwork 2', artist: 'Tom Byrom' },
-    { art: 'Artwork 3', artist: 'Vladimir Malyavko' },
-    { art: 'Artwork 4', artist: 'Double Brain' },
-    { art: 'Artwork 5', artist: 'Eugene Golovesov' },
-    { art: 'Artwork 6', artist: 'Rezli' },
-    { art: 'Artwork 7', artist: 'Claudio Schwarz' },
+  private readonly places = [
+    'cafe',
+    'coast',
+    'forest',
+    'gorge',
+    'mountains',
+    'shed',
+    'summit',
+    'waterfall',
   ];
 }
