@@ -52,7 +52,5 @@ export class ScScrollArea {
   readonly area = inject(ScScrollAreaState);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly class = computed(() =>
-    cn('relative overflow-hidden', this.classInput()),
-  );
+  private readonly class = computed(() => cn('relative', this.classInput()));
 }

@@ -84,6 +84,10 @@ test('Keyboard: the viewport is a tab stop while it overflows; the arrow keys sc
   const v = viewport(page);
   await expect(v).toHaveAttribute('tabindex', '0');
   await v.focus();
+  // Its focus ring (3px, outside it) shows: the root doesn't clip (shadcn's
+  // is `relative` only).
+  await expect(v).toHaveCSS('box-shadow', /3px/);
+  await expect(root(page)).toHaveCSS('overflow', 'visible');
   await press(page, 'End');
   await expect.poll(() => scrollTop(v)).toBeGreaterThan(0);
   await expect(root(page)).toHaveAttribute('data-overflow-y-start', '');
