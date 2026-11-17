@@ -23,6 +23,7 @@ import {
 import {
   ScEditor,
   ScEditorContent,
+  ScEditorContentTitle,
   ScEditorView,
   provideEditor,
 } from '@semantic-components/ui/editor';
@@ -66,6 +67,7 @@ import { EditorToolbar } from './editor-toolbar';
     ScDialogTitle,
     ScEditor,
     ScEditorContent,
+    ScEditorContentTitle,
     ScEditorUploads,
     ScEditorView,
     ScSeparator,
@@ -97,13 +99,12 @@ import { EditorToolbar } from './editor-toolbar';
           >
             <app-editor-toolbar />
             <div
-              class="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-8 px-10 py-10 md:px-14 lg:py-18"
+              class="mx-auto flex w-full max-w-2xl flex-1 flex-col px-10 py-10 md:px-14 lg:py-18"
             >
               <textarea
-                rows="1"
+                scEditorContentTitle
                 aria-label="Title"
                 placeholder="Untitled Article"
-                class="font-heading placeholder:text-muted-foreground/60 field-sizing-content resize-none bg-transparent text-4xl leading-12 font-medium tracking-wide uppercase outline-none"
                 [formField]="articleForm.title"
               ></textarea>
               <div

@@ -22,6 +22,36 @@
   overflow-anchor: none;
 }
 
+/*
+ * The title (scEditorContentTitle): a textarea set as Typeset's h1 — the
+ * preset's heading font, weight, tracking and case — with no box; the space
+ * after it is Typeset's after a heading (1em of the text).
+ */
+[data-slot='editor-content-title'] {
+  display: block;
+  width: 100%;
+  margin: 0 0 calc(1em / 1.75);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  resize: none;
+  overflow: hidden;
+  field-sizing: content;
+  outline: none;
+  color: var(--foreground);
+  font-family: var(--typeset-font-heading);
+  font-size: calc(var(--typeset-size) * 1.75);
+  line-height: 1.3;
+  font-weight: var(--typeset-heading-weight);
+  letter-spacing: var(--typeset-heading-tracking);
+  text-transform: var(--typeset-heading-case);
+}
+
+[data-slot='editor-content-title']::placeholder {
+  color: var(--typeset-muted);
+  opacity: 1;
+}
+
 /* In the editor: it fills its box */
 .ProseMirror {
   min-height: inherit;
