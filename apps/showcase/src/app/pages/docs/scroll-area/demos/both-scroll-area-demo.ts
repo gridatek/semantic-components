@@ -1,31 +1,31 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
-  ScScrollAreaNext,
-  ScScrollAreaNextCorner,
-  ScScrollAreaNextScrollbar,
-  ScScrollAreaNextThumb,
-  ScScrollAreaNextViewport,
-  ScScrollAreaNextViewportContent,
+  ScScrollArea,
+  ScScrollAreaCorner,
+  ScScrollAreaScrollbar,
+  ScScrollAreaThumb,
+  ScScrollAreaViewport,
+  ScScrollAreaViewportContent,
 } from '@semantic-components/ui';
 
 /** Content wider and taller than the box: a scrollbar each way, the corner where they meet. */
 @Component({
-  selector: 'app-both-scroll-area-next-demo',
+  selector: 'app-both-scroll-area-demo',
   imports: [
     ScFrame,
-    ScScrollAreaNext,
-    ScScrollAreaNextViewportContent,
-    ScScrollAreaNextCorner,
-    ScScrollAreaNextScrollbar,
-    ScScrollAreaNextThumb,
-    ScScrollAreaNextViewport,
+    ScScrollArea,
+    ScScrollAreaViewportContent,
+    ScScrollAreaCorner,
+    ScScrollAreaScrollbar,
+    ScScrollAreaThumb,
+    ScScrollAreaViewport,
   ],
   template: `
-    <div scScrollAreaNext scFrame class="h-64 w-80 max-w-full">
-      <div scScrollAreaNextViewport>
+    <div scScrollArea scFrame class="h-64 w-80 max-w-full">
+      <div scScrollAreaViewport>
         <div
-          scScrollAreaNextViewportContent
+          scScrollAreaViewportContent
           class="grid w-max grid-cols-10 gap-3 p-4"
         >
           @for (cell of cells; track cell) {
@@ -37,18 +37,18 @@ import {
           }
         </div>
       </div>
-      <div scScrollAreaNextScrollbar>
-        <div scScrollAreaNextThumb></div>
+      <div scScrollAreaScrollbar>
+        <div scScrollAreaThumb></div>
       </div>
-      <div scScrollAreaNextScrollbar orientation="horizontal">
-        <div scScrollAreaNextThumb></div>
+      <div scScrollAreaScrollbar orientation="horizontal">
+        <div scScrollAreaThumb></div>
       </div>
-      <div scScrollAreaNextCorner></div>
+      <div scScrollAreaCorner></div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BothScrollAreaNextDemo {
+export class BothScrollAreaDemo {
   private readonly cells = Array.from({ length: 100 }, (_, i) => i + 1);
 }

@@ -10,9 +10,9 @@ import {
 import { cn } from 'cn';
 
 /** A scroll area's axis: its scrollbar's orientation. */
-export type ScScrollAreaNextOrientation = 'vertical' | 'horizontal';
+export type ScScrollAreaOrientation = 'vertical' | 'horizontal';
 
-interface ScScrollAreaNextMetrics {
+interface ScScrollAreaMetrics {
   /** Scrolled from the start (px; positive in either direction). */
   x: number;
   y: number;
@@ -22,7 +22,7 @@ interface ScScrollAreaNextMetrics {
   clientHeight: number;
 }
 
-const NONE: ScScrollAreaNextMetrics = {
+const NONE: ScScrollAreaMetrics = {
   x: 0,
   y: 0,
   scrollWidth: 0,
@@ -42,7 +42,7 @@ const SCROLLING = 500;
  * `data-scrolling` while it scrolls. As Base UI's ScrollArea.Root.
  */
 @Directive({
-  selector: 'div[scScrollAreaNext]',
+  selector: 'div[scScrollArea]',
   host: {
     '[attr.data-has-overflow-x]': 'hasOverflowX() ? "" : null',
     '[attr.data-has-overflow-y]': 'hasOverflowY() ? "" : null',
@@ -58,7 +58,7 @@ const SCROLLING = 500;
     '(pointerleave)': 'hovering.set(false)',
   },
 })
-export class ScScrollAreaNext {
+export class ScScrollArea {
   private readonly directionality = inject(Directionality);
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -126,11 +126,11 @@ export class ScScrollAreaNext {
   }
 
   /** Its scroll along an axis: how far from the start, how far it can go, its size. */
-  position(axis: ScScrollAreaNextOrientation): number {
+  position(axis: ScScrollAreaOrientation): number {
     return axis === 'vertical' ? this.metrics().y : this.metrics().x;
   }
 
-  maxScroll(axis: ScScrollAreaNextOrientation): number {
+  maxScroll(axis: ScScrollAreaOrientation): number {
     const m = this.metrics();
     return Math.max(
       0,
@@ -141,7 +141,7 @@ export class ScScrollAreaNext {
   }
 
   /** The share of the content in view along an axis (0–1). */
-  shown(axis: ScScrollAreaNextOrientation): number {
+  shown(axis: ScScrollAreaOrientation): number {
     const m = this.metrics();
     const [view, all] =
       axis === 'vertical'
@@ -151,7 +151,7 @@ export class ScScrollAreaNext {
   }
 
   /** Scrolls to a distance from the start, in either direction. */
-  scrollTo(axis: ScScrollAreaNextOrientation, distance: number): void {
+  scrollTo(axis: ScScrollAreaOrientation, distance: number): void {
     const v = this.viewport();
     if (!v) return;
     const to = Math.max(0, Math.min(this.maxScroll(axis), distance));

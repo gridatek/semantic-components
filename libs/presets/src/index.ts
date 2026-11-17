@@ -364,7 +364,7 @@ export interface ScPreviewCardStyles {
 
 /** A scroll area's parts that change from style to style. */
 export interface ScScrollAreaStyles {
-  /** The scrollbar's thumb (Scroll Area Next: drawn). The browser's scrollbars take the same corners from the preset's `scrollbars-variables.css`. */
+  /** The scrollbar's thumb (the Scroll Area's, drawn). The browser's scrollbars take the same corners from the preset's `scrollbars-variables.css`. */
   thumb: string;
 }
 

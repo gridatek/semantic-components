@@ -889,8 +889,8 @@
     "hidden": true
   },
   {
-    "name": "Scroll Area Next",
-    "path": "scroll-area-next",
+    "name": "Scroll Area",
+    "path": "scroll-area",
     "description": "A native scroll container with custom scrollbars — in the look of the app's preset.",
     "status": "Experimental",
     "library": "ui",

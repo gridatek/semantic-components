@@ -9,7 +9,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScScrollAreaNext } from './scroll-area-next';
+import { ScScrollArea } from './scroll-area';
 
 /**
  * The element that scrolls: its own scrollbar hidden (the scroll area draws
@@ -19,7 +19,7 @@ import { ScScrollAreaNext } from './scroll-area-next';
  * opened from inside it follow its scroll. As Base UI's ScrollArea.Viewport.
  */
 @Directive({
-  selector: 'div[scScrollAreaNextViewport]',
+  selector: 'div[scScrollAreaViewport]',
   hostDirectives: [CdkScrollable],
   host: {
     '[attr.tabindex]': 'overflows() ? 0 : null',
@@ -31,8 +31,8 @@ import { ScScrollAreaNext } from './scroll-area-next';
     '(scroll)': 'area.scrolled()',
   },
 })
-export class ScScrollAreaNextViewport {
-  private readonly area = inject(ScScrollAreaNext);
+export class ScScrollAreaViewport {
+  private readonly area = inject(ScScrollArea);
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly overflows = computed(

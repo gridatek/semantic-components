@@ -7,10 +7,10 @@ import { cn } from 'cn';
  * named after the viewport it sits in (docs/content-body-naming.md).
  */
 @Directive({
-  selector: 'div[scScrollAreaNextViewportContent]',
+  selector: 'div[scScrollAreaViewportContent]',
   host: { '[class]': 'class()' },
 })
-export class ScScrollAreaNextViewportContent {
+export class ScScrollAreaViewportContent {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() => cn('min-w-fit', this.classInput()));

@@ -3,12 +3,11 @@ import { collectErrors, press } from '../../interaction';
 import { box } from '../../looks';
 import { expect, test } from '../../test';
 
-const demo = (name: string) =>
-  `/demos/scroll-area-next/${name}-scroll-area-next-demo`;
-const root = (page: Page) => page.locator('[scScrollAreaNext]');
-const viewport = (page: Page) => page.locator('[scScrollAreaNextViewport]');
+const demo = (name: string) => `/demos/scroll-area/${name}-scroll-area-demo`;
+const root = (page: Page) => page.locator('[scScrollArea]');
+const viewport = (page: Page) => page.locator('[scScrollAreaViewport]');
 const bar = (page: Page, orientation: 'vertical' | 'horizontal') =>
-  page.locator(`[scScrollAreaNextScrollbar][data-orientation=${orientation}]`);
+  page.locator(`[scScrollAreaScrollbar][data-orientation=${orientation}]`);
 const scrollTop = (v: Locator) => v.evaluate((el) => el.scrollTop);
 
 let errors: string[];
@@ -24,7 +23,7 @@ test.afterEach(() => {
 test('Usage: overflows down only; one scrollbar, its thumb as long as the share in view', async ({
   page,
 }) => {
-  await page.goto('/demos/scroll-area-next/scroll-area-next-usage-demo');
+  await page.goto('/demos/scroll-area/scroll-area-usage-demo');
   await expect(root(page)).toHaveAttribute('data-has-overflow-y', '');
   await expect(root(page)).not.toHaveAttribute('data-has-overflow-x');
   await expect(root(page)).toHaveAttribute('data-overflow-y-end', '');
@@ -36,7 +35,7 @@ test('Usage: overflows down only; one scrollbar, its thumb as long as the share 
   );
   const [track, thumb] = [
     await box(bar(page, 'vertical')),
-    await box(page.locator('[scScrollAreaNextThumb]')),
+    await box(page.locator('[scScrollAreaThumb]')),
   ];
   expect(Math.abs(thumb.height - (track.height - 2) * share)).toBeLessThan(2);
 });
@@ -44,7 +43,7 @@ test('Usage: overflows down only; one scrollbar, its thumb as long as the share 
 test('Keyboard: the viewport is a tab stop while it overflows; the arrow keys scroll it', async ({
   page,
 }) => {
-  await page.goto('/demos/scroll-area-next/scroll-area-next-usage-demo');
+  await page.goto('/demos/scroll-area/scroll-area-usage-demo');
   const v = viewport(page);
   await expect(v).toHaveAttribute('tabindex', '0');
   await v.focus();
@@ -57,8 +56,8 @@ test('Keyboard: the viewport is a tab stop while it overflows; the arrow keys sc
 test('Scrolling: the thumb follows; data-scrolling for a moment', async ({
   page,
 }) => {
-  await page.goto('/demos/scroll-area-next/scroll-area-next-usage-demo');
-  const thumb = page.locator('[scScrollAreaNextThumb]');
+  await page.goto('/demos/scroll-area/scroll-area-usage-demo');
+  const thumb = page.locator('[scScrollAreaThumb]');
   const before = await box(thumb);
   await viewport(page).hover();
   await page.mouse.wheel(0, 300);
@@ -70,9 +69,9 @@ test('Scrolling: the thumb follows; data-scrolling for a moment', async ({
 test('Dragging the thumb scrolls; a press on the track jumps there', async ({
   page,
 }) => {
-  await page.goto('/demos/scroll-area-next/scroll-area-next-usage-demo');
+  await page.goto('/demos/scroll-area/scroll-area-usage-demo');
   const v = viewport(page);
-  const thumb = await box(page.locator('[scScrollAreaNextThumb]'));
+  const thumb = await box(page.locator('[scScrollAreaThumb]'));
   await page.mouse.move(thumb.x + thumb.width / 2, thumb.y + 5);
   await page.mouse.down();
   await page.mouse.move(thumb.x + thumb.width / 2, thumb.y + 65, {
@@ -101,7 +100,7 @@ test('Horizontal: overflows sideways; dragging its thumb scrolls left to right',
   await expect(root(page)).toHaveAttribute('data-has-overflow-x', '');
   await expect(root(page)).not.toHaveAttribute('data-has-overflow-y');
   await expect(bar(page, 'horizontal')).toBeVisible();
-  const thumb = await box(page.locator('[scScrollAreaNextThumb]'));
+  const thumb = await box(page.locator('[scScrollAreaThumb]'));
   await page.mouse.move(thumb.x + 5, thumb.y + thumb.height / 2);
   await page.mouse.down();
   await page.mouse.move(thumb.x + 85, thumb.y + thumb.height / 2, { steps: 5 });
@@ -114,7 +113,7 @@ test('Horizontal: overflows sideways; dragging its thumb scrolls left to right',
 test('Content put in later is measured: a wide row added to the viewport overflows sideways', async ({
   page,
 }) => {
-  await page.goto('/demos/scroll-area-next/scroll-area-next-usage-demo');
+  await page.goto('/demos/scroll-area/scroll-area-usage-demo');
   await expect(root(page)).toHaveAttribute('data-has-overflow-y', '');
   await expect(root(page)).not.toHaveAttribute('data-has-overflow-x');
   // A new child of the viewport: neither the viewport nor its first child resizes.
@@ -131,7 +130,7 @@ test('Both: two scrollbars and the corner between them', async ({ page }) => {
   await page.goto(demo('both'));
   await expect(bar(page, 'vertical')).toBeVisible();
   await expect(bar(page, 'horizontal')).toBeVisible();
-  const corner = page.locator('[scScrollAreaNextCorner]');
+  const corner = page.locator('[scScrollAreaCorner]');
   await expect(corner).toBeVisible();
   // The bars stop at the corner.
   const [v, c] = [await box(bar(page, 'vertical')), await box(corner)];

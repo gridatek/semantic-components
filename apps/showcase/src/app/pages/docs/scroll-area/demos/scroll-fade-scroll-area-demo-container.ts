@@ -1,52 +1,52 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ScrollFadeScrollAreaNextDemo } from './scroll-fade-scroll-area-next-demo';
+import { ScrollFadeScrollAreaDemo } from './scroll-fade-scroll-area-demo';
 
 @Component({
-  selector: 'app-scroll-fade-scroll-area-next-demo-container',
-  imports: [DemoContainer, ScrollFadeScrollAreaNextDemo],
+  selector: 'app-scroll-fade-scroll-area-demo-container',
+  imports: [DemoContainer, ScrollFadeScrollAreaDemo],
   template: `
     <app-demo-container
       title="Scroll fade"
-      demoUrl="/demos/scroll-area-next/scroll-fade-scroll-area-next-demo"
+      demoUrl="/demos/scroll-area/scroll-fade-scroll-area-demo"
       [code]="code"
     >
-      <app-scroll-fade-scroll-area-next-demo />
+      <app-scroll-fade-scroll-area-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollFadeScrollAreaNextDemoContainer {
+export class ScrollFadeScrollAreaDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
-  ScScrollAreaNext,
-  ScScrollAreaNextScrollbar,
-  ScScrollAreaNextThumb,
-  ScScrollAreaNextViewport,
-  ScScrollAreaNextViewportContent,
+  ScScrollArea,
+  ScScrollAreaScrollbar,
+  ScScrollAreaThumb,
+  ScScrollAreaViewport,
+  ScScrollAreaViewportContent,
 } from '@semantic-components/ui';
 
 /** The text fades out at an edge it continues past: a mask from the viewport's --sc-scroll-area-overflow-y-start / -end. */
 @Component({
-  selector: 'app-scroll-fade-scroll-area-next-demo',
+  selector: 'app-scroll-fade-scroll-area-demo',
   imports: [
     ScFrame,
-    ScScrollAreaNext,
-    ScScrollAreaNextViewportContent,
-    ScScrollAreaNextScrollbar,
-    ScScrollAreaNextThumb,
-    ScScrollAreaNextViewport,
+    ScScrollArea,
+    ScScrollAreaViewportContent,
+    ScScrollAreaScrollbar,
+    ScScrollAreaThumb,
+    ScScrollAreaViewport,
   ],
   template: \`
-    <div scScrollAreaNext scFrame class="h-48 w-96 max-w-full">
+    <div scScrollArea scFrame class="h-48 w-96 max-w-full">
       <div
-        scScrollAreaNextViewport
+        scScrollAreaViewport
         class="mask-linear-[to_bottom,transparent_0,black_min(40px,var(--sc-scroll-area-overflow-y-start)),black_calc(100%_-_min(40px,var(--sc-scroll-area-overflow-y-end,40px))),transparent_100%] mask-no-repeat"
       >
         <div
-          scScrollAreaNextViewportContent
+          scScrollAreaViewportContent
           class="flex flex-col gap-4 px-4 py-2 text-sm"
         >
           <p>
@@ -67,13 +67,13 @@ import {
           </p>
         </div>
       </div>
-      <div scScrollAreaNextScrollbar>
-        <div scScrollAreaNextThumb></div>
+      <div scScrollAreaScrollbar>
+        <div scScrollAreaThumb></div>
       </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollFadeScrollAreaNextDemo {}`;
+export class ScrollFadeScrollAreaDemo {}`;
 }

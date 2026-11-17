@@ -9,10 +9,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import {
-  ScScrollAreaNext,
-  type ScScrollAreaNextOrientation,
-} from './scroll-area-next';
+import { ScScrollArea, type ScScrollAreaOrientation } from './scroll-area';
 
 /** A thumb is never shorter than this (px). */
 const MIN_THUMB = 16;
@@ -24,7 +21,7 @@ const MIN_THUMB = 16;
  * `data-scrolling` while it scrolls. As Base UI's ScrollArea.Scrollbar.
  */
 @Directive({
-  selector: 'div[scScrollAreaNextScrollbar]',
+  selector: 'div[scScrollAreaScrollbar]',
   host: {
     '[attr.data-orientation]': 'orientation()',
     '[attr.data-hovering]': 'area.hovering() ? "" : null',
@@ -34,12 +31,12 @@ const MIN_THUMB = 16;
     '(pointerdown)': 'onTrackPress($event)',
   },
 })
-export class ScScrollAreaNextScrollbar {
-  private readonly area = inject(ScScrollAreaNext);
+export class ScScrollAreaScrollbar {
+  private readonly area = inject(ScScrollArea);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly orientation = input<ScScrollAreaNextOrientation>('vertical');
+  readonly orientation = input<ScScrollAreaOrientation>('vertical');
 
   /** Its track's length, less its padding (px). */
   private readonly track = signal(0);

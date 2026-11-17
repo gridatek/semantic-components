@@ -12,21 +12,21 @@ import {
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BothScrollAreaNextDemoContainer } from './demos/both-scroll-area-next-demo-container';
-import { HorizontalScrollAreaNextDemoContainer } from './demos/horizontal-scroll-area-next-demo-container';
-import { RtlScrollAreaNextDemoContainer } from './demos/rtl-scroll-area-next-demo-container';
-import { ScrollAreaNextUsageDemoContainer } from './demos/scroll-area-next-usage-demo-container';
-import { ScrollFadeScrollAreaNextDemoContainer } from './demos/scroll-fade-scroll-area-next-demo-container';
+import { BothScrollAreaDemoContainer } from './demos/both-scroll-area-demo-container';
+import { HorizontalScrollAreaDemoContainer } from './demos/horizontal-scroll-area-demo-container';
+import { RtlScrollAreaDemoContainer } from './demos/rtl-scroll-area-demo-container';
+import { ScrollAreaUsageDemoContainer } from './demos/scroll-area-usage-demo-container';
+import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-area-demo-container';
 
 @Component({
-  selector: 'app-scroll-area-next-page',
+  selector: 'app-scroll-area-page',
   imports: [
     Anatomy,
-    ScrollAreaNextUsageDemoContainer,
-    HorizontalScrollAreaNextDemoContainer,
-    BothScrollAreaNextDemoContainer,
-    ScrollFadeScrollAreaNextDemoContainer,
-    RtlScrollAreaNextDemoContainer,
+    ScrollAreaUsageDemoContainer,
+    HorizontalScrollAreaDemoContainer,
+    BothScrollAreaDemoContainer,
+    ScrollFadeScrollAreaDemoContainer,
+    RtlScrollAreaDemoContainer,
     TocHeading,
     ComponentBadges,
     ScTypeset,
@@ -41,17 +41,17 @@ import { ScrollFadeScrollAreaNextDemoContainer } from './demos/scroll-fade-scrol
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scTypeset>Scroll Area Next</h1>
+        <h1 scTypeset>Scroll Area</h1>
         <p class="text-muted-foreground">
           A native scroll container with custom scrollbars. In the look of the
           app&apos;s preset.
         </p>
-        <app-component-badges path="scroll-area-next" />
+        <app-component-badges path="scroll-area" />
       </div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
-        <app-scroll-area-next-usage-demo-container />
+        <app-scroll-area-usage-demo-container />
       </section>
 
       <section class="space-y-4">
@@ -84,10 +84,10 @@ import { ScrollFadeScrollAreaNextDemoContainer } from './demos/scroll-fade-scrol
 
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
-        <app-horizontal-scroll-area-next-demo-container />
-        <app-both-scroll-area-next-demo-container />
-        <app-scroll-fade-scroll-area-next-demo-container />
-        <app-rtl-scroll-area-next-demo-container />
+        <app-horizontal-scroll-area-demo-container />
+        <app-both-scroll-area-demo-container />
+        <app-scroll-fade-scroll-area-demo-container />
+        <app-rtl-scroll-area-demo-container />
       </section>
 
       <section class="space-y-4">
@@ -101,7 +101,7 @@ import { ScrollFadeScrollAreaNextDemoContainer } from './demos/scroll-fade-scrol
           scTableContainer
           tabindex="0"
           role="region"
-          aria-label="Scroll Area Next parts"
+          aria-label="Scroll Area parts"
         >
           <table scTable>
             <thead scTableHeader>
@@ -136,54 +136,54 @@ import { ScrollFadeScrollAreaNextDemoContainer } from './demos/scroll-fade-scrol
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class ScrollAreaNextPage {
+export default class ScrollAreaPage {
   private readonly anatomy = {
     imports: [
       'import {',
-      '  ScScrollAreaNext, ScScrollAreaNextViewport, ScScrollAreaNextViewportContent,',
-      '  ScScrollAreaNextScrollbar, ScScrollAreaNextThumb, ScScrollAreaNextCorner,',
+      '  ScScrollArea, ScScrollAreaViewport, ScScrollAreaViewportContent,',
+      '  ScScrollAreaScrollbar, ScScrollAreaThumb, ScScrollAreaCorner,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
-      '<div scScrollAreaNext>',
-      '  <div scScrollAreaNextViewport>',
-      '    <div scScrollAreaNextViewportContent>…</div>',
+      '<div scScrollArea>',
+      '  <div scScrollAreaViewport>',
+      '    <div scScrollAreaViewportContent>…</div>',
       '  </div>',
-      '  <div scScrollAreaNextScrollbar orientation="…">',
-      '    <div scScrollAreaNextThumb></div>',
+      '  <div scScrollAreaScrollbar orientation="…">',
+      '    <div scScrollAreaThumb></div>',
       '  </div>',
-      '  <div scScrollAreaNextCorner></div>',
+      '  <div scScrollAreaCorner></div>',
       '</div>',
     ].join('\n'),
   };
 
   private readonly parts = [
     {
-      name: 'ScScrollAreaNext',
-      selector: 'div[scScrollAreaNext]',
+      name: 'ScScrollArea',
+      selector: 'div[scScrollArea]',
       description:
         'The root: data-has-overflow-x / -y, data-overflow-{x,y}-{start,end}, data-scrolling.',
     },
     {
-      name: 'ScScrollAreaNextViewport',
-      selector: 'div[scScrollAreaNextViewport]',
+      name: 'ScScrollAreaViewport',
+      selector: 'div[scScrollAreaViewport]',
       description:
         'What scrolls: its own scrollbar hidden, in the tab order while it overflows; --sc-scroll-area-overflow-{x,y}-{start,end}.',
     },
     {
-      name: 'ScScrollAreaNextViewportContent',
-      selector: 'div[scScrollAreaNextViewportContent]',
+      name: 'ScScrollAreaViewportContent',
+      selector: 'div[scScrollAreaViewportContent]',
       description: 'The content: at least as wide as what it holds.',
     },
     {
-      name: 'ScScrollAreaNextScrollbar, ScScrollAreaNextThumb',
-      selector: 'div[…], div[scScrollAreaNextThumb]',
+      name: 'ScScrollAreaScrollbar, ScScrollAreaThumb',
+      selector: 'div[…], div[scScrollAreaThumb]',
       description:
         "orientation ('vertical', 'horizontal'); hidden while that axis doesn't overflow; data-hovering, data-scrolling. The thumb in the preset's look, dragged to scroll.",
     },
     {
-      name: 'ScScrollAreaNextCorner',
-      selector: 'div[scScrollAreaNextCorner]',
+      name: 'ScScrollAreaCorner',
+      selector: 'div[scScrollAreaCorner]',
       description: 'Where two scrollbars meet: shown while both overflow.',
     },
   ];

@@ -2,29 +2,29 @@ import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
-  ScScrollAreaNext,
-  ScScrollAreaNextScrollbar,
-  ScScrollAreaNextThumb,
-  ScScrollAreaNextViewport,
-  ScScrollAreaNextViewportContent,
+  ScScrollArea,
+  ScScrollAreaScrollbar,
+  ScScrollAreaThumb,
+  ScScrollAreaViewport,
+  ScScrollAreaViewportContent,
 } from '@semantic-components/ui';
 
 /** A row wider than the box: a horizontal scrollbar. */
 @Component({
-  selector: 'app-horizontal-scroll-area-next-demo',
+  selector: 'app-horizontal-scroll-area-demo',
   imports: [
     NgOptimizedImage,
     ScFrame,
-    ScScrollAreaNext,
-    ScScrollAreaNextViewportContent,
-    ScScrollAreaNextScrollbar,
-    ScScrollAreaNextThumb,
-    ScScrollAreaNextViewport,
+    ScScrollArea,
+    ScScrollAreaViewportContent,
+    ScScrollAreaScrollbar,
+    ScScrollAreaThumb,
+    ScScrollAreaViewport,
   ],
   template: `
-    <div scScrollAreaNext scFrame class="w-96 max-w-full whitespace-nowrap">
-      <div scScrollAreaNextViewport>
-        <div scScrollAreaNextViewportContent class="flex w-max gap-4 p-4">
+    <div scScrollArea scFrame class="w-96 max-w-full whitespace-nowrap">
+      <div scScrollAreaViewport>
+        <div scScrollAreaViewportContent class="flex w-max gap-4 p-4">
           @for (place of places; track place) {
             <figure class="shrink-0">
               <img
@@ -42,15 +42,15 @@ import {
           }
         </div>
       </div>
-      <div scScrollAreaNextScrollbar orientation="horizontal">
-        <div scScrollAreaNextThumb></div>
+      <div scScrollAreaScrollbar orientation="horizontal">
+        <div scScrollAreaThumb></div>
       </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HorizontalScrollAreaNextDemo {
+export class HorizontalScrollAreaDemo {
   private readonly places = [
     'cafe',
     'coast',

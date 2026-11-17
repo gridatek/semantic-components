@@ -27,8 +27,8 @@
  * The limits are the browser's: Firefox takes a thin bar and its colours only
  * (no exact size, no corners, no inset); where the system's scrollbars take
  * room (Windows, Linux; macOS set to always show them) it is a gutter, not
- * over the content. A drawn Scroll Area (Scroll Area Next) is the same in
- * every browser.
+ * over the content. The Scroll Area (`scScrollArea`), whose scrollbars are
+ * drawn, is the same in every browser.
  */
 
 @layer base {
