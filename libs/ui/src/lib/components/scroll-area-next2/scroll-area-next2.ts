@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
 
 /** How far it is scrolled from each edge (whole px). */
 interface ScScrollAreaNext2Edges {
@@ -28,8 +27,8 @@ const sameEdges = (a: ScScrollAreaNext2Edges, b: ScScrollAreaNext2Edges) =>
   a.end === b.end;
 
 /**
- * A box that scrolls, with the browser's own scrollbar in the preset's look
- * (`::-webkit-scrollbar`: Chromium, Safari; Firefox's thin bar, themed).
+ * A box that scrolls, with the browser's own scrollbar — in the preset's look
+ * with ui's `scrollbars.css`, as every scrollbar of the page.
  * A tab stop while it overflows, ringed when focused: the arrow keys, Page
  * Up / Down, Home and End scroll it. It tells what overflows and where —
  * `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}` and
@@ -55,7 +54,6 @@ const sameEdges = (a: ScScrollAreaNext2Edges, b: ScScrollAreaNext2Edges) =>
   },
 })
 export class ScScrollAreaNext2 {
-  private readonly styles = injectPreset().scrollArea;
   private readonly scrollable = inject(CdkScrollable);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -80,13 +78,6 @@ export class ScScrollAreaNext2 {
   private readonly class = computed(() =>
     cn(
       'overflow-auto',
-      // The browser's scrollbar in the preset's look (Chromium, Safari): 10px,
-      // no track, the thumb inset by 1px. Setting scrollbar-width or -color
-      // would make Chromium ignore these.
-      '[&::-webkit-scrollbar]:size-2.5 [&::-webkit-scrollbar-corner]:bg-transparent [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:border [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-thumb]:bg-clip-padding',
-      this.styles.nativeThumb,
-      // Firefox has no ::-webkit-scrollbar: its thin bar, themed.
-      '[@supports_not_selector(::-webkit-scrollbar)]:scrollbar-thin [@supports_not_selector(::-webkit-scrollbar)]:scrollbar-thumb-border [@supports_not_selector(::-webkit-scrollbar)]:scrollbar-track-transparent',
       'transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1',
       this.classInput(),
     ),

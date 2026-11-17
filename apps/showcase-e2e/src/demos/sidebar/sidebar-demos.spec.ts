@@ -1,5 +1,5 @@
 import { collectErrors, press } from '../../interaction';
-import { expectScrollbarWidth } from '../../looks';
+import { expectStyledScrollbar } from '../../looks';
 import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/sidebar/${name}-sidebar-demo`;
@@ -76,12 +76,11 @@ test.describe('wide', () => {
     );
   });
 
-  test('Usage: the content shows a thin scrollbar', async ({ page }) => {
+  test('Usage: the content shows its scrollbar, scrollbars.css’s', async ({
+    page,
+  }) => {
     await page.goto(usage);
-    await expectScrollbarWidth(
-      page.locator('[data-slot=sidebar-content]'),
-      'thin',
-    );
+    await expectStyledScrollbar(page.locator('[data-slot=sidebar-content]'));
   });
 
   test('Header and Footer: a menu on a menu button; the footer’s opens upwards', async ({

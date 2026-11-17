@@ -8,6 +8,8 @@
 @import '../../../../libs/ui/src/lib/styles/reduced-motion.css';
 @import '../../../../libs/ui/src/lib/styles/typeset.css';
 @import '../../../../libs/presets/sera/src/typeset-variables.css';
+@import '../../../../libs/ui/src/lib/styles/scrollbars.css';
+@import '../../../../libs/presets/sera/src/scrollbars-variables.css';
 @import '../../../../libs/presets/sera/src/editor.css';
 
 /*

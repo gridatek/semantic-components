@@ -25,7 +25,7 @@ export class ScSidebarContent {
       // scrollbar, the rail keeps its outer half.
       this.hideScrollbar()
         ? 'no-scrollbar'
-        : 'relative z-30 [scrollbar-width:thin] [scrollbar-gutter:stable]',
+        : 'relative z-30 [scrollbar-gutter:stable]',
       this.classInput(),
     ),
   );

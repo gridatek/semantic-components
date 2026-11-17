@@ -43,7 +43,7 @@ export class ScMessageScrollerViewport {
 
   private readonly class = computed(() =>
     cn(
-      'scroll-fade-b scrollbar-thin scrollbar-gutter-stable data-autoscrolling:scrollbar-thumb-transparent data-autoscrolling:scrollbar-track-transparent data-pending-scroll:invisible size-full min-h-0 min-w-0 overflow-y-auto overscroll-contain contain-content',
+      'scroll-fade-b scrollbar-gutter-stable data-autoscrolling:[--sc-scrollbar-thumb:transparent] data-pending-scroll:invisible size-full min-h-0 min-w-0 overflow-y-auto overscroll-contain contain-content',
       this.classInput(),
     ),
   );

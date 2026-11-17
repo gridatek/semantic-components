@@ -53,3 +53,30 @@ export async function expectScrollbarWidth(
   if (browser === 'firefox') return;
   await expect(locator).toHaveCSS('scrollbar-width', width);
 }
+
+/**
+ * Its scrollbar is ui's scrollbars.css: no `scrollbar-width` of its own
+ * (`auto` — any other value makes Chromium drop `::-webkit-scrollbar`), and,
+ * in Chromium, the thumb that file draws: a colour, and the preset's corners
+ * (`round` or `square`) when given. The thumb is read in Chromium only: it is
+ * the one whose computed `::-webkit-scrollbar-thumb` is known to be the drawn one.
+ */
+export async function expectStyledScrollbar(
+  locator: Locator,
+  corners?: 'round' | 'square',
+): Promise<void> {
+  await expectScrollbarWidth(locator, 'auto');
+  const browser = locator.page().context().browser()?.browserType().name();
+  if (browser !== 'chromium') return;
+  await expect
+    .poll(() =>
+      locator.evaluate((el) => {
+        const s = getComputedStyle(el, '::-webkit-scrollbar-thumb');
+        return {
+          painted: s.backgroundColor !== 'rgba(0, 0, 0, 0)',
+          corners: s.borderTopLeftRadius === '0px' ? 'square' : 'round',
+        };
+      }),
+    )
+    .toEqual({ painted: true, corners: corners ?? expect.any(String) });
+}

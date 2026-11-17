@@ -58,8 +58,9 @@ import { ScrollFadeScrollAreaNext2DemoContainer } from './demos/scroll-fade-scro
         <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive on your box: it scrolls, the browser draws its
-          scrollbar. Tailwind&apos;s scrollbar-* classes change its look
-          (scrollbar-thumb-*, scrollbar-track-*, scrollbar-gutter-stable).
+          scrollbar. Its look is ui&apos;s scrollbars.css, as every scrollbar of
+          the page: change it on the box with the --sc-scrollbar-* variables
+          (e.g. [--sc-scrollbar-thumb:var(--color-primary)]).
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>

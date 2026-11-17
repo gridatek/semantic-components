@@ -64,6 +64,9 @@
     },
     "./styles/typeset.css": {
       "default": "./src/lib/styles/typeset.css"
+    },
+    "./styles/scrollbars.css": {
+      "default": "./src/lib/styles/scrollbars.css"
     }
   },
   "sideEffects": false,

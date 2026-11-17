@@ -1,6 +1,6 @@
 import { type Page } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
-import { box, expectScrollbarWidth } from '../../looks';
+import { box, expectStyledScrollbar } from '../../looks';
 import { expect, test } from '../../test';
 
 const demo = (name: string) =>
@@ -27,14 +27,8 @@ test('Usage: overflows down only; the browser’s scrollbar in the preset’s lo
   await expect(a).toHaveAttribute('data-overflow-y-end', '');
   await expect(a).not.toHaveAttribute('data-overflow-y-start');
   await expect(a).toHaveCSS('overflow-y', 'auto');
-  // Chromium draws ::-webkit-scrollbar: no scrollbar-width / -color set.
-  await expectScrollbarWidth(a, 'auto');
-  const thumb = await a.evaluate((el) => {
-    const s = getComputedStyle(el, '::-webkit-scrollbar-thumb');
-    return { radius: s.borderTopLeftRadius, color: s.backgroundColor };
-  });
-  expect(thumb.radius).not.toBe('0px');
-  expect(thumb.color).not.toBe('rgba(0, 0, 0, 0)');
+  // scrollbars.css's: nova's thumb, round.
+  await expectStyledScrollbar(a, 'round');
 });
 
 test('Keyboard: a tab stop while it overflows; End scrolls to the bottom', async ({
