@@ -18,7 +18,7 @@ import { RtlTocDemo } from './rtl-toc-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTocDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScToc,

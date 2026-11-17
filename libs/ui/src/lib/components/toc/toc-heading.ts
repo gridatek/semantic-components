@@ -34,7 +34,7 @@ export class ScTocHeading {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('scroll-mt-16', this.classInput()),
   );
 

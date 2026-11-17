@@ -18,7 +18,7 @@ import { BasicTocDemo } from './basic-toc-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTocDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScToc,
   ScTocHeading,

@@ -15,7 +15,7 @@ import { UsageCode } from '../../../../components/usage-code/usage-code';
   encapsulation: ViewEncapsulation.None,
 })
 export class TocUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScToc,
   ScTocHeading,

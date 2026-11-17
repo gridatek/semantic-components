@@ -11,7 +11,7 @@ import { cn } from 'cn';
 export class ScTocList {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col gap-2', this.classInput()),
   );
 }

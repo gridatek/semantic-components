@@ -18,7 +18,7 @@ import { LinksTocDemo } from './links-toc-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinksTocDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScToc, ScTocLink, ScTocList } from '@semantic-components/ui';
 
 /**

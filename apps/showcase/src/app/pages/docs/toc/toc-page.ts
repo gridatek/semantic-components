@@ -262,7 +262,7 @@ interface ApiRow {
   encapsulation: ViewEncapsulation.None,
 })
 export default class TocPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScToc, ScTocList, ScTocLink, ScTocHeading, ScTocScope,',
@@ -283,7 +283,7 @@ export default class TocPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScToc',
       selector: 'nav[scToc]',
@@ -315,7 +315,7 @@ export default class TocPage {
     },
   ];
 
-  protected readonly tocMembers = [
+  private readonly tocMembers = [
     {
       name: 'items()',
       type: 'ScTocItem[]',
@@ -335,7 +335,7 @@ export default class TocPage {
     },
   ];
 
-  protected readonly linkInputs: ApiRow[] = [
+  private readonly linkInputs: ApiRow[] = [
     {
       name: 'scTocLink',
       type: 'string',

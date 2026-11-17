@@ -50,7 +50,7 @@ export class ScTocLink {
     () => this.toc.activeId() === this.target(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-[0.8rem] no-underline transition-colors',
       this.active()
