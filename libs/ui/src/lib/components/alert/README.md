@@ -52,12 +52,12 @@ Screen readers watch a live region that already exists and announce what changes
 
 Each part takes `class`, merged over the preset.
 
-| Part                 | Selector               | Description                                                                                                                                                                |
-| -------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScAlert`            | `div[scAlert]`         | The alert; no role. Input `variant`: `'default'`, `'destructive'`, `'success'` or `'warning'` (the last two not shadcn's: the Toast's colours, `--success` / `--warning`). |
-| `ScAlertTitle`       | `[scAlertTitle]`       | The title, beside the icon.                                                                                                                                                |
-| `ScAlertDescription` | `[scAlertDescription]` | Muted text under the title; its links underlined.                                                                                                                          |
-| `ScAlertAction`      | `[scAlertAction]`      | A button in the end corner; the text keeps clear of it.                                                                                                                    |
+| Part                 | Selector               | Description                                                                                                                                                                      |
+| -------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScAlert`            | `div[scAlert]`         | The alert; no role. Input `variant`: `'default'`, `'destructive'`, `'success'` or `'warning'` (the last two not shadcn's: the Toast's colours, `--sc-success` / `--sc-warning`). |
+| `ScAlertTitle`       | `[scAlertTitle]`       | The title, beside the icon.                                                                                                                                                      |
+| `ScAlertDescription` | `[scAlertDescription]` | Muted text under the title; its links underlined.                                                                                                                                |
+| `ScAlertAction`      | `[scAlertAction]`      | A button in the end corner; the text keeps clear of it.                                                                                                                          |
 
 ## Styles
 

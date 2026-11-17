@@ -19,8 +19,8 @@ We started from shadcn's `typeset.css` and no longer follow it exactly. What's o
 
 - **The variables are the preset's**, on `:root` (shadcn sets them on `.typeset` in its file): each style's own `typeset-variables.css`, or your values.
 - **An element on its own** is set like one in a container: `scTypeset` marks it (`data-typeset`).
-- **The style's corners**: code blocks and images as its Code Block (`--typeset-radius`); inline code, keys and highlights as its Kbd (`--typeset-radius-inline`). shadcn's highlight has a fixed `0.2em`.
-- **Headings h1 to h4 take the style's weight, tracking and case**: `--typeset-heading-weight`, `--typeset-heading-tracking`, `--typeset-heading-case`. shadcn's Typeset has no such variables. They're 600, `normal` and `none` in every style but sera (uppercase, `0.05em`: its titles). **Writing your own values?** Set these three too: they have no fallback, and without `--typeset-heading-weight` headings lose their bold.
+- **The style's corners**: code blocks and images as its Code Block (`--sc-typeset-radius`); inline code, keys and highlights as its Kbd (`--sc-typeset-radius-inline`). shadcn's highlight has a fixed `0.2em`.
+- **Headings h1 to h4 take the style's weight, tracking and case**: `--sc-typeset-heading-weight`, `--sc-typeset-heading-tracking`, `--sc-typeset-heading-case`. shadcn's Typeset has no such variables. They're 600, `normal` and `none` in every style but sera (uppercase, `0.05em`: its titles). **Writing your own values?** Set these three too: they have no fallback, and without `--sc-typeset-heading-weight` headings lose their bold.
 
 The full list: "Deliberate divergences" in `docs/shadcn-style-reference.md`.
 
@@ -96,7 +96,7 @@ In rendered markdown you can rarely put a class on one element: a hook in your r
 | `h5`  | `0.875em`  | `1.5`       | 500    | muted                    |
 | `h6`  | `0.8125em` | `1.5`       | 500    | muted, uppercase, spaced |
 
-**Variables** — in your preset's file (`@semantic-components/presets/<style>/typeset-variables.css`, on `:where(:root)`): `--typeset-size`, `--typeset-leading`, `--typeset-flow` (space between blocks), `--typeset-font-body`, `--typeset-font-heading`, `--typeset-font-mono`, `--typeset-muted`, `--typeset-rule`, and the style's corners: `--typeset-radius` (code blocks, images: its Code Block's) and `--typeset-radius-inline`, `--typeset-heading-weight`, `--typeset-heading-tracking`, `--typeset-heading-case` (headings h1 to h4: sera's uppercase and wider, as its titles) (inline code, keys: its Kbd's). Override them on `:root`, any ancestor, or a container's preset class: yours win.
+**Variables** — in your preset's file (`@semantic-components/presets/<style>/typeset-variables.css`, on `:where(:root)`): `--typeset-size`, `--typeset-leading`, `--typeset-flow` (space between blocks), `--typeset-font-body`, `--typeset-font-heading`, `--typeset-font-mono`, `--typeset-muted`, `--typeset-rule`, and the style's corners: `--sc-typeset-radius` (code blocks, images: its Code Block's) and `--sc-typeset-radius-inline`, `--sc-typeset-heading-weight`, `--sc-typeset-heading-tracking`, `--sc-typeset-heading-case` (headings h1 to h4: sera's uppercase and wider, as its titles) (inline code, keys: its Kbd's). Override them on `:root`, any ancestor, or a container's preset class: yours win.
 
 **Classes:** `typeset` (the container), `not-typeset` (opts an element out; `data-not-typeset` too), `typeset-scroll` (a wide table scrolls in its own box).
 

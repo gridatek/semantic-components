@@ -178,7 +178,7 @@ export default class RadialChartPage {
       type: 'number',
       default: '—',
       description:
-        "Its ends' rounding, in px — unset, the style's (--chart-bar-radius, as the bars'; square in Lyra and Sera).",
+        "Its ends' rounding, in px — unset, the style's (--sc-chart-bar-radius, as the bars'; square in Lyra and Sera).",
     },
     {
       name: 'track',

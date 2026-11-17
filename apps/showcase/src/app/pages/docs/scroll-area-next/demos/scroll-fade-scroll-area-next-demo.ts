@@ -8,7 +8,7 @@ import {
   ScScrollAreaNextViewportContent,
 } from '@semantic-components/ui';
 
-/** The text fades out at an edge it continues past: a mask from the viewport's --scroll-area-overflow-y-start / -end. */
+/** The text fades out at an edge it continues past: a mask from the viewport's --sc-scroll-area-overflow-y-start / -end. */
 @Component({
   selector: 'app-scroll-fade-scroll-area-next-demo',
   imports: [
@@ -23,7 +23,7 @@ import {
     <div scScrollAreaNext scFrame class="h-48 w-96 max-w-full">
       <div
         scScrollAreaNextViewport
-        class="mask-linear-[to_bottom,transparent_0,black_min(40px,var(--scroll-area-overflow-y-start)),black_calc(100%_-_min(40px,var(--scroll-area-overflow-y-end,40px))),transparent_100%] mask-no-repeat"
+        class="mask-linear-[to_bottom,transparent_0,black_min(40px,var(--sc-scroll-area-overflow-y-start)),black_calc(100%_-_min(40px,var(--sc-scroll-area-overflow-y-end,40px))),transparent_100%] mask-no-repeat"
       >
         <div
           scScrollAreaNextViewportContent

@@ -175,7 +175,7 @@ test.describe('View Editor Demo', () => {
       const look = await document.evaluate((element) => {
         const probe = window.document.createElement('div');
         window.document.body.append(probe);
-        probe.style.borderTopLeftRadius = 'var(--typeset-radius)';
+        probe.style.borderTopLeftRadius = 'var(--sc-typeset-radius)';
         const corners = getComputedStyle(probe).borderTopLeftRadius;
         probe.remove();
         const h1 = element.querySelector('h1') as Element;

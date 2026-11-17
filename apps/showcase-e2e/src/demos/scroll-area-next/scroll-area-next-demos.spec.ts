@@ -129,7 +129,7 @@ test('Scroll fade: the viewport says how far from each edge it is', async ({
   const v = viewport(page);
   const end = () =>
     v.evaluate((el) =>
-      parseFloat(el.style.getPropertyValue('--scroll-area-overflow-y-end')),
+      parseFloat(el.style.getPropertyValue('--sc-scroll-area-overflow-y-end')),
     );
   await expect.poll(end).toBeGreaterThan(0);
   await v.evaluate((el) => el.scrollTo({ top: el.scrollHeight }));

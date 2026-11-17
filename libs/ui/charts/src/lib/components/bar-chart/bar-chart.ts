@@ -24,7 +24,7 @@ import {
 import { ScChartState, numberOf } from '../chart/chart-state';
 
 /**
- * Which corners are rounded — by how much is the style's (`--chart-bar-radius`,
+ * Which corners are rounded — by how much is the style's (`--sc-chart-bar-radius`,
  * set by the preset): all, the bar's end's two, its base's two, or none.
  */
 export type ScChartBarCorners = 'all' | 'end' | 'base' | 'none';
@@ -165,7 +165,7 @@ function shapeOf(
       >
         <svg:rect
           [class]="
-            bar.corners === 'none' ? '' : '[rx:var(--chart-bar-radius,0px)]'
+            bar.corners === 'none' ? '' : '[rx:var(--sc-chart-bar-radius,0px)]'
           "
           [attr.x]="bar.shape.x"
           [attr.y]="bar.shape.y"
@@ -201,7 +201,7 @@ export class ScChartBar implements ScChartSeriesLabels {
    * category (a series at 0 there leaves its corners to the next); and where
    * a bar sits on another, with `all`, each piece rounded all round,
    * touching: the join shows in their corners.
-   * How round is the style's: the preset sets `--chart-bar-radius`.
+   * How round is the style's: the preset sets `--sc-chart-bar-radius`.
    */
   readonly corners = input<ScChartBarCorners>('all');
   /** Instead of its color: `url(#gradient)`. */
@@ -218,7 +218,7 @@ export class ScChartBar implements ScChartSeriesLabels {
     if (background === false || background === 'false') return null;
     return cn(
       'fill-muted',
-      this.corners() === 'none' ? '' : '[rx:var(--chart-bar-radius,0px)]',
+      this.corners() === 'none' ? '' : '[rx:var(--sc-chart-bar-radius,0px)]',
       typeof background === 'string' ? background : '',
     );
   });

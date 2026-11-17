@@ -20,6 +20,6 @@ export const START_THUMB_CLASSES = [
 export const END_THUMB_CLASSES = [
   ...SHARED_THUMB_CLASSES,
   '[&::-webkit-slider-thumb]:-mt-1',
-  '[&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--muted)_var(--min-percent),var(--primary)_var(--min-percent)_var(--max-percent),var(--muted)_var(--max-percent))]',
-  '[&::-moz-range-track]:h-1 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-[linear-gradient(to_right,var(--muted)_var(--min-percent),var(--primary)_var(--min-percent)_var(--max-percent),var(--muted)_var(--max-percent))]',
+  '[&::-webkit-slider-runnable-track]:h-1 [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--muted)_var(--sc-range-slider-min),var(--primary)_var(--sc-range-slider-min)_var(--sc-range-slider-max),var(--muted)_var(--sc-range-slider-max))]',
+  '[&::-moz-range-track]:h-1 [&::-moz-range-track]:rounded-full [&::-moz-range-track]:bg-[linear-gradient(to_right,var(--muted)_var(--sc-range-slider-min),var(--primary)_var(--sc-range-slider-min)_var(--sc-range-slider-max),var(--muted)_var(--sc-range-slider-max))]',
 ] as const;

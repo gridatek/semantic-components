@@ -37,7 +37,7 @@ Place the dock yourself (`fixed bottom-4 left-1/2 -translate-x-1/2`…).
 
 Each item grows by its distance to the pointer along the dock — a smooth bell, `magnification` times at the pointer, none past `distance` — and really grows: its neighbours move aside, the dock grows from its base edge (`items-end`; vertical: `items-start`). Items are measured at rest, before any grows, so nothing shifts under the pointer. Focused from the keyboard, an item grows as if the pointer were on it. Touch does not magnify; nor does `prefers-reduced-motion`.
 
-The items' size is `--dock-item` (`2.75rem`); set it with a class (`[--dock-item:3.5rem]`). Icons take half of an item.
+The items' size is `--sc-dock-item` (`2.75rem`); set it with a class (`[--sc-dock-item:3.5rem]`). Icons take half of an item.
 
 ## Accessibility
 

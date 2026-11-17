@@ -194,11 +194,11 @@ export default class UiPage {
   --color-sidebar: var(--sidebar);
   --color-chart-5: var(--chart-5);
   /* Not shadcn's: the confetti's colors, as the charts' (bright: the charts' are grey). */
-  --color-confetti-1: var(--confetti-1);
-  --color-confetti-2: var(--confetti-2);
-  --color-confetti-3: var(--confetti-3);
-  --color-confetti-4: var(--confetti-4);
-  --color-confetti-5: var(--confetti-5);
+  --color-confetti-1: var(--sc-confetti-1);
+  --color-confetti-2: var(--sc-confetti-2);
+  --color-confetti-3: var(--sc-confetti-3);
+  --color-confetti-4: var(--sc-confetti-4);
+  --color-confetti-5: var(--sc-confetti-5);
   --color-chart-4: var(--chart-4);
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
@@ -208,8 +208,8 @@ export default class UiPage {
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   /* Not shadcn's: the toast's success and warning. */
-  --color-success: var(--success);
-  --color-warning: var(--warning);
+  --color-success: var(--sc-success);
+  --color-warning: var(--sc-warning);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -253,8 +253,8 @@ export default class UiPage {
   --destructive: oklch(0.52 0.245 27.325);
   /* Not shadcn's: the toast's success and warning text, 4.5:1 on the popover
      even at 90% opacity. */
-  --success: oklch(0.49 0.14 150);
-  --warning: oklch(0.52 0.15 49);
+  --sc-success: oklch(0.49 0.14 150);
+  --sc-warning: oklch(0.52 0.15 49);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -264,11 +264,11 @@ export default class UiPage {
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   /* Not shadcn's: the confetti's colors. */
-  --confetti-1: oklch(0.646 0.222 41.116);
-  --confetti-2: oklch(0.6 0.118 184.704);
-  --confetti-3: oklch(0.488 0.243 264.376);
-  --confetti-4: oklch(0.828 0.189 84.429);
-  --confetti-5: oklch(0.645 0.246 16.439);
+  --sc-confetti-1: oklch(0.646 0.222 41.116);
+  --sc-confetti-2: oklch(0.6 0.118 184.704);
+  --sc-confetti-3: oklch(0.488 0.243 264.376);
+  --sc-confetti-4: oklch(0.828 0.189 84.429);
+  --sc-confetti-5: oklch(0.645 0.246 16.439);
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -296,8 +296,8 @@ export default class UiPage {
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --success: oklch(0.792 0.209 151.711);
-  --warning: oklch(0.828 0.189 84.429);
+  --sc-success: oklch(0.792 0.209 151.711);
+  --sc-warning: oklch(0.828 0.189 84.429);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
@@ -306,11 +306,11 @@ export default class UiPage {
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --confetti-1: oklch(0.705 0.213 47.604);
-  --confetti-2: oklch(0.696 0.17 162.48);
-  --confetti-3: oklch(0.627 0.265 303.9);
-  --confetti-4: oklch(0.852 0.199 91.936);
-  --confetti-5: oklch(0.645 0.246 16.439);
+  --sc-confetti-1: oklch(0.705 0.213 47.604);
+  --sc-confetti-2: oklch(0.696 0.17 162.48);
+  --sc-confetti-3: oklch(0.627 0.265 303.9);
+  --sc-confetti-4: oklch(0.852 0.199 91.936);
+  --sc-confetti-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);

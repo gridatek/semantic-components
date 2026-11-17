@@ -59,9 +59,9 @@ interface ScSankeyChartNode {
       />
     }
     @for (node of nodes(); track node.name) {
-      <!-- Its corners: the style's, as the bars' (the preset sets --chart-bar-radius). -->
+      <!-- Its corners: the style's, as the bars' (the preset sets --sc-chart-bar-radius). -->
       <svg:rect
-        class="[rx:var(--chart-bar-radius,0px)]"
+        class="[rx:var(--sc-chart-bar-radius,0px)]"
         [attr.x]="node.x"
         [attr.y]="node.y"
         [attr.width]="node.width"

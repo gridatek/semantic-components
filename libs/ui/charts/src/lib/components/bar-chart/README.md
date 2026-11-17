@@ -62,7 +62,7 @@ The plot's `layout="vertical"` puts the categories down the side and the bars ac
 
 ## Corners
 
-`corners` says which corners are rounded; how round they are is the style's: the preset sets `--chart-bar-radius` on the chart (its `chart.chart`), from the theme's `--radius` — nova, vega and mira `--radius-sm` (6px with the default radius), maia `--radius-lg`, luma and rhea `--radius-xl`, lyra and sera square. So the bars follow the theme's radius too. Set it yourself on a chart: `class="[--chart-bar-radius:4px]"`.
+`corners` says which corners are rounded; how round they are is the style's: the preset sets `--sc-chart-bar-radius` on the chart (its `chart.chart`), from the theme's `--radius` — nova, vega and mira `--radius-sm` (6px with the default radius), maia `--radius-lg`, luma and rhea `--radius-xl`, lyra and sera square. So the bars follow the theme's radius too. Set it yourself on a chart: `class="[--sc-chart-bar-radius:4px]"`.
 
 In a `stack`, the corners are the stack's: it rounds as one bar, wherever it ends in each category. `corners="end"` on every series of a stack rounds the top of each column, whichever series is on top there — a series at 0 in a category leaves its corners to the next one down (shadcn rounds per series, so a column whose top series is 0 is square there). `all` (the default) rounds each piece of a stack all round, touching: their rounded corners show the join, so they read one on the other, and no px are lost (square in Lyra and Sera, the radius 0). `end` keeps the joins square.
 

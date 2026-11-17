@@ -154,7 +154,7 @@ export default class FunnelChartPage {
       type: 'number',
       default: '—',
       description:
-        "its stages' corners' rounding, in px — unset, the style's (--chart-bar-radius, as the bars'; square in Lyra and Sera)",
+        "its stages' corners' rounding, in px — unset, the style's (--sc-chart-bar-radius, as the bars'; square in Lyra and Sera)",
     },
     {
       name: 'isAnimationActive',

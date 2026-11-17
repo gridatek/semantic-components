@@ -21,10 +21,10 @@
       --color-border,
       color-mix(in oklab, currentColor 20%, transparent)
     );
-    --typeset-radius: 0;
-    --typeset-radius-inline: 0;
-    --typeset-heading-weight: 600;
-    --typeset-heading-tracking: normal;
-    --typeset-heading-case: none;
+    --sc-typeset-radius: 0;
+    --sc-typeset-radius-inline: 0;
+    --sc-typeset-heading-weight: 600;
+    --sc-typeset-heading-tracking: normal;
+    --sc-typeset-heading-case: none;
   }
 }

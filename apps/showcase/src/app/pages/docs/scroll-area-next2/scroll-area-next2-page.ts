@@ -144,7 +144,7 @@ export default class ScrollAreaNext2Page {
       name: 'ScScrollAreaNext2',
       selector: 'div[scScrollAreaNext2]',
       description:
-        "Scrolls, with the browser's scrollbar in the preset's look; a CdkScrollable (overlays follow its scroll); a tab stop while it overflows; data-has-overflow-x / -y, data-overflow-{x,y}-{start,end}, --scroll-area-overflow-{x,y}-{start,end}.",
+        "Scrolls, with the browser's scrollbar in the preset's look; a CdkScrollable (overlays follow its scroll); a tab stop while it overflows; data-has-overflow-x / -y, data-overflow-{x,y}-{start,end}, --sc-scroll-area-overflow-{x,y}-{start,end}.",
     },
   ];
 }

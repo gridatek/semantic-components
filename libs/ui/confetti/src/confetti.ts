@@ -32,11 +32,11 @@ export interface ScConfettiFireworksOptions extends ScConfettiOptions {
 
 /** The theme's confetti colours, the defaults (as shadcn's `--chart-*`). */
 const CONFETTI = [
-  '--confetti-1',
-  '--confetti-2',
-  '--confetti-3',
-  '--confetti-4',
-  '--confetti-5',
+  '--sc-confetti-1',
+  '--sc-confetti-2',
+  '--sc-confetti-3',
+  '--sc-confetti-4',
+  '--sc-confetti-5',
 ];
 
 /**
@@ -174,7 +174,7 @@ export class ScConfetti {
     if (!colors.length && isDevMode() && !this.warned) {
       this.warned = true;
       console.error(
-        'ScConfetti: no theme colors — define --confetti-1 … --confetti-5 in your styles.css (see the confetti README), or pass colors. Using the colors of canvas-confetti.',
+        'ScConfetti: no theme colors — define --sc-confetti-1 … --sc-confetti-5 in your styles.css (see the confetti README), or pass colors. Using the colors of canvas-confetti.',
       );
     }
     return colors;

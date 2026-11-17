@@ -7,7 +7,7 @@
  * looks as it will once published. Here, only what Typeset doesn't know:
  * writing (placeholder, selection, search, selected nodes), Tiptap's task
  * lists, tables with cells to write in, and highlights (their colours,
- * --editor-highlight-1 to -5, are the theme's: your styles.css). Plain CSS, on
+ * --sc-editor-highlight-1 to -5, are the theme's: your styles.css). Plain CSS, on
  * the theme's tokens: imported or linked as it is.
  */
 
@@ -158,7 +158,7 @@
 
 /* Selected nodes other than images and code blocks: the style's inline corners */
 [data-slot='editor-document'] .ProseMirror-selectednode:not(img):not(pre) {
-  border-radius: var(--typeset-radius-inline);
+  border-radius: var(--sc-typeset-radius-inline);
   background-color: var(--accent);
 }
 
@@ -189,7 +189,7 @@
   border-collapse: separate;
   border-spacing: 0;
   border: 0;
-  border-radius: var(--typeset-radius);
+  border-radius: var(--sc-typeset-radius);
   outline: 1px solid var(--border);
   outline-offset: -1px;
 }
@@ -218,19 +218,19 @@
 
 /* The corner cells follow the frame's corners (their tint, their selection). */
 [data-slot='editor-document'] tr:first-child > :first-child {
-  border-start-start-radius: var(--typeset-radius);
+  border-start-start-radius: var(--sc-typeset-radius);
 }
 
 [data-slot='editor-document'] tr:first-child > :last-child {
-  border-start-end-radius: var(--typeset-radius);
+  border-start-end-radius: var(--sc-typeset-radius);
 }
 
 [data-slot='editor-document'] tr:last-child > :first-child {
-  border-end-start-radius: var(--typeset-radius);
+  border-end-start-radius: var(--sc-typeset-radius);
 }
 
 [data-slot='editor-document'] tr:last-child > :last-child {
-  border-end-end-radius: var(--typeset-radius);
+  border-end-end-radius: var(--sc-typeset-radius);
 }
 
 [data-slot='editor-document'] th {
@@ -280,7 +280,7 @@
 
 /* Highlights: yellow unless a colour is given, across line breaks */
 [data-slot='editor-document'] mark {
-  background-color: var(--editor-highlight-1);
+  background-color: var(--sc-editor-highlight-1);
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
@@ -293,17 +293,17 @@
 
 /*
  * Search matches, in the style's inline corners (its inline code's), in the
- * theme's colours (--editor-search-match, --editor-search-current: your
+ * theme's colours (--sc-editor-search-match, --sc-editor-search-current: your
  * styles.css). The current one: its own colour and an underline — not colour
  * alone — in a shade of it towards the text.
  */
 [data-slot='editor-document'] .find-and-replace-result {
-  border-radius: var(--typeset-radius-inline);
-  background-color: var(--editor-search-match);
+  border-radius: var(--sc-typeset-radius-inline);
+  background-color: var(--sc-editor-search-match);
 }
 
 [data-slot='editor-document'] .find-and-replace-result-current {
-  background-color: var(--editor-search-current);
+  background-color: var(--sc-editor-search-current);
   box-shadow: inset 0 -2px 0
-    color-mix(in oklch, var(--editor-search-current), var(--foreground) 50%);
+    color-mix(in oklch, var(--sc-editor-search-current), var(--foreground) 50%);
 }

@@ -17,8 +17,8 @@ import { ScRangeSliderStartThumb } from './range-slider-start-thumb';
   selector: 'div[scRangeSlider]',
   host: {
     '[class]': 'class()',
-    '[style.--min-percent]': 'startPercentCss()',
-    '[style.--max-percent]': 'endPercentCss()',
+    '[style.--sc-range-slider-min]': 'startPercentCss()',
+    '[style.--sc-range-slider-max]': 'endPercentCss()',
     '(pointerdown)': 'onPointerDown($event)',
   },
 })

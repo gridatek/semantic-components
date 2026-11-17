@@ -13,17 +13,17 @@ import { ScScrollAreaNext } from './scroll-area-next';
 /**
  * The element that scrolls: its own scrollbar hidden (the scroll area draws
  * them), in the tab order while it overflows, ringed when focused. Sets
- * `--scroll-area-overflow-x-start` / `-end` and `-y-start` / `-end` — how far
+ * `--sc-scroll-area-overflow-x-start` / `-end` and `-y-start` / `-end` — how far
  * from each edge it is scrolled, for a fade. As Base UI's ScrollArea.Viewport.
  */
 @Directive({
   selector: 'div[scScrollAreaNextViewport]',
   host: {
     '[attr.tabindex]': 'overflows() ? 0 : null',
-    '[style.--scroll-area-overflow-x-start.px]': 'area.overflowXStart()',
-    '[style.--scroll-area-overflow-x-end.px]': 'area.overflowXEnd()',
-    '[style.--scroll-area-overflow-y-start.px]': 'area.overflowYStart()',
-    '[style.--scroll-area-overflow-y-end.px]': 'area.overflowYEnd()',
+    '[style.--sc-scroll-area-overflow-x-start.px]': 'area.overflowXStart()',
+    '[style.--sc-scroll-area-overflow-x-end.px]': 'area.overflowXEnd()',
+    '[style.--sc-scroll-area-overflow-y-start.px]': 'area.overflowYStart()',
+    '[style.--sc-scroll-area-overflow-y-end.px]': 'area.overflowYEnd()',
     '[class]': 'class()',
     '(scroll)': 'area.scrolled()',
   },

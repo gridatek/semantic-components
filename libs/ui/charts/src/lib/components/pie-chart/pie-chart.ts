@@ -113,7 +113,7 @@ export class ScChartPie implements ScChartSeriesLabels {
   readonly outerRadius = input(1);
   /** The gap between slices, in degrees. */
   readonly padAngle = input(0);
-  /** Its slices' corners' rounding, in px. Unset: the style's (the preset's `--chart-bar-radius`, as the bars'). */
+  /** Its slices' corners' rounding, in px. Unset: the style's (the preset's `--sc-chart-bar-radius`, as the bars'). */
   readonly cornerRadius = input<number | undefined>(undefined);
   /** The line between slices, in px (0: none). */
   readonly strokeWidth = input(2);

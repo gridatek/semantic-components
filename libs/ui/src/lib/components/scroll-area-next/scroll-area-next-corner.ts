@@ -19,7 +19,7 @@ export class ScScrollAreaNextCorner {
 
   private readonly class = computed(() =>
     cn(
-      'absolute end-0 bottom-0 size-(--scroll-area-corner-size)',
+      'absolute end-0 bottom-0 size-(--sc-scroll-area-corner-size)',
       this.classInput(),
     ),
   );

@@ -42,7 +42,7 @@ Any CSS colour goes in — from outside, or typed in the field: hex, `rgb()`, `h
 
 A `[formField]`: `required()` in your schema; `disabled` from it. The picker keeps its hue (and saturation) through greys and black, where the colour has none.
 
-Read: `hsva()` (hue 0–360, saturation and value 0–100, alpha 0–1), `rgba()`, `css()` (also `--color` on the picker). Methods: `set({ h, s, v, a })`, `setColor(css)`, `parse(css)`, `pickFromScreen()`; `canPickFromScreen()`.
+Read: `hsva()` (hue 0–360, saturation and value 0–100, alpha 0–1), `rgba()`, `css()` (also `--sc-color-picker-value` on the picker). Methods: `set({ h, s, v, a })`, `setColor(css)`, `parse(css)`, `pickFromScreen()`; `canPickFromScreen()`.
 
 ## Keyboard
 

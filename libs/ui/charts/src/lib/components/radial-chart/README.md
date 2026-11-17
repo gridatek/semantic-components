@@ -36,7 +36,7 @@ A series as radial bars: a ring per row, the first innermost, its value as an ar
 | `colorBy`           | `'key' \| 'category'`: its key's color, or each row's                                                                                                               | `'key'`    |
 | `innerRadius`       | `number`: where the rings start, a share of the radius                                                                                                              | `0.3`      |
 | `outerRadius`       | `number`: where they end                                                                                                                                            | `1`        |
-| `cornerRadius`      | `number`: its ends' rounding, in px — unset, the style's (`--chart-bar-radius`, as the bars'; square in Lyra and Sera)                                              | —          |
+| `cornerRadius`      | `number`: its ends' rounding, in px — unset, the style's (`--sc-chart-bar-radius`, as the bars'; square in Lyra and Sera)                                           | —          |
 | `track`             | `boolean`: each ring's full length behind it                                                                                                                        | `false`    |
 | `isAnimationActive` | `boolean`: its arcs grow along their rings when it appears (Recharts' entrance)                                                                                     | `true`     |
 | `animationBegin`    | `number`: the wait before it starts, in ms                                                                                                                          | `0`        |

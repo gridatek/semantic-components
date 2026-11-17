@@ -160,9 +160,9 @@ An update replaces the fields it gives and keeps the others; the timer starts ag
 | Variant   | Looks                                              |
 | --------- | -------------------------------------------------- |
 | `default` | The popover's colours                              |
-| `success` | Its title, description and icon in `--success`     |
+| `success` | Its title, description and icon in `--sc-success`  |
 | `info`    | As `default`; your icon tells it                   |
-| `warning` | Its title, description and icon in `--warning`     |
+| `warning` | Its title, description and icon in `--sc-warning`  |
 | `error`   | Its title, description and icon in `--destructive` |
 | `loading` | As `default`; `scToastIcon` spins. Stays           |
 

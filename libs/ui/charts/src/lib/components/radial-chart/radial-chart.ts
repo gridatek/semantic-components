@@ -105,7 +105,7 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
   readonly innerRadius = input(0.3);
   /** Where they end, as a share of the radius. */
   readonly outerRadius = input(1);
-  /** Its ends' rounding, in px. Unset: the style's (the preset's `--chart-bar-radius`, as the bars'). */
+  /** Its ends' rounding, in px. Unset: the style's (the preset's `--sc-chart-bar-radius`, as the bars'). */
   readonly cornerRadius = input<number | undefined>(undefined);
   /** Each ring's full length behind it. */
   readonly track = input(false, { transform: booleanAttribute });
