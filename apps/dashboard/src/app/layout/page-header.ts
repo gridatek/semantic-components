@@ -35,13 +35,15 @@ export interface Crumb {
   template: `
     <div class="flex min-w-0 flex-col gap-1">
       <h1 class="text-2xl font-semibold tracking-tight">{{ title() }}</h1>
-      <nav scBreadcrumb aria-label="Breadcrumb">
+      <nav i18n-aria-label scBreadcrumb aria-label="Breadcrumb">
         <ol scBreadcrumbList>
-          <li scBreadcrumbItem>
+          <li i18n scBreadcrumbItem>
             <a scBreadcrumbLink routerLink="/">Home</a>
           </li>
           @for (crumb of trail(); track crumb.label) {
-            <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
+            <li scBreadcrumbSeparator>
+              <svg siChevronRightIcon class="rtl:-scale-x-100"></svg>
+            </li>
             <li scBreadcrumbItem>
               @if (crumb.url) {
                 <a scBreadcrumbLink [routerLink]="crumb.url">{{

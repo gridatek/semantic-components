@@ -38,6 +38,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
 import { day, money } from '../../shared/format';
+import { label } from '../../shared/labels';
 import {
   INVOICE_STATUSES,
   type Invoice,
@@ -80,12 +81,13 @@ import {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Invoices"
-      [trail]="[{ label: 'Apps' }, { label: 'Invoices' }]"
+      [trail]="[{ label: t.apps }, { label: t.invoices }]"
     >
       <a scLink variant="button" routerLink="/apps/invoice/create">
         <svg siPlusIcon></svg>
-        New Invoice
+        <ng-container i18n>New Invoice</ng-container>
       </a>
     </app-page-header>
 
@@ -107,6 +109,8 @@ import {
         <div class="flex flex-wrap items-center gap-3">
           <div scInputGroup class="max-w-xs">
             <input
+              i18n-aria-label
+              i18n-placeholder
               scInput
               type="search"
               placeholder="Search invoices"
@@ -117,6 +121,7 @@ import {
             <div scInputGroupAddon><svg siSearchIcon></svg></div>
           </div>
           <div
+            i18n-aria-label
             scToggleGroup
             variant="outline"
             size="sm"
@@ -124,9 +129,9 @@ import {
             [value]="[status()]"
             (valueChange)="status.set($event[0] ?? 'All')"
           >
-            <button scToggleGroupItem value="All">All</button>
+            <button i18n scToggleGroupItem value="All">All</button>
             @for (s of statuses; track s) {
-              <button scToggleGroupItem [value]="s">{{ s }}</button>
+              <button scToggleGroupItem [value]="s">{{ labelOf(s) }}</button>
             }
           </div>
         </div>
@@ -134,13 +139,15 @@ import {
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th scTableHeaderCell>Invoice</th>
-                <th scTableHeaderCell>Client</th>
-                <th scTableHeaderCell>Issued</th>
-                <th scTableHeaderCell>Due</th>
-                <th scTableHeaderCell class="text-end">Total</th>
-                <th scTableHeaderCell>Status</th>
-                <th scTableHeaderCell><span class="sr-only">Actions</span></th>
+                <th i18n scTableHeaderCell>Invoice</th>
+                <th i18n scTableHeaderCell>Client</th>
+                <th i18n scTableHeaderCell>Issued</th>
+                <th i18n scTableHeaderCell>Due</th>
+                <th i18n scTableHeaderCell class="text-end">Total</th>
+                <th i18n scTableHeaderCell>Status</th>
+                <th i18n scTableHeaderCell>
+                  <span class="sr-only">Actions</span>
+                </th>
               </tr>
             </thead>
             <tbody scTableBody>
@@ -168,7 +175,7 @@ import {
                   </td>
                   <td scTableCell>
                     <span scBadge [variant]="badgeOf(invoice.status)">{{
-                      invoice.status
+                      labelOf(invoice.status)
                     }}</span>
                   </td>
                   <td scTableCell>
@@ -180,7 +187,7 @@ import {
                         [routerLink]="['/apps/invoice/detail', invoice.id]"
                       >
                         <svg siEyeIcon></svg>
-                        <span class="sr-only">View {{ invoice.id }}</span>
+                        <span i18n class="sr-only">View {{ invoice.id }}</span>
                       </a>
                       <a
                         scLink
@@ -189,7 +196,7 @@ import {
                         [routerLink]="['/apps/invoice/edit', invoice.id]"
                       >
                         <svg siPencilIcon></svg>
-                        <span class="sr-only">Edit {{ invoice.id }}</span>
+                        <span i18n class="sr-only">Edit {{ invoice.id }}</span>
                       </a>
                       <button
                         scButton
@@ -198,7 +205,9 @@ import {
                         (click)="remove(invoice)"
                       >
                         <svg siTrash2Icon></svg>
-                        <span class="sr-only">Delete {{ invoice.id }}</span>
+                        <span i18n class="sr-only"
+                          >Delete {{ invoice.id }}</span
+                        >
                       </button>
                     </div>
                   </td>
@@ -206,6 +215,7 @@ import {
               } @empty {
                 <tr scTableRow>
                   <td
+                    i18n
                     scTableCell
                     colspan="7"
                     class="text-muted-foreground h-24 text-center"
@@ -224,6 +234,13 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class InvoiceListPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    apps: $localize`Apps`,
+    invoices: $localize`Invoices`,
+  };
+
   private readonly store = inject(InvoiceStore);
   private readonly toaster = inject(ScToaster);
   private readonly statuses = INVOICE_STATUSES;
@@ -250,10 +267,10 @@ export class InvoiceListPage {
         .filter((i) => !status || i.status === status)
         .reduce((total, i) => total + totalOf(i), 0);
     return [
-      { label: 'Total invoiced', amount: sum() },
-      { label: 'Paid', amount: sum('Paid') },
-      { label: 'Pending', amount: sum('Pending') },
-      { label: 'Overdue', amount: sum('Overdue') },
+      { label: $localize`Total invoiced`, amount: sum() },
+      { label: $localize`Paid`, amount: sum('Paid') },
+      { label: $localize`Pending`, amount: sum('Pending') },
+      { label: $localize`Overdue`, amount: sum('Overdue') },
     ];
   });
   private readonly total = totalOf;

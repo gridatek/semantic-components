@@ -52,10 +52,9 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ME, PEOPLE, type Person } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { dayTime, initials } from '../../shared/format';
+import { LOCALE, dayTime, initials } from '../../shared/format';
 
 type Folder = 'inbox' | 'sent' | 'drafts' | 'spam' | 'trash';
-type Label = 'Work' | 'Personal' | 'Social';
 
 interface Mail {
   readonly id: number;
@@ -66,7 +65,7 @@ interface Mail {
   readonly folder: Folder;
   readonly read: boolean;
   readonly starred: boolean;
-  readonly label?: Label;
+  readonly label?: string;
   readonly attachment?: { readonly name: string; readonly icon: string };
 }
 
@@ -80,7 +79,7 @@ const MAILS: readonly Mail[] = [
     folder: 'inbox',
     read: false,
     starred: true,
-    label: 'Work',
+    label: $localize`Work`,
     attachment: {
       name: 'pricing-copy.fig',
       icon: 'images/files/icon-figma.svg',
@@ -95,7 +94,7 @@ const MAILS: readonly Mail[] = [
     folder: 'inbox',
     read: false,
     starred: false,
-    label: 'Work',
+    label: $localize`Work`,
   },
   {
     id: 3,
@@ -106,7 +105,7 @@ const MAILS: readonly Mail[] = [
     folder: 'inbox',
     read: true,
     starred: true,
-    label: 'Work',
+    label: $localize`Work`,
   },
   {
     id: 4,
@@ -117,7 +116,7 @@ const MAILS: readonly Mail[] = [
     folder: 'inbox',
     read: true,
     starred: false,
-    label: 'Personal',
+    label: $localize`Personal`,
   },
   {
     id: 5,
@@ -128,7 +127,7 @@ const MAILS: readonly Mail[] = [
     folder: 'inbox',
     read: true,
     starred: false,
-    label: 'Work',
+    label: $localize`Work`,
     attachment: {
       name: 'support-april.pdf',
       icon: 'images/files/icon-adobe.svg',
@@ -143,7 +142,7 @@ const MAILS: readonly Mail[] = [
     folder: 'inbox',
     read: true,
     starred: false,
-    label: 'Social',
+    label: $localize`Social`,
   },
   {
     id: 7,
@@ -178,12 +177,12 @@ const MAILS: readonly Mail[] = [
 ];
 
 const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
-  { value: 'inbox', label: 'Inbox' },
-  { value: 'starred', label: 'Starred' },
-  { value: 'sent', label: 'Sent' },
-  { value: 'drafts', label: 'Drafts' },
-  { value: 'spam', label: 'Spam' },
-  { value: 'trash', label: 'Trash' },
+  { value: 'inbox', label: $localize`Inbox` },
+  { value: 'starred', label: $localize`Starred` },
+  { value: 'sent', label: $localize`Sent` },
+  { value: 'drafts', label: $localize`Drafts` },
+  { value: 'spam', label: $localize`Spam` },
+  { value: 'trash', label: $localize`Trash` },
 ];
 
 /** Email (Pro): folders, the list, the message, writing one. */
@@ -234,18 +233,23 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Email"
-      [trail]="[{ label: 'Apps' }, { label: 'Email' }]"
+      [trail]="[{ label: t.apps }, { label: t.email }]"
     />
 
     <div
       class="grid min-h-[36rem] gap-4 lg:h-[calc(100svh-14rem)] lg:grid-cols-[13rem_22rem_1fr]"
     >
       <div scCard class="p-3">
-        <nav class="flex flex-col gap-1" aria-label="Mail folders">
+        <nav
+          i18n-aria-label
+          class="flex flex-col gap-1"
+          aria-label="Mail folders"
+        >
           <button scButton class="mb-2" (click)="compose()">
             <svg siPencilIcon></svg>
-            Compose
+            <ng-container i18n>Compose</ng-container>
           </button>
           @for (item of folders; track item.value) {
             <button
@@ -279,6 +283,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
               {{ item.label }}
               @if (unreadIn(item.value); as unread) {
                 <span
+                  i18n
                   class="text-muted-foreground ms-auto text-xs tabular-nums"
                 >
                   {{ unread }}<span class="sr-only"> unread</span>
@@ -293,6 +298,8 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
         <div class="px-4">
           <div scInputGroup>
             <input
+              i18n-aria-label
+              i18n-placeholder
               scInput
               type="search"
               placeholder="Search mail"
@@ -321,7 +328,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
                     <span
                       class="bg-primary size-2 shrink-0 rounded-full"
                     ></span>
-                    <span class="sr-only">Unread:</span>
+                    <span i18n class="sr-only">Unread:</span>
                   }
                   <span
                     class="truncate text-sm"
@@ -349,7 +356,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
               </button>
             </li>
           } @empty {
-            <li class="text-muted-foreground p-6 text-center text-sm">
+            <li i18n class="text-muted-foreground p-6 text-center text-sm">
               Nothing here.
             </li>
           }
@@ -366,7 +373,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
               (click)="reply(mail)"
             >
               <svg siReplyIcon></svg>
-              <span class="sr-only">Reply</span>
+              <span i18n class="sr-only">Reply</span>
             </button>
             <button
               scToggle
@@ -375,7 +382,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
               (pressedChange)="star(mail.id)"
             >
               <svg siStarIcon></svg>
-              <span class="sr-only">Starred</span>
+              <span i18n class="sr-only">Starred</span>
             </button>
             <button
               scButton
@@ -384,7 +391,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
               (click)="markUnread(mail.id)"
             >
               <svg siMailIcon></svg>
-              <span class="sr-only">Mark as unread</span>
+              <span i18n class="sr-only">Mark as unread</span>
             </button>
             <button
               scButton
@@ -393,7 +400,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
               (click)="archive(mail.id)"
             >
               <svg siArchiveIcon></svg>
-              <span class="sr-only">Move to inbox</span>
+              <span i18n class="sr-only">Move to inbox</span>
             </button>
             <button
               scButton
@@ -404,7 +411,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
             >
               <svg siTrash2Icon></svg>
               <span class="sr-only">{{
-                mail.folder === 'trash' ? 'Delete forever' : 'Delete'
+                mail.folder === 'trash' ? t.deleteForever : t.delete
               }}</span>
             </button>
           </div>
@@ -439,8 +446,8 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
         } @else {
           <div scEmpty class="h-full">
             <div scEmptyHeader>
-              <h2 scEmptyTitle>No message open</h2>
-              <div scEmptyDescription>Pick one from the list.</div>
+              <h2 i18n scEmptyTitle>No message open</h2>
+              <div i18n scEmptyDescription>Pick one from the list.</div>
             </div>
           </div>
         }
@@ -452,15 +459,15 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
         <div scDialog class="sm:max-w-lg">
           <button scDialogClose>
             <svg siXIcon></svg>
-            <span class="sr-only">Close</span>
+            <span i18n class="sr-only">Close</span>
           </button>
           <div scDialogHeader>
-            <h2 scDialogTitle>New Message</h2>
+            <h2 i18n scDialogTitle>New Message</h2>
           </div>
           <form id="compose" (submit)="send($event)">
             <div scFieldGroup>
               <div scField>
-                <label scLabel>To</label>
+                <label i18n scLabel>To</label>
                 <input
                   scInput
                   type="email"
@@ -469,11 +476,11 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
                 />
               </div>
               <div scField>
-                <label scLabel>Subject</label>
+                <label i18n scLabel>Subject</label>
                 <input scInput [formField]="draftForm.subject" />
               </div>
               <div scField>
-                <label scLabel>Message</label>
+                <label i18n scLabel>Message</label>
                 <textarea
                   scTextarea
                   rows="8"
@@ -483,12 +490,12 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
             </div>
           </form>
           <div scDialogFooter>
-            <button scDialogClose variant="outline" size="default">
+            <button i18n scDialogClose variant="outline" size="default">
               Cancel
             </button>
             <button scButton type="submit" form="compose">
               <svg siSendIcon></svg>
-              Send
+              <ng-container i18n>Send</ng-container>
             </button>
           </div>
         </div>
@@ -499,6 +506,14 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class EmailPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    apps: $localize`Apps`,
+    email: $localize`Email`,
+    deleteForever: $localize`Delete forever`,
+    delete: $localize`Delete`,
+  };
+
   private readonly toaster = inject(ScToaster);
   private readonly folders = FOLDERS;
   private readonly mails = signal<readonly Mail[]>(MAILS);
@@ -549,7 +564,7 @@ export class EmailPage {
   private readonly when = dayTime;
 
   private shortDate(iso: string): string {
-    return Temporal.PlainDate.from(iso.slice(0, 10)).toLocaleString('en-US', {
+    return Temporal.PlainDate.from(iso.slice(0, 10)).toLocaleString(LOCALE, {
       month: 'short',
       day: 'numeric',
     });
@@ -588,16 +603,16 @@ export class EmailPage {
 
   private archive(id: number): void {
     this.change(id, { folder: 'inbox' });
-    this.toaster.show({ title: 'Moved to the inbox' });
+    this.toaster.show({ title: $localize`Moved to the inbox` });
   }
 
   private remove(mail: Mail): void {
     if (mail.folder === 'trash') {
       this.mails.update((mails) => mails.filter((m) => m.id !== mail.id));
-      this.toaster.show({ title: 'Deleted forever' });
+      this.toaster.show({ title: $localize`Deleted forever` });
     } else {
       this.change(mail.id, { folder: 'trash' });
-      this.toaster.show({ title: 'Moved to the trash' });
+      this.toaster.show({ title: $localize`Moved to the trash` });
     }
     this.openId.set(null);
   }
@@ -638,6 +653,6 @@ export class EmailPage {
       ...mails,
     ]);
     this.composing.set(false);
-    this.toaster.show({ variant: 'success', title: 'Message sent' });
+    this.toaster.show({ variant: 'success', title: $localize`Message sent` });
   }
 }

@@ -55,7 +55,7 @@ import {
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
-import { initials } from '../../shared/format';
+import { axisLabel, initials } from '../../shared/format';
 
 const ATTENDANCE = [
   { day: 'Mon', present: 1162, absent: 78 },
@@ -66,47 +66,62 @@ const ATTENDANCE = [
 ];
 
 const EXAMS = [
-  { subject: 'Mathematics', grade: 'Grade 10', date: 'May 4', room: 'Hall A' },
-  { subject: 'Physics', grade: 'Grade 11', date: 'May 6', room: 'Lab 2' },
   {
-    subject: 'English Literature',
-    grade: 'Grade 9',
-    date: 'May 7',
-    room: 'Room 14',
+    subject: $localize`Mathematics`,
+    grade: $localize`Grade 10`,
+    date: 'May 4',
+    room: $localize`Hall A`,
   },
-  { subject: 'History', grade: 'Grade 12', date: 'May 11', room: 'Hall B' },
+  {
+    subject: $localize`Physics`,
+    grade: $localize`Grade 11`,
+    date: 'May 6',
+    room: $localize`Lab 2`,
+  },
+  {
+    subject: $localize`English Literature`,
+    grade: $localize`Grade 9`,
+    date: 'May 7',
+    room: $localize`Room 14`,
+  },
+  {
+    subject: $localize`History`,
+    grade: $localize`Grade 12`,
+    date: 'May 11',
+    room: $localize`Hall B`,
+  },
 ];
 
 const STUDENTS = [
-  { personId: 6, grade: 'Grade 12', average: 96.4, attendance: '99%' },
-  { personId: 2, grade: 'Grade 11', average: 94.8, attendance: '97%' },
-  { personId: 9, grade: 'Grade 12', average: 93.1, attendance: '98%' },
-  { personId: 4, grade: 'Grade 10', average: 92.7, attendance: '96%' },
-  { personId: 7, grade: 'Grade 9', average: 91.9, attendance: '100%' },
+  { personId: 6, grade: $localize`Grade 12`, average: 96.4, attendance: '99%' },
+  { personId: 2, grade: $localize`Grade 11`, average: 94.8, attendance: '97%' },
+  { personId: 9, grade: $localize`Grade 12`, average: 93.1, attendance: '98%' },
+  { personId: 4, grade: $localize`Grade 10`, average: 92.7, attendance: '96%' },
+  { personId: 7, grade: $localize`Grade 9`, average: 91.9, attendance: '100%' },
 ];
 
 const NOTICES = [
   {
-    title: 'Science fair',
-    text: 'Projects go up in the gym on Friday; parents welcome from 3 pm.',
+    title: $localize`Science fair`,
+    text: $localize`Projects go up in the gym on Friday; parents welcome from 3 pm.`,
     at: '2026-04-24',
     status: 'done' as const,
   },
   {
-    title: 'Parent–teacher meetings',
-    text: 'Book a slot with each teacher through the portal.',
+    title: $localize`Parent–teacher meetings`,
+    text: $localize`Book a slot with each teacher through the portal.`,
     at: '2026-04-30',
     status: 'current' as const,
   },
   {
-    title: 'Exam week',
-    text: 'Timetables are pinned outside the staff room.',
+    title: $localize`Exam week`,
+    text: $localize`Timetables are pinned outside the staff room.`,
     at: '2026-05-04',
     status: 'upcoming' as const,
   },
   {
-    title: 'Sports day',
-    text: 'On the field from 9 am; bring water and a hat.',
+    title: $localize`Sports day`,
+    text: $localize`On the field from 9 am; bring water and a hat.`,
     at: '2026-05-22',
     status: 'upcoming' as const,
   },
@@ -168,14 +183,16 @@ const NOTICES = [
   ],
   template: `
     <app-page-header
+      i18n-title
       title="School"
-      [trail]="[{ label: 'Dashboards' }, { label: 'School' }]"
+      [trail]="[{ label: t.dashboards }, { label: t.school }]"
     />
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <dl scStatCard>
         <dt scStatCardLabel>
-          Students <svg siGraduationCapIcon scStatCardIcon></svg>
+          <ng-container i18n>Students</ng-container>
+          <svg siGraduationCapIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="1240"></dd>
         <dd
@@ -185,23 +202,28 @@ const NOTICES = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd scStatCardDescription>from last year</dd>
-      </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>Teachers <svg siUsersIcon scStatCardIcon></svg></dt>
-        <dd scStatCardValue [value]="86"></dd>
-        <dd scStatCardDescription>14.4 students each</dd>
+        <dd i18n scStatCardDescription>from last year</dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          Classes <svg siBookOpenIcon scStatCardIcon></svg>
+          <ng-container i18n>Teachers</ng-container>
+          <svg siUsersIcon scStatCardIcon></svg>
+        </dt>
+        <dd scStatCardValue [value]="86"></dd>
+        <dd i18n scStatCardDescription>14.4 students each</dd>
+      </dl>
+      <dl scStatCard>
+        <dt scStatCardLabel>
+          <ng-container i18n>Classes</ng-container>
+          <svg siBookOpenIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="48"></dd>
-        <dd scStatCardDescription>across 4 grades</dd>
+        <dd i18n scStatCardDescription>across 4 grades</dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          Attendance today <svg siCalendarCheckIcon scStatCardIcon></svg>
+          <ng-container i18n>Attendance today</ng-container>
+          <svg siCalendarCheckIcon scStatCardIcon></svg>
         </dt>
         <dd
           scStatCardValue
@@ -215,15 +237,15 @@ const NOTICES = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd scStatCardDescription>from yesterday</dd>
+        <dd i18n scStatCardDescription>from yesterday</dd>
       </dl>
     </div>
 
     <div class="grid gap-4 xl:grid-cols-3">
       <div scCard class="xl:col-span-2">
         <div scCardHeader>
-          <h2 scCardTitle>Attendance</h2>
-          <p scCardDescription>This week, by day</p>
+          <h2 i18n scCardTitle>Attendance</h2>
+          <p i18n scCardDescription>This week, by day</p>
         </div>
         <div scCardBody>
           <div
@@ -232,7 +254,12 @@ const NOTICES = [
             [data]="attendance"
             class="h-72 w-full"
           >
-            <svg scChartPlot categoryKey="day" aria-label="Attendance by day">
+            <svg
+              i18n-aria-label
+              scChartPlot
+              categoryKey="day"
+              aria-label="Attendance by day"
+            >
               <g scChartGrid />
               <g scChartCategoryAxis />
               <g scChartCursor />
@@ -247,8 +274,8 @@ const NOTICES = [
 
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Upcoming exams</h2>
-          <p scCardDescription>The next two weeks</p>
+          <h2 i18n scCardTitle>Upcoming exams</h2>
+          <p i18n scCardDescription>The next two weeks</p>
         </div>
         <div scCardBody>
           <div scItemGroup class="gap-2">
@@ -274,18 +301,18 @@ const NOTICES = [
     <div class="grid gap-4 xl:grid-cols-3">
       <div scCard class="xl:col-span-2">
         <div scCardHeader>
-          <h2 scCardTitle>Top students</h2>
-          <p scCardDescription>By average this term</p>
+          <h2 i18n scCardTitle>Top students</h2>
+          <p i18n scCardDescription>By average this term</p>
         </div>
         <div scCardBody>
           <div scTableContainer>
             <table scTable>
               <thead scTableHeader>
                 <tr scTableRow>
-                  <th scTableHeaderCell>Student</th>
-                  <th scTableHeaderCell>Grade</th>
-                  <th scTableHeaderCell class="text-end">Average</th>
-                  <th scTableHeaderCell class="text-end">Attendance</th>
+                  <th i18n scTableHeaderCell>Student</th>
+                  <th i18n scTableHeaderCell>Grade</th>
+                  <th i18n scTableHeaderCell class="text-end">Average</th>
+                  <th i18n scTableHeaderCell class="text-end">Attendance</th>
                 </tr>
               </thead>
               <tbody scTableBody>
@@ -327,10 +354,10 @@ const NOTICES = [
 
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Notice board</h2>
+          <h2 i18n scCardTitle>Notice board</h2>
         </div>
         <div scCardBody>
-          <ol scTimeline aria-label="Notices">
+          <ol i18n-aria-label scTimeline aria-label="Notices">
             @for (notice of notices; track notice.title) {
               <li scTimelineItem [status]="notice.status">
                 <div scTimelineMarker></div>
@@ -350,10 +377,19 @@ const NOTICES = [
   encapsulation: ViewEncapsulation.None,
 })
 export class SchoolPage {
-  private readonly attendance = ATTENDANCE.map((row) => ({ ...row }));
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dashboards: $localize`Dashboards`,
+    school: $localize`School`,
+  };
+
+  private readonly attendance = ATTENDANCE.map((row) => ({
+    ...row,
+    day: axisLabel(row.day),
+  }));
   private readonly attendanceConfig: ScChartConfig = {
-    present: { label: 'Present', color: 'var(--chart-2)' },
-    absent: { label: 'Absent', color: 'var(--chart-4)' },
+    present: { label: $localize`Present`, color: 'var(--chart-2)' },
+    absent: { label: $localize`Absent`, color: 'var(--chart-4)' },
   };
   private readonly exams = EXAMS;
   private readonly students = STUDENTS.map((student) => ({

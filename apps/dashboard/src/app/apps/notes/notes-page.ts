@@ -81,25 +81,25 @@ import { NotesStore } from '../../shared/stores';
     PageHeader,
   ],
   template: `
-    <app-page-header title="Notes" [trail]="[{ label: 'Notes' }]">
+    <app-page-header i18n-title title="Notes" [trail]="[{ label: t.notes }]">
       <div scDialogProvider [(open)]="adding">
         <button scButton (click)="startAdding()">
           <svg siPlusIcon></svg>
-          Add Note
+          <ng-container i18n>Add Note</ng-container>
         </button>
         <ng-template scDialogPortal>
           <div scDialog class="sm:max-w-md">
             <button scDialogClose>
               <svg siXIcon></svg>
-              <span class="sr-only">Close</span>
+              <span i18n class="sr-only">Close</span>
             </button>
             <div scDialogHeader>
-              <h2 scDialogTitle>Add Note</h2>
+              <h2 i18n scDialogTitle>Add Note</h2>
             </div>
             <form id="add-note" (submit)="add($event)">
               <div scFieldGroup>
                 <div scField>
-                  <label scLabel>Note</label>
+                  <label i18n scLabel>Note</label>
                   <textarea
                     scTextarea
                     cdkFocusInitial
@@ -108,7 +108,7 @@ import { NotesStore } from '../../shared/stores';
                   ></textarea>
                 </div>
                 <fieldset class="flex flex-col gap-3">
-                  <legend scLegend variant="label">Colour</legend>
+                  <legend i18n scLegend variant="label">Colour</legend>
                   <div class="flex gap-3">
                     @for (color of colors; track color.value) {
                       <input
@@ -124,10 +124,10 @@ import { NotesStore } from '../../shared/stores';
               </div>
             </form>
             <div scDialogFooter>
-              <button scDialogClose variant="outline" size="default">
+              <button i18n scDialogClose variant="outline" size="default">
                 Cancel
               </button>
-              <button scButton type="submit" form="add-note">Add</button>
+              <button i18n scButton type="submit" form="add-note">Add</button>
             </div>
           </div>
         </ng-template>
@@ -139,6 +139,8 @@ import { NotesStore } from '../../shared/stores';
         <div class="px-4">
           <div scInputGroup>
             <input
+              i18n-aria-label
+              i18n-placeholder
               scInput
               type="search"
               placeholder="Search notes"
@@ -149,7 +151,7 @@ import { NotesStore } from '../../shared/stores';
             <div scInputGroupAddon><svg siSearchIcon></svg></div>
           </div>
         </div>
-        <ul class="flex flex-col gap-1 px-2" aria-label="Notes">
+        <ul i18n-aria-label class="flex flex-col gap-1 px-2" aria-label="Notes">
           @for (note of shown(); track note.id) {
             <li>
               <button
@@ -177,7 +179,10 @@ import { NotesStore } from '../../shared/stores';
               </button>
             </li>
           } @empty {
-            <li class="text-muted-foreground px-3 py-6 text-center text-sm">
+            <li
+              i18n
+              class="text-muted-foreground px-3 py-6 text-center text-sm"
+            >
               No notes match “{{ query() }}”.
             </li>
           }
@@ -196,11 +201,11 @@ import { NotesStore } from '../../shared/stores';
                 (click)="remove(note.id)"
               >
                 <svg siTrash2Icon></svg>
-                Delete
+                <ng-container i18n>Delete</ng-container>
               </button>
             </div>
             <div scField class="flex-1">
-              <label scLabel>Edit Note</label>
+              <label i18n scLabel>Edit Note</label>
               <textarea
                 scTextarea
                 class="min-h-64 flex-1"
@@ -209,7 +214,7 @@ import { NotesStore } from '../../shared/stores';
               ></textarea>
             </div>
             <fieldset class="flex flex-col gap-3">
-              <legend scLegend variant="label">Change Note Colour</legend>
+              <legend i18n scLegend variant="label">Change Note Colour</legend>
               <div class="flex gap-3">
                 @for (color of colors; track color.value) {
                   <input
@@ -226,8 +231,8 @@ import { NotesStore } from '../../shared/stores';
         } @else {
           <div scEmpty class="h-full">
             <div scEmptyHeader>
-              <h2 scEmptyTitle>No note selected</h2>
-              <div scEmptyDescription>Choose a note, or add one.</div>
+              <h2 i18n scEmptyTitle>No note selected</h2>
+              <div i18n scEmptyDescription>Choose a note, or add one.</div>
             </div>
           </div>
         }
@@ -238,6 +243,11 @@ import { NotesStore } from '../../shared/stores';
   encapsulation: ViewEncapsulation.None,
 })
 export class NotesPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    notes: $localize`Notes`,
+  };
+
   private readonly store = inject(NotesStore);
   private readonly toaster = inject(ScToaster);
 
@@ -287,7 +297,7 @@ export class NotesPage {
     this.query.set('');
     this.selectedId.set(note.id);
     this.adding.set(false);
-    this.toaster.show({ variant: 'success', title: 'Note added' });
+    this.toaster.show({ variant: 'success', title: $localize`Note added` });
   }
 
   protected edit(id: number, text: string): void {
@@ -300,6 +310,6 @@ export class NotesPage {
 
   protected remove(id: number): void {
     this.store.remove(id);
-    this.toaster.show({ variant: 'success', title: 'Note deleted' });
+    this.toaster.show({ variant: 'success', title: $localize`Note deleted` });
   }
 }

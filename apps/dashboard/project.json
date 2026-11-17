@@ -13,7 +13,7 @@
       "options": {
         "outputPath": "dist/apps/dashboard",
         "browser": "apps/dashboard/src/main.ts",
-        "polyfills": ["temporal-polyfill/global"],
+        "polyfills": ["temporal-polyfill/global", "@angular/localize/init"],
         "tsConfig": "apps/dashboard/tsconfig.app.json",
         "assets": [
           {
@@ -63,6 +63,22 @@
         "development": {
           "buildTarget": "dashboard:build:development"
         }
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular/build:extract-i18n",
+      "options": {
+        "buildTarget": "dashboard:build",
+        "format": "json",
+        "outputPath": "apps/dashboard/public/i18n",
+        "outFile": "messages.json"
+      }
+    },
+    "check-i18n": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["extract-i18n"],
+      "options": {
+        "command": "node scripts/check-translations.mjs apps/dashboard/public/i18n"
       }
     },
     "lint": {

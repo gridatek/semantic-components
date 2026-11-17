@@ -43,7 +43,7 @@ import {
         } @else {
           <svg siSunIcon></svg>
         }
-        <span class="sr-only">Theme</span>
+        <span i18n class="sr-only">Theme</span>
       </button>
       <ng-template scMenuPortal>
         <div scMenu class="w-36">
@@ -71,9 +71,9 @@ import {
 export class ThemeMenu {
   protected readonly theme = inject(ScThemeManager);
   protected readonly modes: { value: ScThemeMode; label: string }[] = [
-    { value: 'light', label: 'Light' },
-    { value: 'dark', label: 'Dark' },
-    { value: 'system', label: 'System' },
+    { value: 'light', label: $localize`Light` },
+    { value: 'dark', label: $localize`Dark` },
+    { value: 'system', label: $localize`System` },
   ];
 
   protected setMode(mode: string | null): void {

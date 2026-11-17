@@ -57,6 +57,7 @@ import {
 import type { BlogPost } from '../../data/blog';
 import { PageHeader } from '../../layout/page-header';
 import { count, day } from '../../shared/format';
+import { label } from '../../shared/labels';
 import { BlogStore } from '../../shared/stores';
 
 const features = tableFeatures({
@@ -73,11 +74,11 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, BlogPost>();
 
 const columns = columnHelper.columns([
-  columnHelper.accessor('title', { header: 'Post' }),
-  columnHelper.accessor('category', { header: 'Category' }),
-  columnHelper.accessor('status', { header: 'Status' }),
-  columnHelper.accessor('date', { header: 'Date' }),
-  columnHelper.accessor('views', { header: 'Views' }),
+  columnHelper.accessor('title', { header: $localize`Post` }),
+  columnHelper.accessor('category', { header: $localize`Category` }),
+  columnHelper.accessor('status', { header: $localize`Status` }),
+  columnHelper.accessor('date', { header: $localize`Date` }),
+  columnHelper.accessor('views', { header: $localize`Views` }),
 ]);
 
 /** Manage Blog: every post, searchable and sortable, to view, edit or delete. */
@@ -123,18 +124,21 @@ const columns = columnHelper.columns([
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Manage Blog"
-      [trail]="[{ label: 'Blog', url: '/apps/blog/post' }, { label: 'Manage' }]"
+      [trail]="[{ label: t.blog, url: '/apps/blog/post' }, { label: t.manage }]"
     >
       <a scLink variant="button" routerLink="/apps/blog/create">
         <svg siPlusIcon></svg>
-        Create Post
+        <ng-container i18n>Create Post</ng-container>
       </a>
     </app-page-header>
 
     <div scCard>
       <div scCardBody class="flex flex-col gap-4">
         <input
+          i18n-aria-label
+          i18n-placeholder
           scInput
           scDataTableGlobalFilter
           [table]="table"
@@ -174,7 +178,7 @@ const columns = columnHelper.columns([
                       </button>
                     </th>
                   }
-                  <th scTableHeaderCell class="text-end">Actions</th>
+                  <th i18n scTableHeaderCell class="text-end">Actions</th>
                 </tr>
               }
             </thead>
@@ -201,7 +205,7 @@ const columns = columnHelper.columns([
                     </div>
                   </td>
                   <td scTableCell scDataTableCell>
-                    {{ row.original.category }}
+                    {{ labelOf(row.original.category) }}
                   </td>
                   <td scTableCell scDataTableCell>
                     <span
@@ -212,7 +216,7 @@ const columns = columnHelper.columns([
                           : 'outline'
                       "
                       class="capitalize"
-                      >{{ row.original.status }}</span
+                      >{{ labelOf(row.original.status) }}</span
                     >
                   </td>
                   <td scTableCell scDataTableCell>
@@ -229,7 +233,9 @@ const columns = columnHelper.columns([
                       [routerLink]="['/apps/blog/detail', row.original.slug]"
                     >
                       <svg siEyeIcon></svg>
-                      <span class="sr-only">View {{ row.original.title }}</span>
+                      <span i18n class="sr-only"
+                        >View {{ row.original.title }}</span
+                      >
                     </a>
                     <a
                       scLink
@@ -238,7 +244,9 @@ const columns = columnHelper.columns([
                       [routerLink]="['/apps/blog/edit', row.original.id]"
                     >
                       <svg siPencilIcon></svg>
-                      <span class="sr-only">Edit {{ row.original.title }}</span>
+                      <span i18n class="sr-only"
+                        >Edit {{ row.original.title }}</span
+                      >
                     </a>
                     <button
                       scButton
@@ -247,7 +255,7 @@ const columns = columnHelper.columns([
                       (click)="remove(row.original)"
                     >
                       <svg siTrash2Icon></svg>
-                      <span class="sr-only"
+                      <span i18n class="sr-only"
                         >Delete {{ row.original.title }}</span
                       >
                     </button>
@@ -256,6 +264,7 @@ const columns = columnHelper.columns([
               } @empty {
                 <tr scTableRow>
                   <td
+                    i18n
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -268,6 +277,7 @@ const columns = columnHelper.columns([
           </table>
         </div>
         <nav
+          i18n-aria-label
           scPagination
           scDataTablePagination
           #pagination="scPagination"
@@ -275,20 +285,20 @@ const columns = columnHelper.columns([
           aria-label="Post pages"
           class="mx-0 w-auto items-center justify-end gap-4"
         >
-          <span class="text-sm font-medium" aria-live="polite">
+          <span i18n class="text-sm font-medium" aria-live="polite">
             Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
               <button scPaginationPrevious variant="outline" size="icon-sm">
-                <svg siChevronLeftIcon></svg>
-                <span class="sr-only">Go to previous page</span>
+                <svg siChevronLeftIcon class="rtl:-scale-x-100"></svg>
+                <span i18n class="sr-only">Go to previous page</span>
               </button>
             </li>
             <li scPaginationItem>
               <button scPaginationNext variant="outline" size="icon-sm">
-                <svg siChevronRightIcon></svg>
-                <span class="sr-only">Go to next page</span>
+                <svg siChevronRightIcon class="rtl:-scale-x-100"></svg>
+                <span i18n class="sr-only">Go to next page</span>
               </button>
             </li>
           </ul>
@@ -300,6 +310,13 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogManagePage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    blog: $localize`Blog`,
+    manage: $localize`Manage`,
+  };
+
   private readonly store = inject(BlogStore);
   private readonly toaster = inject(ScToaster);
 
@@ -318,7 +335,7 @@ export class BlogManagePage {
     this.store.remove(post.id);
     this.toaster.show({
       variant: 'success',
-      title: 'Post deleted',
+      title: $localize`Post deleted`,
       description: post.title,
     });
   }

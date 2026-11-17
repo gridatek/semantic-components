@@ -64,6 +64,7 @@ import {
 import { STAFF, type StaffMember } from '../../data/staff';
 import { PageHeader } from '../../layout/page-header';
 import { money } from '../../shared/format';
+import { label } from '../../shared/labels';
 import { StaffCell } from './table-parts';
 
 const BASE = [
@@ -106,13 +107,14 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Row Selection"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Row Selection' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.rowSelection }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>Tick rows, or all of them from the header</p>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>Tick rows, or all of them from the header</p>
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <div scTableContainer>
@@ -125,6 +127,7 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
                       @if (header.column.id === 'select') {
                         <label scField orientation="horizontal">
                           <input
+                            i18n-aria-label
                             type="checkbox"
                             scCheckbox
                             scDataTableSelectAll
@@ -152,7 +155,7 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
                             scCheckbox
                             scDataTableSelectRow
                             [row]="row"
-                            [attr.aria-label]="'Select ' + row.original.name"
+                            [attr.aria-label]="t.select + row.original.name"
                           />
                         </label>
                       } @else {
@@ -169,7 +172,7 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
           </table>
         </div>
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <p class="text-muted-foreground text-sm" aria-live="polite">
+          <p i18n class="text-muted-foreground text-sm" aria-live="polite">
             {{ table.getSelectedRowModel().rows.length }} of
             {{ table.getRowModel().rows.length }} selected
           </p>
@@ -181,7 +184,7 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
             (click)="removeSelected()"
           >
             <svg siTrash2Icon></svg>
-            Remove selected
+            <ng-container i18n>Remove selected</ng-container>
           </button>
         </div>
       </div>
@@ -191,6 +194,14 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
   encapsulation: ViewEncapsulation.None,
 })
 export class RowSelectionTablePage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    rowSelection: $localize`Row Selection`,
+    select: $localize`Select `,
+  };
+
   private readonly toaster = inject(ScToaster);
   private readonly data = signal(STAFF.slice(0, 10) as StaffMember[]);
   readonly table = injectTable(() => ({
@@ -198,13 +209,13 @@ export class RowSelectionTablePage {
     columns: selectHelper.columns([
       selectHelper.display({
         id: 'select',
-        header: 'Select',
+        header: $localize`Select`,
         enableHiding: false,
       }),
-      selectHelper.accessor('name', { header: 'Name' }),
-      selectHelper.accessor('role', { header: 'Role' }),
-      selectHelper.accessor('department', { header: 'Department' }),
-      selectHelper.accessor('status', { header: 'Status' }),
+      selectHelper.accessor('name', { header: $localize`Name` }),
+      selectHelper.accessor('role', { header: $localize`Role` }),
+      selectHelper.accessor('department', { header: $localize`Department` }),
+      selectHelper.accessor('status', { header: $localize`Status` }),
     ]),
     data: this.data(),
     getRowId: (row) => String(row.id),
@@ -244,22 +255,28 @@ const visibilityHelper = createColumnHelper<
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Column Visibility"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Column Visibility' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.columnVisibility }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>Choose the columns you need</p>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>Choose the columns you need</p>
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <div scPopoverProvider alignment="start">
           <button scButton variant="outline" scPopoverTrigger>
             <svg siColumns3Icon></svg>
-            Columns
+            <ng-container i18n>Columns</ng-container>
           </button>
           <ng-template scPopoverPortal>
-            <div scPopover aria-label="Show columns" class="w-48 gap-1 p-2">
+            <div
+              i18n-aria-label
+              scPopover
+              aria-label="Show columns"
+              class="w-48 gap-1 p-2"
+            >
               @for (column of table.getAllLeafColumns(); track column.id) {
                 @if (column.getCanHide()) {
                   <label scField orientation="horizontal">
@@ -269,7 +286,7 @@ const visibilityHelper = createColumnHelper<
                       scDataTableColumnVisibility
                       [column]="column"
                     />
-                    {{ labelOf(column) }}
+                    {{ columnLabelOf(column) }}
                   </label>
                 }
               }
@@ -312,24 +329,33 @@ const visibilityHelper = createColumnHelper<
   encapsulation: ViewEncapsulation.None,
 })
 export class ColumnVisibilityTablePage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    columnVisibility: $localize`Column Visibility`,
+  };
+
   readonly table = injectTable(() => ({
     features: visibilityFeatures,
     columns: visibilityHelper.columns([
       visibilityHelper.accessor('name', {
-        header: 'Name',
+        header: $localize`Name`,
         enableHiding: false,
       }),
-      visibilityHelper.accessor('role', { header: 'Role' }),
-      visibilityHelper.accessor('department', { header: 'Department' }),
-      visibilityHelper.accessor('location', { header: 'Location' }),
-      visibilityHelper.accessor('salary', { header: 'Salary' }),
-      visibilityHelper.accessor('joined', { header: 'Joined' }),
-      visibilityHelper.accessor('status', { header: 'Status' }),
+      visibilityHelper.accessor('role', { header: $localize`Role` }),
+      visibilityHelper.accessor('department', {
+        header: $localize`Department`,
+      }),
+      visibilityHelper.accessor('location', { header: $localize`Location` }),
+      visibilityHelper.accessor('salary', { header: $localize`Salary` }),
+      visibilityHelper.accessor('joined', { header: $localize`Joined` }),
+      visibilityHelper.accessor('status', { header: $localize`Status` }),
     ]),
     data: STAFF.slice(0, 8) as StaffMember[],
     initialState: { columnVisibility: { joined: false, location: false } },
   }));
-  private readonly labelOf = dataTableColumnLabel;
+  private readonly columnLabelOf = dataTableColumnLabel;
 }
 
 /** Editable (Pro TanStack tables): cells you type into; the data follows. */
@@ -338,13 +364,14 @@ export class ColumnVisibilityTablePage {
   imports: [...BASE, ScInput],
   template: `
     <app-page-header
+      i18n-title
       title="Editable"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Editable' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.editable }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>
           Change a role, a place or a salary: the total follows
         </p>
       </div>
@@ -353,10 +380,10 @@ export class ColumnVisibilityTablePage {
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th scTableHeaderCell>Name</th>
-                <th scTableHeaderCell>Role</th>
-                <th scTableHeaderCell>Location</th>
-                <th scTableHeaderCell>Salary</th>
+                <th i18n scTableHeaderCell>Name</th>
+                <th i18n scTableHeaderCell>Role</th>
+                <th i18n scTableHeaderCell>Location</th>
+                <th i18n scTableHeaderCell>Salary</th>
               </tr>
             </thead>
             <tbody scTableBody>
@@ -369,7 +396,7 @@ export class ColumnVisibilityTablePage {
                     <input
                       scInput
                       class="h-8"
-                      [attr.aria-label]="'Role of ' + member.name"
+                      [attr.aria-label]="t.roleOf + member.name"
                       [value]="member.role"
                       (change)="
                         edit(member.id, 'role', $any($event.target).value)
@@ -380,7 +407,7 @@ export class ColumnVisibilityTablePage {
                     <input
                       scInput
                       class="h-8"
-                      [attr.aria-label]="'Location of ' + member.name"
+                      [attr.aria-label]="t.locationOf + member.name"
                       [value]="member.location"
                       (change)="
                         edit(member.id, 'location', $any($event.target).value)
@@ -392,7 +419,7 @@ export class ColumnVisibilityTablePage {
                       scInput
                       type="number"
                       class="h-8 w-32"
-                      [attr.aria-label]="'Salary of ' + member.name"
+                      [attr.aria-label]="t.salaryOf + member.name"
                       [value]="member.salary"
                       (change)="
                         edit(member.id, 'salary', +$any($event.target).value)
@@ -404,7 +431,7 @@ export class ColumnVisibilityTablePage {
             </tbody>
           </table>
         </div>
-        <p class="text-end text-sm">
+        <p i18n class="text-end text-sm">
           Total payroll:
           <span class="font-semibold tabular-nums">{{ moneyOf(total()) }}</span>
         </p>
@@ -415,6 +442,16 @@ export class ColumnVisibilityTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class EditableTablePage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    editable: $localize`Editable`,
+    roleOf: $localize`Role of `,
+    locationOf: $localize`Location of `,
+    salaryOf: $localize`Salary of `,
+  };
+
   private readonly data = signal(STAFF.slice(0, 8).map((m) => ({ ...m })));
   private readonly moneyOf = money;
 
@@ -448,13 +485,14 @@ export class EditableTablePage {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Drag & Drop"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Drag & Drop' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.dragDrop }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Priorities</h2>
-        <p scCardDescription>
+        <h2 i18n scCardTitle>Priorities</h2>
+        <p i18n scCardDescription>
           Drag a row by its handle, or move it with the arrows
         </p>
       </div>
@@ -463,14 +501,16 @@ export class EditableTablePage {
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th scTableHeaderCell class="w-10">
+                <th i18n scTableHeaderCell class="w-10">
                   <span class="sr-only">Drag</span>
                 </th>
                 <th scTableHeaderCell class="w-10">#</th>
-                <th scTableHeaderCell>Name</th>
-                <th scTableHeaderCell>Role</th>
-                <th scTableHeaderCell>Status</th>
-                <th scTableHeaderCell><span class="sr-only">Move</span></th>
+                <th i18n scTableHeaderCell>Name</th>
+                <th i18n scTableHeaderCell>Role</th>
+                <th i18n scTableHeaderCell>Status</th>
+                <th i18n scTableHeaderCell>
+                  <span class="sr-only">Move</span>
+                </th>
               </tr>
             </thead>
             <tbody scTableBody cdkDropList (cdkDropListDropped)="drop($event)">
@@ -493,7 +533,7 @@ export class EditableTablePage {
                   <td scTableCell>
                     <app-staff-cell column="name" [member]="member" />
                   </td>
-                  <td scTableCell>{{ member.role }}</td>
+                  <td scTableCell>{{ labelOf(member.role) }}</td>
                   <td scTableCell>
                     <app-staff-cell column="status" [member]="member" />
                   </td>
@@ -507,7 +547,9 @@ export class EditableTablePage {
                         (click)="move(i, i - 1)"
                       >
                         <svg siArrowUpIcon></svg>
-                        <span class="sr-only">Move {{ member.name }} up</span>
+                        <span i18n class="sr-only"
+                          >Move {{ member.name }} up</span
+                        >
                       </button>
                       <button
                         scButton
@@ -517,7 +559,9 @@ export class EditableTablePage {
                         (click)="move(i, i + 1)"
                       >
                         <svg siArrowDownIcon></svg>
-                        <span class="sr-only">Move {{ member.name }} down</span>
+                        <span i18n class="sr-only"
+                          >Move {{ member.name }} down</span
+                        >
                       </button>
                     </div>
                   </td>
@@ -533,6 +577,13 @@ export class EditableTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class DragDropTablePage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    dragDrop: $localize`Drag & Drop`,
+  };
+
   private readonly data = signal(STAFF.slice(0, 7) as StaffMember[]);
 
   private drop(event: CdkDragDrop<unknown>): void {
@@ -571,26 +622,27 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Expanding"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Expanding' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.expanding }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>Open a row to see that person’s projects</p>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>Open a row to see that person’s projects</p>
       </div>
       <div scCardBody>
         <div scTableContainer>
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th scTableHeaderCell class="w-10">
+                <th i18n scTableHeaderCell class="w-10">
                   <span class="sr-only">Details</span>
                 </th>
-                <th scTableHeaderCell>Name</th>
-                <th scTableHeaderCell>Role</th>
-                <th scTableHeaderCell>Department</th>
-                <th scTableHeaderCell>Projects</th>
+                <th i18n scTableHeaderCell>Name</th>
+                <th i18n scTableHeaderCell>Role</th>
+                <th i18n scTableHeaderCell>Department</th>
+                <th i18n scTableHeaderCell>Projects</th>
               </tr>
             </thead>
             <tbody scTableBody>
@@ -602,7 +654,7 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
                         siChevronRightIcon
                         class="transition-transform in-aria-expanded:rotate-90 rtl:-scale-x-100"
                       ></svg>
-                      <span class="sr-only"
+                      <span i18n class="sr-only"
                         >Projects of {{ row.original.name }}</span
                       >
                     </button>
@@ -610,8 +662,8 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
                   <td scTableCell>
                     <app-staff-cell column="name" [member]="row.original" />
                   </td>
-                  <td scTableCell>{{ row.original.role }}</td>
-                  <td scTableCell>{{ row.original.department }}</td>
+                  <td scTableCell>{{ labelOf(row.original.role) }}</td>
+                  <td scTableCell>{{ labelOf(row.original.department) }}</td>
                   <td scTableCell class="tabular-nums">
                     {{ row.original.projects.length }}
                   </td>
@@ -650,10 +702,17 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
   encapsulation: ViewEncapsulation.None,
 })
 export class ExpandingTablePage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    expanding: $localize`Expanding`,
+  };
+
   readonly table = injectTable(() => ({
     features: expandFeatures,
     columns: expandHelper.columns([
-      expandHelper.accessor('name', { header: 'Name' }),
+      expandHelper.accessor('name', { header: $localize`Name` }),
     ]),
     data: STAFF.slice(0, 8) as StaffMember[],
     getRowId: (row) => String(row.id),

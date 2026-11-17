@@ -70,26 +70,27 @@ import { TicketsStore } from '../../shared/stores';
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Create Ticket"
       [trail]="[
-        { label: 'Tickets', url: '/apps/tickets' },
-        { label: 'Create' },
+        { label: t.tickets, url: '/apps/tickets' },
+        { label: t.create },
       ]"
     />
 
     <form class="max-w-2xl" (submit)="create($event)">
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle id="ticket-title">Ticket Details</h2>
+          <h2 i18n scCardTitle id="ticket-title">Ticket Details</h2>
         </div>
         <div scCardBody>
           <div scFieldGroup>
             <div scField>
-              <label scLabel>Ticket Title</label>
+              <label i18n scLabel>Ticket Title</label>
               <input scInput [formField]="ticketForm.title" />
             </div>
             <div scField>
-              <label scLabel>Ticket Description</label>
+              <label i18n scLabel>Ticket Description</label>
               <textarea
                 scTextarea
                 rows="4"
@@ -99,9 +100,13 @@ import { TicketsStore } from '../../shared/stores';
             <div class="grid gap-4 sm:grid-cols-2">
               <div scField>
                 <div scSelect [formField]="ticketForm.agent" [items]="agents">
-                  <div scSelectLabel>Assign To</div>
+                  <div i18n scSelectLabel>Assign To</div>
                   <div scSelectTrigger class="w-full">
-                    <span scSelectValue placeholder="Choose an agent"></span>
+                    <span
+                      i18n-placeholder
+                      scSelectValue
+                      placeholder="Choose an agent"
+                    ></span>
                     <svg scSelectIcon siChevronDownIcon></svg>
                   </div>
                   <ng-template scSelectPortal>
@@ -128,7 +133,7 @@ import { TicketsStore } from '../../shared/stores';
                   [formField]="ticketForm.status"
                   [items]="statuses"
                 >
-                  <div scSelectLabel>Status</div>
+                  <div i18n scSelectLabel>Status</div>
                   <div scSelectTrigger class="w-full">
                     <span scSelectValue></span>
                     <svg scSelectIcon siChevronDownIcon></svg>
@@ -155,8 +160,8 @@ import { TicketsStore } from '../../shared/stores';
           </div>
         </div>
         <div scCardFooter class="justify-end gap-2">
-          <a scLink variant="outline" routerLink="/apps/tickets">Cancel</a>
-          <button scButton type="submit">Create Ticket</button>
+          <a i18n scLink variant="outline" routerLink="/apps/tickets">Cancel</a>
+          <button i18n scButton type="submit">Create Ticket</button>
         </div>
       </div>
     </form>
@@ -165,6 +170,12 @@ import { TicketsStore } from '../../shared/stores';
   encapsulation: ViewEncapsulation.None,
 })
 export class TicketCreatePage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    tickets: $localize`Tickets`,
+    create: $localize`Create`,
+  };
+
   private readonly store = inject(TicketsStore);
   private readonly router = inject(Router);
   private readonly toaster = inject(ScToaster);
@@ -195,8 +206,8 @@ export class TicketCreatePage {
     if (this.ticketForm().invalid()) {
       this.toaster.show({
         variant: 'error',
-        title: 'Some fields are missing',
-        description: 'A ticket needs a title, a description and an agent.',
+        title: $localize`Some fields are missing`,
+        description: $localize`A ticket needs a title, a description and an agent.`,
       });
       return;
     }
@@ -212,7 +223,7 @@ export class TicketCreatePage {
     });
     this.toaster.show({
       variant: 'success',
-      title: `Ticket ${ticket.id} created`,
+      title: $localize`Ticket ${ticket.id} created`,
     });
     void this.router.navigateByUrl('/apps/tickets');
   }

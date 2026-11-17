@@ -22,6 +22,7 @@ import {
 } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
+import { label } from '../../shared/labels';
 
 type Category = 'Communication' | 'Project management' | 'Marketing';
 
@@ -40,7 +41,7 @@ const INTEGRATIONS: readonly Integration[] = [
     name: 'Gmail',
     logo: 'gmail.svg',
     category: 'Communication',
-    text: 'Send invoices and replies from your inbox.',
+    text: $localize`Send invoices and replies from your inbox.`,
     connected: true,
   },
   {
@@ -48,7 +49,7 @@ const INTEGRATIONS: readonly Integration[] = [
     name: 'Google Meet',
     logo: 'google-meet.svg',
     category: 'Communication',
-    text: 'Add a call link to every calendar event.',
+    text: $localize`Add a call link to every calendar event.`,
     connected: false,
   },
   {
@@ -56,7 +57,7 @@ const INTEGRATIONS: readonly Integration[] = [
     name: 'Zoom',
     logo: 'zoom.svg',
     category: 'Communication',
-    text: 'Start meetings from a contact or a ticket.',
+    text: $localize`Start meetings from a contact or a ticket.`,
     connected: false,
   },
   {
@@ -64,7 +65,7 @@ const INTEGRATIONS: readonly Integration[] = [
     name: 'Loom',
     logo: 'loom.svg',
     category: 'Communication',
-    text: 'Record a quick video answer on a ticket.',
+    text: $localize`Record a quick video answer on a ticket.`,
     connected: true,
   },
   {
@@ -72,7 +73,7 @@ const INTEGRATIONS: readonly Integration[] = [
     name: 'Jira',
     logo: 'jira.svg',
     category: 'Project management',
-    text: 'Turn tickets into issues, and sync their status.',
+    text: $localize`Turn tickets into issues, and sync their status.`,
     connected: false,
   },
   {
@@ -80,7 +81,7 @@ const INTEGRATIONS: readonly Integration[] = [
     name: 'Linear',
     logo: 'linear.svg',
     category: 'Project management',
-    text: 'Link Kanban tasks to Linear issues.',
+    text: $localize`Link Kanban tasks to Linear issues.`,
     connected: true,
   },
   {
@@ -88,7 +89,7 @@ const INTEGRATIONS: readonly Integration[] = [
     name: 'Trello',
     logo: 'trello.svg',
     category: 'Project management',
-    text: 'Import boards into Kanban.',
+    text: $localize`Import boards into Kanban.`,
     connected: false,
   },
   {
@@ -96,7 +97,7 @@ const INTEGRATIONS: readonly Integration[] = [
     name: 'Notion',
     logo: 'notion.svg',
     category: 'Project management',
-    text: 'Publish blog posts from a Notion page.',
+    text: $localize`Publish blog posts from a Notion page.`,
     connected: false,
   },
   {
@@ -104,7 +105,7 @@ const INTEGRATIONS: readonly Integration[] = [
     name: 'Mailchimp',
     logo: 'mailchimp.svg',
     category: 'Marketing',
-    text: 'Send new customers to an audience.',
+    text: $localize`Send new customers to an audience.`,
     connected: false,
   },
 ];
@@ -130,13 +131,16 @@ const INTEGRATIONS: readonly Integration[] = [
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Integrations"
-      [trail]="[{ label: 'Pages' }, { label: 'Integrations' }]"
+      [trail]="[{ label: t.pages }, { label: t.integrations }]"
     />
 
     <div class="flex flex-wrap items-center gap-3">
       <div scInputGroup class="max-w-xs">
         <input
+          i18n-aria-label
+          i18n-placeholder
           scInput
           type="search"
           placeholder="Search integrations"
@@ -147,6 +151,7 @@ const INTEGRATIONS: readonly Integration[] = [
         <div scInputGroupAddon><svg siSearchIcon></svg></div>
       </div>
       <div
+        i18n-aria-label
         scToggleGroup
         variant="outline"
         size="sm"
@@ -155,10 +160,10 @@ const INTEGRATIONS: readonly Integration[] = [
         (valueChange)="category.set($event[0] ?? 'All')"
       >
         @for (c of categories; track c) {
-          <button scToggleGroupItem [value]="c">{{ c }}</button>
+          <button scToggleGroupItem [value]="c">{{ labelOf(c) }}</button>
         }
       </div>
-      <span class="text-muted-foreground ms-auto text-sm"
+      <span i18n class="text-muted-foreground ms-auto text-sm"
         >{{ connectedCount() }} connected</span
       >
     </div>
@@ -184,11 +189,11 @@ const INTEGRATIONS: readonly Integration[] = [
                 <div class="flex flex-col">
                   <h2 class="font-medium">{{ item.name }}</h2>
                   <span class="text-muted-foreground text-xs">{{
-                    item.category
+                    labelOf(item.category)
                   }}</span>
                 </div>
                 @if (item.connected) {
-                  <span scBadge variant="secondary" class="ms-auto"
+                  <span i18n scBadge variant="secondary" class="ms-auto"
                     >Connected</span
                   >
                 }
@@ -196,7 +201,7 @@ const INTEGRATIONS: readonly Integration[] = [
               <p class="text-muted-foreground text-sm">{{ item.text }}</p>
             </div>
             <div scCardFooter class="justify-between">
-              <label scLabel [for]="'int-' + item.id"
+              <label i18n scLabel [for]="'int-' + item.id"
                 >Connect {{ item.name }}</label
               >
               <input
@@ -216,6 +221,13 @@ const INTEGRATIONS: readonly Integration[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class IntegrationsPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    pages: $localize`Pages`,
+    integrations: $localize`Integrations`,
+  };
+
   private readonly toaster = inject(ScToaster);
   private readonly categories = [
     'All',

@@ -51,15 +51,15 @@ import { SocialButtons } from './social-buttons';
   template: `
     <div scCard class="w-full max-w-md">
       <div scCardHeader class="text-center">
-        <h1 scCardTitle class="text-xl">Sign In</h1>
-        <p scCardDescription>Your admin dashboard</p>
+        <h1 i18n scCardTitle class="text-xl">Sign In</h1>
+        <p i18n scCardDescription>Your admin dashboard</p>
       </div>
       <div scCardBody class="flex flex-col gap-6">
         <app-social-buttons />
         <form (submit)="signIn($event)">
           <div scFieldGroup>
             <div scField>
-              <label scLabel>Email</label>
+              <label i18n scLabel>Email</label>
               <input
                 scInput
                 type="email"
@@ -68,7 +68,7 @@ import { SocialButtons } from './social-buttons';
               />
             </div>
             <div scPasswordField #password="scPasswordField">
-              <label scLabel>Password</label>
+              <label i18n scLabel>Password</label>
               <div scPasswordGroup>
                 <input
                   scPasswordInput
@@ -78,10 +78,10 @@ import { SocialButtons } from './social-buttons';
                 <button scPasswordToggle>
                   @if (password.visible()) {
                     <svg siEyeOffIcon></svg>
-                    <span class="sr-only">Hide password</span>
+                    <span i18n class="sr-only">Hide password</span>
                   } @else {
                     <svg siEyeIcon></svg>
-                    <span class="sr-only">Show password</span>
+                    <span i18n class="sr-only">Show password</span>
                   }
                 </button>
               </div>
@@ -89,16 +89,16 @@ import { SocialButtons } from './social-buttons';
             <div class="flex flex-wrap items-center justify-between gap-2">
               <div scField orientation="horizontal">
                 <input scCheckbox [formField]="loginForm.remember" />
-                <label scLabel>Remember this device</label>
+                <label i18n scLabel>Remember this device</label>
               </div>
-              <a scLink routerLink="/auth/forgot-password" class="text-sm"
+              <a i18n scLink routerLink="/auth/forgot-password" class="text-sm"
                 >Forgot Password?</a
               >
             </div>
-            <button scButton type="submit" class="w-full">Sign In</button>
+            <button i18n scButton type="submit" class="w-full">Sign In</button>
           </div>
         </form>
-        <p class="text-muted-foreground text-center text-sm">
+        <p i18n class="text-muted-foreground text-center text-sm">
           New to the dashboard?
           <a scLink routerLink="/auth/register">Create an account</a>
         </p>

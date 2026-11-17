@@ -40,8 +40,8 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scCard class="w-full max-w-md">
       <div scCardHeader class="text-center">
-        <h1 scCardTitle class="text-xl">Two Step Verification</h1>
-        <p scCardDescription>
+        <h1 i18n scCardTitle class="text-xl">Two Step Verification</h1>
+        <p i18n scCardDescription>
           We sent a verification code to your mobile. Enter the code from the
           mobile in the field below. ******1234
         </p>
@@ -52,27 +52,48 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
           (submit)="verify($event)"
         >
           <div scField class="w-fit">
-            <label scLabel>Type your 6 digits security code</label>
+            <label i18n scLabel>Type your 6 digits security code</label>
             <div scOtpField [formField]="codeForm.code">
               <div scOtpFieldGroup>
                 <input scOtpFieldInput />
-                <input scOtpFieldInput aria-label="Character 2 of 6" />
-                <input scOtpFieldInput aria-label="Character 3 of 6" />
+                <input
+                  i18n-aria-label
+                  scOtpFieldInput
+                  aria-label="Character 2 of 6"
+                />
+                <input
+                  i18n-aria-label
+                  scOtpFieldInput
+                  aria-label="Character 3 of 6"
+                />
               </div>
               <div scOtpFieldSeparator><svg siMinusIcon></svg></div>
               <div scOtpFieldGroup>
-                <input scOtpFieldInput aria-label="Character 4 of 6" />
-                <input scOtpFieldInput aria-label="Character 5 of 6" />
-                <input scOtpFieldInput aria-label="Character 6 of 6" />
+                <input
+                  i18n-aria-label
+                  scOtpFieldInput
+                  aria-label="Character 4 of 6"
+                />
+                <input
+                  i18n-aria-label
+                  scOtpFieldInput
+                  aria-label="Character 5 of 6"
+                />
+                <input
+                  i18n-aria-label
+                  scOtpFieldInput
+                  aria-label="Character 6 of 6"
+                />
               </div>
             </div>
           </div>
-          <button scButton type="submit" class="w-full">
+          <button i18n scButton type="submit" class="w-full">
             Verify My Account
           </button>
           <p class="text-muted-foreground text-sm">
-            Didn't get the code?
+            <ng-container i18n>Didn't get the code?</ng-container>
             <button
+              i18n
               scButton
               variant="link"
               type="button"
@@ -104,6 +125,9 @@ export class TwoStepsPage {
   }
 
   protected resend(): void {
-    this.toaster.show({ variant: 'info', title: 'A new code is on its way' });
+    this.toaster.show({
+      variant: 'info',
+      title: $localize`A new code is on its way`,
+    });
   }
 }

@@ -71,7 +71,7 @@ import {
         }
         <button scToastClose>
           <svg siXIcon></svg>
-          <span class="sr-only">Close</span>
+          <span i18n class="sr-only">Close</span>
         </button>
       </div>
     </ng-template>

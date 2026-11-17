@@ -68,29 +68,29 @@ const HEART = [
 ];
 
 const RINGS = [
-  { name: 'Move', value: 0.82, detail: '410 of 500 kcal' },
-  { name: 'Exercise', value: 0.64, detail: '19 of 30 min' },
-  { name: 'Stand', value: 0.92, detail: '11 of 12 hours' },
+  { name: $localize`Move`, value: 0.82, detail: $localize`410 of 500 kcal` },
+  { name: $localize`Exercise`, value: 0.64, detail: $localize`19 of 30 min` },
+  { name: $localize`Stand`, value: 0.92, detail: $localize`11 of 12 hours` },
 ];
 
 const APPOINTMENTS = [
   {
     personId: 6,
-    title: 'Annual check-up',
-    when: 'Tue, May 5 · 9:30',
-    kind: 'In person',
+    title: $localize`Annual check-up`,
+    when: $localize`Tue, May 5 · 9:30`,
+    kind: $localize`In person`,
   },
   {
     personId: 9,
-    title: 'Physiotherapy',
-    when: 'Thu, May 7 · 17:00',
-    kind: 'In person',
+    title: $localize`Physiotherapy`,
+    when: $localize`Thu, May 7 · 17:00`,
+    kind: $localize`In person`,
   },
   {
     personId: 4,
-    title: 'Nutrition follow-up',
-    when: 'Mon, May 11 · 12:15',
-    kind: 'Video',
+    title: $localize`Nutrition follow-up`,
+    when: $localize`Mon, May 11 · 12:15`,
+    kind: $localize`Video`,
   },
 ];
 
@@ -152,24 +152,27 @@ interface Medication {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Health"
-      [trail]="[{ label: 'Dashboards' }, { label: 'Health' }]"
+      [trail]="[{ label: t.dashboards }, { label: t.health }]"
     />
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <dl scStatCard>
         <dt scStatCardLabel>
-          Resting heart rate <svg siHeartPulseIcon scStatCardIcon></svg>
+          <ng-container i18n>Resting heart rate</ng-container>
+          <svg siHeartPulseIcon scStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue>58 bpm</dd>
+        <dd i18n scStatCardValue>58 bpm</dd>
         <dd scStatCardChange good="down" [value]="-2">
           <svg siTrendingDownIcon></svg>
         </dd>
-        <dd scStatCardDescription>bpm from last week</dd>
+        <dd i18n scStatCardDescription>bpm from last week</dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          Steps <svg siFootprintsIcon scStatCardIcon></svg>
+          <ng-container i18n>Steps</ng-container>
+          <svg siFootprintsIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="8432"></dd>
         <dd
@@ -179,25 +182,31 @@ interface Medication {
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd scStatCardDescription>from yesterday</dd>
+        <dd i18n scStatCardDescription>from yesterday</dd>
       </dl>
       <dl scStatCard>
-        <dt scStatCardLabel>Sleep <svg siMoonIcon scStatCardIcon></svg></dt>
-        <dd scStatCardValue>7h 24m</dd>
-        <dd scStatCardDescription>deep sleep 1h 52m</dd>
+        <dt scStatCardLabel>
+          <ng-container i18n>Sleep</ng-container>
+          <svg siMoonIcon scStatCardIcon></svg>
+        </dt>
+        <dd i18n scStatCardValue>7h 24m</dd>
+        <dd i18n scStatCardDescription>deep sleep 1h 52m</dd>
       </dl>
       <dl scStatCard>
-        <dt scStatCardLabel>Calories <svg siFlameIcon scStatCardIcon></svg></dt>
+        <dt scStatCardLabel>
+          <ng-container i18n>Calories</ng-container>
+          <svg siFlameIcon scStatCardIcon></svg>
+        </dt>
         <dd scStatCardValue [value]="2140"></dd>
-        <dd scStatCardDescription>of 2,400 kcal</dd>
+        <dd i18n scStatCardDescription>of 2,400 kcal</dd>
       </dl>
     </div>
 
     <div class="grid gap-4 xl:grid-cols-3">
       <div scCard class="xl:col-span-2">
         <div scCardHeader>
-          <h2 scCardTitle>Heart rate</h2>
-          <p scCardDescription>Today — the peak is the evening run</p>
+          <h2 i18n scCardTitle>Heart rate</h2>
+          <p i18n scCardDescription>Today — the peak is the evening run</p>
         </div>
         <div scCardBody>
           <div
@@ -206,7 +215,12 @@ interface Medication {
             [data]="heart"
             class="h-72 w-full"
           >
-            <svg scChartPlot categoryKey="time" aria-label="Heart rate today">
+            <svg
+              i18n-aria-label
+              scChartPlot
+              categoryKey="time"
+              aria-label="Heart rate today"
+            >
               <g scChartGrid />
               <g scChartCategoryAxis />
               <g scChartValueAxis [domain]="[40, 140]" />
@@ -220,8 +234,8 @@ interface Medication {
 
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Activity</h2>
-          <p scCardDescription>Today's goals</p>
+          <h2 i18n scCardTitle>Activity</h2>
+          <p i18n scCardDescription>Today's goals</p>
         </div>
         <div scCardBody class="grid grid-cols-3 gap-4">
           @for (ring of rings; track ring.name) {
@@ -250,8 +264,8 @@ interface Medication {
     <div class="grid gap-4 xl:grid-cols-2">
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Appointments</h2>
-          <p scCardDescription>Coming up</p>
+          <h2 i18n scCardTitle>Appointments</h2>
+          <p i18n scCardDescription>Coming up</p>
         </div>
         <div scCardBody>
           <div scItemGroup class="gap-2">
@@ -267,7 +281,7 @@ interface Medication {
                 </div>
                 <div scItemBody>
                   <div scItemTitle>{{ visit.title }}</div>
-                  <p scItemDescription>
+                  <p i18n scItemDescription>
                     Dr. {{ visit.person.name }} · {{ visit.when }}
                   </p>
                 </div>
@@ -282,8 +296,10 @@ interface Medication {
 
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Medication</h2>
-          <p scCardDescription>{{ taken() }} of {{ meds().length }} taken</p>
+          <h2 i18n scCardTitle>Medication</h2>
+          <p i18n scCardDescription>
+            {{ taken() }} of {{ meds().length }} taken
+          </p>
         </div>
         <div scCardBody class="flex flex-col gap-3">
           @for (med of meds(); track med.id) {
@@ -311,9 +327,15 @@ interface Medication {
   encapsulation: ViewEncapsulation.None,
 })
 export class HealthPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dashboards: $localize`Dashboards`,
+    health: $localize`Health`,
+  };
+
   private readonly heart = HEART.map((row) => ({ ...row }));
   private readonly heartConfig: ScChartConfig = {
-    bpm: { label: 'Heart rate', color: 'var(--chart-3)' },
+    bpm: { label: $localize`Heart rate`, color: 'var(--chart-3)' },
   };
   private readonly rings = RINGS;
   private readonly appointments = APPOINTMENTS.map((visit) => ({
@@ -321,10 +343,30 @@ export class HealthPage {
     person: PEOPLE.find((p) => p.id === visit.personId) ?? PEOPLE[0],
   }));
   private readonly meds = signal<readonly Medication[]>([
-    { id: 1, name: 'Vitamin D', dose: '1,000 IU, morning', taken: true },
-    { id: 2, name: 'Omega-3', dose: '1 capsule, lunch', taken: true },
-    { id: 3, name: 'Magnesium', dose: '200 mg, evening', taken: false },
-    { id: 4, name: 'Iron', dose: '14 mg, evening', taken: false },
+    {
+      id: 1,
+      name: $localize`Vitamin D`,
+      dose: $localize`1,000 IU, morning`,
+      taken: true,
+    },
+    {
+      id: 2,
+      name: $localize`Omega-3`,
+      dose: $localize`1 capsule, lunch`,
+      taken: true,
+    },
+    {
+      id: 3,
+      name: $localize`Magnesium`,
+      dose: $localize`200 mg, evening`,
+      taken: false,
+    },
+    {
+      id: 4,
+      name: $localize`Iron`,
+      dose: $localize`14 mg, evening`,
+      taken: false,
+    },
   ]);
   private readonly taken = computed(
     () => this.meds().filter((med) => med.taken).length,

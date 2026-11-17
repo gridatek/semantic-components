@@ -22,6 +22,7 @@ import { SiPencilIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
 import { PROJECT_ROWS, type Priority } from '../../data/tables';
 import { PageHeader } from '../../layout/page-header';
 import { initials } from '../../shared/format';
+import { label } from '../../shared/labels';
 import { EmployeesTable } from './employees-table';
 
 type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
@@ -53,7 +54,11 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
     EmployeesTable,
   ],
   template: `
-    <app-page-header title="Tables" [trail]="[{ label: 'Tables' }]" />
+    <app-page-header
+      i18n-title
+      title="Tables"
+      [trail]="[{ label: t.tables }]"
+    />
 
     @for (table of tables; track table.kind) {
       @if (table.kind === 'hover') {
@@ -71,6 +76,7 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
                   @if (table.kind === 'checkbox') {
                     <th scTableHeaderCell class="w-10">
                       <input
+                        i18n-aria-label
                         scCheckbox
                         aria-label="Select all"
                         [checked]="allChecked()"
@@ -79,12 +85,12 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
                       />
                     </th>
                   }
-                  <th scTableHeaderCell>Assigned</th>
-                  <th scTableHeaderCell>Project</th>
-                  <th scTableHeaderCell>Priority</th>
-                  <th scTableHeaderCell class="text-end">Budget</th>
+                  <th i18n scTableHeaderCell>Assigned</th>
+                  <th i18n scTableHeaderCell>Project</th>
+                  <th i18n scTableHeaderCell>Priority</th>
+                  <th i18n scTableHeaderCell class="text-end">Budget</th>
                   @if (table.kind !== 'basic') {
-                    <th scTableHeaderCell class="text-end">Actions</th>
+                    <th i18n scTableHeaderCell class="text-end">Actions</th>
                   }
                 </tr>
               </thead>
@@ -103,7 +109,7 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
                       <td scTableCell>
                         <input
                           scCheckbox
-                          [attr.aria-label]="'Select ' + row.name"
+                          [attr.aria-label]="t.select + row.name"
                           [checked]="checked().includes(row.id)"
                           (change)="toggle(row.id)"
                         />
@@ -120,7 +126,7 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
                         <div class="flex flex-col">
                           <span class="font-medium">{{ row.name }}</span>
                           <span class="text-muted-foreground text-xs">{{
-                            row.role
+                            labelOf(row.role)
                           }}</span>
                         </div>
                       </div>
@@ -128,7 +134,7 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
                     <td scTableCell>{{ row.project }}</td>
                     <td scTableCell>
                       <span scBadge [variant]="badge(row.priority)">{{
-                        row.priority
+                        labelOf(row.priority)
                       }}</span>
                     </td>
                     <td scTableCell class="text-end tabular-nums">
@@ -138,11 +144,13 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
                       <td scTableCell class="text-end">
                         <button scButton variant="ghost" size="icon-sm">
                           <svg siPencilIcon></svg>
-                          <span class="sr-only">Edit {{ row.name }}</span>
+                          <span i18n class="sr-only">Edit {{ row.name }}</span>
                         </button>
                         <button scButton variant="ghost" size="icon-sm">
                           <svg siTrash2Icon></svg>
-                          <span class="sr-only">Delete {{ row.name }}</span>
+                          <span i18n class="sr-only"
+                            >Delete {{ row.name }}</span
+                          >
                         </button>
                       </td>
                     }
@@ -159,12 +167,19 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
   encapsulation: ViewEncapsulation.None,
 })
 export class TablesPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    tables: $localize`Tables`,
+    select: $localize`Select `,
+  };
+
   protected readonly rows = PROJECT_ROWS;
   protected readonly tables: readonly { kind: Kind; title: string }[] = [
-    { kind: 'basic', title: 'Basic Table' },
-    { kind: 'hover', title: 'Hover Table' },
-    { kind: 'striped', title: 'Striped Row Table' },
-    { kind: 'checkbox', title: 'Checkbox Table' },
+    { kind: 'basic', title: $localize`Basic Table` },
+    { kind: 'hover', title: $localize`Hover Table` },
+    { kind: 'striped', title: $localize`Striped Row Table` },
+    { kind: 'checkbox', title: $localize`Checkbox Table` },
   ];
   protected readonly initialsOf = initials;
 

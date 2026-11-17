@@ -60,7 +60,14 @@ import { personById } from '../../data/people';
 import { PRODUCTS, thumbOf } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
 import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
-import { compactMoney, day, initials, money } from '../../shared/format';
+import {
+  axisLabel,
+  compactMoney,
+  day,
+  initials,
+  money,
+} from '../../shared/format';
+import { label } from '../../shared/labels';
 import { orderBadge } from '../../shared/status';
 
 const REVENUE = [
@@ -132,14 +139,16 @@ const REVENUE = [
   ],
   template: `
     <app-page-header
+      i18n-title
       title="eCommerce"
-      [trail]="[{ label: 'Dashboards' }, { label: 'eCommerce' }]"
+      [trail]="[{ label: t.dashboards }, { label: 'eCommerce' }]"
     />
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <dl scStatCard>
         <dt scStatCardLabel>
-          Revenue <svg siDollarSignIcon scStatCardIcon></svg>
+          <ng-container i18n>Revenue</ng-container>
+          <svg siDollarSignIcon scStatCardIcon></svg>
         </dt>
         <dd
           scStatCardValue
@@ -153,11 +162,12 @@ const REVENUE = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd scStatCardDescription>from last half</dd>
+        <dd i18n scStatCardDescription>from last half</dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          Orders <svg siShoppingCartIcon scStatCardIcon></svg>
+          <ng-container i18n>Orders</ng-container>
+          <svg siShoppingCartIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="2384"></dd>
         <dd
@@ -167,11 +177,12 @@ const REVENUE = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd scStatCardDescription>from last half</dd>
+        <dd i18n scStatCardDescription>from last half</dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          Customers <svg siUsersIcon scStatCardIcon></svg>
+          <ng-container i18n>Customers</ng-container>
+          <svg siUsersIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="1126"></dd>
         <dd
@@ -181,11 +192,12 @@ const REVENUE = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd scStatCardDescription>from last half</dd>
+        <dd i18n scStatCardDescription>from last half</dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          Conversion <svg siPercentIcon scStatCardIcon></svg>
+          <ng-container i18n>Conversion</ng-container>
+          <svg siPercentIcon scStatCardIcon></svg>
         </dt>
         <dd
           scStatCardValue
@@ -199,15 +211,15 @@ const REVENUE = [
         >
           <svg siTrendingDownIcon></svg>
         </dd>
-        <dd scStatCardDescription>from last half</dd>
+        <dd i18n scStatCardDescription>from last half</dd>
       </dl>
     </div>
 
     <div class="grid gap-4 xl:grid-cols-3">
       <div scCard class="xl:col-span-2">
         <div scCardHeader>
-          <h2 scCardTitle>Revenue</h2>
-          <p scCardDescription>This year against last, by month</p>
+          <h2 i18n scCardTitle>Revenue</h2>
+          <p i18n scCardDescription>This year against last, by month</p>
         </div>
         <div scCardBody>
           <div
@@ -217,6 +229,7 @@ const REVENUE = [
             class="h-72 w-full"
           >
             <svg
+              i18n-aria-label
               scChartPlot
               categoryKey="month"
               aria-label="Revenue by month, this year and last"
@@ -236,17 +249,23 @@ const REVENUE = [
 
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Yearly goal</h2>
-          <p scCardDescription>$147K of $204K</p>
+          <h2 i18n scCardTitle>Yearly goal</h2>
+          <p i18n scCardDescription>$147K of $204K</p>
         </div>
         <div scCardBody class="flex flex-col items-center gap-4">
-          <div scProgress [value]="72" aria-label="Yearly goal" class="size-40">
+          <div
+            i18n-aria-label
+            scProgress
+            [value]="72"
+            aria-label="Yearly goal"
+            class="size-40"
+          >
             <svg scProgressCircle [thickness]="6"></svg>
             <span scProgressValueText class="text-2xl font-semibold">{{
               0.72 | percent
             }}</span>
           </div>
-          <p class="text-muted-foreground text-center text-sm">
+          <p i18n class="text-muted-foreground text-center text-sm">
             $57K to go — at this pace, reached in October.
           </p>
         </div>
@@ -256,8 +275,8 @@ const REVENUE = [
     <div class="grid gap-4 xl:grid-cols-3">
       <div scCard class="xl:col-span-2">
         <div scCardHeader>
-          <h2 scCardTitle>Recent orders</h2>
-          <div scCardAction>
+          <h2 i18n scCardTitle>Recent orders</h2>
+          <div i18n scCardAction>
             <a scLink routerLink="/apps/orders" class="text-sm">View all</a>
           </div>
         </div>
@@ -266,12 +285,12 @@ const REVENUE = [
             <table scTable>
               <thead scTableHeader>
                 <tr scTableRow>
-                  <th scTableHeaderCell>Order</th>
-                  <th scTableHeaderCell>Customer</th>
-                  <th scTableHeaderCell>Product</th>
-                  <th scTableHeaderCell>Date</th>
-                  <th scTableHeaderCell class="text-end">Total</th>
-                  <th scTableHeaderCell>Status</th>
+                  <th i18n scTableHeaderCell>Order</th>
+                  <th i18n scTableHeaderCell>Customer</th>
+                  <th i18n scTableHeaderCell>Product</th>
+                  <th i18n scTableHeaderCell>Date</th>
+                  <th i18n scTableHeaderCell class="text-end">Total</th>
+                  <th i18n scTableHeaderCell>Status</th>
                 </tr>
               </thead>
               <tbody scTableBody>
@@ -300,7 +319,7 @@ const REVENUE = [
                     </td>
                     <td scTableCell>
                       <span scBadge [variant]="badgeOf(order.status)">{{
-                        order.status
+                        labelOf(order.status)
                       }}</span>
                     </td>
                   </tr>
@@ -313,8 +332,8 @@ const REVENUE = [
 
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Best sellers</h2>
-          <p scCardDescription>By reviews</p>
+          <h2 i18n scCardTitle>Best sellers</h2>
+          <p i18n scCardDescription>By reviews</p>
         </div>
         <div scCardBody>
           <div scItemGroup class="gap-2">
@@ -334,8 +353,9 @@ const REVENUE = [
                 </div>
                 <div scItemBody>
                   <div scItemTitle>{{ product.name }}</div>
-                  <p scItemDescription>
-                    {{ product.reviews }} reviews · {{ product.category }}
+                  <p i18n scItemDescription>
+                    {{ product.reviews }} reviews ·
+                    {{ labelOf(product.category) }}
                   </p>
                 </div>
                 <span class="text-sm font-medium tabular-nums">{{
@@ -345,7 +365,7 @@ const REVENUE = [
             }
           </div>
         </div>
-        <div scCardFooter>
+        <div i18n scCardFooter>
           <a scLink routerLink="/apps/ecommerce/shop" class="text-sm"
             >Go to the shop</a
           >
@@ -357,10 +377,19 @@ const REVENUE = [
   encapsulation: ViewEncapsulation.None,
 })
 export class EcommercePage {
-  private readonly revenue = REVENUE.map((row) => ({ ...row }));
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dashboards: $localize`Dashboards`,
+  };
+
+  private readonly revenue = REVENUE.map((row) => ({
+    ...row,
+    month: axisLabel(row.month),
+  }));
   private readonly revenueConfig: ScChartConfig = {
-    thisYear: { label: 'This year', color: 'var(--chart-4)' },
-    lastYear: { label: 'Last year', color: 'var(--chart-2)' },
+    thisYear: { label: $localize`This year`, color: 'var(--chart-4)' },
+    lastYear: { label: $localize`Last year`, color: 'var(--chart-2)' },
   };
   private readonly orders = ORDERS.slice(0, 6).map((order) => ({
     ...order,

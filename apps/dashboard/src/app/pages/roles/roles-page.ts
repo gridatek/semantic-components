@@ -35,14 +35,15 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { initials } from '../../shared/format';
+import { label } from '../../shared/labels';
 
 type Role = 'Admin' | 'Editor' | 'Viewer';
 type Action = 'view' | 'edit' | 'delete';
 
 const ROLES: readonly { name: Role; text: string }[] = [
-  { name: 'Admin', text: 'Everything, billing and members included.' },
-  { name: 'Editor', text: 'Creates and changes content; no billing.' },
-  { name: 'Viewer', text: 'Reads dashboards and reports.' },
+  { name: 'Admin', text: $localize`Everything, billing and members included.` },
+  { name: 'Editor', text: $localize`Creates and changes content; no billing.` },
+  { name: 'Viewer', text: $localize`Reads dashboards and reports.` },
 ];
 
 const RESOURCES = [
@@ -103,15 +104,16 @@ function defaults(): Set<string> {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Roles & Permissions"
-      [trail]="[{ label: 'Pages' }, { label: 'Roles & Permissions' }]"
+      [trail]="[{ label: t.pages }, { label: t.rolesPermissions }]"
     />
 
     <div class="grid gap-4 md:grid-cols-3">
       @for (role of roles; track role.name) {
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>{{ role.name }}</h2>
+            <h2 scCardTitle>{{ labelOf(role.name) }}</h2>
             <p scCardDescription>{{ role.text }}</p>
           </div>
           <div scCardBody class="flex items-center justify-between">
@@ -135,7 +137,7 @@ function defaults(): Set<string> {
                 </div>
               }
             </div>
-            <span class="text-muted-foreground text-sm"
+            <span i18n class="text-muted-foreground text-sm"
               >{{ membersOf(role.name).length }} members</span
             >
           </div>
@@ -145,18 +147,18 @@ function defaults(): Set<string> {
 
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Permissions</h2>
-        <p scCardDescription>What each role may do, by section</p>
+        <h2 i18n scCardTitle>Permissions</h2>
+        <p i18n scCardDescription>What each role may do, by section</p>
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <div scTableContainer>
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th scTableHeaderCell rowspan="2">Section</th>
+                <th i18n scTableHeaderCell rowspan="2">Section</th>
                 @for (role of roles; track role.name) {
                   <th scTableHeaderCell colspan="3" class="text-center">
-                    {{ role.name }}
+                    {{ labelOf(role.name) }}
                   </th>
                 }
               </tr>
@@ -167,7 +169,7 @@ function defaults(): Set<string> {
                       scTableHeaderCell
                       class="text-center text-xs font-normal capitalize"
                     >
-                      {{ action }}
+                      {{ labelOf(action) }}
                     </th>
                   }
                 }
@@ -177,7 +179,7 @@ function defaults(): Set<string> {
               @for (resource of resources; track resource) {
                 <tr scTableRow>
                   <th scTableCell scope="row" class="text-start font-medium">
-                    {{ resource }}
+                    {{ labelOf(resource) }}
                   </th>
                   @for (role of roles; track role.name) {
                     @for (action of actions; track action) {
@@ -203,23 +205,23 @@ function defaults(): Set<string> {
           </table>
         </div>
         <div class="flex justify-end">
-          <button scButton (click)="save()">Save permissions</button>
+          <button i18n scButton (click)="save()">Save permissions</button>
         </div>
       </div>
     </div>
 
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Members</h2>
+        <h2 i18n scCardTitle>Members</h2>
       </div>
       <div scCardBody>
         <div scTableContainer>
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th scTableHeaderCell>Member</th>
-                <th scTableHeaderCell>Email</th>
-                <th scTableHeaderCell class="w-44">Role</th>
+                <th i18n scTableHeaderCell>Member</th>
+                <th i18n scTableHeaderCell>Email</th>
+                <th i18n scTableHeaderCell class="w-44">Role</th>
               </tr>
             </thead>
             <tbody scTableBody>
@@ -242,13 +244,13 @@ function defaults(): Set<string> {
                       <select
                         scNativeSelect
                         size="sm"
-                        [attr.aria-label]="'Role of ' + person.name"
+                        [attr.aria-label]="t.roleOf + person.name"
                         [value]="roleOf()[person.id]"
                         (change)="setRole(person.id, $any($event.target).value)"
                       >
                         @for (role of roles; track role.name) {
                           <option scNativeSelectOption [value]="role.name">
-                            {{ role.name }}
+                            {{ labelOf(role.name) }}
                           </option>
                         }
                       </select>
@@ -267,6 +269,14 @@ function defaults(): Set<string> {
   encapsulation: ViewEncapsulation.None,
 })
 export class RolesPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    pages: $localize`Pages`,
+    rolesPermissions: $localize`Roles & Permissions`,
+    roleOf: $localize`Role of `,
+  };
+
   private readonly toaster = inject(ScToaster);
   private readonly roles = ROLES;
   private readonly resources = RESOURCES;
@@ -304,10 +314,13 @@ export class RolesPage {
   private setRole(id: number, role: Role): void {
     this.roleOf.update((roles) => ({ ...roles, [id]: role }));
     const person = PEOPLE.find((p) => p.id === id);
-    this.toaster.show({ title: `${person?.name} is now ${role}` });
+    this.toaster.show({ title: $localize`${person?.name} is now ${role}` });
   }
 
   private save(): void {
-    this.toaster.show({ variant: 'success', title: 'Permissions saved' });
+    this.toaster.show({
+      variant: 'success',
+      title: $localize`Permissions saved`,
+    });
   }
 }

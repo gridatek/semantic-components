@@ -37,8 +37,8 @@ import {
   template: `
     <div scCard class="w-full max-w-md">
       <div scCardHeader class="text-center">
-        <h1 scCardTitle class="text-xl">Forgot Password</h1>
-        <p scCardDescription>
+        <h1 i18n scCardTitle class="text-xl">Forgot Password</h1>
+        <p i18n scCardDescription>
           Please enter the email address associated with your account and we
           will email you a link to reset your password.
         </p>
@@ -47,7 +47,7 @@ import {
         <form (submit)="send($event)">
           <div scFieldGroup>
             <div scField>
-              <label scLabel>Email Address</label>
+              <label i18n scLabel>Email Address</label>
               <input
                 scInput
                 type="email"
@@ -55,10 +55,15 @@ import {
                 [formField]="resetForm.email"
               />
             </div>
-            <button scButton type="submit" class="w-full">
+            <button i18n scButton type="submit" class="w-full">
               Forgot Password
             </button>
-            <a scLink variant="outline" routerLink="/auth/login" class="w-full"
+            <a
+              i18n
+              scLink
+              variant="outline"
+              routerLink="/auth/login"
+              class="w-full"
               >Back to Login</a
             >
           </div>
@@ -82,8 +87,8 @@ export class ForgotPasswordPage {
     if (this.resetForm().invalid()) return;
     this.toaster.show({
       variant: 'success',
-      title: 'Check your email',
-      description: `We sent a reset link to ${this.model().email}.`,
+      title: $localize`Check your email`,
+      description: $localize`We sent a reset link to ${this.model().email}.`,
     });
   }
 }

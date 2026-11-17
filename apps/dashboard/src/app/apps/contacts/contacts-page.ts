@@ -55,6 +55,7 @@ import {
 import { PEOPLE, type Person } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { initials } from '../../shared/format';
+import { label } from '../../shared/labels';
 
 interface Contact extends Person {
   readonly favourite: boolean;
@@ -125,12 +126,13 @@ const EMPTY: ContactDraft = {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Contacts"
-      [trail]="[{ label: 'Apps' }, { label: 'Contacts' }]"
+      [trail]="[{ label: t.apps }, { label: t.contacts }]"
     >
       <button scButton (click)="startAdding()">
         <svg siPlusIcon></svg>
-        Add Contact
+        <ng-container i18n>Add Contact</ng-container>
       </button>
     </app-page-header>
 
@@ -139,6 +141,8 @@ const EMPTY: ContactDraft = {
         <div class="flex flex-col gap-3 px-4">
           <div scInputGroup>
             <input
+              i18n-aria-label
+              i18n-placeholder
               scInput
               type="search"
               placeholder="Search contacts"
@@ -149,6 +153,7 @@ const EMPTY: ContactDraft = {
             <div scInputGroupAddon><svg siSearchIcon></svg></div>
           </div>
           <div
+            i18n-aria-label
             scToggleGroup
             variant="outline"
             size="sm"
@@ -156,12 +161,18 @@ const EMPTY: ContactDraft = {
             [value]="[filter()]"
             (valueChange)="chooseFilter($event)"
           >
-            <button scToggleGroupItem value="all">All</button>
-            <button scToggleGroupItem value="favourites">Favourites</button>
-            <button scToggleGroupItem value="online">Online</button>
+            <button i18n scToggleGroupItem value="all">All</button>
+            <button i18n scToggleGroupItem value="favourites">
+              Favourites
+            </button>
+            <button i18n scToggleGroupItem value="online">Online</button>
           </div>
         </div>
-        <ul class="flex flex-col gap-1 px-2" aria-label="Contacts">
+        <ul
+          i18n-aria-label
+          class="flex flex-col gap-1 px-2"
+          aria-label="Contacts"
+        >
           @for (contact of shown(); track contact.id) {
             <li>
               <button
@@ -179,16 +190,16 @@ const EMPTY: ContactDraft = {
                 </div>
                 <div scItemBody>
                   <div scItemTitle>{{ contact.name }}</div>
-                  <p scItemDescription>{{ contact.role }}</p>
+                  <p scItemDescription>{{ labelOf(contact.role) }}</p>
                 </div>
                 @if (contact.favourite) {
                   <svg siStarIcon class="fill-current"></svg>
-                  <span class="sr-only">Favourite</span>
+                  <span i18n class="sr-only">Favourite</span>
                 }
               </button>
             </li>
           } @empty {
-            <li class="text-muted-foreground p-6 text-center text-sm">
+            <li i18n class="text-muted-foreground p-6 text-center text-sm">
               No contacts match.
             </li>
           }
@@ -206,8 +217,8 @@ const EMPTY: ContactDraft = {
             </span>
             <div class="flex flex-col gap-1">
               <h2 class="text-xl font-semibold">{{ contact.name }}</h2>
-              <p class="text-muted-foreground text-sm">
-                {{ contact.role }} at {{ contact.company }}
+              <p i18n class="text-muted-foreground text-sm">
+                {{ labelOf(contact.role) }} at {{ contact.company }}
               </p>
             </div>
             <div class="ms-auto flex gap-1">
@@ -218,7 +229,7 @@ const EMPTY: ContactDraft = {
                 (pressedChange)="toggleFavourite(contact.id)"
               >
                 <svg siStarIcon></svg>
-                <span class="sr-only">Favourite</span>
+                <span i18n class="sr-only">Favourite</span>
               </button>
               <button
                 scButton
@@ -227,7 +238,7 @@ const EMPTY: ContactDraft = {
                 (click)="startEditing(contact)"
               >
                 <svg siPencilIcon></svg>
-                <span class="sr-only">Edit</span>
+                <span i18n class="sr-only">Edit</span>
               </button>
               <button
                 scButton
@@ -236,7 +247,7 @@ const EMPTY: ContactDraft = {
                 (click)="remove(contact)"
               >
                 <svg siTrash2Icon></svg>
-                <span class="sr-only">Delete</span>
+                <span i18n class="sr-only">Delete</span>
               </button>
             </div>
           </div>
@@ -244,7 +255,7 @@ const EMPTY: ContactDraft = {
           <dl class="grid gap-6 px-6 sm:grid-cols-2">
             <div class="flex flex-col gap-1">
               <dt class="text-muted-foreground flex items-center gap-2 text-sm">
-                <svg siMailIcon></svg> Email
+                <svg siMailIcon></svg> <ng-container i18n>Email</ng-container>
               </dt>
               <dd>
                 <a
@@ -256,19 +267,21 @@ const EMPTY: ContactDraft = {
             </div>
             <div class="flex flex-col gap-1">
               <dt class="text-muted-foreground flex items-center gap-2 text-sm">
-                <svg siPhoneIcon></svg> Phone
+                <svg siPhoneIcon></svg> <ng-container i18n>Phone</ng-container>
               </dt>
               <dd>{{ contact.phone }}</dd>
             </div>
             <div class="flex flex-col gap-1">
               <dt class="text-muted-foreground flex items-center gap-2 text-sm">
-                <svg siBuildingIcon></svg> Company
+                <svg siBuildingIcon></svg>
+                <ng-container i18n>Company</ng-container>
               </dt>
               <dd>{{ contact.company }}</dd>
             </div>
             <div class="flex flex-col gap-1">
               <dt class="text-muted-foreground flex items-center gap-2 text-sm">
-                <svg siMapPinIcon></svg> Location
+                <svg siMapPinIcon></svg>
+                <ng-container i18n>Location</ng-container>
               </dt>
               <dd>{{ contact.city }}, {{ contact.country }}</dd>
             </div>
@@ -276,8 +289,10 @@ const EMPTY: ContactDraft = {
         } @else {
           <div scEmpty class="h-full">
             <div scEmptyHeader>
-              <h2 scEmptyTitle>No contact selected</h2>
-              <div scEmptyDescription>Pick one from the list, or add one.</div>
+              <h2 i18n scEmptyTitle>No contact selected</h2>
+              <div i18n scEmptyDescription>
+                Pick one from the list, or add one.
+              </div>
             </div>
           </div>
         }
@@ -289,50 +304,52 @@ const EMPTY: ContactDraft = {
         <div scDialog class="sm:max-w-lg">
           <button scDialogClose>
             <svg siXIcon></svg>
-            <span class="sr-only">Close</span>
+            <span i18n class="sr-only">Close</span>
           </button>
           <div scDialogHeader>
             <h2 scDialogTitle>
-              {{ editingId() ? 'Edit Contact' : 'Add Contact' }}
+              {{ editingId() ? t.editContact : t.addContact }}
             </h2>
           </div>
           <form id="contact-form" (submit)="save($event)">
             <div scFieldGroup class="grid gap-4 sm:grid-cols-2">
               <div scField class="sm:col-span-2">
-                <label scLabel>Name</label>
+                <label i18n scLabel>Name</label>
                 <input scInput cdkFocusInitial [formField]="draftForm.name" />
               </div>
               <div scField>
-                <label scLabel>Email</label>
+                <label i18n scLabel>Email</label>
                 <input scInput type="email" [formField]="draftForm.email" />
               </div>
               <div scField>
-                <label scLabel>Phone</label>
+                <label i18n scLabel>Phone</label>
                 <input scInput type="tel" [formField]="draftForm.phone" />
               </div>
               <div scField>
-                <label scLabel>Role</label>
+                <label i18n scLabel>Role</label>
                 <input scInput [formField]="draftForm.role" />
               </div>
               <div scField>
-                <label scLabel>Company</label>
+                <label i18n scLabel>Company</label>
                 <input scInput [formField]="draftForm.company" />
               </div>
               <div scField>
-                <label scLabel>City</label>
+                <label i18n scLabel>City</label>
                 <input scInput [formField]="draftForm.city" />
               </div>
               <div scField>
-                <label scLabel>Country</label>
+                <label i18n scLabel>Country</label>
                 <input scInput [formField]="draftForm.country" />
               </div>
             </div>
           </form>
           <div scDialogFooter>
-            <button scDialogClose variant="outline" size="default">
+            <button i18n scDialogClose variant="outline" size="default">
               Cancel
             </button>
-            <button scButton type="submit" form="contact-form">Save</button>
+            <button i18n scButton type="submit" form="contact-form">
+              Save
+            </button>
           </div>
         </div>
       </ng-template>
@@ -342,6 +359,15 @@ const EMPTY: ContactDraft = {
   encapsulation: ViewEncapsulation.None,
 })
 export class ContactsPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    apps: $localize`Apps`,
+    contacts: $localize`Contacts`,
+    editContact: $localize`Edit Contact`,
+    addContact: $localize`Add Contact`,
+  };
+
   private readonly toaster = inject(ScToaster);
   private readonly contacts = signal<readonly Contact[]>(
     PEOPLE.slice(1).map((p) => ({ ...p, favourite: p.id % 3 === 0 })),
@@ -433,7 +459,7 @@ export class ContactsPage {
     this.editing.set(false);
     this.toaster.show({
       variant: 'success',
-      title: id ? 'Contact updated' : 'Contact added',
+      title: id ? $localize`Contact updated` : $localize`Contact added`,
     });
   }
 

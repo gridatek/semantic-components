@@ -40,10 +40,10 @@ import { ProfileHeader } from './profile-header';
     ProfileHeader,
   ],
   template: `
-    <app-profile-header title="Followers" />
+    <app-profile-header i18n-title title="Followers" />
 
     <div class="flex flex-wrap items-center justify-between gap-3">
-      <h2 class="text-lg font-semibold">
+      <h2 i18n class="text-lg font-semibold">
         Followers
         <span class="text-muted-foreground font-normal">{{
           shown().length
@@ -51,6 +51,8 @@ import { ProfileHeader } from './profile-header';
       </h2>
       <div scInputGroup class="max-w-xs">
         <input
+          i18n-aria-label
+          i18n-placeholder
           scInput
           type="search"
           placeholder="Search followers"
@@ -89,16 +91,21 @@ import { ProfileHeader } from './profile-header';
                 (pressedChange)="toggle(person.id)"
               >
                 @if (following().has(person.id)) {
-                  <svg siUserCheckIcon></svg> Following
+                  <svg siUserCheckIcon></svg>
+                  <ng-container i18n>Following</ng-container>
                 } @else {
-                  <svg siUserPlusIcon></svg> Follow back
+                  <svg siUserPlusIcon></svg>
+                  <ng-container i18n>Follow back</ng-container>
                 }
               </button>
             </div>
           </div>
         </li>
       } @empty {
-        <li class="text-muted-foreground col-span-full p-6 text-center text-sm">
+        <li
+          i18n
+          class="text-muted-foreground col-span-full p-6 text-center text-sm"
+        >
           No followers match.
         </li>
       }

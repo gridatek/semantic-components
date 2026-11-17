@@ -38,12 +38,12 @@ const features = tableFeatures({ columnVisibilityFeature });
 const columnHelper = createColumnHelper<typeof features, StaffMember>();
 
 const COLUMNS = columnHelper.columns([
-  columnHelper.accessor('name', { header: 'Name' }),
-  columnHelper.accessor('role', { header: 'Role' }),
-  columnHelper.accessor('department', { header: 'Department' }),
-  columnHelper.accessor('location', { header: 'Location' }),
-  columnHelper.accessor('salary', { header: 'Salary' }),
-  columnHelper.accessor('status', { header: 'Status' }),
+  columnHelper.accessor('name', { header: $localize`Name` }),
+  columnHelper.accessor('role', { header: $localize`Role` }),
+  columnHelper.accessor('department', { header: $localize`Department` }),
+  columnHelper.accessor('location', { header: $localize`Location` }),
+  columnHelper.accessor('salary', { header: $localize`Salary` }),
+  columnHelper.accessor('status', { header: $localize`Status` }),
 ]);
 
 const IMPORTS = [
@@ -78,13 +78,14 @@ const IMPORTS = [
   imports: IMPORTS,
   template: `
     <app-page-header
+      i18n-title
       title="Basic Table"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Basic' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.basic }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>A table from TanStack’s core: no features</p>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>A table from TanStack’s core: no features</p>
       </div>
       <div scCardBody>
         <div scTableContainer>
@@ -123,8 +124,8 @@ const IMPORTS = [
                         <div scEmptyMedia variant="icon">
                           <svg siInboxIcon></svg>
                         </div>
-                        <h3 scEmptyTitle>No people yet</h3>
-                        <div scEmptyDescription>
+                        <h3 i18n scEmptyTitle>No people yet</h3>
+                        <div i18n scEmptyDescription>
                           Invite someone and they’ll show up here.
                         </div>
                       </div>
@@ -142,6 +143,12 @@ const IMPORTS = [
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTablePage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    basic: $localize`Basic`,
+  };
+
   readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
@@ -155,13 +162,14 @@ export class BasicTablePage {
   imports: IMPORTS,
   template: `
     <app-page-header
+      i18n-title
       title="Dense Table"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Dense' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.dense }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>Tighter rows, smaller text</p>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>Tighter rows, smaller text</p>
       </div>
       <div scCardBody>
         <div scTableContainer class="text-xs [&_td]:py-1 [&_th]:h-8">
@@ -200,8 +208,8 @@ export class BasicTablePage {
                         <div scEmptyMedia variant="icon">
                           <svg siInboxIcon></svg>
                         </div>
-                        <h3 scEmptyTitle>No people yet</h3>
-                        <div scEmptyDescription>
+                        <h3 i18n scEmptyTitle>No people yet</h3>
+                        <div i18n scEmptyDescription>
                           Invite someone and they’ll show up here.
                         </div>
                       </div>
@@ -219,6 +227,12 @@ export class BasicTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class DenseTablePage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    dense: $localize`Dense`,
+  };
+
   readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
@@ -232,16 +246,18 @@ export class DenseTablePage {
   imports: IMPORTS,
   template: `
     <app-page-header
+      i18n-title
       title="Sticky Table"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Sticky' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.sticky }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>Scroll the rows: the header stays on top</p>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>Scroll the rows: the header stays on top</p>
       </div>
       <div scCardBody>
         <div
+          i18n-aria-label
           scTableContainer
           tabindex="0"
           aria-label="Team, scrollable"
@@ -282,8 +298,8 @@ export class DenseTablePage {
                         <div scEmptyMedia variant="icon">
                           <svg siInboxIcon></svg>
                         </div>
-                        <h3 scEmptyTitle>No people yet</h3>
-                        <div scEmptyDescription>
+                        <h3 i18n scEmptyTitle>No people yet</h3>
+                        <div i18n scEmptyDescription>
                           Invite someone and they’ll show up here.
                         </div>
                       </div>
@@ -301,6 +317,12 @@ export class DenseTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class StickyTablePage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    sticky: $localize`Sticky`,
+  };
+
   readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
@@ -314,13 +336,14 @@ export class StickyTablePage {
   imports: IMPORTS,
   template: `
     <app-page-header
+      i18n-title
       title="Empty Table"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Empty' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.empty }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>No rows: the table says so</p>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>No rows: the table says so</p>
       </div>
       <div scCardBody>
         <div scTableContainer>
@@ -359,8 +382,8 @@ export class StickyTablePage {
                         <div scEmptyMedia variant="icon">
                           <svg siInboxIcon></svg>
                         </div>
-                        <h3 scEmptyTitle>No people yet</h3>
-                        <div scEmptyDescription>
+                        <h3 i18n scEmptyTitle>No people yet</h3>
+                        <div i18n scEmptyDescription>
                           Invite someone and they’ll show up here.
                         </div>
                       </div>
@@ -378,6 +401,12 @@ export class StickyTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class EmptyTablePage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    empty: $localize`Empty`,
+  };
+
   readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,

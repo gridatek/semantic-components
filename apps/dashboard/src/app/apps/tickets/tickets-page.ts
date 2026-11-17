@@ -36,6 +36,7 @@ import {
 import { TICKET_STATUSES, type TicketStatus } from '../../data/tickets';
 import { PageHeader } from '../../layout/page-header';
 import { day } from '../../shared/format';
+import { label } from '../../shared/labels';
 import { TicketsStore } from '../../shared/stores';
 
 type Filter = 'All' | TicketStatus;
@@ -70,14 +71,19 @@ type Filter = 'All' | TicketStatus;
     PageHeader,
   ],
   template: `
-    <app-page-header title="Tickets" [trail]="[{ label: 'Tickets' }]">
+    <app-page-header
+      i18n-title
+      title="Tickets"
+      [trail]="[{ label: t.tickets }]"
+    >
       <a scLink variant="button" routerLink="/apps/tickets/create">
         <svg siPlusIcon></svg>
-        Create Ticket
+        <ng-container i18n>Create Ticket</ng-container>
       </a>
     </app-page-header>
 
     <ul
+      i18n-aria-label
       class="grid grid-cols-2 gap-4 lg:grid-cols-4"
       aria-label="Filter by status"
     >
@@ -106,6 +112,8 @@ type Filter = 'All' | TicketStatus;
       <div scCardBody class="flex flex-col gap-4">
         <div scInputGroup class="max-w-sm">
           <input
+            i18n-aria-label
+            i18n-placeholder
             scInput
             type="search"
             placeholder="Search tickets"
@@ -119,12 +127,12 @@ type Filter = 'All' | TicketStatus;
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th scTableHeaderCell>Id</th>
-                <th scTableHeaderCell>Ticket</th>
-                <th scTableHeaderCell>Assigned To</th>
-                <th scTableHeaderCell>Status</th>
-                <th scTableHeaderCell>Date</th>
-                <th scTableHeaderCell class="text-end">Action</th>
+                <th i18n scTableHeaderCell>Id</th>
+                <th i18n scTableHeaderCell>Ticket</th>
+                <th i18n scTableHeaderCell>Assigned To</th>
+                <th i18n scTableHeaderCell>Status</th>
+                <th i18n scTableHeaderCell>Date</th>
+                <th i18n scTableHeaderCell class="text-end">Action</th>
               </tr>
             </thead>
             <tbody scTableBody>
@@ -160,7 +168,7 @@ type Filter = 'All' | TicketStatus;
                             ? 'secondary'
                             : 'outline'
                       "
-                      >{{ ticket.status }}</span
+                      >{{ labelOf(ticket.status) }}</span
                     >
                   </td>
                   <td scTableCell>{{ dayOf(ticket.date) }}</td>
@@ -172,13 +180,16 @@ type Filter = 'All' | TicketStatus;
                       (click)="remove(ticket.id)"
                     >
                       <svg siTrash2Icon></svg>
-                      <span class="sr-only">Delete ticket {{ ticket.id }}</span>
+                      <span i18n class="sr-only"
+                        >Delete ticket {{ ticket.id }}</span
+                      >
                     </button>
                   </td>
                 </tr>
               } @empty {
                 <tr scTableRow>
                   <td
+                    i18n
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -197,6 +208,12 @@ type Filter = 'All' | TicketStatus;
   encapsulation: ViewEncapsulation.None,
 })
 export class TicketsPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    tickets: $localize`Tickets`,
+  };
+
   private readonly store = inject(TicketsStore);
   private readonly toaster = inject(ScToaster);
 
@@ -206,10 +223,14 @@ export class TicketsPage {
   protected readonly filters = computed(() => {
     const tickets = this.store.tickets();
     return [
-      { value: 'All' as Filter, label: 'Total Tickets', count: tickets.length },
+      {
+        value: 'All' as Filter,
+        label: $localize`Total Tickets`,
+        count: tickets.length,
+      },
       ...TICKET_STATUSES.map((status) => ({
         value: status as Filter,
-        label: `${status} Tickets`,
+        label: $localize`${status} Tickets`,
         count: tickets.filter((ticket) => ticket.status === status).length,
       })),
     ];
@@ -232,6 +253,9 @@ export class TicketsPage {
 
   protected remove(id: number): void {
     this.store.remove(id);
-    this.toaster.show({ variant: 'success', title: `Ticket ${id} deleted` });
+    this.toaster.show({
+      variant: 'success',
+      title: $localize`Ticket ${id} deleted`,
+    });
   }
 }

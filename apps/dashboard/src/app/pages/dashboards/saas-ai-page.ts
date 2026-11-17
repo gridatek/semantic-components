@@ -59,12 +59,14 @@ import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { ChartTooltip } from '../../shared/chart-parts';
 import {
+  axisLabel,
   compact,
   compactMoney,
   day,
   initials,
   money,
 } from '../../shared/format';
+import { label } from '../../shared/labels';
 
 const MRR = [
   { month: 'Nov', mrr: 38200 },
@@ -84,10 +86,10 @@ const PLANS = [
 ];
 
 const MODELS = [
-  { name: 'Chat assistant', tokens: 18.4, quota: 25 },
-  { name: 'Summaries', tokens: 9.1, quota: 15 },
-  { name: 'Image generation', tokens: 4.7, quota: 10 },
-  { name: 'Embeddings', tokens: 2.2, quota: 5 },
+  { name: $localize`Chat assistant`, tokens: 18.4, quota: 25 },
+  { name: $localize`Summaries`, tokens: 9.1, quota: 15 },
+  { name: $localize`Image generation`, tokens: 4.7, quota: 10 },
+  { name: $localize`Embeddings`, tokens: 2.2, quota: 5 },
 ];
 
 const SIGNUPS = [
@@ -156,14 +158,16 @@ const SIGNUPS = [
   ],
   template: `
     <app-page-header
+      i18n-title
       title="SaaS + AI"
-      [trail]="[{ label: 'Dashboards' }, { label: 'SaaS + AI' }]"
+      [trail]="[{ label: t.dashboards }, { label: t.saasAi }]"
     />
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <dl scStatCard>
         <dt scStatCardLabel>
-          Monthly revenue <svg siCreditCardIcon scStatCardIcon></svg>
+          <ng-container i18n>Monthly revenue</ng-container>
+          <svg siCreditCardIcon scStatCardIcon></svg>
         </dt>
         <dd
           scStatCardValue
@@ -181,11 +185,12 @@ const SIGNUPS = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd scStatCardDescription>from last month</dd>
+        <dd i18n scStatCardDescription>from last month</dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          Paying accounts <svg siSparklesIcon scStatCardIcon></svg>
+          <ng-container i18n>Paying accounts</ng-container>
+          <svg siSparklesIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="3102"></dd>
         <dd
@@ -195,11 +200,12 @@ const SIGNUPS = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd scStatCardDescription>from last month</dd>
+        <dd i18n scStatCardDescription>from last month</dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          Churn <svg siUserMinusIcon scStatCardIcon></svg>
+          <ng-container i18n>Churn</ng-container>
+          <svg siUserMinusIcon scStatCardIcon></svg>
         </dt>
         <dd
           scStatCardValue
@@ -214,11 +220,12 @@ const SIGNUPS = [
         >
           <svg siTrendingDownIcon></svg>
         </dd>
-        <dd scStatCardDescription>from last month</dd>
+        <dd i18n scStatCardDescription>from last month</dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          AI requests <svg siBotIcon scStatCardIcon></svg>
+          <ng-container i18n>AI requests</ng-container>
+          <svg siBotIcon scStatCardIcon></svg>
         </dt>
         <dd
           scStatCardValue
@@ -232,19 +239,24 @@ const SIGNUPS = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd scStatCardDescription>from last month</dd>
+        <dd i18n scStatCardDescription>from last month</dd>
       </dl>
     </div>
 
     <div class="grid gap-4 xl:grid-cols-3">
       <div scCard class="xl:col-span-2">
         <div scCardHeader>
-          <h2 scCardTitle>Monthly recurring revenue</h2>
-          <p scCardDescription>The last six months</p>
+          <h2 i18n scCardTitle>Monthly recurring revenue</h2>
+          <p i18n scCardDescription>The last six months</p>
         </div>
         <div scCardBody>
           <div scChart [config]="mrrConfig" [data]="mrr" class="h-72 w-full">
-            <svg scChartPlot categoryKey="month" aria-label="MRR by month">
+            <svg
+              i18n-aria-label
+              scChartPlot
+              categoryKey="month"
+              aria-label="MRR by month"
+            >
               <g scChartGrid />
               <g scChartCategoryAxis />
               <g scChartValueAxis [tickFormatter]="shortMoney" />
@@ -258,12 +270,13 @@ const SIGNUPS = [
 
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Accounts by plan</h2>
-          <p scCardDescription>{{ totalAccounts }} accounts</p>
+          <h2 i18n scCardTitle>Accounts by plan</h2>
+          <p i18n scCardDescription>{{ totalAccounts }} accounts</p>
         </div>
         <div scCardBody>
           <div scChart [config]="planConfig" [data]="plans" class="h-72 w-full">
             <svg
+              i18n-aria-label
               scChartPlot
               categoryKey="plan"
               layout="vertical"
@@ -281,14 +294,14 @@ const SIGNUPS = [
     <div class="grid gap-4 xl:grid-cols-3">
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>AI usage</h2>
-          <p scCardDescription>Million tokens this month, of the quota</p>
+          <h2 i18n scCardTitle>AI usage</h2>
+          <p i18n scCardDescription>Million tokens this month, of the quota</p>
         </div>
         <div scCardBody class="flex flex-col gap-4">
           @for (model of models; track model.name) {
             <div scProgress [value]="model.tokens" [max]="model.quota">
               <span scProgressLabel>{{ model.name }}</span>
-              <span scProgressValueText
+              <span i18n scProgressValueText
                 >{{ model.tokens }}M / {{ model.quota }}M</span
               >
               <div scProgressTrack><div scProgressRange></div></div>
@@ -299,8 +312,8 @@ const SIGNUPS = [
 
       <div scCard class="xl:col-span-2">
         <div scCardHeader>
-          <h2 scCardTitle>New accounts</h2>
-          <div scCardAction>
+          <h2 i18n scCardTitle>New accounts</h2>
+          <div i18n scCardAction>
             <a scLink routerLink="/apps/customers" class="text-sm">View all</a>
           </div>
         </div>
@@ -309,10 +322,10 @@ const SIGNUPS = [
             <table scTable>
               <thead scTableHeader>
                 <tr scTableRow>
-                  <th scTableHeaderCell>Account</th>
-                  <th scTableHeaderCell>Plan</th>
+                  <th i18n scTableHeaderCell>Account</th>
+                  <th i18n scTableHeaderCell>Plan</th>
                   <th scTableHeaderCell class="text-end">MRR</th>
-                  <th scTableHeaderCell>Joined</th>
+                  <th i18n scTableHeaderCell>Joined</th>
                 </tr>
               </thead>
               <tbody scTableBody>
@@ -341,7 +354,9 @@ const SIGNUPS = [
                       </div>
                     </td>
                     <td scTableCell>
-                      <span scBadge variant="secondary">{{ signup.plan }}</span>
+                      <span scBadge variant="secondary">{{
+                        labelOf(signup.plan)
+                      }}</span>
                     </td>
                     <td scTableCell class="text-end tabular-nums">
                       {{ moneyOf(signup.mrr) }}
@@ -359,14 +374,17 @@ const SIGNUPS = [
     <div scCard>
       <div scCardHeader>
         <h2 scCardTitle class="flex items-center gap-2">
-          <svg siSparklesIcon></svg> Ask the assistant
+          <svg siSparklesIcon></svg>
+          <ng-container i18n>Ask the assistant</ng-container>
         </h2>
-        <p scCardDescription>About your numbers, in plain words</p>
+        <p i18n scCardDescription>About your numbers, in plain words</p>
       </div>
       <div scCardBody>
         <form (submit)="ask($event)">
           <div scInputGroup>
             <textarea
+              i18n-placeholder
+              i18n-aria-label
               scTextarea
               rows="2"
               aria-label="Your question"
@@ -383,7 +401,7 @@ const SIGNUPS = [
                 class="ms-auto"
               >
                 <svg siArrowUpIcon></svg>
-                <span class="sr-only">Ask</span>
+                <span i18n class="sr-only">Ask</span>
               </button>
             </div>
           </div>
@@ -395,10 +413,23 @@ const SIGNUPS = [
   encapsulation: ViewEncapsulation.None,
 })
 export class SaasAiPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dashboards: $localize`Dashboards`,
+    saasAi: $localize`SaaS + AI`,
+  };
+
   private readonly router = inject(Router);
   private readonly question = signal('');
-  private readonly mrr = MRR.map((row) => ({ ...row }));
-  private readonly plans = PLANS.map((row) => ({ ...row }));
+  private readonly mrr = MRR.map((row) => ({
+    ...row,
+    month: axisLabel(row.month),
+  }));
+  private readonly plans = PLANS.map((row) => ({
+    ...row,
+    plan: label(row.plan),
+  }));
   private readonly totalAccounts = compact(
     PLANS.reduce((sum, row) => sum + row.accounts, 0),
   );
@@ -411,7 +442,7 @@ export class SaasAiPage {
     mrr: { label: 'MRR', color: 'var(--chart-3)' },
   };
   private readonly planConfig: ScChartConfig = {
-    accounts: { label: 'Accounts', color: 'var(--chart-3)' },
+    accounts: { label: $localize`Accounts`, color: 'var(--chart-3)' },
   };
   private readonly moneyOf = money;
   private readonly dayOf = day;

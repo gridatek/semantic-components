@@ -30,57 +30,57 @@ const TOPICS: readonly {
   questions: readonly { id: string; q: string; a: string }[];
 }[] = [
   {
-    title: 'Getting started',
+    title: $localize`Getting started`,
     questions: [
       {
         id: 'install',
-        q: 'How do I install the dashboard?',
-        a: 'Clone the repository, install the packages and run the dev server. Every screen is ready with sample data; swap the in-memory stores for your API when you are ready.',
+        q: $localize`How do I install the dashboard?`,
+        a: $localize`Clone the repository, install the packages and run the dev server. Every screen is ready with sample data; swap the in-memory stores for your API when you are ready.`,
       },
       {
         id: 'style',
-        q: 'Can I change the look?',
-        a: 'Yes. The look comes from the preset and the theme: pick another preset, or change the colour tokens, and every screen follows. The pages write layout classes only.',
+        q: $localize`Can I change the look?`,
+        a: $localize`Yes. The look comes from the preset and the theme: pick another preset, or change the colour tokens, and every screen follows. The pages write layout classes only.`,
       },
       {
         id: 'dark',
-        q: 'Is there a dark mode?',
-        a: 'Light, dark and system, from the sun icon in the header. The choice is saved.',
+        q: $localize`Is there a dark mode?`,
+        a: $localize`Light, dark and system, from the sun icon in the header. The choice is saved.`,
       },
     ],
   },
   {
-    title: 'Billing',
+    title: $localize`Billing`,
     questions: [
       {
         id: 'plans',
-        q: 'Which plan should I pick?',
-        a: 'Starter fits one person. Pro adds the apps and priority support. Team adds seats, roles and permissions, and audit logs.',
+        q: $localize`Which plan should I pick?`,
+        a: $localize`Starter fits one person. Pro adds the apps and priority support. Team adds seats, roles and permissions, and audit logs.`,
       },
       {
         id: 'refund',
-        q: 'Can I get a refund?',
-        a: 'Within 30 days of a purchase, for any reason. Write to support with your invoice number.',
+        q: $localize`Can I get a refund?`,
+        a: $localize`Within 30 days of a purchase, for any reason. Write to support with your invoice number.`,
       },
       {
         id: 'invoice',
-        q: 'Where are my invoices?',
-        a: 'In Account Settings, under Billing; each can be downloaded as a PDF.',
+        q: $localize`Where are my invoices?`,
+        a: $localize`In Account Settings, under Billing; each can be downloaded as a PDF.`,
       },
     ],
   },
   {
-    title: 'Accounts and security',
+    title: $localize`Accounts and security`,
     questions: [
       {
         id: '2fa',
-        q: 'How do I turn on two-step sign-in?',
-        a: 'Account Settings → Security → Two-step verification. You will scan a code with an authenticator app.',
+        q: $localize`How do I turn on two-step sign-in?`,
+        a: $localize`Account Settings → Security → Two-step verification. You will scan a code with an authenticator app.`,
       },
       {
         id: 'roles',
-        q: 'Can I limit what teammates see?',
-        a: 'Yes — on the Team plan, Roles & Permissions sets what each role can view, edit or delete.',
+        q: $localize`Can I limit what teammates see?`,
+        a: $localize`Yes — on the Team plan, Roles & Permissions sets what each role can view, edit or delete.`,
       },
     ],
   },
@@ -115,17 +115,19 @@ const TOPICS: readonly {
   template: `
     <app-page-header
       title="FAQ"
-      [trail]="[{ label: 'Pages' }, { label: 'FAQ' }]"
+      [trail]="[{ label: t.pages }, { label: 'FAQ' }]"
     />
 
     <div class="mx-auto flex w-full max-w-3xl flex-col gap-6">
       <div class="flex flex-col items-center gap-3 py-4 text-center">
-        <h2 class="text-2xl font-semibold">Frequently asked questions</h2>
-        <p class="text-muted-foreground">
+        <h2 i18n class="text-2xl font-semibold">Frequently asked questions</h2>
+        <p i18n class="text-muted-foreground">
           Can’t find an answer? Write to us — we reply within a day.
         </p>
         <div scInputGroup class="w-full max-w-md">
           <input
+            i18n-aria-label
+            i18n-placeholder
             scInput
             type="search"
             placeholder="Search the questions"
@@ -159,7 +161,7 @@ const TOPICS: readonly {
           </div>
         </section>
       } @empty {
-        <p class="text-muted-foreground text-center">
+        <p i18n class="text-muted-foreground text-center">
           No question matches “{{ query() }}”.
         </p>
       }
@@ -168,17 +170,18 @@ const TOPICS: readonly {
         <div scCard>
           <div scCardHeader>
             <h2 scCardTitle class="flex items-center gap-2">
-              <svg siMailIcon></svg> Email
+              <svg siMailIcon></svg> <ng-container i18n>Email</ng-container>
             </h2>
-            <p scCardDescription>support&#64;dashboard.example</p>
+            <p i18n scCardDescription>support&#64;dashboard.example</p>
           </div>
         </div>
         <div scCard>
           <div scCardHeader>
             <h2 scCardTitle class="flex items-center gap-2">
-              <svg siMessageCircleIcon></svg> Chat
+              <svg siMessageCircleIcon></svg>
+              <ng-container i18n>Chat</ng-container>
             </h2>
-            <p scCardDescription>
+            <p i18n scCardDescription>
               <a scLink routerLink="/apps/chats">Open a chat</a> — weekdays, 9
               to 6.
             </p>
@@ -191,6 +194,11 @@ const TOPICS: readonly {
   encapsulation: ViewEncapsulation.None,
 })
 export class FaqPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    pages: $localize`Pages`,
+  };
+
   private readonly query = signal('');
   private readonly topics = computed(() => {
     const q = this.query().trim().toLowerCase();

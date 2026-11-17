@@ -41,6 +41,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
 import { money } from '../../shared/format';
+import { label } from '../../shared/labels';
 import {
   INVOICE_STATUSES,
   type Invoice,
@@ -92,48 +93,48 @@ interface Draft {
   ],
   template: `
     <app-page-header
-      [title]="id() ? 'Edit ' + id() : 'New Invoice'"
+      [title]="id() ? t.edit + id() : t.newInvoice"
       [trail]="[
-        { label: 'Apps' },
-        { label: 'Invoices', url: '/apps/invoice/list' },
-        { label: id() ? 'Edit' : 'Create' },
+        { label: t.apps },
+        { label: t.invoices, url: '/apps/invoice/list' },
+        { label: id() ? t.edit2 : t.create },
       ]"
     />
 
     <form class="flex flex-col gap-4" (submit)="save($event)">
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Client</h2>
+          <h2 i18n scCardTitle>Client</h2>
         </div>
         <div scCardBody>
           <div scFieldGroup class="grid gap-4 md:grid-cols-2">
             <div scField>
-              <label scLabel>Client</label>
+              <label i18n scLabel>Client</label>
               <input scInput [formField]="invoiceForm.client" />
             </div>
             <div scField>
-              <label scLabel>Email</label>
+              <label i18n scLabel>Email</label>
               <input scInput type="email" [formField]="invoiceForm.email" />
             </div>
             <div scField class="md:col-span-2">
-              <label scLabel>Address</label>
+              <label i18n scLabel>Address</label>
               <input scInput [formField]="invoiceForm.address" />
             </div>
             <div scField>
-              <label scLabel>Issued</label>
+              <label i18n scLabel>Issued</label>
               <input scInput type="date" [formField]="invoiceForm.issued" />
             </div>
             <div scField>
-              <label scLabel>Due</label>
+              <label i18n scLabel>Due</label>
               <input scInput type="date" [formField]="invoiceForm.due" />
             </div>
             <div scField>
-              <label scLabel>Status</label>
+              <label i18n scLabel>Status</label>
               <div scNativeSelectContainer class="w-full">
                 <select scNativeSelect [formField]="invoiceForm.status">
                   @for (status of statuses; track status) {
                     <option scNativeSelectOption [value]="status">
-                      {{ status }}
+                      {{ labelOf(status) }}
                     </option>
                   }
                 </select>
@@ -141,7 +142,7 @@ interface Draft {
               </div>
             </div>
             <div scField>
-              <label scLabel>Tax rate (%)</label>
+              <label i18n scLabel>Tax rate (%)</label>
               <input scInput type="number" [formField]="invoiceForm.taxRate" />
             </div>
           </div>
@@ -150,24 +151,24 @@ interface Draft {
 
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Items</h2>
+          <h2 i18n scCardTitle>Items</h2>
         </div>
         <div scCardBody class="flex flex-col gap-4">
           @for (line of invoiceForm.lines; track $index; let i = $index) {
             <fieldset
               class="grid items-end gap-3 sm:grid-cols-[1fr_6rem_8rem_8rem_auto]"
             >
-              <legend class="sr-only">Item {{ i + 1 }}</legend>
+              <legend i18n class="sr-only">Item {{ i + 1 }}</legend>
               <div scField>
-                <label scLabel>Description</label>
+                <label i18n scLabel>Description</label>
                 <input scInput [formField]="line.description" />
               </div>
               <div scField>
-                <label scLabel>Qty</label>
+                <label i18n scLabel>Qty</label>
                 <input scInput type="number" [formField]="line.quantity" />
               </div>
               <div scField>
-                <label scLabel>Price</label>
+                <label i18n scLabel>Price</label>
                 <input scInput type="number" [formField]="line.price" />
               </div>
               <div
@@ -186,7 +187,7 @@ interface Draft {
                 (click)="removeLine(i)"
               >
                 <svg siTrash2Icon></svg>
-                <span class="sr-only">Remove item {{ i + 1 }}</span>
+                <span i18n class="sr-only">Remove item {{ i + 1 }}</span>
               </button>
             </fieldset>
           }
@@ -198,17 +199,17 @@ interface Draft {
             (click)="addLine()"
           >
             <svg siPlusIcon></svg>
-            Add item
+            <ng-container i18n>Add item</ng-container>
           </button>
           <div scSeparator></div>
           <dl class="ms-auto grid w-full max-w-xs grid-cols-2 gap-y-1 text-sm">
-            <dt class="text-muted-foreground">Subtotal</dt>
+            <dt i18n class="text-muted-foreground">Subtotal</dt>
             <dd class="text-end tabular-nums">{{ moneyOf(subtotal()) }}</dd>
-            <dt class="text-muted-foreground">Tax</dt>
+            <dt i18n class="text-muted-foreground">Tax</dt>
             <dd class="text-end tabular-nums">
               {{ moneyOf(total() - subtotal()) }}
             </dd>
-            <dt class="font-semibold">Total</dt>
+            <dt i18n class="font-semibold">Total</dt>
             <dd class="text-end font-semibold tabular-nums">
               {{ moneyOf(total()) }}
             </dd>
@@ -219,7 +220,7 @@ interface Draft {
       <div scCard>
         <div scCardBody>
           <div scField>
-            <label scLabel>Notes</label>
+            <label i18n scLabel>Notes</label>
             <textarea
               scTextarea
               rows="3"
@@ -230,8 +231,10 @@ interface Draft {
       </div>
 
       <div class="flex justify-end gap-2">
-        <a scLink variant="outline" routerLink="/apps/invoice/list">Cancel</a>
-        <button scButton type="submit">Save Invoice</button>
+        <a i18n scLink variant="outline" routerLink="/apps/invoice/list"
+          >Cancel</a
+        >
+        <button i18n scButton type="submit">Save Invoice</button>
       </div>
     </form>
   `,
@@ -239,6 +242,17 @@ interface Draft {
   encapsulation: ViewEncapsulation.None,
 })
 export class InvoiceEditPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    edit: $localize`Edit `,
+    newInvoice: $localize`New Invoice`,
+    apps: $localize`Apps`,
+    invoices: $localize`Invoices`,
+    edit2: $localize`Edit`,
+    create: $localize`Create`,
+  };
+
   /** The route's `:id` when editing; none when creating. */
   readonly id = input<string>();
 

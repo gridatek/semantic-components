@@ -48,6 +48,7 @@ import { PEOPLE } from '../../data/people';
 import { PRODUCTS, thumbOf } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
 import { initials, money } from '../../shared/format';
+import { label } from '../../shared/labels';
 import { CartStore, ProductStore } from './shop-store';
 
 const REVIEWS = [
@@ -112,11 +113,11 @@ const REVIEWS = [
   ],
   template: `
     <app-page-header
-      [title]="product()?.name ?? 'Product'"
+      [title]="product()?.name ?? t.product"
       [trail]="[
-        { label: 'Apps' },
-        { label: 'Shop', url: '/apps/ecommerce/shop' },
-        { label: product()?.name ?? 'Product' },
+        { label: t.apps },
+        { label: t.shop, url: '/apps/ecommerce/shop' },
+        { label: product()?.name ?? t.product },
       ]"
     />
 
@@ -135,19 +136,24 @@ const REVIEWS = [
           </div>
           <div class="flex flex-col gap-5">
             <div class="flex flex-wrap items-center gap-2">
-              <span scBadge variant="secondary">{{ product.category }}</span>
+              <span scBadge variant="secondary">{{
+                labelOf(product.category)
+              }}</span>
               @if (product.stock) {
-                <span scBadge variant="outline"
+                <span i18n scBadge variant="outline"
                   >{{ product.stock }} in stock</span
                 >
               } @else {
-                <span scBadge variant="destructive">Sold out</span>
+                <span i18n scBadge variant="destructive">Sold out</span>
               }
             </div>
             <h2 class="text-2xl font-semibold">{{ product.name }}</h2>
             <span class="text-muted-foreground flex items-center gap-1 text-sm">
               <svg siStarIcon class="size-4 fill-current"></svg>
-              {{ product.rating }} · {{ product.reviews }} reviews
+              <ng-container i18n
+                >{{ product.rating }} ·
+                {{ product.reviews }} reviews</ng-container
+              >
             </span>
             <div class="flex items-baseline gap-3">
               <span class="text-3xl font-semibold tabular-nums">{{
@@ -163,7 +169,7 @@ const REVIEWS = [
 
             @if (product.colors.length) {
               <fieldset class="flex flex-col gap-3">
-                <legend scLegend variant="label">Colour</legend>
+                <legend i18n scLegend variant="label">Colour</legend>
                 <div class="flex gap-2">
                   @for (color of product.colors; track color; let i = $index) {
                     <input
@@ -171,7 +177,7 @@ const REVIEWS = [
                       name="product-color"
                       class="ring-offset-background checked:ring-ring focus-visible:ring-ring/50 size-8 cursor-pointer appearance-none rounded-full ring-2 ring-transparent ring-offset-2 outline-none checked:ring-2"
                       [style.background-color]="color"
-                      [attr.aria-label]="'Colour ' + (i + 1)"
+                      [attr.aria-label]="t.colour + (i + 1)"
                       [checked]="colorIndex() === i"
                       (change)="colorIndex.set(i)"
                     />
@@ -187,16 +193,16 @@ const REVIEWS = [
               [max]="product.stock || 1"
               class="w-36"
             >
-              <label scLabel>Quantity</label>
+              <label i18n scLabel>Quantity</label>
               <div scNumberFieldGroup>
                 <button scNumberFieldDecrement>
                   <svg siMinusIcon></svg>
-                  <span class="sr-only">Decrease quantity</span>
+                  <span i18n class="sr-only">Decrease quantity</span>
                 </button>
                 <input scNumberFieldInput />
                 <button scNumberFieldIncrement>
                   <svg siPlusIcon></svg>
-                  <span class="sr-only">Increase quantity</span>
+                  <span i18n class="sr-only">Increase quantity</span>
                 </button>
               </div>
             </div>
@@ -209,9 +215,10 @@ const REVIEWS = [
                 (click)="addToCart()"
               >
                 <svg siShoppingCartIcon></svg>
-                Add to cart
+                <ng-container i18n>Add to cart</ng-container>
               </button>
               <button
+                i18n
                 scButton
                 size="lg"
                 variant="outline"
@@ -224,10 +231,12 @@ const REVIEWS = [
             <div scSeparator></div>
             <ul class="text-muted-foreground flex flex-col gap-2 text-sm">
               <li class="flex items-center gap-2">
-                <svg siTruckIcon></svg> Free delivery over $100
+                <svg siTruckIcon></svg>
+                <ng-container i18n>Free delivery over $100</ng-container>
               </li>
               <li class="flex items-center gap-2">
-                <svg siShieldCheckIcon></svg> 30-day returns
+                <svg siShieldCheckIcon></svg>
+                <ng-container i18n>30-day returns</ng-container>
               </li>
             </ul>
           </div>
@@ -238,8 +247,8 @@ const REVIEWS = [
         <div scCardBody>
           <div scTabs value="description">
             <div scTabsList>
-              <button scTabsTab value="description">Description</button>
-              <button scTabsTab value="reviews">
+              <button i18n scTabsTab value="description">Description</button>
+              <button i18n scTabsTab value="reviews">
                 Reviews ({{ reviews.length }})
               </button>
             </div>
@@ -247,7 +256,7 @@ const REVIEWS = [
               <ng-template scTabsPanelContent>
                 <div class="flex flex-col gap-3 pt-4 text-sm">
                   <p>{{ product.description }}</p>
-                  <p class="text-muted-foreground">
+                  <p i18n class="text-muted-foreground">
                     Ships in two working days from our warehouse. Each order is
                     packed in recycled cardboard.
                   </p>
@@ -277,7 +286,10 @@ const REVIEWS = [
                           class="text-muted-foreground flex items-center gap-1 text-xs"
                         >
                           <svg siStarIcon class="size-3.5 fill-current"></svg>
-                          {{ review.rating }} of 5 · {{ review.date }}
+                          <ng-container i18n
+                            >{{ review.rating }} of 5 ·
+                            {{ review.date }}</ng-container
+                          >
                         </span>
                         <p>{{ review.text }}</p>
                       </div>
@@ -291,7 +303,7 @@ const REVIEWS = [
       </div>
 
       <section class="flex flex-col gap-3">
-        <h2 class="text-lg font-semibold">You may also like</h2>
+        <h2 i18n class="text-lg font-semibold">You may also like</h2>
         <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           @for (item of related(); track item.id) {
             <li>
@@ -320,8 +332,8 @@ const REVIEWS = [
     } @else {
       <div scEmpty>
         <div scEmptyHeader>
-          <h2 scEmptyTitle>No such product</h2>
-          <div scEmptyDescription>
+          <h2 i18n scEmptyTitle>No such product</h2>
+          <div i18n scEmptyDescription>
             <a scLink routerLink="/apps/ecommerce/shop">Back to the shop</a>
           </div>
         </div>
@@ -332,6 +344,15 @@ const REVIEWS = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductDetailPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    product: $localize`Product`,
+    apps: $localize`Apps`,
+    shop: $localize`Shop`,
+    colour: $localize`Colour `,
+  };
+
   /** The route's `:id`. */
   readonly id = input.required<string>();
 
@@ -369,7 +390,7 @@ export class ProductDetailPage {
     this.cart.add(product, this.quantity() ?? 1);
     this.toaster.show({
       variant: 'success',
-      title: `${product.name} added to the cart`,
+      title: $localize`${product.name} added to the cart`,
     });
   }
 

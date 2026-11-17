@@ -46,6 +46,8 @@ import {
   SiTrendingUpIcon,
 } from '@semantic-icons/lucide-icons';
 import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
+import { monthDay } from '../../shared/format';
+import { label } from '../../shared/labels';
 
 /** Sales Overview: new and existing users over a period, as two lines. */
 @Component({
@@ -96,7 +98,7 @@ import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
       <div scCardHeader>
         <h2 scCardTitle id="sales-title" class="flex items-center gap-2">
           <svg siTrendingUpIcon></svg>
-          Sales Overview
+          <ng-container i18n>Sales Overview</ng-container>
         </h2>
         <div scCardAction>
           <div
@@ -105,7 +107,13 @@ import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
             (valueChange)="choose($event)"
             [items]="periods"
           >
-            <div scSelectTrigger size="sm" aria-label="Period" class="w-36">
+            <div
+              i18n-aria-label
+              scSelectTrigger
+              size="sm"
+              aria-label="Period"
+              class="w-36"
+            >
               <span scSelectValue></span>
               <svg scSelectIcon siChevronDownIcon></svg>
             </div>
@@ -130,8 +138,8 @@ import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <div class="flex flex-col gap-1">
-          <span class="text-muted-foreground text-sm">Total Sales</span>
-          <div class="flex flex-wrap items-baseline gap-2">
+          <span i18n class="text-muted-foreground text-sm">Total Sales</span>
+          <div i18n class="flex flex-wrap items-baseline gap-2">
             <span class="text-2xl font-semibold tabular-nums">$12,450.00</span>
             <span scBadge variant="secondary">+22%</span>
             <span class="text-muted-foreground text-sm">vs last month</span>
@@ -141,7 +149,7 @@ import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
           <svg
             scChartPlot
             categoryKey="date"
-            [attr.aria-label]="'New and existing users, ' + period()"
+            [attr.aria-label]="t.newAndExistingUsers + period()"
           >
             <g scChartGrid />
             <g scChartCategoryAxis [tickFormatter]="everyOther" />
@@ -159,7 +167,7 @@ import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
               <div scChartTooltip #tooltip="scChartTooltip">
                 <div scChartTooltipLabel>{{ tooltip.label() }}</div>
                 @for (item of tooltip.payload(); track item.dataKey) {
-                  <div scChartTooltipItem [item]="item">
+                  <div i18n scChartTooltipItem [item]="item">
                     <span scChartTooltipIndicator></span>
                     <span scChartTooltipName>{{ item.name }}</span>
                     <span scChartTooltipValue>{{ item.value | number }}k</span>
@@ -184,17 +192,25 @@ import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
   encapsulation: ViewEncapsulation.None,
 })
 export class SalesOverview {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    newAndExistingUsers: $localize`New and existing users, `,
+  };
+
   protected readonly periods = SALES_PERIODS.map((value) => ({
     value,
-    label: value,
+    label: label(value),
   }));
   protected readonly period = signal<SalesPeriod>('Last 30 Days');
   protected readonly data = computed(() =>
-    SALES[this.period()].map((point) => ({ ...point })),
+    SALES[this.period()].map((point) => ({
+      ...point,
+      date: monthDay(point.date),
+    })),
   );
   protected readonly config: ScChartConfig = {
-    newUser: { label: 'New User', color: 'var(--chart-1)' },
-    existingUser: { label: 'Existing User', color: 'var(--chart-2)' },
+    newUser: { label: $localize`New User`, color: 'var(--chart-1)' },
+    existingUser: { label: $localize`Existing User`, color: 'var(--chart-2)' },
   };
 
   /** Half the dates on the axis when there are many. */

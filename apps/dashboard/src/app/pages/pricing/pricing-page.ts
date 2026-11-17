@@ -23,38 +23,38 @@ import { PageHeader } from '../../layout/page-header';
 
 const PLANS = [
   {
-    name: 'Starter',
+    name: $localize`Starter`,
     monthly: 19,
-    text: 'For one person and a first dashboard.',
+    text: $localize`For one person and a first dashboard.`,
     features: [
-      '1 user',
-      'All dashboards',
-      'Charts and tables',
-      'Email support',
+      $localize`1 user`,
+      $localize`All dashboards`,
+      $localize`Charts and tables`,
+      $localize`Email support`,
     ],
     popular: false,
   },
   {
-    name: 'Pro',
+    name: $localize`Pro`,
     monthly: 49,
-    text: 'For a growing product and its apps.',
+    text: $localize`For a growing product and its apps.`,
     features: [
-      '5 users',
-      'Everything in Starter',
-      'All apps',
-      'Priority support',
+      $localize`5 users`,
+      $localize`Everything in Starter`,
+      $localize`All apps`,
+      $localize`Priority support`,
     ],
     popular: true,
   },
   {
-    name: 'Team',
+    name: $localize`Team`,
     monthly: 99,
-    text: 'For teams that need roles and records.',
+    text: $localize`For teams that need roles and records.`,
     features: [
-      'Unlimited users',
-      'Everything in Pro',
-      'Roles & permissions',
-      'Audit log',
+      $localize`Unlimited users`,
+      $localize`Everything in Pro`,
+      $localize`Roles & permissions`,
+      $localize`Audit log`,
     ],
     popular: false,
   },
@@ -64,12 +64,18 @@ const COMPARE: readonly {
   feature: string;
   plans: readonly (boolean | string)[];
 }[] = [
-  { feature: 'Users', plans: ['1', '5', 'Unlimited'] },
-  { feature: 'Dashboards', plans: [true, true, true] },
-  { feature: 'Apps (mail, chat, calendar…)', plans: [false, true, true] },
-  { feature: 'Roles & permissions', plans: [false, false, true] },
-  { feature: 'Audit log', plans: [false, false, true] },
-  { feature: 'Support', plans: ['Email', 'Priority', 'Dedicated'] },
+  { feature: $localize`Users`, plans: ['1', '5', $localize`Unlimited`] },
+  { feature: $localize`Dashboards`, plans: [true, true, true] },
+  {
+    feature: $localize`Apps (mail, chat, calendar…)`,
+    plans: [false, true, true],
+  },
+  { feature: $localize`Roles & permissions`, plans: [false, false, true] },
+  { feature: $localize`Audit log`, plans: [false, false, true] },
+  {
+    feature: $localize`Support`,
+    plans: [$localize`Email`, $localize`Priority`, $localize`Dedicated`],
+  },
 ];
 
 /** Pricing (Pro): plans, monthly or yearly, and how they compare. */
@@ -98,20 +104,22 @@ const COMPARE: readonly {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Pricing"
-      [trail]="[{ label: 'Pages' }, { label: 'Pricing' }]"
+      [trail]="[{ label: t.pages }, { label: t.pricing }]"
     />
 
     <div class="flex flex-col items-center gap-3 py-4 text-center">
-      <h2 class="text-3xl font-semibold tracking-tight">
+      <h2 i18n class="text-3xl font-semibold tracking-tight">
         Plans for every size
       </h2>
-      <p class="text-muted-foreground">
+      <p i18n class="text-muted-foreground">
         Start free for 14 days. No card needed.
       </p>
       <div class="flex items-center gap-3">
-        <span class="text-sm font-medium">Monthly</span>
+        <span i18n class="text-sm font-medium">Monthly</span>
         <input
+          i18n-aria-label
           scSwitch
           id="yearly"
           type="checkbox"
@@ -119,8 +127,8 @@ const COMPARE: readonly {
           (change)="yearly.set(!yearly())"
           aria-label="Pay yearly"
         />
-        <span class="text-sm font-medium">Yearly</span>
-        <span scBadge variant="secondary">2 months free</span>
+        <span i18n class="text-sm font-medium">Yearly</span>
+        <span i18n scBadge variant="secondary">2 months free</span>
       </div>
     </div>
 
@@ -135,7 +143,7 @@ const COMPARE: readonly {
             <h3 scCardTitle class="flex items-center gap-2">
               {{ plan.name }}
               @if (plan.popular) {
-                <span scBadge>Most popular</span>
+                <span i18n scBadge>Most popular</span>
               }
             </h3>
             <p scCardDescription>{{ plan.text }}</p>
@@ -159,6 +167,7 @@ const COMPARE: readonly {
           </div>
           <div scCardFooter>
             <button
+              i18n
               scButton
               class="w-full"
               [variant]="plan.popular ? 'default' : 'outline'"
@@ -173,14 +182,14 @@ const COMPARE: readonly {
 
     <div scCard class="mx-auto w-full max-w-5xl">
       <div scCardHeader>
-        <h2 scCardTitle>Compare plans</h2>
+        <h2 i18n scCardTitle>Compare plans</h2>
       </div>
       <div scCardBody>
         <div scTableContainer>
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th scTableHeaderCell>Feature</th>
+                <th i18n scTableHeaderCell>Feature</th>
                 @for (plan of plans; track plan.name) {
                   <th scTableHeaderCell class="text-center">{{ plan.name }}</th>
                 }
@@ -196,13 +205,13 @@ const COMPARE: readonly {
                     <td scTableCell class="text-center">
                       @if (value === true) {
                         <svg siCheckIcon class="mx-auto size-4"></svg
-                        ><span class="sr-only">Included</span>
+                        ><span i18n class="sr-only">Included</span>
                       } @else if (value === false) {
                         <svg
                           siMinusIcon
                           class="text-muted-foreground mx-auto size-4"
                         ></svg
-                        ><span class="sr-only">Not included</span>
+                        ><span i18n class="sr-only">Not included</span>
                       } @else {
                         {{ value }}
                       }
@@ -220,6 +229,12 @@ const COMPARE: readonly {
   encapsulation: ViewEncapsulation.None,
 })
 export class PricingPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    pages: $localize`Pages`,
+    pricing: $localize`Pricing`,
+  };
+
   private readonly toaster = inject(ScToaster);
   private readonly plans = PLANS;
   private readonly compare = COMPARE;
@@ -233,8 +248,8 @@ export class PricingPage {
   private choose(plan: string): void {
     this.toaster.show({
       variant: 'success',
-      title: `${plan} plan chosen`,
-      description: `Billed ${this.yearly() ? 'yearly' : 'monthly'} after the trial.`,
+      title: $localize`${plan} plan chosen`,
+      description: $localize`Billed ${this.yearly() ? 'yearly' : 'monthly'} after the trial.`,
     });
   }
 }

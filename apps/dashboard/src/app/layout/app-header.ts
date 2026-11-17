@@ -27,6 +27,7 @@ import {
   SiSearchIcon,
 } from '@semantic-icons/lucide-icons';
 import { MESSAGES, NOTIFICATIONS } from '../data/dashboard';
+import { LocaleSelect } from './locale-select';
 import { ThemeMenu } from './theme-menu';
 
 /**
@@ -58,6 +59,7 @@ import { ThemeMenu } from './theme-menu';
     SiMessageSquareIcon,
     SiPanelLeftIcon,
     SiSearchIcon,
+    LocaleSelect,
     ThemeMenu,
   ],
   template: `
@@ -66,7 +68,7 @@ import { ThemeMenu } from './theme-menu';
     >
       <button scSidebarTrigger>
         <svg siPanelLeftIcon></svg>
-        <span class="sr-only">Toggle sidebar</span>
+        <span i18n class="sr-only">Toggle sidebar</span>
       </button>
       <div
         scSeparator
@@ -76,6 +78,8 @@ import { ThemeMenu } from './theme-menu';
       <div role="search" class="hidden max-w-sm flex-1 sm:block">
         <div scInputGroup>
           <input
+            i18n-aria-label
+            i18n-placeholder
             scInput
             type="search"
             placeholder="Search…"
@@ -85,18 +89,19 @@ import { ThemeMenu } from './theme-menu';
         </div>
       </div>
       <div class="ms-auto flex items-center gap-1">
+        <app-locale-select />
         <app-theme-menu />
 
         <div scMenuProvider alignment="end">
           <button scButton scMenuTrigger variant="ghost" size="icon">
             <svg siMessageSquareIcon></svg>
-            <span class="sr-only">Messages</span>
+            <span i18n class="sr-only">Messages</span>
           </button>
           <ng-template scMenuPortal>
             <div scMenu class="w-72">
               <ng-template scMenuContent>
                 <div scMenuGroup>
-                  <div scMenuLabel>Messages</div>
+                  <div i18n scMenuLabel>Messages</div>
                   @for (message of messages; track message.name) {
                     <div scMenuItem [value]="message.name" class="gap-3">
                       <span scAvatar class="size-8">
@@ -120,13 +125,13 @@ import { ThemeMenu } from './theme-menu';
         <div scMenuProvider alignment="end">
           <button scButton scMenuTrigger variant="ghost" size="icon">
             <svg siBellIcon></svg>
-            <span class="sr-only">Notifications</span>
+            <span i18n class="sr-only">Notifications</span>
           </button>
           <ng-template scMenuPortal>
             <div scMenu class="w-72">
               <ng-template scMenuContent>
                 <div scMenuGroup>
-                  <div scMenuLabel>Notifications</div>
+                  <div i18n scMenuLabel>Notifications</div>
                   @for (
                     notification of notifications;
                     track notification.title
@@ -160,13 +165,13 @@ import { ThemeMenu } from './theme-menu';
               <img scAvatarImage src="images/profile/user-1.png" alt="" />
               <span scAvatarFallback>MA</span>
             </span>
-            <span class="sr-only">Account</span>
+            <span i18n class="sr-only">Account</span>
           </button>
           <ng-template scMenuPortal>
             <div scMenu class="w-56" (itemSelected)="go($event)">
               <ng-template scMenuContent>
                 <div scMenuGroup>
-                  <div scMenuLabel>
+                  <div i18n scMenuLabel>
                     <span class="block font-medium">Mathew Anderson</span>
                     <span
                       class="text-muted-foreground block text-xs font-normal"
@@ -174,12 +179,14 @@ import { ThemeMenu } from './theme-menu';
                       mathew.anderson&#64;gmail.com
                     </span>
                   </div>
-                  <div scMenuItem value="/pages/user-profile">My Profile</div>
-                  <div scMenuItem value="/apps/notes">My Notes</div>
-                  <div scMenuItem value="/apps/tickets">My Tickets</div>
+                  <div i18n scMenuItem value="/pages/user-profile">
+                    My Profile
+                  </div>
+                  <div i18n scMenuItem value="/apps/notes">My Notes</div>
+                  <div i18n scMenuItem value="/apps/tickets">My Tickets</div>
                 </div>
                 <div scMenuSeparator></div>
-                <div scMenuItem value="/auth/login" variant="destructive">
+                <div i18n scMenuItem value="/auth/login" variant="destructive">
                   Log out
                 </div>
               </ng-template>

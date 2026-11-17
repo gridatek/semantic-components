@@ -10,16 +10,16 @@ import { SiGithubIcon, SiGlobeIcon } from '@semantic-icons/lucide-icons';
     <div class="grid grid-cols-2 gap-3">
       <button scButton variant="outline" type="button">
         <svg siGlobeIcon></svg>
-        Google
+        <ng-container i18n>Google</ng-container>
       </button>
       <button scButton variant="outline" type="button">
         <svg siGithubIcon></svg>
-        GitHub
+        <ng-container i18n>GitHub</ng-container>
       </button>
     </div>
     <div class="text-muted-foreground flex items-center gap-3 text-sm">
       <div scSeparator class="flex-1"></div>
-      or {{ action() }} with email
+      <ng-container i18n>or {{ action() }} with email</ng-container>
       <div scSeparator class="flex-1"></div>
     </div>
   `,

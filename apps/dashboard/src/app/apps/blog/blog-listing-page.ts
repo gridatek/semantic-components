@@ -11,21 +11,21 @@ import { BlogCard } from './blog-card';
   selector: 'app-blog-listing-page',
   imports: [RouterLink, ScLink, SiPlusIcon, PageHeader, BlogCard],
   template: `
-    <app-page-header title="Blog" [trail]="[{ label: 'Blog' }]">
+    <app-page-header i18n-title title="Blog" [trail]="[{ label: t.blog }]">
       <a scLink variant="button" routerLink="/apps/blog/create">
         <svg siPlusIcon></svg>
-        Create Post
+        <ng-container i18n>Create Post</ng-container>
       </a>
     </app-page-header>
 
-    <h2 class="sr-only">Featured</h2>
+    <h2 i18n class="sr-only">Featured</h2>
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
       @for (post of featured(); track post.id; let first = $first) {
         <app-blog-card [post]="post" featured [priority]="first" />
       }
     </div>
 
-    <h2 class="sr-only">All posts</h2>
+    <h2 i18n class="sr-only">All posts</h2>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
       @for (post of others(); track post.id) {
         <app-blog-card [post]="post" />
@@ -36,6 +36,11 @@ import { BlogCard } from './blog-card';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogListingPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    blog: $localize`Blog`,
+  };
+
   private readonly store = inject(BlogStore);
   /** Featured first: the store's featured posts, else the two latest. */
   protected readonly featured = computed(() => {

@@ -45,6 +45,7 @@ import { CUSTOMERS, type Customer } from '../../data/orders';
 import { personById } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { day, initials, money } from '../../shared/format';
+import { label } from '../../shared/labels';
 
 interface CustomerRow {
   readonly id: number;
@@ -85,12 +86,12 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, CustomerRow>();
 
 const columns = columnHelper.columns([
-  columnHelper.accessor('name', { header: 'Customer' }),
-  columnHelper.accessor('location', { header: 'Location' }),
-  columnHelper.accessor('orders', { header: 'Orders' }),
-  columnHelper.accessor('spent', { header: 'Spent' }),
-  columnHelper.accessor('since', { header: 'Customer since' }),
-  columnHelper.accessor('status', { header: 'Status' }),
+  columnHelper.accessor('name', { header: $localize`Customer` }),
+  columnHelper.accessor('location', { header: $localize`Location` }),
+  columnHelper.accessor('orders', { header: $localize`Orders` }),
+  columnHelper.accessor('spent', { header: $localize`Spent` }),
+  columnHelper.accessor('since', { header: $localize`Customer since` }),
+  columnHelper.accessor('status', { header: $localize`Status` }),
 ]);
 
 /** Customers (Pro): who buys, how often, how much. */
@@ -126,13 +127,14 @@ const columns = columnHelper.columns([
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Customers"
-      [trail]="[{ label: 'Apps' }, { label: 'Customers' }]"
+      [trail]="[{ label: t.apps }, { label: t.customers }]"
     />
 
     <div class="grid gap-4 sm:grid-cols-3">
       <dl scStatCard>
-        <dt scStatCardLabel>Customers</dt>
+        <dt i18n scStatCardLabel>Customers</dt>
         <dd scStatCardValue [value]="rows.length"></dd>
       </dl>
       <dl scStatCard>
@@ -140,7 +142,7 @@ const columns = columnHelper.columns([
         <dd scStatCardValue [value]="vip"></dd>
       </dl>
       <dl scStatCard>
-        <dt scStatCardLabel>Lifetime spend</dt>
+        <dt i18n scStatCardLabel>Lifetime spend</dt>
         <dd
           scStatCardValue
           [value]="spent"
@@ -152,6 +154,8 @@ const columns = columnHelper.columns([
     <div scCard>
       <div scCardBody class="flex flex-col gap-4">
         <input
+          i18n-aria-label
+          i18n-placeholder
           scInput
           scDataTableGlobalFilter
           [table]="table"
@@ -235,13 +239,14 @@ const columns = columnHelper.columns([
                             ? 'secondary'
                             : 'outline'
                       "
-                      >{{ row.original.status }}</span
+                      >{{ labelOf(row.original.status) }}</span
                     >
                   </td>
                 </tr>
               } @empty {
                 <tr scTableRow>
                   <td
+                    i18n
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -260,6 +265,13 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomersPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    apps: $localize`Apps`,
+    customers: $localize`Customers`,
+  };
+
   readonly table = injectTable(() => ({
     features,
     columns,

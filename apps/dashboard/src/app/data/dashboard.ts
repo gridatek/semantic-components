@@ -74,10 +74,10 @@ export interface Asset {
 }
 
 export const ASSETS: readonly Asset[] = [
-  { title: 'Employees', value: '96', icon: 'users' },
-  { title: 'Projects', value: '356', icon: 'file' },
-  { title: 'Clients', value: '3,650', icon: 'briefcase' },
-  { title: 'Events', value: '86', icon: 'bookmark' },
+  { title: $localize`Employees`, value: '96', icon: 'users' },
+  { title: $localize`Projects`, value: '356', icon: 'file' },
+  { title: $localize`Clients`, value: '3,650', icon: 'briefcase' },
+  { title: $localize`Events`, value: '86', icon: 'bookmark' },
 ];
 
 export interface Kpi {
@@ -91,21 +91,21 @@ export interface Kpi {
 
 export const KPIS: readonly Kpi[] = [
   {
-    title: 'Weekly sales',
+    title: $localize`Weekly sales`,
     value: '714k',
     change: '40%',
     trend: 'up',
     icon: 'handbag',
   },
   {
-    title: 'New users',
+    title: $localize`New users`,
     value: '1.35m',
     change: '20%',
     trend: 'down',
     icon: 'users',
   },
   {
-    title: 'Purchase Orders',
+    title: $localize`Purchase Orders`,
     value: '1.72m',
     change: '40%',
     trend: 'up',
@@ -209,33 +209,42 @@ export const MESSAGES: readonly {
 }[] = [
   {
     name: 'Michell Flintoff',
-    text: 'You: Yesterday was great...',
+    text: $localize`You: Yesterday was great...`,
     avatar: 'images/profile/user-2.png',
   },
   {
     name: 'Bianca Anderson',
-    text: 'Nice looking dress you...',
+    text: $localize`Nice looking dress you...`,
     avatar: 'images/profile/user-3.png',
   },
   {
     name: 'Andrew Johnson',
-    text: 'Sent a photo',
+    text: $localize`Sent a photo`,
     avatar: 'images/profile/user-4.png',
   },
   {
     name: 'Jolly Cummins',
-    text: "If I don't like something",
+    text: $localize`If I don't like something`,
     avatar: 'images/profile/user-5.png',
   },
   {
     name: 'Josh Macklow',
-    text: '$230 deducted from account',
+    text: $localize`$230 deducted from account`,
     avatar: 'images/profile/user-6.png',
   },
 ];
 
 export const NOTIFICATIONS: readonly { title: string; text: string }[] = [
-  { title: 'Event Today', text: 'Just a reminder that you have event' },
-  { title: 'Settings', text: 'You can customize this template as you want' },
-  { title: 'Launch Admin', text: 'Just see the my new admin!' },
+  {
+    title: $localize`Event Today`,
+    text: $localize`Just a reminder that you have event`,
+  },
+  {
+    title: $localize`Settings`,
+    text: $localize`You can customize this template as you want`,
+  },
+  {
+    title: $localize`Launch Admin`,
+    text: $localize`Just see the my new admin!`,
+  },
 ];

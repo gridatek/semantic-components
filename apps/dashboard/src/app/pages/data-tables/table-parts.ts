@@ -16,6 +16,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { type StaffMember, statusBadge } from '../../data/staff';
 import { day, initials, money } from '../../shared/format';
+import { label } from '../../shared/labels';
 
 /** A column's header that sorts it: its name and an arrow for the direction. */
 @Component({
@@ -50,6 +51,7 @@ import { day, initials, money } from '../../shared/format';
   encapsulation: ViewEncapsulation.None,
 })
 export class SortHeader {
+  private readonly labelOf = label;
   readonly column = input.required<ScDataTableSortableColumn>();
   readonly label = input.required<string>();
 }
@@ -82,11 +84,11 @@ export class SortHeader {
       }
       @case ('status') {
         <span scBadge [variant]="badgeOf(member().status)">{{
-          member().status
+          labelOf(member().status)
         }}</span>
       }
       @default {
-        {{ text() }}
+        {{ labelOf(text()) }}
       }
     }
   `,
@@ -94,6 +96,7 @@ export class SortHeader {
   encapsulation: ViewEncapsulation.None,
 })
 export class StaffCell {
+  private readonly labelOf = label;
   readonly column = input.required<string>();
   readonly member = input.required<StaffMember>();
 

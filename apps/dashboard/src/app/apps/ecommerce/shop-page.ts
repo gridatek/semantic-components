@@ -45,6 +45,7 @@ import {
 } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
 import { money } from '../../shared/format';
+import { label } from '../../shared/labels';
 import { CartStore, ProductStore } from './shop-store';
 
 type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
@@ -85,14 +86,15 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Shop"
-      [trail]="[{ label: 'Apps' }, { label: 'Shop' }]"
+      [trail]="[{ label: t.apps }, { label: t.shop }]"
     >
       <a scLink variant="outline" routerLink="/apps/ecommerce/checkout">
         <svg siShoppingCartIcon></svg>
-        Cart
+        <ng-container i18n>Cart</ng-container>
         <span scBadge>{{ cart.count() }}</span>
-        <span class="sr-only">items</span>
+        <span i18n class="sr-only">items</span>
       </a>
     </app-page-header>
 
@@ -100,7 +102,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
       <div scCard class="self-start">
         <div scCardBody class="flex flex-col gap-5">
           <fieldset class="flex flex-col gap-3">
-            <legend scLegend variant="label">Category</legend>
+            <legend i18n scLegend variant="label">Category</legend>
             @for (category of categories; track category) {
               <div scField orientation="horizontal">
                 <input
@@ -110,13 +112,15 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                   [checked]="chosen().has(category)"
                   (change)="toggleCategory(category)"
                 />
-                <label scLabel [for]="'cat-' + category">{{ category }}</label>
+                <label scLabel [for]="'cat-' + category">{{
+                  labelOf(category)
+                }}</label>
               </div>
             }
           </fieldset>
           <div scSeparator></div>
           <div class="flex flex-col gap-3">
-            <label scLabel for="max-price"
+            <label i18n scLabel for="max-price"
               >Up to {{ moneyOf(maxPrice()) }}</label
             >
             <input
@@ -137,9 +141,9 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
               [checked]="inStock()"
               (change)="inStock.set(!inStock())"
             />
-            <label scLabel for="in-stock">In stock only</label>
+            <label i18n scLabel for="in-stock">In stock only</label>
           </div>
-          <button scButton variant="outline" (click)="reset()">
+          <button i18n scButton variant="outline" (click)="reset()">
             Reset filters
           </button>
         </div>
@@ -149,6 +153,8 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
         <div class="flex flex-wrap items-center gap-3">
           <div scInputGroup class="max-w-xs">
             <input
+              i18n-aria-label
+              i18n-placeholder
               scInput
               type="search"
               placeholder="Search products"
@@ -158,24 +164,27 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
             />
             <div scInputGroupAddon><svg siSearchIcon></svg></div>
           </div>
-          <span class="text-muted-foreground text-sm" aria-live="polite">
+          <span i18n class="text-muted-foreground text-sm" aria-live="polite">
             {{ shown().length }} products
           </span>
           <div scNativeSelectContainer class="ms-auto w-48">
             <select
+              i18n-aria-label
               scNativeSelect
               aria-label="Sort by"
               [value]="sort()"
               (change)="sort.set($any($event.target).value)"
             >
-              <option scNativeSelectOption value="newest">Newest</option>
-              <option scNativeSelectOption value="price-asc">
+              <option i18n scNativeSelectOption value="newest">Newest</option>
+              <option i18n scNativeSelectOption value="price-asc">
                 Price: low to high
               </option>
-              <option scNativeSelectOption value="price-desc">
+              <option i18n scNativeSelectOption value="price-desc">
                 Price: high to low
               </option>
-              <option scNativeSelectOption value="rating">Best rated</option>
+              <option i18n scNativeSelectOption value="rating">
+                Best rated
+              </option>
             </select>
             <svg siChevronDownIcon scNativeSelectIcon></svg>
           </div>
@@ -199,6 +208,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                   <span class="sr-only">{{ product.name }}</span>
                   @if (product.listPrice) {
                     <span
+                      i18n
                       scBadge
                       variant="destructive"
                       class="absolute start-3 top-3"
@@ -207,6 +217,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                   }
                   @if (!product.stock) {
                     <span
+                      i18n
                       scBadge
                       variant="secondary"
                       class="absolute end-3 top-3"
@@ -216,7 +227,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                 </a>
                 <div scCardBody class="flex flex-1 flex-col gap-2 pt-4">
                   <span class="text-muted-foreground text-xs">{{
-                    product.category
+                    labelOf(product.category)
                   }}</span>
                   <a
                     scLink
@@ -228,7 +239,10 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                     class="text-muted-foreground flex items-center gap-1 text-sm"
                   >
                     <svg siStarIcon class="size-4 fill-current"></svg>
-                    {{ product.rating }} · {{ product.reviews }} reviews
+                    <ng-container i18n
+                      >{{ product.rating }} ·
+                      {{ product.reviews }} reviews</ng-container
+                    >
                   </span>
                   <div class="mt-auto flex items-center gap-2 pt-2">
                     <span class="font-semibold tabular-nums">{{
@@ -247,7 +261,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                       (click)="addToCart(product)"
                     >
                       <svg siShoppingCartIcon></svg>
-                      <span class="sr-only"
+                      <span i18n class="sr-only"
                         >Add {{ product.name }} to the cart</span
                       >
                     </button>
@@ -259,8 +273,8 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
             <li class="col-span-full">
               <div scEmpty>
                 <div scEmptyHeader>
-                  <h2 scEmptyTitle>No products match</h2>
-                  <div scEmptyDescription>Try fewer filters.</div>
+                  <h2 i18n scEmptyTitle>No products match</h2>
+                  <div i18n scEmptyDescription>Try fewer filters.</div>
                 </div>
               </div>
             </li>
@@ -273,6 +287,13 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShopPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    apps: $localize`Apps`,
+    shop: $localize`Shop`,
+  };
+
   private readonly cart = inject(CartStore);
   private readonly store = inject(ProductStore);
   private readonly toaster = inject(ScToaster);
@@ -320,7 +341,7 @@ export class ShopPage {
     this.cart.add(product);
     this.toaster.show({
       variant: 'success',
-      title: `${product.name} added to the cart`,
+      title: $localize`${product.name} added to the cart`,
     });
   }
 }

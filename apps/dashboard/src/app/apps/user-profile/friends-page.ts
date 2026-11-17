@@ -26,6 +26,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { PEOPLE, type Person } from '../../data/people';
 import { initials } from '../../shared/format';
+import { label } from '../../shared/labels';
 import { ProfileHeader } from './profile-header';
 
 /** Friends (Pro User Profile): cards, a message, unfriending. */
@@ -49,10 +50,10 @@ import { ProfileHeader } from './profile-header';
     ProfileHeader,
   ],
   template: `
-    <app-profile-header title="Friends" />
+    <app-profile-header i18n-title title="Friends" />
 
     <div class="flex flex-wrap items-center justify-between gap-3">
-      <h2 class="text-lg font-semibold">
+      <h2 i18n class="text-lg font-semibold">
         Friends
         <span class="text-muted-foreground font-normal">{{
           shown().length
@@ -60,6 +61,8 @@ import { ProfileHeader } from './profile-header';
       </h2>
       <div scInputGroup class="max-w-xs">
         <input
+          i18n-aria-label
+          i18n-placeholder
           scInput
           type="search"
           placeholder="Search friends"
@@ -84,7 +87,7 @@ import { ProfileHeader } from './profile-header';
               </span>
               <span class="font-medium">{{ friend.name }}</span>
               <span class="text-muted-foreground text-sm">{{
-                friend.role
+                labelOf(friend.role)
               }}</span>
             </div>
             <div scCardFooter class="justify-center gap-2">
@@ -94,7 +97,7 @@ import { ProfileHeader } from './profile-header';
                 size="sm"
                 [href]="'mailto:' + friend.email"
               >
-                <svg siMailIcon></svg> Message
+                <svg siMailIcon></svg> <ng-container i18n>Message</ng-container>
                 <span class="sr-only">{{ friend.name }}</span>
               </a>
               <button
@@ -104,14 +107,17 @@ import { ProfileHeader } from './profile-header';
                 (click)="unfriend(friend)"
               >
                 <svg siUserMinusIcon></svg>
-                Remove
+                <ng-container i18n>Remove</ng-container>
                 <span class="sr-only">{{ friend.name }}</span>
               </button>
             </div>
           </div>
         </li>
       } @empty {
-        <li class="text-muted-foreground col-span-full p-6 text-center text-sm">
+        <li
+          i18n
+          class="text-muted-foreground col-span-full p-6 text-center text-sm"
+        >
           No friends match.
         </li>
       }
@@ -121,6 +127,7 @@ import { ProfileHeader } from './profile-header';
   encapsulation: ViewEncapsulation.None,
 })
 export class FriendsPage {
+  private readonly labelOf = label;
   private readonly toaster = inject(ScToaster);
   private readonly query = signal('');
   private readonly friends = signal<readonly Person[]>(PEOPLE.slice(1));
@@ -132,6 +139,8 @@ export class FriendsPage {
 
   private unfriend(friend: Person): void {
     this.friends.update((all) => all.filter((p) => p.id !== friend.id));
-    this.toaster.show({ title: `${friend.name} removed from friends` });
+    this.toaster.show({
+      title: $localize`${friend.name} removed from friends`,
+    });
   }
 }

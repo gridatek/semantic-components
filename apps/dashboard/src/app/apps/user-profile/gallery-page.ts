@@ -17,6 +17,7 @@ import {
   SiChevronRightIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
+import { label } from '../../shared/labels';
 import { ProfileHeader } from './profile-header';
 
 type Album = 'All' | 'Nature' | 'Work' | 'Travel';
@@ -31,73 +32,73 @@ interface Photo {
 const PHOTOS: readonly Photo[] = [
   {
     src: 'images/image-ai/masonry-1.jpg',
-    title: 'Morning walk',
+    title: $localize`Morning walk`,
     album: 'Nature',
     date: 'Apr 26, 2026',
   },
   {
     src: 'images/image-ai/leptop1.jpg',
-    title: 'Desk, early',
+    title: $localize`Desk, early`,
     album: 'Work',
     date: 'Apr 24, 2026',
   },
   {
     src: 'images/image-ai/masonry-2.jpg',
-    title: 'Spring garden',
+    title: $localize`Spring garden`,
     album: 'Nature',
     date: 'Apr 21, 2026',
   },
   {
     src: 'images/image-ai/masonry-3.jpg',
-    title: 'Harbour',
+    title: $localize`Harbour`,
     album: 'Travel',
     date: 'Apr 18, 2026',
   },
   {
     src: 'images/image-ai/leptop3.jpg',
-    title: 'Studio',
+    title: $localize`Studio`,
     album: 'Work',
     date: 'Apr 15, 2026',
   },
   {
     src: 'images/image-ai/masonry-4.jpg',
-    title: 'Old town',
+    title: $localize`Old town`,
     album: 'Travel',
     date: 'Apr 12, 2026',
   },
   {
     src: 'images/image-ai/masonry-5.jpg',
-    title: 'Field',
+    title: $localize`Field`,
     album: 'Nature',
     date: 'Apr 9, 2026',
   },
   {
     src: 'images/image-ai/masonry-6.jpg',
-    title: 'Coast road',
+    title: $localize`Coast road`,
     album: 'Travel',
     date: 'Apr 5, 2026',
   },
   {
     src: 'images/image-ai/leptop4.jpg',
-    title: 'Notes',
+    title: $localize`Notes`,
     album: 'Work',
     date: 'Apr 2, 2026',
   },
   {
     src: 'images/image-ai/masonry-7.jpg',
-    title: 'Blossom',
+    title: $localize`Blossom`,
     album: 'Nature',
     date: 'Mar 30, 2026',
   },
   {
     src: 'images/image-ai/masonry-8.jpg',
-    title: 'Station',
+    title: $localize`Station`,
     album: 'Travel',
     date: 'Mar 27, 2026',
   },
   {
     src: 'images/image-ai/masonry-9.jpg',
-    title: 'Lake',
+    title: $localize`Lake`,
     album: 'Nature',
     date: 'Mar 22, 2026',
   },
@@ -124,16 +125,17 @@ const PHOTOS: readonly Photo[] = [
     ProfileHeader,
   ],
   template: `
-    <app-profile-header title="Gallery" />
+    <app-profile-header i18n-title title="Gallery" />
 
     <div class="flex flex-wrap items-center justify-between gap-3">
-      <h2 class="text-lg font-semibold">
+      <h2 i18n class="text-lg font-semibold">
         Photos
         <span class="text-muted-foreground font-normal">{{
           shown().length
         }}</span>
       </h2>
       <div
+        i18n-aria-label
         scToggleGroup
         variant="outline"
         size="sm"
@@ -142,7 +144,7 @@ const PHOTOS: readonly Photo[] = [
         (valueChange)="chooseAlbum($event)"
       >
         @for (a of albums; track a) {
-          <button scToggleGroupItem [value]="a">{{ a }}</button>
+          <button scToggleGroupItem [value]="a">{{ labelOf(a) }}</button>
         }
       </div>
     </div>
@@ -177,12 +179,14 @@ const PHOTOS: readonly Photo[] = [
         <div scDialog class="sm:max-w-3xl">
           <button scDialogClose>
             <svg siXIcon></svg>
-            <span class="sr-only">Close</span>
+            <span i18n class="sr-only">Close</span>
           </button>
           @if (current(); as photo) {
             <div scDialogHeader>
               <h2 scDialogTitle>{{ photo.title }}</h2>
-              <p scDialogDescription>{{ photo.album }} · {{ photo.date }}</p>
+              <p scDialogDescription>
+                {{ labelOf(photo.album) }} · {{ photo.date }}
+              </p>
             </div>
             <div class="relative aspect-[4/3] overflow-hidden rounded-lg">
               <img
@@ -195,15 +199,15 @@ const PHOTOS: readonly Photo[] = [
             </div>
             <div class="flex items-center justify-between">
               <button scButton variant="outline" size="icon" (click)="step(-1)">
-                <svg siChevronLeftIcon></svg>
-                <span class="sr-only">Previous photo</span>
+                <svg siChevronLeftIcon class="rtl:-scale-x-100"></svg>
+                <span i18n class="sr-only">Previous photo</span>
               </button>
-              <span class="text-muted-foreground text-sm tabular-nums">
+              <span i18n class="text-muted-foreground text-sm tabular-nums">
                 {{ index() + 1 }} of {{ shown().length }}
               </span>
               <button scButton variant="outline" size="icon" (click)="step(1)">
-                <svg siChevronRightIcon></svg>
-                <span class="sr-only">Next photo</span>
+                <svg siChevronRightIcon class="rtl:-scale-x-100"></svg>
+                <span i18n class="sr-only">Next photo</span>
               </button>
             </div>
           }
@@ -215,6 +219,7 @@ const PHOTOS: readonly Photo[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class GalleryPage {
+  private readonly labelOf = label;
   private readonly albums: readonly Album[] = [
     'All',
     'Nature',

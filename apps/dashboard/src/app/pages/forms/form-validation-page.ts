@@ -65,8 +65,9 @@ const EMPTY = {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Form Validation"
-      [trail]="[{ label: 'Forms' }, { label: 'Validation' }]"
+      [trail]="[{ label: t.forms }, { label: t.validation }]"
     />
 
     <form
@@ -76,27 +77,27 @@ const EMPTY = {
     >
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Create an account</h2>
-          <p scCardDescription>
+          <h2 i18n scCardTitle>Create an account</h2>
+          <p i18n scCardDescription>
             Every field has a rule; send the form empty to see them all.
           </p>
         </div>
         <div scCardBody>
           <div scFieldGroup class="grid gap-4 md:grid-cols-2">
             <div scField>
-              <label scLabel>Username</label>
+              <label i18n scLabel>Username</label>
               <input
                 scInput
                 autocomplete="username"
                 [formField]="signupForm.username"
               />
-              <p scFieldDescription>
+              <p i18n scFieldDescription>
                 3 or more letters, numbers or underscores.
               </p>
               <div scFieldErrors></div>
             </div>
             <div scField>
-              <label scLabel>Email</label>
+              <label i18n scLabel>Email</label>
               <input
                 scInput
                 type="email"
@@ -106,31 +107,31 @@ const EMPTY = {
               <div scFieldErrors></div>
             </div>
             <div scField>
-              <label scLabel>Age</label>
+              <label i18n scLabel>Age</label>
               <input scInput type="number" [formField]="signupForm.age" />
-              <p scFieldDescription>From 18 to 120.</p>
+              <p i18n scFieldDescription>From 18 to 120.</p>
               <div scFieldErrors></div>
             </div>
             <div scField>
-              <label scLabel>Website (optional)</label>
+              <label i18n scLabel>Website (optional)</label>
               <input scInput type="url" [formField]="signupForm.website" />
               <div scFieldErrors></div>
             </div>
             <div scField>
-              <label scLabel>Password</label>
+              <label i18n scLabel>Password</label>
               <input
                 scInput
                 type="password"
                 autocomplete="new-password"
                 [formField]="signupForm.password"
               />
-              <p scFieldDescription>
+              <p i18n scFieldDescription>
                 8 or more characters, one of them a number.
               </p>
               <div scFieldErrors></div>
             </div>
             <div scField>
-              <label scLabel>Confirm password</label>
+              <label i18n scLabel>Confirm password</label>
               <input
                 scInput
                 type="password"
@@ -141,16 +142,22 @@ const EMPTY = {
             </div>
             <div scField orientation="horizontal" class="md:col-span-2">
               <input scCheckbox [formField]="signupForm.terms" />
-              <label scLabel>I accept the terms</label>
+              <label i18n scLabel>I accept the terms</label>
               <div scFieldErrors></div>
             </div>
           </div>
         </div>
         <div scCardFooter class="justify-end gap-2">
-          <button scButton type="button" variant="outline" (click)="clear()">
+          <button
+            i18n
+            scButton
+            type="button"
+            variant="outline"
+            (click)="clear()"
+          >
             Clear
           </button>
-          <button scButton type="submit">Create account</button>
+          <button i18n scButton type="submit">Create account</button>
         </div>
       </div>
     </form>
@@ -159,41 +166,50 @@ const EMPTY = {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormValidationPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    forms: $localize`Forms`,
+    validation: $localize`Validation`,
+  };
+
   private readonly toaster = inject(ScToaster);
   private readonly model = signal({ ...EMPTY });
   private readonly signupForm = form(this.model, (path) => {
-    required(path.username, { message: 'A username is needed.' });
+    required(path.username, { message: $localize`A username is needed.` });
     pattern(path.username, /^\w{3,}$/, {
-      message: 'At least 3 letters, numbers or _.',
+      message: $localize`At least 3 letters, numbers or _.`,
     });
-    required(path.email, { message: 'An email is needed.' });
-    email(path.email, { message: 'This is not an email address.' });
-    min(path.age, 18, { message: 'You must be 18 or older.' });
-    max(path.age, 120, { message: 'That is older than anyone.' });
+    required(path.email, { message: $localize`An email is needed.` });
+    email(path.email, { message: $localize`This is not an email address.` });
+    min(path.age, 18, { message: $localize`You must be 18 or older.` });
+    max(path.age, 120, { message: $localize`That is older than anyone.` });
     pattern(path.website, /^$|^https?:\/\/\S+\.\S+$/, {
-      message: 'Start with http:// or https://.',
+      message: $localize`Start with http:// or https://.`,
     });
-    required(path.password, { message: 'A password is needed.' });
-    minLength(path.password, 8, { message: 'At least 8 characters.' });
-    pattern(path.password, /\d/, { message: 'Add a number.' });
+    required(path.password, { message: $localize`A password is needed.` });
+    minLength(path.password, 8, { message: $localize`At least 8 characters.` });
+    pattern(path.password, /\d/, { message: $localize`Add a number.` });
     validate(path.confirm, ({ value, valueOf }) =>
       value() === valueOf(path.password)
         ? undefined
-        : { kind: 'mismatch', message: 'The passwords differ.' },
+        : { kind: 'mismatch', message: $localize`The passwords differ.` },
     );
-    required(path.terms, { message: 'Please accept the terms.' });
+    required(path.terms, { message: $localize`Please accept the terms.` });
   });
 
   private send(event: Event): void {
     event.preventDefault();
     void submit(this.signupForm, async () => {
-      this.toaster.show({ variant: 'success', title: 'Account created' });
+      this.toaster.show({
+        variant: 'success',
+        title: $localize`Account created`,
+      });
       return undefined;
     });
     if (this.signupForm().invalid())
       this.toaster.show({
         variant: 'error',
-        title: 'Check the highlighted fields',
+        title: $localize`Check the highlighted fields`,
       });
   }
 

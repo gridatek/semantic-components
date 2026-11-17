@@ -177,10 +177,10 @@ const EMPTY_BODY = '<p></p>';
   ],
   template: `
     <app-page-header
-      [title]="post() ? 'Blog Edit' : 'Blog Create'"
+      [title]="post() ? t.blogEdit : t.blogCreate"
       [trail]="[
-        { label: 'Blog', url: '/apps/blog/post' },
-        { label: post() ? 'Edit' : 'Create' },
+        { label: t.blog, url: '/apps/blog/post' },
+        { label: post() ? t.edit : t.create },
       ]"
     />
 
@@ -191,26 +191,27 @@ const EMPTY_BODY = '<p></p>';
       <div class="flex flex-col gap-4">
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>General Details</h2>
+            <h2 i18n scCardTitle>General Details</h2>
           </div>
           <div scCardBody>
             <div scFieldGroup>
               <div scField>
-                <label scLabel>Title</label>
+                <label i18n scLabel>Title</label>
                 <input
+                  i18n-placeholder
                   scInput
                   placeholder="Post title"
                   [formField]="postForm.title"
                 />
               </div>
               <div scField>
-                <label scLabel>Excerpt</label>
+                <label i18n scLabel>Excerpt</label>
                 <textarea
                   scTextarea
                   rows="2"
                   [formField]="postForm.excerpt"
                 ></textarea>
-                <p scFieldDescription>
+                <p i18n scFieldDescription>
                   A sentence or two, shown in the listing.
                 </p>
               </div>
@@ -219,14 +220,20 @@ const EMPTY_BODY = '<p></p>';
                 [formField]="postForm.body"
                 class="flex flex-col gap-2"
               >
-                <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
+                <div
+                  i18n-aria-label
+                  scToolbar
+                  aria-label="Formatting"
+                  class="w-full flex-wrap"
+                >
                   <div scToolbarWidgetGroup>
                     <button scToolbarWidget scToggle scEditorCommand="bold">
-                      <svg siBoldIcon></svg><span class="sr-only">Bold</span>
+                      <svg siBoldIcon></svg
+                      ><span i18n class="sr-only">Bold</span>
                     </button>
                     <button scToolbarWidget scToggle scEditorCommand="italic">
                       <svg siItalicIcon></svg
-                      ><span class="sr-only">Italic</span>
+                      ><span i18n class="sr-only">Italic</span>
                     </button>
                     <button
                       scToolbarWidget
@@ -234,7 +241,7 @@ const EMPTY_BODY = '<p></p>';
                       scEditorCommand="underline"
                     >
                       <svg siUnderlineIcon></svg
-                      ><span class="sr-only">Underline</span>
+                      ><span i18n class="sr-only">Underline</span>
                     </button>
                     <button
                       scToolbarWidget
@@ -242,7 +249,7 @@ const EMPTY_BODY = '<p></p>';
                       scEditorCommand="strikethrough"
                     >
                       <svg siStrikethroughIcon></svg
-                      ><span class="sr-only">Strikethrough</span>
+                      ><span i18n class="sr-only">Strikethrough</span>
                     </button>
                   </div>
                   <div scToolbarSeparator></div>
@@ -253,7 +260,7 @@ const EMPTY_BODY = '<p></p>';
                       scEditorCommand="bullet-list"
                     >
                       <svg siListIcon></svg
-                      ><span class="sr-only">Bulleted list</span>
+                      ><span i18n class="sr-only">Bulleted list</span>
                     </button>
                     <button
                       scToolbarWidget
@@ -261,23 +268,27 @@ const EMPTY_BODY = '<p></p>';
                       scEditorCommand="ordered-list"
                     >
                       <svg siListOrderedIcon></svg
-                      ><span class="sr-only">Numbered list</span>
+                      ><span i18n class="sr-only">Numbered list</span>
                     </button>
                     <button scToolbarWidget scToggle scEditorCommand="quote">
-                      <svg siQuoteIcon></svg><span class="sr-only">Quote</span>
+                      <svg siQuoteIcon></svg
+                      ><span i18n class="sr-only">Quote</span>
                     </button>
                   </div>
                   <div scToolbarSeparator></div>
                   <div scToolbarWidgetGroup>
                     <button scToolbarWidget scToggle scEditorCommand="undo">
-                      <svg siUndoIcon></svg><span class="sr-only">Undo</span>
+                      <svg siUndoIcon></svg
+                      ><span i18n class="sr-only">Undo</span>
                     </button>
                     <button scToolbarWidget scToggle scEditorCommand="redo">
-                      <svg siRedoIcon></svg><span class="sr-only">Redo</span>
+                      <svg siRedoIcon></svg
+                      ><span i18n class="sr-only">Redo</span>
                     </button>
                   </div>
                 </div>
                 <div
+                  i18n-placeholder
                   scFrame
                   scEditorContent
                   ariaLabel="Content"
@@ -291,7 +302,7 @@ const EMPTY_BODY = '<p></p>';
 
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Medias</h2>
+            <h2 i18n scCardTitle>Medias</h2>
           </div>
           <div scCardBody class="flex flex-col gap-4">
             @if (cover(); as cover) {
@@ -301,12 +312,14 @@ const EMPTY_BODY = '<p></p>';
               >
                 @if (cover.startsWith('blob:')) {
                   <img
+                    i18n-alt
                     [src]="cover"
                     alt="The chosen cover"
                     class="size-full object-cover"
                   />
                 } @else {
                   <img
+                    i18n-alt
                     [ngSrc]="cover"
                     alt="The current cover"
                     fill
@@ -321,11 +334,15 @@ const EMPTY_BODY = '<p></p>';
               accept="image/*"
               (valueChange)="choose($event)"
             >
-              <input scFileUploadInput aria-label="Cover image" />
+              <input
+                i18n-aria-label
+                scFileUploadInput
+                aria-label="Cover image"
+              />
               <div scFileUploadDropzone>
                 <svg siUploadIcon></svg>
-                <p>Drop the cover image here</p>
-                <button scFileUploadTrigger size="sm">Browse files</button>
+                <p i18n>Drop the cover image here</p>
+                <button i18n scFileUploadTrigger size="sm">Browse files</button>
               </div>
             </div>
           </div>
@@ -335,29 +352,34 @@ const EMPTY_BODY = '<p></p>';
       <div class="flex flex-col gap-4">
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Status</h2>
+            <h2 i18n scCardTitle>Status</h2>
           </div>
           <div scCardBody class="flex flex-col gap-4">
-            <div scRadioGroup [formField]="postForm.status" aria-label="Status">
+            <div
+              i18n-aria-label
+              scRadioGroup
+              [formField]="postForm.status"
+              aria-label="Status"
+            >
               <label scField orientation="horizontal">
                 <input scRadio value="published" />
-                Published
+                <ng-container i18n>Published</ng-container>
               </label>
               <label scField orientation="horizontal">
                 <input scRadio value="draft" />
-                Draft
+                <ng-container i18n>Draft</ng-container>
               </label>
             </div>
             <div scField orientation="horizontal">
               <input scSwitch [formField]="postForm.featured" />
-              <label scLabel>Featured</label>
+              <label i18n scLabel>Featured</label>
             </div>
           </div>
         </div>
 
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Category &amp; Tags</h2>
+            <h2 i18n scCardTitle>Category &amp; Tags</h2>
           </div>
           <div scCardBody>
             <div scFieldGroup>
@@ -367,9 +389,13 @@ const EMPTY_BODY = '<p></p>';
                   [formField]="postForm.category"
                   [items]="categories"
                 >
-                  <div scSelectLabel>Category</div>
+                  <div i18n scSelectLabel>Category</div>
                   <div scSelectTrigger class="w-full">
-                    <span scSelectValue placeholder="Choose a category"></span>
+                    <span
+                      i18n-placeholder
+                      scSelectValue
+                      placeholder="Choose a category"
+                    ></span>
                     <svg scSelectIcon siChevronDownIcon></svg>
                   </div>
                   <ng-template scSelectPortal>
@@ -391,20 +417,24 @@ const EMPTY_BODY = '<p></p>';
                 </div>
               </div>
               <div scField>
-                <label scLabel>Tags</label>
+                <label i18n scLabel>Tags</label>
                 <div scTagsInput [(value)]="tags">
                   @for (tag of tags(); track $index) {
                     <span scTagsInputItem>
                       <span>{{ tag }}</span>
                       <button scTagsInputItemRemove>
                         <svg siXIcon></svg>
-                        <span class="sr-only">Remove {{ tag }}</span>
+                        <span i18n class="sr-only">Remove {{ tag }}</span>
                       </button>
                     </span>
                   }
-                  <input scTagsInputControl placeholder="Add a tag" />
+                  <input
+                    i18n-placeholder
+                    scTagsInputControl
+                    placeholder="Add a tag"
+                  />
                 </div>
-                <p scFieldDescription>
+                <p i18n scFieldDescription>
                   Press Enter or type a comma to add one.
                 </p>
               </div>
@@ -414,7 +444,7 @@ const EMPTY_BODY = '<p></p>';
 
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Post Date</h2>
+            <h2 i18n scCardTitle>Post Date</h2>
           </div>
           <div scCardBody>
             <div scDatePicker #dp="scDatePicker" [(value)]="date">
@@ -429,11 +459,17 @@ const EMPTY_BODY = '<p></p>';
                   class="w-full"
                 >
                   <svg siCalendarIcon></svg>
-                  <span>{{ dp.text() || 'Pick a date' }}</span>
+                  <span>{{ dp.text() || t.pickADate }}</span>
                 </button>
                 <ng-template scPopoverPortal>
-                  <div scPopover class="w-auto p-0" aria-label="Choose a date">
+                  <div
+                    i18n-aria-label
+                    scPopover
+                    class="w-auto p-0"
+                    aria-label="Choose a date"
+                  >
                     <div
+                      i18n-aria-label
                       scCalendar
                       initialFocus
                       aria-label="Choose a date"
@@ -444,11 +480,11 @@ const EMPTY_BODY = '<p></p>';
                       <div scCalendarHeader>
                         <button scCalendarPrevious>
                           <svg siChevronLeftIcon></svg>
-                          <span class="sr-only">Previous month</span>
+                          <span i18n class="sr-only">Previous month</span>
                         </button>
                         <button scCalendarNext>
                           <svg siChevronRightIcon></svg>
-                          <span class="sr-only">Next month</span>
+                          <span i18n class="sr-only">Next month</span>
                         </button>
                       </div>
                     </div>
@@ -460,11 +496,11 @@ const EMPTY_BODY = '<p></p>';
         </div>
 
         <div class="flex justify-end gap-2">
-          <a scLink variant="outline" routerLink="/apps/blog/manage-blog"
+          <a i18n scLink variant="outline" routerLink="/apps/blog/manage-blog"
             >Cancel</a
           >
           <button scButton type="submit">
-            {{ post() ? 'Save Changes' : 'Create Post' }}
+            {{ post() ? t.saveChanges : t.createPost }}
           </button>
         </div>
       </div>
@@ -474,6 +510,18 @@ const EMPTY_BODY = '<p></p>';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogEditPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    blogEdit: $localize`Blog Edit`,
+    blogCreate: $localize`Blog Create`,
+    blog: $localize`Blog`,
+    edit: $localize`Edit`,
+    create: $localize`Create`,
+    pickADate: $localize`Pick a date`,
+    saveChanges: $localize`Save Changes`,
+    createPost: $localize`Create Post`,
+  };
+
   private readonly store = inject(BlogStore);
   private readonly router = inject(Router);
   private readonly toaster = inject(ScToaster);
@@ -528,8 +576,8 @@ export class BlogEditPage {
     if (this.postForm().invalid()) {
       this.toaster.show({
         variant: 'error',
-        title: 'Some fields are missing',
-        description: 'A post needs a title and a category.',
+        title: $localize`Some fields are missing`,
+        description: $localize`A post needs a title and a category.`,
       });
       return;
     }
@@ -557,7 +605,7 @@ export class BlogEditPage {
     } satisfies Omit<BlogPost, 'id' | 'slug'> & { id?: string });
     this.toaster.show({
       variant: 'success',
-      title: existing ? 'Post saved' : 'Post created',
+      title: existing ? $localize`Post saved` : $localize`Post created`,
     });
     void this.router.navigate(['/apps/blog/detail', saved.slug]);
   }

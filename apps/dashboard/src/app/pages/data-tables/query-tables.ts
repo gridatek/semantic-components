@@ -74,22 +74,28 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, StaffMember>();
 
 const COLUMNS = columnHelper.columns([
-  columnHelper.accessor('name', { header: 'Name', filterFn: 'includesString' }),
-  columnHelper.accessor('role', { header: 'Role', filterFn: 'includesString' }),
+  columnHelper.accessor('name', {
+    header: $localize`Name`,
+    filterFn: 'includesString',
+  }),
+  columnHelper.accessor('role', {
+    header: $localize`Role`,
+    filterFn: 'includesString',
+  }),
   columnHelper.accessor('department', {
-    header: 'Department',
+    header: $localize`Department`,
     filterFn: 'includesString',
   }),
   columnHelper.accessor('location', {
-    header: 'Location',
+    header: $localize`Location`,
     filterFn: 'includesString',
   }),
   columnHelper.accessor('salary', {
-    header: 'Salary',
+    header: $localize`Salary`,
     enableColumnFilter: false,
   }),
   columnHelper.accessor('status', {
-    header: 'Status',
+    header: $localize`Status`,
     filterFn: 'includesString',
   }),
 ]);
@@ -120,13 +126,14 @@ const IMPORTS = [
   imports: [...IMPORTS, SortHeader],
   template: `
     <app-page-header
+      i18n-title
       title="Sorting"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Sorting' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.sorting }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>
           A header sorts up, then down, then not; Shift+click adds another
           column
         </p>
@@ -168,6 +175,7 @@ const IMPORTS = [
               } @empty {
                 <tr scTableRow>
                   <td
+                    i18n
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -186,6 +194,12 @@ const IMPORTS = [
   encapsulation: ViewEncapsulation.None,
 })
 export class SortingTablePage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    sorting: $localize`Sorting`,
+  };
+
   readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
@@ -205,18 +219,21 @@ export class SortingTablePage {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Filtering"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Filtering' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.filtering }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>
           Search everything, or narrow one column at a time
         </p>
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <input
+          i18n-aria-label
+          i18n-placeholder
           scInput
           scDataTableGlobalFilter
           [table]="table"
@@ -247,7 +264,7 @@ export class SortingTablePage {
                             type="search"
                             class="h-7 font-normal"
                             [attr.aria-label]="
-                              'Filter ' + header.column.columnDef.header
+                              t.filter + header.column.columnDef.header
                             "
                           />
                         }
@@ -273,6 +290,7 @@ export class SortingTablePage {
               } @empty {
                 <tr scTableRow>
                   <td
+                    i18n
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -284,7 +302,7 @@ export class SortingTablePage {
             </tbody>
           </table>
         </div>
-        <p class="text-muted-foreground text-sm" aria-live="polite">
+        <p i18n class="text-muted-foreground text-sm" aria-live="polite">
           {{ table.getFilteredRowModel().rows.length }} of {{ total }} people
         </p>
       </div>
@@ -294,6 +312,13 @@ export class SortingTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class FilteringTablePage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    filtering: $localize`Filtering`,
+    filter: $localize`Filter `,
+  };
+
   readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
@@ -329,13 +354,14 @@ export class FilteringTablePage {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Pagination"
-      [trail]="[{ label: 'Data Tables' }, { label: 'Pagination' }]"
+      [trail]="[{ label: t.dataTables }, { label: t.pagination }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle>Team</h2>
-        <p scCardDescription>{{ total }} people, a page at a time</p>
+        <h2 i18n scCardTitle>Team</h2>
+        <p i18n scCardDescription>{{ total }} people, a page at a time</p>
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <div scTableContainer>
@@ -374,6 +400,7 @@ export class FilteringTablePage {
               } @empty {
                 <tr scTableRow>
                   <td
+                    i18n
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -387,7 +414,7 @@ export class FilteringTablePage {
         </div>
         <div class="flex flex-wrap items-center justify-between gap-4">
           <div class="flex items-center gap-2 text-sm">
-            <label for="page-size">Rows per page</label>
+            <label i18n for="page-size">Rows per page</label>
             <div scNativeSelectContainer class="w-20">
               <select
                 scNativeSelect
@@ -405,6 +432,7 @@ export class FilteringTablePage {
           </div>
 
           <nav
+            i18n-aria-label
             scPagination
             scDataTablePagination
             #pagination="scPagination"
@@ -412,33 +440,33 @@ export class FilteringTablePage {
             aria-label="Pages"
             class="mx-0 w-auto flex-wrap items-center justify-end gap-4"
           >
-            <span class="text-sm font-medium" aria-live="polite">
+            <span i18n class="text-sm font-medium" aria-live="polite">
               Page {{ pagination.currentPage() }} of
               {{ pagination.totalPages() }}
             </span>
             <ul scPaginationList>
               <li scPaginationItem>
                 <button scPaginationFirst variant="outline" size="icon-sm">
-                  <svg siChevronsLeftIcon></svg
-                  ><span class="sr-only">Go to first page</span>
+                  <svg siChevronsLeftIcon class="rtl:-scale-x-100"></svg
+                  ><span i18n class="sr-only">Go to first page</span>
                 </button>
               </li>
               <li scPaginationItem>
                 <button scPaginationPrevious variant="outline" size="icon-sm">
-                  <svg siChevronLeftIcon></svg
-                  ><span class="sr-only">Go to previous page</span>
+                  <svg siChevronLeftIcon class="rtl:-scale-x-100"></svg
+                  ><span i18n class="sr-only">Go to previous page</span>
                 </button>
               </li>
               <li scPaginationItem>
                 <button scPaginationNext variant="outline" size="icon-sm">
-                  <svg siChevronRightIcon></svg
-                  ><span class="sr-only">Go to next page</span>
+                  <svg siChevronRightIcon class="rtl:-scale-x-100"></svg
+                  ><span i18n class="sr-only">Go to next page</span>
                 </button>
               </li>
               <li scPaginationItem>
                 <button scPaginationLast variant="outline" size="icon-sm">
-                  <svg siChevronsRightIcon></svg
-                  ><span class="sr-only">Go to last page</span>
+                  <svg siChevronsRightIcon class="rtl:-scale-x-100"></svg
+                  ><span i18n class="sr-only">Go to last page</span>
                 </button>
               </li>
             </ul>
@@ -451,6 +479,12 @@ export class FilteringTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class PaginationTablePage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    dataTables: $localize`Data Tables`,
+    pagination: $localize`Pagination`,
+  };
+
   readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,

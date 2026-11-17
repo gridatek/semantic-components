@@ -57,35 +57,41 @@ interface Conversation {
   readonly messages: readonly ChatMessage[];
 }
 
+/** The suggestions, in the order of their answers below. */
 const SUGGESTIONS = [
-  'Summarise last month’s sales',
-  'Draft a reply to a late-delivery ticket',
-  'Ideas for a blog post on dashboards',
-  'Explain churn in one paragraph',
+  $localize`Summarise last month’s sales`,
+  $localize`Draft a reply to a late-delivery ticket`,
+  $localize`Ideas for a blog post on dashboards`,
+  $localize`Explain churn in one paragraph`,
 ];
 
-/** Canned answers, picked by a word in the question: the app has no model behind it. */
+/**
+ * Canned answers, picked by the suggestion asked or a word of the question
+ * (English words: a question typed in another language gets the fallback).
+ * The app has no model behind it.
+ */
 const ANSWERS: readonly { words: readonly string[]; text: string }[] = [
   {
     words: ['sales', 'revenue', 'month'],
-    text: 'Sales were $147K over the half, up 18.6%. June was the best month at $31.6K, carried by headphones and books; conversion slipped a little, to 3.2%, so the growth came from more visitors rather than better checkout. Worth a look: the drop between cart and payment on phones.',
+    text: $localize`Sales were $147K over the half, up 18.6%. June was the best month at $31.6K, carried by headphones and books; conversion slipped a little, to 3.2%, so the growth came from more visitors rather than better checkout. Worth a look: the drop between cart and payment on phones.`,
   },
   {
     words: ['ticket', 'reply', 'delivery', 'late'],
-    text: 'Here is a draft:\n\nHi — thank you for your patience, and sorry the parcel is late. It left our warehouse on Monday and the carrier now expects it on Thursday. I have refunded the shipping to your card; if it has not arrived by Friday, reply here and we will send a new one at once.',
+    text: $localize`Here is a draft:
+
+Hi — thank you for your patience, and sorry the parcel is late. It left our warehouse on Monday and the carrier now expects it on Thursday. I have refunded the shipping to your card; if it has not arrived by Friday, reply here and we will send a new one at once.`,
   },
   {
     words: ['blog', 'post', 'ideas', 'article'],
-    text: 'Three ideas: 1) “One look, many screens” — how a preset keeps a dashboard consistent. 2) “Charts that read in greyscale” — choosing shades that survive a neutral theme. 3) “From mock data to real” — swapping in-memory stores for an API without touching the screens.',
+    text: $localize`Three ideas: 1) “One look, many screens” — how a preset keeps a dashboard consistent. 2) “Charts that read in greyscale” — choosing shades that survive a neutral theme. 3) “From mock data to real” — swapping in-memory stores for an API without touching the screens.`,
   },
   {
     words: ['churn'],
-    text: 'Churn is the share of paying accounts that leave in a period. At 2.1% a month, about one account in fifty cancels each month; over a year that compounds to roughly 22%. Lowering it is usually cheaper than finding new accounts to replace the ones lost.',
+    text: $localize`Churn is the share of paying accounts that leave in a period. At 2.1% a month, about one account in fifty cancels each month; over a year that compounds to roughly 22%. Lowering it is usually cheaper than finding new accounts to replace the ones lost.`,
   },
 ];
 
-const FALLBACK =
-  'Good question. In this demo I answer from a few prepared notes — ask about sales, churn, a ticket reply or blog ideas to see a fuller answer.';
+const FALLBACK = $localize`Good question. In this demo I answer from a few prepared notes — ask about sales, churn, a ticket reply or blog ideas to see a fuller answer.`;
 
 /** AI Chat (Pro): past conversations, a conversation, a prompt. */
 @Component({
@@ -124,8 +130,9 @@ const FALLBACK =
   ],
   template: `
     <app-page-header
+      i18n-title
       title="AI Chat"
-      [trail]="[{ label: 'Apps' }, { label: 'AI Chat' }]"
+      [trail]="[{ label: t.apps }, { label: t.aiChat }]"
     />
 
     <div
@@ -134,9 +141,11 @@ const FALLBACK =
       <div scCard class="gap-3 p-3">
         <button scButton variant="outline" (click)="newChat()">
           <svg siPlusIcon></svg>
-          New chat
+          <ng-container i18n>New chat</ng-container>
         </button>
-        <h2 class="text-muted-foreground px-2 text-xs font-medium">History</h2>
+        <h2 i18n class="text-muted-foreground px-2 text-xs font-medium">
+          History
+        </h2>
         <ul class="flex flex-col gap-1">
           @for (chat of conversations(); track chat.id) {
             <li>
@@ -149,7 +158,9 @@ const FALLBACK =
               >
                 <div scItemBody>
                   <div scItemTitle>{{ chat.title }}</div>
-                  <p scItemDescription>{{ chat.messages.length }} messages</p>
+                  <p i18n scItemDescription>
+                    {{ chat.messages.length }} messages
+                  </p>
                 </div>
               </button>
             </li>
@@ -161,7 +172,11 @@ const FALLBACK =
         <div class="relative min-h-0 flex-1">
           @if (messages().length) {
             <div scMessageScroller autoScroll class="absolute inset-0">
-              <div scMessageScrollerViewport aria-label="Conversation">
+              <div
+                i18n-aria-label
+                scMessageScrollerViewport
+                aria-label="Conversation"
+              >
                 <div
                   scMessageScrollerContent
                   class="mx-auto max-w-3xl p-4"
@@ -211,7 +226,7 @@ const FALLBACK =
               </div>
               <button scMessageScrollerButton>
                 <svg siArrowDownIcon></svg>
-                <span class="sr-only">Scroll to the latest message</span>
+                <span i18n class="sr-only">Scroll to the latest message</span>
               </button>
             </div>
           } @else {
@@ -224,8 +239,8 @@ const FALLBACK =
                 <svg siSparklesIcon></svg>
               </span>
               <div class="flex flex-col gap-1">
-                <h2 class="text-xl font-semibold">How can I help?</h2>
-                <p class="text-muted-foreground text-sm">
+                <h2 i18n class="text-xl font-semibold">How can I help?</h2>
+                <p i18n class="text-muted-foreground text-sm">
                   Ask about your numbers, or start from one of these.
                 </p>
               </div>
@@ -248,6 +263,8 @@ const FALLBACK =
         <form class="border-t p-4" (submit)="submit($event)">
           <div scInputGroup class="mx-auto max-w-3xl">
             <textarea
+              i18n-placeholder
+              i18n-aria-label
               scTextarea
               rows="2"
               aria-label="Message"
@@ -257,7 +274,9 @@ const FALLBACK =
               (keydown.enter)="enter($event)"
             ></textarea>
             <div scInputGroupAddon side="bottom">
-              <span scInputGroupText>Enter sends, Shift+Enter a new line</span>
+              <span i18n scInputGroupText
+                >Enter sends, Shift+Enter a new line</span
+              >
               @if (streaming()) {
                 <button
                   scInputGroupButton
@@ -267,7 +286,7 @@ const FALLBACK =
                   (click)="stop()"
                 >
                   <svg siSquareIcon></svg>
-                  <span class="sr-only">Stop</span>
+                  <span i18n class="sr-only">Stop</span>
                 </button>
               } @else {
                 <button
@@ -279,7 +298,7 @@ const FALLBACK =
                   [disabled]="!draft().trim()"
                 >
                   <svg siArrowUpIcon></svg>
-                  <span class="sr-only">Send</span>
+                  <span i18n class="sr-only">Send</span>
                 </button>
               }
             </div>
@@ -292,6 +311,12 @@ const FALLBACK =
   encapsulation: ViewEncapsulation.None,
 })
 export class AiChatPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    apps: $localize`Apps`,
+    aiChat: $localize`AI Chat`,
+  };
+
   /** A question brought from elsewhere (the SaaS dashboard): `?q=`. */
   readonly q = input<string>();
 
@@ -305,17 +330,17 @@ export class AiChatPage {
   private readonly conversations = signal<readonly Conversation[]>([
     {
       id: 2,
-      title: 'Churn in one paragraph',
+      title: $localize`Churn in one paragraph`,
       messages: [
-        { id: 'h1', role: 'user', text: 'Explain churn in one paragraph' },
+        { id: 'h1', role: 'user', text: SUGGESTIONS[3] },
         { id: 'h2', role: 'assistant', text: ANSWERS[3].text },
       ],
     },
     {
       id: 1,
-      title: 'Blog ideas',
+      title: $localize`Blog ideas`,
       messages: [
-        { id: 'h3', role: 'user', text: 'Ideas for a blog post on dashboards' },
+        { id: 'h3', role: 'user', text: SUGGESTIONS[2] },
         { id: 'h4', role: 'assistant', text: ANSWERS[2].text },
       ],
     },
@@ -414,6 +439,8 @@ export class AiChatPage {
 }
 
 function answerTo(question: string): string {
+  const asked = SUGGESTIONS.indexOf(question);
+  if (asked >= 0) return ANSWERS[asked].text;
   const lower = question.toLowerCase();
   return (
     ANSWERS.find((answer) => answer.words.some((w) => lower.includes(w)))

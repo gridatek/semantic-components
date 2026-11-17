@@ -86,8 +86,9 @@ interface Address {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="User Profile"
-      [trail]="[{ label: 'User Profile' }]"
+      [trail]="[{ label: t.userProfile }]"
     />
 
     <div scCard>
@@ -107,7 +108,11 @@ interface Address {
               {{ personal().position }} · {{ address().location }}
             </p>
           </div>
-          <ul class="flex items-center gap-2" aria-label="Social profiles">
+          <ul
+            i18n-aria-label
+            class="flex items-center gap-2"
+            aria-label="Social profiles"
+          >
             @for (link of socials; track link.label) {
               <li>
                 <a
@@ -145,26 +150,26 @@ interface Address {
     <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle id="personal-title">Personal Information</h2>
+          <h2 i18n scCardTitle id="personal-title">Personal Information</h2>
           <div scCardAction>
             <div scDialogProvider [(open)]="editingPersonal">
               <button scButton size="sm" (click)="editPersonal()">
                 <svg siPencilIcon></svg>
-                Edit
+                <ng-container i18n>Edit</ng-container>
               </button>
               <ng-template scDialogPortal>
                 <div scDialog class="sm:max-w-lg">
                   <button scDialogClose>
                     <svg siXIcon></svg>
-                    <span class="sr-only">Close</span>
+                    <span i18n class="sr-only">Close</span>
                   </button>
                   <div scDialogHeader>
-                    <h2 scDialogTitle>Edit Personal Information</h2>
+                    <h2 i18n scDialogTitle>Edit Personal Information</h2>
                   </div>
                   <form id="personal-form" (submit)="savePersonal($event)">
                     <div scFieldGroup class="grid gap-4 sm:grid-cols-2">
                       <div scField>
-                        <label scLabel>First Name</label>
+                        <label i18n scLabel>First Name</label>
                         <input
                           scInput
                           cdkFocusInitial
@@ -172,11 +177,11 @@ interface Address {
                         />
                       </div>
                       <div scField>
-                        <label scLabel>Last Name</label>
+                        <label i18n scLabel>Last Name</label>
                         <input scInput [formField]="personalForm.lastName" />
                       </div>
                       <div scField>
-                        <label scLabel>Email</label>
+                        <label i18n scLabel>Email</label>
                         <input
                           scInput
                           type="email"
@@ -184,7 +189,7 @@ interface Address {
                         />
                       </div>
                       <div scField>
-                        <label scLabel>Phone</label>
+                        <label i18n scLabel>Phone</label>
                         <input
                           scInput
                           type="tel"
@@ -192,16 +197,16 @@ interface Address {
                         />
                       </div>
                       <div scField class="sm:col-span-2">
-                        <label scLabel>Position</label>
+                        <label i18n scLabel>Position</label>
                         <input scInput [formField]="personalForm.position" />
                       </div>
                     </div>
                   </form>
                   <div scDialogFooter>
-                    <button scDialogClose variant="outline" size="default">
+                    <button i18n scDialogClose variant="outline" size="default">
                       Cancel
                     </button>
-                    <button scButton type="submit" form="personal-form">
+                    <button i18n scButton type="submit" form="personal-form">
                       Save
                     </button>
                   </div>
@@ -224,26 +229,26 @@ interface Address {
 
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle id="address-title">Address Details</h2>
+          <h2 i18n scCardTitle id="address-title">Address Details</h2>
           <div scCardAction>
             <div scDialogProvider [(open)]="editingAddress">
               <button scButton size="sm" (click)="editAddress()">
                 <svg siPencilIcon></svg>
-                Edit
+                <ng-container i18n>Edit</ng-container>
               </button>
               <ng-template scDialogPortal>
                 <div scDialog class="sm:max-w-lg">
                   <button scDialogClose>
                     <svg siXIcon></svg>
-                    <span class="sr-only">Close</span>
+                    <span i18n class="sr-only">Close</span>
                   </button>
                   <div scDialogHeader>
-                    <h2 scDialogTitle>Edit Address Details</h2>
+                    <h2 i18n scDialogTitle>Edit Address Details</h2>
                   </div>
                   <form id="address-form" (submit)="saveAddress($event)">
                     <div scFieldGroup class="grid gap-4 sm:grid-cols-2">
                       <div scField>
-                        <label scLabel>Location</label>
+                        <label i18n scLabel>Location</label>
                         <input
                           scInput
                           cdkFocusInitial
@@ -251,7 +256,7 @@ interface Address {
                         />
                       </div>
                       <div scField>
-                        <label scLabel>State</label>
+                        <label i18n scLabel>State</label>
                         <input scInput [formField]="addressForm.state" />
                       </div>
                       <div scField>
@@ -263,16 +268,16 @@ interface Address {
                         <input scInput [formField]="addressForm.zip" />
                       </div>
                       <div scField class="sm:col-span-2">
-                        <label scLabel>Tax No.</label>
+                        <label i18n scLabel>Tax No.</label>
                         <input scInput [formField]="addressForm.taxNo" />
                       </div>
                     </div>
                   </form>
                   <div scDialogFooter>
-                    <button scDialogClose variant="outline" size="default">
+                    <button i18n scDialogClose variant="outline" size="default">
                       Cancel
                     </button>
-                    <button scButton type="submit" form="address-form">
+                    <button i18n scButton type="submit" form="address-form">
                       Save
                     </button>
                   </div>
@@ -298,6 +303,11 @@ interface Address {
   encapsulation: ViewEncapsulation.None,
 })
 export class UserProfilePage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    userProfile: $localize`User Profile`,
+  };
+
   private readonly toaster = inject(ScToaster);
 
   protected readonly personal = signal<Personal>({
@@ -316,10 +326,10 @@ export class UserProfilePage {
   });
 
   protected readonly socials = [
-    { label: 'Facebook', href: 'https://www.facebook.com/wrappixel' },
+    { label: $localize`Facebook`, href: 'https://www.facebook.com/wrappixel' },
     { label: 'X', href: 'https://x.com/shadcndashboard' },
-    { label: 'GitHub', href: 'https://github.com/shadcndashboard' },
-    { label: 'Dribbble', href: 'https://dribbble.com/wrappixel' },
+    { label: $localize`GitHub`, href: 'https://github.com/shadcndashboard' },
+    { label: $localize`Dribbble`, href: 'https://dribbble.com/wrappixel' },
   ];
 
   protected readonly editingPersonal = signal(false);
@@ -338,22 +348,22 @@ export class UserProfilePage {
   protected personalItems() {
     const p = this.personal();
     return [
-      { label: 'First Name', value: p.firstName },
-      { label: 'Last Name', value: p.lastName },
-      { label: 'Email', value: p.email },
-      { label: 'Phone', value: p.phone },
-      { label: 'Position', value: p.position },
+      { label: $localize`First Name`, value: p.firstName },
+      { label: $localize`Last Name`, value: p.lastName },
+      { label: $localize`Email`, value: p.email },
+      { label: $localize`Phone`, value: p.phone },
+      { label: $localize`Position`, value: p.position },
     ];
   }
 
   protected addressItems() {
     const a = this.address();
     return [
-      { label: 'Location', value: a.location },
-      { label: 'State', value: a.state },
+      { label: $localize`Location`, value: a.location },
+      { label: $localize`State`, value: a.state },
       { label: 'PIN', value: a.pin },
       { label: 'ZIP', value: a.zip },
-      { label: 'Tax No.', value: a.taxNo },
+      { label: $localize`Tax No.`, value: a.taxNo },
     ];
   }
 
@@ -374,7 +384,7 @@ export class UserProfilePage {
     this.editingPersonal.set(false);
     this.toaster.show({
       variant: 'success',
-      title: 'Personal information saved',
+      title: $localize`Personal information saved`,
     });
   }
 
@@ -382,6 +392,6 @@ export class UserProfilePage {
     event.preventDefault();
     this.address.set({ ...this.addressDraft() });
     this.editingAddress.set(false);
-    this.toaster.show({ variant: 'success', title: 'Address saved' });
+    this.toaster.show({ variant: 'success', title: $localize`Address saved` });
   }
 }

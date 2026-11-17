@@ -43,6 +43,7 @@ import {
 import { ME, PEOPLE, type Person } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { initials } from '../../shared/format';
+import { label } from '../../shared/labels';
 
 interface ChatLine {
   readonly id: string;
@@ -234,8 +235,9 @@ const THREADS: readonly Thread[] = [
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Chats"
-      [trail]="[{ label: 'Apps' }, { label: 'Chats' }]"
+      [trail]="[{ label: t.apps }, { label: t.chats }]"
     />
 
     <div
@@ -245,6 +247,8 @@ const THREADS: readonly Thread[] = [
         <div class="px-4">
           <div scInputGroup>
             <input
+              i18n-aria-label
+              i18n-placeholder
               scInput
               type="search"
               placeholder="Search chats"
@@ -284,12 +288,13 @@ const THREADS: readonly Thread[] = [
                     }}</span>
                   </div>
                   <p scItemDescription class="line-clamp-1">
-                    {{ thread.last.from === 'me' ? 'You: ' : ''
+                    {{ thread.last.from === 'me' ? t.you : ''
                     }}{{ thread.last.text }}
                   </p>
                 </div>
                 @if (thread.unread) {
                   <span
+                    i18n
                     class="bg-primary text-primary-foreground flex size-5 shrink-0 items-center justify-center rounded-full text-xs"
                   >
                     {{ thread.unread }}
@@ -299,7 +304,7 @@ const THREADS: readonly Thread[] = [
               </button>
             </li>
           } @empty {
-            <li class="text-muted-foreground p-4 text-center text-sm">
+            <li i18n class="text-muted-foreground p-4 text-center text-sm">
               No chats match.
             </li>
           }
@@ -316,7 +321,7 @@ const THREADS: readonly Thread[] = [
             <div class="flex flex-col">
               <h2 class="font-medium">{{ thread.person.name }}</h2>
               <span class="text-muted-foreground text-xs">{{
-                thread.person.online ? 'Online' : 'Offline'
+                thread.person.online ? t.online : t.offline
               }}</span>
             </div>
           </div>
@@ -324,7 +329,7 @@ const THREADS: readonly Thread[] = [
             <div scMessageScroller autoScroll class="absolute inset-0">
               <div
                 scMessageScrollerViewport
-                [attr.aria-label]="'Chat with ' + thread.person.name"
+                [attr.aria-label]="t.chatWith + thread.person.name"
               >
                 <div scMessageScrollerContent class="p-4">
                   @for (line of thread.lines; track line.id) {
@@ -396,15 +401,16 @@ const THREADS: readonly Thread[] = [
               </div>
               <button scMessageScrollerButton>
                 <svg siArrowDownIcon></svg>
-                <span class="sr-only">Scroll to the latest message</span>
+                <span i18n class="sr-only">Scroll to the latest message</span>
               </button>
             </div>
           </div>
           <form class="border-t p-4" (submit)="send($event)">
             <div scInputGroup>
               <input
+                i18n-placeholder
                 scInput
-                [attr.aria-label]="'Message ' + thread.person.name"
+                [attr.aria-label]="t.message + thread.person.name"
                 placeholder="Type a message"
                 [value]="draft()"
                 (input)="draft.set($any($event.target).value)"
@@ -417,7 +423,7 @@ const THREADS: readonly Thread[] = [
                   [disabled]="!draft().trim()"
                 >
                   <svg siSendIcon></svg>
-                  <span class="sr-only">Send</span>
+                  <span i18n class="sr-only">Send</span>
                 </button>
               </div>
             </div>
@@ -425,15 +431,22 @@ const THREADS: readonly Thread[] = [
         } @else {
           <div scEmpty class="h-full">
             <div scEmptyHeader>
-              <h2 scEmptyTitle>No chat open</h2>
-              <div scEmptyDescription>Pick a conversation on the left.</div>
+              <h2 i18n scEmptyTitle>No chat open</h2>
+              <div i18n scEmptyDescription>
+                Pick a conversation on the left.
+              </div>
             </div>
           </div>
         }
       </div>
 
       @if (current(); as thread) {
-        <aside scCard class="hidden 2xl:flex" aria-label="Contact">
+        <aside
+          i18n-aria-label
+          scCard
+          class="hidden 2xl:flex"
+          aria-label="Contact"
+        >
           <div class="flex flex-col items-center gap-2 px-6 text-center">
             <span scAvatar class="size-20">
               <img scAvatarImage [src]="thread.person.avatar" alt="" />
@@ -441,7 +454,7 @@ const THREADS: readonly Thread[] = [
             </span>
             <h2 class="font-medium">{{ thread.person.name }}</h2>
             <p class="text-muted-foreground text-sm">
-              {{ thread.person.role }}, {{ thread.person.company }}
+              {{ labelOf(thread.person.role) }}, {{ thread.person.company }}
             </p>
           </div>
           <div scSeparator></div>
@@ -459,7 +472,7 @@ const THREADS: readonly Thread[] = [
           </ul>
           <div scSeparator></div>
           <div class="flex flex-col gap-2 px-6">
-            <h3 class="text-sm font-medium">Files</h3>
+            <h3 i18n class="text-sm font-medium">Files</h3>
             <ul class="flex flex-col gap-2">
               @for (line of thread.files; track line.id) {
                 <li class="flex items-center gap-3 text-sm">
@@ -472,7 +485,9 @@ const THREADS: readonly Thread[] = [
                   {{ line.file!.name }}
                 </li>
               } @empty {
-                <li class="text-muted-foreground text-sm">No files yet.</li>
+                <li i18n class="text-muted-foreground text-sm">
+                  No files yet.
+                </li>
               }
             </ul>
           </div>
@@ -484,6 +499,18 @@ const THREADS: readonly Thread[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ChatsPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    apps: $localize`Apps`,
+    chats: $localize`Chats`,
+    you: $localize`You: `,
+    online: $localize`Online`,
+    offline: $localize`Offline`,
+    chatWith: $localize`Chat with `,
+    message: $localize`Message `,
+  };
+
   private readonly me = ME;
   private readonly query = signal('');
   private readonly draft = signal('');

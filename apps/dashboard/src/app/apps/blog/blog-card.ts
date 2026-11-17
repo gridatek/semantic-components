@@ -18,6 +18,7 @@ import { SiEyeIcon, SiMessageCircleIcon } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
 import type { BlogPost } from '../../data/blog';
 import { count, day, initials } from '../../shared/format';
+import { label } from '../../shared/labels';
 
 /**
  * A post in the listing: its cover, category, title (the link), author and
@@ -48,7 +49,7 @@ import { count, day, initials } from '../../shared/format';
             class="object-cover"
           />
           <span scBadge variant="secondary" class="absolute start-4 top-4">
-            {{ post().category }}
+            {{ labelOf(post().category) }}
           </span>
         </div>
         <div class="flex flex-1 flex-col gap-4 p-6">
@@ -71,11 +72,13 @@ import { count, day, initials } from '../../shared/format';
           >
             <span class="flex items-center gap-1.5">
               <svg siEyeIcon></svg>
-              {{ countOf(post().views) }}<span class="sr-only"> views</span>
+              {{ countOf(post().views)
+              }}<span i18n class="sr-only"> views</span>
             </span>
             <span class="flex items-center gap-1.5">
               <svg siMessageCircleIcon></svg>
-              {{ post().comments.length }}<span class="sr-only"> comments</span>
+              {{ post().comments.length
+              }}<span i18n class="sr-only"> comments</span>
             </span>
             <span class="ms-auto">{{ dayOf(post().date) }}</span>
           </div>
@@ -87,6 +90,7 @@ import { count, day, initials } from '../../shared/format';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogCard {
+  private readonly labelOf = label;
   readonly post = input.required<BlogPost>();
   readonly featured = input(false, { transform: booleanAttribute });
   readonly priority = input(false);

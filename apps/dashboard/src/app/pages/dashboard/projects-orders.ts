@@ -39,6 +39,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ORDERS, type Order, type OrderStatus } from '../../data/dashboard';
 import { day, initials, money } from '../../shared/format';
+import { label } from '../../shared/labels';
 
 const features = tableFeatures({
   rowSortingFeature,
@@ -49,11 +50,11 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, Order>();
 
 const columns = columnHelper.columns([
-  columnHelper.accessor('project', { header: 'Project' }),
-  columnHelper.accessor('name', { header: 'Item' }),
-  columnHelper.accessor('status', { header: 'Status' }),
-  columnHelper.accessor('price', { header: 'Price' }),
-  columnHelper.accessor('deadline', { header: 'Deadline' }),
+  columnHelper.accessor('project', { header: $localize`Project` }),
+  columnHelper.accessor('name', { header: $localize`Item` }),
+  columnHelper.accessor('status', { header: $localize`Status` }),
+  columnHelper.accessor('price', { header: $localize`Price` }),
+  columnHelper.accessor('deadline', { header: $localize`Deadline` }),
 ]);
 
 /** Projects & Orders: every column sorts. */
@@ -89,7 +90,7 @@ const columns = columnHelper.columns([
       <div scCardHeader>
         <h2 scCardTitle id="orders-title" class="flex items-center gap-2">
           <svg siBriefcaseBusinessIcon></svg>
-          Projects &amp; Orders
+          <ng-container i18n>Projects &amp; Orders</ng-container>
         </h2>
       </div>
       <div scCardBody>
@@ -151,14 +152,14 @@ const columns = columnHelper.columns([
                       <div class="flex flex-col">
                         <span class="font-medium">{{ row.original.name }}</span>
                         <span class="text-muted-foreground text-xs">{{
-                          row.original.role
+                          labelOf(row.original.role)
                         }}</span>
                       </div>
                     </div>
                   </td>
                   <td scTableCell scDataTableCell>
                     <span scBadge [variant]="badge(row.original.status)">
-                      {{ row.original.status }}
+                      {{ labelOf(row.original.status) }}
                     </span>
                   </td>
                   <td scTableCell scDataTableCell class="tabular-nums">
@@ -179,6 +180,7 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class ProjectsOrders {
+  private readonly labelOf = label;
   readonly table = injectTable(() => ({
     features,
     columns,

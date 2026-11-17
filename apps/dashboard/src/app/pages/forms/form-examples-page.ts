@@ -77,22 +77,23 @@ import { PageHeader } from '../../layout/page-header';
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Form Examples"
-      [trail]="[{ label: 'Forms' }, { label: 'Examples' }]"
+      [trail]="[{ label: t.forms }, { label: t.examples }]"
     />
 
     <div class="grid gap-4 xl:grid-cols-2">
       <form [formRoot]="contactForm" (submit)="sendContact($event)">
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Contact us</h2>
-            <p scCardDescription>We reply within a working day</p>
+            <h2 i18n scCardTitle>Contact us</h2>
+            <p i18n scCardDescription>We reply within a working day</p>
           </div>
           <div scCardBody>
             <div scFieldGroup>
               <div class="grid gap-4 sm:grid-cols-2">
                 <div scField>
-                  <label scLabel>Name</label>
+                  <label i18n scLabel>Name</label>
                   <input
                     scInput
                     autocomplete="name"
@@ -101,7 +102,7 @@ import { PageHeader } from '../../layout/page-header';
                   <div scFieldErrors></div>
                 </div>
                 <div scField>
-                  <label scLabel>Email</label>
+                  <label i18n scLabel>Email</label>
                   <input
                     scInput
                     type="email"
@@ -112,20 +113,24 @@ import { PageHeader } from '../../layout/page-header';
                 </div>
               </div>
               <div scField>
-                <label scLabel>Topic</label>
+                <label i18n scLabel>Topic</label>
                 <div scNativeSelectContainer class="w-full">
                   <select scNativeSelect [formField]="contactForm.topic">
-                    <option scNativeSelectOption value="sales">Sales</option>
-                    <option scNativeSelectOption value="support">
+                    <option i18n scNativeSelectOption value="sales">
+                      Sales
+                    </option>
+                    <option i18n scNativeSelectOption value="support">
                       Support
                     </option>
-                    <option scNativeSelectOption value="press">Press</option>
+                    <option i18n scNativeSelectOption value="press">
+                      Press
+                    </option>
                   </select>
                   <svg siChevronDownIcon scNativeSelectIcon></svg>
                 </div>
               </div>
               <div scField>
-                <label scLabel>Message</label>
+                <label i18n scLabel>Message</label>
                 <textarea
                   scTextarea
                   rows="4"
@@ -136,7 +141,7 @@ import { PageHeader } from '../../layout/page-header';
             </div>
           </div>
           <div scCardFooter class="justify-end">
-            <button scButton type="submit">Send message</button>
+            <button i18n scButton type="submit">Send message</button>
           </div>
         </div>
       </form>
@@ -145,15 +150,16 @@ import { PageHeader } from '../../layout/page-header';
         <form [formRoot]="newsletterForm" (submit)="sendNewsletter($event)">
           <div scCard>
             <div scCardHeader>
-              <h2 scCardTitle>Newsletter</h2>
-              <p scCardDescription>One email a month, no more</p>
+              <h2 i18n scCardTitle>Newsletter</h2>
+              <p i18n scCardDescription>One email a month, no more</p>
             </div>
             <div scCardBody>
               <div scField>
-                <label scLabel class="sr-only">Email</label>
+                <label i18n scLabel class="sr-only">Email</label>
                 <div class="flex gap-2">
                   <div scInputGroup>
                     <input
+                      i18n-placeholder
                       scInput
                       type="email"
                       placeholder="you@example.com"
@@ -161,7 +167,7 @@ import { PageHeader } from '../../layout/page-header';
                     />
                     <div scInputGroupAddon><svg siMailIcon></svg></div>
                   </div>
-                  <button scButton type="submit">Subscribe</button>
+                  <button i18n scButton type="submit">Subscribe</button>
                 </div>
                 <div scFieldErrors></div>
               </div>
@@ -172,13 +178,13 @@ import { PageHeader } from '../../layout/page-header';
         <form [formRoot]="feedbackForm" (submit)="sendFeedback($event)">
           <div scCard>
             <div scCardHeader>
-              <h2 scCardTitle>Feedback</h2>
-              <p scCardDescription>How was your experience?</p>
+              <h2 i18n scCardTitle>Feedback</h2>
+              <p i18n scCardDescription>How was your experience?</p>
             </div>
             <div scCardBody>
               <div scFieldGroup>
                 <fieldset class="flex flex-col gap-3">
-                  <legend scLegend variant="label">Your rating</legend>
+                  <legend i18n scLegend variant="label">Your rating</legend>
                   <div
                     scRadioGroup
                     [formField]="feedbackForm.rating"
@@ -195,12 +201,12 @@ import { PageHeader } from '../../layout/page-header';
                 </fieldset>
                 <div scField orientation="horizontal">
                   <input scSwitch [formField]="feedbackForm.contact" />
-                  <label scLabel>You may contact me about it</label>
+                  <label i18n scLabel>You may contact me about it</label>
                 </div>
               </div>
             </div>
             <div scCardFooter class="justify-end">
-              <button scButton type="submit">Send feedback</button>
+              <button i18n scButton type="submit">Send feedback</button>
             </div>
           </div>
         </form>
@@ -213,13 +219,13 @@ import { PageHeader } from '../../layout/page-header';
       >
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Payment card</h2>
-            <p scCardDescription>Used for your subscription</p>
+            <h2 i18n scCardTitle>Payment card</h2>
+            <p i18n scCardDescription>Used for your subscription</p>
           </div>
           <div scCardBody>
             <div scFieldGroup class="grid gap-4 md:grid-cols-4">
               <div scField class="md:col-span-2">
-                <label scLabel>Name on the card</label>
+                <label i18n scLabel>Name on the card</label>
                 <input
                   scInput
                   autocomplete="cc-name"
@@ -228,7 +234,7 @@ import { PageHeader } from '../../layout/page-header';
                 <div scFieldErrors></div>
               </div>
               <div scField class="md:col-span-2">
-                <label scLabel>Card number</label>
+                <label i18n scLabel>Card number</label>
                 <div scInputGroup>
                   <input
                     scInput
@@ -241,7 +247,7 @@ import { PageHeader } from '../../layout/page-header';
                 <div scFieldErrors></div>
               </div>
               <div scField>
-                <label scLabel>Expiry (MM/YY)</label>
+                <label i18n scLabel>Expiry (MM/YY)</label>
                 <input
                   scInput
                   autocomplete="cc-exp"
@@ -262,7 +268,7 @@ import { PageHeader } from '../../layout/page-header';
             </div>
           </div>
           <div scCardFooter class="justify-end">
-            <button scButton type="submit">Save card</button>
+            <button i18n scButton type="submit">Save card</button>
           </div>
         </div>
       </form>
@@ -272,8 +278,19 @@ import { PageHeader } from '../../layout/page-header';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormExamplesPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    forms: $localize`Forms`,
+    examples: $localize`Examples`,
+  };
+
   private readonly toaster = inject(ScToaster);
-  private readonly ratings = ['Poor', 'Fair', 'Good', 'Great'];
+  private readonly ratings = [
+    $localize`Poor`,
+    $localize`Fair`,
+    $localize`Good`,
+    $localize`Great`,
+  ];
 
   private readonly contact = signal({
     name: '',
@@ -294,24 +311,31 @@ export class FormExamplesPage {
     email(path.email);
   });
 
-  private readonly feedback = signal({ rating: 'Good', contact: false });
+  private readonly feedback = signal({
+    rating: this.ratings[2],
+    contact: false,
+  });
   private readonly feedbackForm = form(this.feedback);
 
   private readonly card = signal({ name: '', number: '', expiry: '', cvc: '' });
   private readonly cardForm = form(this.card, (path) => {
     required(path.name);
     required(path.number);
-    pattern(path.number, /^[\d ]{12,19}$/, { message: '12 to 19 digits.' });
+    pattern(path.number, /^[\d ]{12,19}$/, {
+      message: $localize`12 to 19 digits.`,
+    });
     required(path.expiry);
-    pattern(path.expiry, /^(0[1-9]|1[0-2])\/\d{2}$/, { message: 'As MM/YY.' });
+    pattern(path.expiry, /^(0[1-9]|1[0-2])\/\d{2}$/, {
+      message: $localize`As MM/YY.`,
+    });
     required(path.cvc);
-    pattern(path.cvc, /^\d{3,4}$/, { message: '3 or 4 digits.' });
+    pattern(path.cvc, /^\d{3,4}$/, { message: $localize`3 or 4 digits.` });
   });
 
   private sendContact(event: Event): void {
     event.preventDefault();
     void submit(this.contactForm, async () => {
-      this.toaster.show({ variant: 'success', title: 'Message sent' });
+      this.toaster.show({ variant: 'success', title: $localize`Message sent` });
       this.contact.set({ name: '', email: '', topic: 'support', message: '' });
       this.contactForm().reset();
       return undefined;
@@ -323,7 +347,7 @@ export class FormExamplesPage {
     void submit(this.newsletterForm, async () => {
       this.toaster.show({
         variant: 'success',
-        title: 'Subscribed',
+        title: $localize`Subscribed`,
         description: this.newsletter().email,
       });
       return undefined;
@@ -334,14 +358,14 @@ export class FormExamplesPage {
     event.preventDefault();
     this.toaster.show({
       variant: 'success',
-      title: `Thanks — “${this.feedback().rating}” noted`,
+      title: $localize`Thanks — “${this.feedback().rating}” noted`,
     });
   }
 
   private sendCard(event: Event): void {
     event.preventDefault();
     void submit(this.cardForm, async () => {
-      this.toaster.show({ variant: 'success', title: 'Card saved' });
+      this.toaster.show({ variant: 'success', title: $localize`Card saved` });
       return undefined;
     });
   }

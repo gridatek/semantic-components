@@ -10,6 +10,7 @@ import { SiMapPinIcon } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
 import { ME } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
+import { label } from '../../shared/labels';
 
 /**
  * The profile's header (Pro User Profile): the page title, the person, their
@@ -31,8 +32,8 @@ import { PageHeader } from '../../layout/page-header';
     <app-page-header
       [title]="title()"
       [trail]="[
-        { label: 'Apps' },
-        { label: 'User Profile' },
+        { label: t.apps },
+        { label: t.userProfile },
         { label: title() },
       ]"
     />
@@ -46,26 +47,27 @@ import { PageHeader } from '../../layout/page-header';
         <div class="flex flex-col gap-1">
           <span class="text-lg font-semibold">{{ me.name }}</span>
           <span class="text-muted-foreground flex items-center gap-1 text-sm">
-            {{ me.role }} · <svg siMapPinIcon class="size-3.5"></svg>
+            {{ labelOf(me.role) }} · <svg siMapPinIcon class="size-3.5"></svg>
             {{ me.city }}
           </span>
         </div>
         <dl class="ms-auto flex gap-6 text-center">
           <div>
-            <dt class="text-muted-foreground text-xs">Posts</dt>
+            <dt i18n class="text-muted-foreground text-xs">Posts</dt>
             <dd class="font-semibold tabular-nums">938</dd>
           </div>
           <div>
-            <dt class="text-muted-foreground text-xs">Followers</dt>
+            <dt i18n class="text-muted-foreground text-xs">Followers</dt>
             <dd class="font-semibold tabular-nums">3,586</dd>
           </div>
           <div>
-            <dt class="text-muted-foreground text-xs">Following</dt>
+            <dt i18n class="text-muted-foreground text-xs">Following</dt>
             <dd class="font-semibold tabular-nums">2,659</dd>
           </div>
         </dl>
       </div>
       <nav
+        i18n-aria-label
         class="flex gap-1 overflow-x-auto border-t px-4"
         aria-label="Profile"
       >
@@ -85,15 +87,22 @@ import { PageHeader } from '../../layout/page-header';
   encapsulation: ViewEncapsulation.None,
 })
 export class ProfileHeader {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    apps: $localize`Apps`,
+    userProfile: $localize`User Profile`,
+  };
+
   readonly title = input.required<string>();
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly me = ME;
   private readonly tabs = [
-    { label: 'Profile', url: '/apps/user-profile/profile' },
-    { label: 'Followers', url: '/apps/user-profile/followers' },
-    { label: 'Friends', url: '/apps/user-profile/friends' },
-    { label: 'Gallery', url: '/apps/user-profile/gallery' },
+    { label: $localize`Profile`, url: '/apps/user-profile/profile' },
+    { label: $localize`Followers`, url: '/apps/user-profile/followers' },
+    { label: $localize`Friends`, url: '/apps/user-profile/friends' },
+    { label: $localize`Gallery`, url: '/apps/user-profile/gallery' },
   ];
   protected readonly class = computed(() =>
     cn('flex flex-col gap-4', this.classInput()),

@@ -41,6 +41,7 @@ import {
 import type { BlogComment } from '../../data/blog';
 import { PageHeader } from '../../layout/page-header';
 import { count, day, initials, today } from '../../shared/format';
+import { label } from '../../shared/labels';
 import { BlogStore } from '../../shared/stores';
 
 /** Blog Detail: the post, then its comments and a reply box (shadcndashboard's). */
@@ -80,19 +81,20 @@ import { BlogStore } from '../../shared/stores';
   template: `
     @if (post(); as post) {
       <app-page-header
+        i18n-title
         title="Blog Detail"
         [trail]="[
-          { label: 'Blog', url: '/apps/blog/post' },
-          { label: 'Detail' },
+          { label: t.blog, url: '/apps/blog/post' },
+          { label: t.detail },
         ]"
       >
         <a scLink variant="outline" routerLink="/apps/blog/post">
-          <svg siArrowLeftIcon></svg>
-          Back
+          <svg siArrowLeftIcon class="rtl:-scale-x-100"></svg>
+          <ng-container i18n>Back</ng-container>
         </a>
         <a scLink variant="button" [routerLink]="['/apps/blog/edit', post.id]">
           <svg siPencilIcon></svg>
-          Edit
+          <ng-container i18n>Edit</ng-container>
         </a>
       </app-page-header>
 
@@ -109,9 +111,11 @@ import { BlogStore } from '../../shared/stores';
           </div>
           <div class="flex flex-col gap-6 p-6 md:p-8">
             <div class="flex flex-wrap items-center gap-3">
-              <span scBadge variant="secondary">{{ post.category }}</span>
+              <span scBadge variant="secondary">{{
+                labelOf(post.category)
+              }}</span>
               @if (post.status === 'draft') {
-                <span scBadge variant="outline">Draft</span>
+                <span i18n scBadge variant="outline">Draft</span>
               }
             </div>
             <h2 class="text-3xl leading-tight font-semibold tracking-tight">
@@ -131,13 +135,22 @@ import { BlogStore } from '../../shared/stores';
               </span>
               <span>{{ dayOf(post.date) }}</span>
               <span class="flex items-center gap-1.5">
-                <svg siEyeIcon></svg>{{ countOf(post.views) }} views
+                <svg siEyeIcon></svg
+                ><ng-container i18n
+                  >{{ countOf(post.views) }} views</ng-container
+                >
               </span>
               <span class="flex items-center gap-1.5">
-                <svg siShare2Icon></svg>{{ countOf(post.shares) }} shares
+                <svg siShare2Icon></svg
+                ><ng-container i18n
+                  >{{ countOf(post.shares) }} shares</ng-container
+                >
               </span>
               <span class="flex items-center gap-1.5">
-                <svg siMessageCircleIcon></svg>{{ comments().length }} comments
+                <svg siMessageCircleIcon></svg
+                ><ng-container i18n
+                  >{{ comments().length }} comments</ng-container
+                >
               </span>
             </div>
             <div scSeparator></div>
@@ -147,19 +160,19 @@ import { BlogStore } from '../../shared/stores';
 
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Comments ({{ comments().length }})</h2>
+            <h2 i18n scCardTitle>Comments ({{ comments().length }})</h2>
           </div>
           <div scCardBody class="flex flex-col gap-6">
             <form class="flex flex-col gap-3" (submit)="addComment($event)">
               <div scField>
-                <label scLabel>Add a comment</label>
+                <label i18n scLabel>Add a comment</label>
                 <textarea
                   scTextarea
                   rows="3"
                   [formField]="commentForm.text"
                 ></textarea>
               </div>
-              <button scButton type="submit" class="self-end">
+              <button i18n scButton type="submit" class="self-end">
                 Post Comment
               </button>
             </form>
@@ -208,18 +221,19 @@ import { BlogStore } from '../../shared/stores';
       </ng-template>
     } @else {
       <app-page-header
+        i18n-title
         title="Blog Detail"
         [trail]="[
-          { label: 'Blog', url: '/apps/blog/post' },
-          { label: 'Detail' },
+          { label: t.blog, url: '/apps/blog/post' },
+          { label: t.detail },
         ]"
       />
       <div scEmpty>
         <div scEmptyHeader>
-          <h2 scEmptyTitle>Post not found</h2>
-          <div scEmptyDescription>It may have been deleted.</div>
+          <h2 i18n scEmptyTitle>Post not found</h2>
+          <div i18n scEmptyDescription>It may have been deleted.</div>
         </div>
-        <a scLink variant="outline" routerLink="/apps/blog/post"
+        <a i18n scLink variant="outline" routerLink="/apps/blog/post"
           >Back to the blog</a
         >
       </div>
@@ -229,6 +243,13 @@ import { BlogStore } from '../../shared/stores';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogDetailPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    blog: $localize`Blog`,
+    detail: $localize`Detail`,
+  };
+
   private readonly store = inject(BlogStore);
   /** From the route (:slug). */
   readonly slug = input('');

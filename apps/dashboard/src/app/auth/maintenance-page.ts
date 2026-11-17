@@ -27,13 +27,13 @@ import { SiWrenchIcon } from '@semantic-icons/lucide-icons';
     <div scEmpty class="bg-background max-w-md border">
       <div scEmptyHeader>
         <div scEmptyMedia variant="icon"><svg siWrenchIcon></svg></div>
-        <h1 class="sr-only">Maintenance</h1>
-        <h2 scEmptyTitle>Maintenance Mode!!!</h2>
-        <div scEmptyDescription>
+        <h1 i18n class="sr-only">Maintenance</h1>
+        <h2 i18n scEmptyTitle>Maintenance Mode!!!</h2>
+        <div i18n scEmptyDescription>
           Website is in under maintenance. Check back later!
         </div>
       </div>
-      <a scLink variant="button" routerLink="/">Go Back to Home</a>
+      <a i18n scLink variant="button" routerLink="/">Go Back to Home</a>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

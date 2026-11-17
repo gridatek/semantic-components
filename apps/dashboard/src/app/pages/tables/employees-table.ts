@@ -56,6 +56,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { EMPLOYEES, type Employee } from '../../data/tables';
 import { initials, money } from '../../shared/format';
+import { label } from '../../shared/labels';
 
 const features = tableFeatures({
   columnFilteringFeature,
@@ -71,11 +72,11 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, Employee>();
 
 const columns = columnHelper.columns([
-  columnHelper.accessor('name', { header: 'Name' }),
-  columnHelper.accessor('position', { header: 'Position' }),
-  columnHelper.accessor('department', { header: 'Department' }),
-  columnHelper.accessor('salary', { header: 'Salary' }),
-  columnHelper.accessor('status', { header: 'Status' }),
+  columnHelper.accessor('name', { header: $localize`Name` }),
+  columnHelper.accessor('position', { header: $localize`Position` }),
+  columnHelper.accessor('department', { header: $localize`Department` }),
+  columnHelper.accessor('salary', { header: $localize`Salary` }),
+  columnHelper.accessor('status', { header: $localize`Status` }),
 ]);
 
 /** The data table: search, sorting and pages over the employees. */
@@ -122,10 +123,12 @@ const columns = columnHelper.columns([
   template: `
     <div scCard>
       <div scCardHeader>
-        <h2 scCardTitle id="employees-title">Data Table</h2>
+        <h2 i18n scCardTitle id="employees-title">Data Table</h2>
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <input
+          i18n-aria-label
+          i18n-placeholder
           scInput
           scDataTableGlobalFilter
           [table]="table"
@@ -186,7 +189,7 @@ const columns = columnHelper.columns([
                     {{ row.original.position }}
                   </td>
                   <td scTableCell scDataTableCell>
-                    {{ row.original.department }}
+                    {{ labelOf(row.original.department) }}
                   </td>
                   <td scTableCell scDataTableCell class="tabular-nums">
                     {{ salaryOf(row.original.salary) }}
@@ -201,13 +204,14 @@ const columns = columnHelper.columns([
                             ? 'outline'
                             : 'destructive'
                       "
-                      >{{ row.original.status }}</span
+                      >{{ labelOf(row.original.status) }}</span
                     >
                   </td>
                 </tr>
               } @empty {
                 <tr scTableRow>
                   <td
+                    i18n
                     scTableCell
                     colspan="5"
                     class="text-muted-foreground h-24 text-center"
@@ -220,6 +224,7 @@ const columns = columnHelper.columns([
           </table>
         </div>
         <nav
+          i18n-aria-label
           scPagination
           scDataTablePagination
           #pagination="scPagination"
@@ -227,32 +232,32 @@ const columns = columnHelper.columns([
           aria-label="Employee pages"
           class="mx-0 w-auto flex-wrap items-center justify-end gap-4"
         >
-          <span class="text-sm font-medium" aria-live="polite">
+          <span i18n class="text-sm font-medium" aria-live="polite">
             Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
               <button scPaginationFirst variant="outline" size="icon-sm">
-                <svg siChevronsLeftIcon></svg>
-                <span class="sr-only">Go to first page</span>
+                <svg siChevronsLeftIcon class="rtl:-scale-x-100"></svg>
+                <span i18n class="sr-only">Go to first page</span>
               </button>
             </li>
             <li scPaginationItem>
               <button scPaginationPrevious variant="outline" size="icon-sm">
-                <svg siChevronLeftIcon></svg>
-                <span class="sr-only">Go to previous page</span>
+                <svg siChevronLeftIcon class="rtl:-scale-x-100"></svg>
+                <span i18n class="sr-only">Go to previous page</span>
               </button>
             </li>
             <li scPaginationItem>
               <button scPaginationNext variant="outline" size="icon-sm">
-                <svg siChevronRightIcon></svg>
-                <span class="sr-only">Go to next page</span>
+                <svg siChevronRightIcon class="rtl:-scale-x-100"></svg>
+                <span i18n class="sr-only">Go to next page</span>
               </button>
             </li>
             <li scPaginationItem>
               <button scPaginationLast variant="outline" size="icon-sm">
-                <svg siChevronsRightIcon></svg>
-                <span class="sr-only">Go to last page</span>
+                <svg siChevronsRightIcon class="rtl:-scale-x-100"></svg>
+                <span i18n class="sr-only">Go to last page</span>
               </button>
             </li>
           </ul>
@@ -264,6 +269,7 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class EmployeesTable {
+  private readonly labelOf = label;
   readonly table = injectTable(() => ({
     features,
     columns,

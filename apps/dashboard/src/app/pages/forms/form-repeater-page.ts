@@ -69,8 +69,9 @@ const blank = (): Member => ({ name: '', email: '', role: 'Editor' });
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Repeater Forms"
-      [trail]="[{ label: 'Forms' }, { label: 'Repeater' }]"
+      [trail]="[{ label: t.forms }, { label: t.repeater }]"
     />
 
     <form
@@ -80,34 +81,40 @@ const blank = (): Member => ({ name: '', email: '', role: 'Editor' });
     >
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Invite your team</h2>
-          <p scCardDescription>One row per person; up to ten at a time.</p>
+          <h2 i18n scCardTitle>Invite your team</h2>
+          <p i18n scCardDescription>One row per person; up to ten at a time.</p>
         </div>
         <div scCardBody class="flex flex-col gap-4">
           @for (member of inviteForm.members; track $index; let i = $index) {
             <fieldset
               class="grid items-start gap-3 rounded-lg border p-4 md:grid-cols-[1fr_1fr_10rem_auto]"
             >
-              <legend class="text-muted-foreground px-1 text-xs">
+              <legend i18n class="text-muted-foreground px-1 text-xs">
                 Person {{ i + 1 }}
               </legend>
               <div scField>
-                <label scLabel>Name</label>
+                <label i18n scLabel>Name</label>
                 <input scInput [formField]="member.name" />
                 <div scFieldErrors></div>
               </div>
               <div scField>
-                <label scLabel>Email</label>
+                <label i18n scLabel>Email</label>
                 <input scInput type="email" [formField]="member.email" />
                 <div scFieldErrors></div>
               </div>
               <div scField>
-                <label scLabel>Role</label>
+                <label i18n scLabel>Role</label>
                 <div scNativeSelectContainer class="w-full">
                   <select scNativeSelect [formField]="member.role">
-                    <option scNativeSelectOption value="Admin">Admin</option>
-                    <option scNativeSelectOption value="Editor">Editor</option>
-                    <option scNativeSelectOption value="Viewer">Viewer</option>
+                    <option i18n scNativeSelectOption value="Admin">
+                      Admin
+                    </option>
+                    <option i18n scNativeSelectOption value="Editor">
+                      Editor
+                    </option>
+                    <option i18n scNativeSelectOption value="Viewer">
+                      Viewer
+                    </option>
                   </select>
                   <svg siChevronDownIcon scNativeSelectIcon></svg>
                 </div>
@@ -122,7 +129,7 @@ const blank = (): Member => ({ name: '', email: '', role: 'Editor' });
                 (click)="remove(i)"
               >
                 <svg siTrash2Icon></svg>
-                <span class="sr-only">Remove person {{ i + 1 }}</span>
+                <span i18n class="sr-only">Remove person {{ i + 1 }}</span>
               </button>
             </fieldset>
           }
@@ -135,14 +142,14 @@ const blank = (): Member => ({ name: '', email: '', role: 'Editor' });
             (click)="add()"
           >
             <svg siPlusIcon></svg>
-            Add a person
+            <ng-container i18n>Add a person</ng-container>
           </button>
         </div>
         <div scCardFooter class="justify-between">
-          <span class="text-muted-foreground text-sm"
+          <span i18n class="text-muted-foreground text-sm"
             >{{ model().members.length }} of 10</span
           >
-          <button scButton type="submit">Send invitations</button>
+          <button i18n scButton type="submit">Send invitations</button>
         </div>
       </div>
     </form>
@@ -151,6 +158,12 @@ const blank = (): Member => ({ name: '', email: '', role: 'Editor' });
   encapsulation: ViewEncapsulation.None,
 })
 export class FormRepeaterPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    forms: $localize`Forms`,
+    repeater: $localize`Repeater`,
+  };
+
   private readonly toaster = inject(ScToaster);
   private readonly model = signal<{ members: Member[] }>({
     members: [
@@ -164,9 +177,9 @@ export class FormRepeaterPage {
   });
   private readonly inviteForm = form(this.model, (path) => {
     applyEach(path.members, (member) => {
-      required(member.name, { message: 'A name is needed.' });
-      required(member.email, { message: 'An email is needed.' });
-      email(member.email, { message: 'Not an email address.' });
+      required(member.name, { message: $localize`A name is needed.` });
+      required(member.email, { message: $localize`An email is needed.` });
+      email(member.email, { message: $localize`Not an email address.` });
     });
   });
 
@@ -186,7 +199,7 @@ export class FormRepeaterPage {
       const count = this.model().members.length;
       this.toaster.show({
         variant: 'success',
-        title: `${count} invitations sent`,
+        title: $localize`${count} invitations sent`,
       });
       this.model.set({ members: [blank()] });
       this.inviteForm().reset();

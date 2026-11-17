@@ -227,10 +227,12 @@ const NAMES = [
     PageHeader,
   ],
   template: `
-    <app-page-header title="Icons" [trail]="[{ label: 'Icons' }]" />
+    <app-page-header i18n-title title="Icons" [trail]="[{ label: t.icons }]" />
 
     <div scInputGroup class="max-w-sm">
       <input
+        i18n-aria-label
+        i18n-placeholder
         scInput
         type="search"
         placeholder="Search icons"
@@ -240,7 +242,7 @@ const NAMES = [
       />
       <div scInputGroupAddon><svg siSearchIcon></svg></div>
     </div>
-    <p class="text-muted-foreground text-sm" aria-live="polite">
+    <p i18n class="text-muted-foreground text-sm" aria-live="polite">
       {{ shown() }} of {{ total }} icons
     </p>
     <ul
@@ -270,7 +272,7 @@ const NAMES = [
       </li>
       <li [hidden]="!matches('arrow-right')">
         <figure scFrame size="sm" class="flex flex-col items-center gap-2 p-4">
-          <svg siArrowRightIcon></svg>
+          <svg siArrowRightIcon class="rtl:-scale-x-100"></svg>
           <figcaption class="text-muted-foreground text-xs">
             arrow-right
           </figcaption>
@@ -678,6 +680,11 @@ const NAMES = [
   encapsulation: ViewEncapsulation.None,
 })
 export class IconsPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    icons: $localize`Icons`,
+  };
+
   protected readonly query = signal('');
   protected readonly total = NAMES.length;
   protected readonly shown = computed(

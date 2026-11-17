@@ -52,10 +52,10 @@ interface CalendarEvent extends ScSchedulerEventData {
 }
 
 const CATEGORIES: readonly { value: Category; label: string; dot: string }[] = [
-  { value: 'work', label: 'Work', dot: 'bg-chart-2' },
-  { value: 'personal', label: 'Personal', dot: 'bg-chart-4' },
-  { value: 'important', label: 'Important', dot: 'bg-destructive' },
-  { value: 'travel', label: 'Travel', dot: 'bg-chart-5' },
+  { value: 'work', label: $localize`Work`, dot: 'bg-chart-2' },
+  { value: 'personal', label: $localize`Personal`, dot: 'bg-chart-4' },
+  { value: 'important', label: $localize`Important`, dot: 'bg-destructive' },
+  { value: 'travel', label: $localize`Travel`, dot: 'bg-chart-5' },
 ];
 
 interface Draft {
@@ -150,12 +150,13 @@ function seed(): CalendarEvent[] {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Calendar"
-      [trail]="[{ label: 'Apps' }, { label: 'Calendar' }]"
+      [trail]="[{ label: t.apps }, { label: t.calendar }]"
     >
       <button scButton (click)="startAdding()">
         <svg siPlusIcon></svg>
-        Add Event
+        <ng-container i18n>Add Event</ng-container>
       </button>
     </app-page-header>
 
@@ -169,20 +170,25 @@ function seed(): CalendarEvent[] {
         class="h-[44rem]"
       >
         <div class="flex flex-wrap items-center gap-2">
-          <button scSchedulerToday>Today</button>
+          <button i18n scSchedulerToday>Today</button>
           <button scSchedulerPrevious>
-            <svg siChevronLeftIcon></svg>
-            <span class="sr-only">Previous</span>
+            <svg siChevronLeftIcon class="rtl:-scale-x-100"></svg>
+            <span i18n class="sr-only">Previous</span>
           </button>
           <button scSchedulerNext>
-            <svg siChevronRightIcon></svg>
-            <span class="sr-only">Next</span>
+            <svg siChevronRightIcon class="rtl:-scale-x-100"></svg>
+            <span i18n class="sr-only">Next</span>
           </button>
           <h2 scSchedulerTitle class="ms-2">{{ scheduler.label() }}</h2>
-          <div role="group" aria-label="View" class="ms-auto flex gap-1">
-            <button scSchedulerViewButton="month">Month</button>
-            <button scSchedulerViewButton="week">Week</button>
-            <button scSchedulerViewButton="day">Day</button>
+          <div
+            i18n-aria-label
+            role="group"
+            aria-label="View"
+            class="ms-auto flex gap-1"
+          >
+            <button i18n scSchedulerViewButton="month">Month</button>
+            <button i18n scSchedulerViewButton="week">Week</button>
+            <button i18n scSchedulerViewButton="day">Day</button>
           </div>
         </div>
 
@@ -205,7 +211,7 @@ function seed(): CalendarEvent[] {
           </button>
         </ng-template>
         <ng-template scSchedulerMoreTemplate let-count let-day="day">
-          <button [scSchedulerMore]="day">{{ count }} more</button>
+          <button i18n [scSchedulerMore]="day">{{ count }} more</button>
         </ng-template>
       </div>
       <ul class="text-muted-foreground flex flex-wrap gap-4 pt-4 text-sm">
@@ -223,35 +229,35 @@ function seed(): CalendarEvent[] {
         <div scDialog class="sm:max-w-md">
           <button scDialogClose>
             <svg siXIcon></svg>
-            <span class="sr-only">Close</span>
+            <span i18n class="sr-only">Close</span>
           </button>
           <div scDialogHeader>
             <h2 scDialogTitle>
-              {{ editingId() ? 'Edit Event' : 'Add Event' }}
+              {{ editingId() ? t.editEvent : t.addEvent }}
             </h2>
           </div>
           <form id="event-form" (submit)="save($event)">
             <div scFieldGroup>
               <div scField>
-                <label scLabel>Title</label>
+                <label i18n scLabel>Title</label>
                 <input scInput cdkFocusInitial [formField]="draftForm.title" />
               </div>
               <div scField>
-                <label scLabel>Date</label>
+                <label i18n scLabel>Date</label>
                 <input scInput type="date" [formField]="draftForm.date" />
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div scField>
-                  <label scLabel>Starts</label>
+                  <label i18n scLabel>Starts</label>
                   <input scInput type="time" [formField]="draftForm.start" />
                 </div>
                 <div scField>
-                  <label scLabel>Ends</label>
+                  <label i18n scLabel>Ends</label>
                   <input scInput type="time" [formField]="draftForm.end" />
                 </div>
               </div>
               <div scField>
-                <label scLabel>Category</label>
+                <label i18n scLabel>Category</label>
                 <div scNativeSelectContainer class="w-full">
                   <select scNativeSelect [formField]="draftForm.category">
                     @for (category of categories; track category.value) {
@@ -268,6 +274,7 @@ function seed(): CalendarEvent[] {
           <div scDialogFooter>
             @if (editingId()) {
               <button
+                i18n
                 scButton
                 variant="destructive"
                 class="sm:me-auto"
@@ -276,10 +283,10 @@ function seed(): CalendarEvent[] {
                 Delete
               </button>
             }
-            <button scDialogClose variant="outline" size="default">
+            <button i18n scDialogClose variant="outline" size="default">
               Cancel
             </button>
-            <button scButton type="submit" form="event-form">Save</button>
+            <button i18n scButton type="submit" form="event-form">Save</button>
           </div>
         </div>
       </ng-template>
@@ -289,6 +296,14 @@ function seed(): CalendarEvent[] {
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendarPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    apps: $localize`Apps`,
+    calendar: $localize`Calendar`,
+    editEvent: $localize`Edit Event`,
+    addEvent: $localize`Add Event`,
+  };
+
   private readonly toaster = inject(ScToaster);
   private readonly categories = CATEGORIES;
   private readonly events = signal<readonly CalendarEvent[]>(seed());
@@ -363,7 +378,9 @@ export class CalendarPage {
     this.editing.set(false);
     this.toaster.show({
       variant: 'success',
-      title: this.editingId() ? 'Event updated' : 'Event added',
+      title: this.editingId()
+        ? $localize`Event updated`
+        : $localize`Event added`,
     });
   }
 
@@ -371,6 +388,6 @@ export class CalendarPage {
     const id = this.editingId();
     this.events.update((events) => events.filter((e) => e.id !== id));
     this.editing.set(false);
-    this.toaster.show({ variant: 'success', title: 'Event deleted' });
+    this.toaster.show({ variant: 'success', title: $localize`Event deleted` });
   }
 }

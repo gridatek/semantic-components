@@ -78,8 +78,9 @@ const EMPTY = {
   ],
   template: `
     <app-page-header
+      i18n-title
       title="Form Wizard"
-      [trail]="[{ label: 'Forms' }, { label: 'Wizard' }]"
+      [trail]="[{ label: t.forms }, { label: t.wizard }]"
     />
 
     <form
@@ -89,7 +90,7 @@ const EMPTY = {
     >
       <div scCard>
         <div scCardHeader>
-          <h2 scCardTitle>Set up your workspace</h2>
+          <h2 i18n scCardTitle>Set up your workspace</h2>
         </div>
         <div scCardBody>
           <div
@@ -113,7 +114,7 @@ const EMPTY = {
                       1
                     }
                   </span>
-                  <span class="flex flex-col items-start">
+                  <span i18n class="flex flex-col items-start">
                     <span scStepperTitle>Account</span>
                     <span scStepperDescription>Email and password</span>
                   </span>
@@ -133,7 +134,7 @@ const EMPTY = {
                       2
                     }
                   </span>
-                  <span class="flex flex-col items-start">
+                  <span i18n class="flex flex-col items-start">
                     <span scStepperTitle>Profile</span>
                     <span scStepperDescription>You and your team</span>
                   </span>
@@ -153,7 +154,7 @@ const EMPTY = {
                       3
                     }
                   </span>
-                  <span class="flex flex-col items-start">
+                  <span i18n class="flex flex-col items-start">
                     <span scStepperTitle>Plan</span>
                     <span scStepperDescription>And review</span>
                   </span>
@@ -164,7 +165,7 @@ const EMPTY = {
             <div scStepperPanel [step]="0">
               <div scFieldGroup>
                 <div scField>
-                  <label scLabel>Email</label>
+                  <label i18n scLabel>Email</label>
                   <input
                     scInput
                     type="email"
@@ -174,7 +175,7 @@ const EMPTY = {
                   <div scFieldErrors></div>
                 </div>
                 <div scField>
-                  <label scLabel>Password</label>
+                  <label i18n scLabel>Password</label>
                   <input
                     scInput
                     type="password"
@@ -189,7 +190,7 @@ const EMPTY = {
             <div scStepperPanel [step]="1">
               <div scFieldGroup>
                 <div scField>
-                  <label scLabel>Your name</label>
+                  <label i18n scLabel>Your name</label>
                   <input
                     scInput
                     autocomplete="name"
@@ -198,7 +199,7 @@ const EMPTY = {
                   <div scFieldErrors></div>
                 </div>
                 <div scField>
-                  <label scLabel>Company</label>
+                  <label i18n scLabel>Company</label>
                   <input
                     scInput
                     autocomplete="organization"
@@ -212,7 +213,7 @@ const EMPTY = {
             <div scStepperPanel [step]="2">
               <div scFieldGroup>
                 <fieldset class="flex flex-col gap-3">
-                  <legend scLegend variant="label">Plan</legend>
+                  <legend i18n scLegend variant="label">Plan</legend>
                   <div
                     scRadioGroup
                     [formField]="wizardForm.plan.plan"
@@ -238,22 +239,22 @@ const EMPTY = {
                 <dl
                   class="bg-muted/50 grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 rounded-lg p-4 text-sm"
                 >
-                  <dt class="text-muted-foreground">Email</dt>
+                  <dt i18n class="text-muted-foreground">Email</dt>
                   <dd>{{ model().account.email || '—' }}</dd>
-                  <dt class="text-muted-foreground">Name</dt>
+                  <dt i18n class="text-muted-foreground">Name</dt>
                   <dd>{{ model().profile.name || '—' }}</dd>
-                  <dt class="text-muted-foreground">Company</dt>
+                  <dt i18n class="text-muted-foreground">Company</dt>
                   <dd>{{ model().profile.company || '—' }}</dd>
                 </dl>
               </div>
             </div>
 
             <div class="flex justify-between gap-2">
-              <button scStepperPrevious type="button">Back</button>
+              <button i18n scStepperPrevious type="button">Back</button>
               @if (stepper.isLastStep()) {
-                <button scButton type="submit">Create workspace</button>
+                <button i18n scButton type="submit">Create workspace</button>
               } @else {
-                <button scStepperNext type="button">Next</button>
+                <button i18n scStepperNext type="button">Next</button>
               }
             </div>
           </div>
@@ -265,12 +266,18 @@ const EMPTY = {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormWizardPage {
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    forms: $localize`Forms`,
+    wizard: $localize`Wizard`,
+  };
+
   private readonly toaster = inject(ScToaster);
   private readonly step = signal(0);
   private readonly plans = [
-    { value: 'starter', label: 'Starter', price: '$19 / month' },
-    { value: 'pro', label: 'Pro', price: '$49 / month' },
-    { value: 'team', label: 'Team', price: '$99 / month' },
+    { value: 'starter', label: $localize`Starter`, price: '$19 / month' },
+    { value: 'pro', label: $localize`Pro`, price: '$49 / month' },
+    { value: 'team', label: $localize`Team`, price: '$99 / month' },
   ];
   private readonly model = signal(structuredClone(EMPTY));
   private readonly wizardForm = form(this.model, (path) => {
@@ -288,8 +295,8 @@ export class FormWizardPage {
     if (this.wizardForm().invalid()) return;
     this.toaster.show({
       variant: 'success',
-      title: `${this.model().profile.company} is ready`,
-      description: 'Your workspace was created.',
+      title: $localize`${this.model().profile.company} is ready`,
+      description: $localize`Your workspace was created.`,
     });
     this.model.set(structuredClone(EMPTY));
     this.wizardForm().reset();

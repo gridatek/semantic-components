@@ -37,6 +37,7 @@ import { SiChevronDownIcon, SiUploadIcon } from '@semantic-icons/lucide-icons';
 import { PRODUCT_CATEGORIES, type ProductCategory } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
 import { today } from '../../shared/format';
+import { label } from '../../shared/labels';
 import { ProductStore } from './shop-store';
 
 interface Draft {
@@ -82,11 +83,11 @@ interface Draft {
   ],
   template: `
     <app-page-header
-      [title]="product() ? 'Edit Product' : 'Add Product'"
+      [title]="product() ? t.editProduct : t.addProduct"
       [trail]="[
-        { label: 'Apps' },
-        { label: 'Products', url: '/apps/ecommerce/list' },
-        { label: product() ? 'Edit' : 'Add' },
+        { label: t.apps },
+        { label: t.products, url: '/apps/ecommerce/list' },
+        { label: product() ? t.edit : t.add },
       ]"
     />
 
@@ -94,16 +95,16 @@ interface Draft {
       <div class="flex flex-col gap-4">
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Details</h2>
+            <h2 i18n scCardTitle>Details</h2>
           </div>
           <div scCardBody>
             <div scFieldGroup>
               <div scField>
-                <label scLabel>Name</label>
+                <label i18n scLabel>Name</label>
                 <input scInput [formField]="productForm.name" />
               </div>
               <div scField>
-                <label scLabel>Description</label>
+                <label i18n scLabel>Description</label>
                 <textarea
                   scTextarea
                   rows="5"
@@ -116,25 +117,25 @@ interface Draft {
 
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Price and stock</h2>
+            <h2 i18n scCardTitle>Price and stock</h2>
           </div>
           <div scCardBody>
             <div scFieldGroup class="grid gap-4 md:grid-cols-3">
               <div scField>
-                <label scLabel>Price ($)</label>
+                <label i18n scLabel>Price ($)</label>
                 <input scInput type="number" [formField]="productForm.price" />
               </div>
               <div scField>
-                <label scLabel>Price before discount ($)</label>
+                <label i18n scLabel>Price before discount ($)</label>
                 <input
                   scInput
                   type="number"
                   [formField]="productForm.listPrice"
                 />
-                <p scFieldDescription>0 when not on sale.</p>
+                <p i18n scFieldDescription>0 when not on sale.</p>
               </div>
               <div scField>
-                <label scLabel>Stock</label>
+                <label i18n scLabel>Stock</label>
                 <input scInput type="number" [formField]="productForm.stock" />
               </div>
             </div>
@@ -145,15 +146,17 @@ interface Draft {
       <div class="flex flex-col gap-4">
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Category</h2>
+            <h2 i18n scCardTitle>Category</h2>
           </div>
           <div scCardBody>
             <div scField>
-              <label scLabel>Category</label>
+              <label i18n scLabel>Category</label>
               <div scNativeSelectContainer class="w-full">
                 <select scNativeSelect [formField]="productForm.category">
                   @for (c of categories; track c) {
-                    <option scNativeSelectOption [value]="c">{{ c }}</option>
+                    <option scNativeSelectOption [value]="c">
+                      {{ labelOf(c) }}
+                    </option>
                   }
                 </select>
                 <svg siChevronDownIcon scNativeSelectIcon></svg>
@@ -164,7 +167,7 @@ interface Draft {
 
         <div scCard>
           <div scCardHeader>
-            <h2 scCardTitle>Picture</h2>
+            <h2 i18n scCardTitle>Picture</h2>
           </div>
           <div scCardBody class="flex flex-col gap-4">
             @if (image(); as image) {
@@ -174,12 +177,14 @@ interface Draft {
               >
                 @if (image.startsWith('blob:')) {
                   <img
+                    i18n-alt
                     [src]="image"
                     alt="The chosen picture"
                     class="size-full object-cover"
                   />
                 } @else {
                   <img
+                    i18n-alt
                     [ngSrc]="image"
                     fill
                     sizes="22rem"
@@ -190,21 +195,25 @@ interface Draft {
               </div>
             }
             <div scFileUpload accept="image/*" (valueChange)="choose($event)">
-              <input scFileUploadInput aria-label="Product picture" />
+              <input
+                i18n-aria-label
+                scFileUploadInput
+                aria-label="Product picture"
+              />
               <div scFileUploadDropzone>
                 <svg siUploadIcon></svg>
-                <p>Drop a picture here</p>
-                <button scFileUploadTrigger size="sm">Browse files</button>
+                <p i18n>Drop a picture here</p>
+                <button i18n scFileUploadTrigger size="sm">Browse files</button>
               </div>
             </div>
           </div>
         </div>
 
         <div class="flex justify-end gap-2">
-          <a scLink variant="outline" routerLink="/apps/ecommerce/list"
+          <a i18n scLink variant="outline" routerLink="/apps/ecommerce/list"
             >Cancel</a
           >
-          <button scButton type="submit">Save Product</button>
+          <button i18n scButton type="submit">Save Product</button>
         </div>
       </div>
     </form>
@@ -213,6 +222,17 @@ interface Draft {
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductEditPage {
+  private readonly labelOf = label;
+  /** The template's words that sit in bindings, translated. */
+  private readonly t = {
+    editProduct: $localize`Edit Product`,
+    addProduct: $localize`Add Product`,
+    apps: $localize`Apps`,
+    products: $localize`Products`,
+    edit: $localize`Edit`,
+    add: $localize`Add`,
+  };
+
   /** The route's `:id` when editing; none when adding. */
   readonly id = input<string>();
 
