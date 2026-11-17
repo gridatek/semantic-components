@@ -61,6 +61,22 @@ test('Yours replace the default: the horizontal demo has its scrollbar only, no 
   await expect(bar(page, 'vertical')).toHaveCount(0);
 });
 
+test('Your own scrollbar: replaces the default; thinner, shown while the pointer is over the box', async ({
+  page,
+}) => {
+  await page.goto(demo('custom'));
+  const bars = page.locator('[scScrollAreaScrollbar]');
+  await expect(bars).toHaveCount(1);
+  // Its classes win over the part's own (cn): 6px, not the default 10px.
+  await expect(bars).toHaveCSS('width', '6px');
+  await expect(bars).toHaveCSS('opacity', '0');
+  await viewport(page).hover();
+  await expect(bars).toHaveAttribute('data-hovering', '');
+  await expect
+    .poll(() => bars.evaluate((el) => getComputedStyle(el).opacity))
+    .toBe('1');
+});
+
 test('Keyboard: the viewport is a tab stop while it overflows; the arrow keys scroll it', async ({
   page,
 }) => {
@@ -188,6 +204,7 @@ test('On a phone, 360px wide: the demos fit; touch scrolls the viewport (no touc
     demo('both'),
     demo('scroll-fade'),
     demo('rtl'),
+    demo('custom'),
   ]) {
     await page.goto(url);
     await expectNoHorizontalScroll(page);

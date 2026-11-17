@@ -19,10 +19,12 @@
  *
  * In the base layer: a utility wins. Tailwind's `scrollbar-none` or shadcn's
  * `no-scrollbar` hide a box's bar; `scrollbar-gutter-stable` keeps its room.
- * `scrollbar-auto` (or `scrollbar-thin`, any `scrollbar-color`) gives a box
- * the browser's own bar back: Chromium draws `::-webkit-scrollbar` only on an
- * element with no `scrollbar-width` or `scrollbar-color` — so this file sets
- * them only where there is no `::-webkit-scrollbar` (Firefox).
+ * `scrollbar-thin` (or any `scrollbar-color`, as Tailwind's
+ * `scrollbar-thumb-*`) gives a box the browser's own bar back: Chromium
+ * draws `::-webkit-scrollbar` only on an element whose `scrollbar-width` and
+ * `scrollbar-color` are `auto` — so this file sets them only where there is
+ * no `::-webkit-scrollbar` (Firefox). (`scrollbar-auto` is `auto`: it
+ * changes nothing.)
  *
  * The limits are the browser's: Firefox takes a thin bar and its colours only
  * (no exact size, no corners, no inset); where the system's scrollbars take

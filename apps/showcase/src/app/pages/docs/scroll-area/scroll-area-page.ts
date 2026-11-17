@@ -13,6 +13,7 @@ import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BothScrollAreaDemoContainer } from './demos/both-scroll-area-demo-container';
+import { CustomScrollAreaDemoContainer } from './demos/custom-scroll-area-demo-container';
 import { HorizontalScrollAreaDemoContainer } from './demos/horizontal-scroll-area-demo-container';
 import { RtlScrollAreaDemoContainer } from './demos/rtl-scroll-area-demo-container';
 import { ScrollAreaUsageDemoContainer } from './demos/scroll-area-usage-demo-container';
@@ -25,6 +26,7 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
     ScrollAreaUsageDemoContainer,
     HorizontalScrollAreaDemoContainer,
     BothScrollAreaDemoContainer,
+    CustomScrollAreaDemoContainer,
     ScrollFadeScrollAreaDemoContainer,
     RtlScrollAreaDemoContainer,
     TocHeading,
@@ -88,6 +90,7 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
         <h2 scTypeset appToc>Examples</h2>
         <app-horizontal-scroll-area-demo-container />
         <app-both-scroll-area-demo-container />
+        <app-custom-scroll-area-demo-container />
         <app-scroll-fade-scroll-area-demo-container />
         <app-rtl-scroll-area-demo-container />
       </section>

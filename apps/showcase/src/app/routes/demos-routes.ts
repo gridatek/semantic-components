@@ -5143,6 +5143,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'custom-scroll-area-demo',
+        loadComponent: () =>
+          import('../pages/docs/scroll-area/demos/custom-scroll-area-demo').then(
+            (m) => m.CustomScrollAreaDemo,
+          ),
+      },
+      {
         path: 'both-scroll-area-demo',
         loadComponent: () =>
           import('../pages/docs/scroll-area/demos/both-scroll-area-demo').then(
@@ -5161,6 +5168,32 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/scroll-area/demos/rtl-scroll-area-demo').then(
             (m) => m.RtlScrollAreaDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/scrollbars',
+    children: [
+      {
+        path: 'scrollbars-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/scrollbars/demos/scrollbars-usage-demo').then(
+            (m) => m.ScrollbarsUsageDemo,
+          ),
+      },
+      {
+        path: 'tuning-scrollbars-demo',
+        loadComponent: () =>
+          import('../pages/docs/scrollbars/demos/tuning-scrollbars-demo').then(
+            (m) => m.TuningScrollbarsDemo,
+          ),
+      },
+      {
+        path: 'opting-out-scrollbars-demo',
+        loadComponent: () =>
+          import('../pages/docs/scrollbars/demos/opting-out-scrollbars-demo').then(
+            (m) => m.OptingOutScrollbarsDemo,
           ),
       },
     ],
