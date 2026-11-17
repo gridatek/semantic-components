@@ -1065,6 +1065,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Table of Contents",
+    "path": "toc",
+    "description": "The sections of a page as links, the one read marked as it scrolls.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Navigation"
+  },
+  {
     "name": "Tabs",
     "path": "tabs",
     "description": "Tabs and their panels, one shown at a time — in the look of the app's preset.",
