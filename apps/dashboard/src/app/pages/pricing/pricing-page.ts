@@ -154,7 +154,7 @@ const COMPARE: readonly {
                 >\${{ price(plan.monthly) }}</span
               >
               <span class="text-muted-foreground">
-                / {{ yearly() ? 'year' : 'month' }}</span
+                {{ yearly() ? t.perYear : t.perMonth }}</span
               >
             </p>
             <ul class="flex flex-col gap-2 text-sm">
@@ -231,6 +231,8 @@ const COMPARE: readonly {
 export class PricingPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
+    perYear: $localize`/ year`,
+    perMonth: $localize`/ month`,
     pages: $localize`Pages`,
     pricing: $localize`Pricing`,
   };
@@ -249,7 +251,9 @@ export class PricingPage {
     this.toaster.show({
       variant: 'success',
       title: $localize`${plan} plan chosen`,
-      description: $localize`Billed ${this.yearly() ? 'yearly' : 'monthly'} after the trial.`,
+      description: this.yearly()
+        ? $localize`Billed yearly after the trial.`
+        : $localize`Billed monthly after the trial.`,
     });
   }
 }

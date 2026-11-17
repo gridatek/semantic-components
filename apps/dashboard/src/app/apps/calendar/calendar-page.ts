@@ -91,18 +91,26 @@ function seed(): CalendarEvent[] {
     return { id, title, category, start, end: start.add(duration), allDay };
   };
   return [
-    make('e1', 'Team stand-up', 'work', 0, '09:00', { minutes: 15 }),
-    make('e2', 'Design review', 'work', 0, '11:00', { hours: 1 }),
-    make('e3', 'Dentist', 'personal', 1, '16:30', { minutes: 45 }),
-    make('e4', 'Quarterly planning', 'important', 2, '10:00', { hours: 3 }),
-    make('e5', 'Lunch with Emily', 'personal', -1, '12:30', { hours: 1 }),
-    make('e6', 'Flight to Berlin', 'travel', 5, '07:40', { hours: 2 }),
-    make('e7', 'Conference', 'travel', 6, '00:00', { days: 2 }, true),
-    make('e8', 'Release v2.4', 'important', -3, '15:00', { minutes: 30 }),
-    make('e9', 'Customer call', 'work', 3, '14:00', { minutes: 45 }),
-    make('e10', 'Yoga', 'personal', 4, '18:00', { hours: 1 }),
-    make('e11', 'Board meeting', 'important', 9, '09:30', { hours: 2 }),
-    make('e12', 'Hiring sync', 'work', -6, '13:00', { minutes: 30 }),
+    make('e1', $localize`Team stand-up`, 'work', 0, '09:00', { minutes: 15 }),
+    make('e2', $localize`Design review`, 'work', 0, '11:00', { hours: 1 }),
+    make('e3', $localize`Dentist`, 'personal', 1, '16:30', { minutes: 45 }),
+    make('e4', $localize`Quarterly planning`, 'important', 2, '10:00', {
+      hours: 3,
+    }),
+    make('e5', $localize`Lunch with Emily`, 'personal', -1, '12:30', {
+      hours: 1,
+    }),
+    make('e6', $localize`Flight to Berlin`, 'travel', 5, '07:40', { hours: 2 }),
+    make('e7', $localize`Conference`, 'travel', 6, '00:00', { days: 2 }, true),
+    make('e8', $localize`Release v2.4`, 'important', -3, '15:00', {
+      minutes: 30,
+    }),
+    make('e9', $localize`Customer call`, 'work', 3, '14:00', { minutes: 45 }),
+    make('e10', $localize`Yoga`, 'personal', 4, '18:00', { hours: 1 }),
+    make('e11', $localize`Board meeting`, 'important', 9, '09:30', {
+      hours: 2,
+    }),
+    make('e12', $localize`Hiring sync`, 'work', -6, '13:00', { minutes: 30 }),
   ];
 }
 
