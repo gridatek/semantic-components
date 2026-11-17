@@ -1,0 +1,557 @@
+import { NgOptimizedImage } from '@angular/common';
+import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
+import {
+  FormField,
+  email,
+  form,
+  minLength,
+  required,
+  validate,
+} from '@angular/forms/signals';
+import {
+  ScAvatar,
+  ScAvatarFallback,
+  ScAvatarImage,
+  ScBadge,
+  ScButton,
+  ScCard,
+  ScCardBody,
+  ScCardDescription,
+  ScCardFooter,
+  ScCardHeader,
+  ScCardTitle,
+  ScField,
+  ScFieldContentWrapper,
+  ScFieldDescription,
+  ScFieldErrors,
+  ScFieldGroup,
+  ScInput,
+  ScLabel,
+  ScSeparator,
+  ScSwitch,
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableContainer,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+  ScTabs,
+  ScTabsList,
+  ScTabsPanel,
+  ScTabsPanelContent,
+  ScTabsTab,
+  ScTextarea,
+  ScToaster,
+} from '@semantic-components/ui';
+import {
+  SiDownloadIcon,
+  SiLaptopIcon,
+  SiSmartphoneIcon,
+} from '@semantic-icons/lucide-icons';
+import { ME } from '../../data/people';
+import { PageHeader } from '../../layout/page-header';
+
+/** Account Settings (Pro): the account, security, notifications, billing. */
+@Component({
+  selector: 'app-account-settings-page',
+  imports: [
+    FormField,
+    NgOptimizedImage,
+    ScAvatar,
+    ScAvatarFallback,
+    ScAvatarImage,
+    ScBadge,
+    ScButton,
+    ScCard,
+    ScCardBody,
+    ScCardDescription,
+    ScCardFooter,
+    ScCardHeader,
+    ScCardTitle,
+    ScField,
+    ScFieldContentWrapper,
+    ScFieldDescription,
+    ScFieldErrors,
+    ScFieldGroup,
+    ScInput,
+    ScLabel,
+    ScSeparator,
+    ScSwitch,
+    ScTable,
+    ScTableBody,
+    ScTableCell,
+    ScTableContainer,
+    ScTableHeader,
+    ScTableHeaderCell,
+    ScTableRow,
+    ScTabs,
+    ScTabsList,
+    ScTabsPanel,
+    ScTabsPanelContent,
+    ScTabsTab,
+    ScTextarea,
+    SiDownloadIcon,
+    SiLaptopIcon,
+    SiSmartphoneIcon,
+    PageHeader,
+  ],
+  template: `
+    <app-page-header
+      title="Account Settings"
+      [trail]="[{ label: 'Pages' }, { label: 'Account Settings' }]"
+    />
+
+    <div scTabs value="account" class="flex flex-col gap-4">
+      <div scTabsList class="self-start">
+        <button scTabsTab value="account">Account</button>
+        <button scTabsTab value="security">Security</button>
+        <button scTabsTab value="notifications">Notifications</button>
+        <button scTabsTab value="billing">Billing</button>
+      </div>
+
+      <div scTabsPanel value="account">
+        <ng-template scTabsPanelContent>
+          <form (submit)="saveAccount($event)">
+            <div scCard>
+              <div scCardHeader>
+                <h2 scCardTitle>Profile</h2>
+                <p scCardDescription>How others see you</p>
+              </div>
+              <div scCardBody class="flex flex-col gap-6">
+                <div class="flex items-center gap-4">
+                  <span scAvatar class="size-16">
+                    <img scAvatarImage [src]="me.avatar" alt="" />
+                    <span scAvatarFallback>MA</span>
+                  </span>
+                  <p class="text-muted-foreground text-sm">
+                    JPG or PNG, up to 800 KB.
+                  </p>
+                </div>
+                <div scFieldGroup class="grid gap-4 md:grid-cols-2">
+                  <div scField>
+                    <label scLabel>Full name</label>
+                    <input
+                      scInput
+                      autocomplete="name"
+                      [formField]="accountForm.name"
+                    />
+                    <div scFieldErrors></div>
+                  </div>
+                  <div scField>
+                    <label scLabel>Email</label>
+                    <input
+                      scInput
+                      type="email"
+                      autocomplete="email"
+                      [formField]="accountForm.email"
+                    />
+                    <div scFieldErrors></div>
+                  </div>
+                  <div scField>
+                    <label scLabel>Phone</label>
+                    <input
+                      scInput
+                      type="tel"
+                      autocomplete="tel"
+                      [formField]="accountForm.phone"
+                    />
+                  </div>
+                  <div scField>
+                    <label scLabel>Location</label>
+                    <input scInput [formField]="accountForm.location" />
+                  </div>
+                  <div scField class="md:col-span-2">
+                    <label scLabel>Bio</label>
+                    <textarea
+                      scTextarea
+                      rows="3"
+                      [formField]="accountForm.bio"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div scCardFooter class="justify-end">
+                <button scButton type="submit">Save changes</button>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+      </div>
+
+      <div scTabsPanel value="security">
+        <ng-template scTabsPanelContent>
+          <div class="flex flex-col gap-4">
+            <form (submit)="savePassword($event)">
+              <div scCard>
+                <div scCardHeader>
+                  <h2 scCardTitle>Password</h2>
+                  <p scCardDescription>At least 8 characters</p>
+                </div>
+                <div scCardBody>
+                  <div scFieldGroup class="max-w-md">
+                    <div scField>
+                      <label scLabel>Current password</label>
+                      <input
+                        scInput
+                        type="password"
+                        autocomplete="current-password"
+                        [formField]="passwordForm.current"
+                      />
+                      <div scFieldErrors></div>
+                    </div>
+                    <div scField>
+                      <label scLabel>New password</label>
+                      <input
+                        scInput
+                        type="password"
+                        autocomplete="new-password"
+                        [formField]="passwordForm.next"
+                      />
+                      <div scFieldErrors></div>
+                    </div>
+                    <div scField>
+                      <label scLabel>Confirm new password</label>
+                      <input
+                        scInput
+                        type="password"
+                        autocomplete="new-password"
+                        [formField]="passwordForm.confirm"
+                      />
+                      <div scFieldErrors></div>
+                    </div>
+                  </div>
+                </div>
+                <div scCardFooter class="justify-end">
+                  <button scButton type="submit">Update password</button>
+                </div>
+              </div>
+            </form>
+
+            <div scCard>
+              <div scCardHeader>
+                <h2 scCardTitle>Two-step verification</h2>
+              </div>
+              <div scCardBody>
+                <div scField orientation="horizontal">
+                  <div scFieldContentWrapper>
+                    <label scLabel for="two-step"
+                      >Ask for a code at sign-in</label
+                    >
+                    <p scFieldDescription>
+                      From an authenticator app, after your password.
+                    </p>
+                  </div>
+                  <input
+                    scSwitch
+                    id="two-step"
+                    type="checkbox"
+                    [checked]="twoStep()"
+                    (change)="toggleTwoStep()"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div scCard>
+              <div scCardHeader>
+                <h2 scCardTitle>Where you’re signed in</h2>
+              </div>
+              <div scCardBody class="flex flex-col gap-4">
+                @for (session of sessions(); track session.id) {
+                  <div class="flex items-center gap-3">
+                    <span
+                      class="bg-muted flex size-10 items-center justify-center rounded-lg"
+                    >
+                      @if (session.phone) {
+                        <svg siSmartphoneIcon></svg>
+                      } @else {
+                        <svg siLaptopIcon></svg>
+                      }
+                    </span>
+                    <div class="flex flex-col text-sm">
+                      <span class="font-medium">
+                        {{ session.device }}
+                        @if (session.current) {
+                          <span scBadge variant="secondary" class="ms-1"
+                            >This device</span
+                          >
+                        }
+                      </span>
+                      <span class="text-muted-foreground">{{
+                        session.where
+                      }}</span>
+                    </div>
+                    @if (!session.current) {
+                      <button
+                        scButton
+                        variant="outline"
+                        size="sm"
+                        class="ms-auto"
+                        (click)="signOut(session.id)"
+                      >
+                        Sign out
+                      </button>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+
+      <div scTabsPanel value="notifications">
+        <ng-template scTabsPanelContent>
+          <div scCard>
+            <div scCardHeader>
+              <h2 scCardTitle>Notifications</h2>
+              <p scCardDescription>What we tell you about, and how</p>
+            </div>
+            <div scCardBody class="flex flex-col gap-4">
+              @for (item of notices(); track item.id; let last = $last) {
+                <div scField orientation="horizontal">
+                  <div scFieldContentWrapper>
+                    <label scLabel [for]="'n-' + item.id">{{
+                      item.label
+                    }}</label>
+                    <p scFieldDescription>{{ item.text }}</p>
+                  </div>
+                  <input
+                    scSwitch
+                    type="checkbox"
+                    [id]="'n-' + item.id"
+                    [checked]="item.on"
+                    (change)="toggleNotice(item.id)"
+                  />
+                </div>
+                @if (!last) {
+                  <div scSeparator></div>
+                }
+              }
+            </div>
+          </div>
+        </ng-template>
+      </div>
+
+      <div scTabsPanel value="billing">
+        <ng-template scTabsPanelContent>
+          <div class="flex flex-col gap-4">
+            <div class="grid gap-4 md:grid-cols-2">
+              <div scCard>
+                <div scCardHeader>
+                  <h2 scCardTitle>Plan</h2>
+                  <p scCardDescription>Renews on June 1, 2026</p>
+                </div>
+                <div scCardBody class="flex items-baseline gap-2">
+                  <span class="text-3xl font-semibold">Pro</span>
+                  <span class="text-muted-foreground">$49 / month</span>
+                </div>
+              </div>
+              <div scCard>
+                <div scCardHeader>
+                  <h2 scCardTitle>Payment method</h2>
+                  <p scCardDescription>Charged on the 1st</p>
+                </div>
+                <div scCardBody class="flex items-center gap-3">
+                  <img
+                    ngSrc="images/brands/mastercard.svg"
+                    width="36"
+                    height="24"
+                    alt="Mastercard"
+                  />
+                  <span class="tabular-nums">•••• 4242</span>
+                  <span class="text-muted-foreground text-sm"
+                    >Expires 08/28</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div scCard>
+              <div scCardHeader>
+                <h2 scCardTitle>Invoices</h2>
+              </div>
+              <div scCardBody>
+                <div scTableContainer>
+                  <table scTable>
+                    <thead scTableHeader>
+                      <tr scTableRow>
+                        <th scTableHeaderCell>Date</th>
+                        <th scTableHeaderCell>Plan</th>
+                        <th scTableHeaderCell class="text-end">Amount</th>
+                        <th scTableHeaderCell>
+                          <span class="sr-only">Download</span>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody scTableBody>
+                      @for (bill of bills; track bill.date) {
+                        <tr scTableRow>
+                          <td scTableCell>{{ bill.date }}</td>
+                          <td scTableCell>Pro, monthly</td>
+                          <td scTableCell class="text-end tabular-nums">
+                            $49.00
+                          </td>
+                          <td scTableCell class="text-end">
+                            <button
+                              scButton
+                              variant="ghost"
+                              size="icon-sm"
+                              (click)="download(bill.date)"
+                            >
+                              <svg siDownloadIcon></svg>
+                              <span class="sr-only"
+                                >Download the invoice of {{ bill.date }}</span
+                              >
+                            </button>
+                          </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  `,
+  host: { class: 'flex flex-col gap-4' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class AccountSettingsPage {
+  private readonly toaster = inject(ScToaster);
+  private readonly me = ME;
+
+  private readonly account = signal({
+    name: ME.name,
+    email: ME.email,
+    phone: ME.phone,
+    location: `${ME.city}, ${ME.country}`,
+    bio: 'Product designer in New York.',
+  });
+  private readonly accountForm = form(this.account, (path) => {
+    required(path.name);
+    required(path.email);
+    email(path.email);
+  });
+
+  private readonly password = signal({ current: '', next: '', confirm: '' });
+  private readonly passwordForm = form(this.password, (path) => {
+    required(path.current);
+    required(path.next);
+    minLength(path.next, 8);
+    validate(path.confirm, ({ value, valueOf }) =>
+      value() === valueOf(path.next)
+        ? undefined
+        : { kind: 'mismatch', message: 'The passwords differ.' },
+    );
+  });
+
+  private readonly twoStep = signal(true);
+  private readonly sessions = signal([
+    {
+      id: 1,
+      device: 'MacBook Pro · Chrome',
+      where: 'New York · now',
+      phone: false,
+      current: true,
+    },
+    {
+      id: 2,
+      device: 'iPhone 15 · Safari',
+      where: 'New York · 2 hours ago',
+      phone: true,
+      current: false,
+    },
+    {
+      id: 3,
+      device: 'Windows · Edge',
+      where: 'Boston · 3 days ago',
+      phone: false,
+      current: false,
+    },
+  ]);
+  private readonly notices = signal([
+    {
+      id: 'orders',
+      label: 'New orders',
+      text: 'An email for each order.',
+      on: true,
+    },
+    {
+      id: 'tickets',
+      label: 'Ticket replies',
+      text: 'When a customer answers.',
+      on: true,
+    },
+    {
+      id: 'mentions',
+      label: 'Mentions',
+      text: 'When someone mentions you in a chat.',
+      on: true,
+    },
+    {
+      id: 'digest',
+      label: 'Weekly digest',
+      text: 'The week’s numbers, on Monday.',
+      on: false,
+    },
+    {
+      id: 'product',
+      label: 'Product news',
+      text: 'New features, now and then.',
+      on: false,
+    },
+  ]);
+  private readonly bills = [
+    { date: 'May 1, 2026' },
+    { date: 'Apr 1, 2026' },
+    { date: 'Mar 1, 2026' },
+  ];
+
+  private saveAccount(event: Event): void {
+    event.preventDefault();
+    if (this.accountForm().invalid()) return;
+    this.toaster.show({ variant: 'success', title: 'Profile saved' });
+  }
+
+  private savePassword(event: Event): void {
+    event.preventDefault();
+    if (this.passwordForm().invalid()) {
+      this.toaster.show({
+        variant: 'error',
+        title: 'Check the password fields',
+      });
+      return;
+    }
+    this.password.set({ current: '', next: '', confirm: '' });
+    this.passwordForm().reset();
+    this.toaster.show({ variant: 'success', title: 'Password updated' });
+  }
+
+  private toggleTwoStep(): void {
+    this.twoStep.update((on) => !on);
+    this.toaster.show({
+      title: this.twoStep()
+        ? 'Two-step verification on'
+        : 'Two-step verification off',
+    });
+  }
+
+  private signOut(id: number): void {
+    this.sessions.update((all) => all.filter((s) => s.id !== id));
+    this.toaster.show({ title: 'Signed out of that device' });
+  }
+
+  private toggleNotice(id: string): void {
+    this.notices.update((all) =>
+      all.map((n) => (n.id === id ? { ...n, on: !n.on } : n)),
+    );
+  }
+
+  private download(date: string): void {
+    this.toaster.show({ title: `Invoice of ${date} downloaded` });
+  }
+}

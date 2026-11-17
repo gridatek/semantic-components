@@ -1,9 +1,19 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import {
   ScAvatar,
   ScAvatarFallback,
   ScAvatarImage,
+  ScCollapsible,
+  ScCollapsiblePanel,
+  ScCollapsibleTrigger,
   ScSidebar,
   ScSidebarContent,
   ScSidebarFooter,
@@ -22,27 +32,18 @@ import {
   ScSidebarRail,
 } from '@semantic-components/ui';
 import {
-  SiBookOpenIcon,
-  SiCircleAlertIcon,
-  SiCircleUserRoundIcon,
-  SiFileTextIcon,
-  SiKeyRoundIcon,
+  SiChevronDownIcon,
   SiLayoutDashboardIcon,
-  SiLogInIcon,
-  SiNotebookPenIcon,
-  SiShieldCheckIcon,
-  SiSmileIcon,
-  SiTableIcon,
-  SiTicketIcon,
-  SiUserPlusIcon,
-  SiWrenchIcon,
 } from '@semantic-icons/lucide-icons';
+import { filter, map } from 'rxjs';
 import { AppHeader } from './app-header';
-import { NAV } from './nav';
+import { NAV, type NavLink } from './nav';
+import { SidebarIcon } from './nav-icon';
 
 /**
- * The app's frame: the sidebar (shadcndashboard's sections), the header and
- * the page; the attribution its license asks for in the footer.
+ * The app's frame: the sidebar (shadcndashboard's sections, a group's pages
+ * folded under it), the header and the page; the attribution its license
+ * asks for in the footer.
  */
 @Component({
   selector: 'app-full-layout',
@@ -53,6 +54,9 @@ import { NAV } from './nav';
     ScAvatar,
     ScAvatarFallback,
     ScAvatarImage,
+    ScCollapsible,
+    ScCollapsiblePanel,
+    ScCollapsibleTrigger,
     ScSidebar,
     ScSidebarContent,
     ScSidebarFooter,
@@ -69,21 +73,10 @@ import { NAV } from './nav';
     ScSidebarMenuSubItem,
     ScSidebarProvider,
     ScSidebarRail,
-    SiBookOpenIcon,
-    SiCircleAlertIcon,
-    SiCircleUserRoundIcon,
-    SiFileTextIcon,
-    SiKeyRoundIcon,
+    SiChevronDownIcon,
     SiLayoutDashboardIcon,
-    SiLogInIcon,
-    SiNotebookPenIcon,
-    SiShieldCheckIcon,
-    SiSmileIcon,
-    SiTableIcon,
-    SiTicketIcon,
-    SiUserPlusIcon,
-    SiWrenchIcon,
     AppHeader,
+    SidebarIcon,
   ],
   template: `
     <div scSidebarProvider class="min-h-svh">
@@ -113,80 +106,56 @@ import { NAV } from './nav';
               <div scSidebarGroupLabel>{{ section.heading }}</div>
               <div scSidebarGroupContent>
                 <ul scSidebarMenu>
-                  @for (link of section.links; track link.url) {
-                    <li scSidebarMenuItem>
-                      <a
-                        scSidebarMenuButton
-                        [routerLink]="link.url"
-                        routerLinkActive
-                        [routerLinkActiveOptions]="{ exact: link.url === '/' }"
-                        #rla="routerLinkActive"
-                        [active]="rla.isActive && !link.children"
+                  @for (link of section.links; track link.label) {
+                    @if (link.children; as children) {
+                      <li
+                        scSidebarMenuItem
+                        scCollapsible
+                        [open]="isOpen(link, url())"
                       >
-                        @switch (link.icon) {
-                          @case ('dashboard') {
-                            <svg siLayoutDashboardIcon></svg>
-                          }
-                          @case ('table') {
-                            <svg siTableIcon></svg>
-                          }
-                          @case ('form') {
-                            <svg siFileTextIcon></svg>
-                          }
-                          @case ('profile') {
-                            <svg siCircleUserRoundIcon></svg>
-                          }
-                          @case ('notes') {
-                            <svg siNotebookPenIcon></svg>
-                          }
-                          @case ('blog') {
-                            <svg siBookOpenIcon></svg>
-                          }
-                          @case ('tickets') {
-                            <svg siTicketIcon></svg>
-                          }
-                          @case ('icons') {
-                            <svg siSmileIcon></svg>
-                          }
-                          @case ('error') {
-                            <svg siCircleAlertIcon></svg>
-                          }
-                          @case ('login') {
-                            <svg siLogInIcon></svg>
-                          }
-                          @case ('register') {
-                            <svg siUserPlusIcon></svg>
-                          }
-                          @case ('forgot') {
-                            <svg siKeyRoundIcon></svg>
-                          }
-                          @case ('two-steps') {
-                            <svg siShieldCheckIcon></svg>
-                          }
-                          @case ('maintenance') {
-                            <svg siWrenchIcon></svg>
-                          }
-                        }
-                        <span>{{ link.label }}</span>
-                      </a>
-                      @if (link.children; as children) {
-                        <ul scSidebarMenuSub>
-                          @for (child of children; track child.url) {
-                            <li scSidebarMenuSubItem>
-                              <a
-                                scSidebarMenuSubButton
-                                [routerLink]="child.url"
-                                routerLinkActive
-                                #childRla="routerLinkActive"
-                                [active]="childRla.isActive"
-                              >
-                                <span>{{ child.label }}</span>
-                              </a>
-                            </li>
-                          }
-                        </ul>
-                      }
-                    </li>
+                        <button scSidebarMenuButton scCollapsibleTrigger>
+                          <app-nav-icon [name]="link.icon" />
+                          <span>{{ link.label }}</span>
+                          <svg
+                            siChevronDownIcon
+                            class="ms-auto transition-transform in-aria-expanded:rotate-180"
+                          ></svg>
+                        </button>
+                        <div scCollapsiblePanel>
+                          <ul scSidebarMenuSub>
+                            @for (child of children; track child.url) {
+                              <li scSidebarMenuSubItem>
+                                <a
+                                  scSidebarMenuSubButton
+                                  [routerLink]="child.url"
+                                  routerLinkActive
+                                  #childRla="routerLinkActive"
+                                  [active]="childRla.isActive"
+                                >
+                                  <span>{{ child.label }}</span>
+                                </a>
+                              </li>
+                            }
+                          </ul>
+                        </div>
+                      </li>
+                    } @else {
+                      <li scSidebarMenuItem>
+                        <a
+                          scSidebarMenuButton
+                          [routerLink]="link.url"
+                          routerLinkActive
+                          [routerLinkActiveOptions]="{
+                            exact: link.url === '/',
+                          }"
+                          #rla="routerLinkActive"
+                          [active]="rla.isActive"
+                        >
+                          <app-nav-icon [name]="link.icon" />
+                          <span>{{ link.label }}</span>
+                        </a>
+                      </li>
+                    }
                   }
                 </ul>
               </div>
@@ -196,7 +165,11 @@ import { NAV } from './nav';
         <div scSidebarFooter>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
-              <a scSidebarMenuButton size="lg" routerLink="/pages/user-profile">
+              <a
+                scSidebarMenuButton
+                size="lg"
+                routerLink="/apps/user-profile/profile"
+              >
                 <span scAvatar class="size-8 rounded-lg">
                   <img scAvatarImage src="images/profile/user-1.png" alt="" />
                   <span scAvatarFallback class="rounded-lg">MA</span>
@@ -240,5 +213,20 @@ import { NAV } from './nav';
   encapsulation: ViewEncapsulation.None,
 })
 export class FullLayout {
-  protected readonly nav = NAV;
+  private readonly router = inject(Router);
+  private readonly nav = NAV;
+  private readonly url = toSignal(
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.router.url),
+    ),
+    { initialValue: this.router.url },
+  );
+
+  /** A group is open on its own pages. */
+  private isOpen(link: NavLink, url: string): boolean {
+    const path = url.split(/[?#]/)[0];
+    if (link.base && path.startsWith(link.base)) return true;
+    return (link.children ?? []).some((child) => child.url === path);
+  }
 }

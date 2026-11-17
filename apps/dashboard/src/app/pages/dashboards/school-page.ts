@@ -1,0 +1,368 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScAvatar,
+  ScAvatarFallback,
+  ScAvatarImage,
+  ScBadge,
+  ScCard,
+  ScCardBody,
+  ScCardDescription,
+  ScCardHeader,
+  ScCardTitle,
+  ScItem,
+  ScItemBody,
+  ScItemDescription,
+  ScItemGroup,
+  ScItemMedia,
+  ScItemTitle,
+  ScStatCard,
+  ScStatCardChange,
+  ScStatCardDescription,
+  ScStatCardIcon,
+  ScStatCardLabel,
+  ScStatCardValue,
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableContainer,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+  ScTimeline,
+  ScTimelineContent,
+  ScTimelineDescription,
+  ScTimelineItem,
+  ScTimelineMarker,
+  ScTimelineTime,
+  ScTimelineTitle,
+} from '@semantic-components/ui';
+import {
+  ScChart,
+  ScChartBar,
+  ScChartCategoryAxis,
+  type ScChartConfig,
+  ScChartCursor,
+  ScChartGrid,
+  ScChartPlot,
+} from '@semantic-components/ui/charts';
+import {
+  SiBookOpenIcon,
+  SiCalendarCheckIcon,
+  SiGraduationCapIcon,
+  SiTrendingUpIcon,
+  SiUsersIcon,
+} from '@semantic-icons/lucide-icons';
+import { PEOPLE } from '../../data/people';
+import { PageHeader } from '../../layout/page-header';
+import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
+import { initials } from '../../shared/format';
+
+const ATTENDANCE = [
+  { day: 'Mon', present: 1162, absent: 78 },
+  { day: 'Tue', present: 1188, absent: 52 },
+  { day: 'Wed', present: 1171, absent: 69 },
+  { day: 'Thu', present: 1149, absent: 91 },
+  { day: 'Fri', present: 1104, absent: 136 },
+];
+
+const EXAMS = [
+  { subject: 'Mathematics', grade: 'Grade 10', date: 'May 4', room: 'Hall A' },
+  { subject: 'Physics', grade: 'Grade 11', date: 'May 6', room: 'Lab 2' },
+  {
+    subject: 'English Literature',
+    grade: 'Grade 9',
+    date: 'May 7',
+    room: 'Room 14',
+  },
+  { subject: 'History', grade: 'Grade 12', date: 'May 11', room: 'Hall B' },
+];
+
+const STUDENTS = [
+  { personId: 6, grade: 'Grade 12', average: 96.4, attendance: '99%' },
+  { personId: 2, grade: 'Grade 11', average: 94.8, attendance: '97%' },
+  { personId: 9, grade: 'Grade 12', average: 93.1, attendance: '98%' },
+  { personId: 4, grade: 'Grade 10', average: 92.7, attendance: '96%' },
+  { personId: 7, grade: 'Grade 9', average: 91.9, attendance: '100%' },
+];
+
+const NOTICES = [
+  {
+    title: 'Science fair',
+    text: 'Projects go up in the gym on Friday; parents welcome from 3 pm.',
+    at: '2026-04-24',
+    status: 'done' as const,
+  },
+  {
+    title: 'Parent–teacher meetings',
+    text: 'Book a slot with each teacher through the portal.',
+    at: '2026-04-30',
+    status: 'current' as const,
+  },
+  {
+    title: 'Exam week',
+    text: 'Timetables are pinned outside the staff room.',
+    at: '2026-05-04',
+    status: 'upcoming' as const,
+  },
+  {
+    title: 'Sports day',
+    text: 'On the field from 9 am; bring water and a hat.',
+    at: '2026-05-22',
+    status: 'upcoming' as const,
+  },
+];
+
+/** School (Pro): students, attendance, exams, notices. */
+@Component({
+  selector: 'app-school-page',
+  imports: [
+    ScAvatar,
+    ScAvatarFallback,
+    ScAvatarImage,
+    ScBadge,
+    ScCard,
+    ScCardBody,
+    ScCardDescription,
+    ScCardHeader,
+    ScCardTitle,
+    ScItem,
+    ScItemBody,
+    ScItemDescription,
+    ScItemGroup,
+    ScItemMedia,
+    ScItemTitle,
+    ScStatCard,
+    ScStatCardChange,
+    ScStatCardDescription,
+    ScStatCardIcon,
+    ScStatCardLabel,
+    ScStatCardValue,
+    ScTable,
+    ScTableBody,
+    ScTableCell,
+    ScTableContainer,
+    ScTableHeader,
+    ScTableHeaderCell,
+    ScTableRow,
+    ScTimeline,
+    ScTimelineContent,
+    ScTimelineDescription,
+    ScTimelineItem,
+    ScTimelineMarker,
+    ScTimelineTime,
+    ScTimelineTitle,
+    ScChart,
+    ScChartBar,
+    ScChartCategoryAxis,
+    ScChartCursor,
+    ScChartGrid,
+    ScChartPlot,
+    SiBookOpenIcon,
+    SiCalendarCheckIcon,
+    SiGraduationCapIcon,
+    SiTrendingUpIcon,
+    SiUsersIcon,
+    PageHeader,
+    ChartLegend,
+    ChartTooltip,
+  ],
+  template: `
+    <app-page-header
+      title="School"
+      [trail]="[{ label: 'Dashboards' }, { label: 'School' }]"
+    />
+
+    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <dl scStatCard>
+        <dt scStatCardLabel>
+          Students <svg siGraduationCapIcon scStatCardIcon></svg>
+        </dt>
+        <dd scStatCardValue [value]="1240"></dd>
+        <dd
+          scStatCardChange
+          [value]="0.032"
+          [format]="{ style: 'percent', maximumFractionDigits: 1 }"
+        >
+          <svg siTrendingUpIcon></svg>
+        </dd>
+        <dd scStatCardDescription>from last year</dd>
+      </dl>
+      <dl scStatCard>
+        <dt scStatCardLabel>Teachers <svg siUsersIcon scStatCardIcon></svg></dt>
+        <dd scStatCardValue [value]="86"></dd>
+        <dd scStatCardDescription>14.4 students each</dd>
+      </dl>
+      <dl scStatCard>
+        <dt scStatCardLabel>
+          Classes <svg siBookOpenIcon scStatCardIcon></svg>
+        </dt>
+        <dd scStatCardValue [value]="48"></dd>
+        <dd scStatCardDescription>across 4 grades</dd>
+      </dl>
+      <dl scStatCard>
+        <dt scStatCardLabel>
+          Attendance today <svg siCalendarCheckIcon scStatCardIcon></svg>
+        </dt>
+        <dd
+          scStatCardValue
+          [value]="0.937"
+          [format]="{ style: 'percent', maximumFractionDigits: 1 }"
+        ></dd>
+        <dd
+          scStatCardChange
+          [value]="0.012"
+          [format]="{ style: 'percent', maximumFractionDigits: 1 }"
+        >
+          <svg siTrendingUpIcon></svg>
+        </dd>
+        <dd scStatCardDescription>from yesterday</dd>
+      </dl>
+    </div>
+
+    <div class="grid gap-4 xl:grid-cols-3">
+      <div scCard class="xl:col-span-2">
+        <div scCardHeader>
+          <h2 scCardTitle>Attendance</h2>
+          <p scCardDescription>This week, by day</p>
+        </div>
+        <div scCardBody>
+          <div
+            scChart
+            [config]="attendanceConfig"
+            [data]="attendance"
+            class="h-72 w-full"
+          >
+            <svg scChartPlot categoryKey="day" aria-label="Attendance by day">
+              <g scChartGrid />
+              <g scChartCategoryAxis />
+              <g scChartCursor />
+              <g scChartBar key="present" stack="a" />
+              <g scChartBar key="absent" stack="a" />
+            </svg>
+            <app-chart-tooltip />
+            <app-chart-legend />
+          </div>
+        </div>
+      </div>
+
+      <div scCard>
+        <div scCardHeader>
+          <h2 scCardTitle>Upcoming exams</h2>
+          <p scCardDescription>The next two weeks</p>
+        </div>
+        <div scCardBody>
+          <div scItemGroup class="gap-2">
+            @for (exam of exams; track exam.subject) {
+              <div scItem variant="outline" size="sm">
+                <div
+                  scItemMedia
+                  class="bg-muted flex size-10 flex-col items-center justify-center rounded-md text-xs leading-tight font-medium"
+                >
+                  {{ exam.date }}
+                </div>
+                <div scItemBody>
+                  <div scItemTitle>{{ exam.subject }}</div>
+                  <p scItemDescription>{{ exam.grade }} · {{ exam.room }}</p>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-4 xl:grid-cols-3">
+      <div scCard class="xl:col-span-2">
+        <div scCardHeader>
+          <h2 scCardTitle>Top students</h2>
+          <p scCardDescription>By average this term</p>
+        </div>
+        <div scCardBody>
+          <div scTableContainer>
+            <table scTable>
+              <thead scTableHeader>
+                <tr scTableRow>
+                  <th scTableHeaderCell>Student</th>
+                  <th scTableHeaderCell>Grade</th>
+                  <th scTableHeaderCell class="text-end">Average</th>
+                  <th scTableHeaderCell class="text-end">Attendance</th>
+                </tr>
+              </thead>
+              <tbody scTableBody>
+                @for (student of students; track student.person.id) {
+                  <tr scTableRow>
+                    <td scTableCell>
+                      <div class="flex items-center gap-2">
+                        <span scAvatar class="size-7">
+                          <img
+                            scAvatarImage
+                            [src]="student.person.avatar"
+                            alt=""
+                          />
+                          <span scAvatarFallback>{{
+                            initialsOf(student.person.name)
+                          }}</span>
+                        </span>
+                        <span class="font-medium">{{
+                          student.person.name
+                        }}</span>
+                      </div>
+                    </td>
+                    <td scTableCell>
+                      <span scBadge variant="outline">{{ student.grade }}</span>
+                    </td>
+                    <td scTableCell class="text-end tabular-nums">
+                      {{ student.average }}
+                    </td>
+                    <td scTableCell class="text-end tabular-nums">
+                      {{ student.attendance }}
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div scCard>
+        <div scCardHeader>
+          <h2 scCardTitle>Notice board</h2>
+        </div>
+        <div scCardBody>
+          <ol scTimeline aria-label="Notices">
+            @for (notice of notices; track notice.title) {
+              <li scTimelineItem [status]="notice.status">
+                <div scTimelineMarker></div>
+                <div scTimelineContent>
+                  <p scTimelineTitle>{{ notice.title }}</p>
+                  <p scTimelineDescription>{{ notice.text }}</p>
+                  <time scTimelineTime [value]="notice.at"></time>
+                </div>
+              </li>
+            }
+          </ol>
+        </div>
+      </div>
+    </div>
+  `,
+  host: { class: 'flex flex-col gap-4' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class SchoolPage {
+  private readonly attendance = ATTENDANCE.map((row) => ({ ...row }));
+  private readonly attendanceConfig: ScChartConfig = {
+    present: { label: 'Present', color: 'var(--chart-2)' },
+    absent: { label: 'Absent', color: 'var(--chart-4)' },
+  };
+  private readonly exams = EXAMS;
+  private readonly students = STUDENTS.map((student) => ({
+    ...student,
+    person: PEOPLE.find((p) => p.id === student.personId) ?? PEOPLE[0],
+  }));
+  private readonly notices = NOTICES.map((notice) => ({
+    ...notice,
+    at: Temporal.PlainDate.from(notice.at),
+  }));
+  private readonly initialsOf = initials;
+}

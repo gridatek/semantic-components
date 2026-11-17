@@ -1,0 +1,240 @@
+import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
+import {
+  ScBadge,
+  ScButton,
+  ScCard,
+  ScCardBody,
+  ScCardDescription,
+  ScCardFooter,
+  ScCardHeader,
+  ScCardTitle,
+  ScSwitch,
+  ScTable,
+  ScTableBody,
+  ScTableCell,
+  ScTableContainer,
+  ScTableHeader,
+  ScTableHeaderCell,
+  ScTableRow,
+  ScToaster,
+} from '@semantic-components/ui';
+import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
+import { PageHeader } from '../../layout/page-header';
+
+const PLANS = [
+  {
+    name: 'Starter',
+    monthly: 19,
+    text: 'For one person and a first dashboard.',
+    features: [
+      '1 user',
+      'All dashboards',
+      'Charts and tables',
+      'Email support',
+    ],
+    popular: false,
+  },
+  {
+    name: 'Pro',
+    monthly: 49,
+    text: 'For a growing product and its apps.',
+    features: [
+      '5 users',
+      'Everything in Starter',
+      'All apps',
+      'Priority support',
+    ],
+    popular: true,
+  },
+  {
+    name: 'Team',
+    monthly: 99,
+    text: 'For teams that need roles and records.',
+    features: [
+      'Unlimited users',
+      'Everything in Pro',
+      'Roles & permissions',
+      'Audit log',
+    ],
+    popular: false,
+  },
+];
+
+const COMPARE: readonly {
+  feature: string;
+  plans: readonly (boolean | string)[];
+}[] = [
+  { feature: 'Users', plans: ['1', '5', 'Unlimited'] },
+  { feature: 'Dashboards', plans: [true, true, true] },
+  { feature: 'Apps (mail, chat, calendar…)', plans: [false, true, true] },
+  { feature: 'Roles & permissions', plans: [false, false, true] },
+  { feature: 'Audit log', plans: [false, false, true] },
+  { feature: 'Support', plans: ['Email', 'Priority', 'Dedicated'] },
+];
+
+/** Pricing (Pro): plans, monthly or yearly, and how they compare. */
+@Component({
+  selector: 'app-pricing-page',
+  imports: [
+    ScBadge,
+    ScButton,
+    ScCard,
+    ScCardBody,
+    ScCardDescription,
+    ScCardFooter,
+    ScCardHeader,
+    ScCardTitle,
+    ScSwitch,
+    ScTable,
+    ScTableBody,
+    ScTableCell,
+    ScTableContainer,
+    ScTableHeader,
+    ScTableHeaderCell,
+    ScTableRow,
+    SiCheckIcon,
+    SiMinusIcon,
+    PageHeader,
+  ],
+  template: `
+    <app-page-header
+      title="Pricing"
+      [trail]="[{ label: 'Pages' }, { label: 'Pricing' }]"
+    />
+
+    <div class="flex flex-col items-center gap-3 py-4 text-center">
+      <h2 class="text-3xl font-semibold tracking-tight">
+        Plans for every size
+      </h2>
+      <p class="text-muted-foreground">
+        Start free for 14 days. No card needed.
+      </p>
+      <div class="flex items-center gap-3">
+        <span class="text-sm font-medium">Monthly</span>
+        <input
+          scSwitch
+          id="yearly"
+          type="checkbox"
+          [checked]="yearly()"
+          (change)="yearly.set(!yearly())"
+          aria-label="Pay yearly"
+        />
+        <span class="text-sm font-medium">Yearly</span>
+        <span scBadge variant="secondary">2 months free</span>
+      </div>
+    </div>
+
+    <div class="mx-auto grid w-full max-w-5xl gap-4 md:grid-cols-3">
+      @for (plan of plans; track plan.name) {
+        <div
+          scCard
+          [class.ring-2]="plan.popular"
+          [class.ring-primary]="plan.popular"
+        >
+          <div scCardHeader>
+            <h3 scCardTitle class="flex items-center gap-2">
+              {{ plan.name }}
+              @if (plan.popular) {
+                <span scBadge>Most popular</span>
+              }
+            </h3>
+            <p scCardDescription>{{ plan.text }}</p>
+          </div>
+          <div scCardBody class="flex flex-1 flex-col gap-6">
+            <p>
+              <span class="text-4xl font-semibold tabular-nums"
+                >\${{ price(plan.monthly) }}</span
+              >
+              <span class="text-muted-foreground">
+                / {{ yearly() ? 'year' : 'month' }}</span
+              >
+            </p>
+            <ul class="flex flex-col gap-2 text-sm">
+              @for (feature of plan.features; track feature) {
+                <li class="flex items-center gap-2">
+                  <svg siCheckIcon class="size-4"></svg>{{ feature }}
+                </li>
+              }
+            </ul>
+          </div>
+          <div scCardFooter>
+            <button
+              scButton
+              class="w-full"
+              [variant]="plan.popular ? 'default' : 'outline'"
+              (click)="choose(plan.name)"
+            >
+              Choose {{ plan.name }}
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div scCard class="mx-auto w-full max-w-5xl">
+      <div scCardHeader>
+        <h2 scCardTitle>Compare plans</h2>
+      </div>
+      <div scCardBody>
+        <div scTableContainer>
+          <table scTable>
+            <thead scTableHeader>
+              <tr scTableRow>
+                <th scTableHeaderCell>Feature</th>
+                @for (plan of plans; track plan.name) {
+                  <th scTableHeaderCell class="text-center">{{ plan.name }}</th>
+                }
+              </tr>
+            </thead>
+            <tbody scTableBody>
+              @for (row of compare; track row.feature) {
+                <tr scTableRow>
+                  <th scTableCell scope="row" class="text-start font-medium">
+                    {{ row.feature }}
+                  </th>
+                  @for (value of row.plans; track $index) {
+                    <td scTableCell class="text-center">
+                      @if (value === true) {
+                        <svg siCheckIcon class="mx-auto size-4"></svg
+                        ><span class="sr-only">Included</span>
+                      } @else if (value === false) {
+                        <svg
+                          siMinusIcon
+                          class="text-muted-foreground mx-auto size-4"
+                        ></svg
+                        ><span class="sr-only">Not included</span>
+                      } @else {
+                        {{ value }}
+                      }
+                    </td>
+                  }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  `,
+  host: { class: 'flex flex-col gap-6' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class PricingPage {
+  private readonly toaster = inject(ScToaster);
+  private readonly plans = PLANS;
+  private readonly compare = COMPARE;
+  private readonly yearly = signal(false);
+
+  /** A year is ten months. */
+  private price(monthly: number): number {
+    return this.yearly() ? monthly * 10 : monthly;
+  }
+
+  private choose(plan: string): void {
+    this.toaster.show({
+      variant: 'success',
+      title: `${plan} plan chosen`,
+      description: `Billed ${this.yearly() ? 'yearly' : 'monthly'} after the trial.`,
+    });
+  }
+}

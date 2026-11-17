@@ -56,3 +56,28 @@ export function initials(name: string): string {
     .slice(0, 2)
     .toUpperCase();
 }
+
+const short = new Intl.NumberFormat('en-US', {
+  notation: 'compact',
+  maximumFractionDigits: 1,
+});
+
+const pct = new Intl.NumberFormat('en-US', {
+  style: 'percent',
+  maximumFractionDigits: 1,
+});
+
+/** 12400 → 12.4K */
+export function compact(value: number): string {
+  return short.format(value);
+}
+
+/** 0.128 → 12.8% */
+export function percent(value: number): string {
+  return pct.format(value);
+}
+
+/** 2499 → $2.5K */
+export function compactMoney(value: number): string {
+  return '$' + short.format(value);
+}
