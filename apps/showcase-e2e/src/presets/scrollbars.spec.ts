@@ -9,12 +9,15 @@ const corners = () =>
 
 test.describe('Scrollbars in their preset', () => {
   test('the page’s own scrollbar', async ({ page }) => {
-    await page.goto('/demos/scroll-area-next2/scroll-area-next2-usage-demo');
+    await page.goto('/demos/sidebar/sidebar-usage-demo');
     await expectStyledScrollbar(page.locator('html'), corners());
   });
 
-  test('a box’s scrollbar (Scroll Area Next2)', async ({ page }) => {
-    await page.goto('/demos/scroll-area-next2/scroll-area-next2-usage-demo');
-    await expectStyledScrollbar(page.locator('[scScrollAreaNext2]'), corners());
+  test('a part’s scrollbar (the Sidebar’s content)', async ({ page }) => {
+    await page.goto('/demos/sidebar/sidebar-usage-demo');
+    await expectStyledScrollbar(
+      page.locator('[data-slot=sidebar-content]'),
+      corners(),
+    );
   });
 });

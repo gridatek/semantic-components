@@ -120,7 +120,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |  62 | [Menubar](../apps/showcase/src/app/pages/docs/menubar)                   | ui      | menu                                                       |     2 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  63 | [Preview Card](../apps/showcase/src/app/pages/docs/preview-card)         | ui      | —                                                          |     4 | hover-card             |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 
-## List 2 — Not in shadcn (87)
+## List 2 — Not in shadcn (86)
 
 The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 
@@ -211,8 +211,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  83 | [Virtual List](../apps/showcase/src/app/pages/docs/virtual-list)                   | ui      | —                                                                       |     2 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  84 | [Frame](../apps/showcase/src/app/pages/docs/frame)                                 | ui      | —                                                                       |     1 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  85 | [Scroll Area Next](../apps/showcase/src/app/pages/docs/scroll-area-next)           | ui      | scroll-area                                                             |     6 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
-|  86 | [Scroll Area Next2](../apps/showcase/src/app/pages/docs/scroll-area-next2)         | ui      | scroll-area                                                             |     1 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
-|  87 | [Checkbox Group](../apps/showcase/src/app/pages/docs/checkbox-group)               | ui      | —                                                                       |     0 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  86 | [Checkbox Group](../apps/showcase/src/app/pages/docs/checkbox-group)               | ui      | —                                                                       |     0 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 
 ## Later
 
