@@ -89,6 +89,9 @@ export class ScScrollAreaNext {
     Math.max(0, Math.round(this.maxScroll('vertical') - this.metrics().y)),
   );
 
+  /** Right to left: the horizontal scroll runs from the right. */
+  readonly isRtl = computed(() => this.directionality.valueSignal() === 'rtl');
+
   private timer: ReturnType<typeof setTimeout> | undefined;
 
   private readonly class = computed(() =>
@@ -154,9 +157,5 @@ export class ScScrollAreaNext {
     const to = Math.max(0, Math.min(this.maxScroll(axis), distance));
     if (axis === 'vertical') v.scrollTop = to;
     else v.scrollLeft = this.isRtl() ? -to : to;
-  }
-
-  isRtl(): boolean {
-    return this.directionality.value === 'rtl';
   }
 }

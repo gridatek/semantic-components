@@ -111,6 +111,22 @@ test('Horizontal: overflows sideways; dragging its thumb scrolls left to right',
     .toBeGreaterThan(0);
 });
 
+test('Content put in later is measured: a wide row added to the viewport overflows sideways', async ({
+  page,
+}) => {
+  await page.goto('/demos/scroll-area-next/scroll-area-next-usage-demo');
+  await expect(root(page)).toHaveAttribute('data-has-overflow-y', '');
+  await expect(root(page)).not.toHaveAttribute('data-has-overflow-x');
+  // A new child of the viewport: neither the viewport nor its first child resizes.
+  await viewport(page).evaluate((el) => {
+    const row = document.createElement('div');
+    row.style.width = '2000px';
+    row.style.height = '1px';
+    el.append(row);
+  });
+  await expect(root(page)).toHaveAttribute('data-has-overflow-x', '');
+});
+
 test('Both: two scrollbars and the corner between them', async ({ page }) => {
   await page.goto(demo('both'));
   await expect(bar(page, 'vertical')).toBeVisible();

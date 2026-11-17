@@ -25,6 +25,7 @@ Its look: the preset's `nativeThumb` on `::-webkit-scrollbar` (Chromium, Safari)
 
 ## Not shadcn's
 
-- **The browser's scrollbar**, not a drawn one (shadcn's is Base UI's: viewport, scrollbar, thumb, corner). The thumb's shape is the browser's — shadcn's styles change only its corners (square in lyra and sera), which `scrollbar-color` can't; so there is no preset key.
+- **The browser's scrollbar**, not a drawn one (shadcn's is Base UI's: viewport, scrollbar, thumb, corner). shadcn's styles change only the thumb's corners (square in lyra and sera): the preset's `scrollArea.nativeThumb` sets them on `::-webkit-scrollbar-thumb` (Chromium, Safari). Firefox's `scrollbar-color` can't, so there its thumb keeps the browser's shape.
+- **It takes room** where the system's scrollbars do (Windows, Linux; macOS when "Show scroll bars: Always"): a 10px gutter beside the content, where shadcn's sits over it.
 - **One directive**, no parts: the overflow attributes and variables (for a fade) come from the box itself.
 - **The variables carry our `--sc-` prefix**: `--sc-scroll-area-overflow-{x,y}-{start,end}` are Base UI's `--scroll-area-overflow-{x,y}-{start,end}` — rename them in a snippet taken from shadcn.

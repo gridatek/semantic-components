@@ -22,7 +22,7 @@ Sideways: `<div scScrollAreaNextScrollbar orientation="horizontal">`. Both ways:
 | Part                              | Selector                               | What it does                                                                                                                                           |
 | --------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `ScScrollAreaNext`                | `div[scScrollAreaNext]`                | The root: `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}`, `data-scrolling`                                                            |
-| `ScScrollAreaNextViewport`        | `div[scScrollAreaNextViewport]`        | What scrolls: its own scrollbar hidden, a tab stop while it overflows (focus ring); `--sc-scroll-area-overflow-{x,y}-{start,end}`                      |
+| `ScScrollAreaNextViewport`        | `div[scScrollAreaNextViewport]`        | What scrolls: its own scrollbar hidden, a tab stop while it overflows (focus ring); `--sc-scroll-area-overflow-{x,y}-{start,end}`; a `CdkScrollable`      |
 | `ScScrollAreaNextViewportContent` | `div[scScrollAreaNextViewportContent]` | The content: at least as wide as what it holds, so a wide row overflows sideways                                                                       |
 | `ScScrollAreaNextScrollbar`       | `div[scScrollAreaNextScrollbar]`       | `orientation` (`vertical`, `horizontal`); hidden while that axis doesn't overflow; a press on its track jumps there; `data-hovering`, `data-scrolling` |
 | `ScScrollAreaNextThumb`           | `div[scScrollAreaNextThumb]`           | In the preset's look; as long as the share in view; dragged, it scrolls                                                                                |
@@ -32,6 +32,7 @@ Sideways: `<div scScrollAreaNextScrollbar orientation="horizontal">`. Both ways:
 
 - The browser scrolls it — the wheel, touch, the keyboard. Its own scrollbar is hidden; the scroll area draws them, for the pointer.
 - While it overflows, the viewport is in the tab order with a focus ring: the arrow keys, Page Up / Down, Home and End scroll it. A box that doesn't scroll isn't a stop.
+- Overlays opened from inside it (a select, a menu, a tooltip) follow its scroll: the viewport is a `CdkScrollable`.
 - In a right-to-left page the vertical scrollbar is at the end (the left), and the horizontal one runs from the right.
 
 ## Not shadcn's
