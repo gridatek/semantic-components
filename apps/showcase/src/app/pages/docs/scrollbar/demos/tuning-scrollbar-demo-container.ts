@@ -1,12 +1,32 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { TuningScrollbarDemo } from './tuning-scrollbar-demo';
+
+@Component({
+  selector: 'app-tuning-scrollbar-demo-container',
+  imports: [DemoContainer, TuningScrollbarDemo],
+  template: `
+    <app-demo-container
+      title="Tuning"
+      demoUrl="/demos/scrollbar/tuning-scrollbar-demo"
+      [code]="code"
+    >
+      <app-tuning-scrollbar-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class TuningScrollbarDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The variables on a box: its scrollbars, and those inside it. On :root,
  * the whole page's.
  */
 @Component({
-  selector: 'app-tuning-scrollbars-demo',
-  template: `
+  selector: 'app-tuning-scrollbar-demo',
+  template: \`
     <div class="flex flex-wrap justify-center gap-6">
       @for (box of boxes; track box.label) {
         <div
@@ -23,13 +43,13 @@ import { Component, ViewEncapsulation } from '@angular/core';
         </div>
       }
     </div>
-  `,
+  \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TuningScrollbarsDemo {
-  private readonly lines = Array.from({ length: 20 }, (_, i) => i + 1);
-  private readonly boxes = [
+export class TuningScrollbarDemo {
+  protected readonly lines = Array.from({ length: 20 }, (_, i) => i + 1);
+  protected readonly boxes = [
     {
       label: 'Primary',
       class: '[--sc-scrollbar-thumb:var(--color-primary)]',
@@ -44,4 +64,5 @@ export class TuningScrollbarsDemo {
         '[--sc-scrollbar-size:0.875rem] [--sc-scrollbar-inset:3px] [--sc-scrollbar-track:var(--color-muted)]',
     },
   ];
+}`;
 }

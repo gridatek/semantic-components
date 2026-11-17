@@ -5,7 +5,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
  * scrollbar is the preset's — as every scrollbar of the page.
  */
 @Component({
-  selector: 'app-scrollbars-usage-demo',
+  selector: 'app-scrollbar-usage-demo',
   template: `
     <div
       tabindex="0"
@@ -22,7 +22,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollbarsUsageDemo {
+export class ScrollbarUsageDemo {
   private readonly tags = Array.from(
     { length: 50 },
     (_, i) => `v1.2.0-beta.${50 - i}`,

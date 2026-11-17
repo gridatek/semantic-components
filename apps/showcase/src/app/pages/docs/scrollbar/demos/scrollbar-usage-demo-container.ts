@@ -1,19 +1,19 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { UsageCode } from '../../../../components/usage-code/usage-code';
-import { ScrollbarsUsageDemo } from './scrollbars-usage-demo';
+import { ScrollbarUsageDemo } from './scrollbar-usage-demo';
 
 @Component({
-  selector: 'app-scrollbars-usage-demo-container',
-  imports: [UsageCode, ScrollbarsUsageDemo],
+  selector: 'app-scrollbar-usage-demo-container',
+  imports: [UsageCode, ScrollbarUsageDemo],
   template: `
     <app-usage-code [code]="code">
-      <ng-template><app-scrollbars-usage-demo /></ng-template>
+      <ng-template><app-scrollbar-usage-demo /></ng-template>
     </app-usage-code>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollbarsUsageDemoContainer {
+export class ScrollbarUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
@@ -21,7 +21,7 @@ export class ScrollbarsUsageDemoContainer {
  * scrollbar is the preset's — as every scrollbar of the page.
  */
 @Component({
-  selector: 'app-scrollbars-usage-demo',
+  selector: 'app-scrollbar-usage-demo',
   template: \`
     <div
       tabindex="0"
@@ -38,7 +38,7 @@ export class ScrollbarsUsageDemoContainer {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollbarsUsageDemo {
+export class ScrollbarUsageDemo {
   protected readonly tags = Array.from(
     { length: 50 },
     (_, i) => \`v1.2.0-beta.\${50 - i}\`,

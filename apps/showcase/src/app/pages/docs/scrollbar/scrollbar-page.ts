@@ -11,9 +11,9 @@ import {
 } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { OptingOutScrollbarsDemoContainer } from './demos/opting-out-scrollbars-demo-container';
-import { ScrollbarsUsageDemoContainer } from './demos/scrollbars-usage-demo-container';
-import { TuningScrollbarsDemoContainer } from './demos/tuning-scrollbars-demo-container';
+import { OptingOutScrollbarDemoContainer } from './demos/opting-out-scrollbar-demo-container';
+import { ScrollbarUsageDemoContainer } from './demos/scrollbar-usage-demo-container';
+import { TuningScrollbarDemoContainer } from './demos/tuning-scrollbar-demo-container';
 
 interface Row {
   readonly name: string;
@@ -22,11 +22,11 @@ interface Row {
 }
 
 @Component({
-  selector: 'app-scrollbars-page',
+  selector: 'app-scrollbar-page',
   imports: [
-    ScrollbarsUsageDemoContainer,
-    TuningScrollbarsDemoContainer,
-    OptingOutScrollbarsDemoContainer,
+    ScrollbarUsageDemoContainer,
+    TuningScrollbarDemoContainer,
+    OptingOutScrollbarDemoContainer,
     TocHeading,
     ComponentBadges,
     ScTypeset,
@@ -41,14 +41,14 @@ interface Row {
   template: `
     <div class="space-y-8">
       <div class="space-y-2">
-        <h1 scTypeset>Scrollbars</h1>
+        <h1 scTypeset>Scrollbar</h1>
         <p class="text-muted-foreground">
           The browser&apos;s own scrollbars in your preset&apos;s look — every
           scrollbar of the page: the page&apos;s, a list, a textarea, a code
           block, a widget you didn&apos;t write. One CSS file, no directive;
           tuned by variables, your classes win.
         </p>
-        <app-component-badges path="scrollbars" />
+        <app-component-badges path="scrollbar" />
       </div>
 
       <section class="space-y-4">
@@ -67,7 +67,7 @@ interface Row {
           (your style&apos;s). Then any box that scrolls has the look — no
           class, no directive.
         </p>
-        <app-scrollbars-usage-demo-container />
+        <app-scrollbar-usage-demo-container />
       </section>
 
       <section class="space-y-4">
@@ -90,8 +90,8 @@ interface Row {
 
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
-        <app-tuning-scrollbars-demo-container />
-        <app-opting-out-scrollbars-demo-container />
+        <app-tuning-scrollbar-demo-container />
+        <app-opting-out-scrollbar-demo-container />
       </section>
 
       <section class="space-y-4">
@@ -123,7 +123,7 @@ interface Row {
           scTableContainer
           tabindex="0"
           role="region"
-          aria-label="Scrollbars variables"
+          aria-label="Scrollbar variables"
         >
           <table scTable>
             <thead scTableHeader>
@@ -163,7 +163,7 @@ interface Row {
           scTableContainer
           tabindex="0"
           role="region"
-          aria-label="Scrollbars classes"
+          aria-label="Scrollbar classes"
         >
           <table scTable>
             <thead scTableHeader>
@@ -194,7 +194,7 @@ interface Row {
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class ScrollbarsPage {
+export default class ScrollbarPage {
   private readonly variables: readonly Row[] = [
     {
       name: '--sc-scrollbar-size',

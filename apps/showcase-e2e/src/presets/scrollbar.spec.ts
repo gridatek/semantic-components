@@ -7,7 +7,7 @@ import { presetName } from './preset';
 const corners = () =>
   ['lyra', 'sera'].includes(presetName()) ? 'square' : 'round';
 
-test.describe('Scrollbars in their preset', () => {
+test.describe('Scrollbar in its preset', () => {
   test('the page’s own scrollbar', async ({ page }) => {
     await page.goto('/demos/sidebar/sidebar-usage-demo');
     await expectStyledScrollbar(page.locator('html'), corners());

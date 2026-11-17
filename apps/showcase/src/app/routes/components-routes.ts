@@ -578,9 +578,9 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/scroll-area/scroll-area-page'),
       },
       {
-        path: 'scrollbars',
-        title: 'Scrollbars - Semantic Components',
-        loadComponent: () => import('../pages/docs/scrollbars/scrollbars-page'),
+        path: 'scrollbar',
+        title: 'Scrollbar - Semantic Components',
+        loadComponent: () => import('../pages/docs/scrollbar/scrollbar-page'),
       },
       {
         path: 'select',

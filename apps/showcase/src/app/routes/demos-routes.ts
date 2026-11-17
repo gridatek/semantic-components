@@ -5173,27 +5173,27 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/scrollbars',
+    path: 'demos/scrollbar',
     children: [
       {
-        path: 'scrollbars-usage-demo',
+        path: 'scrollbar-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/scrollbars/demos/scrollbars-usage-demo').then(
-            (m) => m.ScrollbarsUsageDemo,
+          import('../pages/docs/scrollbar/demos/scrollbar-usage-demo').then(
+            (m) => m.ScrollbarUsageDemo,
           ),
       },
       {
-        path: 'tuning-scrollbars-demo',
+        path: 'tuning-scrollbar-demo',
         loadComponent: () =>
-          import('../pages/docs/scrollbars/demos/tuning-scrollbars-demo').then(
-            (m) => m.TuningScrollbarsDemo,
+          import('../pages/docs/scrollbar/demos/tuning-scrollbar-demo').then(
+            (m) => m.TuningScrollbarDemo,
           ),
       },
       {
-        path: 'opting-out-scrollbars-demo',
+        path: 'opting-out-scrollbar-demo',
         loadComponent: () =>
-          import('../pages/docs/scrollbars/demos/opting-out-scrollbars-demo').then(
-            (m) => m.OptingOutScrollbarsDemo,
+          import('../pages/docs/scrollbar/demos/opting-out-scrollbar-demo').then(
+            (m) => m.OptingOutScrollbarDemo,
           ),
       },
     ],

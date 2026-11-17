@@ -4,7 +4,7 @@ import { expectScrollbarWidth, expectStyledScrollbar } from '../../looks';
 import { expectNoHorizontalScroll } from '../../mobile';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/scrollbars/${name}-scrollbars-demo`;
+const demo = (name: string) => `/demos/scrollbar/${name}-scrollbar-demo`;
 
 /** The thumb that scrollbar.css draws, in Chromium (its pseudo-element). */
 const thumb = (box: Locator) =>
@@ -30,7 +30,7 @@ test.afterEach(() => {
 test('Usage: a plain box that scrolls has the styled scrollbar; a tab stop that scrolls by the keyboard', async ({
   page,
 }) => {
-  await page.goto('/demos/scrollbars/scrollbars-usage-demo');
+  await page.goto('/demos/scrollbar/scrollbar-usage-demo');
   const box = page.getByRole('region', { name: 'Tags' });
   await expectStyledScrollbar(box);
   await box.focus();
@@ -78,7 +78,7 @@ test('Opting out: hidden, its room kept, or the browser’s own bar', async ({
 test('On a phone, 360px wide: the demos fit @mobile', async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 740 });
   for (const url of [
-    '/demos/scrollbars/scrollbars-usage-demo',
+    '/demos/scrollbar/scrollbar-usage-demo',
     demo('tuning'),
     demo('opting-out'),
   ]) {

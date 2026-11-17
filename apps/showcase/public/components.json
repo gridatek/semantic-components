@@ -897,8 +897,8 @@
     "category": "Layout"
   },
   {
-    "name": "Scrollbars",
-    "path": "scrollbars",
+    "name": "Scrollbar",
+    "path": "scrollbar",
     "description": "The browser's own scrollbars in your preset's look — every scrollbar of the page, from one CSS file tuned by variables; your classes win.",
     "status": "Experimental",
     "library": "ui",

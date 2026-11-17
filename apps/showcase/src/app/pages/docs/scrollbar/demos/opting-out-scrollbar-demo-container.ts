@@ -1,12 +1,32 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { OptingOutScrollbarDemo } from './opting-out-scrollbar-demo';
+
+@Component({
+  selector: 'app-opting-out-scrollbar-demo-container',
+  imports: [DemoContainer, OptingOutScrollbarDemo],
+  template: `
+    <app-demo-container
+      title="Opting out"
+      demoUrl="/demos/scrollbar/opting-out-scrollbar-demo"
+      [code]="code"
+    >
+      <app-opting-out-scrollbar-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class OptingOutScrollbarDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Utilities on a box: no scrollbar, its room kept, or the browser's own bar
  * back (scrollbar-thin, or any scrollbar-color, does that in Chromium).
  */
 @Component({
-  selector: 'app-opting-out-scrollbars-demo',
-  template: `
+  selector: 'app-opting-out-scrollbar-demo',
+  template: \`
     <div class="flex flex-wrap justify-center gap-6">
       @for (box of boxes; track box.label) {
         <div
@@ -23,15 +43,16 @@ import { Component, ViewEncapsulation } from '@angular/core';
         </div>
       }
     </div>
-  `,
+  \`,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class OptingOutScrollbarsDemo {
-  private readonly lines = Array.from({ length: 20 }, (_, i) => i + 1);
-  private readonly boxes = [
+export class OptingOutScrollbarDemo {
+  protected readonly lines = Array.from({ length: 20 }, (_, i) => i + 1);
+  protected readonly boxes = [
     { label: 'Hidden', class: 'no-scrollbar' },
     { label: 'Room kept', class: 'scrollbar-gutter-stable' },
     { label: "The browser's, thin", class: 'scrollbar-thin' },
   ];
+}`;
 }
