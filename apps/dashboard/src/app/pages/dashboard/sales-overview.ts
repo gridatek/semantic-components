@@ -1,0 +1,210 @@
+import { DecimalPipe } from '@angular/common';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import {
+  ScBadge,
+  ScCard,
+  ScCardAction,
+  ScCardBody,
+  ScCardHeader,
+  ScCardTitle,
+  ScSelect,
+  ScSelectGroup,
+  ScSelectIcon,
+  ScSelectItem,
+  ScSelectItemIndicator,
+  ScSelectItemText,
+  ScSelectList,
+  ScSelectPopup,
+  ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
+} from '@semantic-components/ui';
+import {
+  ScChart,
+  ScChartCategoryAxis,
+  type ScChartConfig,
+  ScChartCursor,
+  ScChartGrid,
+  ScChartLegend,
+  ScChartLegendIndicator,
+  ScChartLegendItem,
+  ScChartLine,
+  ScChartPlot,
+  ScChartTooltip,
+  ScChartTooltipIndicator,
+  ScChartTooltipItem,
+  ScChartTooltipLabel,
+  ScChartTooltipName,
+  ScChartTooltipPortal,
+  ScChartTooltipProvider,
+  ScChartTooltipValue,
+  ScChartValueAxis,
+} from '@semantic-components/ui/charts';
+import {
+  SiCheckIcon,
+  SiChevronDownIcon,
+  SiTrendingUpIcon,
+} from '@semantic-icons/lucide-icons';
+import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
+
+/** Sales Overview: new and existing users over a period, as two lines. */
+@Component({
+  selector: 'app-sales-overview',
+  imports: [
+    DecimalPipe,
+    ScBadge,
+    ScCard,
+    ScCardAction,
+    ScCardBody,
+    ScCardHeader,
+    ScCardTitle,
+    ScSelect,
+    ScSelectGroup,
+    ScSelectIcon,
+    ScSelectItem,
+    ScSelectItemIndicator,
+    ScSelectItemText,
+    ScSelectList,
+    ScSelectPopup,
+    ScSelectPortal,
+    ScSelectTrigger,
+    ScSelectValue,
+    ScChart,
+    ScChartCategoryAxis,
+    ScChartCursor,
+    ScChartGrid,
+    ScChartLegend,
+    ScChartLegendIndicator,
+    ScChartLegendItem,
+    ScChartLine,
+    ScChartPlot,
+    ScChartTooltip,
+    ScChartTooltipIndicator,
+    ScChartTooltipItem,
+    ScChartTooltipLabel,
+    ScChartTooltipName,
+    ScChartTooltipPortal,
+    ScChartTooltipProvider,
+    ScChartTooltipValue,
+    ScChartValueAxis,
+    SiCheckIcon,
+    SiChevronDownIcon,
+    SiTrendingUpIcon,
+  ],
+  template: `
+    <div scCard class="h-full">
+      <div scCardHeader>
+        <h2 scCardTitle id="sales-title" class="flex items-center gap-2">
+          <svg siTrendingUpIcon></svg>
+          Sales Overview
+        </h2>
+        <div scCardAction>
+          <div
+            scSelect
+            [value]="period()"
+            (valueChange)="choose($event)"
+            [items]="periods"
+          >
+            <div scSelectTrigger size="sm" aria-label="Period" class="w-36">
+              <span scSelectValue></span>
+              <svg scSelectIcon siChevronDownIcon></svg>
+            </div>
+            <ng-template scSelectPortal>
+              <div scSelectPopup>
+                <div scSelectList>
+                  <div scSelectGroup>
+                    @for (item of periods; track item.value) {
+                      <div scSelectItem [value]="item.value">
+                        <span scSelectItemText>{{ item.label }}</span>
+                        <span scSelectItemIndicator
+                          ><svg siCheckIcon></svg
+                        ></span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div scCardBody class="flex flex-col gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-muted-foreground text-sm">Total Sales</span>
+          <div class="flex flex-wrap items-baseline gap-2">
+            <span class="text-2xl font-semibold tabular-nums">$12,450.00</span>
+            <span scBadge variant="secondary">+22%</span>
+            <span class="text-muted-foreground text-sm">vs last month</span>
+          </div>
+        </div>
+        <div scChart [config]="config" [data]="data()" class="h-64 w-full">
+          <svg
+            scChartPlot
+            categoryKey="date"
+            [attr.aria-label]="'New and existing users, ' + period()"
+          >
+            <g scChartGrid />
+            <g scChartCategoryAxis [tickFormatter]="everyOther" />
+            <g
+              scChartValueAxis
+              [domain]="[0, 40]"
+              [tickFormatter]="thousands"
+            />
+            <g scChartCursor />
+            <g scChartLine key="newUser" curve="monotone" />
+            <g scChartLine key="existingUser" curve="monotone" />
+          </svg>
+          <div scChartTooltipProvider>
+            <ng-template scChartTooltipPortal>
+              <div scChartTooltip #tooltip="scChartTooltip">
+                <div scChartTooltipLabel>{{ tooltip.label() }}</div>
+                @for (item of tooltip.payload(); track item.dataKey) {
+                  <div scChartTooltipItem [item]="item">
+                    <span scChartTooltipIndicator></span>
+                    <span scChartTooltipName>{{ item.name }}</span>
+                    <span scChartTooltipValue>{{ item.value | number }}k</span>
+                  </div>
+                }
+              </div>
+            </ng-template>
+          </div>
+          <div scChartLegend #legend="scChartLegend">
+            @for (item of legend.payload(); track item.dataKey) {
+              <div scChartLegendItem [item]="item">
+                <span scChartLegendIndicator></span>
+                {{ item.name }}
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
+  host: { class: 'block' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class SalesOverview {
+  protected readonly periods = SALES_PERIODS.map((value) => ({
+    value,
+    label: value,
+  }));
+  protected readonly period = signal<SalesPeriod>('Last 30 Days');
+  protected readonly data = computed(() =>
+    SALES[this.period()].map((point) => ({ ...point })),
+  );
+  protected readonly config: ScChartConfig = {
+    newUser: { label: 'New User', color: 'var(--chart-1)' },
+    existingUser: { label: 'Existing User', color: 'var(--chart-2)' },
+  };
+
+  /** Half the dates on the axis when there are many. */
+  protected readonly everyOther = (date: string, index: number) =>
+    this.data().length > 10 && index % 3 !== 0 ? '' : date;
+  protected readonly thousands = (value: number) =>
+    value === 0 ? '0' : `${value}k`;
+
+  protected choose(value: unknown): void {
+    if (SALES_PERIODS.includes(value as SalesPeriod))
+      this.period.set(value as SalesPeriod);
+  }
+}

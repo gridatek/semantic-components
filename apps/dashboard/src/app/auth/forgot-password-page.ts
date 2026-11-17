@@ -1,0 +1,89 @@
+import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
+import { FormField, email, form, required } from '@angular/forms/signals';
+import { RouterLink } from '@angular/router';
+import {
+  ScButton,
+  ScCard,
+  ScCardBody,
+  ScCardDescription,
+  ScCardHeader,
+  ScCardTitle,
+  ScField,
+  ScFieldGroup,
+  ScInput,
+  ScLabel,
+  ScLink,
+  ScToaster,
+} from '@semantic-components/ui';
+
+/** Boxed Forgot Password (shadcndashboard's auth2/forgot-password). */
+@Component({
+  selector: 'app-forgot-password-page',
+  imports: [
+    FormField,
+    RouterLink,
+    ScButton,
+    ScCard,
+    ScCardBody,
+    ScCardDescription,
+    ScCardHeader,
+    ScCardTitle,
+    ScField,
+    ScFieldGroup,
+    ScInput,
+    ScLabel,
+    ScLink,
+  ],
+  template: `
+    <div scCard class="w-full max-w-md">
+      <div scCardHeader class="text-center">
+        <h1 scCardTitle class="text-xl">Forgot Password</h1>
+        <p scCardDescription>
+          Please enter the email address associated with your account and we
+          will email you a link to reset your password.
+        </p>
+      </div>
+      <div scCardBody>
+        <form (submit)="send($event)">
+          <div scFieldGroup>
+            <div scField>
+              <label scLabel>Email Address</label>
+              <input
+                scInput
+                type="email"
+                autocomplete="email"
+                [formField]="resetForm.email"
+              />
+            </div>
+            <button scButton type="submit" class="w-full">
+              Forgot Password
+            </button>
+            <a scLink variant="outline" routerLink="/auth/login" class="w-full"
+              >Back to Login</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  `,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ForgotPasswordPage {
+  private readonly toaster = inject(ScToaster);
+  private readonly model = signal({ email: '' });
+  protected readonly resetForm = form(this.model, (path) => {
+    required(path.email);
+    email(path.email);
+  });
+
+  protected send(event: Event): void {
+    event.preventDefault();
+    if (this.resetForm().invalid()) return;
+    this.toaster.show({
+      variant: 'success',
+      title: 'Check your email',
+      description: `We sent a reset link to ${this.model().email}.`,
+    });
+  }
+}

@@ -1,0 +1,203 @@
+import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import {
+  ScAvatar,
+  ScAvatarFallback,
+  ScAvatarImage,
+  ScButton,
+  ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
+  ScMenu,
+  ScMenuContent,
+  ScMenuGroup,
+  ScMenuItem,
+  ScMenuLabel,
+  ScMenuPortal,
+  ScMenuProvider,
+  ScMenuSeparator,
+  ScMenuTrigger,
+  ScSeparator,
+  ScSidebarTrigger,
+} from '@semantic-components/ui';
+import {
+  SiBellIcon,
+  SiMessageSquareIcon,
+  SiPanelLeftIcon,
+  SiSearchIcon,
+} from '@semantic-icons/lucide-icons';
+import { MESSAGES, NOTIFICATIONS } from '../data/dashboard';
+import { ThemeMenu } from './theme-menu';
+
+/**
+ * The header: the sidebar's toggle, the search, and on the end the theme,
+ * messages, notifications and the profile's menu (shadcndashboard's).
+ */
+@Component({
+  selector: 'app-header',
+  imports: [
+    ScAvatar,
+    ScAvatarFallback,
+    ScAvatarImage,
+    ScButton,
+    ScInput,
+    ScInputGroup,
+    ScInputGroupAddon,
+    ScMenu,
+    ScMenuContent,
+    ScMenuGroup,
+    ScMenuItem,
+    ScMenuLabel,
+    ScMenuPortal,
+    ScMenuProvider,
+    ScMenuSeparator,
+    ScMenuTrigger,
+    ScSeparator,
+    ScSidebarTrigger,
+    SiBellIcon,
+    SiMessageSquareIcon,
+    SiPanelLeftIcon,
+    SiSearchIcon,
+    ThemeMenu,
+  ],
+  template: `
+    <header
+      class="bg-background sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b px-4 md:px-6"
+    >
+      <button scSidebarTrigger>
+        <svg siPanelLeftIcon></svg>
+        <span class="sr-only">Toggle sidebar</span>
+      </button>
+      <div
+        scSeparator
+        orientation="vertical"
+        class="me-2 h-4 self-center"
+      ></div>
+      <div role="search" class="hidden max-w-sm flex-1 sm:block">
+        <div scInputGroup>
+          <input
+            scInput
+            type="search"
+            placeholder="Search…"
+            aria-label="Search"
+          />
+          <div scInputGroupAddon><svg siSearchIcon></svg></div>
+        </div>
+      </div>
+      <div class="ms-auto flex items-center gap-1">
+        <app-theme-menu />
+
+        <div scMenuProvider alignment="end">
+          <button scButton scMenuTrigger variant="ghost" size="icon">
+            <svg siMessageSquareIcon></svg>
+            <span class="sr-only">Messages</span>
+          </button>
+          <ng-template scMenuPortal>
+            <div scMenu class="w-72">
+              <ng-template scMenuContent>
+                <div scMenuGroup>
+                  <div scMenuLabel>Messages</div>
+                  @for (message of messages; track message.name) {
+                    <div scMenuItem [value]="message.name" class="gap-3">
+                      <span scAvatar class="size-8">
+                        <img scAvatarImage [src]="message.avatar" alt="" />
+                        <span scAvatarFallback>{{ message.name[0] }}</span>
+                      </span>
+                      <span class="flex min-w-0 flex-col">
+                        <span class="font-medium">{{ message.name }}</span>
+                        <span class="text-muted-foreground truncate text-xs">
+                          {{ message.text }}
+                        </span>
+                      </span>
+                    </div>
+                  }
+                </div>
+              </ng-template>
+            </div>
+          </ng-template>
+        </div>
+
+        <div scMenuProvider alignment="end">
+          <button scButton scMenuTrigger variant="ghost" size="icon">
+            <svg siBellIcon></svg>
+            <span class="sr-only">Notifications</span>
+          </button>
+          <ng-template scMenuPortal>
+            <div scMenu class="w-72">
+              <ng-template scMenuContent>
+                <div scMenuGroup>
+                  <div scMenuLabel>Notifications</div>
+                  @for (
+                    notification of notifications;
+                    track notification.title
+                  ) {
+                    <div scMenuItem [value]="notification.title">
+                      <span class="flex min-w-0 flex-col">
+                        <span class="font-medium">{{
+                          notification.title
+                        }}</span>
+                        <span class="text-muted-foreground truncate text-xs">
+                          {{ notification.text }}
+                        </span>
+                      </span>
+                    </div>
+                  }
+                </div>
+              </ng-template>
+            </div>
+          </ng-template>
+        </div>
+
+        <div scMenuProvider alignment="end">
+          <button
+            scButton
+            scMenuTrigger
+            variant="ghost"
+            size="icon"
+            class="rounded-full"
+          >
+            <span scAvatar class="size-8">
+              <img scAvatarImage src="images/profile/user-1.png" alt="" />
+              <span scAvatarFallback>MA</span>
+            </span>
+            <span class="sr-only">Account</span>
+          </button>
+          <ng-template scMenuPortal>
+            <div scMenu class="w-56" (itemSelected)="go($event)">
+              <ng-template scMenuContent>
+                <div scMenuGroup>
+                  <div scMenuLabel>
+                    <span class="block font-medium">Mathew Anderson</span>
+                    <span
+                      class="text-muted-foreground block text-xs font-normal"
+                    >
+                      mathew.anderson&#64;gmail.com
+                    </span>
+                  </div>
+                  <div scMenuItem value="/pages/user-profile">My Profile</div>
+                  <div scMenuItem value="/apps/notes">My Notes</div>
+                  <div scMenuItem value="/apps/tickets">My Tickets</div>
+                </div>
+                <div scMenuSeparator></div>
+                <div scMenuItem value="/auth/login" variant="destructive">
+                  Log out
+                </div>
+              </ng-template>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </header>
+  `,
+  host: { class: 'block' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class AppHeader {
+  private readonly router = inject(Router);
+  protected readonly messages = MESSAGES;
+  protected readonly notifications = NOTIFICATIONS;
+
+  protected go(url: unknown): void {
+    if (typeof url === 'string') void this.router.navigateByUrl(url);
+  }
+}

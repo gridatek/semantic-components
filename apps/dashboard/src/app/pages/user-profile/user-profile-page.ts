@@ -1,0 +1,387 @@
+import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
+import { FormField, email, form, required } from '@angular/forms/signals';
+import {
+  ScAvatar,
+  ScAvatarFallback,
+  ScAvatarImage,
+  ScButton,
+  ScCard,
+  ScCardAction,
+  ScCardBody,
+  ScCardHeader,
+  ScCardTitle,
+  ScDialog,
+  ScDialogClose,
+  ScDialogFooter,
+  ScDialogHeader,
+  ScDialogPortal,
+  ScDialogProvider,
+  ScDialogTitle,
+  ScField,
+  ScFieldGroup,
+  ScInput,
+  ScLabel,
+  ScLink,
+  ScToaster,
+} from '@semantic-components/ui';
+import {
+  SiDribbbleIcon,
+  SiFacebookIcon,
+  SiGithubIcon,
+  SiPencilIcon,
+  SiTwitterIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
+import { PageHeader } from '../../layout/page-header';
+
+interface Personal {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  position: string;
+}
+
+interface Address {
+  location: string;
+  state: string;
+  pin: string;
+  zip: string;
+  taxNo: string;
+}
+
+/** The user profile: who, how to reach them, where (shadcndashboard's). */
+@Component({
+  selector: 'app-user-profile-page',
+  imports: [
+    FormField,
+    ScAvatar,
+    ScAvatarFallback,
+    ScAvatarImage,
+    ScButton,
+    ScCard,
+    ScCardAction,
+    ScCardBody,
+    ScCardHeader,
+    ScCardTitle,
+    ScDialog,
+    ScDialogClose,
+    ScDialogFooter,
+    ScDialogHeader,
+    ScDialogPortal,
+    ScDialogProvider,
+    ScDialogTitle,
+    ScField,
+    ScFieldGroup,
+    ScInput,
+    ScLabel,
+    ScLink,
+    SiDribbbleIcon,
+    SiFacebookIcon,
+    SiGithubIcon,
+    SiPencilIcon,
+    SiTwitterIcon,
+    SiXIcon,
+    PageHeader,
+  ],
+  template: `
+    <app-page-header
+      title="User Profile"
+      [trail]="[{ label: 'User Profile' }]"
+    />
+
+    <div scCard>
+      <div scCardBody class="flex flex-col items-center gap-6 sm:flex-row">
+        <span scAvatar class="size-20">
+          <img scAvatarImage src="images/profile/user-1.png" alt="" />
+          <span scAvatarFallback>MA</span>
+        </span>
+        <div
+          class="flex w-full flex-wrap items-center justify-center gap-4 sm:justify-between"
+        >
+          <div class="flex flex-col gap-1.5 text-center sm:text-start">
+            <h2 class="text-lg font-semibold">
+              {{ personal().firstName }} {{ personal().lastName }}
+            </h2>
+            <p class="text-muted-foreground text-sm">
+              {{ personal().position }} · {{ address().location }}
+            </p>
+          </div>
+          <ul class="flex items-center gap-2" aria-label="Social profiles">
+            @for (link of socials; track link.label) {
+              <li>
+                <a
+                  scLink
+                  variant="outline"
+                  size="icon"
+                  class="rounded-full"
+                  [href]="link.href"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  @switch (link.label) {
+                    @case ('Facebook') {
+                      <svg siFacebookIcon></svg>
+                    }
+                    @case ('X') {
+                      <svg siTwitterIcon></svg>
+                    }
+                    @case ('GitHub') {
+                      <svg siGithubIcon></svg>
+                    }
+                    @case ('Dribbble') {
+                      <svg siDribbbleIcon></svg>
+                    }
+                  }
+                  <span class="sr-only">{{ link.label }}</span>
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
+      <div scCard>
+        <div scCardHeader>
+          <h2 scCardTitle id="personal-title">Personal Information</h2>
+          <div scCardAction>
+            <div scDialogProvider [(open)]="editingPersonal">
+              <button scButton size="sm" (click)="editPersonal()">
+                <svg siPencilIcon></svg>
+                Edit
+              </button>
+              <ng-template scDialogPortal>
+                <div scDialog class="sm:max-w-lg">
+                  <button scDialogClose>
+                    <svg siXIcon></svg>
+                    <span class="sr-only">Close</span>
+                  </button>
+                  <div scDialogHeader>
+                    <h2 scDialogTitle>Edit Personal Information</h2>
+                  </div>
+                  <form id="personal-form" (submit)="savePersonal($event)">
+                    <div scFieldGroup class="grid gap-4 sm:grid-cols-2">
+                      <div scField>
+                        <label scLabel>First Name</label>
+                        <input
+                          scInput
+                          cdkFocusInitial
+                          [formField]="personalForm.firstName"
+                        />
+                      </div>
+                      <div scField>
+                        <label scLabel>Last Name</label>
+                        <input scInput [formField]="personalForm.lastName" />
+                      </div>
+                      <div scField>
+                        <label scLabel>Email</label>
+                        <input
+                          scInput
+                          type="email"
+                          [formField]="personalForm.email"
+                        />
+                      </div>
+                      <div scField>
+                        <label scLabel>Phone</label>
+                        <input
+                          scInput
+                          type="tel"
+                          [formField]="personalForm.phone"
+                        />
+                      </div>
+                      <div scField class="sm:col-span-2">
+                        <label scLabel>Position</label>
+                        <input scInput [formField]="personalForm.position" />
+                      </div>
+                    </div>
+                  </form>
+                  <div scDialogFooter>
+                    <button scDialogClose variant="outline" size="default">
+                      Cancel
+                    </button>
+                    <button scButton type="submit" form="personal-form">
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div scCardBody>
+          <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            @for (item of personalItems(); track item.label) {
+              <div>
+                <dt class="text-muted-foreground text-xs">{{ item.label }}</dt>
+                <dd class="text-sm font-medium">{{ item.value }}</dd>
+              </div>
+            }
+          </dl>
+        </div>
+      </div>
+
+      <div scCard>
+        <div scCardHeader>
+          <h2 scCardTitle id="address-title">Address Details</h2>
+          <div scCardAction>
+            <div scDialogProvider [(open)]="editingAddress">
+              <button scButton size="sm" (click)="editAddress()">
+                <svg siPencilIcon></svg>
+                Edit
+              </button>
+              <ng-template scDialogPortal>
+                <div scDialog class="sm:max-w-lg">
+                  <button scDialogClose>
+                    <svg siXIcon></svg>
+                    <span class="sr-only">Close</span>
+                  </button>
+                  <div scDialogHeader>
+                    <h2 scDialogTitle>Edit Address Details</h2>
+                  </div>
+                  <form id="address-form" (submit)="saveAddress($event)">
+                    <div scFieldGroup class="grid gap-4 sm:grid-cols-2">
+                      <div scField>
+                        <label scLabel>Location</label>
+                        <input
+                          scInput
+                          cdkFocusInitial
+                          [formField]="addressForm.location"
+                        />
+                      </div>
+                      <div scField>
+                        <label scLabel>State</label>
+                        <input scInput [formField]="addressForm.state" />
+                      </div>
+                      <div scField>
+                        <label scLabel>PIN</label>
+                        <input scInput [formField]="addressForm.pin" />
+                      </div>
+                      <div scField>
+                        <label scLabel>ZIP</label>
+                        <input scInput [formField]="addressForm.zip" />
+                      </div>
+                      <div scField class="sm:col-span-2">
+                        <label scLabel>Tax No.</label>
+                        <input scInput [formField]="addressForm.taxNo" />
+                      </div>
+                    </div>
+                  </form>
+                  <div scDialogFooter>
+                    <button scDialogClose variant="outline" size="default">
+                      Cancel
+                    </button>
+                    <button scButton type="submit" form="address-form">
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+        <div scCardBody>
+          <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            @for (item of addressItems(); track item.label) {
+              <div>
+                <dt class="text-muted-foreground text-xs">{{ item.label }}</dt>
+                <dd class="text-sm font-medium">{{ item.value }}</dd>
+              </div>
+            }
+          </dl>
+        </div>
+      </div>
+    </div>
+  `,
+  host: { class: 'flex flex-col gap-4' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class UserProfilePage {
+  private readonly toaster = inject(ScToaster);
+
+  protected readonly personal = signal<Personal>({
+    firstName: 'Mathew',
+    lastName: 'Anderson',
+    email: 'mathew.anderson@gmail.com',
+    phone: '(347) 528-1947',
+    position: 'Team Leader',
+  });
+  protected readonly address = signal<Address>({
+    location: 'United States',
+    state: 'San Diego, California, United States',
+    pin: '92101',
+    zip: '30303',
+    taxNo: 'GA45273910',
+  });
+
+  protected readonly socials = [
+    { label: 'Facebook', href: 'https://www.facebook.com/wrappixel' },
+    { label: 'X', href: 'https://x.com/shadcndashboard' },
+    { label: 'GitHub', href: 'https://github.com/shadcndashboard' },
+    { label: 'Dribbble', href: 'https://dribbble.com/wrappixel' },
+  ];
+
+  protected readonly editingPersonal = signal(false);
+  protected readonly editingAddress = signal(false);
+
+  // The dialogs edit a copy; Save writes it back, Cancel drops it.
+  private readonly personalDraft = signal<Personal>(this.personal());
+  protected readonly personalForm = form(this.personalDraft, (path) => {
+    required(path.firstName);
+    required(path.email);
+    email(path.email);
+  });
+  private readonly addressDraft = signal<Address>(this.address());
+  protected readonly addressForm = form(this.addressDraft);
+
+  protected personalItems() {
+    const p = this.personal();
+    return [
+      { label: 'First Name', value: p.firstName },
+      { label: 'Last Name', value: p.lastName },
+      { label: 'Email', value: p.email },
+      { label: 'Phone', value: p.phone },
+      { label: 'Position', value: p.position },
+    ];
+  }
+
+  protected addressItems() {
+    const a = this.address();
+    return [
+      { label: 'Location', value: a.location },
+      { label: 'State', value: a.state },
+      { label: 'PIN', value: a.pin },
+      { label: 'ZIP', value: a.zip },
+      { label: 'Tax No.', value: a.taxNo },
+    ];
+  }
+
+  protected editPersonal(): void {
+    this.personalDraft.set({ ...this.personal() });
+    this.editingPersonal.set(true);
+  }
+
+  protected editAddress(): void {
+    this.addressDraft.set({ ...this.address() });
+    this.editingAddress.set(true);
+  }
+
+  protected savePersonal(event: Event): void {
+    event.preventDefault();
+    if (this.personalForm().invalid()) return;
+    this.personal.set({ ...this.personalDraft() });
+    this.editingPersonal.set(false);
+    this.toaster.show({
+      variant: 'success',
+      title: 'Personal information saved',
+    });
+  }
+
+  protected saveAddress(event: Event): void {
+    event.preventDefault();
+    this.address.set({ ...this.addressDraft() });
+    this.editingAddress.set(false);
+    this.toaster.show({ variant: 'success', title: 'Address saved' });
+  }
+}
