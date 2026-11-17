@@ -2717,6 +2717,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'rtl-editor-demo',
+        loadComponent: () =>
+          import('../pages/docs/editor/demos/rtl-editor-demo').then(
+            (m) => m.RtlEditorDemo,
+          ),
+      },
+      {
         path: 'no-count-editor-demo',
         loadComponent: () =>
           import('../pages/docs/editor/demos/no-count-editor-demo').then(

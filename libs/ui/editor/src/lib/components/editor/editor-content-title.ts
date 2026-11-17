@@ -17,10 +17,10 @@ const key = new PluginKey('scEditorContentTitle');
  * The document's title, in a textarea of yours above the text: its value is
  * your field (`[formField]`), not part of the document. Set as a heading of
  * the text — the preset's Typeset heading: its font, weight, tracking, case,
- * and the space after it — with no box. Enter, or ↓ at its end, goes to the
- * start of the text (no line break in a title); Backspace, ↑ or ← at the very
- * start of the text come back to its end. Name it (`aria-label`); a
- * placeholder if you want one.
+ * and the space after it — with no box. Enter, or ↓ / → at its end, goes to
+ * the start of the text (no line break in a title); Backspace, ↑ or ← at the
+ * very start of the text come back to its end. Right to left, → and ← swap.
+ * Name it (`aria-label`); a placeholder if you want one.
  */
 @Directive({
   selector: 'textarea[scEditorContentTitle]',
@@ -67,7 +67,8 @@ export class ScEditorContentTitle {
       selectionStart === value.length && selectionEnd === value.length;
     const toText =
       event.key === 'Enter' ||
-      (atEnd && (event.key === 'ArrowDown' || event.key === 'ArrowRight'));
+      (atEnd &&
+        (event.key === 'ArrowDown' || event.key === forward(this.element)));
     if (!toText) return;
     event.preventDefault();
     this.editor.editorInstance()?.commands.focus('start');
@@ -76,8 +77,10 @@ export class ScEditorContentTitle {
   /** Whether a key at the text's very start goes to the title (and does). */
   private fromText(view: EditorView, event: KeyboardEvent): boolean {
     if (event.isComposing || hasModifier(event)) return false;
-    if (!['ArrowLeft', 'ArrowUp', 'Backspace'].includes(event.key))
-      return false;
+    // Back: ← in left-to-right text, → in right-to-left.
+    const back =
+      forward(view.dom) === 'ArrowRight' ? 'ArrowLeft' : 'ArrowRight';
+    if (![back, 'ArrowUp', 'Backspace'].includes(event.key)) return false;
     // Where the caret is now — the browser's selection: right after a click,
     // the editor's own hasn't caught up yet (it follows on selectionchange).
     const caret = caretPos(view);
@@ -92,7 +95,7 @@ export class ScEditorContentTitle {
         view.coordsAtPos(caret).top - view.coordsAtPos($caret.start()).top,
       ) < 2;
     const goes =
-      (event.key === 'ArrowLeft' && atStart) ||
+      (event.key === back && atStart) ||
       // Backspace keeps its own work on a heading or a list (it turns them
       // into a paragraph first).
       (event.key === 'Backspace' &&
@@ -121,6 +124,13 @@ function caretPos(view: EditorView): number | null {
   } catch {
     return null;
   }
+}
+
+/** The arrow that moves forward in an element's text: → or, right to left, ←. */
+function forward(element: Element): 'ArrowRight' | 'ArrowLeft' {
+  return getComputedStyle(element).direction === 'rtl'
+    ? 'ArrowLeft'
+    : 'ArrowRight';
 }
 
 function hasModifier(event: KeyboardEvent): boolean {

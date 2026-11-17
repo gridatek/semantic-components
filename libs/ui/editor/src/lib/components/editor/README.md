@@ -225,7 +225,7 @@ A title above the text, in a textarea of yours, in the editor:
 
 - **Its value is your field**, not part of the document: the body stays the text alone. (A title inside the document — Tiptap's custom document, `title block+` — is yours to build.)
 - **Set as the text's heading**, with no class of yours: the preset's Typeset heading — font, size, weight, tracking and case (sera's uppercase) — the space after a heading, a muted placeholder, no box; it grows with its text.
-- **The keyboard goes between the two**: **Enter**, or **↓** / **→** at its end, goes to the start of the text (no line break in a title); **Backspace**, **↑** or **←** at the very start of the text come back to its end. Backspace keeps its own work on a heading or a list there (it turns them into a paragraph first).
+- **The keyboard goes between the two**: **Enter**, or **↓** / **→** at its end, goes to the start of the text (no line break in a title); **Backspace**, **↑** or **←** at the very start of the text come back to its end. Backspace keeps its own work on a heading or a list there (it turns them into a paragraph first). Right to left, → and ← swap: **←** at the end of the title goes forward into the text, **→** at its start comes back.
 - **Name it** (`aria-label`): a text box, not a heading — it's a form field.
 
 ## A block menu: text style and lists

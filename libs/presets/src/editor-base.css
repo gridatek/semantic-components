@@ -25,13 +25,15 @@
 /*
  * The title (scEditorContentTitle): a textarea set as Typeset's h1 — the
  * preset's heading font, weight, tracking and case — with no box; the space
- * after it is Typeset's after a heading (1em of the text).
+ * after it is Typeset's after a heading (1em of the text). A textarea clips
+ * at its lines, an h1 doesn't: room above and below them for what reaches
+ * past (Arabic's descenders, accents), taken back by the margins.
  */
 [data-slot='editor-content-title'] {
   display: block;
   width: 100%;
-  margin: 0 0 calc(1em / 1.75);
-  padding: 0;
+  margin: -0.2em 0 calc(1em / 1.75 - 0.2em);
+  padding: 0.2em 0;
   border: 0;
   background: transparent;
   resize: none;

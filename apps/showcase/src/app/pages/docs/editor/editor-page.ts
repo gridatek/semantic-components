@@ -30,6 +30,7 @@ import { LayoutEditorDemoContainer } from './demos/layout-editor-demo-container'
 import { NoCountEditorDemoContainer } from './demos/no-count-editor-demo-container';
 import { PrefilledEditorDemoContainer } from './demos/prefilled-editor-demo-container';
 import { ReadonlyEditorDemoContainer } from './demos/readonly-editor-demo-container';
+import { RtlEditorDemoContainer } from './demos/rtl-editor-demo-container';
 import { SearchEditorDemoContainer } from './demos/search-editor-demo-container';
 import { SignalFormsEditorDemoContainer } from './demos/signal-forms-editor-demo-container';
 import { TablesEditorDemoContainer } from './demos/tables-editor-demo-container';
@@ -48,6 +49,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
     EditorUsageDemoContainer,
     PrefilledEditorDemoContainer,
     NoCountEditorDemoContainer,
+    RtlEditorDemoContainer,
     ReadonlyEditorDemoContainer,
     FullFeaturedEditorDemoContainer,
     SignalFormsEditorDemoContainer,
@@ -302,8 +304,8 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           on a textarea of yours above the text: its value is your field, not
           part of the document, and it's set as the text's heading — the
           preset's heading look, the space after it — with no class of yours.
-          Enter, or ↓ at its end, goes to the text; Backspace, ↑ or ← at the
-          text's very start come back.
+          Enter, or ↓ / → at its end, goes to the text; Backspace, ↑ or ← at the
+          text's very start come back (right to left, → and ← swap).
         </p>
         <app-title-editor-demo-container />
       </section>
@@ -446,6 +448,18 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           character counts.
         </p>
         <app-no-count-editor-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>RTL</h2>
+        <p class="text-muted-foreground">
+          In a right-to-left page: the toolbar starts at the right and Left
+          moves to the next button; the title and the text run from the right,
+          list markers on the right; between the title and the text, Left at the
+          end of the title goes forward into the text and Right at the text's
+          start comes back.
+        </p>
+        <app-rtl-editor-demo-container />
       </section>
 
       <section class="space-y-4">
