@@ -23,8 +23,8 @@ test.describe('Typeset in its preset', () => {
           probe.style.borderTopLeftRadius = value;
           return getComputedStyle(probe).borderTopLeftRadius;
         };
-        const block = resolve('var(--typeset-radius)');
-        const inline = resolve('var(--typeset-radius-inline)');
+        const block = resolve('var(--sc-typeset-radius)');
+        const inline = resolve('var(--sc-typeset-radius-inline)');
         probe.remove();
         const radius = (selector: string) =>
           getComputedStyle(document.querySelector(selector) as Element)
@@ -58,7 +58,7 @@ test.describe('Typeset in its preset', () => {
     await expect
       .poll(() =>
         heading.evaluate((el) =>
-          getComputedStyle(el).getPropertyValue('--typeset-heading-case'),
+          getComputedStyle(el).getPropertyValue('--sc-typeset-heading-case'),
         ),
       )
       .not.toBe('');

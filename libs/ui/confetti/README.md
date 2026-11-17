@@ -48,18 +48,18 @@ Each settles when the confetti has fallen.
 
 ## Options
 
-| Option     | Does                                                                                        |
-| ---------- | ------------------------------------------------------------------------------------------- |
-| `count`    | How many pieces.                                                                            |
-| `spread`   | How wide, in degrees.                                                                       |
-| `angle`    | Which way, in degrees: 90 is up.                                                            |
-| `velocity` | How fast they start.                                                                        |
-| `origin`   | Where from: `{ x, y }` (0–1 of the screen), or an element — its centre.                     |
-| `colors`   | Any CSS colours; the theme's by default — `--confetti-1` … `--confetti-5`, read when fired. |
-| `shapes`   | `square`, `circle`, `star`.                                                                 |
-| `size`     | 1 is the usual.                                                                             |
-| `gravity`  | 1 is the usual.                                                                             |
-| `duration` | Fireworks only, in milliseconds.                                                            |
+| Option     | Does                                                                                              |
+| ---------- | ------------------------------------------------------------------------------------------------- |
+| `count`    | How many pieces.                                                                                  |
+| `spread`   | How wide, in degrees.                                                                             |
+| `angle`    | Which way, in degrees: 90 is up.                                                                  |
+| `velocity` | How fast they start.                                                                              |
+| `origin`   | Where from: `{ x, y }` (0–1 of the screen), or an element — its centre.                           |
+| `colors`   | Any CSS colours; the theme's by default — `--sc-confetti-1` … `--sc-confetti-5`, read when fired. |
+| `shapes`   | `square`, `circle`, `star`.                                                                       |
+| `size`     | 1 is the usual.                                                                                   |
+| `gravity`  | 1 is the usual.                                                                                   |
+| `duration` | Fireworks only, in milliseconds.                                                                  |
 
 ## Colors
 
@@ -67,24 +67,24 @@ Like shadcn's `--chart-1` … `--chart-5`, five theme tokens — add them to you
 
 ```css
 @theme inline {
-  --color-confetti-1: var(--confetti-1);
+  --color-confetti-1: var(--sc-confetti-1);
   /* … to --color-confetti-5 */
 }
 
 :root {
-  --confetti-1: oklch(0.646 0.222 41.116);
-  --confetti-2: oklch(0.6 0.118 184.704);
-  --confetti-3: oklch(0.488 0.243 264.376);
-  --confetti-4: oklch(0.828 0.189 84.429);
-  --confetti-5: oklch(0.645 0.246 16.439);
+  --sc-confetti-1: oklch(0.646 0.222 41.116);
+  --sc-confetti-2: oklch(0.6 0.118 184.704);
+  --sc-confetti-3: oklch(0.488 0.243 264.376);
+  --sc-confetti-4: oklch(0.828 0.189 84.429);
+  --sc-confetti-5: oklch(0.645 0.246 16.439);
 }
 
 .dark {
-  --confetti-1: oklch(0.705 0.213 47.604);
-  --confetti-2: oklch(0.696 0.17 162.48);
-  --confetti-3: oklch(0.627 0.265 303.9);
-  --confetti-4: oklch(0.852 0.199 91.936);
-  --confetti-5: oklch(0.645 0.246 16.439);
+  --sc-confetti-1: oklch(0.705 0.213 47.604);
+  --sc-confetti-2: oklch(0.696 0.17 162.48);
+  --sc-confetti-3: oklch(0.627 0.265 303.9);
+  --sc-confetti-4: oklch(0.852 0.199 91.936);
+  --sc-confetti-5: oklch(0.645 0.246 16.439);
 }
 ```
 

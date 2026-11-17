@@ -263,8 +263,8 @@ Their group is the Toolbar's `scToolbarWidgetGroup`, without a `value`: it group
   </button>
   <ng-template scPopoverPortal>
     <div scPopover aria-label="Highlight colours" class="flex w-auto items-center gap-2 p-2">
-      <button scEditorHighlightColor="var(--editor-highlight-1)"><span class="sr-only">Yellow</span></button>
-      <button scEditorHighlightColor="var(--editor-highlight-2)"><span class="sr-only">Green</span></button>
+      <button scEditorHighlightColor="var(--sc-editor-highlight-1)"><span class="sr-only">Yellow</span></button>
+      <button scEditorHighlightColor="var(--sc-editor-highlight-2)"><span class="sr-only">Green</span></button>
       <button scEditorRemoveHighlight>
         <svg siBanIcon></svg>
         <span class="sr-only">Remove highlight</span>
@@ -274,7 +274,7 @@ Their group is the Toolbar's `scToolbarWidgetGroup`, without a `value`: it group
 </div>
 ```
 
-A popover keeps the selection — still shown while it has focus — so the link or colour goes where it was. The editor's styles have five highlight colours, for light and dark: `var(--editor-highlight-1)` to `var(--editor-highlight-5)`; any CSS colour works.
+A popover keeps the selection — still shown while it has focus — so the link or colour goes where it was. The editor's styles have five highlight colours, for light and dark: `var(--sc-editor-highlight-1)` to `var(--sc-editor-highlight-5)`; any CSS colour works.
 
 ## Images
 
@@ -464,23 +464,23 @@ The editor's styles are your preset's `editor.css`: the placeholder, task lists 
 
 ```css
 :root {
-  --editor-highlight-1: oklch(0.945 0.12 100);
-  --editor-highlight-2: oklch(0.93 0.08 150);
-  --editor-highlight-3: oklch(0.92 0.06 240);
-  --editor-highlight-4: oklch(0.92 0.06 300);
-  --editor-highlight-5: oklch(0.92 0.07 20);
-  --editor-search-match: oklch(0.945 0.12 100 / 60%);
-  --editor-search-current: oklch(0.85 0.14 65);
+  --sc-editor-highlight-1: oklch(0.945 0.12 100);
+  --sc-editor-highlight-2: oklch(0.93 0.08 150);
+  --sc-editor-highlight-3: oklch(0.92 0.06 240);
+  --sc-editor-highlight-4: oklch(0.92 0.06 300);
+  --sc-editor-highlight-5: oklch(0.92 0.07 20);
+  --sc-editor-search-match: oklch(0.945 0.12 100 / 60%);
+  --sc-editor-search-current: oklch(0.85 0.14 65);
 }
 
 .dark {
-  --editor-highlight-1: oklch(0.45 0.09 95);
-  --editor-highlight-2: oklch(0.42 0.08 150);
-  --editor-highlight-3: oklch(0.42 0.08 250);
-  --editor-highlight-4: oklch(0.42 0.09 300);
-  --editor-highlight-5: oklch(0.42 0.1 20);
-  --editor-search-match: oklch(0.45 0.09 95 / 60%);
-  --editor-search-current: oklch(0.52 0.13 55);
+  --sc-editor-highlight-1: oklch(0.45 0.09 95);
+  --sc-editor-highlight-2: oklch(0.42 0.08 150);
+  --sc-editor-highlight-3: oklch(0.42 0.08 250);
+  --sc-editor-highlight-4: oklch(0.42 0.09 300);
+  --sc-editor-highlight-5: oklch(0.42 0.1 20);
+  --sc-editor-search-match: oklch(0.45 0.09 95 / 60%);
+  --sc-editor-search-current: oklch(0.52 0.13 55);
 }
 ```
 

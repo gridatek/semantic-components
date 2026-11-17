@@ -47,7 +47,7 @@ export class ScDock {
 
   private readonly class = computed(() =>
     cn(
-      'bg-background/80 inline-flex gap-2 rounded-2xl border p-2 shadow-lg backdrop-blur-lg [--dock-item:2.75rem]',
+      'bg-background/80 inline-flex gap-2 rounded-2xl border p-2 shadow-lg backdrop-blur-lg [--sc-dock-item:2.75rem]',
       this.orientation() === 'horizontal'
         ? 'flex-row items-end'
         : 'flex-col items-start',

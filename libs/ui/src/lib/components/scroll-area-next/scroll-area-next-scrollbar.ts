@@ -73,8 +73,8 @@ export class ScScrollAreaNextScrollbar {
       // Plain classes, not data-[orientation=…]: variants: those outrank
       // yours in specificity, and cn can't merge them.
       this.orientation() === 'vertical'
-        ? 'end-0 top-0 bottom-(--scroll-area-corner-size) w-2.5 border-s border-s-transparent'
-        : 'start-0 end-(--scroll-area-corner-size) bottom-0 h-2.5 flex-col border-t border-t-transparent',
+        ? 'end-0 top-0 bottom-(--sc-scroll-area-corner-size) w-2.5 border-s border-s-transparent'
+        : 'start-0 end-(--sc-scroll-area-corner-size) bottom-0 h-2.5 flex-col border-t border-t-transparent',
       this.classInput(),
     ),
   );

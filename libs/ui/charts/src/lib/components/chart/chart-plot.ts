@@ -16,13 +16,13 @@ import type {
 } from './chart-types';
 
 /**
- * The preset's corner radius (`--chart-bar-radius`) in px: a length only the
+ * The preset's corner radius (`--sc-chart-bar-radius`) in px: a length only the
  * browser resolves (calc(var(--radius) - 4px)…), read through a probe as wide.
  */
 function radiusOf(chart: Element): number {
   const probe = chart.ownerDocument.createElement('div');
   probe.style.cssText =
-    'position:absolute;visibility:hidden;width:var(--chart-bar-radius,0px)';
+    'position:absolute;visibility:hidden;width:var(--sc-chart-bar-radius,0px)';
   chart.append(probe);
   const width = parseFloat(getComputedStyle(probe).width);
   probe.remove();

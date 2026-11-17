@@ -33,7 +33,7 @@ const sameEdges = (a: ScScrollAreaNext2Edges, b: ScScrollAreaNext2Edges) =>
  * A tab stop while it overflows, ringed when focused: the arrow keys, Page
  * Up / Down, Home and End scroll it. It tells what overflows and where —
  * `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}` and
- * `--scroll-area-overflow-{x,y}-{start,end}` (how far from each edge, for a
+ * `--sc-scroll-area-overflow-{x,y}-{start,end}` (how far from each edge, for a
  * fade). A `CdkScrollable`: overlays opened from inside it follow its scroll.
  */
 @Directive({
@@ -47,10 +47,10 @@ const sameEdges = (a: ScScrollAreaNext2Edges, b: ScScrollAreaNext2Edges) =>
     '[attr.data-overflow-x-end]': 'edges().end > 0 ? "" : null',
     '[attr.data-overflow-y-start]': 'edges().top > 0 ? "" : null',
     '[attr.data-overflow-y-end]': 'edges().bottom > 0 ? "" : null',
-    '[style.--scroll-area-overflow-x-start.px]': 'edges().start',
-    '[style.--scroll-area-overflow-x-end.px]': 'edges().end',
-    '[style.--scroll-area-overflow-y-start.px]': 'edges().top',
-    '[style.--scroll-area-overflow-y-end.px]': 'edges().bottom',
+    '[style.--sc-scroll-area-overflow-x-start.px]': 'edges().start',
+    '[style.--sc-scroll-area-overflow-x-end.px]': 'edges().end',
+    '[style.--sc-scroll-area-overflow-y-start.px]': 'edges().top',
+    '[style.--sc-scroll-area-overflow-y-end.px]': 'edges().bottom',
     '[class]': 'class()',
   },
 })

@@ -82,7 +82,7 @@ export interface ScBreadcrumbStyles {
 /** What changes in a chart from style to style: its bars' corners, and the tooltip's box (shadcn's, per style). */
 export interface ScChartStyles {
   /**
-   * The chart: how round its bars are, as `--chart-bar-radius` — the style's own
+   * The chart: how round its bars are, as `--sc-chart-bar-radius` — the style's own
    * corners, a step under its skeleton's (0 in the square styles).
    */
   chart: string;

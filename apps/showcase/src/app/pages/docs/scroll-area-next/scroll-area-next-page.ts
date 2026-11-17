@@ -168,7 +168,7 @@ export default class ScrollAreaNextPage {
       name: 'ScScrollAreaNextViewport',
       selector: 'div[scScrollAreaNextViewport]',
       description:
-        'What scrolls: its own scrollbar hidden, in the tab order while it overflows; --scroll-area-overflow-{x,y}-{start,end}.',
+        'What scrolls: its own scrollbar hidden, in the tab order while it overflows; --sc-scroll-area-overflow-{x,y}-{start,end}.',
     },
     {
       name: 'ScScrollAreaNextViewportContent',

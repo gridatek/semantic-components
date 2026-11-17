@@ -51,7 +51,8 @@ const SCROLLING = 500;
     '[attr.data-overflow-y-start]': 'overflowYStart() > 0 ? "" : null',
     '[attr.data-overflow-y-end]': 'overflowYEnd() > 0 ? "" : null',
     '[attr.data-scrolling]': 'scrolling() ? "" : null',
-    '[style.--scroll-area-corner-size]': 'bothOverflow() ? "0.625rem" : "0px"',
+    '[style.--sc-scroll-area-corner-size]':
+      'bothOverflow() ? "0.625rem" : "0px"',
     '[class]': 'class()',
     '(pointerenter)': 'hovering.set(true)',
     '(pointerleave)': 'hovering.set(false)',

@@ -38,7 +38,7 @@ interface ScColorPickerEyeDropper {
   host: {
     'data-slot': 'color-picker',
     '[attr.data-disabled]': 'disabled() || null',
-    '[style.--color]': 'css()',
+    '[style.--sc-color-picker-value]': 'css()',
     '[class]': 'class()',
   },
 })
@@ -59,7 +59,7 @@ export class ScColorPicker implements FormValueControl<string> {
   /** The colour: hue, saturation, value, alpha. */
   readonly hsva = signal<ScHsva>({ h: 0, s: 0, v: 0, a: 1 });
   readonly rgba = computed(() => hsvaToRgba(this.hsva()));
-  /** The colour, as CSS (also `--color` on the picker). */
+  /** The colour, as CSS (also `--sc-color-picker-value` on the picker). */
   readonly css = computed(() => formatColor(this.hsva(), 'rgb'));
 
   /** The browser can pick a colour from the screen. */

@@ -196,17 +196,17 @@ interface Row {
           <li>
             <strong class="text-foreground">Headings h1 to h4</strong> take the
             style's weight, tracking and case —
-            <code scTypeset>--typeset-heading-weight</code>,
-            <code scTypeset>--typeset-heading-tracking</code>,
-            <code scTypeset>--typeset-heading-case</code>; shadcn's Typeset has
-            none. 600, normal and none in every style but sera (uppercase,
+            <code scTypeset>--sc-typeset-heading-weight</code>,
+            <code scTypeset>--sc-typeset-heading-tracking</code>,
+            <code scTypeset>--sc-typeset-heading-case</code>; shadcn's Typeset
+            has none. 600, normal and none in every style but sera (uppercase,
             0.05em: its titles).
           </li>
         </ul>
         <p class="text-muted-foreground">
           <strong class="text-foreground">Writing your own values?</strong> Set
           the three heading variables too: they have no fallback, and without
-          <code scTypeset>--typeset-heading-weight</code> headings lose their
+          <code scTypeset>--sc-typeset-heading-weight</code> headings lose their
           bold.
         </p>
       </section>
@@ -405,27 +405,27 @@ export default class TypesetPage {
       description: "Code's font.",
     },
     {
-      name: '--typeset-radius',
+      name: '--sc-typeset-radius',
       value: "the style's Code Block",
       description: 'The corners of code blocks and images.',
     },
     {
-      name: '--typeset-radius-inline',
+      name: '--sc-typeset-radius-inline',
       value: "the style's Kbd",
       description: 'The corners of inline code, keys and highlights.',
     },
     {
-      name: '--typeset-heading-weight',
+      name: '--sc-typeset-heading-weight',
       value: '600',
       description: 'The weight of headings h1 to h4.',
     },
     {
-      name: '--typeset-heading-tracking',
+      name: '--sc-typeset-heading-tracking',
       value: 'normal (sera: 0.05em, as its titles)',
       description: 'The letter spacing of headings h1 to h4.',
     },
     {
-      name: '--typeset-heading-case',
+      name: '--sc-typeset-heading-case',
       value: 'none (sera: uppercase, as its titles)',
       description: 'The case of headings h1 to h4 (text-transform).',
     },

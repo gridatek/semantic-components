@@ -47,7 +47,7 @@ export type ScSidebarSide = 'inline-start' | 'inline-end' | 'left' | 'right';
             scSheet
             data-slot="sidebar"
             data-mobile="true"
-            class="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [--sidebar-width:var(--sidebar-width-mobile)]"
+            class="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [--sidebar-width:var(--sc-sidebar-width-mobile)]"
             [id]="id"
             [attr.aria-label]="label() || null"
             [attr.aria-labelledby]="null"

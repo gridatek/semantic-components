@@ -31,7 +31,7 @@ const MOBILE_QUERY = '(max-width: 767.98px)';
     'data-slot': 'sidebar-wrapper',
     '[class]': 'class()',
     '[style.--sidebar-width]': '"16rem"',
-    '[style.--sidebar-width-mobile]': '"18rem"',
+    '[style.--sc-sidebar-width-mobile]': '"18rem"',
     '[style.--sidebar-width-icon]': '"3rem"',
     '(window:keydown)': 'onKeydown($event)',
   },

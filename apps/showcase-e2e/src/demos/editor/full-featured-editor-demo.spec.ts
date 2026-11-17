@@ -156,7 +156,7 @@ test.describe('Full Featured Editor Demo', () => {
     await page.getByRole('button', { name: 'Green' }).click();
     await expect(article(page).locator('mark')).toHaveAttribute(
       'data-color',
-      'var(--editor-highlight-2)',
+      'var(--sc-editor-highlight-2)',
     );
     await expect(highlight).toHaveAttribute('aria-pressed', 'true');
 

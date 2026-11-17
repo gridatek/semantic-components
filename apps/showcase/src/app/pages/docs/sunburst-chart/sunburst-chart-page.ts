@@ -173,7 +173,7 @@ export default class SunburstChartPage {
       type: 'number',
       default: '—',
       description:
-        "Its arcs' corners' rounding, in px — unset, the style's (--chart-bar-radius, as the bars'; square in Lyra and Sera).",
+        "Its arcs' corners' rounding, in px — unset, the style's (--sc-chart-bar-radius, as the bars'; square in Lyra and Sera).",
     },
     {
       name: 'class',

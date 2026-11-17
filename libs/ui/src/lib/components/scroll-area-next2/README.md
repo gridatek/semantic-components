@@ -14,9 +14,9 @@ Its look: the preset's `nativeThumb` on `::-webkit-scrollbar` (Chromium, Safari)
 
 ## Part
 
-| Part                | Selector                 | What it does                                                                                                                                                                             |
-| ------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScScrollAreaNext2` | `div[scScrollAreaNext2]` | Scrolls, with a thin themed native scrollbar; a tab stop while it overflows; `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}`, `--scroll-area-overflow-{x,y}-{start,end}` |
+| Part                | Selector                 | What it does                                                                                                                                                                                |
+| ------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScScrollAreaNext2` | `div[scScrollAreaNext2]` | Scrolls, with a thin themed native scrollbar; a tab stop while it overflows; `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}`, `--sc-scroll-area-overflow-{x,y}-{start,end}` |
 
 ## Keyboard and screen readers
 
@@ -27,3 +27,4 @@ Its look: the preset's `nativeThumb` on `::-webkit-scrollbar` (Chromium, Safari)
 
 - **The browser's scrollbar**, not a drawn one (shadcn's is Base UI's: viewport, scrollbar, thumb, corner). The thumb's shape is the browser's — shadcn's styles change only its corners (square in lyra and sera), which `scrollbar-color` can't; so there is no preset key.
 - **One directive**, no parts: the overflow attributes and variables (for a fade) come from the box itself.
+- **The variables carry our `--sc-` prefix**: `--sc-scroll-area-overflow-{x,y}-{start,end}` are Base UI's `--scroll-area-overflow-{x,y}-{start,end}` — rename them in a snippet taken from shadcn.

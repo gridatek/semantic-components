@@ -49,7 +49,7 @@ test(`search matches have the style's inline corners (its inline code's), not th
   // The style's inline corners, as the document resolves them.
   const inline = await match.evaluate((el) => {
     const probe = el.ownerDocument.createElement('span');
-    probe.style.borderRadius = 'var(--typeset-radius-inline)';
+    probe.style.borderRadius = 'var(--sc-typeset-radius-inline)';
     el.closest('[data-slot=editor-document]')?.append(probe);
     const corners = getComputedStyle(probe).borderTopLeftRadius;
     probe.remove();
@@ -66,7 +66,7 @@ test(`a highlight has the style's inline corners (its inline code's)`, async ({
   await expect(mark).toBeVisible();
   const inline = await mark.evaluate((el) => {
     const probe = el.ownerDocument.createElement('span');
-    probe.style.borderRadius = 'var(--typeset-radius-inline)';
+    probe.style.borderRadius = 'var(--sc-typeset-radius-inline)';
     el.closest('[data-slot=editor-document]')?.append(probe);
     const corners = getComputedStyle(probe).borderTopLeftRadius;
     probe.remove();

@@ -38,7 +38,7 @@ export class ScDockItem {
   private readonly center = signal<number | null>(null);
 
   private readonly size = computed(
-    () => `calc(var(--dock-item) * ${this.dock.ɵscale(this.center())})`,
+    () => `calc(var(--sc-dock-item) * ${this.dock.ɵscale(this.center())})`,
   );
 
   private readonly class = computed(() =>

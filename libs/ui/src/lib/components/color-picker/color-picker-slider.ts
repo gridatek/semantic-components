@@ -22,8 +22,8 @@ export const CHECKERBOARD =
     '[step]': 'channel() === "hue" ? 1 : 0.01',
     '[value]': 'current()',
     '[disabled]': 'picker.disabled()',
-    '[style.--track]': 'track()',
-    '[style.--thumb]': 'thumb()',
+    '[style.--sc-color-picker-track]': 'track()',
+    '[style.--sc-color-picker-thumb]': 'thumb()',
     '[class]': 'class()',
     '(input)': 'onInput($event)',
     '(blur)': 'picker.touch.emit()',
@@ -59,9 +59,9 @@ export class ScColorPickerSlider {
 
   private readonly class = computed(() =>
     cn(
-      'h-3 w-full cursor-pointer appearance-none rounded-full [background:var(--track)] outline-none disabled:pointer-events-none disabled:opacity-50',
-      '[&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:bg-(--thumb) [&::-webkit-slider-thumb]:shadow-[0_0_0_1px_rgb(0_0_0/0.4),0_1px_3px_rgb(0_0_0/0.4)]',
-      '[&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:box-border [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-white [&::-moz-range-thumb]:bg-(--thumb) [&::-moz-range-thumb]:shadow-[0_0_0_1px_rgb(0_0_0/0.4),0_1px_3px_rgb(0_0_0/0.4)]',
+      'h-3 w-full cursor-pointer appearance-none rounded-full [background:var(--sc-color-picker-track)] outline-none disabled:pointer-events-none disabled:opacity-50',
+      '[&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:bg-(--sc-color-picker-thumb) [&::-webkit-slider-thumb]:shadow-[0_0_0_1px_rgb(0_0_0/0.4),0_1px_3px_rgb(0_0_0/0.4)]',
+      '[&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:box-border [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-white [&::-moz-range-thumb]:bg-(--sc-color-picker-thumb) [&::-moz-range-thumb]:shadow-[0_0_0_1px_rgb(0_0_0/0.4),0_1px_3px_rgb(0_0_0/0.4)]',
       'focus-visible:ring-3 focus-visible:ring-ring/50',
       this.classInput(),
     ),
