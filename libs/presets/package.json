@@ -23,8 +23,8 @@
     "./nova/editor.css": {
       "default": "./nova/src/editor.css"
     },
-    "./nova/scrollbars-variables.css": {
-      "default": "./nova/src/scrollbars-variables.css"
+    "./nova/scrollbar-variables.css": {
+      "default": "./nova/src/scrollbar-variables.css"
     },
     "./lyra/typeset-variables.css": {
       "default": "./lyra/src/typeset-variables.css"
@@ -32,8 +32,8 @@
     "./lyra/editor.css": {
       "default": "./lyra/src/editor.css"
     },
-    "./lyra/scrollbars-variables.css": {
-      "default": "./lyra/src/scrollbars-variables.css"
+    "./lyra/scrollbar-variables.css": {
+      "default": "./lyra/src/scrollbar-variables.css"
     },
     "./maia/typeset-variables.css": {
       "default": "./maia/src/typeset-variables.css"
@@ -41,8 +41,8 @@
     "./maia/editor.css": {
       "default": "./maia/src/editor.css"
     },
-    "./maia/scrollbars-variables.css": {
-      "default": "./maia/src/scrollbars-variables.css"
+    "./maia/scrollbar-variables.css": {
+      "default": "./maia/src/scrollbar-variables.css"
     },
     "./vega/typeset-variables.css": {
       "default": "./vega/src/typeset-variables.css"
@@ -50,8 +50,8 @@
     "./vega/editor.css": {
       "default": "./vega/src/editor.css"
     },
-    "./vega/scrollbars-variables.css": {
-      "default": "./vega/src/scrollbars-variables.css"
+    "./vega/scrollbar-variables.css": {
+      "default": "./vega/src/scrollbar-variables.css"
     },
     "./mira/typeset-variables.css": {
       "default": "./mira/src/typeset-variables.css"
@@ -59,8 +59,8 @@
     "./mira/editor.css": {
       "default": "./mira/src/editor.css"
     },
-    "./mira/scrollbars-variables.css": {
-      "default": "./mira/src/scrollbars-variables.css"
+    "./mira/scrollbar-variables.css": {
+      "default": "./mira/src/scrollbar-variables.css"
     },
     "./luma/typeset-variables.css": {
       "default": "./luma/src/typeset-variables.css"
@@ -68,8 +68,8 @@
     "./luma/editor.css": {
       "default": "./luma/src/editor.css"
     },
-    "./luma/scrollbars-variables.css": {
-      "default": "./luma/src/scrollbars-variables.css"
+    "./luma/scrollbar-variables.css": {
+      "default": "./luma/src/scrollbar-variables.css"
     },
     "./rhea/typeset-variables.css": {
       "default": "./rhea/src/typeset-variables.css"
@@ -77,8 +77,8 @@
     "./rhea/editor.css": {
       "default": "./rhea/src/editor.css"
     },
-    "./rhea/scrollbars-variables.css": {
-      "default": "./rhea/src/scrollbars-variables.css"
+    "./rhea/scrollbar-variables.css": {
+      "default": "./rhea/src/scrollbar-variables.css"
     },
     "./sera/typeset-variables.css": {
       "default": "./sera/src/typeset-variables.css"
@@ -86,8 +86,8 @@
     "./sera/editor.css": {
       "default": "./sera/src/editor.css"
     },
-    "./sera/scrollbars-variables.css": {
-      "default": "./sera/src/scrollbars-variables.css"
+    "./sera/scrollbar-variables.css": {
+      "default": "./sera/src/scrollbar-variables.css"
     }
   }
 }

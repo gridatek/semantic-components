@@ -1,6 +1,6 @@
 /*
- * The scrollbars' variables in sera, for ui's scrollbars.css (its rules):
- * import both. shadcn's Scroll Area thumb in sera — the theme's border
+ * The scrollbars' variables in lyra, for ui's scrollbar.css (its rules):
+ * import both. shadcn's Scroll Area thumb in lyra — the theme's border
  * colour, its corners square, as its Scroll Area thumb (rounded-none). At zero specificity: yours on :root, or on a box,
  * win.
  */

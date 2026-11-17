@@ -18,7 +18,7 @@ import { TuningScrollbarsDemo } from './tuning-scrollbars-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TuningScrollbarsDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * The variables on a box: its scrollbars, and those inside it. On :root,

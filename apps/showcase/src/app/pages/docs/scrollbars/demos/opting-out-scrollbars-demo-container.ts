@@ -18,7 +18,7 @@ import { OptingOutScrollbarsDemo } from './opting-out-scrollbars-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class OptingOutScrollbarsDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Utilities on a box: no scrollbar, its room kept, or the browser's own bar

@@ -4,8 +4,8 @@
  * widget. shadcn's Scroll Area thumb on the native bar: 10px, no track, the
  * thumb inset by 1px, the theme's border colour, the preset's corners.
  *
- *   @import '@semantic-components/ui/styles/scrollbars.css';
- *   @import '@semantic-components/presets/<style>/scrollbars-variables.css';
+ *   @import '@semantic-components/ui/styles/scrollbar.css';
+ *   @import '@semantic-components/presets/<style>/scrollbar-variables.css';
  *
  * The variables below are nova's; the preset's file sets its own (square
  * corners in lyra and sera). Change them on :root for the whole page, or on a

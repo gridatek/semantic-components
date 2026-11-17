@@ -6,7 +6,7 @@ import { expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/scrollbars/${name}-scrollbars-demo`;
 
-/** The thumb that scrollbars.css draws, in Chromium (its pseudo-element). */
+/** The thumb that scrollbar.css draws, in Chromium (its pseudo-element). */
 const thumb = (box: Locator) =>
   box.evaluate((el) => {
     const s = getComputedStyle(el, '::-webkit-scrollbar-thumb');

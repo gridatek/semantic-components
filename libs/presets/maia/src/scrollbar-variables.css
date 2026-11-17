@@ -1,5 +1,5 @@
 /*
- * The scrollbars' variables in maia, for ui's scrollbars.css (its rules):
+ * The scrollbars' variables in maia, for ui's scrollbar.css (its rules):
  * import both. shadcn's Scroll Area thumb in maia — the theme's border
  * colour, its corners round, as its Scroll Area thumb (rounded-full). At zero specificity: yours on :root, or on a box,
  * win.

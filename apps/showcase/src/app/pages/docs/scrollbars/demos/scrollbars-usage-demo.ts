@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
- * A plain box that scrolls: no directive. With scrollbars.css imported, its
+ * A plain box that scrolls: no directive. With scrollbar.css imported, its
  * scrollbar is the preset's — as every scrollbar of the page.
  */
 @Component({
@@ -23,7 +23,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollbarsUsageDemo {
-  protected readonly tags = Array.from(
+  private readonly tags = Array.from(
     { length: 50 },
     (_, i) => `v1.2.0-beta.${50 - i}`,
   );

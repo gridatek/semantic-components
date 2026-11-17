@@ -303,7 +303,7 @@ test('Popup: Down opens it with an empty search; Escape and a click outside clos
   await expect(search).toBeFocused();
   await expect(search).toHaveValue('');
   await expect(options(page)).toHaveCount(12);
-  // A long list: its scrollbar shows, scrollbars.css's.
+  // A long list: its scrollbar shows, scrollbar.css's.
   await expectStyledScrollbar(page.getByRole('listbox'));
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toBeHidden();

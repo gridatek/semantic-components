@@ -49,7 +49,7 @@ import { ScScrollAreaThumb } from './scroll-area-thumb';
 })
 export class ScScrollArea {
   /** Its state: what overflows, where it is scrolled. */
-  readonly area = inject(ScScrollAreaState);
+  private readonly area = inject(ScScrollAreaState);
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() => cn('relative', this.classInput()));

@@ -109,43 +109,43 @@
             "inject": false
           },
           {
-            "input": "libs/presets/nova/src/scrollbars-variables.css",
-            "bundleName": "scrollbars-variables-nova",
+            "input": "libs/presets/nova/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-nova",
             "inject": false
           },
           {
-            "input": "libs/presets/lyra/src/scrollbars-variables.css",
-            "bundleName": "scrollbars-variables-lyra",
+            "input": "libs/presets/lyra/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-lyra",
             "inject": false
           },
           {
-            "input": "libs/presets/maia/src/scrollbars-variables.css",
-            "bundleName": "scrollbars-variables-maia",
+            "input": "libs/presets/maia/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-maia",
             "inject": false
           },
           {
-            "input": "libs/presets/vega/src/scrollbars-variables.css",
-            "bundleName": "scrollbars-variables-vega",
+            "input": "libs/presets/vega/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-vega",
             "inject": false
           },
           {
-            "input": "libs/presets/mira/src/scrollbars-variables.css",
-            "bundleName": "scrollbars-variables-mira",
+            "input": "libs/presets/mira/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-mira",
             "inject": false
           },
           {
-            "input": "libs/presets/luma/src/scrollbars-variables.css",
-            "bundleName": "scrollbars-variables-luma",
+            "input": "libs/presets/luma/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-luma",
             "inject": false
           },
           {
-            "input": "libs/presets/rhea/src/scrollbars-variables.css",
-            "bundleName": "scrollbars-variables-rhea",
+            "input": "libs/presets/rhea/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-rhea",
             "inject": false
           },
           {
-            "input": "libs/presets/sera/src/scrollbars-variables.css",
-            "bundleName": "scrollbars-variables-sera",
+            "input": "libs/presets/sera/src/scrollbar-variables.css",
+            "bundleName": "scrollbar-variables-sera",
             "inject": false
           }
         ]

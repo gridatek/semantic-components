@@ -28,8 +28,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class TuningScrollbarsDemo {
-  protected readonly lines = Array.from({ length: 20 }, (_, i) => i + 1);
-  protected readonly boxes = [
+  private readonly lines = Array.from({ length: 20 }, (_, i) => i + 1);
+  private readonly boxes = [
     {
       label: 'Primary',
       class: '[--sc-scrollbar-thumb:var(--color-primary)]',

@@ -57,12 +57,12 @@ interface Row {
           Import the rules and your preset&apos;s variables in your global
           stylesheet, after Tailwind:
           <code scTypeset
-            >@import '@semantic-components/ui/styles/scrollbars.css';</code
+            >@import '@semantic-components/ui/styles/scrollbar.css';</code
           >
           and
           <code scTypeset
             >@import
-            '@semantic-components/presets/nova/scrollbars-variables.css';</code
+            '@semantic-components/presets/nova/scrollbar-variables.css';</code
           >
           (your style&apos;s). Then any box that scrolls has the look — no
           class, no directive.

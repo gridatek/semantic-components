@@ -2,7 +2,7 @@ import { expectStyledScrollbar } from '../looks';
 import { test } from '../test';
 import { presetName } from './preset';
 
-// ui's scrollbars.css with the preset's scrollbars-variables.css: shadcn's
+// ui's scrollbar.css with the preset's scrollbar-variables.css: shadcn's
 // Scroll Area thumb on the browser's scrollbars — square in lyra and sera.
 const corners = () =>
   ['lyra', 'sera'].includes(presetName()) ? 'square' : 'round';

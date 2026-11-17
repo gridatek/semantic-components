@@ -76,7 +76,7 @@ test.describe('wide', () => {
     );
   });
 
-  test('Usage: the content shows its scrollbar, scrollbars.css’s', async ({
+  test('Usage: the content shows its scrollbar, scrollbar.css’s', async ({
     page,
   }) => {
     await page.goto(usage);

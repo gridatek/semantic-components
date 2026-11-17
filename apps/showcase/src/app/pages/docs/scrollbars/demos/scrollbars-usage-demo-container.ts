@@ -14,10 +14,10 @@ import { ScrollbarsUsageDemo } from './scrollbars-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollbarsUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
- * A plain box that scrolls: no directive. With scrollbars.css imported, its
+ * A plain box that scrolls: no directive. With scrollbar.css imported, its
  * scrollbar is the preset's — as every scrollbar of the page.
  */
 @Component({

@@ -18,7 +18,7 @@ import { CustomScrollAreaDemo } from './custom-scroll-area-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomScrollAreaDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScScrollArea,
