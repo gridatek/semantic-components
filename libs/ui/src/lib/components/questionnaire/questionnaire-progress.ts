@@ -30,11 +30,11 @@ import { ScQuestionnaire } from './questionnaire';
 })
 export class ScQuestionnaireProgress {
   private readonly styles = injectPreset().questionnaire;
-  protected readonly questionnaire = inject(ScQuestionnaire);
+  private readonly questionnaire = inject(ScQuestionnaire);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.progress, this.classInput()),
   );
 

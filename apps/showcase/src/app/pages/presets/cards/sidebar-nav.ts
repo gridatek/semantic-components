@@ -168,7 +168,7 @@ interface ScNavGroup {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewSidebarNav {
-  protected readonly cards: ScNavGroup[][] = [
+  private readonly cards: ScNavGroup[][] = [
     [
       {
         label: 'Overview',

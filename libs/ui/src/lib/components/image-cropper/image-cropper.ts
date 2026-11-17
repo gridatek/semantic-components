@@ -221,7 +221,7 @@ export class ScImageCropper {
     };
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col gap-4', this.classInput()),
   );
 

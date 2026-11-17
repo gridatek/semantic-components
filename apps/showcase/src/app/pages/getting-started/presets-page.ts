@@ -275,10 +275,10 @@ const STYLES: { name: ScPresetName; description: string }[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export default class PresetsPage {
-  protected readonly styles = STYLES;
+  private readonly styles = STYLES;
 
   /** An injector per style: the parts in the sample read its preset. */
-  protected readonly injectors = (() => {
+  private readonly injectors = (() => {
     const parent = inject(Injector);
     const config = inject(SC_CONFIG);
     const injectors = {} as Record<ScPresetName, Injector>;
@@ -296,7 +296,7 @@ export default class PresetsPage {
     return injectors;
   })();
 
-  protected readonly config = {
+  private readonly config = {
     title: 'app.config.ts',
     language: 'typescript',
     code: `import { lyra } from '@semantic-components/presets/lyra';
@@ -307,7 +307,7 @@ export const appConfig: ApplicationConfig = {
 };`,
   };
 
-  protected readonly source = {
+  private readonly source = {
     title: 'styles.css',
     language: 'css',
     code: '@source "../node_modules/@semantic-components/presets/fesm2022/semantic-components-presets-lyra.mjs";',

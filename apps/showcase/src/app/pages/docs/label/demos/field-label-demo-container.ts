@@ -18,7 +18,7 @@ import { FieldLabelDemo } from './field-label-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FieldLabelDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScField, ScInput, ScLabel } from '@semantic-components/ui';
 
 /** In a scField: it names the field’s control, with no id to write. */

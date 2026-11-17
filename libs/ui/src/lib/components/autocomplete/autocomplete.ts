@@ -72,7 +72,7 @@ const positions = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ScAutocomplete implements FormValueControl<string> {
-  protected readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** The input's text. Bind with `[formField]` or `[(value)]`. */
@@ -83,9 +83,9 @@ export class ScAutocomplete implements FormValueControl<string> {
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touch = output<void>();
 
-  protected readonly positions = positions;
-  protected readonly control = contentChild(SC_AUTOCOMPLETE_INPUT);
-  protected readonly autocompletePortal =
+  private readonly positions = positions;
+  private readonly control = contentChild(SC_AUTOCOMPLETE_INPUT);
+  private readonly autocompletePortal =
     contentChild.required(ScAutocompletePortal);
 
   readonly open = computed(() => this.control()?.combobox.expanded() ?? false);
@@ -93,7 +93,7 @@ export class ScAutocomplete implements FormValueControl<string> {
   /** Labels of options seen so far, written into the input on selection. */
   private readonly labels = signal<ReadonlyMap<string, string>>(new Map());
 
-  protected readonly class = computed(() => cn('relative', this.classInput()));
+  private readonly class = computed(() => cn('relative', this.classInput()));
 
   /** The value of the option whose label is `text`, if one has been seen. */
   optionValueFor(text: string): string | undefined {

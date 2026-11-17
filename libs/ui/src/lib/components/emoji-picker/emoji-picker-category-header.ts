@@ -12,11 +12,11 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   },
 })
 export class ScEmojiPickerCategoryHeader {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-popover text-muted-foreground pointer-events-auto top-0 px-3 pt-3.5 pb-2 text-xs leading-none [contain:layout_paint]',
       this.classInput(),

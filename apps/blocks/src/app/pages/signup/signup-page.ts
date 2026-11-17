@@ -192,7 +192,7 @@ export default class SignupPage {
     confirmPassword: '',
   });
 
-  readonly signupForm = form(
+  private readonly signupForm = form(
     this.formModel,
     (s) => {
       required(s.firstName);

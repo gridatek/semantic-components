@@ -18,7 +18,7 @@ import { PositionMessageScrollerDemo } from './position-message-scroller-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PositionMessageScrollerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

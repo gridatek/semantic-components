@@ -23,15 +23,13 @@ import { ScCompare } from './compare';
   },
 })
 export class ScCompareHandle {
-  protected readonly compare = inject(ScCompare);
+  private readonly compare = inject(ScCompare);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly value = computed(() =>
-    Math.round(this.compare.position()),
-  );
+  private readonly value = computed(() => Math.round(this.compare.position()));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute z-10 flex items-center justify-center outline-none',
       // The line, through the whole compare.
@@ -56,7 +54,7 @@ export class ScCompareHandle {
     ɵwarnIfUnnamed('scCompareHandle');
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const big = event.shiftKey ? 10 : 1;
     // Towards the after (right, or left in RTL; down when vertical) is more.
     const forward = this.compare.rtl() ? 'ArrowLeft' : 'ArrowRight';

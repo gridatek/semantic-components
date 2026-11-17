@@ -18,7 +18,7 @@ import { DiffCodeBlockDemo } from './diff-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DiffCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockActions,

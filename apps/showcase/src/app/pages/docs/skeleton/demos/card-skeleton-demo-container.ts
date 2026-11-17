@@ -18,7 +18,7 @@ import { CardSkeletonDemo } from './card-skeleton-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardSkeletonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
   ScCardBody,

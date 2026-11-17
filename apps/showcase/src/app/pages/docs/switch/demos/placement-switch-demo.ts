@@ -54,7 +54,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PlacementSwitchDemo {
-  protected readonly marketing = signal(false);
-  protected readonly security = signal(true);
-  protected readonly updates = signal(false);
+  private readonly marketing = signal(false);
+  private readonly security = signal(true);
+  private readonly updates = signal(false);
 }

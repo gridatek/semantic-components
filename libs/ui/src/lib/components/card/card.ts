@@ -17,7 +17,7 @@ export class ScCard {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<'default' | 'sm'>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.frame, this.styles.card, this.classInput()),
   );
 }

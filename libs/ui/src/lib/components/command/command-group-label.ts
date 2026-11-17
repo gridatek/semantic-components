@@ -15,11 +15,11 @@ import { ScCommandGroup } from './command-group';
 })
 export class ScCommandGroupLabel {
   private readonly styles = injectPreset().command;
-  protected readonly id = inject(_IdGenerator).getId('sc-command-group-');
+  private readonly id = inject(_IdGenerator).getId('sc-command-group-');
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.groupLabel, this.classInput()),
   );
 

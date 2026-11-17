@@ -46,10 +46,10 @@ export class ScImageCropperGrid {
     );
   }
 
-  protected readonly verticals = computed(() => this.lines(this.columns()));
-  protected readonly horizontals = computed(() => this.lines(this.rows()));
+  private readonly verticals = computed(() => this.lines(this.columns()));
+  private readonly horizontals = computed(() => this.lines(this.rows()));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] opacity-80 transition-opacity',
       'in-data-active:opacity-100',

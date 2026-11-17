@@ -18,7 +18,7 @@ import { MultipleComboboxDemo } from './multiple-combobox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleComboboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScComboboxChip,
   ScComboboxChipRemove,

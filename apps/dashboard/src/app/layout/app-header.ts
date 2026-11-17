@@ -201,10 +201,10 @@ import { ThemeMenu } from './theme-menu';
 })
 export class AppHeader {
   private readonly router = inject(Router);
-  protected readonly messages = MESSAGES;
-  protected readonly notifications = NOTIFICATIONS;
+  private readonly messages = MESSAGES;
+  private readonly notifications = NOTIFICATIONS;
 
-  protected go(url: unknown): void {
+  private go(url: unknown): void {
     if (typeof url === 'string') void this.router.navigateByUrl(url);
   }
 }

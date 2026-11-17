@@ -23,12 +23,12 @@ import { ScNavbar } from './navbar';
   },
 })
 export class ScNavbarMenuLink {
-  protected readonly navbar = inject(ScNavbar);
+  private readonly navbar = inject(ScNavbar);
   readonly classInput = input<string>('', { alias: 'class' });
   /** The page shown. */
   readonly active = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground hover:bg-accent hover:text-accent-foreground flex w-full items-center rounded-md px-3 py-2 text-base font-medium transition-colors outline-none',
       'aria-[current=page]:bg-accent aria-[current=page]:text-accent-foreground',

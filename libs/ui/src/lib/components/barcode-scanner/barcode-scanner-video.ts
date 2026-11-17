@@ -18,7 +18,7 @@ export class ScBarcodeScannerVideo {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'block size-full bg-black object-cover',
       this.scanner.camera() === 'user' && '-scale-x-100',

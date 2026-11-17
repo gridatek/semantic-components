@@ -57,9 +57,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class EmailsTagsInputDemo {
-  readonly emails = signal<string[]>(['ada@example.com']);
+  private readonly emails = signal<string[]>(['ada@example.com']);
 
   /** An address, not invited yet. */
-  readonly isEmail: ScTagsInputAccept = (tag, tags) =>
+  private readonly isEmail: ScTagsInputAccept = (tag, tags) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(tag) && !tags.includes(tag);
 }

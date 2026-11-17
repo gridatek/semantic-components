@@ -259,23 +259,23 @@ function counts(tests: Test[]): string {
   encapsulation: ViewEncapsulation.None,
 })
 export class TestResultsUsageDemo {
-  protected readonly suites = SUITES;
-  protected readonly allTests = SUITES.flatMap((suite) => suite.tests);
-  protected readonly failed = failed;
-  protected readonly counts = counts;
+  private readonly suites = SUITES;
+  private readonly allTests = SUITES.flatMap((suite) => suite.tests);
+  private readonly failed = failed;
+  private readonly counts = counts;
   private readonly answer =
     'One test failed. The payment client does not retry a declined card, so the second charge attempt never happens.';
 
-  protected readonly state = signal<'running' | 'ran' | null>('ran');
-  protected readonly reply = signal(this.answer);
-  protected readonly busy = signal(false);
+  private readonly state = signal<'running' | 'ran' | null>('ran');
+  private readonly reply = signal(this.answer);
+  private readonly busy = signal(false);
   private timers: ReturnType<typeof setTimeout>[] = [];
 
   constructor() {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected replay(): void {
+  private replay(): void {
     this.stop();
     this.state.set(null);
     this.reply.set('');

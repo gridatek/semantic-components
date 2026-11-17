@@ -18,7 +18,7 @@ import { DisabledTimeInputDemo } from './disabled-time-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledTimeInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScLabel, ScTimeInput } from '@semantic-components/ui';
 
 /** disabled: shown, not edited — out of the tab order. */

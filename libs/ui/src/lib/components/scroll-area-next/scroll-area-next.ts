@@ -90,7 +90,7 @@ export class ScScrollAreaNext {
 
   private timer: ReturnType<typeof setTimeout> | undefined;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative overflow-hidden', this.classInput()),
   );
 

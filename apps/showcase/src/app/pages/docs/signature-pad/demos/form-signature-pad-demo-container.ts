@@ -18,7 +18,7 @@ import { FormSignaturePadDemo } from './form-signature-pad-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormSignaturePadDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
   ScButton,

@@ -18,7 +18,7 @@ import { BasicTransferListDemo } from './basic-transfer-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTransferListDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
+  private readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTransferList,

@@ -28,13 +28,14 @@ import { SC_AUTOCOMPLETE, SC_AUTOCOMPLETE_INPUT } from './autocomplete-tokens';
   },
 })
 export class ScAutocompleteInput {
-  protected readonly autocomplete = inject(SC_AUTOCOMPLETE);
-  readonly combobox = inject(Combobox);
-  readonly elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef);
+  private readonly autocomplete = inject(SC_AUTOCOMPLETE);
+  private readonly combobox = inject(Combobox);
+  private readonly elementRef =
+    inject<ElementRef<HTMLInputElement>>(ElementRef);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('', this.classInput()));
+  private readonly class = computed(() => cn('', this.classInput()));
 
   constructor() {
     bindInput(this.combobox.disabled, this.autocomplete.disabled);

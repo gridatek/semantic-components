@@ -25,8 +25,8 @@ import { ScComboboxChip } from './combobox-chip';
 })
 export class ScComboboxChipRemove {
   private readonly preset = injectPreset();
-  protected readonly root = inject(ScComboboxBase);
-  protected readonly chip = inject(ScComboboxChip);
+  private readonly root = inject(ScComboboxBase);
+  private readonly chip = inject(ScComboboxChip);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -36,7 +36,7 @@ export class ScComboboxChipRemove {
     ɵwarnIfUnnamed('scComboboxChipRemove');
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.preset.button({ variant: this.variant(), size: this.size() }),
       this.preset.combobox.chipRemove,

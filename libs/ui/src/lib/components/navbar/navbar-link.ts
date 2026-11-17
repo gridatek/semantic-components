@@ -15,7 +15,7 @@ export class ScNavbarLink {
   /** The page shown. */
   readonly active = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground hover:text-foreground rounded-md text-sm font-medium transition-colors outline-none',
       'aria-[current=page]:text-foreground',

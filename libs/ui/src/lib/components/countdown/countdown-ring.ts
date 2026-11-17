@@ -52,11 +52,11 @@ export class ScCountdownRing {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** The share left, in percent. */
-  protected readonly left = computed(
+  private readonly left = computed(
     () => (this.countdown.progress() ?? 1) * 100,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative inline-grid size-40 place-items-center', this.classInput()),
   );
 }

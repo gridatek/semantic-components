@@ -96,12 +96,12 @@ import { SiMinusIcon, SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormOtpFieldDemo {
-  protected readonly otpForm = form(signal({ code: '' }), (path) => {
+  private readonly otpForm = form(signal({ code: '' }), (path) => {
     required(path.code, { message: 'Enter the code.' });
     minLength(path.code, 6, { message: 'Enter all 6 digits.' });
   });
 
-  protected verify(): void {
+  private verify(): void {
     this.otpForm.code().markAsTouched();
   }
 }

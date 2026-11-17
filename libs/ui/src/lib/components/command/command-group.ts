@@ -26,11 +26,11 @@ export class ScCommandGroup {
   /** Its label's id. */
   readonly labelId = signal<string | null>(null);
 
-  protected readonly shown = computed(() =>
+  private readonly shown = computed(() =>
     this.command.shownItems().some((item) => item.group === this),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.group, this.classInput()),
   );
 }

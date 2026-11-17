@@ -10,7 +10,7 @@ import { cn } from 'cn';
 export class ScAvatarGroup {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       '*:data-[slot=avatar]:ring-background group/avatar-group flex -space-x-2 rtl:space-x-reverse *:data-[slot=avatar]:ring-2',
       this.classInput(),

@@ -18,7 +18,7 @@ import { RtlSelectDemo } from './rtl-select-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSelectDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSelect,

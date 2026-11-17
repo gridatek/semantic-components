@@ -32,11 +32,11 @@ export class ScInputGroupAddon {
   /** Its side of the control: `inline-start` (default), `inline-end`, `top`, `bottom`. */
   readonly side = input<ScInputGroupAddonSide>('inline-start');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles({ side: this.side() }), this.classInput()),
   );
 
-  protected focusControl(event: MouseEvent): void {
+  private focusControl(event: MouseEvent): void {
     if ((event.target as HTMLElement).closest('button, a, [tabindex]')) return;
     this.element.nativeElement.parentElement
       ?.querySelector<HTMLElement>('[data-slot=control]')

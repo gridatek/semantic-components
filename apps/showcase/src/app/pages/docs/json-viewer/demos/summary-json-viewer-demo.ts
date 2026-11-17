@@ -19,7 +19,7 @@ import { ScJsonViewer, ScJsonViewerSummary } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class SummaryJsonViewerDemo {
-  readonly order = {
+  private readonly order = {
     number: 'A-1024',
     paid: true,
     total: 59.9,

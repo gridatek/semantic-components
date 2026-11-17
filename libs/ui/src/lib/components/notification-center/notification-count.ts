@@ -18,14 +18,14 @@ import { SC_NOTIFICATION_CENTER } from './notification-center';
   },
 })
 export class ScNotificationCount {
-  protected readonly center = inject(SC_NOTIFICATION_CENTER);
+  private readonly center = inject(SC_NOTIFICATION_CENTER);
   private readonly locale = inject(LOCALE_ID);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The most shown; beyond it, `max`+. */
   readonly max = input(99);
 
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     const count = this.center.unreadCount();
     const format = new Intl.NumberFormat(this.locale);
     return count > this.max()
@@ -33,7 +33,7 @@ export class ScNotificationCount {
       : format.format(count);
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // A counter, not a label: a filled pill in every preset (sera's badges
       // are bare text).

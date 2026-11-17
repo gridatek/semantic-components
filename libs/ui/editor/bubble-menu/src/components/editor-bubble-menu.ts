@@ -34,7 +34,7 @@ export class ScEditorBubbleMenu {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // Placed as Floating UI asks, from the start (fixed, at 0 0, its own
       // width): the plugin measures it before setting these itself. Without,

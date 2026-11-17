@@ -18,7 +18,7 @@ import { StackedToastDemo } from './stacked-toast-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StackedToastDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScButton, ScToaster } from '@semantic-components/ui';
 
 /** Toasts stack, the newest in front; hover or focus them to spread them out. */

@@ -18,7 +18,7 @@ import { StepsNumberFieldDemo } from './steps-number-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export default class StepsNumberFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScLabel,
   ScNumberField,

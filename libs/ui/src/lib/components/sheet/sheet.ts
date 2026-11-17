@@ -28,13 +28,13 @@ import { ScSheetProvider } from './sheet-provider';
 })
 export class ScSheet {
   private readonly styles = injectPreset().sheet;
-  protected readonly sheet = inject(ScSheetProvider);
+  private readonly sheet = inject(ScSheetProvider);
   // Created as it opens: its provider's direction and language then.
-  protected readonly direction = this.sheet.direction();
-  protected readonly lang = this.sheet.lang();
+  private readonly direction = this.sheet.direction();
+  private readonly lang = this.sheet.lang();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.content, this.styles.close, this.classInput()),
   );
 }

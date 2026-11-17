@@ -54,7 +54,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DestructiveCodeBlockDemo {
-  readonly error = `Error: Cannot find module './config'
+  private readonly error = `Error: Cannot find module './config'
     at resolve (node:internal/modules/cjs/loader:1145:15)
     at load (src/app.ts:3:1)`;
 }

@@ -47,7 +47,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalTimelineDemo {
-  readonly roadmap = [
+  private readonly roadmap = [
     {
       title: 'Research',
       text: 'What the best do.',

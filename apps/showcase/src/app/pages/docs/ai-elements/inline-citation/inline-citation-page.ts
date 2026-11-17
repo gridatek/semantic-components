@@ -74,7 +74,7 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class InlineCitationPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScPreviewCardProvider, ScPreviewCardTrigger, ScPreviewCardPortal, ScPreviewCard,',

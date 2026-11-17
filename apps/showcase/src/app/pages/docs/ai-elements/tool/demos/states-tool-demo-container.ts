@@ -18,7 +18,7 @@ import { StatesToolDemo } from './states-tool-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StatesToolDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

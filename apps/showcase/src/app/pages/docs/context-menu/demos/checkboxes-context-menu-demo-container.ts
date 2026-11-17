@@ -18,7 +18,7 @@ import { CheckboxesContextMenuDemo } from './checkboxes-context-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxesContextMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScContextMenu,
   ScContextMenuTrigger,

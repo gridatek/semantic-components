@@ -23,19 +23,19 @@ import { ScSignaturePad } from './signature-pad';
   },
 })
 export class ScSignaturePadText {
-  protected readonly pad = inject(ScSignaturePad);
+  private readonly pad = inject(ScSignaturePad);
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** The typed name; empty while the signature is drawn. */
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     const value = this.pad.value();
     return isTyped(value) ? value.text : '';
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'border-input placeholder:text-muted-foreground h-14 w-full min-w-0 rounded-md border bg-transparent px-3 text-2xl shadow-xs outline-none',
       'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
@@ -44,7 +44,7 @@ export class ScSignaturePadText {
     ),
   );
 
-  protected onInput(): void {
+  private onInput(): void {
     this.pad.ɵsetText(
       this.element.value,
       getComputedStyle(this.element).fontFamily,

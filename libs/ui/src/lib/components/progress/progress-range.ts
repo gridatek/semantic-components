@@ -27,11 +27,11 @@ const SLIDE_TIME = 1500;
   },
 })
 export class ScProgressRange {
-  protected readonly progress = inject(ScProgress);
+  private readonly progress = inject(ScProgress);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-primary h-full transition-[width]',
       this.progress.indeterminate() &&

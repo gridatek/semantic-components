@@ -42,12 +42,12 @@ export class ScBarcodeScannerOverlay {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly viewBox = computed(() => {
+  private readonly viewBox = computed(() => {
     const { width, height } = this.scanner.ɵsize();
     return `0 0 ${width || 1} ${height || 1}`;
   });
 
-  protected readonly shapes = computed(() =>
+  private readonly shapes = computed(() =>
     this.scanner
       .codes()
       .map((code) =>
@@ -55,7 +55,7 @@ export class ScBarcodeScannerOverlay {
       ),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-0 size-full text-emerald-400',
       this.scanner.camera() === 'user' && '-scale-x-100',

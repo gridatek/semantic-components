@@ -18,7 +18,7 @@ import { BasicTreeTableDemo } from './basic-tree-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTreeTableDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   createColumnHelper,
   createExpandedRowModel,
   injectTable,

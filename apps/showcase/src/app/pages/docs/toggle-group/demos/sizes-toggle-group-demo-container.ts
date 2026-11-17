@@ -18,7 +18,7 @@ import { SizesToggleGroupDemo } from './sizes-toggle-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesToggleGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 /** size: sm, default, lg — for every item. */

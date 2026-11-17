@@ -134,7 +134,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class TaskPage {
-  protected readonly comparison = [
+  private readonly comparison = [
     {
       aspect: 'Steps',
       plan: 'Every step, from the start',
@@ -157,7 +157,7 @@ export default class TaskPage {
     },
   ];
 
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle,',

@@ -33,7 +33,7 @@ export class ScTimelineMarker {
   /** An error, a failure: in the destructive colour. */
   readonly variant = input<'default' | 'destructive'>('default');
 
-  protected readonly dot = computed(() => {
+  private readonly dot = computed(() => {
     const status = this.item.status();
     return cn(
       'relative z-10 grid size-3 shrink-0 place-items-center rounded-full has-[svg]:size-6 [&_svg]:size-3.5',
@@ -47,7 +47,7 @@ export class ScTimelineMarker {
     );
   });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const solid = this.item.status() === 'done';
     const line = cn(
       'after:border-solid',

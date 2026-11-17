@@ -18,7 +18,7 @@ import { DetailsSubagentDemo } from './details-subagent-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DetailsSubagentDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBadge,
   ScCollapsible,

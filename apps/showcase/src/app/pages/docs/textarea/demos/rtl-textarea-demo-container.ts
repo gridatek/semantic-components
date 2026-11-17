@@ -18,7 +18,7 @@ import { RtlTextareaDemo } from './rtl-textarea-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTextareaDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScField,

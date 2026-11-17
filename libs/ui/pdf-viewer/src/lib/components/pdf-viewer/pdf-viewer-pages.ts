@@ -21,7 +21,7 @@ export class ScPdfViewerPages {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** The pages being dragged. */
   readonly dragged = signal<readonly number[]>([]);
@@ -51,7 +51,7 @@ export class ScPdfViewerPages {
     this.dropTarget.set(null);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const viewer = this.pdfViewer;
     const selection = viewer.pageSelection();
     const mod = event.ctrlKey || event.metaKey;

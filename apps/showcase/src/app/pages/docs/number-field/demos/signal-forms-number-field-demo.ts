@@ -70,13 +70,13 @@ export class SignalFormsNumberFieldDemo {
   });
   private readonly ordered = signal<number | null>(null);
 
-  readonly orderForm = form(this.order, (path) => {
+  private readonly orderForm = form(this.order, (path) => {
     required(path.quantity, { message: 'Enter a quantity.' });
     min(path.quantity, 1, { message: 'At least 1.' });
     max(path.quantity, 100, { message: 'At most 100.' });
   });
 
-  protected readonly state = computed(() =>
+  private readonly state = computed(() =>
     JSON.stringify(
       {
         value: this.order().quantity,
@@ -89,7 +89,7 @@ export class SignalFormsNumberFieldDemo {
     ),
   );
 
-  protected placeOrder(event: Event): void {
+  private placeOrder(event: Event): void {
     event.preventDefault();
     const quantity = this.orderForm.quantity();
     if (quantity.invalid()) {

@@ -38,7 +38,7 @@ export class ScTagsInputItem {
   /** Its place among the tags. */
   readonly index = computed(() => this.tags.items().indexOf(this));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.badgeStyles({ variant: 'secondary' }),
       'max-w-48 gap-0.5 pe-0.5 outline-none [&>span]:truncate',
@@ -57,7 +57,7 @@ export class ScTagsInputItem {
     this.tags.removeAt(this.index());
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (event.target !== this.element) return;
     const index = this.index();
     const last = this.tags.items().length - 1;

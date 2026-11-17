@@ -18,7 +18,7 @@ import { CoverImageCropperDemo } from './cover-image-cropper-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CoverImageCropperDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScImageCropper,
   ScImageCropperGrid,

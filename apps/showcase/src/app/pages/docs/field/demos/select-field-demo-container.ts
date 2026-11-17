@@ -18,7 +18,7 @@ import { SelectFieldDemo } from './select-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,

@@ -18,7 +18,7 @@ import { PromiseToastDemo } from './promise-toast-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PromiseToastDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScButton, ScToaster } from '@semantic-components/ui';
 
 /** One toast while a promise runs, then its result: loading, success or error. */

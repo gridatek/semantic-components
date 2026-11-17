@@ -18,7 +18,7 @@ import { SplitDiffViewerDemo } from './split-diff-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SplitDiffViewerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import {
   ScCodeBlock,

@@ -16,11 +16,11 @@ import { editorSearch } from './editor-search-state';
   },
 })
 export class ScEditorSearchPrevious {
-  protected readonly search = editorSearch(inject(SC_EDITOR));
+  private readonly search = editorSearch(inject(SC_EDITOR));
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
-  protected readonly disabled = computed(() => !this.search.count());
+  private readonly class = computed(() => cn(this.classInput()));
+  private readonly disabled = computed(() => !this.search.count());
 
   constructor() {
     ɵeditorControl({ disabled: this.disabled });

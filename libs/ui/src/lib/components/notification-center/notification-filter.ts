@@ -18,18 +18,18 @@ import type { ScNotificationFilterValue } from './notification-types';
   },
 })
 export class ScNotificationFilter {
-  protected readonly center = inject(SC_NOTIFICATION_CENTER);
+  private readonly center = inject(SC_NOTIFICATION_CENTER);
 
   readonly value = input.required<ScNotificationFilterValue>({
     alias: 'scNotificationFilter',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly pressed = computed(
+  private readonly pressed = computed(
     () => this.center.filter() === this.value(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 rounded-md px-2.5 py-1 text-xs font-medium outline-none transition-colors focus-visible:ring-3',
       'aria-pressed:bg-background aria-pressed:text-foreground aria-pressed:shadow-sm',

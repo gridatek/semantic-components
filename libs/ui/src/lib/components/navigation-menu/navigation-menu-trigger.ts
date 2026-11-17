@@ -26,11 +26,11 @@ import { ScNavigationMenuItem } from './navigation-menu-item';
   },
 })
 export class ScNavigationMenuTrigger {
-  protected readonly menu = inject(ScNavigationMenu);
-  protected readonly item = inject(ScNavigationMenuItem);
+  private readonly menu = inject(ScNavigationMenu);
+  private readonly item = inject(ScNavigationMenuItem);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.menu.styles.trigger, this.classInput()),
   );
 

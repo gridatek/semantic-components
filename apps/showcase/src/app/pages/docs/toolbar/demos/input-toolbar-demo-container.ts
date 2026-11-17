@@ -18,7 +18,7 @@ import { InputToolbarDemo } from './input-toolbar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputToolbarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScInput,

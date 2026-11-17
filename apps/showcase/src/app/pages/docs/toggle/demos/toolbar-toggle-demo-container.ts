@@ -18,7 +18,7 @@ import { ToolbarToggleDemo } from './toolbar-toggle-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ToolbarToggleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScFrame, ScToggle } from '@semantic-components/ui';
 import {
   SiBoldIcon,

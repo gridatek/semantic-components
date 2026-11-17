@@ -14,7 +14,7 @@ import { TypesetUsageDemo } from './typeset-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TypesetUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 
 /** Rendered content in a typeset container: plain elements, no directives. */
 @Component({

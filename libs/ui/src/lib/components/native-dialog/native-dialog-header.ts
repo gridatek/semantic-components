@@ -10,7 +10,7 @@ import { cn } from 'cn';
 export class ScNativeDialogHeader {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('gap-2 flex flex-col', this.classInput()),
   );
 }

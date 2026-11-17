@@ -74,7 +74,7 @@ export class ScLightbox {
   readonly ɵdialog = signal<HTMLDialogElement | null>(null);
   readonly ɵimage = signal<HTMLImageElement | null>(null);
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   constructor() {
     // Open and closed: the dialog follows.

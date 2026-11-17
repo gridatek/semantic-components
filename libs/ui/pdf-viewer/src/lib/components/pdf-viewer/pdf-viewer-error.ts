@@ -18,10 +18,10 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   },
 })
 export class ScPdfViewerError {
-  readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('bg-background absolute inset-0 z-10', this.classInput()),
   );
 }

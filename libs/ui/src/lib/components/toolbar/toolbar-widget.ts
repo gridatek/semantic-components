@@ -19,7 +19,7 @@ export class ScToolbarWidget {
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Raised while focused: its focus ring over its neighbours'.
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('focus-visible:z-10', this.classInput()),
   );
 }

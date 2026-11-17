@@ -98,7 +98,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewAccountAccess {
-  protected readonly access = form(
+  private readonly access = form(
     signal({ email: 'artist@studio.inc', password: '' }),
   );
 }

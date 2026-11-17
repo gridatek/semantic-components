@@ -34,11 +34,11 @@ const MAX_WIDTH = 500;
   },
 })
 export class ScPdfViewerSidebarResizer {
-  readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   private readonly document = inject(DOCUMENT);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'hover:bg-primary/20 data-resizing:bg-primary/20 focus-visible:ring-ring/50 flex w-1.5 shrink-0 cursor-col-resize touch-none items-center justify-center outline-none focus-visible:ring-3',
       // The grip.
@@ -47,9 +47,9 @@ export class ScPdfViewerSidebarResizer {
     ),
   );
 
-  protected readonly minWidth = MIN_WIDTH;
-  protected readonly maxWidth = MAX_WIDTH;
-  protected readonly resizing = signal(false);
+  private readonly minWidth = MIN_WIDTH;
+  private readonly maxWidth = MAX_WIDTH;
+  private readonly resizing = signal(false);
   private startX = 0;
   private startWidth = 0;
 
@@ -70,7 +70,7 @@ export class ScPdfViewerSidebarResizer {
     inject(DestroyRef).onDestroy(this.onPointerUp);
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     event.preventDefault();
     this.resizing.set(true);
     this.startX = event.clientX;
@@ -79,7 +79,7 @@ export class ScPdfViewerSidebarResizer {
     this.document.addEventListener('pointerup', this.onPointerUp);
   }
 
-  protected onKeyDown(event: KeyboardEvent): void {
+  private onKeyDown(event: KeyboardEvent): void {
     const step = event.shiftKey ? 20 : 5;
     const width = this.pdfViewer.sidebarWidth();
     if (event.key === 'ArrowLeft') {

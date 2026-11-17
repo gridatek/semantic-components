@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScStatCardLabel {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground flex basis-full items-center gap-2 font-medium',
       this.classInput(),

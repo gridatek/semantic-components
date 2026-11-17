@@ -18,7 +18,7 @@ import { RtlAttachmentDemo } from './rtl-attachment-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlAttachmentDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScAttachment,

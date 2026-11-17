@@ -24,7 +24,7 @@ export class ScTraceLine {
   readonly status = input<ScTraceLineStatus>();
 
   // Pending dims the icon, not the text: the text keeps its 4.5:1.
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.line, this.classInput()),
   );
 }

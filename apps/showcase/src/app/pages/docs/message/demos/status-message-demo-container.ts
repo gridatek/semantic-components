@@ -18,7 +18,7 @@ import { StatusMessageDemo } from './status-message-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StatusMessageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

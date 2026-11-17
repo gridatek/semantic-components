@@ -100,9 +100,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormDatePickerDemo {
-  readonly model = signal<{ arrival: ScCalendarValue }>({ arrival: null });
-  readonly booked = signal('');
-  readonly bookingForm = form(
+  private readonly model = signal<{ arrival: ScCalendarValue }>({
+    arrival: null,
+  });
+  private readonly booked = signal('');
+  private readonly bookingForm = form(
     this.model,
     (s) => required(s.arrival, { message: 'Pick your arrival.' }),
     {

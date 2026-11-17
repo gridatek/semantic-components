@@ -21,20 +21,20 @@ import { SC_EMOJI_FONT_FAMILY, skinToneVariation } from './emoji-picker-data';
   },
 })
 export class ScEmojiPickerSkinTone {
-  protected readonly picker = inject(ScEmojiPicker);
+  private readonly picker = inject(ScEmojiPicker);
 
   /** The emoji showing the tone. */
   readonly emoji = input('✋', { alias: 'scEmojiPickerSkinTone' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly font = SC_EMOJI_FONT_FAMILY;
+  private readonly font = SC_EMOJI_FONT_FAMILY;
 
   /** The emoji in the current skin tone. */
   readonly variation = computed(() =>
     skinToneVariation(this.emoji() || '✋', this.picker.skinTone()),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'hover:bg-accent focus-visible:ring-ring/50 flex size-7 shrink-0 items-center justify-center rounded-sm text-base outline-none focus-visible:ring-3',
       this.classInput(),

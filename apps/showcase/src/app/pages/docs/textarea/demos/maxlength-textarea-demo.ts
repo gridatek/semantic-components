@@ -25,8 +25,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MaxlengthTextareaDemo {
-  readonly formModel = signal({ description: '' });
-  readonly descForm = form(this.formModel, (s) => {
+  private readonly formModel = signal({ description: '' });
+  private readonly descForm = form(this.formModel, (s) => {
     maxLength(s.description, 200);
   });
 }

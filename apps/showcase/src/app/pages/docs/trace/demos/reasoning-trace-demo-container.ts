@@ -18,7 +18,7 @@ import { ReasoningTraceDemo } from './reasoning-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ReasoningTraceDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

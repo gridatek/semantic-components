@@ -18,7 +18,7 @@ import { ScrollFadeScrollAreaNextDemo } from './scroll-fade-scroll-area-next-dem
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollFadeScrollAreaNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScScrollAreaNext,

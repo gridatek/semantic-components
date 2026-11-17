@@ -30,15 +30,15 @@ import { ScComboboxBase } from './combobox-base';
 })
 export class ScComboboxItem<T = unknown> {
   private readonly styles = injectPreset().combobox;
-  protected readonly root = inject<ScComboboxBase<T>>(ScComboboxBase);
+  private readonly root = inject<ScComboboxBase<T>>(ScComboboxBase);
   private readonly option = inject<Option<T>>(Option);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
-  protected readonly onPointerMove = useActiveOption(this.option);
+  private readonly onPointerMove = useActiveOption(this.option);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.item, this.classInput()),
   );
 

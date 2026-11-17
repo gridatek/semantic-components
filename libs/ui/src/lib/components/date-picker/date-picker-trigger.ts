@@ -37,9 +37,9 @@ export class ScDatePickerTrigger {
   private readonly groupButtonStyles = injectPreset().inputGroupButton;
   private readonly triggerStyles = injectPreset().select.trigger;
 
-  protected readonly popover = inject(ScPopoverProvider);
-  protected readonly picker = inject(ScDatePicker);
-  protected readonly group = inject(ScInputGroup, { optional: true });
+  private readonly popover = inject(ScPopoverProvider);
+  private readonly picker = inject(ScDatePicker);
+  private readonly group = inject(ScInputGroup, { optional: true });
   readonly overlayOrigin = inject(CdkOverlayOrigin);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -49,7 +49,7 @@ export class ScDatePickerTrigger {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly buttonSize = input<ScInputGroupButtonSize>('icon-xs');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     this.group
       ? cn(
           this.buttonStyles({ variant: this.variant() }),

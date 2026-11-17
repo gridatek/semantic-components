@@ -19,5 +19,5 @@ export class ScNativeDialogProvider {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly open = model<boolean>(false);
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly class = computed(() => cn('contents', this.classInput()));
 }

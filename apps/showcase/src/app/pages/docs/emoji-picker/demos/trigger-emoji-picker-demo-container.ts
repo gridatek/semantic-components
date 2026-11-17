@@ -18,7 +18,7 @@ import { TriggerEmojiPickerDemo } from './trigger-emoji-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TriggerEmojiPickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 import {
   ScButton,
   type ScEmoji,

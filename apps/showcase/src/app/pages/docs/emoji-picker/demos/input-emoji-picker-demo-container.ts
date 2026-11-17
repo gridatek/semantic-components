@@ -18,7 +18,7 @@ import { InputEmojiPickerDemo } from './input-emoji-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputEmojiPickerDemoContainer {
-  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+  private readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   Component,
   ElementRef,

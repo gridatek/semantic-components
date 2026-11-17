@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScFileUploadItemName {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('min-w-0 flex-1 truncate font-medium', this.classInput()),
   );
 }

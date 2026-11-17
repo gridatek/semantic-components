@@ -77,8 +77,8 @@ interface Meeting extends ScSchedulerEventData {
   encapsulation: ViewEncapsulation.None,
 })
 export class MonthSchedulerDemo {
-  readonly events = eventsAroundToday();
-  readonly selected = signal<Meeting | null>(null);
+  private readonly events = eventsAroundToday();
+  private readonly selected = signal<Meeting | null>(null);
 }
 
 /** Around today, in your time zone. */

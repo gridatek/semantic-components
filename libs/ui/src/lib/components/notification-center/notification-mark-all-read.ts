@@ -23,16 +23,16 @@ export class ScNotificationMarkAllRead {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  protected readonly center = inject(SC_NOTIFICATION_CENTER);
+  private readonly center = inject(SC_NOTIFICATION_CENTER);
 
-  protected readonly disabled = computed(() => !this.center.unreadCount());
+  private readonly disabled = computed(() => !this.center.unreadCount());
 
   constructor() {
     ɵwarnIfUnnamed('scNotificationMarkAllRead');

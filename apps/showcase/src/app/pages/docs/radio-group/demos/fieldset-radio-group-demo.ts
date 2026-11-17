@@ -47,5 +47,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FieldsetRadioGroupDemo {
-  protected readonly planForm = form(signal({ plan: 'monthly' }));
+  private readonly planForm = form(signal({ plan: 'monthly' }));
 }

@@ -14,7 +14,7 @@ import { ScrollAreaNext2UsageDemo } from './scroll-area-next2-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollAreaNext2UsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScScrollAreaNext2,

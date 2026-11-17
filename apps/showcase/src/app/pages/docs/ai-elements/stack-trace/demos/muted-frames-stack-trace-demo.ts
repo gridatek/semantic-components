@@ -74,6 +74,6 @@ const STACK = `TypeError: Cannot read properties of undefined (reading 'total')
 })
 export class MutedFramesStackTraceDemo {
   private readonly lines = STACK.split('\n').map((line) => line.trim());
-  protected readonly error = this.lines[0];
-  protected readonly frames = this.lines.slice(1);
+  private readonly error = this.lines[0];
+  private readonly frames = this.lines.slice(1);
 }

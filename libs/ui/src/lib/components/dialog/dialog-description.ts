@@ -12,10 +12,10 @@ import { ScDialog } from './dialog';
 })
 export class ScDialogDescription {
   private readonly styles = injectPreset().dialog;
-  readonly dialog = inject(ScDialog);
+  private readonly dialog = inject(ScDialog);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.description, this.classInput()),
   );
 }

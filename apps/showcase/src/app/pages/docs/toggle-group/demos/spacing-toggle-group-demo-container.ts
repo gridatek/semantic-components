@@ -18,7 +18,7 @@ import { SpacingToggleGroupDemo } from './spacing-toggle-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SpacingToggleGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 
 /** spacing: the gap between the items (2 by default; 0 joins them). */

@@ -18,7 +18,7 @@ import { GroupBubbleDemo } from './group-bubble-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupBubbleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

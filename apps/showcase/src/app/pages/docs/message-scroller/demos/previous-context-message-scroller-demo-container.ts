@@ -18,7 +18,7 @@ import { PreviousContextMessageScrollerDemo } from './previous-context-message-s
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviousContextMessageScrollerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

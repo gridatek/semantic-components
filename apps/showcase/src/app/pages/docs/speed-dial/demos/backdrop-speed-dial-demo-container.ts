@@ -18,7 +18,7 @@ import { BackdropSpeedDialDemo } from './backdrop-speed-dial-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BackdropSpeedDialDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSpeedDial,
   ScSpeedDialAction,

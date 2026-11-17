@@ -18,7 +18,7 @@ import { AutoHighlightComboboxDemo } from './auto-highlight-combobox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AutoHighlightComboboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCombobox,
   ScComboboxEmpty,

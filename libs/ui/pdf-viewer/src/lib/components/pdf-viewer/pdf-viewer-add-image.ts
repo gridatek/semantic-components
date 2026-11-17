@@ -20,9 +20,9 @@ export class ScPdfViewerAddImage {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected add(event: Event): void {
+  private add(event: Event): void {
     const field = event.target as HTMLInputElement;
     const file = field.files?.[0];
     field.value = '';

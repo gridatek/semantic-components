@@ -24,5 +24,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DescriptionSwitchDemo {
-  protected readonly focusForm = form(signal({ share: false }));
+  private readonly focusForm = form(signal({ share: false }));
 }

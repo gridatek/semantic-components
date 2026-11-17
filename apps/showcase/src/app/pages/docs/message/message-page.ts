@@ -149,7 +149,7 @@ import { StatusMessageDemoContainer } from './demos/status-message-demo-containe
   encapsulation: ViewEncapsulation.None,
 })
 export default class MessagePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScMessageGroup, ScMessage, ScMessageAvatar, ScMessageContent,',
@@ -170,7 +170,7 @@ export default class MessagePage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScMessageGroup',
       selector: 'div[scMessageGroup]',

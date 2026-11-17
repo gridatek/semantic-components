@@ -88,7 +88,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class AppsDockDemo {
-  readonly apps = [
+  private readonly apps = [
     { name: 'Finder', icon: 'folder', open: true },
     { name: 'Safari', icon: 'compass', open: true },
     { name: 'Mail', icon: 'mail', open: true, badge: 3 },
@@ -96,5 +96,5 @@ export class AppsDockDemo {
     { name: 'Music', icon: 'music', open: false },
     { name: 'Terminal', icon: 'terminal', open: false },
   ];
-  readonly launched = signal('');
+  private readonly launched = signal('');
 }

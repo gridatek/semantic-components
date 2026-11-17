@@ -147,14 +147,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class AlignNavigationMenuDemo {
-  readonly aligns: readonly ScNavigationMenuAlign[] = [
+  private readonly aligns: readonly ScNavigationMenuAlign[] = [
     'start',
     'center',
     'end',
   ];
-  readonly align = signal<ScNavigationMenuAlign>('center');
+  private readonly align = signal<ScNavigationMenuAlign>('center');
 
-  readonly gettingStarted = [
+  private readonly gettingStarted = [
     {
       link: '/docs/getting-started/introduction',
       title: 'Introduction',
@@ -172,7 +172,7 @@ export class AlignNavigationMenuDemo {
     },
   ];
 
-  readonly components = [
+  private readonly components = [
     {
       link: '/docs/components/alert-dialog',
       title: 'Alert Dialog',

@@ -41,5 +41,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SingleToggleGroupDemo {
-  protected readonly alignment = signal(['start']);
+  private readonly alignment = signal(['start']);
 }

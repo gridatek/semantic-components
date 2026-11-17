@@ -61,12 +61,12 @@ interface PriceRangeFormModel {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormRangeSliderDemo {
-  readonly formModel = signal<PriceRangeFormModel>({
+  private readonly formModel = signal<PriceRangeFormModel>({
     minPrice: 100,
     maxPrice: 750,
   });
 
-  readonly priceForm = form(this.formModel, (path) => {
+  private readonly priceForm = form(this.formModel, (path) => {
     min(path.minPrice, 0);
     max(path.minPrice, 1000);
     min(path.maxPrice, 0);

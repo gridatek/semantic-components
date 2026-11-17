@@ -33,7 +33,9 @@ export class ScPaginationLink {
   readonly type = input<'button' | 'submit' | 'reset'>('button');
   readonly page = input<number>();
 
-  readonly variant = computed(() => (this.isActive() ? 'outline' : 'ghost'));
+  private readonly variant = computed(() =>
+    this.isActive() ? 'outline' : 'ghost',
+  );
 
   readonly size = input<ScButtonVariants['size']>('icon');
 
@@ -41,24 +43,24 @@ export class ScPaginationLink {
     transform: booleanAttribute,
   });
 
-  protected readonly isAnchor = computed(
+  private readonly isAnchor = computed(
     () => this.elementRef.nativeElement.tagName === 'A',
   );
 
-  protected readonly isActive = computed(() => {
+  private readonly isActive = computed(() => {
     const pageNum = this.page();
     if (pageNum === undefined || !this.pagination) return false;
     return pageNum === this.pagination.currentPage();
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  onClick(event: Event): void {
+  private onClick(event: Event): void {
     // A link follows its own href (yours: "?page=2", a routerLink), a button
     // does what its type says; disabled, neither.
     if (this.disabled()) {

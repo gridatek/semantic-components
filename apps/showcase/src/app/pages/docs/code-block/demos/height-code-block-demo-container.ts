@@ -18,7 +18,7 @@ import { HeightCodeBlockDemo } from './height-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeightCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockActions,

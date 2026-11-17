@@ -13,7 +13,7 @@ import { cn } from 'cn';
 export class ScPdfViewerToolbar {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex items-center gap-2 px-3 py-2 bg-background border-b',
       // Vertical separators (scSeparator): short and centered on the row.

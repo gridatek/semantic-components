@@ -17,12 +17,12 @@ import type { ScEmojiListRow as Row } from './emoji-picker-types';
   },
 })
 export class ScEmojiPickerRow {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly row = input.required<Row>({ alias: 'scEmojiPickerRow' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex scroll-my-1 px-1 [contain:content]', this.classInput()),
   );
 }

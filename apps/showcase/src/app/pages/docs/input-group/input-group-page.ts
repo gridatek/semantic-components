@@ -175,7 +175,7 @@ interface ScApiRow {
   encapsulation: ViewEncapsulation.None,
 })
 export default class InputGroupPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScInputGroup,',
@@ -205,7 +205,7 @@ export default class InputGroupPage {
     description: 'Classes merged over the preset (cn: a later class wins).',
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScInputGroup',
       selector: 'div[scInputGroup]',

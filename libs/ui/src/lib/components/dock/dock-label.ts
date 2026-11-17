@@ -15,7 +15,7 @@ export class ScDockLabel {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-popover text-popover-foreground pointer-events-none absolute rounded-md border px-2 py-1 text-xs font-medium whitespace-nowrap opacity-0 shadow-sm transition-opacity',
       'group-hover/dock-item:opacity-100 group-focus-visible/dock-item:opacity-100',

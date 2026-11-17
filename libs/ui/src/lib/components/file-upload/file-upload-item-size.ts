@@ -27,7 +27,7 @@ export class ScFileUploadItemSize {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     let size = this.item.file().size;
     let unit = 0;
     while (size >= 1000 && unit < UNITS.length - 1) {
@@ -43,7 +43,7 @@ export class ScFileUploadItemSize {
     }).format(size);
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground shrink-0 text-xs tabular-nums',
       this.classInput(),

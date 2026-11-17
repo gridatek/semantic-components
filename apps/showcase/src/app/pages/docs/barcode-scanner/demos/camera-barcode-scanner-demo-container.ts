@@ -18,7 +18,7 @@ import { CameraBarcodeScannerDemo } from './camera-barcode-scanner-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CameraBarcodeScannerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScBarcodeScanner,
   ScBarcodeScannerFinder,

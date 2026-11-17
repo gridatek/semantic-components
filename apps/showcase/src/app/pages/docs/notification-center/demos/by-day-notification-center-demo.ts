@@ -171,7 +171,7 @@ const hoursAgo = (hours: number) =>
   encapsulation: ViewEncapsulation.None,
 })
 export class ByDayNotificationCenterDemo {
-  readonly notifications = signal<Notice[]>([
+  private readonly notifications = signal<Notice[]>([
     {
       id: '1',
       title: 'New message from Alice',

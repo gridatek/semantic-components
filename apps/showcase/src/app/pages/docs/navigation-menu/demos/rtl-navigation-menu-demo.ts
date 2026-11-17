@@ -134,7 +134,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlNavigationMenuDemo {
-  readonly gettingStarted = [
+  private readonly gettingStarted = [
     {
       link: '/docs/getting-started/introduction',
       title: 'مقدمة',
@@ -152,7 +152,7 @@ export class RtlNavigationMenuDemo {
     },
   ];
 
-  readonly components = [
+  private readonly components = [
     {
       link: '/docs/components/alert-dialog',
       title: 'حوار التنبيه',

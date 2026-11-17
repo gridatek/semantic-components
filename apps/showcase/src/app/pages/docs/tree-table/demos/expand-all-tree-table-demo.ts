@@ -143,7 +143,7 @@ const FILES: FileNode[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ExpandAllTreeTableDemo {
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: FILES,

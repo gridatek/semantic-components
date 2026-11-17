@@ -27,15 +27,15 @@ import { ScPopoverProvider } from './popover-provider';
 })
 export class ScPopover {
   private readonly styles = injectPreset().popover;
-  protected readonly popover = inject(ScPopoverProvider);
+  private readonly popover = inject(ScPopoverProvider);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.popup, this.classInput()),
   );
 
   /** Opened by the pointer's hover: leaving it closes it. */
-  protected onPointerLeave(): void {
+  private onPointerLeave(): void {
     if (this.popover.openedByHover)
       this.popover.timing.closeSoon(this.popover.trigger()?.closeDelay() ?? 0);
   }

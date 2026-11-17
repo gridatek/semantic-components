@@ -41,11 +41,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormDateInputDemo {
-  readonly model = signal<{ birth: Temporal.PlainDate | null }>({
+  private readonly model = signal<{ birth: Temporal.PlainDate | null }>({
     birth: null,
   });
-  readonly born = signal('');
-  readonly signupForm = form(
+  private readonly born = signal('');
+  private readonly signupForm = form(
     this.model,
     (s) => required(s.birth, { message: 'Enter your date of birth.' }),
     {

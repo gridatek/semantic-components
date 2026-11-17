@@ -163,7 +163,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
   encapsulation: ViewEncapsulation.None,
 })
 export default class TabsPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTabs, ScTabsList, ScTabsTab, ScTabsPanel,',
@@ -182,7 +182,7 @@ export default class TabsPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScTabs',
       selector: '[scTabs]',

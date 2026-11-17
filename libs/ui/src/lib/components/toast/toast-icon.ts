@@ -14,10 +14,10 @@ import { SC_TOAST_CONTEXT } from './toast-context';
   },
 })
 export class ScToastIcon {
-  protected readonly context = inject(SC_TOAST_CONTEXT);
+  private readonly context = inject(SC_TOAST_CONTEXT);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       "flex shrink-0 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
       'data-[variant=loading]:[&_svg]:animate-spin',

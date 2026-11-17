@@ -247,7 +247,7 @@ export class ScChartBar implements ScChartSeriesLabels {
     easing: this.animationEasing,
   });
 
-  protected readonly color = computed(() => `var(--color-${this.key()})`);
+  private readonly color = computed(() => `var(--color-${this.key()})`);
 
   /** Its bars where they belong now: no entrance, no change under way. */
   private readonly targets = computed<ScBarChartTarget[]>(() => {
@@ -323,7 +323,7 @@ export class ScChartBar implements ScChartSeriesLabels {
     interpolate: stepBars,
   });
 
-  protected readonly bars = computed<ScBarChartBar[]>(() => {
+  private readonly bars = computed<ScBarChartBar[]>(() => {
     const values = this.state.valueScale();
     const vertical = this.state.vertical();
     const corners = this.corners();
@@ -380,7 +380,7 @@ export class ScChartBar implements ScChartSeriesLabels {
     });
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({

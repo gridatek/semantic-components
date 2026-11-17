@@ -116,7 +116,7 @@ import { RtlRadarChartDemoContainer } from './demos/rtl-radar-chart-demo-contain
   encapsulation: ViewEncapsulation.None,
 })
 export default class RadarChartPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScChart, ScChartPlot, ScChartPolarAngleAxis, ScChartPolarGrid, ScChartRadar, ScChartTooltip, ScChartTooltipIndicator, ScChartTooltipItem, ScChartTooltipName, ScChartTooltipPortal, ScChartTooltipProvider, ScChartTooltipValue, ScChartLegend, ScChartLegendIndicator, ScChartLegendItem } from '@semantic-components/ui/charts';",
     markup: [
@@ -147,7 +147,7 @@ export default class RadarChartPage {
     ].join('\n'),
   };
 
-  protected readonly inputs: ApiInput[] = [
+  private readonly inputs: ApiInput[] = [
     {
       name: 'key',
       type: 'string (required)',

@@ -14,7 +14,7 @@ import { ScButton, ScToaster } from '@semantic-components/ui';
 export class ToastUsageDemo {
   private readonly toaster = inject(ScToaster);
 
-  show(): void {
+  private show(): void {
     this.toaster.show({
       title: 'Event created',
       description: 'Sunday, December 3 at 9:00 AM',

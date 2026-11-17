@@ -76,7 +76,7 @@ export class ScImageAnnotator {
   /** What a gesture started from: its changes are one undo step. */
   private before: readonly Annotation[] | null = null;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col gap-3', this.classInput()),
   );
 
@@ -269,7 +269,7 @@ export class ScImageAnnotator {
   }
 
   /** Ctrl+Z, Ctrl+Shift+Z / Ctrl+Y — anywhere in the annotator but a text field. */
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (this.readonly() || !(event.ctrlKey || event.metaKey)) return;
     if ((event.target as Element).closest('input, textarea')) return;
     const key = event.key.toLowerCase();

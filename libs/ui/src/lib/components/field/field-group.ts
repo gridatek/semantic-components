@@ -13,7 +13,7 @@ export class ScFieldGroup {
   private readonly styles = injectPreset().field;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.group, this.classInput()),
   );
 }

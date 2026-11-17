@@ -124,23 +124,23 @@ import { DocsNavService } from '../../services/docs-nav-service';
 export class CommandPalette {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   /** The sidebar's groups, the same pages. */
   private readonly nav = inject(DocsNavService);
-  protected readonly commandPaletteService = inject(CommandPaletteService);
+  private readonly commandPaletteService = inject(CommandPaletteService);
 
   constructor() {
     // Mod+K: ⌘K on a Mac, Ctrl+K elsewhere — in a field too.
     injectHotkey('Mod+K', () => this.toggleOpen());
   }
 
-  toggleOpen(): void {
+  private toggleOpen(): void {
     this.commandPaletteService.toggle();
   }
 
   /** A result followed: the link navigates, the palette closes. */
-  protected close(): void {
+  private close(): void {
     this.commandPaletteService.open.set(false);
   }
 }

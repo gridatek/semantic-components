@@ -150,7 +150,7 @@ import { RtlAccordionDemoContainer } from './demos/rtl-accordion-demo-container'
   encapsulation: ViewEncapsulation.None,
 })
 export default class AccordionPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScAccordion, ScAccordionItem, ScAccordionHeader,',
@@ -175,7 +175,7 @@ export default class AccordionPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScAccordion',
       selector: '[scAccordion]',

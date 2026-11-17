@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScNotificationDescription {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-muted-foreground line-clamp-2 text-sm', this.classInput()),
   );
 }

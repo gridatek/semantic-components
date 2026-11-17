@@ -57,7 +57,7 @@ export class ScButton {
     transform: booleanAttribute,
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles({ variant: this.variant(), size: this.size() }),
       // The preset's aria-disabled blocks the pointer: a soft-disabled

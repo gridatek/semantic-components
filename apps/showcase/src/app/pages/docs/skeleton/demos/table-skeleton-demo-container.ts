@@ -18,7 +18,7 @@ import { TableSkeletonDemo } from './table-skeleton-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TableSkeletonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSkeleton } from '@semantic-components/ui';
 
 /** Rows of a table: a wide column, then two narrow ones. */

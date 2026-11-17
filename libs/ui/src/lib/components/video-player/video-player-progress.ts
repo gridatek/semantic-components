@@ -44,13 +44,13 @@ export class ScVideoPlayerProgress {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly loaded = computed(() => {
+  private readonly loaded = computed(() => {
     const duration = this.player.duration();
     return duration ? (this.player.buffered() / duration) * 100 : 0;
   });
 
   /** Where each chapter after the first starts, in percent. */
-  protected readonly marks = computed(() => {
+  private readonly marks = computed(() => {
     const duration = this.player.duration();
     if (!duration) return [];
     return this.player
@@ -59,7 +59,7 @@ export class ScVideoPlayerProgress {
       .map((chapter) => (chapter.start / duration) * 100);
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative flex h-5 items-center',
       // A small player: at its bottom edge, under the bar (as Vidstack's).

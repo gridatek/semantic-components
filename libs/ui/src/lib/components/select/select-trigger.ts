@@ -39,9 +39,9 @@ import { openOnTypeahead } from './select-typeahead';
   },
 })
 export class ScSelectTrigger {
-  protected readonly select = inject(SC_SELECT);
-  readonly combobox = inject(Combobox);
-  readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly select = inject(SC_SELECT);
+  private readonly combobox = inject(Combobox);
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
   private readonly styles = injectPreset().select;
   private readonly field = inject(SC_FIELD, { optional: true });
@@ -52,13 +52,13 @@ export class ScSelectTrigger {
   });
   readonly size = input<'default' | 'sm'>('default');
 
-  readonly id = computed(() => this.idInput());
+  private readonly id = computed(() => this.idInput());
   /** In a field, its description and errors. */
-  protected readonly describedBy = computed(
+  private readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     // As wide as the select (its root sets the width).
     cn(this.styles.trigger, 'w-full', this.classInput()),
   );
@@ -69,7 +69,7 @@ export class ScSelectTrigger {
   }
 
   /** Type-ahead while closed opens the list at the first match. */
-  protected onKeydown(event: Event): void {
+  private onKeydown(event: Event): void {
     openOnTypeahead(
       event as KeyboardEvent,
       this.combobox,

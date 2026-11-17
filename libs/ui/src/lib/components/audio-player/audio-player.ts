@@ -79,7 +79,7 @@ export class ScAudioPlayer<T extends ScAudioPlayerTrack = ScAudioPlayerTrack> {
   /** The track after this one, if any (with `repeat: 'all'`, round again). */
   readonly upcoming = computed(() => this.after(1));
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   private readonly durationFormat = new Intl.DurationFormat(this.locale, {
     style: 'digital',
@@ -198,7 +198,7 @@ export class ScAudioPlayer<T extends ScAudioPlayerTrack = ScAudioPlayerTrack> {
     });
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const target = event.target as HTMLElement;
     // Fields and sliders keep their keys; buttons keep Space and Enter.
     if (

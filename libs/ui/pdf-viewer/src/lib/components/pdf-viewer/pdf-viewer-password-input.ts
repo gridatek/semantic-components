@@ -19,8 +19,8 @@ import { ScPdfViewerPasswordForm } from './pdf-viewer-password-form';
   },
 })
 export class ScPdfViewerPasswordInput {
-  protected readonly form = inject(ScPdfViewerPasswordForm);
+  private readonly form = inject(ScPdfViewerPasswordForm);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

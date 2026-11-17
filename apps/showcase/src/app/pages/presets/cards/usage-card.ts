@@ -102,8 +102,8 @@ const CIRCUMFERENCE = 2 * Math.PI * 42.5;
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewUsageCard {
-  protected readonly circumference = CIRCUMFERENCE;
-  protected readonly items = [
+  private readonly circumference = CIRCUMFERENCE;
+  private readonly items = [
     { name: 'Edge Requests', value: '$1.83K', percentage: 67.34 },
     { name: 'Fast Data Transfer', value: '$952.51', percentage: 52.18 },
     { name: 'Monitoring data points', value: '$901.20', percentage: 89.42 },

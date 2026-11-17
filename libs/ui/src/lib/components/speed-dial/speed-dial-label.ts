@@ -18,7 +18,7 @@ export class ScSpeedDialLabel {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const direction = this.dial.direction();
     const vertical = direction === 'up' || direction === 'down';
     return cn(

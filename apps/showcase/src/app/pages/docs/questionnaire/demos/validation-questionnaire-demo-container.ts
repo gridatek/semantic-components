@@ -18,7 +18,7 @@ import { ValidationQuestionnaireDemo } from './validation-questionnaire-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ValidationQuestionnaireDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
+  private readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,

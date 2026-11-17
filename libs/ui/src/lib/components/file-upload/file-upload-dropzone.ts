@@ -22,13 +22,13 @@ import { ScFileUpload } from './file-upload';
   },
 })
 export class ScFileUploadDropzone {
-  protected readonly upload = inject(ScFileUpload);
+  private readonly upload = inject(ScFileUpload);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Files are dragged over it. */
-  readonly dragging = signal(false);
+  private readonly dragging = signal(false);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'border-input text-muted-foreground flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center text-sm transition-colors',
       'hover:bg-accent/50 data-dragging:border-primary data-dragging:bg-accent',
@@ -39,7 +39,7 @@ export class ScFileUploadDropzone {
     ),
   );
 
-  protected onDragOver(event: DragEvent): void {
+  private onDragOver(event: DragEvent): void {
     if (this.upload.disabled() || !this.hasFiles(event)) return;
     // Ours to take: not the browser's to open.
     event.preventDefault();
@@ -47,7 +47,7 @@ export class ScFileUploadDropzone {
     this.dragging.set(true);
   }
 
-  protected onDragLeave(event: DragEvent): void {
+  private onDragLeave(event: DragEvent): void {
     // Out of the zone — not into one of its children.
     const to = event.relatedTarget as Node | null;
     if (!to || !(event.currentTarget as Node).contains(to)) {
@@ -55,7 +55,7 @@ export class ScFileUploadDropzone {
     }
   }
 
-  protected onDrop(event: DragEvent): void {
+  private onDrop(event: DragEvent): void {
     this.dragging.set(false);
     if (this.upload.disabled() || !this.hasFiles(event)) return;
     event.preventDefault();
@@ -63,7 +63,7 @@ export class ScFileUploadDropzone {
     this.upload.touch.emit();
   }
 
-  protected onClick(event: MouseEvent): void {
+  private onClick(event: MouseEvent): void {
     // A button or link in it does its own thing (the trigger opens it).
     const target = event.target as Element;
     if (target.closest('button, a, input, label')) return;

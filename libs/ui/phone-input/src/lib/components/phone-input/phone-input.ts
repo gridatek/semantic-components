@@ -84,7 +84,7 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
   /** The last value this control produced, to tell outside writes apart. */
   private produced: string | undefined;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.groupStyles,
       // The country trigger sits flush in the group, with a divider.
@@ -144,7 +144,7 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
     this.numberInput()?.focus(options);
   }
 
-  protected onFocusout(event: FocusEvent): void {
+  private onFocusout(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
     if (!next || !this.host.nativeElement.contains(next)) this.touch.emit();
   }

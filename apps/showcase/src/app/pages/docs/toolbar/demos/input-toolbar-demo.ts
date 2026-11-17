@@ -58,9 +58,9 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputToolbarDemo {
-  protected readonly zoom = signal(100);
+  private readonly zoom = signal(100);
 
-  protected setZoom(event: Event): void {
+  private setZoom(event: Event): void {
     this.zoom.set((event.target as HTMLInputElement).valueAsNumber || 100);
   }
 }

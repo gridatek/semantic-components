@@ -78,5 +78,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DrawerUsageDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 }

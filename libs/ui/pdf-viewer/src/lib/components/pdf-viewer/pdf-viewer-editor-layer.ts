@@ -258,9 +258,9 @@ import type { ScPdfEditorAnnotation } from './pdf-viewer-types';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerEditorLayer {
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
-  protected readonly editor = inject(ScPdfEditor);
-  protected readonly host =
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly editor = inject(ScPdfEditor);
+  private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly page = input.required<number>({ alias: 'scPdfViewerEditorLayer' });
@@ -271,12 +271,12 @@ export class ScPdfViewerEditorLayer {
   readonly marker = input<TemplateRef<unknown> | null>(null);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('editorLayer absolute top-1/2 left-1/2 z-[5]', this.classInput()),
   );
 
   /** The resize handles of a selected image. */
-  protected readonly handles = [
+  private readonly handles = [
     { corner: 'nw', class: '-top-1.5 -left-1.5 cursor-nwse-resize' },
     { corner: 'ne', class: '-top-1.5 -right-1.5 cursor-nesw-resize' },
     { corner: 'sw', class: '-bottom-1.5 -left-1.5 cursor-nesw-resize' },
@@ -306,13 +306,13 @@ export class ScPdfViewerEditorLayer {
   }
 
   /** An image annotation's name: its alt text or description, if any. */
-  protected imageName(annotation: ScPdfEditorAnnotation): string | null {
+  private imageName(annotation: ScPdfEditorAnnotation): string | null {
     if (annotation.isDecorative) return null;
     return annotation.altText || annotation.description || null;
   }
 
   /** Points of a stroke for an SVG polyline (0–1 of the page). */
-  protected points(stroke: { x: number; y: number }[]): string {
+  private points(stroke: { x: number; y: number }[]): string {
     return stroke.map((p) => `${p.x},${p.y}`).join(' ');
   }
 }

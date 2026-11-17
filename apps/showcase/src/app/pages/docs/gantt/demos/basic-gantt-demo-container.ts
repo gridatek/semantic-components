@@ -18,7 +18,7 @@ import { BasicGanttDemo } from './basic-gantt-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicGanttDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   createColumnHelper,
   createExpandedRowModel,
   injectTable,

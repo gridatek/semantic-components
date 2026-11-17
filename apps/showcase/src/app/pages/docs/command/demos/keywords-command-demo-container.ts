@@ -18,7 +18,7 @@ import { KeywordsCommandDemo } from './keywords-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class KeywordsCommandDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCommand,
   ScCommandEmpty,

@@ -65,7 +65,7 @@ import { RtlCheckpointDemoContainer } from './demos/rtl-checkpoint-demo-containe
   encapsulation: ViewEncapsulation.None,
 })
 export default class CheckpointPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScMarker, ScMarkerContent, ScButton } from '@semantic-components/ui';",
     markup: [

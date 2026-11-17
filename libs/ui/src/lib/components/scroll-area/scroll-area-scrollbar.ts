@@ -37,7 +37,7 @@ export class ScScrollBar {
 
   readonly orientation = input.required<'vertical' | 'horizontal'>();
 
-  protected readonly isVertical = computed(
+  private readonly isVertical = computed(
     () => this.orientation() === 'vertical',
   );
 
@@ -47,7 +47,9 @@ export class ScScrollBar {
   private readonly trackSize = signal(0);
   private readonly dragging = signal(false);
 
-  readonly visible = computed(() => this.scrollSize() > this.viewportSize());
+  private readonly visible = computed(
+    () => this.scrollSize() > this.viewportSize(),
+  );
 
   private readonly thumbSizePx = computed(() => {
     const ss = this.scrollSize();
@@ -64,7 +66,7 @@ export class ScScrollBar {
     return (this.scrollPos() / maxScroll) * maxOffset;
   });
 
-  protected readonly thumbStyle = computed(() => {
+  private readonly thumbStyle = computed(() => {
     const size = this.thumbSizePx();
     const offset = this.thumbOffsetPx();
     if (this.isVertical()) {
@@ -116,7 +118,7 @@ export class ScScrollBar {
     });
   }
 
-  protected onTrackPointerDown(event: PointerEvent): void {
+  private onTrackPointerDown(event: PointerEvent): void {
     const viewport = this.scrollArea.viewport();
     if (!viewport) return;
 
@@ -141,7 +143,7 @@ export class ScScrollBar {
     }
   }
 
-  protected onThumbPointerDown(event: PointerEvent): void {
+  private onThumbPointerDown(event: PointerEvent): void {
     event.preventDefault();
     event.stopPropagation();
 
@@ -182,7 +184,7 @@ export class ScScrollBar {
     thumb.addEventListener('pointerup', onUp);
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute touch-none select-none transition-opacity',
       this.isVertical()
@@ -196,7 +198,7 @@ export class ScScrollBar {
     ),
   );
 
-  protected readonly thumbClass = computed(() =>
+  private readonly thumbClass = computed(() =>
     cn('rounded-full bg-border', this.isVertical() ? 'w-full' : 'h-full'),
   );
 }

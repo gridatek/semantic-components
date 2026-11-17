@@ -18,7 +18,7 @@ import { GroupTooltipDemo } from './group-tooltip-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupTooltipDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScTooltip,

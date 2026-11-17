@@ -115,7 +115,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewReceivingMethod {
-  protected readonly payout = form(
+  private readonly payout = form(
     signal({
       holder: 'Synthetic Horizons Music LLC',
       method: 'bank',

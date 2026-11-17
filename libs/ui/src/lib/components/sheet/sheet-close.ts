@@ -20,13 +20,13 @@ import { ScSheetProvider } from './sheet-provider';
 })
 export class ScSheetClose {
   private readonly buttonStyles = injectPreset().button;
-  protected readonly sheet = inject(ScSheetProvider);
+  private readonly sheet = inject(ScSheetProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly type = input<'button' | 'submit' | 'reset'>('button');
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

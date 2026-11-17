@@ -165,14 +165,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BoxImageCropperDemo {
-  readonly src = signal('/images/cropper-mountains.jpg');
-  readonly zoom = signal(1);
-  readonly result = signal<string | null>(null);
+  private readonly src = signal('/images/cropper-mountains.jpg');
+  private readonly zoom = signal(1);
+  private readonly result = signal<string | null>(null);
 
-  readonly percent = computed(() => Math.round(this.zoom() * 100));
-  readonly round = Math.round;
+  private readonly percent = computed(() => Math.round(this.zoom() * 100));
+  private readonly round = Math.round;
 
-  readonly handles = [
+  private readonly handles = [
     'top-left',
     'top',
     'top-right',
@@ -183,7 +183,7 @@ export class BoxImageCropperDemo {
     'left',
   ] as const;
 
-  readonly ratios = [
+  private readonly ratios = [
     { label: 'Free', value: null },
     { label: '1:1', value: 1 },
     { label: '4:3', value: 4 / 3 },
@@ -191,12 +191,12 @@ export class BoxImageCropperDemo {
   ];
 
   /** Your own image: shown from the file, not uploaded. */
-  open(event: Event): void {
+  private open(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) this.src.set(URL.createObjectURL(file));
   }
 
-  async crop(cropper: ScImageCropper): Promise<void> {
+  private async crop(cropper: ScImageCropper): Promise<void> {
     const blob = await cropper.crop({ type: 'image/png' });
     const previous = this.result();
     if (previous) URL.revokeObjectURL(previous);

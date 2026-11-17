@@ -19,7 +19,7 @@ import { ConstraintsDatePickerDemo } from './constraints-date-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ConstraintsDatePickerDemoContainer {
-  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+  private readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,

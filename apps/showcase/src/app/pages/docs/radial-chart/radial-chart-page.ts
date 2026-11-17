@@ -119,7 +119,7 @@ import { StackedRadialChartDemoContainer } from './demos/stacked-radial-chart-de
   encapsulation: ViewEncapsulation.None,
 })
 export default class RadialChartPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScChart, ScChartPlot, ScChartRadialBar, ScChartTooltip, ScChartTooltipIndicator, ScChartTooltipItem, ScChartTooltipName, ScChartTooltipPortal, ScChartTooltipProvider, ScChartTooltipValue } from '@semantic-components/ui/charts';",
     markup: [
@@ -142,7 +142,7 @@ export default class RadialChartPage {
     ].join('\n'),
   };
 
-  protected readonly inputs: ApiInput[] = [
+  private readonly inputs: ApiInput[] = [
     {
       name: 'key',
       type: 'string (required)',

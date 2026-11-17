@@ -327,11 +327,11 @@ type Segment = { code: boolean; text: string };
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeNewChat {
-  protected readonly messages = signal<readonly ChatMessage[]>([]);
+  private readonly messages = signal<readonly ChatMessage[]>([]);
   /** A question asked, its reply not yet complete. */
-  protected readonly busy = signal(false);
+  private readonly busy = signal(false);
   /** The next question of the script, or none. */
-  protected readonly next = computed(
+  private readonly next = computed(
     () =>
       SCRIPT[this.messages().filter((m) => m.role === 'user').length] ?? null,
   );
@@ -343,7 +343,7 @@ export class HomeNewChat {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected send(): void {
+  private send(): void {
     const turn = this.next();
     if (!turn || this.busy()) return;
     this.busy.set(true);
@@ -378,14 +378,14 @@ export class HomeNewChat {
     );
   }
 
-  protected reset(): void {
+  private reset(): void {
     this.stop();
     this.busy.set(false);
     this.messages.set([]);
   }
 
   /** A reply's paragraphs, each its text and inline code. */
-  protected paragraphs(text: string): Segment[][] {
+  private paragraphs(text: string): Segment[][] {
     return text.split('\n\n').map((paragraph) =>
       paragraph
         .split('`')

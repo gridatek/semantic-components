@@ -19,7 +19,7 @@ import { ScQuestionnaireItem } from './questionnaire-item';
 })
 export class ScQuestionnaireChoice {
   private readonly styles = injectPreset().questionnaire;
-  protected readonly item = inject(ScQuestionnaireItem);
+  private readonly item = inject(ScQuestionnaireItem);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -27,7 +27,7 @@ export class ScQuestionnaireChoice {
   readonly type = signal<'radio' | 'checkbox' | null>(null);
   readonly shortcut = signal<string | null>(null);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.choice, this.classInput()),
   );
 }

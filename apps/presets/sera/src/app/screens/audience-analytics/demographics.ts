@@ -118,6 +118,6 @@ export const SOURCES = [
   encapsulation: ViewEncapsulation.None,
 })
 export class Demographics {
-  protected readonly ages = AGES;
+  private readonly ages = AGES;
   private readonly sources = SOURCES;
 }

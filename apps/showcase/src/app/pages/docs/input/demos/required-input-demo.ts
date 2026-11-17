@@ -38,7 +38,7 @@ import {
 })
 export class RequiredInputDemo {
   private readonly model = signal({ name: '' });
-  protected readonly nameForm = form(this.model, (s) =>
+  private readonly nameForm = form(this.model, (s) =>
     required(s.name, { message: 'Fill this field out.' }),
   );
 }

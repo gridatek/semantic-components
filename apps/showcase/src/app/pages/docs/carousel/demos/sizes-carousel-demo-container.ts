@@ -18,7 +18,7 @@ import { SizesCarouselDemo } from './sizes-carousel-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesCarouselDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   ScCarousel,

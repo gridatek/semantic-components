@@ -18,7 +18,7 @@ import { BlockEndInputGroupDemo } from './block-end-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlockEndInputGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,

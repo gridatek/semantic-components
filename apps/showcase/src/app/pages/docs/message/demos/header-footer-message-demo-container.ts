@@ -18,7 +18,7 @@ import { HeaderFooterMessageDemo } from './header-footer-message-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderFooterMessageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

@@ -33,7 +33,7 @@ export class ScMultiselectList {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex max-h-44 flex-col gap-0.5 overflow-auto', this.classInput()),
   );
 

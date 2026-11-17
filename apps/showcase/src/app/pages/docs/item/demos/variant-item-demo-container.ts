@@ -18,7 +18,7 @@ import { VariantItemDemo } from './variant-item-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VariantItemDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScItem,
   ScItemBody,

@@ -18,7 +18,7 @@ import { RtlInputGroupDemo } from './rtl-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlInputGroupDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScField,

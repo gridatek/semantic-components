@@ -59,20 +59,20 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomCalendarDemo {
-  readonly date = signal<ScCalendarValue>(
+  private readonly date = signal<ScCalendarValue>(
     Temporal.PlainDate.from('2026-10-14'),
   );
-  readonly events: Record<string, number> = {
+  private readonly events: Record<string, number> = {
     '2026-10-06': 2,
     '2026-10-14': 1,
     '2026-10-22': 3,
   };
-  readonly previousLabel = {
+  private readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',

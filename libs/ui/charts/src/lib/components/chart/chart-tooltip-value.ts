@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScChartTooltipValue {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-foreground ms-auto self-center ps-4 font-mono font-medium tabular-nums',
       this.classInput(),

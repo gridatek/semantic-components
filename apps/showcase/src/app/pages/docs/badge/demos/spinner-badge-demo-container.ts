@@ -18,7 +18,7 @@ import { SpinnerBadgeDemo } from './spinner-badge-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SpinnerBadgeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScBadge, ScSpinner } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 

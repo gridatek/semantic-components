@@ -62,7 +62,7 @@ import { RtlConfirmationDemoContainer } from './demos/rtl-confirmation-demo-cont
   encapsulation: ViewEncapsulation.None,
 })
 export default class ConfirmationPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScItem, ScItemMedia, ScItemBody, ScItemTitle, ScItemDescription,',

@@ -14,7 +14,7 @@ import { AccordionUsageDemo } from './accordion-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AccordionUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
   ScAccordionHeader,

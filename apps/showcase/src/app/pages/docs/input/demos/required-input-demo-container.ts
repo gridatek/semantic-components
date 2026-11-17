@@ -18,7 +18,7 @@ import { RequiredInputDemo } from './required-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RequiredInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScField,

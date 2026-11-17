@@ -72,7 +72,7 @@ export class ScDataTableTreeGrid {
 
   private readonly elements = new Map<string, HTMLElement>();
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** A row's element, to focus it. */
   register(id: string, element: HTMLElement): () => void {
@@ -87,7 +87,7 @@ export class ScDataTableTreeGrid {
     this.activeId.set(id);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (
       event.defaultPrevented ||
       event.altKey ||

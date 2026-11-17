@@ -18,7 +18,7 @@ import { MultipleLineChartDemo } from './multiple-line-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleLineChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

@@ -18,7 +18,7 @@ import { PortraitAspectRatioDemo } from './portrait-aspect-ratio-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PortraitAspectRatioDemoContainer {
-  readonly code = `import { NgOptimizedImage } from '@angular/common';
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 

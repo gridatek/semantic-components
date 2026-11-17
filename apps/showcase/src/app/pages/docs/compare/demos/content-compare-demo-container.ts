@@ -18,7 +18,7 @@ import { ContentCompareDemo } from './content-compare-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ContentCompareDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCompare,

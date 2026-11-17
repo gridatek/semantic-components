@@ -22,7 +22,7 @@ export class ScBackdrop {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none fixed inset-0 -z-50 duration-100',
       this.backdrop,

@@ -18,7 +18,7 @@ import { WeekNumbersCalendarDemo } from './week-numbers-calendar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class WeekNumbersCalendarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

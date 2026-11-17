@@ -18,7 +18,7 @@ import { RtlDialogDemo } from './rtl-dialog-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlDialogDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,

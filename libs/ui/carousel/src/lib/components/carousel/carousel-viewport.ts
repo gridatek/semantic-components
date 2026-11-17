@@ -16,7 +16,7 @@ export class ScCarouselViewport {
   /** Embla's viewport. */
   readonly element: HTMLElement = this.elementRef.nativeElement;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('overflow-hidden', this.classInput()),
   );
 }

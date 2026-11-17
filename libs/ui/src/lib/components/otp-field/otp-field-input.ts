@@ -38,7 +38,7 @@ import { ScOtpField } from './otp-field';
 export class ScOtpFieldInput {
   private readonly directionality = inject(Directionality);
   private readonly styles = injectPreset().otpField;
-  protected readonly otp = inject(ScOtpField);
+  private readonly otp = inject(ScOtpField);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
@@ -46,19 +46,19 @@ export class ScOtpFieldInput {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input('', { alias: 'id' });
 
-  protected readonly index = computed(() => this.otp.indexOf(this));
-  protected readonly first = computed(() => this.index() === 0);
-  protected readonly char = computed(() => this.otp.charAt(this.index()));
+  private readonly index = computed(() => this.otp.indexOf(this));
+  private readonly first = computed(() => this.index() === 0);
+  private readonly char = computed(() => this.otp.charAt(this.index()));
 
   /** The first input takes the field's id, so its label names it. */
-  protected readonly id = computed(
+  private readonly id = computed(
     () => this.idInput() || (this.first() ? this.field?.id() : null) || null,
   );
-  protected readonly describedBy = computed(
+  private readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.input,
       // A real input, where shadcn's slot is a div: its text centred, no
@@ -73,14 +73,14 @@ export class ScOtpFieldInput {
   }
 
   /** In order: focus goes to the first empty input, if it is before this one. */
-  protected onFocus(): void {
+  private onFocus(): void {
     const firstEmpty = this.otp.firstEmptyIndex();
     if (firstEmpty !== -1 && this.index() > firstEmpty) {
       this.otp.focusInput(firstEmpty);
     }
   }
 
-  protected onInput(event: Event): void {
+  private onInput(event: Event): void {
     const { inputType, data } = event as InputEvent;
     const text = this.element.value;
     if (inputType === 'insertText' && data) {
@@ -97,7 +97,7 @@ export class ScOtpFieldInput {
     this.element.value = this.otp.charAt(this.index());
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const otp = this.otp;
     const index = this.index();
     switch (event.key) {

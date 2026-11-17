@@ -39,6 +39,6 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class SpacingToggleGroupDemo {
-  protected readonly spaced = signal(['top']);
-  protected readonly joined = signal(['top']);
+  private readonly spaced = signal(['top']);
+  private readonly joined = signal(['top']);
 }

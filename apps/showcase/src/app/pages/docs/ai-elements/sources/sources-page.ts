@@ -82,7 +82,7 @@ import { SourcesUsageDemoContainer } from './demos/sources-usage-demo-container'
   encapsulation: ViewEncapsulation.None,
 })
 export default class SourcesPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle,',

@@ -20,9 +20,9 @@ export class ScChartTooltipIndicator {
   readonly variant = input<ScChartIndicator>('dot');
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly color = computed(() => this.row.item().color);
+  private readonly color = computed(() => this.row.item().color);
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const variant = this.variant();
     return cn(
       'shrink-0 rounded-[2px] border-(--color-border) bg-(--color-bg)',

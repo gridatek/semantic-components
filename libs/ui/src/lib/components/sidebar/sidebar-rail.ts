@@ -19,10 +19,10 @@ import { ScSidebarState } from './sidebar-state';
   },
 })
 export class ScSidebarRail {
-  protected readonly state = inject(ScSidebarState);
+  private readonly state = inject(ScSidebarState);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute inset-y-0 z-20 hidden w-4 transition-all ease-linear group-data-[side=inline-start]:-end-4 group-data-[side=inline-end]:start-0 group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:start-1/2 after:w-[2px] hover:after:bg-sidebar-border sm:flex ltr:-translate-x-1/2 rtl:translate-x-1/2',
       'in-data-[side=inline-start]:cursor-w-resize rtl:in-data-[side=inline-start]:cursor-e-resize in-data-[side=inline-end]:cursor-e-resize rtl:in-data-[side=inline-end]:cursor-w-resize in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize',

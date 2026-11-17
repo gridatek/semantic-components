@@ -15,7 +15,7 @@ export class ScTraceIcon {
   private readonly styles = injectPreset().trace;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.icon, this.classInput()),
   );
 }

@@ -18,7 +18,7 @@ import { ChainOfThoughtTraceDemo } from './chain-of-thought-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChainOfThoughtTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBadge,
   ScCollapsible,

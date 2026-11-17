@@ -33,7 +33,7 @@ export class ScAccordionPanel extends AccordionPanel {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.panel,
       // Open and close: the height, to and from auto (interpolate-size).
@@ -41,7 +41,7 @@ export class ScAccordionPanel extends AccordionPanel {
       this.classInput(),
     ),
   );
-  protected readonly contentClass = computed(() => this.styles.content);
+  private readonly contentClass = computed(() => this.styles.content);
 
   constructor() {
     super();

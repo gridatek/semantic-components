@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScEmojiPickerSearchField {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex h-9 items-center gap-2 border-b px-3 [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:opacity-50',
       this.classInput(),

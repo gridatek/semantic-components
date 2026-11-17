@@ -20,5 +20,5 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlToggleGroupDemo {
-  protected readonly view = signal(['list']);
+  private readonly view = signal(['list']);
 }

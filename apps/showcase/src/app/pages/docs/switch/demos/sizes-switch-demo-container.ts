@@ -18,7 +18,7 @@ import { SizesSwitchDemo } from './sizes-switch-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesSwitchDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldGroup,

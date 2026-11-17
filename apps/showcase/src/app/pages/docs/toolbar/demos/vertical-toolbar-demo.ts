@@ -51,5 +51,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalToolbarDemo {
-  protected readonly marks = signal(['bold']);
+  private readonly marks = signal(['bold']);
 }

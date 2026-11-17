@@ -165,7 +165,7 @@ export class ScPaginationPrevious {
     transform: booleanAttribute,
   });
 
-  protected readonly class = computed(() => cn('base-classes', 'aria-disabled:pointer-events-none aria-disabled:opacity-50', this.classInput()));
+  private readonly class = computed(() => cn('base-classes', 'aria-disabled:pointer-events-none aria-disabled:opacity-50', this.classInput()));
 }
 ```
 
@@ -267,7 +267,7 @@ export class ScComponentName {
   });
 
   // The preset's classes, then what is the same in every style, then yours.
-  protected readonly class = computed(() => cn(this.styles.root, 'aria-disabled:opacity-50', this.classInput()));
+  private readonly class = computed(() => cn(this.styles.root, 'aria-disabled:opacity-50', this.classInput()));
 }
 ```
 

@@ -131,11 +131,11 @@ export class ScCodeEditor implements FormValueControl<string> {
   /** The CodeMirror view, once drawn. */
   view: EditorView | undefined;
 
-  protected readonly showInvalid = computed(
+  private readonly showInvalid = computed(
     () => this.invalid() && this.touched(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'block min-h-0 min-w-0 overflow-hidden text-sm data-disabled:opacity-50 [&_.cm-editor]:h-full [&_.cm-editor]:max-h-[inherit] [&_.cm-scroller]:scrollbar-thin',
       this.classInput(),
@@ -263,7 +263,7 @@ export class ScCodeEditor implements FormValueControl<string> {
     this.view?.focus();
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
     if (!next || !this.host.contains(next)) this.touch.emit();
   }

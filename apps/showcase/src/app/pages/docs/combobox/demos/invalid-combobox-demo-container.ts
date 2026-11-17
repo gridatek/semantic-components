@@ -18,7 +18,7 @@ import { InvalidComboboxDemo } from './invalid-combobox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidComboboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScCombobox,

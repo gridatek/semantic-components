@@ -107,16 +107,16 @@ function lasting<T>(value: () => T | undefined, initial: T) {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScToastStack {
-  protected readonly toaster = inject(ScToaster);
+  private readonly toaster = inject(ScToaster);
   private readonly injector = inject(Injector);
   private readonly styles = injectPreset().toast;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** How a toast looks: your `scToastTemplate`. */
-  protected readonly template = computed(() => this.toaster.ɵtemplate());
-  protected readonly templateRef = computed(() => this.template()?.ɵtemplate);
-  protected readonly label = computed(() => this.template()?.label());
+  private readonly template = computed(() => this.toaster.ɵtemplate());
+  private readonly templateRef = computed(() => this.template()?.ɵtemplate);
+  private readonly label = computed(() => this.template()?.label());
 
   private readonly lists = viewChildren<ElementRef<HTMLElement>>('list');
   /** Where focus was before the hotkey moved it here. */
@@ -130,7 +130,7 @@ export class ScToastStack {
    * stack. A toast keeps its injector while it is shown — a new one would
    * render it again.
    */
-  protected readonly injectors = linkedSignal<
+  private readonly injectors = linkedSignal<
     readonly ScToastData[],
     ReadonlyMap<string, Injector>
   >({
@@ -145,7 +145,7 @@ export class ScToastStack {
   });
 
   /** The positions that have toasts, each with its own (oldest first). */
-  protected readonly columns = computed(() => {
+  private readonly columns = computed(() => {
     const toasts = this.toaster.toasts();
     const held = this.toaster.ɵheld();
     return POSITION_ORDER.map((position) => {
@@ -161,23 +161,23 @@ export class ScToastStack {
     }).filter((column) => column.toasts.length);
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('pointer-events-none fixed inset-0 z-100', this.classInput()),
   );
 
-  protected readonly listClass = cn(
+  private readonly listClass = cn(
     'pointer-events-auto relative w-full outline-none transition-[height] duration-300',
     'focus-visible:ring-3 focus-visible:ring-ring/50',
     this.styles.list,
   );
 
-  protected columnClass(position: ScToastPosition): string {
+  private columnClass(position: ScToastPosition): string {
     // shadcn's: the screen's width on a phone, max-w-sm (and its p-4) above.
     return cn('absolute flex w-full p-4 sm:max-w-104', POSITIONS[position]);
   }
 
   /** Hovered or focused, the column spreads out and its timers pause. */
-  protected sync(
+  private sync(
     position: ScToastPosition,
     list: HTMLElement,
     hovered: boolean | null,
@@ -192,7 +192,7 @@ export class ScToastStack {
     }
   }
 
-  protected onHotkey(event: KeyboardEvent): void {
+  private onHotkey(event: KeyboardEvent): void {
     const keys = this.toaster.ɵconfig.hotkey;
     const list = this.lists()[0]?.nativeElement;
     if (!keys.length || !list) return;
@@ -212,7 +212,7 @@ export class ScToastStack {
   }
 
   /** Escape: back to where the hotkey came from. */
-  protected returnFocus(): void {
+  private returnFocus(): void {
     const previous = this.previousFocus;
     this.previousFocus = null;
     if (previous?.isConnected) {

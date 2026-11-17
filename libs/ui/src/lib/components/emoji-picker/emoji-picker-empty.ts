@@ -16,13 +16,13 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   },
 })
 export class ScEmojiPickerEmpty {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** What was searched for. */
   readonly search = this.state.search.asReadonly();
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-muted-foreground absolute inset-0 flex items-center justify-center text-sm',
       this.classInput(),

@@ -147,7 +147,7 @@ import { TriggerElsewhereCollapsibleDemoContainer } from './demos/trigger-elsewh
   encapsulation: ViewEncapsulation.None,
 })
 export default class CollapsiblePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScCollapsible, ScCollapsiblePanel, ScCollapsibleTrigger } from '@semantic-components/ui';",
     markup: [
@@ -158,7 +158,7 @@ export default class CollapsiblePage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScCollapsible',
       selector: '[scCollapsible]',

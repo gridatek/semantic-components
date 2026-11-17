@@ -30,20 +30,20 @@ import { ScFileUpload } from './file-upload';
   },
 })
 export class ScFileUploadInput {
-  protected readonly upload = inject(ScFileUpload);
+  private readonly upload = inject(ScFileUpload);
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     this.upload.ɵregister(this.element);
     inject(DestroyRef).onDestroy(() => this.upload.ɵregister(null));
   }
 
-  protected onChange(): void {
+  private onChange(): void {
     this.upload.add(this.element.files ?? []);
     // Cleared: the same file can be picked again.
     this.element.value = '';

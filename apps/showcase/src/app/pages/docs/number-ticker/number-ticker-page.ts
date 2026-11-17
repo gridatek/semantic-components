@@ -95,12 +95,12 @@ import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-
   encapsulation: ViewEncapsulation.None,
 })
 export default class NumberTickerPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScNumberTicker } from '@semantic-components/ui';",
     markup: '<span scNumberTicker [value]="…"></span>',
   };
 
-  protected readonly inputs: ApiInput[] = [
+  private readonly inputs: ApiInput[] = [
     {
       name: 'value',
       type: 'number',

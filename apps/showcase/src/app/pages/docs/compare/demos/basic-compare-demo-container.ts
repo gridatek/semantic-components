@@ -18,7 +18,7 @@ import { BasicCompareDemo } from './basic-compare-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCompareDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCompare,
   ScCompareAfter,

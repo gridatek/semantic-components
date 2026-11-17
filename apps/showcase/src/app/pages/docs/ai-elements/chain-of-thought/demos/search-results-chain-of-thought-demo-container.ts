@@ -18,7 +18,7 @@ import { SearchResultsChainOfThoughtDemo } from './search-results-chain-of-thoug
   encapsulation: ViewEncapsulation.None,
 })
 export class SearchResultsChainOfThoughtDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBadge,
   ScCollapsible,

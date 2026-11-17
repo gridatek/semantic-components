@@ -64,7 +64,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleTimePickerDemo {
-  readonly time = signal<Temporal.PlainTime | null>(
+  private readonly time = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('18:30'),
   );
 }

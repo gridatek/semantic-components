@@ -41,5 +41,5 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesNativeSelectDemo {
-  protected readonly sizes = ['default', 'sm'] as const;
+  private readonly sizes = ['default', 'sm'] as const;
 }

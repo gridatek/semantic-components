@@ -82,7 +82,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class QuantityNumberFieldDemo {
-  readonly adults = signal<number | null>(1);
-  readonly kids = signal<number | null>(0);
-  readonly animals = signal<number | null>(0);
+  private readonly adults = signal<number | null>(1);
+  private readonly kids = signal<number | null>(0);
+  private readonly animals = signal<number | null>(0);
 }

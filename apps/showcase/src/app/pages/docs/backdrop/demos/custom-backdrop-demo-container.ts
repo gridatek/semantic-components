@@ -18,7 +18,7 @@ import { CustomBackdropDemo } from './custom-backdrop-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomBackdropDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScBackdrop, ScButton, ScFrame } from '@semantic-components/ui';
 
 /**

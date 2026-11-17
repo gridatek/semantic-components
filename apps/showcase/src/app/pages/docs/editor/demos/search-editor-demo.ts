@@ -197,7 +197,7 @@ const DRAFT = `<p>The colour of the sky changes with the hour: the colour of daw
   encapsulation: ViewEncapsulation.None,
 })
 export class SearchEditorDemo {
-  readonly searchOpen = signal(false);
+  private readonly searchOpen = signal(false);
   private readonly model = signal({ body: DRAFT });
-  readonly editorForm = form(this.model);
+  private readonly editorForm = form(this.model);
 }

@@ -128,7 +128,7 @@ import { ConditionalButtonPatternDemoContainer } from './demos/conditional-butto
   encapsulation: ViewEncapsulation.None,
 })
 export default class ButtonPatternPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       "import { ScButtonPattern } from '@semantic-components/ui';",
     ].join('\n'),
@@ -138,7 +138,7 @@ export default class ButtonPatternPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScButtonPattern',
       selector: '[scButtonPattern]',

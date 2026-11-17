@@ -96,7 +96,7 @@ export class ScCountdown {
     return this.until() || !total ? null : this.remaining() / total;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('inline-flex items-center', this.classInput()),
   );
 

@@ -16,7 +16,7 @@ export class ScDockIndicator {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-foreground/70 absolute size-1 rounded-full',
       this.dock.orientation() === 'horizontal'

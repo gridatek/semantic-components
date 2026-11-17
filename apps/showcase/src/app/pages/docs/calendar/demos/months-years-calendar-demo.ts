@@ -50,13 +50,13 @@ import {
 })
 export class MonthsYearsCalendarDemo {
   // Empty: startView applies (with a value it would open on its days).
-  readonly date = signal<ScCalendarValue>(null);
-  readonly previousLabel = {
+  private readonly date = signal<ScCalendarValue>(null);
+  private readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',

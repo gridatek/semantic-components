@@ -18,7 +18,7 @@ import { BoxImageCropperDemo } from './box-image-cropper-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BoxImageCropperDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScButton,
   ScImageCropper,

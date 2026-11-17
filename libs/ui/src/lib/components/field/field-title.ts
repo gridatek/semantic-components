@@ -12,7 +12,7 @@ export class ScFieldTitle {
   private readonly styles = injectPreset().field;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.title, this.classInput()),
   );
 }

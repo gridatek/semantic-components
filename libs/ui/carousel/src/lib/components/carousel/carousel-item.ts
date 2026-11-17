@@ -38,7 +38,7 @@ export class ScCarouselItem {
     inject(DestroyRef).onDestroy(this.carousel.register(this.element));
   }
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const isHorizontal = this.carousel.orientation() === 'horizontal';
     return cn(
       'min-w-0 shrink-0 grow-0 basis-full',

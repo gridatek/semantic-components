@@ -14,7 +14,7 @@ import { ItemUsageDemo } from './item-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ItemUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScItem,

@@ -16,7 +16,7 @@ export class ScLegend {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScLegendVariant>('legend');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.legend, this.classInput()),
   );
 }

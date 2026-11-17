@@ -118,7 +118,7 @@ export class ScNumberField implements FormValueControl<number | null> {
    * The value a button stepped to, read out (a live region: focus is on the
    * button, not the input); cleared after a while.
    */
-  protected readonly announcement = signal('');
+  private readonly announcement = signal('');
   private announcementTimeout: ReturnType<typeof setTimeout> | undefined;
 
   /** Reads the value out (the buttons do, after a step). */

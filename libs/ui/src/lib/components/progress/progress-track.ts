@@ -14,7 +14,7 @@ export class ScProgressTrack {
   private readonly styles = injectPreset().progress;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.track, this.classInput()),
   );
 }

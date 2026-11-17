@@ -18,7 +18,7 @@ import { AvatarSkeletonDemo } from './avatar-skeleton-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AvatarSkeletonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSkeleton } from '@semantic-components/ui';
 
 /** A person while they load: a round picture and two lines. */

@@ -23,7 +23,7 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
   encapsulation: ViewEncapsulation.None,
 })
 export class UseCasesQrCodeDemo {
-  readonly useCases = [
+  private readonly useCases = [
     { value: 'https://angular.dev', label: 'Website URL' },
     { value: 'tel:+1234567890', label: 'Phone Number' },
     { value: 'mailto:hello@example.com', label: 'Email' },

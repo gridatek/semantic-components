@@ -18,7 +18,7 @@ import { ExternalLinkDemo } from './external-link-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ExternalLinkDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 import { SiExternalLinkIcon } from '@semantic-icons/lucide-icons';
 

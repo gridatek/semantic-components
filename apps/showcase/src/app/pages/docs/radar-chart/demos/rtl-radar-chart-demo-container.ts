@@ -18,7 +18,7 @@ import { RtlRadarChartDemo } from './rtl-radar-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlRadarChartDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

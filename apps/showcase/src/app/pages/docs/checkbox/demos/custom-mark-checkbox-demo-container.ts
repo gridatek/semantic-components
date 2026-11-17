@@ -18,7 +18,7 @@ import { CustomMarkCheckboxDemo } from './custom-mark-checkbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomMarkCheckboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScCheckbox,

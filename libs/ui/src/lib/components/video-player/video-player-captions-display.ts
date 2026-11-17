@@ -30,11 +30,11 @@ import { ScVideoPlayer } from './video-player';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScVideoPlayerCaptionsDisplay {
-  protected readonly player = inject(ScVideoPlayer);
+  private readonly player = inject(ScVideoPlayer);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-x-0 z-10 flex flex-col items-center gap-1 px-4 text-center transition-[bottom] duration-200',
       // Above the controls while they show.

@@ -20,11 +20,11 @@ export class ScMenubar {
 
   rendered = signal(false);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.bar, this.classInput()),
   );
 
-  onFocusIn() {
+  private onFocusIn() {
     this.rendered.set(true);
   }
 
@@ -33,7 +33,7 @@ export class ScMenubar {
    * has no Escape handling of its own; Escape inside a menu is handled by that
    * menu (it closes one level), so ignore it here.
    */
-  protected onEscape(event: Event): void {
+  private onEscape(event: Event): void {
     if ((event.target as HTMLElement).closest('[role=menu]')) return;
     this.menubar.close();
   }

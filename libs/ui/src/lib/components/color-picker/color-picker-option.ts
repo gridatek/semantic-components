@@ -34,7 +34,7 @@ import { ScColorPickerSwatches } from './color-picker-swatches';
   },
 })
 export class ScColorPickerOption {
-  protected readonly picker = inject(ScColorPicker);
+  private readonly picker = inject(ScColorPicker);
   private readonly group = inject(ScColorPickerSwatches);
   private readonly element =
     inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
@@ -45,19 +45,19 @@ export class ScColorPickerOption {
 
   private readonly rgba = computed(() => this.picker.parse(this.color()));
   /** It is the colour (no colour: none is). */
-  protected readonly checked = computed(
+  private readonly checked = computed(
     () => !!this.picker.value() && sameRgba(this.rgba(), this.picker.rgba()),
   );
 
-  protected readonly reachable = computed(
+  private readonly reachable = computed(
     () => this.group.ɵreachable() === this.element,
   );
 
-  protected readonly background = computed(
+  private readonly background = computed(
     () => `linear-gradient(${this.color()}, ${this.color()}), ${CHECKERBOARD}`,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'size-6 shrink-0 cursor-pointer rounded-md border shadow-xs outline-none transition-shadow',
       'focus-visible:ring-3 focus-visible:ring-ring/50',
@@ -86,7 +86,7 @@ export class ScColorPickerOption {
     );
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const options = this.group.ɵoptions().map((option) => option.element);
     const steps: Record<string, number> = {
       ArrowRight: 1,

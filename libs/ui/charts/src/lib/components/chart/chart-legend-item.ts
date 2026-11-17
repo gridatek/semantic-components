@@ -15,7 +15,7 @@ export class ScChartLegendItem {
   readonly item = input.required<ScChartLegendPayload>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex items-center gap-1.5', this.classInput()),
   );
 }

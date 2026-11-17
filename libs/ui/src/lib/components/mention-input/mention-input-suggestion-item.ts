@@ -51,13 +51,13 @@ export class ScMentionInputSuggestionItem {
   readonly user = input.required<ScMentionUser>();
   readonly index = input.required<number>();
 
-  protected readonly state = inject(ScMentionInputState);
+  private readonly state = inject(ScMentionInputState);
 
-  protected readonly isSelected = computed(
+  private readonly isSelected = computed(
     () => this.index() === this.state.selectedIndex(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none',
       this.isSelected() && 'bg-muted text-foreground',

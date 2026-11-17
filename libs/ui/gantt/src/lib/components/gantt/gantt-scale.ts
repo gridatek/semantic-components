@@ -66,13 +66,13 @@ interface ScGanttScaleSpan {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScGanttScale {
-  protected readonly gantt = inject(ScGantt);
+  private readonly gantt = inject(ScGantt);
   private readonly locale = inject(LOCALE_ID);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Months (years, on a month scale). */
-  protected readonly upper = computed(() =>
+  private readonly upper = computed(() =>
     this.gantt.scale() === 'month'
       ? this.spans(
           (date) => date.with({ month: 1, day: 1 }).add({ years: 1 }),
@@ -87,7 +87,7 @@ export class ScGanttScale {
   );
 
   /** Days, weeks (from Monday, by their first day) or months. */
-  protected readonly lower = computed(() => {
+  private readonly lower = computed(() => {
     switch (this.gantt.scale()) {
       case 'day':
         return this.spans((date) => date.add({ days: 1 }), { day: 'numeric' });
@@ -104,7 +104,7 @@ export class ScGanttScale {
     }
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative flex flex-col', this.classInput()),
   );
 

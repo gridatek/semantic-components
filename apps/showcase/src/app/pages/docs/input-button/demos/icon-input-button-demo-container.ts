@@ -18,7 +18,7 @@ import { IconInputButtonDemo } from './icon-input-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class IconInputButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScInputButton } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 

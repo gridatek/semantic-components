@@ -18,7 +18,7 @@ import { ReadonlyEditorDemo } from './readonly-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ReadonlyEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, readonly } from '@angular/forms/signals';
 import { ScFrame } from '@semantic-components/ui';
 import {

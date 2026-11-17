@@ -18,7 +18,7 @@ import { ChoiceCardRadioGroupDemo } from './choice-card-radio-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChoiceCardRadioGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,

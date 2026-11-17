@@ -18,7 +18,7 @@ import { StatusMarkerDemo } from './status-marker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StatusMarkerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScMarker,
   ScMarkerContent,

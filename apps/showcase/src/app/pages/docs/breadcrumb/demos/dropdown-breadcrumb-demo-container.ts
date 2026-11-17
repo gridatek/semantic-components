@@ -18,7 +18,7 @@ import { DropdownBreadcrumbDemo } from './dropdown-breadcrumb-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DropdownBreadcrumbDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScBreadcrumb,

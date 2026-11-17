@@ -18,7 +18,7 @@ import { IconBadgeDemo } from './icon-badge-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class IconBadgeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScBadge } from '@semantic-components/ui';
 import { SiBadgeCheckIcon, SiBookmarkIcon } from '@semantic-icons/lucide-icons';
 

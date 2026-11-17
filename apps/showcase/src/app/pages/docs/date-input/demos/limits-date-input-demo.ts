@@ -30,8 +30,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LimitsDateInputDemo {
-  readonly today = Temporal.Now.plainDateISO();
-  readonly date = signal<Temporal.PlainDate | null>(null);
+  private readonly today = Temporal.Now.plainDateISO();
+  private readonly date = signal<Temporal.PlainDate | null>(null);
   /** Saturdays and Sundays. */
-  readonly weekend = (date: Temporal.PlainDate) => date.dayOfWeek > 5;
+  private readonly weekend = (date: Temporal.PlainDate) => date.dayOfWeek > 5;
 }

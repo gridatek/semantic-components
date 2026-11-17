@@ -89,7 +89,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlLineChartDemo {
-  readonly data = [
+  private readonly data = [
     { month: 'يناير', desktop: 186, mobile: 80 },
     { month: 'فبراير', desktop: 305, mobile: 200 },
     { month: 'مارس', desktop: 237, mobile: 120 },
@@ -97,7 +97,7 @@ export class RtlLineChartDemo {
     { month: 'مايو', desktop: 209, mobile: 130 },
     { month: 'يونيو', desktop: 214, mobile: 140 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     desktop: { label: 'سطح المكتب', color: 'var(--chart-1)' },
     mobile: { label: 'الجوال', color: 'var(--chart-2)' },
   };

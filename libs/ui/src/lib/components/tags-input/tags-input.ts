@@ -77,7 +77,7 @@ export class ScTagsInput implements FormValueControl<string[]> {
     },
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'border-input dark:bg-input/30 flex min-h-8 w-full cursor-text flex-wrap items-center gap-1 rounded-lg border bg-transparent px-1.5 py-1 text-base transition-colors md:text-sm',
       'focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-3',
@@ -145,12 +145,12 @@ export class ScTagsInput implements FormValueControl<string[]> {
     this.items()[index]?.focus();
   }
 
-  protected onClick(event: MouseEvent): void {
+  private onClick(event: MouseEvent): void {
     // Its empty space: the field.
     if (event.target === this.host.nativeElement) this.focusControl();
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     const to = event.relatedTarget as Node | null;
     if (!to || !this.host.nativeElement.contains(to)) this.touch.emit();
   }

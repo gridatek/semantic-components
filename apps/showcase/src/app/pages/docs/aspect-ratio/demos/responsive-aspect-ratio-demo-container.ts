@@ -18,7 +18,7 @@ import { ResponsiveAspectRatioDemo } from './responsive-aspect-ratio-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResponsiveAspectRatioDemoContainer {
-  readonly code = `import { NgOptimizedImage } from '@angular/common';
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 

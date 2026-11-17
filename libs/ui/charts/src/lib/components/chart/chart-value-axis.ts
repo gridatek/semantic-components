@@ -68,9 +68,9 @@ export class ScChartValueAxis {
    */
   readonly domain = input<readonly [number, number] | undefined>(undefined);
 
-  protected readonly vertical = this.state.vertical;
+  private readonly vertical = this.state.vertical;
 
-  protected readonly ticks = computed(() => {
+  private readonly ticks = computed(() => {
     if (this.hide()) return [];
     const scale = this.state.valueScale();
     const { left, right, bottom } = this.state.area();
@@ -88,7 +88,7 @@ export class ScChartValueAxis {
     }));
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('fill-muted-foreground', this.classInput()),
   );
 

@@ -123,7 +123,7 @@ import { StepLineChartDemoContainer } from './demos/step-line-chart-demo-contain
   encapsulation: ViewEncapsulation.None,
 })
 export default class LineChartPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScChart, ScChartPlot, ScChartCategoryAxis, ScChartCursor, ScChartGrid, ScChartValueAxis, ScChartLine, ScChartTooltip, ScChartTooltipIndicator, ScChartTooltipItem, ScChartTooltipName, ScChartTooltipPortal, ScChartTooltipProvider, ScChartTooltipValue, ScChartLegend, ScChartLegendIndicator, ScChartLegendItem } from '@semantic-components/ui/charts';",
     markup: [
@@ -156,7 +156,7 @@ export default class LineChartPage {
     ].join('\n'),
   };
 
-  protected readonly inputs: ApiInput[] = [
+  private readonly inputs: ApiInput[] = [
     {
       name: 'key',
       type: 'string (required)',

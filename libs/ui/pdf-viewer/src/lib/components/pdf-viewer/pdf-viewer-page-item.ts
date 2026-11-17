@@ -26,24 +26,24 @@ import { ScPdfViewerPages } from './pdf-viewer-pages';
 })
 export class ScPdfViewerPageItem {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
-  protected readonly pages = inject(ScPdfViewerPages);
+  private readonly pages = inject(ScPdfViewerPages);
 
   readonly page = input.required<number>({ alias: 'scPdfViewerPageItem' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly selected = computed(() =>
+  private readonly selected = computed(() =>
     this.pdfViewer.pageSelection().includes(this.page()),
   );
-  protected readonly current = computed(
+  private readonly current = computed(
     () => this.pdfViewer.currentPage() === this.page(),
   );
-  protected readonly drop = computed(() => {
+  private readonly drop = computed(() => {
     const target = this.pages.dropTarget();
     if (target?.page !== this.page()) return null;
     return target.after ? 'after' : 'before';
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative rounded-md',
       'data-[drop=before]:shadow-[0_-3px_0_var(--color-primary)] data-[drop=after]:shadow-[0_3px_0_var(--color-primary)]',
@@ -51,7 +51,7 @@ export class ScPdfViewerPageItem {
     ),
   );
 
-  protected onDragStart(event: DragEvent): void {
+  private onDragStart(event: DragEvent): void {
     this.pages.startDrag(this.page());
     if (event.dataTransfer) {
       event.dataTransfer.effectAllowed = 'move';
@@ -59,7 +59,7 @@ export class ScPdfViewerPageItem {
     }
   }
 
-  protected onDragOver(event: DragEvent): void {
+  private onDragOver(event: DragEvent): void {
     if (!this.pages.dragged().length) return;
     event.preventDefault();
     const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
@@ -69,13 +69,13 @@ export class ScPdfViewerPageItem {
     });
   }
 
-  protected onDragLeave(): void {
+  private onDragLeave(): void {
     if (this.pages.dropTarget()?.page === this.page()) {
       this.pages.dropTarget.set(null);
     }
   }
 
-  protected onDrop(event: DragEvent): void {
+  private onDrop(event: DragEvent): void {
     if (!this.pages.dragged().length) return;
     event.preventDefault();
     this.pages.drop();

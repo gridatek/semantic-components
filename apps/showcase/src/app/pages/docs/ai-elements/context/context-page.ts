@@ -84,7 +84,7 @@ import { RtlContextDemoContainer } from './demos/rtl-context-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class ContextPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScPreviewCardProvider, ScPreviewCardTrigger, ScPreviewCardPortal, ScPreviewCard,',

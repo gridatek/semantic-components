@@ -18,7 +18,7 @@ import { TextTypesetDemo } from './text-typeset-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TextTypesetDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScTypeset } from '@semantic-components/ui';
 
 /** Typeset's text without a container: each element marks itself. */

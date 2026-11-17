@@ -18,7 +18,7 @@ import { FloatingActionsCodeBlockDemo } from './floating-actions-code-block-demo
   encapsulation: ViewEncapsulation.None,
 })
 export class FloatingActionsCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockActions,

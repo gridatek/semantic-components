@@ -52,12 +52,12 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerContainer {
-  readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('bg-background border rounded-lg overflow-hidden', this.classInput()),
   );
 

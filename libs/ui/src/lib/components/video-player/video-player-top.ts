@@ -16,7 +16,7 @@ import { cn } from 'cn';
 export class ScVideoPlayerTop {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute inset-x-0 top-0 z-20 hidden items-center justify-end gap-1 bg-linear-to-b from-black/60 to-transparent px-3 pt-2 pb-6 transition-opacity duration-300',
       // Small only, once played.

@@ -55,7 +55,7 @@ export class ScFileUpload implements FormValueControl<File[]> {
   /** Invalid, once touched: shown. */
   readonly showInvalid = computed(() => this.invalid() && this.touched());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col gap-3', this.classInput()),
   );
 

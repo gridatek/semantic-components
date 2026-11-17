@@ -140,7 +140,7 @@ import { SpinnerUsageDemoContainer } from './demos/spinner-usage-demo-container'
   encapsulation: ViewEncapsulation.None,
 })
 export default class SpinnerPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       "import { ScSpinner } from '@semantic-components/ui';",
       "import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';",
@@ -148,7 +148,7 @@ export default class SpinnerPage {
     markup: '<svg scSpinner siLoaderCircleIcon aria-label="…"></svg>',
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScSpinner',
       selector: 'svg[scSpinner]',

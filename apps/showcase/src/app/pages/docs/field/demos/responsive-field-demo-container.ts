@@ -18,7 +18,7 @@ import { ResponsiveFieldDemo } from './responsive-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResponsiveFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScField,

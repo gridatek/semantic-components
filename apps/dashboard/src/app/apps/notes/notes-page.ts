@@ -251,16 +251,16 @@ export class NotesPage {
   private readonly store = inject(NotesStore);
   private readonly toaster = inject(ScToaster);
 
-  protected readonly colors = NOTE_COLORS;
-  protected readonly query = signal('');
-  protected readonly shown = computed(() => {
+  private readonly colors = NOTE_COLORS;
+  private readonly query = signal('');
+  private readonly shown = computed(() => {
     const query = this.query().trim().toLowerCase();
     return this.store
       .notes()
       .filter((note) => note.text.toLowerCase().includes(query));
   });
   /** The chosen note: the first shown until one is clicked (or it's gone). */
-  protected readonly selectedId = linkedSignal<
+  private readonly selectedId = linkedSignal<
     readonly { id: number }[],
     number | null
   >({
@@ -270,27 +270,27 @@ export class NotesPage {
         ? previous.value
         : (notes[0]?.id ?? null),
   });
-  protected readonly selected = computed(
+  private readonly selected = computed(
     () =>
       this.store.notes().find((note) => note.id === this.selectedId()) ?? null,
   );
 
-  protected readonly adding = signal(false);
+  private readonly adding = signal(false);
   private readonly draft = signal({ text: '' });
-  protected readonly draftForm = form(this.draft, (path) => {
+  private readonly draftForm = form(this.draft, (path) => {
     required(path.text);
   });
-  protected readonly draftColor = signal<NoteColor>('primary');
+  private readonly draftColor = signal<NoteColor>('primary');
 
-  protected readonly when = dayTime;
+  private readonly when = dayTime;
 
-  protected startAdding(): void {
+  private startAdding(): void {
     this.draft.set({ text: '' });
     this.draftColor.set('primary');
     this.adding.set(true);
   }
 
-  protected add(event: Event): void {
+  private add(event: Event): void {
     event.preventDefault();
     if (this.draftForm().invalid()) return;
     const note = this.store.add(this.draft().text, this.draftColor());
@@ -300,15 +300,15 @@ export class NotesPage {
     this.toaster.show({ variant: 'success', title: $localize`Note added` });
   }
 
-  protected edit(id: number, text: string): void {
+  private edit(id: number, text: string): void {
     this.store.update(id, { text });
   }
 
-  protected recolor(id: number, color: NoteColor): void {
+  private recolor(id: number, color: NoteColor): void {
     this.store.update(id, { color });
   }
 
-  protected remove(id: number): void {
+  private remove(id: number): void {
     this.store.remove(id);
     this.toaster.show({ variant: 'success', title: $localize`Note deleted` });
   }

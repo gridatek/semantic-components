@@ -82,14 +82,14 @@ interface ContactForm {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTextareaDemo {
-  readonly formModel = signal<ContactForm>({
+  private readonly formModel = signal<ContactForm>({
     name: '',
     email: '',
     subject: '',
     message: '',
   });
 
-  readonly contactForm = form(this.formModel, (s) => {
+  private readonly contactForm = form(this.formModel, (s) => {
     required(s.name);
     required(s.email);
     email(s.email);

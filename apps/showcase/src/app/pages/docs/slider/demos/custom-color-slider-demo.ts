@@ -19,5 +19,5 @@ import { ScField, ScLabel, ScSlider } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomColorSliderDemo {
-  protected readonly temperature = signal(50);
+  private readonly temperature = signal(50);
 }

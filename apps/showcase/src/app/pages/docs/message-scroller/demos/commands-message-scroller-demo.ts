@@ -112,7 +112,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 })
 export class CommandsMessageScrollerDemo {
   private readonly scroller = viewChild.required<ScMessageScroller>('scroller');
-  readonly messages = [
+  private readonly messages = [
     { id: 'q1', role: 'user', text: 'What does a message scroller do?' },
     {
       id: 'a1',
@@ -140,7 +140,7 @@ export class CommandsMessageScrollerDemo {
   ];
 
   /** The question whose turn is on screen. */
-  protected readonly reading = computed(() => {
+  private readonly reading = computed(() => {
     const id = this.scroller().visibility().currentAnchorId;
     return this.messages.find((message) => message.id === id)?.text ?? '—';
   });

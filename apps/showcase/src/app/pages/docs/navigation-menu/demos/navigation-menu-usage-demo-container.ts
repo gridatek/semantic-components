@@ -14,7 +14,7 @@ import { NavigationMenuUsageDemo } from './navigation-menu-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NavigationMenuUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScNavigationMenu,

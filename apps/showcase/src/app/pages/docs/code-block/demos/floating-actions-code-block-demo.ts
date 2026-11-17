@@ -42,7 +42,7 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FloatingActionsCodeBlockDemo {
-  readonly output = `$ pnpm build
+  private readonly output = `$ pnpm build
 > next build
 
 ✓ Compiled successfully in 4.2s

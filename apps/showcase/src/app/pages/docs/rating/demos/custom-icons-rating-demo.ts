@@ -36,5 +36,5 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomIconsRatingDemo {
-  readonly rating = signal(4);
+  private readonly rating = signal(4);
 }

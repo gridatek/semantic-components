@@ -115,13 +115,13 @@ export class LoginPage {
     password: 'admin123',
     remember: true,
   });
-  protected readonly loginForm = form(this.model, (path) => {
+  private readonly loginForm = form(this.model, (path) => {
     required(path.email);
     email(path.email);
     required(path.password);
   });
 
-  protected signIn(event: Event): void {
+  private signIn(event: Event): void {
     event.preventDefault();
     if (this.loginForm().valid()) void this.router.navigateByUrl('/');
   }

@@ -44,7 +44,7 @@ export class ScTabsList {
     transform: booleanAttribute,
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.list({ variant: this.variant() }), this.classInput()),
   );
 

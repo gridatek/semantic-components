@@ -200,14 +200,14 @@ export class ProgressQuestionnaireDemo {
     tests: '',
     delivery: '',
   });
-  readonly sent = signal<ReturnType<typeof this.model> | null>(null);
+  private readonly sent = signal<ReturnType<typeof this.model> | null>(null);
   private readonly questionnaire = viewChild.required(ScQuestionnaire);
   /** A step per question: 1 to total. */
-  protected readonly steps = computed(() =>
+  private readonly steps = computed(() =>
     Array.from({ length: this.questionnaire().total() }, (_, i) => i + 1),
   );
 
-  readonly survey = form(
+  private readonly survey = form(
     this.model,
     (s) => {
       required(s.scope);

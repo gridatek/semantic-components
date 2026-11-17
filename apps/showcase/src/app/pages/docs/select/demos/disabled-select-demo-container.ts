@@ -18,7 +18,7 @@ import { DisabledSelectDemo } from './disabled-select-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledSelectDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScSelect,
   ScSelectGroup,

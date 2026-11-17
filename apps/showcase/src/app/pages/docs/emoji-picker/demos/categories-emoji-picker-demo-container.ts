@@ -18,7 +18,7 @@ import { CategoriesEmojiPickerDemo } from './categories-emoji-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CategoriesEmojiPickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   type ScEmoji,
   ScEmojiPicker,

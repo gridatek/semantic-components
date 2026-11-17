@@ -18,7 +18,7 @@ import { BlockStartInputGroupDemo } from './block-start-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlockStartInputGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,

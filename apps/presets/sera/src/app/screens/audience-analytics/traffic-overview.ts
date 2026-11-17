@@ -132,14 +132,14 @@ const TRAFFIC = [
   encapsulation: ViewEncapsulation.None,
 })
 export class TrafficOverview {
-  protected readonly data = TRAFFIC;
-  protected readonly config: ScChartConfig = {
+  private readonly data = TRAFFIC;
+  private readonly config: ScChartConfig = {
     views: { label: 'Views', color: 'var(--traffic-views)' },
     unique: { label: 'Unique', color: 'var(--traffic-unique)' },
   };
 
   /** "Oct 1": the day, as shadcn writes it. */
-  protected readonly day = (date: string) =>
+  private readonly day = (date: string) =>
     Temporal.PlainDate.from(date).toLocaleString('en-US', {
       month: 'short',
       day: 'numeric',

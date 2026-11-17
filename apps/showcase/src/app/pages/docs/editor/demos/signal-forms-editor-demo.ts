@@ -121,12 +121,12 @@ interface PostModel {
 export class SignalFormsEditorDemo {
   private readonly model = signal<PostModel>({ body: '', locked: false });
 
-  readonly postForm = form(this.model, (path) => {
+  private readonly postForm = form(this.model, (path) => {
     required(path.body, { message: 'Write the post.' });
     disabled(path.body, ({ valueOf }) => valueOf(path.locked));
   });
 
-  formState(): string {
+  private formState(): string {
     const body = this.postForm.body();
     return JSON.stringify(
       {
@@ -140,12 +140,12 @@ export class SignalFormsEditorDemo {
     );
   }
 
-  reset(): void {
+  private reset(): void {
     this.model.set({ body: '', locked: false });
     this.postForm().reset();
   }
 
-  fill(): void {
+  private fill(): void {
     this.model.update((m) => ({
       ...m,
       body: '<p>Hello, <strong>world</strong></p>',

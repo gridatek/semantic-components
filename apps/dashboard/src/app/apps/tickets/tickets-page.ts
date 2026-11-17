@@ -217,10 +217,10 @@ export class TicketsPage {
   private readonly store = inject(TicketsStore);
   private readonly toaster = inject(ScToaster);
 
-  protected readonly active = signal<Filter>('All');
-  protected readonly query = signal('');
+  private readonly active = signal<Filter>('All');
+  private readonly query = signal('');
 
-  protected readonly filters = computed(() => {
+  private readonly filters = computed(() => {
     const tickets = this.store.tickets();
     return [
       {
@@ -236,7 +236,7 @@ export class TicketsPage {
     ];
   });
 
-  protected readonly shown = computed(() => {
+  private readonly shown = computed(() => {
     const query = this.query().trim().toLowerCase();
     const active = this.active();
     return this.store
@@ -249,9 +249,9 @@ export class TicketsPage {
       );
   });
 
-  protected readonly dayOf = day;
+  private readonly dayOf = day;
 
-  protected remove(id: number): void {
+  private remove(id: number): void {
     this.store.remove(id);
     this.toaster.show({
       variant: 'success',

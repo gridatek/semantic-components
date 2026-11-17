@@ -18,7 +18,7 @@ import { GoodStatCardDemo } from './good-stat-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GoodStatCardDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScStatCard,
   ScStatCardChange,

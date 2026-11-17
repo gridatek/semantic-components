@@ -18,7 +18,7 @@ import { SeparatorOtpFieldDemo } from './separator-otp-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SeparatorOtpFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,

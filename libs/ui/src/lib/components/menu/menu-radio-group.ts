@@ -19,5 +19,5 @@ export class ScMenuRadioGroup {
   readonly value = model<string | null>(null);
   readonly labelId = signal<string | null>(null);
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

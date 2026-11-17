@@ -18,7 +18,7 @@ import { QueueUsageDemo } from './queue-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class QueueUsageDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,

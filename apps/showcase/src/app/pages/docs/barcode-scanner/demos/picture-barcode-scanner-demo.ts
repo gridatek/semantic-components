@@ -55,17 +55,17 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PictureBarcodeScannerDemo {
-  readonly samples = [
+  private readonly samples = [
     { src: '/images/barcode-qr.png', label: 'A QR code' },
     { src: '/images/barcode-ean13.png', label: 'A product label' },
   ];
-  readonly codes = signal<readonly ScBarcode[]>([]);
+  private readonly codes = signal<readonly ScBarcode[]>([]);
 
-  found(code: ScBarcode): void {
+  private found(code: ScBarcode): void {
     this.codes.update((codes) => [code, ...codes].slice(0, 3));
   }
 
-  async try(scanner: ScBarcodeScanner, src: string): Promise<void> {
+  private async try(scanner: ScBarcodeScanner, src: string): Promise<void> {
     await scanner.scan(await (await fetch(src)).blob());
   }
 }

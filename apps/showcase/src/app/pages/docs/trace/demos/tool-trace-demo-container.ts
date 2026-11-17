@@ -18,7 +18,7 @@ import { ToolTraceDemo } from './tool-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ToolTraceDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

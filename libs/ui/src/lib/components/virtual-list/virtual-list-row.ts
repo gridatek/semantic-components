@@ -26,7 +26,7 @@ import { ScVirtualList, type ScVirtualListItem } from './virtual-list';
   },
 })
 export class ScVirtualListRow {
-  protected readonly list = inject(ScVirtualList);
+  private readonly list = inject(ScVirtualList);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -36,7 +36,7 @@ export class ScVirtualListRow {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Where it goes: along the flow at its start, across in its lane. */
-  protected readonly place = computed(() => {
+  private readonly place = computed(() => {
     const { start, lane } = this.row();
     const lanes = Math.max(1, this.list.lanes());
     const gap = this.list.gap();
@@ -50,7 +50,7 @@ export class ScVirtualListRow {
       : `inset-inline-start:${start}px;top:${across[0]};height:${across[1]}`;
   });
 
-  protected readonly class = computed(() => cn('absolute', this.classInput()));
+  private readonly class = computed(() => cn('absolute', this.classInput()));
 
   constructor() {
     this.list.ɵobserve(this.element, () => this.row().key);

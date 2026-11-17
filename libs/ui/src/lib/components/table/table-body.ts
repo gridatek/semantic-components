@@ -10,7 +10,7 @@ import { cn } from 'cn';
 export class ScTableBody {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('[&_tr:last-child]:border-0', this.classInput()),
   );
 }

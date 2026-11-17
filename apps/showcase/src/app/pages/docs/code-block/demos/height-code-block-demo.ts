@@ -53,7 +53,7 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeightCodeBlockDemo {
-  readonly logs = `[12:00:00] GET /api/items/1 200 in 12ms
+  private readonly logs = `[12:00:00] GET /api/items/1 200 in 12ms
 [12:00:01] GET /api/items/2 200 in 13ms
 [12:00:02] GET /api/items/3 200 in 14ms
 [12:00:03] GET /api/items/4 200 in 15ms

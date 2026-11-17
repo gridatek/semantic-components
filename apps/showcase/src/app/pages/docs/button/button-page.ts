@@ -226,7 +226,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
   encapsulation: ViewEncapsulation.None,
 })
 export default class ButtonPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScButton } from '@semantic-components/ui';",
     markup: [
       '<button scButton>',
@@ -237,7 +237,7 @@ export default class ButtonPage {
     ].join('\n'),
   };
 
-  protected readonly inputs = [
+  private readonly inputs = [
     {
       name: 'variant',
       type: "'default' | 'outline' | 'secondary' | 'ghost' | 'destructive' | 'link'",

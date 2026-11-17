@@ -84,14 +84,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DonutChartDemo {
-  readonly data = [
+  private readonly data = [
     { browser: 'chrome', visitors: 275 },
     { browser: 'safari', visitors: 200 },
     { browser: 'firefox', visitors: 187 },
     { browser: 'edge', visitors: 173 },
     { browser: 'other', visitors: 90 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     visitors: { label: 'Visitors' },
     chrome: { label: 'Chrome', color: 'var(--chart-1)' },
     safari: { label: 'Safari', color: 'var(--chart-2)' },
@@ -99,5 +99,8 @@ export class DonutChartDemo {
     edge: { label: 'Edge', color: 'var(--chart-4)' },
     other: { label: 'Other', color: 'var(--chart-5)' },
   };
-  readonly total = this.data.reduce((sum, row) => sum + row.visitors, 0);
+  private readonly total = this.data.reduce(
+    (sum, row) => sum + row.visitors,
+    0,
+  );
 }

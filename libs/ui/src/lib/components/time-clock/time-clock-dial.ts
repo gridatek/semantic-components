@@ -89,24 +89,24 @@ const INNER = 26;
   encapsulation: ViewEncapsulation.None,
 })
 export class ScTimeClockDial {
-  protected readonly clock = inject(ScTimeClock);
+  private readonly clock = inject(ScTimeClock);
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly dragging = signal(false);
+  private readonly dragging = signal(false);
   /** An hour picked in this drag — only then on to the minutes. */
   private pickedHour = false;
 
   /** The value on this view: the hour (0–23), or the minute. */
-  protected readonly selected = computed(() => {
+  private readonly selected = computed(() => {
     const value = this.clock.value();
     if (!value) return null;
     return this.clock.view() === 'hours' ? value.hour : value.minute;
   });
 
-  protected readonly marks = computed<ScTimeClockMark[]>(() => {
+  private readonly marks = computed<ScTimeClockMark[]>(() => {
     const clock = this.clock;
     const { plain, padded } = clock.number();
     const at = (index: number, radius: number) => {
@@ -150,7 +150,7 @@ export class ScTimeClockDial {
   });
 
   /** The hand: where it points, and how long it is. */
-  protected readonly angle = computed(() => {
+  private readonly angle = computed(() => {
     const value = this.clock.value();
     if (!value) return null;
     const hours = this.clock.view() === 'hours';
@@ -169,12 +169,12 @@ export class ScTimeClockDial {
     };
   });
 
-  protected readonly numberClass = cn(
+  private readonly numberClass = cn(
     'pointer-events-none absolute flex size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-sm tabular-nums',
     'data-selected:text-primary-foreground data-disabled:text-muted-foreground/50',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-muted relative size-56 shrink-0 touch-none rounded-full outline-none select-none',
       'focus-visible:ring-ring/50 focus-visible:ring-3',
@@ -183,7 +183,7 @@ export class ScTimeClockDial {
     ),
   );
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (this.clock.disabled() || event.button !== 0) return;
     event.preventDefault();
     this.host.focus();
@@ -193,11 +193,11 @@ export class ScTimeClockDial {
     this.pick(event);
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     if (this.dragging()) this.pick(event);
   }
 
-  protected onPointerUp(event: PointerEvent): void {
+  private onPointerUp(event: PointerEvent): void {
     if (!this.dragging()) return;
     this.dragging.set(false);
     this.pick(event);
@@ -205,7 +205,7 @@ export class ScTimeClockDial {
       this.clock.hourPicked();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (this.clock.disabled()) return;
     const hours = this.clock.view() === 'hours';
     const step = hours ? 1 : this.clock.stepMinutes();

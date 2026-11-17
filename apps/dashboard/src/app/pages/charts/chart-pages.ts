@@ -74,24 +74,21 @@ const CARD_IMPORTS = [
 /** Each page's data: fresh copies (a chart takes mutable rows). */
 abstract class ChartPage {
   /** The donut's centre word: SVG text, so not an i18n element. */
-  protected readonly visitorsLabel = $localize`Visitors`;
-  protected readonly months = MONTHS.map((row) => ({
+  private readonly visitorsLabel = $localize`Visitors`;
+  private readonly months = MONTHS.map((row) => ({
     ...row,
     month: axisLabel(row.month),
   }));
-  protected readonly browsers = BROWSERS.map((row) => ({ ...row }));
-  protected readonly devices = DEVICES;
-  protected readonly desktopOnly: ScChartConfig = {
+  private readonly browsers = BROWSERS.map((row) => ({ ...row }));
+  private readonly devices = DEVICES;
+  private readonly desktopOnly: ScChartConfig = {
     desktop: DEVICES['desktop'],
   };
-  protected readonly browserConfig = BROWSER_CONFIG;
-  protected readonly total = BROWSERS.reduce(
-    (sum, row) => sum + row.visitors,
-    0,
-  );
+  private readonly browserConfig = BROWSER_CONFIG;
+  private readonly total = BROWSERS.reduce((sum, row) => sum + row.visitors, 0);
   /** The months are short already (axisLabel). */
-  protected readonly short = (month: string) => month;
-  protected readonly name = (_: number, category: string) => category;
+  private readonly short = (month: string) => month;
+  private readonly name = (_: number, category: string) => category;
 }
 
 /** Line charts (Pro): one series, two, with dots, in steps. */

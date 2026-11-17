@@ -18,7 +18,7 @@ import { ManyTransferListDemo } from './many-transfer-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ManyTransferListDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTransferList,
   ScTransferListListbox,

@@ -18,7 +18,7 @@ import { DisabledTabsDemo } from './disabled-tabs-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledTabsDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTabs,
   ScTabsList,

@@ -38,7 +38,7 @@ export class ScPdfViewerSignaturePad {
     inject<ElementRef<HTMLCanvasElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'size-full cursor-crosshair touch-none rounded-lg border bg-white',
       this.classInput(),
@@ -62,7 +62,7 @@ export class ScPdfViewerSignaturePad {
     effect(() => this.redraw(this.form.strokes()));
   }
 
-  protected start(event: PointerEvent): void {
+  private start(event: PointerEvent): void {
     this.canvas.setPointerCapture(event.pointerId);
     this.current = {
       points: [this.point(event)],
@@ -70,7 +70,7 @@ export class ScPdfViewerSignaturePad {
     };
   }
 
-  protected move(event: PointerEvent): void {
+  private move(event: PointerEvent): void {
     const stroke = this.current;
     const context = this.canvas.getContext('2d');
     if (!stroke || !context) return;
@@ -84,7 +84,7 @@ export class ScPdfViewerSignaturePad {
     context.stroke();
   }
 
-  protected end(event: PointerEvent): void {
+  private end(event: PointerEvent): void {
     const stroke = this.current;
     this.current = null;
     if (this.canvas.hasPointerCapture(event.pointerId)) {

@@ -18,7 +18,7 @@ import { ReadOnlyImageAnnotatorDemo } from './read-only-image-annotator-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ReadOnlyImageAnnotatorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScImageAnnotator,
   type ScImageAnnotatorAnnotation,

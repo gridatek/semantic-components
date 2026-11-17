@@ -18,7 +18,7 @@ import { WrapCodeEditorDemo } from './wrap-code-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class WrapCodeEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScCodeBlock } from '@semantic-components/ui/code-block';
 import { ScCodeEditor } from '@semantic-components/ui/code-editor';
 

@@ -14,7 +14,7 @@ export class ScEmptyTitle {
   private readonly styles = injectPreset().empty;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.title, this.classInput()),
   );
 }

@@ -13,7 +13,7 @@ import { cn } from 'cn';
 export class ScNotificationFilters {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-muted inline-flex items-center gap-0.5 rounded-lg p-0.5',
       this.classInput(),

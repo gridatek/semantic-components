@@ -21,12 +21,12 @@ import { ScDrawerProvider } from './drawer-provider';
 export class ScDrawerHandle {
   private readonly styles = injectPreset().drawer;
   private readonly drawer = inject(ScDrawerProvider);
-  protected readonly isButton =
+  private readonly isButton =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName ===
     'BUTTON';
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative z-10 flex shrink-0 cursor-grab touch-none outline-none after:block after:shrink-0 active:cursor-grabbing',
       'transition-opacity duration-200 group-data-nested-drawer-open/drawer-popup:opacity-0',
@@ -41,7 +41,7 @@ export class ScDrawerHandle {
     ),
   );
 
-  protected onClick(): void {
+  private onClick(): void {
     if (this.isButton) this.drawer.nextSnapPoint();
   }
 }

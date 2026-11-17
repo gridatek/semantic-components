@@ -91,7 +91,7 @@ import { RtlChatDemoContainer } from './demos/rtl-chat-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class ChatPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScMessageScroller, ScMessageScrollerViewport, ScMessageScrollerContent,',

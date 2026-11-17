@@ -144,7 +144,7 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
   encapsulation: ViewEncapsulation.None,
 })
 export default class DialogPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScDialogProvider, ScDialogTrigger, ScDialogPortal, ScDialog,',
@@ -173,7 +173,7 @@ export default class DialogPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScDialogProvider',
       selector: 'div[scDialogProvider], span[scDialogProvider]',

@@ -18,7 +18,7 @@ import { RtlCommandDemo } from './rtl-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCommandDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScCommand,

@@ -26,13 +26,13 @@ import { ScSpeedDial } from './speed-dial';
 export class ScSpeedDialTrigger {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly dial = inject(ScSpeedDial);
+  private readonly dial = inject(ScSpeedDial);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('default');
   readonly size = input<ScButtonVariants['size']>('icon-lg');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'rounded-full shadow-lg',
@@ -47,12 +47,12 @@ export class ScSpeedDialTrigger {
     );
   }
 
-  protected toggle(): void {
+  private toggle(): void {
     if (this.dial.open()) this.dial.close();
     else this.dial.openOnFirst();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (!event.key.startsWith('Arrow')) return;
     event.preventDefault();
     this.dial.openOnFirst();

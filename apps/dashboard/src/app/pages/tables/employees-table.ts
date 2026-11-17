@@ -270,7 +270,7 @@ const columns = columnHelper.columns([
 })
 export class EmployeesTable {
   private readonly labelOf = label;
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: [...EMPLOYEES],
@@ -278,6 +278,6 @@ export class EmployeesTable {
     initialState: { pagination: { pageIndex: 0, pageSize: 5 } },
   }));
 
-  protected readonly initialsOf = initials;
-  protected readonly salaryOf = money;
+  private readonly initialsOf = initials;
+  private readonly salaryOf = money;
 }

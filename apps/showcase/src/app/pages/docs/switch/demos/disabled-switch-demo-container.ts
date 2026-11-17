@@ -18,7 +18,7 @@ import { DisabledSwitchDemo } from './disabled-switch-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledSwitchDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScField, ScLabel, ScSwitch } from '@semantic-components/ui';
 
 /** Disabled: dimmed, out of the Tab order. */

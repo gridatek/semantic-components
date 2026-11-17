@@ -18,7 +18,7 @@ import { BasicEmojiPickerDemo } from './basic-emoji-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicEmojiPickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   type ScEmoji,
   ScEmojiPicker,

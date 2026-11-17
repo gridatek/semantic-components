@@ -103,7 +103,7 @@ export class ScVideoPlayer {
   /** The chapter playing. */
   readonly chapter = computed(() => this.chapterAt(this.currentTime()));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // A container (@container/video): its parts fit themselves to its width.
       'group/video @container/video relative isolate block overflow-hidden rounded-lg bg-black text-white outline-none',
@@ -260,12 +260,12 @@ export class ScVideoPlayer {
    * A mouse or a pen wakes the controls; a touch leaves it to what it lands
    * on — a tap on the video toggles them, a button takes focus (and wakes).
    */
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (event.pointerType !== 'touch') this.wake();
   }
 
   /** Shows the controls again, and hides them after a rest (while playing). */
-  protected wake(): void {
+  private wake(): void {
     this.idle.set(false);
     clearTimeout(this.idleTimer);
     if (this.paused()) return;
@@ -279,7 +279,7 @@ export class ScVideoPlayer {
     }, IDLE_AFTER);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const target = event.target as HTMLElement;
     // Fields keep their keys; buttons keep Space and Enter.
     if (target.closest('input, textarea, select, [contenteditable]')) return;

@@ -18,7 +18,7 @@ import { SidesDrawerDemo } from './sides-drawer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidesDrawerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScDrawer,

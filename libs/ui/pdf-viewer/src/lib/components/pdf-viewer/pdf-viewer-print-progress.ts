@@ -20,7 +20,7 @@ export class ScPdfViewerPrintProgress {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const progress = inject(ScProgress);

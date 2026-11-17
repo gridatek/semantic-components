@@ -147,7 +147,7 @@ import { SwipeHandleDrawerDemoContainer } from './demos/swipe-handle-drawer-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class DrawerPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScDrawerProvider, ScDrawerTrigger, ScDrawerPortal, ScDrawer,',
@@ -175,7 +175,7 @@ export default class DrawerPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScDrawerProvider',
       selector: 'div[scDrawerProvider], span[scDrawerProvider]',

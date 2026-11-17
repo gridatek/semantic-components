@@ -18,7 +18,7 @@ import { WhitespaceDiffViewerDemo } from './whitespace-diff-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class WhitespaceDiffViewerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScSwitch } from '@semantic-components/ui';
 import { ScCodeBlock } from '@semantic-components/ui/code-block';
 import { ScDiffViewer } from '@semantic-components/ui/diff-viewer';

@@ -16,15 +16,15 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   },
 })
 export class ScPdfViewerGoToPage {
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly page = input.required<number>({ alias: 'scPdfViewerGoToPage' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly current = computed(
+  private readonly current = computed(
     () => this.pdfViewer.currentPage() === this.page(),
   );
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('data-current:bg-accent', this.classInput()),
   );
 }

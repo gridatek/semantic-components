@@ -333,21 +333,21 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
 })
 export default class Navbar {
   /** A shortcut as this platform writes it (⌘K, Ctrl+K). */
-  protected readonly format = injectFormatForDisplay();
+  private readonly format = injectFormatForDisplay();
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   private readonly componentsService = inject(ComponentsService);
-  protected readonly featuredComponents = computed(() =>
+  private readonly featuredComponents = computed(() =>
     this.componentsService.visibleComponents().slice(0, 5),
   );
 
   private readonly github = inject(GithubService);
-  protected readonly starCount = this.github.starCount;
+  private readonly starCount = this.github.starCount;
 
   private readonly commandPalette = inject(CommandPaletteService);
 
-  openCommandPalette(): void {
+  private openCommandPalette(): void {
     this.commandPalette.open.set(true);
   }
 }

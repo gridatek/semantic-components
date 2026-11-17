@@ -108,7 +108,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ConfirmDateRangePickerDemo {
-  readonly presets = scDateRangePresets({
+  private readonly presets = scDateRangePresets({
     today: 'Today',
     yesterday: 'Yesterday',
     last7Days: 'Last 7 days',
@@ -116,5 +116,5 @@ export class ConfirmDateRangePickerDemo {
     thisMonth: 'This month',
     lastMonth: 'Last month',
   });
-  readonly range = signal<ScCalendarValue>(this.presets[2].value);
+  private readonly range = signal<ScCalendarValue>(this.presets[2].value);
 }

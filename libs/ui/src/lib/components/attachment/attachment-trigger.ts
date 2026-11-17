@@ -15,12 +15,12 @@ import { cn } from 'cn';
   },
 })
 export class ScAttachmentTrigger {
-  protected readonly isButton =
+  private readonly isButton =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName ===
     'BUTTON';
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('absolute inset-0 z-10 outline-none', this.classInput()),
   );
 }

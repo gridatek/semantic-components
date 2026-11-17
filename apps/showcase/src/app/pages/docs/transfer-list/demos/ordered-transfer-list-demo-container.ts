@@ -18,7 +18,7 @@ import { OrderedTransferListDemo } from './ordered-transfer-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class OrderedTransferListDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTransferList,
   ScTransferListListbox,

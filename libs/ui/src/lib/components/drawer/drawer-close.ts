@@ -20,13 +20,13 @@ import { ScDrawerProvider } from './drawer-provider';
 })
 export class ScDrawerClose {
   private readonly buttonStyles = injectPreset().button;
-  protected readonly drawer = inject(ScDrawerProvider);
+  private readonly drawer = inject(ScDrawerProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly type = input<'button' | 'submit' | 'reset'>('button');
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

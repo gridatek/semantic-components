@@ -14,7 +14,7 @@ import { TraceUsageDemo } from './trace-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TraceUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

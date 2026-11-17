@@ -18,7 +18,7 @@ import { DefaultButtonDemo } from './default-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DefaultButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 
 @Component({

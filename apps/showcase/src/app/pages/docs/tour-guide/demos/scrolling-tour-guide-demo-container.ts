@@ -18,7 +18,7 @@ import { ScrollingTourGuideDemo } from './scrolling-tour-guide-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollingTourGuideDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScTourGuide,

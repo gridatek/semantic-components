@@ -18,7 +18,7 @@ import { VariantsBubbleDemo } from './variants-bubble-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VariantsBubbleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

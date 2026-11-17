@@ -39,7 +39,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class InputTimeClockDemo {
-  readonly time = signal<Temporal.PlainTime | null>(
+  private readonly time = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('07:15'),
   );
 }

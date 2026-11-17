@@ -30,12 +30,12 @@ export class ScCountdownText {
     secondsDisplay: 'always',
   });
 
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     const left = this.countdown.left();
     return this.countdown.done()
       ? this.zero.format({ seconds: 0 })
       : this.format.format(left);
   });
 
-  protected readonly class = computed(() => cn('sr-only', this.classInput()));
+  private readonly class = computed(() => cn('sr-only', this.classInput()));
 }

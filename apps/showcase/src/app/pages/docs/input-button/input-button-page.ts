@@ -129,7 +129,7 @@ import { RtlInputButtonDemoContainer } from './demos/rtl-input-button-demo-conta
   encapsulation: ViewEncapsulation.None,
 })
 export default class InputButtonPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScInputButton } from '@semantic-components/ui';",
     markup: [
       '<button scInputButton>',
@@ -140,7 +140,7 @@ export default class InputButtonPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScInputButton',
       selector: 'button[scInputButton]',

@@ -28,7 +28,7 @@ import { ScAvatar } from './avatar';
   },
 })
 export class ScAvatarImage {
-  protected readonly avatar = inject(ScAvatar);
+  private readonly avatar = inject(ScAvatar);
   private readonly image =
     inject<ElementRef<HTMLImageElement>>(ElementRef).nativeElement;
   private readonly browser = isPlatformBrowser(inject(PLATFORM_ID));
@@ -37,7 +37,7 @@ export class ScAvatarImage {
 
   // The same classes on the server and in the browser — the state is in
   // attributes, which hydration updates (a class it may leave behind).
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute inset-0 aspect-square size-full rounded-full object-cover data-error:invisible data-loading:invisible',
       this.classInput(),
@@ -52,11 +52,11 @@ export class ScAvatarImage {
     this.avatar.imageStatus.set(loaded ? 'loaded' : 'loading');
   }
 
-  protected onLoad(): void {
+  private onLoad(): void {
     this.avatar.imageStatus.set('loaded');
   }
 
-  protected onError(): void {
+  private onError(): void {
     this.avatar.imageStatus.set('error');
   }
 }

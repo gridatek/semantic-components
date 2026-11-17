@@ -18,7 +18,7 @@ import { SheetToolDemo } from './sheet-tool-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SheetToolDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScSheet,
   ScSheetDescription,

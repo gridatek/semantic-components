@@ -77,12 +77,12 @@ import {
 export class ForgotPasswordPage {
   private readonly toaster = inject(ScToaster);
   private readonly model = signal({ email: '' });
-  protected readonly resetForm = form(this.model, (path) => {
+  private readonly resetForm = form(this.model, (path) => {
     required(path.email);
     email(path.email);
   });
 
-  protected send(event: Event): void {
+  private send(event: Event): void {
     event.preventDefault();
     if (this.resetForm().invalid()) return;
     this.toaster.show({

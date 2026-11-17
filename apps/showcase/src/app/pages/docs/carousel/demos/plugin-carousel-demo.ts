@@ -99,14 +99,14 @@ import Autoplay from 'embla-carousel-autoplay';
   encapsulation: ViewEncapsulation.None,
 })
 export class PluginCarouselDemo {
-  readonly slides = [1, 2, 3, 4, 5];
+  private readonly slides = [1, 2, 3, 4, 5];
   private readonly autoplay = Autoplay({
     delay: 2000,
     stopOnMouseEnter: true,
     stopOnFocusIn: true,
   });
-  readonly plugins = [this.autoplay];
-  readonly playing = signal(false);
+  private readonly plugins = [this.autoplay];
+  private readonly playing = signal(false);
   private readonly carousel = viewChild.required(ScCarousel);
 
   constructor() {
@@ -125,7 +125,7 @@ export class PluginCarouselDemo {
     });
   }
 
-  toggle(): void {
+  private toggle(): void {
     if (this.autoplay.isPlaying()) this.autoplay.stop();
     else this.autoplay.play();
   }

@@ -16,10 +16,10 @@ import { SC_NOTIFICATION } from './notification';
   },
 })
 export class ScNotificationIcon {
-  protected readonly item = inject(SC_NOTIFICATION);
+  private readonly item = inject(SC_NOTIFICATION);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-muted text-muted-foreground flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full [&_svg]:size-4 [&_img]:size-full [&_img]:object-cover',
       'data-[type=success]:bg-success/10 data-[type=success]:text-success',

@@ -18,7 +18,7 @@ import { RtlAspectRatioDemo } from './rtl-aspect-ratio-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlAspectRatioDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { NgOptimizedImage } from '@angular/common';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio, ScFrame } from '@semantic-components/ui';

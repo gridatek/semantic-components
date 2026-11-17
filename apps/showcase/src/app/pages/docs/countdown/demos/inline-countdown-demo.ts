@@ -30,7 +30,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class InlineCountdownDemo {
-  readonly end = Temporal.Now.instant().add({
+  private readonly end = Temporal.Now.instant().add({
     hours: 2,
     minutes: 14,
     seconds: 5,

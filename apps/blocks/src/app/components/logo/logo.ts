@@ -21,7 +21,7 @@ import { cn } from 'cn';
 export class Logo {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex items-center gap-2.5 font-semibold', this.classInput()),
   );
 }

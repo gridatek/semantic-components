@@ -18,7 +18,7 @@ import { SizesAttachmentDemo } from './sizes-attachment-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesAttachmentDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAttachment,
   ScAttachmentContent,

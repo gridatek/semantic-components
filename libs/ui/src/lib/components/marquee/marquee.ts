@@ -85,12 +85,12 @@ export class ScMarquee {
   readonly fade = input(false, { transform: booleanAttribute });
 
   /** Under the pointer, or with focus in the content (not the pause button): it waits. */
-  protected readonly hovered = signal(false);
-  protected readonly focused = signal(false);
+  private readonly hovered = signal(false);
+  private readonly focused = signal(false);
   /** Reduced motion: it does not move. */
   readonly still = signal(false);
 
-  protected readonly content = contentChild(ScMarqueeContent);
+  private readonly content = contentChild(ScMarqueeContent);
   private readonly viewport =
     viewChild.required<ElementRef<HTMLElement>>('viewport');
   private readonly track = viewChild.required<ElementRef<HTMLElement>>('track');
@@ -105,7 +105,7 @@ export class ScMarquee {
   private readonly copySize = signal(0);
 
   /** As many copies as fill what shows, and one more to loop. */
-  protected readonly copies = computed(() => {
+  private readonly copies = computed(() => {
     const copy = this.copySize() + this.gap();
     if (this.still() || !copy || !this.copySize()) return [0];
     return Array.from(
@@ -114,11 +114,11 @@ export class ScMarquee {
     );
   });
 
-  protected readonly flow = computed(() =>
+  private readonly flow = computed(() =>
     cn('flex shrink-0', this.vertical() ? 'flex-col' : 'flex-row items-center'),
   );
 
-  protected readonly viewportClass = computed(() =>
+  private readonly viewportClass = computed(() =>
     cn(
       'flex min-h-0 min-w-0 flex-1',
       this.vertical() && 'flex-col',
@@ -131,13 +131,13 @@ export class ScMarquee {
     ),
   );
 
-  protected readonly mask = computed(() =>
+  private readonly mask = computed(() =>
     this.fade()
       ? `linear-gradient(to ${this.vertical() ? 'bottom' : 'right'}, transparent, black 10%, black 90%, transparent)`
       : null,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // The content takes the room; a pause button sits beside it.
       'relative flex gap-2',
@@ -206,7 +206,7 @@ export class ScMarquee {
     });
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     const viewport = this.viewport().nativeElement;
     if (!viewport.contains(event.relatedTarget as Node | null)) {
       this.focused.set(false);

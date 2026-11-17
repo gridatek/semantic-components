@@ -626,13 +626,13 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class EditorPage {
-  readonly stylesCode = [
+  private readonly stylesCode = [
     '@import "@semantic-components/ui/styles/typeset.css";',
     '@import "@semantic-components/presets/nova/typeset-variables.css";',
     '@import "@semantic-components/presets/nova/editor.css";',
   ].join('\n');
 
-  readonly featuresCode = `import { Component, signal } from '@angular/core';
+  private readonly featuresCode = `import { Component, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScToggle,
@@ -686,7 +686,7 @@ export class NoteEditor {
 }`;
 
   /** The parts and functions of each entry point. */
-  readonly api: {
+  private readonly api: {
     entry: string;
     items: { name: string; inputs: string[]; read: string[]; do: string[] }[];
   }[] = [
@@ -933,7 +933,7 @@ export class NoteEditor {
     },
   ];
 
-  readonly shortcuts = [
+  private readonly shortcuts = [
     { keys: 'Ctrl / ⌘ + B', does: 'Bold', needs: '' },
     { keys: 'Ctrl / ⌘ + I', does: 'Italic', needs: '' },
     { keys: 'Ctrl / ⌘ + U', does: 'Underline', needs: '' },
@@ -978,13 +978,13 @@ export class NoteEditor {
     },
   ];
 
-  readonly loadingCode = `@defer (on viewport) {
+  private readonly loadingCode = `@defer (on viewport) {
   <app-note-editor />
 } @placeholder {
   <div class="h-40 rounded-lg border"></div>
 }`;
 
-  readonly features = [
+  private readonly features = [
     {
       entry: '/tables',
       provide: 'withTables()',

@@ -18,7 +18,7 @@ import { VerticalCompareDemo } from './vertical-compare-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalCompareDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCompare,
   ScCompareAfter,

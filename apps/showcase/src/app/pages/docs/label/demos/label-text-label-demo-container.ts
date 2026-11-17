@@ -18,7 +18,7 @@ import { LabelTextLabelDemo } from './label-text-label-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelTextLabelDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScLabelText, ScSwitch } from '@semantic-components/ui';
 
 /** Text inside another label (a switch’s): scLabelText, a label’s look without a second label. */

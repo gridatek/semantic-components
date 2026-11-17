@@ -27,13 +27,13 @@ import { ScPasswordField } from './password-field';
 })
 export class ScPasswordToggle {
   private readonly buttonStyles = injectPreset().button;
-  protected readonly password = inject(ScPasswordField);
+  private readonly password = inject(ScPasswordField);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'shrink-0',
@@ -46,7 +46,7 @@ export class ScPasswordToggle {
   }
 
   /** A pointer press doesn't take the focus from the input: typing goes on. */
-  protected keepFocus(event: PointerEvent): void {
+  private keepFocus(event: PointerEvent): void {
     if (event.button === 0 && this.password.input()) event.preventDefault();
   }
 }

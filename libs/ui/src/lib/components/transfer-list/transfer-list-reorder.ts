@@ -23,7 +23,7 @@ import { ScTransferList } from './transfer-list';
 export class ScTransferListReorder {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly list = inject(ScTransferList);
+  private readonly list = inject(ScTransferList);
 
   readonly step = input.required<-1 | 1>({
     alias: 'scTransferListReorder',
@@ -33,11 +33,11 @@ export class ScTransferListReorder {
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
   /** The chosen side's selection. */
-  protected readonly selected = computed(
+  private readonly selected = computed(
     () => this.list.pane('target')?.selected() ?? [],
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

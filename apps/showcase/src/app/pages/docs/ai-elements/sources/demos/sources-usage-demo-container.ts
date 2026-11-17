@@ -18,7 +18,7 @@ import { SourcesUsageDemo } from './sources-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SourcesUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

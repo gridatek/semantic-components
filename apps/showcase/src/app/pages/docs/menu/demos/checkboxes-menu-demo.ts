@@ -63,7 +63,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxesMenuDemo {
-  protected readonly statusBar = signal(true);
-  protected readonly activityBar = signal(false);
-  protected readonly panel = signal(false);
+  private readonly statusBar = signal(true);
+  private readonly activityBar = signal(false);
+  private readonly panel = signal(false);
 }

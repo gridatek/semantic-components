@@ -18,7 +18,7 @@ import { RtlBadgeDemo } from './rtl-badge-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlBadgeDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScBadge } from '@semantic-components/ui';
 import { SiBadgeCheckIcon } from '@semantic-icons/lucide-icons';

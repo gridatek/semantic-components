@@ -149,7 +149,7 @@ export class BasicTablePage {
     basic: $localize`Basic`,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
     data: STAFF.slice(0, 8) as StaffMember[],
@@ -233,7 +233,7 @@ export class DenseTablePage {
     dense: $localize`Dense`,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
     data: STAFF as StaffMember[],
@@ -323,7 +323,7 @@ export class StickyTablePage {
     sticky: $localize`Sticky`,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
     data: STAFF as StaffMember[],
@@ -407,7 +407,7 @@ export class EmptyTablePage {
     empty: $localize`Empty`,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns: COLUMNS,
     data: [] as StaffMember[],

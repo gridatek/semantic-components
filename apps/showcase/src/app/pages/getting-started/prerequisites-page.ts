@@ -190,7 +190,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
   encapsulation: ViewEncapsulation.None,
 })
 export default class PrerequisitesPage {
-  readonly step3aCode = `{
+  private readonly step3aCode = `{
   "plugins": {
     "@tailwindcss/postcss": {}
   }

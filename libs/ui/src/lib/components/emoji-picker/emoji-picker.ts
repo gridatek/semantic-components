@@ -50,7 +50,7 @@ const ARROW_KEYS = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
   },
 })
 export class ScEmojiPicker {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -81,7 +81,7 @@ export class ScEmojiPicker {
   /** An emoji was picked. */
   readonly emojiSelect = output<ScEmoji>();
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-popover text-popover-foreground isolate flex h-[342px] w-fit flex-col overflow-hidden rounded-md',
       this.classInput(),
@@ -178,7 +178,7 @@ export class ScEmojiPicker {
   }
 
   /** In the search field or the list: arrows move, Enter picks. */
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (event.defaultPrevented || !this.inPicker(event.target)) return;
     if (event.key === 'Enter') {
       if (this.state.selectActive()) event.preventDefault();
@@ -188,7 +188,7 @@ export class ScEmojiPicker {
     }
   }
 
-  protected onFocusin(event: FocusEvent): void {
+  private onFocusin(event: FocusEvent): void {
     if (event.target === this.state.viewportElement) {
       // Tabbing into the list: its first emoji.
       if (this.state.interaction() === 'none') {
@@ -202,7 +202,7 @@ export class ScEmojiPicker {
     }
   }
 
-  protected onFocusout(event: FocusEvent): void {
+  private onFocusout(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
     if (!next || !this.host.contains(next)) this.state.resetActive();
   }

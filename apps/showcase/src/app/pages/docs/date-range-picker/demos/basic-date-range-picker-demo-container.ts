@@ -18,7 +18,7 @@ import { BasicDateRangePickerDemo } from './basic-date-range-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicDateRangePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

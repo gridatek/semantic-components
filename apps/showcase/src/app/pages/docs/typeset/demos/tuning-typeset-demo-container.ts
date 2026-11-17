@@ -18,7 +18,7 @@ import { TuningTypesetDemo } from './tuning-typeset-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TuningTypesetDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * Three variables tune it: the size, the line height and the space between

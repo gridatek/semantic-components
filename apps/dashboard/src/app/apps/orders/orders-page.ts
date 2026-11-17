@@ -310,7 +310,7 @@ export class OrdersPage {
     orders: $localize`Orders`,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: ROWS,

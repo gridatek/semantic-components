@@ -18,7 +18,7 @@ import { GroupChatMessageScrollerDemo } from './group-chat-message-scroller-demo
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupChatMessageScrollerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

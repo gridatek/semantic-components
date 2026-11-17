@@ -18,7 +18,7 @@ import { MenuSeparatorDemo } from './menu-separator-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MenuSeparatorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSeparator } from '@semantic-components/ui';
 
 /** Vertical lines between columns; the last column and its line only from md up. */

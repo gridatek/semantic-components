@@ -21,7 +21,7 @@ import { SC_TOAST_CONTEXT } from './toast-context';
   },
 })
 export class ScToastClose {
-  protected readonly context = inject(SC_TOAST_CONTEXT);
+  private readonly context = inject(SC_TOAST_CONTEXT);
   private readonly buttonStyles = injectPreset().button;
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -33,7 +33,7 @@ export class ScToastClose {
     ɵwarnIfUnnamed('scToastClose');
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       "relative shrink-0 text-muted-foreground after:absolute after:-inset-2 after:content-[''] hover:text-foreground",

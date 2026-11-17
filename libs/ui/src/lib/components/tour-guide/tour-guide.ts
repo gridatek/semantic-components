@@ -100,8 +100,8 @@ export class ScTourGuide {
   /** The current step's title and text: named and described by them. */
   readonly ɵtitleId = signal<string | null>(null);
   readonly ɵdescriptionId = signal<string | null>(null);
-  protected readonly titleId = this.ɵtitleId.asReadonly();
-  protected readonly descriptionId = this.ɵdescriptionId.asReadonly();
+  private readonly titleId = this.ɵtitleId.asReadonly();
+  private readonly descriptionId = this.ɵdescriptionId.asReadonly();
 
   private readonly dialog =
     viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
@@ -109,27 +109,27 @@ export class ScTourGuide {
     viewChild.required<ElementRef<HTMLElement>>('card');
 
   /** Where the spotlight and the card are, and the side the card took. */
-  protected readonly spotlight = signal<ScPlacementBox>({
+  private readonly spotlight = signal<ScPlacementBox>({
     top: 0,
     left: 0,
     width: 0,
     height: 0,
   });
-  protected readonly cardAt = signal({ top: 0, left: 0 });
-  protected readonly placed = signal<ScOverlaySide | 'center'>('center');
+  private readonly cardAt = signal({ top: 0, left: 0 });
+  private readonly placed = signal<ScOverlaySide | 'center'>('center');
 
   /** Placed once since opening: from then on, its moves are animated. */
-  protected readonly settled = signal(false);
+  private readonly settled = signal(false);
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
-  protected readonly spotlightClass = computed(() =>
+  private readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly spotlightClass = computed(() =>
     cn(
       'pointer-events-none fixed rounded-lg shadow-[0_0_0_200vmax_rgb(0_0_0/0.5)]',
       this.settled() &&
         'transition-[top,left,width,height] duration-300 ease-out motion-reduce:transition-none',
     ),
   );
-  protected readonly cardClass = computed(() =>
+  private readonly cardClass = computed(() =>
     cn(
       'bg-popover text-popover-foreground fixed w-80 max-w-[calc(100vw-1rem)] space-y-3 rounded-lg border p-4 shadow-lg outline-none',
       this.settled() &&
@@ -203,13 +203,13 @@ export class ScTourGuide {
     this.open.set(false);
   }
 
-  protected onCancel(event: Event): void {
+  private onCancel(event: Event): void {
     // Escape: ours to close (the model follows).
     event.preventDefault();
     this.close();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const target = event.target as HTMLElement;
     if (target.closest('input, textarea, select, [contenteditable]')) return;
     if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {

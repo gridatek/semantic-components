@@ -18,7 +18,7 @@ import { ReadonlyCodeEditorDemo } from './readonly-code-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ReadonlyCodeEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScCodeBlock } from '@semantic-components/ui/code-block';
 import { ScCodeEditor } from '@semantic-components/ui/code-editor';
 

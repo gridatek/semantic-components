@@ -18,7 +18,7 @@ import { ShortcutsContextMenuDemo } from './shortcuts-context-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShortcutsContextMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScContextMenu,
   ScContextMenuTrigger,

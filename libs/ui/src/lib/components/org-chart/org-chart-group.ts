@@ -44,7 +44,7 @@ import { ScOrgChartItem } from './org-chart-item';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScOrgChartGroup implements ScTreeItemGroupContext {
-  protected readonly item = inject(forwardRef(() => ScOrgChartItem));
+  private readonly item = inject(forwardRef(() => ScOrgChartItem));
   private readonly chart = inject(ScOrgChart);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -83,11 +83,11 @@ export class ScOrgChartGroup implements ScTreeItemGroupContext {
   }
 
   /** Gone (closed, or removed): no longer re-sorted. */
-  forget(item: TreeItem<unknown>): void {
+  private forget(item: TreeItem<unknown>): void {
     this.live.delete(item);
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'before:bg-border relative flex before:absolute',
       this.chart.direction() === 'down'

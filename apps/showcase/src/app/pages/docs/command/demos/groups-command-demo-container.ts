@@ -18,7 +18,7 @@ import { GroupsCommandDemo } from './groups-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupsCommandDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCommand,

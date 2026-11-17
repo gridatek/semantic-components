@@ -18,7 +18,7 @@ import { GroupKbdDemo } from './group-kbd-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupKbdDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScKbd, ScKbdGroup } from '@semantic-components/ui';
 
 /** Keys together in a scKbdGroup, here in a sentence. */

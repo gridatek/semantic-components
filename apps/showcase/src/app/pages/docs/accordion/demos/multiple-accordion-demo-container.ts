@@ -18,7 +18,7 @@ import { MultipleAccordionDemo } from './multiple-accordion-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleAccordionDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAccordion,
   ScAccordionHeader,

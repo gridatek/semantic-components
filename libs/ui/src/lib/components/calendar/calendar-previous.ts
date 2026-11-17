@@ -21,7 +21,7 @@ export class ScCalendarPrevious {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'absolute start-0 size-(--cell-size) p-0 select-none',
@@ -31,7 +31,7 @@ export class ScCalendarPrevious {
     ),
   );
 
-  onClick(): void {
+  private onClick(): void {
     this.calendar.previous();
   }
 }

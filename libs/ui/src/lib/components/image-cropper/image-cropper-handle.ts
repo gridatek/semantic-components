@@ -37,7 +37,7 @@ export class ScImageCropperHandle {
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute z-10 border border-gray-400 bg-white',
       // A larger target than it looks, for fingers.

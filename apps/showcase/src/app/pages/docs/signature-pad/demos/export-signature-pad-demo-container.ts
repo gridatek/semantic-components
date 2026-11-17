@@ -18,7 +18,7 @@ import { ExportSignaturePadDemo } from './export-signature-pad-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ExportSignaturePadDemoContainer {
-  readonly code = `import { DOCUMENT } from '@angular/common';
+  private readonly code = `import { DOCUMENT } from '@angular/common';
 import {
   Component,
   ViewEncapsulation,

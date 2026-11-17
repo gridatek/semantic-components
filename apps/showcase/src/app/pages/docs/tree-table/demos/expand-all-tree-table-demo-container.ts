@@ -18,7 +18,7 @@ import { ExpandAllTreeTableDemo } from './expand-all-tree-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ExpandAllTreeTableDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   createColumnHelper,
   createExpandedRowModel,
   injectTable,

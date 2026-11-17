@@ -18,7 +18,7 @@ import { StepTimeClockDemo } from './step-time-clock-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StepTimeClockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTimeClock,
   ScTimeClockDial,

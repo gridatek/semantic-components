@@ -18,7 +18,7 @@ import { MutedFramesStackTraceDemo } from './muted-frames-stack-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MutedFramesStackTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

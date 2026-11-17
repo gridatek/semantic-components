@@ -117,7 +117,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewContributionHistory {
-  protected readonly data = [
+  private readonly data = [
     { month: 'Dec', amount: 800 },
     { month: 'Jan', amount: 1100 },
     { month: 'Feb', amount: 900 },
@@ -125,10 +125,10 @@ export class PreviewContributionHistory {
     { month: 'Apr', amount: 750 },
     { month: 'May', amount: 1400 },
   ];
-  protected readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     amount: { label: 'Contribution', color: 'var(--chart-2)' },
   };
-  protected readonly plans = [
+  private readonly plans = [
     { label: 'Upcoming', value: 'May 25, 2024', note: '$1,000 scheduled' },
     { label: 'Auto-Save Plan', value: 'Accelerated', note: 'Recurring weekly' },
   ];

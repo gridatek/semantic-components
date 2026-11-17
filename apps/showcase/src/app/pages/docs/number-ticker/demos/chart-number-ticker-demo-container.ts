@@ -19,7 +19,7 @@ import { ChartNumberTickerDemo } from './chart-number-ticker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChartNumberTickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScNumberTicker } from '@semantic-components/ui';
 
 /** On an SVG \`<text>\`: a total in a ring's center, counting up with the ring (after 400ms, for 1500ms, ease). */

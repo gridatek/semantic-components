@@ -15,7 +15,7 @@ export class ScCodeBlockHeader {
 
   private readonly styles = injectPreset().codeBlock;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.header,
       "[&>svg]:pointer-events-none [&>svg]:shrink-0 [&>svg:not([class*='size-'])]:size-4",

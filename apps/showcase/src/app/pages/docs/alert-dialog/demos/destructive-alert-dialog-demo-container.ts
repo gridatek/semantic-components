@@ -18,7 +18,7 @@ import { DestructiveAlertDialogDemo } from './destructive-alert-dialog-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DestructiveAlertDialogDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlertDialog,
   ScAlertDialogAction,

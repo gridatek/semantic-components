@@ -71,7 +71,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewFeedbackForm {
-  protected readonly topics = [
+  private readonly topics = [
     { value: '', label: 'Select a topic' },
     { value: 'ai', label: 'AI' },
     { value: 'accounts', label: 'Accounts and Access Controls' },
@@ -94,5 +94,5 @@ export class PreviewFeedbackForm {
     },
     { value: 'storage', label: 'Storage' },
   ];
-  protected readonly feedback = form(signal({ topic: '', message: '' }));
+  private readonly feedback = form(signal({ topic: '', message: '' }));
 }

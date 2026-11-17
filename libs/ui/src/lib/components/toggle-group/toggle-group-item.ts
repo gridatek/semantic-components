@@ -36,7 +36,7 @@ import { ScToggleGroup, type ScToggleGroupItemRef } from './toggle-group';
 export class ScToggleGroupItem implements ScToggleGroupItemRef {
   private readonly toggleStyles = injectPreset().toggle;
   private readonly styles = injectPreset().toggleGroup;
-  protected readonly group = inject(ScToggleGroup);
+  private readonly group = inject(ScToggleGroup);
   readonly element =
     inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
 
@@ -52,13 +52,13 @@ export class ScToggleGroupItem implements ScToggleGroupItemRef {
   readonly variant = input<ScToggleVariants['variant']>('default');
   readonly size = input<ScToggleVariants['size']>('default');
 
-  protected readonly isPressed = computed(() => this.group.has(this.value()));
+  private readonly isPressed = computed(() => this.group.has(this.value()));
 
   readonly isDisabled = computed(
     () => this.disabledInput() || this.group.disabled(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.item,
       this.toggleStyles({
@@ -78,7 +78,7 @@ export class ScToggleGroupItem implements ScToggleGroupItemRef {
     this.element.focus();
   }
 
-  protected onClick(): void {
+  private onClick(): void {
     if (!this.isDisabled()) this.group.toggle(this.value());
   }
 }

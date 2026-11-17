@@ -166,14 +166,14 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
   encapsulation: ViewEncapsulation.None,
 })
 export default class FocusTrapPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: ["import { ScFocusTrap } from '@semantic-components/ui';"].join(
       '\n',
     ),
     markup: ['@if (open()) {', '  <div scFocusTrap>…</div>', '}'].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScFocusTrap',
       selector: '[scFocusTrap]',

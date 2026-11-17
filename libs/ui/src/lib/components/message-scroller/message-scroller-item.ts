@@ -34,7 +34,7 @@ export class ScMessageScrollerItem {
   /** Starts a turn — usually the reader's own messages. */
   readonly scrollAnchor = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'min-w-0 shrink-0 [contain-intrinsic-size:auto_10rem] [content-visibility:auto]',
       this.classInput(),

@@ -45,7 +45,7 @@ export class ScResizablePanelGroup {
   /** Its own panels: its direct children (a nested group has its own). */
   readonly panels = contentChildren(forwardRef(() => ScResizablePanel));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex size-full',
       // Plain classes, not data-[orientation=…]: (they'd outrank yours).
@@ -70,7 +70,7 @@ export class ScResizablePanelGroup {
   }
 
   /** A panel's size, in %. */
-  sizeOf(panel: ScResizablePanel): number {
+  private sizeOf(panel: ScResizablePanel): number {
     return this.layout()[this.panels().indexOf(panel)] ?? 0;
   }
 

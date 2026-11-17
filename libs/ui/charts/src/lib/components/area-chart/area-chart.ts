@@ -150,7 +150,7 @@ export class ScChartArea implements ScChartSeriesLabels {
   );
   private readonly clipId = inject(_IdGenerator).getId('sc-chart-area-clip-');
 
-  protected readonly color = computed(() => `var(--color-${this.key()})`);
+  private readonly color = computed(() => `var(--color-${this.key()})`);
 
   /** Its points where they belong now. */
   private readonly targets = computed<ScAreaChartPoint[]>(() => {
@@ -186,7 +186,7 @@ export class ScChartArea implements ScChartSeriesLabels {
   /** What is drawn: its points, moving or still. */
   private readonly points = this.moving.items;
 
-  protected readonly areaPath = computed(() => {
+  private readonly areaPath = computed(() => {
     const vertical = this.state.vertical();
     const shape = vertical
       ? area<ScAreaChartPoint>()
@@ -200,7 +200,7 @@ export class ScChartArea implements ScChartSeriesLabels {
     return shape.curve(curveOf(this.curve(), vertical))(this.points()) ?? '';
   });
 
-  protected readonly edgePath = computed(
+  private readonly edgePath = computed(
     () =>
       line<ScAreaChartPoint>()
         .x((p) => p.x)
@@ -233,12 +233,12 @@ export class ScChartArea implements ScChartSeriesLabels {
       : { x: start, y: across.start, width: length, height: across.length };
   });
 
-  protected readonly activePoint = computed(() => {
+  private readonly activePoint = computed(() => {
     const index = this.state.activeIndex();
     return this.activeDot() && index !== null ? this.targets()[index] : null;
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({

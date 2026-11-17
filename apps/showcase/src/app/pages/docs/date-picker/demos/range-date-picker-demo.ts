@@ -81,5 +81,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RangeDatePickerDemo {
-  readonly stay = signal<ScCalendarValue>(null);
+  private readonly stay = signal<ScCalendarValue>(null);
 }

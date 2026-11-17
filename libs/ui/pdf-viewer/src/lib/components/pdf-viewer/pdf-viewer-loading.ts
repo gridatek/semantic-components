@@ -16,10 +16,10 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   },
 })
 export class ScPdfViewerLoading {
-  readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-background text-muted-foreground absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 text-sm',
       '[&>svg]:size-6',

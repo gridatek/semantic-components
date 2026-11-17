@@ -18,7 +18,7 @@ import { DialogTraceDemo } from './dialog-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DialogTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScDialog,
   ScDialogDescription,

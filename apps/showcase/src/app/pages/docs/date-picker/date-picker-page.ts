@@ -165,7 +165,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
   encapsulation: ViewEncapsulation.None,
 })
 export default class DatePickerPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScDatePicker, ScDatePickerTrigger, ScDatePickerPresets, ScDatePickerPreset,',
@@ -199,7 +199,7 @@ export default class DatePickerPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScDatePicker',
       selector: 'div[scDatePicker]',

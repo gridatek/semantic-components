@@ -13,7 +13,7 @@ import { cn } from 'cn';
 export class ScPdfViewerZoom {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex items-center gap-1', this.classInput()),
   );
 }

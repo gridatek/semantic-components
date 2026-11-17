@@ -141,7 +141,7 @@ import { RtlLabelDemoContainer } from './demos/rtl-label-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class LabelPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScField, ScFieldContentWrapper, ScFieldDescription, ScFieldTitle, ScLabel, ScLabelText } from '@semantic-components/ui';",
     markup: [
@@ -166,7 +166,7 @@ export default class LabelPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScLabel',
       selector: 'label[scLabel]',

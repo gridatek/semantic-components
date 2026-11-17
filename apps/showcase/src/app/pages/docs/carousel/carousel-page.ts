@@ -168,7 +168,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
   encapsulation: ViewEncapsulation.None,
 })
 export default class CarouselPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScCarousel, ScCarouselViewport, ScCarouselTrack,',
@@ -193,7 +193,7 @@ export default class CarouselPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScCarousel',
       selector: 'div[scCarousel]',

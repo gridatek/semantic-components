@@ -155,7 +155,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class SwitchPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScSwitch, ScField, ScFieldContentWrapper, ScFieldDescription, ScFieldTitle, ScLabel } from '@semantic-components/ui';",
     markup: [
@@ -185,7 +185,7 @@ export default class SwitchPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScSwitch',
       selector: 'input[scSwitch]',

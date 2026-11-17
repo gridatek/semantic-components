@@ -27,7 +27,7 @@ import { ScNavigationMenuContent } from './navigation-menu-content';
   },
 })
 export class ScNavigationMenuLink {
-  protected readonly menu = inject(ScNavigationMenu);
+  private readonly menu = inject(ScNavigationMenu);
   private readonly inContent = !!inject(ScNavigationMenuContent, {
     optional: true,
   });
@@ -38,7 +38,7 @@ export class ScNavigationMenuLink {
   /** Following it closes the menu (a page shown without reloading). */
   readonly closeOnClick = input(true, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.inContent
         ? cn(

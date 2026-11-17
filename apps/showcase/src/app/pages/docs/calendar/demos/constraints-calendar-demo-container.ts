@@ -18,7 +18,7 @@ import { ConstraintsCalendarDemo } from './constraints-calendar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ConstraintsCalendarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

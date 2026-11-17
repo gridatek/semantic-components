@@ -150,17 +150,17 @@ const CALLS: Call[] = [
 })
 export class ToolUsageDemo {
   private readonly answer = 'Node 24 and npm 11 are installed. pnpm is not.';
-  protected readonly calls = signal<Call[]>(CALLS);
-  protected readonly reply = signal(this.answer);
-  protected readonly busy = signal(false);
-  protected readonly replayed = signal(false);
+  private readonly calls = signal<Call[]>(CALLS);
+  private readonly reply = signal(this.answer);
+  private readonly busy = signal(false);
+  private readonly replayed = signal(false);
   private timers: ReturnType<typeof setTimeout>[] = [];
 
   constructor() {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected replay(): void {
+  private replay(): void {
     this.stop();
     this.calls.set([]);
     this.reply.set('');

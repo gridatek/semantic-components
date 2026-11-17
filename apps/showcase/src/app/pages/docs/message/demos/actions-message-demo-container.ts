@@ -18,7 +18,7 @@ import { ActionsMessageDemo } from './actions-message-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ActionsMessageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

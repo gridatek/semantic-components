@@ -18,7 +18,7 @@ import { HighlightedLinesCodeBlockDemo } from './highlighted-lines-code-block-de
   encapsulation: ViewEncapsulation.None,
 })
 export class HighlightedLinesCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockContent,

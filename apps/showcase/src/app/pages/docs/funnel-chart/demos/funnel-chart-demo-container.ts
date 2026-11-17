@@ -18,7 +18,7 @@ import { FunnelChartDemo } from './funnel-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FunnelChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

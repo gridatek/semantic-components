@@ -68,22 +68,22 @@ import { ScTimeClock } from './time-clock';
 export class ScTimeClockHeader {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly clock = inject(ScTimeClock);
+  private readonly clock = inject(ScTimeClock);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly periods = ['am', 'pm'] as const;
+  private readonly periods = ['am', 'pm'] as const;
 
-  protected readonly viewClass = cn(
+  private readonly viewClass = cn(
     this.buttonStyles({ variant: 'ghost', size: 'lg' }),
     'h-12 px-2 text-3xl font-medium tabular-nums aria-pressed:bg-accent aria-pressed:text-accent-foreground',
   );
-  protected readonly periodClass = cn(
+  private readonly periodClass = cn(
     this.buttonStyles({ variant: 'outline', size: 'xs' }),
     'aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:border-primary',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex items-center gap-3', this.classInput()),
   );
 }

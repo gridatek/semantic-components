@@ -152,7 +152,7 @@ import { VariantItemDemoContainer } from './demos/variant-item-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class ItemPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScItemGroup, ScItem, ScItemMedia, ScItemBody, ScItemTitle,',
@@ -177,7 +177,7 @@ export default class ItemPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScItemGroup, ScItemSeparator',
       selector: 'div[…]',

@@ -88,20 +88,20 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewUpcomingPayments {
-  protected readonly date = signal<Temporal.PlainDate | null>(
+  private readonly date = signal<Temporal.PlainDate | null>(
     Temporal.Now.plainDateISO(),
   );
-  protected readonly previous = {
+  private readonly previous = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  protected readonly next = {
+  private readonly next = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',
   };
-  protected readonly payments = [
+  private readonly payments = [
     { name: 'Netflix Subscription', date: 'Apr 15, 2024', amount: '$19.99' },
     { name: 'Rent Payment', date: 'Apr 1, 2024', amount: '$2,400.00' },
     { name: 'Auto Insurance', date: 'Apr 22, 2024', amount: '$186.00' },

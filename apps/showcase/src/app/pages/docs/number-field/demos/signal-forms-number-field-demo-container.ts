@@ -18,7 +18,7 @@ import { SignalFormsNumberFieldDemo } from './signal-forms-number-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export default class SignalFormsNumberFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form, max, min, required } from '@angular/forms/signals';
 import {
   ScButton,

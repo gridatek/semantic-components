@@ -47,7 +47,7 @@ export class ScResizableHandle {
   private readonly group = inject(ScResizablePanelGroup);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly dragging = signal(false);
+  private readonly dragging = signal(false);
   private drag: {
     id: number;
     from: number;
@@ -60,19 +60,19 @@ export class ScResizableHandle {
     this.group.panels();
     return this.group.around(this.element);
   });
-  protected readonly before = computed(() => this.neighbours().before);
+  private readonly before = computed(() => this.neighbours().before);
   private readonly after = computed(() => this.neighbours().after);
-  protected readonly valueNow = computed(() => {
+  private readonly valueNow = computed(() => {
     const b = this.before();
     return b ? Math.round(b.size()) : null;
   });
 
   /** A separator runs across its group's axis. */
-  protected readonly ariaOrientation = computed(() =>
+  private readonly ariaOrientation = computed(() =>
     this.group.orientation() === 'horizontal' ? 'vertical' : 'horizontal',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative flex shrink-0 items-center justify-center bg-border ring-offset-background touch-none select-none after:absolute focus-visible:ring-1 focus-visible:ring-ring focus-visible:outline-hidden',
       // Plain classes, not aria-[orientation=…]: (they'd outrank yours).
@@ -83,7 +83,7 @@ export class ScResizableHandle {
     ),
   );
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (event.button !== 0 || !this.before() || !this.after()) return;
     // No text selected while dragging.
     event.preventDefault();
@@ -97,7 +97,7 @@ export class ScResizableHandle {
     this.dragging.set(true);
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     const d = this.drag;
     const [b, a] = [this.before(), this.after()];
     if (!d || event.pointerId !== d.id || !b || !a) return;
@@ -108,13 +108,13 @@ export class ScResizableHandle {
     this.group.resize(b, a, d.size + moved, d.start);
   }
 
-  protected onPointerUp(event: PointerEvent): void {
+  private onPointerUp(event: PointerEvent): void {
     if (!this.drag || event.pointerId !== this.drag.id) return;
     this.drag = null;
     this.dragging.set(false);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const [b, a] = [this.before(), this.after()];
     if (!b || !a) return;
     const horizontal = this.group.orientation() === 'horizontal';

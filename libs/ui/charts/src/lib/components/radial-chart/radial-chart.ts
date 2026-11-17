@@ -133,7 +133,7 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
     this.isAnimationActive() ? this.entrance() : 1,
   );
 
-  protected readonly transform = computed(() => {
+  private readonly transform = computed(() => {
     const { cx, cy } = this.state.circle();
     return `translate(${cx},${cy})`;
   });
@@ -183,7 +183,7 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
       }),
   });
 
-  protected readonly rings = computed<ScRadialChartRing[]>(() => {
+  private readonly rings = computed<ScRadialChartRing[]>(() => {
     const arcs = this.moving.items();
     const [start, end] = this.state.angles();
     const { radius } = this.state.circle();
@@ -213,7 +213,7 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
     });
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({
@@ -234,7 +234,7 @@ export class ScChartRadialBar implements ScChartSeriesLabels {
     inject(DestroyRef).onDestroy(unregister);
   }
 
-  protected point(index: number): void {
+  private point(index: number): void {
     this.state.activeIndex.set(index);
   }
 

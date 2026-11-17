@@ -31,16 +31,16 @@ export class ScCommandInputGroup {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly groupClass = cn(
+  private readonly groupClass = cn(
     this.preset.inputGroup,
     this.preset.command.inputGroup,
   );
-  protected readonly addonClass = cn(
+  private readonly addonClass = cn(
     this.preset.inputGroupAddon({ side: 'inline-start' }),
     this.preset.command.inputIcon,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.preset.command.inputWrapper, this.classInput()),
   );
 }

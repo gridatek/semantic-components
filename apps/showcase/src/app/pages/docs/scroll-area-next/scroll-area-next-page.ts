@@ -137,7 +137,7 @@ import { ScrollFadeScrollAreaNextDemoContainer } from './demos/scroll-fade-scrol
   encapsulation: ViewEncapsulation.None,
 })
 export default class ScrollAreaNextPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScScrollAreaNext, ScScrollAreaNextViewport, ScScrollAreaNextViewportContent,',
@@ -157,7 +157,7 @@ export default class ScrollAreaNextPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScScrollAreaNext',
       selector: 'div[scScrollAreaNext]',

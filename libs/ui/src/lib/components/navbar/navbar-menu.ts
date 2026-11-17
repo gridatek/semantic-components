@@ -30,12 +30,12 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
   },
 })
 export class ScNavbarMenu {
-  protected readonly navbar = inject(ScNavbar);
+  private readonly navbar = inject(ScNavbar);
   readonly classInput = input<string>('', { alias: 'class' });
   /** Over the page, under the bar, rather than pushing the page down. */
   readonly overlay = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex basis-full flex-col gap-1 overflow-hidden',
       // Height between auto and 0 (global `interpolate-size`); closed, it ends
@@ -51,7 +51,7 @@ export class ScNavbarMenu {
   );
 
   /** Overlaid, it hides the page: a click or the focus out there closes it. */
-  protected closeOutside(event: Event): void {
+  private closeOutside(event: Event): void {
     if (
       this.overlay() &&
       this.navbar.open() &&

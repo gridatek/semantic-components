@@ -30,7 +30,7 @@ import { ScKanbanColumn } from './kanban-column';
   },
 })
 export class ScKanbanCard<T = unknown> {
-  protected readonly board = inject<ScKanbanBoard<T>>(
+  private readonly board = inject<ScKanbanBoard<T>>(
     forwardRef(() => ScKanbanBoard),
   );
   /** The column it is in. */
@@ -40,11 +40,9 @@ export class ScKanbanCard<T = unknown> {
   readonly item = input.required<T>({ alias: 'scKanbanCard' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly active = computed(
-    () => this.board.active() === this.item(),
-  );
+  private readonly active = computed(() => this.board.active() === this.item());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-card text-card-foreground ring-foreground/10 relative cursor-grab touch-manipulation rounded-lg p-3 text-sm shadow-xs ring-1 outline-none select-none',
       'focus-visible:ring-ring/50 focus-visible:ring-3',

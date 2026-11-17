@@ -44,13 +44,13 @@ import type { ScToastVariant } from './toast-types';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScToast {
-  protected readonly context = inject(SC_TOAST_CONTEXT);
-  protected readonly layout = inject(SC_TOAST_LAYOUT);
+  private readonly context = inject(SC_TOAST_CONTEXT);
+  private readonly layout = inject(SC_TOAST_LAYOUT);
   private readonly styles = injectPreset().toast;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly variant = computed<ScToastVariant>(
+  private readonly variant = computed<ScToastVariant>(
     () => this.context.toast().variant ?? 'default',
   );
 
@@ -65,15 +65,15 @@ export class ScToast {
   );
 
   /** Past the toaster's `visibleToasts`: not shown, and out of reach (inert). */
-  protected readonly hidden = computed(
+  private readonly hidden = computed(
     () => this.layout.index() >= this.layout.visible,
   );
 
-  protected readonly stackedHeight = computed(() =>
+  private readonly stackedHeight = computed(() =>
     this.behind() ? this.layout.frontHeight() : null,
   );
 
-  protected readonly transform = computed(() => {
+  private readonly transform = computed(() => {
     const direction = this.layout.fromBottom ? -1 : 1;
     const index = this.layout.index();
     if (this.layout.expanded()) {
@@ -84,7 +84,7 @@ export class ScToast {
     return `translateY(${direction * visible * SC_TOAST_PEEK}px) scale(${1 - visible * SC_TOAST_SHRINK})`;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-auto absolute inset-x-0 flex items-center gap-3 overflow-hidden p-4',
       this.styles.toast,
@@ -114,12 +114,12 @@ export class ScToast {
     inject(DestroyRef).onDestroy(() => observer.disconnect());
   }
 
-  protected onTouchStart(event: TouchEvent): void {
+  private onTouchStart(event: TouchEvent): void {
     this.swipeStartX = event.touches[0].clientX;
     this.element.style.transition = 'none';
   }
 
-  protected onTouchMove(event: TouchEvent): void {
+  private onTouchMove(event: TouchEvent): void {
     const deltaX = event.touches[0].clientX - this.swipeStartX;
     this.element.style.translate = `${deltaX}px 0`;
     this.element.style.opacity = String(
@@ -127,7 +127,7 @@ export class ScToast {
     );
   }
 
-  protected onTouchEnd(event: TouchEvent): void {
+  private onTouchEnd(event: TouchEvent): void {
     const deltaX = event.changedTouches[0].clientX - this.swipeStartX;
     if (Math.abs(deltaX) >= this.swipeThreshold) {
       // It leaves the way it was thrown.

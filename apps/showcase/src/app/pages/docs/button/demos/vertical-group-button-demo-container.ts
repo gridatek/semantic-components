@@ -18,7 +18,7 @@ import { VerticalGroupButtonDemo } from './vertical-group-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalGroupButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScControlGroup } from '@semantic-components/ui';
 import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 

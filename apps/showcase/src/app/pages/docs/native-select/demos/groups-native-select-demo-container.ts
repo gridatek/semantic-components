@@ -18,7 +18,7 @@ import { GroupsNativeSelectDemo } from './groups-native-select-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupsNativeSelectDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScLabel,

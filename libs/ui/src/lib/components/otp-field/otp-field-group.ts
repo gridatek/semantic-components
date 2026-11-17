@@ -17,7 +17,7 @@ export class ScOtpFieldGroup {
   private readonly styles = injectPreset().otpField;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.group, 'has-disabled:opacity-50', this.classInput()),
   );
 }

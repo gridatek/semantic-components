@@ -19,18 +19,18 @@ import { ScDatePicker } from './date-picker';
 export class ScDatePickerPreset {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly picker = inject(ScDatePicker);
+  private readonly picker = inject(ScDatePicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = input.required<ScCalendarValue>();
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly pressed = computed(() =>
+  private readonly pressed = computed(() =>
     same(this.picker.draft(), this.value()),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'justify-start aria-pressed:bg-muted',

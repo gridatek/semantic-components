@@ -18,7 +18,7 @@ import { BasicStatCardDemo } from './basic-stat-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicStatCardDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScStatCard,
   ScStatCardChange,

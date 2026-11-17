@@ -21,13 +21,13 @@ import { ScSidebarState } from './sidebar-state';
 })
 export class ScSidebarTrigger {
   private readonly buttonStyles = injectPreset().button;
-  protected readonly state = inject(ScSidebarState);
+  private readonly state = inject(ScSidebarState);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'rtl:[&_svg]:rotate-180',

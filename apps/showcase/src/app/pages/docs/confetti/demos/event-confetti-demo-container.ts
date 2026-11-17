@@ -18,7 +18,7 @@ import { EventConfettiDemo } from './event-confetti-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class EventConfettiDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   ElementRef,
   ViewEncapsulation,

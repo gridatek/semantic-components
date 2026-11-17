@@ -55,7 +55,7 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class DiffCodeBlockDemo {
-  readonly source = `export function greet(name: string) {
+  private readonly source = `export function greet(name: string) {
   return 'Hello ' + name;
   return \`Hello, \${name}!\`;
 }`;

@@ -20,7 +20,7 @@ export class ScNavbarNav {
   private readonly navbar = inject(ScNavbar);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'hidden items-center gap-6',
       SHOWN[this.navbar.expand()],

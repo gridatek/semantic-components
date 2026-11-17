@@ -56,17 +56,17 @@ const SETTLE =
 })
 export class ScDrawer {
   private readonly styles = injectPreset().drawer;
-  protected readonly drawer = inject(ScDrawerProvider);
+  private readonly drawer = inject(ScDrawerProvider);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   // Created as it opens: its provider's direction and language then.
-  protected readonly direction = this.drawer.direction();
-  protected readonly lang = this.drawer.lang();
+  private readonly direction = this.drawer.direction();
+  private readonly lang = this.drawer.lang();
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** How far it has been dragged towards its edge (px; negative: away). */
   private readonly offset = signal(0);
-  protected readonly dragging = signal(false);
+  private readonly dragging = signal(false);
   private readonly settling = signal(false);
   private start: { x: number; y: number; id: number } | null = null;
   private samples: { at: number; offset: number }[] = [];
@@ -78,7 +78,7 @@ export class ScDrawer {
     return Math.max(0, window.innerHeight - this.drawer.snapHeight(point));
   });
 
-  protected readonly transform = computed(() => {
+  private readonly transform = computed(() => {
     const distance = this.snapOffset() + this.offset();
     if (!distance) return null;
     const d = this.drawer.physicalDirection();
@@ -87,7 +87,7 @@ export class ScDrawer {
       ? `translate3d(0, ${sign * distance}px, 0)`
       : `translate3d(${sign * distance}px, 0, 0)`;
   });
-  protected readonly transition = computed(() =>
+  private readonly transition = computed(() =>
     this.dragging() ? 'none' : this.settling() ? SETTLE : null,
   );
 
@@ -112,7 +112,7 @@ export class ScDrawer {
         : '',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/drawer-popup fixed z-50 m-(--drawer-inset,0px) flex flex-col outline-none data-swiping:select-none duration-450 ease-[cubic-bezier(0.22,1,0.36,1)]',
       // At its edge, and sliding from and to it; dragged away from it, no
@@ -148,7 +148,7 @@ export class ScDrawer {
     }
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (event.button !== 0 || this.drawer.nestedOpen()) return;
     const target = event.target as HTMLElement;
     if (target.closest('[data-swipe-ignore]')) return;
@@ -164,7 +164,7 @@ export class ScDrawer {
     this.samples = [];
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     if (!this.start || event.pointerId !== this.start.id) return;
     let moved = this.towardsEdge(event);
     if (!this.dragging()) {
@@ -182,7 +182,7 @@ export class ScDrawer {
     this.samples = this.samples.filter((s) => at - s.at < 100);
   }
 
-  protected onPointerUp(event: PointerEvent): void {
+  private onPointerUp(event: PointerEvent): void {
     if (!this.start || event.pointerId !== this.start.id) return;
     this.start = null;
     if (!this.dragging()) return;

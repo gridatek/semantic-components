@@ -93,7 +93,7 @@ export class ScKanbanBoard<T = unknown> {
   /** The column a dragged card is over. */
   readonly over = this.sortable.over.asReadonly();
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex items-start gap-4 overflow-x-auto p-1',
       this.dragging() && 'cursor-grabbing select-none',

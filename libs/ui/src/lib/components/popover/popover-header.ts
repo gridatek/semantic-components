@@ -11,7 +11,7 @@ export class ScPopoverHeader {
   private readonly styles = injectPreset().popover;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.header, this.classInput()),
   );
 }

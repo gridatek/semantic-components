@@ -16,5 +16,5 @@ export class ScComboboxGroup {
   /** Set by its label. */
   readonly labelId = signal<string | null>(null);
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

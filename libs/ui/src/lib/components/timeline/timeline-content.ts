@@ -15,7 +15,7 @@ export class ScTimelineContent {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     if (this.timeline.orientation() === 'horizontal') {
       return cn('min-w-0 space-y-1 pe-2', this.classInput());
     }

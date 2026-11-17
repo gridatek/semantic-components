@@ -75,7 +75,7 @@ export class ScChartLabels {
     ((value: number, category: string, index: number) => string) | null
   >(null);
 
-  protected readonly labels = computed(() => {
+  private readonly labels = computed(() => {
     const categories = this.state.categories();
     const format =
       this.formatter() ?? ((value: number) => this.numbers.format(value));
@@ -87,7 +87,7 @@ export class ScChartLabels {
       }));
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('fill-foreground pointer-events-none text-xs', this.classInput()),
   );
 }

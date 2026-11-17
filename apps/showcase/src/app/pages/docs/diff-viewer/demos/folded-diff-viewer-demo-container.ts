@@ -18,7 +18,7 @@ import { FoldedDiffViewerDemo } from './folded-diff-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FoldedDiffViewerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockHeader,

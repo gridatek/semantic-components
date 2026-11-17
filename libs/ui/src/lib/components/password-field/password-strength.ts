@@ -61,10 +61,10 @@ export class ScPasswordStrength {
       Math.min(Math.max(Math.round(numberAttribute(value, 0)), 0), 4),
   });
 
-  protected readonly segments = [1, 2, 3, 4];
-  protected readonly color = computed(() => COLORS[this.score()]);
+  private readonly segments = [1, 2, 3, 4];
+  private readonly color = computed(() => COLORS[this.score()]);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('grid gap-1.5', this.classInput()),
   );
 

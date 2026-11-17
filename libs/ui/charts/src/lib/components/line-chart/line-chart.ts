@@ -145,7 +145,7 @@ export class ScChartLine implements ScChartSeriesLabels {
     this.isAnimationActive() ? this.entrance() : 1,
   );
 
-  protected readonly color = computed(() => `var(--color-${this.key()})`);
+  private readonly color = computed(() => `var(--color-${this.key()})`);
 
   /** Its points where they belong now. */
   private readonly targets = computed<ScLineChartPoint[]>(() => {
@@ -171,9 +171,9 @@ export class ScChartLine implements ScChartSeriesLabels {
   });
 
   /** What is drawn: its points, moving or still. */
-  protected readonly points = this.moving.items;
+  private readonly points = this.moving.items;
 
-  protected readonly path = computed(
+  private readonly path = computed(
     () =>
       line<ScLineChartPoint>()
         .x((p) => p.x)
@@ -182,12 +182,12 @@ export class ScChartLine implements ScChartSeriesLabels {
       '',
   );
 
-  protected readonly activePoint = computed(() => {
+  private readonly activePoint = computed(() => {
     const index = this.state.activeIndex();
     return this.activeDot() && index !== null ? this.targets()[index] : null;
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({

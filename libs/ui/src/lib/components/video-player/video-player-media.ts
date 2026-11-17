@@ -48,13 +48,13 @@ import { ScVideoPlayer } from './video-player';
   },
 })
 export class ScVideoPlayerMedia {
-  protected readonly player = inject(ScVideoPlayer);
+  private readonly player = inject(ScVideoPlayer);
   private readonly element =
     inject<ElementRef<HTMLVideoElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('block size-full bg-black object-contain', this.classInput()),
   );
 
@@ -102,7 +102,7 @@ export class ScVideoPlayerMedia {
    * but not after every render: a read changes the time, which renders,
    * which would read again in the same pass (NG0103).
    */
-  protected sync(): void {
+  private sync(): void {
     if (this.pending) return;
     this.pending = afterNextRender(
       () => {
@@ -129,12 +129,12 @@ export class ScVideoPlayerMedia {
   /** Whether the controls were hidden when it began: its focus wakes them. */
   private hiddenAtPress = false;
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     this.pointerType = event.pointerType;
     this.hiddenAtPress = this.player.idle();
   }
 
-  protected onClick(): void {
+  private onClick(): void {
     if (this.pointerType === 'touch' && this.player.started()) {
       this.player.toggleControls(this.hiddenAtPress);
     } else {
@@ -142,7 +142,7 @@ export class ScVideoPlayerMedia {
     }
   }
 
-  protected onMetadata(): void {
+  private onMetadata(): void {
     this.sync();
     this.player.ɵreadTracks(this.element);
   }

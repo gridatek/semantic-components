@@ -179,7 +179,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
   encapsulation: ViewEncapsulation.None,
 })
 export default class ChartPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScChart, ScChartBar, ScChartCategoryAxis, ScChartCursor, ScChartGrid, ScChartLabels, ScChartLegend, ScChartLegendIndicator, ScChartLegendItem, ScChartPlot, ScChartTooltip, ScChartTooltipIndicator, ScChartTooltipItem, ScChartTooltipLabel, ScChartTooltipName, ScChartTooltipPortal, ScChartTooltipProvider, ScChartTooltipValue, ScChartValueAxis } from '@semantic-components/ui/charts';",
     markup: [
@@ -214,7 +214,7 @@ export default class ChartPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       selector: 'div[scChart]',
       description: 'data, config',
@@ -306,7 +306,7 @@ export default class ChartPage {
     },
   ];
 
-  protected readonly types = [
+  private readonly types = [
     {
       name: 'Area Chart',
       path: 'area-chart',

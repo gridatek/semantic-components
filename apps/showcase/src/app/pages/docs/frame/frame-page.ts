@@ -119,7 +119,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class FramePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScFrame } from '@semantic-components/ui';",
     markup: '<div scFrame>…</div>',
   };

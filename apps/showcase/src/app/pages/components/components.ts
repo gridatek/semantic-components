@@ -114,7 +114,7 @@ import { ComponentsService } from '../../services/components-service';
 export default class Components {
   private readonly componentsService = inject(ComponentsService);
 
-  readonly categories: ComponentCategory[] = [
+  private readonly categories: ComponentCategory[] = [
     'Forms',
     'Buttons & Actions',
     'Navigation',
@@ -128,9 +128,9 @@ export default class Components {
     'Advanced',
   ];
 
-  readonly filterCategory = signal<string[]>(['All']);
+  private readonly filterCategory = signal<string[]>(['All']);
 
-  readonly filteredComponents = computed(() => {
+  private readonly filteredComponents = computed(() => {
     const [category] = this.filterCategory();
     const visible = this.componentsService.visibleCatalog();
     const items =

@@ -18,7 +18,7 @@ import { PlanUsageDemo } from './plan-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PlanUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

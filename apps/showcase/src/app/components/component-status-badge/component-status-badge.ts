@@ -22,9 +22,9 @@ export class ComponentStatusBadge {
   readonly classInput = input<string>('', { alias: 'class' });
   // flex, not block: the badge fills it, centred in its row as a sibling
   // badge is — not left on a line's baseline (Sera's text-only badge drops).
-  protected readonly class = computed(() => cn('flex', this.classInput()));
+  private readonly class = computed(() => cn('flex', this.classInput()));
 
   readonly status = input.required<ComponentStatus>();
 
-  protected readonly variant = computed(() => variantMap[this.status()]);
+  private readonly variant = computed(() => variantMap[this.status()]);
 }

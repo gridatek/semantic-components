@@ -18,7 +18,7 @@ import { PdfViewerOpenParametersDemo } from './pdf-viewer-open-parameters-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PdfViewerOpenParametersDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { ScButton, ScInput, ScSpinner } from '@semantic-components/ui';
 import {
   ScPdfViewer,

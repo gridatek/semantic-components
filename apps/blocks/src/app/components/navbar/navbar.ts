@@ -415,7 +415,7 @@ import { cn } from 'cn';
   encapsulation: ViewEncapsulation.None,
 })
 export class Navbar {
-  protected readonly i18n = inject(ScI18n);
+  private readonly i18n = inject(ScI18n);
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 }

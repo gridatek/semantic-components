@@ -18,7 +18,7 @@ import { VariantsLinkDemo } from './variants-link-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VariantsLinkDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
 
 @Component({

@@ -18,7 +18,7 @@ import { SizeCardDemo } from './size-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizeCardDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,

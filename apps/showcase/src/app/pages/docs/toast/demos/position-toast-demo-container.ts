@@ -18,7 +18,7 @@ import { PositionToastDemo } from './position-toast-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PositionToastDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScButton,
   type ScToastPosition,

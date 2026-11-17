@@ -41,7 +41,7 @@ export class ScPdfViewerZoomSelect {
     0.5, 0.75, 1, 1.25, 1.5, 2, 3, 4,
   ]);
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** The zoom as an option value. */
   readonly value = computed(() => String(this.pdfViewer.zoom()));
@@ -69,7 +69,7 @@ export class ScPdfViewerZoomSelect {
     });
   }
 
-  protected onChange(event: Event): void {
+  private onChange(event: Event): void {
     const value = (event.target as HTMLSelectElement).value;
     if (NAMED.includes(value)) {
       this.pdfViewer.setZoom(value as ScPdfZoomLevel);

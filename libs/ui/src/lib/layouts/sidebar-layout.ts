@@ -23,7 +23,7 @@ export class ScSidebarLayout {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex min-h-screen', this.classInput()),
   );
 }

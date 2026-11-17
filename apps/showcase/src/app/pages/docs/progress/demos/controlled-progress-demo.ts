@@ -22,5 +22,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledProgressDemo {
-  protected readonly value = signal(50);
+  private readonly value = signal(50);
 }

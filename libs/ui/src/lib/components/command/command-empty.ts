@@ -15,11 +15,11 @@ import { ScCommand } from './command';
 })
 export class ScCommandEmpty {
   private readonly styles = injectPreset().command;
-  protected readonly command = inject(ScCommand);
+  private readonly command = inject(ScCommand);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.empty, this.classInput()),
   );
 }

@@ -18,7 +18,7 @@ import { DirectionsSpeedDialDemo } from './directions-speed-dial-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DirectionsSpeedDialDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSpeedDial,
   ScSpeedDialAction,

@@ -82,7 +82,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollableSelectDemo {
-  protected readonly regions = [
+  private readonly regions = [
     {
       label: 'North America',
       items: [
@@ -136,6 +136,6 @@ export class ScrollableSelectDemo {
       ],
     },
   ];
-  protected readonly items = this.regions.flatMap((region) => region.items);
-  protected readonly zone = signal('');
+  private readonly items = this.regions.flatMap((region) => region.items);
+  private readonly zone = signal('');
 }

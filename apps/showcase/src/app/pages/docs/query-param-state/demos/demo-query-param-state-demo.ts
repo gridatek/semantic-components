@@ -66,14 +66,17 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoQueryParamStateDemo {
-  readonly search = injectQueryParam(
+  private readonly search = injectQueryParam(
     'q',
     parseAsString.withDefault('').withOptions({ debounceMs: 300 }),
   );
 
-  readonly page = injectQueryParam('page', parseAsInteger.withDefault(1));
+  private readonly page = injectQueryParam(
+    'page',
+    parseAsInteger.withDefault(1),
+  );
 
-  readonly sort = injectQueryParam(
+  private readonly sort = injectQueryParam(
     'sort',
     parseAsStringEnum(['asc', 'desc'] as const).withDefault('asc'),
   );
@@ -83,7 +86,7 @@ export class DemoQueryParamStateDemo {
    * params. The `set` interceptor pushes form edits straight back into the
    * params — synchronously, and without an effect.
    */
-  readonly formModel = linkedSignal(
+  private readonly formModel = linkedSignal(
     () => ({
       q: this.search.value(),
       page: this.page.value(),
@@ -99,11 +102,11 @@ export class DemoQueryParamStateDemo {
     },
   );
 
-  readonly filtersForm = form(this.formModel, (path) => {
+  private readonly filtersForm = form(this.formModel, (path) => {
     min(path.page, 1, { message: 'Page must be at least 1' });
   });
 
-  stateJson() {
+  private stateJson() {
     return JSON.stringify(
       {
         q: this.search.value(),
@@ -115,7 +118,7 @@ export class DemoQueryParamStateDemo {
     );
   }
 
-  reset() {
+  private reset() {
     this.search.clear();
     this.page.clear();
     this.sort.clear();

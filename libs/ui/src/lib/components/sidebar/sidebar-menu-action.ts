@@ -19,7 +19,7 @@ export class ScSidebarMenuAction {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly showOnHover = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.menuAction,
       this.showOnHover() &&

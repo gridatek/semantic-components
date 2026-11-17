@@ -18,7 +18,7 @@ import { NestedControlGroupDemo } from './nested-control-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NestedControlGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScControlGroup,

@@ -28,7 +28,7 @@ import { SC_FIELD } from '../field';
 })
 export class ScNativeSelect {
   private readonly styles = injectPreset().nativeSelect;
-  protected readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-native-select-');
 
   readonly idInput = input('', { alias: 'id' });
@@ -43,11 +43,11 @@ export class ScNativeSelect {
     transform: booleanAttribute,
   });
 
-  readonly id = computed(
+  private readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
   );
 
-  readonly ariaDescribedBy = computed(
+  private readonly ariaDescribedBy = computed(
     () =>
       this.ariaDescribedByInput() ||
       this.field?.descriptionIds().join(' ') ||
@@ -55,11 +55,11 @@ export class ScNativeSelect {
   );
 
   // Not invalid until it has been touched.
-  protected readonly ariaInvalid = computed(
+  private readonly ariaInvalid = computed(
     () => (this.touched() && this.invalid()) || null,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.select, this.classInput()),
   );
 }

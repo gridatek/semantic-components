@@ -14,7 +14,7 @@ export class ScAlertDialogMedia {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.media, this.classInput()),
   );
 }

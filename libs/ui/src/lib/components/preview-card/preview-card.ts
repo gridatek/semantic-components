@@ -22,10 +22,10 @@ import { ScPreviewCardProvider } from './preview-card-provider';
 })
 export class ScPreviewCard {
   private readonly styles = injectPreset().previewCard;
-  protected readonly card = inject(ScPreviewCardProvider);
+  private readonly card = inject(ScPreviewCardProvider);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.popup, this.classInput()),
   );
 }

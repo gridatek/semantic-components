@@ -18,7 +18,7 @@ import { ToolUsageDemo } from './tool-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ToolUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

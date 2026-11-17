@@ -13,5 +13,5 @@ import { cn } from 'cn';
 export class ScScrollAreaNextViewportContent {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('min-w-fit', this.classInput()));
+  private readonly class = computed(() => cn('min-w-fit', this.classInput()));
 }

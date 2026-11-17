@@ -141,7 +141,7 @@ import { RtlEmptyDemoContainer } from './demos/rtl-empty-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class EmptyPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScEmpty, ScEmptyHeader, ScEmptyMedia, ScEmptyTitle,',
@@ -160,7 +160,7 @@ export default class EmptyPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScEmpty, ScEmptyHeader',
       selector: 'div[…]',

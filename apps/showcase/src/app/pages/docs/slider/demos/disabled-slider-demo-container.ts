@@ -18,7 +18,7 @@ import { DisabledSliderDemo } from './disabled-slider-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledSliderDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSlider } from '@semantic-components/ui';
 
 /** Disabled: dimmed, out of the Tab order. */

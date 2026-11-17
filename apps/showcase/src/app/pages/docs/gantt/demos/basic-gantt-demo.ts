@@ -224,14 +224,14 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicGanttDemo {
-  readonly from = date('2026-10-30');
-  readonly to = date('2026-12-06');
+  private readonly from = date('2026-10-30');
+  private readonly to = date('2026-12-06');
   /** A fixed day, so the demo looks the same any day: use Temporal.Now.plainDateISO(). */
-  readonly today = date('2026-11-09');
+  private readonly today = date('2026-11-09');
 
-  readonly tasks = signal(summarise(PLAN));
+  private readonly tasks = signal(summarise(PLAN));
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: this.tasks(),
@@ -247,11 +247,11 @@ export class BasicGanttDemo {
   }
 
   /** The bar proposes, the data follows — and the parents with it. */
-  move(task: Task, dates: ScGanttDates): void {
+  private move(task: Task, dates: ScGanttDates): void {
     this.tasks.update((tasks) => summarise(update(tasks, task.id, dates)));
   }
 
-  advance(task: Task, progress: number): void {
+  private advance(task: Task, progress: number): void {
     this.tasks.update((tasks) => update(tasks, task.id, { progress }));
   }
 }

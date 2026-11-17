@@ -18,7 +18,7 @@ import { ControlGroupInputDemo } from './control-group-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlGroupInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScControlGroup,

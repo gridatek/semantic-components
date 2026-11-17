@@ -41,7 +41,7 @@ export class ScPdfViewerSetting {
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** The viewer's signal for the setting. */
   private readonly target = computed(

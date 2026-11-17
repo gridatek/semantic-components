@@ -52,5 +52,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlRadioGroupDemo {
-  protected readonly spacingForm = form(signal({ spacing: 'comfortable' }));
+  private readonly spacingForm = form(signal({ spacing: 'comfortable' }));
 }

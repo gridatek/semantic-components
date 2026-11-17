@@ -18,5 +18,5 @@ import { cn } from 'cn';
 export class ScCommandStatus {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('sr-only', this.classInput()));
+  private readonly class = computed(() => cn('sr-only', this.classInput()));
 }

@@ -14,7 +14,7 @@ import { DatePickerUsageDemo } from './date-picker-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DatePickerUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

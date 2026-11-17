@@ -39,14 +39,14 @@ export class ScQrCodeDownload {
   /** Image width in pixels, rounded down to whole pixels per module. */
   readonly imageSize = input(1024);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  protected download(): void {
+  private download(): void {
     const qr = this.for();
     const modules = qr.modules();
     if (!modules.length) return;

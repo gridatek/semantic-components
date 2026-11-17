@@ -18,7 +18,7 @@ import { GroupButtonDemo } from './group-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScControlGroup } from '@semantic-components/ui';
 import {
   SiArchiveIcon,

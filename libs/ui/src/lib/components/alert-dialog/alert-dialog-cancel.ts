@@ -21,14 +21,14 @@ export class ScAlertDialogCancel {
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  cancel(): void {
+  private cancel(): void {
     this.alertDialogProvider.open.set(false);
   }
 }

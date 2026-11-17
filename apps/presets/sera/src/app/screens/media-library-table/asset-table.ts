@@ -315,7 +315,7 @@ const PAGE_SIZE = 8;
   encapsulation: ViewEncapsulation.None,
 })
 export class AssetTable {
-  protected readonly store = inject(MediaStore);
+  private readonly store = inject(MediaStore);
   private readonly actions = inject(AssetActions);
 
   /** The filters applied; null, none. */
@@ -327,7 +327,7 @@ export class AssetTable {
   private readonly pageSize = PAGE_SIZE;
   private readonly today = Temporal.Now.plainDateISO();
 
-  protected readonly matching = computed(() => {
+  private readonly matching = computed(() => {
     const query = this.search.query().value();
     const filters = this.filters();
     return this.store
@@ -354,11 +354,11 @@ export class AssetTable {
     new Set([this.store.assets()[0]?.id ?? '']),
   );
 
-  protected isSelected(id: string): boolean {
+  private isSelected(id: string): boolean {
     return this.selectedIds().has(id);
   }
 
-  protected toggle(id: string): void {
+  private toggle(id: string): void {
     this.selectedIds.update((previous) => {
       const next = new Set(previous);
       if (next.has(id)) next.delete(id);

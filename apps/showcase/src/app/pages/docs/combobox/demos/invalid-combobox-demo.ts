@@ -82,7 +82,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidComboboxDemo {
-  protected readonly frameworkForm = form(
+  private readonly frameworkForm = form(
     signal<{ framework: string | null }>({ framework: null }),
     (path) => {
       required(path.framework, { message: 'Please select a framework.' });
@@ -94,7 +94,7 @@ export class InvalidComboboxDemo {
     this.frameworkForm.framework().markAsTouched();
   }
 
-  protected readonly frameworks = [
+  private readonly frameworks = [
     'Next.js',
     'SvelteKit',
     'Nuxt.js',
@@ -102,7 +102,7 @@ export class InvalidComboboxDemo {
     'Astro',
   ];
 
-  protected matching(query: string): string[] {
+  private matching(query: string): string[] {
     return this.frameworks.filter((name) => scComboboxMatches(name, query));
   }
 }

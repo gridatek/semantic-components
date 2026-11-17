@@ -18,11 +18,11 @@ import { ScVideoPlayer } from './video-player';
   },
 })
 export class ScVideoPlayerPreview {
-  protected readonly player = inject(ScVideoPlayer);
+  private readonly player = inject(ScVideoPlayer);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute bottom-full mb-2 -translate-x-1/2 rounded-md bg-black/85 px-2 py-1 text-center text-xs whitespace-nowrap text-white tabular-nums',
       this.classInput(),

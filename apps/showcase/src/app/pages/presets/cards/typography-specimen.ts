@@ -192,14 +192,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewTypographySpecimen {
-  protected readonly open = signal(false);
-  protected readonly categories = [
+  private readonly open = signal(false);
+  private readonly categories = [
     { label: 'General', value: 'general' },
     { label: 'Bug Report', value: 'bug' },
     { label: 'Feature Request', value: 'feature' },
     { label: 'Improvement', value: 'improvement' },
   ];
-  protected readonly feedback = form(
+  private readonly feedback = form(
     signal({ name: '', email: '', category: 'general', message: '' }),
   );
 }

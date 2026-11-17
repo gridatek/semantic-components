@@ -133,7 +133,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewReportBug {
-  protected readonly bug = form(
+  private readonly bug = form(
     signal({
       title: '',
       severity: 'medium',
@@ -141,7 +141,7 @@ export class PreviewReportBug {
       steps: '',
     }),
   );
-  protected readonly selects = [
+  private readonly selects = [
     {
       key: 'severity',
       label: 'Severity',

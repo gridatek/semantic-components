@@ -18,7 +18,7 @@ import { ImageCardDemo } from './image-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ImageCardDemoContainer {
-  readonly code = `import { NgOptimizedImage } from '@angular/common';
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBadge,

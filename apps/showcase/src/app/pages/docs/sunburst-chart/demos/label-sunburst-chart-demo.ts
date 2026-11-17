@@ -70,18 +70,18 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelSunburstChartDemo {
-  readonly data = [
+  private readonly data = [
     { region: 'europe', country: 'France', sales: 240 },
     { region: 'europe', country: 'Germany', sales: 190 },
     { region: 'americas', country: 'USA', sales: 320 },
     { region: 'americas', country: 'Brazil', sales: 130 },
     { region: 'asia', country: 'Japan', sales: 210 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     sales: { label: 'Sales' },
     europe: { label: 'Europe', color: 'var(--chart-1)' },
     americas: { label: 'Americas', color: 'var(--chart-2)' },
     asia: { label: 'Asia', color: 'var(--chart-3)' },
   };
-  readonly name = (_: number, country: string) => country;
+  private readonly name = (_: number, country: string) => country;
 }

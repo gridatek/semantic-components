@@ -18,7 +18,7 @@ import { RtlToggleDemo } from './rtl-toggle-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlToggleDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 import { SiBookmarkIcon } from '@semantic-icons/lucide-icons';

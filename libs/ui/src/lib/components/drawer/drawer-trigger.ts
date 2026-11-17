@@ -15,14 +15,14 @@ import { ScDrawerProvider } from './drawer-provider';
   },
 })
 export class ScDrawerTrigger {
-  protected readonly drawer = inject(ScDrawerProvider);
+  private readonly drawer = inject(ScDrawerProvider);
   private readonly element =
     inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected toggle(): void {
+  private toggle(): void {
     ɵfocusOnPress(this.element);
     this.drawer.open.update((open) => !open);
   }

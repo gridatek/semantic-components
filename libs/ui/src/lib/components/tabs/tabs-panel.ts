@@ -21,7 +21,7 @@ export class ScTabsPanel {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     // Aria makes a hidden panel inert; it is not shown either.
     cn(this.styles.panel, '[[inert]]:hidden', this.classInput()),
   );

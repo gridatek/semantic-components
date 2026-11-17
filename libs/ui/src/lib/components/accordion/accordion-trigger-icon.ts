@@ -15,7 +15,7 @@ export class ScAccordionTriggerIcon {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.icon,
       'transition-transform group-aria-expanded/accordion-trigger:rotate-180',

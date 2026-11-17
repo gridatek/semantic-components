@@ -33,14 +33,14 @@ import type { ScDataTableTreeRow } from './data-table-types';
 })
 export class ScDataTableExpand {
   private readonly buttonStyles = injectPreset().button;
-  protected readonly tree = inject(ScDataTableTreeGrid, { optional: true });
+  private readonly tree = inject(ScDataTableTreeGrid, { optional: true });
 
   readonly row = input.required<ScDataTableTreeRow>();
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-xs');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       '[&_svg]:transition-transform data-[state=open]:[&_svg]:rotate-90 rtl:data-[state=closed]:[&_svg]:-scale-x-100',
@@ -53,7 +53,7 @@ export class ScDataTableExpand {
     ɵwarnIfUnnamed('scDataTableExpand');
   }
 
-  protected toggle(event: Event): void {
+  private toggle(event: Event): void {
     // The row, not the button, keeps the focus in a tree grid.
     if (this.tree) event.preventDefault();
     this.row().toggleExpanded();

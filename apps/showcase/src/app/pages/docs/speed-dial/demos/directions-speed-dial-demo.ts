@@ -65,8 +65,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DirectionsSpeedDialDemo {
-  readonly last = signal('');
-  readonly ways = [
+  private readonly last = signal('');
+  private readonly ways = [
     { direction: 'up', place: 'absolute start-1/2 bottom-4 -translate-x-1/2' },
     { direction: 'down', place: 'absolute start-1/2 top-4 -translate-x-1/2' },
     { direction: 'left', place: 'absolute end-4 top-1/2 -translate-y-1/2' },

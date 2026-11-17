@@ -147,7 +147,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
   encapsulation: ViewEncapsulation.None,
 })
 export default class AttachmentPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScAttachment, ScAttachmentMedia, ScAttachmentContent, ScAttachmentTitle,',
@@ -172,7 +172,7 @@ export default class AttachmentPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScAttachment',
       selector: 'div[scAttachment]',

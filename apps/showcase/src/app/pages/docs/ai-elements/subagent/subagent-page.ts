@@ -127,7 +127,7 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
   encapsulation: ViewEncapsulation.None,
 })
 export default class SubagentPage {
-  protected readonly states = [
+  private readonly states = [
     {
       state: 'Starting, or a partial result',
       status: '"running" while the chat streams',
@@ -141,7 +141,7 @@ export default class SubagentPage {
     },
   ];
 
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle,',

@@ -33,7 +33,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class StartLineCodeBlockDemo {
-  readonly source = `  readonly total = computed(() =>
+  private readonly source = `  readonly total = computed(() =>
     this.items().reduce((sum, item) => sum + item.price, 0),
   );`;
 }

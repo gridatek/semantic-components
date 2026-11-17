@@ -18,7 +18,7 @@ import { OutlineEmptyDemo } from './outline-empty-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class OutlineEmptyDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScEmpty,

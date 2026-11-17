@@ -18,7 +18,7 @@ import { DurationReasoningDemo } from './duration-reasoning-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DurationReasoningDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

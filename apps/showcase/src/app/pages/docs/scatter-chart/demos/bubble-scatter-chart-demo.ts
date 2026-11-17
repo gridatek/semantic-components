@@ -75,7 +75,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BubbleScatterChartDemo {
-  readonly data = [
+  private readonly data = [
     { city: 'Lisbon', salary: 1600, rent: 1100, population: 3 },
     { city: 'Madrid', salary: 2100, rent: 1250, population: 7 },
     { city: 'Paris', salary: 3000, rent: 1500, population: 11 },
@@ -84,7 +84,7 @@ export class BubbleScatterChartDemo {
     { city: 'London', salary: 3600, rent: 2200, population: 9 },
     { city: 'Zurich', salary: 6500, rent: 2600, population: 1 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     salary: { label: 'Salary (€)' },
     rent: { label: 'Rent (€)', color: 'var(--chart-2)' },
     population: { label: 'Population (M)' },

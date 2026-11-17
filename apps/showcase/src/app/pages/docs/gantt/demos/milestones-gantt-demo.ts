@@ -157,11 +157,11 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class MilestonesGanttDemo {
-  readonly from = date('2026-10-30');
-  readonly to = date('2026-11-27');
-  readonly freeze = date('2026-11-18');
+  private readonly from = date('2026-10-30');
+  private readonly to = date('2026-11-27');
+  private readonly freeze = date('2026-11-18');
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: STEPS,

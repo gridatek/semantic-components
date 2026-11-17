@@ -21,9 +21,7 @@ export class ScPdfViewerPasswordForm {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
-    cn('grid gap-4', this.classInput()),
-  );
+  private readonly class = computed(() => cn('grid gap-4', this.classInput()));
 
   /** What's typed. */
   readonly password = signal('');
@@ -32,7 +30,7 @@ export class ScPdfViewerPasswordForm {
     () => this.pdfViewer.passwordReason() === 'incorrect-password',
   );
 
-  protected submit(event: Event): void {
+  private submit(event: Event): void {
     event.preventDefault();
     const password = this.password();
     if (!password) return;

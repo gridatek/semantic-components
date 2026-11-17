@@ -28,8 +28,8 @@ import { SC_SELECT } from './select-tokens';
   },
 })
 export class ScSelectPopup {
-  protected readonly select = inject(SC_SELECT);
-  protected readonly styles = injectPreset().select;
+  private readonly select = inject(SC_SELECT);
+  private readonly styles = injectPreset().select;
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -38,7 +38,7 @@ export class ScSelectPopup {
   readonly canScrollUp = signal(false);
   readonly canScrollDown = signal(false);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.popup,
       // As wide as the trigger and as tall as the room in the viewport: the

@@ -91,12 +91,12 @@ export class ScTooltipProvider implements ScTooltipContext {
 
   readonly id = inject(_IdGenerator).getId('sc-tooltip-');
 
-  protected readonly trigger = contentChild(ScTooltipTrigger);
-  protected readonly portal = contentChild.required(ScTooltipPortal);
+  private readonly trigger = contentChild(ScTooltipTrigger);
+  private readonly portal = contentChild.required(ScTooltipPortal);
 
   private readonly timing = new ScOpenDelay(this.open);
 
-  protected readonly positions = computed(() =>
+  private readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
       physicalSide(this.side(), this.direction.valueSignal()),
       this.alignment(),
@@ -113,7 +113,7 @@ export class ScTooltipProvider implements ScTooltipContext {
       this.placed() ?? physicalSide(this.side(), this.direction.valueSignal()),
   );
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly class = computed(() => cn('contents', this.classInput()));
 
   constructor() {
     // The group knows which of its tooltips are open.
@@ -160,11 +160,11 @@ export class ScTooltipProvider implements ScTooltipContext {
     if (this.open()) this.open.set(false);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Escape') this.hide();
   }
 
-  protected onPositionChange(change: ConnectedOverlayPositionChange): void {
+  private onPositionChange(change: ConnectedOverlayPositionChange): void {
     this.placed.set(placedSide(change, this.direction.valueSignal()));
   }
 }

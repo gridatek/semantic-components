@@ -18,7 +18,7 @@ import { DestructiveCodeBlockDemo } from './destructive-code-block-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DestructiveCodeBlockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCodeBlock,
   ScCodeBlockActions,

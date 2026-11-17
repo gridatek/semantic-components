@@ -57,7 +57,7 @@ export class ScEditorView {
   readonly layout = input<ScEditorContentLayout>('default');
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'typeset block text-foreground',
       this.layout() === 'page' &&

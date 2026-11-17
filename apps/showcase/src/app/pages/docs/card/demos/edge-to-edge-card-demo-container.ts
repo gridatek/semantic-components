@@ -18,7 +18,7 @@ import { EdgeToEdgeCardDemo } from './edge-to-edge-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class EdgeToEdgeCardDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,

@@ -18,7 +18,7 @@ import { RejectionsFileUploadDemo } from './rejections-file-upload-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RejectionsFileUploadDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFileUpload,
   ScFileUploadDropzone,

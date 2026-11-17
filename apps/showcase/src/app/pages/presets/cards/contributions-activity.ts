@@ -74,5 +74,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewContributionsActivity {
-  protected readonly settings = form(signal({ private: false }));
+  private readonly settings = form(signal({ private: false }));
 }

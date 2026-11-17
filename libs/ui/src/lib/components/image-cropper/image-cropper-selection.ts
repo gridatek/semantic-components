@@ -26,7 +26,7 @@ import { ScImageCropper } from './image-cropper';
   },
 })
 export class ScImageCropperSelection {
-  protected readonly cropper = inject(ScImageCropper);
+  private readonly cropper = inject(ScImageCropper);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -34,7 +34,7 @@ export class ScImageCropperSelection {
     ɵwarnIfUnnamed('scImageCropperSelection');
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute outline-none',
       // The shade around: one shadow, as large as any stage.
@@ -46,7 +46,7 @@ export class ScImageCropperSelection {
     ),
   );
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const size = this.cropper.orientedSize();
     // A step: 1% of the image, 10% with Shift.
     const step =

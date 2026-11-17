@@ -197,13 +197,13 @@ function todosAt(current: number): Todo[] {
 export class QueueUsageDemo {
   private readonly answer =
     'Dark mode is in. The toggle is under Settings, Appearance.';
-  protected readonly todos = signal<Todo[]>(todosAt(TODOS.length));
-  protected readonly reply = signal(this.answer);
-  protected readonly busy = signal(false);
-  protected readonly pending = computed(() =>
+  private readonly todos = signal<Todo[]>(todosAt(TODOS.length));
+  private readonly reply = signal(this.answer);
+  private readonly busy = signal(false);
+  private readonly pending = computed(() =>
     this.todos().filter((todo) => todo.status !== 'completed'),
   );
-  protected readonly completed = computed(() =>
+  private readonly completed = computed(() =>
     this.todos().filter((todo) => todo.status === 'completed'),
   );
   private timers: ReturnType<typeof setTimeout>[] = [];
@@ -212,7 +212,7 @@ export class QueueUsageDemo {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected replay(): void {
+  private replay(): void {
     this.stop();
     this.todos.set([]);
     this.reply.set('');

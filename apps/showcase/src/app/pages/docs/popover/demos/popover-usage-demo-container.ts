@@ -14,7 +14,7 @@ import { PopoverUsageDemo } from './popover-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PopoverUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScField,

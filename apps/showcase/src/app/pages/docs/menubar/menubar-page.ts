@@ -148,7 +148,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export default class MenubarPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScMenubar, ScMenubarItem, ScMenuPortal, ScMenu, ScMenuContent,',
@@ -177,7 +177,7 @@ export default class MenubarPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScMenubar',
       selector: '[scMenubar]',

@@ -98,7 +98,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewSocialLinks {
-  protected readonly links = form(
+  private readonly links = form(
     signal({
       spotify: 'spotify.com/artist/3j...2k',
       instagram: '@julianduryea_music',

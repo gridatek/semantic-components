@@ -17,5 +17,5 @@ export class ScControlGroupText {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.styles, this.classInput()));
+  private readonly class = computed(() => cn(this.styles, this.classInput()));
 }

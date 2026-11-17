@@ -88,11 +88,11 @@ export class ScSheetProvider {
 
   private readonly overlayTemplate =
     viewChild.required<TemplateRef<unknown>>('overlayTemplate');
-  protected readonly portal = contentChild.required(ScSheetPortal);
+  private readonly portal = contentChild.required(ScSheetPortal);
 
   private overlayRef: OverlayRef | null = null;
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly class = computed(() => cn('contents', this.classInput()));
 
   constructor() {
     // Detached on close: Angular keeps the parts until they've animated out.

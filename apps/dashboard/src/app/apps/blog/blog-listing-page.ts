@@ -43,12 +43,12 @@ export class BlogListingPage {
 
   private readonly store = inject(BlogStore);
   /** Featured first: the store's featured posts, else the two latest. */
-  protected readonly featured = computed(() => {
+  private readonly featured = computed(() => {
     const posts = this.store.posts();
     const featured = posts.filter((post) => post.featured);
     return (featured.length ? featured : posts).slice(0, 2);
   });
-  protected readonly others = computed(() => {
+  private readonly others = computed(() => {
     const featured = new Set(this.featured().map((post) => post.id));
     return this.store.posts().filter((post) => !featured.has(post.id));
   });

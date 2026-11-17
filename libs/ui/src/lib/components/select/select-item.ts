@@ -32,11 +32,11 @@ export class ScSelectItem {
   private readonly option = inject<Option<string>>(Option);
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly styles = injectPreset().select;
-  protected readonly onPointerMove = useActiveOption(this.option);
+  private readonly onPointerMove = useActiveOption(this.option);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.item, this.classInput()),
   );
 

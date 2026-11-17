@@ -18,7 +18,7 @@ import { StepLineChartDemo } from './step-line-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StepLineChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

@@ -18,7 +18,7 @@ import { InlineStartInputGroupDemo } from './inline-start-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InlineStartInputGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,

@@ -70,13 +70,13 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlFunnelChartDemo {
-  readonly data = [
+  private readonly data = [
     { stage: 'visit', visitors: 1200 },
     { stage: 'signup', visitors: 860 },
     { stage: 'trial', visitors: 540 },
     { stage: 'paid', visitors: 280 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     visitors: { label: 'الزوار' },
     visit: { label: 'زيارة', color: 'var(--chart-2)' },
     signup: { label: 'تسجيل', color: 'var(--chart-3)' },

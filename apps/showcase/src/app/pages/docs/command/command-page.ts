@@ -167,7 +167,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
   encapsulation: ViewEncapsulation.None,
 })
 export default class CommandPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScCommand, ScCommandInputGroup, ScCommandInput,',
@@ -198,7 +198,7 @@ export default class CommandPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScCommand',
       selector: 'div[scCommand]',

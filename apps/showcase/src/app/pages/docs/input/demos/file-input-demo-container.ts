@@ -18,7 +18,7 @@ import { FileInputDemo } from './file-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FileInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,

@@ -48,7 +48,7 @@ export class ScScrollArea implements ScScrollAreaContext {
 
   readonly viewport = computed(() => this.viewportRef()?.nativeElement);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('group relative overflow-hidden', this.classInput()),
   );
 }

@@ -28,7 +28,7 @@ export class ScNotificationItem {
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/notification relative flex items-start gap-3 rounded-lg p-3 ps-5 transition-colors',
       'hover:bg-muted/50 data-[read=false]:bg-primary/5',

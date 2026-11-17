@@ -66,9 +66,9 @@ export class ScAudioPlayerWaveform {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Each bar's loudness, 0–1, once the file is read. */
-  protected readonly peaks = signal<readonly number[] | null>(null);
+  private readonly peaks = signal<readonly number[] | null>(null);
 
-  protected readonly heights = computed(() => {
+  private readonly heights = computed(() => {
     const peaks = this.peaks();
     return Array.from(
       { length: this.bars() },
@@ -76,17 +76,15 @@ export class ScAudioPlayerWaveform {
     );
   });
 
-  protected readonly played = computed(() => {
+  private readonly played = computed(() => {
     const duration = this.player.duration();
     return duration ? (this.player.currentTime() / duration) * 100 : 0;
   });
 
-  protected readonly max = computed(() => Math.round(this.player.duration()));
-  protected readonly now = computed(() =>
-    Math.round(this.player.currentTime()),
-  );
+  private readonly max = computed(() => Math.round(this.player.duration()));
+  private readonly now = computed(() => Math.round(this.player.currentTime()));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative block h-12 w-full cursor-pointer touch-none rounded-md outline-none',
       'focus-visible:ring-3 focus-visible:ring-ring/50',
@@ -110,7 +108,7 @@ export class ScAudioPlayerWaveform {
     });
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const steps: Record<string, number> = {
       ArrowLeft: -5,
       ArrowDown: -5,
@@ -131,14 +129,14 @@ export class ScAudioPlayerWaveform {
     event.preventDefault();
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (event.button !== 0) return;
     const target = event.currentTarget as HTMLElement;
     target.setPointerCapture(event.pointerId);
     this.seekAt(event);
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     const target = event.currentTarget as HTMLElement;
     if (target.hasPointerCapture(event.pointerId)) this.seekAt(event);
   }

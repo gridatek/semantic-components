@@ -20,7 +20,7 @@ import { cn } from 'cn';
 export class LiveDot {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative inline-flex size-2 shrink-0', this.classInput()),
   );
 }

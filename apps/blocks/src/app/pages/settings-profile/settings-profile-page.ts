@@ -367,9 +367,9 @@ Product designer with 8+ years of experience in SaaS applications. Passionate ab
   encapsulation: ViewEncapsulation.None,
 })
 export default class SettingsProfilePage {
-  readonly bioLength = signal(120);
+  private readonly bioLength = signal(120);
 
-  onBioInput(event: Event) {
+  private onBioInput(event: Event) {
     const target = event.target as HTMLTextAreaElement;
     this.bioLength.set(target.value.length);
   }

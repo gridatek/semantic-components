@@ -34,10 +34,10 @@ export class ScPdfViewerThumbnail {
   readonly width = input(150);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly src = signal<string | null>(null);
+  private readonly src = signal<string | null>(null);
   private readonly near = signal(false);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'mx-auto border bg-white shadow-sm data-loading:aspect-[3/4] data-loading:w-full',
       this.classInput(),

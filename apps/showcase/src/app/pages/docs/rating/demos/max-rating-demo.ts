@@ -32,5 +32,5 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class MaxRatingDemo {
-  readonly rating = signal(7);
+  private readonly rating = signal(7);
 }

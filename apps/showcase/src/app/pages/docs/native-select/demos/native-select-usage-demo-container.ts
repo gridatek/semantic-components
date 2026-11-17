@@ -14,7 +14,7 @@ import { NativeSelectUsageDemo } from './native-select-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NativeSelectUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScLabel,

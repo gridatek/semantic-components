@@ -138,12 +138,12 @@ import { WithTextToggleDemoContainer } from './demos/with-text-toggle-demo-conta
   encapsulation: ViewEncapsulation.None,
 })
 export default class TogglePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScToggle } from '@semantic-components/ui';",
     markup: '<button scToggle [(pressed)]="…">…</button>',
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScToggle',
       selector: 'button[scToggle]',

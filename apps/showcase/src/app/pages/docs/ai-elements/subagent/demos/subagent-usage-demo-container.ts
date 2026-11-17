@@ -18,7 +18,7 @@ import { SubagentUsageDemo } from './subagent-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SubagentUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

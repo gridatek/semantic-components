@@ -23,7 +23,7 @@ export class ScPasswordStrengthLabel {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-muted-foreground text-xs', this.classInput()),
   );
 

@@ -53,7 +53,7 @@ export class ScStepperItem extends CdkStep {
     return 'inactive';
   });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const isVertical = this.stepper.orientation() === 'vertical';
     return cn(
       'flex gap-2',

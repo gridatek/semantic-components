@@ -179,7 +179,7 @@ import { SizesAvatarDemoContainer } from './demos/sizes-avatar-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class AvatarPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScAvatar, ScAvatarImage, ScAvatarFallback, ScAvatarBadge,',
@@ -198,7 +198,7 @@ export default class AvatarPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScAvatar',
       selector: 'span[scAvatar]',

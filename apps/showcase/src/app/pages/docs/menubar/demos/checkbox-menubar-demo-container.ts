@@ -18,7 +18,7 @@ import { CheckboxMenubarDemo } from './checkbox-menubar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxMenubarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScMenu,
   ScMenuCheckboxItem,

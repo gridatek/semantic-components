@@ -139,7 +139,7 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
   encapsulation: ViewEncapsulation.None,
 })
 export default class BadgePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScBadge } from '@semantic-components/ui';",
     markup: [
       '<span scBadge variant="secondary">',
@@ -149,7 +149,7 @@ export default class BadgePage {
     ].join('\n'),
   };
 
-  protected readonly inputs = [
+  private readonly inputs = [
     {
       name: 'variant',
       type: "'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link'",

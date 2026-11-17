@@ -18,7 +18,7 @@ import { SettingsPanelThemeToggleDemo } from './settings-panel-theme-toggle-demo
   encapsulation: ViewEncapsulation.None,
 })
 export class SettingsPanelThemeToggleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScNativeSelect,
   ScNativeSelectContainer,

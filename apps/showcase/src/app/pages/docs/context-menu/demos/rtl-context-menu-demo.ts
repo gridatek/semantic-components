@@ -169,7 +169,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlContextMenuDemo {
-  protected readonly bookmarks = signal(true);
-  protected readonly fullUrls = signal(false);
-  protected readonly person = signal('pedro');
+  private readonly bookmarks = signal(true);
+  private readonly fullUrls = signal(false);
+  private readonly person = signal('pedro');
 }

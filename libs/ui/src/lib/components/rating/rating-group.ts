@@ -26,7 +26,7 @@ export const SC_RATING_GROUP = new InjectionToken<ScRatingGroup>(
   },
 })
 export class ScRatingGroup {
-  protected readonly field = inject(SC_RATING);
+  private readonly field = inject(SC_RATING);
 
   constructor() {
     ɵwarnIfUnnamed('scRatingGroup');
@@ -34,14 +34,14 @@ export class ScRatingGroup {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  readonly hoveredValue = signal<number | null>(null);
+  private readonly hoveredValue = signal<number | null>(null);
 
   readonly displayValue = computed(() => {
     const hovered = this.hoveredValue();
     return hovered !== null ? hovered : this.field.value();
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex gap-0.5', this.classInput()),
   );
 
@@ -51,11 +51,11 @@ export class ScRatingGroup {
     }
   }
 
-  onMouseLeave(): void {
+  private onMouseLeave(): void {
     this.hoveredValue.set(null);
   }
 
-  onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (this.field.readonly() || this.field.disabled()) return;
 
     const step = this.field.allowHalf() ? 0.5 : 1;

@@ -14,7 +14,7 @@ import { SunburstChartUsageDemo } from './sunburst-chart-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SunburstChartUsageDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

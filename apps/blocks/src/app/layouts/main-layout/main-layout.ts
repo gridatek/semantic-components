@@ -20,5 +20,5 @@ import { StackedLayout } from '../../components/stacked-layout/stacked-layout';
 })
 export class MainLayout {
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 }

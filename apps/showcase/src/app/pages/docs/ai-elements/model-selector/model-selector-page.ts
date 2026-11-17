@@ -75,7 +75,7 @@ import { RtlModelSelectorDemoContainer } from './demos/rtl-model-selector-demo-c
   encapsulation: ViewEncapsulation.None,
 })
 export default class ModelSelectorPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScMenuProvider, ScMenuTrigger, ScMenuPortal, ScMenu, ScMenuContent,',

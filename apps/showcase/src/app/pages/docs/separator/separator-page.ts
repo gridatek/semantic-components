@@ -131,12 +131,12 @@ import { VerticalSeparatorDemoContainer } from './demos/vertical-separator-demo-
   encapsulation: ViewEncapsulation.None,
 })
 export default class SeparatorPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScSeparator } from '@semantic-components/ui';",
     markup: '<div scSeparator orientation="…"></div>',
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScSeparator',
       selector: 'div[scSeparator]',

@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScTimelineTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-sm leading-6 font-medium', this.classInput()),
   );
 }

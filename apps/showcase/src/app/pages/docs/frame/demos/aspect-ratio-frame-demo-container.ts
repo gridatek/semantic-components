@@ -18,7 +18,7 @@ import { AspectRatioFrameDemo } from './aspect-ratio-frame-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AspectRatioFrameDemoContainer {
-  readonly code = `import { NgOptimizedImage } from '@angular/common';
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScAspectRatio, ScFrame } from '@semantic-components/ui';
 

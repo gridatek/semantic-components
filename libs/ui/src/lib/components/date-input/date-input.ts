@@ -75,12 +75,12 @@ export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> 
   readonly touch = output<void>();
 
   /** The typed text could not be read as a day that can be picked, until it is edited. */
-  protected readonly rejected = signal(false);
+  private readonly rejected = signal(false);
 
-  protected readonly isDisabled = computed(
+  private readonly isDisabled = computed(
     () => this.disabled() || !!this.picker?.disabled(),
   );
-  protected readonly showInvalid = computed(
+  private readonly showInvalid = computed(
     () =>
       this.rejected() ||
       (this.picker
@@ -88,13 +88,13 @@ export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> 
         : this.invalid() && this.touched()),
   );
 
-  protected readonly id = computed(
+  private readonly id = computed(
     () =>
       this.idInput() ||
       (this.part() === 'end' ? '' : this.field?.id()) ||
       this.fallbackId,
   );
-  protected readonly describedBy = computed(
+  private readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
@@ -132,7 +132,7 @@ export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> 
     return (part === 'start' ? range?.from : range?.to) ?? null;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.inputStyles, this.classInput()),
   );
 
@@ -162,7 +162,7 @@ export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> 
     this.element.value = date ? this.numeric().format(date) : '';
   }
 
-  protected left(): void {
+  private left(): void {
     if (this.picker) this.picker.touch.emit();
     else this.touch.emit();
   }

@@ -18,7 +18,7 @@ import { EventCountdownDemo } from './event-countdown-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class EventCountdownDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCountdown,
   ScCountdownText,

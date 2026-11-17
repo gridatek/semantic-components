@@ -51,7 +51,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupCheckboxDemo {
-  protected readonly desktopForm = form(
+  private readonly desktopForm = form(
     signal({
       hardDisks: true,
       externalDisks: true,

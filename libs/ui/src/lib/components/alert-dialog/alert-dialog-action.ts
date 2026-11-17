@@ -21,14 +21,14 @@ export class ScAlertDialogAction {
   readonly variant = input<ScButtonVariants['variant']>('default');
   readonly size = input<ScButtonVariants['size']>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  action(): void {
+  private action(): void {
     this.alertDialogProvider.open.set(false);
   }
 }

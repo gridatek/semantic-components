@@ -26,7 +26,7 @@ export class ScRatingIcon {
   /** Set by the parent ScRatingItem so the icon can read state */
   readonly state = signal<'full' | 'half' | 'empty'>('empty');
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const role = this.role();
     const state = this.state();
     const base = this.classInput();
@@ -51,7 +51,7 @@ export class ScRatingIcon {
     );
   });
 
-  protected readonly clipPath = computed(() => {
+  private readonly clipPath = computed(() => {
     if (this.role() !== 'foreground') {
       return null;
     }

@@ -30,19 +30,19 @@ export const CHECKERBOARD =
   },
 })
 export class ScColorPickerSlider {
-  protected readonly picker = inject(ScColorPicker);
+  private readonly picker = inject(ScColorPicker);
 
   readonly channel = input.required<'hue' | 'alpha'>({
     alias: 'scColorPickerSlider',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly current = computed(() => {
+  private readonly current = computed(() => {
     const { h, a } = this.picker.hsva();
     return this.channel() === 'hue' ? Math.round(h) : a;
   });
 
-  protected readonly track = computed(() => {
+  private readonly track = computed(() => {
     if (this.channel() === 'hue') {
       return 'linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)';
     }
@@ -51,13 +51,13 @@ export class ScColorPickerSlider {
   });
 
   /** The thumb: the hue, or the colour as it is. */
-  protected readonly thumb = computed(() =>
+  private readonly thumb = computed(() =>
     this.channel() === 'hue'
       ? `hsl(${this.picker.hsva().h} 100% 50%)`
       : this.picker.css(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'h-3 w-full cursor-pointer appearance-none rounded-full [background:var(--track)] outline-none disabled:pointer-events-none disabled:opacity-50',
       '[&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:bg-(--thumb) [&::-webkit-slider-thumb]:shadow-[0_0_0_1px_rgb(0_0_0/0.4),0_1px_3px_rgb(0_0_0/0.4)]',
@@ -71,7 +71,7 @@ export class ScColorPickerSlider {
     ɵwarnIfUnnamed('scColorPickerSlider');
   }
 
-  protected onInput(event: Event): void {
+  private onInput(event: Event): void {
     const value = Number((event.target as HTMLInputElement).value);
     this.picker.set(this.channel() === 'hue' ? { h: value } : { a: value });
   }

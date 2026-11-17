@@ -77,23 +77,23 @@ import { ScSignaturePad } from './signature-pad';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSignaturePadSurface {
-  protected readonly pad = inject(ScSignaturePad);
+  private readonly pad = inject(ScSignaturePad);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly describedBy = computed(
+  private readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
   /** The surface's size, as shown. */
-  protected readonly size = signal({ width: 0, height: 0 });
+  private readonly size = signal({ width: 0, height: 0 });
   /** The stroke being drawn. */
-  protected readonly points = signal<readonly ScSignaturePoint[]>([]);
+  private readonly points = signal<readonly ScSignaturePoint[]>([]);
 
-  protected readonly typed = computed(() => {
+  private readonly typed = computed(() => {
     const value = this.pad.value();
     return isTyped(value) ? value : null;
   });
@@ -104,19 +104,19 @@ export class ScSignaturePadSurface {
   });
 
   /** The strokes' space: the surface it was drawn on, or this one. */
-  protected readonly viewBox = computed(() => {
+  private readonly viewBox = computed(() => {
     const space = this.drawn() ?? this.size();
     return `0 0 ${space.width || 1} ${space.height || 1}`;
   });
 
-  protected readonly paths = computed(() =>
+  private readonly paths = computed(() =>
     (this.drawn()?.strokes ?? []).map((stroke) => ({
       d: pathData(outline(stroke)),
       color: stroke.color,
     })),
   );
 
-  protected readonly live = computed(() => {
+  private readonly live = computed(() => {
     const points = this.points();
     if (!points.length) return null;
     return {
@@ -125,7 +125,7 @@ export class ScSignaturePadSurface {
     };
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative block h-40 w-full touch-none overflow-hidden rounded-md border bg-background text-foreground outline-none',
       'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
@@ -150,7 +150,7 @@ export class ScSignaturePadSurface {
     inject(DestroyRef).onDestroy(() => observer.disconnect());
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (!this.pad.editable() || event.button !== 0) return;
     event.preventDefault();
     // Focused for its keys (undo…), without the keyboard's ring.
@@ -160,14 +160,14 @@ export class ScSignaturePadSurface {
     this.add(event);
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     if (!this.points().length) return;
     // Every point the pointer passed, not only one per frame.
     const events = event.getCoalescedEvents?.() ?? [];
     for (const each of events.length ? events : [event]) this.add(each);
   }
 
-  protected end(): void {
+  private end(): void {
     const points = this.points();
     if (!points.length) return;
     this.points.set([]);
@@ -179,7 +179,7 @@ export class ScSignaturePadSurface {
     );
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const key = event.key.toLowerCase();
     const mod = event.ctrlKey || event.metaKey;
     if (mod && key === 'z' && !event.shiftKey) this.pad.undo();

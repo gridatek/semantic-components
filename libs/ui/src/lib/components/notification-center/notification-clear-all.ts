@@ -23,16 +23,16 @@ export class ScNotificationClearAll {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  protected readonly center = inject(SC_NOTIFICATION_CENTER);
+  private readonly center = inject(SC_NOTIFICATION_CENTER);
 
-  protected readonly disabled = computed(
+  private readonly disabled = computed(
     () => !this.center.notifications().length,
   );
 

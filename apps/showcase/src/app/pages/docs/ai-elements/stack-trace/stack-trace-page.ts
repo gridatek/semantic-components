@@ -86,7 +86,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
   encapsulation: ViewEncapsulation.None,
 })
 export default class StackTracePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle,',

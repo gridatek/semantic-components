@@ -56,7 +56,7 @@ export class ScSidebarProvider {
   /** Saved only once the saved state is read: not over it. */
   private readonly restored = signal(false);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/sidebar-wrapper flex min-h-svh w-full has-data-[variant=inset]:bg-sidebar',
       this.classInput(),
@@ -96,7 +96,7 @@ export class ScSidebarProvider {
     });
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const key = this.shortcut();
     if (
       key &&

@@ -18,7 +18,7 @@ import { ConfirmDateRangePickerDemo } from './confirm-date-range-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ConfirmDateRangePickerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarFooter,

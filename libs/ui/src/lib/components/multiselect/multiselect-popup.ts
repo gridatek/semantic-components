@@ -15,7 +15,7 @@ import { cn } from 'cn';
 export class ScMultiselectPopup {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-popover text-popover-foreground ring-foreground/10 relative z-50 flex w-full min-w-36 flex-col overflow-hidden rounded-lg p-1 shadow-md ring-1',
       this.classInput(),

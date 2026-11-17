@@ -14,7 +14,7 @@ import { NumberTickerUsageDemo } from './number-ticker-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NumberTickerUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScFrame } from '@semantic-components/ui';
 import { ScNumberTicker } from '@semantic-components/ui';
 

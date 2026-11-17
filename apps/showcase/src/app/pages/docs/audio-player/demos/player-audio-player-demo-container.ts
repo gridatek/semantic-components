@@ -18,7 +18,7 @@ import { PlayerAudioPlayerDemo } from './player-audio-player-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayerAudioPlayerDemoContainer {
-  readonly code = `import { NgOptimizedImage } from '@angular/common';
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScAudioPlayer,

@@ -18,7 +18,7 @@ import { BasicBreadcrumbDemo } from './basic-breadcrumb-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicBreadcrumbDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBreadcrumb,
   ScBreadcrumbItem,

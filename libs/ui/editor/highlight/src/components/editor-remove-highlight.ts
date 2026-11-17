@@ -24,18 +24,18 @@ export class ScEditorRemoveHighlight {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly disabled = computed(
+  private readonly disabled = computed(
     () => !this.editor.editable() || !this.editor.isActive('highlight'),
   );
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     ɵassertEditorFeature('withHighlight', 'scEditorRemoveHighlight');
     ɵeditorControl({ disabled: this.disabled });
   }
 
-  protected onClick(): void {
+  private onClick(): void {
     this.editor.run((chain) => chain.unsetHighlight());
   }
 }

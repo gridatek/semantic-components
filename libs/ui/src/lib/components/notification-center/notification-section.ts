@@ -37,7 +37,7 @@ export class ScNotificationSection {
   /** The id of its title, which names it. */
   readonly titleId = inject(_IdGenerator).getId('sc-notification-section-');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col gap-1', this.classInput()),
   );
 }

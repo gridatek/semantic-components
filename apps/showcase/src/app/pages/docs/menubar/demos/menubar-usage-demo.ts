@@ -216,7 +216,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class MenubarUsageDemo {
-  protected readonly bookmarksBar = signal(false);
-  protected readonly fullUrls = signal(true);
-  protected readonly profile = signal('benoit');
+  private readonly bookmarksBar = signal(false);
+  private readonly fullUrls = signal(true);
+  private readonly profile = signal('benoit');
 }

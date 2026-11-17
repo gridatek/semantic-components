@@ -31,5 +31,5 @@ import { ScFrame, ScScrollArea } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class BothScrollAreaDemo {
-  readonly numbers = Array.from({ length: 20 }, (_, i) => i + 1);
+  private readonly numbers = Array.from({ length: 20 }, (_, i) => i + 1);
 }

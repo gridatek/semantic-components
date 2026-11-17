@@ -88,12 +88,12 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlControlGroupDemo {
-  protected readonly currencies = [
+  private readonly currencies = [
     { value: 'د.م.', label: 'درهم مغربي' },
     { value: '$', label: 'دولار أمريكي' },
     { value: '€', label: 'يورو' },
   ];
 
   private readonly model = signal({ currency: 'د.م.', amount: '' });
-  protected readonly paymentForm = form(this.model);
+  private readonly paymentForm = form(this.model);
 }

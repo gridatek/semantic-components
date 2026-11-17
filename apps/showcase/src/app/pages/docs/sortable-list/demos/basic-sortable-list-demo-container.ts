@@ -18,7 +18,7 @@ import { BasicSortableListDemo } from './basic-sortable-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicSortableListDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScSortableList,
   type ScSortableListAnnouncement,

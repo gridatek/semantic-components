@@ -18,7 +18,7 @@ import { AvatarItemDemo } from './avatar-item-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AvatarItemDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,

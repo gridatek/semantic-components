@@ -33,17 +33,17 @@ import { ScNativeDialogProvider } from './native-dialog-provider';
 })
 export class ScNativeDialog {
   private readonly elementRef = inject(ElementRef<HTMLDialogElement>);
-  readonly dialogProvider = inject(ScNativeDialogProvider);
+  private readonly dialogProvider = inject(ScNativeDialogProvider);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  readonly dialogContent = contentChild.required(ScNativeDialogContent);
+  private readonly dialogContent = contentChild.required(ScNativeDialogContent);
 
-  readonly dialogId = inject(_IdGenerator).getId('sc-native-dialog-');
+  private readonly dialogId = inject(_IdGenerator).getId('sc-native-dialog-');
   readonly titleId = `${this.dialogId}-title`;
   readonly descriptionId = `${this.dialogId}-description`;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-background text-foreground fixed inset-0 m-auto w-full max-w-sm rounded-xl border p-4 shadow-lg backdrop:bg-black/50',
       'focus:outline-none',
@@ -66,11 +66,11 @@ export class ScNativeDialog {
     });
   }
 
-  protected onClose(): void {
+  private onClose(): void {
     this.dialogProvider.open.set(false);
   }
 
-  protected onBackdropClick(event: MouseEvent): void {
+  private onBackdropClick(event: MouseEvent): void {
     const dialogEl = this.elementRef.nativeElement;
     if (event.target === dialogEl) {
       dialogEl.close();

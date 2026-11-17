@@ -15,10 +15,10 @@ import { SC_NOTIFICATION } from './notification';
   },
 })
 export class ScNotificationUnread {
-  protected readonly item = inject(SC_NOTIFICATION);
+  private readonly item = inject(SC_NOTIFICATION);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-primary absolute start-2 top-5 size-1.5 rounded-full',
       this.classInput(),

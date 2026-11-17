@@ -18,7 +18,7 @@ import { FormTextareaDemo } from './form-textarea-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTextareaDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, email, form, required } from '@angular/forms/signals';
 import {
   ScCard,

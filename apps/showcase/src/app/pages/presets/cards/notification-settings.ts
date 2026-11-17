@@ -75,7 +75,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewNotificationSettings {
-  protected readonly notifications = [
+  private readonly notifications = [
     {
       id: 'transactions',
       label: 'Transaction alerts',
@@ -97,6 +97,6 @@ export class PreviewNotificationSettings {
       description: 'Daily portfolio summary and price alerts.',
     },
   ];
-  protected readonly allIds = this.notifications.map((n) => n.id);
-  protected readonly checked = signal<string[]>(['transactions', 'security']);
+  private readonly allIds = this.notifications.map((n) => n.id);
+  private readonly checked = signal<string[]>(['transactions', 'security']);
 }

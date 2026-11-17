@@ -34,17 +34,17 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   },
 })
 export class ScPdfViewerPageInput {
-  readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   /** Typed in since the last Enter / leaving the field. */
-  protected typing = false;
+  private typing = false;
 
-  protected readonly labelled = computed(() => !!this.pdfViewer.pageLabels());
+  private readonly labelled = computed(() => !!this.pdfViewer.pageLabels());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'w-14 text-center',
       this.labelled()
@@ -82,7 +82,7 @@ export class ScPdfViewerPageInput {
     });
   }
 
-  protected go(event: Event): void {
+  private go(event: Event): void {
     const field = event.target as HTMLInputElement;
     const page = this.pdfViewer.pageForLabel(field.value);
     this.typing = false;
@@ -94,7 +94,7 @@ export class ScPdfViewerPageInput {
   }
 
   /** Leaving the field: back to the current page. */
-  protected show(): void {
+  private show(): void {
     this.typing = false;
     this.element.value = this.pdfViewer.pageLabel(this.pdfViewer.currentPage());
   }

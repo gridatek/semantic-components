@@ -59,7 +59,7 @@ export class ScCodeBlockContent {
   readonly removedLines = input<readonly number[]>([]);
 
   /** An empty line holds a newline, so copying a selection keeps it. */
-  protected readonly newline = '\n';
+  private readonly newline = '\n';
 
   /** The code without its last newline (it would show as an empty line). */
   private readonly text = computed(() => this.code().replace(/\n$/, ''));
@@ -70,7 +70,7 @@ export class ScCodeBlockContent {
     readonly lines: ScCodeToken[][];
   } | null>(null);
 
-  protected readonly lines = computed<ScCodeToken[][]>(() => {
+  private readonly lines = computed<ScCodeToken[][]>(() => {
     const text = this.text();
     const highlighted = this.highlighted();
     if (highlighted?.text === text && highlighted.language === this.language())
@@ -80,7 +80,7 @@ export class ScCodeBlockContent {
       .map((line) => (line ? [{ content: line, style: {} }] : []));
   });
 
-  protected readonly variants = computed(() => {
+  private readonly variants = computed(() => {
     const marks = new Map<number, ScCodeBlockLineVariant>();
     for (const n of this.highlightedLines()) marks.set(n, 'highlighted');
     for (const n of this.addedLines()) marks.set(n, 'added');
@@ -89,11 +89,10 @@ export class ScCodeBlockContent {
   });
 
   private readonly styles = injectPreset().codeBlock;
-  protected readonly codeClass = this.styles.code;
-  protected readonly tokenClass =
-    'text-(--shiki-light) dark:text-(--shiki-dark)';
+  private readonly codeClass = this.styles.code;
+  private readonly tokenClass = 'text-(--shiki-light) dark:text-(--shiki-dark)';
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.content, this.classInput()),
   );
 
@@ -116,7 +115,7 @@ export class ScCodeBlockContent {
     });
   }
 
-  protected lineClass(variant: ScCodeBlockLineVariant): string {
+  private lineClass(variant: ScCodeBlockLineVariant): string {
     return this.styles.line({ variant });
   }
 }

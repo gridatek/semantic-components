@@ -18,7 +18,7 @@ import { NavigationThemeToggleDemo } from './navigation-theme-toggle-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NavigationThemeToggleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScButton, ScThemeManager } from '@semantic-components/ui';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 

@@ -181,18 +181,18 @@ const columns = columnHelper.columns([
 })
 export class ProjectsOrders {
   private readonly labelOf = label;
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: [...ORDERS],
     getRowId: (order) => order.id,
   }));
 
-  protected readonly initialsOf = initials;
-  protected readonly priceOf = money;
-  protected readonly dayOf = day;
+  private readonly initialsOf = initials;
+  private readonly priceOf = money;
+  private readonly dayOf = day;
 
-  protected badge(status: OrderStatus): ScBadgeVariants['variant'] {
+  private badge(status: OrderStatus): ScBadgeVariants['variant'] {
     if (status === 'Delivered') return 'default';
     if (status === 'Processing') return 'secondary';
     return 'destructive';

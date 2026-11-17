@@ -17,11 +17,11 @@ import { SC_STEPPER } from './stepper-types';
   },
 })
 export class ScStepperList {
-  protected readonly stepper = inject(SC_STEPPER);
+  private readonly stepper = inject(SC_STEPPER);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const isVertical = this.stepper.orientation() === 'vertical';
     return cn(
       'flex',
@@ -30,7 +30,7 @@ export class ScStepperList {
     );
   });
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const cdk = this.stepper.cdk;
     const before = cdk._getFocusIndex();
     cdk._onKeydown(event);

@@ -95,13 +95,13 @@ export class BlogCard {
   readonly featured = input(false, { transform: booleanAttribute });
   readonly priority = input(false);
 
-  protected readonly titleClass = computed(() =>
+  private readonly titleClass = computed(() =>
     cn(
       'leading-snug font-semibold',
       this.featured() ? 'text-xl' : 'line-clamp-2 text-base',
     ),
   );
-  protected readonly initialsOf = initials;
-  protected readonly countOf = count;
-  protected readonly dayOf = day;
+  private readonly initialsOf = initials;
+  private readonly countOf = count;
+  private readonly dayOf = day;
 }

@@ -18,7 +18,7 @@ import { TablesEditorDemo } from './tables-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TablesEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScFrame,

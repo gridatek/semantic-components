@@ -80,7 +80,7 @@ async function verifyOnServer(code: string): Promise<boolean> {
 export class ServerValidationOtpFieldDemo {
   private readonly model = signal({ code: '' });
 
-  protected readonly otpForm = form(this.model, (path) => {
+  private readonly otpForm = form(this.model, (path) => {
     required(path.code, { message: 'Enter the code.' });
     minLength(path.code, 6, { message: 'Enter all 6 digits.' });
     // Runs only once the code is complete (the validators above pass).
@@ -102,7 +102,7 @@ export class ServerValidationOtpFieldDemo {
     });
   });
 
-  protected readonly status = computed(() => {
+  private readonly status = computed(() => {
     const code = this.otpForm.code();
     if (code.pending()) return 'Checking…';
     if (code.valid()) return 'Verified.';

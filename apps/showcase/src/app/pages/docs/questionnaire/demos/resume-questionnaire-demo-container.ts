@@ -18,7 +18,7 @@ import { ResumeQuestionnaireDemo } from './resume-questionnaire-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResumeQuestionnaireDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
+  private readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   FormField,

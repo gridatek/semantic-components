@@ -21,9 +21,9 @@ export class ScSelectGroupLabel {
     alias: 'id',
   });
 
-  readonly id = computed(() => this.idInput());
+  private readonly id = computed(() => this.idInput());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.groupLabel, this.classInput()),
   );
 

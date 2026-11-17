@@ -23,7 +23,7 @@ import { ScTransferList, type ScTransferListSide } from './transfer-list';
 export class ScTransferListMoveAll {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly list = inject(ScTransferList);
+  private readonly list = inject(ScTransferList);
 
   readonly to = input.required<ScTransferListSide>({
     alias: 'scTransferListMoveAll',
@@ -33,7 +33,7 @@ export class ScTransferListMoveAll {
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
   /** What the other side shows, movable. */
-  protected readonly ids = computed(
+  private readonly ids = computed(
     () =>
       this.list
         .pane(this.to() === 'target' ? 'source' : 'target')
@@ -41,7 +41,7 @@ export class ScTransferListMoveAll {
         .map((item) => item.id) ?? [],
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

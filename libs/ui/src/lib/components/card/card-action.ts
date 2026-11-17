@@ -11,7 +11,7 @@ import { cn } from 'cn';
 export class ScCardAction {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'col-start-2 row-span-2 row-start-1 self-start justify-self-end',
       this.classInput(),

@@ -172,7 +172,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
   encapsulation: ViewEncapsulation.None,
 })
 export default class OtpFieldPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScOtpField, ScOtpFieldGroup, ScOtpFieldInput, ScOtpFieldSeparator } from '@semantic-components/ui';",
     markup: [
@@ -191,7 +191,7 @@ export default class OtpFieldPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScOtpField',
       selector: 'div[scOtpField]',

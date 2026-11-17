@@ -45,7 +45,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidRadioGroupDemo {
-  protected readonly notifyForm = form(signal({ notify: '' }), (path) => {
+  private readonly notifyForm = form(signal({ notify: '' }), (path) => {
     required(path.notify);
   });
 

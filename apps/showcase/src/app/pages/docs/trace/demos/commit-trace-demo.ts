@@ -127,7 +127,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CommitTraceDemo {
-  protected readonly files = [
+  private readonly files = [
     {
       path: 'app/login/login-page.ts',
       added: false,

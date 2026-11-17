@@ -20,12 +20,12 @@ export type ScTimelineStatus = 'done' | 'current' | 'upcoming';
   },
 })
 export class ScTimelineItem {
-  protected readonly timeline = inject(ScTimeline);
+  private readonly timeline = inject(ScTimeline);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly status = input<ScTimelineStatus>('done');
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     if (this.timeline.orientation() === 'horizontal') {
       return cn(
         'group/item flex min-w-44 flex-1 flex-col gap-2 pe-4 last:pe-0',

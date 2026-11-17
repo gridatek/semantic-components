@@ -39,7 +39,7 @@ You are an expert in TypeScript, Angular, and scalable web application developme
   ```typescript
   // host: { '[class]': 'class()' }
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
   ```
 
   - Import `cn` from the `cn` package (shadcn's): `import { cn } from 'cn'`.
@@ -49,7 +49,11 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - A part's own classes that depend on its state (orientation, side, axis…) are plain classes chosen in its `computed()` — `this.orientation() === 'vertical' ? 'w-px self-stretch' : 'h-px w-full'` — never `data-[orientation=vertical]:…` variants on itself. A `data-[…]:` class outranks the consumer's plain class in specificity (class + attribute), and `cn` doesn't see them as conflicting, so the consumer's `h-4 self-center` silently loses. Data variants stay for styling by state from elsewhere (`group-data-…`, `in-data-…`, a parent's `*:data-…`) and in the preset strings taken from shadcn.
 - Keep components small and focused on a single responsibility
 - Use `input()` and `output()` functions instead of decorators
-- Members used only by the template are `private` (Angular 22.2+ reads them), not `protected`. `protected` is kept for members a subclass reads. TS `private`, never ES `#field` (not supported in templates). The project leaves `noUnusedLocals` off: TypeScript doesn't see template uses, so it would report these members as unused.
+- Members are `private` unless something outside the class reads them. Angular 22.2+ lets a template and the `host` bindings read their own class's `private` members.
+  - Public (no keyword, never write `public`): `input()`, `output()` and `model()` fields (Angular rejects private ones, NG1053), and members that other classes or other components' templates read (a parent's state read by its parts through `inject()`, an interface's members). In `libs`, a part with `exportAs`, a service and a plain class (a ref, an object handed to pdf.js…) keep their API public even when nothing in the repo reads it: apps use it through `#ref="scX"` or `inject()`.
+  - `protected`: members a subclass reads.
+  - TS `private`, never ES `#field` (not supported in templates). The project leaves `noUnusedLocals` off: TypeScript doesn't see template uses, so it would report these members as unused.
+  - `node scripts/tighten-visibility.mjs [paths…]` applies this: it makes every member it can private, type-checks every project, and makes public or protected only what the compiler says needs it. Run it on the files you wrote.
 - Use `computed()` for derived state
 - Do NOT set `changeDetection` in `@Component` — `OnPush` is the default in Angular v22+. Never use `ChangeDetectionStrategy.Eager` (or its deprecated alias `Default`)
 - Set `encapsulation: ViewEncapsulation.None` in `@Component` decorator

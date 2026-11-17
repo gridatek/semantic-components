@@ -14,7 +14,7 @@ import { MaxRatingDemo } from './max-rating-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MaxRatingDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScRating,
   ScRatingGroup,

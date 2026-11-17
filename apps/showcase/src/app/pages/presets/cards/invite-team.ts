@@ -147,8 +147,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewInviteTeam {
-  protected readonly link = 'https://app.co/invite/x8f2k';
-  protected readonly roles = [
+  private readonly link = 'https://app.co/invite/x8f2k';
+  private readonly roles = [
     { label: 'Admin', value: 'admin' },
     { label: 'Editor', value: 'editor' },
     { label: 'Viewer', value: 'viewer' },
@@ -159,9 +159,9 @@ export class PreviewInviteTeam {
       { email: 'sam@example.com', role: 'viewer' },
     ],
   });
-  protected readonly team = form(this.model);
+  private readonly team = form(this.model);
 
-  protected addAnother(): void {
+  private addAnother(): void {
     this.model.update((m) => ({
       invites: [...m.invites, { email: '', role: 'viewer' }],
     }));

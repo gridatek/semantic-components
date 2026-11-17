@@ -39,7 +39,7 @@ import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class PageVirtualListDemo {
-  readonly rows = Array.from(
+  private readonly rows = Array.from(
     { length: 500 },
     (_, i) => 'Entry ' + (i + 1) + ': all good',
   );

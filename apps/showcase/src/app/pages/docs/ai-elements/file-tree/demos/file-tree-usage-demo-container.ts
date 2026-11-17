@@ -18,7 +18,7 @@ import { FileTreeUsageDemo } from './file-tree-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FileTreeUsageDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,

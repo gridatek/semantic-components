@@ -29,7 +29,7 @@ export class ScColorPickerSwatches {
     return (options.find((option) => option.checked()) ?? options[0])?.element;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-wrap gap-1', this.classInput()),
   );
 

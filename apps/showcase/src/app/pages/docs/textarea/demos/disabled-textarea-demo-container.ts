@@ -18,7 +18,7 @@ import { DisabledTextareaDemo } from './disabled-textarea-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledTextareaDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
 
 /** disabled: dimmed, and nothing can be typed. */

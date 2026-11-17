@@ -176,15 +176,15 @@ interface SignupModel {
   encapsulation: ViewEncapsulation.None,
 })
 export class LinearStepperDemo {
-  readonly selectedIndex = signal(0);
-  readonly created = signal(false);
+  private readonly selectedIndex = signal(0);
+  private readonly created = signal(false);
 
-  readonly model = signal<SignupModel>({
+  private readonly model = signal<SignupModel>({
     account: { email: '' },
     profile: { name: '' },
   });
 
-  readonly signupForm = form(this.model, (s) => {
+  private readonly signupForm = form(this.model, (s) => {
     required(s.account.email, { message: 'Email is required' });
     email(s.account.email, { message: 'Enter a valid email' });
     required(s.profile.name, { message: 'Name is required' });

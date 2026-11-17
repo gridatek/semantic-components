@@ -14,7 +14,7 @@ import { AlertUsageDemo } from './alert-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AlertUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlert,
   ScAlertDescription,

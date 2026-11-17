@@ -22,12 +22,12 @@ export class ScDataTableColumnFilter {
   readonly column = input.required<ScDataTableFilterableColumn>();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly value = computed(() =>
+  private readonly value = computed(() =>
     String(this.column().getFilterValue() ?? ''),
   );
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected onInput(event: Event): void {
+  private onInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this.column().setFilterValue(value === '' ? undefined : value);
   }

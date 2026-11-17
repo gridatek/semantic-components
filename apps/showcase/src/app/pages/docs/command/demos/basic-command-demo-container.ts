@@ -18,7 +18,7 @@ import { BasicCommandDemo } from './basic-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCommandDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCommand,

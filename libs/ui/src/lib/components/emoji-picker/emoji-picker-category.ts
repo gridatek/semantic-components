@@ -17,7 +17,7 @@ import type { ScEmojiListCategory as Category } from './emoji-picker-types';
   },
 })
 export class ScEmojiPickerCategory {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly category = input.required<Category>({
     alias: 'scEmojiPickerCategory',
@@ -25,14 +25,14 @@ export class ScEmojiPickerCategory {
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Over the rows (they scroll under its header); clicks go through to them.
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-x-0 z-10 [contain:content]',
       this.classInput(),
     ),
   );
 
-  protected readonly height = computed(
+  private readonly height = computed(
     () =>
       (this.state.headerHeight() ?? 0) +
       this.category().rowsCount * (this.state.rowHeight() ?? 0),

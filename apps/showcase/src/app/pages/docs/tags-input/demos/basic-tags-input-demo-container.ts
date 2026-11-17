@@ -18,7 +18,7 @@ import { BasicTagsInputDemo } from './basic-tags-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTagsInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,

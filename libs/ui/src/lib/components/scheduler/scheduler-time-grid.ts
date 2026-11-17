@@ -169,7 +169,7 @@ import { schedulerEventInjector } from './scheduler-types';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSchedulerTimeGrid {
-  protected readonly scheduler = inject(ScScheduler);
+  private readonly scheduler = inject(ScScheduler);
   private readonly injector = inject(Injector);
   private readonly locale = inject(LOCALE_ID);
   private readonly body = viewChild.required<ElementRef<HTMLElement>>('body');
@@ -182,11 +182,11 @@ export class ScSchedulerTimeGrid {
   /** Scrolled to on first render. */
   readonly scrollToHour = input<number>(8);
 
-  protected readonly template = computed(
+  private readonly template = computed(
     () => this.scheduler.eventTemplate()?.template ?? null,
   );
 
-  protected readonly hours = computed(() =>
+  private readonly hours = computed(() =>
     Array.from(
       { length: this.endHour() - this.startHour() },
       (_, i) => this.startHour() + i,
@@ -199,12 +199,12 @@ export class ScSchedulerTimeGrid {
     })),
   );
 
-  protected readonly columnsTemplate = computed(
+  private readonly columnsTemplate = computed(
     () => `repeat(${this.columns().length}, minmax(0, 1fr))`,
   );
 
   /** Each day shown, with its all-day and its timed events (placed). */
-  protected readonly columns = computed(() => {
+  private readonly columns = computed(() => {
     const events = this.scheduler.events();
     const timeZone = this.scheduler.timeZone();
     const today = this.scheduler.today();
@@ -246,12 +246,12 @@ export class ScSchedulerTimeGrid {
     });
   });
 
-  protected readonly hasAllDay = computed(() =>
+  private readonly hasAllDay = computed(() =>
     this.columns().some((column) => column.allDay.length),
   );
 
   /** Where now is, in percent of the day shown; null outside it. */
-  protected readonly nowTop = computed(() => {
+  private readonly nowTop = computed(() => {
     const now = this.scheduler.now();
     const minutes = now.hour * 60 + now.minute;
     const from = this.startHour() * 60;
@@ -261,14 +261,14 @@ export class ScSchedulerTimeGrid {
       : ((minutes - from) / (to - from)) * 100;
   });
 
-  protected readonly dayClass = cn(
+  private readonly dayClass = cn(
     'flex size-8 items-center justify-center rounded-full text-sm font-semibold outline-none transition-colors',
     'focus-visible:ring-3 focus-visible:ring-ring/50',
     '[&:is(button)]:hover:bg-muted',
     'aria-[current=date]:bg-primary aria-[current=date]:text-primary-foreground',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex min-h-0 flex-col overflow-hidden rounded-lg border [--sc-scheduler-hour-height:3rem]',
       this.classInput(),

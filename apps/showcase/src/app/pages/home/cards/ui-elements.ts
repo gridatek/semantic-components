@@ -197,7 +197,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeUiElements {
-  protected readonly settings = form(
+  private readonly settings = form(
     signal({ fruit: 'apple', emailAlerts: true, compact: true }),
   );
 }

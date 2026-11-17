@@ -133,7 +133,7 @@ import { SideSheetDemoContainer } from './demos/side-sheet-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class SheetPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScSheetProvider, ScSheetTrigger, ScSheetPortal, ScSheet,',
@@ -159,7 +159,7 @@ export default class SheetPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScSheetProvider',
       selector: 'div[scSheetProvider], span[scSheetProvider]',

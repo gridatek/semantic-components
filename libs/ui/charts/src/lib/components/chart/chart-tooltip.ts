@@ -30,8 +30,8 @@ import { ScChartTooltipProvider } from './chart-tooltip-provider';
   },
 })
 export class ScChartTooltip {
-  protected readonly provider = inject(ScChartTooltipProvider);
-  protected readonly state = inject(ScChartState);
+  private readonly provider = inject(ScChartTooltipProvider);
+  private readonly state = inject(ScChartState);
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly tooltipStyles = injectPreset().chart.tooltip;
@@ -53,7 +53,7 @@ export class ScChartTooltip {
   /** Each series' value at the category, with its name and colour. */
   readonly payload = this.provider.payload;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('pointer-events-none', this.tooltipStyles, this.classInput()),
   );
 

@@ -36,13 +36,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ConditionalButtonPatternDemo {
-  protected readonly settings = form(signal({ editable: true }));
-  protected readonly editable = computed(() =>
-    this.settings.editable().value(),
-  );
-  protected readonly edits = signal(0);
+  private readonly settings = form(signal({ editable: true }));
+  private readonly editable = computed(() => this.settings.editable().value());
+  private readonly edits = signal(0);
 
-  protected edit(): void {
+  private edit(): void {
     if (this.editable()) this.edits.update((n) => n + 1);
   }
 }

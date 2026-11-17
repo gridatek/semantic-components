@@ -24,7 +24,7 @@ import { PluginCarouselDemo } from './plugin-carousel-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PluginCarouselDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   ViewEncapsulation,
   effect,

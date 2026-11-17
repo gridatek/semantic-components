@@ -14,7 +14,7 @@ import { FieldUsageDemo } from './field-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FieldUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScCheckbox,

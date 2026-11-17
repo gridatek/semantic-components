@@ -18,7 +18,7 @@ import { VisibilityMessageScrollerDemo } from './visibility-message-scroller-dem
   encapsulation: ViewEncapsulation.None,
 })
 export class VisibilityMessageScrollerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

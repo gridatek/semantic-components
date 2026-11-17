@@ -18,7 +18,7 @@ import { GroupCountAvatarDemo } from './group-count-avatar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupCountAvatarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,

@@ -88,5 +88,5 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class NativeDialogDemo {
-  readonly isOpen = signal(false);
+  private readonly isOpen = signal(false);
 }

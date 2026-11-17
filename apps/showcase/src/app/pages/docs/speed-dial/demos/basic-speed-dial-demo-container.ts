@@ -18,7 +18,7 @@ import { BasicSpeedDialDemo } from './basic-speed-dial-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicSpeedDialDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScSpeedDial,
   ScSpeedDialAction,

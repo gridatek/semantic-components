@@ -15,9 +15,9 @@ import { ScSheetProvider } from './sheet-provider';
 export class ScSheetDescription {
   private readonly styles = injectPreset().sheet;
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly id = inject(_IdGenerator).getId('sc-sheet-desc-');
+  private readonly id = inject(_IdGenerator).getId('sc-sheet-desc-');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.description, this.classInput()),
   );
 

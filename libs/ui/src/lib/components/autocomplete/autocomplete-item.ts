@@ -30,7 +30,7 @@ export class ScAutocompleteItem {
 
   private readonly autocomplete = inject(SC_AUTOCOMPLETE);
   private readonly option = inject<Option<string>>(Option);
-  protected readonly onPointerMove = useActiveOption(this.option);
+  private readonly onPointerMove = useActiveOption(this.option);
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   constructor() {
@@ -43,7 +43,7 @@ export class ScAutocompleteItem {
     });
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'transition-colors duration-100 data-[active=true]:bg-accent data-[active=true]:text-accent-foreground flex cursor-pointer items-center rounded-md px-2 py-1 text-sm outline-none select-none aria-selected:font-medium aria-disabled:pointer-events-none aria-disabled:opacity-50',
       this.classInput(),

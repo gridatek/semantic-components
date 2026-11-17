@@ -20,9 +20,9 @@ export class ScPdfViewerSignatureImage {
   private readonly form = inject(ScPdfViewerSignatureForm);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected pick(event: Event): void {
+  private pick(event: Event): void {
     const field = event.target as HTMLInputElement;
     const file = field.files?.[0];
     field.value = '';

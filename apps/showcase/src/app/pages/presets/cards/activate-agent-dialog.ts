@@ -121,6 +121,6 @@ import { SiCircleCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewActivateAgentDialog {
-  protected readonly feature =
+  private readonly feature =
     'text-muted-foreground inline leading-relaxed font-normal *:[strong]:text-foreground *:[strong]:font-medium';
 }

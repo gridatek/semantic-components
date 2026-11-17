@@ -18,7 +18,7 @@ import { SidesConfettiDemo } from './sides-confetti-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidesConfettiDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScConfettiTrigger } from '@semantic-components/ui/confetti';
 

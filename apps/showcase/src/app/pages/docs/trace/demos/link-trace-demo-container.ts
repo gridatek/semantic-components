@@ -18,7 +18,7 @@ import { LinkTraceDemo } from './link-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinkTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTrace,
   ScTraceIcon,

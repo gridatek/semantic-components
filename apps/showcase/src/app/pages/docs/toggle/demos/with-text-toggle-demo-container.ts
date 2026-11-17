@@ -18,7 +18,7 @@ import { WithTextToggleDemo } from './with-text-toggle-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class WithTextToggleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggle } from '@semantic-components/ui';
 import { SiItalicIcon } from '@semantic-icons/lucide-icons';
 

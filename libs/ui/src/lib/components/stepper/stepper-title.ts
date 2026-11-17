@@ -10,7 +10,7 @@ import { cn } from 'cn';
 export class ScStepperTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-sm font-medium', this.classInput()),
   );
 }

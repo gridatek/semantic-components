@@ -15,7 +15,7 @@ import { cn } from 'cn';
 export class ScEmojiPickerFooter {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex w-full max-w-(--sc-emoji-picker-viewport-width) min-w-0 items-center gap-1 border-t p-2',
       this.classInput(),

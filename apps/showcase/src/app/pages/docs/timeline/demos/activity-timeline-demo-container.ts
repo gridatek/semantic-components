@@ -18,7 +18,7 @@ import { ActivityTimelineDemo } from './activity-timeline-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ActivityTimelineDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTimeline,
   ScTimelineContent,

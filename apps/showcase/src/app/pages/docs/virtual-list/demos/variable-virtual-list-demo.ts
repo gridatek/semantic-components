@@ -45,7 +45,7 @@ export class VariableVirtualListDemo {
     'the plan for the release is ready and the team would like your thoughts before friday when we meet to decide'.split(
       ' ',
     );
-  readonly messages = Array.from({ length: 2_000 }, (_, i) => ({
+  private readonly messages = Array.from({ length: 2_000 }, (_, i) => ({
     id: 'm' + i,
     from: [
       'Ada',
@@ -64,5 +64,5 @@ export class VariableVirtualListDemo {
       '.' +
       (i % 5 === 0 ? ' ' + this.words.join(' ') + '.' : ''),
   }));
-  readonly keyOf = (index: number) => this.messages[index].id;
+  private readonly keyOf = (index: number) => this.messages[index].id;
 }

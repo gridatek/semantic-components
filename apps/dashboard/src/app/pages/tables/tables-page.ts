@@ -174,34 +174,34 @@ export class TablesPage {
     select: $localize`Select `,
   };
 
-  protected readonly rows = PROJECT_ROWS;
-  protected readonly tables: readonly { kind: Kind; title: string }[] = [
+  private readonly rows = PROJECT_ROWS;
+  private readonly tables: readonly { kind: Kind; title: string }[] = [
     { kind: 'basic', title: $localize`Basic Table` },
     { kind: 'hover', title: $localize`Hover Table` },
     { kind: 'striped', title: $localize`Striped Row Table` },
     { kind: 'checkbox', title: $localize`Checkbox Table` },
   ];
-  protected readonly initialsOf = initials;
+  private readonly initialsOf = initials;
 
-  protected readonly checked = signal<readonly number[]>([2]);
-  protected readonly allChecked = computed(
+  private readonly checked = signal<readonly number[]>([2]);
+  private readonly allChecked = computed(
     () => this.checked().length === this.rows.length,
   );
-  protected readonly someChecked = computed(
+  private readonly someChecked = computed(
     () => this.checked().length > 0 && !this.allChecked(),
   );
 
-  protected toggle(id: number): void {
+  private toggle(id: number): void {
     this.checked.update((ids) =>
       ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id],
     );
   }
 
-  protected toggleAll(): void {
+  private toggleAll(): void {
     this.checked.set(this.allChecked() ? [] : this.rows.map((row) => row.id));
   }
 
-  protected badge(priority: Priority): 'secondary' | 'outline' | 'destructive' {
+  private badge(priority: Priority): 'secondary' | 'outline' | 'destructive' {
     if (priority === 'High') return 'destructive';
     if (priority === 'Medium') return 'outline';
     return 'secondary';

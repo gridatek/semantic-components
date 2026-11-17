@@ -32,14 +32,14 @@ let count = 0;
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSidebarMenuSkeleton {
-  protected readonly styles = injectPreset().sidebar;
+  private readonly styles = injectPreset().sidebar;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly showIcon = input(false, { transform: booleanAttribute });
 
   /** Between 50 and 90 %: varied, and the same on the server and in the browser. */
-  protected readonly width = `${50 + ((count++ * 37) % 41)}%`;
+  private readonly width = `${50 + ((count++ * 37) % 41)}%`;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.menuSkeleton, this.classInput()),
   );
 }

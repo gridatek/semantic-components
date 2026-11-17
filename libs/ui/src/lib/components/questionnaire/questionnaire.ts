@@ -101,7 +101,7 @@ export class ScQuestionnaire {
     () => this.total() > 0 && this.index() === this.total() - 1,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.root, this.classInput()),
   );
 
@@ -180,7 +180,7 @@ export class ScQuestionnaire {
   }
 
   /** Submitted with a question left wrong: back to it. */
-  protected onSubmit(): void {
+  private onSubmit(): void {
     const wrong = this.items().find((item) => !item.valid());
     if (!wrong) return;
     wrong.touch();
@@ -188,7 +188,7 @@ export class ScQuestionnaire {
     else this.goTo(wrong, 'invalid');
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const active = this.active();
     const target = event.target;
     if (

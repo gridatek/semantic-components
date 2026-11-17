@@ -33,12 +33,12 @@ import { ScQuestionnaireChoice } from './questionnaire-choice';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScQuestionnaireChoiceIndicator {
-  protected readonly styles = injectPreset().questionnaire;
-  protected readonly choice = inject(ScQuestionnaireChoice);
+  private readonly styles = injectPreset().questionnaire;
+  private readonly choice = inject(ScQuestionnaireChoice);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.indicator, this.classInput()),
   );
 }

@@ -76,11 +76,11 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledSelectDemo {
-  protected readonly selects = [
+  private readonly selects = [
     { label: 'Disabled', disabled: true },
     { label: 'Disabled option', disabled: false },
   ];
-  protected readonly fruits = [
+  private readonly fruits = [
     { value: 'apple', label: 'Apple', disabled: false },
     { value: 'banana', label: 'Banana', disabled: false },
     { value: 'blueberry', label: 'Blueberry', disabled: false },

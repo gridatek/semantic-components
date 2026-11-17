@@ -100,7 +100,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
   encapsulation: ViewEncapsulation.None,
 })
 export default class McpServerPage {
-  readonly setupCode = `{
+  private readonly setupCode = `{
   "mcpServers": {
     "semantic-components": {
       "command": "npx",

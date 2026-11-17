@@ -32,7 +32,7 @@ export class ScCollapsible {
   /** Its panel's id, for the trigger's aria-controls. */
   readonly panelId = signal<string | null>(null);
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** Opens or closes it — unless disabled. */
   toggle(): void {

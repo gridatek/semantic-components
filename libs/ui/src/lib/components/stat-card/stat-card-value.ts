@@ -30,14 +30,14 @@ export class ScStatCardValue {
   readonly value = input<number | null>(null);
   readonly format = input<Intl.NumberFormatOptions>({});
 
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     const value = this.value();
     return value === null
       ? ''
       : new Intl.NumberFormat(this.locale, this.format()).format(value);
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'basis-full text-2xl font-semibold tracking-tight tabular-nums',
       this.classInput(),

@@ -79,11 +79,11 @@ export class ScChartPlot {
   /** Polar charts: where they end (180: a half circle over the top). Unset: 360 (a radar's: −270). */
   readonly endAngle = input<number | undefined>(undefined);
 
-  protected readonly viewBox = computed(
+  private readonly viewBox = computed(
     () => `0 0 ${this.state.width()} ${this.state.height()}`,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'h-full min-h-0 w-full flex-1 overflow-visible rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
       // Its text anchored as placed (start: from the point rightwards), in a
@@ -151,7 +151,7 @@ export class ScChartPlot {
     });
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     this.state.pointer.set({
       x: event.clientX,
       y: event.clientY,
@@ -168,7 +168,7 @@ export class ScChartPlot {
       this.state.activeIndex.set(this.state.spokeAt(px, py));
   }
 
-  protected onFocus(): void {
+  private onFocus(): void {
     // Focused by a tap: what it pointed at stays.
     if (this.state.pointer()) return;
     if (this.state.activeIndex() === null && this.state.data().length)
@@ -176,17 +176,17 @@ export class ScChartPlot {
   }
 
   /** A finger lifted "leaves": what it tapped stays, until a tap elsewhere (blur). */
-  protected onPointerLeave(event: PointerEvent): void {
+  private onPointerLeave(event: PointerEvent): void {
     if (event.pointerType !== 'touch') this.onLeave();
   }
 
-  protected onLeave(): void {
+  private onLeave(): void {
     this.state.pointer.set(null);
     if (this.host.ownerDocument.activeElement !== this.host)
       this.state.activeIndex.set(null);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const last = this.state.data().length - 1;
     if (last < 0) return;
     const current = this.state.activeIndex() ?? 0;

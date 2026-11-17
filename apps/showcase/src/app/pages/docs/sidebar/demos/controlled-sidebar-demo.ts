@@ -108,5 +108,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledSidebarDemo {
-  protected readonly open = signal(true);
+  private readonly open = signal(true);
 }

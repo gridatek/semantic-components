@@ -67,7 +67,7 @@ export class ScSignaturePad implements FormValueControl<ScSignature | null> {
     () => this.editable() && this.future().length > 0,
   );
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   undo(): void {
     const past = this.past();

@@ -18,7 +18,7 @@ import { RememberedResizableDemo } from './remembered-resizable-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RememberedResizableDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, effect, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, effect, signal } from '@angular/core';
 import {
   ScFrame,
   ScResizableHandle,

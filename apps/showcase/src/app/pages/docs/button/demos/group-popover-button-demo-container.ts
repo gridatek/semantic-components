@@ -18,7 +18,7 @@ import { GroupPopoverButtonDemo } from './group-popover-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupPopoverButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScControlGroup,

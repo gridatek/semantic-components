@@ -19,11 +19,11 @@ import { ScPdfViewerAltTextForm } from './pdf-viewer-alt-text-form';
   },
 })
 export class ScPdfViewerAltTextKind {
-  protected readonly form = inject(ScPdfViewerAltTextForm);
+  private readonly form = inject(ScPdfViewerAltTextForm);
   readonly kind = input.required<'describe' | 'decorative'>({
     alias: 'scPdfViewerAltTextKind',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

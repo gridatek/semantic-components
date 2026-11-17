@@ -65,7 +65,7 @@ export class ScSpeedDial {
   readonly ɵactions = signal<readonly HTMLElement[]>([]);
   readonly ɵtrigger = signal<HTMLElement | null>(null);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('relative isolate z-10 inline-flex', this.classInput()),
   );
 

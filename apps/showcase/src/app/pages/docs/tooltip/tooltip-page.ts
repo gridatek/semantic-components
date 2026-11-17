@@ -147,7 +147,7 @@ import { TooltipUsageDemoContainer } from './demos/tooltip-usage-demo-container'
   encapsulation: ViewEncapsulation.None,
 })
 export default class TooltipPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTooltipProvider, ScTooltipTrigger, ScTooltipPortal,',
@@ -167,7 +167,7 @@ export default class TooltipPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScTooltipProvider',
       selector: 'div[scTooltipProvider], span[scTooltipProvider]',

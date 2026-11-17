@@ -18,7 +18,7 @@ import { BasicFileUploadDemo } from './basic-file-upload-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicFileUploadDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFileUpload,
   ScFileUploadDropzone,

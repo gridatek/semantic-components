@@ -62,5 +62,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupFieldDemo {
-  protected readonly push = signal(true);
+  private readonly push = signal(true);
 }

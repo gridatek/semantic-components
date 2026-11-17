@@ -31,7 +31,7 @@ import { ScFrame, ScScrollAreaNext2 } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalScrollAreaNext2Demo {
-  protected readonly places = [
+  private readonly places = [
     'cafe',
     'coast',
     'forest',

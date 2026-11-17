@@ -76,10 +76,10 @@ import {
 })
 export class RtlPasswordFieldDemo {
   private readonly model = signal({ password: '' });
-  readonly signup = form(this.model);
+  private readonly signup = form(this.model);
 
   /** 0: nothing yet; then a point for each rule met, at least 1. */
-  readonly score = computed(() => {
+  private readonly score = computed(() => {
     const value = this.model().password;
     if (!value) return 0;
     const met = [
@@ -90,7 +90,7 @@ export class RtlPasswordFieldDemo {
     ].filter(Boolean).length;
     return Math.max(met, 1);
   });
-  readonly strength = computed(
+  private readonly strength = computed(
     () => ['', 'ضعيفة', 'مقبولة', 'جيدة', 'قوية'][this.score()],
   );
 }

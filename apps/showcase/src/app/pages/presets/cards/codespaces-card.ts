@@ -331,8 +331,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewCodespacesCard {
-  protected readonly creating = signal(false);
-  protected readonly remotes = [
+  private readonly creating = signal(false);
+  private readonly remotes = [
     {
       value: 'https',
       label: 'HTTPS',
@@ -361,7 +361,7 @@ export class PreviewCodespacesCard {
     inject(DestroyRef).onDestroy(() => clearTimeout(this.timer));
   }
 
-  protected create(): void {
+  private create(): void {
     this.creating.set(true);
     this.timer = setTimeout(() => this.creating.set(false), 2000);
   }

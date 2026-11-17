@@ -26,7 +26,7 @@ export class ScAttachment {
   readonly size = input<ScAttachmentSize>('default');
   readonly orientation = input<ScAttachmentOrientation>('horizontal');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.root({
         size: this.size(),

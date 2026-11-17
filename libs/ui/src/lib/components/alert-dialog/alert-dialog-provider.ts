@@ -46,14 +46,14 @@ export class ScAlertDialogProvider {
   private readonly overlayTemplate =
     viewChild.required<TemplateRef<unknown>>('overlayTemplate');
 
-  protected readonly alertDialogPortal =
+  private readonly alertDialogPortal =
     contentChild.required(ScAlertDialogPortal);
 
   /** Shown or not; the dialog and backdrop animate in and out (`animate.enter` / `animate.leave`). */
   readonly open = model<boolean>(false);
   private overlayRef: OverlayRef | null = null;
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly class = computed(() => cn('contents', this.classInput()));
 
   constructor() {
     inject(DestroyRef).onDestroy(() => this.overlayRef?.dispose());

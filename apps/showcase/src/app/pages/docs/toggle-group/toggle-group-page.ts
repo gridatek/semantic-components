@@ -159,7 +159,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
   encapsulation: ViewEncapsulation.None,
 })
 export default class ToggleGroupPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';",
     markup: [
@@ -169,7 +169,7 @@ export default class ToggleGroupPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScToggleGroup',
       selector: 'div[scToggleGroup]',

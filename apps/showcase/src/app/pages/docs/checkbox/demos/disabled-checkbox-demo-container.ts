@@ -18,7 +18,7 @@ import { DisabledCheckboxDemo } from './disabled-checkbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledCheckboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCheckbox,
   ScField,

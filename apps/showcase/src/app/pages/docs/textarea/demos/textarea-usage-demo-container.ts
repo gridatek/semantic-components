@@ -14,7 +14,7 @@ import { TextareaUsageDemo } from './textarea-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TextareaUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScTextarea } from '@semantic-components/ui';
 
 @Component({

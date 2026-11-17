@@ -14,7 +14,7 @@ import { VerticalScrollAreaDemo } from './vertical-scroll-area-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalScrollAreaDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScFrame, ScScrollArea } from '@semantic-components/ui';
 
 interface Tag {

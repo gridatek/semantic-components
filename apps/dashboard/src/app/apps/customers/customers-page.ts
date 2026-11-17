@@ -272,7 +272,7 @@ export class CustomersPage {
     customers: $localize`Customers`,
   };
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: ROWS,

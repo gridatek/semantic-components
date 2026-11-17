@@ -115,8 +115,8 @@ const ITEMS = [
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewInvoice {
-  protected readonly items = ITEMS;
-  protected readonly subtotal = ITEMS.reduce(
+  private readonly items = ITEMS;
+  private readonly subtotal = ITEMS.reduce(
     (sum, row) => sum + row.qty * row.unitPrice,
     0,
   );
@@ -126,7 +126,7 @@ export class PreviewInvoice {
     maximumFractionDigits: 2,
   });
 
-  protected money(value: number): string {
+  private money(value: number): string {
     return this.format.format(value);
   }
 }

@@ -18,7 +18,7 @@ import { ServerValidationOtpFieldDemo } from './server-validation-otp-field-demo
   encapsulation: ViewEncapsulation.None,
 })
 export class ServerValidationOtpFieldDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   ViewEncapsulation,
   computed,

@@ -150,7 +150,7 @@ import { VariantsMarkerDemoContainer } from './demos/variants-marker-demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export default class MarkerPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import { ScMarker, ScMarkerIcon, ScMarkerContent } from',
       "  '@semantic-components/ui';",
@@ -163,7 +163,7 @@ export default class MarkerPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScMarker',
       selector: 'div[scMarker], a[scMarker], button[scMarker]',

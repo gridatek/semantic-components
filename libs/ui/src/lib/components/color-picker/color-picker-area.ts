@@ -44,26 +44,26 @@ import { ScColorPicker } from './color-picker';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScColorPickerArea {
-  protected readonly picker = inject(ScColorPicker);
+  private readonly picker = inject(ScColorPicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly saturation = computed(() =>
+  private readonly saturation = computed(() =>
     Math.round(this.picker.hsva().s),
   );
 
   /** The thumb: the colour, without its transparency. */
-  protected readonly opaque = computed(() => {
+  private readonly opaque = computed(() => {
     const { r, g, b } = this.picker.rgba();
     return `rgb(${r} ${g} ${b})`;
   });
 
-  protected readonly background = computed(
+  private readonly background = computed(
     () =>
       `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, transparent), hsl(${this.picker.hsva().h} 100% 50%)`,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative block aspect-[4/3] w-full cursor-crosshair touch-none rounded-md outline-none',
       'focus-visible:ring-3 focus-visible:ring-ring/50',
@@ -76,7 +76,7 @@ export class ScColorPickerArea {
     ɵwarnIfUnnamed('scColorPickerArea');
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     if (event.button !== 0 || this.picker.disabled()) return;
     const target = event.currentTarget as HTMLElement;
     target.setPointerCapture(event.pointerId);
@@ -85,12 +85,12 @@ export class ScColorPickerArea {
     this.pick(event);
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     const target = event.currentTarget as HTMLElement;
     if (target.hasPointerCapture(event.pointerId)) this.pick(event);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     const { s, v } = this.picker.hsva();
     const step = event.shiftKey ? 10 : 1;
     const moves: Record<string, [number, number]> = {

@@ -17,13 +17,13 @@ import { ScEmojiPickerState } from './emoji-picker-state';
   },
 })
 export class ScEmojiPickerAnnouncer {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('sr-only', this.classInput()));
+  private readonly class = computed(() => cn('sr-only', this.classInput()));
 
-  protected readonly label = computed(() =>
+  private readonly label = computed(() =>
     this.state.interaction() === 'keyboard'
       ? (this.state.activeEmoji()?.label ?? '')
       : '',

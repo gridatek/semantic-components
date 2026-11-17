@@ -96,7 +96,7 @@ export class StreamingMessageScrollerDemo {
   private timer: ReturnType<typeof setInterval> | undefined;
   private asked = 0;
 
-  readonly messages = signal([
+  private readonly messages = signal([
     { id: 'q1', role: 'user', text: 'What does a message scroller do?' },
     {
       id: 'a1',
@@ -122,14 +122,14 @@ export class StreamingMessageScrollerDemo {
       text: 'They do: the messages are a log, so each new one is announced once it is added.',
     },
   ]);
-  readonly streaming = signal(false);
+  private readonly streaming = signal(false);
 
   constructor() {
     this.destroyRef.onDestroy(() => clearInterval(this.timer));
   }
 
   /** Your question, near the top; the reply word by word below it. */
-  ask(): void {
+  private ask(): void {
     const n = ++this.asked;
     const words = (
       'Your question stays near the top while this reply arrives below it, a word at a time. ' +

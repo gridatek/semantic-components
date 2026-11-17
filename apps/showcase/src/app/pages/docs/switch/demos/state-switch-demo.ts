@@ -15,5 +15,5 @@ import { ScField, ScSwitch } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class StateSwitchDemo {
-  protected readonly notifications = signal(true);
+  private readonly notifications = signal(true);
 }

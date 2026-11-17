@@ -216,7 +216,7 @@ interface Step {
   encapsulation: ViewEncapsulation.None,
 })
 export default class I18nPage {
-  protected readonly steps: readonly Step[] = [
+  private readonly steps: readonly Step[] = [
     {
       title: 'List your locales',
       text: "The source locale (your templates' language) and the others, each named in its own language. A locale's dir wins over the platform's guess.",
@@ -300,7 +300,7 @@ export const appConfig: ApplicationConfig = {
     },
   ];
 
-  protected readonly members = [
+  private readonly members = [
     ['locales', 'The locales offered.'],
     ['locale', 'The locale in use: { id, label, dir? }.'],
     ['dir', 'Its writing direction: ltr or rtl.'],

@@ -18,7 +18,7 @@ import { DescriptionRadioGroupDemo } from './description-radio-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DescriptionRadioGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,

@@ -129,6 +129,6 @@ import {
 })
 export class BirthDatePickerDemo {
   /** 18 years old today, at the latest. */
-  readonly adult = Temporal.Now.plainDateISO().subtract({ years: 18 });
-  readonly date = signal<ScCalendarValue>(null);
+  private readonly adult = Temporal.Now.plainDateISO().subtract({ years: 18 });
+  private readonly date = signal<ScCalendarValue>(null);
 }

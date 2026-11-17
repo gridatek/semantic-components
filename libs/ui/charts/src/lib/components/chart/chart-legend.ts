@@ -42,7 +42,7 @@ export class ScChartLegend {
     }));
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex items-center justify-center gap-4 pt-3', this.classInput()),
   );
 }

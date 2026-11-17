@@ -14,7 +14,7 @@ import { SimpleStepperDemo } from './simple-stepper-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SimpleStepperDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScStepper,
   ScStepperIndicator,

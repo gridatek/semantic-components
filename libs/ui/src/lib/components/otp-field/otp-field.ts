@@ -108,7 +108,7 @@ export class ScOtpField implements FormValueControl<string> {
     this.value().length >= this.length() ? -1 : this.value().length,
   );
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex w-fit items-center has-disabled:opacity-50', this.classInput()),
   );
 
@@ -117,7 +117,7 @@ export class ScOtpField implements FormValueControl<string> {
     () => this.length() > 0 && this.value().length === this.length(),
   );
   /** Focus is in one of the inputs. */
-  protected readonly focused = signal(false);
+  private readonly focused = signal(false);
   /** Can't be changed: disabled, or read-only. */
   private readonly locked = computed(() => this.disabled() || this.readOnly());
 
@@ -195,7 +195,7 @@ export class ScOtpField implements FormValueControl<string> {
     this.inputs()[index]?.focus();
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
     if (!next || !this.element.contains(next)) {
       this.focused.set(false);
@@ -204,7 +204,7 @@ export class ScOtpField implements FormValueControl<string> {
   }
 
   /** A pasted code replaces the whole value. */
-  protected onPaste(event: ClipboardEvent): void {
+  private onPaste(event: ClipboardEvent): void {
     event.preventDefault();
     if (this.locked()) return;
     const chars = this.accept(event.clipboardData?.getData('text') ?? '');

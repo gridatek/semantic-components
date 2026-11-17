@@ -123,7 +123,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class QueuePage {
-  protected readonly statuses = [
+  private readonly statuses = [
     { status: 'pending', section: 'To do', icon: 'siCircleIcon', line: 'none' },
     {
       status: 'in_progress',
@@ -139,7 +139,7 @@ export default class QueuePage {
     },
   ];
 
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle,',

@@ -18,7 +18,7 @@ import { AlphanumericOtpFieldDemo } from './alphanumeric-otp-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AlphanumericOtpFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,

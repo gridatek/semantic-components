@@ -18,7 +18,7 @@ import { ColorsAlertDemo } from './colors-alert-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ColorsAlertDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAlert,
   ScAlertDescription,

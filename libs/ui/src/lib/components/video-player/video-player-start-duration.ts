@@ -16,7 +16,7 @@ import { cn } from 'cn';
 export class ScVideoPlayerStartDuration {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute end-3 bottom-3 z-20 rounded-md bg-black/70 px-1.5 py-0.5 text-white',
       'group-data-started/video:hidden',

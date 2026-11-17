@@ -35,8 +35,8 @@ import { ScInput } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class ErrorFieldDemo {
-  readonly formModel = signal({ password: '' });
-  readonly passwordForm = form(this.formModel, (s) => {
+  private readonly formModel = signal({ password: '' });
+  private readonly passwordForm = form(this.formModel, (s) => {
     required(s.password, { message: 'Password is required' });
     minLength(s.password, 8, {
       message: 'Password must be at least 8 characters',

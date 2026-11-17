@@ -45,7 +45,7 @@ export class ScDock {
     () => this.magnification() > 1 && !this.reducedMotion(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-background/80 inline-flex gap-2 rounded-2xl border p-2 shadow-lg backdrop-blur-lg [--dock-item:2.75rem]',
       this.orientation() === 'horizontal'
@@ -102,12 +102,12 @@ export class ScDock {
     }
   }
 
-  protected onPointerEnter(event: PointerEvent): void {
+  private onPointerEnter(event: PointerEvent): void {
     this.ɵmeasure();
     this.onPointerMove(event);
   }
 
-  protected onPointerMove(event: PointerEvent): void {
+  private onPointerMove(event: PointerEvent): void {
     // Touch: tapped, not hovered — nothing grows.
     if (event.pointerType === 'touch') return;
     this.pointer.set(this.ɵalong(event.clientX, event.clientY));

@@ -18,7 +18,7 @@ import { DurationToastDemo } from './duration-toast-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DurationToastDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { ScToaster } from '@semantic-components/ui';
 

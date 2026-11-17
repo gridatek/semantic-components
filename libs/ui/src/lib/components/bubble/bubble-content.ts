@@ -18,10 +18,10 @@ export class ScBubbleContent {
   private readonly styles = injectPreset().bubble;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly isButton =
+  private readonly isButton =
     inject(ElementRef<HTMLElement>).nativeElement.tagName === 'BUTTON';
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.content, this.classInput()),
   );
 }

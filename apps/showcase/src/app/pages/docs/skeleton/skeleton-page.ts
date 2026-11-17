@@ -139,12 +139,12 @@ import { TextSkeletonDemoContainer } from './demos/text-skeleton-demo-container'
   encapsulation: ViewEncapsulation.None,
 })
 export default class SkeletonPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScSkeleton } from '@semantic-components/ui';",
     markup: '<div scSkeleton class="h-4 w-48"></div>',
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScSkeleton',
       selector: 'div[scSkeleton]',

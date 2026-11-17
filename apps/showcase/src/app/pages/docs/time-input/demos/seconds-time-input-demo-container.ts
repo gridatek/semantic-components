@@ -18,7 +18,7 @@ import { SecondsTimeInputDemo } from './seconds-time-input-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SecondsTimeInputDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScLabel, ScTimeInput } from '@semantic-components/ui';
 
 /** granularity="second" adds the seconds; "hour" keeps only the hour. */

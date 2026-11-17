@@ -18,7 +18,7 @@ import { AddKanbanBoardDemo } from './add-kanban-board-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AddKanbanBoardDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScInput,

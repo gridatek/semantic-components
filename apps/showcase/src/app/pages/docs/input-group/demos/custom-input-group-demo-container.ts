@@ -18,7 +18,7 @@ import { CustomInputGroupDemo } from './custom-input-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomInputGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScInputGroup,
   ScInputGroupAddon,

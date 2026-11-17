@@ -18,7 +18,7 @@ import { ModalPopoverDemo } from './modal-popover-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ModalPopoverDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScField,

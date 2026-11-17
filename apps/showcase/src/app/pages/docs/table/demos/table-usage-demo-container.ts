@@ -14,7 +14,7 @@ import { TableUsageDemo } from './table-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TableUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTable,
   ScTableBody,

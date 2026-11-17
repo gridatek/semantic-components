@@ -34,20 +34,20 @@ export class ScPdfViewerInsertPages {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly disabled = computed(
+  private readonly disabled = computed(
     () => !this.pdfViewer.pdfDocument() || this.pdfViewer.organizing(),
   );
   /** The chosen file couldn't be read as a PDF. */
   readonly insertFailed = output<File>();
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),
     ),
   );
 
-  protected choose(): void {
+  private choose(): void {
     const field = this.document.createElement('input');
     field.type = 'file';
     field.accept = '.pdf,application/pdf';

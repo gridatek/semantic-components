@@ -18,7 +18,7 @@ import { ColorsBadgeDemo } from './colors-badge-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ColorsBadgeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScBadge } from '@semantic-components/ui';
 
 /** Your own colors: classes over the preset's (cn: a later class wins). */

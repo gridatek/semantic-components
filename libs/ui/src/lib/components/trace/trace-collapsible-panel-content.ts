@@ -18,7 +18,7 @@ export class ScTraceCollapsiblePanelContent {
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Not shadcn's: text-sm, the lines' size, not the page's.
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.collapsiblePanelContent, this.classInput()),
   );
 }

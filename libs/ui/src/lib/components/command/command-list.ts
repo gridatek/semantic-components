@@ -26,13 +26,13 @@ import { ScCommand } from './command';
 })
 export class ScCommandList {
   private readonly styles = injectPreset().command;
-  protected readonly id = inject(_IdGenerator).getId('sc-command-list-');
+  private readonly id = inject(_IdGenerator).getId('sc-command-list-');
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Hides its scrollbar (shadcn's look): nothing then shows that it scrolls. */
   readonly hideScrollbar = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.list,
       this.hideScrollbar() ? 'no-scrollbar' : '[scrollbar-width:thin]',

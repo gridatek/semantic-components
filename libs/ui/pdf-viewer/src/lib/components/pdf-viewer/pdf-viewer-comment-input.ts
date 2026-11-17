@@ -25,11 +25,11 @@ import { ScPdfViewerCommentForm } from './pdf-viewer-comment-form';
   },
 })
 export class ScPdfViewerCommentInput {
-  protected readonly form = inject(ScPdfViewerCommentForm);
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly form = inject(ScPdfViewerCommentForm);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const element =

@@ -18,7 +18,7 @@ import { DisabledNativeSelectDemo } from './disabled-native-select-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledNativeSelectDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScLabel,

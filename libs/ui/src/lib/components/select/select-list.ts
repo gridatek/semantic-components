@@ -29,14 +29,14 @@ import { SC_SELECT } from './select-tokens';
   },
 })
 export class ScSelectList {
-  protected readonly select = inject(SC_SELECT);
+  private readonly select = inject(SC_SELECT);
   private readonly listbox = inject<Listbox<string>>(Listbox);
   private readonly widget = inject(ComboboxWidget);
   private readonly styles = injectPreset().select;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('outline-none', this.styles.viewport, this.classInput()),
   );
 

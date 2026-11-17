@@ -18,7 +18,7 @@ import { TextStatCardDemo } from './text-stat-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TextStatCardDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScStatCard,
   ScStatCardDescription,

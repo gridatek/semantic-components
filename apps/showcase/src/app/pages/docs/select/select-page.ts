@@ -155,7 +155,7 @@ interface ScApiRow {
   encapsulation: ViewEncapsulation.None,
 })
 export default class SelectPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScSelect, ScSelectLabel, ScSelectTrigger,',
@@ -200,7 +200,7 @@ export default class SelectPage {
     description: 'Classes merged over the preset (cn: a later class wins).',
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScSelect',
       selector: 'div[scSelect]',

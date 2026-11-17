@@ -19,13 +19,13 @@ import { ScImageAnnotator } from './image-annotator';
 export class ScImageAnnotatorClear {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly annotator = inject(ScImageAnnotator);
+  private readonly annotator = inject(ScImageAnnotator);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

@@ -18,7 +18,7 @@ import { InteractiveAreaChartDemo } from './interactive-area-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InteractiveAreaChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import {
   Component,
   LOCALE_ID,

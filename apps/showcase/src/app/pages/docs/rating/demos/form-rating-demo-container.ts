@@ -14,7 +14,7 @@ import { FormRatingDemo } from './form-rating-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormRatingDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
+  private readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,

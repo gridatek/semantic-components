@@ -63,7 +63,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewShortcuts {
-  protected readonly shortcuts = [
+  private readonly shortcuts = [
     { label: 'Search', keys: ['⌘', 'K'] },
     { label: 'Quick Actions', keys: ['⌘', 'J'] },
     { label: 'New File', keys: ['⌘', 'N'] },

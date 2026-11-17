@@ -18,7 +18,7 @@ import { FileExplorerTreeDemo } from './file-explorer-tree-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FileExplorerTreeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTree,
   ScTreeItem,

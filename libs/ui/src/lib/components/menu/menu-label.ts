@@ -21,14 +21,14 @@ import { injectMenuStyles } from './menu-styles';
 })
 export class ScMenuLabel {
   private readonly styles = injectMenuStyles();
-  protected readonly id = inject(_IdGenerator).getId('sc-menu-label-');
+  private readonly id = inject(_IdGenerator).getId('sc-menu-label-');
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly inset = input<boolean, unknown>(false, {
     transform: booleanAttribute,
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles().label, this.classInput()),
   );
 

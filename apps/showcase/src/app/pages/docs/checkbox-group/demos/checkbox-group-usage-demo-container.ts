@@ -14,7 +14,7 @@ import { CheckboxGroupUsageDemo } from './checkbox-group-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxGroupUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
 
 /** Checkboxes sharing one value: the ticked ones, as an array. */

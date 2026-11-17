@@ -296,13 +296,13 @@ class RtlWithoutDir {}
   encapsulation: ViewEncapsulation.None,
 })
 export default class RtlPage {
-  protected readonly html: ScCodeSample = {
+  private readonly html: ScCodeSample = {
     title: 'index.html',
     language: 'html',
     code: `<html lang="ar" dir="rtl">`,
   };
 
-  protected readonly mixed: ScCodeSample = {
+  private readonly mixed: ScCodeSample = {
     title: 'quote.ts',
     language: 'typescript',
     code: `import { Dir } from '@angular/cdk/bidi';

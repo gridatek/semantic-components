@@ -18,7 +18,7 @@ import { LogosMarqueeDemo } from './logos-marquee-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LogosMarqueeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScMarquee,
   ScMarqueeContent,

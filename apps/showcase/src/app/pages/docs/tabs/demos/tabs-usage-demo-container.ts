@@ -14,7 +14,7 @@ import { TabsUsageDemo } from './tabs-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TabsUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCard,
   ScCardBody,

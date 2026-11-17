@@ -18,7 +18,7 @@ import { DescriptionLabelDemo } from './description-label-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DescriptionLabelDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScField,
   ScFieldDescription,

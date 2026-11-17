@@ -151,7 +151,7 @@ import { SizesNativeSelectDemoContainer } from './demos/sizes-native-select-demo
   encapsulation: ViewEncapsulation.None,
 })
 export default class NativeSelectPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScNativeSelect, ScNativeSelectContainer, ScNativeSelectIcon,',
@@ -175,7 +175,7 @@ export default class NativeSelectPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScNativeSelect',
       selector: 'select[scNativeSelect]',

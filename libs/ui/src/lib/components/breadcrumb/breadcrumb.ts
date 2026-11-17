@@ -11,5 +11,5 @@ import { cn } from 'cn';
 export class ScBreadcrumb {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

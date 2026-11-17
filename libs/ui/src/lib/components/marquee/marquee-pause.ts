@@ -22,13 +22,13 @@ import { ScMarquee } from './marquee';
 export class ScMarqueePause {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly marquee = inject(ScMarquee);
+  private readonly marquee = inject(ScMarquee);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('icon-sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

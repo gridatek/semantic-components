@@ -162,7 +162,7 @@ import { VisibilityMessageScrollerDemoContainer } from './demos/visibility-messa
   encapsulation: ViewEncapsulation.None,
 })
 export default class MessageScrollerPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScMessageScroller, ScMessageScrollerViewport, ScMessageScrollerContent,',
@@ -181,7 +181,7 @@ export default class MessageScrollerPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScMessageScroller',
       selector: 'div[scMessageScroller]',

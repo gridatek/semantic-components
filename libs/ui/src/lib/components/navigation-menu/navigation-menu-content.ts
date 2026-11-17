@@ -30,11 +30,11 @@ import { ScNavigationMenuItem } from './navigation-menu-item';
   },
 })
 export class ScNavigationMenuContent {
-  protected readonly menu = inject(ScNavigationMenu);
-  protected readonly item = inject(ScNavigationMenuItem);
+  private readonly menu = inject(ScNavigationMenu);
+  private readonly item = inject(ScNavigationMenuItem);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const align = this.menu.alignment();
     return cn(
       'text-popover-foreground absolute top-full z-50 mt-2 w-max',

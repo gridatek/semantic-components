@@ -18,7 +18,7 @@ import { BothScrollAreaNextDemo } from './both-scroll-area-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BothScrollAreaNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScScrollAreaNext,

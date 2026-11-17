@@ -158,7 +158,7 @@ import { VariantsBubbleDemoContainer } from './demos/variants-bubble-demo-contai
   encapsulation: ViewEncapsulation.None,
 })
 export default class BubblePage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScBubbleGroup, ScBubble, ScBubbleContent, ScBubbleReactions,',
@@ -174,7 +174,7 @@ export default class BubblePage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScBubbleGroup',
       selector: 'div[scBubbleGroup]',

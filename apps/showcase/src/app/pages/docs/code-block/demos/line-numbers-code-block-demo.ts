@@ -22,7 +22,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LineNumbersCodeBlockDemo {
-  readonly source = `import { Component, signal } from '@angular/core';
+  private readonly source = `import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-counter',

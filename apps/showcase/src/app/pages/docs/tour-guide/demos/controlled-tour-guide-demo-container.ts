@@ -18,7 +18,7 @@ import { ControlledTourGuideDemo } from './controlled-tour-guide-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledTourGuideDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   ViewEncapsulation,
   effect,

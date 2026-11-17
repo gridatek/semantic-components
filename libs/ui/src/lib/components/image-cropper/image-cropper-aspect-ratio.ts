@@ -22,7 +22,7 @@ import { ScImageCropper } from './image-cropper';
 export class ScImageCropperAspectRatio {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly cropper = inject(ScImageCropper);
+  private readonly cropper = inject(ScImageCropper);
 
   readonly ratio = input.required<number | null>({
     alias: 'scImageCropperAspectRatio',
@@ -30,11 +30,11 @@ export class ScImageCropperAspectRatio {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly pressed = computed(
+  private readonly pressed = computed(
     () => this.cropper.aspectRatio() === this.ratio(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({
         variant: this.pressed() ? 'secondary' : 'ghost',

@@ -80,7 +80,7 @@ export class ScNotificationCenter<T extends ScNotification = ScNotification> {
     );
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col', this.classInput()),
   );
 

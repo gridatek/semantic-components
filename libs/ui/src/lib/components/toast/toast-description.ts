@@ -14,7 +14,7 @@ export class ScToastDescription {
   private readonly context = inject(SC_TOAST_CONTEXT);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'text-sm text-muted-foreground',
       toastColors[this.context.toast().variant ?? 'default'],

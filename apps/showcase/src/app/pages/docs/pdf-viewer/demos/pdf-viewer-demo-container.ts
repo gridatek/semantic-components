@@ -18,7 +18,7 @@ import { PdfViewerDemo } from './pdf-viewer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PdfViewerDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ViewEncapsulation,

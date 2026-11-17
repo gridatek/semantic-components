@@ -75,11 +75,11 @@ export class ScLink {
     transform: booleanAttribute,
   });
 
-  protected readonly tabIndex = computed(() =>
+  private readonly tabIndex = computed(() =>
     this.widget ? this.widget._pattern.tabIndex() : this.disabled() ? -1 : null,
   );
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const variant = this.variant();
     return cn(
       variant === 'default'

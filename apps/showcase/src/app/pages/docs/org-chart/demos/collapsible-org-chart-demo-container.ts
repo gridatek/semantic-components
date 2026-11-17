@@ -18,7 +18,7 @@ import { CollapsibleOrgChartDemo } from './collapsible-org-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollapsibleOrgChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBadge,
   ScOrgChart,

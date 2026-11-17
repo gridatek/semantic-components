@@ -151,7 +151,7 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
   encapsulation: ViewEncapsulation.None,
 })
 export default class LinkPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScLink } from '@semantic-components/ui';",
     markup: [
       '<a scLink variant="button" href="…">',
@@ -162,7 +162,7 @@ export default class LinkPage {
     ].join('\n'),
   };
 
-  protected readonly inputs = [
+  private readonly inputs = [
     {
       name: 'variant',
       type: "'default' | 'link' | 'button' | 'outline' | 'secondary' | 'ghost' | 'destructive'",

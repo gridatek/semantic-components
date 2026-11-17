@@ -18,7 +18,7 @@ import { LabelFunnelChartDemo } from './label-funnel-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelFunnelChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

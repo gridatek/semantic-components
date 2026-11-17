@@ -23,7 +23,7 @@ export class ScTooltipGroup {
   private lastClosed = -Infinity;
   private current: ScTooltipGroupMember | null = null;
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   /** Whether a tooltip of the group is open, or closed only just now. */
   warm(): boolean {

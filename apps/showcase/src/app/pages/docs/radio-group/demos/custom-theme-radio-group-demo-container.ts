@@ -18,7 +18,7 @@ import { CustomThemeRadioGroupDemo } from './custom-theme-radio-group-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomThemeRadioGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScField, ScRadio, ScRadioGroup } from '@semantic-components/ui';
 

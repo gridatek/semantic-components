@@ -39,5 +39,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledOtpFieldDemo {
-  protected readonly code = signal('');
+  private readonly code = signal('');
 }

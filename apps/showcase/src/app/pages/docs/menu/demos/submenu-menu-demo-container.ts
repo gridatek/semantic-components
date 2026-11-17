@@ -18,7 +18,7 @@ import { SubmenuMenuDemo } from './submenu-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SubmenuMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScMenu,

@@ -114,17 +114,17 @@ export class TwoStepsPage {
   private readonly router = inject(Router);
   private readonly toaster = inject(ScToaster);
   private readonly model = signal({ code: '' });
-  protected readonly codeForm = form(this.model, (path) => {
+  private readonly codeForm = form(this.model, (path) => {
     required(path.code);
     minLength(path.code, 6);
   });
 
-  protected verify(event: Event): void {
+  private verify(event: Event): void {
     event.preventDefault();
     if (this.codeForm().valid()) void this.router.navigateByUrl('/');
   }
 
-  protected resend(): void {
+  private resend(): void {
     this.toaster.show({
       variant: 'info',
       title: $localize`A new code is on its way`,

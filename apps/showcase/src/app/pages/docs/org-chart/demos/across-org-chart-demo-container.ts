@@ -18,7 +18,7 @@ import { AcrossOrgChartDemo } from './across-org-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AcrossOrgChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScOrgChart,
   ScOrgChartCard,

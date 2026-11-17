@@ -13,11 +13,11 @@ import { ScSpotlight } from './spotlight';
   },
 })
 export class ScSpotlightTitle {
-  protected readonly id = inject(_IdGenerator).getId('sc-spotlight-title-');
+  private readonly id = inject(_IdGenerator).getId('sc-spotlight-title-');
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('pe-6 leading-tight font-semibold', this.classInput()),
   );
 

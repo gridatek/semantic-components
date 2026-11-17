@@ -132,7 +132,7 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
     (this.value()?.hour ?? 0) < 12 ? 'am' : 'pm',
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('inline-flex flex-col items-center gap-3', this.classInput()),
   );
 
@@ -216,7 +216,7 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
     if (this.autoAdvance() && this.view() === 'hours') this.view.set('minutes');
   }
 
-  protected onFocusOut(event: FocusEvent): void {
+  private onFocusOut(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
     if (!next || !this.host.contains(next)) this.touch.emit();
   }

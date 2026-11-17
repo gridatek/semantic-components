@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScSidebarFooter {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-col gap-2 p-2', this.classInput()),
   );
 }

@@ -18,5 +18,5 @@ import { Toaster } from './layouts/toaster';
 export class App {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 }

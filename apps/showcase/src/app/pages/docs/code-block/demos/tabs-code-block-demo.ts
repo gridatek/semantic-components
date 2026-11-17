@@ -109,12 +109,12 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class TabsCodeBlockDemo {
-  readonly component = `@Component({
+  private readonly component = `@Component({
   selector: 'app-hello',
   templateUrl: './hello.html',
 })
 export class Hello {
   readonly name = input('world');
 }`;
-  readonly template = `<p>Hello, {{ name() }}!</p>`;
+  private readonly template = `<p>Hello, {{ name() }}!</p>`;
 }

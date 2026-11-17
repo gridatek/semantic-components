@@ -18,7 +18,7 @@ import { NestedParentCheckboxGroupDemo } from './nested-parent-checkbox-group-de
   encapsulation: ViewEncapsulation.None,
 })
 export class NestedParentCheckboxGroupDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
 
 /** A parent inside a group: Manage Users heads its own group; the top parent is mixed while it is partly ticked. */

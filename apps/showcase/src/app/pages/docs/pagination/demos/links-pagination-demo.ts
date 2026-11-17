@@ -108,7 +108,7 @@ export class LinksPaginationDemo {
   private readonly query = toSignal(inject(ActivatedRoute).queryParamMap);
 
   // The pagination keeps it in range (?page=99: the last page).
-  protected readonly page = computed(
+  private readonly page = computed(
     () => Number(this.query()?.get('page')) || 1,
   );
 }

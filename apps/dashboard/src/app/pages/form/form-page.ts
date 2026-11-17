@@ -397,14 +397,14 @@ export class FormPage {
     form: $localize`Form`,
   };
 
-  protected readonly countries = [
+  private readonly countries = [
     { value: 'us', label: $localize`United States` },
     { value: 'ca', label: $localize`Canada` },
     { value: 'fr', label: $localize`France` },
     { value: 'de', label: $localize`Germany` },
   ];
 
-  protected readonly inputs = form(
+  private readonly inputs = form(
     signal({
       plain: '',
       firstName: '',
@@ -418,21 +418,21 @@ export class FormPage {
     },
   );
 
-  protected readonly texts = form(
+  private readonly texts = form(
     signal({ description: '', disabled: '' }),
     (path) => {
       disabled(path.disabled);
     },
   );
 
-  protected readonly groups = form(
+  private readonly groups = form(
     signal({ email: '', phone: '', website: '' }),
     (path) => {
       required(path.email);
     },
   );
 
-  protected readonly choices = form(
+  private readonly choices = form(
     signal({
       checkDefault: false,
       checkChecked: true,

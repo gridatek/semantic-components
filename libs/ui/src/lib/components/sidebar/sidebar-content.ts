@@ -16,7 +16,7 @@ export class ScSidebarContent {
   /** Hides its scrollbar (shadcn's look): nothing then shows that it scrolls. */
   readonly hideScrollbar = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.content,
       // Its scrollbar's room kept: the menus don't shift when it comes and

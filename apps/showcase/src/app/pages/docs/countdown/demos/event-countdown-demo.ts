@@ -43,7 +43,7 @@ import {
 })
 export class EventCountdownDemo {
   /** In 2 days, 3 hours, 4 minutes and 5 seconds from now. */
-  readonly launch = Temporal.Now.instant().add({
+  private readonly launch = Temporal.Now.instant().add({
     hours: 51,
     minutes: 4,
     seconds: 5,

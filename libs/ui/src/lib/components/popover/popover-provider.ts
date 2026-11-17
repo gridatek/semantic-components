@@ -115,13 +115,13 @@ export class ScPopoverProvider {
 
   /** Its trigger, when it has one (a date picker anchors on an input group). */
   readonly trigger = contentChild(ScPopoverTrigger);
-  protected readonly portal = contentChild.required(ScPopoverPortal);
+  private readonly portal = contentChild.required(ScPopoverPortal);
 
-  readonly origin = computed(
+  private readonly origin = computed(
     () => this.originInput() ?? this.trigger()?.overlayOrigin,
   );
 
-  protected readonly positions = computed(() =>
+  private readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
       physicalSide(this.side(), this.direction.valueSignal()),
       this.alignment(),
@@ -139,7 +139,7 @@ export class ScPopoverProvider {
   );
 
   /** Modal: the page behind doesn't scroll; otherwise it follows its anchor. */
-  protected readonly scrollStrategy = computed(() =>
+  private readonly scrollStrategy = computed(() =>
     this.modal() === true
       ? this.overlay.scrollStrategies.block()
       : this.overlay.scrollStrategies.reposition(),
@@ -150,14 +150,14 @@ export class ScPopoverProvider {
   /** Opened by the pointer's hover: leaving closes it. */
   openedByHover = false;
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly class = computed(() => cn('contents', this.classInput()));
 
   close(): void {
     this.timing.cancel();
     this.open.set(false);
   }
 
-  protected onOutsideClick(event: MouseEvent): void {
+  private onOutsideClick(event: MouseEvent): void {
     // Its own trigger toggles it: not an outside click.
     const anchor = this.origin()?.elementRef.nativeElement as HTMLElement;
     if (anchor?.contains(event.target as Node)) return;
@@ -165,11 +165,11 @@ export class ScPopoverProvider {
   }
 
   /** The CDK detached the overlay (it was scrolled away, say): closed. */
-  protected onDetach(): void {
+  private onDetach(): void {
     if (this.open()) this.open.set(false);
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Escape') {
       this.close();
       return;
@@ -215,7 +215,7 @@ export class ScPopoverProvider {
     ).filter((el) => this.checker.isTabbable(el));
   }
 
-  protected onPositionChange(change: ConnectedOverlayPositionChange): void {
+  private onPositionChange(change: ConnectedOverlayPositionChange): void {
     this.placed.set(placedSide(change, this.direction.valueSignal()));
   }
 }

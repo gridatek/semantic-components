@@ -60,22 +60,22 @@ export class ScCountdownUnit {
       }),
   );
 
-  protected readonly value = computed(() => this.countdown.left()[this.unit()]);
+  private readonly value = computed(() => this.countdown.left()[this.unit()]);
 
-  protected readonly text = computed(() => this.format().format(this.value()));
+  private readonly text = computed(() => this.format().format(this.value()));
 
   /** Rolling: each digit's place, 0–9. */
-  protected readonly digits = computed(() =>
+  private readonly digits = computed(() =>
     String(this.value()).padStart(this.minDigits(), '0').split('').map(Number),
   );
 
   /** The digits 0–9, in the app's language. */
-  protected readonly glyphs = computed(() => {
+  private readonly glyphs = computed(() => {
     const format = new Intl.NumberFormat(this.countdown.ɵlocale);
     return Array.from({ length: 10 }, (_, digit) => format.format(digit));
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('inline-flex tabular-nums', this.classInput()),
   );
 }

@@ -18,7 +18,7 @@ import { RtlMessageDemo } from './rtl-message-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlMessageDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,

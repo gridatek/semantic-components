@@ -26,5 +26,5 @@ import { ScDiffViewer } from '@semantic-components/ui/diff-viewer';
   encapsulation: ViewEncapsulation.None,
 })
 export class IdenticalDiffViewerDemo {
-  readonly text = `ng add @semantic-components/ui`;
+  private readonly text = `ng add @semantic-components/ui`;
 }

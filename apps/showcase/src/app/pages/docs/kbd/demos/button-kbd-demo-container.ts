@@ -18,7 +18,7 @@ import { ButtonKbdDemo } from './button-kbd-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonKbdDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScKbd } from '@semantic-components/ui';
 
 /** A key at a button’s end (data-icon="inline-end": the button’s padding follows). */

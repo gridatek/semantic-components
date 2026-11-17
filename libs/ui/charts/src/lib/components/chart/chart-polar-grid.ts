@@ -57,7 +57,7 @@ export class ScChartPolarGrid {
   /** A line to each category. */
   readonly spokes = input(true, { transform: booleanAttribute });
 
-  protected readonly ringList = computed(() => {
+  private readonly ringList = computed(() => {
     const { cx, cy, radius } = this.state.circle();
     const spokes = this.state.data().map((_, i) => this.state.spokeAngle(i));
     // Radial bars: through each ring's middle (Recharts' circles at the
@@ -85,7 +85,7 @@ export class ScChartPolarGrid {
     });
   });
 
-  protected readonly spokeList = computed(() => {
+  private readonly spokeList = computed(() => {
     const { cx, cy, radius } = this.state.circle();
     // Radial bars: at the values' ticks along the ring (Recharts' radial
     // lines on the angle axis); else to each category.
@@ -115,7 +115,7 @@ export class ScChartPolarGrid {
     }));
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('stroke-border', this.classInput()),
   );
 }

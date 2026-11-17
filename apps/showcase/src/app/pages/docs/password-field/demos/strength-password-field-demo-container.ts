@@ -18,7 +18,7 @@ import { StrengthPasswordFieldDemo } from './strength-password-field-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StrengthPasswordFieldDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScLabel,

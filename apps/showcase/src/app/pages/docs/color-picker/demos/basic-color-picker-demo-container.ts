@@ -18,7 +18,7 @@ import { BasicColorPickerDemo } from './basic-color-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicColorPickerDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScColorPicker,

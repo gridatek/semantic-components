@@ -63,9 +63,9 @@ export class ScMasonryGrid {
 
   /** The columns, as laid out. */
   readonly columns = signal(1);
-  protected readonly height = signal(0);
+  private readonly height = signal(0);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.native() ? '[display:grid-lanes]' : 'relative block',
       this.classInput(),

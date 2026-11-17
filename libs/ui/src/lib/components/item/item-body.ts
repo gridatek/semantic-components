@@ -13,7 +13,7 @@ export class ScItemBody {
   private readonly styles = injectPreset().item;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.body, this.classInput()),
   );
 }

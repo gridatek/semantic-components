@@ -18,7 +18,7 @@ import { TriggerElsewhereCollapsibleDemo } from './trigger-elsewhere-collapsible
   encapsulation: ViewEncapsulation.None,
 })
 export class TriggerElsewhereCollapsibleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCollapsible,

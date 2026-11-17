@@ -29,16 +29,16 @@ import { SC_STEPPER, SC_STEPPER_ITEM } from './stepper-types';
   },
 })
 export class ScStepperTrigger {
-  protected readonly stepper = inject(SC_STEPPER);
+  private readonly stepper = inject(SC_STEPPER);
   readonly stepperItem = inject(SC_STEPPER_ITEM);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly index = this.stepperItem.index;
+  private readonly index = this.stepperItem.index;
   /** Whether the step can't be reached yet. */
   readonly disabled = computed(() => !this.stepperItem.isNavigable());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       // The clickable step header; the circle is scStepperIndicator inside.
       'inline-flex items-center gap-2 rounded-full outline-none',
@@ -48,7 +48,7 @@ export class ScStepperTrigger {
     ),
   );
 
-  protected select(): void {
+  private select(): void {
     if (!this.disabled()) this.stepper.goToStep(this.index());
   }
 }

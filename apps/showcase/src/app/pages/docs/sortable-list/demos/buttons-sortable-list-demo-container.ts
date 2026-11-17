@@ -18,7 +18,7 @@ import { ButtonsSortableListDemo } from './buttons-sortable-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonsSortableListDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScButton,
   ScSortableList,

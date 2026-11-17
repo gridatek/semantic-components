@@ -28,7 +28,7 @@ export class ScProgressValueText {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.value,
       'group-data-[shape=circle]/progress:text-foreground group-data-[shape=circle]/progress:absolute group-data-[shape=circle]/progress:inset-0 group-data-[shape=circle]/progress:m-0 group-data-[shape=circle]/progress:flex group-data-[shape=circle]/progress:items-center group-data-[shape=circle]/progress:justify-center group-data-[shape=circle]/progress:text-xs group-data-[shape=circle]/progress:font-medium',

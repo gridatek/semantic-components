@@ -30,5 +30,5 @@ import { ScField, ScRadio, ScRadioGroup } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioGroupUsageDemo {
-  protected readonly spacingForm = form(signal({ spacing: 'comfortable' }));
+  private readonly spacingForm = form(signal({ spacing: 'comfortable' }));
 }

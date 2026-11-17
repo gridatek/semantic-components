@@ -35,7 +35,7 @@ export class ScStepperIndicator {
   /** The step's index (0-based). */
   readonly step = computed(() => this.item.index());
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'inline-flex size-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-medium transition-colors',
       'data-[state=complete]:border-primary data-[state=complete]:bg-primary data-[state=complete]:text-primary-foreground',

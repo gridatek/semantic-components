@@ -197,29 +197,29 @@ export class SalesOverview {
     newAndExistingUsers: $localize`New and existing users, `,
   };
 
-  protected readonly periods = SALES_PERIODS.map((value) => ({
+  private readonly periods = SALES_PERIODS.map((value) => ({
     value,
     label: label(value),
   }));
-  protected readonly period = signal<SalesPeriod>('Last 30 Days');
-  protected readonly data = computed(() =>
+  private readonly period = signal<SalesPeriod>('Last 30 Days');
+  private readonly data = computed(() =>
     SALES[this.period()].map((point) => ({
       ...point,
       date: monthDay(point.date),
     })),
   );
-  protected readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     newUser: { label: $localize`New User`, color: 'var(--chart-1)' },
     existingUser: { label: $localize`Existing User`, color: 'var(--chart-2)' },
   };
 
   /** Half the dates on the axis when there are many. */
-  protected readonly everyOther = (date: string, index: number) =>
+  private readonly everyOther = (date: string, index: number) =>
     this.data().length > 10 && index % 3 !== 0 ? '' : date;
-  protected readonly thousands = (value: number) =>
+  private readonly thousands = (value: number) =>
     value === 0 ? '0' : `${value}k`;
 
-  protected choose(value: unknown): void {
+  private choose(value: unknown): void {
     if (SALES_PERIODS.includes(value as SalesPeriod))
       this.period.set(value as SalesPeriod);
   }

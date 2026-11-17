@@ -14,7 +14,7 @@ import { SC_MENU_GROUP } from './menu-context';
 })
 export class ScMenuGroup {
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly labelId = signal<string | null>(null);
+  private readonly labelId = signal<string | null>(null);
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 }

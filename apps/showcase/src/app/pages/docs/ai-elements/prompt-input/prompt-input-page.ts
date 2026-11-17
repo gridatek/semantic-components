@@ -96,7 +96,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
   encapsulation: ViewEncapsulation.None,
 })
 export default class PromptInputPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScInputGroup, ScInputGroupAddon, ScInputGroupButton, ScTextarea,',

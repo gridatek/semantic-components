@@ -18,7 +18,7 @@ import { BasicMenuDemo } from './basic-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScMenu,

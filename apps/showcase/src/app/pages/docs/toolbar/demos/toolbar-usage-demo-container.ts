@@ -14,7 +14,7 @@ import { ToolbarUsageDemo } from './toolbar-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ToolbarUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScLink,

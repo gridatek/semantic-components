@@ -57,7 +57,7 @@ export class ScTransferListPane {
     this.items().filter((item) => !item.disabled),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-card text-foreground flex min-w-0 flex-col overflow-hidden rounded-lg border',
       this.list.showInvalid() && 'border-destructive',

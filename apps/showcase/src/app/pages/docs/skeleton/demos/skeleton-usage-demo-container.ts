@@ -14,7 +14,7 @@ import { SkeletonUsageDemo } from './skeleton-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SkeletonUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSkeleton } from '@semantic-components/ui';
 
 @Component({

@@ -28,7 +28,7 @@ export class ScStackedLayout {
     alias: 'class',
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('min-h-screen flex flex-col', this.classInput()),
   );
 }

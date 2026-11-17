@@ -60,12 +60,15 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormSignaturePadDemo {
-  readonly model = signal<{ name: string; signature: ScSignature | null }>({
+  private readonly model = signal<{
+    name: string;
+    signature: ScSignature | null;
+  }>({
     name: '',
     signature: null,
   });
-  readonly sent = signal(false);
-  readonly signForm = form(
+  private readonly sent = signal(false);
+  private readonly signForm = form(
     this.model,
     (path) => {
       required(path.name, { message: 'Enter your name.' });

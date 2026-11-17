@@ -18,7 +18,7 @@ import { CustomSpinnerDemo } from './custom-spinner-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomSpinnerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScSpinner } from '@semantic-components/ui';
 import {
   SiLoaderCircleIcon,

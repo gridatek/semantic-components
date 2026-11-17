@@ -18,7 +18,7 @@ import { PdfViewerReadingDemo } from './pdf-viewer-reading-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PdfViewerReadingDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   ViewEncapsulation,
   computed,

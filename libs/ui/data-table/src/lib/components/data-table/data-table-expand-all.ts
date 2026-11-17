@@ -29,11 +29,11 @@ export class ScDataTableExpandAll {
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly expanded = computed(() =>
+  private readonly expanded = computed(() =>
     this.table().getIsAllRowsExpanded(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

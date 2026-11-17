@@ -51,7 +51,7 @@ export class App {
     { initialValue: false },
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('block', this.demoGutter() && 'px-4', this.classInput()),
   );
 }

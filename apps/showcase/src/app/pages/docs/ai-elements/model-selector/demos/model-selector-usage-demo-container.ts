@@ -18,7 +18,7 @@ import { ModelSelectorUsageDemo } from './model-selector-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ModelSelectorUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {
   ScInputGroup,

@@ -42,7 +42,7 @@ import { ScCommandGroup } from './command-group';
 })
 export class ScCommandItem implements Highlightable {
   private readonly styles = injectPreset().command;
-  protected readonly command = inject(ScCommand);
+  private readonly command = inject(ScCommand);
   /** The group it is in. */
   readonly group = inject(ScCommandGroup, { optional: true });
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -65,7 +65,7 @@ export class ScCommandItem implements Highlightable {
 
   /** Its text, read once rendered. */
   private readonly text = signal('');
-  protected readonly highlighted = signal(false);
+  private readonly highlighted = signal(false);
 
   /** Shown: it matches the search, or always shown. */
   readonly shown = computed(
@@ -79,7 +79,7 @@ export class ScCommandItem implements Highlightable {
     return this.disabledInput();
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.item, this.classInput()),
   );
 
@@ -107,7 +107,7 @@ export class ScCommandItem implements Highlightable {
     else this.select.emit();
   }
 
-  protected onClick(event: Event): void {
+  private onClick(event: Event): void {
     if (this.disabledInput()) {
       event.preventDefault();
       return;

@@ -42,7 +42,7 @@ export const SC_TREE_ITEM = new InjectionToken<ScTreeItem>('SC_TREE_ITEM');
 })
 export class ScTreeItem {
   readonly treeItem = inject(ScAriaTreeItem);
-  readonly groupContent = contentChild(ScTreeItemGroup);
+  private readonly groupContent = contentChild(ScTreeItemGroup);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -53,7 +53,7 @@ export class ScTreeItem {
 
   private readonly tree = inject(ScTree);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'flex flex-col outline-none',
       // Focus ring on this item's own row only (direct child), not on the rows

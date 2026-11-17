@@ -33,11 +33,11 @@ import { ScNumberTicker } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardNumberTickerDemo {
-  readonly users = signal(1_284);
+  private readonly users = signal(1_284);
   private turn = 0;
 
   /** New figures, as from a server. */
-  refresh(): void {
+  private refresh(): void {
     this.users.update((v) => v + [137, -58, 412, -201][this.turn++ % 4]);
   }
 }

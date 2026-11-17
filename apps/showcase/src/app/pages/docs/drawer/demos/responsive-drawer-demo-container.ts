@@ -18,7 +18,7 @@ import { ResponsiveDrawerDemo } from './responsive-drawer-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResponsiveDrawerDemoContainer {
-  readonly code = `import { DOCUMENT } from '@angular/common';
+  private readonly code = `import { DOCUMENT } from '@angular/common';
 import {
   Component,
   DestroyRef,

@@ -18,7 +18,7 @@ import { ButtonTextareaDemo } from './button-textarea-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonTextareaDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScTextarea } from '@semantic-components/ui';
 
 /** A message and its send button. */

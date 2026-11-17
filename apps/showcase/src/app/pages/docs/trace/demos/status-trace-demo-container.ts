@@ -18,7 +18,7 @@ import { StatusTraceDemo } from './status-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StatusTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTrace,
   ScTraceIcon,

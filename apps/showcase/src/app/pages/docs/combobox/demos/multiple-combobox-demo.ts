@@ -73,9 +73,9 @@ import { SiCheckIcon, SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleComboboxDemo {
-  protected readonly selected = signal(['Next.js']);
+  private readonly selected = signal(['Next.js']);
 
-  protected readonly frameworks = [
+  private readonly frameworks = [
     'Next.js',
     'SvelteKit',
     'Nuxt.js',
@@ -83,7 +83,7 @@ export class MultipleComboboxDemo {
     'Astro',
   ];
 
-  protected matching(query: string): string[] {
+  private matching(query: string): string[] {
     return this.frameworks.filter((name) => scComboboxMatches(name, query));
   }
 }

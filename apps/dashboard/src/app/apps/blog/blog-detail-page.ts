@@ -254,22 +254,22 @@ export class BlogDetailPage {
   /** From the route (:slug). */
   readonly slug = input('');
 
-  protected readonly post = computed(() => this.store.bySlug(this.slug()));
+  private readonly post = computed(() => this.store.bySlug(this.slug()));
   /** Its comments, the ones added here first. */
-  protected readonly comments = linkedSignal<readonly BlogComment[]>(
+  private readonly comments = linkedSignal<readonly BlogComment[]>(
     () => this.post()?.comments ?? [],
   );
 
   private readonly draft = signal({ text: '' });
-  protected readonly commentForm = form(this.draft, (path) => {
+  private readonly commentForm = form(this.draft, (path) => {
     required(path.text);
   });
 
-  protected readonly initialsOf = initials;
-  protected readonly dayOf = day;
-  protected readonly countOf = count;
+  private readonly initialsOf = initials;
+  private readonly dayOf = day;
+  private readonly countOf = count;
 
-  protected addComment(event: Event): void {
+  private addComment(event: Event): void {
     event.preventDefault();
     if (this.commentForm().invalid()) return;
     const comment: BlogComment = {

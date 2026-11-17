@@ -23,7 +23,7 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
   encapsulation: ViewEncapsulation.None,
 })
 export class ColorsQrCodeDemo {
-  readonly colors = [
+  private readonly colors = [
     { class: 'bg-blue-100 text-blue-700', label: 'Blue' },
     { class: 'bg-green-100 text-green-800', label: 'Green' },
     { class: 'bg-purple-100 text-purple-700', label: 'Purple' },

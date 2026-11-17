@@ -103,19 +103,19 @@ export class ScNavigationMenu {
   /** An item whose panel focuses its first link once shown (↓ on its trigger). */
   readonly focusOnOpen = signal<string | null>(null);
 
-  protected readonly box = signal<ScNavigationMenuBox | null>(null);
+  private readonly box = signal<ScNavigationMenuBox | null>(null);
   /** Opened by the pointer resting: a click then keeps it open. */
   private openedByHover = false;
   private timer: ReturnType<typeof setTimeout> | undefined;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/navigation-menu relative flex max-w-max flex-1 items-center justify-center',
       this.classInput(),
     ),
   );
 
-  protected readonly viewportClass = cn(
+  private readonly viewportClass = cn(
     this.styles.popup,
     'pointer-events-none absolute z-40',
     'transition-[left,top,width,height,opacity,scale,visibility] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
@@ -215,7 +215,7 @@ export class ScNavigationMenu {
     if (focusTrigger) open?.trigger()?.focus();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
     const target = event.target as HTMLElement;
     const item = this.items().find((i) => i.element.contains(target));
@@ -277,14 +277,14 @@ export class ScNavigationMenu {
   }
 
   /** The focus left the menu, or went to another item: the panel closes. */
-  protected onFocusout(event: FocusEvent): void {
+  private onFocusout(event: FocusEvent): void {
     const to = event.relatedTarget as Node | null;
     if (this.value() === null) return;
     const open = this.items().find((item) => item.value() === this.value());
     if (!to || !open?.element.contains(to)) this.close();
   }
 
-  protected onOutsidePointer(event: Event): void {
+  private onOutsidePointer(event: Event): void {
     if (this.value() !== null && !this.element.contains(event.target as Node))
       this.close();
   }

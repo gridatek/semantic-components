@@ -94,12 +94,12 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectControlGroupDemo {
-  protected readonly currencies = [
+  private readonly currencies = [
     { value: '$', label: 'US Dollar' },
     { value: '€', label: 'Euro' },
     { value: '£', label: 'British Pound' },
   ];
 
   private readonly model = signal({ currency: '$', amount: '' });
-  protected readonly paymentForm = form(this.model);
+  private readonly paymentForm = form(this.model);
 }

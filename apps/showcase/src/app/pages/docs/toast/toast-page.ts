@@ -159,7 +159,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class ToastPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScToaster, ScToastTemplate, ScToast, ScToastIcon,',
@@ -185,7 +185,7 @@ export default class ToastPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScToaster',
       selector: 'service',

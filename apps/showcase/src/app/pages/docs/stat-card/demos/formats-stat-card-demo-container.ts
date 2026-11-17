@@ -18,7 +18,7 @@ import { FormatsStatCardDemo } from './formats-stat-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsStatCardDemoContainer {
-  readonly code = `import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScStatCard,
   ScStatCardChange,

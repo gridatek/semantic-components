@@ -18,7 +18,7 @@ import { BasicCollapsibleDemo } from './basic-collapsible-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCollapsibleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCard,

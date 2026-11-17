@@ -18,7 +18,7 @@ import { ScrollingTableDemo } from './scrolling-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollingTableDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScTable,

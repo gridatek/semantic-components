@@ -88,7 +88,7 @@ export class ScInfiniteScroll {
   private kept: number | null = null;
   private scroller: HTMLElement | null = null;
 
-  protected readonly class = computed(() => cn('block', this.classInput()));
+  private readonly class = computed(() => cn('block', this.classInput()));
 
   constructor() {
     const destroyRef = inject(DestroyRef);

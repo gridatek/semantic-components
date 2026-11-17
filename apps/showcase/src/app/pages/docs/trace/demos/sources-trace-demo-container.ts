@@ -18,7 +18,7 @@ import { SourcesTraceDemo } from './sources-trace-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SourcesTraceDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

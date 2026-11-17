@@ -44,7 +44,7 @@ import { ScPasswordField } from './password-field';
 })
 export class ScPasswordInput {
   private readonly inputStyles = injectPreset().input;
-  protected readonly password = inject(ScPasswordField);
+  private readonly password = inject(ScPasswordField);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** A password the browser knows (`current-password`), or a new one. */
@@ -63,17 +63,17 @@ export class ScPasswordInput {
   readonly disabled = input(false, { transform: booleanAttribute });
 
   // Not before it is touched.
-  protected readonly ariaInvalid = computed(
+  private readonly ariaInvalid = computed(
     () => (this.touched() && this.invalid()) || null,
   );
-  protected readonly ariaDescribedBy = computed(
+  private readonly ariaDescribedBy = computed(
     () =>
       this.ariaDescribedByInput() ||
       this.password.field.descriptionIds().join(' ') ||
       null,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.inputStyles, this.classInput()),
   );
 
@@ -84,7 +84,7 @@ export class ScPasswordInput {
     inject(DestroyRef).onDestroy(() => this.password.input.set(null));
   }
 
-  protected readCapsLock(event: KeyboardEvent): void {
+  private readCapsLock(event: KeyboardEvent): void {
     // Synthetic events (autofill) have no modifier state.
     if (typeof event.getModifierState === 'function')
       this.password.capsLock.set(event.getModifierState('CapsLock'));

@@ -13,7 +13,7 @@ export class ScAttachmentActions {
   private readonly styles = injectPreset().attachment;
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.actions, this.classInput()),
   );
 }

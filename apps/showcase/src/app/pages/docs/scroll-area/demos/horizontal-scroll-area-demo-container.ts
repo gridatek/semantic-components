@@ -14,7 +14,7 @@ import { HorizontalScrollAreaDemo } from './horizontal-scroll-area-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalScrollAreaDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScFrame, ScScrollArea } from '@semantic-components/ui';
 
 @Component({

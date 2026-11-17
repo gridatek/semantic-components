@@ -74,10 +74,10 @@ export class PageNav {
   private readonly index = computed(() =>
     this.pages().findIndex((page) => page.path === this.url()),
   );
-  protected readonly previous = computed(() =>
+  private readonly previous = computed(() =>
     this.index() > 0 ? this.pages()[this.index() - 1] : null,
   );
-  protected readonly next = computed(() => {
+  private readonly next = computed(() => {
     const i = this.index();
     return i !== -1 && i < this.pages().length - 1 ? this.pages()[i + 1] : null;
   });

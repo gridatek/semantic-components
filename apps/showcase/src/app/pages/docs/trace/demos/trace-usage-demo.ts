@@ -120,5 +120,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TraceUsageDemo {
-  protected readonly buildOutput = '$ pnpm build\nBuilt in 41s';
+  private readonly buildOutput = '$ pnpm build\nBuilt in 41s';
 }

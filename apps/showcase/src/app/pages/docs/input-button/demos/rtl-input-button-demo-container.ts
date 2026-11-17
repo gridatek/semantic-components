@@ -18,7 +18,7 @@ import { RtlInputButtonDemo } from './rtl-input-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlInputButtonDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScInputButton, ScKbd } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';

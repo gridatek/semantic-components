@@ -47,7 +47,7 @@ export class ScPdfViewerSignatureForm {
   private readonly document = inject(DOCUMENT);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   readonly mode = signal<ScPdfSignatureMode>('type');
   /** The typed name. */

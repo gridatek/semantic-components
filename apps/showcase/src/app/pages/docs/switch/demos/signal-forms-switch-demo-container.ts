@@ -18,7 +18,7 @@ import { SignalFormsSwitchDemo } from './signal-forms-switch-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SignalFormsSwitchDemoContainer {
-  readonly code = `import { JsonPipe } from '@angular/common';
+  private readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {

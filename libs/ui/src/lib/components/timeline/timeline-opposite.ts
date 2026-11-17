@@ -15,7 +15,7 @@ export class ScTimelineOpposite {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     if (this.timeline.orientation() === 'horizontal') {
       // Above the marker.
       return cn('text-muted-foreground order-first text-sm', this.classInput());

@@ -18,7 +18,7 @@ import { GroupIconAvatarDemo } from './group-icon-avatar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupIconAvatarDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,

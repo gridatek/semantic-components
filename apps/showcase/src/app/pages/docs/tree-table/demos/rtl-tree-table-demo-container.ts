@@ -18,7 +18,7 @@ import { RtlTreeTableDemo } from './rtl-tree-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTreeTableDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   createColumnHelper,
   createExpandedRowModel,
   injectTable,

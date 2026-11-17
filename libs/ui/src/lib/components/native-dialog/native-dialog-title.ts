@@ -10,10 +10,10 @@ import { ScNativeDialog } from './native-dialog';
   },
 })
 export class ScNativeDialogTitle {
-  readonly dialog = inject(ScNativeDialog);
+  private readonly dialog = inject(ScNativeDialog);
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-base leading-none font-medium', this.classInput()),
   );
 }

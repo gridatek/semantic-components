@@ -185,7 +185,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class AlertPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScAlert, ScAlertTitle, ScAlertDescription, ScAlertAction,',
@@ -201,7 +201,7 @@ export default class AlertPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScAlert',
       selector: 'div[scAlert]',

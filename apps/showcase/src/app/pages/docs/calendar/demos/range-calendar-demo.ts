@@ -54,11 +54,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RangeCalendarDemo {
-  readonly stay = signal<ScCalendarValue>({
+  private readonly stay = signal<ScCalendarValue>({
     from: Temporal.PlainDate.from('2026-10-12'),
     to: Temporal.PlainDate.from('2026-10-16'),
   });
-  readonly picked = computed(() => {
+  private readonly picked = computed(() => {
     const range = this.stay() as ScCalendarRange | null;
     if (!range?.from) return 'No days picked.';
     return range.to
@@ -67,12 +67,12 @@ export class RangeCalendarDemo {
   });
   private readonly long = (date: Temporal.PlainDate) =>
     date.toLocaleString('en-US', { dateStyle: 'long' });
-  readonly previousLabel = {
+  private readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',

@@ -18,7 +18,7 @@ import { UpdateToastDemo } from './update-toast-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class UpdateToastDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
 import { ScButton, ScToaster } from '@semantic-components/ui';
 
 /** One toast, changed in place: a loading toast becomes a success one. */

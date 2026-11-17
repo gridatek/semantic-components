@@ -18,7 +18,7 @@ import { ScField, ScLabel, ScTimeInput } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledTimeInputDemo {
-  readonly time = signal<Temporal.PlainTime | null>(
+  private readonly time = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('11:00'),
   );
 }

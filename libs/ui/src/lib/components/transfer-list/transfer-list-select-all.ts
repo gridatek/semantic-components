@@ -16,19 +16,19 @@ import { ScTransferListPane } from './transfer-list-pane';
   },
 })
 export class ScTransferListSelectAll {
-  protected readonly pane = inject(ScTransferListPane);
+  private readonly pane = inject(ScTransferListPane);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly all = computed(() => {
+  private readonly all = computed(() => {
     const count = this.pane.selectable().length;
     return count > 0 && this.pane.selected().length === count;
   });
-  protected readonly some = computed(
+  private readonly some = computed(
     () => this.pane.selected().length > 0 && !this.all(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'accent-primary size-4 shrink-0 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50',
       this.classInput(),

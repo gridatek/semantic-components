@@ -18,7 +18,7 @@ import { cn } from 'cn';
 export class ScEmojiPickerCategoryNav {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex gap-0.5 border-b px-1 py-1', this.classInput()),
   );
 }

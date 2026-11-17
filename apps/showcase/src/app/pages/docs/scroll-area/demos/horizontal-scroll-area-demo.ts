@@ -31,7 +31,7 @@ import { ScFrame, ScScrollArea } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalScrollAreaDemo {
-  readonly artworks = [
+  private readonly artworks = [
     { art: 'Artwork 1', artist: 'Ornella Binni' },
     { art: 'Artwork 2', artist: 'Tom Byrom' },
     { art: 'Artwork 3', artist: 'Vladimir Malyavko' },

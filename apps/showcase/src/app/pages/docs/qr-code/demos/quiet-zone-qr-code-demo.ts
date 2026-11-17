@@ -24,7 +24,7 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
   encapsulation: ViewEncapsulation.None,
 })
 export class QuietZoneQrCodeDemo {
-  readonly zones = [
+  private readonly zones = [
     { quietZone: 0, label: 'No quiet zone' },
     { quietZone: 1, label: '1 module' },
     { quietZone: 2, label: '2 modules' },

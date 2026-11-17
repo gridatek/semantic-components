@@ -18,7 +18,7 @@ import { LinkBadgeDemo } from './link-badge-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinkBadgeDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ScBadge } from '@semantic-components/ui';
 import { SiArrowUpRightIcon } from '@semantic-icons/lucide-icons';

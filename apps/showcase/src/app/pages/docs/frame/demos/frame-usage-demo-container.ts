@@ -14,7 +14,7 @@ import { FrameUsageDemo } from './frame-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FrameUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScFrame } from '@semantic-components/ui';
 
 @Component({

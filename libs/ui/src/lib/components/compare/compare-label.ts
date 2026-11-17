@@ -24,13 +24,13 @@ export class ScCompareLabel {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Its side has too little room left to show it. */
-  protected readonly covered = computed(() =>
+  private readonly covered = computed(() =>
     this.side() === 'before'
       ? this.compare.position() < 20
       : this.compare.position() > 80,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute z-[5] m-3 rounded-md bg-black/60 px-2 py-1 text-xs font-medium text-white transition-opacity',
       'data-covered:opacity-0',

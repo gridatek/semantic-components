@@ -28,7 +28,7 @@ import { ScQuestionnaireItem } from './questionnaire-item';
 })
 export class ScQuestionnaireChoiceInput {
   private readonly questionnaire = inject(ScQuestionnaire);
-  protected readonly item = inject(ScQuestionnaireItem);
+  private readonly item = inject(ScQuestionnaireItem);
   private readonly choice = inject(ScQuestionnaireChoice, { optional: true });
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
@@ -36,12 +36,12 @@ export class ScQuestionnaireChoiceInput {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Its key, by its place among the question's choices. */
-  protected readonly shortcut = computed(() => {
+  private readonly shortcut = computed(() => {
     const index = this.item.choiceInputs().indexOf(this.element);
     return this.questionnaire.shortcutKeys()[index] ?? null;
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'absolute inset-0 z-10 size-full cursor-pointer opacity-0',
       this.classInput(),

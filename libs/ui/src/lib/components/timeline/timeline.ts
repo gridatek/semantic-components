@@ -24,7 +24,7 @@ export class ScTimeline {
   /** Where the content is, down the line: after it, before it, or in turn. */
   readonly alignment = input<'start' | 'end' | 'alternate'>('start');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.orientation() === 'horizontal'
         ? 'flex overflow-x-auto rounded-md pb-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50'

@@ -18,7 +18,7 @@ import { GroupMessageDemo } from './group-message-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupMessageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,

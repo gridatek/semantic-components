@@ -103,9 +103,9 @@ const TREND = Math.round(((LATEST - PREVIOUS) / PREVIOUS) * 100);
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewVisitors {
-  protected readonly data = DATA;
-  protected readonly trend = TREND;
-  protected readonly config: ScChartConfig = {
+  private readonly data = DATA;
+  private readonly trend = TREND;
+  private readonly config: ScChartConfig = {
     desktop: { label: 'Desktop', color: 'var(--chart-1)' },
   };
 }

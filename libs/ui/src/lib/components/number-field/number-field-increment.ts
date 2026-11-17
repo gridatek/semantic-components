@@ -29,12 +29,12 @@ import { ScNumberFieldHold } from './number-field-hold';
 export class ScNumberFieldIncrement {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly number = inject(SC_NUMBER_FIELD);
+  private readonly number = inject(SC_NUMBER_FIELD);
   private readonly hold = new ScNumberFieldHold();
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: 'outline', size: 'icon' }),
       'touch-manipulation select-none',
@@ -46,7 +46,7 @@ export class ScNumberFieldIncrement {
     inject(DestroyRef).onDestroy(() => this.hold.stop());
   }
 
-  protected onPointerDown(event: PointerEvent): void {
+  private onPointerDown(event: PointerEvent): void {
     this.number.flushInput();
     const amount = this.number.stepSize(event);
     this.hold.start(event, () => {
@@ -58,7 +58,7 @@ export class ScNumberFieldIncrement {
   }
 
   /** A click that isn't a pointer press (a screen reader's, say). */
-  protected onClick(event: MouseEvent): void {
+  private onClick(event: MouseEvent): void {
     if (this.hold.pressed) {
       this.hold.pressed = false;
       return;

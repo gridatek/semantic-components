@@ -18,7 +18,7 @@ import { TableTypesetDemo } from './table-typeset-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TableTypesetDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 
 /**
  * A wide table in \`typeset-scroll\`: it scrolls across in its own box, the

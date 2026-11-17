@@ -18,7 +18,7 @@ import { BasicMultiselectDemo } from './basic-multiselect-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicMultiselectDemoContainer {
-  readonly code = `import { JsonPipe, NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { JsonPipe, NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, FormRoot, form } from '@angular/forms/signals';
 import {

@@ -38,7 +38,7 @@ export class ScEditorSearchBar {
   /** Whether it is open: bind the signal that shows it. */
   readonly open = model(false);
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     ɵassertEditorFeature('withSearch', 'scEditorSearchBar');
@@ -59,7 +59,7 @@ export class ScEditorSearchBar {
     });
   }
 
-  protected onEscape(event: Event): void {
+  private onEscape(event: Event): void {
     event.preventDefault();
     this.search.close();
   }

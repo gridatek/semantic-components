@@ -59,5 +59,5 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PriceNumberFieldDemo {
-  readonly price = signal<number | null>(1234.5);
+  private readonly price = signal<number | null>(1234.5);
 }

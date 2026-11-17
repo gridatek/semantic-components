@@ -132,7 +132,7 @@ interface Photo {
   encapsulation: ViewEncapsulation.None,
 })
 export class GalleryLightboxDemo {
-  readonly photos: readonly Photo[] = [
+  private readonly photos: readonly Photo[] = [
     {
       name: 'forest',
       alt: 'A pine forest above the sea',

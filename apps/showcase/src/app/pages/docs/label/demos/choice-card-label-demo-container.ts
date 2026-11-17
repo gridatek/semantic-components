@@ -18,7 +18,7 @@ import { ChoiceCardLabelDemo } from './choice-card-label-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChoiceCardLabelDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCheckbox,
   ScField,

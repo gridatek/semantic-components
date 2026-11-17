@@ -33,7 +33,7 @@ export class ScInputGroupButton {
     transform: booleanAttribute,
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.preset.button({ variant: this.variant() }),
       this.preset.inputGroupButton({ size: this.size() }),

@@ -34,17 +34,17 @@ import type { ScPdfOutlineItem } from './pdf-viewer-types';
   },
 })
 export class ScPdfViewerOutlineItem {
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly item = input.required<ScPdfOutlineItem>({
     alias: 'scPdfViewerOutlineItem',
   });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly current = computed(
+  private readonly current = computed(
     () => this.pdfViewer.currentOutlineItem()?.id === this.item().id,
   );
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'data-current:bg-accent data-bold:font-bold data-italic:italic',
       this.classInput(),

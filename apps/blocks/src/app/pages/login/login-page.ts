@@ -158,7 +158,7 @@ export default class LoginPage {
     password: '',
   });
 
-  readonly loginForm = form(
+  private readonly loginForm = form(
     this.formModel,
     (s) => {
       required(s.email);

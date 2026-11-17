@@ -144,7 +144,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
   encapsulation: ViewEncapsulation.None,
 })
 export default class ChainOfThoughtPage {
-  protected readonly steps = [
+  private readonly steps = [
     { step: 'Running', status: '"running"', title: 'Searching for …' },
     { step: 'Done, with detail', status: 'none', title: 'Searched for …' },
     {
@@ -155,7 +155,7 @@ export default class ChainOfThoughtPage {
     { step: 'Failed', status: '"error"', title: 'Failed to search for …' },
   ];
 
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle,',

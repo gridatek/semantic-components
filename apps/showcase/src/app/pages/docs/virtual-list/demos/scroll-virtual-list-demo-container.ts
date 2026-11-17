@@ -18,7 +18,7 @@ import { ScrollVirtualListDemo } from './scroll-virtual-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollVirtualListDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScVirtualList,

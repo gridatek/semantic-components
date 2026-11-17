@@ -18,7 +18,7 @@ import { KeyboardTooltipDemo } from './keyboard-tooltip-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class KeyboardTooltipDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScKbd,

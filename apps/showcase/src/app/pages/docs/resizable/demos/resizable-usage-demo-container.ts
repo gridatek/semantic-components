@@ -14,7 +14,7 @@ import { ResizableUsageDemo } from './resizable-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ResizableUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScResizableHandle,

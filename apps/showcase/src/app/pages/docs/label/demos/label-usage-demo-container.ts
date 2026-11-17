@@ -14,7 +14,7 @@ import { LabelUsageDemo } from './label-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCheckbox, ScField, ScLabel } from '@semantic-components/ui';
 
 @Component({

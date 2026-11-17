@@ -51,7 +51,9 @@ export class ScQuestionnaireItem implements ScQuestionnaireItemRef {
   /** The answer's field: `survey.goal`. */
   readonly field = input.required<ScQuestionnaireAnswer>();
 
-  readonly active = computed(() => this.questionnaire.active() === this);
+  private readonly active = computed(
+    () => this.questionnaire.active() === this,
+  );
   readonly required = computed(() => this.field()().required());
   readonly valid = computed(() => this.field()().valid());
   readonly answered = computed(() => hasAnswer(this.field()().value()));
@@ -73,14 +75,14 @@ export class ScQuestionnaireItem implements ScQuestionnaireItemRef {
     return [...this.choices()].sort(inDocumentOrder);
   });
 
-  protected readonly describedBy = computed(
+  private readonly describedBy = computed(
     () =>
       [...this.descriptions(), ...(this.showInvalid() ? this.errors() : [])]
         .map((id) => id())
         .join(' ') || null,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.item, this.classInput()),
   );
 

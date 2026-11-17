@@ -72,11 +72,11 @@ export class ScNavbar {
   readonly toggle = signal<HTMLElement | null>(null);
 
   private readonly scrolledAway = signal(false);
-  protected readonly hidden = computed(
+  private readonly hidden = computed(
     () => this.hideOnScroll() && this.scrolledAway() && !this.open(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'bg-background relative z-40 flex flex-wrap items-center gap-x-4 border-b px-4 md:px-6',
       this.sticky() && 'sticky top-0',
@@ -126,7 +126,7 @@ export class ScNavbar {
     });
   }
 
-  protected onEscape(): void {
+  private onEscape(): void {
     if (!this.open()) return;
     this.open.set(false);
     this.toggle()?.focus();

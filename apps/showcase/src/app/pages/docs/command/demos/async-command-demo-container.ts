@@ -18,7 +18,7 @@ import { AsyncCommandDemo } from './async-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AsyncCommandDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, effect, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, effect, signal } from '@angular/core';
 import {
   ScCommand,
   ScCommandEmpty,

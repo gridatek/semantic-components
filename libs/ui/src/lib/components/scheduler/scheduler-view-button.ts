@@ -22,7 +22,7 @@ import type { ScSchedulerView } from './scheduler-types';
 export class ScSchedulerViewButton {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly scheduler = inject(ScScheduler);
+  private readonly scheduler = inject(ScScheduler);
 
   readonly viewName = input.required<ScSchedulerView>({
     alias: 'scSchedulerViewButton',
@@ -30,11 +30,11 @@ export class ScSchedulerViewButton {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly pressed = computed(
+  private readonly pressed = computed(
     () => this.scheduler.view() === this.viewName(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({
         variant: this.pressed() ? 'secondary' : 'ghost',

@@ -23,7 +23,7 @@ import { cn } from 'cn';
   encapsulation: ViewEncapsulation.None,
 })
 export class DevOnly {
-  protected readonly class = cn(
+  private readonly class = cn(
     'block space-y-3 border border-dashed p-4',
     // The frame's corners only: its ring and shadow are a solid edge.
     injectPreset()

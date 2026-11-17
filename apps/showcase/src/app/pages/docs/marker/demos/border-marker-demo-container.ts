@@ -18,7 +18,7 @@ import { BorderMarkerDemo } from './border-marker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class BorderMarkerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScMarker,
   ScMarkerContent,

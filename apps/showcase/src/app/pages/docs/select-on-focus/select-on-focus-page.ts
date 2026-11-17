@@ -126,7 +126,7 @@ import { SelectOnFocusUsageDemoContainer } from './demos/select-on-focus-usage-d
   encapsulation: ViewEncapsulation.None,
 })
 export default class SelectOnFocusPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       "import { ScSelectOnFocus } from '@semantic-components/ui';",
     ].join('\n'),
@@ -136,7 +136,7 @@ export default class SelectOnFocusPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScSelectOnFocus',
       selector: 'input[scSelectOnFocus]',

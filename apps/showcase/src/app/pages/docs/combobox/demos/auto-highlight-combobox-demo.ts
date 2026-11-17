@@ -70,7 +70,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class AutoHighlightComboboxDemo {
-  protected readonly frameworks = [
+  private readonly frameworks = [
     'Next.js',
     'SvelteKit',
     'Nuxt.js',
@@ -78,7 +78,7 @@ export class AutoHighlightComboboxDemo {
     'Astro',
   ];
 
-  protected matching(query: string): string[] {
+  private matching(query: string): string[] {
     return this.frameworks.filter((name) => scComboboxMatches(name, query));
   }
 }

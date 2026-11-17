@@ -18,7 +18,7 @@ import { SidesPopoverDemo } from './sides-popover-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidesPopoverDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScPopover,

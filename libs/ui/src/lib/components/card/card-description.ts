@@ -14,7 +14,7 @@ export class ScCardDescription {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.description, this.classInput()),
   );
 }

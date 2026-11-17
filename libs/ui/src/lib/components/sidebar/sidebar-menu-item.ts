@@ -12,7 +12,7 @@ import { cn } from 'cn';
 export class ScSidebarMenuItem {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('group/menu-item relative', this.classInput()),
   );
 }

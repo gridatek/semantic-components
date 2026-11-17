@@ -19,7 +19,7 @@ import { ScAudioPlayer } from './audio-player';
 export class ScAudioPlayerRate {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly player = inject(ScAudioPlayer);
+  private readonly player = inject(ScAudioPlayer);
 
   readonly rate = input.required<number>({
     alias: 'scAudioPlayerRate',
@@ -28,7 +28,7 @@ export class ScAudioPlayerRate {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('sm');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'aria-pressed:bg-accent aria-pressed:text-accent-foreground',

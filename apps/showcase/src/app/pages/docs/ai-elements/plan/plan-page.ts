@@ -81,7 +81,7 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
   encapsulation: ViewEncapsulation.None,
 })
 export default class PlanPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScTrace, ScTraceLine, ScTraceIcon, ScTraceTitle, ScTraceDescription,',

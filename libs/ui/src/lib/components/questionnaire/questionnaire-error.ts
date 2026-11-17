@@ -20,12 +20,12 @@ import { ScQuestionnaireItem } from './questionnaire-item';
 })
 export class ScQuestionnaireError {
   private readonly styles = injectPreset().questionnaire;
-  protected readonly item = inject(ScQuestionnaireItem);
+  private readonly item = inject(ScQuestionnaireItem);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-questionnaire-error-'));
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.error, this.classInput()),
   );
 

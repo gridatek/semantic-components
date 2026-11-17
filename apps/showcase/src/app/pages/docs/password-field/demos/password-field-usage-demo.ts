@@ -45,5 +45,5 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PasswordFieldUsageDemo {
-  readonly login = form(signal({ password: '' }));
+  private readonly login = form(signal({ password: '' }));
 }

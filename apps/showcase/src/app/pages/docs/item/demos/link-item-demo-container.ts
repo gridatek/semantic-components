@@ -18,7 +18,7 @@ import { LinkItemDemo } from './link-item-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinkItemDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScItem,
   ScItemActions,

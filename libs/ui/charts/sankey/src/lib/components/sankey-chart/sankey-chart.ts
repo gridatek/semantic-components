@@ -102,7 +102,7 @@ export class ScChartSankey implements ScChartSeriesLabels {
   /** The space between nodes in a column, in px. */
   readonly nodePadding = input(16);
 
-  protected readonly active = this.state.activeIndex;
+  private readonly active = this.state.activeIndex;
 
   private readonly sourceOf = (index: number) =>
     String(this.state.data()[index]?.[this.sourceKey()] ?? '');
@@ -146,7 +146,7 @@ export class ScChartSankey implements ScChartSeriesLabels {
     return this.mirrored() ? (x: number) => left + right - x : (x: number) => x;
   });
 
-  protected readonly flows = computed<ScSankeyChartFlow[]>(() => {
+  private readonly flows = computed<ScSankeyChartFlow[]>(() => {
     const across = this.across();
     // A node's middle: a flow starts and ends there, under it (the nodes are
     // drawn over the flows) — out from behind it, no square end beside its
@@ -177,7 +177,7 @@ export class ScChartSankey implements ScChartSeriesLabels {
       .sort((a, b) => a.index - b.index);
   });
 
-  protected readonly nodes = computed<ScSankeyChartNode[]>(() => {
+  private readonly nodes = computed<ScSankeyChartNode[]>(() => {
     const config = this.state.config();
     const { right } = this.state.area();
     const across = this.across();
@@ -205,7 +205,7 @@ export class ScChartSankey implements ScChartSeriesLabels {
     });
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({
@@ -231,7 +231,7 @@ export class ScChartSankey implements ScChartSeriesLabels {
     inject(DestroyRef).onDestroy(unregister);
   }
 
-  protected point(index: number): void {
+  private point(index: number): void {
     this.state.activeIndex.set(index);
   }
 

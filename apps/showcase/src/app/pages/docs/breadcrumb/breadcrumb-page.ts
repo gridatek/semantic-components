@@ -155,7 +155,7 @@ import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-d
   encapsulation: ViewEncapsulation.None,
 })
 export default class BreadcrumbPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: [
       'import {',
       '  ScBreadcrumb, ScBreadcrumbList, ScBreadcrumbItem, ScBreadcrumbLink,',
@@ -177,7 +177,7 @@ export default class BreadcrumbPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScBreadcrumb',
       selector: 'nav[scBreadcrumb]',

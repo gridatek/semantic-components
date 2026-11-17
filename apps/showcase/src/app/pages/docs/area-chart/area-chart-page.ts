@@ -123,7 +123,7 @@ import { StackedAreaChartDemoContainer } from './demos/stacked-area-chart-demo-c
   encapsulation: ViewEncapsulation.None,
 })
 export default class AreaChartPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScChart, ScChartPlot, ScChartCategoryAxis, ScChartCursor, ScChartGrid, ScChartValueAxis, ScChartArea, ScChartTooltip, ScChartTooltipIndicator, ScChartTooltipItem, ScChartTooltipName, ScChartTooltipPortal, ScChartTooltipProvider, ScChartTooltipValue, ScChartLegend, ScChartLegendIndicator, ScChartLegendItem } from '@semantic-components/ui/charts';",
     markup: [
@@ -156,7 +156,7 @@ export default class AreaChartPage {
     ].join('\n'),
   };
 
-  protected readonly inputs: ApiInput[] = [
+  private readonly inputs: ApiInput[] = [
     {
       name: 'key',
       type: 'string (required)',

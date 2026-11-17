@@ -37,11 +37,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTimeInputDemo {
-  readonly model = signal<{ alarm: Temporal.PlainTime | null }>({
+  private readonly model = signal<{ alarm: Temporal.PlainTime | null }>({
     alarm: null,
   });
-  readonly set = signal('');
-  readonly alarmForm = form(
+  private readonly set = signal('');
+  private readonly alarmForm = form(
     this.model,
     (s) => required(s.alarm, { message: 'Set a time.' }),
     {

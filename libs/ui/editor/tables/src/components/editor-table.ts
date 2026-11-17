@@ -50,9 +50,9 @@ export class ScEditorTable {
   /** Whether the selection is in a table. */
   readonly inTable = computed(() => this.editor.isActive('table'));
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
-  protected readonly disabled = computed(
+  private readonly disabled = computed(
     () => this.disabledInput() || !this.editor.editable(),
   );
 

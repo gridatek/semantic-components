@@ -10,7 +10,7 @@ import { cn } from 'cn';
 export class ScMultiselectItemIndicator {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('hidden [[aria-selected=true]>&]:block', this.classInput()),
   );
 }

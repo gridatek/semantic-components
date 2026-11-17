@@ -19,13 +19,13 @@ export class ScStepperSeparator {
   /** The step before this line (0-based); defaults to the enclosing step. */
   readonly step = input<number | undefined>(undefined);
 
-  protected readonly state = computed(() => {
+  private readonly state = computed(() => {
     const index = this.step() ?? this.stepperItem?.index();
     if (index === undefined || index < 0) return 'inactive';
     return this.stepper.isStepComplete(index) ? 'complete' : 'inactive';
   });
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const isVertical = this.stepper.orientation() === 'vertical';
     return cn(
       'transition-colors',

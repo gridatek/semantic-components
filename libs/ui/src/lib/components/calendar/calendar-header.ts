@@ -29,11 +29,11 @@ import { ScCalendarHeading } from './calendar-heading';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCalendarHeader {
-  protected readonly calendar = inject(ScCalendar);
+  private readonly calendar = inject(ScCalendar);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative flex h-(--cell-size) items-center justify-center',
       this.classInput(),

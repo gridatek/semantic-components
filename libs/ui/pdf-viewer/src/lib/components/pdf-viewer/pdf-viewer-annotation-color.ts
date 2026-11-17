@@ -22,7 +22,7 @@ import type { ScPdfEditorAnnotation } from './pdf-viewer-types';
 export class ScPdfViewerAnnotationColor {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly pdfViewer = inject(SC_PDF_VIEWER);
 
   readonly annotation = input.required<ScPdfEditorAnnotation>({
     alias: 'scPdfViewerAnnotationColor',
@@ -32,7 +32,7 @@ export class ScPdfViewerAnnotationColor {
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-xs');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       this.classInput(),

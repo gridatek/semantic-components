@@ -39,7 +39,7 @@ export class ScAccordion {
   /** The open items' values; `[(value)]`. */
   readonly value = model<readonly string[]>([]);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.root, this.classInput()),
   );
 

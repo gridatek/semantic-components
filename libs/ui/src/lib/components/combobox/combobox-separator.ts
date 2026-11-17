@@ -16,7 +16,7 @@ export class ScComboboxSeparator {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.separator, this.classInput()),
   );
 }

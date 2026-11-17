@@ -18,7 +18,7 @@ import { LanguagesCodeEditorDemo } from './languages-code-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LanguagesCodeEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
 import { ScCodeBlock } from '@semantic-components/ui/code-block';
 import { ScCodeEditor } from '@semantic-components/ui/code-editor';

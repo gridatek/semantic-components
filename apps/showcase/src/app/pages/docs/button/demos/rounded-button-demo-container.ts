@@ -18,7 +18,7 @@ import { RoundedButtonDemo } from './rounded-button-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RoundedButtonDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
 import { SiArrowUpIcon } from '@semantic-icons/lucide-icons';
 

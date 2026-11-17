@@ -65,6 +65,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCodeBlockDemo {
-  readonly source = `pnpm add @semantic-components/ui
+  private readonly source = `pnpm add @semantic-components/ui
 pnpm dlx semantic-components init`;
 }

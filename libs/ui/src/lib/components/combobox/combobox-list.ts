@@ -37,7 +37,7 @@ function sameItems<T>(a: readonly T[], b: readonly T[]): boolean {
 })
 export class ScComboboxList<T = unknown> {
   private readonly styles = injectPreset().combobox;
-  protected readonly root = inject<ScComboboxBase<T>>(ScComboboxBase);
+  private readonly root = inject<ScComboboxBase<T>>(ScComboboxBase);
   private readonly listbox = inject<Listbox<T>>(Listbox);
   private readonly widget = inject(ComboboxWidget);
 
@@ -45,7 +45,7 @@ export class ScComboboxList<T = unknown> {
   /** Hides its scrollbar (shadcn's look): nothing then shows that it scrolls. */
   readonly hideScrollbar = input(false, { transform: booleanAttribute });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.styles.list,
       this.hideScrollbar() ? 'no-scrollbar' : '[scrollbar-width:thin]',

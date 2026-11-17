@@ -28,5 +28,5 @@ import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxGroupUsageDemo {
-  protected readonly apples = signal(['fuji-apple']);
+  private readonly apples = signal(['fuji-apple']);
 }

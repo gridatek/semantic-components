@@ -1562,14 +1562,16 @@ export default class ShadcnPage {
     style: 'narrow',
   });
 
-  readonly basicDialogOpen = signal(false);
-  readonly confirmDialogOpen = signal(false);
-  readonly formDialogOpen = signal(false);
-  readonly selectedDate = signal<Temporal.PlainDate | null>(null);
+  private readonly basicDialogOpen = signal(false);
+  private readonly confirmDialogOpen = signal(false);
+  private readonly formDialogOpen = signal(false);
+  private readonly selectedDate = signal<Temporal.PlainDate | null>(null);
 
-  readonly userGrowthData = [15, 22, 28, 35, 40, 48, 55, 60, 68, 75, 85, 100];
+  private readonly userGrowthData = [
+    15, 22, 28, 35, 40, 48, 55, 60, 68, 75, 85, 100,
+  ];
 
-  readonly signupsByDay = [
+  private readonly signupsByDay = [
     { label: this.weekday(0), value: 65 },
     { label: this.weekday(1), value: 80 },
     { label: this.weekday(2), value: 72 },
@@ -1579,7 +1581,7 @@ export default class ShadcnPage {
     { label: this.weekday(6), value: 35 },
   ];
 
-  readonly recentActivity = [
+  private readonly recentActivity = [
     {
       initials: 'AL',
       name: 'Alice Lee',
@@ -1618,7 +1620,7 @@ export default class ShadcnPage {
     },
   ];
 
-  readonly popularTracks = [
+  private readonly popularTracks = [
     {
       title: 'Los Angeles',
       album: 'Monsters',
@@ -1658,7 +1660,7 @@ export default class ShadcnPage {
     },
   ];
 
-  readonly discography = [
+  private readonly discography = [
     {
       title: 'Monsters',
       year: '2022',
@@ -1691,7 +1693,7 @@ export default class ShadcnPage {
     },
   ];
 
-  readonly menuStarters = [
+  private readonly menuStarters = [
     {
       emoji: '🧀',
       name: 'Burrata & Heirloom Tomatoes',
@@ -1730,7 +1732,7 @@ export default class ShadcnPage {
     },
   ];
 
-  readonly spendingBreakdown = [
+  private readonly spendingBreakdown = [
     {
       name: $localize`:@@shadcn.category.housing:Housing`,
       amount: '1,225',
@@ -1758,7 +1760,7 @@ export default class ShadcnPage {
     },
   ];
 
-  readonly budgetItems = [
+  private readonly budgetItems = [
     {
       name: $localize`:@@shadcn.category.dining:Food & Dining`,
       spent: 770,
@@ -1789,7 +1791,7 @@ export default class ShadcnPage {
     },
   ];
 
-  readonly recentTransactions = [
+  private readonly recentTransactions = [
     {
       icon: '🛒',
       name: 'Whole Foods',
@@ -1840,7 +1842,7 @@ export default class ShadcnPage {
     },
   ];
 
-  readonly incomeExpenseData = [
+  private readonly incomeExpenseData = [
     { label: this.month(1), income: 140, expense: 100 },
     { label: this.month(2), income: 135, expense: 95 },
     { label: this.month(3), income: 150, expense: 110 },
@@ -1850,7 +1852,7 @@ export default class ShadcnPage {
   ];
 
   /** A weekday's short name, Monday first. */
-  weekday(index: number): string {
+  private weekday(index: number): string {
     return Temporal.PlainDate.from({
       year: 2026,
       month: 1,
@@ -1859,7 +1861,7 @@ export default class ShadcnPage {
   }
 
   /** A month's short name. */
-  month(month: number): string {
+  private month(month: number): string {
     return Temporal.PlainDate.from({
       year: 2026,
       month,

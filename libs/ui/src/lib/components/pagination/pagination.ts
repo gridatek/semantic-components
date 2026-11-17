@@ -40,7 +40,7 @@ export class ScPagination {
   /** A page or its size changed by the user: to load that page. */
   readonly change = output<ScPaginationChange>();
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('mx-auto flex w-full justify-center', this.classInput()),
   );
 

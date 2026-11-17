@@ -38,5 +38,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DigitsOnlyOtpFieldDemo {
-  protected readonly otpForm = form(signal({ code: '' }));
+  private readonly otpForm = form(signal({ code: '' }));
 }

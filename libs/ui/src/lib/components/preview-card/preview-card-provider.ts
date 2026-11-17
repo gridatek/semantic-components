@@ -84,17 +84,17 @@ export class ScPreviewCardProvider {
     alias: 'origin',
   });
 
-  protected readonly trigger = contentChild(ScPreviewCardTrigger);
-  protected readonly portal = contentChild.required(ScPreviewCardPortal);
+  private readonly trigger = contentChild(ScPreviewCardTrigger);
+  private readonly portal = contentChild.required(ScPreviewCardPortal);
 
-  readonly origin = computed(
+  private readonly origin = computed(
     () => this.originInput() ?? this.trigger()?.overlayOrigin,
   );
 
   /** Opening and closing after the trigger's delays. */
   readonly timing = new ScOpenDelay(this.open);
 
-  protected readonly positions = computed(() =>
+  private readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
       physicalSide(this.side(), this.direction.valueSignal()),
       this.alignment(),
@@ -111,7 +111,7 @@ export class ScPreviewCardProvider {
       this.placed() ?? physicalSide(this.side(), this.direction.valueSignal()),
   );
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly class = computed(() => cn('contents', this.classInput()));
 
   /** The pointer is on the card: it stays. */
   keepOpen(): void {
@@ -128,18 +128,18 @@ export class ScPreviewCardProvider {
     if (this.open()) this.open.set(false);
   }
 
-  protected onOutsideClick(event: MouseEvent): void {
+  private onOutsideClick(event: MouseEvent): void {
     const origin = this.origin()?.elementRef.nativeElement as
       HTMLElement | undefined;
     if (origin?.contains(event.target as Node)) return;
     this.hide();
   }
 
-  protected onKeydown(event: KeyboardEvent): void {
+  private onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Escape') this.hide();
   }
 
-  protected onPositionChange(change: ConnectedOverlayPositionChange): void {
+  private onPositionChange(change: ConnectedOverlayPositionChange): void {
     this.placed.set(placedSide(change, this.direction.valueSignal()));
   }
 }

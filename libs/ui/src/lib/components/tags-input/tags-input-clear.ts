@@ -19,13 +19,13 @@ import { ScTagsInput } from './tags-input';
 export class ScTagsInputClear {
   private readonly buttonStyles = injectPreset().button;
 
-  protected readonly tags = inject(ScTagsInput);
+  private readonly tags = inject(ScTagsInput);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
   readonly size = input<ScButtonVariants['size']>('icon-xs');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       'text-muted-foreground ms-auto',

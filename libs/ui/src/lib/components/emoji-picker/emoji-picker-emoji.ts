@@ -29,14 +29,14 @@ import type { ScEmojiListEmoji as Emoji } from './emoji-picker-types';
   },
 })
 export class ScEmojiPickerEmoji {
-  protected readonly state = inject(ScEmojiPickerState);
+  private readonly state = inject(ScEmojiPickerState);
 
   readonly emoji = input.required<Emoji>({ alias: 'scEmojiPickerEmoji' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly font = SC_EMOJI_FONT_FAMILY;
+  private readonly font = SC_EMOJI_FONT_FAMILY;
 
-  protected readonly active = computed(() => {
+  private readonly active = computed(() => {
     const active = this.state.activeEmoji();
     const emoji = this.emoji();
     return (
@@ -46,19 +46,19 @@ export class ScEmojiPickerEmoji {
     );
   });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'data-active:bg-accent flex size-7 items-center justify-center rounded-sm text-base',
       this.classInput(),
     ),
   );
 
-  protected select(): void {
+  private select(): void {
     const { emoji, label } = this.emoji();
     this.state.onSelect({ emoji, label });
   }
 
-  protected hover(): void {
+  private hover(): void {
     const { columnIndex, rowIndex } = this.emoji();
     this.state.setActive('pointer', columnIndex, rowIndex);
   }

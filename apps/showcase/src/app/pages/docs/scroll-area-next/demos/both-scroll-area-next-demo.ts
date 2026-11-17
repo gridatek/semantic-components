@@ -50,5 +50,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BothScrollAreaNextDemo {
-  protected readonly cells = Array.from({ length: 100 }, (_, i) => i + 1);
+  private readonly cells = Array.from({ length: 100 }, (_, i) => i + 1);
 }

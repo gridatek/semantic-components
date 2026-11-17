@@ -67,9 +67,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormCalendarDemo {
-  readonly model = signal<{ day: ScCalendarValue }>({ day: null });
-  readonly booked = signal('');
-  readonly bookingForm = form(
+  private readonly model = signal<{ day: ScCalendarValue }>({ day: null });
+  private readonly booked = signal('');
+  private readonly bookingForm = form(
     this.model,
     (s) => required(s.day, { message: 'Pick a day.' }),
     {
@@ -84,12 +84,12 @@ export class FormCalendarDemo {
   );
   private readonly long = (date: Temporal.PlainDate) =>
     date.toLocaleString('en-US', { dateStyle: 'long' });
-  readonly previousLabel = {
+  private readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',

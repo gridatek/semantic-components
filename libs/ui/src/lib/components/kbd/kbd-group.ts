@@ -11,7 +11,7 @@ import { cn } from 'cn';
 export class ScKbdGroup {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('gap-1 inline-flex items-center', this.classInput()),
   );
 }

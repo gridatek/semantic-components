@@ -18,7 +18,7 @@ import { LinksCommandDemo } from './links-command-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinksCommandDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScCommand,

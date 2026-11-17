@@ -18,7 +18,7 @@ import { ConfirmationUsageDemo } from './confirmation-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ConfirmationUsageDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   Component,
   DestroyRef,
   ViewEncapsulation,

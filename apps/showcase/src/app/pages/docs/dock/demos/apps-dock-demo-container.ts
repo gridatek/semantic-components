@@ -18,7 +18,7 @@ import { AppsDockDemo } from './apps-dock-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppsDockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScDock,
   ScDockBadge,

@@ -17,7 +17,7 @@ export class ScItemMedia {
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScItemMediaVariant>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.media({ variant: this.variant() }), this.classInput()),
   );
 }

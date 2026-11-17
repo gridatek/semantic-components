@@ -122,9 +122,9 @@ export class ScGanttBar implements ScGanttBarRef {
   /** A new progress, proposed. */
   readonly progressChange = output<number>();
 
-  protected readonly drag = signal<ScGanttDrag | null>(null);
+  private readonly drag = signal<ScGanttDrag | null>(null);
 
-  protected readonly kind = computed(() =>
+  private readonly kind = computed(() =>
     this.dataTableRow?.row()?.getCanExpand?.()
       ? 'summary'
       : this.milestone()
@@ -132,7 +132,7 @@ export class ScGanttBar implements ScGanttBarRef {
         : 'task',
   );
 
-  protected readonly editable = computed(
+  private readonly editable = computed(
     () => !this.gantt.readonly() && this.kind() !== 'summary',
   );
 
@@ -144,7 +144,7 @@ export class ScGanttBar implements ScGanttBarRef {
       ? this.shownStart()
       : this.end().add({ days: this.drag()?.endDays ?? 0 }),
   );
-  protected readonly shownProgress = computed(
+  private readonly shownProgress = computed(
     () => this.drag()?.progress ?? this.progress() ?? 0,
   );
 
@@ -156,7 +156,7 @@ export class ScGanttBar implements ScGanttBarRef {
   );
 
   /** Its dates and progress, read out with its row. */
-  protected readonly text = computed(() => {
+  private readonly text = computed(() => {
     const progress = this.progress();
     const range = this.gantt.rangeText(
       this.start(),
@@ -171,7 +171,7 @@ export class ScGanttBar implements ScGanttBarRef {
     return this.element.closest('tr');
   }
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/gantt-bar absolute top-1/2 flex -translate-y-1/2 items-center text-xs select-none touch-none',
       this.editable() && 'cursor-grab data-dragging:cursor-grabbing',
@@ -185,7 +185,7 @@ export class ScGanttBar implements ScGanttBarRef {
     ),
   );
 
-  protected readonly labelClass = computed(() =>
+  private readonly labelClass = computed(() =>
     cn(
       'relative truncate',
       // A summary's and a milestone's label follow them.
@@ -215,7 +215,7 @@ export class ScGanttBar implements ScGanttBarRef {
       this.proposeDates(start, end.add({ days: amount }));
   }
 
-  protected onPointerdown(event: PointerEvent): void {
+  private onPointerdown(event: PointerEvent): void {
     if (!this.editable() || event.button !== 0) return;
     const handle = (event.target as HTMLElement)
       .closest<HTMLElement>('[data-handle]')
@@ -231,7 +231,7 @@ export class ScGanttBar implements ScGanttBarRef {
     });
   }
 
-  protected onPointermove(event: PointerEvent): void {
+  private onPointermove(event: PointerEvent): void {
     const drag = this.drag();
     if (!drag) return;
     const dx = (event.clientX - drag.originX) * (drag.rtl ? -1 : 1);
@@ -263,7 +263,7 @@ export class ScGanttBar implements ScGanttBarRef {
     }
   }
 
-  protected onPointerup(): void {
+  private onPointerup(): void {
     const drag = this.drag();
     if (!drag) return;
     this.drag.set(null);

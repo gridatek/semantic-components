@@ -18,7 +18,7 @@ import { VerticalSliderDemo } from './vertical-slider-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalSliderDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScSlider } from '@semantic-components/ui';
 
 /** orientation="vertical": the value grows upward; the arrows still move it. */

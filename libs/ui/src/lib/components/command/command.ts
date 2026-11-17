@@ -103,7 +103,7 @@ export class ScCommand {
     this.injector,
   ).skipPredicate((item) => !item.shown() || item.disabled);
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(this.styles.root, this.classInput()),
   );
 

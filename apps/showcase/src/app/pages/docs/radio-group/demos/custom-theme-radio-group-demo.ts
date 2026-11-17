@@ -26,6 +26,6 @@ import { ScField, ScRadio, ScRadioGroup } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomThemeRadioGroupDemo {
-  readonly formModel = signal({ selected: 'option1' });
-  readonly themeForm = form(this.formModel);
+  private readonly formModel = signal({ selected: 'option1' });
+  private readonly themeForm = form(this.formModel);
 }

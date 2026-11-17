@@ -18,7 +18,7 @@ import { SeparatorMarkerDemo } from './separator-marker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SeparatorMarkerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScMarker, ScMarkerContent } from '@semantic-components/ui';
 
 /** A labeled divider — a date, a section — in a conversation. No role="separator": its label would be lost. */

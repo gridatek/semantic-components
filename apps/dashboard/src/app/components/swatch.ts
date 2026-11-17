@@ -20,7 +20,7 @@ export class Swatch {
   readonly color = input.required<string>({ alias: 'appSwatch' });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'ring-offset-background size-7 shrink-0 cursor-pointer appearance-none rounded-full border transition-shadow outline-none',
       'checked:ring-ring checked:ring-2 checked:ring-offset-2',

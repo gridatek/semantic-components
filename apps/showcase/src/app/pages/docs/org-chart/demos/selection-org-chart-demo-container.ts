@@ -18,7 +18,7 @@ import { SelectionOrgChartDemo } from './selection-org-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectionOrgChartDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScOrgChart,
   ScOrgChartCard,

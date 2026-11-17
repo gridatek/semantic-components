@@ -685,13 +685,13 @@ export class IconsPage {
     icons: $localize`Icons`,
   };
 
-  protected readonly query = signal('');
-  protected readonly total = NAMES.length;
-  protected readonly shown = computed(
+  private readonly query = signal('');
+  private readonly total = NAMES.length;
+  private readonly shown = computed(
     () => NAMES.filter((name) => this.matches(name)).length,
   );
 
-  protected matches(name: string): boolean {
+  private matches(name: string): boolean {
     return name.includes(this.query().trim().toLowerCase());
   }
 }

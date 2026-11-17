@@ -43,13 +43,13 @@ import { ScAudioPlayer } from './audio-player';
   },
 })
 export class ScAudioPlayerMedia {
-  protected readonly player = inject(ScAudioPlayer);
+  private readonly player = inject(ScAudioPlayer);
   private readonly element =
     inject<ElementRef<HTMLAudioElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('hidden', this.classInput()));
+  private readonly class = computed(() => cn('hidden', this.classInput()));
 
   private readonly injector = inject(Injector);
   private readonly window = inject(DOCUMENT).defaultView;
@@ -74,7 +74,7 @@ export class ScAudioPlayerMedia {
     });
   }
 
-  protected onEnded(): void {
+  private onEnded(): void {
     this.sync();
     this.player.ɵended(this.element);
   }
@@ -86,7 +86,7 @@ export class ScAudioPlayerMedia {
    * but not after every render: a read changes the time, which renders,
    * which would read again in the same pass (NG0103).
    */
-  protected sync(): void {
+  private sync(): void {
     if (this.pending) return;
     this.pending = afterNextRender(
       () => {

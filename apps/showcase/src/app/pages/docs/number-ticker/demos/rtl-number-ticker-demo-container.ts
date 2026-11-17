@@ -19,7 +19,7 @@ import { RtlNumberTickerDemo } from './rtl-number-ticker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlNumberTickerDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScNumberTicker } from '@semantic-components/ui';
 

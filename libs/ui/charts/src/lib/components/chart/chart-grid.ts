@@ -46,7 +46,7 @@ import { ScChartState } from './chart-state';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScChartGrid {
-  protected readonly state = inject(ScChartState);
+  private readonly state = inject(ScChartState);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly horizontal = input(true, { transform: booleanAttribute });
@@ -68,16 +68,16 @@ export class ScChartGrid {
   });
 
   /** The horizontal lines: at the values — at the categories, laid out vertically. */
-  protected readonly rows = computed(() =>
+  private readonly rows = computed(() =>
     this.state.vertical() ? this.categoryLines() : this.valueLines(),
   );
 
   /** The vertical lines: at the categories — at the values, laid out vertically. */
-  protected readonly columns = computed(() =>
+  private readonly columns = computed(() =>
     this.state.vertical() ? this.valueLines() : this.categoryLines(),
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('stroke-border/50', this.classInput()),
   );
 }

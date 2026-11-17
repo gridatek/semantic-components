@@ -18,7 +18,7 @@ import { LocaleTimePickerDemo } from './locale-time-picker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleTimePickerDemoContainer {
-  readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+  private readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,

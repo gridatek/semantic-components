@@ -18,7 +18,7 @@ import { StackedRadialChartDemo } from './stacked-radial-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StackedRadialChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScNumberTicker } from '@semantic-components/ui';
 import {

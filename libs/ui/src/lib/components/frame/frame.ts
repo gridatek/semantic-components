@@ -23,7 +23,7 @@ export class ScFrame {
   /** `sm`: a small box's frame (a row, an icon's box); `xs`: a tiny box's corners (a meter's track and fill). */
   readonly size = input<'default' | 'sm' | 'xs'>('default');
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       {
         default: this.preset.frame,

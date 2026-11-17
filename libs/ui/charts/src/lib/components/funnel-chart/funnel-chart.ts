@@ -141,7 +141,7 @@ export class ScChartFunnel implements ScChartSeriesLabels {
     this.isAnimationActive() ? this.entrance() : 1,
   );
 
-  protected readonly active = this.state.activeIndex;
+  private readonly active = this.state.activeIndex;
 
   /** Its stages where they belong now: their center, half widths and half height. */
   private readonly targets = computed(() => {
@@ -200,7 +200,7 @@ export class ScChartFunnel implements ScChartSeriesLabels {
       }),
   });
 
-  protected readonly stages = computed<ScFunnelChartStage[]>(() => {
+  private readonly stages = computed<ScFunnelChartStage[]>(() => {
     const categories = this.state.categories();
     // Growing in: each stage out of its own center, its widths and height.
     const grown = this.grown();
@@ -233,7 +233,7 @@ export class ScChartFunnel implements ScChartSeriesLabels {
     });
   });
 
-  protected readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const unregister = this.state.register({
@@ -257,7 +257,7 @@ export class ScChartFunnel implements ScChartSeriesLabels {
     inject(DestroyRef).onDestroy(unregister);
   }
 
-  protected point(index: number): void {
+  private point(index: number): void {
     this.state.activeIndex.set(index);
   }
 

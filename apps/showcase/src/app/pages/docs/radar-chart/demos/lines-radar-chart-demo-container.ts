@@ -18,7 +18,7 @@ import { LinesRadarChartDemo } from './lines-radar-chart-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinesRadarChartDemoContainer {
-  readonly code = `import { DecimalPipe } from '@angular/common';
+  private readonly code = `import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScChart,

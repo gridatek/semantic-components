@@ -147,12 +147,12 @@ import { TextareaUsageDemoContainer } from './demos/textarea-usage-demo-containe
   encapsulation: ViewEncapsulation.None,
 })
 export default class TextareaPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports: "import { ScTextarea } from '@semantic-components/ui';",
     markup: '<textarea scTextarea [formField]="…"></textarea>',
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScTextarea',
       selector: 'textarea[scTextarea]',

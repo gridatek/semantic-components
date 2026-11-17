@@ -28,7 +28,7 @@ import { ScDock } from './dock';
   },
 })
 export class ScDockItem {
-  protected readonly dock = inject(ScDock);
+  private readonly dock = inject(ScDock);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -37,11 +37,11 @@ export class ScDockItem {
   /** Its centre along the dock, at rest. */
   private readonly center = signal<number | null>(null);
 
-  protected readonly size = computed(
+  private readonly size = computed(
     () => `calc(var(--dock-item) * ${this.dock.ɵscale(this.center())})`,
   );
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'group/dock-item bg-muted/60 hover:bg-muted relative grid shrink-0 place-items-center rounded-xl outline-none',
       'transition-[width,height,background-color] duration-150 ease-out motion-reduce:transition-none',
@@ -66,11 +66,11 @@ export class ScDockItem {
     );
   }
 
-  protected onBlur(): void {
+  private onBlur(): void {
     this.dock.ɵfocusAt.set(null);
   }
 
-  protected onFocus(): void {
+  private onFocus(): void {
     // From the keyboard only: a click is the pointer's.
     if (!this.element.matches(':focus-visible')) return;
     // Measured once at rest: moving on from a grown item, the places hold.

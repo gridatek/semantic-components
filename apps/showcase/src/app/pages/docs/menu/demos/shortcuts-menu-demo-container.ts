@@ -18,7 +18,7 @@ import { ShortcutsMenuDemo } from './shortcuts-menu-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShortcutsMenuDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScMenu,

@@ -16,7 +16,7 @@ import { ScButton, ScToaster } from '@semantic-components/ui';
 export class StackedToastDemo {
   private readonly toaster = inject(ScToaster);
 
-  showThree(): void {
+  private showThree(): void {
     for (const n of [1, 2, 3]) {
       this.toaster.show({
         title: `Toast ${n}`,

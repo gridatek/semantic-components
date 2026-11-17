@@ -18,7 +18,7 @@ import { ApiCarouselDemo } from './api-carousel-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ApiCarouselDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   ScCarousel,

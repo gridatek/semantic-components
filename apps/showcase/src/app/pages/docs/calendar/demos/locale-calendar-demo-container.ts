@@ -18,7 +18,7 @@ import { LocaleCalendarDemo } from './locale-calendar-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleCalendarDemoContainer {
-  readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,

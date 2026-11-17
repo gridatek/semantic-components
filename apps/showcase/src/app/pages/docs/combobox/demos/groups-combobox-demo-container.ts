@@ -18,7 +18,7 @@ import { GroupsComboboxDemo } from './groups-combobox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupsComboboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCombobox,
   ScComboboxEmpty,

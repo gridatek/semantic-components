@@ -18,7 +18,7 @@ import { FileTreeCollapsibleDemo } from './file-tree-collapsible-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FileTreeCollapsibleDemoContainer {
-  readonly code = `import { NgTemplateOutlet } from '@angular/common';
+  private readonly code = `import { NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,

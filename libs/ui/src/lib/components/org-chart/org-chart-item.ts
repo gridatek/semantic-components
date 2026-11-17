@@ -62,13 +62,13 @@ export class ScOrgChartItem {
   });
   readonly hasReports = computed(() => !!this.reports());
   readonly expanded = computed(() => this.treeItem.expanded());
-  protected readonly state = computed(() =>
+  private readonly state = computed(() =>
     this.hasReports() ? (this.expanded() ? 'open' : 'closed') : null,
   );
 
   private readonly cardText = signal('');
 
-  protected readonly class = computed(() => {
+  private readonly class = computed(() => {
     const down = this.chart.direction() === 'down';
     return cn(
       'relative flex outline-none',

@@ -18,7 +18,7 @@ import { ReactionsBubbleDemo } from './reactions-bubble-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ReactionsBubbleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

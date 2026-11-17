@@ -28,7 +28,7 @@ import { cn } from 'cn';
 export class ScBarcodeScannerFinder {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-[15%] text-white/90',
       this.classInput(),

@@ -63,5 +63,5 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioGroupMenuDemo {
-  protected readonly position = signal('bottom');
+  private readonly position = signal('bottom');
 }

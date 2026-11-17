@@ -167,10 +167,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewTransferFunds {
-  protected readonly transfer = form(
+  private readonly transfer = form(
     signal({ amount: '1,200.00', from: 'checking', to: 'savings' }),
   );
-  protected readonly selects = [
+  private readonly selects = [
     {
       key: 'from',
       label: 'From Account',

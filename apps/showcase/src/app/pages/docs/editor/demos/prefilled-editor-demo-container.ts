@@ -18,7 +18,7 @@ import { PrefilledEditorDemo } from './prefilled-editor-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class PrefilledEditorDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
   ScFrame,

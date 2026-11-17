@@ -18,7 +18,7 @@ import { LimitsTimeClockDemo } from './limits-time-clock-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LimitsTimeClockDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScTimeClock,
   ScTimeClockDial,

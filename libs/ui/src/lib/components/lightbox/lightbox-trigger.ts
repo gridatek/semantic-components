@@ -30,7 +30,7 @@ export class ScLightboxTrigger {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'block cursor-zoom-in overflow-hidden rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
       this.classInput(),
@@ -52,7 +52,7 @@ export class ScLightboxTrigger {
     });
   }
 
-  protected onClick(event: MouseEvent): void {
+  private onClick(event: MouseEvent): void {
     // A new tab, a download: the link's.
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) {
       return;

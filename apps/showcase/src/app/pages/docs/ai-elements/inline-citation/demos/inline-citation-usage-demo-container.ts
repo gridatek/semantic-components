@@ -18,7 +18,7 @@ import { InlineCitationUsageDemo } from './inline-citation-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class InlineCitationUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
   ScLink,
   ScPreviewCard,

@@ -56,7 +56,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizeCardDemo {
-  protected readonly items = [
+  private readonly items = [
     'Choose a schedule (daily, or weekly).',
     'Send to channels or specific teammates.',
     'Include charts, tables, and key metrics.',

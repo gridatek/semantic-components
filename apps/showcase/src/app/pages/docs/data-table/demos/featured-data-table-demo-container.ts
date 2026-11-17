@@ -14,7 +14,7 @@ import { FeaturedDataTableDemo } from './featured-data-table-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FeaturedDataTableDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   columnFilteringFeature,
   columnVisibilityFeature,
   createColumnHelper,

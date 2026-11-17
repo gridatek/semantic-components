@@ -10,5 +10,5 @@ import { cn } from 'cn';
 export class ScNativeDialogBody {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  protected readonly class = computed(() => cn('py-4', this.classInput()));
+  private readonly class = computed(() => cn('py-4', this.classInput()));
 }

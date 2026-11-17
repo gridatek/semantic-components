@@ -34,18 +34,18 @@ import { ScDialogProvider } from './dialog-provider';
 })
 export class ScDialog {
   private readonly styles = injectPreset().dialog;
-  readonly dialogProvider = inject(ScDialogProvider);
+  private readonly dialogProvider = inject(ScDialogProvider);
   // Created as it opens: its provider's direction and language then.
-  protected readonly direction = this.dialogProvider.direction();
-  protected readonly lang = this.dialogProvider.lang();
+  private readonly direction = this.dialogProvider.direction();
+  private readonly lang = this.dialogProvider.lang();
   readonly classInput = input<string>('', { alias: 'class' });
 
-  readonly dialogId = inject(_IdGenerator).getId('sc-dialog-');
+  private readonly dialogId = inject(_IdGenerator).getId('sc-dialog-');
 
   readonly titleId = `${this.dialogId}-title`;
   readonly descriptionId = `${this.dialogId}-description`;
 
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn(
       'relative mx-auto',
       this.styles.content,

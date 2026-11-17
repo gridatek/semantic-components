@@ -137,7 +137,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
   encapsulation: ViewEncapsulation.None,
 })
 export default class CheckboxGroupPage {
-  protected readonly anatomy = {
+  private readonly anatomy = {
     imports:
       "import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';",
     markup: [
@@ -148,7 +148,7 @@ export default class CheckboxGroupPage {
     ].join('\n'),
   };
 
-  protected readonly parts = [
+  private readonly parts = [
     {
       name: 'ScCheckboxGroup',
       selector: 'div[scCheckboxGroup]',

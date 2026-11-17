@@ -81,13 +81,13 @@ export class ScMenuProvider implements ScMenuContext {
     this.host.closest('[lang]')?.getAttribute('lang') ?? null;
 
   private readonly triggerChild = contentChild(ScMenuTrigger);
-  protected readonly menuPortal = contentChild.required(ScMenuPortal);
+  private readonly menuPortal = contentChild.required(ScMenuPortal);
 
-  readonly origin = computed(
+  private readonly origin = computed(
     () => this.originInput() ?? this.triggerChild()?.overlayOrigin,
   );
 
-  protected readonly positions = computed(() =>
+  private readonly positions = computed(() =>
     buildOverlayPositionsWithFallback(
       this.side(),
       this.alignment(),
@@ -97,11 +97,11 @@ export class ScMenuProvider implements ScMenuContext {
     ),
   );
 
-  protected readonly expanded = computed(
+  private readonly expanded = computed(
     () => this.triggerChild()?.trigger.expanded() ?? false,
   );
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly class = computed(() => cn('contents', this.classInput()));
 
   private readonly overlay = viewChild(CdkConnectedOverlay);
 

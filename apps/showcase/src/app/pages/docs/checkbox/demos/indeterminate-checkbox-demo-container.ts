@@ -18,7 +18,7 @@ import { IndeterminateCheckboxDemo } from './indeterminate-checkbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class IndeterminateCheckboxDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { ScCheckbox, ScField, ScFieldGroup } from '@semantic-components/ui';
 
 /** A "select all" over a few items: a minus when only some are checked. */

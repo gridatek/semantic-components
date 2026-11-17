@@ -110,29 +110,29 @@ export class ScSpotlight {
 
   readonly ɵtitleId = signal<string | null>(null);
   readonly ɵdescriptionId = signal<string | null>(null);
-  protected readonly titleId = this.ɵtitleId.asReadonly();
-  protected readonly descriptionId = this.ɵdescriptionId.asReadonly();
+  private readonly titleId = this.ɵtitleId.asReadonly();
+  private readonly descriptionId = this.ɵdescriptionId.asReadonly();
 
   private readonly dialog =
     viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
   private readonly cardElement =
     viewChild.required<ElementRef<HTMLElement>>('card');
 
-  protected readonly lit = signal<ScPlacementBox>({
+  private readonly lit = signal<ScPlacementBox>({
     top: 0,
     left: 0,
     width: 0,
     height: 0,
   });
-  protected readonly cardAt = signal({ top: 0, left: 0 });
-  protected readonly placed = signal<ScOverlaySide | 'center'>('center');
+  private readonly cardAt = signal({ top: 0, left: 0 });
+  private readonly placed = signal<ScOverlaySide | 'center'>('center');
   private readonly viewport = signal({ width: 0, height: 0 });
 
   /** Placed once since opening: from then on, its moves are animated. */
-  protected readonly settled = signal(false);
+  private readonly settled = signal(false);
 
   /** The dim around the cutout, in four strips: above, below, either side. */
-  protected readonly strips = computed(() => {
+  private readonly strips = computed(() => {
     const { top, left, width, height } = this.lit();
     const view = this.viewport();
     return [
@@ -153,15 +153,15 @@ export class ScSpotlight {
     ];
   });
 
-  protected readonly class = computed(() => cn('contents', this.classInput()));
-  protected readonly dialogClass = computed(() =>
+  private readonly class = computed(() => cn('contents', this.classInput()));
+  private readonly dialogClass = computed(() =>
     cn(
       'fixed inset-0 z-50 m-0 size-full max-h-none max-w-none overflow-visible bg-transparent p-0 backdrop:bg-transparent',
       // Interactive: clicks pass through, but where something catches them.
       this.interactive() && 'pointer-events-none',
     ),
   );
-  protected readonly dimClass = computed(() =>
+  private readonly dimClass = computed(() =>
     cn(
       'pointer-events-none fixed rounded-lg shadow-[0_0_0_200vmax_rgb(0_0_0/0.5)]',
       this.settled() &&
@@ -169,7 +169,7 @@ export class ScSpotlight {
       this.dimClassInput(),
     ),
   );
-  protected readonly cardClass = computed(() =>
+  private readonly cardClass = computed(() =>
     cn(
       'bg-popover text-popover-foreground pointer-events-auto fixed w-80 max-w-[calc(100vw-1rem)] space-y-3 rounded-lg border p-4 shadow-lg outline-none',
       this.settled() &&
@@ -238,13 +238,13 @@ export class ScSpotlight {
     this.open.set(false);
   }
 
-  protected onCancel(event: Event): void {
+  private onCancel(event: Event): void {
     event.preventDefault();
     this.close();
   }
 
   /** Modal: a click on the dim (the dialog itself, not its card) closes. */
-  protected onDialogClick(event: MouseEvent): void {
+  private onDialogClick(event: MouseEvent): void {
     if (event.target === this.dialog().nativeElement) this.close();
   }
 

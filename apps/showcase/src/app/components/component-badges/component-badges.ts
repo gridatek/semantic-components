@@ -28,13 +28,13 @@ export class ComponentBadges {
   private readonly componentsService = inject(ComponentsService);
 
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('flex flex-wrap items-center gap-2', this.classInput()),
   );
 
   readonly path = input.required<string>();
 
-  readonly componentItem = computed(() =>
+  private readonly componentItem = computed(() =>
     this.componentsService.components().find((c) => c.path === this.path()),
   );
 }

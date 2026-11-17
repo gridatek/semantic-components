@@ -148,13 +148,13 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewPayoutThreshold {
-  protected readonly currencies = [
+  private readonly currencies = [
     { label: 'USD — United States Dollar', value: 'usd' },
     { label: 'EUR — Euro', value: 'eur' },
     { label: 'GBP — British Pound', value: 'gbp' },
     { label: 'JPY — Japanese Yen', value: 'jpy' },
   ];
-  protected readonly payout = form(
+  private readonly payout = form(
     signal({ currency: 'usd', amount: 2500, notes: '' }),
     (path) => {
       min(path.amount, 50);

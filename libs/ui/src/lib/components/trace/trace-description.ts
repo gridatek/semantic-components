@@ -13,7 +13,7 @@ export class ScTraceDescription {
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Not shadcn's /70: muted-foreground itself, for 4.5:1.
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('text-muted-foreground shrink-0 tabular-nums', this.classInput()),
   );
 }

@@ -18,7 +18,7 @@ import { TooltipBubbleDemo } from './tooltip-bubble-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TooltipBubbleDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScBubble,
   ScBubbleContent,

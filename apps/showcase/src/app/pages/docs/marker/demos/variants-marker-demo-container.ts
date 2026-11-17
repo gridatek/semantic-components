@@ -18,7 +18,7 @@ import { VariantsMarkerDemo } from './variants-marker-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class VariantsMarkerDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScMarker, ScMarkerContent } from '@semantic-components/ui';
 
 /** variant: default (inline notes), separator (a label between lines), border (a row with a line under it). */

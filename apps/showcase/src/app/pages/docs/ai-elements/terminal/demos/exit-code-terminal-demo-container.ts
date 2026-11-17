@@ -18,7 +18,7 @@ import { ExitCodeTerminalDemo } from './exit-code-terminal-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ExitCodeTerminalDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCollapsible,
   ScCollapsiblePanel,

@@ -78,5 +78,5 @@ export class EditArticlePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class MediaPage {
-  protected readonly view = signal<'grid' | 'table' | null>('grid');
+  private readonly view = signal<'grid' | 'table' | null>('grid');
 }

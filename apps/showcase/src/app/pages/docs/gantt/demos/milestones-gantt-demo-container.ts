@@ -18,7 +18,7 @@ import { MilestonesGanttDemo } from './milestones-gantt-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class MilestonesGanttDemoContainer {
-  readonly code = `import {
+  private readonly code = `import {
   createColumnHelper,
   createExpandedRowModel,
   injectTable,

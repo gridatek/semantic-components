@@ -157,7 +157,10 @@ const REVIEW: ScImageAnnotatorAnnotation[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ReviewImageAnnotatorDemo {
-  readonly annotations = signal<readonly ScImageAnnotatorAnnotation[]>(REVIEW);
-  readonly labelOf = labelOf;
-  readonly json = computed(() => JSON.stringify(this.annotations(), null, 2));
+  private readonly annotations =
+    signal<readonly ScImageAnnotatorAnnotation[]>(REVIEW);
+  private readonly labelOf = labelOf;
+  private readonly json = computed(() =>
+    JSON.stringify(this.annotations(), null, 2),
+  );
 }

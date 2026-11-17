@@ -14,7 +14,7 @@ import { NumberFieldUsageDemo } from './number-field-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class NumberFieldUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScLabel,
   ScNumberField,
