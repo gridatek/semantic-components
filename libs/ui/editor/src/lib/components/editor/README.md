@@ -162,7 +162,6 @@ readonly postForm = form(signal({ body: '' }), (path) => {
 | ------------------------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ScEditor`                                  | `[scEditor]`                                  | The document and its commands; a Signal Forms control (`exportAs: 'scEditor'`). `data-disabled`, `data-readonly`, `data-invalid`.                                                                                                                                       |
 | `ScEditorContent`                           | `div[scEditorContent]`                        | Where it's written: a multi-line `textbox`. `ariaLabel` (name it — no default), `placeholder` (none by default), `layout` (`default` or `page`, see [Styling](#styling)).                                                                                               |
-| `ScEditorContentTitle`                      | `textarea[scEditorContentTitle]`              | A title above the text: your field, set as the text's heading; the keyboard goes between the two (see [Title](#title)).                                                                                                                                                 |
 | `ScEditorCommand`                           | `button[scEditorCommand]`                     | Runs a command by name — `scEditorCommand="bold"` (see below). Behaviour only: beside `scToggle` in a toolbar (every command the same size) or `scButton`, and `scToolbarWidget`; pressed as the document says, disabled when it can't run. Write its icon and name it. |
 | `ScEditorBlock`                             | `[scEditorBlock]`                             | The selection's block for a control of yours (a menu, a select): `value()` (`'paragraph'`, `'heading-1'`…`'heading-6'`, `'bullet-list'`, `'ordered-list'`, `'task-list'`, `'quote'`, `'code-block'`), `select(block)` (`exportAs`).                                     |
 | `ScEditorTable` (`/tables`)                 | `button[scEditorTable]`                       | Tables: `select(action)`, `can(action)`, `inTable()` — a menu trigger, never pressed (see [Tables](#tables)).                                                                                                                                                           |
@@ -211,22 +210,6 @@ Their group is the Toolbar's `scToolbarWidgetGroup`, without a `value`: it group
 - **For your own parts**: `editorInstance()`, the Tiptap editor; `contentVersion()`, which moves on with every change — read it in a `computed` that reads the document.
 
 `run`, `can` and `editorInstance()` hand you Tiptap's own objects: they are the way out to anything the parts don't do, not the editor's API — what they give follows Tiptap.
-
-## Title
-
-A title above the text, in a textarea of yours, in the editor:
-
-```html
-<div scEditor [formField]="articleForm.body">
-  <textarea scEditorContentTitle aria-label="Title" placeholder="Untitled" [formField]="articleForm.title"></textarea>
-  <div scEditorContent ariaLabel="Text"></div>
-</div>
-```
-
-- **Its value is your field**, not part of the document: the body stays the text alone. (A title inside the document — Tiptap's custom document, `title block+` — is yours to build.)
-- **Set as the text's heading**, with no class of yours: the preset's Typeset heading — font, size, weight, tracking and case (sera's uppercase) — the space after a heading, a muted placeholder, no box; it grows with its text.
-- **The keyboard goes between the two**: **Enter**, or **↓** / **→** at its end, goes to the start of the text (no line break in a title); **Backspace**, **↑** or **←** at the very start of the text come back to its end. Backspace keeps its own work on a heading or a list there (it turns them into a paragraph first). Right to left, → and ← swap: **←** at the end of the title goes forward into the text, **→** at its start comes back.
-- **Name it** (`aria-label`): a text box, not a heading — it's a form field.
 
 ## A block menu: text style and lists
 
@@ -462,7 +445,7 @@ readonly noteForm = form(signal<{ body: ScEditorValue }>({ body: null }), (path)
 
 ## Keyboard
 
-Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E** inline code, **Shift + H** highlight (with `withHighlight()`), **.** superscript, **,** subscript (with `withScripts()`), **Alt + C** code block, **Shift + 7 / 8 / 9** numbered, bulleted and task list, **Z** undo, **Shift + Z** or **Y** redo; **Ctrl / ⌘ + F** search (with a `scEditorSearchBar`). Markdown shortcuts as you type: `# ` headings, `- ` lists, `[ ] ` tasks, `> ` quotes, ` ``` ` code blocks. In the toolbar, **← / →** move between buttons and **Tab** leaves it. With a title (`scEditorContentTitle`): **Enter** or **↓** in it goes to the text, **Backspace**, **↑** or **←** at the text's start back to it.
+Tiptap's shortcuts: **Ctrl / ⌘ + B** bold, **I** italic, **U** underline, **E** inline code, **Shift + H** highlight (with `withHighlight()`), **.** superscript, **,** subscript (with `withScripts()`), **Alt + C** code block, **Shift + 7 / 8 / 9** numbered, bulleted and task list, **Z** undo, **Shift + Z** or **Y** redo; **Ctrl / ⌘ + F** search (with a `scEditorSearchBar`). Markdown shortcuts as you type: `# ` headings, `- ` lists, `[ ] ` tasks, `> ` quotes, ` ``` ` code blocks. In the toolbar, **← / →** move between buttons and **Tab** leaves it.
 
 ## Styling
 

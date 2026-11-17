@@ -5,7 +5,6 @@ export * from './editor-control';
 
 // Content and display
 export * from './editor-content';
-export * from './editor-content-title';
 export * from './editor-view';
 export * from './editor-extensions';
 

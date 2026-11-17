@@ -34,7 +34,6 @@ import { RtlEditorDemoContainer } from './demos/rtl-editor-demo-container';
 import { SearchEditorDemoContainer } from './demos/search-editor-demo-container';
 import { SignalFormsEditorDemoContainer } from './demos/signal-forms-editor-demo-container';
 import { TablesEditorDemoContainer } from './demos/tables-editor-demo-container';
-import { TitleEditorDemoContainer } from './demos/title-editor-demo-container';
 import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
 
 @Component({
@@ -58,7 +57,6 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
     TablesEditorDemoContainer,
     ImagesEditorDemoContainer,
     SearchEditorDemoContainer,
-    TitleEditorDemoContainer,
     BubbleMenuEditorDemoContainer,
     LayoutEditorDemoContainer,
     TocHeading,
@@ -293,21 +291,6 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           after its file.
         </p>
         <app-images-editor-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Title</h2>
-        <p class="text-muted-foreground">
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scEditorContentTitle</code
-          >
-          on a textarea of yours above the text: its value is your field, not
-          part of the document, and it's set as the text's heading — the
-          preset's heading look, the space after it — with no class of yours.
-          Enter, or ↓ / → at its end, goes to the text; Backspace, ↑ or ← at the
-          text's very start come back (right to left, → and ← swap).
-        </p>
-        <app-title-editor-demo-container />
       </section>
 
       <section class="space-y-4">
@@ -732,14 +715,6 @@ export class NoteEditor {
           inputs: ['ariaLabel', 'placeholder', "layout: 'default' | 'page'"],
           read: [],
           do: [],
-        },
-        {
-          name: 'textarea[scEditorContentTitle]',
-          inputs: [],
-          read: [],
-          do: [
-            'A title above the text: your field ([formField]), set as its heading. Enter / ↓ to the text; Backspace / ↑ / ← at its start back',
-          ],
         },
         {
           name: '[scEditorView]',

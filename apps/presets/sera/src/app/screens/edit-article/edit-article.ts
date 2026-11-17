@@ -17,13 +17,15 @@ import {
   ScDialogPortal,
   ScDialogProvider,
   ScDialogTitle,
+  ScField,
+  ScInput,
+  ScLabel,
   ScSeparator,
   ScToaster,
 } from '@semantic-components/ui';
 import {
   ScEditor,
   ScEditorContent,
-  ScEditorContentTitle,
   ScEditorView,
   provideEditor,
 } from '@semantic-components/ui/editor';
@@ -67,9 +69,11 @@ import { EditorToolbar } from './editor-toolbar';
     ScDialogTitle,
     ScEditor,
     ScEditorContent,
-    ScEditorContentTitle,
     ScEditorUploads,
     ScEditorView,
+    ScField,
+    ScInput,
+    ScLabel,
     ScSeparator,
     SiXIcon,
   ],
@@ -90,31 +94,35 @@ import { EditorToolbar } from './editor-toolbar';
         <div
           class="grid grid-cols-1 items-start gap-6 xl:grid-cols-[minmax(0,1fr)_300px]"
         >
-          <section
-            scEditor
-            aria-label="Article"
-            [formField]="articleForm.body"
-            [upload]="upload"
-            class="border-border/70 bg-background flex flex-col border"
-          >
-            <app-editor-toolbar />
-            <div
-              class="mx-auto flex w-full max-w-2xl flex-1 flex-col px-10 py-10 md:px-14 lg:py-18"
-            >
-              <textarea
-                scEditorContentTitle
-                aria-label="Title"
+          <div class="flex flex-col gap-6">
+            <div scField>
+              <label scLabel>Title</label>
+              <input
+                scInput
                 placeholder="Untitled Article"
                 [formField]="articleForm.title"
-              ></textarea>
-              <div
-                scEditorContent
-                ariaLabel="Text"
-                placeholder="Start writing…"
-                class="max-h-none min-h-60 overflow-visible p-0"
-              ></div>
+              />
             </div>
-          </section>
+            <section
+              scEditor
+              aria-label="Article"
+              [formField]="articleForm.body"
+              [upload]="upload"
+              class="border-border/70 bg-background flex flex-col border"
+            >
+              <app-editor-toolbar />
+              <div
+                class="mx-auto flex w-full max-w-2xl flex-1 flex-col px-10 py-10 md:px-14 lg:py-18"
+              >
+                <div
+                  scEditorContent
+                  ariaLabel="Text"
+                  placeholder="Start writing…"
+                  class="max-h-none min-h-60 overflow-visible p-0"
+                ></div>
+              </div>
+            </section>
+          </div>
           <app-article-sidebar
             [fields]="articleForm"
             [targetWords]="article()?.targetWords ?? 2000"

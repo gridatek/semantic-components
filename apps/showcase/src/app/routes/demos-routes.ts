@@ -2780,13 +2780,6 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'title-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/editor/demos/title-editor-demo').then(
-            (m) => m.TitleEditorDemo,
-          ),
-      },
-      {
         path: 'search-editor-demo',
         loadComponent: () =>
           import('../pages/docs/editor/demos/search-editor-demo').then(
