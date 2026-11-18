@@ -27,6 +27,8 @@ import { ScRadioGroup } from './radio-group';
     '[disabled]': 'disabled()',
     '[value]': 'nativeValue()',
     '(change)': 'onChange()',
+    '(click)': 'onClick($event)',
+    '(keydown)': 'onKeydown($event)',
   },
 })
 export class ScRadio {
@@ -94,6 +96,30 @@ export class ScRadio {
       this.element.name = group.radioName();
       this.element.checked = Object.is(group.value(), this.value());
     });
+  }
+
+  /** Read-only: a click (or Space, or its label's) leaves it as it was. */
+  private onClick(event: MouseEvent): void {
+    if (this.radioGroup?.readonly()) event.preventDefault();
+  }
+
+  /** Read-only: the arrows move the focus, not the choice. */
+  private onKeydown(event: KeyboardEvent): void {
+    const group = this.radioGroup;
+    if (!group?.readonly()) return;
+    // Sideways, the reading direction decides which way is next.
+    const rtl = getComputedStyle(this.element).direction === 'rtl';
+    const step = (
+      {
+        ArrowDown: 1,
+        ArrowUp: -1,
+        ArrowRight: rtl ? -1 : 1,
+        ArrowLeft: rtl ? 1 : -1,
+      } as Record<string, 1 | -1 | undefined>
+    )[event.key];
+    if (!step) return;
+    event.preventDefault();
+    group.focusSibling(this.element, step);
   }
 
   private onChange(): void {

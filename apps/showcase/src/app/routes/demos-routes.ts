@@ -5042,6 +5042,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'read-only-radio-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/radio-group/demos/read-only-radio-group-demo').then(
+            (m) => m.ReadOnlyRadioGroupDemo,
+          ),
+      },
+      {
         path: 'invalid-radio-group-demo',
         loadComponent: () =>
           import('../pages/docs/radio-group/demos/invalid-radio-group-demo').then(

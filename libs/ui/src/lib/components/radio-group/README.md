@@ -21,10 +21,10 @@ A radio field with a description is a `div`: `<label scLabel>` and `<p scFieldDe
 
 ## Parts
 
-| Part           | Selector            | What it does                                                                                                                                                                                                    |
-| -------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScRadioGroup` | `div[scRadioGroup]` | `role="radiogroup"`; the choice: `value` (a `[formField]`, or two-way); `orientation`; `disabled`. Checks the radio whose value matches, names its radios alike, invalid once touched (focus leaving the group) |
-| `ScRadio`      | `input[scRadio]`    | A native radio (its own `type`), in the preset's look: `value` (its option, any type), `disabled`                                                                                                               |
+| Part           | Selector            | What it does                                                                                                                                                                                                                                                                                                                                          |
+| -------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScRadioGroup` | `div[scRadioGroup]` | `role="radiogroup"`; the choice: `value` (a `[formField]`, or two-way); `orientation`; `disabled`; `readonly` (`readonly()` in the form, or set: `aria-readonly`, the choice takes focus and the arrows move it, but it doesn't change). Checks the radio whose value matches, names its radios alike, invalid once touched (focus leaving the group) |
+| `ScRadio`      | `input[scRadio]`    | A native radio (its own `type`), in the preset's look: `value` (its option, any type), `disabled`                                                                                                                                                                                                                                                     |
 
 ## Why the group holds the choice
 

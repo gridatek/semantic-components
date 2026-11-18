@@ -18,7 +18,8 @@ import { injectPreset } from '../../config/preset';
  * (Signal Forms types it by the group: a union value works) or [(value)].
  * Its radios carry their own value; the group checks the one that matches,
  * names them alike (one Tab stop, the arrows move the choice) and passes its
- * disabled and invalid state down.
+ * disabled and invalid state down. Read-only: the choice shows and takes
+ * focus (the arrows move it, not the choice), but doesn't change.
  */
 @Directive({
   selector: 'div[scRadioGroup]',
@@ -26,6 +27,8 @@ import { injectPreset } from '../../config/preset';
     'data-slot': 'radio-group',
     role: 'radiogroup',
     '[attr.aria-disabled]': 'disabled() || null',
+    '[attr.aria-readonly]': 'readonly() || null',
+    '[attr.data-readonly]': 'readonly() ? "" : null',
     '[class]': 'class()',
     '(focusout)': 'onFocusOut($event)',
   },
@@ -45,6 +48,8 @@ export class ScRadioGroup<T = unknown> implements FormValueControl<
   readonly value = model<T | undefined>(undefined);
   // Bound by the Field directive (FormValueControl).
   readonly disabled = input(false, { transform: booleanAttribute });
+  /** Read-only: bound by the Field directive (`readonly()` in the form), or set. */
+  readonly readonly = input(false, { transform: booleanAttribute });
   readonly invalid = input(false);
   readonly touched = input(false);
   /** The field's name (bound by the Field directive), for its radios. */
@@ -79,6 +84,20 @@ export class ScRadioGroup<T = unknown> implements FormValueControl<
       ),
     ];
     (radios.find((radio) => radio.checked) ?? radios[0])?.focus(options);
+  }
+
+  /**
+   * Read-only: the focus to the next radio (`step` 1) or the previous (-1),
+   * around the ends — what the arrows do, without the choice.
+   */
+  focusSibling(radio: HTMLInputElement, step: 1 | -1): void {
+    const radios = [
+      ...this.element.querySelectorAll<HTMLInputElement>(
+        'input[type="radio"]:not(:disabled)',
+      ),
+    ];
+    const next = radios.indexOf(radio) + step;
+    radios[(next + radios.length) % radios.length]?.focus();
   }
 
   /** Picks a radio's value: the radio calls it when chosen. */

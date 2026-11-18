@@ -58,6 +58,33 @@ test('Disabled: the arrows skip it', async ({ page }) => {
   await expect(page.getByRole('radio', { name: 'Option 2' })).toBeChecked();
 });
 
+test('Read-only (its form): the choice takes focus but stays', async ({
+  page,
+}) => {
+  await page.goto(demo('read-only'));
+  await expect(page.getByRole('radiogroup', { name: 'Plan' })).toHaveAttribute(
+    'aria-readonly',
+    'true',
+  );
+  const [pro, team] = [
+    page.getByRole('radio', { name: 'Pro' }),
+    page.getByRole('radio', { name: 'Team' }),
+  ];
+  await expect(pro).toBeChecked();
+  // A click, on the radio or its text: nothing changes.
+  await team.click();
+  await page.getByText('Free', { exact: true }).click();
+  await expect(pro).toBeChecked();
+  // The arrows move the focus, not the choice; Space doesn't pick.
+  await pro.focus();
+  await expect(pro).toBeFocused();
+  await press(page, 'ArrowDown');
+  await expect(team).toBeFocused();
+  await press(page, 'Space');
+  await expect(pro).toBeChecked();
+  await expect(team).not.toBeChecked();
+});
+
 test('Invalid: each radio marked, once touched', async ({ page }) => {
   await page.goto(demo('invalid'));
   await expect(page.getByRole('radio', { name: 'SMS only' })).toHaveAttribute(

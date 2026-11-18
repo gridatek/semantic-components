@@ -21,6 +21,7 @@ import { FormRadioGroupDemoContainer } from './demos/form-radio-group-demo-conta
 import { HorizontalRadioGroupDemoContainer } from './demos/horizontal-radio-group-demo-container';
 import { InvalidRadioGroupDemoContainer } from './demos/invalid-radio-group-demo-container';
 import { RadioGroupUsageDemoContainer } from './demos/radio-group-usage-demo-container';
+import { ReadOnlyRadioGroupDemoContainer } from './demos/read-only-radio-group-demo-container';
 import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-container';
 
 @Component({
@@ -32,6 +33,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
     ChoiceCardRadioGroupDemoContainer,
     FieldsetRadioGroupDemoContainer,
     DisabledRadioGroupDemoContainer,
+    ReadOnlyRadioGroupDemoContainer,
     InvalidRadioGroupDemoContainer,
     HorizontalRadioGroupDemoContainer,
     FormRadioGroupDemoContainer,
@@ -112,6 +114,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
         <app-choice-card-radio-group-demo-container />
         <app-fieldset-radio-group-demo-container />
         <app-disabled-radio-group-demo-container />
+        <app-read-only-radio-group-demo-container />
         <app-invalid-radio-group-demo-container />
         <app-horizontal-radio-group-demo-container />
         <app-form-radio-group-demo-container />
@@ -184,7 +187,7 @@ export default class RadioGroupPage {
       name: 'ScRadioGroup',
       selector: 'div[scRadioGroup]',
       description:
-        "role=\"radiogroup\"; the choice: value (a [formField], or two-way); orientation ('vertical', 'horizontal'); disabled. Checks the radio whose value matches, names its radios alike; invalid once touched.",
+        "role=\"radiogroup\"; the choice: value (a [formField], or two-way); orientation ('vertical', 'horizontal'); disabled; readonly (aria-readonly: the choice takes focus, the arrows move it, but it doesn't change). Checks the radio whose value matches, names its radios alike; invalid once touched.",
     },
     {
       name: 'ScRadio',
