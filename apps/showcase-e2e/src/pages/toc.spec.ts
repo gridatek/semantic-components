@@ -5,6 +5,13 @@ import { type Page, expect, test } from '../test';
  * (`#id`) opens there — loaded, or reloaded.
  */
 
+/**
+ * Room for the TOC: its column shows from `xl` (1280px). The desktop devices
+ * are 1280px wide, and WebKit measures a media query without its scrollbar
+ * (scrollbar.css gives it a 10px one): 1270px, the column hidden.
+ */
+test.use({ viewport: { width: 1440, height: 900 } });
+
 const page = '/docs/components/virtual-list';
 const section = 'with-the-infinite-scroll';
 

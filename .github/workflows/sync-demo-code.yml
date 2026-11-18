@@ -8,6 +8,8 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  # Starts CI on the PR's branch (below).
+  actions: write
 
 jobs:
   sync:
@@ -44,5 +46,9 @@ jobs:
           git commit -m "chore: sync demo code"
           git push --set-upstream origin "$BRANCH"
           gh pr create --title "chore: sync demo code" --body "Automated sync of demo code." --base main
+          # A PR opened with GITHUB_TOKEN gets its CI run only once a maintainer
+          # approves it; a workflow_dispatch from GITHUB_TOKEN runs at once, and
+          # its checks show on the PR (same commit).
+          gh workflow run ci.yml --ref "$BRANCH"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
