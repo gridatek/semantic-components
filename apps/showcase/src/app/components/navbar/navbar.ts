@@ -184,12 +184,12 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           <li scNavigationMenuItem>
             <a
               scNavigationMenuLink
-              routerLink="/presets"
+              routerLink="/customize"
               routerLinkActive
-              #presetsRla="routerLinkActive"
-              [active]="presetsRla.isActive"
+              #customizeRla="routerLinkActive"
+              [active]="customizeRla.isActive"
             >
-              Presets
+              Customize
             </a>
           </li>
         </ul>
@@ -315,12 +315,12 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           </a>
           <a
             scNavbarMenuLink
-            routerLink="/presets"
+            routerLink="/customize"
             routerLinkActive="active"
-            #mobilePresetsRla="routerLinkActive"
-            [active]="mobilePresetsRla.isActive"
+            #mobileCustomizeRla="routerLinkActive"
+            [active]="mobileCustomizeRla.isActive"
           >
-            Presets
+            Customize
           </a>
         </nav>
       </div>

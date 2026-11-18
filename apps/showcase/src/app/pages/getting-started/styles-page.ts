@@ -139,7 +139,7 @@ const STYLES: { name: ScStyleName; description: string }[] = [
           your theme, so any style goes with any theme.
         </p>
         <div class="flex flex-wrap gap-2">
-          <a scLink variant="button" size="sm" routerLink="/presets">
+          <a scLink variant="button" size="sm" routerLink="/customize">
             Pick one for the whole site
           </a>
           <a
@@ -177,7 +177,7 @@ const STYLES: { name: ScStyleName; description: string }[] = [
                   {{ style.description }}
                 </p>
                 <code class="text-muted-foreground text-xs"
-                  >&#64;semantic-components/presets/{{ style.name }}</code
+                  >&#64;semantic-components/styles/{{ style.name }}</code
                 >
               </div>
               <div class="bg-muted flex flex-1 items-center rounded-md p-4">

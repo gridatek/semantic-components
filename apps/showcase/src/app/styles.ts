@@ -16,7 +16,7 @@ import { vega } from '@semantic-components/styles/vega';
 import { ScStorage, writeStorage } from '@semantic-components/ui';
 
 /**
- * Every style, for the showcase's /presets page. An app with one style
+ * Every style, for the showcase's /customize page. An app with one style
  * imports only its own; the showcase shows them all.
  */
 export const STYLES: Record<ScStyleName, ScStyle> = {
@@ -33,7 +33,7 @@ export const STYLES: Record<ScStyleName, ScStyle> = {
 const KEY = 'sc-style';
 
 /**
- * The style chosen on /presets, from `ScStorage`: its cookie in the browser
+ * The style chosen on /customize, from `ScStorage`: its cookie in the browser
  * and, on the server, the request's — so a server-rendered page is drawn in it
  * (the browser can't change the classes hydration keeps). Lyra without one:
  * the showcase opens in lyra, not in shadcn's default look (nova).

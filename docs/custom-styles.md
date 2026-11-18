@@ -41,9 +41,9 @@ Let a consumer restyle the whole library with their own style, once the library 
 ## Styles are fixed at start (decided, 2026-11-13)
 
 - An app picks its style once, when it starts; it doesn't change it while running. A runtime switch is not planned: no app needs it, and offering several styles would grow the app's JavaScript and CSS (every style's classes generated).
-- Only our showcase switches (on /presets): it saves the name in a cookie and reloads — enough there.
+- Only our showcase switches (on /customize): it saves the name in a cookie and reloads — enough there.
 - Why it needs the reload: each part reads its classes once, when it is created (`private readonly styles = injectStyle().card`). Switching live would mean the style as a signal and every part reading it in its `computed()`: about a hundred parts. Cheap at run time, but not worth it for the showcase alone.
-- So a consumer's own style is previewed in their own app, not on /presets (an object with functions — the `cva` variants — can't be saved in a cookie and rebuilt after a reload).
+- So a consumer's own style is previewed in their own app, not on /customize (an object with functions — the `cva` variants — can't be saved in a cookie and rebuilt after a reload).
 
 ## Open questions
 

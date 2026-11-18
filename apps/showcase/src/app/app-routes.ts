@@ -20,9 +20,9 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('./pages/home/home'),
       },
       {
-        path: 'presets',
-        title: 'Presets - Semantic Components',
-        loadComponent: () => import('./pages/presets/presets'),
+        path: 'customize',
+        title: 'Customize - Semantic Components',
+        loadComponent: () => import('./pages/customize/customize'),
       },
       {
         path: 'components',

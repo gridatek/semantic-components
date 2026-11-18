@@ -34,13 +34,13 @@ import { STYLES, storeStyle, styleFrom } from '../../styles';
 import { PreviewCards } from './cards/preview-cards';
 
 /**
- * Presets, as shadcn's Create: the options as cards on the left, the
- * components in that look on the right. Only the style and the mode change
- * for now. The style:
- * a preset is set when the app starts, so picking one saves it and reloads.
+ * Customize, as shadcn's Create: the options as cards on the left, the
+ * components in that look on the right — for the whole site. Only the style
+ * and the mode change for now. The style is set when the app starts, so
+ * picking one saves it and reloads.
  */
 @Component({
-  selector: 'app-presets',
+  selector: 'app-customize',
   imports: [
     SiSunIcon,
     SiMoonIcon,
@@ -67,7 +67,7 @@ import { PreviewCards } from './cards/preview-cards';
     SiTypeIcon,
   ],
   template: `
-    <h1 class="sr-only">Presets</h1>
+    <h1 class="sr-only">Customize</h1>
     <div class="flex flex-col gap-4 p-4 md:flex-row md:items-start">
       <section
         aria-label="Options"
@@ -204,7 +204,7 @@ import { PreviewCards } from './cards/preview-cards';
   host: { class: 'block' },
   encapsulation: ViewEncapsulation.None,
 })
-export default class Presets {
+export default class Customize {
   private readonly window = inject(DOCUMENT).defaultView;
 
   private readonly names = Object.keys(STYLES) as ScStyleName[];

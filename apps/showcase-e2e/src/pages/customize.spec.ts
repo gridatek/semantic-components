@@ -2,7 +2,7 @@ import { expectNoA11yViolations } from '../axe';
 import { fromOtherSite } from '../interaction';
 import { expect, test } from '../test';
 
-test.describe('Presets Page', () => {
+test.describe('Customize Page', () => {
   // The largest page: in Firefox and WebKit, beside the other workers, it
   // takes more than the 5 s of an expect to show, and its tests more than 30 s.
   // (In a beforeEach: test.slow(callback) at the describe level marks the test
@@ -11,7 +11,7 @@ test.describe('Presets Page', () => {
     test.slow(browserName !== 'chromium');
   });
 
-  // One after the other, in one worker (the preset runs a file's tests side
+  // One after the other, in one worker (Nx's preset runs a file's tests side
   // by side): four of this page at once, beside other pages, froze WebKit's
   // pages for more than the 90 s of a test. 'default', not 'serial': a
   // failure doesn't skip the rest.
@@ -20,10 +20,10 @@ test.describe('Presets Page', () => {
   // To show, and to close (its leave animation, on WebKit's lagging clock).
   const shown = { timeout: 30_000 };
 
-  test('the style card picks a preset, which reloads in it', async ({
+  test('the style card picks a style, which reloads in it', async ({
     page,
   }) => {
-    await page.goto('/presets');
+    await page.goto('/customize');
     const style = page.getByRole('button', { name: /Style/ });
     await expect(style).toContainText('nova', { ignoreCase: true, ...shown });
     // The options still to come are there, not usable yet.
@@ -50,7 +50,7 @@ test.describe('Presets Page', () => {
       if (m.type() === 'warning' || m.type() === 'error')
         messages.push(m.text().split('\n')[0]);
     });
-    await page.goto('/presets');
+    await page.goto('/customize');
     // A card from each page of shadcn's preview.
     await expect(
       page.getByRole('heading', { name: 'Recent Transactions' }),
@@ -79,7 +79,7 @@ test.describe('Presets Page', () => {
   test('no accessibility violations, light and dark', async ({ page }) => {
     // The largest page, checked twice: more than 30 s on CI in Firefox and
     // WebKit (slow there, above).
-    await page.goto('/presets');
+    await page.goto('/customize');
     await expectNoA11yViolations(page);
     await expectNoA11yViolations(page, { dark: true });
   });
@@ -95,7 +95,7 @@ test.describe('Presets Page', () => {
         url: baseURL ?? 'http://localhost:4200',
       },
     ]);
-    await page.goto('/presets');
+    await page.goto('/customize');
     const plot = page.getByRole('group', {
       name: 'Sleep stages by hour, 10pm to 6am',
     });
@@ -133,7 +133,7 @@ test.describe('Presets Page', () => {
     page,
   }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('/presets');
+    await page.goto('/customize');
     const plot = page.getByRole('group', {
       name: 'Workout load by day, Monday to Sunday',
     });

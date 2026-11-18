@@ -35,7 +35,7 @@ export const appConfig: ApplicationConfig = {
       // Code blocks highlighted with Shiki, each language loaded when first shown.
       withCodeHighlighter(),
     ),
-    // The style picked on /presets (lyra by default): its cookie, read from
+    // The style picked on /customize (lyra by default): its cookie, read from
     // the request when the server renders — a page is drawn in it from the
     // first paint, and hydration keeps those classes.
     {

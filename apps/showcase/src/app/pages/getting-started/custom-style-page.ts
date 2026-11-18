@@ -123,7 +123,7 @@ interface ScCodeSample {
         <p class="text-muted-foreground">
           Keep
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/presets</code
+            >&#64;semantic-components/styles</code
           >
           installed: your files import its types (<code
             class="bg-muted rounded px-1.5 py-0.5 text-sm"

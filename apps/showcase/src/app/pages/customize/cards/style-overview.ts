@@ -7,7 +7,7 @@ import {
 } from '@semantic-components/ui';
 import { styleFrom } from '../../../styles';
 
-/** The preset at a glance: its name and font, then the theme's colors. */
+/** The style at a glance: its name and font, then the theme's colors. */
 @Component({
   selector: 'app-preview-style-overview',
   imports: [ScCard, ScCardBody, ScFrame],
@@ -16,7 +16,7 @@ import { styleFrom } from '../../../styles';
       <div scCardBody class="flex flex-col gap-6">
         <div class="flex flex-col gap-1">
           <h2 class="font-heading text-2xl font-medium capitalize">
-            {{ preset }} - Geist
+            {{ style }} - Geist
           </h2>
           <p class="text-muted-foreground line-clamp-2 text-base">
             Designers love packing quirky glyphs into test phrases. This is a
@@ -47,7 +47,7 @@ import { styleFrom } from '../../../styles';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewStyleOverview {
-  private readonly preset = styleFrom(inject(ScStorage));
+  private readonly style = styleFrom(inject(ScStorage));
   private readonly variables = [
     '--background',
     '--foreground',

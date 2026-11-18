@@ -212,12 +212,17 @@ import { TocHeading } from '../../components/toc/toc-heading';
               </p>
             </div>
           </a>
-          <a scItem variant="outline" class="items-start" routerLink="/presets">
+          <a
+            scItem
+            variant="outline"
+            class="items-start"
+            routerLink="/customize"
+          >
             <div scItemMedia variant="icon"><svg siPaletteIcon></svg></div>
             <div scItemBody>
-              <div scItemTitle>Presets</div>
+              <div scItemTitle>Customize</div>
               <p scItemDescription class="line-clamp-none">
-                The eight styles side by side, on real screens.
+                Pick the style the whole site uses, and see it on real screens.
               </p>
             </div>
           </a>
