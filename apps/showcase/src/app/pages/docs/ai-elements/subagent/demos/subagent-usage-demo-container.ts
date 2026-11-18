@@ -228,14 +228,14 @@ export class SubagentUsageDemo {
   private readonly answer =
     'Image optimization reruns because its cache is keyed on the commit SHA, which changes on every deploy. Key the cache on a hash of public/images instead, and unchanged images will be skipped.';
 
-  protected readonly started = signal(true);
+  private readonly started = signal(true);
   /** The step the subagent is on; past the end when done; null before its first. */
-  protected readonly current = signal<number | null>(STEPS.length);
-  protected readonly report = signal(this.finding);
-  protected readonly reply = signal(this.answer);
-  protected readonly busy = signal(false);
-  protected readonly done = computed(() => this.report() !== '');
-  protected readonly visibleSteps = computed(() =>
+  private readonly current = signal<number | null>(STEPS.length);
+  private readonly report = signal(this.finding);
+  private readonly reply = signal(this.answer);
+  private readonly busy = signal(false);
+  private readonly done = computed(() => this.report() !== '');
+  private readonly visibleSteps = computed(() =>
     STEPS.slice(0, Math.min((this.current() ?? 0) + 1, STEPS.length)),
   );
   private timers: ReturnType<typeof setTimeout>[] = [];
@@ -244,7 +244,7 @@ export class SubagentUsageDemo {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected replay(): void {
+  private replay(): void {
     this.stop();
     this.started.set(false);
     this.current.set(null);

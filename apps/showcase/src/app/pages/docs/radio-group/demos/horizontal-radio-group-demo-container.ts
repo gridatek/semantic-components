@@ -49,10 +49,10 @@ interface FilterFormModel {
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalRadioGroupDemo {
-  readonly formModel = signal<FilterFormModel>({
+  private readonly formModel = signal<FilterFormModel>({
     filter: 'all',
   });
 
-  readonly filterForm = form(this.formModel);
+  private readonly filterForm = form(this.formModel);
 }`;
 }

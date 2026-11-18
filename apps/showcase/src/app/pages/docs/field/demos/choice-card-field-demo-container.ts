@@ -83,6 +83,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ChoiceCardFieldDemo {
-  protected readonly envForm = form(signal({ environment: 'kubernetes' }));
+  private readonly envForm = form(signal({ environment: 'kubernetes' }));
 }`;
 }

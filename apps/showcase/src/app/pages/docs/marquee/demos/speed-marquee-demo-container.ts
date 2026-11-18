@@ -47,8 +47,8 @@ import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class SpeedMarqueeDemo {
-  readonly short = ['One', 'Two', 'Three'];
-  readonly long = [
+  private readonly short = ['One', 'Two', 'Three'];
+  private readonly long = [
     'Alpha',
     'Bravo',
     'Charlie',

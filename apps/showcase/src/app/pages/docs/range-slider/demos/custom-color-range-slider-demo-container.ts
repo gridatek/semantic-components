@@ -65,7 +65,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomColorRangeSliderDemo {
-  minValue = 15;
-  maxValue = 35;
+  private minValue = 15;
+  private maxValue = 35;
 }`;
 }

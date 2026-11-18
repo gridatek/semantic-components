@@ -45,7 +45,7 @@ import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class PhotosMasonryGridDemo {
-  readonly photos = [
+  private readonly photos = [
     {
       name: 'forest',
       alt: 'A pine forest above the sea',

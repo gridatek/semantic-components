@@ -109,7 +109,7 @@ interface Country {
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomComboboxDemo {
-  protected readonly countries: Country[] = [
+  private readonly countries: Country[] = [
     { code: 'DZ', name: 'Algeria' },
     { code: 'BR', name: 'Brazil' },
     { code: 'FR', name: 'France' },
@@ -117,10 +117,10 @@ export class CustomComboboxDemo {
     { code: 'MA', name: 'Morocco' },
     { code: 'ES', name: 'Spain' },
   ];
-  protected readonly country = signal<Country | null>(this.countries[2]);
-  protected readonly label = (country: Country) => country.name;
+  private readonly country = signal<Country | null>(this.countries[2]);
+  private readonly label = (country: Country) => country.name;
 
-  protected matching(query: string): Country[] {
+  private matching(query: string): Country[] {
     return this.countries.filter((country) =>
       scComboboxMatches(country.name, query),
     );

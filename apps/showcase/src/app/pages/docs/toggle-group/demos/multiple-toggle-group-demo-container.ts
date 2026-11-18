@@ -66,6 +66,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleToggleGroupDemo {
-  protected readonly formatting = signal(['bold']);
+  private readonly formatting = signal(['bold']);
 }`;
 }

@@ -64,6 +64,6 @@ import { SiBellOffIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class EmptyNotificationCenterDemo {
-  readonly notifications = signal<ScNotification[]>([]);
+  private readonly notifications = signal<ScNotification[]>([]);
 }`;
 }

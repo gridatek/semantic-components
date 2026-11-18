@@ -149,7 +149,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SeparateNavigationMenuDemo {
-  readonly gettingStarted = [
+  private readonly gettingStarted = [
     {
       link: '/docs/getting-started/introduction',
       title: 'Introduction',
@@ -167,7 +167,7 @@ export class SeparateNavigationMenuDemo {
     },
   ];
 
-  readonly components = [
+  private readonly components = [
     {
       link: '/docs/components/alert-dialog',
       title: 'Alert Dialog',

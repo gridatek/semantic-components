@@ -126,10 +126,10 @@ const SCRIPT: readonly Turn[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckpointUsageDemo {
-  protected readonly turns = signal<readonly Turn[]>(SCRIPT);
-  protected readonly busy = signal(false);
+  private readonly turns = signal<readonly Turn[]>(SCRIPT);
+  private readonly busy = signal(false);
   /** The next scripted message, once a restore has dropped it. */
-  protected readonly next = computed(() => SCRIPT[this.turns().length]);
+  private readonly next = computed(() => SCRIPT[this.turns().length]);
   private timers: ReturnType<typeof setTimeout>[] = [];
 
   constructor() {
@@ -137,13 +137,13 @@ export class CheckpointUsageDemo {
   }
 
   /** Keeps that turn, drops every message after it. */
-  protected restore(id: string): void {
+  private restore(id: string): void {
     const index = this.turns().findIndex((turn) => turn.id === id);
     if (index !== -1) this.turns.set(this.turns().slice(0, index + 1));
   }
 
   /** Sends the next scripted message; the agent answers word by word. */
-  protected continue(): void {
+  private continue(): void {
     const question = this.next();
     const answer = SCRIPT[this.turns().length + 1];
     if (!question) return;

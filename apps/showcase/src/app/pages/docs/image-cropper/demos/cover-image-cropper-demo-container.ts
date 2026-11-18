@@ -85,7 +85,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CoverImageCropperDemo {
-  readonly zoom = signal(1);
-  readonly percent = computed(() => Math.round(this.zoom() * 100));
+  private readonly zoom = signal(1);
+  private readonly percent = computed(() => Math.round(this.zoom() * 100));
 }`;
 }

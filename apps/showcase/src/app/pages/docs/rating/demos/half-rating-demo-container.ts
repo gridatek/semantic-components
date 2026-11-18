@@ -51,6 +51,6 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class HalfRatingDemo {
-  readonly rating = signal(3.5);
+  private readonly rating = signal(3.5);
 }`;
 }

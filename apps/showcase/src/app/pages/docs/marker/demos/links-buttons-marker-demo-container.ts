@@ -57,6 +57,6 @@ import { SiGitBranchIcon, SiRotateCcwIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class LinksButtonsMarkerDemo {
-  protected readonly reverted = signal(false);
+  private readonly reverted = signal(false);
 }`;
 }

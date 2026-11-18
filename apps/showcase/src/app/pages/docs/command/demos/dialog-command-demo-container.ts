@@ -172,19 +172,19 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DialogCommandDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
   /** The shortcut as this platform writes it. */
-  protected readonly format = injectFormatForDisplay();
+  private readonly format = injectFormatForDisplay();
 
   constructor() {
     injectHotkey('Mod+J', () => this.open.update((open) => !open));
   }
 
-  protected ran(name: string): void {
+  private ran(name: string): void {
     this.open.set(false);
     this.last.set(name);
   }
 
-  protected readonly last = signal('');
+  private readonly last = signal('');
 }`;
 }

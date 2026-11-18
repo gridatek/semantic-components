@@ -40,7 +40,7 @@ import { ScJsonViewer } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlJsonViewerDemo {
-  readonly user = {
+  private readonly user = {
     الاسم: 'ليلى',
     المدينة: 'الرباط',
     العمر: 31,

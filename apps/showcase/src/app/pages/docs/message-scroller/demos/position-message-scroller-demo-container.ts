@@ -89,7 +89,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
 })
 export class PositionMessageScrollerDemo {
   /** A long last answer: it opens on its question, not its end. */
-  readonly messages = [
+  private readonly messages = [
     ...[
       { id: 'q1', role: 'user', text: 'What does a message scroller do?' },
       {

@@ -80,7 +80,7 @@ import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SiblingsPaginationDemo {
-  protected isSibling(item: ScPaginationPage, current: number): boolean {
+  private isSibling(item: ScPaginationPage, current: number): boolean {
     return item.type === 'page' && Math.abs(item.value - current) <= 2;
   }
 }`;

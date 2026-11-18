@@ -110,7 +110,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class AnchoringMessageScrollerDemo {
-  readonly messages = signal([
+  private readonly messages = signal([
     { id: 'q1', role: 'user', text: 'What does a message scroller do?' },
     {
       id: 'a1',
@@ -130,10 +130,10 @@ export class AnchoringMessageScrollerDemo {
       text: 'Yes: the conversation is a region you can tab to, and the arrow keys, Page Up, Page Down, Home and End scroll it.',
     },
   ]);
-  readonly anchorReply = signal(false);
+  private readonly anchorReply = signal(false);
   private sent = 0;
 
-  send(): void {
+  private send(): void {
     const n = ++this.sent;
     this.messages.update((messages) => [
       ...messages,

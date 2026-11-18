@@ -146,7 +146,7 @@ import {
 export class RtlQuestionnaireDemo {
   private readonly model = signal({ goal: '', when: '' });
 
-  readonly survey = form(this.model, (s) => {
+  private readonly survey = form(this.model, (s) => {
     required(s.goal);
     required(s.when);
   });

@@ -56,11 +56,11 @@ import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class ParentCheckboxGroupDemo {
-  protected readonly allApples = [
+  private readonly allApples = [
     'fuji-apple',
     'gala-apple',
     'granny-smith-apple',
   ];
-  protected readonly apples = signal<string[]>([]);
+  private readonly apples = signal<string[]>([]);
 }`;
 }

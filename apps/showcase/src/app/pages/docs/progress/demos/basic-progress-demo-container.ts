@@ -51,6 +51,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicProgressDemo {
-  readonly value = 33;
+  private readonly value = 33;
 }`;
 }

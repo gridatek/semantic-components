@@ -67,7 +67,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class AlternateTimelineDemo {
-  readonly history = [
+  private readonly history = [
     {
       title: 'The idea',
       text: 'Components as parts, written by you.',

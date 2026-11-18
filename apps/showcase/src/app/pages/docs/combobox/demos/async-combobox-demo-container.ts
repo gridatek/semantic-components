@@ -114,9 +114,9 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 })
 export class AsyncComboboxDemo {
   private readonly combobox = viewChild.required(ScCombobox);
-  protected readonly city = signal<string | null>(null);
-  protected readonly results = signal<readonly string[]>([]);
-  protected readonly loading = signal(false);
+  private readonly city = signal<string | null>(null);
+  private readonly results = signal<readonly string[]>([]);
+  private readonly loading = signal(false);
 
   private readonly cities = [
     'Algiers',

@@ -85,7 +85,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicNumberFieldDemo {
-  readonly count = signal<number | null>(10);
-  readonly committed = signal<number | null>(10);
+  private readonly count = signal<number | null>(10);
+  private readonly committed = signal<number | null>(10);
 }`;
 }

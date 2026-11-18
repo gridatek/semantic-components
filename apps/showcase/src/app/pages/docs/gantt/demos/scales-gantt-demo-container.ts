@@ -161,23 +161,25 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class ScalesGanttDemo {
-  readonly from = date('2027-01-01');
-  readonly to = date('2027-06-30');
+  private readonly from = date('2027-01-01');
+  private readonly to = date('2027-06-30');
 
-  readonly choice = signal<ScGanttScaleUnit[]>(['week']);
+  private readonly choice = signal<ScGanttScaleUnit[]>(['week']);
   /** The toggle group can be emptied: weeks then. */
-  readonly scale = computed<ScGanttScaleUnit>(() => this.choice()[0] ?? 'week');
+  private readonly scale = computed<ScGanttScaleUnit>(
+    () => this.choice()[0] ?? 'week',
+  );
 
-  readonly releases = signal(RELEASES);
+  private readonly releases = signal(RELEASES);
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: this.releases(),
     getRowId: (release) => release.id,
   }));
 
-  move(release: Release, dates: ScGanttDates): void {
+  private move(release: Release, dates: ScGanttDates): void {
     this.releases.update((releases) =>
       releases.map((r) => (r.id === release.id ? { ...r, ...dates } : r)),
     );

@@ -72,8 +72,8 @@ import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SwatchesColorPickerDemo {
-  readonly color = signal('#22c55e');
-  readonly presets = [
+  private readonly color = signal('#22c55e');
+  private readonly presets = [
     { color: '#e11d48', name: 'Rose' },
     { color: '#f97316', name: 'Orange' },
     { color: '#eab308', name: 'Yellow' },

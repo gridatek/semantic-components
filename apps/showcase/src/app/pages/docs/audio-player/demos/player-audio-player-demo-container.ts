@@ -197,7 +197,7 @@ interface Song {
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayerAudioPlayerDemo {
-  readonly songs: readonly Song[] = [
+  private readonly songs: readonly Song[] = [
     {
       src: '/media/carefree.mp3',
       title: 'Carefree',
@@ -218,9 +218,9 @@ export class PlayerAudioPlayerDemo {
     },
   ];
 
-  readonly track = signal(0);
-  readonly song = computed(() => this.songs[this.track()]);
-  readonly metadata = computed(() => ({
+  private readonly track = signal(0);
+  private readonly song = computed(() => this.songs[this.track()]);
+  private readonly metadata = computed(() => ({
     title: this.song().title,
     artist: this.song().artist,
     artwork: [{ src: this.song().cover, sizes: '400x400', type: 'image/jpeg' }],

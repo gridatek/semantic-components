@@ -183,9 +183,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SidebarUsageDemo {
-  protected readonly active = signal('Home');
+  private readonly active = signal('Home');
 
-  protected go(event: Event, page: string): void {
+  private go(event: Event, page: string): void {
     event.preventDefault();
     this.active.set(page);
   }

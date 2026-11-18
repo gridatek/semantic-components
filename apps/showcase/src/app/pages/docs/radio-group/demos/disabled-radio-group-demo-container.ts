@@ -51,6 +51,6 @@ import { ScField, ScRadio, ScRadioGroup } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledRadioGroupDemo {
-  protected readonly optionForm = form(signal({ option: 'option2' }));
+  private readonly optionForm = form(signal({ option: 'option2' }));
 }`;
 }

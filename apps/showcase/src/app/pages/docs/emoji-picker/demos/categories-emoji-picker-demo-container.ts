@@ -170,7 +170,7 @@ import {
 })
 export class CategoriesEmojiPickerDemo {
   /** Your recent emojis (keep them, e.g. in localStorage, to restore them). */
-  readonly recent = signal<ScEmoji[]>([
+  private readonly recent = signal<ScEmoji[]>([
     { emoji: '👋', label: 'Waving hand' },
     { emoji: '🎉', label: 'Party popper' },
   ]);

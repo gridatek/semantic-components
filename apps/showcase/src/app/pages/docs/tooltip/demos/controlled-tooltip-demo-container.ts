@@ -59,6 +59,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledTooltipDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 }`;
 }

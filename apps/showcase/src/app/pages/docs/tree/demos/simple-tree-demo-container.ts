@@ -105,6 +105,6 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SimpleTreeDemo {
-  readonly selected = signal<string[]>(['apple']);
+  private readonly selected = signal<string[]>(['apple']);
 }`;
 }

@@ -74,21 +74,21 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BookedCalendarDemo {
-  readonly date = signal<ScCalendarValue>(
+  private readonly date = signal<ScCalendarValue>(
     Temporal.PlainDate.from('2026-01-06'),
   );
   private readonly first = Temporal.PlainDate.from('2026-01-12');
   /** 15 days from January 12. */
-  readonly booked = (date: Temporal.PlainDate) => {
+  private readonly booked = (date: Temporal.PlainDate) => {
     const days = date.since(this.first).days;
     return days >= 0 && days < 15;
   };
-  readonly previousLabel = {
+  private readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',

@@ -75,7 +75,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidOtpFieldDemo {
-  protected readonly otpForm = form(signal({ code: '12' }), (path) => {
+  private readonly otpForm = form(signal({ code: '12' }), (path) => {
     required(path.code, { message: 'Enter the code.' });
     minLength(path.code, 6, { message: 'Enter all 6 digits.' });
   });

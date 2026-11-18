@@ -96,13 +96,13 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FunnelChartUsageDemo {
-  readonly data = [
+  private readonly data = [
     { stage: 'visit', visitors: 1200 },
     { stage: 'signup', visitors: 860 },
     { stage: 'trial', visitors: 540 },
     { stage: 'paid', visitors: 280 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     visitors: { label: 'Visitors' },
     visit: { label: 'Visit', color: 'var(--chart-2)' },
     signup: { label: 'Sign up', color: 'var(--chart-3)' },

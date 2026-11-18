@@ -63,7 +63,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomMarkCheckboxDemo {
-  protected readonly colorsForm = form(
+  private readonly colorsForm = form(
     signal({ red: true, green: false, blue: true }),
   );
 }`;

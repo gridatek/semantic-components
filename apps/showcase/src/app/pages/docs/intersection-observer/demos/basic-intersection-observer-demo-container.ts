@@ -65,11 +65,11 @@ import { ScFrame, ScIntersectionObserver } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicIntersectionObserverDemo {
-  readonly thresholds = [0, 0.25, 0.5, 0.75, 1];
+  private readonly thresholds = [0, 0.25, 0.5, 0.75, 1];
 
-  readonly ratio = signal(0);
+  private readonly ratio = signal(0);
 
-  onIntersect(entry: IntersectionObserverEntry): void {
+  private onIntersect(entry: IntersectionObserverEntry): void {
     this.ratio.set(Math.round(entry.intersectionRatio * 100));
   }
 }`;

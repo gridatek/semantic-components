@@ -106,7 +106,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioMenubarDemo {
-  protected readonly user = signal('benoit');
-  protected readonly theme = signal('system');
+  private readonly user = signal('benoit');
+  private readonly theme = signal('system');
 }`;
 }

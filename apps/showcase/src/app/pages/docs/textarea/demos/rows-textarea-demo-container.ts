@@ -51,7 +51,7 @@ import { ScField, ScLabel, ScTextarea } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class RowsTextareaDemo {
-  readonly formModel = signal({ small: '', large: '' });
-  readonly rowsForm = form(this.formModel);
+  private readonly formModel = signal({ small: '', large: '' });
+  private readonly rowsForm = form(this.formModel);
 }`;
 }

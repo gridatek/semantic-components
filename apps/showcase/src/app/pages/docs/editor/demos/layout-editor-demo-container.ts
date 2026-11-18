@@ -104,16 +104,16 @@ const LAYOUTS: ScEditorContentLayout[] = ['default', 'page'];
 })
 export class LayoutEditorDemo {
   private readonly model = signal({ body: LETTER });
-  readonly editorForm = form(this.model);
+  private readonly editorForm = form(this.model);
 
-  readonly layouts = LAYOUTS;
-  readonly layoutLabels: Record<ScEditorContentLayout, string> = {
+  private readonly layouts = LAYOUTS;
+  private readonly layoutLabels: Record<ScEditorContentLayout, string> = {
     default: 'Default',
     page: 'Page',
   };
-  readonly layout = signal<ScEditorContentLayout>('page');
+  private readonly layout = signal<ScEditorContentLayout>('page');
 
-  setLayout(value: string | string[] | null): void {
+  private setLayout(value: string | string[] | null): void {
     if (LAYOUTS.includes(value as ScEditorContentLayout)) {
       this.layout.set(value as ScEditorContentLayout);
     }

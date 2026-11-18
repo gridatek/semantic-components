@@ -218,8 +218,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MessagePatternUsageDemo {
-  protected readonly copied = signal(false);
-  protected readonly feedback = signal<'like' | 'dislike' | null>(null);
+  private readonly copied = signal(false);
+  private readonly feedback = signal<'like' | 'dislike' | null>(null);
   private timer: ReturnType<typeof setTimeout> | undefined;
 
   constructor() {
@@ -227,7 +227,7 @@ export class MessagePatternUsageDemo {
   }
 
   /** Writes the reply to the clipboard; a check for two seconds. */
-  protected copy(): void {
+  private copy(): void {
     void navigator.clipboard?.writeText(
       'Install Dialog, then open it from the gear button in site-header.ts.',
     );
@@ -236,7 +236,7 @@ export class MessagePatternUsageDemo {
     this.timer = setTimeout(() => this.copied.set(false), 2000);
   }
 
-  protected rate(value: 'like' | 'dislike'): void {
+  private rate(value: 'like' | 'dislike'): void {
     this.feedback.update((current) => (current === value ? null : value));
   }
 }`;

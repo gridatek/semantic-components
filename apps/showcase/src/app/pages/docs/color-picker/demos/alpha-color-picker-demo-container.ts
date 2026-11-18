@@ -70,6 +70,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class AlphaColorPickerDemo {
-  readonly color = signal('#8b5cf680');
+  private readonly color = signal('#8b5cf680');
 }`;
 }

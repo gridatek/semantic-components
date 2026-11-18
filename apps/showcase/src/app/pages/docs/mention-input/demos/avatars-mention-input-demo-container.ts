@@ -74,7 +74,7 @@ import type { ScMentionUser } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class AvatarsMentionInputDemo {
-  readonly usersWithAvatars: ScMentionUser[] = [
+  private readonly usersWithAvatars: ScMentionUser[] = [
     {
       id: '1',
       name: 'Sarah Connor',

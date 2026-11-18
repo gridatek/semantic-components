@@ -89,9 +89,9 @@ import type { ScMentionUser } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormMentionInputDemo {
-  readonly commentValue = signal('');
+  private readonly commentValue = signal('');
 
-  readonly sampleUsers: ScMentionUser[] = [
+  private readonly sampleUsers: ScMentionUser[] = [
     { id: '1', name: 'John Doe', username: 'johndoe' },
     { id: '2', name: 'Jane Smith', username: 'janesmith' },
     { id: '3', name: 'Bob Wilson', username: 'bobwilson' },

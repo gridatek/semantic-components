@@ -102,6 +102,6 @@ import {
 })
 export class NoCountEditorDemo {
   private readonly model = signal({ body: '' });
-  readonly editorForm = form(this.model);
+  private readonly editorForm = form(this.model);
 }`;
 }

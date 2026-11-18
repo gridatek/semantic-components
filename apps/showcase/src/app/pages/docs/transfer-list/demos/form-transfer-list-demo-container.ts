@@ -167,7 +167,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTransferListDemo {
-  readonly permissions = [
+  private readonly permissions = [
     { id: 'read', label: 'Read' },
     { id: 'write', label: 'Write' },
     { id: 'delete', label: 'Delete' },
@@ -177,9 +177,11 @@ export class FormTransferListDemo {
     { id: 'billing', label: 'Billing', disabled: true },
     { id: 'admin', label: 'Administer' },
   ];
-  readonly model = signal<{ permissions: string[] }>({ permissions: [] });
-  readonly saved = signal(false);
-  readonly roleForm = form(
+  private readonly model = signal<{ permissions: string[] }>({
+    permissions: [],
+  });
+  private readonly saved = signal(false);
+  private readonly roleForm = form(
     this.model,
     (path) =>
       minLength(path.permissions, 2, {

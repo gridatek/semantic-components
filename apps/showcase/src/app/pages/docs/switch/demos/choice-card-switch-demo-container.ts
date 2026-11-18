@@ -74,7 +74,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ChoiceCardSwitchDemo {
-  protected readonly focusForm = form(
+  private readonly focusForm = form(
     signal({ share: false, notifications: true }),
   );
 }`;

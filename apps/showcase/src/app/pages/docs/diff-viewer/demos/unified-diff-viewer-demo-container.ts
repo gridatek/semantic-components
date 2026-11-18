@@ -51,7 +51,7 @@ import { ScDiffViewer } from '@semantic-components/ui/diff-viewer';
   encapsulation: ViewEncapsulation.None,
 })
 export class UnifiedDiffViewerDemo {
-  readonly before = \`import { Component, signal } from '@angular/core';
+  private readonly before = \`import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -64,7 +64,7 @@ export class Counter {
     this.count.set(this.count() + 1);
   }
 }\`;
-  readonly after = \`import { Component, signal } from '@angular/core';
+  private readonly after = \`import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-counter',

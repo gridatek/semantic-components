@@ -74,9 +74,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TerminalOutputCodeBlockDemo {
-  readonly output = \`\\x1b[32m✓\\x1b[0m 12 tests passed\\n\\x1b[33m!\\x1b[0m 1 test skipped\\n\\x1b[31m✗\\x1b[0m 2 tests failed\\n\\x1b[2mDone in 1.8s\\x1b[0m\`;
+  private readonly output = \`\\x1b[32m✓\\x1b[0m 12 tests passed\\n\\x1b[33m!\\x1b[0m 1 test skipped\\n\\x1b[31m✗\\x1b[0m 2 tests failed\\n\\x1b[2mDone in 1.8s\\x1b[0m\`;
   /** The output without its colour codes (ESC [ … m), to copy. */
-  protected readonly text = this.output
+  private readonly text = this.output
     .split(String.fromCharCode(27))
     .map((part, i) => (i === 0 ? part : part.replace(/^\\[[\\d;]*m/, '')))
     .join('');

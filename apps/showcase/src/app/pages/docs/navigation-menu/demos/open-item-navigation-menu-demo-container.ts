@@ -173,9 +173,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class OpenItemNavigationMenuDemo {
-  readonly open = signal<string | null>(null);
+  private readonly open = signal<string | null>(null);
 
-  readonly gettingStarted = [
+  private readonly gettingStarted = [
     {
       link: '/docs/getting-started/introduction',
       title: 'Introduction',
@@ -193,7 +193,7 @@ export class OpenItemNavigationMenuDemo {
     },
   ];
 
-  readonly components = [
+  private readonly components = [
     {
       link: '/docs/components/alert-dialog',
       title: 'Alert Dialog',

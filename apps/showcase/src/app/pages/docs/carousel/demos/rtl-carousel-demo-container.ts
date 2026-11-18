@@ -97,6 +97,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCarouselDemo {
-  readonly slides = ['١', '٢', '٣', '٤', '٥'];
+  private readonly slides = ['١', '٢', '٣', '٤', '٥'];
 }`;
 }

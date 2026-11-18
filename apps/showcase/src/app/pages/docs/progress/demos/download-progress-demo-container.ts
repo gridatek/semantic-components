@@ -72,15 +72,15 @@ import {
 export class DownloadProgressDemo {
   private timer: ReturnType<typeof setInterval> | undefined;
 
-  readonly received = signal(0);
-  readonly downloading = signal(false);
+  private readonly received = signal(0);
+  private readonly downloading = signal(false);
 
   constructor() {
     inject(DestroyRef).onDestroy(() => clearInterval(this.timer));
   }
 
   /** A download of chunks of uneven size, until all of it is here. */
-  download(): void {
+  private download(): void {
     this.received.set(0);
     this.downloading.set(true);
     this.timer = setInterval(() => {

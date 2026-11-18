@@ -127,9 +127,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormDateRangePickerDemo {
-  readonly model = signal<{ stay: ScCalendarValue }>({ stay: null });
-  readonly booked = signal('');
-  readonly bookingForm = form(
+  private readonly model = signal<{ stay: ScCalendarValue }>({ stay: null });
+  private readonly booked = signal('');
+  private readonly bookingForm = form(
     this.model,
     (s) =>
       validate(s.stay, ({ value }) =>

@@ -70,7 +70,8 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCodeEditorDemo {
-  readonly code = signal(\`import { Component, signal } from '@angular/core';
+  private readonly code =
+    signal(\`import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-counter',

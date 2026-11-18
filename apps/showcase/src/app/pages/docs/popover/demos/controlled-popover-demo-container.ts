@@ -77,6 +77,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledPopoverDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 }`;
 }

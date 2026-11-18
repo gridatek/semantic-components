@@ -93,14 +93,14 @@ function formatTokens(value: number): string {
   encapsulation: ViewEncapsulation.None,
 })
 export class ContextUsageDemo {
-  protected readonly usage = usage;
-  protected readonly used = usage.input + usage.output + usage.reasoning;
-  protected readonly percent = Math.round((this.used / usage.limit) * 100);
-  protected readonly rows = [
+  private readonly usage = usage;
+  private readonly used = usage.input + usage.output + usage.reasoning;
+  private readonly percent = Math.round((this.used / usage.limit) * 100);
+  private readonly rows = [
     { label: 'Input', value: usage.input },
     { label: 'Output', value: usage.output },
     { label: 'Reasoning', value: usage.reasoning },
   ];
-  protected readonly format = formatTokens;
+  private readonly format = formatTokens;
 }`;
 }

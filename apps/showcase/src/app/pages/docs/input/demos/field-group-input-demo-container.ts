@@ -79,8 +79,8 @@ import {
 })
 export class FieldGroupInputDemo {
   private readonly model = signal({ name: '', email: '' });
-  protected readonly status = signal('');
-  protected readonly profileForm = form(this.model, () => undefined, {
+  private readonly status = signal('');
+  private readonly profileForm = form(this.model, () => undefined, {
     submission: {
       action: async () => {
         this.status.set(\`Submitted: \${this.model().name}\`);
@@ -88,7 +88,7 @@ export class FieldGroupInputDemo {
     },
   });
 
-  protected reset(): void {
+  private reset(): void {
     this.model.set({ name: '', email: '' });
     this.profileForm().reset();
     this.status.set('');

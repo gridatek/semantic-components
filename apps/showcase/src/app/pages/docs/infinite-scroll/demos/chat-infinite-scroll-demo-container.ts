@@ -76,11 +76,11 @@ interface Message {
 })
 export class ChatInfiniteScrollDemo {
   /** The newest 15, oldest first. */
-  readonly messages = signal<Message[]>(this.page(60, 15));
-  readonly loading = signal(false);
-  readonly done = signal(false);
+  private readonly messages = signal<Message[]>(this.page(60, 15));
+  private readonly loading = signal(false);
+  private readonly done = signal(false);
 
-  async load(): Promise<void> {
+  private async load(): Promise<void> {
     this.loading.set(true);
     await new Promise((resolve) => setTimeout(resolve, 600));
     const oldest = this.messages()[0].id;

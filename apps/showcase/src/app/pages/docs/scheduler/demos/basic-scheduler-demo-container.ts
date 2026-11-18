@@ -118,10 +118,10 @@ interface Meeting extends ScSchedulerEventData {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicSchedulerDemo {
-  readonly events = eventsAroundToday();
-  readonly view = signal<ScSchedulerView>('week');
-  readonly date = signal(Temporal.Now.plainDateISO());
-  readonly selected = signal<Meeting | null>(null);
+  private readonly events = eventsAroundToday();
+  private readonly view = signal<ScSchedulerView>('week');
+  private readonly date = signal(Temporal.Now.plainDateISO());
+  private readonly selected = signal<Meeting | null>(null);
 }
 
 /** Around today, in your time zone. */

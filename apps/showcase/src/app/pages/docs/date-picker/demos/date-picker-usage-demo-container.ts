@@ -90,6 +90,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DatePickerUsageDemo {
-  readonly date = signal<ScCalendarValue>(null);
+  private readonly date = signal<ScCalendarValue>(null);
 }`;
 }

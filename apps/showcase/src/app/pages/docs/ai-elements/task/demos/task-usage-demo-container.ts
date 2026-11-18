@@ -135,13 +135,13 @@ export class TaskRow {
   readonly task = input.required<TaskScript>();
   /** How many steps are done; the next one, if any, is running. */
   readonly done = input(0);
-  protected readonly running = computed(
+  private readonly running = computed(
     () => this.done() < this.task().steps.length,
   );
-  protected readonly steps = computed(() =>
+  private readonly steps = computed(() =>
     this.task().steps.slice(0, this.done() + 1),
   );
-  protected readonly choice = signal<boolean | null>(null);
+  private readonly choice = signal<boolean | null>(null);
 }
 
 /** The agent's work as tasks, each step appearing as it is taken (replayed on a timer). */
@@ -198,22 +198,22 @@ export class TaskRow {
   encapsulation: ViewEncapsulation.None,
 })
 export class TaskUsageDemo {
-  protected readonly tasks = TASKS;
+  private readonly tasks = TASKS;
   private readonly answer =
     'Added Open Graph defaults to app/layout.tsx and a title, description and image for the home page in app/page.tsx.';
   /** For each task so far, how many of its steps are done. */
-  protected readonly progress = signal<number[]>(
+  private readonly progress = signal<number[]>(
     TASKS.map((task) => task.steps.length),
   );
-  protected readonly reply = signal(this.answer);
-  protected readonly busy = signal(false);
+  private readonly reply = signal(this.answer);
+  private readonly busy = signal(false);
   private timers: ReturnType<typeof setTimeout>[] = [];
 
   constructor() {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected replay(): void {
+  private replay(): void {
     this.stop();
     this.progress.set([]);
     this.reply.set('');

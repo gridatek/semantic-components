@@ -284,14 +284,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayerVideoPlayerDemo {
-  readonly settings = signal({ captions: 'off' });
-  readonly settingsForm = form(this.settings);
-  readonly captions = computed(() =>
+  private readonly settings = signal({ captions: 'off' });
+  private readonly settingsForm = form(this.settings);
+  private readonly captions = computed(() =>
     this.settings().captions === 'off' ? null : this.settings().captions,
   );
-  readonly rates = [1, 1.5, 2];
+  private readonly rates = [1, 1.5, 2];
 
-  setCaptions(id: string | null) {
+  private setCaptions(id: string | null) {
     this.settings.set({ captions: id ?? 'off' });
   }
 }`;

@@ -167,9 +167,9 @@ import {
 })
 export class TriggerEmojiPickerDemo {
   private readonly popover = viewChild.required(ScPopoverProvider);
-  readonly selected = signal<ScEmoji | null>(null);
+  private readonly selected = signal<ScEmoji | null>(null);
 
-  pick(emoji: ScEmoji): void {
+  private pick(emoji: ScEmoji): void {
     this.selected.set(emoji);
     this.popover().close();
   }

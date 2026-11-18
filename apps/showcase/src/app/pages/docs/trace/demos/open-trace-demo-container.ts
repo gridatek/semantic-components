@@ -114,8 +114,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class OpenTraceDemo {
-  protected readonly open = signal(false);
-  protected readonly nodeOutput = '$ node --version\\nv24.18.0';
-  protected readonly pnpmOutput = '$ pnpm --version\\n10.33.4';
+  private readonly open = signal(false);
+  private readonly nodeOutput = '$ node --version\\nv24.18.0';
+  private readonly pnpmOutput = '$ pnpm --version\\n10.33.4';
 }`;
 }

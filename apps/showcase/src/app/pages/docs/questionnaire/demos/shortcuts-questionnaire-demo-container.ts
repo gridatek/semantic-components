@@ -126,9 +126,9 @@ import {
 })
 export class ShortcutsQuestionnaireDemo {
   private readonly model = signal({ action: '' });
-  readonly sent = signal<{ action: string } | null>(null);
+  private readonly sent = signal<{ action: string } | null>(null);
 
-  readonly survey = form(this.model, (s) => required(s.action), {
+  private readonly survey = form(this.model, (s) => required(s.action), {
     submission: { action: async () => this.sent.set(this.model()) },
   });
 }`;

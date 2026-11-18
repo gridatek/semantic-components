@@ -149,8 +149,8 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class ContextMenuUsageDemo {
-  protected readonly bookmarks = signal(true);
-  protected readonly fullUrls = signal(false);
-  protected readonly person = signal('pedro');
+  private readonly bookmarks = signal(true);
+  private readonly fullUrls = signal(false);
+  private readonly person = signal('pedro');
 }`;
 }

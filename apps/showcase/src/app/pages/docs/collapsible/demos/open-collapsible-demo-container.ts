@@ -63,6 +63,6 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class OpenCollapsibleDemo {
-  protected readonly open = signal(true);
+  private readonly open = signal(true);
 }`;
 }

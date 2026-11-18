@@ -44,7 +44,7 @@ import {
 export class TypesToastDemo {
   private readonly toaster = inject(ScToaster);
 
-  readonly types: { label: string; toast: ScToastConfig }[] = [
+  private readonly types: { label: string; toast: ScToastConfig }[] = [
     { label: 'Default', toast: { description: 'Event has been created.' } },
     {
       label: 'Success',
@@ -73,7 +73,7 @@ export class TypesToastDemo {
     },
   ];
 
-  show(toast: ScToastConfig): void {
+  private show(toast: ScToastConfig): void {
     this.toaster.show(toast);
   }
 }`;

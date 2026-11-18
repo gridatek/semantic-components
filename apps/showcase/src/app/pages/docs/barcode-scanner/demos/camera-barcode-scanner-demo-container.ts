@@ -105,6 +105,6 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class CameraBarcodeScannerDemo {
-  readonly last = signal('');
+  private readonly last = signal('');
 }`;
 }

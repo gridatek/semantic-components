@@ -78,20 +78,20 @@ import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';
   encapsulation: ViewEncapsulation.None,
 })
 export class TreemapChartUsageDemo {
-  readonly data = [
+  private readonly data = [
     { browser: 'chrome', visitors: 275 },
     { browser: 'safari', visitors: 200 },
     { browser: 'firefox', visitors: 187 },
     { browser: 'edge', visitors: 173 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     visitors: { label: 'Visitors' },
     chrome: { label: 'Chrome', color: 'var(--chart-2)' },
     safari: { label: 'Safari', color: 'var(--chart-3)' },
     firefox: { label: 'Firefox', color: 'var(--chart-4)' },
     edge: { label: 'Edge', color: 'var(--chart-5)' },
   };
-  readonly name = (_: number, browser: string) =>
+  private readonly name = (_: number, browser: string) =>
     this.config[browser]?.label ?? browser;
 }`;
 }

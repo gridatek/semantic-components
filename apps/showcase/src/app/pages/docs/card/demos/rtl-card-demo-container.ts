@@ -120,7 +120,7 @@ import {
 })
 export class RtlCardDemo {
   private readonly model = signal({ email: '', password: '' });
-  protected readonly loginForm = form(
+  private readonly loginForm = form(
     this.model,
     (path) => {
       required(path.email);

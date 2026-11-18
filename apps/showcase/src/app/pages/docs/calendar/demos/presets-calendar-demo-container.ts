@@ -92,25 +92,25 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PresetsCalendarDemo {
-  readonly date = signal<ScCalendarValue>(
+  private readonly date = signal<ScCalendarValue>(
     Temporal.PlainDate.from('2026-02-12'),
   );
-  readonly presets = [
+  private readonly presets = [
     { label: 'Today', days: 0 },
     { label: 'Tomorrow', days: 1 },
     { label: 'In 3 days', days: 3 },
     { label: 'In a week', days: 7 },
     { label: 'In 2 weeks', days: 14 },
   ];
-  pick(days: number): void {
+  private pick(days: number): void {
     this.date.set(Temporal.Now.plainDateISO().add({ days }));
   }
-  readonly previousLabel = {
+  private readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',

@@ -118,27 +118,27 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PagesCommandDemo {
-  protected readonly page = signal<'home' | 'projects'>('home');
-  protected readonly search = signal('');
-  protected readonly last = signal('');
-  protected readonly projects = [
+  private readonly page = signal<'home' | 'projects'>('home');
+  private readonly search = signal('');
+  private readonly last = signal('');
+  private readonly projects = [
     'Website redesign',
     'Mobile app',
     'Design system',
     'Docs',
   ];
 
-  protected openProjects(): void {
+  private openProjects(): void {
     this.page.set('projects');
     this.search.set('');
   }
 
   /** Backspace in an empty search: the page before. */
-  protected back(): void {
+  private back(): void {
     if (!this.search() && this.page() !== 'home') this.page.set('home');
   }
 
-  protected ran(name: string): void {
+  private ran(name: string): void {
     this.last.set(name);
   }
 }`;

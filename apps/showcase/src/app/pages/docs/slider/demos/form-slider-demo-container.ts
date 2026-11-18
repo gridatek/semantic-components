@@ -40,8 +40,8 @@ import { ScField, ScFrame, ScLabel, ScSlider } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormSliderDemo {
-  protected readonly model = signal({ volume: 50 });
-  protected readonly volumeForm = form(this.model, (path) => {
+  private readonly model = signal({ volume: 50 });
+  private readonly volumeForm = form(this.model, (path) => {
     min(path.volume, 0);
     max(path.volume, 100);
   });

@@ -64,7 +64,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidNativeSelectDemo {
-  protected readonly fruitForm = form(signal({ fruit: '' }), (path) => {
+  private readonly fruitForm = form(signal({ fruit: '' }), (path) => {
     required(path.fruit, { message: 'Please select a fruit.' });
   });
 

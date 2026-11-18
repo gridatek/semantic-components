@@ -50,6 +50,9 @@ import { ScIntersectionObserver } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class OnceIntersectionObserverDemo {
-  readonly items = Array.from({ length: 12 }, (_, i) => \`Item \${i + 1}\`);
+  private readonly items = Array.from(
+    { length: 12 },
+    (_, i) => \`Item \${i + 1}\`,
+  );
 }`;
 }

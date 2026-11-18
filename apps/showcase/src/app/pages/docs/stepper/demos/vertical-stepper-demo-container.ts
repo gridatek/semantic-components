@@ -128,8 +128,8 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerticalStepperDemo {
-  readonly selectedIndex = signal(0);
-  readonly steps = [
+  private readonly selectedIndex = signal(0);
+  private readonly steps = [
     'Content for step 1',
     'Content for step 2',
     'Content for step 3',

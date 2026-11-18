@@ -47,6 +47,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CircleProgressDemo {
-  readonly values = [0, 25, 50, 75, 100];
+  private readonly values = [0, 25, 50, 75, 100];
 }`;
 }

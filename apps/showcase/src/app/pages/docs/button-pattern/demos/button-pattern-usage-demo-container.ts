@@ -25,7 +25,7 @@ import { ScButtonPattern } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonPatternUsageDemo {
-  handleClick() {
+  private handleClick() {
     // no-op for demo
   }
 }`;

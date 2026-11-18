@@ -93,19 +93,19 @@ interface Item {
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonsSortableListDemo {
-  readonly items = signal<Item[]>([
+  private readonly items = signal<Item[]>([
     { id: 'p1', label: 'Opening theme' },
     { id: 'p2', label: 'Night drive' },
     { id: 'p3', label: 'Slow morning' },
     { id: 'p4', label: 'Last call' },
   ]);
-  readonly joined = computed(() =>
+  private readonly joined = computed(() =>
     this.items()
       .map((item) => item.label)
       .join(', '),
   );
   /** What a keyboard move says, step by step. */
-  readonly announce = ({
+  private readonly announce = ({
     type,
     item,
     position,

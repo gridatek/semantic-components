@@ -105,8 +105,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ConstraintsDateRangePickerDemo {
-  readonly range = signal<ScCalendarValue>(null);
-  readonly today = Temporal.Now.plainDateISO();
-  readonly latest = this.today.add({ days: 90 });
+  private readonly range = signal<ScCalendarValue>(null);
+  private readonly today = Temporal.Now.plainDateISO();
+  private readonly latest = this.today.add({ days: 90 });
 }`;
 }

@@ -86,9 +86,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTagsInputDemo {
-  readonly model = signal({ keywords: [] as string[] });
-  readonly published = signal('');
-  readonly articleForm = form(
+  private readonly model = signal({ keywords: [] as string[] });
+  private readonly published = signal('');
+  private readonly articleForm = form(
     this.model,
     (s) => {
       minLength(s.keywords, 1, { message: 'Add at least one keyword.' });

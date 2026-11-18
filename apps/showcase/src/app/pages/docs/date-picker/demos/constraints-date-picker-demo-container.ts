@@ -123,10 +123,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ConstraintsDatePickerDemo {
-  readonly min = Temporal.PlainDate.from('2026-10-08');
-  readonly max = Temporal.PlainDate.from('2026-11-20');
-  readonly date = signal<ScCalendarValue>(null);
+  private readonly min = Temporal.PlainDate.from('2026-10-08');
+  private readonly max = Temporal.PlainDate.from('2026-11-20');
+  private readonly date = signal<ScCalendarValue>(null);
   /** Saturdays and Sundays. */
-  readonly weekend = (date: Temporal.PlainDate) => date.dayOfWeek > 5;
+  private readonly weekend = (date: Temporal.PlainDate) => date.dayOfWeek > 5;
 }`;
 }

@@ -170,23 +170,27 @@ interface Task {
   encapsulation: ViewEncapsulation.None,
 })
 export class RichKanbanBoardDemo {
-  readonly columns = [
+  private readonly columns = [
     { id: 'todo', title: 'To do' },
     { id: 'doing', title: 'In progress' },
     { id: 'done', title: 'Done' },
   ];
-  readonly titles: Record<string, string> = {
+  private readonly titles: Record<string, string> = {
     todo: 'To do',
     doing: 'In progress',
     done: 'Done',
   };
-  readonly priorityText = { high: 'High', medium: 'Medium', low: 'Low' };
-  readonly priorityClass = {
+  private readonly priorityText = {
+    high: 'High',
+    medium: 'Medium',
+    low: 'Low',
+  };
+  private readonly priorityClass = {
     high: 'text-destructive font-medium',
     medium: 'text-warning font-medium',
     low: 'text-muted-foreground',
   };
-  readonly board = signal<ScKanbanBoardValue<Task>>({
+  private readonly board = signal<ScKanbanBoardValue<Task>>({
     todo: [
       {
         id: 'r1',
@@ -227,7 +231,7 @@ export class RichKanbanBoardDemo {
     ],
   });
   /** What a keyboard move says, step by step. */
-  readonly announce = ({
+  private readonly announce = ({
     type,
     item,
     column,

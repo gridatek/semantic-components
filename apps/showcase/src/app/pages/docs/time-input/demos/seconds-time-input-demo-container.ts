@@ -38,7 +38,7 @@ import { ScField, ScLabel, ScTimeInput } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class SecondsTimeInputDemo {
-  readonly time = signal<Temporal.PlainTime | null>(
+  private readonly time = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('09:05:30'),
   );
 }`;

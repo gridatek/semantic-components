@@ -201,38 +201,38 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsEditorDemo {
-  readonly formats = FORMATS;
-  readonly formatLabels: Record<ScEditorFormat, string> = {
+  private readonly formats = FORMATS;
+  private readonly formatLabels: Record<ScEditorFormat, string> = {
     html: 'HTML',
     json: 'JSON',
     markdown: 'Markdown',
     text: 'Text',
   };
 
-  readonly format = signal<ScEditorFormat>('json');
+  private readonly format = signal<ScEditorFormat>('json');
 
   private readonly model = signal<{ body: ScEditorValue }>({ body: null });
-  readonly noteForm = form(this.model, (path) => {
+  private readonly noteForm = form(this.model, (path) => {
     required(path.body);
   });
 
   /** The value as it is stored: a string as it is, JSON written out. */
-  readonly shownValue = computed(() => {
+  private readonly shownValue = computed(() => {
     const value = this.noteForm.body().value();
     return typeof value === 'string'
       ? JSON.stringify(value)
       : JSON.stringify(value, null, 2);
   });
 
-  setFormat(value: string | string[] | null): void {
+  private setFormat(value: string | string[] | null): void {
     if (typeof value === 'string') this.format.set(value as ScEditorFormat);
   }
 
-  clear(): void {
+  private clear(): void {
     this.model.set({ body: this.format() === 'json' ? null : '' });
   }
 
-  load(): void {
+  private load(): void {
     this.model.set({ body: SAMPLES[this.format()] });
   }
 }`;

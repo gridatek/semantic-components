@@ -48,6 +48,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RollCountdownDemo {
-  readonly end = Temporal.Now.instant().add({ hours: 5, minutes: 30 });
+  private readonly end = Temporal.Now.instant().add({ hours: 5, minutes: 30 });
 }`;
 }

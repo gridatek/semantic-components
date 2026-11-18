@@ -163,7 +163,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormInputDemo {
-  protected readonly countries = [
+  private readonly countries = [
     { value: 'us', label: 'United States' },
     { value: 'uk', label: 'United Kingdom' },
     { value: 'ma', label: 'Morocco' },
@@ -178,8 +178,8 @@ export class FormInputDemo {
     address: '',
   };
   private readonly model = signal({ ...this.empty });
-  protected readonly status = signal('');
-  protected readonly contactForm = form(
+  private readonly status = signal('');
+  private readonly contactForm = form(
     this.model,
     (s) => {
       required(s.name, { message: 'Enter your name.' });
@@ -194,12 +194,12 @@ export class FormInputDemo {
     },
   );
 
-  protected countryLabel(): string {
+  private countryLabel(): string {
     const value = this.contactForm.country().value();
     return this.countries.find((c) => c.value === value)?.label ?? '';
   }
 
-  protected cancel(): void {
+  private cancel(): void {
     this.model.set({ ...this.empty });
     this.contactForm().reset();
     this.status.set('');

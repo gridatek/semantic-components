@@ -94,6 +94,6 @@ import {
 })
 export class EditorUsageDemo {
   private readonly model = signal({ body: '' });
-  readonly editorForm = form(this.model);
+  private readonly editorForm = form(this.model);
 }`;
 }

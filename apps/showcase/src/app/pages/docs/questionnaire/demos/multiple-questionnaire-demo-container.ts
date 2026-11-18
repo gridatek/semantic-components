@@ -138,9 +138,9 @@ export class MultipleQuestionnaireDemo {
     sources: { docs: false, code: false, issues: false },
     notes: '',
   });
-  readonly sent = signal<unknown>(null);
+  private readonly sent = signal<unknown>(null);
 
-  readonly survey = form(this.model, () => undefined, {
+  private readonly survey = form(this.model, () => undefined, {
     submission: { action: async () => this.sent.set(this.model()) },
   });
 }`;

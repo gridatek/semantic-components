@@ -106,7 +106,7 @@ const PACKAGE_JSON = \`{
   encapsulation: ViewEncapsulation.None,
 })
 export class SheetToolDemo {
-  protected readonly content = PACKAGE_JSON;
-  protected readonly lines = PACKAGE_JSON.split('\\n').length;
+  private readonly content = PACKAGE_JSON;
+  private readonly lines = PACKAGE_JSON.split('\\n').length;
 }`;
 }

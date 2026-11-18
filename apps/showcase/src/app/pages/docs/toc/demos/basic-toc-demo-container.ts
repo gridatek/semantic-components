@@ -70,7 +70,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTocDemo {
-  protected readonly sections = [
+  private readonly sections = [
     {
       title: 'Getting started',
       text: 'Install the package, then import the parts you need. Every part is a directive on your own element: the markup and the text stay yours.',

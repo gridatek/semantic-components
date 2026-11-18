@@ -46,7 +46,7 @@ import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class TickerMarqueeDemo {
-  readonly headlines = [
+  private readonly headlines = [
     'Version 3 is out',
     'Signal Forms everywhere',
     'New: the dock',

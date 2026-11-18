@@ -61,15 +61,15 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LanguagesCodeBlockDemo {
-  readonly css = \`.button {
+  private readonly css = \`.button {
   padding: 0.5rem 1rem;
   border-radius: var(--radius);
 }\`;
-  readonly json = \`{
+  private readonly json = \`{
   "name": "my-app",
   "private": true
 }\`;
-  readonly python = \`def greet(name: str) -> str:
+  private readonly python = \`def greet(name: str) -> str:
     return f"Hello, {name}!"\`;
 }`;
 }

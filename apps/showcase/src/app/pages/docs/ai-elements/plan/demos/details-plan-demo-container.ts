@@ -96,7 +96,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DetailsPlanDemo {
-  protected readonly steps = [
+  private readonly steps = [
     'Add a dark variant to the theme tokens',
     'Read the theme from a cookie on the server',
     'Add a toggle to the settings page',

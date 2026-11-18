@@ -109,6 +109,6 @@ const COMMENT =
 })
 export class BubbleMenuEditorDemo {
   private readonly model = signal({ body: COMMENT });
-  readonly editorForm = form(this.model);
+  private readonly editorForm = form(this.model);
 }`;
 }

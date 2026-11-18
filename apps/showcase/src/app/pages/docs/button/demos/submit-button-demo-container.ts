@@ -62,9 +62,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SubmitButtonDemo {
-  readonly model = signal({ name: '' });
-  readonly status = signal('');
-  readonly profileForm = form(
+  private readonly model = signal({ name: '' });
+  private readonly status = signal('');
+  private readonly profileForm = form(
     this.model,
     (s) => required(s.name, { message: 'Enter a name.' }),
     {
@@ -77,7 +77,7 @@ export class SubmitButtonDemo {
   );
 
   /** A plain button: it resets, and the form isn't submitted. */
-  cancel(): void {
+  private cancel(): void {
     this.model.set({ name: '' });
     this.profileForm().reset();
     this.status.set('Cancelled');

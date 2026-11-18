@@ -43,7 +43,7 @@ import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class CardsMasonryGridDemo {
-  readonly notes = [
+  private readonly notes = [
     { title: 'Groceries', text: 'Milk, eggs, bread, and the good coffee.' },
     {
       title: 'Ideas',

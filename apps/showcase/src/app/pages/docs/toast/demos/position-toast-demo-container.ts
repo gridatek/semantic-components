@@ -45,7 +45,7 @@ export class PositionToastDemo {
   private readonly toaster = inject(ScToaster);
 
   /** Start and end follow the text's direction (start is on the right in Arabic). */
-  readonly positions: { value: ScToastPosition; label: string }[] = [
+  private readonly positions: { value: ScToastPosition; label: string }[] = [
     { value: 'top-start', label: 'Top start' },
     { value: 'top-center', label: 'Top center' },
     { value: 'top-end', label: 'Top end' },
@@ -54,7 +54,7 @@ export class PositionToastDemo {
     { value: 'bottom-end', label: 'Bottom end' },
   ];
 
-  show(position: ScToastPosition): void {
+  private show(position: ScToastPosition): void {
     this.toaster.show({ position, description: \`Shown at \${position}.\` });
   }
 }`;

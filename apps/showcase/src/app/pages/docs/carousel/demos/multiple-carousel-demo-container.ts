@@ -94,6 +94,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleCarouselDemo {
-  readonly slides = [1, 2, 3, 4, 5];
+  private readonly slides = [1, 2, 3, 4, 5];
 }`;
 }

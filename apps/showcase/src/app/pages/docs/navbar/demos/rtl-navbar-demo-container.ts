@@ -99,11 +99,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlNavbarDemo {
-  readonly links = ['المنتجات', 'الأسعار', 'التوثيق', 'المدونة'];
-  readonly current = signal('المنتجات');
+  private readonly links = ['المنتجات', 'الأسعار', 'التوثيق', 'المدونة'];
+  private readonly current = signal('المنتجات');
 
   /** A demo: the link marks its page, and stays here. */
-  go(event: Event, link: string): void {
+  private go(event: Event, link: string): void {
     event.preventDefault();
     this.current.set(link);
   }

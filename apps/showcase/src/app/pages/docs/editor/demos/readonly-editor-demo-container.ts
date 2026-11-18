@@ -69,6 +69,6 @@ export class ReadonlyEditorDemo {
     <p>Useful for displaying formatted content that users should only read.</p>
   \`,
   });
-  readonly editorForm = form(this.model, (path) => readonly(path.body));
+  private readonly editorForm = form(this.model, (path) => readonly(path.body));
 }`;
 }

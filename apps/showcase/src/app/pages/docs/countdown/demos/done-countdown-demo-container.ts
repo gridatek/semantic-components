@@ -54,10 +54,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DoneCountdownDemo {
-  readonly run = signal(Temporal.Now.instant().add({ seconds: 10 }));
-  readonly over = signal(false);
+  private readonly run = signal(Temporal.Now.instant().add({ seconds: 10 }));
+  private readonly over = signal(false);
 
-  again(): void {
+  private again(): void {
     this.over.set(false);
     this.run.set(Temporal.Now.instant().add({ seconds: 10 }));
   }

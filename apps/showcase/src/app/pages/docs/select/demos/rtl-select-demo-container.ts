@@ -90,13 +90,13 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSelectDemo {
-  protected readonly fruits = [
+  private readonly fruits = [
     { value: 'apple', label: 'تفاح' },
     { value: 'banana', label: 'موز' },
     { value: 'blueberry', label: 'توت أزرق' },
     { value: 'grapes', label: 'عنب' },
     { value: 'pineapple', label: 'أناناس' },
   ];
-  protected readonly fruit = signal('');
+  private readonly fruit = signal('');
 }`;
 }

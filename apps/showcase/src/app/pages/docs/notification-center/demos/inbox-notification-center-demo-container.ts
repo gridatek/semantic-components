@@ -227,7 +227,7 @@ const minutesAgo = (minutes: number) =>
   encapsulation: ViewEncapsulation.None,
 })
 export class InboxNotificationCenterDemo {
-  readonly notifications = signal<Notice[]>([
+  private readonly notifications = signal<Notice[]>([
     {
       id: '1',
       title: 'Alice replied to your comment',
@@ -275,7 +275,7 @@ export class InboxNotificationCenterDemo {
   private sent = 0;
 
   /** A notification arrives: new, unread, at the top. */
-  receive(): void {
+  private receive(): void {
     this.sent++;
     this.notifications.update((list) => [
       {

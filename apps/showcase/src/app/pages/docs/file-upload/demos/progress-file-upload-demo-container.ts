@@ -110,10 +110,10 @@ import {
 })
 export class ProgressFileUploadDemo {
   /** Each file's share sent, 0–100: yours, not the lib's. */
-  readonly progress = signal(new Map<File, number>());
+  private readonly progress = signal(new Map<File, number>());
 
   /** A pretend upload: every file, a tenth more each 200 ms. */
-  send(files: File[]): void {
+  private send(files: File[]): void {
     const timer = setInterval(() => {
       const next = new Map(this.progress());
       for (const file of files)

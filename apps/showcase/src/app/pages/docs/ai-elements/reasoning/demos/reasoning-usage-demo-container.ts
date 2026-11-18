@@ -134,23 +134,23 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ReasoningUsageDemo {
-  protected readonly question = 'Why is the checkout deploy so slow?';
+  private readonly question = 'Why is the checkout deploy so slow?';
   private readonly reasoning =
     'The deploy log has three phases. Install takes 38s and next build takes 52s, both normal for this repo.\\n\\nImage optimization takes 3m 50s. It reruns on every deploy because its cache key includes the commit hash, so the cache never hits.';
   private readonly answer =
     'Image optimization is the bottleneck. Key its cache on the lockfile and the image directory instead of the commit hash, and the deploy should take under two minutes.';
 
   /** What has arrived so far: the page opens on the finished turn. */
-  protected readonly thought = signal(this.reasoning);
-  protected readonly reply = signal(this.answer);
-  protected readonly started = signal(true);
-  protected readonly thinking = signal(false);
-  protected readonly busy = signal(false);
+  private readonly thought = signal(this.reasoning);
+  private readonly reply = signal(this.answer);
+  private readonly started = signal(true);
+  private readonly thinking = signal(false);
+  private readonly busy = signal(false);
 
   /** Open while it thinks, closed once done — unless you opened or closed it. */
-  protected readonly choice = signal<boolean | null>(null);
+  private readonly choice = signal<boolean | null>(null);
   private readonly replayed = signal(false);
-  protected readonly open = computed(
+  private readonly open = computed(
     () => this.choice() ?? (this.replayed() ? this.thinking() : true),
   );
 
@@ -160,7 +160,7 @@ export class ReasoningUsageDemo {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  replay(): void {
+  private replay(): void {
     this.stop();
     this.thought.set('');
     this.reply.set('');

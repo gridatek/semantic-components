@@ -99,7 +99,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SunburstChartDemo {
-  readonly data = [
+  private readonly data = [
     { region: 'europe', country: 'France', sales: 240 },
     { region: 'europe', country: 'Germany', sales: 190 },
     { region: 'europe', country: 'Spain', sales: 110 },
@@ -108,7 +108,7 @@ export class SunburstChartDemo {
     { region: 'asia', country: 'Japan', sales: 210 },
     { region: 'asia', country: 'India', sales: 150 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     sales: { label: 'Sales' },
     europe: { label: 'Europe', color: 'var(--chart-1)' },
     americas: { label: 'Americas', color: 'var(--chart-2)' },

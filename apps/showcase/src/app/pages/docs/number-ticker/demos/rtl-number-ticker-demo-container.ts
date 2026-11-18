@@ -43,6 +43,6 @@ import { ScButton, ScNumberTicker } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlNumberTickerDemo {
-  protected readonly visitors = signal(4820);
+  private readonly visitors = signal(4820);
 }`;
 }

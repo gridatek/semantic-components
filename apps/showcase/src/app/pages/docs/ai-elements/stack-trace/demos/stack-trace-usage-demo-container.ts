@@ -256,32 +256,32 @@ type CommandState = 'running' | 'ran' | 'failed';
   encapsulation: ViewEncapsulation.None,
 })
 export class StackTraceUsageDemo {
-  protected readonly commands = [
+  private readonly commands = [
     'pnpm prisma migrate reset --skip-seed',
     'pnpm prisma db seed',
   ];
-  protected readonly resetOutput = RESET_OUTPUT;
+  private readonly resetOutput = RESET_OUTPUT;
   private readonly lines = STACK.split('\\n').map((line) => line.trim());
-  protected readonly error = this.lines[0];
+  private readonly error = this.lines[0];
   private readonly frames = this.lines.slice(1).map(parseFrame);
-  protected readonly appFrames = this.frames.filter((frame) => !frame.internal);
-  protected readonly internalFrames = this.frames.filter(
+  private readonly appFrames = this.frames.filter((frame) => !frame.internal);
+  private readonly internalFrames = this.frames.filter(
     (frame) => frame.internal,
   );
   private readonly answer =
     'The migrations ran, but the seed failed in seedUsers. One fixture has no profile, so profile.email is undefined.';
 
-  protected readonly reset = signal<CommandState | null>('ran');
-  protected readonly seed = signal<CommandState | null>('failed');
-  protected readonly reply = signal(this.answer);
-  protected readonly busy = signal(false);
+  private readonly reset = signal<CommandState | null>('ran');
+  private readonly seed = signal<CommandState | null>('failed');
+  private readonly reply = signal(this.answer);
+  private readonly busy = signal(false);
   private timers: ReturnType<typeof setTimeout>[] = [];
 
   constructor() {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected replay(): void {
+  private replay(): void {
     this.stop();
     this.reset.set(null);
     this.seed.set(null);

@@ -149,7 +149,7 @@ interface Photo {
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledLightboxDemo {
-  readonly photos: readonly Photo[] = [
+  private readonly photos: readonly Photo[] = [
     {
       name: 'forest',
       alt: 'A pine forest above the sea',
@@ -191,7 +191,7 @@ export class ControlledLightboxDemo {
       author: 'Alexander Shustov',
     },
   ];
-  readonly open = signal(false);
-  readonly index = signal(0);
+  private readonly open = signal(false);
+  private readonly index = signal(0);
 }`;
 }

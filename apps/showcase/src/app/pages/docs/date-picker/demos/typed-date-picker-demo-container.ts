@@ -118,7 +118,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TypedDatePickerDemo {
-  readonly date = signal<ScCalendarValue>(
+  private readonly date = signal<ScCalendarValue>(
     Temporal.PlainDate.from('2026-10-14'),
   );
 }`;

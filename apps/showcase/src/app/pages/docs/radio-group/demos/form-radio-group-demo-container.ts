@@ -59,10 +59,10 @@ interface NotificationFormModel {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormRadioGroupDemo {
-  readonly formModel = signal<NotificationFormModel>({
+  private readonly formModel = signal<NotificationFormModel>({
     notify: 'mentions',
   });
 
-  readonly notificationForm = form(this.formModel);
+  private readonly notificationForm = form(this.formModel);
 }`;
 }

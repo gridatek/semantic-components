@@ -44,7 +44,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidSwitchDemo {
-  protected readonly termsForm = form(signal({ terms: false }), (path) => {
+  private readonly termsForm = form(signal({ terms: false }), (path) => {
     required(path.terms);
   });
 

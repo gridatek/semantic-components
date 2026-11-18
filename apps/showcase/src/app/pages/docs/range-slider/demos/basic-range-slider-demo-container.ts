@@ -61,7 +61,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicRangeSliderDemo {
-  minValue = 200;
-  maxValue = 800;
+  private minValue = 200;
+  private maxValue = 800;
 }`;
 }

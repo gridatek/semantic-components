@@ -81,15 +81,15 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class NavigationDockDemo {
-  readonly pages = [
+  private readonly pages = [
     { id: 'home', name: 'Home' },
     { id: 'inbox', name: 'Inbox' },
     { id: 'calendar', name: 'Calendar' },
     { id: 'settings', name: 'Settings' },
   ];
-  readonly current = signal('home');
+  private readonly current = signal('home');
 
-  go(event: Event, id: string): void {
+  private go(event: Event, id: string): void {
     event.preventDefault();
     this.current.set(id);
   }

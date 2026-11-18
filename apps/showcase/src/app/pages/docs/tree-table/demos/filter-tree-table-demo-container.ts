@@ -182,7 +182,7 @@ const FILES: FileNode[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class FilterTreeTableDemo {
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: FILES,

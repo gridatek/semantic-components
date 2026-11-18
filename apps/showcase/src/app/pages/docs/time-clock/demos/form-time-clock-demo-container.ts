@@ -64,9 +64,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTimeClockDemo {
-  readonly model = signal<{ at: Temporal.PlainTime | null }>({ at: null });
-  readonly booked = signal('');
-  readonly callForm = form(
+  private readonly model = signal<{ at: Temporal.PlainTime | null }>({
+    at: null,
+  });
+  private readonly booked = signal('');
+  private readonly callForm = form(
     this.model,
     (s) => required(s.at, { message: 'Pick a time.' }),
     {

@@ -87,6 +87,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicSpeedDialDemo {
-  readonly last = signal('');
+  private readonly last = signal('');
 }`;
 }

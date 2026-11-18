@@ -137,6 +137,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class IconsOnlyPaginationDemo {
-  protected readonly sizes = [10, 25, 50, 100];
+  private readonly sizes = [10, 25, 50, 100];
 }`;
 }

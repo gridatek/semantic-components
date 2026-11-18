@@ -76,7 +76,7 @@ import { ScChartSankey } from '@semantic-components/ui/charts/sankey';
   encapsulation: ViewEncapsulation.None,
 })
 export class SankeyChartUsageDemo {
-  readonly data = [
+  private readonly data = [
     {
       flow: 'Search → Pricing',
       source: 'search',
@@ -112,7 +112,7 @@ export class SankeyChartUsageDemo {
     { flow: 'Docs → Sign up', source: 'docs', target: 'signup', visitors: 160 },
     { flow: 'Docs → Left', source: 'docs', target: 'left', visitors: 240 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     visitors: { label: 'Visitors' },
     search: { label: 'Search', color: 'var(--chart-1)' },
     social: { label: 'Social', color: 'var(--chart-2)' },

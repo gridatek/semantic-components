@@ -90,6 +90,6 @@ import { SiMaximizeIcon, SiMinimizeIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SettingsCollapsibleDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 }`;
 }

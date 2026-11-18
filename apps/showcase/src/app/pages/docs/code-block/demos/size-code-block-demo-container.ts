@@ -97,7 +97,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SizeCodeBlockDemo {
-  readonly output = \`$ pnpm build
+  private readonly output = \`$ pnpm build
 > next build
 
 ✓ Compiled successfully in 4.2s

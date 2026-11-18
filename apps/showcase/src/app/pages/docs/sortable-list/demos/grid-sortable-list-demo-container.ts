@@ -70,7 +70,7 @@ interface Item {
   encapsulation: ViewEncapsulation.None,
 })
 export class GridSortableListDemo {
-  readonly items = signal<Item[]>([
+  private readonly items = signal<Item[]>([
     { id: 'cafe', label: 'Café' },
     { id: 'coast', label: 'Coast' },
     { id: 'forest', label: 'Forest' },
@@ -80,13 +80,13 @@ export class GridSortableListDemo {
     { id: 'summit', label: 'Summit' },
     { id: 'waterfall', label: 'Waterfall' },
   ]);
-  readonly joined = computed(() =>
+  private readonly joined = computed(() =>
     this.items()
       .map((item) => item.label)
       .join(', '),
   );
   /** What a keyboard move says, step by step. */
-  readonly announce = ({
+  private readonly announce = ({
     type,
     item,
     position,

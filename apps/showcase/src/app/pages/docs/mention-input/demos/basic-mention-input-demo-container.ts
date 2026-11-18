@@ -81,10 +81,10 @@ import type { ScMentionUser } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicMentionInputDemo {
-  readonly value = signal('');
-  readonly mentions = signal<ScMentionUser[]>([]);
+  private readonly value = signal('');
+  private readonly mentions = signal<ScMentionUser[]>([]);
 
-  readonly sampleUsers: ScMentionUser[] = [
+  private readonly sampleUsers: ScMentionUser[] = [
     { id: '1', name: 'John Doe', username: 'johndoe' },
     { id: '2', name: 'Jane Smith', username: 'janesmith' },
     { id: '3', name: 'Bob Wilson', username: 'bobwilson' },
@@ -95,7 +95,7 @@ export class BasicMentionInputDemo {
     { id: '8', name: 'Grace Lee', username: 'gracelee' },
   ];
 
-  onMentionSelect(user: ScMentionUser): void {
+  private onMentionSelect(user: ScMentionUser): void {
     console.log('Mentioned:', user);
   }
 }`;

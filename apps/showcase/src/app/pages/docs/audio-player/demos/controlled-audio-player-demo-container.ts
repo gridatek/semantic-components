@@ -116,19 +116,19 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledAudioPlayerDemo {
-  readonly songs = [
+  private readonly songs = [
     { src: '/media/carefree.mp3', title: 'Carefree' },
     { src: '/media/sneaky-snitch.mp3', title: 'Sneaky Snitch' },
     { src: '/media/gymnopedie-no-1.mp3', title: 'Gymnopédie No. 1' },
   ];
-  readonly modes = ['off', 'all', 'one'] as const;
+  private readonly modes = ['off', 'all', 'one'] as const;
 
-  readonly track = signal(0);
-  readonly paused = signal(true);
-  readonly time = signal(0);
-  readonly settings = signal<{ repeat: 'off' | 'all' | 'one' }>({
+  private readonly track = signal(0);
+  private readonly paused = signal(true);
+  private readonly time = signal(0);
+  private readonly settings = signal<{ repeat: 'off' | 'all' | 'one' }>({
     repeat: 'off',
   });
-  readonly settingsForm = form(this.settings);
+  private readonly settingsForm = form(this.settings);
 }`;
 }

@@ -143,6 +143,6 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleEmojiPickerDemo {
-  readonly skinTone = signal<ScEmojiSkinTone>('medium');
+  private readonly skinTone = signal<ScEmojiSkinTone>('medium');
 }`;
 }

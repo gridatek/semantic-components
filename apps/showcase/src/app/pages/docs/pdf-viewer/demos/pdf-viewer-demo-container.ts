@@ -2141,36 +2141,36 @@ const INK_COLORS = [
 })
 export class PdfViewerDemo {
   readonly classInput = input<string>('', { alias: 'class' });
-  protected readonly class = computed(() =>
+  private readonly class = computed(() =>
     cn('block h-dvh w-full', this.classInput()),
   );
 
   private readonly viewerRef = viewChild<ScPdfViewer>('viewer');
 
-  readonly pdfSrc = signal(
+  private readonly pdfSrc = signal(
     'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
   );
-  readonly fileName = signal('tracemonkey');
+  private readonly fileName = signal('tracemonkey');
 
-  readonly sidebarOpen = signal(false);
-  readonly sidebarTab = signal<ScPdfSidebarView>('thumbnails');
-  readonly signaturesOpen = signal(false);
+  private readonly sidebarOpen = signal(false);
+  private readonly sidebarTab = signal<ScPdfSidebarView>('thumbnails');
+  private readonly signaturesOpen = signal(false);
   /** The comment being edited in the list. */
-  readonly editingComment = signal<string | null>(null);
+  private readonly editingComment = signal<string | null>(null);
   /** The name of a file that couldn't be inserted. */
-  readonly insertFailed = signal<string | null>(null);
+  private readonly insertFailed = signal<string | null>(null);
 
-  protected readonly highlightColors = HIGHLIGHT_COLORS;
-  protected readonly inkColors = INK_COLORS;
+  private readonly highlightColors = HIGHLIGHT_COLORS;
+  private readonly inkColors = INK_COLORS;
 
   /** The tool selected in the toggle group, if any. */
-  protected readonly selectedTool = computed(() => {
+  private readonly selectedTool = computed(() => {
     const mode = this.viewerRef()?.editorMode() ?? 'none';
     return TOOLS.includes(mode) ? mode : null;
   });
 
   /** The active tool, if it has options. */
-  protected readonly activeTool = computed(() => {
+  private readonly activeTool = computed(() => {
     const mode = this.viewerRef()?.editorMode() ?? 'none';
     return TOOLS_WITH_OPTIONS.includes(mode) ? mode : null;
   });
@@ -2191,17 +2191,17 @@ export class PdfViewerDemo {
     });
   }
 
-  protected setTool(value: string | string[] | null): void {
+  private setTool(value: string | string[] | null): void {
     this.viewerRef()?.setEditorMode(
       typeof value === 'string' ? (value as ScPdfEditorMode) : 'none',
     );
   }
 
-  protected setSidebarTab(value: unknown): void {
+  private setSidebarTab(value: unknown): void {
     this.sidebarTab.set(value as ScPdfSidebarView);
   }
 
-  protected setHighlightAll(value: boolean): void {
+  private setHighlightAll(value: boolean): void {
     const viewer = this.viewerRef();
     if (!viewer) return;
     viewer.findHighlightAll.set(value);
@@ -2209,11 +2209,11 @@ export class PdfViewerDemo {
   }
 
   /** Types the outline template's context. */
-  protected asOutline(items: unknown): ScPdfOutlineItem[] {
+  private asOutline(items: unknown): ScPdfOutlineItem[] {
     return items as ScPdfOutlineItem[];
   }
 
-  protected onMenuItem(value: unknown): void {
+  private onMenuItem(value: unknown): void {
     const viewer = this.viewerRef();
     if (!viewer) return;
     switch (value) {
@@ -2244,7 +2244,7 @@ export class PdfViewerDemo {
     }
   }
 
-  protected fileSize(bytes: number | null): string {
+  private fileSize(bytes: number | null): string {
     if (bytes === null) return '—';
     if (bytes < 1024) return \`\${bytes} B\`;
     if (bytes < 1024 * 1024) return \`\${(bytes / 1024).toFixed(1)} KB\`;
@@ -2252,7 +2252,7 @@ export class PdfViewerDemo {
   }
 
   /** E.g. "8.27 × 11.69 in (210 × 297 mm, A4, portrait)". */
-  protected pageSize(size: ScPdfDocumentProperties['pageSize']): string {
+  private pageSize(size: ScPdfDocumentProperties['pageSize']): string {
     if (!size) return '—';
     const inches = (points: number) => (points / 72).toFixed(2);
     const mm = (points: number) => ((points / 72) * 25.4).toFixed(0);

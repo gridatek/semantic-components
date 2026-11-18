@@ -40,6 +40,6 @@ import { ScCheckbox, ScField, ScLabel } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomThemeCheckboxDemo {
-  protected readonly themeForm = form(signal({ purple: true }));
+  private readonly themeForm = form(signal({ purple: true }));
 }`;
 }

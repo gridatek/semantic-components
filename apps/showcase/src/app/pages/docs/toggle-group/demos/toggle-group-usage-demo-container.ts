@@ -58,6 +58,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ToggleGroupUsageDemo {
-  protected readonly formatting = signal<string[]>([]);
+  private readonly formatting = signal<string[]>([]);
 }`;
 }

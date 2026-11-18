@@ -82,20 +82,20 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomDaysCalendarDemo {
-  readonly stay = signal<ScCalendarValue>({
+  private readonly stay = signal<ScCalendarValue>({
     from: Temporal.PlainDate.from('2026-12-08'),
     to: Temporal.PlainDate.from('2026-12-18'),
   });
   /** Saturday and Sunday cost more. */
-  price(day: Temporal.PlainDate): string {
+  private price(day: Temporal.PlainDate): string {
     return day.dayOfWeek >= 6 ? '$120' : '$100';
   }
-  readonly previousLabel = {
+  private readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',

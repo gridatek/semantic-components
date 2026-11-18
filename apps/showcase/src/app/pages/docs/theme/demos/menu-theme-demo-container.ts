@@ -97,15 +97,15 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MenuThemeDemo {
-  protected readonly themeManager = inject(ScThemeManager);
+  private readonly themeManager = inject(ScThemeManager);
 
-  protected readonly modes: readonly { value: ScThemeMode; label: string }[] = [
+  private readonly modes: readonly { value: ScThemeMode; label: string }[] = [
     { value: 'light', label: 'Light' },
     { value: 'dark', label: 'Dark' },
     { value: 'system', label: 'System' },
   ];
 
-  protected setMode(value: string | null): void {
+  private setMode(value: string | null): void {
     const mode = this.modes.find((m) => m.value === value);
     if (mode) this.themeManager.setMode(mode.value);
   }

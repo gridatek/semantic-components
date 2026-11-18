@@ -116,7 +116,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class VisibilityMessageScrollerDemo {
-  readonly messages = signal([
+  private readonly messages = signal([
     { id: 'q1', role: 'user', text: 'What does a message scroller do?' },
     {
       id: 'a1',
@@ -136,7 +136,7 @@ export class VisibilityMessageScrollerDemo {
       text: 'Yes: the conversation is a region you can tab to, and the arrow keys, Page Up, Page Down, Home and End scroll it.',
     },
   ]);
-  protected readonly questions = computed(() =>
+  private readonly questions = computed(() =>
     this.messages().filter((message) => message.role === 'user'),
   );
 }`;

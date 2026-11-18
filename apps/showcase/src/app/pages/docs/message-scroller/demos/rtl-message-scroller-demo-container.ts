@@ -95,7 +95,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlMessageScrollerDemo {
-  readonly messages = [
+  private readonly messages = [
     { id: 'q1', role: 'user', text: 'ماذا يفعل مُمرِّر الرسائل؟' },
     {
       id: 'a1',

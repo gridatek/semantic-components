@@ -150,7 +150,7 @@ export class CommandRow {
   readonly output = input('');
   readonly running = input(false);
   readonly defaultOpen = input<boolean | undefined>(undefined);
-  protected readonly choice = signal<boolean | null>(null);
+  private readonly choice = signal<boolean | null>(null);
 }
 
 /** Commands the agent runs, their output streaming in under them (replayed on a timer). */
@@ -215,16 +215,16 @@ export class TerminalUsageDemo {
   private readonly answer =
     'Lint and tests pass, and the build compiled both routes.';
   /** The page opens on the finished turn, the last command open. */
-  protected readonly runs = signal<Run[]>(
+  private readonly runs = signal<Run[]>(
     COMMANDS.map(({ command, output }) => ({
       command,
       lines: output.length,
       exited: true,
     })),
   );
-  protected readonly reply = signal(this.answer);
-  protected readonly busy = signal(false);
-  protected readonly replayed = signal(false);
+  private readonly reply = signal(this.answer);
+  private readonly busy = signal(false);
+  private readonly replayed = signal(false);
   private readonly outputs = computed(
     () => new Map(COMMANDS.map(({ command, output }) => [command, output])),
   );
@@ -234,13 +234,13 @@ export class TerminalUsageDemo {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  protected output(run: Run): string {
+  private output(run: Run): string {
     return (this.outputs().get(run.command) ?? [])
       .slice(0, run.lines)
       .join('\\n');
   }
 
-  protected replay(): void {
+  private replay(): void {
     this.stop();
     this.runs.set([]);
     this.reply.set('');

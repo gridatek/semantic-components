@@ -160,10 +160,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ManyTransferListDemo {
-  readonly countries = Array.from({ length: 200 }, (_, i) => ({
+  private readonly countries = Array.from({ length: 200 }, (_, i) => ({
     id: 'c' + i,
     label: 'Region ' + String(i + 1).padStart(3, '0'),
   }));
-  readonly chosen = signal<string[]>([]);
+  private readonly chosen = signal<string[]>([]);
 }`;
 }

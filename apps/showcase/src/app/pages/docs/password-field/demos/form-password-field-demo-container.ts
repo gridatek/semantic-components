@@ -80,9 +80,9 @@ import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormPasswordFieldDemo {
-  readonly signedIn = signal(false);
+  private readonly signedIn = signal(false);
 
-  readonly login = form(
+  private readonly login = form(
     signal({ password: '' }),
     (s) => {
       required(s.password, { message: 'Enter your password.' });

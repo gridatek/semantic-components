@@ -111,9 +111,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class KeywordsCommandDemo {
-  protected readonly last = signal('');
+  private readonly last = signal('');
 
-  protected ran(name: string): void {
+  private ran(name: string): void {
     this.last.set(name);
   }
 }`;

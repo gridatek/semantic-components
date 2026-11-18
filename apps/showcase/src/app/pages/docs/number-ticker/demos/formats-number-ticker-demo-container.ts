@@ -64,11 +64,11 @@ import { ScNumberTicker } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormatsNumberTickerDemo {
-  readonly sales = signal(18_450.5);
-  readonly share = signal(0.124);
-  readonly views = signal(1_200_000);
+  private readonly sales = signal(18_450.5);
+  private readonly share = signal(0.124);
+  private readonly views = signal(1_200_000);
 
-  next(): void {
+  private next(): void {
     this.sales.update((v) => Math.round(v * 1.18 * 100) / 100);
     this.share.update((v) => Math.round((v + 0.031) * 1000) / 1000);
     this.views.update((v) => Math.round(v * 1.4));

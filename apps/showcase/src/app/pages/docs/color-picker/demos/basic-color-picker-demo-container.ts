@@ -69,6 +69,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicColorPickerDemo {
-  readonly color = signal('#3b82f6');
+  private readonly color = signal('#3b82f6');
 }`;
 }

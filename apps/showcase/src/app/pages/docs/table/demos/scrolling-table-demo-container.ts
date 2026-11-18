@@ -85,7 +85,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollingTableDemo {
-  protected readonly orders = [
+  private readonly orders = [
     {
       id: 'ORD-1042',
       customer: 'Olivia Martin',

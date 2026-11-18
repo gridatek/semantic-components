@@ -100,7 +100,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollableMessageScrollerDemo {
-  readonly messages = signal([
+  private readonly messages = signal([
     { id: 'q1', role: 'user', text: 'What does a message scroller do?' },
     {
       id: 'a1',

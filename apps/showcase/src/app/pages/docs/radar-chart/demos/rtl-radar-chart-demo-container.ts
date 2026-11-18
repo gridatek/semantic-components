@@ -95,7 +95,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlRadarChartDemo {
-  readonly data = [
+  private readonly data = [
     { month: 'يناير', desktop: 186 },
     { month: 'فبراير', desktop: 305 },
     { month: 'مارس', desktop: 237 },
@@ -103,7 +103,7 @@ export class RtlRadarChartDemo {
     { month: 'مايو', desktop: 209 },
     { month: 'يونيو', desktop: 214 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     desktop: { label: 'سطح المكتب', color: 'var(--chart-1)' },
   };
   private readonly numbers = new Intl.NumberFormat('ar');

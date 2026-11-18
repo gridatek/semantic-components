@@ -86,7 +86,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxFieldDemo {
-  protected readonly hardDisks = signal(true);
-  protected readonly sync = signal(true);
+  private readonly hardDisks = signal(true);
+  private readonly sync = signal(true);
 }`;
 }

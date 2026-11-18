@@ -89,7 +89,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TableCheckboxDemo {
-  protected readonly rows = [
+  private readonly rows = [
     {
       id: '1',
       name: 'Sarah Chen',
@@ -115,19 +115,19 @@ export class TableCheckboxDemo {
       role: 'Editor',
     },
   ];
-  protected readonly selected = signal(new Set(['1']));
-  protected readonly allSelected = computed(
+  private readonly selected = signal(new Set(['1']));
+  private readonly allSelected = computed(
     () => this.selected().size === this.rows.length,
   );
-  protected readonly someSelected = computed(
+  private readonly someSelected = computed(
     () => this.selected().size > 0 && !this.allSelected(),
   );
 
-  protected selectAll(checked: boolean): void {
+  private selectAll(checked: boolean): void {
     this.selected.set(new Set(checked ? this.rows.map((row) => row.id) : []));
   }
 
-  protected select(id: string, checked: boolean): void {
+  private select(id: string, checked: boolean): void {
     const selected = new Set(this.selected());
     if (checked) selected.add(id);
     else selected.delete(id);

@@ -69,7 +69,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CodeBlockUsageDemo {
-  readonly source = \`import { Component, signal } from '@angular/core';
+  private readonly source = \`import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-counter',

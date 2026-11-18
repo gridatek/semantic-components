@@ -114,8 +114,8 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SimpleStepperDemo {
-  readonly selectedIndex = signal(0);
-  readonly steps = [
+  private readonly selectedIndex = signal(0);
+  private readonly steps = [
     'Step 1 of 4: get started.',
     'Step 2 of 4: add the details.',
     'Step 3 of 4: check everything.',
