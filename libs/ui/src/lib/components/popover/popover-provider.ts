@@ -21,7 +21,6 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScFocusTrap } from '../../utilities/focus-trap';
 import { ScOpenDelay } from '../../utils';
 import {
   type ScOverlayAlign,
@@ -31,6 +30,7 @@ import {
   physicalSide,
   placedSide,
 } from '../../utils/overlay-positions';
+import { ScFocusTrap } from '../focus-trap';
 import { ScPopoverPortal } from './popover-portal';
 import { ScPopoverTrigger } from './popover-trigger';
 

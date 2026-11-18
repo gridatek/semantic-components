@@ -17,8 +17,8 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScFocusTrap } from '../../utilities';
 import { ScBackdrop } from '../backdrop';
+import { ScFocusTrap } from '../focus-trap';
 import { ScDialogPortal } from './dialog-portal';
 
 @Component({

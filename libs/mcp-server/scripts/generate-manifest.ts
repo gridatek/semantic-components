@@ -185,7 +185,6 @@ function scanLibrary(
   const srcLib = join(libDir, 'src', 'lib');
   const components = [
     ...scanDirectory(join(srcLib, 'components'), visiblePaths),
-    ...scanDirectory(join(srcLib, 'utilities'), visiblePaths),
   ];
 
   // Secondary entry points (`@semantic-components/ui/editor/tables`): their

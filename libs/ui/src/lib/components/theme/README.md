@@ -128,7 +128,7 @@ Injection token for overriding defaults.
 
 ## Persistence
 
-Mode and color scheme are kept apart (each a cookie, copied to `localStorage` — see [storage](../../utilities/storage/README.md)) and restored on page load — read on the server too, when a route is rendered per request, so a dark page is drawn dark from the first paint. (`system` needs the browser: the server draws it light.)
+Mode and color scheme are kept apart (each a cookie, copied to `localStorage` — see [storage](../../utils/storage/README.md)) and restored on page load — read on the server too, when a route is rendered per request, so a dark page is drawn dark from the first paint. (`system` needs the browser: the server draws it light.)
 
 ## Accessibility
 

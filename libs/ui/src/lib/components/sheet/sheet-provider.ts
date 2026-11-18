@@ -20,13 +20,13 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScFocusTrap } from '../../utilities';
 import {
   type ScOverlayLogicalSide,
   type ScOverlaySide,
   physicalSide,
 } from '../../utils/overlay-positions';
 import { ScBackdrop } from '../backdrop';
+import { ScFocusTrap } from '../focus-trap';
 import { ScSheetPortal } from './sheet-portal';
 
 /** Physical (`top`, `right`, `bottom`, `left`) or logical (`inline-start`, `inline-end`). */

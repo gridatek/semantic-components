@@ -22,8 +22,8 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScFocusTrap } from '../../utilities';
 import { ScBackdrop } from '../backdrop';
+import { ScFocusTrap } from '../focus-trap';
 import { ScDrawerPortal } from './drawer-portal';
 
 /** The way a swipe dismisses it — and so the edge it sits at. */

@@ -7,7 +7,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { ScStorage } from '../../utilities/storage/storage';
+import { ScStorage } from '../../utils/storage/storage';
 
 export type ScThemeMode = 'light' | 'dark' | 'system';
 

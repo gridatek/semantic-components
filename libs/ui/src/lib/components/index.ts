@@ -112,3 +112,5 @@ export * from './transfer-list';
 export * from './virtual-list';
 export * from './video-player';
 export * from './number-ticker';
+export * from './focus-trap';
+export * from './select-on-focus';

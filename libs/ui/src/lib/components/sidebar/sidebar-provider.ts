@@ -12,7 +12,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScStorage } from '../../utilities/storage/storage';
+import { ScStorage } from '../../utils/storage/storage';
 import { ScSidebarState } from './sidebar-state';
 
 const MOBILE_QUERY = '(max-width: 767.98px)';

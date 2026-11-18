@@ -5,3 +5,4 @@ export * from './easing';
 export * from './focus-on-press';
 export * from './open-delay';
 export * from './overlay-positions';
+export * from './storage';

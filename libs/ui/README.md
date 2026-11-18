@@ -1,6 +1,6 @@
 # @semantic-components/ui
 
-The Semantic Components library: components, layouts and utilities.
+The Semantic Components library: components and utilities.
 
 ## Contents
 
