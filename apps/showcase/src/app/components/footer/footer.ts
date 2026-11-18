@@ -15,7 +15,8 @@ import { cn } from 'cn';
           class="text-foreground font-medium underline underline-offset-4"
           >Khalil Lagrida</a
         >
-        for the Angular community. The source code is available on
+        with mint tea, for the Angular community. The source code is available
+        on
         <a
           href="https://github.com/gridatek/semantic-components"
           target="_blank"
