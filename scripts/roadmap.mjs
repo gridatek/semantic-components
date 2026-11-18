@@ -81,13 +81,10 @@ const entryComponents = (lib) => {
   return found;
 };
 const entries = new Map(LIBRARIES.map((lib) => [lib, entryComponents(lib)]));
-/** A component's code: its folder, or its one file (a layout). */
+/** A component's code: its folder, or its entry point. */
 const sourceOf = (path, lib) =>
   [
     `libs/${lib}/src/lib/components/${path}`,
-    `libs/${lib}/src/lib/utilities/${path}`,
-    `libs/${lib}/src/lib/layouts/${path}`,
-    `libs/${lib}/src/lib/layouts/${path}.ts`,
     `libs/${lib}/${path}/src`,
     `libs/${path}/src`,
   ]
