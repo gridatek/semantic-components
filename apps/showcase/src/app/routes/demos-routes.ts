@@ -2199,18 +2199,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/copy-to-clipboard',
-    children: [
-      {
-        path: 'basic-copy-to-clipboard-demo',
-        loadComponent: () =>
-          import('../pages/docs/copy-to-clipboard/demos/basic-copy-to-clipboard-demo').then(
-            (m) => m.BasicCopyToClipboardDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/countdown',
     children: [
       {
@@ -3371,25 +3359,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/intersection-observer',
-    children: [
-      {
-        path: 'basic-intersection-observer-demo',
-        loadComponent: () =>
-          import('../pages/docs/intersection-observer/demos/basic-intersection-observer-demo').then(
-            (m) => m.BasicIntersectionObserverDemo,
-          ),
-      },
-      {
-        path: 'once-intersection-observer-demo',
-        loadComponent: () =>
-          import('../pages/docs/intersection-observer/demos/once-intersection-observer-demo').then(
-            (m) => m.OnceIntersectionObserverDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/input-group',
     children: [
       {
@@ -4442,18 +4411,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/button-pattern',
-    children: [
-      {
-        path: 'conditional-button-pattern-demo',
-        loadComponent: () =>
-          import('../pages/docs/button-pattern/demos/conditional-button-pattern-demo').then(
-            (m) => m.ConditionalButtonPatternDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/select-on-focus',
     children: [
       {
@@ -4926,18 +4883,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/progress/demos/rtl-progress-demo').then(
             (m) => m.RtlProgressDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/query-param-state',
-    children: [
-      {
-        path: 'demo-query-param-state-demo',
-        loadComponent: () =>
-          import('../pages/docs/query-param-state/demos/demo-query-param-state-demo').then(
-            (m) => m.DemoQueryParamStateDemo,
           ),
       },
     ],

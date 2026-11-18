@@ -18,11 +18,11 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from 'cn';
+import { type ScOverlaySide } from '../../utils/overlay-positions';
 import {
   type ScPlacementBox,
   spotlightPlacement,
-} from '../../utilities/spotlight-placement';
-import { type ScOverlaySide } from '../../utils/overlay-positions';
+} from '../spotlight/spotlight-placement';
 import { ScTourGuideStep } from './tour-guide-step';
 
 /**

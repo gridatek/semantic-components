@@ -17,13 +17,10 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import {
-  type ScPlacementBox,
-  spotlightPlacement,
-} from '../../utilities/spotlight-placement';
-import {
   type ScOverlayLogicalSide,
   type ScOverlaySide,
 } from '../../utils/overlay-positions';
+import { type ScPlacementBox, spotlightPlacement } from './spotlight-placement';
 
 /**
  * One element in the spotlight: the page dimmed but for it, your content in

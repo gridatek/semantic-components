@@ -156,12 +156,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/button/button-page'),
       },
       {
-        path: 'button-pattern',
-        title: 'Button Pattern - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/button-pattern/button-pattern-page'),
-      },
-      {
         path: 'calendar',
         title: 'Calendar - Semantic Components',
         loadComponent: () => import('../pages/docs/calendar/calendar-page'),
@@ -241,12 +235,6 @@ export const componentsRoutes: Route[] = [
         title: 'Control Group - Semantic Components',
         loadComponent: () =>
           import('../pages/docs/control-group/control-group-page'),
-      },
-      {
-        path: 'copy-to-clipboard',
-        title: 'Copy to Clipboard - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/copy-to-clipboard/copy-to-clipboard-page'),
       },
       {
         path: 'countdown',
@@ -367,12 +355,6 @@ export const componentsRoutes: Route[] = [
         title: 'Input Group - Semantic Components',
         loadComponent: () =>
           import('../pages/docs/input-group/input-group-page'),
-      },
-      {
-        path: 'intersection-observer',
-        title: 'Intersection Observer - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/intersection-observer/intersection-observer-page'),
       },
       {
         path: 'otp-field',
@@ -520,12 +502,6 @@ export const componentsRoutes: Route[] = [
         path: 'progress',
         title: 'Progress - Semantic Components',
         loadComponent: () => import('../pages/docs/progress/progress-page'),
-      },
-      {
-        path: 'query-param-state',
-        title: 'Query Param State - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/query-param-state/query-param-state-page'),
       },
       {
         path: 'qr-code',

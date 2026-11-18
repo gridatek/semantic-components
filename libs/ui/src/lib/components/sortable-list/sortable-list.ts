@@ -10,10 +10,7 @@ import {
   model,
 } from '@angular/core';
 import { cn } from 'cn';
-import {
-  ScSortable,
-  type ScSortableOrientation,
-} from '../../utilities/sortable';
+import { ScSortable, type ScSortableOrientation } from './sortable';
 import { ScSortableListItem } from './sortable-list-item';
 
 /** How a list is laid out: down, along, or as a grid. */

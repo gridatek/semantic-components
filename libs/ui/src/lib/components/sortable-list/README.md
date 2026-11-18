@@ -11,7 +11,7 @@ Your array, reordered — dragged by mouse, touch or pen, or lifted and moved by
     └── [scSortableListHandle]    — optional: only it starts a drag
 ```
 
-It shares its engine with the kanban board (`utilities/sortable`): a kanban is sortable lists, linked.
+It shares its engine with the kanban board (`sortable.ts`, beside it): a kanban is sortable lists, linked.
 
 ## Usage
 

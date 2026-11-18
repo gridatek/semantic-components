@@ -24,7 +24,6 @@ import {
 import {
   ScBadge,
   ScButton,
-  ScButtonPattern,
   ScCheckbox,
   ScField,
   ScFrame,
@@ -86,7 +85,6 @@ import type { User } from './user-service';
     SiArrowDownIcon,
     SiChevronDownIcon,
     SiChevronRightIcon,
-    ScButtonPattern,
     ScDataTableCell,
     ScDataTableColumnFilter,
     ScDataTableHeaderCell,
@@ -332,28 +330,19 @@ import type { User } from './user-service';
                       </div>
                     } @else if (cell.column.id === 'apiCalls') {
                       {{ formatNumber(asNumber(cell.getValue())) }}
-                    } @else {
-                      <span
-                        [scButtonPattern]="canEditColumn(cell.column.id)"
-                        (dblclick)="
-                          canEditColumn(cell.column.id)
-                            ? startEdit(row.id, cell.column.id, cell.getValue())
-                            : null
-                        "
+                    } @else if (canEditColumn(cell.column.id)) {
+                      <button
+                        type="button"
+                        class="cursor-pointer text-start"
+                        title="Click or press Enter to edit"
                         (click)="
-                          canEditColumn(cell.column.id)
-                            ? startEdit(row.id, cell.column.id, cell.getValue())
-                            : null
-                        "
-                        [class.cursor-pointer]="canEditColumn(cell.column.id)"
-                        [title]="
-                          canEditColumn(cell.column.id)
-                            ? 'Double-click or press Enter to edit'
-                            : ''
+                          startEdit(row.id, cell.column.id, cell.getValue())
                         "
                       >
                         {{ cell.getValue() }}
-                      </span>
+                      </button>
+                    } @else {
+                      {{ cell.getValue() }}
                     }
                   }
                 </td>
