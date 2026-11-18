@@ -9,7 +9,7 @@ test.describe('Component badges', () => {
     // baseline shows below the one centred in the row.
     await page.context().addCookies([
       {
-        name: 'sc-preset',
+        name: 'sc-style',
         value: 'sera',
         url: baseURL ?? 'http://localhost:4200',
       },

@@ -1,6 +1,6 @@
 # Radio Group
 
-One choice among several: native radios in the look of the app's preset (the `radioGroup` key: `group`, `item`, `dot` — the radio draws itself, its dot the `::before`). The group holds the choice: a `[formField]` or `[(value)]` on the group, a `value` on each radio.
+One choice among several: native radios in the look of the app's style (the `radioGroup` key: `group`, `item`, `dot` — the radio draws itself, its dot the `::before`). The group holds the choice: a `[formField]` or `[(value)]` on the group, a `value` on each radio.
 
 ## Usage
 
@@ -24,7 +24,7 @@ A radio field with a description is a `div`: `<label scLabel>` and `<p scFieldDe
 | Part           | Selector            | What it does                                                                                                                                                                                                                                                                                                                                          |
 | -------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ScRadioGroup` | `div[scRadioGroup]` | `role="radiogroup"`; the choice: `value` (a `[formField]`, or two-way); `orientation`; `disabled`; `readonly` (`readonly()` in the form, or set: `aria-readonly`, the choice takes focus and the arrows move it, but it doesn't change). Checks the radio whose value matches, names its radios alike, invalid once touched (focus leaving the group) |
-| `ScRadio`      | `input[scRadio]`    | A native radio (its own `type`), in the preset's look: `value` (its option, any type), `disabled`                                                                                                                                                                                                                                                     |
+| `ScRadio`      | `input[scRadio]`    | A native radio (its own `type`), in the style's look: `value` (its option, any type), `disabled`                                                                                                                                                                                                                                                      |
 
 ## Why the group holds the choice
 

@@ -1,7 +1,7 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
-import type { ScInputGroupAddonSide } from '@semantic-components/presets';
+import type { ScInputGroupAddonSide } from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * Icons, text or buttons beside a group's control, on its `side`: before or
@@ -25,7 +25,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScInputGroupAddon {
-  private readonly styles = injectPreset().inputGroupAddon;
+  private readonly styles = injectStyle().inputGroupAddon;
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
 
   readonly classInput = input<string>('', { alias: 'class' });

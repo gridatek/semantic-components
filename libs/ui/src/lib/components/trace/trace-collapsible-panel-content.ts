@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * A step's details, indented under it — inside the `scCollapsiblePanel`.
@@ -14,7 +14,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScTraceCollapsiblePanelContent {
-  private readonly styles = injectPreset().trace;
+  private readonly styles = injectStyle().trace;
   readonly classInput = input<string>('', { alias: 'class' });
 
   // Not shadcn's: text-sm, the lines' size, not the page's.

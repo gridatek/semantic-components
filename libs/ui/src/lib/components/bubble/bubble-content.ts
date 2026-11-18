@@ -1,9 +1,9 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
- * The bubble's text, in the preset's look. On a `button` or an `a` the whole
+ * The bubble's text, in the style's look. On a `button` or an `a` the whole
  * bubble is clickable, with a focus ring (a button gets `type="button"`).
  */
 @Directive({
@@ -15,7 +15,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScBubbleContent {
-  private readonly styles = injectPreset().bubble;
+  private readonly styles = injectStyle().bubble;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly isButton =

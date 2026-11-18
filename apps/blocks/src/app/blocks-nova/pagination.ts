@@ -1,4 +1,4 @@
-import type { ScPaginationStyles } from '@semantic-components/presets';
+import type { ScPaginationStyles } from '@semantic-components/styles';
 
 // shadcn's pagination in nova (shadcn-reference/presets/nova/pagination.tsx).
 export const pagination: ScPaginationStyles = {

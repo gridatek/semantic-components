@@ -1,4 +1,4 @@
-import type { ScPreviewCardStyles } from '@semantic-components/presets';
+import type { ScPreviewCardStyles } from '@semantic-components/styles';
 
 // shadcn's hover card in nova (shadcn-reference/presets/nova/hover-card.tsx). Its
 // open/close animation classes are Angular's animate.enter / animate.leave here.

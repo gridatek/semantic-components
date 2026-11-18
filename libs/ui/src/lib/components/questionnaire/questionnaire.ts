@@ -12,7 +12,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import {
   type ScQuestionnaireItemRef,
   type ScQuestionnaireShortcuts,
@@ -61,7 +61,7 @@ const isFilled = (answer: HTMLInputElement | HTMLTextAreaElement) =>
   },
 })
 export class ScQuestionnaire {
-  private readonly styles = injectPreset().questionnaire;
+  private readonly styles = injectStyle().questionnaire;
   private readonly injector = inject(Injector);
   private readonly form =
     inject<ElementRef<HTMLFormElement>>(ElementRef).nativeElement;

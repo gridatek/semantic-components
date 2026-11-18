@@ -25,7 +25,7 @@ export const inputGroupAddon = cva(
   },
 );
 
-/** Over the preset's button: `button[scInputGroupButton]`. */
+/** Over the style's button: `button[scInputGroupButton]`. */
 export const inputGroupButton = cva(
   'flex items-center gap-2 text-sm shadow-none',
   {

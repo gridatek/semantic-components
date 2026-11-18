@@ -43,7 +43,7 @@ test('Sera: the thumb is square — Firefox rounds its own', async ({
   );
   await page.context().addCookies([
     {
-      name: 'sc-preset',
+      name: 'sc-style',
       value: 'sera',
       url: baseURL ?? 'http://localhost:4200',
     },

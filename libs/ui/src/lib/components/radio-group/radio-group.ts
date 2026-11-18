@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * A group of radios, one picked: the group holds the choice — a [formField]
@@ -36,7 +36,7 @@ import { injectPreset } from '../../config/preset';
 export class ScRadioGroup<T = unknown> implements FormValueControl<
   T | undefined
 > {
-  private readonly styles = injectPreset().radioGroup;
+  private readonly styles = injectStyle().radioGroup;
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly fallbackName = inject(_IdGenerator).getId('sc-radio-group-');

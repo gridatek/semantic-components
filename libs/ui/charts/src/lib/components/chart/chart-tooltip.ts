@@ -7,13 +7,13 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { injectPreset } from '@semantic-components/ui';
+import { injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScChartState } from './chart-state';
 import { ScChartTooltipProvider } from './chart-tooltip-provider';
 
 /**
- * The tooltip's box, in its provider's overlay: the preset's look. You write
+ * The tooltip's box, in its provider's overlay: the style's look. You write
  * what is in it from its state — `label()`, the category; `payload()`, an item
  * per series (Recharts' names) — with `scChartTooltipLabel` and
  * `scChartTooltipItem`. What it shows is what screen readers hear.
@@ -34,7 +34,7 @@ export class ScChartTooltip {
   private readonly state = inject(ScChartState);
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
-  private readonly tooltipStyles = injectPreset().chart.tooltip;
+  private readonly tooltipStyles = injectStyle().chart.tooltip;
   private readonly reducedMotion =
     !!this.host.ownerDocument.defaultView?.matchMedia?.(
       '(prefers-reduced-motion: reduce)',

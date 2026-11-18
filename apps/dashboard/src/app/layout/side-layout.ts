@@ -35,7 +35,7 @@ import { SiLayoutDashboardIcon } from '@semantic-icons/lucide-icons';
         <blockquote class="flex flex-col gap-2">
           <p i18n class="text-lg">
             “Every screen of this dashboard is built from the same parts: one
-            look, carried by the preset.”
+            look, carried by the style.”
           </p>
           <footer i18n class="text-muted-foreground text-sm">
             Semantic Components

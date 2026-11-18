@@ -7,13 +7,13 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { SC_FIELD } from '../field';
 
 /**
- * A native text field in the app's preset: its classes are the preset's
- * (`injectPreset().input`). In a field (`div[scField]`) it takes the field's
+ * A native text field in the app's style: its classes are the style's
+ * (`injectStyle().input`). In a field (`div[scField]`) it takes the field's
  * id and description; with Signal Forms (`[formField]`) it is invalid once
  * touched. It needs a name — a label, or `aria-label` — and warns in
  * development without one.
@@ -33,7 +33,7 @@ import { SC_FIELD } from '../field';
 export class ScInput {
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-input-');
-  private readonly styles = injectPreset().input;
+  private readonly styles = injectStyle().input;
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });

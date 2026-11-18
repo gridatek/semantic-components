@@ -1,6 +1,6 @@
 # Label
 
-A control's name, shown beside it — shadcn's Label (and FieldLabel) in the look of the app's preset (`label` key: shadcn's in each of the eight styles).
+A control's name, shown beside it — shadcn's Label (and FieldLabel) in the look of the app's style (`label` key: shadcn's in each of the eight styles).
 
 ## Usage
 
@@ -36,10 +36,10 @@ Around a field, it is a choice card — the whole card picks:
 
 ## Parts
 
-| Part          | Selector         | What it does                                                                                                                                                                               |
-| ------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ScLabel`     | `label[scLabel]` | The preset's `label` look; in a field, or around one, its `field` look too (choice card: border, corners, padding, focus ring, tint when checked). `for`, `id`: from the field when in one |
-| `ScLabelText` | `[scLabelText]`  | A label's text inside another label (a switch's), so there is never a label in a label                                                                                                     |
+| Part          | Selector         | What it does                                                                                                                                                                              |
+| ------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScLabel`     | `label[scLabel]` | The style's `label` look; in a field, or around one, its `field` look too (choice card: border, corners, padding, focus ring, tint when checked). `for`, `id`: from the field when in one |
+| `ScLabelText` | `[scLabelText]`  | A label's text inside another label (a switch's), so there is never a label in a label                                                                                                    |
 
 ## Keyboard and screen readers
 

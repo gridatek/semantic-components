@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScComboboxBase } from './combobox-base';
 
 /**
@@ -26,7 +26,7 @@ import { ScComboboxBase } from './combobox-base';
   },
 })
 export class ScComboboxChips {
-  private readonly styles = injectPreset().combobox;
+  private readonly styles = injectStyle().combobox;
   private readonly root = inject(ScComboboxBase);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;

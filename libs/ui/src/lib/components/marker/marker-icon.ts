@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** Your icon, hidden from screen readers: the content says it. */
 @Directive({
@@ -12,7 +12,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScMarkerIcon {
-  private readonly styles = injectPreset().marker;
+  private readonly styles = injectStyle().marker;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** How the group lays out the input and its buttons. */
 export type ScNumberFieldGroupVariant = 'split' | 'stacked';
@@ -40,7 +40,7 @@ const ring = cn(
   },
 })
 export class ScNumberFieldGroup {
-  private readonly controlGroupStyles = injectPreset().controlGroup;
+  private readonly controlGroupStyles = injectStyle().controlGroup;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScNumberFieldGroupVariant>('split');

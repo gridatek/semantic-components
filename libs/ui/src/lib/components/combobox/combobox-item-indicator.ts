@@ -1,7 +1,7 @@
 import { Option } from '@angular/aria/listbox';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** Round your check icon, in an option: shown only on a selected one. */
 @Directive({
@@ -13,7 +13,7 @@ import { injectPreset } from '../../config/preset';
 })
 export class ScComboboxItemIndicator {
   private readonly option = inject<Option<unknown>>(Option);
-  private readonly styles = injectPreset().combobox;
+  private readonly styles = injectStyle().combobox;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

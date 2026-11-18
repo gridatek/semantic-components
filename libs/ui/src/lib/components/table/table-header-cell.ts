@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: 'th[scTableHeaderCell]',
@@ -9,7 +9,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScTableHeaderCell {
-  private readonly styles = injectPreset().table;
+  private readonly styles = injectStyle().table;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

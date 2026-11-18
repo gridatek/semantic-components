@@ -21,7 +21,7 @@ const pages = [
   '/docs/components',
   '/docs/getting-started/prerequisites',
   '/docs/getting-started/ui',
-  '/docs/getting-started/presets',
+  '/docs/getting-started/styles',
   '/docs/getting-started/i18n',
   '/docs/getting-started/mcp-server',
   ...components

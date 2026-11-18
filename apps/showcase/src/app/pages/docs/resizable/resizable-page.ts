@@ -46,7 +46,7 @@ import { VerticalResizableDemoContainer } from './demos/vertical-resizable-demo-
         <h1 scTypeset>Resizable</h1>
         <p class="text-muted-foreground">
           Panels resized by the handles between them, by pointer or keyboard. In
-          the look of the app&apos;s preset.
+          the look of the app&apos;s style.
         </p>
         <app-component-badges path="resizable" />
       </div>
@@ -97,7 +97,7 @@ import { VerticalResizableDemoContainer } from './demos/vertical-resizable-demo-
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -179,7 +179,7 @@ export default class ResizablePage {
     {
       name: 'ScResizableHandleGrip',
       selector: 'div[scResizableHandleGrip]',
-      description: "The handle's grip, in the preset's look; aria-hidden.",
+      description: "The handle's grip, in the style's look; aria-hidden.",
     },
   ];
 }

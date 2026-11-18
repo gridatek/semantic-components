@@ -42,7 +42,7 @@ Its own entry point, so the other charts don't need `d3-hierarchy`: `import { Sc
 
 With a `groupKey`, the legend lists the groups: give them their colors in the config (`folder name: { label, color }`).
 
-Its boxes' corners are the style's, as the bars': the preset sets `--sc-chart-bar-radius` (square in Lyra and Sera, rounded in the others).
+Its boxes' corners are the style's, as the bars': the style sets `--sc-chart-bar-radius` (square in Lyra and Sera, rounded in the others).
 
 ## Entrance
 

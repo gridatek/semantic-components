@@ -202,7 +202,7 @@ export class ScChartState {
   readonly polarPadding = signal(0);
 
   /**
-   * The preset's corner radius (`--sc-chart-bar-radius`), in px: for shapes
+   * The style's corner radius (`--sc-chart-bar-radius`), in px: for shapes
    * drawn as paths (radial bars), which can't take it from CSS. Measured with
    * the plot's size, once it's laid out; 0 until then (and on the server).
    */

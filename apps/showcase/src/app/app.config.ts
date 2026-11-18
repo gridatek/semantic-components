@@ -20,7 +20,7 @@ import {
 } from '@semantic-components/ui';
 import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 import { appRoutes } from './app-routes';
-import { PRESETS, presetFrom, providePresetStyles } from './presets';
+import { STYLES, provideStyleSheets, styleFrom } from './styles';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,7 +35,7 @@ export const appConfig: ApplicationConfig = {
       // Code blocks highlighted with Shiki, each language loaded when first shown.
       withCodeHighlighter(),
     ),
-    // The preset picked on /presets (lyra by default): its cookie, read from
+    // The style picked on /presets (lyra by default): its cookie, read from
     // the request when the server renders — a page is drawn in it from the
     // first paint, and hydration keeps those classes.
     {
@@ -43,11 +43,11 @@ export const appConfig: ApplicationConfig = {
       useFactory: () => ({
         toaster: { hotkey: ['altKey', 'KeyT'] },
         charts: { followDirection: true },
-        preset: PRESETS[presetFrom(inject(ScStorage))],
+        style: STYLES[styleFrom(inject(ScStorage))],
       }),
     },
-    // The preset's stylesheets (Typeset's variables, the editor), linked at start.
-    providePresetStyles(),
+    // The style's stylesheets (Typeset's variables, the editor), linked at start.
+    provideStyleSheets(),
     // Keyboard shortcuts (the docs search, Mod+K): TanStack Hotkeys.
     provideHotkeys(),
     // Overlays (dialogs, menus, tooltips) stay visible in fullscreen, e.g. in

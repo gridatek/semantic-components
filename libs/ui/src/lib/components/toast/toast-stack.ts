@@ -12,7 +12,7 @@ import {
   viewChildren,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_TOAST_CONTEXT, type ScToastContext } from './toast-context';
 import {
   SC_TOAST_GAP,
@@ -109,7 +109,7 @@ function lasting<T>(value: () => T | undefined, initial: T) {
 export class ScToastStack {
   private readonly toaster = inject(ScToaster);
   private readonly injector = inject(Injector);
-  private readonly styles = injectPreset().toast;
+  private readonly styles = injectStyle().toast;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

@@ -1,6 +1,6 @@
 # Select
 
-A choice among a short list of options — a trigger showing the value, the options in a popup below it. In the look of the app's preset, with Signal Forms. For a long list to filter, use a Combobox; for several values, a Multiselect.
+A choice among a short list of options — a trigger showing the value, the options in a popup below it. In the look of the app's style, with Signal Forms. For a long list to filter, use a Combobox; for several values, a Multiselect.
 
 ## Usage
 
@@ -86,7 +86,7 @@ Focus stays on the trigger (APG select-only combobox). Enter, Space or the arrow
 | `ScSelectItemText`, `ScSelectItemIndicator`          | `span[…]`                                         | `class` — the indicator shows on the selected option only                                                                                                         |
 | `ScSelectSeparator`                                  | `div[scSelectSeparator]`                          | `class`                                                                                                                                                           |
 
-Every part's classes are the preset's (`injectPreset().select`): shadcn's Select on Radix, in each style. Its parts and behaviour follow Base UI.
+Every part's classes are the style's (`injectStyle().select`): shadcn's Select on Radix, in each style. Its parts and behaviour follow Base UI.
 
 `data-slot`: `select` (root) and `select-trigger`, read by the control group and the input group; `select-value`, read by the trigger.
 

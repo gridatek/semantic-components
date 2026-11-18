@@ -1,4 +1,4 @@
-import type { ScTabsStyles } from '@semantic-components/presets';
+import type { ScTabsStyles } from '@semantic-components/styles';
 import { cva } from 'class-variance-authority';
 
 // shadcn's tabs in nova (shadcn-reference/presets/nova/tabs.tsx), in our

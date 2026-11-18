@@ -14,16 +14,16 @@
         "command": "node scripts/validate-demo-code.mjs"
       }
     },
-    "sync-blocks-preset": {
+    "sync-blocks-style": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "node scripts/sync-blocks-preset.mjs"
+        "command": "node scripts/sync-blocks-style.mjs"
       }
     },
-    "validate-blocks-preset": {
+    "validate-blocks-style": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "node scripts/sync-blocks-preset.mjs --check"
+        "command": "node scripts/sync-blocks-style.mjs --check"
       }
     },
     "local-registry": {

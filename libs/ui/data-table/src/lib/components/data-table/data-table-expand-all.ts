@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { injectPreset } from '@semantic-components/ui';
+import { injectStyle } from '@semantic-components/ui';
 import type { ScButtonVariants } from '@semantic-components/ui';
 import { cn } from 'cn';
 import type { ScDataTableExpandAllTable } from './data-table-types';
@@ -22,7 +22,7 @@ import type { ScDataTableExpandAllTable } from './data-table-types';
   },
 })
 export class ScDataTableExpandAll {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   readonly table = input.required<ScDataTableExpandAllTable>();
   readonly classInput = input<string>('', { alias: 'class' });

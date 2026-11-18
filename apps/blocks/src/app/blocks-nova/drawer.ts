@@ -1,4 +1,4 @@
-import type { ScDrawerStyles } from '@semantic-components/presets';
+import type { ScDrawerStyles } from '@semantic-components/styles';
 
 // shadcn's drawer in nova (shadcn-reference/presets/nova/drawer.tsx): its look
 // only — Base UI's mechanics (swipe, snap, stack) are the part's.

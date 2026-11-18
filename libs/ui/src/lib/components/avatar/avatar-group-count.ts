@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: 'div[scAvatarGroupCount]',
@@ -9,7 +9,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScAvatarGroupCount {
-  private readonly styles = injectPreset().avatarGroupCount;
+  private readonly styles = injectStyle().avatarGroupCount;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

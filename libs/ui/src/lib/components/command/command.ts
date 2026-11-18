@@ -13,7 +13,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import type { ScCommandItem } from './command-item';
 
 /** Whether an item matches the search: its text, its `value` and its `keywords`. */
@@ -62,7 +62,7 @@ export const scCommandContains: ScCommandFilter = (text, search, keywords) => {
   },
 })
 export class ScCommand {
-  private readonly styles = injectPreset().command;
+  private readonly styles = injectStyle().command;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Replaces the matching (a contains, accents and case ignored). */

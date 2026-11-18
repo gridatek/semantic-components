@@ -1,11 +1,11 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { ScDrawerProvider } from './drawer-provider';
 
 /**
- * Closes the drawer: the preset's button, outline by default (Cancel, in the
+ * Closes the drawer: the style's button, outline by default (Cancel, in the
  * footer, as shadcn's). Submit: `variant="default"`; a ✕: `variant="ghost"
  * size="icon-sm"`, named.
  */
@@ -19,7 +19,7 @@ import { ScDrawerProvider } from './drawer-provider';
   },
 })
 export class ScDrawerClose {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
   private readonly drawer = inject(ScDrawerProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly type = input<'button' | 'submit' | 'reset'>('button');

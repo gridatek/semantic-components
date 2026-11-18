@@ -82,7 +82,7 @@ const MIN_LABEL_HEIGHT = 24;
       </svg:text>
     }
     @for (box of boxes(); track box.index) {
-      <!-- Its corners: the style's, as the bars' (the preset sets --sc-chart-bar-radius). -->
+      <!-- Its corners: the style's, as the bars' (the style sets --sc-chart-bar-radius). -->
       <svg:rect
         class="[rx:var(--sc-chart-bar-radius,0px)]"
         [attr.x]="box.x"

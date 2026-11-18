@@ -28,14 +28,14 @@ One part, on a native link. Its address is yours, and it needs one: `href`, or `
 
 ### ScLink — `a[scLink]`
 
-In text (the default), its classes are its own (underline, the text's colour and size, an icon at the text's size) and the preset's `link` (`injectPreset().link`: the style's corners and focus ring). In a button's look, they are the preset's button (`injectPreset().button`), as `scButton`'s, and it carries `data-slot="button"` so a button group styles it as a button.
+In text (the default), its classes are its own (underline, the text's colour and size, an icon at the text's size) and the style's `link` (`injectStyle().link`: the style's corners and focus ring). In a button's look, they are the style's button (`injectStyle().button`), as `scButton`'s, and it carries `data-slot="button"` so a button group styles it as a button.
 
 | Input      | Type                                                                                      | Default     | Description                                                                                                                               |
 | ---------- | ----------------------------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `variant`  | `'default' \| 'link' \| 'button' \| 'outline' \| 'secondary' \| 'ghost' \| 'destructive'` | `'default'` | Its look: a link in text (default), or a button's, inherited from the Button — `link` the Button's link variant, `button` the primary one |
 | `size`     | `'xs' \| 'sm' \| 'default' \| 'lg' \| 'icon-xs' \| 'icon-sm' \| 'icon' \| 'icon-lg'`      | `'default'` | A button look's size: the button's sizes. A link in text takes the size of its text                                                       |
 | `disabled` | `boolean`                                                                                 | `false`     | Not followed by any means (click, Enter, middle-click, `routerLink`); out of the tab order; `aria-disabled`                               |
-| `class`    | `string`                                                                                  | `''`        | Classes merged over the preset (`cn`: a later class wins)                                                                                 |
+| `class`    | `string`                                                                                  | `''`        | Classes merged over the style (`cn`: a later class wins)                                                                                  |
 
 ## Examples
 
@@ -52,7 +52,7 @@ The default: a link inside a sentence. Underlined — told apart by more than it
 
 ### Variants
 
-The button looks are inherited from the Button: the same preset classes as `scButton`'s variants. `link` is the Button's link variant — the button's box (its height, padding and text size), underlined on hover — for a link that sits among buttons: in a toolbar, beside an empty state's actions, a card's footer. In a sentence, use the default.
+The button looks are inherited from the Button: the same style classes as `scButton`'s variants. `link` is the Button's link variant — the button's box (its height, padding and text size), underlined on hover — for a link that sits among buttons: in a toolbar, beside an empty state's actions, a card's footer. In a sentence, use the default.
 
 ```html
 <a scLink href="/docs/components/tabs">Default</a>

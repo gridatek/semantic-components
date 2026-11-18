@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScButtonVariants } from '../button';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
@@ -13,7 +13,7 @@ import { ScAlertDialogProvider } from './alert-dialog-provider';
   },
 })
 export class ScAlertDialogCancel {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly alertDialogProvider = inject(ScAlertDialogProvider);
   readonly classInput = input<string>('', { alias: 'class' });

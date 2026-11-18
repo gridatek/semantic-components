@@ -1,4 +1,4 @@
-import type { ScToastStyles } from '@semantic-components/presets';
+import type { ScToastStyles } from '@semantic-components/styles';
 
 // shadcn's toast in nova (shadcn-reference/presets/nova/toast.tsx): the toast's look — its
 // corners are all that change between styles — and the same corners on the stack's focus ring.

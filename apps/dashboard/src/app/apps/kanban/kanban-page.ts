@@ -94,7 +94,7 @@ const BOARD: ScKanbanBoardValue<Task> = {
   progress: [
     {
       id: 4,
-      title: $localize`Charts follow the preset`,
+      title: $localize`Charts follow the style`,
       tag: 'Development',
       due: '2026-05-03',
       people: who(3, 7),

@@ -11,14 +11,14 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_FIELD } from '../field';
 
 /** A slider's orientation. */
 export type ScSliderOrientation = 'horizontal' | 'vertical';
 
 /**
- * A slider: a native range in the preset's look — its track, the range up to
+ * A slider: a native range in the style's look — its track, the range up to
  * the thumb, and the thumb. Horizontal, or vertical (its value growing
  * upward). The keyboard, screen readers and right to left are the browser's.
  */
@@ -45,7 +45,7 @@ export type ScSliderOrientation = 'horizontal' | 'vertical';
   },
 })
 export class ScSlider implements FormValueControl<number> {
-  private readonly styles = injectPreset().slider;
+  private readonly styles = injectStyle().slider;
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   private readonly field = inject(SC_FIELD, { optional: true });
@@ -106,7 +106,7 @@ export class ScSlider implements FormValueControl<number> {
         : '[&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_right,var(--primary)_var(--sc-slider-fill),transparent_var(--sc-slider-fill))] rtl:[&::-webkit-slider-runnable-track]:bg-[linear-gradient(to_left,var(--primary)_var(--sc-slider-fill),transparent_var(--sc-slider-fill))]',
       '[--sc-slider-fill:calc(var(--sc-slider-thumb)/2_+_(100%_-_var(--sc-slider-thumb))_*_var(--sc-slider-value))]',
       // The browsers' own thumb off (Firefox's border, and its round corners:
-      // square, as shadcn's, unless the preset rounds it); the preset's over it.
+      // square, as shadcn's, unless the style rounds it); the style's over it.
       '[&::-webkit-slider-thumb]:box-border [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:box-border [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:rounded-none',
       this.styles.thumb,
       this.classInput(),

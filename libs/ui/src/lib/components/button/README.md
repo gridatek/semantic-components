@@ -1,6 +1,6 @@
 # Button
 
-A native button for an action: submit, open, delete. Six variants and eight sizes, in the look of the app's preset, with room for icons and a spinner. In a form it submits only when told to; to go somewhere, use a Link.
+A native button for an action: submit, open, delete. Six variants and eight sizes, in the look of the app's style, with room for icons and a spinner. In a form it submits only when told to; to go somewhere, use a Link.
 
 ## Usage
 
@@ -12,7 +12,7 @@ A native button for an action: submit, open, delete. Six variants and eight size
 
 ### ScButton — `button[scButton]`
 
-Its classes are the app's preset's (`provideSemanticComponents({ preset })`, from `@semantic-components/presets`; nova by default). Each of the eight presets (nova, vega, maia, lyra, mira, luma, sera, rhea) is shadcn's button in that style, class for class.
+Its classes are the app's style's (`provideSemanticComponents({ style })`, from `@semantic-components/styles`; nova by default). Each of the eight styles (nova, vega, maia, lyra, mira, luma, sera, rhea) is shadcn's button in that style, class for class.
 
 | Input          | Type                              | Default     | Description                                    |
 | -------------- | --------------------------------- | ----------- | ---------------------------------------------- |

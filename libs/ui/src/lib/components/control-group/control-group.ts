@@ -1,11 +1,11 @@
 import { Directive, computed, input } from '@angular/core';
-import type { ScControlGroupOrientation } from '@semantic-components/presets';
+import type { ScControlGroupOrientation } from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * Buttons (and inputs, selects, text) joined into one: shared borders, the
- * outer corners rounded. Its classes are the preset's; a `group`, named by the
+ * outer corners rounded. Its classes are the style's; a `group`, named by the
  * consumer (`aria-label`). Tab goes through each button — for arrow keys
  * between them, a Toolbar; for buttons that toggle a state, a Toggle Group.
  */
@@ -20,7 +20,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScControlGroup {
-  private readonly styles = injectPreset().controlGroup;
+  private readonly styles = injectStyle().controlGroup;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScControlGroupOrientation>('horizontal');

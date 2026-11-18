@@ -1,4 +1,4 @@
-import type { ScAccordionStyles } from '@semantic-components/presets';
+import type { ScAccordionStyles } from '@semantic-components/styles';
 
 // shadcn's accordion in nova (shadcn-reference/presets/nova/accordion.tsx).
 // Its panel's open/close classes and height variable are left out: the panel

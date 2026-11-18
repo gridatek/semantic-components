@@ -1,6 +1,6 @@
 # Popover
 
-Rich content in a panel beside its trigger — a dialog, modal or not, opened by a click or a hover — as Base UI's Popover (parts, behaviour) in the look of the app's preset (`popover` key: shadcn's in each of the eight styles).
+Rich content in a panel beside its trigger — a dialog, modal or not, opened by a click or a hover — as Base UI's Popover (parts, behaviour) in the look of the app's style (`popover` key: shadcn's in each of the eight styles).
 
 ## Usage
 
@@ -30,7 +30,7 @@ Rich content in a panel beside its trigger — a dialog, modal or not, opened by
 | `ScPopoverHeader`      | `div[scPopoverHeader]`                            | Its title and description, together                                                                                                                                                                                                                                                                                                                                 |
 | `ScPopoverTitle`       | `[scPopoverTitle]`                                | Names it; the heading level is yours                                                                                                                                                                                                                                                                                                                                |
 | `ScPopoverDescription` | `p[scPopoverDescription]`                         | Describes it                                                                                                                                                                                                                                                                                                                                                        |
-| `ScPopoverClose`       | `button[scPopoverClose]`                          | Closes it: the preset's button (ghost, icon-xs); name it                                                                                                                                                                                                                                                                                                            |
+| `ScPopoverClose`       | `button[scPopoverClose]`                          | Closes it: the style's button (ghost, icon-xs); name it                                                                                                                                                                                                                                                                                                             |
 
 `scPopoverProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 

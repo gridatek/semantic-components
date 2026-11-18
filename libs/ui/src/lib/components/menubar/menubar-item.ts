@@ -17,7 +17,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { followOverlaySize, setInput } from '../../utils';
 import { ScMenuPortal } from '../menu';
 import { useDefaultSearchTerm } from '../menu/menu-search-term';
@@ -61,7 +61,7 @@ export class ScMenubarItem {
   private readonly connectedOverlay = viewChild(CdkConnectedOverlay);
 
   private readonly scMenubar = inject(ScMenubar);
-  private readonly styles = injectPreset().menubar;
+  private readonly styles = injectStyle().menubar;
   private readonly directionality = inject(Directionality);
 
   /**

@@ -39,7 +39,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
       <div class="space-y-2">
         <h1 scTypeset>Frame</h1>
         <p class="text-muted-foreground">
-          A frame round a box, in the app&apos;s preset: the style&apos;s card
+          A frame round a box, in the app&apos;s style: the style&apos;s card
           radius, ring and shadow — for an aspect ratio, a table, any box that
           isn&apos;t a card.
         </p>
@@ -77,7 +77,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[scFrame]</code>
         </h3>
         <p class="text-muted-foreground">
-          The preset&apos;s frame: the style&apos;s card radius, ring and shadow
+          The style&apos;s frame: the style&apos;s card radius, ring and shadow
           — square in lyra and sera,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">4xl</code> in
           luma.
@@ -107,7 +107,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
                 </td>
                 <td scTableCell><code class="font-mono text-sm">''</code></td>
                 <td scTableCell class="text-muted-foreground whitespace-normal">
-                  Classes merged over the preset (cn: a later class wins).
+                  Classes merged over the style (cn: a later class wins).
                 </td>
               </tr>
             </tbody>

@@ -1,4 +1,4 @@
-import type { ScMenuStyles } from '@semantic-components/presets';
+import type { ScMenuStyles } from '@semantic-components/styles';
 
 // shadcn's context menu in nova (shadcn-reference/presets/nova/context-menu.tsx):
 // the Menu's parts in a context menu. In our states, as the menu key:

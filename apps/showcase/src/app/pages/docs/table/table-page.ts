@@ -46,7 +46,7 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
         <h1 scTypeset>Table</h1>
         <p class="text-muted-foreground">
           A table of data: the native table elements, in the look of the
-          app&apos;s preset. For sorting, filtering, selection and pages, use a
+          app&apos;s style. For sorting, filtering, selection and pages, use a
           <a scLink variant="button" routerLink="/docs/components/data-table"
             >Data Table</a
           >.
@@ -117,7 +117,7 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -190,12 +190,12 @@ export default class TablePage {
       name: 'ScTableContainer',
       selector: 'div[scTableContainer]',
       description:
-        'Scrolls a wide table sideways. Framed: add scFrame (the preset’s frame).',
+        'Scrolls a wide table sideways. Framed: add scFrame (the style’s frame).',
     },
     {
       name: 'ScTable',
       selector: 'table[scTable]',
-      description: 'The table: full width, its text size from the preset.',
+      description: 'The table: full width, its text size from the style.',
     },
     {
       name: 'ScTableCaption',

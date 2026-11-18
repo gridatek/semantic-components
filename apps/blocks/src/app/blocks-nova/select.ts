@@ -1,4 +1,4 @@
-import type { ScSelectStyles } from '@semantic-components/presets';
+import type { ScSelectStyles } from '@semantic-components/styles';
 
 // shadcn's select on Radix, in nova (shadcn-reference/presets-radix/nova/select.tsx),
 // adapted: Radix's states as ours show them — the active item is

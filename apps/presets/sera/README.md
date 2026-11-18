@@ -1,6 +1,6 @@
 # Sera
 
-An editorial workspace built with Semantic Components in shadcn's Sera style: audience analytics, an article directory with its editor, a media library. Every link goes to a page and every button does what it says. This is an app, not the presets library (`libs/presets`), whose `sera` preset it uses.
+An editorial workspace built with Semantic Components in shadcn's Sera style: audience analytics, an article directory with its editor, a media library. Every link goes to a page and every button does what it says. This is an app, not the presets library (`libs/styles`), whose `sera` preset it uses.
 
 - **Design**: shadcn-ui/ui, `apps/v4/app/(app)/(styles)/sera` (MIT): its screens on `base-sera`.
 - **Look**: the Sera preset (`app.config.ts`); shadcn's `taupe` theme, light and dark, square corners, and its fonts (Playfair Display for headings, Noto Sans for the text) in `styles.css` and `index.html`.

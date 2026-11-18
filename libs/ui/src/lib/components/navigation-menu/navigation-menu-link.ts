@@ -11,7 +11,7 @@ import { ScNavigationMenuContent } from './navigation-menu-content';
 
 /**
  * A link of the menu: at the top level the trigger's look; in a panel the
- * preset's link (a row — `flex-col items-start gap-1` for a title over a
+ * style's link (a row — `flex-col items-start gap-1` for a title over a
  * text). `active` for the page shown (`aria-current="page"`). Following it
  * closes the menu, unless `closeOnClick` is off.
  */

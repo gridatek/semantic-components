@@ -1,4 +1,4 @@
-import type { ScTooltipStyles } from '@semantic-components/presets';
+import type { ScTooltipStyles } from '@semantic-components/styles';
 
 // shadcn's tooltip in nova (shadcn-reference/presets/nova/tooltip.tsx). Its
 // open/close animation classes are Angular's animate.enter / animate.leave here.

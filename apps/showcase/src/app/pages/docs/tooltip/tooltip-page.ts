@@ -48,7 +48,7 @@ import { TooltipUsageDemoContainer } from './demos/tooltip-usage-demo-container'
         <h1 scTypeset>Tooltip</h1>
         <p class="text-muted-foreground">
           A short label shown when the pointer rests on a control or the
-          keyboard reaches it. In the look of the app&apos;s preset.
+          keyboard reaches it. In the look of the app&apos;s style.
         </p>
         <app-component-badges path="tooltip" />
       </div>
@@ -105,7 +105,7 @@ import { TooltipUsageDemoContainer } from './demos/tooltip-usage-demo-container'
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer

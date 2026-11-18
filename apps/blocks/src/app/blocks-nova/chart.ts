@@ -1,4 +1,4 @@
-import type { ScChartStyles } from '@semantic-components/presets';
+import type { ScChartStyles } from '@semantic-components/styles';
 
 // shadcn's chart in nova (shadcn-reference/presets/nova/chart.tsx): the tooltip's box,
 // the only class shadcn changes from style to style.

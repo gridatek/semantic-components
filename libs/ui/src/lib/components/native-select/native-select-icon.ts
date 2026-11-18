@@ -1,10 +1,10 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * Your chevron, on its SVG after the select: placed at the select's end by
- * the preset, hidden from screen readers.
+ * the style, hidden from screen readers.
  */
 @Directive({
   selector: 'svg[scNativeSelectIcon]',
@@ -14,7 +14,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScNativeSelectIcon {
-  private readonly styles = injectPreset().nativeSelect;
+  private readonly styles = injectStyle().nativeSelect;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

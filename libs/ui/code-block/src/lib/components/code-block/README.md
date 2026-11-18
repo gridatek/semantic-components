@@ -1,6 +1,6 @@
 # Code Block
 
-Code to read and copy, following shadcn/ui's code block, in the look of the app's preset: a header (title, actions), the code — highlighted, numbered, wrapped, its lines marked — and a footer.
+Code to read and copy, following shadcn/ui's code block, in the look of the app's style: a header (title, actions), the code — highlighted, numbered, wrapped, its lines marked — and a footer.
 
 ## Architecture
 
@@ -86,4 +86,4 @@ Layout parts, each a `div` with its `class`.
 
 ## Styles
 
-Every part's classes are the preset's (`injectPreset().codeBlock`: `root` by variant, `header`, `title`, `actions`, `content`, `code`, `line` by mark, `footer`): shadcn's Code Block, in each style. A code editor in the block (the Code Editor) takes the preset's focus look for the code.
+Every part's classes are the style's (`injectStyle().codeBlock`: `root` by variant, `header`, `title`, `actions`, `content`, `code`, `line` by mark, `footer`): shadcn's Code Block, in each style. A code editor in the block (the Code Editor) takes the style's focus look for the code.

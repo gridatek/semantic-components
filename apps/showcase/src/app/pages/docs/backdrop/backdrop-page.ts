@@ -42,7 +42,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
         <h1 scTypeset>Backdrop</h1>
         <p class="text-muted-foreground">
           The dimmed, blurred layer behind an overlay, in the look of the
-          app&apos;s preset. The
+          app&apos;s style. The
           <a scLink routerLink="/docs/components/dialog">Dialog</a>,
           <a scLink routerLink="/docs/components/alert-dialog">Alert Dialog</a>,
           <a scLink routerLink="/docs/components/sheet">Sheet</a>
@@ -97,8 +97,8 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
             the overlay&apos;s.
           </li>
           <li>
-            Its shade and blur are the preset&apos;s — shadcn&apos;s overlay,
-            the same behind every overlay of a style:
+            Its shade and blur are the style&apos;s — shadcn&apos;s overlay, the
+            same behind every overlay of a style:
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
               >bg-black/10</code
             >
@@ -153,7 +153,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
                   <code class="font-mono text-sm">''</code>
                 </td>
                 <td scTableCell class="text-muted-foreground whitespace-normal">
-                  Classes merged over the preset (cn: a later class wins) — your
+                  Classes merged over the style (cn: a later class wins) — your
                   own shade, its place.
                 </td>
               </tr>

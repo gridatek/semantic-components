@@ -1,6 +1,6 @@
 # Accordion
 
-Items whose panels open and close under their heading. In the look of the app's preset (shadcn's Accordion), Base UI's parts and state, on `@angular/aria`.
+Items whose panels open and close under their heading. In the look of the app's style (shadcn's Accordion), Base UI's parts and state, on `@angular/aria`.
 
 ## Usage
 
@@ -41,4 +41,4 @@ Tab moves between the triggers; Enter or Space opens or closes. ArrowDown and Ar
 | `ScAccordionTriggerIcon`                      | `svg[scAccordionTriggerIcon]`                                | `class` — your chevron, at the end, turned while open                                                         |
 | `ScAccordionPanel`, `ScAccordionPanelContent` | `[scAccordionPanel]`, `ng-template[scAccordionPanelContent]` | `class` — role `region`, named by its trigger; its height animates (needs `interpolate-size: allow-keywords`) |
 
-Every part's classes are the preset's (`injectPreset().accordion`: `root`, `item`, `trigger`, `icon`, `panel`, `content`): shadcn's Accordion, in each style. The trigger shows its focus in every style (luma's has no focus style).
+Every part's classes are the style's (`injectStyle().accordion`: `root`, `item`, `trigger`, `icon`, `panel`, `content`): shadcn's Accordion, in each style. The trigger shows its focus in every style (luma's has no focus style).

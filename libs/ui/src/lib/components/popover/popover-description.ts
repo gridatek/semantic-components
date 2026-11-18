@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScPopoverProvider } from './popover-provider';
 
 /** The popover's description: read with it. */
@@ -13,7 +13,7 @@ import { ScPopoverProvider } from './popover-provider';
   },
 })
 export class ScPopoverDescription {
-  private readonly styles = injectPreset().popover;
+  private readonly styles = injectStyle().popover;
   readonly classInput = input<string>('', { alias: 'class' });
   private readonly id = inject(_IdGenerator).getId('sc-popover-desc-');
 

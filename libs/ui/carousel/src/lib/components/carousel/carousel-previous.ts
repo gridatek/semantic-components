@@ -1,9 +1,9 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { ScButtonVariants, injectPreset } from '@semantic-components/ui';
+import { ScButtonVariants, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScCarousel } from './carousel';
 
-/** To the previous slide: the preset's button (outline, icon-sm), outside the carousel's start (above, vertical); disabled at the first. Write its icon and name it. */
+/** To the previous slide: the style's button (outline, icon-sm), outside the carousel's start (above, vertical); disabled at the first. Write its icon and name it. */
 @Directive({
   selector: 'button[scCarouselPrevious]',
   host: {
@@ -14,9 +14,9 @@ import { ScCarousel } from './carousel';
   },
 })
 export class ScCarouselPrevious {
-  private readonly buttonStyles = injectPreset().button;
-  /** The preset's corners for these buttons. */
-  private readonly corners = injectPreset().carousel;
+  private readonly buttonStyles = injectStyle().button;
+  /** The style's corners for these buttons. */
+  private readonly corners = injectStyle().carousel;
 
   private readonly carousel = inject(ScCarousel);
 

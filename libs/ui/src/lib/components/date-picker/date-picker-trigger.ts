@@ -1,8 +1,8 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Directive, computed, inject, input } from '@angular/core';
-import type { ScInputGroupButtonSize } from '@semantic-components/presets';
+import type { ScInputGroupButtonSize } from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button';
 import { ScInputGroup } from '../input-group';
 import { ScPopoverProvider } from '../popover';
@@ -33,9 +33,9 @@ import { ScDatePicker } from './date-picker';
   },
 })
 export class ScDatePickerTrigger {
-  private readonly buttonStyles = injectPreset().button;
-  private readonly groupButtonStyles = injectPreset().inputGroupButton;
-  private readonly triggerStyles = injectPreset().select.trigger;
+  private readonly buttonStyles = injectStyle().button;
+  private readonly groupButtonStyles = injectStyle().inputGroupButton;
+  private readonly triggerStyles = injectStyle().select.trigger;
 
   private readonly popover = inject(ScPopoverProvider);
   private readonly picker = inject(ScDatePicker);

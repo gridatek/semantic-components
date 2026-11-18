@@ -10,14 +10,14 @@ export * from '@playwright/test';
  */
 export const test = base.extend({
   page: async ({ page, baseURL }, use, testInfo) => {
-    // The specs' preset: their project's (presets-lyra…), else nova — the
+    // The specs' style: their project's (styles-lyra…), else nova — the
     // showcase opens in lyra. Read when the app starts.
-    const preset =
-      (testInfo.project.metadata as { preset?: string }).preset ?? 'nova';
+    const style =
+      (testInfo.project.metadata as { style?: string }).style ?? 'nova';
     await page.context().addCookies([
       {
-        name: 'sc-preset',
-        value: preset,
+        name: 'sc-style',
+        value: style,
         url: baseURL ?? 'http://localhost:4200',
       },
     ]);

@@ -1,6 +1,6 @@
 # Drawer
 
-A panel at the edge of the screen that a swipe dismisses — or moves between its snap points. shadcn's Drawer (Base UI's Drawer) in the look of the app's preset (`drawer` key: shadcn's in each of the eight styles).
+A panel at the edge of the screen that a swipe dismisses — or moves between its snap points. shadcn's Drawer (Base UI's Drawer) in the look of the app's style (`drawer` key: shadcn's in each of the eight styles).
 
 ## Usage
 
@@ -37,7 +37,7 @@ A panel at the edge of the screen that a swipe dismisses — or moves between it
 | `ScDrawerTitle`       | `h2[scDrawerTitle]`                             | Names it                                                                                                                                                                                           |
 | `ScDrawerDescription` | `p[scDrawerDescription]`                        | Describes it                                                                                                                                                                                       |
 | `ScDrawerFooter`      | `div[scDrawerFooter]`                           | Its actions, at the bottom                                                                                                                                                                         |
-| `ScDrawerClose`       | `button[scDrawerClose]`                         | Closes it: the preset's button, outline by default                                                                                                                                                 |
+| `ScDrawerClose`       | `button[scDrawerClose]`                         | Closes it: the style's button, outline by default                                                                                                                                                  |
 
 `scDrawerProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 
@@ -59,7 +59,7 @@ A panel at the edge of the screen that a swipe dismisses — or moves between it
 ## Not shadcn's
 
 - **Angular's animations**: the panel slides in and out from its edge with `animate.enter` / `animate.leave` (tw-animate's `animate-in` / `animate-out`, `slide-in-from-*` / `slide-out-to-*`). A swipe's leave starts where it was let go (tw-animate's exit has only an end state).
-- **Mechanics in the part, look in the preset**: Base UI's CSS variables (`--drawer-swipe-movement-*`, `--stack-*`) aren't used; the part sets the panel's transform. The preset keeps colours, corners, borders and the handle's bar.
+- **Mechanics in the part, look in the style**: Base UI's CSS variables (`--drawer-swipe-movement-*`, `--stack-*`) aren't used; the part sets the panel's transform. The style keeps colours, corners, borders and the handle's bar.
 - **A simpler stack**: the drawer behind scales to 95% and dims; Base UI's peek and height matching aren't copied.
 - **Physical swipe directions** (as Base UI), plus `inline-start` / `inline-end`, resolved by the page's direction.
 - **The responsive example is composition**: a Dialog on wide screens, a Drawer on phones, on one `open` signal and a media query in your component.

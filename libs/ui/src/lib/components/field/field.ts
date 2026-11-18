@@ -14,7 +14,7 @@ import {
 import { FormField } from '@angular/forms/signals';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScFieldContentWrapper } from './field-content-wrapper';
 
 const fieldVariants = cva('', {
@@ -67,8 +67,8 @@ export const SC_FIELD_CHOICE = new InjectionToken<unknown>('SC_FIELD_CHOICE');
   ],
 })
 export class ScField implements ScFieldContext {
-  private readonly styles = injectPreset().field;
-  private readonly labelStyles = injectPreset().label;
+  private readonly styles = injectStyle().field;
+  private readonly labelStyles = injectStyle().label;
   private readonly elementRef = inject(ElementRef<HTMLElement>);
 
   /**

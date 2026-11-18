@@ -195,7 +195,7 @@ export default class ControlGroupPage {
     name: 'class',
     type: 'string',
     default: "''",
-    description: 'Classes merged over the preset (cn: a later class wins).',
+    description: 'Classes merged over the style (cn: a later class wins).',
   };
 
   private readonly parts = [
@@ -203,7 +203,7 @@ export default class ControlGroupPage {
       name: 'ScControlGroup',
       selector: 'div[scControlGroup]',
       description:
-        'The group: role="group", its classes the preset’s. A group in a group is spaced from the others.',
+        'The group: role="group", its classes the style’s. A group in a group is spaced from the others.',
       inputs: [
         {
           name: 'orientation',

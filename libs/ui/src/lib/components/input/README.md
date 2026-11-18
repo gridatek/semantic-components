@@ -1,6 +1,6 @@
 # Input
 
-A native text field, in the look of the app's preset. In a Field it takes the field's label and description; with Signal Forms it shows itself invalid once touched. For a longer text, use a Textarea; for a choice among options, a Select.
+A native text field, in the look of the app's style. In a Field it takes the field's label and description; with Signal Forms it shows itself invalid once touched. For a longer text, use a Textarea; for a choice among options, a Select.
 
 ## Usage
 
@@ -50,14 +50,14 @@ readonly profile = form(signal({ email: '' }), (s) => {
 
 ### ScInput — `input[scInput]`
 
-Its classes are the preset's (`injectPreset().input`, from `provideSemanticComponents({ preset })`; nova by default). Every native attribute (`type`, `placeholder`, `autocomplete`…) is the input's own.
+Its classes are the style's (`injectStyle().input`, from `provideSemanticComponents({ style })`; nova by default). Every native attribute (`type`, `placeholder`, `autocomplete`…) is the input's own.
 
 | Input              | Type      | Default                 | Description                                                            |
 | ------------------ | --------- | ----------------------- | ---------------------------------------------------------------------- |
 | `id`               | `string`  | the field's, or made up | In a field, the field's id: its label points to it                     |
 | `aria-describedby` | `string`  | the field's description | In a field, its description and errors                                 |
 | `disabled`         | `boolean` | `false`                 | Without a form. With `[formField]`, declare `disabled()` in the schema |
-| `class`            | `string`  | `''`                    | Classes merged over the preset (`cn`: a later class wins)              |
+| `class`            | `string`  | `''`                    | Classes merged over the style (`cn`: a later class wins)               |
 
 `data-slot="control"`: read by the input group and the control group (focus, invalid, border). In an input group (`div[scInputGroup]`) the group gives it the look of being inside — no border, ring or corners of its own — as it does for every control in it.
 

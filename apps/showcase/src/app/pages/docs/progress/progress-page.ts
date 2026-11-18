@@ -50,7 +50,7 @@ import { StepsProgressDemoContainer } from './demos/steps-progress-demo-containe
         <h1 scTypeset>Progress</h1>
         <p class="text-muted-foreground">
           How far a task has gone, as a bar or a circle. In the look of the
-          app&apos;s preset.
+          app&apos;s style.
         </p>
         <app-component-badges path="progress" />
       </div>
@@ -103,7 +103,7 @@ import { StepsProgressDemoContainer } from './demos/steps-progress-demo-containe
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -177,13 +177,13 @@ export default class ProgressPage {
       name: 'ScProgressLabel, ScProgressValueText',
       selector: '[scProgressLabel], [scProgressValueText]',
       description:
-        "Its name (aria-labelledby), and its value as text (aria-valuetext), in the preset's look; centred in a circle.",
+        "Its name (aria-labelledby), and its value as text (aria-valuetext), in the style's look; centred in a circle.",
     },
     {
       name: 'ScProgressTrack, ScProgressRange',
       selector: 'div[scProgressTrack], div[scProgressRange]',
       description:
-        "A bar: the track in the preset's look, the range as far as the value; sliding while indeterminate.",
+        "A bar: the track in the style's look, the range as far as the value; sliding while indeterminate.",
     },
     {
       name: 'ScProgressCircle',

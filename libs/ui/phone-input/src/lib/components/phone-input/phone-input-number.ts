@@ -7,7 +7,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { SC_FIELD, injectPreset } from '@semantic-components/ui';
+import { SC_FIELD, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { PHONE_SEPARATOR } from './phone-input-text';
 import { SC_PHONE_INPUT } from './phone-input-types';
@@ -52,7 +52,7 @@ function positionAfter(text: string, count: number): number {
   },
 })
 export class ScPhoneInputNumber {
-  private readonly inputStyles = injectPreset().input;
+  private readonly inputStyles = injectStyle().input;
   private readonly phone = inject(SC_PHONE_INPUT);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =

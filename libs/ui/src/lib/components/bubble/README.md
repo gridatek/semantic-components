@@ -25,7 +25,7 @@ import { ScBubble, ScBubbleContent, ScBubbleGroup, ScBubbleReactions } from '@se
 
 ## Components
 
-The look is the app's preset's (`bubble` key: the content and the reactions,
+The look is the app's style's (`bubble` key: the content and the reactions,
 shadcn's in each of the eight styles); the variants and positions are the same
 in every style. All directives accept a `class` input for merging additional
 CSS classes via the `cn` utility.

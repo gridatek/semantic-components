@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { ScImageCropper } from './image-cropper';
 
@@ -20,7 +20,7 @@ import { ScImageCropper } from './image-cropper';
   },
 })
 export class ScImageCropperAspectRatio {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly cropper = inject(ScImageCropper);
 

@@ -1,4 +1,4 @@
-import type { ScOtpFieldStyles } from '@semantic-components/presets';
+import type { ScOtpFieldStyles } from '@semantic-components/styles';
 
 // shadcn's input OTP in nova (shadcn-reference/presets/nova/input-otp.tsx): a group (one
 // chunk, a joined box), an input (shadcn's slot is a div with a fake caret; ours a real input —

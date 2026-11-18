@@ -125,7 +125,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -260,7 +260,7 @@ export default class CommandPage {
       name: 'ScCommandDialog',
       selector: 'div[scCommandDialog]',
       description:
-        "On the scDialog a command opens in: no padding, the preset's corners; its items' corners follow.",
+        "On the scDialog a command opens in: no padding, the style's corners; its items' corners follow.",
     },
   ];
 }

@@ -1,4 +1,4 @@
-import type { ScToggleGroupStyles } from '@semantic-components/presets';
+import type { ScToggleGroupStyles } from '@semantic-components/styles';
 
 // shadcn's toggle group in nova (shadcn-reference/presets/nova/toggle-group.tsx): the group,
 // and an item's place in it (its look is the toggle key's). They read the group's data-orientation

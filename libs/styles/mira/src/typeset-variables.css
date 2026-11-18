@@ -1,0 +1,30 @@
+/*
+ * Typeset's variables in mira, for ui's typeset.css (its rules): import
+ * both. shadcn's values, and the corners of the style's own parts — code
+ * blocks and images as its Code Block (rounded-md), inline code and keys as its
+ * Kbd (rounded-xs). At zero specificity: yours on :root, or a style class on a
+ * container (`.typeset-chat`), win.
+ */
+@layer components {
+  :where(:root) {
+    --typeset-font-body: inherit;
+    --typeset-font-heading: var(--font-heading);
+    --typeset-font-mono: var(--font-mono);
+    --typeset-size: 1em;
+    --typeset-leading: 1.75;
+    --typeset-flow: 1.25em;
+    --typeset-muted: var(
+      --color-muted-foreground,
+      color-mix(in oklab, currentColor 60%, transparent)
+    );
+    --typeset-rule: var(
+      --color-border,
+      color-mix(in oklab, currentColor 20%, transparent)
+    );
+    --sc-typeset-radius: var(--radius-md);
+    --sc-typeset-radius-inline: var(--radius-xs);
+    --sc-typeset-heading-weight: 600;
+    --sc-typeset-heading-tracking: normal;
+    --sc-typeset-heading-case: none;
+  }
+}

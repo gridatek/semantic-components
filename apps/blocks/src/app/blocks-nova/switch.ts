@@ -1,4 +1,4 @@
-import type { ScSwitchStyles } from '@semantic-components/presets';
+import type { ScSwitchStyles } from '@semantic-components/styles';
 
 // shadcn's switch in nova (shadcn-reference/presets/nova/switch.tsx): our switch is a
 // native checkbox drawing itself — the track is the input (:checked, :not(:checked), :disabled

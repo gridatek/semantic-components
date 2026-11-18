@@ -63,7 +63,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
       <div class="space-y-2">
         <h1 scTypeset>Input</h1>
         <p class="text-muted-foreground">
-          A native text field, in the look of the app&apos;s preset. In a Field
+          A native text field, in the look of the app&apos;s style. In a Field
           it takes the field&apos;s label and description; with Signal Forms it
           shows itself invalid once touched. For a longer text, use a Textarea;
           for a choice among options, a Select.
@@ -130,9 +130,9 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
           is a directive on a native
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >input[scInput]</code
-          >: its classes are the app&apos;s preset&apos;s (
+          >: its classes are the app&apos;s style&apos;s (
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >provideSemanticComponents(&#123; preset &#125;)</code
+            >provideSemanticComponents(&#123; style &#125;)</code
           >, nova by default). Every native attribute (
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">type</code>,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">placeholder</code
@@ -220,7 +220,7 @@ export default class InputPage {
       name: 'class',
       type: 'string',
       default: "''",
-      description: 'Classes merged over the preset (cn: a later class wins).',
+      description: 'Classes merged over the style (cn: a later class wins).',
     },
   ];
 }

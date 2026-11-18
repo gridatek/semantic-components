@@ -105,7 +105,7 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -196,7 +196,7 @@ export default class NavigationMenuPage {
       name: 'ScNavigationMenuTrigger',
       selector: 'button[scNavigationMenuTrigger]',
       description:
-        "Opens its item's panel on hover or press: the preset's trigger, aria-expanded and aria-controls.",
+        "Opens its item's panel on hover or press: the style's trigger, aria-expanded and aria-controls.",
     },
     {
       name: 'ScNavigationMenuTriggerIcon',
@@ -208,13 +208,13 @@ export default class NavigationMenuPage {
       name: 'ScNavigationMenuContent',
       selector: 'div[scNavigationMenuContent]',
       description:
-        "The panel, after its trigger: the preset's padding; always in the page, invisible while closed; slides in from the side you came from. Lay out its inside as you like.",
+        "The panel, after its trigger: the style's padding; always in the page, invisible while closed; slides in from the side you came from. Lay out its inside as you like.",
     },
     {
       name: 'ScNavigationMenuLink',
       selector: 'a[scNavigationMenuLink]',
       description:
-        'A link: the trigger\'s look at the top level, the preset\'s link in a panel. active (aria-current="page"); closeOnClick (true): following it closes the menu.',
+        'A link: the trigger\'s look at the top level, the style\'s link in a panel. active (aria-current="page"); closeOnClick (true): following it closes the menu.',
     },
   ];
 }

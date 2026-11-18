@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScCalendarDay } from './calendar-day';
 import { ScCalendarMonth } from './calendar-month';
 import { ScCalendarMonths } from './calendar-months';
@@ -87,7 +87,7 @@ export type ScCalendarValue =
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCalendar implements FormValueControl<ScCalendarValue> {
-  private readonly styles = injectPreset().calendar;
+  private readonly styles = injectStyle().calendar;
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly injector = inject(Injector);

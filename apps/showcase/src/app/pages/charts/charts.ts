@@ -94,8 +94,8 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
         Charts
       </h1>
       <p class="text-foreground max-w-2xl text-base text-balance sm:text-lg">
-        Charts made of parts, in your preset's look: area, bar, line, pie,
-        radar, radial and more. Copy them into your app.
+        Charts made of parts, in your style's look: area, bar, line, pie, radar,
+        radial and more. Copy them into your app.
       </p>
       <div class="flex flex-wrap justify-center gap-2 pt-2">
         <a

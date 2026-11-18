@@ -1,6 +1,6 @@
 # Collapsible
 
-A trigger that shows and hides a panel of content: the disclosure pattern, Base UI's Collapsible. shadcn's adds no classes (the same in every style): no preset key.
+A trigger that shows and hides a panel of content: the disclosure pattern, Base UI's Collapsible. shadcn's adds no classes (the same in every style): no style key.
 
 ## Usage
 

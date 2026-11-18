@@ -1,6 +1,6 @@
 # Empty
 
-What to show where there is nothing yet — what is empty, why, what to do — in the look of the app's preset (`empty` key: shadcn's in each of the eight styles). Add `border` for a dashed outline.
+What to show where there is nothing yet — what is empty, why, what to do — in the look of the app's style (`empty` key: shadcn's in each of the eight styles). Add `border` for a dashed outline.
 
 ## Components
 

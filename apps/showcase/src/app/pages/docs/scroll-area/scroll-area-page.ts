@@ -46,7 +46,7 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
         <h1 scTypeset>Scroll Area</h1>
         <p class="text-muted-foreground">
           A native scroll container with custom scrollbars. In the look of the
-          app&apos;s preset.
+          app&apos;s style.
         </p>
         <app-component-badges path="scroll-area" />
       </div>
@@ -100,7 +100,7 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -185,7 +185,7 @@ export default class ScrollAreaPage {
       name: 'ScScrollAreaScrollbar, ScScrollAreaThumb',
       selector: 'div[…], div[scScrollAreaThumb]',
       description:
-        "orientation ('vertical', 'horizontal'); hidden while that axis doesn't overflow; data-hovering, data-scrolling. The thumb in the preset's look, dragged to scroll.",
+        "orientation ('vertical', 'horizontal'); hidden while that axis doesn't overflow; data-hovering, data-scrolling. The thumb in the style's look, dragged to scroll.",
     },
     {
       name: 'ScScrollAreaCorner',

@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** The sheet's title and description, at its top. */
 @Directive({
@@ -8,7 +8,7 @@ import { injectPreset } from '../../config/preset';
   host: { '[class]': 'class()' },
 })
 export class ScSheetHeader {
-  private readonly styles = injectPreset().sheet;
+  private readonly styles = injectStyle().sheet;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

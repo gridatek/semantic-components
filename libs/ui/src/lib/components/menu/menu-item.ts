@@ -96,7 +96,7 @@ export class ScMenuItem {
 
   /**
    * How far the submenu's first row is from its top (its padding and
-   * border, the preset's): lifted by as much, that row is level with this
+   * border, the style's): lifted by as much, that row is level with this
    * item. Measured once the submenu is rendered.
    */
   private readonly submenuInset = signal(0);
@@ -104,7 +104,7 @@ export class ScMenuItem {
 
   /**
    * Beside its menu, at the reading end — at the other end if there is no
-   * room — a gap from the menu's edge, whatever the preset's padding. The
+   * room — a gap from the menu's edge, whatever the style's padding. The
    * CDK mirrors start and end in right to left, not the offsets: they are
    * turned here. Measured as the submenu opens.
    */

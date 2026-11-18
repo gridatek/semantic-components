@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: '[scAlertDescription]',
@@ -10,7 +10,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScAlertDescription {
-  private readonly styles = injectPreset().alert;
+  private readonly styles = injectStyle().alert;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

@@ -85,7 +85,7 @@ export class ScChartSunburst implements ScChartSeriesLabels {
   readonly splitRadius = input(0.65);
   /** The line between slices, in px (0: none). */
   readonly strokeWidth = input(2);
-  /** Its arcs' corners' rounding, in px. Unset: the style's (the preset's `--sc-chart-bar-radius`, as the bars'). */
+  /** Its arcs' corners' rounding, in px. Unset: the style's (the style's `--sc-chart-bar-radius`, as the bars'). */
   readonly cornerRadius = input<number | undefined>(undefined);
 
   private readonly active = this.state.activeIndex;

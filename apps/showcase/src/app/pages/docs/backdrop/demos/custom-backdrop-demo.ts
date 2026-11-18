@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScBackdrop, ScButton, ScFrame } from '@semantic-components/ui';
 
 /**
- * Your own shade: classes over the preset's (cn: a later class wins) — here
+ * Your own shade: classes over the style's (cn: a later class wins) — here
  * a tint of the primary color, no blur.
  */
 @Component({

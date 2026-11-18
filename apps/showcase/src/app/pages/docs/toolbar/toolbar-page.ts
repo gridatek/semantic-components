@@ -111,7 +111,7 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -172,7 +172,7 @@ export default class ToolbarPage {
       name: 'ScToolbar',
       selector: 'div[scToolbar]',
       description:
-        'Angular Aria\'s Toolbar: role="toolbar", one Tab stop, the arrows between its widgets; orientation, loopFocus (wraps, on by default), disabled, softDisabled (disabled widgets stay focusable, on by default). The preset\'s frame.',
+        'Angular Aria\'s Toolbar: role="toolbar", one Tab stop, the arrows between its widgets; orientation, loopFocus (wraps, on by default), disabled, softDisabled (disabled widgets stay focusable, on by default). The style\'s frame.',
     },
     {
       name: 'ScToolbarWidget',

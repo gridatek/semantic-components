@@ -48,7 +48,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
         <h1 scTypeset>Attachment</h1>
         <p class="text-muted-foreground">
           A file and its upload state, on its own or in a scrolling row. In the
-          look of the app&apos;s preset.
+          look of the app&apos;s style.
         </p>
         <app-component-badges path="attachment" />
       </div>
@@ -105,7 +105,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -200,7 +200,7 @@ export default class AttachmentPage {
       name: 'ScAttachmentAction',
       selector: 'button[scAttachmentAction]',
       description:
-        "An action (remove, retry…): the preset's button, variant and size (ghost, icon-xs). Name it.",
+        "An action (remove, retry…): the style's button, variant and size (ghost, icon-xs). Name it.",
     },
     {
       name: 'ScAttachmentTrigger',

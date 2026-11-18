@@ -76,7 +76,7 @@ export class ScSheetProvider {
   readonly lang = (): string | null =>
     this.host.closest('[lang]')?.getAttribute('lang') ?? null;
 
-  /** The side as the screen sees it (what the preset reads, `data-side`). */
+  /** The side as the screen sees it (what the style reads, `data-side`). */
   readonly physicalSide = computed<ScOverlaySide>(() =>
     physicalSide(this.side(), this.direction()),
   );

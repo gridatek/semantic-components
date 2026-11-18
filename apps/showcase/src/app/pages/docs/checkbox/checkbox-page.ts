@@ -58,7 +58,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
         <h1 scTypeset>Checkbox</h1>
         <p class="text-muted-foreground">
           A native checkbox that draws itself, in the look of the app&apos;s
-          preset.
+          style.
         </p>
         <app-component-badges path="checkbox" />
       </div>
@@ -119,7 +119,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -196,7 +196,7 @@ export default class CheckboxPage {
       name: 'ScCheckbox',
       selector: 'input[scCheckbox]',
       description:
-        "A native checkbox in the preset's look, its check or minus drawn by itself: checked (two-way, or a [formField]); indeterminate; invalid once touched.",
+        "A native checkbox in the style's look, its check or minus drawn by itself: checked (two-way, or a [formField]); indeterminate; invalid once touched.",
     },
   ];
 }

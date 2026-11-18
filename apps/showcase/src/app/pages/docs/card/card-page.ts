@@ -46,7 +46,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
         <h1 scTypeset>Card</h1>
         <p class="text-muted-foreground">
           A box of related content: a header with its title, description and
-          action, the content, a footer. In the look of the app&apos;s preset.
+          action, the content, a footer. In the look of the app&apos;s style.
         </p>
         <app-component-badges path="card" />
       </div>
@@ -76,7 +76,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
             variable,
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
               >--card-spacing</code
-            >, set by the preset and by
+            >, set by the style and by
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm">size="sm"</code
             >; change it with a class on the card.
           </li>
@@ -89,7 +89,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
             description.
           </li>
           <li>
-            A footer&apos;s look is the preset&apos;s: a muted band with a line
+            A footer&apos;s look is the style&apos;s: a muted band with a line
             above in nova, a line in lyra, none in the others (add
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm">border-t</code>
             for one).
@@ -111,7 +111,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -210,7 +210,7 @@ export default class CardPage {
       name: 'ScCardFooter',
       selector: 'div[scCardFooter]',
       description:
-        'Actions at the bottom: a row; its look from the preset (with border-t, a line and spacing above).',
+        'Actions at the bottom: a row; its look from the style (with border-t, a line and spacing above).',
     },
   ];
 }

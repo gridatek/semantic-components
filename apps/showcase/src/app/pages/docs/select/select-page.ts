@@ -53,7 +53,7 @@ interface ScApiRow {
         <h1 scTypeset>Select</h1>
         <p class="text-muted-foreground">
           A choice among a short list of options: a trigger showing the value,
-          the options in a popup below it. In the look of the app&apos;s preset,
+          the options in a popup below it. In the look of the app&apos;s style,
           with Signal Forms. For a long list to filter, use a Combobox; for
           several values, a Multiselect.
         </p>
@@ -197,7 +197,7 @@ export default class SelectPage {
     name: 'class',
     type: 'string',
     default: "''",
-    description: 'Classes merged over the preset (cn: a later class wins).',
+    description: 'Classes merged over the style (cn: a later class wins).',
   };
 
   private readonly parts = [

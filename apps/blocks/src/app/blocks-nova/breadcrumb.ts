@@ -1,4 +1,4 @@
-import type { ScBreadcrumbStyles } from '@semantic-components/presets';
+import type { ScBreadcrumbStyles } from '@semantic-components/styles';
 
 // shadcn's breadcrumb in nova (shadcn-reference/presets/nova/breadcrumb.tsx).
 export const breadcrumb: ScBreadcrumbStyles = {

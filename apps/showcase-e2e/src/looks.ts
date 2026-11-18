@@ -57,7 +57,7 @@ export async function expectScrollbarWidth(
 /**
  * Its scrollbar is ui's scrollbar.css: no `scrollbar-width` of its own
  * (`auto` — any other value makes Chromium drop `::-webkit-scrollbar`), and,
- * in Chromium, the thumb that file draws: a colour, and the preset's corners
+ * in Chromium, the thumb that file draws: a colour, and the style's corners
  * (`round` or `square`) when given. The thumb is read in Chromium only: it is
  * the one whose computed `::-webkit-scrollbar-thumb` is known to be the drawn one.
  */

@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import type { ScCalendarRange } from '../calendar';
 import { ScDatePicker } from '../date-picker/date-picker';
 import { SC_FIELD } from '../field';
@@ -47,7 +47,7 @@ import { SC_FIELD } from '../field';
   },
 })
 export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> {
-  private readonly inputStyles = injectPreset().input;
+  private readonly inputStyles = injectStyle().input;
   private readonly picker = inject(ScDatePicker, { optional: true });
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =

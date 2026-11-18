@@ -47,7 +47,7 @@ import { WithTextToggleDemoContainer } from './demos/with-text-toggle-demo-conta
       <div class="space-y-2">
         <h1 scTypeset>Toggle</h1>
         <p class="text-muted-foreground">
-          A button that stays pressed, in the look of the app&apos;s preset.
+          A button that stays pressed, in the look of the app&apos;s style.
         </p>
         <app-component-badges path="toggle" />
       </div>
@@ -96,7 +96,7 @@ import { WithTextToggleDemoContainer } from './demos/with-text-toggle-demo-conta
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -148,7 +148,7 @@ export default class TogglePage {
       name: 'ScToggle',
       selector: 'button[scToggle]',
       description:
-        "A button that stays pressed: pressed (two-way); variant ('default', 'outline'); size ('sm', 'default', 'lg'); disabled. In the preset's toggle look.",
+        "A button that stays pressed: pressed (two-way); variant ('default', 'outline'); size ('sm', 'default', 'lg'); disabled. In the style's toggle look.",
     },
   ];
 }

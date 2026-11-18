@@ -81,11 +81,10 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
-          shadcn&apos;s Sidebar, in the look of the app&apos;s preset. A
-          provider round the sidebar and the page beside it holds their shared
-          state. The sidebar has a header and a footer that stay, and a content
-          that scrolls between them: groups, each with a label and a menu of
-          items.
+          shadcn&apos;s Sidebar, in the look of the app&apos;s style. A provider
+          round the sidebar and the page beside it holds their shared state. The
+          sidebar has a header and a footer that stay, and a content that
+          scrolls between them: groups, each with a label and a menu of items.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -152,7 +151,7 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -262,7 +261,7 @@ export default class SidebarPage {
       name: 'ScSidebarTrigger',
       selector: 'button[scSidebarTrigger]',
       description:
-        "Opens and closes the sidebar (the sheet on phones): the preset's button (ghost, icon-sm; variant, size), aria-expanded, aria-controls. Write its icon and its name.",
+        "Opens and closes the sidebar (the sheet on phones): the style's button (ghost, icon-sm; variant, size), aria-expanded, aria-controls. Write its icon and its name.",
     },
     {
       name: 'ScSidebarRail',

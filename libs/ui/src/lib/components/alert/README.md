@@ -1,6 +1,6 @@
 # Alert
 
-A callout for something to notice — a success, a warning, an error — with an icon, a title, a description and an action. In the look of the app's preset.
+A callout for something to notice — a success, a warning, an error — with an icon, a title, a description and an action. In the look of the app's style.
 
 ## Usage
 
@@ -50,7 +50,7 @@ Screen readers watch a live region that already exists and announce what changes
 
 ## API reference
 
-Each part takes `class`, merged over the preset.
+Each part takes `class`, merged over the style.
 
 | Part                 | Selector               | Description                                                                                                                                                                      |
 | -------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -61,4 +61,4 @@ Each part takes `class`, merged over the preset.
 
 ## Styles
 
-From the preset (`alert`): the alert's cva (its radius, padding, text size and icon gap), the title, the description and the action's place. More padding in vega, maia, luma, rhea and sera; square and `text-xs` in lyra; tighter in mira; in sera a bar on the start side (the foreground's color, or the variant's) and a semibold title.
+From the style (`alert`): the alert's cva (its radius, padding, text size and icon gap), the title, the description and the action's place. More padding in vega, maia, luma, rhea and sera; square and `text-xs` in lyra; tighter in mira; in sera a bar on the start side (the foreground's color, or the variant's) and a semibold title.

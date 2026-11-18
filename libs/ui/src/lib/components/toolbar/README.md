@@ -20,7 +20,7 @@ A row of controls of any kind — buttons, toggles, selects, links, an input —
 
 | Part                   | Selector                    | Angular Aria         | What it does                                                                                                                              |
 | ---------------------- | --------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScToolbar`            | `div[scToolbar]`            | `Toolbar`            | `role="toolbar"`, one Tab stop; `orientation`, `loopFocus` (Aria's `wrap`, on), `disabled`, `softDisabled` (on). The preset's `frame`     |
+| `ScToolbar`            | `div[scToolbar]`            | `Toolbar`            | `role="toolbar"`, one Tab stop; `orientation`, `loopFocus` (Aria's `wrap`, on), `disabled`, `softDisabled` (on). The style's `frame`      |
 | `ScToolbarWidget`      | `[scToolbarWidget]`         | `ToolbarWidget`      | Any element made a stop in the toolbar; `disabled`. Its look and state are the part beside it                                             |
 | `ScToolbarWidgetGroup` | `div[scToolbarWidgetGroup]` | `ToolbarWidgetGroup` | Widgets grouped, any mix; `disabled` for all. Holds its toggles' pressed values: `value` (an array, `[formField]` or two-way), `multiple` |
 | `ScToolbarSeparator`   | `div[scToolbarSeparator]`   | —                    | A separator across the toolbar's direction                                                                                                |

@@ -87,7 +87,7 @@ test('Action: the button in the end corner, the text clear of it', async ({
   expect(d.x + d.width).toBeLessThanOrEqual(b.x + 1);
 });
 
-test('Custom Colors: your classes over the preset’s', async ({ page }) => {
+test('Custom Colors: your classes over the style’s', async ({ page }) => {
   await page.goto(demo('colors'));
   const alert = page.locator('[scAlert]');
   await expect(alert).toHaveClass(/bg-amber-50/);

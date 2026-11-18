@@ -4,17 +4,17 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/geist';
-@import '../../../libs/ui/src/lib/styles/reduced-motion.css';
-@import '../../../libs/ui/src/lib/styles/typeset.css';
-@import '../../../libs/presets/nova/src/typeset-variables.css';
-@import '../../../libs/presets/nova/src/editor.css';
+@import '../../../libs/styles/src/reduced-motion.css';
+@import '../../../libs/styles/src/typeset.css';
+@import '../../../libs/styles/nova/src/typeset-variables.css';
+@import '../../../libs/styles/nova/src/editor.css';
 
 /*
  * The dashboard: shadcndashboard's screens (MIT) on our components, in the
- * nova preset (app.config.ts) — shadcn's base-nova, the reference's own style.
+ * nova style (app.config.ts) — shadcn's base-nova, the reference's own style.
  * The theme is shadcn's neutral one, as the showcase's (with its two tokens of
  * ours and two colours darkened for contrast), and Geist, the reference's font.
- * No CSS of the app's own beyond the theme: the preset carries the look.
+ * No CSS of the app's own beyond the theme: the style carries the look.
  */
 
 @custom-variant dark (&:is(.dark *));

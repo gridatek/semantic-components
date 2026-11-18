@@ -9,7 +9,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScComboboxBase } from './combobox-base';
 import { ScComboboxListContent } from './combobox-list-content';
@@ -54,7 +54,7 @@ import { ScComboboxListContent } from './combobox-list-content';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScComboboxPopup {
-  private readonly styles = injectPreset().combobox;
+  private readonly styles = injectStyle().combobox;
   private readonly root = inject(ScComboboxBase);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;

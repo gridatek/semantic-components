@@ -1,6 +1,6 @@
 # Skeleton
 
-A placeholder while content loads — shadcn's Skeleton in the look of the app's preset (`skeleton` key: shadcn's in each of the eight styles; only the corners change).
+A placeholder while content loads — shadcn's Skeleton in the look of the app's style (`skeleton` key: shadcn's in each of the eight styles; only the corners change).
 
 ## Usage
 
@@ -14,13 +14,13 @@ A placeholder while content loads — shadcn's Skeleton in the look of the app's
 </div>
 ```
 
-Its size and shape are yours (`h-4 w-48`, `rounded-full`…), merged over the preset's (cn: a later class wins).
+Its size and shape are yours (`h-4 w-48`, `rounded-full`…), merged over the style's (cn: a later class wins).
 
 ## Part
 
-| Part         | Selector          | What it does                                                                                  |
-| ------------ | ----------------- | --------------------------------------------------------------------------------------------- |
-| `ScSkeleton` | `div[scSkeleton]` | A pulsing muted block in the preset's look (`animate-pulse`, `bg-muted`, the style's corners) |
+| Part         | Selector          | What it does                                                                                 |
+| ------------ | ----------------- | -------------------------------------------------------------------------------------------- |
+| `ScSkeleton` | `div[scSkeleton]` | A pulsing muted block in the style's look (`animate-pulse`, `bg-muted`, the style's corners) |
 
 ## Keyboard and screen readers
 

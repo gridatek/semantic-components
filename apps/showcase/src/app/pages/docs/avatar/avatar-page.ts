@@ -56,7 +56,7 @@ import { SizesAvatarDemoContainer } from './demos/sizes-avatar-demo-container';
         <h1 scTypeset>Avatar</h1>
         <p class="text-muted-foreground">
           A person&apos;s picture, with initials when there is none — alone, in
-          a group, with a status badge. In the look of the app&apos;s preset.
+          a group, with a status badge. In the look of the app&apos;s style.
         </p>
         <app-component-badges path="avatar" />
       </div>
@@ -137,7 +137,7 @@ import { SizesAvatarDemoContainer } from './demos/sizes-avatar-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer

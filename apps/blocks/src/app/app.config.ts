@@ -16,7 +16,7 @@ import { I18N } from './i18n';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideSemanticComponents({ preset: blocksNova }, withI18n(I18N)),
+    provideSemanticComponents({ style: blocksNova }, withI18n(I18N)),
     provideRouter(
       appRoutes,
       withRouterConfig({ onSameUrlNavigation: 'reload' }), // Enable reloading on same URL navigation for mobile menu

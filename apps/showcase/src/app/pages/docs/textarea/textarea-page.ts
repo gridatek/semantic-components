@@ -52,7 +52,7 @@ import { TextareaUsageDemoContainer } from './demos/textarea-usage-demo-containe
         <h1 scTypeset>Textarea</h1>
         <p class="text-muted-foreground">
           A text field of several lines, growing with its text. In the look of
-          the app&apos;s preset.
+          the app&apos;s style.
         </p>
         <app-component-badges path="textarea" />
       </div>
@@ -105,7 +105,7 @@ import { TextareaUsageDemoContainer } from './demos/textarea-usage-demo-containe
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -157,7 +157,7 @@ export default class TextareaPage {
       name: 'ScTextarea',
       selector: 'textarea[scTextarea]',
       description:
-        "A textarea in the preset's look; in a field, its id, description and invalid state from the field; a [formField]; disabled.",
+        "A textarea in the style's look; in a field, its id, description and invalid state from the field; a [formField]; disabled.",
     },
   ];
 }

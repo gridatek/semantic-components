@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** Between chunks (`scOtpFieldGroup`): write its content (an icon, a dash, a dot). */
 @Directive({
@@ -12,7 +12,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScOtpFieldSeparator {
-  private readonly styles = injectPreset().otpField;
+  private readonly styles = injectStyle().otpField;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

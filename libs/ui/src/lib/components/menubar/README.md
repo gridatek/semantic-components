@@ -1,6 +1,6 @@
 # Menubar
 
-A row of menus, as at the top of a desktop app: File, Edit, View. In the look of the app's preset (shadcn's Menubar), on `@angular/aria`. The menus are made of the Menu's parts, which take the menu bar's look inside it.
+A row of menus, as at the top of a desktop app: File, Edit, View. In the look of the app's style (shadcn's Menubar), on `@angular/aria`. The menus are made of the Menu's parts, which take the menu bar's look inside it.
 
 ## Usage
 
@@ -56,4 +56,4 @@ The bar is one tab stop: ArrowLeft and ArrowRight move along it (mirrored right 
 
 The menus: the Menu's parts (see the Menu's README).
 
-Every part's classes are the preset's (`injectPreset().menubar`: `bar`, `trigger`, and `menu` for the Menu's parts in a bar): shadcn's Menubar, in each style. The trigger adds a focus ring shadcn's lacks.
+Every part's classes are the style's (`injectStyle().menubar`: `bar`, `trigger`, and `menu` for the Menu's parts in a bar): shadcn's Menubar, in each style. The trigger adds a focus ring shadcn's lacks.

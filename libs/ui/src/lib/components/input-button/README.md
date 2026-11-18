@@ -1,6 +1,6 @@
 # Input Button
 
-A button that looks like a text field — in the look of the app's preset's `input` — to open a search or a command palette. Our own: shadcn has none.
+A button that looks like a text field — in the look of the app's style's `input` — to open a search or a command palette. Our own: shadcn has none.
 
 ## Usage
 
@@ -14,9 +14,9 @@ A button that looks like a text field — in the look of the app's preset's `inp
 
 ## Part
 
-| Part            | Selector                | What it does                                                                                 |
-| --------------- | ----------------------- | -------------------------------------------------------------------------------------------- |
-| `ScInputButton` | `button[scInputButton]` | The preset's input look, muted text, its icon sized (`size-4` unless yours); `type="button"` |
+| Part            | Selector                | What it does                                                                                |
+| --------------- | ----------------------- | ------------------------------------------------------------------------------------------- |
+| `ScInputButton` | `button[scInputButton]` | The style's input look, muted text, its icon sized (`size-4` unless yours); `type="button"` |
 
 ## Keyboard and screen readers
 

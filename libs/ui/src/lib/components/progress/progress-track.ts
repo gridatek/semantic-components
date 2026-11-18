@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** The bar's track: the whole line, the range inside it. */
 @Directive({
@@ -11,7 +11,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScProgressTrack {
-  private readonly styles = injectPreset().progress;
+  private readonly styles = injectStyle().progress;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

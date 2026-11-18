@@ -97,10 +97,10 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScLink</code>
           is a directive on a native
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">a[scLink]</code>:
-          in text (the default), its classes are the preset&apos;s
+          in text (the default), its classes are the style&apos;s
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">link</code>
           (its corners and focus ring); in a button&apos;s look, the
-          preset&apos;s button, as
+          style&apos;s button, as
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scButton</code
           >&apos;s. Its address is the link&apos;s own:
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">href</code>, or
@@ -188,7 +188,7 @@ export default class LinkPage {
       name: 'class',
       type: 'string',
       default: "''",
-      description: 'Classes merged over the preset (cn: a later class wins).',
+      description: 'Classes merged over the style (cn: a later class wins).',
     },
   ];
 }

@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ViewEncapsulation, computed, inject } from '@angular/core';
-import type { ScPresetName } from '@semantic-components/presets';
+import type { ScStyleName } from '@semantic-components/styles';
 import {
   ScFrame,
   ScMenu,
@@ -30,7 +30,7 @@ import {
   SiSunIcon,
   SiTypeIcon,
 } from '@semantic-icons/lucide-icons';
-import { PRESETS, presetFrom, storePreset } from '../../presets';
+import { STYLES, storeStyle, styleFrom } from '../../styles';
 import { PreviewCards } from './cards/preview-cards';
 
 /**
@@ -207,8 +207,8 @@ import { PreviewCards } from './cards/preview-cards';
 export default class Presets {
   private readonly window = inject(DOCUMENT).defaultView;
 
-  private readonly names = Object.keys(PRESETS) as ScPresetName[];
-  private readonly current = presetFrom(inject(ScStorage));
+  private readonly names = Object.keys(STYLES) as ScStyleName[];
+  private readonly current = styleFrom(inject(ScStorage));
 
   private readonly themeManager = inject(ScThemeManager);
   private readonly modes: readonly { value: ScThemeMode; label: string }[] = [
@@ -244,7 +244,7 @@ export default class Presets {
 
   private choose(name: string | null): void {
     if (!name || name === this.current) return;
-    storePreset(name as ScPresetName);
+    storeStyle(name as ScStyleName);
     this.window?.location.reload();
   }
 }

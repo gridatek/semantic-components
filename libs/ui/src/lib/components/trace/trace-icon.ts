@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** A step's icon — your SVG inside; hidden from screen readers: the title says it. */
 @Directive({
@@ -12,7 +12,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScTraceIcon {
-  private readonly styles = injectPreset().trace;
+  private readonly styles = injectStyle().trace;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

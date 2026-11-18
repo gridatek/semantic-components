@@ -1,4 +1,4 @@
-import type { ScAlertStyles } from '@semantic-components/presets';
+import type { ScAlertStyles } from '@semantic-components/styles';
 import { cva } from 'class-variance-authority';
 
 // shadcn's alert in nova (shadcn-reference/presets/nova/alert.tsx).

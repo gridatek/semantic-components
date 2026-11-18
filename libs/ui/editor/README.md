@@ -6,7 +6,7 @@ Rich text editor components built on Tiptap: an entry point of `@semantic-compon
 
 - **Core** (`@semantic-components/ui/editor`): Editor (a Signal Forms control; HTML, JSON or text), content, toolbar, command buttons (bold, italic, underline, strikethrough, code, lists and task lists, blockquote, code block, horizontal rule, clear formatting, undo/redo, link), heading and list menus, word/char count and character limit, `scEditorView`, `provideEditor`
 - **Features**, each an entry point with its own Tiptap package: `/tables`, `/images`, `/search`, `/highlight`, `/scripts` (superscript and subscript), `/align`, `/markdown`, `/bubble-menu` (the floating toolbar)
-- **Styles**: your preset's `editor.css` (`@semantic-components/presets/<style>/editor.css`), the document a Typeset container
+- **Styles**: your style's `editor.css` (`@semantic-components/styles/<style>/editor.css`), the document a Typeset container
 
 ## Usage
 

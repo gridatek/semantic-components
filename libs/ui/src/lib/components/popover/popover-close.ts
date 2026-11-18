@@ -1,11 +1,11 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { ScPopoverProvider } from './popover-provider';
 
 /**
- * Closes the popover: the preset's button, ghost and icon-sized for a ✕
+ * Closes the popover: the style's button, ghost and icon-sized for a ✕
  * (`variant`, `size` for another). Name it.
  */
 @Directive({
@@ -17,7 +17,7 @@ import { ScPopoverProvider } from './popover-provider';
   },
 })
 export class ScPopoverClose {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
   private readonly popover = inject(ScPopoverProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly type = input<'button' | 'submit' | 'reset'>('button');

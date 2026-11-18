@@ -1,6 +1,6 @@
 # Pagination
 
-Moves through pages of results — the pages, previous and next — in the look of the app's preset. It counts the pages from the number of items and the page size, and works out which to show.
+Moves through pages of results — the pages, previous and next — in the look of the app's style. It counts the pages from the number of items and the page size, and works out which to show.
 
 ## Usage
 
@@ -85,7 +85,7 @@ Exported as `scPagination`.
 | `currentPage` | `number` | `1`     | The page; `[(currentPage)]` two-way.            |
 | `siblings`    | `number` | `1`     | Pages shown on each side of the current one.    |
 | `boundaries`  | `number` | `1`     | Pages always shown at the start and at the end. |
-| `class`       | `string` | `''`    | Classes merged over the preset.                 |
+| `class`       | `string` | `''`    | Classes merged over the style.                  |
 
 | Output   | Type                                 | Description                                        |
 | -------- | ------------------------------------ | -------------------------------------------------- |
@@ -129,4 +129,4 @@ On an `a` or a `button`.
 
 ## Styles
 
-From the preset (`pagination`): the list's gap, the ellipsis's size, and the padding by the arrow of a text Previous or Next. The buttons are the preset's buttons.
+From the style (`pagination`): the list's gap, the ellipsis's size, and the padding by the arrow of a text Previous or Next. The buttons are the style's buttons.

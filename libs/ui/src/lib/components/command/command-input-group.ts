@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * Around the search: your search icon (an SVG, placed first) and the
@@ -27,7 +27,7 @@ import { injectPreset } from '../../config/preset';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCommandInputGroup {
-  private readonly preset = injectPreset();
+  private readonly preset = injectStyle();
 
   readonly classInput = input<string>('', { alias: 'class' });
 

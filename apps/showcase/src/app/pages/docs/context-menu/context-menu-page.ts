@@ -57,7 +57,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
         <p class="text-muted-foreground">
           A menu at the pointer, opened by a right-click on an area — a long
           press on touch, Shift+F10 or the Menu key on the focused area. In the
-          look of the app&apos;s preset.
+          look of the app&apos;s style.
         </p>
         <app-component-badges path="context-menu" />
       </div>
@@ -116,7 +116,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins). The menus&apos; parts
+          merged over the style (cn: a later class wins). The menus&apos; parts
           are the Menu&apos;s (see Menu).
         </p>
         <div

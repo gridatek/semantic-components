@@ -48,7 +48,7 @@ import { SmallMediaAlertDialogDemoContainer } from './demos/small-media-alert-di
         <h1 scTypeset>Alert Dialog</h1>
         <p class="text-muted-foreground">
           A modal dialog that asks for an answer before going on — to confirm,
-          to cancel. In the look of the app&apos;s preset. For a dialog that can
+          to cancel. In the look of the app&apos;s style. For a dialog that can
           simply be dismissed, use a Dialog.
         </p>
         <app-component-badges path="alert-dialog" />
@@ -105,7 +105,7 @@ import { SmallMediaAlertDialogDemoContainer } from './demos/small-media-alert-di
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -224,7 +224,7 @@ export default class AlertDialogPage {
       name: 'ScAlertDialogCancel, ScAlertDialogAction',
       selector: 'button[scAlertDialogCancel], button[scAlertDialogAction]',
       description:
-        "Close it. Buttons in the preset's look: inputs variant ('outline' and 'default') and size.",
+        "Close it. Buttons in the style's look: inputs variant ('outline' and 'default') and size.",
     },
   ];
 }

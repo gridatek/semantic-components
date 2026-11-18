@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** The question's choices, in a column. */
 @Directive({
@@ -11,7 +11,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScQuestionnaireChoices {
-  private readonly styles = injectPreset().questionnaire;
+  private readonly styles = injectStyle().questionnaire;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

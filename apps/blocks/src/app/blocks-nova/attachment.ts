@@ -1,4 +1,4 @@
-import type { ScAttachmentStyles } from '@semantic-components/presets';
+import type { ScAttachmentStyles } from '@semantic-components/styles';
 import { cva } from 'class-variance-authority';
 
 // shadcn's attachment in nova (shadcn-reference/presets/nova/attachment.tsx).

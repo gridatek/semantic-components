@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_TOOLTIP_CONTEXT } from './tooltip-context';
 
 /**
@@ -16,7 +16,7 @@ import { SC_TOOLTIP_CONTEXT } from './tooltip-context';
   },
 })
 export class ScTooltipArrow {
-  private readonly styles = injectPreset().tooltip;
+  private readonly styles = injectStyle().tooltip;
   private readonly tooltip = inject(SC_TOOLTIP_CONTEXT);
   readonly classInput = input<string>('', { alias: 'class' });
 

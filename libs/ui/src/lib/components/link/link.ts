@@ -10,7 +10,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button';
 
 /**
@@ -29,11 +29,11 @@ export type ScLinkVariant =
 
 /**
  * A link: a real `<a>`, its `href` (or `routerLink`) yours — in the
- * preset's link look, or a button's (`variant`). `disabled`: still
+ * style's link look, or a button's (`variant`). `disabled`: still
  * announced as a link (dimmed), out of the tab order, and nothing follows it
  * — not a click, Enter, a middle-click, nor a `routerLink`.
  */
-/** The preset's button variant for each button look. */
+/** The style's button variant for each button look. */
 const LINK_TO_BUTTON: Record<
   Exclude<ScLinkVariant, 'default'>,
   ScButtonVariants['variant']
@@ -57,7 +57,7 @@ const LINK_TO_BUTTON: Record<
   },
 })
 export class ScLink {
-  private readonly preset = injectPreset();
+  private readonly preset = injectStyle();
   // A toolbar's widget: its roving tabindex (one Tab stop for the toolbar),
   // which this binding would otherwise override.
   private readonly widget = inject(ToolbarWidget, {

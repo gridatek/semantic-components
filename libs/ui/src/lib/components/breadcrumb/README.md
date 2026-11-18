@@ -1,6 +1,6 @@
 # Breadcrumb
 
-Where the page is, in the site: the pages above it as links, the page itself last. In the look of the app's preset.
+Where the page is, in the site: the pages above it as links, the page itself last. In the look of the app's style.
 
 ## Usage
 
@@ -27,7 +27,7 @@ Where the page is, in the site: the pages above it as links, the page itself las
 
 ## API reference
 
-Each part takes `class`, merged over the preset.
+Each part takes `class`, merged over the style.
 
 | Part                    | Selector                     | Description                                       |
 | ----------------------- | ---------------------------- | ------------------------------------------------- |
@@ -41,4 +41,4 @@ Each part takes `class`, merged over the preset.
 
 ## Styles
 
-From the preset (`breadcrumb`): the list (its gaps, text size — `text-xs` in lyra and mira, uppercase in sera), the item's gap and the ellipsis's size.
+From the style (`breadcrumb`): the list (its gaps, text size — `text-xs` in lyra and mira, uppercase in sera), the item's gap and the ellipsis's size.

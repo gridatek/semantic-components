@@ -1,7 +1,7 @@
 import { Tab } from '@angular/aria/tabs';
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * A tab (role tab), on your button: its text and icons are yours. A disabled
@@ -20,7 +20,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScTabsTab {
-  private readonly styles = injectPreset().tabs;
+  private readonly styles = injectStyle().tabs;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

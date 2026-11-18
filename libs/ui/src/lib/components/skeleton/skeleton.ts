@@ -1,9 +1,9 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
- * A placeholder while content loads, in the preset's look: a pulsing muted
+ * A placeholder while content loads, in the style's look: a pulsing muted
  * block (still when the user asks for less motion). Its size and shape are
  * yours (`h-4 w-48`, `rounded-full`…). Empty and silent: say the region is
  * loading with `aria-busy="true"` on it.
@@ -15,7 +15,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScSkeleton {
-  private readonly styles = injectPreset().skeleton;
+  private readonly styles = injectStyle().skeleton;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

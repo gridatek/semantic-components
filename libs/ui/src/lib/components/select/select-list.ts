@@ -9,7 +9,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { bindInput } from '../../utils';
 import { SC_SELECT } from './select-tokens';
 
@@ -23,7 +23,7 @@ import { SC_SELECT } from './select-tokens';
   hostDirectives: [Listbox, ComboboxWidget],
   host: {
     '[attr.aria-labelledby]': 'select.labelId()',
-    // Radix's popper position: the preset's list classes read it.
+    // Radix's popper position: the style's list classes read it.
     'data-position': 'popper',
     '[class]': 'class()',
   },
@@ -32,7 +32,7 @@ export class ScSelectList {
   private readonly select = inject(SC_SELECT);
   private readonly listbox = inject<Listbox<string>>(Listbox);
   private readonly widget = inject(ComboboxWidget);
-  private readonly styles = injectPreset().select;
+  private readonly styles = injectStyle().select;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

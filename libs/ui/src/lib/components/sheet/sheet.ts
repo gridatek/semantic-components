@@ -1,12 +1,12 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScSheetProvider } from './sheet-provider';
 
 /**
- * The sheet's panel, in the preset's look: a modal dialog at its side's
+ * The sheet's panel, in the style's look: a modal dialog at its side's
  * edge, named by its title and described by its description. It slides in
- * and out from its side (animate.enter / animate.leave; the preset's side
+ * and out from its side (animate.enter / animate.leave; the style's side
  * classes set the direction); a close straight in it goes in its corner.
  */
 @Directive({
@@ -27,7 +27,7 @@ import { ScSheetProvider } from './sheet-provider';
   },
 })
 export class ScSheet {
-  private readonly styles = injectPreset().sheet;
+  private readonly styles = injectStyle().sheet;
   private readonly sheet = inject(ScSheetProvider);
   // Created as it opens: its provider's direction and language then.
   private readonly direction = this.sheet.direction();

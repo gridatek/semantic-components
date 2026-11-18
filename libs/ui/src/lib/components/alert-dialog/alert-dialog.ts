@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScAlertDialogProvider } from './alert-dialog-provider';
 
 /** The alert dialog's panel: animates in when shown and out when it goes (`animate.enter` / `animate.leave`). */
@@ -28,7 +28,7 @@ import { ScAlertDialogProvider } from './alert-dialog-provider';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScAlertDialog {
-  private readonly styles = injectPreset().alertDialog;
+  private readonly styles = injectStyle().alertDialog;
 
   private readonly alertDialogProvider = inject(ScAlertDialogProvider);
   readonly classInput = input<string>('', { alias: 'class' });
@@ -43,7 +43,7 @@ export class ScAlertDialog {
     cn(
       'relative max-w-[calc(100%-2rem)] text-sm',
       this.styles.content,
-      // Its full width, capped by the preset's max-w (by size) — as shadcn's,
+      // Its full width, capped by the style's max-w (by size) — as shadcn's,
       // whose w-full fills a fixed, screen-wide box. The CDK's pane is only as
       // wide as its content: short text left it narrow.
       'w-screen',

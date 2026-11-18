@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { Directive, computed, effect, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScSelectGroup } from './select-group';
 
 /** A group's heading: it names the group. */
@@ -14,7 +14,7 @@ import { ScSelectGroup } from './select-group';
 })
 export class ScSelectGroupLabel {
   private readonly group = inject(ScSelectGroup, { optional: true });
-  private readonly styles = injectPreset().select;
+  private readonly styles = injectStyle().select;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input(inject(_IdGenerator).getId('sc-select-group-'), {

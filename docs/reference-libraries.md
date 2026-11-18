@@ -199,7 +199,7 @@ A short label (`span[scBadge]`). A shadcn component; Base UI has no badge, so sh
 
 **Taken:**
 
-- **Each preset's cva** (`injectPreset().badge({ variant })`, as the button's); `badgeVariants` left the public API.
+- **Each preset's cva** (`injectStyle().badge({ variant })`, as the button's); `badgeVariants` left the public API.
 - **The examples**, our way: our Spinner (named, a status), the link on `a[scBadge]` with a `routerLink`.
 - **The Tags Input's tags follow the preset; the Notification Center's count doesn't** (the user, 2026-11-04): a counter keeps a filled pill — sera's badges are bare text.
 
@@ -686,7 +686,7 @@ Restyled 2026-11-11: shadcn's Toast (Base UI's, `toast.tsx` in each style; it re
 Restyled 2026-11-10: shadcn's Toggle in each style, and its examples.
 
 - **The `toggle` preset key**: each style's `toggleVariants` cva, copied (`variant` default / outline, `size` sm / default / lg) — the corners (none in lyra and sera), text (`text-xs` in lyra and mira, sera's uppercase), heights (mira 7, sera 10, vega/maia/luma 9) differ by style.
-- **`toggleVariants` gone**: its 31 users (the editor's buttons, the toolbar's toggle, the toggle group's items) read `injectPreset().toggle`, so they take each style's look too.
+- **`toggleVariants` gone**: its 31 users (the editor's buttons, the toolbar's toggle, the toggle group's items) read `injectStyle().toggle`, so they take each style's look too.
 - **`disabled` a boolean attribute**; `data-state` kept (shadcn's classes and the toolbar style by it).
 - **shadcn's examples**: Demo (the Usage: Bookmark, outline sm, the icon filled when pressed), Outline, With text, Sizes, Disabled, RTL — named by their text, not shadcn's `aria-label` beside it; ours kept: Toolbar. Basic dropped.
 

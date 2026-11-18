@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
-import type { ScItemMediaVariant } from '@semantic-components/presets';
+import type { ScItemMediaVariant } from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** Your icon, avatar or image, at the item's start. */
 @Directive({
@@ -13,7 +13,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScItemMedia {
-  private readonly styles = injectPreset().item;
+  private readonly styles = injectStyle().item;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScItemMediaVariant>('default');
 

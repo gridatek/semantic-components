@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { type ScButtonVariants } from '../button/button';
 import { ScLightbox } from './lightbox';
@@ -16,7 +16,7 @@ import { ScLightbox } from './lightbox';
   },
 })
 export class ScLightboxClose {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly lightbox = inject(ScLightbox);
 

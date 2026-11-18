@@ -44,7 +44,7 @@ import { RtlKbdDemoContainer } from './demos/rtl-kbd-demo-container';
         <h1 scTypeset>Kbd</h1>
         <p class="text-muted-foreground">
           A key or a shortcut, as it is pressed. In the look of the app&apos;s
-          preset.
+          style.
         </p>
         <app-component-badges path="kbd" />
       </div>
@@ -90,7 +90,7 @@ import { RtlKbdDemoContainer } from './demos/rtl-kbd-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div scTableContainer tabindex="0" role="region" aria-label="Kbd parts">
           <table scTable>

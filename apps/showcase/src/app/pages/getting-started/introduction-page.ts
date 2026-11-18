@@ -104,7 +104,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Every part is a directive on an element you write: the markup, the
           text and the icons stay yours, and the part brings the behaviour, the
-          accessibility and the look of your preset.
+          accessibility and the look of your style.
         </p>
         <div class="grid gap-4 lg:grid-cols-2">
           <div scCodeBlock class="min-w-0">
@@ -242,7 +242,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
               <div scItemMedia variant="icon">
                 @if (pkg.name.endsWith('mcp-server')) {
                   <svg siBotIcon></svg>
-                } @else if (pkg.name.endsWith('presets')) {
+                } @else if (pkg.name.endsWith('styles')) {
                   <svg siPaletteIcon></svg>
                 } @else {
                   <svg siPackageIcon></svg>
@@ -307,7 +307,7 @@ export default class IntroductionPage {
       icon: 'palette',
       title: 'Eight styles',
       description:
-        "shadcn/ui's eight styles as presets, chosen when the app starts — or one of your own.",
+        "shadcn/ui's eight styles, one chosen when the app starts — or one of your own.",
     },
     {
       icon: 'rtl',
@@ -325,13 +325,13 @@ export default class IntroductionPage {
       icon: 'code',
       title: 'Type safe',
       description:
-        'Strict TypeScript, typed inputs and preset types, with autocompletion out of the box.',
+        'Strict TypeScript, typed inputs and style types, with autocompletion out of the box.',
     },
     {
       icon: 'layers',
       title: 'Tailwind CSS',
       description:
-        'Styled with Tailwind CSS: the preset gives the look, your class merges over it.',
+        'Styled with Tailwind CSS: the style gives the look, your class merges over it.',
     },
     {
       icon: 'package',
@@ -348,7 +348,7 @@ export default class IntroductionPage {
         'The components, with entry points for the ones that need a library: carousel (Embla), data table (TanStack Table), PDF viewer (PDF.js), phone input (libphonenumber-js), QR code (uqr), animated counter (Motion), confetti, rich text editor (Tiptap), charts (d3), code block (Shiki), diff viewer (jsdiff), code editor (CodeMirror), languages (Angular localize).',
     },
     {
-      name: '@semantic-components/presets',
+      name: '@semantic-components/styles',
       description:
         "The components' looks, one per shadcn/ui style — Nova by default, Lyra, Vega, Maia, Mira, Luma, Sera, Rhea — chosen when the app starts.",
     },
@@ -370,8 +370,8 @@ export default class IntroductionPage {
       description: 'install the components and set up the app.',
     },
     {
-      name: 'Presets',
-      path: '/docs/getting-started/presets',
+      name: 'Styles',
+      path: '/docs/getting-started/styles',
       description: 'choose one of the eight styles.',
     },
     {

@@ -63,7 +63,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps ${{ matrix.browser }}
 
-      # Four workers and a reporter that shows progress; the preset's two
+      # Four workers and a reporter that shows progress; the style's two
       # retries kept — overnight, a flake is retried.
       - name: E2E tests (showcase)
         run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.showcase }} --shard=${{ matrix.shard }} --workers=4 --reporter=line

@@ -26,7 +26,7 @@ import {
 } from '@semantic-components/ui';
 import { SiTriangleAlertIcon } from '@semantic-icons/lucide-icons';
 
-/** Your own colors: classes over the preset's (cn: a later class wins). */
+/** Your own colors: classes over the style's (cn: a later class wins). */
 @Component({
   selector: 'app-colors-alert-demo',
   imports: [ScAlert, ScAlertDescription, ScAlertTitle, SiTriangleAlertIcon],

@@ -22,7 +22,7 @@ export class TuningTypesetDemoContainer {
 
 /**
  * Three variables tune it: the size, the line height and the space between
- * blocks. Here set on the container (a one-off); a preset class of yours
+ * blocks. Here set on the container (a one-off); a style class of yours
  * (\`.typeset-chat { --typeset-size: … }\`) does the same for every use.
  */
 @Component({

@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** The box around the input and the toggle: one border, one focus ring. */
 @Directive({
@@ -11,7 +11,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScPasswordGroup {
-  private readonly groupStyles = injectPreset().inputGroup;
+  private readonly groupStyles = injectStyle().inputGroup;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

@@ -48,7 +48,7 @@ import { TextSkeletonDemoContainer } from './demos/text-skeleton-demo-container'
         <h1 scTypeset>Skeleton</h1>
         <p class="text-muted-foreground">
           A placeholder while content loads. In the look of the app&apos;s
-          preset.
+          style.
         </p>
         <app-component-badges path="skeleton" />
       </div>
@@ -62,7 +62,7 @@ import { TextSkeletonDemoContainer } from './demos/text-skeleton-demo-container'
         <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A directive on your div; its size and shape are yours (h-4 w-48,
-          rounded-full…), its look the preset&apos;s.
+          rounded-full…), its look the style&apos;s.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -97,7 +97,7 @@ import { TextSkeletonDemoContainer } from './demos/text-skeleton-demo-container'
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -149,7 +149,7 @@ export default class SkeletonPage {
       name: 'ScSkeleton',
       selector: 'div[scSkeleton]',
       description:
-        "The placeholder: a pulsing muted block in the preset's look, still with reduced motion. Size and shape in your class.",
+        "The placeholder: a pulsing muted block in the style's look, still with reduced motion. Size and shape in your class.",
     },
   ];
 }

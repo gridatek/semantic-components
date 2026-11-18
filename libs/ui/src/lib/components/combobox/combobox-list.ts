@@ -12,7 +12,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { bindInput } from '../../utils';
 import { ScComboboxBase } from './combobox-base';
 
@@ -36,7 +36,7 @@ function sameItems<T>(a: readonly T[], b: readonly T[]): boolean {
   },
 })
 export class ScComboboxList<T = unknown> {
-  private readonly styles = injectPreset().combobox;
+  private readonly styles = injectStyle().combobox;
   private readonly root = inject<ScComboboxBase<T>>(ScComboboxBase);
   private readonly listbox = inject<Listbox<T>>(Listbox);
   private readonly widget = inject(ComboboxWidget);

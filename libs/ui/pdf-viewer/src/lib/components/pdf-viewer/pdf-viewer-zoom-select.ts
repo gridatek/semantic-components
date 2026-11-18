@@ -36,7 +36,7 @@ const NAMED: readonly string[] = [
 export class ScPdfViewerZoomSelect {
   readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
-  /** The preset scales to offer (as pdf.js's viewer does). */
+  /** The style scales to offer (as pdf.js's viewer does). */
   readonly scales = input<readonly number[]>([
     0.5, 0.75, 1, 1.25, 1.5, 2, 3, 4,
   ]);
@@ -46,7 +46,7 @@ export class ScPdfViewerZoomSelect {
   /** The zoom as an option value. */
   readonly value = computed(() => String(this.pdfViewer.zoom()));
 
-  /** A scale that isn't a preset (as an option value), or null. */
+  /** A scale that isn't a style (as an option value), or null. */
   readonly customZoom = computed(() => {
     const zoom = this.pdfViewer.zoom();
     return typeof zoom === 'number' && !this.scales().includes(zoom)

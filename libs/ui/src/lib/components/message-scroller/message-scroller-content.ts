@@ -10,7 +10,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScMessageScrollerState } from './message-scroller-state';
 
 /**
@@ -38,7 +38,7 @@ import { ScMessageScrollerState } from './message-scroller-state';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScMessageScrollerContent {
-  private readonly styles = injectPreset().messageScrollerContent;
+  private readonly styles = injectStyle().messageScrollerContent;
   private readonly state = inject(ScMessageScrollerState);
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly spacer =

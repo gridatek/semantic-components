@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScDrawerProvider } from './drawer-provider';
 
 /** Dragged at least this far (px) before it is a swipe, not a press. */
@@ -19,7 +19,7 @@ const SETTLE =
   'transform 300ms cubic-bezier(0.22, 1, 0.36, 1), scale 450ms, filter 450ms';
 
 /**
- * The drawer's panel, in the preset's look: a dialog at its edge, named by
+ * The drawer's panel, in the style's look: a dialog at its edge, named by
  * its title and described by its description. It follows a swipe towards
  * its edge and, let go, closes (far enough, or flicked), settles back, or
  * rests at the nearest snap point. A mouse drags it by its handle or its
@@ -55,7 +55,7 @@ const SETTLE =
   },
 })
 export class ScDrawer {
-  private readonly styles = injectPreset().drawer;
+  private readonly styles = injectStyle().drawer;
   private readonly drawer = inject(ScDrawerProvider);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;

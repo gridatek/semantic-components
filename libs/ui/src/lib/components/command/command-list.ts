@@ -8,7 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScCommand } from './command';
 
 /**
@@ -25,7 +25,7 @@ import { ScCommand } from './command';
   },
 })
 export class ScCommandList {
-  private readonly styles = injectPreset().command;
+  private readonly styles = injectStyle().command;
   private readonly id = inject(_IdGenerator).getId('sc-command-list-');
 
   readonly classInput = input<string>('', { alias: 'class' });

@@ -67,16 +67,16 @@
         "libs/ui/charts/treemap/src/index.ts"
       ],
       "@semantic-components/ui/i18n": ["libs/ui/i18n/src/index.ts"],
-      "@semantic-components/presets": ["libs/presets/src/index.ts"],
-      "@semantic-components/presets/lyra": ["libs/presets/lyra/src/index.ts"],
-      "@semantic-components/presets/nova": ["libs/presets/nova/src/index.ts"],
+      "@semantic-components/styles": ["libs/styles/src/index.ts"],
+      "@semantic-components/styles/lyra": ["libs/styles/lyra/src/index.ts"],
+      "@semantic-components/styles/nova": ["libs/styles/nova/src/index.ts"],
       "@semantic-components/mcp-server": ["libs/mcp-server/src/index.ts"],
-      "@semantic-components/presets/vega": ["libs/presets/vega/src/index.ts"],
-      "@semantic-components/presets/maia": ["libs/presets/maia/src/index.ts"],
-      "@semantic-components/presets/mira": ["libs/presets/mira/src/index.ts"],
-      "@semantic-components/presets/luma": ["libs/presets/luma/src/index.ts"],
-      "@semantic-components/presets/sera": ["libs/presets/sera/src/index.ts"],
-      "@semantic-components/presets/rhea": ["libs/presets/rhea/src/index.ts"]
+      "@semantic-components/styles/vega": ["libs/styles/vega/src/index.ts"],
+      "@semantic-components/styles/maia": ["libs/styles/maia/src/index.ts"],
+      "@semantic-components/styles/mira": ["libs/styles/mira/src/index.ts"],
+      "@semantic-components/styles/luma": ["libs/styles/luma/src/index.ts"],
+      "@semantic-components/styles/sera": ["libs/styles/sera/src/index.ts"],
+      "@semantic-components/styles/rhea": ["libs/styles/rhea/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

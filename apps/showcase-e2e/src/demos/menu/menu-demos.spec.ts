@@ -167,7 +167,7 @@ test('Submenu: ArrowRight opens it on its first item, ArrowLeft closes it; neste
     await box(page.getByRole('menu').first()),
     await box(page.getByRole('menu').nth(1)),
   ];
-  // At the reading end, 4px from its menu, whatever the preset's padding.
+  // At the reading end, 4px from its menu, whatever the style's padding.
   expect(sub.x - (parent.x + parent.width)).toBeCloseTo(4, 0);
   // Its first row level with the item that opened it.
   const [opener, first] = [

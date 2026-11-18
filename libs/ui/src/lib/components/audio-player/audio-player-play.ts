@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { type ScButtonVariants } from '../button/button';
 import { ScAudioPlayer } from './audio-player';
@@ -16,7 +16,7 @@ import { ScAudioPlayer } from './audio-player';
   },
 })
 export class ScAudioPlayerPlay {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly player = inject(ScAudioPlayer);
 

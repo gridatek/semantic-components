@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { injectPreset } from '@semantic-components/ui';
+import { injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 
 /** The block's title — a file name, a language; an icon of yours before it. */
@@ -13,7 +13,7 @@ import { cn } from 'cn';
 export class ScCodeBlockTitle {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly styles = injectPreset().codeBlock;
+  private readonly styles = injectStyle().codeBlock;
 
   private readonly class = computed(() =>
     cn(this.styles.title, this.classInput()),

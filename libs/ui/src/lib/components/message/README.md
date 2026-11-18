@@ -1,7 +1,7 @@
 # Message
 
 A row in a conversation: an avatar beside a column of bubbles, with an
-optional header and footer. In the look of the app's preset (`message` key:
+optional header and footer. In the look of the app's style (`message` key:
 shadcn's in each of the eight styles).
 
 Pairs with [Bubble](../bubble/README.md) — a bubble reads the message's

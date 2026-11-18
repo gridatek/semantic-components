@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * A row in a conversation: an avatar beside a column of bubbles. `align="end"`
@@ -16,7 +16,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScMessage {
-  private readonly styles = injectPreset().message;
+  private readonly styles = injectStyle().message;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly alignment = input<'start' | 'end'>('start');
 

@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
-import type { ScEmptyMediaVariant } from '@semantic-components/presets';
+import type { ScEmptyMediaVariant } from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** Your icon, avatar or image above the title; `icon` frames an icon. */
 @Directive({
@@ -12,7 +12,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScEmptyMedia {
-  private readonly styles = injectPreset().empty;
+  private readonly styles = injectStyle().empty;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScEmptyMediaVariant>('default');
 

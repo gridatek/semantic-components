@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScQuestionnaireItem } from './questionnaire-item';
 
 /**
@@ -18,7 +18,7 @@ import { ScQuestionnaireItem } from './questionnaire-item';
   },
 })
 export class ScQuestionnaireChoice {
-  private readonly styles = injectPreset().questionnaire;
+  private readonly styles = injectStyle().questionnaire;
   private readonly item = inject(ScQuestionnaireItem);
 
   readonly classInput = input<string>('', { alias: 'class' });

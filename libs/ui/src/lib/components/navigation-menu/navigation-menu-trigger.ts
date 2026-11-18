@@ -12,7 +12,7 @@ import { ScNavigationMenuItem } from './navigation-menu-item';
 
 /**
  * Opens its item's panel: on hover, or pressed (click, Enter, Space) — a
- * disclosure, `aria-expanded` and `aria-controls`. The preset's trigger. Your
+ * disclosure, `aria-expanded` and `aria-controls`. The style's trigger. Your
  * text, then your chevron (`svg[scNavigationMenuTriggerIcon]`).
  */
 @Directive({

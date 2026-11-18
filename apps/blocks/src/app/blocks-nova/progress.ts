@@ -1,4 +1,4 @@
-import type { ScProgressStyles } from '@semantic-components/presets';
+import type { ScProgressStyles } from '@semantic-components/styles';
 
 // shadcn's progress in nova (shadcn-reference/presets/nova/progress.tsx).
 export const progress: ScProgressStyles = {

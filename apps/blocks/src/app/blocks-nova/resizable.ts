@@ -1,4 +1,4 @@
-import type { ScResizableStyles } from '@semantic-components/presets';
+import type { ScResizableStyles } from '@semantic-components/styles';
 
 // shadcn's resizable in nova (shadcn-reference/presets/nova/resizable.tsx): the
 // handle's grip (its withHandle div).

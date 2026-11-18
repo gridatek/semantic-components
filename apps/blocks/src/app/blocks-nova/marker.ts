@@ -1,4 +1,4 @@
-import type { ScMarkerStyles } from '@semantic-components/presets';
+import type { ScMarkerStyles } from '@semantic-components/styles';
 
 // shadcn's marker in nova (shadcn-reference/presets/nova/marker.tsx).
 export const marker: ScMarkerStyles = {

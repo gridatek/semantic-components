@@ -1,6 +1,6 @@
 # Item
 
-A row of content — media, a title and a description, actions — in the look of the app's preset (`item` key: shadcn's in each of the eight styles).
+A row of content — media, a title and a description, actions — in the look of the app's style (`item` key: shadcn's in each of the eight styles).
 
 On a link or a button the whole item does what it says, named by its text. Items that are a list: `role="list"` on the group, `role="listitem"` on each item (not on a link item: wrap it). Inside a Menu's item, an item has no padding of its own.
 

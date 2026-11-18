@@ -1,6 +1,6 @@
 # Scroll Area
 
-A native scroll container with custom scrollbars — shadcn's Scroll Area (Base UI's) in the look of the app's preset (`scrollArea` key: the thumb, shadcn's in each of the eight styles).
+A native scroll container with custom scrollbars — shadcn's Scroll Area (Base UI's) in the look of the app's style (`scrollArea` key: the thumb, shadcn's in each of the eight styles).
 
 ## Usage
 
@@ -34,10 +34,10 @@ Sideways only: one `<div scScrollAreaScrollbar orientation="horizontal">`. Your 
 | Part                          | Selector                           | What it does                                                                                                                                           |
 | ----------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `ScScrollArea`                | `div[scScrollArea]`                | The root: a vertical scrollbar by default, replaced by yours; `data-has-overflow-x` / `-y`, `data-overflow-{x,y}-{start,end}`, `data-scrolling`        |
-| `ScScrollAreaViewport`        | `div[scScrollAreaViewport]`        | What scrolls: its own scrollbar hidden, a tab stop while it overflows (focus ring); `--sc-scroll-area-overflow-{x,y}-{start,end}`; a `CdkScrollable`      |
+| `ScScrollAreaViewport`        | `div[scScrollAreaViewport]`        | What scrolls: its own scrollbar hidden, a tab stop while it overflows (focus ring); `--sc-scroll-area-overflow-{x,y}-{start,end}`; a `CdkScrollable`   |
 | `ScScrollAreaViewportContent` | `div[scScrollAreaViewportContent]` | The content: at least as wide as what it holds, so a wide row overflows sideways                                                                       |
 | `ScScrollAreaScrollbar`       | `div[scScrollAreaScrollbar]`       | `orientation` (`vertical`, `horizontal`); hidden while that axis doesn't overflow; a press on its track jumps there; `data-hovering`, `data-scrolling` |
-| `ScScrollAreaThumb`           | `div[scScrollAreaThumb]`           | In the preset's look; as long as the share in view; dragged, it scrolls                                                                                |
+| `ScScrollAreaThumb`           | `div[scScrollAreaThumb]`           | In the style's look; as long as the share in view; dragged, it scrolls                                                                                 |
 | `ScScrollAreaCorner`          | `div[scScrollAreaCorner]`          | Where the two scrollbars meet: shown while both axes overflow                                                                                          |
 
 ## Keyboard and screen readers

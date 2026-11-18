@@ -1,4 +1,4 @@
-import type { ScSliderStyles } from '@semantic-components/presets';
+import type { ScSliderStyles } from '@semantic-components/styles';
 
 // shadcn's slider in nova (shadcn-reference/presets/nova/slider.tsx): our slider is a native
 // range — the track and thumb classes on the browser's parts (::-webkit-slider-*,

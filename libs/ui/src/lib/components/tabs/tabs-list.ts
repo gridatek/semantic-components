@@ -8,9 +8,9 @@ import {
   input,
   untracked,
 } from '@angular/core';
-import type { ScTabsListVariant } from '@semantic-components/presets';
+import type { ScTabsListVariant } from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { bindInput, setInput } from '../../utils';
 import { ScTabs } from './tabs';
 
@@ -25,7 +25,7 @@ import { ScTabs } from './tabs';
   },
 })
 export class ScTabsList {
-  private readonly styles = injectPreset().tabs;
+  private readonly styles = injectStyle().tabs;
   private readonly tabs = inject(ScTabs);
   private readonly tabList = inject(TabList);
 

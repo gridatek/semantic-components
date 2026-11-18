@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { type ScButtonVariants, injectPreset } from '@semantic-components/ui';
+import { type ScButtonVariants, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfSignatureData } from './pdf-viewer-types';
@@ -18,7 +18,7 @@ import type { ScPdfSignatureData } from './pdf-viewer-types';
   },
 })
 export class ScPdfViewerSignaturePlace {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly signature = input.required<ScPdfSignatureData>({

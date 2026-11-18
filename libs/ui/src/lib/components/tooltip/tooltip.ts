@@ -1,10 +1,10 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_TOOLTIP_CONTEXT } from './tooltip-context';
 
 /**
- * The tooltip, in the preset's look: `role="tooltip"`, described by its
+ * The tooltip, in the style's look: `role="tooltip"`, described by its
  * trigger while open. The pointer can move onto it (it stays open); it
  * animates in and out.
  */
@@ -23,7 +23,7 @@ import { SC_TOOLTIP_CONTEXT } from './tooltip-context';
   },
 })
 export class ScTooltip {
-  private readonly styles = injectPreset().tooltip;
+  private readonly styles = injectStyle().tooltip;
   private readonly tooltip = inject(SC_TOOLTIP_CONTEXT);
   readonly classInput = input<string>('', { alias: 'class' });
 

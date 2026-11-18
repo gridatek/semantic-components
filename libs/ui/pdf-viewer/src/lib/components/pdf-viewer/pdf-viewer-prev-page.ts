@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { type ScButtonVariants, injectPreset } from '@semantic-components/ui';
+import { type ScButtonVariants, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
@@ -16,7 +16,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
   },
 })
 export class ScPdfViewerPrevPage {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
 

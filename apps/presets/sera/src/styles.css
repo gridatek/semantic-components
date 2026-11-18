@@ -5,12 +5,12 @@
 @source not '../../../showcase-e2e';
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
-@import '../../../../libs/ui/src/lib/styles/reduced-motion.css';
-@import '../../../../libs/ui/src/lib/styles/typeset.css';
-@import '../../../../libs/presets/sera/src/typeset-variables.css';
-@import '../../../../libs/ui/src/lib/styles/scrollbar.css';
-@import '../../../../libs/presets/sera/src/scrollbar-variables.css';
-@import '../../../../libs/presets/sera/src/editor.css';
+@import '../../../../libs/styles/src/reduced-motion.css';
+@import '../../../../libs/styles/src/typeset.css';
+@import '../../../../libs/styles/sera/src/typeset-variables.css';
+@import '../../../../libs/styles/src/scrollbar.css';
+@import '../../../../libs/styles/sera/src/scrollbar-variables.css';
+@import '../../../../libs/styles/sera/src/editor.css';
 
 /*
  * Sera as shadcn shows it (shadcn-ui/ui, apps/v4/app/(app)/(styles)/sera,

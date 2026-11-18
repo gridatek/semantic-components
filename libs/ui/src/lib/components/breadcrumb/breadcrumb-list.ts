@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: 'ol[scBreadcrumbList]',
@@ -9,7 +9,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScBreadcrumbList {
-  private readonly styles = injectPreset().breadcrumb;
+  private readonly styles = injectStyle().breadcrumb;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

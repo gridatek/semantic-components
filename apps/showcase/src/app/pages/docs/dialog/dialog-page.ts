@@ -46,7 +46,7 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
         <h1 scTypeset>Dialog</h1>
         <p class="text-muted-foreground">
           A window over the page, which waits until it is closed: the page
-          behind it can&apos;t be reached. In the look of the app&apos;s preset.
+          behind it can&apos;t be reached. In the look of the app&apos;s style.
         </p>
         <app-component-badges path="dialog" />
       </div>
@@ -72,7 +72,7 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
           <li>
             scDialogClose closes it, on any button — the ✕ straight in the
             dialog (in its corner), Cancel or Done in the footer. It is the
-            preset&apos;s button: ghost and icon-sized for the ✕,
+            style&apos;s button: ghost and icon-sized for the ✕,
             variant=&quot;outline&quot; size=&quot;default&quot; for Cancel — no
             scButton.
           </li>
@@ -102,7 +102,7 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -195,7 +195,7 @@ export default class DialogPage {
       name: 'ScDialogClose',
       selector: 'button[scDialogClose]',
       description:
-        'Closes it: the preset’s button, variant and size (ghost, icon-sm: the ✕). Straight in the dialog: in its corner.',
+        'Closes it: the style’s button, variant and size (ghost, icon-sm: the ✕). Straight in the dialog: in its corner.',
     },
     {
       name: 'ScDialogHeader, ScDialogFooter',

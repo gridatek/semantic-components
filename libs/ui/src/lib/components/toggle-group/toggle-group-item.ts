@@ -8,13 +8,13 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import type { ScToggleVariants } from '../toggle/toggle';
 import { ScToggleGroup, type ScToggleGroupItemRef } from './toggle-group';
 
 /**
  * A toggle in a toggle group: pressed when the group's value includes its
- * value. In the preset's toggle look, placed by the group's (joined when its
+ * value. In the style's toggle look, placed by the group's (joined when its
  * spacing is 0).
  */
 @Directive({
@@ -34,8 +34,8 @@ import { ScToggleGroup, type ScToggleGroupItemRef } from './toggle-group';
   },
 })
 export class ScToggleGroupItem implements ScToggleGroupItemRef {
-  private readonly toggleStyles = injectPreset().toggle;
-  private readonly styles = injectPreset().toggleGroup;
+  private readonly toggleStyles = injectStyle().toggle;
+  private readonly styles = injectStyle().toggleGroup;
   private readonly group = inject(ScToggleGroup);
   readonly element =
     inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;

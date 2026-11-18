@@ -1,4 +1,4 @@
-import type { ScCommandStyles } from '@semantic-components/presets';
+import type { ScCommandStyles } from '@semantic-components/styles';
 
 // shadcn's command in nova (shadcn-reference/presets/nova/command.tsx), adapted: the group
 // heading's classes are the label's own; the dialog's placement is the CDK's (its top-1/3 left

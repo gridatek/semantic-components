@@ -50,7 +50,7 @@ import { SidesPopoverDemoContainer } from './demos/sides-popover-demo-container'
         <h1 scTypeset>Popover</h1>
         <p class="text-muted-foreground">
           Rich content in a panel beside its trigger: a dialog, modal or not,
-          opened by a click or a hover. In the look of the app&apos;s preset.
+          opened by a click or a hover. In the look of the app&apos;s style.
         </p>
         <app-component-badges path="popover" />
       </div>
@@ -110,7 +110,7 @@ import { SidesPopoverDemoContainer } from './demos/sides-popover-demo-container'
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -206,7 +206,7 @@ export default class PopoverPage {
       name: 'ScPopoverClose',
       selector: 'button[scPopoverClose]',
       description:
-        "Closes it: the preset's button, variant and size (ghost, icon-xs). Name it.",
+        "Closes it: the style's button, variant and size (ghost, icon-xs). Name it.",
     },
   ];
 }

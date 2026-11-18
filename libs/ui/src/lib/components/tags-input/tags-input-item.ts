@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScTagsInput } from './tags-input';
 
 /**
@@ -26,8 +26,8 @@ import { ScTagsInput } from './tags-input';
   },
 })
 export class ScTagsInputItem {
-  // A tag looks like the preset's secondary badge.
-  private readonly badgeStyles = injectPreset().badge;
+  // A tag looks like the style's secondary badge.
+  private readonly badgeStyles = injectStyle().badge;
 
   private readonly tags = inject(forwardRef(() => ScTagsInput));
   private readonly element =

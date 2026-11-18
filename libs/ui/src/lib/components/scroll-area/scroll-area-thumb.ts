@@ -1,11 +1,11 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScScrollAreaScrollbar } from './scroll-area-scrollbar';
 import { ScScrollAreaState } from './scroll-area-state';
 
 /**
- * The scrollbar's thumb, in the preset's look: as long as the share of the
+ * The scrollbar's thumb, in the style's look: as long as the share of the
  * content in view, where the scroll is. Dragged, it scrolls.
  * As Base UI's ScrollArea.Thumb.
  */
@@ -25,7 +25,7 @@ import { ScScrollAreaState } from './scroll-area-state';
   },
 })
 export class ScScrollAreaThumb {
-  private readonly styles = injectPreset().scrollArea;
+  private readonly styles = injectStyle().scrollArea;
   private readonly area = inject(ScScrollAreaState);
   private readonly bar = inject(ScScrollAreaScrollbar);
   readonly classInput = input<string>('', { alias: 'class' });

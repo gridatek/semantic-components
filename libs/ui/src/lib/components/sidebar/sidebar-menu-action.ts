@@ -1,6 +1,6 @@
 import { Directive, booleanAttribute, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * A button at a menu item's end (more…): your icon and its name (`sr-only`).
@@ -15,7 +15,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScSidebarMenuAction {
-  private readonly styles = injectPreset().sidebar;
+  private readonly styles = injectStyle().sidebar;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly showOnHover = input(false, { transform: booleanAttribute });
 

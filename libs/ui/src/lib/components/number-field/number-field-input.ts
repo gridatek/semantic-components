@@ -10,7 +10,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_FIELD } from '../field';
 import { SC_NUMBER_FIELD } from './number-field';
 import { isNumberCharacter } from './number-field-format';
@@ -53,7 +53,7 @@ import { isNumberCharacter } from './number-field-format';
   },
 })
 export class ScNumberFieldInput {
-  private readonly inputStyles = injectPreset().input;
+  private readonly inputStyles = injectStyle().input;
   private readonly element = inject<ElementRef<HTMLInputElement>>(ElementRef);
   private readonly number = inject(SC_NUMBER_FIELD);
   private readonly field = inject(SC_FIELD, { optional: true });

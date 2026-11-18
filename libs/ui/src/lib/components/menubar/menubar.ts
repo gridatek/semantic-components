@@ -1,7 +1,7 @@
 import { MenuBar } from '@angular/aria/menu';
 import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: '[scMenubar]',
@@ -14,7 +14,7 @@ import { injectPreset } from '../../config/preset';
 })
 export class ScMenubar {
   private readonly menubar = inject(MenuBar);
-  private readonly styles = injectPreset().menubar;
+  private readonly styles = injectStyle().menubar;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

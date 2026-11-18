@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { type ScButtonVariants } from '../button/button';
 import { ScTransferList } from './transfer-list';
@@ -21,7 +21,7 @@ import { ScTransferList } from './transfer-list';
   },
 })
 export class ScTransferListReorder {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly list = inject(ScTransferList);
 

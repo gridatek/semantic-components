@@ -1,4 +1,4 @@
-import type { ScPreset } from '@semantic-components/presets';
+import type { ScStyle } from '@semantic-components/styles';
 import { accordion } from './accordion';
 import { alert } from './alert';
 import { alertDialog } from './alert-dialog';
@@ -58,7 +58,7 @@ import { skeleton } from './skeleton';
 import { slider } from './slider';
 import { switchStyles } from './switch';
 import { table } from './table';
-/** The nova preset: `provideSemanticComponents({ preset: nova })`. */
+/** The nova style: `provideSemanticComponents({ style: nova })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
 import { toast } from './toast';
@@ -67,7 +67,7 @@ import { toggleGroup } from './toggle-group';
 import { tooltip } from './tooltip';
 import { trace } from './trace';
 
-export const blocksNova: ScPreset = {
+export const blocksNova: ScStyle = {
   accordion,
   alert,
   alertDialog,

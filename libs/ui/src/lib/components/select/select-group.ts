@@ -1,6 +1,6 @@
 import { Directive, computed, input, signal } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** Options together: a `group`, named by its label. */
 @Directive({
@@ -12,7 +12,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScSelectGroup {
-  private readonly styles = injectPreset().select;
+  private readonly styles = injectStyle().select;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Set by its label. */

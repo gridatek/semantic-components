@@ -54,7 +54,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
         <h1 scTypeset>Toggle Group</h1>
         <p class="text-muted-foreground">
           Toggles sharing one value: one pressed at a time, or several. In the
-          look of the app&apos;s preset.
+          look of the app&apos;s style.
         </p>
         <app-component-badges path="toggle-group" />
       </div>
@@ -117,7 +117,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -180,7 +180,7 @@ export default class ToggleGroupPage {
       name: 'ScToggleGroupItem',
       selector: 'button[scToggleGroupItem]',
       description:
-        "A toggle in the group: value (any type), pressed when the group's value includes it (aria-pressed); disabled. In the preset's toggle look.",
+        "A toggle in the group: value (any type), pressed when the group's value includes it (aria-pressed); disabled. In the style's toggle look.",
     },
   ];
 }

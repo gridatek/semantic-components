@@ -1,0 +1,73 @@
+/*
+ * The browser's scrollbars in the style's look — every scrollbar of the
+ * page: the page's own, a list, a textarea, a code block, a third-party
+ * widget. shadcn's Scroll Area thumb on the native bar: 10px, no track, the
+ * thumb inset by 1px, the theme's border colour, the style's corners.
+ *
+ *   @import '@semantic-components/styles/scrollbar.css';
+ *   @import '@semantic-components/styles/<style>/scrollbar-variables.css';
+ *
+ * The variables below are nova's; the style's file sets its own (square
+ * corners in lyra and sera). Change them on :root for the whole page, or on a
+ * box for its scrollbars and those inside it:
+ *
+ *   --sc-scrollbar-size     the bar's thickness
+ *   --sc-scrollbar-inset    room around the thumb
+ *   --sc-scrollbar-thumb    the thumb's colour
+ *   --sc-scrollbar-track    the track's colour
+ *   --sc-scrollbar-radius   the thumb's corners
+ *
+ * In the base layer: a utility wins. Tailwind's `scrollbar-none` or shadcn's
+ * `no-scrollbar` hide a box's bar; `scrollbar-gutter-stable` keeps its room.
+ * `scrollbar-thin` (or any `scrollbar-color`, as Tailwind's
+ * `scrollbar-thumb-*`) gives a box the browser's own bar back: Chromium
+ * draws `::-webkit-scrollbar` only on an element whose `scrollbar-width` and
+ * `scrollbar-color` are `auto` — so this file sets them only where there is
+ * no `::-webkit-scrollbar` (Firefox). (`scrollbar-auto` is `auto`: it
+ * changes nothing.)
+ *
+ * The limits are the browser's: Firefox takes a thin bar and its colours only
+ * (no exact size, no corners, no inset); where the system's scrollbars take
+ * room (Windows, Linux; macOS set to always show them) it is a gutter, not
+ * over the content. The Scroll Area (`scScrollArea`), whose scrollbars are
+ * drawn, is the same in every browser.
+ */
+
+@layer base {
+  :where(:root) {
+    --sc-scrollbar-size: 0.625rem;
+    --sc-scrollbar-inset: 1px;
+    --sc-scrollbar-thumb: var(
+      --color-border,
+      color-mix(in oklab, currentColor 20%, transparent)
+    );
+    --sc-scrollbar-track: transparent;
+    --sc-scrollbar-radius: calc(infinity * 1px);
+  }
+
+  /* Chromium, Safari. */
+  ::-webkit-scrollbar {
+    width: var(--sc-scrollbar-size);
+    height: var(--sc-scrollbar-size);
+  }
+
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-corner {
+    background-color: var(--sc-scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border: var(--sc-scrollbar-inset) solid transparent;
+    border-radius: var(--sc-scrollbar-radius);
+    background-color: var(--sc-scrollbar-thumb);
+    background-clip: padding-box;
+  }
+
+  /* Firefox: its thin bar, in the same colours. */
+  @supports not selector(::-webkit-scrollbar) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--sc-scrollbar-thumb) var(--sc-scrollbar-track);
+    }
+  }
+}

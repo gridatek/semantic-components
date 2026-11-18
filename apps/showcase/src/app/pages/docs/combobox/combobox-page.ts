@@ -152,7 +152,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -300,7 +300,7 @@ export default class ComboboxPage {
       name: 'ScComboboxTrigger',
       selector: 'button[scComboboxTrigger]',
       description:
-        "Opens and closes the list: the preset's button (variant, size). Beside the input, the chevron (ghost, icon-xs) — not a tab stop. With no input in the field, the field itself (outline, as wide as the combobox), holding a scComboboxValue; in a scField, named by its label and its value.",
+        "Opens and closes the list: the style's button (variant, size). Beside the input, the chevron (ghost, icon-xs) — not a tab stop. With no input in the field, the field itself (outline, as wide as the combobox), holding a scComboboxValue; in a scField, named by its label and its value.",
     },
     {
       name: 'ScComboboxValue',
@@ -312,7 +312,7 @@ export default class ComboboxPage {
       name: 'ScComboboxClear',
       selector: 'button[scComboboxClear]',
       description:
-        "Clears the value: the preset's button, shown only while there is a value, in the trigger's place. Write its icon and name it.",
+        "Clears the value: the style's button, shown only while there is a value, in the trigger's place. Write its icon and name it.",
     },
     {
       name: 'ScComboboxChips, ScComboboxChip, ScComboboxChipRemove',

@@ -2,13 +2,13 @@ import { Directive, booleanAttribute, computed, input } from '@angular/core';
 import type {
   ScButtonVariant,
   ScInputGroupButtonSize,
-} from '@semantic-components/presets';
+} from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
- * A button inside an input group's addon: the preset's button (ghost by
- * default), sized for the group (`injectPreset().inputGroupButton`), its
+ * A button inside an input group's addon: the style's button (ghost by
+ * default), sized for the group (`injectStyle().inputGroupButton`), its
  * corners following the group's.
  */
 @Directive({
@@ -23,7 +23,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScInputGroupButton {
-  private readonly preset = injectPreset();
+  private readonly preset = injectStyle();
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariant>('ghost');

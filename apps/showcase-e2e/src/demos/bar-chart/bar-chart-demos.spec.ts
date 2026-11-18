@@ -253,7 +253,7 @@ test('Stacked, rounded: the pieces touch, each rounded on its own', async ({
 }) => {
   await page.context().addCookies([
     {
-      name: 'sc-preset',
+      name: 'sc-style',
       value: 'nova',
       url: baseURL ?? 'http://localhost:4200',
     },
@@ -290,7 +290,7 @@ test('Stacked, rounded: the piece under another is rounded all round too', async
 }) => {
   await page.context().addCookies([
     {
-      name: 'sc-preset',
+      name: 'sc-style',
       value: 'nova',
       url: baseURL ?? 'http://localhost:4200',
     },

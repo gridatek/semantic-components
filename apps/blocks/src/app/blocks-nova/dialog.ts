@@ -1,4 +1,4 @@
-import type { ScDialogStyles } from '@semantic-components/presets';
+import type { ScDialogStyles } from '@semantic-components/styles';
 
 // shadcn's dialog in nova (shadcn-reference/presets/nova/dialog.tsx). Its
 // placement and open/close classes are left out: the CDK centres the dialog,

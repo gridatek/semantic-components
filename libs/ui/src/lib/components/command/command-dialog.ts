@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * On the `scDialog` a command opens in: no padding, its corners (over the
@@ -15,7 +15,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScCommandDialog {
-  private readonly styles = injectPreset().command;
+  private readonly styles = injectStyle().command;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

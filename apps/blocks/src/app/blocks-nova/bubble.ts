@@ -1,4 +1,4 @@
-import type { ScBubbleStyles } from '@semantic-components/presets';
+import type { ScBubbleStyles } from '@semantic-components/styles';
 
 // shadcn's bubble in nova (shadcn-reference/presets/nova/bubble.tsx):
 // the parts that change from style to style.

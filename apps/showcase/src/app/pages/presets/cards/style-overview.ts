@@ -5,7 +5,7 @@ import {
   ScFrame,
   ScStorage,
 } from '@semantic-components/ui';
-import { presetFrom } from '../../../presets';
+import { styleFrom } from '../../../styles';
 
 /** The preset at a glance: its name and font, then the theme's colors. */
 @Component({
@@ -47,7 +47,7 @@ import { presetFrom } from '../../../presets';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewStyleOverview {
-  private readonly preset = presetFrom(inject(ScStorage));
+  private readonly preset = styleFrom(inject(ScStorage));
   private readonly variables = [
     '--background',
     '--foreground',

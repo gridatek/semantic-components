@@ -1,6 +1,6 @@
 # Table
 
-A table of data: the native table elements, in the look of the app's preset. For sorting, filtering, selection and pages, use a Data Table.
+A table of data: the native table elements, in the look of the app's style. For sorting, filtering, selection and pages, use a Data Table.
 
 ## Usage
 
@@ -45,12 +45,12 @@ shadcn's parts, each a directive on the native element, so the table stays a tab
 
 ## API reference
 
-Each part takes `class`, merged over the preset.
+Each part takes `class`, merged over the style.
 
 | Part                | Selector                  | Description                                                                |
 | ------------------- | ------------------------- | -------------------------------------------------------------------------- |
 | `ScTableContainer`  | `div[scTableContainer]`   | Scrolls a wide table sideways. Framed: add `scFrame`.                      |
-| `ScTable`           | `table[scTable]`          | Full width; its text size from the preset.                                 |
+| `ScTable`           | `table[scTable]`          | Full width; its text size from the style.                                  |
 | `ScTableCaption`    | `caption[scTableCaption]` | Names the table; shown below it.                                           |
 | `ScTableHeader`     | `thead[scTableHeader]`    | The header rows, a line below.                                             |
 | `ScTableBody`       | `tbody[scTableBody]`      | The rows; no line below the last.                                          |
@@ -61,4 +61,4 @@ Each part takes `class`, merged over the preset.
 
 ## Styles
 
-From the preset (`table`): the table's text size (`text-xs` in lyra and mira), the header cell (taller and wider in maia, luma and sera; small uppercase muted in sera), the cell's padding and the caption. A frame round the container is `scFrame` (the preset's `frame`), not the table's. The rest is the same in every style.
+From the style (`table`): the table's text size (`text-xs` in lyra and mira), the header cell (taller and wider in maia, luma and sera; small uppercase muted in sera), the cell's padding and the caption. A frame round the container is `scFrame` (the style's `frame`), not the table's. The rest is the same in every style.

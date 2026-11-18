@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScBadge } from '@semantic-components/ui';
 
-/** Your own colors: classes over the preset's (cn: a later class wins). */
+/** Your own colors: classes over the style's (cn: a later class wins). */
 @Component({
   selector: 'app-colors-badge-demo',
   imports: [ScBadge],

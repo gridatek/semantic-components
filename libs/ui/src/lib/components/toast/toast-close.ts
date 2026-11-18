@@ -1,12 +1,12 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils';
 import { type ScButtonVariants } from '../button/button';
 import { SC_TOAST_CONTEXT } from './toast-context';
 
 /**
- * Dismisses its toast, in your `scToastTemplate`: the preset's button, ghost
+ * Dismisses its toast, in your `scToastTemplate`: the style's button, ghost
  * and icon-sized for the ✕, at the end of the row, muted until hovered, its
  * hit area a little larger than itself. A Dismiss of your own sets `variant`
  * and `size`. Write its icon and name it.
@@ -22,7 +22,7 @@ import { SC_TOAST_CONTEXT } from './toast-context';
 })
 export class ScToastClose {
   private readonly context = inject(SC_TOAST_CONTEXT);
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly type = input<'button' | 'submit' | 'reset'>('button');

@@ -54,10 +54,10 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       <section class="space-y-4">
         <h2 scTypeset appToc>1. Install the packages</h2>
         <p class="text-muted-foreground">
-          The components, and their classes in shadcn's styles (the presets):
+          The components, and their classes in shadcn's styles (the styles):
         </p>
         <app-package-manager-install
-          packages="@semantic-components/ui @semantic-components/presets"
+          packages="@semantic-components/ui @semantic-components/styles"
         />
       </section>
 
@@ -112,20 +112,20 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           </div>
         </div>
         <p class="text-muted-foreground">
-          The components use nova. For another preset, give it when the app
+          The components use nova. For another style, give it when the app
           starts, and point the second
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&#64;source</code
           >
           at its file (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >…-presets-lyra.mjs</code
+            >…-styles-lyra.mjs</code
           >):
         </p>
         <div scCodeBlock>
           <div scCodeBlockHeader>
             <div scCodeBlockTitle>ts</div>
             <div scCodeBlockActions>
-              <button [scCodeBlockCopy]="presetCode" #copy5="scCodeBlockCopy">
+              <button [scCodeBlockCopy]="styleCode" #copy5="scCodeBlockCopy">
                 @if (copy5.copied()) {
                   <svg siCheckIcon></svg>
                 } @else {
@@ -137,7 +137,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           </div>
           <pre
             scCodeBlockContent
-            [code]="presetCode"
+            [code]="styleCode"
             language="typescript"
           ></pre>
         </div>
@@ -165,16 +165,16 @@ export default class UiPage {
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/geist';
-@import '@semantic-components/ui/styles/reduced-motion.css';
-@import '@semantic-components/ui/styles/typeset.css';
-@import '@semantic-components/presets/nova/typeset-variables.css';
-@import '@semantic-components/ui/styles/scrollbar.css';
-@import '@semantic-components/presets/nova/scrollbar-variables.css';
+@import '@semantic-components/styles/reduced-motion.css';
+@import '@semantic-components/styles/typeset.css';
+@import '@semantic-components/styles/nova/typeset-variables.css';
+@import '@semantic-components/styles/scrollbar.css';
+@import '@semantic-components/styles/nova/scrollbar-variables.css';
 
-/* The library and your preset (its file only): Tailwind skips node_modules.
+/* The library and your style (its file only): Tailwind skips node_modules.
    Adjust the path to node_modules to your project. */
 @source '../node_modules/@semantic-components/ui';
-@source '../node_modules/@semantic-components/presets/fesm2022/semantic-components-presets-nova.mjs';
+@source '../node_modules/@semantic-components/styles/fesm2022/semantic-components-styles-nova.mjs';
 
 /*
  * The theme: shadcn's nova, with our differences marked "Not shadcn's":
@@ -338,10 +338,10 @@ export default class UiPage {
 }
 `;
 
-  private readonly presetCode = `import { lyra } from '@semantic-components/presets/lyra';
+  private readonly styleCode = `import { lyra } from '@semantic-components/styles/lyra';
 import { provideSemanticComponents } from '@semantic-components/ui';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideSemanticComponents({ preset: lyra })],
+  providers: [provideSemanticComponents({ style: lyra })],
 };`;
 }

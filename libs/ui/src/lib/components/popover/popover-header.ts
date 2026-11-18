@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** The popover's title and description, together. */
 @Directive({
@@ -8,7 +8,7 @@ import { injectPreset } from '../../config/preset';
   host: { '[class]': 'class()' },
 })
 export class ScPopoverHeader {
-  private readonly styles = injectPreset().popover;
+  private readonly styles = injectStyle().popover;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

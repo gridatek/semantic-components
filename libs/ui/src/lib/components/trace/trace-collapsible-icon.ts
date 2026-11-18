@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * The trigger's chevron — your SVG, pointing to the end (a chevron right):
@@ -15,7 +15,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScTraceCollapsibleIcon {
-  private readonly styles = injectPreset().trace;
+  private readonly styles = injectStyle().trace;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

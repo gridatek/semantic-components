@@ -6,11 +6,11 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_FIELD } from '../field';
 
 /**
- * A label, in the preset's look: its text alone; in a field — inside one, or
+ * A label, in the style's look: its text alone; in a field — inside one, or
  * around one as a choice card — the field's look too (border, corners,
  * padding, focus ring, checked tint). In a field it names the field's
  * control (`for`), or, for a group, is named `<field id>-label`.
@@ -25,7 +25,7 @@ import { SC_FIELD } from '../field';
   },
 })
 export class ScLabel {
-  private readonly styles = injectPreset().label;
+  private readonly styles = injectStyle().label;
   private readonly field = inject(SC_FIELD, { optional: true });
   /** A field it wraps: a choice card. */
   private readonly wrapped = contentChild(SC_FIELD);

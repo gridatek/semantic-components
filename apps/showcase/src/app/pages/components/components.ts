@@ -40,7 +40,7 @@ import { ComponentsService } from '../../services/components-service';
       </h1>
       <p class="text-foreground max-w-2xl text-base text-balance sm:text-lg">
         Beautifully designed components built with Angular Aria and Tailwind CSS
-        — directives on your own elements, in the look of your preset.
+        — directives on your own elements, in the look of your style.
       </p>
       <div class="flex flex-wrap justify-center gap-2 pt-2">
         <a

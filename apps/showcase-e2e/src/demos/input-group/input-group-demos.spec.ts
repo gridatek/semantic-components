@@ -115,7 +115,7 @@ test('Button: the copy button copies; the star toggles, its name fixed', async (
   );
 });
 
-test('Button: the group button is the preset’s button, sized for the group', async ({
+test('Button: the group button is the style’s button, sized for the group', async ({
   page,
 }) => {
   await openStill(page, demo('button'));

@@ -69,7 +69,7 @@ import { TurnTraceDemoContainer } from './demos/turn-trace-demo-container';
         <p class="text-muted-foreground">
           The steps an agent takes — searches, reads, commands, edits — a line
           each, with a status, a detail and the output it opens on. In the look
-          of the app&apos;s preset.
+          of the app&apos;s style.
         </p>
         <app-component-badges path="trace" />
       </div>
@@ -140,7 +140,7 @@ import { TurnTraceDemoContainer } from './demos/turn-trace-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer

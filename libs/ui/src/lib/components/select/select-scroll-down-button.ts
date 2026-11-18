@@ -1,6 +1,6 @@
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScSelectPopup } from './select-popup';
 import { scrollWhileHovered } from './select-scroll';
 
@@ -20,7 +20,7 @@ import { scrollWhileHovered } from './select-scroll';
 })
 export class ScSelectScrollDownButton {
   private readonly popup = inject(ScSelectPopup);
-  private readonly styles = injectPreset().select;
+  private readonly styles = injectStyle().select;
   private readonly scroll = scrollWhileHovered(this.popup, 1);
 
   readonly classInput = input<string>('', { alias: 'class' });

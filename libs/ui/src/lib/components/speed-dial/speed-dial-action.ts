@@ -8,7 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { ScSpeedDial } from './speed-dial';
 
@@ -49,7 +49,7 @@ type ScSpeedDialMove = 'next' | 'previous' | 'first' | 'last';
   },
 })
 export class ScSpeedDialAction {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly dial = inject(ScSpeedDial);
   private readonly element =

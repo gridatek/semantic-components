@@ -43,7 +43,7 @@ interface Row {
       <div class="space-y-2">
         <h1 scTypeset>Scrollbar</h1>
         <p class="text-muted-foreground">
-          The browser&apos;s own scrollbars in your preset&apos;s look — every
+          The browser&apos;s own scrollbars in your style&apos;s look — every
           scrollbar of the page: the page&apos;s, a list, a textarea, a code
           block, a widget you didn&apos;t write. One CSS file, no directive;
           tuned by variables, your classes win.
@@ -54,15 +54,15 @@ interface Row {
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <p class="text-muted-foreground">
-          Import the rules and your preset&apos;s variables in your global
+          Import the rules and your style&apos;s variables in your global
           stylesheet, after Tailwind:
           <code scTypeset
-            >@import '@semantic-components/ui/styles/scrollbar.css';</code
+            >@import '@semantic-components/styles/scrollbar.css';</code
           >
           and
           <code scTypeset
             >@import
-            '@semantic-components/presets/nova/scrollbar-variables.css';</code
+            '@semantic-components/styles/nova/scrollbar-variables.css';</code
           >
           (your style&apos;s). Then any box that scrolls has the look — no
           class, no directive.
@@ -116,7 +116,7 @@ interface Row {
         <h3 scTypeset>Variables</h3>
         <p class="text-muted-foreground">
           On <code scTypeset>:root</code> for the whole page, or on a box for
-          its scrollbars and those inside it. The preset&apos;s file sets the
+          its scrollbars and those inside it. The style&apos;s file sets the
           thumb and its corners.
         </p>
         <div

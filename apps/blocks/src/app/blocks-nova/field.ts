@@ -1,4 +1,4 @@
-import type { ScFieldStyles } from '@semantic-components/presets';
+import type { ScFieldStyles } from '@semantic-components/styles';
 
 // shadcn's field in nova (shadcn-reference/presets/nova/field.tsx): FieldContent is our
 // field content wrapper, FieldError our field errors.

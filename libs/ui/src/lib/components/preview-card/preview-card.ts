@@ -1,10 +1,10 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScPreviewCardProvider } from './preview-card-provider';
 
 /**
- * The card, in the preset's look. No role and no link to its trigger: it is
+ * The card, in the style's look. No role and no link to its trigger: it is
  * a visual preview (Base UI's guidance) — what it shows must be at the
  * link's destination too. The pointer can move onto it (it stays open); it
  * animates in and out.
@@ -21,7 +21,7 @@ import { ScPreviewCardProvider } from './preview-card-provider';
   },
 })
 export class ScPreviewCard {
-  private readonly styles = injectPreset().previewCard;
+  private readonly styles = injectStyle().previewCard;
   private readonly card = inject(ScPreviewCardProvider);
   readonly classInput = input<string>('', { alias: 'class' });
 

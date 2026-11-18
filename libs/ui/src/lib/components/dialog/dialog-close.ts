@@ -1,11 +1,11 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { ScDialogProvider } from './dialog-provider';
 
 /**
- * Closes the dialog: the preset's button, ghost and icon-sized for the ✕ —
+ * Closes the dialog: the style's button, ghost and icon-sized for the ✕ —
  * straight in the dialog, the dialog puts it in its corner (`data-slot`).
  * Cancel or Done in the footer: `variant="outline" size="default"`, where it
  * stands. Code to run before closing (Save) closes through the provider's
@@ -22,7 +22,7 @@ import { ScDialogProvider } from './dialog-provider';
 })
 export class ScDialogClose {
   private readonly dialogProvider = inject(ScDialogProvider);
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly type = input<'button' | 'submit' | 'reset'>('button');

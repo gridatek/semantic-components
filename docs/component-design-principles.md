@@ -233,7 +233,7 @@ A rule (the user, 2026-11-13). The consumer speaks logical first — `side="inli
 
 - **Convert as soon as possible**, in one place: `physicalSide(side, direction)` (`utils/overlay-positions`), in the first `computed()` that needs the side. Positions, flips, fallbacks, fits and `data-side` all use the physical result; no code past that point checks for `inline-start`.
 - **The direction is a signal**: CDK's `Directionality.valueSignal()`, injected as is — the document's, or the nearest CDK `Dir` directive's. A part provides no `Directionality` of its own and never reads `direction` from the DOM (2026-11-13). An app in one direction sets `dir` on `<html>` and needs nothing else; a box in another direction is the consumer's to mark with `Dir` (`@angular/cdk/bidi`), as our RTL examples do (the Right to left docs page). Never a plain `.value` inside a `computed()`; an event handler reading the current `.value` is fine.
-- **`data-side` is physical** — the side the box landed on, after a flip (`top`, `right`, `bottom`, `left`). The presets carry rules for those four only: no `data-[side=inline-…]` and no logical slide utilities (tw-animate's `start` / `end` slides build invalid CSS anyway).
+- **`data-side` is physical** — the side the box landed on, after a flip (`top`, `right`, `bottom`, `left`). The styles carry rules for those four only: no `data-[side=inline-…]` and no logical slide utilities (tw-animate's `start` / `end` slides build invalid CSS anyway).
 - **The one exception: a part placed by CSS** — the Sidebar. Nothing to convert in script: its `data-side` is the word given, and its CSS uses logical utilities (`start-0`, `border-e`), right in both directions before any script runs, server-rendered pages included. Converting it would need the direction in the browser, and the page would jump on first paint.
 
 Names: `side` is the edge (`top`, `bottom`, `inline-start`, `inline-end`, `left`, `right`); `alignment` is the place along it (`start`, `center`, `end`); their offsets `sideOffset` and `alignmentOffset`. `start` / `end` never name a side.
@@ -244,7 +244,7 @@ A part is a `@Directive` on the consumer's element — a `@Component` only when 
 
 ```typescript
 import { Directive, booleanAttribute, computed, input } from '@angular/core';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { cn } from '../../utils';
 
 @Directive({
@@ -255,8 +255,8 @@ import { cn } from '../../utils';
   },
 })
 export class ScComponentName {
-  // What changes from style to style: the preset's (libs/presets/<style>/src).
-  private readonly styles = injectPreset().componentName;
+  // What changes from style to style: the style's (libs/styles/<style>/src).
+  private readonly styles = injectStyle().componentName;
 
   // Class input for custom styling, merged last.
   readonly classInput = input<string>('', { alias: 'class' });
@@ -266,7 +266,7 @@ export class ScComponentName {
     transform: booleanAttribute,
   });
 
-  // The preset's classes, then what is the same in every style, then yours.
+  // The style's classes, then what is the same in every style, then yours.
   private readonly class = computed(() => cn(this.styles.root, 'aria-disabled:opacity-50', this.classInput()));
 }
 ```

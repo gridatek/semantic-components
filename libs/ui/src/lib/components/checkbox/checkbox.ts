@@ -11,12 +11,12 @@ import {
 } from '@angular/core';
 import type { FormCheckboxControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_FIELD, SC_FIELD_CHOICE } from '../field';
 import { ScCheckboxGroup } from './checkbox-group';
 
 /**
- * A native checkbox in the preset's look, drawn by itself: its box, and its
+ * A native checkbox in the style's look, drawn by itself: its box, and its
  * check or minus (its ::before). Alone (a table's row), in a checkbox field
  * beside its text, or in any field. In a checkbox group: its value is ticked
  * in the group's, or as the parent it ticks them all.
@@ -40,7 +40,7 @@ import { ScCheckboxGroup } from './checkbox-group';
   exportAs: 'scCheckbox',
 })
 export class ScCheckbox implements FormCheckboxControl {
-  private readonly styles = injectPreset().checkbox;
+  private readonly styles = injectStyle().checkbox;
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   private readonly field = inject(SC_FIELD, { optional: true });

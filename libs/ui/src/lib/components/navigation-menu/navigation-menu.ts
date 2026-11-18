@@ -13,7 +13,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** Where a panel lines up under its trigger. */
 export type ScNavigationMenuAlign = 'start' | 'center' | 'end';
@@ -76,8 +76,8 @@ const FOCUSABLE = 'a[href], button:not([disabled])';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScNavigationMenu {
-  /** The preset's look, for the parts. */
-  readonly styles = injectPreset().navigationMenu;
+  /** The style's look, for the parts. */
+  readonly styles = injectStyle().navigationMenu;
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });

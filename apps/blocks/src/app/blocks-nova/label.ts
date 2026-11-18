@@ -1,4 +1,4 @@
-import type { ScLabelStyles } from '@semantic-components/presets';
+import type { ScLabelStyles } from '@semantic-components/styles';
 
 // shadcn's label in nova (shadcn-reference/presets/nova/label.tsx, and FieldLabel in field.tsx).
 export const label: ScLabelStyles = {

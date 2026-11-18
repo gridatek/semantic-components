@@ -15,7 +15,7 @@ test.afterEach(() => {
   expect(errors).toEqual([]);
 });
 
-test('Usage: a ring round a plain box, the preset’s corners', async ({
+test('Usage: a ring round a plain box, the style’s corners', async ({
   page,
 }) => {
   await page.goto('/demos/frame/frame-usage-demo');

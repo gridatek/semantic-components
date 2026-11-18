@@ -83,7 +83,7 @@ Hi — thank you for your patience, and sorry the parcel is late. It left our wa
   },
   {
     words: ['blog', 'post', 'ideas', 'article'],
-    text: $localize`Three ideas: 1) “One look, many screens” — how a preset keeps a dashboard consistent. 2) “Charts that read in greyscale” — choosing shades that survive a neutral theme. 3) “From mock data to real” — swapping in-memory stores for an API without touching the screens.`,
+    text: $localize`Three ideas: 1) “One look, many screens” — how a style keeps a dashboard consistent. 2) “Charts that read in greyscale” — choosing shades that survive a neutral theme. 3) “From mock data to real” — swapping in-memory stores for an API without touching the screens.`,
   },
   {
     words: ['churn'],

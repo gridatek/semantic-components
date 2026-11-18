@@ -8,7 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_TOAST_CONTEXT } from './toast-context';
 import {
   SC_TOAST_LAYOUT,
@@ -18,7 +18,7 @@ import {
 import type { ScToastVariant } from './toast-types';
 
 /**
- * A toast, the root of your `scToastTemplate`: the preset's look, its variant (`data-variant`) and its
+ * A toast, the root of your `scToastTemplate`: the style's look, its variant (`data-variant`) and its
  * place in the stack. It slides in when shown and out when dismissed, and
  * goes when swiped sideways.
  */
@@ -46,7 +46,7 @@ import type { ScToastVariant } from './toast-types';
 export class ScToast {
   private readonly context = inject(SC_TOAST_CONTEXT);
   private readonly layout = inject(SC_TOAST_LAYOUT);
-  private readonly styles = injectPreset().toast;
+  private readonly styles = injectStyle().toast;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

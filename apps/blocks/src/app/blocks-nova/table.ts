@@ -1,4 +1,4 @@
-import type { ScTableStyles } from '@semantic-components/presets';
+import type { ScTableStyles } from '@semantic-components/styles';
 
 // shadcn's table in nova (shadcn-reference/presets/nova/table.tsx).
 export const table: ScTableStyles = {

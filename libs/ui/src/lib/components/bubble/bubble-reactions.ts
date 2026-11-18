@@ -1,9 +1,9 @@
 import { Directive, computed, input } from '@angular/core';
 import { cva } from 'class-variance-authority';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
-// The same in every style: where the row sits. Its look is the preset's.
+// The same in every style: where the row sits. Its look is the style's.
 const position = cva('', {
   variants: {
     side: {
@@ -31,7 +31,7 @@ const position = cva('', {
   },
 })
 export class ScBubbleReactions {
-  private readonly styles = injectPreset().bubble;
+  private readonly styles = injectStyle().bubble;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly side = input<'top' | 'bottom'>('bottom');
   readonly alignment = input<'start' | 'end'>('end');

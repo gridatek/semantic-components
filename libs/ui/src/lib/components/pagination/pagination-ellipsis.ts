@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: 'span[scPaginationEllipsis]',
@@ -10,7 +10,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScPaginationEllipsis {
-  private readonly styles = injectPreset().pagination;
+  private readonly styles = injectStyle().pagination;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

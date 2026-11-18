@@ -71,9 +71,9 @@ interface ScApiRow {
         <h1 scTypeset>Input Group</h1>
         <p class="text-muted-foreground">
           An input or a textarea with icons, text and buttons in one box: beside
-          it, above or below. In the look of the app&apos;s preset; a click on
-          an addon focuses the field. To join a field with buttons outside its
-          box, use a Control Group.
+          it, above or below. In the look of the app&apos;s style; a click on an
+          addon focuses the field. To join a field with buttons outside its box,
+          use a Control Group.
         </p>
         <app-component-badges path="input-group" />
       </div>
@@ -202,7 +202,7 @@ export default class InputGroupPage {
     name: 'class',
     type: 'string',
     default: "''",
-    description: 'Classes merged over the preset (cn: a later class wins).',
+    description: 'Classes merged over the style (cn: a later class wins).',
   };
 
   private readonly parts = [
@@ -233,7 +233,7 @@ export default class InputGroupPage {
       name: 'ScInputGroupButton',
       selector: 'button[scInputGroupButton]',
       description:
-        'A button in an addon: the preset’s button, sized for the group; type "button".',
+        'A button in an addon: the style’s button, sized for the group; type "button".',
       inputs: [
         {
           name: 'variant',

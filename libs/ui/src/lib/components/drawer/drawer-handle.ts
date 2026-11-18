@@ -1,6 +1,6 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScDrawerProvider } from './drawer-provider';
 
 /**
@@ -19,7 +19,7 @@ import { ScDrawerProvider } from './drawer-provider';
   },
 })
 export class ScDrawerHandle {
-  private readonly styles = injectPreset().drawer;
+  private readonly styles = injectStyle().drawer;
   private readonly drawer = inject(ScDrawerProvider);
   private readonly isButton =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName ===

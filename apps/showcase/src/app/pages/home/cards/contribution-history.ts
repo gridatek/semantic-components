@@ -27,7 +27,7 @@ import {
   ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
-/** A bar per month, each its own colour (a chart: the preset's corners), then what comes next. */
+/** A bar per month, each its own colour (a chart: the style's corners), then what comes next. */
 @Component({
   selector: 'app-home-contribution-history',
   imports: [

@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { Directive, computed, effect, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScProgress } from './progress';
 
 /** Your label for the progress — its name (`aria-labelledby`). */
@@ -14,7 +14,7 @@ import { ScProgress } from './progress';
   },
 })
 export class ScProgressLabel {
-  private readonly styles = injectPreset().progress;
+  private readonly styles = injectStyle().progress;
   private readonly progress = inject(ScProgress);
 
   readonly classInput = input<string>('', { alias: 'class' });

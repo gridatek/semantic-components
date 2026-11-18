@@ -1,5 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
-import { injectPreset } from '@semantic-components/ui';
+import { injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 
 /**
@@ -17,7 +17,7 @@ import { cn } from 'cn';
 export class ScCodeBlockActions {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly styles = injectPreset().codeBlock;
+  private readonly styles = injectStyle().codeBlock;
 
   private readonly class = computed(() =>
     cn(this.styles.actions, this.classInput()),

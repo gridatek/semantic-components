@@ -1,6 +1,6 @@
 # Separator
 
-A line between sections, across or up and down — shadcn's Separator (Base UI's). The same in every style, so it has no preset key.
+A line between sections, across or up and down — shadcn's Separator (Base UI's). The same in every style, so it has no style key.
 
 ## Usage
 

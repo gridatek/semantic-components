@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * The step's line as the button that opens it — on a `scCollapsibleTrigger`,
@@ -14,7 +14,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScTraceCollapsibleTrigger {
-  private readonly styles = injectPreset().trace;
+  private readonly styles = injectStyle().trace;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

@@ -1,12 +1,12 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * An input or a textarea with addons — icons, text, buttons — in one box: the
  * group draws the border, the ring and the corners, and gives its control
  * (`[data-slot=control]`: `scInput`, `scTextarea`, or a control of yours) the
- * look of being inside. Its classes are the preset's.
+ * look of being inside. Its classes are the style's.
  */
 @Directive({
   selector: 'div[scInputGroup]',
@@ -18,7 +18,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScInputGroup {
-  private readonly styles = injectPreset().inputGroup;
+  private readonly styles = injectStyle().inputGroup;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

@@ -31,7 +31,7 @@ import {
 /**
  * The mark's shape from your own image: --sc-checkbox-check (and
  * --sc-checkbox-indeterminate), on the checkbox or any element round it. A
- * mask: the image's outline only, in the preset's colour.
+ * mask: the image's outline only, in the style's colour.
  */
 @Component({
   selector: 'app-custom-mark-checkbox-demo',

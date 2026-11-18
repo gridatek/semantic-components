@@ -139,7 +139,7 @@ test('No Close Button: closed by Escape', async ({ page }) => {
 test('Short content: the dialog still opens at its full width', async ({
   page,
 }) => {
-  // Two lines of text: as wide as the preset's max (sm:max-w-sm, 384px, in
+  // Two lines of text: as wide as the style's max (sm:max-w-sm, 384px, in
   // nova), not as its text — and not narrower while it zooms in.
   await page.goto(demo('no-close-button'));
   await page.getByRole('button', { name: 'No Close Button' }).click();

@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** The chevron in the trigger: it flips while the list is open. */
 @Directive({
@@ -10,7 +10,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScSelectIcon {
-  private readonly styles = injectPreset().select;
+  private readonly styles = injectStyle().select;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

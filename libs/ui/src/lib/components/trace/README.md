@@ -4,7 +4,7 @@ The steps of a run — an agent's searches, reads and commands — a line each, 
 
 A line is text on its own: inside a link it is a link, inside a collapsible's trigger a button with `aria-expanded`. Its title says what happened — its status too ("Failed to run pnpm build"): the color and the shimmer aren't read out.
 
-The look is the app's preset's (`trace` key: shadcn's in each of the eight styles).
+The look is the app's style's (`trace` key: shadcn's in each of the eight styles).
 
 ## Usage
 

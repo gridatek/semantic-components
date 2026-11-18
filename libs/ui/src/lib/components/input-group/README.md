@@ -1,6 +1,6 @@
 # Input Group
 
-An input or a textarea with icons, text and buttons in one box: beside it, above or below. In the look of the app's preset; a click on an addon focuses the field. To join a field with buttons outside its box, use a Control Group.
+An input or a textarea with icons, text and buttons in one box: beside it, above or below. In the look of the app's style; a click on an addon focuses the field. To join a field with buttons outside its box, use a Control Group.
 
 ## Usage
 
@@ -38,26 +38,26 @@ The group on a `div`, the control in it — `scInput`, `scTextarea`, or one of y
 
 ### ScInputGroup — `div[scInputGroup]`
 
-The box: `role="group"`, the border, the ring when its control has focus, red when it is invalid. Its classes are the preset's (`injectPreset().inputGroup`). A focused date or time segment, or a select, multiselect or combobox trigger inside, rings it too.
+The box: `role="group"`, the border, the ring when its control has focus, red when it is invalid. Its classes are the style's (`injectStyle().inputGroup`). A focused date or time segment, or a select, multiselect or combobox trigger inside, rings it too.
 
-| Input   | Type     | Default | Description                                               |
-| ------- | -------- | ------- | --------------------------------------------------------- |
-| `class` | `string` | `''`    | Classes merged over the preset (`cn`: a later class wins) |
+| Input   | Type     | Default | Description                                              |
+| ------- | -------- | ------- | -------------------------------------------------------- |
+| `class` | `string` | `''`    | Classes merged over the style (`cn`: a later class wins) |
 
 `data-slot="input-group"`: read by a control group around it, and by the parts that join it.
 
 ### ScInputGroupAddon — `div[scInputGroupAddon]`
 
-Icons, text or buttons beside the control (`injectPreset().inputGroupAddon`). A click on it, not on its buttons, focuses the control.
+Icons, text or buttons beside the control (`injectStyle().inputGroupAddon`). A click on it, not on its buttons, focuses the control.
 
 | Input   | Type                                                  | Default          | Description                                                                                                                                                                                                                                                                   |
 | ------- | ----------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `side`  | `'inline-start' \| 'inline-end' \| 'top' \| 'bottom'` | `'inline-start'` | Its side of the control: before or after it (an input; logical: `inline-start` is the reading start, flipped right to left), above or below it (a textarea). shadcn's `align`, with `top` / `bottom` for its `block-start` / `block-end`: the same words as every `side` here |
-| `class` | `string`                                              | `''`             | Classes merged over the preset (`cn`: a later class wins)                                                                                                                                                                                                                     |
+| `class` | `string`                                              | `''`             | Classes merged over the style (`cn`: a later class wins)                                                                                                                                                                                                                      |
 
 ### ScInputGroupButton — `button[scInputGroupButton]`
 
-A button in an addon: the preset's button, sized for the group (`injectPreset().inputGroupButton`).
+A button in an addon: the style's button, sized for the group (`injectStyle().inputGroupButton`).
 
 | Input      | Type                                                                          | Default    | Description                                    |
 | ---------- | ----------------------------------------------------------------------------- | ---------- | ---------------------------------------------- |
@@ -65,15 +65,15 @@ A button in an addon: the preset's button, sized for the group (`injectPreset().
 | `size`     | `'xs' \| 'sm' \| 'icon-xs' \| 'icon-sm'`                                      | `'xs'`     | Its size in the group                          |
 | `type`     | `'button' \| 'submit' \| 'reset'`                                             | `'button'` | In a form, only a submit button submits it     |
 | `disabled` | `boolean`                                                                     | `false`    | Sets the native `disabled` and `aria-disabled` |
-| `class`    | `string`                                                                      | `''`       | Classes merged over the preset                 |
+| `class`    | `string`                                                                      | `''`       | Classes merged over the style                  |
 
 ### ScInputGroupText — `span[scInputGroupText]`
 
-Text in an addon, with its icons (`injectPreset().inputGroupText`).
+Text in an addon, with its icons (`injectStyle().inputGroupText`).
 
-| Input   | Type     | Default | Description                    |
-| ------- | -------- | ------- | ------------------------------ |
-| `class` | `string` | `''`    | Classes merged over the preset |
+| Input   | Type     | Default | Description                   |
+| ------- | -------- | ------- | ----------------------------- |
+| `class` | `string` | `''`    | Classes merged over the style |
 
 ## Examples
 

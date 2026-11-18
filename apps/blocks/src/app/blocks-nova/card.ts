@@ -1,8 +1,8 @@
-import type { ScCardStyles } from '@semantic-components/presets';
+import type { ScCardStyles } from '@semantic-components/styles';
 
 // shadcn's card in nova (shadcn-reference/presets/nova/card.tsx).
 export const card: ScCardStyles = {
-  // Its radius, ring and shadow are the preset's `frame` (frame.ts), which
+  // Its radius, ring and shadow are the style's `frame` (frame.ts), which
   // ScCard adds: a change to the card's frame goes there.
   card: 'group/card flex flex-col gap-(--card-spacing) overflow-hidden bg-card py-(--card-spacing) text-sm text-card-foreground [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl',
   header:

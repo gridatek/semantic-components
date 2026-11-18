@@ -11,7 +11,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { setInput } from '../../utils';
 import { ScAccordion } from './accordion';
 import {
@@ -34,7 +34,7 @@ import {
   },
 })
 export class ScAccordionItem implements ScAccordionItemContext {
-  private readonly styles = injectPreset().accordion;
+  private readonly styles = injectStyle().accordion;
   private readonly accordion = inject(ScAccordion);
 
   readonly classInput = input<string>('', { alias: 'class' });

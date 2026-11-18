@@ -1,4 +1,4 @@
-import type { ScEmptyStyles } from '@semantic-components/presets';
+import type { ScEmptyStyles } from '@semantic-components/styles';
 import { cva } from 'class-variance-authority';
 
 // shadcn's empty in nova (shadcn-reference/presets/nova/empty.tsx).

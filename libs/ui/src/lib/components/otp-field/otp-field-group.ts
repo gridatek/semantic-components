@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * One chunk of the code's inputs, joined into one box (separate boxes in
@@ -14,7 +14,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScOtpFieldGroup {
-  private readonly styles = injectPreset().otpField;
+  private readonly styles = injectStyle().otpField;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

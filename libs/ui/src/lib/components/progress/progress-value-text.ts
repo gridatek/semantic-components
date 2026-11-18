@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScProgress } from './progress';
 
 /**
@@ -23,7 +23,7 @@ import { ScProgress } from './progress';
   },
 })
 export class ScProgressValueText {
-  private readonly styles = injectPreset().progress;
+  private readonly styles = injectStyle().progress;
   private readonly progress = inject(ScProgress);
 
   readonly classInput = input<string>('', { alias: 'class' });

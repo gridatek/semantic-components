@@ -5,8 +5,8 @@ import { defineConfig, devices } from '@playwright/test';
 // For CI, you may want to set BASE_URL to the deployed application.
 const baseURL = process.env['BASE_URL'] || 'http://localhost:4200';
 
-/** The presets, a presets-… project each. */
-const PRESET_NAMES = [
+/** The styles, a styles-… project each. */
+const STYLE_NAMES = [
   'nova',
   'vega',
   'maia',
@@ -30,7 +30,7 @@ const preset = nxE2EPreset(__filename, { testDir: './src' });
 
 export default defineConfig({
   ...preset,
-  // On CI, four workers and the progress in the log. The preset's CI default
+  // On CI, four workers and the progress in the log. The style's CI default
   // is one worker: the showcase's suite then outgrew the csr job's 30 minutes,
   // and the html report alone printed nothing while it ran.
   workers: process.env['CI'] ? 4 : undefined,
@@ -58,10 +58,10 @@ export default defineConfig({
     cwd: workspaceRoot,
   },
   // Projects by kind of test, each its folder (src/demos, src/pages,
-  // src/presets): --project=demos runs one kind, and a CI job a group.
+  // src/styles): --project=demos runs one kind, and a CI job a group.
   //   demos, pages — behaviour and each docs page, in nova, desktop Chrome;
-  //   presets-nova … presets-rhea — src/presets in that preset (its cookie,
-  //     from metadata.preset in test.ts): classes, axe;
+  //   styles-nova … styles-rhea — src/styles in that style (its cookie,
+  //     from metadata.style in test.ts): classes, axe;
   //   mobile — the @mobile tests of demos and pages, on a phone.
   // ALL_BROWSERS (nightly) adds demos and pages in Firefox and WebKit, and an
   // iPhone.
@@ -83,7 +83,7 @@ export default defineConfig({
         use: {
           ...device,
           // Firefox's bounce-tracker guess: localhost sets its cookies (a
-          // preset, a theme) with no click first — a warning in the console
+          // style, a theme) with no click first — a warning in the console
           // about the browser, not the page.
           ...(suffix === '-firefox' && {
             launchOptions: {
@@ -96,11 +96,11 @@ export default defineConfig({
         grepInvert: /@mobile/,
       })),
     ),
-    ...PRESET_NAMES.map((preset) => ({
-      name: 'presets-' + preset,
-      testDir: './src/presets',
+    ...STYLE_NAMES.map((style) => ({
+      name: 'styles-' + style,
+      testDir: './src/styles',
       use: { ...devices['Desktop Chrome'] },
-      metadata: { preset },
+      metadata: { style },
     })),
     ...(process.env['ALL_BROWSERS']
       ? ([

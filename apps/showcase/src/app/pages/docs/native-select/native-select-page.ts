@@ -45,7 +45,7 @@ import { SizesNativeSelectDemoContainer } from './demos/sizes-native-select-demo
       <div class="space-y-2">
         <h1 scTypeset>Native Select</h1>
         <p class="text-muted-foreground">
-          The browser&apos;s own select, in the look of the app&apos;s preset.
+          The browser&apos;s own select, in the look of the app&apos;s style.
         </p>
         <app-component-badges path="native-select" />
       </div>
@@ -109,7 +109,7 @@ import { SizesNativeSelectDemoContainer } from './demos/sizes-native-select-demo
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -180,7 +180,7 @@ export default class NativeSelectPage {
       name: 'ScNativeSelect',
       selector: 'select[scNativeSelect]',
       description:
-        "The browser's select, in the preset's look. size ('default', 'sm'); its id and description from a scField; [formField] on it (disabled and required from the schema); aria-invalid once touched.",
+        "The browser's select, in the style's look. size ('default', 'sm'); its id and description from a scField; [formField] on it (disabled and required from the schema); aria-invalid once touched.",
     },
     {
       name: 'ScNativeSelectContainer',
@@ -192,7 +192,7 @@ export default class NativeSelectPage {
       name: 'ScNativeSelectIcon',
       selector: 'svg[scNativeSelectIcon]',
       description:
-        'Your chevron (siChevronDownIcon), after the select: at its end, by the preset; hidden from screen readers.',
+        'Your chevron (siChevronDownIcon), after the select: at its end, by the style; hidden from screen readers.',
     },
     {
       name: 'ScNativeSelectOption, ScNativeSelectOptionGroup',

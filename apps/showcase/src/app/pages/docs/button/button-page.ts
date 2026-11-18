@@ -82,7 +82,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
         <h1 scTypeset>Button</h1>
         <p class="text-muted-foreground">
           A native button for an action: submit, open, delete. Six variants and
-          eight sizes, in the look of the app&apos;s preset, with room for icons
+          eight sizes, in the look of the app&apos;s style, with room for icons
           and a spinner. In a form it submits only when told to; to go
           somewhere, use a Link.
         </p>
@@ -163,9 +163,9 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
           is a directive on a native
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >button[scButton]</code
-          >: its classes are the app&apos;s preset&apos;s (
+          >: its classes are the app&apos;s style&apos;s (
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >provideSemanticComponents(&#123; preset &#125;)</code
+            >provideSemanticComponents(&#123; style &#125;)</code
           >, nova by default).
         </p>
         <div
@@ -276,7 +276,7 @@ export default class ButtonPage {
       name: 'class',
       type: 'string',
       default: "''",
-      description: 'Classes merged over the preset (cn: a later class wins).',
+      description: 'Classes merged over the style (cn: a later class wins).',
     },
   ];
 }

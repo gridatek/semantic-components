@@ -59,7 +59,7 @@ interface ScApiRow {
         <h1 scTypeset>Pagination</h1>
         <p class="text-muted-foreground">
           Moves through pages of results: the pages, previous and next, in the
-          look of the app&apos;s preset. It counts the pages from the number of
+          look of the app&apos;s style. It counts the pages from the number of
           items and the page size, and works out which to show.
         </p>
         <app-component-badges path="pagination" />
@@ -217,7 +217,7 @@ export default class PaginationPage {
     name: 'class',
     type: 'string',
     default: "''",
-    description: 'Classes merged over the preset (cn: a later class wins).',
+    description: 'Classes merged over the style (cn: a later class wins).',
   };
 
   private readonly disabledRow: ScApiRow = {

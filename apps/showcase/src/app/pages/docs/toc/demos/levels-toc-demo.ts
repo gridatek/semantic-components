@@ -38,7 +38,7 @@ import {
           Configure
         </h3>
         <p class="text-muted-foreground mt-2 mb-6 text-sm">
-          Choose a preset and a theme for the whole app.
+          Choose a style and a theme for the whole app.
         </p>
         <h4 scTocHeading class="scroll-mt-4 text-sm font-medium">Presets</h4>
         <p class="text-muted-foreground mt-2 mb-6 text-sm">

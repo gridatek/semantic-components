@@ -1,7 +1,7 @@
 import { Directive, computed, input } from '@angular/core';
-import type { ScAttachmentMediaVariant } from '@semantic-components/presets';
+import type { ScAttachmentMediaVariant } from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: 'div[scAttachmentMedia]',
@@ -12,7 +12,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScAttachmentMedia {
-  private readonly styles = injectPreset().attachment;
+  private readonly styles = injectStyle().attachment;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScAttachmentMediaVariant>('icon');
 

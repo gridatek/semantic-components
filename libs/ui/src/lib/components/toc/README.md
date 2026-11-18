@@ -63,4 +63,4 @@ Each part takes `class`, merged over its own.
 
 ## Styles
 
-No preset: shadcn has no table of contents in its components. The look is its docs site's — small muted links, the active one in the foreground colour, deeper ones indented (`ps-4` a level).
+No style: shadcn has no table of contents in its components. The look is its docs site's — small muted links, the active one in the foreground colour, deeper ones indented (`ps-4` a level).

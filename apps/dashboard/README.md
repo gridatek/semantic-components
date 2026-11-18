@@ -4,7 +4,7 @@ An admin dashboard built with Semantic Components, complete: every screen of
 [shadcndashboard](https://github.com/shadcndashboard/shadcndashboard)'s sidebar
 — its free version's screens and data, and the screens it lists as Pro —
 rebuilt in Angular with this repository's library. It sits outside
-`apps/presets` on purpose: it isn't a preset's showcase, it's an app — a second
+`apps/presets` on purpose: it isn't a style's showcase, it's an app — a second
 test, after Sera, that the library carries a real product.
 
 ```bash
@@ -29,7 +29,7 @@ npx nx serve dashboard   # http://localhost:4203
   products (made smaller here: 640 px, and 96 px thumbnails, for
   `NgOptimizedImage`), AI images, integration logos, card brands, file icons,
   kanban and sign-in pictures.
-- **Not its CSS.** The look is the library's: the **nova** preset (shadcn's
+- **Not its CSS.** The look is the library's: the **nova** style (shadcn's
   base-nova, the reference's own style), shadcn's **neutral** theme and
   **Geist**. The app writes layout classes, not looks.
 - **License.** MIT; the footer credits shadcndashboard, as its README asks.

@@ -1,6 +1,6 @@
 # Avatar
 
-A person's picture, with initials when there is none — alone, in a group, with a status badge. In the look of the app's preset.
+A person's picture, with initials when there is none — alone, in a group, with a status badge. In the look of the app's style.
 
 ## Usage
 
@@ -38,7 +38,7 @@ As Base UI's avatar (its `keepMounted` way):
 
 ## API reference
 
-Each part takes `class`, merged over the preset.
+Each part takes `class`, merged over the style.
 
 | Part                 | Selector                  | Description                                                                                             |
 | -------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------- |
@@ -51,4 +51,4 @@ Each part takes `class`, merged over the preset.
 
 ## Styles
 
-shadcn's avatar is the same in every style but for the group count's text (`text-xs` in lyra and mira): that one is the preset's (`avatarGroupCount`).
+shadcn's avatar is the same in every style but for the group count's text (`text-xs` in lyra and mira): that one is the style's (`avatarGroupCount`).

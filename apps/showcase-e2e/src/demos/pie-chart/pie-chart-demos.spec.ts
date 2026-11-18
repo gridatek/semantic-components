@@ -149,7 +149,7 @@ test("Corners: a pie's and a donut's slices the style's — square in Lyra, roun
   const shapeIn = async (preset: string, name: string) => {
     await page.context().addCookies([
       {
-        name: 'sc-preset',
+        name: 'sc-style',
         value: preset,
         url: baseURL ?? 'http://localhost:4200',
       },

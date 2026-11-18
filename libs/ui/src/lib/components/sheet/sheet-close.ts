@@ -1,11 +1,11 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { ScSheetProvider } from './sheet-provider';
 
 /**
- * Closes the sheet: the preset's button, ghost and icon-sized for the ✕ —
+ * Closes the sheet: the style's button, ghost and icon-sized for the ✕ —
  * straight in the sheet, the sheet puts it in its corner (`data-slot`).
  * Cancel or Done in the footer: `variant="outline" size="default"`.
  */
@@ -19,7 +19,7 @@ import { ScSheetProvider } from './sheet-provider';
   },
 })
 export class ScSheetClose {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
   private readonly sheet = inject(ScSheetProvider);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly type = input<'button' | 'submit' | 'reset'>('button');

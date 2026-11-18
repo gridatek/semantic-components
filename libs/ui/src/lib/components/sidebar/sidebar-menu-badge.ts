@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** A count at an item's end. Hidden when collapsed to icons. */
 @Directive({
@@ -11,7 +11,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScSidebarMenuBadge {
-  private readonly styles = injectPreset().sidebar;
+  private readonly styles = injectStyle().sidebar;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

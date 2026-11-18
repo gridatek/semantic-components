@@ -1,13 +1,13 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils';
 import { type ScButtonVariants } from '../button/button';
 import { ScComboboxBase } from './combobox-base';
 import { ScComboboxChip } from './combobox-chip';
 
 /**
- * Removes its chip's value: the preset's button (ghost, icon-xs). Write its
+ * Removes its chip's value: the style's button (ghost, icon-xs). Write its
  * icon and name it. Reached from the input by the arrow keys, not by Tab.
  */
 @Directive({
@@ -24,7 +24,7 @@ import { ScComboboxChip } from './combobox-chip';
   },
 })
 export class ScComboboxChipRemove {
-  private readonly preset = injectPreset();
+  private readonly preset = injectStyle();
   private readonly root = inject(ScComboboxBase);
   private readonly chip = inject(ScComboboxChip);
 

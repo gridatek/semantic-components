@@ -9,12 +9,12 @@ import {
 import type {
   ScToggleSize,
   ScToggleVariant,
-} from '@semantic-components/presets';
+} from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_TOGGLE_VALUES } from './toggle-values';
 
-/** A toggle's look: its variant and size, the classes the preset's. */
+/** A toggle's look: its variant and size, the classes the style's. */
 export interface ScToggleVariants {
   variant?: ScToggleVariant | null;
   size?: ScToggleSize | null;
@@ -22,7 +22,7 @@ export interface ScToggleVariants {
 
 /**
  * A button that stays pressed: `aria-pressed` follows `pressed`. In the
- * preset's look (its `toggle` key, shadcn's toggleVariants in each style).
+ * style's look (its `toggle` key, shadcn's toggleVariants in each style).
  * In a container holding pressed values (a toolbar's widget group): its
  * `value`, pressed when the container has it.
  */
@@ -39,7 +39,7 @@ export interface ScToggleVariants {
   },
 })
 export class ScToggle {
-  private readonly styles = injectPreset().toggle;
+  private readonly styles = injectStyle().toggle;
   private readonly values = inject(SC_TOGGLE_VALUES, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });

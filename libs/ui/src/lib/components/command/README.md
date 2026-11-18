@@ -1,6 +1,6 @@
 # Command
 
-A search over commands: typing filters them, the arrows move the highlight while focus stays in the search, Enter runs it. shadcn's Command (built on cmdk) in the look of the app's preset (the `command` key).
+A search over commands: typing filters them, the arrows move the highlight while focus stays in the search, Enter runs it. shadcn's Command (built on cmdk) in the look of the app's style (the `command` key).
 
 ## Usage
 
@@ -42,7 +42,7 @@ In a dialog, on the dialog itself: `<div scDialog scCommandDialog>`, with an `sr
 | `ScCommandShortcut`                     | `span[scCommandShortcut]`                      | A key hint at the end of an item: shown, not bound                                                                                                              |
 | `ScCommandSeparator`                    | `div[scCommandSeparator]`                      | A line between groups, hidden while searching; decorative (`aria-hidden`: not allowed in a listbox)                                                             |
 | `ScCommandStatus`                       | `div[scCommandStatus]`                         | Read, not shown (`role="status"`): your text about the results. Outside the list                                                                                |
-| `ScCommandDialog`                       | `div[scCommandDialog]`                         | On the `scDialog` a command opens in: no padding, the preset's corners (important over the dialog's); its items' corners follow                                 |
+| `ScCommandDialog`                       | `div[scCommandDialog]`                         | On the `scDialog` a command opens in: no padding, the style's corners (important over the dialog's); its items' corners follow                                  |
 
 ## Filtering
 

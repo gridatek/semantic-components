@@ -18,7 +18,7 @@ export class ScrollbarUsageDemoContainer {
 
 /**
  * A plain box that scrolls: no directive. With scrollbar.css imported, its
- * scrollbar is the preset's — as every scrollbar of the page.
+ * scrollbar is the style's — as every scrollbar of the page.
  */
 @Component({
   selector: 'app-scrollbar-usage-demo',

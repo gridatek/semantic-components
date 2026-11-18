@@ -48,7 +48,7 @@ import { VerticalSliderDemoContainer } from './demos/vertical-slider-demo-contai
         <h1 scTypeset>Slider</h1>
         <p class="text-muted-foreground">
           A native range input, its track and thumb in the look of the
-          app&apos;s preset.
+          app&apos;s style.
         </p>
         <app-component-badges path="slider" />
       </div>
@@ -102,7 +102,7 @@ import { VerticalSliderDemoContainer } from './demos/vertical-slider-demo-contai
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -154,7 +154,7 @@ export default class SliderPage {
       name: 'ScSlider',
       selector: 'input[scSlider]',
       description:
-        "A native range in the preset's look (track, range, thumb): value (two-way, or a [formField]); min, max, step; orientation ('horizontal', 'vertical'); invalid once touched.",
+        "A native range in the style's look (track, range, thumb): value (two-way, or a [formField]); min, max, step; orientation ('horizontal', 'vertical'); invalid once touched.",
     },
   ];
 }

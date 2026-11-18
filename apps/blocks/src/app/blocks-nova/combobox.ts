@@ -1,4 +1,4 @@
-import type { ScComboboxStyles } from '@semantic-components/presets';
+import type { ScComboboxStyles } from '@semantic-components/styles';
 
 // shadcn's combobox in nova (shadcn-reference/presets/nova/combobox.tsx), adapted: Base UI's
 // states as Angular Aria shows them (data-highlighted: is data-[active=true]:, data-disabled: is

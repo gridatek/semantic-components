@@ -2,7 +2,7 @@
 
 A flexible field composition system for building accessible forms with labels, descriptions, errors, and various layout orientations.
 
-In the look of the app's preset (`field` key: each part's spacing and text, shadcn's in each of the eight styles — lyra and mira smaller, sera's legends and titles uppercase). The orientation layouts are the same in every style and stay in `scField`.
+In the look of the app's style (`field` key: each part's spacing and text, shadcn's in each of the eight styles — lyra and mira smaller, sera's legends and titles uppercase). The orientation layouts are the same in every style and stay in `scField`.
 
 ## Components
 
@@ -266,7 +266,7 @@ Around a checkbox, a radio or a switch (they tell the field, `SC_FIELD_CHOICE`),
     Description      Description
 ```
 
-Inside a `label[scLabel]`, a field is a choice card: the label is its parent, the whole card picks, bordered and tinted when checked (the label preset's `field` key). The field then has no `role="group"` — it is the label's control and texts:
+Inside a `label[scLabel]`, a field is a choice card: the label is its parent, the whole card picks, bordered and tinted when checked (the label style's `field` key). The field then has no `role="group"` — it is the label's control and texts:
 
 ```html
 <label scLabel>

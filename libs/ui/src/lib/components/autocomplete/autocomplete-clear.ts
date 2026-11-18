@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { SC_AUTOCOMPLETE } from './autocomplete-tokens';
 
@@ -26,7 +26,7 @@ import { SC_AUTOCOMPLETE } from './autocomplete-tokens';
   },
 })
 export class ScAutocompleteClear {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly autocomplete = inject(SC_AUTOCOMPLETE);
   readonly classInput = input<string>('', { alias: 'class' });

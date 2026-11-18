@@ -1,7 +1,7 @@
 import { CdkCopyToClipboard } from '@angular/cdk/clipboard';
 import { Directive, computed, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { type ScButtonVariants, injectPreset } from '@semantic-components/ui';
+import { type ScButtonVariants, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { concat, delay, filter, of, switchMap } from 'rxjs';
 
@@ -27,7 +27,7 @@ import { concat, delay, filter, of, switchMap } from 'rxjs';
   },
 })
 export class ScCodeBlockCopy {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly clipboard = inject(CdkCopyToClipboard);
 

@@ -65,7 +65,7 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
         <p class="text-muted-foreground">
           Questions one at a time, on your Signal Form: each answer checked
           against your schema before moving on, optional ones skipped, the last
-          one submitting. In the look of the app&apos;s preset.
+          one submitting. In the look of the app&apos;s style.
         </p>
         <app-component-badges path="questionnaire" />
       </div>
@@ -150,7 +150,7 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -294,7 +294,7 @@ export default class QuestionnairePage {
       name: 'ScQuestionnairePrevious, ScQuestionnaireSkip, ScQuestionnaireNext, ScQuestionnaireSubmit',
       selector: 'button[…]',
       description:
-        'The preset’s button, variant and size. Each shows when it applies: Previous from the second question, Skip on an optional one, Next before the last, Submit on it.',
+        'The style’s button, variant and size. Each shows when it applies: Previous from the second question, Skip on an optional one, Next before the last, Submit on it.',
     },
   ];
 }

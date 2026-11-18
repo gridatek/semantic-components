@@ -7,11 +7,11 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_FIELD } from '../field';
 
 /**
- * The browser's own select, in the preset's look: its list, keyboard and
+ * The browser's own select, in the style's look: its list, keyboard and
  * mobile picker are the browser's. In a `scNativeSelectContainer`, beside
  * your chevron. Its id and description from a `scField`; `[formField]` on it.
  */
@@ -27,7 +27,7 @@ import { SC_FIELD } from '../field';
   },
 })
 export class ScNativeSelect {
-  private readonly styles = injectPreset().nativeSelect;
+  private readonly styles = injectStyle().nativeSelect;
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-native-select-');
 

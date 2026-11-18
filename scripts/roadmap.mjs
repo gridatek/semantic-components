@@ -122,11 +122,11 @@ const rows = registry.map((item) => {
 });
 
 // Built on: the components whose exports a component imports, and those whose
-// `data-slot` its styles (or its preset's) read — a button group shapes the
+// `data-slot` its styles (or its style's) read — a button group shapes the
 // buttons, inputs and selects in it.
-const presetFiles = readdirSync(at('libs/presets'), { withFileTypes: true })
-  .filter((entry) => existsSync(at('libs/presets', entry.name, 'src')))
-  .flatMap((entry) => walk(at('libs/presets', entry.name, 'src')));
+const presetFiles = readdirSync(at('libs/styles'), { withFileTypes: true })
+  .filter((entry) => existsSync(at('libs/styles', entry.name, 'src')))
+  .flatMap((entry) => walk(at('libs/styles', entry.name, 'src')));
 /** The components declaring each `data-slot`. */
 const declaring = new Map();
 for (const row of rows)
@@ -172,17 +172,17 @@ for (const row of rows) {
         )
           deps.add(owner.get(name));
     }
-  // A part's classes from the preset (`injectPreset().controlGroup`): built on
+  // A part's classes from the style (`injectStyle().controlGroup`): built on
   // that part's component (`control-group`).
   const styles = [...row.files];
   for (const file of row.files)
     for (const [, part] of readFileSync(file, 'utf8').matchAll(
-      /injectPreset\(\)\.(\w+)/g,
+      /injectStyle\(\)\.(\w+)/g,
     )) {
       const path = part.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
       if (path !== row.path && rows.some((other) => other.path === path))
         deps.add(path);
-      // Its own part's classes, in every preset: read for slots too.
+      // Its own part's classes, in every style: read for slots too.
       if (path === row.path)
         styles.push(
           ...presetFiles.filter((preset) =>

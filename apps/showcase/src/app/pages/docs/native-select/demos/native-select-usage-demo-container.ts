@@ -25,7 +25,7 @@ import {
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
-/** The browser's own select, in the preset's look: here a status, its label from the field. */
+/** The browser's own select, in the style's look: here a status, its label from the field. */
 @Component({
   selector: 'app-native-select-usage-demo',
   imports: [

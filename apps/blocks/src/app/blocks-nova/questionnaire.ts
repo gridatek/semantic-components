@@ -1,4 +1,4 @@
-import type { ScQuestionnaireStyles } from '@semantic-components/presets';
+import type { ScQuestionnaireStyles } from '@semantic-components/styles';
 
 // shadcn's questionnaire in nova (shadcn-reference/presets/nova/questionnaire.tsx).
 // Its data-checked / data-disabled are our :has(>input:checked / :disabled);

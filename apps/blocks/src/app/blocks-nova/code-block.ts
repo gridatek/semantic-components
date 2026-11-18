@@ -1,4 +1,4 @@
-import type { ScCodeBlockStyles } from '@semantic-components/presets';
+import type { ScCodeBlockStyles } from '@semantic-components/styles';
 import { cva } from 'class-variance-authority';
 
 // shadcn's code block in nova (shadcn-reference/presets/nova/code-block.tsx).

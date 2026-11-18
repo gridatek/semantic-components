@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScComboboxGroup } from './combobox-group';
 
 /** A group's heading: it names the group. */
@@ -14,7 +14,7 @@ import { ScComboboxGroup } from './combobox-group';
   },
 })
 export class ScComboboxGroupLabel {
-  private readonly styles = injectPreset().combobox;
+  private readonly styles = injectStyle().combobox;
   private readonly id = inject(_IdGenerator).getId('sc-combobox-group-');
 
   readonly classInput = input<string>('', { alias: 'class' });

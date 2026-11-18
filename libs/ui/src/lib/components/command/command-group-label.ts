@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScCommandGroup } from './command-group';
 
 /** A group's heading: it names the group. */
@@ -14,7 +14,7 @@ import { ScCommandGroup } from './command-group';
   },
 })
 export class ScCommandGroupLabel {
-  private readonly styles = injectPreset().command;
+  private readonly styles = injectStyle().command;
   private readonly id = inject(_IdGenerator).getId('sc-command-group-');
 
   readonly classInput = input<string>('', { alias: 'class' });

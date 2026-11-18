@@ -64,7 +64,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
         <h1 scTypeset>OTP Field</h1>
         <p class="text-muted-foreground">
           A one-time code, one input per character, in the look of the
-          app&apos;s preset.
+          app&apos;s style.
         </p>
         <app-component-badges path="otp-field" />
       </div>
@@ -130,7 +130,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -202,7 +202,7 @@ export default class OtpFieldPage {
       name: 'ScOtpFieldGroup',
       selector: 'div[scOtpFieldGroup]',
       description:
-        "One chunk of inputs, joined into one box (the preset's: separate boxes in some styles).",
+        "One chunk of inputs, joined into one box (the style's: separate boxes in some styles).",
     },
     {
       name: 'ScOtpFieldInput',

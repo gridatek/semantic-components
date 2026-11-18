@@ -1,7 +1,7 @@
 import { AccordionPanel, AccordionTrigger } from '@angular/aria/accordion';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_ACCORDION_ITEM } from './accordion-item-context';
 
 /**
@@ -21,7 +21,7 @@ import { SC_ACCORDION_ITEM } from './accordion-item-context';
   },
 })
 export class ScAccordionTrigger extends AccordionTrigger {
-  private readonly styles = injectPreset().accordion;
+  private readonly styles = injectStyle().accordion;
 
   /** Its panel: set by the item. */
   override readonly panel = input<AccordionPanel>(

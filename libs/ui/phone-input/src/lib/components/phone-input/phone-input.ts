@@ -14,7 +14,7 @@ import {
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { injectPreset } from '@semantic-components/ui';
+import { injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import {
   AsYouType,
@@ -46,7 +46,7 @@ import { SC_PHONE_INPUT, type ScPhoneCountryCode } from './phone-input-types';
   },
 })
 export class ScPhoneInput implements FormValueControl<string>, OnInit {
-  private readonly groupStyles = injectPreset().inputGroup;
+  private readonly groupStyles = injectStyle().inputGroup;
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
   readonly classInput = input<string>('', { alias: 'class' });

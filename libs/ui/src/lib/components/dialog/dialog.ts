@@ -7,13 +7,13 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScDialogProvider } from './dialog-provider';
 
 /**
  * The dialog's panel: animates in when shown and out when it goes
  * (`animate.enter` / `animate.leave`). A close straight in it (the ✕) goes
- * in its corner, from the preset.
+ * in its corner, from the style.
  */
 @Component({
   selector: 'div[scDialog]',
@@ -33,7 +33,7 @@ import { ScDialogProvider } from './dialog-provider';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScDialog {
-  private readonly styles = injectPreset().dialog;
+  private readonly styles = injectStyle().dialog;
   private readonly dialogProvider = inject(ScDialogProvider);
   // Created as it opens: its provider's direction and language then.
   private readonly direction = this.dialogProvider.direction();
@@ -49,7 +49,7 @@ export class ScDialog {
     cn(
       'relative mx-auto',
       this.styles.content,
-      // Its full width, capped by the preset's max-w — as shadcn's, whose
+      // Its full width, capped by the style's max-w — as shadcn's, whose
       // w-full fills a fixed, screen-wide box. The CDK's pane is only as wide
       // as its content, so w-full had nothing to fill: short content left the
       // dialog narrow, and it collapsed while zooming in.

@@ -2,7 +2,7 @@
   {
     "name": "Accordion",
     "path": "accordion",
-    "description": "Items whose panels open and close under their heading — in the look of the app's preset.",
+    "description": "Items whose panels open and close under their heading — in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Layout"
@@ -125,7 +125,7 @@
   {
     "name": "Button",
     "path": "button",
-    "description": "A native button for an action: six variants, eight sizes from the app's preset, icons and a spinner; it submits a form only when told to.",
+    "description": "A native button for an action: six variants, eight sizes from the app's style, icons and a spinner; it submits a form only when told to.",
     "status": "Experimental",
     "library": "ui",
     "category": "Buttons & Actions"
@@ -165,7 +165,7 @@
   {
     "name": "Checkbox",
     "path": "checkbox",
-    "description": "A native checkbox that draws itself, in the look of the app's preset.",
+    "description": "A native checkbox that draws itself, in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -335,7 +335,7 @@
   {
     "name": "Drawer",
     "path": "drawer",
-    "description": "A panel at the edge of the screen that a swipe dismisses, with snap points and stacking — in the look of the app's preset.",
+    "description": "A panel at the edge of the screen that a swipe dismisses, with snap points and stacking — in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Overlay"
@@ -446,7 +446,7 @@
   {
     "name": "Input",
     "path": "input",
-    "description": "A native text field in the look of the app's preset: in a Field it takes the label and description; with Signal Forms it shows itself invalid once touched.",
+    "description": "A native text field in the look of the app's style: in a Field it takes the label and description; with Signal Forms it shows itself invalid once touched.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -572,7 +572,7 @@
   {
     "name": "Menu",
     "path": "menu",
-    "description": "A menu of actions from a button: groups, checkbox and radio items, submenus, shortcuts — in the look of the app's preset.",
+    "description": "A menu of actions from a button: groups, checkbox and radio items, submenus, shortcuts — in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Navigation"
@@ -622,7 +622,7 @@
   {
     "name": "Native Select",
     "path": "native-select",
-    "description": "The browser's own select, in the preset's look.",
+    "description": "The browser's own select, in the style's look.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -682,7 +682,7 @@
   {
     "name": "OTP Field",
     "path": "otp-field",
-    "description": "A one-time code, one input per character, in the look of the app's preset.",
+    "description": "A one-time code, one input per character, in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -732,7 +732,7 @@
   {
     "name": "Popover",
     "path": "popover",
-    "description": "Rich content in a panel beside its trigger — a dialog, modal or not, opened by a click or a hover, in the look of the app's preset.",
+    "description": "Rich content in a panel beside its trigger — a dialog, modal or not, opened by a click or a hover, in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Overlay"
@@ -740,7 +740,7 @@
   {
     "name": "Preview Card",
     "path": "preview-card",
-    "description": "A preview of a link's destination, shown on hover or keyboard focus — in the look of the app's preset.",
+    "description": "A preview of a link's destination, shown on hover or keyboard focus — in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Overlay"
@@ -815,7 +815,7 @@
   {
     "name": "Resizable",
     "path": "resizable",
-    "description": "Panels resized by the handles between them, by pointer or keyboard — in the look of the app's preset.",
+    "description": "Panels resized by the handles between them, by pointer or keyboard — in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Layout"
@@ -848,7 +848,7 @@
   {
     "name": "Scroll Area",
     "path": "scroll-area",
-    "description": "A native scroll container with custom scrollbars — in the look of the app's preset.",
+    "description": "A native scroll container with custom scrollbars — in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Layout"
@@ -856,7 +856,7 @@
   {
     "name": "Scrollbar",
     "path": "scrollbar",
-    "description": "The browser's own scrollbars in your preset's look — every scrollbar of the page, from one CSS file tuned by variables; your classes win.",
+    "description": "The browser's own scrollbars in your style's look — every scrollbar of the page, from one CSS file tuned by variables; your classes win.",
     "status": "Experimental",
     "library": "ui",
     "category": "Layout"
@@ -864,7 +864,7 @@
   {
     "name": "Select",
     "path": "select",
-    "description": "A choice among a short list: a trigger showing the value, the options in a popup below it — a label, groups, scroll buttons, in each preset's look, with Signal Forms.",
+    "description": "A choice among a short list: a trigger showing the value, the options in a popup below it — a label, groups, scroll buttons, in each style's look, with Signal Forms.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -888,7 +888,7 @@
   {
     "name": "Sheet",
     "path": "sheet",
-    "description": "A dialog at the edge of the screen, sliding in from its side — in the look of the app's preset.",
+    "description": "A dialog at the edge of the screen, sliding in from its side — in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Overlay"
@@ -921,7 +921,7 @@
   {
     "name": "Slider",
     "path": "slider",
-    "description": "A native range input, its track and thumb in the look of the app's preset.",
+    "description": "A native range input, its track and thumb in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -990,7 +990,7 @@
   {
     "name": "Switch",
     "path": "switch",
-    "description": "A native checkbox shown as a switch, drawn by itself, in the look of the app's preset.",
+    "description": "A native checkbox shown as a switch, drawn by itself, in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -1014,7 +1014,7 @@
   {
     "name": "Tabs",
     "path": "tabs",
-    "description": "Tabs and their panels, one shown at a time — in the look of the app's preset.",
+    "description": "Tabs and their panels, one shown at a time — in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Navigation"
@@ -1116,7 +1116,7 @@
   {
     "name": "Tooltip",
     "path": "tooltip",
-    "description": "A short label shown on hover or keyboard focus — rich content, a group delay, in the look of the app's preset.",
+    "description": "A short label shown on hover or keyboard focus — rich content, a group delay, in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",
     "category": "Overlay"

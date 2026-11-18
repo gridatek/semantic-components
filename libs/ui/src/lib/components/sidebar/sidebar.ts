@@ -11,7 +11,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScSheet, ScSheetPortal, ScSheetProvider } from '../sheet';
 import { ScSidebarState } from './sidebar-state';
 
@@ -153,7 +153,7 @@ export class ScSidebar {
     ),
   );
 
-  private readonly innerClass = cn(injectPreset().sidebar.inner);
+  private readonly innerClass = cn(injectStyle().sidebar.inner);
 
   constructor() {
     this.state.sidebarId.set(this.id);

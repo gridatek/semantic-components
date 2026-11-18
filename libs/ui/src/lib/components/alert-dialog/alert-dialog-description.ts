@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScAlertDialog } from './alert-dialog';
 
 @Directive({
@@ -11,7 +11,7 @@ import { ScAlertDialog } from './alert-dialog';
   },
 })
 export class ScAlertDialogDescription {
-  private readonly styles = injectPreset().alertDialog;
+  private readonly styles = injectStyle().alertDialog;
 
   private readonly dialog = inject(ScAlertDialog);
   readonly classInput = input<string>('', { alias: 'class' });

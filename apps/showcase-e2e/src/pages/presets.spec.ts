@@ -90,7 +90,7 @@ test.describe('Presets Page', () => {
   }) => {
     await page.context().addCookies([
       {
-        name: 'sc-preset',
+        name: 'sc-style',
         value: 'nova',
         url: baseURL ?? 'http://localhost:4200',
       },

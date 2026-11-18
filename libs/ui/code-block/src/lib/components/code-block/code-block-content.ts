@@ -9,12 +9,12 @@ import {
   numberAttribute,
   signal,
 } from '@angular/core';
-import type { ScCodeBlockLineVariant } from '@semantic-components/presets';
-import { injectPreset } from '@semantic-components/ui';
+import type { ScCodeBlockLineVariant } from '@semantic-components/styles';
+import { injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { SC_CODE_HIGHLIGHTER, type ScCodeToken } from './code-highlighter';
 
-export type { ScCodeBlockLineVariant } from '@semantic-components/presets';
+export type { ScCodeBlockLineVariant } from '@semantic-components/styles';
 
 /**
  * The code (`[code]`), line by line — highlighted in its `language` when the
@@ -88,7 +88,7 @@ export class ScCodeBlockContent {
     return this.lines().map((_, i) => marks.get(i + 1) ?? 'default');
   });
 
-  private readonly styles = injectPreset().codeBlock;
+  private readonly styles = injectStyle().codeBlock;
   private readonly codeClass = this.styles.code;
   private readonly tokenClass = 'text-(--shiki-light) dark:text-(--shiki-dark)';
 

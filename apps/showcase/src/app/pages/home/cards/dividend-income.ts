@@ -29,7 +29,7 @@ import {
 } from '@semantic-components/ui/charts';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
-/** Holdings, each with its quarters as a small bar chart (the preset's corners). */
+/** Holdings, each with its quarters as a small bar chart (the style's corners). */
 @Component({
   selector: 'app-home-dividend-income',
   imports: [

@@ -5,7 +5,7 @@ import {
   inject,
   makeEnvironmentProviders,
 } from '@angular/core';
-import type { ScPreset } from '@semantic-components/presets';
+import type { ScStyle } from '@semantic-components/styles';
 import type { ScToasterConfig } from '../components/toast/toast-types';
 
 /**
@@ -21,8 +21,8 @@ import type { ScToasterConfig } from '../components/toast/toast-types';
  * ```
  */
 export interface ScConfig {
-  /** The components' classes: a preset from presets; nova by default. */
-  preset?: ScPreset;
+  /** The components' classes: a style from `@semantic-components/styles`; nova by default. */
+  style?: ScStyle;
   toaster?: ScToasterConfig;
 }
 
@@ -50,7 +50,7 @@ export function makeScFeature<Kind extends string>(
 /**
  * Sets up the libraries: their settings — each part falls back to its
  * component's defaults — and the features of their entries:
- * `provideSemanticComponents({ preset: nova }, withCodeHighlighter())`.
+ * `provideSemanticComponents({ style: nova }, withCodeHighlighter())`.
  * Given again lower down (a lazy route), its parts merge into those above.
  */
 export function provideSemanticComponents(

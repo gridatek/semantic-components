@@ -48,7 +48,7 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
         <h1 scTypeset>Badge</h1>
         <p class="text-muted-foreground">
           A short label — a status, a count, a tag — in the look of the
-          app&apos;s preset.
+          app&apos;s style.
         </p>
         <app-component-badges path="badge" />
       </div>
@@ -154,14 +154,14 @@ export default class BadgePage {
       name: 'variant',
       type: "'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link'",
       default: "'default'",
-      description: 'Its look, from the preset.',
+      description: 'Its look, from the style.',
     },
     {
       name: 'class',
       type: 'string',
       default: "''",
       description:
-        'Classes merged over the preset (cn: a later class wins) — your own colors.',
+        'Classes merged over the style (cn: a later class wins) — your own colors.',
     },
   ];
 }

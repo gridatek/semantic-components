@@ -1,6 +1,6 @@
 # Menu
 
-A menu of actions from a button: groups, checkbox and radio items, submenus, shortcuts. In the look of the app's preset (shadcn's Dropdown Menu), with Base UI's behaviour, on `@angular/aria`.
+A menu of actions from a button: groups, checkbox and radio items, submenus, shortcuts. In the look of the app's style (shadcn's Dropdown Menu), with Base UI's behaviour, on `@angular/aria`.
 
 ## Usage
 
@@ -78,4 +78,4 @@ On the trigger, Enter, Space or ArrowDown opens the menu on its first item, Arro
 
 `scMenuProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 
-Every part's classes are the preset's (`injectPreset().menu`): shadcn's Dropdown Menu, in each style. Items read `data-highlighted` (the highlighted one), `data-variant`, `data-inset`; checkbox and radio items `data-checked`.
+Every part's classes are the style's (`injectStyle().menu`): shadcn's Dropdown Menu, in each style. Items read `data-highlighted` (the highlighted one), `data-variant`, `data-inset`; checkbox and radio items `data-checked`.

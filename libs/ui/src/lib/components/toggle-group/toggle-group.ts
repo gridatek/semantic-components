@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import type { ScToggleVariants } from '../toggle/toggle';
 
 /** What the group needs from its items: to focus one, and know its value. */
@@ -54,7 +54,7 @@ export interface ScToggleGroupItemRef extends FocusableOption {
 })
 export class ScToggleGroup<T = unknown> implements FormValueControl<T[]> {
   private readonly directionality = inject(Directionality);
-  private readonly styles = injectPreset().toggleGroup;
+  private readonly styles = injectStyle().toggleGroup;
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 

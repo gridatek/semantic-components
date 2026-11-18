@@ -1,12 +1,12 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils';
 import { type ScButtonVariants } from '../button/button';
 
 /**
  * An action on an attachment (remove, download…), in its actions: the
- * preset's button, ghost and small. Write its icon and name it with the file
+ * style's button, ghost and small. Write its icon and name it with the file
  * ("Remove report.pdf").
  */
 @Directive({
@@ -18,7 +18,7 @@ import { type ScButtonVariants } from '../button/button';
   },
 })
 export class ScAttachmentAction {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** `button` by default, so it never submits a form round it. */

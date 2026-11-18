@@ -1,4 +1,4 @@
-import type { ScPopoverStyles } from '@semantic-components/presets';
+import type { ScPopoverStyles } from '@semantic-components/styles';
 
 // shadcn's popover in nova (shadcn-reference/presets/nova/popover.tsx). Its
 // open/close animation classes are Angular's animate.enter / animate.leave here.

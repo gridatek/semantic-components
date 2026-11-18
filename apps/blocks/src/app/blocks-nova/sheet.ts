@@ -1,4 +1,4 @@
-import type { ScSheetStyles } from '@semantic-components/presets';
+import type { ScSheetStyles } from '@semantic-components/styles';
 
 // shadcn's sheet in nova (shadcn-reference/presets/nova/sheet.tsx). Its
 // slide and fade are the panel's animate.enter / animate.leave (tw-animate):

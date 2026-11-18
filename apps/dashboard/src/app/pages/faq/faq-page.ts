@@ -40,7 +40,7 @@ const TOPICS: readonly {
       {
         id: 'style',
         q: $localize`Can I change the look?`,
-        a: $localize`Yes. The look comes from the preset and the theme: pick another preset, or change the colour tokens, and every screen follows. The pages write layout classes only.`,
+        a: $localize`Yes. The look comes from the style and the theme: pick another style, or change the colour tokens, and every screen follows. The pages write layout classes only.`,
       },
       {
         id: 'dark',

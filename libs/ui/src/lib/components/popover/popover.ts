@@ -1,10 +1,10 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScPopoverProvider } from './popover-provider';
 
 /**
- * The popover, in the preset's look: a dialog (`role="dialog"`) named by its
+ * The popover, in the style's look: a dialog (`role="dialog"`) named by its
  * title and described by its description. Focus moves into it as it opens
  * and back to the trigger as it closes; it animates in and out.
  */
@@ -26,7 +26,7 @@ import { ScPopoverProvider } from './popover-provider';
   },
 })
 export class ScPopover {
-  private readonly styles = injectPreset().popover;
+  private readonly styles = injectStyle().popover;
   private readonly popover = inject(ScPopoverProvider);
   readonly classInput = input<string>('', { alias: 'class' });
 

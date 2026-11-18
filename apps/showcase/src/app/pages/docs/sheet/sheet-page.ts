@@ -44,7 +44,7 @@ import { SideSheetDemoContainer } from './demos/side-sheet-demo-container';
         <h1 scTypeset>Sheet</h1>
         <p class="text-muted-foreground">
           A dialog at the edge of the screen, sliding in from its side. In the
-          look of the app&apos;s preset.
+          look of the app&apos;s style.
         </p>
         <app-component-badges path="sheet" />
       </div>
@@ -91,7 +91,7 @@ import { SideSheetDemoContainer } from './demos/side-sheet-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -187,7 +187,7 @@ export default class SheetPage {
       name: 'ScSheetClose',
       selector: 'button[scSheetClose]',
       description:
-        "Closes it: the preset's button (ghost, icon-sm); straight in the panel, in its corner. In the footer: variant and size of your choice.",
+        "Closes it: the style's button (ghost, icon-sm); straight in the panel, in its corner. In the footer: variant and size of your choice.",
     },
   ];
 }

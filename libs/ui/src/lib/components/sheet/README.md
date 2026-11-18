@@ -1,6 +1,6 @@
 # Sheet
 
-A dialog at the edge of the screen, sliding in from its side — shadcn's Sheet (Base UI's Dialog) in the look of the app's preset (`sheet` key: shadcn's in each of the eight styles).
+A dialog at the edge of the screen, sliding in from its side — shadcn's Sheet (Base UI's Dialog) in the look of the app's style (`sheet` key: shadcn's in each of the eight styles).
 
 ## Usage
 
@@ -39,7 +39,7 @@ A dialog at the edge of the screen, sliding in from its side — shadcn's Sheet 
 | `ScSheetTitle`       | `h2[scSheetTitle]`                            | Names it                                                                                                                                  |
 | `ScSheetDescription` | `p[scSheetDescription]`                       | Describes it                                                                                                                              |
 | `ScSheetFooter`      | `div[scSheetFooter]`                          | Its actions, at the bottom                                                                                                                |
-| `ScSheetClose`       | `button[scSheetClose]`                        | Closes it: the preset's button (ghost, icon-sm); straight in the panel, the panel puts it in its corner                                   |
+| `ScSheetClose`       | `button[scSheetClose]`                        | Closes it: the style's button (ghost, icon-sm); straight in the panel, the panel puts it in its corner                                    |
 
 `scSheetProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 

@@ -67,15 +67,15 @@ interface Row {
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <p class="text-muted-foreground">
-          Import the rules and your preset's variables in your global
-          stylesheet, after Tailwind:
+          Import the rules and your style's variables in your global stylesheet,
+          after Tailwind:
           <code scTypeset
-            >@import '@semantic-components/ui/styles/typeset.css';</code
+            >@import '@semantic-components/styles/typeset.css';</code
           >
           and
           <code scTypeset
             >@import
-            '@semantic-components/presets/nova/typeset-variables.css';</code
+            '@semantic-components/styles/nova/typeset-variables.css';</code
           >
           (your style's). Then put your content in a
           <code scTypeset>typeset</code> container.
@@ -123,8 +123,8 @@ interface Row {
           links. In a container, the directive changes nothing.
         </p>
         <p class="text-muted-foreground">
-          Either way, the variables tune it — on the container, on a preset
-          class of yours (<code scTypeset>.typeset-chat</code>) or on
+          Either way, the variables tune it — on the container, on a style class
+          of yours (<code scTypeset>.typeset-chat</code>) or on
           <code scTypeset>:root</code> for the whole app.
         </p>
       </section>
@@ -177,7 +177,7 @@ interface Row {
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             <strong class="text-foreground"
-              >The variables are the preset's</strong
+              >The variables are the style's</strong
             >, on <code scTypeset>:root</code> (shadcn sets them on
             <code scTypeset>.typeset</code> in its file): each style's own
             <code scTypeset>typeset-variables.css</code> — optional — or your

@@ -44,7 +44,7 @@ import { SidesPreviewCardDemoContainer } from './demos/sides-preview-card-demo-c
         <h1 scTypeset>Preview Card</h1>
         <p class="text-muted-foreground">
           A preview of a link&apos;s destination, shown on hover or keyboard
-          focus. In the look of the app&apos;s preset.
+          focus. In the look of the app&apos;s style.
         </p>
         <app-component-badges path="preview-card" />
       </div>
@@ -97,7 +97,7 @@ import { SidesPreviewCardDemoContainer } from './demos/sides-preview-card-demo-c
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -173,7 +173,7 @@ export default class PreviewCardPage {
       name: 'ScPreviewCardPortal, ScPreviewCard',
       selector: 'ng-template[…], div[scPreviewCard]',
       description:
-        "The content, rendered while open; the card in the preset's look, data-side as placed, animating in and out.",
+        "The content, rendered while open; the card in the style's look, data-side as placed, animating in and out.",
     },
   ];
 }

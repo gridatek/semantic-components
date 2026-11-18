@@ -1,4 +1,4 @@
-import type { ScRadioGroupStyles } from '@semantic-components/presets';
+import type { ScRadioGroupStyles } from '@semantic-components/styles';
 
 // shadcn's radio group in nova (shadcn-reference/presets/nova/radio-group.tsx): our radio
 // is a native input — :checked for Base UI's data-checked; its dot is the ::before.

@@ -52,7 +52,7 @@ import { VariantsMarkerDemoContainer } from './demos/variants-marker-demo-contai
         <h1 scTypeset>Marker</h1>
         <p class="text-muted-foreground">
           A note between messages: a status, a labeled divider, an action. In
-          the look of the app&apos;s preset.
+          the look of the app&apos;s style.
         </p>
         <app-component-badges path="marker" />
       </div>
@@ -108,7 +108,7 @@ import { VariantsMarkerDemoContainer } from './demos/variants-marker-demo-contai
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer

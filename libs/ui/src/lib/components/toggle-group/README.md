@@ -1,6 +1,6 @@
 # Toggle Group
 
-Toggles sharing one value: the pressed items' values, an array (Base UI's ToggleGroup). One pressed at a time — or none — or several (`multiple`). The group holds the value: a `[formField]` (Signal Forms types it by the group) or `[(value)]`; each item carries its `value` (any type). In the look of the app's preset: the `toggleGroup` key (`group`, `item`'s place in it), the items' look the `toggle` key.
+Toggles sharing one value: the pressed items' values, an array (Base UI's ToggleGroup). One pressed at a time — or none — or several (`multiple`). The group holds the value: a `[formField]` (Signal Forms types it by the group) or `[(value)]`; each item carries its `value` (any type). In the look of the app's style: the `toggleGroup` key (`group`, `item`'s place in it), the items' look the `toggle` key.
 
 ## Usage
 

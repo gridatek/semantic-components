@@ -56,7 +56,7 @@ Build it to the project's rules (`.claude/CLAUDE.md`, memory):
 
 - Parts are directives on the consumer's elements; one per file; `classInput` + `cn()` on each.
 - The consumer writes markup, text, icons and accessible names — no default strings; icon buttons named with `sr-only` text.
-- Button parts style themselves with the preset's button, `injectPreset().button(…)` (`docs/button-parts-styling.md`).
+- Button parts style themselves with the style's button, `injectStyle().button(…)` (`docs/button-parts-styling.md`).
 - Signals, `model()` for two-way state, `computed()` for the rest; Signal Forms only.
 - Web platform APIs as globals: `Temporal`, never `Date` (`project-future-browsers` memory).
 - Axe and WCAG AA from the start: keyboard, focus, names, contrast.
@@ -79,7 +79,7 @@ Wire it into the showcase:
   ```sh
   cd apps/showcase-e2e
   npx playwright test src/demos/foo-next/ src/pages/foo-next-page.spec.ts --project=demos --project=pages --reporter=line --retries=0 --workers=1
-  npx playwright test src/presets/foo-next.spec.ts --project=presets-nova --project=presets-lyra --reporter=line --retries=0 --workers=1
+  npx playwright test src/styles/foo-next.spec.ts --project=styles-nova --project=styles-lyra --reporter=line --retries=0 --workers=1
   ```
 
   For Firefox or WebKit: `ALL_BROWSERS=1 … --project=demos-firefox`.

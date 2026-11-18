@@ -12,7 +12,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScCommand } from './command';
 import { ScCommandGroup } from './command-group';
 
@@ -41,7 +41,7 @@ import { ScCommandGroup } from './command-group';
   },
 })
 export class ScCommandItem implements Highlightable {
-  private readonly styles = injectPreset().command;
+  private readonly styles = injectStyle().command;
   private readonly command = inject(ScCommand);
   /** The group it is in. */
   readonly group = inject(ScCommandGroup, { optional: true });

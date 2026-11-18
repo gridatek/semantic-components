@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { type ScButtonVariants } from '../button/button';
 import { ScColorPicker } from './color-picker';
@@ -20,7 +20,7 @@ import { ScColorPicker } from './color-picker';
   },
 })
 export class ScColorPickerEyeDropper {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly picker = inject(ScColorPicker);
 

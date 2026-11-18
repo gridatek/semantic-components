@@ -26,7 +26,7 @@ import { ScAttachment, ScAttachmentAction, ScAttachmentActions, ScAttachmentCont
 
 ## Components
 
-The look is the app's preset's (`attachment` key, shadcn's in each of the
+The look is the app's style's (`attachment` key, shadcn's in each of the
 eight styles). All directives accept a `class` input for merging additional
 CSS classes via the `cn` utility.
 
@@ -71,7 +71,7 @@ inline-end corner of the card.
 | Selector | `button[scAttachmentAction]`                               |
 | Inputs   | `variant` (`ghost`), `size` (`icon-xs`), `type` (`button`) |
 
-An action (remove, retry, cancel…): the preset's button. Name it after what it
+An action (remove, retry, cancel…): the style's button. Name it after what it
 does and to which file, in sr-only text ("Remove report.pdf").
 
 ### ScAttachmentTrigger

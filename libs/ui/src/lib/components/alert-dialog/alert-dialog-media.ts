@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: 'div[scAlertDialogMedia]',
@@ -10,7 +10,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScAlertDialogMedia {
-  private readonly styles = injectPreset().alertDialog;
+  private readonly styles = injectStyle().alertDialog;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

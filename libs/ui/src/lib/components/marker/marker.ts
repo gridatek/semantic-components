@@ -1,11 +1,11 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cva } from 'class-variance-authority';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 export type ScMarkerVariant = 'default' | 'separator' | 'border';
 
-// The same in every style: the variants. The base is the preset's.
+// The same in every style: the variants. The base is the style's.
 const variants = cva('', {
   variants: {
     variant: {
@@ -32,7 +32,7 @@ const variants = cva('', {
   },
 })
 export class ScMarker {
-  private readonly styles = injectPreset().marker;
+  private readonly styles = injectStyle().marker;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScMarkerVariant>('default');
 

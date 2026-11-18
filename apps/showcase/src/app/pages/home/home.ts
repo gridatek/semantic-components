@@ -24,7 +24,7 @@ import { HomeCards } from './cards/home-cards';
       </h1>
       <p class="text-foreground max-w-4xl text-base text-balance sm:text-lg">
         Accessible components for modern Angular, built with Tailwind CSS on
-        Angular Aria and the CDK: parts you compose, in the look of your preset.
+        Angular Aria and the CDK: parts you compose, in the look of your style.
       </p>
       <div class="flex w-full items-center justify-center gap-2 pt-2">
         <a scLink variant="button" routerLink="/docs/getting-started">

@@ -1,11 +1,11 @@
 import { Directive, computed, input } from '@angular/core';
-import type { ScItemSize, ScItemVariant } from '@semantic-components/presets';
+import type { ScItemSize, ScItemVariant } from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * A row of content — media, a title and description, actions — in the
- * preset's look. On a link or a button the whole item does what it says,
+ * style's look. On a link or a button the whole item does what it says,
  * named by its text.
  */
 @Directive({
@@ -18,7 +18,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScItem {
-  private readonly styles = injectPreset().item;
+  private readonly styles = injectStyle().item;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScItemVariant>('default');
   readonly size = input<ScItemSize>('default');

@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: '[scCardTitle]',
@@ -9,7 +9,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScCardTitle {
-  private readonly styles = injectPreset().card;
+  private readonly styles = injectStyle().card;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

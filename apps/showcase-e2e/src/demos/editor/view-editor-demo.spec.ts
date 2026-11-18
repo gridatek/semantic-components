@@ -168,7 +168,7 @@ test.describe('View Editor Demo', () => {
     ).not.toBeChecked();
   });
 
-  test('both documents are Typeset containers: its headings, the preset’s corners', async ({
+  test('both documents are Typeset containers: its headings, the style’s corners', async ({
     page,
   }) => {
     for (const document of [editor(page), view(page)]) {
@@ -195,7 +195,7 @@ test.describe('View Editor Demo', () => {
       expect(look.container).toBe(true);
       expect(look.weight).toBe('600');
       expect(look.ratio).toBeCloseTo(1.75, 2);
-      // A code block's corners: the preset's (typeset-variables.css).
+      // A code block's corners: the style's (typeset-variables.css).
       expect(look.pre).toBe(look.corners);
     }
   });

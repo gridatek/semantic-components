@@ -23,7 +23,7 @@ import {
   ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
 
-/** Usage by hour as a bar chart (the preset's corners), then two figures. */
+/** Usage by hour as a bar chart (the style's corners), then two figures. */
 @Component({
   selector: 'app-home-power-usage',
   imports: [

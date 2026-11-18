@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScSidebarState } from './sidebar-state';
 
 /**
@@ -25,7 +25,7 @@ import { ScSidebarState } from './sidebar-state';
   },
 })
 export class ScSidebarMenuSubButton {
-  private readonly styles = injectPreset().sidebar;
+  private readonly styles = injectStyle().sidebar;
   private readonly state = inject(ScSidebarState, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });

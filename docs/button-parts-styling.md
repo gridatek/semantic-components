@@ -6,7 +6,7 @@ Status: **decided** (2026-10-16) — option A: a part on a `button` gives it its
 
 A part on a `button` (`scPdfViewerZoomIn`, `scTransferListMoveToTarget`…):
 
-1. takes its look from the preset's button (`injectPreset().button(…)`, in a field) (a toggle: `injectPreset().toggle(…)`), never from a class list of its own that copies a button;
+1. takes its look from the style's button (`injectStyle().button(…)`, in a field) (a toggle: `injectStyle().toggle(…)`), never from a class list of its own that copies a button;
 2. has `variant` and `size` inputs, with defaults that suit where it sits — the consumer writes nothing to get the right look, and picks another with the same words as `scButton` (`variant="outline" size="icon-sm"`);
 3. adds only the classes that are its own: position (`absolute end-1 top-1`), visibility, a colour in its context;
 4. sets its own `type="button"` and `[disabled]` — it doesn't need `scButton`.
@@ -56,14 +56,14 @@ Every one with a close part makes it **behaviour only**, on any button: Base UI 
 
 1. **Two parts** — `scDialogClose` behaviour only, `scDialogCloseButton` the styled ✕. Turned down: "button" in the name.
 2. **`scDialogClose` stays the ✕; another verb for the rest** (`scDialogDismiss`). Turned down: close and dismiss are synonyms, and the other libraries' "close" is the behaviour.
-3. **One part, behaviour only; the container places the ✕** — chosen. The ✕ is the consumer's button (`scButton variant="ghost" size="icon-sm"`); a close that is a **direct child** of the dialog goes in its corner, from the preset (`[&>[data-slot=dialog-close]]:…` classes, on the dialog). A close anywhere else (the footer) stays where it is.
+3. **One part, behaviour only; the container places the ✕** — chosen. The ✕ is the consumer's button (`scButton variant="ghost" size="icon-sm"`); a close that is a **direct child** of the dialog goes in its corner, from the style (`[&>[data-slot=dialog-close]]:…` classes, on the dialog). A close anywhere else (the footer) stays where it is.
 4. **The same, but asked for** — `<button scDialogClose corner>`. Turned down: the place in the markup says it already (option 3 was preferred).
 
 Done the same way for the toast (`scToastClose`: the toast places a direct-child close, faint, shown on hover or focus).
 
 ### Revised (2026-11-05): the close styles itself again, the dialog still places it
 
-The user changed their mind: `scDialogClose` is the preset's button again (`variant`, `size` inputs; ghost / icon-sm by default, for the ✕), and keeps `data-slot="dialog-close"`: the dialog still puts a direct-child close in its corner. A footer close sets its look: `<button scDialogClose variant="outline" size="default">Cancel</button>`, no `scButton`. So the problem above (a Cancel pulled into the corner) stays solved by the place, not by dropping the look. The same for `scToastClose` (ghost / icon-xs, placed by the toast) and `scDrawerClose` (outline / default: shadcn's Cancel; the drawer places nothing).
+The user changed their mind: `scDialogClose` is the style's button again (`variant`, `size` inputs; ghost / icon-sm by default, for the ✕), and keeps `data-slot="dialog-close"`: the dialog still puts a direct-child close in its corner. A footer close sets its look: `<button scDialogClose variant="outline" size="default">Cancel</button>`, no `scButton`. So the problem above (a Cancel pulled into the corner) stays solved by the place, not by dropping the look. The same for `scToastClose` (ghost / icon-xs, placed by the toast) and `scDrawerClose` (outline / default: shadcn's Cancel; the drawer places nothing).
 
 ### What it changes in the rule
 

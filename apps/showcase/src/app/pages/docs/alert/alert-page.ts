@@ -51,7 +51,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
         <p class="text-muted-foreground">
           A callout for something to notice — a success, a warning, an error —
           with an icon, a title, a description and an action. In the look of the
-          app&apos;s preset.
+          app&apos;s style.
         </p>
         <app-component-badges path="alert" />
       </div>
@@ -143,7 +143,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer

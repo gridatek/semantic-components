@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** The drawer's actions, at its bottom. */
 @Directive({
@@ -8,7 +8,7 @@ import { injectPreset } from '../../config/preset';
   host: { '[class]': 'class()' },
 })
 export class ScDrawerFooter {
-  private readonly styles = injectPreset().drawer;
+  private readonly styles = injectStyle().drawer;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

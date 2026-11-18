@@ -54,7 +54,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
         <h1 scTypeset>Switch</h1>
         <p class="text-muted-foreground">
           A native checkbox shown as a switch, drawn by itself, in the look of
-          the app&apos;s preset.
+          the app&apos;s style.
         </p>
         <app-component-badges path="switch" />
       </div>
@@ -113,7 +113,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -190,7 +190,7 @@ export default class SwitchPage {
       name: 'ScSwitch',
       selector: 'input[scSwitch]',
       description:
-        "A native checkbox with role=\"switch\", its track and thumb drawn by itself in the preset's look: checked (two-way, or a [formField]); size ('default', 'sm'); invalid once touched.",
+        "A native checkbox with role=\"switch\", its track and thumb drawn by itself in the style's look: checked (two-way, or a [formField]); size ('default', 'sm'); invalid once touched.",
     },
   ];
 }

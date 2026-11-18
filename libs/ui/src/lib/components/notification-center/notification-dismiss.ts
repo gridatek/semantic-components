@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { type ScButtonVariants } from '../button/button';
 import { SC_NOTIFICATION } from './notification';
@@ -17,7 +17,7 @@ import { SC_NOTIFICATION_CENTER } from './notification-center';
   },
 })
 export class ScNotificationDismiss {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');

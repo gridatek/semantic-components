@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScSheetProvider } from './sheet-provider';
 
 /** The sheet's title: it names the sheet. */
@@ -13,7 +13,7 @@ import { ScSheetProvider } from './sheet-provider';
   },
 })
 export class ScSheetTitle {
-  private readonly styles = injectPreset().sheet;
+  private readonly styles = injectStyle().sheet;
   readonly classInput = input<string>('', { alias: 'class' });
   private readonly id = inject(_IdGenerator).getId('sc-sheet-title-');
 

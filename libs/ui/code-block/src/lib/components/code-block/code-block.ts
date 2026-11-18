@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
-import type { ScCodeBlockVariant } from '@semantic-components/presets';
-import { injectPreset } from '@semantic-components/ui';
+import type { ScCodeBlockVariant } from '@semantic-components/styles';
+import { injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 
 export type ScCodeBlockVariants = { variant?: ScCodeBlockVariant | null };
@@ -24,7 +24,7 @@ export class ScCodeBlock {
   readonly variant = input<ScCodeBlockVariants['variant']>('default');
   readonly size = input<'default' | 'sm'>('default');
 
-  private readonly styles = injectPreset().codeBlock;
+  private readonly styles = injectStyle().codeBlock;
 
   private readonly class = computed(() => {
     const root = this.styles.root({ variant: this.variant() });
@@ -33,7 +33,7 @@ export class ScCodeBlock {
 }
 
 /**
- * A code editor in the block (the Code Editor): the preset's focus look for
+ * A code editor in the block (the Code Editor): the style's focus look for
  * the code, given to the editor while it has focus; a ring when invalid.
  */
 function editorStates(root: string): string {

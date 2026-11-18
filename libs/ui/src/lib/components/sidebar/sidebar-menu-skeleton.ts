@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScSkeleton } from '../skeleton';
 
 let count = 0;
@@ -32,7 +32,7 @@ let count = 0;
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSidebarMenuSkeleton {
-  private readonly styles = injectPreset().sidebar;
+  private readonly styles = injectStyle().sidebar;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly showIcon = input(false, { transform: booleanAttribute });
 

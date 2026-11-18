@@ -1,7 +1,7 @@
 import { Toolbar } from '@angular/aria/toolbar';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * A toolbar: Angular Aria's Toolbar — one Tab stop, the arrow keys move
@@ -24,7 +24,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScToolbar {
-  private readonly frame = injectPreset().frame;
+  private readonly frame = injectStyle().frame;
   private readonly toolbar = inject(Toolbar);
 
   readonly classInput = input<string>('', { alias: 'class' });

@@ -221,7 +221,7 @@ export class ProfilePage {
   private readonly posts = signal<readonly Post[]>([
     {
       id: 2,
-      text: 'New dashboard screens are up — one look across forty pages, carried by the preset.',
+      text: 'New dashboard screens are up — one look across forty pages, carried by the style.',
       when: 'Apr 27, 2026',
       image: 'images/image-ai/leptop2.jpg',
       likes: 128,

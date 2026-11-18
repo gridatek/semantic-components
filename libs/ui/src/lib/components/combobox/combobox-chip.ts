@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** A chip: one of the selected values (`value`), its label written inside. */
 @Directive({
@@ -11,7 +11,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScComboboxChip<T = unknown> {
-  private readonly styles = injectPreset().combobox;
+  private readonly styles = injectStyle().combobox;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The value it shows: what its remove button removes. */

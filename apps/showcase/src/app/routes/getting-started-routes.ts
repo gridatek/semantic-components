@@ -29,15 +29,15 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () => import('../pages/getting-started/ui-page'),
       },
       {
-        path: 'presets',
-        title: 'Presets - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/presets-page'),
+        path: 'styles',
+        title: 'Styles - Semantic Components',
+        loadComponent: () => import('../pages/getting-started/styles-page'),
       },
       {
-        path: 'custom-preset',
-        title: 'Custom preset - Semantic Components',
+        path: 'custom-style',
+        title: 'Custom style - Semantic Components',
         loadComponent: () =>
-          import('../pages/getting-started/custom-preset-page'),
+          import('../pages/getting-started/custom-style-page'),
       },
       {
         path: 'i18n',

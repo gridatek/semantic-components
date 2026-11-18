@@ -1,6 +1,6 @@
 # Navigation Menu
 
-Site navigation with panels of links: shadcn's Navigation Menu (its look in each style, the `navigationMenu` preset key), Base UI's parts and behaviour, built as a WAI-ARIA disclosure navigation (not a `menu`).
+Site navigation with panels of links: shadcn's Navigation Menu (its look in each style, the `navigationMenu` style key), Base UI's parts and behaviour, built as a WAI-ARIA disclosure navigation (not a `menu`).
 
 ## Usage
 
@@ -32,10 +32,10 @@ Site navigation with panels of links: shadcn's Navigation Menu (its look in each
 | `ScNavigationMenu`            | `nav[scNavigationMenu]`            | `[(value)]` (the open item, or `null`), `delay` / `closeDelay` (50 ms), `viewport` (one shared box, default), `alignment` (`start` default, `center`, `end`; logical: `start` is the reading start, flipped right to left; no `left` / `right`). Draws the shared box (a component). |
 | `ScNavigationMenuList`        | `ul[scNavigationMenuList]`         | The top-level row.                                                                                                                                                                                                                                                                   |
 | `ScNavigationMenuItem`        | `li[scNavigationMenuItem]`         | `value`; a link, or a trigger and its panel. Registers with the menu.                                                                                                                                                                                                                |
-| `ScNavigationMenuTrigger`     | `button[scNavigationMenuTrigger]`  | Hover or press; `aria-expanded`, `aria-controls`; the preset's `trigger`.                                                                                                                                                                                                            |
+| `ScNavigationMenuTrigger`     | `button[scNavigationMenuTrigger]`  | Hover or press; `aria-expanded`, `aria-controls`; the style's `trigger`.                                                                                                                                                                                                             |
 | `ScNavigationMenuTriggerIcon` | `svg[scNavigationMenuTriggerIcon]` | Your chevron, turned over while open, `aria-hidden`.                                                                                                                                                                                                                                 |
-| `ScNavigationMenuContent`     | `div[scNavigationMenuContent]`     | The panel, inside its item: the preset's `content` padding (and `popup` without the shared box); lined up by `alignment`; invisible while closed.                                                                                                                                    |
-| `ScNavigationMenuLink`        | `a[scNavigationMenuLink]`          | `active` (`aria-current="page"`), `closeOnClick` (true). Top level: the trigger's look; in a panel: the preset's `link`.                                                                                                                                                             |
+| `ScNavigationMenuContent`     | `div[scNavigationMenuContent]`     | The panel, inside its item: the style's `content` padding (and `popup` without the shared box); lined up by `alignment`; invisible while closed.                                                                                                                                     |
+| `ScNavigationMenuLink`        | `a[scNavigationMenuLink]`          | `active` (`aria-current="page"`), `closeOnClick` (true). Top level: the trigger's look; in a panel: the style's `link`.                                                                                                                                                              |
 
 ## Behaviour
 
@@ -45,7 +45,7 @@ Site navigation with panels of links: shadcn's Navigation Menu (its look in each
 - **The shared box** follows the open panel's place and size; panels slide in from the side you came from.
 - **Links close the menu** by default (`closeOnClick`; Base UI's default is off): a page shown without reloading would otherwise keep it open.
 
-## Preset
+## Style
 
 `navigationMenu`: `trigger` (Base UI's open state as `aria-expanded:`), `link` (shadcn's in-panel classes resolved), `content` (padding), `popup` (corners, background, shadow, ring) — from `shadcn-reference/presets/<style>/navigation-menu.tsx`.
 

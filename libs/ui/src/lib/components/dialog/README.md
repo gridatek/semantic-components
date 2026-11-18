@@ -1,6 +1,6 @@
 # Dialog
 
-A window over the page, which waits until it is closed: the page behind it can't be reached. In the look of the app's preset (shadcn's Dialog).
+A window over the page, which waits until it is closed: the page behind it can't be reached. In the look of the app's style (shadcn's Dialog).
 
 ## Usage
 
@@ -29,13 +29,13 @@ A window over the page, which waits until it is closed: the page behind it can't
 
 ## Closing
 
-- `scDialogClose` closes it, on any button: the ✕ straight in the dialog (the dialog puts it in its corner), Cancel or Done in the footer. It styles itself — the preset's button, `variant` and `size` (ghost, icon-sm: the ✕); in the footer `variant="outline" size="default"` — so it takes no `scButton`.
+- `scDialogClose` closes it, on any button: the ✕ straight in the dialog (the dialog puts it in its corner), Cancel or Done in the footer. It styles itself — the style's button, `variant` and `size` (ghost, icon-sm: the ✕); in the footer `variant="outline" size="default"` — so it takes no `scButton`.
 - When your code runs first (Save checks and sends the form), the button is yours and closes the dialog through `[(open)]` when it is done, or keeps it open to show what is wrong.
 - Escape and a click outside close it too. Focus stays in it while it is open, starts on its first focusable element, and goes back to what opened it.
 
 ## Width
 
-The dialog is as wide as the preset allows (`sm:max-w-sm` or `sm:max-w-md`, depending on the style; the screen less 2rem on a phone), whatever its content — as shadcn's. Its own `w-screen` gives it that width: the CDK's overlay pane is only as wide as its content, so a `w-full` has nothing to fill, and a dialog with short content (a command, a one-line confirm) stayed narrow and collapsed while zooming in.
+The dialog is as wide as the style allows (`sm:max-w-sm` or `sm:max-w-md`, depending on the style; the screen less 2rem on a phone), whatever its content — as shadcn's. Its own `w-screen` gives it that width: the CDK's overlay pane is only as wide as its content, so a `w-full` has nothing to fill, and a dialog with short content (a command, a one-line confirm) stayed narrow and collapsed while zooming in.
 
 Narrow it with a `max-w` of your own (`class="sm:max-w-md"`), or set a width (`class="w-lg"`): your classes win.
 
@@ -46,10 +46,10 @@ Narrow it with a `max-w` of your own (`class="sm:max-w-md"`), or set a width (`c
 | `ScDialogProvider`                     | `div[scDialogProvider], span[scDialogProvider]` | `open` (`[(open)]`), `class` — renders the dialog centred over the backdrop                                                              |
 | `ScDialogTrigger`                      | `button[scDialogTrigger]`                       | `class` — opens it; behaviour only                                                                                                       |
 | `ScDialogPortal`, `ScDialog`           | `ng-template[scDialogPortal]`, `div[scDialog]`  | `class` — role `dialog`, modal; named by its title, described by its description; takes the direction and language of where it is opened |
-| `ScDialogClose`                        | `button[scDialogClose]`                         | `class`, `variant` (`ghost`), `size` (`icon-sm`), `type` — closes it; the preset's button                                                |
+| `ScDialogClose`                        | `button[scDialogClose]`                         | `class`, `variant` (`ghost`), `size` (`icon-sm`), `type` — closes it; the style's button                                                 |
 | `ScDialogHeader`, `ScDialogFooter`     | `div[…]`                                        | `class`                                                                                                                                  |
 | `ScDialogTitle`, `ScDialogDescription` | `h2[scDialogTitle]`, `p[scDialogDescription]`   | `class`                                                                                                                                  |
 
 `scDialogProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 
-Every part's classes are the preset's (`injectPreset().dialog`: `content`, `close` — the ✕'s place and fill —, `header`, `footer`, `title`, `description`): shadcn's Dialog, in each style. The backdrop is the shared `backdrop` key.
+Every part's classes are the style's (`injectStyle().dialog`: `content`, `close` — the ✕'s place and fill —, `header`, `footer`, `title`, `description`): shadcn's Dialog, in each style. The backdrop is the shared `backdrop` key.

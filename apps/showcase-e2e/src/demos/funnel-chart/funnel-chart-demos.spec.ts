@@ -98,7 +98,7 @@ test("Corners: the stages' the style's — square in Lyra, rounded in Nova", asy
   const shapeIn = async (preset: string, name: string) => {
     await page.context().addCookies([
       {
-        name: 'sc-preset',
+        name: 'sc-style',
         value: preset,
         url: baseURL ?? 'http://localhost:4200',
       },

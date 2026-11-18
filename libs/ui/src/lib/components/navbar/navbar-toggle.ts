@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { ScNavbar } from './navbar';
 
@@ -39,7 +39,7 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
   },
 })
 export class ScNavbarToggle {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
   private readonly navbar = inject(ScNavbar);
 
   readonly classInput = input<string>('', { alias: 'class' });

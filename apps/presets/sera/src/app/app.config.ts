@@ -7,7 +7,7 @@ import {
   withComponentInputBinding,
   withInMemoryScrolling,
 } from '@angular/router';
-import { sera } from '@semantic-components/presets/sera';
+import { sera } from '@semantic-components/styles/sera';
 import { provideSemanticComponents } from '@semantic-components/ui';
 import { appRoutes } from './app-routes';
 
@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     // The Sera preset, the whole app's: chosen at start, as in any app.
-    provideSemanticComponents({ preset: sera }),
+    provideSemanticComponents({ style: sera }),
     provideRouter(
       appRoutes,
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),

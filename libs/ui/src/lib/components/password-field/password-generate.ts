@@ -7,7 +7,7 @@ import {
   numberAttribute,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils';
 import type { ScButtonVariants } from '../button/button';
 import { ScPasswordField } from './password-field';
@@ -48,7 +48,7 @@ function randomBelow(size: number): number {
   },
 })
 export class ScPasswordGenerate {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
   private readonly password = inject(ScPasswordField);
 
   readonly classInput = input<string>('', { alias: 'class' });

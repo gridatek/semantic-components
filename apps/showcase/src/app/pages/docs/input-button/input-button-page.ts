@@ -42,7 +42,7 @@ import { RtlInputButtonDemoContainer } from './demos/rtl-input-button-demo-conta
         <h1 scTypeset>Input Button</h1>
         <p class="text-muted-foreground">
           A button that looks like a text field, to open a search or a command
-          palette. In the look of the app&apos;s preset&apos;s input.
+          palette. In the look of the app&apos;s style&apos;s input.
         </p>
         <app-component-badges path="input-button" />
       </div>
@@ -87,7 +87,7 @@ import { RtlInputButtonDemoContainer } from './demos/rtl-input-button-demo-conta
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -145,7 +145,7 @@ export default class InputButtonPage {
       name: 'ScInputButton',
       selector: 'button[scInputButton]',
       description:
-        'A button in the preset\'s input look: muted text, its icon sized; type="button".',
+        'A button in the style\'s input look: muted text, its icon sized; type="button".',
     },
   ];
 }

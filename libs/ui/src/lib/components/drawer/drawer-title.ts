@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScDrawerProvider } from './drawer-provider';
 
 /** The drawer's title: it names the drawer. */
@@ -13,7 +13,7 @@ import { ScDrawerProvider } from './drawer-provider';
   },
 })
 export class ScDrawerTitle {
-  private readonly styles = injectPreset().drawer;
+  private readonly styles = injectStyle().drawer;
   readonly classInput = input<string>('', { alias: 'class' });
   private readonly id = inject(_IdGenerator).getId('sc-drawer-title-');
 

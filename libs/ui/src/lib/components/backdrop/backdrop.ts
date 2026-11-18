@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * A dimmed, blurred layer behind an overlay. It fades in when shown and out
@@ -17,8 +17,8 @@ import { injectPreset } from '../../config/preset';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScBackdrop {
-  // Its shade and blur: the preset's, the same behind every overlay.
-  private readonly backdrop = injectPreset().backdrop;
+  // Its shade and blur: the style's, the same behind every overlay.
+  private readonly backdrop = injectStyle().backdrop;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

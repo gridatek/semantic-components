@@ -145,12 +145,12 @@ Styles are written in Tailwind CSS and managed with [class-variance-authority](h
 - Predictable, overridable class names
 - Consistent variants (`default`, `outline`, `ghost`, `destructive`, `link`) across all components
 
-And shadcn's eight styles are presets — nova, vega, maia, lyra, mira, luma, sera, rhea — chosen once, when the app starts. A preset holds the classes of the components whose look changes from style to style: the alert, the alert dialog, the avatar group's count, the backdrop behind every overlay, the breadcrumb, the badge (the tags input's tags too), the button (every part that looks like one, a link included), the card and the frame it shares with any framed box, the code block, the control group (shadcn's Button Group), with its text, the input (every part that looks like one: password, date, number, phone), the input group with its addon, button and text, the menu — and the same parts in a menubar or a context menu, in their own looks —, the select (its trigger, popup and items), the pagination (its list, ellipsis and the padding by its arrows), the table (its text size, cells and caption) and the tabs, so far.
+And shadcn's eight styles — nova, vega, maia, lyra, mira, luma, sera, rhea — are ours too, chosen once, when the app starts. A style holds the classes of the components whose look changes from style to style: the alert, the alert dialog, the avatar group's count, the backdrop behind every overlay, the breadcrumb, the badge (the tags input's tags too), the button (every part that looks like one, a link included), the card and the frame it shares with any framed box, the code block, the control group (shadcn's Button Group), with its text, the input (every part that looks like one: password, date, number, phone), the input group with its addon, button and text, the menu — and the same parts in a menubar or a context menu, in their own looks —, the select (its trigger, popup and items), the pagination (its list, ellipsis and the padding by its arrows), the table (its text size, cells and caption) and the tabs, so far.
 
 ```typescript
-import { nova } from '@semantic-components/presets/nova';
+import { nova } from '@semantic-components/styles/nova';
 
-provideSemanticComponents({ preset: nova });
+provideSemanticComponents({ style: nova });
 ```
 
 What an entry needs set up comes with it, as a feature of the same call — the Angular way, as `provideRouter(routes, withComponentInputBinding())`: one place to set the library up, and an app that doesn't use an entry doesn't load it.
@@ -159,11 +159,11 @@ What an entry needs set up comes with it, as a feature of the same call — the 
 import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 import { withI18n } from '@semantic-components/ui/i18n';
 
-provideSemanticComponents({ preset: nova }, withCodeHighlighter(), withI18n(I18N));
+provideSemanticComponents({ style: nova }, withCodeHighlighter(), withI18n(I18N));
 ```
 
 ```typescript
-// libs/presets/nova/src/button.ts — shadcn's nova, as a cva
+// libs/styles/nova/src/button.ts — shadcn's nova, as a cva
 export const button = cva('group/button inline-flex shrink-0 items-center justify-center rounded-lg border ...', {
   variants: {
     variant: {
@@ -179,7 +179,7 @@ export const button = cva('group/button inline-flex shrink-0 items-center justif
 });
 ```
 
-A part reads its preset's classes (`injectPreset().button({ variant, size })`, `injectPreset().controlGroup({ orientation })`); your `class` is merged over them.
+A part reads its style's classes (`injectStyle().button({ variant, size })`, `injectStyle().controlGroup({ orientation })`); your `class` is merged over them.
 
 ### Built on Solid Foundations
 
@@ -214,7 +214,7 @@ This library makes deliberate choices that prioritize the future of Angular over
 - **OnPush only.** All components use OnPush change detection, the Angular v22+ default.
 - **Signal-based forms only.** Form integrations are designed around signals, not `NgModel` or reactive forms.
 - **No NgModules.** Everything is standalone. There are no module exports, no `forRoot()`, no compatibility shims for module-based apps.
-- **Input names that aren't HTML attributes.** A part is a directive on your own element, so a static input stays in the DOM as an attribute. Where shadcn and Base UI say `align`, ours is `alignment` (Menu, Tooltip, Popover, Preview Card, Navigation Menu, Bubble, Message, Timeline): `align` is an old HTML attribute that browsers read as text alignment on a `div`. Its values are logical only (`start`, `center`, `end`): `start` is the reading start, flipped right to left — no `left` / `right`. Positioning pairs it with `side` (which edge): `inline-start` / `inline-end` (logical, the words never shared with `alignment`), `top`, `bottom`, and `left` / `right` for who wants a fixed side; the offsets are `sideOffset` and `alignmentOffset`. The Input Group addon takes a `side` too (shadcn's `align`): `inline-start`, `inline-end`, `top`, `bottom`. Names say where a part is: a section between a header and a footer is a Body (`scCardBody`, shadcn's CardContent), and `…Content` is a component's whole content; some of its children grouped beside another part are a `…ContentWrapper` (`scFieldContentWrapper`: a field's title and description beside its checkbox, shadcn's FieldContent). One field for every control: `scField orientation="horizontal"` lays out a checkbox, a radio or a switch beside its text (no separate checkbox, radio or switch field), as shadcn's `Field` does. An axis is always `orientation` (`horizontal`, `vertical`), and `direction` only the way something moves (a marquee's `left`, a speed dial's `up`): the Number Field's scrub area takes `orientation` where Base UI says `direction`. The charts (`ui/charts`) are the exception: they keep Recharts' names so its examples port over, and a chart's axis stays Recharts' `layout` (`horizontal`, `vertical`). A bar says which of its corners are rounded (`corners`: `all`, `end`, `base`, `none`), not by how much: that is the style's, `--sc-chart-bar-radius` from the preset, tied to the theme's `--radius` — square in lyra and sera, as shadcn's examples draw them. The tooltip floats in a CDK overlay as our other popups do — a provider, a portal, the tooltip — beside the pointer where Recharts puts it. Their tooltip and legend are parts you fill from their state (`label()`, `payload()`: Recharts' names), as Recharts' `content` — no `hideLabel` or formatter inputs: leave a part out, write the value as you want it. A popup's `data-side` is the side it landed on, physical; the Sidebar's is the word given, so its CSS is right in both directions before any script.
+- **Input names that aren't HTML attributes.** A part is a directive on your own element, so a static input stays in the DOM as an attribute. Where shadcn and Base UI say `align`, ours is `alignment` (Menu, Tooltip, Popover, Preview Card, Navigation Menu, Bubble, Message, Timeline): `align` is an old HTML attribute that browsers read as text alignment on a `div`. Its values are logical only (`start`, `center`, `end`): `start` is the reading start, flipped right to left — no `left` / `right`. Positioning pairs it with `side` (which edge): `inline-start` / `inline-end` (logical, the words never shared with `alignment`), `top`, `bottom`, and `left` / `right` for who wants a fixed side; the offsets are `sideOffset` and `alignmentOffset`. The Input Group addon takes a `side` too (shadcn's `align`): `inline-start`, `inline-end`, `top`, `bottom`. Names say where a part is: a section between a header and a footer is a Body (`scCardBody`, shadcn's CardContent), and `…Content` is a component's whole content; some of its children grouped beside another part are a `…ContentWrapper` (`scFieldContentWrapper`: a field's title and description beside its checkbox, shadcn's FieldContent). One field for every control: `scField orientation="horizontal"` lays out a checkbox, a radio or a switch beside its text (no separate checkbox, radio or switch field), as shadcn's `Field` does. An axis is always `orientation` (`horizontal`, `vertical`), and `direction` only the way something moves (a marquee's `left`, a speed dial's `up`): the Number Field's scrub area takes `orientation` where Base UI says `direction`. The charts (`ui/charts`) are the exception: they keep Recharts' names so its examples port over, and a chart's axis stays Recharts' `layout` (`horizontal`, `vertical`). A bar says which of its corners are rounded (`corners`: `all`, `end`, `base`, `none`), not by how much: that is the style's, `--sc-chart-bar-radius` from the style, tied to the theme's `--radius` — square in lyra and sera, as shadcn's examples draw them. The tooltip floats in a CDK overlay as our other popups do — a provider, a portal, the tooltip — beside the pointer where Recharts puts it. Their tooltip and legend are parts you fill from their state (`label()`, `payload()`: Recharts' names), as Recharts' `content` — no `hideLabel` or formatter inputs: leave a part out, write the value as you want it. A popup's `data-side` is the side it landed on, physical; the Sidebar's is the word given, so its CSS is right in both directions before any script.
 - **Direction and locale from Angular, not inputs.** Where react-day-picker and others take a `locale` prop, our parts read Angular's `LOCALE_ID` (dates, numbers, the week's first day, Intl's words), as they read the CDK's `Directionality` for right to left. A section in another language provides both on its component — `imports: [Dir]` with `dir="rtl"`, `providers: [{ provide: LOCALE_ID, useValue: 'ar' }]` — and every part inside follows, overlays included. No part has a `locale` input.
 
 ---
@@ -261,9 +261,9 @@ npm install @semantic-components/ui
 Add the styles to your global stylesheet:
 
 ```css
-@import '@semantic-components/ui/styles/reduced-motion.css';
-@import '@semantic-components/ui/styles/typeset.css';
-@import '@semantic-components/presets/nova/typeset-variables.css';
+@import '@semantic-components/styles/reduced-motion.css';
+@import '@semantic-components/styles/typeset.css';
+@import '@semantic-components/styles/nova/typeset-variables.css';
 @source '../node_modules/@semantic-components/ui';
 ```
 

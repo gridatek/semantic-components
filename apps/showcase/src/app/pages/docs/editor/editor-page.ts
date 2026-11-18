@@ -627,9 +627,9 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
 })
 export default class EditorPage {
   private readonly stylesCode = [
-    '@import "@semantic-components/ui/styles/typeset.css";',
-    '@import "@semantic-components/presets/nova/typeset-variables.css";',
-    '@import "@semantic-components/presets/nova/editor.css";',
+    '@import "@semantic-components/styles/typeset.css";',
+    '@import "@semantic-components/styles/nova/typeset-variables.css";',
+    '@import "@semantic-components/styles/nova/editor.css";',
   ].join('\n');
 
   private readonly featuresCode = `import { Component, signal } from '@angular/core';

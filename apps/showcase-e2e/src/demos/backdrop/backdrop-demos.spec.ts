@@ -32,7 +32,7 @@ test('Usage: fades in when shown, out when it goes, then is removed', async ({
   await expect(backdrop).toHaveCount(0);
 });
 
-test('Custom Shade: your classes over the preset’s', async ({ page }) => {
+test('Custom Shade: your classes over the style’s', async ({ page }) => {
   await page.goto('/demos/backdrop/custom-backdrop-demo');
   await page.getByRole('button', { name: 'Tinted backdrop' }).click();
   const backdrop = page.locator('[scBackdrop]');

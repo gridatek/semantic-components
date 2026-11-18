@@ -8,7 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_ACCORDION_ITEM } from './accordion-item-context';
 
 /**
@@ -29,7 +29,7 @@ import { SC_ACCORDION_ITEM } from './accordion-item-context';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScAccordionPanel extends AccordionPanel {
-  private readonly styles = injectPreset().accordion;
+  private readonly styles = injectStyle().accordion;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

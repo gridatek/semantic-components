@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { type ScButtonVariants, injectPreset } from '@semantic-components/ui';
+import { type ScButtonVariants, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScPdfViewerSignatureForm } from './pdf-viewer-signature-form';
 
@@ -16,7 +16,7 @@ import { ScPdfViewerSignatureForm } from './pdf-viewer-signature-form';
   },
 })
 export class ScPdfViewerSignatureClear {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly form = inject(ScPdfViewerSignatureForm);
   readonly classInput = input<string>('', { alias: 'class' });

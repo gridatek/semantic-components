@@ -10,19 +10,19 @@ import {
 import type {
   ScButtonSize,
   ScButtonVariant,
-} from '@semantic-components/presets';
+} from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
-/** A button's look: its variant and size, the classes the preset's. */
+/** A button's look: its variant and size, the classes the style's. */
 export interface ScButtonVariants {
   variant?: ScButtonVariant | null;
   size?: ScButtonSize | null;
 }
 
 /**
- * A button in the app's preset: its classes are the preset's
- * (`provideSemanticComponents({ preset })`, from `@semantic-components/presets`;
+ * A button in the app's style: its classes are the style's
+ * (`provideSemanticComponents({ style })`, from `@semantic-components/styles`;
  * nova by default), chosen when the app starts.
  *
  * `disabled` with `softDisabled`: disabled but still reachable — announced
@@ -43,7 +43,7 @@ export interface ScButtonVariants {
   },
 })
 export class ScButton {
-  private readonly styles = injectPreset().button;
+  private readonly styles = injectStyle().button;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('default');
@@ -60,7 +60,7 @@ export class ScButton {
   private readonly class = computed(() =>
     cn(
       this.styles({ variant: this.variant(), size: this.size() }),
-      // The preset's aria-disabled blocks the pointer: a soft-disabled
+      // The style's aria-disabled blocks the pointer: a soft-disabled
       // button keeps its hover (its tooltip).
       this.disabled() && this.softDisabled()
         ? 'aria-disabled:pointer-events-auto aria-disabled:cursor-not-allowed'

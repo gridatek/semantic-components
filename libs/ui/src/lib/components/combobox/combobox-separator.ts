@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** A line between groups. Decorative: the groups are named. */
 @Directive({
@@ -12,7 +12,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScComboboxSeparator {
-  private readonly styles = injectPreset().combobox;
+  private readonly styles = injectStyle().combobox;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

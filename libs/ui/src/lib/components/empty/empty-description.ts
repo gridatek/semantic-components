@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: 'div[scEmptyDescription]',
@@ -9,7 +9,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScEmptyDescription {
-  private readonly styles = injectPreset().empty;
+  private readonly styles = injectStyle().empty;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

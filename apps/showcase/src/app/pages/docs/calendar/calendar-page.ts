@@ -69,7 +69,7 @@ import { WeekNumbersCalendarDemoContainer } from './demos/week-numbers-calendar-
         <p class="text-muted-foreground">
           Days, months and years in the app&apos;s language — one day, several,
           or a range; reached by the keyboard across months; a [formField]. In
-          the look of the app&apos;s preset.
+          the look of the app&apos;s style.
         </p>
         <app-component-badges path="calendar" />
       </div>
@@ -138,7 +138,7 @@ import { WeekNumbersCalendarDemoContainer } from './demos/week-numbers-calendar-
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -219,7 +219,7 @@ export default class CalendarPage {
       name: 'ScCalendarPrevious, ScCalendarNext',
       selector: 'button[scCalendarPrevious], button[scCalendarNext]',
       description:
-        "A month (or year, or years) back and on: the preset's button, ghost and a cell square; named by you.",
+        "A month (or year, or years) back and on: the style's button, ghost and a cell square; named by you.",
     },
     {
       name: 'ScCalendarDay',

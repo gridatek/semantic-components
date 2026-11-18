@@ -60,7 +60,7 @@ import { VisibilityMessageScrollerDemoContainer } from './demos/visibility-messa
           A conversation that scrolls itself: it opens on the last turn, holds a
           new turn near the top while its reply arrives, follows the end until
           you scroll away, and keeps your place when older messages load above.
-          In the look of the app&apos;s preset.
+          In the look of the app&apos;s style.
         </p>
         <app-component-badges path="message-scroller" />
       </div>
@@ -120,7 +120,7 @@ import { VisibilityMessageScrollerDemoContainer } from './demos/visibility-messa
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -209,7 +209,7 @@ export default class MessageScrollerPage {
       name: 'ScMessageScrollerButton',
       selector: 'button[scMessageScrollerButton]',
       description:
-        "To the end (direction 'end') or the start; the preset's button, shown when there is somewhere to go.",
+        "To the end (direction 'end') or the start; the style's button, shown when there is somewhere to go.",
     },
   ];
 }

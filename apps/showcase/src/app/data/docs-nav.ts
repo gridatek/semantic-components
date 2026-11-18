@@ -15,8 +15,8 @@ export const introductionPages: readonly DocsPage[] = [
 export const installationPages: readonly DocsPage[] = [
   { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
   { name: 'UI', path: '/docs/getting-started/ui' },
-  { name: 'Presets', path: '/docs/getting-started/presets' },
-  { name: 'Custom preset', path: '/docs/getting-started/custom-preset' },
+  { name: 'Styles', path: '/docs/getting-started/styles' },
+  { name: 'Custom style', path: '/docs/getting-started/custom-style' },
   { name: 'Internationalization', path: '/docs/getting-started/i18n' },
   { name: 'Right to left', path: '/docs/getting-started/rtl' },
   { name: 'MCP Server', path: '/docs/getting-started/mcp-server' },

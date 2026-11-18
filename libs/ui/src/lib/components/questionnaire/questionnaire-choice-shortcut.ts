@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScQuestionnaireChoice } from './questionnaire-choice';
 
 /**
@@ -26,7 +26,7 @@ import { ScQuestionnaireChoice } from './questionnaire-choice';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScQuestionnaireChoiceShortcut {
-  private readonly styles = injectPreset().questionnaire;
+  private readonly styles = injectStyle().questionnaire;
   private readonly choice = inject(ScQuestionnaireChoice);
 
   readonly classInput = input<string>('', { alias: 'class' });

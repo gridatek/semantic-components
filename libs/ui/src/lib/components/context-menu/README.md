@@ -1,6 +1,6 @@
 # Context Menu
 
-A menu at the pointer, opened by a right-click on an area — a long press on touch, Shift+F10 or the Menu key on the focused area. In the look of the app's preset (shadcn's Context Menu), on `@angular/aria`. The menu is made of the Menu's parts, which take the context menu's look in it.
+A menu at the pointer, opened by a right-click on an area — a long press on touch, Shift+F10 or the Menu key on the focused area. In the look of the app's style (shadcn's Context Menu), on `@angular/aria`. The menu is made of the Menu's parts, which take the context menu's look in it.
 
 ## Usage
 
@@ -51,4 +51,4 @@ A right-click opens the menu with nothing highlighted, until the pointer moves o
 
 The menu: in a `scMenuPortal`, rendered while it is open, made of the Menu's parts (see the Menu's README).
 
-The menu's parts read the preset's `contextMenu` key (`injectPreset().contextMenu`): shadcn's Context Menu, in each style.
+The menu's parts read the style's `contextMenu` key (`injectStyle().contextMenu`): shadcn's Context Menu, in each style.

@@ -10,7 +10,7 @@ A review of `apps/showcase-e2e` at commit `54dbbae3e`: what is done well, what i
 | -------------------- | ----- | ----------------------------------------- | ------ |
 | `src/demos`          | 161   | 1,129                                     | 20,882 |
 | `src/pages`          | 165   | 348 (+ ~1,300 generated in `ssr.spec.ts`) | 3,952  |
-| `src/presets`        | 65    | 65 × 8 presets                            | 2,213  |
+| `src/styles`         | 65    | 65 × 8 styles                             | 2,213  |
 | helpers (`src/*.ts`) | 7     |                                           | 500    |
 
 Playwright lists 3,422 tests for two projects alone; the nightly runs the suite in three engines, CSR and SSR.
@@ -20,9 +20,9 @@ Playwright lists 3,422 tests for two projects alone; the nightly runs the suite 
 1. **Tests check behaviour a user sees, by role.** 2,004 `getByRole` calls in 251 files against 700 `page.locator(`. Titles say the behaviour ("Sticky, Hides on Scroll: away going down, back going up"), not the implementation.
 2. **Almost no hard waits.** 6 `waitForTimeout` in 391 files, and 4 of them carry a comment saying time itself is what is tested (a tooltip's grace period, a chart that must _not_ draw). 375 `expect.poll` in 145 files instead.
 3. **No leftovers.** 0 `test.only`, 0 `fixme`. All 10 `test.skip` are conditional with a stated reason (clipboard read is Chromium-only, no Web Audio in the build, SSR job only).
-4. **A clear structure.** One folder per kind of test, each a Playwright project (`demos`, `pages`, `presets-<name>`, `mobile`), documented in `docs/e2e-testing.md` with a "where a new test goes" table. The preset is the project, not a loop in the spec.
+4. **A clear structure.** One folder per kind of test, each a Playwright project (`demos`, `pages`, `presets-<name>`, `mobile`), documented in `docs/e2e-testing.md` with a "where a new test goes" table. The style is the project, not a loop in the spec.
 5. **Shared helpers that encode real knowledge**, each with a comment saying why: `press` (paced keys for `@angular/aria`), `focus` (retries until focusable), `expectNoA11yViolations` (settles fonts and animations first), `expectTargetSize` (WCAG 2.5.8), `expectRtl` / `expectInlineOrder`, `expectHydrated`.
-6. **Wide coverage per component**, beyond the happy path: axe in light and dark on every docs page, console errors (129 specs use `collectErrors`), RTL, phone width and target size (84 specs tagged `@mobile`), hydration of every route (`ssr.spec.ts` reads the routes files), all eight presets.
+6. **Wide coverage per component**, beyond the happy path: axe in light and dark on every docs page, console errors (129 specs use `collectErrors`), RTL, phone width and target size (84 specs tagged `@mobile`), hydration of every route (`ssr.spec.ts` reads the routes files), all eight styles.
 7. **Layout is measured the stable way.** 153 `toHaveCSS` and `getComputedStyle` reads, `openStill()` to switch transitions off, and a rule in CLAUDE.md to measure layout, not `getBoundingClientRect()`, on animated elements.
 8. **The lint is set up for Playwright** (`eslint-plugin-playwright`, `expect-expect` taught the custom `expect…` helpers) and passes with 0 errors.
 9. **CI is shaped around the suite**: named job groups instead of anonymous shards, the built app instead of the dev server, a nightly for Firefox and WebKit.
@@ -66,8 +66,8 @@ The nightly keeps 2 retries, so a test that fails once and passes on retry is re
 
 ### 5. Duplicate work (verify)
 
-- Each docs page spec loads its page 3 or 4 times: axe light and axe dark are separate tests with separate loads (185 axe tests in `pages/`). `presets/pages.spec.ts` does both in one load.
-- A visible page's axe in nova runs in the `pages` project **and** in `presets-nova` (`presets/pages.spec.ts`). The `pages` project also covers hidden pages and the other engines, so only the Chromium nova run of visible pages is a true duplicate.
+- Each docs page spec loads its page 3 or 4 times: axe light and axe dark are separate tests with separate loads (185 axe tests in `pages/`). `styles/pages.spec.ts` does both in one load.
+- A visible page's axe in nova runs in the `pages` project **and** in `styles-nova` (`styles/pages.spec.ts`). The `pages` project also covers hidden pages and the other engines, so only the Chromium nova run of visible pages is a true duplicate.
 
 With over 3,000 tests and CI jobs near their 30 minutes (per `docs/e2e-testing.md`), this is the cheapest time to win back.
 
@@ -81,7 +81,7 @@ Three fixes of 2026-11-16 retry the user's action with `toPass` because WebKit u
 - **487 `.first()` / `.nth()` / `.last()`** in 152 files and 472 `data-slot` selectors: fine for parts with no role, but worth a look where a role and name would do **(verify, sample only)**.
 - **Long loops in one test**: 50 `for (const … of …)` loops, many of them `goto` per demo inside one `@mobile` test. One failure hides the rest, and the test's time grows with the list.
 - **`networkidle`** in `axe.ts` and `console-clean.spec.ts` (the lint rule is switched off for it). Bounded to 10 s and caught, so it costs time, not correctness.
-- **No visual tests** (`toHaveScreenshot`: 0). The docs list them as "coming"; class checks per preset cover the look only indirectly.
+- **No visual tests** (`toHaveScreenshot`: 0). The docs list them as "coming"; class checks per style cover the look only indirectly.
 - **`page.goto` is monkey-patched** in `test.ts` for SSR. It works, but a second `goto`-like path (`openStill`, `expectHydrated`) has to remember it. A `gotoReady` fixture would be explicit.
 
 ## Recommendations, in order of value
@@ -91,7 +91,7 @@ Three fixes of 2026-11-16 retry the user's action with `toPass` because WebKit u
 3. **Raise `expect.timeout` for Firefox and WebKit** in the config (for example 10 s), then delete the per-test `timeout:` values that only exist for that.
 4. **Report flaky tests**: fail the nightly, or post the list, when the "flaky" count is not 0.
 5. **Move the copies into helpers**: `framesOf`, `settled`, `expectClasses`, and a `preset` fixture option for the cookie.
-6. **One load per page for axe** (light then dark in one test), and drop the nova duplicate between `pages` and `presets-nova` if it is confirmed.
+6. **One load per page for axe** (light then dark in one test), and drop the nova duplicate between `pages` and `styles-nova` if it is confirmed.
 7. **Clear the 60 lint warnings**, then turn warnings into errors for the e2e project so they stay at 0.
 8. **Look at the three retried interactions in a real Safari** before treating them as test-only problems.
 

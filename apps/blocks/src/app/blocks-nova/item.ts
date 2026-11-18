@@ -1,4 +1,4 @@
-import type { ScItemStyles } from '@semantic-components/presets';
+import type { ScItemStyles } from '@semantic-components/styles';
 import { cva } from 'class-variance-authority';
 
 // shadcn's item in nova (shadcn-reference/presets/nova/item.tsx); its

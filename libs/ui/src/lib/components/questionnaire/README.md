@@ -72,7 +72,7 @@ Several answers: checkboxes, each bound to a boolean (`survey.sources.docs`), th
 | `kbd[scQuestionnaireChoiceShortcut]`                  | Its key, written for you; hidden without `shortcuts`                                                                                                                                                                       |
 | `p[scQuestionnaireError]`                             | Your words: shown and announced once the question is tried wrong                                                                                                                                                           |
 | `div[scQuestionnaireActions]`                         | The buttons' row                                                                                                                                                                                                           |
-| `button[scQuestionnairePrevious\|Skip\|Next\|Submit]` | `variant`, `size` (the preset's button). Each shows when it applies — Previous from the second question, Skip on an optional one, Next before the last, Submit on it                                                       |
+| `button[scQuestionnairePrevious\|Skip\|Next\|Submit]` | `variant`, `size` (the style's button). Each shows when it applies — Previous from the second question, Skip on an optional one, Next before the last, Submit on it                                                        |
 
 ## Keyboard and screen readers
 

@@ -93,9 +93,8 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
-          Each part takes class, merged over the preset (cn: a later class
-          wins). The field is a scField too: it takes its id, orientation and
-          class.
+          Each part takes class, merged over the style (cn: a later class wins).
+          The field is a scField too: it takes its id, orientation and class.
         </p>
         <div
           scTableContainer

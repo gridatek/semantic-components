@@ -5,7 +5,7 @@ export type ScControlGroupSeparatorOrientation = 'horizontal' | 'vertical';
 
 /**
  * A line between two of a group's buttons: shadcn's Separator, with the
- * group's classes over it (the same in every preset).
+ * group's classes over it (the same in every style).
  */
 @Directive({
   selector: 'div[scControlGroupSeparator]',

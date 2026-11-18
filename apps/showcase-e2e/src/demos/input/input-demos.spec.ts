@@ -31,7 +31,7 @@ test('Usage: in a field, named by its label', async ({ page }) => {
   await expect(name).toHaveValue('Jordan');
 });
 
-test('Basic: the preset’s look; Tab reaches it, its ring shows', async ({
+test('Basic: the style’s look; Tab reaches it, its ring shows', async ({
   page,
 }) => {
   await openStill(page, demo('basic'));
@@ -122,7 +122,7 @@ test('Inline: the input and its button on one line', async ({ page }) => {
   await page.goto(demo('inline'));
   const input = page.getByRole('searchbox', { name: 'Search' });
   const button = page.getByRole('button', { name: 'Search' });
-  // Their middles level — read until the layout settles (fonts, the preset).
+  // Their middles level — read until the layout settles (fonts, the style).
   const middle = async (target: typeof input) => {
     const found = await box(target);
     return found.y + found.height / 2;

@@ -1,4 +1,4 @@
-import type { ScTraceStyles } from '@semantic-components/presets';
+import type { ScTraceStyles } from '@semantic-components/styles';
 
 // shadcn's trace in nova (shadcn-reference/presets/nova/trace.tsx). Ours: a
 // pending step dims only its icon (contrast); the content's text is the line's size.

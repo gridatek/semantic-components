@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { injectPreset, ɵwarnIfUnnamed } from '@semantic-components/ui';
+import { injectStyle, ɵwarnIfUnnamed } from '@semantic-components/ui';
 import type { ScButtonVariants } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScDataTableTreeGrid } from './data-table-tree-grid';
@@ -32,7 +32,7 @@ import type { ScDataTableTreeRow } from './data-table-types';
   },
 })
 export class ScDataTableExpand {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
   private readonly tree = inject(ScDataTableTreeGrid, { optional: true });
 
   readonly row = input.required<ScDataTableTreeRow>();

@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScButtonVariants } from '../button/button';
 import { ScNativeDialogProvider } from './native-dialog-provider';
 
@@ -13,7 +13,7 @@ import { ScNativeDialogProvider } from './native-dialog-provider';
   },
 })
 export class ScNativeDialogClose {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly dialogProvider = inject(ScNativeDialogProvider);
 

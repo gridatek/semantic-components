@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScDialog } from './dialog';
 
 @Directive({
@@ -11,7 +11,7 @@ import { ScDialog } from './dialog';
   },
 })
 export class ScDialogTitle {
-  private readonly styles = injectPreset().dialog;
+  private readonly styles = injectStyle().dialog;
   private readonly dialog = inject(ScDialog);
   readonly classInput = input<string>('', { alias: 'class' });
 

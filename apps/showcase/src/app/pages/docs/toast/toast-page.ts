@@ -117,7 +117,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -202,7 +202,7 @@ export default class ToastPage {
       name: 'ScToast',
       selector: 'div[scToast]',
       description:
-        "The toast, the template's root: the preset's look, data-variant, its place in the stack (the newest in front, spread out while hovered or focused); it slides in and out, and goes when swiped sideways.",
+        "The toast, the template's root: the style's look, data-variant, its place in the stack (the newest in front, spread out while hovered or focused); it slides in and out, and goes when swiped sideways.",
     },
     {
       name: 'ScToastIcon',
@@ -220,13 +220,13 @@ export default class ToastPage {
       name: 'ScToastAction',
       selector: 'button[scToastAction]',
       description:
-        "Runs the toast's action, then closes it: the preset's button (outline, sm; variant, size). Write its text (toast.action.label).",
+        "Runs the toast's action, then closes it: the style's button (outline, sm; variant, size). Write its text (toast.action.label).",
     },
     {
       name: 'ScToastClose',
       selector: 'button[scToastClose]',
       description:
-        "Closes the toast: the preset's button (ghost, icon-sm; variant, size), at the end of the row, muted until hovered. Write its icon and name it.",
+        "Closes the toast: the style's button (ghost, icon-sm; variant, size), at the end of the row, muted until hovered. Write its icon and name it.",
     },
   ];
 }

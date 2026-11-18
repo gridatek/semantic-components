@@ -1,4 +1,4 @@
-import type { ScMenubarStyles } from '@semantic-components/presets';
+import type { ScMenubarStyles } from '@semantic-components/styles';
 
 // shadcn's menubar in nova (shadcn-reference/presets/nova/menubar.tsx):
 // the bar, its triggers, and the menus in it — where a menubar part wraps a

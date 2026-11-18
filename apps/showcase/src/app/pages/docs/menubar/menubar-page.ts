@@ -46,7 +46,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
         <h1 scTypeset>Menubar</h1>
         <p class="text-muted-foreground">
           A row of menus, as at the top of a desktop app: File, Edit, View. In
-          the look of the app&apos;s preset.
+          the look of the app&apos;s style.
         </p>
         <app-component-badges path="menubar" />
       </div>
@@ -105,7 +105,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins). The menus&apos; parts
+          merged over the style (cn: a later class wins). The menus&apos; parts
           are the Menu&apos;s (see Menu).
         </p>
         <div

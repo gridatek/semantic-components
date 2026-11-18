@@ -1,4 +1,4 @@
-import type { ScScrollAreaStyles } from '@semantic-components/presets';
+import type { ScScrollAreaStyles } from '@semantic-components/styles';
 
 // shadcn's scroll area in nova (shadcn-reference/presets/nova/scroll-area.tsx):
 // the thumb, whose corners change from style to style.

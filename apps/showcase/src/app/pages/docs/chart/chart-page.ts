@@ -275,7 +275,7 @@ export default class ChartPage {
     {
       selector: 'div[scChartTooltip]',
       description:
-        "The box, in the preset's look (exportAs: scChartTooltip): active(), label() (the category), payload() (an item per series: dataKey, name, value, color) — see [Tooltip and legend](#tooltip-and-legend)",
+        "The box, in the style's look (exportAs: scChartTooltip): active(), label() (the category), payload() (an item per series: dataKey, name, value, color) — see [Tooltip and legend](#tooltip-and-legend)",
     },
     {
       selector: '[scChartTooltipLabel]',

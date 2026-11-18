@@ -35,7 +35,7 @@ export class ScNotificationCount {
 
   private readonly class = computed(() =>
     cn(
-      // A counter, not a label: a filled pill in every preset (sera's badges
+      // A counter, not a label: a filled pill in every style (sera's badges
       // are bare text).
       'bg-primary text-primary-foreground pointer-events-none absolute -end-1.5 -top-1.5 inline-flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-xs font-medium whitespace-nowrap tabular-nums',
       this.classInput(),

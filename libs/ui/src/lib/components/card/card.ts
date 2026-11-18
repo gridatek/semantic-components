@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 @Directive({
   selector: 'div[scCard]',
@@ -10,9 +10,9 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScCard {
-  private readonly styles = injectPreset().card;
-  // The card's frame (radius, ring, shadow): the preset's, as scFrame's.
-  private readonly frame = injectPreset().frame;
+  private readonly styles = injectStyle().card;
+  // The card's frame (radius, ring, shadow): the style's, as scFrame's.
+  private readonly frame = injectStyle().frame;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly size = input<'default' | 'sm'>('default');

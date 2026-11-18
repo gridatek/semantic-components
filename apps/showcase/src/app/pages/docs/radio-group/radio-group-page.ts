@@ -56,7 +56,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
         <h1 scTypeset>Radio Group</h1>
         <p class="text-muted-foreground">
           One choice among several, as native radios. In the look of the
-          app&apos;s preset.
+          app&apos;s style.
         </p>
         <app-component-badges path="radio-group" />
       </div>
@@ -129,7 +129,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -214,7 +214,7 @@ export default class RadioGroupPage {
       name: 'ScRadio',
       selector: 'input[scRadio]',
       description:
-        "A native radio (its own type) in the preset's look, its dot when checked: value (its option, any type); disabled.",
+        "A native radio (its own type) in the style's look, its dot when checked: value (its option, any type); disabled.",
     },
   ];
 }

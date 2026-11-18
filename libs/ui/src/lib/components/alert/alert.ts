@@ -1,15 +1,15 @@
 import { Directive, computed, input } from '@angular/core';
-import type { ScAlertVariant } from '@semantic-components/presets';
+import type { ScAlertVariant } from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
-/** An alert's look: its variant, the classes the preset's. */
+/** An alert's look: its variant, the classes the style's. */
 export interface ScAlertVariants {
   variant?: ScAlertVariant | null;
 }
 
 /**
- * A callout for something to notice, in the app's preset. No role of its own:
+ * A callout for something to notice, in the app's style. No role of its own:
  * one already on the page is read in its place. One that appears, to be
  * announced, takes yours — `role="status"` (polite) or `role="alert"`
  * (urgent: interrupts).
@@ -21,7 +21,7 @@ export interface ScAlertVariants {
   },
 })
 export class ScAlert {
-  private readonly styles = injectPreset().alert;
+  private readonly styles = injectStyle().alert;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScAlertVariants['variant']>('default');

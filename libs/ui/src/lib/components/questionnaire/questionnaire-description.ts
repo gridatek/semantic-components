@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScQuestionnaireItem } from './questionnaire-item';
 
 /** More about the question: read with it (`aria-describedby`). */
@@ -14,7 +14,7 @@ import { ScQuestionnaireItem } from './questionnaire-item';
   },
 })
 export class ScQuestionnaireDescription {
-  private readonly styles = injectPreset().questionnaire;
+  private readonly styles = injectStyle().questionnaire;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(
     inject(_IdGenerator).getId('sc-questionnaire-description-'),

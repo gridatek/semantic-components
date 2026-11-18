@@ -1,7 +1,7 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_FIELD } from '../field';
 import { ScOtpField } from './otp-field';
 
@@ -37,7 +37,7 @@ import { ScOtpField } from './otp-field';
 })
 export class ScOtpFieldInput {
   private readonly directionality = inject(Directionality);
-  private readonly styles = injectPreset().otpField;
+  private readonly styles = injectStyle().otpField;
   private readonly otp = inject(ScOtpField);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =

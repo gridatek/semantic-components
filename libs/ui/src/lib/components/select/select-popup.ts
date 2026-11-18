@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_SELECT } from './select-tokens';
 
 /**
@@ -20,7 +20,7 @@ import { SC_SELECT } from './select-tokens';
   exportAs: 'scSelectPopup',
   host: {
     '[attr.data-side]': 'select.side()',
-    // Opening and closing, the preset's classes, played by Angular.
+    // Opening and closing, the style's classes, played by Angular.
     '[animate.enter]': 'styles.popupEnter',
     '[animate.leave]': 'styles.popupLeave',
     '[class]': 'class()',
@@ -29,7 +29,7 @@ import { SC_SELECT } from './select-tokens';
 })
 export class ScSelectPopup {
   private readonly select = inject(SC_SELECT);
-  private readonly styles = injectPreset().select;
+  private readonly styles = injectStyle().select;
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });

@@ -1,16 +1,16 @@
 import { Menu, MenuBar, MenuItem } from '@angular/aria/menu';
 import { type Signal, computed, inject } from '@angular/core';
-import type { ScMenuStyles } from '@semantic-components/presets';
-import { injectPreset } from '../../config/preset';
+import type { ScMenuStyles } from '@semantic-components/styles';
+import { injectStyle } from '../../config/style';
 import { SC_CONTEXT_MENU } from '../context-menu/context-menu-types';
 
 /**
- * The preset's classes for a menu's parts: the menu's, or — in a menubar,
+ * The style's classes for a menu's parts: the menu's, or — in a menubar,
  * however deep — the menubar's, or in a context menu the context menu's. The
  * same parts serve all three.
  */
 export function injectMenuStyles(): Signal<ScMenuStyles> {
-  const preset = injectPreset();
+  const preset = injectStyle();
   const menu = inject(Menu, { optional: true });
   const contextMenu = inject(SC_CONTEXT_MENU, { optional: true });
   return computed(() => {

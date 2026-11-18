@@ -115,7 +115,7 @@ export class ScChartFunnel implements ScChartSeriesLabels {
   readonly key = input.required<string>();
   /** The space between stages, in px. */
   readonly gap = input(2);
-  /** Its stages' corners' rounding, in px. Unset: the style's (the preset's `--sc-chart-bar-radius`, as the bars'). */
+  /** Its stages' corners' rounding, in px. Unset: the style's (the style's `--sc-chart-bar-radius`, as the bars'). */
   readonly cornerRadius = input<number | undefined>(undefined);
   /**
    * Its stages grow out of their centers when it appears, and move to their

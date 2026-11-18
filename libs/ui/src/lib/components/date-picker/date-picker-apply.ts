@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button';
 import { ScDatePicker } from './date-picker';
 
@@ -16,7 +16,7 @@ import { ScDatePicker } from './date-picker';
   },
 })
 export class ScDatePickerApply {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly picker = inject(ScDatePicker);
 

@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScTimeClock } from './time-clock';
 
 /**
@@ -66,7 +66,7 @@ import { ScTimeClock } from './time-clock';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScTimeClockHeader {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly clock = inject(ScTimeClock);
 

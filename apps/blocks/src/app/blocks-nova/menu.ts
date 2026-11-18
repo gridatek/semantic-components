@@ -1,4 +1,4 @@
-import type { ScMenuStyles } from '@semantic-components/presets';
+import type { ScMenuStyles } from '@semantic-components/styles';
 
 // shadcn's dropdown menu in nova (shadcn-reference/presets/nova/dropdown-menu.tsx),
 // in our states: focus: → data-highlighted: (a pointer open highlights

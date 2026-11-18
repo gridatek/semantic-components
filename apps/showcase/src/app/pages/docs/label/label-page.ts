@@ -46,7 +46,7 @@ import { RtlLabelDemoContainer } from './demos/rtl-label-demo-container';
         <h1 scTypeset>Label</h1>
         <p class="text-muted-foreground">
           A control&apos;s name, shown beside it. In the look of the app&apos;s
-          preset.
+          style.
         </p>
         <app-component-badges path="label" />
       </div>
@@ -99,7 +99,7 @@ import { RtlLabelDemoContainer } from './demos/rtl-label-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -171,7 +171,7 @@ export default class LabelPage {
       name: 'ScLabel',
       selector: 'label[scLabel]',
       description:
-        "A label in the preset's look; in a field (or around one: a choice card) the field's look too. for, id: from the field when it is in one.",
+        "A label in the style's look; in a field (or around one: a choice card) the field's look too. for, id: from the field when it is in one.",
     },
     {
       name: 'ScLabelText',

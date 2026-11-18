@@ -1,4 +1,4 @@
-import type { ScNativeSelectStyles } from '@semantic-components/presets';
+import type { ScNativeSelectStyles } from '@semantic-components/styles';
 
 // shadcn's native select in nova (shadcn-reference/presets/nova/native-select.tsx): the
 // select and the chevron's place. Its wrapper (our container) is the same in every style: in the part.

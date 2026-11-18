@@ -1,6 +1,6 @@
 # Tabs
 
-Tabs and their panels, one shown at a time. In the look of the app's preset (shadcn's Tabs), Base UI's parts and state, on `@angular/aria`.
+Tabs and their panels, one shown at a time. In the look of the app's style (shadcn's Tabs), Base UI's parts and state, on `@angular/aria`.
 
 ## Usage
 
@@ -50,7 +50,7 @@ Tab enters the list on the selected tab, then goes on to its panel. ArrowLeft an
 | `ScTabsPanel`        | `[scTabsPanel]`                   | `value`, `class` — role `tabpanel`, named by its tab                                                              |
 | `ScTabsPanelContent` | `ng-template[scTabsPanelContent]` | — the panel's content                                                                                             |
 
-Every part's classes are the preset's (`injectPreset().tabs`: `root`, `list` by variant, `trigger`, `panel`): shadcn's Tabs, in each style.
+Every part's classes are the style's (`injectStyle().tabs`: `root`, `list` by variant, `trigger`, `panel`): shadcn's Tabs, in each style.
 
 ## Left out
 

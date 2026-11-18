@@ -10,12 +10,12 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { ScComboboxBase } from './combobox-base';
 
 /**
- * Opens and closes the list: the preset's button. Beside the input, the
+ * Opens and closes the list: the style's button. Beside the input, the
  * chevron at its end (ghost, icon-xs; not a tab stop — the input is). With no
  * input in the field, it is the field (outline, as wide as the combobox): it
  * shows the value and opens a popup with the search inside; in a `scField`,
@@ -40,7 +40,7 @@ import { ScComboboxBase } from './combobox-base';
   },
 })
 export class ScComboboxTrigger {
-  private readonly preset = injectPreset();
+  private readonly preset = injectStyle();
   private readonly root = inject(ScComboboxBase);
 
   readonly classInput = input<string>('', { alias: 'class' });

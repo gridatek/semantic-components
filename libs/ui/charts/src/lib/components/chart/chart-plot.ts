@@ -16,7 +16,7 @@ import type {
 } from './chart-types';
 
 /**
- * The preset's corner radius (`--sc-chart-bar-radius`) in px: a length only the
+ * The style's corner radius (`--sc-chart-bar-radius`) in px: a length only the
  * browser resolves (calc(var(--radius) - 4px)…), read through a probe as wide.
  */
 function radiusOf(chart: Element): number {
@@ -119,7 +119,7 @@ export class ScChartPlot {
         if (box.height > 0) this.state.height.set(box.height);
         if (box.width > 0 && box.height > 0) this.state.measured.set(true);
         // Laid out at last (a chart rendered before it was in the page has
-        // no styles to read until then): the preset's corner radius in px.
+        // no styles to read until then): the style's corner radius in px.
         if (box.width > 0 && chart) this.state.barRadius.set(radiusOf(chart));
         const around = chart?.getBoundingClientRect();
         if (around)

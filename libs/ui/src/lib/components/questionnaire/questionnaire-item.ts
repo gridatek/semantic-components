@@ -12,7 +12,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScQuestionnaire } from './questionnaire';
 import {
   type ScQuestionnaireAnswer,
@@ -40,7 +40,7 @@ import {
   },
 })
 export class ScQuestionnaireItem implements ScQuestionnaireItemRef {
-  private readonly styles = injectPreset().questionnaire;
+  private readonly styles = injectStyle().questionnaire;
   private readonly questionnaire = inject(ScQuestionnaire);
   private readonly injector = inject(Injector);
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;

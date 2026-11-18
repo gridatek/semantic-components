@@ -1,7 +1,7 @@
 import { Tabs } from '@angular/aria/tabs';
 import { Directive, computed, input, model } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 export type ScTabsOrientation = 'horizontal' | 'vertical';
 
@@ -20,7 +20,7 @@ export type ScTabsOrientation = 'horizontal' | 'vertical';
   },
 })
 export class ScTabs {
-  private readonly styles = injectPreset().tabs;
+  private readonly styles = injectStyle().tabs;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The selected tab's value; `[(value)]`. */

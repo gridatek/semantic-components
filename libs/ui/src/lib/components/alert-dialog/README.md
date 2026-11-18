@@ -1,6 +1,6 @@
 # Alert Dialog
 
-A modal dialog that asks for an answer before going on — to confirm, to cancel. In the look of the app's preset. For a dialog that can simply be dismissed, use a Dialog.
+A modal dialog that asks for an answer before going on — to confirm, to cancel. In the look of the app's style. For a dialog that can simply be dismissed, use a Dialog.
 
 ## Usage
 
@@ -54,7 +54,7 @@ Every part is a directive on your element. The dialog is in a template, rendered
 
 ## API reference
 
-Each part takes `class`, merged over the preset.
+Each part takes `class`, merged over the style.
 
 | Part                                             | Selector                                                     | Description                                                                                     |
 | ------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- |
@@ -66,10 +66,10 @@ Each part takes `class`, merged over the preset.
 | `ScAlertDialogMedia`                             | `div[scAlertDialogMedia]`                                    | An icon, beside the title (above it in a small dialog).                                         |
 | `ScAlertDialogTitle`, `ScAlertDialogDescription` | `h2[scAlertDialogTitle]`, `p[scAlertDialogDescription]`      | Name and describe the dialog.                                                                   |
 | `ScAlertDialogFooter`                            | `div[scAlertDialogFooter]`                                   | The buttons: stacked on a phone, in a row beyond.                                               |
-| `ScAlertDialogCancel`, `ScAlertDialogAction`     | `button[scAlertDialogCancel]`, `button[scAlertDialogAction]` | Close it. The preset's buttons: inputs `variant` (`'outline'`, `'default'`) and `size`.         |
+| `ScAlertDialogCancel`, `ScAlertDialogAction`     | `button[scAlertDialogCancel]`, `button[scAlertDialogAction]` | Close it. The style's buttons: inputs `variant` (`'outline'`, `'default'`) and `size`.          |
 
 `scAlertDialogProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 
 ## Styles
 
-From the preset (`alertDialog`): the dialog (padding, radius, width, shadow), the header, the footer (a muted band only in nova), the media, the title and the description. shadcn's placement and open/close classes are left out: the CDK overlay centers the dialog, Angular animates it. Its width is the preset's maximum for its `size`, whatever its text, as shadcn's: the dialog adds `w-screen`, capped by that `max-w` (the CDK's pane is only as wide as its content, so `w-full` alone left a short alert narrow). Your classes win. The backdrop is the shared `scBackdrop`, its shade and blur the preset's `backdrop`, the same behind every overlay.
+From the style (`alertDialog`): the dialog (padding, radius, width, shadow), the header, the footer (a muted band only in nova), the media, the title and the description. shadcn's placement and open/close classes are left out: the CDK overlay centers the dialog, Angular animates it. Its width is the style's maximum for its `size`, whatever its text, as shadcn's: the dialog adds `w-screen`, capped by that `max-w` (the CDK's pane is only as wide as its content, so `w-full` alone left a short alert narrow). Your classes win. The backdrop is the shared `scBackdrop`, its shade and blur the style's `backdrop`, the same behind every overlay.

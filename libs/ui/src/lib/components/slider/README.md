@@ -1,6 +1,6 @@
 # Slider
 
-A slider: a native `input[type=range]` in the look of the app's preset — the `slider` key's `root`, `track` and `thumb`, shadcn's classes put on the browser's parts (`::-webkit-slider-runnable-track` / `::-moz-range-track`, `::-webkit-slider-thumb` / `::-moz-range-thumb`), sizes logical (block = thickness, inline = along the track) so a vertical slider takes the same classes. The range (`bg-primary`) is Firefox's `::-moz-range-progress`, and on Chrome's track a fill up to the thumb's centre (`--sc-slider-value`, `--sc-slider-thumb`): the thumb stays inside the track at both ends, as shadcn's `thumbAlignment="edge"`.
+A slider: a native `input[type=range]` in the look of the app's style — the `slider` key's `root`, `track` and `thumb`, shadcn's classes put on the browser's parts (`::-webkit-slider-runnable-track` / `::-moz-range-track`, `::-webkit-slider-thumb` / `::-moz-range-thumb`), sizes logical (block = thickness, inline = along the track) so a vertical slider takes the same classes. The range (`bg-primary`) is Firefox's `::-moz-range-progress`, and on Chrome's track a fill up to the thumb's centre (`--sc-slider-value`, `--sc-slider-thumb`): the thumb stays inside the track at both ends, as shadcn's `thumbAlignment="edge"`.
 
 ## Usage
 

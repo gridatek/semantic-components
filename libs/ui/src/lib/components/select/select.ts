@@ -31,7 +31,7 @@ import {
 } from './select-tokens';
 
 // Below the trigger, or above it without room. The gap from the trigger is the
-// preset's (Radix's popper translate).
+// style's (Radix's popper translate).
 const positions: ConnectedPosition[] = [
   {
     originX: 'start',

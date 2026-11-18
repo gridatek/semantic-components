@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** Your chevron, in the trigger: at its end, turned while open. */
 @Directive({
@@ -11,7 +11,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScAccordionTriggerIcon {
-  private readonly styles = injectPreset().accordion;
+  private readonly styles = injectStyle().accordion;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

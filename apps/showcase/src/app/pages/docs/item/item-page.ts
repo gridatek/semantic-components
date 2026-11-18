@@ -56,7 +56,7 @@ import { VariantItemDemoContainer } from './demos/variant-item-demo-container';
         <h1 scTypeset>Item</h1>
         <p class="text-muted-foreground">
           A row of content: media, a title and a description, actions. In the
-          look of the app&apos;s preset.
+          look of the app&apos;s style.
         </p>
         <app-component-badges path="item" />
       </div>
@@ -110,7 +110,7 @@ import { VariantItemDemoContainer } from './demos/variant-item-demo-container';
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer

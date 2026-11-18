@@ -1,6 +1,6 @@
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_NUMBER_FIELD } from './number-field';
 import { ScNumberFieldHold } from './number-field-hold';
 
@@ -27,7 +27,7 @@ import { ScNumberFieldHold } from './number-field-hold';
   },
 })
 export class ScNumberFieldIncrement {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly number = inject(SC_NUMBER_FIELD);
   private readonly hold = new ScNumberFieldHold();

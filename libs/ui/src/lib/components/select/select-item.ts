@@ -9,7 +9,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { setInput, useActiveOption } from '../../utils';
 import { SC_SELECT } from './select-tokens';
 
@@ -31,7 +31,7 @@ export class ScSelectItem {
   private readonly select = inject(SC_SELECT);
   private readonly option = inject<Option<string>>(Option);
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly styles = injectPreset().select;
+  private readonly styles = injectStyle().select;
   private readonly onPointerMove = useActiveOption(this.option);
 
   readonly classInput = input<string>('', { alias: 'class' });

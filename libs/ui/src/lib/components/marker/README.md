@@ -1,7 +1,7 @@
 # Marker
 
 A note between messages — a status, a labeled divider, an action. In the look
-of the app's preset (`marker` key: shadcn's in each of the eight styles).
+of the app's style (`marker` key: shadcn's in each of the eight styles).
 
 ## Usage
 

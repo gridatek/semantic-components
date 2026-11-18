@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils';
 import { ScButtonVariants } from '../button/button';
 import { ScPagination } from './pagination';
@@ -23,10 +23,10 @@ import { ScPagination } from './pagination';
   },
 })
 export class ScPaginationFirst {
-  private readonly buttonStyles = injectPreset().button;
-  // The preset's padding by the arrow (shadcn's, important: it outweighs the
+  private readonly buttonStyles = injectStyle().button;
+  // The style's padding by the arrow (shadcn's, important: it outweighs the
   // button's own padding by an icon).
-  private readonly paginationStyles = injectPreset().pagination;
+  private readonly paginationStyles = injectStyle().pagination;
 
   constructor() {
     ɵwarnIfUnnamed('scPaginationFirst');

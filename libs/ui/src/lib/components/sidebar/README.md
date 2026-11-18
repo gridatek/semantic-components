@@ -1,6 +1,6 @@
 # Sidebar
 
-An app's side panel, as shadcn's, in the look of the app's preset (the `sidebar` key): beside the page on wide screens — collapsed off the screen (`offcanvas`), to icons (`icon`) or never (`none`) — and a sheet over it on phones. The parts follow shadcn's names, so its examples carry over.
+An app's side panel, as shadcn's, in the look of the app's style (the `sidebar` key): beside the page on wide screens — collapsed off the screen (`offcanvas`), to icons (`icon`) or never (`none`) — and a sheet over it on phones. The parts follow shadcn's names, so its examples carry over.
 
 ## Features
 
@@ -10,7 +10,7 @@ An app's side panel, as shadcn's, in the look of the app's preset (the `sidebar`
 - **Ctrl/⌘+B** (`shortcut`, `null` to turn off)
 - **Phones** — a sheet: a named dialog, the focus kept inside, Escape closes it and gives the trigger back the focus; following a link closes it
 - **Collapsed to icons** — each button keeps its name (its hidden text); `tooltip` shows it in the Tooltip's own parts (`scTooltip`, `scTooltipArrow`), only then
-- **Its scrollbar shown** — the content shows its scrollbar when it has more than fits (in the preset's look with `scrollbar.css`), its room kept (`scrollbar-gutter: stable`) so the menus don't shift as it comes and goes; `hideScrollbar` hides it (shadcn's look)
+- **Its scrollbar shown** — the content shows its scrollbar when it has more than fits (in the style's look with `scrollbar.css`), its room kept (`scrollbar-gutter: stable`) so the menus don't shift as it comes and goes; `hideScrollbar` hides it (shadcn's look)
 - **Landmarks you choose** — on an `aside`, the whole sidebar is a named landmark (complementary), header and footer included; on a `div`, none. Either way the navigation is the named `nav` you put in it
 
 ## Quick Start
@@ -139,7 +139,7 @@ The part that scrolls, between the header and the footer. `hideScrollbar`: no sc
 
 ## Styles
 
-From the preset (`sidebar`): the inner panel (floating corners and ring), the inset page, the input, the header, the content, the group and its label, action and content, the menu, the menu button (`variant`, `size`), its action, badge and skeleton, the sub-button. What is the same in every style — the frame (gap, container, rail), the provider, the footer, the separator, the sub-menu — stays in the parts.
+From the style (`sidebar`): the inner panel (floating corners and ring), the inset page, the input, the header, the content, the group and its label, action and content, the menu, the menu button (`variant`, `size`), its action, badge and skeleton, the sub-button. What is the same in every style — the frame (gap, container, rail), the provider, the footer, the separator, the sub-menu — stays in the parts.
 
 ## Left out
 

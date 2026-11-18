@@ -52,7 +52,7 @@ jobs:
 
   # The e2e tests of the client-side apps, a job per group of Playwright
   # projects run side by side (the showcase's suite outgrew one job's 30
-  # minutes): demos (two shards), pages, the presets two by two, the phones
+  # minutes): demos (two shards), pages, the styles two by two, the phones
   # with the blocks. A job's name says which kind of test failed. Only when the
   # change affects them.
   csr-e2e:
@@ -69,14 +69,14 @@ jobs:
             projects: --project=demos --shard=2/2
           - group: pages
             projects: --project=pages
-          - group: presets-nova-vega
-            projects: --project=presets-nova --project=presets-vega
-          - group: presets-maia-lyra
-            projects: --project=presets-maia --project=presets-lyra
-          - group: presets-mira-luma
-            projects: --project=presets-mira --project=presets-luma
-          - group: presets-sera-rhea
-            projects: --project=presets-sera --project=presets-rhea
+          - group: styles-nova-vega
+            projects: --project=styles-nova --project=styles-vega
+          - group: styles-maia-lyra
+            projects: --project=styles-maia --project=styles-lyra
+          - group: styles-mira-luma
+            projects: --project=styles-mira --project=styles-luma
+          - group: styles-sera-rhea
+            projects: --project=styles-sera --project=styles-rhea
           # The phones' tests, and the blocks' small suite.
           - group: mobile
             projects: --project=mobile
@@ -139,7 +139,7 @@ jobs:
   # hydrated: every e2e test again, plus `ssr.spec.ts` (every page hydrates),
   # in Chromium, in the same groups as `csr-e2e`. Not required: the apps stay
   # client-side by default. Its own Playwright flags: four workers, not the
-  # preset's CI default of one (which made it run for hours), two retries, and
+  # style's CI default of one (which made it run for hours), two retries, and
   # a reporter that shows progress.
   ssr:
     name: ssr (${{ matrix.group }})
@@ -155,14 +155,14 @@ jobs:
             projects: --project=demos --shard=2/2
           - group: pages
             projects: --project=pages
-          - group: presets-nova-vega
-            projects: --project=presets-nova --project=presets-vega
-          - group: presets-maia-lyra
-            projects: --project=presets-maia --project=presets-lyra
-          - group: presets-mira-luma
-            projects: --project=presets-mira --project=presets-luma
-          - group: presets-sera-rhea
-            projects: --project=presets-sera --project=presets-rhea
+          - group: styles-nova-vega
+            projects: --project=styles-nova --project=styles-vega
+          - group: styles-maia-lyra
+            projects: --project=styles-maia --project=styles-lyra
+          - group: styles-mira-luma
+            projects: --project=styles-mira --project=styles-luma
+          - group: styles-sera-rhea
+            projects: --project=styles-sera --project=styles-rhea
           # The phones' tests, and the blocks' small suite.
           - group: mobile
             projects: --project=mobile

@@ -8,7 +8,7 @@ import {
   model,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { bindInput } from '../../utils';
 
 /**
@@ -29,7 +29,7 @@ import { bindInput } from '../../utils';
   },
 })
 export class ScAccordion {
-  private readonly styles = injectPreset().accordion;
+  private readonly styles = injectStyle().accordion;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Several items open at once; one at a time by default. */

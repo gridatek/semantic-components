@@ -1,4 +1,4 @@
-import type { ScNavigationMenuStyles } from '@semantic-components/presets';
+import type { ScNavigationMenuStyles } from '@semantic-components/styles';
 
 // shadcn's navigation menu in nova (shadcn-reference/presets/nova/navigation-menu.tsx):
 // Base UI's open state as aria-expanded, the in-panel link classes resolved.

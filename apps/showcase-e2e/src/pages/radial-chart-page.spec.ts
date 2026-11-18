@@ -28,7 +28,7 @@ test.describe('Radial Chart Page', () => {
     // corners measured once laid out.
     await page.context().addCookies([
       {
-        name: 'sc-preset',
+        name: 'sc-style',
         value: 'nova',
         url: baseURL ?? 'http://localhost:4200',
       },

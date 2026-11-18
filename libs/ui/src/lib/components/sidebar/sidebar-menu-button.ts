@@ -8,9 +8,9 @@ import {
 import type {
   ScSidebarMenuButtonSize,
   ScSidebarMenuButtonVariant,
-} from '@semantic-components/presets';
+} from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScSidebarMenuTooltip } from './sidebar-menu-tooltip';
 import { ScSidebarState } from './sidebar-state';
 
@@ -38,7 +38,7 @@ import { ScSidebarState } from './sidebar-state';
   },
 })
 export class ScSidebarMenuButton {
-  private readonly styles = injectPreset().sidebar;
+  private readonly styles = injectStyle().sidebar;
   private readonly state = inject(ScSidebarState, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });

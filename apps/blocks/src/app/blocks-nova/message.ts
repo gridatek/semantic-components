@@ -1,4 +1,4 @@
-import type { ScMessageStyles } from '@semantic-components/presets';
+import type { ScMessageStyles } from '@semantic-components/styles';
 
 // shadcn's message in nova (shadcn-reference/presets/nova/message.tsx).
 export const message: ScMessageStyles = {

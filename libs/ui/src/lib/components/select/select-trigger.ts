@@ -9,7 +9,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { bindInput } from '../../utils';
 import { SC_FIELD } from '../field';
 import { SC_SELECT, SC_SELECT_TRIGGER } from './select-tokens';
@@ -43,7 +43,7 @@ export class ScSelectTrigger {
   private readonly combobox = inject(Combobox);
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
-  private readonly styles = injectPreset().select;
+  private readonly styles = injectStyle().select;
   private readonly field = inject(SC_FIELD, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });

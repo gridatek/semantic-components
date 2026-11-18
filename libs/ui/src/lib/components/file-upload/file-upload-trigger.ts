@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { ScFileUpload } from './file-upload';
 
@@ -17,7 +17,7 @@ import { ScFileUpload } from './file-upload';
   },
 })
 export class ScFileUploadTrigger {
-  private readonly buttonStyles = injectPreset().button;
+  private readonly buttonStyles = injectStyle().button;
 
   private readonly upload = inject(ScFileUpload);
 

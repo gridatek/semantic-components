@@ -1,7 +1,7 @@
 import { TabPanel } from '@angular/aria/tabs';
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /**
  * A tab's panel (role tabpanel), named by its tab, shown while its tab is
@@ -17,7 +17,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScTabsPanel {
-  private readonly styles = injectPreset().tabs;
+  private readonly styles = injectStyle().tabs;
 
   readonly classInput = input<string>('', { alias: 'class' });
 

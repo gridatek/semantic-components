@@ -1,6 +1,6 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 /** What is empty — best a heading, at the page's level (h2–h6). */
 @Directive({
@@ -11,7 +11,7 @@ import { injectPreset } from '../../config/preset';
   },
 })
 export class ScEmptyTitle {
-  private readonly styles = injectPreset().empty;
+  private readonly styles = injectStyle().empty;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

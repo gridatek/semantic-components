@@ -1,6 +1,6 @@
 # Preview Card
 
-A preview of a link's destination, shown on hover or keyboard focus — shadcn's Hover Card (Base UI's Preview Card) in the look of the app's preset (`previewCard` key: shadcn's in each of the eight styles).
+A preview of a link's destination, shown on hover or keyboard focus — shadcn's Hover Card (Base UI's Preview Card) in the look of the app's style (`previewCard` key: shadcn's in each of the eight styles).
 
 ## Usage
 
@@ -20,7 +20,7 @@ A preview of a link's destination, shown on hover or keyboard focus — shadcn's
 | `ScPreviewCardProvider` | `div[scPreviewCardProvider], span[scPreviewCardProvider]` | `[(open)]`, `side` (`bottom`, `top`, `left`, `right`, `inline-start`, `inline-end`), `alignment` (`start`, `center` default, `end`; logical: `start` is the reading start, flipped right to left; no `left` / `right`), `sideOffset` (4: px from the side), `alignmentOffset` (0: px along it, toward its end), `origin` |
 | `ScPreviewCardTrigger`  | `a[scPreviewCardTrigger]`, `button[scPreviewCardTrigger]` | Your link (or button): `delay` (600), `closeDelay` (300); `data-popup-open` while open                                                                                                                                                                                                                                   |
 | `ScPreviewCardPortal`   | `ng-template[scPreviewCardPortal]`                        | The content, rendered while open                                                                                                                                                                                                                                                                                         |
-| `ScPreviewCard`         | `div[scPreviewCard]`                                      | The card in the preset's look; `data-side` (physical: `top`, `right`, `bottom`, `left` — the side it landed on, after a flip); animates in and out                                                                                                                                                                       |
+| `ScPreviewCard`         | `div[scPreviewCard]`                                      | The card in the style's look; `data-side` (physical: `top`, `right`, `bottom`, `left` — the side it landed on, after a flip); animates in and out                                                                                                                                                                        |
 
 `scPreviewCardProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 
@@ -32,6 +32,6 @@ A preview of a link's destination, shown on hover or keyboard focus — shadcn's
 
 ## Not shadcn's
 
-- **Angular's animations**: the card fades, zooms and slides with `animate.enter` / `animate.leave` (tw-animate's `animate-in` / `animate-out`); shadcn's `data-open:` / `data-closed:` classes are left out of the preset.
+- **Angular's animations**: the card fades, zooms and slides with `animate.enter` / `animate.leave` (tw-animate's `animate-in` / `animate-out`); shadcn's `data-open:` / `data-closed:` classes are left out of the style.
 - **The CDK places it** (`cdkConnectedOverlay`), with the sides and hover timing shared with Tooltip and Popover (`utils/overlay-positions`, `utils/open-delay`).
 - **One card per trigger**: Base UI's detached triggers (`handle`, `payload`), its Viewport, Arrow and Backdrop aren't taken — shadcn uses none of them.

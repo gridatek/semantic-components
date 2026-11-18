@@ -9,7 +9,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_FIELD, SC_FIELD_CHOICE } from '../field';
 import { ScRadioGroup } from './radio-group';
 
@@ -32,7 +32,7 @@ import { ScRadioGroup } from './radio-group';
   },
 })
 export class ScRadio {
-  private readonly styles = injectPreset().radioGroup;
+  private readonly styles = injectStyle().radioGroup;
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   private readonly radioGroup = inject(ScRadioGroup, { optional: true });

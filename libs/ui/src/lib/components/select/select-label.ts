@@ -1,7 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_FIELD } from '../field';
 import { SC_SELECT } from './select-tokens';
 
@@ -19,7 +19,7 @@ import { SC_SELECT } from './select-tokens';
   },
 })
 export class ScSelectLabel {
-  private readonly styles = injectPreset().label;
+  private readonly styles = injectStyle().label;
   /** In a field: a field's label, as scLabel there (shadcn's FieldLabel). */
   private readonly inField = !!inject(SC_FIELD, { optional: true });
   private readonly select = inject(SC_SELECT);
@@ -33,7 +33,7 @@ export class ScSelectLabel {
 
   private readonly class = computed(() =>
     cn(
-      // shadcn's Label, in the preset's look.
+      // shadcn's Label, in the style's look.
       this.styles.label,
       this.inField && this.styles.field,
       'w-fit cursor-default',

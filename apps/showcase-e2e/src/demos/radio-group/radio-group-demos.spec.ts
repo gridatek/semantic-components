@@ -32,7 +32,7 @@ test('Checked: its dot shows', async ({ page }) => {
     page
       .getByRole('radio', { name })
       .evaluate((el) => getComputedStyle(el, '::before').width);
-  // Checked: the preset's dot size; unchecked: nothing drawn.
+  // Checked: the style's dot size; unchecked: nothing drawn.
   expect(await dot('Comfortable')).not.toBe('0px');
   expect(await dot('Default')).toBe('0px');
 });

@@ -2,9 +2,9 @@ import { Directive, computed, input } from '@angular/core';
 import type {
   ScAttachmentOrientation,
   ScAttachmentSize,
-} from '@semantic-components/presets';
+} from '@semantic-components/styles';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 
 export type ScAttachmentState =
   'idle' | 'uploading' | 'processing' | 'error' | 'done';
@@ -20,7 +20,7 @@ export type ScAttachmentState =
   },
 })
 export class ScAttachment {
-  private readonly styles = injectPreset().attachment;
+  private readonly styles = injectStyle().attachment;
   readonly classInput = input<string>('', { alias: 'class' });
   readonly state = input<ScAttachmentState>('done');
   readonly size = input<ScAttachmentSize>('default');

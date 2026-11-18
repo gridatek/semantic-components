@@ -1,12 +1,12 @@
 import { Directive, computed, effect, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils';
 import { type ScButtonVariants } from '../button/button';
 import { ScComboboxBase } from './combobox-base';
 
 /**
- * Clears the value: the preset's button (ghost, icon-xs), beside the trigger
+ * Clears the value: the style's button (ghost, icon-xs), beside the trigger
  * at the input's end — shown only while there is a value, in the trigger's
  * place. Write its icon and name it. Not a tab stop: emptying the input
  * clears the value too.
@@ -24,7 +24,7 @@ import { ScComboboxBase } from './combobox-base';
   },
 })
 export class ScComboboxClear {
-  private readonly preset = injectPreset();
+  private readonly preset = injectStyle();
   private readonly root = inject(ScComboboxBase);
 
   readonly classInput = input<string>('', { alias: 'class' });

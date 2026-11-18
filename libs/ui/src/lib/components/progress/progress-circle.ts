@@ -10,7 +10,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { ScProgress } from './progress';
 
 /**
@@ -55,10 +55,10 @@ import { ScProgress } from './progress';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScProgressCircle {
-  /** The arc: its ends round, or square in a square style (the preset). */
+  /** The arc: its ends round, or square in a square style (the style). */
   private readonly arcClass = cn(
     'stroke-primary transition-[stroke-dashoffset] duration-300',
-    injectPreset().progress.arc,
+    injectStyle().progress.arc,
   );
   private readonly progress = inject(ScProgress);
 

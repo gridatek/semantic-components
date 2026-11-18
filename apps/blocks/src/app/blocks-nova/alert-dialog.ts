@@ -1,4 +1,4 @@
-import type { ScAlertDialogStyles } from '@semantic-components/presets';
+import type { ScAlertDialogStyles } from '@semantic-components/styles';
 
 // shadcn's alert dialog in nova (shadcn-reference/presets/nova/alert-dialog.tsx),
 // without its placement and animation classes: the CDK overlay centers it,

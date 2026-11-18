@@ -62,7 +62,7 @@ test('Link: a link, followed', async ({ page }) => {
   await expect(page).toHaveURL(/\/docs\/components\/button$/);
 });
 
-test('Custom Colors: your classes over the preset’s', async ({ page }) => {
+test('Custom Colors: your classes over the style’s', async ({ page }) => {
   await page.goto(demo('colors'));
   const blue = page.locator('[scBadge]', { hasText: 'Blue' });
   await expect(blue).toHaveClass(/bg-blue-50/);

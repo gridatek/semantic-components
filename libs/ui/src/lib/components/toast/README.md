@@ -1,6 +1,6 @@
 # Toast Components
 
-A succinct message that is displayed temporarily. shadcn's Toast (Base UI's) in the look of the app's preset (the `toast` key): only its corners change between styles.
+A succinct message that is displayed temporarily. shadcn's Toast (Base UI's) in the look of the app's style (the `toast` key): only its corners change between styles.
 
 ## Architecture
 
@@ -15,16 +15,16 @@ ScToaster.show({ title, description, variant, action })
 
 ## Parts
 
-| Part                 | Selector                       | Does                                                                                                                                                  |
-| -------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScToastTemplate`    | `ng-template[scToastTemplate]` | How a toast looks — once, in your app; `let-toast` is the toast's data; `label` names the toasts' region                                              |
-| `ScToastIcon`        | `[scToastIcon]`                | Your icon, in its variant's colour; a spinner turns while `loading`                                                                                   |
-| `ScToastTitle`       | `[scToastTitle]`               | The title                                                                                                                                             |
-| `ScToastDescription` | `[scToastDescription]`         | The description, muted (or the variant's colour)                                                                                                      |
-| `ScToastAction`      | `button[scToastAction]`        | Runs the toast's `action`, then dismisses it: the preset's button, `variant` / `size` (outline, sm). Write `toast.action.label`                       |
-| `ScToastClose`       | `button[scToastClose]`         | Dismisses the toast: the preset's button, `variant` / `size` (ghost, icon-sm), at the end of the row, muted until hovered. Write its icon and name it |
-| `ScToast`            | `div[scToast]`                 | The toast, your template's root: the preset's look, `data-variant`, its place in the stack, swipe to dismiss                                          |
-| `ScToastStack`       | `div[scToastStack]`            | The stack — the toaster creates it in an overlay: don't place it yourself                                                                             |
+| Part                 | Selector                       | Does                                                                                                                                                 |
+| -------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScToastTemplate`    | `ng-template[scToastTemplate]` | How a toast looks — once, in your app; `let-toast` is the toast's data; `label` names the toasts' region                                             |
+| `ScToastIcon`        | `[scToastIcon]`                | Your icon, in its variant's colour; a spinner turns while `loading`                                                                                  |
+| `ScToastTitle`       | `[scToastTitle]`               | The title                                                                                                                                            |
+| `ScToastDescription` | `[scToastDescription]`         | The description, muted (or the variant's colour)                                                                                                     |
+| `ScToastAction`      | `button[scToastAction]`        | Runs the toast's `action`, then dismisses it: the style's button, `variant` / `size` (outline, sm). Write `toast.action.label`                       |
+| `ScToastClose`       | `button[scToastClose]`         | Dismisses the toast: the style's button, `variant` / `size` (ghost, icon-sm), at the end of the row, muted until hovered. Write its icon and name it |
+| `ScToast`            | `div[scToast]`                 | The toast, your template's root: the style's look, `data-variant`, its place in the stack, swipe to dismiss                                          |
+| `ScToastStack`       | `div[scToastStack]`            | The stack — the toaster creates it in an overlay: don't place it yourself                                                                            |
 
 ## Service
 
@@ -190,6 +190,6 @@ this.toaster.show({ position: 'top-center', description: 'Copied.' });
 
 ## Styling
 
-shadcn's Toast: `border bg-popover text-popover-foreground shadow-lg`, its corners the preset's (`toast.toast`: `rounded-2xl`, `rounded-md` in mira, none in lyra and sera); the stack's focus ring takes them too (`toast.list`). Its variant colours its title, description and icon, the Alert's way (`success`, `warning`, `error`; not `info`, its icon is enough), not its buttons — not shadcn's, which colours only the error icon. A row (`p-4 gap-3`): your icon, the text column (`flex min-w-0 flex-1 flex-col gap-1`, yours), the action, the close. The stack as shadcn's: `max-w-sm` (the screen's width on a phone), each toast behind showing 12px and 10% smaller, 12px apart when spread out.
+shadcn's Toast: `border bg-popover text-popover-foreground shadow-lg`, its corners the style's (`toast.toast`: `rounded-2xl`, `rounded-md` in mira, none in lyra and sera); the stack's focus ring takes them too (`toast.list`). Its variant colours its title, description and icon, the Alert's way (`success`, `warning`, `error`; not `info`, its icon is enough), not its buttons — not shadcn's, which colours only the error icon. A row (`p-4 gap-3`): your icon, the text column (`flex min-w-0 flex-1 flex-col gap-1`, yours), the action, the close. The stack as shadcn's: `max-w-sm` (the screen's width on a phone), each toast behind showing 12px and 10% smaller, 12px apart when spread out.
 
 Not shadcn's: the six positions (shadcn's bottom end only), the `hotkey` (Base UI's F6), and the enter and leave animations (Angular's `animate.enter` / `animate.leave` with tw-animate).

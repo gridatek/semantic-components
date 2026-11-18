@@ -1,4 +1,4 @@
-import type { ScCheckboxStyles } from '@semantic-components/presets';
+import type { ScCheckboxStyles } from '@semantic-components/styles';
 
 // shadcn's checkbox in nova (shadcn-reference/presets/nova/checkbox.tsx): our checkbox is a
 // native input drawing itself — :checked / :indeterminate for Base UI's data-checked; its

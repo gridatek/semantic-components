@@ -731,7 +731,7 @@ export class UiElementPage {
     {
       id: 'b',
       q: $localize`Is it styled?`,
-      a: $localize`Yes — by the preset, like every other part.`,
+      a: $localize`Yes — by the style, like every other part.`,
     },
     {
       id: 'c',

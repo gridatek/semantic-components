@@ -1,6 +1,6 @@
 # Checkbox
 
-A native checkbox that draws itself (`appearance-none`): its box, and its check or minus as its `::before` — the style's icon (lucide, hugeicons or phosphor) as a CSS mask. In the look of the app's preset: the `checkbox` key's `item` and `mark`. Alone (a table row), or in a field: `scField orientation="horizontal"` lays it out beside its text (the field is the label, a label is inside it, or it is inside a label — a choice card).
+A native checkbox that draws itself (`appearance-none`): its box, and its check or minus as its `::before` — the style's icon (lucide, hugeicons or phosphor) as a CSS mask. In the look of the app's style: the `checkbox` key's `item` and `mark`. Alone (a table row), or in a field: `scField orientation="horizontal"` lays it out beside its text (the field is the label, a label is inside it, or it is inside a label — a choice card).
 
 ## Usage
 
@@ -21,7 +21,7 @@ A native checkbox that draws itself (`appearance-none`): its box, and its check 
 
 ## Custom mark
 
-The mark is a mask: set `--sc-checkbox-check` (and `--sc-checkbox-indeterminate`) to your image, on the checkbox or any element round it. Its outline only, in the preset's colour; the style's icon when unset.
+The mark is a mask: set `--sc-checkbox-check` (and `--sc-checkbox-indeterminate`) to your image, on the checkbox or any element round it. Its outline only, in the style's colour; the style's icon when unset.
 
 ```html
 <fieldset scFieldset style="--sc-checkbox-check: url(/images/checkbox-heart.svg)">…</fieldset>
@@ -56,4 +56,4 @@ Base UI's `data-checked` is `:checked` here, and `:indeterminate` is filled too.
 
 In a group, `ScCheckbox` takes `value` — its option, ticked when the group's value includes it — or `parent`: ticked when all of `allValues` are, mixed when only some are (or when its `indeterminate` says so: a nested group partly ticked), a click ticks all or none. A checkbox with neither stays a plain checkbox. (Its `value` is `valueInput` in the class: Signal Forms' `FormCheckboxControl` keeps a `value` property for value controls.)
 
-A fieldset round the group names it (its legend), and its preset closes up to `gap-3` (shadcn's `has-[>[data-slot=checkbox-group]]`); a group alone is named by `aria-label` or `aria-labelledby`.
+A fieldset round the group names it (its legend), and its style closes up to `gap-3` (shadcn's `has-[>[data-slot=checkbox-group]]`); a group alone is named by `aria-label` or `aria-labelledby`.

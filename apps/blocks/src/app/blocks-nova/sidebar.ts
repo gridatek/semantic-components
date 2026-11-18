@@ -1,4 +1,4 @@
-import type { ScSidebarStyles } from '@semantic-components/presets';
+import type { ScSidebarStyles } from '@semantic-components/styles';
 import { cva } from 'class-variance-authority';
 
 // shadcn's sidebar in nova (shadcn-reference/presets/nova/sidebar.tsx): the parts whose

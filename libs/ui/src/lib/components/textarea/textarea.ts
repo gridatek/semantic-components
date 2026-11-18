@@ -7,7 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_FIELD } from '../field';
 
 @Directive({
@@ -22,7 +22,7 @@ import { SC_FIELD } from '../field';
   },
 })
 export class ScTextarea {
-  private readonly styles = injectPreset().textarea;
+  private readonly styles = injectStyle().textarea;
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly fallbackId = inject(_IdGenerator).getId('sc-textarea-');
 

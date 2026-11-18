@@ -17,7 +17,7 @@ Keeps its content to a ratio of width to height — a photo, a video, a map — 
 - It is `relative`: what fills it can be placed inside it (an image with `fill`, a video with `size-full`).
 - It clips what overflows its box (`overflow-hidden`): a framed photo takes the frame's corners.
 - Framed: add `scFrame` — the style's card radius, ring and shadow (a fixed `rounded-lg` suits few styles).
-- The same in every shadcn style: no preset of its own.
+- The same in every shadcn style: no style of its own.
 
 ## API reference
 

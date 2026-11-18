@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import type { FormCheckboxControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { injectPreset } from '../../config/preset';
+import { injectStyle } from '../../config/style';
 import { SC_FIELD, SC_FIELD_CHOICE } from '../field';
 
 /** A switch's size: shadcn's two. */
@@ -18,7 +18,7 @@ export type ScSwitchSize = 'default' | 'sm';
 
 /**
  * A switch: a native checkbox with role="switch", drawn by itself in the
- * preset's look — the track, and its thumb (its ::before). Alone, in a switch
+ * style's look — the track, and its thumb (its ::before). Alone, in a switch
  * field beside its text, or in any field.
  */
 @Directive({
@@ -41,7 +41,7 @@ export type ScSwitchSize = 'default' | 'sm';
   exportAs: 'scSwitch',
 })
 export class ScSwitch implements FormCheckboxControl {
-  private readonly styles = injectPreset().switch;
+  private readonly styles = injectStyle().switch;
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   private readonly field = inject(SC_FIELD, { optional: true });

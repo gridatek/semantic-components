@@ -1,5 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { injectPreset } from '@semantic-components/ui';
+import { injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScChartState } from './chart-state';
 import type { ScChartConfig, ScChartDatum } from './chart-types';
@@ -21,8 +21,8 @@ import type { ScChartConfig, ScChartDatum } from './chart-types';
 })
 export class ScChart {
   readonly state = inject(ScChartState);
-  /** The preset's: how round the bars, treemap boxes, radial bars' ends, pie slices, sunburst arcs, funnel stages and sankey nodes are (`--sc-chart-bar-radius`). */
-  private readonly chartStyles = injectPreset().chart.chart;
+  /** The style's: how round the bars, treemap boxes, radial bars' ends, pie slices, sunburst arcs, funnel stages and sankey nodes are (`--sc-chart-bar-radius`). */
+  private readonly chartStyles = injectStyle().chart.chart;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly data = input<readonly ScChartDatum[]>([]);

@@ -39,7 +39,7 @@ const PROJECTS = [
   'apps/dashboard/tsconfig.app.json',
   'apps/presets/sera/tsconfig.app.json',
   'libs/ui/tsconfig.lib.json',
-  'libs/presets/tsconfig.lib.json',
+  'libs/styles/tsconfig.lib.json',
 ];
 
 const SOURCES = [
@@ -48,7 +48,7 @@ const SOURCES = [
   'apps/dashboard/src/**/*.ts',
   'apps/presets/sera/src/**/*.ts',
   'libs/ui/**/src/**/*.ts',
-  'libs/presets/src/**/*.ts',
+  'libs/styles/src/**/*.ts',
   '!**/*.spec.ts',
   '!**/*.test.ts',
   '!**/node_modules/**',

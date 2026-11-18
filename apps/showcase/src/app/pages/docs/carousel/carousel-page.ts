@@ -126,7 +126,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
         <p class="text-muted-foreground">
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the preset (cn: a later class wins).
+          merged over the style (cn: a later class wins).
         </p>
         <div
           scTableContainer
@@ -221,7 +221,7 @@ export default class CarouselPage {
       name: 'ScCarouselPrevious, ScCarouselNext',
       selector: 'button[…]',
       description:
-        "The preset's button (variant 'outline', size 'icon-sm', the preset's corners) outside either end; disabled when it can't move; your icon, mirrored right to left.",
+        "The style's button (variant 'outline', size 'icon-sm', the style's corners) outside either end; disabled when it can't move; your icon, mirrored right to left.",
     },
   ];
 }

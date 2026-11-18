@@ -1,6 +1,6 @@
 # OTP Field
 
-A one-time code, one real `<input>` per character (Base UI's OTP Field), in shadcn's Input OTP look for each style (the `otpField` preset key: `group`, `input`, `separator`).
+A one-time code, one real `<input>` per character (Base UI's OTP Field), in shadcn's Input OTP look for each style (the `otpField` style key: `group`, `input`, `separator`).
 
 ## Usage
 

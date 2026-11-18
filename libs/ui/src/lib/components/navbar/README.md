@@ -97,7 +97,7 @@ The buttons at the end.
 
 ### ScNavbarToggle — `button[scNavbarToggle]`
 
-Opens and closes the menu, below `expand`. Styled as the preset's button: `variant` (`'ghost'`), `size` (`'icon'`).
+Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`).
 
 ### ScNavbarMenu — `div[scNavbarMenu]`
 
