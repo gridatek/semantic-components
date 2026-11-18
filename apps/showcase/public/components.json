@@ -57,15 +57,6 @@
     "hidden": true
   },
   {
-    "name": "Auth Layout",
-    "path": "auth-layout",
-    "description": "A page frame for sign-in pages: the routed page, alone.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Layout",
-    "hidden": true
-  },
-  {
     "name": "Autocomplete",
     "path": "autocomplete",
     "description": "An input with autocomplete suggestions.",
@@ -1002,24 +993,6 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Overlay",
-    "hidden": true
-  },
-  {
-    "name": "Sidebar Layout",
-    "path": "sidebar-layout",
-    "description": "A page frame: a sidebar beside the routed page.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Layout",
-    "hidden": true
-  },
-  {
-    "name": "Stacked Layout",
-    "path": "stacked-layout",
-    "description": "A page frame: a sticky navbar, the routed page and a footer.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Layout",
     "hidden": true
   },
   {

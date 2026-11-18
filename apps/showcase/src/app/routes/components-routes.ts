@@ -55,12 +55,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/frame/frame-page'),
       },
       {
-        path: 'auth-layout',
-        title: 'Auth Layout - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/auth-layout/auth-layout-page'),
-      },
-      {
         path: 'pie-chart',
         title: 'Pie Chart - Semantic Components',
         loadComponent: () => import('../pages/docs/pie-chart/pie-chart-page'),
@@ -106,18 +100,6 @@ export const componentsRoutes: Route[] = [
         title: 'Scatter Chart - Semantic Components',
         loadComponent: () =>
           import('../pages/docs/scatter-chart/scatter-chart-page'),
-      },
-      {
-        path: 'sidebar-layout',
-        title: 'Sidebar Layout - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/sidebar-layout/sidebar-layout-page'),
-      },
-      {
-        path: 'stacked-layout',
-        title: 'Stacked Layout - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/stacked-layout/stacked-layout-page'),
       },
       {
         path: 'focus-trap',
