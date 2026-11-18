@@ -61,10 +61,10 @@ interface Generation {
 }
 
 const STYLES = [
-  $localize`Photographic`,
-  $localize`Digital art`,
-  $localize`Watercolour`,
-  $localize`3D render`,
+  $localize`:@@ai.image.photographic:Photographic`,
+  $localize`:@@ai.image.digitalArt:Digital art`,
+  $localize`:@@ai.image.watercolour:Watercolour`,
+  $localize`:@@ai.image.n3dRender:3D render`,
 ];
 
 const SETS: readonly (readonly string[])[] = [
@@ -118,7 +118,7 @@ const SETS: readonly (readonly string[])[] = [
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@ai.image.aiImage"
       title="AI Image"
       [trail]="[{ label: t.apps }, { label: t.aiImage }]"
     />
@@ -126,16 +126,20 @@ const SETS: readonly (readonly string[])[] = [
     <div class="grid gap-4 lg:grid-cols-[22rem_1fr]">
       <div scCard class="self-start">
         <div scCardHeader>
-          <h2 i18n scCardTitle>Describe a picture</h2>
-          <p i18n scCardDescription>Four versions each time</p>
+          <h2 i18n="@@ai.image.describeAPicture" scCardTitle>
+            Describe a picture
+          </h2>
+          <p i18n="@@ai.image.fourVersionsEachTime" scCardDescription>
+            Four versions each time
+          </p>
         </div>
         <div scCardBody>
           <form (submit)="generate($event)">
             <div scFieldGroup>
               <div scField>
-                <label i18n scLabel>Prompt</label>
+                <label i18n="@@ai.image.prompt" scLabel>Prompt</label>
                 <textarea
-                  i18n-placeholder
+                  i18n-placeholder="@@ai.image.aLaptopOnADesk"
                   scTextarea
                   rows="4"
                   placeholder="A laptop on a desk by a window, morning light"
@@ -149,7 +153,7 @@ const SETS: readonly (readonly string[])[] = [
                   (valueChange)="style.set($any($event))"
                   [items]="styles"
                 >
-                  <label i18n scSelectLabel>Style</label>
+                  <label i18n="@@ai.image.style" scSelectLabel>Style</label>
                   <div scSelectTrigger class="w-full">
                     <span scSelectValue></span>
                     <svg scSelectIcon siChevronDownIcon></svg>
@@ -173,20 +177,36 @@ const SETS: readonly (readonly string[])[] = [
                 </div>
               </div>
               <fieldset class="flex flex-col gap-3">
-                <legend i18n scLegend variant="label">Shape</legend>
+                <legend i18n="@@ai.image.shape" scLegend variant="label">
+                  Shape
+                </legend>
                 <div
-                  i18n-aria-label
+                  i18n-aria-label="@@ai.image.shape"
                   scToggleGroup
                   variant="outline"
                   aria-label="Shape"
                   [value]="[ratio()]"
                   (valueChange)="chooseRatio($event)"
                 >
-                  <button i18n scToggleGroupItem value="square">Square</button>
-                  <button i18n scToggleGroupItem value="portrait">
+                  <button
+                    i18n="@@ai.image.square"
+                    scToggleGroupItem
+                    value="square"
+                  >
+                    Square
+                  </button>
+                  <button
+                    i18n="@@ai.image.portrait"
+                    scToggleGroupItem
+                    value="portrait"
+                  >
                     Portrait
                   </button>
-                  <button i18n scToggleGroupItem value="landscape">
+                  <button
+                    i18n="@@ai.image.landscape"
+                    scToggleGroupItem
+                    value="landscape"
+                  >
                     Landscape
                   </button>
                 </div>
@@ -194,15 +214,19 @@ const SETS: readonly (readonly string[])[] = [
               <button scButton type="submit" [disabled]="working()">
                 @if (working()) {
                   <svg
-                    i18n-aria-label
+                    i18n-aria-label="@@ai.image.loading"
                     scSpinner
                     siLoaderCircleIcon
                     aria-label="Loading"
                   ></svg>
-                  <ng-container i18n>Generating…</ng-container>
+                  <ng-container i18n="@@ai.image.generating"
+                    >Generating…</ng-container
+                  >
                 } @else {
                   <svg siSparklesIcon></svg>
-                  <ng-container i18n>Generate</ng-container>
+                  <ng-container i18n="@@ai.image.generate"
+                    >Generate</ng-container
+                  >
                 }
               </button>
             </div>
@@ -213,7 +237,9 @@ const SETS: readonly (readonly string[])[] = [
       <div class="flex flex-col gap-6">
         @if (working()) {
           <section class="flex flex-col gap-3" aria-busy="true">
-            <h2 i18n class="font-medium">Generating…</h2>
+            <h2 i18n="@@ai.image.generating" class="font-medium">
+              Generating…
+            </h2>
             <div class="grid grid-cols-2 gap-3 xl:grid-cols-4">
               @for (n of [1, 2, 3, 4]; track n) {
                 <div scSkeleton [class]="shapeClass(ratio())"></div>
@@ -251,7 +277,7 @@ const SETS: readonly (readonly string[])[] = [
                     class="absolute end-2 bottom-2 opacity-0 group-focus-within:opacity-100 group-hover:opacity-100"
                   >
                     <svg siDownloadIcon></svg>
-                    <span i18n class="sr-only"
+                    <span i18n="@@ai.image.downloadVersion" class="sr-only"
                       >Download version {{ i + 1 }}</span
                     >
                   </a>
@@ -270,9 +296,9 @@ export class AiImagePage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    apps: $localize`Apps`,
-    aiImage: $localize`AI Image`,
-    version: $localize`, version `,
+    apps: $localize`:@@ai.image.apps:Apps`,
+    aiImage: $localize`:@@ai.image.aiImage:AI Image`,
+    version: $localize`:@@ai.image.version:, version `,
   };
 
   private readonly toaster = inject(ScToaster);
@@ -288,14 +314,14 @@ export class AiImagePage {
   private readonly generations = signal<readonly Generation[]>([
     {
       id: 2,
-      prompt: $localize`Flowers and birds in soft spring light`,
+      prompt: $localize`:@@ai.image.flowersAndBirdsInSoft:Flowers and birds in soft spring light`,
       style: STYLES[0],
       ratio: 'portrait',
       images: SETS[1],
     },
     {
       id: 1,
-      prompt: $localize`A laptop on a wooden desk, top view`,
+      prompt: $localize`:@@ai.image.aLaptopOnAWooden:A laptop on a wooden desk, top view`,
       style: STYLES[0],
       ratio: 'square',
       images: SETS[0],
@@ -343,7 +369,7 @@ export class AiImagePage {
       this.model.set({ prompt: '' });
       this.toaster.show({
         variant: 'success',
-        title: $localize`Four pictures ready`,
+        title: $localize`:@@ai.image.fourPicturesReady:Four pictures ready`,
       });
     }, 1600);
   }

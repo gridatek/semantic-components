@@ -75,27 +75,27 @@ const columnHelper = createColumnHelper<typeof features, StaffMember>();
 
 const COLUMNS = columnHelper.columns([
   columnHelper.accessor('name', {
-    header: $localize`Name`,
+    header: $localize`:@@dataTables.queryTables.name:Name`,
     filterFn: 'includesString',
   }),
   columnHelper.accessor('role', {
-    header: $localize`Role`,
+    header: $localize`:@@dataTables.queryTables.role:Role`,
     filterFn: 'includesString',
   }),
   columnHelper.accessor('department', {
-    header: $localize`Department`,
+    header: $localize`:@@dataTables.queryTables.department:Department`,
     filterFn: 'includesString',
   }),
   columnHelper.accessor('location', {
-    header: $localize`Location`,
+    header: $localize`:@@dataTables.queryTables.location:Location`,
     filterFn: 'includesString',
   }),
   columnHelper.accessor('salary', {
-    header: $localize`Salary`,
+    header: $localize`:@@dataTables.queryTables.salary:Salary`,
     enableColumnFilter: false,
   }),
   columnHelper.accessor('status', {
-    header: $localize`Status`,
+    header: $localize`:@@dataTables.queryTables.status:Status`,
     filterFn: 'includesString',
   }),
 ]);
@@ -126,14 +126,14 @@ const IMPORTS = [
   imports: [...IMPORTS, SortHeader],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@dataTables.queryTables.sorting"
       title="Sorting"
       [trail]="[{ label: t.dataTables }, { label: t.sorting }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 i18n scCardTitle>Team</h2>
-        <p i18n scCardDescription>
+        <h2 i18n="@@dataTables.queryTables.team" scCardTitle>Team</h2>
+        <p i18n="@@dataTables.queryTables.aHeaderSortsUpThen" scCardDescription>
           A header sorts up, then down, then not; Shift+click adds another
           column
         </p>
@@ -175,7 +175,7 @@ const IMPORTS = [
               } @empty {
                 <tr scTableRow>
                   <td
-                    i18n
+                    i18n="@@dataTables.queryTables.noOneMatches"
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -196,8 +196,8 @@ const IMPORTS = [
 export class SortingTablePage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    dataTables: $localize`Data Tables`,
-    sorting: $localize`Sorting`,
+    dataTables: $localize`:@@dataTables.queryTables.dataTables:Data Tables`,
+    sorting: $localize`:@@dataTables.queryTables.sorting:Sorting`,
   };
 
   private readonly table = injectTable(() => ({
@@ -219,21 +219,24 @@ export class SortingTablePage {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@dataTables.queryTables.filtering"
       title="Filtering"
       [trail]="[{ label: t.dataTables }, { label: t.filtering }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 i18n scCardTitle>Team</h2>
-        <p i18n scCardDescription>
+        <h2 i18n="@@dataTables.queryTables.team" scCardTitle>Team</h2>
+        <p
+          i18n="@@dataTables.queryTables.searchEverythingOrNarrowOne"
+          scCardDescription
+        >
           Search everything, or narrow one column at a time
         </p>
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <input
-          i18n-aria-label
-          i18n-placeholder
+          i18n-aria-label="@@dataTables.queryTables.searchAllColumns"
+          i18n-placeholder="@@dataTables.queryTables.searchAllColumns2"
           scInput
           scDataTableGlobalFilter
           [table]="table"
@@ -290,7 +293,7 @@ export class SortingTablePage {
               } @empty {
                 <tr scTableRow>
                   <td
-                    i18n
+                    i18n="@@dataTables.queryTables.noOneMatches"
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -302,7 +305,11 @@ export class SortingTablePage {
             </tbody>
           </table>
         </div>
-        <p i18n class="text-muted-foreground text-sm" aria-live="polite">
+        <p
+          i18n="@@dataTables.queryTables.ofPeople"
+          class="text-muted-foreground text-sm"
+          aria-live="polite"
+        >
           {{ table.getFilteredRowModel().rows.length }} of {{ total }} people
         </p>
       </div>
@@ -314,9 +321,9 @@ export class SortingTablePage {
 export class FilteringTablePage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    dataTables: $localize`Data Tables`,
-    filtering: $localize`Filtering`,
-    filter: $localize`Filter `,
+    dataTables: $localize`:@@dataTables.queryTables.dataTables:Data Tables`,
+    filtering: $localize`:@@dataTables.queryTables.filtering:Filtering`,
+    filter: $localize`:@@dataTables.queryTables.filter:Filter `,
   };
 
   private readonly table = injectTable(() => ({
@@ -354,14 +361,16 @@ export class FilteringTablePage {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@dataTables.queryTables.pagination"
       title="Pagination"
       [trail]="[{ label: t.dataTables }, { label: t.pagination }]"
     />
     <div scCard>
       <div scCardHeader>
-        <h2 i18n scCardTitle>Team</h2>
-        <p i18n scCardDescription>{{ total }} people, a page at a time</p>
+        <h2 i18n="@@dataTables.queryTables.team" scCardTitle>Team</h2>
+        <p i18n="@@dataTables.queryTables.peopleAPageAtA" scCardDescription>
+          {{ total }} people, a page at a time
+        </p>
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <div scTableContainer>
@@ -400,7 +409,7 @@ export class FilteringTablePage {
               } @empty {
                 <tr scTableRow>
                   <td
-                    i18n
+                    i18n="@@dataTables.queryTables.noOneMatches"
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -414,7 +423,9 @@ export class FilteringTablePage {
         </div>
         <div class="flex flex-wrap items-center justify-between gap-4">
           <div class="flex items-center gap-2 text-sm">
-            <label i18n for="page-size">Rows per page</label>
+            <label i18n="@@dataTables.queryTables.rowsPerPage" for="page-size"
+              >Rows per page</label
+            >
             <div scNativeSelectContainer class="w-20">
               <select
                 scNativeSelect
@@ -432,7 +443,7 @@ export class FilteringTablePage {
           </div>
 
           <nav
-            i18n-aria-label
+            i18n-aria-label="@@dataTables.queryTables.pages"
             scPagination
             scDataTablePagination
             #pagination="scPagination"
@@ -440,7 +451,11 @@ export class FilteringTablePage {
             aria-label="Pages"
             class="mx-0 w-auto flex-wrap items-center justify-end gap-4"
           >
-            <span i18n class="text-sm font-medium" aria-live="polite">
+            <span
+              i18n="@@dataTables.queryTables.pageOf"
+              class="text-sm font-medium"
+              aria-live="polite"
+            >
               Page {{ pagination.currentPage() }} of
               {{ pagination.totalPages() }}
             </span>
@@ -448,25 +463,41 @@ export class FilteringTablePage {
               <li scPaginationItem>
                 <button scPaginationFirst variant="outline" size="icon-sm">
                   <svg siChevronsLeftIcon class="rtl:-scale-x-100"></svg
-                  ><span i18n class="sr-only">Go to first page</span>
+                  ><span
+                    i18n="@@dataTables.queryTables.goToFirstPage"
+                    class="sr-only"
+                    >Go to first page</span
+                  >
                 </button>
               </li>
               <li scPaginationItem>
                 <button scPaginationPrevious variant="outline" size="icon-sm">
                   <svg siChevronLeftIcon class="rtl:-scale-x-100"></svg
-                  ><span i18n class="sr-only">Go to previous page</span>
+                  ><span
+                    i18n="@@dataTables.queryTables.goToPreviousPage"
+                    class="sr-only"
+                    >Go to previous page</span
+                  >
                 </button>
               </li>
               <li scPaginationItem>
                 <button scPaginationNext variant="outline" size="icon-sm">
                   <svg siChevronRightIcon class="rtl:-scale-x-100"></svg
-                  ><span i18n class="sr-only">Go to next page</span>
+                  ><span
+                    i18n="@@dataTables.queryTables.goToNextPage"
+                    class="sr-only"
+                    >Go to next page</span
+                  >
                 </button>
               </li>
               <li scPaginationItem>
                 <button scPaginationLast variant="outline" size="icon-sm">
                   <svg siChevronsRightIcon class="rtl:-scale-x-100"></svg
-                  ><span i18n class="sr-only">Go to last page</span>
+                  ><span
+                    i18n="@@dataTables.queryTables.goToLastPage"
+                    class="sr-only"
+                    >Go to last page</span
+                  >
                 </button>
               </li>
             </ul>
@@ -481,8 +512,8 @@ export class FilteringTablePage {
 export class PaginationTablePage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    dataTables: $localize`Data Tables`,
-    pagination: $localize`Pagination`,
+    dataTables: $localize`:@@dataTables.queryTables.dataTables:Data Tables`,
+    pagination: $localize`:@@dataTables.queryTables.pagination:Pagination`,
   };
 
   private readonly table = injectTable(() => ({

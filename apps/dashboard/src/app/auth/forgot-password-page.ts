@@ -37,8 +37,17 @@ import {
   template: `
     <div scCard class="w-full max-w-md">
       <div scCardHeader class="text-center">
-        <h1 i18n scCardTitle class="text-xl">Forgot Password</h1>
-        <p i18n scCardDescription>
+        <h1
+          i18n="@@auth.forgotPassword.forgotPassword"
+          scCardTitle
+          class="text-xl"
+        >
+          Forgot Password
+        </h1>
+        <p
+          i18n="@@auth.forgotPassword.pleaseEnterTheEmailAddress"
+          scCardDescription
+        >
           Please enter the email address associated with your account and we
           will email you a link to reset your password.
         </p>
@@ -47,7 +56,9 @@ import {
         <form (submit)="send($event)">
           <div scFieldGroup>
             <div scField>
-              <label i18n scLabel>Email Address</label>
+              <label i18n="@@auth.forgotPassword.emailAddress" scLabel
+                >Email Address</label
+              >
               <input
                 scInput
                 type="email"
@@ -55,11 +66,16 @@ import {
                 [formField]="resetForm.email"
               />
             </div>
-            <button i18n scButton type="submit" class="w-full">
+            <button
+              i18n="@@auth.forgotPassword.forgotPassword"
+              scButton
+              type="submit"
+              class="w-full"
+            >
               Forgot Password
             </button>
             <a
-              i18n
+              i18n="@@auth.forgotPassword.backToLogin"
               scLink
               variant="outline"
               routerLink="/auth/login"
@@ -87,8 +103,8 @@ export class ForgotPasswordPage {
     if (this.resetForm().invalid()) return;
     this.toaster.show({
       variant: 'success',
-      title: $localize`Check your email`,
-      description: $localize`We sent a reset link to ${this.model().email}.`,
+      title: $localize`:@@auth.forgotPassword.checkYourEmail:Check your email`,
+      description: $localize`:@@auth.forgotPassword.weSentAResetLink:We sent a reset link to ${this.model().email}.`,
     });
   }
 }

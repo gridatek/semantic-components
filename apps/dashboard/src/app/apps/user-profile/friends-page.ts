@@ -50,10 +50,13 @@ import { ProfileHeader } from './profile-header';
     ProfileHeader,
   ],
   template: `
-    <app-profile-header i18n-title title="Friends" />
+    <app-profile-header
+      i18n-title="@@userProfile.friends.friends"
+      title="Friends"
+    />
 
     <div class="flex flex-wrap items-center justify-between gap-3">
-      <h2 i18n class="text-lg font-semibold">
+      <h2 i18n="@@userProfile.friends.friends2" class="text-lg font-semibold">
         Friends
         <span class="text-muted-foreground font-normal">{{
           shown().length
@@ -61,8 +64,8 @@ import { ProfileHeader } from './profile-header';
       </h2>
       <div scInputGroup class="max-w-xs">
         <input
-          i18n-aria-label
-          i18n-placeholder
+          i18n-aria-label="@@userProfile.friends.searchFriends"
+          i18n-placeholder="@@userProfile.friends.searchFriends"
           scInput
           type="search"
           placeholder="Search friends"
@@ -97,7 +100,10 @@ import { ProfileHeader } from './profile-header';
                 size="sm"
                 [href]="'mailto:' + friend.email"
               >
-                <svg siMailIcon></svg> <ng-container i18n>Message</ng-container>
+                <svg siMailIcon></svg>
+                <ng-container i18n="@@userProfile.friends.message"
+                  >Message</ng-container
+                >
                 <span class="sr-only">{{ friend.name }}</span>
               </a>
               <button
@@ -107,7 +113,9 @@ import { ProfileHeader } from './profile-header';
                 (click)="unfriend(friend)"
               >
                 <svg siUserMinusIcon></svg>
-                <ng-container i18n>Remove</ng-container>
+                <ng-container i18n="@@userProfile.friends.remove"
+                  >Remove</ng-container
+                >
                 <span class="sr-only">{{ friend.name }}</span>
               </button>
             </div>
@@ -115,7 +123,7 @@ import { ProfileHeader } from './profile-header';
         </li>
       } @empty {
         <li
-          i18n
+          i18n="@@userProfile.friends.noFriendsMatch"
           class="text-muted-foreground col-span-full p-6 text-center text-sm"
         >
           No friends match.
@@ -140,7 +148,7 @@ export class FriendsPage {
   private unfriend(friend: Person): void {
     this.friends.update((all) => all.filter((p) => p.id !== friend.id));
     this.toaster.show({
-      title: $localize`${friend.name} removed from friends`,
+      title: $localize`:@@userProfile.friends.removedFromFriends:${friend.name} removed from friends`,
     });
   }
 }

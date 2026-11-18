@@ -74,10 +74,26 @@ export interface Asset {
 }
 
 export const ASSETS: readonly Asset[] = [
-  { title: $localize`Employees`, value: '96', icon: 'users' },
-  { title: $localize`Projects`, value: '356', icon: 'file' },
-  { title: $localize`Clients`, value: '3,650', icon: 'briefcase' },
-  { title: $localize`Events`, value: '86', icon: 'bookmark' },
+  {
+    title: $localize`:@@data.dashboard.employees:Employees`,
+    value: '96',
+    icon: 'users',
+  },
+  {
+    title: $localize`:@@data.dashboard.projects:Projects`,
+    value: '356',
+    icon: 'file',
+  },
+  {
+    title: $localize`:@@data.dashboard.clients:Clients`,
+    value: '3,650',
+    icon: 'briefcase',
+  },
+  {
+    title: $localize`:@@data.dashboard.events:Events`,
+    value: '86',
+    icon: 'bookmark',
+  },
 ];
 
 export interface Kpi {
@@ -91,21 +107,21 @@ export interface Kpi {
 
 export const KPIS: readonly Kpi[] = [
   {
-    title: $localize`Weekly sales`,
+    title: $localize`:@@data.dashboard.weeklySales:Weekly sales`,
     value: '714k',
     change: '40%',
     trend: 'up',
     icon: 'handbag',
   },
   {
-    title: $localize`New users`,
+    title: $localize`:@@data.dashboard.newUsers:New users`,
     value: '1.35m',
     change: '20%',
     trend: 'down',
     icon: 'users',
   },
   {
-    title: $localize`Purchase Orders`,
+    title: $localize`:@@data.dashboard.purchaseOrders:Purchase Orders`,
     value: '1.72m',
     change: '40%',
     trend: 'up',
@@ -209,42 +225,42 @@ export const MESSAGES: readonly {
 }[] = [
   {
     name: 'Michell Flintoff',
-    text: $localize`You: Yesterday was great...`,
+    text: $localize`:@@data.dashboard.youYesterdayWasGreat:You: Yesterday was great...`,
     avatar: 'images/profile/user-2.png',
   },
   {
     name: 'Bianca Anderson',
-    text: $localize`Nice looking dress you...`,
+    text: $localize`:@@data.dashboard.niceLookingDressYou:Nice looking dress you...`,
     avatar: 'images/profile/user-3.png',
   },
   {
     name: 'Andrew Johnson',
-    text: $localize`Sent a photo`,
+    text: $localize`:@@data.dashboard.sentAPhoto:Sent a photo`,
     avatar: 'images/profile/user-4.png',
   },
   {
     name: 'Jolly Cummins',
-    text: $localize`If I don't like something`,
+    text: $localize`:@@data.dashboard.ifIDonTLike:If I don't like something`,
     avatar: 'images/profile/user-5.png',
   },
   {
     name: 'Josh Macklow',
-    text: $localize`$230 deducted from account`,
+    text: $localize`:@@data.dashboard.n230DeductedFromAccount:$230 deducted from account`,
     avatar: 'images/profile/user-6.png',
   },
 ];
 
 export const NOTIFICATIONS: readonly { title: string; text: string }[] = [
   {
-    title: $localize`Event Today`,
-    text: $localize`Just a reminder that you have event`,
+    title: $localize`:@@data.dashboard.eventToday:Event Today`,
+    text: $localize`:@@data.dashboard.justAReminderThatYou:Just a reminder that you have event`,
   },
   {
-    title: $localize`Settings`,
-    text: $localize`You can customize this template as you want`,
+    title: $localize`:@@data.dashboard.settings:Settings`,
+    text: $localize`:@@data.dashboard.youCanCustomizeThisTemplate:You can customize this template as you want`,
   },
   {
-    title: $localize`Launch Admin`,
-    text: $localize`Just see the my new admin!`,
+    title: $localize`:@@data.dashboard.launchAdmin:Launch Admin`,
+    text: $localize`:@@data.dashboard.justSeeTheMyNew:Just see the my new admin!`,
   },
 ];

@@ -41,9 +41,18 @@ type Role = 'Admin' | 'Editor' | 'Viewer';
 type Action = 'view' | 'edit' | 'delete';
 
 const ROLES: readonly { name: Role; text: string }[] = [
-  { name: 'Admin', text: $localize`Everything, billing and members included.` },
-  { name: 'Editor', text: $localize`Creates and changes content; no billing.` },
-  { name: 'Viewer', text: $localize`Reads dashboards and reports.` },
+  {
+    name: 'Admin',
+    text: $localize`:@@roles.everythingBillingAndMembersIncluded:Everything, billing and members included.`,
+  },
+  {
+    name: 'Editor',
+    text: $localize`:@@roles.createsAndChangesContentNo:Creates and changes content; no billing.`,
+  },
+  {
+    name: 'Viewer',
+    text: $localize`:@@roles.readsDashboardsAndReports:Reads dashboards and reports.`,
+  },
 ];
 
 const RESOURCES = [
@@ -104,7 +113,7 @@ function defaults(): Set<string> {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@roles.rolesPermissions"
       title="Roles & Permissions"
       [trail]="[{ label: t.pages }, { label: t.rolesPermissions }]"
     />
@@ -137,7 +146,7 @@ function defaults(): Set<string> {
                 </div>
               }
             </div>
-            <span i18n class="text-muted-foreground text-sm"
+            <span i18n="@@roles.members" class="text-muted-foreground text-sm"
               >{{ membersOf(role.name).length }} members</span
             >
           </div>
@@ -147,15 +156,19 @@ function defaults(): Set<string> {
 
     <div scCard>
       <div scCardHeader>
-        <h2 i18n scCardTitle>Permissions</h2>
-        <p i18n scCardDescription>What each role may do, by section</p>
+        <h2 i18n="@@roles.permissions" scCardTitle>Permissions</h2>
+        <p i18n="@@roles.whatEachRoleMayDo" scCardDescription>
+          What each role may do, by section
+        </p>
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <div scTableContainer>
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th i18n scTableHeaderCell rowspan="2">Section</th>
+                <th i18n="@@roles.section" scTableHeaderCell rowspan="2">
+                  Section
+                </th>
                 @for (role of roles; track role.name) {
                   <th scTableHeaderCell colspan="3" class="text-center">
                     {{ labelOf(role.name) }}
@@ -205,23 +218,25 @@ function defaults(): Set<string> {
           </table>
         </div>
         <div class="flex justify-end">
-          <button i18n scButton (click)="save()">Save permissions</button>
+          <button i18n="@@roles.savePermissions" scButton (click)="save()">
+            Save permissions
+          </button>
         </div>
       </div>
     </div>
 
     <div scCard>
       <div scCardHeader>
-        <h2 i18n scCardTitle>Members</h2>
+        <h2 i18n="@@roles.members2" scCardTitle>Members</h2>
       </div>
       <div scCardBody>
         <div scTableContainer>
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th i18n scTableHeaderCell>Member</th>
-                <th i18n scTableHeaderCell>Email</th>
-                <th i18n scTableHeaderCell class="w-44">Role</th>
+                <th i18n="@@roles.member" scTableHeaderCell>Member</th>
+                <th i18n="@@roles.email" scTableHeaderCell>Email</th>
+                <th i18n="@@roles.role" scTableHeaderCell class="w-44">Role</th>
               </tr>
             </thead>
             <tbody scTableBody>
@@ -272,9 +287,9 @@ export class RolesPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    pages: $localize`Pages`,
-    rolesPermissions: $localize`Roles & Permissions`,
-    roleOf: $localize`Role of `,
+    pages: $localize`:@@roles.pages:Pages`,
+    rolesPermissions: $localize`:@@roles.rolesPermissions:Roles & Permissions`,
+    roleOf: $localize`:@@roles.roleOf:Role of `,
   };
 
   private readonly toaster = inject(ScToaster);
@@ -314,13 +329,15 @@ export class RolesPage {
   private setRole(id: number, role: Role): void {
     this.roleOf.update((roles) => ({ ...roles, [id]: role }));
     const person = PEOPLE.find((p) => p.id === id);
-    this.toaster.show({ title: $localize`${person?.name} is now ${role}` });
+    this.toaster.show({
+      title: $localize`:@@roles.isNow:${person?.name} is now ${role}`,
+    });
   }
 
   private save(): void {
     this.toaster.show({
       variant: 'success',
-      title: $localize`Permissions saved`,
+      title: $localize`:@@roles.permissionsSaved:Permissions saved`,
     });
   }
 }

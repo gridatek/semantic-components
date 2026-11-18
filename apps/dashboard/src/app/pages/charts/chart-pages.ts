@@ -49,17 +49,38 @@ const BROWSERS = [
 ];
 
 const DEVICES: ScChartConfig = {
-  desktop: { label: $localize`Desktop`, color: 'var(--chart-2)' },
-  mobile: { label: $localize`Mobile`, color: 'var(--chart-4)' },
+  desktop: {
+    label: $localize`:@@charts.chartPages.desktop:Desktop`,
+    color: 'var(--chart-2)',
+  },
+  mobile: {
+    label: $localize`:@@charts.chartPages.mobile:Mobile`,
+    color: 'var(--chart-4)',
+  },
 };
 
 const BROWSER_CONFIG: ScChartConfig = {
-  visitors: { label: $localize`Visitors` },
-  chrome: { label: $localize`Chrome`, color: 'var(--chart-1)' },
-  safari: { label: $localize`Safari`, color: 'var(--chart-2)' },
-  firefox: { label: $localize`Firefox`, color: 'var(--chart-3)' },
-  edge: { label: $localize`Edge`, color: 'var(--chart-4)' },
-  other: { label: $localize`Other`, color: 'var(--chart-5)' },
+  visitors: { label: $localize`:@@charts.chartPages.visitors:Visitors` },
+  chrome: {
+    label: $localize`:@@charts.chartPages.chrome:Chrome`,
+    color: 'var(--chart-1)',
+  },
+  safari: {
+    label: $localize`:@@charts.chartPages.safari:Safari`,
+    color: 'var(--chart-2)',
+  },
+  firefox: {
+    label: $localize`:@@charts.chartPages.firefox:Firefox`,
+    color: 'var(--chart-3)',
+  },
+  edge: {
+    label: $localize`:@@charts.chartPages.edge:Edge`,
+    color: 'var(--chart-4)',
+  },
+  other: {
+    label: $localize`:@@charts.chartPages.other:Other`,
+    color: 'var(--chart-5)',
+  },
 };
 
 const CARD_IMPORTS = [
@@ -74,7 +95,7 @@ const CARD_IMPORTS = [
 /** Each page's data: fresh copies (a chart takes mutable rows). */
 abstract class ChartPage {
   /** The donut's centre word: SVG text, so not an i18n element. */
-  private readonly visitorsLabel = $localize`Visitors`;
+  private readonly visitorsLabel = $localize`:@@charts.chartPages.visitors:Visitors`;
   private readonly months = MONTHS.map((row) => ({
     ...row,
     month: axisLabel(row.month),
@@ -107,15 +128,17 @@ abstract class ChartPage {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@charts.chartPages.lineCharts"
       title="Line Charts"
       [trail]="[{ label: t.charts }, { label: t.line }]"
     />
     <div class="grid gap-4 lg:grid-cols-2">
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Line</h2>
-          <p i18n scCardDescription>Desktop visitors</p>
+          <h2 i18n="@@charts.chartPages.line" scCardTitle>Line</h2>
+          <p i18n="@@charts.chartPages.desktopVisitors" scCardDescription>
+            Desktop visitors
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -125,7 +148,7 @@ abstract class ChartPage {
             class="h-64 w-full"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.desktopVisitorsByMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Desktop visitors by month"
@@ -141,13 +164,15 @@ abstract class ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Two lines</h2>
-          <p i18n scCardDescription>Desktop and mobile</p>
+          <h2 i18n="@@charts.chartPages.twoLines" scCardTitle>Two lines</h2>
+          <p i18n="@@charts.chartPages.desktopAndMobile" scCardDescription>
+            Desktop and mobile
+          </p>
         </div>
         <div scCardBody>
           <div scChart [config]="devices" [data]="months" class="h-64 w-full">
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByDeviceAndMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Visitors by device and month"
@@ -165,8 +190,10 @@ abstract class ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>With dots</h2>
-          <p i18n scCardDescription>Each month marked</p>
+          <h2 i18n="@@charts.chartPages.withDots" scCardTitle>With dots</h2>
+          <p i18n="@@charts.chartPages.eachMonthMarked" scCardDescription>
+            Each month marked
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -176,7 +203,7 @@ abstract class ChartPage {
             class="h-64 w-full"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.desktopVisitorsByMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Desktop visitors by month"
@@ -192,8 +219,10 @@ abstract class ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Steps</h2>
-          <p i18n scCardDescription>Changes as steps</p>
+          <h2 i18n="@@charts.chartPages.steps" scCardTitle>Steps</h2>
+          <p i18n="@@charts.chartPages.changesAsSteps" scCardDescription>
+            Changes as steps
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -203,7 +232,7 @@ abstract class ChartPage {
             class="h-64 w-full"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.desktopVisitorsByMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Desktop visitors by month"
@@ -225,8 +254,8 @@ abstract class ChartPage {
 export class LineChartsPage extends ChartPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    charts: $localize`Charts`,
-    line: $localize`Line`,
+    charts: $localize`:@@charts.chartPages.charts:Charts`,
+    line: $localize`:@@charts.chartPages.line:Line`,
   };
 }
 
@@ -247,15 +276,17 @@ export class LineChartsPage extends ChartPage {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@charts.chartPages.areaCharts"
       title="Area Charts"
       [trail]="[{ label: t.charts }, { label: t.area }]"
     />
     <div class="grid gap-4 lg:grid-cols-2">
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Area</h2>
-          <p i18n scCardDescription>Desktop visitors</p>
+          <h2 i18n="@@charts.chartPages.area" scCardTitle>Area</h2>
+          <p i18n="@@charts.chartPages.desktopVisitors" scCardDescription>
+            Desktop visitors
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -265,7 +296,7 @@ export class LineChartsPage extends ChartPage {
             class="h-64 w-full"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.desktopVisitorsByMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Desktop visitors by month"
@@ -281,13 +312,15 @@ export class LineChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Stacked</h2>
-          <p i18n scCardDescription>Mobile under desktop</p>
+          <h2 i18n="@@charts.chartPages.stacked" scCardTitle>Stacked</h2>
+          <p i18n="@@charts.chartPages.mobileUnderDesktop" scCardDescription>
+            Mobile under desktop
+          </p>
         </div>
         <div scCardBody>
           <div scChart [config]="devices" [data]="months" class="h-64 w-full">
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByDeviceAndMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Visitors by device and month"
@@ -305,13 +338,17 @@ export class LineChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>With a scale</h2>
-          <p i18n scCardDescription>Values along the side</p>
+          <h2 i18n="@@charts.chartPages.withAScale" scCardTitle>
+            With a scale
+          </h2>
+          <p i18n="@@charts.chartPages.valuesAlongTheSide" scCardDescription>
+            Values along the side
+          </p>
         </div>
         <div scCardBody>
           <div scChart [config]="devices" [data]="months" class="h-64 w-full">
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByDeviceAndMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Visitors by device and month"
@@ -329,8 +366,10 @@ export class LineChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Steps</h2>
-          <p i18n scCardDescription>Changes as steps</p>
+          <h2 i18n="@@charts.chartPages.steps" scCardTitle>Steps</h2>
+          <p i18n="@@charts.chartPages.changesAsSteps" scCardDescription>
+            Changes as steps
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -340,7 +379,7 @@ export class LineChartsPage extends ChartPage {
             class="h-64 w-full"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.desktopVisitorsByMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Desktop visitors by month"
@@ -362,8 +401,8 @@ export class LineChartsPage extends ChartPage {
 export class AreaChartsPage extends ChartPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    charts: $localize`Charts`,
-    area: $localize`Area`,
+    charts: $localize`:@@charts.chartPages.charts:Charts`,
+    area: $localize`:@@charts.chartPages.area:Area`,
   };
 }
 
@@ -383,15 +422,17 @@ export class AreaChartsPage extends ChartPage {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@charts.chartPages.barCharts"
       title="Bar Charts"
       [trail]="[{ label: t.charts }, { label: t.bar }]"
     />
     <div class="grid gap-4 lg:grid-cols-2">
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Bar</h2>
-          <p i18n scCardDescription>Desktop visitors</p>
+          <h2 i18n="@@charts.chartPages.bar" scCardTitle>Bar</h2>
+          <p i18n="@@charts.chartPages.desktopVisitors" scCardDescription>
+            Desktop visitors
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -401,7 +442,7 @@ export class AreaChartsPage extends ChartPage {
             class="h-64 w-full"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.desktopVisitorsByMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Desktop visitors by month"
@@ -417,13 +458,17 @@ export class AreaChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Side by side</h2>
-          <p i18n scCardDescription>Desktop and mobile</p>
+          <h2 i18n="@@charts.chartPages.sideBySide" scCardTitle>
+            Side by side
+          </h2>
+          <p i18n="@@charts.chartPages.desktopAndMobile" scCardDescription>
+            Desktop and mobile
+          </p>
         </div>
         <div scCardBody>
           <div scChart [config]="devices" [data]="months" class="h-64 w-full">
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByDeviceAndMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Visitors by device and month"
@@ -441,13 +486,15 @@ export class AreaChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Stacked</h2>
-          <p i18n scCardDescription>One bar per month</p>
+          <h2 i18n="@@charts.chartPages.stacked" scCardTitle>Stacked</h2>
+          <p i18n="@@charts.chartPages.oneBarPerMonth" scCardDescription>
+            One bar per month
+          </p>
         </div>
         <div scCardBody>
           <div scChart [config]="devices" [data]="months" class="h-64 w-full">
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByDeviceAndMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Visitors by device and month"
@@ -465,8 +512,10 @@ export class AreaChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Across</h2>
-          <p i18n scCardDescription>Bars from the side</p>
+          <h2 i18n="@@charts.chartPages.across" scCardTitle>Across</h2>
+          <p i18n="@@charts.chartPages.barsFromTheSide" scCardDescription>
+            Bars from the side
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -476,7 +525,7 @@ export class AreaChartsPage extends ChartPage {
             class="h-64 w-full"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.desktopVisitorsByMonth"
               scChartPlot
               categoryKey="month"
               layout="vertical"
@@ -498,8 +547,8 @@ export class AreaChartsPage extends ChartPage {
 export class BarChartsPage extends ChartPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    charts: $localize`Charts`,
-    bar: $localize`Bar`,
+    charts: $localize`:@@charts.chartPages.charts:Charts`,
+    bar: $localize`:@@charts.chartPages.bar:Bar`,
   };
 }
 
@@ -518,15 +567,17 @@ export class BarChartsPage extends ChartPage {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@charts.chartPages.pieDonutCharts"
       title="Pie & Donut Charts"
       [trail]="[{ label: t.charts }, { label: t.pieDonut }]"
     />
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Pie</h2>
-          <p i18n scCardDescription>Visitors by browser</p>
+          <h2 i18n="@@charts.chartPages.pie" scCardTitle>Pie</h2>
+          <p i18n="@@charts.chartPages.visitorsByBrowser" scCardDescription>
+            Visitors by browser
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -536,7 +587,7 @@ export class BarChartsPage extends ChartPage {
             class="mx-auto aspect-square max-h-60"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByBrowser"
               scChartPlot
               categoryKey="browser"
               aria-label="Visitors by browser"
@@ -549,8 +600,10 @@ export class BarChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Donut</h2>
-          <p i18n scCardDescription>With a legend</p>
+          <h2 i18n="@@charts.chartPages.donut" scCardTitle>Donut</h2>
+          <p i18n="@@charts.chartPages.withALegend" scCardDescription>
+            With a legend
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -560,7 +613,7 @@ export class BarChartsPage extends ChartPage {
             class="mx-auto aspect-square max-h-60"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByBrowser"
               scChartPlot
               categoryKey="browser"
               aria-label="Visitors by browser"
@@ -580,8 +633,12 @@ export class BarChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Donut with total</h2>
-          <p i18n scCardDescription>The sum in the middle</p>
+          <h2 i18n="@@charts.chartPages.donutWithTotal" scCardTitle>
+            Donut with total
+          </h2>
+          <p i18n="@@charts.chartPages.theSumInTheMiddle" scCardDescription>
+            The sum in the middle
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -591,7 +648,7 @@ export class BarChartsPage extends ChartPage {
             class="mx-auto aspect-square max-h-60"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByBrowser"
               scChartPlot
               categoryKey="browser"
               aria-label="Visitors by browser"
@@ -624,8 +681,10 @@ export class BarChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Labelled</h2>
-          <p i18n scCardDescription>Values outside</p>
+          <h2 i18n="@@charts.chartPages.labelled" scCardTitle>Labelled</h2>
+          <p i18n="@@charts.chartPages.valuesOutside" scCardDescription>
+            Values outside
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -635,7 +694,7 @@ export class BarChartsPage extends ChartPage {
             class="mx-auto aspect-square max-h-60"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByBrowser"
               scChartPlot
               categoryKey="browser"
               [margin]="{ top: 24, right: 40, bottom: 24, left: 40 }"
@@ -657,8 +716,8 @@ export class BarChartsPage extends ChartPage {
 export class PieChartsPage extends ChartPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    charts: $localize`Charts`,
-    pieDonut: $localize`Pie & Donut`,
+    charts: $localize`:@@charts.chartPages.charts:Charts`,
+    pieDonut: $localize`:@@charts.chartPages.pieDonut:Pie & Donut`,
   };
 }
 
@@ -677,15 +736,17 @@ export class PieChartsPage extends ChartPage {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@charts.chartPages.radarCharts"
       title="Radar Charts"
       [trail]="[{ label: t.charts }, { label: t.radar }]"
     />
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Radar</h2>
-          <p i18n scCardDescription>Desktop visitors</p>
+          <h2 i18n="@@charts.chartPages.radar" scCardTitle>Radar</h2>
+          <p i18n="@@charts.chartPages.desktopVisitors" scCardDescription>
+            Desktop visitors
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -695,7 +756,7 @@ export class PieChartsPage extends ChartPage {
             class="mx-auto aspect-square max-h-64"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.desktopVisitorsByMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Desktop visitors by month"
@@ -710,8 +771,10 @@ export class PieChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Two series</h2>
-          <p i18n scCardDescription>Desktop and mobile</p>
+          <h2 i18n="@@charts.chartPages.twoSeries" scCardTitle>Two series</h2>
+          <p i18n="@@charts.chartPages.desktopAndMobile" scCardDescription>
+            Desktop and mobile
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -721,7 +784,7 @@ export class PieChartsPage extends ChartPage {
             class="mx-auto aspect-square max-h-64"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByDeviceAndMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Visitors by device and month"
@@ -738,8 +801,10 @@ export class PieChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Lines</h2>
-          <p i18n scCardDescription>On a round grid</p>
+          <h2 i18n="@@charts.chartPages.lines" scCardTitle>Lines</h2>
+          <p i18n="@@charts.chartPages.onARoundGrid" scCardDescription>
+            On a round grid
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -749,7 +814,7 @@ export class PieChartsPage extends ChartPage {
             class="mx-auto aspect-square max-h-64"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByDeviceAndMonth"
               scChartPlot
               categoryKey="month"
               aria-label="Visitors by device and month"
@@ -771,8 +836,8 @@ export class PieChartsPage extends ChartPage {
 export class RadarChartsPage extends ChartPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    charts: $localize`Charts`,
-    radar: $localize`Radar`,
+    charts: $localize`:@@charts.chartPages.charts:Charts`,
+    radar: $localize`:@@charts.chartPages.radar:Radar`,
   };
 }
 
@@ -790,15 +855,17 @@ export class RadarChartsPage extends ChartPage {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@charts.chartPages.radialCharts"
       title="Radial Charts"
       [trail]="[{ label: t.charts }, { label: t.radial }]"
     />
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Radial</h2>
-          <p i18n scCardDescription>One ring per browser</p>
+          <h2 i18n="@@charts.chartPages.radial" scCardTitle>Radial</h2>
+          <p i18n="@@charts.chartPages.oneRingPerBrowser" scCardDescription>
+            One ring per browser
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -808,7 +875,7 @@ export class RadarChartsPage extends ChartPage {
             class="mx-auto aspect-square max-h-64"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByBrowser"
               scChartPlot
               categoryKey="browser"
               aria-label="Visitors by browser"
@@ -821,8 +888,12 @@ export class RadarChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>With a track</h2>
-          <p i18n scCardDescription>And a legend</p>
+          <h2 i18n="@@charts.chartPages.withATrack" scCardTitle>
+            With a track
+          </h2>
+          <p i18n="@@charts.chartPages.andALegend" scCardDescription>
+            And a legend
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -832,7 +903,7 @@ export class RadarChartsPage extends ChartPage {
             class="mx-auto aspect-square max-h-64"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByBrowser"
               scChartPlot
               categoryKey="browser"
               aria-label="Visitors by browser"
@@ -846,8 +917,10 @@ export class RadarChartsPage extends ChartPage {
       </div>
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Labelled</h2>
-          <p i18n scCardDescription>Each ring named</p>
+          <h2 i18n="@@charts.chartPages.labelled" scCardTitle>Labelled</h2>
+          <p i18n="@@charts.chartPages.eachRingNamed" scCardDescription>
+            Each ring named
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -857,7 +930,7 @@ export class RadarChartsPage extends ChartPage {
             class="mx-auto aspect-square max-h-64"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@charts.chartPages.visitorsByBrowser"
               scChartPlot
               categoryKey="browser"
               aria-label="Visitors by browser"
@@ -885,7 +958,7 @@ export class RadarChartsPage extends ChartPage {
 export class RadialChartsPage extends ChartPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    charts: $localize`Charts`,
-    radial: $localize`Radial`,
+    charts: $localize`:@@charts.chartPages.charts:Charts`,
+    radial: $localize`:@@charts.chartPages.radial:Radial`,
   };
 }

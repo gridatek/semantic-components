@@ -28,12 +28,14 @@ import { SiCircleAlertIcon } from '@semantic-icons/lucide-icons';
       <div scEmptyHeader>
         <div scEmptyMedia variant="icon"><svg siCircleAlertIcon></svg></div>
         <h1 class="text-6xl font-semibold tracking-tight tabular-nums">404</h1>
-        <h2 i18n scEmptyTitle>Opps!!!</h2>
-        <div i18n scEmptyDescription>
+        <h2 i18n="@@auth.error.opps" scEmptyTitle>Opps!!!</h2>
+        <div i18n="@@auth.error.thisPageYouAreLooking" scEmptyDescription>
           This page you are looking for could not be found.
         </div>
       </div>
-      <a i18n scLink variant="button" routerLink="/">Go Back to Home</a>
+      <a i18n="@@auth.error.goBackToHome" scLink variant="button" routerLink="/"
+        >Go Back to Home</a
+      >
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

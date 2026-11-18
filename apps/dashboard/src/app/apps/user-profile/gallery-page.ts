@@ -32,73 +32,73 @@ interface Photo {
 const PHOTOS: readonly Photo[] = [
   {
     src: 'images/image-ai/masonry-1.jpg',
-    title: $localize`Morning walk`,
+    title: $localize`:@@userProfile.gallery.morningWalk:Morning walk`,
     album: 'Nature',
     date: 'Apr 26, 2026',
   },
   {
     src: 'images/image-ai/leptop1.jpg',
-    title: $localize`Desk, early`,
+    title: $localize`:@@userProfile.gallery.deskEarly:Desk, early`,
     album: 'Work',
     date: 'Apr 24, 2026',
   },
   {
     src: 'images/image-ai/masonry-2.jpg',
-    title: $localize`Spring garden`,
+    title: $localize`:@@userProfile.gallery.springGarden:Spring garden`,
     album: 'Nature',
     date: 'Apr 21, 2026',
   },
   {
     src: 'images/image-ai/masonry-3.jpg',
-    title: $localize`Harbour`,
+    title: $localize`:@@userProfile.gallery.harbour:Harbour`,
     album: 'Travel',
     date: 'Apr 18, 2026',
   },
   {
     src: 'images/image-ai/leptop3.jpg',
-    title: $localize`Studio`,
+    title: $localize`:@@userProfile.gallery.studio:Studio`,
     album: 'Work',
     date: 'Apr 15, 2026',
   },
   {
     src: 'images/image-ai/masonry-4.jpg',
-    title: $localize`Old town`,
+    title: $localize`:@@userProfile.gallery.oldTown:Old town`,
     album: 'Travel',
     date: 'Apr 12, 2026',
   },
   {
     src: 'images/image-ai/masonry-5.jpg',
-    title: $localize`Field`,
+    title: $localize`:@@userProfile.gallery.field:Field`,
     album: 'Nature',
     date: 'Apr 9, 2026',
   },
   {
     src: 'images/image-ai/masonry-6.jpg',
-    title: $localize`Coast road`,
+    title: $localize`:@@userProfile.gallery.coastRoad:Coast road`,
     album: 'Travel',
     date: 'Apr 5, 2026',
   },
   {
     src: 'images/image-ai/leptop4.jpg',
-    title: $localize`Notes`,
+    title: $localize`:@@userProfile.gallery.notes:Notes`,
     album: 'Work',
     date: 'Apr 2, 2026',
   },
   {
     src: 'images/image-ai/masonry-7.jpg',
-    title: $localize`Blossom`,
+    title: $localize`:@@userProfile.gallery.blossom:Blossom`,
     album: 'Nature',
     date: 'Mar 30, 2026',
   },
   {
     src: 'images/image-ai/masonry-8.jpg',
-    title: $localize`Station`,
+    title: $localize`:@@userProfile.gallery.station:Station`,
     album: 'Travel',
     date: 'Mar 27, 2026',
   },
   {
     src: 'images/image-ai/masonry-9.jpg',
-    title: $localize`Lake`,
+    title: $localize`:@@userProfile.gallery.lake:Lake`,
     album: 'Nature',
     date: 'Mar 22, 2026',
   },
@@ -125,17 +125,20 @@ const PHOTOS: readonly Photo[] = [
     ProfileHeader,
   ],
   template: `
-    <app-profile-header i18n-title title="Gallery" />
+    <app-profile-header
+      i18n-title="@@userProfile.gallery.gallery"
+      title="Gallery"
+    />
 
     <div class="flex flex-wrap items-center justify-between gap-3">
-      <h2 i18n class="text-lg font-semibold">
+      <h2 i18n="@@userProfile.gallery.photos" class="text-lg font-semibold">
         Photos
         <span class="text-muted-foreground font-normal">{{
           shown().length
         }}</span>
       </h2>
       <div
-        i18n-aria-label
+        i18n-aria-label="@@userProfile.gallery.album"
         scToggleGroup
         variant="outline"
         size="sm"
@@ -179,7 +182,9 @@ const PHOTOS: readonly Photo[] = [
         <div scDialog class="sm:max-w-3xl">
           <button scDialogClose>
             <svg siXIcon></svg>
-            <span i18n class="sr-only">Close</span>
+            <span i18n="@@userProfile.gallery.close" class="sr-only"
+              >Close</span
+            >
           </button>
           @if (current(); as photo) {
             <div scDialogHeader>
@@ -200,14 +205,21 @@ const PHOTOS: readonly Photo[] = [
             <div class="flex items-center justify-between">
               <button scButton variant="outline" size="icon" (click)="step(-1)">
                 <svg siChevronLeftIcon class="rtl:-scale-x-100"></svg>
-                <span i18n class="sr-only">Previous photo</span>
+                <span i18n="@@userProfile.gallery.previousPhoto" class="sr-only"
+                  >Previous photo</span
+                >
               </button>
-              <span i18n class="text-muted-foreground text-sm tabular-nums">
+              <span
+                i18n="@@userProfile.gallery.of"
+                class="text-muted-foreground text-sm tabular-nums"
+              >
                 {{ index() + 1 }} of {{ shown().length }}
               </span>
               <button scButton variant="outline" size="icon" (click)="step(1)">
                 <svg siChevronRightIcon class="rtl:-scale-x-100"></svg>
-                <span i18n class="sr-only">Next photo</span>
+                <span i18n="@@userProfile.gallery.nextPhoto" class="sr-only"
+                  >Next photo</span
+                >
               </button>
             </div>
           }

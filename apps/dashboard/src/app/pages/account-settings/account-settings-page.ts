@@ -98,17 +98,29 @@ import { PageHeader } from '../../layout/page-header';
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@accountSettings.accountSettings"
       title="Account Settings"
       [trail]="[{ label: t.pages }, { label: t.accountSettings }]"
     />
 
     <div scTabs value="account" class="flex flex-col gap-4">
       <div scTabsList class="self-start">
-        <button i18n scTabsTab value="account">Account</button>
-        <button i18n scTabsTab value="security">Security</button>
-        <button i18n scTabsTab value="notifications">Notifications</button>
-        <button i18n scTabsTab value="billing">Billing</button>
+        <button i18n="@@accountSettings.account" scTabsTab value="account">
+          Account
+        </button>
+        <button i18n="@@accountSettings.security" scTabsTab value="security">
+          Security
+        </button>
+        <button
+          i18n="@@accountSettings.notifications"
+          scTabsTab
+          value="notifications"
+        >
+          Notifications
+        </button>
+        <button i18n="@@accountSettings.billing" scTabsTab value="billing">
+          Billing
+        </button>
       </div>
 
       <div scTabsPanel value="account">
@@ -116,8 +128,10 @@ import { PageHeader } from '../../layout/page-header';
           <form (submit)="saveAccount($event)">
             <div scCard>
               <div scCardHeader>
-                <h2 i18n scCardTitle>Profile</h2>
-                <p i18n scCardDescription>How others see you</p>
+                <h2 i18n="@@accountSettings.profile" scCardTitle>Profile</h2>
+                <p i18n="@@accountSettings.howOthersSeeYou" scCardDescription>
+                  How others see you
+                </p>
               </div>
               <div scCardBody class="flex flex-col gap-6">
                 <div class="flex items-center gap-4">
@@ -125,13 +139,18 @@ import { PageHeader } from '../../layout/page-header';
                     <img scAvatarImage [src]="me.avatar" alt="" />
                     <span scAvatarFallback>MA</span>
                   </span>
-                  <p i18n class="text-muted-foreground text-sm">
+                  <p
+                    i18n="@@accountSettings.jpgOrPngUpTo"
+                    class="text-muted-foreground text-sm"
+                  >
                     JPG or PNG, up to 800 KB.
                   </p>
                 </div>
                 <div scFieldGroup class="grid gap-4 md:grid-cols-2">
                   <div scField>
-                    <label i18n scLabel>Full name</label>
+                    <label i18n="@@accountSettings.fullName" scLabel
+                      >Full name</label
+                    >
                     <input
                       scInput
                       autocomplete="name"
@@ -140,7 +159,7 @@ import { PageHeader } from '../../layout/page-header';
                     <div scFieldErrors></div>
                   </div>
                   <div scField>
-                    <label i18n scLabel>Email</label>
+                    <label i18n="@@accountSettings.email" scLabel>Email</label>
                     <input
                       scInput
                       type="email"
@@ -150,7 +169,7 @@ import { PageHeader } from '../../layout/page-header';
                     <div scFieldErrors></div>
                   </div>
                   <div scField>
-                    <label i18n scLabel>Phone</label>
+                    <label i18n="@@accountSettings.phone" scLabel>Phone</label>
                     <input
                       scInput
                       type="tel"
@@ -159,11 +178,13 @@ import { PageHeader } from '../../layout/page-header';
                     />
                   </div>
                   <div scField>
-                    <label i18n scLabel>Location</label>
+                    <label i18n="@@accountSettings.location" scLabel
+                      >Location</label
+                    >
                     <input scInput [formField]="accountForm.location" />
                   </div>
                   <div scField class="md:col-span-2">
-                    <label i18n scLabel>Bio</label>
+                    <label i18n="@@accountSettings.bio" scLabel>Bio</label>
                     <textarea
                       scTextarea
                       rows="3"
@@ -173,7 +194,13 @@ import { PageHeader } from '../../layout/page-header';
                 </div>
               </div>
               <div scCardFooter class="justify-end">
-                <button i18n scButton type="submit">Save changes</button>
+                <button
+                  i18n="@@accountSettings.saveChanges"
+                  scButton
+                  type="submit"
+                >
+                  Save changes
+                </button>
               </div>
             </div>
           </form>
@@ -186,13 +213,22 @@ import { PageHeader } from '../../layout/page-header';
             <form (submit)="savePassword($event)">
               <div scCard>
                 <div scCardHeader>
-                  <h2 i18n scCardTitle>Password</h2>
-                  <p i18n scCardDescription>At least 8 characters</p>
+                  <h2 i18n="@@accountSettings.password" scCardTitle>
+                    Password
+                  </h2>
+                  <p
+                    i18n="@@accountSettings.atLeast8Characters"
+                    scCardDescription
+                  >
+                    At least 8 characters
+                  </p>
                 </div>
                 <div scCardBody>
                   <div scFieldGroup class="max-w-md">
                     <div scField>
-                      <label i18n scLabel>Current password</label>
+                      <label i18n="@@accountSettings.currentPassword" scLabel
+                        >Current password</label
+                      >
                       <input
                         scInput
                         type="password"
@@ -202,7 +238,9 @@ import { PageHeader } from '../../layout/page-header';
                       <div scFieldErrors></div>
                     </div>
                     <div scField>
-                      <label i18n scLabel>New password</label>
+                      <label i18n="@@accountSettings.newPassword" scLabel
+                        >New password</label
+                      >
                       <input
                         scInput
                         type="password"
@@ -212,7 +250,9 @@ import { PageHeader } from '../../layout/page-header';
                       <div scFieldErrors></div>
                     </div>
                     <div scField>
-                      <label i18n scLabel>Confirm new password</label>
+                      <label i18n="@@accountSettings.confirmNewPassword" scLabel
+                        >Confirm new password</label
+                      >
                       <input
                         scInput
                         type="password"
@@ -224,22 +264,36 @@ import { PageHeader } from '../../layout/page-header';
                   </div>
                 </div>
                 <div scCardFooter class="justify-end">
-                  <button i18n scButton type="submit">Update password</button>
+                  <button
+                    i18n="@@accountSettings.updatePassword"
+                    scButton
+                    type="submit"
+                  >
+                    Update password
+                  </button>
                 </div>
               </div>
             </form>
 
             <div scCard>
               <div scCardHeader>
-                <h2 i18n scCardTitle>Two-step verification</h2>
+                <h2 i18n="@@accountSettings.twoStepVerification" scCardTitle>
+                  Two-step verification
+                </h2>
               </div>
               <div scCardBody>
                 <div scField orientation="horizontal">
                   <div scFieldContentWrapper>
-                    <label i18n scLabel for="two-step"
+                    <label
+                      i18n="@@accountSettings.askForACodeAt"
+                      scLabel
+                      for="two-step"
                       >Ask for a code at sign-in</label
                     >
-                    <p i18n scFieldDescription>
+                    <p
+                      i18n="@@accountSettings.fromAnAuthenticatorAppAfter"
+                      scFieldDescription
+                    >
                       From an authenticator app, after your password.
                     </p>
                   </div>
@@ -256,7 +310,9 @@ import { PageHeader } from '../../layout/page-header';
 
             <div scCard>
               <div scCardHeader>
-                <h2 i18n scCardTitle>Where you’re signed in</h2>
+                <h2 i18n="@@accountSettings.whereYouReSignedIn" scCardTitle>
+                  Where you’re signed in
+                </h2>
               </div>
               <div scCardBody class="flex flex-col gap-4">
                 @for (session of sessions(); track session.id) {
@@ -274,7 +330,11 @@ import { PageHeader } from '../../layout/page-header';
                       <span class="font-medium">
                         {{ session.device }}
                         @if (session.current) {
-                          <span i18n scBadge variant="secondary" class="ms-1"
+                          <span
+                            i18n="@@accountSettings.thisDevice"
+                            scBadge
+                            variant="secondary"
+                            class="ms-1"
                             >This device</span
                           >
                         }
@@ -285,7 +345,7 @@ import { PageHeader } from '../../layout/page-header';
                     </div>
                     @if (!session.current) {
                       <button
-                        i18n
+                        i18n="@@accountSettings.signOut"
                         scButton
                         variant="outline"
                         size="sm"
@@ -307,8 +367,12 @@ import { PageHeader } from '../../layout/page-header';
         <ng-template scTabsPanelContent>
           <div scCard>
             <div scCardHeader>
-              <h2 i18n scCardTitle>Notifications</h2>
-              <p i18n scCardDescription>What we tell you about, and how</p>
+              <h2 i18n="@@accountSettings.notifications" scCardTitle>
+                Notifications
+              </h2>
+              <p i18n="@@accountSettings.whatWeTellYouAbout" scCardDescription>
+                What we tell you about, and how
+              </p>
             </div>
             <div scCardBody class="flex flex-col gap-4">
               @for (item of notices(); track item.id; let last = $last) {
@@ -342,29 +406,44 @@ import { PageHeader } from '../../layout/page-header';
             <div class="grid gap-4 md:grid-cols-2">
               <div scCard>
                 <div scCardHeader>
-                  <h2 i18n scCardTitle>Plan</h2>
-                  <p i18n scCardDescription>Renews on June 1, 2026</p>
+                  <h2 i18n="@@accountSettings.plan" scCardTitle>Plan</h2>
+                  <p
+                    i18n="@@accountSettings.renewsOnJune12026"
+                    scCardDescription
+                  >
+                    Renews on June 1, 2026
+                  </p>
                 </div>
-                <div i18n scCardBody class="flex items-baseline gap-2">
+                <div
+                  i18n="@@accountSettings.pro49Month"
+                  scCardBody
+                  class="flex items-baseline gap-2"
+                >
                   <span class="text-3xl font-semibold">Pro</span>
                   <span class="text-muted-foreground">$49 / month</span>
                 </div>
               </div>
               <div scCard>
                 <div scCardHeader>
-                  <h2 i18n scCardTitle>Payment method</h2>
-                  <p i18n scCardDescription>Charged on the 1st</p>
+                  <h2 i18n="@@accountSettings.paymentMethod" scCardTitle>
+                    Payment method
+                  </h2>
+                  <p i18n="@@accountSettings.chargedOnThe1st" scCardDescription>
+                    Charged on the 1st
+                  </p>
                 </div>
                 <div scCardBody class="flex items-center gap-3">
                   <img
-                    i18n-alt
+                    i18n-alt="@@accountSettings.mastercard"
                     ngSrc="images/brands/mastercard.svg"
                     width="36"
                     height="24"
                     alt="Mastercard"
                   />
                   <span class="tabular-nums">•••• 4242</span>
-                  <span i18n class="text-muted-foreground text-sm"
+                  <span
+                    i18n="@@accountSettings.expires0828"
+                    class="text-muted-foreground text-sm"
                     >Expires 08/28</span
                   >
                 </div>
@@ -372,17 +451,27 @@ import { PageHeader } from '../../layout/page-header';
             </div>
             <div scCard>
               <div scCardHeader>
-                <h2 i18n scCardTitle>Invoices</h2>
+                <h2 i18n="@@accountSettings.invoices" scCardTitle>Invoices</h2>
               </div>
               <div scCardBody>
                 <div scTableContainer>
                   <table scTable>
                     <thead scTableHeader>
                       <tr scTableRow>
-                        <th i18n scTableHeaderCell>Date</th>
-                        <th i18n scTableHeaderCell>Plan</th>
-                        <th i18n scTableHeaderCell class="text-end">Amount</th>
-                        <th i18n scTableHeaderCell>
+                        <th i18n="@@accountSettings.date" scTableHeaderCell>
+                          Date
+                        </th>
+                        <th i18n="@@accountSettings.plan" scTableHeaderCell>
+                          Plan
+                        </th>
+                        <th
+                          i18n="@@accountSettings.amount"
+                          scTableHeaderCell
+                          class="text-end"
+                        >
+                          Amount
+                        </th>
+                        <th i18n="@@accountSettings.download" scTableHeaderCell>
                           <span class="sr-only">Download</span>
                         </th>
                       </tr>
@@ -391,7 +480,9 @@ import { PageHeader } from '../../layout/page-header';
                       @for (bill of bills; track bill.date) {
                         <tr scTableRow>
                           <td scTableCell>{{ bill.date }}</td>
-                          <td i18n scTableCell>Pro, monthly</td>
+                          <td i18n="@@accountSettings.proMonthly" scTableCell>
+                            Pro, monthly
+                          </td>
                           <td scTableCell class="text-end tabular-nums">
                             $49.00
                           </td>
@@ -403,7 +494,9 @@ import { PageHeader } from '../../layout/page-header';
                               (click)="download(bill.date)"
                             >
                               <svg siDownloadIcon></svg>
-                              <span i18n class="sr-only"
+                              <span
+                                i18n="@@accountSettings.downloadTheInvoiceOf"
+                                class="sr-only"
                                 >Download the invoice of {{ bill.date }}</span
                               >
                             </button>
@@ -426,8 +519,8 @@ import { PageHeader } from '../../layout/page-header';
 export class AccountSettingsPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    pages: $localize`Pages`,
-    accountSettings: $localize`Account Settings`,
+    pages: $localize`:@@accountSettings.pages:Pages`,
+    accountSettings: $localize`:@@accountSettings.accountSettings:Account Settings`,
   };
 
   private readonly toaster = inject(ScToaster);
@@ -454,7 +547,10 @@ export class AccountSettingsPage {
     validate(path.confirm, ({ value, valueOf }) =>
       value() === valueOf(path.next)
         ? undefined
-        : { kind: 'mismatch', message: $localize`The passwords differ.` },
+        : {
+            kind: 'mismatch',
+            message: $localize`:@@accountSettings.thePasswordsDiffer:The passwords differ.`,
+          },
     );
   });
 
@@ -485,32 +581,32 @@ export class AccountSettingsPage {
   private readonly notices = signal([
     {
       id: 'orders',
-      label: $localize`New orders`,
-      text: $localize`An email for each order.`,
+      label: $localize`:@@accountSettings.newOrders:New orders`,
+      text: $localize`:@@accountSettings.anEmailForEachOrder:An email for each order.`,
       on: true,
     },
     {
       id: 'tickets',
-      label: $localize`Ticket replies`,
-      text: $localize`When a customer answers.`,
+      label: $localize`:@@accountSettings.ticketReplies:Ticket replies`,
+      text: $localize`:@@accountSettings.whenACustomerAnswers:When a customer answers.`,
       on: true,
     },
     {
       id: 'mentions',
-      label: $localize`Mentions`,
-      text: $localize`When someone mentions you in a chat.`,
+      label: $localize`:@@accountSettings.mentions:Mentions`,
+      text: $localize`:@@accountSettings.whenSomeoneMentionsYouIn:When someone mentions you in a chat.`,
       on: true,
     },
     {
       id: 'digest',
-      label: $localize`Weekly digest`,
-      text: $localize`The week’s numbers, on Monday.`,
+      label: $localize`:@@accountSettings.weeklyDigest:Weekly digest`,
+      text: $localize`:@@accountSettings.theWeekSNumbersOn:The week’s numbers, on Monday.`,
       on: false,
     },
     {
       id: 'product',
-      label: $localize`Product news`,
-      text: $localize`New features, now and then.`,
+      label: $localize`:@@accountSettings.productNews:Product news`,
+      text: $localize`:@@accountSettings.newFeaturesNowAndThen:New features, now and then.`,
       on: false,
     },
   ]);
@@ -523,7 +619,10 @@ export class AccountSettingsPage {
   private saveAccount(event: Event): void {
     event.preventDefault();
     if (this.accountForm().invalid()) return;
-    this.toaster.show({ variant: 'success', title: $localize`Profile saved` });
+    this.toaster.show({
+      variant: 'success',
+      title: $localize`:@@accountSettings.profileSaved:Profile saved`,
+    });
   }
 
   private savePassword(event: Event): void {
@@ -531,7 +630,7 @@ export class AccountSettingsPage {
     if (this.passwordForm().invalid()) {
       this.toaster.show({
         variant: 'error',
-        title: $localize`Check the password fields`,
+        title: $localize`:@@accountSettings.checkThePasswordFields:Check the password fields`,
       });
       return;
     }
@@ -539,7 +638,7 @@ export class AccountSettingsPage {
     this.passwordForm().reset();
     this.toaster.show({
       variant: 'success',
-      title: $localize`Password updated`,
+      title: $localize`:@@accountSettings.passwordUpdated:Password updated`,
     });
   }
 
@@ -547,14 +646,16 @@ export class AccountSettingsPage {
     this.twoStep.update((on) => !on);
     this.toaster.show({
       title: this.twoStep()
-        ? $localize`Two-step verification on`
-        : $localize`Two-step verification off`,
+        ? $localize`:@@accountSettings.twoStepVerificationOn:Two-step verification on`
+        : $localize`:@@accountSettings.twoStepVerificationOff:Two-step verification off`,
     });
   }
 
   private signOut(id: number): void {
     this.sessions.update((all) => all.filter((s) => s.id !== id));
-    this.toaster.show({ title: $localize`Signed out of that device` });
+    this.toaster.show({
+      title: $localize`:@@accountSettings.signedOutOfThatDevice:Signed out of that device`,
+    });
   }
 
   private toggleNotice(id: string): void {
@@ -564,6 +665,8 @@ export class AccountSettingsPage {
   }
 
   private download(date: string): void {
-    this.toaster.show({ title: $localize`Invoice of ${date} downloaded` });
+    this.toaster.show({
+      title: $localize`:@@accountSettings.invoiceOfDownloaded:Invoice of ${date} downloaded`,
+    });
   }
 }

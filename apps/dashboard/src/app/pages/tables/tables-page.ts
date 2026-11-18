@@ -55,7 +55,7 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@tables.tables"
       title="Tables"
       [trail]="[{ label: t.tables }]"
     />
@@ -76,7 +76,7 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
                   @if (table.kind === 'checkbox') {
                     <th scTableHeaderCell class="w-10">
                       <input
-                        i18n-aria-label
+                        i18n-aria-label="@@tables.selectAll"
                         scCheckbox
                         aria-label="Select all"
                         [checked]="allChecked()"
@@ -85,12 +85,20 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
                       />
                     </th>
                   }
-                  <th i18n scTableHeaderCell>Assigned</th>
-                  <th i18n scTableHeaderCell>Project</th>
-                  <th i18n scTableHeaderCell>Priority</th>
-                  <th i18n scTableHeaderCell class="text-end">Budget</th>
+                  <th i18n="@@tables.assigned" scTableHeaderCell>Assigned</th>
+                  <th i18n="@@tables.project" scTableHeaderCell>Project</th>
+                  <th i18n="@@tables.priority" scTableHeaderCell>Priority</th>
+                  <th i18n="@@tables.budget" scTableHeaderCell class="text-end">
+                    Budget
+                  </th>
                   @if (table.kind !== 'basic') {
-                    <th i18n scTableHeaderCell class="text-end">Actions</th>
+                    <th
+                      i18n="@@tables.actions"
+                      scTableHeaderCell
+                      class="text-end"
+                    >
+                      Actions
+                    </th>
                   }
                 </tr>
               </thead>
@@ -144,11 +152,13 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
                       <td scTableCell class="text-end">
                         <button scButton variant="ghost" size="icon-sm">
                           <svg siPencilIcon></svg>
-                          <span i18n class="sr-only">Edit {{ row.name }}</span>
+                          <span i18n="@@tables.edit" class="sr-only"
+                            >Edit {{ row.name }}</span
+                          >
                         </button>
                         <button scButton variant="ghost" size="icon-sm">
                           <svg siTrash2Icon></svg>
-                          <span i18n class="sr-only"
+                          <span i18n="@@tables.delete" class="sr-only"
                             >Delete {{ row.name }}</span
                           >
                         </button>
@@ -170,16 +180,22 @@ export class TablesPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    tables: $localize`Tables`,
-    select: $localize`Select `,
+    tables: $localize`:@@tables.tables:Tables`,
+    select: $localize`:@@tables.select:Select `,
   };
 
   private readonly rows = PROJECT_ROWS;
   private readonly tables: readonly { kind: Kind; title: string }[] = [
-    { kind: 'basic', title: $localize`Basic Table` },
-    { kind: 'hover', title: $localize`Hover Table` },
-    { kind: 'striped', title: $localize`Striped Row Table` },
-    { kind: 'checkbox', title: $localize`Checkbox Table` },
+    { kind: 'basic', title: $localize`:@@tables.basicTable:Basic Table` },
+    { kind: 'hover', title: $localize`:@@tables.hoverTable:Hover Table` },
+    {
+      kind: 'striped',
+      title: $localize`:@@tables.stripedRowTable:Striped Row Table`,
+    },
+    {
+      kind: 'checkbox',
+      title: $localize`:@@tables.checkboxTable:Checkbox Table`,
+    },
   ];
   private readonly initialsOf = initials;
 

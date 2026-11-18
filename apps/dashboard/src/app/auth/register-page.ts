@@ -57,15 +57,19 @@ import { SocialButtons } from './social-buttons';
   template: `
     <div scCard class="w-full max-w-md">
       <div scCardHeader class="text-center">
-        <h1 i18n scCardTitle class="text-xl">Sign Up</h1>
-        <p i18n scCardDescription>Create your account</p>
+        <h1 i18n="@@auth.register.signUp" scCardTitle class="text-xl">
+          Sign Up
+        </h1>
+        <p i18n="@@auth.register.createYourAccount" scCardDescription>
+          Create your account
+        </p>
       </div>
       <div scCardBody class="flex flex-col gap-6">
         <app-social-buttons action="sign up" />
         <form (submit)="signUp($event)">
           <div scFieldGroup>
             <div scField>
-              <label i18n scLabel>Name</label>
+              <label i18n="@@auth.register.name" scLabel>Name</label>
               <input
                 scInput
                 autocomplete="name"
@@ -73,7 +77,9 @@ import { SocialButtons } from './social-buttons';
               />
             </div>
             <div scField>
-              <label i18n scLabel>Email Address</label>
+              <label i18n="@@auth.register.emailAddress" scLabel
+                >Email Address</label
+              >
               <input
                 scInput
                 type="email"
@@ -82,7 +88,7 @@ import { SocialButtons } from './social-buttons';
               />
             </div>
             <div scPasswordField #password="scPasswordField">
-              <label i18n scLabel>Password</label>
+              <label i18n="@@auth.register.password" scLabel>Password</label>
               <div scPasswordGroup>
                 <input
                   scPasswordInput
@@ -92,19 +98,35 @@ import { SocialButtons } from './social-buttons';
                 <button scPasswordToggle>
                   @if (password.visible()) {
                     <svg siEyeOffIcon></svg>
-                    <span i18n class="sr-only">Hide password</span>
+                    <span i18n="@@auth.register.hidePassword" class="sr-only"
+                      >Hide password</span
+                    >
                   } @else {
                     <svg siEyeIcon></svg>
-                    <span i18n class="sr-only">Show password</span>
+                    <span i18n="@@auth.register.showPassword" class="sr-only"
+                      >Show password</span
+                    >
                   }
                 </button>
               </div>
-              <p i18n scFieldDescription>At least 8 characters.</p>
+              <p i18n="@@auth.register.atLeast8Characters" scFieldDescription>
+                At least 8 characters.
+              </p>
             </div>
-            <button i18n scButton type="submit" class="w-full">Sign Up</button>
+            <button
+              i18n="@@auth.register.signUp"
+              scButton
+              type="submit"
+              class="w-full"
+            >
+              Sign Up
+            </button>
           </div>
         </form>
-        <p i18n class="text-muted-foreground text-center text-sm">
+        <p
+          i18n="@@auth.register.alreadyHaveAnAccountSign"
+          class="text-muted-foreground text-center text-sm"
+        >
           Already have an account?
           <a scLink routerLink="/auth/login">Sign in</a>
         </p>

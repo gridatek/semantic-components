@@ -150,7 +150,7 @@ export function axisLabel(text: string): string {
   const longMonth = LONG_MONTHS.indexOf(text);
   if (longMonth >= 0) return month(longMonth);
   const week = /^Week (\d+)$/.exec(text);
-  if (week) return $localize`Week ${week[1]}:number:`;
+  if (week) return $localize`:@@shared.format.week:Week ${week[1]}:number:`;
   return text;
 }
 

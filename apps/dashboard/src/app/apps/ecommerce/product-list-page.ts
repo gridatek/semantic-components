@@ -78,13 +78,15 @@ import { ProductStore } from './shop-store';
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@ecommerce.productList.products"
       title="Products"
       [trail]="[{ label: t.apps }, { label: t.products }]"
     >
       <a scLink variant="button" routerLink="/apps/ecommerce/add-product">
         <svg siPlusIcon></svg>
-        <ng-container i18n>Add Product</ng-container>
+        <ng-container i18n="@@ecommerce.productList.addProduct"
+          >Add Product</ng-container
+        >
       </a>
     </app-page-header>
 
@@ -93,8 +95,8 @@ import { ProductStore } from './shop-store';
         <div class="flex flex-wrap items-center gap-3">
           <div scInputGroup class="max-w-xs">
             <input
-              i18n-aria-label
-              i18n-placeholder
+              i18n-aria-label="@@ecommerce.productList.searchProducts"
+              i18n-placeholder="@@ecommerce.productList.searchProducts"
               scInput
               type="search"
               placeholder="Search products"
@@ -106,13 +108,19 @@ import { ProductStore } from './shop-store';
           </div>
           <div scNativeSelectContainer class="w-44">
             <select
-              i18n-aria-label
+              i18n-aria-label="@@ecommerce.productList.category"
               scNativeSelect
               aria-label="Category"
               [value]="category()"
               (change)="category.set($any($event.target).value)"
             >
-              <option i18n scNativeSelectOption value="">All categories</option>
+              <option
+                i18n="@@ecommerce.productList.allCategories"
+                scNativeSelectOption
+                value=""
+              >
+                All categories
+              </option>
               @for (c of categories; track c) {
                 <option scNativeSelectOption [value]="c">
                   {{ labelOf(c) }}
@@ -129,7 +137,9 @@ import { ProductStore } from './shop-store';
               (click)="removeSelected()"
             >
               <svg siTrash2Icon></svg>
-              <ng-container i18n>Delete {{ selected().size }}</ng-container>
+              <ng-container i18n="@@ecommerce.productList.delete"
+                >Delete {{ selected().size }}</ng-container
+              >
             </button>
           }
         </div>
@@ -139,7 +149,7 @@ import { ProductStore } from './shop-store';
               <tr scTableRow>
                 <th scTableHeaderCell class="w-10">
                   <input
-                    i18n-aria-label
+                    i18n-aria-label="@@ecommerce.productList.selectAll"
                     scCheckbox
                     type="checkbox"
                     aria-label="Select all"
@@ -148,12 +158,26 @@ import { ProductStore } from './shop-store';
                     (change)="toggleAll()"
                   />
                 </th>
-                <th i18n scTableHeaderCell>Product</th>
-                <th i18n scTableHeaderCell>Category</th>
-                <th i18n scTableHeaderCell>Added</th>
-                <th i18n scTableHeaderCell>Stock</th>
-                <th i18n scTableHeaderCell class="text-end">Price</th>
-                <th i18n scTableHeaderCell>
+                <th i18n="@@ecommerce.productList.product" scTableHeaderCell>
+                  Product
+                </th>
+                <th i18n="@@ecommerce.productList.category" scTableHeaderCell>
+                  Category
+                </th>
+                <th i18n="@@ecommerce.productList.added" scTableHeaderCell>
+                  Added
+                </th>
+                <th i18n="@@ecommerce.productList.stock" scTableHeaderCell>
+                  Stock
+                </th>
+                <th
+                  i18n="@@ecommerce.productList.price"
+                  scTableHeaderCell
+                  class="text-end"
+                >
+                  Price
+                </th>
+                <th i18n="@@ecommerce.productList.actions" scTableHeaderCell>
                   <span class="sr-only">Actions</span>
                 </th>
               </tr>
@@ -195,9 +219,17 @@ import { ProductStore } from './shop-store';
                   <td scTableCell>{{ dayOf(product.added) }}</td>
                   <td scTableCell>
                     @if (product.stock === 0) {
-                      <span i18n scBadge variant="destructive">Sold out</span>
+                      <span
+                        i18n="@@ecommerce.productList.soldOut"
+                        scBadge
+                        variant="destructive"
+                        >Sold out</span
+                      >
                     } @else if (product.stock < 10) {
-                      <span i18n scBadge variant="outline"
+                      <span
+                        i18n="@@ecommerce.productList.low"
+                        scBadge
+                        variant="outline"
                         >Low · {{ product.stock }}</span
                       >
                     } @else {
@@ -221,7 +253,9 @@ import { ProductStore } from './shop-store';
                         ]"
                       >
                         <svg siPencilIcon></svg>
-                        <span i18n class="sr-only"
+                        <span
+                          i18n="@@ecommerce.productList.edit"
+                          class="sr-only"
                           >Edit {{ product.name }}</span
                         >
                       </a>
@@ -232,7 +266,9 @@ import { ProductStore } from './shop-store';
                         (click)="remove(product)"
                       >
                         <svg siTrash2Icon></svg>
-                        <span i18n class="sr-only"
+                        <span
+                          i18n="@@ecommerce.productList.delete2"
+                          class="sr-only"
                           >Delete {{ product.name }}</span
                         >
                       </button>
@@ -242,7 +278,7 @@ import { ProductStore } from './shop-store';
               } @empty {
                 <tr scTableRow>
                   <td
-                    i18n
+                    i18n="@@ecommerce.productList.noProductsMatch"
                     scTableCell
                     colspan="7"
                     class="text-muted-foreground h-24 text-center"
@@ -264,9 +300,9 @@ export class ProductListPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    apps: $localize`Apps`,
-    products: $localize`Products`,
-    select: $localize`Select `,
+    apps: $localize`:@@ecommerce.productList.apps:Apps`,
+    products: $localize`:@@ecommerce.productList.products:Products`,
+    select: $localize`:@@ecommerce.productList.select:Select `,
   };
 
   private readonly store = inject(ProductStore);
@@ -319,6 +355,8 @@ export class ProductListPage {
     const ids = [...this.selected()];
     ids.forEach((id) => this.store.remove(id));
     this.selected.set(new Set());
-    this.toaster.show({ title: $localize`${ids.length} products deleted` });
+    this.toaster.show({
+      title: $localize`:@@ecommerce.productList.productsDeleted:${ids.length} products deleted`,
+    });
   }
 }

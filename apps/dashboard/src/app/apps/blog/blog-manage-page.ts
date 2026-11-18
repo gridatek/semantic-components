@@ -74,11 +74,21 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, BlogPost>();
 
 const columns = columnHelper.columns([
-  columnHelper.accessor('title', { header: $localize`Post` }),
-  columnHelper.accessor('category', { header: $localize`Category` }),
-  columnHelper.accessor('status', { header: $localize`Status` }),
-  columnHelper.accessor('date', { header: $localize`Date` }),
-  columnHelper.accessor('views', { header: $localize`Views` }),
+  columnHelper.accessor('title', {
+    header: $localize`:@@blog.manage.post:Post`,
+  }),
+  columnHelper.accessor('category', {
+    header: $localize`:@@blog.manage.category:Category`,
+  }),
+  columnHelper.accessor('status', {
+    header: $localize`:@@blog.manage.status:Status`,
+  }),
+  columnHelper.accessor('date', {
+    header: $localize`:@@blog.manage.date:Date`,
+  }),
+  columnHelper.accessor('views', {
+    header: $localize`:@@blog.manage.views:Views`,
+  }),
 ]);
 
 /** Manage Blog: every post, searchable and sortable, to view, edit or delete. */
@@ -124,21 +134,21 @@ const columns = columnHelper.columns([
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@blog.manage.manageBlog"
       title="Manage Blog"
       [trail]="[{ label: t.blog, url: '/apps/blog/post' }, { label: t.manage }]"
     >
       <a scLink variant="button" routerLink="/apps/blog/create">
         <svg siPlusIcon></svg>
-        <ng-container i18n>Create Post</ng-container>
+        <ng-container i18n="@@blog.manage.createPost">Create Post</ng-container>
       </a>
     </app-page-header>
 
     <div scCard>
       <div scCardBody class="flex flex-col gap-4">
         <input
-          i18n-aria-label
-          i18n-placeholder
+          i18n-aria-label="@@blog.manage.searchPosts"
+          i18n-placeholder="@@blog.manage.searchPosts2"
           scInput
           scDataTableGlobalFilter
           [table]="table"
@@ -178,7 +188,13 @@ const columns = columnHelper.columns([
                       </button>
                     </th>
                   }
-                  <th i18n scTableHeaderCell class="text-end">Actions</th>
+                  <th
+                    i18n="@@blog.manage.actions"
+                    scTableHeaderCell
+                    class="text-end"
+                  >
+                    Actions
+                  </th>
                 </tr>
               }
             </thead>
@@ -233,7 +249,7 @@ const columns = columnHelper.columns([
                       [routerLink]="['/apps/blog/detail', row.original.slug]"
                     >
                       <svg siEyeIcon></svg>
-                      <span i18n class="sr-only"
+                      <span i18n="@@blog.manage.view" class="sr-only"
                         >View {{ row.original.title }}</span
                       >
                     </a>
@@ -244,7 +260,7 @@ const columns = columnHelper.columns([
                       [routerLink]="['/apps/blog/edit', row.original.id]"
                     >
                       <svg siPencilIcon></svg>
-                      <span i18n class="sr-only"
+                      <span i18n="@@blog.manage.edit" class="sr-only"
                         >Edit {{ row.original.title }}</span
                       >
                     </a>
@@ -255,7 +271,7 @@ const columns = columnHelper.columns([
                       (click)="remove(row.original)"
                     >
                       <svg siTrash2Icon></svg>
-                      <span i18n class="sr-only"
+                      <span i18n="@@blog.manage.delete" class="sr-only"
                         >Delete {{ row.original.title }}</span
                       >
                     </button>
@@ -264,7 +280,7 @@ const columns = columnHelper.columns([
               } @empty {
                 <tr scTableRow>
                   <td
-                    i18n
+                    i18n="@@blog.manage.noPostsMatch"
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -277,7 +293,7 @@ const columns = columnHelper.columns([
           </table>
         </div>
         <nav
-          i18n-aria-label
+          i18n-aria-label="@@blog.manage.postPages"
           scPagination
           scDataTablePagination
           #pagination="scPagination"
@@ -285,20 +301,28 @@ const columns = columnHelper.columns([
           aria-label="Post pages"
           class="mx-0 w-auto items-center justify-end gap-4"
         >
-          <span i18n class="text-sm font-medium" aria-live="polite">
+          <span
+            i18n="@@blog.manage.pageOf"
+            class="text-sm font-medium"
+            aria-live="polite"
+          >
             Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
               <button scPaginationPrevious variant="outline" size="icon-sm">
                 <svg siChevronLeftIcon class="rtl:-scale-x-100"></svg>
-                <span i18n class="sr-only">Go to previous page</span>
+                <span i18n="@@blog.manage.goToPreviousPage" class="sr-only"
+                  >Go to previous page</span
+                >
               </button>
             </li>
             <li scPaginationItem>
               <button scPaginationNext variant="outline" size="icon-sm">
                 <svg siChevronRightIcon class="rtl:-scale-x-100"></svg>
-                <span i18n class="sr-only">Go to next page</span>
+                <span i18n="@@blog.manage.goToNextPage" class="sr-only"
+                  >Go to next page</span
+                >
               </button>
             </li>
           </ul>
@@ -313,8 +337,8 @@ export class BlogManagePage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    blog: $localize`Blog`,
-    manage: $localize`Manage`,
+    blog: $localize`:@@blog.manage.blog:Blog`,
+    manage: $localize`:@@blog.manage.manage:Manage`,
   };
 
   private readonly store = inject(BlogStore);
@@ -335,7 +359,7 @@ export class BlogManagePage {
     this.store.remove(post.id);
     this.toaster.show({
       variant: 'success',
-      title: $localize`Post deleted`,
+      title: $localize`:@@blog.manage.postDeleted:Post deleted`,
       description: post.title,
     });
   }

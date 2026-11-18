@@ -59,10 +59,10 @@ interface Conversation {
 
 /** The suggestions, in the order of their answers below. */
 const SUGGESTIONS = [
-  $localize`Summarise last month’s sales`,
-  $localize`Draft a reply to a late-delivery ticket`,
-  $localize`Ideas for a blog post on dashboards`,
-  $localize`Explain churn in one paragraph`,
+  $localize`:@@ai.chat.summariseLastMonthSSales:Summarise last month’s sales`,
+  $localize`:@@ai.chat.draftAReplyToA:Draft a reply to a late-delivery ticket`,
+  $localize`:@@ai.chat.ideasForABlogPost:Ideas for a blog post on dashboards`,
+  $localize`:@@ai.chat.explainChurnInOneParagraph:Explain churn in one paragraph`,
 ];
 
 /**
@@ -73,25 +73,25 @@ const SUGGESTIONS = [
 const ANSWERS: readonly { words: readonly string[]; text: string }[] = [
   {
     words: ['sales', 'revenue', 'month'],
-    text: $localize`Sales were $147K over the half, up 18.6%. June was the best month at $31.6K, carried by headphones and books; conversion slipped a little, to 3.2%, so the growth came from more visitors rather than better checkout. Worth a look: the drop between cart and payment on phones.`,
+    text: $localize`:@@ai.chat.salesWere147kOverThe:Sales were $147K over the half, up 18.6%. June was the best month at $31.6K, carried by headphones and books; conversion slipped a little, to 3.2%, so the growth came from more visitors rather than better checkout. Worth a look: the drop between cart and payment on phones.`,
   },
   {
     words: ['ticket', 'reply', 'delivery', 'late'],
-    text: $localize`Here is a draft:
+    text: $localize`:@@ai.chat.hereIsADraftHi:Here is a draft:
 
 Hi — thank you for your patience, and sorry the parcel is late. It left our warehouse on Monday and the carrier now expects it on Thursday. I have refunded the shipping to your card; if it has not arrived by Friday, reply here and we will send a new one at once.`,
   },
   {
     words: ['blog', 'post', 'ideas', 'article'],
-    text: $localize`Three ideas: 1) “One look, many screens” — how a style keeps a dashboard consistent. 2) “Charts that read in greyscale” — choosing shades that survive a neutral theme. 3) “From mock data to real” — swapping in-memory stores for an API without touching the screens.`,
+    text: $localize`:@@ai.chat.threeIdeas1OneLook:Three ideas: 1) “One look, many screens” — how a style keeps a dashboard consistent. 2) “Charts that read in greyscale” — choosing shades that survive a neutral theme. 3) “From mock data to real” — swapping in-memory stores for an API without touching the screens.`,
   },
   {
     words: ['churn'],
-    text: $localize`Churn is the share of paying accounts that leave in a period. At 2.1% a month, about one account in fifty cancels each month; over a year that compounds to roughly 22%. Lowering it is usually cheaper than finding new accounts to replace the ones lost.`,
+    text: $localize`:@@ai.chat.churnIsTheShareOf:Churn is the share of paying accounts that leave in a period. At 2.1% a month, about one account in fifty cancels each month; over a year that compounds to roughly 22%. Lowering it is usually cheaper than finding new accounts to replace the ones lost.`,
   },
 ];
 
-const FALLBACK = $localize`Good question. In this demo I answer from a few prepared notes — ask about sales, churn, a ticket reply or blog ideas to see a fuller answer.`;
+const FALLBACK = $localize`:@@ai.chat.goodQuestionInThisDemo:Good question. In this demo I answer from a few prepared notes — ask about sales, churn, a ticket reply or blog ideas to see a fuller answer.`;
 
 /** AI Chat (Pro): past conversations, a conversation, a prompt. */
 @Component({
@@ -130,7 +130,7 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@ai.chat.aiChat"
       title="AI Chat"
       [trail]="[{ label: t.apps }, { label: t.aiChat }]"
     />
@@ -141,9 +141,12 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
       <div scCard class="gap-3 p-3">
         <button scButton variant="outline" (click)="newChat()">
           <svg siPlusIcon></svg>
-          <ng-container i18n>New chat</ng-container>
+          <ng-container i18n="@@ai.chat.newChat">New chat</ng-container>
         </button>
-        <h2 i18n class="text-muted-foreground px-2 text-xs font-medium">
+        <h2
+          i18n="@@ai.chat.history"
+          class="text-muted-foreground px-2 text-xs font-medium"
+        >
           History
         </h2>
         <ul class="flex flex-col gap-1">
@@ -158,7 +161,7 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
               >
                 <div scItemBody>
                   <div scItemTitle>{{ chat.title }}</div>
-                  <p i18n scItemDescription>
+                  <p i18n="@@ai.chat.messages" scItemDescription>
                     {{ chat.messages.length }} messages
                   </p>
                 </div>
@@ -173,7 +176,7 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
           @if (messages().length) {
             <div scMessageScroller autoScroll class="absolute inset-0">
               <div
-                i18n-aria-label
+                i18n-aria-label="@@ai.chat.conversation"
                 scMessageScrollerViewport
                 aria-label="Conversation"
               >
@@ -226,7 +229,9 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
               </div>
               <button scMessageScrollerButton>
                 <svg siArrowDownIcon></svg>
-                <span i18n class="sr-only">Scroll to the latest message</span>
+                <span i18n="@@ai.chat.scrollToTheLatestMessage" class="sr-only"
+                  >Scroll to the latest message</span
+                >
               </button>
             </div>
           } @else {
@@ -239,8 +244,13 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
                 <svg siSparklesIcon></svg>
               </span>
               <div class="flex flex-col gap-1">
-                <h2 i18n class="text-xl font-semibold">How can I help?</h2>
-                <p i18n class="text-muted-foreground text-sm">
+                <h2 i18n="@@ai.chat.howCanIHelp" class="text-xl font-semibold">
+                  How can I help?
+                </h2>
+                <p
+                  i18n="@@ai.chat.askAboutYourNumbersOr"
+                  class="text-muted-foreground text-sm"
+                >
                   Ask about your numbers, or start from one of these.
                 </p>
               </div>
@@ -263,8 +273,8 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
         <form class="border-t p-4" (submit)="submit($event)">
           <div scInputGroup class="mx-auto max-w-3xl">
             <textarea
-              i18n-placeholder
-              i18n-aria-label
+              i18n-placeholder="@@ai.chat.askAnything"
+              i18n-aria-label="@@ai.chat.message"
               scTextarea
               rows="2"
               aria-label="Message"
@@ -274,7 +284,7 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
               (keydown.enter)="enter($event)"
             ></textarea>
             <div scInputGroupAddon side="bottom">
-              <span i18n scInputGroupText
+              <span i18n="@@ai.chat.enterSendsShiftEnterA" scInputGroupText
                 >Enter sends, Shift+Enter a new line</span
               >
               @if (streaming()) {
@@ -286,7 +296,7 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
                   (click)="stop()"
                 >
                   <svg siSquareIcon></svg>
-                  <span i18n class="sr-only">Stop</span>
+                  <span i18n="@@ai.chat.stop" class="sr-only">Stop</span>
                 </button>
               } @else {
                 <button
@@ -298,7 +308,7 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
                   [disabled]="!draft().trim()"
                 >
                   <svg siArrowUpIcon></svg>
-                  <span i18n class="sr-only">Send</span>
+                  <span i18n="@@ai.chat.send" class="sr-only">Send</span>
                 </button>
               }
             </div>
@@ -313,8 +323,8 @@ const FALLBACK = $localize`Good question. In this demo I answer from a few prepa
 export class AiChatPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    apps: $localize`Apps`,
-    aiChat: $localize`AI Chat`,
+    apps: $localize`:@@ai.chat.apps:Apps`,
+    aiChat: $localize`:@@ai.chat.aiChat:AI Chat`,
   };
 
   /** A question brought from elsewhere (the SaaS dashboard): `?q=`. */
@@ -330,7 +340,7 @@ export class AiChatPage {
   private readonly conversations = signal<readonly Conversation[]>([
     {
       id: 2,
-      title: $localize`Churn in one paragraph`,
+      title: $localize`:@@ai.chat.churnInOneParagraph:Churn in one paragraph`,
       messages: [
         { id: 'h1', role: 'user', text: SUGGESTIONS[3] },
         { id: 'h2', role: 'assistant', text: ANSWERS[3].text },
@@ -338,7 +348,7 @@ export class AiChatPage {
     },
     {
       id: 1,
-      title: $localize`Blog ideas`,
+      title: $localize`:@@ai.chat.blogIdeas:Blog ideas`,
       messages: [
         { id: 'h3', role: 'user', text: SUGGESTIONS[2] },
         { id: 'h4', role: 'assistant', text: ANSWERS[2].text },

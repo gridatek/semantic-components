@@ -55,10 +55,10 @@ interface Task {
 }
 
 const COLUMNS: readonly { id: ColumnId; title: string }[] = [
-  { id: 'todo', title: $localize`To do` },
-  { id: 'progress', title: $localize`In progress` },
-  { id: 'review', title: $localize`Review` },
-  { id: 'done', title: $localize`Done` },
+  { id: 'todo', title: $localize`:@@kanban.toDo:To do` },
+  { id: 'progress', title: $localize`:@@kanban.inProgress:In progress` },
+  { id: 'review', title: $localize`:@@kanban.review:Review` },
+  { id: 'done', title: $localize`:@@kanban.done:Done` },
 ];
 
 const TAGS: readonly Tag[] = ['Design', 'Development', 'Research', 'Marketing'];
@@ -70,14 +70,14 @@ const BOARD: ScKanbanBoardValue<Task> = {
   todo: [
     {
       id: 1,
-      title: $localize`Pricing page: annual toggle`,
+      title: $localize`:@@kanban.pricingPageAnnualToggle:Pricing page: annual toggle`,
       tag: 'Design',
       due: '2026-05-06',
       people: who(2, 6),
     },
     {
       id: 2,
-      title: $localize`Export a dashboard as PDF`,
+      title: $localize`:@@kanban.exportADashboardAsPdf:Export a dashboard as PDF`,
       tag: 'Research',
       due: '2026-05-09',
       people: who(6),
@@ -85,7 +85,7 @@ const BOARD: ScKanbanBoardValue<Task> = {
     },
     {
       id: 3,
-      title: $localize`May newsletter`,
+      title: $localize`:@@kanban.mayNewsletter:May newsletter`,
       tag: 'Marketing',
       due: '2026-05-12',
       people: who(4),
@@ -94,14 +94,14 @@ const BOARD: ScKanbanBoardValue<Task> = {
   progress: [
     {
       id: 4,
-      title: $localize`Charts follow the style`,
+      title: $localize`:@@kanban.chartsFollowTheStyle:Charts follow the style`,
       tag: 'Development',
       due: '2026-05-03',
       people: who(3, 7),
     },
     {
       id: 5,
-      title: $localize`Onboarding checklist`,
+      title: $localize`:@@kanban.onboardingChecklist:Onboarding checklist`,
       tag: 'Design',
       due: '2026-05-05',
       people: who(2),
@@ -111,14 +111,14 @@ const BOARD: ScKanbanBoardValue<Task> = {
   review: [
     {
       id: 6,
-      title: $localize`Invoice PDF layout`,
+      title: $localize`:@@kanban.invoicePdfLayout:Invoice PDF layout`,
       tag: 'Development',
       due: '2026-04-30',
       people: who(9),
     },
     {
       id: 7,
-      title: $localize`Interview synthesis`,
+      title: $localize`:@@kanban.interviewSynthesis:Interview synthesis`,
       tag: 'Research',
       due: '2026-04-29',
       people: who(6, 5),
@@ -127,14 +127,14 @@ const BOARD: ScKanbanBoardValue<Task> = {
   done: [
     {
       id: 8,
-      title: $localize`Ticket filters`,
+      title: $localize`:@@kanban.ticketFilters:Ticket filters`,
       tag: 'Development',
       due: '2026-04-24',
       people: who(7),
     },
     {
       id: 9,
-      title: $localize`Spring campaign visuals`,
+      title: $localize`:@@kanban.springCampaignVisuals:Spring campaign visuals`,
       tag: 'Marketing',
       due: '2026-04-21',
       people: who(4, 8),
@@ -182,17 +182,17 @@ const BOARD: ScKanbanBoardValue<Task> = {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@kanban.kanban"
       title="Kanban"
       [trail]="[{ label: t.apps }, { label: t.kanban }]"
     >
       <button scButton (click)="startAdding('todo')">
         <svg siPlusIcon></svg>
-        <ng-container i18n>Add Task</ng-container>
+        <ng-container i18n="@@kanban.addTask">Add Task</ng-container>
       </button>
     </app-page-header>
 
-    <p i18n id="kanban-help" class="sr-only">
+    <p i18n="@@kanban.spaceLiftsATaskThe" id="kanban-help" class="sr-only">
       Space lifts a task, the arrow keys move it, Space drops it, Escape puts it
       back.
     </p>
@@ -222,7 +222,9 @@ const BOARD: ScKanbanBoardValue<Task> = {
               (click)="startAdding(column.id)"
             >
               <svg siPlusIcon></svg>
-              <span i18n class="sr-only">Add a task to {{ column.title }}</span>
+              <span i18n="@@kanban.addATaskTo" class="sr-only"
+                >Add a task to {{ column.title }}</span
+              >
             </button>
           </div>
           <ul
@@ -257,7 +259,9 @@ const BOARD: ScKanbanBoardValue<Task> = {
                     (click)="remove(column.id, task)"
                   >
                     <svg siTrash2Icon></svg>
-                    <span i18n class="sr-only">Delete {{ task.title }}</span>
+                    <span i18n="@@kanban.delete" class="sr-only"
+                      >Delete {{ task.title }}</span
+                    >
                   </button>
                 </div>
                 <div class="flex items-center gap-2">
@@ -297,20 +301,20 @@ const BOARD: ScKanbanBoardValue<Task> = {
         <div scDialog class="sm:max-w-md">
           <button scDialogClose>
             <svg siXIcon></svg>
-            <span i18n class="sr-only">Close</span>
+            <span i18n="@@kanban.close" class="sr-only">Close</span>
           </button>
           <div scDialogHeader>
-            <h2 i18n scDialogTitle>Add Task</h2>
+            <h2 i18n="@@kanban.addTask" scDialogTitle>Add Task</h2>
           </div>
           <form id="task-form" (submit)="add($event)">
             <div scFieldGroup>
               <div scField>
-                <label i18n scLabel>Title</label>
+                <label i18n="@@kanban.title" scLabel>Title</label>
                 <input scInput cdkFocusInitial [formField]="draftForm.title" />
               </div>
               <div class="grid grid-cols-2 gap-4">
                 <div scField>
-                  <label i18n scLabel>Column</label>
+                  <label i18n="@@kanban.column" scLabel>Column</label>
                   <div scNativeSelectContainer class="w-full">
                     <select scNativeSelect [formField]="draftForm.column">
                       @for (column of columns; track column.id) {
@@ -323,7 +327,7 @@ const BOARD: ScKanbanBoardValue<Task> = {
                   </div>
                 </div>
                 <div scField>
-                  <label i18n scLabel>Tag</label>
+                  <label i18n="@@kanban.tag" scLabel>Tag</label>
                   <div scNativeSelectContainer class="w-full">
                     <select scNativeSelect [formField]="draftForm.tag">
                       @for (tag of tags; track tag) {
@@ -337,16 +341,23 @@ const BOARD: ScKanbanBoardValue<Task> = {
                 </div>
               </div>
               <div scField>
-                <label i18n scLabel>Due</label>
+                <label i18n="@@kanban.due" scLabel>Due</label>
                 <input scInput type="date" [formField]="draftForm.due" />
               </div>
             </div>
           </form>
           <div scDialogFooter>
-            <button i18n scDialogClose variant="outline" size="default">
+            <button
+              i18n="@@kanban.cancel"
+              scDialogClose
+              variant="outline"
+              size="default"
+            >
               Cancel
             </button>
-            <button i18n scButton type="submit" form="task-form">Add</button>
+            <button i18n="@@kanban.add" scButton type="submit" form="task-form">
+              Add
+            </button>
           </div>
         </div>
       </ng-template>
@@ -359,8 +370,8 @@ export class KanbanPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    apps: $localize`Apps`,
-    kanban: $localize`Kanban`,
+    apps: $localize`:@@kanban.apps:Apps`,
+    kanban: $localize`:@@kanban.kanban:Kanban`,
   };
 
   private readonly toaster = inject(ScToaster);
@@ -432,7 +443,10 @@ export class KanbanPage {
       ],
     }));
     this.adding.set(false);
-    this.toaster.show({ variant: 'success', title: $localize`Task added` });
+    this.toaster.show({
+      variant: 'success',
+      title: $localize`:@@kanban.taskAdded:Task added`,
+    });
   }
 
   private remove(column: string, task: Task): void {

@@ -5,37 +5,37 @@ const dashboards: Route[] = [
   {
     path: '',
     pathMatch: 'full',
-    title: $localize`Dashboard`,
+    title: $localize`:@@routes.dashboard:Dashboard`,
     loadComponent: () =>
       import('./pages/dashboard/dashboard-page').then((m) => m.DashboardPage),
   },
   {
     path: 'dashboards/analytics',
-    title: $localize`Analytics — Dashboard`,
+    title: $localize`:@@routes.analyticsDashboard:Analytics — Dashboard`,
     loadComponent: () =>
       import('./pages/dashboards/analytics-page').then((m) => m.AnalyticsPage),
   },
   {
     path: 'dashboards/ecommerce',
-    title: $localize`eCommerce — Dashboard`,
+    title: $localize`:@@routes.ecommerceDashboard:eCommerce — Dashboard`,
     loadComponent: () =>
       import('./pages/dashboards/ecommerce-page').then((m) => m.EcommercePage),
   },
   {
     path: 'dashboards/saas-ai',
-    title: $localize`SaaS + AI — Dashboard`,
+    title: $localize`:@@routes.saasAiDashboard:SaaS + AI — Dashboard`,
     loadComponent: () =>
       import('./pages/dashboards/saas-ai-page').then((m) => m.SaasAiPage),
   },
   {
     path: 'dashboards/school',
-    title: $localize`School — Dashboard`,
+    title: $localize`:@@routes.schoolDashboard:School — Dashboard`,
     loadComponent: () =>
       import('./pages/dashboards/school-page').then((m) => m.SchoolPage),
   },
   {
     path: 'dashboards/health',
-    title: $localize`Health — Dashboard`,
+    title: $localize`:@@routes.healthDashboard:Health — Dashboard`,
     loadComponent: () =>
       import('./pages/dashboards/health-page').then((m) => m.HealthPage),
   },
@@ -45,19 +45,19 @@ const dashboards: Route[] = [
 const pages: Route[] = [
   {
     path: 'pages/tables',
-    title: $localize`Tables — Dashboard`,
+    title: $localize`:@@routes.tablesDashboard:Tables — Dashboard`,
     loadComponent: () =>
       import('./pages/tables/tables-page').then((m) => m.TablesPage),
   },
   {
     path: 'pages/form',
-    title: $localize`Form — Dashboard`,
+    title: $localize`:@@routes.formDashboard:Form — Dashboard`,
     loadComponent: () =>
       import('./pages/form/form-page').then((m) => m.FormPage),
   },
   {
     path: 'pages/user-profile',
-    title: $localize`User Profile — Dashboard`,
+    title: $localize`:@@routes.userProfileDashboard:User Profile — Dashboard`,
     loadComponent: () =>
       import('./pages/user-profile/user-profile-page').then(
         (m) => m.UserProfilePage,
@@ -65,13 +65,13 @@ const pages: Route[] = [
   },
   {
     path: 'icons',
-    title: $localize`Icons — Dashboard`,
+    title: $localize`:@@routes.iconsDashboard:Icons — Dashboard`,
     loadComponent: () =>
       import('./pages/icons/icons-page').then((m) => m.IconsPage),
   },
   {
     path: 'pages/account-settings',
-    title: $localize`Account Settings — Dashboard`,
+    title: $localize`:@@routes.accountSettingsDashboard:Account Settings — Dashboard`,
     loadComponent: () =>
       import('./pages/account-settings/account-settings-page').then(
         (m) => m.AccountSettingsPage,
@@ -79,24 +79,24 @@ const pages: Route[] = [
   },
   {
     path: 'pages/faq',
-    title: $localize`FAQ — Dashboard`,
+    title: $localize`:@@routes.faqDashboard:FAQ — Dashboard`,
     loadComponent: () => import('./pages/faq/faq-page').then((m) => m.FaqPage),
   },
   {
     path: 'pages/pricing',
-    title: $localize`Pricing — Dashboard`,
+    title: $localize`:@@routes.pricingDashboard:Pricing — Dashboard`,
     loadComponent: () =>
       import('./pages/pricing/pricing-page').then((m) => m.PricingPage),
   },
   {
     path: 'pages/roles',
-    title: $localize`Roles & Permissions — Dashboard`,
+    title: $localize`:@@routes.rolesPermissionsDashboard:Roles & Permissions — Dashboard`,
     loadComponent: () =>
       import('./pages/roles/roles-page').then((m) => m.RolesPage),
   },
   {
     path: 'pages/integrations',
-    title: $localize`Integrations — Dashboard`,
+    title: $localize`:@@routes.integrationsDashboard:Integrations — Dashboard`,
     loadComponent: () =>
       import('./pages/integrations/integrations-page').then(
         (m) => m.IntegrationsPage,
@@ -108,61 +108,61 @@ const pages: Route[] = [
 const apps: Route[] = [
   {
     path: 'apps/ai/chat',
-    title: $localize`AI Chat — Dashboard`,
+    title: $localize`:@@routes.aiChatDashboard:AI Chat — Dashboard`,
     loadComponent: () =>
       import('./apps/ai/ai-chat-page').then((m) => m.AiChatPage),
   },
   {
     path: 'apps/ai/image',
-    title: $localize`AI Image — Dashboard`,
+    title: $localize`:@@routes.aiImageDashboard:AI Image — Dashboard`,
     loadComponent: () =>
       import('./apps/ai/ai-image-page').then((m) => m.AiImagePage),
   },
   {
     path: 'apps/calendar',
-    title: $localize`Calendar — Dashboard`,
+    title: $localize`:@@routes.calendarDashboard:Calendar — Dashboard`,
     loadComponent: () =>
       import('./apps/calendar/calendar-page').then((m) => m.CalendarPage),
   },
   {
     path: 'apps/chats',
-    title: $localize`Chats — Dashboard`,
+    title: $localize`:@@routes.chatsDashboard:Chats — Dashboard`,
     loadComponent: () =>
       import('./apps/chats/chats-page').then((m) => m.ChatsPage),
   },
   {
     path: 'apps/email',
-    title: $localize`Email — Dashboard`,
+    title: $localize`:@@routes.emailDashboard:Email — Dashboard`,
     loadComponent: () =>
       import('./apps/email/email-page').then((m) => m.EmailPage),
   },
   {
     path: 'apps/contacts',
-    title: $localize`Contacts — Dashboard`,
+    title: $localize`:@@routes.contactsDashboard:Contacts — Dashboard`,
     loadComponent: () =>
       import('./apps/contacts/contacts-page').then((m) => m.ContactsPage),
   },
   {
     path: 'apps/kanban',
-    title: $localize`Kanban — Dashboard`,
+    title: $localize`:@@routes.kanbanDashboard:Kanban — Dashboard`,
     loadComponent: () =>
       import('./apps/kanban/kanban-page').then((m) => m.KanbanPage),
   },
   {
     path: 'apps/notes',
-    title: $localize`Notes — Dashboard`,
+    title: $localize`:@@routes.notesDashboard:Notes — Dashboard`,
     loadComponent: () =>
       import('./apps/notes/notes-page').then((m) => m.NotesPage),
   },
   {
     path: 'apps/tickets',
-    title: $localize`Tickets — Dashboard`,
+    title: $localize`:@@routes.ticketsDashboard:Tickets — Dashboard`,
     loadComponent: () =>
       import('./apps/tickets/tickets-page').then((m) => m.TicketsPage),
   },
   {
     path: 'apps/tickets/create',
-    title: $localize`Create Ticket — Dashboard`,
+    title: $localize`:@@routes.createTicketDashboard:Create Ticket — Dashboard`,
     loadComponent: () =>
       import('./apps/tickets/ticket-create-page').then(
         (m) => m.TicketCreatePage,
@@ -170,43 +170,43 @@ const apps: Route[] = [
   },
   {
     path: 'apps/blog/post',
-    title: $localize`Blog — Dashboard`,
+    title: $localize`:@@routes.blogDashboard:Blog — Dashboard`,
     loadComponent: () =>
       import('./apps/blog/blog-listing-page').then((m) => m.BlogListingPage),
   },
   {
     path: 'apps/blog/detail/:slug',
-    title: $localize`Blog Detail — Dashboard`,
+    title: $localize`:@@routes.blogDetailDashboard:Blog Detail — Dashboard`,
     loadComponent: () =>
       import('./apps/blog/blog-detail-page').then((m) => m.BlogDetailPage),
   },
   {
     path: 'apps/blog/create',
-    title: $localize`Blog Create — Dashboard`,
+    title: $localize`:@@routes.blogCreateDashboard:Blog Create — Dashboard`,
     loadComponent: () =>
       import('./apps/blog/blog-edit-page').then((m) => m.BlogEditPage),
   },
   {
     path: 'apps/blog/edit/:id',
-    title: $localize`Blog Edit — Dashboard`,
+    title: $localize`:@@routes.blogEditDashboard:Blog Edit — Dashboard`,
     loadComponent: () =>
       import('./apps/blog/blog-edit-page').then((m) => m.BlogEditPage),
   },
   {
     path: 'apps/blog/manage-blog',
-    title: $localize`Manage Blog — Dashboard`,
+    title: $localize`:@@routes.manageBlogDashboard:Manage Blog — Dashboard`,
     loadComponent: () =>
       import('./apps/blog/blog-manage-page').then((m) => m.BlogManagePage),
   },
   {
     path: 'apps/invoice/list',
-    title: $localize`Invoices — Dashboard`,
+    title: $localize`:@@routes.invoicesDashboard:Invoices — Dashboard`,
     loadComponent: () =>
       import('./apps/invoice/invoice-list-page').then((m) => m.InvoiceListPage),
   },
   {
     path: 'apps/invoice/detail/:id',
-    title: $localize`Invoice — Dashboard`,
+    title: $localize`:@@routes.invoiceDashboard:Invoice — Dashboard`,
     loadComponent: () =>
       import('./apps/invoice/invoice-detail-page').then(
         (m) => m.InvoiceDetailPage,
@@ -214,49 +214,49 @@ const apps: Route[] = [
   },
   {
     path: 'apps/invoice/create',
-    title: $localize`New Invoice — Dashboard`,
+    title: $localize`:@@routes.newInvoiceDashboard:New Invoice — Dashboard`,
     loadComponent: () =>
       import('./apps/invoice/invoice-edit-page').then((m) => m.InvoiceEditPage),
   },
   {
     path: 'apps/invoice/edit/:id',
-    title: $localize`Edit Invoice — Dashboard`,
+    title: $localize`:@@routes.editInvoiceDashboard:Edit Invoice — Dashboard`,
     loadComponent: () =>
       import('./apps/invoice/invoice-edit-page').then((m) => m.InvoiceEditPage),
   },
   {
     path: 'apps/user-profile/profile',
-    title: $localize`Profile — Dashboard`,
+    title: $localize`:@@routes.profileDashboard:Profile — Dashboard`,
     loadComponent: () =>
       import('./apps/user-profile/profile-page').then((m) => m.ProfilePage),
   },
   {
     path: 'apps/user-profile/followers',
-    title: $localize`Followers — Dashboard`,
+    title: $localize`:@@routes.followersDashboard:Followers — Dashboard`,
     loadComponent: () =>
       import('./apps/user-profile/followers-page').then((m) => m.FollowersPage),
   },
   {
     path: 'apps/user-profile/friends',
-    title: $localize`Friends — Dashboard`,
+    title: $localize`:@@routes.friendsDashboard:Friends — Dashboard`,
     loadComponent: () =>
       import('./apps/user-profile/friends-page').then((m) => m.FriendsPage),
   },
   {
     path: 'apps/user-profile/gallery',
-    title: $localize`Gallery — Dashboard`,
+    title: $localize`:@@routes.galleryDashboard:Gallery — Dashboard`,
     loadComponent: () =>
       import('./apps/user-profile/gallery-page').then((m) => m.GalleryPage),
   },
   {
     path: 'apps/ecommerce/shop',
-    title: $localize`Shop — Dashboard`,
+    title: $localize`:@@routes.shopDashboard:Shop — Dashboard`,
     loadComponent: () =>
       import('./apps/ecommerce/shop-page').then((m) => m.ShopPage),
   },
   {
     path: 'apps/ecommerce/detail/:id',
-    title: $localize`Product — Dashboard`,
+    title: $localize`:@@routes.productDashboard:Product — Dashboard`,
     loadComponent: () =>
       import('./apps/ecommerce/product-detail-page').then(
         (m) => m.ProductDetailPage,
@@ -264,7 +264,7 @@ const apps: Route[] = [
   },
   {
     path: 'apps/ecommerce/list',
-    title: $localize`Products — Dashboard`,
+    title: $localize`:@@routes.productsDashboard:Products — Dashboard`,
     loadComponent: () =>
       import('./apps/ecommerce/product-list-page').then(
         (m) => m.ProductListPage,
@@ -272,13 +272,13 @@ const apps: Route[] = [
   },
   {
     path: 'apps/ecommerce/checkout',
-    title: $localize`Checkout — Dashboard`,
+    title: $localize`:@@routes.checkoutDashboard:Checkout — Dashboard`,
     loadComponent: () =>
       import('./apps/ecommerce/checkout-page').then((m) => m.CheckoutPage),
   },
   {
     path: 'apps/ecommerce/add-product',
-    title: $localize`Add Product — Dashboard`,
+    title: $localize`:@@routes.addProductDashboard:Add Product — Dashboard`,
     loadComponent: () =>
       import('./apps/ecommerce/product-edit-page').then(
         (m) => m.ProductEditPage,
@@ -286,7 +286,7 @@ const apps: Route[] = [
   },
   {
     path: 'apps/ecommerce/edit-product/:id',
-    title: $localize`Edit Product — Dashboard`,
+    title: $localize`:@@routes.editProductDashboard:Edit Product — Dashboard`,
     loadComponent: () =>
       import('./apps/ecommerce/product-edit-page').then(
         (m) => m.ProductEditPage,
@@ -294,13 +294,13 @@ const apps: Route[] = [
   },
   {
     path: 'apps/customers',
-    title: $localize`Customers — Dashboard`,
+    title: $localize`:@@routes.customersDashboard:Customers — Dashboard`,
     loadComponent: () =>
       import('./apps/customers/customers-page').then((m) => m.CustomersPage),
   },
   {
     path: 'apps/orders',
-    title: $localize`Orders — Dashboard`,
+    title: $localize`:@@routes.ordersDashboard:Orders — Dashboard`,
     loadComponent: () =>
       import('./apps/orders/orders-page').then((m) => m.OrdersPage),
   },
@@ -310,13 +310,13 @@ const apps: Route[] = [
 const forms: Route[] = [
   {
     path: 'forms/layouts',
-    title: $localize`Form Layouts — Dashboard`,
+    title: $localize`:@@routes.formLayoutsDashboard:Form Layouts — Dashboard`,
     loadComponent: () =>
       import('./pages/forms/form-layouts-page').then((m) => m.FormLayoutsPage),
   },
   {
     path: 'forms/validation',
-    title: $localize`Form Validation — Dashboard`,
+    title: $localize`:@@routes.formValidationDashboard:Form Validation — Dashboard`,
     loadComponent: () =>
       import('./pages/forms/form-validation-page').then(
         (m) => m.FormValidationPage,
@@ -324,7 +324,7 @@ const forms: Route[] = [
   },
   {
     path: 'forms/examples',
-    title: $localize`Form Examples — Dashboard`,
+    title: $localize`:@@routes.formExamplesDashboard:Form Examples — Dashboard`,
     loadComponent: () =>
       import('./pages/forms/form-examples-page').then(
         (m) => m.FormExamplesPage,
@@ -332,7 +332,7 @@ const forms: Route[] = [
   },
   {
     path: 'forms/repeater',
-    title: $localize`Repeater Forms — Dashboard`,
+    title: $localize`:@@routes.repeaterFormsDashboard:Repeater Forms — Dashboard`,
     loadComponent: () =>
       import('./pages/forms/form-repeater-page').then(
         (m) => m.FormRepeaterPage,
@@ -340,7 +340,7 @@ const forms: Route[] = [
   },
   {
     path: 'forms/wizard',
-    title: $localize`Form Wizard — Dashboard`,
+    title: $localize`:@@routes.formWizardDashboard:Form Wizard — Dashboard`,
     loadComponent: () =>
       import('./pages/forms/form-wizard-page').then((m) => m.FormWizardPage),
   },
@@ -350,7 +350,7 @@ const forms: Route[] = [
 const ui: Route[] = [
   {
     path: 'ui/:element',
-    title: $localize`UI Elements — Dashboard`,
+    title: $localize`:@@routes.uiElementsDashboard:UI Elements — Dashboard`,
     loadComponent: () =>
       import('./pages/ui/ui-element-page').then((m) => m.UiElementPage),
   },
@@ -360,31 +360,31 @@ const ui: Route[] = [
 const tables: Route[] = [
   {
     path: 'tables/basic',
-    title: $localize`Basic Table — Dashboard`,
+    title: $localize`:@@routes.basicTableDashboard:Basic Table — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/basic-tables').then((m) => m.BasicTablePage),
   },
   {
     path: 'tables/dense',
-    title: $localize`Dense Table — Dashboard`,
+    title: $localize`:@@routes.denseTableDashboard:Dense Table — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/basic-tables').then((m) => m.DenseTablePage),
   },
   {
     path: 'tables/sticky',
-    title: $localize`Sticky Table — Dashboard`,
+    title: $localize`:@@routes.stickyTableDashboard:Sticky Table — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/basic-tables').then((m) => m.StickyTablePage),
   },
   {
     path: 'tables/empty',
-    title: $localize`Empty Table — Dashboard`,
+    title: $localize`:@@routes.emptyTableDashboard:Empty Table — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/basic-tables').then((m) => m.EmptyTablePage),
   },
   {
     path: 'tables/sorting',
-    title: $localize`Sorting — Dashboard`,
+    title: $localize`:@@routes.sortingDashboard:Sorting — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/query-tables').then(
         (m) => m.SortingTablePage,
@@ -392,7 +392,7 @@ const tables: Route[] = [
   },
   {
     path: 'tables/filtering',
-    title: $localize`Filtering — Dashboard`,
+    title: $localize`:@@routes.filteringDashboard:Filtering — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/query-tables').then(
         (m) => m.FilteringTablePage,
@@ -400,7 +400,7 @@ const tables: Route[] = [
   },
   {
     path: 'tables/pagination',
-    title: $localize`Pagination — Dashboard`,
+    title: $localize`:@@routes.paginationDashboard:Pagination — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/query-tables').then(
         (m) => m.PaginationTablePage,
@@ -408,7 +408,7 @@ const tables: Route[] = [
   },
   {
     path: 'tables/row-selection',
-    title: $localize`Row Selection — Dashboard`,
+    title: $localize`:@@routes.rowSelectionDashboard:Row Selection — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/interactive-tables').then(
         (m) => m.RowSelectionTablePage,
@@ -416,7 +416,7 @@ const tables: Route[] = [
   },
   {
     path: 'tables/column-visibility',
-    title: $localize`Column Visibility — Dashboard`,
+    title: $localize`:@@routes.columnVisibilityDashboard:Column Visibility — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/interactive-tables').then(
         (m) => m.ColumnVisibilityTablePage,
@@ -424,7 +424,7 @@ const tables: Route[] = [
   },
   {
     path: 'tables/editable',
-    title: $localize`Editable Table — Dashboard`,
+    title: $localize`:@@routes.editableTableDashboard:Editable Table — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/interactive-tables').then(
         (m) => m.EditableTablePage,
@@ -432,7 +432,7 @@ const tables: Route[] = [
   },
   {
     path: 'tables/drag-drop',
-    title: $localize`Drag & Drop Table — Dashboard`,
+    title: $localize`:@@routes.dragDropTableDashboard:Drag & Drop Table — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/interactive-tables').then(
         (m) => m.DragDropTablePage,
@@ -440,7 +440,7 @@ const tables: Route[] = [
   },
   {
     path: 'tables/expanding',
-    title: $localize`Expanding Table — Dashboard`,
+    title: $localize`:@@routes.expandingTableDashboard:Expanding Table — Dashboard`,
     loadComponent: () =>
       import('./pages/data-tables/interactive-tables').then(
         (m) => m.ExpandingTablePage,
@@ -452,37 +452,37 @@ const tables: Route[] = [
 const charts: Route[] = [
   {
     path: 'charts/line',
-    title: $localize`Line Charts — Dashboard`,
+    title: $localize`:@@routes.lineChartsDashboard:Line Charts — Dashboard`,
     loadComponent: () =>
       import('./pages/charts/chart-pages').then((m) => m.LineChartsPage),
   },
   {
     path: 'charts/area',
-    title: $localize`Area Charts — Dashboard`,
+    title: $localize`:@@routes.areaChartsDashboard:Area Charts — Dashboard`,
     loadComponent: () =>
       import('./pages/charts/chart-pages').then((m) => m.AreaChartsPage),
   },
   {
     path: 'charts/bar',
-    title: $localize`Bar Charts — Dashboard`,
+    title: $localize`:@@routes.barChartsDashboard:Bar Charts — Dashboard`,
     loadComponent: () =>
       import('./pages/charts/chart-pages').then((m) => m.BarChartsPage),
   },
   {
     path: 'charts/pie',
-    title: $localize`Pie & Donut Charts — Dashboard`,
+    title: $localize`:@@routes.pieDonutChartsDashboard:Pie & Donut Charts — Dashboard`,
     loadComponent: () =>
       import('./pages/charts/chart-pages').then((m) => m.PieChartsPage),
   },
   {
     path: 'charts/radar',
-    title: $localize`Radar Charts — Dashboard`,
+    title: $localize`:@@routes.radarChartsDashboard:Radar Charts — Dashboard`,
     loadComponent: () =>
       import('./pages/charts/chart-pages').then((m) => m.RadarChartsPage),
   },
   {
     path: 'charts/radial',
-    title: $localize`Radial Charts — Dashboard`,
+    title: $localize`:@@routes.radialChartsDashboard:Radial Charts — Dashboard`,
     loadComponent: () =>
       import('./pages/charts/chart-pages').then((m) => m.RadialChartsPage),
   },
@@ -492,13 +492,13 @@ const charts: Route[] = [
 const widgets: Route[] = [
   {
     path: 'widgets/cards',
-    title: $localize`Widget Cards — Dashboard`,
+    title: $localize`:@@routes.widgetCardsDashboard:Widget Cards — Dashboard`,
     loadComponent: () =>
       import('./pages/widgets/widget-pages').then((m) => m.WidgetCardsPage),
   },
   {
     path: 'widgets/charts',
-    title: $localize`Widget Charts — Dashboard`,
+    title: $localize`:@@routes.widgetChartsDashboard:Widget Charts — Dashboard`,
     loadComponent: () =>
       import('./pages/widgets/widget-pages').then((m) => m.WidgetChartsPage),
   },
@@ -508,24 +508,24 @@ const widgets: Route[] = [
 const signIn: Route[] = [
   {
     path: 'login',
-    title: $localize`Login — Dashboard`,
+    title: $localize`:@@routes.loginDashboard:Login — Dashboard`,
     loadComponent: () => import('./auth/login-page').then((m) => m.LoginPage),
   },
   {
     path: 'register',
-    title: $localize`Register — Dashboard`,
+    title: $localize`:@@routes.registerDashboard:Register — Dashboard`,
     loadComponent: () =>
       import('./auth/register-page').then((m) => m.RegisterPage),
   },
   {
     path: 'forgot-password',
-    title: $localize`Forgot Password — Dashboard`,
+    title: $localize`:@@routes.forgotPasswordDashboard:Forgot Password — Dashboard`,
     loadComponent: () =>
       import('./auth/forgot-password-page').then((m) => m.ForgotPasswordPage),
   },
   {
     path: 'two-steps',
-    title: $localize`Two Steps — Dashboard`,
+    title: $localize`:@@routes.twoStepsDashboard:Two Steps — Dashboard`,
     loadComponent: () =>
       import('./auth/two-steps-page').then((m) => m.TwoStepsPage),
   },
@@ -565,13 +565,13 @@ export const appRoutes: Route[] = [
       ...signIn,
       {
         path: 'maintenance',
-        title: $localize`Maintenance — Dashboard`,
+        title: $localize`:@@routes.maintenanceDashboard:Maintenance — Dashboard`,
         loadComponent: () =>
           import('./auth/maintenance-page').then((m) => m.MaintenancePage),
       },
       {
         path: '404',
-        title: $localize`Page Not Found — Dashboard`,
+        title: $localize`:@@routes.pageNotFoundDashboard:Page Not Found — Dashboard`,
         loadComponent: () =>
           import('./auth/error-page').then((m) => m.ErrorPage),
       },

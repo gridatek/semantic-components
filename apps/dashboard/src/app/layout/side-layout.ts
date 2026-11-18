@@ -21,7 +21,9 @@ import { SiLayoutDashboardIcon } from '@semantic-icons/lucide-icons';
           >
             <svg siLayoutDashboardIcon></svg>
           </span>
-          <ng-container i18n>Dashboard</ng-container>
+          <ng-container i18n="@@layout.sideLayout.dashboard"
+            >Dashboard</ng-container
+          >
         </div>
         <div class="relative mx-auto aspect-square w-full max-w-md">
           <img
@@ -33,11 +35,17 @@ import { SiLayoutDashboardIcon } from '@semantic-icons/lucide-icons';
           />
         </div>
         <blockquote class="flex flex-col gap-2">
-          <p i18n class="text-lg">
+          <p
+            i18n="@@layout.sideLayout.everyScreenOfThisDashboard"
+            class="text-lg"
+          >
             “Every screen of this dashboard is built from the same parts: one
             look, carried by the style.”
           </p>
-          <footer i18n class="text-muted-foreground text-sm">
+          <footer
+            i18n="@@layout.sideLayout.semanticComponents"
+            class="text-muted-foreground text-sm"
+          >
             Semantic Components
           </footer>
         </blockquote>

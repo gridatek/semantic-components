@@ -71,23 +71,26 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
     ProfileHeader,
   ],
   template: `
-    <app-profile-header i18n-title title="Profile" />
+    <app-profile-header
+      i18n-title="@@userProfile.profile.profile"
+      title="Profile"
+    />
 
     <div class="grid gap-4 lg:grid-cols-[22rem_1fr]">
       <div class="flex flex-col gap-4">
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>About</h2>
+            <h2 i18n="@@userProfile.profile.about" scCardTitle>About</h2>
           </div>
           <div scCardBody class="flex flex-col gap-4 text-sm">
-            <p i18n>
+            <p i18n="@@userProfile.profile.productDesignerInNewYork">
               Product designer in New York. I draw dashboards by day and ceramic
               bowls on weekends.
             </p>
             <ul class="flex flex-col gap-3">
               <li class="flex items-center gap-2">
                 <svg siBriefcaseIcon></svg
-                ><ng-container i18n
+                ><ng-container i18n="@@userProfile.profile.at"
                   >{{ labelOf(me.role) }} at {{ me.company }}</ng-container
                 >
               </li>
@@ -105,7 +108,7 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
         </div>
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>Photos</h2>
+            <h2 i18n="@@userProfile.profile.photos" scCardTitle>Photos</h2>
           </div>
           <div scCardBody>
             <ul class="grid grid-cols-3 gap-2">
@@ -122,7 +125,7 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
               }
             </ul>
           </div>
-          <div i18n scCardFooter>
+          <div i18n="@@userProfile.profile.seeAllPhotos" scCardFooter>
             <a scLink routerLink="/apps/user-profile/gallery" class="text-sm"
               >See all photos</a
             >
@@ -135,8 +138,8 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
           <div scCard>
             <div scCardBody class="flex flex-col gap-3">
               <textarea
-                i18n-placeholder
-                i18n-aria-label
+                i18n-placeholder="@@userProfile.profile.shareSomething"
+                i18n-aria-label="@@userProfile.profile.shareSomething2"
                 scTextarea
                 rows="3"
                 aria-label="Share something"
@@ -151,7 +154,9 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
                 [disabled]="!draft().trim()"
               >
                 <svg siSendIcon></svg>
-                <ng-container i18n>Post</ng-container>
+                <ng-container i18n="@@userProfile.profile.post"
+                  >Post</ng-container
+                >
               </button>
             </div>
           </div>
@@ -195,13 +200,18 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
                 >
                   <svg siHeartIcon></svg>
                   {{ post.likes }}
-                  <span i18n class="sr-only">likes — like</span>
+                  <span i18n="@@userProfile.profile.likesLike" class="sr-only"
+                    >likes — like</span
+                  >
                 </button>
                 <span
                   class="text-muted-foreground flex items-center gap-1 text-sm"
                 >
                   <svg siMessageSquareIcon class="size-4"></svg>
-                  {{ post.comments }} <span i18n class="sr-only">comments</span>
+                  {{ post.comments }}
+                  <span i18n="@@userProfile.profile.comments" class="sr-only"
+                    >comments</span
+                  >
                 </span>
               </div>
             </div>

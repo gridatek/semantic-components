@@ -235,7 +235,7 @@ const THREADS: readonly Thread[] = [
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@chats.chats"
       title="Chats"
       [trail]="[{ label: t.apps }, { label: t.chats }]"
     />
@@ -247,8 +247,8 @@ const THREADS: readonly Thread[] = [
         <div class="px-4">
           <div scInputGroup>
             <input
-              i18n-aria-label
-              i18n-placeholder
+              i18n-aria-label="@@chats.searchChats"
+              i18n-placeholder="@@chats.searchChats"
               scInput
               type="search"
               placeholder="Search chats"
@@ -294,7 +294,7 @@ const THREADS: readonly Thread[] = [
                 </div>
                 @if (thread.unread) {
                   <span
-                    i18n
+                    i18n="@@chats.unread"
                     class="bg-primary text-primary-foreground flex size-5 shrink-0 items-center justify-center rounded-full text-xs"
                   >
                     {{ thread.unread }}
@@ -304,7 +304,10 @@ const THREADS: readonly Thread[] = [
               </button>
             </li>
           } @empty {
-            <li i18n class="text-muted-foreground p-4 text-center text-sm">
+            <li
+              i18n="@@chats.noChatsMatch"
+              class="text-muted-foreground p-4 text-center text-sm"
+            >
               No chats match.
             </li>
           }
@@ -401,14 +404,16 @@ const THREADS: readonly Thread[] = [
               </div>
               <button scMessageScrollerButton>
                 <svg siArrowDownIcon></svg>
-                <span i18n class="sr-only">Scroll to the latest message</span>
+                <span i18n="@@chats.scrollToTheLatestMessage" class="sr-only"
+                  >Scroll to the latest message</span
+                >
               </button>
             </div>
           </div>
           <form class="border-t p-4" (submit)="send($event)">
             <div scInputGroup>
               <input
-                i18n-placeholder
+                i18n-placeholder="@@chats.typeAMessage"
                 scInput
                 [attr.aria-label]="t.message + thread.person.name"
                 placeholder="Type a message"
@@ -423,7 +428,7 @@ const THREADS: readonly Thread[] = [
                   [disabled]="!draft().trim()"
                 >
                   <svg siSendIcon></svg>
-                  <span i18n class="sr-only">Send</span>
+                  <span i18n="@@chats.send" class="sr-only">Send</span>
                 </button>
               </div>
             </div>
@@ -431,8 +436,8 @@ const THREADS: readonly Thread[] = [
         } @else {
           <div scEmpty class="h-full">
             <div scEmptyHeader>
-              <h2 i18n scEmptyTitle>No chat open</h2>
-              <div i18n scEmptyDescription>
+              <h2 i18n="@@chats.noChatOpen" scEmptyTitle>No chat open</h2>
+              <div i18n="@@chats.pickAConversationOnThe" scEmptyDescription>
                 Pick a conversation on the left.
               </div>
             </div>
@@ -442,7 +447,7 @@ const THREADS: readonly Thread[] = [
 
       @if (current(); as thread) {
         <aside
-          i18n-aria-label
+          i18n-aria-label="@@chats.contact"
           scCard
           class="hidden 2xl:flex"
           aria-label="Contact"
@@ -472,7 +477,7 @@ const THREADS: readonly Thread[] = [
           </ul>
           <div scSeparator></div>
           <div class="flex flex-col gap-2 px-6">
-            <h3 i18n class="text-sm font-medium">Files</h3>
+            <h3 i18n="@@chats.files" class="text-sm font-medium">Files</h3>
             <ul class="flex flex-col gap-2">
               @for (line of thread.files; track line.id) {
                 <li class="flex items-center gap-3 text-sm">
@@ -485,7 +490,10 @@ const THREADS: readonly Thread[] = [
                   {{ line.file!.name }}
                 </li>
               } @empty {
-                <li i18n class="text-muted-foreground text-sm">
+                <li
+                  i18n="@@chats.noFilesYet"
+                  class="text-muted-foreground text-sm"
+                >
                   No files yet.
                 </li>
               }
@@ -502,13 +510,13 @@ export class ChatsPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    apps: $localize`Apps`,
-    chats: $localize`Chats`,
-    you: $localize`You: `,
-    online: $localize`Online`,
-    offline: $localize`Offline`,
-    chatWith: $localize`Chat with `,
-    message: $localize`Message `,
+    apps: $localize`:@@chats.apps:Apps`,
+    chats: $localize`:@@chats.chats:Chats`,
+    you: $localize`:@@chats.you:You: `,
+    online: $localize`:@@chats.online:Online`,
+    offline: $localize`:@@chats.offline:Offline`,
+    chatWith: $localize`:@@chats.chatWith:Chat with `,
+    message: $localize`:@@chats.message:Message `,
   };
 
   private readonly me = ME;

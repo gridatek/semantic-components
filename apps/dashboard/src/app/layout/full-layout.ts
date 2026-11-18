@@ -80,7 +80,12 @@ import { SidebarIcon } from './nav-icon';
   ],
   template: `
     <div scSidebarProvider class="min-h-svh">
-      <aside i18n-aria-label scSidebar collapsible="icon" aria-label="Sidebar">
+      <aside
+        i18n-aria-label="@@layout.fullLayout.sidebar"
+        scSidebar
+        collapsible="icon"
+        aria-label="Sidebar"
+      >
         <div scSidebarHeader>
           <ul scSidebarMenu>
             <li scSidebarMenuItem>
@@ -90,7 +95,10 @@ import { SidebarIcon } from './nav-icon';
                 >
                   <svg siLayoutDashboardIcon></svg>
                 </span>
-                <span i18n class="grid flex-1 text-start text-sm leading-tight">
+                <span
+                  i18n="@@layout.fullLayout.dashboardSemanticComponents"
+                  class="grid flex-1 text-start text-sm leading-tight"
+                >
                   <span class="truncate font-semibold">Dashboard</span>
                   <span class="text-sidebar-foreground/70 truncate text-xs">
                     Semantic Components
@@ -100,7 +108,11 @@ import { SidebarIcon } from './nav-icon';
             </li>
           </ul>
         </div>
-        <nav i18n-aria-label scSidebarContent aria-label="Main">
+        <nav
+          i18n-aria-label="@@layout.fullLayout.main"
+          scSidebarContent
+          aria-label="Main"
+        >
           @for (section of nav; track section.heading) {
             <div scSidebarGroup>
               <div scSidebarGroupLabel>{{ section.heading }}</div>
@@ -174,7 +186,10 @@ import { SidebarIcon } from './nav-icon';
                   <img scAvatarImage src="images/profile/user-1.png" alt="" />
                   <span scAvatarFallback class="rounded-lg">MA</span>
                 </span>
-                <span i18n class="grid flex-1 text-start text-sm leading-tight">
+                <span
+                  i18n="@@layout.fullLayout.mathewAndersonMathewAndersonGmail"
+                  class="grid flex-1 text-start text-sm leading-tight"
+                >
                   <span class="truncate font-medium">Mathew Anderson</span>
                   <span class="text-sidebar-foreground/70 truncate text-xs">
                     mathew.anderson&#64;gmail.com
@@ -192,7 +207,7 @@ import { SidebarIcon } from './nav-icon';
           <router-outlet />
         </div>
         <footer
-          i18n
+          i18n="@@layout.fullLayout.screensAndDataFromShadcndashboard"
           class="text-muted-foreground border-t px-4 py-4 text-sm md:px-6"
         >
           Screens and data from

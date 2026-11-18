@@ -67,282 +67,491 @@ export interface NavSection {
 
 export const NAV: readonly NavSection[] = [
   {
-    heading: $localize`Dashboards`,
+    heading: $localize`:@@layout.nav.dashboards:Dashboards`,
     links: [
-      { label: $localize`Modern`, url: '/', icon: 'modern' },
       {
-        label: $localize`Analytics`,
+        label: $localize`:@@layout.nav.modern:Modern`,
+        url: '/',
+        icon: 'modern',
+      },
+      {
+        label: $localize`:@@layout.nav.analytics:Analytics`,
         url: '/dashboards/analytics',
         icon: 'analytics',
       },
       {
-        label: $localize`eCommerce`,
+        label: $localize`:@@layout.nav.ecommerce:eCommerce`,
         url: '/dashboards/ecommerce',
         icon: 'ecommerce',
       },
-      { label: $localize`SaaS + AI`, url: '/dashboards/saas-ai', icon: 'saas' },
-      { label: $localize`School`, url: '/dashboards/school', icon: 'school' },
-      { label: $localize`Health`, url: '/dashboards/health', icon: 'health' },
+      {
+        label: $localize`:@@layout.nav.saasAi:SaaS + AI`,
+        url: '/dashboards/saas-ai',
+        icon: 'saas',
+      },
+      {
+        label: $localize`:@@layout.nav.school:School`,
+        url: '/dashboards/school',
+        icon: 'school',
+      },
+      {
+        label: $localize`:@@layout.nav.health:Health`,
+        url: '/dashboards/health',
+        icon: 'health',
+      },
     ],
   },
   {
-    heading: $localize`Apps`,
+    heading: $localize`:@@layout.nav.apps:Apps`,
     links: [
       {
-        label: $localize`AI`,
+        label: $localize`:@@layout.nav.ai:AI`,
         icon: 'ai',
         base: '/apps/ai',
         children: [
-          { label: $localize`Chat`, url: '/apps/ai/chat' },
-          { label: $localize`Image`, url: '/apps/ai/image' },
+          { label: $localize`:@@layout.nav.chat:Chat`, url: '/apps/ai/chat' },
+          {
+            label: $localize`:@@layout.nav.image:Image`,
+            url: '/apps/ai/image',
+          },
         ],
       },
-      { label: $localize`Calendar`, url: '/apps/calendar', icon: 'calendar' },
-      { label: $localize`Chats`, url: '/apps/chats', icon: 'chats' },
-      { label: $localize`Email`, url: '/apps/email', icon: 'email' },
-      { label: $localize`Contacts`, url: '/apps/contacts', icon: 'contacts' },
-      { label: $localize`Notes`, url: '/apps/notes', icon: 'notes' },
       {
-        label: $localize`Blogs`,
+        label: $localize`:@@layout.nav.calendar:Calendar`,
+        url: '/apps/calendar',
+        icon: 'calendar',
+      },
+      {
+        label: $localize`:@@layout.nav.chats:Chats`,
+        url: '/apps/chats',
+        icon: 'chats',
+      },
+      {
+        label: $localize`:@@layout.nav.email:Email`,
+        url: '/apps/email',
+        icon: 'email',
+      },
+      {
+        label: $localize`:@@layout.nav.contacts:Contacts`,
+        url: '/apps/contacts',
+        icon: 'contacts',
+      },
+      {
+        label: $localize`:@@layout.nav.notes:Notes`,
+        url: '/apps/notes',
+        icon: 'notes',
+      },
+      {
+        label: $localize`:@@layout.nav.blogs:Blogs`,
         icon: 'blog',
         base: '/apps/blog',
         children: [
-          { label: $localize`Blog Listing`, url: '/apps/blog/post' },
           {
-            label: $localize`Blog Detail`,
+            label: $localize`:@@layout.nav.blogListing:Blog Listing`,
+            url: '/apps/blog/post',
+          },
+          {
+            label: $localize`:@@layout.nav.blogDetail:Blog Detail`,
             url: '/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow',
           },
-          { label: $localize`Blog Edit`, url: '/apps/blog/edit/5' },
-          { label: $localize`Blog Create`, url: '/apps/blog/create' },
-          { label: $localize`Manage Blog`, url: '/apps/blog/manage-blog' },
+          {
+            label: $localize`:@@layout.nav.blogEdit:Blog Edit`,
+            url: '/apps/blog/edit/5',
+          },
+          {
+            label: $localize`:@@layout.nav.blogCreate:Blog Create`,
+            url: '/apps/blog/create',
+          },
+          {
+            label: $localize`:@@layout.nav.manageBlog:Manage Blog`,
+            url: '/apps/blog/manage-blog',
+          },
         ],
       },
-      { label: $localize`Tickets`, url: '/apps/tickets', icon: 'tickets' },
       {
-        label: $localize`Invoice`,
+        label: $localize`:@@layout.nav.tickets:Tickets`,
+        url: '/apps/tickets',
+        icon: 'tickets',
+      },
+      {
+        label: $localize`:@@layout.nav.invoice:Invoice`,
         icon: 'invoice',
         base: '/apps/invoice',
         children: [
-          { label: $localize`List`, url: '/apps/invoice/list' },
-          { label: $localize`Details`, url: '/apps/invoice/detail/INV-1042' },
-          { label: $localize`Create`, url: '/apps/invoice/create' },
-          { label: $localize`Edit`, url: '/apps/invoice/edit/INV-1042' },
+          {
+            label: $localize`:@@layout.nav.list:List`,
+            url: '/apps/invoice/list',
+          },
+          {
+            label: $localize`:@@layout.nav.details:Details`,
+            url: '/apps/invoice/detail/INV-1042',
+          },
+          {
+            label: $localize`:@@layout.nav.create:Create`,
+            url: '/apps/invoice/create',
+          },
+          {
+            label: $localize`:@@layout.nav.edit:Edit`,
+            url: '/apps/invoice/edit/INV-1042',
+          },
         ],
       },
       {
-        label: $localize`User Profile`,
+        label: $localize`:@@layout.nav.userProfile:User Profile`,
         icon: 'profile',
         base: '/apps/user-profile',
         children: [
-          { label: $localize`Profile`, url: '/apps/user-profile/profile' },
-          { label: $localize`Followers`, url: '/apps/user-profile/followers' },
-          { label: $localize`Friends`, url: '/apps/user-profile/friends' },
-          { label: $localize`Gallery`, url: '/apps/user-profile/gallery' },
+          {
+            label: $localize`:@@layout.nav.profile:Profile`,
+            url: '/apps/user-profile/profile',
+          },
+          {
+            label: $localize`:@@layout.nav.followers:Followers`,
+            url: '/apps/user-profile/followers',
+          },
+          {
+            label: $localize`:@@layout.nav.friends:Friends`,
+            url: '/apps/user-profile/friends',
+          },
+          {
+            label: $localize`:@@layout.nav.gallery:Gallery`,
+            url: '/apps/user-profile/gallery',
+          },
         ],
       },
       {
-        label: $localize`Ecommerce`,
+        label: $localize`:@@layout.nav.ecommerce2:Ecommerce`,
         icon: 'shop',
         base: '/apps/ecommerce',
         children: [
-          { label: $localize`Shop`, url: '/apps/ecommerce/shop' },
-          { label: $localize`Details`, url: '/apps/ecommerce/detail/3' },
-          { label: $localize`List`, url: '/apps/ecommerce/list' },
-          { label: $localize`Checkout`, url: '/apps/ecommerce/checkout' },
-          { label: $localize`Add Product`, url: '/apps/ecommerce/add-product' },
           {
-            label: $localize`Edit Product`,
+            label: $localize`:@@layout.nav.shop:Shop`,
+            url: '/apps/ecommerce/shop',
+          },
+          {
+            label: $localize`:@@layout.nav.details:Details`,
+            url: '/apps/ecommerce/detail/3',
+          },
+          {
+            label: $localize`:@@layout.nav.list:List`,
+            url: '/apps/ecommerce/list',
+          },
+          {
+            label: $localize`:@@layout.nav.checkout:Checkout`,
+            url: '/apps/ecommerce/checkout',
+          },
+          {
+            label: $localize`:@@layout.nav.addProduct:Add Product`,
+            url: '/apps/ecommerce/add-product',
+          },
+          {
+            label: $localize`:@@layout.nav.editProduct:Edit Product`,
             url: '/apps/ecommerce/edit-product/3',
           },
         ],
       },
-      { label: $localize`Kanban`, url: '/apps/kanban', icon: 'kanban' },
       {
-        label: $localize`Customers`,
+        label: $localize`:@@layout.nav.kanban:Kanban`,
+        url: '/apps/kanban',
+        icon: 'kanban',
+      },
+      {
+        label: $localize`:@@layout.nav.customers:Customers`,
         url: '/apps/customers',
         icon: 'customers',
       },
-      { label: $localize`Orders`, url: '/apps/orders', icon: 'orders' },
+      {
+        label: $localize`:@@layout.nav.orders:Orders`,
+        url: '/apps/orders',
+        icon: 'orders',
+      },
     ],
   },
   {
-    heading: $localize`Pages`,
+    heading: $localize`:@@layout.nav.pages:Pages`,
     links: [
-      { label: $localize`Table`, url: '/pages/tables', icon: 'table' },
-      { label: $localize`Form`, url: '/pages/form', icon: 'form' },
       {
-        label: $localize`User Profile`,
+        label: $localize`:@@layout.nav.table:Table`,
+        url: '/pages/tables',
+        icon: 'table',
+      },
+      {
+        label: $localize`:@@layout.nav.form:Form`,
+        url: '/pages/form',
+        icon: 'form',
+      },
+      {
+        label: $localize`:@@layout.nav.userProfile:User Profile`,
         url: '/pages/user-profile',
         icon: 'profile',
       },
       {
-        label: $localize`Account Settings`,
+        label: $localize`:@@layout.nav.accountSettings:Account Settings`,
         url: '/pages/account-settings',
         icon: 'settings',
       },
       { label: 'FAQ', url: '/pages/faq', icon: 'faq' },
-      { label: $localize`Pricing`, url: '/pages/pricing', icon: 'pricing' },
       {
-        label: $localize`Roles & Permissions`,
+        label: $localize`:@@layout.nav.pricing:Pricing`,
+        url: '/pages/pricing',
+        icon: 'pricing',
+      },
+      {
+        label: $localize`:@@layout.nav.rolesPermissions:Roles & Permissions`,
         url: '/pages/roles',
         icon: 'roles',
       },
       {
-        label: $localize`Integrations`,
+        label: $localize`:@@layout.nav.integrations:Integrations`,
         url: '/pages/integrations',
         icon: 'integrations',
       },
     ],
   },
   {
-    heading: $localize`UI Elements`,
+    heading: $localize`:@@layout.nav.uiElements:UI Elements`,
     links: [
       {
-        label: $localize`Components`,
+        label: $localize`:@@layout.nav.components:Components`,
         icon: 'ui',
         base: '/ui',
         children: [
-          { label: $localize`Button`, url: '/ui/button' },
-          { label: $localize`Avatar`, url: '/ui/avatar' },
-          { label: $localize`Badge`, url: '/ui/badge' },
-          { label: $localize`Tooltip`, url: '/ui/tooltip' },
-          { label: $localize`Input`, url: '/ui/input' },
-          { label: $localize`Textarea`, url: '/ui/textarea' },
-          { label: $localize`Switch`, url: '/ui/switch' },
-          { label: $localize`Tabs`, url: '/ui/tabs' },
-          { label: $localize`Select`, url: '/ui/select' },
-          { label: $localize`Checkbox`, url: '/ui/checkbox' },
-          { label: $localize`Accordion`, url: '/ui/accordion' },
-          { label: $localize`Card`, url: '/ui/card' },
-          { label: $localize`Radio Group`, url: '/ui/radio-group' },
-          { label: $localize`Date Picker`, url: '/ui/date-picker' },
+          { label: $localize`:@@layout.nav.button:Button`, url: '/ui/button' },
+          { label: $localize`:@@layout.nav.avatar:Avatar`, url: '/ui/avatar' },
+          { label: $localize`:@@layout.nav.badge:Badge`, url: '/ui/badge' },
+          {
+            label: $localize`:@@layout.nav.tooltip:Tooltip`,
+            url: '/ui/tooltip',
+          },
+          { label: $localize`:@@layout.nav.input:Input`, url: '/ui/input' },
+          {
+            label: $localize`:@@layout.nav.textarea:Textarea`,
+            url: '/ui/textarea',
+          },
+          { label: $localize`:@@layout.nav.switch:Switch`, url: '/ui/switch' },
+          { label: $localize`:@@layout.nav.tabs:Tabs`, url: '/ui/tabs' },
+          { label: $localize`:@@layout.nav.select:Select`, url: '/ui/select' },
+          {
+            label: $localize`:@@layout.nav.checkbox:Checkbox`,
+            url: '/ui/checkbox',
+          },
+          {
+            label: $localize`:@@layout.nav.accordion:Accordion`,
+            url: '/ui/accordion',
+          },
+          { label: $localize`:@@layout.nav.card:Card`, url: '/ui/card' },
+          {
+            label: $localize`:@@layout.nav.radioGroup:Radio Group`,
+            url: '/ui/radio-group',
+          },
+          {
+            label: $localize`:@@layout.nav.datePicker:Date Picker`,
+            url: '/ui/date-picker',
+          },
         ],
       },
     ],
   },
   {
-    heading: $localize`Forms`,
+    heading: $localize`:@@layout.nav.forms:Forms`,
     links: [
       {
-        label: $localize`Form Layouts`,
+        label: $localize`:@@layout.nav.formLayouts:Form Layouts`,
         icon: 'form-layouts',
         base: '/forms',
         children: [
-          { label: $localize`Layouts`, url: '/forms/layouts' },
-          { label: $localize`Validation`, url: '/forms/validation' },
-          { label: $localize`Examples`, url: '/forms/examples' },
-          { label: $localize`Repeater`, url: '/forms/repeater' },
-          { label: $localize`Wizard`, url: '/forms/wizard' },
+          {
+            label: $localize`:@@layout.nav.layouts:Layouts`,
+            url: '/forms/layouts',
+          },
+          {
+            label: $localize`:@@layout.nav.validation:Validation`,
+            url: '/forms/validation',
+          },
+          {
+            label: $localize`:@@layout.nav.examples:Examples`,
+            url: '/forms/examples',
+          },
+          {
+            label: $localize`:@@layout.nav.repeater:Repeater`,
+            url: '/forms/repeater',
+          },
+          {
+            label: $localize`:@@layout.nav.wizard:Wizard`,
+            url: '/forms/wizard',
+          },
         ],
       },
     ],
   },
   {
-    heading: $localize`Tables`,
+    heading: $localize`:@@layout.nav.tables:Tables`,
     links: [
       {
-        label: $localize`Data Tables`,
+        label: $localize`:@@layout.nav.dataTables:Data Tables`,
         icon: 'data-tables',
         base: '/tables',
         children: [
-          { label: $localize`Basic`, url: '/tables/basic' },
-          { label: $localize`Dense`, url: '/tables/dense' },
-          { label: $localize`Sorting`, url: '/tables/sorting' },
-          { label: $localize`Filtering`, url: '/tables/filtering' },
-          { label: $localize`Pagination`, url: '/tables/pagination' },
-          { label: $localize`Row Selection`, url: '/tables/row-selection' },
+          { label: $localize`:@@layout.nav.basic:Basic`, url: '/tables/basic' },
+          { label: $localize`:@@layout.nav.dense:Dense`, url: '/tables/dense' },
           {
-            label: $localize`Column Visibility`,
+            label: $localize`:@@layout.nav.sorting:Sorting`,
+            url: '/tables/sorting',
+          },
+          {
+            label: $localize`:@@layout.nav.filtering:Filtering`,
+            url: '/tables/filtering',
+          },
+          {
+            label: $localize`:@@layout.nav.pagination:Pagination`,
+            url: '/tables/pagination',
+          },
+          {
+            label: $localize`:@@layout.nav.rowSelection:Row Selection`,
+            url: '/tables/row-selection',
+          },
+          {
+            label: $localize`:@@layout.nav.columnVisibility:Column Visibility`,
             url: '/tables/column-visibility',
           },
-          { label: $localize`Editable`, url: '/tables/editable' },
-          { label: $localize`Sticky`, url: '/tables/sticky' },
-          { label: $localize`Drag & Drop`, url: '/tables/drag-drop' },
-          { label: $localize`Empty`, url: '/tables/empty' },
-          { label: $localize`Expanding`, url: '/tables/expanding' },
+          {
+            label: $localize`:@@layout.nav.editable:Editable`,
+            url: '/tables/editable',
+          },
+          {
+            label: $localize`:@@layout.nav.sticky:Sticky`,
+            url: '/tables/sticky',
+          },
+          {
+            label: $localize`:@@layout.nav.dragDrop:Drag & Drop`,
+            url: '/tables/drag-drop',
+          },
+          { label: $localize`:@@layout.nav.empty:Empty`, url: '/tables/empty' },
+          {
+            label: $localize`:@@layout.nav.expanding:Expanding`,
+            url: '/tables/expanding',
+          },
         ],
       },
     ],
   },
   {
-    heading: $localize`Charts`,
+    heading: $localize`:@@layout.nav.charts:Charts`,
     links: [
       {
-        label: $localize`Charts`,
+        label: $localize`:@@layout.nav.charts:Charts`,
         icon: 'charts',
         base: '/charts',
         children: [
-          { label: $localize`Line`, url: '/charts/line' },
-          { label: $localize`Area`, url: '/charts/area' },
-          { label: $localize`Bar`, url: '/charts/bar' },
-          { label: $localize`Pie & Donut`, url: '/charts/pie' },
-          { label: $localize`Radar`, url: '/charts/radar' },
-          { label: $localize`Radial`, url: '/charts/radial' },
+          { label: $localize`:@@layout.nav.line:Line`, url: '/charts/line' },
+          { label: $localize`:@@layout.nav.area:Area`, url: '/charts/area' },
+          { label: $localize`:@@layout.nav.bar:Bar`, url: '/charts/bar' },
+          {
+            label: $localize`:@@layout.nav.pieDonut:Pie & Donut`,
+            url: '/charts/pie',
+          },
+          { label: $localize`:@@layout.nav.radar:Radar`, url: '/charts/radar' },
+          {
+            label: $localize`:@@layout.nav.radial:Radial`,
+            url: '/charts/radial',
+          },
         ],
       },
     ],
   },
   {
-    heading: $localize`Widgets`,
+    heading: $localize`:@@layout.nav.widgets:Widgets`,
     links: [
-      { label: $localize`Cards`, url: '/widgets/cards', icon: 'cards' },
       {
-        label: $localize`Charts`,
+        label: $localize`:@@layout.nav.cards:Cards`,
+        url: '/widgets/cards',
+        icon: 'cards',
+      },
+      {
+        label: $localize`:@@layout.nav.charts:Charts`,
         url: '/widgets/charts',
         icon: 'widget-charts',
       },
     ],
   },
   {
-    heading: $localize`Icons`,
-    links: [{ label: $localize`Lucide Icons`, url: '/icons', icon: 'icons' }],
+    heading: $localize`:@@layout.nav.icons:Icons`,
+    links: [
+      {
+        label: $localize`:@@layout.nav.lucideIcons:Lucide Icons`,
+        url: '/icons',
+        icon: 'icons',
+      },
+    ],
   },
   {
-    heading: $localize`Auth`,
+    heading: $localize`:@@layout.nav.auth:Auth`,
     links: [
-      { label: $localize`Error`, url: '/auth/404', icon: 'error' },
       {
-        label: $localize`Maintenance`,
+        label: $localize`:@@layout.nav.error:Error`,
+        url: '/auth/404',
+        icon: 'error',
+      },
+      {
+        label: $localize`:@@layout.nav.maintenance:Maintenance`,
         url: '/auth/maintenance',
         icon: 'maintenance',
       },
       {
-        label: $localize`Login`,
+        label: $localize`:@@layout.nav.login:Login`,
         icon: 'login',
         base: '/auth/login',
         children: [
-          { label: $localize`Side Login`, url: '/auth/side/login' },
-          { label: $localize`Boxed Login`, url: '/auth/login' },
+          {
+            label: $localize`:@@layout.nav.sideLogin:Side Login`,
+            url: '/auth/side/login',
+          },
+          {
+            label: $localize`:@@layout.nav.boxedLogin:Boxed Login`,
+            url: '/auth/login',
+          },
         ],
       },
       {
-        label: $localize`Register`,
+        label: $localize`:@@layout.nav.register:Register`,
         icon: 'register',
         children: [
-          { label: $localize`Side Register`, url: '/auth/side/register' },
-          { label: $localize`Boxed Register`, url: '/auth/register' },
+          {
+            label: $localize`:@@layout.nav.sideRegister:Side Register`,
+            url: '/auth/side/register',
+          },
+          {
+            label: $localize`:@@layout.nav.boxedRegister:Boxed Register`,
+            url: '/auth/register',
+          },
         ],
       },
       {
-        label: $localize`Forgot Password`,
+        label: $localize`:@@layout.nav.forgotPassword:Forgot Password`,
         icon: 'forgot',
         children: [
           {
-            label: $localize`Side Forgot Password`,
+            label: $localize`:@@layout.nav.sideForgotPassword:Side Forgot Password`,
             url: '/auth/side/forgot-password',
           },
           {
-            label: $localize`Boxed Forgot Password`,
+            label: $localize`:@@layout.nav.boxedForgotPassword:Boxed Forgot Password`,
             url: '/auth/forgot-password',
           },
         ],
       },
       {
-        label: $localize`Two Steps`,
+        label: $localize`:@@layout.nav.twoSteps:Two Steps`,
         icon: 'two-steps',
         children: [
-          { label: $localize`Side Two Steps`, url: '/auth/side/two-steps' },
-          { label: $localize`Boxed Two Steps`, url: '/auth/two-steps' },
+          {
+            label: $localize`:@@layout.nav.sideTwoSteps:Side Two Steps`,
+            url: '/auth/side/two-steps',
+          },
+          {
+            label: $localize`:@@layout.nav.boxedTwoSteps:Boxed Two Steps`,
+            url: '/auth/two-steps',
+          },
         ],
       },
     ],

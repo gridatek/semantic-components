@@ -50,11 +50,21 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, Order>();
 
 const columns = columnHelper.columns([
-  columnHelper.accessor('project', { header: $localize`Project` }),
-  columnHelper.accessor('name', { header: $localize`Item` }),
-  columnHelper.accessor('status', { header: $localize`Status` }),
-  columnHelper.accessor('price', { header: $localize`Price` }),
-  columnHelper.accessor('deadline', { header: $localize`Deadline` }),
+  columnHelper.accessor('project', {
+    header: $localize`:@@dashboard.projectsOrders.project:Project`,
+  }),
+  columnHelper.accessor('name', {
+    header: $localize`:@@dashboard.projectsOrders.item:Item`,
+  }),
+  columnHelper.accessor('status', {
+    header: $localize`:@@dashboard.projectsOrders.status:Status`,
+  }),
+  columnHelper.accessor('price', {
+    header: $localize`:@@dashboard.projectsOrders.price:Price`,
+  }),
+  columnHelper.accessor('deadline', {
+    header: $localize`:@@dashboard.projectsOrders.deadline:Deadline`,
+  }),
 ]);
 
 /** Projects & Orders: every column sorts. */
@@ -90,7 +100,9 @@ const columns = columnHelper.columns([
       <div scCardHeader>
         <h2 scCardTitle id="orders-title" class="flex items-center gap-2">
           <svg siBriefcaseBusinessIcon></svg>
-          <ng-container i18n>Projects &amp; Orders</ng-container>
+          <ng-container i18n="@@dashboard.projectsOrders.projectsOrders"
+            >Projects &amp; Orders</ng-container
+          >
         </h2>
       </div>
       <div scCardBody>

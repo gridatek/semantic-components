@@ -124,23 +124,31 @@ import { PageHeader } from '../../layout/page-header';
     PageHeader,
   ],
   template: `
-    <app-page-header i18n-title title="Form" [trail]="[{ label: t.form }]" />
+    <app-page-header
+      i18n-title="@@form.form"
+      title="Form"
+      [trail]="[{ label: t.form }]"
+    />
 
     <div class="grid grid-cols-1 gap-4 xl:grid-cols-2">
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle id="inputs-title">Default Inputs</h2>
+          <h2 i18n="@@form.defaultInputs" scCardTitle id="inputs-title">
+            Default Inputs
+          </h2>
         </div>
         <div scCardBody>
           <div scFieldGroup>
             <div scField>
-              <label i18n scLabel>Input</label>
+              <label i18n="@@form.input" scLabel>Input</label>
               <input scInput [formField]="inputs.plain" />
             </div>
             <div scField>
-              <label i18n scLabel>Input with Placeholder</label>
+              <label i18n="@@form.inputWithPlaceholder" scLabel
+                >Input with Placeholder</label
+              >
               <input
-                i18n-placeholder
+                i18n-placeholder="@@form.firstname"
                 scInput
                 placeholder="Firstname"
                 [formField]="inputs.firstName"
@@ -148,10 +156,10 @@ import { PageHeader } from '../../layout/page-header';
             </div>
             <div scField>
               <div scSelect [formField]="inputs.country" [items]="countries">
-                <div i18n scSelectLabel>Select Input</div>
+                <div i18n="@@form.selectInput" scSelectLabel>Select Input</div>
                 <div scSelectTrigger class="w-full">
                   <span
-                    i18n-placeholder
+                    i18n-placeholder="@@form.selectAnOption"
                     scSelectValue
                     placeholder="Select an option"
                   ></span>
@@ -176,10 +184,10 @@ import { PageHeader } from '../../layout/page-header';
               </div>
             </div>
             <div scPasswordField #password="scPasswordField">
-              <label i18n scLabel>Password Input</label>
+              <label i18n="@@form.passwordInput" scLabel>Password Input</label>
               <div scPasswordGroup>
                 <input
-                  i18n-placeholder
+                  i18n-placeholder="@@form.enterYourPassword"
                   scPasswordInput
                   placeholder="Enter your Password"
                   [formField]="inputs.password"
@@ -187,23 +195,29 @@ import { PageHeader } from '../../layout/page-header';
                 <button scPasswordToggle>
                   @if (password.visible()) {
                     <svg siEyeOffIcon></svg>
-                    <span i18n class="sr-only">Hide password</span>
+                    <span i18n="@@form.hidePassword" class="sr-only"
+                      >Hide password</span
+                    >
                   } @else {
                     <svg siEyeIcon></svg>
-                    <span i18n class="sr-only">Show password</span>
+                    <span i18n="@@form.showPassword" class="sr-only"
+                      >Show password</span
+                    >
                   }
                 </button>
               </div>
             </div>
             <div scField>
-              <label i18n scLabel>Time Picker Input</label>
+              <label i18n="@@form.timePickerInput" scLabel
+                >Time Picker Input</label
+              >
               <input scInput type="time" [formField]="inputs.time" />
             </div>
             <div scField>
-              <label i18n scLabel>Card</label>
+              <label i18n="@@form.card" scLabel>Card</label>
               <div scInputGroup>
                 <input
-                  i18n-placeholder
+                  i18n-placeholder="@@form.cardNumber"
                   scInput
                   inputmode="numeric"
                   autocomplete="cc-number"
@@ -212,7 +226,9 @@ import { PageHeader } from '../../layout/page-header';
                 />
                 <div scInputGroupAddon><svg siCreditCardIcon></svg></div>
               </div>
-              <p i18n scFieldDescription>16 digits, no spaces.</p>
+              <p i18n="@@form.n16DigitsNoSpaces" scFieldDescription>
+                16 digits, no spaces.
+              </p>
             </div>
           </div>
         </div>
@@ -221,23 +237,25 @@ import { PageHeader } from '../../layout/page-header';
       <div class="flex flex-col gap-4">
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle id="textarea-title">Textarea Input</h2>
+            <h2 i18n="@@form.textareaInput" scCardTitle id="textarea-title">
+              Textarea Input
+            </h2>
           </div>
           <div scCardBody>
             <div scFieldGroup>
               <div scField>
-                <label i18n scLabel>Description</label>
+                <label i18n="@@form.description" scLabel>Description</label>
                 <textarea
-                  i18n-placeholder
+                  i18n-placeholder="@@form.leaveAComment"
                   scTextarea
                   placeholder="Leave a comment..."
                   [formField]="texts.description"
                 ></textarea>
               </div>
               <div scField>
-                <label i18n scLabel>Disabled</label>
+                <label i18n="@@form.disabled" scLabel>Disabled</label>
                 <textarea
-                  i18n-placeholder
+                  i18n-placeholder="@@form.leaveAComment"
                   scTextarea
                   placeholder="Leave a comment..."
                   [formField]="texts.disabled"
@@ -249,15 +267,17 @@ import { PageHeader } from '../../layout/page-header';
 
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle id="group-title">Input Group</h2>
+            <h2 i18n="@@form.inputGroup" scCardTitle id="group-title">
+              Input Group
+            </h2>
           </div>
           <div scCardBody>
             <div scFieldGroup>
               <div scField>
-                <label i18n scLabel>Email</label>
+                <label i18n="@@form.email" scLabel>Email</label>
                 <div scInputGroup>
                   <input
-                    i18n-placeholder
+                    i18n-placeholder="@@form.nameExampleCom"
                     scInput
                     type="email"
                     placeholder="name@example.com"
@@ -267,7 +287,7 @@ import { PageHeader } from '../../layout/page-header';
                 </div>
               </div>
               <div scField>
-                <label i18n scLabel>Phone</label>
+                <label i18n="@@form.phone" scLabel>Phone</label>
                 <div scInputGroup>
                   <input scInput type="tel" [formField]="groups.phone" />
                   <div scInputGroupAddon>
@@ -276,19 +296,19 @@ import { PageHeader } from '../../layout/page-header';
                 </div>
               </div>
               <div scField>
-                <label i18n scLabel>Website</label>
+                <label i18n="@@form.website" scLabel>Website</label>
                 <div scInputGroup>
                   <input
-                    i18n-placeholder
+                    i18n-placeholder="@@form.wwwExampleCom"
                     scInput
                     placeholder="www.example.com"
                     [formField]="groups.website"
                   />
-                  <div i18n scInputGroupAddon>
+                  <div i18n="@@form.https" scInputGroupAddon>
                     <span scInputGroupText>https://</span>
                   </div>
                 </div>
-                <p i18n scFieldDescription>
+                <p i18n="@@form.withoutTheProtocolItS" scFieldDescription>
                   Without the protocol: it's added for you.
                 </p>
               </div>
@@ -299,17 +319,25 @@ import { PageHeader } from '../../layout/page-header';
 
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle id="file-title">File Input</h2>
+          <h2 i18n="@@form.fileInput" scCardTitle id="file-title">
+            File Input
+          </h2>
         </div>
         <div scCardBody>
           <div scFileUpload #upload="scFileUpload" multiple>
             <input scFileUploadInput />
             <div scFileUploadDropzone>
               <svg siUploadIcon></svg>
-              <p i18n>Drop files here</p>
-              <button i18n scFileUploadTrigger size="sm">Browse files</button>
+              <p i18n="@@form.dropFilesHere">Drop files here</p>
+              <button i18n="@@form.browseFiles" scFileUploadTrigger size="sm">
+                Browse files
+              </button>
             </div>
-            <ul i18n-aria-label scFileUploadList aria-label="Chosen files">
+            <ul
+              i18n-aria-label="@@form.chosenFiles"
+              scFileUploadList
+              aria-label="Chosen files"
+            >
               @for (file of upload.value(); track file) {
                 <li scFileUploadItem [file]="file">
                   <span scFileUploadItemPreview><svg siFileIcon></svg></span>
@@ -317,7 +345,9 @@ import { PageHeader } from '../../layout/page-header';
                   <span scFileUploadItemSize></span>
                   <button scFileUploadItemRemove>
                     <svg siXIcon></svg>
-                    <span i18n class="sr-only">Remove {{ file.name }}</span>
+                    <span i18n="@@form.remove" class="sr-only"
+                      >Remove {{ file.name }}</span
+                    >
                   </button>
                 </li>
               }
@@ -328,7 +358,11 @@ import { PageHeader } from '../../layout/page-header';
 
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle id="choices-title">
+          <h2
+            i18n="@@form.checkboxRadioButtonsToggleSwitch"
+            scCardTitle
+            id="choices-title"
+          >
             Checkbox, Radio Buttons, Toggle Switch
           </h2>
         </div>
@@ -336,52 +370,56 @@ import { PageHeader } from '../../layout/page-header';
           <div scFieldGroup>
             <div scField orientation="horizontal">
               <input scCheckbox [formField]="choices.checkDefault" />
-              <label i18n scLabel>Default</label>
+              <label i18n="@@form.default" scLabel>Default</label>
             </div>
             <div scField orientation="horizontal">
               <input scCheckbox [formField]="choices.checkChecked" />
-              <label i18n scLabel>Checked</label>
+              <label i18n="@@form.checked" scLabel>Checked</label>
             </div>
             <div scField orientation="horizontal">
               <input scCheckbox [formField]="choices.checkDisabled" />
-              <label i18n scLabel>Disabled</label>
+              <label i18n="@@form.disabled" scLabel>Disabled</label>
             </div>
           </div>
           <div
-            i18n-aria-label
+            i18n-aria-label="@@form.radioButtons"
             scRadioGroup
             [formField]="choices.radio"
             aria-label="Radio Buttons"
           >
             <label scField orientation="horizontal">
               <input scRadio value="default" />
-              <ng-container i18n>Default</ng-container>
+              <ng-container i18n="@@form.default">Default</ng-container>
             </label>
             <label scField orientation="horizontal">
               <input scRadio value="selected" />
-              <ng-container i18n>Selected</ng-container>
+              <ng-container i18n="@@form.selected">Selected</ng-container>
             </label>
             <label scField orientation="horizontal">
               <input scRadio value="disabled" disabled />
-              <ng-container i18n>Disabled</ng-container>
+              <ng-container i18n="@@form.disabled">Disabled</ng-container>
             </label>
           </div>
           <div scFieldGroup>
             <div scField orientation="horizontal">
               <input scSwitch [formField]="choices.switchOff" />
-              <label i18n scLabel>Toggle me</label>
+              <label i18n="@@form.toggleMe" scLabel>Toggle me</label>
             </div>
             <div scField orientation="horizontal">
               <input scSwitch [formField]="choices.switchOn" />
-              <label i18n scLabel>Toggle me (checked)</label>
+              <label i18n="@@form.toggleMeChecked" scLabel
+                >Toggle me (checked)</label
+              >
             </div>
             <div scField orientation="horizontal">
               <input scSwitch [formField]="choices.switchDisabled" />
-              <label i18n scLabel>Disabled</label>
+              <label i18n="@@form.disabled" scLabel>Disabled</label>
             </div>
             <div scField orientation="horizontal">
               <input scSwitch [formField]="choices.switchDisabledOn" />
-              <label i18n scLabel>Disabled (checked)</label>
+              <label i18n="@@form.disabledChecked" scLabel
+                >Disabled (checked)</label
+              >
             </div>
           </div>
         </div>
@@ -394,14 +432,14 @@ import { PageHeader } from '../../layout/page-header';
 export class FormPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    form: $localize`Form`,
+    form: $localize`:@@form.form:Form`,
   };
 
   private readonly countries = [
-    { value: 'us', label: $localize`United States` },
-    { value: 'ca', label: $localize`Canada` },
-    { value: 'fr', label: $localize`France` },
-    { value: 'de', label: $localize`Germany` },
+    { value: 'us', label: $localize`:@@form.unitedStates:United States` },
+    { value: 'ca', label: $localize`:@@form.canada:Canada` },
+    { value: 'fr', label: $localize`:@@form.france:France` },
+    { value: 'de', label: $localize`:@@form.germany:Germany` },
   ];
 
   private readonly inputs = form(
@@ -414,7 +452,9 @@ export class FormPage {
       card: '',
     }),
     (path) => {
-      pattern(path.card, /^\d{16}$/, { message: $localize`16 digits` });
+      pattern(path.card, /^\d{16}$/, {
+        message: $localize`:@@form.n16Digits:16 digits`,
+      });
     },
   );
 

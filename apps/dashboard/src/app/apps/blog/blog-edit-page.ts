@@ -191,27 +191,29 @@ const EMPTY_BODY = '<p></p>';
       <div class="flex flex-col gap-4">
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>General Details</h2>
+            <h2 i18n="@@blog.edit.generalDetails" scCardTitle>
+              General Details
+            </h2>
           </div>
           <div scCardBody>
             <div scFieldGroup>
               <div scField>
-                <label i18n scLabel>Title</label>
+                <label i18n="@@blog.edit.title" scLabel>Title</label>
                 <input
-                  i18n-placeholder
+                  i18n-placeholder="@@blog.edit.postTitle"
                   scInput
                   placeholder="Post title"
                   [formField]="postForm.title"
                 />
               </div>
               <div scField>
-                <label i18n scLabel>Excerpt</label>
+                <label i18n="@@blog.edit.excerpt" scLabel>Excerpt</label>
                 <textarea
                   scTextarea
                   rows="2"
                   [formField]="postForm.excerpt"
                 ></textarea>
-                <p i18n scFieldDescription>
+                <p i18n="@@blog.edit.aSentenceOrTwoShown" scFieldDescription>
                   A sentence or two, shown in the listing.
                 </p>
               </div>
@@ -221,7 +223,7 @@ const EMPTY_BODY = '<p></p>';
                 class="flex flex-col gap-2"
               >
                 <div
-                  i18n-aria-label
+                  i18n-aria-label="@@blog.edit.formatting"
                   scToolbar
                   aria-label="Formatting"
                   class="w-full flex-wrap"
@@ -229,11 +231,13 @@ const EMPTY_BODY = '<p></p>';
                   <div scToolbarWidgetGroup>
                     <button scToolbarWidget scToggle scEditorCommand="bold">
                       <svg siBoldIcon></svg
-                      ><span i18n class="sr-only">Bold</span>
+                      ><span i18n="@@blog.edit.bold" class="sr-only">Bold</span>
                     </button>
                     <button scToolbarWidget scToggle scEditorCommand="italic">
                       <svg siItalicIcon></svg
-                      ><span i18n class="sr-only">Italic</span>
+                      ><span i18n="@@blog.edit.italic" class="sr-only"
+                        >Italic</span
+                      >
                     </button>
                     <button
                       scToolbarWidget
@@ -241,7 +245,9 @@ const EMPTY_BODY = '<p></p>';
                       scEditorCommand="underline"
                     >
                       <svg siUnderlineIcon></svg
-                      ><span i18n class="sr-only">Underline</span>
+                      ><span i18n="@@blog.edit.underline" class="sr-only"
+                        >Underline</span
+                      >
                     </button>
                     <button
                       scToolbarWidget
@@ -249,7 +255,9 @@ const EMPTY_BODY = '<p></p>';
                       scEditorCommand="strikethrough"
                     >
                       <svg siStrikethroughIcon></svg
-                      ><span i18n class="sr-only">Strikethrough</span>
+                      ><span i18n="@@blog.edit.strikethrough" class="sr-only"
+                        >Strikethrough</span
+                      >
                     </button>
                   </div>
                   <div scToolbarSeparator></div>
@@ -260,7 +268,9 @@ const EMPTY_BODY = '<p></p>';
                       scEditorCommand="bullet-list"
                     >
                       <svg siListIcon></svg
-                      ><span i18n class="sr-only">Bulleted list</span>
+                      ><span i18n="@@blog.edit.bulletedList" class="sr-only"
+                        >Bulleted list</span
+                      >
                     </button>
                     <button
                       scToolbarWidget
@@ -268,27 +278,31 @@ const EMPTY_BODY = '<p></p>';
                       scEditorCommand="ordered-list"
                     >
                       <svg siListOrderedIcon></svg
-                      ><span i18n class="sr-only">Numbered list</span>
+                      ><span i18n="@@blog.edit.numberedList" class="sr-only"
+                        >Numbered list</span
+                      >
                     </button>
                     <button scToolbarWidget scToggle scEditorCommand="quote">
                       <svg siQuoteIcon></svg
-                      ><span i18n class="sr-only">Quote</span>
+                      ><span i18n="@@blog.edit.quote" class="sr-only"
+                        >Quote</span
+                      >
                     </button>
                   </div>
                   <div scToolbarSeparator></div>
                   <div scToolbarWidgetGroup>
                     <button scToolbarWidget scToggle scEditorCommand="undo">
                       <svg siUndoIcon></svg
-                      ><span i18n class="sr-only">Undo</span>
+                      ><span i18n="@@blog.edit.undo" class="sr-only">Undo</span>
                     </button>
                     <button scToolbarWidget scToggle scEditorCommand="redo">
                       <svg siRedoIcon></svg
-                      ><span i18n class="sr-only">Redo</span>
+                      ><span i18n="@@blog.edit.redo" class="sr-only">Redo</span>
                     </button>
                   </div>
                 </div>
                 <div
-                  i18n-placeholder
+                  i18n-placeholder="@@blog.edit.writeThePost"
                   scFrame
                   scEditorContent
                   ariaLabel="Content"
@@ -302,7 +316,7 @@ const EMPTY_BODY = '<p></p>';
 
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>Medias</h2>
+            <h2 i18n="@@blog.edit.medias" scCardTitle>Medias</h2>
           </div>
           <div scCardBody class="flex flex-col gap-4">
             @if (cover(); as cover) {
@@ -312,14 +326,14 @@ const EMPTY_BODY = '<p></p>';
               >
                 @if (cover.startsWith('blob:')) {
                   <img
-                    i18n-alt
+                    i18n-alt="@@blog.edit.theChosenCover"
                     [src]="cover"
                     alt="The chosen cover"
                     class="size-full object-cover"
                   />
                 } @else {
                   <img
-                    i18n-alt
+                    i18n-alt="@@blog.edit.theCurrentCover"
                     [ngSrc]="cover"
                     alt="The current cover"
                     fill
@@ -335,14 +349,22 @@ const EMPTY_BODY = '<p></p>';
               (valueChange)="choose($event)"
             >
               <input
-                i18n-aria-label
+                i18n-aria-label="@@blog.edit.coverImage"
                 scFileUploadInput
                 aria-label="Cover image"
               />
               <div scFileUploadDropzone>
                 <svg siUploadIcon></svg>
-                <p i18n>Drop the cover image here</p>
-                <button i18n scFileUploadTrigger size="sm">Browse files</button>
+                <p i18n="@@blog.edit.dropTheCoverImageHere">
+                  Drop the cover image here
+                </p>
+                <button
+                  i18n="@@blog.edit.browseFiles"
+                  scFileUploadTrigger
+                  size="sm"
+                >
+                  Browse files
+                </button>
               </div>
             </div>
           </div>
@@ -352,34 +374,38 @@ const EMPTY_BODY = '<p></p>';
       <div class="flex flex-col gap-4">
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>Status</h2>
+            <h2 i18n="@@blog.edit.status" scCardTitle>Status</h2>
           </div>
           <div scCardBody class="flex flex-col gap-4">
             <div
-              i18n-aria-label
+              i18n-aria-label="@@blog.edit.status"
               scRadioGroup
               [formField]="postForm.status"
               aria-label="Status"
             >
               <label scField orientation="horizontal">
                 <input scRadio value="published" />
-                <ng-container i18n>Published</ng-container>
+                <ng-container i18n="@@blog.edit.published"
+                  >Published</ng-container
+                >
               </label>
               <label scField orientation="horizontal">
                 <input scRadio value="draft" />
-                <ng-container i18n>Draft</ng-container>
+                <ng-container i18n="@@blog.edit.draft">Draft</ng-container>
               </label>
             </div>
             <div scField orientation="horizontal">
               <input scSwitch [formField]="postForm.featured" />
-              <label i18n scLabel>Featured</label>
+              <label i18n="@@blog.edit.featured" scLabel>Featured</label>
             </div>
           </div>
         </div>
 
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>Category &amp; Tags</h2>
+            <h2 i18n="@@blog.edit.categoryTags" scCardTitle>
+              Category &amp; Tags
+            </h2>
           </div>
           <div scCardBody>
             <div scFieldGroup>
@@ -389,10 +415,10 @@ const EMPTY_BODY = '<p></p>';
                   [formField]="postForm.category"
                   [items]="categories"
                 >
-                  <div i18n scSelectLabel>Category</div>
+                  <div i18n="@@blog.edit.category" scSelectLabel>Category</div>
                   <div scSelectTrigger class="w-full">
                     <span
-                      i18n-placeholder
+                      i18n-placeholder="@@blog.edit.chooseACategory"
                       scSelectValue
                       placeholder="Choose a category"
                     ></span>
@@ -417,24 +443,26 @@ const EMPTY_BODY = '<p></p>';
                 </div>
               </div>
               <div scField>
-                <label i18n scLabel>Tags</label>
+                <label i18n="@@blog.edit.tags" scLabel>Tags</label>
                 <div scTagsInput [(value)]="tags">
                   @for (tag of tags(); track $index) {
                     <span scTagsInputItem>
                       <span>{{ tag }}</span>
                       <button scTagsInputItemRemove>
                         <svg siXIcon></svg>
-                        <span i18n class="sr-only">Remove {{ tag }}</span>
+                        <span i18n="@@blog.edit.remove" class="sr-only"
+                          >Remove {{ tag }}</span
+                        >
                       </button>
                     </span>
                   }
                   <input
-                    i18n-placeholder
+                    i18n-placeholder="@@blog.edit.addATag"
                     scTagsInputControl
                     placeholder="Add a tag"
                   />
                 </div>
-                <p i18n scFieldDescription>
+                <p i18n="@@blog.edit.pressEnterOrTypeA" scFieldDescription>
                   Press Enter or type a comma to add one.
                 </p>
               </div>
@@ -444,7 +472,7 @@ const EMPTY_BODY = '<p></p>';
 
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>Post Date</h2>
+            <h2 i18n="@@blog.edit.postDate" scCardTitle>Post Date</h2>
           </div>
           <div scCardBody>
             <div scDatePicker #dp="scDatePicker" [(value)]="date">
@@ -463,13 +491,13 @@ const EMPTY_BODY = '<p></p>';
                 </button>
                 <ng-template scPopoverPortal>
                   <div
-                    i18n-aria-label
+                    i18n-aria-label="@@blog.edit.chooseADate"
                     scPopover
                     class="w-auto p-0"
                     aria-label="Choose a date"
                   >
                     <div
-                      i18n-aria-label
+                      i18n-aria-label="@@blog.edit.chooseADate"
                       scCalendar
                       initialFocus
                       aria-label="Choose a date"
@@ -480,11 +508,15 @@ const EMPTY_BODY = '<p></p>';
                       <div scCalendarHeader>
                         <button scCalendarPrevious>
                           <svg siChevronLeftIcon></svg>
-                          <span i18n class="sr-only">Previous month</span>
+                          <span i18n="@@blog.edit.previousMonth" class="sr-only"
+                            >Previous month</span
+                          >
                         </button>
                         <button scCalendarNext>
                           <svg siChevronRightIcon></svg>
-                          <span i18n class="sr-only">Next month</span>
+                          <span i18n="@@blog.edit.nextMonth" class="sr-only"
+                            >Next month</span
+                          >
                         </button>
                       </div>
                     </div>
@@ -496,7 +528,11 @@ const EMPTY_BODY = '<p></p>';
         </div>
 
         <div class="flex justify-end gap-2">
-          <a i18n scLink variant="outline" routerLink="/apps/blog/manage-blog"
+          <a
+            i18n="@@blog.edit.cancel"
+            scLink
+            variant="outline"
+            routerLink="/apps/blog/manage-blog"
             >Cancel</a
           >
           <button scButton type="submit">
@@ -512,14 +548,14 @@ const EMPTY_BODY = '<p></p>';
 export class BlogEditPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    blogEdit: $localize`Blog Edit`,
-    blogCreate: $localize`Blog Create`,
-    blog: $localize`Blog`,
-    edit: $localize`Edit`,
-    create: $localize`Create`,
-    pickADate: $localize`Pick a date`,
-    saveChanges: $localize`Save Changes`,
-    createPost: $localize`Create Post`,
+    blogEdit: $localize`:@@blog.edit.blogEdit:Blog Edit`,
+    blogCreate: $localize`:@@blog.edit.blogCreate:Blog Create`,
+    blog: $localize`:@@blog.edit.blog:Blog`,
+    edit: $localize`:@@blog.edit.edit:Edit`,
+    create: $localize`:@@blog.edit.create:Create`,
+    pickADate: $localize`:@@blog.edit.pickADate:Pick a date`,
+    saveChanges: $localize`:@@blog.edit.saveChanges:Save Changes`,
+    createPost: $localize`:@@blog.edit.createPost:Create Post`,
   };
 
   private readonly store = inject(BlogStore);
@@ -576,8 +612,8 @@ export class BlogEditPage {
     if (this.postForm().invalid()) {
       this.toaster.show({
         variant: 'error',
-        title: $localize`Some fields are missing`,
-        description: $localize`A post needs a title and a category.`,
+        title: $localize`:@@blog.edit.someFieldsAreMissing:Some fields are missing`,
+        description: $localize`:@@blog.edit.aPostNeedsATitle:A post needs a title and a category.`,
       });
       return;
     }
@@ -605,7 +641,9 @@ export class BlogEditPage {
     } satisfies Omit<BlogPost, 'id' | 'slug'> & { id?: string });
     this.toaster.show({
       variant: 'success',
-      title: existing ? $localize`Post saved` : $localize`Post created`,
+      title: existing
+        ? $localize`:@@blog.edit.postSaved:Post saved`
+        : $localize`:@@blog.edit.postCreated:Post created`,
     });
     void this.router.navigate(['/apps/blog/detail', saved.slug]);
   }

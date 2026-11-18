@@ -104,32 +104,32 @@ interface Draft {
     <form class="flex flex-col gap-4" (submit)="save($event)">
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Client</h2>
+          <h2 i18n="@@invoice.edit.client" scCardTitle>Client</h2>
         </div>
         <div scCardBody>
           <div scFieldGroup class="grid gap-4 md:grid-cols-2">
             <div scField>
-              <label i18n scLabel>Client</label>
+              <label i18n="@@invoice.edit.client" scLabel>Client</label>
               <input scInput [formField]="invoiceForm.client" />
             </div>
             <div scField>
-              <label i18n scLabel>Email</label>
+              <label i18n="@@invoice.edit.email" scLabel>Email</label>
               <input scInput type="email" [formField]="invoiceForm.email" />
             </div>
             <div scField class="md:col-span-2">
-              <label i18n scLabel>Address</label>
+              <label i18n="@@invoice.edit.address" scLabel>Address</label>
               <input scInput [formField]="invoiceForm.address" />
             </div>
             <div scField>
-              <label i18n scLabel>Issued</label>
+              <label i18n="@@invoice.edit.issued" scLabel>Issued</label>
               <input scInput type="date" [formField]="invoiceForm.issued" />
             </div>
             <div scField>
-              <label i18n scLabel>Due</label>
+              <label i18n="@@invoice.edit.due" scLabel>Due</label>
               <input scInput type="date" [formField]="invoiceForm.due" />
             </div>
             <div scField>
-              <label i18n scLabel>Status</label>
+              <label i18n="@@invoice.edit.status" scLabel>Status</label>
               <div scNativeSelectContainer class="w-full">
                 <select scNativeSelect [formField]="invoiceForm.status">
                   @for (status of statuses; track status) {
@@ -142,7 +142,7 @@ interface Draft {
               </div>
             </div>
             <div scField>
-              <label i18n scLabel>Tax rate (%)</label>
+              <label i18n="@@invoice.edit.taxRate" scLabel>Tax rate (%)</label>
               <input scInput type="number" [formField]="invoiceForm.taxRate" />
             </div>
           </div>
@@ -151,24 +151,28 @@ interface Draft {
 
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Items</h2>
+          <h2 i18n="@@invoice.edit.items" scCardTitle>Items</h2>
         </div>
         <div scCardBody class="flex flex-col gap-4">
           @for (line of invoiceForm.lines; track $index; let i = $index) {
             <fieldset
               class="grid items-end gap-3 sm:grid-cols-[1fr_6rem_8rem_8rem_auto]"
             >
-              <legend i18n class="sr-only">Item {{ i + 1 }}</legend>
+              <legend i18n="@@invoice.edit.item" class="sr-only">
+                Item {{ i + 1 }}
+              </legend>
               <div scField>
-                <label i18n scLabel>Description</label>
+                <label i18n="@@invoice.edit.description" scLabel
+                  >Description</label
+                >
                 <input scInput [formField]="line.description" />
               </div>
               <div scField>
-                <label i18n scLabel>Qty</label>
+                <label i18n="@@invoice.edit.qty" scLabel>Qty</label>
                 <input scInput type="number" [formField]="line.quantity" />
               </div>
               <div scField>
-                <label i18n scLabel>Price</label>
+                <label i18n="@@invoice.edit.price" scLabel>Price</label>
                 <input scInput type="number" [formField]="line.price" />
               </div>
               <div
@@ -187,7 +191,9 @@ interface Draft {
                 (click)="removeLine(i)"
               >
                 <svg siTrash2Icon></svg>
-                <span i18n class="sr-only">Remove item {{ i + 1 }}</span>
+                <span i18n="@@invoice.edit.removeItem" class="sr-only"
+                  >Remove item {{ i + 1 }}</span
+                >
               </button>
             </fieldset>
           }
@@ -199,17 +205,19 @@ interface Draft {
             (click)="addLine()"
           >
             <svg siPlusIcon></svg>
-            <ng-container i18n>Add item</ng-container>
+            <ng-container i18n="@@invoice.edit.addItem">Add item</ng-container>
           </button>
           <div scSeparator></div>
           <dl class="ms-auto grid w-full max-w-xs grid-cols-2 gap-y-1 text-sm">
-            <dt i18n class="text-muted-foreground">Subtotal</dt>
+            <dt i18n="@@invoice.edit.subtotal" class="text-muted-foreground">
+              Subtotal
+            </dt>
             <dd class="text-end tabular-nums">{{ moneyOf(subtotal()) }}</dd>
-            <dt i18n class="text-muted-foreground">Tax</dt>
+            <dt i18n="@@invoice.edit.tax" class="text-muted-foreground">Tax</dt>
             <dd class="text-end tabular-nums">
               {{ moneyOf(total() - subtotal()) }}
             </dd>
-            <dt i18n class="font-semibold">Total</dt>
+            <dt i18n="@@invoice.edit.total" class="font-semibold">Total</dt>
             <dd class="text-end font-semibold tabular-nums">
               {{ moneyOf(total()) }}
             </dd>
@@ -220,7 +228,7 @@ interface Draft {
       <div scCard>
         <div scCardBody>
           <div scField>
-            <label i18n scLabel>Notes</label>
+            <label i18n="@@invoice.edit.notes" scLabel>Notes</label>
             <textarea
               scTextarea
               rows="3"
@@ -231,10 +239,16 @@ interface Draft {
       </div>
 
       <div class="flex justify-end gap-2">
-        <a i18n scLink variant="outline" routerLink="/apps/invoice/list"
+        <a
+          i18n="@@invoice.edit.cancel"
+          scLink
+          variant="outline"
+          routerLink="/apps/invoice/list"
           >Cancel</a
         >
-        <button i18n scButton type="submit">Save Invoice</button>
+        <button i18n="@@invoice.edit.saveInvoice" scButton type="submit">
+          Save Invoice
+        </button>
       </div>
     </form>
   `,
@@ -245,12 +259,12 @@ export class InvoiceEditPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    edit: $localize`Edit `,
-    newInvoice: $localize`New Invoice`,
-    apps: $localize`Apps`,
-    invoices: $localize`Invoices`,
-    edit2: $localize`Edit`,
-    create: $localize`Create`,
+    edit: $localize`:@@invoice.edit.edit:Edit `,
+    newInvoice: $localize`:@@invoice.edit.newInvoice:New Invoice`,
+    apps: $localize`:@@invoice.edit.apps:Apps`,
+    invoices: $localize`:@@invoice.edit.invoices:Invoices`,
+    edit2: $localize`:@@invoice.edit.edit:Edit`,
+    create: $localize`:@@invoice.edit.create:Create`,
   };
 
   /** The route's `:id` when editing; none when creating. */

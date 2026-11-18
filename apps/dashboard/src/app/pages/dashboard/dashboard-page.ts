@@ -107,17 +107,25 @@ function greeting(): Greeting {
             <svg siMoonIcon></svg>
           }
         </h1>
-        <p i18n class="text-muted-foreground text-sm">
+        <p
+          i18n="@@dashboard.stayInformedWithTodayS"
+          class="text-muted-foreground text-sm"
+        >
           Stay informed with today’s analytics
         </p>
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <button scButton variant="outline" size="icon" (click)="refresh()">
           <svg siRefreshCcwIcon></svg>
-          <span i18n class="sr-only">Refresh</span>
+          <span i18n="@@dashboard.refresh" class="sr-only">Refresh</span>
         </button>
         <div scSelect [(value)]="range" [items]="ranges">
-          <div i18n-aria-label scSelectTrigger aria-label="Range" class="w-36">
+          <div
+            i18n-aria-label="@@dashboard.range"
+            scSelectTrigger
+            aria-label="Range"
+            class="w-36"
+          >
             <svg siCalendarDaysIcon></svg>
             <span scSelectValue></span>
             <svg scSelectIcon siChevronDownIcon></svg>
@@ -139,7 +147,7 @@ function greeting(): Greeting {
         </div>
         <button scButton (click)="export()">
           <svg siDownloadIcon></svg>
-          <ng-container i18n>Export</ng-container>
+          <ng-container i18n="@@dashboard.export">Export</ng-container>
         </button>
       </div>
     </div>
@@ -149,13 +157,17 @@ function greeting(): Greeting {
         <div class="flex flex-col gap-1">
           <div class="flex items-center gap-2 text-sm">
             <app-live-dot />
-            <span i18n class="font-medium">Update</span>
+            <span i18n="@@dashboard.update" class="font-medium">Update</span>
             <span class="text-muted-foreground">· {{ date }}</span>
           </div>
-          <p i18n>Sales revenue increased <strong>40%</strong> in 1 week</p>
+          <p i18n="@@dashboard.salesRevenueIncreased40In">
+            Sales revenue increased <strong>40%</strong> in 1 week
+          </p>
         </div>
         <button scButton variant="outline">
-          <ng-container i18n>See Statistics</ng-container>
+          <ng-container i18n="@@dashboard.seeStatistics"
+            >See Statistics</ng-container
+          >
           <svg siArrowRightIcon class="rtl:-scale-x-100"></svg>
         </button>
       </div>
@@ -167,7 +179,9 @@ function greeting(): Greeting {
         <div scCardHeader>
           <h2 scCardTitle id="assets-title" class="flex items-center gap-2">
             <svg siBoxIcon></svg>
-            <ng-container i18n>Total Assets</ng-container>
+            <ng-container i18n="@@dashboard.totalAssets"
+              >Total Assets</ng-container
+            >
           </h2>
         </div>
         <div scCardBody class="grid flex-1 grid-cols-2 gap-4">
@@ -242,7 +256,9 @@ function greeting(): Greeting {
               </span>
             </div>
             <button scButton variant="outline" size="sm">
-              <ng-container i18n>See Statistics</ng-container>
+              <ng-container i18n="@@dashboard.seeStatistics"
+                >See Statistics</ng-container
+              >
               <svg siArrowRightIcon class="rtl:-scale-x-100"></svg>
             </button>
           </div>
@@ -258,43 +274,43 @@ function greeting(): Greeting {
 export class DashboardPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    up: $localize`Up`,
-    down: $localize`Down`,
+    up: $localize`:@@dashboard.up:Up`,
+    down: $localize`:@@dashboard.down:Down`,
   };
 
   private readonly toaster = inject(ScToaster);
   private readonly hello = greeting();
   /** The greeting in the reader's words, with the name. */
   private readonly helloText = {
-    'Good Morning': $localize`Good Morning, Cameron`,
-    'Good Afternoon': $localize`Good Afternoon, Cameron`,
-    'Good Evening': $localize`Good Evening, Cameron`,
-    'Good Night': $localize`Good Night, Cameron`,
+    'Good Morning': $localize`:@@dashboard.goodMorningCameron:Good Morning, Cameron`,
+    'Good Afternoon': $localize`:@@dashboard.goodAfternoonCameron:Good Afternoon, Cameron`,
+    'Good Evening': $localize`:@@dashboard.goodEveningCameron:Good Evening, Cameron`,
+    'Good Night': $localize`:@@dashboard.goodNightCameron:Good Night, Cameron`,
   }[this.hello];
   private readonly date = day(today());
   private readonly assets = ASSETS;
   private readonly kpis = KPIS;
   private readonly ranges = [
-    { value: 'Monthly', label: $localize`Monthly` },
-    { value: 'Yearly', label: $localize`Yearly` },
+    { value: 'Monthly', label: $localize`:@@dashboard.monthly:Monthly` },
+    { value: 'Yearly', label: $localize`:@@dashboard.yearly:Yearly` },
   ];
   private readonly range = signal('Monthly');
 
   private refresh(): void {
     this.toaster.show({
       variant: 'success',
-      title: $localize`Dashboard refreshed`,
+      title: $localize`:@@dashboard.dashboardRefreshed:Dashboard refreshed`,
     });
   }
 
   private export(): void {
     this.toaster.show({
       variant: 'info',
-      title: $localize`Export started`,
+      title: $localize`:@@dashboard.exportStarted:Export started`,
       description:
         this.range() === 'Yearly'
-          ? $localize`The yearly report will download shortly.`
-          : $localize`The monthly report will download shortly.`,
+          ? $localize`:@@dashboard.theYearlyReportWillDownload:The yearly report will download shortly.`
+          : $localize`:@@dashboard.theMonthlyReportWillDownload:The monthly report will download shortly.`,
     });
   }
 }

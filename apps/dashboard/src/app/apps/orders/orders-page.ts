@@ -99,14 +99,20 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, OrderRow>();
 
 const columns = columnHelper.columns([
-  columnHelper.accessor('id', { header: $localize`Order` }),
-  columnHelper.accessor('customer', { header: $localize`Customer` }),
-  columnHelper.accessor('product', { header: $localize`Product` }),
-  columnHelper.accessor('date', { header: $localize`Date` }),
-  columnHelper.accessor('total', { header: $localize`Total` }),
-  columnHelper.accessor('payment', { header: $localize`Payment` }),
+  columnHelper.accessor('id', { header: $localize`:@@orders.order:Order` }),
+  columnHelper.accessor('customer', {
+    header: $localize`:@@orders.customer:Customer`,
+  }),
+  columnHelper.accessor('product', {
+    header: $localize`:@@orders.product:Product`,
+  }),
+  columnHelper.accessor('date', { header: $localize`:@@orders.date:Date` }),
+  columnHelper.accessor('total', { header: $localize`:@@orders.total:Total` }),
+  columnHelper.accessor('payment', {
+    header: $localize`:@@orders.payment:Payment`,
+  }),
   columnHelper.accessor('status', {
-    header: $localize`Status`,
+    header: $localize`:@@orders.status:Status`,
     filterFn: 'equals',
   }),
 ]);
@@ -151,7 +157,7 @@ const columns = columnHelper.columns([
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@orders.orders"
       title="Orders"
       [trail]="[{ label: t.apps }, { label: t.orders }]"
     />
@@ -160,8 +166,8 @@ const columns = columnHelper.columns([
       <div scCardBody class="flex flex-col gap-4">
         <div class="flex flex-wrap items-center gap-3">
           <input
-            i18n-aria-label
-            i18n-placeholder
+            i18n-aria-label="@@orders.searchOrders"
+            i18n-placeholder="@@orders.searchOrders2"
             scInput
             scDataTableGlobalFilter
             [table]="table"
@@ -171,7 +177,7 @@ const columns = columnHelper.columns([
             class="max-w-xs"
           />
           <div
-            i18n-aria-label
+            i18n-aria-label="@@orders.status"
             scToggleGroup
             variant="outline"
             size="sm"
@@ -179,7 +185,9 @@ const columns = columnHelper.columns([
             [value]="[status()]"
             (valueChange)="filterStatus($event[0] ?? 'All')"
           >
-            <button i18n scToggleGroupItem value="All">All</button>
+            <button i18n="@@orders.all" scToggleGroupItem value="All">
+              All
+            </button>
             @for (s of statuses; track s) {
               <button scToggleGroupItem [value]="s">{{ labelOf(s) }}</button>
             }
@@ -257,7 +265,7 @@ const columns = columnHelper.columns([
               } @empty {
                 <tr scTableRow>
                   <td
-                    i18n
+                    i18n="@@orders.noOrdersMatch"
                     scTableCell
                     colspan="7"
                     class="text-muted-foreground h-24 text-center"
@@ -270,7 +278,7 @@ const columns = columnHelper.columns([
           </table>
         </div>
         <nav
-          i18n-aria-label
+          i18n-aria-label="@@orders.orderPages"
           scPagination
           scDataTablePagination
           #pagination="scPagination"
@@ -278,20 +286,28 @@ const columns = columnHelper.columns([
           aria-label="Order pages"
           class="mx-0 w-auto flex-wrap items-center justify-end gap-4"
         >
-          <span i18n class="text-sm font-medium" aria-live="polite">
+          <span
+            i18n="@@orders.pageOf"
+            class="text-sm font-medium"
+            aria-live="polite"
+          >
             Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
               <button scPaginationPrevious variant="outline" size="icon-sm">
                 <svg siChevronLeftIcon class="rtl:-scale-x-100"></svg>
-                <span i18n class="sr-only">Go to previous page</span>
+                <span i18n="@@orders.goToPreviousPage" class="sr-only"
+                  >Go to previous page</span
+                >
               </button>
             </li>
             <li scPaginationItem>
               <button scPaginationNext variant="outline" size="icon-sm">
                 <svg siChevronRightIcon class="rtl:-scale-x-100"></svg>
-                <span i18n class="sr-only">Go to next page</span>
+                <span i18n="@@orders.goToNextPage" class="sr-only"
+                  >Go to next page</span
+                >
               </button>
             </li>
           </ul>
@@ -306,8 +322,8 @@ export class OrdersPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    apps: $localize`Apps`,
-    orders: $localize`Orders`,
+    apps: $localize`:@@orders.apps:Apps`,
+    orders: $localize`:@@orders.orders:Orders`,
   };
 
   private readonly table = injectTable(() => ({

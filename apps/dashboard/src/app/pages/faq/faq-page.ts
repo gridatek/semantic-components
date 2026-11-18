@@ -30,57 +30,57 @@ const TOPICS: readonly {
   questions: readonly { id: string; q: string; a: string }[];
 }[] = [
   {
-    title: $localize`Getting started`,
+    title: $localize`:@@faq.gettingStarted:Getting started`,
     questions: [
       {
         id: 'install',
-        q: $localize`How do I install the dashboard?`,
-        a: $localize`Clone the repository, install the packages and run the dev server. Every screen is ready with sample data; swap the in-memory stores for your API when you are ready.`,
+        q: $localize`:@@faq.howDoIInstallThe:How do I install the dashboard?`,
+        a: $localize`:@@faq.cloneTheRepositoryInstallThe:Clone the repository, install the packages and run the dev server. Every screen is ready with sample data; swap the in-memory stores for your API when you are ready.`,
       },
       {
         id: 'style',
-        q: $localize`Can I change the look?`,
-        a: $localize`Yes. The look comes from the style and the theme: pick another style, or change the colour tokens, and every screen follows. The pages write layout classes only.`,
+        q: $localize`:@@faq.canIChangeTheLook:Can I change the look?`,
+        a: $localize`:@@faq.yesTheLookComesFrom:Yes. The look comes from the style and the theme: pick another style, or change the colour tokens, and every screen follows. The pages write layout classes only.`,
       },
       {
         id: 'dark',
-        q: $localize`Is there a dark mode?`,
-        a: $localize`Light, dark and system, from the sun icon in the header. The choice is saved.`,
+        q: $localize`:@@faq.isThereADarkMode:Is there a dark mode?`,
+        a: $localize`:@@faq.lightDarkAndSystemFrom:Light, dark and system, from the sun icon in the header. The choice is saved.`,
       },
     ],
   },
   {
-    title: $localize`Billing`,
+    title: $localize`:@@faq.billing:Billing`,
     questions: [
       {
         id: 'plans',
-        q: $localize`Which plan should I pick?`,
-        a: $localize`Starter fits one person. Pro adds the apps and priority support. Team adds seats, roles and permissions, and audit logs.`,
+        q: $localize`:@@faq.whichPlanShouldIPick:Which plan should I pick?`,
+        a: $localize`:@@faq.starterFitsOnePersonPro:Starter fits one person. Pro adds the apps and priority support. Team adds seats, roles and permissions, and audit logs.`,
       },
       {
         id: 'refund',
-        q: $localize`Can I get a refund?`,
-        a: $localize`Within 30 days of a purchase, for any reason. Write to support with your invoice number.`,
+        q: $localize`:@@faq.canIGetARefund:Can I get a refund?`,
+        a: $localize`:@@faq.within30DaysOfA:Within 30 days of a purchase, for any reason. Write to support with your invoice number.`,
       },
       {
         id: 'invoice',
-        q: $localize`Where are my invoices?`,
-        a: $localize`In Account Settings, under Billing; each can be downloaded as a PDF.`,
+        q: $localize`:@@faq.whereAreMyInvoices:Where are my invoices?`,
+        a: $localize`:@@faq.inAccountSettingsUnderBilling:In Account Settings, under Billing; each can be downloaded as a PDF.`,
       },
     ],
   },
   {
-    title: $localize`Accounts and security`,
+    title: $localize`:@@faq.accountsAndSecurity:Accounts and security`,
     questions: [
       {
         id: '2fa',
-        q: $localize`How do I turn on two-step sign-in?`,
-        a: $localize`Account Settings → Security → Two-step verification. You will scan a code with an authenticator app.`,
+        q: $localize`:@@faq.howDoITurnOn:How do I turn on two-step sign-in?`,
+        a: $localize`:@@faq.accountSettingsSecurityTwoStep:Account Settings → Security → Two-step verification. You will scan a code with an authenticator app.`,
       },
       {
         id: 'roles',
-        q: $localize`Can I limit what teammates see?`,
-        a: $localize`Yes — on the Team plan, Roles & Permissions sets what each role can view, edit or delete.`,
+        q: $localize`:@@faq.canILimitWhatTeammates:Can I limit what teammates see?`,
+        a: $localize`:@@faq.yesOnTheTeamPlan:Yes — on the Team plan, Roles & Permissions sets what each role can view, edit or delete.`,
       },
     ],
   },
@@ -120,14 +120,19 @@ const TOPICS: readonly {
 
     <div class="mx-auto flex w-full max-w-3xl flex-col gap-6">
       <div class="flex flex-col items-center gap-3 py-4 text-center">
-        <h2 i18n class="text-2xl font-semibold">Frequently asked questions</h2>
-        <p i18n class="text-muted-foreground">
+        <h2
+          i18n="@@faq.frequentlyAskedQuestions"
+          class="text-2xl font-semibold"
+        >
+          Frequently asked questions
+        </h2>
+        <p i18n="@@faq.canTFindAnAnswer" class="text-muted-foreground">
           Can’t find an answer? Write to us — we reply within a day.
         </p>
         <div scInputGroup class="w-full max-w-md">
           <input
-            i18n-aria-label
-            i18n-placeholder
+            i18n-aria-label="@@faq.searchTheQuestions"
+            i18n-placeholder="@@faq.searchTheQuestions"
             scInput
             type="search"
             placeholder="Search the questions"
@@ -161,7 +166,10 @@ const TOPICS: readonly {
           </div>
         </section>
       } @empty {
-        <p i18n class="text-muted-foreground text-center">
+        <p
+          i18n="@@faq.noQuestionMatches"
+          class="text-muted-foreground text-center"
+        >
           No question matches “{{ query() }}”.
         </p>
       }
@@ -170,18 +178,21 @@ const TOPICS: readonly {
         <div scCard>
           <div scCardHeader>
             <h2 scCardTitle class="flex items-center gap-2">
-              <svg siMailIcon></svg> <ng-container i18n>Email</ng-container>
+              <svg siMailIcon></svg>
+              <ng-container i18n="@@faq.email">Email</ng-container>
             </h2>
-            <p i18n scCardDescription>support&#64;dashboard.example</p>
+            <p i18n="@@faq.supportDashboardExample" scCardDescription>
+              support&#64;dashboard.example
+            </p>
           </div>
         </div>
         <div scCard>
           <div scCardHeader>
             <h2 scCardTitle class="flex items-center gap-2">
               <svg siMessageCircleIcon></svg>
-              <ng-container i18n>Chat</ng-container>
+              <ng-container i18n="@@faq.chat">Chat</ng-container>
             </h2>
-            <p i18n scCardDescription>
+            <p i18n="@@faq.openAChatWeekdays9" scCardDescription>
               <a scLink routerLink="/apps/chats">Open a chat</a> — weekdays, 9
               to 6.
             </p>
@@ -196,7 +207,7 @@ const TOPICS: readonly {
 export class FaqPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    pages: $localize`Pages`,
+    pages: $localize`:@@faq.pages:Pages`,
   };
 
   private readonly query = signal('');

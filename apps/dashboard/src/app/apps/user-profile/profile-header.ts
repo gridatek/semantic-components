@@ -53,21 +53,36 @@ import { label } from '../../shared/labels';
         </div>
         <dl class="ms-auto flex gap-6 text-center">
           <div>
-            <dt i18n class="text-muted-foreground text-xs">Posts</dt>
+            <dt
+              i18n="@@userProfile.profileHeader.posts"
+              class="text-muted-foreground text-xs"
+            >
+              Posts
+            </dt>
             <dd class="font-semibold tabular-nums">938</dd>
           </div>
           <div>
-            <dt i18n class="text-muted-foreground text-xs">Followers</dt>
+            <dt
+              i18n="@@userProfile.profileHeader.followers"
+              class="text-muted-foreground text-xs"
+            >
+              Followers
+            </dt>
             <dd class="font-semibold tabular-nums">3,586</dd>
           </div>
           <div>
-            <dt i18n class="text-muted-foreground text-xs">Following</dt>
+            <dt
+              i18n="@@userProfile.profileHeader.following"
+              class="text-muted-foreground text-xs"
+            >
+              Following
+            </dt>
             <dd class="font-semibold tabular-nums">2,659</dd>
           </div>
         </dl>
       </div>
       <nav
-        i18n-aria-label
+        i18n-aria-label="@@userProfile.profileHeader.profile"
         class="flex gap-1 overflow-x-auto border-t px-4"
         aria-label="Profile"
       >
@@ -90,8 +105,8 @@ export class ProfileHeader {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    apps: $localize`Apps`,
-    userProfile: $localize`User Profile`,
+    apps: $localize`:@@userProfile.profileHeader.apps:Apps`,
+    userProfile: $localize`:@@userProfile.profileHeader.userProfile:User Profile`,
   };
 
   readonly title = input.required<string>();
@@ -99,10 +114,22 @@ export class ProfileHeader {
 
   private readonly me = ME;
   private readonly tabs = [
-    { label: $localize`Profile`, url: '/apps/user-profile/profile' },
-    { label: $localize`Followers`, url: '/apps/user-profile/followers' },
-    { label: $localize`Friends`, url: '/apps/user-profile/friends' },
-    { label: $localize`Gallery`, url: '/apps/user-profile/gallery' },
+    {
+      label: $localize`:@@userProfile.profileHeader.profile:Profile`,
+      url: '/apps/user-profile/profile',
+    },
+    {
+      label: $localize`:@@userProfile.profileHeader.followers:Followers`,
+      url: '/apps/user-profile/followers',
+    },
+    {
+      label: $localize`:@@userProfile.profileHeader.friends:Friends`,
+      url: '/apps/user-profile/friends',
+    },
+    {
+      label: $localize`:@@userProfile.profileHeader.gallery:Gallery`,
+      url: '/apps/user-profile/gallery',
+    },
   ];
   private readonly class = computed(() =>
     cn('flex flex-col gap-4', this.classInput()),

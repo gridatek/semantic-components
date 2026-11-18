@@ -81,7 +81,7 @@ import { BlogStore } from '../../shared/stores';
   template: `
     @if (post(); as post) {
       <app-page-header
-        i18n-title
+        i18n-title="@@blog.detail.blogDetail"
         title="Blog Detail"
         [trail]="[
           { label: t.blog, url: '/apps/blog/post' },
@@ -90,11 +90,11 @@ import { BlogStore } from '../../shared/stores';
       >
         <a scLink variant="outline" routerLink="/apps/blog/post">
           <svg siArrowLeftIcon class="rtl:-scale-x-100"></svg>
-          <ng-container i18n>Back</ng-container>
+          <ng-container i18n="@@blog.detail.back">Back</ng-container>
         </a>
         <a scLink variant="button" [routerLink]="['/apps/blog/edit', post.id]">
           <svg siPencilIcon></svg>
-          <ng-container i18n>Edit</ng-container>
+          <ng-container i18n="@@blog.detail.edit">Edit</ng-container>
         </a>
       </app-page-header>
 
@@ -115,7 +115,9 @@ import { BlogStore } from '../../shared/stores';
                 labelOf(post.category)
               }}</span>
               @if (post.status === 'draft') {
-                <span i18n scBadge variant="outline">Draft</span>
+                <span i18n="@@blog.detail.draft" scBadge variant="outline"
+                  >Draft</span
+                >
               }
             </div>
             <h2 class="text-3xl leading-tight font-semibold tracking-tight">
@@ -136,19 +138,19 @@ import { BlogStore } from '../../shared/stores';
               <span>{{ dayOf(post.date) }}</span>
               <span class="flex items-center gap-1.5">
                 <svg siEyeIcon></svg
-                ><ng-container i18n
+                ><ng-container i18n="@@blog.detail.views"
                   >{{ countOf(post.views) }} views</ng-container
                 >
               </span>
               <span class="flex items-center gap-1.5">
                 <svg siShare2Icon></svg
-                ><ng-container i18n
+                ><ng-container i18n="@@blog.detail.shares"
                   >{{ countOf(post.shares) }} shares</ng-container
                 >
               </span>
               <span class="flex items-center gap-1.5">
                 <svg siMessageCircleIcon></svg
-                ><ng-container i18n
+                ><ng-container i18n="@@blog.detail.comments"
                   >{{ comments().length }} comments</ng-container
                 >
               </span>
@@ -160,19 +162,28 @@ import { BlogStore } from '../../shared/stores';
 
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>Comments ({{ comments().length }})</h2>
+            <h2 i18n="@@blog.detail.comments2" scCardTitle>
+              Comments ({{ comments().length }})
+            </h2>
           </div>
           <div scCardBody class="flex flex-col gap-6">
             <form class="flex flex-col gap-3" (submit)="addComment($event)">
               <div scField>
-                <label i18n scLabel>Add a comment</label>
+                <label i18n="@@blog.detail.addAComment" scLabel
+                  >Add a comment</label
+                >
                 <textarea
                   scTextarea
                   rows="3"
                   [formField]="commentForm.text"
                 ></textarea>
               </div>
-              <button i18n scButton type="submit" class="self-end">
+              <button
+                i18n="@@blog.detail.postComment"
+                scButton
+                type="submit"
+                class="self-end"
+              >
                 Post Comment
               </button>
             </form>
@@ -221,7 +232,7 @@ import { BlogStore } from '../../shared/stores';
       </ng-template>
     } @else {
       <app-page-header
-        i18n-title
+        i18n-title="@@blog.detail.blogDetail"
         title="Blog Detail"
         [trail]="[
           { label: t.blog, url: '/apps/blog/post' },
@@ -230,10 +241,16 @@ import { BlogStore } from '../../shared/stores';
       />
       <div scEmpty>
         <div scEmptyHeader>
-          <h2 i18n scEmptyTitle>Post not found</h2>
-          <div i18n scEmptyDescription>It may have been deleted.</div>
+          <h2 i18n="@@blog.detail.postNotFound" scEmptyTitle>Post not found</h2>
+          <div i18n="@@blog.detail.itMayHaveBeenDeleted" scEmptyDescription>
+            It may have been deleted.
+          </div>
         </div>
-        <a i18n scLink variant="outline" routerLink="/apps/blog/post"
+        <a
+          i18n="@@blog.detail.backToTheBlog"
+          scLink
+          variant="outline"
+          routerLink="/apps/blog/post"
           >Back to the blog</a
         >
       </div>
@@ -246,8 +263,8 @@ export class BlogDetailPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    blog: $localize`Blog`,
-    detail: $localize`Detail`,
+    blog: $localize`:@@blog.detail.blog:Blog`,
+    detail: $localize`:@@blog.detail.detail:Detail`,
   };
 
   private readonly store = inject(BlogStore);

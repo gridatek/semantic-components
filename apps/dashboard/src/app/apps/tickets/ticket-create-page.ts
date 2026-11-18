@@ -70,7 +70,7 @@ import { TicketsStore } from '../../shared/stores';
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@tickets.ticketCreate.createTicket"
       title="Create Ticket"
       [trail]="[
         { label: t.tickets, url: '/apps/tickets' },
@@ -81,16 +81,26 @@ import { TicketsStore } from '../../shared/stores';
     <form class="max-w-2xl" (submit)="create($event)">
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle id="ticket-title">Ticket Details</h2>
+          <h2
+            i18n="@@tickets.ticketCreate.ticketDetails"
+            scCardTitle
+            id="ticket-title"
+          >
+            Ticket Details
+          </h2>
         </div>
         <div scCardBody>
           <div scFieldGroup>
             <div scField>
-              <label i18n scLabel>Ticket Title</label>
+              <label i18n="@@tickets.ticketCreate.ticketTitle" scLabel
+                >Ticket Title</label
+              >
               <input scInput [formField]="ticketForm.title" />
             </div>
             <div scField>
-              <label i18n scLabel>Ticket Description</label>
+              <label i18n="@@tickets.ticketCreate.ticketDescription" scLabel
+                >Ticket Description</label
+              >
               <textarea
                 scTextarea
                 rows="4"
@@ -100,10 +110,12 @@ import { TicketsStore } from '../../shared/stores';
             <div class="grid gap-4 sm:grid-cols-2">
               <div scField>
                 <div scSelect [formField]="ticketForm.agent" [items]="agents">
-                  <div i18n scSelectLabel>Assign To</div>
+                  <div i18n="@@tickets.ticketCreate.assignTo" scSelectLabel>
+                    Assign To
+                  </div>
                   <div scSelectTrigger class="w-full">
                     <span
-                      i18n-placeholder
+                      i18n-placeholder="@@tickets.ticketCreate.chooseAnAgent"
                       scSelectValue
                       placeholder="Choose an agent"
                     ></span>
@@ -133,7 +145,9 @@ import { TicketsStore } from '../../shared/stores';
                   [formField]="ticketForm.status"
                   [items]="statuses"
                 >
-                  <div i18n scSelectLabel>Status</div>
+                  <div i18n="@@tickets.ticketCreate.status" scSelectLabel>
+                    Status
+                  </div>
                   <div scSelectTrigger class="w-full">
                     <span scSelectValue></span>
                     <svg scSelectIcon siChevronDownIcon></svg>
@@ -160,8 +174,20 @@ import { TicketsStore } from '../../shared/stores';
           </div>
         </div>
         <div scCardFooter class="justify-end gap-2">
-          <a i18n scLink variant="outline" routerLink="/apps/tickets">Cancel</a>
-          <button i18n scButton type="submit">Create Ticket</button>
+          <a
+            i18n="@@tickets.ticketCreate.cancel"
+            scLink
+            variant="outline"
+            routerLink="/apps/tickets"
+            >Cancel</a
+          >
+          <button
+            i18n="@@tickets.ticketCreate.createTicket"
+            scButton
+            type="submit"
+          >
+            Create Ticket
+          </button>
         </div>
       </div>
     </form>
@@ -172,8 +198,8 @@ import { TicketsStore } from '../../shared/stores';
 export class TicketCreatePage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    tickets: $localize`Tickets`,
-    create: $localize`Create`,
+    tickets: $localize`:@@tickets.ticketCreate.tickets:Tickets`,
+    create: $localize`:@@tickets.ticketCreate.create:Create`,
   };
 
   private readonly store = inject(TicketsStore);
@@ -206,8 +232,8 @@ export class TicketCreatePage {
     if (this.ticketForm().invalid()) {
       this.toaster.show({
         variant: 'error',
-        title: $localize`Some fields are missing`,
-        description: $localize`A ticket needs a title, a description and an agent.`,
+        title: $localize`:@@tickets.ticketCreate.someFieldsAreMissing:Some fields are missing`,
+        description: $localize`:@@tickets.ticketCreate.aTicketNeedsATitle:A ticket needs a title, a description and an agent.`,
       });
       return;
     }
@@ -223,7 +249,7 @@ export class TicketCreatePage {
     });
     this.toaster.show({
       variant: 'success',
-      title: $localize`Ticket ${ticket.id} created`,
+      title: $localize`:@@tickets.ticketCreate.ticketCreated:Ticket ${ticket.id} created`,
     });
     void this.router.navigateByUrl('/apps/tickets');
   }

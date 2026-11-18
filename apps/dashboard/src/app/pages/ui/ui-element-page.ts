@@ -93,20 +93,20 @@ import { PageHeader } from '../../layout/page-header';
 import { initials } from '../../shared/format';
 
 const TITLES: Record<string, string> = {
-  button: $localize`Button`,
-  avatar: $localize`Avatar`,
-  badge: $localize`Badge`,
-  tooltip: $localize`Tooltip`,
-  input: $localize`Input`,
-  textarea: $localize`Textarea`,
-  switch: $localize`Switch`,
-  tabs: $localize`Tabs`,
-  select: $localize`Select`,
-  checkbox: $localize`Checkbox`,
-  accordion: $localize`Accordion`,
-  card: $localize`Card`,
-  'radio-group': $localize`Radio Group`,
-  'date-picker': $localize`Date Picker`,
+  button: $localize`:@@ui.element.button:Button`,
+  avatar: $localize`:@@ui.element.avatar:Avatar`,
+  badge: $localize`:@@ui.element.badge:Badge`,
+  tooltip: $localize`:@@ui.element.tooltip:Tooltip`,
+  input: $localize`:@@ui.element.input:Input`,
+  textarea: $localize`:@@ui.element.textarea:Textarea`,
+  switch: $localize`:@@ui.element.switch:Switch`,
+  tabs: $localize`:@@ui.element.tabs:Tabs`,
+  select: $localize`:@@ui.element.select:Select`,
+  checkbox: $localize`:@@ui.element.checkbox:Checkbox`,
+  accordion: $localize`:@@ui.element.accordion:Accordion`,
+  card: $localize`:@@ui.element.card:Card`,
+  'radio-group': $localize`:@@ui.element.radioGroup:Radio Group`,
+  'date-picker': $localize`:@@ui.element.datePicker:Date Picker`,
 };
 
 /**
@@ -206,56 +206,92 @@ const TITLES: Record<string, string> = {
       @case ('button') {
         <div class="grid gap-4 lg:grid-cols-2">
           <section scFrame class="flex flex-col gap-4 p-6">
-            <h2 i18n class="font-medium">Variants</h2>
+            <h2 i18n="@@ui.element.variants" class="font-medium">Variants</h2>
             <div class="flex flex-wrap gap-2">
-              <button i18n scButton>Default</button>
-              <button i18n scButton variant="secondary">Secondary</button>
-              <button i18n scButton variant="outline">Outline</button>
-              <button i18n scButton variant="ghost">Ghost</button>
-              <button i18n scButton variant="destructive">Destructive</button>
-              <button i18n scButton variant="link">Link</button>
+              <button i18n="@@ui.element.default" scButton>Default</button>
+              <button
+                i18n="@@ui.element.secondary"
+                scButton
+                variant="secondary"
+              >
+                Secondary
+              </button>
+              <button i18n="@@ui.element.outline" scButton variant="outline">
+                Outline
+              </button>
+              <button i18n="@@ui.element.ghost" scButton variant="ghost">
+                Ghost
+              </button>
+              <button
+                i18n="@@ui.element.destructive"
+                scButton
+                variant="destructive"
+              >
+                Destructive
+              </button>
+              <button i18n="@@ui.element.link" scButton variant="link">
+                Link
+              </button>
             </div>
           </section>
           <section scFrame class="flex flex-col gap-4 p-6">
-            <h2 i18n class="font-medium">Sizes</h2>
+            <h2 i18n="@@ui.element.sizes" class="font-medium">Sizes</h2>
             <div class="flex flex-wrap items-center gap-2">
-              <button i18n scButton size="xs">Extra small</button>
-              <button i18n scButton size="sm">Small</button>
-              <button i18n scButton>Default</button>
-              <button i18n scButton size="lg">Large</button>
+              <button i18n="@@ui.element.extraSmall" scButton size="xs">
+                Extra small
+              </button>
+              <button i18n="@@ui.element.small" scButton size="sm">
+                Small
+              </button>
+              <button i18n="@@ui.element.default" scButton>Default</button>
+              <button i18n="@@ui.element.large" scButton size="lg">
+                Large
+              </button>
             </div>
           </section>
           <section scFrame class="flex flex-col gap-4 p-6">
-            <h2 i18n class="font-medium">With icons</h2>
+            <h2 i18n="@@ui.element.withIcons" class="font-medium">
+              With icons
+            </h2>
             <div class="flex flex-wrap items-center gap-2">
               <button scButton>
-                <svg siMailIcon></svg> <ng-container i18n>Email</ng-container>
+                <svg siMailIcon></svg>
+                <ng-container i18n="@@ui.element.email">Email</ng-container>
               </button>
               <button scButton variant="outline">
-                <ng-container i18n>Next</ng-container>
+                <ng-container i18n="@@ui.element.next">Next</ng-container>
                 <svg siArrowRightIcon class="rtl:-scale-x-100"></svg>
               </button>
               <button scButton variant="outline" size="icon">
-                <svg siPlusIcon></svg><span i18n class="sr-only">Add</span>
+                <svg siPlusIcon></svg
+                ><span i18n="@@ui.element.add" class="sr-only">Add</span>
               </button>
               <button scButton variant="destructive" size="icon">
-                <svg siTrash2Icon></svg><span i18n class="sr-only">Delete</span>
+                <svg siTrash2Icon></svg
+                ><span i18n="@@ui.element.delete" class="sr-only">Delete</span>
               </button>
             </div>
           </section>
           <section scFrame class="flex flex-col gap-4 p-6">
-            <h2 i18n class="font-medium">States</h2>
+            <h2 i18n="@@ui.element.states" class="font-medium">States</h2>
             <div class="flex flex-wrap items-center gap-2">
               <button scButton disabled>
                 <svg
-                  i18n-aria-label
+                  i18n-aria-label="@@ui.element.loading"
                   scSpinner
                   siLoaderCircleIcon
                   aria-label="Loading"
                 ></svg>
-                <ng-container i18n>Saving</ng-container>
+                <ng-container i18n="@@ui.element.saving">Saving</ng-container>
               </button>
-              <button i18n scButton variant="outline" disabled>Disabled</button>
+              <button
+                i18n="@@ui.element.disabled"
+                scButton
+                variant="outline"
+                disabled
+              >
+                Disabled
+              </button>
             </div>
           </section>
         </div>
@@ -263,7 +299,7 @@ const TITLES: Record<string, string> = {
       @case ('avatar') {
         <div class="grid gap-4 lg:grid-cols-2">
           <section scFrame class="flex flex-col gap-4 p-6">
-            <h2 i18n class="font-medium">Sizes</h2>
+            <h2 i18n="@@ui.element.sizes" class="font-medium">Sizes</h2>
             <div class="flex items-center gap-3">
               <span scAvatar size="sm"
                 ><img scAvatarImage [src]="people[1].avatar" alt="" /><span
@@ -286,7 +322,9 @@ const TITLES: Record<string, string> = {
             </div>
           </section>
           <section scFrame class="flex flex-col gap-4 p-6">
-            <h2 i18n class="font-medium">Fallback and badge</h2>
+            <h2 i18n="@@ui.element.fallbackAndBadge" class="font-medium">
+              Fallback and badge
+            </h2>
             <div class="flex items-center gap-3">
               <span scAvatar><span scAvatarFallback>AB</span></span>
               <span scAvatar>
@@ -297,7 +335,7 @@ const TITLES: Record<string, string> = {
             </div>
           </section>
           <section scFrame class="flex flex-col gap-4 p-6 lg:col-span-2">
-            <h2 i18n class="font-medium">Group</h2>
+            <h2 i18n="@@ui.element.group" class="font-medium">Group</h2>
             <div scAvatarGroup>
               @for (person of people.slice(0, 5); track person.id) {
                 <span scAvatar>
@@ -316,15 +354,23 @@ const TITLES: Record<string, string> = {
       }
       @case ('badge') {
         <section scFrame class="flex flex-col gap-4 p-6">
-          <h2 i18n class="font-medium">Variants</h2>
+          <h2 i18n="@@ui.element.variants" class="font-medium">Variants</h2>
           <div class="flex flex-wrap items-center gap-2">
-            <span i18n scBadge>Default</span>
-            <span i18n scBadge variant="secondary">Secondary</span>
-            <span i18n scBadge variant="outline">Outline</span>
-            <span i18n scBadge variant="destructive">Destructive</span>
+            <span i18n="@@ui.element.default" scBadge>Default</span>
+            <span i18n="@@ui.element.secondary" scBadge variant="secondary"
+              >Secondary</span
+            >
+            <span i18n="@@ui.element.outline" scBadge variant="outline"
+              >Outline</span
+            >
+            <span i18n="@@ui.element.destructive" scBadge variant="destructive"
+              >Destructive</span
+            >
             <span scBadge variant="secondary"
               ><svg siCheckIcon></svg>
-              <ng-container i18n>Verified</ng-container></span
+              <ng-container i18n="@@ui.element.verified"
+                >Verified</ng-container
+              ></span
             >
             <span scBadge class="rounded-full tabular-nums">8</span>
           </div>
@@ -332,7 +378,7 @@ const TITLES: Record<string, string> = {
       }
       @case ('tooltip') {
         <section scFrame class="flex flex-col gap-4 p-6">
-          <h2 i18n class="font-medium">Sides</h2>
+          <h2 i18n="@@ui.element.sides" class="font-medium">Sides</h2>
           <div class="flex flex-wrap gap-2">
             @for (side of sides; track side) {
               <div scTooltipProvider [side]="side">
@@ -340,7 +386,7 @@ const TITLES: Record<string, string> = {
                   {{ side }}
                 </button>
                 <ng-template scTooltipPortal>
-                  <div i18n scTooltip>
+                  <div i18n="@@ui.element.onThe" scTooltip>
                     On the {{ side }}<span scTooltipArrow></span>
                   </div>
                 </ng-template>
@@ -349,10 +395,10 @@ const TITLES: Record<string, string> = {
             <div scTooltipProvider>
               <button scButton scTooltipTrigger variant="outline" size="icon">
                 <svg siSaveIcon></svg>
-                <span i18n class="sr-only">Save</span>
+                <span i18n="@@ui.element.save" class="sr-only">Save</span>
               </button>
               <ng-template scTooltipPortal>
-                <div i18n scTooltip>
+                <div i18n="@@ui.element.saveCtrlS" scTooltip>
                   Save <kbd scKbd>Ctrl S</kbd><span scTooltipArrow></span>
                 </div>
               </ng-template>
@@ -363,42 +409,51 @@ const TITLES: Record<string, string> = {
       @case ('input') {
         <div class="grid gap-4 lg:grid-cols-2">
           <section scFrame class="flex flex-col gap-4 p-6">
-            <h2 i18n class="font-medium">Kinds</h2>
+            <h2 i18n="@@ui.element.kinds" class="font-medium">Kinds</h2>
             <div scField>
-              <label i18n scLabel>Text</label
-              ><input i18n-placeholder scInput placeholder="Your name" />
+              <label i18n="@@ui.element.text" scLabel>Text</label
+              ><input
+                i18n-placeholder="@@ui.element.yourName"
+                scInput
+                placeholder="Your name"
+              />
             </div>
             <div scField>
-              <label i18n scLabel>Email</label
+              <label i18n="@@ui.element.email" scLabel>Email</label
               ><input
-                i18n-placeholder
+                i18n-placeholder="@@ui.element.youExampleCom"
                 scInput
                 type="email"
                 placeholder="you@example.com"
               />
             </div>
             <div scField>
-              <label i18n scLabel>Number</label
+              <label i18n="@@ui.element.number" scLabel>Number</label
               ><input scInput type="number" value="42" />
             </div>
           </section>
           <section scFrame class="flex flex-col gap-4 p-6">
-            <h2 i18n class="font-medium">States</h2>
+            <h2 i18n="@@ui.element.states" class="font-medium">States</h2>
             <div scField>
-              <label i18n scLabel>With a description</label>
+              <label i18n="@@ui.element.withADescription" scLabel
+                >With a description</label
+              >
               <input scInput />
-              <p i18n scFieldDescription>Shown under the field.</p>
+              <p i18n="@@ui.element.shownUnderTheField" scFieldDescription>
+                Shown under the field.
+              </p>
             </div>
             <div scField>
-              <label i18n scLabel>Disabled</label
+              <label i18n="@@ui.element.disabled" scLabel>Disabled</label
               ><input scInput disabled value="Can’t change" />
             </div>
             <div scField>
-              <label i18n scLabel>Read-only</label
+              <label i18n="@@ui.element.readOnly" scLabel>Read-only</label
               ><input scInput readonly value="Read me" />
             </div>
             <div scField>
-              <label i18n scLabel>File</label><input scInput type="file" />
+              <label i18n="@@ui.element.file" scLabel>File</label
+              ><input scInput type="file" />
             </div>
           </section>
         </div>
@@ -406,25 +461,29 @@ const TITLES: Record<string, string> = {
       @case ('textarea') {
         <div class="grid gap-4 lg:grid-cols-2">
           <section scFrame class="flex flex-col gap-4 p-6">
-            <h2 i18n class="font-medium">Default</h2>
+            <h2 i18n="@@ui.element.default" class="font-medium">Default</h2>
             <div scField>
-              <label i18n scLabel>Message</label>
+              <label i18n="@@ui.element.message" scLabel>Message</label>
               <textarea
-                i18n-placeholder
+                i18n-placeholder="@@ui.element.typeYourMessage"
                 scTextarea
                 placeholder="Type your message"
               ></textarea>
             </div>
           </section>
           <section scFrame class="flex flex-col gap-4 p-6">
-            <h2 i18n class="font-medium">With description, disabled</h2>
+            <h2 i18n="@@ui.element.withDescriptionDisabled" class="font-medium">
+              With description, disabled
+            </h2>
             <div scField>
-              <label i18n scLabel>Bio</label>
+              <label i18n="@@ui.element.bio" scLabel>Bio</label>
               <textarea scTextarea rows="3"></textarea>
-              <p i18n scFieldDescription>A sentence or two.</p>
+              <p i18n="@@ui.element.aSentenceOrTwo" scFieldDescription>
+                A sentence or two.
+              </p>
             </div>
             <div scField>
-              <label i18n scLabel>Disabled</label>
+              <label i18n="@@ui.element.disabled" scLabel>Disabled</label>
               <textarea scTextarea disabled>Can’t change</textarea>
             </div>
           </section>
@@ -432,50 +491,76 @@ const TITLES: Record<string, string> = {
       }
       @case ('switch') {
         <section scFrame class="flex max-w-xl flex-col gap-4 p-6">
-          <h2 i18n class="font-medium">Settings</h2>
+          <h2 i18n="@@ui.element.settings" class="font-medium">Settings</h2>
           <div scField orientation="horizontal">
             <input scSwitch type="checkbox" id="sw-1" [checked]="true" />
-            <label i18n scLabel for="sw-1">Airplane mode</label>
+            <label i18n="@@ui.element.airplaneMode" scLabel for="sw-1"
+              >Airplane mode</label
+            >
           </div>
           <div scField orientation="horizontal">
             <div scFieldContentWrapper>
-              <label i18n scLabel for="sw-2">Marketing emails</label>
-              <p i18n scFieldDescription>News about features and offers.</p>
+              <label i18n="@@ui.element.marketingEmails" scLabel for="sw-2"
+                >Marketing emails</label
+              >
+              <p
+                i18n="@@ui.element.newsAboutFeaturesAndOffers"
+                scFieldDescription
+              >
+                News about features and offers.
+              </p>
             </div>
             <input scSwitch type="checkbox" id="sw-2" />
           </div>
           <div scField orientation="horizontal">
             <input scSwitch type="checkbox" id="sw-3" disabled />
-            <label i18n scLabel for="sw-3">Disabled</label>
+            <label i18n="@@ui.element.disabled" scLabel for="sw-3"
+              >Disabled</label
+            >
           </div>
         </section>
       }
       @case ('tabs') {
         <section scFrame class="flex flex-col gap-4 p-6">
-          <h2 i18n class="font-medium">Account</h2>
+          <h2 i18n="@@ui.element.account" class="font-medium">Account</h2>
           <div scTabs value="account">
             <div scTabsList>
-              <button i18n scTabsTab value="account">Account</button>
-              <button i18n scTabsTab value="password">Password</button>
-              <button i18n scTabsTab value="team">Team</button>
+              <button i18n="@@ui.element.account" scTabsTab value="account">
+                Account
+              </button>
+              <button i18n="@@ui.element.password" scTabsTab value="password">
+                Password
+              </button>
+              <button i18n="@@ui.element.team" scTabsTab value="team">
+                Team
+              </button>
             </div>
             <div scTabsPanel value="account">
               <ng-template scTabsPanelContent
-                ><p i18n class="pt-4 text-sm">
+                ><p
+                  i18n="@@ui.element.changeYourNameAndEmail"
+                  class="pt-4 text-sm"
+                >
                   Change your name and email here.
                 </p></ng-template
               >
             </div>
             <div scTabsPanel value="password">
               <ng-template scTabsPanelContent
-                ><p i18n class="pt-4 text-sm">
+                ><p
+                  i18n="@@ui.element.changeYourPasswordHere"
+                  class="pt-4 text-sm"
+                >
                   Change your password here.
                 </p></ng-template
               >
             </div>
             <div scTabsPanel value="team">
               <ng-template scTabsPanelContent
-                ><p i18n class="pt-4 text-sm">
+                ><p
+                  i18n="@@ui.element.invitePeopleAndSetTheir"
+                  class="pt-4 text-sm"
+                >
                   Invite people and set their roles.
                 </p></ng-template
               >
@@ -485,7 +570,7 @@ const TITLES: Record<string, string> = {
       }
       @case ('select') {
         <section scFrame class="flex max-w-sm flex-col gap-4 p-6">
-          <h2 i18n class="font-medium">A fruit</h2>
+          <h2 i18n="@@ui.element.aFruit" class="font-medium">A fruit</h2>
           <div scField>
             <div
               scSelect
@@ -493,7 +578,7 @@ const TITLES: Record<string, string> = {
               (valueChange)="fruit.set($any($event))"
               [items]="fruits"
             >
-              <label i18n scSelectLabel>Fruit</label>
+              <label i18n="@@ui.element.fruit" scSelectLabel>Fruit</label>
               <div scSelectTrigger class="w-full">
                 <span scSelectValue></span>
                 <svg scSelectIcon siChevronDownIcon></svg>
@@ -516,23 +601,29 @@ const TITLES: Record<string, string> = {
               </ng-template>
             </div>
           </div>
-          <p i18n class="text-muted-foreground text-sm">
+          <p i18n="@@ui.element.chosen" class="text-muted-foreground text-sm">
             Chosen: {{ fruit() }}
           </p>
         </section>
       }
       @case ('checkbox') {
         <section scFrame class="flex max-w-xl flex-col gap-4 p-6">
-          <h2 i18n class="font-medium">Choices</h2>
+          <h2 i18n="@@ui.element.choices" class="font-medium">Choices</h2>
           <div scField orientation="horizontal">
             <input scCheckbox type="checkbox" id="cb-1" [checked]="true" />
-            <label i18n scLabel for="cb-1">Accept the terms</label>
+            <label i18n="@@ui.element.acceptTheTerms" scLabel for="cb-1"
+              >Accept the terms</label
+            >
           </div>
           <div scField orientation="horizontal">
             <input scCheckbox type="checkbox" id="cb-2" />
             <div scFieldContentWrapper>
-              <label i18n scLabel for="cb-2">Send me a copy</label>
-              <p i18n scFieldDescription>To the email on your account.</p>
+              <label i18n="@@ui.element.sendMeACopy" scLabel for="cb-2"
+                >Send me a copy</label
+              >
+              <p i18n="@@ui.element.toTheEmailOnYour" scFieldDescription>
+                To the email on your account.
+              </p>
             </div>
           </div>
           <div scField orientation="horizontal">
@@ -542,17 +633,21 @@ const TITLES: Record<string, string> = {
               id="cb-3"
               [indeterminate]="true"
             />
-            <label i18n scLabel for="cb-3">Some selected</label>
+            <label i18n="@@ui.element.someSelected" scLabel for="cb-3"
+              >Some selected</label
+            >
           </div>
           <div scField orientation="horizontal">
             <input scCheckbox type="checkbox" id="cb-4" disabled />
-            <label i18n scLabel for="cb-4">Disabled</label>
+            <label i18n="@@ui.element.disabled" scLabel for="cb-4"
+              >Disabled</label
+            >
           </div>
         </section>
       }
       @case ('accordion') {
         <section scFrame class="flex max-w-2xl flex-col gap-4 p-6">
-          <h2 i18n class="font-medium">Questions</h2>
+          <h2 i18n="@@ui.element.questions" class="font-medium">Questions</h2>
           <div scAccordion>
             @for (item of questions; track item.id) {
               <div scAccordionItem [value]="item.id">
@@ -576,40 +671,72 @@ const TITLES: Record<string, string> = {
         <div class="grid gap-4 lg:grid-cols-3">
           <div scCard>
             <div scCardHeader>
-              <h2 i18n scCardTitle>Simple</h2>
-              <p i18n scCardDescription>A title and a description</p>
+              <h2 i18n="@@ui.element.simple" scCardTitle>Simple</h2>
+              <p i18n="@@ui.element.aTitleAndADescription" scCardDescription>
+                A title and a description
+              </p>
             </div>
-            <div i18n scCardBody class="text-sm">The content goes here.</div>
+            <div
+              i18n="@@ui.element.theContentGoesHere"
+              scCardBody
+              class="text-sm"
+            >
+              The content goes here.
+            </div>
           </div>
           <div scCard>
             <div scCardHeader>
-              <h2 i18n scCardTitle>With an action</h2>
-              <p i18n scCardDescription>In the header’s corner</p>
+              <h2 i18n="@@ui.element.withAnAction" scCardTitle>
+                With an action
+              </h2>
+              <p i18n="@@ui.element.inTheHeaderSCorner" scCardDescription>
+                In the header’s corner
+              </p>
               <div scCardAction>
                 <button scButton variant="ghost" size="icon-sm">
                   <svg siBellIcon></svg
-                  ><span i18n class="sr-only">Notify me</span>
+                  ><span i18n="@@ui.element.notifyMe" class="sr-only"
+                    >Notify me</span
+                  >
                 </button>
               </div>
             </div>
-            <div i18n scCardBody class="text-sm">Three new messages today.</div>
+            <div
+              i18n="@@ui.element.threeNewMessagesToday"
+              scCardBody
+              class="text-sm"
+            >
+              Three new messages today.
+            </div>
           </div>
           <div scCard>
             <div scCardHeader>
-              <h2 i18n scCardTitle>With a footer</h2>
-              <p i18n scCardDescription>For the buttons</p>
+              <h2 i18n="@@ui.element.withAFooter" scCardTitle>With a footer</h2>
+              <p i18n="@@ui.element.forTheButtons" scCardDescription>
+                For the buttons
+              </p>
             </div>
-            <div i18n scCardBody class="text-sm">Ready to publish?</div>
+            <div i18n="@@ui.element.readyToPublish" scCardBody class="text-sm">
+              Ready to publish?
+            </div>
             <div scCardFooter class="gap-2">
-              <button i18n scButton variant="outline">Cancel</button>
-              <button i18n scButton>Publish</button>
+              <button i18n="@@ui.element.cancel" scButton variant="outline">
+                Cancel
+              </button>
+              <button i18n="@@ui.element.publish" scButton>Publish</button>
             </div>
           </div>
         </div>
       }
       @case ('radio-group') {
         <section scFrame class="flex max-w-xl flex-col gap-4 p-6">
-          <h2 i18n class="font-medium" id="rg-title">Notify me about</h2>
+          <h2
+            i18n="@@ui.element.notifyMeAbout"
+            class="font-medium"
+            id="rg-title"
+          >
+            Notify me about
+          </h2>
           <div
             scRadioGroup
             aria-labelledby="rg-title"
@@ -622,7 +749,9 @@ const TITLES: Record<string, string> = {
                 name="notify"
                 value="all"
                 checked
-              /><ng-container i18n>All new messages</ng-container></label
+              /><ng-container i18n="@@ui.element.allNewMessages"
+                >All new messages</ng-container
+              ></label
             >
             <label scLabel
               ><input
@@ -630,7 +759,9 @@ const TITLES: Record<string, string> = {
                 type="radio"
                 name="notify"
                 value="mentions"
-              /><ng-container i18n>Mentions only</ng-container></label
+              /><ng-container i18n="@@ui.element.mentionsOnly"
+                >Mentions only</ng-container
+              ></label
             >
             <label scLabel
               ><input
@@ -638,14 +769,16 @@ const TITLES: Record<string, string> = {
                 type="radio"
                 name="notify"
                 value="none"
-              /><ng-container i18n>Nothing</ng-container></label
+              /><ng-container i18n="@@ui.element.nothing"
+                >Nothing</ng-container
+              ></label
             >
           </div>
         </section>
       }
       @case ('date-picker') {
         <section scFrame class="flex max-w-sm flex-col gap-4 p-6">
-          <h2 i18n class="font-medium">A date</h2>
+          <h2 i18n="@@ui.element.aDate" class="font-medium">A date</h2>
           <div scDatePicker #dp="scDatePicker" [(value)]="date">
             <div
               scPopoverProvider
@@ -662,13 +795,13 @@ const TITLES: Record<string, string> = {
               </button>
               <ng-template scPopoverPortal>
                 <div
-                  i18n-aria-label
+                  i18n-aria-label="@@ui.element.chooseADate"
                   scPopover
                   class="w-auto p-0"
                   aria-label="Choose a date"
                 >
                   <div
-                    i18n-aria-label
+                    i18n-aria-label="@@ui.element.chooseADate"
                     scCalendar
                     initialFocus
                     aria-label="Choose a date"
@@ -679,11 +812,15 @@ const TITLES: Record<string, string> = {
                     <div scCalendarHeader>
                       <button scCalendarPrevious>
                         <svg siChevronLeftIcon></svg>
-                        <span i18n class="sr-only">Previous month</span>
+                        <span i18n="@@ui.element.previousMonth" class="sr-only"
+                          >Previous month</span
+                        >
                       </button>
                       <button scCalendarNext>
                         <svg siChevronRightIcon></svg>
-                        <span i18n class="sr-only">Next month</span>
+                        <span i18n="@@ui.element.nextMonth" class="sr-only"
+                          >Next month</span
+                        >
                       </button>
                     </div>
                   </div>
@@ -701,42 +838,43 @@ const TITLES: Record<string, string> = {
 export class UiElementPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    uiElements: $localize`UI Elements`,
-    pickADate: $localize`Pick a date`,
+    uiElements: $localize`:@@ui.element.uiElements:UI Elements`,
+    pickADate: $localize`:@@ui.element.pickADate:Pick a date`,
   };
 
   /** The route's `:element`. */
   readonly element = input.required<string>();
 
   private readonly title = computed(
-    () => TITLES[this.element()] ?? $localize`UI Element`,
+    () =>
+      TITLES[this.element()] ?? $localize`:@@ui.element.uiElement:UI Element`,
   );
   private readonly people = PEOPLE;
   private readonly sides = ['top', 'right', 'bottom', 'left'] as const;
   private readonly fruits = [
-    $localize`Apple`,
-    $localize`Banana`,
-    $localize`Blueberry`,
-    $localize`Grapes`,
-    $localize`Pineapple`,
+    $localize`:@@ui.element.apple:Apple`,
+    $localize`:@@ui.element.banana:Banana`,
+    $localize`:@@ui.element.blueberry:Blueberry`,
+    $localize`:@@ui.element.grapes:Grapes`,
+    $localize`:@@ui.element.pineapple:Pineapple`,
   ].map((value) => ({ value, label: value }));
   private readonly fruit = signal(this.fruits[0].value);
   private readonly date = signal<ScCalendarValue>(Temporal.Now.plainDateISO());
   private readonly questions = [
     {
       id: 'a',
-      q: $localize`Is it accessible?`,
-      a: $localize`Yes. It follows the WAI-ARIA disclosure pattern.`,
+      q: $localize`:@@ui.element.isItAccessible:Is it accessible?`,
+      a: $localize`:@@ui.element.yesItFollowsTheWai:Yes. It follows the WAI-ARIA disclosure pattern.`,
     },
     {
       id: 'b',
-      q: $localize`Is it styled?`,
-      a: $localize`Yes — by the style, like every other part.`,
+      q: $localize`:@@ui.element.isItStyled:Is it styled?`,
+      a: $localize`:@@ui.element.yesByTheStyleLike:Yes — by the style, like every other part.`,
     },
     {
       id: 'c',
-      q: $localize`Is it animated?`,
-      a: $localize`Yes, unless you prefer reduced motion.`,
+      q: $localize`:@@ui.element.isItAnimated:Is it animated?`,
+      a: $localize`:@@ui.element.yesUnlessYouPreferReduced:Yes, unless you prefer reduced motion.`,
     },
   ];
   private readonly initialsOf = initials;

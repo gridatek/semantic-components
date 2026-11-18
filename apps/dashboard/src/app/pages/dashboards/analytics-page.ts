@@ -163,7 +163,7 @@ const COUNTRIES = [
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@dashboards.analytics.analytics"
       title="Analytics"
       [trail]="[{ label: t.dashboards }, { label: t.analytics }]"
     />
@@ -171,7 +171,9 @@ const COUNTRIES = [
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <dl scStatCard>
         <dt scStatCardLabel>
-          <ng-container i18n>Visitors</ng-container>
+          <ng-container i18n="@@dashboards.analytics.visitors"
+            >Visitors</ng-container
+          >
           <svg siUsersIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="45820"></dd>
@@ -182,11 +184,15 @@ const COUNTRIES = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n scStatCardDescription>from last month</dd>
+        <dd i18n="@@dashboards.analytics.fromLastMonth" scStatCardDescription>
+          from last month
+        </dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          <ng-container i18n>Page views</ng-container>
+          <ng-container i18n="@@dashboards.analytics.pageViews"
+            >Page views</ng-container
+          >
           <svg siEyeIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="128430"></dd>
@@ -197,11 +203,15 @@ const COUNTRIES = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n scStatCardDescription>from last month</dd>
+        <dd i18n="@@dashboards.analytics.fromLastMonth" scStatCardDescription>
+          from last month
+        </dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          <ng-container i18n>Bounce rate</ng-container>
+          <ng-container i18n="@@dashboards.analytics.bounceRate"
+            >Bounce rate</ng-container
+          >
           <svg siMousePointerClickIcon scStatCardIcon></svg>
         </dt>
         <dd
@@ -217,14 +227,18 @@ const COUNTRIES = [
         >
           <svg siTrendingDownIcon></svg>
         </dd>
-        <dd i18n scStatCardDescription>from last month</dd>
+        <dd i18n="@@dashboards.analytics.fromLastMonth" scStatCardDescription>
+          from last month
+        </dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          <ng-container i18n>Avg. session</ng-container>
+          <ng-container i18n="@@dashboards.analytics.avgSession"
+            >Avg. session</ng-container
+          >
           <svg siClockIcon scStatCardIcon></svg>
         </dt>
-        <dd i18n scStatCardValue>3m 42s</dd>
+        <dd i18n="@@dashboards.analytics.n3m42s" scStatCardValue>3m 42s</dd>
         <dd
           scStatCardChange
           [value]="0.046"
@@ -232,18 +246,22 @@ const COUNTRIES = [
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n scStatCardDescription>from last month</dd>
+        <dd i18n="@@dashboards.analytics.fromLastMonth" scStatCardDescription>
+          from last month
+        </dd>
       </dl>
     </div>
 
     <div class="grid gap-4 xl:grid-cols-3">
       <div scCard class="xl:col-span-2">
         <div scCardHeader>
-          <h2 i18n scCardTitle>Traffic</h2>
-          <p i18n scCardDescription>Visitors by device</p>
+          <h2 i18n="@@dashboards.analytics.traffic" scCardTitle>Traffic</h2>
+          <p i18n="@@dashboards.analytics.visitorsByDevice" scCardDescription>
+            Visitors by device
+          </p>
           <div scCardAction>
             <div
-              i18n-aria-label
+              i18n-aria-label="@@dashboards.analytics.period"
               scToggleGroup
               variant="outline"
               size="sm"
@@ -251,9 +269,27 @@ const COUNTRIES = [
               [value]="[range()]"
               (valueChange)="choose($event)"
             >
-              <button i18n scToggleGroupItem value="7d">7 days</button>
-              <button i18n scToggleGroupItem value="30d">30 days</button>
-              <button i18n scToggleGroupItem value="90d">90 days</button>
+              <button
+                i18n="@@dashboards.analytics.n7Days"
+                scToggleGroupItem
+                value="7d"
+              >
+                7 days
+              </button>
+              <button
+                i18n="@@dashboards.analytics.n30Days"
+                scToggleGroupItem
+                value="30d"
+              >
+                30 days
+              </button>
+              <button
+                i18n="@@dashboards.analytics.n90Days"
+                scToggleGroupItem
+                value="90d"
+              >
+                90 days
+              </button>
             </div>
           </div>
         </div>
@@ -265,7 +301,7 @@ const COUNTRIES = [
             class="h-72 w-full"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@dashboards.analytics.visitorsByDevice"
               scChartPlot
               categoryKey="date"
               aria-label="Visitors by device"
@@ -284,8 +320,12 @@ const COUNTRIES = [
 
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Traffic sources</h2>
-          <p i18n scCardDescription>Visits this month</p>
+          <h2 i18n="@@dashboards.analytics.trafficSources" scCardTitle>
+            Traffic sources
+          </h2>
+          <p i18n="@@dashboards.analytics.visitsThisMonth" scCardDescription>
+            Visits this month
+          </p>
         </div>
         <div scCardBody>
           <div
@@ -295,7 +335,7 @@ const COUNTRIES = [
             class="mx-auto aspect-square max-h-64"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@dashboards.analytics.visitsBySource"
               scChartPlot
               categoryKey="source"
               aria-label="Visits by source"
@@ -333,18 +373,43 @@ const COUNTRIES = [
     <div class="grid gap-4 xl:grid-cols-3">
       <div scCard class="xl:col-span-2">
         <div scCardHeader>
-          <h2 i18n scCardTitle>Top pages</h2>
-          <p i18n scCardDescription>The most read this month</p>
+          <h2 i18n="@@dashboards.analytics.topPages" scCardTitle>Top pages</h2>
+          <p
+            i18n="@@dashboards.analytics.theMostReadThisMonth"
+            scCardDescription
+          >
+            The most read this month
+          </p>
         </div>
         <div scCardBody>
           <div scTableContainer>
             <table scTable>
               <thead scTableHeader>
                 <tr scTableRow>
-                  <th i18n scTableHeaderCell>Page</th>
-                  <th i18n scTableHeaderCell class="text-end">Views</th>
-                  <th i18n scTableHeaderCell class="text-end">Unique</th>
-                  <th i18n scTableHeaderCell class="text-end">Bounce</th>
+                  <th i18n="@@dashboards.analytics.page" scTableHeaderCell>
+                    Page
+                  </th>
+                  <th
+                    i18n="@@dashboards.analytics.views"
+                    scTableHeaderCell
+                    class="text-end"
+                  >
+                    Views
+                  </th>
+                  <th
+                    i18n="@@dashboards.analytics.unique"
+                    scTableHeaderCell
+                    class="text-end"
+                  >
+                    Unique
+                  </th>
+                  <th
+                    i18n="@@dashboards.analytics.bounce"
+                    scTableHeaderCell
+                    class="text-end"
+                  >
+                    Bounce
+                  </th>
                 </tr>
               </thead>
               <tbody scTableBody>
@@ -370,8 +435,12 @@ const COUNTRIES = [
 
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Visitors by country</h2>
-          <p i18n scCardDescription>Share of this month's visitors</p>
+          <h2 i18n="@@dashboards.analytics.visitorsByCountry" scCardTitle>
+            Visitors by country
+          </h2>
+          <p i18n="@@dashboards.analytics.shareOfThisMonthS" scCardDescription>
+            Share of this month's visitors
+          </p>
         </div>
         <div scCardBody class="flex flex-col gap-4">
           @for (country of countries; track country.name) {
@@ -390,11 +459,11 @@ const COUNTRIES = [
 })
 export class AnalyticsPage {
   /** The donut's centre word: SVG text, so not an i18n element. */
-  private readonly visitsLabel = $localize`Visits`;
+  private readonly visitsLabel = $localize`:@@dashboards.analytics.visits:Visits`;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    dashboards: $localize`Dashboards`,
-    analytics: $localize`Analytics`,
+    dashboards: $localize`:@@dashboards.analytics.dashboards:Dashboards`,
+    analytics: $localize`:@@dashboards.analytics.analytics:Analytics`,
   };
 
   private readonly range = signal<Range>('90d');
@@ -408,16 +477,37 @@ export class AnalyticsPage {
   private readonly pages = PAGES;
   private readonly countries = COUNTRIES;
   private readonly trafficConfig: ScChartConfig = {
-    desktop: { label: $localize`Desktop`, color: 'var(--chart-2)' },
-    mobile: { label: $localize`Mobile`, color: 'var(--chart-4)' },
+    desktop: {
+      label: $localize`:@@dashboards.analytics.desktop:Desktop`,
+      color: 'var(--chart-2)',
+    },
+    mobile: {
+      label: $localize`:@@dashboards.analytics.mobile:Mobile`,
+      color: 'var(--chart-4)',
+    },
   };
   private readonly sourceConfig: ScChartConfig = {
-    visits: { label: $localize`Visits` },
-    organic: { label: $localize`Organic`, color: 'var(--chart-1)' },
-    direct: { label: $localize`Direct`, color: 'var(--chart-2)' },
-    referral: { label: $localize`Referral`, color: 'var(--chart-3)' },
-    social: { label: $localize`Social`, color: 'var(--chart-4)' },
-    email: { label: $localize`Email`, color: 'var(--chart-5)' },
+    visits: { label: $localize`:@@dashboards.analytics.visits:Visits` },
+    organic: {
+      label: $localize`:@@dashboards.analytics.organic:Organic`,
+      color: 'var(--chart-1)',
+    },
+    direct: {
+      label: $localize`:@@dashboards.analytics.direct:Direct`,
+      color: 'var(--chart-2)',
+    },
+    referral: {
+      label: $localize`:@@dashboards.analytics.referral:Referral`,
+      color: 'var(--chart-3)',
+    },
+    social: {
+      label: $localize`:@@dashboards.analytics.social:Social`,
+      color: 'var(--chart-4)',
+    },
+    email: {
+      label: $localize`:@@dashboards.analytics.email:Email`,
+      color: 'var(--chart-5)',
+    },
   };
   private readonly countOf = count;
   private readonly percentOf = percent;

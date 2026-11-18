@@ -52,7 +52,7 @@ import { PageHeader } from '../../layout/page-header';
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@forms.formLayouts.formLayouts"
       title="Form Layouts"
       [trail]="[{ label: t.forms }, { label: t.layouts }]"
     />
@@ -61,27 +61,36 @@ import { PageHeader } from '../../layout/page-header';
       <form (submit)="send($event, 'Stacked')">
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>Stacked</h2>
-            <p i18n scCardDescription>Labels above the fields</p>
+            <h2 i18n="@@forms.formLayouts.stacked" scCardTitle>Stacked</h2>
+            <p
+              i18n="@@forms.formLayouts.labelsAboveTheFields"
+              scCardDescription
+            >
+              Labels above the fields
+            </p>
           </div>
           <div scCardBody>
             <div scFieldGroup>
               <div scField>
-                <label i18n scLabel>Name</label>
+                <label i18n="@@forms.formLayouts.name" scLabel>Name</label>
                 <input scInput autocomplete="name" />
               </div>
               <div scField>
-                <label i18n scLabel>Email</label>
+                <label i18n="@@forms.formLayouts.email" scLabel>Email</label>
                 <input scInput type="email" autocomplete="email" />
               </div>
               <div scField>
-                <label i18n scLabel>Message</label>
+                <label i18n="@@forms.formLayouts.message" scLabel
+                  >Message</label
+                >
                 <textarea scTextarea rows="3"></textarea>
               </div>
             </div>
           </div>
           <div scCardFooter class="justify-end">
-            <button i18n scButton type="submit">Submit</button>
+            <button i18n="@@forms.formLayouts.submit" scButton type="submit">
+              Submit
+            </button>
           </div>
         </div>
       </form>
@@ -89,8 +98,13 @@ import { PageHeader } from '../../layout/page-header';
       <form (submit)="send($event, 'Side by side')">
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>Side by side</h2>
-            <p i18n scCardDescription>
+            <h2 i18n="@@forms.formLayouts.sideBySide" scCardTitle>
+              Side by side
+            </h2>
+            <p
+              i18n="@@forms.formLayouts.labelsBesideTheFieldsOn"
+              scCardDescription
+            >
               Labels beside the fields on wide screens
             </p>
           </div>
@@ -98,7 +112,7 @@ import { PageHeader } from '../../layout/page-header';
             <div scFieldGroup>
               <div scField orientation="responsive">
                 <label
-                  i18n
+                  i18n="@@forms.formLayouts.name"
                   scLabel
                   class="@md/field-group:w-32 @md/field-group:flex-none"
                   >Name</label
@@ -111,7 +125,7 @@ import { PageHeader } from '../../layout/page-header';
               </div>
               <div scField orientation="responsive">
                 <label
-                  i18n
+                  i18n="@@forms.formLayouts.email"
                   scLabel
                   class="@md/field-group:w-32 @md/field-group:flex-none"
                   >Email</label
@@ -125,7 +139,7 @@ import { PageHeader } from '../../layout/page-header';
               </div>
               <div scField orientation="responsive">
                 <label
-                  i18n
+                  i18n="@@forms.formLayouts.website"
                   scLabel
                   class="@md/field-group:w-32 @md/field-group:flex-none"
                   >Website</label
@@ -134,12 +148,16 @@ import { PageHeader } from '../../layout/page-header';
               </div>
               <div scField orientation="horizontal">
                 <input scCheckbox type="checkbox" />
-                <label i18n scLabel>Keep me posted</label>
+                <label i18n="@@forms.formLayouts.keepMePosted" scLabel
+                  >Keep me posted</label
+                >
               </div>
             </div>
           </div>
           <div scCardFooter class="justify-end">
-            <button i18n scButton type="submit">Submit</button>
+            <button i18n="@@forms.formLayouts.submit" scButton type="submit">
+              Submit
+            </button>
           </div>
         </div>
       </form>
@@ -147,24 +165,30 @@ import { PageHeader } from '../../layout/page-header';
       <form (submit)="send($event, 'Row')">
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>In a row</h2>
-            <p i18n scCardDescription>A short form on one line</p>
+            <h2 i18n="@@forms.formLayouts.inARow" scCardTitle>In a row</h2>
+            <p i18n="@@forms.formLayouts.aShortFormOnOne" scCardDescription>
+              A short form on one line
+            </p>
           </div>
           <div scCardBody>
             <div class="flex flex-wrap items-end gap-3">
               <div scField class="min-w-40 flex-1">
-                <label i18n scLabel>Email</label>
+                <label i18n="@@forms.formLayouts.email" scLabel>Email</label>
                 <input scInput type="email" autocomplete="email" />
               </div>
               <div scField class="min-w-40 flex-1">
-                <label i18n scLabel>Password</label>
+                <label i18n="@@forms.formLayouts.password" scLabel
+                  >Password</label
+                >
                 <input
                   scInput
                   type="password"
                   autocomplete="current-password"
                 />
               </div>
-              <button i18n scButton type="submit">Sign in</button>
+              <button i18n="@@forms.formLayouts.signIn" scButton type="submit">
+                Sign in
+              </button>
             </div>
           </div>
         </div>
@@ -173,34 +197,42 @@ import { PageHeader } from '../../layout/page-header';
       <form (submit)="send($event, 'With icons')">
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>With icons</h2>
-            <p i18n scCardDescription>Each field says what it holds</p>
+            <h2 i18n="@@forms.formLayouts.withIcons" scCardTitle>With icons</h2>
+            <p i18n="@@forms.formLayouts.eachFieldSaysWhatIt" scCardDescription>
+              Each field says what it holds
+            </p>
           </div>
           <div scCardBody>
             <div scFieldGroup>
               <div scField>
-                <label i18n scLabel>Username</label>
+                <label i18n="@@forms.formLayouts.username" scLabel
+                  >Username</label
+                >
                 <div scInputGroup>
                   <input scInput autocomplete="username" />
                   <div scInputGroupAddon><svg siUserIcon></svg></div>
                 </div>
               </div>
               <div scField>
-                <label i18n scLabel>Email</label>
+                <label i18n="@@forms.formLayouts.email" scLabel>Email</label>
                 <div scInputGroup>
                   <input scInput type="email" autocomplete="email" />
                   <div scInputGroupAddon><svg siAtSignIcon></svg></div>
                 </div>
               </div>
               <div scField>
-                <label i18n scLabel>Website</label>
+                <label i18n="@@forms.formLayouts.website" scLabel
+                  >Website</label
+                >
                 <div scInputGroup>
                   <input scInput type="url" />
                   <div scInputGroupAddon><svg siGlobeIcon></svg></div>
                 </div>
               </div>
               <div scField>
-                <label i18n scLabel>Password</label>
+                <label i18n="@@forms.formLayouts.password" scLabel
+                  >Password</label
+                >
                 <div scInputGroup>
                   <input scInput type="password" autocomplete="new-password" />
                   <div scInputGroupAddon><svg siLockIcon></svg></div>
@@ -209,7 +241,9 @@ import { PageHeader } from '../../layout/page-header';
             </div>
           </div>
           <div scCardFooter class="justify-end">
-            <button i18n scButton type="submit">Submit</button>
+            <button i18n="@@forms.formLayouts.submit" scButton type="submit">
+              Submit
+            </button>
           </div>
         </div>
       </form>
@@ -217,48 +251,71 @@ import { PageHeader } from '../../layout/page-header';
       <form class="xl:col-span-2" (submit)="send($event, 'Columns')">
         <div scCard>
           <div scCardHeader>
-            <h2 i18n scCardTitle>In columns</h2>
-            <p i18n scCardDescription>A longer form, two or three to a row</p>
+            <h2 i18n="@@forms.formLayouts.inColumns" scCardTitle>In columns</h2>
+            <p i18n="@@forms.formLayouts.aLongerFormTwoOr" scCardDescription>
+              A longer form, two or three to a row
+            </p>
           </div>
           <div scCardBody>
             <div scFieldGroup class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               <div scField>
-                <label i18n scLabel>First name</label>
+                <label i18n="@@forms.formLayouts.firstName" scLabel
+                  >First name</label
+                >
                 <input scInput autocomplete="given-name" />
               </div>
               <div scField>
-                <label i18n scLabel>Last name</label>
+                <label i18n="@@forms.formLayouts.lastName" scLabel
+                  >Last name</label
+                >
                 <input scInput autocomplete="family-name" />
               </div>
               <div scField>
-                <label i18n scLabel>Company</label>
+                <label i18n="@@forms.formLayouts.company" scLabel
+                  >Company</label
+                >
                 <input scInput autocomplete="organization" />
               </div>
               <div scField class="md:col-span-2">
-                <label i18n scLabel>Address</label>
+                <label i18n="@@forms.formLayouts.address" scLabel
+                  >Address</label
+                >
                 <input scInput autocomplete="street-address" />
               </div>
               <div scField>
-                <label i18n scLabel>City</label>
+                <label i18n="@@forms.formLayouts.city" scLabel>City</label>
                 <input scInput autocomplete="address-level2" />
               </div>
               <div scField>
-                <label i18n scLabel>Postal code</label>
+                <label i18n="@@forms.formLayouts.postalCode" scLabel
+                  >Postal code</label
+                >
                 <input scInput autocomplete="postal-code" />
               </div>
               <div scField>
-                <label i18n scLabel>Country</label>
+                <label i18n="@@forms.formLayouts.country" scLabel
+                  >Country</label
+                >
                 <input scInput autocomplete="country-name" />
               </div>
               <div scField>
-                <label i18n scLabel>Phone</label>
+                <label i18n="@@forms.formLayouts.phone" scLabel>Phone</label>
                 <input scInput type="tel" autocomplete="tel" />
               </div>
             </div>
           </div>
           <div scCardFooter class="justify-end gap-2">
-            <button i18n scButton type="reset" variant="outline">Clear</button>
-            <button i18n scButton type="submit">Save</button>
+            <button
+              i18n="@@forms.formLayouts.clear"
+              scButton
+              type="reset"
+              variant="outline"
+            >
+              Clear
+            </button>
+            <button i18n="@@forms.formLayouts.save" scButton type="submit">
+              Save
+            </button>
           </div>
         </div>
       </form>
@@ -270,8 +327,8 @@ import { PageHeader } from '../../layout/page-header';
 export class FormLayoutsPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    forms: $localize`Forms`,
-    layouts: $localize`Layouts`,
+    forms: $localize`:@@forms.formLayouts.forms:Forms`,
+    layouts: $localize`:@@forms.formLayouts.layouts:Layouts`,
   };
 
   private readonly toaster = inject(ScToaster);
@@ -280,7 +337,7 @@ export class FormLayoutsPage {
     event.preventDefault();
     this.toaster.show({
       variant: 'success',
-      title: $localize`${layout} form sent`,
+      title: $localize`:@@forms.formLayouts.formSent:${layout} form sent`,
     });
   }
 }

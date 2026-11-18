@@ -101,7 +101,7 @@ import { axisLabel, initials, money } from '../../shared/format';
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@widgets.widgetPages.widgetCards"
       title="Widget Cards"
       [trail]="[{ label: t.widgets }, { label: t.cards }]"
     />
@@ -109,7 +109,9 @@ import { axisLabel, initials, money } from '../../shared/format';
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <dl scStatCard>
         <dt scStatCardLabel>
-          <ng-container i18n>Revenue</ng-container>
+          <ng-container i18n="@@widgets.widgetPages.revenue"
+            >Revenue</ng-container
+          >
           <svg siDollarSignIcon scStatCardIcon></svg>
         </dt>
         <dd
@@ -124,11 +126,15 @@ import { axisLabel, initials, money } from '../../shared/format';
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n scStatCardDescription>from last month</dd>
+        <dd i18n="@@widgets.widgetPages.fromLastMonth" scStatCardDescription>
+          from last month
+        </dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          <ng-container i18n>Subscriptions</ng-container>
+          <ng-container i18n="@@widgets.widgetPages.subscriptions"
+            >Subscriptions</ng-container
+          >
           <svg siUsersIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="2350"></dd>
@@ -139,11 +145,13 @@ import { axisLabel, initials, money } from '../../shared/format';
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n scStatCardDescription>from last month</dd>
+        <dd i18n="@@widgets.widgetPages.fromLastMonth" scStatCardDescription>
+          from last month
+        </dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          <ng-container i18n>Sales</ng-container>
+          <ng-container i18n="@@widgets.widgetPages.sales">Sales</ng-container>
           <svg siShoppingBagIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="12234"></dd>
@@ -154,11 +162,15 @@ import { axisLabel, initials, money } from '../../shared/format';
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n scStatCardDescription>from last month</dd>
+        <dd i18n="@@widgets.widgetPages.fromLastMonth" scStatCardDescription>
+          from last month
+        </dd>
       </dl>
       <dl scStatCard>
         <dt scStatCardLabel>
-          <ng-container i18n>Refunds</ng-container>
+          <ng-container i18n="@@widgets.widgetPages.refunds"
+            >Refunds</ng-container
+          >
           <svg siTrendingDownIcon scStatCardIcon></svg>
         </dt>
         <dd scStatCardValue [value]="573"></dd>
@@ -170,7 +182,9 @@ import { axisLabel, initials, money } from '../../shared/format';
         >
           <svg siTrendingDownIcon></svg>
         </dd>
-        <dd i18n scStatCardDescription>from last month</dd>
+        <dd i18n="@@widgets.widgetPages.fromLastMonth" scStatCardDescription>
+          from last month
+        </dd>
       </dl>
     </div>
 
@@ -190,15 +204,32 @@ import { axisLabel, initials, money } from '../../shared/format';
           </p>
           <dl class="grid w-full grid-cols-3 gap-2 pt-2">
             <div>
-              <dt i18n class="text-muted-foreground text-xs">Posts</dt>
+              <dt
+                i18n="@@widgets.widgetPages.posts"
+                class="text-muted-foreground text-xs"
+              >
+                Posts
+              </dt>
               <dd class="font-semibold">124</dd>
             </div>
             <div>
-              <dt i18n class="text-muted-foreground text-xs">Followers</dt>
-              <dd i18n class="font-semibold">3.2K</dd>
+              <dt
+                i18n="@@widgets.widgetPages.followers"
+                class="text-muted-foreground text-xs"
+              >
+                Followers
+              </dt>
+              <dd i18n="@@widgets.widgetPages.n32k" class="font-semibold">
+                3.2K
+              </dd>
             </div>
             <div>
-              <dt i18n class="text-muted-foreground text-xs">Following</dt>
+              <dt
+                i18n="@@widgets.widgetPages.following"
+                class="text-muted-foreground text-xs"
+              >
+                Following
+              </dt>
               <dd class="font-semibold">410</dd>
             </div>
           </dl>
@@ -207,7 +238,12 @@ import { axisLabel, initials, money } from '../../shared/format';
           <button scButton size="sm" (click)="following.set(!following())">
             {{ following() ? t.following : t.follow }}
           </button>
-          <a i18n scLink variant="outline" size="sm" routerLink="/apps/chats"
+          <a
+            i18n="@@widgets.widgetPages.message"
+            scLink
+            variant="outline"
+            size="sm"
+            routerLink="/apps/chats"
             >Message</a
           >
         </div>
@@ -223,7 +259,7 @@ import { axisLabel, initials, money } from '../../shared/format';
             class="object-cover"
           />
           <span
-            i18n
+            i18n="@@widgets.widgetPages.sale"
             scBadge
             variant="destructive"
             class="absolute start-3 top-3"
@@ -234,7 +270,7 @@ import { axisLabel, initials, money } from '../../shared/format';
           <h2 scCardTitle>{{ product.name }}</h2>
           <p scCardDescription class="flex items-center gap-1">
             <svg siStarIcon class="size-3.5 fill-current"></svg>
-            <ng-container i18n
+            <ng-container i18n="@@widgets.widgetPages.reviews"
               >{{ product.rating }} ·
               {{ product.reviews }} reviews</ng-container
             >
@@ -246,11 +282,18 @@ import { axisLabel, initials, money } from '../../shared/format';
               [pressed]="liked()"
               (pressedChange)="liked.set($event)"
             >
-              <svg siHeartIcon></svg><span i18n class="sr-only">Like</span>
+              <svg siHeartIcon></svg
+              ><span i18n="@@widgets.widgetPages.like" class="sr-only"
+                >Like</span
+              >
             </button>
           </div>
         </div>
-        <div i18n scCardFooter class="justify-between">
+        <div
+          i18n="@@widgets.widgetPages.view"
+          scCardFooter
+          class="justify-between"
+        >
           <span class="text-lg font-semibold tabular-nums">{{
             moneyOf(product.price)
           }}</span>
@@ -266,15 +309,21 @@ import { axisLabel, initials, money } from '../../shared/format';
 
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Project Apollo</h2>
-          <p i18n scCardDescription>Due May 30</p>
-          <div i18n scCardAction>
+          <h2 i18n="@@widgets.widgetPages.projectApollo" scCardTitle>
+            Project Apollo
+          </h2>
+          <p i18n="@@widgets.widgetPages.dueMay30" scCardDescription>
+            Due May 30
+          </p>
+          <div i18n="@@widgets.widgetPages.onTrack" scCardAction>
             <span scBadge variant="secondary">On track</span>
           </div>
         </div>
         <div scCardBody class="flex flex-col gap-4">
           <div scProgress [value]="68">
-            <span i18n scProgressLabel>Progress</span>
+            <span i18n="@@widgets.widgetPages.progress" scProgressLabel
+              >Progress</span
+            >
             <span scProgressValueText>68%</span>
             <div scProgressTrack><div scProgressRange></div></div>
           </div>
@@ -288,7 +337,9 @@ import { axisLabel, initials, money } from '../../shared/format';
               }
               <div scAvatarGroupCount>+3</div>
             </div>
-            <span i18n class="text-muted-foreground text-sm"
+            <span
+              i18n="@@widgets.widgetPages.n14Of21Tasks"
+              class="text-muted-foreground text-sm"
               >14 of 21 tasks</span
             >
           </div>
@@ -302,10 +353,10 @@ import { axisLabel, initials, money } from '../../shared/format';
 export class WidgetCardsPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    widgets: $localize`Widgets`,
-    cards: $localize`Cards`,
-    following: $localize`Following`,
-    follow: $localize`Follow`,
+    widgets: $localize`:@@widgets.widgetPages.widgets:Widgets`,
+    cards: $localize`:@@widgets.widgetPages.cards:Cards`,
+    following: $localize`:@@widgets.widgetPages.following:Following`,
+    follow: $localize`:@@widgets.widgetPages.follow:Follow`,
   };
 
   private readonly person = PEOPLE[5];
@@ -351,7 +402,7 @@ const WEEK = [
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@widgets.widgetPages.widgetCharts"
       title="Widget Charts"
       [trail]="[{ label: t.widgets }, { label: t.charts }]"
     />
@@ -359,13 +410,15 @@ const WEEK = [
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <div scCard>
         <div scCardHeader>
-          <p i18n scCardDescription>Visitors this week</p>
+          <p i18n="@@widgets.widgetPages.visitorsThisWeek" scCardDescription>
+            Visitors this week
+          </p>
           <h2 scCardTitle class="text-2xl tabular-nums">328</h2>
         </div>
         <div scCardBody>
           <div scChart [config]="config" [data]="week" class="h-20 w-full">
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@widgets.widgetPages.visitorsByDay"
               scChartPlot
               categoryKey="day"
               aria-label="Visitors by day"
@@ -378,13 +431,15 @@ const WEEK = [
       </div>
       <div scCard>
         <div scCardHeader>
-          <p i18n scCardDescription>Orders this week</p>
+          <p i18n="@@widgets.widgetPages.ordersThisWeek" scCardDescription>
+            Orders this week
+          </p>
           <h2 scCardTitle class="text-2xl tabular-nums">1,204</h2>
         </div>
         <div scCardBody>
           <div scChart [config]="config" [data]="week" class="h-20 w-full">
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@widgets.widgetPages.ordersByDay"
               scChartPlot
               categoryKey="day"
               aria-label="Orders by day"
@@ -397,13 +452,15 @@ const WEEK = [
       </div>
       <div scCard>
         <div scCardHeader>
-          <p i18n scCardDescription>Sign-ups this week</p>
+          <p i18n="@@widgets.widgetPages.signUpsThisWeek" scCardDescription>
+            Sign-ups this week
+          </p>
           <h2 scCardTitle class="text-2xl tabular-nums">86</h2>
         </div>
         <div scCardBody>
           <div scChart [config]="config" [data]="week" class="h-20 w-full">
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@widgets.widgetPages.signUpsByDay"
               scChartPlot
               categoryKey="day"
               aria-label="Sign-ups by day"
@@ -416,12 +473,20 @@ const WEEK = [
       </div>
       <div scCard>
         <div scCardHeader>
-          <p i18n scCardDescription>Storage used</p>
-          <h2 i18n scCardTitle class="text-2xl tabular-nums">74 GB</h2>
+          <p i18n="@@widgets.widgetPages.storageUsed" scCardDescription>
+            Storage used
+          </p>
+          <h2
+            i18n="@@widgets.widgetPages.n74Gb"
+            scCardTitle
+            class="text-2xl tabular-nums"
+          >
+            74 GB
+          </h2>
         </div>
         <div scCardBody class="flex justify-center">
           <div
-            i18n-aria-label
+            i18n-aria-label="@@widgets.widgetPages.storageUsed"
             scProgress
             [value]="74"
             aria-label="Storage used"
@@ -439,8 +504,10 @@ const WEEK = [
     <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
       <div scCard>
         <div scCardHeader>
-          <h2 i18n scCardTitle>Devices</h2>
-          <p i18n scCardDescription>Where visits come from</p>
+          <h2 i18n="@@widgets.widgetPages.devices" scCardTitle>Devices</h2>
+          <p i18n="@@widgets.widgetPages.whereVisitsComeFrom" scCardDescription>
+            Where visits come from
+          </p>
         </div>
         <div scCardBody class="flex items-center gap-6">
           <div
@@ -450,7 +517,7 @@ const WEEK = [
             class="aspect-square w-32"
           >
             <svg
-              i18n-aria-label
+              i18n-aria-label="@@widgets.widgetPages.visitsByDevice"
               scChartPlot
               categoryKey="device"
               aria-label="Visits by device"
@@ -482,8 +549,12 @@ const WEEK = [
       </div>
       <div scCard class="xl:col-span-2">
         <div scCardHeader>
-          <h2 i18n scCardTitle>Weekly goals</h2>
-          <p i18n scCardDescription>How far each team got</p>
+          <h2 i18n="@@widgets.widgetPages.weeklyGoals" scCardTitle>
+            Weekly goals
+          </h2>
+          <p i18n="@@widgets.widgetPages.howFarEachTeamGot" scCardDescription>
+            How far each team got
+          </p>
         </div>
         <div scCardBody class="grid grid-cols-2 gap-6 sm:grid-cols-4">
           @for (goal of goals; track goal.team) {
@@ -512,8 +583,8 @@ const WEEK = [
 export class WidgetChartsPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    widgets: $localize`Widgets`,
-    charts: $localize`Charts`,
+    widgets: $localize`:@@widgets.widgetPages.widgets:Widgets`,
+    charts: $localize`:@@widgets.widgetPages.charts:Charts`,
   };
 
   private readonly week = WEEK.map((row) => ({
@@ -521,7 +592,10 @@ export class WidgetChartsPage {
     day: axisLabel(row.day),
   }));
   private readonly config: ScChartConfig = {
-    value: { label: $localize`This week`, color: 'var(--chart-3)' },
+    value: {
+      label: $localize`:@@widgets.widgetPages.thisWeek:This week`,
+      color: 'var(--chart-3)',
+    },
   };
   private readonly devices = [
     { device: 'desktop', share: 0.58 },
@@ -532,15 +606,27 @@ export class WidgetChartsPage {
     string,
     { label: string; color: string }
   > = {
-    desktop: { label: $localize`Desktop`, color: 'var(--chart-2)' },
-    mobile: { label: $localize`Mobile`, color: 'var(--chart-4)' },
-    tablet: { label: $localize`Tablet`, color: 'var(--chart-5)' },
+    desktop: {
+      label: $localize`:@@widgets.widgetPages.desktop:Desktop`,
+      color: 'var(--chart-2)',
+    },
+    mobile: {
+      label: $localize`:@@widgets.widgetPages.mobile:Mobile`,
+      color: 'var(--chart-4)',
+    },
+    tablet: {
+      label: $localize`:@@widgets.widgetPages.tablet:Tablet`,
+      color: 'var(--chart-5)',
+    },
   };
   private readonly goals = [
-    { team: $localize`Sales`, value: 0.82 },
-    { team: $localize`Support`, value: 0.64 },
-    { team: $localize`Design`, value: 0.91 },
-    { team: $localize`Engineering`, value: 0.57 },
+    { team: $localize`:@@widgets.widgetPages.sales:Sales`, value: 0.82 },
+    { team: $localize`:@@widgets.widgetPages.support:Support`, value: 0.64 },
+    { team: $localize`:@@widgets.widgetPages.design:Design`, value: 0.91 },
+    {
+      team: $localize`:@@widgets.widgetPages.engineering:Engineering`,
+      value: 0.57,
+    },
   ];
   private readonly percentOf = (value: number) => `${Math.round(value * 100)}%`;
 }

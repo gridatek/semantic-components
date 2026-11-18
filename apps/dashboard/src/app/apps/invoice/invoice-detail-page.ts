@@ -85,12 +85,14 @@ import {
         @if (invoice.status !== 'Paid') {
           <button scButton variant="outline" (click)="markPaid()">
             <svg siCheckIcon></svg>
-            <ng-container i18n>Mark as paid</ng-container>
+            <ng-container i18n="@@invoice.detail.markAsPaid"
+              >Mark as paid</ng-container
+            >
           </button>
         }
         <button scButton variant="outline" (click)="print()">
           <svg siPrinterIcon></svg>
-          <ng-container i18n>Print</ng-container>
+          <ng-container i18n="@@invoice.detail.print">Print</ng-container>
         </button>
         <a
           scLink
@@ -98,7 +100,7 @@ import {
           [routerLink]="['/apps/invoice/edit', invoice.id]"
         >
           <svg siPencilIcon></svg>
-          <ng-container i18n>Edit</ng-container>
+          <ng-container i18n="@@invoice.detail.edit">Edit</ng-container>
         </a>
       }
     </app-page-header>
@@ -113,10 +115,17 @@ import {
               >
                 <svg siLayoutDashboardIcon></svg>
               </span>
-              <ng-container i18n>Dashboard Inc.</ng-container>
+              <ng-container i18n="@@invoice.detail.dashboardInc"
+                >Dashboard Inc.</ng-container
+              >
             </div>
             <div class="flex flex-col items-end gap-1 text-end">
-              <h2 i18n class="text-2xl font-semibold">Invoice</h2>
+              <h2
+                i18n="@@invoice.detail.invoice"
+                class="text-2xl font-semibold"
+              >
+                Invoice
+              </h2>
               <span class="text-muted-foreground text-sm">{{
                 invoice.id
               }}</span>
@@ -129,18 +138,24 @@ import {
           <div class="grid gap-6 sm:grid-cols-3">
             <div class="flex flex-col gap-1 text-sm">
               <h3
-                i18n
+                i18n="@@invoice.detail.from"
                 class="text-muted-foreground text-xs font-medium uppercase"
               >
                 From
               </h3>
-              <span i18n class="font-medium">Dashboard Inc.</span>
-              <span i18n>350 Fifth Avenue, New York, NY 10118</span>
-              <span i18n>billing&#64;dashboard.example</span>
+              <span i18n="@@invoice.detail.dashboardInc" class="font-medium"
+                >Dashboard Inc.</span
+              >
+              <span i18n="@@invoice.detail.n350FifthAvenueNewYork"
+                >350 Fifth Avenue, New York, NY 10118</span
+              >
+              <span i18n="@@invoice.detail.billingDashboardExample"
+                >billing&#64;dashboard.example</span
+              >
             </div>
             <div class="flex flex-col gap-1 text-sm">
               <h3
-                i18n
+                i18n="@@invoice.detail.billTo"
                 class="text-muted-foreground text-xs font-medium uppercase"
               >
                 Bill to
@@ -152,9 +167,13 @@ import {
             <dl
               class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm sm:justify-self-end"
             >
-              <dt i18n class="text-muted-foreground">Issued</dt>
+              <dt i18n="@@invoice.detail.issued" class="text-muted-foreground">
+                Issued
+              </dt>
               <dd>{{ dayOf(invoice.issued) }}</dd>
-              <dt i18n class="text-muted-foreground">Due</dt>
+              <dt i18n="@@invoice.detail.due" class="text-muted-foreground">
+                Due
+              </dt>
               <dd>{{ dayOf(invoice.due) }}</dd>
             </dl>
           </div>
@@ -163,10 +182,30 @@ import {
             <table scTable>
               <thead scTableHeader>
                 <tr scTableRow>
-                  <th i18n scTableHeaderCell>Description</th>
-                  <th i18n scTableHeaderCell class="text-end">Qty</th>
-                  <th i18n scTableHeaderCell class="text-end">Price</th>
-                  <th i18n scTableHeaderCell class="text-end">Amount</th>
+                  <th i18n="@@invoice.detail.description" scTableHeaderCell>
+                    Description
+                  </th>
+                  <th
+                    i18n="@@invoice.detail.qty"
+                    scTableHeaderCell
+                    class="text-end"
+                  >
+                    Qty
+                  </th>
+                  <th
+                    i18n="@@invoice.detail.price"
+                    scTableHeaderCell
+                    class="text-end"
+                  >
+                    Price
+                  </th>
+                  <th
+                    i18n="@@invoice.detail.amount"
+                    scTableHeaderCell
+                    class="text-end"
+                  >
+                    Amount
+                  </th>
                 </tr>
               </thead>
               <tbody scTableBody>
@@ -187,7 +226,12 @@ import {
               </tbody>
               <tfoot scTableFooter>
                 <tr scTableRow>
-                  <td i18n scTableCell colspan="3" class="text-end">
+                  <td
+                    i18n="@@invoice.detail.subtotal"
+                    scTableCell
+                    colspan="3"
+                    class="text-end"
+                  >
                     Subtotal
                   </td>
                   <td scTableCell class="text-end tabular-nums">
@@ -195,7 +239,12 @@ import {
                   </td>
                 </tr>
                 <tr scTableRow>
-                  <td i18n scTableCell colspan="3" class="text-end">
+                  <td
+                    i18n="@@invoice.detail.tax"
+                    scTableCell
+                    colspan="3"
+                    class="text-end"
+                  >
                     Tax ({{ invoice.taxRate }}%)
                   </td>
                   <td scTableCell class="text-end tabular-nums">
@@ -204,7 +253,7 @@ import {
                 </tr>
                 <tr scTableRow>
                   <td
-                    i18n
+                    i18n="@@invoice.detail.total"
                     scTableCell
                     colspan="3"
                     class="text-end font-semibold"
@@ -228,8 +277,10 @@ import {
     } @else {
       <div scEmpty>
         <div scEmptyHeader>
-          <h2 i18n scEmptyTitle>No invoice {{ id() }}</h2>
-          <div i18n scEmptyDescription>
+          <h2 i18n="@@invoice.detail.noInvoice" scEmptyTitle>
+            No invoice {{ id() }}
+          </h2>
+          <div i18n="@@invoice.detail.itMayHaveBeenDeleted" scEmptyDescription>
             It may have been deleted.
             <a scLink routerLink="/apps/invoice/list">Back to the invoices</a>
           </div>
@@ -244,9 +295,9 @@ export class InvoiceDetailPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    invoice: $localize`Invoice`,
-    apps: $localize`Apps`,
-    invoices: $localize`Invoices`,
+    invoice: $localize`:@@invoice.detail.invoice:Invoice`,
+    apps: $localize`:@@invoice.detail.apps:Apps`,
+    invoices: $localize`:@@invoice.detail.invoices:Invoices`,
   };
 
   /** The route's `:id`. */
@@ -271,7 +322,7 @@ export class InvoiceDetailPage {
     this.store.setStatus(this.id(), 'Paid');
     this.toaster.show({
       variant: 'success',
-      title: $localize`${this.id()} marked as paid`,
+      title: $localize`:@@invoice.detail.markedAsPaid:${this.id()} marked as paid`,
     });
   }
 

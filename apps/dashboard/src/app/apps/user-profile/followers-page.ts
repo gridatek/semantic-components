@@ -40,10 +40,16 @@ import { ProfileHeader } from './profile-header';
     ProfileHeader,
   ],
   template: `
-    <app-profile-header i18n-title title="Followers" />
+    <app-profile-header
+      i18n-title="@@userProfile.followers.followers"
+      title="Followers"
+    />
 
     <div class="flex flex-wrap items-center justify-between gap-3">
-      <h2 i18n class="text-lg font-semibold">
+      <h2
+        i18n="@@userProfile.followers.followers2"
+        class="text-lg font-semibold"
+      >
         Followers
         <span class="text-muted-foreground font-normal">{{
           shown().length
@@ -51,8 +57,8 @@ import { ProfileHeader } from './profile-header';
       </h2>
       <div scInputGroup class="max-w-xs">
         <input
-          i18n-aria-label
-          i18n-placeholder
+          i18n-aria-label="@@userProfile.followers.searchFollowers"
+          i18n-placeholder="@@userProfile.followers.searchFollowers"
           scInput
           type="search"
           placeholder="Search followers"
@@ -92,10 +98,14 @@ import { ProfileHeader } from './profile-header';
               >
                 @if (following().has(person.id)) {
                   <svg siUserCheckIcon></svg>
-                  <ng-container i18n>Following</ng-container>
+                  <ng-container i18n="@@userProfile.followers.following"
+                    >Following</ng-container
+                  >
                 } @else {
                   <svg siUserPlusIcon></svg>
-                  <ng-container i18n>Follow back</ng-container>
+                  <ng-container i18n="@@userProfile.followers.followBack"
+                    >Follow back</ng-container
+                  >
                 }
               </button>
             </div>
@@ -103,7 +113,7 @@ import { ProfileHeader } from './profile-header';
         </li>
       } @empty {
         <li
-          i18n
+          i18n="@@userProfile.followers.noFollowersMatch"
           class="text-muted-foreground col-span-full p-6 text-center text-sm"
         >
           No followers match.

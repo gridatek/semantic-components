@@ -72,18 +72,18 @@ type Filter = 'All' | TicketStatus;
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@tickets.tickets"
       title="Tickets"
       [trail]="[{ label: t.tickets }]"
     >
       <a scLink variant="button" routerLink="/apps/tickets/create">
         <svg siPlusIcon></svg>
-        <ng-container i18n>Create Ticket</ng-container>
+        <ng-container i18n="@@tickets.createTicket">Create Ticket</ng-container>
       </a>
     </app-page-header>
 
     <ul
-      i18n-aria-label
+      i18n-aria-label="@@tickets.filterByStatus"
       class="grid grid-cols-2 gap-4 lg:grid-cols-4"
       aria-label="Filter by status"
     >
@@ -112,8 +112,8 @@ type Filter = 'All' | TicketStatus;
       <div scCardBody class="flex flex-col gap-4">
         <div scInputGroup class="max-w-sm">
           <input
-            i18n-aria-label
-            i18n-placeholder
+            i18n-aria-label="@@tickets.searchTickets"
+            i18n-placeholder="@@tickets.searchTickets"
             scInput
             type="search"
             placeholder="Search tickets"
@@ -127,12 +127,16 @@ type Filter = 'All' | TicketStatus;
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th i18n scTableHeaderCell>Id</th>
-                <th i18n scTableHeaderCell>Ticket</th>
-                <th i18n scTableHeaderCell>Assigned To</th>
-                <th i18n scTableHeaderCell>Status</th>
-                <th i18n scTableHeaderCell>Date</th>
-                <th i18n scTableHeaderCell class="text-end">Action</th>
+                <th i18n="@@tickets.id" scTableHeaderCell>Id</th>
+                <th i18n="@@tickets.ticket" scTableHeaderCell>Ticket</th>
+                <th i18n="@@tickets.assignedTo" scTableHeaderCell>
+                  Assigned To
+                </th>
+                <th i18n="@@tickets.status" scTableHeaderCell>Status</th>
+                <th i18n="@@tickets.date" scTableHeaderCell>Date</th>
+                <th i18n="@@tickets.action" scTableHeaderCell class="text-end">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody scTableBody>
@@ -180,7 +184,7 @@ type Filter = 'All' | TicketStatus;
                       (click)="remove(ticket.id)"
                     >
                       <svg siTrash2Icon></svg>
-                      <span i18n class="sr-only"
+                      <span i18n="@@tickets.deleteTicket" class="sr-only"
                         >Delete ticket {{ ticket.id }}</span
                       >
                     </button>
@@ -189,7 +193,7 @@ type Filter = 'All' | TicketStatus;
               } @empty {
                 <tr scTableRow>
                   <td
-                    i18n
+                    i18n="@@tickets.noTickets"
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -211,7 +215,7 @@ export class TicketsPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    tickets: $localize`Tickets`,
+    tickets: $localize`:@@tickets.tickets:Tickets`,
   };
 
   private readonly store = inject(TicketsStore);
@@ -225,12 +229,12 @@ export class TicketsPage {
     return [
       {
         value: 'All' as Filter,
-        label: $localize`Total Tickets`,
+        label: $localize`:@@tickets.totalTickets:Total Tickets`,
         count: tickets.length,
       },
       ...TICKET_STATUSES.map((status) => ({
         value: status as Filter,
-        label: $localize`${status} Tickets`,
+        label: $localize`:@@tickets.tickets2:${status} Tickets`,
         count: tickets.filter((ticket) => ticket.status === status).length,
       })),
     ];
@@ -255,7 +259,7 @@ export class TicketsPage {
     this.store.remove(id);
     this.toaster.show({
       variant: 'success',
-      title: $localize`Ticket ${id} deleted`,
+      title: $localize`:@@tickets.ticketDeleted:Ticket ${id} deleted`,
     });
   }
 }

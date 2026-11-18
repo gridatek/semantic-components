@@ -73,12 +73,14 @@ import { label } from '../../shared/labels';
             <span class="flex items-center gap-1.5">
               <svg siEyeIcon></svg>
               {{ countOf(post().views)
-              }}<span i18n class="sr-only"> views</span>
+              }}<span i18n="@@blog.card.views" class="sr-only"> views</span>
             </span>
             <span class="flex items-center gap-1.5">
               <svg siMessageCircleIcon></svg>
               {{ post().comments.length
-              }}<span i18n class="sr-only"> comments</span>
+              }}<span i18n="@@blog.card.comments" class="sr-only">
+                comments</span
+              >
             </span>
             <span class="ms-auto">{{ dayOf(post().date) }}</span>
           </div>

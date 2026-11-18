@@ -49,7 +49,7 @@ import {
         scSelectTrigger
         size="sm"
         aria-label="Language"
-        i18n-aria-label
+        i18n-aria-label="@@layout.localeSelect.language"
         class="w-auto gap-2"
       >
         <svg siLanguagesIcon></svg>

@@ -86,12 +86,24 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, CustomerRow>();
 
 const columns = columnHelper.columns([
-  columnHelper.accessor('name', { header: $localize`Customer` }),
-  columnHelper.accessor('location', { header: $localize`Location` }),
-  columnHelper.accessor('orders', { header: $localize`Orders` }),
-  columnHelper.accessor('spent', { header: $localize`Spent` }),
-  columnHelper.accessor('since', { header: $localize`Customer since` }),
-  columnHelper.accessor('status', { header: $localize`Status` }),
+  columnHelper.accessor('name', {
+    header: $localize`:@@customers.customer:Customer`,
+  }),
+  columnHelper.accessor('location', {
+    header: $localize`:@@customers.location:Location`,
+  }),
+  columnHelper.accessor('orders', {
+    header: $localize`:@@customers.orders:Orders`,
+  }),
+  columnHelper.accessor('spent', {
+    header: $localize`:@@customers.spent:Spent`,
+  }),
+  columnHelper.accessor('since', {
+    header: $localize`:@@customers.customerSince:Customer since`,
+  }),
+  columnHelper.accessor('status', {
+    header: $localize`:@@customers.status:Status`,
+  }),
 ]);
 
 /** Customers (Pro): who buys, how often, how much. */
@@ -127,14 +139,14 @@ const columns = columnHelper.columns([
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@customers.customers"
       title="Customers"
       [trail]="[{ label: t.apps }, { label: t.customers }]"
     />
 
     <div class="grid gap-4 sm:grid-cols-3">
       <dl scStatCard>
-        <dt i18n scStatCardLabel>Customers</dt>
+        <dt i18n="@@customers.customers" scStatCardLabel>Customers</dt>
         <dd scStatCardValue [value]="rows.length"></dd>
       </dl>
       <dl scStatCard>
@@ -142,7 +154,7 @@ const columns = columnHelper.columns([
         <dd scStatCardValue [value]="vip"></dd>
       </dl>
       <dl scStatCard>
-        <dt i18n scStatCardLabel>Lifetime spend</dt>
+        <dt i18n="@@customers.lifetimeSpend" scStatCardLabel>Lifetime spend</dt>
         <dd
           scStatCardValue
           [value]="spent"
@@ -154,8 +166,8 @@ const columns = columnHelper.columns([
     <div scCard>
       <div scCardBody class="flex flex-col gap-4">
         <input
-          i18n-aria-label
-          i18n-placeholder
+          i18n-aria-label="@@customers.searchCustomers"
+          i18n-placeholder="@@customers.searchCustomers2"
           scInput
           scDataTableGlobalFilter
           [table]="table"
@@ -246,7 +258,7 @@ const columns = columnHelper.columns([
               } @empty {
                 <tr scTableRow>
                   <td
-                    i18n
+                    i18n="@@customers.noCustomersMatch"
                     scTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
@@ -268,8 +280,8 @@ export class CustomersPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    apps: $localize`Apps`,
-    customers: $localize`Customers`,
+    apps: $localize`:@@customers.apps:Apps`,
+    customers: $localize`:@@customers.customers:Customers`,
   };
 
   private readonly table = injectTable(() => ({

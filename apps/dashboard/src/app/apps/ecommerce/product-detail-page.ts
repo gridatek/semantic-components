@@ -140,17 +140,25 @@ const REVIEWS = [
                 labelOf(product.category)
               }}</span>
               @if (product.stock) {
-                <span i18n scBadge variant="outline"
+                <span
+                  i18n="@@ecommerce.productDetail.inStock"
+                  scBadge
+                  variant="outline"
                   >{{ product.stock }} in stock</span
                 >
               } @else {
-                <span i18n scBadge variant="destructive">Sold out</span>
+                <span
+                  i18n="@@ecommerce.productDetail.soldOut"
+                  scBadge
+                  variant="destructive"
+                  >Sold out</span
+                >
               }
             </div>
             <h2 class="text-2xl font-semibold">{{ product.name }}</h2>
             <span class="text-muted-foreground flex items-center gap-1 text-sm">
               <svg siStarIcon class="size-4 fill-current"></svg>
-              <ng-container i18n
+              <ng-container i18n="@@ecommerce.productDetail.reviews"
                 >{{ product.rating }} ·
                 {{ product.reviews }} reviews</ng-container
               >
@@ -169,7 +177,13 @@ const REVIEWS = [
 
             @if (product.colors.length) {
               <fieldset class="flex flex-col gap-3">
-                <legend i18n scLegend variant="label">Colour</legend>
+                <legend
+                  i18n="@@ecommerce.productDetail.colour"
+                  scLegend
+                  variant="label"
+                >
+                  Colour
+                </legend>
                 <div class="flex gap-2">
                   @for (color of product.colors; track color; let i = $index) {
                     <input
@@ -193,16 +207,26 @@ const REVIEWS = [
               [max]="product.stock || 1"
               class="w-36"
             >
-              <label i18n scLabel>Quantity</label>
+              <label i18n="@@ecommerce.productDetail.quantity" scLabel
+                >Quantity</label
+              >
               <div scNumberFieldGroup>
                 <button scNumberFieldDecrement>
                   <svg siMinusIcon></svg>
-                  <span i18n class="sr-only">Decrease quantity</span>
+                  <span
+                    i18n="@@ecommerce.productDetail.decreaseQuantity"
+                    class="sr-only"
+                    >Decrease quantity</span
+                  >
                 </button>
                 <input scNumberFieldInput />
                 <button scNumberFieldIncrement>
                   <svg siPlusIcon></svg>
-                  <span i18n class="sr-only">Increase quantity</span>
+                  <span
+                    i18n="@@ecommerce.productDetail.increaseQuantity"
+                    class="sr-only"
+                    >Increase quantity</span
+                  >
                 </button>
               </div>
             </div>
@@ -215,10 +239,12 @@ const REVIEWS = [
                 (click)="addToCart()"
               >
                 <svg siShoppingCartIcon></svg>
-                <ng-container i18n>Add to cart</ng-container>
+                <ng-container i18n="@@ecommerce.productDetail.addToCart"
+                  >Add to cart</ng-container
+                >
               </button>
               <button
-                i18n
+                i18n="@@ecommerce.productDetail.buyNow"
                 scButton
                 size="lg"
                 variant="outline"
@@ -232,11 +258,16 @@ const REVIEWS = [
             <ul class="text-muted-foreground flex flex-col gap-2 text-sm">
               <li class="flex items-center gap-2">
                 <svg siTruckIcon></svg>
-                <ng-container i18n>Free delivery over $100</ng-container>
+                <ng-container
+                  i18n="@@ecommerce.productDetail.freeDeliveryOver100"
+                  >Free delivery over $100</ng-container
+                >
               </li>
               <li class="flex items-center gap-2">
                 <svg siShieldCheckIcon></svg>
-                <ng-container i18n>30-day returns</ng-container>
+                <ng-container i18n="@@ecommerce.productDetail.n30DayReturns"
+                  >30-day returns</ng-container
+                >
               </li>
             </ul>
           </div>
@@ -247,8 +278,18 @@ const REVIEWS = [
         <div scCardBody>
           <div scTabs value="description">
             <div scTabsList>
-              <button i18n scTabsTab value="description">Description</button>
-              <button i18n scTabsTab value="reviews">
+              <button
+                i18n="@@ecommerce.productDetail.description"
+                scTabsTab
+                value="description"
+              >
+                Description
+              </button>
+              <button
+                i18n="@@ecommerce.productDetail.reviews2"
+                scTabsTab
+                value="reviews"
+              >
                 Reviews ({{ reviews.length }})
               </button>
             </div>
@@ -256,7 +297,10 @@ const REVIEWS = [
               <ng-template scTabsPanelContent>
                 <div class="flex flex-col gap-3 pt-4 text-sm">
                   <p>{{ product.description }}</p>
-                  <p i18n class="text-muted-foreground">
+                  <p
+                    i18n="@@ecommerce.productDetail.shipsInTwoWorkingDays"
+                    class="text-muted-foreground"
+                  >
                     Ships in two working days from our warehouse. Each order is
                     packed in recycled cardboard.
                   </p>
@@ -286,7 +330,7 @@ const REVIEWS = [
                           class="text-muted-foreground flex items-center gap-1 text-xs"
                         >
                           <svg siStarIcon class="size-3.5 fill-current"></svg>
-                          <ng-container i18n
+                          <ng-container i18n="@@ecommerce.productDetail.of5"
                             >{{ review.rating }} of 5 ·
                             {{ review.date }}</ng-container
                           >
@@ -303,7 +347,12 @@ const REVIEWS = [
       </div>
 
       <section class="flex flex-col gap-3">
-        <h2 i18n class="text-lg font-semibold">You may also like</h2>
+        <h2
+          i18n="@@ecommerce.productDetail.youMayAlsoLike"
+          class="text-lg font-semibold"
+        >
+          You may also like
+        </h2>
         <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           @for (item of related(); track item.id) {
             <li>
@@ -332,8 +381,13 @@ const REVIEWS = [
     } @else {
       <div scEmpty>
         <div scEmptyHeader>
-          <h2 i18n scEmptyTitle>No such product</h2>
-          <div i18n scEmptyDescription>
+          <h2 i18n="@@ecommerce.productDetail.noSuchProduct" scEmptyTitle>
+            No such product
+          </h2>
+          <div
+            i18n="@@ecommerce.productDetail.backToTheShop"
+            scEmptyDescription
+          >
             <a scLink routerLink="/apps/ecommerce/shop">Back to the shop</a>
           </div>
         </div>
@@ -347,10 +401,10 @@ export class ProductDetailPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    product: $localize`Product`,
-    apps: $localize`Apps`,
-    shop: $localize`Shop`,
-    colour: $localize`Colour `,
+    product: $localize`:@@ecommerce.productDetail.product:Product`,
+    apps: $localize`:@@ecommerce.productDetail.apps:Apps`,
+    shop: $localize`:@@ecommerce.productDetail.shop:Shop`,
+    colour: $localize`:@@ecommerce.productDetail.colour:Colour `,
   };
 
   /** The route's `:id`. */
@@ -390,7 +444,7 @@ export class ProductDetailPage {
     this.cart.add(product, this.quantity() ?? 1);
     this.toaster.show({
       variant: 'success',
-      title: $localize`${product.name} added to the cart`,
+      title: $localize`:@@ecommerce.productDetail.addedToTheCart:${product.name} added to the cart`,
     });
   }
 

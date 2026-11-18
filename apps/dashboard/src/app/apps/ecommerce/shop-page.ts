@@ -86,15 +86,15 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@ecommerce.shop.shop"
       title="Shop"
       [trail]="[{ label: t.apps }, { label: t.shop }]"
     >
       <a scLink variant="outline" routerLink="/apps/ecommerce/checkout">
         <svg siShoppingCartIcon></svg>
-        <ng-container i18n>Cart</ng-container>
+        <ng-container i18n="@@ecommerce.shop.cart">Cart</ng-container>
         <span scBadge>{{ cart.count() }}</span>
-        <span i18n class="sr-only">items</span>
+        <span i18n="@@ecommerce.shop.items" class="sr-only">items</span>
       </a>
     </app-page-header>
 
@@ -102,7 +102,9 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
       <div scCard class="self-start">
         <div scCardBody class="flex flex-col gap-5">
           <fieldset class="flex flex-col gap-3">
-            <legend i18n scLegend variant="label">Category</legend>
+            <legend i18n="@@ecommerce.shop.category" scLegend variant="label">
+              Category
+            </legend>
             @for (category of categories; track category) {
               <div scField orientation="horizontal">
                 <input
@@ -120,7 +122,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
           </fieldset>
           <div scSeparator></div>
           <div class="flex flex-col gap-3">
-            <label i18n scLabel for="max-price"
+            <label i18n="@@ecommerce.shop.upTo" scLabel for="max-price"
               >Up to {{ moneyOf(maxPrice()) }}</label
             >
             <input
@@ -141,9 +143,16 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
               [checked]="inStock()"
               (change)="inStock.set(!inStock())"
             />
-            <label i18n scLabel for="in-stock">In stock only</label>
+            <label i18n="@@ecommerce.shop.inStockOnly" scLabel for="in-stock"
+              >In stock only</label
+            >
           </div>
-          <button i18n scButton variant="outline" (click)="reset()">
+          <button
+            i18n="@@ecommerce.shop.resetFilters"
+            scButton
+            variant="outline"
+            (click)="reset()"
+          >
             Reset filters
           </button>
         </div>
@@ -153,8 +162,8 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
         <div class="flex flex-wrap items-center gap-3">
           <div scInputGroup class="max-w-xs">
             <input
-              i18n-aria-label
-              i18n-placeholder
+              i18n-aria-label="@@ecommerce.shop.searchProducts"
+              i18n-placeholder="@@ecommerce.shop.searchProducts"
               scInput
               type="search"
               placeholder="Search products"
@@ -164,25 +173,47 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
             />
             <div scInputGroupAddon><svg siSearchIcon></svg></div>
           </div>
-          <span i18n class="text-muted-foreground text-sm" aria-live="polite">
+          <span
+            i18n="@@ecommerce.shop.products"
+            class="text-muted-foreground text-sm"
+            aria-live="polite"
+          >
             {{ shown().length }} products
           </span>
           <div scNativeSelectContainer class="ms-auto w-48">
             <select
-              i18n-aria-label
+              i18n-aria-label="@@ecommerce.shop.sortBy"
               scNativeSelect
               aria-label="Sort by"
               [value]="sort()"
               (change)="sort.set($any($event.target).value)"
             >
-              <option i18n scNativeSelectOption value="newest">Newest</option>
-              <option i18n scNativeSelectOption value="price-asc">
+              <option
+                i18n="@@ecommerce.shop.newest"
+                scNativeSelectOption
+                value="newest"
+              >
+                Newest
+              </option>
+              <option
+                i18n="@@ecommerce.shop.priceLowToHigh"
+                scNativeSelectOption
+                value="price-asc"
+              >
                 Price: low to high
               </option>
-              <option i18n scNativeSelectOption value="price-desc">
+              <option
+                i18n="@@ecommerce.shop.priceHighToLow"
+                scNativeSelectOption
+                value="price-desc"
+              >
                 Price: high to low
               </option>
-              <option i18n scNativeSelectOption value="rating">
+              <option
+                i18n="@@ecommerce.shop.bestRated"
+                scNativeSelectOption
+                value="rating"
+              >
                 Best rated
               </option>
             </select>
@@ -208,7 +239,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                   <span class="sr-only">{{ product.name }}</span>
                   @if (product.listPrice) {
                     <span
-                      i18n
+                      i18n="@@ecommerce.shop.sale"
                       scBadge
                       variant="destructive"
                       class="absolute start-3 top-3"
@@ -217,7 +248,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                   }
                   @if (!product.stock) {
                     <span
-                      i18n
+                      i18n="@@ecommerce.shop.soldOut"
                       scBadge
                       variant="secondary"
                       class="absolute end-3 top-3"
@@ -239,7 +270,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                     class="text-muted-foreground flex items-center gap-1 text-sm"
                   >
                     <svg siStarIcon class="size-4 fill-current"></svg>
-                    <ng-container i18n
+                    <ng-container i18n="@@ecommerce.shop.reviews"
                       >{{ product.rating }} ·
                       {{ product.reviews }} reviews</ng-container
                     >
@@ -261,7 +292,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                       (click)="addToCart(product)"
                     >
                       <svg siShoppingCartIcon></svg>
-                      <span i18n class="sr-only"
+                      <span i18n="@@ecommerce.shop.addToTheCart" class="sr-only"
                         >Add {{ product.name }} to the cart</span
                       >
                     </button>
@@ -273,8 +304,15 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
             <li class="col-span-full">
               <div scEmpty>
                 <div scEmptyHeader>
-                  <h2 i18n scEmptyTitle>No products match</h2>
-                  <div i18n scEmptyDescription>Try fewer filters.</div>
+                  <h2 i18n="@@ecommerce.shop.noProductsMatch" scEmptyTitle>
+                    No products match
+                  </h2>
+                  <div
+                    i18n="@@ecommerce.shop.tryFewerFilters"
+                    scEmptyDescription
+                  >
+                    Try fewer filters.
+                  </div>
                 </div>
               </div>
             </li>
@@ -290,8 +328,8 @@ export class ShopPage {
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    apps: $localize`Apps`,
-    shop: $localize`Shop`,
+    apps: $localize`:@@ecommerce.shop.apps:Apps`,
+    shop: $localize`:@@ecommerce.shop.shop:Shop`,
   };
 
   private readonly cart = inject(CartStore);
@@ -341,7 +379,7 @@ export class ShopPage {
     this.cart.add(product);
     this.toaster.show({
       variant: 'success',
-      title: $localize`${product.name} added to the cart`,
+      title: $localize`:@@ecommerce.shop.addedToTheCart:${product.name} added to the cart`,
     });
   }
 }

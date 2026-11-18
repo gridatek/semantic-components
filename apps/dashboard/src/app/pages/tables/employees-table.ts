@@ -72,11 +72,21 @@ const features = tableFeatures({
 const columnHelper = createColumnHelper<typeof features, Employee>();
 
 const columns = columnHelper.columns([
-  columnHelper.accessor('name', { header: $localize`Name` }),
-  columnHelper.accessor('position', { header: $localize`Position` }),
-  columnHelper.accessor('department', { header: $localize`Department` }),
-  columnHelper.accessor('salary', { header: $localize`Salary` }),
-  columnHelper.accessor('status', { header: $localize`Status` }),
+  columnHelper.accessor('name', {
+    header: $localize`:@@tables.employeesTable.name:Name`,
+  }),
+  columnHelper.accessor('position', {
+    header: $localize`:@@tables.employeesTable.position:Position`,
+  }),
+  columnHelper.accessor('department', {
+    header: $localize`:@@tables.employeesTable.department:Department`,
+  }),
+  columnHelper.accessor('salary', {
+    header: $localize`:@@tables.employeesTable.salary:Salary`,
+  }),
+  columnHelper.accessor('status', {
+    header: $localize`:@@tables.employeesTable.status:Status`,
+  }),
 ]);
 
 /** The data table: search, sorting and pages over the employees. */
@@ -123,12 +133,18 @@ const columns = columnHelper.columns([
   template: `
     <div scCard>
       <div scCardHeader>
-        <h2 i18n scCardTitle id="employees-title">Data Table</h2>
+        <h2
+          i18n="@@tables.employeesTable.dataTable"
+          scCardTitle
+          id="employees-title"
+        >
+          Data Table
+        </h2>
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <input
-          i18n-aria-label
-          i18n-placeholder
+          i18n-aria-label="@@tables.employeesTable.searchEmployees"
+          i18n-placeholder="@@tables.employeesTable.searchEmployees2"
           scInput
           scDataTableGlobalFilter
           [table]="table"
@@ -211,7 +227,7 @@ const columns = columnHelper.columns([
               } @empty {
                 <tr scTableRow>
                   <td
-                    i18n
+                    i18n="@@tables.employeesTable.noEmployeesMatch"
                     scTableCell
                     colspan="5"
                     class="text-muted-foreground h-24 text-center"
@@ -224,7 +240,7 @@ const columns = columnHelper.columns([
           </table>
         </div>
         <nav
-          i18n-aria-label
+          i18n-aria-label="@@tables.employeesTable.employeePages"
           scPagination
           scDataTablePagination
           #pagination="scPagination"
@@ -232,32 +248,52 @@ const columns = columnHelper.columns([
           aria-label="Employee pages"
           class="mx-0 w-auto flex-wrap items-center justify-end gap-4"
         >
-          <span i18n class="text-sm font-medium" aria-live="polite">
+          <span
+            i18n="@@tables.employeesTable.pageOf"
+            class="text-sm font-medium"
+            aria-live="polite"
+          >
             Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
               <button scPaginationFirst variant="outline" size="icon-sm">
                 <svg siChevronsLeftIcon class="rtl:-scale-x-100"></svg>
-                <span i18n class="sr-only">Go to first page</span>
+                <span
+                  i18n="@@tables.employeesTable.goToFirstPage"
+                  class="sr-only"
+                  >Go to first page</span
+                >
               </button>
             </li>
             <li scPaginationItem>
               <button scPaginationPrevious variant="outline" size="icon-sm">
                 <svg siChevronLeftIcon class="rtl:-scale-x-100"></svg>
-                <span i18n class="sr-only">Go to previous page</span>
+                <span
+                  i18n="@@tables.employeesTable.goToPreviousPage"
+                  class="sr-only"
+                  >Go to previous page</span
+                >
               </button>
             </li>
             <li scPaginationItem>
               <button scPaginationNext variant="outline" size="icon-sm">
                 <svg siChevronRightIcon class="rtl:-scale-x-100"></svg>
-                <span i18n class="sr-only">Go to next page</span>
+                <span
+                  i18n="@@tables.employeesTable.goToNextPage"
+                  class="sr-only"
+                  >Go to next page</span
+                >
               </button>
             </li>
             <li scPaginationItem>
               <button scPaginationLast variant="outline" size="icon-sm">
                 <svg siChevronsRightIcon class="rtl:-scale-x-100"></svg>
-                <span i18n class="sr-only">Go to last page</span>
+                <span
+                  i18n="@@tables.employeesTable.goToLastPage"
+                  class="sr-only"
+                  >Go to last page</span
+                >
               </button>
             </li>
           </ul>

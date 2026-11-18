@@ -23,38 +23,38 @@ import { PageHeader } from '../../layout/page-header';
 
 const PLANS = [
   {
-    name: $localize`Starter`,
+    name: $localize`:@@pricing.starter:Starter`,
     monthly: 19,
-    text: $localize`For one person and a first dashboard.`,
+    text: $localize`:@@pricing.forOnePersonAndA:For one person and a first dashboard.`,
     features: [
-      $localize`1 user`,
-      $localize`All dashboards`,
-      $localize`Charts and tables`,
-      $localize`Email support`,
+      $localize`:@@pricing.n1User:1 user`,
+      $localize`:@@pricing.allDashboards:All dashboards`,
+      $localize`:@@pricing.chartsAndTables:Charts and tables`,
+      $localize`:@@pricing.emailSupport:Email support`,
     ],
     popular: false,
   },
   {
-    name: $localize`Pro`,
+    name: $localize`:@@pricing.pro:Pro`,
     monthly: 49,
-    text: $localize`For a growing product and its apps.`,
+    text: $localize`:@@pricing.forAGrowingProductAnd:For a growing product and its apps.`,
     features: [
-      $localize`5 users`,
-      $localize`Everything in Starter`,
-      $localize`All apps`,
-      $localize`Priority support`,
+      $localize`:@@pricing.n5Users:5 users`,
+      $localize`:@@pricing.everythingInStarter:Everything in Starter`,
+      $localize`:@@pricing.allApps:All apps`,
+      $localize`:@@pricing.prioritySupport:Priority support`,
     ],
     popular: true,
   },
   {
-    name: $localize`Team`,
+    name: $localize`:@@pricing.team:Team`,
     monthly: 99,
-    text: $localize`For teams that need roles and records.`,
+    text: $localize`:@@pricing.forTeamsThatNeedRoles:For teams that need roles and records.`,
     features: [
-      $localize`Unlimited users`,
-      $localize`Everything in Pro`,
-      $localize`Roles & permissions`,
-      $localize`Audit log`,
+      $localize`:@@pricing.unlimitedUsers:Unlimited users`,
+      $localize`:@@pricing.everythingInPro:Everything in Pro`,
+      $localize`:@@pricing.rolesPermissions:Roles & permissions`,
+      $localize`:@@pricing.auditLog:Audit log`,
     ],
     popular: false,
   },
@@ -64,17 +64,33 @@ const COMPARE: readonly {
   feature: string;
   plans: readonly (boolean | string)[];
 }[] = [
-  { feature: $localize`Users`, plans: ['1', '5', $localize`Unlimited`] },
-  { feature: $localize`Dashboards`, plans: [true, true, true] },
   {
-    feature: $localize`Apps (mail, chat, calendar…)`,
+    feature: $localize`:@@pricing.users:Users`,
+    plans: ['1', '5', $localize`:@@pricing.unlimited:Unlimited`],
+  },
+  {
+    feature: $localize`:@@pricing.dashboards:Dashboards`,
+    plans: [true, true, true],
+  },
+  {
+    feature: $localize`:@@pricing.appsMailChatCalendar:Apps (mail, chat, calendar…)`,
     plans: [false, true, true],
   },
-  { feature: $localize`Roles & permissions`, plans: [false, false, true] },
-  { feature: $localize`Audit log`, plans: [false, false, true] },
   {
-    feature: $localize`Support`,
-    plans: [$localize`Email`, $localize`Priority`, $localize`Dedicated`],
+    feature: $localize`:@@pricing.rolesPermissions:Roles & permissions`,
+    plans: [false, false, true],
+  },
+  {
+    feature: $localize`:@@pricing.auditLog:Audit log`,
+    plans: [false, false, true],
+  },
+  {
+    feature: $localize`:@@pricing.support:Support`,
+    plans: [
+      $localize`:@@pricing.email:Email`,
+      $localize`:@@pricing.priority:Priority`,
+      $localize`:@@pricing.dedicated:Dedicated`,
+    ],
   },
 ];
 
@@ -104,22 +120,27 @@ const COMPARE: readonly {
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@pricing.pricing"
       title="Pricing"
       [trail]="[{ label: t.pages }, { label: t.pricing }]"
     />
 
     <div class="flex flex-col items-center gap-3 py-4 text-center">
-      <h2 i18n class="text-3xl font-semibold tracking-tight">
+      <h2
+        i18n="@@pricing.plansForEverySize"
+        class="text-3xl font-semibold tracking-tight"
+      >
         Plans for every size
       </h2>
-      <p i18n class="text-muted-foreground">
+      <p i18n="@@pricing.startFreeFor14Days" class="text-muted-foreground">
         Start free for 14 days. No card needed.
       </p>
       <div class="flex items-center gap-3">
-        <span i18n class="text-sm font-medium">Monthly</span>
+        <span i18n="@@pricing.monthly" class="text-sm font-medium"
+          >Monthly</span
+        >
         <input
-          i18n-aria-label
+          i18n-aria-label="@@pricing.payYearly"
           scSwitch
           id="yearly"
           type="checkbox"
@@ -127,8 +148,10 @@ const COMPARE: readonly {
           (change)="yearly.set(!yearly())"
           aria-label="Pay yearly"
         />
-        <span i18n class="text-sm font-medium">Yearly</span>
-        <span i18n scBadge variant="secondary">2 months free</span>
+        <span i18n="@@pricing.yearly" class="text-sm font-medium">Yearly</span>
+        <span i18n="@@pricing.n2MonthsFree" scBadge variant="secondary"
+          >2 months free</span
+        >
       </div>
     </div>
 
@@ -143,7 +166,7 @@ const COMPARE: readonly {
             <h3 scCardTitle class="flex items-center gap-2">
               {{ plan.name }}
               @if (plan.popular) {
-                <span i18n scBadge>Most popular</span>
+                <span i18n="@@pricing.mostPopular" scBadge>Most popular</span>
               }
             </h3>
             <p scCardDescription>{{ plan.text }}</p>
@@ -167,7 +190,7 @@ const COMPARE: readonly {
           </div>
           <div scCardFooter>
             <button
-              i18n
+              i18n="@@pricing.choose"
               scButton
               class="w-full"
               [variant]="plan.popular ? 'default' : 'outline'"
@@ -182,14 +205,14 @@ const COMPARE: readonly {
 
     <div scCard class="mx-auto w-full max-w-5xl">
       <div scCardHeader>
-        <h2 i18n scCardTitle>Compare plans</h2>
+        <h2 i18n="@@pricing.comparePlans" scCardTitle>Compare plans</h2>
       </div>
       <div scCardBody>
         <div scTableContainer>
           <table scTable>
             <thead scTableHeader>
               <tr scTableRow>
-                <th i18n scTableHeaderCell>Feature</th>
+                <th i18n="@@pricing.feature" scTableHeaderCell>Feature</th>
                 @for (plan of plans; track plan.name) {
                   <th scTableHeaderCell class="text-center">{{ plan.name }}</th>
                 }
@@ -205,13 +228,17 @@ const COMPARE: readonly {
                     <td scTableCell class="text-center">
                       @if (value === true) {
                         <svg siCheckIcon class="mx-auto size-4"></svg
-                        ><span i18n class="sr-only">Included</span>
+                        ><span i18n="@@pricing.included" class="sr-only"
+                          >Included</span
+                        >
                       } @else if (value === false) {
                         <svg
                           siMinusIcon
                           class="text-muted-foreground mx-auto size-4"
                         ></svg
-                        ><span i18n class="sr-only">Not included</span>
+                        ><span i18n="@@pricing.notIncluded" class="sr-only"
+                          >Not included</span
+                        >
                       } @else {
                         {{ value }}
                       }
@@ -231,10 +258,10 @@ const COMPARE: readonly {
 export class PricingPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    perYear: $localize`/ year`,
-    perMonth: $localize`/ month`,
-    pages: $localize`Pages`,
-    pricing: $localize`Pricing`,
+    perYear: $localize`:@@pricing.year:/ year`,
+    perMonth: $localize`:@@pricing.month:/ month`,
+    pages: $localize`:@@pricing.pages:Pages`,
+    pricing: $localize`:@@pricing.pricing:Pricing`,
   };
 
   private readonly toaster = inject(ScToaster);
@@ -250,10 +277,10 @@ export class PricingPage {
   private choose(plan: string): void {
     this.toaster.show({
       variant: 'success',
-      title: $localize`${plan} plan chosen`,
+      title: $localize`:@@pricing.planChosen:${plan} plan chosen`,
       description: this.yearly()
-        ? $localize`Billed yearly after the trial.`
-        : $localize`Billed monthly after the trial.`,
+        ? $localize`:@@pricing.billedYearlyAfterTheTrial:Billed yearly after the trial.`
+        : $localize`:@@pricing.billedMonthlyAfterTheTrial:Billed monthly after the trial.`,
     });
   }
 }

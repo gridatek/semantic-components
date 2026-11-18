@@ -98,7 +98,9 @@ import { label } from '../../shared/labels';
       <div scCardHeader>
         <h2 scCardTitle id="sales-title" class="flex items-center gap-2">
           <svg siTrendingUpIcon></svg>
-          <ng-container i18n>Sales Overview</ng-container>
+          <ng-container i18n="@@dashboard.salesOverview.salesOverview"
+            >Sales Overview</ng-container
+          >
         </h2>
         <div scCardAction>
           <div
@@ -108,7 +110,7 @@ import { label } from '../../shared/labels';
             [items]="periods"
           >
             <div
-              i18n-aria-label
+              i18n-aria-label="@@dashboard.salesOverview.period"
               scSelectTrigger
               size="sm"
               aria-label="Period"
@@ -138,8 +140,15 @@ import { label } from '../../shared/labels';
       </div>
       <div scCardBody class="flex flex-col gap-4">
         <div class="flex flex-col gap-1">
-          <span i18n class="text-muted-foreground text-sm">Total Sales</span>
-          <div i18n class="flex flex-wrap items-baseline gap-2">
+          <span
+            i18n="@@dashboard.salesOverview.totalSales"
+            class="text-muted-foreground text-sm"
+            >Total Sales</span
+          >
+          <div
+            i18n="@@dashboard.salesOverview.n124500022Vs"
+            class="flex flex-wrap items-baseline gap-2"
+          >
             <span class="text-2xl font-semibold tabular-nums">$12,450.00</span>
             <span scBadge variant="secondary">+22%</span>
             <span class="text-muted-foreground text-sm">vs last month</span>
@@ -167,7 +176,11 @@ import { label } from '../../shared/labels';
               <div scChartTooltip #tooltip="scChartTooltip">
                 <div scChartTooltipLabel>{{ tooltip.label() }}</div>
                 @for (item of tooltip.payload(); track item.dataKey) {
-                  <div i18n scChartTooltipItem [item]="item">
+                  <div
+                    i18n="@@dashboard.salesOverview.k"
+                    scChartTooltipItem
+                    [item]="item"
+                  >
                     <span scChartTooltipIndicator></span>
                     <span scChartTooltipName>{{ item.name }}</span>
                     <span scChartTooltipValue>{{ item.value | number }}k</span>
@@ -194,7 +207,7 @@ import { label } from '../../shared/labels';
 export class SalesOverview {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    newAndExistingUsers: $localize`New and existing users, `,
+    newAndExistingUsers: $localize`:@@dashboard.salesOverview.newAndExistingUsers:New and existing users, `,
   };
 
   private readonly periods = SALES_PERIODS.map((value) => ({
@@ -209,8 +222,14 @@ export class SalesOverview {
     })),
   );
   private readonly config: ScChartConfig = {
-    newUser: { label: $localize`New User`, color: 'var(--chart-1)' },
-    existingUser: { label: $localize`Existing User`, color: 'var(--chart-2)' },
+    newUser: {
+      label: $localize`:@@dashboard.salesOverview.newUser:New User`,
+      color: 'var(--chart-1)',
+    },
+    existingUser: {
+      label: $localize`:@@dashboard.salesOverview.existingUser:Existing User`,
+      color: 'var(--chart-2)',
+    },
   };
 
   /** Half the dates on the axis when there are many. */

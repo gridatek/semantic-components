@@ -117,7 +117,7 @@ import { CartStore } from './shop-store';
   ],
   template: `
     <app-page-header
-      i18n-title
+      i18n-title="@@ecommerce.checkout.checkout"
       title="Checkout"
       [trail]="[{ label: t.apps }, { label: t.checkout }]"
     />
@@ -130,14 +130,20 @@ import { CartStore } from './shop-store';
               <div scEmptyMedia variant="icon">
                 <svg siCircleCheckIcon></svg>
               </div>
-              <h2 i18n scEmptyTitle>
+              <h2
+                i18n="@@ecommerce.checkout.thankYouOrderIsPlaced"
+                scEmptyTitle
+              >
                 Thank you — order {{ placed() }} is placed
               </h2>
-              <div i18n scEmptyDescription>
+              <div
+                i18n="@@ecommerce.checkout.aConfirmationIsOnIts"
+                scEmptyDescription
+              >
                 A confirmation is on its way to {{ model().delivery.email }}.
               </div>
             </div>
-            <div i18n scEmptyBody>
+            <div i18n="@@ecommerce.checkout.keepShopping" scEmptyBody>
               <a scLink variant="button" routerLink="/apps/ecommerce/shop"
                 >Keep shopping</a
               >
@@ -153,12 +159,17 @@ import { CartStore } from './shop-store';
               <div scEmptyMedia variant="icon">
                 <svg siShoppingCartIcon></svg>
               </div>
-              <h2 i18n scEmptyTitle>Your cart is empty</h2>
-              <div i18n scEmptyDescription>
+              <h2 i18n="@@ecommerce.checkout.yourCartIsEmpty" scEmptyTitle>
+                Your cart is empty
+              </h2>
+              <div
+                i18n="@@ecommerce.checkout.addSomethingFromTheShop"
+                scEmptyDescription
+              >
                 Add something from the shop first.
               </div>
             </div>
-            <div i18n scEmptyBody>
+            <div i18n="@@ecommerce.checkout.goToTheShop" scEmptyBody>
               <a scLink variant="button" routerLink="/apps/ecommerce/shop"
                 >Go to the shop</a
               >
@@ -188,7 +199,9 @@ import { CartStore } from './shop-store';
                           1
                         }
                       </span>
-                      <span i18n scStepperTitle>Cart</span>
+                      <span i18n="@@ecommerce.checkout.cart" scStepperTitle
+                        >Cart</span
+                      >
                     </button>
                   </div>
                   <div scStepperSeparator [step]="0"></div>
@@ -205,7 +218,9 @@ import { CartStore } from './shop-store';
                           2
                         }
                       </span>
-                      <span i18n scStepperTitle>Delivery</span>
+                      <span i18n="@@ecommerce.checkout.delivery" scStepperTitle
+                        >Delivery</span
+                      >
                     </button>
                   </div>
                   <div scStepperSeparator [step]="1"></div>
@@ -222,7 +237,9 @@ import { CartStore } from './shop-store';
                           3
                         }
                       </span>
-                      <span i18n scStepperTitle>Payment</span>
+                      <span i18n="@@ecommerce.checkout.payment" scStepperTitle
+                        >Payment</span
+                      >
                     </button>
                   </div>
                 </div>
@@ -238,7 +255,10 @@ import { CartStore } from './shop-store';
                           alt=""
                           class="rounded-md"
                         />
-                        <div i18n class="flex min-w-40 flex-1 flex-col">
+                        <div
+                          i18n="@@ecommerce.checkout.each"
+                          class="flex min-w-40 flex-1 flex-col"
+                        >
                           <span class="font-medium">{{
                             line.product.name
                           }}</span>
@@ -256,18 +276,29 @@ import { CartStore } from './shop-store';
                           [max]="Math.max(line.product.stock, 1)"
                           class="w-32"
                         >
-                          <label i18n scLabel class="sr-only"
+                          <label
+                            i18n="@@ecommerce.checkout.quantityOf"
+                            scLabel
+                            class="sr-only"
                             >Quantity of {{ line.product.name }}</label
                           >
                           <div scNumberFieldGroup>
                             <button scNumberFieldDecrement>
                               <svg siMinusIcon></svg>
-                              <span i18n class="sr-only">Decrease</span>
+                              <span
+                                i18n="@@ecommerce.checkout.decrease"
+                                class="sr-only"
+                                >Decrease</span
+                              >
                             </button>
                             <input scNumberFieldInput />
                             <button scNumberFieldIncrement>
                               <svg siPlusIcon></svg>
-                              <span i18n class="sr-only">Increase</span>
+                              <span
+                                i18n="@@ecommerce.checkout.increase"
+                                class="sr-only"
+                                >Increase</span
+                              >
                             </button>
                           </div>
                         </div>
@@ -282,7 +313,9 @@ import { CartStore } from './shop-store';
                           (click)="cart.setQuantity(line.product.id, 0)"
                         >
                           <svg siTrash2Icon></svg>
-                          <span i18n class="sr-only"
+                          <span
+                            i18n="@@ecommerce.checkout.remove"
+                            class="sr-only"
                             >Remove {{ line.product.name }}</span
                           >
                         </button>
@@ -294,7 +327,9 @@ import { CartStore } from './shop-store';
                 <div scStepperPanel [step]="1">
                   <div scFieldGroup class="grid gap-4 md:grid-cols-2">
                     <div scField>
-                      <label i18n scLabel>Full name</label>
+                      <label i18n="@@ecommerce.checkout.fullName" scLabel
+                        >Full name</label
+                      >
                       <input
                         scInput
                         autocomplete="name"
@@ -303,7 +338,9 @@ import { CartStore } from './shop-store';
                       <div scFieldErrors></div>
                     </div>
                     <div scField>
-                      <label i18n scLabel>Email</label>
+                      <label i18n="@@ecommerce.checkout.email" scLabel
+                        >Email</label
+                      >
                       <input
                         scInput
                         type="email"
@@ -313,7 +350,9 @@ import { CartStore } from './shop-store';
                       <div scFieldErrors></div>
                     </div>
                     <div scField class="md:col-span-2">
-                      <label i18n scLabel>Address</label>
+                      <label i18n="@@ecommerce.checkout.address" scLabel
+                        >Address</label
+                      >
                       <input
                         scInput
                         autocomplete="street-address"
@@ -322,7 +361,9 @@ import { CartStore } from './shop-store';
                       <div scFieldErrors></div>
                     </div>
                     <div scField>
-                      <label i18n scLabel>City</label>
+                      <label i18n="@@ecommerce.checkout.city" scLabel
+                        >City</label
+                      >
                       <input
                         scInput
                         autocomplete="address-level2"
@@ -331,7 +372,9 @@ import { CartStore } from './shop-store';
                       <div scFieldErrors></div>
                     </div>
                     <div scField>
-                      <label i18n scLabel>Postal code</label>
+                      <label i18n="@@ecommerce.checkout.postalCode" scLabel
+                        >Postal code</label
+                      >
                       <input
                         scInput
                         autocomplete="postal-code"
@@ -345,7 +388,13 @@ import { CartStore } from './shop-store';
                 <div scStepperPanel [step]="2">
                   <div scFieldGroup>
                     <fieldset class="flex flex-col gap-3">
-                      <legend i18n scLegend variant="label">Pay with</legend>
+                      <legend
+                        i18n="@@ecommerce.checkout.payWith"
+                        scLegend
+                        variant="label"
+                      >
+                        Pay with
+                      </legend>
                       <div
                         scRadioGroup
                         [formField]="checkoutForm.payment.method"
@@ -356,7 +405,9 @@ import { CartStore } from './shop-store';
                           class="has-checked:border-primary rounded-lg border p-4"
                         >
                           <input scRadio type="radio" value="card" />
-                          <ng-container i18n>Card</ng-container>
+                          <ng-container i18n="@@ecommerce.checkout.card"
+                            >Card</ng-container
+                          >
                           <img
                             ngSrc="images/brands/mastercard.svg"
                             width="36"
@@ -370,7 +421,9 @@ import { CartStore } from './shop-store';
                           class="has-checked:border-primary rounded-lg border p-4"
                         >
                           <input scRadio type="radio" value="paypal" />
-                          <ng-container i18n>PayPal</ng-container>
+                          <ng-container i18n="@@ecommerce.checkout.paypal"
+                            >PayPal</ng-container
+                          >
                           <img
                             ngSrc="images/brands/paypal.svg"
                             width="36"
@@ -384,7 +437,9 @@ import { CartStore } from './shop-store';
                     @if (model().payment.method === 'card') {
                       <div class="grid gap-4 md:grid-cols-3">
                         <div scField class="md:col-span-3">
-                          <label i18n scLabel>Card number</label>
+                          <label i18n="@@ecommerce.checkout.cardNumber" scLabel
+                            >Card number</label
+                          >
                           <input
                             scInput
                             inputmode="numeric"
@@ -394,7 +449,9 @@ import { CartStore } from './shop-store';
                           <div scFieldErrors></div>
                         </div>
                         <div scField>
-                          <label i18n scLabel>Expiry (MM/YY)</label>
+                          <label i18n="@@ecommerce.checkout.expiryMmYy" scLabel
+                            >Expiry (MM/YY)</label
+                          >
                           <input
                             scInput
                             autocomplete="cc-exp"
@@ -414,7 +471,10 @@ import { CartStore } from './shop-store';
                         </div>
                       </div>
                     } @else {
-                      <p i18n class="text-muted-foreground text-sm">
+                      <p
+                        i18n="@@ecommerce.checkout.youWillFinishPayingOn"
+                        class="text-muted-foreground text-sm"
+                      >
                         You will finish paying on PayPal after placing the
                         order.
                       </p>
@@ -423,11 +483,29 @@ import { CartStore } from './shop-store';
                 </div>
 
                 <div class="flex justify-between gap-2">
-                  <button i18n scStepperPrevious type="button">Back</button>
+                  <button
+                    i18n="@@ecommerce.checkout.back"
+                    scStepperPrevious
+                    type="button"
+                  >
+                    Back
+                  </button>
                   @if (stepper.isLastStep()) {
-                    <button i18n scButton type="submit">Place order</button>
+                    <button
+                      i18n="@@ecommerce.checkout.placeOrder"
+                      scButton
+                      type="submit"
+                    >
+                      Place order
+                    </button>
                   } @else {
-                    <button i18n scStepperNext type="button">Continue</button>
+                    <button
+                      i18n="@@ecommerce.checkout.continue"
+                      scStepperNext
+                      type="button"
+                    >
+                      Continue
+                    </button>
                   }
                 </div>
               </div>
@@ -437,7 +515,9 @@ import { CartStore } from './shop-store';
 
         <div scCard class="self-start">
           <div scCardHeader>
-            <h2 i18n scCardTitle>Order summary</h2>
+            <h2 i18n="@@ecommerce.checkout.orderSummary" scCardTitle>
+              Order summary
+            </h2>
           </div>
           <div scCardBody class="flex flex-col gap-3 text-sm">
             @for (line of cart.lines(); track line.product.id) {
@@ -449,18 +529,28 @@ import { CartStore } from './shop-store';
               </div>
             }
             <div scSeparator></div>
-            <div i18n class="flex justify-between">
+            <div
+              i18n="@@ecommerce.checkout.subtotal"
+              class="flex justify-between"
+            >
               <span class="text-muted-foreground">Subtotal</span>
               <span class="tabular-nums">{{ moneyOf(cart.subtotal()) }}</span>
             </div>
-            <div i18n class="flex justify-between">
+            <div
+              i18n="@@ecommerce.checkout.shipping"
+              class="flex justify-between"
+            >
               <span class="text-muted-foreground">Shipping</span>
               <span class="tabular-nums">{{
                 cart.shipping() ? moneyOf(cart.shipping()) : t.free
               }}</span>
             </div>
           </div>
-          <div i18n scCardFooter class="justify-between font-semibold">
+          <div
+            i18n="@@ecommerce.checkout.total"
+            scCardFooter
+            class="justify-between font-semibold"
+          >
             <span>Total</span>
             <span class="tabular-nums">{{ moneyOf(cart.total()) }}</span>
           </div>
@@ -474,9 +564,9 @@ import { CartStore } from './shop-store';
 export class CheckoutPage {
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
-    apps: $localize`Apps`,
-    checkout: $localize`Checkout`,
-    free: $localize`Free`,
+    apps: $localize`:@@ecommerce.checkout.apps:Apps`,
+    checkout: $localize`:@@ecommerce.checkout.checkout:Checkout`,
+    free: $localize`:@@ecommerce.checkout.free:Free`,
   };
 
   private readonly cart = inject(CartStore);
@@ -524,7 +614,7 @@ export class CheckoutPage {
     this.placed.set(id);
     this.toaster.show({
       variant: 'success',
-      title: $localize`Order ${id} placed`,
+      title: $localize`:@@ecommerce.checkout.orderPlaced:Order ${id} placed`,
     });
   }
 }
