@@ -74,7 +74,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
     <header scNavbar #navbar="scNavbar" class="border-b-0">
       <!-- Brand -->
       <a scNavbarBrand routerLink="/">
-        <svg app-logo class="size-6"></svg>
+        <svg app-logo></svg>
         <span class="sr-only">Semantic Components</span>
       </a>
 
