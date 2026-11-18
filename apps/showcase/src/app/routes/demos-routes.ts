@@ -7062,6 +7062,7 @@ export const demosRoutes: Route[] = [
     children: [
       {
         path: 'toc-usage-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/toc/demos/toc-usage-demo').then(
             (m) => m.TocUsageDemo,
