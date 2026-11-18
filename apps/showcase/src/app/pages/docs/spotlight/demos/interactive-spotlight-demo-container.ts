@@ -74,6 +74,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class InteractiveSpotlightDemo {
-  readonly typed = signal('');
+  private readonly typed = signal('');
 }`;
 }

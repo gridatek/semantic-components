@@ -117,9 +117,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormFileUploadDemo {
-  readonly model = signal({ documents: [] as File[] });
-  readonly sent = signal('');
-  readonly applicationForm = form(
+  private readonly model = signal({ documents: [] as File[] });
+  private readonly sent = signal('');
+  private readonly applicationForm = form(
     this.model,
     (s) => {
       minLength(s.documents, 1, { message: 'Add at least one document.' });

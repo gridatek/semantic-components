@@ -79,17 +79,17 @@ interface Task {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicKanbanBoardDemo {
-  readonly columns = [
+  private readonly columns = [
     { id: 'todo', title: 'To do' },
     { id: 'doing', title: 'In progress' },
     { id: 'done', title: 'Done' },
   ];
-  readonly titles: Record<string, string> = {
+  private readonly titles: Record<string, string> = {
     todo: 'To do',
     doing: 'In progress',
     done: 'Done',
   };
-  readonly board = signal<ScKanbanBoardValue<Task>>({
+  private readonly board = signal<ScKanbanBoardValue<Task>>({
     todo: [
       { id: 't1', title: 'Write the release notes' },
       { id: 't2', title: 'Plan the next sprint' },
@@ -102,7 +102,7 @@ export class BasicKanbanBoardDemo {
     done: [{ id: 't6', title: 'Set up the CI' }],
   });
   /** What a keyboard move says, step by step. */
-  readonly announce = ({
+  private readonly announce = ({
     type,
     item,
     column,

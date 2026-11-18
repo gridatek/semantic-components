@@ -71,6 +71,6 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class LimitTagsInputDemo {
-  readonly topics = signal(['Design', 'Research', 'Testing']);
+  private readonly topics = signal(['Design', 'Research', 'Testing']);
 }`;
 }

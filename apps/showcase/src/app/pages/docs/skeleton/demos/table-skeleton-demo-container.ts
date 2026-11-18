@@ -40,6 +40,6 @@ import { ScSkeleton } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class TableSkeletonDemo {
-  protected readonly rows = [1, 2, 3, 4, 5];
+  private readonly rows = [1, 2, 3, 4, 5];
 }`;
 }

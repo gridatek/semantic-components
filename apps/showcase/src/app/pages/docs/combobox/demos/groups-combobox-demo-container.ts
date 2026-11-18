@@ -104,7 +104,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupsComboboxDemo {
-  protected readonly timezones = [
+  private readonly timezones = [
     {
       region: 'Americas',
       zones: [
@@ -138,7 +138,7 @@ export class GroupsComboboxDemo {
   ];
 
   /** The groups that still have a zone matching, with those zones. */
-  protected matching(query: string): { region: string; zones: string[] }[] {
+  private matching(query: string): { region: string; zones: string[] }[] {
     return this.timezones
       .map((group) => ({
         region: group.region,

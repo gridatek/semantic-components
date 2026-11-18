@@ -107,8 +107,8 @@ import {
 export class ReasoningLine {
   readonly text = input('');
   readonly running = input(false);
-  protected readonly choice = signal<boolean | null>(null);
-  protected readonly open = computed(() => this.choice() ?? this.running());
+  private readonly choice = signal<boolean | null>(null);
+  private readonly open = computed(() => this.choice() ?? this.running());
 }
 
 interface ReasoningPart {
@@ -153,17 +153,17 @@ export class PartsReasoningDemo {
   ];
 
   /** The message's reasoning parts, as they arrive. */
-  protected readonly parts = signal<ReasoningPart[]>(
+  private readonly parts = signal<ReasoningPart[]>(
     this.texts.map((text) => ({ text, state: 'done' })),
   );
-  protected readonly busy = signal(false);
+  private readonly busy = signal(false);
   private timers: ReturnType<typeof setTimeout>[] = [];
 
   constructor() {
     inject(DestroyRef).onDestroy(() => this.stop());
   }
 
-  replay(): void {
+  private replay(): void {
     this.stop();
     this.parts.set([]);
     this.busy.set(true);

@@ -38,7 +38,7 @@ import { ScJsonViewer } from '@semantic-components/ui';
 })
 export class LargeJsonViewerDemo {
   /** 1,000 items: split into ranges of 100, drawn when opened. */
-  readonly readings = Array.from({ length: 1000 }, (_, index) => ({
+  private readonly readings = Array.from({ length: 1000 }, (_, index) => ({
     index,
     value: Math.round(Math.sin(index / 10) * 1000) / 1000,
   }));

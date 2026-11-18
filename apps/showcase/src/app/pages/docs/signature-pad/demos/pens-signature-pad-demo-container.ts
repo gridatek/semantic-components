@@ -75,12 +75,12 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PensSignaturePadDemo {
-  readonly colors = [
+  private readonly colors = [
     { color: 'currentColor', name: 'Ink' },
     { color: '#1d4ed8', name: 'Blue' },
     { color: '#b91c1c', name: 'Red' },
   ];
-  readonly widths = [
+  private readonly widths = [
     { width: 2, name: 'Thin' },
     { width: 3, name: 'Medium' },
     { width: 6, name: 'Thick' },

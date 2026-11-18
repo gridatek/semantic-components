@@ -114,11 +114,11 @@ import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class OnceBarcodeScannerDemo {
-  readonly scanning = signal(false);
-  readonly model = signal({ code: '' });
-  readonly productForm = form(this.model);
+  private readonly scanning = signal(false);
+  private readonly model = signal({ code: '' });
+  private readonly productForm = form(this.model);
 
-  fill(code: ScBarcode): void {
+  private fill(code: ScBarcode): void {
     this.model.set({ code: code.rawValue });
     this.scanning.set(false);
   }

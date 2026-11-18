@@ -68,9 +68,9 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SettingsPanelThemeToggleDemo {
-  protected readonly themeManager = inject(ScThemeManager);
+  private readonly themeManager = inject(ScThemeManager);
 
-  protected onThemeChange(event: Event): void {
+  private onThemeChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     this.themeManager.setMode(target.value as ScThemeMode);
   }

@@ -45,6 +45,6 @@ import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledCheckboxGroupDemo {
-  protected readonly apples = signal(['gala-apple']);
+  private readonly apples = signal(['gala-apple']);
 }`;
 }

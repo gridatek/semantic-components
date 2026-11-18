@@ -61,6 +61,6 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class NumberFieldUsageDemo {
-  readonly quantity = signal<number | null>(1);
+  private readonly quantity = signal<number | null>(1);
 }`;
 }

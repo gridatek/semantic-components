@@ -72,12 +72,12 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormCheckboxGroupDemo {
-  protected readonly model = signal<{
+  private readonly model = signal<{
     protocols: ('http' | 'https' | 'ssh')[];
   }>({
     protocols: ['https'],
   });
-  protected readonly networkForm = form(this.model, (path) => {
+  private readonly networkForm = form(this.model, (path) => {
     minLength(path.protocols, 1);
   });
 }`;

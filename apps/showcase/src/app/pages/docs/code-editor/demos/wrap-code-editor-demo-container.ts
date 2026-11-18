@@ -41,7 +41,7 @@ import { ScCodeEditor } from '@semantic-components/ui/code-editor';
   encapsulation: ViewEncapsulation.None,
 })
 export class WrapCodeEditorDemo {
-  readonly code = signal(
+  private readonly code = signal(
     'A long line of prose that wraps inside the editor instead of scrolling sideways, because wrap is on. A second sentence keeps it going, well past the edge.',
   );
 }`;

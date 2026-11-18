@@ -103,7 +103,7 @@ import { ScChartTreemap } from '@semantic-components/ui/charts/treemap';
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupedTreemapChartDemo {
-  readonly data = [
+  private readonly data = [
     { folder: 'src', name: 'components', size: 420 },
     { folder: 'src', name: 'pages', size: 260 },
     { folder: 'src', name: 'styles', size: 90 },
@@ -112,12 +112,12 @@ export class GroupedTreemapChartDemo {
     { folder: 'docs', name: 'guides', size: 160 },
     { folder: 'docs', name: 'api', size: 110 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     size: { label: 'Size (MB)' },
     src: { label: 'src', color: 'var(--chart-2)' },
     assets: { label: 'assets', color: 'var(--chart-3)' },
     docs: { label: 'docs', color: 'var(--chart-5)' },
   };
-  readonly name = (_: number, name: string) => name;
+  private readonly name = (_: number, name: string) => name;
 }`;
 }

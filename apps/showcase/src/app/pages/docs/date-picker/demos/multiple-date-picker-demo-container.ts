@@ -101,6 +101,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleDatePickerDemo {
-  readonly days = signal<ScCalendarValue>(null);
+  private readonly days = signal<ScCalendarValue>(null);
 }`;
 }

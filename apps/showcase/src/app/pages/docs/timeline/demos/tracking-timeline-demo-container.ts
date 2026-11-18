@@ -82,7 +82,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TrackingTimelineDemo {
-  readonly steps: readonly {
+  private readonly steps: readonly {
     title: string;
     status: ScTimelineStatus;
     at?: Temporal.PlainDateTime;
@@ -109,7 +109,7 @@ export class TrackingTimelineDemo {
     },
     { title: 'Delivered', status: 'upcoming' },
   ];
-  readonly said: Record<ScTimelineStatus, string> = {
+  private readonly said: Record<ScTimelineStatus, string> = {
     done: 'done',
     current: 'in progress',
     upcoming: 'to come',

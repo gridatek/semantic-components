@@ -46,7 +46,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleTimeClockDemo {
-  readonly time = signal<Temporal.PlainTime | null>(
+  private readonly time = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('18:45'),
   );
 }`;

@@ -94,6 +94,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ReactionsBubbleDemo {
-  protected readonly ran = signal(false);
+  private readonly ran = signal(false);
 }`;
 }

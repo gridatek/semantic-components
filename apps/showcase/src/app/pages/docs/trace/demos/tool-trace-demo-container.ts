@@ -132,7 +132,7 @@ interface ScDemoToolCall {
   encapsulation: ViewEncapsulation.None,
 })
 export class ToolTraceDemo {
-  protected readonly calls = signal<readonly ScDemoToolCall[]>([]);
+  private readonly calls = signal<readonly ScDemoToolCall[]>([]);
   private readonly script: readonly Omit<ScDemoToolCall, 'state'>[] = [
     { command: 'node --version', output: 'v24.18.0' },
     { command: 'npm --version', output: '11.6.2' },
@@ -148,7 +148,7 @@ export class ToolTraceDemo {
     inject(DestroyRef).onDestroy(() => clearTimeout(this.timer));
   }
 
-  replay(): void {
+  private replay(): void {
     clearTimeout(this.timer);
     this.calls.set([]);
     this.run(0);

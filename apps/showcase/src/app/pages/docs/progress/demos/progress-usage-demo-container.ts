@@ -40,7 +40,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ProgressUsageDemo {
-  protected readonly value = signal(13);
+  private readonly value = signal(13);
 
   constructor() {
     // A moment after it appears: further along.

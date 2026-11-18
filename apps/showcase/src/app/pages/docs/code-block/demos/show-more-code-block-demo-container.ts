@@ -101,7 +101,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ShowMoreCodeBlockDemo {
-  readonly source = \`import { Component, signal } from '@angular/core';
+  private readonly source = \`import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
@@ -127,6 +127,6 @@ export class Chat {
     this.draft.set('');
   }
 }\`;
-  protected readonly expanded = signal(false);
+  private readonly expanded = signal(false);
 }`;
 }

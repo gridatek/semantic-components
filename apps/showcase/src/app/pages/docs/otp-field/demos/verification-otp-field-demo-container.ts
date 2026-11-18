@@ -88,7 +88,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class VerificationOtpFieldDemo {
-  protected readonly otpForm = form(signal({ code: '' }), (path) => {
+  private readonly otpForm = form(signal({ code: '' }), (path) => {
     required(path.code);
     minLength(path.code, 6);
   });

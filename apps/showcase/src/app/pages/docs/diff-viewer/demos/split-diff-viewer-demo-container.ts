@@ -74,7 +74,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SplitDiffViewerDemo {
-  readonly before = \`import { Component, signal } from '@angular/core';
+  private readonly before = \`import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -87,7 +87,7 @@ export class Counter {
     this.count.set(this.count() + 1);
   }
 }\`;
-  readonly after = \`import { Component, signal } from '@angular/core';
+  private readonly after = \`import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-counter',
@@ -100,9 +100,9 @@ export class Counter {
     this.count.update((count) => count + 1);
   }
 }\`;
-  readonly view = signal<ScDiffView>('split');
+  private readonly view = signal<ScDiffView>('split');
 
-  show(view: string | string[] | null): void {
+  private show(view: string | string[] | null): void {
     if (view === 'split' || view === 'unified') this.view.set(view);
   }
 }`;

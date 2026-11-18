@@ -83,27 +83,27 @@ import { ScCheckbox, ScCheckboxGroup, ScField } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class NestedParentCheckboxGroupDemo {
-  protected readonly mainPermissions = [
+  private readonly mainPermissions = [
     'view-dashboard',
     'manage-users',
     'access-reports',
   ];
-  protected readonly managementPermissions = [
+  private readonly managementPermissions = [
     'create-user',
     'edit-user',
     'delete-user',
     'assign-roles',
   ];
-  protected readonly main = signal<string[]>([]);
-  protected readonly management = signal<string[]>([]);
-  protected readonly managementPartly = computed(
+  private readonly main = signal<string[]>([]);
+  private readonly management = signal<string[]>([]);
+  private readonly managementPartly = computed(
     () =>
       this.management().length > 0 &&
       this.management().length < this.managementPermissions.length,
   );
 
   // The top group's "manage-users" follows the nested group: all of it ticked.
-  protected setMain(value: string[]): void {
+  private setMain(value: string[]): void {
     if (value.includes('manage-users')) {
       this.management.set([...this.managementPermissions]);
     } else if (this.management().length === this.managementPermissions.length) {
@@ -112,7 +112,7 @@ export class NestedParentCheckboxGroupDemo {
     this.main.set(value);
   }
 
-  protected setManagement(value: string[]): void {
+  private setManagement(value: string[]): void {
     const all = value.length === this.managementPermissions.length;
     this.main.update((main) =>
       all

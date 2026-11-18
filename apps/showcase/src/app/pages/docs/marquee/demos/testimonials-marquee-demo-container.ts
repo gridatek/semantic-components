@@ -61,7 +61,7 @@ import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class TestimonialsMarqueeDemo {
-  readonly quotes = [
+  private readonly quotes = [
     { text: 'It just works, and it reads well.', name: 'Ada' },
     { text: 'Our forms finally feel finished.', name: 'Grace' },
     { text: 'Accessible without trying hard.', name: 'Alan' },

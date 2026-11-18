@@ -44,7 +44,7 @@ import { ScQrCode, ScQrCodeEcc } from '@semantic-components/ui/qr-code';
   encapsulation: ViewEncapsulation.None,
 })
 export class ErrorCorrectionQrCodeDemo {
-  readonly levels: { ecc: ScQrCodeEcc; label: string }[] = [
+  private readonly levels: { ecc: ScQrCodeEcc; label: string }[] = [
     { ecc: 'L', label: 'Low (7%)' },
     { ecc: 'M', label: 'Medium (15%)' },
     { ecc: 'Q', label: 'Quartile (25%)' },

@@ -88,18 +88,18 @@ interface Task {
   encapsulation: ViewEncapsulation.None,
 })
 export class FlatKanbanBoardDemo {
-  readonly columns = [
+  private readonly columns = [
     { id: 'todo', title: 'To do' },
     { id: 'doing', title: 'In progress' },
     { id: 'done', title: 'Done' },
   ];
-  readonly titles: Record<string, string> = {
+  private readonly titles: Record<string, string> = {
     todo: 'To do',
     doing: 'In progress',
     done: 'Done',
   };
   /** As stored: a flat list, each issue with its status. */
-  readonly issues = signal<Task[]>([
+  private readonly issues = signal<Task[]>([
     { id: 'ISS-1', title: 'Crash on empty search', status: 'todo' },
     { id: 'ISS-2', title: 'Slow dashboard', status: 'doing' },
     { id: 'ISS-3', title: 'Typo in footer', status: 'done' },
@@ -107,20 +107,20 @@ export class FlatKanbanBoardDemo {
   ]);
 
   /** The board's value: the issues by status, in their order. */
-  readonly byStatus = computed(() => {
+  private readonly byStatus = computed(() => {
     const value: Record<string, Task[]> = { todo: [], doing: [], done: [] };
     for (const issue of this.issues()) value[issue.status].push(issue);
     return value;
   });
 
-  readonly stored = computed(() =>
+  private readonly stored = computed(() =>
     this.issues()
       .map((issue) => issue.id + ' → ' + issue.status)
       .join('\\n'),
   );
 
   /** A move, written back: each issue's status is its column. */
-  save(value: ScKanbanBoardValue<Task>): void {
+  private save(value: ScKanbanBoardValue<Task>): void {
     this.issues.set(
       Object.entries(value).flatMap(([status, tasks]) =>
         tasks.map((task) =>
@@ -130,7 +130,7 @@ export class FlatKanbanBoardDemo {
     );
   }
   /** What a keyboard move says, step by step. */
-  readonly announce = ({
+  private readonly announce = ({
     type,
     item,
     column,

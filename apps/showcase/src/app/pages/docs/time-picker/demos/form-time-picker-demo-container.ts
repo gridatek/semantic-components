@@ -94,9 +94,11 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTimePickerDemo {
-  readonly model = signal<{ at: Temporal.PlainTime | null }>({ at: null });
-  readonly booked = signal('');
-  readonly tableForm = form(
+  private readonly model = signal<{ at: Temporal.PlainTime | null }>({
+    at: null,
+  });
+  private readonly booked = signal('');
+  private readonly tableForm = form(
     this.model,
     (s) => required(s.at, { message: 'Pick a time.' }),
     {

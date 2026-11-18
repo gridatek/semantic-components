@@ -33,6 +33,6 @@ import { ScButton, ScFocusTrap } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class FocusTrapUsageDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 }`;
 }

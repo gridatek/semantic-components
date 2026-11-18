@@ -49,6 +49,6 @@ import { ScBackdrop, ScButton, ScFrame } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class BackdropUsageDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 }`;
 }

@@ -70,8 +70,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormCheckboxDemo {
-  protected readonly email = signal(true);
-  protected readonly sms = signal(false);
-  protected readonly push = signal(true);
+  private readonly email = signal(true);
+  private readonly sms = signal(false);
+  private readonly push = signal(true);
 }`;
 }

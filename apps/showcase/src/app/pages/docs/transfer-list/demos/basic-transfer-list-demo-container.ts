@@ -165,7 +165,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTransferListDemo {
-  readonly permissions = [
+  private readonly permissions = [
     { id: 'read', label: 'Read' },
     { id: 'write', label: 'Write' },
     { id: 'delete', label: 'Delete' },
@@ -175,6 +175,6 @@ export class BasicTransferListDemo {
     { id: 'billing', label: 'Billing', disabled: true },
     { id: 'admin', label: 'Administer' },
   ];
-  readonly chosen = signal(['read']);
+  private readonly chosen = signal(['read']);
 }`;
 }

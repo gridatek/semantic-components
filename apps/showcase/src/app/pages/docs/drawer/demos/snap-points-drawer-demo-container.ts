@@ -80,7 +80,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SnapPointsDrawerDemo {
-  protected readonly snapPoints = [0.4, 0.9];
-  protected readonly snapPoint = signal<number | null>(null);
+  private readonly snapPoints = [0.4, 0.9];
+  private readonly snapPoint = signal<number | null>(null);
 }`;
 }

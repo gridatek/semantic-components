@@ -56,7 +56,7 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class SizesToggleGroupDemo {
-  protected readonly small = signal(['top']);
-  protected readonly normal = signal(['top']);
+  private readonly small = signal(['top']);
+  private readonly normal = signal(['top']);
 }`;
 }

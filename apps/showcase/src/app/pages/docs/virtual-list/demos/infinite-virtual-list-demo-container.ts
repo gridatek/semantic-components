@@ -81,10 +81,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class InfiniteVirtualListDemo {
-  readonly items = signal<string[]>([]);
-  readonly loading = signal(false);
+  private readonly items = signal<string[]>([]);
+  private readonly loading = signal(false);
 
-  async load(): Promise<void> {
+  private async load(): Promise<void> {
     this.loading.set(true);
     await new Promise((resolve) => setTimeout(resolve, 400));
     const from = this.items().length;

@@ -121,10 +121,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonInputGroupDemo {
-  protected readonly copied = signal(false);
-  protected readonly favorite = signal(false);
+  private readonly copied = signal(false);
+  private readonly favorite = signal(false);
 
-  protected async copy(): Promise<void> {
+  private async copy(): Promise<void> {
     await navigator.clipboard.writeText('https://x.com/shadcn');
     this.copied.set(true);
   }

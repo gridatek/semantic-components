@@ -65,6 +65,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class StackedNumberFieldDemo {
-  readonly quantity = signal<number | null>(123);
+  private readonly quantity = signal<number | null>(123);
 }`;
 }

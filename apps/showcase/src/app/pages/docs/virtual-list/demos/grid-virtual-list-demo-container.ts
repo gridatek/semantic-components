@@ -68,6 +68,9 @@ export class GridVirtualListDemo {
     'summit',
     'waterfall',
   ];
-  readonly photos = Array.from({ length: 600 }, (_, i) => this.names[i % 8]);
+  private readonly photos = Array.from(
+    { length: 600 },
+    (_, i) => this.names[i % 8],
+  );
 }`;
 }

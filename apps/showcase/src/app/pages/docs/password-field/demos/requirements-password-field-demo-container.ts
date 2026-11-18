@@ -91,9 +91,9 @@ import {
 })
 export class RequirementsPasswordFieldDemo {
   private readonly model = signal({ password: '' });
-  readonly signup = form(this.model);
+  private readonly signup = form(this.model);
 
-  readonly rules = computed(() => {
+  private readonly rules = computed(() => {
     const value = this.model().password;
     return [
       { text: 'At least 12 characters', met: value.length >= 12 },

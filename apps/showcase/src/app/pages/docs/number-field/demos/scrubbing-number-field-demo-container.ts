@@ -119,7 +119,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrubbingNumberFieldDemo {
-  readonly opacity = signal<number | null>(0.5);
-  readonly rotation = signal<number | null>(0);
+  private readonly opacity = signal<number | null>(0.5);
+  private readonly rotation = signal<number | null>(0);
 }`;
 }

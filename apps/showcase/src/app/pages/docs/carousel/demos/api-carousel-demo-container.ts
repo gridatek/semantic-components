@@ -99,7 +99,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ApiCarouselDemo {
-  readonly slides = [1, 2, 3, 4, 5];
-  readonly current = signal(0);
+  private readonly slides = [1, 2, 3, 4, 5];
+  private readonly current = signal(0);
 }`;
 }

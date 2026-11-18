@@ -120,14 +120,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class NavigationMenuNavbarDemo {
-  readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
-  readonly current = signal('Products');
+  private readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
+  private readonly current = signal('Products');
 
   /** A demo: the link marks its page, and stays here. */
-  go(event: Event, link: string): void {
+  private go(event: Event, link: string): void {
     event.preventDefault();
     this.current.set(link);
   }
-  readonly products = ['Analytics', 'Automation', 'Reports'];
+  private readonly products = ['Analytics', 'Automation', 'Reports'];
 }`;
 }

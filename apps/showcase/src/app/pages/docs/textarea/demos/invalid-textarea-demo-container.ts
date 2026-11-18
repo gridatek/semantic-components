@@ -46,7 +46,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidTextareaDemo {
-  protected readonly messageForm = form(signal({ message: '' }), (path) => {
+  private readonly messageForm = form(signal({ message: '' }), (path) => {
     required(path.message, { message: 'Please enter a message.' });
   });
 

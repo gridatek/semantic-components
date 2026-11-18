@@ -167,7 +167,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class OrderedTransferListDemo {
-  readonly columns = [
+  private readonly columns = [
     { id: 'name', label: 'Name' },
     { id: 'email', label: 'Email' },
     { id: 'role', label: 'Role' },
@@ -175,6 +175,6 @@ export class OrderedTransferListDemo {
     { id: 'joined', label: 'Joined' },
     { id: 'last-seen', label: 'Last seen' },
   ];
-  readonly shown = signal(['name', 'email', 'role']);
+  private readonly shown = signal(['name', 'email', 'role']);
 }`;
 }

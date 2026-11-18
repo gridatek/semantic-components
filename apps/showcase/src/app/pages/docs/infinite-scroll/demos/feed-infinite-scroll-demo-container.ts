@@ -82,11 +82,11 @@ interface Item {
 export class FeedInfiniteScrollDemo {
   // The first page comes with the page (rendered on the server too): a feed
   // is never empty — the rest as you scroll.
-  readonly items = signal<Item[]>(page(0));
-  readonly loading = signal(false);
-  readonly done = signal(false);
+  private readonly items = signal<Item[]>(page(0));
+  private readonly loading = signal(false);
+  private readonly done = signal(false);
 
-  async load(): Promise<void> {
+  private async load(): Promise<void> {
     this.loading.set(true);
     const more = await this.fetch();
     this.items.update((items) => [...items, ...more]);

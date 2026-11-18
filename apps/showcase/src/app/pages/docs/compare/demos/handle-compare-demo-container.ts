@@ -78,6 +78,6 @@ import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class HandleCompareDemo {
-  readonly position = signal(30);
+  private readonly position = signal(30);
 }`;
 }

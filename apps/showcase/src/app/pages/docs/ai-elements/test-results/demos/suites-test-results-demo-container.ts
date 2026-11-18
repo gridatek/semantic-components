@@ -215,9 +215,9 @@ function counts(tests: Test[]): string {
   encapsulation: ViewEncapsulation.None,
 })
 export class SuitesTestResultsDemo {
-  protected readonly suites = SUITES;
-  protected readonly allTests = SUITES.flatMap((suite) => suite.tests);
-  protected readonly failed = failed;
-  protected readonly counts = counts;
+  private readonly suites = SUITES;
+  private readonly allTests = SUITES.flatMap((suite) => suite.tests);
+  private readonly failed = failed;
+  private readonly counts = counts;
 }`;
 }

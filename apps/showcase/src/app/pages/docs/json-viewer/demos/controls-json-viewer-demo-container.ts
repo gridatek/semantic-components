@@ -62,7 +62,7 @@ import { ScButton, ScFrame, ScJsonViewer } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlsJsonViewerDemo {
-  readonly pkg = {
+  private readonly pkg = {
     name: '@semantic-components/ui',
     version: '0.0.0',
     description:

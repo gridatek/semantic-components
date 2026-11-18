@@ -97,13 +97,13 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidSelectDemo {
-  protected readonly fruits = [
+  private readonly fruits = [
     { value: 'apple', label: 'Apple' },
     { value: 'banana', label: 'Banana' },
     { value: 'blueberry', label: 'Blueberry' },
   ];
   private readonly model = signal({ fruit: '' });
-  protected readonly fruitForm = form(this.model, (s) =>
+  private readonly fruitForm = form(this.model, (s) =>
     required(s.fruit, { message: 'Please select a fruit.' }),
   );
 

@@ -72,6 +72,6 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlOtpFieldDemo {
-  protected readonly otpForm = form(signal({ code: '' }));
+  private readonly otpForm = form(signal({ code: '' }));
 }`;
 }

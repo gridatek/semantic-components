@@ -74,13 +74,13 @@ interface Item {
   encapsulation: ViewEncapsulation.None,
 })
 export class ErrorInfiniteScrollDemo {
-  readonly items = signal<Item[]>([]);
-  readonly loading = signal(false);
-  readonly done = signal(false);
-  readonly failed = signal(false);
+  private readonly items = signal<Item[]>([]);
+  private readonly loading = signal(false);
+  private readonly done = signal(false);
+  private readonly failed = signal(false);
   private calls = 0;
 
-  async load(): Promise<void> {
+  private async load(): Promise<void> {
     this.loading.set(true);
     try {
       const more = await this.fetch();

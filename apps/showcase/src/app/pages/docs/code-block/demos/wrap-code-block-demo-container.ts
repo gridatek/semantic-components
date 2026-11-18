@@ -37,6 +37,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class WrapCodeBlockDemo {
-  readonly source = \`npx create-semantic-app my-application --template dashboard --style nova --package-manager pnpm --no-git --skip-install\`;
+  private readonly source = \`npx create-semantic-app my-application --template dashboard --style nova --package-manager pnpm --no-git --skip-install\`;
 }`;
 }

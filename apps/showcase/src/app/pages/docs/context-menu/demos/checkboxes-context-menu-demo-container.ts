@@ -83,8 +83,8 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckboxesContextMenuDemo {
-  protected readonly bookmarksBar = signal(true);
-  protected readonly fullUrls = signal(false);
-  protected readonly developerTools = signal(true);
+  private readonly bookmarksBar = signal(true);
+  private readonly fullUrls = signal(false);
+  private readonly developerTools = signal(true);
 }`;
 }

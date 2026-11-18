@@ -98,7 +98,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlScatterChartDemo {
-  readonly data = [
+  private readonly data = [
     { name: 'سارة', height: 158, weight: 52 },
     { name: 'أحمد', height: 183, weight: 81 },
     { name: 'ليلى', height: 165, weight: 60 },
@@ -112,7 +112,7 @@ export class RtlScatterChartDemo {
     { name: 'رنا', height: 185, weight: 77 },
     { name: 'زياد', height: 173, weight: 66 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     height: { label: 'الطول (سم)' },
     weight: { label: 'الوزن (كغ)', color: 'var(--chart-1)' },
   };

@@ -64,6 +64,6 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class CollapsibleUsageDemo {
-  protected readonly open = signal(false);
+  private readonly open = signal(false);
 }`;
 }

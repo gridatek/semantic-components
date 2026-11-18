@@ -36,7 +36,7 @@ import { ScCheckbox, ScField, ScLabel } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class InvalidCheckboxDemo {
-  protected readonly termsForm = form(signal({ terms: false }), (path) => {
+  private readonly termsForm = form(signal({ terms: false }), (path) => {
     required(path.terms);
   });
 

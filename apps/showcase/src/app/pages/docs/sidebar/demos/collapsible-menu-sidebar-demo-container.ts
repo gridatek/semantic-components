@@ -119,7 +119,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CollapsibleMenuSidebarDemo {
-  protected readonly sections = [
+  private readonly sections = [
     { title: 'Getting Started', pages: ['Installation', 'Project Structure'] },
     {
       title: 'Building Your Application',

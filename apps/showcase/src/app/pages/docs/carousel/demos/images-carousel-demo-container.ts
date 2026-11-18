@@ -95,7 +95,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ImagesCarouselDemo {
-  readonly images = [
+  private readonly images = [
     {
       src: '/images/gallery/mountains.jpg',
       alt: 'Mountains under a clear sky',

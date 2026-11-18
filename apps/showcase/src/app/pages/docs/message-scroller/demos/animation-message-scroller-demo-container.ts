@@ -97,7 +97,7 @@ import { SiArrowDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class AnimationMessageScrollerDemo {
-  readonly messages = signal([
+  private readonly messages = signal([
     { id: 'q1', role: 'user', text: 'What does a message scroller do?' },
     {
       id: 'a1',
@@ -119,7 +119,7 @@ export class AnimationMessageScrollerDemo {
   ]);
   private sent = 0;
 
-  send(): void {
+  private send(): void {
     const n = ++this.sent;
     this.messages.update((messages) => [
       ...messages,

@@ -56,6 +56,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FourDigitsOtpFieldDemo {
-  protected readonly otpForm = form(signal({ pin: '' }));
+  private readonly otpForm = form(signal({ pin: '' }));
 }`;
 }

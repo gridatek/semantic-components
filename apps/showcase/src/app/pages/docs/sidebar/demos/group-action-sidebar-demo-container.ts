@@ -125,6 +125,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class GroupActionSidebarDemo {
-  protected readonly added = signal(0);
+  private readonly added = signal(0);
 }`;
 }

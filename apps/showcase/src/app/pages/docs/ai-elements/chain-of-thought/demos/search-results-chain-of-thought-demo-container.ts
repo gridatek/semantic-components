@@ -76,13 +76,13 @@ import { SiCircleCheckIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SearchResultsChainOfThoughtDemo {
-  protected readonly results = [
+  private readonly results = [
     'https://nextjs.org/docs/app/api-reference/components/image',
     'https://vercel.com/docs/deployments/troubleshoot-a-build',
     'https://github.com/vercel/next.js/discussions',
   ];
 
-  protected hostname(url: string): string {
+  private hostname(url: string): string {
     return new URL(url).hostname;
   }
 }`;

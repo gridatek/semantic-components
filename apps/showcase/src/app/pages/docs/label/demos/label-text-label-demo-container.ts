@@ -41,7 +41,7 @@ import { ScField, ScLabelText, ScSwitch } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelTextLabelDemo {
-  protected readonly airplaneMode = signal(false);
-  protected readonly wifi = signal(true);
+  private readonly airplaneMode = signal(false);
+  private readonly wifi = signal(true);
 }`;
 }

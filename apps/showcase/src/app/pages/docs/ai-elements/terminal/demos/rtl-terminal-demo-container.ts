@@ -86,7 +86,7 @@ import { SiTerminalIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTerminalDemo {
-  protected readonly output =
+  private readonly output =
     ' ✓ lib/ai.test.ts (6 tests) 41ms\\n ✓ components/chat.test.tsx (9 tests) 212ms\\n\\n Tests  15 passed (15)';
 }`;
 }

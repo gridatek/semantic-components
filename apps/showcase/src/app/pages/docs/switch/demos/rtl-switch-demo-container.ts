@@ -46,6 +46,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSwitchDemo {
-  protected readonly focusForm = form(signal({ share: true }));
+  private readonly focusForm = form(signal({ share: true }));
 }`;
 }

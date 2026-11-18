@@ -43,7 +43,7 @@ import {
 })
 export class InvalidInputDemo {
   private readonly model = signal({ email: 'jordan@' });
-  protected readonly emailForm = form(this.model, (s) =>
+  private readonly emailForm = form(this.model, (s) =>
     email(s.email, { message: 'Enter a valid email address.' }),
   );
 

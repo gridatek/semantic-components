@@ -67,6 +67,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RadioFieldDemo {
-  protected readonly planForm = form(signal({ plan: 'monthly' }));
+  private readonly planForm = form(signal({ plan: 'monthly' }));
 }`;
 }

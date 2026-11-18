@@ -61,9 +61,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ToolbarToggleDemo {
-  readonly bold = signal(true);
-  readonly italic = signal(false);
-  readonly underline = signal(false);
-  readonly strike = signal(false);
+  private readonly bold = signal(true);
+  private readonly italic = signal(false);
+  private readonly underline = signal(false);
+  private readonly strike = signal(false);
 }`;
 }

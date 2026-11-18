@@ -101,9 +101,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ClearComboboxDemo {
-  protected readonly framework = signal<string | null>('Next.js');
+  private readonly framework = signal<string | null>('Next.js');
 
-  protected readonly frameworks = [
+  private readonly frameworks = [
     'Next.js',
     'SvelteKit',
     'Nuxt.js',
@@ -111,7 +111,7 @@ export class ClearComboboxDemo {
     'Astro',
   ];
 
-  protected matching(query: string): string[] {
+  private matching(query: string): string[] {
     return this.frameworks.filter((name) => scComboboxMatches(name, query));
   }
 }`;

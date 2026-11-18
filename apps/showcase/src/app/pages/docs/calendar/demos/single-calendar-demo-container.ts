@@ -81,10 +81,10 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SingleCalendarDemo {
-  readonly date = signal<ScCalendarValue>(
+  private readonly date = signal<ScCalendarValue>(
     Temporal.PlainDate.from('2026-10-14'),
   );
-  readonly picked = computed(() => {
+  private readonly picked = computed(() => {
     const date = this.date();
     return date instanceof Temporal.PlainDate
       ? this.long(date)
@@ -92,12 +92,12 @@ export class SingleCalendarDemo {
   });
   private readonly long = (date: Temporal.PlainDate) =>
     date.toLocaleString('en-US', { dateStyle: 'long' });
-  readonly previousLabel = {
+  private readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',

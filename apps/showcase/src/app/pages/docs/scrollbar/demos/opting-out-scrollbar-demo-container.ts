@@ -48,8 +48,8 @@ export class OptingOutScrollbarDemoContainer {
   encapsulation: ViewEncapsulation.None,
 })
 export class OptingOutScrollbarDemo {
-  protected readonly lines = Array.from({ length: 20 }, (_, i) => i + 1);
-  protected readonly boxes = [
+  private readonly lines = Array.from({ length: 20 }, (_, i) => i + 1);
+  private readonly boxes = [
     { label: 'Hidden', class: 'no-scrollbar' },
     { label: 'Room kept', class: 'scrollbar-gutter-stable' },
     { label: "The browser's, thin", class: 'scrollbar-thin' },

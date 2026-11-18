@@ -86,7 +86,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class NegativeBarChartDemo {
-  readonly data = [
+  private readonly data = [
     { month: 'January', change: 186 },
     { month: 'February', change: 205 },
     { month: 'March', change: -207 },
@@ -94,10 +94,10 @@ export class NegativeBarChartDemo {
     { month: 'May', change: -209 },
     { month: 'June', change: 214 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     change: { label: 'Change', color: 'var(--chart-1)' },
   };
   /** January → Jan. */
-  readonly short = (month: string) => month.slice(0, 3);
+  private readonly short = (month: string) => month.slice(0, 3);
 }`;
 }

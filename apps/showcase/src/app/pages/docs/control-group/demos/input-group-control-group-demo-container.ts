@@ -94,6 +94,6 @@ import { SiAudioLinesIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class InputGroupControlGroupDemo {
-  protected readonly voice = signal(false);
+  private readonly voice = signal(false);
 }`;
 }

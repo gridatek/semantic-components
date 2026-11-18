@@ -164,25 +164,25 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlGanttDemo {
-  readonly from = date('2026-10-30');
-  readonly to = date('2026-11-29');
+  private readonly from = date('2026-10-30');
+  private readonly to = date('2026-11-29');
 
-  readonly tasks = signal(TASKS);
+  private readonly tasks = signal(TASKS);
 
-  readonly table = injectTable(() => ({
+  private readonly table = injectTable(() => ({
     features,
     columns,
     data: this.tasks(),
     getRowId: (task) => task.id,
   }));
 
-  move(task: Task, dates: ScGanttDates): void {
+  private move(task: Task, dates: ScGanttDates): void {
     this.tasks.update((tasks) =>
       tasks.map((t) => (t.id === task.id ? { ...t, ...dates } : t)),
     );
   }
 
-  advance(task: Task, progress: number): void {
+  private advance(task: Task, progress: number): void {
     this.tasks.update((tasks) =>
       tasks.map((t) => (t.id === task.id ? { ...t, progress } : t)),
     );

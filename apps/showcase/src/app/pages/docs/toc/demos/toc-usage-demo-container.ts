@@ -57,7 +57,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TocUsageDemo {
-  protected readonly sections = [
+  private readonly sections = [
     'Introduction',
     'Installation',
     'Usage',

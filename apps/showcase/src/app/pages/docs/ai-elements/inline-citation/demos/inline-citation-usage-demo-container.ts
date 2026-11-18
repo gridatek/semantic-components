@@ -104,7 +104,7 @@ const sources = {
 })
 export class Citation {
   readonly source = input.required<Source>();
-  protected readonly host = computed(() =>
+  private readonly host = computed(() =>
     new URL(this.source().url).hostname.replace(/^www\\./, ''),
   );
 }
@@ -145,6 +145,6 @@ export class Citation {
   encapsulation: ViewEncapsulation.None,
 })
 export class InlineCitationUsageDemo {
-  protected readonly sources = sources;
+  private readonly sources = sources;
 }`;
 }

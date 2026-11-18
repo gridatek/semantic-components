@@ -89,7 +89,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScatterChartDemo {
-  readonly data = [
+  private readonly data = [
     { name: 'Ana', height: 158, weight: 52 },
     { name: 'Ben', height: 183, weight: 81 },
     { name: 'Chloé', height: 165, weight: 60 },
@@ -103,7 +103,7 @@ export class ScatterChartDemo {
     { name: 'Kai', height: 185, weight: 77 },
     { name: 'Lea', height: 173, weight: 66 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     height: { label: 'Height (cm)' },
     weight: { label: 'Weight (kg)', color: 'var(--chart-1)' },
   };

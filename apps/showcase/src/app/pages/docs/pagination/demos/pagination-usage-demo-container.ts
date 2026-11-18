@@ -76,6 +76,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PaginationUsageDemo {
-  protected readonly page = signal(1);
+  private readonly page = signal(1);
 }`;
 }

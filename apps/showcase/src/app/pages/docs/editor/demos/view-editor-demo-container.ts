@@ -167,6 +167,6 @@ export class ViewEditorDemo {
 <hr>
 <p>That's all for this week.</p>\`,
   });
-  readonly postForm = form(this.model);
+  private readonly postForm = form(this.model);
 }`;
 }

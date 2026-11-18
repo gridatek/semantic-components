@@ -96,16 +96,16 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ActionsCodeBlockDemo {
-  readonly output = \`$ pnpm build
+  private readonly output = \`$ pnpm build
 > next build
 
 ✓ Compiled successfully in 4.2s
 ✓ Linting and checking validity of types
 ✓ Generating static pages (12/12)\`;
-  protected readonly wrap = signal(false);
+  private readonly wrap = signal(false);
   private readonly document = inject(DOCUMENT);
 
-  protected download(): void {
+  private download(): void {
     const link = this.document.createElement('a');
     link.href = URL.createObjectURL(
       new Blob([this.output], { type: 'text/plain' }),

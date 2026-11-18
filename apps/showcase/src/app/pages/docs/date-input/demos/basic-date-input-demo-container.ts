@@ -44,6 +44,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicDateInputDemo {
-  readonly date = signal<Temporal.PlainDate | null>(null);
+  private readonly date = signal<Temporal.PlainDate | null>(null);
 }`;
 }

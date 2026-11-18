@@ -111,7 +111,6 @@ import { SiTerminalIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class StatesToolDemo {
-  protected readonly status =
-    ' M app/api/chat/route.ts\\n M components/chat.tsx';
+  private readonly status = ' M app/api/chat/route.ts\\n M components/chat.tsx';
 }`;
 }

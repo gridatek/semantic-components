@@ -113,8 +113,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectionOrgChartDemo {
-  readonly selected = signal<string[]>(['grace']);
-  readonly people: Record<string, string> = {
+  private readonly selected = signal<string[]>(['grace']);
+  private readonly people: Record<string, string> = {
     ada: 'Ada Lovelace, Chief Executive — since 2019.',
     grace: 'Grace Hopper, Chief Technology Officer — 42 engineers.',
     alan: 'Alan Turing, Platform Lead — 12 engineers.',

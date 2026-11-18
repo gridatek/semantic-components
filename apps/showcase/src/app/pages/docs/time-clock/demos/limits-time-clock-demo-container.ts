@@ -52,9 +52,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LimitsTimeClockDemo {
-  readonly open = Temporal.PlainTime.from('09:00');
-  readonly close = Temporal.PlainTime.from('17:30');
-  readonly time = signal<Temporal.PlainTime | null>(
+  private readonly open = Temporal.PlainTime.from('09:00');
+  private readonly close = Temporal.PlainTime.from('17:30');
+  private readonly time = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('09:00'),
   );
 }`;

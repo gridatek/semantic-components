@@ -166,7 +166,7 @@ export class DescriptionsQueueDemo {
       done: false,
     },
   ];
-  protected readonly pending = this.todos.filter((todo) => !todo.done);
-  protected readonly completed = this.todos.filter((todo) => todo.done);
+  private readonly pending = this.todos.filter((todo) => !todo.done);
+  private readonly completed = this.todos.filter((todo) => todo.done);
 }`;
 }

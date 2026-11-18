@@ -29,7 +29,7 @@ import { ScJsonViewer } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicJsonViewerDemo {
-  readonly user = {
+  private readonly user = {
     id: 42,
     name: 'Ada Lovelace',
     email: 'ada@example.com',

@@ -119,11 +119,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ToolbarUsageDemo {
-  protected readonly alignment = signal(['start']);
-  protected readonly fonts = [
+  private readonly alignment = signal(['start']);
+  private readonly fonts = [
     { value: 'helvetica', label: 'Helvetica' },
     { value: 'arial', label: 'Arial' },
   ];
-  protected readonly font = signal('helvetica');
+  private readonly font = signal('helvetica');
 }`;
 }

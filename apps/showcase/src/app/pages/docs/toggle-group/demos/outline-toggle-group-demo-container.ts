@@ -35,6 +35,6 @@ import { ScToggleGroup, ScToggleGroupItem } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class OutlineToggleGroupDemo {
-  protected readonly calls = signal(['all']);
+  private readonly calls = signal(['all']);
 }`;
 }

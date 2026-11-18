@@ -53,6 +53,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SliderFieldDemo {
-  protected readonly price = signal(500);
+  private readonly price = signal(500);
 }`;
 }

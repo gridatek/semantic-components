@@ -100,7 +100,7 @@ import { ScChartSankey } from '@semantic-components/ui/charts/sankey';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSankeyChartDemo {
-  readonly data = [
+  private readonly data = [
     {
       flow: 'البحث ← الأسعار',
       source: 'search',
@@ -151,7 +151,7 @@ export class RtlSankeyChartDemo {
     },
     { flow: 'التوثيق ← غادر', source: 'docs', target: 'left', visitors: 240 },
   ];
-  readonly config: ScChartConfig = {
+  private readonly config: ScChartConfig = {
     visitors: { label: 'الزوار' },
     search: { label: 'البحث', color: 'var(--chart-1)' },
     social: { label: 'التواصل الاجتماعي', color: 'var(--chart-2)' },

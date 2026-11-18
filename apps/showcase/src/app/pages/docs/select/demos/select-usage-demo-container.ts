@@ -78,11 +78,11 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class SelectUsageDemo {
-  protected readonly themes = [
+  private readonly themes = [
     { value: 'light', label: 'Light' },
     { value: 'dark', label: 'Dark' },
     { value: 'system', label: 'System' },
   ];
-  protected readonly theme = signal('');
+  private readonly theme = signal('');
 }`;
 }

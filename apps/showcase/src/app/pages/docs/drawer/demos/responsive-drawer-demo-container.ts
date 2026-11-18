@@ -157,8 +157,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ResponsiveDrawerDemo {
-  protected readonly open = signal(false);
-  protected readonly desktop = signal(false);
+  private readonly open = signal(false);
+  private readonly desktop = signal(false);
 
   constructor() {
     // No matchMedia on the server (its window has none): the phone's drawer there.

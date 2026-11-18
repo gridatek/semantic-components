@@ -92,7 +92,7 @@ interface Person {
   encapsulation: ViewEncapsulation.None,
 })
 export class DataOrgChartDemo {
-  readonly team: Person = {
+  private readonly team: Person = {
     id: 'ada',
     name: 'Ada Lovelace',
     title: 'Chief Executive',

@@ -44,7 +44,7 @@ import { ScButton } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlSuggestionDemo {
-  protected readonly suggestions = [
+  private readonly suggestions = [
     'أضف مفتاح الوضع الداكن',
     'أصلح البناء الفاشل',
     'اكتب اختبارات للنموذج',

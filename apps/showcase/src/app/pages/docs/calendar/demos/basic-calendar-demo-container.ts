@@ -61,12 +61,12 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCalendarDemo {
-  readonly previousLabel = {
+  private readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',

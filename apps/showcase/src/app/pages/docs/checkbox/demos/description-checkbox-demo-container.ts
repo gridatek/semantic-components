@@ -44,6 +44,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class DescriptionCheckboxDemo {
-  protected readonly termsForm = form(signal({ terms: true }));
+  private readonly termsForm = form(signal({ terms: true }));
 }`;
 }

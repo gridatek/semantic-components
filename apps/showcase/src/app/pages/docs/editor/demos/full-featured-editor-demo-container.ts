@@ -759,14 +759,14 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
   encapsulation: ViewEncapsulation.None,
 })
 export class FullFeaturedEditorDemo {
-  readonly searchOpen = signal(false);
+  private readonly searchOpen = signal(false);
   private readonly model = signal({ body: SAMPLE });
-  readonly editorForm = form(this.model);
+  private readonly editorForm = form(this.model);
 
   /** The link popover and its address. */
-  readonly linkOpen = signal(false);
+  private readonly linkOpen = signal(false);
   private readonly linkModel = signal({ href: '' });
-  readonly linkForm = form(this.linkModel);
+  private readonly linkForm = form(this.linkModel);
 
   /** The block menu's items, and every block's name (the trigger's too). */
   private readonly blocks: ScEditorBlockType[] = [
@@ -794,7 +794,7 @@ export class FullFeaturedEditorDemo {
     'code-block': 'Code block',
   };
 
-  readonly tableActions: ScEditorTableAction[] = [
+  private readonly tableActions: ScEditorTableAction[] = [
     'insertTable',
     'addRowBefore',
     'addRowAfter',
@@ -808,7 +808,7 @@ export class FullFeaturedEditorDemo {
     'toggleHeaderColumn',
     'deleteTable',
   ];
-  readonly tableLabels: Record<ScEditorTableAction, string> = {
+  private readonly tableLabels: Record<ScEditorTableAction, string> = {
     insertTable: 'Insert table',
     addRowBefore: 'Add row above',
     addRowAfter: 'Add row below',
@@ -823,7 +823,7 @@ export class FullFeaturedEditorDemo {
     deleteTable: 'Delete table',
   };
 
-  readonly highlightColors = [
+  private readonly highlightColors = [
     { label: 'Yellow', value: 'var(--sc-editor-highlight-1)' },
     { label: 'Green', value: 'var(--sc-editor-highlight-2)' },
     { label: 'Blue', value: 'var(--sc-editor-highlight-3)' },
@@ -835,7 +835,10 @@ export class FullFeaturedEditorDemo {
    * A pretend upload: reports progress for a second, then gives the image a
    * local address. A real one would send the file to your server.
    */
-  readonly upload: ScEditorUploadHandler = (file, { onProgress, signal }) =>
+  private readonly upload: ScEditorUploadHandler = (
+    file,
+    { onProgress, signal },
+  ) =>
     new Promise((resolve, reject) => {
       let progress = 0;
       const timer = setInterval(() => {
@@ -853,25 +856,25 @@ export class FullFeaturedEditorDemo {
     });
 
   /** The link popover opens with the address at the selection. */
-  editLink(href: string): void {
+  private editLink(href: string): void {
     this.linkModel.set({ href: href || 'https://' });
   }
 
-  applyLink(link: ScEditorLink): void {
+  private applyLink(link: ScEditorLink): void {
     link.set(this.linkModel().href);
     this.linkOpen.set(false);
   }
 
-  removeLink(link: ScEditorLink): void {
+  private removeLink(link: ScEditorLink): void {
     link.remove();
     this.linkOpen.set(false);
   }
 
-  clearContent(): void {
+  private clearContent(): void {
     this.model.set({ body: '' });
   }
 
-  insertSampleContent(): void {
+  private insertSampleContent(): void {
     this.model.set({ body: SAMPLE });
   }
 }`;

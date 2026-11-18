@@ -188,10 +188,10 @@ import {
 })
 export class DialogQuestionnaireDemo {
   private readonly model = signal({ scope: '', tests: '' });
-  readonly sent = signal<ReturnType<typeof this.model> | null>(null);
-  readonly open = signal(false);
+  private readonly sent = signal<ReturnType<typeof this.model> | null>(null);
+  private readonly open = signal(false);
 
-  readonly survey = form(
+  private readonly survey = form(
     this.model,
     (s) => {
       required(s.scope);

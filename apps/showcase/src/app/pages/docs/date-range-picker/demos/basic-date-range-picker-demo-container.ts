@@ -101,6 +101,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicDateRangePickerDemo {
-  readonly range = signal<ScCalendarValue>(null);
+  private readonly range = signal<ScCalendarValue>(null);
 }`;
 }

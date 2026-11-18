@@ -73,6 +73,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class CapsLockPasswordFieldDemo {
-  readonly login = form(signal({ password: '' }));
+  private readonly login = form(signal({ password: '' }));
 }`;
 }

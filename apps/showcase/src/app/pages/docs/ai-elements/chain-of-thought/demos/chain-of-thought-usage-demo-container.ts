@@ -249,8 +249,8 @@ interface Step {
   encapsulation: ViewEncapsulation.None,
 })
 export class ChainOfThoughtUsageDemo {
-  protected readonly log = 'install    41s\\ncompile    38s\\nimages   3m 52s';
-  protected readonly results = [
+  private readonly log = 'install    41s\\ncompile    38s\\nimages   3m 52s';
+  private readonly results = [
     {
       title: 'Image component | nextjs.org',
       url: 'https://nextjs.org/docs/app/api-reference/components/image',
@@ -260,24 +260,24 @@ export class ChainOfThoughtUsageDemo {
       url: 'https://vercel.com/docs/deployments/troubleshoot-a-build',
     },
   ];
-  protected readonly files = ['next.config.ts', 'scripts/optimize-images.ts'];
+  private readonly files = ['next.config.ts', 'scripts/optimize-images.ts'];
   private readonly answer =
     'Image optimization takes almost four minutes because its cache key includes the commit hash. Key it on the image directory instead.';
 
   /** The page opens on the finished turn. */
-  protected readonly steps = signal<readonly Step[]>([
+  private readonly steps = signal<readonly Step[]>([
     { kind: 'log', done: true },
     { kind: 'web', done: true },
     { kind: 'code', done: true },
   ]);
-  protected readonly reply = signal(this.answer);
-  protected readonly busy = signal(false);
+  private readonly reply = signal(this.answer);
+  private readonly busy = signal(false);
 
   /** Researching while steps run and before the reply starts. */
-  protected readonly researching = computed(() => this.busy() && !this.reply());
+  private readonly researching = computed(() => this.busy() && !this.reply());
   /** Open while it researches — unless you opened or closed it. */
-  protected readonly choice = signal<boolean | null>(null);
-  protected readonly open = computed(() => this.choice() ?? this.researching());
+  private readonly choice = signal<boolean | null>(null);
+  private readonly open = computed(() => this.choice() ?? this.researching());
 
   private timers: ReturnType<typeof setTimeout>[] = [];
 
@@ -286,7 +286,7 @@ export class ChainOfThoughtUsageDemo {
   }
 
   /** The step's title, in the tense of its state. */
-  protected title(step: Step): string {
+  private title(step: Step): string {
     const verb = (running: string, done: string) =>
       step.done ? done : running;
     switch (step.kind) {
@@ -299,7 +299,7 @@ export class ChainOfThoughtUsageDemo {
     }
   }
 
-  replay(): void {
+  private replay(): void {
     this.stop();
     this.steps.set([]);
     this.reply.set('');

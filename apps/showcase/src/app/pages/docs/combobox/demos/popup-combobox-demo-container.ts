@@ -99,7 +99,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class PopupComboboxDemo {
-  protected readonly countries = [
+  private readonly countries = [
     'Algeria',
     'Argentina',
     'Australia',
@@ -113,9 +113,9 @@ export class PopupComboboxDemo {
     'Spain',
     'United Kingdom',
   ];
-  protected readonly country = signal<string | null>('Algeria');
+  private readonly country = signal<string | null>('Algeria');
 
-  protected matching(query: string): string[] {
+  private matching(query: string): string[] {
     return this.countries.filter((name) => scComboboxMatches(name, query));
   }
 }`;

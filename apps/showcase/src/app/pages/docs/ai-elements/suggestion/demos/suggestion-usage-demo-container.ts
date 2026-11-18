@@ -156,11 +156,11 @@ interface Turn {
   encapsulation: ViewEncapsulation.None,
 })
 export class SuggestionUsageDemo {
-  protected readonly suggestions = suggestions;
-  protected readonly turn = signal<Turn | null>(null);
+  private readonly suggestions = suggestions;
+  private readonly turn = signal<Turn | null>(null);
 
   private readonly message = signal({ text: '' });
-  protected readonly composer = form(this.message, () => undefined, {
+  private readonly composer = form(this.message, () => undefined, {
     submission: {
       action: async () => {
         const text = this.message().text.trim();
@@ -170,7 +170,7 @@ export class SuggestionUsageDemo {
   });
 
   /** The label is the message: sent as is. */
-  protected send(prompt: string): void {
+  private send(prompt: string): void {
     this.turn.set({
       prompt,
       reply:
@@ -180,7 +180,7 @@ export class SuggestionUsageDemo {
   }
 
   /** Enter sends; Shift+Enter starts a new line. */
-  protected sendOnEnter(event: Event): void {
+  private sendOnEnter(event: Event): void {
     const key = event as KeyboardEvent;
     if (key.shiftKey || key.isComposing) return;
     key.preventDefault();

@@ -52,6 +52,6 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicCopyToClipboardDemo {
-  readonly text = 'npm install @semantic-components/ui';
+  private readonly text = 'npm install @semantic-components/ui';
 }`;
 }

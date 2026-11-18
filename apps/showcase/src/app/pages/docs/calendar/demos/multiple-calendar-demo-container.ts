@@ -72,20 +72,20 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MultipleCalendarDemo {
-  readonly days = signal<ScCalendarValue>([
+  private readonly days = signal<ScCalendarValue>([
     Temporal.PlainDate.from('2026-10-05'),
     Temporal.PlainDate.from('2026-10-07'),
   ]);
-  readonly picked = computed(() => {
+  private readonly picked = computed(() => {
     const days = (this.days() as readonly Temporal.PlainDate[] | null) ?? [];
     return days.length + ' days: ' + days.map((d) => d.day).join(', ');
   });
-  readonly previousLabel = {
+  private readonly previousLabel = {
     day: 'Previous month',
     month: 'Previous year',
     year: 'Previous years',
   };
-  readonly nextLabel = {
+  private readonly nextLabel = {
     day: 'Next month',
     month: 'Next year',
     year: 'Next years',

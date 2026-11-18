@@ -93,7 +93,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledSpeedDialDemo {
-  readonly last = signal('');
-  readonly open = signal(false);
+  private readonly last = signal('');
+  private readonly open = signal(false);
 }`;
 }

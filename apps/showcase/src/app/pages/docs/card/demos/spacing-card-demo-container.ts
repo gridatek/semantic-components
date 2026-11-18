@@ -88,20 +88,20 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SpacingCardDemo {
-  protected readonly options = [
+  private readonly options = [
     { value: '4', label: '16px', class: '[--card-spacing:--spacing(4)]' },
     { value: '5', label: '20px', class: '[--card-spacing:--spacing(5)]' },
     { value: '6', label: '24px', class: '[--card-spacing:--spacing(6)]' },
     { value: '8', label: '32px', class: '[--card-spacing:--spacing(8)]' },
   ];
 
-  protected readonly spacing = signal('4');
+  private readonly spacing = signal('4');
 
-  protected readonly spacingClass = computed(
+  private readonly spacingClass = computed(
     () => this.options.find((o) => o.value === this.spacing())?.class ?? '',
   );
 
-  protected choose(value: string | string[] | null): void {
+  private choose(value: string | string[] | null): void {
     // A single group: keep a choice, even when the chosen one is pressed again.
     if (typeof value === 'string' && value) this.spacing.set(value);
   }

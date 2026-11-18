@@ -204,11 +204,13 @@ const labelOf = (annotation: ScImageAnnotatorAnnotation) =>
   encapsulation: ViewEncapsulation.None,
 })
 export class EditorImageAnnotatorDemo {
-  readonly annotations = signal<readonly ScImageAnnotatorAnnotation[]>([]);
-  readonly width = signal(4);
-  readonly labelOf = labelOf;
+  private readonly annotations = signal<readonly ScImageAnnotatorAnnotation[]>(
+    [],
+  );
+  private readonly width = signal(4);
+  private readonly labelOf = labelOf;
 
-  readonly tools = [
+  private readonly tools = [
     { value: 'select', label: 'Select' },
     { value: 'pen', label: 'Pen' },
     { value: 'highlighter', label: 'Highlighter' },
@@ -220,7 +222,7 @@ export class EditorImageAnnotatorDemo {
     { value: 'eraser', label: 'Eraser' },
   ] as const;
 
-  readonly colors = [
+  private readonly colors = [
     { value: '#e11d48', label: 'Red' },
     { value: '#f59e0b', label: 'Amber' },
     { value: '#16a34a', label: 'Green' },
@@ -229,7 +231,7 @@ export class EditorImageAnnotatorDemo {
     { value: '#171717', label: 'Black' },
   ];
 
-  async download(annotator: ScImageAnnotator): Promise<void> {
+  private async download(annotator: ScImageAnnotator): Promise<void> {
     const blob = await annotator.toBlob({ type: 'image/png' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');

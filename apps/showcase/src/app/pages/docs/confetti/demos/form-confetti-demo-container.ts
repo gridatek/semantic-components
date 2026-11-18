@@ -61,9 +61,9 @@ import { ScConfetti } from '@semantic-components/ui/confetti';
 })
 export class FormConfettiDemo {
   private readonly confetti = inject(ScConfetti);
-  readonly model = signal({ name: '' });
-  readonly joined = signal('');
-  readonly signupForm = form(
+  private readonly model = signal({ name: '' });
+  private readonly joined = signal('');
+  private readonly signupForm = form(
     this.model,
     (s) => required(s.name, { message: 'Your name, please.' }),
     {

@@ -72,13 +72,15 @@ export class EventConfettiDemo {
   private readonly confetti = inject(ScConfetti);
   private readonly list = viewChild.required<ElementRef<HTMLElement>>('list');
 
-  readonly tasks = signal([
+  private readonly tasks = signal([
     { label: 'Write the brief', done: true },
     { label: 'Book the venue', done: false },
     { label: 'Send the invites', done: false },
   ]);
-  readonly left = computed(() => this.tasks().filter((t) => !t.done).length);
-  readonly allDone = computed(() => this.left() === 0);
+  private readonly left = computed(
+    () => this.tasks().filter((t) => !t.done).length,
+  );
+  private readonly allDone = computed(() => this.left() === 0);
 
   constructor() {
     // The event: everything done — confetti, from the list.
@@ -90,7 +92,7 @@ export class EventConfettiDemo {
     });
   }
 
-  toggle(index: number): void {
+  private toggle(index: number): void {
     this.tasks.update((tasks) =>
       tasks.map((task, i) =>
         i === index ? { ...task, done: !task.done } : task,

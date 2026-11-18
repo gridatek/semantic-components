@@ -116,6 +116,6 @@ export class RtlEditorDemo {
   private readonly model = signal({
     body: '<p>تستيقظ الحديقة.</p><ul><li><p>أولاً الزعفران</p></li><li><p>ثم التوليب</p></li></ul>',
   });
-  readonly noteForm = form(this.model);
+  private readonly noteForm = form(this.model);
 }`;
 }

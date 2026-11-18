@@ -83,6 +83,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ChoiceCardRadioGroupDemo {
-  protected readonly planForm = form(signal({ plan: 'plus' }));
+  private readonly planForm = form(signal({ plan: 'plus' }));
 }`;
 }

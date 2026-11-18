@@ -119,8 +119,8 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 export class ExportSignaturePadDemo {
   private readonly document = inject(DOCUMENT);
   private readonly pad = viewChild.required<ScSignaturePad>('pad');
-  readonly signature = signal<ScSignature | null>(null);
-  readonly preview = signal<string | null>(null);
+  private readonly signature = signal<ScSignature | null>(null);
+  private readonly preview = signal<string | null>(null);
 
   constructor() {
     // The trimmed PNG, again for each change.
@@ -142,12 +142,15 @@ export class ExportSignaturePadDemo {
     });
   }
 
-  async download(blob: Promise<Blob | null>, name: string): Promise<void> {
+  private async download(
+    blob: Promise<Blob | null>,
+    name: string,
+  ): Promise<void> {
     const file = await blob;
     if (file) this.save(file, name);
   }
 
-  downloadSvg(svg: string): void {
+  private downloadSvg(svg: string): void {
     this.save(new Blob([svg], { type: 'image/svg+xml' }), 'signature.svg');
   }
 

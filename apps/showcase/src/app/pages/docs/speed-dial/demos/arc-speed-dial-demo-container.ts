@@ -87,6 +87,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ArcSpeedDialDemo {
-  readonly last = signal('');
+  private readonly last = signal('');
 }`;
 }

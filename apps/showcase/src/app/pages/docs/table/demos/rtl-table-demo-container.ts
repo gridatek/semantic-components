@@ -79,7 +79,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTableDemo {
-  protected readonly invoices = [
+  private readonly invoices = [
     {
       id: 'INV001',
       status: 'مدفوعة',

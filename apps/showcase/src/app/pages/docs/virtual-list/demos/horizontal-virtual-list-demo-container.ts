@@ -59,6 +59,6 @@ import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalVirtualListDemo {
-  readonly days = Array.from({ length: 365 }, (_, i) => i + 1);
+  private readonly days = Array.from({ length: 365 }, (_, i) => i + 1);
 }`;
 }

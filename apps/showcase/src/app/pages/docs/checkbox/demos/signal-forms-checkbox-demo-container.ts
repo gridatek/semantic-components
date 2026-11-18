@@ -60,7 +60,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class SignalFormsCheckboxDemo {
-  protected readonly model = signal({ newsletter: true, marketing: false });
-  protected readonly emailForm = form(this.model);
+  private readonly model = signal({ newsletter: true, marketing: false });
+  private readonly emailForm = form(this.model);
 }`;
 }

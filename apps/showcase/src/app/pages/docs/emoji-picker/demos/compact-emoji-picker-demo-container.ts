@@ -89,6 +89,6 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class CompactEmojiPickerDemo {
-  readonly selected = signal<ScEmoji | null>(null);
+  private readonly selected = signal<ScEmoji | null>(null);
 }`;
 }

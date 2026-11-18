@@ -54,23 +54,23 @@ import { ScCheckbox, ScField, ScFieldGroup } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class IndeterminateCheckboxDemo {
-  protected readonly items = signal([
+  private readonly items = signal([
     { name: 'Item 1', checked: true },
     { name: 'Item 2', checked: false },
     { name: 'Item 3', checked: false },
   ]);
-  protected readonly allSelected = computed(() =>
+  private readonly allSelected = computed(() =>
     this.items().every((item) => item.checked),
   );
-  protected readonly someSelected = computed(
+  private readonly someSelected = computed(
     () => this.items().some((item) => item.checked) && !this.allSelected(),
   );
 
-  protected selectAll(checked: boolean): void {
+  private selectAll(checked: boolean): void {
     this.items.update((items) => items.map((item) => ({ ...item, checked })));
   }
 
-  protected select(index: number, checked: boolean): void {
+  private select(index: number, checked: boolean): void {
     this.items.update((items) =>
       items.map((item, i) => (i === index ? { ...item, checked } : item)),
     );

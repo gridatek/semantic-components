@@ -48,6 +48,6 @@ import { ScNumberTicker } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class RollNumberTickerDemo {
-  readonly price = signal(1249.99);
+  private readonly price = signal(1249.99);
 }`;
 }

@@ -38,6 +38,6 @@ import { ScField, ScLabel, ScTimeInput } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicTimeInputDemo {
-  readonly time = signal<Temporal.PlainTime | null>(null);
+  private readonly time = signal<Temporal.PlainTime | null>(null);
 }`;
 }

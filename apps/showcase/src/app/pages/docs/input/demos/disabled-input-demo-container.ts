@@ -47,6 +47,6 @@ import {
 })
 export class DisabledInputDemo {
   private readonly model = signal({ email: '' });
-  protected readonly emailForm = form(this.model, (s) => disabled(s.email));
+  private readonly emailForm = form(this.model, (s) => disabled(s.email));
 }`;
 }

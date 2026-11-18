@@ -65,20 +65,20 @@ interface Item {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicSortableListDemo {
-  readonly items = signal<Item[]>([
+  private readonly items = signal<Item[]>([
     { id: 'a', label: 'Customer support' },
     { id: 'b', label: 'Performance' },
     { id: 'c', label: 'Accessibility' },
     { id: 'd', label: 'New features' },
     { id: 'e', label: 'Documentation' },
   ]);
-  readonly joined = computed(() =>
+  private readonly joined = computed(() =>
     this.items()
       .map((item) => item.label)
       .join(', '),
   );
   /** What a keyboard move says, step by step. */
-  readonly announce = ({
+  private readonly announce = ({
     type,
     item,
     position,

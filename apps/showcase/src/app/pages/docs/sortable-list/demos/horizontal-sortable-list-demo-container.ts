@@ -65,20 +65,20 @@ interface Item {
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalSortableListDemo {
-  readonly items = signal<Item[]>([
+  private readonly items = signal<Item[]>([
     { id: 's1', label: 'Plan' },
     { id: 's2', label: 'Design' },
     { id: 's3', label: 'Build' },
     { id: 's4', label: 'Test' },
     { id: 's5', label: 'Ship' },
   ]);
-  readonly joined = computed(() =>
+  private readonly joined = computed(() =>
     this.items()
       .map((item) => item.label)
       .join(', '),
   );
   /** What a keyboard move says, step by step. */
-  readonly announce = ({
+  private readonly announce = ({
     type,
     item,
     position,

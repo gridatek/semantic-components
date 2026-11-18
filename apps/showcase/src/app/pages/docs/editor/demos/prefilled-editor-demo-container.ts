@@ -135,6 +135,6 @@ export class PrefilledEditorDemo {
     <p>You can also add <code>inline code</code> snippets.</p>
   \`,
   });
-  readonly editorForm = form(this.model);
+  private readonly editorForm = form(this.model);
 }`;
 }

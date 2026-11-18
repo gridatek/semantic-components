@@ -80,6 +80,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScrollVirtualListDemo {
-  readonly aligns = ['start', 'center', 'end', 'auto'] as const;
+  private readonly aligns = ['start', 'center', 'end', 'auto'] as const;
 }`;
 }

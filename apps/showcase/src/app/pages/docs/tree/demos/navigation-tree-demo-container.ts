@@ -144,6 +144,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class NavigationTreeDemo {
-  readonly current = signal<string[]>(['installation']);
+  private readonly current = signal<string[]>(['installation']);
 }`;
 }
