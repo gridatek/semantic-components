@@ -69,9 +69,11 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
-          Native radio inputs in your labels, each with its value; the group
-          holds the choice — a [formField] or [(value)] on the group. A radio
-          field puts a radio beside its text.
+          Native radio inputs that draw their own circle and dot, each with its
+          value, in a group that holds the choice — a [formField] or [(value)]
+          on the group. Each radio is in a horizontal field beside its text —
+          the field is the label, a label is inside the field, or the field is
+          inside a label (a choice card: the whole card clicks).
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -171,12 +173,31 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
 export default class RadioGroupPage {
   private readonly anatomy = {
     imports:
-      "import { ScRadioGroup, ScRadio, ScField } from '@semantic-components/ui';",
+      "import { ScField, ScFieldContentWrapper, ScFieldDescription, ScFieldTitle, ScLabel, ScRadio, ScRadioGroup } from '@semantic-components/ui';",
     markup: [
       '<div scRadioGroup [formField]="…" aria-label="…">',
+      '  <!-- The field is the label: the radio and its text -->',
       '  <label scField orientation="horizontal">',
       '    <input scRadio value="…" />',
       '    …',
+      '  </label>',
+      '',
+      '  <!-- A label inside the field, with a description -->',
+      '  <div scField orientation="horizontal">',
+      '    <input scRadio value="…" />',
+      '    <label scLabel>…</label>',
+      '    <p scFieldDescription>…</p>',
+      '  </div>',
+      '',
+      '  <!-- The field inside a label: a choice card, the whole card clicks -->',
+      '  <label scLabel>',
+      '    <div scField orientation="horizontal">',
+      '      <input scRadio value="…" />',
+      '      <div scFieldContentWrapper>',
+      '        <div scFieldTitle>…</div>',
+      '        <p scFieldDescription>…</p>',
+      '      </div>',
+      '    </div>',
       '  </label>',
       '</div>',
     ].join('\n'),
