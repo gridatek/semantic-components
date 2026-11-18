@@ -60,7 +60,7 @@ interface Step {
           >: it picks the language, loads its translations before the app
           starts, and sets the page's language and direction (right to left for
           Arabic). One build to deploy; changing language reloads the page. The
-          blocks app works this way, in English, French and Arabic.
+          dashboard app works this way, in English, French and Arabic.
         </p>
       </div>
 

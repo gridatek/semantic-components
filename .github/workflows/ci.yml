@@ -53,7 +53,7 @@ jobs:
   # The e2e tests of the client-side apps, a job per group of Playwright
   # projects run side by side (the showcase's suite outgrew one job's 30
   # minutes): demos (two shards), pages, the styles two by two, the phones
-  # with the blocks. A job's name says which kind of test failed. Only when the
+  # with the custom app. A job's name says which kind of test failed. Only when the
   # change affects them.
   csr-e2e:
     name: csr-e2e (${{ matrix.group }})
@@ -77,10 +77,10 @@ jobs:
             projects: --project=styles-mira --project=styles-luma
           - group: styles-sera-rhea
             projects: --project=styles-sera --project=styles-rhea
-          # The phones' tests, and the blocks' small suite.
+          # The phones' tests, and the custom app's small suite.
           - group: mobile
             projects: --project=mobile
-            blocks: true
+            custom: true
     steps:
       - uses: actions/checkout@v7
         with:
@@ -102,7 +102,7 @@ jobs:
         run: |
           projects=$(npx nx show projects --affected -t e2e)
           echo "showcase=$(echo "$projects" | grep -qw showcase-e2e && echo true || echo false)" >> "$GITHUB_OUTPUT"
-          echo "blocks=$(echo "$projects" | grep -qw blocks-e2e && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          echo "custom=$(echo "$projects" | grep -qw custom-e2e && echo true || echo false)" >> "$GITHUB_OUTPUT"
 
       # The showcase's settings aren't in git: the tests' own
       # (scripts/showcase-config.mjs).
@@ -110,20 +110,20 @@ jobs:
         run: node scripts/showcase-config.mjs test
 
       - name: Build
-        if: steps.affected.outputs.showcase == 'true' || (matrix.blocks && steps.affected.outputs.blocks == 'true')
-        run: npx nx run-many -t build -p showcase blocks
+        if: steps.affected.outputs.showcase == 'true' || (matrix.custom && steps.affected.outputs.custom == 'true')
+        run: npx nx run-many -t build -p showcase custom
 
       - name: Install Playwright Browsers
-        if: steps.affected.outputs.showcase == 'true' || (matrix.blocks && steps.affected.outputs.blocks == 'true')
+        if: steps.affected.outputs.showcase == 'true' || (matrix.custom && steps.affected.outputs.custom == 'true')
         run: npx playwright install --with-deps chromium
 
       - name: E2E tests (showcase, ${{ matrix.group }})
         if: steps.affected.outputs.showcase == 'true'
         run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.projects }}
 
-      - name: E2E tests (blocks)
-        if: ${{ !cancelled() && matrix.blocks && steps.affected.outputs.blocks == 'true' }}
-        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts
+      - name: E2E tests (custom)
+        if: ${{ !cancelled() && matrix.custom && steps.affected.outputs.custom == 'true' }}
+        run: npx playwright test -c apps/styles/custom-e2e/playwright.config.ts
 
       - name: Upload Playwright report
         if: failure()
@@ -132,14 +132,14 @@ jobs:
           name: playwright-report-${{ matrix.group }}
           path: |
             dist/.playwright/apps/showcase-e2e/
-            dist/.playwright/apps/blocks-e2e/
+            dist/.playwright/apps/styles/custom-e2e/
           retention-days: 7
 
   # The apps rendered on the server (the `ssr` build, on its Node server), then
   # hydrated: every e2e test again, plus `ssr.spec.ts` (every page hydrates),
   # in Chromium, in the same groups as `csr-e2e`. Not required: the apps stay
   # client-side by default. Its own Playwright flags: four workers, not the
-  # style's CI default of one (which made it run for hours), two retries, and
+  # Nx preset's CI default of one (which made it run for hours), two retries, and
   # a reporter that shows progress.
   ssr:
     name: ssr (${{ matrix.group }})
@@ -163,10 +163,9 @@ jobs:
             projects: --project=styles-mira --project=styles-luma
           - group: styles-sera-rhea
             projects: --project=styles-sera --project=styles-rhea
-          # The phones' tests, and the blocks' small suite.
+          # The phones' tests.
           - group: mobile
             projects: --project=mobile
-            blocks: true
     env:
       SSR: true
     steps:
@@ -186,7 +185,7 @@ jobs:
         run: node scripts/showcase-config.mjs test
 
       - name: Build (SSR)
-        run: npx nx run-many -t build -p showcase blocks -c ssr
+        run: npx nx build showcase -c ssr
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps chromium
@@ -194,16 +193,12 @@ jobs:
       - name: E2E tests (showcase, SSR, ${{ matrix.group }})
         run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.projects }} --workers=4 --retries=2 --reporter=line
 
-      - name: E2E tests (blocks, SSR)
-        if: ${{ !cancelled() && matrix.blocks }}
-        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts --project=chromium --workers=4 --retries=2 --reporter=line
-
       # What failed on the server: Angular logs it, the page still answers 200.
       - name: Server errors
         if: ${{ !cancelled() }}
         run: |
           status=0
-          for log in dist/ssr-showcase.log dist/ssr-blocks.log; do
+          for log in dist/ssr-showcase.log; do
             [ -f "$log" ] || continue
             if grep -qE '^(ERROR|uncaughtException)' "$log"; then
               echo "::error::Server errors in $log"
@@ -220,6 +215,5 @@ jobs:
           name: playwright-report-ssr-${{ matrix.group }}
           path: |
             dist/.playwright/apps/showcase-e2e/
-            dist/.playwright/apps/blocks-e2e/
             dist/ssr-*.log
           retention-days: 7

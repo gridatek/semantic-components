@@ -26,14 +26,12 @@ jobs:
           - browser: firefox
             shard: 1/2
             showcase: --project=demos-firefox --project=pages-firefox
-            blocks: --project=firefox
           - browser: firefox
             shard: 2/2
             showcase: --project=demos-firefox --project=pages-firefox
           - browser: webkit
             shard: 1/2
             showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
-            blocks: --project=webkit
           - browser: webkit
             shard: 2/2
             showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
@@ -58,19 +56,15 @@ jobs:
         run: node scripts/showcase-config.mjs test
 
       - name: Build
-        run: npx nx run-many -t build -p showcase blocks
+        run: npx nx build showcase
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps ${{ matrix.browser }}
 
-      # Four workers and a reporter that shows progress; the style's two
+      # Four workers and a reporter that shows progress; Nx preset's two
       # retries kept — overnight, a flake is retried.
       - name: E2E tests (showcase)
         run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.showcase }} --shard=${{ matrix.shard }} --workers=4 --reporter=line
-
-      - name: E2E tests (blocks)
-        if: ${{ !cancelled() && matrix.blocks }}
-        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts ${{ matrix.blocks }} --workers=4 --reporter=line
 
       - name: Upload Playwright report
         if: failure()
@@ -79,7 +73,6 @@ jobs:
           name: playwright-report-${{ matrix.browser }}-${{ strategy.job-index }}
           path: |
             dist/.playwright/apps/showcase-e2e/
-            dist/.playwright/apps/blocks-e2e/
           retention-days: 7
 
   # The apps rendered on the server (the `ssr` build, on its Node server), then
@@ -98,14 +91,12 @@ jobs:
           - browser: firefox
             shard: 1/2
             showcase: --project=demos-firefox --project=pages-firefox
-            blocks: --project=firefox
           - browser: firefox
             shard: 2/2
             showcase: --project=demos-firefox --project=pages-firefox
           - browser: webkit
             shard: 1/2
             showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
-            blocks: --project=webkit
           - browser: webkit
             shard: 2/2
             showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
@@ -129,7 +120,7 @@ jobs:
         run: node scripts/showcase-config.mjs test
 
       - name: Build (SSR)
-        run: npx nx run-many -t build -p showcase blocks -c ssr
+        run: npx nx build showcase -c ssr
 
       # Its own engine only.
       - name: Install Playwright Browsers
@@ -139,16 +130,12 @@ jobs:
       - name: E2E tests (showcase, SSR)
         run: npx playwright test -c apps/showcase-e2e/playwright.config.ts ${{ matrix.showcase }} --shard=${{ matrix.shard }} --workers=4 --retries=2 --reporter=line
 
-      - name: E2E tests (blocks, SSR)
-        if: ${{ !cancelled() && matrix.blocks }}
-        run: npx playwright test -c apps/blocks-e2e/playwright.config.ts ${{ matrix.blocks }} --workers=4 --retries=2 --reporter=line
-
       # What failed on the server: Angular logs it, the page still answers 200.
       - name: Server errors
         if: ${{ !cancelled() }}
         run: |
           status=0
-          for log in dist/ssr-showcase.log dist/ssr-blocks.log; do
+          for log in dist/ssr-showcase.log; do
             [ -f "$log" ] || continue
             if grep -qE '^(ERROR|uncaughtException)' "$log"; then
               echo "::error::Server errors in $log"
@@ -165,6 +152,5 @@ jobs:
           name: playwright-report-ssr-${{ matrix.browser }}-${{ strategy.job-index }}
           path: |
             dist/.playwright/apps/showcase-e2e/
-            dist/.playwright/apps/blocks-e2e/
             dist/ssr-*.log
           retention-days: 7

@@ -1,6 +1,6 @@
 name: Deploy Sera to Cloudflare Pages
 
-# The Sera template (apps/presets/sera), started by hand: Actions → Deploy Sera
+# The Sera template (apps/styles/sera), started by hand: Actions → Deploy Sera
 # to Cloudflare Pages → Run workflow. The same secrets as the showcase's
 # deploy: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID.
 on:
@@ -43,4 +43,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/apps/presets/sera/browser --project-name=semantic-components-sera --branch=main
+          command: pages deploy dist/apps/styles/sera/browser --project-name=semantic-components-sera --branch=main

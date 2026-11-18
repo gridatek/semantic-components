@@ -3,7 +3,7 @@
 ## Setup
 
 - **Framework:** Playwright (via `@nx/playwright`)
-- **Test suites:** `apps/showcase-e2e/` and `apps/blocks-e2e/`
+- **Test suite:** `apps/showcase-e2e/`
 - **The showcase's settings** (`apps/showcase/public/config.json`) aren't in git. The tests need every page listed, hidden ones too: after cloning, run `node scripts/showcase-config.mjs test`. Without the file, hidden pages don't show and their tests fail. Every workflow writes it the same way before building (`test`; `deploy.yml`: `prod` and `dev`).
 
 ## Running Tests
@@ -11,7 +11,6 @@
 ```bash
 # Run all e2e tests
 npx nx run showcase-e2e:e2e
-npx nx run blocks-e2e:e2e
 
 # One kind of test (a Playwright project)
 npx nx run showcase-e2e:e2e -- --project=demos
@@ -64,12 +63,12 @@ npx playwright test src/styles/foo.spec.ts --project=styles-nova --project=style
 
 ### CI groups
 
-| Workflow             | Jobs                                                                                                                                                                                                                   |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ci.yml` — `csr`     | lint, translations, build (affected)                                                                                                                                                                                   |
-| `ci.yml` — `csr-e2e` | 8 jobs: `demos-1`, `demos-2` (`--shard`), `pages`, `styles-nova-vega`, `styles-maia-lyra`, `styles-mira-luma`, `styles-sera-rhea`, `mobile` (+ the blocks' suite) — each only when the change affects the e2e projects |
-| `ci.yml` — `ssr`     | the same 8 groups against the server-rendered build (not required)                                                                                                                                                     |
-| `nightly-e2e.yml`    | Firefox and WebKit (CI runs Chromium), two shards each, client-side and server-rendered                                                                                                                                |
+| Workflow             | Jobs                                                                                                                                                                                             |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ci.yml` — `csr`     | lint, translations, build (affected)                                                                                                                                                             |
+| `ci.yml` — `csr-e2e` | 8 jobs: `demos-1`, `demos-2` (`--shard`), `pages`, `styles-nova-vega`, `styles-maia-lyra`, `styles-mira-luma`, `styles-sera-rhea`, `mobile` — each only when the change affects the e2e projects |
+| `ci.yml` — `ssr`     | the same 8 groups against the server-rendered build (not required)                                                                                                                               |
+| `nightly-e2e.yml`    | Firefox and WebKit (CI runs Chromium), two shards each, client-side and server-rendered                                                                                                          |
 
 A group is a `matrix.include` entry in `ci.yml`: its name and its `--project` flags. Branch protection's required checks name these jobs.
 
@@ -105,7 +104,7 @@ Both apps are static by default; SSR is the `ssr` build configuration. The CI jo
 
 The nightly workflow (`nightly-e2e.yml`) runs both ways — jobs `csr` and `ssr` — in the browsers CI doesn't (`ALL_BROWSERS`): Firefox and WebKit (`demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit`, the iPhone `mobile-webkit`), two shards each; the pull requests' CI runs Chromium, every project.
 
-`serve-ssr` needs a build first (`npx nx build showcase -c ssr`); with `SSR=1`, the Playwright config starts it instead of `serve-static`. Its log goes to `dist/ssr-showcase.log` (`dist/ssr-blocks.log`). The same for `blocks`.
+`serve-ssr` needs a build first (`npx nx build showcase -c ssr`); with `SSR=1`, the Playwright config starts it instead of `serve-static`. Its log goes to `dist/ssr-showcase.log`.
 
 **One spec locally, under SSR:** build, start the server on a free port, and point the tests at it (`BASE_URL` set, the config starts no server of its own). Restart the server after each rebuild.
 
@@ -129,7 +128,7 @@ What fails only here is mostly code that runs on the server without a browser (`
 
 ## Fixing Common Issues
 
-- **Timeout:** The dev server may be slow to start. Check that `showcase` or `blocks` app serves correctly on its own first (`npx nx run showcase:serve`).
+- **Timeout:** The dev server may be slow to start. Check that the `showcase` app serves correctly on its own first (`npx nx run showcase:serve`).
 - **Selector not found:** Inspect the page manually; component selectors use `[sc-*]` attributes (e.g., `button[scButton]`).
 - **Flaky tests:** Use `await expect(...).toHaveText()` (auto-retrying) instead of raw `innerText()` checks.
 - **Wrong base URL:** Override with `BASE_URL` env var if ports differ.

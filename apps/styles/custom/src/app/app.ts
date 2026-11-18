@@ -1,0 +1,17 @@
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { cn } from 'cn';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet],
+  template: `<router-outlet />`,
+  host: {
+    '[class]': 'class()',
+  },
+  encapsulation: ViewEncapsulation.None,
+})
+export class App {
+  readonly classInput = input<string>('', { alias: 'class' });
+  private readonly class = computed(() => cn('block', this.classInput()));
+}

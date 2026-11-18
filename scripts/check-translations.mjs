@@ -4,7 +4,7 @@
 // placeholders (`{$INTERPOLATION}`, `{$START_TAG_SPAN}`…). Angular checks
 // none of this when translations load at runtime.
 //
-//   node scripts/check-translations.mjs apps/blocks/public/i18n
+//   node scripts/check-translations.mjs apps/dashboard/public/i18n
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 

@@ -35,18 +35,18 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 const PROJECTS = [
   'apps/showcase/tsconfig.app.json',
-  'apps/blocks/tsconfig.app.json',
   'apps/dashboard/tsconfig.app.json',
-  'apps/presets/sera/tsconfig.app.json',
+  'apps/styles/sera/tsconfig.app.json',
+  'apps/styles/custom/tsconfig.app.json',
   'libs/ui/tsconfig.lib.json',
   'libs/styles/tsconfig.lib.json',
 ];
 
 const SOURCES = [
   'apps/showcase/src/**/*.ts',
-  'apps/blocks/src/**/*.ts',
   'apps/dashboard/src/**/*.ts',
-  'apps/presets/sera/src/**/*.ts',
+  'apps/styles/sera/src/**/*.ts',
+  'apps/styles/custom/src/**/*.ts',
   'libs/ui/**/src/**/*.ts',
   'libs/styles/src/**/*.ts',
   '!**/*.spec.ts',

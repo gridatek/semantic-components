@@ -30,11 +30,11 @@ export default [
   {
     files: ['**/*.html'],
     rules: {
-      // A label in a scField is tied to its control by the field (as in
-      // the blocks app), which this rule can't see.
+      // A label in a scField is tied to its control by the field, which this rule
+      // can't see.
       '@angular-eslint/template/label-has-associated-control': 'off',
       // The sidebar's rail: aria-hidden and out of the tab order — a mouse
-      // edge, nothing to name (as in the showcase and blocks apps).
+      // edge, nothing to name (as in the showcase).
       '@angular-eslint/template/elements-content': 'off',
     },
   },

@@ -4,7 +4,7 @@ An admin dashboard built with Semantic Components, complete: every screen of
 [shadcndashboard](https://github.com/shadcndashboard/shadcndashboard)'s sidebar
 — its free version's screens and data, and the screens it lists as Pro —
 rebuilt in Angular with this repository's library. It sits outside
-`apps/presets` on purpose: it isn't a style's showcase, it's an app — a second
+`apps/styles` on purpose: it isn't a style's showcase, it's an app — a second
 test, after Sera, that the library carries a real product.
 
 ```bash
@@ -109,7 +109,7 @@ chosen from the header's select (the language icon). The choice is kept (a
 cookie, `sc-locale`) and the page reloads in it; with none, the browser's
 language is used when it's one of the three.
 
-It runs on the library's `ui/i18n` entry, as the blocks app does: Angular's
+It runs on the library's `ui/i18n` entry: Angular's
 own i18n, translated in the browser (one build).
 
 - `src/app/i18n.ts` lists the locales; `main.ts` awaits `loadLocale(I18N)`
