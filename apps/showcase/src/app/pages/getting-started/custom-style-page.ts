@@ -31,7 +31,6 @@ interface ScCodeSample {
     ScCodeBlockTitle,
     ScTypeset,
     ScLink,
-    ScSeparator,
     SiCheckIcon,
     SiCopyIcon,
     TocHeading,
@@ -87,8 +86,6 @@ interface ScCodeSample {
         />
       </section>
 
-      <div scSeparator></div>
-
       <section class="space-y-4">
         <h2 scTypeset appToc>2. Name it</h2>
         <p>
@@ -104,8 +101,6 @@ interface ScCodeSample {
           [ngTemplateOutletContext]="{ $implicit: index }"
         />
       </section>
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>3. Use it</h2>
@@ -140,8 +135,6 @@ interface ScCodeSample {
         </p>
       </section>
 
-      <div scSeparator></div>
-
       <section class="space-y-4">
         <h2 scTypeset appToc>4. Change it</h2>
         <p>
@@ -168,8 +161,6 @@ interface ScCodeSample {
         </p>
       </section>
 
-      <div scSeparator></div>
-
       <section class="space-y-4">
         <h2 scTypeset appToc>Only a few changes?</h2>
         <p>
@@ -185,8 +176,6 @@ interface ScCodeSample {
           [ngTemplateOutletContext]="{ $implicit: spread }"
         />
       </section>
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Good to know</h2>

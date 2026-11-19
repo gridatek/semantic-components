@@ -24,7 +24,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
     TocHeading,
     SiCheckIcon,
     SiCopyIcon,
-    ScSeparator,
     ScTypeset,
     PackageManagerInstall,
   ],
@@ -42,8 +41,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p>Semantic Components depends on Angular Aria and Angular CDK.</p>
         <app-package-manager-install packages="@angular/aria @angular/cdk" />
       </section>
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>2. Set up Tailwind CSS</h2>
@@ -105,8 +102,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
         </div>
       </section>
 
-      <div scSeparator></div>
-
       <section class="space-y-4">
         <h2 scTypeset appToc>3. Install utilities</h2>
         <p>
@@ -117,8 +112,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
           packages="shadcn class-variance-authority cn tw-animate-css"
         />
       </section>
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>4. Install the font</h2>
@@ -133,8 +126,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
           >
         </p>
       </section>
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>5. Install icons</h2>
@@ -151,8 +142,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
           you can swap them for any library.
         </p>
       </section>
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>6. Polyfill Temporal</h2>

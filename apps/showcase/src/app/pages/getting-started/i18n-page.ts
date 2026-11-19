@@ -33,7 +33,6 @@ interface Step {
     TocHeading,
     SiCheckIcon,
     SiCopyIcon,
-    ScSeparator,
     ScTypeset,
     PackageManagerInstall,
   ],
@@ -87,7 +86,6 @@ interface Step {
       </section>
 
       @for (step of steps; track step.file; let i = $index) {
-        <div scSeparator></div>
         <section class="space-y-4">
           <h2 scTypeset appToc>{{ i + 2 }}. {{ step.title }}</h2>
           <p>{{ step.text }}</p>
@@ -113,8 +111,6 @@ interface Step {
           </div>
         </section>
       }
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>How the locale is chosen</h2>
@@ -158,8 +154,6 @@ interface Step {
         </p>
       </section>
 
-      <div scSeparator></div>
-
       <section class="space-y-4">
         <h2 scTypeset appToc>ScI18n</h2>
         <div scFrame class="overflow-x-auto">
@@ -185,8 +179,6 @@ interface Step {
           </table>
         </div>
       </section>
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Limits</h2>

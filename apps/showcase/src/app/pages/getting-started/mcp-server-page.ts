@@ -23,7 +23,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
     TocHeading,
     SiCheckIcon,
     SiCopyIcon,
-    ScSeparator,
     ScTypeset,
   ],
   template: `
@@ -69,8 +68,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
           downloads the package from npm on first use and caches it.
         </p>
       </section>
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Available Tools</h2>

@@ -33,7 +33,6 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
     TocHeading,
     SiCheckIcon,
     SiCopyIcon,
-    ScSeparator,
     ScTypeset,
     PackageManagerInstall,
     ButtonUsageDemoContainer,
@@ -60,8 +59,6 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           packages="@semantic-components/ui @semantic-components/styles"
         />
       </section>
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>2. Configure styles</h2>
@@ -142,8 +139,6 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
           ></pre>
         </div>
       </section>
-
-      <div scSeparator></div>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
