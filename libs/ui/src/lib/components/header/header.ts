@@ -30,6 +30,13 @@ export type ScHeaderExpand = 'sm' | 'md' | 'lg';
 const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
 
 /** The bar's links (its `nav`): shown from `expand` up. */
+/** The mobile menu's toggle, wherever it sits in the bar: hidden from `expand` up. */
+const TOGGLE_HIDDEN = {
+  sm: 'sm:[&_[data-slot=header-mobile-menu-toggle]]:hidden',
+  md: 'md:[&_[data-slot=header-mobile-menu-toggle]]:hidden',
+  lg: 'lg:[&_[data-slot=header-mobile-menu-toggle]]:hidden',
+} as const;
+
 const NAV_SHOWN = {
   sm: 'sm:[&>nav]:flex',
   md: 'md:[&>nav]:flex',
@@ -57,7 +64,7 @@ const BREAKPOINT: Record<ScHeaderExpand, string> = {
  *   <a href="/">…</a>
  *   <nav scNavigationMenu aria-label="Main">…</nav>
  *   <div class="ms-auto flex items-center gap-2">…</div>
- *   <button scHeaderToggle>…</button>
+ *   <button scHeaderMobileMenuToggle>…</button>
  *   <ng-template scHeaderMobileMenu><nav aria-label="Main">…</nav></ng-template>
  * </header>
  * ```
@@ -158,6 +165,8 @@ export class ScHeader implements ScNavigationMenuLinkHost {
       // `expand`, where the menu has them.
       '[&>nav]:hidden',
       NAV_SHOWN[this.expand()],
+      // The toggle: only below `expand`, where the menu is.
+      TOGGLE_HIDDEN[this.expand()],
       this.sticky() && 'sticky top-0',
       this.hideOnScroll() &&
         'transition-transform duration-200 data-hidden:-translate-y-full motion-reduce:transition-none',

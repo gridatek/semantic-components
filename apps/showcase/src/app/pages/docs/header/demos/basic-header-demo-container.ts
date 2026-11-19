@@ -22,7 +22,7 @@ export class BasicHeaderDemoContainer {
 import {
   ScHeader,
   ScHeaderMobileMenu,
-  ScHeaderToggle,
+  ScHeaderMobileMenuToggle,
   ScLink,
   ScNavigationMenu,
   ScNavigationMenuItem,
@@ -45,7 +45,7 @@ import {
     ScNavigationMenuLink,
     ScNavigationMenuList,
     ScHeaderMobileMenu,
-    ScHeaderToggle,
+    ScHeaderMobileMenuToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
@@ -78,7 +78,7 @@ import {
           >Get started</a
         >
       </div>
-      <button scHeaderToggle class="-me-2">
+      <button scHeaderMobileMenuToggle class="-me-2">
         @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>

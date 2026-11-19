@@ -12,17 +12,16 @@ import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
 import { ScHeader } from './header';
 
-const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
-
 /**
- * Opens and closes the menu, on narrow screens. Your icons inside, and a name
+ * Opens and closes the mobile menu (the header shows it only below `expand`,
+ * wherever it sits in the bar). Your icons inside, and a name
  * that follows the state (`sr-only`): "Open menu" / "Close menu". Once it's
  * been pressed, the icon that comes in turns and fades in (100ms; not with
  * reduced motion) — not on the first paint. Where it sits is yours: e.g.
  * `ms-auto` to reach the bar's end, `-me-2` to line its icon up with the edge.
  *
  * ```html
- * <button scHeaderToggle>
+ * <button scHeaderMobileMenuToggle>
  *   @if (header.open()) {
  *     <svg siXIcon></svg><span class="sr-only">Close menu</span>
  *   } @else {
@@ -32,9 +31,9 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
  * ```
  */
 @Directive({
-  selector: 'button[scHeaderToggle]',
+  selector: 'button[scHeaderMobileMenuToggle]',
   host: {
-    'data-slot': 'header-toggle',
+    'data-slot': 'header-mobile-menu-toggle',
     type: 'button',
     '[attr.aria-expanded]': 'header.open()',
     // The panel exists only while open: nothing to control otherwise.
@@ -43,7 +42,7 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
     '(click)': 'toggle()',
   },
 })
-export class ScHeaderToggle {
+export class ScHeaderMobileMenuToggle {
   private readonly buttonStyles = injectStyle().button;
   private readonly header = inject(ScHeader);
 
@@ -60,7 +59,6 @@ export class ScHeaderToggle {
       // The icon your @if puts in (Menu ↔ X) turns 45°, grows and fades in.
       this.pressed() &&
         '[&_svg]:animate-in [&_svg]:fade-in-0 [&_svg]:zoom-in-75 [&_svg]:spin-in-45 [&_svg]:duration-100 motion-reduce:[&_svg]:animate-none',
-      HIDDEN[this.header.expand()],
       this.classInput(),
     ),
   );

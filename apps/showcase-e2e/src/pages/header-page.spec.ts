@@ -26,12 +26,12 @@ test.describe('Header Page', () => {
       .locator('tbody tr');
     await expect(rows.locator('td:nth-child(1)')).toHaveText([
       'ScHeader',
-      'ScHeaderToggle',
+      'ScHeaderMobileMenuToggle',
       'ScHeaderMobileMenu',
     ]);
     await expect(rows.locator('td:nth-child(2)')).toHaveText([
       'header[scHeader]',
-      'button[scHeaderToggle]',
+      'button[scHeaderMobileMenuToggle]',
       'ng-template[scHeaderMobileMenu]',
     ]);
   });

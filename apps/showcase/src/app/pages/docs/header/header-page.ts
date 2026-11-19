@@ -166,7 +166,7 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
 export default class HeaderPage {
   private readonly anatomy = {
     imports:
-      "import { ScHeader, ScHeaderMobileMenu, ScHeaderToggle, ScNavigationMenu, ScNavigationMenuItem, ScNavigationMenuLink, ScNavigationMenuList } from '@semantic-components/ui';",
+      "import { ScHeader, ScHeaderMobileMenu, ScHeaderMobileMenuToggle, ScNavigationMenu, ScNavigationMenuItem, ScNavigationMenuLink, ScNavigationMenuList } from '@semantic-components/ui';",
     markup: [
       '<header scHeader #header="scHeader">',
       '  <a href="/">…</a>  <!-- your brand: your own link -->',
@@ -183,7 +183,7 @@ export default class HeaderPage {
       '  <div class="ms-auto flex items-center gap-2">…</div>  <!-- your actions: your own layout -->',
       '',
       '  <!-- Below the expand width: the toggle and the menu -->',
-      '  <button scHeaderToggle class="-me-2">',
+      '  <button scHeaderMobileMenuToggle class="-me-2">',
       '    @if (header.open()) {',
       '      <svg siXIcon></svg><span class="sr-only">Close menu</span>',
       '    } @else {',
@@ -208,8 +208,8 @@ export default class HeaderPage {
         "The bar, the page's banner, 56px tall (more when the menu pushes the page): [(open)] the menu's state; expand ('sm', 'md', 'lg' — the width from which its links show, 'md' by default: its nav, a Navigation Menu, is hidden below it); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed, the window growing wide enough, the focus leaving the bar.",
     },
     {
-      name: 'ScHeaderToggle',
-      selector: 'button[scHeaderToggle]',
+      name: 'ScHeaderMobileMenuToggle',
+      selector: 'button[scHeaderMobileMenuToggle]',
       description:
         "Opens and closes the menu, below expand: aria-expanded, aria-controls while open. Your icons and a name that follows the state (sr-only); once pressed, the icon that comes in turns and fades in. The style's button: variant ('ghost'), size ('icon'). Where it sits is yours (ms-auto to reach the end, -me-2 to line its icon up with the edge).",
     },

@@ -10,7 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScHeader,
   ScHeaderMobileMenu,
-  ScHeaderToggle,
+  ScHeaderMobileMenuToggle,
   ScInputButton,
   ScKbd,
   ScLink,
@@ -43,7 +43,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
     RouterLinkActive,
     ScHeader,
     ScHeaderMobileMenu,
-    ScHeaderToggle,
+    ScHeaderMobileMenuToggle,
     ScInputButton,
     ScKbd,
     ScLink,
@@ -237,7 +237,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
         <app-theme-menu />
       </div>
 
-      <button scHeaderToggle class="-me-2">
+      <button scHeaderMobileMenuToggle class="-me-2">
         @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>

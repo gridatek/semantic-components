@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
   ScHeaderMobileMenu,
-  ScHeaderToggle,
+  ScHeaderMobileMenuToggle,
   ScLink,
   ScNavigationMenu,
   ScNavigationMenuItem,
@@ -20,7 +20,7 @@ import {
   imports: [
     ScHeader,
     ScHeaderMobileMenu,
-    ScHeaderToggle,
+    ScHeaderMobileMenuToggle,
     ScLink,
     ScNavigationMenu,
     ScNavigationMenuItem,
@@ -58,7 +58,7 @@ import {
         <a scLink variant="button" href="#">Get started</a>
       </div>
 
-      <button scHeaderToggle class="-me-2">
+      <button scHeaderMobileMenuToggle class="-me-2">
         @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>

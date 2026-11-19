@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
   ScHeaderMobileMenu,
-  ScHeaderToggle,
+  ScHeaderMobileMenuToggle,
   ScNavigationMenu,
   ScNavigationMenuContent,
   ScNavigationMenuItem,
@@ -23,7 +23,7 @@ import {
   imports: [
     ScHeader,
     ScHeaderMobileMenu,
-    ScHeaderToggle,
+    ScHeaderMobileMenuToggle,
     ScNavigationMenu,
     ScNavigationMenuContent,
     ScNavigationMenuItem,
@@ -66,7 +66,7 @@ import {
           }
         </ul>
       </nav>
-      <button scHeaderToggle class="ms-auto -me-2">
+      <button scHeaderMobileMenuToggle class="ms-auto -me-2">
         @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>

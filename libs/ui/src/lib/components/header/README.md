@@ -35,7 +35,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
     <a scLink variant="button" routerLink="/start">Get started</a>
   </div>
 
-  <button scHeaderToggle class="-me-2">
+  <button scHeaderMobileMenuToggle class="-me-2">
     @if (header.open()) {
     <svg siXIcon></svg>
     <span class="sr-only">Close menu</span>
@@ -74,7 +74,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 | `hideOnScroll` | `boolean`              | `false` | Slides away scrolling down, back scrolling up       |
 | `class`        | `string`               | `''`    | Additional CSS classes                              |
 
-### ScHeaderToggle — `button[scHeaderToggle]`
+### ScHeaderMobileMenuToggle — `button[scHeaderMobileMenuToggle]`
 
 Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`). Your icons inside (Menu and X, swapped with `@if`); once pressed, the one that comes in turns and fades in. Where it sits is yours: `ms-auto` to reach the bar's end, `-me-2` to line its icon up with the edge.
 

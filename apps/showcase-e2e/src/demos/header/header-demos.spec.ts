@@ -2,7 +2,8 @@ import { collectErrors, press } from '../../interaction';
 import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/header/${name}-header-demo`;
-const toggle = (page: Page) => page.locator('[data-slot=header-toggle]');
+const toggle = (page: Page) =>
+  page.locator('[data-slot=header-mobile-menu-toggle]');
 const menu = (page: Page) => page.locator('[data-slot=header-menu]');
 
 let errors: string[];
