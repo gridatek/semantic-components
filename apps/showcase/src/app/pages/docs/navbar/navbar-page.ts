@@ -5,7 +5,7 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicNavbarDemoContainer } from './demos/basic-navbar-demo-container';
 import { MobileNavbarDemoContainer } from './demos/mobile-navbar-demo-container';
 import { NavigationMenuNavbarDemoContainer } from './demos/navigation-menu-navbar-demo-container';
-import { OverlayNavbarDemoContainer } from './demos/overlay-navbar-demo-container';
+import { PushNavbarDemoContainer } from './demos/push-navbar-demo-container';
 import { RtlNavbarDemoContainer } from './demos/rtl-navbar-demo-container';
 import { StickyNavbarDemoContainer } from './demos/sticky-navbar-demo-container';
 
@@ -14,7 +14,7 @@ import { StickyNavbarDemoContainer } from './demos/sticky-navbar-demo-container'
   imports: [
     BasicNavbarDemoContainer,
     MobileNavbarDemoContainer,
-    OverlayNavbarDemoContainer,
+    PushNavbarDemoContainer,
     NavigationMenuNavbarDemoContainer,
     StickyNavbarDemoContainer,
     RtlNavbarDemoContainer,
@@ -43,7 +43,7 @@ import { StickyNavbarDemoContainer } from './demos/sticky-navbar-demo-container'
         </p>
         <app-basic-navbar-demo-container />
         <app-mobile-navbar-demo-container />
-        <app-overlay-navbar-demo-container />
+        <app-push-navbar-demo-container />
         <app-navigation-menu-navbar-demo-container />
         <app-sticky-navbar-demo-container />
         <app-rtl-navbar-demo-container />

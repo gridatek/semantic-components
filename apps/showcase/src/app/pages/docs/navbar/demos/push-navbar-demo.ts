@@ -15,7 +15,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-overlay-navbar-demo',
+  selector: 'app-push-navbar-demo',
   imports: [
     ScNavbar,
     ScNavbarBrand,
@@ -29,12 +29,12 @@ import {
     SiXIcon,
   ],
   template: `
-    <header scNavbar aria-label="Acme, overlay" #navbar="scNavbar">
+    <header scNavbar aria-label="Acme, push" #navbar="scNavbar">
       <a scNavbarBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavbarNav aria-label="Main, overlay">
+      <nav scNavbarNav aria-label="Main, push">
         @for (link of links; track link) {
           <a
             scNavbarLink
@@ -55,8 +55,8 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <div scNavbarMenu overlay>
-        <nav aria-label="Main, overlay">
+      <div scNavbarMenu push>
+        <nav aria-label="Main, push">
           @for (link of links; track link) {
             <a
               scNavbarMenuLink
@@ -73,14 +73,14 @@ import {
     <div class="space-y-4 p-4">
       <h2 class="text-lg font-semibold">{{ current() }}</h2>
       <p class="text-muted-foreground text-sm">
-        The menu opens over this text, which stays where it is. A click here, or
-        the focus moving here, closes it.
+        The menu pushes this text down, and stays open until you close it with
+        its toggle, Escape or a link.
       </p>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export class OverlayNavbarDemo {
+export class PushNavbarDemo {
   private readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   private readonly current = signal('Products');
 

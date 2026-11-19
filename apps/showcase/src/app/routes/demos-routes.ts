@@ -6272,11 +6272,11 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'overlay-navbar-demo',
+        path: 'push-navbar-demo',
         data: { fullPage: true },
         loadComponent: () =>
-          import('../pages/docs/navbar/demos/overlay-navbar-demo').then(
-            (m) => m.OverlayNavbarDemo,
+          import('../pages/docs/navbar/demos/push-navbar-demo').then(
+            (m) => m.PushNavbarDemo,
           ),
       },
       {

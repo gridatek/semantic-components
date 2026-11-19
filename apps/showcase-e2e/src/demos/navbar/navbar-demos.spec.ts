@@ -145,38 +145,30 @@ test.describe('narrow', () => {
     ).toHaveCount(4);
   });
 
-  test('Mobile Menu: pushes the page down', async ({ page }) => {
-    await page.goto(demo('mobile'));
-    const after = page.getByText('Menu closed');
-    const before = (await after.boundingBox())!.y;
-    await page.getByRole('button', { name: 'Open menu' }).click();
-    await expect
-      .poll(async () => (await page.getByText('Menu open').boundingBox())!.y)
-      .toBeGreaterThan(before + 100);
-  });
-
-  test('Overlay Menu: over the page, which stays put; closes outside', async ({
+  test('Mobile Menu: over the whole page, which stays put; closes when the focus leaves', async ({
     page,
   }) => {
-    await page.goto(demo('overlay'));
-    const heading = page.getByRole('heading', { name: 'Products' });
-    const before = (await heading.boundingBox())!.y;
+    await page.goto(demo('mobile'));
+    const before = (await page.getByText('Menu closed').boundingBox())!.y;
     await page.getByRole('button', { name: 'Open menu' }).click();
     await expect(menu(page)).toHaveAttribute('data-state', 'open');
     await expect(
-      page.getByRole('navigation', { name: 'Main, overlay' }).getByRole('link'),
+      page.getByRole('navigation', { name: 'Main, mobile' }).getByRole('link'),
     ).toHaveCount(4);
-    expect((await heading.boundingBox())!.y).toBe(before);
-    // The menu covers the heading.
-    const box = (await menu(page).boundingBox())!;
-    expect(box.y + box.height).toBeGreaterThan(before);
+    // Shown at once (no animation), as ui-sdk's.
+    await expect(menu(page)).toHaveCSS('transition-duration', '0s');
+    // The page stays where it is; the menu covers all of it below the bar,
+    // down to the window's bottom.
+    expect((await page.getByText('Menu open').boundingBox())!.y).toBe(before);
+    const bottom = page.viewportSize()!.height;
+    await expect
+      .poll(async () => {
+        const box = (await menu(page).boundingBox())!;
+        return Math.round(box.y + box.height);
+      })
+      .toBe(bottom);
 
-    // A click outside the bar closes it.
-    await page.mouse.click(200, 400);
-    await expect(menu(page)).toHaveAttribute('data-state', 'closed');
-
-    // So does the focus leaving it: Tab past its last link.
-    await page.getByRole('button', { name: 'Open menu' }).click();
+    // The focus leaving it closes it: Tab past its last link.
     await page.getByRole('link', { name: 'Blog' }).focus();
     await page.evaluate(() => {
       const outside = document.createElement('button');
@@ -185,6 +177,41 @@ test.describe('narrow', () => {
       outside.focus();
     });
     await expect(menu(page)).toHaveAttribute('data-state', 'closed');
+  });
+
+  test('Push Menu: pushes the page down; a click on the page leaves it open', async ({
+    page,
+  }) => {
+    await page.goto(demo('push'));
+    const heading = page.getByRole('heading', { name: 'Products' });
+    const before = (await heading.boundingBox())!.y;
+    await page.getByRole('button', { name: 'Open menu' }).click();
+    await expect(
+      page.getByRole('navigation', { name: 'Main, push' }).getByRole('link'),
+    ).toHaveCount(4);
+    await expect
+      .poll(async () => (await heading.boundingBox())!.y)
+      .toBeGreaterThan(before + 100);
+    await page.getByText('The menu pushes this text down').click();
+    await expect(menu(page)).toHaveAttribute('data-state', 'open');
+    // Its height still animates: it moves the page.
+    await expect(menu(page)).not.toHaveCSS('transition-duration', '0s');
+  });
+
+  test('Mobile Menu: the icon that comes in turns and fades in, not on the first paint', async ({
+    page,
+  }) => {
+    await page.goto(demo('mobile'));
+    const icon = toggle(page).locator('svg');
+    // On load: the Menu icon as it is, no animation.
+    await expect(icon).toHaveCSS('animation-name', 'none');
+    await toggle(page).click();
+    // Pressed: the X swapped in plays tw-animate's enter, in 100ms.
+    await expect(icon).toHaveCSS('animation-name', 'enter');
+    await expect(icon).toHaveCSS('animation-duration', '0.1s');
+    await toggle(page).click();
+    await expect(page.getByRole('button', { name: 'Open menu' })).toBeVisible();
+    await expect(icon).toHaveCSS('animation-name', 'enter');
   });
 
   test('RTL: brand at the right, toggle at the left', async ({ page }) => {

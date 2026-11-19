@@ -5,8 +5,9 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
 ## Features
 
 - **Responsive** — the links show from `expand` (`sm`, `md`, `lg`); below it, the toggle and the menu
-- **Disclosure menu** — `aria-expanded`, `aria-controls`; its height animates; it pushes the page down, or with `overlay` lies over it
-- **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough
+- **Disclosure menu** — `aria-expanded`, `aria-controls`; it covers the page below the bar, shown and hidden at once (scrolling inside if it is taller), or with `push` pushes the page down, its height animating
+- **The toggle's icon animates** — once the toggle is pressed, the icon your `@if` swaps in (Menu ↔ X) turns 45° and fades in (100ms; not on the first paint, not with reduced motion)
+- **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough; covering the page, the focus leaving the bar too
 - **`[(open)]`** — the menu's state, two-way
 - **Sticky**, and **hides on scroll** (away going down, back going up)
 - **Current page** — `active` gives `aria-current="page"`
@@ -97,15 +98,15 @@ The buttons at the end.
 
 ### ScNavbarToggle — `button[scNavbarToggle]`
 
-Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`).
+Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`). Your icons inside (Menu and X, swapped with `@if`); once pressed, the one that comes in turns and fades in.
 
 ### ScNavbarMenu — `div[scNavbarMenu]`
 
 The panel under the bar, below `expand`. Put a named `nav` inside, and any actions.
 
-| Input     | Type      | Default | Description                                                                                                |
-| --------- | --------- | ------- | ---------------------------------------------------------------------------------------------------------- |
-| `overlay` | `boolean` | `false` | Over the page, under the bar, instead of pushing the page down; closes on a click or focus outside the bar |
+| Input  | Type      | Default | Description                                                                                            |
+| ------ | --------- | ------- | ------------------------------------------------------------------------------------------------------ |
+| `push` | `boolean` | `false` | Pushes the page down, instead of covering it below the bar (where the focus leaving the bar closes it) |
 
 ### ScNavbarMenuLink — `a[scNavbarMenuLink]`
 
