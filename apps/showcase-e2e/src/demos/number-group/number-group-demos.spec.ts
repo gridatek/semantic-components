@@ -220,7 +220,8 @@ test.describe('Number field', () => {
     const adults = page.getByRole('spinbutton', { name: 'Adults' });
     const remove = page.getByRole('button', { name: 'Remove adult' });
     const add = page.getByRole('button', { name: 'Add adult' });
-    const status = page.getByRole('status').first();
+    // The page's live region (CDK's announcer), not one in the group.
+    const status = page.locator('.cdk-live-announcer-element');
     await expect(adults).toHaveAccessibleDescription('Between 1 and 8.');
 
     // At its bound a button is unavailable, yet still focusable (not disabled).

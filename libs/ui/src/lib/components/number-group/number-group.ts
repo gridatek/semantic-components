@@ -1,3 +1,4 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
   Component,
   DestroyRef,
@@ -77,9 +78,6 @@ const ring = cn(
   },
   template: `
     <ng-content />
-    <span class="sr-only" role="status" data-slot="number-status">{{
-      announcement()
-    }}</span>
     @if (name()) {
       <input
         type="hidden"
@@ -93,6 +91,7 @@ const ring = cn(
 })
 export class ScNumberGroup implements FormValueControl<number | null> {
   private readonly controlGroupStyles = injectStyle().controlGroup;
+  private readonly announcer = inject(LiveAnnouncer);
   /** The field it is in (its label, descriptions, errors). */
   private readonly field = inject(ScField, { optional: true });
 
@@ -152,18 +151,15 @@ export class ScNumberGroup implements FormValueControl<number | null> {
   }
 
   /**
-   * The value a button stepped to, read out (a live region: focus is on the
-   * button, not the input); cleared after a while.
+   * Reads out the value a button stepped to (the buttons do: focus is on the
+   * button, not the input) — through the page's live region (CDK's
+   * announcer), cleared after a while: not a region of its own in the group,
+   * whose first and last children are its buttons (their corners).
    */
-  private readonly announcement = signal('');
-  private announcementTimeout: ReturnType<typeof setTimeout> | undefined;
-
-  /** Reads the value out (the buttons do, after a step). */
   announce(): void {
-    this.announcement.set(this.formattedValue());
-    clearTimeout(this.announcementTimeout);
-    this.announcementTimeout = setTimeout(
-      () => this.announcement.set(''),
+    void this.announcer.announce(
+      this.formattedValue(),
+      'polite',
       ANNOUNCEMENT_DURATION,
     );
   }
@@ -288,7 +284,6 @@ export class ScNumberGroup implements FormValueControl<number | null> {
   }
 
   constructor() {
-    inject(DestroyRef).onDestroy(() => clearTimeout(this.announcementTimeout));
     // The field it is in: its state follows the number's (`data-disabled`,
     // `data-invalid`), and its scrub area (around the label, outside this
     // group) reaches it.
