@@ -155,8 +155,10 @@ test.describe('narrow', () => {
     await expect(
       page.getByRole('navigation', { name: 'Main, mobile' }).getByRole('link'),
     ).toHaveCount(4);
-    // Shown at once (no animation), as ui-sdk's.
+    // Shown at once (no animation), as shadcn's; see-through and blurred.
     await expect(menu(page)).toHaveCSS('transition-duration', '0s');
+    await expect(menu(page)).toHaveCSS('animation-name', 'none');
+    await expect(menu(page)).toHaveCSS('backdrop-filter', /blur/);
     // The page stays where it is; the menu covers all of it below the bar,
     // down to the window's bottom.
     expect((await page.getByText('Menu open').boundingBox())!.y).toBe(before);
@@ -177,6 +179,23 @@ test.describe('narrow', () => {
       outside.focus();
     });
     await expect(menu(page)).toHaveAttribute('data-state', 'closed');
+  });
+
+  test('Mobile Menu: closing, it fades out in 100ms, then is hidden', async ({
+    page,
+  }) => {
+    await page.goto(demo('mobile'));
+    await page.getByRole('button', { name: 'Open menu' }).click();
+    await expect(menu(page)).toHaveAttribute('data-state', 'open');
+    await page.getByRole('button', { name: 'Close menu' }).click();
+    // tw-animate's exit (fade out, zoom out), 100ms…
+    await expect(menu(page)).toHaveCSS('animation-name', 'exit');
+    await expect(menu(page)).toHaveCSS('animation-duration', '0.1s');
+    // …then hidden: out of the tab order and the accessibility tree.
+    await expect(menu(page)).toHaveCSS('visibility', 'hidden');
+    await expect(
+      page.getByRole('navigation', { name: 'Main, mobile' }),
+    ).toHaveCount(0);
   });
 
   test('Push Menu: pushes the page down; a click on the page leaves it open', async ({

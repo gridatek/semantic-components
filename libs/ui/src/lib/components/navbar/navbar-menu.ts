@@ -38,19 +38,22 @@ export class ScNavbarMenu {
     cn(
       'flex basis-full flex-col gap-1 overflow-hidden',
       // Closed: `invisible`, out of the tab order and the accessibility tree.
-      'data-[state=open]:pb-4 data-[state=closed]:invisible data-[state=closed]:h-0',
+      'data-[state=open]:pb-4 data-[state=closed]:invisible',
       // Pushing the page, its height animates between auto and 0 (global
-      // `interpolate-size`): the page moves with it. Over the page, it shows
-      // and hides at once, as ui-sdk's.
+      // `interpolate-size`): the page moves with it.
       this.push() &&
-        'transition-[height,padding,visibility] duration-200 ease-out motion-reduce:transition-none',
-      // Over the page: the bar's width and padding, its own background; open,
-      // all of the page below the bar (the window's height less the bar's,
-      // which is `100%` here), scrolling if its content is taller.
-      !this.push() && 'bg-background absolute inset-x-0 top-full px-4 md:px-6',
+        'data-[state=closed]:h-0 transition-[height,padding,visibility] duration-200 ease-out motion-reduce:transition-none',
+      // Over the page, as shadcn's: the bar's width and padding; all of the
+      // page below the bar (the window's height less the bar's, which is
+      // `100%` here), scrolling if its content is taller; see-through and
+      // blurred. It opens at once.
       !this.push() &&
-        this.navbar.open() &&
-        'h-[calc(100dvh-100%)] overflow-y-auto overscroll-contain',
+        'bg-background/90 backdrop-blur absolute inset-x-0 top-full px-4 md:px-6 h-[calc(100dvh-100%)] overflow-y-auto overscroll-contain',
+      // Closing, it fades out and shrinks a little (100ms), and only then is
+      // hidden: `visibility` waits for the end of its transition.
+      !this.push() &&
+        !this.navbar.open() &&
+        'animate-out fade-out-0 zoom-out-95 duration-100 transition-[visibility] motion-reduce:animate-none motion-reduce:transition-none',
       HIDDEN[this.navbar.expand()],
       this.classInput(),
     ),

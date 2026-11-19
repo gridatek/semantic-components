@@ -5,7 +5,7 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
 ## Features
 
 - **Responsive** — the links show from `expand` (`sm`, `md`, `lg`); below it, the toggle and the menu
-- **Disclosure menu** — `aria-expanded`, `aria-controls`; it covers the page below the bar, shown and hidden at once (scrolling inside if it is taller), or with `push` pushes the page down, its height animating
+- **Disclosure menu** — `aria-expanded`, `aria-controls`; it covers the page below the bar, see-through and blurred as shadcn's (scrolling inside if it is taller); it opens at once and fades out in 100ms on closing, or with `push` pushes the page down, its height animating
 - **The toggle's icon animates** — once the toggle is pressed, the icon your `@if` swaps in (Menu ↔ X) turns 45° and fades in (100ms; not on the first paint, not with reduced motion)
 - **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough; covering the page, the focus leaving the bar too
 - **`[(open)]`** — the menu's state, two-way
