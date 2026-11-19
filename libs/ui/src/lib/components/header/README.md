@@ -10,7 +10,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 - **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough; covering the page, the focus leaving the bar too
 - **`[(open)]`** — the menu's state, two-way
 - **Sticky**, and **hides on scroll** (away going down, back going up)
-- **The links are the Navigation Menu's** — on the same `nav` (one landmark); the header adds only what the Navigation Menu doesn't have: the bar, the breakpoint, the phone menu
+- **The links are a Navigation Menu** — the bar's `nav`, which the header hides below `expand`; the header adds only what the Navigation Menu doesn't have: the bar, the breakpoint, the phone menu
 - **Current page** — `active` gives `aria-current="page"`, in the bar (the Navigation Menu's links) and in the menu
 - **RTL**
 
@@ -18,9 +18,9 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 
 ```html
 <header scHeader #header="scHeader">
-  <a scHeaderBrand href="/"><svg siGalleryVerticalEndIcon></svg> Acme</a>
+  <a href="/" class="flex items-center gap-2 font-semibold"> <svg siGalleryVerticalEndIcon></svg> Acme </a>
 
-  <nav scNavigationMenu scHeaderNav aria-label="Main">
+  <nav scNavigationMenu aria-label="Main">
     <ul scNavigationMenuList>
       <li scNavigationMenuItem>
         <a scNavigationMenuLink routerLink="/products" active>Products</a>
@@ -31,11 +31,11 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
     </ul>
   </nav>
 
-  <div scHeaderActions>
+  <div class="ms-auto flex items-center gap-2">
     <a scLink variant="button" routerLink="/start">Get started</a>
   </div>
 
-  <button scHeaderToggle>
+  <button scHeaderToggle class="-me-2">
     @if (header.open()) {
     <svg siXIcon></svg>
     <span class="sr-only">Close menu</span>
@@ -45,7 +45,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
     }
   </button>
 
-  <ng-template scHeaderMenu>
+  <ng-template scHeaderMobileMenuContent>
     <nav aria-label="Main">
       <a scHeaderMenuLink routerLink="/products" active>Products</a>
       <a scHeaderMenuLink routerLink="/pricing">Pricing</a>
@@ -74,23 +74,11 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 | `hideOnScroll` | `boolean`              | `false` | Slides away scrolling down, back scrolling up       |
 | `class`        | `string`               | `''`    | Additional CSS classes                              |
 
-### ScHeaderBrand — `a[scHeaderBrand]`
-
-Your logo and name, a link home.
-
-### ScHeaderNav — `nav[scHeaderNav]`
-
-The links, from `expand` up: on a Navigation Menu (`nav[scNavigationMenu]`), which draws them — its links, `active` for the page shown, its panels if you want them. The header only hides it on narrow screens, where its menu has the links.
-
-### ScHeaderActions — `div[scHeaderActions]`
-
-The buttons at the end.
-
 ### ScHeaderToggle — `button[scHeaderToggle]`
 
-Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`). Your icons inside (Menu and X, swapped with `@if`); once pressed, the one that comes in turns and fades in.
+Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`). Your icons inside (Menu and X, swapped with `@if`); once pressed, the one that comes in turns and fades in. Where it sits is yours: `ms-auto` to reach the bar's end, `-me-2` to line its icon up with the edge.
 
-### ScHeaderMenu — `ng-template[scHeaderMenu]`
+### ScHeaderMobileMenuContent — `ng-template[scHeaderMobileMenuContent]`
 
 The menu's content, below `expand`: a named `nav` with `scHeaderMenuLink`s, and any actions, in an `ng-template`. The header renders it while the menu is open, in its own panel under the bar (`data-slot="header-menu"`, the toggle's `aria-controls` while open), and removes it on closing — so closed, its links aren't in the page. `class`: classes for that panel.
 

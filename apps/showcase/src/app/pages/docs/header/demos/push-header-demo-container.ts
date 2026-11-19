@@ -21,10 +21,8 @@ export class PushHeaderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
-  ScHeaderBrand,
-  ScHeaderMenu,
+  ScHeaderMobileMenuContent,
   ScHeaderMenuLink,
-  ScHeaderNav,
   ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
@@ -41,14 +39,12 @@ import {
   selector: 'app-push-header-demo',
   imports: [
     ScHeader,
-    ScHeaderBrand,
     ScNavigationMenu,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScHeaderMenu,
+    ScHeaderMobileMenuContent,
     ScHeaderMenuLink,
-    ScHeaderNav,
     ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
@@ -56,11 +52,11 @@ import {
   ],
   template: \`
     <header scHeader aria-label="Acme, push" #header="scHeader">
-      <a scHeaderBrand href="#">
+      <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavigationMenu scHeaderNav aria-label="Main, push">
+      <nav scNavigationMenu aria-label="Main, push">
         <ul scNavigationMenuList>
           @for (link of links; track link) {
             <li scNavigationMenuItem>
@@ -76,7 +72,7 @@ import {
           }
         </ul>
       </nav>
-      <button scHeaderToggle>
+      <button scHeaderToggle class="ms-auto -me-2">
         @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
@@ -85,7 +81,7 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scHeaderMenu push>
+      <ng-template scHeaderMobileMenuContent push>
         <nav aria-label="Main, push">
           @for (link of links; track link) {
             <a

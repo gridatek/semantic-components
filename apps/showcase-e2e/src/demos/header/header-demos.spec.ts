@@ -23,6 +23,8 @@ test.describe('wide', () => {
   }) => {
     await page.goto(demo('basic'));
     await expect(page.getByRole('banner')).toBeVisible();
+    // The bar's height is its own, brand or not.
+    await expect(page.getByRole('banner')).toHaveCSS('min-height', '56px');
     const nav = page.getByRole('navigation', { name: 'Main' });
     await expect(nav).toHaveCount(1);
     await expect(nav.getByRole('link')).toHaveText([
@@ -239,7 +241,7 @@ test.describe('narrow', () => {
 
   test('RTL: brand at the right, toggle at the left', async ({ page }) => {
     await page.goto(demo('rtl'));
-    const brand = page.locator('[data-slot=header-brand]');
+    const brand = page.getByRole('link', { name: 'أكمي' });
     const button = page.getByRole('button', { name: 'فتح القائمة' });
     expect((await brand.boundingBox())!.x).toBeGreaterThan(
       (await button.boundingBox())!.x,

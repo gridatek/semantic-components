@@ -2,11 +2,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
   ScHeader,
-  ScHeaderActions,
-  ScHeaderBrand,
-  ScHeaderMenu,
   ScHeaderMenuLink,
-  ScHeaderNav,
+  ScHeaderMobileMenuContent,
   ScHeaderToggle,
   ScLink,
   ScNavigationMenu,
@@ -30,15 +27,12 @@ import { ThemeMenu } from './theme-menu';
     RouterOutlet,
     ScLink,
     ScHeader,
-    ScHeaderActions,
-    ScHeaderBrand,
     ScNavigationMenu,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScHeaderMenu,
+    ScHeaderMobileMenuContent,
     ScHeaderMenuLink,
-    ScHeaderNav,
     ScHeaderToggle,
     ScSeparator,
     SiMenuIcon,
@@ -53,14 +47,14 @@ import { ThemeMenu } from './theme-menu';
       aria-label="Sera"
       class="px-(--page-gutter) md:px-(--page-gutter)"
     >
-      <a scHeaderBrand routerLink="/">
+      <a class="flex items-center" routerLink="/">
         <span
           class="bg-primary text-primary-foreground font-heading flex h-8 items-center px-3 text-lg tracking-wide uppercase"
           >Sera</span
         >
       </a>
 
-      <nav scNavigationMenu scHeaderNav aria-label="Main">
+      <nav scNavigationMenu aria-label="Main">
         <ul scNavigationMenuList>
           @for (page of pages; track page.path) {
             <li scNavigationMenuItem>
@@ -78,11 +72,11 @@ import { ThemeMenu } from './theme-menu';
         </ul>
       </nav>
 
-      <div scHeaderActions>
+      <div class="ms-auto flex items-center gap-2">
         <app-theme-menu />
       </div>
 
-      <button scHeaderToggle>
+      <button scHeaderToggle class="-me-2">
         @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
@@ -92,7 +86,7 @@ import { ThemeMenu } from './theme-menu';
         }
       </button>
 
-      <ng-template scHeaderMenu>
+      <ng-template scHeaderMobileMenuContent>
         <nav aria-label="Main">
           @for (page of pages; track page.path) {
             <a

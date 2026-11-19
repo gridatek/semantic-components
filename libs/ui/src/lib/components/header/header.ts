@@ -18,12 +18,19 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { cn } from 'cn';
 import { filter } from 'rxjs';
-import { ScHeaderMenu } from './header-menu';
+import { ScHeaderMobileMenuContent } from './header-mobile-menu-content';
 
 /** The width from which the links show and the toggle hides. */
 export type ScHeaderExpand = 'sm' | 'md' | 'lg';
 
 const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
+
+/** The bar's links (its `nav`): shown from `expand` up. */
+const NAV_SHOWN = {
+  sm: 'sm:[&>nav]:flex',
+  md: 'md:[&>nav]:flex',
+  lg: 'lg:[&>nav]:flex',
+} as const;
 
 /** Tailwind's breakpoints, for the same widths in a media query. */
 const BREAKPOINT: Record<ScHeaderExpand, string> = {
@@ -33,21 +40,21 @@ const BREAKPOINT: Record<ScHeaderExpand, string> = {
 };
 
 /**
- * A site's top bar (`header`, the banner landmark): your brand, links and
+ * A site's top bar (`header`, the banner landmark): your brand (your own link), links and
  * actions; on narrow screens a toggle and a menu panel under the bar (a
  * disclosure — the page stays usable, nothing is trapped). The menu is your
- * `ng-template scHeaderMenu`: the header renders it while open. It closes on
+ * `ng-template scHeaderMobileMenuContent`: the header renders it while open. It closes on
  * Escape (focus back on the toggle), when a link in it is followed, when the
  * window grows wide enough for the links, and — over the page — when the
  * focus leaves the bar.
  *
  * ```html
  * <header scHeader>
- *   <a scHeaderBrand href="/">…</a>
- *   <nav scNavigationMenu scHeaderNav aria-label="Main">…</nav>
- *   <div scHeaderActions>…</div>
+ *   <a href="/">…</a>
+ *   <nav scNavigationMenu aria-label="Main">…</nav>
+ *   <div class="ms-auto flex items-center gap-2">…</div>
  *   <button scHeaderToggle>…</button>
- *   <ng-template scHeaderMenu><nav aria-label="Main">…</nav></ng-template>
+ *   <ng-template scHeaderMobileMenuContent><nav aria-label="Main">…</nav></ng-template>
  * </header>
  * ```
  */
@@ -97,8 +104,8 @@ export class ScHeader {
   /** The toggle, to give it back the focus. */
   readonly toggle = signal<HTMLElement | null>(null);
 
-  /** Your menu's content (`ng-template scHeaderMenu`). */
-  private readonly menu = contentChild(ScHeaderMenu);
+  /** Your menu's content (`ng-template scHeaderMobileMenuContent`). */
+  private readonly menu = contentChild(ScHeaderMobileMenuContent);
   /** The menu lies over the page (not `push`). */
   private readonly covers = computed(() => !(this.menu()?.push() ?? false));
 
@@ -137,12 +144,16 @@ export class ScHeader {
 
   private readonly class = computed(() =>
     cn(
-      'bg-background relative z-40 flex flex-wrap items-center gap-x-4 border-b px-4 md:px-6',
+      // Its own height (56px), whatever is in it; it grows when the menu wraps
+      // below (push).
+      'bg-background relative z-40 flex min-h-14 flex-wrap items-center gap-x-4 border-b px-4 md:px-6',
+      // Its links (a `nav` in the bar, a Navigation Menu): hidden below
+      // `expand`, where the menu has them.
+      '[&>nav]:hidden',
+      NAV_SHOWN[this.expand()],
       this.sticky() && 'sticky top-0',
       this.hideOnScroll() &&
         'transition-transform duration-200 data-hidden:-translate-y-full motion-reduce:transition-none',
-      // The actions take the free space; the toggle after them doesn't.
-      '[&>[data-slot=header-actions]~[data-slot=header-toggle]]:ms-0',
       this.classInput(),
     ),
   );

@@ -64,10 +64,11 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
-          The bar holds your brand, the links — a Navigation Menu, shown from
-          the expand width up — your actions, and below that width a toggle and
-          the menu. The menu is an ng-template: the header renders it while it
-          is open, and removes it on closing.
+          The bar holds your brand and your actions — your own markup, laid out
+          as you like — the links — a Navigation Menu, shown from the expand
+          width up — your actions, and below that width a toggle and the menu.
+          The menu is an ng-template: the header renders it while it is open,
+          and removes it on closing.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -165,13 +166,13 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
 export default class HeaderPage {
   private readonly anatomy = {
     imports:
-      "import { ScHeader, ScHeaderActions, ScHeaderBrand, ScHeaderMenu, ScHeaderMenuLink, ScHeaderNav, ScHeaderToggle, ScNavigationMenu, ScNavigationMenuItem, ScNavigationMenuLink, ScNavigationMenuList } from '@semantic-components/ui';",
+      "import { ScHeader, ScHeaderMobileMenuContent, ScHeaderMenuLink, ScHeaderToggle, ScNavigationMenu, ScNavigationMenuItem, ScNavigationMenuLink, ScNavigationMenuList } from '@semantic-components/ui';",
     markup: [
       '<header scHeader #header="scHeader">',
-      '  <a scHeaderBrand href="/">…</a>',
+      '  <a href="/">…</a>  <!-- your brand: your own link -->',
       '',
       '  <!-- The links: a Navigation Menu, from the expand width up -->',
-      '  <nav scNavigationMenu scHeaderNav aria-label="Main">',
+      '  <nav scNavigationMenu aria-label="Main">',
       '    <ul scNavigationMenuList>',
       '      <li scNavigationMenuItem>',
       '        <a scNavigationMenuLink [active]="…">…</a>',
@@ -179,10 +180,10 @@ export default class HeaderPage {
       '    </ul>',
       '  </nav>',
       '',
-      '  <div scHeaderActions>…</div>',
+      '  <div class="ms-auto flex items-center gap-2">…</div>  <!-- your actions: your own layout -->',
       '',
       '  <!-- Below the expand width: the toggle and the menu -->',
-      '  <button scHeaderToggle>',
+      '  <button scHeaderToggle class="-me-2">',
       '    @if (header.open()) {',
       '      <svg siXIcon></svg><span class="sr-only">Close menu</span>',
       '    } @else {',
@@ -190,7 +191,7 @@ export default class HeaderPage {
       '    }',
       '  </button>',
       '',
-      '  <ng-template scHeaderMenu>',
+      '  <ng-template scHeaderMobileMenuContent>',
       '    <nav aria-label="Main">',
       '      <a scHeaderMenuLink [active]="…">…</a>',
       '    </nav>',
@@ -204,34 +205,17 @@ export default class HeaderPage {
       name: 'ScHeader',
       selector: 'header[scHeader]',
       description:
-        "The bar, the page's banner: [(open)] the menu's state; expand ('sm', 'md', 'lg' — the width from which the links show, 'md' by default); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed, the window growing wide enough, the focus leaving the bar.",
-    },
-    {
-      name: 'ScHeaderBrand',
-      selector: 'a[scHeaderBrand]',
-      description: 'Your logo and name: a link home.',
-    },
-    {
-      name: 'ScHeaderNav',
-      selector: 'nav[scHeaderNav]',
-      description:
-        'On a Navigation Menu (nav[scNavigationMenu]), which draws the links: shown from expand up, the menu has them below. A navigation landmark: name it (aria-label).',
-    },
-    {
-      name: 'ScHeaderActions',
-      selector: 'div[scHeaderActions]',
-      description:
-        "The buttons at the bar's end — search, theme, sign in — at every width.",
+        "The bar, the page's banner, 56px tall (more when the menu pushes the page): [(open)] the menu's state; expand ('sm', 'md', 'lg' — the width from which its links show, 'md' by default: its nav, a Navigation Menu, is hidden below it); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed, the window growing wide enough, the focus leaving the bar.",
     },
     {
       name: 'ScHeaderToggle',
       selector: 'button[scHeaderToggle]',
       description:
-        "Opens and closes the menu, below expand: aria-expanded, aria-controls while open. Your icons and a name that follows the state (sr-only); once pressed, the icon that comes in turns and fades in. The style's button: variant ('ghost'), size ('icon').",
+        "Opens and closes the menu, below expand: aria-expanded, aria-controls while open. Your icons and a name that follows the state (sr-only); once pressed, the icon that comes in turns and fades in. The style's button: variant ('ghost'), size ('icon'). Where it sits is yours (ms-auto to reach the end, -me-2 to line its icon up with the edge).",
     },
     {
-      name: 'ScHeaderMenu',
-      selector: 'ng-template[scHeaderMenu]',
+      name: 'ScHeaderMobileMenuContent',
+      selector: 'ng-template[scHeaderMobileMenuContent]',
       description:
         "The menu's content — a named nav with its links, any actions — rendered by the header while open, in a panel covering the page below the bar: see-through and blurred, opening at once, fading out in 100ms. push: pushing the page down instead. class: the panel's classes.",
     },

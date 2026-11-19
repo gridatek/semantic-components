@@ -1,11 +1,8 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
-  ScHeaderActions,
-  ScHeaderBrand,
-  ScHeaderMenu,
   ScHeaderMenuLink,
-  ScHeaderNav,
+  ScHeaderMobileMenuContent,
   ScHeaderToggle,
   ScLink,
   ScNavigationMenu,
@@ -23,11 +20,8 @@ import {
   selector: 'app-header-usage-demo',
   imports: [
     ScHeader,
-    ScHeaderActions,
-    ScHeaderBrand,
-    ScHeaderMenu,
+    ScHeaderMobileMenuContent,
     ScHeaderMenuLink,
-    ScHeaderNav,
     ScHeaderToggle,
     ScLink,
     ScNavigationMenu,
@@ -40,12 +34,12 @@ import {
   ],
   template: `
     <header scHeader #header="scHeader">
-      <a scHeaderBrand href="#">
+      <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
 
-      <nav scNavigationMenu scHeaderNav aria-label="Main">
+      <nav scNavigationMenu aria-label="Main">
         <ul scNavigationMenuList>
           @for (link of links; track link) {
             <li scNavigationMenuItem>
@@ -62,11 +56,11 @@ import {
         </ul>
       </nav>
 
-      <div scHeaderActions>
+      <div class="ms-auto flex items-center gap-2">
         <a scLink variant="button" href="#">Get started</a>
       </div>
 
-      <button scHeaderToggle>
+      <button scHeaderToggle class="-me-2">
         @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
@@ -76,7 +70,7 @@ import {
         }
       </button>
 
-      <ng-template scHeaderMenu>
+      <ng-template scHeaderMobileMenuContent>
         <nav aria-label="Main">
           @for (link of links; track link) {
             <a

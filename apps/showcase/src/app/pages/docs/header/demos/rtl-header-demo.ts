@@ -2,10 +2,8 @@ import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
-  ScHeaderBrand,
-  ScHeaderMenu,
   ScHeaderMenuLink,
-  ScHeaderNav,
+  ScHeaderMobileMenuContent,
   ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
@@ -23,14 +21,12 @@ import {
   imports: [
     Dir,
     ScHeader,
-    ScHeaderBrand,
     ScNavigationMenu,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScHeaderMenu,
+    ScHeaderMobileMenuContent,
     ScHeaderMenuLink,
-    ScHeaderNav,
     ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
@@ -39,11 +35,14 @@ import {
   template: `
     <div dir="rtl" lang="ar">
       <header scHeader aria-label="أكمي" #header="scHeader">
-        <a scHeaderBrand href="#">
+        <a
+          class="flex items-center gap-2 font-semibold [&>svg]:size-6"
+          href="#"
+        >
           <svg siGalleryVerticalEndIcon></svg>
           أكمي
         </a>
-        <nav scNavigationMenu scHeaderNav aria-label="الرئيسية">
+        <nav scNavigationMenu aria-label="الرئيسية">
           <ul scNavigationMenuList>
             @for (link of links; track link) {
               <li scNavigationMenuItem>
@@ -59,7 +58,7 @@ import {
             }
           </ul>
         </nav>
-        <button scHeaderToggle>
+        <button scHeaderToggle class="ms-auto -me-2">
           @if (header.open()) {
             <svg siXIcon></svg>
             <span class="sr-only">إغلاق القائمة</span>
@@ -68,7 +67,7 @@ import {
             <span class="sr-only">فتح القائمة</span>
           }
         </button>
-        <ng-template scHeaderMenu>
+        <ng-template scHeaderMobileMenuContent>
           <nav aria-label="الرئيسية">
             @for (link of links; track link) {
               <a

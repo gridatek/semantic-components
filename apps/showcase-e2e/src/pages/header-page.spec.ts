@@ -26,20 +26,14 @@ test.describe('Header Page', () => {
       .locator('tbody tr');
     await expect(rows.locator('td:nth-child(1)')).toHaveText([
       'ScHeader',
-      'ScHeaderBrand',
-      'ScHeaderNav',
-      'ScHeaderActions',
       'ScHeaderToggle',
-      'ScHeaderMenu',
+      'ScHeaderMobileMenuContent',
       'ScHeaderMenuLink',
     ]);
     await expect(rows.locator('td:nth-child(2)')).toHaveText([
       'header[scHeader]',
-      'a[scHeaderBrand]',
-      'nav[scHeaderNav]',
-      'div[scHeaderActions]',
       'button[scHeaderToggle]',
-      'ng-template[scHeaderMenu]',
+      'ng-template[scHeaderMobileMenuContent]',
       'a[scHeaderMenuLink]',
     ]);
   });

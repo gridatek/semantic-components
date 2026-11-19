@@ -18,7 +18,8 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
  * Opens and closes the menu, on narrow screens. Your icons inside, and a name
  * that follows the state (`sr-only`): "Open menu" / "Close menu". Once it's
  * been pressed, the icon that comes in turns and fades in (100ms; not with
- * reduced motion) — not on the first paint.
+ * reduced motion) — not on the first paint. Where it sits is yours: e.g.
+ * `ms-auto` to reach the bar's end, `-me-2` to line its icon up with the edge.
  *
  * ```html
  * <button scHeaderToggle>
@@ -56,7 +57,6 @@ export class ScHeaderToggle {
   private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
-      '-me-2 ms-auto',
       // The icon your @if puts in (Menu ↔ X) turns 45°, grows and fades in.
       this.pressed() &&
         '[&_svg]:animate-in [&_svg]:fade-in-0 [&_svg]:zoom-in-75 [&_svg]:spin-in-45 [&_svg]:duration-100 motion-reduce:[&_svg]:animate-none',

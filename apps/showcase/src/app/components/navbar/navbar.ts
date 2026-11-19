@@ -9,11 +9,8 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScHeader,
-  ScHeaderActions,
-  ScHeaderBrand,
-  ScHeaderMenu,
   ScHeaderMenuLink,
-  ScHeaderNav,
+  ScHeaderMobileMenuContent,
   ScHeaderToggle,
   ScInputButton,
   ScKbd,
@@ -46,11 +43,8 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
     RouterLink,
     RouterLinkActive,
     ScHeader,
-    ScHeaderActions,
-    ScHeaderBrand,
-    ScHeaderMenu,
+    ScHeaderMobileMenuContent,
     ScHeaderMenuLink,
-    ScHeaderNav,
     ScHeaderToggle,
     ScInputButton,
     ScKbd,
@@ -73,13 +67,13 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
   template: `
     <header scHeader #header="scHeader" class="border-b-0">
       <!-- Brand -->
-      <a scHeaderBrand routerLink="/">
+      <a class="flex items-center" routerLink="/">
         <svg app-logo></svg>
         <span class="sr-only">Semantic Components</span>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav scNavigationMenu scHeaderNav aria-label="Main">
+      <nav scNavigationMenu aria-label="Main">
         <ul scNavigationMenuList>
           <li scNavigationMenuItem>
             <a
@@ -196,7 +190,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
       </nav>
 
       <!-- Actions -->
-      <div scHeaderActions>
+      <div class="ms-auto flex items-center gap-2">
         <button
           scInputButton
           class="hidden w-48 md:flex lg:w-64"
@@ -245,7 +239,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
         <app-theme-menu />
       </div>
 
-      <button scHeaderToggle>
+      <button scHeaderToggle class="-me-2">
         @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
@@ -256,7 +250,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
       </button>
 
       <!-- Mobile Menu -->
-      <ng-template scHeaderMenu>
+      <ng-template scHeaderMobileMenuContent>
         <nav aria-label="Main">
           <a
             scHeaderMenuLink
