@@ -29,7 +29,12 @@ import {
     SiXIcon,
   ],
   template: `
-    <header scHeader aria-label="Acme, push" #header="scHeader">
+    <header
+      scHeader
+      mobileMenu="push"
+      aria-label="Acme, push"
+      #header="scHeader"
+    >
       <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
@@ -59,7 +64,7 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scHeaderMobileMenu push>
+      <ng-template scHeaderMobileMenu>
         <nav aria-label="Main, push">
           @for (link of links; track link) {
             <a

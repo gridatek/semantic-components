@@ -5,7 +5,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 ## Features
 
 - **Responsive** — the links show from `expand` (`sm`, `md`, `lg`); below it, the toggle and the menu
-- **Disclosure menu** — `aria-expanded`, `aria-controls`; it covers the page below the bar, see-through and blurred as shadcn's (scrolling inside if it is taller); it opens at once and fades out in 100ms on closing, or with `push` pushes the page down, its height animating
+- **Disclosure menu** — `aria-expanded`, `aria-controls`; it covers the page below the bar, see-through and blurred as shadcn's (scrolling inside if it is taller); it opens at once and fades out in 100ms on closing, or with `mobileMenu="push"` pushes the page down, its height animating
 - **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough; covering the page, the focus leaving the bar too
 - **`[(mobileMenuOpen)]`** — the mobile menu's state, two-way
 - **Sticky**, and **hides on scroll** (away going down, back going up)
@@ -64,13 +64,14 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 
 `exportAs: 'scHeader'`.
 
-| Input            | Type                   | Default | Description                                         |
-| ---------------- | ---------------------- | ------- | --------------------------------------------------- |
-| `mobileMenuOpen` | `boolean` (two-way)    | `false` | Whether the mobile menu is open                     |
-| `expand`         | `'sm' \| 'md' \| 'lg'` | `'md'`  | The width from which the links show, the toggle not |
-| `sticky`         | `boolean`              | `false` | Stays at the top of the page                        |
-| `hideOnScroll`   | `boolean`              | `false` | Slides away scrolling down, back scrolling up       |
-| `class`          | `string`               | `''`    | Additional CSS classes                              |
+| Input            | Type                   | Default   | Description                                                                                                      |
+| ---------------- | ---------------------- | --------- | ---------------------------------------------------------------------------------------------------------------- |
+| `mobileMenuOpen` | `boolean` (two-way)    | `false`   | Whether the mobile menu is open                                                                                  |
+| `expand`         | `'sm' \| 'md' \| 'lg'` | `'md'`    | The width from which the links show, the toggle not                                                              |
+| `mobileMenu`     | `'cover' \| 'push'`    | `'cover'` | How the mobile menu shows: over the page below the bar (the focus leaving the bar closes it), or pushing it down |
+| `sticky`         | `boolean`              | `false`   | Stays at the top of the page                                                                                     |
+| `hideOnScroll`   | `boolean`              | `false`   | Slides away scrolling down, back scrolling up                                                                    |
+| `class`          | `string`               | `''`      | Additional CSS classes                                                                                           |
 
 ### ScHeaderMobileMenuToggle — `button[scHeaderMobileMenuToggle]`
 
@@ -78,11 +79,7 @@ Opens and closes the menu, below `expand`. Styled as the style's button: `varian
 
 ### ScHeaderMobileMenu — `ng-template[scHeaderMobileMenu]`
 
-The menu's content, below `expand`: a named `nav` with `scNavigationMenuLink`s (the Navigation Menu's link, with its states: following one closes the menu), and any actions, in an `ng-template`. The header renders it while the menu is open, in its own panel under the bar (`data-slot="header-menu"`, the toggle's `aria-controls` while open), and removes it on closing — so closed, its links aren't in the page. `class`: classes for that panel.
-
-| Input  | Type      | Default | Description                                                                                            |
-| ------ | --------- | ------- | ------------------------------------------------------------------------------------------------------ |
-| `push` | `boolean` | `false` | Pushes the page down, instead of covering it below the bar (where the focus leaving the bar closes it) |
+The menu's content, below `expand`: a named `nav` with `scNavigationMenuLink`s (the Navigation Menu's link, with its states: following one closes the menu), and any actions, in an `ng-template`. The header renders it while the menu is open, in its own panel under the bar (`data-slot="header-menu"`, the toggle's `aria-controls` while open), and removes it on closing — so closed, its links aren't in the page. No `class`: a template has no element of its own; style the content you put in it.
 
 ## Accessibility
 

@@ -207,7 +207,7 @@ export default class HeaderPage {
       name: 'ScHeader',
       selector: 'header[scHeader]',
       description:
-        "The bar, the page's banner, 56px tall (more when the menu pushes the page): [(mobileMenuOpen)] the mobile menu's state; expand ('sm', 'md', 'lg' — the width from which its links show, 'md' by default: its nav, a Navigation Menu, is hidden below it); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed, the window growing wide enough, the focus leaving the bar.",
+        "The bar, the page's banner, 56px tall (more when the menu pushes the page): [(mobileMenuOpen)] the mobile menu's state; expand ('sm', 'md', 'lg' — the width from which its links show, 'md' by default: its nav, a Navigation Menu, is hidden below it); mobileMenu ('cover' over the page below the bar, by default, or 'push' pushing it down); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed, the window growing wide enough, the focus leaving the bar.",
     },
     {
       name: 'ScHeaderMobileMenuToggle',
@@ -219,7 +219,7 @@ export default class HeaderPage {
       name: 'ScHeaderMobileMenu',
       selector: 'ng-template[scHeaderMobileMenu]',
       description:
-        "The menu's content — a named nav with its links (scNavigationMenuLink: the Navigation Menu's link, with its states; following one closes the menu), any actions — rendered by the header while open, in a panel covering the page below the bar: see-through and blurred, opening at once, fading out in 100ms. push: pushing the page down instead. class: the panel's classes.",
+        "The menu's content — a named nav with its links (scNavigationMenuLink: the Navigation Menu's link, with its states; following one closes the menu), any actions — rendered by the header while open, in a panel covering the page below the bar: see-through and blurred, opening at once, fading out in 100ms (with the header's mobileMenu set to 'push': pushing the page down instead). No class: style the content you put in it.",
     },
   ];
 }

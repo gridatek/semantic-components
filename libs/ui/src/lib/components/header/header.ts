@@ -27,6 +27,9 @@ import { ScHeaderMobileMenu } from './header-mobile-menu';
 /** The width from which the links show and the toggle hides. */
 export type ScHeaderExpand = 'sm' | 'md' | 'lg';
 
+/** How the mobile menu shows: over the page below the bar, or pushing it down. */
+export type ScHeaderMobileMenuMode = 'cover' | 'push';
+
 const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
 
 /** The bar's links (its `nav`): shown from `expand` up. */
@@ -106,6 +109,11 @@ export class ScHeader implements ScNavigationMenuLinkHost {
   readonly mobileMenuOpen = model(false);
   /** The width from which the links show and the toggle hides. */
   readonly expand = input<ScHeaderExpand>('md');
+  /**
+   * How the mobile menu shows: `'cover'` over the page below the bar (the
+   * focus leaving the bar closes it), `'push'` pushing the page down.
+   */
+  readonly mobileMenu = input<ScHeaderMobileMenuMode>('cover');
   /** Stays at the top of the page as it scrolls. */
   readonly sticky = input(false, { transform: booleanAttribute });
   /** Slides away while the page scrolls down, back when it scrolls up. */
@@ -121,7 +129,7 @@ export class ScHeader implements ScNavigationMenuLinkHost {
   /** Your menu's content (`ng-template scHeaderMobileMenu`). */
   private readonly menu = contentChild(ScHeaderMobileMenu);
   /** The menu lies over the page (not `push`). */
-  private readonly covers = computed(() => !(this.menu()?.push() ?? false));
+  private readonly covers = computed(() => this.mobileMenu() === 'cover');
 
   /**
    * The panel, under the bar. Over the page, as shadcn's: the bar's width and
@@ -135,7 +143,6 @@ export class ScHeader implements ScNavigationMenuLinkHost {
       this.covers() &&
         'bg-background/90 backdrop-blur absolute inset-x-0 top-full px-4 md:px-6 h-[calc(100dvh-100%)] overflow-y-auto overscroll-contain',
       HIDDEN[this.expand()],
-      this.menu()?.classInput(),
     ),
   );
   /** Over the page, it opens at once; pushing it, it fades and slides in. */
