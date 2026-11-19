@@ -23,7 +23,7 @@ import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScColorPicker,
   ScColorPickerArea,
-  ScColorPickerField,
+  ScColorPickerInput,
   ScColorPickerSlider,
   ScColorPickerSwatch,
 } from '@semantic-components/ui';
@@ -37,7 +37,7 @@ import {
     ScColorPickerArea,
     ScColorPickerSlider,
     ScColorPickerSwatch,
-    ScColorPickerField,
+    ScColorPickerInput,
   ],
   template: \`
     <div
@@ -61,7 +61,7 @@ import {
       <input scColorPickerSlider="alpha" aria-label="Opacity" />
       <div class="flex items-center gap-2">
         <span scColorPickerSwatch></span>
-        <input scColorPickerField aria-label="Colour" />
+        <input scColorPickerInput aria-label="Colour" />
       </div>
     </div>
     <pre class="bg-muted w-64 rounded-md p-3 text-xs">{{ color() }}</pre>

@@ -5,7 +5,7 @@ import {
   type ScColorFormat,
   ScColorPicker,
   ScColorPickerArea,
-  ScColorPickerField,
+  ScColorPickerInput,
   ScColorPickerSlider,
   ScColorPickerSwatch,
   ScField,
@@ -22,7 +22,7 @@ import {
     ScColorPickerArea,
     ScColorPickerSlider,
     ScColorPickerSwatch,
-    ScColorPickerField,
+    ScColorPickerInput,
     ScRadioGroup,
     ScRadio,
     FormField,
@@ -67,7 +67,7 @@ import {
       <input scColorPickerSlider="alpha" aria-label="Opacity" />
       <div class="flex items-center gap-2">
         <span scColorPickerSwatch></span>
-        <input scColorPickerField aria-label="Colour" />
+        <input scColorPickerInput aria-label="Colour" />
       </div>
     </div>
     <pre class="bg-muted w-64 rounded-md p-3 text-xs">{{ color() }}</pre>

@@ -20,9 +20,9 @@ import { QuantityNumberGroupDemo } from './quantity-number-group-demo';
 export default class QuantityNumberGroupDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScField,
   ScFieldDescription,
   ScLabel,
-  ScField,
   ScNumberDecrement,
   ScNumberGroup,
   ScNumberIncrement,

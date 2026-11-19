@@ -16,8 +16,8 @@ import { NumberGroupUsageDemo } from './number-group-usage-demo';
 export class NumberGroupUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScLabel,
   ScField,
+  ScLabel,
   ScNumberDecrement,
   ScNumberGroup,
   ScNumberIncrement,

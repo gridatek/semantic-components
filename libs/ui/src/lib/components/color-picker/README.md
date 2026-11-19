@@ -8,7 +8,7 @@ An area and channel sliders, with alpha; a field that takes any CSS colour; swat
 scColorPicker (value — two-way, a [formField]: a CSS colour; format; disabled)
 ├── div[scColorPickerArea]                 — saturation × brightness: one thumb, a slider
 ├── input[scColorPickerSlider]="'hue' | 'alpha'" — a native range on a painted track
-├── input[scColorPickerField]              — type any CSS colour
+├── input[scColorPickerInput]              — type any CSS colour
 ├── [scColorPickerSwatch]                  — the colour, on a checkerboard
 ├── [scColorPickerSwatches]                — a radio group of…
 │   └── button[scColorPickerOption]="'#e11d48'"
@@ -23,7 +23,7 @@ scColorPicker (value — two-way, a [formField]: a CSS colour; format; disabled)
   <input scColorPickerSlider="hue" aria-label="Hue" />
   <input scColorPickerSlider="alpha" aria-label="Opacity" />
   <span scColorPickerSwatch></span>
-  <input scColorPickerField aria-label="Colour" />
+  <input scColorPickerInput aria-label="Colour" />
 </div>
 ```
 

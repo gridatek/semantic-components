@@ -20,8 +20,8 @@ import { StepsNumberGroupDemo } from './steps-number-group-demo';
 export default class StepsNumberGroupDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScLabel,
   ScField,
+  ScLabel,
   ScNumberDecrement,
   ScNumberGroup,
   ScNumberIncrement,
@@ -50,7 +50,17 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         <div scNumberScrubArea>
           <label scLabel>Width (px)</label>
         </div>
-        <div scNumberGroup [(value)]="width" [min]="0" [max]="1000" [step]="5" [smallStep]="1" [largeStep]="50" snapOnStep allowWheelScrub>
+        <div
+          scNumberGroup
+          [(value)]="width"
+          [min]="0"
+          [max]="1000"
+          [step]="5"
+          [smallStep]="1"
+          [largeStep]="50"
+          snapOnStep
+          allowWheelScrub
+        >
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
             <span class="sr-only">Decrease width</span>

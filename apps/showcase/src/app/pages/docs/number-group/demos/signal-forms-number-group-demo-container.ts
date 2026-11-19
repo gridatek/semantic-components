@@ -22,10 +22,10 @@ export default class SignalFormsNumberGroupDemoContainer {
 import { FormField, form, max, min, required } from '@angular/forms/signals';
 import {
   ScButton,
+  ScField,
   ScFieldErrors,
   ScFrame,
   ScLabel,
-  ScField,
   ScNumberDecrement,
   ScNumberGroup,
   ScNumberIncrement,

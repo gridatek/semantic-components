@@ -20,9 +20,9 @@ import { PriceNumberGroupDemo } from './price-number-group-demo';
 export default class PriceNumberGroupDemoContainer {
   private readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScField,
   ScFrame,
   ScLabel,
-  ScField,
   ScNumberDecrement,
   ScNumberGroup,
   ScNumberIncrement,
@@ -52,7 +52,14 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         <div scNumberScrubArea>
           <label scLabel>Preis</label>
         </div>
-        <div scNumberGroup [(value)]="price" [min]="0" [step]="0.5" [largeStep]="10" [format]="{ style: 'currency', currency: 'EUR' }">
+        <div
+          scNumberGroup
+          [(value)]="price"
+          [min]="0"
+          [step]="0.5"
+          [largeStep]="10"
+          [format]="{ style: 'currency', currency: 'EUR' }"
+        >
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
             <span class="sr-only">Decrease price</span>

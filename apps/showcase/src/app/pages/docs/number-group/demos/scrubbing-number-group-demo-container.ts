@@ -20,8 +20,8 @@ import { ScrubbingNumberGroupDemo } from './scrubbing-number-group-demo';
 export default class ScrubbingNumberGroupDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScLabel,
   ScField,
+  ScLabel,
   ScNumberDecrement,
   ScNumberGroup,
   ScNumberIncrement,
@@ -58,11 +58,18 @@ import {
       <div scField>
         <div scNumberScrubArea>
           <label scLabel>Opacity</label>
-          <span scNumberScrubAreaCursor
-            ><svg siMoveHorizontalIcon></svg
-          ></span>
+          <span scNumberScrubAreaCursor><svg siMoveHorizontalIcon></svg></span>
         </div>
-        <div scNumberGroup [(value)]="opacity" [min]="0" [max]="1" [step]="0.01" [smallStep]="0.001" [largeStep]="0.1" [format]="{ style: 'percent', maximumFractionDigits: 1 }">
+        <div
+          scNumberGroup
+          [(value)]="opacity"
+          [min]="0"
+          [max]="1"
+          [step]="0.01"
+          [smallStep]="0.001"
+          [largeStep]="0.1"
+          [format]="{ style: 'percent', maximumFractionDigits: 1 }"
+        >
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
             <span class="sr-only">Decrease opacity</span>
@@ -76,17 +83,17 @@ import {
       </div>
 
       <div scField>
-        <div
-          scNumberScrubArea
-          orientation="vertical"
-          [pixelSensitivity]="4"
-        >
+        <div scNumberScrubArea orientation="vertical" [pixelSensitivity]="4">
           <label scLabel>Rotation (drag up or down)</label>
-          <span scNumberScrubAreaCursor
-            ><svg siMoveVerticalIcon></svg
-          ></span>
+          <span scNumberScrubAreaCursor><svg siMoveVerticalIcon></svg></span>
         </div>
-        <div scNumberGroup [(value)]="rotation" [min]="-180" [max]="180" [format]="{ style: 'unit', unit: 'degree' }">
+        <div
+          scNumberGroup
+          [(value)]="rotation"
+          [min]="-180"
+          [max]="180"
+          [format]="{ style: 'unit', unit: 'degree' }"
+        >
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
             <span class="sr-only">Decrease rotation</span>

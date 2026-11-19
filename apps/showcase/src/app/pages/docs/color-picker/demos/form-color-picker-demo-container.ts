@@ -25,7 +25,7 @@ import {
   ScButton,
   ScColorPicker,
   ScColorPickerArea,
-  ScColorPickerField,
+  ScColorPickerInput,
   ScColorPickerOption,
   ScColorPickerSlider,
   ScColorPickerSwatch,
@@ -48,7 +48,7 @@ import {
     ScColorPickerArea,
     ScColorPickerSlider,
     ScColorPickerSwatch,
-    ScColorPickerField,
+    ScColorPickerInput,
     ScColorPickerSwatches,
     ScColorPickerOption,
     ScButton,
@@ -103,7 +103,7 @@ import {
                     </button>
                   }
                 </div>
-                <input scColorPickerField aria-label="Colour" />
+                <input scColorPickerInput aria-label="Colour" />
               </div>
             </ng-template>
           </div>

@@ -20,9 +20,9 @@ import { BasicNumberGroupDemo } from './basic-number-group-demo';
 export default class BasicNumberGroupDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScField,
   ScFrame,
   ScLabel,
-  ScField,
   ScNumberDecrement,
   ScNumberGroup,
   ScNumberIncrement,
@@ -52,7 +52,13 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         <div scNumberScrubArea>
           <label scLabel>Count</label>
         </div>
-        <div scNumberGroup [(value)]="count" [min]="0" [max]="100" (valueCommitted)="committed.set($event)">
+        <div
+          scNumberGroup
+          [(value)]="count"
+          [min]="0"
+          [max]="100"
+          (valueCommitted)="committed.set($event)"
+        >
           <button scNumberDecrement>
             <svg siMinusIcon></svg>
             <span class="sr-only">Decrease count</span>

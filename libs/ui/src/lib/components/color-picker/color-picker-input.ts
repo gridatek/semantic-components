@@ -6,12 +6,12 @@ import { ScColorPicker } from './color-picker';
 /**
  * The colour as text: type any CSS colour — hex, `rgb()`, `hsl()`,
  * `oklch()`, a name. A valid one is taken as you type; an invalid one is
- * `aria-invalid`, and left, the field shows the colour again. Label it.
+ * `aria-invalid`, and left, the input shows the colour again. Label it.
  */
 @Directive({
-  selector: 'input[scColorPickerField]',
+  selector: 'input[scColorPickerInput]',
   host: {
-    'data-slot': 'color-picker-field',
+    'data-slot': 'color-picker-input',
     type: 'text',
     autocomplete: 'off',
     spellcheck: 'false',
@@ -24,7 +24,7 @@ import { ScColorPicker } from './color-picker';
     '(keydown.enter)': 'onBlur()',
   },
 })
-export class ScColorPickerField {
+export class ScColorPickerInput {
   private readonly picker = inject(ScColorPicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -44,7 +44,7 @@ export class ScColorPickerField {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scColorPickerField');
+    ɵwarnIfUnnamed('scColorPickerInput');
   }
 
   private onInput(event: Event): void {

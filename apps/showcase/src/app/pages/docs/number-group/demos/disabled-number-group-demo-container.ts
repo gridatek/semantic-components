@@ -20,8 +20,8 @@ import { DisabledNumberGroupDemo } from './disabled-number-group-demo';
 export default class DisabledNumberGroupDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScLabel,
   ScField,
+  ScLabel,
   ScNumberDecrement,
   ScNumberGroup,
   ScNumberIncrement,

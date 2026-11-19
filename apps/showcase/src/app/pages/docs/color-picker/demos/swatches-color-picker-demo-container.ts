@@ -22,7 +22,7 @@ export class SwatchesColorPickerDemoContainer {
 import {
   ScColorPicker,
   ScColorPickerEyeDropper,
-  ScColorPickerField,
+  ScColorPickerInput,
   ScColorPickerOption,
   ScColorPickerSwatch,
   ScColorPickerSwatches,
@@ -37,7 +37,7 @@ import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
     ScColorPickerSwatches,
     ScColorPickerOption,
     ScColorPickerSwatch,
-    ScColorPickerField,
+    ScColorPickerInput,
     ScColorPickerEyeDropper,
     SiPipetteIcon,
   ],
@@ -57,7 +57,7 @@ import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div class="flex items-center gap-2">
         <span scColorPickerSwatch></span>
-        <input scColorPickerField aria-label="Colour" />
+        <input scColorPickerInput aria-label="Colour" />
         @if (picker.canPickFromScreen()) {
           <button scColorPickerEyeDropper>
             <svg siPipetteIcon></svg>
