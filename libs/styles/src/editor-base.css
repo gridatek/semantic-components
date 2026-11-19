@@ -13,13 +13,28 @@
 
 [data-slot='editor-document'] {
   outline: none;
-  white-space: pre-wrap;
+  /*
+   * As ProseMirror sets them in the editor — spaces at a line's end take
+   * room, no ligatures (the caret never inside one) — so scEditorView breaks
+   * its lines where the editor does.
+   */
+  white-space: break-spaces;
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0;
   /*
    * Never the page's scroll anchor: browsers anchor on the focused editable,
    * so when something above it changes size — a search bar closing as focus
    * comes back to the text — the page would slide to keep the text still.
    */
   overflow-anchor: none;
+}
+
+/*
+ * A code block wraps its long lines, in scEditorView as in the editor
+ * (ProseMirror's own rule there): the document looks the same in both.
+ */
+[data-slot='editor-document'] pre {
+  white-space: pre-wrap;
 }
 
 /* In the editor: it fills its box */
