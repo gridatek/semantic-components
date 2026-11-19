@@ -22,7 +22,7 @@ export class RtlHeaderDemoContainer {
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
-  ScHeaderMobileMenuContent,
+  ScHeaderMobileMenu,
   ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
@@ -44,7 +44,7 @@ import {
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScHeaderMobileMenuContent,
+    ScHeaderMobileMenu,
     ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
@@ -85,7 +85,7 @@ import {
             <span class="sr-only">فتح القائمة</span>
           }
         </button>
-        <ng-template scHeaderMobileMenuContent>
+        <ng-template scHeaderMobileMenu>
           <nav aria-label="الرئيسية">
             @for (link of links; track link) {
               <a

@@ -15,7 +15,7 @@ import {
  * leaves the bar); `push`, pushing the page down instead.
  *
  * ```html
- * <ng-template scHeaderMobileMenuContent>
+ * <ng-template scHeaderMobileMenu>
  *   <nav aria-label="Main">
  *     <a scNavigationMenuLink routerLink="/">Home</a>
  *   </nav>
@@ -23,9 +23,9 @@ import {
  * ```
  */
 @Directive({
-  selector: 'ng-template[scHeaderMobileMenuContent]',
+  selector: 'ng-template[scHeaderMobileMenu]',
 })
-export class ScHeaderMobileMenuContent {
+export class ScHeaderMobileMenu {
   /** Your content, rendered by the header while the menu is open. */
   readonly template = inject(TemplateRef);
   /** Classes for the panel the header renders. */

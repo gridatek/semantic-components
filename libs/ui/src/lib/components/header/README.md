@@ -45,7 +45,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
     }
   </button>
 
-  <ng-template scHeaderMobileMenuContent>
+  <ng-template scHeaderMobileMenu>
     <nav aria-label="Main">
       <a scNavigationMenuLink routerLink="/products" active>Products</a>
       <a scNavigationMenuLink routerLink="/pricing">Pricing</a>
@@ -78,7 +78,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 
 Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`). Your icons inside (Menu and X, swapped with `@if`); once pressed, the one that comes in turns and fades in. Where it sits is yours: `ms-auto` to reach the bar's end, `-me-2` to line its icon up with the edge.
 
-### ScHeaderMobileMenuContent — `ng-template[scHeaderMobileMenuContent]`
+### ScHeaderMobileMenu — `ng-template[scHeaderMobileMenu]`
 
 The menu's content, below `expand`: a named `nav` with `scNavigationMenuLink`s (the Navigation Menu's link, with its states: following one closes the menu), and any actions, in an `ng-template`. The header renders it while the menu is open, in its own panel under the bar (`data-slot="header-menu"`, the toggle's `aria-controls` while open), and removes it on closing — so closed, its links aren't in the page. `class`: classes for that panel.
 

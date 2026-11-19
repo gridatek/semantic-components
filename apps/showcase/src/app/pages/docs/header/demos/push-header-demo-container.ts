@@ -21,7 +21,7 @@ export class PushHeaderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
-  ScHeaderMobileMenuContent,
+  ScHeaderMobileMenu,
   ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
@@ -42,7 +42,7 @@ import {
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScHeaderMobileMenuContent,
+    ScHeaderMobileMenu,
     ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
@@ -79,7 +79,7 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scHeaderMobileMenuContent push>
+      <ng-template scHeaderMobileMenu push>
         <nav aria-label="Main, push">
           @for (link of links; track link) {
             <a

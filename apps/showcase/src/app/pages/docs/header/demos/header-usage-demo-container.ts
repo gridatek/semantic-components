@@ -18,7 +18,7 @@ export class HeaderUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
-  ScHeaderMobileMenuContent,
+  ScHeaderMobileMenu,
   ScHeaderToggle,
   ScLink,
   ScNavigationMenu,
@@ -36,7 +36,7 @@ import {
   selector: 'app-header-usage-demo',
   imports: [
     ScHeader,
-    ScHeaderMobileMenuContent,
+    ScHeaderMobileMenu,
     ScHeaderToggle,
     ScLink,
     ScNavigationMenu,
@@ -85,7 +85,7 @@ import {
         }
       </button>
 
-      <ng-template scHeaderMobileMenuContent>
+      <ng-template scHeaderMobileMenu>
         <nav aria-label="Main">
           @for (link of links; track link) {
             <a

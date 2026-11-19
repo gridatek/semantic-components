@@ -21,7 +21,7 @@ export class NavigationMenuHeaderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
-  ScHeaderMobileMenuContent,
+  ScHeaderMobileMenu,
   ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuContent,
@@ -42,7 +42,7 @@ import {
   selector: 'app-navigation-menu-header-demo',
   imports: [
     ScHeader,
-    ScHeaderMobileMenuContent,
+    ScHeaderMobileMenu,
     ScHeaderToggle,
     ScNavigationMenu,
     ScNavigationMenuContent,
@@ -95,7 +95,7 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scHeaderMobileMenuContent>
+      <ng-template scHeaderMobileMenu>
         <nav aria-label="Main, with menus">
           @for (link of links; track link) {
             <a

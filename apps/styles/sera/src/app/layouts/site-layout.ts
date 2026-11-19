@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
   ScHeader,
-  ScHeaderMobileMenuContent,
+  ScHeaderMobileMenu,
   ScHeaderToggle,
   ScLink,
   ScNavigationMenu,
@@ -30,7 +30,7 @@ import { ThemeMenu } from './theme-menu';
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScHeaderMobileMenuContent,
+    ScHeaderMobileMenu,
     ScHeaderToggle,
     ScSeparator,
     SiMenuIcon,
@@ -84,7 +84,7 @@ import { ThemeMenu } from './theme-menu';
         }
       </button>
 
-      <ng-template scHeaderMobileMenuContent>
+      <ng-template scHeaderMobileMenu>
         <nav aria-label="Main">
           @for (page of pages; track page.path) {
             <a

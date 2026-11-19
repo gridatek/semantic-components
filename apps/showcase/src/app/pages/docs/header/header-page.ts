@@ -166,7 +166,7 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
 export default class HeaderPage {
   private readonly anatomy = {
     imports:
-      "import { ScHeader, ScHeaderMobileMenuContent, ScHeaderToggle, ScNavigationMenu, ScNavigationMenuItem, ScNavigationMenuLink, ScNavigationMenuList } from '@semantic-components/ui';",
+      "import { ScHeader, ScHeaderMobileMenu, ScHeaderToggle, ScNavigationMenu, ScNavigationMenuItem, ScNavigationMenuLink, ScNavigationMenuList } from '@semantic-components/ui';",
     markup: [
       '<header scHeader #header="scHeader">',
       '  <a href="/">…</a>  <!-- your brand: your own link -->',
@@ -191,7 +191,7 @@ export default class HeaderPage {
       '    }',
       '  </button>',
       '',
-      '  <ng-template scHeaderMobileMenuContent>',
+      '  <ng-template scHeaderMobileMenu>',
       '    <nav aria-label="Main">',
       '      <a scNavigationMenuLink [active]="…">…</a>',
       '    </nav>',
@@ -214,8 +214,8 @@ export default class HeaderPage {
         "Opens and closes the menu, below expand: aria-expanded, aria-controls while open. Your icons and a name that follows the state (sr-only); once pressed, the icon that comes in turns and fades in. The style's button: variant ('ghost'), size ('icon'). Where it sits is yours (ms-auto to reach the end, -me-2 to line its icon up with the edge).",
     },
     {
-      name: 'ScHeaderMobileMenuContent',
-      selector: 'ng-template[scHeaderMobileMenuContent]',
+      name: 'ScHeaderMobileMenu',
+      selector: 'ng-template[scHeaderMobileMenu]',
       description:
         "The menu's content — a named nav with its links (scNavigationMenuLink: the Navigation Menu's link, with its states; following one closes the menu), any actions — rendered by the header while open, in a panel covering the page below the bar: see-through and blurred, opening at once, fading out in 100ms. push: pushing the page down instead. class: the panel's classes.",
     },

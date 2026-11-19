@@ -9,7 +9,7 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScHeader,
-  ScHeaderMobileMenuContent,
+  ScHeaderMobileMenu,
   ScHeaderToggle,
   ScInputButton,
   ScKbd,
@@ -42,7 +42,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
     RouterLink,
     RouterLinkActive,
     ScHeader,
-    ScHeaderMobileMenuContent,
+    ScHeaderMobileMenu,
     ScHeaderToggle,
     ScInputButton,
     ScKbd,
@@ -248,7 +248,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
       </button>
 
       <!-- Mobile Menu -->
-      <ng-template scHeaderMobileMenuContent>
+      <ng-template scHeaderMobileMenu>
         <nav aria-label="Main">
           <a
             scNavigationMenuLink

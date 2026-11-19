@@ -22,7 +22,7 @@ import {
   SC_NAVIGATION_MENU_LINK_HOST,
   type ScNavigationMenuLinkHost,
 } from '../navigation-menu/navigation-menu-link-host';
-import { ScHeaderMobileMenuContent } from './header-mobile-menu-content';
+import { ScHeaderMobileMenu } from './header-mobile-menu';
 
 /** The width from which the links show and the toggle hides. */
 export type ScHeaderExpand = 'sm' | 'md' | 'lg';
@@ -47,7 +47,7 @@ const BREAKPOINT: Record<ScHeaderExpand, string> = {
  * A site's top bar (`header`, the banner landmark): your brand (your own link), links and
  * actions; on narrow screens a toggle and a menu panel under the bar (a
  * disclosure — the page stays usable, nothing is trapped). The menu is your
- * `ng-template scHeaderMobileMenuContent`: the header renders it while open. It closes on
+ * `ng-template scHeaderMobileMenu`: the header renders it while open. It closes on
  * Escape (focus back on the toggle), when a link in it is followed, when the
  * window grows wide enough for the links, and — over the page — when the
  * focus leaves the bar.
@@ -58,7 +58,7 @@ const BREAKPOINT: Record<ScHeaderExpand, string> = {
  *   <nav scNavigationMenu aria-label="Main">…</nav>
  *   <div class="ms-auto flex items-center gap-2">…</div>
  *   <button scHeaderToggle>…</button>
- *   <ng-template scHeaderMobileMenuContent><nav aria-label="Main">…</nav></ng-template>
+ *   <ng-template scHeaderMobileMenu><nav aria-label="Main">…</nav></ng-template>
  * </header>
  * ```
  */
@@ -111,8 +111,8 @@ export class ScHeader implements ScNavigationMenuLinkHost {
   /** The toggle, to give it back the focus. */
   readonly toggle = signal<HTMLElement | null>(null);
 
-  /** Your menu's content (`ng-template scHeaderMobileMenuContent`). */
-  private readonly menu = contentChild(ScHeaderMobileMenuContent);
+  /** Your menu's content (`ng-template scHeaderMobileMenu`). */
+  private readonly menu = contentChild(ScHeaderMobileMenu);
   /** The menu lies over the page (not `push`). */
   private readonly covers = computed(() => !(this.menu()?.push() ?? false));
 
