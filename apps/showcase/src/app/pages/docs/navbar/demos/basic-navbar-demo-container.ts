@@ -24,11 +24,14 @@ import {
   ScNavbar,
   ScNavbarActions,
   ScNavbarBrand,
-  ScNavbarLink,
   ScNavbarMenu,
   ScNavbarMenuLink,
   ScNavbarNav,
   ScNavbarToggle,
+  ScNavigationMenu,
+  ScNavigationMenuItem,
+  ScNavigationMenuLink,
+  ScNavigationMenuList,
 } from '@semantic-components/ui';
 import {
   SiGalleryVerticalEndIcon,
@@ -43,7 +46,10 @@ import {
     ScNavbar,
     ScNavbarActions,
     ScNavbarBrand,
-    ScNavbarLink,
+    ScNavigationMenu,
+    ScNavigationMenuItem,
+    ScNavigationMenuLink,
+    ScNavigationMenuList,
     ScNavbarMenu,
     ScNavbarMenuLink,
     ScNavbarNav,
@@ -58,17 +64,21 @@ import {
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavbarNav aria-label="Main">
-        @for (link of links; track link) {
-          <a
-            scNavbarLink
-            href="#"
-            [active]="link === current()"
-            (click)="go($event, link)"
-          >
-            {{ link }}
-          </a>
-        }
+      <nav scNavigationMenu scNavbarNav aria-label="Main">
+        <ul scNavigationMenuList>
+          @for (link of links; track link) {
+            <li scNavigationMenuItem>
+              <a
+                scNavigationMenuLink
+                href="#"
+                [active]="link === current()"
+                (click)="go($event, link)"
+              >
+                {{ link }}
+              </a>
+            </li>
+          }
+        </ul>
       </nav>
       <div scNavbarActions>
         <a scLink variant="ghost" href="/docs/components/navbar">Sign in</a>

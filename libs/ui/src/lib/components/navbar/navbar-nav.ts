@@ -6,8 +6,9 @@ const SHOWN = { sm: 'sm:flex', md: 'md:flex', lg: 'lg:flex' } as const;
 
 /**
  * The links, on screens wide enough for them (the navbar's `expand`); the
- * menu has them below that. A navigation landmark: name it (`aria-label`).
- * Holds `scNavbarLink`s, or a navigation menu.
+ * menu has them below that. Goes on a Navigation Menu, which draws the links
+ * (`nav[scNavigationMenu]`): the navbar only hides it on narrow screens. A
+ * navigation landmark: name it (`aria-label`).
  */
 @Directive({
   selector: 'nav[scNavbarNav]',
@@ -21,10 +22,6 @@ export class ScNavbarNav {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>
-    cn(
-      'hidden items-center gap-6',
-      SHOWN[this.navbar.expand()],
-      this.classInput(),
-    ),
+    cn('hidden', SHOWN[this.navbar.expand()], this.classInput()),
   );
 }

@@ -22,11 +22,14 @@ export class PushNavbarDemoContainer {
 import {
   ScNavbar,
   ScNavbarBrand,
-  ScNavbarLink,
   ScNavbarMenu,
   ScNavbarMenuLink,
   ScNavbarNav,
   ScNavbarToggle,
+  ScNavigationMenu,
+  ScNavigationMenuItem,
+  ScNavigationMenuLink,
+  ScNavigationMenuList,
 } from '@semantic-components/ui';
 import {
   SiGalleryVerticalEndIcon,
@@ -39,7 +42,10 @@ import {
   imports: [
     ScNavbar,
     ScNavbarBrand,
-    ScNavbarLink,
+    ScNavigationMenu,
+    ScNavigationMenuItem,
+    ScNavigationMenuLink,
+    ScNavigationMenuList,
     ScNavbarMenu,
     ScNavbarMenuLink,
     ScNavbarNav,
@@ -54,17 +60,21 @@ import {
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavbarNav aria-label="Main, push">
-        @for (link of links; track link) {
-          <a
-            scNavbarLink
-            href="#"
-            [active]="link === current()"
-            (click)="go($event, link)"
-          >
-            {{ link }}
-          </a>
-        }
+      <nav scNavigationMenu scNavbarNav aria-label="Main, push">
+        <ul scNavigationMenuList>
+          @for (link of links; track link) {
+            <li scNavigationMenuItem>
+              <a
+                scNavigationMenuLink
+                href="#"
+                [active]="link === current()"
+                (click)="go($event, link)"
+              >
+                {{ link }}
+              </a>
+            </li>
+          }
+        </ul>
       </nav>
       <button scNavbarToggle>
         @if (navbar.open()) {

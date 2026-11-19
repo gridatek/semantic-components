@@ -5,11 +5,14 @@ import {
   ScNavbar,
   ScNavbarActions,
   ScNavbarBrand,
-  ScNavbarLink,
   ScNavbarMenu,
   ScNavbarMenuLink,
   ScNavbarNav,
   ScNavbarToggle,
+  ScNavigationMenu,
+  ScNavigationMenuItem,
+  ScNavigationMenuLink,
+  ScNavigationMenuList,
   ScSeparator,
 } from '@semantic-components/ui';
 import { SiMenuIcon, SiXIcon } from '@semantic-icons/lucide-icons';
@@ -29,7 +32,10 @@ import { ThemeMenu } from './theme-menu';
     ScNavbar,
     ScNavbarActions,
     ScNavbarBrand,
-    ScNavbarLink,
+    ScNavigationMenu,
+    ScNavigationMenuItem,
+    ScNavigationMenuLink,
+    ScNavigationMenuList,
     ScNavbarMenu,
     ScNavbarMenuLink,
     ScNavbarNav,
@@ -54,18 +60,22 @@ import { ThemeMenu } from './theme-menu';
         >
       </a>
 
-      <nav scNavbarNav aria-label="Main">
-        @for (page of pages; track page.path) {
-          <a
-            scNavbarLink
-            [routerLink]="page.path"
-            routerLinkActive
-            #rla="routerLinkActive"
-            [active]="rla.isActive"
-          >
-            {{ page.label }}
-          </a>
-        }
+      <nav scNavigationMenu scNavbarNav aria-label="Main">
+        <ul scNavigationMenuList>
+          @for (page of pages; track page.path) {
+            <li scNavigationMenuItem>
+              <a
+                scNavigationMenuLink
+                [routerLink]="page.path"
+                routerLinkActive
+                #rla="routerLinkActive"
+                [active]="rla.isActive"
+              >
+                {{ page.label }}
+              </a>
+            </li>
+          }
+        </ul>
       </nav>
 
       <div scNavbarActions>

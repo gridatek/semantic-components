@@ -10,8 +10,8 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
 - **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough; covering the page, the focus leaving the bar too
 - **`[(open)]`** — the menu's state, two-way
 - **Sticky**, and **hides on scroll** (away going down, back going up)
-- **Current page** — `active` gives `aria-current="page"`
-- **Works with the Navigation Menu** — on the same `nav`
+- **The links are the Navigation Menu's** — on the same `nav` (one landmark); the navbar adds only what the Navigation Menu doesn't have: the bar, the breakpoint, the phone menu
+- **Current page** — `active` gives `aria-current="page"`, in the bar (the Navigation Menu's links) and in the menu
 - **RTL**
 
 ## Quick Start
@@ -20,9 +20,15 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
 <header scNavbar #navbar="scNavbar">
   <a scNavbarBrand href="/"><svg siGalleryVerticalEndIcon></svg> Acme</a>
 
-  <nav scNavbarNav aria-label="Main">
-    <a scNavbarLink routerLink="/products" active>Products</a>
-    <a scNavbarLink routerLink="/pricing">Pricing</a>
+  <nav scNavigationMenu scNavbarNav aria-label="Main">
+    <ul scNavigationMenuList>
+      <li scNavigationMenuItem>
+        <a scNavigationMenuLink routerLink="/products" active>Products</a>
+      </li>
+      <li scNavigationMenuItem>
+        <a scNavigationMenuLink routerLink="/pricing">Pricing</a>
+      </li>
+    </ul>
   </nav>
 
   <div scNavbarActions>
@@ -54,18 +60,6 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
 - The toggle's name follows its state ("Open menu" / "Close menu"); it has no `aria-pressed`.
 - Several bars on one page (or in frames checked together): name each `header` too.
 
-## With a Navigation Menu
-
-Both on the same `nav`, so there is one landmark:
-
-```html
-<nav scNavigationMenu scNavbarNav aria-label="Main">
-  <ul scNavigationMenuList>
-    …
-  </ul>
-</nav>
-```
-
 ## API
 
 ### ScNavbar — `header[scNavbar]`
@@ -86,11 +80,7 @@ Your logo and name, a link home.
 
 ### ScNavbarNav — `nav[scNavbarNav]`
 
-The links, from `expand` up.
-
-### ScNavbarLink — `a[scNavbarLink]`
-
-A link of the bar. `active`: the page shown (`aria-current="page"`).
+The links, from `expand` up: on a Navigation Menu (`nav[scNavigationMenu]`), which draws them — its links, `active` for the page shown, its panels if you want them. The navbar only hides it on narrow screens, where its menu has the links.
 
 ### ScNavbarActions — `div[scNavbarActions]`
 
