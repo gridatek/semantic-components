@@ -208,7 +208,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
         </button>
         <button
           scButton
-          variant="ghost"
+          variant="outline"
           size="icon"
           [class]="searchIconClass"
           (click)="openCommandPalette()"
