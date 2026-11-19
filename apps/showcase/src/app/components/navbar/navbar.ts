@@ -21,6 +21,7 @@ import {
   ScNavigationMenuList,
   ScNavigationMenuTrigger,
   ScNavigationMenuTriggerIcon,
+  ScStorage,
 } from '@semantic-components/ui';
 import {
   SiChevronDownIcon,
@@ -33,6 +34,7 @@ import { cn } from 'cn';
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
 import { GithubService } from '../../services/github-service';
+import { styleFrom } from '../../styles';
 import { Logo } from '../logo/logo';
 import { ThemeMenu } from '../theme-menu/theme-menu';
 
@@ -98,7 +100,8 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             </a>
           </li>
 
-          <li scNavigationMenuItem>
+          <!-- Only where the bar has room for it: Documentation leads there too. -->
+          <li scNavigationMenuItem [class]="componentsItemClass">
             <button scNavigationMenuTrigger>
               Components
               <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
@@ -327,6 +330,21 @@ export default class Navbar {
   private readonly format = injectFormatForDisplay();
   readonly classInput = input<string>('', { alias: 'class' });
   private readonly class = computed(() => cn('block', this.classInput()));
+
+  /**
+   * Components, in the bar only from the width where it fits beside the
+   * actions — measured per style (2026-11-19): vega, maia, luma and sera, with
+   * wider buttons and text, need 1440px; the others 1280px. The style is known at
+   * start, from its cookie: the server draws the same bar.
+   */
+  private readonly componentsItemClass = [
+    'vega',
+    'maia',
+    'luma',
+    'sera',
+  ].includes(styleFrom(inject(ScStorage)))
+    ? 'max-[90rem]:hidden'
+    : 'max-xl:hidden';
 
   private readonly componentsService = inject(ComponentsService);
   private readonly featuredComponents = computed(() =>
