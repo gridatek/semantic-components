@@ -2,20 +2,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { AlphaColorPickerDemoContainer } from './demos/alpha-color-picker-demo-container';
-import { BasicColorPickerDemoContainer } from './demos/basic-color-picker-demo-container';
-import { FormColorPickerDemoContainer } from './demos/form-color-picker-demo-container';
-import { FormatsColorPickerDemoContainer } from './demos/formats-color-picker-demo-container';
-import { SwatchesColorPickerDemoContainer } from './demos/swatches-color-picker-demo-container';
+import { AllFeaturesColorPickerDemoContainer } from './demos/all-features-color-picker-demo-container';
 
 @Component({
   selector: 'app-color-picker-page',
   imports: [
-    BasicColorPickerDemoContainer,
-    AlphaColorPickerDemoContainer,
-    FormatsColorPickerDemoContainer,
-    SwatchesColorPickerDemoContainer,
-    FormColorPickerDemoContainer,
+    AllFeaturesColorPickerDemoContainer,
     TocHeading,
     ComponentBadges,
     ScTypeset,
@@ -33,49 +25,15 @@ import { SwatchesColorPickerDemoContainer } from './demos/swatches-color-picker-
       </div>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Basic</h2>
+        <h2 scTypeset appToc>Example</h2>
         <p class="text-muted-foreground">
-          The area (saturation and brightness), the hue, the colour and its
-          field. The field takes any CSS colour — try a name, or oklch().
+          Every part at once, in a form: drag across the area or along the
+          sliders, pick from the screen, choose a preset — a radio group, the
+          arrows move — type any CSS colour (a name, oklch()), write it as Hex,
+          RGB, HSL or OKLCH, or disable the picker. The colour is a Signal Forms
+          field, required.
         </p>
-        <app-basic-color-picker-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Alpha</h2>
-        <p class="text-muted-foreground">
-          An opacity slider, on a checkerboard; the value carries it —
-          #rrggbbaa, or rgb(… / a).
-        </p>
-        <app-alpha-color-picker-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Formats</h2>
-        <p class="text-muted-foreground">
-          The value in hex, rgb(), hsl() or oklch() — the format is an input;
-          changed, the value is written again.
-        </p>
-        <app-formats-color-picker-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Swatches</h2>
-        <p class="text-muted-foreground">
-          Preset colours, a radio group — the arrows move and choose; the one
-          that is the colour is checked. Where the browser can, pick from the
-          screen.
-        </p>
-        <app-swatches-color-picker-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Popover in a form</h2>
-        <p class="text-muted-foreground">
-          A [formField]: the trigger shows the colour, the picker opens in a
-          popover; required in the schema.
-        </p>
-        <app-form-color-picker-demo-container />
+        <app-all-features-color-picker-demo-container />
       </section>
     </div>
   `,

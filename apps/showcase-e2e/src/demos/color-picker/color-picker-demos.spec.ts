@@ -1,10 +1,11 @@
 import { type Page, expect, test } from '../../test';
 
-const value = (page: Page) => page.locator('pre').first();
+/** The colour, as the form holds it. */
+const value = (page: Page) => page.locator('form code');
 
-test.describe('Basic', () => {
+test.describe('Every part, in a form', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/demos/color-picker/basic-color-picker-demo');
+    await page.goto('/demos/color-picker/all-features-color-picker-demo');
   });
 
   test('the area: a click, and the keys', async ({ page }) => {
@@ -28,18 +29,18 @@ test.describe('Basic', () => {
     );
   });
 
-  test('the field takes any CSS colour', async ({ page }) => {
-    const field = page.getByLabel('Colour');
-    await field.fill('rebeccapurple');
+  test('the text takes any CSS colour', async ({ page }) => {
+    const text = page.getByLabel('Colour');
+    await text.fill('rebeccapurple');
     await expect(value(page)).toHaveText('#663399');
-    await field.fill('oklch(70% 0.15 150)');
+    await text.fill('oklch(70% 0.15 150)');
     await expect(value(page)).toHaveText('#4cb86a');
     // Not a colour: marked, nothing changes; left, the colour again.
-    await field.fill('nope');
-    await expect(field).toHaveAttribute('aria-invalid', 'true');
+    await text.fill('nope');
+    await expect(text).toHaveAttribute('aria-invalid', 'true');
     await expect(value(page)).toHaveText('#4cb86a');
-    await field.blur();
-    await expect(field).toHaveValue('#4cb86a');
+    await text.blur();
+    await expect(text).toHaveValue('#4cb86a');
   });
 
   test('the hue is kept through black', async ({ page }) => {
@@ -48,54 +49,48 @@ test.describe('Basic', () => {
     await page.getByLabel('Colour').fill('#000');
     await expect(hue).toHaveValue('200');
   });
-});
 
-test('Alpha: in the value', async ({ page }) => {
-  await page.goto('/demos/color-picker/alpha-color-picker-demo');
-  await page.getByRole('slider', { name: 'Opacity' }).fill('0.25');
-  await expect(value(page)).toHaveText('#8b5cf640');
-});
+  test('the opacity, in the value', async ({ page }) => {
+    await page.getByRole('slider', { name: 'Opacity' }).fill('0.25');
+    await expect(value(page)).toHaveText('#0ea5e940');
+  });
 
-test('Formats: the value written again', async ({ page }) => {
-  await page.goto('/demos/color-picker/formats-color-picker-demo');
-  await page.getByRole('radio', { name: 'hex' }).check();
-  await expect(value(page)).toHaveText('#2b7fff');
-  await page.getByRole('radio', { name: 'rgb' }).check();
-  await expect(value(page)).toHaveText('rgb(43 127 255)');
-  await page.getByRole('radio', { name: 'hsl' }).check();
-  await expect(value(page)).toHaveText('hsl(216 100% 58%)');
-});
+  test('the format: the value written again', async ({ page }) => {
+    const format = page.getByLabel('Format');
+    await format.selectOption('rgb');
+    await expect(value(page)).toHaveText('rgb(14 165 233)');
+    await format.selectOption('hsl');
+    await expect(value(page)).toHaveText(/^hsl\(\d+ \d+% \d+%\)$/);
+    await format.selectOption('oklch');
+    await expect(value(page)).toHaveText(/^oklch\(/);
+    await format.selectOption('hex');
+    await expect(value(page)).toHaveText('#0ea5e9');
+  });
 
-test('Swatches: a radio group', async ({ page }) => {
-  await page.goto('/demos/color-picker/swatches-color-picker-demo');
-  const green = page.getByRole('radio', { name: 'Green' });
-  await expect(green).toHaveAttribute('aria-checked', 'true');
-  // Only the checked one is in the tab order.
-  await expect(page.locator('[role="radio"][tabindex="0"]')).toHaveCount(1);
-  await green.focus();
-  await page.keyboard.press('ArrowRight');
-  await expect(page.getByRole('radio', { name: 'Cyan' })).toBeFocused();
-  await expect(value(page)).toHaveText('#06b6d4');
-  await page.getByLabel('Colour').fill('#3b82f6');
-  await expect(page.getByRole('radio', { name: 'Blue' })).toHaveAttribute(
-    'aria-checked',
-    'true',
-  );
-});
+  test('the presets: a radio group', async ({ page }) => {
+    const sky = page.getByRole('radio', { name: 'Sky' });
+    await expect(sky).toHaveAttribute('aria-checked', 'true');
+    // Only the checked one is in the tab order.
+    await expect(page.locator('[role="radio"][tabindex="0"]')).toHaveCount(1);
+    await sky.focus();
+    await page.keyboard.press('ArrowRight');
+    await expect(page.getByRole('radio', { name: 'Indigo' })).toBeFocused();
+    await expect(value(page)).toHaveText('#6366f1');
+    await page.getByLabel('Colour').fill('#22c55e');
+    await expect(page.getByRole('radio', { name: 'Green' })).toHaveAttribute(
+      'aria-checked',
+      'true',
+    );
+  });
 
-test('Popover in a form: required, then chosen', async ({ page }) => {
-  await page.goto('/demos/color-picker/form-color-picker-demo');
-  await page.getByRole('button', { name: 'Save' }).click();
-  await expect(page.getByText('Choose a colour.')).toBeVisible();
-  // No colour: no preset is checked, not even black.
-  await page.getByRole('button', { name: 'Brand colour' }).click();
-  await expect(page.locator('[role="radio"][aria-checked="true"]')).toHaveCount(
-    0,
-  );
-  const violet = page.getByRole('radio', { name: 'Violet' });
-  await violet.click();
-  await expect(violet).toHaveAttribute('aria-checked', 'true');
-  await page.keyboard.press('Escape');
-  await page.getByRole('button', { name: 'Save' }).click();
-  await expect(page.getByRole('status')).toHaveText('Saved: #8b5cf6');
+  test('disabled from the switch, then saved', async ({ page }) => {
+    const text = page.getByLabel('Colour');
+    await page.getByRole('switch', { name: 'Disabled' }).check();
+    await expect(text).toBeDisabled();
+    await page.getByRole('switch', { name: 'Disabled' }).uncheck();
+    await expect(text).toBeEnabled();
+    await page.getByRole('radio', { name: 'Purple' }).click();
+    await page.getByRole('button', { name: 'Save' }).click();
+    await expect(page.getByRole('status')).toHaveText('Saved: #a855f7');
+  });
 });

@@ -1794,38 +1794,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/color-picker',
     children: [
       {
-        path: 'basic-color-picker-demo',
+        path: 'all-features-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker/demos/basic-color-picker-demo').then(
-            (m) => m.BasicColorPickerDemo,
-          ),
-      },
-      {
-        path: 'alpha-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/alpha-color-picker-demo').then(
-            (m) => m.AlphaColorPickerDemo,
-          ),
-      },
-      {
-        path: 'formats-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/formats-color-picker-demo').then(
-            (m) => m.FormatsColorPickerDemo,
-          ),
-      },
-      {
-        path: 'swatches-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/swatches-color-picker-demo').then(
-            (m) => m.SwatchesColorPickerDemo,
-          ),
-      },
-      {
-        path: 'form-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/form-color-picker-demo').then(
-            (m) => m.FormColorPickerDemo,
+          import('../pages/docs/color-picker/demos/all-features-color-picker-demo').then(
+            (m) => m.AllFeaturesColorPickerDemo,
           ),
       },
     ],
