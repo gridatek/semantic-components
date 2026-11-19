@@ -417,6 +417,15 @@
     "hidden": true
   },
   {
+    "name": "Header",
+    "path": "header",
+    "description": "A site's top bar: brand, links, actions; on narrow screens a toggle and a menu panel under the bar.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Navigation",
+    "hidden": true
+  },
+  {
     "name": "Image Annotator",
     "path": "image-annotator",
     "description": "Annotate an image: shapes over it — selected, moved, resized, restyled — with keyboard, kept as data, exported as an image.",
@@ -626,15 +635,6 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
-  },
-  {
-    "name": "Navbar",
-    "path": "navbar",
-    "description": "A site's top bar: brand, links, actions; on narrow screens a toggle and a menu panel under the bar.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Navigation",
-    "hidden": true
   },
   {
     "name": "Navigation Menu",

@@ -18,15 +18,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { cn } from 'cn';
 import { filter } from 'rxjs';
-import { ScNavbarMenu } from './navbar-menu';
+import { ScHeaderMenu } from './header-menu';
 
 /** The width from which the links show and the toggle hides. */
-export type ScNavbarExpand = 'sm' | 'md' | 'lg';
+export type ScHeaderExpand = 'sm' | 'md' | 'lg';
 
 const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
 
 /** Tailwind's breakpoints, for the same widths in a media query. */
-const BREAKPOINT: Record<ScNavbarExpand, string> = {
+const BREAKPOINT: Record<ScHeaderExpand, string> = {
   sm: '40rem',
   md: '48rem',
   lg: '64rem',
@@ -36,30 +36,30 @@ const BREAKPOINT: Record<ScNavbarExpand, string> = {
  * A site's top bar (`header`, the banner landmark): your brand, links and
  * actions; on narrow screens a toggle and a menu panel under the bar (a
  * disclosure — the page stays usable, nothing is trapped). The menu is your
- * `ng-template scNavbarMenu`: the navbar renders it while open. It closes on
+ * `ng-template scHeaderMenu`: the header renders it while open. It closes on
  * Escape (focus back on the toggle), when a link in it is followed, when the
  * window grows wide enough for the links, and — over the page — when the
  * focus leaves the bar.
  *
  * ```html
- * <header scNavbar>
- *   <a scNavbarBrand href="/">…</a>
- *   <nav scNavigationMenu scNavbarNav aria-label="Main">…</nav>
- *   <div scNavbarActions>…</div>
- *   <button scNavbarToggle>…</button>
- *   <ng-template scNavbarMenu><nav aria-label="Main">…</nav></ng-template>
+ * <header scHeader>
+ *   <a scHeaderBrand href="/">…</a>
+ *   <nav scNavigationMenu scHeaderNav aria-label="Main">…</nav>
+ *   <div scHeaderActions>…</div>
+ *   <button scHeaderToggle>…</button>
+ *   <ng-template scHeaderMenu><nav aria-label="Main">…</nav></ng-template>
  * </header>
  * ```
  */
 @Component({
-  selector: 'header[scNavbar]',
-  exportAs: 'scNavbar',
+  selector: 'header[scHeader]',
+  exportAs: 'scHeader',
   imports: [NgTemplateOutlet],
   template: `
     <ng-content />
     @if (open() && menu(); as menu) {
       <div
-        data-slot="navbar-menu"
+        data-slot="header-menu"
         [id]="menuId"
         [class]="panelClass()"
         [animate.enter]="panelEnter()"
@@ -70,7 +70,7 @@ const BREAKPOINT: Record<ScNavbarExpand, string> = {
     }
   `,
   host: {
-    'data-slot': 'navbar',
+    'data-slot': 'header',
     '[attr.data-hidden]': 'hidden() ? "" : null',
     '[class]': 'class()',
     '(keydown.escape)': 'onEscape()',
@@ -79,26 +79,26 @@ const BREAKPOINT: Record<ScNavbarExpand, string> = {
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScNavbar {
+export class ScHeader {
   readonly classInput = input<string>('', { alias: 'class' });
   /** Whether the menu is open (narrow screens). */
   readonly open = model(false);
   /** The width from which the links show and the toggle hides. */
-  readonly expand = input<ScNavbarExpand>('md');
+  readonly expand = input<ScHeaderExpand>('md');
   /** Stays at the top of the page as it scrolls. */
   readonly sticky = input(false, { transform: booleanAttribute });
   /** Slides away while the page scrolls down, back when it scrolls up. */
   readonly hideOnScroll = input(false, { transform: booleanAttribute });
 
   /** The menu's id: the toggle's `aria-controls`. */
-  readonly menuId = inject(_IdGenerator).getId('sc-navbar-menu-');
+  readonly menuId = inject(_IdGenerator).getId('sc-header-menu-');
   /** The bar: what is inside it, or not (an overlaid menu closes on the outside). */
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   /** The toggle, to give it back the focus. */
   readonly toggle = signal<HTMLElement | null>(null);
 
-  /** Your menu's content (`ng-template scNavbarMenu`). */
-  private readonly menu = contentChild(ScNavbarMenu);
+  /** Your menu's content (`ng-template scHeaderMenu`). */
+  private readonly menu = contentChild(ScHeaderMenu);
   /** The menu lies over the page (not `push`). */
   private readonly covers = computed(() => !(this.menu()?.push() ?? false));
 
@@ -142,7 +142,7 @@ export class ScNavbar {
       this.hideOnScroll() &&
         'transition-transform duration-200 data-hidden:-translate-y-full motion-reduce:transition-none',
       // The actions take the free space; the toggle after them doesn't.
-      '[&>[data-slot=navbar-actions]~[data-slot=navbar-toggle]]:ms-0',
+      '[&>[data-slot=header-actions]~[data-slot=header-toggle]]:ms-0',
       this.classInput(),
     ),
   );

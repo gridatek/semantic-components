@@ -671,9 +671,9 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tree-table/tree-table-page'),
       },
       {
-        path: 'navbar',
-        title: 'Navbar - Semantic Components',
-        loadComponent: () => import('../pages/docs/navbar/navbar-page'),
+        path: 'header',
+        title: 'Header - Semantic Components',
+        loadComponent: () => import('../pages/docs/header/header-page'),
       },
       {
         path: 'navigation-menu',

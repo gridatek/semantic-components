@@ -1,12 +1,11 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScLink,
-  ScNavbar,
-  ScNavbarBrand,
-  ScNavbarMenu,
-  ScNavbarMenuLink,
-  ScNavbarNav,
-  ScNavbarToggle,
+  ScHeader,
+  ScHeaderBrand,
+  ScHeaderMenu,
+  ScHeaderMenuLink,
+  ScHeaderNav,
+  ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
   ScNavigationMenuLink,
@@ -19,35 +18,29 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-mobile-navbar-demo',
+  selector: 'app-push-header-demo',
   imports: [
-    ScLink,
-    ScNavbar,
-    ScNavbarBrand,
+    ScHeader,
+    ScHeaderBrand,
     ScNavigationMenu,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavbarMenu,
-    ScNavbarMenuLink,
-    ScNavbarNav,
-    ScNavbarToggle,
+    ScHeaderMenu,
+    ScHeaderMenuLink,
+    ScHeaderNav,
+    ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
   template: `
-    <header
-      scNavbar
-      aria-label="Acme, mobile"
-      #navbar="scNavbar"
-      [(open)]="open"
-    >
-      <a scNavbarBrand href="#">
+    <header scHeader aria-label="Acme, push" #header="scHeader">
+      <a scHeaderBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavigationMenu scNavbarNav aria-label="Main, mobile">
+      <nav scNavigationMenu scHeaderNav aria-label="Main, push">
         <ul scNavigationMenuList>
           @for (link of links; track link) {
             <li scNavigationMenuItem>
@@ -63,8 +56,8 @@ import {
           }
         </ul>
       </nav>
-      <button scNavbarToggle>
-        @if (navbar.open()) {
+      <button scHeaderToggle>
+        @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {
@@ -72,11 +65,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scNavbarMenu>
-        <nav aria-label="Main, mobile">
+      <ng-template scHeaderMenu push>
+        <nav aria-label="Main, push">
           @for (link of links; track link) {
             <a
-              scNavbarMenuLink
+              scHeaderMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -85,22 +78,19 @@ import {
             </a>
           }
         </nav>
-        <a
-          scLink
-          variant="button"
-          class="mt-3"
-          href="/docs/getting-started/introduction"
-          >Get started</a
-        >
       </ng-template>
     </header>
-    <p class="text-muted-foreground p-4 text-sm">
-      Menu {{ open() ? 'open' : 'closed' }}
-    </p>
+    <div class="space-y-4 p-4">
+      <h2 class="text-lg font-semibold">{{ current() }}</h2>
+      <p class="text-muted-foreground text-sm">
+        The menu pushes this text down, and stays open until you close it with
+        its toggle, Escape or a link.
+      </p>
+    </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export class MobileNavbarDemo {
+export class PushHeaderDemo {
   private readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   private readonly current = signal('Products');
 
@@ -109,6 +99,4 @@ export class MobileNavbarDemo {
     event.preventDefault();
     this.current.set(link);
   }
-  /** Two-way bound to the navbar's open state. */
-  private readonly open = signal(false);
 }

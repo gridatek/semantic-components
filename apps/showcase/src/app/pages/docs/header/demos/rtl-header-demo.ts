@@ -1,12 +1,12 @@
 import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScNavbar,
-  ScNavbarBrand,
-  ScNavbarMenu,
-  ScNavbarMenuLink,
-  ScNavbarNav,
-  ScNavbarToggle,
+  ScHeader,
+  ScHeaderBrand,
+  ScHeaderMenu,
+  ScHeaderMenuLink,
+  ScHeaderNav,
+  ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
   ScNavigationMenuLink,
@@ -19,31 +19,31 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-rtl-navbar-demo',
+  selector: 'app-rtl-header-demo',
   imports: [
     Dir,
-    ScNavbar,
-    ScNavbarBrand,
+    ScHeader,
+    ScHeaderBrand,
     ScNavigationMenu,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavbarMenu,
-    ScNavbarMenuLink,
-    ScNavbarNav,
-    ScNavbarToggle,
+    ScHeaderMenu,
+    ScHeaderMenuLink,
+    ScHeaderNav,
+    ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
   template: `
     <div dir="rtl" lang="ar">
-      <header scNavbar aria-label="أكمي" #navbar="scNavbar">
-        <a scNavbarBrand href="#">
+      <header scHeader aria-label="أكمي" #header="scHeader">
+        <a scHeaderBrand href="#">
           <svg siGalleryVerticalEndIcon></svg>
           أكمي
         </a>
-        <nav scNavigationMenu scNavbarNav aria-label="الرئيسية">
+        <nav scNavigationMenu scHeaderNav aria-label="الرئيسية">
           <ul scNavigationMenuList>
             @for (link of links; track link) {
               <li scNavigationMenuItem>
@@ -59,8 +59,8 @@ import {
             }
           </ul>
         </nav>
-        <button scNavbarToggle>
-          @if (navbar.open()) {
+        <button scHeaderToggle>
+          @if (header.open()) {
             <svg siXIcon></svg>
             <span class="sr-only">إغلاق القائمة</span>
           } @else {
@@ -68,11 +68,11 @@ import {
             <span class="sr-only">فتح القائمة</span>
           }
         </button>
-        <ng-template scNavbarMenu>
+        <ng-template scHeaderMenu>
           <nav aria-label="الرئيسية">
             @for (link of links; track link) {
               <a
-                scNavbarMenuLink
+                scHeaderMenuLink
                 href="#"
                 [active]="link === current()"
                 (click)="go($event, link)"
@@ -88,7 +88,7 @@ import {
   providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlNavbarDemo {
+export class RtlHeaderDemo {
   private readonly links = ['المنتجات', 'الأسعار', 'التوثيق', 'المدونة'];
   private readonly current = signal('المنتجات');
 

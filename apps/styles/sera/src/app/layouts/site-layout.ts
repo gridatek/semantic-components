@@ -1,14 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
+  ScHeader,
+  ScHeaderActions,
+  ScHeaderBrand,
+  ScHeaderMenu,
+  ScHeaderMenuLink,
+  ScHeaderNav,
+  ScHeaderToggle,
   ScLink,
-  ScNavbar,
-  ScNavbarActions,
-  ScNavbarBrand,
-  ScNavbarMenu,
-  ScNavbarMenuLink,
-  ScNavbarNav,
-  ScNavbarToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
   ScNavigationMenuLink,
@@ -29,17 +29,17 @@ import { ThemeMenu } from './theme-menu';
     RouterLinkActive,
     RouterOutlet,
     ScLink,
-    ScNavbar,
-    ScNavbarActions,
-    ScNavbarBrand,
+    ScHeader,
+    ScHeaderActions,
+    ScHeaderBrand,
     ScNavigationMenu,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavbarMenu,
-    ScNavbarMenuLink,
-    ScNavbarNav,
-    ScNavbarToggle,
+    ScHeaderMenu,
+    ScHeaderMenuLink,
+    ScHeaderNav,
+    ScHeaderToggle,
     ScSeparator,
     SiMenuIcon,
     SiXIcon,
@@ -47,20 +47,20 @@ import { ThemeMenu } from './theme-menu';
   ],
   template: `
     <header
-      scNavbar
-      #navbar="scNavbar"
+      scHeader
+      #header="scHeader"
       sticky
       aria-label="Sera"
       class="px-(--page-gutter) md:px-(--page-gutter)"
     >
-      <a scNavbarBrand routerLink="/">
+      <a scHeaderBrand routerLink="/">
         <span
           class="bg-primary text-primary-foreground font-heading flex h-8 items-center px-3 text-lg tracking-wide uppercase"
           >Sera</span
         >
       </a>
 
-      <nav scNavigationMenu scNavbarNav aria-label="Main">
+      <nav scNavigationMenu scHeaderNav aria-label="Main">
         <ul scNavigationMenuList>
           @for (page of pages; track page.path) {
             <li scNavigationMenuItem>
@@ -78,12 +78,12 @@ import { ThemeMenu } from './theme-menu';
         </ul>
       </nav>
 
-      <div scNavbarActions>
+      <div scHeaderActions>
         <app-theme-menu />
       </div>
 
-      <button scNavbarToggle>
-        @if (navbar.open()) {
+      <button scHeaderToggle>
+        @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {
@@ -92,11 +92,11 @@ import { ThemeMenu } from './theme-menu';
         }
       </button>
 
-      <ng-template scNavbarMenu>
+      <ng-template scHeaderMenu>
         <nav aria-label="Main">
           @for (page of pages; track page.path) {
             <a
-              scNavbarMenuLink
+              scHeaderMenuLink
               [routerLink]="page.path"
               routerLinkActive
               #menuRla="routerLinkActive"

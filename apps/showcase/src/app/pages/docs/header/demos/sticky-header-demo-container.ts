@@ -2,12 +2,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 
 @Component({
-  selector: 'app-navigation-menu-navbar-demo-container',
+  selector: 'app-sticky-header-demo-container',
   imports: [DemoContainer],
   template: `
     <app-demo-container
-      title="With a Navigation Menu"
-      demoUrl="/demos/navbar/navigation-menu-navbar-demo"
+      title="Sticky, Hides on Scroll"
+      demoUrl="/demos/header/sticky-header-demo"
       framed
       [frameWidth]="1024"
       [frameHeight]="360"
@@ -17,83 +17,73 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class NavigationMenuNavbarDemoContainer {
+export class StickyHeaderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScNavbar,
-  ScNavbarBrand,
-  ScNavbarMenu,
-  ScNavbarMenuLink,
-  ScNavbarNav,
-  ScNavbarToggle,
+  ScHeader,
+  ScHeaderBrand,
+  ScHeaderMenu,
+  ScHeaderMenuLink,
+  ScHeaderNav,
+  ScHeaderToggle,
   ScNavigationMenu,
-  ScNavigationMenuContent,
   ScNavigationMenuItem,
   ScNavigationMenuLink,
   ScNavigationMenuList,
-  ScNavigationMenuTrigger,
-  ScNavigationMenuTriggerIcon,
 } from '@semantic-components/ui';
 import {
-  SiChevronDownIcon,
   SiGalleryVerticalEndIcon,
   SiMenuIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-navigation-menu-navbar-demo',
+  selector: 'app-sticky-header-demo',
   imports: [
-    ScNavbar,
-    ScNavbarBrand,
-    ScNavbarMenu,
-    ScNavbarMenuLink,
-    ScNavbarNav,
-    ScNavbarToggle,
+    ScHeader,
+    ScHeaderBrand,
     ScNavigationMenu,
-    ScNavigationMenuContent,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavigationMenuTrigger,
-    ScNavigationMenuTriggerIcon,
-    SiChevronDownIcon,
+    ScHeaderMenu,
+    ScHeaderMenuLink,
+    ScHeaderNav,
+    ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
   template: \`
-    <header scNavbar aria-label="Acme, with menus" #navbar="scNavbar">
-      <a scNavbarBrand href="#">
+    <header
+      scHeader
+      aria-label="Acme, sticky"
+      #header="scHeader"
+      sticky
+      hideOnScroll
+    >
+      <a scHeaderBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavigationMenu scNavbarNav aria-label="Main, with menus">
+      <nav scNavigationMenu scHeaderNav aria-label="Main, sticky">
         <ul scNavigationMenuList>
-          <li scNavigationMenuItem>
-            <button scNavigationMenuTrigger>
-              Products
-              <svg siChevronDownIcon scNavigationMenuTriggerIcon></svg>
-            </button>
-            <div scNavigationMenuContent>
-              <ul class="grid w-72 gap-1">
-                @for (product of products; track product) {
-                  <li>
-                    <a scNavigationMenuLink href="#">{{ product }}</a>
-                  </li>
-                }
-              </ul>
-            </div>
-          </li>
-          @for (link of links.slice(1); track link) {
+          @for (link of links; track link) {
             <li scNavigationMenuItem>
-              <a scNavigationMenuLink href="#">{{ link }}</a>
+              <a
+                scNavigationMenuLink
+                href="#"
+                [active]="link === current()"
+                (click)="go($event, link)"
+              >
+                {{ link }}
+              </a>
             </li>
           }
         </ul>
       </nav>
-      <button scNavbarToggle>
-        @if (navbar.open()) {
+      <button scHeaderToggle>
+        @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {
@@ -101,11 +91,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scNavbarMenu>
-        <nav aria-label="Main, with menus">
+      <ng-template scHeaderMenu>
+        <nav aria-label="Main, sticky">
           @for (link of links; track link) {
             <a
-              scNavbarMenuLink
+              scHeaderMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -116,10 +106,18 @@ import {
         </nav>
       </ng-template>
     </header>
+    <div class="space-y-4 p-6">
+      @for (paragraph of paragraphs; track $index) {
+        <p class="text-muted-foreground max-w-prose">
+          Scroll down: the bar slides away. Scroll up: it comes back. Paragraph
+          {{ $index + 1 }}.
+        </p>
+      }
+    </div>
   \`,
   encapsulation: ViewEncapsulation.None,
 })
-export class NavigationMenuNavbarDemo {
+export class StickyHeaderDemo {
   private readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   private readonly current = signal('Products');
 
@@ -128,6 +126,6 @@ export class NavigationMenuNavbarDemo {
     event.preventDefault();
     this.current.set(link);
   }
-  private readonly products = ['Analytics', 'Automation', 'Reports'];
+  private readonly paragraphs = Array.from({ length: 30 });
 }`;
 }

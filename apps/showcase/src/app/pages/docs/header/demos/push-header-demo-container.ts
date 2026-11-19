@@ -2,32 +2,30 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 
 @Component({
-  selector: 'app-basic-navbar-demo-container',
+  selector: 'app-push-header-demo-container',
   imports: [DemoContainer],
   template: `
     <app-demo-container
-      title="Basic"
-      demoUrl="/demos/navbar/basic-navbar-demo"
+      title="Push Menu"
+      demoUrl="/demos/header/push-header-demo"
       framed
-      [frameWidth]="1024"
-      [frameHeight]="300"
+      [frameWidth]="390"
+      [frameHeight]="420"
       [code]="code"
     />
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicNavbarDemoContainer {
+export class PushHeaderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScLink,
-  ScNavbar,
-  ScNavbarActions,
-  ScNavbarBrand,
-  ScNavbarMenu,
-  ScNavbarMenuLink,
-  ScNavbarNav,
-  ScNavbarToggle,
+  ScHeader,
+  ScHeaderBrand,
+  ScHeaderMenu,
+  ScHeaderMenuLink,
+  ScHeaderNav,
+  ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
   ScNavigationMenuLink,
@@ -40,31 +38,29 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-basic-navbar-demo',
+  selector: 'app-push-header-demo',
   imports: [
-    ScLink,
-    ScNavbar,
-    ScNavbarActions,
-    ScNavbarBrand,
+    ScHeader,
+    ScHeaderBrand,
     ScNavigationMenu,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavbarMenu,
-    ScNavbarMenuLink,
-    ScNavbarNav,
-    ScNavbarToggle,
+    ScHeaderMenu,
+    ScHeaderMenuLink,
+    ScHeaderNav,
+    ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
   template: \`
-    <header scNavbar aria-label="Acme" #navbar="scNavbar">
-      <a scNavbarBrand href="#">
+    <header scHeader aria-label="Acme, push" #header="scHeader">
+      <a scHeaderBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavigationMenu scNavbarNav aria-label="Main">
+      <nav scNavigationMenu scHeaderNav aria-label="Main, push">
         <ul scNavigationMenuList>
           @for (link of links; track link) {
             <li scNavigationMenuItem>
@@ -80,14 +76,8 @@ import {
           }
         </ul>
       </nav>
-      <div scNavbarActions>
-        <a scLink variant="ghost" href="/docs/components/navbar">Sign in</a>
-        <a scLink variant="button" href="/docs/getting-started/introduction"
-          >Get started</a
-        >
-      </div>
-      <button scNavbarToggle>
-        @if (navbar.open()) {
+      <button scHeaderToggle>
+        @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {
@@ -95,11 +85,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scNavbarMenu>
-        <nav aria-label="Main">
+      <ng-template scHeaderMenu push>
+        <nav aria-label="Main, push">
           @for (link of links; track link) {
             <a
-              scNavbarMenuLink
+              scHeaderMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -110,10 +100,17 @@ import {
         </nav>
       </ng-template>
     </header>
+    <div class="space-y-4 p-4">
+      <h2 class="text-lg font-semibold">{{ current() }}</h2>
+      <p class="text-muted-foreground text-sm">
+        The menu pushes this text down, and stays open until you close it with
+        its toggle, Escape or a link.
+      </p>
+    </div>
   \`,
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicNavbarDemo {
+export class PushHeaderDemo {
   private readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   private readonly current = signal('Products');
 

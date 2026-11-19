@@ -8,16 +8,16 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
+  ScHeader,
+  ScHeaderActions,
+  ScHeaderBrand,
+  ScHeaderMenu,
+  ScHeaderMenuLink,
+  ScHeaderNav,
+  ScHeaderToggle,
   ScInputButton,
   ScKbd,
   ScLink,
-  ScNavbar,
-  ScNavbarActions,
-  ScNavbarBrand,
-  ScNavbarMenu,
-  ScNavbarMenuLink,
-  ScNavbarNav,
-  ScNavbarToggle,
   ScNavigationMenu,
   ScNavigationMenuContent,
   ScNavigationMenuItem,
@@ -45,13 +45,13 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
   imports: [
     RouterLink,
     RouterLinkActive,
-    ScNavbar,
-    ScNavbarActions,
-    ScNavbarBrand,
-    ScNavbarMenu,
-    ScNavbarMenuLink,
-    ScNavbarNav,
-    ScNavbarToggle,
+    ScHeader,
+    ScHeaderActions,
+    ScHeaderBrand,
+    ScHeaderMenu,
+    ScHeaderMenuLink,
+    ScHeaderNav,
+    ScHeaderToggle,
     ScInputButton,
     ScKbd,
     ScLink,
@@ -71,15 +71,15 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
     ScNavigationMenuTriggerIcon,
   ],
   template: `
-    <header scNavbar #navbar="scNavbar" class="border-b-0">
+    <header scHeader #header="scHeader" class="border-b-0">
       <!-- Brand -->
-      <a scNavbarBrand routerLink="/">
+      <a scHeaderBrand routerLink="/">
         <svg app-logo></svg>
         <span class="sr-only">Semantic Components</span>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav scNavigationMenu scNavbarNav aria-label="Main">
+      <nav scNavigationMenu scHeaderNav aria-label="Main">
         <ul scNavigationMenuList>
           <li scNavigationMenuItem>
             <a
@@ -196,7 +196,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
       </nav>
 
       <!-- Actions -->
-      <div scNavbarActions>
+      <div scHeaderActions>
         <button
           scInputButton
           class="hidden w-48 md:flex lg:w-64"
@@ -245,8 +245,8 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
         <app-theme-menu />
       </div>
 
-      <button scNavbarToggle>
-        @if (navbar.open()) {
+      <button scHeaderToggle>
+        @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {
@@ -256,10 +256,10 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
       </button>
 
       <!-- Mobile Menu -->
-      <ng-template scNavbarMenu>
+      <ng-template scHeaderMenu>
         <nav aria-label="Main">
           <a
-            scNavbarMenuLink
+            scHeaderMenuLink
             routerLink="/"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -269,7 +269,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Home
           </a>
           <a
-            scNavbarMenuLink
+            scHeaderMenuLink
             routerLink="/components"
             routerLinkActive="active"
             #mobileComponentsRla="routerLinkActive"
@@ -278,7 +278,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Components
           </a>
           <a
-            scNavbarMenuLink
+            scHeaderMenuLink
             routerLink="/docs/getting-started"
             routerLinkActive="active"
             #mobileDocsRla="routerLinkActive"
@@ -287,7 +287,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Documentation
           </a>
           <a
-            scNavbarMenuLink
+            scHeaderMenuLink
             routerLink="/ai-elements"
             routerLinkActive="active"
             #mobileAiElementsRla="routerLinkActive"
@@ -296,7 +296,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             AI Elements
           </a>
           <a
-            scNavbarMenuLink
+            scHeaderMenuLink
             routerLink="/charts"
             routerLinkActive="active"
             #mobileChartsRla="routerLinkActive"
@@ -305,7 +305,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Charts
           </a>
           <a
-            scNavbarMenuLink
+            scHeaderMenuLink
             routerLink="/typeset"
             routerLinkActive="active"
             #mobileTypesetRla="routerLinkActive"
@@ -314,7 +314,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Typeset
           </a>
           <a
-            scNavbarMenuLink
+            scHeaderMenuLink
             routerLink="/customize"
             routerLinkActive="active"
             #mobileCustomizeRla="routerLinkActive"

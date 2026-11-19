@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScNavbar,
-  ScNavbarBrand,
-  ScNavbarMenu,
-  ScNavbarMenuLink,
-  ScNavbarNav,
-  ScNavbarToggle,
+  ScHeader,
+  ScHeaderBrand,
+  ScHeaderMenu,
+  ScHeaderMenuLink,
+  ScHeaderNav,
+  ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuContent,
   ScNavigationMenuItem,
@@ -22,14 +22,14 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-navigation-menu-navbar-demo',
+  selector: 'app-navigation-menu-header-demo',
   imports: [
-    ScNavbar,
-    ScNavbarBrand,
-    ScNavbarMenu,
-    ScNavbarMenuLink,
-    ScNavbarNav,
-    ScNavbarToggle,
+    ScHeader,
+    ScHeaderBrand,
+    ScHeaderMenu,
+    ScHeaderMenuLink,
+    ScHeaderNav,
+    ScHeaderToggle,
     ScNavigationMenu,
     ScNavigationMenuContent,
     ScNavigationMenuItem,
@@ -43,12 +43,12 @@ import {
     SiXIcon,
   ],
   template: `
-    <header scNavbar aria-label="Acme, with menus" #navbar="scNavbar">
-      <a scNavbarBrand href="#">
+    <header scHeader aria-label="Acme, with menus" #header="scHeader">
+      <a scHeaderBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavigationMenu scNavbarNav aria-label="Main, with menus">
+      <nav scNavigationMenu scHeaderNav aria-label="Main, with menus">
         <ul scNavigationMenuList>
           <li scNavigationMenuItem>
             <button scNavigationMenuTrigger>
@@ -72,8 +72,8 @@ import {
           }
         </ul>
       </nav>
-      <button scNavbarToggle>
-        @if (navbar.open()) {
+      <button scHeaderToggle>
+        @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {
@@ -81,11 +81,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scNavbarMenu>
+      <ng-template scHeaderMenu>
         <nav aria-label="Main, with menus">
           @for (link of links; track link) {
             <a
-              scNavbarMenuLink
+              scHeaderMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -99,7 +99,7 @@ import {
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export class NavigationMenuNavbarDemo {
+export class NavigationMenuHeaderDemo {
   private readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   private readonly current = signal('Products');
 

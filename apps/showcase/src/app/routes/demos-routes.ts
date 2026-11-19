@@ -6253,54 +6253,54 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/navbar',
+    path: 'demos/header',
     children: [
       {
-        path: 'basic-navbar-demo',
+        path: 'basic-header-demo',
         data: { fullPage: true },
         loadComponent: () =>
-          import('../pages/docs/navbar/demos/basic-navbar-demo').then(
-            (m) => m.BasicNavbarDemo,
+          import('../pages/docs/header/demos/basic-header-demo').then(
+            (m) => m.BasicHeaderDemo,
           ),
       },
       {
-        path: 'mobile-navbar-demo',
+        path: 'mobile-header-demo',
         data: { fullPage: true },
         loadComponent: () =>
-          import('../pages/docs/navbar/demos/mobile-navbar-demo').then(
-            (m) => m.MobileNavbarDemo,
+          import('../pages/docs/header/demos/mobile-header-demo').then(
+            (m) => m.MobileHeaderDemo,
           ),
       },
       {
-        path: 'push-navbar-demo',
+        path: 'push-header-demo',
         data: { fullPage: true },
         loadComponent: () =>
-          import('../pages/docs/navbar/demos/push-navbar-demo').then(
-            (m) => m.PushNavbarDemo,
+          import('../pages/docs/header/demos/push-header-demo').then(
+            (m) => m.PushHeaderDemo,
           ),
       },
       {
-        path: 'navigation-menu-navbar-demo',
+        path: 'navigation-menu-header-demo',
         data: { fullPage: true },
         loadComponent: () =>
-          import('../pages/docs/navbar/demos/navigation-menu-navbar-demo').then(
-            (m) => m.NavigationMenuNavbarDemo,
+          import('../pages/docs/header/demos/navigation-menu-header-demo').then(
+            (m) => m.NavigationMenuHeaderDemo,
           ),
       },
       {
-        path: 'sticky-navbar-demo',
+        path: 'sticky-header-demo',
         data: { fullPage: true },
         loadComponent: () =>
-          import('../pages/docs/navbar/demos/sticky-navbar-demo').then(
-            (m) => m.StickyNavbarDemo,
+          import('../pages/docs/header/demos/sticky-header-demo').then(
+            (m) => m.StickyHeaderDemo,
           ),
       },
       {
-        path: 'rtl-navbar-demo',
+        path: 'rtl-header-demo',
         data: { fullPage: true },
         loadComponent: () =>
-          import('../pages/docs/navbar/demos/rtl-navbar-demo').then(
-            (m) => m.RtlNavbarDemo,
+          import('../pages/docs/header/demos/rtl-header-demo').then(
+            (m) => m.RtlHeaderDemo,
           ),
       },
     ],

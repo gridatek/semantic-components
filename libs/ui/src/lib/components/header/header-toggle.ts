@@ -10,7 +10,7 @@ import {
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
-import { ScNavbar } from './navbar';
+import { ScHeader } from './header';
 
 const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
 
@@ -21,8 +21,8 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
  * reduced motion) — not on the first paint.
  *
  * ```html
- * <button scNavbarToggle>
- *   @if (navbar.open()) {
+ * <button scHeaderToggle>
+ *   @if (header.open()) {
  *     <svg siXIcon></svg><span class="sr-only">Close menu</span>
  *   } @else {
  *     <svg siMenuIcon></svg><span class="sr-only">Open menu</span>
@@ -31,20 +31,20 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
  * ```
  */
 @Directive({
-  selector: 'button[scNavbarToggle]',
+  selector: 'button[scHeaderToggle]',
   host: {
-    'data-slot': 'navbar-toggle',
+    'data-slot': 'header-toggle',
     type: 'button',
-    '[attr.aria-expanded]': 'navbar.open()',
+    '[attr.aria-expanded]': 'header.open()',
     // The panel exists only while open: nothing to control otherwise.
-    '[attr.aria-controls]': 'navbar.open() ? navbar.menuId : null',
+    '[attr.aria-controls]': 'header.open() ? header.menuId : null',
     '[class]': 'class()',
     '(click)': 'toggle()',
   },
 })
-export class ScNavbarToggle {
+export class ScHeaderToggle {
   private readonly buttonStyles = injectStyle().button;
-  private readonly navbar = inject(ScNavbar);
+  private readonly header = inject(ScHeader);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -60,18 +60,18 @@ export class ScNavbarToggle {
       // The icon your @if puts in (Menu ↔ X) turns 45°, grows and fades in.
       this.pressed() &&
         '[&_svg]:animate-in [&_svg]:fade-in-0 [&_svg]:zoom-in-75 [&_svg]:spin-in-45 [&_svg]:duration-100 motion-reduce:[&_svg]:animate-none',
-      HIDDEN[this.navbar.expand()],
+      HIDDEN[this.header.expand()],
       this.classInput(),
     ),
   );
 
   private toggle(): void {
     this.pressed.set(true);
-    this.navbar.open.set(!this.navbar.open());
+    this.header.open.set(!this.header.open());
   }
 
   constructor() {
-    this.navbar.toggle.set(inject(ElementRef).nativeElement);
-    inject(DestroyRef).onDestroy(() => this.navbar.toggle.set(null));
+    this.header.toggle.set(inject(ElementRef).nativeElement);
+    inject(DestroyRef).onDestroy(() => this.header.toggle.set(null));
   }
 }

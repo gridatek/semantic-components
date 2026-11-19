@@ -1,11 +1,12 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScNavbar,
-  ScNavbarBrand,
-  ScNavbarMenu,
-  ScNavbarMenuLink,
-  ScNavbarNav,
-  ScNavbarToggle,
+  ScHeader,
+  ScHeaderBrand,
+  ScHeaderMenu,
+  ScHeaderMenuLink,
+  ScHeaderNav,
+  ScHeaderToggle,
+  ScLink,
   ScNavigationMenu,
   ScNavigationMenuItem,
   ScNavigationMenuLink,
@@ -18,35 +19,35 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-sticky-navbar-demo',
+  selector: 'app-mobile-header-demo',
   imports: [
-    ScNavbar,
-    ScNavbarBrand,
+    ScLink,
+    ScHeader,
+    ScHeaderBrand,
     ScNavigationMenu,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavbarMenu,
-    ScNavbarMenuLink,
-    ScNavbarNav,
-    ScNavbarToggle,
+    ScHeaderMenu,
+    ScHeaderMenuLink,
+    ScHeaderNav,
+    ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
   template: `
     <header
-      scNavbar
-      aria-label="Acme, sticky"
-      #navbar="scNavbar"
-      sticky
-      hideOnScroll
+      scHeader
+      aria-label="Acme, mobile"
+      #header="scHeader"
+      [(open)]="open"
     >
-      <a scNavbarBrand href="#">
+      <a scHeaderBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavigationMenu scNavbarNav aria-label="Main, sticky">
+      <nav scNavigationMenu scHeaderNav aria-label="Main, mobile">
         <ul scNavigationMenuList>
           @for (link of links; track link) {
             <li scNavigationMenuItem>
@@ -62,8 +63,8 @@ import {
           }
         </ul>
       </nav>
-      <button scNavbarToggle>
-        @if (navbar.open()) {
+      <button scHeaderToggle>
+        @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {
@@ -71,11 +72,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scNavbarMenu>
-        <nav aria-label="Main, sticky">
+      <ng-template scHeaderMenu>
+        <nav aria-label="Main, mobile">
           @for (link of links; track link) {
             <a
-              scNavbarMenuLink
+              scHeaderMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -84,20 +85,22 @@ import {
             </a>
           }
         </nav>
+        <a
+          scLink
+          variant="button"
+          class="mt-3"
+          href="/docs/getting-started/introduction"
+          >Get started</a
+        >
       </ng-template>
     </header>
-    <div class="space-y-4 p-6">
-      @for (paragraph of paragraphs; track $index) {
-        <p class="text-muted-foreground max-w-prose">
-          Scroll down: the bar slides away. Scroll up: it comes back. Paragraph
-          {{ $index + 1 }}.
-        </p>
-      }
-    </div>
+    <p class="text-muted-foreground p-4 text-sm">
+      Menu {{ open() ? 'open' : 'closed' }}
+    </p>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export class StickyNavbarDemo {
+export class MobileHeaderDemo {
   private readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   private readonly current = signal('Products');
 
@@ -106,5 +109,6 @@ export class StickyNavbarDemo {
     event.preventDefault();
     this.current.set(link);
   }
-  private readonly paragraphs = Array.from({ length: 30 });
+  /** Two-way bound to the header's open state. */
+  private readonly open = signal(false);
 }

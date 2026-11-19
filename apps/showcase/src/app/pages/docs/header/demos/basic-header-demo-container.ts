@@ -1,13 +1,33 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+
+@Component({
+  selector: 'app-basic-header-demo-container',
+  imports: [DemoContainer],
+  template: `
+    <app-demo-container
+      title="Basic"
+      demoUrl="/demos/header/basic-header-demo"
+      framed
+      [frameWidth]="1024"
+      [frameHeight]="300"
+      [code]="code"
+    />
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class BasicHeaderDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScHeader,
+  ScHeaderActions,
+  ScHeaderBrand,
+  ScHeaderMenu,
+  ScHeaderMenuLink,
+  ScHeaderNav,
+  ScHeaderToggle,
   ScLink,
-  ScNavbar,
-  ScNavbarActions,
-  ScNavbarBrand,
-  ScNavbarMenu,
-  ScNavbarMenuLink,
-  ScNavbarNav,
-  ScNavbarToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
   ScNavigationMenuLink,
@@ -20,31 +40,31 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-basic-navbar-demo',
+  selector: 'app-basic-header-demo',
   imports: [
     ScLink,
-    ScNavbar,
-    ScNavbarActions,
-    ScNavbarBrand,
+    ScHeader,
+    ScHeaderActions,
+    ScHeaderBrand,
     ScNavigationMenu,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavbarMenu,
-    ScNavbarMenuLink,
-    ScNavbarNav,
-    ScNavbarToggle,
+    ScHeaderMenu,
+    ScHeaderMenuLink,
+    ScHeaderNav,
+    ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
-  template: `
-    <header scNavbar aria-label="Acme" #navbar="scNavbar">
-      <a scNavbarBrand href="#">
+  template: \`
+    <header scHeader aria-label="Acme" #header="scHeader">
+      <a scHeaderBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavigationMenu scNavbarNav aria-label="Main">
+      <nav scNavigationMenu scHeaderNav aria-label="Main">
         <ul scNavigationMenuList>
           @for (link of links; track link) {
             <li scNavigationMenuItem>
@@ -60,14 +80,14 @@ import {
           }
         </ul>
       </nav>
-      <div scNavbarActions>
-        <a scLink variant="ghost" href="/docs/components/navbar">Sign in</a>
+      <div scHeaderActions>
+        <a scLink variant="ghost" href="/docs/components/header">Sign in</a>
         <a scLink variant="button" href="/docs/getting-started/introduction"
           >Get started</a
         >
       </div>
-      <button scNavbarToggle>
-        @if (navbar.open()) {
+      <button scHeaderToggle>
+        @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {
@@ -75,11 +95,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scNavbarMenu>
+      <ng-template scHeaderMenu>
         <nav aria-label="Main">
           @for (link of links; track link) {
             <a
-              scNavbarMenuLink
+              scHeaderMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -90,10 +110,10 @@ import {
         </nav>
       </ng-template>
     </header>
-  `,
+  \`,
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicNavbarDemo {
+export class BasicHeaderDemo {
   private readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   private readonly current = signal('Products');
 
@@ -102,4 +122,5 @@ export class BasicNavbarDemo {
     event.preventDefault();
     this.current.set(link);
   }
+}`;
 }

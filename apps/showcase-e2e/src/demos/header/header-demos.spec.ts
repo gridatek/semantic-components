@@ -1,9 +1,9 @@
 import { collectErrors, press } from '../../interaction';
 import { type Page, expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/navbar/${name}-navbar-demo`;
-const toggle = (page: Page) => page.locator('[data-slot=navbar-toggle]');
-const menu = (page: Page) => page.locator('[data-slot=navbar-menu]');
+const demo = (name: string) => `/demos/header/${name}-header-demo`;
+const toggle = (page: Page) => page.locator('[data-slot=header-toggle]');
+const menu = (page: Page) => page.locator('[data-slot=header-menu]');
 
 let errors: string[];
 
@@ -101,7 +101,7 @@ test.describe('narrow', () => {
     await open.click();
     const close = page.getByRole('button', { name: 'Close menu' });
     await expect(close).toHaveAttribute('aria-expanded', 'true');
-    // Open, the navbar renders it: the toggle controls it.
+    // Open, the header renders it: the toggle controls it.
     await expect(menu(page)).toBeVisible();
     await expect(close).toHaveAttribute(
       'aria-controls',
@@ -239,7 +239,7 @@ test.describe('narrow', () => {
 
   test('RTL: brand at the right, toggle at the left', async ({ page }) => {
     await page.goto(demo('rtl'));
-    const brand = page.locator('[data-slot=navbar-brand]');
+    const brand = page.locator('[data-slot=header-brand]');
     const button = page.getByRole('button', { name: 'فتح القائمة' });
     expect((await brand.boundingBox())!.x).toBeGreaterThan(
       (await button.boundingBox())!.x,

@@ -3,13 +3,13 @@ import { cn } from 'cn';
 
 /** The site's logo and name, a link home: your icon and text inside. */
 @Directive({
-  selector: 'a[scNavbarBrand]',
+  selector: 'a[scHeaderBrand]',
   host: {
-    'data-slot': 'navbar-brand',
+    'data-slot': 'header-brand',
     '[class]': 'class()',
   },
 })
-export class ScNavbarBrand {
+export class ScHeaderBrand {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

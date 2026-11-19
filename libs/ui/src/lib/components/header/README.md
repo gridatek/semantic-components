@@ -1,4 +1,4 @@
-# Navbar
+# Header
 
 A site's top bar: your brand, links and actions; on narrow screens a toggle opens a menu under the bar. The bar is the page's banner (`header`); the menu is a disclosure, part of the page — nothing is trapped, the page still scrolls — following the WAI-ARIA disclosure navigation pattern.
 
@@ -10,17 +10,17 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
 - **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough; covering the page, the focus leaving the bar too
 - **`[(open)]`** — the menu's state, two-way
 - **Sticky**, and **hides on scroll** (away going down, back going up)
-- **The links are the Navigation Menu's** — on the same `nav` (one landmark); the navbar adds only what the Navigation Menu doesn't have: the bar, the breakpoint, the phone menu
+- **The links are the Navigation Menu's** — on the same `nav` (one landmark); the header adds only what the Navigation Menu doesn't have: the bar, the breakpoint, the phone menu
 - **Current page** — `active` gives `aria-current="page"`, in the bar (the Navigation Menu's links) and in the menu
 - **RTL**
 
 ## Quick Start
 
 ```html
-<header scNavbar #navbar="scNavbar">
-  <a scNavbarBrand href="/"><svg siGalleryVerticalEndIcon></svg> Acme</a>
+<header scHeader #header="scHeader">
+  <a scHeaderBrand href="/"><svg siGalleryVerticalEndIcon></svg> Acme</a>
 
-  <nav scNavigationMenu scNavbarNav aria-label="Main">
+  <nav scNavigationMenu scHeaderNav aria-label="Main">
     <ul scNavigationMenuList>
       <li scNavigationMenuItem>
         <a scNavigationMenuLink routerLink="/products" active>Products</a>
@@ -31,12 +31,12 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
     </ul>
   </nav>
 
-  <div scNavbarActions>
+  <div scHeaderActions>
     <a scLink variant="button" routerLink="/start">Get started</a>
   </div>
 
-  <button scNavbarToggle>
-    @if (navbar.open()) {
+  <button scHeaderToggle>
+    @if (header.open()) {
     <svg siXIcon></svg>
     <span class="sr-only">Close menu</span>
     } @else {
@@ -45,10 +45,10 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
     }
   </button>
 
-  <ng-template scNavbarMenu>
+  <ng-template scHeaderMenu>
     <nav aria-label="Main">
-      <a scNavbarMenuLink routerLink="/products" active>Products</a>
-      <a scNavbarMenuLink routerLink="/pricing">Pricing</a>
+      <a scHeaderMenuLink routerLink="/products" active>Products</a>
+      <a scHeaderMenuLink routerLink="/pricing">Pricing</a>
     </nav>
   </ng-template>
 </header>
@@ -62,9 +62,9 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
 
 ## API
 
-### ScNavbar — `header[scNavbar]`
+### ScHeader — `header[scHeader]`
 
-`exportAs: 'scNavbar'`.
+`exportAs: 'scHeader'`.
 
 | Input          | Type                   | Default | Description                                         |
 | -------------- | ---------------------- | ------- | --------------------------------------------------- |
@@ -74,31 +74,31 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
 | `hideOnScroll` | `boolean`              | `false` | Slides away scrolling down, back scrolling up       |
 | `class`        | `string`               | `''`    | Additional CSS classes                              |
 
-### ScNavbarBrand — `a[scNavbarBrand]`
+### ScHeaderBrand — `a[scHeaderBrand]`
 
 Your logo and name, a link home.
 
-### ScNavbarNav — `nav[scNavbarNav]`
+### ScHeaderNav — `nav[scHeaderNav]`
 
-The links, from `expand` up: on a Navigation Menu (`nav[scNavigationMenu]`), which draws them — its links, `active` for the page shown, its panels if you want them. The navbar only hides it on narrow screens, where its menu has the links.
+The links, from `expand` up: on a Navigation Menu (`nav[scNavigationMenu]`), which draws them — its links, `active` for the page shown, its panels if you want them. The header only hides it on narrow screens, where its menu has the links.
 
-### ScNavbarActions — `div[scNavbarActions]`
+### ScHeaderActions — `div[scHeaderActions]`
 
 The buttons at the end.
 
-### ScNavbarToggle — `button[scNavbarToggle]`
+### ScHeaderToggle — `button[scHeaderToggle]`
 
 Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`). Your icons inside (Menu and X, swapped with `@if`); once pressed, the one that comes in turns and fades in.
 
-### ScNavbarMenu — `ng-template[scNavbarMenu]`
+### ScHeaderMenu — `ng-template[scHeaderMenu]`
 
-The menu's content, below `expand`: a named `nav` with `scNavbarMenuLink`s, and any actions, in an `ng-template`. The navbar renders it while the menu is open, in its own panel under the bar (`data-slot="navbar-menu"`, the toggle's `aria-controls` while open), and removes it on closing — so closed, its links aren't in the page. `class`: classes for that panel.
+The menu's content, below `expand`: a named `nav` with `scHeaderMenuLink`s, and any actions, in an `ng-template`. The header renders it while the menu is open, in its own panel under the bar (`data-slot="header-menu"`, the toggle's `aria-controls` while open), and removes it on closing — so closed, its links aren't in the page. `class`: classes for that panel.
 
 | Input  | Type      | Default | Description                                                                                            |
 | ------ | --------- | ------- | ------------------------------------------------------------------------------------------------------ |
 | `push` | `boolean` | `false` | Pushes the page down, instead of covering it below the bar (where the focus leaving the bar closes it) |
 
-### ScNavbarMenuLink — `a[scNavbarMenuLink]`
+### ScHeaderMenuLink — `a[scHeaderMenuLink]`
 
 A link of the menu, a full-width row; closes the menu when followed. `active`: the page shown.
 

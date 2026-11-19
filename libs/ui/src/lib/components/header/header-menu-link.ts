@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScNavbar } from './navbar';
+import { ScHeader } from './header';
 
 /**
  * A link of the menu: a full-width row. Closes the menu when followed (even
@@ -14,16 +14,16 @@ import { ScNavbar } from './navbar';
  * (`aria-current="page"`).
  */
 @Directive({
-  selector: 'a[scNavbarMenuLink]',
+  selector: 'a[scHeaderMenuLink]',
   host: {
-    'data-slot': 'navbar-menu-link',
+    'data-slot': 'header-menu-link',
     '[attr.aria-current]': 'active() ? "page" : null',
     '[class]': 'class()',
-    '(click)': 'navbar.open.set(false)',
+    '(click)': 'header.open.set(false)',
   },
 })
-export class ScNavbarMenuLink {
-  private readonly navbar = inject(ScNavbar);
+export class ScHeaderMenuLink {
+  private readonly header = inject(ScHeader);
   readonly classInput = input<string>('', { alias: 'class' });
   /** The page shown. */
   readonly active = input(false, { transform: booleanAttribute });

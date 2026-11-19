@@ -2,12 +2,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
 
 @Component({
-  selector: 'app-push-navbar-demo-container',
+  selector: 'app-mobile-header-demo-container',
   imports: [DemoContainer],
   template: `
     <app-demo-container
-      title="Push Menu"
-      demoUrl="/demos/navbar/push-navbar-demo"
+      title="Mobile Menu"
+      demoUrl="/demos/header/mobile-header-demo"
       framed
       [frameWidth]="390"
       [frameHeight]="420"
@@ -17,15 +17,16 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PushNavbarDemoContainer {
+export class MobileHeaderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScNavbar,
-  ScNavbarBrand,
-  ScNavbarMenu,
-  ScNavbarMenuLink,
-  ScNavbarNav,
-  ScNavbarToggle,
+  ScHeader,
+  ScHeaderBrand,
+  ScHeaderMenu,
+  ScHeaderMenuLink,
+  ScHeaderNav,
+  ScHeaderToggle,
+  ScLink,
   ScNavigationMenu,
   ScNavigationMenuItem,
   ScNavigationMenuLink,
@@ -38,29 +39,35 @@ import {
 } from '@semantic-icons/lucide-icons';
 
 @Component({
-  selector: 'app-push-navbar-demo',
+  selector: 'app-mobile-header-demo',
   imports: [
-    ScNavbar,
-    ScNavbarBrand,
+    ScLink,
+    ScHeader,
+    ScHeaderBrand,
     ScNavigationMenu,
     ScNavigationMenuItem,
     ScNavigationMenuLink,
     ScNavigationMenuList,
-    ScNavbarMenu,
-    ScNavbarMenuLink,
-    ScNavbarNav,
-    ScNavbarToggle,
+    ScHeaderMenu,
+    ScHeaderMenuLink,
+    ScHeaderNav,
+    ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
     SiXIcon,
   ],
   template: \`
-    <header scNavbar aria-label="Acme, push" #navbar="scNavbar">
-      <a scNavbarBrand href="#">
+    <header
+      scHeader
+      aria-label="Acme, mobile"
+      #header="scHeader"
+      [(open)]="open"
+    >
+      <a scHeaderBrand href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
-      <nav scNavigationMenu scNavbarNav aria-label="Main, push">
+      <nav scNavigationMenu scHeaderNav aria-label="Main, mobile">
         <ul scNavigationMenuList>
           @for (link of links; track link) {
             <li scNavigationMenuItem>
@@ -76,8 +83,8 @@ import {
           }
         </ul>
       </nav>
-      <button scNavbarToggle>
-        @if (navbar.open()) {
+      <button scHeaderToggle>
+        @if (header.open()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {
@@ -85,11 +92,11 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <ng-template scNavbarMenu push>
-        <nav aria-label="Main, push">
+      <ng-template scHeaderMenu>
+        <nav aria-label="Main, mobile">
           @for (link of links; track link) {
             <a
-              scNavbarMenuLink
+              scHeaderMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"
@@ -98,19 +105,22 @@ import {
             </a>
           }
         </nav>
+        <a
+          scLink
+          variant="button"
+          class="mt-3"
+          href="/docs/getting-started/introduction"
+          >Get started</a
+        >
       </ng-template>
     </header>
-    <div class="space-y-4 p-4">
-      <h2 class="text-lg font-semibold">{{ current() }}</h2>
-      <p class="text-muted-foreground text-sm">
-        The menu pushes this text down, and stays open until you close it with
-        its toggle, Escape or a link.
-      </p>
-    </div>
+    <p class="text-muted-foreground p-4 text-sm">
+      Menu {{ open() ? 'open' : 'closed' }}
+    </p>
   \`,
   encapsulation: ViewEncapsulation.None,
 })
-export class PushNavbarDemo {
+export class MobileHeaderDemo {
   private readonly links = ['Products', 'Pricing', 'Docs', 'Blog'];
   private readonly current = signal('Products');
 
@@ -119,5 +129,7 @@ export class PushNavbarDemo {
     event.preventDefault();
     this.current.set(link);
   }
+  /** Two-way bound to the header's open state. */
+  private readonly open = signal(false);
 }`;
 }
