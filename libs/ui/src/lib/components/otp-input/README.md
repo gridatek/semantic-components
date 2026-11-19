@@ -36,7 +36,7 @@ Typing moves on, Backspace back, Delete clears; Left and Right move (mirrored ri
 
 Left out (Base UI): `autoSubmit`, `form` / `name` — native forms; Signal Forms only.
 
-Between chunks, the library's Separator: `<div scSeparator><svg siMinusIcon></svg></div>` — the OTP input draws it as a short dash (`*:data-[slot=separator]:`); no separator part of its own.
+Between chunks, the library's Separator with your icon in it: `<div scSeparator><svg siMinusIcon></svg></div>` (a dot, a slash: yours). Left empty, the OTP input draws it as a short dash (`*:data-[slot=separator]:empty:`). No separator part of its own.
 
 ## Names
 
