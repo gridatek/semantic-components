@@ -23,7 +23,8 @@ const WIDE = [768, 900, 1024, 1280, 1440];
 /**
  * GitHub's stars, answered here: the API refuses a burst of requests (403)
  * and the count would then be missing — a narrower button than the real one.
- * Three digits: room for the count to grow.
+ * Three digits: room for the count to grow. Not with SSR: the server fetched
+ * the count already.
  */
 async function starsAnswered(page: Page) {
   await page.route('https://api.github.com/repos/**', (route) =>
@@ -122,10 +123,12 @@ for (const style of STYLES) {
         await page.goto('/');
         await expect(nav).toBeVisible();
         await expect(toggle).toBeHidden();
-        // The count in (shown from 768px): the button at its full width.
+        // A count in (shown from 768px): the button at its full width — ours
+        // (999), or with SSR the real one, fetched by the server and handed
+        // over: the browser doesn't ask again.
         await expect(
           page.getByRole('banner').getByRole('link', { name: /GitHub/ }),
-        ).toContainText('999');
+        ).toContainText(/\d/);
         await oneLine(page);
       });
     }

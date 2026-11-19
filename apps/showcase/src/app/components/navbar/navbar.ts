@@ -365,14 +365,12 @@ export default class Navbar {
     : 'max-xl:hidden';
 
   /**
-   * Home and Get Started, in the bar only from the width where they fit —
-   * the logo leads home, Documentation to getting started (measured
-   * 2026-11-19): lyra and mira from 1024px, the others from 1280px.
+   * Home and Get Started, in the bar from 1280px — the logo leads home,
+   * Documentation to getting started. In every style: lyra and mira fit them
+   * at 1024px by a few pixels only, not with CI's fonts and a longer star
+   * count (2026-11-19).
    */
-  private readonly roomy = ['lyra', 'mira'].includes(this.style);
-  private readonly homeItemClass = this.roomy
-    ? 'max-lg:hidden'
-    : 'max-xl:hidden';
+  private readonly homeItemClass = 'max-xl:hidden';
   /**
    * AI Elements and Charts: hidden below 1024px in vega, maia, luma and sera,
    * whose wider buttons and text don't fit there with a three-digit star count
@@ -395,9 +393,7 @@ export default class Navbar {
       ? 'hidden md:inline-flex xl:hidden'
       : 'hidden md:inline-flex lg:hidden';
 
-  private readonly getStartedClass = this.roomy
-    ? 'hidden lg:inline-flex'
-    : 'hidden xl:inline-flex';
+  private readonly getStartedClass = 'hidden xl:inline-flex';
 
   private readonly componentsService = inject(ComponentsService);
   private readonly featuredComponents = computed(() =>
