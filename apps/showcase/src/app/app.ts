@@ -10,12 +10,15 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { cn } from 'cn';
 import { filter, map } from 'rxjs';
 import { CommandPalette } from './components/command-palette/command-palette';
+import { NavigationProgress } from './components/navigation-progress/navigation-progress';
 import { Toaster } from './components/toaster/toaster';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommandPalette, Toaster],
+  imports: [RouterOutlet, CommandPalette, NavigationProgress, Toaster],
   template: `
+    <!-- A slow navigation: a thin bar at the top while it runs. -->
+    <app-navigation-progress />
     <router-outlet />
     <app-command-palette />
     <app-toaster />
