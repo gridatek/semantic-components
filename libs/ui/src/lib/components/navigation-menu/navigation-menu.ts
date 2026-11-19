@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { onNavigationEnd } from '../../utils/navigation-end';
 import {
   SC_NAVIGATION_MENU_LINK_HOST,
   type ScNavigationMenuLinkHost,
@@ -132,6 +133,8 @@ export class ScNavigationMenu implements ScNavigationMenuLinkHost {
 
   constructor() {
     inject(DestroyRef).onDestroy(() => clearTimeout(this.timer));
+    // A navigation over (a link elsewhere, Back…): the panel closes.
+    onNavigationEnd(() => this.close());
 
     // The shared box follows the open panel: lined up as the panel is, its size.
     afterRenderEffect({

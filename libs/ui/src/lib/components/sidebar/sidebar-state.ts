@@ -1,4 +1,5 @@
 import { Service, computed, signal } from '@angular/core';
+import { onNavigationEnd } from '../../utils/navigation-end';
 
 /** A sidebar's state, shared by its parts (one per `scSidebarProvider`). */
 @Service({ autoProvided: false })
@@ -16,6 +17,11 @@ export class ScSidebarState {
   readonly expanded = computed(() =>
     this.isMobile() ? this.openMobile() : this.open(),
   );
+
+  constructor() {
+    // A navigation over (a link elsewhere, Back…): the phone sheet closes.
+    onNavigationEnd(() => this.openMobile.set(false));
+  }
 
   /** Opens or closes what is shown: the sheet on phones, the sidebar otherwise. */
   toggle(): void {

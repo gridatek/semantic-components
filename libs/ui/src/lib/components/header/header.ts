@@ -14,16 +14,8 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  NavigationCancel,
-  NavigationEnd,
-  NavigationError,
-  NavigationSkipped,
-  Router,
-} from '@angular/router';
 import { cn } from 'cn';
-import { filter } from 'rxjs';
+import { onNavigationEnd } from '../../utils/navigation-end';
 import {
   SC_NAVIGATION_MENU_LINK_HOST,
   type ScNavigationMenuLinkHost,
@@ -190,23 +182,9 @@ export class ScHeader implements ScNavigationMenuLinkHost {
     ),
   );
 
-  private readonly router = inject(Router, { optional: true });
-
   constructor() {
-    // A navigation over — done, or none after all (cancelled, failed, the
-    // same page): the menu closes, whatever started it.
-    this.router?.events
-      .pipe(
-        filter(
-          (event) =>
-            event instanceof NavigationEnd ||
-            event instanceof NavigationCancel ||
-            event instanceof NavigationError ||
-            event instanceof NavigationSkipped,
-        ),
-        takeUntilDestroyed(),
-      )
-      .subscribe(() => this.mobileMenuOpen.set(false));
+    // A navigation over (a link elsewhere, Back…): the menu closes.
+    onNavigationEnd(() => this.mobileMenuOpen.set(false));
 
     const destroyRef = inject(DestroyRef);
     const element = this.element;
