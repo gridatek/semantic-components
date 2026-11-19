@@ -70,7 +70,7 @@ import {
                 <input scOtpInputSlot />
                 <input scOtpInputSlot />
               </div>
-              <div scSeparator></div>
+              <div scSeparator><svg siMinusIcon></svg></div>
               <div scOtpInputGroup>
                 <input scOtpInputSlot />
                 <input scOtpInputSlot />

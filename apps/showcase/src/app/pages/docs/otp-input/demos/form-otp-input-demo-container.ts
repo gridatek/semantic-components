@@ -37,12 +37,13 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
+import { SiRefreshCwIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** In a card: a bigger code, a resend button beside its label, its errors once left. */
 @Component({
   selector: 'app-form-otp-input-demo',
   imports: [
+    SiMinusIcon,
     ScField,
     FormField,
     ScButton,
@@ -89,7 +90,7 @@ import { SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
               <input scOtpInputSlot />
               <input scOtpInputSlot />
             </div>
-            <div scSeparator></div>
+            <div scSeparator><svg siMinusIcon></svg></div>
             <div scOtpInputGroup class="*:h-12 *:w-11 *:text-xl">
               <input scOtpInputSlot />
               <input scOtpInputSlot />

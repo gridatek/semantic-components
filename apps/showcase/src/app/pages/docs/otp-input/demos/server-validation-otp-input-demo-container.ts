@@ -41,6 +41,7 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
+import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /**
  * Stands in for the server: the code is right if it is 123456, after a
@@ -56,6 +57,7 @@ async function verifyOnServer(code: string): Promise<boolean> {
 @Component({
   selector: 'app-server-validation-otp-input-demo',
   imports: [
+    SiMinusIcon,
     ScField,
     FormField,
     ScFieldErrors,
@@ -79,7 +81,7 @@ async function verifyOnServer(code: string): Promise<boolean> {
             <input scOtpInputSlot />
             <input scOtpInputSlot />
           </div>
-          <div scSeparator></div>
+          <div scSeparator><svg siMinusIcon></svg></div>
           <div scOtpInputGroup>
             <input scOtpInputSlot />
             <input scOtpInputSlot />

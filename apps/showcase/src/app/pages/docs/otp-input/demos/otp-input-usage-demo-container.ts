@@ -24,11 +24,13 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
+import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Six characters, one input each: typed in order, pasted or autofilled from an SMS. */
 @Component({
   selector: 'app-otp-input-usage-demo',
   imports: [
+    SiMinusIcon,
     ScField,
     FormField,
     ScLabel,
@@ -50,7 +52,7 @@ import {
           <input scOtpInputSlot />
           <input scOtpInputSlot />
         </div>
-        <div scSeparator></div>
+        <div scSeparator><svg siMinusIcon></svg></div>
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />

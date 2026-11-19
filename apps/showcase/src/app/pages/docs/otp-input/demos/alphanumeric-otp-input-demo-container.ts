@@ -28,11 +28,13 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
+import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** validationType="alphanumeric": letters and digits — recovery and invite codes. */
 @Component({
   selector: 'app-alphanumeric-otp-input-demo',
   imports: [
+    SiMinusIcon,
     ScField,
     FormField,
     ScLabel,
@@ -55,7 +57,7 @@ import {
           <input scOtpInputSlot />
           <input scOtpInputSlot />
         </div>
-        <div scSeparator></div>
+        <div scSeparator><svg siMinusIcon></svg></div>
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />

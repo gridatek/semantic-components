@@ -142,7 +142,7 @@ export default class OtpInputPage {
       '      <input scOtpInputSlot />',
       '      <input scOtpInputSlot />',
       '    </div>',
-      "    <div scSeparator></div>  <!-- the library's: a dash here -->",
+      "    <div scSeparator><svg siMinusIcon></svg></div>  <!-- the library's Separator, your icon in it -->",
       '    <div scOtpInputGroup>…</div>',
       '  </div>',
       '  <p scFieldErrors></p>',

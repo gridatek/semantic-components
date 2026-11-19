@@ -10,11 +10,13 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
+import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Complete — every input filled — it can be checked: complete() and data-complete. */
 @Component({
   selector: 'app-verification-otp-input-demo',
   imports: [
+    SiMinusIcon,
     ScFrame,
     ScField,
     FormField,
@@ -44,7 +46,7 @@ import {
             <input scOtpInputSlot />
             <input scOtpInputSlot />
           </div>
-          <div scSeparator></div>
+          <div scSeparator><svg siMinusIcon></svg></div>
           <div scOtpInputGroup>
             <input scOtpInputSlot />
             <input scOtpInputSlot />

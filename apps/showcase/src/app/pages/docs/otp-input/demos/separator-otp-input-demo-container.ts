@@ -28,11 +28,13 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
+import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Chunks of two, separators between them. */
 @Component({
   selector: 'app-separator-otp-input-demo',
   imports: [
+    SiMinusIcon,
     ScField,
     FormField,
     ScLabel,
@@ -53,12 +55,12 @@ import {
           <input scOtpInputSlot />
           <input scOtpInputSlot />
         </div>
-        <div scSeparator></div>
+        <div scSeparator><svg siMinusIcon></svg></div>
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />
         </div>
-        <div scSeparator></div>
+        <div scSeparator><svg siMinusIcon></svg></div>
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />

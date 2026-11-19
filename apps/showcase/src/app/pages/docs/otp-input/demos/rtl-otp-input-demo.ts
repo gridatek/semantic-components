@@ -9,11 +9,13 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
+import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** In a right-to-left page: filled from the right; the arrows mirrored. */
 @Component({
   selector: 'app-rtl-otp-input-demo',
   imports: [
+    SiMinusIcon,
     Dir,
     ScField,
     FormField,
@@ -37,7 +39,7 @@ import {
             <input scOtpInputSlot />
             <input scOtpInputSlot />
           </div>
-          <div scSeparator></div>
+          <div scSeparator><svg siMinusIcon></svg></div>
           <div scOtpInputGroup>
             <input scOtpInputSlot />
             <input scOtpInputSlot />

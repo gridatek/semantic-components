@@ -9,11 +9,13 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
+import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Required and six long, touched and short: marked invalid, its errors shown (Signal Forms). */
 @Component({
   selector: 'app-invalid-otp-input-demo',
   imports: [
+    SiMinusIcon,
     ScField,
     FormField,
     ScFieldErrors,
@@ -35,12 +37,12 @@ import {
           <input scOtpInputSlot />
           <input scOtpInputSlot />
         </div>
-        <div scSeparator></div>
+        <div scSeparator><svg siMinusIcon></svg></div>
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />
         </div>
-        <div scSeparator></div>
+        <div scSeparator><svg siMinusIcon></svg></div>
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />

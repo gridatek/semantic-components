@@ -123,8 +123,9 @@ export class ScOtpInput implements FormValueControl<string> {
   private readonly class = computed(() =>
     cn(
       'flex w-fit items-center has-disabled:opacity-50',
-      // A separator between the chunks (your scSeparator): a short dash.
-      '*:data-[slot=separator]:mx-[3px] *:data-[slot=separator]:w-2.5 *:data-[slot=separator]:bg-foreground',
+      // A separator between the chunks (your scSeparator): its content (your
+      // icon), or — empty — a short dash.
+      '*:data-[slot=separator]:mx-[3px] *:data-[slot=separator]:empty:w-2.5 *:data-[slot=separator]:empty:bg-foreground',
       this.classInput(),
     ),
   );

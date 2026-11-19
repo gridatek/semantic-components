@@ -13,7 +13,7 @@ A one-time code, one real `<input>` per character (Base UI's OTP Field), in shad
       <input scOtpInputSlot />
       <input scOtpInputSlot />
     </div>
-    <div scSeparator></div>
+    <div scSeparator><svg siMinusIcon></svg></div>
     <div scOtpInputGroup>…</div>
   </div>
   <p scFieldErrors></p>
@@ -36,7 +36,7 @@ Typing moves on, Backspace back, Delete clears; Left and Right move (mirrored ri
 
 Left out (Base UI): `autoSubmit`, `form` / `name` — native forms; Signal Forms only.
 
-Between chunks, the library's Separator: `<div scSeparator></div>` — the OTP input draws it as a short dash (`*:data-[slot=separator]:`); no separator part of its own.
+Between chunks, the library's Separator: `<div scSeparator><svg siMinusIcon></svg></div>` — the OTP input draws it as a short dash (`*:data-[slot=separator]:`); no separator part of its own.
 
 ## Names
 

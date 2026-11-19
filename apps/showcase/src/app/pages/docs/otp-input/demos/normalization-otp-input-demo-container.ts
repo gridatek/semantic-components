@@ -28,11 +28,13 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
+import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** normalizeValue: accepted text uppercased before it is kept. */
 @Component({
   selector: 'app-normalization-otp-input-demo',
   imports: [
+    SiMinusIcon,
     ScField,
     FormField,
     ScLabel,
@@ -56,7 +58,7 @@ import {
           <input scOtpInputSlot />
           <input scOtpInputSlot />
         </div>
-        <div scSeparator></div>
+        <div scSeparator><svg siMinusIcon></svg></div>
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />
