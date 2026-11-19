@@ -666,8 +666,7 @@
     "description": "Counting or rolling to a new value, in the reader’s language — on an SVG text too; no animation library.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Data Display"
   },
   {
     "name": "Org Chart",

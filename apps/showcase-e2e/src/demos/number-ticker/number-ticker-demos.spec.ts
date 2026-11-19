@@ -122,3 +122,40 @@ test('RTL: Arabic digits, rolling', async ({ page }) => {
   await page.getByRole('button', { name: 'زيادة' }).click();
   await expect(said(page)).toHaveText('٦٬٠٧٠');
 });
+
+test('RTL, rolling: the digits shown in their order — a number reads left to right there too', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(demo('rtl'));
+  await expect(said(page)).toHaveText('٤٬٨٢٠');
+  // What the eye reads, left to right: each digit's column (the glyph it
+  // has rolled to) and each character beside them, by where they are.
+  const shown = () =>
+    page.locator('[data-slot=number-ticker-visual]').evaluate((visual) => {
+      const columns = [...visual.querySelectorAll('span')].filter((span) =>
+        span.classList.contains('overflow-hidden'),
+      );
+      const chars = [...visual.querySelectorAll('span')].filter(
+        (span) =>
+          span.children.length === 0 &&
+          !columns.some((column) => column.contains(span)),
+      );
+      const read = (element: Element) => {
+        if (!columns.includes(element as HTMLSpanElement))
+          return element.textContent ?? '';
+        const strip = element.firstElementChild as HTMLElement;
+        const place = Number(/-(\d+)em/.exec(strip.style.transform)?.[1] ?? 0);
+        return strip.children[place]?.textContent ?? '';
+      };
+      return [...columns, ...chars]
+        .sort(
+          (a, b) => a.getBoundingClientRect().x - b.getBoundingClientRect().x,
+        )
+        .map(read)
+        .join('');
+    });
+  await expect.poll(shown).toBe('٤٬٨٢٠');
+  await page.getByRole('button', { name: 'زيادة' }).click();
+  await expect.poll(shown).toBe('٦٬٠٧٠');
+});

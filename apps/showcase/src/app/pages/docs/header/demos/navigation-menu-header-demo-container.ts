@@ -57,7 +57,12 @@ import {
     SiXIcon,
   ],
   template: \`
-    <header scHeader class="border-b-0" aria-label="Acme, with menus" #header="scHeader">
+    <header
+      scHeader
+      class="border-b-0"
+      aria-label="Acme, with menus"
+      #header="scHeader"
+    >
       <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme

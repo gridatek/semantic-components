@@ -35,27 +35,40 @@ export type ScNumberTickerEffect = 'count' | 'roll';
       {{ shownText() }}
     } @else {
       <span class="sr-only">{{ text() }}</span>
+      <!-- Not a flex row: the text around the number (a currency, a sign) is
+        placed by the page's direction, as the same text unrolled would be. -->
       <span
         aria-hidden="true"
         data-slot="number-ticker-visual"
-        class="inline-flex"
+        class="whitespace-nowrap"
       >
         @if (effect() === 'roll') {
-          @for (part of parts(); track parts().length - $index) {
-            @if (part.digit === null) {
-              <span>{{ part.char }}</span>
-            } @else {
-              <span class="inline-block h-[1em] overflow-hidden leading-none">
-                <span
-                  class="flex flex-col transition-transform ease-out motion-reduce:transition-none"
-                  [style.transition-duration.ms]="duration()"
-                  [style.transform]="'translateY(-' + part.digit + 'em)'"
-                >
-                  @for (glyph of glyphs(); track $index) {
-                    <span class="h-[1em]">{{ glyph }}</span>
+          @for (segment of segments(); track segments().length - $index) {
+            @if (segment.number) {
+              <!-- The number itself: left to right, in any page. -->
+              <span dir="ltr" class="inline-flex">
+                @for (part of segment.parts; track part.key) {
+                  @if (part.digit === null) {
+                    <span>{{ part.char }}</span>
+                  } @else {
+                    <span
+                      class="inline-block h-[1em] overflow-hidden leading-none"
+                    >
+                      <span
+                        class="flex flex-col transition-transform ease-out motion-reduce:transition-none"
+                        [style.transition-duration.ms]="duration()"
+                        [style.transform]="'translateY(-' + part.digit + 'em)'"
+                      >
+                        @for (glyph of glyphs(); track $index) {
+                          <span class="h-[1em]">{{ glyph }}</span>
+                        }
+                      </span>
+                    </span>
                   }
-                </span>
+                }
               </span>
+            } @else {
+              <span>{{ segment.text }}</span>
             }
           }
         } @else {
@@ -112,12 +125,17 @@ export class ScNumberTicker {
   /** The value, as written — what screen readers get. */
   private readonly text = computed(() => this.formatter().format(this.value()));
 
-  /** The number on its way, as written: with the value's decimals. */
-  private readonly shownText = computed(() => {
+  /** The number on its way, with the value's decimals. */
+  private readonly shownValue = computed(() => {
     const shown = this.shown() ?? this.from();
     const places = Math.max(decimals(this.value()), decimals(this.from()));
-    return this.formatter().format(round(shown, places));
+    return round(shown, places);
   });
+
+  /** The number on its way, as written. */
+  private readonly shownText = computed(() =>
+    this.formatter().format(this.shownValue()),
+  );
 
   /** The digits 0–9, in the app's language. */
   private readonly glyphs = computed(() => {
@@ -125,13 +143,36 @@ export class ScNumberTicker {
     return Array.from({ length: 10 }, (_, digit) => format.format(digit));
   });
 
-  /** Rolling: the written value, each digit with its place 0–9. */
-  private readonly parts = computed(() => {
+  /**
+   * Rolling: the written value in runs — the number (its digits, each with
+   * its place 0–9, and separators) and the text around it (a currency, a
+   * sign, a unit).
+   */
+  private readonly segments = computed(() => {
     const glyphs = this.glyphs();
-    return [...this.shownText()].map((char) => {
-      const digit = glyphs.indexOf(char);
-      return { char, digit: digit < 0 ? null : digit };
+    const segments: ScNumberTickerSegment[] = [];
+    for (const { type, value } of this.formatter().formatToParts(
+      this.shownValue(),
+    )) {
+      const number = NUMBER_PARTS.has(type);
+      const last = segments[segments.length - 1];
+      if (last && last.number === number) last.text += value;
+      else segments.push({ number, text: value, parts: [] });
+    }
+    // Keyed from the end: a digit keeps its column (its roll) as the number
+    // grows a digit at its start.
+    segments.forEach((segment, i) => {
+      const chars = [...segment.text];
+      segment.parts = chars.map((char, j) => {
+        const digit = glyphs.indexOf(char);
+        return {
+          char,
+          digit: digit < 0 ? null : digit,
+          key: `${segments.length - i}-${chars.length - j}`,
+        };
+      });
     });
+    return segments;
   });
 
   private readonly class = computed(() =>
@@ -204,6 +245,22 @@ export class ScNumberTicker {
     };
     this.frame = view.requestAnimationFrame(step);
   }
+}
+
+/** The parts of a written number that are the number itself. */
+const NUMBER_PARTS = new Set<string>([
+  'integer',
+  'group',
+  'decimal',
+  'fraction',
+]);
+
+/** A run of the written value: the number, or the text beside it. */
+interface ScNumberTickerSegment {
+  number: boolean;
+  text: string;
+  /** Its characters, a digit with its place 0–9; keyed from the end. */
+  parts: { char: string; digit: number | null; key: string }[];
 }
 
 /** How many decimals a number has. */
