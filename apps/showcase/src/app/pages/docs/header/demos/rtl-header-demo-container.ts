@@ -23,7 +23,6 @@ import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
   ScHeaderMobileMenuContent,
-  ScHeaderMenuLink,
   ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
@@ -46,7 +45,6 @@ import {
     ScNavigationMenuLink,
     ScNavigationMenuList,
     ScHeaderMobileMenuContent,
-    ScHeaderMenuLink,
     ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
@@ -91,7 +89,7 @@ import {
           <nav aria-label="الرئيسية">
             @for (link of links; track link) {
               <a
-                scHeaderMenuLink
+                scNavigationMenuLink
                 href="#"
                 [active]="link === current()"
                 (click)="go($event, link)"

@@ -18,6 +18,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { cn } from 'cn';
 import { filter } from 'rxjs';
+import {
+  SC_NAVIGATION_MENU_LINK_HOST,
+  type ScNavigationMenuLinkHost,
+} from '../navigation-menu/navigation-menu-link-host';
 import { ScHeaderMobileMenuContent } from './header-mobile-menu-content';
 
 /** The width from which the links show and the toggle hides. */
@@ -62,6 +66,9 @@ const BREAKPOINT: Record<ScHeaderExpand, string> = {
   selector: 'header[scHeader]',
   exportAs: 'scHeader',
   imports: [NgTemplateOutlet],
+  // The mobile menu's links (scNavigationMenuLink) tell it when one is
+  // followed: it closes.
+  providers: [{ provide: SC_NAVIGATION_MENU_LINK_HOST, useExisting: ScHeader }],
   template: `
     <ng-content />
     @if (open() && menu(); as menu) {
@@ -86,7 +93,7 @@ const BREAKPOINT: Record<ScHeaderExpand, string> = {
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScHeader {
+export class ScHeader implements ScNavigationMenuLinkHost {
   readonly classInput = input<string>('', { alias: 'class' });
   /** Whether the menu is open (narrow screens). */
   readonly open = model(false);
@@ -204,6 +211,11 @@ export class ScHeader {
       !this.element.contains(event.target as Node)
     )
       this.open.set(false);
+  }
+
+  /** A link of the mobile menu was followed: it closes. */
+  linkFollowed(): void {
+    this.open.set(false);
   }
 
   private onEscape(): void {

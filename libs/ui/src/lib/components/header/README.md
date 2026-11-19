@@ -47,8 +47,8 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 
   <ng-template scHeaderMobileMenuContent>
     <nav aria-label="Main">
-      <a scHeaderMenuLink routerLink="/products" active>Products</a>
-      <a scHeaderMenuLink routerLink="/pricing">Pricing</a>
+      <a scNavigationMenuLink routerLink="/products" active>Products</a>
+      <a scNavigationMenuLink routerLink="/pricing">Pricing</a>
     </nav>
   </ng-template>
 </header>
@@ -80,15 +80,11 @@ Opens and closes the menu, below `expand`. Styled as the style's button: `varian
 
 ### ScHeaderMobileMenuContent — `ng-template[scHeaderMobileMenuContent]`
 
-The menu's content, below `expand`: a named `nav` with `scHeaderMenuLink`s, and any actions, in an `ng-template`. The header renders it while the menu is open, in its own panel under the bar (`data-slot="header-menu"`, the toggle's `aria-controls` while open), and removes it on closing — so closed, its links aren't in the page. `class`: classes for that panel.
+The menu's content, below `expand`: a named `nav` with `scNavigationMenuLink`s (the Navigation Menu's link, with its states: following one closes the menu), and any actions, in an `ng-template`. The header renders it while the menu is open, in its own panel under the bar (`data-slot="header-menu"`, the toggle's `aria-controls` while open), and removes it on closing — so closed, its links aren't in the page. `class`: classes for that panel.
 
 | Input  | Type      | Default | Description                                                                                            |
 | ------ | --------- | ------- | ------------------------------------------------------------------------------------------------------ |
 | `push` | `boolean` | `false` | Pushes the page down, instead of covering it below the bar (where the focus leaving the bar closes it) |
-
-### ScHeaderMenuLink — `a[scHeaderMenuLink]`
-
-A link of the menu, a full-width row; closes the menu when followed. `active`: the page shown.
 
 ## Accessibility
 

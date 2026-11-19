@@ -22,7 +22,6 @@ export class NavigationMenuHeaderDemoContainer {
 import {
   ScHeader,
   ScHeaderMobileMenuContent,
-  ScHeaderMenuLink,
   ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuContent,
@@ -44,7 +43,6 @@ import {
   imports: [
     ScHeader,
     ScHeaderMobileMenuContent,
-    ScHeaderMenuLink,
     ScHeaderToggle,
     ScNavigationMenu,
     ScNavigationMenuContent,
@@ -101,7 +99,7 @@ import {
         <nav aria-label="Main, with menus">
           @for (link of links; track link) {
             <a
-              scHeaderMenuLink
+              scNavigationMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"

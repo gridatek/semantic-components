@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScHeader,
-  ScHeaderMenuLink,
   ScHeaderMobileMenuContent,
   ScHeaderToggle,
   ScNavigationMenu,
@@ -24,7 +23,6 @@ import {
   imports: [
     ScHeader,
     ScHeaderMobileMenuContent,
-    ScHeaderMenuLink,
     ScHeaderToggle,
     ScNavigationMenu,
     ScNavigationMenuContent,
@@ -81,7 +79,7 @@ import {
         <nav aria-label="Main, with menus">
           @for (link of links; track link) {
             <a
-              scHeaderMenuLink
+              scNavigationMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"

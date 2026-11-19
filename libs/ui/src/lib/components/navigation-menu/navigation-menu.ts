@@ -14,6 +14,10 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import {
+  SC_NAVIGATION_MENU_LINK_HOST,
+  type ScNavigationMenuLinkHost,
+} from './navigation-menu-link-host';
 
 /** Where a panel lines up under its trigger. */
 export type ScNavigationMenuAlign = 'start' | 'center' | 'end';
@@ -51,6 +55,10 @@ const FOCUSABLE = 'a[href], button:not([disabled])';
 @Component({
   selector: 'nav[scNavigationMenu]',
   exportAs: 'scNavigationMenu',
+  // Its links tell it when one is followed: it closes its panel.
+  providers: [
+    { provide: SC_NAVIGATION_MENU_LINK_HOST, useExisting: ScNavigationMenu },
+  ],
   template: `
     @if (viewport()) {
       <div
@@ -75,7 +83,7 @@ const FOCUSABLE = 'a[href], button:not([disabled])';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScNavigationMenu {
+export class ScNavigationMenu implements ScNavigationMenuLinkHost {
   /** The style's look, for the parts. */
   readonly styles = injectStyle().navigationMenu;
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -205,6 +213,11 @@ export class ScNavigationMenu {
   /** Keeps the panel open: the pointer came back. */
   cancelClose(): void {
     clearTimeout(this.timer);
+  }
+
+  /** One of its links was followed: the panel closes. */
+  linkFollowed(): void {
+    this.close();
   }
 
   close(focusTrigger = false): void {

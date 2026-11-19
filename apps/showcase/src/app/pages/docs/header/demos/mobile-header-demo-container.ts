@@ -22,7 +22,6 @@ export class MobileHeaderDemoContainer {
 import {
   ScHeader,
   ScHeaderMobileMenuContent,
-  ScHeaderMenuLink,
   ScHeaderToggle,
   ScLink,
   ScNavigationMenu,
@@ -46,7 +45,6 @@ import {
     ScNavigationMenuLink,
     ScNavigationMenuList,
     ScHeaderMobileMenuContent,
-    ScHeaderMenuLink,
     ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
@@ -92,7 +90,7 @@ import {
         <nav aria-label="Main, mobile">
           @for (link of links; track link) {
             <a
-              scHeaderMenuLink
+              scNavigationMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"

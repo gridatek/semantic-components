@@ -28,13 +28,11 @@ test.describe('Header Page', () => {
       'ScHeader',
       'ScHeaderToggle',
       'ScHeaderMobileMenuContent',
-      'ScHeaderMenuLink',
     ]);
     await expect(rows.locator('td:nth-child(2)')).toHaveText([
       'header[scHeader]',
       'button[scHeaderToggle]',
       'ng-template[scHeaderMobileMenuContent]',
-      'a[scHeaderMenuLink]',
     ]);
   });
 });

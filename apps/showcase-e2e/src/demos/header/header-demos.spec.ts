@@ -140,6 +140,22 @@ test.describe('narrow', () => {
     );
   });
 
+  test("Mobile Menu: its links are the Navigation Menu's, with its states", async ({
+    page,
+  }) => {
+    await page.goto(demo('mobile'));
+    await page.getByRole('button', { name: 'Open menu' }).click();
+    const links = menu(page).getByRole('navigation').getByRole('link');
+    await expect(links).toHaveCount(4);
+    for (const link of await links.all()) {
+      await expect(link).toHaveAttribute('data-slot', 'navigation-menu-link');
+    }
+    // The page shown: Navigation Menu's active state.
+    const current = menu(page).getByRole('link', { name: 'Products' });
+    await expect(current).toHaveAttribute('aria-current', 'page');
+    await expect(current).toHaveAttribute('data-active', 'true');
+  });
+
   test('Mobile Menu: closes when the window is wide enough for the links', async ({
     page,
   }) => {

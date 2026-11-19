@@ -22,7 +22,6 @@ export class PushHeaderDemoContainer {
 import {
   ScHeader,
   ScHeaderMobileMenuContent,
-  ScHeaderMenuLink,
   ScHeaderToggle,
   ScNavigationMenu,
   ScNavigationMenuItem,
@@ -44,7 +43,6 @@ import {
     ScNavigationMenuLink,
     ScNavigationMenuList,
     ScHeaderMobileMenuContent,
-    ScHeaderMenuLink,
     ScHeaderToggle,
     SiGalleryVerticalEndIcon,
     SiMenuIcon,
@@ -85,7 +83,7 @@ import {
         <nav aria-label="Main, push">
           @for (link of links; track link) {
             <a
-              scHeaderMenuLink
+              scNavigationMenuLink
               href="#"
               [active]="link === current()"
               (click)="go($event, link)"

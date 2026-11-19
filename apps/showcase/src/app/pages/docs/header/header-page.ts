@@ -166,7 +166,7 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
 export default class HeaderPage {
   private readonly anatomy = {
     imports:
-      "import { ScHeader, ScHeaderMobileMenuContent, ScHeaderMenuLink, ScHeaderToggle, ScNavigationMenu, ScNavigationMenuItem, ScNavigationMenuLink, ScNavigationMenuList } from '@semantic-components/ui';",
+      "import { ScHeader, ScHeaderMobileMenuContent, ScHeaderToggle, ScNavigationMenu, ScNavigationMenuItem, ScNavigationMenuLink, ScNavigationMenuList } from '@semantic-components/ui';",
     markup: [
       '<header scHeader #header="scHeader">',
       '  <a href="/">…</a>  <!-- your brand: your own link -->',
@@ -193,7 +193,7 @@ export default class HeaderPage {
       '',
       '  <ng-template scHeaderMobileMenuContent>',
       '    <nav aria-label="Main">',
-      '      <a scHeaderMenuLink [active]="…">…</a>',
+      '      <a scNavigationMenuLink [active]="…">…</a>',
       '    </nav>',
       '  </ng-template>',
       '</header>',
@@ -217,13 +217,7 @@ export default class HeaderPage {
       name: 'ScHeaderMobileMenuContent',
       selector: 'ng-template[scHeaderMobileMenuContent]',
       description:
-        "The menu's content — a named nav with its links, any actions — rendered by the header while open, in a panel covering the page below the bar: see-through and blurred, opening at once, fading out in 100ms. push: pushing the page down instead. class: the panel's classes.",
-    },
-    {
-      name: 'ScHeaderMenuLink',
-      selector: 'a[scHeaderMenuLink]',
-      description:
-        'A link of the menu, a full-width row; closes the menu when followed. active: the page shown (aria-current="page").',
+        "The menu's content — a named nav with its links (scNavigationMenuLink: the Navigation Menu's link, with its states; following one closes the menu), any actions — rendered by the header while open, in a panel covering the page below the bar: see-through and blurred, opening at once, fading out in 100ms. push: pushing the page down instead. class: the panel's classes.",
     },
   ];
 }

@@ -9,7 +9,6 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScHeader,
-  ScHeaderMenuLink,
   ScHeaderMobileMenuContent,
   ScHeaderToggle,
   ScInputButton,
@@ -44,7 +43,6 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
     RouterLinkActive,
     ScHeader,
     ScHeaderMobileMenuContent,
-    ScHeaderMenuLink,
     ScHeaderToggle,
     ScInputButton,
     ScKbd,
@@ -253,7 +251,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
       <ng-template scHeaderMobileMenuContent>
         <nav aria-label="Main">
           <a
-            scHeaderMenuLink
+            scNavigationMenuLink
             routerLink="/"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
@@ -263,7 +261,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Home
           </a>
           <a
-            scHeaderMenuLink
+            scNavigationMenuLink
             routerLink="/components"
             routerLinkActive="active"
             #mobileComponentsRla="routerLinkActive"
@@ -272,7 +270,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Components
           </a>
           <a
-            scHeaderMenuLink
+            scNavigationMenuLink
             routerLink="/docs/getting-started"
             routerLinkActive="active"
             #mobileDocsRla="routerLinkActive"
@@ -281,7 +279,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Documentation
           </a>
           <a
-            scHeaderMenuLink
+            scNavigationMenuLink
             routerLink="/ai-elements"
             routerLinkActive="active"
             #mobileAiElementsRla="routerLinkActive"
@@ -290,7 +288,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             AI Elements
           </a>
           <a
-            scHeaderMenuLink
+            scNavigationMenuLink
             routerLink="/charts"
             routerLinkActive="active"
             #mobileChartsRla="routerLinkActive"
@@ -299,7 +297,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Charts
           </a>
           <a
-            scHeaderMenuLink
+            scNavigationMenuLink
             routerLink="/typeset"
             routerLinkActive="active"
             #mobileTypesetRla="routerLinkActive"
@@ -308,7 +306,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Typeset
           </a>
           <a
-            scHeaderMenuLink
+            scNavigationMenuLink
             routerLink="/customize"
             routerLinkActive="active"
             #mobileCustomizeRla="routerLinkActive"
