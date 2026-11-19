@@ -42,18 +42,20 @@ export interface ApiPart {
       <table scTable>
         <thead scTableHeader>
           <tr scTableRow>
-            <th scTableHeaderCell>Part</th>
-            <th scTableHeaderCell>Selector</th>
+            <!-- The short columns as narrow as their longest name (a list wraps
+                 between names); the description takes the rest. -->
+            <th scTableHeaderCell class="w-px">Part</th>
+            <th scTableHeaderCell class="w-px">Selector</th>
             <th scTableHeaderCell>Description</th>
           </tr>
         </thead>
         <tbody scTableBody>
           @for (part of parts(); track part.name) {
             <tr scTableRow>
-              <td scTableCell>
+              <td scTableCell class="whitespace-normal">
                 <code class="font-mono text-sm">{{ part.name }}</code>
               </td>
-              <td scTableCell>
+              <td scTableCell class="whitespace-normal">
                 <code class="font-mono text-sm">{{ part.selector }}</code>
               </td>
               <td scTableCell class="text-muted-foreground whitespace-normal">

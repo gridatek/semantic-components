@@ -220,7 +220,7 @@ export default class MenuPage {
       name: 'ScMenuSeparator',
       selector: '[scMenuSeparator]',
       description:
-        'A line between items. A key hint is yours: <kbd scKbd>⌘S</kbd> in the item — the menu places it at the item’s end.',
+        'A line between items. A key hint is yours: a scKbd in the item (⌘S) — the menu places it at the item’s end.',
     },
   ];
 }

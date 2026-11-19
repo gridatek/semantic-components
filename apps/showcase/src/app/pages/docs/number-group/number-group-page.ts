@@ -83,7 +83,8 @@ import WithoutLabelNumberGroupDemoContainer from './demos/without-label-number-g
         <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
           Each part takes class, merged over the style (cn: a later class wins).
-          The field is a scField too: it takes its id, orientation and class.
+          The label, descriptions and errors are the scField&apos;s the group is
+          in, as for any input.
         </p>
         <app-parts-table label="Number Group parts" [parts]="parts" />
       </section>

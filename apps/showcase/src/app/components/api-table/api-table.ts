@@ -40,22 +40,24 @@ export interface ApiInput {
       <table scTable>
         <thead scTableHeader>
           <tr scTableRow>
-            <th scTableHeaderCell>Input</th>
+            <!-- The short columns as narrow as their longest name (a list wraps
+                 between names); the description takes the rest. -->
+            <th scTableHeaderCell class="w-px">Input</th>
             <th scTableHeaderCell>Type</th>
-            <th scTableHeaderCell>Default</th>
+            <th scTableHeaderCell class="w-px">Default</th>
             <th scTableHeaderCell>Description</th>
           </tr>
         </thead>
         <tbody scTableBody>
           @for (row of inputs(); track row.name) {
             <tr scTableRow>
-              <td scTableCell>
+              <td scTableCell class="whitespace-normal">
                 <code class="font-mono text-sm">{{ row.name }}</code>
               </td>
               <td scTableCell class="whitespace-normal">
                 <code class="font-mono text-sm">{{ row.type }}</code>
               </td>
-              <td scTableCell>
+              <td scTableCell class="whitespace-normal">
                 <code class="font-mono text-sm">{{ row.default }}</code>
               </td>
               <td scTableCell class="text-muted-foreground whitespace-normal">
