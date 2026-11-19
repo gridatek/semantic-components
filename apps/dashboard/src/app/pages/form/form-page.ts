@@ -30,7 +30,6 @@ import {
   ScInputGroupAddon,
   ScInputGroupText,
   ScLabel,
-  ScPasswordField,
   ScPasswordGroup,
   ScPasswordInput,
   ScPasswordToggle,
@@ -92,7 +91,6 @@ import { PageHeader } from '../../layout/page-header';
     ScInputGroupAddon,
     ScInputGroupText,
     ScLabel,
-    ScPasswordField,
     ScPasswordGroup,
     ScPasswordInput,
     ScPasswordToggle,
@@ -183,9 +181,9 @@ import { PageHeader } from '../../layout/page-header';
                 </ng-template>
               </div>
             </div>
-            <div scPasswordField #password="scPasswordField">
+            <div scField>
               <label i18n="@@form.passwordInput" scLabel>Password Input</label>
-              <div scPasswordGroup>
+              <div scPasswordGroup #password="scPasswordGroup">
                 <input
                   i18n-placeholder="@@form.enterYourPassword"
                   scPasswordInput

@@ -4538,69 +4538,69 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/password-field',
+    path: 'demos/password-group',
     children: [
       {
-        path: 'password-field-usage-demo',
+        path: 'password-group-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/password-field-usage-demo').then(
-            (m) => m.PasswordFieldUsageDemo,
+          import('../pages/docs/password-group/demos/password-group-usage-demo').then(
+            (m) => m.PasswordGroupUsageDemo,
           ),
       },
       {
-        path: 'visible-password-field-demo',
+        path: 'visible-password-group-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/visible-password-field-demo').then(
-            (m) => m.VisiblePasswordFieldDemo,
+          import('../pages/docs/password-group/demos/visible-password-group-demo').then(
+            (m) => m.VisiblePasswordGroupDemo,
           ),
       },
       {
-        path: 'disabled-password-field-demo',
+        path: 'disabled-password-group-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/disabled-password-field-demo').then(
-            (m) => m.DisabledPasswordFieldDemo,
+          import('../pages/docs/password-group/demos/disabled-password-group-demo').then(
+            (m) => m.DisabledPasswordGroupDemo,
           ),
       },
       {
-        path: 'form-password-field-demo',
+        path: 'form-password-group-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/form-password-field-demo').then(
-            (m) => m.FormPasswordFieldDemo,
+          import('../pages/docs/password-group/demos/form-password-group-demo').then(
+            (m) => m.FormPasswordGroupDemo,
           ),
       },
       {
-        path: 'caps-lock-password-field-demo',
+        path: 'caps-lock-password-group-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/caps-lock-password-field-demo').then(
-            (m) => m.CapsLockPasswordFieldDemo,
+          import('../pages/docs/password-group/demos/caps-lock-password-group-demo').then(
+            (m) => m.CapsLockPasswordGroupDemo,
           ),
       },
       {
-        path: 'strength-password-field-demo',
+        path: 'strength-password-group-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/strength-password-field-demo').then(
-            (m) => m.StrengthPasswordFieldDemo,
+          import('../pages/docs/password-group/demos/strength-password-group-demo').then(
+            (m) => m.StrengthPasswordGroupDemo,
           ),
       },
       {
-        path: 'requirements-password-field-demo',
+        path: 'requirements-password-group-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/requirements-password-field-demo').then(
-            (m) => m.RequirementsPasswordFieldDemo,
+          import('../pages/docs/password-group/demos/requirements-password-group-demo').then(
+            (m) => m.RequirementsPasswordGroupDemo,
           ),
       },
       {
-        path: 'generate-password-field-demo',
+        path: 'generate-password-group-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/generate-password-field-demo').then(
-            (m) => m.GeneratePasswordFieldDemo,
+          import('../pages/docs/password-group/demos/generate-password-group-demo').then(
+            (m) => m.GeneratePasswordGroupDemo,
           ),
       },
       {
-        path: 'rtl-password-field-demo',
+        path: 'rtl-password-group-demo',
         loadComponent: () =>
-          import('../pages/docs/password-field/demos/rtl-password-field-demo').then(
-            (m) => m.RtlPasswordFieldDemo,
+          import('../pages/docs/password-group/demos/rtl-password-group-demo').then(
+            (m) => m.RtlPasswordGroupDemo,
           ),
       },
     ],

@@ -34,8 +34,8 @@ import {
   ScLabel,
   ScOtpInput,
   ScOtpInputGroup,
-  ScSeparator,
   ScOtpInputSlot,
+  ScSeparator,
 } from '@semantic-components/ui';
 import { SiMinusIcon, SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
 

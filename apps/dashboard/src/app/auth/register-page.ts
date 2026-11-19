@@ -20,7 +20,6 @@ import {
   ScInput,
   ScLabel,
   ScLink,
-  ScPasswordField,
   ScPasswordGroup,
   ScPasswordInput,
   ScPasswordToggle,
@@ -46,7 +45,6 @@ import { SocialButtons } from './social-buttons';
     ScInput,
     ScLabel,
     ScLink,
-    ScPasswordField,
     ScPasswordGroup,
     ScPasswordInput,
     ScPasswordToggle,
@@ -87,9 +85,9 @@ import { SocialButtons } from './social-buttons';
                 [formField]="registerForm.email"
               />
             </div>
-            <div scPasswordField #password="scPasswordField">
+            <div scField>
               <label i18n="@@auth.register.password" scLabel>Password</label>
-              <div scPasswordGroup>
+              <div scPasswordGroup #password="scPasswordGroup">
                 <input
                   scPasswordInput
                   autocomplete="new-password"

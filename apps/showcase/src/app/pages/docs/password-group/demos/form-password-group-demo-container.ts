@@ -1,0 +1,95 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { FormPasswordGroupDemo } from './form-password-group-demo';
+
+@Component({
+  selector: 'app-form-password-group-demo-container',
+  imports: [DemoContainer, FormPasswordGroupDemo],
+  template: `
+    <app-demo-container
+      title="Signal Forms"
+      demoUrl="/demos/password-group/form-password-group-demo"
+      [code]="code"
+    >
+      <app-form-password-group-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class FormPasswordGroupDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  FormField,
+  FormRoot,
+  form,
+  minLength,
+  required,
+} from '@angular/forms/signals';
+import {
+  ScButton,
+  ScField,
+  ScFieldErrors,
+  ScLabel,
+  ScPasswordGroup,
+  ScPasswordInput,
+  ScPasswordToggle,
+} from '@semantic-components/ui';
+import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
+
+@Component({
+  selector: 'app-form-password-group-demo',
+  imports: [
+    FormField,
+    FormRoot,
+    ScButton,
+    ScFieldErrors,
+    ScLabel,
+    ScField,
+    ScPasswordGroup,
+    ScPasswordInput,
+    ScPasswordToggle,
+    SiEyeIcon,
+    SiEyeOffIcon,
+  ],
+  template: \`
+    <form [formRoot]="login" class="flex w-full max-w-sm flex-col gap-4">
+      <div scField>
+        <label scLabel>Password</label>
+        <div scPasswordGroup #password="scPasswordGroup">
+          <input scPasswordInput [formField]="login.password" />
+          <button scPasswordToggle>
+            @if (password.visible()) {
+              <svg siEyeOffIcon></svg>
+              <span class="sr-only">Hide password</span>
+            } @else {
+              <svg siEyeIcon></svg>
+              <span class="sr-only">Show password</span>
+            }
+          </button>
+        </div>
+        <div scFieldErrors></div>
+      </div>
+      <button scButton type="submit">Sign in</button>
+      @if (signedIn()) {
+        <p class="text-muted-foreground text-sm" role="status">Signed in.</p>
+      }
+    </form>
+  \`,
+  host: { class: 'flex w-full flex-col items-center gap-4' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class FormPasswordGroupDemo {
+  private readonly signedIn = signal(false);
+
+  private readonly login = form(
+    signal({ password: '' }),
+    (s) => {
+      required(s.password, { message: 'Enter your password.' });
+      minLength(s.password, 8, { message: 'Use 8 characters or more.' });
+    },
+    // Submitting marks the fields touched: their errors show.
+    { submission: { action: async () => this.signedIn.set(true) } },
+  );
+}`;
+}

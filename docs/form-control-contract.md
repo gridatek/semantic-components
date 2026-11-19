@@ -21,11 +21,11 @@ anything up.
 
 ## Where we are
 
-| Pattern                                                          | Components                                                                 |
-| ---------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| **Push** — declares `invalid` / `touched` / `disabled` as inputs | `checkbox`, `switch`, `input`, `textarea`, `password-input`                |
-| **Push, partial** — `invalid` / `touched` only                   | `radio` (see below)                                                        |
-| **Container** — queries the field with `contentChild(FormField)` | `field` (also under `password-field`); `field-errors` reads via `SC_FIELD` |
+| Pattern                                                          | Components                                                  |
+| ---------------------------------------------------------------- | ----------------------------------------------------------- |
+| **Push** — declares `invalid` / `touched` / `disabled` as inputs | `checkbox`, `switch`, `input`, `textarea`, `password-input` |
+| **Push, partial** — `invalid` / `touched` only                   | `radio` (see below)                                         |
+| **Container** — queries the field with `contentChild(FormField)` | `field`; `field-errors` reads via `SC_FIELD`                |
 
 ### Radio is a special case
 
@@ -42,7 +42,7 @@ declares `invalid` and `touched` as inputs purely to surface that. It has no
 
 Push arrived with #1515 and #1516; the remaining controls followed. No control
 injects `FormField` any more. `ScField` is the one place that still reaches
-for it — `ScPasswordField` too, which carries it as a host directive — and it
+for it, and it
 queries rather than injects — see "Controls versus containers" below.
 
 ### Why pull works
@@ -81,9 +81,12 @@ same-element case.
       injector chain nor injectable from the provider above it — injection only
       walks up, never down. `ScPasswordProvider` therefore _queried_ it with
       `contentChild(FormField)` and exposed `disabled`. Since the rewrite
-      (2026-10-29), `ScPasswordField` carries `ScField` as a host directive:
+      (2026-10-29), `ScPasswordGroup` carries `ScField` as a host directive:
       the field's query does it, and the toggle reads `disabled` from it.
-      Before #1519, the toggle's `disabled` was permanently `false`.
+      Before #1519, the toggle's `disabled` was permanently `false`. Since
+      2026-11-19 (Password Group, in the consumer's `scField`): the input,
+      bound by Signal Forms, hands its `disabled` to `ScPasswordGroup`, its
+      parent, which the toggle and the generator read — no query.
 - [x] **Give `radio` a Signal Forms integration.** It turned out to have one
       already, via native-input support — see the radio section above. The only
       genuine gap was `aria-invalid`, now surfaced through `invalid`/`touched`
@@ -101,8 +104,7 @@ Two roles, and they need different mechanisms.
 everything in the first two rows of the table above.
 
 **Containers** query downward with `contentChild(FormField)`, because the field
-lives on a descendant and injection only walks up. `ScField` does this,
-`ScPasswordField` through the `ScField` it carries, and `ScFieldErrors` reads
+lives on a descendant and injection only walks up. `ScField` does this, and `ScFieldErrors` reads
 the result through `SC_FIELD`.
 
 Declaring `errors` as an input on `ScFieldErrors` would be **dead code**: it is

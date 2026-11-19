@@ -1,0 +1,117 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { RtlPasswordGroupDemo } from './rtl-password-group-demo';
+
+@Component({
+  selector: 'app-rtl-password-group-demo-container',
+  imports: [DemoContainer, RtlPasswordGroupDemo],
+  template: `
+    <app-demo-container
+      title="RTL"
+      demoUrl="/demos/password-group/rtl-password-group-demo"
+      [code]="code"
+    >
+      <app-rtl-password-group-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class RtlPasswordGroupDemoContainer {
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
+import {
+  Component,
+  LOCALE_ID,
+  ViewEncapsulation,
+  computed,
+  signal,
+} from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
+import {
+  ScField,
+  ScLabel,
+  ScPasswordCapsLock,
+  ScPasswordGroup,
+  ScPasswordInput,
+  ScPasswordStrength,
+  ScPasswordStrengthLabel,
+  ScPasswordToggle,
+} from '@semantic-components/ui';
+import {
+  SiArrowBigUpIcon,
+  SiEyeIcon,
+  SiEyeOffIcon,
+} from '@semantic-icons/lucide-icons';
+
+@Component({
+  selector: 'app-rtl-password-group-demo',
+  imports: [
+    Dir,
+    FormField,
+    ScLabel,
+    ScPasswordCapsLock,
+    ScField,
+    ScPasswordGroup,
+    ScPasswordInput,
+    ScPasswordStrengthLabel,
+    ScPasswordStrength,
+    ScPasswordToggle,
+    SiArrowBigUpIcon,
+    SiEyeIcon,
+    SiEyeOffIcon,
+  ],
+  template: \`
+    <div dir="rtl" lang="ar" class="w-full max-w-sm">
+      <div scField>
+        <label scLabel>كلمة المرور الجديدة</label>
+        <div scPasswordGroup #password="scPasswordGroup">
+          <input
+            scPasswordInput
+            autocomplete="new-password"
+            [formField]="signup.password"
+          />
+          <button scPasswordToggle>
+            @if (password.visible()) {
+              <svg siEyeOffIcon></svg>
+              <span class="sr-only">إخفاء كلمة المرور</span>
+            } @else {
+              <svg siEyeIcon></svg>
+              <span class="sr-only">إظهار كلمة المرور</span>
+            }
+          </button>
+        </div>
+        <p scPasswordCapsLock>
+          <svg siArrowBigUpIcon></svg>
+          مفتاح الأحرف الكبيرة مفعّل
+        </p>
+        <div scPasswordStrength [score]="score()" aria-label="قوة كلمة المرور">
+          <span scPasswordStrengthLabel>{{ strength() }}</span>
+        </div>
+      </div>
+    </div>
+  \`,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
+  host: { class: 'flex w-full flex-col items-center gap-4' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class RtlPasswordGroupDemo {
+  private readonly model = signal({ password: '' });
+  private readonly signup = form(this.model);
+
+  /** 0: nothing yet; then a point for each rule met, at least 1. */
+  private readonly score = computed(() => {
+    const value = this.model().password;
+    if (!value) return 0;
+    const met = [
+      value.length >= 12,
+      /\\d/.test(value),
+      /[a-z]/.test(value) && /[A-Z]/.test(value),
+      /[^A-Za-z0-9]/.test(value),
+    ].filter(Boolean).length;
+    return Math.max(met, 1);
+  });
+  private readonly strength = computed(
+    () => ['', 'ضعيفة', 'مقبولة', 'جيدة', 'قوية'][this.score()],
+  );
+}`;
+}

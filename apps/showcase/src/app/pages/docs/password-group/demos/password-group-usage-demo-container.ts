@@ -1,0 +1,66 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { UsageCode } from '../../../../components/usage-code/usage-code';
+import { PasswordGroupUsageDemo } from './password-group-usage-demo';
+
+@Component({
+  selector: 'app-password-group-usage-demo-container',
+  imports: [UsageCode, PasswordGroupUsageDemo],
+  template: `
+    <app-usage-code [code]="code">
+      <ng-template><app-password-group-usage-demo /></ng-template>
+    </app-usage-code>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class PasswordGroupUsageDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
+import {
+  ScField,
+  ScFieldDescription,
+  ScLabel,
+  ScPasswordGroup,
+  ScPasswordInput,
+  ScPasswordToggle,
+} from '@semantic-components/ui';
+import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
+
+@Component({
+  selector: 'app-password-group-usage-demo',
+  imports: [
+    FormField,
+    ScFieldDescription,
+    ScLabel,
+    ScField,
+    ScPasswordGroup,
+    ScPasswordInput,
+    ScPasswordToggle,
+    SiEyeIcon,
+    SiEyeOffIcon,
+  ],
+  template: \`
+    <div scField class="w-full max-w-sm">
+      <label scLabel>Password</label>
+      <div scPasswordGroup #password="scPasswordGroup">
+        <input scPasswordInput [formField]="login.password" />
+        <button scPasswordToggle>
+          @if (password.visible()) {
+            <svg siEyeOffIcon></svg>
+            <span class="sr-only">Hide password</span>
+          } @else {
+            <svg siEyeIcon></svg>
+            <span class="sr-only">Show password</span>
+          }
+        </button>
+      </div>
+      <p scFieldDescription>The one you signed up with.</p>
+    </div>
+  \`,
+  host: { class: 'flex w-full flex-col items-center gap-4' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class PasswordGroupUsageDemo {
+  private readonly login = form(signal({ password: '' }));
+}`;
+}

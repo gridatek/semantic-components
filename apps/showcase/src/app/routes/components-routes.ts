@@ -471,10 +471,10 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/pagination/pagination-page'),
       },
       {
-        path: 'password-field',
-        title: 'Password Field - Semantic Components',
+        path: 'password-group',
+        title: 'Password Group - Semantic Components',
         loadComponent: () =>
-          import('../pages/docs/password-field/password-field-page'),
+          import('../pages/docs/password-group/password-group-page'),
       },
       {
         path: 'pdf-viewer',

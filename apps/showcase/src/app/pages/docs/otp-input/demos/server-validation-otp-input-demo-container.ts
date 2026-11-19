@@ -38,8 +38,8 @@ import {
   ScLabel,
   ScOtpInput,
   ScOtpInputGroup,
-  ScSeparator,
   ScOtpInputSlot,
+  ScSeparator,
 } from '@semantic-components/ui';
 import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 

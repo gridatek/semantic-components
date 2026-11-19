@@ -693,9 +693,9 @@
     "category": "Navigation"
   },
   {
-    "name": "Password Field",
-    "path": "password-field",
-    "description": "A password field: show or hide it, Caps Lock warning, strength, rules and a generator, on your Signal Form.",
+    "name": "Password Group",
+    "path": "password-group",
+    "description": "A password input in its box, with buttons to show or hide it and to generate a strong one, on your Signal Form. In a scField, as any input; a Caps Lock warning, a strength meter and the rules met or not are parts to add.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"

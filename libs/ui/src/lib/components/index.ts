@@ -38,7 +38,7 @@ export * from './navigation-menu';
 export * from './number-field';
 export * from './otp-input';
 export * from './pagination';
-export * from './password-field';
+export * from './password-group';
 export * from './popover';
 export * from './preview-card';
 export * from './progress';
