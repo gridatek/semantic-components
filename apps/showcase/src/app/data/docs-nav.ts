@@ -12,7 +12,6 @@ export const gettingStartedPages: readonly DocsPage[] = [
   { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
   { name: 'Installation', path: '/docs/getting-started/ui' },
   { name: 'Styles', path: '/docs/getting-started/styles' },
-  { name: 'Custom style', path: '/docs/getting-started/custom-style' },
   { name: 'MCP Server', path: '/docs/getting-started/mcp-server' },
 ];
 
@@ -23,6 +22,7 @@ export const guidePages: readonly DocsPage[] = [
     path: '/docs/guides/theming',
     description: 'Styles, theme variables, dark mode',
   },
+  { name: 'Custom style', path: '/docs/getting-started/custom-style' },
   {
     name: 'Forms',
     path: '/docs/guides/forms',
