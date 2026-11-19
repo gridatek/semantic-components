@@ -343,11 +343,10 @@
   {
     "name": "Editor",
     "path": "editor",
-    "description": "Composable WYSIWYG editor with customizable toolbar.",
+    "description": "A rich text editor for articles, posts and notes, built on Tiptap: headings, lists and task lists, code blocks and links, with tables, images, search and replace and more as features you add. Its value is a Signal Forms field — HTML, JSON, Markdown or text — and its toolbar is yours, made of the library’s parts. For plain text, use a Textarea; for code, the Code Editor.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Editor",
-    "hidden": true
+    "category": "Editor"
   },
   {
     "name": "Emoji Picker",

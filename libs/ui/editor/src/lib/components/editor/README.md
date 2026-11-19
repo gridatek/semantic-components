@@ -1,6 +1,8 @@
 # Editor
 
-A composable rich text editor built on [Tiptap](https://tiptap.dev/) (ProseMirror): the document is HTML, edited through Signal Forms. Its full demo follows Tiptap's [Simple Editor](https://tiptap.dev/docs/ui-components/templates/simple-editor) template — block types, lists with task lists, code blocks, marks, highlights, links, superscript and subscript, alignment, images, search and replace — in this library's styles.
+A rich text editor for articles, posts and notes, built on [Tiptap](https://tiptap.dev/): headings, lists and task lists, code blocks and links, with tables, images, search and replace and more as features you add. Its value is a Signal Forms field — HTML, JSON, Markdown or text — and its toolbar is yours, made of the library's parts. For plain text, use a Textarea; for code, the Code Editor.
+
+Its full demo follows Tiptap's [Simple Editor](https://tiptap.dev/docs/ui-components/templates/simple-editor) template — block types, lists with task lists, code blocks, marks, highlights, links, superscript and subscript, alignment, images, search and replace — in this library's styles.
 
 You write the markup and every piece of text — the toolbar, its icons and names, the editor's name and placeholder, the menu labels, the popovers, the search bar; the parts add the behaviour, ARIA and default styles.
 
