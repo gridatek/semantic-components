@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -15,6 +15,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
 @Component({
   selector: 'app-toast-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     ToastUsageDemoContainer,
@@ -67,7 +68,8 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
             until closed.
           </li>
           <li>
-            The toaster&apos;s hotkey moves focus to the toasts, and Escape
+            The toaster&apos;s hotkey moves focus to the toasts, and
+            <kbd scKbd>Escape</kbd>
             back; write the keys in the template&apos;s label, the region&apos;s
             name.
           </li>

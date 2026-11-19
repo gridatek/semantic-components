@@ -263,20 +263,17 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Keyboard</h2>
         <p class="text-muted-foreground">
-          Tiptap&apos;s shortcuts, and Markdown as you type:
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"># </code>
-          headings,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">- </code> lists,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[ ] </code>
-          tasks,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&gt; </code>
-          quotes,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#96;&#96;&#96;</code
-          >
-          code blocks. Some come with a feature. A browser can take a few before
-          the editor: Ctrl + Shift + R reloads, Ctrl + Shift + J opens the
-          console; with AltGr layouts, Ctrl + Alt is AltGr.
+          Tiptap&apos;s shortcuts, and Markdown as you type, each at the start
+          of a line and followed by a space:
+          <kbd scKbd class="font-mono">#</kbd> headings,
+          <kbd scKbd class="font-mono">-</kbd> lists,
+          <kbd scKbd class="font-mono">[ ]</kbd> tasks,
+          <kbd scKbd class="font-mono">&gt;</kbd> quotes,
+          <kbd scKbd class="font-mono">&#96;&#96;&#96;</kbd> code blocks. Some
+          come with a feature. A browser can take a few before the editor:
+          <kbd scKbd>Ctrl + Shift + R</kbd> reloads,
+          <kbd scKbd>Ctrl + Shift + J</kbd> opens the console; with AltGr
+          layouts, <kbd scKbd>Ctrl + Alt</kbd> is <kbd scKbd>AltGr</kbd>.
         </p>
         <div
           scTableContainer

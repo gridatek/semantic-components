@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -16,6 +16,7 @@ import { SwipeHandleDrawerDemoContainer } from './demos/swipe-handle-drawer-demo
 @Component({
   selector: 'app-drawer-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     DrawerUsageDemoContainer,
@@ -64,13 +65,15 @@ import { SwipeHandleDrawerDemoContainer } from './demos/swipe-handle-drawer-demo
           </li>
           <li>
             Focus moves into it and, unless [modal]=&quot;false&quot;, stays
-            there; closing gives it back to the trigger. Escape closes it, as
-            does a press outside (unless disablePointerDismissal).
+            there; closing gives it back to the trigger.
+            <kbd scKbd>Escape</kbd> closes it, as does a press outside (unless
+            disablePointerDismissal).
           </li>
           <li>
-            Swiping is for the pointer only: a keyboard closes it with Escape or
-            its close button. A handle on a div is hidden from screen readers;
-            on a button, named by you, it moves to the next snap point.
+            Swiping is for the pointer only: a keyboard closes it with
+            <kbd scKbd>Escape</kbd> or its close button. A handle on a div is
+            hidden from screen readers; on a button, named by you, it moves to
+            the next snap point.
           </li>
         </ul>
       </section>

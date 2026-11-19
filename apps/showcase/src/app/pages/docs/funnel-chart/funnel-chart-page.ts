@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import {
   type ApiInput,
@@ -16,6 +16,7 @@ import { RtlFunnelChartDemoContainer } from './demos/rtl-funnel-chart-demo-conta
 @Component({
   selector: 'app-funnel-chart-page',
   imports: [
+    ScKbd,
     FunnelChartUsageDemoContainer,
     Anatomy,
     ApiTable,
@@ -69,8 +70,8 @@ import { RtlFunnelChartDemoContainer } from './demos/rtl-funnel-chart-demo-conta
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: the arrow
-            keys, Home and End move through its stages; Escape closes the
-            tooltip.
+            keys, <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> move through
+            its stages; <kbd scKbd>Escape</kbd> closes the tooltip.
           </li>
           <li>
             As the keyboard moves, screen readers hear what the tooltip says,
@@ -79,7 +80,7 @@ import { RtlFunnelChartDemoContainer } from './demos/rtl-funnel-chart-demo-conta
           <li>
             Right to left, with the app following the direction
             (charts.followDirection), it is mirrored — symmetric, so only its
-            arrows — and ← goes to the next.
+            arrows — and <kbd scKbd>←</kbd> goes to the next.
           </li>
           <li>
             With reduced motion (prefers-reduced-motion), it appears and changes

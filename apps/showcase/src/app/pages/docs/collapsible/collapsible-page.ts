@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -17,6 +17,7 @@ import { TriggerElsewhereCollapsibleDemoContainer } from './demos/trigger-elsewh
 @Component({
   selector: 'app-collapsible-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     CollapsibleUsageDemoContainer,
@@ -61,7 +62,8 @@ import { TriggerElsewhereCollapsibleDemoContainer } from './demos/trigger-elsewh
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The disclosure pattern: a native button, aria-expanded, and
-            aria-controls naming its panel; Space and Enter toggle it.
+            aria-controls naming its panel; <kbd scKbd>Space</kbd> and
+            <kbd scKbd>Enter</kbd> toggle it.
           </li>
           <li>
             Name an icon trigger with sr-only text; its name stays the same as

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSignaturePadDemoContainer } from './demos/basic-signature-pad-demo-container';
@@ -11,6 +11,7 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
 @Component({
   selector: 'app-signature-pad-page',
   imports: [
+    ScKbd,
     BasicSignaturePadDemoContainer,
     PensSignaturePadDemoContainer,
     TypeSignaturePadDemoContainer,
@@ -35,8 +36,9 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           Sign with a mouse, a finger or a pen: the ink follows its speed, or
-          the pen's pressure. Undo, redo, clear — or, focused, Ctrl+Z,
-          Ctrl+Shift+Z and Delete.
+          the pen's pressure. Undo, redo, clear — or, focused,
+          <kbd scKbd>Ctrl + Z</kbd>, <kbd scKbd>Ctrl + Shift + Z</kbd> and
+          <kbd scKbd>Delete</kbd>.
         </p>
         <app-basic-signature-pad-demo-container />
       </section>

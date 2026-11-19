@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSortableListDemoContainer } from './demos/basic-sortable-list-demo-container';
@@ -12,6 +12,7 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
 @Component({
   selector: 'app-sortable-list-page',
   imports: [
+    ScKbd,
     BasicSortableListDemoContainer,
     HandleSortableListDemoContainer,
     HorizontalSortableListDemoContainer,
@@ -38,9 +39,10 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           Your array, reordered: drag an item with the mouse, a finger (hold,
-          then move) or a pen — or lift it with Space, move it with ↑ ↓, drop it
-          with Space; Escape puts it back. Each keyboard step is announced in
-          your words.
+          then move) or a pen — or lift it with <kbd scKbd>Space</kbd>, move it
+          with <kbd scKbd>↑</kbd> <kbd scKbd>↓</kbd>, drop it with
+          <kbd scKbd>Space</kbd>; <kbd scKbd>Escape</kbd> puts it back. Each
+          keyboard step is announced in your words.
         </p>
         <app-basic-sortable-list-demo-container />
       </section>
@@ -57,8 +59,9 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
       <section class="space-y-4">
         <h2 scTypeset appToc>Horizontal</h2>
         <p class="text-muted-foreground">
-          Along a row — tags, tabs, steps: ← → move a lifted item, in the
-          reading direction (reversed right to left).
+          Along a row — tags, tabs, steps: <kbd scKbd>←</kbd>
+          <kbd scKbd>→</kbd> move a lifted item, in the reading direction
+          (reversed right to left).
         </p>
         <app-horizontal-sortable-list-demo-container />
       </section>
@@ -66,8 +69,9 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
       <section class="space-y-4">
         <h2 scTypeset appToc>Grid</h2>
         <p class="text-muted-foreground">
-          As a grid — photos: the place follows the reading order; ← → move a
-          lifted item by one, ↑ ↓ by a row.
+          As a grid — photos: the place follows the reading order;
+          <kbd scKbd>←</kbd> <kbd scKbd>→</kbd> move a lifted item by one,
+          <kbd scKbd>↑</kbd> <kbd scKbd>↓</kbd> by a row.
         </p>
         <app-grid-sortable-list-demo-container />
       </section>
@@ -84,8 +88,8 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
       <section class="space-y-4">
         <h2 scTypeset appToc>Disabled</h2>
         <p class="text-muted-foreground">
-          disabled: shown in order, but not moved — the items are not Tab stops
-          then.
+          disabled: shown in order, but not moved — the items are not
+          <kbd scKbd>Tab</kbd> stops then.
         </p>
         <app-disabled-sortable-list-demo-container />
       </section>

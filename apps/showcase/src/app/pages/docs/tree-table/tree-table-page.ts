@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -12,6 +12,7 @@ import { SelectionTreeTableDemoContainer } from './demos/selection-tree-table-de
 @Component({
   selector: 'app-tree-table-page',
   imports: [
+    ScKbd,
     BasicTreeTableDemoContainer,
     ExpandAllTreeTableDemoContainer,
     SelectionTreeTableDemoContainer,
@@ -30,7 +31,8 @@ import { SelectionTreeTableDemoContainer } from './demos/selection-tree-table-de
           A Data Table whose rows open on their children: folders and files,
           tasks and subtasks. TanStack's expanding feature builds the tree;
           these parts indent it, open it, and make it a tree grid — one tab
-          stop, the arrows to move, open and close, Space to select.
+          stop, the arrows to move, open and close, <kbd scKbd>Space</kbd> to
+          select.
         </p>
         <app-component-badges path="tree-table" />
       </div>

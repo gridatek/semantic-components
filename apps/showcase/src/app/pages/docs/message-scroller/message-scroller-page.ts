@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -20,6 +20,7 @@ import { VisibilityMessageScrollerDemoContainer } from './demos/visibility-messa
 @Component({
   selector: 'app-message-scroller-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     MessageScrollerUsageDemoContainer,
@@ -72,7 +73,8 @@ import { VisibilityMessageScrollerDemoContainer } from './demos/visibility-messa
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The viewport is a region you can tab to — name it (aria-label); the
-            arrow keys, Page Up, Page Down, Home and End scroll it.
+            arrow keys, <kbd scKbd>Page Up</kbd>, <kbd scKbd>Page Down</kbd>,
+            <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> scroll it.
           </li>
           <li>
             The content is a log: each new message is announced once, as it is

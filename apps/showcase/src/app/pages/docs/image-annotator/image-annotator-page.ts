@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { EditorImageAnnotatorDemoContainer } from './demos/editor-image-annotator-demo-container';
@@ -9,6 +9,7 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
 @Component({
   selector: 'app-image-annotator-page',
   imports: [
+    ScKbd,
     EditorImageAnnotatorDemoContainer,
     ReviewImageAnnotatorDemoContainer,
     ReadOnlyImageAnnotatorDemoContainer,
@@ -32,9 +33,10 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
         <h2 scTypeset appToc>Editor</h2>
         <p class="text-muted-foreground">
           Every tool. Select an annotation to move it, resize it by its handles,
-          or restyle it with a colour or the width. From the keyboard: Enter on
-          the image places a shape; on an annotation, the arrows move it, Alt +
-          arrows resize it, Delete removes it. Ctrl+Z undoes.
+          or restyle it with a colour or the width. From the keyboard:
+          <kbd scKbd>Enter</kbd> on the image places a shape; on an annotation,
+          the arrows move it, Alt + arrows resize it,
+          <kbd scKbd>Delete</kbd> removes it. <kbd scKbd>Ctrl + Z</kbd> undoes.
         </p>
         <app-editor-image-annotator-demo-container />
       </section>
@@ -52,7 +54,7 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
         <h2 scTypeset appToc>Read only</h2>
         <p class="text-muted-foreground">
           The same annotations, shown: each one is still named and reached with
-          Tab.
+          <kbd scKbd>Tab</kbd>.
         </p>
         <app-read-only-image-annotator-demo-container />
       </section>

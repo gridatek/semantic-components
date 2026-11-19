@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { LogosMarqueeDemoContainer } from './demos/logos-marquee-demo-container';
@@ -11,6 +11,7 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
 @Component({
   selector: 'app-marquee-page',
   imports: [
+    ScKbd,
     LogosMarqueeDemoContainer,
     TestimonialsMarqueeDemoContainer,
     VerticalMarqueeDemoContainer,
@@ -36,8 +37,8 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
         <h2 scTypeset appToc>Logos</h2>
         <p class="text-muted-foreground">
           Links, written once: the copies are out of reach. It waits under the
-          pointer and with focus inside — Tab into it — and the button pauses
-          it.
+          pointer and with focus inside — <kbd scKbd>Tab</kbd> into it — and the
+          button pauses it.
         </p>
         <app-logos-marquee-demo-container />
       </section>

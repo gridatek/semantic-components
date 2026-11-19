@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScLink, ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { InlineCitationUsageDemoContainer } from './demos/inline-citation-usage-demo-container';
@@ -10,6 +10,7 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
 @Component({
   selector: 'app-inline-citation-page',
   imports: [
+    ScKbd,
     Anatomy,
     InlineCitationUsageDemoContainer,
     RouterLink,
@@ -50,9 +51,10 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
           Not shadcn&apos;s: there, the citation is a button, and the link to
           the source sits in the card. A preview card is for the eyes only — not
           announced, not reached with the keyboard — so here the citation is the
-          link itself: Tab reaches it, Enter follows it, and its name says where
-          it goes (the title, in hidden text, and that it opens in a new tab).
-          The card only previews it.
+          link itself: <kbd scKbd>Tab</kbd> reaches it,
+          <kbd scKbd>Enter</kbd> follows it, and its name says where it goes
+          (the title, in hidden text, and that it opens in a new tab). The card
+          only previews it.
         </p>
       </section>
 

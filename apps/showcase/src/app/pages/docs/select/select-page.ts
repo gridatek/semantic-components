@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ApiTable } from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -21,6 +21,7 @@ interface ScApiRow {
 @Component({
   selector: 'app-select-page',
   imports: [
+    ScKbd,
     ApiTable,
     Anatomy,
     SelectUsageDemoContainer,
@@ -66,10 +67,12 @@ interface ScApiRow {
       <section class="space-y-4">
         <h2 scTypeset appToc>Keyboard</h2>
         <p class="text-muted-foreground">
-          Focus stays on the trigger. Enter, Space or the arrow keys open the
-          list; the arrows, Home and End move through it; Enter or Space
-          selects; Escape closes; typing a letter goes to the first option that
-          starts with it, open or closed.
+          Focus stays on the trigger. <kbd scKbd>Enter</kbd>,
+          <kbd scKbd>Space</kbd> or the arrow keys open the list; the arrows,
+          <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> move through it;
+          <kbd scKbd>Enter</kbd> or <kbd scKbd>Space</kbd> selects;
+          <kbd scKbd>Escape</kbd> closes; typing a letter goes to the first
+          option that starts with it, open or closed.
         </p>
       </section>
 

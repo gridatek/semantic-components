@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ArticleLightboxDemoContainer } from './demos/article-lightbox-demo-container';
@@ -10,6 +10,7 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
 @Component({
   selector: 'app-lightbox-page',
   imports: [
+    ScKbd,
     GalleryLightboxDemoContainer,
     ZoomLightboxDemoContainer,
     ArticleLightboxDemoContainer,
@@ -41,8 +42,9 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
         <h2 scTypeset appToc>Gallery</h2>
         <p class="text-muted-foreground">
           A grid of links to the full photos — links still, without the
-          lightbox. Opened, the thumbnail grows into the photo; ← → or a swipe
-          to change, + − 0 to zoom, Escape or a swipe down to close.
+          lightbox. Opened, the thumbnail grows into the photo;
+          <kbd scKbd>←</kbd> <kbd scKbd>→</kbd> or a swipe to change, + − 0 to
+          zoom, <kbd scKbd>Escape</kbd> or a swipe down to close.
         </p>
         <app-gallery-lightbox-demo-container />
       </section>

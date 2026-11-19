@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import {
   type ApiInput,
@@ -16,6 +16,7 @@ import { TreemapChartUsageDemoContainer } from './demos/treemap-chart-usage-demo
 @Component({
   selector: 'app-treemap-chart-page',
   imports: [
+    ScKbd,
     TreemapChartUsageDemoContainer,
     Anatomy,
     ApiTable,
@@ -69,8 +70,8 @@ import { TreemapChartUsageDemoContainer } from './demos/treemap-chart-usage-demo
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: the arrow
-            keys, Home and End move through its boxes; Escape closes the
-            tooltip.
+            keys, <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> move through
+            its boxes; <kbd scKbd>Escape</kbd> closes the tooltip.
           </li>
           <li>
             As the keyboard moves, screen readers hear what the tooltip says,
@@ -79,7 +80,7 @@ import { TreemapChartUsageDemoContainer } from './demos/treemap-chart-usage-demo
           <li>
             Right to left, with the app following the direction
             (charts.followDirection), it is mirrored — laid out from the right —
-            and ← goes to the next.
+            and <kbd scKbd>←</kbd> goes to the next.
           </li>
           <li>
             With reduced motion (prefers-reduced-motion), it appears and changes

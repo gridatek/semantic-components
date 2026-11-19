@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScLink, ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../../components/toc/toc-heading';
 import { PromptInputUsageDemoContainer } from './demos/prompt-input-usage-demo-container';
@@ -10,6 +10,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
 @Component({
   selector: 'app-prompt-input-page',
   imports: [
+    ScKbd,
     Anatomy,
     PromptInputUsageDemoContainer,
     RouterLink,
@@ -71,8 +72,9 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
       <section class="space-y-4">
         <h2 scTypeset appToc>Keyboard</h2>
         <p class="text-muted-foreground">
-          Enter sends the message; Shift+Enter adds a new line. Send is disabled
-          while the field is empty.
+          <kbd scKbd>Enter</kbd> sends the message;
+          <kbd scKbd>Shift + Enter</kbd> adds a new line. Send is disabled while
+          the field is empty.
         </p>
       </section>
 

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicTagsInputDemoContainer } from './demos/basic-tags-input-demo-container';
@@ -10,6 +10,7 @@ import { LimitTagsInputDemoContainer } from './demos/limit-tags-input-demo-conta
 @Component({
   selector: 'app-tags-input-page',
   imports: [
+    ScKbd,
     BasicTagsInputDemoContainer,
     EmailsTagsInputDemoContainer,
     LimitTagsInputDemoContainer,
@@ -24,8 +25,8 @@ import { LimitTagsInputDemoContainer } from './demos/limit-tags-input-demo-conta
         <h1 scTypeset>Tags Input</h1>
         <p class="text-muted-foreground">
           Tags typed into one field — a string[] for Signal Forms — checked
-          before they go in, and reached by the keyboard without a Tab stop
-          each.
+          before they go in, and reached by the keyboard without a
+          <kbd scKbd>Tab</kbd> stop each.
         </p>
         <app-component-badges path="tags-input" />
       </div>
@@ -33,9 +34,11 @@ import { LimitTagsInputDemoContainer } from './demos/limit-tags-input-demo-conta
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
-          Enter or a comma adds a tag, and so does leaving the field; a
-          duplicate is refused. Backspace or ← in the empty field goes to the
-          last tag — ← → between tags, Delete removes one.
+          <kbd scKbd>Enter</kbd> or a comma adds a tag, and so does leaving the
+          field; a duplicate is refused. <kbd scKbd>Backspace</kbd> or
+          <kbd scKbd>←</kbd> in the empty field goes to the last tag —
+          <kbd scKbd>←</kbd> <kbd scKbd>→</kbd> between tags,
+          <kbd scKbd>Delete</kbd> removes one.
         </p>
         <app-basic-tags-input-demo-container />
       </section>

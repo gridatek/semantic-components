@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -12,6 +12,7 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
 @Component({
   selector: 'app-code-editor-page',
   imports: [
+    ScKbd,
     BasicCodeEditorDemoContainer,
     FormCodeEditorDemoContainer,
     LanguagesCodeEditorDemoContainer,
@@ -28,8 +29,11 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
         <h1 scTypeset>Code Editor</h1>
         <p class="text-muted-foreground">
           CodeMirror, colored by Shiki through the app’s highlighter — the code
-          block’s colors and frame. Undo, indentation from the keyboard (Escape
-          then Tab moves on), line numbers, a form field.
+          block’s colors and frame. Undo, indentation from the keyboard (<kbd
+            scKbd
+            >Escape</kbd
+          >
+          then <kbd scKbd>Tab</kbd> moves on), line numbers, a form field.
         </p>
         <app-component-badges path="code-editor" />
       </div>
@@ -52,8 +56,9 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           CodeMirror, colored by the app’s highlighter (Shiki, like a code
-          block), in a code block for its frame, title and copy button. Tab
-          indents; Escape then Tab moves on.
+          block), in a code block for its frame, title and copy button.
+          <kbd scKbd>Tab</kbd> indents; <kbd scKbd>Escape</kbd> then
+          <kbd scKbd>Tab</kbd> moves on.
         </p>
         <app-basic-code-editor-demo-container />
       </section>

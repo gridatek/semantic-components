@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ArcSpeedDialDemoContainer } from './demos/arc-speed-dial-demo-container';
@@ -11,6 +11,7 @@ import { DirectionsSpeedDialDemoContainer } from './demos/directions-speed-dial-
 @Component({
   selector: 'app-speed-dial-page',
   imports: [
+    ScKbd,
     BasicSpeedDialDemoContainer,
     DirectionsSpeedDialDemoContainer,
     ArcSpeedDialDemoContainer,
@@ -36,8 +37,9 @@ import { DirectionsSpeedDialDemoContainer } from './demos/directions-speed-dial-
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           A button in a corner; its actions open upward, each named by the label
-          beside it. From the keyboard: Enter, Space or an arrow opens it on the
-          first action; the arrows move along, Escape closes.
+          beside it. From the keyboard: <kbd scKbd>Enter</kbd>,
+          <kbd scKbd>Space</kbd> or an arrow opens it on the first action; the
+          arrows move along, <kbd scKbd>Escape</kbd> closes.
         </p>
         <app-basic-speed-dial-demo-container />
       </section>

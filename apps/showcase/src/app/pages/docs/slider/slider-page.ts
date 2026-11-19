@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -15,6 +15,7 @@ import { VerticalSliderDemoContainer } from './demos/vertical-slider-demo-contai
 @Component({
   selector: 'app-slider-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     SliderUsageDemoContainer,
@@ -58,9 +59,10 @@ import { VerticalSliderDemoContainer } from './demos/vertical-slider-demo-contai
         <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            A native range: Tab reaches it; the arrows move it by its step, Page
-            Up and Page Down by more, Home and End to its ends (mirrored right
-            to left).
+            A native range: <kbd scKbd>Tab</kbd> reaches it; the arrows move it
+            by its step, Page Up and <kbd scKbd>Page Down</kbd> by more,
+            <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> to its ends (mirrored
+            right to left).
           </li>
           <li>
             Name it: a label (scLabel in a field, or for) or aria-label.

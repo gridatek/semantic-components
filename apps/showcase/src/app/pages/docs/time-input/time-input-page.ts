@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicTimeInputDemoContainer } from './demos/basic-time-input-demo-container';
@@ -12,6 +12,7 @@ import { SecondsTimeInputDemoContainer } from './demos/seconds-time-input-demo-c
 @Component({
   selector: 'app-time-input-page',
   imports: [
+    ScKbd,
     BasicTimeInputDemoContainer,
     LocaleTimeInputDemoContainer,
     SecondsTimeInputDemoContainer,
@@ -29,8 +30,9 @@ import { SecondsTimeInputDemoContainer } from './demos/seconds-time-input-demo-c
         <p class="text-muted-foreground">
           A time, typed part by part — hour, minute, AM/PM — in the order, the
           separators and the hour cycle of the app’s language. Each part is a
-          spin button: arrows step it, digits fill it, Backspace clears it. A
-          [formField], its value a Temporal.PlainTime.
+          spin button: arrows step it, digits fill it,
+          <kbd scKbd>Backspace</kbd> clears it. A [formField], its value a
+          Temporal.PlainTime.
         </p>
         <app-component-badges path="time-input" />
       </div>

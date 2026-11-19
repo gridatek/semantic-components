@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -13,6 +13,7 @@ import { SideSheetDemoContainer } from './demos/side-sheet-demo-container';
 @Component({
   selector: 'app-sheet-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     SheetUsageDemoContainer,
@@ -58,7 +59,8 @@ import { SideSheetDemoContainer } from './demos/side-sheet-demo-container';
           </li>
           <li>
             Focus moves into it and stays there; closing gives it back to the
-            trigger. Escape or a press on the backdrop closes it.
+            trigger. <kbd scKbd>Escape</kbd> or a press on the backdrop closes
+            it.
           </li>
           <li>Name the ✕: it is an icon — sr-only text.</li>
         </ul>

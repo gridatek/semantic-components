@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -19,6 +19,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
 @Component({
   selector: 'app-radio-group-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     RadioGroupUsageDemoContainer,
@@ -68,8 +69,9 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
         <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            Native radios: one Tab stop for the group, the arrows move the
-            choice (mirrored right to left), Space picks.
+            Native radios: one <kbd scKbd>Tab</kbd> stop for the group, the
+            arrows move the choice (mirrored right to left),
+            <kbd scKbd>Space</kbd> picks.
           </li>
           <li>
             Name the group (a fieldset&apos;s legend, or aria-label on the

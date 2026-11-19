@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -23,6 +23,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
 @Component({
   selector: 'app-otp-field-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     OtpFieldUsageDemoContainer,
@@ -75,9 +76,11 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
         <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            Real inputs: typing moves on, Backspace back; Left and Right move
-            (mirrored right to left), Home and End to the ends; focus goes to
-            the first empty input, so the code is entered in order.
+            Real inputs: typing moves on, <kbd scKbd>Backspace</kbd> back;
+            <kbd scKbd>←</kbd> and <kbd scKbd>→</kbd> move (mirrored right to
+            left), <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> to the ends;
+            focus goes to the first empty input, so the code is entered in
+            order.
           </li>
           <li>
             The label names the first input (it takes the field&apos;s id); name

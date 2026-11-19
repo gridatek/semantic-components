@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSpotlightDemoContainer } from './demos/basic-spotlight-demo-container';
@@ -10,6 +10,7 @@ import { SidesSpotlightDemoContainer } from './demos/sides-spotlight-demo-contai
 @Component({
   selector: 'app-spotlight-page',
   imports: [
+    ScKbd,
     BasicSpotlightDemoContainer,
     InteractiveSpotlightDemoContainer,
     SidesSpotlightDemoContainer,
@@ -34,8 +35,8 @@ import { SidesSpotlightDemoContainer } from './demos/sides-spotlight-demo-contai
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           A new feature, in the spotlight: the page dimmed and inert but for it,
-          a card beside it, named by its title. Escape, a click on the dim, or
-          Got it.
+          a card beside it, named by its title. <kbd scKbd>Escape</kbd>, a click
+          on the dim, or Got it.
         </p>
         <app-basic-spotlight-demo-container />
       </section>
@@ -44,8 +45,8 @@ import { SidesSpotlightDemoContainer } from './demos/sides-spotlight-demo-contai
         <h2 scTypeset appToc>Interactive</h2>
         <p class="text-muted-foreground">
           The element stays usable through the cutout — type in the search while
-          it is lit; the rest of the page stays dimmed and blocked. Escape still
-          closes.
+          it is lit; the rest of the page stays dimmed and blocked.
+          <kbd scKbd>Escape</kbd> still closes.
         </p>
         <app-interactive-spotlight-demo-container />
       </section>

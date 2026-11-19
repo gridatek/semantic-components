@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -15,6 +15,7 @@ import { SmallMediaAlertDialogDemoContainer } from './demos/small-media-alert-di
 @Component({
   selector: 'app-alert-dialog-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     AlertDialogUsageDemoContainer,
@@ -67,10 +68,13 @@ import { SmallMediaAlertDialogDemoContainer } from './demos/small-media-alert-di
             Open, focus goes into the dialog — to its first button, Cancel: put
             the least harmful answer first.
           </li>
-          <li>Tab and Shift+Tab stay in the dialog.</li>
           <li>
-            Escape closes it, as Cancel does. A click outside doesn&apos;t: it
-            wants an answer.
+            <kbd scKbd>Tab</kbd> and <kbd scKbd>Shift + Tab</kbd> stay in the
+            dialog.
+          </li>
+          <li>
+            <kbd scKbd>Escape</kbd> closes it, as Cancel does. A click outside
+            doesn&apos;t: it wants an answer.
           </li>
           <li>Closed, focus goes back to the trigger.</li>
         </ul>

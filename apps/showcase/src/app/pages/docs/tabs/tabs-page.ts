@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -14,6 +14,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
 @Component({
   selector: 'app-tabs-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     TabsUsageDemoContainer,
@@ -78,16 +79,19 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
         <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            Tab enters the list on the selected tab, then goes on to its panel.
+            <kbd scKbd>Tab</kbd> enters the list on the selected tab, then goes
+            on to its panel.
           </li>
           <li>
-            ArrowLeft and ArrowRight move between the tabs (mirrored right to
-            left), ArrowUp and ArrowDown when vertical; Home and End go to the
+            <kbd scKbd>ArrowLeft</kbd> and <kbd scKbd>ArrowRight</kbd> move
+            between the tabs (mirrored right to left),
+            <kbd scKbd>ArrowUp</kbd> and <kbd scKbd>ArrowDown</kbd> when
+            vertical; <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> go to the
             ends.
           </li>
           <li>
-            Enter or Space selects the tab — or the arrows select as they move,
-            with activateOnFocus.
+            <kbd scKbd>Enter</kbd> or <kbd scKbd>Space</kbd> selects the tab —
+            or the arrows select as they move, with activateOnFocus.
           </li>
           <li>A disabled tab is reached, not selected.</li>
         </ul>

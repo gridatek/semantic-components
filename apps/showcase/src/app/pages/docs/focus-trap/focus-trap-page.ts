@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -10,6 +10,7 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
 @Component({
   selector: 'app-focus-trap-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     TocHeading,
@@ -38,8 +39,8 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
         <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           One directive on the element shown — a dialog, a panel: focus moves
-          in, Tab stays inside, and focus goes back where it came from when it
-          goes away.
+          in, <kbd scKbd>Tab</kbd> stays inside, and focus goes back where it
+          came from when it goes away.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -53,7 +54,10 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
             <code>cdkFocusInitial</code>
             ).
           </li>
-          <li>Tab and Shift+Tab wrap round inside it.</li>
+          <li>
+            <kbd scKbd>Tab</kbd> and <kbd scKbd>Shift + Tab</kbd> wrap round
+            inside it.
+          </li>
           <li>
             When it goes away, focus goes back to where it was before — only if
             it is still inside, or lost to the page. Focus that moved on (into a
@@ -87,9 +91,9 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
               >Not trapped, still moving in.</strong
             >
             <code>[scFocusTrap]="false"</code>
-            moves focus in and back, but lets Tab leave — Base UI&apos;s
-            Popover, not modal by default. With the CDK, its restore would still
-            be unconditional.
+            moves focus in and back, but lets <kbd scKbd>Tab</kbd> leave — Base
+            UI&apos;s Popover, not modal by default. With the CDK, its restore
+            would still be unconditional.
           </li>
           <li>
             <strong class="text-foreground">On by default.</strong>

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -14,6 +14,7 @@ import { VerticalResizableDemoContainer } from './demos/vertical-resizable-demo-
 @Component({
   selector: 'app-resizable-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     ResizableUsageDemoContainer,
@@ -62,8 +63,8 @@ import { VerticalResizableDemoContainer } from './demos/vertical-resizable-demo-
           </li>
           <li>
             The arrow keys along its axis resize by 10% (mirrored right to
-            left), Home and End to the limits, Enter shuts or opens a
-            collapsible panel.
+            left), <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> to the limits,
+            <kbd scKbd>Enter</kbd> shuts or opens a collapsible panel.
           </li>
           <li>The grip is only for the eye (aria-hidden).</li>
         </ul>

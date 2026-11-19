@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ControlledVideoPlayerDemoContainer } from './demos/controlled-video-player-demo-container';
@@ -9,6 +9,7 @@ import { PlayerVideoPlayerDemoContainer } from './demos/player-video-player-demo
 @Component({
   selector: 'app-video-player-page',
   imports: [
+    ScKbd,
     PlayerVideoPlayerDemoContainer,
     MinimalVideoPlayerDemoContainer,
     ControlledVideoPlayerDemoContainer,
@@ -46,12 +47,14 @@ import { PlayerVideoPlayerDemoContainer } from './demos/player-video-player-demo
         <p class="text-muted-foreground">
           Captions in two languages — shown by the player, above its controls —
           chapters and a preview on the seek bar, speeds, picture-in-picture and
-          fullscreen. Focused, the keys work: Space or K, J and L, the arrows,
-          M, F, C, 0–9. Before the first play, only its play and the length; the
-          controls hide while playing untouched. Below 576px wide it has
-          Vidstack's small layout — captions at the top, play in the middle,
-          time and fullscreen at the bottom — from the parts alone: the template
-          is the same.
+          fullscreen. Focused, the keys work: <kbd scKbd>Space</kbd> or
+          <kbd scKbd>K</kbd>, <kbd scKbd>J</kbd> and <kbd scKbd>L</kbd>, the
+          arrows, <kbd scKbd>M</kbd>, <kbd scKbd>F</kbd>, <kbd scKbd>C</kbd>,
+          <kbd scKbd>0</kbd>–<kbd scKbd>9</kbd>. Before the first play, only its
+          play and the length; the controls hide while playing untouched. Below
+          576px wide it has Vidstack's small layout — captions at the top, play
+          in the middle, time and fullscreen at the bottom — from the parts
+          alone: the template is the same.
         </p>
         <app-player-video-player-demo-container />
       </section>

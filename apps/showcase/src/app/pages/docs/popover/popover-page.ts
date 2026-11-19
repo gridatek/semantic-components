@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -16,6 +16,7 @@ import { SidesPopoverDemoContainer } from './demos/sides-popover-demo-container'
 @Component({
   selector: 'app-popover-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     PopoverUsageDemoContainer,
@@ -65,13 +66,13 @@ import { SidesPopoverDemoContainer } from './demos/sides-popover-demo-container'
           </li>
           <li>
             Opening moves focus into it (its first field, or the one marked
-            cdkFocusInitial); closing gives it back to the trigger. Escape or a
-            press outside closes it.
+            cdkFocusInitial); closing gives it back to the trigger.
+            <kbd scKbd>Escape</kbd> or a press outside closes it.
           </li>
           <li>
-            Not modal (default): Tab out of it closes it and goes on from the
-            trigger. trap-focus keeps Tab inside; modal also stops the page
-            behind.
+            Not modal (default): <kbd scKbd>Tab</kbd> out of it closes it and
+            goes on from the trigger. trap-focus keeps
+            <kbd scKbd>Tab</kbd> inside; modal also stops the page behind.
           </li>
           <li>
             Open on hover is for extra help (an infotip): a click opens it too,

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AddKanbanBoardDemoContainer } from './demos/add-kanban-board-demo-container';
@@ -10,6 +10,7 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
 @Component({
   selector: 'app-kanban-board-page',
   imports: [
+    ScKbd,
     BasicKanbanBoardDemoContainer,
     RichKanbanBoardDemoContainer,
     FlatKanbanBoardDemoContainer,
@@ -34,8 +35,9 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           Cards dragged with the mouse, a finger (hold, then move) or a pen — or
-          lifted by the keyboard: Space, the arrows, Space; Escape puts it back.
-          Each keyboard step is announced, in your words.
+          lifted by the keyboard: <kbd scKbd>Space</kbd>, the arrows,
+          <kbd scKbd>Space</kbd>; <kbd scKbd>Escape</kbd> puts it back. Each
+          keyboard step is announced, in your words.
         </p>
         <app-basic-kanban-board-demo-container />
       </section>

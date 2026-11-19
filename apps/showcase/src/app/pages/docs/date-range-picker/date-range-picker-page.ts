@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicDateRangePickerDemoContainer } from './demos/basic-date-range-picker-demo-container';
@@ -12,6 +12,7 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
 @Component({
   selector: 'app-date-range-picker-page',
   imports: [
+    ScKbd,
     BasicDateRangePickerDemoContainer,
     PresetsDateRangePickerDemoContainer,
     TypedDateRangePickerDemoContainer,
@@ -66,8 +67,8 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
         <h2 scTypeset appToc>Apply</h2>
         <p class="text-muted-foreground">
           confirm: picks and presets are a draft, kept by scDatePickerApply —
-          Cancel, Escape or a click outside drop it. Two months and presets, as
-          on an analytics page.
+          Cancel, <kbd scKbd>Escape</kbd> or a click outside drop it. Two months
+          and presets, as on an analytics page.
         </p>
         <app-confirm-date-range-picker-demo-container />
       </section>

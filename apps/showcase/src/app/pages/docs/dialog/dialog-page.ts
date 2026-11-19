@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -14,6 +14,7 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
 @Component({
   selector: 'app-dialog-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     DialogUsageDemoContainer,
@@ -68,8 +69,8 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
             done (or keeps it open, to show what is wrong).
           </li>
           <li>
-            Escape and a click outside close it too. Focus stays in it while it
-            is open, and goes back to what opened it.
+            <kbd scKbd>Escape</kbd> and a click outside close it too. Focus
+            stays in it while it is open, and goes back to what opened it.
           </li>
         </ul>
       </section>

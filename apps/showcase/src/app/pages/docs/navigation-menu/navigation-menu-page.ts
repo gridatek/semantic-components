@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -13,6 +13,7 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
 @Component({
   selector: 'app-navigation-menu-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     NavigationMenuUsageDemoContainer,
@@ -44,8 +45,8 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
         <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
           A named nav and its list of items. An item holds a link, or a trigger
-          and its panel — written inside the item, so Tab reaches its links
-          right after the trigger.
+          and its panel — written inside the item, so
+          <kbd scKbd>Tab</kbd> reaches its links right after the trigger.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -59,13 +60,16 @@ import { SeparateNavigationMenuDemoContainer } from './demos/separate-navigation
             links.
           </li>
           <li>
-            Tab follows the page: a trigger, then its panel&apos;s links. ← and
-            → move between the top-level items (mirrored right to left), Home
-            and End too; ↓ goes into the open panel, ↑ and ↓ within it.
+            <kbd scKbd>Tab</kbd> follows the page: a trigger, then its
+            panel&apos;s links. <kbd scKbd>←</kbd> and <kbd scKbd>→</kbd> move
+            between the top-level items (mirrored right to left),
+            <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> too;
+            <kbd scKbd>↓</kbd> goes into the open panel, <kbd scKbd>↑</kbd> and
+            <kbd scKbd>↓</kbd> within it.
           </li>
           <li>
-            Escape closes the panel and returns to its trigger; the focus
-            leaving it, or a click outside, closes it too.
+            <kbd scKbd>Escape</kbd> closes the panel and returns to its trigger;
+            the focus leaving it, or a click outside, closes it too.
           </li>
           <li>
             A closed panel is invisible: out of the tab order and of the

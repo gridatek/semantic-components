@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AcrossOrgChartDemoContainer } from './demos/across-org-chart-demo-container';
@@ -12,6 +12,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
 @Component({
   selector: 'app-org-chart-page',
   imports: [
+    ScKbd,
     BasicOrgChartDemoContainer,
     AvatarsOrgChartDemoContainer,
     AcrossOrgChartDemoContainer,
@@ -37,8 +38,11 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
-          People and their reports, as nested lists — one Tab stop, then ↑ ↓
-          between people, → ← to open and close, Home and End, or type a name.
+          People and their reports, as nested lists — one
+          <kbd scKbd>Tab</kbd> stop, then <kbd scKbd>↑</kbd>
+          <kbd scKbd>↓</kbd> between people, <kbd scKbd>→</kbd>
+          <kbd scKbd>←</kbd> to open and close, <kbd scKbd>Home</kbd> and
+          <kbd scKbd>End</kbd>, or type a name.
         </p>
         <app-basic-org-chart-demo-container />
       </section>
@@ -63,8 +67,9 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
       <section class="space-y-4">
         <h2 scTypeset appToc>Collapsible</h2>
         <p class="text-muted-foreground">
-          A click, or → and ←, opens and closes a person. Your chevron
-          (scOrgChartExpandIcon) turns; [expanded]="false" starts closed.
+          A click, or <kbd scKbd>→</kbd> and <kbd scKbd>←</kbd>, opens and
+          closes a person. Your chevron (scOrgChartExpandIcon) turns;
+          [expanded]="false" starts closed.
         </p>
         <app-collapsible-org-chart-demo-container />
       </section>
@@ -72,8 +77,9 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
       <section class="space-y-4">
         <h2 scTypeset appToc>Selection</h2>
         <p class="text-muted-foreground">
-          The selected person, two-way through [(value)] — Enter, Space or a
-          click — and their details beside the chart.
+          The selected person, two-way through [(value)] —
+          <kbd scKbd>Enter</kbd>, <kbd scKbd>Space</kbd> or a click — and their
+          details beside the chart.
         </p>
         <app-selection-org-chart-demo-container />
       </section>

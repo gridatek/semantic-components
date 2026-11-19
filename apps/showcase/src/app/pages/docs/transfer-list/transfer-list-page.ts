@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicTransferListDemoContainer } from './demos/basic-transfer-list-demo-container';
@@ -10,6 +10,7 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
 @Component({
   selector: 'app-transfer-list-page',
   imports: [
+    ScKbd,
     BasicTransferListDemoContainer,
     FormTransferListDemoContainer,
     OrderedTransferListDemoContainer,
@@ -24,8 +25,8 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
         <h1 scTypeset>Transfer List</h1>
         <p class="text-muted-foreground">
           One value — the chosen ids, in order, a form field — and two sides
-          that are listboxes: select with the keys, move with Enter or a
-          double-click, search, reorder.
+          that are listboxes: select with the keys, move with
+          <kbd scKbd>Enter</kbd> or a double-click, search, reorder.
         </p>
         <app-component-badges path="transfer-list" />
       </div>
@@ -33,9 +34,11 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
-          Two sides, one value: the chosen ids. Each side a listbox — ↑ ↓, Space
-          selects, Shift extends, Ctrl+A all, Enter (or a double-click) moves
-          across; one Tab stop each. Billing is disabled.
+          Two sides, one value: the chosen ids. Each side a listbox —
+          <kbd scKbd>↑</kbd> <kbd scKbd>↓</kbd>, <kbd scKbd>Space</kbd> selects,
+          <kbd scKbd>Shift</kbd> extends, <kbd scKbd>Ctrl + A</kbd> all,
+          <kbd scKbd>Enter</kbd> (or a double-click) moves across; one
+          <kbd scKbd>Tab</kbd> stop each. Billing is disabled.
         </p>
         <app-basic-transfer-list-demo-container />
       </section>

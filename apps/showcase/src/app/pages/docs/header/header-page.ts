@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -15,6 +15,7 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
 @Component({
   selector: 'app-header-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     HeaderUsageDemoContainer,
@@ -78,9 +79,9 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
             icons.
           </li>
           <li>
-            Not modal: nothing is trapped. Escape closes the menu and gives the
-            focus back to the toggle; following a link closes it too, and, over
-            the page, a click or the focus outside the bar.
+            Not modal: nothing is trapped. <kbd scKbd>Escape</kbd> closes the
+            menu and gives the focus back to the toggle; following a link closes
+            it too, and, over the page, a click or the focus outside the bar.
           </li>
           <li>
             With reduced motion, nothing animates: the menu opens and closes at

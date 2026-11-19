@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -23,6 +23,7 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
 @Component({
   selector: 'app-questionnaire-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     QuestionnaireUsageDemoContainer,
@@ -75,11 +76,13 @@ import { ValidationQuestionnaireDemoContainer } from './demos/validation-questio
         <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            Enter on a chosen answer (or a filled text field) moves on — or
-            submits on the last question; Ctrl/⌘+Enter from anywhere in it.
+            <kbd scKbd>Enter</kbd> on a chosen answer (or a filled text field)
+            moves on — or submits on the last question;
+            <kbd scKbd>Ctrl/⌘ + Enter</kbd> from anywhere in it.
           </li>
           <li>
-            ArrowUp and ArrowDown between the answers; ArrowLeft and ArrowRight
+            <kbd scKbd>ArrowUp</kbd> and <kbd scKbd>ArrowDown</kbd> between the
+            answers; <kbd scKbd>ArrowLeft</kbd> and <kbd scKbd>ArrowRight</kbd>
             outside them: back, and forward once answered — mirrored in
             right-to-left.
           </li>

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -14,6 +14,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
 @Component({
   selector: 'app-menubar-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     MenubarUsageDemoContainer,
@@ -57,22 +58,26 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
         <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            The bar is one tab stop: ArrowLeft and ArrowRight move along it
-            (mirrored right to left), Home and End go to its ends, a letter goes
-            to the item it starts.
+            The bar is one tab stop: <kbd scKbd>ArrowLeft</kbd> and
+            <kbd scKbd>ArrowRight</kbd> move along it (mirrored right to left),
+            <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> go to its ends, a
+            letter goes to the item it starts.
           </li>
           <li>
-            Enter, Space or ArrowDown opens an item&apos;s menu on its first
-            item, ArrowUp on its last. With a menu open, ArrowLeft and
-            ArrowRight open the next item&apos;s menu.
+            <kbd scKbd>Enter</kbd>, <kbd scKbd>Space</kbd> or
+            <kbd scKbd>ArrowDown</kbd> opens an item&apos;s menu on its first
+            item, <kbd scKbd>ArrowUp</kbd> on its last. With a menu open,
+            <kbd scKbd>ArrowLeft</kbd> and <kbd scKbd>ArrowRight</kbd> open the
+            next item&apos;s menu.
           </li>
           <li>
             In a menu, the keys are the Menu&apos;s: the arrows move, a submenu
-            opens toward the reading end, Enter or Space chooses.
+            opens toward the reading end, <kbd scKbd>Enter</kbd> or
+            <kbd scKbd>Space</kbd> chooses.
           </li>
           <li>
-            Escape closes the menu and gives focus back to its item; Tab closes
-            it and leaves the bar.
+            <kbd scKbd>Escape</kbd> closes the menu and gives focus back to its
+            item; <kbd scKbd>Tab</kbd> closes it and leaves the bar.
           </li>
         </ul>
       </section>

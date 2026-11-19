@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -18,6 +18,7 @@ import { SubmenuMenuDemoContainer } from './demos/submenu-menu-demo-container';
 @Component({
   selector: 'app-menu-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     MenuUsageDemoContainer,
@@ -64,24 +65,26 @@ import { SubmenuMenuDemoContainer } from './demos/submenu-menu-demo-container';
         <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            On the trigger, Enter, Space or ArrowDown opens the menu on its
-            first item, ArrowUp on its last. A click opens it with nothing
+            On the trigger, <kbd scKbd>Enter</kbd>, <kbd scKbd>Space</kbd> or
+            <kbd scKbd>ArrowDown</kbd> opens the menu on its first item,
+            <kbd scKbd>ArrowUp</kbd> on its last. A click opens it with nothing
             highlighted, until the pointer moves or a key is pressed.
           </li>
           <li>
-            The arrows move, Home and End go to the ends, a letter goes to the
-            item it starts.
+            The arrows move, <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> go
+            to the ends, a letter goes to the item it starts.
           </li>
           <li>
             The arrow toward the reading end opens a submenu, the other way
             closes it (mirrored right to left).
           </li>
           <li>
-            Enter or Space chooses an item; a checkbox or radio item toggles and
-            the menu stays open.
+            <kbd scKbd>Enter</kbd> or <kbd scKbd>Space</kbd> chooses an item; a
+            checkbox or radio item toggles and the menu stays open.
           </li>
           <li>
-            Escape closes the menu and gives focus back to the trigger; Tab
+            <kbd scKbd>Escape</kbd> closes the menu and gives focus back to the
+            trigger; <kbd scKbd>Tab</kbd>
             closes it and moves on.
           </li>
         </ul>

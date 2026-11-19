@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicJsonViewerDemoContainer } from './demos/basic-json-viewer-demo-container';
@@ -12,6 +12,7 @@ import { TypesJsonViewerDemoContainer } from './demos/types-json-viewer-demo-con
 @Component({
   selector: 'app-json-viewer-page',
   imports: [
+    ScKbd,
     BasicJsonViewerDemoContainer,
     SummaryJsonViewerDemoContainer,
     LargeJsonViewerDemoContainer,
@@ -28,9 +29,9 @@ import { TypesJsonViewerDemoContainer } from './demos/types-json-viewer-demo-con
         <h1 scTypeset>JSON Viewer</h1>
         <p class="text-muted-foreground">
           A JSON value as a tree: keys and values coloured by type, objects and
-          arrays that open and close, long arrays split into ranges. One Tab
-          stop, then the arrow keys; type a key to jump to it, Ctrl/⌘+C copies
-          the focused value.
+          arrays that open and close, long arrays split into ranges. One
+          <kbd scKbd>Tab</kbd> stop, then the arrow keys; type a key to jump to
+          it, <kbd scKbd>Ctrl/⌘ + C</kbd> copies the focused value.
         </p>
         <app-component-badges path="json-viewer" />
       </div>

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicDateInputDemoContainer } from './demos/basic-date-input-demo-container';
@@ -13,6 +13,7 @@ import { SegmentedLocaleDateInputDemoContainer } from './demos/segmented-locale-
 @Component({
   selector: 'app-date-input-page',
   imports: [
+    ScKbd,
     BasicDateInputDemoContainer,
     LocaleDateInputDemoContainer,
     LimitsDateInputDemoContainer,
@@ -41,8 +42,8 @@ import { SegmentedLocaleDateInputDemoContainer } from './demos/segmented-locale-
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           A text input in a field: the locale’s numeric order (here 10/14/2026)
-          or ISO (2026-10-14), read on Enter or leaving. Text that is not a day
-          stays, marked — the value as it was.
+          or ISO (2026-10-14), read on <kbd scKbd>Enter</kbd> or leaving. Text
+          that is not a day stays, marked — the value as it was.
         </p>
         <app-basic-date-input-demo-container />
       </section>
@@ -83,8 +84,8 @@ import { SegmentedLocaleDateInputDemoContainer } from './demos/segmented-locale-
         <p class="text-muted-foreground">
           scSegmentedDateInput: typed part by part — each part a spin button.
           Digits fill it and move on, arrows step it (an empty part starts at
-          today), Backspace clears it; the day stays within its month. Its value
-          is null until every part is filled.
+          today), <kbd scKbd>Backspace</kbd> clears it; the day stays within its
+          month. Its value is null until every part is filled.
         </p>
         <app-segmented-date-input-demo-container />
       </section>

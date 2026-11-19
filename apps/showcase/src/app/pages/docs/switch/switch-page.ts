@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -18,6 +18,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
 @Component({
   selector: 'app-switch-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     SwitchUsageDemoContainer,
@@ -67,7 +68,8 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A native checkbox with role="switch": announced as a switch, on or
-            off; Tab reaches it, Space toggles it.
+            off; <kbd scKbd>Tab</kbd> reaches it, <kbd scKbd>Space</kbd> toggles
+            it.
           </li>
           <li>
             Name it by its text: a label round both (label scField

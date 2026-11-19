@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -21,6 +21,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
 @Component({
   selector: 'app-combobox-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     ComboboxUsageDemoContainer,
@@ -90,13 +91,16 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
           </li>
           <li>
             Down opens the list; Up and Down move the highlight (round with
-            loopFocus), Home and End to its ends; Enter picks; Escape closes,
+            loopFocus), <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> to its
+            ends; <kbd scKbd>Enter</kbd> picks; <kbd scKbd>Escape</kbd> closes,
             and the input shows the value again.
           </li>
           <li>
-            Several values: Backspace in the empty input removes the last chip;
-            the arrow towards the chips reaches their remove buttons, the arrows
-            move between them, Backspace or Delete removes one. One tab stop.
+            Several values: <kbd scKbd>Backspace</kbd> in the empty input
+            removes the last chip; the arrow towards the chips reaches their
+            remove buttons, the arrows move between them,
+            <kbd scKbd>Backspace</kbd> or <kbd scKbd>Delete</kbd> removes one.
+            One tab stop.
           </li>
           <li>
             The chevron and the clear button are not tab stops: the keyboard
@@ -104,11 +108,11 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
           </li>
           <li>
             With the search inside the popup, the trigger opens a dialog; focus
-            goes to the search, and back to the trigger on Escape or a pick. In
-            a field, the trigger is named by the label and the value it shows,
-            the dialog by the label; without one, name them (aria-labelledby
-            with the value&apos;s id on the trigger: an aria-label alone leaves
-            its text out of its name).
+            goes to the search, and back to the trigger on
+            <kbd scKbd>Escape</kbd> or a pick. In a field, the trigger is named
+            by the label and the value it shows, the dialog by the label;
+            without one, name them (aria-labelledby with the value&apos;s id on
+            the trigger: an aria-label alone leaves its text out of its name).
           </li>
           <li>
             Invalid once touched (aria-invalid on the input, or the trigger),

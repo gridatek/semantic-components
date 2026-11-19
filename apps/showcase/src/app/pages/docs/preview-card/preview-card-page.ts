@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -13,6 +13,7 @@ import { SidesPreviewCardDemoContainer } from './demos/sides-preview-card-demo-c
 @Component({
   selector: 'app-preview-card-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     PreviewCardUsageDemoContainer,
@@ -64,8 +65,8 @@ import { SidesPreviewCardDemoContainer } from './demos/sides-preview-card-demo-c
           </li>
           <li>
             Hover opens it after the trigger&apos;s delay; keyboard focus at
-            once. Leaving, blur, Escape or a press outside close it. A touch
-            only follows the link.
+            once. Leaving, blur, <kbd scKbd>Escape</kbd> or a press outside
+            close it. A touch only follows the link.
           </li>
         </ul>
       </section>

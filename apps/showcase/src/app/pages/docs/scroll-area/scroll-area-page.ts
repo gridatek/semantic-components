@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -14,6 +14,7 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
 @Component({
   selector: 'app-scroll-area-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     ScrollAreaUsageDemoContainer,
@@ -62,8 +63,10 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
           </li>
           <li>
             While it overflows, its viewport is in the tab order (with a focus
-            ring): the arrow keys, Page Up, Page Down, Home and End scroll it. A
-            box that doesn&apos;t scroll isn&apos;t a stop.
+            ring): the arrow keys, <kbd scKbd>Page Up</kbd>,
+            <kbd scKbd>Page Down</kbd>, <kbd scKbd>Home</kbd> and
+            <kbd scKbd>End</kbd> scroll it. A box that doesn&apos;t scroll
+            isn&apos;t a stop.
           </li>
           <li>
             The scrollbars are for the pointer only: drag a thumb, or press the

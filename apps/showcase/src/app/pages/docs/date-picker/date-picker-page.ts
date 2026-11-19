@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -18,6 +18,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
 @Component({
   selector: 'app-date-picker-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     DatePickerUsageDemoContainer,
@@ -67,12 +68,15 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
           <li>
             The trigger opens a dialog (the popover) holding the calendar, a
             grid: focus goes to the chosen day (or today); the arrow keys move
-            by day and week, Home and End, Page Up and Page Down by month (with
-            Shift, by year); Enter or Space picks.
+            by day and week, <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd>,
+            <kbd scKbd>Page Up</kbd> and <kbd scKbd>Page Down</kbd> by month
+            (with <kbd scKbd>Shift</kbd>, by year); <kbd scKbd>Enter</kbd> or
+            <kbd scKbd>Space</kbd> picks.
           </li>
           <li>
-            A pick closes it, focus back on the trigger; Escape closes it too.
-            With confirm, picks are a draft until Apply.
+            A pick closes it, focus back on the trigger;
+            <kbd scKbd>Escape</kbd> closes it too. With confirm, picks are a
+            draft until Apply.
           </li>
           <li>
             Name every icon button and the popover (an sr-only span, an

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ControlledAudioPlayerDemoContainer } from './demos/controlled-audio-player-demo-container';
@@ -9,6 +9,7 @@ import { PlayerAudioPlayerDemoContainer } from './demos/player-audio-player-demo
 @Component({
   selector: 'app-audio-player-page',
   imports: [
+    ScKbd,
     PlayerAudioPlayerDemoContainer,
     MinimalAudioPlayerDemoContainer,
     ControlledAudioPlayerDemoContainer,
@@ -47,8 +48,10 @@ import { PlayerAudioPlayerDemoContainer } from './demos/player-audio-player-demo
         <p class="text-muted-foreground">
           A playlist of three tracks: the waveform seeks (click, drag, or the
           arrows), the next track plays when one ends, shuffle and repeat.
-          Focused, the keys work: Space or K, J and L, the arrows, M, N and P,
-          0–9.
+          Focused, the keys work: <kbd scKbd>Space</kbd> or <kbd scKbd>K</kbd>,
+          <kbd scKbd>J</kbd> and <kbd scKbd>L</kbd>, the arrows,
+          <kbd scKbd>M</kbd>, <kbd scKbd>N</kbd> and <kbd scKbd>P</kbd>,
+          <kbd scKbd>0</kbd>–<kbd scKbd>9</kbd>.
         </p>
         <app-player-audio-player-demo-container />
       </section>

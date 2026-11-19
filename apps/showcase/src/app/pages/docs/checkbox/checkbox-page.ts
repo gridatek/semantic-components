@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -20,6 +20,7 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
 @Component({
   selector: 'app-checkbox-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     CheckboxUsageDemoContainer,
@@ -70,8 +71,9 @@ import { TableCheckboxDemoContainer } from './demos/table-checkbox-demo-containe
         <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            A native checkbox: Tab reaches it, Space toggles it; its box and
-            mark are its own (CSS), nothing extra for screen readers.
+            A native checkbox: <kbd scKbd>Tab</kbd> reaches it,
+            <kbd scKbd>Space</kbd> toggles it; its box and mark are its own
+            (CSS), nothing extra for screen readers.
           </li>
           <li>
             Name it by its text: a label round both (label scField

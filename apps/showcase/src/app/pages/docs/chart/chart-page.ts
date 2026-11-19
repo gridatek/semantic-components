@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ScFrame,
+  ScKbd,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -21,6 +22,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
 @Component({
   selector: 'app-chart-page',
   imports: [
+    ScKbd,
     ChartUsageDemoContainer,
     Anatomy,
     ScTable,
@@ -82,8 +84,10 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: on focus,
-            the first category; the arrow keys, Home and End move between them;
-            Escape closes the tooltip. A tap points like the pointer.
+            the first category; the arrow keys, <kbd scKbd>Home</kbd> and
+            <kbd scKbd>End</kbd> move between them;
+            <kbd scKbd>Escape</kbd> closes the tooltip. A tap points like the
+            pointer.
           </li>
           <li>
             As the keyboard moves, screen readers hear what the tooltip says —

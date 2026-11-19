@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicTimeClockDemoContainer } from './demos/basic-time-clock-demo-container';
@@ -12,6 +12,7 @@ import { StepTimeClockDemoContainer } from './demos/step-time-clock-demo-contain
 @Component({
   selector: 'app-time-clock-page',
   imports: [
+    ScKbd,
     BasicTimeClockDemoContainer,
     LocaleTimeClockDemoContainer,
     StepTimeClockDemoContainer,
@@ -37,8 +38,10 @@ import { StepTimeClockDemoContainer } from './demos/step-time-clock-demo-contain
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           The hour, then the minute: drag or click the hand, or the keyboard on
-          the dial (arrows, Page Up/Down, Home/End, Enter). The header shows the
-          time and switches the view; AM and PM in 12 hours.
+          the dial (arrows, <kbd scKbd>Page Up</kbd>/Down,
+          <kbd scKbd>Home</kbd>/<kbd scKbd>End</kbd>, <kbd scKbd>Enter</kbd>).
+          The header shows the time and switches the view; AM and PM in 12
+          hours.
         </p>
         <app-basic-time-clock-demo-container />
       </section>

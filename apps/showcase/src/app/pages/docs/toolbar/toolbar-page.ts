@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -15,6 +15,7 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
 @Component({
   selector: 'app-toolbar-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     ToolbarUsageDemoContainer,
@@ -34,7 +35,8 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
         <h1 scTypeset>Toolbar</h1>
         <p class="text-muted-foreground">
           A row of controls of any kind — buttons, toggles, selects, links, an
-          input — with one Tab stop and the arrow keys between them.
+          input — with one <kbd scKbd>Tab</kbd> stop and the arrow keys between
+          them.
         </p>
         <app-component-badges path="toolbar" />
       </div>
@@ -59,9 +61,10 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
         <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            role=&quot;toolbar&quot;: one Tab stop; the arrow keys move between
-            its widgets (Left and Right mirrored right to left, Up and Down when
-            vertical), wrapping at the ends; Home and End to the ends.
+            role=&quot;toolbar&quot;: one <kbd scKbd>Tab</kbd> stop; the arrow
+            keys move between its widgets (Left and Right mirrored right to
+            left, Up and Down when vertical), wrapping at the ends;
+            <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> to the ends.
           </li>
           <li>
             A disabled widget stays reachable (softDisabled), announced as
@@ -77,7 +80,7 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
           </li>
           <li>
             A toggle group on its own (not in a toolbar) is the Toggle Group:
-            its own Tab stop and arrow keys.
+            its own <kbd scKbd>Tab</kbd> stop and arrow keys.
           </li>
         </ul>
       </section>

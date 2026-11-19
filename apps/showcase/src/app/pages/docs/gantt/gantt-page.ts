@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicGanttDemoContainer } from './demos/basic-gantt-demo-container';
@@ -10,6 +10,7 @@ import { ScalesGanttDemoContainer } from './demos/scales-gantt-demo-container';
 @Component({
   selector: 'app-gantt-page',
   imports: [
+    ScKbd,
     BasicGanttDemoContainer,
     ScalesGanttDemoContainer,
     MilestonesGanttDemoContainer,
@@ -25,9 +26,11 @@ import { ScalesGanttDemoContainer } from './demos/scales-gantt-demo-container';
         <p class="text-muted-foreground">
           A Data Table with a timeline column: each row's bar from its start to
           its end, its progress, arrows to the tasks that follow. Drag a bar,
-          its ends or its progress; or, on a row, Alt+←/→ moves it a day,
-          Alt+Shift+←/→ its end, Alt+↑/↓ its progress. The bar proposes the
-          change, your data applies it.
+          its ends or its progress; or, on a row,
+          <kbd scKbd>Alt + ←/→</kbd> moves it a day,
+          <kbd scKbd>Alt + Shift + ←/→</kbd> its end,
+          <kbd scKbd>Alt + ↑/↓</kbd> its progress. The bar proposes the change,
+          your data applies it.
         </p>
         <app-component-badges path="gantt" />
       </div>

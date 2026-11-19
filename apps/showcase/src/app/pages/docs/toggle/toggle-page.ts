@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -15,6 +15,7 @@ import { WithTextToggleDemoContainer } from './demos/with-text-toggle-demo-conta
 @Component({
   selector: 'app-toggle-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     ToggleUsageDemoContainer,
@@ -57,13 +58,14 @@ import { WithTextToggleDemoContainer } from './demos/with-text-toggle-demo-conta
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             A native button with aria-pressed: announced as a toggle button,
-            pressed or not; Tab reaches it, Space and Enter press it.
+            pressed or not; <kbd scKbd>Tab</kbd> reaches it,
+            <kbd scKbd>Space</kbd> and <kbd scKbd>Enter</kbd> press it.
           </li>
           <li>
             Its name stays the same as it toggles: its text, or an icon with
             sr-only text.
           </li>
-          <li>Disabled: out of the Tab order, dimmed.</li>
+          <li>Disabled: out of the <kbd scKbd>Tab</kbd> order, dimmed.</li>
         </ul>
       </section>
 

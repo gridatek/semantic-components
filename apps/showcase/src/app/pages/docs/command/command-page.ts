@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -19,6 +19,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
 @Component({
   selector: 'app-command-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     CommandUsageDemoContainer,
@@ -42,7 +43,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
         <h1 scTypeset>Command</h1>
         <p class="text-muted-foreground">
           A search over commands: typing filters them, the arrows move the
-          highlight, Enter runs it.
+          highlight, <kbd scKbd>Enter</kbd> runs it.
         </p>
         <app-component-badges path="command" />
       </div>
@@ -73,8 +74,12 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
           </li>
           <li>
             Up and Down move the highlight (round from the last item with
-            loopFocus), Ctrl+N and Ctrl+P (or J and K) too; Alt+Up and Alt+Down
-            jump between groups; Enter runs the highlighted item. Home and End
+            loopFocus), <kbd scKbd>Ctrl + N</kbd> and
+            <kbd scKbd>Ctrl + P</kbd> (or <kbd scKbd>J</kbd> and
+            <kbd scKbd>K</kbd>) too; <kbd scKbd>Alt + Up</kbd> and
+            <kbd scKbd>Alt + Down</kbd> jump between groups;
+            <kbd scKbd>Enter</kbd> runs the highlighted item.
+            <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd>
             stay the search&apos;s. The first match is always highlighted.
           </li>
           <li>
@@ -85,9 +90,9 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
             results as they change ("3 results").
           </li>
           <li>
-            In a dialog: focus in the search when it opens, Escape closes it,
-            focus back to what opened it. Write its title and description
-            (sr-only).
+            In a dialog: focus in the search when it opens,
+            <kbd scKbd>Escape</kbd> closes it, focus back to what opened it.
+            Write its title and description (sr-only).
           </li>
         </ul>
       </section>

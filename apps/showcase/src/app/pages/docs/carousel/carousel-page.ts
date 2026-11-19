@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
@@ -18,6 +18,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
 @Component({
   selector: 'app-carousel-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     EntryInstall,
@@ -80,8 +81,9 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
             and its place (aria-label, from index() and count(): "2 of 5").
           </li>
           <li>
-            With focus inside, the arrow keys move: ← and → (mirrored right to
-            left), ↑ and ↓ when vertical.
+            With focus inside, the arrow keys move: <kbd scKbd>←</kbd> and
+            <kbd scKbd>→</kbd> (mirrored right to left), <kbd scKbd>↑</kbd> and
+            <kbd scKbd>↓</kbd> when vertical.
           </li>
           <li>
             The buttons are disabled at either end (unless it loops); name them

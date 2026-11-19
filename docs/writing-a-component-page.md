@@ -25,6 +25,7 @@ In this order (the Button page is the model, `pages/docs/button/button-page.ts`)
 5. **Examples** — one demo per example, in the order of shadcn's page when shadcn has the component; an **RTL** demo last.
 6. **API reference** — every part: its selector, then a table of its inputs (Input, Type, Default, Description) in a scrollable `scTableContainer` (`tabindex="0"`, `role="region"`, named), and its outputs and what it exports.
    Use the showcase's shared tables, never hand-written table markup: `<app-parts-table label="Accordion parts" [parts]="parts" />` (`components/parts-table`: Part, Selector, Description) and `<app-api-table label="ScBadge inputs" [inputs]="inputs" />` (`components/api-table`: Input, Type, Default, Description) — one look on every page. A table that isn't an API list (a page's keys, CSS variables, statuses) is the library's Table, its cells in the same style: plain `font-mono text-sm` code (no `bg-muted` chips), one value per line, keys in `scKbd`.
+   Any key named in a page's text is `<kbd scKbd>` too — Tab, Enter, Escape, the arrows (← → ↑ ↓), letters, combinations written `Ctrl + Shift + Z` — never plain text or a hand-styled chip; a typed character (Markdown's `#`) is `<kbd scKbd class="font-mono">`, with no space inside.
 
 ## File Structure
 

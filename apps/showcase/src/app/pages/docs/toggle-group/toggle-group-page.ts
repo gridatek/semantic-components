@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -18,6 +18,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
 @Component({
   selector: 'app-toggle-group-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     ToggleGroupUsageDemoContainer,
@@ -65,9 +66,11 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
         <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            One Tab stop: the arrow keys move between the items (Left and Right
-            mirrored right to left; Up and Down when vertical), Home and End to
-            the ends; Space and Enter press one.
+            One <kbd scKbd>Tab</kbd> stop: the arrow keys move between the items
+            (<kbd scKbd>←</kbd> and <kbd scKbd>→</kbd> mirrored right to left;
+            <kbd scKbd>↑</kbd> and <kbd scKbd>↓</kbd> when vertical),
+            <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> to the ends;
+            <kbd scKbd>Space</kbd> and <kbd scKbd>Enter</kbd> press one.
           </li>
           <li>
             Each item a button with aria-pressed; its name stays the same as it
@@ -79,8 +82,8 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
             (role=&quot;group&quot;, the CDK&apos;s FocusKeyManager), not
             Angular Aria&apos;s Toolbar: a toolbar is its own component
             (scToolbar), with its widget group (scToolbarWidgetGroup) sharing
-            the toolbar&apos;s Tab stop and arrow keys. You choose: a toggle
-            group on its own, or a toolbar.
+            the toolbar&apos;s <kbd scKbd>Tab</kbd> stop and arrow keys. You
+            choose: a toggle group on its own, or a toolbar.
           </li>
         </ul>
       </section>

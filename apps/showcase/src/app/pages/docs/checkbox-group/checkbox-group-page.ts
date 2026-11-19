@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -14,6 +14,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
 @Component({
   selector: 'app-checkbox-group-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     CheckboxGroupUsageDemoContainer,
@@ -56,8 +57,9 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
         <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            Native checkboxes: each a Tab stop, Space ticks it; a parent is
-            announced as mixed when only some are ticked.
+            Native checkboxes: each a <kbd scKbd>Tab</kbd> stop,
+            <kbd scKbd>Space</kbd> ticks it; a parent is announced as mixed when
+            only some are ticked.
           </li>
           <li>
             Name the group: a fieldset&apos;s legend round it, aria-labelledby

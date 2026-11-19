@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -12,6 +12,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
 @Component({
   selector: 'app-pdf-viewer-page',
   imports: [
+    ScKbd,
     EntryInstall,
     PdfViewerDemoContainer,
     PdfViewerFormDemoContainer,
@@ -93,8 +94,8 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
         <h2 scTypeset appToc>Presentation mode</h2>
         <p class="text-muted-foreground">
           One page at a time, fitted to the screen, in fullscreen. Click, the
-          arrow keys, the wheel or a swipe turn the page; Escape leaves and
-          restores the view.
+          arrow keys, the wheel or a swipe turn the page;
+          <kbd scKbd>Escape</kbd> leaves and restores the view.
         </p>
         <app-pdf-viewer-presentation-demo-container />
       </section>
@@ -115,14 +116,15 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
           browsing (F7) on, tell the viewer (<code
             class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >caretBrowsing</code
-          >) and ↑ / ↓ move the caret line by line through the text.
+          >) and <kbd scKbd>↑</kbd> / <kbd scKbd>↓</kbd> move the caret line by
+          line through the text.
         </p>
         <app-pdf-viewer-reading-demo-container />
         <p class="text-muted-foreground">
-          Zoom goes from 10% to 2500% (Ctrl + wheel or pinch around the
-          pointer): past what a canvas can hold, the visible part is drawn sharp
-          on its own. Tagged PDFs expose their structure — headings, lists,
-          tables, figures with alt text — to screen readers. With
+          Zoom goes from 10% to 2500% (<kbd scKbd>Ctrl</kbd> + wheel or pinch
+          around the pointer): past what a canvas can hold, the visible part is
+          drawn sharp on its own. Tagged PDFs expose their structure — headings,
+          lists, tables, figures with alt text — to screen readers. With
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >enablePermissions</code
           >, a document that forbids copying, printing, annotating or filling in

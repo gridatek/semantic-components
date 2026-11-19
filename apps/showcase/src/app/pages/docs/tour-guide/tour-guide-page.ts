@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ControlledTourGuideDemoContainer } from './demos/controlled-tour-guide-demo-container';
@@ -10,6 +10,7 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
 @Component({
   selector: 'app-tour-guide-page',
   imports: [
+    ScKbd,
     TourTourGuideDemoContainer,
     MinimalTourGuideDemoContainer,
     ScrollingTourGuideDemoContainer,
@@ -35,8 +36,8 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
         <h2 scTypeset appToc>Tour</h2>
         <p class="text-muted-foreground">
           A welcome (centred, no target), three steps on their targets — the
-          page dimmed but for each — and a farewell. ← → step; Escape, or the ×,
-          ends it.
+          page dimmed but for each — and a farewell. <kbd scKbd>←</kbd>
+          <kbd scKbd>→</kbd> step; <kbd scKbd>Escape</kbd>, or the ×, ends it.
         </p>
         <app-tour-tour-guide-demo-container />
       </section>

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import {
   type ApiInput,
@@ -18,6 +18,7 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
 @Component({
   selector: 'app-pie-chart-page',
   imports: [
+    ScKbd,
     PieChartUsageDemoContainer,
     Anatomy,
     ApiTable,
@@ -73,8 +74,8 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: the arrow
-            keys, Home and End move through its slices; Escape closes the
-            tooltip.
+            keys, <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> move through
+            its slices; <kbd scKbd>Escape</kbd> closes the tooltip.
           </li>
           <li>
             As the keyboard moves, screen readers hear what the tooltip says,
@@ -83,7 +84,7 @@ import { StackedPieChartDemoContainer } from './demos/stacked-pie-chart-demo-con
           <li>
             Right to left, with the app following the direction
             (charts.followDirection), it is mirrored — from 9 o’clock, clockwise
-            — and ← goes to the next.
+            — and <kbd scKbd>←</kbd> goes to the next.
           </li>
           <li>
             With reduced motion (prefers-reduced-motion), it appears and changes

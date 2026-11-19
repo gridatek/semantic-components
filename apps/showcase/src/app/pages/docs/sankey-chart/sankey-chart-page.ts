@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import {
   type ApiInput,
@@ -15,6 +15,7 @@ import { SankeyChartUsageDemoContainer } from './demos/sankey-chart-usage-demo-c
 @Component({
   selector: 'app-sankey-chart-page',
   imports: [
+    ScKbd,
     SankeyChartUsageDemoContainer,
     Anatomy,
     ApiTable,
@@ -67,8 +68,8 @@ import { SankeyChartUsageDemoContainer } from './demos/sankey-chart-usage-demo-c
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: the arrow
-            keys, Home and End move through its flows; Escape closes the
-            tooltip.
+            keys, <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> move through
+            its flows; <kbd scKbd>Escape</kbd> closes the tooltip.
           </li>
           <li>
             As the keyboard moves, screen readers hear what the tooltip says,
@@ -77,7 +78,7 @@ import { SankeyChartUsageDemoContainer } from './demos/sankey-chart-usage-demo-c
           <li>
             Right to left, with the app following the direction
             (charts.followDirection), it is mirrored — flowing from the right —
-            and ← goes to the next.
+            and <kbd scKbd>←</kbd> goes to the next.
           </li>
           <li>It draws whole at once: Recharts&apos; has no animation.</li>
         </ul>

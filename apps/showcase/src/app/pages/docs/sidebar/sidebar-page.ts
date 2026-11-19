@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -25,6 +25,7 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
 @Component({
   selector: 'app-sidebar-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     SidebarUsageDemoContainer,
@@ -94,8 +95,8 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
           </li>
           <li>
             On a phone it is a sheet: a dialog named by the sidebar&apos;s
-            aria-label, focus kept inside, closed by Escape or by following a
-            link.
+            aria-label, focus kept inside, closed by <kbd scKbd>Escape</kbd> or
+            by following a link.
           </li>
           <li>
             The page shown is marked on its link (active: aria-current).

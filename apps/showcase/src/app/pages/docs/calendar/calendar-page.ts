@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -25,6 +25,7 @@ import { WeekNumbersCalendarDemoContainer } from './demos/week-numbers-calendar-
 @Component({
   selector: 'app-calendar-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     CalendarUsageDemoContainer,
@@ -83,8 +84,11 @@ import { WeekNumbersCalendarDemoContainer } from './demos/week-numbers-calendar-
             word — days, months, the heading — from Intl, in the locale.
           </li>
           <li>
-            One Tab stop: the focused day. The arrows, Home and End, Page Up and
-            Page Down (with Shift, years) move it, across months; Enter or Space
+            One <kbd scKbd>Tab</kbd> stop: the focused day. The arrows,
+            <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd>,
+            <kbd scKbd>Page Up</kbd> and <kbd scKbd>Page Down</kbd> (with
+            <kbd scKbd>Shift</kbd>, years) move it, across months;
+            <kbd scKbd>Enter</kbd> or <kbd scKbd>Space</kbd>
             picks it. The heading zooms out: months, then years.
           </li>
           <li>

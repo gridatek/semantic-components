@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -15,6 +15,7 @@ import { TooltipUsageDemoContainer } from './demos/tooltip-usage-demo-container'
 @Component({
   selector: 'app-tooltip-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     TooltipUsageDemoContainer,
@@ -62,8 +63,8 @@ import { TooltipUsageDemoContainer } from './demos/tooltip-usage-demo-container'
             (role=&quot;tooltip&quot;, aria-describedby) while open.
           </li>
           <li>
-            Keyboard focus opens it at once; Escape, blur or a click closes it.
-            The pointer can move onto it without closing it.
+            Keyboard focus opens it at once; <kbd scKbd>Escape</kbd>, blur or a
+            click closes it. The pointer can move onto it without closing it.
           </li>
           <li>
             It doesn&apos;t open on touch: what matters goes in the page, or in

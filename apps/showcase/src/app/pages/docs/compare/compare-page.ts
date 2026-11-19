@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicCompareDemoContainer } from './demos/basic-compare-demo-container';
@@ -11,6 +11,7 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
 @Component({
   selector: 'app-compare-page',
   imports: [
+    ScKbd,
     BasicCompareDemoContainer,
     VerticalCompareDemoContainer,
     HoverCompareDemoContainer,
@@ -36,8 +37,10 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
         <h2 scTypeset appToc>Basic</h2>
         <p class="text-muted-foreground">
           Two photos, before and after an edit. Drag the divider, click anywhere
-          to move it there, or focus it: the arrows move it (Shift: by 10), Home
-          and End to the ends. The labels fade while the divider covers them.
+          to move it there, or focus it: the arrows move it (<kbd scKbd
+            >Shift</kbd
+          >: by 10), <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> to the ends.
+          The labels fade while the divider covers them.
         </p>
         <app-basic-compare-demo-container />
       </section>

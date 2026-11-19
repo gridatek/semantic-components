@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -12,6 +12,7 @@ import { RtlInputButtonDemoContainer } from './demos/rtl-input-button-demo-conta
 @Component({
   selector: 'app-input-button-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     InputButtonUsageDemoContainer,
@@ -51,8 +52,9 @@ import { RtlInputButtonDemoContainer } from './demos/rtl-input-button-demo-conta
         <h2 scTypeset appToc>Accessibility</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            A button, not a field: read as one, pressed with Enter or Space.
-            What it opens (a dialog, a palette) does the searching.
+            A button, not a field: read as one, pressed with
+            <kbd scKbd>Enter</kbd> or <kbd scKbd>Space</kbd>. What it opens (a
+            dialog, a palette) does the searching.
           </li>
           <li>
             Its name is its text; icon only, give it sr-only text. Name a

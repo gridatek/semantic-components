@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -15,6 +15,7 @@ import { RtlAccordionDemoContainer } from './demos/rtl-accordion-demo-container'
 @Component({
   selector: 'app-accordion-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     AccordionUsageDemoContainer,
@@ -69,10 +70,12 @@ import { RtlAccordionDemoContainer } from './demos/rtl-accordion-demo-container'
         <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            Tab moves between the triggers; Enter or Space opens or closes.
+            <kbd scKbd>Tab</kbd> moves between the triggers;
+            <kbd scKbd>Enter</kbd> or <kbd scKbd>Space</kbd> opens or closes.
           </li>
           <li>
-            ArrowDown and ArrowUp move between the triggers too, Home and End to
+            <kbd scKbd>ArrowDown</kbd> and <kbd scKbd>ArrowUp</kbd> move between
+            the triggers too, <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> to
             the first and last (Angular Aria&apos;s).
           </li>
           <li>A disabled item is reached, not opened.</li>

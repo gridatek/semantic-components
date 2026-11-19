@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import {
   type ApiInput,
@@ -16,6 +16,7 @@ import { ScatterChartUsageDemoContainer } from './demos/scatter-chart-usage-demo
 @Component({
   selector: 'app-scatter-chart-page',
   imports: [
+    ScKbd,
     ScatterChartUsageDemoContainer,
     Anatomy,
     ApiTable,
@@ -68,8 +69,8 @@ import { ScatterChartUsageDemoContainer } from './demos/scatter-chart-usage-demo
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: the arrow
-            keys, Home and End move through its points; Escape closes the
-            tooltip.
+            keys, <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> move through
+            its points; <kbd scKbd>Escape</kbd> closes the tooltip.
           </li>
           <li>
             As the keyboard moves, screen readers hear what the tooltip says,

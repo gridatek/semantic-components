@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AppsDockDemoContainer } from './demos/apps-dock-demo-container';
@@ -10,6 +10,7 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
 @Component({
   selector: 'app-dock-page',
   imports: [
+    ScKbd,
     AppsDockDemoContainer,
     NavigationDockDemoContainer,
     VerticalDockDemoContainer,
@@ -34,8 +35,8 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
         <p class="text-muted-foreground">
           A launcher: the items near the pointer grow, their neighbours move
           aside. Dots for open apps, a count on Mail, a separator before the
-          bin. From the keyboard, Tab: the focused item grows and shows its
-          name.
+          bin. From the keyboard, <kbd scKbd>Tab</kbd>: the focused item grows
+          and shows its name.
         </p>
         <app-apps-dock-demo-container />
       </section>

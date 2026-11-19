@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CardsMasonryGridDemoContainer } from './demos/cards-masonry-grid-demo-container';
@@ -10,6 +10,7 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
 @Component({
   selector: 'app-masonry-grid-page',
   imports: [
+    ScKbd,
     PhotosMasonryGridDemoContainer,
     CardsMasonryGridDemoContainer,
     MoreMasonryGridDemoContainer,
@@ -24,8 +25,9 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
         <h1 scTypeset>Masonry Grid</h1>
         <p class="text-muted-foreground">
           Items of any height packed into columns by width, the source order
-          kept for reading and Tab; laid out again whenever anything changes
-          size, the moves animated; native where the browser can.
+          kept for reading and <kbd scKbd>Tab</kbd>; laid out again whenever
+          anything changes size, the moves animated; native where the browser
+          can.
         </p>
         <app-component-badges path="masonry-grid" />
       </div>

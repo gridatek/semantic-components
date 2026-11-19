@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
@@ -19,6 +19,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
 @Component({
   selector: 'app-context-menu-page',
   imports: [
+    ScKbd,
     PartsTable,
     Anatomy,
     ContextMenuUsageDemoContainer,
@@ -42,8 +43,8 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
         <h1 scTypeset>Context Menu</h1>
         <p class="text-muted-foreground">
           A menu at the pointer, opened by a right-click on an area — a long
-          press on touch, Shift+F10 or the Menu key on the focused area. In the
-          look of the app&apos;s style.
+          press on touch, <kbd scKbd>Shift + F10</kbd> or the Menu key on the
+          focused area. In the look of the app&apos;s style.
         </p>
         <app-component-badges path="context-menu" />
       </div>
@@ -68,17 +69,19 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
         <h2 scTypeset appToc>Keyboard</h2>
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
-            The area is focusable: Shift+F10 or the Menu key opens the menu on
-            it, with its first item highlighted. A right-click opens it with
-            nothing highlighted, until the pointer moves or a key is pressed.
+            The area is focusable: <kbd scKbd>Shift + F10</kbd> or the Menu key
+            opens the menu on it, with its first item highlighted. A right-click
+            opens it with nothing highlighted, until the pointer moves or a key
+            is pressed.
           </li>
           <li>
             In the menu, the Menu&apos;s keys: the arrows move, a submenu opens
-            toward the reading end, Enter or Space chooses.
+            toward the reading end, <kbd scKbd>Enter</kbd> or
+            <kbd scKbd>Space</kbd> chooses.
           </li>
           <li>
-            Escape, a click outside or a choice closes it; focus goes back to
-            the area.
+            <kbd scKbd>Escape</kbd>, a click outside or a choice closes it;
+            focus goes back to the area.
           </li>
         </ul>
       </section>
