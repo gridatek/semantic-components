@@ -72,17 +72,16 @@ import { ThemeMenu } from './theme-menu';
 
       <div class="ms-auto flex items-center gap-2">
         <app-theme-menu />
+        <button scHeaderMobileMenuToggle class="-me-2">
+          @if (header.mobileMenuOpen()) {
+            <svg siXIcon></svg>
+            <span class="sr-only">Close menu</span>
+          } @else {
+            <svg siMenuIcon></svg>
+            <span class="sr-only">Open menu</span>
+          }
+        </button>
       </div>
-
-      <button scHeaderMobileMenuToggle class="-me-2">
-        @if (header.mobileMenuOpen()) {
-          <svg siXIcon></svg>
-          <span class="sr-only">Close menu</span>
-        } @else {
-          <svg siMenuIcon></svg>
-          <span class="sr-only">Open menu</span>
-        }
-      </button>
 
       <ng-template scHeaderMobileMenu>
         <nav aria-label="Main">

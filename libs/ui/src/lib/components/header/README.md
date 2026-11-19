@@ -33,17 +33,16 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 
   <div class="ms-auto flex items-center gap-2">
     <a scLink variant="button" routerLink="/start">Get started</a>
+    <button scHeaderMobileMenuToggle class="-me-2">
+      @if (header.mobileMenuOpen()) {
+      <svg siXIcon></svg>
+      <span class="sr-only">Close menu</span>
+      } @else {
+      <svg siMenuIcon></svg>
+      <span class="sr-only">Open menu</span>
+      }
+    </button>
   </div>
-
-  <button scHeaderMobileMenuToggle class="-me-2">
-    @if (header.mobileMenuOpen()) {
-    <svg siXIcon></svg>
-    <span class="sr-only">Close menu</span>
-    } @else {
-    <svg siMenuIcon></svg>
-    <span class="sr-only">Open menu</span>
-    }
-  </button>
 
   <ng-template scHeaderMobileMenu>
     <nav aria-label="Main">

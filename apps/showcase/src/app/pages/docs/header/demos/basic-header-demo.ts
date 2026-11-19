@@ -57,16 +57,16 @@ import {
         <a scLink variant="button" href="/docs/getting-started/introduction"
           >Get started</a
         >
+        <button scHeaderMobileMenuToggle class="-me-2">
+          @if (header.mobileMenuOpen()) {
+            <svg siXIcon></svg>
+            <span class="sr-only">Close menu</span>
+          } @else {
+            <svg siMenuIcon></svg>
+            <span class="sr-only">Open menu</span>
+          }
+        </button>
       </div>
-      <button scHeaderMobileMenuToggle class="-me-2">
-        @if (header.mobileMenuOpen()) {
-          <svg siXIcon></svg>
-          <span class="sr-only">Close menu</span>
-        } @else {
-          <svg siMenuIcon></svg>
-          <span class="sr-only">Open menu</span>
-        }
-      </button>
       <ng-template scHeaderMobileMenu>
         <nav aria-label="Main">
           @for (link of links; track link) {
