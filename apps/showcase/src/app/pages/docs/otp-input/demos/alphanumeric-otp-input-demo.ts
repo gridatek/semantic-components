@@ -8,7 +8,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** validationType="alphanumeric": letters and digits — recovery and invite codes. */
 @Component({

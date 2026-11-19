@@ -35,7 +35,11 @@ import {
     <div class="space-y-2">
       <div scField class="w-fit">
         <label scLabel>One-time password</label>
-        <div scOtpInput slotLabel="Character {index} of {length}" [(value)]="code">
+        <div
+          scOtpInput
+          slotLabel="Character {index} of {length}"
+          [(value)]="code"
+        >
           <div scOtpInputGroup>
             <input scOtpInputSlot />
             <input scOtpInputSlot />

@@ -42,7 +42,12 @@ import {
   template: \`
     <div scField class="w-fit">
       <label scLabel>PIN</label>
-      <div scOtpInput slotLabel="Character {index} of {length}" mask [formField]="otpForm.pin">
+      <div
+        scOtpInput
+        slotLabel="Character {index} of {length}"
+        mask
+        [formField]="otpForm.pin"
+      >
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />

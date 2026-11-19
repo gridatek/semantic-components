@@ -8,7 +8,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Six characters, one input each: typed in order, pasted or autofilled from an SMS. */
 @Component({

@@ -28,7 +28,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Chunks of two, separators between them. */
 @Component({
@@ -45,7 +44,11 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div scField class="w-fit">
       <label scLabel>Verification code</label>
-      <div scOtpInput slotLabel="Character {index} of {length}" [formField]="otpForm.code">
+      <div
+        scOtpInput
+        slotLabel="Character {index} of {length}"
+        [formField]="otpForm.code"
+      >
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />

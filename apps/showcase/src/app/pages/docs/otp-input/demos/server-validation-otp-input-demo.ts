@@ -21,7 +21,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /**
  * Stands in for the server: the code is right if it is 123456, after a

@@ -41,7 +41,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /**
  * Stands in for the server: the code is right if it is 123456, after a
@@ -70,7 +69,11 @@ async function verifyOnServer(code: string): Promise<boolean> {
     <div class="w-72 space-y-4">
       <div scField class="w-fit">
         <label scLabel>Verification code</label>
-        <div scOtpInput slotLabel="Character {index} of {length}" [formField]="otpForm.code">
+        <div
+          scOtpInput
+          slotLabel="Character {index} of {length}"
+          [formField]="otpForm.code"
+        >
           <div scOtpInputGroup>
             <input scOtpInputSlot />
             <input scOtpInputSlot />

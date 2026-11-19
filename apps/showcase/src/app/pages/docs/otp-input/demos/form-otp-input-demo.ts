@@ -17,7 +17,7 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon, SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
+import { SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
 
 /** In a card: a bigger code, a resend button beside its label, its errors once left. */
 @Component({

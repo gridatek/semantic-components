@@ -9,7 +9,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** In a right-to-left page: filled from the right; the arrows mirrored. */
 @Component({

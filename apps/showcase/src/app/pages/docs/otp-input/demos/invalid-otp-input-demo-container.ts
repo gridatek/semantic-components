@@ -29,7 +29,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Required and six long, touched and short: marked invalid, its errors shown (Signal Forms). */
 @Component({
@@ -47,7 +46,11 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div scField class="w-fit">
       <label scLabel>Verification code</label>
-      <div scOtpInput slotLabel="Character {index} of {length}" [formField]="otpForm.code">
+      <div
+        scOtpInput
+        slotLabel="Character {index} of {length}"
+        [formField]="otpForm.code"
+      >
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />

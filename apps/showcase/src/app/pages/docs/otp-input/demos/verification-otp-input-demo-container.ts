@@ -30,7 +30,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Complete — every input filled — it can be checked: complete() and data-complete. */
 @Component({
@@ -53,7 +52,9 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
         <p scFieldDescription class="text-center">
           We sent a code to your email address.
         </p>
-        <div scOtpInput slotLabel="Character {index} of {length}"
+        <div
+          scOtpInput
+          slotLabel="Character {index} of {length}"
           #otp="scOtpInput"
           [formField]="otpForm.code"
           class="mx-auto"

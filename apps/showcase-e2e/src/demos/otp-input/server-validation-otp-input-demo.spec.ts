@@ -3,7 +3,11 @@ import { type Page, expect, test } from '../../test';
 
 /** Types a code from the start, over whatever was there. */
 async function enter(page: Page, code: string): Promise<void> {
-  await page.getByRole('textbox', { name: 'Verification code' }).click();
+  await page
+    .getByRole('group', { name: 'Verification code' })
+    .getByRole('textbox')
+    .first()
+    .click();
   await type(page, code);
 }
 
@@ -22,7 +26,10 @@ test.describe('OTP input — validation with a server call', () => {
     const field = page.locator('[data-slot=field]');
     const status = page.getByRole('status');
     const message = page.getByRole('alert');
-    const first = page.getByRole('textbox', { name: 'Verification code' });
+    const first = page
+      .getByRole('group', { name: 'Verification code' })
+      .getByRole('textbox')
+      .first();
 
     // Incomplete: no server call.
     await enter(page, '123');

@@ -28,7 +28,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** validationType="alphanumeric": letters and digits — recovery and invite codes. */
 @Component({
@@ -45,7 +44,12 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div scField class="w-fit">
       <label scLabel>Recovery code</label>
-      <div scOtpInput slotLabel="Character {index} of {length}" validationType="alphanumeric" [formField]="otpForm.code">
+      <div
+        scOtpInput
+        slotLabel="Character {index} of {length}"
+        validationType="alphanumeric"
+        [formField]="otpForm.code"
+      >
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />

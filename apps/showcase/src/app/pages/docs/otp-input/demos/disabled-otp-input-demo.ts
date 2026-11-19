@@ -8,7 +8,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Disabled in the schema: dimmed, out of reach. */
 @Component({

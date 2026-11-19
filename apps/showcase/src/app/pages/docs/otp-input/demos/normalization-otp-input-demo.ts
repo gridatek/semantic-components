@@ -8,7 +8,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** normalizeValue: accepted text uppercased before it is kept. */
 @Component({

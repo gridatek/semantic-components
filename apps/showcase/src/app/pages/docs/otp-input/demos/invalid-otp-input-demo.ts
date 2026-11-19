@@ -9,7 +9,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Required and six long, touched and short: marked invalid, its errors shown (Signal Forms). */
 @Component({

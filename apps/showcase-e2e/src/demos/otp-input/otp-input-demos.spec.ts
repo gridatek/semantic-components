@@ -70,7 +70,10 @@ test('Digits only: letters dropped, digits of any script kept as ASCII', async (
   page,
 }) => {
   await page.goto(demo('digits-only'));
-  const first = page.getByRole('textbox', { name: 'Digits Only' });
+  const first = page
+    .getByRole('group', { name: 'Digits Only' })
+    .getByRole('textbox')
+    .first();
   await first.click();
   await type(page, 'a٣३');
   await expect(first).toHaveValue('3');
@@ -97,11 +100,18 @@ test('A code pasted or autofilled into the first input fills them all', async ({
 
 test('Custom normalization: uppercased', async ({ page }) => {
   await page.goto(demo('normalization'));
-  await page.getByRole('textbox', { name: 'Invite code' }).click();
+  await page
+    .getByRole('group', { name: 'Invite code' })
+    .getByRole('textbox')
+    .first()
+    .click();
   await type(page, 'ab');
-  await expect(page.getByRole('textbox', { name: 'Invite code' })).toHaveValue(
-    'A',
-  );
+  await expect(
+    page
+      .getByRole('group', { name: 'Invite code' })
+      .getByRole('textbox')
+      .first(),
+  ).toHaveValue('A');
 });
 
 test('Masked entry: password inputs', async ({ page }) => {
@@ -115,7 +125,10 @@ test('Masked entry: password inputs', async ({ page }) => {
 test('Invalid: marked once touched, its error shown', async ({ page }) => {
   await page.goto(demo('invalid'));
   await expect(
-    page.getByRole('textbox', { name: 'Verification code' }),
+    page
+      .getByRole('group', { name: 'Verification code' })
+      .getByRole('textbox')
+      .first(),
   ).toHaveAttribute('aria-invalid', 'true');
   await expect(page.getByText('Enter all 6 digits.')).toBeVisible();
 });
@@ -130,7 +143,11 @@ test('Verification: complete() once every input is filled', async ({
   page,
 }) => {
   await page.goto(demo('verification'));
-  await page.getByRole('textbox', { name: 'Enter verification code' }).click();
+  await page
+    .getByRole('group', { name: 'Enter verification code' })
+    .getByRole('textbox')
+    .first()
+    .click();
   await type(page, '123456');
   await expect(page.getByRole('status')).toHaveText('Verifying 123456…');
 });
@@ -139,7 +156,10 @@ test('RTL: in a right-to-left section, ArrowLeft goes to the next input', async 
   page,
 }) => {
   await page.goto(demo('rtl'));
-  const first = page.getByRole('textbox', { name: 'رمز التحقق' });
+  const first = page
+    .getByRole('group', { name: 'رمز التحقق' })
+    .getByRole('textbox')
+    .first();
   await first.click();
   await type(page, '123');
   await press(page, 'Home');

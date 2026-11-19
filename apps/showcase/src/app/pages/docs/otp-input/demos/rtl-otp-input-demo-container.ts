@@ -29,7 +29,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** In a right-to-left page: filled from the right; the arrows mirrored. */
 @Component({
@@ -48,7 +47,11 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
     <div dir="rtl" lang="ar">
       <div scField class="w-fit">
         <label scLabel>رمز التحقق</label>
-        <div scOtpInput slotLabel="الحرف {index} من {length}" [formField]="otpForm.code">
+        <div
+          scOtpInput
+          slotLabel="الحرف {index} من {length}"
+          [formField]="otpForm.code"
+        >
           <div scOtpInputGroup>
             <input scOtpInputSlot />
             <input scOtpInputSlot />

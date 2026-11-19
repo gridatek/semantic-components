@@ -24,7 +24,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Six characters, one input each: typed in order, pasted or autofilled from an SMS. */
 @Component({
@@ -41,7 +40,11 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div scField class="w-fit">
       <label scLabel>Verification code</label>
-      <div scOtpInput slotLabel="Character {index} of {length}" [formField]="otpForm.code">
+      <div
+        scOtpInput
+        slotLabel="Character {index} of {length}"
+        [formField]="otpForm.code"
+      >
         <div scOtpInputGroup>
           <input scOtpInputSlot />
           <input scOtpInputSlot />

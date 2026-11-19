@@ -28,7 +28,6 @@ import {
   ScOtpInputSlot,
   ScSeparator,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** normalizeValue: accepted text uppercased before it is kept. */
 @Component({
@@ -45,7 +44,9 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div scField class="w-fit">
       <label scLabel>Invite code</label>
-      <div scOtpInput slotLabel="Character {index} of {length}"
+      <div
+        scOtpInput
+        slotLabel="Character {index} of {length}"
         validationType="alphanumeric"
         [normalizeValue]="uppercase"
         [formField]="otpForm.code"
