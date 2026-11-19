@@ -10,10 +10,10 @@ import {
   ScCardTitle,
   ScField,
   ScLabel,
-  ScOtpField,
-  ScOtpFieldGroup,
-  ScOtpFieldInput,
-  ScOtpFieldSeparator,
+  ScOtpInput,
+  ScOtpInputGroup,
+  ScOtpInputSeparator,
+  ScOtpInputSlot,
   ScToaster,
 } from '@semantic-components/ui';
 import { SiMinusIcon } from '@semantic-icons/lucide-icons';
@@ -31,10 +31,10 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
     ScCardTitle,
     ScField,
     ScLabel,
-    ScOtpField,
-    ScOtpFieldGroup,
-    ScOtpFieldInput,
-    ScOtpFieldSeparator,
+    ScOtpInput,
+    ScOtpInputGroup,
+    ScOtpInputSlot,
+    ScOtpInputSeparator,
     SiMinusIcon,
   ],
   template: `
@@ -61,35 +61,35 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
             <label i18n="@@auth.twoSteps.typeYour6DigitsSecurity" scLabel
               >Type your 6 digits security code</label
             >
-            <div scOtpField [formField]="codeForm.code">
-              <div scOtpFieldGroup>
-                <input scOtpFieldInput />
+            <div scOtpInput [formField]="codeForm.code">
+              <div scOtpInputGroup>
+                <input scOtpInputSlot />
                 <input
                   i18n-aria-label="@@auth.twoSteps.character2Of6"
-                  scOtpFieldInput
+                  scOtpInputSlot
                   aria-label="Character 2 of 6"
                 />
                 <input
                   i18n-aria-label="@@auth.twoSteps.character3Of6"
-                  scOtpFieldInput
+                  scOtpInputSlot
                   aria-label="Character 3 of 6"
                 />
               </div>
-              <div scOtpFieldSeparator><svg siMinusIcon></svg></div>
-              <div scOtpFieldGroup>
+              <div scOtpInputSeparator><svg siMinusIcon></svg></div>
+              <div scOtpInputGroup>
                 <input
                   i18n-aria-label="@@auth.twoSteps.character4Of6"
-                  scOtpFieldInput
+                  scOtpInputSlot
                   aria-label="Character 4 of 6"
                 />
                 <input
                   i18n-aria-label="@@auth.twoSteps.character5Of6"
-                  scOtpFieldInput
+                  scOtpInputSlot
                   aria-label="Character 5 of 6"
                 />
                 <input
                   i18n-aria-label="@@auth.twoSteps.character6Of6"
-                  scOtpFieldInput
+                  scOtpInputSlot
                   aria-label="Character 6 of 6"
                 />
               </div>

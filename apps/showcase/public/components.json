@@ -677,8 +677,8 @@
     "hidden": true
   },
   {
-    "name": "OTP Field",
-    "path": "otp-field",
+    "name": "OTP Input",
+    "path": "otp-input",
     "description": "A one-time code, one input per character, in the look of the app's style.",
     "status": "Experimental",
     "library": "ui",

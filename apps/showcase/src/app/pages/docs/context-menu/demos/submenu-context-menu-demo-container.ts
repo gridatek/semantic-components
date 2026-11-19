@@ -23,13 +23,13 @@ import {
   ScContextMenu,
   ScContextMenuTrigger,
   ScFrame,
+  ScKbd,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
-  ScKbd,
   ScMenuSubmenuIcon,
 } from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';

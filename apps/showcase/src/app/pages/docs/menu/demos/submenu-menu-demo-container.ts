@@ -21,13 +21,13 @@ export class SubmenuMenuDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScKbd,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
   ScMenuProvider,
   ScMenuSeparator,
-  ScKbd,
   ScMenuSubmenuIcon,
   ScMenuTrigger,
 } from '@semantic-components/ui';

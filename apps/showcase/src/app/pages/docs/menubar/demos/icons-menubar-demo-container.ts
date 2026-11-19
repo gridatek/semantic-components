@@ -20,13 +20,13 @@ import { IconsMenubarDemo } from './icons-menubar-demo';
 export class IconsMenubarDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScKbd,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
-  ScKbd,
   ScMenubar,
   ScMenubarItem,
 } from '@semantic-components/ui';

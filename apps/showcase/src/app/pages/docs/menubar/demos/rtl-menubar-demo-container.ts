@@ -21,6 +21,7 @@ export class RtlMenubarDemoContainer {
   private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScKbd,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -31,7 +32,6 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuSeparator,
-  ScKbd,
   ScMenuSubmenuIcon,
   ScMenubar,
   ScMenubarItem,

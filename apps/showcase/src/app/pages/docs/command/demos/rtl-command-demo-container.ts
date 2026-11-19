@@ -30,9 +30,9 @@ import {
   ScCommandItem,
   ScCommandList,
   ScCommandSeparator,
-  ScKbd,
   ScCommandStatus,
   ScFrame,
+  ScKbd,
 } from '@semantic-components/ui';
 import {
   SiCalculatorIcon,

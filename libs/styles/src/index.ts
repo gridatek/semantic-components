@@ -456,8 +456,8 @@ export interface ScToggleGroupStyles {
   item: string;
 }
 
-/** An OTP field's parts that change from style to style. */
-export interface ScOtpFieldStyles {
+/** An OTP input's parts that change from style to style. */
+export interface ScOtpInputStyles {
   /** A group: one chunk of inputs, joined into one box (separate boxes in sera). */
   group: string;
   /** An input: one character (shadcn's slot; its active look on :focus). */
@@ -657,7 +657,7 @@ export interface ScStyle {
   messageScrollerContent: string;
   nativeSelect: ScNativeSelectStyles;
   navigationMenu: ScNavigationMenuStyles;
-  otpField: ScOtpFieldStyles;
+  otpInput: ScOtpInputStyles;
   pagination: ScPaginationStyles;
   popover: ScPopoverStyles;
   previewCard: ScPreviewCardStyles;

@@ -23,13 +23,13 @@ import {
   ScContextMenu,
   ScContextMenuTrigger,
   ScFrame,
+  ScKbd,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
-  ScKbd,
 } from '@semantic-components/ui';
 
 /** A keyboard hint at the end of each item; the text is yours. */

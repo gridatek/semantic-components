@@ -42,7 +42,7 @@ import { message } from './message';
 import { messageScrollerContent } from './message-scroller';
 import { nativeSelect } from './native-select';
 import { navigationMenu } from './navigation-menu';
-import { otpField } from './otp-field';
+import { otpInput } from './otp-input';
 import { pagination } from './pagination';
 import { popover } from './popover';
 import { previewCard } from './preview-card';
@@ -112,7 +112,7 @@ export const sera: ScStyle = {
   messageScrollerContent,
   nativeSelect,
   navigationMenu,
-  otpField,
+  otpInput,
   pagination,
   popover,
   previewCard,

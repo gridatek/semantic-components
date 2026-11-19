@@ -23,6 +23,7 @@ import {
   ScContextMenu,
   ScContextMenuTrigger,
   ScFrame,
+  ScKbd,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
@@ -30,7 +31,6 @@ import {
   ScMenuLabel,
   ScMenuPortal,
   ScMenuSeparator,
-  ScKbd,
 } from '@semantic-components/ui';
 
 /** Groups named by their label, lines between them. */

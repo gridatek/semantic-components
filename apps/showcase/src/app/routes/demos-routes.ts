@@ -7705,111 +7705,111 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/otp-field',
+    path: 'demos/otp-input',
     children: [
       {
-        path: 'otp-field-usage-demo',
+        path: 'otp-input-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/otp-field-usage-demo').then(
-            (m) => m.OtpFieldUsageDemo,
+          import('../pages/docs/otp-input/demos/otp-input-usage-demo').then(
+            (m) => m.OtpInputUsageDemo,
           ),
       },
       {
-        path: 'digits-only-otp-field-demo',
+        path: 'digits-only-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/digits-only-otp-field-demo').then(
-            (m) => m.DigitsOnlyOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/digits-only-otp-input-demo').then(
+            (m) => m.DigitsOnlyOtpInputDemo,
           ),
       },
       {
-        path: 'alphanumeric-otp-field-demo',
+        path: 'alphanumeric-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/alphanumeric-otp-field-demo').then(
-            (m) => m.AlphanumericOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/alphanumeric-otp-input-demo').then(
+            (m) => m.AlphanumericOtpInputDemo,
           ),
       },
       {
-        path: 'four-digits-otp-field-demo',
+        path: 'four-digits-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/four-digits-otp-field-demo').then(
-            (m) => m.FourDigitsOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/four-digits-otp-input-demo').then(
+            (m) => m.FourDigitsOtpInputDemo,
           ),
       },
       {
-        path: 'separator-otp-field-demo',
+        path: 'separator-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/separator-otp-field-demo').then(
-            (m) => m.SeparatorOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/separator-otp-input-demo').then(
+            (m) => m.SeparatorOtpInputDemo,
           ),
       },
       {
-        path: 'invalid-otp-field-demo',
+        path: 'invalid-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/invalid-otp-field-demo').then(
-            (m) => m.InvalidOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/invalid-otp-input-demo').then(
+            (m) => m.InvalidOtpInputDemo,
           ),
       },
       {
-        path: 'disabled-otp-field-demo',
+        path: 'disabled-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/disabled-otp-field-demo').then(
-            (m) => m.DisabledOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/disabled-otp-input-demo').then(
+            (m) => m.DisabledOtpInputDemo,
           ),
       },
       {
-        path: 'controlled-otp-field-demo',
+        path: 'controlled-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/controlled-otp-field-demo').then(
-            (m) => m.ControlledOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/controlled-otp-input-demo').then(
+            (m) => m.ControlledOtpInputDemo,
           ),
       },
       {
-        path: 'form-otp-field-demo',
+        path: 'form-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/form-otp-field-demo').then(
-            (m) => m.FormOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/form-otp-input-demo').then(
+            (m) => m.FormOtpInputDemo,
           ),
       },
       {
-        path: 'placeholder-otp-field-demo',
+        path: 'placeholder-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/placeholder-otp-field-demo').then(
-            (m) => m.PlaceholderOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/placeholder-otp-input-demo').then(
+            (m) => m.PlaceholderOtpInputDemo,
           ),
       },
       {
-        path: 'normalization-otp-field-demo',
+        path: 'normalization-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/normalization-otp-field-demo').then(
-            (m) => m.NormalizationOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/normalization-otp-input-demo').then(
+            (m) => m.NormalizationOtpInputDemo,
           ),
       },
       {
-        path: 'masked-otp-field-demo',
+        path: 'masked-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/masked-otp-field-demo').then(
-            (m) => m.MaskedOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/masked-otp-input-demo').then(
+            (m) => m.MaskedOtpInputDemo,
           ),
       },
       {
-        path: 'verification-otp-field-demo',
+        path: 'verification-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/verification-otp-field-demo').then(
-            (m) => m.VerificationOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/verification-otp-input-demo').then(
+            (m) => m.VerificationOtpInputDemo,
           ),
       },
       {
-        path: 'server-validation-otp-field-demo',
+        path: 'server-validation-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/server-validation-otp-field-demo').then(
-            (m) => m.ServerValidationOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/server-validation-otp-input-demo').then(
+            (m) => m.ServerValidationOtpInputDemo,
           ),
       },
       {
-        path: 'rtl-otp-field-demo',
+        path: 'rtl-otp-input-demo',
         loadComponent: () =>
-          import('../pages/docs/otp-field/demos/rtl-otp-field-demo').then(
-            (m) => m.RtlOtpFieldDemo,
+          import('../pages/docs/otp-input/demos/rtl-otp-input-demo').then(
+            (m) => m.RtlOtpInputDemo,
           ),
       },
     ],

@@ -19,6 +19,7 @@ import {
   ScContextMenu,
   ScContextMenuTrigger,
   ScFrame,
+  ScKbd,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -30,7 +31,6 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuSeparator,
-  ScKbd,
   ScMenuSubmenuIcon,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';

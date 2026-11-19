@@ -20,7 +20,7 @@ const reference =
 // shadcn counterparts under another name.
 const ALIAS = {
   menu: 'dropdown-menu, menubar',
-  'otp-field': 'input-otp',
+  'otp-input': 'input-otp',
   charts: 'chart',
   // No link in shadcn: the Button's look on an <a> (its `render`).
   link: 'button',

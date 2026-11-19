@@ -20,12 +20,12 @@ import { SubmenuMenubarDemo } from './submenu-menubar-demo';
 export class SubmenuMenubarDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScKbd,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
-  ScKbd,
   ScMenuSubmenuIcon,
   ScMenubar,
   ScMenubarItem,

@@ -22,6 +22,7 @@ export class RtlMenuDemoContainer {
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScKbd,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -32,7 +33,6 @@ import {
   ScMenuPortal,
   ScMenuProvider,
   ScMenuSeparator,
-  ScKbd,
   ScMenuSubmenuIcon,
   ScMenuTrigger,
 } from '@semantic-components/ui';

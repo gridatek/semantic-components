@@ -20,6 +20,7 @@ import { CheckboxMenubarDemo } from './checkbox-menubar-demo';
 export class CheckboxMenubarDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScKbd,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -27,7 +28,6 @@ import {
   ScMenuItemIndicator,
   ScMenuPortal,
   ScMenuSeparator,
-  ScKbd,
   ScMenubar,
   ScMenubarItem,
 } from '@semantic-components/ui';

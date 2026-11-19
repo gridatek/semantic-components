@@ -30,7 +30,6 @@ import {
   ScCommandInputGroup,
   ScCommandItem,
   ScCommandList,
-  ScKbd,
   ScCommandStatus,
   ScDialog,
   ScDialogDescription,
@@ -38,6 +37,7 @@ import {
   ScDialogProvider,
   ScDialogTitle,
   ScDialogTrigger,
+  ScKbd,
 } from '@semantic-components/ui';
 import {
   SiCreditCardIcon,

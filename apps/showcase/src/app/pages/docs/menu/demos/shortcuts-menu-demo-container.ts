@@ -21,6 +21,7 @@ export class ShortcutsMenuDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScKbd,
   ScMenu,
   ScMenuContent,
   ScMenuGroup,
@@ -29,7 +30,6 @@ import {
   ScMenuPortal,
   ScMenuProvider,
   ScMenuSeparator,
-  ScKbd,
   ScMenuTrigger,
 } from '@semantic-components/ui';
 

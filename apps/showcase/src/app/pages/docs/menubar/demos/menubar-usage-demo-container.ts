@@ -16,6 +16,7 @@ import { MenubarUsageDemo } from './menubar-usage-demo';
 export class MenubarUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScKbd,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -26,7 +27,6 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuSeparator,
-  ScKbd,
   ScMenuSubmenuIcon,
   ScMenubar,
   ScMenubarItem,
