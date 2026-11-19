@@ -144,7 +144,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             </div>
           </li>
 
-          <li scNavigationMenuItem>
+          <li scNavigationMenuItem [class]="tightItemClass">
             <a
               scNavigationMenuLink
               routerLink="/ai-elements"
@@ -156,7 +156,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             </a>
           </li>
 
-          <li scNavigationMenuItem>
+          <li scNavigationMenuItem [class]="tightItemClass">
             <a
               scNavigationMenuLink
               routerLink="/charts"
@@ -373,6 +373,16 @@ export default class Navbar {
   private readonly homeItemClass = this.roomy
     ? 'max-lg:hidden'
     : 'max-xl:hidden';
+  /**
+   * AI Elements and Charts: hidden below 1024px in maia, luma and sera, whose
+   * wider buttons and text don't fit there (measured 2026-11-19); the mobile
+   * menu and Documentation lead to them.
+   */
+  private readonly tightItemClass = ['maia', 'luma', 'sera'].includes(
+    this.style,
+  )
+    ? 'max-lg:hidden'
+    : '';
   /**
    * Search: the box from the width where it fits, else an icon button (from
    * md: below it, the bar has no search) — measured 2026-11-19: the box from
