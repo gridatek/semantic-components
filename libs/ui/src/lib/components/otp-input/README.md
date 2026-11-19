@@ -7,11 +7,11 @@ A one-time code, one real `<input>` per character (Base UI's OTP Field), in shad
 ```html
 <div scField>
   <label scLabel>Verification code</label>
-  <div scOtpInput [formField]="otpForm.code">
+  <div scOtpInput [formField]="otpForm.code" slotLabel="Character {index} of {length}">
     <div scOtpInputGroup>
       <input scOtpInputSlot />
-      <input scOtpInputSlot aria-label="Character 2 of 6" />
-      <input scOtpInputSlot aria-label="Character 3 of 6" />
+      <input scOtpInputSlot />
+      <input scOtpInputSlot />
     </div>
     <div scSeparator></div>
     <div scOtpInputGroup>…</div>
@@ -37,3 +37,7 @@ Typing moves on, Backspace back, Delete clears; Left and Right move (mirrored ri
 Left out (Base UI): `autoSubmit`, `form` / `name` — native forms; Signal Forms only.
 
 Between chunks, the library's Separator: `<div scSeparator></div>` — the OTP input draws it as a short dash (`*:data-[slot=separator]:`); no separator part of its own.
+
+## Names
+
+The root is a group named by the field's label (`aria-labelledby`). Each input is named by its place, in your words, written once on the root: `slotLabel="Character {index} of {length}"` (`{index}` from 1) — one string to translate, never the numbers. An input's own `aria-label` wins, for an exception. There is no default wording: without either, an input warns in dev mode (unnamed). Clicking the label goes to the first input (it takes the field's id).

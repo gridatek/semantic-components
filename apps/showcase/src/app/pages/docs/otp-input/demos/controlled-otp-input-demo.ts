@@ -15,14 +15,18 @@ import {
     <div class="space-y-2">
       <div scField class="w-fit">
         <label scLabel>One-time password</label>
-        <div scOtpInput [(value)]="code">
+        <div
+          scOtpInput
+          slotLabel="Character {index} of {length}"
+          [(value)]="code"
+        >
           <div scOtpInputGroup>
             <input scOtpInputSlot />
-            <input scOtpInputSlot aria-label="Character 2 of 6" />
-            <input scOtpInputSlot aria-label="Character 3 of 6" />
-            <input scOtpInputSlot aria-label="Character 4 of 6" />
-            <input scOtpInputSlot aria-label="Character 5 of 6" />
-            <input scOtpInputSlot aria-label="Character 6 of 6" />
+            <input scOtpInputSlot />
+            <input scOtpInputSlot />
+            <input scOtpInputSlot />
+            <input scOtpInputSlot />
+            <input scOtpInputSlot />
           </div>
         </div>
       </div>

@@ -2,13 +2,15 @@ import { Directionality } from '@angular/cdk/bidi';
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { ɵwarnIfUnnamed } from '../../utils';
 import { SC_FIELD } from '../field';
 import { ScOtpInput } from './otp-input';
 
 /**
  * One character of the code, on your `<input>`. The first input takes the
  * field's id (a `scLabel` names it) and offers the code from an SMS
- * (`autocomplete="one-time-code"`); name the others with `aria-label`.
+ * (`autocomplete="one-time-code"`). Named from the root's `slotLabel`
+ * (its place and the count), or by its own `aria-label`.
  * Typing overwrites, Backspace / Delete clear, ← → Home End move (← → as
  * they look: mirrored right to left); focus always goes to the first empty
  * input, so the code is entered in order.
@@ -22,6 +24,7 @@ import { ScOtpInput } from './otp-input';
     autocapitalize: 'off',
     spellcheck: 'false',
     '[attr.id]': 'id()',
+    '[attr.aria-label]': 'label()',
     '[attr.autocomplete]': 'first() ? "one-time-code" : "off"',
     '[attr.inputmode]': 'otp.inputMode()',
     '[attr.aria-describedby]': 'describedBy()',
@@ -45,10 +48,24 @@ export class ScOtpInputSlot {
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input('', { alias: 'id' });
+  /** Its own name: an exception to the root's `slotLabel`. */
+  readonly ariaLabelInput = input('', { alias: 'aria-label' });
 
   private readonly index = computed(() => this.otp.indexOf(this));
   private readonly first = computed(() => this.index() === 0);
   private readonly char = computed(() => this.otp.charAt(this.index()));
+  /** Its own aria-label, or the root's slotLabel with its place and the count. */
+  private readonly label = computed(
+    () =>
+      this.ariaLabelInput() ||
+      this.otp
+        .slotLabel()
+        .split('{index}')
+        .join(String(this.index() + 1))
+        .split('{length}')
+        .join(String(this.otp.length())) ||
+      null,
+  );
 
   /** The first input takes the field's id, so its label names it. */
   private readonly id = computed(
@@ -73,6 +90,11 @@ export class ScOtpInputSlot {
   }
 
   /** In order: focus goes to the first empty input, if it is before this one. */
+
+  constructor() {
+    ɵwarnIfUnnamed('scOtpInputSlot');
+  }
+
   private onFocus(): void {
     const firstEmpty = this.otp.firstEmptyIndex();
     if (firstEmpty !== -1 && this.index() > firstEmpty) {

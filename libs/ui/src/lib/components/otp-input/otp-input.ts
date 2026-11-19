@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
+import { SC_FIELD } from '../field';
 import { ScOtpInputSlot } from './otp-input-slot';
 
 /** Which characters the code accepts. */
@@ -58,6 +59,9 @@ const accepted: Record<ScOtpInputValidationType, (char: string) => string> = {
   host: {
     '[class]': 'class()',
     'data-slot': 'otp-input',
+    role: 'group',
+    // Named by the label of the field it is in (`<field id>-label`).
+    '[attr.aria-labelledby]': 'field ? field.id() + "-label" : null',
     '[attr.data-complete]': 'complete() ? "" : null',
     '[attr.data-filled]': 'value() ? "" : null',
     '[attr.data-focused]': 'focused() ? "" : null',
@@ -70,6 +74,8 @@ const accepted: Record<ScOtpInputValidationType, (char: string) => string> = {
 export class ScOtpInput implements FormValueControl<string> {
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  /** The field it is in: its label names the group. */
+  private readonly field = inject(SC_FIELD, { optional: true });
 
   /** Which characters are accepted (anything else is dropped); `numeric` brings up a numeric keypad. */
   readonly validationType = input<ScOtpInputValidationType>('numeric');
@@ -90,6 +96,12 @@ export class ScOtpInput implements FormValueControl<string> {
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touched = input(false, { transform: booleanAttribute });
+  /**
+   * Each input's name, in your words, written once: `{index}` its place
+   * (from 1), `{length}` how many — "Character {index} of {length}". An
+   * input's own `aria-label` wins (an exception). No default: you write it.
+   */
+  readonly slotLabel = input('');
   /** The schema's `minLength` / `maxLength`: checked against the number of inputs. */
   readonly minLength = input<number | undefined>(undefined);
   readonly maxLength = input<number | undefined>(undefined);

@@ -83,9 +83,12 @@ import { VerificationOtpInputDemoContainer } from './demos/verification-otp-inpu
             order.
           </li>
           <li>
-            The label names the first input (it takes the field&apos;s id); name
-            the others (&quot;Character 2 of 6&quot;). A description is read
-            with them.
+            The inputs are a group named by the field&apos;s label; each input
+            is named by its place, in your words, written once on the root
+            (slotLabel=&quot;Character {{ '{' }}index{{ '}' }} of
+            {{ '{' }}length{{ '}' }}&quot;) — an input&apos;s own aria-label wins.
+            Clicking the label goes to the first. A description is read with
+            them.
           </li>
           <li>
             The first input offers the code from an SMS
@@ -134,10 +137,10 @@ export default class OtpInputPage {
     markup: [
       '<div scField>',
       '  <label scLabel>…</label>',
-      '  <div scOtpInput [formField]="…">',
+      '  <div scOtpInput [formField]="…" slotLabel="Character {index} of {length}">',
       '    <div scOtpInputGroup>',
       '      <input scOtpInputSlot />',
-      '      <input scOtpInputSlot aria-label="Character 2 of 6" />',
+      '      <input scOtpInputSlot />',
       '    </div>',
       "    <div scSeparator></div>  <!-- the library's: a dash here -->",
       '    <div scOtpInputGroup>…</div>',
@@ -152,7 +155,7 @@ export default class OtpInputPage {
       name: 'ScOtpInput',
       selector: 'div[scOtpInput]',
       description:
-        "The code (a [formField] or [(value)]), as long as its inputs; paste and SMS autofill spread over them. validationType ('numeric', 'alpha', 'alphanumeric', 'none'), normalizeValue, mask, readOnly; disabled and required from the schema. complete(); data-complete, data-filled, data-focused. The row of chunks and separators; its label, description and errors go round it, in a scField (the first input takes its id).",
+        "The code (a [formField] or [(value)]), as long as its inputs; paste and SMS autofill spread over them. validationType ('numeric', 'alpha', 'alphanumeric', 'none'), normalizeValue, mask, readOnly; disabled and required from the schema. complete(); data-complete, data-filled, data-focused. The row of chunks and separators; its label, description and errors go round it, in a scField (the first input takes its id). A group, named by the field’s label; slotLabel: each input’s name, written once ({index}, {length}).",
     },
     {
       name: 'ScOtpInputGroup',
@@ -164,7 +167,7 @@ export default class OtpInputPage {
       name: 'ScOtpInputSlot',
       selector: 'input[scOtpInputSlot]',
       description:
-        'One character, on your input. The first takes the field\'s id and autocomplete="one-time-code"; name the others ("Character 2 of 6"). data-filled; aria-invalid once the field is left invalid.',
+        'One character, on your input, named from the root\'s slotLabel ({index}, {length}) — its own aria-label wins. The first takes the field\'s id (the label goes to it) and autocomplete="one-time-code". data-filled; aria-invalid once the field is left invalid.',
     },
   ];
 }

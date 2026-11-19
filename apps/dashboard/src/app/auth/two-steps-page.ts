@@ -59,37 +59,22 @@ import {
             <label i18n="@@auth.twoSteps.typeYour6DigitsSecurity" scLabel
               >Type your 6 digits security code</label
             >
-            <div scOtpInput [formField]="codeForm.code">
+            <div
+              scOtpInput
+              i18n-slotLabel="@@auth.twoSteps.characterOfLength"
+              slotLabel="Character {index} of {length}"
+              [formField]="codeForm.code"
+            >
               <div scOtpInputGroup>
                 <input scOtpInputSlot />
-                <input
-                  i18n-aria-label="@@auth.twoSteps.character2Of6"
-                  scOtpInputSlot
-                  aria-label="Character 2 of 6"
-                />
-                <input
-                  i18n-aria-label="@@auth.twoSteps.character3Of6"
-                  scOtpInputSlot
-                  aria-label="Character 3 of 6"
-                />
+                <input scOtpInputSlot />
+                <input scOtpInputSlot />
               </div>
               <div scSeparator></div>
               <div scOtpInputGroup>
-                <input
-                  i18n-aria-label="@@auth.twoSteps.character4Of6"
-                  scOtpInputSlot
-                  aria-label="Character 4 of 6"
-                />
-                <input
-                  i18n-aria-label="@@auth.twoSteps.character5Of6"
-                  scOtpInputSlot
-                  aria-label="Character 5 of 6"
-                />
-                <input
-                  i18n-aria-label="@@auth.twoSteps.character6Of6"
-                  scOtpInputSlot
-                  aria-label="Character 6 of 6"
-                />
+                <input scOtpInputSlot />
+                <input scOtpInputSlot />
+                <input scOtpInputSlot />
               </div>
             </div>
           </div>

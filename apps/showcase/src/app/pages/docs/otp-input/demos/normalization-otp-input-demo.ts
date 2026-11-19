@@ -27,20 +27,21 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
       <label scLabel>Invite code</label>
       <div
         scOtpInput
+        slotLabel="Character {index} of {length}"
         validationType="alphanumeric"
         [normalizeValue]="uppercase"
         [formField]="otpForm.code"
       >
         <div scOtpInputGroup>
           <input scOtpInputSlot />
-          <input scOtpInputSlot aria-label="Character 2 of 6" />
-          <input scOtpInputSlot aria-label="Character 3 of 6" />
+          <input scOtpInputSlot />
+          <input scOtpInputSlot />
         </div>
         <div scSeparator></div>
         <div scOtpInputGroup>
-          <input scOtpInputSlot aria-label="Character 4 of 6" />
-          <input scOtpInputSlot aria-label="Character 5 of 6" />
-          <input scOtpInputSlot aria-label="Character 6 of 6" />
+          <input scOtpInputSlot />
+          <input scOtpInputSlot />
+          <input scOtpInputSlot />
         </div>
       </div>
     </div>

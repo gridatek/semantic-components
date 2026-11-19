@@ -3,9 +3,7 @@ import { expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/otp-input/${name}-otp-input-demo`;
 const input = (page: import('@playwright/test').Page, n: number) =>
-  n === 1
-    ? page.getByRole('textbox', { name: 'One-time password' })
-    : page.getByRole('textbox', { name: `Character ${n} of 6` });
+  page.getByRole('textbox', { name: `Character ${n} of 6`, exact: true });
 
 let errors: string[];
 
@@ -17,11 +15,25 @@ test.afterEach(() => {
   expect(errors).toEqual([]);
 });
 
-test('Usage: the label names the first input; it offers the SMS code', async ({
+test('Usage: a group named by the label, each input by its place; the first offers the SMS code', async ({
   page,
 }) => {
   await page.goto('/demos/otp-input/otp-input-usage-demo');
-  const first = page.getByRole('textbox', { name: 'Verification code' });
+  // The label names the group; slotLabel, written once, names each input.
+  await expect(
+    page.getByRole('group', { name: 'Verification code' }),
+  ).toBeVisible();
+  for (let n = 1; n <= 6; n++)
+    await expect(
+      page.getByRole('textbox', { name: `Character ${n} of 6`, exact: true }),
+    ).toHaveCount(1);
+  // The label still goes to the first input.
+  await page.getByText('Verification code', { exact: true }).click();
+  const first = page.getByRole('textbox', {
+    name: 'Character 1 of 6',
+    exact: true,
+  });
+  await expect(first).toBeFocused();
   await expect(first).toHaveValue('1');
   await expect(first).toHaveAttribute('autocomplete', 'one-time-code');
   await expect(
