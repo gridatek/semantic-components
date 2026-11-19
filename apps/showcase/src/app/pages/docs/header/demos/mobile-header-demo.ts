@@ -35,7 +35,7 @@ import {
       scHeader
       aria-label="Acme, mobile"
       #header="scHeader"
-      [(open)]="open"
+      [(mobileMenuOpen)]="open"
     >
       <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
         <svg siGalleryVerticalEndIcon></svg>
@@ -58,7 +58,7 @@ import {
         </ul>
       </nav>
       <button scHeaderMobileMenuToggle class="ms-auto -me-2">
-        @if (header.open()) {
+        @if (header.mobileMenuOpen()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {

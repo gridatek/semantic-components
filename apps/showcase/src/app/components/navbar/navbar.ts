@@ -238,7 +238,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
       </div>
 
       <button scHeaderMobileMenuToggle class="-me-2">
-        @if (header.open()) {
+        @if (header.mobileMenuOpen()) {
           <svg siXIcon></svg>
           <span class="sr-only">Close menu</span>
         } @else {

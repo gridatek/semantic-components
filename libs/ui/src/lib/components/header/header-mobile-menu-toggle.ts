@@ -22,7 +22,7 @@ import { ScHeader } from './header';
  *
  * ```html
  * <button scHeaderMobileMenuToggle>
- *   @if (header.open()) {
+ *   @if (header.mobileMenuOpen()) {
  *     <svg siXIcon></svg><span class="sr-only">Close menu</span>
  *   } @else {
  *     <svg siMenuIcon></svg><span class="sr-only">Open menu</span>
@@ -35,9 +35,9 @@ import { ScHeader } from './header';
   host: {
     'data-slot': 'header-mobile-menu-toggle',
     type: 'button',
-    '[attr.aria-expanded]': 'header.open()',
+    '[attr.aria-expanded]': 'header.mobileMenuOpen()',
     // The panel exists only while open: nothing to control otherwise.
-    '[attr.aria-controls]': 'header.open() ? header.menuId : null',
+    '[attr.aria-controls]': 'header.mobileMenuOpen() ? header.menuId : null',
     '[class]': 'class()',
     '(click)': 'toggle()',
   },
@@ -65,7 +65,7 @@ export class ScHeaderMobileMenuToggle {
 
   private toggle(): void {
     this.pressed.set(true);
-    this.header.open.set(!this.header.open());
+    this.header.mobileMenuOpen.set(!this.header.mobileMenuOpen());
   }
 
   constructor() {

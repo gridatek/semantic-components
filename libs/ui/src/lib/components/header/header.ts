@@ -78,7 +78,7 @@ const BREAKPOINT: Record<ScHeaderExpand, string> = {
   providers: [{ provide: SC_NAVIGATION_MENU_LINK_HOST, useExisting: ScHeader }],
   template: `
     <ng-content />
-    @if (open() && menu(); as menu) {
+    @if (mobileMenuOpen() && menu(); as menu) {
       <div
         data-slot="header-menu"
         [id]="menuId"
@@ -102,8 +102,8 @@ const BREAKPOINT: Record<ScHeaderExpand, string> = {
 })
 export class ScHeader implements ScNavigationMenuLinkHost {
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Whether the menu is open (narrow screens). */
-  readonly open = model(false);
+  /** Whether the mobile menu is open (below `expand`): `[(mobileMenuOpen)]`. */
+  readonly mobileMenuOpen = model(false);
   /** The width from which the links show and the toggle hides. */
   readonly expand = input<ScHeaderExpand>('md');
   /** Stays at the top of the page as it scrolls. */
@@ -153,7 +153,7 @@ export class ScHeader implements ScNavigationMenuLinkHost {
 
   private readonly scrolledAway = signal(false);
   private readonly hidden = computed(
-    () => this.hideOnScroll() && this.scrolledAway() && !this.open(),
+    () => this.hideOnScroll() && this.scrolledAway() && !this.mobileMenuOpen(),
   );
 
   private readonly class = computed(() =>
@@ -180,7 +180,7 @@ export class ScHeader implements ScNavigationMenuLinkHost {
         filter((event) => event instanceof NavigationEnd),
         takeUntilDestroyed(),
       )
-      .subscribe(() => this.open.set(false));
+      .subscribe(() => this.mobileMenuOpen.set(false));
 
     const destroyRef = inject(DestroyRef);
     const element = this.element;
@@ -192,7 +192,7 @@ export class ScHeader implements ScNavigationMenuLinkHost {
       const wide = window.matchMedia(
         `(min-width: ${BREAKPOINT[this.expand()]})`,
       );
-      const onWide = () => wide.matches && this.open.set(false);
+      const onWide = () => wide.matches && this.mobileMenuOpen.set(false);
       wide.addEventListener('change', onWide);
 
       let lastY = window.scrollY;
@@ -215,21 +215,21 @@ export class ScHeader implements ScNavigationMenuLinkHost {
   /** Over the page, it hides it: the focus or a click out there closes it. */
   private closeOutside(event: Event): void {
     if (
-      this.open() &&
+      this.mobileMenuOpen() &&
       this.covers() &&
       !this.element.contains(event.target as Node)
     )
-      this.open.set(false);
+      this.mobileMenuOpen.set(false);
   }
 
   /** A link of the mobile menu was followed: it closes. */
   linkFollowed(): void {
-    this.open.set(false);
+    this.mobileMenuOpen.set(false);
   }
 
   private onEscape(): void {
-    if (!this.open()) return;
-    this.open.set(false);
+    if (!this.mobileMenuOpen()) return;
+    this.mobileMenuOpen.set(false);
     this.toggle()?.focus();
   }
 }

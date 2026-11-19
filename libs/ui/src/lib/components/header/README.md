@@ -8,7 +8,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 - **Disclosure menu** — `aria-expanded`, `aria-controls`; it covers the page below the bar, see-through and blurred as shadcn's (scrolling inside if it is taller); it opens at once and fades out in 100ms on closing, or with `push` pushes the page down, its height animating
 - **The toggle's icon animates** — once the toggle is pressed, the icon your `@if` swaps in (Menu ↔ X) turns 45° and fades in (100ms; not on the first paint, not with reduced motion)
 - **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough; covering the page, the focus leaving the bar too
-- **`[(open)]`** — the menu's state, two-way
+- **`[(mobileMenuOpen)]`** — the mobile menu's state, two-way
 - **Sticky**, and **hides on scroll** (away going down, back going up)
 - **The links are a Navigation Menu** — the bar's `nav`, which the header hides below `expand`; the header adds only what the Navigation Menu doesn't have: the bar, the breakpoint, the phone menu
 - **Current page** — `active` gives `aria-current="page"`, in the bar (the Navigation Menu's links) and in the menu
@@ -36,7 +36,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
   </div>
 
   <button scHeaderMobileMenuToggle class="-me-2">
-    @if (header.open()) {
+    @if (header.mobileMenuOpen()) {
     <svg siXIcon></svg>
     <span class="sr-only">Close menu</span>
     } @else {
@@ -66,13 +66,13 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 
 `exportAs: 'scHeader'`.
 
-| Input          | Type                   | Default | Description                                         |
-| -------------- | ---------------------- | ------- | --------------------------------------------------- |
-| `open`         | `boolean` (two-way)    | `false` | Whether the menu is open                            |
-| `expand`       | `'sm' \| 'md' \| 'lg'` | `'md'`  | The width from which the links show, the toggle not |
-| `sticky`       | `boolean`              | `false` | Stays at the top of the page                        |
-| `hideOnScroll` | `boolean`              | `false` | Slides away scrolling down, back scrolling up       |
-| `class`        | `string`               | `''`    | Additional CSS classes                              |
+| Input            | Type                   | Default | Description                                         |
+| ---------------- | ---------------------- | ------- | --------------------------------------------------- |
+| `mobileMenuOpen` | `boolean` (two-way)    | `false` | Whether the mobile menu is open                     |
+| `expand`         | `'sm' \| 'md' \| 'lg'` | `'md'`  | The width from which the links show, the toggle not |
+| `sticky`         | `boolean`              | `false` | Stays at the top of the page                        |
+| `hideOnScroll`   | `boolean`              | `false` | Slides away scrolling down, back scrolling up       |
+| `class`          | `string`               | `''`    | Additional CSS classes                              |
 
 ### ScHeaderMobileMenuToggle — `button[scHeaderMobileMenuToggle]`
 

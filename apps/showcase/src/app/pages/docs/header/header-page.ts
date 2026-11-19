@@ -184,7 +184,7 @@ export default class HeaderPage {
       '',
       '  <!-- Below the expand width: the toggle and the menu -->',
       '  <button scHeaderMobileMenuToggle class="-me-2">',
-      '    @if (header.open()) {',
+      '    @if (header.mobileMenuOpen()) {',
       '      <svg siXIcon></svg><span class="sr-only">Close menu</span>',
       '    } @else {',
       '      <svg siMenuIcon></svg><span class="sr-only">Open menu</span>',
@@ -205,7 +205,7 @@ export default class HeaderPage {
       name: 'ScHeader',
       selector: 'header[scHeader]',
       description:
-        "The bar, the page's banner, 56px tall (more when the menu pushes the page): [(open)] the menu's state; expand ('sm', 'md', 'lg' — the width from which its links show, 'md' by default: its nav, a Navigation Menu, is hidden below it); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed, the window growing wide enough, the focus leaving the bar.",
+        "The bar, the page's banner, 56px tall (more when the menu pushes the page): [(mobileMenuOpen)] the mobile menu's state; expand ('sm', 'md', 'lg' — the width from which its links show, 'md' by default: its nav, a Navigation Menu, is hidden below it); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed, the window growing wide enough, the focus leaving the bar.",
     },
     {
       name: 'ScHeaderMobileMenuToggle',

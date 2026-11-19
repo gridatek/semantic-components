@@ -57,7 +57,7 @@ import {
           </ul>
         </nav>
         <button scHeaderMobileMenuToggle class="ms-auto -me-2">
-          @if (header.open()) {
+          @if (header.mobileMenuOpen()) {
             <svg siXIcon></svg>
             <span class="sr-only">إغلاق القائمة</span>
           } @else {
