@@ -45,7 +45,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Input</h1>
         <p class="text-muted-foreground">
@@ -64,7 +64,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           One part, on a native
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">input</code>. It
           needs a name: a label — in a Field, the field links them — or
@@ -76,7 +76,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Forms</h2>
-        <p class="text-muted-foreground">
+        <p>
           With
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[formField]</code
           >, the form owns its state: its constraints (
@@ -111,7 +111,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScInput</code>
           is a directive on a native
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"

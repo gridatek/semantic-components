@@ -24,7 +24,7 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Code Editor</h1>
         <p class="text-muted-foreground">
@@ -46,7 +46,7 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
           href="https://codemirror.net"
           names="ScCodeEditor"
         />
-        <p class="text-muted-foreground">
+        <p>
           Each language loads the first time it is shown, colored like a code
           block — no highlighter to provide.
         </p>
@@ -54,7 +54,7 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           CodeMirror, colored by the app’s highlighter (Shiki, like a code
           block), in a code block for its frame, title and copy button.
           <kbd scKbd>Tab</kbd> indents; <kbd scKbd>Escape</kbd> then
@@ -65,7 +65,7 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>In a form</h2>
-        <p class="text-muted-foreground">
+        <p>
           A [formField] (a string): named by the field’s label, required from
           the schema, marked once left.
         </p>
@@ -74,7 +74,7 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Languages</h2>
-        <p class="text-muted-foreground">
+        <p>
           language: each one loaded the first time it is shown — its colors and
           its structure (indentation, brackets).
         </p>
@@ -83,15 +83,13 @@ import { WrapCodeEditorDemoContainer } from './demos/wrap-code-editor-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Wrap</h2>
-        <p class="text-muted-foreground">
-          wrap: long lines break instead of scrolling; lineNumbers off.
-        </p>
+        <p>wrap: long lines break instead of scrolling; lineNumbers off.</p>
         <app-wrap-code-editor-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Read-only and disabled</h2>
-        <p class="text-muted-foreground">
+        <p>
           readonly: selectable and copyable, not edited. disabled: out of the
           way.
         </p>

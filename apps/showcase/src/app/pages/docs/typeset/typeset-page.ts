@@ -56,7 +56,7 @@ interface Row {
     ScTableRow,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Typeset</h1>
         <p class="text-muted-foreground">
@@ -71,7 +71,7 @@ interface Row {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
-        <p class="text-muted-foreground">
+        <p>
           Import the rules and your style's variables in your global stylesheet,
           after Tailwind:
           <code scTypeset
@@ -90,7 +90,7 @@ interface Row {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A class on the container, for content you don't write; one directive,
           on any element, for text that stands on its own.
         </p>
@@ -99,10 +99,10 @@ interface Row {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Two ways</h2>
-        <p class="text-muted-foreground">
+        <p>
           The same rules reach your text in two ways; pick by what the text is.
         </p>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             <strong class="text-foreground">A container</strong>
             (<code scTypeset>class="typeset"</code>): its plain elements are set
@@ -117,7 +117,7 @@ interface Row {
             items of a list, code inside a heading.
           </li>
         </ul>
-        <p class="text-muted-foreground">
+        <p>
           <strong class="text-foreground">Our recommendation:</strong> a
           container for reading text — content you don't write the markup of
           (markdown, a CMS, a chat answer) and long-form pages (an article, a
@@ -127,7 +127,7 @@ interface Row {
           card — where a container would also set the layout's own lists and
           links. In a container, the directive changes nothing.
         </p>
-        <p class="text-muted-foreground">
+        <p>
           Either way, the variables tune it — on the container, on a style class
           of yours (<code scTypeset>.typeset-chat</code>) or on
           <code scTypeset>:root</code> for the whole app.
@@ -136,11 +136,11 @@ interface Row {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Leaving something out</h2>
-        <p class="text-muted-foreground">
+        <p>
           In a container, every plain element is set. To keep one as it is — a
           link, a list, a block:
         </p>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             <strong class="text-foreground">All of it:</strong>
             <code scTypeset>class="not-typeset"</code> (or
@@ -166,7 +166,7 @@ interface Row {
             set as a link in the text, as it should be.
           </li>
         </ul>
-        <p class="text-muted-foreground">
+        <p>
           In rendered markdown you can rarely put a class on one element: a hook
           in your renderer adds it, or <code scTypeset>not-typeset</code> goes
           on a wrapper around the region.
@@ -175,11 +175,11 @@ interface Row {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Not shadcn's Typeset</h2>
-        <p class="text-muted-foreground">
+        <p>
           We started from shadcn's <code scTypeset>typeset.css</code> and no
           longer follow it exactly. What's ours:
         </p>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             <strong class="text-foreground"
               >The variables are the style's</strong
@@ -208,7 +208,7 @@ interface Row {
             0.05em: its titles).
           </li>
         </ul>
-        <p class="text-muted-foreground">
+        <p>
           <strong class="text-foreground">Writing your own values?</strong> Set
           the three heading variables too: they have no fallback, and without
           <code scTypeset>--sc-typeset-heading-weight</code> headings lose their
@@ -218,7 +218,7 @@ interface Row {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Native elements only: headings keep the page's outline, lists and
             quotes are read as such. Keep heading levels in order.
@@ -246,7 +246,7 @@ interface Row {
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
         <h3 scTypeset>Directive</h3>
-        <p class="text-muted-foreground">
+        <p>
           Each takes <code scTypeset>class</code>; your classes win over its
           rules.
         </p>

@@ -25,7 +25,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Virtual List</h1>
         <p class="text-muted-foreground">
@@ -37,7 +37,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           10,000 rows, a few dozen rendered: those in view, and five more each
           way. Each row is measured as it renders; its place in the whole list
           is aria-posinset of aria-setsize.
@@ -47,7 +47,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Variable heights</h2>
-        <p class="text-muted-foreground">
+        <p>
           Rows of any height — messages, long and short: estimated first, then
           measured; the list and its scrollbar follow, and the reader keeps
           their place as rows above settle.
@@ -57,7 +57,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Horizontal</h2>
-        <p class="text-muted-foreground">
+        <p>
           Along a row: days of a year, as a strip. Right to left, it starts at
           the right.
         </p>
@@ -66,7 +66,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Grid</h2>
-        <p class="text-muted-foreground">
+        <p>
           In lanes: photos in three columns, each placed in the lane that ends
           first.
         </p>
@@ -75,7 +75,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Page scroll</h2>
-        <p class="text-muted-foreground">
+        <p>
           Without a size of its own, it takes its full height, and the page — or
           the box around it — scrolls.
         </p>
@@ -84,7 +84,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Scroll to</h2>
-        <p class="text-muted-foreground">
+        <p>
           scrollToIndex(index, with an alignment): row 5,000 at the start, the
           centre, the end — or, auto, only as far as needed.
         </p>
@@ -93,7 +93,7 @@ import { VariableVirtualListDemoContainer } from './demos/variable-virtual-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>With the infinite scroll</h2>
-        <p class="text-muted-foreground">
+        <p>
           Long, and longer: the infinite scroll asks for 100 more near the end;
           the virtual list renders only what is seen.
         </p>

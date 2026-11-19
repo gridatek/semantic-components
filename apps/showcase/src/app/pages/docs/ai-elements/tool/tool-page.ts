@@ -40,7 +40,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
     ToolUsageDemoContainer,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Tool</h1>
         <p class="text-muted-foreground">
@@ -51,7 +51,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-tool-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A <a scLink routerLink="/docs/components/trace">Trace</a> line: plain
           while the tool runs, collapsible once its output arrives — the output
           in a
@@ -66,7 +66,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>States</h2>
-        <p class="text-muted-foreground">
+        <p>
           The Trace doesn&apos;t read tool calls: map each call&apos;s state to
           a status and a title.
         </p>
@@ -93,7 +93,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
             </tbody>
           </table>
         </div>
-        <p class="text-muted-foreground">
+        <p>
           A tool that runs in the browser stays waiting after the chat stops,
           until you give it its output: treat it as waiting, not failed.
         </p>
@@ -101,7 +101,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Approval</h2>
-        <p class="text-muted-foreground">
+        <p>
           A pending approval is a question for the person, not a step the agent
           took, so it sits outside the Trace as an Item with Deny and Approve;
           once answered, the tool is a line again. See
@@ -113,7 +113,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
-          <p class="text-muted-foreground">
+          <p>
             Long output in a sheet: the line is the
             <a scLink routerLink="/docs/components/sheet">Sheet</a>&apos;s
             trigger.
@@ -125,7 +125,7 @@ import { ToolUsageDemoContainer } from './demos/tool-usage-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

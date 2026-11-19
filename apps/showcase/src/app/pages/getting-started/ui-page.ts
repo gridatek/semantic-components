@@ -39,7 +39,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
     ButtonUsageDemoContainer,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>UI</h1>
         <p class="text-muted-foreground">
@@ -53,7 +53,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>1. Install the packages</h2>
-        <p class="text-muted-foreground">
+        <p>
           The components, and their classes in shadcn's styles (the styles):
         </p>
         <app-package-manager-install
@@ -65,7 +65,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>2. Configure styles</h2>
-        <p class="text-muted-foreground">
+        <p>
           As in shadcn/ui, the theme is your app's. Copy this into your
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
           >: shadcn's nova theme (colors, radius, font) with our additions
@@ -111,7 +111,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
             </button>
           </div>
         </div>
-        <p class="text-muted-foreground">
+        <p>
           The components use nova. For another style, give it when the app
           starts, and point the second
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -147,9 +147,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
-        <p class="text-muted-foreground">
-          Import and use components in your Angular templates:
-        </p>
+        <p>Import and use components in your Angular templates:</p>
         <app-button-usage-demo-container />
       </section>
     </div>

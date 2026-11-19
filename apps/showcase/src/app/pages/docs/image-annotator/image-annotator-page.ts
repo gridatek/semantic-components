@@ -18,7 +18,7 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Image Annotator</h1>
         <p class="text-muted-foreground">
@@ -31,7 +31,7 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Editor</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every tool. Select an annotation to move it, resize it by its handles,
           or restyle it with a colour or the width. From the keyboard:
           <kbd scKbd>Enter</kbd> on the image places a shape; on an annotation,
@@ -43,7 +43,7 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Review a screenshot</h2>
-        <p class="text-muted-foreground">
+        <p>
           A few tools, and annotations given as data — to save, send and show
           again.
         </p>
@@ -52,7 +52,7 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Read only</h2>
-        <p class="text-muted-foreground">
+        <p>
           The same annotations, shown: each one is still named and reached with
           <kbd scKbd>Tab</kbd>.
         </p>

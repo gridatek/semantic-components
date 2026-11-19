@@ -24,7 +24,7 @@ import { SelectionTreeTableDemoContainer } from './demos/selection-tree-table-de
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Tree Table</h1>
         <p class="text-muted-foreground">

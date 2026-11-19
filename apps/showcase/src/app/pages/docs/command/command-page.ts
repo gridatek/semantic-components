@@ -38,7 +38,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Command</h1>
         <p class="text-muted-foreground">
@@ -55,7 +55,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A search and a list of your items, in groups. It filters them itself —
           their text, value and keywords — and keeps your order; a group with no
           match hides, the lines between groups while searching. In a dialog, on
@@ -66,7 +66,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The search is a combo box and the items a list box: focus stays in
             the search while the highlight moves (aria-activedescendant). Name
@@ -113,7 +113,7 @@ import { ShortcutsCommandDemoContainer } from './demos/shortcuts-command-demo-co
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

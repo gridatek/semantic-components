@@ -19,7 +19,7 @@ import { SelectOnFocusUsageDemoContainer } from './demos/select-on-focus-usage-d
     SelectOnFocusUsageDemoContainer,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Select On Focus</h1>
         <p class="text-muted-foreground">
@@ -36,7 +36,7 @@ import { SelectOnFocusUsageDemoContainer } from './demos/select-on-focus-usage-d
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           One directive on an input: its text is selected when it gets focus —
           from the keyboard, the mouse, a touch or the program, as you choose.
         </p>
@@ -71,7 +71,7 @@ import { SelectOnFocusUsageDemoContainer } from './demos/select-on-focus-usage-d
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">A behaviour only, on an input.</p>
+        <p>A behaviour only, on an input.</p>
         <app-parts-table label="Select On Focus parts" [parts]="parts" />
       </section>
     </div>

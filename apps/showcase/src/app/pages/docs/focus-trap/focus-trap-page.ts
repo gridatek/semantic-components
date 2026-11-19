@@ -20,7 +20,7 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
     BasicFocusTrapDemoContainer,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Focus Trap</h1>
         <p class="text-muted-foreground">
@@ -37,7 +37,7 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           One directive on the element shown — a dialog, a panel: focus moves
           in, <kbd scKbd>Tab</kbd> stays inside, and focus goes back where it
           came from when it goes away.
@@ -71,7 +71,7 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Why not cdkTrapFocus</h2>
-        <p class="text-muted-foreground">
+        <p>
           It is the CDK&apos;s focus trap underneath (FocusTrapFactory), with
           two changes:
         </p>
@@ -103,9 +103,7 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
             .
           </li>
         </ul>
-        <p class="text-muted-foreground">
-          The Dialog, Alert Dialog, Sheet, Drawer and Popover use it.
-        </p>
+        <p>The Dialog, Alert Dialog, Sheet, Drawer and Popover use it.</p>
       </section>
 
       <section class="space-y-8">
@@ -115,7 +113,7 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">A behaviour only, on any element.</p>
+        <p>A behaviour only, on any element.</p>
         <app-parts-table label="Focus Trap parts" [parts]="parts" />
       </section>
     </div>

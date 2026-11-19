@@ -50,7 +50,7 @@ interface ApiRow {
     TocUsageDemoContainer,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Table of Contents</h1>
         <p class="text-muted-foreground">
@@ -67,7 +67,7 @@ interface ApiRow {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element: the headings in your
           content, a
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">nav</code>
@@ -84,7 +84,7 @@ interface ApiRow {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Notes</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The section read is the last one whose heading reached the top of
             the page — or of the box that scrolls it — and the last one,
@@ -141,7 +141,7 @@ interface ApiRow {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over its own (cn: a later class wins).
@@ -149,7 +149,7 @@ interface ApiRow {
         <app-parts-table label="Table of contents parts" [parts]="parts" />
 
         <h3 class="text-lg font-semibold">ScToc</h3>
-        <p class="text-muted-foreground">
+        <p>
           Exported as
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scToc</code>.
         </p>

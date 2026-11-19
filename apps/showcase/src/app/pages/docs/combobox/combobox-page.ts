@@ -42,7 +42,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Combobox</h1>
         <p class="text-muted-foreground">
@@ -59,7 +59,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Base UI&apos;s Combobox, on Angular Aria&apos;s Combobox and Listbox.
           Its value is one of its options, never free text (that is an
           autocomplete). The input goes in our input group, with a trigger and a
@@ -67,11 +67,9 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
           options, by the text typed since the list opened: query().
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
-        <p class="text-muted-foreground">
-          Several values (multiple): chips, then the input.
-        </p>
+        <p>Several values (multiple): chips, then the input.</p>
         <app-anatomy [imports]="chips.imports" [markup]="chips.markup" />
-        <p class="text-muted-foreground">
+        <p>
           A trigger showing the value, the search inside the popup: the trigger
           takes the field&apos;s look by itself, and in a field its label names
           it and the popup. Angular Aria renders a combobox&apos;s list from a
@@ -83,7 +81,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The input is a combo box, the options a list box: focus stays in the
             input while the highlight moves (aria-activedescendant). Name the
@@ -139,7 +137,7 @@ import { RtlComboboxDemoContainer } from './demos/rtl-combobox-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

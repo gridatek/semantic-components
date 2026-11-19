@@ -38,7 +38,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Queue</h1>
         <p class="text-muted-foreground">
@@ -50,7 +50,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-queue-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A <a scLink routerLink="/docs/components/trace">Trace</a> with a
           collapsible line for each section, To do and Completed; the icon on
           each todo shows its status.
@@ -64,7 +64,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Statuses</h2>
-        <p class="text-muted-foreground">
+        <p>
           The agent sends the whole list each time it updates it: render the
           latest. Mark the todo in progress as running only while the chat
           streams, so its title stops shimmering when the agent stops.
@@ -100,7 +100,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
-          <p class="text-muted-foreground">
+          <p>
             A todo with a description opens to show it; one without stays a
             line.
           </p>
@@ -111,7 +111,7 @@ import { RtlQueueDemoContainer } from './demos/rtl-queue-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

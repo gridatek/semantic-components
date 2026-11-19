@@ -19,7 +19,7 @@ import { RtlChatDemoContainer } from './demos/rtl-chat-demo-container';
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Chat</h1>
         <p class="text-muted-foreground">
@@ -31,7 +31,7 @@ import { RtlChatDemoContainer } from './demos/rtl-chat-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-chat-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           Each turn is a
           <a scLink routerLink="/docs/components/message">Message</a> inside a
           <a scLink routerLink="/docs/components/message-scroller"
@@ -48,7 +48,7 @@ import { RtlChatDemoContainer } from './demos/rtl-chat-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scrollAnchor</code
           >
@@ -60,7 +60,7 @@ import { RtlChatDemoContainer } from './demos/rtl-chat-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Scripted turns</h2>
-        <p class="text-muted-foreground">
+        <p>
           The demo has no model: each agent turn is scripted — reasoning, a
           command and a reply — and played on timers. The field holds the next
           scripted question; anything else gets a fallback reply, and Reset
@@ -77,7 +77,7 @@ import { RtlChatDemoContainer } from './demos/rtl-chat-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/message-scroller"
             >Message Scroller</a

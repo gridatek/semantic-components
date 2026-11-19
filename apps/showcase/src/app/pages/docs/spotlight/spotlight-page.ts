@@ -20,7 +20,7 @@ import { SidesSpotlightDemoContainer } from './demos/sides-spotlight-demo-contai
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Spotlight</h1>
         <p class="text-muted-foreground">
@@ -33,7 +33,7 @@ import { SidesSpotlightDemoContainer } from './demos/sides-spotlight-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           A new feature, in the spotlight: the page dimmed and inert but for it,
           a card beside it, named by its title. <kbd scKbd>Escape</kbd>, a click
           on the dim, or Got it.
@@ -43,7 +43,7 @@ import { SidesSpotlightDemoContainer } from './demos/sides-spotlight-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Interactive</h2>
-        <p class="text-muted-foreground">
+        <p>
           The element stays usable through the cutout — type in the search while
           it is lit; the rest of the page stays dimmed and blocked.
           <kbd scKbd>Escape</kbd> still closes.
@@ -53,7 +53,7 @@ import { SidesSpotlightDemoContainer } from './demos/sides-spotlight-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Sides</h2>
-        <p class="text-muted-foreground">
+        <p>
           The card on the side you ask — logical, start and end follow the
           direction — flipping when there is no room.
         </p>
@@ -62,7 +62,7 @@ import { SidesSpotlightDemoContainer } from './demos/sides-spotlight-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Custom dim</h2>
-        <p class="text-muted-foreground">
+        <p>
           The dim and the cutout are classes: here a round cutout around an
           avatar, and a deeper dim.
         </p>

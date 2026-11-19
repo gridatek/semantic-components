@@ -29,7 +29,7 @@ import { ComponentsService } from '../../../services/components-service';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Components</h1>
         <p class="text-muted-foreground">

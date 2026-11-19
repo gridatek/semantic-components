@@ -38,7 +38,7 @@ interface Step {
     PackageManagerInstall,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Internationalization</h1>
         <p class="text-muted-foreground">
@@ -46,7 +46,7 @@ interface Step {
           they translate with the rest of your app, whichever way you translate
           it.
         </p>
-        <p class="text-muted-foreground">
+        <p>
           Angular's i18n works in two ways. Its usual one builds the app once
           per language (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >ng build --localize</code
@@ -66,7 +66,7 @@ interface Step {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>1. Install Angular's localize</h2>
-        <p class="text-muted-foreground">
+        <p>
           Then add
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&#64;angular/localize/init</code
@@ -90,7 +90,7 @@ interface Step {
         <div scSeparator></div>
         <section class="space-y-4">
           <h2 scTypeset appToc>{{ i + 2 }}. {{ step.title }}</h2>
-          <p class="text-muted-foreground">{{ step.text }}</p>
+          <p>{{ step.text }}</p>
           <div scCodeBlock>
             <div scCodeBlockHeader>
               <div scCodeBlockTitle>{{ step.file }}</div>
@@ -118,7 +118,7 @@ interface Step {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>How the locale is chosen</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The one chosen before (kept in a cookie), if it is still offered.
           </li>
@@ -131,7 +131,7 @@ interface Step {
           </li>
           <li>Else the source locale.</li>
         </ul>
-        <p class="text-muted-foreground">
+        <p>
           If its translations fail to load, the app starts in the source locale
           and says why in the console. A message missing from a file shows its
           source text.
@@ -190,7 +190,7 @@ interface Step {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Limits</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Switching reloads the page: Angular translates a template once, when
             it is created.

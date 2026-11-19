@@ -40,7 +40,7 @@ import { VisibilityMessageScrollerDemoContainer } from './demos/visibility-messa
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Message Scroller</h1>
         <p class="text-muted-foreground">
@@ -59,7 +59,7 @@ import { VisibilityMessageScrollerDemoContainer } from './demos/visibility-messa
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element; the messages and the
           button&apos;s icon and name are yours. Its state and commands, through
           exportAs: scrollable(), visibility(), scrollToEnd(), scrollToStart(),
@@ -70,7 +70,7 @@ import { VisibilityMessageScrollerDemoContainer } from './demos/visibility-messa
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The viewport is a region you can tab to — name it (aria-label); the
             arrow keys, <kbd scKbd>Page Up</kbd>, <kbd scKbd>Page Down</kbd>,
@@ -105,7 +105,7 @@ import { VisibilityMessageScrollerDemoContainer } from './demos/visibility-messa
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

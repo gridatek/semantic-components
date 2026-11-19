@@ -19,7 +19,7 @@ import { RtlConfirmationDemoContainer } from './demos/rtl-confirmation-demo-cont
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Confirmation</h1>
         <p class="text-muted-foreground">
@@ -30,7 +30,7 @@ import { RtlConfirmationDemoContainer } from './demos/rtl-confirmation-demo-cont
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-confirmation-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           The question is an
           <a scLink routerLink="/docs/components/item">Item</a> with Deny and
           Approve buttons. A pending approval is a prompt, not activity, so it
@@ -52,7 +52,7 @@ import { RtlConfirmationDemoContainer } from './demos/rtl-confirmation-demo-cont
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the <a scLink routerLink="/docs/components/item">Item</a> and the
           <a scLink routerLink="/docs/components/trace">Trace</a>.
         </p>

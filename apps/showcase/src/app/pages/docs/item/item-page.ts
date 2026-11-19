@@ -37,7 +37,7 @@ import { VariantItemDemoContainer } from './demos/variant-item-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Item</h1>
         <p class="text-muted-foreground">
@@ -54,7 +54,7 @@ import { VariantItemDemoContainer } from './demos/variant-item-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element — an item on a div, a link
           or a button; the media, the words and the actions are yours.
         </p>
@@ -63,7 +63,7 @@ import { VariantItemDemoContainer } from './demos/variant-item-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             An item is layout. When items are a list, say so:
             role=&quot;list&quot; on the group, role=&quot;listitem&quot; on
@@ -93,7 +93,7 @@ import { VariantItemDemoContainer } from './demos/variant-item-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

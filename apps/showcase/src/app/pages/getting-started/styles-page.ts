@@ -194,7 +194,7 @@ const STYLES: { name: ScStyleName; description: string }[] = [
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Styles and themes</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             <strong class="text-foreground">The style</strong> says how things
             are drawn: the classes of each component, written out in full as in
@@ -228,9 +228,7 @@ const STYLES: { name: ScStyleName; description: string }[] = [
         <h3 class="text-lg font-medium tracking-tight">
           1. Install the package
         </h3>
-        <p class="text-muted-foreground">
-          The ui library needs it (its peer): install them together.
-        </p>
+        <p>The ui library needs it (its peer): install them together.</p>
         <app-package-manager-install
           packages="@semantic-components/ui @semantic-components/styles"
         />
@@ -238,7 +236,7 @@ const STYLES: { name: ScStyleName; description: string }[] = [
         <h3 class="pt-4 text-lg font-medium tracking-tight">
           2. Choose a style
         </h3>
-        <p class="text-muted-foreground">
+        <p>
           Give it to
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >provideSemanticComponents</code
@@ -253,7 +251,7 @@ const STYLES: { name: ScStyleName; description: string }[] = [
         <h3 class="pt-4 text-lg font-medium tracking-tight">
           3. Add its file to Tailwind
         </h3>
-        <p class="text-muted-foreground">
+        <p>
           Tailwind skips
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >node_modules</code

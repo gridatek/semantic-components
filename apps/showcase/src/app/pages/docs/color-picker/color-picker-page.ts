@@ -13,7 +13,7 @@ import { AllFeaturesColorPickerDemoContainer } from './demos/all-features-color-
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Color Picker</h1>
         <p class="text-muted-foreground">
@@ -26,7 +26,7 @@ import { AllFeaturesColorPickerDemoContainer } from './demos/all-features-color-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Example</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part at once, in a form: drag across the area or along the
           sliders, pick from the screen, choose a preset — a radio group, the
           arrows move — type any CSS colour (a name, oklch()), write it as Hex,

@@ -20,7 +20,7 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Tour Guide</h1>
         <p class="text-muted-foreground">
@@ -34,7 +34,7 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Tour</h2>
-        <p class="text-muted-foreground">
+        <p>
           A welcome (centred, no target), three steps on their targets — the
           page dimmed but for each — and a farewell. <kbd scKbd>←</kbd>
           <kbd scKbd>→</kbd> step; <kbd scKbd>Escape</kbd>, or the ×, ends it.
@@ -44,15 +44,13 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Minimal</h2>
-        <p class="text-muted-foreground">
-          Three steps, Next and Done — no progress, no Back.
-        </p>
+        <p>Three steps, Next and Done — no progress, no Back.</p>
         <app-minimal-tour-guide-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Scrolling</h2>
-        <p class="text-muted-foreground">
+        <p>
           Targets far apart in a long page: each is scrolled into view (smoothly
           — at once for reduced motion), and the card follows.
         </p>
@@ -61,7 +59,7 @@ import { TourTourGuideDemoContainer } from './demos/tour-tour-guide-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Controlled</h2>
-        <p class="text-muted-foreground">
+        <p>
           Open and step are two-way: start at any step from outside; (finished)
           at Done — closed is not finished.
         </p>

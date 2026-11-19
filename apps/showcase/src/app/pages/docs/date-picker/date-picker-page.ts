@@ -36,7 +36,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Date Picker</h1>
         <p class="text-muted-foreground">
@@ -53,7 +53,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           The picker holds the value; a popover holds the calendar, opened by
           the trigger — a button showing the day, or an icon button in an input
           group beside a typed input (the popover then anchored to the group).
@@ -64,7 +64,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The trigger opens a dialog (the popover) holding the calendar, a
             grid: focus goes to the chosen day (or today); the arrow keys move
@@ -109,7 +109,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the preset (cn: a later class wins). The calendar and the

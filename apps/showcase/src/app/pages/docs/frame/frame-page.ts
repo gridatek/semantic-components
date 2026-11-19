@@ -24,7 +24,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Frame</h1>
         <p class="text-muted-foreground">
@@ -42,7 +42,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           One directive, beside another part or on a plain box. Only the look:
           clipping is the box&apos;s (the aspect ratio clips, the table&apos;s
           container scrolls; on a plain box with an image, add
@@ -65,7 +65,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
           ScFrame —
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[scFrame]</code>
         </h3>
-        <p class="text-muted-foreground">
+        <p>
           The style&apos;s frame: the style&apos;s card radius, ring and shadow
           — square in lyra and sera,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">4xl</code> in

@@ -17,7 +17,7 @@ import { SimpleTreeDemoContainer } from './demos/simple-tree-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Tree</h1>
         <p class="text-muted-foreground">

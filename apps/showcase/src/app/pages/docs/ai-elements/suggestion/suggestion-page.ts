@@ -19,7 +19,7 @@ import { SuggestionUsageDemoContainer } from './demos/suggestion-usage-demo-cont
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Suggestion</h1>
         <p class="text-muted-foreground">
@@ -30,7 +30,7 @@ import { SuggestionUsageDemoContainer } from './demos/suggestion-usage-demo-cont
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-suggestion-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           Each one is a
           <a scLink routerLink="/docs/components/button">Button</a> with the
           prompt as its label; the label is the message, sent as is. Put a row
@@ -47,7 +47,7 @@ import { SuggestionUsageDemoContainer } from './demos/suggestion-usage-demo-cont
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Scrolling</h2>
-        <p class="text-muted-foreground">
+        <p>
           The row scrolls sideways when the suggestions do not fit.
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scroll-fade-x</code
@@ -65,7 +65,7 @@ import { SuggestionUsageDemoContainer } from './demos/suggestion-usage-demo-cont
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the <a scLink routerLink="/docs/components/button">Button</a>.
         </p>
       </section>

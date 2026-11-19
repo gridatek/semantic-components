@@ -38,7 +38,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Task</h1>
         <p class="text-muted-foreground">
@@ -51,7 +51,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-task-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A <a scLink routerLink="/docs/components/trace">Trace</a> with a
           collapsible line for each task. Keep the running task open, and close
           each one once it is done.
@@ -65,7 +65,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Task or Plan</h2>
-        <p class="text-muted-foreground">
+        <p>
           Both are a list of steps under a collapsible line; they differ in when
           the steps are known. Use a
           <a scLink routerLink="/docs/ai-elements/plan">Plan</a> when the agent
@@ -101,7 +101,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Status</h2>
-        <p class="text-muted-foreground">
+        <p>
           The task&apos;s status comes from its steps. Its title is in the
           present tense while it runs, in the past tense once it is done:
           &quot;Updating the page metadata&quot;, &quot;Failed to update the
@@ -112,9 +112,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
-          <p class="text-muted-foreground">
-            Steps with icons, a read linking to its file.
-          </p>
+          <p>Steps with icons, a read linking to its file.</p>
           <app-steps-task-demo-container />
         </div>
         <app-rtl-task-demo-container />
@@ -122,7 +120,7 @@ import { TaskUsageDemoContainer } from './demos/task-usage-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

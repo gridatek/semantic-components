@@ -20,7 +20,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Prompt Input</h1>
         <p class="text-muted-foreground">
@@ -32,7 +32,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-prompt-input-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           An
           <a scLink routerLink="/docs/components/input-group">Input Group</a>
           around a textarea bound with Signal Forms, an attach button, the
@@ -52,7 +52,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Attachments</h2>
-        <p class="text-muted-foreground">
+        <p>
           The attach button opens a hidden file input. Each file shows as an
           Attachment in an addon on top, with a button to remove it, named by
           the file (&quot;Remove report.pdf&quot;).
@@ -61,7 +61,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Model and effort</h2>
-        <p class="text-muted-foreground">
+        <p>
           The two Model Selector menus go in the bottom addon, between the
           attach and send buttons: the first menu&apos;s
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ms-auto</code>
@@ -71,7 +71,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Keyboard</h2>
-        <p class="text-muted-foreground">
+        <p>
           <kbd scKbd>Enter</kbd> sends the message;
           <kbd scKbd>Shift + Enter</kbd> adds a new line. Send is disabled while
           the field is empty.
@@ -85,7 +85,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/input-group">Input Group</a>,
           the

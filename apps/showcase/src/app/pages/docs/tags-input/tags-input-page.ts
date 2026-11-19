@@ -20,7 +20,7 @@ import { LimitTagsInputDemoContainer } from './demos/limit-tags-input-demo-conta
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Tags Input</h1>
         <p class="text-muted-foreground">
@@ -33,7 +33,7 @@ import { LimitTagsInputDemoContainer } from './demos/limit-tags-input-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           <kbd scKbd>Enter</kbd> or a comma adds a tag, and so does leaving the
           field; a duplicate is refused. <kbd scKbd>Backspace</kbd> or
           <kbd scKbd>←</kbd> in the empty field goes to the last tag —
@@ -45,7 +45,7 @@ import { LimitTagsInputDemoContainer } from './demos/limit-tags-input-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Emails</h2>
-        <p class="text-muted-foreground">
+        <p>
           accept decides what goes in — here an address, once. Refused text
           stays, marked, to be corrected; a pasted list is split on commas and
           new lines.
@@ -55,7 +55,7 @@ import { LimitTagsInputDemoContainer } from './demos/limit-tags-input-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Limit and clear</h2>
-        <p class="text-muted-foreground">
+        <p>
           maxLength: at five, nothing more goes in (data-full on it). The count
           is yours to write; Clear removes them all.
         </p>
@@ -64,7 +64,7 @@ import { LimitTagsInputDemoContainer } from './demos/limit-tags-input-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Form</h2>
-        <p class="text-muted-foreground">
+        <p>
           A [formField]: one to five keywords, from the schema — its maxLength
           also stops a sixth going in; its errors once it is touched.
         </p>

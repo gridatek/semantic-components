@@ -26,7 +26,7 @@ import { SegmentedLocaleDateInputDemoContainer } from './demos/segmented-locale-
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Date Input</h1>
         <p class="text-muted-foreground">
@@ -40,7 +40,7 @@ import { SegmentedLocaleDateInputDemoContainer } from './demos/segmented-locale-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           A text input in a field: the locale’s numeric order (here 10/14/2026)
           or ISO (2026-10-14), read on <kbd scKbd>Enter</kbd> or leaving. Text
           that is not a day stays, marked — the value as it was.
@@ -50,15 +50,13 @@ import { SegmentedLocaleDateInputDemoContainer } from './demos/segmented-locale-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Locale</h2>
-        <p class="text-muted-foreground">
-          LOCALE_ID provided as 'fr-FR': typed day first (14/10/2026).
-        </p>
+        <p>LOCALE_ID provided as 'fr-FR': typed day first (14/10/2026).</p>
         <app-locale-date-input-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Limits</h2>
-        <p class="text-muted-foreground">
+        <p>
           minDate, maxDate and unavailable days: a date outside them is not read
           — marked. Here, weekdays from today on.
         </p>
@@ -67,21 +65,19 @@ import { SegmentedLocaleDateInputDemoContainer } from './demos/segmented-locale-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>In a form</h2>
-        <p class="text-muted-foreground">
-          A [formField]: required, from the schema; marked once left.
-        </p>
+        <p>A [formField]: required, from the schema; marked once left.</p>
         <app-form-date-input-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Disabled</h2>
-        <p class="text-muted-foreground">disabled: shown, not edited.</p>
+        <p>disabled: shown, not edited.</p>
         <app-disabled-date-input-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Segmented</h2>
-        <p class="text-muted-foreground">
+        <p>
           scSegmentedDateInput: typed part by part — each part a spin button.
           Digits fill it and move on, arrows step it (an empty part starts at
           today), <kbd scKbd>Backspace</kbd> clears it; the day stays within its
@@ -92,7 +88,7 @@ import { SegmentedLocaleDateInputDemoContainer } from './demos/segmented-locale-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Segmented, French</h2>
-        <p class="text-muted-foreground">
+        <p>
           LOCALE_ID provided as 'fr-FR': day, month, year — the parts named in
           French.
         </p>

@@ -18,7 +18,7 @@ import { PlayerVideoPlayerDemoContainer } from './demos/player-video-player-demo
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Video Player</h1>
         <p class="text-muted-foreground">
@@ -44,7 +44,7 @@ import { PlayerVideoPlayerDemoContainer } from './demos/player-video-player-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Player</h2>
-        <p class="text-muted-foreground">
+        <p>
           Captions in two languages — shown by the player, above its controls —
           chapters and a preview on the seek bar, speeds, picture-in-picture and
           fullscreen. Focused, the keys work: <kbd scKbd>Space</kbd> or
@@ -61,13 +61,13 @@ import { PlayerVideoPlayerDemoContainer } from './demos/player-video-player-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Minimal</h2>
-        <p class="text-muted-foreground">Only the parts you put in.</p>
+        <p>Only the parts you put in.</p>
         <app-minimal-video-player-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Controlled</h2>
-        <p class="text-muted-foreground">
+        <p>
           Its state is two-way: here played, paused and timed from outside, its
           chapters as a list that jumps.
         </p>

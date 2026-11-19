@@ -20,7 +20,7 @@ import { ScalesGanttDemoContainer } from './demos/scales-gantt-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Gantt</h1>
         <p class="text-muted-foreground">

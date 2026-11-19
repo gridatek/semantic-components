@@ -22,7 +22,7 @@ import { DirectionsSpeedDialDemoContainer } from './demos/directions-speed-dial-
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Speed Dial</h1>
         <p class="text-muted-foreground">
@@ -35,7 +35,7 @@ import { DirectionsSpeedDialDemoContainer } from './demos/directions-speed-dial-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           A button in a corner; its actions open upward, each named by the label
           beside it. From the keyboard: <kbd scKbd>Enter</kbd>,
           <kbd scKbd>Space</kbd> or an arrow opens it on the first action; the
@@ -46,7 +46,7 @@ import { DirectionsSpeedDialDemoContainer } from './demos/directions-speed-dial-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Directions</h2>
-        <p class="text-muted-foreground">
+        <p>
           Up, down, left or right — the arrow keys follow: away from the button
           is the next action.
         </p>
@@ -55,7 +55,7 @@ import { DirectionsSpeedDialDemoContainer } from './demos/directions-speed-dial-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Arc</h2>
-        <p class="text-muted-foreground">
+        <p>
           Toward a corner — up-left for a button at the bottom right — the
           actions fan out on a quarter circle. Their labels are read, not shown.
         </p>
@@ -64,7 +64,7 @@ import { DirectionsSpeedDialDemoContainer } from './demos/directions-speed-dial-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Backdrop</h2>
-        <p class="text-muted-foreground">
+        <p>
           On a phone: the page dims behind the actions; a tap on it closes them.
         </p>
         <app-backdrop-speed-dial-demo-container />
@@ -72,7 +72,7 @@ import { DirectionsSpeedDialDemoContainer } from './demos/directions-speed-dial-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Controlled</h2>
-        <p class="text-muted-foreground">
+        <p>
           Open is two-way — here opened from outside too (a press outside closes
           it). A disabled action stays reachable, and does nothing.
         </p>

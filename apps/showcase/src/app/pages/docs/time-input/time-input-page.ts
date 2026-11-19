@@ -24,7 +24,7 @@ import { SecondsTimeInputDemoContainer } from './demos/seconds-time-input-demo-c
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Time Input</h1>
         <p class="text-muted-foreground">
@@ -39,7 +39,7 @@ import { SecondsTimeInputDemoContainer } from './demos/seconds-time-input-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           In a field, named by its label. Type the digits — it moves on by
           itself — or use the arrows; AM/PM takes a or p.
         </p>
@@ -48,7 +48,7 @@ import { SecondsTimeInputDemoContainer } from './demos/seconds-time-input-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Locale</h2>
-        <p class="text-muted-foreground">
+        <p>
           LOCALE_ID provided as 'fr-FR': 24 hours, the parts named in French.
           hourCycle overrides the locale’s 12 or 24 hours.
         </p>
@@ -57,7 +57,7 @@ import { SecondsTimeInputDemoContainer } from './demos/seconds-time-input-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Seconds</h2>
-        <p class="text-muted-foreground">
+        <p>
           granularity="second" adds the seconds; "hour" keeps only the hour.
         </p>
         <app-seconds-time-input-demo-container />
@@ -65,7 +65,7 @@ import { SecondsTimeInputDemoContainer } from './demos/seconds-time-input-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Step and limits</h2>
-        <p class="text-muted-foreground">
+        <p>
           step, 15 minutes here, for the arrows; minTime and maxTime: a time
           outside them is marked.
         </p>
@@ -74,7 +74,7 @@ import { SecondsTimeInputDemoContainer } from './demos/seconds-time-input-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>In a form</h2>
-        <p class="text-muted-foreground">
+        <p>
           A [formField]: required, from the schema — null until every part is
           filled; marked once left.
         </p>
@@ -83,9 +83,7 @@ import { SecondsTimeInputDemoContainer } from './demos/seconds-time-input-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Disabled</h2>
-        <p class="text-muted-foreground">
-          disabled: shown, not edited — out of the tab order.
-        </p>
+        <p>disabled: shown, not edited — out of the tab order.</p>
         <app-disabled-time-input-demo-container />
       </section>
     </div>

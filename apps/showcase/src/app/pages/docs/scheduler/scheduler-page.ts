@@ -17,7 +17,7 @@ import { WorkingHoursSchedulerDemoContainer } from './demos/working-hours-schedu
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Scheduler</h1>
         <p class="text-muted-foreground">
@@ -31,7 +31,7 @@ import { WorkingHoursSchedulerDemoContainer } from './demos/working-hours-schedu
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           Month, week and day, with a toolbar. A day's number opens the day;
           dates, times and the title are written in the app's language, in your
           time zone.
@@ -41,7 +41,7 @@ import { WorkingHoursSchedulerDemoContainer } from './demos/working-hours-schedu
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Month</h2>
-        <p class="text-muted-foreground">
+        <p>
           One view alone. A day shows
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">maxEvents</code>
           and gives the rest to your
@@ -54,7 +54,7 @@ import { WorkingHoursSchedulerDemoContainer } from './demos/working-hours-schedu
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Working hours</h2>
-        <p class="text-muted-foreground">
+        <p>
           A day from 8:00 to 18:00 (<code
             class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >startHour</code

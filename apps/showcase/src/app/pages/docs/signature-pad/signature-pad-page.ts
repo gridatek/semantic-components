@@ -22,7 +22,7 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Signature Pad</h1>
         <p class="text-muted-foreground">
@@ -34,7 +34,7 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           Sign with a mouse, a finger or a pen: the ink follows its speed, or
           the pen's pressure. Undo, redo, clear — or, focused,
           <kbd scKbd>Ctrl + Z</kbd>, <kbd scKbd>Ctrl + Shift + Z</kbd> and
@@ -45,15 +45,13 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Pens</h2>
-        <p class="text-muted-foreground">
-          The pen's colour and width — two-way, here picked with buttons.
-        </p>
+        <p>The pen's colour and width — two-way, here picked with buttons.</p>
         <app-pens-signature-pad-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Draw or type</h2>
-        <p class="text-muted-foreground">
+        <p>
           Without a pointer, type your name: the text is the signature, in the
           input's font. One pad, two ways in.
         </p>
@@ -62,7 +60,7 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Form</h2>
-        <p class="text-muted-foreground">
+        <p>
           A [formField]: required() in the schema; left unsigned, the field
           shows its error.
         </p>
@@ -71,7 +69,7 @@ import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Export</h2>
-        <p class="text-muted-foreground">
+        <p>
           The value is data — drawn again here, read-only and smaller. Exported,
           the image is trimmed to the ink: PNG or SVG.
         </p>

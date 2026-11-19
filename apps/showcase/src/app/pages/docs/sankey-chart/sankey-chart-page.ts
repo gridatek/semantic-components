@@ -27,7 +27,7 @@ import { SankeyChartUsageDemoContainer } from './demos/sankey-chart-usage-demo-c
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Sankey Chart</h1>
         <p class="text-muted-foreground">
@@ -56,7 +56,7 @@ import { SankeyChartUsageDemoContainer } from './demos/sankey-chart-usage-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A chart (its rows and config), its plot with the series, and the
           tooltip and legend you write from their state.
         </p>
@@ -65,7 +65,7 @@ import { SankeyChartUsageDemoContainer } from './demos/sankey-chart-usage-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: the arrow
             keys, <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> move through
@@ -91,7 +91,7 @@ import { SankeyChartUsageDemoContainer } from './demos/sankey-chart-usage-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           The series&apos; inputs. The chart, its plot, axes, tooltip and legend
           are on the
           <a

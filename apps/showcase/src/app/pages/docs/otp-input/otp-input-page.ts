@@ -46,7 +46,7 @@ import { VerificationOtpInputDemoContainer } from './demos/verification-otp-inpu
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>OTP Input</h1>
         <p class="text-muted-foreground">
@@ -63,7 +63,7 @@ import { VerificationOtpInputDemoContainer } from './demos/verification-otp-inpu
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Base UI&apos;s OTP Field: one real input per character, in chunks
           (groups, each a joined box) with separators between them, in a row
           that holds the code — a [formField] or [(value)] — as long as its
@@ -74,7 +74,7 @@ import { VerificationOtpInputDemoContainer } from './demos/verification-otp-inpu
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Real inputs: typing moves on, <kbd scKbd>Backspace</kbd> back;
             <kbd scKbd>←</kbd> and <kbd scKbd>→</kbd> move (mirrored right to
@@ -119,7 +119,7 @@ import { VerificationOtpInputDemoContainer } from './demos/verification-otp-inpu
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

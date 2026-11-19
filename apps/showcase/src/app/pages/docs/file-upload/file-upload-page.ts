@@ -21,7 +21,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>File Upload</h1>
         <p class="text-muted-foreground">
@@ -33,7 +33,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           Files dropped on the zone, or picked — a click on it, or its button by
           keyboard. They are only chosen: the value is a File[], yours to
           upload.
@@ -43,7 +43,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Single image</h2>
-        <p class="text-muted-foreground">
+        <p>
           One image, from a button: without multiple, a new one replaces it.
           Images get a thumbnail.
         </p>
@@ -52,7 +52,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Rejections</h2>
-        <p class="text-muted-foreground">
+        <p>
           Images only, 1 MB at most, three at most: those that break a rule are
           kept out, and said — in your words — from rejections().
         </p>
@@ -61,7 +61,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Upload progress</h2>
-        <p class="text-muted-foreground">
+        <p>
           Uploading is yours, and so is its progress — here, kept per File and
           shown with the lib’s progress bar.
         </p>
@@ -70,7 +70,7 @@ import { SingleFileUploadDemoContainer } from './demos/single-file-upload-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Form</h2>
-        <p class="text-muted-foreground">
+        <p>
           A [formField]: at least one file, and 5 MB in all, checked by the
           form’s schema; the errors shown once it is touched.
         </p>

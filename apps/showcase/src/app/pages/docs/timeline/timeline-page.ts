@@ -21,7 +21,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Timeline</h1>
         <p class="text-muted-foreground">
@@ -34,7 +34,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Activity</h2>
-        <p class="text-muted-foreground">
+        <p>
           A feed: an icon in each marker, and when — written in the app's
           language from a Temporal value, its datetime set.
         </p>
@@ -43,7 +43,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Tracking</h2>
-        <p class="text-muted-foreground">
+        <p>
           Progress: done (filled, solid line), current (a ring —
           aria-current="step"), to come (outlined, dashed). The status is said
           in words too.
@@ -53,7 +53,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Alternate</h2>
-        <p class="text-muted-foreground">
+        <p>
           A history down a centred line, the events in turn on each side, their
           dates facing them.
         </p>
@@ -62,7 +62,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Horizontal</h2>
-        <p class="text-muted-foreground">
+        <p>
           Across, for a roadmap: the date above each marker, the content below;
           it scrolls sideways when narrow.
         </p>
@@ -71,7 +71,7 @@ import { TrackingTimelineDemoContainer } from './demos/tracking-timeline-demo-co
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Pending</h2>
-        <p class="text-muted-foreground">
+        <p>
           The last step still under way: a spinner in its marker, and a failure
           in the destructive colour.
         </p>

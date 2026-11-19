@@ -21,7 +21,7 @@ import { TimerCountdownDemoContainer } from './demos/timer-countdown-demo-contai
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Countdown</h1>
         <p class="text-muted-foreground">
@@ -34,7 +34,7 @@ import { TimerCountdownDemoContainer } from './demos/timer-countdown-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Event</h2>
-        <p class="text-muted-foreground">
+        <p>
           To a moment: the days, hours, minutes and seconds left — each a unit,
           your labels. Screen readers hear it in words, in the app's language.
         </p>
@@ -43,15 +43,13 @@ import { TimerCountdownDemoContainer } from './demos/timer-countdown-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Inline</h2>
-        <p class="text-muted-foreground">
-          In a sentence: hours, minutes and seconds, with your separators.
-        </p>
+        <p>In a sentence: hours, minutes and seconds, with your separators.</p>
         <app-inline-countdown-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Timer</h2>
-        <p class="text-muted-foreground">
+        <p>
           A duration: it starts, pauses and resets; the ring empties as it runs.
         </p>
         <app-timer-countdown-demo-container />
@@ -59,7 +57,7 @@ import { TimerCountdownDemoContainer } from './demos/timer-countdown-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Rolling digits</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each digit slides to the next — still, for anyone who asks for less
           motion.
         </p>
@@ -68,7 +66,7 @@ import { TimerCountdownDemoContainer } from './demos/timer-countdown-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Done</h2>
-        <p class="text-muted-foreground">
+        <p>
           Ten seconds; at zero, (completed) — once — and data-done to style what
           is over.
         </p>

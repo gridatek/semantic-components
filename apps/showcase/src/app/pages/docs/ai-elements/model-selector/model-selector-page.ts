@@ -19,7 +19,7 @@ import { RtlModelSelectorDemoContainer } from './demos/rtl-model-selector-demo-c
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Model Selector</h1>
         <p class="text-muted-foreground">
@@ -31,7 +31,7 @@ import { RtlModelSelectorDemoContainer } from './demos/rtl-model-selector-demo-c
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-model-selector-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           Two <a scLink routerLink="/docs/components/menu">Menus</a> with radio
           items, their triggers buttons in the
           <a scLink routerLink="/docs/components/input-group">Input Group</a>
@@ -52,7 +52,7 @@ import { RtlModelSelectorDemoContainer } from './demos/rtl-model-selector-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Sending</h2>
-        <p class="text-muted-foreground">
+        <p>
           Send the model and the effort with the message; the server maps them
           to a model and its provider&apos;s options.
         </p>
@@ -65,7 +65,7 @@ import { RtlModelSelectorDemoContainer } from './demos/rtl-model-selector-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the <a scLink routerLink="/docs/components/menu">Menu</a> and the
           <a scLink routerLink="/docs/components/input-group">Input Group</a>.
         </p>

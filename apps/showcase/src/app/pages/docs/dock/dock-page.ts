@@ -20,7 +20,7 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Dock</h1>
         <p class="text-muted-foreground">
@@ -32,7 +32,7 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Apps</h2>
-        <p class="text-muted-foreground">
+        <p>
           A launcher: the items near the pointer grow, their neighbours move
           aside. Dots for open apps, a count on Mail, a separator before the
           bin. From the keyboard, <kbd scKbd>Tab</kbd>: the focused item grows
@@ -43,7 +43,7 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Navigation</h2>
-        <p class="text-muted-foreground">
+        <p>
           Links in a nav: the current page marked (aria-current), its dot shown.
         </p>
         <app-navigation-dock-demo-container />
@@ -51,15 +51,13 @@ import { VerticalDockDemoContainer } from './demos/vertical-dock-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Vertical</h2>
-        <p class="text-muted-foreground">
-          On a side: items grow outward, their labels beside them.
-        </p>
+        <p>On a side: items grow outward, their labels beside them.</p>
         <app-vertical-dock-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Plain</h2>
-        <p class="text-muted-foreground">
+        <p>
           Without magnification: magnification set to 1. Under reduced motion,
           the dock is always so.
         </p>

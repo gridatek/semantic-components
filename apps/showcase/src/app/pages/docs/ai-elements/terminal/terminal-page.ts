@@ -38,7 +38,7 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Terminal</h1>
         <p class="text-muted-foreground">
@@ -50,7 +50,7 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-terminal-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A <a scLink routerLink="/docs/components/trace">Trace</a> with a
           collapsible line for each command, its output in a
           <a scLink routerLink="/docs/components/code-block">Code Block</a>.
@@ -64,7 +64,7 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Exit code</h2>
-        <p class="text-muted-foreground">
+        <p>
           A command that exits with any code other than 0 failed: an error
           status. It is a tool call, so its states map as in
           <a scLink routerLink="/docs/ai-elements/tool">Tool</a>.
@@ -95,7 +95,7 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Open while running</h2>
-        <p class="text-muted-foreground">
+        <p>
           The line opens once the first output arrives, so the output shows
           while the command runs; after that it stays as it is, or as the person
           left it. The output streams beside the command and grows in place: a
@@ -111,7 +111,7 @@ import { TerminalUsageDemoContainer } from './demos/terminal-usage-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

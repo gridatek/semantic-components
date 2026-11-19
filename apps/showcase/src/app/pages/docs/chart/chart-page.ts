@@ -41,7 +41,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Chart</h1>
         <p class="text-muted-foreground">
@@ -71,7 +71,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           The chart holds the rows and the config; the plot draws the grid, the
           axes, the cursor and the series; the tooltip and the legend are yours
           to write, from their state. A part you leave out isn&apos;t there.
@@ -81,7 +81,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The plot is one tab stop, a group named by its aria-label: on focus,
             the first category; the arrow keys, <kbd scKbd>Home</kbd> and
@@ -107,7 +107,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Tooltip and legend</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each series' name and color come from the chart's config; its color is
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >--color-&lt;key&gt;</code
@@ -141,7 +141,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           The parts every chart shares, and their inputs; each series&apos; are
           on its own page. Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,

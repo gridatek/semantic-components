@@ -23,7 +23,7 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Reasoning</h1>
         <p class="text-muted-foreground">
@@ -37,7 +37,7 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-reasoning-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A pattern, not a component: it is built with the
           <a scLink routerLink="/docs/components/trace">Trace</a>, a Collapsible
           for the thinking, in a
@@ -53,7 +53,7 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Open state</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Until the first words arrive, it is a plain line: nothing to open
             before the model has written anything.
@@ -79,14 +79,14 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
-          <p class="text-muted-foreground">
+          <p>
             How long it thought, in a description after the title: measure it on
             the server and send it with the message.
           </p>
           <app-duration-reasoning-demo-container />
         </div>
         <div class="space-y-4">
-          <p class="text-muted-foreground">
+          <p>
             Some models send several reasoning parts in one message: each one is
             a line in the same trace, with its own open state.
           </p>
@@ -97,7 +97,7 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

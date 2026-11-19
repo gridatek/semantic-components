@@ -28,7 +28,7 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Dialog</h1>
         <p class="text-muted-foreground">
@@ -45,7 +45,7 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element; the text, the buttons and
           their names are yours. The dialog is in a template, rendered while it
           is open.
@@ -55,7 +55,7 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Closing</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             scDialogClose closes it, on any button — the ✕ straight in the
             dialog (in its corner), Cancel or Done in the footer. It is the
@@ -86,7 +86,7 @@ import { StickyFooterDialogDemoContainer } from './demos/sticky-footer-dialog-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

@@ -18,7 +18,7 @@ import { PlayerAudioPlayerDemoContainer } from './demos/player-audio-player-demo
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Audio Player</h1>
         <p class="text-muted-foreground">
@@ -45,7 +45,7 @@ import { PlayerAudioPlayerDemoContainer } from './demos/player-audio-player-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Player</h2>
-        <p class="text-muted-foreground">
+        <p>
           A playlist of three tracks: the waveform seeks (click, drag, or the
           arrows), the next track plays when one ends, shuffle and repeat.
           Focused, the keys work: <kbd scKbd>Space</kbd> or <kbd scKbd>K</kbd>,
@@ -58,15 +58,13 @@ import { PlayerAudioPlayerDemoContainer } from './demos/player-audio-player-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Minimal</h2>
-        <p class="text-muted-foreground">
-          One file, no playlist — the audio's own src — on one line.
-        </p>
+        <p>One file, no playlist — the audio's own src — on one line.</p>
         <app-minimal-audio-player-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Controlled</h2>
-        <p class="text-muted-foreground">
+        <p>
           Its state is two-way: the track, played, paused, timed and repeated
           from outside.
         </p>

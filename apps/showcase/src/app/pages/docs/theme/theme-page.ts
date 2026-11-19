@@ -21,7 +21,7 @@ import { ThemeSelectDemoContainer } from './demos/theme-select-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Theme</h1>
         <p class="text-muted-foreground">

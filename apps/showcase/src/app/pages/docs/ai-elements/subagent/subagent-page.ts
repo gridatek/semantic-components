@@ -40,7 +40,7 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Subagent</h1>
         <p class="text-muted-foreground">
@@ -53,7 +53,7 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-subagent-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A <a scLink routerLink="/docs/components/trace">Trace</a> line,
           collapsible on the run, with a Trace of its tool calls inside — each
           as a <a scLink routerLink="/docs/ai-elements/tool">Tool</a> line — and
@@ -68,7 +68,7 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>States</h2>
-        <p class="text-muted-foreground">
+        <p>
           The subagent streams what it has done so far, then its final result,
           which replaces it: show &quot;Ran&quot; only once the result is final.
         </p>
@@ -97,14 +97,14 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
-          <p class="text-muted-foreground">
+          <p>
             While it runs, the line is running and its content shows the tool
             calls so far; add the result when it finishes.
           </p>
           <app-running-subagent-demo-container />
         </div>
         <div class="space-y-4">
-          <p class="text-muted-foreground">
+          <p>
             The task it was given at the top, its model and tools as badges, how
             long it ran after the title.
           </p>
@@ -115,7 +115,7 @@ import { SubagentUsageDemoContainer } from './demos/subagent-usage-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

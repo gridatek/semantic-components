@@ -38,7 +38,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Radio Group</h1>
         <p class="text-muted-foreground">
@@ -55,7 +55,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Native radio inputs that draw their own circle and dot, each with its
           value, in a group that holds the choice — a [formField] or [(value)]
           on the group. Each radio is in a horizontal field beside its text —
@@ -67,7 +67,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Native radios: one <kbd scKbd>Tab</kbd> stop for the group, the
             arrows move the choice (mirrored right to left),
@@ -86,7 +86,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Why the group holds the choice</h2>
-        <p class="text-muted-foreground">
+        <p>
           Signal Forms can also bind each native radio itself — a [formField] on
           each, the Angular way. That still works, but each radio then needs
           type="radio" in your template: Angular types a native input&apos;s
@@ -114,7 +114,7 @@ import { RtlRadioGroupDemoContainer } from './demos/rtl-radio-group-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

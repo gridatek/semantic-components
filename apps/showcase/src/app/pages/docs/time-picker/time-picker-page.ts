@@ -19,7 +19,7 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Time Picker</h1>
         <p class="text-muted-foreground">
@@ -32,7 +32,7 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           The button in the field opens the times, every 30 minutes — focus on
           the value, or the time before it. A pick closes them, focus back on
           the button.
@@ -42,7 +42,7 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Interval and limits</h2>
-        <p class="text-muted-foreground">
+        <p>
           interval: 15 minutes between the times; the input’s minTime and
           maxTime bound the list too.
         </p>
@@ -51,7 +51,7 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Locale</h2>
-        <p class="text-muted-foreground">
+        <p>
           LOCALE_ID and the input’s hour cycle write the list too: here French,
           24 hours.
         </p>
@@ -60,7 +60,7 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>In a form</h2>
-        <p class="text-muted-foreground">
+        <p>
           The [formField] is on the time input; the list fills it. Required —
           marked once the list closes or the input is left.
         </p>

@@ -32,7 +32,7 @@ import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Number Ticker</h1>
         <p class="text-muted-foreground">
@@ -50,7 +50,7 @@ import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           One part, on the element that holds the number — a span, a heading, an
           SVG text. It writes the number; you style it.
         </p>
@@ -59,7 +59,7 @@ import { VisibleNumberTickerDemoContainer } from './demos/visible-number-ticker-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Screen readers get the value, never the numbers on the way: a hidden
             text with it, the moving digits hidden from them — on an SVG text,

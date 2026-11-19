@@ -37,7 +37,7 @@ import WithoutLabelNumberGroupDemoContainer from './demos/without-label-number-g
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Number Group</h1>
         <p class="text-muted-foreground">
@@ -56,7 +56,7 @@ import WithoutLabelNumberGroupDemoContainer from './demos/without-label-number-g
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A scField holds the label, the group and the descriptions. The group
           joins the input and its buttons and holds the value — a Signal Forms
           control. A scrub area round the label changes the value by dragging:
@@ -81,7 +81,7 @@ import WithoutLabelNumberGroupDemoContainer from './demos/without-label-number-g
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes class, merged over the style (cn: a later class wins).
           The label, descriptions and errors are the scField&apos;s the group is
           in, as for any input.

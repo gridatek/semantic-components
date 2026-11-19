@@ -30,7 +30,7 @@ import { VerticalSliderDemoContainer } from './demos/vertical-slider-demo-contai
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Slider</h1>
         <p class="text-muted-foreground">
@@ -47,7 +47,7 @@ import { VerticalSliderDemoContainer } from './demos/vertical-slider-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A native range input: the browser draws its track and thumb, the
           preset styles them. A [formField] or [(value)] binds it; a label or
           aria-label names it.
@@ -57,7 +57,7 @@ import { VerticalSliderDemoContainer } from './demos/vertical-slider-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             A native range: <kbd scKbd>Tab</kbd> reaches it; the arrows move it
             by its step, Page Up and <kbd scKbd>Page Down</kbd> by more,
@@ -87,7 +87,7 @@ import { VerticalSliderDemoContainer } from './demos/vertical-slider-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

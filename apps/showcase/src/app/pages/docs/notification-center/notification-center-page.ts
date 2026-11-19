@@ -17,7 +17,7 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Notification Center</h1>
         <p class="text-muted-foreground">
@@ -30,7 +30,7 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Inbox</h2>
-        <p class="text-muted-foreground">
+        <p>
           A bell with the unread count (<code
             class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scNotificationCount</code
@@ -44,7 +44,7 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
 
       <section class="space-y-4">
         <h2 scTypeset appToc>By day</h2>
-        <p class="text-muted-foreground">
+        <p>
           Sections by day, as most apps show them:
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">days()</code>
           groups what is shown by the user's calendar day, and
@@ -59,7 +59,7 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Empty</h2>
-        <p class="text-muted-foreground">
+        <p>
           When nothing matches the filter,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scNotificationEmpty</code

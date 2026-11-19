@@ -30,7 +30,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Toast</h1>
         <p class="text-muted-foreground">
@@ -46,7 +46,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Toasts are shown from code, with ScToaster. How one looks is written
           once, in your app: an ng-template whose root is a scToast, its parts
           inside, from the toast&apos;s data. The toaster renders it for each
@@ -57,7 +57,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The stack is one polite live region: each new toast is announced as
             it appears, without interrupting.
@@ -92,7 +92,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
         <app-duration-toast-demo-container />
         <app-update-toast-demo-container />
         <app-stacked-toast-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           No right-to-left example here: the toasts are one stack for the whole
           app, and follow the page&apos;s direction (dir on the html element) —
           not a dir="rtl" around an example, as other components do. In an
@@ -102,7 +102,7 @@ import { UpdateToastDemoContainer } from './demos/update-toast-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

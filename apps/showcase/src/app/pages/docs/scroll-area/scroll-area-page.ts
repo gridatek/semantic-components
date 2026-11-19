@@ -28,7 +28,7 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Scroll Area</h1>
         <p class="text-muted-foreground">
@@ -45,7 +45,7 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element: you write the viewport and
           its content. A vertical scrollbar comes by default; write your own
           scrollbars (and the corner) and they take its place — sideways, both
@@ -56,7 +56,7 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The browser scrolls it — the wheel, touch, the keyboard; its own
             scrollbar is hidden, the scroll area draws them.
@@ -86,7 +86,7 @@ import { ScrollFadeScrollAreaDemoContainer } from './demos/scroll-fade-scroll-ar
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

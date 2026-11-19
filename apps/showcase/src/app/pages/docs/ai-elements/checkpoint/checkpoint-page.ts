@@ -19,7 +19,7 @@ import { RtlCheckpointDemoContainer } from './demos/rtl-checkpoint-demo-containe
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Checkpoint</h1>
         <p class="text-muted-foreground">
@@ -30,7 +30,7 @@ import { RtlCheckpointDemoContainer } from './demos/rtl-checkpoint-demo-containe
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-checkpoint-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A
           <a scLink routerLink="/docs/components/marker">Marker</a> after a
           turn, with a Restore button. Restore keeps that turn and drops every
@@ -41,7 +41,7 @@ import { RtlCheckpointDemoContainer } from './demos/rtl-checkpoint-demo-containe
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
-        <p class="text-muted-foreground">
+        <p>
           The button&apos;s name says which point it restores: hidden text after
           &quot;Restore&quot;, so the visible word starts its name.
         </p>
@@ -54,7 +54,7 @@ import { RtlCheckpointDemoContainer } from './demos/rtl-checkpoint-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/marker">Marker</a> and the
           <a scLink routerLink="/docs/components/button">Button</a>.

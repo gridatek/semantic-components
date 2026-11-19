@@ -19,7 +19,7 @@ import { SourcesUsageDemoContainer } from './demos/sources-usage-demo-container'
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Sources</h1>
         <p class="text-muted-foreground">
@@ -31,7 +31,7 @@ import { SourcesUsageDemoContainer } from './demos/sources-usage-demo-container'
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-sources-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A <a scLink routerLink="/docs/components/trace">Trace</a> with a
           collapsible line for the list, after the reply. The agent can cite the
           same page more than once: list each once, by its address. A title is
@@ -50,7 +50,7 @@ import { SourcesUsageDemoContainer } from './demos/sources-usage-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Each source is a plain link in the list. It opens in a new tab: say
             so in hidden text, &quot;(opens in a new tab)&quot;.
@@ -70,7 +70,7 @@ import { SourcesUsageDemoContainer } from './demos/sources-usage-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

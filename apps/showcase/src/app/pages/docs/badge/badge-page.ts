@@ -29,7 +29,7 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Badge</h1>
         <p class="text-muted-foreground">
@@ -46,7 +46,7 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           One directive, on a
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">span</code> or a
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">div</code>; on an

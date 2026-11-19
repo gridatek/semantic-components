@@ -22,7 +22,7 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Marquee</h1>
         <p class="text-muted-foreground">
@@ -35,7 +35,7 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Logos</h2>
-        <p class="text-muted-foreground">
+        <p>
           Links, written once: the copies are out of reach. It waits under the
           pointer and with focus inside — <kbd scKbd>Tab</kbd> into it — and the
           button pauses it.
@@ -45,31 +45,25 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Testimonials</h2>
-        <p class="text-muted-foreground">Two rows, going opposite ways.</p>
+        <p>Two rows, going opposite ways.</p>
         <app-testimonials-marquee-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Vertical</h2>
-        <p class="text-muted-foreground">
-          A column, going up: give it a height.
-        </p>
+        <p>A column, going up: give it a height.</p>
         <app-vertical-marquee-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Ticker</h2>
-        <p class="text-muted-foreground">
-          Headlines, with your separators — text is content like any other.
-        </p>
+        <p>Headlines, with your separators — text is content like any other.</p>
         <app-ticker-marquee-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Speed</h2>
-        <p class="text-muted-foreground">
-          In pixels a second: short and long content move at the same pace.
-        </p>
+        <p>In pixels a second: short and long content move at the same pace.</p>
         <app-speed-marquee-demo-container />
       </section>
     </div>

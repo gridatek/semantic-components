@@ -29,7 +29,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     PackageManagerInstall,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Prerequisites</h1>
         <p class="text-muted-foreground">
@@ -39,9 +39,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>1. Install Angular Aria and CDK</h2>
-        <p class="text-muted-foreground">
-          Semantic Components depends on Angular Aria and Angular CDK.
-        </p>
+        <p>Semantic Components depends on Angular Aria and Angular CDK.</p>
         <app-package-manager-install packages="@angular/aria @angular/cdk" />
       </section>
 
@@ -49,7 +47,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>2. Set up Tailwind CSS</h2>
-        <p class="text-muted-foreground">
+        <p>
           Tailwind CSS v4 is required. Follow these steps if not already
           installed:
         </p>
@@ -59,7 +57,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <h3 class="text-lg font-medium tracking-tight">
               2.1 Install Tailwind CSS
             </h3>
-            <p class="text-muted-foreground">
+            <p>
               Next, open a terminal in your Angular project's root directory and
               run the following command to install Tailwind CSS and its peer
               dependencies:
@@ -73,7 +71,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
             <h3 class="text-lg font-medium tracking-tight">
               2.2 Configure PostCSS Plugins
             </h3>
-            <p class="text-muted-foreground">
+            <p>
               Next, add a
               <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
                 >.postcssrc.json</code
@@ -111,7 +109,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>3. Install utilities</h2>
-        <p class="text-muted-foreground">
+        <p>
           Install the required utility libraries for class management and
           animations.
         </p>
@@ -124,11 +122,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>4. Install the font</h2>
-        <p class="text-muted-foreground">
-          The theme's font is Geist, as in shadcn/ui:
-        </p>
+        <p>The theme's font is Geist, as in shadcn/ui:</p>
         <app-package-manager-install packages="@fontsource-variable/geist" />
-        <p class="text-muted-foreground">
+        <p>
           Your
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
           imports it (it's in the file to copy, UI › Configure styles):
@@ -142,7 +138,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>5. Install icons</h2>
-        <p class="text-muted-foreground">
+        <p>
           The examples use
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&#64;semantic-icons/lucide-icons</code
@@ -150,7 +146,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           — install it to copy them as they are.
         </p>
         <app-package-manager-install packages="@semantic-icons/lucide-icons" />
-        <p class="text-muted-foreground">
+        <p>
           The components themselves draw no icons: they're in your templates, so
           you can swap them for any library.
         </p>
@@ -160,7 +156,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>6. Polyfill Temporal</h2>
-        <p class="text-muted-foreground">
+        <p>
           The date components use the browser's
           <a
             href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Temporal"
@@ -173,7 +169,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           your app: it fills in the global only where it's missing.
         </p>
         <app-package-manager-install packages="temporal-polyfill" />
-        <p class="text-muted-foreground">
+        <p>
           Then list it in your build's
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">polyfills</code>
           (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"

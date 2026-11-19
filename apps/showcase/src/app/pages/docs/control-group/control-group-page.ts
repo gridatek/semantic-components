@@ -38,7 +38,7 @@ interface ScApiRow {
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Control Group</h1>
         <p class="text-muted-foreground">
@@ -56,7 +56,7 @@ interface ScApiRow {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A group on a
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">div</code>, its
           children what you put in it: inputs, selects, text, buttons, input
@@ -69,7 +69,7 @@ interface ScApiRow {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>shadcn&apos;s Button Group</h2>
-        <p class="text-muted-foreground">
+        <p>
           This is shadcn&apos;s
           <a
             href="https://ui.shadcn.com/docs/components/button-group"
@@ -86,7 +86,7 @@ interface ScApiRow {
             >Button page</a
           >.
         </p>
-        <p class="text-muted-foreground">
+        <p>
           Tab goes to each control. For buttons that toggle a state, use a
           Toggle Group; for a row of controls moved between with the arrow keys,
           a Toolbar.
@@ -112,7 +112,7 @@ interface ScApiRow {
               part.selector
             }}</code>
           </h3>
-          <p class="text-muted-foreground">{{ part.description }}</p>
+          <p>{{ part.description }}</p>
           <app-api-table
             [label]="part.name + ' inputs'"
             [inputs]="part.inputs"

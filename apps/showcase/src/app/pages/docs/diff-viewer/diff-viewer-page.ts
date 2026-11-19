@@ -23,7 +23,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Diff Viewer</h1>
         <p class="text-muted-foreground">
@@ -42,14 +42,14 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
           href="https://github.com/kpdecker/jsdiff"
           names="ScDiffViewer"
         />
-        <p class="text-muted-foreground">
+        <p>
           Colored by the code block's highlighter, when the app provides one.
         </p>
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Split</h2>
-        <p class="text-muted-foreground">
+        <p>
           Side by side: the old text facing the new, rows aligned, long lines
           wrapped. Your header holds the title, the counts and a switch for the
           view ([(view)]).
@@ -59,7 +59,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Unified</h2>
-        <p class="text-muted-foreground">
+        <p>
           One column, both line numbers, + and − — the words changed in a
           changed line marked.
         </p>
@@ -68,7 +68,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Folded</h2>
-        <p class="text-muted-foreground">
+        <p>
           context: unchanged lines kept around each change; the rest folded —
           your scDiffViewerFold template writes the button, a click shows them.
         </p>
@@ -77,7 +77,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Ignore whitespace</h2>
-        <p class="text-muted-foreground">
+        <p>
           ignoreWhitespace: lines that differ only in spaces and tabs count as
           unchanged (ignoreCase, the same for letter case).
         </p>
@@ -86,9 +86,7 @@ import { WhitespaceDiffViewerDemoContainer } from './demos/whitespace-diff-viewe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Identical</h2>
-        <p class="text-muted-foreground">
-          identical(): nothing changed — show your own words.
-        </p>
+        <p>identical(): nothing changed — show your own words.</p>
         <app-identical-diff-viewer-demo-container />
       </section>
     </div>

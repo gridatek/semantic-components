@@ -21,7 +21,7 @@ import { GridInfiniteScrollDemoContainer } from './demos/grid-infinite-scroll-de
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Infinite Scroll</h1>
         <p class="text-muted-foreground">
@@ -34,7 +34,7 @@ import { GridInfiniteScrollDemoContainer } from './demos/grid-infinite-scroll-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Feed</h2>
-        <p class="text-muted-foreground">
+        <p>
           Articles in a feed (role="feed"), more as the reader nears the end of
           the box: aria-busy while loading, and your words in the status — then
           “That’s all”.
@@ -44,7 +44,7 @@ import { GridInfiniteScrollDemoContainer } from './demos/grid-infinite-scroll-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Grid</h2>
-        <p class="text-muted-foreground">
+        <p>
           Any layout: here a grid of products. The first page does not fill the
           box — it asks again, until the box is full or there is no more.
         </p>
@@ -53,7 +53,7 @@ import { GridInfiniteScrollDemoContainer } from './demos/grid-infinite-scroll-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Load more</h2>
-        <p class="text-muted-foreground">
+        <p>
           auto off: only the button asks — the footer stays within reach, and
           the reader decides.
         </p>
@@ -62,7 +62,7 @@ import { GridInfiniteScrollDemoContainer } from './demos/grid-infinite-scroll-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Error and retry</h2>
-        <p class="text-muted-foreground">
+        <p>
           A load fails: auto off, so it does not ask again by itself; the status
           says so and the button tries again.
         </p>
@@ -71,7 +71,7 @@ import { GridInfiniteScrollDemoContainer } from './demos/grid-infinite-scroll-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Chat</h2>
-        <p class="text-muted-foreground">
+        <p>
           direction="start": it opens at the end, and older messages come in
           above as the reader scrolls up — the one they were reading stays where
           it was.

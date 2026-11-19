@@ -20,7 +20,7 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Lightbox</h1>
         <p class="text-muted-foreground">
@@ -40,7 +40,7 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Gallery</h2>
-        <p class="text-muted-foreground">
+        <p>
           A grid of links to the full photos — links still, without the
           lightbox. Opened, the thumbnail grows into the photo;
           <kbd scKbd>←</kbd> <kbd scKbd>→</kbd> or a swipe to change, + − 0 to
@@ -51,7 +51,7 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Zoom</h2>
-        <p class="text-muted-foreground">
+        <p>
           One photo: the wheel, a double-click or a pinch zooms where you point;
           drag to pan.
         </p>
@@ -60,7 +60,7 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>In an article</h2>
-        <p class="text-muted-foreground">
+        <p>
           One image in the text, opened in place — no thumbnails, no counter
           needed.
         </p>
@@ -69,7 +69,7 @@ import { ZoomLightboxDemoContainer } from './demos/zoom-lightbox-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Controlled</h2>
-        <p class="text-muted-foreground">
+        <p>
           Open and the index are two-way — here from outside; it stops at the
           ends (no loop).
         </p>

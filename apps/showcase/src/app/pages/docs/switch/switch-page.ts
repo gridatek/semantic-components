@@ -36,7 +36,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Switch</h1>
         <p class="text-muted-foreground">
@@ -53,7 +53,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A native checkbox with role="switch" that draws its track and thumb:
           alone, or in a horizontal field beside its text — the field is the
           label, a label is inside the field, or the field is inside a label (a
@@ -65,7 +65,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             A native checkbox with role="switch": announced as a switch, on or
             off; <kbd scKbd>Tab</kbd> reaches it, <kbd scKbd>Space</kbd> toggles
@@ -98,7 +98,7 @@ import { SwitchUsageDemoContainer } from './demos/switch-usage-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

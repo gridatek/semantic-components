@@ -22,7 +22,7 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Compare</h1>
         <p class="text-muted-foreground">
@@ -35,7 +35,7 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           Two photos, before and after an edit. Drag the divider, click anywhere
           to move it there, or focus it: the arrows move it (<kbd scKbd
             >Shift</kbd
@@ -47,13 +47,13 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Vertical</h2>
-        <p class="text-muted-foreground">Top and bottom.</p>
+        <p>Top and bottom.</p>
         <app-vertical-compare-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Hover</h2>
-        <p class="text-muted-foreground">
+        <p>
           With
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">hover</code>, the
           divider follows the pointer.
@@ -63,7 +63,7 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Handle only</h2>
-        <p class="text-muted-foreground">
+        <p>
           With
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">handleOnly</code
           >, only the handle drags — a page can scroll over the rest.
@@ -77,7 +77,7 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Any content</h2>
-        <p class="text-muted-foreground">
+        <p>
           Before and after are any content, not only images: the same card in
           the light and the dark theme.
         </p>

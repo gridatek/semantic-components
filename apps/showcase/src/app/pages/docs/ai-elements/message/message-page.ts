@@ -19,7 +19,7 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Message</h1>
         <p class="text-muted-foreground">
@@ -31,7 +31,7 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-message-pattern-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           The person&apos;s text is a
           <a scLink routerLink="/docs/components/bubble">Bubble</a> on a
           <a scLink routerLink="/docs/components/message">Message</a> aligned to
@@ -48,12 +48,12 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Actions</h2>
-        <p class="text-muted-foreground">
+        <p>
           Actions go in the message&apos;s footer, which follows its alignment:
           on the person&apos;s turn they sit at the end. Ghost icon buttons,
           each named by hidden text and shown in a tooltip.
         </p>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             <strong>Copy</strong> writes the reply to the clipboard and turns to
             a check for two seconds; its name follows: Copy, then Copied.
@@ -75,7 +75,7 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Markdown</h2>
-        <p class="text-muted-foreground">
+        <p>
           The reply streams as markdown. The library has no Markdown renderer
           yet: here the reply is written out, its code in a
           <a scLink routerLink="/docs/components/code-block">Code Block</a>.
@@ -89,7 +89,7 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the <a scLink routerLink="/docs/components/message">Message</a>,
           the <a scLink routerLink="/docs/components/bubble">Bubble</a> and the
           <a scLink routerLink="/docs/components/tooltip">Tooltip</a>.

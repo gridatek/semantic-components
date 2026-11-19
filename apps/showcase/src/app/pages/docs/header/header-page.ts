@@ -30,7 +30,7 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Header</h1>
         <p class="text-muted-foreground">
@@ -50,7 +50,7 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           The bar holds your brand, the links — a Navigation Menu, shown from
           the expand width up — and your actions, your own markup laid out as
           you like. Below the expand width, the header shows the mobile
@@ -63,7 +63,7 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The bar is the page&apos;s banner landmark (a header element); name
             it with aria-label only if the page has more than one.
@@ -106,7 +106,7 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           The header and the toggle take
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over their own (cn: a later class wins). The menu&apos;s

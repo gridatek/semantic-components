@@ -31,7 +31,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Alert</h1>
         <p class="text-muted-foreground">
@@ -49,7 +49,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element; the icon is yours, the
           first child: it sits beside the title and the description.
         </p>
@@ -58,12 +58,12 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Announcing</h2>
-        <p class="text-muted-foreground">
+        <p>
           An alert has no role of its own: one that is on the page when it loads
           is read in its place, like the rest of the page. Announce one only
           when it appears after something the user did — a save, an error:
         </p>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
               >role="status"</code
@@ -110,7 +110,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
             would be announced on every visit, or not at all.
           </li>
         </ul>
-        <p class="text-muted-foreground">The Announced example shows it.</p>
+        <p>The Announced example shows it.</p>
       </section>
 
       <section class="space-y-8">
@@ -126,7 +126,7 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

@@ -8,7 +8,7 @@ import { NativeDialogDemoContainer } from './demos/native-dialog-demo-container'
   selector: 'app-native-dialog-page',
   imports: [NativeDialogDemoContainer, TocHeading, ComponentBadges, ScTypeset],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Native Dialog</h1>
         <p class="text-muted-foreground">

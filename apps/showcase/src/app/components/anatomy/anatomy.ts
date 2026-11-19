@@ -4,8 +4,6 @@ import {
   ScCodeBlockActions,
   ScCodeBlockContent,
   ScCodeBlockCopy,
-  ScCodeBlockHeader,
-  ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
 
@@ -20,41 +18,33 @@ import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
     ScCodeBlockActions,
     ScCodeBlockContent,
     ScCodeBlockCopy,
-    ScCodeBlockHeader,
-    ScCodeBlockTitle,
     SiCheckIcon,
     SiCopyIcon,
   ],
   template: `
-    <div scCodeBlock>
-      <div scCodeBlockHeader>
-        <div scCodeBlockTitle>typescript</div>
-        <div scCodeBlockActions>
-          <button [scCodeBlockCopy]="imports()" #copyImports="scCodeBlockCopy">
-            @if (copyImports.copied()) {
-              <svg siCheckIcon></svg>
-            } @else {
-              <svg siCopyIcon></svg>
-            }
-            <span class="sr-only">Copy the import</span>
-          </button>
-        </div>
+    <div scCodeBlock class="bg-muted/50 border-transparent">
+      <div scCodeBlockActions class="absolute end-2 top-2 z-10">
+        <button [scCodeBlockCopy]="imports()" #copyImports="scCodeBlockCopy">
+          @if (copyImports.copied()) {
+            <svg siCheckIcon></svg>
+          } @else {
+            <svg siCopyIcon></svg>
+          }
+          <span class="sr-only">Copy the import</span>
+        </button>
       </div>
       <pre scCodeBlockContent [code]="imports()" language="typescript"></pre>
     </div>
-    <div scCodeBlock>
-      <div scCodeBlockHeader>
-        <div scCodeBlockTitle>angular-html</div>
-        <div scCodeBlockActions>
-          <button [scCodeBlockCopy]="markup()" #copyMarkup="scCodeBlockCopy">
-            @if (copyMarkup.copied()) {
-              <svg siCheckIcon></svg>
-            } @else {
-              <svg siCopyIcon></svg>
-            }
-            <span class="sr-only">Copy the markup</span>
-          </button>
-        </div>
+    <div scCodeBlock class="bg-muted/50 border-transparent">
+      <div scCodeBlockActions class="absolute end-2 top-2 z-10">
+        <button [scCodeBlockCopy]="markup()" #copyMarkup="scCodeBlockCopy">
+          @if (copyMarkup.copied()) {
+            <svg siCheckIcon></svg>
+          } @else {
+            <svg siCopyIcon></svg>
+          }
+          <span class="sr-only">Copy the markup</span>
+        </button>
       </div>
       <pre scCodeBlockContent [code]="markup()" language="angular-html"></pre>
     </div>

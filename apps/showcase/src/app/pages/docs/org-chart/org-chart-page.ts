@@ -24,7 +24,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Org Chart</h1>
         <p class="text-muted-foreground">
@@ -37,7 +37,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           People and their reports, as nested lists — one
           <kbd scKbd>Tab</kbd> stop, then <kbd scKbd>↑</kbd>
           <kbd scKbd>↓</kbd> between people, <kbd scKbd>→</kbd>
@@ -49,15 +49,13 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Avatars</h2>
-        <p class="text-muted-foreground">
-          A card is yours to fill: here, the lib’s avatar beside the name.
-        </p>
+        <p>A card is yours to fill: here, the lib’s avatar beside the name.</p>
         <app-avatars-org-chart-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Across</h2>
-        <p class="text-muted-foreground">
+        <p>
           direction="across": reports at the inline end — on the right, or on
           the left in a right-to-left page.
         </p>
@@ -66,7 +64,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Collapsible</h2>
-        <p class="text-muted-foreground">
+        <p>
           A click, or <kbd scKbd>→</kbd> and <kbd scKbd>←</kbd>, opens and
           closes a person. Your chevron (scOrgChartExpandIcon) turns;
           [expanded]="false" starts closed.
@@ -76,7 +74,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Selection</h2>
-        <p class="text-muted-foreground">
+        <p>
           The selected person, two-way through [(value)] —
           <kbd scKbd>Enter</kbd>, <kbd scKbd>Space</kbd> or a click — and their
           details beside the chart.
@@ -86,7 +84,7 @@ import { SelectionOrgChartDemoContainer } from './demos/selection-org-chart-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>From data</h2>
-        <p class="text-muted-foreground">
+        <p>
           From your own data: a template that writes a person, then — for each
           report — itself, with the outlet’s injector (so each report finds its
           group). Any shape; here, those below the second level start closed.

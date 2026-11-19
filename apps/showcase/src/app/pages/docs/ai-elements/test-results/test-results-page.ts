@@ -21,7 +21,7 @@ import { TestResultsUsageDemoContainer } from './demos/test-results-usage-demo-c
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Test Results</h1>
         <p class="text-muted-foreground">
@@ -34,7 +34,7 @@ import { TestResultsUsageDemoContainer } from './demos/test-results-usage-demo-c
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-test-results-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A <a scLink routerLink="/docs/components/trace">Trace</a> with a
           collapsible line for the run and for each suite; a failed test opens
           on its error, in a
@@ -50,7 +50,7 @@ import { TestResultsUsageDemoContainer } from './demos/test-results-usage-demo-c
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
-          <p class="text-muted-foreground">
+          <p>
             Tests grouped by file: each suite a collapsible line with its tests,
             the suites with a failure open.
           </p>
@@ -61,7 +61,7 @@ import { TestResultsUsageDemoContainer } from './demos/test-results-usage-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

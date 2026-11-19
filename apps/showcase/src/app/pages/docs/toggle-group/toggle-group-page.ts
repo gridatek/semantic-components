@@ -36,7 +36,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Toggle Group</h1>
         <p class="text-muted-foreground">
@@ -53,7 +53,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A group round your buttons, each with its value; the group holds the
           pressed ones — a [formField] or [(value)], an array. Inside a toolbar,
           use a widget group in the toolbar: it shares the toolbar&apos;s arrow
@@ -64,7 +64,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             One <kbd scKbd>Tab</kbd> stop: the arrow keys move between the items
             (<kbd scKbd>←</kbd> and <kbd scKbd>→</kbd> mirrored right to left;
@@ -103,7 +103,7 @@ import { VerticalToggleGroupDemoContainer } from './demos/vertical-toggle-group-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

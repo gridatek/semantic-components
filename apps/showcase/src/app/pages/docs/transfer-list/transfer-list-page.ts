@@ -20,7 +20,7 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Transfer List</h1>
         <p class="text-muted-foreground">
@@ -33,7 +33,7 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           Two sides, one value: the chosen ids. Each side a listbox —
           <kbd scKbd>↑</kbd> <kbd scKbd>↓</kbd>, <kbd scKbd>Space</kbd> selects,
           <kbd scKbd>Shift</kbd> extends, <kbd scKbd>Ctrl + A</kbd> all,
@@ -45,7 +45,7 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Form</h2>
-        <p class="text-muted-foreground">
+        <p>
           A [formField]: the chosen ids; at least two, in the schema — left
           short, the error shows.
         </p>
@@ -54,7 +54,7 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Ordered</h2>
-        <p class="text-muted-foreground">
+        <p>
           The value keeps its order: choose a table's columns, then move them up
           and down.
         </p>
@@ -63,7 +63,7 @@ import { OrderedTransferListDemoContainer } from './demos/ordered-transfer-list-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Many</h2>
-        <p class="text-muted-foreground">
+        <p>
           Two hundred items: search to narrow a side; Add all moves what the
           search shows.
         </p>

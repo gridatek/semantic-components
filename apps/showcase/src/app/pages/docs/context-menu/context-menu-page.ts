@@ -38,7 +38,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Context Menu</h1>
         <p class="text-muted-foreground">
@@ -56,7 +56,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           The context menu holds the area (the trigger) and the menu, in a
           portal as the Menu&apos;s: rendered while it is open. The menu is made
           of the Menu&apos;s parts, which take the context menu&apos;s look in
@@ -67,7 +67,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Keyboard</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The area is focusable: <kbd scKbd>Shift + F10</kbd> or the Menu key
             opens the menu on it, with its first item highlighted. A right-click
@@ -102,7 +102,7 @@ import { SubmenuContextMenuDemoContainer } from './demos/submenu-context-menu-de
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins). The menus&apos; parts

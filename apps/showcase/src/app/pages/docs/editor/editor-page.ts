@@ -83,7 +83,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
     SiCopyIcon,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Editor</h1>
         <p class="text-muted-foreground">
@@ -99,7 +99,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Installation</h2>
-        <p class="text-muted-foreground">
+        <p>
           It has its own entry point,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&#64;semantic-components/ui/editor</code
@@ -122,7 +122,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
         <app-package-manager-install
           packages="@tiptap/core @tiptap/pm @tiptap/starter-kit"
         />
-        <p class="text-muted-foreground">
+        <p>
           Then its styles, in your
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
           >:
@@ -153,7 +153,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           The editor holds a toolbar — the library&apos;s Toolbar, a command
           beside each scToggle — and the document. The counts are optional; so
           are the block menu, the link popover and the features&apos; parts
@@ -163,7 +163,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc id="features">Features</h2>
-        <p class="text-muted-foreground">
+        <p>
           The core,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&#64;semantic-components/ui/editor</code
@@ -262,7 +262,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Keyboard</h2>
-        <p class="text-muted-foreground">
+        <p>
           Tiptap&apos;s shortcuts, and Markdown as you type, each at the start
           of a line and followed by a space:
           <kbd scKbd class="font-mono">#</kbd> headings,
@@ -313,7 +313,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Loading</h2>
-        <p class="text-muted-foreground">
+        <p>
           The features are loaded with the editor, not on their own: a
           feature&apos;s package is small next to what every editor needs (<code
             class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -354,7 +354,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Examples</h2>
-        <p class="text-muted-foreground">
+        <p>
           The complete editor, after Tiptap's Simple Editor: undo and redo, the
           block type and list menus (with task lists), blockquotes and code
           blocks, marks, highlight colours, links, superscript and subscript,
@@ -371,7 +371,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Tables</h2>
-        <p class="text-muted-foreground">
+        <p>
           The core and one feature,
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >withTables()</code
@@ -383,7 +383,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Images</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >withImages()</code
           >
@@ -400,13 +400,13 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Search and replace</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >withSearch()</code
           >: the search button, or Ctrl / ⌘ + F in the document, opens the bar.
           Enter and Shift + Enter step through the matches, Escape closes it.
         </p>
-        <p class="text-muted-foreground">
+        <p>
           Whether the bar is open is yours: one signal, bound to what shows it
           and to the bar's
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[(open)]</code>.
@@ -422,7 +422,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Floating toolbar</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scEditorBubbleMenu</code
           >
@@ -433,7 +433,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Signal Forms</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >[formField]</code
           >
@@ -455,7 +455,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Displaying the document</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >scEditorView</code
           >
@@ -468,7 +468,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Formats</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">format</code>
           picks what the form holds:
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">html</code>
@@ -491,7 +491,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Layout</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">layout</code>
           on
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -507,7 +507,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Initial content</h2>
-        <p class="text-muted-foreground">
+        <p>
           The form's value is the document to start with: any HTML the editor
           knows — headings, lists, quotes, marks.
         </p>
@@ -515,7 +515,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Read-only</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">readonly</code>
           from the schema: the document can be read, selected and searched, not
           changed, and its buttons are disabled. Here it has no toolbar at all.
@@ -524,7 +524,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Without counts</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is optional: leave out the footer and its word and
           character counts.
         </p>
@@ -532,7 +532,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>RTL</h2>
-        <p class="text-muted-foreground">
+        <p>
           In a right-to-left page: the toolbar starts at the right and Left
           moves to the next button; the text runs from the right, list markers
           on the right.
@@ -542,7 +542,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>, and
           the buttons take

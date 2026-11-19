@@ -266,7 +266,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Next steps</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           @for (step of nextSteps; track step.path) {
             <li>
               <a scLink [routerLink]="step.path">{{ step.name }}</a>

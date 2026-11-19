@@ -20,7 +20,7 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Kanban Board</h1>
         <p class="text-muted-foreground">
@@ -33,7 +33,7 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           Cards dragged with the mouse, a finger (hold, then move) or a pen — or
           lifted by the keyboard: <kbd scKbd>Space</kbd>, the arrows,
           <kbd scKbd>Space</kbd>; <kbd scKbd>Escape</kbd> puts it back. Each
@@ -44,7 +44,7 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Rich cards</h2>
-        <p class="text-muted-foreground">
+        <p>
           A card is yours: labels, a priority in words and the theme’s colours,
           a due date, an avatar — and a “Move to…” menu, through move(), for
           those who neither drag nor lift.
@@ -54,7 +54,7 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
 
       <section class="space-y-4">
         <h2 scTypeset appToc>From a flat list</h2>
-        <p class="text-muted-foreground">
+        <p>
           Your data as it is stored — issues, each with a status: the board’s
           value made from it, and each move written back.
         </p>
@@ -63,7 +63,7 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Add and limit</h2>
-        <p class="text-muted-foreground">
+        <p>
           Adding a card, and a work-in-progress limit, are yours: here a field
           under each column, and In progress said to be over three.
         </p>

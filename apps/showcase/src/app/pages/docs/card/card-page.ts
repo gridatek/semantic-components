@@ -27,7 +27,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Card</h1>
         <p class="text-muted-foreground">
@@ -44,7 +44,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element. The title is the heading
           you choose (an
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">h3</code>, an
@@ -56,7 +56,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Notes</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The spacing between the sections and the inset of every part is one
             variable,
@@ -94,7 +94,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

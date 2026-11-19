@@ -25,7 +25,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
     ScLink,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Backdrop</h1>
         <p class="text-muted-foreground">
@@ -48,7 +48,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           One directive, on an empty
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">div</code>, shown
           with
@@ -60,7 +60,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Notes</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             It fades in when shown and out when it goes (<code
               class="bg-muted rounded px-1.5 py-0.5 text-sm"

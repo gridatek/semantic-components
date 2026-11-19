@@ -40,7 +40,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Chain of Thought</h1>
         <p class="text-muted-foreground">
@@ -53,7 +53,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-chain-of-thought-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A pattern, not a component: a
           <a scLink routerLink="/docs/components/trace">Trace</a> whose
           collapsible line is the summary, with a Trace of steps inside — their
@@ -71,7 +71,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Steps</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each step is a line: set its status, and write its title in the
           matching tense.
         </p>
@@ -97,7 +97,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
             </tbody>
           </table>
         </div>
-        <p class="text-muted-foreground">
+        <p>
           The steps stay in the page when the summary closes (the
           Collapsible&apos;s panel only hides them), so each keeps its own open
           state.
@@ -106,7 +106,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Open state</h2>
-        <p class="text-muted-foreground">
+        <p>
           The summary is researching while the steps run and before the reply
           starts: it opens then and closes when the reply begins, unless the
           person opened or closed it. Its status and title follow the steps —
@@ -119,7 +119,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
         <h2 scTypeset appToc>Examples</h2>
         <app-steps-chain-of-thought-demo-container />
         <div class="space-y-4">
-          <p class="text-muted-foreground">
+          <p>
             A web search&apos;s results: a badge for each hostname, in the
             step&apos;s content.
           </p>
@@ -130,7 +130,7 @@ import { StepsChainOfThoughtDemoContainer } from './demos/steps-chain-of-thought
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

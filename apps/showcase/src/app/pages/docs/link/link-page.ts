@@ -33,7 +33,7 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Link</h1>
         <p class="text-muted-foreground">
@@ -51,7 +51,7 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           One part, on a native link: its
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">href</code> (or
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">routerLink</code
@@ -79,7 +79,7 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScLink</code>
           is a directive on a native
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">a[scLink]</code>:

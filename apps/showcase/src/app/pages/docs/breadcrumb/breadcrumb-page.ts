@@ -31,7 +31,7 @@ import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-d
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Breadcrumb</h1>
         <p class="text-muted-foreground">
@@ -48,7 +48,7 @@ import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-d
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element: a
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">nav</code>
           named by you, an ordered list, the links and the separators as list
@@ -59,7 +59,7 @@ import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-d
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Notes</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Name the navigation (<code
               class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -96,7 +96,7 @@ import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-d
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

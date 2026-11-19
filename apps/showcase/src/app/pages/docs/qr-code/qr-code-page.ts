@@ -29,7 +29,7 @@ import { UseCasesQrCodeDemoContainer } from './demos/use-cases-qr-code-demo-cont
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>QR Code</h1>
         <p class="text-muted-foreground">

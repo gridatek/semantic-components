@@ -70,7 +70,7 @@ interface ScCodeSample {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>1. Copy a style</h2>
-        <p class="text-muted-foreground">
+        <p>
           Pick the style closest to what you want and copy its folder from
           <a scLink [href]="sourceUrl" target="_blank" rel="noopener noreferrer"
             >the repository</a
@@ -91,7 +91,7 @@ interface ScCodeSample {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>2. Name it</h2>
-        <p class="text-muted-foreground">
+        <p>
           Rename the file that puts the parts together, and its export — the
           name is yours:
         </p>
@@ -109,7 +109,7 @@ interface ScCodeSample {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>3. Use it</h2>
-        <p class="text-muted-foreground">
+        <p>
           Give it to
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >provideSemanticComponents</code
@@ -120,7 +120,7 @@ interface ScCodeSample {
           [ngTemplateOutlet]="sample"
           [ngTemplateOutletContext]="{ $implicit: config }"
         />
-        <p class="text-muted-foreground">
+        <p>
           Keep
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >&#64;semantic-components/styles</code
@@ -144,7 +144,7 @@ interface ScCodeSample {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>4. Change it</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each file holds one component's classes, in Tailwind. Change a file,
           and every component that reads it follows — the cards and every framed
           box, for instance, take their corners, ring and shadow from
@@ -154,7 +154,7 @@ interface ScCodeSample {
           [ngTemplateOutlet]="sample"
           [ngTemplateOutletContext]="{ $implicit: frame }"
         />
-        <p class="text-muted-foreground">
+        <p>
           Some keys are variant functions (<code
             class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >cva</code
@@ -172,7 +172,7 @@ interface ScCodeSample {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Only a few changes?</h2>
-        <p class="text-muted-foreground">
+        <p>
           Then no copy: spread one of ours and replace the keys you change. It
           keeps our updates for the rest — and its
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -190,7 +190,7 @@ interface ScCodeSample {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Good to know</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             A style is set when the app starts: switching it means reloading.
           </li>

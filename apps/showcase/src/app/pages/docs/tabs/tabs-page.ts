@@ -28,7 +28,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Tabs</h1>
         <p class="text-muted-foreground">
@@ -45,7 +45,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element; the tabs&apos; text and
           icons are yours. A panel&apos;s content goes in an ng-template
           scTabsPanelContent.
@@ -55,13 +55,13 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Limitation: panel content</h2>
-        <p class="text-muted-foreground">
+        <p>
           Angular Aria, which the tabs are built on, renders a panel only
           through its template: content written straight in a panel is not
           allowed (Aria reports it in development). So every panel&apos;s
           content goes in an ng-template scTabsPanelContent.
         </p>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             It is created when its tab is selected — a heavy panel costs nothing
             until it is opened.
@@ -77,7 +77,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Keyboard</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             <kbd scKbd>Tab</kbd> enters the list on the selected tab, then goes
             on to its panel.
@@ -108,7 +108,7 @@ import { VerticalTabsDemoContainer } from './demos/vertical-tabs-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

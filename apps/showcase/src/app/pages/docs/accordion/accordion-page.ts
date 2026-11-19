@@ -30,7 +30,7 @@ import { RtlAccordionDemoContainer } from './demos/rtl-accordion-demo-container'
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Accordion</h1>
         <p class="text-muted-foreground">
@@ -47,7 +47,7 @@ import { RtlAccordionDemoContainer } from './demos/rtl-accordion-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element; the heading&apos;s level,
           the text and the chevron are yours. The item connects its trigger and
           its panel: nothing to wire.
@@ -57,7 +57,7 @@ import { RtlAccordionDemoContainer } from './demos/rtl-accordion-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Limitation: panel content</h2>
-        <p class="text-muted-foreground">
+        <p>
           Angular Aria, which the accordion is built on, renders a panel only
           through its template: a panel&apos;s content goes in an ng-template
           scAccordionPanelContent. It is created when the panel first opens,
@@ -68,7 +68,7 @@ import { RtlAccordionDemoContainer } from './demos/rtl-accordion-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Keyboard</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             <kbd scKbd>Tab</kbd> moves between the triggers;
             <kbd scKbd>Enter</kbd> or <kbd scKbd>Space</kbd> opens or closes.
@@ -94,7 +94,7 @@ import { RtlAccordionDemoContainer } from './demos/rtl-accordion-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

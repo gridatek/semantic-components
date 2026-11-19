@@ -17,7 +17,7 @@ import { FormRangeSliderDemoContainer } from './demos/form-range-slider-demo-con
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Range Slider</h1>
         <p class="text-muted-foreground">

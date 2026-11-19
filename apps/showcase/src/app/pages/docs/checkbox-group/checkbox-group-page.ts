@@ -28,7 +28,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Checkbox Group</h1>
         <p class="text-muted-foreground">
@@ -45,7 +45,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A group round your checkboxes, each with its value; the group holds
           the ticked ones — a [formField] or [(value)] on the group. A parent
           checkbox ticks all of allValues.
@@ -55,7 +55,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Native checkboxes: each a <kbd scKbd>Tab</kbd> stop,
             <kbd scKbd>Space</kbd> ticks it; a parent is announced as mixed when
@@ -80,7 +80,7 @@ import { RtlCheckboxGroupDemoContainer } from './demos/rtl-checkbox-group-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

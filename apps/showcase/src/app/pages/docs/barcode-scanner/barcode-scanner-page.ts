@@ -21,7 +21,7 @@ import { PictureBarcodeScannerDemoContainer } from './demos/picture-barcode-scan
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Barcode Scanner</h1>
         <p class="text-muted-foreground">
@@ -50,7 +50,7 @@ import { PictureBarcodeScannerDemoContainer } from './demos/picture-barcode-scan
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Camera</h2>
-        <p class="text-muted-foreground">
+        <p>
           The camera, each code outlined where it is; each new one comes out of
           (detected) — here, said in a live region.
         </p>
@@ -59,7 +59,7 @@ import { PictureBarcodeScannerDemoContainer } from './demos/picture-barcode-scan
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Scan once</h2>
-        <p class="text-muted-foreground">
+        <p>
           Into a form: the first code fills the field, and the camera stops —
           turned off in (detected).
         </p>
@@ -68,7 +68,7 @@ import { PictureBarcodeScannerDemoContainer } from './demos/picture-barcode-scan
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Formats</h2>
-        <p class="text-muted-foreground">
+        <p>
           Only the formats you ask for — QR codes, or products (EAN, UPC); none
           asked, all the browser reads.
         </p>
@@ -77,7 +77,7 @@ import { PictureBarcodeScannerDemoContainer } from './demos/picture-barcode-scan
 
       <section class="space-y-4">
         <h2 scTypeset appToc>From a picture</h2>
-        <p class="text-muted-foreground">
+        <p>
           No camera needed: a picture — your file, or one of these — is read the
           same way. The way for anyone who cannot aim a camera.
         </p>
@@ -86,7 +86,7 @@ import { PictureBarcodeScannerDemoContainer } from './demos/picture-barcode-scan
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Controls</h2>
-        <p class="text-muted-foreground">
+        <p>
           The light and the other camera, where the device has them; the state,
           to say why it does not scan.
         </p>

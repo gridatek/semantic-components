@@ -27,7 +27,7 @@ import { SizesNativeSelectDemoContainer } from './demos/sizes-native-select-demo
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Native Select</h1>
         <p class="text-muted-foreground">
@@ -43,7 +43,7 @@ import { SizesNativeSelectDemoContainer } from './demos/sizes-native-select-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A real select and its options, in a container beside your chevron. Its
           label, description and errors go round it, in a field.
         </p>
@@ -52,7 +52,7 @@ import { SizesNativeSelectDemoContainer } from './demos/sizes-native-select-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             A real select: its keyboard, its list and the phone&apos;s picker
             are the browser&apos;s, and read as a combo box.
@@ -69,7 +69,7 @@ import { SizesNativeSelectDemoContainer } from './demos/sizes-native-select-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Native Select or Select</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Native Select: the browser&apos;s behaviour, light and fast, and the
             phone&apos;s own picker.
@@ -92,7 +92,7 @@ import { SizesNativeSelectDemoContainer } from './demos/sizes-native-select-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

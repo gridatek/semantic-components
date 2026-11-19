@@ -24,7 +24,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Pdf Viewer</h1>
         <p class="text-muted-foreground">
@@ -55,7 +55,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Examples</h2>
-        <p class="text-muted-foreground">
+        <p>
           The complete viewer: sidebar (pages, outline, attachments, layers,
           comments), find, annotation tools, signatures, view options and the
           pdf.js keyboard shortcuts. Drop a PDF on it to open it.
@@ -65,7 +65,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Forms</h2>
-        <p class="text-muted-foreground">
+        <p>
           Form fields are real inputs. The document's own scripts run in
           pdf.js's sandbox — here the total is computed by the PDF. Download and
           Print include what you typed in.
@@ -75,7 +75,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Open parameters</h2>
-        <p class="text-muted-foreground">
+        <p>
           pdf.js's open parameters in the fragment of
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">src</code>
           (<code class="bg-muted rounded px-1.5 py-0.5 text-sm">page</code>,
@@ -92,7 +92,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Presentation mode</h2>
-        <p class="text-muted-foreground">
+        <p>
           One page at a time, fitted to the screen, in fullscreen. Click, the
           arrow keys, the wheel or a swipe turn the page;
           <kbd scKbd>Escape</kbd> leaves and restores the view.
@@ -102,7 +102,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Reading</h2>
-        <p class="text-muted-foreground">
+        <p>
           Jumps — a link, a bookmark, a thumbnail, the page field — are
           remembered:
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Back</code>
@@ -120,7 +120,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
           line through the text.
         </p>
         <app-pdf-viewer-reading-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           Zoom goes from 10% to 2500% (<kbd scKbd>Ctrl</kbd> + wheel or pinch
           around the pointer): past what a canvas can hold, the visible part is
           drawn sharp on its own. Tagged PDFs expose their structure — headings,
@@ -138,7 +138,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Saving and page organisation</h2>
-        <p class="text-muted-foreground">
+        <p>
           Download writes the annotations, comments and form data into the PDF.
           In the full example's Pages sidebar, select pages to move, copy, cut,
           paste, delete or save them as a new file, drag them to reorder, or

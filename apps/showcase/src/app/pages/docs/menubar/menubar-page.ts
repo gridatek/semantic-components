@@ -28,7 +28,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Menubar</h1>
         <p class="text-muted-foreground">
@@ -45,7 +45,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           The bar and its items are the Menubar&apos;s; each item&apos;s menu is
           made of the Menu&apos;s parts — groups, checkbox and radio items,
           submenus, shortcuts — which take the menu bar&apos;s look inside it.
@@ -56,7 +56,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Keyboard</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The bar is one tab stop: <kbd scKbd>ArrowLeft</kbd> and
             <kbd scKbd>ArrowRight</kbd> move along it (mirrored right to left),
@@ -93,7 +93,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins). The menus&apos; parts

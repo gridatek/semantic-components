@@ -29,7 +29,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Attachment</h1>
         <p class="text-muted-foreground">
@@ -46,7 +46,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element; the icons, images, text and
           names are yours.
         </p>
@@ -55,7 +55,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Name each action after what it does and to which file — &quot;Remove
             report.pdf&quot;, not &quot;Remove&quot; — in sr-only text.
@@ -88,7 +88,7 @@ import { TriggerAttachmentDemoContainer } from './demos/trigger-attachment-demo-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

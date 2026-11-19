@@ -27,7 +27,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Aspect Ratio</h1>
         <p class="text-muted-foreground">
@@ -44,7 +44,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           One directive, on your element; its content fills it (an image with
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">fill</code>, a
           video with
@@ -56,7 +56,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Notes</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Its width is yours — a class (<code
               class="bg-muted rounded px-1.5 py-0.5 text-sm"

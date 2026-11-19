@@ -25,7 +25,7 @@ import { VerticalSeparatorDemoContainer } from './demos/vertical-separator-demo-
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Separator</h1>
         <p class="text-muted-foreground">
@@ -42,15 +42,13 @@ import { VerticalSeparatorDemoContainer } from './demos/vertical-separator-demo-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
-          A directive on your div; orientation sets which way it runs.
-        </p>
+        <p>A directive on your div; orientation sets which way it runs.</p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             A separator (role=&quot;separator&quot;, aria-orientation): screen
             readers announce the break, as for an hr.
@@ -72,7 +70,7 @@ import { VerticalSeparatorDemoContainer } from './demos/vertical-separator-demo-
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

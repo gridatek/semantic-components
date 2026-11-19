@@ -12,23 +12,13 @@ import {
   viewChild,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import {
-  ScButton,
-  ScFrame,
-  ScTabs,
-  ScTabsList,
-  ScTabsPanel,
-  ScTabsPanelContent,
-  ScTabsTab,
-} from '@semantic-components/ui';
+import { ScButton, ScFrame } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
   ScCodeBlockContent,
   ScCodeBlockCopy,
   ScCodeBlockFooter,
-  ScCodeBlockHeader,
-  ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 import {
   SiCheckIcon,
@@ -47,16 +37,9 @@ import { TocHeading } from '../toc/toc-heading';
     SiChevronDownIcon,
     ScFrame,
     ScCodeBlock,
-    ScCodeBlockHeader,
-    ScCodeBlockTitle,
     ScCodeBlockActions,
     ScCodeBlockCopy,
     ScCodeBlockContent,
-    ScTabs,
-    ScTabsList,
-    ScTabsTab,
-    ScTabsPanel,
-    ScTabsPanelContent,
     SiCheckIcon,
     SiCopyIcon,
     SiExternalLinkIcon,
@@ -85,92 +68,89 @@ import { TocHeading } from '../toc/toc-heading';
         <p class="text-muted-foreground text-sm">{{ description() }}</p>
       }
 
-      <!-- What the demo needs first (an install step), between the description and the tabs. -->
+      <!-- What the demo needs first (an install step), between the description and the demo. -->
       <ng-content select="[demoSetup]" />
 
-      <div scTabs class="w-full" value="preview">
-        <div scTabsList>
-          <button scTabsTab value="preview">Preview</button>
-          <button scTabsTab value="code">Code</button>
-        </div>
-
-        <div scTabsPanel scFrame value="preview" [class]="previewClass()">
-          <ng-template scTabsPanelContent>
-            @if (framed()) {
-              <!--
-                Full-page demos (e.g. a sidebar layout) run in their own
-                viewport, at desktop width, scaled down to fit the panel.
-              -->
-              <div
-                #frameBox
-                class="relative mx-auto overflow-hidden"
-                [style.height.px]="frameHeight()"
-                [style.max-width.px]="frameWidth()"
-              >
-                <iframe
-                  class="absolute top-0 left-0 origin-top-left"
-                  [style.width.px]="frameWidth()"
-                  [style.height.px]="frameHeight() / frameScale()"
-                  [style.transform]="'scale(' + frameScale() + ')'"
-                  [src]="frameSrc()"
-                  [title]="title() + ' demo'"
-                  loading="lazy"
-                ></iframe>
-              </div>
-            } @else {
-              <ng-content />
-            }
-          </ng-template>
-        </div>
-
-        <div scTabsPanel value="code">
-          <ng-template scTabsPanelContent>
-            <div scCodeBlock>
-              <div scCodeBlockHeader>
-                <div scCodeBlockTitle>{{ language() }}</div>
-                <div scCodeBlockActions>
-                  <button [scCodeBlockCopy]="code()" #copy="scCodeBlockCopy">
-                    @if (copy.copied()) {
-                      <svg siCheckIcon></svg>
-                    } @else {
-                      <svg siCopyIcon></svg>
-                    }
-                    <span class="sr-only">Copy to clipboard</span>
-                  </button>
-                </div>
-              </div>
-              <pre
-                scCodeBlockContent
-                [id]="codeId"
-                [code]="code()"
-                [language]="language()"
-                lineNumbers
-                [class]="
-                  long() && !expanded()
-                    ? 'scroll-fade-y max-h-96 overflow-y-hidden'
-                    : ''
-                "
-              ></pre>
-              @if (long()) {
-                <div scCodeBlockFooter class="justify-center">
-                  <button
-                    scButton
-                    variant="ghost"
-                    size="xs"
-                    [attr.aria-controls]="codeId"
-                    [attr.aria-expanded]="expanded()"
-                    (click)="expanded.set(!expanded())"
-                  >
-                    <svg
-                      siChevronDownIcon
-                      class="transition-transform in-aria-expanded:rotate-180"
-                    ></svg>
-                    {{ expanded() ? 'Show less' : 'Show more' }}
-                  </button>
-                </div>
-              }
+      <!-- One box, as shadcn's docs: the demo, its code folded below it. -->
+      <div scFrame class="overflow-hidden">
+        <div [class]="previewClass()">
+          @if (framed()) {
+            <!--
+              Full-page demos (e.g. a sidebar layout) run in their own
+              viewport, at desktop width, scaled down to fit the panel.
+            -->
+            <div
+              #frameBox
+              class="relative mx-auto overflow-hidden"
+              [style.height.px]="frameHeight()"
+              [style.max-width.px]="frameWidth()"
+            >
+              <iframe
+                class="absolute top-0 left-0 origin-top-left"
+                [style.width.px]="frameWidth()"
+                [style.height.px]="frameHeight() / frameScale()"
+                [style.transform]="'scale(' + frameScale() + ')'"
+                [src]="frameSrc()"
+                [title]="title() + ' demo'"
+                loading="lazy"
+              ></iframe>
             </div>
-          </ng-template>
+          } @else {
+            <ng-content />
+          }
+        </div>
+
+        <div
+          scCodeBlock
+          class="bg-muted/50 border-t-border rounded-none border-transparent"
+        >
+          <div scCodeBlockActions class="absolute end-2 top-2 z-10">
+            <button [scCodeBlockCopy]="code()" #copy="scCodeBlockCopy">
+              @if (copy.copied()) {
+                <svg siCheckIcon></svg>
+              } @else {
+                <svg siCopyIcon></svg>
+              }
+              <span class="sr-only">Copy to clipboard</span>
+            </button>
+          </div>
+          <pre
+            scCodeBlockContent
+            [id]="codeId"
+            [code]="code()"
+            [language]="language()"
+            lineNumbers
+            [class]="
+              long() && !expanded()
+                ? 'scroll-fade-y max-h-36 overflow-y-hidden'
+                : ''
+            "
+          ></pre>
+          @if (long()) {
+            <div
+              scCodeBlockFooter
+              [class]="
+                expanded()
+                  ? 'justify-center'
+                  : 'absolute inset-x-0 bottom-3 justify-center'
+              "
+            >
+              <button
+                scButton
+                variant="outline"
+                size="sm"
+                [attr.aria-controls]="codeId"
+                [attr.aria-expanded]="expanded()"
+                (click)="expanded.set(!expanded())"
+              >
+                <svg
+                  siChevronDownIcon
+                  class="transition-transform in-aria-expanded:rotate-180"
+                ></svg>
+                {{ expanded() ? 'Hide code' : 'View code' }}
+              </button>
+            </div>
+          }
         </div>
       </div>
     </div>
@@ -190,7 +170,8 @@ export class DemoContainer {
   readonly language = input<string>('angular-ts');
 
   /** Long code shows in part, until Show more. */
-  private readonly long = computed(() => this.code().split('\n').length > 20);
+  /** More than a few lines: folded under the demo, "View code" opens it. */
+  private readonly long = computed(() => this.code().split('\n').length > 8);
   private readonly expanded = signal(false);
   private readonly codeId = inject(_IdGenerator).getId('demo-code-');
   /**
@@ -230,7 +211,7 @@ export class DemoContainer {
     // Framed in the app's style (scFrame): its radius, ring and shadow.
     this.framed()
       ? 'overflow-hidden'
-      : 'flex min-h-40 items-center justify-center p-6',
+      : 'flex min-h-56 items-center justify-center p-10',
   );
 
   private readonly devMode = this.config.devMode;

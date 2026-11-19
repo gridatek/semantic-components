@@ -24,7 +24,7 @@ import { StepTimeClockDemoContainer } from './demos/step-time-clock-demo-contain
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Time Clock</h1>
         <p class="text-muted-foreground">
@@ -36,7 +36,7 @@ import { StepTimeClockDemoContainer } from './demos/step-time-clock-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Basic</h2>
-        <p class="text-muted-foreground">
+        <p>
           The hour, then the minute: drag or click the hand, or the keyboard on
           the dial (arrows, <kbd scKbd>Page Up</kbd>/Down,
           <kbd scKbd>Home</kbd>/<kbd scKbd>End</kbd>, <kbd scKbd>Enter</kbd>).
@@ -48,7 +48,7 @@ import { StepTimeClockDemoContainer } from './demos/step-time-clock-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>24 hours</h2>
-        <p class="text-muted-foreground">
+        <p>
           LOCALE_ID provided as 'fr-FR': 24 hours — 13 to 00 on an inner ring.
           hourCycle overrides the locale’s 12 or 24.
         </p>
@@ -57,7 +57,7 @@ import { StepTimeClockDemoContainer } from './demos/step-time-clock-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Step</h2>
-        <p class="text-muted-foreground">
+        <p>
           step: 5 minutes — the hand snaps to them, the arrows move by them.
         </p>
         <app-step-time-clock-demo-container />
@@ -65,7 +65,7 @@ import { StepTimeClockDemoContainer } from './demos/step-time-clock-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Limits</h2>
-        <p class="text-muted-foreground">
+        <p>
           minTime and maxTime: the hours and minutes outside them are dimmed and
           cannot be picked. Here, 9:00 to 17:30, every quarter hour.
         </p>
@@ -74,17 +74,13 @@ import { StepTimeClockDemoContainer } from './demos/step-time-clock-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>With a time input</h2>
-        <p class="text-muted-foreground">
-          One value for a time input and the clock: type it, or pick it.
-        </p>
+        <p>One value for a time input and the clock: type it, or pick it.</p>
         <app-input-time-clock-demo-container />
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>In a form</h2>
-        <p class="text-muted-foreground">
-          A [formField]: required, from the schema; marked once left.
-        </p>
+        <p>A [formField]: required, from the schema; marked once left.</p>
         <app-form-time-clock-demo-container />
       </section>
     </div>

@@ -50,7 +50,7 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Sidebar</h1>
         <p class="text-muted-foreground">
@@ -67,7 +67,7 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           shadcn&apos;s Sidebar, in the look of the app&apos;s style. A provider
           round the sidebar and the page beside it holds their shared state. The
           sidebar has a header and a footer that stay, and a content that
@@ -78,7 +78,7 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             On an aside, the sidebar is a landmark holding its header, its
             navigation and its footer: name it (aria-label), and name the nav
@@ -112,9 +112,7 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
 
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
-        <p class="text-muted-foreground">
-          Each example is a page of its own, shown in a frame.
-        </p>
+        <p>Each example is a page of its own, shown in a frame.</p>
         <app-header-sidebar-demo-container />
         <app-footer-sidebar-demo-container />
         <app-group-sidebar-demo-container />
@@ -135,7 +133,7 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

@@ -32,7 +32,7 @@ import { SwipeHandleDrawerDemoContainer } from './demos/swipe-handle-drawer-demo
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Drawer</h1>
         <p class="text-muted-foreground">
@@ -49,7 +49,7 @@ import { SwipeHandleDrawerDemoContainer } from './demos/swipe-handle-drawer-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element; the trigger, the title, the
           content and the close buttons are yours.
         </p>
@@ -58,7 +58,7 @@ import { SwipeHandleDrawerDemoContainer } from './demos/swipe-handle-drawer-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             A dialog (role=&quot;dialog&quot;, aria-modal when modal), named by
             its title and described by its description.
@@ -91,7 +91,7 @@ import { SwipeHandleDrawerDemoContainer } from './demos/swipe-handle-drawer-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

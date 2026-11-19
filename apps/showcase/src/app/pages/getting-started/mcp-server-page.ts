@@ -27,7 +27,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>MCP Server</h1>
         <p class="text-muted-foreground">
@@ -42,7 +42,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Setup</h2>
-        <p class="text-muted-foreground">
+        <p>
           Add the following to your project's
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">.mcp.json</code>
           at the project root:
@@ -63,7 +63,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           </div>
           <pre scCodeBlockContent [code]="setupCode" language="json"></pre>
         </div>
-        <p class="text-muted-foreground">
+        <p>
           No installation is required.
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">npx -y</code>
           downloads the package from npm on first use and caches it.
@@ -74,7 +74,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Available Tools</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 pl-6">
+        <ul class="list-disc space-y-2 pl-6">
           <li>
             <strong>list_components</strong>
             — Lists all available components across libraries. Optionally filter

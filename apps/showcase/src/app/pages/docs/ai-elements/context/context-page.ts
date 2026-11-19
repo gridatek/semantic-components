@@ -19,7 +19,7 @@ import { RtlContextDemoContainer } from './demos/rtl-context-demo-container';
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Context</h1>
         <p class="text-muted-foreground">
@@ -30,7 +30,7 @@ import { RtlContextDemoContainer } from './demos/rtl-context-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-context-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A
           <a scLink routerLink="/docs/components/preview-card">Preview Card</a>
           (shadcn&apos;s Hover Card) on a button, with a
@@ -46,7 +46,7 @@ import { RtlContextDemoContainer } from './demos/rtl-context-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <p class="text-muted-foreground">
+        <p>
           A preview card is for the eyes only: it opens on hover and focus, but
           it is not announced. The button&apos;s own text carries what matters
           (&quot;8% context&quot;); the breakdown is extra. If it must be read
@@ -58,7 +58,7 @@ import { RtlContextDemoContainer } from './demos/rtl-context-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Limit</h2>
-        <p class="text-muted-foreground">
+        <p>
           The usage comes with the agent&apos;s message, once its stream ends;
           the limit is the model&apos;s context window, which the stream does
           not send: set it from the model you use.
@@ -72,7 +72,7 @@ import { RtlContextDemoContainer } from './demos/rtl-context-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/preview-card">Preview Card</a>
           and the

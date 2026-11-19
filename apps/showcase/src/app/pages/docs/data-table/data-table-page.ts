@@ -21,7 +21,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Data Table</h1>
         <p class="text-muted-foreground">
@@ -49,7 +49,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           TanStack Table builds the table (its columns, rows and state); the
           table parts render it, and a data table part on a header cell, a cell
           or a row binds it to its column or row. Add the parts for what you
@@ -123,7 +123,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes class, merged over its own (cn: a later class wins).
           The parts are typed structurally: pass TanStack&apos;s own table,
           column and row objects.

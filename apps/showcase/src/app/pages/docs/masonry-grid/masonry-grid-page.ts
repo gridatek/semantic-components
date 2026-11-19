@@ -20,7 +20,7 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Masonry Grid</h1>
         <p class="text-muted-foreground">
@@ -34,7 +34,7 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Photos</h2>
-        <p class="text-muted-foreground">
+        <p>
           Photos of different heights, each into the shortest column — as many
           columns of at least 200 px as fit. In a list: the order is the
           source's, row by row.
@@ -44,7 +44,7 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Cards</h2>
-        <p class="text-muted-foreground">
+        <p>
           Text of any length — measured, never guessed; resize the window and it
           lays out again. The first card spans two columns.
         </p>
@@ -53,7 +53,7 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Load more</h2>
-        <p class="text-muted-foreground">
+        <p>
           Items added, or removed: the grid lays out again, and the others move
           into place (not under reduced motion).
         </p>
@@ -62,7 +62,7 @@ import { PhotosMasonryGridDemoContainer } from './demos/photos-masonry-grid-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Order</h2>
-        <p class="text-muted-foreground">
+        <p>
           Into the shortest column (balanced) — or in turn, column after column
           (predictable): the same tiles, both ways.
         </p>

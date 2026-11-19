@@ -505,9 +505,12 @@ import { DocsNavService } from '../../services/docs-nav-service';
         </header>
 
         <div class="flex flex-1">
-          <div #contentArea class="min-w-0 flex-1 p-6">
-            <router-outlet />
-            <app-page-nav [pages]="pages()" />
+          <div #contentArea class="min-w-0 flex-1 px-6 py-10">
+            <!-- A reading width, as shadcn's docs: lines of 65–75 characters. -->
+            <div class="mx-auto w-full max-w-3xl">
+              <router-outlet />
+              <app-page-nav [pages]="pages()" />
+            </div>
           </div>
 
           <aside class="hidden w-56 shrink-0 border-l xl:block">

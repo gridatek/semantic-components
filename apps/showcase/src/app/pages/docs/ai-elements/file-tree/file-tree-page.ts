@@ -19,7 +19,7 @@ import { RtlFileTreeDemoContainer } from './demos/rtl-file-tree-demo-container';
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>File Tree</h1>
         <p class="text-muted-foreground">
@@ -30,7 +30,7 @@ import { RtlFileTreeDemoContainer } from './demos/rtl-file-tree-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-file-tree-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A folder is a
           <a scLink routerLink="/docs/components/collapsible">Collapsible</a>
           on a ghost
@@ -47,7 +47,7 @@ import { RtlFileTreeDemoContainer } from './demos/rtl-file-tree-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           The nodes render themselves: an
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >ng-template</code
@@ -64,7 +64,7 @@ import { RtlFileTreeDemoContainer } from './demos/rtl-file-tree-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/collapsible">Collapsible</a>
           and the <a scLink routerLink="/docs/components/button">Button</a>.

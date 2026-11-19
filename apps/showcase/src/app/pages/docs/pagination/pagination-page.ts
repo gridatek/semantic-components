@@ -40,7 +40,7 @@ interface ScApiRow {
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Pagination</h1>
         <p class="text-muted-foreground">
@@ -58,7 +58,7 @@ interface ScApiRow {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A navigation round a list; every part is a directive on your element,
           the icons and the text are yours. Name the navigation with
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">aria-label</code>
@@ -78,7 +78,7 @@ interface ScApiRow {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Notes</h2>
-        <p class="text-muted-foreground">
+        <p>
           Use buttons when the page changes in place, links when each page has
           its own URL: the href is yours (?page=2, a routerLink) and the link
           follows it; read the page from the URL into
@@ -117,7 +117,7 @@ interface ScApiRow {
               part.selector
             }}</code>
           </h3>
-          <p class="text-muted-foreground">{{ part.description }}</p>
+          <p>{{ part.description }}</p>
           @if (part.inputs.length) {
             <app-api-table
               [label]="part.name + ' inputs'"

@@ -17,7 +17,7 @@ import { CoverImageCropperDemoContainer } from './demos/cover-image-cropper-demo
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Image Cropper</h1>
         <p class="text-muted-foreground">
@@ -30,7 +30,7 @@ import { CoverImageCropperDemoContainer } from './demos/cover-image-cropper-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Crop box</h2>
-        <p class="text-muted-foreground">
+        <p>
           Handles in the selection make it a box resized over the image. The
           slider and the zoom buttons share one
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">zoom</code>.
@@ -41,7 +41,7 @@ import { CoverImageCropperDemoContainer } from './demos/cover-image-cropper-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Avatar</h2>
-        <p class="text-muted-foreground">
+        <p>
           A circle with handles: resize it, zoom with the wheel, a pinch or the
           slider, and drag around it to move the image.
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">crop()</code>
@@ -52,7 +52,7 @@ import { CoverImageCropperDemoContainer } from './demos/cover-image-cropper-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Cover</h2>
-        <p class="text-muted-foreground">
+        <p>
           Without handles, the selection is a frame that stays put and the image
           moves under it: drag, wheel or pinch — or, focused, the arrows and + /
           −. Its grid is yours too: four columns and two rows here (<code

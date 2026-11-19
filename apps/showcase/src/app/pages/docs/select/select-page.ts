@@ -35,7 +35,7 @@ interface ScApiRow {
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Select</h1>
         <p class="text-muted-foreground">
@@ -54,7 +54,7 @@ interface ScApiRow {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           The select round its label and trigger; the popup in a template,
           rendered while it is open. Every part is a directive on your element;
           the icons are yours. It needs a name: its label, or
@@ -66,7 +66,7 @@ interface ScApiRow {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Keyboard</h2>
-        <p class="text-muted-foreground">
+        <p>
           Focus stays on the trigger. <kbd scKbd>Enter</kbd>,
           <kbd scKbd>Space</kbd> or the arrow keys open the list; the arrows,
           <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> move through it;
@@ -94,7 +94,7 @@ interface ScApiRow {
               part.selector
             }}</code>
           </h3>
-          <p class="text-muted-foreground">{{ part.description }}</p>
+          <p>{{ part.description }}</p>
           @if (part.inputs.length) {
             <app-api-table
               [label]="part.name + ' inputs'"

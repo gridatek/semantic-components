@@ -34,7 +34,7 @@ import { TriggerElsewhereCollapsibleDemoContainer } from './demos/trigger-elsewh
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Collapsible</h1>
         <p class="text-muted-foreground">
@@ -50,7 +50,7 @@ import { TriggerElsewhereCollapsibleDemoContainer } from './demos/trigger-elsewh
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Base UI&apos;s Collapsible: a root holding open, a trigger on your
           button, a panel with its content written inside.
         </p>
@@ -59,7 +59,7 @@ import { TriggerElsewhereCollapsibleDemoContainer } from './demos/trigger-elsewh
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             The disclosure pattern: a native button, aria-expanded, and
             aria-controls naming its panel; <kbd scKbd>Space</kbd> and
@@ -90,7 +90,7 @@ import { TriggerElsewhereCollapsibleDemoContainer } from './demos/trigger-elsewh
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over its own (cn: a later class wins).

@@ -21,7 +21,7 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Plan</h1>
         <p class="text-muted-foreground">
@@ -34,7 +34,7 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-plan-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A <a scLink routerLink="/docs/components/trace">Trace</a> whose
           collapsible line is the plan, its steps a Trace inside. When the steps
           are not known up front, use a
@@ -49,7 +49,7 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Updating in place</h2>
-        <p class="text-muted-foreground">
+        <p>
           The plan streams as one piece of data, sent again whenever a step
           moves on: the page replaces it rather than adding a new one, so the
           same plan updates.
@@ -59,9 +59,7 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
-          <p class="text-muted-foreground">
-            A description above the steps, inside the plan.
-          </p>
+          <p>A description above the steps, inside the plan.</p>
           <app-details-plan-demo-container />
         </div>
         <app-rtl-plan-demo-container />
@@ -69,7 +67,7 @@ import { RtlPlanDemoContainer } from './demos/rtl-plan-demo-container';
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

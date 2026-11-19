@@ -70,7 +70,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
     SiCopyIcon,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Code Block</h1>
         <p class="text-muted-foreground">
@@ -94,7 +94,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
           href="https://shiki.style"
           names="ScCodeBlock, ScCodeBlockContent"
         />
-        <p class="text-muted-foreground">
+        <p>
           Then add the highlighter, a feature of the library, in your app&apos;s
           config — without it, code shows plain:
         </p>
@@ -125,7 +125,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           Every part is a directive on your element; the title, the buttons and
           their names are yours. The code is an input, highlighted in its
           language.
@@ -135,7 +135,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Highlighting</h2>
-        <p class="text-muted-foreground">
+        <p>
           Shiki, loaded with the first block; each language the first time it is
           used: typescript, angular-ts, angular-html, javascript, html, css,
           scss, json, yaml, markdown, bash, python, sql, diff — and ansi, for a
@@ -167,7 +167,7 @@ import { WrapCodeBlockDemoContainer } from './demos/wrap-code-block-demo-contain
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).

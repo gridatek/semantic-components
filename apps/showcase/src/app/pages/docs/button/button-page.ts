@@ -63,7 +63,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Button</h1>
         <p class="text-muted-foreground">
@@ -82,7 +82,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           One part, on a native button. An icon may go at either side, marked
           with its side; a spinner in place of the first while it is busy.
         </p>
@@ -91,7 +91,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Cursor</h2>
-        <p class="text-muted-foreground">
+        <p>
           Buttons keep the default cursor, as native buttons and Tailwind do: a
           pointer is for links. To show one on buttons anyway, add to your
           global styles:
@@ -103,7 +103,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Groups</h2>
-        <p class="text-muted-foreground">
+        <p>
           Buttons are joined with a
           <a
             routerLink="/docs/components/control-group"
@@ -144,7 +144,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScButton</code>
           is a directive on a native
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
@@ -155,7 +155,7 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
           >, nova by default).
         </p>
         <app-api-table label="ScButton inputs" [inputs]="inputs" />
-        <p class="text-muted-foreground">
+        <p>
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
             >ScButtonVariants</code
           >

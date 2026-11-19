@@ -33,7 +33,7 @@ import { VisiblePasswordGroupDemoContainer } from './demos/visible-password-grou
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Password Group</h1>
         <p class="text-muted-foreground">
@@ -53,7 +53,7 @@ import { VisiblePasswordGroupDemoContainer } from './demos/visible-password-grou
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
-        <p class="text-muted-foreground">
+        <p>
           A scField holds the label, the group (the input and its buttons) and
           the descriptions. The group holds the state (the password shown or
           not); a generate button goes in it, beside the toggle. A Caps Lock
@@ -77,7 +77,7 @@ import { VisiblePasswordGroupDemoContainer } from './demos/visible-password-grou
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each part takes class, merged over its own (cn: a later class wins).
           The label, descriptions and errors are the scField&apos;s it is in, as
           for any input.

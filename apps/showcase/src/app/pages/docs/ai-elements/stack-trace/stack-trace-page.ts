@@ -21,7 +21,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Stack Trace</h1>
         <p class="text-muted-foreground">
@@ -34,7 +34,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-stack-trace-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A <a scLink routerLink="/docs/components/trace">Trace</a> line with an
           error status, collapsible on the frames. Your own frames are links to
           the file at the line; the framework&apos;s fold into a line of their
@@ -45,7 +45,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
-        <p class="text-muted-foreground">
+        <p>
           The title truncates, so the content repeats the whole error at its
           top.
         </p>
@@ -53,7 +53,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Sending the stack</h2>
-        <p class="text-muted-foreground">
+        <p>
           A failed tool sends only its error message by default; the server has
           to send the stack for the frames. A stack shows file paths from your
           server: send it in development only.
@@ -63,7 +63,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <div class="space-y-4">
-          <p class="text-muted-foreground">
+          <p>
             Every frame in one block: the framework&apos;s stay muted, so your
             own stand out.
           </p>
@@ -74,7 +74,7 @@ import { StackTraceUsageDemoContainer } from './demos/stack-trace-usage-demo-con
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/trace" fragment="api-reference"
             >Trace</a

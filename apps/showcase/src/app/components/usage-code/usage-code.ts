@@ -18,8 +18,6 @@ import {
   ScCodeBlockContent,
   ScCodeBlockCopy,
   ScCodeBlockFooter,
-  ScCodeBlockHeader,
-  ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 import {
   SiCheckIcon,
@@ -46,26 +44,21 @@ import { DevOnly } from '../dev-only/dev-only';
     ScCodeBlockContent,
     ScCodeBlockCopy,
     ScCodeBlockFooter,
-    ScCodeBlockHeader,
-    ScCodeBlockTitle,
     SiCheckIcon,
     SiChevronDownIcon,
     SiCopyIcon,
   ],
   template: `
-    <div scCodeBlock>
-      <div scCodeBlockHeader>
-        <div scCodeBlockTitle>angular-ts</div>
-        <div scCodeBlockActions>
-          <button [scCodeBlockCopy]="code()" #copy="scCodeBlockCopy">
-            @if (copy.copied()) {
-              <svg siCheckIcon></svg>
-            } @else {
-              <svg siCopyIcon></svg>
-            }
-            <span class="sr-only">Copy to clipboard</span>
-          </button>
-        </div>
+    <div scCodeBlock class="bg-muted/50 border-transparent">
+      <div scCodeBlockActions class="absolute end-2 top-2 z-10">
+        <button [scCodeBlockCopy]="code()" #copy="scCodeBlockCopy">
+          @if (copy.copied()) {
+            <svg siCheckIcon></svg>
+          } @else {
+            <svg siCopyIcon></svg>
+          }
+          <span class="sr-only">Copy to clipboard</span>
+        </button>
       </div>
       <pre
         scCodeBlockContent

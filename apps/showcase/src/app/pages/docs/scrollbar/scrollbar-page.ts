@@ -39,7 +39,7 @@ interface Row {
     ScTableRow,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Scrollbar</h1>
         <p class="text-muted-foreground">
@@ -53,7 +53,7 @@ interface Row {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
-        <p class="text-muted-foreground">
+        <p>
           Import the rules and your style&apos;s variables in your global
           stylesheet, after Tailwind:
           <code scTypeset
@@ -72,7 +72,7 @@ interface Row {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>The Scroll Area, or this file?</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             <strong class="text-foreground">This file</strong>: every scrollbar,
             with nothing to write. The browser draws them, so they have its
@@ -96,7 +96,7 @@ interface Row {
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <ul class="text-muted-foreground list-disc space-y-2 ps-6">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
             Only the look changes: the scrollbars are the browser&apos;s, and so
             is scrolling — the wheel, touch, the keyboard, a screen
@@ -114,7 +114,7 @@ interface Row {
         <h2 scTypeset appToc>API reference</h2>
 
         <h3 scTypeset>Variables</h3>
-        <p class="text-muted-foreground">
+        <p>
           On <code scTypeset>:root</code> for the whole page, or on a box for
           its scrollbars and those inside it. The style&apos;s file sets the
           thumb and its corners.
@@ -155,7 +155,7 @@ interface Row {
         </div>
 
         <h3 scTypeset>Classes</h3>
-        <p class="text-muted-foreground">
+        <p>
           Tailwind&apos;s and shadcn&apos;s utilities, not ours: the file is in
           the base layer, so they win.
         </p>

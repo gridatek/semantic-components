@@ -27,7 +27,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
     ScTypeset,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Confetti</h1>
         <p class="text-muted-foreground">
@@ -49,7 +49,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Burst</h2>
-        <p class="text-muted-foreground">
+        <p>
           scConfettiTrigger on a button: a click bursts from it, in the theme’s
           colours. Decorative — hidden from screen readers, never in the way,
           and none for reduced motion.
@@ -59,7 +59,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>From the element</h2>
-        <p class="text-muted-foreground">
+        <p>
           Each burst starts at the centre of what was clicked — wherever it is.
         </p>
         <app-element-confetti-demo-container />
@@ -67,7 +67,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Sides</h2>
-        <p class="text-muted-foreground">
+        <p>
           confettiEffect="sides": two cannons, from the edges of the screen.
         </p>
         <app-sides-confetti-demo-container />
@@ -75,7 +75,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Fireworks</h2>
-        <p class="text-muted-foreground">
+        <p>
           confettiEffect="fireworks": bursts here and there, for three seconds —
           or the duration you give.
         </p>
@@ -84,7 +84,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Colours and shapes</h2>
-        <p class="text-muted-foreground">
+        <p>
           Any CSS colours, circles and squares, bigger pieces, a wider spread.
         </p>
         <app-custom-confetti-demo-container />
@@ -92,7 +92,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>After a form</h2>
-        <p class="text-muted-foreground">
+        <p>
           The service, from code: when the form is sent, sides() — and your
           words for screen readers.
         </p>
@@ -101,7 +101,7 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
 
       <section class="space-y-4">
         <h2 scTypeset appToc>On an event</h2>
-        <p class="text-muted-foreground">
+        <p>
           The service, on an event — no button: when the last task is ticked, an
           effect calls burst() from the list.
         </p>

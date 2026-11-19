@@ -20,7 +20,7 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
     TocHeading,
   ],
   template: `
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Inline Citation</h1>
         <p class="text-muted-foreground">
@@ -31,7 +31,7 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
         <app-inline-citation-usage-demo-container />
-        <p class="text-muted-foreground">
+        <p>
           A <a scLink routerLink="/docs/components/link">Link</a> in a small
           secondary button look, with a
           <a scLink routerLink="/docs/components/preview-card">Preview Card</a>
@@ -47,7 +47,7 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Accessibility</h2>
-        <p class="text-muted-foreground">
+        <p>
           Not shadcn&apos;s: there, the citation is a button, and the link to
           the source sits in the card. A preview card is for the eyes only — not
           announced, not reached with the keyboard — so here the citation is the
@@ -65,7 +65,7 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
 
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
-        <p class="text-muted-foreground">
+        <p>
           See the
           <a scLink routerLink="/docs/components/preview-card">Preview Card</a>
           and the <a scLink routerLink="/docs/components/link">Link</a>.
