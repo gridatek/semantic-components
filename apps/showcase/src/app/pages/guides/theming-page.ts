@@ -38,8 +38,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <app-doc-code [code]="styleCode" />
         <p>
           See
-          <a scLink routerLink="/docs/getting-started/styles">Styles</a> for the
-          eight, side by side.
+          <a scLink routerLink="/docs/packages/styles">Styles</a> for the eight,
+          side by side.
         </p>
       </section>
 

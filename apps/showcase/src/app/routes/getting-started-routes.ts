@@ -18,21 +18,16 @@ export const gettingStartedRoutes: Route[] = [
           import('../pages/getting-started/introduction-page'),
       },
       {
-        path: 'prerequisites',
-        title: 'Prerequisites - Semantic Components',
+        path: 'installation',
+        title: 'Installation - Semantic Components',
         loadComponent: () =>
-          import('../pages/getting-started/prerequisites-page'),
+          import('../pages/getting-started/installation-page'),
       },
-      {
-        path: 'ui',
-        title: 'UI - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/ui-page'),
-      },
-      {
-        path: 'styles',
-        title: 'Styles - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/styles-page'),
-      },
+      // Their old addresses.
+      { path: 'ui', redirectTo: 'installation' },
+      { path: 'prerequisites', redirectTo: 'installation' },
+      { path: 'styles', redirectTo: '/docs/packages/styles' },
+      { path: 'mcp-server', redirectTo: '/docs/packages/mcp-server' },
       {
         path: 'custom-style',
         title: 'Custom style - Semantic Components',
@@ -48,11 +43,6 @@ export const gettingStartedRoutes: Route[] = [
         path: 'rtl',
         title: 'Right to left - Semantic Components',
         loadComponent: () => import('../pages/getting-started/rtl-page'),
-      },
-      {
-        path: 'mcp-server',
-        title: 'MCP Server - Semantic Components',
-        loadComponent: () => import('../pages/getting-started/mcp-server-page'),
       },
     ],
   },

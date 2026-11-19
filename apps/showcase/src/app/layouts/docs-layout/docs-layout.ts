@@ -54,7 +54,7 @@ import {
   SiChevronRightIcon,
   SiCompassIcon,
   SiCookingPotIcon,
-  SiInfoIcon,
+  SiPackageIcon,
   SiPanelLeftIcon,
   SiSearchIcon,
   SiSparklesIcon,
@@ -68,10 +68,10 @@ import { ThemeMenu } from '../../components/theme-menu/theme-menu';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc-service';
 import {
-  aboutPages,
   aiElementPages,
   gettingStartedPages,
   guidePages,
+  packagePages,
 } from '../../data/docs-nav';
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
@@ -118,7 +118,7 @@ import { DocsNavService } from '../../services/docs-nav-service';
     SiChartColumnIcon,
     SiCookingPotIcon,
     SiCompassIcon,
-    SiInfoIcon,
+    SiPackageIcon,
     SiPanelLeftIcon,
     SiSearchIcon,
     SiSparklesIcon,
@@ -185,8 +185,8 @@ import { DocsNavService } from '../../services/docs-nav-service';
                   scCollapsible
                   routerLinkActive
                   [routerLinkActiveOptions]="{ exact: true }"
-                  #groupGetStarted="routerLinkActive"
-                  [open]="groupGetStarted.isActive"
+                  #groupOverview="routerLinkActive"
+                  [open]="groupOverview.isActive"
                 >
                   <button
                     scSidebarMenuButton
@@ -194,7 +194,7 @@ import { DocsNavService } from '../../services/docs-nav-service';
                     class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
                   >
                     <svg siBookOpenTextIcon></svg>
-                    <span>Get Started</span>
+                    <span>Overview</span>
                     <svg
                       siChevronRightIcon
                       class="ms-auto transition-transform rtl:-scale-x-100"
@@ -203,6 +203,45 @@ import { DocsNavService } from '../../services/docs-nav-service';
                   <div scCollapsiblePanel hiddenUntilFound>
                     <ul scSidebarMenuSub>
                       @for (page of gettingStartedPages; track page.path) {
+                        <li scSidebarMenuSubItem>
+                          <a
+                            scSidebarMenuSubButton
+                            [routerLink]="page.path"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            routerLinkActive
+                            #pageRla="routerLinkActive"
+                            [active]="pageRla.isActive"
+                          >
+                            <span>{{ page.name }}</span>
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </li>
+                <li
+                  scSidebarMenuItem
+                  scCollapsible
+                  routerLinkActive
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  #groupPackages="routerLinkActive"
+                  [open]="groupPackages.isActive"
+                >
+                  <button
+                    scSidebarMenuButton
+                    scCollapsibleTrigger
+                    class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
+                  >
+                    <svg siPackageIcon></svg>
+                    <span>Packages</span>
+                    <svg
+                      siChevronRightIcon
+                      class="ms-auto transition-transform rtl:-scale-x-100"
+                    ></svg>
+                  </button>
+                  <div scCollapsiblePanel hiddenUntilFound>
+                    <ul scSidebarMenuSub>
+                      @for (page of packagePages; track page.path) {
                         <li scSidebarMenuSubItem>
                           <a
                             scSidebarMenuSubButton
@@ -455,45 +494,6 @@ import { DocsNavService } from '../../services/docs-nav-service';
                     </ul>
                   </div>
                 </li>
-                <li
-                  scSidebarMenuItem
-                  scCollapsible
-                  routerLinkActive
-                  [routerLinkActiveOptions]="{ exact: true }"
-                  #groupAbout="routerLinkActive"
-                  [open]="groupAbout.isActive"
-                >
-                  <button
-                    scSidebarMenuButton
-                    scCollapsibleTrigger
-                    class="[&[aria-expanded=true]>svg:last-child]:rotate-90"
-                  >
-                    <svg siInfoIcon></svg>
-                    <span>About</span>
-                    <svg
-                      siChevronRightIcon
-                      class="ms-auto transition-transform rtl:-scale-x-100"
-                    ></svg>
-                  </button>
-                  <div scCollapsiblePanel hiddenUntilFound>
-                    <ul scSidebarMenuSub>
-                      @for (page of aboutPages; track page.path) {
-                        <li scSidebarMenuSubItem>
-                          <a
-                            scSidebarMenuSubButton
-                            [routerLink]="page.path"
-                            [routerLinkActiveOptions]="{ exact: true }"
-                            routerLinkActive
-                            #aboutRla="routerLinkActive"
-                            [active]="aboutRla.isActive"
-                          >
-                            <span>{{ page.name }}</span>
-                          </a>
-                        </li>
-                      }
-                    </ul>
-                  </div>
-                </li>
               </ul>
             </div>
           </div>
@@ -594,7 +594,7 @@ export class DocsLayout {
   private readonly recipes = this.componentsService.visibleRecipes;
   private readonly gettingStartedPages = gettingStartedPages;
   private readonly guidePages = guidePages;
-  private readonly aboutPages = aboutPages;
+  private readonly packagePages = packagePages;
   private readonly aiElementPages = aiElementPages;
   private readonly devMode = this.config.devMode;
 
@@ -628,7 +628,7 @@ export class DocsLayout {
       .find(
         (g) =>
           g.kind === 'page' &&
-          g.label !== 'Get Started' &&
+          g.label !== 'Overview' &&
           g.pages.some((page) => page.path === url),
       );
     return group

@@ -6,10 +6,12 @@ import { componentsRoutes } from './routes/components-routes';
 import { demosRoutes } from './routes/demos-routes';
 import { gettingStartedRoutes } from './routes/getting-started-routes';
 import { guidesRoutes } from './routes/guides-routes';
+import { packagesRoutes } from './routes/packages-routes';
 
 export const appRoutes: Route[] = [
   ...demosRoutes,
   ...gettingStartedRoutes,
+  ...packagesRoutes,
   ...guidesRoutes,
   ...aboutRoutes,
   ...componentsRoutes,

@@ -14,9 +14,9 @@ const pages = [
     title: 'Server-side rendering',
     group: 'Guides',
   },
-  { path: '/docs/about/changelog', title: 'Changelog', group: 'About' },
-  { path: '/docs/about/credits', title: 'Credits', group: 'About' },
-  { path: '/docs/about/roadmap', title: 'Roadmap', group: 'About' },
+  { path: '/docs/about/changelog', title: 'Changelog', group: 'Overview' },
+  { path: '/docs/about/credits', title: 'Credits', group: 'Overview' },
+  { path: '/docs/about/roadmap', title: 'Roadmap', group: 'Overview' },
 ];
 
 test.describe('Guides and About pages', () => {
@@ -44,7 +44,14 @@ test.describe('Guides and About pages', () => {
       ).toBeVisible();
       await expect(
         page.getByRole('navigation', { name: 'Where you are' }),
-      ).toHaveText(new RegExp(`Docs\\s*${group}\\s*${title}`));
+      ).toHaveText(
+        // Overview's pages come straight after Docs.
+        new RegExp(
+          group === 'Overview'
+            ? `Docs\\s*${title}`
+            : `Docs\\s*${group}\\s*${title}`,
+        ),
+      );
     });
   }
 
@@ -52,13 +59,13 @@ test.describe('Guides and About pages', () => {
     await page.goto('/docs/guides/theming');
     const nav = page.getByRole('navigation', { name: 'Documentation' });
     await expect(nav.locator('[scCollapsibleTrigger]')).toHaveText([
-      'Get Started',
+      'Overview',
+      'Packages',
       'Guides',
       'Components',
       'Charts',
       'Utilities',
       'AI Elements',
-      'About',
     ]);
   });
 });

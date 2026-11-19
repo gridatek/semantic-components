@@ -5,14 +5,45 @@ export interface DocsPage {
   readonly description?: string;
 }
 
-/** Getting started: the library, installing it, choosing a style. */
+/** Overview: the library and installing it. */
 export const gettingStartedPages: readonly DocsPage[] = [
   { name: 'Introduction', path: '/docs/getting-started/introduction' },
+  {
+    name: 'Credits',
+    path: '/docs/about/credits',
+    description: 'The projects we build on',
+  },
+  { name: 'Installation', path: '/docs/getting-started/installation' },
   { name: 'Components', path: '/docs/components' },
-  { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
-  { name: 'Installation', path: '/docs/getting-started/ui' },
-  { name: 'Styles', path: '/docs/getting-started/styles' },
-  { name: 'MCP Server', path: '/docs/getting-started/mcp-server' },
+  {
+    name: 'Roadmap',
+    path: '/docs/about/roadmap',
+    description: 'Where the library is going',
+  },
+  {
+    name: 'Changelog',
+    path: '/docs/about/changelog',
+    description: 'What changed',
+  },
+];
+
+/** The three packages, one page each. */
+export const packagePages: readonly DocsPage[] = [
+  {
+    name: 'UI',
+    path: '/docs/packages/ui',
+    description: 'The components and their entry points',
+  },
+  {
+    name: 'Styles',
+    path: '/docs/packages/styles',
+    description: 'shadcn/ui’s eight styles',
+  },
+  {
+    name: 'MCP Server',
+    path: '/docs/packages/mcp-server',
+    description: 'The docs for AI coding assistants',
+  },
 ];
 
 /** Guides: how to do things well with the library. */
@@ -39,25 +70,6 @@ export const guidePages: readonly DocsPage[] = [
     name: 'Server-side rendering',
     path: '/docs/guides/ssr',
     description: 'SSR, hydration, saved choices',
-  },
-];
-
-/** About the project. */
-export const aboutPages: readonly DocsPage[] = [
-  {
-    name: 'Changelog',
-    path: '/docs/about/changelog',
-    description: 'What changed',
-  },
-  {
-    name: 'Credits',
-    path: '/docs/about/credits',
-    description: 'The projects we build on',
-  },
-  {
-    name: 'Roadmap',
-    path: '/docs/about/roadmap',
-    description: 'Where the library is going',
   },
 ];
 

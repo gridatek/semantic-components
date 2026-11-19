@@ -3,7 +3,7 @@ import { test } from '../test';
 
 test.describe('Styles Install Page', () => {
   test('should have no accessibility violations', async ({ page }) => {
-    await page.goto('/docs/getting-started/styles');
+    await page.goto('/docs/packages/styles');
     await expectNoA11yViolations(page);
   });
 });

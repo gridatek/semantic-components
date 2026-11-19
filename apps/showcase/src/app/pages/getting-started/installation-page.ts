@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScTypeset } from '@semantic-components/ui';
+import { RouterLink } from '@angular/router';
+import { ScButton, ScLink, ScTypeset } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -14,6 +15,7 @@ import {
   SiChevronDownIcon,
   SiCopyIcon,
 } from '@semantic-icons/lucide-icons';
+import { DocCode } from '../../components/doc-code/doc-code';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
 import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo-container';
@@ -21,6 +23,9 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
 @Component({
   selector: 'app-ui-page',
   imports: [
+    DocCode,
+    RouterLink,
+    ScLink,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
@@ -40,18 +45,155 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
   template: `
     <div class="space-y-12">
       <div class="space-y-2">
-        <h1 scTypeset>UI</h1>
+        <h1 scTypeset>Installation</h1>
         <p class="text-muted-foreground">
-          Install and configure the
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/ui</code
-          >
-          package.
+          Everything an Angular app needs for the components: Angular Aria and
+          the CDK, Tailwind CSS, the utilities and the font, then the packages
+          and your styles.css.
         </p>
       </div>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>1. Install the packages</h2>
+        <h2 scTypeset appToc>1. Install Angular Aria and CDK</h2>
+        <p>Semantic Components depends on Angular Aria and Angular CDK.</p>
+        <app-package-manager-install packages="@angular/aria @angular/cdk" />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>2. Set up Tailwind CSS</h2>
+        <p>
+          Tailwind CSS v4 is required. Follow these steps if not already
+          installed:
+        </p>
+
+        <div class="space-y-4 pl-4">
+          <div class="space-y-3">
+            <h3 class="text-lg font-medium tracking-tight">
+              2.1 Install Tailwind CSS
+            </h3>
+            <p>
+              Next, open a terminal in your Angular project's root directory and
+              run the following command to install Tailwind CSS and its peer
+              dependencies:
+            </p>
+            <app-package-manager-install
+              packages="tailwindcss @tailwindcss/postcss postcss"
+            />
+          </div>
+
+          <div class="space-y-3">
+            <h3 class="text-lg font-medium tracking-tight">
+              2.2 Configure PostCSS Plugins
+            </h3>
+            <p>
+              Next, add a
+              <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+                >.postcssrc.json</code
+              >
+              file in the file root of the project. Add the
+              <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+                >&#64;tailwindcss/postcss</code
+              >
+              plugin into your PostCSS configuration.
+            </p>
+            <div scCodeBlock>
+              <div scCodeBlockHeader>
+                <div scCodeBlockTitle>.postcssrc.json</div>
+                <div scCodeBlockActions>
+                  <button
+                    [scCodeBlockCopy]="postcssCode"
+                    #copy3="scCodeBlockCopy"
+                  >
+                    @if (copy3.copied()) {
+                      <svg siCheckIcon></svg>
+                    } @else {
+                      <svg siCopyIcon></svg>
+                    }
+                    <span class="sr-only">Copy to clipboard</span>
+                  </button>
+                </div>
+              </div>
+              <pre
+                scCodeBlockContent
+                [code]="postcssCode"
+                language="json"
+              ></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>3. Install utilities</h2>
+        <p>
+          Install the required utility libraries for class management and
+          animations.
+        </p>
+        <app-package-manager-install
+          packages="shadcn class-variance-authority cn tw-animate-css"
+        />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>4. Install the font</h2>
+        <p>The theme's font is Geist, as in shadcn/ui:</p>
+        <app-package-manager-install packages="@fontsource-variable/geist" />
+        <p>
+          Your
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
+          imports it (it's in the file to copy, step 8):
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;import '&#64;fontsource-variable/geist';</code
+          >
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>5. Install icons</h2>
+        <p>
+          The examples use
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >&#64;semantic-icons/lucide-icons</code
+          >
+          — install it to copy them as they are.
+        </p>
+        <app-package-manager-install packages="@semantic-icons/lucide-icons" />
+        <p>
+          The components themselves draw no icons: they're in your templates, so
+          you can swap them for any library.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>6. Polyfill Temporal</h2>
+        <p>
+          The date components use the browser's
+          <a
+            href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Temporal"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-foreground underline underline-offset-4"
+          >
+            Temporal API</a
+          >. Until every browser has it (Safari doesn't yet), add a polyfill to
+          your app: it fills in the global only where it's missing.
+        </p>
+        <app-package-manager-install packages="temporal-polyfill" />
+        <p>
+          Then list it in your build's
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">polyfills</code>
+          (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >angular.json</code
+          >):
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >"polyfills": ["temporal-polyfill/global"]</code
+          >. Once all browsers ship Temporal, remove both — your code stays as
+          it is.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>7. Install the packages</h2>
         <p>
           The components, and their classes in shadcn's styles (the styles):
         </p>
@@ -61,7 +203,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>2. Configure styles</h2>
+        <h2 scTypeset appToc>8. Configure styles</h2>
         <p>
           As in shadcn/ui, the theme is your app's. Copy this into your
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
@@ -145,11 +287,37 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <p>Import and use components in your Angular templates:</p>
         <app-button-usage-demo-container />
       </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>AI coding assistants</h2>
+        <p>
+          Optional: give your assistant the library&apos;s docs with the
+          <a scLink routerLink="/docs/packages/mcp-server">MCP server</a>. Add
+          it to your project&apos;s
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">.mcp.json</code>;
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">npx -y</code>
+          fetches it on first use, nothing to install.
+        </p>
+        <app-doc-code [code]="mcpCode" language="json" />
+      </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class UiPage {
+export default class InstallationPage {
+  private readonly postcssCode = `{
+  "plugins": {
+    "@tailwindcss/postcss": {}
+  }
+}`;
+  private readonly mcpCode = `{
+  "mcpServers": {
+    "semantic-components": {
+      "command": "npx",
+      "args": ["-y", "@semantic-components/mcp-server"]
+    }
+  }
+}`;
   /** styles.css: its first lines, or all of it. */
   private readonly stylesExpanded = signal(false);
   private readonly stylesCode = `@import url('@angular/cdk/a11y-prebuilt.css');

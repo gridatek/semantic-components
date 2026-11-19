@@ -91,7 +91,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
             scLink
             variant="button"
             size="sm"
-            routerLink="/docs/getting-started/prerequisites"
+            routerLink="/docs/getting-started/installation"
           >
             Get started
           </a>
@@ -415,18 +415,13 @@ export default class IntroductionPage {
 
   private readonly nextSteps = [
     {
-      name: 'Prerequisites',
-      path: '/docs/getting-started/prerequisites',
-      description: 'Angular Aria, the CDK and Tailwind CSS.',
-    },
-    {
       name: 'Installation',
-      path: '/docs/getting-started/ui',
-      description: 'install the components and set up the app.',
+      path: '/docs/getting-started/installation',
+      description: 'Angular Aria, the CDK, Tailwind CSS, then the components.',
     },
     {
       name: 'Styles',
-      path: '/docs/getting-started/styles',
+      path: '/docs/packages/styles',
       description: 'choose one of the eight styles.',
     },
     {

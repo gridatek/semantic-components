@@ -2,10 +2,10 @@ import { Service, computed, inject } from '@angular/core';
 import { ComponentItem } from '../data/components';
 import {
   type DocsPage,
-  aboutPages,
   aiElementPages,
   gettingStartedPages,
   guidePages,
+  packagePages,
 } from '../data/docs-nav';
 import { ComponentsService } from './components-service';
 
@@ -38,9 +38,14 @@ export class DocsNavService {
   readonly groups = computed<DocsNavGroup[]>(() =>
     [
       {
-        label: 'Get Started',
+        label: 'Overview',
         kind: 'page' as const,
         pages: gettingStartedPages,
+      },
+      {
+        label: 'Packages',
+        kind: 'page' as const,
+        pages: packagePages,
       },
       {
         label: 'Guides',
@@ -71,11 +76,6 @@ export class DocsNavService {
         label: 'AI Elements',
         kind: 'component' as const,
         pages: aiElementPages,
-      },
-      {
-        label: 'About',
-        kind: 'page' as const,
-        pages: aboutPages,
       },
     ].filter((group) => group.pages.length > 0),
   );

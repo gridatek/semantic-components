@@ -26,7 +26,6 @@ import {
   ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
-import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
 import { STYLES as STYLE_CLASSES } from '../../styles';
 
@@ -60,7 +59,6 @@ const STYLES: { name: ScStyleName; description: string }[] = [
   selector: 'app-styles-page',
   imports: [
     NgTemplateOutlet,
-    PackageManagerInstall,
     RouterLink,
     ScBadge,
     ScButton,
@@ -224,49 +222,49 @@ const STYLES: { name: ScStyleName; description: string }[] = [
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Setup</h2>
-        <h3 class="text-lg font-medium tracking-tight">
-          1. Install the package
-        </h3>
-        <p>The ui library needs it (its peer): install them together.</p>
-        <app-package-manager-install
-          packages="@semantic-components/ui @semantic-components/styles"
-        />
-
-        <h3 class="pt-4 text-lg font-medium tracking-tight">
-          2. Choose a style
-        </h3>
+        <h2 scTypeset appToc>CSS files</h2>
         <p>
-          Give it to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >provideSemanticComponents</code
-          >
-          when the app starts — for nova, nothing to do:
+          Beside the eight styles, the package holds the CSS the components
+          can&apos;t carry as classes. Those for a style come in two: the rules,
+          the same in every style, and the style&apos;s variables.
         </p>
-        <ng-container
-          [ngTemplateOutlet]="code"
-          [ngTemplateOutletContext]="{ $implicit: config }"
-        />
-
-        <h3 class="pt-4 text-lg font-medium tracking-tight">
-          3. Add its file to Tailwind
-        </h3>
-        <p>
-          Tailwind skips
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >node_modules</code
-          >: add your style&apos;s file as a source in
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
-          — that one file only, so Tailwind scans one style. It is named after
-          the style (nova:
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >…-styles-nova.mjs</code
-          >); adjust the path to your project.
-        </p>
-        <ng-container
-          [ngTemplateOutlet]="code"
-          [ngTemplateOutletContext]="{ $implicit: source }"
-        />
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >reduced-motion.css</code
+            >
+            — what the components need whatever the theme: with reduced motion
+            asked for, animations keep their fades and lose their movement.
+          </li>
+          <li>
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >typeset.css</code
+            >
+            and
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >&lt;style&gt;/typeset-variables.css</code
+            >
+            — shadcn&apos;s typeset, for prose under
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scTypeset</code
+            >.
+          </li>
+          <li>
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >scrollbar.css</code
+            >
+            and
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >&lt;style&gt;/scrollbar-variables.css</code
+            >
+            — every scrollbar of the page in the style&apos;s look.
+          </li>
+          <li>
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              >&lt;style&gt;/editor.css</code
+            >
+            — the Editor&apos;s document, if you use it.
+          </li>
+        </ul>
       </section>
     </div>
   `,
@@ -293,21 +291,4 @@ export default class StylesPage {
     }
     return injectors;
   })();
-
-  private readonly config = {
-    title: 'app.config.ts',
-    language: 'typescript',
-    code: `import { lyra } from '@semantic-components/styles/lyra';
-import { provideSemanticComponents } from '@semantic-components/ui';
-
-export const appConfig: ApplicationConfig = {
-  providers: [provideSemanticComponents({ style: lyra })],
-};`,
-  };
-
-  private readonly source = {
-    title: 'styles.css',
-    language: 'css',
-    code: '@source "../node_modules/@semantic-components/styles/fesm2022/semantic-components-styles-lyra.mjs";',
-  };
 }
