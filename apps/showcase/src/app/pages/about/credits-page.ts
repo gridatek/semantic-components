@@ -43,27 +43,6 @@ interface Credit {
           </ul>
         </section>
       }
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Made by</h2>
-        <p>
-          Built for the Angular community by
-          <a
-            scLink
-            href="https://x.com/klagrida"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Khalil Lagrida</a
-          >, with mint tea. The source is on
-          <a
-            scLink
-            href="https://github.com/gridatek/semantic-components"
-            target="_blank"
-            rel="noopener noreferrer"
-            >GitHub</a
-          >.
-        </p>
-      </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,

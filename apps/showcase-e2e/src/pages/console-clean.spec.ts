@@ -28,9 +28,7 @@ const pages = [
   '/docs/guides/forms',
   '/docs/guides/accessibility',
   '/docs/guides/ssr',
-  '/docs/about/changelog',
   '/docs/about/credits',
-  '/docs/about/roadmap',
   ...components
     .filter((c) => !c.hidden)
     .map((c) => `/docs/components/${c.path}`),
