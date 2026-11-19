@@ -1,16 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicFocusTrapDemoContainer from './demos/basic-focus-trap-demo-container';
 import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-container';
@@ -18,14 +10,8 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
 @Component({
   selector: 'app-focus-trap-page',
   imports: [
+    PartsTable,
     Anatomy,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     TocHeading,
     ComponentBadges,
     ScTypeset,
@@ -126,40 +112,7 @@ import { FocusTrapUsageDemoContainer } from './demos/focus-trap-usage-demo-conta
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">A behaviour only, on any element.</p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="Focus Trap parts"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Part</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.selector }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="Focus Trap parts" [parts]="parts" />
       </section>
     </div>
   `,

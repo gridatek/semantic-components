@@ -1,18 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import {
-  ScLink,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { FooterTableDemoContainer } from './demos/footer-table-demo-container';
 import { RtlTableDemoContainer } from './demos/rtl-table-demo-container';
@@ -22,6 +13,7 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
 @Component({
   selector: 'app-table-page',
   imports: [
+    PartsTable,
     Anatomy,
     TableUsageDemoContainer,
     FooterTableDemoContainer,
@@ -32,13 +24,6 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
     ComponentBadges,
     ScTypeset,
     ScLink,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -119,40 +104,7 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="Table parts"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Part</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.selector }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="Table parts" [parts]="parts" />
       </section>
     </div>
   `,

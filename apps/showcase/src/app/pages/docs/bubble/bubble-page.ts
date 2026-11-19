@@ -1,16 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AlignmentBubbleDemoContainer } from './demos/alignment-bubble-demo-container';
 import { BubbleUsageDemoContainer } from './demos/bubble-usage-demo-container';
@@ -26,6 +18,7 @@ import { VariantsBubbleDemoContainer } from './demos/variants-bubble-demo-contai
 @Component({
   selector: 'app-bubble-page',
   imports: [
+    PartsTable,
     Anatomy,
     BubbleUsageDemoContainer,
     VariantsBubbleDemoContainer,
@@ -40,13 +33,6 @@ import { VariantsBubbleDemoContainer } from './demos/variants-bubble-demo-contai
     TocHeading,
     ComponentBadges,
     ScTypeset,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -118,40 +104,7 @@ import { VariantsBubbleDemoContainer } from './demos/variants-bubble-demo-contai
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="Bubble parts"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Part</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.selector }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="Bubble parts" [parts]="parts" />
       </section>
     </div>
   `,

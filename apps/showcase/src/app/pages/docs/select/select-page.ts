@@ -1,15 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
+import { ApiTable } from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { DisabledSelectDemoContainer } from './demos/disabled-select-demo-container';
@@ -29,6 +21,7 @@ interface ScApiRow {
 @Component({
   selector: 'app-select-page',
   imports: [
+    ApiTable,
     Anatomy,
     SelectUsageDemoContainer,
     GroupsSelectDemoContainer,
@@ -39,13 +32,6 @@ interface ScApiRow {
     TocHeading,
     ComponentBadges,
     ScTypeset,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -107,46 +93,10 @@ interface ScApiRow {
           </h3>
           <p class="text-muted-foreground">{{ part.description }}</p>
           @if (part.inputs.length) {
-            <div
-              scTableContainer
-              tabindex="0"
-              role="region"
-              [attr.aria-label]="part.name + ' inputs'"
-            >
-              <table scTable>
-                <thead scTableHeader>
-                  <tr scTableRow>
-                    <th scTableHeaderCell>Input</th>
-                    <th scTableHeaderCell>Type</th>
-                    <th scTableHeaderCell>Default</th>
-                    <th scTableHeaderCell>Description</th>
-                  </tr>
-                </thead>
-                <tbody scTableBody>
-                  @for (input of part.inputs; track input.name) {
-                    <tr scTableRow>
-                      <td scTableCell>
-                        <code class="font-mono text-sm">{{ input.name }}</code>
-                      </td>
-                      <td scTableCell class="whitespace-normal">
-                        <code class="font-mono text-sm">{{ input.type }}</code>
-                      </td>
-                      <td scTableCell>
-                        <code class="font-mono text-sm">{{
-                          input.default
-                        }}</code>
-                      </td>
-                      <td
-                        scTableCell
-                        class="text-muted-foreground whitespace-normal"
-                      >
-                        {{ input.description }}
-                      </td>
-                    </tr>
-                  }
-                </tbody>
-              </table>
-            </div>
+            <app-api-table
+              [label]="part.name + ' inputs'"
+              [inputs]="part.inputs"
+            />
           }
         }
       </section>

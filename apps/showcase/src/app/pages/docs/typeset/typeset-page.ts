@@ -11,6 +11,10 @@ import {
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import {
+  type ApiPart,
+  PartsTable,
+} from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ComponentsTypesetDemoContainer } from './demos/components-typeset-demo-container';
 import { HeadingsTypesetDemoContainer } from './demos/headings-typeset-demo-container';
@@ -30,6 +34,7 @@ interface Row {
 @Component({
   selector: 'app-typeset-page',
   imports: [
+    PartsTable,
     Anatomy,
     TypesetUsageDemoContainer,
     HeadingsTypesetDemoContainer,
@@ -245,40 +250,7 @@ interface Row {
           Each takes <code scTypeset>class</code>; your classes win over its
           rules.
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="Typeset directive"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Directive</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.value }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="Typeset directive" [parts]="parts" />
 
         <h3 scTypeset>Variables</h3>
         <div
@@ -363,10 +335,10 @@ export default class TypesetPage {
 <p scTypeset>… <code scTypeset>…</code> …</p>`,
   };
 
-  private readonly parts: readonly Row[] = [
+  private readonly parts: readonly ApiPart[] = [
     {
       name: 'ScTypeset',
-      value: '[scTypeset]',
+      selector: '[scTypeset]',
       description:
         'An element on its own — a heading, a paragraph, a quote, inline code, a rule — set by its tag, as in a container: it marks itself data-typeset. For the container itself, class="typeset".',
     },

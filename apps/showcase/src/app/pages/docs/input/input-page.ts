@@ -1,15 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
+import { ApiTable } from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BadgeInputDemoContainer } from './demos/badge-input-demo-container';
@@ -31,6 +23,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
 @Component({
   selector: 'app-input-page',
   imports: [
+    ApiTable,
     Anatomy,
     InputUsageDemoContainer,
     BasicInputDemoContainer,
@@ -50,13 +43,6 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
     TocHeading,
     ComponentBadges,
     ScTypeset,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -141,44 +127,7 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
             >autocomplete</code
           >…) is the input&apos;s own.
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="ScInput inputs"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Input</th>
-                <th scTableHeaderCell>Type</th>
-                <th scTableHeaderCell>Default</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (input of inputs; track input.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ input.name }}</code>
-                  </td>
-                  <td scTableCell class="whitespace-normal">
-                    <code class="font-mono text-sm">{{ input.type }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ input.default }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ input.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-api-table label="ScInput inputs" [inputs]="inputs" />
       </section>
     </div>
   `,

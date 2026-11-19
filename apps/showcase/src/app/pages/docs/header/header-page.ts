@@ -1,16 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicHeaderDemoContainer } from './demos/basic-header-demo-container';
 import { HeaderUsageDemoContainer } from './demos/header-usage-demo-container';
@@ -23,6 +15,7 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
 @Component({
   selector: 'app-header-page',
   imports: [
+    PartsTable,
     Anatomy,
     HeaderUsageDemoContainer,
     BasicHeaderDemoContainer,
@@ -34,13 +27,6 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
     TocHeading,
     ComponentBadges,
     ScTypeset,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -125,40 +111,7 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
           merged over their own (cn: a later class wins). The menu&apos;s
           template has no element of its own: style the content you put in it.
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="Header parts"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Part</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.selector }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="Header parts" [parts]="parts" />
       </section>
     </div>
   `,

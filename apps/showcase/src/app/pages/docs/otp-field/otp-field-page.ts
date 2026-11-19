@@ -1,16 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AlphanumericOtpFieldDemoContainer } from './demos/alphanumeric-otp-field-demo-container';
 import { ControlledOtpFieldDemoContainer } from './demos/controlled-otp-field-demo-container';
@@ -31,6 +23,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
 @Component({
   selector: 'app-otp-field-page',
   imports: [
+    PartsTable,
     Anatomy,
     OtpFieldUsageDemoContainer,
     DigitsOnlyOtpFieldDemoContainer,
@@ -50,13 +43,6 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
     TocHeading,
     ComponentBadges,
     ScTypeset,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -132,40 +118,7 @@ import { VerificationOtpFieldDemoContainer } from './demos/verification-otp-fiel
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over the style (cn: a later class wins).
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="OTP Field parts"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Part</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.selector }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="OTP Field parts" [parts]="parts" />
       </section>
     </div>
   `,

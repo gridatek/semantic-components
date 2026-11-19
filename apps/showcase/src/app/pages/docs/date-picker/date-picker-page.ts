@@ -1,16 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BirthDatePickerDemoContainer } from './demos/birth-date-picker-demo-container';
 import { ConstraintsDatePickerDemoContainer } from './demos/constraints-date-picker-demo-container';
@@ -26,6 +18,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
 @Component({
   selector: 'app-date-picker-page',
   imports: [
+    PartsTable,
     Anatomy,
     DatePickerUsageDemoContainer,
     TypedDatePickerDemoContainer,
@@ -40,13 +33,6 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
     TocHeading,
     ComponentBadges,
     ScTypeset,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -125,40 +111,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
           merged over the preset (cn: a later class wins). The calendar and the
           popover are their own components: see Calendar and Popover.
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="Date Picker parts"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Part</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.selector }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="Date Picker parts" [parts]="parts" />
       </section>
     </div>
   `,

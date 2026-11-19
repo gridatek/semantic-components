@@ -1,16 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CheckboxMenubarDemoContainer } from './demos/checkbox-menubar-demo-container';
 import { IconsMenubarDemoContainer } from './demos/icons-menubar-demo-container';
@@ -22,6 +14,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
 @Component({
   selector: 'app-menubar-page',
   imports: [
+    PartsTable,
     Anatomy,
     MenubarUsageDemoContainer,
     CheckboxMenubarDemoContainer,
@@ -32,13 +25,6 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
     TocHeading,
     ComponentBadges,
     ScTypeset,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -108,40 +94,7 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
           merged over the style (cn: a later class wins). The menus&apos; parts
           are the Menu&apos;s (see Menu).
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="Menubar parts"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Part</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.selector }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="Menubar parts" [parts]="parts" />
       </section>
     </div>
   `,

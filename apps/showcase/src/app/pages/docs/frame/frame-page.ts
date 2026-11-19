@@ -1,15 +1,10 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
+import {
+  type ApiInput,
+  ApiTable,
+} from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AspectRatioFrameDemoContainer } from './demos/aspect-ratio-frame-demo-container';
@@ -19,6 +14,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
 @Component({
   selector: 'app-frame-page',
   imports: [
+    ApiTable,
     Anatomy,
     FrameUsageDemoContainer,
     AspectRatioFrameDemoContainer,
@@ -26,13 +22,6 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
     TocHeading,
     ComponentBadges,
     ScTypeset,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -82,43 +71,22 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">4xl</code> in
           luma.
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="ScFrame inputs"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Input</th>
-                <th scTableHeaderCell>Type</th>
-                <th scTableHeaderCell>Default</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              <tr scTableRow>
-                <td scTableCell>
-                  <code class="font-mono text-sm">class</code>
-                </td>
-                <td scTableCell>
-                  <code class="font-mono text-sm">string</code>
-                </td>
-                <td scTableCell><code class="font-mono text-sm">''</code></td>
-                <td scTableCell class="text-muted-foreground whitespace-normal">
-                  Classes merged over the style (cn: a later class wins).
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <app-api-table label="ScFrame inputs" [inputs]="inputs" />
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
 export default class FramePage {
+  private readonly inputs: readonly ApiInput[] = [
+    {
+      name: 'class',
+      type: 'string',
+      default: "''",
+      description: 'Classes merged over the style (cn: a later class wins).',
+    },
+  ];
+
   private readonly anatomy = {
     imports: "import { ScFrame } from '@semantic-components/ui';",
     markup: '<div scFrame>…</div>',

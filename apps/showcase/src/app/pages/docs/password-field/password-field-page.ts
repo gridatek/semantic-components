@@ -1,16 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CapsLockPasswordFieldDemoContainer } from './demos/caps-lock-password-field-demo-container';
 import { DisabledPasswordFieldDemoContainer } from './demos/disabled-password-field-demo-container';
@@ -25,14 +17,8 @@ import { VisiblePasswordFieldDemoContainer } from './demos/visible-password-fiel
 @Component({
   selector: 'app-password-field-page',
   imports: [
+    PartsTable,
     Anatomy,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     PasswordFieldUsageDemoContainer,
     VisiblePasswordFieldDemoContainer,
     DisabledPasswordFieldDemoContainer,
@@ -93,40 +79,7 @@ import { VisiblePasswordFieldDemoContainer } from './demos/visible-password-fiel
           The field is a scField underneath: label, descriptions and Signal
           Forms work as in any field.
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="Password Field parts"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Part</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.selector }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="Password Field parts" [parts]="parts" />
       </section>
     </div>
   `,

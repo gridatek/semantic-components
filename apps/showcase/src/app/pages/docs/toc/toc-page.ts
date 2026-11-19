@@ -10,7 +10,9 @@ import {
   ScTypeset,
 } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
+import { ApiTable } from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicTocDemoContainer } from './demos/basic-toc-demo-container';
 import { LevelsTocDemoContainer } from './demos/levels-toc-demo-container';
@@ -28,6 +30,8 @@ interface ApiRow {
 @Component({
   selector: 'app-toc-page',
   imports: [
+    ApiTable,
+    PartsTable,
     Anatomy,
     BasicTocDemoContainer,
     ComponentBadges,
@@ -142,40 +146,7 @@ interface ApiRow {
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
           merged over its own (cn: a later class wins).
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="Table of contents parts"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Part</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.selector }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="Table of contents parts" [parts]="parts" />
 
         <h3 class="text-lg font-semibold">ScToc</h3>
         <p class="text-muted-foreground">
@@ -218,44 +189,7 @@ interface ApiRow {
         </div>
 
         <h3 class="text-lg font-semibold">ScTocLink</h3>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="ScTocLink inputs"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Input</th>
-                <th scTableHeaderCell>Type</th>
-                <th scTableHeaderCell>Default</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (row of linkInputs; track row.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ row.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ row.type }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ row.default }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ row.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-api-table label="ScTocLink inputs" [inputs]="linkInputs" />
       </section>
     </div>
   `,

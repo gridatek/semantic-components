@@ -1,15 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
+import { ApiTable } from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AspectRatioUsageDemoContainer } from './demos/aspect-ratio-usage-demo-container';
@@ -22,6 +14,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
 @Component({
   selector: 'app-aspect-ratio-page',
   imports: [
+    ApiTable,
     Anatomy,
     AspectRatioUsageDemoContainer,
     SquareAspectRatioDemoContainer,
@@ -32,13 +25,6 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
     TocHeading,
     ComponentBadges,
     ScTypeset,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -120,44 +106,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
             >[scAspectRatio]</code
           >
         </h3>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="ScAspectRatio inputs"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Input</th>
-                <th scTableHeaderCell>Type</th>
-                <th scTableHeaderCell>Default</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (input of inputs; track input.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ input.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ input.type }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ input.default }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ input.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-api-table label="ScAspectRatio inputs" [inputs]="inputs" />
       </section>
     </div>
   `,

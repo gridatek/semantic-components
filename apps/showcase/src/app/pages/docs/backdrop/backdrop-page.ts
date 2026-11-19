@@ -1,17 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import {
-  ScLink,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
+import {
+  type ApiInput,
+  ApiTable,
+} from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BackdropUsageDemoContainer } from './demos/backdrop-usage-demo-container';
@@ -20,6 +14,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
 @Component({
   selector: 'app-backdrop-page',
   imports: [
+    ApiTable,
     Anatomy,
     BackdropUsageDemoContainer,
     CustomBackdropDemoContainer,
@@ -28,13 +23,6 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
     ComponentBadges,
     ScTypeset,
     ScLink,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
   ],
   template: `
     <div class="space-y-8">
@@ -126,46 +114,23 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
             >div[scBackdrop]</code
           >
         </h3>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="ScBackdrop inputs"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Input</th>
-                <th scTableHeaderCell>Type</th>
-                <th scTableHeaderCell>Default</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              <tr scTableRow>
-                <td scTableCell>
-                  <code class="font-mono text-sm">class</code>
-                </td>
-                <td scTableCell>
-                  <code class="font-mono text-sm">string</code>
-                </td>
-                <td scTableCell>
-                  <code class="font-mono text-sm">''</code>
-                </td>
-                <td scTableCell class="text-muted-foreground whitespace-normal">
-                  Classes merged over the style (cn: a later class wins) — your
-                  own shade, its place.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <app-api-table label="ScBackdrop inputs" [inputs]="inputs" />
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
 export default class BackdropPage {
+  private readonly inputs: readonly ApiInput[] = [
+    {
+      name: 'class',
+      type: 'string',
+      default: "''",
+      description:
+        'Classes merged over the style (cn: a later class wins) — your own shade, its place.',
+    },
+  ];
+
   private readonly anatomy = {
     imports: "import { ScBackdrop } from '@semantic-components/ui';",
     markup: ['@if (open()) {', '  <div scBackdrop></div>', '}'].join('\n'),

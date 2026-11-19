@@ -1,16 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-  ScTypeset,
-} from '@semantic-components/ui';
+import { ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import BasicNumberFieldDemoContainer from './demos/basic-number-field-demo-container';
 import DisabledNumberFieldDemoContainer from './demos/disabled-number-field-demo-container';
@@ -26,14 +18,8 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
 @Component({
   selector: 'app-number-field-page',
   imports: [
+    PartsTable,
     Anatomy,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     BasicNumberFieldDemoContainer,
     ScrubbingNumberFieldDemoContainer,
     StepsNumberFieldDemoContainer,
@@ -96,40 +82,7 @@ import WithoutLabelNumberFieldDemoContainer from './demos/without-label-number-f
           Each part takes class, merged over the style (cn: a later class wins).
           The field is a scField too: it takes its id, orientation and class.
         </p>
-        <div
-          scTableContainer
-          tabindex="0"
-          role="region"
-          aria-label="Number Field parts"
-        >
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
-                <th scTableHeaderCell>Part</th>
-                <th scTableHeaderCell>Selector</th>
-                <th scTableHeaderCell>Description</th>
-              </tr>
-            </thead>
-            <tbody scTableBody>
-              @for (part of parts; track part.name) {
-                <tr scTableRow>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.name }}</code>
-                  </td>
-                  <td scTableCell>
-                    <code class="font-mono text-sm">{{ part.selector }}</code>
-                  </td>
-                  <td
-                    scTableCell
-                    class="text-muted-foreground whitespace-normal"
-                  >
-                    {{ part.description }}
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        <app-parts-table label="Number Field parts" [parts]="parts" />
       </section>
     </div>
   `,
