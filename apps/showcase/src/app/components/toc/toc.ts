@@ -14,15 +14,18 @@ import { TocItem } from './toc-service';
   template: `
     @if (items().length > 0) {
       <nav aria-label="Table of contents">
-        <p class="mb-4 text-sm font-semibold">On This Page</p>
-        <ul class="space-y-2 text-sm">
+        <!-- Quiet beside the page (shadcn's docs): small, gray; the section shown in the text colour. -->
+        <p class="text-muted-foreground mb-3 text-xs font-medium">
+          On This Page
+        </p>
+        <ul class="space-y-1.5 text-[0.8125rem]">
           @for (item of items(); track item.id) {
             <li>
               <a
                 [href]="href(item.id)"
                 [class]="
                   'hover:text-foreground block transition-colors ' +
-                  (item.level === 3 ? 'pl-4 ' : '') +
+                  (item.level === 3 ? 'pl-3 ' : '') +
                   (activeId() === item.id
                     ? 'text-foreground font-medium'
                     : 'text-muted-foreground')

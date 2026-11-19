@@ -513,7 +513,7 @@ import { DocsNavService } from '../../services/docs-nav-service';
             </div>
           </div>
 
-          <aside class="hidden w-56 shrink-0 border-l xl:block">
+          <aside class="hidden w-56 shrink-0 xl:block">
             <div class="sticky top-14 p-6">
               <app-toc
                 [items]="tocService.items()"
