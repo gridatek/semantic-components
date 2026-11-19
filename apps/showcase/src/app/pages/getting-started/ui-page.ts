@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScButton, ScSeparator, ScTypeset } from '@semantic-components/ui';
+import { ScButton, ScTypeset } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,

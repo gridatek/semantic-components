@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScLink, ScSeparator, ScTypeset } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -55,7 +55,7 @@ interface ScCodeSample {
       </div>
     </ng-template>
 
-    <div class="space-y-8">
+    <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Custom style</h1>
         <p class="text-muted-foreground">
