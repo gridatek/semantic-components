@@ -433,6 +433,24 @@ export interface ScSwitchStyles {
   thumb: string;
 }
 
+/**
+ * A colour picker's corners, from style to style — our own part, not
+ * shadcn's: the area as the style's popover, the swatch and presets as its
+ * toggles, the thumbs and the sliders' tracks as its Slider.
+ */
+export interface ScColorPickerStyles {
+  /** The saturation and brightness area. */
+  area: string;
+  /** The area's thumb. */
+  thumb: string;
+  /** A slider (a native range): its track, and its thumb (::-webkit-slider-thumb, ::-moz-range-thumb). */
+  slider: string;
+  /** The swatch showing the colour. */
+  swatch: string;
+  /** A preset. */
+  option: string;
+}
+
 /** A slider's parts that change from style to style. */
 export interface ScSliderStyles {
   /** The native range: its thickness (the thumb's), and the thumb's size along the track. */
@@ -614,6 +632,7 @@ export interface ScStyle {
   chart: ScChartStyles;
   checkbox: ScCheckboxStyles;
   codeBlock: ScCodeBlockStyles;
+  colorPicker: ScColorPickerStyles;
   combobox: ScComboboxStyles;
   command: ScCommandStyles;
   /** scFrame: a box's frame — the style's card radius, ring and shadow. */

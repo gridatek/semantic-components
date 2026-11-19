@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScColorPicker } from './color-picker';
 import { CHECKERBOARD } from './color-picker-slider';
 
@@ -16,6 +17,7 @@ import { CHECKERBOARD } from './color-picker-slider';
 export class ScColorPickerSwatch {
   private readonly picker = inject(ScColorPicker);
 
+  private readonly styles = injectStyle().colorPicker;
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** No colour (an empty value): the checkerboard alone. */
@@ -26,6 +28,10 @@ export class ScColorPickerSwatch {
   );
 
   private readonly class = computed(() =>
-    cn('inline-block size-9 shrink-0 rounded-md border', this.classInput()),
+    cn(
+      'inline-block size-9 shrink-0 border',
+      this.styles.swatch,
+      this.classInput(),
+    ),
   );
 }

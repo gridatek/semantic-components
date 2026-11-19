@@ -7,6 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { sameRgba } from './color';
 import { ScColorPicker } from './color-picker';
@@ -41,6 +42,7 @@ export class ScColorPickerOption {
 
   /** Its colour (the group may ask before it is set: none, until then). */
   readonly color = input('', { alias: 'scColorPickerOption' });
+  private readonly styles = injectStyle().colorPicker;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly rgba = computed(() => this.picker.parse(this.color()));
@@ -59,7 +61,8 @@ export class ScColorPickerOption {
 
   private readonly class = computed(() =>
     cn(
-      'size-6 shrink-0 cursor-pointer rounded-md border shadow-xs outline-none transition-shadow',
+      'size-6 shrink-0 cursor-pointer border shadow-xs outline-none transition-shadow',
+      this.styles.option,
       'focus-visible:ring-3 focus-visible:ring-ring/50',
       'aria-checked:ring-2 aria-checked:ring-ring aria-checked:ring-offset-2 aria-checked:ring-offset-background',
       'disabled:pointer-events-none disabled:opacity-50',

@@ -6,6 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { ScColorPicker } from './color-picker';
 
@@ -19,7 +20,7 @@ import { ScColorPicker } from './color-picker';
   selector: 'div[scColorPickerArea]',
   template: `
     <span
-      class="pointer-events-none absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-[0_0_0_1px_rgb(0_0_0/0.4),0_1px_3px_rgb(0_0_0/0.4)]"
+      [class]="thumbClass"
       [style.left.%]="picker.hsva().s"
       [style.top.%]="100 - picker.hsva().v"
       [style.background]="opaque()"
@@ -46,6 +47,13 @@ import { ScColorPicker } from './color-picker';
 export class ScColorPickerArea {
   private readonly picker = inject(ScColorPicker);
 
+  private readonly styles = injectStyle().colorPicker;
+  /** The thumb: white-edged, a dark outline, so it shows on any colour; its corners the style's. */
+  private readonly thumbClass = cn(
+    'pointer-events-none absolute size-4 -translate-x-1/2 -translate-y-1/2 border-2 border-white shadow-[0_0_0_1px_rgb(0_0_0/0.4),0_1px_3px_rgb(0_0_0/0.4)]',
+    this.styles.thumb,
+  );
+
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly saturation = computed(() =>
@@ -65,7 +73,8 @@ export class ScColorPickerArea {
 
   private readonly class = computed(() =>
     cn(
-      'relative block aspect-[4/3] w-full cursor-crosshair touch-none rounded-md outline-none',
+      'relative block aspect-[4/3] w-full cursor-crosshair touch-none outline-none',
+      this.styles.area,
       'focus-visible:ring-3 focus-visible:ring-ring/50',
       'aria-disabled:pointer-events-none aria-disabled:opacity-50',
       this.classInput(),

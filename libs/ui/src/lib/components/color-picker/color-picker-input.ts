@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input, signal } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { ScColorPicker } from './color-picker';
 
@@ -27,6 +28,7 @@ import { ScColorPicker } from './color-picker';
 export class ScColorPickerInput {
   private readonly picker = inject(ScColorPicker);
 
+  private readonly inputStyles = injectStyle().input;
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** What is typed, while typing. */
@@ -34,13 +36,7 @@ export class ScColorPickerInput {
   private readonly wrong = signal(false);
 
   private readonly class = computed(() =>
-    cn(
-      'border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 font-mono text-sm shadow-xs outline-none',
-      'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
-      'aria-invalid:border-destructive aria-invalid:ring-destructive/20',
-      'disabled:cursor-not-allowed disabled:opacity-50',
-      this.classInput(),
-    ),
+    cn(this.inputStyles, 'font-mono', this.classInput()),
   );
 
   constructor() {

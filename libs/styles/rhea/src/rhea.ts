@@ -15,6 +15,7 @@ import { carousel } from './carousel';
 import { chart } from './chart';
 import { checkbox } from './checkbox';
 import { codeBlock } from './code-block';
+import { colorPicker } from './color-picker';
 import { combobox } from './combobox';
 import { command } from './command';
 import { contextMenu } from './context-menu';
@@ -84,6 +85,7 @@ export const rhea: ScStyle = {
   chart,
   checkbox,
   codeBlock,
+  colorPicker,
   combobox,
   command,
   frame,
