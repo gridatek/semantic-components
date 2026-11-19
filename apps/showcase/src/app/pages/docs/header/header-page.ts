@@ -64,11 +64,12 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <p class="text-muted-foreground">
-          The bar holds your brand and your actions — your own markup, laid out
-          as you like — the links — a Navigation Menu, shown from the expand
-          width up — your actions, and below that width a toggle and the menu.
-          The menu is an ng-template: the header renders it while it is open,
-          and removes it on closing.
+          The bar holds your brand, the links — a Navigation Menu, shown from
+          the expand width up — and your actions, your own markup laid out as
+          you like. Below the expand width, the header shows the mobile
+          menu&apos;s toggle, wherever you put it (here, with your actions), and
+          hides the links. The menu is an ng-template: the header renders it
+          while it is open, and removes it on closing.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -92,12 +93,12 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
           </li>
           <li>
             Not modal: nothing is trapped. Escape closes the menu and gives the
-            focus back to the toggle; following a link, or the focus leaving the
-            bar, closes it too.
+            focus back to the toggle; following a link closes it too, and, over
+            the page, a click or the focus outside the bar.
           </li>
           <li>
             With reduced motion, nothing animates: the menu opens and closes at
-            once.
+            once, and hiding on scroll hides without sliding.
           </li>
         </ul>
       </section>
@@ -119,10 +120,10 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
-          Each part takes
+          The header and the toggle take
           <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over its own (cn: a later class wins); the menu&apos;s goes to
-          the panel the header renders.
+          merged over their own (cn: a later class wins). The menu&apos;s
+          template has no element of its own: style the content you put in it.
         </p>
         <div
           scTableContainer
@@ -207,7 +208,7 @@ export default class HeaderPage {
       name: 'ScHeader',
       selector: 'header[scHeader]',
       description:
-        "The bar, the page's banner, 56px tall (more when the menu pushes the page): [(mobileMenuOpen)] the mobile menu's state; expand ('sm', 'md', 'lg' — the width from which its links show, 'md' by default: its nav, a Navigation Menu, is hidden below it); mobileMenu ('cover' over the page below the bar, by default, or 'push' pushing it down); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed, the window growing wide enough, the focus leaving the bar.",
+        "The bar, the page's banner, 56px tall (more when the menu pushes the page): [(mobileMenuOpen)] the mobile menu's state; expand ('sm', 'md', 'lg' — the width from which its links show, 'md' by default: its nav, a Navigation Menu, is hidden below it); mobileMenu ('cover' over the page below the bar, by default, or 'push' pushing it down); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed, a page change, the window growing wide enough, and (covering the page) a click or the focus outside the bar.",
     },
     {
       name: 'ScHeaderMobileMenuToggle',
@@ -219,7 +220,7 @@ export default class HeaderPage {
       name: 'ScHeaderMobileMenu',
       selector: 'ng-template[scHeaderMobileMenu]',
       description:
-        "The menu's content — a named nav with its links (scNavigationMenuLink: the Navigation Menu's link, with its states; following one closes the menu), any actions — rendered by the header while open, in a panel covering the page below the bar: see-through and blurred, opening at once, fading out in 100ms (with the header's mobileMenu set to 'push': pushing the page down instead). No class: style the content you put in it.",
+        "The menu's content — a named nav with its links (scNavigationMenuLink: the Navigation Menu's link, with its states; following one closes the menu), any actions — rendered by the header while open, in its panel: over the page below the bar, see-through and blurred, opening at once, fading out in 100ms — or, with the header's mobileMenu set to 'push', pushing the page down. No class: the template has no element; style the content you put in it.",
     },
   ];
 }

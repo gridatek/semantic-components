@@ -32,7 +32,6 @@ export type ScHeaderMobileMenuMode = 'cover' | 'push';
 
 const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
 
-/** The bar's links (its `nav`): shown from `expand` up. */
 /** The mobile menu's toggle, wherever it sits in the bar: hidden from `expand` up. */
 const TOGGLE_HIDDEN = {
   sm: 'sm:[&_[data-slot=header-mobile-menu-toggle]]:hidden',
@@ -40,6 +39,7 @@ const TOGGLE_HIDDEN = {
   lg: 'lg:[&_[data-slot=header-mobile-menu-toggle]]:hidden',
 } as const;
 
+/** The bar's links (its `nav`): shown from `expand` up. */
 const NAV_SHOWN = {
   sm: 'sm:[&>nav]:flex',
   md: 'md:[&>nav]:flex',
@@ -54,20 +54,23 @@ const BREAKPOINT: Record<ScHeaderExpand, string> = {
 };
 
 /**
- * A site's top bar (`header`, the banner landmark): your brand (your own link), links and
- * actions; on narrow screens a toggle and a menu panel under the bar (a
- * disclosure — the page stays usable, nothing is trapped). The menu is your
- * `ng-template scHeaderMobileMenu`: the header renders it while open. It closes on
- * Escape (focus back on the toggle), when a link in it is followed, when the
- * window grows wide enough for the links, and — over the page — when the
- * focus leaves the bar.
+ * A site's top bar (`header`, the banner landmark): your brand and actions
+ * (your own markup), and the links (a Navigation Menu); below `expand`, the
+ * mobile menu's toggle and the menu, under the bar — over the page, or
+ * pushing it down (`mobileMenu`). A disclosure: nothing is trapped. The menu
+ * is your `ng-template scHeaderMobileMenu`: the header renders it while open.
+ * It closes on Escape (focus back on the toggle), when a link in it is
+ * followed, on a page change, when the window grows wide enough for the
+ * links, and — over the page — on a click or the focus outside the bar.
  *
  * ```html
  * <header scHeader>
  *   <a href="/">…</a>
  *   <nav scNavigationMenu aria-label="Main">…</nav>
- *   <div class="ms-auto flex items-center gap-2">…</div>
- *   <button scHeaderMobileMenuToggle>…</button>
+ *   <div class="ms-auto flex items-center gap-2">
+ *     …
+ *     <button scHeaderMobileMenuToggle class="-me-2">…</button>
+ *   </div>
  *   <ng-template scHeaderMobileMenu><nav aria-label="Main">…</nav></ng-template>
  * </header>
  * ```

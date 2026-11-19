@@ -5,11 +5,12 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 ## Features
 
 - **Responsive** — the links show from `expand` (`sm`, `md`, `lg`); below it, the toggle and the menu
-- **Disclosure menu** — `aria-expanded`, `aria-controls`; it covers the page below the bar, see-through and blurred as shadcn's (scrolling inside if it is taller); it opens at once and fades out in 100ms on closing, or with `mobileMenu="push"` pushes the page down, its height animating
-- **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough; covering the page, the focus leaving the bar too
+- **Your markup** — the brand and the actions are your own elements, laid out as you like; the toggle goes wherever you put it (beside your actions, say)
+- **Disclosure menu** — `aria-expanded`, `aria-controls`; by default it covers the page below the bar, see-through and blurred as shadcn's (scrolling inside if it is taller), opening at once and fading out in 100ms; with `mobileMenu="push"` it pushes the page down, fading and sliding in and out
+- **Closes by itself** — Escape (focus back on the toggle), a link followed, a page change, the window growing wide enough; covering the page, a click or the focus outside the bar too
 - **`[(mobileMenuOpen)]`** — the mobile menu's state, two-way
 - **Sticky**, and **hides on scroll** (away going down, back going up)
-- **The links are a Navigation Menu** — the bar's `nav`, which the header hides below `expand`; the header adds only what the Navigation Menu doesn't have: the bar, the breakpoint, the phone menu
+- **The links are a Navigation Menu** — the bar's `nav`, which the header hides below `expand`; the header adds only what the Navigation Menu doesn't have: the bar, the breakpoint, the mobile menu
 - **Current page** — `active` gives `aria-current="page"`, in the bar (the Navigation Menu's links) and in the menu
 - **RTL**
 
@@ -55,6 +56,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 **Rules**
 
 - Name each `nav` (`aria-label`). The bar's links and the menu's are the same navigation, shown at different widths: give them the same name — only one is ever shown.
+- The menu's content styles itself: the template has no element of its own (no `class` on it).
 - The toggle's name follows its state ("Open menu" / "Close menu"); it has no `aria-pressed`.
 - Several bars on one page (or in frames checked together): name each `header` too.
 
@@ -85,7 +87,7 @@ The menu's content, below `expand`: a named `nav` with `scNavigationMenuLink`s (
 
 - One banner (`header`), named navigation landmarks, none nested.
 - The toggle: `aria-expanded`, `aria-controls` the menu; a name that follows the state.
-- The menu is not modal: Tab moves through it and on; a closed menu is `invisible`, out of the tab order.
+- The menu is not modal: Tab moves through it and on. Closed, it isn't in the page at all.
 - Escape in the bar closes the menu and gives the toggle back the focus.
 - `aria-current="page"` on the current link.
-- Hiding on scroll is off under `prefers-reduced-motion` (no slide).
+- Under `prefers-reduced-motion` nothing animates: the menu opens and closes at once, and hiding on scroll hides without sliding.
