@@ -130,7 +130,7 @@ import { VerificationOtpInputDemoContainer } from './demos/verification-otp-inpu
 export default class OtpInputPage {
   private readonly anatomy = {
     imports:
-      "import { ScOtpInput, ScOtpInputGroup, ScOtpInputSlot, ScOtpInputSeparator } from '@semantic-components/ui';",
+      "import { ScOtpInput, ScOtpInputGroup, ScOtpInputSlot, ScSeparator } from '@semantic-components/ui';",
     markup: [
       '<div scField>',
       '  <label scLabel>…</label>',
@@ -139,7 +139,7 @@ export default class OtpInputPage {
       '      <input scOtpInputSlot />',
       '      <input scOtpInputSlot aria-label="Character 2 of 6" />',
       '    </div>',
-      '    <div scOtpInputSeparator>…</div>',
+      "    <div scSeparator></div>  <!-- the library's: a dash here -->",
       '    <div scOtpInputGroup>…</div>',
       '  </div>',
       '  <p scFieldErrors></p>',
@@ -165,12 +165,6 @@ export default class OtpInputPage {
       selector: 'input[scOtpInputSlot]',
       description:
         'One character, on your input. The first takes the field\'s id and autocomplete="one-time-code"; name the others ("Character 2 of 6"). data-filled; aria-invalid once the field is left invalid.',
-    },
-    {
-      name: 'ScOtpInputSeparator',
-      selector: '[scOtpInputSeparator]',
-      description:
-        'Between chunks (role="separator"): write its content (an icon, a dash, a dot).',
     },
   ];
 }

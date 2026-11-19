@@ -11,6 +11,8 @@ export type ScSeparatorOrientation = 'horizontal' | 'vertical';
 @Directive({
   selector: 'div[scSeparator]',
   host: {
+    // The OTP input styles its separators by it.
+    'data-slot': 'separator',
     role: 'separator',
     '[attr.aria-orientation]': 'orientation()',
     '[attr.data-orientation]': 'orientation()',

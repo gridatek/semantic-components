@@ -12,11 +12,10 @@ import {
   ScLabel,
   ScOtpInput,
   ScOtpInputGroup,
-  ScOtpInputSeparator,
   ScOtpInputSlot,
+  ScSeparator,
   ScToaster,
 } from '@semantic-components/ui';
-import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
 /** Boxed Two Steps: the code sent to the phone (shadcndashboard's auth2/two-steps). */
 @Component({
@@ -34,8 +33,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
     ScOtpInput,
     ScOtpInputGroup,
     ScOtpInputSlot,
-    ScOtpInputSeparator,
-    SiMinusIcon,
+    ScSeparator,
   ],
   template: `
     <div scCard class="w-full max-w-md">
@@ -75,7 +73,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
                   aria-label="Character 3 of 6"
                 />
               </div>
-              <div scOtpInputSeparator><svg siMinusIcon></svg></div>
+              <div scSeparator></div>
               <div scOtpInputGroup>
                 <input
                   i18n-aria-label="@@auth.twoSteps.character4Of6"

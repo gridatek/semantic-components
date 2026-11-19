@@ -26,8 +26,8 @@ import {
   ScLabel,
   ScOtpInput,
   ScOtpInputGroup,
+  ScSeparator,
   ScOtpInputSlot,
-  ScOtpInputSeparator,
 } from '@semantic-components/ui';
 import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
@@ -42,8 +42,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
     ScOtpInput,
     ScOtpInputGroup,
     ScOtpInputSlot,
-    ScOtpInputSeparator,
-    SiMinusIcon,
+    ScSeparator,
   ],
   template: \`
     <div scField class="w-fit">
@@ -53,16 +52,12 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
           <input scOtpInputSlot />
           <input scOtpInputSlot aria-label="Character 2 of 6" />
         </div>
-        <div scOtpInputSeparator>
-          <svg siMinusIcon></svg>
-        </div>
+        <div scSeparator></div>
         <div scOtpInputGroup>
           <input scOtpInputSlot aria-label="Character 3 of 6" />
           <input scOtpInputSlot aria-label="Character 4 of 6" />
         </div>
-        <div scOtpInputSeparator>
-          <svg siMinusIcon></svg>
-        </div>
+        <div scSeparator></div>
         <div scOtpInputGroup>
           <input scOtpInputSlot aria-label="Character 5 of 6" />
           <input scOtpInputSlot aria-label="Character 6 of 6" />

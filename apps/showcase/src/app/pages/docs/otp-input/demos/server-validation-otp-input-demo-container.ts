@@ -38,8 +38,8 @@ import {
   ScLabel,
   ScOtpInput,
   ScOtpInputGroup,
+  ScSeparator,
   ScOtpInputSlot,
-  ScOtpInputSeparator,
 } from '@semantic-components/ui';
 import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
@@ -64,8 +64,7 @@ async function verifyOnServer(code: string): Promise<boolean> {
     ScOtpInput,
     ScOtpInputGroup,
     ScOtpInputSlot,
-    ScOtpInputSeparator,
-    SiMinusIcon,
+    ScSeparator,
   ],
   template: \`
     <div class="w-72 space-y-4">
@@ -77,9 +76,7 @@ async function verifyOnServer(code: string): Promise<boolean> {
             <input scOtpInputSlot aria-label="Character 2 of 6" />
             <input scOtpInputSlot aria-label="Character 3 of 6" />
           </div>
-          <div scOtpInputSeparator>
-            <svg siMinusIcon></svg>
-          </div>
+          <div scSeparator></div>
           <div scOtpInputGroup>
             <input scOtpInputSlot aria-label="Character 4 of 6" />
             <input scOtpInputSlot aria-label="Character 5 of 6" />

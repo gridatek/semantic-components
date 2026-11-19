@@ -462,8 +462,6 @@ export interface ScOtpInputStyles {
   group: string;
   /** An input: one character (shadcn's slot; its active look on :focus). */
   input: string;
-  /** A separator between groups. */
-  separator: string;
 }
 
 /** A toast's parts that change from style to style. */

@@ -26,8 +26,8 @@ import {
   ScLabel,
   ScOtpInput,
   ScOtpInputGroup,
+  ScSeparator,
   ScOtpInputSlot,
-  ScOtpInputSeparator,
 } from '@semantic-components/ui';
 import { SiMinusIcon } from '@semantic-icons/lucide-icons';
 
@@ -42,8 +42,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
     ScOtpInput,
     ScOtpInputGroup,
     ScOtpInputSlot,
-    ScOtpInputSeparator,
-    SiMinusIcon,
+    ScSeparator,
   ],
   template: \`
     <div dir="rtl" lang="ar">
@@ -55,9 +54,7 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
             <input scOtpInputSlot aria-label="الحرف 2 من 6" />
             <input scOtpInputSlot aria-label="الحرف 3 من 6" />
           </div>
-          <div scOtpInputSeparator>
-            <svg siMinusIcon></svg>
-          </div>
+          <div scSeparator></div>
           <div scOtpInputGroup>
             <input scOtpInputSlot aria-label="الحرف 4 من 6" />
             <input scOtpInputSlot aria-label="الحرف 5 من 6" />
