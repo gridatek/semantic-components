@@ -4433,6 +4433,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'rtl-number-group-demo',
+        loadComponent: () =>
+          import('../pages/docs/number-group/demos/rtl-number-group-demo').then(
+            (m) => m.RtlNumberGroupDemo,
+          ),
+      },
+      {
         path: 'price-number-group-demo',
         loadComponent: () =>
           import('../pages/docs/number-group/demos/price-number-group-demo').then(

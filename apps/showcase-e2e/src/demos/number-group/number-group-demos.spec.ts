@@ -331,4 +331,23 @@ test.describe('Number field', () => {
     expect(submitted).toEqual(['5']);
     expect(errors).toEqual([]);
   });
+
+  test('RTL: the buttons mirrored, the price in Arabic digits', async ({
+    page,
+  }) => {
+    const errors = collectErrors(page);
+    await page.goto('/demos/number-group/rtl-number-group-demo');
+    const price = page.getByRole('spinbutton', { name: 'السعر' });
+    const decrease = page.getByRole('button', { name: 'تقليل السعر' });
+    const increase = page.getByRole('button', { name: 'زيادة السعر' });
+    await expect(price).toHaveAttribute('aria-valuenow', '150');
+    // Decrease at the start — on the right, right to left.
+    expect((await center(decrease)).x).toBeGreaterThan(
+      (await center(increase)).x,
+    );
+    await increase.click();
+    await expect(price).toHaveAttribute('aria-valuenow', '155');
+    await expect(price).toHaveValue(/١٥٥/);
+    expect(errors).toEqual([]);
+  });
 });

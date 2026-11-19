@@ -9,6 +9,7 @@ import DisabledNumberGroupDemoContainer from './demos/disabled-number-group-demo
 import { NumberGroupUsageDemoContainer } from './demos/number-group-usage-demo-container';
 import PriceNumberGroupDemoContainer from './demos/price-number-group-demo-container';
 import QuantityNumberGroupDemoContainer from './demos/quantity-number-group-demo-container';
+import RtlNumberGroupDemoContainer from './demos/rtl-number-group-demo-container';
 import ScrubbingNumberGroupDemoContainer from './demos/scrubbing-number-group-demo-container';
 import SignalFormsNumberGroupDemoContainer from './demos/signal-forms-number-group-demo-container';
 import StackedNumberGroupDemoContainer from './demos/stacked-number-group-demo-container';
@@ -27,6 +28,7 @@ import WithoutLabelNumberGroupDemoContainer from './demos/without-label-number-g
     QuantityNumberGroupDemoContainer,
     SignalFormsNumberGroupDemoContainer,
     PriceNumberGroupDemoContainer,
+    RtlNumberGroupDemoContainer,
     DisabledNumberGroupDemoContainer,
     WithoutLabelNumberGroupDemoContainer,
     NumberGroupUsageDemoContainer,
@@ -74,6 +76,7 @@ import WithoutLabelNumberGroupDemoContainer from './demos/without-label-number-g
         <app-signal-forms-number-group-demo-container />
         <app-disabled-number-group-demo-container />
         <app-without-label-number-group-demo-container />
+        <app-rtl-number-group-demo-container />
       </section>
 
       <section class="space-y-4">
