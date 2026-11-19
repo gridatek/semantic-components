@@ -122,7 +122,7 @@ export default class MenuPage {
       'import {',
       '  ScMenuProvider, ScMenuTrigger, ScMenuPortal, ScMenu,',
       '  ScMenuContent, ScMenuGroup, ScMenuLabel, ScMenuItem,',
-      '  ScMenuShortcut, ScMenuCheckboxItem, ScMenuRadioGroup,',
+      '  ScMenuCheckboxItem, ScMenuRadioGroup,',
       '  ScMenuRadioItem, ScMenuItemIndicator, ScMenuSeparator, ScMenuSubmenuIcon,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
@@ -135,7 +135,7 @@ export default class MenuPage {
       '        <div scMenuGroup>',
       '          <div scMenuLabel>…</div>',
       '          <div scMenuItem value="…">',
-      '            …<span scMenuShortcut>…</span>',
+      '            …<kbd scKbd>…</kbd>',
       '          </div>',
       '        </div>',
       '        <div scMenuSeparator></div>',
@@ -217,9 +217,10 @@ export default class MenuPage {
         'The icon (yours) of an item that opens a submenu: at its end, turned right to left.',
     },
     {
-      name: 'ScMenuSeparator, ScMenuShortcut',
-      selector: '[scMenuSeparator], span[scMenuShortcut]',
-      description: 'A line between items; the keyboard hint at an item’s end.',
+      name: 'ScMenuSeparator',
+      selector: '[scMenuSeparator]',
+      description:
+        'A line between items. A key hint is yours: <kbd scKbd>⌘S</kbd> in the item — the menu places it at the item’s end.',
     },
   ];
 }

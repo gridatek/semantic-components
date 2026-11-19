@@ -10,9 +10,9 @@ import {
   ScCommandItem,
   ScCommandList,
   ScCommandSeparator,
-  ScCommandShortcut,
   ScCommandStatus,
   ScFrame,
+  ScKbd,
 } from '@semantic-components/ui';
 import {
   SiCalculatorIcon,
@@ -38,7 +38,7 @@ import {
     ScCommandItem,
     ScCommandList,
     ScCommandSeparator,
-    ScCommandShortcut,
+    ScKbd,
     ScCommandStatus,
     ScFrame,
     SiCalculatorIcon,
@@ -83,17 +83,17 @@ import {
             <div scCommandItem>
               <svg siUserIcon></svg>
               <span>الملف الشخصي</span>
-              <span scCommandShortcut>⌘P</span>
+              <kbd scKbd>⌘P</kbd>
             </div>
             <div scCommandItem>
               <svg siCreditCardIcon></svg>
               <span>الفوترة</span>
-              <span scCommandShortcut>⌘B</span>
+              <kbd scKbd>⌘B</kbd>
             </div>
             <div scCommandItem>
               <svg siSettingsIcon></svg>
               <span>الإعدادات</span>
-              <span scCommandShortcut>⌘S</span>
+              <kbd scKbd>⌘S</kbd>
             </div>
           </div>
         </div>

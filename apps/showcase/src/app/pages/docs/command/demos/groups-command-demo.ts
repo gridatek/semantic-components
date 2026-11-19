@@ -11,7 +11,6 @@ import {
   ScCommandItem,
   ScCommandList,
   ScCommandSeparator,
-  ScCommandShortcut,
   ScCommandStatus,
   ScDialog,
   ScDialogDescription,
@@ -19,6 +18,7 @@ import {
   ScDialogProvider,
   ScDialogTitle,
   ScDialogTrigger,
+  ScKbd,
 } from '@semantic-components/ui';
 import {
   SiCalculatorIcon,
@@ -45,7 +45,7 @@ import {
     ScCommandItem,
     ScCommandList,
     ScCommandSeparator,
-    ScCommandShortcut,
+    ScKbd,
     ScCommandStatus,
     ScDialog,
     ScDialogDescription,
@@ -103,17 +103,17 @@ import {
                   <div scCommandItem (select)="ran('Profile')">
                     <svg siUserIcon></svg>
                     <span>Profile</span>
-                    <span scCommandShortcut>⌘P</span>
+                    <kbd scKbd>⌘P</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Billing')">
                     <svg siCreditCardIcon></svg>
                     <span>Billing</span>
-                    <span scCommandShortcut>⌘B</span>
+                    <kbd scKbd>⌘B</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Settings')">
                     <svg siSettingsIcon></svg>
                     <span>Settings</span>
-                    <span scCommandShortcut>⌘S</span>
+                    <kbd scKbd>⌘S</kbd>
                   </div>
                 </div>
               </div>

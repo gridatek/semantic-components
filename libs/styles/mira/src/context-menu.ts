@@ -20,6 +20,4 @@ export const contextMenu: ScMenuStyles = {
   indicator:
     'pointer-events-none absolute end-2 flex items-center justify-center',
   separator: '-mx-1 my-1 h-px bg-border/50',
-  shortcut:
-    'ms-auto text-[0.625rem] tracking-widest text-muted-foreground group-data-highlighted/menu-item:text-accent-foreground',
 };

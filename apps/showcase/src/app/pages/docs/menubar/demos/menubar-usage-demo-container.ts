@@ -26,7 +26,7 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuSeparator,
-  ScMenuShortcut,
+  ScKbd,
   ScMenuSubmenuIcon,
   ScMenubar,
   ScMenubarItem,
@@ -49,7 +49,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuRadioGroup,
     ScMenuRadioItem,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     SiCheckIcon,
     SiChevronRightIcon,
   ],
@@ -63,11 +63,11 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
               <div scMenuGroup>
                 <div scMenuItem value="New Tab">
                   New Tab
-                  <span scMenuShortcut>⌘T</span>
+                  <kbd scKbd>⌘T</kbd>
                 </div>
                 <div scMenuItem value="New Window">
                   New Window
-                  <span scMenuShortcut>⌘N</span>
+                  <kbd scKbd>⌘N</kbd>
                 </div>
                 <div scMenuItem value="New Incognito Window" [disabled]="true">
                   New Incognito Window
@@ -95,7 +95,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
               <div scMenuGroup>
                 <div scMenuItem value="Print...">
                   Print...
-                  <span scMenuShortcut>⌘P</span>
+                  <kbd scKbd>⌘P</kbd>
                 </div>
               </div>
             </ng-template>
@@ -110,11 +110,11 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
               <div scMenuGroup>
                 <div scMenuItem value="Undo">
                   Undo
-                  <span scMenuShortcut>⌘Z</span>
+                  <kbd scKbd>⌘Z</kbd>
                 </div>
                 <div scMenuItem value="Redo">
                   Redo
-                  <span scMenuShortcut>⇧⌘Z</span>
+                  <kbd scKbd>⇧⌘Z</kbd>
                 </div>
               </div>
               <div scMenuSeparator></div>
@@ -172,11 +172,11 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
               <div scMenuGroup>
                 <div scMenuItem value="Reload" inset>
                   Reload
-                  <span scMenuShortcut>⌘R</span>
+                  <kbd scKbd>⌘R</kbd>
                 </div>
                 <div scMenuItem value="Force Reload" [disabled]="true" inset>
                   Force Reload
-                  <span scMenuShortcut>⇧⌘R</span>
+                  <kbd scKbd>⇧⌘R</kbd>
                 </div>
               </div>
               <div scMenuSeparator></div>

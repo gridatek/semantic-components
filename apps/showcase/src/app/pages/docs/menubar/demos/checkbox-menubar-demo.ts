@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScKbd,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -7,7 +8,6 @@ import {
   ScMenuItemIndicator,
   ScMenuPortal,
   ScMenuSeparator,
-  ScMenuShortcut,
   ScMenubar,
   ScMenubarItem,
 } from '@semantic-components/ui';
@@ -26,7 +26,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScMenuItemIndicator,
     ScMenuPortal,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     SiCheckIcon,
   ],
   template: `
@@ -47,11 +47,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
               <div scMenuSeparator></div>
               <div scMenuItem value="Reload" inset>
                 Reload
-                <span scMenuShortcut>⌘R</span>
+                <kbd scKbd>⌘R</kbd>
               </div>
               <div scMenuItem value="Force Reload" [disabled]="true" inset>
                 Force Reload
-                <span scMenuShortcut>⇧⌘R</span>
+                <kbd scKbd>⇧⌘R</kbd>
               </div>
             </ng-template>
           </div>

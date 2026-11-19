@@ -19,6 +19,4 @@ export const command: ScCommandStyles = {
   groupLabel: 'px-2 py-1.5 text-xs font-medium text-muted-foreground',
   item: "group/command-item relative flex min-h-7 cursor-default items-center gap-2 rounded-xl px-2 py-1.5 text-sm outline-hidden select-none in-data-[slot=command-dialog]:rounded-2xl data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground",
   separator: 'my-1 h-px bg-border/50',
-  shortcut:
-    'ms-auto text-xs tracking-widest text-muted-foreground group-data-selected/command-item:text-foreground',
 };

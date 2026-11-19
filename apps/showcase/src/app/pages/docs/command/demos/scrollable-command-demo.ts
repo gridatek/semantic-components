@@ -11,7 +11,6 @@ import {
   ScCommandItem,
   ScCommandList,
   ScCommandSeparator,
-  ScCommandShortcut,
   ScCommandStatus,
   ScDialog,
   ScDialogDescription,
@@ -19,6 +18,7 @@ import {
   ScDialogProvider,
   ScDialogTitle,
   ScDialogTrigger,
+  ScKbd,
 } from '@semantic-components/ui';
 import {
   SiBellIcon,
@@ -62,7 +62,7 @@ import {
     ScCommandItem,
     ScCommandList,
     ScCommandSeparator,
-    ScCommandShortcut,
+    ScKbd,
     ScCommandStatus,
     ScDialog,
     ScDialogDescription,
@@ -121,22 +121,22 @@ import {
                   <div scCommandItem (select)="ran('Home')">
                     <svg siHouseIcon></svg>
                     <span>Home</span>
-                    <span scCommandShortcut>⌘H</span>
+                    <kbd scKbd>⌘H</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Inbox')">
                     <svg siInboxIcon></svg>
                     <span>Inbox</span>
-                    <span scCommandShortcut>⌘I</span>
+                    <kbd scKbd>⌘I</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Documents')">
                     <svg siFileTextIcon></svg>
                     <span>Documents</span>
-                    <span scCommandShortcut>⌘D</span>
+                    <kbd scKbd>⌘D</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Folders')">
                     <svg siFolderIcon></svg>
                     <span>Folders</span>
-                    <span scCommandShortcut>⌘F</span>
+                    <kbd scKbd>⌘F</kbd>
                   </div>
                 </div>
                 <div scCommandSeparator></div>
@@ -145,32 +145,32 @@ import {
                   <div scCommandItem (select)="ran('New File')">
                     <svg siFilePlusIcon></svg>
                     <span>New File</span>
-                    <span scCommandShortcut>⌘N</span>
+                    <kbd scKbd>⌘N</kbd>
                   </div>
                   <div scCommandItem (select)="ran('New Folder')">
                     <svg siFolderPlusIcon></svg>
                     <span>New Folder</span>
-                    <span scCommandShortcut>⇧⌘N</span>
+                    <kbd scKbd>⇧⌘N</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Copy')">
                     <svg siCopyIcon></svg>
                     <span>Copy</span>
-                    <span scCommandShortcut>⌘C</span>
+                    <kbd scKbd>⌘C</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Cut')">
                     <svg siScissorsIcon></svg>
                     <span>Cut</span>
-                    <span scCommandShortcut>⌘X</span>
+                    <kbd scKbd>⌘X</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Paste')">
                     <svg siClipboardPasteIcon></svg>
                     <span>Paste</span>
-                    <span scCommandShortcut>⌘V</span>
+                    <kbd scKbd>⌘V</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Delete')">
                     <svg siTrashIcon></svg>
                     <span>Delete</span>
-                    <span scCommandShortcut>⌫</span>
+                    <kbd scKbd>⌫</kbd>
                   </div>
                 </div>
                 <div scCommandSeparator></div>
@@ -187,12 +187,12 @@ import {
                   <div scCommandItem (select)="ran('Zoom In')">
                     <svg siZoomInIcon></svg>
                     <span>Zoom In</span>
-                    <span scCommandShortcut>⌘+</span>
+                    <kbd scKbd>⌘+</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Zoom Out')">
                     <svg siZoomOutIcon></svg>
                     <span>Zoom Out</span>
-                    <span scCommandShortcut>⌘-</span>
+                    <kbd scKbd>⌘-</kbd>
                   </div>
                 </div>
                 <div scCommandSeparator></div>
@@ -201,17 +201,17 @@ import {
                   <div scCommandItem (select)="ran('Profile')">
                     <svg siUserIcon></svg>
                     <span>Profile</span>
-                    <span scCommandShortcut>⌘P</span>
+                    <kbd scKbd>⌘P</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Billing')">
                     <svg siCreditCardIcon></svg>
                     <span>Billing</span>
-                    <span scCommandShortcut>⌘B</span>
+                    <kbd scKbd>⌘B</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Settings')">
                     <svg siSettingsIcon></svg>
                     <span>Settings</span>
-                    <span scCommandShortcut>⌘S</span>
+                    <kbd scKbd>⌘S</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Notifications')">
                     <svg siBellIcon></svg>

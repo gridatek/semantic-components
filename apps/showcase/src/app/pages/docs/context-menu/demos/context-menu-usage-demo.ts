@@ -3,6 +3,7 @@ import {
   ScContextMenu,
   ScContextMenuTrigger,
   ScFrame,
+  ScKbd,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -14,7 +15,6 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuSeparator,
-  ScMenuShortcut,
   ScMenuSubmenuIcon,
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
@@ -37,7 +37,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuRadioGroup,
     ScMenuRadioItem,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     SiCheckIcon,
     SiChevronRightIcon,
   ],
@@ -57,15 +57,15 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <div scMenuGroup>
               <div scMenuItem value="Back">
                 Back
-                <span scMenuShortcut>⌘[</span>
+                <kbd scKbd>⌘[</kbd>
               </div>
               <div scMenuItem value="Forward" [disabled]="true">
                 Forward
-                <span scMenuShortcut>⌘]</span>
+                <kbd scKbd>⌘]</kbd>
               </div>
               <div scMenuItem value="Reload">
                 Reload
-                <span scMenuShortcut>⌘R</span>
+                <kbd scKbd>⌘R</kbd>
               </div>
               <div scMenuItem value="More Tools">
                 More Tools

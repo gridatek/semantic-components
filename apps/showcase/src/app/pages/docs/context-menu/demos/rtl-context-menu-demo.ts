@@ -4,6 +4,7 @@ import {
   ScContextMenu,
   ScContextMenuTrigger,
   ScFrame,
+  ScKbd,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -15,7 +16,6 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuSeparator,
-  ScMenuShortcut,
   ScMenuSubmenuIcon,
 } from '@semantic-components/ui';
 import {
@@ -46,7 +46,7 @@ import {
     ScMenuRadioGroup,
     ScMenuRadioItem,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     SiArrowLeftIcon,
     SiArrowRightIcon,
     SiCheckIcon,
@@ -82,17 +82,17 @@ import {
                           <div scMenuItem value="رجوع">
                             <svg siArrowLeftIcon></svg>
                             رجوع
-                            <span scMenuShortcut>⌘[</span>
+                            <kbd scKbd>⌘[</kbd>
                           </div>
                           <div scMenuItem value="تقدم" [disabled]="true">
                             <svg siArrowRightIcon></svg>
                             تقدم
-                            <span scMenuShortcut>⌘]</span>
+                            <kbd scKbd>⌘]</kbd>
                           </div>
                           <div scMenuItem value="إعادة تحميل">
                             <svg siRotateCwIcon></svg>
                             إعادة تحميل
-                            <span scMenuShortcut>⌘R</span>
+                            <kbd scKbd>⌘R</kbd>
                           </div>
                         </div>
                       </ng-template>

@@ -10,7 +10,6 @@ import {
   ScCommandInputGroup,
   ScCommandItem,
   ScCommandList,
-  ScCommandShortcut,
   ScCommandStatus,
   ScDialog,
   ScDialogDescription,
@@ -18,6 +17,7 @@ import {
   ScDialogProvider,
   ScDialogTitle,
   ScDialogTrigger,
+  ScKbd,
 } from '@semantic-components/ui';
 import {
   SiCreditCardIcon,
@@ -26,7 +26,7 @@ import {
   SiUserIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** A key hint at the end of each item (scCommandShortcut): shown, not bound. */
+/** A key hint at the end of each item (the library's Kbd, placed by the list): shown, not bound. */
 @Component({
   selector: 'app-shortcuts-command-demo',
   imports: [
@@ -40,7 +40,7 @@ import {
     ScCommandInputGroup,
     ScCommandItem,
     ScCommandList,
-    ScCommandShortcut,
+    ScKbd,
     ScCommandStatus,
     ScDialog,
     ScDialogDescription,
@@ -79,17 +79,17 @@ import {
                   <div scCommandItem (select)="ran('Profile')">
                     <svg siUserIcon></svg>
                     <span>Profile</span>
-                    <span scCommandShortcut>⌘P</span>
+                    <kbd scKbd>⌘P</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Billing')">
                     <svg siCreditCardIcon></svg>
                     <span>Billing</span>
-                    <span scCommandShortcut>⌘B</span>
+                    <kbd scKbd>⌘B</kbd>
                   </div>
                   <div scCommandItem (select)="ran('Settings')">
                     <svg siSettingsIcon></svg>
                     <span>Settings</span>
-                    <span scCommandShortcut>⌘S</span>
+                    <kbd scKbd>⌘S</kbd>
                   </div>
                 </div>
               </div>

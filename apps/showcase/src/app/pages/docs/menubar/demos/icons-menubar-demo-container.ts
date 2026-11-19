@@ -26,7 +26,7 @@ import {
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
-  ScMenuShortcut,
+  ScKbd,
   ScMenubar,
   ScMenubarItem,
 } from '@semantic-components/ui';
@@ -51,7 +51,7 @@ import {
     ScMenuItem,
     ScMenuPortal,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     SiCircleQuestionMarkIcon,
     SiFileIcon,
     SiFolderIcon,
@@ -69,7 +69,7 @@ import {
               <div scMenuItem value="New File">
                 <svg siFileIcon></svg>
                 New File
-                <span scMenuShortcut>⌘N</span>
+                <kbd scKbd>⌘N</kbd>
               </div>
               <div scMenuItem value="Open Folder">
                 <svg siFolderIcon></svg>
@@ -79,7 +79,7 @@ import {
               <div scMenuItem value="Save">
                 <svg siSaveIcon></svg>
                 Save
-                <span scMenuShortcut>⌘S</span>
+                <kbd scKbd>⌘S</kbd>
               </div>
             </ng-template>
           </div>

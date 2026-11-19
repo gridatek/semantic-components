@@ -33,7 +33,7 @@ A menu of actions from a button: groups, checkbox and radio items, submenus, sho
       <ng-template scMenuContent>
         <div scMenuGroup>
           <div scMenuLabel></div>
-          <div scMenuItem><span scMenuShortcut></span></div>
+          <div scMenuItem><kbd scKbd></kbd></div>
         </div>
         <div scMenuSeparator></div>
         <div scMenuCheckboxItem>
@@ -74,7 +74,7 @@ On the trigger, Enter, Space or ArrowDown opens the menu on its first item, Arro
 | `ScMenuItemIndicator`                 | `span[scMenuItemIndicator]`                               | `class` — shown when its item is on                                                                                                                                                                                                                                                                                            |
 | `ScMenuGroup`, `ScMenuLabel`          | `[scMenuGroup]`, `[scMenuLabel]`                          | `class`; label: `inset` — a `group` named by its label                                                                                                                                                                                                                                                                         |
 | `ScMenuSubmenuIcon`                   | `svg[scMenuSubmenuIcon]`                                  | `class` — your icon for an item that opens a submenu: at its end, turned right to left                                                                                                                                                                                                                                         |
-| `ScMenuSeparator`, `ScMenuShortcut`   | `[scMenuSeparator]`, `span[scMenuShortcut]`               | `class`                                                                                                                                                                                                                                                                                                                        |
+| `ScMenuSeparator`                     | `[scMenuSeparator]`                                       | `class`                                                                                                                                                                                                                                                                                                                        |
 
 `scMenuProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 

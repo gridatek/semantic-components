@@ -1,6 +1,7 @@
 import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScKbd,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -11,7 +12,6 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuSeparator,
-  ScMenuShortcut,
   ScMenuSubmenuIcon,
   ScMenubar,
   ScMenubarItem,
@@ -40,7 +40,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuRadioGroup,
     ScMenuRadioItem,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     SiCheckIcon,
     SiChevronRightIcon,
   ],
@@ -55,11 +55,11 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div scMenuGroup>
                   <div scMenuItem value="علامة تبويب جديدة">
                     علامة تبويب جديدة
-                    <span scMenuShortcut>⌘T</span>
+                    <kbd scKbd>⌘T</kbd>
                   </div>
                   <div scMenuItem value="نافذة جديدة">
                     نافذة جديدة
-                    <span scMenuShortcut>⌘N</span>
+                    <kbd scKbd>⌘N</kbd>
                   </div>
                   <div
                     scMenuItem
@@ -93,7 +93,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div scMenuGroup>
                   <div scMenuItem value="طباعة...">
                     طباعة...
-                    <span scMenuShortcut>⌘P</span>
+                    <kbd scKbd>⌘P</kbd>
                   </div>
                 </div>
               </ng-template>
@@ -108,11 +108,11 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div scMenuGroup>
                   <div scMenuItem value="تراجع">
                     تراجع
-                    <span scMenuShortcut>⌘Z</span>
+                    <kbd scKbd>⌘Z</kbd>
                   </div>
                   <div scMenuItem value="إعادة">
                     إعادة
-                    <span scMenuShortcut>⇧⌘Z</span>
+                    <kbd scKbd>⇧⌘Z</kbd>
                   </div>
                 </div>
                 <div scMenuSeparator></div>
@@ -172,7 +172,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div scMenuGroup>
                   <div scMenuItem value="إعادة تحميل" inset>
                     إعادة تحميل
-                    <span scMenuShortcut>⌘R</span>
+                    <kbd scKbd>⌘R</kbd>
                   </div>
                   <div
                     scMenuItem
@@ -181,7 +181,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                     inset
                   >
                     إعادة تحميل قسري
-                    <span scMenuShortcut>⇧⌘R</span>
+                    <kbd scKbd>⇧⌘R</kbd>
                   </div>
                 </div>
                 <div scMenuSeparator></div>

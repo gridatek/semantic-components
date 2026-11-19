@@ -19,6 +19,4 @@ export const contextMenu: ScMenuStyles = {
     "relative flex cursor-default items-center gap-2.5 rounded-2xl py-2 pe-8 ps-3 text-sm font-medium outline-hidden select-none data-highlighted:bg-accent data-highlighted:text-accent-foreground data-inset:ps-9.5 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   indicator: 'pointer-events-none absolute end-2',
   separator: '-mx-1.5 my-1.5 h-px bg-border/50',
-  shortcut:
-    'ms-auto text-xs tracking-widest text-muted-foreground group-data-highlighted/menu-item:text-accent-foreground',
 };

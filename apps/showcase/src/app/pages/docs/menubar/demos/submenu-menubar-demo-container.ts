@@ -25,7 +25,7 @@ import {
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
-  ScMenuShortcut,
+  ScKbd,
   ScMenuSubmenuIcon,
   ScMenubar,
   ScMenubarItem,
@@ -44,7 +44,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuPortal,
     ScMenuSubmenuIcon,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     SiChevronRightIcon,
   ],
   template: \`
@@ -70,7 +70,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
               <div scMenuSeparator></div>
               <div scMenuItem value="Print...">
                 Print...
-                <span scMenuShortcut>⌘P</span>
+                <kbd scKbd>⌘P</kbd>
               </div>
             </ng-template>
           </div>
@@ -83,11 +83,11 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <ng-template scMenuContent>
               <div scMenuItem value="Undo">
                 Undo
-                <span scMenuShortcut>⌘Z</span>
+                <kbd scKbd>⌘Z</kbd>
               </div>
               <div scMenuItem value="Redo">
                 Redo
-                <span scMenuShortcut>⇧⌘Z</span>
+                <kbd scKbd>⇧⌘Z</kbd>
               </div>
               <div scMenuSeparator></div>
               <div scMenuItem value="Find">

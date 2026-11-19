@@ -118,8 +118,6 @@ export interface ScMenuStyles {
   /** The check or dot of a checkbox or radio item. */
   indicator: string;
   separator: string;
-  /** The keyboard hint at the end of an item. */
-  shortcut: string;
 }
 
 /** A menu bar's parts that change from style to style. */
@@ -510,8 +508,6 @@ export interface ScCommandStyles {
   item: string;
   /** Between groups. */
   separator: string;
-  /** A key hint at the end of an item. */
-  shortcut: string;
 }
 
 /** A combobox's parts that change from style to style. */

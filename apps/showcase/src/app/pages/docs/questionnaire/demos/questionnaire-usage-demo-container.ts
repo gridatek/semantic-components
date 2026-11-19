@@ -18,8 +18,8 @@ export class QuestionnaireUsageDemoContainer {
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
-  ScKbd,
   ScFrame,
+  ScKbd,
   ScQuestionnaire,
   ScQuestionnaireActions,
   ScQuestionnaireChoice,
@@ -98,7 +98,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
               >
             </span>
             @if (toolCallsChoice.shortcut()) {
-              <kbd scKbd aria-hidden="true">{{ toolCallsChoice.shortcut() }}</kbd>
+              <kbd scKbd aria-hidden="true">{{
+                toolCallsChoice.shortcut()
+              }}</kbd>
             }
           </label>
           <label scQuestionnaireChoice #approvalsChoice="scQuestionnaireChoice">
@@ -116,7 +118,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
               >
             </span>
             @if (approvalsChoice.shortcut()) {
-              <kbd scKbd aria-hidden="true">{{ approvalsChoice.shortcut() }}</kbd>
+              <kbd scKbd aria-hidden="true">{{
+                approvalsChoice.shortcut()
+              }}</kbd>
             }
           </label>
           <label scQuestionnaireChoice #handoffsChoice="scQuestionnaireChoice">
@@ -134,7 +138,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
               >
             </span>
             @if (handoffsChoice.shortcut()) {
-              <kbd scKbd aria-hidden="true">{{ handoffsChoice.shortcut() }}</kbd>
+              <kbd scKbd aria-hidden="true">{{
+                handoffsChoice.shortcut()
+              }}</kbd>
             }
           </label>
         </div>
@@ -227,7 +233,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Next development cycle </span>
             @if (nextCycleChoice.shortcut()) {
-              <kbd scKbd aria-hidden="true">{{ nextCycleChoice.shortcut() }}</kbd>
+              <kbd scKbd aria-hidden="true">{{
+                nextCycleChoice.shortcut()
+              }}</kbd>
             }
           </label>
           <label scQuestionnaireChoice #backlogChoice="scQuestionnaireChoice">

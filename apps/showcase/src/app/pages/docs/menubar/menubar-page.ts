@@ -110,7 +110,7 @@ export default class MenubarPage {
     imports: [
       'import {',
       '  ScMenubar, ScMenubarItem, ScMenuPortal, ScMenu, ScMenuContent,',
-      '  ScMenuGroup, ScMenuItem, ScMenuShortcut, ScMenuSeparator,',
+      '  ScMenuGroup, ScMenuItem, ScMenuSeparator,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
@@ -122,7 +122,7 @@ export default class MenubarPage {
       '        <ng-template scMenuContent>',
       '          <div scMenuGroup>',
       '            <div scMenuItem value="…">',
-      '              …<span scMenuShortcut>…</span>',
+      '              …<kbd scKbd>…</kbd>',
       '            </div>',
       '          </div>',
       '          <div scMenuSeparator></div>',

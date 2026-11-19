@@ -26,7 +26,5 @@ export const menubar: ScMenubarStyles = {
     indicator:
       "pointer-events-none absolute start-1.5 flex size-4 items-center justify-center [&_svg:not([class*='size-'])]:size-4",
     separator: '-mx-1 my-1 h-px bg-border',
-    shortcut:
-      'group-data-highlighted/menu-item:text-accent-foreground ms-auto text-xs tracking-widest text-muted-foreground',
   },
 };

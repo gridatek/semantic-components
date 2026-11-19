@@ -1,13 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScKbd,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
   ScMenuProvider,
   ScMenuSeparator,
-  ScMenuShortcut,
   ScMenuSubmenuIcon,
   ScMenuTrigger,
 } from '@semantic-components/ui';
@@ -25,7 +25,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuSubmenuIcon,
     ScMenuProvider,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     ScMenuTrigger,
     SiChevronRightIcon,
   ],
@@ -66,7 +66,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             </div>
             <div scMenuItem value="New Team">
               New Team
-              <span scMenuShortcut>⌘+T</span>
+              <kbd scKbd>⌘+T</kbd>
             </div>
           </ng-template>
         </div>

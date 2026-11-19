@@ -245,7 +245,7 @@ test('RTL: the search icon at the right, the shortcuts at the left', async ({
   const icon = page.locator('[data-slot=input-group-addon] svg');
   expect((await box(icon)).x).toBeGreaterThan((await box(input)).x);
   const option = page.getByRole('option', { name: /الفوترة/ });
-  const shortcut = option.locator('[data-slot=command-shortcut]');
+  const shortcut = option.locator('[data-slot=kbd]');
   expect((await box(shortcut)).x).toBeLessThan(
     (await box(option.locator('span').first())).x,
   );

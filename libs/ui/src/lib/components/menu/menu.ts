@@ -98,6 +98,9 @@ export class ScMenu<V = string> {
       // before its items are styled — unsized icons (300×150) would make it
       // too tall and open on the wrong side.
       "[&_svg:not([class*='size-'])]:size-4",
+      // A key hint in an item (your scKbd): at its end; its box kept on the
+      // highlighted item's background.
+      '**:data-[slot=kbd]:ms-auto **:data-[slot=kbd]:in-data-highlighted:bg-background',
       this.classInput(),
     ),
   );

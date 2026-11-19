@@ -21,6 +21,4 @@ export const menu: ScMenuStyles = {
   indicator:
     'pointer-events-none absolute end-2 flex items-center justify-center',
   separator: '-mx-1.5 my-1.5 h-px bg-border/50',
-  shortcut:
-    'ms-auto text-xs tracking-widest text-muted-foreground group-data-highlighted/menu-item:text-accent-foreground',
 };

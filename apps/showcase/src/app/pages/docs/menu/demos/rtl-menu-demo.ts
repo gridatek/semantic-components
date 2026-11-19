@@ -2,6 +2,7 @@ import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScKbd,
   ScMenu,
   ScMenuCheckboxItem,
   ScMenuContent,
@@ -12,7 +13,6 @@ import {
   ScMenuPortal,
   ScMenuProvider,
   ScMenuSeparator,
-  ScMenuShortcut,
   ScMenuSubmenuIcon,
   ScMenuTrigger,
 } from '@semantic-components/ui';
@@ -39,7 +39,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuSubmenuIcon,
     ScMenuProvider,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     ScMenuTrigger,
     SiCheckIcon,
     SiChevronRightIcon,
@@ -55,7 +55,7 @@ import { SiCheckIcon, SiChevronRightIcon } from '@semantic-icons/lucide-icons';
                 <div scMenuLabel>حسابي</div>
                 <div scMenuItem value="الملف الشخصي">
                   الملف الشخصي
-                  <span scMenuShortcut>⇧⌘P</span>
+                  <kbd scKbd>⇧⌘P</kbd>
                 </div>
                 <div scMenuItem value="الفواتير">الفواتير</div>
               </div>

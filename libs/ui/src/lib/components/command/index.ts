@@ -8,5 +8,4 @@ export * from './command-input-group';
 export * from './command-item';
 export * from './command-list';
 export * from './command-separator';
-export * from './command-shortcut';
 export * from './command-status';

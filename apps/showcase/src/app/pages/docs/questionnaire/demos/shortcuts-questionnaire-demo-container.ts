@@ -22,8 +22,8 @@ export class ShortcutsQuestionnaireDemoContainer {
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
-  ScKbd,
   ScFrame,
+  ScKbd,
   ScQuestionnaire,
   ScQuestionnaireActions,
   ScQuestionnaireChoice,

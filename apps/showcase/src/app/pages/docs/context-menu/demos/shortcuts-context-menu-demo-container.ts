@@ -29,7 +29,7 @@ import {
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
-  ScMenuShortcut,
+  ScKbd,
 } from '@semantic-components/ui';
 
 /** A keyboard hint at the end of each item; the text is yours. */
@@ -45,7 +45,7 @@ import {
     ScMenuItem,
     ScMenuPortal,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
   ],
   template: \`
     <div scContextMenu class="w-full max-w-xs">
@@ -63,26 +63,26 @@ import {
             <div scMenuGroup>
               <div scMenuItem value="Back">
                 Back
-                <span scMenuShortcut>⌘[</span>
+                <kbd scKbd>⌘[</kbd>
               </div>
               <div scMenuItem value="Forward" [disabled]="true">
                 Forward
-                <span scMenuShortcut>⌘]</span>
+                <kbd scKbd>⌘]</kbd>
               </div>
               <div scMenuItem value="Reload">
                 Reload
-                <span scMenuShortcut>⌘R</span>
+                <kbd scKbd>⌘R</kbd>
               </div>
             </div>
             <div scMenuSeparator></div>
             <div scMenuGroup>
               <div scMenuItem value="Save">
                 Save
-                <span scMenuShortcut>⌘S</span>
+                <kbd scKbd>⌘S</kbd>
               </div>
               <div scMenuItem value="Save As...">
                 Save As...
-                <span scMenuShortcut>⇧⌘S</span>
+                <kbd scKbd>⇧⌘S</kbd>
               </div>
             </div>
           </ng-template>

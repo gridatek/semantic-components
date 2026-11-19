@@ -29,7 +29,7 @@ import {
   ScMenuItem,
   ScMenuPortal,
   ScMenuSeparator,
-  ScMenuShortcut,
+  ScKbd,
   ScMenuSubmenuIcon,
 } from '@semantic-components/ui';
 import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
@@ -48,7 +48,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     ScMenuItem,
     ScMenuPortal,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     SiChevronRightIcon,
   ],
   template: \`
@@ -67,11 +67,11 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
             <div scMenuGroup>
               <div scMenuItem value="Copy">
                 Copy
-                <span scMenuShortcut>⌘C</span>
+                <kbd scKbd>⌘C</kbd>
               </div>
               <div scMenuItem value="Cut">
                 Cut
-                <span scMenuShortcut>⌘X</span>
+                <kbd scKbd>⌘X</kbd>
               </div>
             </div>
             <div scMenuItem value="More Tools">

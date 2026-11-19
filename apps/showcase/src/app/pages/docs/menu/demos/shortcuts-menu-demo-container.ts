@@ -29,7 +29,7 @@ import {
   ScMenuPortal,
   ScMenuProvider,
   ScMenuSeparator,
-  ScMenuShortcut,
+  ScKbd,
   ScMenuTrigger,
 } from '@semantic-components/ui';
 
@@ -46,7 +46,7 @@ import {
     ScMenuPortal,
     ScMenuProvider,
     ScMenuSeparator,
-    ScMenuShortcut,
+    ScKbd,
     ScMenuTrigger,
   ],
   template: \`
@@ -59,21 +59,21 @@ import {
               <div scMenuLabel>My Account</div>
               <div scMenuItem value="Profile">
                 Profile
-                <span scMenuShortcut>⇧⌘P</span>
+                <kbd scKbd>⇧⌘P</kbd>
               </div>
               <div scMenuItem value="Billing">
                 Billing
-                <span scMenuShortcut>⌘B</span>
+                <kbd scKbd>⌘B</kbd>
               </div>
               <div scMenuItem value="Settings">
                 Settings
-                <span scMenuShortcut>⌘S</span>
+                <kbd scKbd>⌘S</kbd>
               </div>
             </div>
             <div scMenuSeparator></div>
             <div scMenuItem value="Log out">
               Log out
-              <span scMenuShortcut>⇧⌘Q</span>
+              <kbd scKbd>⇧⌘Q</kbd>
             </div>
           </ng-template>
         </div>

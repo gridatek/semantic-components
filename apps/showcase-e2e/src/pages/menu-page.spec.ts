@@ -29,7 +29,7 @@ test.describe('Menu Page', () => {
       'ScMenuItemIndicator',
       'ScMenuGroup, ScMenuLabel',
       'ScMenuSubmenuIcon',
-      'ScMenuSeparator, ScMenuShortcut',
+      'ScMenuSeparator',
     ]);
   });
 

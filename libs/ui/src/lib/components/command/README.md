@@ -17,7 +17,7 @@ A search over commands: typing filters them, the arrows move the highlight while
       <div scCommandItem [keywords]="['account']" (select)="openProfile()">
         <svg siUserIcon></svg>
         <span>Profile</span>
-        <span scCommandShortcut>⌘P</span>
+        <kbd scKbd>⌘P</kbd>
       </div>
     </div>
     <div scCommandSeparator></div>
@@ -39,7 +39,6 @@ In a dialog, on the dialog itself: `<div scDialog scCommandDialog>`, with an `sr
 | `ScCommandEmpty`                        | `div[scCommandEmpty]`                          | Your text when no item shows                                                                                                                                    |
 | `ScCommandGroup`, `ScCommandGroupLabel` | `div[scCommandGroup]`, `[scCommandGroupLabel]` | Related items (`role="group"`), named by the label; hidden while none of its items shows                                                                        |
 | `ScCommandItem`                         | `div[scCommandItem]`, `a[scCommandItem]`       | A command (`role="option"`): `(select)` on Enter or a click, a link followed. `value`, `keywords`, `disabled`, `forceMount`; `data-selected="true"` highlighted |
-| `ScCommandShortcut`                     | `span[scCommandShortcut]`                      | A key hint at the end of an item: shown, not bound                                                                                                              |
 | `ScCommandSeparator`                    | `div[scCommandSeparator]`                      | A line between groups, hidden while searching; decorative (`aria-hidden`: not allowed in a listbox)                                                             |
 | `ScCommandStatus`                       | `div[scCommandStatus]`                         | Read, not shown (`role="status"`): your text about the results. Outside the list                                                                                |
 | `ScCommandDialog`                       | `div[scCommandDialog]`                         | On the `scDialog` a command opens in: no padding, the style's corners (important over the dialog's); its items' corners follow                                  |

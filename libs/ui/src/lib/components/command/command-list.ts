@@ -36,6 +36,9 @@ export class ScCommandList {
     cn(
       this.styles.list,
       this.hideScrollbar() && 'no-scrollbar',
+      // A key hint in an item (your scKbd): at its end; its box kept on the
+      // highlighted item's background.
+      '**:data-[slot=kbd]:ms-auto **:data-[slot=kbd]:in-data-selected:bg-background',
       this.classInput(),
     ),
   );

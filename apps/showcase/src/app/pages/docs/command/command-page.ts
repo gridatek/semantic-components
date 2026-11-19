@@ -130,7 +130,7 @@ export default class CommandPage {
       'import {',
       '  ScCommand, ScCommandInputGroup, ScCommandInput,',
       '  ScCommandList, ScCommandEmpty, ScCommandGroup,',
-      '  ScCommandGroupLabel, ScCommandItem, ScCommandShortcut,',
+      '  ScCommandGroupLabel, ScCommandItem,',
       '  ScCommandSeparator, ScCommandStatus, ScCommandDialog,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
@@ -146,7 +146,7 @@ export default class CommandPage {
       '      <div scCommandGroupLabel>…</div>',
       '      <div scCommandItem (select)="…">',
       '        …',
-      '        <span scCommandShortcut>…</span>',
+      '        <kbd scKbd>…</kbd>',
       '      </div>',
       '    </div>',
       '    <div scCommandSeparator></div>',
@@ -197,11 +197,6 @@ export default class CommandPage {
       selector: 'div[scCommandItem], a[scCommandItem]',
       description:
         'A command (role option): (select) on Enter or a click — a link is followed. value (what the search matches, its text when not set), keywords, disabled, forceMount (shown whatever the search). data-selected while highlighted.',
-    },
-    {
-      name: 'ScCommandShortcut',
-      selector: 'span[scCommandShortcut]',
-      description: 'A key hint at the end of an item: shown, not bound.',
     },
     {
       name: 'ScCommandSeparator',

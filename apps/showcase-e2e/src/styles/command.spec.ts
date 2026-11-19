@@ -26,9 +26,10 @@ test.describe('Command in its style', () => {
       ],
       [page.locator('[role=option]').first(), styles.command.item, 'item'],
       [
-        page.locator('[data-slot=command-shortcut]').first(),
-        styles.command.shortcut,
-        'shortcut',
+        // A key hint: the library's Kbd, in the style's look.
+        page.locator('[role=option] [data-slot=kbd]').first(),
+        styles.kbd,
+        'key hint',
       ],
     ] as const) {
       const classes = twMerge(wanted).split(/\s+/).filter(Boolean);

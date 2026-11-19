@@ -14,7 +14,7 @@ A row of menus, as at the top of a desktop app: File, Edit, View. In the look of
           <div scMenuGroup>
             <div scMenuItem value="New Tab">
               New Tab
-              <span scMenuShortcut>⌘T</span>
+              <kbd scKbd>⌘T</kbd>
             </div>
             <div scMenuItem value="New Window">New Window</div>
           </div>
