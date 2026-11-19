@@ -1,6 +1,6 @@
 # Header
 
-A site's top bar: your brand, links and actions; on narrow screens a toggle opens a menu under the bar. The bar is the page's banner (`header`); the menu is a disclosure, part of the page — nothing is trapped, the page still scrolls — following the WAI-ARIA disclosure navigation pattern.
+A site's top bar, the page's banner: your brand, the Navigation Menu's links and your actions; on narrow screens a toggle and a menu that covers the page below the bar. It can stay at the top, or slide away as the page scrolls. For an app's navigation beside the page, use a Sidebar.
 
 ## Features
 

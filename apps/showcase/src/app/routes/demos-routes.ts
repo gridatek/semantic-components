@@ -6256,6 +6256,14 @@ export const demosRoutes: Route[] = [
     path: 'demos/header',
     children: [
       {
+        path: 'header-usage-demo',
+        data: { fullPage: true },
+        loadComponent: () =>
+          import('../pages/docs/header/demos/header-usage-demo').then(
+            (m) => m.HeaderUsageDemo,
+          ),
+      },
+      {
         path: 'basic-header-demo',
         data: { fullPage: true },
         loadComponent: () =>
