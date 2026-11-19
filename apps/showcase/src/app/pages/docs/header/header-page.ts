@@ -96,8 +96,8 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
             bar, closes it too.
           </li>
           <li>
-            With reduced motion, nothing animates: the menu and the
-            toggle&apos;s icons change at once.
+            With reduced motion, nothing animates: the menu opens and closes at
+            once.
           </li>
         </ul>
       </section>
@@ -213,7 +213,7 @@ export default class HeaderPage {
       name: 'ScHeaderMobileMenuToggle',
       selector: 'button[scHeaderMobileMenuToggle]',
       description:
-        "Opens and closes the menu, below expand: aria-expanded, aria-controls while open. Your icons and a name that follows the state (sr-only); once pressed, the icon that comes in turns and fades in. The style's button: variant ('ghost'), size ('icon'). Where it sits is yours (ms-auto to reach the end, -me-2 to line its icon up with the edge).",
+        "Opens and closes the menu, below expand: aria-expanded, aria-controls while open. Your icons and a name that follows the state (sr-only). The style's button: variant ('ghost'), size ('icon'). Where it sits is yours (ms-auto to reach the end, -me-2 to line its icon up with the edge).",
     },
     {
       name: 'ScHeaderMobileMenu',

@@ -6,7 +6,6 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 
 - **Responsive** — the links show from `expand` (`sm`, `md`, `lg`); below it, the toggle and the menu
 - **Disclosure menu** — `aria-expanded`, `aria-controls`; it covers the page below the bar, see-through and blurred as shadcn's (scrolling inside if it is taller); it opens at once and fades out in 100ms on closing, or with `push` pushes the page down, its height animating
-- **The toggle's icon animates** — once the toggle is pressed, the icon your `@if` swaps in (Menu ↔ X) turns 45° and fades in (100ms; not on the first paint, not with reduced motion)
 - **Closes by itself** — Escape (focus back on the toggle), a link followed, the window growing wide enough; covering the page, the focus leaving the bar too
 - **`[(mobileMenuOpen)]`** — the mobile menu's state, two-way
 - **Sticky**, and **hides on scroll** (away going down, back going up)
@@ -75,7 +74,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 
 ### ScHeaderMobileMenuToggle — `button[scHeaderMobileMenuToggle]`
 
-Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`). Your icons inside (Menu and X, swapped with `@if`); once pressed, the one that comes in turns and fades in. Where it sits is yours: `ms-auto` to reach the bar's end, `-me-2` to line its icon up with the edge.
+Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`). Your icons inside (Menu and X, swapped with `@if`). Where it sits is yours: `ms-auto` to reach the bar's end, `-me-2` to line its icon up with the edge.
 
 ### ScHeaderMobileMenu — `ng-template[scHeaderMobileMenu]`
 

@@ -240,22 +240,6 @@ test.describe('narrow', () => {
     await expect(menu(page)).toBeVisible();
   });
 
-  test('Mobile Menu: the icon that comes in turns and fades in, not on the first paint', async ({
-    page,
-  }) => {
-    await page.goto(demo('mobile'));
-    const icon = toggle(page).locator('svg');
-    // On load: the Menu icon as it is, no animation.
-    await expect(icon).toHaveCSS('animation-name', 'none');
-    await toggle(page).click();
-    // Pressed: the X swapped in plays tw-animate's enter, in 100ms.
-    await expect(icon).toHaveCSS('animation-name', 'enter');
-    await expect(icon).toHaveCSS('animation-duration', '0.1s');
-    await toggle(page).click();
-    await expect(page.getByRole('button', { name: 'Open menu' })).toBeVisible();
-    await expect(icon).toHaveCSS('animation-name', 'enter');
-  });
-
   test('RTL: brand at the right, toggle at the left', async ({ page }) => {
     await page.goto(demo('rtl'));
     const brand = page.getByRole('link', { name: 'أكمي' });
