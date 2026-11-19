@@ -31,11 +31,6 @@ export const guidesRoutes: Route[] = [
         title: 'Server-side rendering - Semantic Components',
         loadComponent: () => import('../pages/guides/ssr-page'),
       },
-      {
-        path: 'why',
-        title: 'Why Semantic Components - Semantic Components',
-        loadComponent: () => import('../pages/guides/why-page'),
-      },
     ],
   },
 ];

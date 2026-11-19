@@ -14,11 +14,6 @@ const pages = [
     title: 'Server-side rendering',
     group: 'Guides',
   },
-  {
-    path: '/docs/guides/why',
-    title: 'Why Semantic Components',
-    group: 'Guides',
-  },
   { path: '/docs/about/changelog', title: 'Changelog', group: 'About' },
   { path: '/docs/about/credits', title: 'Credits', group: 'About' },
   { path: '/docs/about/roadmap', title: 'Roadmap', group: 'About' },

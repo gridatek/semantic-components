@@ -36,11 +36,13 @@ import {
   SiSparklesIcon,
   SiZapIcon,
 } from '@semantic-icons/lucide-icons';
+import { DocCode } from '../../components/doc-code/doc-code';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
   selector: 'app-introduction-page',
   imports: [
+    DocCode,
     RouterLink,
     ScBadge,
     ScButton,
@@ -104,7 +106,11 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p class="text-muted-foreground">
           Every part is a directive on an element you write: the markup, the
           text and the icons stay yours, and the part brings the behaviour, the
-          accessibility and the look of your style.
+          accessibility and the look of your style. Each is named for its role —
+          the button that opens a dialog is its trigger, the heading its title —
+          and goes on the right native element rather than a generic div. Parts
+          stack: one button can be a dialog&apos;s trigger and a toolbar&apos;s
+          widget at once.
         </p>
         <div class="grid gap-4 lg:grid-cols-2">
           <div scCodeBlock class="min-w-0">
@@ -178,6 +184,39 @@ import { TocHeading } from '../../components/toc/toc-heading';
             </div>
           }
         </div>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Declarative</h2>
+        <p>
+          The whole interface is in the template: no service to call to open a
+          dialog, no imperative create(). State is a two-way binding —
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[(open)]</code>,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[(value)]</code>
+          — or a Signal Forms field.
+        </p>
+        <app-doc-code [code]="dialogCode" language="angular-html" />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Not for every project</h2>
+        <p>
+          Deliberate choices, for the Angular to come rather than the one
+          before:
+        </p>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>Zoneless and OnPush, signals throughout.</li>
+          <li>Standalone only: no NgModules, no forRoot().</li>
+          <li>Signal Forms only: no ngModel, no reactive forms.</li>
+          <li>
+            Attribute selectors only (button[scButton]): no custom elements, no
+            wrappers.
+          </li>
+          <li>
+            Direction and language from Angular (Directionality, LOCALE_ID), not
+            inputs on each part.
+          </li>
+        </ul>
       </section>
 
       <section class="space-y-4">
@@ -295,6 +334,17 @@ export default class IntroductionPage {
     '</div>',
   ].join('\n');
 
+  private readonly dialogCode = `<div scDialogProvider [(open)]="editing">
+  <button scButton scDialogTrigger variant="outline">Edit profile</button>
+  <ng-template scDialogPortal>
+    <div scDialog>
+      <h2 scDialogTitle>Edit profile</h2>
+      <p scDialogDescription>Make changes to your profile here.</p>
+      …
+    </div>
+  </ng-template>
+</div>`;
+
   private readonly features = [
     {
       icon: 'puzzle',
@@ -370,7 +420,7 @@ export default class IntroductionPage {
       description: 'Angular Aria, the CDK and Tailwind CSS.',
     },
     {
-      name: 'UI',
+      name: 'Installation',
       path: '/docs/getting-started/ui',
       description: 'install the components and set up the app.',
     },

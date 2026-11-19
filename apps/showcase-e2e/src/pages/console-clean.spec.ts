@@ -28,7 +28,6 @@ const pages = [
   '/docs/guides/forms',
   '/docs/guides/accessibility',
   '/docs/guides/ssr',
-  '/docs/guides/why',
   '/docs/about/changelog',
   '/docs/about/credits',
   '/docs/about/roadmap',

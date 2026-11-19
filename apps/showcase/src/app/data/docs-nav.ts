@@ -40,11 +40,6 @@ export const guidePages: readonly DocsPage[] = [
     path: '/docs/guides/ssr',
     description: 'SSR, hydration, saved choices',
   },
-  {
-    name: 'Why Semantic Components',
-    path: '/docs/guides/why',
-    description: 'The principles',
-  },
 ];
 
 /** About the project. */
