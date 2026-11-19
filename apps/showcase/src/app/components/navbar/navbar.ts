@@ -374,11 +374,11 @@ export default class Navbar {
     ? 'max-lg:hidden'
     : 'max-xl:hidden';
   /**
-   * AI Elements and Charts: hidden below 1024px in maia, luma and sera, whose
-   * wider buttons and text don't fit there (measured 2026-11-19); the mobile
-   * menu and Documentation lead to them.
+   * AI Elements and Charts: hidden below 1024px in vega, maia, luma and sera,
+   * whose wider buttons and text don't fit there with a three-digit star count
+   * (measured 2026-11-19); the mobile menu and Documentation lead to them.
    */
-  private readonly tightItemClass = ['maia', 'luma', 'sera'].includes(
+  private readonly tightItemClass = ['vega', 'maia', 'luma', 'sera'].includes(
     this.style,
   )
     ? 'max-lg:hidden'
