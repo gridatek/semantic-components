@@ -36,7 +36,8 @@ const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
     'data-slot': 'navbar-toggle',
     type: 'button',
     '[attr.aria-expanded]': 'navbar.open()',
-    '[attr.aria-controls]': 'navbar.menuId',
+    // The panel exists only while open: nothing to control otherwise.
+    '[attr.aria-controls]': 'navbar.open() ? navbar.menuId : null',
     '[class]': 'class()',
     '(click)': 'toggle()',
   },

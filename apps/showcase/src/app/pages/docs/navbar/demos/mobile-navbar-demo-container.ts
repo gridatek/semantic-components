@@ -92,7 +92,7 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <div scNavbarMenu>
+      <ng-template scNavbarMenu>
         <nav aria-label="Main, mobile">
           @for (link of links; track link) {
             <a
@@ -112,7 +112,7 @@ import {
           href="/docs/getting-started/introduction"
           >Get started</a
         >
-      </div>
+      </ng-template>
     </header>
     <p class="text-muted-foreground p-4 text-sm">
       Menu {{ open() ? 'open' : 'closed' }}

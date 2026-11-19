@@ -85,7 +85,7 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <div scNavbarMenu push>
+      <ng-template scNavbarMenu push>
         <nav aria-label="Main, push">
           @for (link of links; track link) {
             <a
@@ -98,7 +98,7 @@ import {
             </a>
           }
         </nav>
-      </div>
+      </ng-template>
     </header>
     <div class="space-y-4 p-4">
       <h2 class="text-lg font-semibold">{{ current() }}</h2>

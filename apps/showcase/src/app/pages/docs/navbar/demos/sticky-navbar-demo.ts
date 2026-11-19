@@ -71,7 +71,7 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <div scNavbarMenu>
+      <ng-template scNavbarMenu>
         <nav aria-label="Main, sticky">
           @for (link of links; track link) {
             <a
@@ -84,7 +84,7 @@ import {
             </a>
           }
         </nav>
-      </div>
+      </ng-template>
     </header>
     <div class="space-y-4 p-6">
       @for (paragraph of paragraphs; track $index) {

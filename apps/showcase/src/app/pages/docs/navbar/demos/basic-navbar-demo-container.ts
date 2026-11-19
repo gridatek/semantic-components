@@ -95,7 +95,7 @@ import {
           <span class="sr-only">Open menu</span>
         }
       </button>
-      <div scNavbarMenu>
+      <ng-template scNavbarMenu>
         <nav aria-label="Main">
           @for (link of links; track link) {
             <a
@@ -108,7 +108,7 @@ import {
             </a>
           }
         </nav>
-      </div>
+      </ng-template>
     </header>
   \`,
   encapsulation: ViewEncapsulation.None,

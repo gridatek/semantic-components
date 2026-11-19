@@ -68,7 +68,7 @@ import {
             <span class="sr-only">فتح القائمة</span>
           }
         </button>
-        <div scNavbarMenu>
+        <ng-template scNavbarMenu>
           <nav aria-label="الرئيسية">
             @for (link of links; track link) {
               <a
@@ -81,7 +81,7 @@ import {
               </a>
             }
           </nav>
-        </div>
+        </ng-template>
       </header>
     </div>
   `,

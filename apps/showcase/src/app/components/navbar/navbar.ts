@@ -256,7 +256,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
       </button>
 
       <!-- Mobile Menu -->
-      <div scNavbarMenu>
+      <ng-template scNavbarMenu>
         <nav aria-label="Main">
           <a
             scNavbarMenuLink
@@ -323,7 +323,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             Customize
           </a>
         </nav>
-      </div>
+      </ng-template>
     </header>
   `,
   host: {

@@ -92,7 +92,7 @@ import { ThemeMenu } from './theme-menu';
         }
       </button>
 
-      <div scNavbarMenu>
+      <ng-template scNavbarMenu>
         <nav aria-label="Main">
           @for (page of pages; track page.path) {
             <a
@@ -106,7 +106,7 @@ import { ThemeMenu } from './theme-menu';
             </a>
           }
         </nav>
-      </div>
+      </ng-template>
     </header>
 
     <main class="min-h-[70vh]">

@@ -94,13 +94,19 @@ test.describe('narrow', () => {
     const open = page.getByRole('button', { name: 'Open menu' });
     await expect(open).toHaveAttribute('aria-expanded', 'false');
     await expect(open).not.toHaveAttribute('aria-pressed');
-    const id = await open.getAttribute('aria-controls');
-    await expect(menu(page)).toHaveAttribute('id', id!);
-    await expect(menu(page)).toHaveCSS('visibility', 'hidden');
+    // Closed, there is no menu in the page: nothing for aria-controls.
+    await expect(menu(page)).toHaveCount(0);
+    await expect(open).not.toHaveAttribute('aria-controls');
 
     await open.click();
     const close = page.getByRole('button', { name: 'Close menu' });
     await expect(close).toHaveAttribute('aria-expanded', 'true');
+    // Open, the navbar renders it: the toggle controls it.
+    await expect(menu(page)).toBeVisible();
+    await expect(close).toHaveAttribute(
+      'aria-controls',
+      (await menu(page).getAttribute('id'))!,
+    );
     await expect(page.getByText('Menu open')).toBeVisible();
     const nav = page.getByRole('navigation', { name: 'Main' });
     await expect(nav.getByRole('link')).toHaveCount(4);
@@ -115,7 +121,7 @@ test.describe('narrow', () => {
     await page.getByRole('button', { name: 'Open menu' }).click();
     await page.getByRole('link', { name: 'Pricing' }).focus();
     await press(page, 'Escape');
-    await expect(menu(page)).toHaveAttribute('data-state', 'closed');
+    await expect(menu(page)).toHaveCount(0);
     await expect(page.getByRole('button', { name: 'Open menu' })).toBeFocused();
   });
 
@@ -123,7 +129,7 @@ test.describe('narrow', () => {
     await page.goto(demo('mobile'));
     await page.getByRole('button', { name: 'Open menu' }).click();
     await page.getByRole('link', { name: 'Docs' }).click();
-    await expect(menu(page)).toHaveAttribute('data-state', 'closed');
+    await expect(menu(page)).toHaveCount(0);
     await expect(page.getByText('Menu closed')).toBeVisible();
     await page.getByRole('button', { name: 'Open menu' }).click();
     await expect(page.getByRole('link', { name: 'Docs' })).toHaveAttribute(
@@ -151,7 +157,7 @@ test.describe('narrow', () => {
     await page.goto(demo('mobile'));
     const before = (await page.getByText('Menu closed').boundingBox())!.y;
     await page.getByRole('button', { name: 'Open menu' }).click();
-    await expect(menu(page)).toHaveAttribute('data-state', 'open');
+    await expect(menu(page)).toBeVisible();
     await expect(
       page.getByRole('navigation', { name: 'Main, mobile' }).getByRole('link'),
     ).toHaveCount(4);
@@ -178,21 +184,21 @@ test.describe('narrow', () => {
       document.body.append(outside);
       outside.focus();
     });
-    await expect(menu(page)).toHaveAttribute('data-state', 'closed');
+    await expect(menu(page)).toHaveCount(0);
   });
 
-  test('Mobile Menu: closing, it fades out in 100ms, then is hidden', async ({
+  test('Mobile Menu: closing, it fades out in 100ms, then leaves the page', async ({
     page,
   }) => {
     await page.goto(demo('mobile'));
     await page.getByRole('button', { name: 'Open menu' }).click();
-    await expect(menu(page)).toHaveAttribute('data-state', 'open');
+    await expect(menu(page)).toBeVisible();
     await page.getByRole('button', { name: 'Close menu' }).click();
     // tw-animate's exit (fade out, zoom out), 100ms…
     await expect(menu(page)).toHaveCSS('animation-name', 'exit');
     await expect(menu(page)).toHaveCSS('animation-duration', '0.1s');
-    // …then hidden: out of the tab order and the accessibility tree.
-    await expect(menu(page)).toHaveCSS('visibility', 'hidden');
+    // …then gone from the page.
+    await expect(menu(page)).toHaveCount(0);
     await expect(
       page.getByRole('navigation', { name: 'Main, mobile' }),
     ).toHaveCount(0);
@@ -212,9 +218,7 @@ test.describe('narrow', () => {
       .poll(async () => (await heading.boundingBox())!.y)
       .toBeGreaterThan(before + 100);
     await page.getByText('The menu pushes this text down').click();
-    await expect(menu(page)).toHaveAttribute('data-state', 'open');
-    // Its height still animates: it moves the page.
-    await expect(menu(page)).not.toHaveCSS('transition-duration', '0s');
+    await expect(menu(page)).toBeVisible();
   });
 
   test('Mobile Menu: the icon that comes in turns and fades in, not on the first paint', async ({

@@ -1,71 +1,34 @@
 import {
   Directive,
+  TemplateRef,
   booleanAttribute,
-  computed,
   inject,
   input,
 } from '@angular/core';
-import { cn } from 'cn';
-import { ScNavbar } from './navbar';
-
-const HIDDEN = { sm: 'sm:hidden', md: 'md:hidden', lg: 'lg:hidden' } as const;
 
 /**
- * The menu under the bar, on narrow screens: opens and closes with the toggle,
- * not modal — nothing is trapped and the page still
- * scrolls. It covers the page below the bar, and closes too when you
- * click or tab outside the bar; `push`, it pushes the page down instead.
- * Put a named `nav` with `scNavbarMenuLink`s inside, and any actions.
+ * The menu's content, on narrow screens: put it in an `ng-template` — a named
+ * `nav` with `scNavbarMenuLink`s, and any actions. The navbar renders it while
+ * the menu is open, in a panel under the bar: over the page, see-through and
+ * blurred, opening at once and fading out in 100ms (closing too when the focus
+ * leaves the bar); `push`, pushing the page down instead.
+ *
+ * ```html
+ * <ng-template scNavbarMenu>
+ *   <nav aria-label="Main">
+ *     <a scNavbarMenuLink routerLink="/">Home</a>
+ *   </nav>
+ * </ng-template>
+ * ```
  */
 @Directive({
-  selector: 'div[scNavbarMenu]',
-  host: {
-    'data-slot': 'navbar-menu',
-    '[id]': 'navbar.menuId',
-    '[attr.data-state]': 'navbar.open() ? "open" : "closed"',
-    '[class]': 'class()',
-    '(document:pointerdown)': 'closeOutside($event)',
-    '(document:focusin)': 'closeOutside($event)',
-  },
+  selector: 'ng-template[scNavbarMenu]',
 })
 export class ScNavbarMenu {
-  private readonly navbar = inject(ScNavbar);
+  /** Your content, rendered by the navbar while the menu is open. */
+  readonly template = inject(TemplateRef);
+  /** Classes for the panel the navbar renders. */
   readonly classInput = input<string>('', { alias: 'class' });
   /** Pushes the page down, rather than lying over it. */
   readonly push = input(false, { transform: booleanAttribute });
-
-  private readonly class = computed(() =>
-    cn(
-      'flex basis-full flex-col gap-1 overflow-hidden',
-      // Closed: `invisible`, out of the tab order and the accessibility tree.
-      'data-[state=open]:pb-4 data-[state=closed]:invisible',
-      // Pushing the page, its height animates between auto and 0 (global
-      // `interpolate-size`): the page moves with it.
-      this.push() &&
-        'data-[state=closed]:h-0 transition-[height,padding,visibility] duration-200 ease-out motion-reduce:transition-none',
-      // Over the page, as shadcn's: the bar's width and padding; all of the
-      // page below the bar (the window's height less the bar's, which is
-      // `100%` here), scrolling if its content is taller; see-through and
-      // blurred. It opens at once.
-      !this.push() &&
-        'bg-background/90 backdrop-blur absolute inset-x-0 top-full px-4 md:px-6 h-[calc(100dvh-100%)] overflow-y-auto overscroll-contain',
-      // Closing, it fades out and shrinks a little (100ms), and only then is
-      // hidden: `visibility` waits for the end of its transition.
-      !this.push() &&
-        !this.navbar.open() &&
-        'animate-out fade-out-0 zoom-out-95 duration-100 transition-[visibility] motion-reduce:animate-none motion-reduce:transition-none',
-      HIDDEN[this.navbar.expand()],
-      this.classInput(),
-    ),
-  );
-
-  /** Over the page, it hides it: a click or the focus out there closes it. */
-  private closeOutside(event: Event): void {
-    if (
-      !this.push() &&
-      this.navbar.open() &&
-      !this.navbar.element.contains(event.target as Node)
-    )
-      this.navbar.open.set(false);
-  }
 }

@@ -45,12 +45,12 @@ A site's top bar: your brand, links and actions; on narrow screens a toggle open
     }
   </button>
 
-  <div scNavbarMenu>
+  <ng-template scNavbarMenu>
     <nav aria-label="Main">
       <a scNavbarMenuLink routerLink="/products" active>Products</a>
       <a scNavbarMenuLink routerLink="/pricing">Pricing</a>
     </nav>
-  </div>
+  </ng-template>
 </header>
 ```
 
@@ -90,9 +90,9 @@ The buttons at the end.
 
 Opens and closes the menu, below `expand`. Styled as the style's button: `variant` (`'ghost'`), `size` (`'icon'`). Your icons inside (Menu and X, swapped with `@if`); once pressed, the one that comes in turns and fades in.
 
-### ScNavbarMenu — `div[scNavbarMenu]`
+### ScNavbarMenu — `ng-template[scNavbarMenu]`
 
-The panel under the bar, below `expand`. Put a named `nav` inside, and any actions.
+The menu's content, below `expand`: a named `nav` with `scNavbarMenuLink`s, and any actions, in an `ng-template`. The navbar renders it while the menu is open, in its own panel under the bar (`data-slot="navbar-menu"`, the toggle's `aria-controls` while open), and removes it on closing — so closed, its links aren't in the page. `class`: classes for that panel.
 
 | Input  | Type      | Default | Description                                                                                            |
 | ------ | --------- | ------- | ------------------------------------------------------------------------------------------------------ |
