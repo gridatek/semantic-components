@@ -53,6 +53,7 @@ import {
   template: \`
     <header
       scHeader
+      class="border-b-0"
       aria-label="Acme, mobile"
       #header="scHeader"
       [(mobileMenuOpen)]="open"
@@ -112,6 +113,8 @@ import {
       Menu {{ open() ? 'open' : 'closed' }}
     </p>
   \`,
+  // The page under the bar: gray, the frame's height.
+  host: { class: 'bg-muted block min-h-dvh' },
   encapsulation: ViewEncapsulation.None,
 })
 export class MobileHeaderDemo {

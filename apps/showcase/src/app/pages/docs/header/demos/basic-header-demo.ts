@@ -31,7 +31,7 @@ import {
     SiXIcon,
   ],
   template: `
-    <header scHeader aria-label="Acme" #header="scHeader">
+    <header scHeader class="border-b-0" aria-label="Acme" #header="scHeader">
       <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
@@ -83,6 +83,8 @@ import {
       </ng-template>
     </header>
   `,
+  // The page under the bar: gray, the frame's height.
+  host: { class: 'bg-muted block min-h-dvh' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicHeaderDemo {

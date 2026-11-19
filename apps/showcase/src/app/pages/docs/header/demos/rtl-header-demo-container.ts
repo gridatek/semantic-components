@@ -52,7 +52,7 @@ import {
   ],
   template: \`
     <div dir="rtl" lang="ar">
-      <header scHeader aria-label="أكمي" #header="scHeader">
+      <header scHeader class="border-b-0" aria-label="أكمي" #header="scHeader">
         <a
           class="flex items-center gap-2 font-semibold [&>svg]:size-6"
           href="#"
@@ -103,6 +103,8 @@ import {
     </div>
   \`,
   providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
+  // The page under the bar: gray, the frame's height.
+  host: { class: 'bg-muted block min-h-dvh' },
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlHeaderDemo {

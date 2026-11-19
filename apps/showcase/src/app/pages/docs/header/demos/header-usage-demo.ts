@@ -31,7 +31,7 @@ import {
     SiXIcon,
   ],
   template: `
-    <header scHeader #header="scHeader">
+    <header scHeader class="border-b-0" #header="scHeader">
       <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
         <svg siGalleryVerticalEndIcon></svg>
         Acme
@@ -89,6 +89,8 @@ import {
       </p>
     </main>
   `,
+  // The page under the bar: gray, the frame's height.
+  host: { class: 'bg-muted block min-h-dvh' },
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderUsageDemo {

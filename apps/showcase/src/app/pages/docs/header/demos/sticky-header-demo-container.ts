@@ -51,6 +51,7 @@ import {
   template: \`
     <header
       scHeader
+      class="border-b-0"
       aria-label="Acme, sticky"
       #header="scHeader"
       sticky
@@ -109,6 +110,8 @@ import {
       }
     </div>
   \`,
+  // The page under the bar: gray, the frame's height.
+  host: { class: 'bg-muted block min-h-dvh' },
   encapsulation: ViewEncapsulation.None,
 })
 export class StickyHeaderDemo {
