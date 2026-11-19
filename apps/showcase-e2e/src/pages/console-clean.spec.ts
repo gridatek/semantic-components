@@ -24,6 +24,14 @@ const pages = [
   '/docs/getting-started/styles',
   '/docs/getting-started/i18n',
   '/docs/getting-started/mcp-server',
+  '/docs/guides/theming',
+  '/docs/guides/forms',
+  '/docs/guides/accessibility',
+  '/docs/guides/ssr',
+  '/docs/guides/why',
+  '/docs/about/changelog',
+  '/docs/about/credits',
+  '/docs/about/roadmap',
   ...components
     .filter((c) => !c.hidden)
     .map((c) => `/docs/components/${c.path}`),

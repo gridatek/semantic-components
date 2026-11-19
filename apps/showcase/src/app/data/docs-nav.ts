@@ -5,21 +5,65 @@ export interface DocsPage {
   readonly description?: string;
 }
 
-/** The docs' first group: the library and its catalogue. */
-export const introductionPages: readonly DocsPage[] = [
+/** Getting started: the library, installing it, choosing a style. */
+export const gettingStartedPages: readonly DocsPage[] = [
   { name: 'Introduction', path: '/docs/getting-started/introduction' },
   { name: 'Components', path: '/docs/components' },
-];
-
-/** Setting it up. */
-export const installationPages: readonly DocsPage[] = [
   { name: 'Prerequisites', path: '/docs/getting-started/prerequisites' },
-  { name: 'UI', path: '/docs/getting-started/ui' },
+  { name: 'Installation', path: '/docs/getting-started/ui' },
   { name: 'Styles', path: '/docs/getting-started/styles' },
   { name: 'Custom style', path: '/docs/getting-started/custom-style' },
+  { name: 'MCP Server', path: '/docs/getting-started/mcp-server' },
+];
+
+/** Guides: how to do things well with the library. */
+export const guidePages: readonly DocsPage[] = [
+  {
+    name: 'Theming',
+    path: '/docs/guides/theming',
+    description: 'Styles, theme variables, dark mode',
+  },
+  {
+    name: 'Forms',
+    path: '/docs/guides/forms',
+    description: 'Signal Forms, fields, errors',
+  },
+  {
+    name: 'Accessibility',
+    path: '/docs/guides/accessibility',
+    description: 'WCAG AA, keyboard, focus, names',
+  },
   { name: 'Internationalization', path: '/docs/getting-started/i18n' },
   { name: 'Right to left', path: '/docs/getting-started/rtl' },
-  { name: 'MCP Server', path: '/docs/getting-started/mcp-server' },
+  {
+    name: 'Server-side rendering',
+    path: '/docs/guides/ssr',
+    description: 'SSR, hydration, saved choices',
+  },
+  {
+    name: 'Why Semantic Components',
+    path: '/docs/guides/why',
+    description: 'The principles',
+  },
+];
+
+/** About the project. */
+export const aboutPages: readonly DocsPage[] = [
+  {
+    name: 'Changelog',
+    path: '/docs/about/changelog',
+    description: 'What changed',
+  },
+  {
+    name: 'Credits',
+    path: '/docs/about/credits',
+    description: 'The projects we build on',
+  },
+  {
+    name: 'Roadmap',
+    path: '/docs/about/roadmap',
+    description: 'Where the library is going',
+  },
 ];
 
 /** shadcn's AI Elements: patterns built from the components. */

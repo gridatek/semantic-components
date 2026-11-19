@@ -27,11 +27,16 @@ Every directive or component is named to describe its **role** in the interface,
 <button matTooltip="Save changes">Save</button>
 ```
 
-In Semantic Components, it's scTooltipTrigger:
+In Semantic Components, the button is a `scTooltipTrigger`, and the tooltip is your markup:
 
 ```html
 <!-- Semantic Components -->
-<button scTooltipTrigger="Save changes">Save</button>
+<div scTooltipProvider>
+  <button scButton scTooltipTrigger>Save</button>
+  <ng-template scTooltipPortal>
+    <div scTooltip>Save changes</div>
+  </ng-template>
+</div>
 ```
 
 `scTooltipTrigger` — because `ScTooltip` is already the component that _renders_ the actual tooltip bubble. The directive on the button is not the tooltip — it's what triggers it. These are two different things, and the names reflect that. `ScDrawerTrigger`, `ScSelectTrigger`, `ScSidebarContent` — you know exactly what each piece does before reading a single line of docs.
