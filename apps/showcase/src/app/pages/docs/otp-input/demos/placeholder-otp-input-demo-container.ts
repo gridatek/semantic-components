@@ -42,7 +42,7 @@ import {
   template: \`
     <div scField class="w-fit">
       <label scLabel>Verification code</label>
-      <div scOtpInput [formField]="otpForm.code">
+      <div scOtpInput slotLabel="Character {index} of {length}" [formField]="otpForm.code">
         <div scOtpInputGroup>
           <input
             scOtpInputSlot
@@ -51,31 +51,26 @@ import {
           />
           <input
             scOtpInputSlot
-            aria-label="Character 2 of 6"
             placeholder="•"
             class="focus:placeholder:text-transparent"
           />
           <input
             scOtpInputSlot
-            aria-label="Character 3 of 6"
             placeholder="•"
             class="focus:placeholder:text-transparent"
           />
           <input
             scOtpInputSlot
-            aria-label="Character 4 of 6"
             placeholder="•"
             class="focus:placeholder:text-transparent"
           />
           <input
             scOtpInputSlot
-            aria-label="Character 5 of 6"
             placeholder="•"
             class="focus:placeholder:text-transparent"
           />
           <input
             scOtpInputSlot
-            aria-label="Character 6 of 6"
             placeholder="•"
             class="focus:placeholder:text-transparent"
           />

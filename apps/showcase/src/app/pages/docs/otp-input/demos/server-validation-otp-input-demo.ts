@@ -50,7 +50,11 @@ async function verifyOnServer(code: string): Promise<boolean> {
     <div class="w-72 space-y-4">
       <div scField class="w-fit">
         <label scLabel>Verification code</label>
-        <div scOtpInput slotLabel="Character {index} of {length}" [formField]="otpForm.code">
+        <div
+          scOtpInput
+          slotLabel="Character {index} of {length}"
+          [formField]="otpForm.code"
+        >
           <div scOtpInputGroup>
             <input scOtpInputSlot />
             <input scOtpInputSlot />

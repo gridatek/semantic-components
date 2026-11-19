@@ -22,7 +22,11 @@ import {
   template: `
     <div scField class="w-fit">
       <label scLabel>Verification code</label>
-      <div scOtpInput slotLabel="Character {index} of {length}" [formField]="otpForm.code">
+      <div
+        scOtpInput
+        slotLabel="Character {index} of {length}"
+        [formField]="otpForm.code"
+      >
         <div scOtpInputGroup>
           <input
             scOtpInputSlot

@@ -28,7 +28,11 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
     <div dir="rtl" lang="ar">
       <div scField class="w-fit">
         <label scLabel>رمز التحقق</label>
-        <div scOtpInput slotLabel="الحرف {index} من {length}" [formField]="otpForm.code">
+        <div
+          scOtpInput
+          slotLabel="الحرف {index} من {length}"
+          [formField]="otpForm.code"
+        >
           <div scOtpInputGroup>
             <input scOtpInputSlot />
             <input scOtpInputSlot />

@@ -86,9 +86,9 @@ import { VerificationOtpInputDemoContainer } from './demos/verification-otp-inpu
             The inputs are a group named by the field&apos;s label; each input
             is named by its place, in your words, written once on the root
             (slotLabel=&quot;Character {{ '{' }}index{{ '}' }} of
-            {{ '{' }}length{{ '}' }}&quot;) — an input&apos;s own aria-label wins.
-            Clicking the label goes to the first. A description is read with
-            them.
+            {{ '{' }}length{{ '}' }}&quot;) — an input&apos;s own aria-label
+            wins. Clicking the label goes to the first. A description is read
+            with them.
           </li>
           <li>
             The first input offers the code from an SMS

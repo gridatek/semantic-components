@@ -48,17 +48,17 @@ import { SiMinusIcon } from '@semantic-icons/lucide-icons';
     <div dir="rtl" lang="ar">
       <div scField class="w-fit">
         <label scLabel>رمز التحقق</label>
-        <div scOtpInput [formField]="otpForm.code">
+        <div scOtpInput slotLabel="الحرف {index} من {length}" [formField]="otpForm.code">
           <div scOtpInputGroup>
             <input scOtpInputSlot />
-            <input scOtpInputSlot aria-label="الحرف 2 من 6" />
-            <input scOtpInputSlot aria-label="الحرف 3 من 6" />
+            <input scOtpInputSlot />
+            <input scOtpInputSlot />
           </div>
           <div scSeparator></div>
           <div scOtpInputGroup>
-            <input scOtpInputSlot aria-label="الحرف 4 من 6" />
-            <input scOtpInputSlot aria-label="الحرف 5 من 6" />
-            <input scOtpInputSlot aria-label="الحرف 6 من 6" />
+            <input scOtpInputSlot />
+            <input scOtpInputSlot />
+            <input scOtpInputSlot />
           </div>
         </div>
       </div>
