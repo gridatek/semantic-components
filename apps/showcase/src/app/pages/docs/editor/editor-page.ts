@@ -351,7 +351,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           <pre scCodeBlockContent [code]="loadingCode" language="html"></pre>
         </div>
       </section>
-      <section class="space-y-8">
+      <section class="space-y-4">
         <h2 scTypeset appToc>Examples</h2>
         <p class="text-muted-foreground">
           The complete editor, after Tiptap's Simple Editor: undo and redo, the
@@ -367,179 +367,178 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           >.
         </p>
         <app-full-featured-editor-demo-container />
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Tables</h3>
-          <p class="text-muted-foreground">
-            The core and one feature,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >withTables()</code
-            >: the table menu inserts a table and edits the one at the
-            selection, its actions disabled where they don&apos;t apply. Tab
-            moves between cells; dragging a column&apos;s border resizes it.
-          </p>
-          <app-tables-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Images</h3>
-          <p class="text-muted-foreground">
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >withImages()</code
-            >
-            and an
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[upload]</code>
-            handler on the editor (<code
-              class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >scEditorUploads</code
-            >): pick an image, or drop or paste one. Each is uploaded with its
-            progress — cancel it there — and inserted when it resolves, named
-            after its file.
-          </p>
-          <app-images-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Search and replace</h3>
-          <p class="text-muted-foreground">
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >withSearch()</code
-            >: the search button, or Ctrl / ⌘ + F in the document, opens the
-            bar. Enter and Shift + Enter step through the matches, Escape closes
-            it.
-          </p>
-          <p class="text-muted-foreground">
-            Whether the bar is open is yours: one signal, bound to what shows it
-            and to the bar's
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[(open)]</code
-            >. Here a Collapsible, its trigger in the toolbar. The editor isn't
-            tied to it: where a search shows is a layout choice — a panel that
-            pushes the text down, a box over a corner, a dialog — and editors
-            make it differently. The editor does the search (its keys, focus and
-            matches); a Popover, a Sheet or an
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&#64;if</code>
-            work as well.
-          </p>
-          <app-search-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Floating toolbar</h3>
-          <p class="text-muted-foreground">
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >scEditorBubbleMenu</code
-            >
-            shows by the selected text, here instead of a toolbar. It needs no
-            provider: it adds itself to the editor.
-          </p>
-          <app-bubble-menu-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Signal Forms</h3>
-          <p class="text-muted-foreground">
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >[formField]</code
-            >
-            on the editor: the value is the document's HTML.
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">required</code>
-            checks it,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >scFieldErrors</code
-            >
-            shows the message once the document is left, and
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">disabled</code>
-            from the schema follows the checkbox.
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >characterLimit</code
-            >
-            stops the text at 280 characters — its text, not its HTML.
-          </p>
-          <app-signal-forms-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Displaying the document</h3>
-          <p class="text-muted-foreground">
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >scEditorView</code
-            >
-            shows what the editor wrote — a published post, a preview — in the
-            editor's styles, without an editor. The HTML is read through the
-            editor's schema, so only what the editor can hold is shown: no
-            scripts, no unsafe links.
-          </p>
-          <app-view-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Formats</h3>
-          <p class="text-muted-foreground">
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">format</code>
-            picks what the form holds:
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">html</code>
-            (the default),
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">json</code>
-            (Tiptap&apos;s JSON,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">null</code>
-            when empty),
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">markdown</code>
-            or
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">text</code>
-            (plain text, a line per paragraph). Switching it rewrites the value
-            in the new format, and
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >scEditorView</code
-            >
-            shows any of them, given the same format.
-          </p>
-          <app-formats-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Layout</h3>
-          <p class="text-muted-foreground">
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">layout</code>
-            on
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >scEditorContent</code
-            >:
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">default</code>
-            pads the text edge to edge, for a field or a comment box;
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">page</code>
-            sets it in a centred column of readable width with page margins, for
-            a document. The toolbar follows.
-          </p>
-          <app-layout-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Initial content</h3>
-          <p class="text-muted-foreground">
-            The form's value is the document to start with: any HTML the editor
-            knows — headings, lists, quotes, marks.
-          </p>
-          <app-prefilled-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Read-only</h3>
-          <p class="text-muted-foreground">
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">readonly</code>
-            from the schema: the document can be read, selected and searched,
-            not changed, and its buttons are disabled. Here it has no toolbar at
-            all.
-          </p>
-          <app-readonly-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>Without counts</h3>
-          <p class="text-muted-foreground">
-            Every part is optional: leave out the footer and its word and
-            character counts.
-          </p>
-          <app-no-count-editor-demo-container />
-        </section>
-        <section class="space-y-4">
-          <h3 scTypeset appToc>RTL</h3>
-          <p class="text-muted-foreground">
-            In a right-to-left page: the toolbar starts at the right and Left
-            moves to the next button; the text runs from the right, list markers
-            on the right.
-          </p>
-          <app-rtl-editor-demo-container />
-        </section>
       </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Tables</h2>
+        <p class="text-muted-foreground">
+          The core and one feature,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >withTables()</code
+          >: the table menu inserts a table and edits the one at the selection,
+          its actions disabled where they don&apos;t apply. Tab moves between
+          cells; dragging a column&apos;s border resizes it.
+        </p>
+        <app-tables-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Images</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >withImages()</code
+          >
+          and an
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[upload]</code>
+          handler on the editor (<code
+            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorUploads</code
+          >): pick an image, or drop or paste one. Each is uploaded with its
+          progress — cancel it there — and inserted when it resolves, named
+          after its file.
+        </p>
+        <app-images-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Search and replace</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >withSearch()</code
+          >: the search button, or Ctrl / ⌘ + F in the document, opens the bar.
+          Enter and Shift + Enter step through the matches, Escape closes it.
+        </p>
+        <p class="text-muted-foreground">
+          Whether the bar is open is yours: one signal, bound to what shows it
+          and to the bar's
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[(open)]</code>.
+          Here a Collapsible, its trigger in the toolbar. The editor isn't tied
+          to it: where a search shows is a layout choice — a panel that pushes
+          the text down, a box over a corner, a dialog — and editors make it
+          differently. The editor does the search (its keys, focus and matches);
+          a Popover, a Sheet or an
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&#64;if</code>
+          work as well.
+        </p>
+        <app-search-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Floating toolbar</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorBubbleMenu</code
+          >
+          shows by the selected text, here instead of a toolbar. It needs no
+          provider: it adds itself to the editor.
+        </p>
+        <app-bubble-menu-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Signal Forms</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >[formField]</code
+          >
+          on the editor: the value is the document's HTML.
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">required</code>
+          checks it,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scFieldErrors</code
+          >
+          shows the message once the document is left, and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">disabled</code>
+          from the schema follows the checkbox.
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >characterLimit</code
+          >
+          stops the text at 280 characters — its text, not its HTML.
+        </p>
+        <app-signal-forms-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Displaying the document</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorView</code
+          >
+          shows what the editor wrote — a published post, a preview — in the
+          editor's styles, without an editor. The HTML is read through the
+          editor's schema, so only what the editor can hold is shown: no
+          scripts, no unsafe links.
+        </p>
+        <app-view-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Formats</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">format</code>
+          picks what the form holds:
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">html</code>
+          (the default),
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">json</code>
+          (Tiptap&apos;s JSON,
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">null</code>
+          when empty),
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">markdown</code>
+          or
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">text</code>
+          (plain text, a line per paragraph). Switching it rewrites the value in
+          the new format, and
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorView</code
+          >
+          shows any of them, given the same format.
+        </p>
+        <app-formats-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Layout</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">layout</code>
+          on
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            >scEditorContent</code
+          >:
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">default</code>
+          pads the text edge to edge, for a field or a comment box;
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">page</code>
+          sets it in a centred column of readable width with page margins, for a
+          document. The toolbar follows.
+        </p>
+        <app-layout-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Initial content</h2>
+        <p class="text-muted-foreground">
+          The form's value is the document to start with: any HTML the editor
+          knows — headings, lists, quotes, marks.
+        </p>
+        <app-prefilled-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Read-only</h2>
+        <p class="text-muted-foreground">
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">readonly</code>
+          from the schema: the document can be read, selected and searched, not
+          changed, and its buttons are disabled. Here it has no toolbar at all.
+        </p>
+        <app-readonly-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Without counts</h2>
+        <p class="text-muted-foreground">
+          Every part is optional: leave out the footer and its word and
+          character counts.
+        </p>
+        <app-no-count-editor-demo-container />
+      </section>
+      <section class="space-y-4">
+        <h2 scTypeset appToc>RTL</h2>
+        <p class="text-muted-foreground">
+          In a right-to-left page: the toolbar starts at the right and Left
+          moves to the next button; the text runs from the right, list markers
+          on the right.
+        </p>
+        <app-rtl-editor-demo-container />
+      </section>
+
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
         <p class="text-muted-foreground">
