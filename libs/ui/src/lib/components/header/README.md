@@ -7,7 +7,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 - **Responsive** — the links show from `expand` (`sm`, `md`, `lg`); below it, the toggle and the menu
 - **Your markup** — the brand and the actions are your own elements, laid out as you like; the toggle goes wherever you put it (beside your actions, say)
 - **Disclosure menu** — `aria-expanded`, `aria-controls`; by default it covers the page below the bar, see-through and blurred as shadcn's (scrolling inside if it is taller), opening at once and fading out in 100ms; with `mobileMenu="push"` it pushes the page down, fading and sliding in and out
-- **Closes by itself** — Escape (focus back on the toggle), a link followed, a page change, the window growing wide enough; covering the page, a click or the focus outside the bar too
+- **Closes by itself** — Escape (focus back on the toggle), a link followed (at once, on the click: a fast next page is your app's — e.g. `withPreloading` on its router), a navigation ending (done, cancelled, failed), the window growing wide enough; covering the page, a click or the focus outside the bar too
 - **`[(mobileMenuOpen)]`** — the mobile menu's state, two-way
 - **Sticky**, and **hides on scroll** (away going down, back going up)
 - **The links are a Navigation Menu** — the bar's `nav`, which the header hides below `expand`; the header adds only what the Navigation Menu doesn't have: the bar, the breakpoint, the mobile menu

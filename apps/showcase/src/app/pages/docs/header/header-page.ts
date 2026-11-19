@@ -208,7 +208,7 @@ export default class HeaderPage {
       name: 'ScHeader',
       selector: 'header[scHeader]',
       description:
-        "The bar, the page's banner, 56px tall (more when the menu pushes the page): [(mobileMenuOpen)] the mobile menu's state; expand ('sm', 'md', 'lg' — the width from which its links show, 'md' by default: its nav, a Navigation Menu, is hidden below it); mobileMenu ('cover' over the page below the bar, by default, or 'push' pushing it down); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed, a page change, the window growing wide enough, and (covering the page) a click or the focus outside the bar.",
+        "The bar, the page's banner, 56px tall (more when the menu pushes the page): [(mobileMenuOpen)] the mobile menu's state; expand ('sm', 'md', 'lg' — the width from which its links show, 'md' by default: its nav, a Navigation Menu, is hidden below it); mobileMenu ('cover' over the page below the bar, by default, or 'push' pushing it down); sticky; hideOnScroll (away going down, back going up). exportAs scHeader. Renders your menu while open, and closes it on Escape, a link followed (at once), a navigation ending, the window growing wide enough, and (covering the page) a click or the focus outside the bar.",
     },
     {
       name: 'ScHeaderMobileMenuToggle',

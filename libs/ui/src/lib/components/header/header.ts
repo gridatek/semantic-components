@@ -15,7 +15,13 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router } from '@angular/router';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationSkipped,
+  Router,
+} from '@angular/router';
 import { cn } from 'cn';
 import { filter } from 'rxjs';
 import {
@@ -184,10 +190,20 @@ export class ScHeader implements ScNavigationMenuLinkHost {
     ),
   );
 
+  private readonly router = inject(Router, { optional: true });
+
   constructor() {
-    inject(Router, { optional: true })
-      ?.events.pipe(
-        filter((event) => event instanceof NavigationEnd),
+    // A navigation over — done, or none after all (cancelled, failed, the
+    // same page): the menu closes, whatever started it.
+    this.router?.events
+      .pipe(
+        filter(
+          (event) =>
+            event instanceof NavigationEnd ||
+            event instanceof NavigationCancel ||
+            event instanceof NavigationError ||
+            event instanceof NavigationSkipped,
+        ),
         takeUntilDestroyed(),
       )
       .subscribe(() => this.mobileMenuOpen.set(false));
@@ -232,7 +248,7 @@ export class ScHeader implements ScNavigationMenuLinkHost {
       this.mobileMenuOpen.set(false);
   }
 
-  /** A link of the mobile menu was followed: it closes. */
+  /** A link of the mobile menu was followed: it closes, at once. */
   linkFollowed(): void {
     this.mobileMenuOpen.set(false);
   }

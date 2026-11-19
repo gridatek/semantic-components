@@ -238,6 +238,14 @@ A rule (the user, 2026-11-13). The consumer speaks logical first — `side="inli
 
 Names: `side` is the edge (`top`, `bottom`, `inline-start`, `inline-end`, `left`, `right`); `alignment` is the place along it (`start`, `center`, `end`); their offsets `sideOffset` and `alignmentOffset`. `start` / `end` never name a side.
 
+## A Link Closes Its Popup at Once
+
+A rule (the user, 2026-11-19). A popup holding links — the Header's mobile menu, the Navigation Menu's panel, the Sidebar's sheet on a phone, a Menu — closes as soon as one of its links is followed, on the click. It never waits for the Router to finish: a menu that stays open while the next page loads looks stuck, and the user can't tell why nothing moves. That's what the web does (shadcn's site, GitHub, Next.js apps).
+
+- **Closing is the part's job; a fast next page is the app's.** The page you leave may show for a moment while the next one loads (lazy routes). The app makes that short or visible: `withPreloading(…)` on its router (the next page loaded before it is asked for), a progress bar while a navigation runs. Not the component.
+- **A navigation that ends closes it too**, whatever started it — done, cancelled, failed or skipped (the Header listens to the Router's events, when there is a Router): a menu is never left open on a page it no longer matches.
+- **How a link tells its popup**: `scNavigationMenuLink` calls its nearest `SC_NAVIGATION_MENU_LINK_HOST` (the Navigation Menu, the Header), unless `closeOnClick` is off; the Sidebar's buttons on an `a` close the sheet themselves; a Menu item closes its menu on activation.
+
 ## Component Structure Template
 
 A part is a `@Directive` on the consumer's element — a `@Component` only when it needs a template of its own, encapsulation or a CDK base class. It sets no text (no default label: the consumer writes it), and a `data-slot` only when another component styles by it ([data-slot-pattern.md](data-slot-pattern.md)).

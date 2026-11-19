@@ -59,6 +59,35 @@ async function oneLine(page: Page) {
   ).toBe(true);
 }
 
+test('a page picked in the mobile menu: the menu closes at once, then the page comes', async ({
+  page,
+}) => {
+  await starsAnswered(page);
+  await page.setViewportSize({ width: 390, height: 700 });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Open menu' }).click();
+  const menu = page.locator('[data-slot=header-menu]');
+  await expect(menu).toBeVisible();
+  // The page picked is slow to load (its scripts held back a second): the
+  // menu doesn't wait for it — closing is the header's, a fast page the app's
+  // (docs/component-design-principles.md, "A Link Closes Its Popup at Once").
+  await page.route('**/*.js', async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await route.continue();
+  });
+  await menu.getByRole('link', { name: 'Charts', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Open menu' })).toHaveAttribute(
+    'aria-expanded',
+    'false',
+  );
+  await expect(menu).toHaveCount(0);
+  // Closed while the page picked is still loading…
+  await expect(page).toHaveURL(/\/$/);
+  // …which comes after.
+  await expect(page).toHaveURL(/\/charts$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Charts');
+});
+
 for (const style of STYLES) {
   test(`${style}: the header on one line at every width`, async ({
     page,
