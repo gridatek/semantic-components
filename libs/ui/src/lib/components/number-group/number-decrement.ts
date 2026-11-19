@@ -1,0 +1,71 @@
+import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
+import { SC_NUMBER_GROUP } from './number-group';
+import { ScNumberHold } from './number-hold';
+
+/**
+ * Steps the value down — repeatedly while held (Shift: `largeStep`, Alt:
+ * `smallStep`). Not in the Tab order (the arrow keys do it from the
+ * input), focus stays put; the new value is announced. At the bound it is
+ * `aria-disabled` (still found by a screen reader or a voice command). Write its icon and name it (`aria-label` or
+ * visually hidden text).
+ */
+@Directive({
+  selector: 'button[scNumberDecrement]',
+  host: {
+    'data-slot': 'number-decrement',
+    type: 'button',
+    tabindex: '-1',
+    '[class]': 'class()',
+    '[disabled]': 'number.disabled()',
+    '[attr.aria-disabled]':
+      '(!number.disabled() && !number.canDecrement()) || null',
+    '[attr.aria-controls]': 'number.inputId()',
+    '(pointerdown)': 'onPointerDown($event)',
+    '(click)': 'onClick($event)',
+  },
+})
+export class ScNumberDecrement {
+  private readonly buttonStyles = injectStyle().button;
+
+  private readonly number = inject(SC_NUMBER_GROUP);
+  private readonly hold = new ScNumberHold();
+
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  private readonly class = computed(() =>
+    cn(
+      this.buttonStyles({ variant: 'outline', size: 'icon' }),
+      'touch-manipulation select-none',
+      this.classInput(),
+    ),
+  );
+
+  constructor() {
+    inject(DestroyRef).onDestroy(() => this.hold.stop());
+  }
+
+  private onPointerDown(event: PointerEvent): void {
+    this.number.flushInput();
+    const amount = this.number.stepSize(event);
+    this.hold.start(event, () => {
+      if (!this.number.canDecrement()) return false;
+      this.number.decrement(amount);
+      this.number.announce();
+      return true;
+    });
+  }
+
+  /** A click that isn't a pointer press (a screen reader's, say). */
+  private onClick(event: MouseEvent): void {
+    if (this.hold.pressed) {
+      this.hold.pressed = false;
+      return;
+    }
+    if (!this.number.canDecrement()) return;
+    this.number.flushInput();
+    this.number.decrement(this.number.stepSize(event));
+    this.number.announce();
+  }
+}

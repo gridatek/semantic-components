@@ -246,10 +246,10 @@ component-name/
 
 ### Class Names
 
-- **Root**: `ScComponentName` (e.g., `ScNumberField`, `ScPassword`)
+- **Root**: `ScComponentName` (e.g., `ScNumber`, `ScPassword`)
 - **Containers**: `ScInputGroup` for input grouping, `ScComponentNameGroup` for specialized grouping
-- **Actions**: `ScComponentName[Action]` (e.g., `ScNumberFieldIncrement`, `ScPasswordToggle`)
-- **Inputs**: `ScComponentNameInput` (e.g., `ScNumberFieldInput`)
+- **Actions**: `ScComponentName[Action]` (e.g., `ScNumberIncrement`, `ScPasswordToggle`)
+- **Inputs**: `ScComponentNameInput` (e.g., `ScNumberInput`)
 
 ### Selectors
 
@@ -410,17 +410,17 @@ export class ScPasswordToggle {
 
 ```typescript
 // number.ts (Root)
-export const SC_NUMBER_FIELD = new InjectionToken<ScNumberField>('SC_NUMBER_FIELD');
+export const SC_NUMBER_GROUP = new InjectionToken<ScNumber>('SC_NUMBER_GROUP');
 
 @Directive({
-  selector: '[scNumberField]',
-  providers: [{ provide: SC_NUMBER_FIELD, useExisting: ScNumberField }],
+  selector: '[scNumber]',
+  providers: [{ provide: SC_NUMBER_GROUP, useExisting: ScNumber }],
   host: {
-    'data-slot': 'number-field',
+    'data-slot': 'number-group',
     '[attr.data-disabled]': 'disabled() || null',
   },
 })
-export class ScNumberField {
+export class ScNumber {
   readonly value = model<number | null>(null);
   readonly min = input<number | null>(null);
   readonly max = input<number | null>(null);
@@ -450,7 +450,7 @@ export class ScNumberField {
 
 // number-input.ts (Input)
 @Component({
-  selector: 'input[scNumberFieldInput]',
+  selector: 'input[scNumberInput]',
   template: ``,
   host: {
     type: 'text',
@@ -460,8 +460,8 @@ export class ScNumberField {
     '(input)': 'onInput($event)',
   },
 })
-export class ScNumberFieldInput {
-  readonly number = inject(SC_NUMBER_FIELD);
+export class ScNumberInput {
+  readonly number = inject(SC_NUMBER_GROUP);
 
   onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -474,7 +474,7 @@ export class ScNumberFieldInput {
 
 // number-increment.ts (Action)
 @Component({
-  selector: 'button[scNumberFieldIncrement]',
+  selector: 'button[scNumberIncrement]',
   template: ` <ng-content><svg>+</svg></ng-content> `,
   host: {
     type: 'button',
@@ -482,8 +482,8 @@ export class ScNumberFieldInput {
     '(click)': 'onClick()',
   },
 })
-export class ScNumberFieldIncrement {
-  readonly number = inject(SC_NUMBER_FIELD);
+export class ScNumberIncrement {
+  readonly number = inject(SC_NUMBER_GROUP);
 
   onClick(): void {
     this.number.increment();
@@ -492,7 +492,7 @@ export class ScNumberFieldIncrement {
 
 // number-decrement.ts (Action)
 @Component({
-  selector: 'button[scNumberFieldDecrement]',
+  selector: 'button[scNumberDecrement]',
   template: ` <ng-content><svg>-</svg></ng-content> `,
   host: {
     type: 'button',
@@ -500,8 +500,8 @@ export class ScNumberFieldIncrement {
     '(click)': 'onClick()',
   },
 })
-export class ScNumberFieldDecrement {
-  readonly number = inject(SC_NUMBER_FIELD);
+export class ScNumberDecrement {
+  readonly number = inject(SC_NUMBER_GROUP);
 
   onClick(): void {
     this.number.decrement();
@@ -512,13 +512,13 @@ export class ScNumberFieldDecrement {
 **Usage:**
 
 ```html
-<div scNumberField [(value)]="count" [min]="0" [max]="100">
+<div scNumber [(value)]="count" [min]="0" [max]="100">
   <label scLabel>Count</label>
 
   <div scControlGroup>
-    <button scNumberFieldDecrement></button>
-    <input scNumberFieldInput />
-    <button scNumberFieldIncrement></button>
+    <button scNumberDecrement></button>
+    <input scNumberInput />
+    <button scNumberIncrement></button>
   </div>
 </div>
 ```
@@ -597,20 +597,20 @@ get canSubmit() {
 
 ```typescript
 // Use specific types
-export const SC_NUMBER_FIELD = new InjectionToken<ScNumberField>('SC_NUMBER_FIELD');
+export const SC_NUMBER_GROUP = new InjectionToken<ScNumber>('SC_NUMBER_GROUP');
 
 // Type the injection
-readonly number = inject(SC_NUMBER_FIELD);
+readonly number = inject(SC_NUMBER_GROUP);
 ```
 
 **DON'T:**
 
 ```typescript
 // Don't use any
-export const SC_NUMBER_FIELD = new InjectionToken<any>('SC_NUMBER_FIELD');
+export const SC_NUMBER_GROUP = new InjectionToken<any>('SC_NUMBER_GROUP');
 
 // Don't skip typing
-readonly number = inject(SC_NUMBER_FIELD) as any;
+readonly number = inject(SC_NUMBER_GROUP) as any;
 ```
 
 ### 3. Naming
@@ -620,7 +620,7 @@ readonly number = inject(SC_NUMBER_FIELD) as any;
 ```typescript
 // Use descriptive, specific names
 ScPasswordToggle;
-ScNumberFieldIncrement;
+ScNumberIncrement;
 ScDatePickerCalendar;
 ```
 
@@ -629,7 +629,7 @@ ScDatePickerCalendar;
 ```typescript
 // Don't use generic names
 ScPasswordButton;
-ScNumberFieldButton;
+ScNumberButton;
 ScDateButton;
 ```
 
@@ -882,7 +882,7 @@ TestBed.configureTestingModule({
 
 ## Resources
 
-- [Number Implementation](../libs/ui/src/lib/components/number-field/)
+- [Number Implementation](../libs/ui/src/lib/components/number-group/)
 - [Password Implementation](../libs/ui/src/lib/components/password/)
 - [Angular Dependency Injection](https://angular.dev/guide/di)
 - [Angular Signals](https://angular.dev/guide/signals)

@@ -4423,69 +4423,69 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/number-field',
+    path: 'demos/number-group',
     children: [
       {
-        path: 'quantity-number-field-demo',
+        path: 'quantity-number-group-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/quantity-number-field-demo').then(
-            (m) => m.QuantityNumberFieldDemo,
+          import('../pages/docs/number-group/demos/quantity-number-group-demo').then(
+            (m) => m.QuantityNumberGroupDemo,
           ),
       },
       {
-        path: 'stacked-number-field-demo',
+        path: 'stacked-number-group-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/stacked-number-field-demo').then(
-            (m) => m.StackedNumberFieldDemo,
+          import('../pages/docs/number-group/demos/stacked-number-group-demo').then(
+            (m) => m.StackedNumberGroupDemo,
           ),
       },
       {
-        path: 'steps-number-field-demo',
+        path: 'steps-number-group-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/steps-number-field-demo').then(
-            (m) => m.StepsNumberFieldDemo,
+          import('../pages/docs/number-group/demos/steps-number-group-demo').then(
+            (m) => m.StepsNumberGroupDemo,
           ),
       },
       {
-        path: 'basic-number-field-demo',
+        path: 'basic-number-group-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/basic-number-field-demo').then(
-            (m) => m.BasicNumberFieldDemo,
+          import('../pages/docs/number-group/demos/basic-number-group-demo').then(
+            (m) => m.BasicNumberGroupDemo,
           ),
       },
       {
-        path: 'scrubbing-number-field-demo',
+        path: 'scrubbing-number-group-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/scrubbing-number-field-demo').then(
-            (m) => m.ScrubbingNumberFieldDemo,
+          import('../pages/docs/number-group/demos/scrubbing-number-group-demo').then(
+            (m) => m.ScrubbingNumberGroupDemo,
           ),
       },
       {
-        path: 'price-number-field-demo',
+        path: 'price-number-group-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/price-number-field-demo').then(
-            (m) => m.PriceNumberFieldDemo,
+          import('../pages/docs/number-group/demos/price-number-group-demo').then(
+            (m) => m.PriceNumberGroupDemo,
           ),
       },
       {
-        path: 'disabled-number-field-demo',
+        path: 'disabled-number-group-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/disabled-number-field-demo').then(
-            (m) => m.DisabledNumberFieldDemo,
+          import('../pages/docs/number-group/demos/disabled-number-group-demo').then(
+            (m) => m.DisabledNumberGroupDemo,
           ),
       },
       {
-        path: 'without-label-number-field-demo',
+        path: 'without-label-number-group-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/without-label-number-field-demo').then(
-            (m) => m.WithoutLabelNumberFieldDemo,
+          import('../pages/docs/number-group/demos/without-label-number-group-demo').then(
+            (m) => m.WithoutLabelNumberGroupDemo,
           ),
       },
       {
-        path: 'signal-forms-number-field-demo',
+        path: 'signal-forms-number-group-demo',
         loadComponent: () =>
-          import('../pages/docs/number-field/demos/signal-forms-number-field-demo').then(
-            (m) => m.SignalFormsNumberFieldDemo,
+          import('../pages/docs/number-group/demos/signal-forms-number-group-demo').then(
+            (m) => m.SignalFormsNumberGroupDemo,
           ),
       },
     ],

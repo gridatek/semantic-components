@@ -455,10 +455,10 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/notification-center/notification-center-page'),
       },
       {
-        path: 'number-field',
-        title: 'Number Field - Semantic Components',
+        path: 'number-group',
+        title: 'Number Group - Semantic Components',
         loadComponent: () =>
-          import('../pages/docs/number-field/number-field-page'),
+          import('../pages/docs/number-group/number-group-page'),
       },
       {
         path: 'org-chart',

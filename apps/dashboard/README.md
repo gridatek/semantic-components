@@ -74,7 +74,7 @@ What differs from the reference, deliberately:
 | `/apps/notes`, `/apps/blog/*`, `/apps/tickets*`                                             | The free apps (see the reference)                                                                                          | Item, Dialog, `ui/editor`, File Upload, Tags Input, Date Picker…                                |
 | `/apps/invoice/list`, `detail/:id`, `create`, `edit/:id`                                    | Totals by status, search; the invoice as it prints, mark paid, print; one form with lines added and removed                | Stat Card, Toggle Group, Table (footer), Signal Forms (`applyEach`)                             |
 | `/apps/user-profile/profile`, `followers`, `friends`, `gallery`                             | Header with tabs as links; about, photos, posts and likes; follow back; remove friend; albums and a viewer                 | Toggle, Avatar Group, Dialog, Toggle Group                                                      |
-| `/apps/ecommerce/shop`, `detail/:id`, `list`, `checkout`, `add-product`, `edit-product/:id` | Filters (category, price, stock), sort, cart; options, quantity, reviews; bulk delete; checkout in steps; one product form | Slider, Checkbox, Number Field, Tabs, Stepper (linear, `stepControl`), Radio Group, File Upload |
+| `/apps/ecommerce/shop`, `detail/:id`, `list`, `checkout`, `add-product`, `edit-product/:id` | Filters (category, price, stock), sort, cart; options, quantity, reviews; bulk delete; checkout in steps; one product form | Slider, Checkbox, Number Group, Tabs, Stepper (linear, `stepControl`), Radio Group, File Upload |
 | `/apps/kanban`                                                                              | Columns, tasks moved by drag or keyboard, added, deleted                                                                   | Kanban Board, Avatar Group, Dialog                                                              |
 | `/apps/customers`, `/apps/orders`                                                           | Search, sort; orders by status, pages                                                                                      | `ui/data-table`, Stat Card, Toggle Group, Pagination                                            |
 
@@ -226,7 +226,7 @@ Not the library's, but met on the way:
 - No e2e specs for this app (checked by a scripted run, above, and by hand).
 - Dark mode, phone widths and RTL aren't reviewed screen by screen.
 - Hidden (non-shadcn) components carry several screens — Scheduler, Kanban
-  Board, Stepper, Stat Card, Timeline, Number Field — as they are today.
+  Board, Stepper, Stat Card, Timeline, Number Group — as they are today.
 - The header's search is a field without results (as in the reference's free
   version).
 - Adds 7 MB of images.

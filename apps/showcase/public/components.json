@@ -652,9 +652,9 @@
     "hidden": true
   },
   {
-    "name": "Number Field",
-    "path": "number-field",
-    "description": "A number input: typed and read in the locale, stepped with the keyboard, buttons, the wheel or by dragging its label.",
+    "name": "Number Group",
+    "path": "number-group",
+    "description": "A number input with its buttons: typed and read in the locale, stepped with the keyboard, buttons, the wheel or by dragging its label. In a scField, as any input; a Signal Forms control.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"

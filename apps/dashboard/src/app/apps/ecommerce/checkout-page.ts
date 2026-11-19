@@ -29,11 +29,10 @@ import {
   ScLabel,
   ScLegend,
   ScLink,
-  ScNumberField,
-  ScNumberFieldDecrement,
-  ScNumberFieldGroup,
-  ScNumberFieldIncrement,
-  ScNumberFieldInput,
+  ScNumberDecrement,
+  ScNumberGroup,
+  ScNumberIncrement,
+  ScNumberInput,
   ScRadio,
   ScRadioGroup,
   ScSeparator,
@@ -89,11 +88,10 @@ import { CartStore } from './shop-store';
     ScLabel,
     ScLegend,
     ScLink,
-    ScNumberField,
-    ScNumberFieldDecrement,
-    ScNumberFieldGroup,
-    ScNumberFieldIncrement,
-    ScNumberFieldInput,
+    ScNumberDecrement,
+    ScNumberGroup,
+    ScNumberIncrement,
+    ScNumberInput,
     ScRadio,
     ScRadioGroup,
     ScSeparator,
@@ -266,24 +264,23 @@ import { CartStore } from './shop-store';
                             >{{ moneyOf(line.product.price) }} each</span
                           >
                         </div>
-                        <div
-                          scNumberField
-                          [value]="line.quantity"
-                          (valueChange)="
-                            cart.setQuantity(line.product.id, $event ?? 1)
-                          "
-                          [min]="1"
-                          [max]="Math.max(line.product.stock, 1)"
-                          class="w-32"
-                        >
+                        <div scField class="w-32">
                           <label
                             i18n="@@ecommerce.checkout.quantityOf"
                             scLabel
                             class="sr-only"
                             >Quantity of {{ line.product.name }}</label
                           >
-                          <div scNumberFieldGroup>
-                            <button scNumberFieldDecrement>
+                          <div
+                            scNumberGroup
+                            [value]="line.quantity"
+                            (valueChange)="
+                              cart.setQuantity(line.product.id, $event ?? 1)
+                            "
+                            [min]="1"
+                            [max]="Math.max(line.product.stock, 1)"
+                          >
+                            <button scNumberDecrement>
                               <svg siMinusIcon></svg>
                               <span
                                 i18n="@@ecommerce.checkout.decrease"
@@ -291,8 +288,8 @@ import { CartStore } from './shop-store';
                                 >Decrease</span
                               >
                             </button>
-                            <input scNumberFieldInput />
-                            <button scNumberFieldIncrement>
+                            <input scNumberInput />
+                            <button scNumberIncrement>
                               <svg siPlusIcon></svg>
                               <span
                                 i18n="@@ecommerce.checkout.increase"

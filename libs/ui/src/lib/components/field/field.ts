@@ -38,6 +38,11 @@ export interface ScFieldContext {
   id: () => string;
   descriptionIds: WritableSignal<string[]>;
   formField: Signal<FormField<unknown> | undefined>;
+  /**
+   * The control that registered itself here (a Number Group): for a part of
+   * the field outside it — the scrub area around the label — to reach it.
+   */
+  control: WritableSignal<unknown>;
 }
 
 export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
@@ -78,6 +83,8 @@ export class ScField implements ScFieldContext {
    */
   readonly id = input(inject(_IdGenerator).getId('sc-field-'));
   readonly descriptionIds = signal<string[]>([]);
+  /** The control that registered itself (see ScFieldContext). */
+  readonly control = signal<unknown>(null);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScFieldVariants['orientation']>('vertical');
   readonly invalidInput = input<boolean>(false, { alias: 'invalid' });

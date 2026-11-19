@@ -20,14 +20,14 @@ import {
   ScEmptyDescription,
   ScEmptyHeader,
   ScEmptyTitle,
+  ScField,
   ScLabel,
   ScLegend,
   ScLink,
-  ScNumberField,
-  ScNumberFieldDecrement,
-  ScNumberFieldGroup,
-  ScNumberFieldIncrement,
-  ScNumberFieldInput,
+  ScNumberDecrement,
+  ScNumberGroup,
+  ScNumberIncrement,
+  ScNumberInput,
   ScSeparator,
   ScTabs,
   ScTabsList,
@@ -92,11 +92,11 @@ const REVIEWS = [
     ScLabel,
     ScLegend,
     ScLink,
-    ScNumberField,
-    ScNumberFieldDecrement,
-    ScNumberFieldGroup,
-    ScNumberFieldIncrement,
-    ScNumberFieldInput,
+    ScField,
+    ScNumberDecrement,
+    ScNumberGroup,
+    ScNumberIncrement,
+    ScNumberInput,
     ScSeparator,
     ScTabs,
     ScTabsList,
@@ -200,18 +200,17 @@ const REVIEWS = [
               </fieldset>
             }
 
-            <div
-              scNumberField
-              [(value)]="quantity"
-              [min]="1"
-              [max]="product.stock || 1"
-              class="w-36"
-            >
+            <div scField class="w-36">
               <label i18n="@@ecommerce.productDetail.quantity" scLabel
                 >Quantity</label
               >
-              <div scNumberFieldGroup>
-                <button scNumberFieldDecrement>
+              <div
+                scNumberGroup
+                [(value)]="quantity"
+                [min]="1"
+                [max]="product.stock || 1"
+              >
+                <button scNumberDecrement>
                   <svg siMinusIcon></svg>
                   <span
                     i18n="@@ecommerce.productDetail.decreaseQuantity"
@@ -219,8 +218,8 @@ const REVIEWS = [
                     >Decrease quantity</span
                   >
                 </button>
-                <input scNumberFieldInput />
-                <button scNumberFieldIncrement>
+                <input scNumberInput />
+                <button scNumberIncrement>
                   <svg siPlusIcon></svg>
                   <span
                     i18n="@@ecommerce.productDetail.increaseQuantity"
