@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
+  ScButton,
   ScHeader,
   ScHeaderMobileMenu,
   ScHeaderMobileMenuToggle,
@@ -41,6 +42,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
 @Component({
   selector: 'app-navbar',
   imports: [
+    ScButton,
     RouterLink,
     RouterLinkActive,
     ScHeader,
@@ -75,7 +77,8 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
       <!-- Desktop Navigation -->
       <nav scNavigationMenu aria-label="Main">
         <ul scNavigationMenuList>
-          <li scNavigationMenuItem>
+          <!-- Only where the bar has room for it: the logo leads home too. -->
+          <li scNavigationMenuItem [class]="homeItemClass">
             <a
               scNavigationMenuLink
               routerLink="/"
@@ -192,14 +195,26 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
 
       <!-- Actions -->
       <div class="ms-auto flex items-center gap-2">
+        <!-- Search: the box where the bar has room, else an icon button
+             (Ctrl/⌘ K opens it either way). -->
         <button
           scInputButton
-          class="hidden w-48 md:flex lg:w-64"
+          [class]="searchBoxClass"
           (click)="openCommandPalette()"
         >
           <svg siSearchIcon></svg>
           <span class="flex-1 text-start">Search...</span>
           <kbd scKbd>{{ format('Mod+K') }}</kbd>
+        </button>
+        <button
+          scButton
+          variant="ghost"
+          size="icon"
+          [class]="searchIconClass"
+          (click)="openCommandPalette()"
+        >
+          <svg siSearchIcon></svg>
+          <span class="sr-only">Search</span>
         </button>
         <a
           scLink
@@ -229,10 +244,11 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           <svg siGithubIcon></svg>
           <span class="sr-only">GitHub</span>
         </a>
+        <!-- Only where the bar has room for it: Documentation leads there too. -->
         <a
           scLink
           variant="button"
-          class="hidden md:inline-flex"
+          [class]="getStartedClass"
           routerLink="/docs/getting-started"
         >
           Get Started
@@ -337,14 +353,41 @@ export default class Navbar {
    * wider buttons and text, need 1440px; the others 1280px. The style is known at
    * start, from its cookie: the server draws the same bar.
    */
+  private readonly style = styleFrom(inject(ScStorage));
+
   private readonly componentsItemClass = [
     'vega',
     'maia',
     'luma',
     'sera',
-  ].includes(styleFrom(inject(ScStorage)))
+  ].includes(this.style)
     ? 'max-[90rem]:hidden'
     : 'max-xl:hidden';
+
+  /**
+   * Home and Get Started, in the bar only from the width where they fit —
+   * the logo leads home, Documentation to getting started (measured
+   * 2026-11-19): lyra and mira from 1024px, the others from 1280px.
+   */
+  private readonly roomy = ['lyra', 'mira'].includes(this.style);
+  private readonly homeItemClass = this.roomy
+    ? 'max-lg:hidden'
+    : 'max-xl:hidden';
+  /**
+   * Search: the box from the width where it fits, else an icon button (from
+   * md: below it, the bar has no search) — measured 2026-11-19: the box from
+   * 1024px, from 1280px in sera.
+   */
+  private readonly searchBoxClass =
+    this.style === 'sera' ? 'hidden w-64 xl:flex' : 'hidden w-64 lg:flex';
+  private readonly searchIconClass =
+    this.style === 'sera'
+      ? 'hidden md:inline-flex xl:hidden'
+      : 'hidden md:inline-flex lg:hidden';
+
+  private readonly getStartedClass = this.roomy
+    ? 'hidden lg:inline-flex'
+    : 'hidden xl:inline-flex';
 
   private readonly componentsService = inject(ComponentsService);
   private readonly featuredComponents = computed(() =>
