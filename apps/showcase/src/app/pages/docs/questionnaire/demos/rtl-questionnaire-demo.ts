@@ -2,13 +2,13 @@ import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
+  ScKbd,
   ScQuestionnaire,
   ScQuestionnaireActions,
   ScQuestionnaireChoice,
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireError,
   ScQuestionnaireItem,
@@ -23,6 +23,7 @@ import {
 @Component({
   selector: 'app-rtl-questionnaire-demo',
   imports: [
+    ScKbd,
     Dir,
     FormField,
     FormRoot,
@@ -32,7 +33,6 @@ import {
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireError,
     ScQuestionnaireItem,
@@ -57,7 +57,7 @@ import {
         <fieldset scQuestionnaireItem name="goal" [field]="survey.goal">
           <legend scQuestionnaireTitle>بماذا نبدأ؟</legend>
           <div scQuestionnaireChoices>
-            <label scQuestionnaireChoice>
+            <label scQuestionnaireChoice #testsChoice="scQuestionnaireChoice">
               <input
                 type="radio"
                 scQuestionnaireChoiceInput
@@ -66,9 +66,11 @@ import {
               />
               <span scQuestionnaireChoiceIndicator></span>
               <span scQuestionnaireChoiceLabel> إضافة الاختبارات </span>
-              <kbd scQuestionnaireChoiceShortcut></kbd>
+              @if (testsChoice.shortcut()) {
+                <kbd scKbd aria-hidden="true">{{ testsChoice.shortcut() }}</kbd>
+              }
             </label>
-            <label scQuestionnaireChoice>
+            <label scQuestionnaireChoice #docsChoice="scQuestionnaireChoice">
               <input
                 type="radio"
                 scQuestionnaireChoiceInput
@@ -77,7 +79,9 @@ import {
               />
               <span scQuestionnaireChoiceIndicator></span>
               <span scQuestionnaireChoiceLabel> كتابة التوثيق </span>
-              <kbd scQuestionnaireChoiceShortcut></kbd>
+              @if (docsChoice.shortcut()) {
+                <kbd scKbd aria-hidden="true">{{ docsChoice.shortcut() }}</kbd>
+              }
             </label>
           </div>
           <p scQuestionnaireError>اختر إجابة للمتابعة.</p>
@@ -85,7 +89,7 @@ import {
         <fieldset scQuestionnaireItem name="when" [field]="survey.when">
           <legend scQuestionnaireTitle>متى؟</legend>
           <div scQuestionnaireChoices>
-            <label scQuestionnaireChoice>
+            <label scQuestionnaireChoice #weekChoice="scQuestionnaireChoice">
               <input
                 type="radio"
                 scQuestionnaireChoiceInput
@@ -94,9 +98,11 @@ import {
               />
               <span scQuestionnaireChoiceIndicator></span>
               <span scQuestionnaireChoiceLabel> هذا الأسبوع </span>
-              <kbd scQuestionnaireChoiceShortcut></kbd>
+              @if (weekChoice.shortcut()) {
+                <kbd scKbd aria-hidden="true">{{ weekChoice.shortcut() }}</kbd>
+              }
             </label>
-            <label scQuestionnaireChoice>
+            <label scQuestionnaireChoice #monthChoice="scQuestionnaireChoice">
               <input
                 type="radio"
                 scQuestionnaireChoiceInput
@@ -105,7 +111,9 @@ import {
               />
               <span scQuestionnaireChoiceIndicator></span>
               <span scQuestionnaireChoiceLabel> هذا الشهر </span>
-              <kbd scQuestionnaireChoiceShortcut></kbd>
+              @if (monthChoice.shortcut()) {
+                <kbd scKbd aria-hidden="true">{{ monthChoice.shortcut() }}</kbd>
+              }
             </label>
           </div>
           <p scQuestionnaireError>اختر إجابة للمتابعة.</p>

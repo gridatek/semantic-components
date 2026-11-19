@@ -37,7 +37,7 @@ test('Usage: one at a time; checked before moving on; an optional one skipped', 
   await expect(page.getByRole('button', { name: 'Previous' })).toBeHidden();
   await expect(page.getByRole('button', { name: 'Skip' })).toBeHidden();
   await expect(
-    page.locator('[data-slot=questionnaire-choice-shortcut]:visible'),
+    page.locator('[data-slot=questionnaire-choice] [data-slot=kbd]:visible'),
   ).toHaveText(['A', 'B', 'C']);
 
   // Unanswered: the error, and the first answer focused.
@@ -239,7 +239,7 @@ test('Multiple Selection: checkboxes, skipped, a text answer', async ({
 test('Shortcuts: a letter picks a choice, Enter confirms', async ({ page }) => {
   await page.goto(demo('shortcuts'));
   await expect(
-    page.locator('[data-slot=questionnaire-choice-shortcut]'),
+    page.locator('[data-slot=questionnaire-choice] [data-slot=kbd]'),
   ).toHaveText(['A', 'B', 'C']);
   const archive = page.getByRole('radio', { name: /Archive it/ });
   await expect(archive).toHaveAttribute('aria-keyshortcuts', 'B');

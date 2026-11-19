@@ -35,7 +35,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireError,
   ScQuestionnaireItem,
@@ -60,7 +59,6 @@ import {
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireError,
     ScQuestionnaireItem,
@@ -89,7 +87,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> A short summary </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -100,7 +97,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> A complete answer </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>{{ survey.detail().errors()[0]?.message }}</p>
@@ -117,7 +113,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> The team </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -128,7 +123,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> The public </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>{{ survey.audience().errors()[0]?.message }}</p>

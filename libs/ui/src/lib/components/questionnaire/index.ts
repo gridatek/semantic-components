@@ -5,7 +5,6 @@ export { ScQuestionnaireChoiceDescription } from './questionnaire-choice-descrip
 export { ScQuestionnaireChoiceIndicator } from './questionnaire-choice-indicator';
 export { ScQuestionnaireChoiceInput } from './questionnaire-choice-input';
 export { ScQuestionnaireChoiceLabel } from './questionnaire-choice-label';
-export { ScQuestionnaireChoiceShortcut } from './questionnaire-choice-shortcut';
 export { ScQuestionnaireChoices } from './questionnaire-choices';
 export { ScQuestionnaireDescription } from './questionnaire-description';
 export { ScQuestionnaireError } from './questionnaire-error';

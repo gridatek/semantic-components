@@ -9,7 +9,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireDescription,
   ScQuestionnaireItem,
@@ -35,7 +34,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireDescription,
     ScQuestionnaireItem,
@@ -63,7 +61,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             />
             <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
             <span scQuestionnaireChoiceLabel> The docs </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -73,7 +70,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             />
             <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
             <span scQuestionnaireChoiceLabel> The code </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -83,7 +79,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             />
             <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
             <span scQuestionnaireChoiceLabel> The open issues </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
       </fieldset>

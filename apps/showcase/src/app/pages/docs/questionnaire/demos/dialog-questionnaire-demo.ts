@@ -19,7 +19,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireError,
   ScQuestionnaireItem,
@@ -54,7 +53,6 @@ import {
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireError,
     ScQuestionnaireItem,
@@ -96,7 +94,6 @@ import {
                   />
                   <span scQuestionnaireChoiceIndicator></span>
                   <span scQuestionnaireChoiceLabel> Only this folder </span>
-                  <kbd scQuestionnaireChoiceShortcut></kbd>
                 </label>
                 <label scQuestionnaireChoice>
                   <input
@@ -107,7 +104,6 @@ import {
                   />
                   <span scQuestionnaireChoiceIndicator></span>
                   <span scQuestionnaireChoiceLabel> The whole workspace </span>
-                  <kbd scQuestionnaireChoiceShortcut></kbd>
                 </label>
               </div>
               <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -126,7 +122,6 @@ import {
                   />
                   <span scQuestionnaireChoiceIndicator></span>
                   <span scQuestionnaireChoiceLabel> A quick check </span>
-                  <kbd scQuestionnaireChoiceShortcut></kbd>
                 </label>
                 <label scQuestionnaireChoice>
                   <input
@@ -137,7 +132,6 @@ import {
                   />
                   <span scQuestionnaireChoiceIndicator></span>
                   <span scQuestionnaireChoiceLabel> The full test suite </span>
-                  <kbd scQuestionnaireChoiceShortcut></kbd>
                 </label>
               </div>
               <p scQuestionnaireError>Choose an answer to continue.</p>

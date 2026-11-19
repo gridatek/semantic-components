@@ -9,7 +9,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireDescription,
   ScQuestionnaireError,
@@ -35,7 +34,6 @@ import {
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireDescription,
     ScQuestionnaireError,
@@ -70,7 +68,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Read files only </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -83,7 +80,6 @@ import {
             <span scQuestionnaireChoiceLabel>
               Edit files in the workspace
             </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -104,7 +100,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Tests </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -117,7 +112,6 @@ import {
             <span scQuestionnaireChoiceLabel>
               Tests, types, and visual QA
             </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>

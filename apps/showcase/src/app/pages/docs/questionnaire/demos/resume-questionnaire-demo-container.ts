@@ -37,7 +37,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireDescription,
   ScQuestionnaireError,
@@ -74,7 +73,6 @@ const saved = () => ({
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireDescription,
     ScQuestionnaireError,
@@ -112,7 +110,6 @@ const saved = () => ({
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Incremental migration </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -123,7 +120,6 @@ const saved = () => ({
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Single cutover </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -148,7 +144,6 @@ const saved = () => ({
             />
             <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
             <span scQuestionnaireChoiceLabel> Run migration tests </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -158,7 +153,6 @@ const saved = () => ({
             />
             <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
             <span scQuestionnaireChoiceLabel> Run the typecheck </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -170,7 +164,6 @@ const saved = () => ({
             <span scQuestionnaireChoiceLabel>
               Perform a manual smoke test
             </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>

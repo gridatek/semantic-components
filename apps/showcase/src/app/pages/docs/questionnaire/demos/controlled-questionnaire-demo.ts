@@ -9,7 +9,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireError,
   ScQuestionnaireItem,
@@ -34,7 +33,6 @@ import {
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireError,
     ScQuestionnaireItem,
@@ -69,7 +67,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Only the target component </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -82,7 +79,6 @@ import {
             <span scQuestionnaireChoiceLabel>
               Component and related tests
             </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -93,7 +89,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> The complete feature area </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -112,7 +107,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Targeted tests </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -125,7 +119,6 @@ import {
             <span scQuestionnaireChoiceLabel>
               Package tests and typecheck
             </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -138,7 +131,6 @@ import {
             <span scQuestionnaireChoiceLabel>
               Full workspace verification
             </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -157,7 +149,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Concise summary </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -168,7 +159,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Summary with changed files </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -179,7 +169,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Detailed handoff </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>

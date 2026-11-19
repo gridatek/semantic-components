@@ -19,8 +19,6 @@ export const questionnaire: ScQuestionnaireStyles = {
   indicatorDot:
     'hidden size-2 rounded-full bg-primary-foreground group-has-[>input:checked]/questionnaire-choice:block dark:size-2.5',
   choiceLabel: 'flex min-w-0 flex-1 flex-col gap-1 leading-snug',
-  shortcut:
-    'pointer-events-none ms-auto size-5 shrink-0 translate-y-[--spacing(0.45)] items-center justify-center rounded-full border border-primary/10 bg-background/80 font-mono text-[0.625rem] leading-none font-medium text-muted-foreground group-has-data-[slot=questionnaire-choice-description]/questionnaire-choice:translate-y-0.5 inline-flex',
   error: 'mt-2 text-sm text-destructive',
   actions:
     'grid min-h-11 w-full grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 sm:min-h-9',

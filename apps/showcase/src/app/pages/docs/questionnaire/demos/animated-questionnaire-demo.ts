@@ -9,7 +9,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireError,
   ScQuestionnaireItem,
@@ -34,7 +33,6 @@ import {
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireError,
     ScQuestionnaireItem,
@@ -66,7 +64,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Fix a bug </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -77,7 +74,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Build a feature </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -99,7 +95,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Tests only </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -110,7 +105,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Tests and manual QA </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -134,7 +128,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> A summary </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -145,7 +138,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> A pull request </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>

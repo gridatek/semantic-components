@@ -9,7 +9,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireDescription,
   ScQuestionnaireError,
@@ -35,7 +34,6 @@ import {
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireDescription,
     ScQuestionnaireError,
@@ -66,7 +64,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> On this machine </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -77,7 +74,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> In the cloud </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -101,7 +97,6 @@ import {
               />
               <span scQuestionnaireChoiceIndicator></span>
               <span scQuestionnaireChoiceLabel> Staging </span>
-              <kbd scQuestionnaireChoiceShortcut></kbd>
             </label>
             <label scQuestionnaireChoice>
               <input
@@ -112,7 +107,6 @@ import {
               />
               <span scQuestionnaireChoiceIndicator></span>
               <span scQuestionnaireChoiceLabel> Production </span>
-              <kbd scQuestionnaireChoiceShortcut></kbd>
             </label>
           </div>
           <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -132,7 +126,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Before every change </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
           <label scQuestionnaireChoice>
             <input
@@ -143,7 +136,6 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Before risky changes only </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>

@@ -9,6 +9,7 @@ import { ScQuestionnaireItem } from './questionnaire-item';
  */
 @Directive({
   selector: 'label[scQuestionnaireChoice]',
+  exportAs: 'scQuestionnaireChoice',
   host: {
     'data-slot': 'questionnaire-choice',
     '[attr.data-type]': 'type()',
@@ -23,11 +24,21 @@ export class ScQuestionnaireChoice {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  /** Its input: radio or checkbox, and its shortcut — set by the input. */
+  /**
+   * Its input: radio or checkbox, and its key (A, B… or 1, 2…, from the
+   * questionnaire's `shortcuts`; null without) — set by the input. Show the
+   * key yourself, in your words: `<kbd scKbd>{{ choice.shortcut() }}</kbd>`.
+   */
   readonly type = signal<'radio' | 'checkbox' | null>(null);
   readonly shortcut = signal<string | null>(null);
 
   private readonly class = computed(() =>
-    cn(this.styles.choice, this.classInput()),
+    cn(
+      this.styles.choice,
+      // A key you show in it (scKbd): at its end, on its first line — lower
+      // with a description.
+      '*:data-[slot=kbd]:ms-auto *:data-[slot=kbd]:shrink-0 *:data-[slot=kbd]:translate-y-[--spacing(0.45)] has-data-[slot=questionnaire-choice-description]:*:data-[slot=kbd]:translate-y-0.5',
+      this.classInput(),
+    ),
   );
 }

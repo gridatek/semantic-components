@@ -22,6 +22,7 @@ export class ShortcutsQuestionnaireDemoContainer {
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
+  ScKbd,
   ScFrame,
   ScQuestionnaire,
   ScQuestionnaireActions,
@@ -29,7 +30,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireDescription,
   ScQuestionnaireError,
@@ -44,6 +44,7 @@ import {
 @Component({
   selector: 'app-shortcuts-questionnaire-demo',
   imports: [
+    ScKbd,
     ScFrame,
     JsonPipe,
     FormField,
@@ -54,7 +55,6 @@ import {
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireDescription,
     ScQuestionnaireError,
@@ -71,7 +71,7 @@ import {
         <legend scQuestionnaireTitle>What should happen to the branch?</legend>
         <p scQuestionnaireDescription>Press a letter to choose, then Enter.</p>
         <div scQuestionnaireChoices>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #keepChoice="scQuestionnaireChoice">
             <input
               type="radio"
               scQuestionnaireChoiceInput
@@ -80,9 +80,11 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Keep it </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (keepChoice.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ keepChoice.shortcut() }}</kbd>
+            }
           </label>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #archiveChoice="scQuestionnaireChoice">
             <input
               type="radio"
               scQuestionnaireChoiceInput
@@ -91,9 +93,11 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Archive it </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (archiveChoice.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ archiveChoice.shortcut() }}</kbd>
+            }
           </label>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #deleteChoice="scQuestionnaireChoice">
             <input
               type="radio"
               scQuestionnaireChoiceInput
@@ -102,7 +106,9 @@ import {
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Delete it </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (deleteChoice.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ deleteChoice.shortcut() }}</kbd>
+            }
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>

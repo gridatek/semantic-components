@@ -22,6 +22,7 @@ export class CardQuestionnaireDemoContainer {
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
+  ScKbd,
   ScCard,
   ScCardAction,
   ScCardBody,
@@ -36,7 +37,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireError,
   ScQuestionnaireItem,
@@ -50,6 +50,7 @@ import {
 @Component({
   selector: 'app-card-questionnaire-demo',
   imports: [
+    ScKbd,
     ScFrame,
     JsonPipe,
     FormField,
@@ -67,7 +68,6 @@ import {
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireError,
     ScQuestionnaireItem,
@@ -103,7 +103,7 @@ import {
           </div>
           <div scCardBody>
             <div scQuestionnaireChoices>
-              <label scQuestionnaireChoice>
+              <label scQuestionnaireChoice #triageChoice="scQuestionnaireChoice">
                 <input
                   type="radio"
                   scQuestionnaireChoiceInput
@@ -112,9 +112,11 @@ import {
                 />
                 <span scQuestionnaireChoiceIndicator></span>
                 <span scQuestionnaireChoiceLabel> Triage new issues </span>
-                <kbd scQuestionnaireChoiceShortcut></kbd>
+                @if (triageChoice.shortcut()) {
+                  <kbd scKbd aria-hidden="true">{{ triageChoice.shortcut() }}</kbd>
+                }
               </label>
-              <label scQuestionnaireChoice>
+              <label scQuestionnaireChoice #docsChoice="scQuestionnaireChoice">
                 <input
                   type="radio"
                   scQuestionnaireChoiceInput
@@ -123,9 +125,11 @@ import {
                 />
                 <span scQuestionnaireChoiceIndicator></span>
                 <span scQuestionnaireChoiceLabel> Update the docs </span>
-                <kbd scQuestionnaireChoiceShortcut></kbd>
+                @if (docsChoice.shortcut()) {
+                  <kbd scKbd aria-hidden="true">{{ docsChoice.shortcut() }}</kbd>
+                }
               </label>
-              <label scQuestionnaireChoice>
+              <label scQuestionnaireChoice #depsChoice="scQuestionnaireChoice">
                 <input
                   type="radio"
                   scQuestionnaireChoiceInput
@@ -134,7 +138,9 @@ import {
                 />
                 <span scQuestionnaireChoiceIndicator></span>
                 <span scQuestionnaireChoiceLabel> Upgrade dependencies </span>
-                <kbd scQuestionnaireChoiceShortcut></kbd>
+                @if (depsChoice.shortcut()) {
+                  <kbd scKbd aria-hidden="true">{{ depsChoice.shortcut() }}</kbd>
+                }
               </label>
             </div>
             <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -159,7 +165,7 @@ import {
           </div>
           <div scCardBody>
             <div scQuestionnaireChoices>
-              <label scQuestionnaireChoice>
+              <label scQuestionnaireChoice #summaryChoice="scQuestionnaireChoice">
                 <input
                   type="radio"
                   scQuestionnaireChoiceInput
@@ -168,9 +174,11 @@ import {
                 />
                 <span scQuestionnaireChoiceIndicator></span>
                 <span scQuestionnaireChoiceLabel> A summary </span>
-                <kbd scQuestionnaireChoiceShortcut></kbd>
+                @if (summaryChoice.shortcut()) {
+                  <kbd scKbd aria-hidden="true">{{ summaryChoice.shortcut() }}</kbd>
+                }
               </label>
-              <label scQuestionnaireChoice>
+              <label scQuestionnaireChoice #filesChoice="scQuestionnaireChoice">
                 <input
                   type="radio"
                   scQuestionnaireChoiceInput
@@ -181,7 +189,9 @@ import {
                 <span scQuestionnaireChoiceLabel>
                   A summary and the changed files
                 </span>
-                <kbd scQuestionnaireChoiceShortcut></kbd>
+                @if (filesChoice.shortcut()) {
+                  <kbd scKbd aria-hidden="true">{{ filesChoice.shortcut() }}</kbd>
+                }
               </label>
             </div>
             <p scQuestionnaireError>Choose an answer to continue.</p>

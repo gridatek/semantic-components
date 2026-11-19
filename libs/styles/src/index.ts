@@ -256,7 +256,6 @@ export interface ScQuestionnaireStyles {
   /** A chosen radio's dot. */
   indicatorDot: string;
   choiceLabel: string;
-  shortcut: string;
   error: string;
   actions: string;
 }

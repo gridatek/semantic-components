@@ -18,6 +18,7 @@ export class QuestionnaireUsageDemoContainer {
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
+  ScKbd,
   ScFrame,
   ScQuestionnaire,
   ScQuestionnaireActions,
@@ -26,7 +27,6 @@ import {
   ScQuestionnaireChoiceIndicator,
   ScQuestionnaireChoiceInput,
   ScQuestionnaireChoiceLabel,
-  ScQuestionnaireChoiceShortcut,
   ScQuestionnaireChoices,
   ScQuestionnaireDescription,
   ScQuestionnaireError,
@@ -43,6 +43,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-questionnaire-usage-demo',
   imports: [
+    ScKbd,
     ScFrame,
     JsonPipe,
     FormField,
@@ -54,7 +55,6 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScQuestionnaireChoiceIndicator,
     ScQuestionnaireChoiceInput,
     ScQuestionnaireChoiceLabel,
-    ScQuestionnaireChoiceShortcut,
     ScQuestionnaireChoices,
     ScQuestionnaireDescription,
     ScQuestionnaireError,
@@ -83,7 +83,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
           Choose the direction that matters most.
         </p>
         <div scQuestionnaireChoices>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #toolCallsChoice="scQuestionnaireChoice">
             <input
               type="radio"
               scQuestionnaireChoiceInput
@@ -97,9 +97,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
                 >Show what the agent ran and what came back.</span
               >
             </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (toolCallsChoice.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ toolCallsChoice.shortcut() }}</kbd>
+            }
           </label>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #approvalsChoice="scQuestionnaireChoice">
             <input
               type="radio"
               scQuestionnaireChoiceInput
@@ -113,9 +115,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
                 >Ask before sensitive or destructive actions.</span
               >
             </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (approvalsChoice.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ approvalsChoice.shortcut() }}</kbd>
+            }
           </label>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #handoffsChoice="scQuestionnaireChoice">
             <input
               type="radio"
               scQuestionnaireChoiceInput
@@ -129,7 +133,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
                 >Make delegated work and results easier to follow.</span
               >
             </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (handoffsChoice.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ handoffsChoice.shortcut() }}</kbd>
+            }
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>
@@ -142,7 +148,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
           Select all that apply, or skip this question.
         </p>
         <div scQuestionnaireChoices>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #choice1="scQuestionnaireChoice">
             <input
               type="checkbox"
               scQuestionnaireChoiceInput
@@ -150,9 +156,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             />
             <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
             <span scQuestionnaireChoiceLabel> Progress </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (choice1.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ choice1.shortcut() }}</kbd>
+            }
           </label>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #choice2="scQuestionnaireChoice">
             <input
               type="checkbox"
               scQuestionnaireChoiceInput
@@ -160,9 +168,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             />
             <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
             <span scQuestionnaireChoiceLabel> Decisions </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (choice2.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ choice2.shortcut() }}</kbd>
+            }
           </label>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #choice3="scQuestionnaireChoice">
             <input
               type="checkbox"
               scQuestionnaireChoiceInput
@@ -170,9 +180,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             />
             <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
             <span scQuestionnaireChoiceLabel> Risks </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (choice3.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ choice3.shortcut() }}</kbd>
+            }
           </label>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #choice4="scQuestionnaireChoice">
             <input
               type="checkbox"
               scQuestionnaireChoiceInput
@@ -180,7 +192,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             />
             <span scQuestionnaireChoiceIndicator><svg siCheckIcon></svg></span>
             <span scQuestionnaireChoiceLabel> Next step </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (choice4.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ choice4.shortcut() }}</kbd>
+            }
           </label>
         </div>
       </fieldset>
@@ -190,7 +204,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
           Choose when the agent should begin the work.
         </p>
         <div scQuestionnaireChoices>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #nowChoice="scQuestionnaireChoice">
             <input
               type="radio"
               scQuestionnaireChoiceInput
@@ -199,9 +213,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Start now </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (nowChoice.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ nowChoice.shortcut() }}</kbd>
+            }
           </label>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #nextCycleChoice="scQuestionnaireChoice">
             <input
               type="radio"
               scQuestionnaireChoiceInput
@@ -210,9 +226,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Next development cycle </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (nextCycleChoice.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ nextCycleChoice.shortcut() }}</kbd>
+            }
           </label>
-          <label scQuestionnaireChoice>
+          <label scQuestionnaireChoice #backlogChoice="scQuestionnaireChoice">
             <input
               type="radio"
               scQuestionnaireChoiceInput
@@ -221,7 +239,9 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             />
             <span scQuestionnaireChoiceIndicator></span>
             <span scQuestionnaireChoiceLabel> Add it to the backlog </span>
-            <kbd scQuestionnaireChoiceShortcut></kbd>
+            @if (backlogChoice.shortcut()) {
+              <kbd scKbd aria-hidden="true">{{ backlogChoice.shortcut() }}</kbd>
+            }
           </label>
         </div>
         <p scQuestionnaireError>Choose an answer to continue.</p>

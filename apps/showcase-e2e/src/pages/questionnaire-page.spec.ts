@@ -26,7 +26,6 @@ test.describe('Questionnaire Page', () => {
       'ScQuestionnaireChoices, ScQuestionnaireChoice',
       'ScQuestionnaireChoiceInput',
       'ScQuestionnaireChoiceIndicator, ScQuestionnaireChoiceLabel, ScQuestionnaireChoiceDescription',
-      'ScQuestionnaireChoiceShortcut',
       'ScQuestionnaireError',
       'ScQuestionnaireActions',
       'ScQuestionnairePrevious, ScQuestionnaireSkip, ScQuestionnaireNext, ScQuestionnaireSubmit',

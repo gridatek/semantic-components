@@ -17,14 +17,16 @@ Questions one at a time, as [shadcn/ui's Questionnaire](https://ui.shadcn.com/do
     <legend scQuestionnaireTitle>What should we work on first?</legend>
     <p scQuestionnaireDescription>Pick the one that matters most this week.</p>
     <div scQuestionnaireChoices>
-      <label scQuestionnaireChoice>
+      <label scQuestionnaireChoice #tests="scQuestionnaireChoice">
         <input type="radio" scQuestionnaireChoiceInput value="tests" [formField]="survey.goal" />
         <span scQuestionnaireChoiceIndicator></span>
         <span scQuestionnaireChoiceLabel>
           Add tests
           <span scQuestionnaireChoiceDescription>Cover the parts that broke last month.</span>
         </span>
-        <kbd scQuestionnaireChoiceShortcut></kbd>
+        @if (tests.shortcut()) {
+        <kbd scKbd aria-hidden="true">{{ tests.shortcut() }}</kbd>
+        }
       </label>
       …
     </div>
@@ -69,7 +71,6 @@ Several answers: checkboxes, each bound to a boolean (`survey.sources.docs`), th
 | `span[scQuestionnaireChoiceIndicator]`                | A radio's dot; a checkbox's tick — your icon inside                                                                                                                                                                        |
 | `span[scQuestionnaireChoiceLabel]`                    | The choice's text                                                                                                                                                                                                          |
 | `span[scQuestionnaireChoiceDescription]`              | More about it, under its text                                                                                                                                                                                              |
-| `kbd[scQuestionnaireChoiceShortcut]`                  | Its key, written for you; hidden without `shortcuts`                                                                                                                                                                       |
 | `p[scQuestionnaireError]`                             | Your words: shown and announced once the question is tried wrong                                                                                                                                                           |
 | `div[scQuestionnaireActions]`                         | The buttons' row                                                                                                                                                                                                           |
 | `button[scQuestionnairePrevious\|Skip\|Next\|Submit]` | `variant`, `size` (the style's button). Each shows when it applies — Previous from the second question, Skip on an optional one, Next before the last, Submit on it                                                        |
@@ -78,7 +79,7 @@ Several answers: checkboxes, each bound to a boolean (`survey.sources.docs`), th
 
 - **Enter** on a chosen answer (or a filled text field) moves on — or submits on the last question; **Ctrl/⌘+Enter** from anywhere in the question.
 - **↑/↓** between the answers (radios move on their own); **←/→** outside them: back, and forward once answered — mirrored in right-to-left.
-- **Letters or numbers** (with `shortcuts`) pick a choice, outside text fields; its input says so (`aria-keyshortcuts`).
+- **Letters or numbers** (with `shortcuts`) pick a choice, outside text fields; its input says so (`aria-keyshortcuts`). The key is yours to show, in your words (`⌘A`, `Ctrl+1`…): the choice gives it (`#choice="scQuestionnaireChoice"`, `choice.shortcut()`, null without `shortcuts`), you write it in the library's Kbd, `<kbd scKbd aria-hidden="true">`; the choice places it at its end.
 - Each question is a named group (`fieldset`, `legend`), its description and — when shown — its error read with it (`aria-describedby`); invalid, it and its choices say so (`aria-invalid`).
 - Moving on focuses the new question; a wrong answer, the answer.
 
