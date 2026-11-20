@@ -127,6 +127,10 @@ for (const style of STYLES) {
       await test.step(`${width}px: the links`, async () => {
         await page.setViewportSize({ width, height: 600 });
         await page.goto('/');
+        // The page drawn first: before it, the page is short — no scrollbar
+        // to measure (the client-rendered build draws after `load`), and
+        // the one that comes with the content then takes 10 px off.
+        await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
         // WebKit's media queries measure without the scrollbar (768 wide is
         // 758 to them, below md): the width the browser sees as this one.
         const scrollbar = await page.evaluate(() =>

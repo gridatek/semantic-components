@@ -79,6 +79,12 @@ test('Variable heights: measured, never overlapping; the place kept', async ({
   await list(page).evaluate((el) => {
     el.scrollTop = 60_000;
   });
+  // Rendered there — not the first rows still in the DOM, scrolled out of
+  // sight (they count as rows too: under load, WebKit renders the new ones
+  // late, and the row "being read" below was one 60 000 px above).
+  await expect
+    .poll(async () => Math.min(...(await boxes(page)).map((b) => b.index)))
+    .toBeGreaterThan(100);
   await expect.poll(async () => (await boxes(page)).length).toBeGreaterThan(3);
   // In order, each below the last (8 px apart).
   await expect
