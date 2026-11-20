@@ -1,37 +1,37 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScTimelineNext,
-  ScTimelineNextConnector,
-  ScTimelineNextDescription,
-  ScTimelineNextItem,
-  ScTimelineNextMarker,
-  ScTimelineNextTime,
-  ScTimelineNextTitle,
+  ScTimeline,
+  ScTimelineConnector,
+  ScTimelineDescription,
+  ScTimelineItem,
+  ScTimelineMarker,
+  ScTimelineTime,
+  ScTimelineTitle,
 } from '@semantic-components/ui';
 
 /** An activity feed: Tab into it, then ↑ and ↓ between events; Home and End to the first and last. */
 @Component({
-  selector: 'app-timeline-next-usage-demo',
+  selector: 'app-timeline-usage-demo',
   imports: [
-    ScTimelineNext,
-    ScTimelineNextItem,
-    ScTimelineNextMarker,
-    ScTimelineNextConnector,
-    ScTimelineNextTitle,
-    ScTimelineNextTime,
-    ScTimelineNextDescription,
+    ScTimeline,
+    ScTimelineItem,
+    ScTimelineMarker,
+    ScTimelineConnector,
+    ScTimelineTitle,
+    ScTimelineTime,
+    ScTimelineDescription,
   ],
   template: `
-    <div scTimelineNext aria-label="Activity" class="w-full max-w-md">
+    <div scTimeline aria-label="Activity" class="w-full max-w-md">
       @for (event of events; track event.title) {
-        <div scTimelineNextItem>
-          <span scTimelineNextMarker></span>
-          <span scTimelineNextConnector></span>
-          <h3 scTimelineNextTitle>{{ event.title }}</h3>
-          <time scTimelineNextTime [datetime]="event.datetime">
+        <div scTimelineItem>
+          <span scTimelineMarker></span>
+          <span scTimelineConnector></span>
+          <h3 scTimelineTitle>{{ event.title }}</h3>
+          <time scTimelineTime [datetime]="event.datetime">
             {{ event.time }}
           </time>
-          <p scTimelineNextDescription>{{ event.description }}</p>
+          <p scTimelineDescription>{{ event.description }}</p>
         </div>
       }
     </div>
@@ -39,7 +39,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TimelineNextUsageDemo {
+export class TimelineUsageDemo {
   private readonly events = [
     {
       title: 'Deployed to production',

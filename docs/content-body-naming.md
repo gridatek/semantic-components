@@ -66,7 +66,6 @@ Not the whole content of X: the main section, beside another part. Check each on
 - [ ] `ScMarkerContent` (`span`): the text, beside `scMarkerIcon`.
 - [ ] `ScMessageContent` (`div`): header and bubbles, beside `scMessageAvatar`.
 - [ ] `ScNotificationContent` (`div`): title, description, time, beside its icon.
-- [ ] `ScTimelineContent` (`[scTimelineContent]`): an event's text, beside `scTimelineMarker`.
 
 ## For each rename
 

@@ -1,73 +1,73 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { StatusTimelineNextDemo } from './status-timeline-next-demo';
+import { StatusTimelineDemo } from './status-timeline-demo';
 
 @Component({
-  selector: 'app-status-timeline-next-demo-container',
-  imports: [DemoContainer, StatusTimelineNextDemo],
+  selector: 'app-status-timeline-demo-container',
+  imports: [DemoContainer, StatusTimelineDemo],
   template: `
     <app-demo-container
       title="Status"
       [code]="code"
-      demoUrl="/demos/timeline-next/status-timeline-next-demo"
+      demoUrl="/demos/timeline/status-timeline-demo"
     >
-      <app-status-timeline-next-demo />
+      <app-status-timeline-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class StatusTimelineNextDemoContainer {
+export class StatusTimelineDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
-  ScTimelineNext,
-  ScTimelineNextConnector,
-  ScTimelineNextDescription,
-  ScTimelineNextItem,
-  ScTimelineNextMarker,
-  ScTimelineNextTime,
-  ScTimelineNextTitle,
+  ScTimeline,
+  ScTimelineConnector,
+  ScTimelineDescription,
+  ScTimelineItem,
+  ScTimelineMarker,
+  ScTimelineTime,
+  ScTimelineTitle,
 } from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 /** An order’s steps: complete, current, upcoming — said in words too, not only by the markers. Focus starts on the current step; the button moves it there. */
 @Component({
-  selector: 'app-status-timeline-next-demo',
+  selector: 'app-status-timeline-demo',
   imports: [
     ScButton,
-    ScTimelineNext,
-    ScTimelineNextItem,
-    ScTimelineNextMarker,
-    ScTimelineNextConnector,
-    ScTimelineNextTitle,
-    ScTimelineNextTime,
-    ScTimelineNextDescription,
+    ScTimeline,
+    ScTimelineItem,
+    ScTimelineMarker,
+    ScTimelineConnector,
+    ScTimelineTitle,
+    ScTimelineTime,
+    ScTimelineDescription,
     SiCheckIcon,
   ],
   template: \`
     <div class="flex w-full max-w-md flex-col gap-4">
       <div
-        scTimelineNext
-        #timeline="scTimelineNext"
+        scTimeline
+        #timeline="scTimeline"
         aria-label="Order status"
         class="[--sc-timeline-marker:1.25rem]"
       >
         @for (step of steps; track step.value) {
-          <div scTimelineNextItem [value]="step.value" [status]="step.status">
-            <span scTimelineNextMarker>
+          <div scTimelineItem [value]="step.value" [status]="step.status">
+            <span scTimelineMarker>
               @if (step.status === 'complete') {
                 <svg siCheckIcon></svg>
               }
             </span>
-            <span scTimelineNextConnector></span>
-            <h3 scTimelineNextTitle>{{ step.title }}</h3>
+            <span scTimelineConnector></span>
+            <h3 scTimelineTitle>{{ step.title }}</h3>
             <time
-              scTimelineNextTime
+              scTimelineTime
               [value]="step.date"
               [options]="{ month: 'short', day: 'numeric' }"
             ></time>
-            <p scTimelineNextDescription>{{ step.state }}</p>
+            <p scTimelineDescription>{{ step.state }}</p>
           </div>
         }
       </div>
@@ -84,7 +84,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class StatusTimelineNextDemo {
+export class StatusTimelineDemo {
   private readonly steps = [
     {
       value: 'placed',

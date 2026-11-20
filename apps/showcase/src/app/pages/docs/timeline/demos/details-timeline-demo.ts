@@ -4,40 +4,40 @@ import {
   ScCollapsible,
   ScCollapsiblePanel,
   ScCollapsibleTrigger,
-  ScTimelineNext,
-  ScTimelineNextConnector,
-  ScTimelineNextItem,
-  ScTimelineNextMarker,
-  ScTimelineNextTime,
-  ScTimelineNextTitle,
+  ScTimeline,
+  ScTimelineConnector,
+  ScTimelineItem,
+  ScTimelineMarker,
+  ScTimelineTime,
+  ScTimelineTitle,
 } from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 /** A changelog, each release with a Collapsible of its changes: Tab reaches the trigger after the event, the arrows still move between events. */
 @Component({
-  selector: 'app-details-timeline-next-demo',
+  selector: 'app-details-timeline-demo',
   imports: [
     ScButton,
     ScCollapsible,
     ScCollapsibleTrigger,
     ScCollapsiblePanel,
-    ScTimelineNext,
-    ScTimelineNextItem,
-    ScTimelineNextMarker,
-    ScTimelineNextConnector,
-    ScTimelineNextTitle,
-    ScTimelineNextTime,
+    ScTimeline,
+    ScTimelineItem,
+    ScTimelineMarker,
+    ScTimelineConnector,
+    ScTimelineTitle,
+    ScTimelineTime,
     SiChevronDownIcon,
   ],
   template: `
-    <div scTimelineNext aria-label="Changelog" class="w-full max-w-md">
+    <div scTimeline aria-label="Changelog" class="w-full max-w-md">
       @for (release of releases; track release.title) {
-        <div scTimelineNextItem>
-          <span scTimelineNextMarker></span>
-          <span scTimelineNextConnector></span>
-          <h3 scTimelineNextTitle>{{ release.title }}</h3>
+        <div scTimelineItem>
+          <span scTimelineMarker></span>
+          <span scTimelineConnector></span>
+          <h3 scTimelineTitle>{{ release.title }}</h3>
           <time
-            scTimelineNextTime
+            scTimelineTime
             [value]="release.date"
             [options]="{ month: 'long', day: 'numeric' }"
           ></time>
@@ -70,7 +70,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DetailsTimelineNextDemo {
+export class DetailsTimelineDemo {
   private readonly releases = [
     {
       title: 'Version 2.4',

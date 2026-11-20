@@ -1,34 +1,38 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { ScTimeline } from './timeline';
+import { injectStyle } from '../../config/style';
+import { ScTimelineItem } from './timeline-item';
 
-/** Across the line from the content — a date facing its event. Optional. */
+/**
+ * Across the line from the event's content — a date, a year, a label. In a
+ * vertical timeline, on the other side of the line (the line stays straight,
+ * whatever its width); across, above the content.
+ */
 @Directive({
   selector: '[scTimelineOpposite]',
   host: {
-    'data-slot': 'timeline-opposite',
     '[class]': 'class()',
   },
 })
 export class ScTimelineOpposite {
-  private readonly timeline = inject(ScTimeline);
+  private readonly item = inject(ScTimelineItem);
+  private readonly styles = injectStyle().timeline;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() => {
-    if (this.timeline.orientation() === 'horizontal') {
-      // Above the marker.
-      return cn('text-muted-foreground order-first text-sm', this.classInput());
-    }
-    const side = {
-      start: 'col-start-1 pe-4 text-end',
-      end: 'col-start-3 ps-4',
-      alternate:
-        'col-start-1 pe-4 text-end group-even/item:col-start-3 group-even/item:pe-0 group-even/item:ps-4 group-even/item:text-start',
-    }[this.timeline.alignment()];
+    const alignment = this.item.timeline.alignment();
     return cn(
-      'text-muted-foreground row-start-1 pt-0.5 text-sm',
-      side,
+      'block',
+      this.styles.time,
+      this.item.vertical()
+        ? cn(
+            'row-start-1! leading-(--sc-timeline-line)',
+            this.item.side() === 'after'
+              ? cn('col-start-1! text-end', alignment === 'start' && 'pe-3')
+              : cn('col-start-3! text-start', alignment === 'end' && 'ps-3'),
+          )
+        : 'order-first',
       this.classInput(),
     );
   });

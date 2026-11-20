@@ -1064,22 +1064,12 @@
     "hidden": true
   },
   {
-    "name": "Timeline Next",
-    "path": "timeline-next",
+    "name": "Timeline",
+    "path": "timeline",
     "description": "Dated events in order — a feed, a changelog, an order’s steps: a list for screen readers, one tab stop, the arrow keys between events.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
-    "hidden": true
-  },
-  {
-    "name": "Timeline",
-    "path": "timeline",
-    "description": "An ordered list, the line drawn for you, progress by status, Temporal times, alternate and horizontal.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Data Display"
   },
   {
     "name": "Toast",

@@ -1,5 +1,9 @@
-export { ScTimeline } from './timeline';
-export { ScTimelineContent } from './timeline-content';
+export {
+  ScTimeline,
+  type ScTimelineAlignment,
+  type ScTimelineOrientation,
+} from './timeline';
+export { ScTimelineConnector } from './timeline-connector';
 export { ScTimelineDescription } from './timeline-description';
 export { ScTimelineItem, type ScTimelineStatus } from './timeline-item';
 export { ScTimelineMarker } from './timeline-marker';

@@ -1,74 +1,53 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { ScTimeline } from './timeline';
+import { injectStyle } from '../../config/style';
 import { ScTimelineItem } from './timeline-item';
 
 /**
- * An event's marker — a dot, or your icon in it — and the line from it to
- * the next: solid after what is done, dashed after the rest. Decorative.
+ * The event's dot on the line — or your icon in it. Filled when complete
+ * (or with no status), ringed when current, muted when upcoming, in the
+ * destructive colour when failed. Hidden from screen readers: say the
+ * status in words too. Its size is the timeline's `--sc-timeline-marker`
+ * (0.75rem; larger for an icon).
  */
-@Component({
+@Directive({
   selector: '[scTimelineMarker]',
-  template: `
-    <span [class]="dot()" data-slot="timeline-dot"><ng-content /></span>
-  `,
   host: {
-    'data-slot': 'timeline-marker',
     'aria-hidden': 'true',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScTimelineMarker {
-  private readonly timeline = inject(ScTimeline);
   private readonly item = inject(ScTimelineItem);
+  private readonly styles = injectStyle().timeline;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** An error, a failure: in the destructive colour. */
-  readonly variant = input<'default' | 'destructive'>('default');
-
-  private readonly dot = computed(() => {
-    const status = this.item.status();
-    return cn(
-      'relative z-10 grid size-3 shrink-0 place-items-center rounded-full has-[svg]:size-6 [&_svg]:size-3.5',
-      status === 'done' && 'bg-primary text-primary-foreground',
-      status === 'current' &&
-        'bg-primary text-primary-foreground ring-primary/20 ring-4',
-      status === 'upcoming' &&
-        'border-border bg-background text-muted-foreground border-2',
-      this.variant() === 'destructive' &&
-        'bg-destructive ring-destructive/20 border-transparent text-white',
-    );
-  });
 
   private readonly class = computed(() => {
-    const solid = this.item.status() === 'done';
-    const line = cn(
-      'after:border-solid',
-      solid
-        ? 'after:border-primary'
-        : 'after:border-border after:border-dashed',
-      'group-last/item:after:hidden',
-    );
-    if (this.timeline.orientation() === 'horizontal') {
-      // A row: the dot, then the line to the next.
-      return cn(
-        'flex h-6 items-center gap-2 after:flex-1 after:border-t-2',
-        line,
-        this.classInput(),
-      );
-    }
-    // A column: the dot, then the line down to the next (through the gap).
+    const status = this.item.status();
+    const alignment = this.item.timeline.alignment();
     return cn(
-      'col-start-2 row-start-1 flex w-6 flex-col items-center gap-1 pt-1.5 has-[svg]:pt-0',
-      'after:-mb-8 after:flex-1 after:border-s-2',
-      line,
+      'flex size-(--sc-timeline-marker) items-center justify-center',
+      this.styles.marker,
+      '[&_svg]:size-[calc(var(--sc-timeline-marker)*0.6)] [&_svg]:shrink-0',
+      this.item.vertical()
+        ? cn(
+            // In the line's column, level with the title's first line.
+            'col-start-2! row-start-1! mt-[max(0px,calc((var(--sc-timeline-line)-var(--sc-timeline-marker))/2))] self-start',
+            alignment === 'start'
+              ? 'justify-self-start'
+              : alignment === 'end'
+                ? 'justify-self-end'
+                : 'justify-self-center',
+          )
+        : 'absolute start-0 top-0',
+      status === 'current'
+        ? cn('bg-background ring-primary ring-inset', this.styles.markerRing)
+        : status === 'upcoming'
+          ? 'bg-muted ring-border ring-1 ring-inset'
+          : status === 'failed'
+            ? 'bg-destructive text-white'
+            : 'bg-primary text-primary-foreground',
       this.classInput(),
     );
   });

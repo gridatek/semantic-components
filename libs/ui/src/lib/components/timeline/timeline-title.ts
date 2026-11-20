@@ -1,18 +1,33 @@
-import { Directive, computed, input } from '@angular/core';
+import { _IdGenerator } from '@angular/cdk/a11y';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
+import { ScTimelineItem } from './timeline-item';
 
-/** An event's title: your heading, or text. */
+/** The event's title, on your heading or any element: it names the event. */
 @Directive({
   selector: '[scTimelineTitle]',
   host: {
-    'data-slot': 'timeline-title',
+    '[id]': 'id()',
     '[class]': 'class()',
   },
 })
 export class ScTimelineTitle {
+  private readonly styles = injectStyle().timeline;
+
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly id = input(inject(_IdGenerator).getId('sc-timeline-title-'));
 
   private readonly class = computed(() =>
-    cn('text-sm leading-6 font-medium', this.classInput()),
+    cn(
+      'block leading-(--sc-timeline-line)',
+      this.styles.title,
+      this.classInput(),
+    ),
   );
+
+  constructor() {
+    const item = inject(ScTimelineItem);
+    item.ɵtitle.set(() => this.id());
+  }
 }

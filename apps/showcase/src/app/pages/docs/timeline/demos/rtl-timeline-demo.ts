@@ -1,35 +1,35 @@
 import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
-  ScTimelineNext,
-  ScTimelineNextConnector,
-  ScTimelineNextItem,
-  ScTimelineNextMarker,
-  ScTimelineNextTime,
-  ScTimelineNextTitle,
+  ScTimeline,
+  ScTimelineConnector,
+  ScTimelineItem,
+  ScTimelineMarker,
+  ScTimelineTime,
+  ScTimelineTitle,
 } from '@semantic-components/ui';
 
 /** In a right-to-left page: a horizontal timeline runs from the right, and ← moves to the next event. */
 @Component({
-  selector: 'app-rtl-timeline-next-demo',
+  selector: 'app-rtl-timeline-demo',
   imports: [
     Dir,
-    ScTimelineNext,
-    ScTimelineNextItem,
-    ScTimelineNextMarker,
-    ScTimelineNextConnector,
-    ScTimelineNextTitle,
-    ScTimelineNextTime,
+    ScTimeline,
+    ScTimelineItem,
+    ScTimelineMarker,
+    ScTimelineConnector,
+    ScTimelineTitle,
+    ScTimelineTime,
   ],
   template: `
     <div dir="rtl" lang="ar" class="w-full">
-      <div scTimelineNext orientation="horizontal" aria-label="خارطة الطريق">
+      <div scTimeline orientation="horizontal" aria-label="خارطة الطريق">
         @for (milestone of milestones; track milestone.title) {
-          <div scTimelineNextItem>
-            <span scTimelineNextMarker></span>
-            <span scTimelineNextConnector></span>
-            <h3 scTimelineNextTitle>{{ milestone.title }}</h3>
-            <time scTimelineNextTime [datetime]="milestone.datetime">
+          <div scTimelineItem>
+            <span scTimelineMarker></span>
+            <span scTimelineConnector></span>
+            <h3 scTimelineTitle>{{ milestone.title }}</h3>
+            <time scTimelineTime [datetime]="milestone.datetime">
               {{ milestone.month }}
             </time>
           </div>
@@ -41,7 +41,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlTimelineNextDemo {
+export class RtlTimelineDemo {
   private readonly milestones = [
     { title: 'الانطلاق', datetime: '2027-01', month: 'يناير' },
     { title: 'مراجعة التصميم', datetime: '2027-03', month: 'مارس' },

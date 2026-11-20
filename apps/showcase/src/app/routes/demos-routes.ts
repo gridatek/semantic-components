@@ -7132,88 +7132,13 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/timeline-next',
-    children: [
-      {
-        path: 'timeline-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/timeline-next-usage-demo').then(
-            (m) => m.TimelineNextUsageDemo,
-          ),
-      },
-      {
-        path: 'horizontal-timeline-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/horizontal-timeline-next-demo').then(
-            (m) => m.HorizontalTimelineNextDemo,
-          ),
-      },
-      {
-        path: 'alternate-timeline-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/alternate-timeline-next-demo').then(
-            (m) => m.AlternateTimelineNextDemo,
-          ),
-      },
-      {
-        path: 'failure-timeline-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/failure-timeline-next-demo').then(
-            (m) => m.FailureTimelineNextDemo,
-          ),
-      },
-      {
-        path: 'status-timeline-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/status-timeline-next-demo').then(
-            (m) => m.StatusTimelineNextDemo,
-          ),
-      },
-      {
-        path: 'details-timeline-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/details-timeline-next-demo').then(
-            (m) => m.DetailsTimelineNextDemo,
-          ),
-      },
-      {
-        path: 'feed-timeline-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/feed-timeline-next-demo').then(
-            (m) => m.FeedTimelineNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-timeline-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/demos/rtl-timeline-next-demo').then(
-            (m) => m.RtlTimelineNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/timeline',
     children: [
       {
-        path: 'activity-timeline-demo',
+        path: 'timeline-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/timeline/demos/activity-timeline-demo').then(
-            (m) => m.ActivityTimelineDemo,
-          ),
-      },
-      {
-        path: 'tracking-timeline-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline/demos/tracking-timeline-demo').then(
-            (m) => m.TrackingTimelineDemo,
-          ),
-      },
-      {
-        path: 'alternate-timeline-demo',
-        loadComponent: () =>
-          import('../pages/docs/timeline/demos/alternate-timeline-demo').then(
-            (m) => m.AlternateTimelineDemo,
+          import('../pages/docs/timeline/demos/timeline-usage-demo').then(
+            (m) => m.TimelineUsageDemo,
           ),
       },
       {
@@ -7224,10 +7149,45 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'pending-timeline-demo',
+        path: 'alternate-timeline-demo',
         loadComponent: () =>
-          import('../pages/docs/timeline/demos/pending-timeline-demo').then(
-            (m) => m.PendingTimelineDemo,
+          import('../pages/docs/timeline/demos/alternate-timeline-demo').then(
+            (m) => m.AlternateTimelineDemo,
+          ),
+      },
+      {
+        path: 'failure-timeline-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline/demos/failure-timeline-demo').then(
+            (m) => m.FailureTimelineDemo,
+          ),
+      },
+      {
+        path: 'status-timeline-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline/demos/status-timeline-demo').then(
+            (m) => m.StatusTimelineDemo,
+          ),
+      },
+      {
+        path: 'details-timeline-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline/demos/details-timeline-demo').then(
+            (m) => m.DetailsTimelineDemo,
+          ),
+      },
+      {
+        path: 'feed-timeline-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline/demos/feed-timeline-demo').then(
+            (m) => m.FeedTimelineDemo,
+          ),
+      },
+      {
+        path: 'rtl-timeline-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline/demos/rtl-timeline-demo').then(
+            (m) => m.RtlTimelineDemo,
           ),
       },
     ],

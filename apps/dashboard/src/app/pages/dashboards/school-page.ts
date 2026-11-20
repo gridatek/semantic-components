@@ -29,7 +29,7 @@ import {
   ScTableHeaderCell,
   ScTableRow,
   ScTimeline,
-  ScTimelineContent,
+  ScTimelineConnector,
   ScTimelineDescription,
   ScTimelineItem,
   ScTimelineMarker,
@@ -130,7 +130,7 @@ const NOTICES = [
     title: $localize`:@@dashboards.school.scienceFair:Science fair`,
     text: $localize`:@@dashboards.school.projectsGoUpInThe:Projects go up in the gym on Friday; parents welcome from 3 pm.`,
     at: '2026-04-24',
-    status: 'done' as const,
+    status: 'complete' as const,
   },
   {
     title: $localize`:@@dashboards.school.parentTeacherMeetings:Parent–teacher meetings`,
@@ -185,7 +185,7 @@ const NOTICES = [
     ScTableHeaderCell,
     ScTableRow,
     ScTimeline,
-    ScTimelineContent,
+    ScTimelineConnector,
     ScTimelineDescription,
     ScTimelineItem,
     ScTimelineMarker,
@@ -433,12 +433,11 @@ const NOTICES = [
           >
             @for (notice of notices; track notice.title) {
               <li scTimelineItem [status]="notice.status">
-                <div scTimelineMarker></div>
-                <div scTimelineContent>
-                  <p scTimelineTitle>{{ notice.title }}</p>
-                  <p scTimelineDescription>{{ notice.text }}</p>
-                  <time scTimelineTime [value]="notice.at"></time>
-                </div>
+                <span scTimelineMarker></span>
+                <span scTimelineConnector></span>
+                <p scTimelineTitle>{{ notice.title }}</p>
+                <p scTimelineDescription>{{ notice.text }}</p>
+                <time scTimelineTime [value]="notice.at"></time>
               </li>
             }
           </ol>

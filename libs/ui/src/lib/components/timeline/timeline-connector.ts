@@ -1,7 +1,7 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { ScTimelineNextItem } from './timeline-next-item';
+import { ScTimelineItem } from './timeline-item';
 
 /**
  * The line from the event's marker to the next one: down (vertical) or
@@ -9,14 +9,14 @@ import { ScTimelineNextItem } from './timeline-next-item';
  * after the last event. Hidden from screen readers.
  */
 @Directive({
-  selector: '[scTimelineNextConnector]',
+  selector: '[scTimelineConnector]',
   host: {
     'aria-hidden': 'true',
     '[class]': 'class()',
   },
 })
-export class ScTimelineNextConnector {
-  private readonly item = inject(ScTimelineNextItem);
+export class ScTimelineConnector {
+  private readonly item = inject(ScTimelineItem);
   private readonly styles = injectStyle().timeline;
 
   readonly classInput = input<string>('', { alias: 'class' });

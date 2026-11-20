@@ -704,12 +704,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/marker/marker-page'),
       },
       {
-        path: 'timeline-next',
-        title: 'Timeline Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/timeline-next/timeline-next-page'),
-      },
-      {
         path: 'timeline',
         title: 'Timeline - Semantic Components',
         loadComponent: () => import('../pages/docs/timeline/timeline-page'),

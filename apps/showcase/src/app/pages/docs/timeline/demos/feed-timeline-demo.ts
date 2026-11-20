@@ -1,55 +1,35 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { FeedTimelineNextDemo } from './feed-timeline-next-demo';
-
-@Component({
-  selector: 'app-feed-timeline-next-demo-container',
-  imports: [DemoContainer, FeedTimelineNextDemo],
-  template: `
-    <app-demo-container
-      title="Feed"
-      [code]="code"
-      demoUrl="/demos/timeline-next/feed-timeline-next-demo"
-    >
-      <app-feed-timeline-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class FeedTimelineNextDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScButton,
-  ScTimelineNext,
-  ScTimelineNextConnector,
-  ScTimelineNextItem,
-  ScTimelineNextMarker,
-  ScTimelineNextTime,
-  ScTimelineNextTitle,
+  ScTimeline,
+  ScTimelineConnector,
+  ScTimelineItem,
+  ScTimelineMarker,
+  ScTimelineTime,
+  ScTimelineTitle,
 } from '@semantic-components/ui';
 
 /** Team updates as a feed: articles that load more, busy while they do. Page Up and Page Down move between articles from anywhere in one. */
 @Component({
-  selector: 'app-feed-timeline-next-demo',
+  selector: 'app-feed-timeline-demo',
   imports: [
     ScButton,
-    ScTimelineNext,
-    ScTimelineNextItem,
-    ScTimelineNextMarker,
-    ScTimelineNextConnector,
-    ScTimelineNextTitle,
-    ScTimelineNextTime,
+    ScTimeline,
+    ScTimelineItem,
+    ScTimelineMarker,
+    ScTimelineConnector,
+    ScTimelineTitle,
+    ScTimelineTime,
   ],
-  template: \`
+  template: `
     <div class="flex w-full max-w-md flex-col gap-4">
-      <div scTimelineNext feed [busy]="busy()" aria-label="Team updates">
+      <div scTimeline feed [busy]="busy()" aria-label="Team updates">
         @for (update of shown(); track update.title) {
-          <article scTimelineNextItem>
-            <span scTimelineNextMarker></span>
-            <span scTimelineNextConnector></span>
-            <h3 scTimelineNextTitle>{{ update.title }}</h3>
-            <time scTimelineNextTime [datetime]="update.datetime">
+          <article scTimelineItem>
+            <span scTimelineMarker></span>
+            <span scTimelineConnector></span>
+            <h3 scTimelineTitle>{{ update.title }}</h3>
+            <time scTimelineTime [datetime]="update.datetime">
               {{ update.date }} · {{ update.author }}
             </time>
           </article>
@@ -65,11 +45,11 @@ import {
         {{ busy() ? 'Loading…' : 'Load more' }}
       </button>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FeedTimelineNextDemo {
+export class FeedTimelineDemo {
   private readonly updates = [
     ['Shipped the new onboarding', 'Ada', '2026-11-10', 'Nov 10'],
     ['Fixed the flaky upload test', 'Grace', '2026-11-10', 'Nov 10'],
@@ -99,5 +79,4 @@ export class FeedTimelineNextDemo {
       this.busy.set(false);
     }, 600);
   }
-}`;
 }
