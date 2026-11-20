@@ -60,8 +60,9 @@ export class ScEditorBubbleMenu {
           pluginKey: this.pluginKey,
           editor,
           element: this.element,
-          // Not clipped by the document's scrolling box.
-          options: { strategy: 'fixed', placement: 'top' },
+          // Not clipped by the document's scrolling box; clear of the
+          // selection's highlight (Tiptap's 8 sat on it).
+          options: { strategy: 'fixed', placement: 'top', offset: 12 },
         }),
       );
 
