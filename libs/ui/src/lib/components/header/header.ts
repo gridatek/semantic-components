@@ -141,6 +141,8 @@ export class ScHeader implements ScNavigationMenuLinkHost {
   private readonly panelClass = computed(() =>
     cn(
       'flex basis-full flex-col gap-1 pb-4',
+      // Pushing: a little room under the bar.
+      !this.covers() && 'pt-2',
       this.covers() &&
         'bg-background/90 backdrop-blur absolute inset-x-0 top-full px-4 md:px-6 h-[calc(100dvh-100%)] overflow-y-auto overscroll-contain',
       HIDDEN[this.expand()],
@@ -166,9 +168,12 @@ export class ScHeader implements ScNavigationMenuLinkHost {
 
   private readonly class = computed(() =>
     cn(
-      // Its own height (56px), whatever is in it; it grows when the menu wraps
-      // below (push).
-      'bg-background relative z-40 flex min-h-14 flex-wrap items-center gap-x-4 border-b px-4 md:px-6',
+      // Its own height (56px), whatever is in it. The bar's line is 56px tall
+      // by an invisible first item (::before, no width; its gap taken back):
+      // a push menu wraps below as a line of its own, and the bar keeps its
+      // place — a min-height would centre both lines together.
+      'bg-background relative z-40 flex flex-wrap items-center gap-x-4 border-b px-4 md:px-6',
+      "before:h-14 before:w-0 before:-me-4 before:content-['']",
       // Its links (a `nav` in the bar, a Navigation Menu): hidden below
       // `expand`, where the menu has them.
       '[&>nav]:hidden',

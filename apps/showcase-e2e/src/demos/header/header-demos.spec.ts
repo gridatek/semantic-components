@@ -240,6 +240,27 @@ test.describe('narrow', () => {
     await expect(menu(page)).toBeVisible();
   });
 
+  test('Push Menu: only the page moves — the bar keeps its brand and toggle in place', async ({
+    page,
+  }) => {
+    await page.goto(demo('push'));
+    const header = page.locator('[data-slot=header]');
+    const brand = header.getByRole('link').first();
+    const button = page.getByRole('button', { name: 'Open menu' });
+    const tops = async () => ({
+      brand: Math.round((await brand.boundingBox())?.y ?? -1),
+      toggle: Math.round((await toggle(page).boundingBox())?.y ?? -1),
+    });
+    await expect(brand).toBeVisible();
+    const closed = await tops();
+    await button.click();
+    await expect(menu(page)).toBeVisible();
+    await expect.poll(tops).toEqual(closed);
+    // The bar is still 56px tall; the menu is below it.
+    const menuTop = (await menu(page).boundingBox())?.y ?? 0;
+    expect(menuTop).toBeGreaterThanOrEqual(56);
+  });
+
   test('RTL: brand at the right, toggle at the left', async ({ page }) => {
     await page.goto(demo('rtl'));
     const brand = page.getByRole('link', { name: 'أكمي' });
