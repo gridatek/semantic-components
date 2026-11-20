@@ -35,7 +35,7 @@ import { ReviewImageAnnotatorDemoContainer } from './demos/review-image-annotato
           Every tool. Select an annotation to move it, resize it by its handles,
           or restyle it with a colour or the width. From the keyboard:
           <kbd scKbd>Enter</kbd> on the image places a shape; on an annotation,
-          the arrows move it, Alt + arrows resize it,
+          the arrows move it, <kbd scKbd>Alt</kbd> + the arrows resize it,
           <kbd scKbd>Delete</kbd> removes it. <kbd scKbd>Ctrl + Z</kbd> undoes.
         </p>
         <app-editor-image-annotator-demo-container />

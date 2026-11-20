@@ -21,6 +21,7 @@ export default class StepsNumberGroupDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
+  ScKbd,
   ScLabel,
   ScNumberDecrement,
   ScNumberGroup,
@@ -34,6 +35,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-steps-number-group-demo',
   imports: [
+    ScKbd,
     ScLabel,
     ScField,
     ScNumberScrubArea,
@@ -73,7 +75,7 @@ import { SiMinusIcon, SiPlusIcon } from '@semantic-icons/lucide-icons';
         </div>
       </div>
       <p class="text-muted-foreground text-sm">
-        Type 12, then press ↑: it snaps to 15.
+        Type 12, then press <kbd scKbd>↑</kbd>: it snaps to 15.
       </p>
     </div>
   \`,

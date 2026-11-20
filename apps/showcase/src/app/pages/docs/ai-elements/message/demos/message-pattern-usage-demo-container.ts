@@ -30,6 +30,7 @@ import {
   ScBubble,
   ScBubbleContent,
   ScButton,
+  ScKbd,
   ScMessage,
   ScMessageContent,
   ScMessageFooter,
@@ -55,6 +56,7 @@ import {
 @Component({
   selector: 'app-message-pattern-usage-demo',
   imports: [
+    ScKbd,
     NgTemplateOutlet,
     ScBubble,
     ScBubbleContent,
@@ -120,7 +122,8 @@ import {
                 >scDialogTrigger</code
               >
               on the button and the settings form in the dialog. Focus moves
-              into the dialog when it opens, and <strong>Esc</strong> closes it.
+              into the dialog when it opens, and <kbd scKbd>Escape</kbd> closes
+              it.
             </p>
           </div>
           <div scMessageFooter class="px-0">

@@ -4,6 +4,7 @@ import {
   ScField,
   ScFieldGroup,
   ScInput,
+  ScKbd,
   ScLabel,
   ScPopover,
   ScPopoverDescription,
@@ -19,6 +20,7 @@ import {
 @Component({
   selector: 'app-modal-popover-demo',
   imports: [
+    ScKbd,
     ScButton,
     ScField,
     ScFieldGroup,
@@ -41,7 +43,10 @@ import {
           <div scPopover class="w-64">
             <div scPopoverHeader>
               <h2 scPopoverTitle>Not modal</h2>
-              <p scPopoverDescription>Tab through it, then press Escape.</p>
+              <p scPopoverDescription>
+                <kbd scKbd>Tab</kbd> through it, then press
+                <kbd scKbd>Escape</kbd>.
+              </p>
             </div>
             <div scFieldGroup class="gap-4">
               <div scField orientation="horizontal">
@@ -67,7 +72,10 @@ import {
           <div scPopover class="w-64">
             <div scPopoverHeader>
               <h2 scPopoverTitle>Trap focus</h2>
-              <p scPopoverDescription>Tab through it, then press Escape.</p>
+              <p scPopoverDescription>
+                <kbd scKbd>Tab</kbd> through it, then press
+                <kbd scKbd>Escape</kbd>.
+              </p>
             </div>
             <div scFieldGroup class="gap-4">
               <div scField orientation="horizontal">
@@ -93,7 +101,10 @@ import {
           <div scPopover class="w-64">
             <div scPopoverHeader>
               <h2 scPopoverTitle>Modal</h2>
-              <p scPopoverDescription>Tab through it, then press Escape.</p>
+              <p scPopoverDescription>
+                <kbd scKbd>Tab</kbd> through it, then press
+                <kbd scKbd>Escape</kbd>.
+              </p>
             </div>
             <div scFieldGroup class="gap-4">
               <div scField orientation="horizontal">

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AvatarImageCropperDemoContainer } from './demos/avatar-image-cropper-demo-container';
@@ -9,6 +9,7 @@ import { CoverImageCropperDemoContainer } from './demos/cover-image-cropper-demo
 @Component({
   selector: 'app-image-cropper-page',
   imports: [
+    ScKbd,
     BoxImageCropperDemoContainer,
     AvatarImageCropperDemoContainer,
     CoverImageCropperDemoContainer,
@@ -33,8 +34,8 @@ import { CoverImageCropperDemoContainer } from './demos/cover-image-cropper-demo
         <p>
           Handles in the selection make it a box resized over the image. The
           slider and the zoom buttons share one
-          <code scTypeset>zoom</code>. Focused, the arrows move the crop and Alt
-          + arrows resize it.
+          <code scTypeset>zoom</code>. Focused, the arrows move the crop and
+          <kbd scKbd>Alt</kbd> + the arrows resize it.
         </p>
         <app-box-image-cropper-demo-container />
       </section>

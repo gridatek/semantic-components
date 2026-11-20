@@ -62,8 +62,9 @@ import { VerticalToolbarDemoContainer } from './demos/vertical-toolbar-demo-cont
         <ul class="list-disc space-y-2 ps-6">
           <li>
             role=&quot;toolbar&quot;: one <kbd scKbd>Tab</kbd> stop; the arrow
-            keys move between its widgets (Left and Right mirrored right to
-            left, Up and Down when vertical), wrapping at the ends;
+            keys move between its widgets (<kbd scKbd>←</kbd> and
+            <kbd scKbd>→</kbd> mirrored right to left; <kbd scKbd>↑</kbd> and
+            <kbd scKbd>↓</kbd> when vertical), wrapping at the ends;
             <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> to the ends.
           </li>
           <li>

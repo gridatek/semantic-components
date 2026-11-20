@@ -21,6 +21,7 @@ export class NoCloseButtonSheetDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScKbd,
   ScSheet,
   ScSheetDescription,
   ScSheetHeader,
@@ -34,6 +35,7 @@ import {
 @Component({
   selector: 'app-no-close-button-sheet-demo',
   imports: [
+    ScKbd,
     ScButton,
     ScSheet,
     ScSheetDescription,
@@ -50,7 +52,9 @@ import {
         <div scSheet>
           <div scSheetHeader>
             <h2 scSheetTitle>No close button</h2>
-            <p scSheetDescription>Press Escape or the backdrop to close it.</p>
+            <p scSheetDescription>
+              Press <kbd scKbd>Escape</kbd> or the backdrop to close it.
+            </p>
           </div>
         </div>
       </ng-template>

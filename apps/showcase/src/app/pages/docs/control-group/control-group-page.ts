@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ApiTable } from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
@@ -23,6 +23,7 @@ interface ScApiRow {
 @Component({
   selector: 'app-control-group-page',
   imports: [
+    ScKbd,
     ApiTable,
     Anatomy,
     RouterLink,
@@ -85,9 +86,9 @@ interface ScApiRow {
           >.
         </p>
         <p>
-          Tab goes to each control. For buttons that toggle a state, use a
-          Toggle Group; for a row of controls moved between with the arrow keys,
-          a Toolbar.
+          <kbd scKbd>Tab</kbd> goes to each control. For buttons that toggle a
+          state, use a Toggle Group; for a row of controls moved between with
+          the arrow keys, a Toolbar.
         </p>
       </section>
 
