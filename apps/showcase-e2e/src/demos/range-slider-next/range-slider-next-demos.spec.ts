@@ -193,7 +193,8 @@ test.describe('Range Slider Next demos', () => {
     await lowest.focus();
     await page.keyboard.press('Tab');
     await expect(highest).toBeFocused();
-    await page.keyboard.press('Tab');
+    // Out of the slider (Firefox's Tab stays: nothing follows on the page).
+    await highest.blur();
     await expect(errors).toHaveText('Leave 100 at least between them.');
     await expect(lowest).toHaveAttribute('aria-invalid', 'true');
     await expect(highest).toHaveAttribute('aria-invalid', 'true');
