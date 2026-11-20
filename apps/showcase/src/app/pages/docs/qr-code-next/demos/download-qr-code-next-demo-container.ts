@@ -21,7 +21,11 @@ export class DownloadQrCodeNextDemoContainer {
   private readonly code = `import { DOCUMENT } from '@angular/common';
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScButton } from '@semantic-components/ui';
-import { ScQrCodeNext, qrCodeToBlob, qrCodeToSvg } from '@semantic-components/ui/qr-code';
+import {
+  ScQrCodeNext,
+  qrCodeToBlob,
+  qrCodeToSvg,
+} from '@semantic-components/ui/qr-code';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
 /** A file from the value, with the functions: qrCodeToBlob (PNG) and qrCodeToSvg — black on white, for print, at the size asked. */

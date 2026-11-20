@@ -18,9 +18,9 @@ import { LiveQrCodeNextDemo } from './live-qr-code-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class LiveQrCodeNextDemoContainer {
-  private readonly code = `import { FormField, form } from '@angular/forms/signals';
-import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScField, ScLabel, ScInput, ScButton } from '@semantic-components/ui';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
+import { ScButton, ScField, ScInput, ScLabel } from '@semantic-components/ui';
 import { ScQrCodeNext } from '@semantic-components/ui/qr-code';
 
 /** Drawn as you type. A value too long to encode draws nothing and sets error(). */

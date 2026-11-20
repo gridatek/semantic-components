@@ -43,6 +43,5 @@ import { ScQrCodeNext } from '@semantic-components/ui/qr-code';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlQrCodeNextDemo {
-}`;
+export class RtlQrCodeNextDemo {}`;
 }
