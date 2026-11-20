@@ -29,7 +29,7 @@ import {
             <span scTimelineNextMarker></span>
             <span scTimelineNextConnector></span>
             <h3 scTimelineNextTitle>{{ update.title }}</h3>
-            <time scTimelineNextTime [attr.datetime]="update.datetime">
+            <time scTimelineNextTime [datetime]="update.datetime">
               {{ update.date }} · {{ update.author }}
             </time>
           </article>

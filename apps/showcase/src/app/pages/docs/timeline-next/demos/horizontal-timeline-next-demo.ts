@@ -32,7 +32,7 @@ import {
           <span scTimelineNextMarker></span>
           <span scTimelineNextConnector></span>
           <h3 scTimelineNextTitle>{{ milestone.title }}</h3>
-          <time scTimelineNextTime [attr.datetime]="milestone.datetime">
+          <time scTimelineNextTime [datetime]="milestone.datetime">
             {{ milestone.month }}
           </time>
         </div>

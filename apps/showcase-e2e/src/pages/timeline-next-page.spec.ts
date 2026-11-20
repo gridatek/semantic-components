@@ -21,7 +21,7 @@ test.describe('Timeline Next Page', () => {
       page
         .getByRole('region', { name: 'Timeline Next parts' })
         .getByRole('row'),
-    ).toHaveCount(8);
+    ).toHaveCount(9);
     await expect(
       page.getByRole('region', { name: 'ScTimelineNextItem inputs' }),
     ).toContainText('status');

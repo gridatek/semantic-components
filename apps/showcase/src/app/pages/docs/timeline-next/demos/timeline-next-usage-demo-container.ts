@@ -48,7 +48,7 @@ import {
           <span scTimelineNextMarker></span>
           <span scTimelineNextConnector></span>
           <h3 scTimelineNextTitle>{{ event.title }}</h3>
-          <time scTimelineNextTime [attr.datetime]="event.datetime">
+          <time scTimelineNextTime [datetime]="event.datetime">
             {{ event.time }}
           </time>
           <p scTimelineNextDescription>{{ event.description }}</p>

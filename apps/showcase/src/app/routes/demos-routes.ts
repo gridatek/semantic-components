@@ -7149,6 +7149,20 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'alternate-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/alternate-timeline-next-demo').then(
+            (m) => m.AlternateTimelineNextDemo,
+          ),
+      },
+      {
+        path: 'failure-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/failure-timeline-next-demo').then(
+            (m) => m.FailureTimelineNextDemo,
+          ),
+      },
+      {
         path: 'status-timeline-next-demo',
         loadComponent: () =>
           import('../pages/docs/timeline-next/demos/status-timeline-next-demo').then(

@@ -42,9 +42,11 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
             </span>
             <span scTimelineNextConnector></span>
             <h3 scTimelineNextTitle>{{ step.title }}</h3>
-            <time scTimelineNextTime [attr.datetime]="step.datetime">
-              {{ step.date }}
-            </time>
+            <time
+              scTimelineNextTime
+              [value]="step.date"
+              [options]="{ month: 'short', day: 'numeric' }"
+            ></time>
             <p scTimelineNextDescription>{{ step.state }}</p>
           </div>
         }
@@ -68,32 +70,28 @@ export class StatusTimelineNextDemo {
       value: 'placed',
       status: 'complete',
       title: 'Order placed',
-      datetime: '2026-11-01',
-      date: 'Nov 1',
+      date: Temporal.PlainDate.from('2026-11-01'),
       state: 'Done',
     },
     {
       value: 'packed',
       status: 'complete',
       title: 'Packed',
-      datetime: '2026-11-02',
-      date: 'Nov 2',
+      date: Temporal.PlainDate.from('2026-11-02'),
       state: 'Done',
     },
     {
       value: 'shipped',
       status: 'current',
       title: 'Shipped',
-      datetime: '2026-11-03',
-      date: 'Nov 3',
+      date: Temporal.PlainDate.from('2026-11-03'),
       state: 'On its way',
     },
     {
       value: 'delivered',
       status: 'upcoming',
       title: 'Delivered',
-      datetime: '2026-11-05',
-      date: 'Nov 5',
+      date: Temporal.PlainDate.from('2026-11-05'),
       state: 'Expected',
     },
   ] as const;

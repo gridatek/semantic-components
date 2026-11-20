@@ -14,6 +14,9 @@ import { ɵwarnIfUnnamed } from '../../utils';
 /** Which way the events run. */
 export type ScTimelineNextOrientation = 'vertical' | 'horizontal';
 
+/** Which side of the line the events are on (vertical): after it, before it, or in turn. */
+export type ScTimelineNextAlignment = 'start' | 'end' | 'alternate';
+
 /** What the timeline knows of an event: set by `scTimelineNextItem`. */
 export interface ScTimelineNextEntry {
   readonly value: () => string;
@@ -45,6 +48,8 @@ export class ScTimelineNext {
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScTimelineNextOrientation>('vertical');
+  /** Vertical: the events after the line (start), before it (end), or in turn (alternate, the line in the middle). */
+  readonly alignment = input<ScTimelineNextAlignment>('start');
   /** The arrows wrap from the last event to the first. */
   readonly loop = input(true, { transform: booleanAttribute });
   /** A feed of articles that loads more (role feed). */
@@ -68,8 +73,16 @@ export class ScTimelineNext {
   private readonly class = computed(() =>
     cn(
       this.orientation() === 'horizontal'
-        ? 'grid grid-cols-[repeat(var(--sc-timeline-count),minmax(0,1fr))]'
-        : 'flex flex-col',
+        ? // A row, scrolled across when narrow (room kept for the focus ring).
+          '-m-1.5 grid grid-cols-[repeat(var(--sc-timeline-count),minmax(10rem,1fr))] overflow-x-auto p-1.5'
+        : // One grid for all events (each a subgrid row): the line stays straight.
+          {
+            start:
+              'grid grid-cols-[auto_calc(var(--sc-timeline-marker)+0.75rem)_minmax(0,1fr)]',
+            end: 'grid grid-cols-[minmax(0,1fr)_calc(var(--sc-timeline-marker)+0.75rem)_auto]',
+            alternate:
+              'grid grid-cols-[minmax(0,1fr)_calc(var(--sc-timeline-marker)+1.5rem)_minmax(0,1fr)]',
+          }[this.alignment()],
       '[--sc-timeline-marker:0.75rem]',
       // The title line's height, which the markers line up with.
       this.styles.root,

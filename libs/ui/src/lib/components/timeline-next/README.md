@@ -23,8 +23,9 @@ Dated events in order — an activity feed, a changelog, an order's steps: a lis
 └── [scTimelineNextItem]            listitem (article); named by its title, described by its time and description
     ├── [scTimelineNextMarker]      the dot, or your icon in it; hidden
     ├── [scTimelineNextConnector]   the line to the next event; hidden; none after the last
+    ├── [scTimelineNextOpposite]    across the line: a date, a year (above the content, across)
     ├── [scTimelineNextTitle]       on your heading
-    ├── time[scTimelineNextTime]    your <time datetime>
+    ├── time[scTimelineNextTime]    your <time>: [value] a Temporal date or moment, written in the locale; or your words + datetime
     └── [scTimelineNextDescription]
 ```
 
@@ -32,20 +33,21 @@ Every part inside an event is optional; put links, buttons or a collapsible in i
 
 ## Inputs
 
-| On       | Input         | Type                                    | Default      |                                             |
-| -------- | ------------- | --------------------------------------- | ------------ | ------------------------------------------- |
-| timeline | `orientation` | `'vertical' \| 'horizontal'`            | `'vertical'` | Which way the events run (and which arrows) |
-| timeline | `loop`        | `boolean`                               | `true`       | The arrows wrap from last to first          |
-| timeline | `feed`        | `boolean`                               | `false`      | A feed of articles that loads more          |
-| timeline | `busy`        | `boolean`                               | `false`      | Loading more (`aria-busy`), in a feed       |
-| item     | `status`      | `'complete' \| 'current' \| 'upcoming'` | none         | Where it is in a process                    |
-| item     | `value`       | `string`                                | generated    | Names the event for `focus(value)`          |
+| On       | Input         | Type                                                | Default      |                                                 |
+| -------- | ------------- | --------------------------------------------------- | ------------ | ----------------------------------------------- |
+| timeline | `alignment`   | `'start' \| 'end' \| 'alternate'`                   | `'start'`    | Vertical: after the line, before it, or in turn |
+| timeline | `orientation` | `'vertical' \| 'horizontal'`                        | `'vertical'` | Which way the events run (and which arrows)     |
+| timeline | `loop`        | `boolean`                                           | `true`       | The arrows wrap from last to first              |
+| timeline | `feed`        | `boolean`                                           | `false`      | A feed of articles that loads more              |
+| timeline | `busy`        | `boolean`                                           | `false`      | Loading more (`aria-busy`), in a feed           |
+| item     | `status`      | `'complete' \| 'current' \| 'upcoming' \| 'failed'` | none         | Where it is in a process                        |
+| item     | `value`       | `string`                                            | generated    | Names the event for `focus(value)`              |
 
 ## Look
 
 The style draws it — its `timeline` key (ours: shadcn has no timeline): titles and descriptions as the style's Item text, the markers' corners and the current one's ring as its badges and focus rings, the gap between events, the line's colour, the item's corners and focus ring. Square markers in lyra and sera, uppercase titles in sera, more room in maia and luma, less in mira and rhea.
 
-Each event leaves room for its marker (before it, or above it across), the connector running from the marker to the next one. The marker is filled (complete, or no status), ringed (current) or muted (upcoming); the line after a complete event is the primary colour.
+Vertical, the events are the rows of one grid (subgrid) — the opposite, the line, the content — so the line stays straight whatever the opposite's width; `alternate` puts the line in the middle and the content on either side in turn. Across, a row with the marker above each event, scrolled sideways when narrow (an event focused scrolls into view). The marker is filled (complete, or no status), ringed (current), muted (upcoming) or in the destructive colour (failed); the line after a complete event is the primary colour.
 
 - `--sc-timeline-line` (the style's) is the title line's height, which the markers line up with.
 - `--sc-timeline-marker` on the timeline sizes the markers (0.75rem; larger for an icon: `[--sc-timeline-marker:1.25rem]`).

@@ -12,8 +12,9 @@ import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { ScTimelineNext } from './timeline-next';
 
-/** Where an event is in a process: done, now, or to come. */
-export type ScTimelineNextStatus = 'complete' | 'current' | 'upcoming';
+/** Where an event is in a process: done, now, to come — or failed. */
+export type ScTimelineNextStatus =
+  'complete' | 'current' | 'upcoming' | 'failed';
 
 /**
  * An event: a list item (an article in a feed), one tab stop for all of
@@ -33,6 +34,8 @@ export type ScTimelineNextStatus = 'complete' | 'current' | 'upcoming';
     '[attr.data-complete]': 'status() === "complete" ? "" : null',
     '[attr.data-current]': 'status() === "current" ? "" : null',
     '[attr.data-upcoming]': 'status() === "upcoming" ? "" : null',
+    '[attr.data-failed]': 'status() === "failed" ? "" : null',
+    '[attr.data-side]': 'vertical() ? side() : null',
     '[attr.data-orientation]': 'timeline.orientation()',
     '[attr.data-first]': 'index() === 0 ? "" : null',
     '[attr.data-last]': 'isLast() ? "" : null',
@@ -43,7 +46,7 @@ export type ScTimelineNextStatus = 'complete' | 'current' | 'upcoming';
   },
 })
 export class ScTimelineNextItem {
-  private readonly timeline = inject(ScTimelineNext);
+  readonly timeline = inject(ScTimelineNext);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly styles = injectStyle().timeline;
@@ -68,6 +71,13 @@ export class ScTimelineNextItem {
   readonly vertical = computed(
     () => this.timeline.orientation() === 'vertical',
   );
+  /** Vertical: its content after the line, or before it (end, and every other one in alternate). */
+  readonly side = computed<'after' | 'before'>(() => {
+    const alignment = this.timeline.alignment();
+    if (alignment === 'end') return 'before';
+    if (alignment === 'alternate' && this.index() % 2 === 1) return 'before';
+    return 'after';
+  });
 
   private readonly titleId = computed(() => this.ɵtitle()?.() ?? null);
   private readonly describedBy = computed(
@@ -82,10 +92,16 @@ export class ScTimelineNextItem {
       // The style's ring, clear of the marker on its edge.
       'ring-offset-background relative outline-none focus-visible:ring-offset-2',
       this.styles.item,
-      // Room for the marker: before it (vertical) or above it (horizontal).
       this.vertical()
-        ? 'min-h-(--sc-timeline-marker) ps-[calc(var(--sc-timeline-marker)+0.75rem)]'
-        : 'pe-4 pt-[calc(var(--sc-timeline-marker)+0.75rem)]',
+        ? cn(
+            // A row of the timeline's grid; its content on its side of the line.
+            'col-span-full grid grid-cols-subgrid content-start',
+            this.side() === 'after'
+              ? '*:col-start-3'
+              : 'text-end *:col-start-1',
+          )
+        : // Room above for the marker; the opposite first.
+          'flex flex-col pe-4 pt-[calc(var(--sc-timeline-marker)+0.75rem)]',
       this.vertical() && !this.isLast() && this.styles.gap,
       this.classInput(),
     ),

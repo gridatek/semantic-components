@@ -140,3 +140,81 @@ test('RTL: from the right, ← to the next event', async ({ page }) => {
   await page.keyboard.press('ArrowRight');
   await expect(first).toBeFocused();
 });
+
+test('Status: dates from Temporal values, written in the locale', async ({
+  page,
+}) => {
+  await page.goto('/demos/timeline-next/status-timeline-next-demo');
+  const time = event(page, 'Order placed').locator('time');
+  await expect(time).toHaveText('Nov 1');
+  await expect(time).toHaveAttribute('datetime', '2026-11-01');
+});
+
+test('Alternate: the events on either side in turn, the years across, the line straight', async ({
+  page,
+}) => {
+  await page.goto('/demos/timeline-next/alternate-timeline-next-demo');
+  const founded = event(page, 'Founded');
+  const release = event(page, 'First release');
+  await expect(founded).toHaveAttribute('data-side', 'after');
+  await expect(release).toHaveAttribute('data-side', 'before');
+  await expect(founded).toHaveAccessibleDescription(
+    '2019 Two people and a spare room.',
+  );
+
+  // The title after the marker on one, before it on the next; the year across.
+  const x = (locator: ReturnType<Page['locator']>) =>
+    locator.evaluate((e) => e.getBoundingClientRect().left);
+  const markerX = await x(founded.locator('[scTimelineNextMarker]'));
+  expect(await x(founded.locator('h3'))).toBeGreaterThan(markerX);
+  expect(await x(release.locator('h3'))).toBeLessThan(markerX);
+  expect(await x(founded.locator('time'))).toBeLessThan(markerX);
+  expect(await x(release.locator('[scTimelineNextMarker]'))).toBeCloseTo(
+    markerX,
+    0,
+  );
+  // The line under the markers, at their centre.
+  const line = await founded
+    .locator('[scTimelineNextConnector]')
+    .evaluate((e) => {
+      const r = e.getBoundingClientRect();
+      return r.left + r.width / 2;
+    });
+  const marker = await founded
+    .locator('[scTimelineNextMarker]')
+    .evaluate((e) => {
+      const r = e.getBoundingClientRect();
+      return r.left + r.width / 2;
+    });
+  expect(Math.abs(line - marker)).toBeLessThan(1.5);
+});
+
+test('Failure: the failed step marked, in the destructive colour', async ({
+  page,
+}) => {
+  await page.goto('/demos/timeline-next/failure-timeline-next-demo');
+  const tests = event(page, 'Tests');
+  await expect(tests).toHaveAttribute('data-failed', '');
+  await expect(tests).not.toHaveAttribute('aria-current', /.*/);
+  await expect(tests.locator('[scTimelineNextMarker]')).toHaveClass(
+    /bg-destructive/,
+  );
+  await expect(tests).toHaveAccessibleDescription('Failed: 2 of 312 tests.');
+});
+
+test('Horizontal, narrow: it scrolls across, and to the event focused', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 640 });
+  await page.goto('/demos/timeline-next/horizontal-timeline-next-demo');
+  const roadmap = page.getByRole('list', { name: 'Roadmap' });
+  await expect(event(page, 'Kickoff')).toBeVisible();
+  await expect
+    .poll(() => roadmap.evaluate((e) => e.scrollWidth > e.clientWidth))
+    .toBe(true);
+  await page.keyboard.press('Tab');
+  await expect(event(page, 'Kickoff')).toBeFocused();
+  await page.keyboard.press('End');
+  await expect(event(page, 'Launch')).toBeFocused();
+  await expect(event(page, 'Launch')).toBeInViewport();
+});

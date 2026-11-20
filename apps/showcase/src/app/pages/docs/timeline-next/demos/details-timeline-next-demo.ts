@@ -36,9 +36,11 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           <span scTimelineNextMarker></span>
           <span scTimelineNextConnector></span>
           <h3 scTimelineNextTitle>{{ release.title }}</h3>
-          <time scTimelineNextTime [attr.datetime]="release.datetime">
-            {{ release.date }}
-          </time>
+          <time
+            scTimelineNextTime
+            [value]="release.date"
+            [options]="{ month: 'long', day: 'numeric' }"
+          ></time>
           <div scCollapsible class="mt-2">
             <button
               scButton
@@ -72,20 +74,17 @@ export class DetailsTimelineNextDemo {
   private readonly releases = [
     {
       title: 'Version 2.4',
-      datetime: '2026-10-28',
-      date: 'October 28',
+      date: Temporal.PlainDate.from('2026-10-28'),
       changes: ['Search results are cached.', 'Faster cold starts.'],
     },
     {
       title: 'Version 2.3',
-      datetime: '2026-09-30',
-      date: 'September 30',
+      date: Temporal.PlainDate.from('2026-09-30'),
       changes: ['A dark theme.', 'Keyboard shortcuts in the editor.'],
     },
     {
       title: 'Version 2.2',
-      datetime: '2026-08-26',
-      date: 'August 26',
+      date: Temporal.PlainDate.from('2026-08-26'),
       changes: ['Exports to CSV.', 'A fix for long file names.'],
     },
   ];

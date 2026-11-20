@@ -8,7 +8,9 @@ import {
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { AlternateTimelineNextDemoContainer } from './demos/alternate-timeline-next-demo-container';
 import { DetailsTimelineNextDemoContainer } from './demos/details-timeline-next-demo-container';
+import { FailureTimelineNextDemoContainer } from './demos/failure-timeline-next-demo-container';
 import { FeedTimelineNextDemoContainer } from './demos/feed-timeline-next-demo-container';
 import { HorizontalTimelineNextDemoContainer } from './demos/horizontal-timeline-next-demo-container';
 import { RtlTimelineNextDemoContainer } from './demos/rtl-timeline-next-demo-container';
@@ -27,6 +29,8 @@ import { TimelineNextUsageDemoContainer } from './demos/timeline-next-usage-demo
     ComponentBadges,
     TimelineNextUsageDemoContainer,
     HorizontalTimelineNextDemoContainer,
+    AlternateTimelineNextDemoContainer,
+    FailureTimelineNextDemoContainer,
     StatusTimelineNextDemoContainer,
     DetailsTimelineNextDemoContainer,
     FeedTimelineNextDemoContainer,
@@ -64,11 +68,12 @@ import { TimelineNextUsageDemoContainer } from './demos/timeline-next-usage-demo
         <p>
           For a process, give each event a
           <code scTypeset>status</code>: <code scTypeset>complete</code>,
-          <code scTypeset>current</code> or <code scTypeset>upcoming</code>. Its
-          marker is filled, ringed or muted, the line after a complete event is
-          the primary colour, and the current event is the step (aria-current)
-          where focus starts. Style by state from the item&apos;s data-complete,
-          data-current, data-upcoming, data-first and data-last;
+          <code scTypeset>current</code>, <code scTypeset>upcoming</code> or
+          <code scTypeset>failed</code>. Its marker is filled, ringed, muted or
+          in the destructive colour, the line after a complete event is the
+          primary colour, and the current event is the step (aria-current) where
+          focus starts. Style by state from the item&apos;s data-complete,
+          data-current, data-upcoming, data-failed, data-first and data-last;
           --sc-timeline-index numbers the events, --sc-timeline-count counts
           them, --sc-timeline-marker sizes the markers.
         </p>
@@ -110,7 +115,9 @@ import { TimelineNextUsageDemoContainer } from './demos/timeline-next-usage-demo
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <app-horizontal-timeline-next-demo-container />
+        <app-alternate-timeline-next-demo-container />
         <app-status-timeline-next-demo-container />
+        <app-failure-timeline-next-demo-container />
         <app-details-timeline-next-demo-container />
         <app-feed-timeline-next-demo-container />
         <app-rtl-timeline-next-demo-container />
@@ -139,7 +146,7 @@ export default class TimelineNextPage {
     imports: [
       'import {',
       '  ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector,',
-      '  ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription,',
+      '  ScTimelineNextOpposite, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
@@ -147,8 +154,9 @@ export default class TimelineNextPage {
       '  <div scTimelineNextItem>',
       '    <span scTimelineNextMarker></span>',
       '    <span scTimelineNextConnector></span>',
+      '    <div scTimelineNextOpposite>…</div>',
       '    <h3 scTimelineNextTitle>Deployed to production</h3>',
-      '    <time scTimelineNextTime datetime="2026-11-20T14:32">Today, 2:32 PM</time>',
+      '    <time scTimelineNextTime [value]="deployedAt"></time>',
       '    <p scTimelineNextDescription>Version 2.4.1 is live.</p>',
       '  </div>',
       '</div>',
@@ -181,6 +189,12 @@ export default class TimelineNextPage {
         'The line to the next event: primary after a complete one, none after the last. Hidden.',
     },
     {
+      name: 'ScTimelineNextOpposite',
+      selector: '[scTimelineNextOpposite]',
+      description:
+        'Across the line from the content — a date, a year: on the other side (vertical; the line stays straight), above the content (across).',
+    },
+    {
       name: 'ScTimelineNextTitle',
       selector: '[scTimelineNextTitle]',
       description: 'The event’s title, on your heading: names the event.',
@@ -189,7 +203,7 @@ export default class TimelineNextPage {
       name: 'ScTimelineNextTime',
       selector: 'time[scTimelineNextTime]',
       description:
-        'Your <time datetime>: when it was, in your words. Describes the event.',
+        'Your <time>: [value] a Temporal date or moment, written in the locale (options), its datetime set — or your words with a datetime. Describes the event.',
     },
     {
       name: 'ScTimelineNextDescription',
@@ -200,10 +214,18 @@ export default class TimelineNextPage {
 
   private readonly rootInputs: ApiInput[] = [
     {
+      name: 'alignment',
+      type: "'start' | 'end' | 'alternate'",
+      default: "'start'",
+      description:
+        'Vertical: the events after the line, before it, or in turn (the line in the middle).',
+    },
+    {
       name: 'orientation',
       type: "'vertical' | 'horizontal'",
       default: "'vertical'",
-      description: 'Which way the events run, and which arrows move.',
+      description:
+        'Which way the events run, and which arrows move; across, it scrolls when narrow.',
     },
     {
       name: 'loop',
@@ -228,7 +250,7 @@ export default class TimelineNextPage {
   private readonly itemInputs: ApiInput[] = [
     {
       name: 'status',
-      type: "'complete' | 'current' | 'upcoming'",
+      type: "'complete' | 'current' | 'upcoming' | 'failed'",
       default: 'none',
       description: 'Where it is in a process.',
     },
