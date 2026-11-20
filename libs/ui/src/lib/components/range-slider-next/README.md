@@ -26,7 +26,7 @@ Not `min` / `max`: a Signal Forms control's `min` and `max` are its value's (a n
 
 ## Behaviour
 
-- **Thumbs never cross**: each is clamped to its side of the other, on the keyboard and the pointer. Home on "to" stops at "from".
+- **Thumbs never cross.** Dragged into the other, a thumb pushes it along (Base UI's `push`), the `minStepsBetweenValues` gap kept. On the keyboard it stops at the other instead: an arrow never moves a value you didn't focus. Home on "to" stops at "from".
 - **The pointer**: a press anywhere on it brings the nearer thumb, which follows the drag (the slider drives it; the thumbs take the pointer only for their hover). With both on one spot, the direction of the drag picks the one that can move.
 - **Vertical**: the native ranges turned (`writing-mode`), the values growing upward, `aria-orientation`.
 - **Right to left**: from on the right; the arrows mirrored (Safari's too, `rtlArrowStep`, shared with the Slider).

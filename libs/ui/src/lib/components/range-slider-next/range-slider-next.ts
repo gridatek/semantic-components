@@ -136,6 +136,28 @@ export class ScRangeSliderNext implements FormValueControl<ScRangeSliderNextValu
     return next;
   }
 
+  /**
+   * Drags a thumb (the pointer): into the other, it pushes it along — the
+   * steps between them kept, both within min and max (Base UI's `push`).
+   */
+  private pushThumb(index: number, raw: number): void {
+    const [from, to] = this.value();
+    const gap = this.minStepsBetweenValues() * this.step();
+    let value: ScRangeSliderNextValue;
+    if (index === 0) {
+      const next = this.round(
+        Math.min(Math.max(raw, this.minValue()), this.maxValue() - gap),
+      );
+      value = [next, Math.max(to, this.round(next + gap))];
+    } else {
+      const next = this.round(
+        Math.max(Math.min(raw, this.maxValue()), this.minValue() + gap),
+      );
+      value = [Math.min(from, this.round(next - gap)), next];
+    }
+    if (value[0] !== from || value[1] !== to) this.value.set(value);
+  }
+
   /** Focuses the first thumb — Signal Forms does, to show an invalid field. */
   focus(options?: FocusOptions): void {
     this.ordered()[0]?.focus(options);
@@ -188,7 +210,7 @@ export class ScRangeSliderNext implements FormValueControl<ScRangeSliderNextValu
   }
 
   private move(index: number, at: number): void {
-    this.setThumb(index, at);
+    this.pushThumb(index, at);
     this.ordered()[index]?.focus({ preventScroll: true });
   }
 

@@ -135,6 +135,51 @@ test.describe('Range Slider Next demos', () => {
     await expect(from).toHaveValue('10');
   });
 
+  test('usage: a thumb dragged into the other pushes it along', async ({
+    page,
+  }) => {
+    await page.goto(demo('range-slider-next-usage-demo'));
+    const slider = page.locator('[scRangeSliderNext]');
+    const from = page.getByRole('slider', { name: 'Minimum' });
+    const to = page.getByRole('slider', { name: 'Maximum' });
+    await expect(to).toHaveValue('75');
+    const drag = async (a: number, b: number) => {
+      const start = await pointAt(page, slider, a);
+      const end = await pointAt(page, slider, b);
+      await page.mouse.move(start.x, start.y);
+      await page.mouse.down();
+      await page.mouse.move(end.x, end.y, { steps: 8 });
+      await page.mouse.up();
+    };
+
+    await drag(0.25, 0.9);
+    await expect(from).toHaveValue('90');
+    await expect(to).toHaveValue('90');
+
+    // And back: to, dragged down past where they met, pushes from.
+    await drag(0.9, 0.9);
+    await drag(0.95, 0.4);
+    await expect(to).toHaveValue('40');
+    await expect(from).toHaveValue('40');
+  });
+
+  test('steps: a pushed thumb keeps the gap', async ({ page }) => {
+    await page.goto(demo('steps-range-slider-next-demo'));
+    const slider = page.locator('[scRangeSliderNext]');
+    const from = page.getByRole('slider', { name: 'Minimum' });
+    const to = page.getByRole('slider', { name: 'Maximum' });
+    await expect(from).toHaveValue('30');
+    const start = await pointAt(page, slider, 0.3);
+    const end = await pointAt(page, slider, 1);
+    await page.mouse.move(start.x, start.y);
+    await page.mouse.down();
+    await page.mouse.move(end.x, end.y, { steps: 8 });
+    await page.mouse.up();
+    // To at the end, from two steps short of it.
+    await expect(to).toHaveValue('100');
+    await expect(from).toHaveValue('80');
+  });
+
   test('usage: both on one spot, the direction of the drag picks the thumb that can move', async ({
     page,
   }) => {

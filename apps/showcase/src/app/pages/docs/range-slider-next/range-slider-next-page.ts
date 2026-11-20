@@ -71,8 +71,9 @@ import { VerticalRangeSliderNextDemoContainer } from './demos/vertical-range-sli
             "€200").
           </li>
           <li>
-            A press on the track brings the nearer thumb; with both on one spot,
-            the direction of the drag chooses the one that can move.
+            A press on the track brings the nearer thumb; dragged into the
+            other, a thumb pushes it along. With both on one spot, the direction
+            of the drag chooses the thumb.
           </li>
           <li>
             A description is read with each thumb; invalid once touched
