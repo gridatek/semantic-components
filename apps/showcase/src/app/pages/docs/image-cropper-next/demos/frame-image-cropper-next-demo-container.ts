@@ -20,9 +20,9 @@ import { FrameImageCropperNextDemo } from './frame-image-cropper-next-demo';
 export class FrameImageCropperNextDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type ScImageCropNext,
   ScButton,
   ScFrame,
+  type ScImageCropNext,
   ScImageCropperNext,
   ScImageCropperNextImage,
   ScImageCropperNextPreview,
@@ -83,10 +83,7 @@ import { SiRotateCwIcon } from '@semantic-icons/lucide-icons';
           <svg siRotateCwIcon></svg>
           <span class="sr-only">Rotate</span>
         </button>
-        <div
-          scImageCropperNextPreview
-          class="ms-auto size-12 rounded-full"
-        >
+        <div scImageCropperNextPreview class="ms-auto size-12 rounded-full">
           <img scImageCropperNextPreviewImage alt="Your avatar, as cropped" />
         </div>
         <button scButton (click)="save()">Save avatar</button>

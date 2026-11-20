@@ -24,6 +24,7 @@ export default [
             'expectClasses',
             'expectScrollbarWidth',
             'expectStyledScrollbar',
+            'expectCrop',
           ],
         },
       ],

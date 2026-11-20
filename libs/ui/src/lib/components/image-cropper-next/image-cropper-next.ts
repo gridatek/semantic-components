@@ -39,6 +39,9 @@ export type ScImageCropperNextMode = 'box' | 'frame';
 /** How the selection looks; a circle crops to an ellipse with `cropImage`'s `shape`. */
 export type ScImageCropperNextShape = 'rectangle' | 'circle';
 
+/** The frame's room from the viewport's edges, in pixels. */
+const FRAME_INSET = 24;
+
 interface ScImageCropperNextDrag {
   readonly id: number;
   readonly element: HTMLElement;
@@ -162,12 +165,26 @@ export class ScImageCropperNext {
     };
   });
 
-  /** In frame mode, the frame: the largest box at the ratio in the viewport. */
+  /** In frame mode, the frame: the largest box at the ratio in the viewport, inset. */
   private readonly frame = computed(() => {
     const crop = this.crop();
     const ratio =
       this.ratio() ?? (crop ? crop.width / crop.height : null) ?? null;
-    return largest(this.ɵviewportSize(), ratio);
+    // Inset: the shaded image shows round it, and that it goes on.
+    const viewport = this.ɵviewportSize();
+    const inset = Math.min(
+      FRAME_INSET,
+      viewport.width / 8,
+      viewport.height / 8,
+    );
+    const box = largest(
+      {
+        width: viewport.width - inset * 2,
+        height: viewport.height - inset * 2,
+      },
+      ratio,
+    );
+    return { ...box, x: box.x + inset, y: box.y + inset };
   });
 
   /** Viewport pixels per image pixel. */
