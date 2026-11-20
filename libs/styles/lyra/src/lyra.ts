@@ -62,6 +62,7 @@ import { table } from './table';
 /** The lyra style: `provideSemanticComponents({ style: lyra })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
+import { timeline } from './timeline';
 import { toast } from './toast';
 import { toggle } from './toggle';
 import { toggleGroup } from './toggle-group';
@@ -132,6 +133,7 @@ export const lyra: ScStyle = {
   table,
   tabs,
   textarea,
+  timeline,
   toast,
   toggle,
   toggleGroup,

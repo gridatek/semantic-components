@@ -62,6 +62,7 @@ import { table } from './table';
 /** The rhea style: `provideSemanticComponents({ style: rhea })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
+import { timeline } from './timeline';
 import { toast } from './toast';
 import { toggle } from './toggle';
 import { toggleGroup } from './toggle-group';
@@ -132,6 +133,7 @@ export const rhea: ScStyle = {
   table,
   tabs,
   textarea,
+  timeline,
   toast,
   toggle,
   toggleGroup,

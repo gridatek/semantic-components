@@ -1,6 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScTimelineNextItem } from './timeline-next-item';
 
 /**
@@ -15,11 +16,13 @@ import { ScTimelineNextItem } from './timeline-next-item';
   },
 })
 export class ScTimelineNextTime {
+  private readonly styles = injectStyle().timeline;
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-timeline-time-'));
 
   private readonly class = computed(() =>
-    cn('text-muted-foreground block text-xs', this.classInput()),
+    cn('block', this.styles.time, this.classInput()),
   );
 
   constructor() {

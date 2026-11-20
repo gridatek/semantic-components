@@ -46,7 +46,7 @@ export class ScTimelineNextItem {
   private readonly timeline = inject(ScTimelineNext);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
-  private readonly corners = injectStyle().frameXs;
+  private readonly styles = injectStyle().timeline;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Names the event for `focus(value)`. */
@@ -79,13 +79,14 @@ export class ScTimelineNextItem {
 
   private readonly class = computed(() =>
     cn(
-      'relative outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
-      this.corners,
+      // The style's ring, clear of the marker on its edge.
+      'ring-offset-background relative outline-none focus-visible:ring-offset-2',
+      this.styles.item,
       // Room for the marker: before it (vertical) or above it (horizontal).
       this.vertical()
         ? 'min-h-(--sc-timeline-marker) ps-[calc(var(--sc-timeline-marker)+0.75rem)]'
         : 'pe-4 pt-[calc(var(--sc-timeline-marker)+0.75rem)]',
-      this.vertical() && !this.isLast() && 'pb-6',
+      this.vertical() && !this.isLast() && this.styles.gap,
       this.classInput(),
     ),
   );

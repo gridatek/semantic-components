@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils';
 
 /** Which way the events run. */
@@ -40,6 +41,7 @@ export interface ScTimelineNextEntry {
 })
 export class ScTimelineNext {
   private readonly direction = inject(Directionality);
+  private readonly styles = injectStyle().timeline;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScTimelineNextOrientation>('vertical');
@@ -69,6 +71,8 @@ export class ScTimelineNext {
         ? 'grid grid-cols-[repeat(var(--sc-timeline-count),minmax(0,1fr))]'
         : 'flex flex-col',
       '[--sc-timeline-marker:0.75rem]',
+      // The title line's height, which the markers line up with.
+      this.styles.root,
       this.classInput(),
     ),
   );

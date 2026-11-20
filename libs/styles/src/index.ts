@@ -259,6 +259,29 @@ export interface ScQuestionnaireStyles {
 }
 
 /** A trace's parts that change from style to style. */
+/**
+ * A timeline's parts that change from style to style — ours (shadcn has no
+ * timeline): its text as the style's Item, its markers and rings as its
+ * badges and focus rings.
+ */
+export interface ScTimelineStyles {
+  /** The title line's height (`--sc-timeline-line`): the markers line up with it. */
+  root: string;
+  /** An event: its corners and focus ring. */
+  item: string;
+  /** The space after an event, before the next (vertical). */
+  gap: string;
+  /** The marker's corners. */
+  marker: string;
+  /** The current marker's ring. */
+  markerRing: string;
+  /** The line, until an event is complete. */
+  connector: string;
+  title: string;
+  time: string;
+  description: string;
+}
+
 export interface ScTraceStyles {
   /** The rows, and any trigger or link around a line. */
   root: string;
@@ -702,6 +725,7 @@ export interface ScStyle {
   /** A multi-line text field. */
   textarea: string;
   /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
+  timeline: ScTimelineStyles;
   toast: ScToastStyles;
   toggle: (props: {
     variant?: ScToggleVariant | null;

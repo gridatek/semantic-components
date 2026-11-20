@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScTimelineNextItem } from './timeline-next-item';
 
 /**
@@ -16,6 +17,7 @@ import { ScTimelineNextItem } from './timeline-next-item';
 })
 export class ScTimelineNextConnector {
   private readonly item = inject(ScTimelineNextItem);
+  private readonly styles = injectStyle().timeline;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -24,10 +26,10 @@ export class ScTimelineNextConnector {
       'absolute',
       this.item.vertical()
         ? // Under the marker, to the event's end (its gap included).
-          'start-[calc(var(--sc-timeline-marker)/2-0.5px)] top-[calc(max(0px,(1.25rem-var(--sc-timeline-marker))/2)+var(--sc-timeline-marker)+0.25rem)] -bottom-1 w-px'
+          'start-[calc(var(--sc-timeline-marker)/2-0.5px)] top-[calc(max(0px,(var(--sc-timeline-line)-var(--sc-timeline-marker))/2)+var(--sc-timeline-marker)+0.25rem)] -bottom-1 w-px'
         : // After the marker, to the next one.
           'start-[calc(var(--sc-timeline-marker)+0.25rem)] -end-1 top-[calc(var(--sc-timeline-marker)/2-0.5px)] h-px',
-      this.item.status() === 'complete' ? 'bg-primary' : 'bg-border',
+      this.item.status() === 'complete' ? 'bg-primary' : this.styles.connector,
       this.item.isLast() && 'hidden',
       this.classInput(),
     ),

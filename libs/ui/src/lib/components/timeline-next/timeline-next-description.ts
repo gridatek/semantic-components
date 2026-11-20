@@ -1,6 +1,7 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import { DestroyRef, Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScTimelineNextItem } from './timeline-next-item';
 
 /** What happened, in more words: it describes the event. */
@@ -12,11 +13,13 @@ import { ScTimelineNextItem } from './timeline-next-item';
   },
 })
 export class ScTimelineNextDescription {
+  private readonly styles = injectStyle().timeline;
+
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-timeline-description-'));
 
   private readonly class = computed(() =>
-    cn('text-muted-foreground mt-1 block text-sm', this.classInput()),
+    cn('mt-1 block', this.styles.description, this.classInput()),
   );
 
   constructor() {
