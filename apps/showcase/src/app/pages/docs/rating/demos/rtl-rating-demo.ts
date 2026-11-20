@@ -1,22 +1,22 @@
 import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
-import { ScRatingNext, ScRatingNextIcon } from '@semantic-components/ui';
+import { ScRating, ScRatingIcon } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
 /** In a right-to-left page: from the right, ← raises it, the left half of a star its far half. */
 @Component({
-  selector: 'app-rtl-rating-next-demo',
-  imports: [Dir, ScRatingNext, ScRatingNextIcon, SiStarIcon],
+  selector: 'app-rtl-rating-demo',
+  imports: [Dir, ScRating, ScRatingIcon, SiStarIcon],
   template: `
     <div dir="rtl" lang="ar">
       <div
-        scRatingNext
+        scRating
         [(value)]="score"
         [step]="0.5"
         aria-label="التقييم"
         valueText="{value} من {max} نجوم"
       >
-        <ng-template scRatingNextIcon>
+        <ng-template scRatingIcon>
           <svg siStarIcon></svg>
         </ng-template>
       </div>
@@ -26,6 +26,6 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlRatingNextDemo {
+export class RtlRatingDemo {
   private readonly score = signal<number | null>(3.5);
 }

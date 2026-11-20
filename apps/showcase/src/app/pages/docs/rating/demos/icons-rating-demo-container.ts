@@ -1,40 +1,40 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { IconsRatingNextDemo } from './icons-rating-next-demo';
+import { IconsRatingDemo } from './icons-rating-demo';
 
 @Component({
-  selector: 'app-icons-rating-next-demo-container',
-  imports: [DemoContainer, IconsRatingNextDemo],
+  selector: 'app-icons-rating-demo-container',
+  imports: [DemoContainer, IconsRatingDemo],
   template: `
     <app-demo-container
       title="Other icons"
-      demoUrl="/demos/rating-next/icons-rating-next-demo"
+      demoUrl="/demos/rating/icons-rating-demo"
       [code]="code"
     >
-      <app-icons-rating-next-demo />
+      <app-icons-rating-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class IconsRatingNextDemoContainer {
+export class IconsRatingDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScRatingNext, ScRatingNextIcon } from '@semantic-components/ui';
+import { ScRating, ScRatingIcon } from '@semantic-components/ui';
 import { SiHeartIcon } from '@semantic-icons/lucide-icons';
 
 /** Any icon, and a colour of yours on the rating (the full stars). */
 @Component({
-  selector: 'app-icons-rating-next-demo',
-  imports: [ScRatingNext, ScRatingNextIcon, SiHeartIcon],
+  selector: 'app-icons-rating-demo',
+  imports: [ScRating, ScRatingIcon, SiHeartIcon],
   template: \`
     <div
-      scRatingNext
+      scRating
       class="text-red-500"
       [(value)]="score"
       aria-label="How much you liked it"
       valueText="{value} of {max} hearts"
     >
-      <ng-template scRatingNextIcon>
+      <ng-template scRatingIcon>
         <svg siHeartIcon></svg>
       </ng-template>
     </div>
@@ -42,7 +42,7 @@ import { SiHeartIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class IconsRatingNextDemo {
+export class IconsRatingDemo {
   private readonly score = signal<number | null>(4);
 }`;
 }

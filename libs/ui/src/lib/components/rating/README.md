@@ -1,159 +1,61 @@
-# Rating Component
+# Rating
 
-A composable rating component for Angular applications, built with a three-tier directive architecture for maximum flexibility and accessibility.
+A score in stars, or any icon: WAI-ARIA's rating slider — one control, one tab stop, one value (`null` while not rated), whole or half stars, read out by your words. Built from MUI's, Mantine's, Zag's (Ark UI, Chakra) and ui-sdk's ratings: their features (halves, deselect, read-only for any score, a fill per star, no hover preview on touch), the slider so that halves read right ("3.5 out of 5 stars").
 
-## Architecture
-
-The component consists of four directives:
-
-1. **ScRating** - Parent directive managing value state and configuration
-2. **ScRatingGroup** - Container directive managing hover state and keyboard navigation
-3. **ScRatingItem** - Individual rating item directive
-4. **ScRatingIcon** - Icon directive that handles active/inactive styling automatically
-
-## Basic Usage
+## Usage
 
 ```html
-<div scRating [(value)]="rating">
-  <div scRatingGroup aria-label="Rating">
-    @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
-      <svg siStarIcon scRatingIcon></svg>
-    </span>
-    }
+<div scField>
+  <label scLabel>Your rating</label>
+  <div scRating [formField]="form.stars" [step]="0.5" valueText="{value} out of {max} stars">
+    <ng-template scRatingIcon>
+      <svg siStarIcon></svg>
+    </ng-template>
   </div>
+  <div scFieldErrors></div>
 </div>
 ```
 
-## Features
-
-- **Two-way binding** - Use `[(value)]` for reactive value updates
-- **Hover preview** - Visual feedback shows rating before selection
-- **Half-star support** - Enable `[allowHalf]="true"` for 0.5 increments
-- **Custom icons** - Use any icon (stars, hearts, etc.)
-- **Custom colors** - Override `--sc-rating-active-color` and `--sc-rating-inactive-color` CSS variables
-- **Keyboard navigation** - Full arrow key, Home, End support
-- **Accessibility** - WCAG AA compliant with proper ARIA attributes
-- **Readonly/Disabled states** - Control interactivity
-- **Clear capability** - Click same value to reset (configurable)
-
-## API
-
-### ScRating
-
-| Input        | Type      | Default | Description                                 |
-| ------------ | --------- | ------- | ------------------------------------------- |
-| `value`      | `number`  | `0`     | Current rating value (use with `[(value)]`) |
-| `allowHalf`  | `boolean` | `false` | Enable half-star ratings                    |
-| `allowClear` | `boolean` | `true`  | Allow clearing by clicking same value       |
-| `readonly`   | `boolean` | `false` | Make the rating read-only                   |
-| `disabled`   | `boolean` | `false` | Disable the rating                          |
-| `label`      | `string`  | `''`    | Accessible label for the rating             |
-
-**Note:** The `max` value is automatically calculated from the highest `value` among all rating items.
-
-### CSS Variables
-
-| Variable                     | Default                   | Description            |
-| ---------------------------- | ------------------------- | ---------------------- |
-| `--sc-rating-active-color`   | `var(--color-yellow-400)` | Color for filled icons |
-| `--sc-rating-inactive-color` | `var(--color-gray-300)`   | Color for empty icons  |
-
-### ScRatingGroup
-
-Container directive that manages hover state and keyboard navigation. No inputs required.
-
-### ScRatingItem
-
-| Input   | Type     | Required | Description                           |
-| ------- | -------- | -------- | ------------------------------------- |
-| `value` | `number` | Yes      | The rating value this item represents |
-
-### ScRatingIcon
-
-Icon directive applied to SVGs inside `scRatingItem`. Automatically handles active/inactive styling based on the item's state. Default size is `size-6`, overridable via the `class` input.
-
-## Examples
-
-### Half-Star Rating
-
-```html
-<div scRating [(value)]="rating" [allowHalf]="true">
-  <div scRatingGroup aria-label="Rating">
-    @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
-      <svg siStarIcon scRatingIcon></svg>
-      <svg siStarIcon scRatingIcon></svg>
-    </span>
-    }
-  </div>
-</div>
+```ts
+readonly reviewForm = form(signal({ stars: null as number | null }), (path) =>
+  required(path.stars, { message: 'Pick at least one star.' }),
+);
 ```
 
-### Custom Icons with Custom Color (Hearts)
+## Parts
+
+| Part           | Selector                    | What it does                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| -------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScRating`     | `div[scRating]`             | `role="slider"` (read-only: `role="img"`), named by its field's label or `aria-label`. `value`: a number, `null` while not rated (two-way, or a `[formField]`: `FormValueControl<number \| null>`); `count` (5, the stars); `step` (1, or 0.5 for halves); `deselectable`; `readonly`; `disabled`; `valueText` (`{value}`, `{max}`, the value in `LOCALE_ID`). exportAs `scRating`: `shown()`, `text()`.                                                    |
+| `ScRatingIcon` | `ng-template[scRatingIcon]` | Your icon, once, in `<ng-template scRatingIcon>`. The rating draws it for each star, twice: empty (`text-muted-foreground`), and full over it up to the star's fill (`--sc-rating-fill`, 0 to 1), filled in the rating's colour (`text-primary`; yours by `class` on the rating). Context: `$implicit`, the star (1 for the first), and `full` — `let-full="full"` for a different icon per layer (an outline heart, a filled one). Unsized icons `size-5`. |
+
+Not `max`: a Signal Forms control's `max` is the value's; the highest score is `count`, one per star.
+
+## A different icon per layer
 
 ```html
-<div scRating [(value)]="rating" [style.--sc-rating-active-color]="'var(--color-red-500)'">
-  <div scRatingGroup aria-label="Rating">
-    @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
-      <svg siHeartIcon scRatingIcon></svg>
-    </span>
-    }
-  </div>
-</div>
+<ng-template scRatingIcon let-full="full">
+  @if (full) {
+  <svg siHeartIcon></svg>
+  } @else {
+  <svg siHeartCrackIcon></svg>
+  }
+</ng-template>
 ```
 
-### Custom Size
+## Behaviour
 
-```html
-<div scRating [(value)]="rating">
-  <div scRatingGroup aria-label="Rating">
-    @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track i) {
-    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
-      <svg siStarIcon scRatingIcon class="size-5"></svg>
-    </span>
-    }
-  </div>
-</div>
-```
-
-### Readonly Display
-
-```html
-<div scRating [value]="4.5" [readonly]="true">
-  <div scRatingGroup aria-label="Rating">
-    @for (i of [1, 2, 3, 4, 5]; track i) {
-    <span scRatingItem [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'" [value]="i">
-      <svg siStarIcon scRatingIcon></svg>
-    </span>
-    }
-  </div>
-</div>
-```
+- **Keys**: → and ↑ raise it by `step`, ← and ↓ lower it (mirrored right to left), Home and End go to the lowest and highest scores. Deselectable: Delete or Backspace, or ↓ from the lowest score, takes it back (`null`).
+- **Pointer**: a press picks the star under it — with `step` 0.5, its first half gives a half (the right half, right to left). Deselectable, a press on the score given takes it back. A hover previews (not on touch: a tap picks at once); leaving shows the score again.
+- **Read-only**: any score (4.2) shows, the fifth star a fifth filled; not focusable.
+- **One icon, two layers**: you write the icon once; the rating stamps it twice per star (a template), the full layer clipped to the fill — whole, half or part of a star, rendered on the server as in the browser. It's a `@Component` for that template.
 
 ## Accessibility
 
-The component implements WCAG AA accessibility standards:
+- One tab stop; `aria-valuenow`, `aria-valuemin` (0), `aria-valuemax` (the number of stars), and your `aria-valuetext` ("3.5 out of 5 stars").
+- Read-only, an image named by the value text. Required and invalid (once touched) from Signal Forms; a field's description is read with it.
+- The empty and full stars differ by fill, not only by colour; the theme's `primary` keeps the 3:1 contrast a state needs (yellow on white doesn't).
 
-- **ARIA roles**: `group` for container, `radiogroup` for items container, `radio` for items
-- **ARIA attributes**: `aria-label`, `aria-labelledby`, `aria-checked`, `aria-valuenow/min/max`
-- **Keyboard navigation**: Arrow keys, Home, End, Space, Enter
-- **Focus management**: Roving tabindex pattern for optimal keyboard navigation
-- **Screen reader support**: Announces current value and changes
+## Style
 
-## Keyboard Shortcuts
-
-- **Arrow Right/Up**: Increase rating by step (1 or 0.5)
-- **Arrow Left/Down**: Decrease rating by step
-- **Home**: Set to minimum (0)
-- **End**: Set to maximum
-- **Space/Enter**: Select focused item
-
-## Styling
-
-Items expose a `data-state` attribute with values:
-
-- `full` - Item is fully selected
-- `half` - Item is half selected (when `allowHalf` is enabled)
-- `empty` - Item is not selected
+No key of its own: theme colours (`primary`, `muted-foreground`), the focus ring of every control.

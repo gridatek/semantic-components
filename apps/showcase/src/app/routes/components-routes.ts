@@ -520,12 +520,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/rating/rating-page'),
       },
       {
-        path: 'rating-next',
-        title: 'Rating Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/rating-next/rating-next-page'),
-      },
-      {
         path: 'resizable',
         title: 'Resizable - Semantic Components',
         loadComponent: () => import('../pages/docs/resizable/resizable-page'),

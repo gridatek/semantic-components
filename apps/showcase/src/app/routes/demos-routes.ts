@@ -4281,69 +4281,69 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/rating-next',
+    path: 'demos/rating',
     children: [
       {
-        path: 'rating-next-usage-demo',
+        path: 'rating-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/rating-next/demos/rating-next-usage-demo').then(
-            (m) => m.RatingNextUsageDemo,
+          import('../pages/docs/rating/demos/rating-usage-demo').then(
+            (m) => m.RatingUsageDemo,
           ),
       },
       {
-        path: 'half-rating-next-demo',
+        path: 'half-rating-demo',
         loadComponent: () =>
-          import('../pages/docs/rating-next/demos/half-rating-next-demo').then(
-            (m) => m.HalfRatingNextDemo,
+          import('../pages/docs/rating/demos/half-rating-demo').then(
+            (m) => m.HalfRatingDemo,
           ),
       },
       {
-        path: 'form-rating-next-demo',
+        path: 'form-rating-demo',
         loadComponent: () =>
-          import('../pages/docs/rating-next/demos/form-rating-next-demo').then(
-            (m) => m.FormRatingNextDemo,
+          import('../pages/docs/rating/demos/form-rating-demo').then(
+            (m) => m.FormRatingDemo,
           ),
       },
       {
-        path: 'readonly-rating-next-demo',
+        path: 'readonly-rating-demo',
         loadComponent: () =>
-          import('../pages/docs/rating-next/demos/readonly-rating-next-demo').then(
-            (m) => m.ReadonlyRatingNextDemo,
+          import('../pages/docs/rating/demos/readonly-rating-demo').then(
+            (m) => m.ReadonlyRatingDemo,
           ),
       },
       {
-        path: 'disabled-rating-next-demo',
+        path: 'disabled-rating-demo',
         loadComponent: () =>
-          import('../pages/docs/rating-next/demos/disabled-rating-next-demo').then(
-            (m) => m.DisabledRatingNextDemo,
+          import('../pages/docs/rating/demos/disabled-rating-demo').then(
+            (m) => m.DisabledRatingDemo,
           ),
       },
       {
-        path: 'deselectable-rating-next-demo',
+        path: 'deselectable-rating-demo',
         loadComponent: () =>
-          import('../pages/docs/rating-next/demos/deselectable-rating-next-demo').then(
-            (m) => m.DeselectableRatingNextDemo,
+          import('../pages/docs/rating/demos/deselectable-rating-demo').then(
+            (m) => m.DeselectableRatingDemo,
           ),
       },
       {
-        path: 'icons-rating-next-demo',
+        path: 'icons-rating-demo',
         loadComponent: () =>
-          import('../pages/docs/rating-next/demos/icons-rating-next-demo').then(
-            (m) => m.IconsRatingNextDemo,
+          import('../pages/docs/rating/demos/icons-rating-demo').then(
+            (m) => m.IconsRatingDemo,
           ),
       },
       {
-        path: 'size-rating-next-demo',
+        path: 'size-rating-demo',
         loadComponent: () =>
-          import('../pages/docs/rating-next/demos/size-rating-next-demo').then(
-            (m) => m.SizeRatingNextDemo,
+          import('../pages/docs/rating/demos/size-rating-demo').then(
+            (m) => m.SizeRatingDemo,
           ),
       },
       {
-        path: 'rtl-rating-next-demo',
+        path: 'rtl-rating-demo',
         loadComponent: () =>
-          import('../pages/docs/rating-next/demos/rtl-rating-next-demo').then(
-            (m) => m.RtlRatingNextDemo,
+          import('../pages/docs/rating/demos/rtl-rating-demo').then(
+            (m) => m.RtlRatingDemo,
           ),
       },
     ],

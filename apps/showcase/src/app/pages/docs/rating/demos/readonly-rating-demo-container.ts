@@ -6,7 +6,11 @@ import { ReadonlyRatingDemo } from './readonly-rating-demo';
   selector: 'app-readonly-rating-demo-container',
   imports: [DemoContainer, ReadonlyRatingDemo],
   template: `
-    <app-demo-container title="Readonly" [code]="code">
+    <app-demo-container
+      title="Read-only"
+      demoUrl="/demos/rating/readonly-rating-demo"
+      [code]="code"
+    >
       <app-readonly-rating-demo />
     </app-demo-container>
   `,
@@ -15,53 +19,26 @@ import { ReadonlyRatingDemo } from './readonly-rating-demo';
 })
 export class ReadonlyRatingDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScRating,
-  ScRatingGroup,
-  ScRatingIcon,
-  ScRatingItem,
-} from '@semantic-components/ui';
+import { ScRating, ScRatingIcon } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
+/** Read-only: any score (4.2), an image named by its value text. */
 @Component({
   selector: 'app-readonly-rating-demo',
-  imports: [ScRating, ScRatingGroup, ScRatingItem, ScRatingIcon, SiStarIcon],
+  imports: [ScRating, ScRatingIcon, SiStarIcon],
   template: \`
-    <div class="flex flex-col gap-4">
-      <div class="flex flex-col gap-2">
-        <div scRating [value]="4" [readonly]="true">
-          <div scRatingGroup aria-label="Rating">
-            @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span
-                scRatingItem
-                [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'"
-                [value]="i"
-              >
-                <svg siStarIcon scRatingIcon></svg>
-              </span>
-            }
-          </div>
-        </div>
-        <p class="text-muted-foreground text-sm">Average: 4.0 / 5</p>
+    <div class="flex items-center gap-2">
+      <div
+        scRating
+        readonly
+        [value]="4.2"
+        valueText="Rated {value} out of {max}"
+      >
+        <ng-template scRatingIcon>
+          <svg siStarIcon></svg>
+        </ng-template>
       </div>
-
-      <div class="flex flex-col gap-2">
-        <div scRating [value]="3.5" [readonly]="true" [allowHalf]="true">
-          <div scRatingGroup aria-label="Rating">
-            @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span
-                scRatingItem
-                [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'"
-                [value]="i"
-              >
-                <svg siStarIcon scRatingIcon></svg>
-                <svg siStarIcon scRatingIcon></svg>
-              </span>
-            }
-          </div>
-        </div>
-        <p class="text-muted-foreground text-sm">Average: 3.5 / 5</p>
-      </div>
+      <span class="text-muted-foreground text-sm">4.2 · 128 reviews</span>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },

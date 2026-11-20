@@ -45,7 +45,6 @@ export * from './progress';
 export * from './radio-group';
 export * from './range-slider';
 export * from './rating';
-export * from './rating-next';
 export * from './resizable';
 export * from './scroll-area';
 export * from './select';

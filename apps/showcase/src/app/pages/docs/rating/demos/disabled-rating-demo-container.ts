@@ -6,7 +6,11 @@ import { DisabledRatingDemo } from './disabled-rating-demo';
   selector: 'app-disabled-rating-demo-container',
   imports: [DemoContainer, DisabledRatingDemo],
   template: `
-    <app-demo-container title="Disabled" [code]="code">
+    <app-demo-container
+      title="Disabled"
+      demoUrl="/demos/rating/disabled-rating-demo"
+      [code]="code"
+    >
       <app-disabled-rating-demo />
     </app-demo-container>
   `,
@@ -15,41 +19,30 @@ import { DisabledRatingDemo } from './disabled-rating-demo';
 })
 export class DisabledRatingDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScRating,
-  ScRatingGroup,
-  ScRatingIcon,
-  ScRatingItem,
-} from '@semantic-components/ui';
+import { ScRating, ScRatingIcon } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
+/** Disabled: out of the tab order, no press or key changes it. */
 @Component({
   selector: 'app-disabled-rating-demo',
-  imports: [ScRating, ScRatingGroup, ScRatingItem, ScRatingIcon, SiStarIcon],
+  imports: [ScRating, ScRatingIcon, SiStarIcon],
   template: \`
-    <div class="flex flex-col gap-2">
-      <div scRating [(value)]="rating" [disabled]="true">
-        <div scRatingGroup aria-label="Rating">
-          @for (i of [1, 2, 3, 4, 5]; track i) {
-            <span
-              scRatingItem
-              [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'"
-              [value]="i"
-            >
-              <svg siStarIcon scRatingIcon></svg>
-            </span>
-          }
-        </div>
-      </div>
-      <p class="text-muted-foreground text-sm">
-        Rating: {{ rating() }} / 5 (disabled)
-      </p>
+    <div
+      scRating
+      disabled
+      [(value)]="score"
+      aria-label="Rating"
+      valueText="{value} out of {max} stars"
+    >
+      <ng-template scRatingIcon>
+        <svg siStarIcon></svg>
+      </ng-template>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledRatingDemo {
-  private readonly rating = signal(2);
+  private readonly score = signal<number | null>(2);
 }`;
 }

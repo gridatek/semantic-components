@@ -1,7 +1,7 @@
 import type { Locator, Page } from '@playwright/test';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/rating-next/${name}`;
+const demo = (name: string) => `/demos/rating/${name}`;
 
 /** A press on a star (1 for the first), so far across it (0 to 1, from its start). */
 async function pressStar(
@@ -35,11 +35,11 @@ const fills = (rating: Locator) =>
       ),
     );
 
-test.describe('Rating Next demos', () => {
+test.describe('Rating demos', () => {
   test('usage: a slider read out by its value text; the stars hidden', async ({
     page,
   }) => {
-    await page.goto(demo('rating-next-usage-demo'));
+    await page.goto(demo('rating-usage-demo'));
     const rating = page.getByRole('slider', { name: 'Rating' });
     await expect(rating).toHaveAttribute('aria-valuenow', '3');
     await expect(rating).toHaveAttribute('aria-valuetext', '3 out of 5 stars');
@@ -53,7 +53,7 @@ test.describe('Rating Next demos', () => {
   test('usage: the keys — arrows by one, Home and End to the ends', async ({
     page,
   }) => {
-    await page.goto(demo('rating-next-usage-demo'));
+    await page.goto(demo('rating-usage-demo'));
     const rating = page.getByRole('slider', { name: 'Rating' });
     await rating.focus();
     await page.keyboard.press('ArrowRight');
@@ -75,7 +75,7 @@ test.describe('Rating Next demos', () => {
   test('usage: a press picks a star; a hover previews, leaving shows the score', async ({
     page,
   }) => {
-    await page.goto(demo('rating-next-usage-demo'));
+    await page.goto(demo('rating-usage-demo'));
     const rating = page.getByRole('slider', { name: 'Rating' });
     await pressStar(page, rating, 5, 0.5);
     await expect(rating).toHaveAttribute('aria-valuenow', '5');
@@ -98,7 +98,7 @@ test.describe('Rating Next demos', () => {
   test('halves: the left half of a star gives a half; the keys move by halves', async ({
     page,
   }) => {
-    await page.goto(demo('half-rating-next-demo'));
+    await page.goto(demo('half-rating-demo'));
     const rating = page.getByRole('slider', { name: 'Rating' });
     await expect(rating).toHaveAttribute(
       'aria-valuetext',
@@ -118,7 +118,7 @@ test.describe('Rating Next demos', () => {
   test('form: not rated is null; required, once touched, says so', async ({
     page,
   }) => {
-    await page.goto(demo('form-rating-next-demo'));
+    await page.goto(demo('form-rating-demo'));
     const rating = page.getByRole('slider', { name: 'Your rating' });
     const errors = page.locator('[scFieldErrors]');
     await expect(rating).toHaveAttribute('aria-required', 'true');
@@ -140,7 +140,7 @@ test.describe('Rating Next demos', () => {
   test('read-only: an image named by its value text, any score, no focus', async ({
     page,
   }) => {
-    await page.goto(demo('readonly-rating-next-demo'));
+    await page.goto(demo('readonly-rating-demo'));
     const rating = page.getByRole('img', { name: 'Rated 4.2 out of 5' });
     await expect(rating).toBeVisible();
     await expect(rating).not.toHaveAttribute('tabindex');
@@ -154,7 +154,7 @@ test.describe('Rating Next demos', () => {
   test('disabled: out of the tab order; a press changes nothing', async ({
     page,
   }) => {
-    await page.goto(demo('disabled-rating-next-demo'));
+    await page.goto(demo('disabled-rating-demo'));
     const rating = page.getByRole('slider', { name: 'Rating' });
     await expect(rating).toHaveAttribute('aria-disabled', 'true');
     await expect(rating).toHaveAttribute('tabindex', '-1');
@@ -165,7 +165,7 @@ test.describe('Rating Next demos', () => {
   test('deselectable: the score pressed again, or Delete, takes it back', async ({
     page,
   }) => {
-    await page.goto(demo('deselectable-rating-next-demo'));
+    await page.goto(demo('deselectable-rating-demo'));
     const rating = page.getByRole('slider', { name: 'Rating' });
     await pressStar(page, rating, 3, 0.5);
     await expect(rating).toHaveAttribute('aria-valuenow', '0');
@@ -180,7 +180,7 @@ test.describe('Rating Next demos', () => {
   test('other icons: hearts in your colour, written once, read out by your words', async ({
     page,
   }) => {
-    await page.goto(demo('icons-rating-next-demo'));
+    await page.goto(demo('icons-rating-demo'));
     const rating = page.getByRole('slider', { name: 'How much you liked it' });
     await expect(rating).toHaveAttribute('aria-valuetext', '4 of 5 hearts');
     await expect(rating).toHaveClass(/\btext-red-500\b/);
@@ -189,12 +189,10 @@ test.describe('Rating Next demos', () => {
   test('size and colour: your size on the icons, your colour on the rating', async ({
     page,
   }) => {
-    await page.goto(demo('size-rating-next-demo'));
+    await page.goto(demo('size-rating-demo'));
     const icon = page.locator('[data-slot=rating-item] svg').first();
     await expect(icon).toHaveCSS('width', '32px');
-    await expect(page.locator('[scRatingNext]')).toHaveClass(
-      /\btext-amber-500\b/,
-    );
+    await expect(page.locator('[scRating]')).toHaveClass(/\btext-amber-500\b/);
     // Each star, both layers: the icon written once.
     await expect(page.locator('[data-slot=rating-item] svg')).toHaveCount(10);
   });
@@ -202,7 +200,7 @@ test.describe('Rating Next demos', () => {
   test('RTL: from the right; ← raises it, the right half of a star is its first', async ({
     page,
   }) => {
-    await page.goto(demo('rtl-rating-next-demo'));
+    await page.goto(demo('rtl-rating-demo'));
     const rating = page.getByRole('slider', { name: 'التقييم' });
     await rating.focus();
     await page.keyboard.press('ArrowLeft');

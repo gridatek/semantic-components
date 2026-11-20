@@ -1,52 +1,53 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RatingNextUsageDemo } from './rating-next-usage-demo';
+import { DeselectableRatingDemo } from './deselectable-rating-demo';
 
 @Component({
-  selector: 'app-rating-next-usage-demo-container',
-  imports: [DemoContainer, RatingNextUsageDemo],
+  selector: 'app-deselectable-rating-demo-container',
+  imports: [DemoContainer, DeselectableRatingDemo],
   template: `
     <app-demo-container
-      title="Usage"
-      demoUrl="/demos/rating-next/rating-next-usage-demo"
+      title="Deselectable"
+      demoUrl="/demos/rating/deselectable-rating-demo"
       [code]="code"
     >
-      <app-rating-next-usage-demo />
+      <app-deselectable-rating-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RatingNextUsageDemoContainer {
+export class DeselectableRatingDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScRatingNext, ScRatingNextIcon } from '@semantic-components/ui';
+import { ScRating, ScRatingIcon } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
-/** A score out of five, read out by your value text; your icon, once: the rating draws the stars. */
+/** Deselectable: a press on the score given, Delete or Backspace takes it back (null). */
 @Component({
-  selector: 'app-rating-next-usage-demo',
-  imports: [ScRatingNext, ScRatingNextIcon, SiStarIcon],
+  selector: 'app-deselectable-rating-demo',
+  imports: [ScRating, ScRatingIcon, SiStarIcon],
   template: \`
     <div class="flex flex-col items-center gap-2">
       <div
-        scRatingNext
+        scRating
+        deselectable
         [(value)]="score"
         aria-label="Rating"
         valueText="{value} out of {max} stars"
       >
-        <ng-template scRatingNextIcon>
+        <ng-template scRatingIcon>
           <svg siStarIcon></svg>
         </ng-template>
       </div>
-      <p class="text-muted-foreground text-sm tabular-nums">
-        {{ score() ?? 0 }} out of 5
+      <p class="text-muted-foreground text-sm">
+        {{ score() === null ? 'Not rated' : score() + ' out of 5' }}
       </p>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RatingNextUsageDemo {
+export class DeselectableRatingDemo {
   private readonly score = signal<number | null>(3);
 }`;
 }

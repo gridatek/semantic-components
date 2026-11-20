@@ -1,51 +1,24 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScRating,
-  ScRatingGroup,
-  ScRatingIcon,
-  ScRatingItem,
-} from '@semantic-components/ui';
+import { ScRating, ScRatingIcon } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
+/** Read-only: any score (4.2), an image named by its value text. */
 @Component({
   selector: 'app-readonly-rating-demo',
-  imports: [ScRating, ScRatingGroup, ScRatingItem, ScRatingIcon, SiStarIcon],
+  imports: [ScRating, ScRatingIcon, SiStarIcon],
   template: `
-    <div class="flex flex-col gap-4">
-      <div class="flex flex-col gap-2">
-        <div scRating [value]="4" [readonly]="true">
-          <div scRatingGroup aria-label="Rating">
-            @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span
-                scRatingItem
-                [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'"
-                [value]="i"
-              >
-                <svg siStarIcon scRatingIcon></svg>
-              </span>
-            }
-          </div>
-        </div>
-        <p class="text-muted-foreground text-sm">Average: 4.0 / 5</p>
+    <div class="flex items-center gap-2">
+      <div
+        scRating
+        readonly
+        [value]="4.2"
+        valueText="Rated {value} out of {max}"
+      >
+        <ng-template scRatingIcon>
+          <svg siStarIcon></svg>
+        </ng-template>
       </div>
-
-      <div class="flex flex-col gap-2">
-        <div scRating [value]="3.5" [readonly]="true" [allowHalf]="true">
-          <div scRatingGroup aria-label="Rating">
-            @for (i of [1, 2, 3, 4, 5]; track i) {
-              <span
-                scRatingItem
-                [attr.aria-label]="i === 1 ? '1 star' : i + ' stars'"
-                [value]="i"
-              >
-                <svg siStarIcon scRatingIcon></svg>
-                <svg siStarIcon scRatingIcon></svg>
-              </span>
-            }
-          </div>
-        </div>
-        <p class="text-muted-foreground text-sm">Average: 3.5 / 5</p>
-      </div>
+      <span class="text-muted-foreground text-sm">4.2 · 128 reviews</span>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

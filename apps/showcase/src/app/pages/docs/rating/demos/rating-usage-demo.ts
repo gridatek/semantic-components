@@ -1,21 +1,20 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScRatingNext, ScRatingNextIcon } from '@semantic-components/ui';
+import { ScRating, ScRatingIcon } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
-/** By halves (step 0.5): the left half of a star gives a half, the arrows move by halves. */
+/** A score out of five, read out by your value text; your icon, once: the rating draws the stars. */
 @Component({
-  selector: 'app-half-rating-next-demo',
-  imports: [ScRatingNext, ScRatingNextIcon, SiStarIcon],
+  selector: 'app-rating-usage-demo',
+  imports: [ScRating, ScRatingIcon, SiStarIcon],
   template: `
     <div class="flex flex-col items-center gap-2">
       <div
-        scRatingNext
+        scRating
         [(value)]="score"
-        [step]="0.5"
         aria-label="Rating"
         valueText="{value} out of {max} stars"
       >
-        <ng-template scRatingNextIcon>
+        <ng-template scRatingIcon>
           <svg siStarIcon></svg>
         </ng-template>
       </div>
@@ -27,6 +26,6 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HalfRatingNextDemo {
-  private readonly score = signal<number | null>(3.5);
+export class RatingUsageDemo {
+  private readonly score = signal<number | null>(3);
 }

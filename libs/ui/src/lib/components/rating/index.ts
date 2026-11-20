@@ -1,4 +1,3 @@
-export { SC_RATING, ScRating } from './rating';
-export { SC_RATING_GROUP, ScRatingGroup } from './rating-group';
-export { ScRatingItem } from './rating-item';
+export { ScRating } from './rating';
 export { ScRatingIcon } from './rating-icon';
+export type { ScRatingIconContext } from './rating-icon';

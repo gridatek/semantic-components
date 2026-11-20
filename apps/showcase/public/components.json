@@ -802,15 +802,6 @@
   {
     "name": "Rating",
     "path": "rating",
-    "description": "A composable rating component for feedback and reviews.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
-    "name": "Rating Next",
-    "path": "rating-next",
     "description": "A score in stars (or any icon): a slider, whole or half stars, read out by your words; a Signal Forms field.",
     "status": "Experimental",
     "library": "ui",
