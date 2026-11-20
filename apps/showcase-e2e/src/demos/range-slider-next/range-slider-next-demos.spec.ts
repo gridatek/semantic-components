@@ -39,6 +39,26 @@ async function pointAt(
   };
 }
 
+/** The colour drawn at a point of the page, as an image shows it: [r, g, b]. */
+async function pixelAt(
+  page: Page,
+  { x, y }: { x: number; y: number },
+): Promise<number[]> {
+  const shot = await page.screenshot({
+    clip: { x: Math.round(x), y: Math.round(y), width: 1, height: 1 },
+  });
+  return page.evaluate(async (png) => {
+    const image = new Image();
+    image.src = `data:image/png;base64,${png}`;
+    await image.decode();
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = 1;
+    const context = canvas.getContext('2d') as CanvasRenderingContext2D;
+    context.drawImage(image, 0, 0);
+    return [...context.getImageData(0, 0, 1, 1).data.slice(0, 3)];
+  }, shot.toString('base64'));
+}
+
 async function pressAt(page: Page, slider: Locator, fraction: number) {
   const { x, y } = await pointAt(page, slider, fraction);
   await page.mouse.click(x, y);
@@ -65,6 +85,29 @@ test.describe('Range Slider Next demos', () => {
     await expect(to).toHaveValue('75');
     await page.keyboard.press('ArrowRight');
     await expect(to).toHaveValue('76');
+  });
+
+  test('usage: a focused thumb never hides the other under the range', async ({
+    page,
+  }) => {
+    await page.goto(demo('range-slider-next-usage-demo'));
+    const slider = page.locator('[scRangeSliderNext]');
+    const from = page.getByRole('slider', { name: 'Minimum' });
+    const to = page.getByRole('slider', { name: 'Maximum' });
+    await expect(to).toHaveValue('75');
+    for (const focused of [from, to]) {
+      // By the keyboard: the focus ring shows.
+      await focused.focus();
+      await page.keyboard.press('ArrowRight');
+      await page.keyboard.press('ArrowLeft');
+      await expect(focused).toBeFocused();
+      // Both thumbs look the same at their centres: the thumb, not the range.
+      const fromAt = await pointAt(page, slider, 0.25);
+      const toAt = await pointAt(page, slider, 0.75);
+      await expect
+        .poll(async () => pixelAt(page, toAt))
+        .toEqual(await pixelAt(page, fromAt));
+    }
   });
 
   test('usage: a press on the track brings the nearer thumb, which follows the drag', async ({

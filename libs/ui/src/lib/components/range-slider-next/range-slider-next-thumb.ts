@@ -84,8 +84,10 @@ export class ScRangeSliderNextThumb {
     const from = this.index() === 0;
     return cn(
       // Both in one cell, one over the other; only the thumbs take the
-      // pointer (for their hover: the slider drives the drag).
-      'pointer-events-none col-start-1 row-start-1 m-0 appearance-none bg-transparent focus-visible:z-10 focus-visible:outline-hidden disabled:opacity-100',
+      // pointer (for their hover: the slider drives the drag). Never raised
+      // on focus: the first draws the range on its track, which would cover
+      // the second thumb.
+      'pointer-events-none col-start-1 row-start-1 m-0 appearance-none bg-transparent focus-visible:outline-hidden disabled:opacity-100',
       '[&::-webkit-slider-thumb]:pointer-events-auto [&::-moz-range-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:cursor-pointer',
       vertical
         ? 'h-full min-h-40 [direction:rtl] [writing-mode:vertical-lr]'
