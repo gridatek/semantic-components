@@ -797,8 +797,7 @@
     "description": "A range on one track: two thumbs that never cross, in the Slider's look; the value is the pair, one Signal Forms field.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Rating",
