@@ -19,12 +19,28 @@ import { TimelineNextUsageDemo } from './timeline-next-usage-demo';
 })
 export class TimelineNextUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription } from '@semantic-components/ui';
+import {
+  ScTimelineNext,
+  ScTimelineNextConnector,
+  ScTimelineNextDescription,
+  ScTimelineNextItem,
+  ScTimelineNextMarker,
+  ScTimelineNextTime,
+  ScTimelineNextTitle,
+} from '@semantic-components/ui';
 
 /** An activity feed: Tab into it, then ↑ and ↓ between events; Home and End to the first and last. */
 @Component({
   selector: 'app-timeline-next-usage-demo',
-  imports: [ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription],
+  imports: [
+    ScTimelineNext,
+    ScTimelineNextItem,
+    ScTimelineNextMarker,
+    ScTimelineNextConnector,
+    ScTimelineNextTitle,
+    ScTimelineNextTime,
+    ScTimelineNextDescription,
+  ],
   template: \`
     <div scTimelineNext aria-label="Activity" class="w-full max-w-md">
       @for (event of events; track event.title) {

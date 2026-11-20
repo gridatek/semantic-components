@@ -19,13 +19,32 @@ import { StatusTimelineNextDemo } from './status-timeline-next-demo';
 })
 export class StatusTimelineNextDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScTimelineNext,
+  ScTimelineNextConnector,
+  ScTimelineNextDescription,
+  ScTimelineNextItem,
+  ScTimelineNextMarker,
+  ScTimelineNextTime,
+  ScTimelineNextTitle,
+} from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 /** An order’s steps: complete, current, upcoming — said in words too, not only by the markers. Focus starts on the current step; the button moves it there. */
 @Component({
   selector: 'app-status-timeline-next-demo',
-  imports: [ScButton, ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription, SiCheckIcon],
+  imports: [
+    ScButton,
+    ScTimelineNext,
+    ScTimelineNextItem,
+    ScTimelineNextMarker,
+    ScTimelineNextConnector,
+    ScTimelineNextTitle,
+    ScTimelineNextTime,
+    ScTimelineNextDescription,
+    SiCheckIcon,
+  ],
   template: \`
     <div class="flex w-full max-w-md flex-col gap-4">
       <div

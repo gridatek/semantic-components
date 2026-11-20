@@ -3,7 +3,6 @@ import {
   ScButton,
   ScTimelineNext,
   ScTimelineNextConnector,
-  ScTimelineNextDescription,
   ScTimelineNextItem,
   ScTimelineNextMarker,
   ScTimelineNextTime,
@@ -21,7 +20,6 @@ import {
     ScTimelineNextConnector,
     ScTimelineNextTitle,
     ScTimelineNextTime,
-    ScTimelineNextDescription,
   ],
   template: `
     <div class="flex w-full max-w-md flex-col gap-4">

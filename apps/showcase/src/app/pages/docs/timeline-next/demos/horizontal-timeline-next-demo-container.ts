@@ -19,12 +19,26 @@ import { HorizontalTimelineNextDemo } from './horizontal-timeline-next-demo';
 })
 export class HorizontalTimelineNextDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription } from '@semantic-components/ui';
+import {
+  ScTimelineNext,
+  ScTimelineNextConnector,
+  ScTimelineNextItem,
+  ScTimelineNextMarker,
+  ScTimelineNextTime,
+  ScTimelineNextTitle,
+} from '@semantic-components/ui';
 
 /** A roadmap in a row: ← and → between milestones; loop off, so → stops at Launch. */
 @Component({
   selector: 'app-horizontal-timeline-next-demo',
-  imports: [ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription],
+  imports: [
+    ScTimelineNext,
+    ScTimelineNextItem,
+    ScTimelineNextMarker,
+    ScTimelineNextConnector,
+    ScTimelineNextTitle,
+    ScTimelineNextTime,
+  ],
   template: \`
     <div
       scTimelineNext

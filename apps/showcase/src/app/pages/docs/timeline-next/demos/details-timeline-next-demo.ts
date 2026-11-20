@@ -6,7 +6,6 @@ import {
   ScCollapsibleTrigger,
   ScTimelineNext,
   ScTimelineNextConnector,
-  ScTimelineNextDescription,
   ScTimelineNextItem,
   ScTimelineNextMarker,
   ScTimelineNextTime,
@@ -28,7 +27,6 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScTimelineNextConnector,
     ScTimelineNextTitle,
     ScTimelineNextTime,
-    ScTimelineNextDescription,
     SiChevronDownIcon,
   ],
   template: `

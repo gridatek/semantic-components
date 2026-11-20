@@ -19,20 +19,31 @@ import { FeedTimelineNextDemo } from './feed-timeline-next-demo';
 })
 export class FeedTimelineNextDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
-import { ScButton, ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScTimelineNext,
+  ScTimelineNextConnector,
+  ScTimelineNextItem,
+  ScTimelineNextMarker,
+  ScTimelineNextTime,
+  ScTimelineNextTitle,
+} from '@semantic-components/ui';
 
 /** Team updates as a feed: articles that load more, busy while they do. Page Up and Page Down move between articles from anywhere in one. */
 @Component({
   selector: 'app-feed-timeline-next-demo',
-  imports: [ScButton, ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription],
+  imports: [
+    ScButton,
+    ScTimelineNext,
+    ScTimelineNextItem,
+    ScTimelineNextMarker,
+    ScTimelineNextConnector,
+    ScTimelineNextTitle,
+    ScTimelineNextTime,
+  ],
   template: \`
     <div class="flex w-full max-w-md flex-col gap-4">
-      <div
-        scTimelineNext
-        feed
-        [busy]="busy()"
-        aria-label="Team updates"
-      >
+      <div scTimelineNext feed [busy]="busy()" aria-label="Team updates">
         @for (update of shown(); track update.title) {
           <article scTimelineNextItem>
             <span scTimelineNextMarker></span>
@@ -78,9 +89,7 @@ export class FeedTimelineNextDemo {
 
   private readonly count = signal(3);
   private readonly busy = signal(false);
-  private readonly shown = computed(() =>
-    this.updates.slice(0, this.count()),
-  );
+  private readonly shown = computed(() => this.updates.slice(0, this.count()));
 
   /** Three more, after a moment — as from a server. */
   private more(): void {

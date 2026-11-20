@@ -3,7 +3,6 @@ import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScTimelineNext,
   ScTimelineNextConnector,
-  ScTimelineNextDescription,
   ScTimelineNextItem,
   ScTimelineNextMarker,
   ScTimelineNextTime,
@@ -21,7 +20,6 @@ import {
     ScTimelineNextConnector,
     ScTimelineNextTitle,
     ScTimelineNextTime,
-    ScTimelineNextDescription,
   ],
   template: `
     <div dir="rtl" lang="ar" class="w-full">

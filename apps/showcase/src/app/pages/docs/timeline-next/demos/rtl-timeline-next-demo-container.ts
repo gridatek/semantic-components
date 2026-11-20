@@ -20,12 +20,27 @@ import { RtlTimelineNextDemo } from './rtl-timeline-next-demo';
 export class RtlTimelineNextDemoContainer {
   readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription } from '@semantic-components/ui';
+import {
+  ScTimelineNext,
+  ScTimelineNextConnector,
+  ScTimelineNextItem,
+  ScTimelineNextMarker,
+  ScTimelineNextTime,
+  ScTimelineNextTitle,
+} from '@semantic-components/ui';
 
 /** In a right-to-left page: a horizontal timeline runs from the right, and ← moves to the next event. */
 @Component({
   selector: 'app-rtl-timeline-next-demo',
-  imports: [Dir, ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription],
+  imports: [
+    Dir,
+    ScTimelineNext,
+    ScTimelineNextItem,
+    ScTimelineNextMarker,
+    ScTimelineNextConnector,
+    ScTimelineNextTitle,
+    ScTimelineNextTime,
+  ],
   template: \`
     <div dir="rtl" lang="ar" class="w-full">
       <div scTimelineNext orientation="horizontal" aria-label="خارطة الطريق">

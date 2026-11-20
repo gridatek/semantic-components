@@ -19,13 +19,36 @@ import { DetailsTimelineNextDemo } from './details-timeline-next-demo';
 })
 export class DetailsTimelineNextDemoContainer {
   readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScCollapsible, ScCollapsibleTrigger, ScCollapsiblePanel, ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription } from '@semantic-components/ui';
+import {
+  ScButton,
+  ScCollapsible,
+  ScCollapsiblePanel,
+  ScCollapsibleTrigger,
+  ScTimelineNext,
+  ScTimelineNextConnector,
+  ScTimelineNextItem,
+  ScTimelineNextMarker,
+  ScTimelineNextTime,
+  ScTimelineNextTitle,
+} from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 /** A changelog, each release with a Collapsible of its changes: Tab reaches the trigger after the event, the arrows still move between events. */
 @Component({
   selector: 'app-details-timeline-next-demo',
-  imports: [ScButton, ScCollapsible, ScCollapsibleTrigger, ScCollapsiblePanel, ScTimelineNext, ScTimelineNextItem, ScTimelineNextMarker, ScTimelineNextConnector, ScTimelineNextTitle, ScTimelineNextTime, ScTimelineNextDescription, SiChevronDownIcon],
+  imports: [
+    ScButton,
+    ScCollapsible,
+    ScCollapsibleTrigger,
+    ScCollapsiblePanel,
+    ScTimelineNext,
+    ScTimelineNextItem,
+    ScTimelineNextMarker,
+    ScTimelineNextConnector,
+    ScTimelineNextTitle,
+    ScTimelineNextTime,
+    SiChevronDownIcon,
+  ],
   template: \`
     <div scTimelineNext aria-label="Changelog" class="w-full max-w-md">
       @for (release of releases; track release.title) {
