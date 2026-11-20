@@ -49,7 +49,7 @@ import {
         />
         <p scFieldDescription>Typing your name signs as drawing does.</p>
       </div>
-      <button scButton type="submit">Sign</button>
+      <button scButton type="submit">Send</button>
       @if (sent()) {
         <p role="status" class="text-muted-foreground text-sm">
           Signed {{ sent() }}.

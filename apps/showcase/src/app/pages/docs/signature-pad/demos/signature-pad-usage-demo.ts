@@ -1,36 +1,47 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScSignaturePad } from '@semantic-components/ui';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
+import {
+  ScButton,
+  type ScSignature,
+  ScSignaturePad,
+} from '@semantic-components/ui';
 
-/** The pad, and your buttons calling it: Undo takes the last stroke back, Clear all. */
+/** Sign, then Clear or Save: the pad, named by the line above it, and your two buttons. */
 @Component({
   selector: 'app-signature-pad-usage-demo',
   imports: [ScButton, ScSignaturePad],
   template: `
-    <div class="w-full max-w-md space-y-2">
-      <div scSignaturePad #pad="scSignaturePad" aria-label="Signature"></div>
-      <div class="flex justify-end gap-2">
+    <div class="flex w-full max-w-md flex-col gap-3">
+      <p id="agree-label" class="text-sm font-medium">Sign below to agree:</p>
+      <div
+        scSignaturePad
+        #pad="scSignaturePad"
+        aria-labelledby="agree-label"
+        [(value)]="signature"
+      ></div>
+      <div class="grid grid-cols-2 gap-3">
         <button
           scButton
           variant="outline"
-          size="sm"
-          [disabled]="!pad.canUndo()"
-          (click)="pad.undo()"
-        >
-          Undo
-        </button>
-        <button
-          scButton
-          variant="outline"
-          size="sm"
           [disabled]="pad.empty()"
-          (click)="pad.clear()"
+          (click)="pad.clear(); saved.set(false)"
         >
           Clear
         </button>
+        <button scButton [disabled]="pad.empty()" (click)="saved.set(true)">
+          Save
+        </button>
       </div>
+      @if (saved() && signature()) {
+        <p role="status" class="text-muted-foreground text-sm">
+          Signature saved.
+        </p>
+      }
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SignaturePadUsageDemo {}
+export class SignaturePadUsageDemo {
+  private readonly signature = signal<ScSignature | null>(null);
+  private readonly saved = signal(false);
+}

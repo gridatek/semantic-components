@@ -68,7 +68,7 @@ import {
         <p scFieldErrors></p>
       </div>
       <div class="flex gap-2">
-        <button scButton type="submit">Sign</button>
+        <button scButton type="submit">Send</button>
         <button
           scButton
           variant="outline"
