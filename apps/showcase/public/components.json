@@ -754,8 +754,7 @@
     "description": "A QR code as one SVG path, named for where it leads; qrCodeToSvg and qrCodeToBlob make files.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Questionnaire",
