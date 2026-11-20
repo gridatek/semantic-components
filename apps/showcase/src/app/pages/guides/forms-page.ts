@@ -68,11 +68,19 @@ import { TocHeading } from '../../components/toc/toc-heading';
         </p>
         <app-doc-code [code]="schemaCode" />
         <p>
-          The bounds of a slider or a number are these rules too — the control
-          takes them from the form, never from an input of its own. A range (a
-          pair of values) gets them on each value:
+          The bounds of a slider, a number or a range are these rules too: with
+          a form, the control takes them from the schema (Angular refuses
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[min]</code> or
+          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[max]</code>
+          beside [formField]). A range — a pair of values — gets them on each
+          value:
         </p>
         <app-doc-code [code]="pairCode" />
+        <p>
+          Without a form — a live filter, a clip&apos;s trim, a chart&apos;s
+          zoom — write them on the control instead, the same for every one:
+        </p>
+        <app-doc-code [code]="noFormCode" language="angular-html" />
       </section>
 
       <section class="space-y-4">
@@ -123,6 +131,9 @@ readonly profileForm = form(this.profile, (path) => {
     max(value, 1000);
   }),
 );`;
+
+  private readonly noFormCode = `<input scSlider [(value)]="volume" [min]="0" [max]="11" aria-label="Volume" />
+<div scRangeSlider [(value)]="clip" [min]="0" [max]="duration" aria-label="Trim">…</div>`;
 
   private readonly submitCode = `readonly profileForm = form(this.profile, schema, {
   submission: {
