@@ -143,16 +143,16 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
                 scEditorSearchBar
                 [(open)]="searchOpen"
                 aria-label="Search and replace"
-                class="flex flex-col gap-1.5 p-2"
+                class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 gap-y-1.5 p-2"
               >
-                <div class="flex flex-wrap items-center gap-2">
-                  <input
-                    scInput
-                    scEditorSearchInput
-                    aria-label="Search"
-                    placeholder="Search…"
-                    class="h-8 min-w-40 flex-1"
-                  />
+                <input
+                  scInput
+                  scEditorSearchInput
+                  aria-label="Search"
+                  placeholder="Search…"
+                  class="h-8 w-full"
+                />
+                <div class="flex items-center justify-end gap-2">
                   <span
                     scEditorSearchResults
                     #results="scEditorSearchResults"
@@ -192,14 +192,14 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
                     <span class="sr-only">Close search</span>
                   </button>
                 </div>
-                <div class="flex flex-wrap items-center gap-2">
-                  <input
-                    scInput
-                    scEditorReplaceInput
-                    aria-label="Replace with"
-                    placeholder="Replace with…"
-                    class="h-8 min-w-40 flex-1"
-                  />
+                <input
+                  scInput
+                  scEditorReplaceInput
+                  aria-label="Replace with"
+                  placeholder="Replace with…"
+                  class="h-8 w-full"
+                />
+                <div class="flex items-center justify-end gap-2">
                   <button scButton variant="outline" size="sm" scEditorReplace>
                     Replace
                   </button>
