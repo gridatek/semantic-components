@@ -254,7 +254,7 @@ A rule (the user, 2026-11-20). A control's bounds — the lowest and highest val
 - **A number** (Slider, Number Group): `min(path.volume, 0); max(path.volume, 100);` — Signal Forms feeds the control's `min` / `max` inputs.
 - **A pair** (Range Slider): `applyEach(path.price, (value) => { min(value, 0); max(value, 1000); })` — each value's bounds; the control reads its first value's `min` and its second's `max` from the `[formField]` on it (`FormField`, `self: true`). No `minValue` / `maxValue`: a Signal Forms control's `min` and `max` are typed as its value, so a pair can't take them as inputs.
 - **Without a form**, a control keeps its defaults (a Range Slider 0 to 100). A Number Group or Slider bound by `[(value)]` can still take `[min]` / `[max]`: the same inputs the form feeds, not a second API.
-- **Not for dates yet**: Signal Forms' `min()` / `max()` take numbers, so Calendar, Date Picker and Date Input keep `minDate` / `maxDate`.
+- **Not for dates yet**: Signal Forms' `min()` / `max()` take numbers, so Calendar, Date Picker and Date Input keep `minDate` / `maxDate` — to move once Angular takes dates (docs/todo.md, "Date bounds from the form").
 
 ## Component Structure Template
 
