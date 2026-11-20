@@ -8,6 +8,8 @@ import {
   ScField,
   ScFrame,
   ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
   ScLabel,
   ScLink,
   ScMenu,
@@ -156,6 +158,8 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     ),
   ],
   imports: [
+    ScInputGroupAddon,
+    ScInputGroup,
     ScCollapsible,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
@@ -594,27 +598,31 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                 scEditorSearchBar
                 [(open)]="searchOpen"
                 aria-label="Search and replace"
-                class="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-2 gap-y-1.5 p-2"
+                class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 gap-y-1.5 p-2 [grid-template-areas:'search_close'_'actions_actions'_'replace_replace'_'buttons_buttons'] sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:[grid-template-areas:'search_actions_close'_'replace_buttons_.']"
               >
-                <input
-                  scInput
-                  scEditorSearchInput
-                  aria-label="Search"
-                  placeholder="Search…"
-                  class="h-8 w-full"
-                />
-                <div class="flex items-center justify-start gap-2">
-                  <span
-                    scEditorSearchResults
-                    #results="scEditorSearchResults"
-                    class="text-muted-foreground data-[state=none]:text-destructive min-w-16 text-sm whitespace-nowrap tabular-nums"
-                  >
-                    @if (results.state() === 'found') {
-                      {{ (results.index() ?? 0) + 1 }} of {{ results.count() }}
-                    } @else if (results.state() === 'none') {
-                      No results
-                    }
-                  </span>
+                <div scInputGroup class="h-8 [grid-area:search]">
+                  <input
+                    scInput
+                    scEditorSearchInput
+                    aria-label="Search"
+                    placeholder="Search…"
+                  />
+                  <div scInputGroupAddon side="inline-end">
+                    <span
+                      scEditorSearchResults
+                      #results="scEditorSearchResults"
+                      class="text-muted-foreground data-[state=none]:text-destructive text-sm whitespace-nowrap tabular-nums"
+                    >
+                      @if (results.state() === 'found') {
+                        {{ (results.index() ?? 0) + 1 }} of
+                        {{ results.count() }}
+                      } @else if (results.state() === 'none') {
+                        No results
+                      }
+                    </span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 [grid-area:actions]">
                   <button
                     scButton
                     variant="ghost"
@@ -655,6 +663,7 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                   variant="ghost"
                   size="icon-sm"
                   scEditorSearchClose
+                  class="[grid-area:close]"
                 >
                   <svg siXIcon></svg>
                   <span class="sr-only">Close search</span>
@@ -664,9 +673,9 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                   scEditorReplaceInput
                   aria-label="Replace with"
                   placeholder="Replace with…"
-                  class="h-8 w-full"
+                  class="h-8 w-full [grid-area:replace]"
                 />
-                <div class="flex items-center justify-start gap-2">
+                <div class="flex items-center gap-2 [grid-area:buttons]">
                   <button scButton variant="outline" size="sm" scEditorReplace>
                     Replace
                   </button>
