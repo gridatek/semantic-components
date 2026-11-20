@@ -92,3 +92,42 @@ test('on a scrolled page, the first selection shows it by the text', async ({
     Math.abs((box?.y ?? 0) + (box?.height ?? 0) - (text?.y ?? 0)),
   ).toBeLessThan(60);
 });
+
+test('it follows the text as the page scrolls', async ({ page }) => {
+  // Shown, then the page (not the document) scrolled: it was fixed where it
+  // first showed, the text going on without it.
+  await page.goto('/docs/components/editor');
+  const editor = page
+    .getByTitle('A comment with a floating toolbar', { exact: true })
+    .getByRole('textbox', { name: 'Comment' });
+  await editor.scrollIntoViewIfNeeded();
+  await listening(page);
+  const toolbar = bubble(page);
+  await expect(async () => {
+    await editor.getByText('Select some of this text').dblclick({
+      position: { x: 10, y: 8 },
+    });
+    await expect(toolbar).toBeVisible({ timeout: 2000 });
+  }).toPass({ timeout: 15_000 });
+
+  // The gap from the toolbar's bottom to the text's top.
+  const gap = async () => {
+    const text = await editor.boundingBox();
+    const box = await toolbar.boundingBox();
+    return (text?.y ?? 0) - ((box?.y ?? 0) + (box?.height ?? 0));
+  };
+  const before = await gap();
+  const top = (await editor.boundingBox())?.y ?? 0;
+
+  await editor.hover();
+  await page.mouse.wheel(0, 120);
+  // The page has scrolled…
+  await expect
+    .poll(async () => (await editor.boundingBox())?.y ?? 0)
+    .toBeLessThan(top - 50);
+  // …and the toolbar with it.
+  await expect
+    .poll(async () => Math.abs((await gap()) - before))
+    .toBeLessThan(2);
+  await expect(toolbar).toBeVisible();
+});

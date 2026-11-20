@@ -60,15 +60,32 @@ export class ScEditorBubbleMenu {
           pluginKey: this.pluginKey,
           editor,
           element: this.element,
-          // Not clipped by the document's scrolling box; moves as it scrolls.
-          options: {
-            strategy: 'fixed',
-            placement: 'top',
-            scrollTarget: editor.view.dom.parentElement ?? window,
-          },
+          // Not clipped by the document's scrolling box.
+          options: { strategy: 'fixed', placement: 'top' },
         }),
       );
+
+      // Placed again as anything scrolls — the page, a layout's box, the
+      // document — not only the one target the plugin listens to: fixed,
+      // it would stay where it was as the text went on. Scroll events don't
+      // bubble, hence the capture. Once a frame, and only while shown.
+      let frame = 0;
+      const place = () => {
+        if (frame || this.element.style.visibility === 'hidden') return;
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          if (editor.isDestroyed) return;
+          editor.view.dispatch(
+            editor.state.tr.setMeta(this.pluginKey, 'updatePosition'),
+          );
+        });
+      };
+      const doc = editor.view.dom.ownerDocument;
+      doc.addEventListener('scroll', place, { capture: true, passive: true });
+
       onCleanup(() => {
+        doc.removeEventListener('scroll', place, { capture: true });
+        cancelAnimationFrame(frame);
         if (!editor.isDestroyed) editor.unregisterPlugin(this.pluginKey);
       });
     });
