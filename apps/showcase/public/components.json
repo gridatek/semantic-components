@@ -441,6 +441,15 @@
     "hidden": true
   },
   {
+    "name": "Image Cropper Next",
+    "path": "image-cropper-next",
+    "description": "Crop an image, after Vercel: a box over it or a frame it moves under, the crop as two-way state, sliders for screen readers, cropImage() for the file.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Media",
+    "hidden": true
+  },
+  {
     "name": "Infinite Scroll",
     "path": "infinite-scroll",
     "description": "More near the end or the start, with whatever scrolls; a Load more button and a status.",

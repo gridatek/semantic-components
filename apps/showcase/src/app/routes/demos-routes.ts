@@ -3061,6 +3061,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/image-cropper-next',
+    children: [
+      {
+        path: 'image-cropper-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/image-cropper-next-usage-demo').then(
+            (m) => m.ImageCropperNextUsageDemo,
+          ),
+      },
+      {
+        path: 'aspect-ratio-image-cropper-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/aspect-ratio-image-cropper-next-demo').then(
+            (m) => m.AspectRatioImageCropperNextDemo,
+          ),
+      },
+      {
+        path: 'frame-image-cropper-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/frame-image-cropper-next-demo').then(
+            (m) => m.FrameImageCropperNextDemo,
+          ),
+      },
+      {
+        path: 'grid-image-cropper-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/grid-image-cropper-next-demo').then(
+            (m) => m.GridImageCropperNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-image-cropper-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/controlled-image-cropper-next-demo').then(
+            (m) => m.ControlledImageCropperNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-image-cropper-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/disabled-image-cropper-next-demo').then(
+            (m) => m.DisabledImageCropperNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-image-cropper-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/rtl-image-cropper-next-demo').then(
+            (m) => m.RtlImageCropperNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/infinite-scroll',
     children: [
       {
