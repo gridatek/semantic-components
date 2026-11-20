@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -12,9 +12,9 @@ import {
 
 /** mode="both": the highlighted suggestion also completes the text, selected — typing on replaces it. It completes from the start, so the suggestions begin with the text. */
 @Component({
-  selector: 'app-inline-autocomplete-next-demo',
+  selector: 'app-inline-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -25,8 +25,8 @@ import {
   ],
   template: `
     <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
+      scAutocomplete
+      #ac="scAutocomplete"
       mode="both"
       autoHighlight
       [(value)]="country"
@@ -53,7 +53,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InlineAutocompleteNextDemo {
+export class InlineAutocompleteDemo {
   private readonly country = signal('');
   private readonly countries = [
     'Algeria',

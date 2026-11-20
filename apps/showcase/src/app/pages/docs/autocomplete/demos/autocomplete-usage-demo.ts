@@ -1,26 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { AutocompleteNextUsageDemo } from './autocomplete-next-usage-demo';
-
-@Component({
-  selector: 'app-autocomplete-next-usage-demo-container',
-  imports: [DemoContainer, AutocompleteNextUsageDemo],
-  template: `
-    <app-demo-container
-      title="Usage"
-      demoUrl="/demos/autocomplete-next/autocomplete-next-usage-demo"
-      [code]="code"
-    >
-      <app-autocomplete-next-usage-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class AutocompleteNextUsageDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -35,9 +15,9 @@ import {
 
 /** Free text with suggestions: the value is what is typed; a suggestion picked writes its label. */
 @Component({
-  selector: 'app-autocomplete-next-usage-demo',
+  selector: 'app-autocomplete-usage-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -48,11 +28,11 @@ import {
     ScField,
     ScLabel,
   ],
-  template: \`
+  template: `
     <div class="flex w-64 flex-col gap-3">
       <div scField>
         <label scLabel>Country</label>
-        <div scAutocompleteNext #ac="scAutocompleteNext" [(value)]="country">
+        <div scAutocomplete #ac="scAutocomplete" [(value)]="country">
           <input scInput scComboboxInput placeholder="Type a country" />
           <ng-template scComboboxPortal>
             <div scComboboxPopup>
@@ -68,11 +48,11 @@ import {
       </div>
       <p class="text-muted-foreground text-sm">Value: “{{ country() }}”</p>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AutocompleteNextUsageDemo {
+export class AutocompleteUsageDemo {
   private readonly country = signal('');
   private readonly countries = [
     'Algeria',
@@ -100,5 +80,4 @@ export class AutocompleteNextUsageDemo {
   private matching(query: string): string[] {
     return this.countries.filter((name) => scComboboxMatches(name, query));
   }
-}`;
 }

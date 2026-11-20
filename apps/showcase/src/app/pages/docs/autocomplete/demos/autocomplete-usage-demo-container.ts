@@ -1,8 +1,26 @@
-import { JsonPipe } from '@angular/common';
-import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { FormField, form, maxLength, required } from '@angular/forms/signals';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { AutocompleteUsageDemo } from './autocomplete-usage-demo';
+
+@Component({
+  selector: 'app-autocomplete-usage-demo-container',
+  imports: [DemoContainer, AutocompleteUsageDemo],
+  template: `
+    <app-demo-container
+      title="Usage"
+      demoUrl="/demos/autocomplete/autocomplete-usage-demo"
+      [code]="code"
+    >
+      <app-autocomplete-usage-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class AutocompleteUsageDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -10,21 +28,16 @@ import {
   ScComboboxPopup,
   ScComboboxPortal,
   ScField,
-  ScFieldDescription,
-  ScFieldErrors,
-  ScFrame,
   ScInput,
   ScLabel,
   scComboboxMatches,
 } from '@semantic-components/ui';
 
-/** A Signal Forms field of text: required and maxLength in the schema, the errors once touched. */
+/** Free text with suggestions: the value is what is typed; a suggestion picked writes its label. */
 @Component({
-  selector: 'app-form-autocomplete-next-demo',
+  selector: 'app-autocomplete-usage-demo',
   imports: [
-    FormField,
-    JsonPipe,
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -33,21 +46,14 @@ import {
     ScComboboxPortal,
     ScInput,
     ScField,
-    ScFieldDescription,
-    ScFieldErrors,
-    ScFrame,
     ScLabel,
   ],
-  template: `
-    <div class="flex w-72 flex-col gap-4">
+  template: \`
+    <div class="flex w-64 flex-col gap-3">
       <div scField>
-        <label scLabel>Destination</label>
-        <div
-          scAutocompleteNext
-          #ac="scAutocompleteNext"
-          [formField]="tripForm.destination"
-        >
-          <input scInput scComboboxInput placeholder="A country, or anywhere" />
+        <label scLabel>Country</label>
+        <div scAutocomplete #ac="scAutocomplete" [(value)]="country">
+          <input scInput scComboboxInput placeholder="Type a country" />
           <ng-template scComboboxPortal>
             <div scComboboxPopup>
               <div scComboboxEmpty>No country found.</div>
@@ -59,21 +65,15 @@ import {
             </div>
           </ng-template>
         </div>
-        <p scFieldDescription>Pick a country, or write your own.</p>
-        <div scFieldErrors></div>
       </div>
-      <pre scFrame class="bg-muted p-4 text-xs">{{ model() | json }}</pre>
+      <p class="text-muted-foreground text-sm">Value: “{{ country() }}”</p>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormAutocompleteNextDemo {
-  private readonly model = signal({ destination: '' });
-  private readonly tripForm = form(this.model, (path) => {
-    required(path.destination, { message: 'Where are you going?' });
-    maxLength(path.destination, 40, { message: 'At most 40 characters.' });
-  });
+export class AutocompleteUsageDemo {
+  private readonly country = signal('');
   private readonly countries = [
     'Algeria',
     'Argentina',
@@ -100,4 +100,5 @@ export class FormAutocompleteNextDemo {
   private matching(query: string): string[] {
     return this.countries.filter((name) => scComboboxMatches(name, query));
   }
+}`;
 }

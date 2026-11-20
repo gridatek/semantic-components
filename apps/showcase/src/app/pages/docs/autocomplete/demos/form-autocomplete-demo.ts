@@ -1,28 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { FormAutocompleteNextDemo } from './form-autocomplete-next-demo';
-
-@Component({
-  selector: 'app-form-autocomplete-next-demo-container',
-  imports: [DemoContainer, FormAutocompleteNextDemo],
-  template: `
-    <app-demo-container
-      title="Form"
-      demoUrl="/demos/autocomplete-next/form-autocomplete-next-demo"
-      [code]="code"
-    >
-      <app-form-autocomplete-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class FormAutocompleteNextDemoContainer {
-  private readonly code = `import { JsonPipe } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, maxLength, required } from '@angular/forms/signals';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -40,11 +20,11 @@ import {
 
 /** A Signal Forms field of text: required and maxLength in the schema, the errors once touched. */
 @Component({
-  selector: 'app-form-autocomplete-next-demo',
+  selector: 'app-form-autocomplete-demo',
   imports: [
     FormField,
     JsonPipe,
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -58,13 +38,13 @@ import {
     ScFrame,
     ScLabel,
   ],
-  template: \`
+  template: `
     <div class="flex w-72 flex-col gap-4">
       <div scField>
         <label scLabel>Destination</label>
         <div
-          scAutocompleteNext
-          #ac="scAutocompleteNext"
+          scAutocomplete
+          #ac="scAutocomplete"
           [formField]="tripForm.destination"
         >
           <input scInput scComboboxInput placeholder="A country, or anywhere" />
@@ -84,11 +64,11 @@ import {
       </div>
       <pre scFrame class="bg-muted p-4 text-xs">{{ model() | json }}</pre>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormAutocompleteNextDemo {
+export class FormAutocompleteDemo {
   private readonly model = signal({ destination: '' });
   private readonly tripForm = form(this.model, (path) => {
     required(path.destination, { message: 'Where are you going?' });
@@ -120,5 +100,4 @@ export class FormAutocompleteNextDemo {
   private matching(query: string): string[] {
     return this.countries.filter((name) => scComboboxMatches(name, query));
   }
-}`;
 }

@@ -1,24 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { AsyncAutocompleteNextDemo } from './async-autocomplete-next-demo';
-
-@Component({
-  selector: 'app-async-autocomplete-next-demo-container',
-  imports: [DemoContainer, AsyncAutocompleteNextDemo],
-  template: `
-    <app-demo-container
-      title="Async search"
-      demoUrl="/demos/autocomplete-next/async-autocomplete-next-demo"
-      [code]="code"
-    >
-      <app-async-autocomplete-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class AsyncAutocompleteNextDemoContainer {
-  private readonly code = `import {
+import {
   Component,
   ViewEncapsulation,
   effect,
@@ -26,7 +6,7 @@ export class AsyncAutocompleteNextDemoContainer {
   viewChild,
 } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -39,9 +19,9 @@ import {
 
 /** Suggestions from a server: your search runs on query(), a status says it is searching. */
 @Component({
-  selector: 'app-async-autocomplete-next-demo',
+  selector: 'app-async-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -51,8 +31,8 @@ import {
     ScInput,
     ScComboboxStatus,
   ],
-  template: \`
-    <div scAutocompleteNext [(value)]="city" class="w-64">
+  template: `
+    <div scAutocomplete [(value)]="city" class="w-64">
       <input
         scInput
         scComboboxInput
@@ -86,12 +66,12 @@ import {
         </div>
       </ng-template>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AsyncAutocompleteNextDemo {
-  private readonly autocomplete = viewChild.required(ScAutocompleteNext);
+export class AsyncAutocompleteDemo {
+  private readonly autocomplete = viewChild.required(ScAutocomplete);
   private readonly city = signal('');
   private readonly results = signal<readonly string[]>([]);
   private readonly loading = signal(false);
@@ -126,5 +106,4 @@ export class AsyncAutocompleteNextDemo {
       onCleanup(() => clearTimeout(timer));
     });
   }
-}`;
 }

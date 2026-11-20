@@ -1,12 +1,12 @@
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/autocomplete-next/${name}`;
+const demo = (name: string) => `/demos/autocomplete/${name}`;
 
-test.describe('Autocomplete Next demos', () => {
+test.describe('Autocomplete demos', () => {
   test('usage: typing filters; arrows and Enter write the label', async ({
     page,
   }) => {
-    await page.goto(demo('autocomplete-next-usage-demo'));
+    await page.goto(demo('autocomplete-usage-demo'));
     const input = page.getByRole('combobox', { name: 'Country' });
     await expect(input).toHaveAttribute('aria-autocomplete', 'list');
     // A click doesn't open it (openOnInputClick off, as Base UI's).
@@ -25,7 +25,7 @@ test.describe('Autocomplete Next demos', () => {
   test('usage: free text stays, with no suggestion and after closing', async ({
     page,
   }) => {
-    await page.goto(demo('autocomplete-next-usage-demo'));
+    await page.goto(demo('autocomplete-usage-demo'));
     const input = page.getByRole('combobox', { name: 'Country' });
     await input.click();
     await input.pressSequentially('Atlantis');
@@ -38,7 +38,7 @@ test.describe('Autocomplete Next demos', () => {
   });
 
   test('usage: a click on a suggestion picks it', async ({ page }) => {
-    await page.goto(demo('autocomplete-next-usage-demo'));
+    await page.goto(demo('autocomplete-usage-demo'));
     const input = page.getByRole('combobox', { name: 'Country' });
     await input.click();
     await input.pressSequentially('ja');
@@ -50,7 +50,7 @@ test.describe('Autocomplete Next demos', () => {
   test('inline completion: the highlighted suggestion typed in, selected', async ({
     page,
   }) => {
-    await page.goto(demo('inline-autocomplete-next-demo'));
+    await page.goto(demo('inline-autocomplete-demo'));
     const input = page.getByRole('combobox', { name: 'Country' });
     await input.click();
     await input.pressSequentially('ge');
@@ -69,7 +69,7 @@ test.describe('Autocomplete Next demos', () => {
   });
 
   test('groups: suggestions under their labels', async ({ page }) => {
-    await page.goto(demo('groups-autocomplete-next-demo'));
+    await page.goto(demo('groups-autocomplete-demo'));
     const input = page.getByRole('combobox', { name: 'Food' });
     await input.click();
     await input.pressSequentially('ap');
@@ -88,7 +88,7 @@ test.describe('Autocomplete Next demos', () => {
   test('async search: a status while searching, then the results', async ({
     page,
   }) => {
-    await page.goto(demo('async-autocomplete-next-demo'));
+    await page.goto(demo('async-autocomplete-demo'));
     const input = page.getByRole('combobox', { name: 'City' });
     await input.click();
     await input.pressSequentially('ber');
@@ -97,7 +97,7 @@ test.describe('Autocomplete Next demos', () => {
   });
 
   test('auto highlight: Enter picks the first suggestion', async ({ page }) => {
-    await page.goto(demo('auto-highlight-autocomplete-next-demo'));
+    await page.goto(demo('auto-highlight-autocomplete-demo'));
     const input = page.getByRole('combobox', { name: 'Country' });
     await input.click();
     await input.pressSequentially('ita');
@@ -107,7 +107,7 @@ test.describe('Autocomplete Next demos', () => {
   });
 
   test('limit: five suggestions, and how many there are', async ({ page }) => {
-    await page.goto(demo('limit-autocomplete-next-demo'));
+    await page.goto(demo('limit-autocomplete-demo'));
     const input = page.getByRole('combobox', { name: 'Country' });
     await input.click();
     await page.keyboard.press('ArrowDown');
@@ -128,7 +128,7 @@ test.describe('Autocomplete Next demos', () => {
   test('form: required and maxLength from the schema, once touched', async ({
     page,
   }) => {
-    await page.goto(demo('form-autocomplete-next-demo'));
+    await page.goto(demo('form-autocomplete-demo'));
     const input = page.getByRole('combobox', { name: 'Destination' });
     const errors = page.locator('[scFieldErrors]');
     await expect(input).toHaveAccessibleDescription(
@@ -153,7 +153,7 @@ test.describe('Autocomplete Next demos', () => {
   test('icon and clear: the clear button empties the text, focus back in', async ({
     page,
   }) => {
-    await page.goto(demo('input-group-autocomplete-next-demo'));
+    await page.goto(demo('input-group-autocomplete-demo'));
     const input = page.getByRole('combobox', { name: 'Country' });
     await expect(input).toHaveValue('France');
     await page.getByRole('button', { name: 'Clear' }).click();
@@ -163,7 +163,7 @@ test.describe('Autocomplete Next demos', () => {
   });
 
   test('disabled: no focus, no text', async ({ page }) => {
-    await page.goto(demo('disabled-autocomplete-next-demo'));
+    await page.goto(demo('disabled-autocomplete-demo'));
     const input = page.getByRole('combobox', { name: 'Country' });
     await expect(input).toBeDisabled();
     await expect(input).toHaveValue('Japan');
@@ -172,7 +172,7 @@ test.describe('Autocomplete Next demos', () => {
   test('RTL: suggestions from the right; a pick writes the label', async ({
     page,
   }) => {
-    await page.goto(demo('rtl-autocomplete-next-demo'));
+    await page.goto(demo('rtl-autocomplete-demo'));
     const input = page.getByRole('combobox', { name: 'المدينة' });
     await input.click();
     await input.pressSequentially('تو');

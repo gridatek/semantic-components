@@ -1,6 +1,26 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { DisabledAutocompleteDemo } from './disabled-autocomplete-demo';
+
+@Component({
+  selector: 'app-disabled-autocomplete-demo-container',
+  imports: [DemoContainer, DisabledAutocompleteDemo],
+  template: `
+    <app-demo-container
+      title="Disabled"
+      demoUrl="/demos/autocomplete/disabled-autocomplete-demo"
+      [code]="code"
+    >
+      <app-disabled-autocomplete-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class DisabledAutocompleteDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -11,11 +31,11 @@ import {
   scComboboxMatches,
 } from '@semantic-components/ui';
 
-/** autoHighlight: the first suggestion is highlighted as you type — Enter picks it. */
+/** Disabled: the input takes no focus and no text. */
 @Component({
-  selector: 'app-auto-highlight-autocomplete-next-demo',
+  selector: 'app-disabled-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -24,11 +44,11 @@ import {
     ScComboboxPortal,
     ScInput,
   ],
-  template: `
+  template: \`
     <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
-      autoHighlight
+      scAutocomplete
+      #ac="scAutocomplete"
+      disabled
       [(value)]="country"
       class="w-64"
     >
@@ -49,12 +69,12 @@ import {
         </div>
       </ng-template>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AutoHighlightAutocompleteNextDemo {
-  private readonly country = signal('');
+export class DisabledAutocompleteDemo {
+  private readonly country = signal('Japan');
   private readonly countries = [
     'Algeria',
     'Argentina',
@@ -81,4 +101,5 @@ export class AutoHighlightAutocompleteNextDemo {
   private matching(query: string): string[] {
     return this.countries.filter((name) => scComboboxMatches(name, query));
   }
+}`;
 }

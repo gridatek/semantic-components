@@ -1,26 +1,27 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { AutoHighlightAutocompleteNextDemo } from './auto-highlight-autocomplete-next-demo';
+import { InputGroupAutocompleteDemo } from './input-group-autocomplete-demo';
 
 @Component({
-  selector: 'app-auto-highlight-autocomplete-next-demo-container',
-  imports: [DemoContainer, AutoHighlightAutocompleteNextDemo],
+  selector: 'app-input-group-autocomplete-demo-container',
+  imports: [DemoContainer, InputGroupAutocompleteDemo],
   template: `
     <app-demo-container
-      title="Auto highlight"
-      demoUrl="/demos/autocomplete-next/auto-highlight-autocomplete-next-demo"
+      title="Icon and clear"
+      demoUrl="/demos/autocomplete/input-group-autocomplete-demo"
       [code]="code"
     >
-      <app-auto-highlight-autocomplete-next-demo />
+      <app-input-group-autocomplete-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AutoHighlightAutocompleteNextDemoContainer {
+export class InputGroupAutocompleteDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
+  ScComboboxClear,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -28,14 +29,17 @@ import {
   ScComboboxPopup,
   ScComboboxPortal,
   ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
   scComboboxMatches,
 } from '@semantic-components/ui';
+import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
-/** autoHighlight: the first suggestion is highlighted as you type — Enter picks it. */
+/** In an input group: a search icon, and the Combobox’s clear button (shown with text). */
 @Component({
-  selector: 'app-auto-highlight-autocomplete-next-demo',
+  selector: 'app-input-group-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -43,21 +47,36 @@ import {
     ScComboboxPopup,
     ScComboboxPortal,
     ScInput,
+    ScComboboxClear,
+    ScInputGroup,
+    ScInputGroupAddon,
+    SiSearchIcon,
+    SiXIcon,
   ],
   template: \`
     <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
-      autoHighlight
+      scAutocomplete
+      #ac="scAutocomplete"
       [(value)]="country"
       class="w-64"
     >
-      <input
-        scInput
-        scComboboxInput
-        aria-label="Country"
-        placeholder="Type a country"
-      />
+      <div scInputGroup>
+        <div scInputGroupAddon side="inline-start">
+          <svg siSearchIcon></svg>
+        </div>
+        <input
+          scInput
+          scComboboxInput
+          aria-label="Country"
+          placeholder="Search a country"
+        />
+        <div scInputGroupAddon side="inline-end">
+          <button scComboboxClear>
+            <svg siXIcon></svg>
+            <span class="sr-only">Clear</span>
+          </button>
+        </div>
+      </div>
       <ng-template scComboboxPortal>
         <div scComboboxPopup>
           <div scComboboxEmpty>No country found.</div>
@@ -73,8 +92,8 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AutoHighlightAutocompleteNextDemo {
-  private readonly country = signal('');
+export class InputGroupAutocompleteDemo {
+  private readonly country = signal('France');
   private readonly countries = [
     'Algeria',
     'Argentina',

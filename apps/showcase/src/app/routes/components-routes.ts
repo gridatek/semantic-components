@@ -119,12 +119,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/autocomplete/autocomplete-page'),
       },
       {
-        path: 'autocomplete-next',
-        title: 'Autocomplete Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/autocomplete-next/autocomplete-next-page'),
-      },
-      {
         path: 'audio-player',
         title: 'Audio Player - Semantic Components',
         loadComponent: () =>

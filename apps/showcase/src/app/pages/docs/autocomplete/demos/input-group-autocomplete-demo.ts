@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxClear,
   ScComboboxEmpty,
   ScComboboxInput,
@@ -17,9 +17,9 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** In an input group: a search icon, and the Combobox’s clear button (shown with text). */
 @Component({
-  selector: 'app-input-group-autocomplete-next-demo',
+  selector: 'app-input-group-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -34,12 +34,7 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
-      [(value)]="country"
-      class="w-64"
-    >
+    <div scAutocomplete #ac="scAutocomplete" [(value)]="country" class="w-64">
       <div scInputGroup>
         <div scInputGroupAddon side="inline-start">
           <svg siSearchIcon></svg>
@@ -72,7 +67,7 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InputGroupAutocompleteNextDemo {
+export class InputGroupAutocompleteDemo {
   private readonly country = signal('France');
   private readonly countries = [
     'Algeria',

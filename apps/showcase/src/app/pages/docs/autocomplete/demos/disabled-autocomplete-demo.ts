@@ -1,22 +1,21 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
   ScComboboxList,
   ScComboboxPopup,
   ScComboboxPortal,
-  ScComboboxStatus,
   ScInput,
   scComboboxMatches,
 } from '@semantic-components/ui';
 
-/** The first five matches only, and a status that says how many there are. */
+/** Disabled: the input takes no focus and no text. */
 @Component({
-  selector: 'app-limit-autocomplete-next-demo',
+  selector: 'app-disabled-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -24,12 +23,12 @@ import {
     ScComboboxPopup,
     ScComboboxPortal,
     ScInput,
-    ScComboboxStatus,
   ],
   template: `
     <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
+      scAutocomplete
+      #ac="scAutocomplete"
+      disabled
       [(value)]="country"
       class="w-64"
     >
@@ -43,17 +42,9 @@ import {
         <div scComboboxPopup>
           <div scComboboxEmpty>No country found.</div>
           <div scComboboxList aria-label="Countries">
-            @for (country of matching(ac.query()).slice(0, 5); track country) {
+            @for (country of matching(ac.query()); track country) {
               <div scComboboxItem [value]="country">{{ country }}</div>
             }
-          </div>
-          @if (matching(ac.query()).length > 5) {
-            <p class="text-muted-foreground px-2 py-1.5 text-xs">
-              5 of {{ matching(ac.query()).length }} — type more to narrow.
-            </p>
-          }
-          <div scComboboxStatus>
-            {{ matching(ac.query()).length }} countries
           </div>
         </div>
       </ng-template>
@@ -62,8 +53,8 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LimitAutocompleteNextDemo {
-  private readonly country = signal('');
+export class DisabledAutocompleteDemo {
+  private readonly country = signal('Japan');
   private readonly countries = [
     'Algeria',
     'Argentina',

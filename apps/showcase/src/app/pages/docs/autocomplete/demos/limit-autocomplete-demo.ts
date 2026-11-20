@@ -1,26 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { LimitAutocompleteNextDemo } from './limit-autocomplete-next-demo';
-
-@Component({
-  selector: 'app-limit-autocomplete-next-demo-container',
-  imports: [DemoContainer, LimitAutocompleteNextDemo],
-  template: `
-    <app-demo-container
-      title="Limit results"
-      demoUrl="/demos/autocomplete-next/limit-autocomplete-next-demo"
-      [code]="code"
-    >
-      <app-limit-autocomplete-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class LimitAutocompleteNextDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -34,9 +14,9 @@ import {
 
 /** The first five matches only, and a status that says how many there are. */
 @Component({
-  selector: 'app-limit-autocomplete-next-demo',
+  selector: 'app-limit-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -46,13 +26,8 @@ import {
     ScInput,
     ScComboboxStatus,
   ],
-  template: \`
-    <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
-      [(value)]="country"
-      class="w-64"
-    >
+  template: `
+    <div scAutocomplete #ac="scAutocomplete" [(value)]="country" class="w-64">
       <input
         scInput
         scComboboxInput
@@ -78,11 +53,11 @@ import {
         </div>
       </ng-template>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LimitAutocompleteNextDemo {
+export class LimitAutocompleteDemo {
   private readonly country = signal('');
   private readonly countries = [
     'Algeria',
@@ -110,5 +85,4 @@ export class LimitAutocompleteNextDemo {
   private matching(query: string): string[] {
     return this.countries.filter((name) => scComboboxMatches(name, query));
   }
-}`;
 }

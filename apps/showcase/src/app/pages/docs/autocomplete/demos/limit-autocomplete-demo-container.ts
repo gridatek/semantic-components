@@ -1,40 +1,42 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { InlineAutocompleteNextDemo } from './inline-autocomplete-next-demo';
+import { LimitAutocompleteDemo } from './limit-autocomplete-demo';
 
 @Component({
-  selector: 'app-inline-autocomplete-next-demo-container',
-  imports: [DemoContainer, InlineAutocompleteNextDemo],
+  selector: 'app-limit-autocomplete-demo-container',
+  imports: [DemoContainer, LimitAutocompleteDemo],
   template: `
     <app-demo-container
-      title="Inline completion"
-      demoUrl="/demos/autocomplete-next/inline-autocomplete-next-demo"
+      title="Limit results"
+      demoUrl="/demos/autocomplete/limit-autocomplete-demo"
       [code]="code"
     >
-      <app-inline-autocomplete-next-demo />
+      <app-limit-autocomplete-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InlineAutocompleteNextDemoContainer {
+export class LimitAutocompleteDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
   ScComboboxList,
   ScComboboxPopup,
   ScComboboxPortal,
+  ScComboboxStatus,
   ScInput,
+  scComboboxMatches,
 } from '@semantic-components/ui';
 
-/** mode="both": the highlighted suggestion also completes the text, selected — typing on replaces it. It completes from the start, so the suggestions begin with the text. */
+/** The first five matches only, and a status that says how many there are. */
 @Component({
-  selector: 'app-inline-autocomplete-next-demo',
+  selector: 'app-limit-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -42,13 +44,12 @@ import {
     ScComboboxPopup,
     ScComboboxPortal,
     ScInput,
+    ScComboboxStatus,
   ],
   template: \`
     <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
-      mode="both"
-      autoHighlight
+      scAutocomplete
+      #ac="scAutocomplete"
       [(value)]="country"
       class="w-64"
     >
@@ -62,9 +63,17 @@ import {
         <div scComboboxPopup>
           <div scComboboxEmpty>No country found.</div>
           <div scComboboxList aria-label="Countries">
-            @for (country of matching(ac.query()); track country) {
+            @for (country of matching(ac.query()).slice(0, 5); track country) {
               <div scComboboxItem [value]="country">{{ country }}</div>
             }
+          </div>
+          @if (matching(ac.query()).length > 5) {
+            <p class="text-muted-foreground px-2 py-1.5 text-xs">
+              5 of {{ matching(ac.query()).length }} — type more to narrow.
+            </p>
+          }
+          <div scComboboxStatus>
+            {{ matching(ac.query()).length }} countries
           </div>
         </div>
       </ng-template>
@@ -73,7 +82,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InlineAutocompleteNextDemo {
+export class LimitAutocompleteDemo {
   private readonly country = signal('');
   private readonly countries = [
     'Algeria',
@@ -98,13 +107,8 @@ export class InlineAutocompleteNextDemo {
     'United States',
   ];
 
-  // Inline completion completes from the start: suggestions that begin with
-  // the text.
   private matching(query: string): string[] {
-    const start = query.trim().toLowerCase();
-    return this.countries.filter((name) =>
-      name.toLowerCase().startsWith(start),
-    );
+    return this.countries.filter((name) => scComboboxMatches(name, query));
   }
 }`;
 }

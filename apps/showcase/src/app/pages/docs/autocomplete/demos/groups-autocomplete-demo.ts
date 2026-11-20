@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxGroup,
   ScComboboxGroupLabel,
@@ -16,9 +16,9 @@ import {
 
 /** Suggestions in named groups, a line between them: the Combobox’s group parts. */
 @Component({
-  selector: 'app-groups-autocomplete-next-demo',
+  selector: 'app-groups-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -31,12 +31,7 @@ import {
     ScComboboxSeparator,
   ],
   template: `
-    <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
-      [(value)]="food"
-      class="w-64"
-    >
+    <div scAutocomplete #ac="scAutocomplete" [(value)]="food" class="w-64">
       <input
         scInput
         scComboboxInput
@@ -66,7 +61,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class GroupsAutocompleteNextDemo {
+export class GroupsAutocompleteDemo {
   private readonly food = signal('');
   private readonly groups = [
     {

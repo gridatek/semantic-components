@@ -1,27 +1,26 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { InputGroupAutocompleteNextDemo } from './input-group-autocomplete-next-demo';
+import { InlineAutocompleteDemo } from './inline-autocomplete-demo';
 
 @Component({
-  selector: 'app-input-group-autocomplete-next-demo-container',
-  imports: [DemoContainer, InputGroupAutocompleteNextDemo],
+  selector: 'app-inline-autocomplete-demo-container',
+  imports: [DemoContainer, InlineAutocompleteDemo],
   template: `
     <app-demo-container
-      title="Icon and clear"
-      demoUrl="/demos/autocomplete-next/input-group-autocomplete-next-demo"
+      title="Inline completion"
+      demoUrl="/demos/autocomplete/inline-autocomplete-demo"
       [code]="code"
     >
-      <app-input-group-autocomplete-next-demo />
+      <app-inline-autocomplete-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InputGroupAutocompleteNextDemoContainer {
+export class InlineAutocompleteDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
-  ScComboboxClear,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -29,17 +28,13 @@ import {
   ScComboboxPopup,
   ScComboboxPortal,
   ScInput,
-  ScInputGroup,
-  ScInputGroupAddon,
-  scComboboxMatches,
 } from '@semantic-components/ui';
-import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
-/** In an input group: a search icon, and the Combobox’s clear button (shown with text). */
+/** mode="both": the highlighted suggestion also completes the text, selected — typing on replaces it. It completes from the start, so the suggestions begin with the text. */
 @Component({
-  selector: 'app-input-group-autocomplete-next-demo',
+  selector: 'app-inline-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -47,36 +42,22 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     ScComboboxPopup,
     ScComboboxPortal,
     ScInput,
-    ScComboboxClear,
-    ScInputGroup,
-    ScInputGroupAddon,
-    SiSearchIcon,
-    SiXIcon,
   ],
   template: \`
     <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
+      scAutocomplete
+      #ac="scAutocomplete"
+      mode="both"
+      autoHighlight
       [(value)]="country"
       class="w-64"
     >
-      <div scInputGroup>
-        <div scInputGroupAddon side="inline-start">
-          <svg siSearchIcon></svg>
-        </div>
-        <input
-          scInput
-          scComboboxInput
-          aria-label="Country"
-          placeholder="Search a country"
-        />
-        <div scInputGroupAddon side="inline-end">
-          <button scComboboxClear>
-            <svg siXIcon></svg>
-            <span class="sr-only">Clear</span>
-          </button>
-        </div>
-      </div>
+      <input
+        scInput
+        scComboboxInput
+        aria-label="Country"
+        placeholder="Type a country"
+      />
       <ng-template scComboboxPortal>
         <div scComboboxPopup>
           <div scComboboxEmpty>No country found.</div>
@@ -92,8 +73,8 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class InputGroupAutocompleteNextDemo {
-  private readonly country = signal('France');
+export class InlineAutocompleteDemo {
+  private readonly country = signal('');
   private readonly countries = [
     'Algeria',
     'Argentina',
@@ -117,8 +98,13 @@ export class InputGroupAutocompleteNextDemo {
     'United States',
   ];
 
+  // Inline completion completes from the start: suggestions that begin with
+  // the text.
   private matching(query: string): string[] {
-    return this.countries.filter((name) => scComboboxMatches(name, query));
+    const start = query.trim().toLowerCase();
+    return this.countries.filter((name) =>
+      name.toLowerCase().startsWith(start),
+    );
   }
 }`;
 }

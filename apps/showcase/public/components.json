@@ -59,15 +59,6 @@
   {
     "name": "Autocomplete",
     "path": "autocomplete",
-    "description": "An input with autocomplete suggestions.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
-    "name": "Autocomplete Next",
-    "path": "autocomplete-next",
     "description": "Free text with suggestions: the value is what is typed, a suggestion completes it; the Combobox’s parts.",
     "status": "Experimental",
     "library": "ui",

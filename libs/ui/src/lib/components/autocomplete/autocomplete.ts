@@ -2,68 +2,39 @@ import { ComboboxPopup } from '@angular/aria/combobox';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {
   Component,
-  ElementRef,
   ViewEncapsulation,
   booleanAttribute,
   computed,
   contentChild,
-  inject,
+  effect,
   input,
   model,
-  output,
-  signal,
   untracked,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
-import { cn } from 'cn';
+import { setInput } from '../../utils';
+import { ScComboboxBase } from '../combobox/combobox-base';
+import { ScComboboxPortal } from '../combobox/combobox-portal';
+import { scComboboxTemplate } from '../combobox/combobox-template';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
-import { ScAutocompletePortal } from './autocomplete-portal';
-import { SC_AUTOCOMPLETE, SC_AUTOCOMPLETE_INPUT } from './autocomplete-tokens';
 
-const positions = [
-  {
-    originX: 'start' as const,
-    originY: 'bottom' as const,
-    overlayX: 'start' as const,
-    overlayY: 'top' as const,
-    offsetY: 4,
-  },
-  {
-    originX: 'start' as const,
-    originY: 'top' as const,
-    overlayX: 'start' as const,
-    overlayY: 'bottom' as const,
-    offsetY: -4,
-  },
-];
+/** How it completes: suggestions in a list, or also inline in the input. */
+export type ScAutocompleteMode = 'list' | 'both';
 
+/**
+ * Free text with suggestions, as Base UI's Autocomplete: its value is the
+ * input's text — a suggestion picked writes its label there, and the text may
+ * be anything. Inside, the Combobox's parts (`scComboboxInput`,
+ * `scComboboxPortal`, `scComboboxPopup`, `scComboboxList`, `scComboboxItem`…).
+ * You filter the suggestions, by `query()`. With `mode="both"`, the
+ * highlighted suggestion is also typed into the input, selected.
+ */
 @Component({
   selector: 'div[scAutocomplete]',
   exportAs: 'scAutocomplete',
   imports: [ComboboxPopup, OverlayModule, ScPortalOutlet],
-  providers: [{ provide: SC_AUTOCOMPLETE, useExisting: ScAutocomplete }],
-  template: `
-    <ng-content />
-    @if (control(); as control) {
-      <ng-template
-        ngComboboxPopup
-        [combobox]="control.combobox"
-        popupType="listbox"
-      >
-        <ng-template
-          [cdkConnectedOverlay]="{
-            origin: elementRef,
-            usePopover: 'inline',
-            matchWidth: true,
-          }"
-          [cdkConnectedOverlayOpen]="open()"
-          [cdkConnectedOverlayPositions]="positions"
-        >
-          <ng-container [scPortalOutlet]="autocompletePortal()" />
-        </ng-template>
-      </ng-template>
-    }
-  `,
+  providers: [{ provide: ScComboboxBase, useExisting: ScAutocomplete }],
+  template: scComboboxTemplate,
   host: {
     'data-slot': 'autocomplete',
     '[class]': 'class()',
@@ -71,68 +42,59 @@ const positions = [
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScAutocomplete implements FormValueControl<string> {
-  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-  readonly classInput = input<string>('', { alias: 'class' });
-
-  /** The input's text. Bind with `[formField]` or `[(value)]`. */
+export class ScAutocomplete
+  extends ScComboboxBase<string>
+  implements FormValueControl<string>
+{
+  /** The text: two-way, or a [formField]. */
   readonly value = model('');
-  readonly disabled = input(false, { transform: booleanAttribute });
-  readonly readonly = input(false, { transform: booleanAttribute });
-  readonly required = input(false, { transform: booleanAttribute });
-  readonly invalid = input(false, { transform: booleanAttribute });
-  readonly touch = output<void>();
+  /** `list`: suggestions in a list; `both`: the highlighted one also completes the text inline. */
+  readonly mode = input<ScAutocompleteMode>('list');
+  /** Opens on a click in the input (off: typing or ↓ opens it, as Base UI's). */
+  override readonly openOnInputClick = input(false, {
+    transform: booleanAttribute,
+  });
 
-  private readonly positions = positions;
-  private readonly control = contentChild(SC_AUTOCOMPLETE_INPUT);
-  private readonly autocompletePortal =
-    contentChild.required(ScAutocompletePortal);
+  readonly multiple = false;
+  /** The text as the "selected" value: shown again when the list closes. */
+  readonly selected = computed<readonly string[]>(() =>
+    this.value() ? [this.value()] : [],
+  );
+  readonly portal = contentChild.required(ScComboboxPortal);
 
-  readonly open = computed(() => this.control()?.combobox.expanded() ?? false);
-
-  /** Labels of options seen so far, written into the input on selection. */
-  private readonly labels = signal<ReadonlyMap<string, string>>(new Map());
-
-  private readonly class = computed(() => cn('relative', this.classInput()));
-
-  /** The value of the option whose label is `text`, if one has been seen. */
-  optionValueFor(text: string): string | undefined {
-    for (const [value, label] of this.labels()) {
-      if (label === text) return value;
-    }
-    return undefined;
+  /** A suggestion picked: its label is the text. */
+  setSelected(values: readonly string[]): void {
+    const [value] = values;
+    this.value.set(value === undefined ? '' : this.labelOf(value));
   }
 
-  labelFor(value: string): string {
-    return this.labels().get(value) || value;
-  }
-
-  registerLabel(value: string, label: string): void {
-    // Untracked: items call this from an effect that must not depend on it.
-    if (untracked(this.labels).get(value) === label) return;
-    this.labels.update((labels) => new Map(labels).set(value, label));
-  }
-
-  /** Writes the option's label into the input and closes the popup. */
-  select(value: string): void {
-    this.value.set(this.labelFor(value));
-    this.close();
-  }
-
-  /** Empties the input, closes the popup and keeps focus in the input. */
-  clear(): void {
-    this.value.set('');
-    this.close();
-  }
-
-  close(): void {
-    const control = this.control();
-    if (!control) return;
-    control.combobox.expanded.set(false);
-    control.elementRef.nativeElement.focus();
-  }
-
-  focus(options?: FocusOptions): void {
-    this.control()?.elementRef.nativeElement.focus(options);
+  constructor() {
+    super();
+    // Typed: the text is the value, as typed.
+    effect(() => {
+      const text = this.inputValue();
+      untracked(() => {
+        if (this.value() !== text) this.value.set(text);
+      });
+    });
+    // Open, the suggestions are filtered by the text, whatever opened it.
+    effect(() => {
+      const open = this.open();
+      const text = this.inputValue();
+      untracked(() => this.query.set(open ? text : ''));
+    });
+    // `both`: the highlighted suggestion completes the text inline.
+    effect(() => {
+      const field = this.field();
+      if (!field) return;
+      const suggestion =
+        this.mode() === 'both' && this.open()
+          ? (this.activeLabel() ?? undefined)
+          : undefined;
+      untracked(() => setInput(field.combobox.inlineSuggestion, suggestion));
+    });
+    effect(() => {
+      if (!this.open()) untracked(() => this.activeLabel.set(null));
+    });
   }
 }

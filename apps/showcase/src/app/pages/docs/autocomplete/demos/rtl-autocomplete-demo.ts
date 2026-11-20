@@ -1,27 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RtlAutocompleteNextDemo } from './rtl-autocomplete-next-demo';
-
-@Component({
-  selector: 'app-rtl-autocomplete-next-demo-container',
-  imports: [DemoContainer, RtlAutocompleteNextDemo],
-  template: `
-    <app-demo-container
-      title="RTL"
-      demoUrl="/demos/autocomplete-next/rtl-autocomplete-next-demo"
-      [code]="code"
-    >
-      <app-rtl-autocomplete-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class RtlAutocompleteNextDemoContainer {
-  private readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -34,10 +14,10 @@ import {
 
 /** In a right-to-left page: the suggestions under the input, from the right. */
 @Component({
-  selector: 'app-rtl-autocomplete-next-demo',
+  selector: 'app-rtl-autocomplete-demo',
   imports: [
     Dir,
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -46,14 +26,9 @@ import {
     ScComboboxPortal,
     ScInput,
   ],
-  template: \`
+  template: `
     <div dir="rtl" lang="ar">
-      <div
-        scAutocompleteNext
-        #ac="scAutocompleteNext"
-        [(value)]="city"
-        class="w-64"
-      >
+      <div scAutocomplete #ac="scAutocomplete" [(value)]="city" class="w-64">
         <input
           scInput
           scComboboxInput
@@ -72,12 +47,12 @@ import {
         </ng-template>
       </div>
     </div>
-  \`,
+  `,
   providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlAutocompleteNextDemo {
+export class RtlAutocompleteDemo {
   private readonly city = signal('');
   private readonly cities = [
     'الجزائر',
@@ -92,5 +67,4 @@ export class RtlAutocompleteNextDemo {
   private matching(query: string): string[] {
     return this.cities.filter((name) => scComboboxMatches(name, query));
   }
-}`;
 }

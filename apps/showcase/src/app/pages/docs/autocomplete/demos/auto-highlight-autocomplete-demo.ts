@@ -1,23 +1,21 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
   ScComboboxList,
   ScComboboxPopup,
   ScComboboxPortal,
-  ScField,
   ScInput,
-  ScLabel,
   scComboboxMatches,
 } from '@semantic-components/ui';
 
-/** Free text with suggestions: the value is what is typed; a suggestion picked writes its label. */
+/** autoHighlight: the first suggestion is highlighted as you type — Enter picks it. */
 @Component({
-  selector: 'app-autocomplete-next-usage-demo',
+  selector: 'app-auto-highlight-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -25,34 +23,37 @@ import {
     ScComboboxPopup,
     ScComboboxPortal,
     ScInput,
-    ScField,
-    ScLabel,
   ],
   template: `
-    <div class="flex w-64 flex-col gap-3">
-      <div scField>
-        <label scLabel>Country</label>
-        <div scAutocompleteNext #ac="scAutocompleteNext" [(value)]="country">
-          <input scInput scComboboxInput placeholder="Type a country" />
-          <ng-template scComboboxPortal>
-            <div scComboboxPopup>
-              <div scComboboxEmpty>No country found.</div>
-              <div scComboboxList aria-label="Countries">
-                @for (country of matching(ac.query()); track country) {
-                  <div scComboboxItem [value]="country">{{ country }}</div>
-                }
-              </div>
-            </div>
-          </ng-template>
+    <div
+      scAutocomplete
+      #ac="scAutocomplete"
+      autoHighlight
+      [(value)]="country"
+      class="w-64"
+    >
+      <input
+        scInput
+        scComboboxInput
+        aria-label="Country"
+        placeholder="Type a country"
+      />
+      <ng-template scComboboxPortal>
+        <div scComboboxPopup>
+          <div scComboboxEmpty>No country found.</div>
+          <div scComboboxList aria-label="Countries">
+            @for (country of matching(ac.query()); track country) {
+              <div scComboboxItem [value]="country">{{ country }}</div>
+            }
+          </div>
         </div>
-      </div>
-      <p class="text-muted-foreground text-sm">Value: “{{ country() }}”</p>
+      </ng-template>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class AutocompleteNextUsageDemo {
+export class AutoHighlightAutocompleteDemo {
   private readonly country = signal('');
   private readonly countries = [
     'Algeria',

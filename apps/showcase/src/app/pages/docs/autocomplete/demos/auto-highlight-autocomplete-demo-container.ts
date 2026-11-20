@@ -1,26 +1,26 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { DisabledAutocompleteNextDemo } from './disabled-autocomplete-next-demo';
+import { AutoHighlightAutocompleteDemo } from './auto-highlight-autocomplete-demo';
 
 @Component({
-  selector: 'app-disabled-autocomplete-next-demo-container',
-  imports: [DemoContainer, DisabledAutocompleteNextDemo],
+  selector: 'app-auto-highlight-autocomplete-demo-container',
+  imports: [DemoContainer, AutoHighlightAutocompleteDemo],
   template: `
     <app-demo-container
-      title="Disabled"
-      demoUrl="/demos/autocomplete-next/disabled-autocomplete-next-demo"
+      title="Auto highlight"
+      demoUrl="/demos/autocomplete/auto-highlight-autocomplete-demo"
       [code]="code"
     >
-      <app-disabled-autocomplete-next-demo />
+      <app-auto-highlight-autocomplete-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DisabledAutocompleteNextDemoContainer {
+export class AutoHighlightAutocompleteDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxInput,
   ScComboboxItem,
@@ -31,11 +31,11 @@ import {
   scComboboxMatches,
 } from '@semantic-components/ui';
 
-/** Disabled: the input takes no focus and no text. */
+/** autoHighlight: the first suggestion is highlighted as you type — Enter picks it. */
 @Component({
-  selector: 'app-disabled-autocomplete-next-demo',
+  selector: 'app-auto-highlight-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -46,9 +46,9 @@ import {
   ],
   template: \`
     <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
-      disabled
+      scAutocomplete
+      #ac="scAutocomplete"
+      autoHighlight
       [(value)]="country"
       class="w-64"
     >
@@ -73,8 +73,8 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DisabledAutocompleteNextDemo {
-  private readonly country = signal('Japan');
+export class AutoHighlightAutocompleteDemo {
+  private readonly country = signal('');
   private readonly countries = [
     'Algeria',
     'Argentina',

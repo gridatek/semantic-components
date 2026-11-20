@@ -1,26 +1,26 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { GroupsAutocompleteNextDemo } from './groups-autocomplete-next-demo';
+import { GroupsAutocompleteDemo } from './groups-autocomplete-demo';
 
 @Component({
-  selector: 'app-groups-autocomplete-next-demo-container',
-  imports: [DemoContainer, GroupsAutocompleteNextDemo],
+  selector: 'app-groups-autocomplete-demo-container',
+  imports: [DemoContainer, GroupsAutocompleteDemo],
   template: `
     <app-demo-container
       title="Groups"
-      demoUrl="/demos/autocomplete-next/groups-autocomplete-next-demo"
+      demoUrl="/demos/autocomplete/groups-autocomplete-demo"
       [code]="code"
     >
-      <app-groups-autocomplete-next-demo />
+      <app-groups-autocomplete-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class GroupsAutocompleteNextDemoContainer {
+export class GroupsAutocompleteDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScAutocompleteNext,
+  ScAutocomplete,
   ScComboboxEmpty,
   ScComboboxGroup,
   ScComboboxGroupLabel,
@@ -36,9 +36,9 @@ import {
 
 /** Suggestions in named groups, a line between them: the Combobox’s group parts. */
 @Component({
-  selector: 'app-groups-autocomplete-next-demo',
+  selector: 'app-groups-autocomplete-demo',
   imports: [
-    ScAutocompleteNext,
+    ScAutocomplete,
     ScComboboxEmpty,
     ScComboboxInput,
     ScComboboxItem,
@@ -52,8 +52,8 @@ import {
   ],
   template: \`
     <div
-      scAutocompleteNext
-      #ac="scAutocompleteNext"
+      scAutocomplete
+      #ac="scAutocomplete"
       [(value)]="food"
       class="w-64"
     >
@@ -86,7 +86,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class GroupsAutocompleteNextDemo {
+export class GroupsAutocompleteDemo {
   private readonly food = signal('');
   private readonly groups = [
     {

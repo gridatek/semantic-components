@@ -669,18 +669,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/autocomplete',
-    children: [
-      {
-        path: 'basic-autocomplete-demo',
-        loadComponent: () =>
-          import('../pages/docs/autocomplete/demos/basic-autocomplete-demo').then(
-            (m) => m.BasicAutocompleteDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/audio-player',
     children: [
       {
@@ -4349,76 +4337,76 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/autocomplete-next',
+    path: 'demos/autocomplete',
     children: [
       {
-        path: 'autocomplete-next-usage-demo',
+        path: 'autocomplete-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/autocomplete-next/demos/autocomplete-next-usage-demo').then(
-            (m) => m.AutocompleteNextUsageDemo,
+          import('../pages/docs/autocomplete/demos/autocomplete-usage-demo').then(
+            (m) => m.AutocompleteUsageDemo,
           ),
       },
       {
-        path: 'inline-autocomplete-next-demo',
+        path: 'inline-autocomplete-demo',
         loadComponent: () =>
-          import('../pages/docs/autocomplete-next/demos/inline-autocomplete-next-demo').then(
-            (m) => m.InlineAutocompleteNextDemo,
+          import('../pages/docs/autocomplete/demos/inline-autocomplete-demo').then(
+            (m) => m.InlineAutocompleteDemo,
           ),
       },
       {
-        path: 'groups-autocomplete-next-demo',
+        path: 'groups-autocomplete-demo',
         loadComponent: () =>
-          import('../pages/docs/autocomplete-next/demos/groups-autocomplete-next-demo').then(
-            (m) => m.GroupsAutocompleteNextDemo,
+          import('../pages/docs/autocomplete/demos/groups-autocomplete-demo').then(
+            (m) => m.GroupsAutocompleteDemo,
           ),
       },
       {
-        path: 'async-autocomplete-next-demo',
+        path: 'async-autocomplete-demo',
         loadComponent: () =>
-          import('../pages/docs/autocomplete-next/demos/async-autocomplete-next-demo').then(
-            (m) => m.AsyncAutocompleteNextDemo,
+          import('../pages/docs/autocomplete/demos/async-autocomplete-demo').then(
+            (m) => m.AsyncAutocompleteDemo,
           ),
       },
       {
-        path: 'auto-highlight-autocomplete-next-demo',
+        path: 'auto-highlight-autocomplete-demo',
         loadComponent: () =>
-          import('../pages/docs/autocomplete-next/demos/auto-highlight-autocomplete-next-demo').then(
-            (m) => m.AutoHighlightAutocompleteNextDemo,
+          import('../pages/docs/autocomplete/demos/auto-highlight-autocomplete-demo').then(
+            (m) => m.AutoHighlightAutocompleteDemo,
           ),
       },
       {
-        path: 'limit-autocomplete-next-demo',
+        path: 'limit-autocomplete-demo',
         loadComponent: () =>
-          import('../pages/docs/autocomplete-next/demos/limit-autocomplete-next-demo').then(
-            (m) => m.LimitAutocompleteNextDemo,
+          import('../pages/docs/autocomplete/demos/limit-autocomplete-demo').then(
+            (m) => m.LimitAutocompleteDemo,
           ),
       },
       {
-        path: 'form-autocomplete-next-demo',
+        path: 'form-autocomplete-demo',
         loadComponent: () =>
-          import('../pages/docs/autocomplete-next/demos/form-autocomplete-next-demo').then(
-            (m) => m.FormAutocompleteNextDemo,
+          import('../pages/docs/autocomplete/demos/form-autocomplete-demo').then(
+            (m) => m.FormAutocompleteDemo,
           ),
       },
       {
-        path: 'input-group-autocomplete-next-demo',
+        path: 'input-group-autocomplete-demo',
         loadComponent: () =>
-          import('../pages/docs/autocomplete-next/demos/input-group-autocomplete-next-demo').then(
-            (m) => m.InputGroupAutocompleteNextDemo,
+          import('../pages/docs/autocomplete/demos/input-group-autocomplete-demo').then(
+            (m) => m.InputGroupAutocompleteDemo,
           ),
       },
       {
-        path: 'disabled-autocomplete-next-demo',
+        path: 'disabled-autocomplete-demo',
         loadComponent: () =>
-          import('../pages/docs/autocomplete-next/demos/disabled-autocomplete-next-demo').then(
-            (m) => m.DisabledAutocompleteNextDemo,
+          import('../pages/docs/autocomplete/demos/disabled-autocomplete-demo').then(
+            (m) => m.DisabledAutocompleteDemo,
           ),
       },
       {
-        path: 'rtl-autocomplete-next-demo',
+        path: 'rtl-autocomplete-demo',
         loadComponent: () =>
-          import('../pages/docs/autocomplete-next/demos/rtl-autocomplete-next-demo').then(
-            (m) => m.RtlAutocompleteNextDemo,
+          import('../pages/docs/autocomplete/demos/rtl-autocomplete-demo').then(
+            (m) => m.RtlAutocompleteDemo,
           ),
       },
     ],
