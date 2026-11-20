@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScRatingNext, ScRatingNextItem } from '@semantic-components/ui';
+import { ScRatingNext, ScRatingNextIcon } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
 /** Deselectable: a press on the score given, Delete or Backspace takes it back (null). */
 @Component({
   selector: 'app-deselectable-rating-next-demo',
-  imports: [ScRatingNext, ScRatingNextItem, SiStarIcon],
+  imports: [ScRatingNext, ScRatingNextIcon, SiStarIcon],
   template: `
     <div class="flex flex-col items-center gap-2">
       <div
@@ -15,12 +15,9 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
         aria-label="Rating"
         valueText="{value} out of {max} stars"
       >
-        @for (star of stars; track star) {
-          <span scRatingNextItem>
-            <svg siStarIcon></svg>
-            <svg siStarIcon></svg>
-          </span>
-        }
+        <ng-template scRatingNextIcon>
+          <svg siStarIcon></svg>
+        </ng-template>
       </div>
       <p class="text-muted-foreground text-sm">
         {{ score() === null ? 'Not rated' : score() + ' out of 5' }}
@@ -31,6 +28,5 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class DeselectableRatingNextDemo {
-  private readonly stars = [1, 2, 3, 4, 5];
   private readonly score = signal<number | null>(3);
 }

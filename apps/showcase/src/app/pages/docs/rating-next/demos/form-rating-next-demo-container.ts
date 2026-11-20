@@ -27,14 +27,24 @@ import {
   ScFrame,
   ScLabel,
   ScRatingNext,
-  ScRatingNextItem,
+  ScRatingNextIcon,
 } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
 /** A Signal Forms field: not rated is null, so required asks for a score; named by its label. */
 @Component({
   selector: 'app-form-rating-next-demo',
-  imports: [FormField, JsonPipe, ScField, ScFieldErrors, ScFrame, ScLabel, ScRatingNext, ScRatingNextItem, SiStarIcon],
+  imports: [
+    FormField,
+    JsonPipe,
+    ScField,
+    ScFieldErrors,
+    ScFrame,
+    ScLabel,
+    ScRatingNext,
+    ScRatingNextIcon,
+    SiStarIcon,
+  ],
   template: \`
     <div class="flex w-full max-w-xs flex-col gap-4">
       <div scField>
@@ -44,12 +54,9 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
           [formField]="reviewForm.stars"
           valueText="{value} out of {max} stars"
         >
-          @for (star of stars; track star) {
-          <span scRatingNextItem>
+          <ng-template scRatingNextIcon>
             <svg siStarIcon></svg>
-            <svg siStarIcon></svg>
-          </span>
-        }
+          </ng-template>
         </div>
         <div scFieldErrors></div>
       </div>
@@ -60,7 +67,6 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormRatingNextDemo {
-  private readonly stars = [1, 2, 3, 4, 5];
   private readonly model = signal<{ stars: number | null }>({ stars: null });
   private readonly reviewForm = form(this.model, (path) =>
     required(path.stars, { message: 'Pick at least one star.' }),

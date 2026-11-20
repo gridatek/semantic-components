@@ -52,9 +52,9 @@ import { SizeRatingNextDemoContainer } from './demos/size-rating-next-demo-conta
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
-          The rating holds the score and takes the focus; in it, your stars —
-          each your icon twice, empty then full: the full one is drawn up to the
-          star&apos;s fill. A star&apos;s place gives its score.
+          The rating holds the score, takes the focus and draws the stars: your
+          icon, written once — for each star twice, empty and full, the full one
+          drawn up to the star&apos;s fill.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -115,15 +115,12 @@ import { SizeRatingNextDemoContainer } from './demos/size-rating-next-demo-conta
 export default class RatingNextPage {
   private readonly anatomy = {
     imports:
-      "import { ScRatingNext, ScRatingNextItem } from '@semantic-components/ui';",
+      "import { ScRatingNext, ScRatingNextIcon } from '@semantic-components/ui';",
     markup: [
       '<div scRatingNext [formField]="…" valueText="{value} out of {max} stars">',
-      '  @for (star of stars; track star) {',
-      '    <span scRatingNextItem>',
-      '      <svg siStarIcon></svg>',
-      '      <svg siStarIcon></svg>',
-      '    </span>',
-      '  }',
+      '  <ng-template scRatingNextIcon>',
+      '    <svg siStarIcon></svg>',
+      '  </ng-template>',
       '</div>',
     ].join('\n'),
   };
@@ -133,13 +130,13 @@ export default class RatingNextPage {
       name: 'ScRatingNext',
       selector: 'div[scRatingNext]',
       description:
-        'A slider (an image, read-only): value, a number or null while not rated (two-way, or a [formField]); step (1, or 0.5 for halves); deselectable; readonly; disabled; valueText ({value}, {max}, in LOCALE_ID). exportAs scRatingNext: count(), shown(), text().',
+        'A slider (an image, read-only): value, a number or null while not rated (two-way, or a [formField]); count (5); step (1, or 0.5 for halves); deselectable; readonly; disabled; valueText ({value}, {max}, in LOCALE_ID). exportAs scRatingNext: shown(), text().',
     },
     {
-      name: 'ScRatingNextItem',
-      selector: '[scRatingNextItem]',
+      name: 'ScRatingNextIcon',
+      selector: 'ng-template[scRatingNextIcon]',
       description:
-        "A star, hidden from screen readers: your icon twice, empty then full — the full one drawn up to its fill (--sc-rating-fill, 0 to 1). Its colour is the full icon's (text-primary; yours by class); unsized icons size-5.",
+        "Your icon, once, in an ng-template: drawn for each star twice — empty (muted), and full over it up to the star's fill (--sc-rating-fill, 0 to 1), in the rating's colour (text-primary; yours by class). Context: the star (1 for the first) and full, for a different icon per layer. Unsized icons size-5.",
     },
   ];
 }

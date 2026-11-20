@@ -10,7 +10,7 @@ async function pressStar(
   star: number,
   across: number,
 ) {
-  const item = rating.locator('[scRatingNextItem]').nth(star - 1);
+  const item = rating.locator('[data-slot=rating-item]').nth(star - 1);
   await expect(item).toBeVisible();
   const box = await item.boundingBox();
   const rtl = await rating.evaluate(
@@ -26,7 +26,7 @@ async function pressStar(
 /** Each star's fill, 0 to 1. */
 const fills = (rating: Locator) =>
   rating
-    .locator('[scRatingNextItem]')
+    .locator('[data-slot=rating-item]')
     .evaluateAll((items) =>
       items.map((item) =>
         Number(
@@ -44,10 +44,9 @@ test.describe('Rating Next demos', () => {
     await expect(rating).toHaveAttribute('aria-valuenow', '3');
     await expect(rating).toHaveAttribute('aria-valuetext', '3 out of 5 stars');
     await expect(rating).toHaveAttribute('aria-valuemax', '5');
-    await expect(rating.locator('[scRatingNextItem]').first()).toHaveAttribute(
-      'aria-hidden',
-      'true',
-    );
+    await expect(
+      rating.locator('[data-slot=rating-item]').first(),
+    ).toHaveAttribute('aria-hidden', 'true');
     await expect.poll(() => fills(rating)).toEqual([1, 1, 1, 0, 0]);
   });
 
@@ -83,7 +82,7 @@ test.describe('Rating Next demos', () => {
     await expect(rating).toBeFocused();
 
     const second = await rating
-      .locator('[scRatingNextItem]')
+      .locator('[data-slot=rating-item]')
       .nth(1)
       .boundingBox();
     await page.mouse.move(
@@ -178,26 +177,26 @@ test.describe('Rating Next demos', () => {
     await expect(page.getByText('Not rated')).toBeVisible();
   });
 
-  test('other icons: hearts in your colour, read out by your words', async ({
+  test('other icons: hearts in your colour, written once, read out by your words', async ({
     page,
   }) => {
     await page.goto(demo('icons-rating-next-demo'));
     const rating = page.getByRole('slider', { name: 'How much you liked it' });
     await expect(rating).toHaveAttribute('aria-valuetext', '4 of 5 hearts');
-    await expect(rating.locator('[scRatingNextItem]').first()).toHaveClass(
-      /\btext-red-500\b/,
-    );
+    await expect(rating).toHaveClass(/\btext-red-500\b/);
   });
 
-  test('size and colour: your size on the icons, your colour on the stars', async ({
+  test('size and colour: your size on the icons, your colour on the rating', async ({
     page,
   }) => {
     await page.goto(demo('size-rating-next-demo'));
-    const icon = page.locator('[scRatingNextItem] svg').first();
+    const icon = page.locator('[data-slot=rating-item] svg').first();
     await expect(icon).toHaveCSS('width', '32px');
-    await expect(page.locator('[scRatingNextItem]').first()).toHaveClass(
+    await expect(page.locator('[scRatingNext]')).toHaveClass(
       /\btext-amber-500\b/,
     );
+    // Each star, both layers: the icon written once.
+    await expect(page.locator('[data-slot=rating-item] svg')).toHaveCount(10);
   });
 
   test('RTL: from the right; ← raises it, the right half of a star is its first', async ({
@@ -211,7 +210,7 @@ test.describe('Rating Next demos', () => {
     await page.keyboard.press('ArrowRight');
     await expect(rating).toHaveAttribute('aria-valuenow', '3.5');
     // The first star sits on the right; its right half is its first half.
-    const items = rating.locator('[scRatingNextItem]');
+    const items = rating.locator('[data-slot=rating-item]');
     const first = await items.first().boundingBox();
     const last = await items.last().boundingBox();
     expect(first?.x ?? 0).toBeGreaterThan(last?.x ?? 0);

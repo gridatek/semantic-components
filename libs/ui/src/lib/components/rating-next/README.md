@@ -8,12 +8,9 @@ A score in stars, or any icon: WAI-ARIA's rating slider — one control, one tab
 <div scField>
   <label scLabel>Your rating</label>
   <div scRatingNext [formField]="form.stars" [step]="0.5" valueText="{value} out of {max} stars">
-    @for (star of stars; track star) {
-    <span scRatingNextItem>
+    <ng-template scRatingNextIcon>
       <svg siStarIcon></svg>
-      <svg siStarIcon></svg>
-    </span>
-    }
+    </ng-template>
   </div>
   <div scFieldErrors></div>
 </div>
@@ -27,19 +24,31 @@ readonly reviewForm = form(signal({ stars: null as number | null }), (path) =>
 
 ## Parts
 
-| Part               | Selector             | What it does                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------ | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScRatingNext`     | `div[scRatingNext]`  | `role="slider"` (read-only: `role="img"`), named by its field's label or `aria-label`. `value`: a number, `null` while not rated (two-way, or a `[formField]`: `FormValueControl<number \| null>`); `step` (1, or 0.5 for halves); `deselectable`; `readonly`; `disabled`; `valueText` (`{value}`, `{max}`, the value in `LOCALE_ID`). exportAs `scRatingNext`: `count()`, `shown()`, `text()`. |
-| `ScRatingNextItem` | `[scRatingNextItem]` | A star, `aria-hidden`: your icon twice — empty, then full. The full one is drawn over the empty one up to the star's fill (`--sc-rating-fill`, 0 to 1). Its place gives its score (the first is 1). Its colour is the full icon's (`text-primary`; yours by `class`); the empty one `text-muted-foreground`; unsized icons `size-5`.                                                            |
+| Part               | Selector                        | What it does                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------ | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScRatingNext`     | `div[scRatingNext]`             | `role="slider"` (read-only: `role="img"`), named by its field's label or `aria-label`. `value`: a number, `null` while not rated (two-way, or a `[formField]`: `FormValueControl<number \| null>`); `count` (5, the stars); `step` (1, or 0.5 for halves); `deselectable`; `readonly`; `disabled`; `valueText` (`{value}`, `{max}`, the value in `LOCALE_ID`). exportAs `scRatingNext`: `shown()`, `text()`.                                                    |
+| `ScRatingNextIcon` | `ng-template[scRatingNextIcon]` | Your icon, once, in `<ng-template scRatingNextIcon>`. The rating draws it for each star, twice: empty (`text-muted-foreground`), and full over it up to the star's fill (`--sc-rating-fill`, 0 to 1), filled in the rating's colour (`text-primary`; yours by `class` on the rating). Context: `$implicit`, the star (1 for the first), and `full` — `let-full="full"` for a different icon per layer (an outline heart, a filled one). Unsized icons `size-5`. |
 
-Not `max`: a Signal Forms control's `max` is an input; the highest score is `count()`, one per star.
+Not `max`: a Signal Forms control's `max` is the value's; the highest score is `count`, one per star.
+
+## A different icon per layer
+
+```html
+<ng-template scRatingNextIcon let-full="full">
+  @if (full) {
+  <svg siHeartIcon></svg>
+  } @else {
+  <svg siHeartCrackIcon></svg>
+  }
+</ng-template>
+```
 
 ## Behaviour
 
 - **Keys**: → and ↑ raise it by `step`, ← and ↓ lower it (mirrored right to left), Home and End go to the lowest and highest scores. Deselectable: Delete or Backspace, or ↓ from the lowest score, takes it back (`null`).
 - **Pointer**: a press picks the star under it — with `step` 0.5, its first half gives a half (the right half, right to left). Deselectable, a press on the score given takes it back. A hover previews (not on touch: a tap picks at once); leaving shows the score again.
 - **Read-only**: any score (4.2) shows, the fifth star a fifth filled; not focusable.
-- **Why two icons**: the full one drawn over the empty one, clipped to the fill — whole, half or part of a star, rendered on the server as in the browser; and the two may differ (an outline heart, a filled one).
+- **One icon, two layers**: you write the icon once; the rating stamps it twice per star (a template), the full layer clipped to the fill — whole, half or part of a star, rendered on the server as in the browser. It's a `@Component` for that template.
 
 ## Accessibility
 

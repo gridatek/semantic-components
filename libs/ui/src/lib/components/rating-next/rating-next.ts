@@ -1,9 +1,12 @@
+import { NgTemplateOutlet } from '@angular/common';
 import {
-  Directive,
+  Component,
   ElementRef,
   LOCALE_ID,
+  ViewEncapsulation,
   booleanAttribute,
   computed,
+  contentChild,
   inject,
   input,
   model,
@@ -14,16 +17,43 @@ import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { bindInput } from '../../utils';
 import { ScField } from '../field';
+import { ScRatingNextIcon } from './rating-next-icon';
 
 /**
- * A rating: a slider over your stars (WAI-ARIA's rating slider) — one value,
- * `null` while not rated, up to the number of `scRatingNextItem`s. Whole or
- * part stars (`step`), read out by your `valueText` ("3.5 out of 5 stars").
- * Read-only, it is an image named by that text, for any score (4.2).
+ * A rating: WAI-ARIA's rating slider — one value, `null` while not rated,
+ * up to `count` stars. Whole or part stars (`step`), read out by your
+ * `valueText` ("3.5 out of 5 stars"). Read-only, it is an image named by
+ * that text, for any score (4.2). It draws the stars: your icon
+ * (`<ng-template scRatingNextIcon>`), twice each — empty, and full over it up to the
+ * star's fill (`--sc-rating-fill`, 0 to 1).
  */
-@Directive({
+@Component({
   selector: 'div[scRatingNext]',
   exportAs: 'scRatingNext',
+  imports: [NgTemplateOutlet],
+  template: `
+    @for (star of stars(); track star) {
+      <span
+        data-slot="rating-item"
+        aria-hidden="true"
+        [attr.data-star]="star"
+        [style.--sc-rating-fill]="fill(star)"
+        [class]="itemClass"
+      >
+        @if (icon(); as icon) {
+          <ng-container
+            [ngTemplateOutlet]="icon.template"
+            [ngTemplateOutletContext]="{ $implicit: star, full: false }"
+          />
+          <ng-container
+            [ngTemplateOutlet]="icon.template"
+            [ngTemplateOutletContext]="{ $implicit: star, full: true }"
+          />
+        }
+      </span>
+    }
+  `,
+  encapsulation: ViewEncapsulation.None,
   host: {
     'data-slot': 'rating',
     '[attr.role]': "readonly() ? 'img' : 'slider'",
@@ -80,16 +110,13 @@ export class ScRatingNext implements FormValueControl<number | null> {
   /** Focus left it (Signal Forms marks the field touched). */
   readonly touch = output<void>();
 
-  private readonly items = signal<readonly HTMLElement[]>([]);
-  /** The stars in page order: the first is 1. */
-  private readonly ordered = computed(() =>
-    [...this.items()].sort((a, b) =>
-      // 4: b follows a (Node.DOCUMENT_POSITION_FOLLOWING, no Node global on the server).
-      a.compareDocumentPosition(b) & 4 ? -1 : 1,
-    ),
+  /** How many stars: the highest score (not `max`: a Signal Forms control's is the value's). */
+  readonly count = input(5);
+  /** Your icon (`<ng-template scRatingNextIcon>`), drawn for each star. */
+  private readonly icon = contentChild(ScRatingNextIcon);
+  private readonly stars = computed(() =>
+    Array.from({ length: this.count() }, (_, i) => i + 1),
   );
-  /** The highest score: one per star (not `max`: a Signal Forms control's is an input). */
-  readonly count = computed(() => this.items().length);
 
   /** Under the pointer, before a press (not on touch). */
   readonly preview = signal<number | null>(null);
@@ -128,23 +155,27 @@ export class ScRatingNext implements FormValueControl<number | null> {
 
   private readonly class = computed(() =>
     cn(
-      'inline-flex w-fit items-center gap-0.5 rounded-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
+      'text-primary inline-flex w-fit items-center gap-0.5 rounded-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
       this.interactive() && 'cursor-pointer touch-manipulation',
       this.disabled() && 'opacity-50',
       this.classInput(),
     ),
   );
 
-  /** A star joins (it registers itself): its place, from its order. */
-  register(item: HTMLElement): () => void {
-    this.items.update((all) => [...all, item]);
-    return () => this.items.update((all) => all.filter((i) => i !== item));
+  /** How much of a star is filled, 0 to 1 (1 for the first star). */
+  private fill(star: number): number {
+    return Math.min(1, Math.max(0, this.shown() - (star - 1)));
   }
 
-  /** 1 for the first star; 0 before it is known. */
-  indexOf(item: HTMLElement): number {
-    return this.ordered().indexOf(item) + 1;
-  }
+  /** A star: both layers in one cell; the full one cut at the fill. */
+  private readonly itemClass = cn(
+    'grid shrink-0 place-items-center',
+    "[&>svg]:col-start-1 [&>svg]:row-start-1 [&>svg:not([class*='size-'])]:size-5",
+    // The empty layer: quieter; the full one: filled, in the rating's colour,
+    // cut at the fill (from the right; right to left, from the left).
+    '[&>svg:first-of-type]:text-muted-foreground',
+    '[&>svg:last-of-type:not(:first-of-type)]:fill-current [&>svg:last-of-type:not(:first-of-type)]:[clip-path:inset(0_calc((1_-_var(--sc-rating-fill))_*_100%)_0_0)] rtl:[&>svg:last-of-type:not(:first-of-type)]:[clip-path:inset(0_0_0_calc((1_-_var(--sc-rating-fill))_*_100%))]',
+  );
 
   /** Focuses it — Signal Forms does, to show an invalid field. */
   focus(options?: FocusOptions): void {
@@ -217,8 +248,9 @@ export class ScRatingNext implements FormValueControl<number | null> {
     const item = (event.target as Element | null)?.closest?.(
       '[data-slot=rating-item]',
     ) as HTMLElement | null;
-    const index = item ? this.ordered().indexOf(item) : -1;
-    if (!item || index < 0) return null;
+    const star = Number(item?.dataset['star']);
+    if (!item || !star) return null;
+    const index = star - 1;
     const box = item.getBoundingClientRect();
     const rtl = getComputedStyle(this.element).direction === 'rtl';
     const across =

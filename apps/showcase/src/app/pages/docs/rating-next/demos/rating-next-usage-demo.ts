@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScRatingNext, ScRatingNextItem } from '@semantic-components/ui';
+import { ScRatingNext, ScRatingNextIcon } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
-/** A score out of five, read out by your value text; each star is your icon twice (empty, full). */
+/** A score out of five, read out by your value text; your icon, once: the rating draws the stars. */
 @Component({
   selector: 'app-rating-next-usage-demo',
-  imports: [ScRatingNext, ScRatingNextItem, SiStarIcon],
+  imports: [ScRatingNext, ScRatingNextIcon, SiStarIcon],
   template: `
     <div class="flex flex-col items-center gap-2">
       <div
@@ -14,12 +14,9 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
         aria-label="Rating"
         valueText="{value} out of {max} stars"
       >
-        @for (star of stars; track star) {
-          <span scRatingNextItem>
-            <svg siStarIcon></svg>
-            <svg siStarIcon></svg>
-          </span>
-        }
+        <ng-template scRatingNextIcon>
+          <svg siStarIcon></svg>
+        </ng-template>
       </div>
       <p class="text-muted-foreground text-sm tabular-nums">
         {{ score() ?? 0 }} out of 5
@@ -30,6 +27,5 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RatingNextUsageDemo {
-  private readonly stars = [1, 2, 3, 4, 5];
   private readonly score = signal<number | null>(3);
 }

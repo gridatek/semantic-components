@@ -19,16 +19,13 @@ import { DisabledRatingNextDemo } from './disabled-rating-next-demo';
 })
 export class DisabledRatingNextDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScRatingNext,
-  ScRatingNextItem,
-} from '@semantic-components/ui';
+import { ScRatingNext, ScRatingNextIcon } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
 /** Disabled: out of the tab order, no press or key changes it. */
 @Component({
   selector: 'app-disabled-rating-next-demo',
-  imports: [ScRatingNext, ScRatingNextItem, SiStarIcon],
+  imports: [ScRatingNext, ScRatingNextIcon, SiStarIcon],
   template: \`
     <div
       scRatingNext
@@ -37,19 +34,15 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
       aria-label="Rating"
       valueText="{value} out of {max} stars"
     >
-      @for (star of stars; track star) {
-          <span scRatingNextItem>
-            <svg siStarIcon></svg>
-            <svg siStarIcon></svg>
-          </span>
-        }
+      <ng-template scRatingNextIcon>
+        <svg siStarIcon></svg>
+      </ng-template>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledRatingNextDemo {
-  private readonly stars = [1, 2, 3, 4, 5];
   private readonly score = signal<number | null>(2);
 }`;
 }

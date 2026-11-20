@@ -1,2 +1,3 @@
 export { ScRatingNext } from './rating-next';
-export { ScRatingNextItem } from './rating-next-item';
+export { ScRatingNextIcon } from './rating-next-icon';
+export type { ScRatingNextIconContext } from './rating-next-icon';

@@ -19,6 +19,6 @@ test.describe('Rating Next Page', () => {
     const table = page.getByRole('region', { name: 'Rating Next parts' });
     await expect(table.getByRole('row')).toHaveCount(3);
     await expect(table).toContainText('div[scRatingNext]');
-    await expect(table).toContainText('[scRatingNextItem]');
+    await expect(table).toContainText('ng-template[scRatingNextIcon]');
   });
 });

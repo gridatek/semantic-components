@@ -7,7 +7,7 @@ import {
   ScFrame,
   ScLabel,
   ScRatingNext,
-  ScRatingNextItem,
+  ScRatingNextIcon,
 } from '@semantic-components/ui';
 import { SiStarIcon } from '@semantic-icons/lucide-icons';
 
@@ -22,7 +22,7 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
     ScFrame,
     ScLabel,
     ScRatingNext,
-    ScRatingNextItem,
+    ScRatingNextIcon,
     SiStarIcon,
   ],
   template: `
@@ -34,12 +34,9 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
           [formField]="reviewForm.stars"
           valueText="{value} out of {max} stars"
         >
-          @for (star of stars; track star) {
-            <span scRatingNextItem>
-              <svg siStarIcon></svg>
-              <svg siStarIcon></svg>
-            </span>
-          }
+          <ng-template scRatingNextIcon>
+            <svg siStarIcon></svg>
+          </ng-template>
         </div>
         <div scFieldErrors></div>
       </div>
@@ -50,7 +47,6 @@ import { SiStarIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormRatingNextDemo {
-  private readonly stars = [1, 2, 3, 4, 5];
   private readonly model = signal<{ stars: number | null }>({ stars: null });
   private readonly reviewForm = form(this.model, (path) =>
     required(path.stars, { message: 'Pick at least one star.' }),
