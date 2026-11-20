@@ -55,17 +55,17 @@ export class ScTimelineNextItem {
   readonly status = input<ScTimelineNextStatus | undefined>(undefined);
 
   /** Its title's id: set by `scTimelineNextTitle`. */
-  private readonly ɵtitle = signal<(() => string) | null>(null);
+  readonly ɵtitle = signal<(() => string) | null>(null);
   /** Its time's and description's ids. */
-  private readonly ɵdescriptions = signal<readonly (() => string)[]>([]);
+  readonly ɵdescriptions = signal<readonly (() => string)[]>([]);
 
   private readonly index = computed(() =>
     this.timeline.entries().findIndex((e) => e.element === this.element),
   );
-  private readonly isLast = computed(
+  readonly isLast = computed(
     () => this.index() === this.timeline.entries().length - 1,
   );
-  private readonly vertical = computed(
+  readonly vertical = computed(
     () => this.timeline.orientation() === 'vertical',
   );
 
