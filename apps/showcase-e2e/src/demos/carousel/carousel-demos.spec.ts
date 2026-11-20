@@ -126,6 +126,52 @@ test.describe('Carousel demos', () => {
     await expect(status).toHaveText('Slide 1 of 5');
   });
 
+  test('dots: one per position; a click, Enter or the arrows move the current one', async ({
+    page,
+  }) => {
+    await page.goto(demo('dots-carousel-demo'));
+    const group = page.getByRole('group', { name: 'Choose a slide' });
+    const dot = (n: number) =>
+      group.getByRole('button', { name: `Slide ${n}`, exact: true });
+    await expect(group.getByRole('button')).toHaveCount(5);
+    await expect(dot(1)).toHaveAttribute('aria-current', 'true');
+
+    await dot(3).click();
+    await expect(dot(3)).toHaveAttribute('aria-current', 'true');
+    await expect(dot(1)).not.toHaveAttribute('aria-current');
+    await expect.poll(() => shown(page)).toEqual(['3 of 5']);
+
+    // The arrows move the dots too.
+    await page.getByRole('button', { name: 'Next slide' }).click();
+    await expect(dot(4)).toHaveAttribute('aria-current', 'true');
+
+    // A dot is a button: Enter.
+    await dot(1).focus();
+    await page.keyboard.press('Enter');
+    await expect(dot(1)).toHaveAttribute('aria-current', 'true');
+    await expect.poll(() => shown(page)).toEqual(['1 of 5']);
+  });
+
+  test('dots: 24px targets; the current one wider, not only darker', async ({
+    page,
+  }) => {
+    await page.goto(demo('dots-carousel-demo'));
+    const group = page.getByRole('group', { name: 'Choose a slide' });
+    const dots = group.getByRole('button');
+    await expect(dots).toHaveCount(5);
+    const mark = (n: number) =>
+      dots
+        .nth(n)
+        .evaluate((el) => parseFloat(getComputedStyle(el, '::after').width));
+    await expect.poll(() => mark(0)).toBeGreaterThan(await mark(1));
+    for (const box of await dots.evaluateAll((all) =>
+      all.map((el) => el.getBoundingClientRect()),
+    )) {
+      expect(box.width).toBeGreaterThanOrEqual(24);
+      expect(box.height).toBeGreaterThanOrEqual(24);
+    }
+  });
+
   test('plugin: autoplay moves on; Pause stops it and becomes Play', async ({
     page,
   }) => {

@@ -63,6 +63,10 @@ export class ScCarousel {
   readonly api = this.apiSignal.asReadonly();
   /** How many positions it stops at (with several slides in view, fewer than the slides). */
   readonly count = signal(0);
+  /** Its positions, 0 … count − 1: one scCarouselDot each. */
+  readonly positions = computed(() =>
+    Array.from({ length: this.count() }, (_, i) => i),
+  );
   private readonly items = signal<readonly HTMLElement[]>([]);
   /** The slides, in page order (they register themselves): each one's place, for its name ("2 of 5"). */
   readonly slides = computed(() =>

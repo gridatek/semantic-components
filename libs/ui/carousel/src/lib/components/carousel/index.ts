@@ -5,6 +5,7 @@ export type {
   ScCarouselOrientation,
   ScCarouselPlugin,
 } from './carousel';
+export { ScCarouselDot } from './carousel-dot';
 export { ScCarouselItem } from './carousel-item';
 export { ScCarouselNext } from './carousel-next';
 export { ScCarouselPrevious } from './carousel-previous';

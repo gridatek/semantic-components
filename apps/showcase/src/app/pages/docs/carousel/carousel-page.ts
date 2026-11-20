@@ -7,6 +7,7 @@ import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ApiCarouselDemoContainer } from './demos/api-carousel-demo-container';
 import { CarouselUsageDemoContainer } from './demos/carousel-usage-demo-container';
+import { DotsCarouselDemoContainer } from './demos/dots-carousel-demo-container';
 import { ImagesCarouselDemoContainer } from './demos/images-carousel-demo-container';
 import { MultipleCarouselDemoContainer } from './demos/multiple-carousel-demo-container';
 import { OrientationCarouselDemoContainer } from './demos/orientation-carousel-demo-container';
@@ -27,6 +28,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
     SpacingCarouselDemoContainer,
     OrientationCarouselDemoContainer,
     ApiCarouselDemoContainer,
+    DotsCarouselDemoContainer,
     PluginCarouselDemoContainer,
     MultipleCarouselDemoContainer,
     ImagesCarouselDemoContainer,
@@ -103,6 +105,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
         <app-spacing-carousel-demo-container />
         <app-orientation-carousel-demo-container />
         <app-api-carousel-demo-container />
+        <app-dots-carousel-demo-container />
         <app-plugin-carousel-demo-container />
         <app-multiple-carousel-demo-container />
         <app-images-carousel-demo-container />
@@ -127,7 +130,7 @@ export default class CarouselPage {
     imports: [
       'import {',
       '  ScCarousel, ScCarouselViewport, ScCarouselTrack,',
-      '  ScCarouselItem, ScCarouselPrevious, ScCarouselNext,',
+      '  ScCarouselItem, ScCarouselPrevious, ScCarouselNext, ScCarouselDot,',
       "} from '@semantic-components/ui/carousel';",
     ].join('\n'),
     markup: [
@@ -144,6 +147,11 @@ export default class CarouselPage {
       '  <button scCarouselNext>',
       '    <svg siChevronRightIcon></svg><span class="sr-only">…</span>',
       '  </button>',
+      '  <div role="group" aria-label="…">',
+      '    @for (i of carousel.positions(); track i) {',
+      '      <button scCarouselDot [index]="i"><span class="sr-only">…</span></button>',
+      '    }',
+      '  </div>',
       '</div>',
     ].join('\n'),
   };
@@ -153,7 +161,7 @@ export default class CarouselPage {
       name: 'ScCarousel',
       selector: 'div[scCarousel]',
       description:
-        "The region. orientation ('horizontal', 'vertical'); options and plugins (Embla's: a change starts it again with them; its direction from the page unless given); [(activeIndex)]. exportAs scCarousel: api() (Embla's), count() (positions), canScrollPrev(), canScrollNext(), scrollPrev(), scrollNext().",
+        "The region. orientation ('horizontal', 'vertical'); options and plugins (Embla's: a change starts it again with them; its direction from the page unless given); [(activeIndex)]. exportAs scCarousel: api() (Embla's), count() (positions), positions() (0 … count − 1, for the dots), canScrollPrev(), canScrollNext(), scrollPrev(), scrollNext().",
     },
     {
       name: 'ScCarouselViewport',
@@ -177,6 +185,12 @@ export default class CarouselPage {
       selector: 'button[…]',
       description:
         "The style's button (variant 'outline', size 'icon-sm', the style's corners) outside either end; disabled when it can't move; your icon, mirrored right to left.",
+    },
+    {
+      name: 'ScCarouselDot',
+      selector: 'button[scCarouselDot]',
+      description:
+        'A position’s dot (index): a click goes there; the current one has aria-current and is wider. A 24px target that draws its mark, in the style’s corners. Write its name; put the dots in a group of yours, inside the carousel.',
     },
   ];
 }

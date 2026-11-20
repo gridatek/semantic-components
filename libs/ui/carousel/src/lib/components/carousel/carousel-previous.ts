@@ -16,7 +16,7 @@ import { ScCarousel } from './carousel';
 export class ScCarouselPrevious {
   private readonly buttonStyles = injectStyle().button;
   /** The style's corners for these buttons. */
-  private readonly corners = injectStyle().carousel;
+  private readonly corners = injectStyle().carousel.button;
 
   private readonly carousel = inject(ScCarousel);
 

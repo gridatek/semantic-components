@@ -1319,6 +1319,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'dots-carousel-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel/demos/dots-carousel-demo').then(
+            (m) => m.DotsCarouselDemo,
+          ),
+      },
+      {
         path: 'plugin-carousel-demo',
         loadComponent: () =>
           import('../pages/docs/carousel/demos/plugin-carousel-demo').then(

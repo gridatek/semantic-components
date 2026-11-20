@@ -608,6 +608,14 @@ export interface ScNavigationMenuStyles {
   popup: string;
 }
 
+/** A carousel's corners: its Previous and Next buttons', and its dots'. */
+export interface ScCarouselStyles {
+  /** Previous and Next: empty where the style's button keeps its own. */
+  button: string;
+  /** scCarouselDot: its focus ring and its mark. */
+  dot: string;
+}
+
 export interface ScStyle {
   accordion: ScAccordionStyles;
   alert: ScAlertStyles;
@@ -627,8 +635,7 @@ export interface ScStyle {
   /** A calendar's root: its padding, --cell-size and --cell-radius. */
   calendar: string;
   card: ScCardStyles;
-  /** A carousel's previous and next buttons: their corners. */
-  carousel: string;
+  carousel: ScCarouselStyles;
   chart: ScChartStyles;
   checkbox: ScCheckboxStyles;
   codeBlock: ScCodeBlockStyles;
