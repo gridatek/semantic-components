@@ -29,6 +29,20 @@ test.describe('Bubble Menu Editor Demo', () => {
 
     await page.keyboard.press('Shift+Home');
     await expect(bubble(page)).toBeVisible();
+    // By the text: its centre over the selection, not pushed to an edge.
+    const text = await page.evaluate(() => {
+      const r = getSelection()?.getRangeAt(0).getBoundingClientRect();
+      return { left: r?.left ?? 0, right: r?.right ?? 0 };
+    });
+    await expect
+      .poll(async () => {
+        const box = (await bubble(page).boundingBox()) ?? { x: 0, width: 0 };
+        return box.x + box.width / 2;
+      })
+      .toBeGreaterThan(text.left);
+    const box = (await bubble(page).boundingBox()) ?? { x: 0, width: 0 };
+    expect(box.x + box.width / 2).toBeLessThan(text.right);
+
     const italic = bubble(page).getByRole('button', { name: 'Italic' });
     await italic.click();
     await expect(italic).toHaveAttribute('aria-pressed', 'true');

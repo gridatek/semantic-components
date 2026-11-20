@@ -65,7 +65,6 @@ import {
   provideEditor,
 } from '@semantic-components/ui/editor';
 import { withAlign } from '@semantic-components/ui/editor/align';
-import { ScEditorBubbleMenu } from '@semantic-components/ui/editor/bubble-menu';
 import {
   ScEditorHighlight,
   ScEditorHighlightColor,
@@ -155,7 +154,6 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
 <table>
   <tr><th><p>Feature</p></th><th><p>Where</p></th></tr>
   <tr><td><p>Tables</p></td><td><p>The table menu</p></td></tr>
-  <tr><td><p>Floating toolbar</p></td><td><p>Select some text</p></td></tr>
 </table>
 <blockquote><p>Search with Ctrl + F, and replace what you find.</p></blockquote>
 <p style="text-align: center">Centred, justified, or aligned to either side.</p>\`;
@@ -217,7 +215,6 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
     ScEditorBlock,
     ScEditorLink,
     ScEditorWordCount,
-    ScEditorBubbleMenu,
     ScEditorHighlight,
     ScEditorHighlightColor,
     ScEditorRemoveHighlight,
@@ -570,36 +567,6 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
             >
               <svg siSearchIcon></svg>
               <span class="sr-only">Search and replace</span>
-            </button>
-          </div>
-        </div>
-
-        <div
-          scEditorBubbleMenu
-          scToolbar
-          aria-label="Selection"
-          class="shadow-md"
-        >
-          <div scToolbarWidgetGroup>
-            <button scToolbarWidget scToggle scEditorCommand="bold">
-              <svg siBoldIcon></svg>
-              <span class="sr-only">Bold</span>
-            </button>
-            <button scToolbarWidget scToggle scEditorCommand="italic">
-              <svg siItalicIcon></svg>
-              <span class="sr-only">Italic</span>
-            </button>
-            <button scToolbarWidget scToggle scEditorCommand="strikethrough">
-              <svg siStrikethroughIcon></svg>
-              <span class="sr-only">Strikethrough</span>
-            </button>
-            <button scToolbarWidget scToggle scEditorCommand="code">
-              <svg siCodeIcon></svg>
-              <span class="sr-only">Code</span>
-            </button>
-            <button scToolbarWidget scToggle scEditorCommand="underline">
-              <svg siUnderlineIcon></svg>
-              <span class="sr-only">Underline</span>
             </button>
           </div>
         </div>

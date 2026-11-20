@@ -351,43 +351,4 @@ test.describe('Full Featured Editor Demo', () => {
     await page.getByRole('menuitem', { name: 'Delete table' }).click();
     await expect(article(page).locator('table')).toHaveCount(0);
   });
-
-  test('the floating toolbar appears by selected text', async ({ page }) => {
-    const bubble = page.getByRole('toolbar', { name: 'Selection' });
-    await expect(bubble).toBeHidden();
-
-    await startEmpty(page);
-    await page.keyboard.type('Make this loud');
-    // Typed in before selecting (see superscript above).
-    await expect(output(page)).toHaveText('<p>Make this loud</p>');
-    await expect(bubble).toBeHidden();
-    await page.keyboard.press('Shift+Home');
-    await expect(bubble).toBeVisible();
-    // By the text: its centre over the selection, not pushed to an edge.
-    const text = await page.evaluate(() => {
-      const r = getSelection()!.getRangeAt(0).getBoundingClientRect();
-      return { left: r.left, right: r.right };
-    });
-    await expect
-      .poll(async () => {
-        const box = (await bubble.boundingBox()) ?? { x: 0, width: 0 };
-        return box.x + box.width / 2;
-      })
-      .toBeGreaterThan(text.left);
-    const box = (await bubble.boundingBox()) ?? { x: 0, width: 0 };
-    expect(box.x + box.width / 2).toBeLessThan(text.right);
-
-    await bubble.getByRole('button', { name: 'Bold', exact: true }).click();
-    await expect(output(page)).toHaveText(
-      '<p><strong>Make this loud</strong></p>',
-    );
-    await expect(
-      bubble.getByRole('button', { name: 'Bold', exact: true }),
-    ).toHaveAttribute('aria-pressed', 'true');
-
-    // An empty selection hides it.
-    await article(page).click();
-    await page.keyboard.press('End');
-    await expect(bubble).toBeHidden();
-  });
 });

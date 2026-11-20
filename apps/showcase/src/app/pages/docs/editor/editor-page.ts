@@ -340,9 +340,9 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           block type and list menus (with task lists), blockquotes and code
           blocks, marks, highlight colours, links, superscript and subscript,
           alignment, tables (from the table menu), images (pick, drop or paste
-          one) and search and replace (<kbd scKbd>Ctrl / ⌘ + F</kbd>). Select
-          some text for the floating toolbar. The page layout centres the text
-          in a column of readable width. It uses every feature:
+          one) and search and replace (<kbd scKbd>Ctrl / ⌘ + F</kbd>). The page
+          layout centres the text in a column of readable width. It uses every
+          feature:
           <code scTypeset
             >provideEditor(withAlign(), withHighlight(), withImages(),
             withScripts(), withSearch(), withTables())</code
