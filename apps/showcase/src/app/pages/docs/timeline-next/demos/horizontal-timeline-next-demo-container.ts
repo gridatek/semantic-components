@@ -18,7 +18,7 @@ import { HorizontalTimelineNextDemo } from './horizontal-timeline-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class HorizontalTimelineNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTimelineNext,
   ScTimelineNextConnector,

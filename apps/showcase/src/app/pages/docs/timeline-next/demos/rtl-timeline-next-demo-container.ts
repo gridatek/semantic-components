@@ -18,7 +18,7 @@ import { RtlTimelineNextDemo } from './rtl-timeline-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlTimelineNextDemoContainer {
-  readonly code = `import { Dir } from '@angular/cdk/bidi';
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
   ScTimelineNext,

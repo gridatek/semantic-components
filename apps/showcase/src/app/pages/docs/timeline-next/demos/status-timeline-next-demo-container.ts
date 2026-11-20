@@ -18,7 +18,7 @@ import { StatusTimelineNextDemo } from './status-timeline-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class StatusTimelineNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScTimelineNext,

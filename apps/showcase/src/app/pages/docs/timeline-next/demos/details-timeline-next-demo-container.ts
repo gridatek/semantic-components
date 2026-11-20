@@ -18,7 +18,7 @@ import { DetailsTimelineNextDemo } from './details-timeline-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DetailsTimelineNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScCollapsible,

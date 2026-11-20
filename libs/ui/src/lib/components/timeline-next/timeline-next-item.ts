@@ -43,7 +43,7 @@ export type ScTimelineNextStatus = 'complete' | 'current' | 'upcoming';
   },
 })
 export class ScTimelineNextItem {
-  readonly timeline = inject(ScTimelineNext);
+  private readonly timeline = inject(ScTimelineNext);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly corners = injectStyle().frameXs;
@@ -55,17 +55,17 @@ export class ScTimelineNextItem {
   readonly status = input<ScTimelineNextStatus | undefined>(undefined);
 
   /** Its title's id: set by `scTimelineNextTitle`. */
-  readonly ɵtitle = signal<(() => string) | null>(null);
+  private readonly ɵtitle = signal<(() => string) | null>(null);
   /** Its time's and description's ids. */
-  readonly ɵdescriptions = signal<readonly (() => string)[]>([]);
+  private readonly ɵdescriptions = signal<readonly (() => string)[]>([]);
 
-  readonly index = computed(() =>
+  private readonly index = computed(() =>
     this.timeline.entries().findIndex((e) => e.element === this.element),
   );
-  readonly isLast = computed(
+  private readonly isLast = computed(
     () => this.index() === this.timeline.entries().length - 1,
   );
-  readonly vertical = computed(
+  private readonly vertical = computed(
     () => this.timeline.orientation() === 'vertical',
   );
 

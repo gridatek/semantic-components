@@ -18,7 +18,7 @@ import { TimelineNextUsageDemo } from './timeline-next-usage-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class TimelineNextUsageDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScTimelineNext,
   ScTimelineNextConnector,

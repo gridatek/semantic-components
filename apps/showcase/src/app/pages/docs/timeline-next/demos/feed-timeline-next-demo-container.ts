@@ -18,7 +18,7 @@ import { FeedTimelineNextDemo } from './feed-timeline-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FeedTimelineNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScButton,
   ScTimelineNext,
