@@ -19,6 +19,9 @@ const pages = [
   '/docs/getting-started/introduction',
   '/components',
   '/docs/components',
+  // Guides the style draws (out of the components' list).
+  '/docs/guides/scrollbar',
+  '/docs/guides/typeset',
   ...components
     .filter((c) => !c.hidden)
     .map((c) => `/docs/components/${c.path}`),
@@ -30,7 +33,10 @@ test.describe('Docs pages in their style', () => {
       // Two full axe runs on a whole page (the Sidebar's: about 35s).
       test.slow();
       await page.goto(path);
-      await expect(page.locator('h1').first()).toBeVisible();
+      // A heavy page (the Editor's) under CI load: seconds to its heading.
+      await expect(page.locator('h1').first()).toBeVisible({
+        timeout: 15_000,
+      });
       await expectNoA11yViolations(page);
       await expectNoA11yViolations(page, { dark: true });
     });

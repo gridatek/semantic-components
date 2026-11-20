@@ -11,7 +11,10 @@ export async function expectNoA11yViolations(
 ) {
   if (dark) {
     await page.emulateMedia({ colorScheme: 'dark' });
-    await expect(page.locator('html')).toHaveClass(/\bdark\b/);
+    // A heavy page (the Editor's) under CI load takes seconds to react.
+    await expect(page.locator('html')).toHaveClass(/\bdark\b/, {
+      timeout: 15_000,
+    });
   }
   // Settled: the page's code loaded (its route is lazy) — network idle, but
   // not forever: a page loading images (or Firefox) may never get there —
@@ -25,7 +28,7 @@ export async function expectNoA11yViolations(
   await page
     .waitForLoadState('networkidle', { timeout: 10_000 })
     .catch(() => undefined);
-  await page.locator('h1').first().waitFor();
+  await page.locator('h1').first().waitFor({ timeout: 15_000 });
   await page.evaluate(async () => {
     await document.fonts.ready;
     const deadline = performance.now() + 3000;

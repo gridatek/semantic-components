@@ -3,9 +3,9 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
+  afterRenderEffect,
   booleanAttribute,
   computed,
-  effect,
   inject,
   input,
   signal,
@@ -194,7 +194,8 @@ export class DemoContainer {
   private readonly frameBox = viewChild<ElementRef<HTMLElement>>('frameBox');
 
   constructor() {
-    effect((onCleanup) => {
+    // After render: in the browser only (no ResizeObserver on the server).
+    afterRenderEffect((onCleanup) => {
       const box = this.frameBox()?.nativeElement;
       if (!box) return;
       const observer = new ResizeObserver(([entry]) =>
