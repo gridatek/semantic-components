@@ -4281,6 +4281,74 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/rating-next',
+    children: [
+      {
+        path: 'rating-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/rating-next/demos/rating-next-usage-demo').then(
+            (m) => m.RatingNextUsageDemo,
+          ),
+      },
+      {
+        path: 'half-rating-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/rating-next/demos/half-rating-next-demo').then(
+            (m) => m.HalfRatingNextDemo,
+          ),
+      },
+      {
+        path: 'form-rating-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/rating-next/demos/form-rating-next-demo').then(
+            (m) => m.FormRatingNextDemo,
+          ),
+      },
+      {
+        path: 'readonly-rating-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/rating-next/demos/readonly-rating-next-demo').then(
+            (m) => m.ReadonlyRatingNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-rating-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/rating-next/demos/disabled-rating-next-demo').then(
+            (m) => m.DisabledRatingNextDemo,
+          ),
+      },
+      {
+        path: 'deselectable-rating-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/rating-next/demos/deselectable-rating-next-demo').then(
+            (m) => m.DeselectableRatingNextDemo,
+          ),
+      },
+      {
+        path: 'icons-rating-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/rating-next/demos/icons-rating-next-demo').then(
+            (m) => m.IconsRatingNextDemo,
+          ),
+      },
+      {
+        path: 'size-rating-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/rating-next/demos/size-rating-next-demo').then(
+            (m) => m.SizeRatingNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-rating-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/rating-next/demos/rtl-rating-next-demo').then(
+            (m) => m.RtlRatingNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/range-slider',
     children: [
       {

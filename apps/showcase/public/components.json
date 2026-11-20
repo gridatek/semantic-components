@@ -809,6 +809,14 @@
     "hidden": true
   },
   {
+    "name": "Rating Next",
+    "path": "rating-next",
+    "description": "A score in stars (or any icon): a slider, whole or half stars, read out by your words; a Signal Forms field.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Resizable",
     "path": "resizable",
     "description": "Panels resized by the handles between them, by pointer or keyboard — in the look of the app's style.",
