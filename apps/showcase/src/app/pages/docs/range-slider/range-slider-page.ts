@@ -10,6 +10,7 @@ import { LabelRangeSliderDemoContainer } from './demos/label-range-slider-demo-c
 import { RangeSliderUsageDemoContainer } from './demos/range-slider-usage-demo-container';
 import { RtlRangeSliderDemoContainer } from './demos/rtl-range-slider-demo-container';
 import { StepsRangeSliderDemoContainer } from './demos/steps-range-slider-demo-container';
+import { TrimRangeSliderDemoContainer } from './demos/trim-range-slider-demo-container';
 import { VerticalRangeSliderDemoContainer } from './demos/vertical-range-slider-demo-container';
 
 @Component({
@@ -21,6 +22,7 @@ import { VerticalRangeSliderDemoContainer } from './demos/vertical-range-slider-
     RangeSliderUsageDemoContainer,
     LabelRangeSliderDemoContainer,
     StepsRangeSliderDemoContainer,
+    TrimRangeSliderDemoContainer,
     VerticalRangeSliderDemoContainer,
     FormRangeSliderDemoContainer,
     DisabledRangeSliderDemoContainer,
@@ -90,6 +92,7 @@ import { VerticalRangeSliderDemoContainer } from './demos/vertical-range-slider-
         <app-steps-range-slider-demo-container />
         <app-vertical-range-slider-demo-container />
         <app-form-range-slider-demo-container />
+        <app-trim-range-slider-demo-container />
         <app-disabled-range-slider-demo-container />
         <app-rtl-range-slider-demo-container />
       </section>
@@ -124,7 +127,7 @@ export default class RangeSliderPage {
       name: 'ScRangeSlider',
       selector: 'div[scRangeSlider]',
       description:
-        "A group (named by its field's label) drawing the track and the range: value, the pair [from, to] (a [formField], or two-way); its ends from the form's schema (applyEach: min and max on each value; 0 and 100 without); step; minStepsBetweenValues; orientation ('horizontal', 'vertical'); disabled; format (Intl.NumberFormat, in LOCALE_ID). exportAs scRangeSlider: formatted(), lowest(), highest().",
+        "A group (named by its field's label) drawing the track and the range: value, the pair [from, to] (a [formField], or two-way); its ends: with a form, the schema's (applyEach: min and max on each value), without one min and max (0 and 100 by default); step; minStepsBetweenValues; orientation ('horizontal', 'vertical'); disabled; format (Intl.NumberFormat, in LOCALE_ID). exportAs scRangeSlider: formatted(), lowest(), highest().",
     },
     {
       name: 'ScRangeSliderThumb',

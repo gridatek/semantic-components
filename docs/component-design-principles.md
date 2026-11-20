@@ -249,11 +249,11 @@ A rule (the user, 2026-11-19). A popup holding links — the Header's mobile men
 
 ## Bounds Come From the Form
 
-A rule (the user, 2026-11-20). A control's bounds — the lowest and highest values it takes — are the form's: `min(…)` and `max(…)` in the `form()` schema, never inputs the consumer writes beside `[formField]`. One way, the same for every control, and the bounds validate too (a value outside them is an error).
+A rule (the user, 2026-11-20). A control's bounds — the lowest and highest values it takes — are the form's: `min(…)` and `max(…)` in the `form()` schema, never inputs the consumer writes beside `[formField]` (Angular refuses them: NG8022). Without a form, `[min]` / `[max]`. One way per case, the same for every control; with a form, the bounds validate too (a value outside them is an error).
 
 - **A number** (Slider, Number Group): `min(path.volume, 0); max(path.volume, 100);` — Signal Forms feeds the control's `min` / `max` inputs.
-- **A pair** (Range Slider): `applyEach(path.price, (value) => { min(value, 0); max(value, 1000); })` — each value's bounds; the control reads its first value's `min` and its second's `max` from the `[formField]` on it (`FormField`, `self: true`). No `minValue` / `maxValue`: a Signal Forms control's `min` and `max` are typed as its value, so a pair can't take them as inputs.
-- **Without a form**, a control keeps its defaults (a Range Slider 0 to 100). A Number Group or Slider bound by `[(value)]` can still take `[min]` / `[max]`: the same inputs the form feeds, not a second API.
+- **A pair** (Range Slider): `applyEach(path.price, (value) => { min(value, 0); max(value, 1000); })` — each value's bounds; the control reads its first value's `min` and its second's `max` from the `[formField]` on it (`FormField`, `self: true`).
+- **Without a form** — a clip's trim, a live filter, a chart's zoom — `[min]` and `[max]`, the same for every control. Never both: Angular refuses `[min]` / `[max]` beside `[formField]` (NG8022), so it is one way per case. A Slider's or Number Group's `min` / `max` inputs are the ones the form feeds; a Range Slider's are `minInput` / `maxInput` in the class (written `[min]` / `[max]`, as `classInput` is `[class]`), since a Signal Forms control's `min` property is typed as its value — a pair there — and they ignore what the form binds into them. Without either: the defaults (a Range Slider 0 to 100).
 - **Not for dates yet**: Signal Forms' `min()` / `max()` take numbers, so Calendar, Date Picker and Date Input keep `minDate` / `maxDate` — to move once Angular takes dates (docs/todo.md, "Date bounds from the form").
 
 ## Component Structure Template

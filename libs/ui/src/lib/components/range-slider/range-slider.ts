@@ -26,6 +26,21 @@ export type ScRangeSliderOrientation = 'horizontal' | 'vertical';
 export type ScRangeSliderValue = readonly [number, number];
 
 /**
+ * A bound as written: a number (`[min]="0"`, or `min="0"`). With a
+ * [formField], Angular binds the field's `min` / `max` here too — typed as
+ * the pair, and not a number: nothing (the schema's are read instead).
+ */
+function toBound(value: unknown): number | undefined {
+  const n =
+    typeof value === 'number'
+      ? value
+      : typeof value === 'string' && value.trim() !== ''
+        ? Number(value)
+        : NaN;
+  return Number.isFinite(n) ? n : undefined;
+}
+
+/**
  * A range on one track: two native ranges (`scRangeSliderThumb`, from and
  * to, in page order) that never cross, the track and the range between them
  * in the style's Slider look. The value is the pair, one Signal Forms field.
@@ -64,13 +79,29 @@ export class ScRangeSlider implements FormValueControl<ScRangeSliderValue> {
     self: true,
     optional: true,
   });
+  // `minInput`, written `[min]`: a Signal Forms control's `min` property is
+  // typed as its value (here a pair), as `classInput` is written `[class]`.
+  /** The track's lowest value, without a form: `[min]="0"`, as a Slider's. */
+  readonly minInput = input<number | undefined, unknown>(undefined, {
+    alias: 'min',
+    transform: toBound,
+  });
+  /** The track's highest value, without a form: `[max]="1000"`. */
+  readonly maxInput = input<number | undefined, unknown>(undefined, {
+    alias: 'max',
+    transform: toBound,
+  });
   /**
-   * The track's ends: the schema's `min` of the first value and `max` of
-   * the second (`applyEach(path, (value) => { min(value, 0); max(value, 1000); })`),
-   * as Slider and Number Group take theirs; 0 and 100 without them.
+   * The track's ends. With a [formField], the schema's: `min` of the first
+   * value and `max` of the second (`applyEach(path, (value) => { min(value, 0);
+   * max(value, 1000); })`). Without, [min] and [max]. Else 0 and 100.
    */
-  readonly lowest = computed(() => this.itemState(0)?.min?.() ?? 0);
-  readonly highest = computed(() => this.itemState(1)?.max?.() ?? 100);
+  readonly lowest = computed(
+    () => this.itemState(0)?.min?.() ?? this.minInput() ?? 0,
+  );
+  readonly highest = computed(
+    () => this.itemState(1)?.max?.() ?? this.maxInput() ?? 100,
+  );
   readonly step = input(1);
   /** The steps the thumbs keep between them (0: they may meet). */
   readonly minStepsBetweenValues = input(0);

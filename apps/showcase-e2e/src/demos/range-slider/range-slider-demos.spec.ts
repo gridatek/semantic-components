@@ -318,6 +318,22 @@ test.describe('Range Slider demos', () => {
     await expect(to).toHaveAttribute('aria-valuetext', '€1,000');
   });
 
+  test('without a form: the ends are its [min] and [max]', async ({ page }) => {
+    await page.goto(demo('trim-range-slider-demo'));
+    const group = page.getByRole('group', { name: 'Trim the clip' });
+    const start = group.getByRole('slider', { name: 'Start' });
+    const end = group.getByRole('slider', { name: 'End' });
+    await expect(end).toHaveAttribute('max', '90');
+    await expect(start).toHaveAttribute('min', '0');
+    await end.focus();
+    await page.keyboard.press('End');
+    await expect(end).toHaveValue('90');
+    await expect(end).toHaveAttribute('aria-valuetext', '90 sec');
+    // A press at the far end: 90, not 100.
+    await pressAt(page, page.locator('[scRangeSlider]'), 1);
+    await expect(end).toHaveValue('90');
+  });
+
   test('disabled: neither thumb takes the focus or a press', async ({
     page,
   }) => {

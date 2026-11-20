@@ -4284,6 +4284,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/range-slider',
     children: [
       {
+        path: 'trim-range-slider-demo',
+        loadComponent: () =>
+          import('../pages/docs/range-slider/demos/trim-range-slider-demo').then(
+            (m) => m.TrimRangeSliderDemo,
+          ),
+      },
+      {
         path: 'range-slider-usage-demo',
         loadComponent: () =>
           import('../pages/docs/range-slider/demos/range-slider-usage-demo').then(

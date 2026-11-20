@@ -27,14 +27,20 @@ readonly priceForm = form(signal({ price: [200, 800] as readonly [number, number
 
 ## Parts
 
-| Part                 | Selector                    | What it does                                                                                                                                                                                                                                                                                                                                                                                              |
-| -------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScRangeSlider`      | `div[scRangeSlider]`        | A group (`role="group"`, named by its field's label). `value`: the pair, two-way or a `[formField]` (`FormValueControl<readonly [number, number]>`); `step` (1), `minStepsBetweenValues` (0), `orientation` (`horizontal`, `vertical`), `disabled`, `format` (`Intl.NumberFormatOptions`, in `LOCALE_ID`). exportAs `scRangeSlider`: `formatted()`, `fractions()`, `lowest()` and `highest()` (the ends). |
-| `ScRangeSliderThumb` | `input[scRangeSliderThumb]` | A native range (`type="range"` set by the part) in the style's slider thumb: the first in the page is from, the second to. It stops at the other (and `minStepsBetweenValues` short of it); `aria-valuetext` from `format`. The first takes the field's id, so the label points to it.                                                                                                                    |
+| Part                 | Selector                    | What it does                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScRangeSlider`      | `div[scRangeSlider]`        | A group (`role="group"`, named by its field's label). `value`: the pair, two-way or a `[formField]` (`FormValueControl<readonly [number, number]>`); `min` and `max` (without a form; with one, the schema's), `step` (1), `minStepsBetweenValues` (0), `orientation` (`horizontal`, `vertical`), `disabled`, `format` (`Intl.NumberFormatOptions`, in `LOCALE_ID`). exportAs `scRangeSlider`: `formatted()`, `fractions()`, `lowest()` and `highest()` (the ends). |
+| `ScRangeSliderThumb` | `input[scRangeSliderThumb]` | A native range (`type="range"` set by the part) in the style's slider thumb: the first in the page is from, the second to. It stops at the other (and `minStepsBetweenValues` short of it); `aria-valuetext` from `format`. The first takes the field's id, so the label points to it.                                                                                                                                                                              |
 
-## The ends come from the form
+## The ends
 
-As every control's bounds (docs/component-design-principles.md, "Bounds Come From the Form"): `min` and `max` in the schema, on each value of the pair (`applyEach`). The slider reads the first value's `min` and the second's `max` from the `[formField]` on it; they validate too (a value outside them is an error). Without a form, or without them: 0 and 100. No `min` / `max` inputs: a Signal Forms control's `min` and `max` are typed as its value, here a pair.
+As every control's bounds (docs/component-design-principles.md, "Bounds Come From the Form"), one way per case:
+
+- **With a form**, the schema's: `min` and `max` on each value of the pair (`applyEach`). The slider reads the first value's `min` and the second's `max` from the `[formField]` on it; they validate too (a value outside them is an error). Angular refuses `[min]` / `[max]` beside `[formField]` (NG8022).
+- **Without a form**, `[min]` and `[max]`, as a Slider's: `<div scRangeSlider [(value)]="clip" [min]="0" [max]="duration">` — a clip's trim, a live filter, a chart's zoom.
+- **Neither**: 0 and 100.
+
+In the class they are `minInput` / `maxInput` (written `[min]` / `[max]`, as `classInput` is `[class]`): a Signal Forms control's `min` property is typed as its value, here a pair. With a form, Angular binds the field's `min` / `max` there too; not numbers, they are ignored.
 
 ## Behaviour
 
