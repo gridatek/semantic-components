@@ -5861,10 +5861,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/tags-input',
     children: [
       {
-        path: 'basic-tags-input-demo',
+        path: 'tags-input-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/tags-input/demos/basic-tags-input-demo').then(
-            (m) => m.BasicTagsInputDemo,
+          import('../pages/docs/tags-input/demos/tags-input-usage-demo').then(
+            (m) => m.TagsInputUsageDemo,
           ),
       },
       {

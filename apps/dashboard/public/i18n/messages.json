@@ -176,6 +176,7 @@
     "blog.edit.tags": "Tags",
     "blog.edit.remove": "Remove {$INTERPOLATION}",
     "blog.edit.addATag": "Add a tag",
+    "blog.edit.addTag": "Add “{$INTERPOLATION}”",
     "blog.edit.pressEnterOrTypeA": " Press Enter or type a comma to add one. ",
     "blog.edit.postDate": "Post Date",
     "blog.edit.chooseADate": "Choose a date",

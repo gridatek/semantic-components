@@ -104,7 +104,6 @@ export * from './sortable-list';
 export * from './spotlight';
 export * from './stat-card';
 export * from './stepper';
-export * from './tags-input';
 export * from './time-clock';
 export * from './timeline';
 export * from './tour-guide';

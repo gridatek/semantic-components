@@ -48,12 +48,7 @@ import {
   ],
   template: \`
     <div dir="rtl" lang="ar">
-      <div
-        scAutocomplete
-        #ac="scAutocomplete"
-        [(value)]="city"
-        class="w-64"
-      >
+      <div scAutocomplete #ac="scAutocomplete" [(value)]="city" class="w-64">
         <input
           scInput
           scComboboxInput

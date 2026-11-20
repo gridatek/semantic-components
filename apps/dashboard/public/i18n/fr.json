@@ -176,6 +176,7 @@
     "blog.edit.tags": "Étiquettes",
     "blog.edit.remove": "Retirer {$INTERPOLATION}",
     "blog.edit.addATag": "Ajouter une étiquette",
+    "blog.edit.addTag": "Ajouter « {$INTERPOLATION} »",
     "blog.edit.pressEnterOrTypeA": " Appuyez sur Entrée ou tapez une virgule pour en ajouter une. ",
     "blog.edit.postDate": "Date de publication",
     "blog.edit.chooseADate": "Choisissez une date",

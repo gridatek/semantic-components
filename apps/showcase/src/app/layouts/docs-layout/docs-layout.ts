@@ -438,6 +438,18 @@ import { DocsNavService } from '../../services/docs-nav-service';
                     </button>
                     <div scCollapsiblePanel hiddenUntilFound>
                       <ul scSidebarMenuSub>
+                        <li scSidebarMenuSubItem>
+                          <a
+                            scSidebarMenuSubButton
+                            routerLink="/docs/recipes"
+                            [routerLinkActiveOptions]="{ exact: true }"
+                            routerLinkActive
+                            #recipesRla="routerLinkActive"
+                            [active]="recipesRla.isActive"
+                          >
+                            <span>All recipes</span>
+                          </a>
+                        </li>
                         @for (item of recipes(); track item.path) {
                           <li scSidebarMenuSubItem>
                             <a

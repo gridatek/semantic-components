@@ -236,7 +236,14 @@ export abstract class ScComboboxBase<T = unknown> {
     this.setSelected(values);
     if (this.multiple) {
       this.query.set('');
-      if (this.field()) this.inputValue.set('');
+      // The text cleared at once, everywhere: through the effects alone, a
+      // pick from code (a comma typed fast) races Aria's stale text back in.
+      const field = this.field();
+      if (field) {
+        this.inputValue.set('');
+        field.combobox.value.set('');
+        field.element.value = '';
+      }
       this.search()?.combobox.value.set('');
     } else {
       this.close();

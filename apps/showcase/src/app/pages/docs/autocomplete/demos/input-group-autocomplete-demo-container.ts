@@ -54,12 +54,7 @@ import { SiSearchIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: \`
-    <div
-      scAutocomplete
-      #ac="scAutocomplete"
-      [(value)]="country"
-      class="w-64"
-    >
+    <div scAutocomplete #ac="scAutocomplete" [(value)]="country" class="w-64">
       <div scInputGroup>
         <div scInputGroupAddon side="inline-start">
           <svg siSearchIcon></svg>

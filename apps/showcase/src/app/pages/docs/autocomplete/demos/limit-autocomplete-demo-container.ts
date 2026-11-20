@@ -47,12 +47,7 @@ import {
     ScComboboxStatus,
   ],
   template: \`
-    <div
-      scAutocomplete
-      #ac="scAutocomplete"
-      [(value)]="country"
-      class="w-64"
-    >
+    <div scAutocomplete #ac="scAutocomplete" [(value)]="country" class="w-64">
       <input
         scInput
         scComboboxInput

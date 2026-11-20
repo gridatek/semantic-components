@@ -1,77 +1,110 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScKbd, ScTypeset } from '@semantic-components/ui';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { RouterLink } from '@angular/router';
+import { ScKbd, ScLink, ScTypeset } from '@semantic-components/ui';
+import { Anatomy } from '../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BasicTagsInputDemoContainer } from './demos/basic-tags-input-demo-container';
 import { EmailsTagsInputDemoContainer } from './demos/emails-tags-input-demo-container';
 import { FormTagsInputDemoContainer } from './demos/form-tags-input-demo-container';
 import { LimitTagsInputDemoContainer } from './demos/limit-tags-input-demo-container';
+import { TagsInputUsageDemoContainer } from './demos/tags-input-usage-demo-container';
 
 @Component({
   selector: 'app-tags-input-page',
   imports: [
+    Anatomy,
+    RouterLink,
     ScKbd,
-    BasicTagsInputDemoContainer,
+    ScLink,
+    ScTypeset,
+    TagsInputUsageDemoContainer,
     EmailsTagsInputDemoContainer,
     LimitTagsInputDemoContainer,
     FormTagsInputDemoContainer,
     TocHeading,
-    ComponentBadges,
-    ScTypeset,
   ],
   template: `
     <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Tags Input</h1>
         <p class="text-muted-foreground">
-          Tags typed into one field — a string[] for Signal Forms — checked
-          before they go in, and reached by the keyboard without a
-          <kbd scKbd>Tab</kbd> stop each.
+          A recipe: tags typed into one field, a list of strings for Signal
+          Forms — the
+          <a scLink routerLink="/docs/components/combobox">Combobox</a> with
+          several values, and an Add item for what is typed. No component of its
+          own.
         </p>
-        <app-component-badges path="tags-input" />
       </div>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Basic</h2>
-        <p>
-          <kbd scKbd>Enter</kbd> or a comma adds a tag, and so does leaving the
-          field; a duplicate is refused. <kbd scKbd>Backspace</kbd> or
-          <kbd scKbd>←</kbd> in the empty field goes to the last tag —
-          <kbd scKbd>←</kbd> <kbd scKbd>→</kbd> between tags,
-          <kbd scKbd>Delete</kbd> removes one.
-        </p>
-        <app-basic-tags-input-demo-container />
+        <h2 scTypeset appToc>Usage</h2>
+        <app-tags-input-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Emails</h2>
+        <h2 scTypeset appToc>How it is made</h2>
         <p>
-          accept decides what goes in — here an address, once. Refused text
-          stays, marked, to be corrected; a pasted list is split on commas and
-          new lines.
+          Base UI&apos;s &quot;Creatable&quot; combobox: scCombobox with
+          multiple holds the tags as chips; the list offers the text typed as an
+          item of its own («Add “Docker”»), first, so
+          <kbd scKbd>Enter</kbd> adds it — and your suggestions after it. Its
+          label is the text, so the chip reads «Docker». A comma adds it too: a
+          beforeinput of yours, picking it as Enter does (pick()).
         </p>
+        <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Accessibility</h2>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            The Combobox&apos;s: one tab stop; <kbd scKbd>Backspace</kbd> in an
+            empty input removes the last tag, <kbd scKbd>←</kbd> and
+            <kbd scKbd>→</kbd> reach the chips, and each chip&apos;s remove
+            button is named by you («Remove Docker»).
+          </li>
+          <li>
+            The Add item says what it adds, in your words; the chips are the
+            value, read with the field&apos;s label.
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-8">
+        <h2 scTypeset appToc>Examples</h2>
         <app-emails-tags-input-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Limit and clear</h2>
-        <p>
-          maxLength: at five, nothing more goes in (data-full on it). The count
-          is yours to write; Clear removes them all.
-        </p>
         <app-limit-tags-input-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Form</h2>
-        <p>
-          A [formField]: one to five keywords, from the schema — its maxLength
-          also stops a sixth going in; its errors once it is touched.
-        </p>
         <app-form-tags-input-demo-container />
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class TagsInputPage {}
+export default class TagsInputPage {
+  private readonly anatomy = {
+    imports:
+      "import { ScComboboxMultiple, ScComboboxChips, ScComboboxChip, ScComboboxChipRemove, ScComboboxInput, ScComboboxPortal, ScComboboxPopup, ScComboboxList, ScComboboxItem } from '@semantic-components/ui';",
+    markup: [
+      '<div scCombobox multiple autoHighlight [(value)]="tags" #cb="scCombobox">',
+      '  <div scComboboxChips>',
+      '    @for (tag of tags(); track tag) {',
+      '      <span scComboboxChip [value]="tag">',
+      '        {{ tag }}',
+      '        <button scComboboxChipRemove>…</button>',
+      '      </span>',
+      '    }',
+      '    <input scComboboxInput (beforeinput)="addOnComma($event, cb)" />',
+      '  </div>',
+      '  <ng-template scComboboxPortal>',
+      '    <div scComboboxPopup>',
+      '      <div scComboboxList aria-label="…">',
+      '        @if (typed(cb.query()); as text) {',
+      '          <div scComboboxItem [value]="text" [label]="text">Add “{{ text }}”</div>',
+      '        }',
+      '        @for (tag of matching(cb.query()); track tag) { … }',
+      '      </div>',
+      '    </div>',
+      '  </ng-template>',
+      '</div>',
+    ].join('\n'),
+  };
+}

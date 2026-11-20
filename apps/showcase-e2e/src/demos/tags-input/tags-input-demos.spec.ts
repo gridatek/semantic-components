@@ -1,190 +1,129 @@
-import { collectErrors, press, type } from '../../interaction';
-import { type Locator, type Page, expect, test } from '../../test';
+import type { Page } from '@playwright/test';
+import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/tags-input/${name}-tags-input-demo`;
-const tags = (page: Page) => page.locator('[data-slot="tags-input-item"]');
-/** The tags' labels (not their remove buttons' names). */
-const labels = (page: Page) =>
-  page.locator('[data-slot="tags-input-item"] > span');
+const demo = (name: string) => `/demos/tags-input/${name}`;
 
-/**
- * Pastes `text` into the field, as from the clipboard. Firefox drops the data
- * of a made-up paste event, so there the real clipboard pastes it.
- */
-async function paste(control: Locator, text: string): Promise<void> {
-  const page = control.page();
-  if (page.context().browser()?.browserType().name() === 'firefox') {
-    await control.focus();
-    await page.evaluate(
-      (pasted) => navigator.clipboard.writeText(pasted),
-      text,
-    );
-    await page.keyboard.press('Control+V');
-    return;
-  }
-  await control.evaluate((input, pasted) => {
-    const data = new DataTransfer();
-    data.setData('text/plain', pasted);
-    input.dispatchEvent(
-      new ClipboardEvent('paste', {
-        clipboardData: data,
-        bubbles: true,
-        cancelable: true,
-      }),
-    );
-  }, text);
-}
+/** The tags, as the chips show them. */
+const chips = (page: Page) =>
+  page.locator('[data-slot=combobox-chip]').filter({ hasNotText: /^$/ });
 
-let errors: string[];
+test.describe('Tags Input recipe', () => {
+  test('usage: the text typed is offered first; Enter adds it as a tag', async ({
+    page,
+  }) => {
+    await page.goto(demo('tags-input-usage-demo'));
+    const input = page.getByRole('combobox', { name: 'Skills' });
+    await expect(chips(page)).toHaveCount(2);
+    await input.click();
+    await input.pressSequentially('Docker');
+    await expect(page.getByRole('option')).toHaveText(['Add “Docker”']);
+    await page.keyboard.press('Enter');
+    await expect(chips(page).last()).toContainText('Docker');
+    await expect(chips(page).last()).not.toContainText('Add');
+    await expect(input).toHaveValue('');
+  });
 
-test.beforeEach(({ page }) => {
-  errors = collectErrors(page);
-});
+  test('usage: a comma adds a tag too; a suggestion is picked by ↓ and Enter', async ({
+    page,
+  }) => {
+    await page.goto(demo('tags-input-usage-demo'));
+    const input = page.getByRole('combobox', { name: 'Skills' });
+    await input.click();
+    await input.pressSequentially('Go,');
+    await expect(chips(page).last()).toContainText('Go');
+    await expect(input).toHaveValue('');
 
-test.afterEach(() => {
-  expect(errors).toEqual([]);
-});
+    await input.pressSequentially('sig');
+    await expect(page.getByRole('option')).toHaveText(['Add “sig”', 'Signals']);
+    // ↓ onto Signals: autoHighlight settles on the first item a moment after
+    // the list renders, and may land after a quick ↓ — press again, as you
+    // would, until Signals is the one.
+    const signals = page.getByRole('option', { name: 'Signals' });
+    await expect(async () => {
+      await page.keyboard.press('ArrowDown');
+      await expect(input).toHaveAttribute(
+        'aria-activedescendant',
+        (await signals.getAttribute('id')) ?? 'missing',
+        { timeout: 1000 },
+      );
+    }).toPass();
+    await page.keyboard.press('Enter');
+    await expect(chips(page).last()).toContainText('Signals');
+  });
 
-test('Basic: Enter, a comma and leaving add; a duplicate is refused', async ({
-  page,
-}) => {
-  await page.goto(demo('basic'));
-  const control = page.getByLabel('Skills');
-  await expect(control).toHaveAttribute('data-slot', 'tags-input-control');
-  await expect(labels(page)).toHaveText([
-    'Angular',
-    'TypeScript',
-    'Accessibility',
-  ]);
+  test('usage: a tag already there is not offered again; a chip removes itself', async ({
+    page,
+  }) => {
+    await page.goto(demo('tags-input-usage-demo'));
+    const input = page.getByRole('combobox', { name: 'Skills' });
+    await input.click();
+    await input.pressSequentially('Angular');
+    await expect(page.getByRole('option')).toHaveCount(0);
+    await page.getByRole('button', { name: 'Remove TypeScript' }).click();
+    await expect(chips(page)).toHaveCount(1);
+    // Backspace in the empty input removes the last tag.
+    await input.fill('');
+    await input.press('Backspace');
+    await expect(chips(page)).toHaveCount(0);
+  });
 
-  await control.click();
-  await type(page, 'RxJS');
-  await press(page, 'Enter');
-  await type(page, 'Signals,');
-  await expect(tags(page)).toHaveCount(5);
-  await expect(control).toHaveValue('');
+  test('emails: only an address is offered; else a word says why', async ({
+    page,
+  }) => {
+    await page.goto(demo('emails-tags-input-demo'));
+    const input = page.getByRole('combobox', { name: 'Invite' });
+    await input.click();
+    await input.pressSequentially('grace');
+    await expect(page.getByText('Not an email address yet.')).toBeVisible();
+    await expect(page.getByRole('option')).toHaveCount(0);
+    await input.pressSequentially('@example.com');
+    await expect(page.getByRole('option')).toHaveText([
+      'Invite “grace@example.com”',
+    ]);
+    await page.keyboard.press('Enter');
+    await expect(chips(page)).toHaveCount(2);
+    await expect(chips(page).last()).toContainText('grace@example.com');
+  });
 
-  // A duplicate stays, marked, until edited.
-  await type(page, 'Angular');
-  await press(page, 'Enter');
-  await expect(tags(page)).toHaveCount(5);
-  await expect(control).toHaveValue('Angular');
-  await expect(control).toHaveAttribute('aria-invalid', 'true');
-  await press(page, 'Backspace');
-  await expect(control).not.toHaveAttribute('aria-invalid');
+  test('limit: three at most, then nothing more is offered', async ({
+    page,
+  }) => {
+    await page.goto(demo('limit-tags-input-demo'));
+    const input = page.getByRole('combobox', { name: 'Topics' });
+    await input.click();
+    for (const topic of ['Sales', 'Support']) {
+      await input.pressSequentially(topic);
+      // Enter once the first item is highlighted (autoHighlight).
+      const first = page.getByRole('option').first();
+      await expect(first).toHaveText(`Add “${topic}”`);
+      await expect(input).toHaveAttribute(
+        'aria-activedescendant',
+        (await first.getAttribute('id')) ?? 'missing',
+      );
+      await page.keyboard.press('Enter');
+      await expect(chips(page).last()).toContainText(topic);
+    }
+    await expect(chips(page)).toHaveCount(3);
+    await expect(page.getByText('3 of 3.')).toBeVisible();
+    await input.pressSequentially('Product');
+    await expect(
+      page.getByText('Three topics at most — remove one first.'),
+    ).toBeVisible();
+    await expect(page.getByRole('option')).toHaveCount(0);
+  });
 
-  await control.fill('  CSS  ');
-  await control.blur();
-  await expect(labels(page).last()).toHaveText('CSS');
-});
-
-test('Basic: one Tab stop; into the tags and out by keys', async ({ page }) => {
-  await page.goto(demo('basic'));
-  const control = page.getByLabel('Skills');
-  await control.focus();
-  await press(page, 'Backspace');
-  await expect(tags(page).nth(2)).toBeFocused();
-  await press(page, 'ArrowLeft');
-  await expect(tags(page).nth(1)).toBeFocused();
-  await press(page, 'Home');
-  await expect(tags(page).nth(0)).toBeFocused();
-  await press(page, 'ArrowRight');
-  await press(page, 'ArrowRight');
-  await press(page, 'ArrowRight');
-  await expect(control).toBeFocused();
-
-  // Delete: removed, focus on the one now in its place.
-  await press(page, 'ArrowLeft');
-  await press(page, 'ArrowLeft');
-  await expect(tags(page).nth(1)).toBeFocused();
-  await press(page, 'Delete');
-  await expect(labels(page)).toHaveText(['Angular', 'Accessibility']);
-  await expect(tags(page).nth(1)).toBeFocused();
-  await press(page, 'Escape');
-  await expect(control).toBeFocused();
-
-  // The remove buttons are not Tab stops.
-  await expect(
-    page.getByRole('button', { name: 'Remove Angular' }),
-  ).toHaveAttribute('tabindex', '-1');
-  await page.getByRole('button', { name: 'Remove Angular' }).click();
-  await expect(labels(page)).toHaveText(['Accessibility']);
-});
-
-test('Basic: right to left, → goes into the tags', async ({ page }) => {
-  await page.goto(demo('basic'));
-  await page.evaluate(() =>
-    document.documentElement.setAttribute('dir', 'rtl'),
-  );
-  await page.getByLabel('Skills').focus();
-  await press(page, 'ArrowLeft');
-  await expect(page.getByLabel('Skills')).toBeFocused();
-  await press(page, 'ArrowRight');
-  await expect(tags(page).nth(2)).toBeFocused();
-  await press(page, 'ArrowRight');
-  await expect(tags(page).nth(1)).toBeFocused();
-  await press(page, 'ArrowLeft');
-  await press(page, 'ArrowLeft');
-  await expect(page.getByLabel('Skills')).toBeFocused();
-});
-
-test('Emails: accept refuses; a pasted list is split', async ({ page }) => {
-  await page.goto(demo('emails'));
-  const control = page.getByLabel('Invite');
-  await control.click();
-  await type(page, 'not-an-email');
-  await press(page, 'Enter');
-  await expect(tags(page)).toHaveCount(1);
-  await expect(page.getByText('Not an email address')).toBeVisible();
-
-  await control.fill('');
-  await paste(control, 'grace@example.com, oops\nalan@example.com');
-  await expect(labels(page)).toHaveText([
-    'ada@example.com',
-    'grace@example.com',
-    'alan@example.com',
-  ]);
-  await expect(control).toHaveValue('oops');
-  await expect(control).toHaveAttribute('aria-invalid', 'true');
-});
-
-test('Limit: at five, nothing more; Clear empties it', async ({ page }) => {
-  await page.goto(demo('limit'));
-  const control = page.getByLabel('Topics');
-  const root = page.locator('[data-slot="tags-input"]');
-  await control.click();
-  await type(page, 'Ops,Data,');
-  await expect(tags(page)).toHaveCount(5);
-  await expect(root).toHaveAttribute('data-full');
-  await expect(page.getByText('5 of 5 topics.')).toBeVisible();
-  await type(page, 'More');
-  await press(page, 'Enter');
-  await expect(tags(page)).toHaveCount(5);
-
-  await page.getByRole('button', { name: 'Clear topics' }).click();
-  await expect(tags(page)).toHaveCount(0);
-  await expect(control).toBeFocused();
-  await expect(
-    page.getByRole('button', { name: 'Clear topics' }),
-  ).toBeDisabled();
-});
-
-test('Form: one to five keywords, from the schema', async ({ page }) => {
-  await page.goto(demo('form'));
-  const publish = page.getByRole('button', { name: 'Publish' });
-  await publish.click();
-  await expect(page.getByRole('alert')).toHaveText('Add at least one keyword.');
-  const control = page.getByLabel('Keywords');
-  await expect(control).toHaveAttribute('aria-invalid', 'true');
-
-  await control.click();
-  await type(page, 'a,b,c,d,e,f,');
-  // maxLength from the schema: the sixth does not go in.
-  await expect(tags(page)).toHaveCount(5);
-  await expect(control).toHaveValue('f');
-  await control.fill('');
-  await publish.click();
-  await expect(page.getByRole('status')).toHaveText(
-    'Published with a, b, c, d, e.',
-  );
+  test('form: one tag at least, from the schema, once touched', async ({
+    page,
+  }) => {
+    await page.goto(demo('form-tags-input-demo'));
+    const input = page.getByRole('combobox', { name: 'Keywords' });
+    const errors = page.locator('[scFieldErrors]');
+    await input.click();
+    await input.blur();
+    await expect(errors).toHaveText('Add one keyword at least.');
+    await input.click();
+    await input.pressSequentially('angular,');
+    await expect(errors).toBeEmpty();
+    await expect(page.locator('pre')).toContainText('"angular"');
+  });
 });

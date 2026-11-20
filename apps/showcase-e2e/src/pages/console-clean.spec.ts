@@ -19,6 +19,7 @@ const pages = [
   '/docs/getting-started/introduction',
   '/components',
   '/docs/components',
+  '/docs/recipes',
   '/docs/getting-started',
   '/docs/packages/ui',
   '/docs/packages/styles',

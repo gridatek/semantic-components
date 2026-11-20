@@ -75,11 +75,14 @@ export class ScComboboxInput {
     bindInput(this.combobox.disabled, this.root.disabled);
     bindInput(this.combobox.readonly, this.root.readonly);
 
-    // The text, both ways.
+    // The text, both ways — and into the input itself: Aria writes it only in
+    // its own key handling, so a value set from code (a pick by a comma, a
+    // clear) would leave the old text showing.
     effect(() => {
       const text = this.root.inputValue();
       untracked(() => {
         if (this.combobox.value() !== text) this.combobox.value.set(text);
+        if (this.element.value !== text) this.element.value = text;
       });
     });
     effect(() => {

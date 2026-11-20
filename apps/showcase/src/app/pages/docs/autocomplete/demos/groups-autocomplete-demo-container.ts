@@ -51,12 +51,7 @@ import {
     ScComboboxSeparator,
   ],
   template: \`
-    <div
-      scAutocomplete
-      #ac="scAutocomplete"
-      [(value)]="food"
-      class="w-64"
-    >
+    <div scAutocomplete #ac="scAutocomplete" [(value)]="food" class="w-64">
       <input
         scInput
         scComboboxInput

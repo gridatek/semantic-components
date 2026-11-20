@@ -20,6 +20,15 @@ import {
   ScCardBody,
   ScCardHeader,
   ScCardTitle,
+  ScComboboxChip,
+  ScComboboxChipRemove,
+  ScComboboxChips,
+  ScComboboxInput,
+  ScComboboxItem,
+  ScComboboxList,
+  ScComboboxMultiple,
+  ScComboboxPopup,
+  ScComboboxPortal,
   ScDatePicker,
   ScDatePickerTrigger,
   ScField,
@@ -51,10 +60,6 @@ import {
   ScSelectTrigger,
   ScSelectValue,
   ScSwitch,
-  ScTagsInput,
-  ScTagsInputControl,
-  ScTagsInputItem,
-  ScTagsInputItemRemove,
   ScTextarea,
   ScToaster,
   ScToggle,
@@ -144,10 +149,15 @@ const EMPTY_BODY = '<p></p>';
     ScSelectTrigger,
     ScSelectValue,
     ScSwitch,
-    ScTagsInput,
-    ScTagsInputControl,
-    ScTagsInputItem,
-    ScTagsInputItemRemove,
+    ScComboboxChip,
+    ScComboboxChipRemove,
+    ScComboboxChips,
+    ScComboboxInput,
+    ScComboboxItem,
+    ScComboboxList,
+    ScComboboxMultiple,
+    ScComboboxPopup,
+    ScComboboxPortal,
     ScTextarea,
     ScToggle,
     ScToolbar,
@@ -444,23 +454,50 @@ const EMPTY_BODY = '<p></p>';
               </div>
               <div scField>
                 <label i18n="@@blog.edit.tags" scLabel>Tags</label>
-                <div scTagsInput [(value)]="tags">
-                  @for (tag of tags(); track $index) {
-                    <span scTagsInputItem>
-                      <span>{{ tag }}</span>
-                      <button scTagsInputItemRemove>
-                        <svg siXIcon></svg>
-                        <span i18n="@@blog.edit.remove" class="sr-only"
-                          >Remove {{ tag }}</span
-                        >
-                      </button>
-                    </span>
-                  }
-                  <input
-                    i18n-placeholder="@@blog.edit.addATag"
-                    scTagsInputControl
-                    placeholder="Add a tag"
-                  />
+                <!-- Tags: the Combobox recipe (docs: Recipes, Tags Input). -->
+                <div
+                  scCombobox
+                  multiple
+                  autoHighlight
+                  #tagBox="scCombobox"
+                  [(value)]="tags"
+                >
+                  <div scComboboxChips>
+                    @for (tag of tags(); track tag) {
+                      <span scComboboxChip [value]="tag">
+                        {{ tag }}
+                        <button scComboboxChipRemove>
+                          <svg siXIcon></svg>
+                          <span i18n="@@blog.edit.remove" class="sr-only"
+                            >Remove {{ tag }}</span
+                          >
+                        </button>
+                      </span>
+                    }
+                    <input
+                      i18n-placeholder="@@blog.edit.addATag"
+                      scComboboxInput
+                      placeholder="Add a tag"
+                      (beforeinput)="addTagOnComma($event, tagBox)"
+                    />
+                  </div>
+                  <ng-template scComboboxPortal>
+                    <div scComboboxPopup>
+                      <div
+                        i18n-aria-label="@@blog.edit.tags"
+                        scComboboxList
+                        aria-label="Tags"
+                      >
+                        @if (typedTag(tagBox.query()); as text) {
+                          <div scComboboxItem [value]="text" [label]="text">
+                            <span i18n="@@blog.edit.addTag"
+                              >Add “{{ text }}”</span
+                            >
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </ng-template>
                 </div>
                 <p i18n="@@blog.edit.pressEnterOrTypeA" scFieldDescription>
                   Press Enter or type a comma to add one.
@@ -594,6 +631,26 @@ export class BlogEditPage {
   private readonly tags = linkedSignal<string[]>(() => [
     ...(this.post()?.tags ?? []),
   ]);
+
+  /** What is typed, as a new tag: not empty, not a tag already. */
+  private typedTag(query: string): string | null {
+    const text = query.trim();
+    return text && !this.tags().includes(text) ? text : null;
+  }
+
+  /** A comma adds the tag typed, as Enter on the Add item does. */
+  private addTagOnComma(
+    event: InputEvent,
+    box: ScComboboxMultiple<string>,
+  ): void {
+    // On the character typed (beforeinput: after the combobox's own keys,
+    // and phone keyboards too).
+    if (event.data !== ',') return;
+    event.preventDefault();
+    const text = this.typedTag(box.query());
+    // As a pick: the tag added, the text cleared.
+    if (text) box.pick([...box.selected(), text]);
+  }
   private readonly date = linkedSignal<ScCalendarValue>(() =>
     Temporal.PlainDate.from(this.post()?.date ?? today()),
   );

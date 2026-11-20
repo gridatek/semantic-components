@@ -1017,11 +1017,10 @@
   {
     "name": "Tags Input",
     "path": "tags-input",
-    "description": "Tags typed into one field, a string[] for Signal Forms, checked before they go in.",
+    "description": "Tags typed into one field, a list of strings: the Combobox with several values and an Add item for the text typed.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Recipes"
   },
   {
     "name": "Textarea",

@@ -7,9 +7,9 @@ import { EmailsTagsInputDemo } from './emails-tags-input-demo';
   imports: [DemoContainer, EmailsTagsInputDemo],
   template: `
     <app-demo-container
-      title="Emails"
-      [code]="code"
+      title="Checked before they go in"
       demoUrl="/demos/tags-input/emails-tags-input-demo"
+      [code]="code"
     >
       <app-emails-tags-input-demo />
     </app-demo-container>
@@ -20,57 +20,83 @@ import { EmailsTagsInputDemo } from './emails-tags-input-demo';
 export class EmailsTagsInputDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScComboboxChip,
+  ScComboboxChipRemove,
+  ScComboboxChips,
+  ScComboboxInput,
+  ScComboboxItem,
+  ScComboboxList,
+  ScComboboxMultiple,
+  ScComboboxPopup,
+  ScComboboxPortal,
   ScField,
   ScFieldDescription,
   ScLabel,
-  ScTagsInput,
-  type ScTagsInputAccept,
-  ScTagsInputControl,
-  ScTagsInputItem,
-  ScTagsInputItemRemove,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
-/** accept decides what goes in — here an address, once. Refused text stays, marked, to be corrected; a pasted list is split on commas and new lines. */
+/** Only an email address goes in: the Add item shows only for one; else a word says why (not an item). */
 @Component({
   selector: 'app-emails-tags-input-demo',
   imports: [
-    ScTagsInput,
-    ScTagsInputControl,
-    ScTagsInputItem,
-    ScTagsInputItemRemove,
+    ScComboboxChip,
+    ScComboboxChipRemove,
+    ScComboboxChips,
+    ScComboboxInput,
+    ScComboboxItem,
+    ScComboboxList,
+    ScComboboxMultiple,
+    ScComboboxPopup,
+    ScComboboxPortal,
     ScField,
     ScFieldDescription,
     ScLabel,
     SiXIcon,
   ],
   template: \`
-    <div scField class="w-full max-w-md">
+    <div scField class="w-full max-w-sm">
       <label scLabel>Invite</label>
       <div
-        scTagsInput
-        #invite="scTagsInput"
+        scCombobox
+        multiple
+        autoHighlight
+        #tags="scCombobox"
         [(value)]="emails"
-        [accept]="isEmail"
       >
-        @for (email of emails(); track $index) {
-          <span scTagsInputItem>
-            <span>{{ email }}</span>
-            <button scTagsInputItemRemove>
-              <svg siXIcon></svg>
-              <span class="sr-only">Remove {{ email }}</span>
-            </button>
-          </span>
-        }
-        <input scTagsInputControl type="email" placeholder="name@example.com" />
+        <div scComboboxChips>
+          @for (email of emails(); track email) {
+            <span scComboboxChip [value]="email">
+              {{ email }}
+              <button scComboboxChipRemove>
+                <svg siXIcon></svg>
+                <span class="sr-only">Remove {{ email }}</span>
+              </button>
+            </span>
+          }
+          <input
+            scComboboxInput
+            placeholder="name@example.com"
+            (beforeinput)="addOnComma($event, tags)"
+          />
+        </div>
+        <ng-template scComboboxPortal>
+          <div scComboboxPopup>
+            @if (tags.query().trim() && !typed(tags.query())) {
+              <p class="text-muted-foreground px-2 py-1.5 text-sm">
+                Not an email address yet.
+              </p>
+            }
+            <div scComboboxList aria-label="Invite">
+              @if (typed(tags.query()); as text) {
+                <div scComboboxItem [value]="text" [label]="text">
+                  Invite “{{ text }}”
+                </div>
+              }
+            </div>
+          </div>
+        </ng-template>
       </div>
-      @if (invite.rejected()) {
-        <p class="text-destructive text-sm">
-          Not an email address, or already invited.
-        </p>
-      } @else {
-        <p scFieldDescription>Paste a list to add them all.</p>
-      }
+      <p scFieldDescription>An address, then Enter or a comma.</p>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
@@ -79,8 +105,27 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 export class EmailsTagsInputDemo {
   private readonly emails = signal<string[]>(['ada@example.com']);
 
-  /** An address, not invited yet. */
-  private readonly isEmail: ScTagsInputAccept = (tag, tags) =>
-    /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(tag) && !tags.includes(tag);
+  /** What is typed, as a new address: an email, not one already. */
+  private typed(query: string): string | null {
+    const text = query.trim();
+    return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(text) &&
+      !this.emails().includes(text)
+      ? text
+      : null;
+  }
+
+  /** A comma adds the text typed, as Enter on the Add item does. */
+  private addOnComma(
+    event: InputEvent,
+    tags: ScComboboxMultiple<string>,
+  ): void {
+    // On the character typed (beforeinput: after the combobox's own keys,
+    // and phone keyboards too).
+    if (event.data !== ',') return;
+    event.preventDefault();
+    const text = this.typed(tags.query());
+    // As a pick: the tag added, the text cleared.
+    if (text) tags.pick([...tags.selected(), text]);
+  }
 }`;
 }

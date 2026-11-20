@@ -176,6 +176,7 @@
     "blog.edit.tags": "الوسوم",
     "blog.edit.remove": "إزالة {$INTERPOLATION}",
     "blog.edit.addATag": "أضف وسمًا",
+    "blog.edit.addTag": "أضف «{$INTERPOLATION}»",
     "blog.edit.pressEnterOrTypeA": " اضغط Enter أو اكتب فاصلة لإضافة وسم. ",
     "blog.edit.postDate": "تاريخ النشر",
     "blog.edit.chooseADate": "اختر تاريخًا",

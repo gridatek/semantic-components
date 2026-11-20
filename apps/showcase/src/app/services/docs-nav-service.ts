@@ -70,7 +70,14 @@ export class DocsNavService {
       {
         label: 'Recipes',
         kind: 'component' as const,
-        pages: toPages(this.componentsService.visibleRecipes()),
+        pages: [
+          {
+            name: 'All recipes',
+            path: '/docs/recipes',
+            description: 'Patterns made from the components',
+          },
+          ...toPages(this.componentsService.visibleRecipes()),
+        ],
       },
       {
         label: 'AI Elements',

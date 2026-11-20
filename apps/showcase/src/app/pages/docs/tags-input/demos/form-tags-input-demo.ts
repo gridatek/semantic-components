@@ -1,84 +1,123 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { JsonPipe } from '@angular/common';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { FormField, form, validate } from '@angular/forms/signals';
 import {
-  FormField,
-  FormRoot,
-  form,
-  maxLength,
-  minLength,
-} from '@angular/forms/signals';
-import {
-  ScButton,
+  ScComboboxChip,
+  ScComboboxChipRemove,
+  ScComboboxChips,
+  ScComboboxInput,
+  ScComboboxItem,
+  ScComboboxList,
+  ScComboboxMultiple,
+  ScComboboxPopup,
+  ScComboboxPortal,
   ScField,
+  ScFieldDescription,
   ScFieldErrors,
   ScFrame,
   ScLabel,
-  ScTagsInput,
-  ScTagsInputControl,
-  ScTagsInputItem,
-  ScTagsInputItemRemove,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
-/** A [formField]: one to five keywords, from the schema — its maxLength also stops a sixth going in; its errors once it is touched. */
+/** A Signal Forms field of strings: one tag at least and five at most, in the schema; the errors once touched. */
 @Component({
   selector: 'app-form-tags-input-demo',
   imports: [
-    ScFrame,
     FormField,
-    FormRoot,
-    ScTagsInput,
-    ScTagsInputControl,
-    ScTagsInputItem,
-    ScTagsInputItemRemove,
-    ScButton,
+    JsonPipe,
+    ScComboboxChip,
+    ScComboboxChipRemove,
+    ScComboboxChips,
+    ScComboboxInput,
+    ScComboboxItem,
+    ScComboboxList,
+    ScComboboxMultiple,
+    ScComboboxPopup,
+    ScComboboxPortal,
     ScField,
+    ScFieldDescription,
     ScFieldErrors,
+    ScFrame,
     ScLabel,
     SiXIcon,
   ],
   template: `
-    <form [formRoot]="articleForm" class="grid w-full max-w-md gap-4">
+    <div class="flex w-full max-w-sm flex-col gap-4">
       <div scField>
         <label scLabel>Keywords</label>
-        <div scTagsInput [formField]="articleForm.keywords">
-          @for (keyword of model().keywords; track $index) {
-            <span scTagsInputItem>
-              <span>{{ keyword }}</span>
-              <button scTagsInputItemRemove>
-                <svg siXIcon></svg>
-                <span class="sr-only">Remove {{ keyword }}</span>
-              </button>
-            </span>
-          }
-          <input scTagsInputControl placeholder="Add a keyword" />
+        <div
+          scCombobox
+          multiple
+          autoHighlight
+          #tags="scCombobox"
+          [formField]="articleForm.keywords"
+        >
+          <div scComboboxChips>
+            @for (keyword of keywords(); track keyword) {
+              <span scComboboxChip [value]="keyword">
+                {{ keyword }}
+                <button scComboboxChipRemove>
+                  <svg siXIcon></svg>
+                  <span class="sr-only">Remove {{ keyword }}</span>
+                </button>
+              </span>
+            }
+            <input
+              scComboboxInput
+              placeholder="Add a keyword"
+              (beforeinput)="addOnComma($event, tags)"
+            />
+          </div>
+          <ng-template scComboboxPortal>
+            <div scComboboxPopup>
+              <div scComboboxList aria-label="Keywords">
+                @if (typed(tags.query()); as text) {
+                  <div scComboboxItem [value]="text" [label]="text">
+                    Add “{{ text }}”
+                  </div>
+                }
+              </div>
+            </div>
+          </ng-template>
         </div>
         <div scFieldErrors></div>
       </div>
-      <button scButton type="submit" class="justify-self-end">Publish</button>
-      @if (published()) {
-        <p scFrame class="bg-muted p-4 text-sm" role="status">
-          Published with {{ published() }}.
-        </p>
-      }
-    </form>
+      <pre scFrame class="bg-muted p-4 text-xs">{{ model() | json }}</pre>
+    </div>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class FormTagsInputDemo {
-  private readonly model = signal({ keywords: [] as string[] });
-  private readonly published = signal('');
-  private readonly articleForm = form(
-    this.model,
-    (s) => {
-      minLength(s.keywords, 1, { message: 'Add at least one keyword.' });
-      maxLength(s.keywords, 5, { message: 'Five keywords at most.' });
-    },
-    {
-      submission: {
-        action: async () =>
-          this.published.set(this.model().keywords.join(', ')),
-      },
-    },
+  private readonly model = signal<{ keywords: string[] }>({ keywords: [] });
+  private readonly articleForm = form(this.model, (path) =>
+    validate(path.keywords, ({ value }) =>
+      value().length === 0
+        ? { kind: 'required', message: 'Add one keyword at least.' }
+        : value().length > 5
+          ? { kind: 'maxItems', message: 'Five keywords at most.' }
+          : null,
+    ),
   );
+  private readonly keywords = computed(() => this.model().keywords);
+
+  /** What is typed, as a new keyword: not empty, not one already. */
+  private typed(query: string): string | null {
+    const text = query.trim();
+    return text && !this.keywords().includes(text) ? text : null;
+  }
+
+  /** A comma adds the text typed, as Enter on the Add item does. */
+  private addOnComma(
+    event: InputEvent,
+    tags: ScComboboxMultiple<string>,
+  ): void {
+    // On the character typed (beforeinput: after the combobox's own keys,
+    // and phone keyboards too).
+    if (event.data !== ',') return;
+    event.preventDefault();
+    const text = this.typed(tags.query());
+    // As a pick: the tag added, the text cleared.
+    if (text) tags.pick([...tags.selected(), text]);
+  }
 }
