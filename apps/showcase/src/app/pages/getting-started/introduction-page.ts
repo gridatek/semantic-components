@@ -10,11 +10,6 @@ import {
   ScCardHeader,
   ScCardTitle,
   ScFrame,
-  ScItem,
-  ScItemBody,
-  ScItemDescription,
-  ScItemMedia,
-  ScItemTitle,
   ScLink,
   ScTypeset,
 } from '@semantic-components/ui';
@@ -22,20 +17,6 @@ import {
   ScCodeBlock,
   ScCodeBlockContent,
 } from '@semantic-components/ui/code-block';
-import {
-  SiAccessibilityIcon,
-  SiArrowRightLeftIcon,
-  SiBlocksIcon,
-  SiBotIcon,
-  SiChartColumnIcon,
-  SiCodeIcon,
-  SiLayersIcon,
-  SiPackageIcon,
-  SiPaletteIcon,
-  SiPuzzleIcon,
-  SiSparklesIcon,
-  SiZapIcon,
-} from '@semantic-icons/lucide-icons';
 import { DocCode } from '../../components/doc-code/doc-code';
 import { TocHeading } from '../../components/toc/toc-heading';
 
@@ -55,25 +36,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
     ScCodeBlock,
     ScCodeBlockContent,
     ScFrame,
-    ScTypeset,
-    ScItem,
-    ScItemBody,
-    ScItemDescription,
-    ScItemMedia,
-    ScItemTitle,
     ScLink,
-    SiAccessibilityIcon,
-    SiArrowRightLeftIcon,
-    SiBlocksIcon,
-    SiBotIcon,
-    SiChartColumnIcon,
-    SiCodeIcon,
-    SiLayersIcon,
-    SiPackageIcon,
-    SiPaletteIcon,
-    SiPuzzleIcon,
-    SiSparklesIcon,
-    SiZapIcon,
+    ScTypeset,
     TocHeading,
   ],
   template: `
@@ -81,10 +45,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div class="space-y-4">
         <h1 scTypeset>Introduction</h1>
         <p class="text-muted-foreground text-lg text-balance">
-          The missing piece in the Angular world: beautifully crafted UI
-          components for modern Angular, built with Tailwind CSS on Angular Aria
-          and the Angular CDK — in the look of shadcn/ui, in all eight of its
-          styles.
+          Semantic Components is a UI library for modern Angular: the look of
+          shadcn/ui, in all eight of its styles, made of parts you put on your
+          own elements.
         </p>
         <div class="flex flex-wrap gap-2">
           <a
@@ -102,15 +65,23 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </div>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>A part on your element</h2>
-        <p class="text-muted-foreground">
-          Every part is a directive on an element you write: the markup, the
-          text and the icons stay yours, and the part brings the behaviour, the
-          accessibility and the look of your style. Each is named for its role —
-          the button that opens a dialog is its trigger, the heading its title —
-          and goes on the right native element rather than a generic div. Parts
-          stack: one button can be a dialog&apos;s trigger and a toolbar&apos;s
-          widget at once.
+        <h2 scTypeset appToc>The big idea</h2>
+        <p>
+          A component library usually makes you choose. A component that draws
+          everything itself is quick to start with, but its markup, its words
+          and its layout are its own, and you fight it as soon as you need
+          something else. Copying a component&apos;s source into your app, as
+          shadcn/ui does, gives you all of it — and leaves you to maintain the
+          copy.
+        </p>
+        <p>
+          Semantic Components splits the work in two. A component is a set of
+          parts, and each part is a directive on an element you write.
+          <strong
+            >The markup, the words and the icons are yours; the behaviour, the
+            accessibility and the look are the library&apos;s</strong
+          >
+          — and they improve each time you update the package.
         </p>
         <div class="grid gap-4 lg:grid-cols-2">
           <div scCodeBlock class="min-w-0">
@@ -143,66 +114,77 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Features</h2>
-        <div class="grid gap-3 sm:grid-cols-2">
-          @for (feature of features; track feature.title) {
-            <div scItem variant="outline" class="items-start">
-              <div scItemMedia variant="icon">
-                @switch (feature.icon) {
-                  @case ('puzzle') {
-                    <svg siPuzzleIcon></svg>
-                  }
-                  @case ('accessibility') {
-                    <svg siAccessibilityIcon></svg>
-                  }
-                  @case ('palette') {
-                    <svg siPaletteIcon></svg>
-                  }
-                  @case ('rtl') {
-                    <svg siArrowRightLeftIcon></svg>
-                  }
-                  @case ('zap') {
-                    <svg siZapIcon></svg>
-                  }
-                  @case ('code') {
-                    <svg siCodeIcon></svg>
-                  }
-                  @case ('layers') {
-                    <svg siLayersIcon></svg>
-                  }
-                  @default {
-                    <svg siPackageIcon></svg>
-                  }
-                }
-              </div>
-              <div scItemBody>
-                <div scItemTitle>{{ feature.title }}</div>
-                <p scItemDescription class="line-clamp-none">
-                  {{ feature.description }}
-                </p>
-              </div>
-            </div>
-          }
-        </div>
+        <h2 scTypeset appToc>What is yours</h2>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            <strong>The markup.</strong> You choose the elements, their order
+            and the layout around them; leave out a part you don&apos;t need,
+            put your own markup between two.
+          </li>
+          <li>
+            <strong>The words.</strong> No part writes text: every label, button
+            name and message is in your template, in your language — so
+            translating is yours, with Angular&apos;s tools.
+          </li>
+          <li>
+            <strong>The icons.</strong> A part holds your
+            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">svg</code>
+            and sizes it; swap Lucide for any set.
+          </li>
+          <li>
+            <strong>The theme.</strong> Colours, radius and fonts are your CSS
+            variables — shadcn&apos;s names, so its themes carry over.
+          </li>
+        </ul>
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Declarative</h2>
+        <h2 scTypeset appToc>What is the library&apos;s</h2>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            <strong>Behaviour.</strong> Opening and closing, positioning,
+            keyboard, focus, typeahead — on Angular Aria and the CDK.
+          </li>
+          <li>
+            <strong>Accessibility.</strong> Roles, states and names wired
+            between the parts, to WCAG AA; every page checked with axe, in light
+            and dark.
+          </li>
+          <li>
+            <strong>The look.</strong> Each part&apos;s classes in the style
+            your app chose — one of shadcn/ui&apos;s eight. Your class merges
+            over them.
+          </li>
+          <li>
+            <strong>Forms.</strong> Every control is a Signal Forms control: its
+            value, its errors and its state come from the field you bind.
+          </li>
+          <li>
+            <strong>Direction and the server.</strong> Right to left built in;
+            rendered on the server and hydrated without a mismatch.
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Named for their role</h2>
         <p>
-          The whole interface is in the template: no service to call to open a
-          dialog, no imperative create(). State is a two-way binding —
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[(open)]</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[(value)]</code>
-          — or a Signal Forms field.
+          Each part says what it is in the interface: the button that opens a
+          dialog is its trigger, the heading in it is its title. And each goes
+          on the native element that has that role — a title on a heading, a
+          trigger on a button — so the page keeps what the browser gives it.
+          Parts stack: one button can be a dialog&apos;s trigger and a
+          toolbar&apos;s widget at once. The template describes the page, and
+          state is a binding:
         </p>
         <app-doc-code [code]="dialogCode" language="angular-html" />
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Not for every project</h2>
+        <h2 scTypeset appToc>Modern Angular only</h2>
         <p>
-          Deliberate choices, for the Angular to come rather than the one
-          before:
+          Deliberate choices, for the Angular to come rather than the one before
+          — so it isn&apos;t for every project:
         </p>
         <ul class="list-disc space-y-2 ps-6">
           <li>Zoneless and OnPush, signals throughout.</li>
@@ -217,90 +199,6 @@ import { TocHeading } from '../../components/toc/toc-heading';
             inputs on each part.
           </li>
         </ul>
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Explore</h2>
-        <div class="grid gap-3 sm:grid-cols-2">
-          <a
-            scItem
-            variant="outline"
-            class="items-start"
-            routerLink="/components"
-          >
-            <div scItemMedia variant="icon"><svg siBlocksIcon></svg></div>
-            <div scItemBody>
-              <div scItemTitle>Components</div>
-              <p scItemDescription class="line-clamp-none">
-                Every component, by category, each with its examples and API.
-              </p>
-            </div>
-          </a>
-          <a
-            scItem
-            variant="outline"
-            class="items-start"
-            routerLink="/ai-elements"
-          >
-            <div scItemMedia variant="icon"><svg siSparklesIcon></svg></div>
-            <div scItemBody>
-              <div scItemTitle>AI Elements</div>
-              <p scItemDescription class="line-clamp-none">
-                Patterns for agentic interfaces: chat, reasoning, tool calls,
-                plans.
-              </p>
-            </div>
-          </a>
-          <a
-            scItem
-            variant="outline"
-            class="items-start"
-            routerLink="/customize"
-          >
-            <div scItemMedia variant="icon"><svg siPaletteIcon></svg></div>
-            <div scItemBody>
-              <div scItemTitle>Customize</div>
-              <p scItemDescription class="line-clamp-none">
-                Pick the style the whole site uses, and see it on real screens.
-              </p>
-            </div>
-          </a>
-          <a scItem variant="outline" class="items-start" routerLink="/charts">
-            <div scItemMedia variant="icon"><svg siChartColumnIcon></svg></div>
-            <div scItemBody>
-              <div scItemTitle>Charts</div>
-              <p scItemDescription class="line-clamp-none">
-                Area, bar, line, pie, radar, radial, scatter, funnel, treemap,
-                sunburst and sankey charts to copy.
-              </p>
-            </div>
-          </a>
-        </div>
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Packages</h2>
-        <div class="grid gap-3">
-          @for (pkg of packages; track pkg.name) {
-            <div scItem variant="outline" class="items-start">
-              <div scItemMedia variant="icon">
-                @if (pkg.name.endsWith('mcp-server')) {
-                  <svg siBotIcon></svg>
-                } @else if (pkg.name.endsWith('styles')) {
-                  <svg siPaletteIcon></svg>
-                } @else {
-                  <svg siPackageIcon></svg>
-                }
-              </div>
-              <div scItemBody>
-                <div scItemTitle class="font-mono">{{ pkg.name }}</div>
-                <p scItemDescription class="line-clamp-none">
-                  {{ pkg.description }}
-                </p>
-              </div>
-            </div>
-          }
-        </div>
       </section>
 
       <section class="space-y-4">
@@ -345,94 +243,26 @@ export default class IntroductionPage {
   </ng-template>
 </div>`;
 
-  private readonly features = [
-    {
-      icon: 'puzzle',
-      title: 'Semantic and composable',
-      description:
-        'Small parts with meaningful names, directives on your own elements: templates that read like documentation.',
-    },
-    {
-      icon: 'accessibility',
-      title: 'Accessible',
-      description:
-        'Built on Angular Aria: roles, keyboard and focus handled; every page checked with axe, to WCAG AA.',
-    },
-    {
-      icon: 'palette',
-      title: 'Eight styles',
-      description:
-        "shadcn/ui's eight styles, one chosen when the app starts — or one of your own.",
-    },
-    {
-      icon: 'rtl',
-      title: 'Right to left',
-      description:
-        'Logical sides and alignments that flip with the direction, for one direction or mixed.',
-    },
-    {
-      icon: 'zap',
-      title: 'Modern Angular',
-      description:
-        'Signals, standalone parts, control flow, and Signal Forms for every form control.',
-    },
-    {
-      icon: 'code',
-      title: 'Type safe',
-      description:
-        'Strict TypeScript, typed inputs and style types, with autocompletion out of the box.',
-    },
-    {
-      icon: 'layers',
-      title: 'Tailwind CSS',
-      description:
-        'Styled with Tailwind CSS: the style gives the look, your class merges over it.',
-    },
-    {
-      icon: 'package',
-      title: 'Tree-shakable',
-      description:
-        'Heavy parts live in their own entry points, so only what you use reaches your bundle.',
-    },
-  ];
-
-  private readonly packages = [
-    {
-      name: '@semantic-components/ui',
-      description:
-        'The components, with entry points for the ones that need a library: carousel (Embla), data table (TanStack Table), PDF viewer (PDF.js), phone input (libphonenumber-js), QR code (uqr), animated counter (Motion), confetti, rich text editor (Tiptap), charts (d3), code block (Shiki), diff viewer (jsdiff), code editor (CodeMirror), languages (Angular localize).',
-    },
-    {
-      name: '@semantic-components/styles',
-      description:
-        "The components' looks, one per shadcn/ui style — Nova by default, Lyra, Vega, Maia, Mira, Luma, Sera, Rhea — chosen when the app starts.",
-    },
-    {
-      name: '@semantic-components/mcp-server',
-      description: 'An MCP server for AI coding assistants.',
-    },
-  ];
-
   private readonly nextSteps = [
     {
       name: 'Installation',
       path: '/docs/getting-started/installation',
-      description: 'Angular Aria, the CDK, Tailwind CSS, then the components.',
+      description: 'set up an Angular app for the components.',
+    },
+    {
+      name: 'Components',
+      path: '/docs/components',
+      description: 'every component, with its examples and API.',
     },
     {
       name: 'Styles',
       path: '/docs/packages/styles',
-      description: 'choose one of the eight styles.',
+      description: 'the eight looks, side by side.',
     },
     {
-      name: 'Internationalization',
-      path: '/docs/getting-started/i18n',
-      description: 'one build for all languages using Angular localize.',
-    },
-    {
-      name: 'Right to left',
-      path: '/docs/getting-started/rtl',
-      description: 'one direction, or mixed.',
+      name: 'Theming',
+      path: '/docs/guides/theming',
+      description: 'your colours, dark mode, colour schemes.',
     },
   ];
 }
