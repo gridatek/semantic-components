@@ -106,6 +106,7 @@ export * from './stat-card';
 export * from './stepper';
 export * from './time-clock';
 export * from './timeline';
+export * from './timeline-next';
 export * from './tour-guide';
 export * from './transfer-list';
 export * from './virtual-list';

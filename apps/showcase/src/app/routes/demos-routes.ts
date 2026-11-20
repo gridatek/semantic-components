@@ -7132,6 +7132,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/timeline-next',
+    children: [
+      {
+        path: 'timeline-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/timeline-next-usage-demo').then(
+            (m) => m.TimelineNextUsageDemo,
+          ),
+      },
+      {
+        path: 'horizontal-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/horizontal-timeline-next-demo').then(
+            (m) => m.HorizontalTimelineNextDemo,
+          ),
+      },
+      {
+        path: 'status-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/status-timeline-next-demo').then(
+            (m) => m.StatusTimelineNextDemo,
+          ),
+      },
+      {
+        path: 'details-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/details-timeline-next-demo').then(
+            (m) => m.DetailsTimelineNextDemo,
+          ),
+      },
+      {
+        path: 'feed-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/feed-timeline-next-demo').then(
+            (m) => m.FeedTimelineNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-timeline-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/timeline-next/demos/rtl-timeline-next-demo').then(
+            (m) => m.RtlTimelineNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/timeline',
     children: [
       {
