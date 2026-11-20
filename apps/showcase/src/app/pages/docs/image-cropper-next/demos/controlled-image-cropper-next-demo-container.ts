@@ -18,7 +18,7 @@ import { ControlledImageCropperNextDemo } from './controlled-image-cropper-next-
   encapsulation: ViewEncapsulation.None,
 })
 export class ControlledImageCropperNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   type ScImageCropNext,
   ScButton,

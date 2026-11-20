@@ -18,7 +18,7 @@ import { AspectRatioImageCropperNextDemo } from './aspect-ratio-image-cropper-ne
   encapsulation: ViewEncapsulation.None,
 })
 export class AspectRatioImageCropperNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScFrame,
   ScImageCropperNext,

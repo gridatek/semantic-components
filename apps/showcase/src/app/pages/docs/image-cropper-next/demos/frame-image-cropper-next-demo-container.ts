@@ -18,7 +18,7 @@ import { FrameImageCropperNextDemo } from './frame-image-cropper-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class FrameImageCropperNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   type ScImageCropNext,
   ScButton,

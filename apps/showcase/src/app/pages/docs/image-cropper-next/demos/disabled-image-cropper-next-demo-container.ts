@@ -18,7 +18,7 @@ import { DisabledImageCropperNextDemo } from './disabled-image-cropper-next-demo
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledImageCropperNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScImageCropperNext,

@@ -35,7 +35,16 @@ export class ScImageCropperNextPreviewImage {
     const box = this.preview.size();
     const natural = this.cropper.ɵnatural();
     const shown = this.cropper.shown();
-    if (!crop) return { width: 0, height: 0, left: 0, top: 0, transform: '' };
+    // Until it can be placed, its own size (hidden): never 0 px (NG0913).
+    if (!crop || !box.width || !this.cropper.ready()) {
+      return {
+        width: null,
+        height: null,
+        left: null,
+        top: null,
+        transform: null,
+      };
+    }
     // The crop covers the preview: preview pixels per image pixel.
     const k = Math.max(box.width / crop.width, box.height / crop.height);
     const left = (box.width - crop.width * k) / 2 - crop.x * k;

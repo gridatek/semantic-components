@@ -29,7 +29,10 @@ export class ScImageCropperNextPreview {
   readonly classInput = input<string>('', { alias: 'class' });
 
   /** Its size, for its image to cover it. */
-  readonly size = signal<ScImageCropperNextSize>({ width: 0, height: 0 });
+  private readonly size = signal<ScImageCropperNextSize>({
+    width: 0,
+    height: 0,
+  });
 
   private readonly class = computed(() =>
     cn('bg-muted relative overflow-hidden', this.classInput()),

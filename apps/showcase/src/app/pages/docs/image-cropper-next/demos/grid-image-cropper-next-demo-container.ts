@@ -18,7 +18,7 @@ import { GridImageCropperNextDemo } from './grid-image-cropper-next-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GridImageCropperNextDemoContainer {
-  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScFrame,
   ScImageCropperNext,

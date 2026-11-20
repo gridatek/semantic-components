@@ -216,6 +216,18 @@ export class ScImageCropperNext {
 
   /** The image element's place: its own size, scaled, turned and mirrored about its centre. */
   readonly imageStyle = computed(() => {
+    // Until it can be placed, its own size (hidden, in the clipped
+    // viewport): never 0 px, which Angular's dev check takes for an
+    // oversized image (NG0913).
+    if (!this.ready()) {
+      return {
+        width: null,
+        height: null,
+        left: null,
+        top: null,
+        transform: null,
+      };
+    }
     const natural = this.ɵnatural();
     const shown = this.shown();
     const s = this.ɵscale();
