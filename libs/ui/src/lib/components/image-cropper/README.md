@@ -1,80 +1,71 @@
 # Image Cropper
 
-Crop an image, put together from parts. One set of parts crops both ways:
-
-- **a box over the image** — put handles in the selection, and it is moved and resized over the image (as in document and photo editors);
-- **a frame the image moves under** — no handles, and the selection is a fixed frame: the image is dragged, wheeled and pinched under it (as profile pictures are chosen).
+Choose the part of an image to keep, after Vercel's ui-sdk Image Cropper: a **box** moved and resized over the image (`mode="box"`, the default), or a **frame** the image moves under (`mode="frame"`, as profile pictures are chosen). The crop is one value — a box in the image's own pixels, with its quarter turn and flips — two-way, and `cropImage()` makes it a file.
 
 ## Architecture
 
 ```
-scImageCropper (zoom, rotation, flipX, flipY, aspectRatio — area(), crop())
-├── scImageCropperStage — give it a height
-│   ├── img[scImageCropperImage] — your image, its src and alt
-│   └── scImageCropperSelection — name it
-│       ├── scImageCropperGrid — guide lines: columns, rows (3), restyled from its class
-│       └── scImageCropperHandle × 8 — with any: a box
-├── scImageCropperPreview → img[scImageCropperPreviewImage]
-└── buttons: ZoomIn, ZoomOut, RotateLeft, RotateRight, FlipHorizontal, FlipVertical, Reset, AspectRatio
+scImageCropper ([(crop)], mode, aspectRatio, shape, minWidth, minHeight, maxZoom, disabled)
+├── scImageCropperViewport — give it a height; pans, wheels and pinches in frame mode
+│   ├── img[scImageCropperImage] — your src and alt
+│   ├── scImageCropperSelection — a slider: name it, valueText
+│   │   └── scImageCropperGrid — columns, rows (3), restyled from its class
+│   └── scImageCropperHandle="n|ne|e|se|s|sw|w|nw" — box mode; sliders: name each
+├── input[scImageCropperZoom] — the style's slider, 1 → mostZoom(); name it
+├── button[scImageCropperRotate] — direction: clockwise | counterclockwise
+├── button[scImageCropperFlip] — direction: horizontal | vertical
+└── scImageCropperPreview → img[scImageCropperPreviewImage] — a live preview
 ```
 
 ## Usage
 
 ```html
-<div scImageCropper #cropper="scImageCropper" [(zoom)]="zoom">
-  <div scImageCropperStage class="h-80 rounded-lg border">
-    <img scImageCropperImage [src]="src()" alt="Mountains at dawn" />
-    <div scImageCropperSelection aria-label="Crop area">
+<div scImageCropper aria-label="Photo" [(crop)]="crop" [aspectRatio]="ratio()">
+  <div scImageCropperViewport class="h-80">
+    <img scImageCropperImage src="/photo.jpg" alt="Mountains at dawn" />
+    <div scImageCropperSelection aria-label="Crop" valueText="{width} by {height} pixels, at {x}, {y}">
       <div scImageCropperGrid></div>
-      @for (handle of handles; track handle) {
-      <div [scImageCropperHandle]="handle"></div>
-      }
     </div>
+    @for (handle of handles; track handle.position) {
+    <div [scImageCropperHandle]="handle.position" [attr.aria-label]="handle.label" valueText="{width} by {height} pixels"></div>
+    }
   </div>
-
-  <input scSlider aria-label="Zoom" [min]="cropper.minZoom()" [max]="cropper.maxZoom()" [step]="0.01" [(value)]="zoom" />
-  <button scImageCropperRotateRight><svg siRotateCwIcon></svg><span class="sr-only">Rotate right</span></button>
-  <button scButton (click)="crop(cropper)">Crop</button>
+  <input scImageCropperZoom aria-label="Zoom" />
+  <button scImageCropperRotate><svg siRotateCwIcon></svg><span class="sr-only">Rotate</span></button>
 </div>
 ```
 
 ```ts
-async crop(cropper: ScImageCropper): Promise<void> {
-  const blob = await cropper.crop({ type: 'image/webp', quality: 0.9, width: 512 });
-  // upload it, or show it: URL.createObjectURL(blob)
+readonly crop = signal<ScImageCrop | null>(null);
+
+async save(): Promise<void> {
+  const file = await cropImage('/photo.jpg', this.crop()!, { type: 'image/webp', quality: 0.9, width: 512 });
+  // upload it, or show it: URL.createObjectURL(file)
 }
 ```
 
-A frame instead of a box: leave the handles out, and set a ratio and a shape — `<div scImageCropper shape="circle" [aspectRatio]="1">`.
+## The crop
 
-## State
+`{ x, y, width, height, rotation?, flipX?, flipY? }`: in the pixels of the image as shown — turned, then mirrored on the screen's axes. Written when the image loads (centred, at four fifths of the largest crop the ratio allows; all the frame in frame mode). Set it to restore a saved crop — one set before the first image loads is kept; set it to `null` to start again. Another image starts again.
 
-| On `scImageCropper` | Type                              | Default  |                                                               |
-| ------------------- | --------------------------------- | -------- | ------------------------------------------------------------- |
-| `zoom`              | `number` (two-way)                | `1`      | 1: the image fits the stage. Share it with a slider           |
-| `maxZoom`           | `number`                          | `4`      | `minZoom()` is 1 for a box, what covers the frame for a frame |
-| `rotation`          | `0 \| 90 \| 180 \| 270` (two-way) | `0`      | Quarter turns, clockwise                                      |
-| `flipX`, `flipY`    | `boolean` (two-way)               | `false`  |                                                               |
-| `aspectRatio`       | `number \| null` (two-way)        | `null`   | Width / height; free when null                                |
-| `shape`             | `'rect' \| 'circle'`              | `'rect'` | A circle crops to an ellipse, transparent around in a PNG     |
+Zoom is the crop's size: 1 is the largest box at its ratio; `maxZoom` (10) the smallest, or less where `minWidth` / `minHeight` come first (`mostZoom()`). In frame mode the frame stays the largest box at the ratio in the viewport, and the image is scaled under it.
 
-`area()` is the crop in the (turned) image's pixels; `crop({ type, quality, width })` makes it a `Blob`. Moving it yourself: `move()`, `resizeBy()`, `zoomBy()`, `pan()`, `rotate()`, `reset()`.
+Through `#c="scImageCropper"`: `zoom()`, `mostZoom()`, `loading()`, `dragging()`, `ready()`, `setZoom(zoom)`, `rotate(direction)`, `flip(direction)`, `focus()`.
 
-## The grid
+## Keyboard and screen readers
 
-`scImageCropperGrid` draws the lines between its `columns` and `rows` (3 each: thirds; 1: none that way). Faint at rest, clearer while the crop moves. Its lines are styled from its class — `class="*:border-amber-400"`, and `opacity-100` to keep them clear. Leave it out for no grid.
+- The root is a group you name; busy (`aria-busy`) until the image loads.
+- The selection and each handle are WAI-ARIA sliders: the selection's value is its x, a handle's its width (its height for n and s). Their `valueText` is yours, with `{x}`, `{y}`, `{width}`, `{height}` written in the locale.
+- Arrows move the selection, or a handle's edge (an edge takes only the arrows along it): one screen pixel, Shift ten. + and − zoom about the crop's middle; R turns the image a quarter, Shift + R back.
+- Dragging: Shift on a handle keeps the ratio when it is free; Escape puts the crop back where the drag started. In frame mode the wheel zooms at the pointer and two fingers pinch.
+- The zoom is the style's slider, read as a percentage in the locale.
+- Disabled: nothing moves, the selection and handles leave the tab order, the controls are off.
+- Right to left, the image is not mirrored: a photo has no direction.
 
-## The parts' buttons
+## cropImage(source, crop, options)
 
-Each styles itself as the style's button (`outline`, `icon`; `variant` and `size` as on `scButton`) and is disabled until an image is in, and where it can't go further (zoom). Write each one's icon and name; `scImageCropperAspectRatio` (`[scImageCropperAspectRatio]="16 / 9"`, `null` for free) is pressed while its ratio is the one — put them in a group you name.
-
-## Accessibility
-
-- The selection is focusable and named by you: the arrows move the crop (Shift: by 10%), Alt + arrows resize it (with handles), + and − zoom. Under a frame, the arrows move the image.
-- Handles and the grid are for the pointer, hidden from screen readers: the keyboard does what they do.
-- Zoom with a real slider — your `input[scSlider]`, named.
-- The preview's image and the cropped one are yours to describe (`alt`).
+`source`: a URL, a `Blob` / `File`, an `img` or an `ImageBitmap`. Options: `type` (`image/png`), `quality`, `width` / `height` (one alone: the other at the crop's ratio), `shape` (`'circle'`: an ellipse, its corners transparent), `name`. Returns a `File`. In the browser only; an image from another site needs CORS.
 
 ## Not here
 
-A file input: show any file with `URL.createObjectURL(file)` as the image's `src` (see the demo). Free rotation (other than quarter turns).
+A file input: show any file with `URL.createObjectURL(file)` as the image's `src`. Free rotation (other than quarter turns). A background for a circle in JPEG (its corners are black).

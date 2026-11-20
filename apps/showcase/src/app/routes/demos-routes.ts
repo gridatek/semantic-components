@@ -3038,85 +3038,59 @@ export const demosRoutes: Route[] = [
     path: 'demos/image-cropper',
     children: [
       {
-        path: 'box-image-cropper-demo',
+        path: 'image-cropper-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/box-image-cropper-demo').then(
-            (m) => m.BoxImageCropperDemo,
+          import('../pages/docs/image-cropper/demos/image-cropper-usage-demo').then(
+            (m) => m.ImageCropperUsageDemo,
           ),
       },
       {
-        path: 'avatar-image-cropper-demo',
+        path: 'aspect-ratio-image-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/avatar-image-cropper-demo').then(
-            (m) => m.AvatarImageCropperDemo,
+          import('../pages/docs/image-cropper/demos/aspect-ratio-image-cropper-demo').then(
+            (m) => m.AspectRatioImageCropperDemo,
           ),
       },
       {
-        path: 'cover-image-cropper-demo',
+        path: 'circle-image-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper/demos/cover-image-cropper-demo').then(
-            (m) => m.CoverImageCropperDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/image-cropper-next',
-    children: [
-      {
-        path: 'image-cropper-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/image-cropper-next-usage-demo').then(
-            (m) => m.ImageCropperNextUsageDemo,
+          import('../pages/docs/image-cropper/demos/circle-image-cropper-demo').then(
+            (m) => m.CircleImageCropperDemo,
           ),
       },
       {
-        path: 'aspect-ratio-image-cropper-next-demo',
+        path: 'frame-image-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/aspect-ratio-image-cropper-next-demo').then(
-            (m) => m.AspectRatioImageCropperNextDemo,
+          import('../pages/docs/image-cropper/demos/frame-image-cropper-demo').then(
+            (m) => m.FrameImageCropperDemo,
           ),
       },
       {
-        path: 'circle-image-cropper-next-demo',
+        path: 'grid-image-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/circle-image-cropper-next-demo').then(
-            (m) => m.CircleImageCropperNextDemo,
+          import('../pages/docs/image-cropper/demos/grid-image-cropper-demo').then(
+            (m) => m.GridImageCropperDemo,
           ),
       },
       {
-        path: 'frame-image-cropper-next-demo',
+        path: 'controlled-image-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/frame-image-cropper-next-demo').then(
-            (m) => m.FrameImageCropperNextDemo,
+          import('../pages/docs/image-cropper/demos/controlled-image-cropper-demo').then(
+            (m) => m.ControlledImageCropperDemo,
           ),
       },
       {
-        path: 'grid-image-cropper-next-demo',
+        path: 'disabled-image-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/grid-image-cropper-next-demo').then(
-            (m) => m.GridImageCropperNextDemo,
+          import('../pages/docs/image-cropper/demos/disabled-image-cropper-demo').then(
+            (m) => m.DisabledImageCropperDemo,
           ),
       },
       {
-        path: 'controlled-image-cropper-next-demo',
+        path: 'rtl-image-cropper-demo',
         loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/controlled-image-cropper-next-demo').then(
-            (m) => m.ControlledImageCropperNextDemo,
-          ),
-      },
-      {
-        path: 'disabled-image-cropper-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/disabled-image-cropper-next-demo').then(
-            (m) => m.DisabledImageCropperNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-image-cropper-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-cropper-next/demos/rtl-image-cropper-next-demo').then(
-            (m) => m.RtlImageCropperNextDemo,
+          import('../pages/docs/image-cropper/demos/rtl-image-cropper-demo').then(
+            (m) => m.RtlImageCropperDemo,
           ),
       },
     ],

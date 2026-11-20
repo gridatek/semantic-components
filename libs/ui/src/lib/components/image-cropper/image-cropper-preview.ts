@@ -13,14 +13,12 @@ import type { ScImageCropperSize } from './image-cropper-geometry';
 
 /**
  * A live preview of the crop: size it (`size-24`, `rounded-full`…) and put
- * a `img[scImageCropperPreviewImage]` inside, with its `alt`. The crop
+ * an `img[scImageCropperPreviewImage]` inside, with its `alt`. The crop
  * covers it.
  */
 @Directive({
   selector: '[scImageCropperPreview]',
-  exportAs: 'scImageCropperPreview',
   host: {
-    'data-slot': 'image-cropper-preview',
     '[class]': 'class()',
   },
 })
@@ -40,10 +38,10 @@ export class ScImageCropperPreview {
   constructor() {
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
-      const observer = new ResizeObserver(([entry]) =>
+      const observer = new ResizeObserver(() =>
         this.size.set({
-          width: entry.contentRect.width,
-          height: entry.contentRect.height,
+          width: this.element.clientWidth,
+          height: this.element.clientHeight,
         }),
       );
       observer.observe(this.element);

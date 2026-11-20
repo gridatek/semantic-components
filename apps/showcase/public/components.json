@@ -434,20 +434,10 @@
   {
     "name": "Image Cropper",
     "path": "image-cropper",
-    "description": "Crop an image: a box over it or a frame it moves under, with keyboard, pinch and wheel, the crop as a file.",
+    "description": "Crop an image: a box over it or a frame it moves under, the crop as two-way state, sliders for screen readers, cropImage() for the file.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media",
-    "hidden": true
-  },
-  {
-    "name": "Image Cropper Next",
-    "path": "image-cropper-next",
-    "description": "Crop an image, after Vercel: a box over it or a frame it moves under, the crop as two-way state, sliders for screen readers, cropImage() for the file.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Infinite Scroll",

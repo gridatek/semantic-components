@@ -1,13 +1,13 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { ScImageCropper } from './image-cropper';
+import { imageTransform } from './image-cropper-geometry';
 import { ScImageCropperPreview } from './image-cropper-preview';
 
 /** The crop, in its preview: the cropper's image, placed so the crop covers it. Write its `alt`. */
 @Directive({
   selector: 'img[scImageCropperPreviewImage]',
   host: {
-    'data-slot': 'image-cropper-preview-image',
     draggable: 'false',
     '[attr.src]': 'src()',
     '[style.width.px]': 'place().width',
@@ -31,23 +31,30 @@ export class ScImageCropperPreviewImage {
   });
 
   private readonly place = computed(() => {
-    const area = this.cropper.area();
+    const crop = this.cropper.crop();
     const box = this.preview.size();
     const natural = this.cropper.ɵnatural();
-    const size = this.cropper.orientedSize();
+    const shown = this.cropper.shown();
+    // Until it can be placed, its own size (hidden): never 0 px (NG0913).
+    if (!crop || !box.width || !this.cropper.ready()) {
+      return {
+        width: null,
+        height: null,
+        left: null,
+        top: null,
+        transform: null,
+      };
+    }
     // The crop covers the preview: preview pixels per image pixel.
-    const k =
-      area.width && area.height
-        ? Math.max(box.width / area.width, box.height / area.height)
-        : 0;
-    const left = (box.width - area.width * k) / 2 - area.x * k;
-    const top = (box.height - area.height * k) / 2 - area.y * k;
+    const k = Math.max(box.width / crop.width, box.height / crop.height);
+    const left = (box.width - crop.width * k) / 2 - crop.x * k;
+    const top = (box.height - crop.height * k) / 2 - crop.y * k;
     return {
       width: natural.width * k,
       height: natural.height * k,
-      left: left + ((size.width - natural.width) * k) / 2,
-      top: top + ((size.height - natural.height) * k) / 2,
-      transform: `rotate(${this.cropper.rotation()}deg) scale(${this.cropper.flipX() ? -1 : 1}, ${this.cropper.flipY() ? -1 : 1})`,
+      left: left + ((shown.width - natural.width) * k) / 2,
+      top: top + ((shown.height - natural.height) * k) / 2,
+      transform: imageTransform(crop),
     };
   });
 
