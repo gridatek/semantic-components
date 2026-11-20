@@ -1,6 +1,7 @@
 import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScToc,
   ScTocHeading,
   ScTocLink,
@@ -14,7 +15,15 @@ import {
  */
 @Component({
   selector: 'app-rtl-toc-demo',
-  imports: [Dir, ScToc, ScTocHeading, ScTocLink, ScTocList, ScTocScope],
+  imports: [
+    ScFrame,
+    Dir,
+    ScToc,
+    ScTocHeading,
+    ScTocLink,
+    ScTocList,
+    ScTocScope,
+  ],
   providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   template: `
     <div
@@ -27,7 +36,8 @@ import {
         tabindex="0"
         role="region"
         aria-label="الدليل"
-        class="h-72 overflow-y-auto rounded-md border p-4"
+        scFrame
+        class="h-72 overflow-y-auto p-4"
       >
         <h3 scTocHeading class="scroll-mt-4 text-sm font-semibold">التثبيت</h3>
         <p class="text-muted-foreground mt-2 mb-6 text-sm">

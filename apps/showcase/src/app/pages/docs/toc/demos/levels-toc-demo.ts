@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScToc,
   ScTocHeading,
   ScTocLink,
@@ -10,7 +11,7 @@ import {
 /** Headings at two levels: the deeper ones indented, by the item's depth. */
 @Component({
   selector: 'app-levels-toc-demo',
-  imports: [ScToc, ScTocHeading, ScTocLink, ScTocList, ScTocScope],
+  imports: [ScFrame, ScToc, ScTocHeading, ScTocLink, ScTocList, ScTocScope],
   template: `
     <div
       scTocScope
@@ -20,7 +21,8 @@ import {
         tabindex="0"
         role="region"
         aria-label="Guide"
-        class="h-72 overflow-y-auto rounded-md border p-4"
+        scFrame
+        class="h-72 overflow-y-auto p-4"
       >
         <h3 scTocHeading class="scroll-mt-4 text-sm font-semibold">Install</h3>
         <p class="text-muted-foreground mt-2 mb-6 text-sm">

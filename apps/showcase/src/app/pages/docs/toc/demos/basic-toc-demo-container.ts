@@ -20,6 +20,7 @@ import { BasicTocDemo } from './basic-toc-demo';
 export class BasicTocDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScToc,
   ScTocHeading,
   ScTocLink,
@@ -33,7 +34,7 @@ import {
  */
 @Component({
   selector: 'app-basic-toc-demo',
-  imports: [ScToc, ScTocHeading, ScTocLink, ScTocList, ScTocScope],
+  imports: [ScFrame, ScToc, ScTocHeading, ScTocLink, ScTocList, ScTocScope],
   template: \`
     <div
       scTocScope
@@ -43,7 +44,8 @@ import {
         tabindex="0"
         role="region"
         aria-label="Article"
-        class="h-72 overflow-y-auto rounded-md border p-4"
+        scFrame
+        class="h-72 overflow-y-auto p-4"
       >
         @for (section of sections; track section.title) {
           <h3 scTocHeading class="scroll-mt-4 text-sm font-semibold">

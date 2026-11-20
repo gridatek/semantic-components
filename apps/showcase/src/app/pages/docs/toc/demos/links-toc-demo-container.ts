@@ -19,7 +19,7 @@ import { LinksTocDemo } from './links-toc-demo';
 })
 export class LinksTocDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScToc, ScTocLink, ScTocList } from '@semantic-components/ui';
+import { ScFrame, ScToc, ScTocLink, ScTocList } from '@semantic-components/ui';
 
 /**
  * Links written by hand, to your sections' ids: no headings to read, so the
@@ -27,14 +27,15 @@ import { ScToc, ScTocLink, ScTocList } from '@semantic-components/ui';
  */
 @Component({
   selector: 'app-links-toc-demo',
-  imports: [ScToc, ScTocLink, ScTocList],
+  imports: [ScFrame, ScToc, ScTocLink, ScTocList],
   template: \`
     <div class="grid w-full max-w-2xl gap-6 sm:grid-cols-[minmax(0,1fr)_10rem]">
       <div
         tabindex="0"
         role="region"
         aria-label="Release notes"
-        class="h-72 overflow-y-auto rounded-md border p-4"
+        scFrame
+        class="h-72 overflow-y-auto p-4"
       >
         <h3 id="added" class="scroll-mt-4 text-sm font-semibold">Added</h3>
         <p class="text-muted-foreground mt-2 mb-6 min-h-24 text-sm">
