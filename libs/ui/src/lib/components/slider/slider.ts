@@ -13,6 +13,7 @@ import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { SC_FIELD } from '../field';
+import { rtlArrowStep } from './rtl-arrow-step';
 
 /** A slider's orientation. */
 export type ScSliderOrientation = 'horizontal' | 'vertical';
@@ -115,27 +116,12 @@ export class ScSlider implements FormValueControl<number> {
 
   private readonly direction = inject(Directionality);
 
-  /**
-   * Right to left, across: ← raises it, → lowers it.
-   *
-   * FIXME(webkit): a workaround. Chrome and Firefox flip a native range's
-   * arrows right to left by themselves; Safari (WebKit) doesn't, its arrows
-   * stay left to right. Check again with each WebKit release; drop it once
-   * Safari flips them (specs: "RTL" in the slider and range slider demos).
-   * See docs/webkit-workarounds.md.
-   */
+  /** Right to left, across: Safari's arrows mirrored (rtlArrowStep). */
   private onKeydown(event: KeyboardEvent): void {
-    if (
-      this.orientation() !== 'horizontal' ||
-      this.direction.value !== 'rtl' ||
-      (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') ||
-      event.altKey ||
-      event.ctrlKey ||
-      event.metaKey
-    )
-      return;
+    const sign = rtlArrowStep(event, this.orientation(), this.direction.value);
+    if (!sign) return;
     event.preventDefault();
-    const step = (event.key === 'ArrowLeft' ? 1 : -1) * this.step();
+    const step = sign * this.step();
     const next = Math.min(
       this.resolvedMax(),
       Math.max(this.resolvedMin(), this.value() + step),

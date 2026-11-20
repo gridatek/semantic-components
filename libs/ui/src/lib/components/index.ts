@@ -44,6 +44,7 @@ export * from './preview-card';
 export * from './progress';
 export * from './radio-group';
 export * from './range-slider';
+export * from './range-slider-next';
 export * from './rating';
 export * from './resizable';
 export * from './scroll-area';

@@ -444,6 +444,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/range-slider/range-slider-page'),
       },
       {
+        path: 'range-slider-next',
+        title: 'Range Slider Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/range-slider-next/range-slider-next-page'),
+      },
+      {
         path: 'slider',
         title: 'Slider - Semantic Components',
         loadComponent: () => import('../pages/docs/slider/slider-page'),

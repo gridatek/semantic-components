@@ -4281,6 +4281,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/range-slider-next',
+    children: [
+      {
+        path: 'range-slider-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/range-slider-next/demos/range-slider-next-usage-demo').then(
+            (m) => m.RangeSliderNextUsageDemo,
+          ),
+      },
+      {
+        path: 'label-range-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/range-slider-next/demos/label-range-slider-next-demo').then(
+            (m) => m.LabelRangeSliderNextDemo,
+          ),
+      },
+      {
+        path: 'steps-range-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/range-slider-next/demos/steps-range-slider-next-demo').then(
+            (m) => m.StepsRangeSliderNextDemo,
+          ),
+      },
+      {
+        path: 'vertical-range-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/range-slider-next/demos/vertical-range-slider-next-demo').then(
+            (m) => m.VerticalRangeSliderNextDemo,
+          ),
+      },
+      {
+        path: 'form-range-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/range-slider-next/demos/form-range-slider-next-demo').then(
+            (m) => m.FormRangeSliderNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-range-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/range-slider-next/demos/disabled-range-slider-next-demo').then(
+            (m) => m.DisabledRangeSliderNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-range-slider-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/range-slider-next/demos/rtl-range-slider-next-demo').then(
+            (m) => m.RtlRangeSliderNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/range-slider',
     children: [
       {
