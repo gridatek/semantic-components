@@ -1,100 +1,68 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  Component,
-  ViewEncapsulation,
-  effect,
-  inject,
-  signal,
-  untracked,
-  viewChild,
-} from '@angular/core';
+import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
 import {
   ScButton,
   ScFrame,
   type ScSignature,
   ScSignaturePad,
-  ScSignaturePadClear,
-  ScSignaturePadLine,
-  ScSignaturePadSurface,
+  signatureToBlob,
+  signatureToSvg,
 } from '@semantic-components/ui';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
-/** The value is data — drawn again here, read-only and smaller. Exported, the image is trimmed to the ink: PNG or SVG. */
+/** Exported from the value, trimmed to the ink: a PNG (transparent) or an SVG, downloaded. */
 @Component({
   selector: 'app-export-signature-pad-demo',
-  imports: [
-    ScFrame,
-    ScSignaturePad,
-    ScSignaturePadSurface,
-    ScSignaturePadLine,
-    ScSignaturePadClear,
-    ScButton,
-    SiDownloadIcon,
-  ],
+  imports: [ScButton, ScFrame, ScSignaturePad, SiDownloadIcon],
   template: `
-    <div class="w-full max-w-md space-y-4">
+    <div class="w-full max-w-md space-y-2">
       <div
         scSignaturePad
         #pad="scSignaturePad"
+        aria-label="Signature"
         [(value)]="signature"
-        class="space-y-2"
-      >
-        <div scSignaturePadSurface aria-label="Signature">
-          <div scSignaturePadLine>× Sign here</div>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <button
-            scButton
-            variant="outline"
-            size="sm"
-            [disabled]="pad.empty()"
-            (click)="download(pad.toBlob(), 'signature.png')"
-          >
-            <svg siDownloadIcon></svg>
-            PNG
-          </button>
-          <button
-            scButton
-            variant="outline"
-            size="sm"
-            [disabled]="pad.empty()"
-            (click)="downloadSvg(pad.toSvg())"
-          >
-            <svg siDownloadIcon></svg>
-            SVG
-          </button>
-          <button scSignaturePadClear size="sm" class="ms-auto">Clear</button>
-        </div>
+      ></div>
+      <div class="flex flex-wrap gap-2">
+        <button
+          scButton
+          variant="outline"
+          size="sm"
+          [disabled]="pad.empty()"
+          (click)="png()"
+        >
+          <svg siDownloadIcon></svg>
+          PNG
+        </button>
+        <button
+          scButton
+          variant="outline"
+          size="sm"
+          [disabled]="pad.empty()"
+          (click)="svg()"
+        >
+          <svg siDownloadIcon></svg>
+          SVG
+        </button>
+        <button
+          scButton
+          variant="outline"
+          size="sm"
+          class="ms-auto"
+          [disabled]="pad.empty()"
+          (click)="pad.clear()"
+        >
+          Clear
+        </button>
       </div>
-
-      <div class="grid grid-cols-2 gap-4 text-sm">
-        <div class="space-y-1">
-          <p class="text-muted-foreground">Read-only, drawn again</p>
-          <div scSignaturePad readonly [value]="signature()">
-            <div
-              scSignaturePadSurface
-              aria-label="Signature, read-only"
-              class="h-20"
-            ></div>
-          </div>
+      @if (preview(); as preview) {
+        <div scFrame size="sm" class="flex h-20 items-center bg-white p-1">
+          <img
+            [src]="preview"
+            alt="The signature, as exported"
+            class="max-h-full"
+          />
         </div>
-        <div class="space-y-1">
-          <p class="text-muted-foreground">Trimmed PNG</p>
-          <div
-            scFrame
-            size="sm"
-            class="flex h-20 items-center justify-center bg-white p-1"
-          >
-            @if (preview(); as preview) {
-              <img
-                [src]="preview"
-                alt="The signature, as exported"
-                class="max-h-full"
-              />
-            }
-          </div>
-        </div>
-      </div>
+      }
     </div>
   `,
   host: { class: 'flex w-full justify-center' },
@@ -102,48 +70,35 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 })
 export class ExportSignaturePadDemo {
   private readonly document = inject(DOCUMENT);
-  private readonly pad = viewChild.required<ScSignaturePad>('pad');
   private readonly signature = signal<ScSignature | null>(null);
   private readonly preview = signal<string | null>(null);
 
-  constructor() {
-    // The trimmed PNG, again for each change.
-    effect((onCleanup) => {
-      const signature = this.signature();
-      this.preview.set(null);
-      if (!signature) return;
-      let url: string | null = null;
-      let stale = false;
-      void untracked(() => this.pad().toBlob()).then((blob) => {
-        if (stale || !blob) return;
-        url = URL.createObjectURL(blob);
-        this.preview.set(url);
-      });
-      onCleanup(() => {
-        stale = true;
-        if (url) URL.revokeObjectURL(url);
-      });
+  private async png(): Promise<void> {
+    const signature = this.signature();
+    const blob = signature ? await signatureToBlob(signature) : null;
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const previous = this.preview();
+    if (previous) URL.revokeObjectURL(previous);
+    this.preview.set(url);
+    this.download(url, 'signature.png');
+  }
+
+  private svg(): void {
+    const signature = this.signature();
+    if (!signature) return;
+    const blob = new Blob([signatureToSvg(signature)], {
+      type: 'image/svg+xml',
     });
+    const url = URL.createObjectURL(blob);
+    this.download(url, 'signature.svg');
+    URL.revokeObjectURL(url);
   }
 
-  private async download(
-    blob: Promise<Blob | null>,
-    name: string,
-  ): Promise<void> {
-    const file = await blob;
-    if (file) this.save(file, name);
-  }
-
-  private downloadSvg(svg: string): void {
-    this.save(new Blob([svg], { type: 'image/svg+xml' }), 'signature.svg');
-  }
-
-  private save(file: Blob, name: string): void {
-    const url = URL.createObjectURL(file);
+  private download(url: string, name: string): void {
     const link = this.document.createElement('a');
     link.href = url;
     link.download = name;
     link.click();
-    URL.revokeObjectURL(url);
   }
 }

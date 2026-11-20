@@ -1,36 +1,16 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { PenSignaturePadNextDemo } from './pen-signature-pad-next-demo';
-
-@Component({
-  selector: 'app-pen-signature-pad-next-demo-container',
-  imports: [DemoContainer, PenSignaturePadNextDemo],
-  template: `
-    <app-demo-container
-      title="Pen"
-      [code]="code"
-      demoUrl="/demos/signature-pad-next/pen-signature-pad-next-demo"
-    >
-      <app-pen-signature-pad-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class PenSignaturePadNextDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
+import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScButton,
-  ScSignaturePadNext,
+  ScSignaturePad,
   ScToggleGroup,
   ScToggleGroupItem,
 } from '@semantic-components/ui';
 
-/** The pen from your own controls: \`penColor\` and \`penWidth\` bound to toggle groups. Each stroke keeps its own. */
+/** The pen from your own controls: `penColor` and `penWidth` bound to toggle groups. Each stroke keeps its own. */
 @Component({
-  selector: 'app-pen-signature-pad-next-demo',
-  imports: [ScButton, ScSignaturePadNext, ScToggleGroup, ScToggleGroupItem],
-  template: \`
+  selector: 'app-pen-signature-pad-demo',
+  imports: [ScButton, ScSignaturePad, ScToggleGroup, ScToggleGroupItem],
+  template: `
     <div class="w-full max-w-md space-y-2">
       <div class="flex flex-wrap items-center gap-2">
         <div
@@ -73,18 +53,18 @@ import {
         </button>
       </div>
       <div
-        scSignaturePadNext
-        #pad="scSignaturePadNext"
+        scSignaturePad
+        #pad="scSignaturePad"
         aria-label="Signature"
         [penColor]="penColor()"
         [penWidth]="penWidth()"
       ></div>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PenSignaturePadNextDemo {
+export class PenSignaturePadDemo {
   private readonly colors = [
     { name: 'Ink', value: 'currentColor', swatch: 'currentColor' },
     { name: 'Blue', value: '#1d4ed8', swatch: '#1d4ed8' },
@@ -96,5 +76,4 @@ export class PenSignaturePadNextDemo {
 
   private readonly penColor = computed(() => this.color()[0] ?? 'currentColor');
   private readonly penWidth = computed(() => Number(this.width()[0] ?? 3));
-}`;
 }

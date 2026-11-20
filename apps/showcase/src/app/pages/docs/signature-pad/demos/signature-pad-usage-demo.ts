@@ -1,17 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScSignaturePadNext } from '@semantic-components/ui';
+import { ScButton, ScSignaturePad } from '@semantic-components/ui';
 
 /** The pad, and your buttons calling it: Undo takes the last stroke back, Clear all. */
 @Component({
-  selector: 'app-signature-pad-next-usage-demo',
-  imports: [ScButton, ScSignaturePadNext],
+  selector: 'app-signature-pad-usage-demo',
+  imports: [ScButton, ScSignaturePad],
   template: `
     <div class="w-full max-w-md space-y-2">
-      <div
-        scSignaturePadNext
-        #pad="scSignaturePadNext"
-        aria-label="Signature"
-      ></div>
+      <div scSignaturePad #pad="scSignaturePad" aria-label="Signature"></div>
       <div class="flex justify-end gap-2">
         <button
           scButton
@@ -37,4 +33,4 @@ import { ScButton, ScSignaturePadNext } from '@semantic-components/ui';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SignaturePadNextUsageDemo {}
+export class SignaturePadUsageDemo {}

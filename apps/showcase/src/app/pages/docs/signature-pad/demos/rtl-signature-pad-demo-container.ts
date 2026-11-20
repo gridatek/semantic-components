@@ -1,34 +1,34 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RtlSignaturePadNextDemo } from './rtl-signature-pad-next-demo';
+import { RtlSignaturePadDemo } from './rtl-signature-pad-demo';
 
 @Component({
-  selector: 'app-rtl-signature-pad-next-demo-container',
-  imports: [DemoContainer, RtlSignaturePadNextDemo],
+  selector: 'app-rtl-signature-pad-demo-container',
+  imports: [DemoContainer, RtlSignaturePadDemo],
   template: `
     <app-demo-container
       title="RTL"
       [code]="code"
-      demoUrl="/demos/signature-pad-next/rtl-signature-pad-next-demo"
+      demoUrl="/demos/signature-pad/rtl-signature-pad-demo"
     >
-      <app-rtl-signature-pad-next-demo />
+      <app-rtl-signature-pad-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlSignaturePadNextDemoContainer {
+export class RtlSignaturePadDemoContainer {
   private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScSignaturePadNext } from '@semantic-components/ui';
+import { ScButton, ScSignaturePad } from '@semantic-components/ui';
 
 /** In a right-to-left page: the pad draws as anywhere (ink has no direction); your text and buttons follow the page. */
 @Component({
-  selector: 'app-rtl-signature-pad-next-demo',
-  imports: [Dir, ScButton, ScSignaturePadNext],
+  selector: 'app-rtl-signature-pad-demo',
+  imports: [Dir, ScButton, ScSignaturePad],
   template: \`
     <div dir="rtl" lang="ar" class="w-full max-w-md space-y-2">
-      <div scSignaturePadNext #pad="scSignaturePadNext" aria-label="التوقيع">
+      <div scSignaturePad #pad="scSignaturePad" aria-label="التوقيع">
         <span
           class="text-muted-foreground pointer-events-none absolute start-3 bottom-3 text-sm"
         >
@@ -61,5 +61,5 @@ import { ScButton, ScSignaturePadNext } from '@semantic-components/ui';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlSignaturePadNextDemo {}`;
+export class RtlSignaturePadDemo {}`;
 }

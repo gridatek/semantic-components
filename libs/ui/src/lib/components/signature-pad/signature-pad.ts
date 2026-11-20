@@ -1,6 +1,9 @@
-import { DOCUMENT } from '@angular/common';
 import {
-  Directive,
+  Component,
+  DestroyRef,
+  ElementRef,
+  ViewEncapsulation,
+  afterNextRender,
   booleanAttribute,
   computed,
   inject,
@@ -11,132 +14,239 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
+import { ɵwarnIfUnnamed } from '../../utils';
+import { SC_FIELD } from '../field/field';
 import {
   type ScSignature,
-  type ScSignatureStroke,
-  isTyped,
-  toBlob,
-  toSvg,
-} from './ink';
+  type ScSignaturePoint,
+  nextPoint,
+  strokePath,
+} from './signature';
 
 /**
- * A signature: drawn on `scSignaturePadSurface`, or typed in
- * `scSignaturePadText`. Its value is plain data — strokes, or a name —
- * to store and give back; a `[formField]`. Export it with `toSvg()` or
- * `toBlob()`, trimmed to the ink.
+ * A signature pad: where you sign — ink that follows the pen (its pressure;
+ * a mouse's or a finger's speed). Its value is the strokes, plain data to
+ * store and give back; a `[formField]`. Name it (`aria-label`). Focused,
+ * Ctrl + Z takes the last stroke back and Delete clears it. What you put
+ * inside shows under the ink ("Sign here", in your words).
  */
-@Directive({
-  selector: '[scSignaturePad]',
+@Component({
+  selector: 'div[scSignaturePad]',
   exportAs: 'scSignaturePad',
+  template: `
+    <ng-content />
+    <svg
+      class="pointer-events-none absolute inset-0 size-full"
+      [attr.viewBox]="viewBox()"
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden="true"
+    >
+      @for (path of paths(); track $index) {
+        <path [attr.d]="path.d" [attr.fill]="path.color" />
+      }
+      @if (live(); as live) {
+        <path [attr.d]="live.d" [attr.fill]="live.color" />
+      }
+    </svg>
+  `,
   host: {
-    'data-slot': 'signature-pad',
-    '[attr.data-disabled]': 'disabled() || null',
-    '[attr.data-empty]': 'empty() || null',
+    role: 'img',
+    '[attr.tabindex]': 'disabled() ? null : 0',
+    '[attr.aria-disabled]': 'disabled() || null',
+    '[attr.aria-invalid]': 'showInvalid() || null',
+    // In a field: its errors and description are read with it.
+    '[attr.aria-describedby]': 'describedBy()',
+    '[attr.data-empty]': 'empty() ? "" : null',
+    '[attr.data-drawing]': 'drawing().length ? "" : null',
     '[class]': 'class()',
+    '(pointerdown)': 'onPointerDown($event)',
+    '(pointermove)': 'onPointerMove($event)',
+    '(pointerup)': 'end()',
+    '(pointercancel)': 'end()',
+    '(keydown)': 'onKeydown($event)',
+    '(blur)': 'touch.emit()',
   },
+  encapsulation: ViewEncapsulation.None,
 })
 export class ScSignaturePad implements FormValueControl<ScSignature | null> {
-  private readonly document = inject(DOCUMENT);
+  private readonly textareaStyles = injectStyle().textarea;
+  private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
+  /** The strokes, or null before any: two-way, or a `[formField]`. */
   readonly value = model<ScSignature | null>(null);
   readonly disabled = input(false, { transform: booleanAttribute });
-  /** Shown, not changed. */
   readonly readonly = input(false, { transform: booleanAttribute });
   readonly invalid = input(false, { transform: booleanAttribute });
   readonly touched = input(false, { transform: booleanAttribute });
   readonly required = input(false, { transform: booleanAttribute });
-  /** Signed on, or left (Signal Forms marks it touched). */
   readonly touch = output<void>();
 
-  /** The pen: its colour (`currentColor` exports black) and width. */
-  readonly penColor = model('currentColor');
-  readonly penWidth = model(3);
+  /** The ink's colour: the text's by default (black when exported). */
+  readonly penColor = input('currentColor');
+  /** The pen's width, at an even pressure. */
+  readonly penWidth = input(3);
 
+  /** Nothing signed. */
   readonly empty = computed(() => this.value() === null);
-  /** Neither disabled nor read-only. */
-  readonly editable = computed(() => !this.disabled() && !this.readonly());
-  /** Invalid once touched. */
-  readonly showInvalid = computed(() => this.invalid() && this.touched());
+  /** A stroke to take back. */
+  readonly canUndo = computed(() => this.editable() && !this.empty());
 
-  private readonly past = signal<readonly (ScSignature | null)[]>([]);
-  private readonly future = signal<readonly (ScSignature | null)[]>([]);
-  readonly canUndo = computed(() => this.editable() && this.past().length > 0);
-  readonly canRedo = computed(
-    () => this.editable() && this.future().length > 0,
+  private readonly editable = computed(
+    () => !this.disabled() && !this.readonly(),
+  );
+  private readonly showInvalid = computed(
+    () => this.invalid() && this.touched(),
+  );
+  private readonly describedBy = computed(
+    () => this.field?.descriptionIds().join(' ') || null,
   );
 
-  private readonly class = computed(() => cn('block', this.classInput()));
+  /** The pad's size, as shown. */
+  private readonly size = signal({ width: 0, height: 0 });
+  /** The stroke being drawn. */
+  private readonly drawing = signal<readonly ScSignaturePoint[]>([]);
 
+  /** The strokes' space: the pad they were drawn on, fitted to this one. */
+  private readonly viewBox = computed(() => {
+    const space = this.value() ?? this.size();
+    return `0 0 ${space.width || 1} ${space.height || 1}`;
+  });
+
+  private readonly paths = computed(() =>
+    (this.value()?.strokes ?? []).map((stroke) => ({
+      d: strokePath(stroke),
+      color: stroke.color,
+    })),
+  );
+
+  private readonly live = computed(() => {
+    const points = this.drawing();
+    if (!points.length) return null;
+    return {
+      d: strokePath({ points, color: '', width: this.penWidth() }),
+      color: this.penColor(),
+    };
+  });
+
+  private readonly class = computed(() =>
+    cn(
+      // The style's textarea: a box you write in.
+      this.textareaStyles,
+      'text-foreground relative block h-40 touch-none overflow-hidden select-none',
+      'aria-disabled:cursor-not-allowed aria-disabled:opacity-50',
+      this.editable() && 'cursor-crosshair',
+      this.classInput(),
+    ),
+  );
+
+  constructor() {
+    ɵwarnIfUnnamed('scSignaturePad');
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const observer = new ResizeObserver(() =>
+        this.size.set({
+          width: this.element.clientWidth,
+          height: this.element.clientHeight,
+        }),
+      );
+      observer.observe(this.element);
+      destroyRef.onDestroy(() => observer.disconnect());
+    });
+  }
+
+  /** Takes the last stroke back. */
   undo(): void {
-    const past = this.past();
-    if (!this.canUndo()) return;
-    this.future.update((future) => [...future, this.value()]);
-    this.past.set(past.slice(0, -1));
-    this.value.set(past[past.length - 1] ?? null);
+    const value = this.value();
+    if (!value || !this.editable()) return;
+    const strokes = value.strokes.slice(0, -1);
+    this.value.set(strokes.length ? { ...value, strokes } : null);
   }
 
-  redo(): void {
-    const future = this.future();
-    if (!this.canRedo()) return;
-    this.past.update((past) => [...past, this.value()]);
-    this.future.set(future.slice(0, -1));
-    this.value.set(future[future.length - 1] ?? null);
-  }
-
+  /** Clears the signature. */
   clear(): void {
     if (!this.editable() || this.empty()) return;
-    this.commit(null);
+    this.value.set(null);
   }
 
-  /** The signature as an SVG document, trimmed to its ink. */
-  toSvg(padding?: number): string {
-    const value = this.value();
-    return value ? toSvg(value, this.canvas(), padding) : '';
+  private onPointerDown(event: PointerEvent): void {
+    if (!this.editable() || event.button !== 0) return;
+    event.preventDefault();
+    // Focused for its keys, without the keyboard's ring.
+    this.element.focus({ preventScroll: true, focusVisible: false });
+    this.element.setPointerCapture?.(event.pointerId);
+    this.drawing.set([]);
+    this.add(event);
   }
 
-  /** The signature as an image (PNG by default), trimmed to its ink. */
-  toBlob(
-    type?: string,
-    options?: { scale?: number; padding?: number },
-  ): Promise<Blob | null> {
-    const value = this.value();
-    return value
-      ? toBlob(value, this.canvas(), type, options)
-      : Promise.resolve(null);
+  private onPointerMove(event: PointerEvent): void {
+    if (!this.drawing().length) return;
+    // Every point the pointer passed, not only one a frame.
+    const events = event.getCoalescedEvents?.() ?? [];
+    for (const each of events.length ? events : [event]) this.add(each);
   }
 
-  /** A stroke drawn, on a surface of `width` × `height` (if the first). */
-  ɵaddStroke(stroke: ScSignatureStroke, width: number, height: number): void {
+  private end(): void {
+    const points = this.drawing();
+    if (!points.length) return;
+    this.drawing.set([]);
     const value = this.value();
-    const drawn = value && !isTyped(value) ? value : null;
-    this.commit({
-      width: drawn?.width ?? width,
-      height: drawn?.height ?? height,
-      strokes: [...(drawn?.strokes ?? []), stroke],
+    const space = this.space();
+    this.value.set({
+      width: space.width,
+      height: space.height,
+      strokes: [
+        ...(value?.strokes ?? []),
+        { points, color: this.penColor(), width: this.penWidth() },
+      ],
     });
     this.touch.emit();
   }
 
-  /** A name typed: one step of history, however many keys. */
-  ɵsetText(text: string, font: string): void {
-    const value = this.value();
-    const next = text.trim() ? { text, font } : null;
-    if (isTyped(value) && next) {
-      this.value.set(next);
+  private onKeydown(event: KeyboardEvent): void {
+    const key = event.key.toLowerCase();
+    if ((event.ctrlKey || event.metaKey) && key === 'z' && !event.shiftKey) {
+      this.undo();
+    } else if (key === 'delete' || key === 'backspace') {
+      this.clear();
     } else {
-      this.commit(next);
+      return;
     }
+    event.preventDefault();
   }
 
-  private canvas(): HTMLCanvasElement {
-    return this.document.createElement('canvas');
+  /** The point under the pointer, in the strokes' space. */
+  private add(event: PointerEvent): void {
+    const rect = this.element.getBoundingClientRect();
+    const space = this.space();
+    // The space is fitted in the pad, centred (as the SVG shows it).
+    const scale = Math.min(
+      rect.width / space.width,
+      rect.height / space.height,
+    );
+    const x =
+      (event.clientX - rect.left - (rect.width - space.width * scale) / 2) /
+      scale;
+    const y =
+      (event.clientY - rect.top - (rect.height - space.height * scale) / 2) /
+      scale;
+    // A pen's pressure; a mouse or a finger has none worth reading.
+    const pressure = event.pointerType === 'pen' ? event.pressure : null;
+    this.drawing.update((points) => [
+      ...points,
+      nextPoint(points[points.length - 1], x, y, pressure),
+    ]);
   }
 
-  private commit(next: ScSignature | null): void {
-    this.past.update((past) => [...past, this.value()]);
-    this.future.set([]);
-    this.value.set(next);
+  /** Where strokes are drawn: the signature's space, or this pad's. */
+  private space(): { width: number; height: number } {
+    const value = this.value();
+    if (value) return { width: value.width, height: value.height };
+    const rect = this.element.getBoundingClientRect();
+    return { width: rect.width || 1, height: rect.height || 1 };
   }
 }

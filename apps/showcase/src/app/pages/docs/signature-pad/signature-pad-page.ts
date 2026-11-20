@@ -1,82 +1,209 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScKbd, ScTypeset } from '@semantic-components/ui';
+import { Anatomy } from '../../../components/anatomy/anatomy';
+import {
+  type ApiInput,
+  ApiTable,
+} from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BasicSignaturePadDemoContainer } from './demos/basic-signature-pad-demo-container';
 import { ExportSignaturePadDemoContainer } from './demos/export-signature-pad-demo-container';
 import { FormSignaturePadDemoContainer } from './demos/form-signature-pad-demo-container';
-import { PensSignaturePadDemoContainer } from './demos/pens-signature-pad-demo-container';
+import { PenSignaturePadDemoContainer } from './demos/pen-signature-pad-demo-container';
+import { ReadonlySignaturePadDemoContainer } from './demos/readonly-signature-pad-demo-container';
+import { RtlSignaturePadDemoContainer } from './demos/rtl-signature-pad-demo-container';
+import { SignaturePadUsageDemoContainer } from './demos/signature-pad-usage-demo-container';
 import { TypeSignaturePadDemoContainer } from './demos/type-signature-pad-demo-container';
 
 @Component({
   selector: 'app-signature-pad-page',
   imports: [
     ScKbd,
-    BasicSignaturePadDemoContainer,
-    PensSignaturePadDemoContainer,
-    TypeSignaturePadDemoContainer,
-    FormSignaturePadDemoContainer,
-    ExportSignaturePadDemoContainer,
+    ScTypeset,
+    Anatomy,
+    ApiTable,
+    PartsTable,
     TocHeading,
     ComponentBadges,
-    ScTypeset,
+    SignaturePadUsageDemoContainer,
+    FormSignaturePadDemoContainer,
+    PenSignaturePadDemoContainer,
+    ExportSignaturePadDemoContainer,
+    ReadonlySignaturePadDemoContainer,
+    TypeSignaturePadDemoContainer,
+    RtlSignaturePadDemoContainer,
   ],
   template: `
     <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Signature Pad</h1>
         <p class="text-muted-foreground">
-          Ink that follows the pen, a signature drawn or typed, its value plain
-          data to store and draw again, and exports trimmed to the ink.
+          Sign with a pen, a mouse or a finger: one part, ink that follows the
+          pen, the strokes as a value to store and draw again — and exported,
+          trimmed to the ink.
         </p>
         <app-component-badges path="signature-pad" />
       </div>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Basic</h2>
-        <p>
-          Sign with a mouse, a finger or a pen: the ink follows its speed, or
-          the pen's pressure. Undo, redo, clear — or, focused,
-          <kbd scKbd>Ctrl + Z</kbd>, <kbd scKbd>Ctrl + Shift + Z</kbd> and
-          <kbd scKbd>Delete</kbd>.
-        </p>
-        <app-basic-signature-pad-demo-container />
+        <h2 scTypeset appToc>Usage</h2>
+        <app-signature-pad-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Pens</h2>
-        <p>The pen's colour and width — two-way, here picked with buttons.</p>
-        <app-pens-signature-pad-demo-container />
+        <h2 scTypeset appToc>Anatomy</h2>
+        <p>
+          One part: the pad. Your buttons call it (<code scTypeset>undo()</code
+          >, <code scTypeset>clear()</code>); your controls set its pen.
+          Anything inside it — a line, "Sign here" in your words — shows under
+          the ink.
+        </p>
+        <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Draw or type</h2>
+        <h2 scTypeset appToc>The value</h2>
         <p>
-          Without a pointer, type your name: the text is the signature, in the
-          input's font. One pad, two ways in.
+          <code scTypeset>{{ valueType }}</code>
+          — or <code scTypeset>null</code> before any stroke. Plain JSON: store
+          it, give it back, and the pad draws it again fitted to its size. Each
+          stroke keeps its colour and width; its points carry the pressure — a
+          pen&apos;s, or a mouse&apos;s and a finger&apos;s speed (faster,
+          thinner).
         </p>
-        <app-type-signature-pad-demo-container />
+        <p>
+          <code scTypeset>signatureToSvg(value)</code>
+          and
+          <code scTypeset>signatureToBlob(value)</code>
+          export it, trimmed to the ink: functions on the value, so a stored
+          signature exports without a pad.
+        </p>
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Form</h2>
-        <p>
-          A [formField]: required() in the schema; left unsigned, the field
-          shows its error.
-        </p>
+        <h2 scTypeset appToc>Accessibility</h2>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            The pad is an image of the signature: name it (aria-label or
+            aria-labelledby). In a field, its errors are read with it; once
+            touched and invalid, it is marked so.
+          </li>
+          <li>
+            Focused: <kbd scKbd>Ctrl + Z</kbd> takes the last stroke back,
+            <kbd scKbd>Delete</kbd> clears it.
+          </li>
+          <li>
+            Drawing needs a pointer. Offer a way to sign with a keyboard — a
+            typed name, as a second field (see Type instead).
+          </li>
+          <li>
+            The ink is the text&apos;s colour by default (<code scTypeset
+              >currentColor</code
+            >), so it reads in dark mode; exported, it is black.
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-8">
+        <h2 scTypeset appToc>Examples</h2>
         <app-form-signature-pad-demo-container />
+        <app-pen-signature-pad-demo-container />
+        <app-export-signature-pad-demo-container />
+        <app-readonly-signature-pad-demo-container />
+        <app-type-signature-pad-demo-container />
+        <app-rtl-signature-pad-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Export</h2>
+        <h2 scTypeset appToc>API reference</h2>
         <p>
-          The value is data — drawn again here, read-only and smaller. Exported,
-          the image is trimmed to the ink: PNG or SVG.
+          The pad takes
+          <code scTypeset>class</code>, merged over the style (cn: a later class
+          wins).
         </p>
-        <app-export-signature-pad-demo-container />
+        <app-parts-table label="Signature Pad parts" [parts]="parts" />
+        <app-api-table label="ScSignaturePad inputs" [inputs]="inputs" />
+        <app-api-table label="Export options" [inputs]="options" />
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class SignaturePadPage {}
+export default class SignaturePadPage {
+  private readonly valueType =
+    '{ width, height, strokes: [{ points: [x, y, pressure][], color, width }] }';
+
+  private readonly anatomy = {
+    imports:
+      "import { ScSignaturePad, signatureToBlob, signatureToSvg } from '@semantic-components/ui';",
+    markup: [
+      '<div scSignaturePad #pad="scSignaturePad" [formField]="…" aria-label="Signature"></div>',
+      '<button scButton (click)="pad.undo()" [disabled]="!pad.canUndo()">Undo</button>',
+      '<button scButton (click)="pad.clear()" [disabled]="pad.empty()">Clear</button>',
+    ].join('\n'),
+  };
+
+  private readonly parts = [
+    {
+      name: 'ScSignaturePad',
+      selector: 'div[scSignaturePad]',
+      description:
+        'Where you sign, in the style’s textarea look: an image you name, focusable; a Signal Forms control (value, disabled, readonly). Your content shows under the ink. exportAs scSignaturePad: empty(), canUndo(), undo(), clear().',
+    },
+  ];
+
+  private readonly inputs: ApiInput[] = [
+    {
+      name: 'value',
+      type: 'ScSignature | null',
+      default: 'null',
+      description: 'The strokes: two-way, or a [formField].',
+    },
+    {
+      name: 'penColor',
+      type: 'string',
+      default: "'currentColor'",
+      description: 'The next strokes’ colour.',
+    },
+    {
+      name: 'penWidth',
+      type: 'number',
+      default: '3',
+      description: 'The next strokes’ width, at an even pressure.',
+    },
+    {
+      name: 'disabled, readonly',
+      type: 'boolean',
+      default: 'false',
+      description: 'From the field, or set; no drawing.',
+    },
+  ];
+
+  private readonly options: ApiInput[] = [
+    {
+      name: 'padding',
+      type: 'number',
+      default: '8',
+      description: 'Space round the ink (both functions).',
+    },
+    {
+      name: 'type',
+      type: 'string',
+      default: "'image/png'",
+      description: 'signatureToBlob: PNG is transparent, others on white.',
+    },
+    {
+      name: 'quality',
+      type: 'number',
+      default: '—',
+      description: 'signatureToBlob: 0 to 1, for JPEG and WebP.',
+    },
+    {
+      name: 'scale',
+      type: 'number',
+      default: '2',
+      description: 'signatureToBlob: pixels per signature pixel.',
+    },
+  ];
+}

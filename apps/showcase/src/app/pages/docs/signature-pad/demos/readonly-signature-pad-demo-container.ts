@@ -1,34 +1,34 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ReadonlySignaturePadNextDemo } from './readonly-signature-pad-next-demo';
+import { ReadonlySignaturePadDemo } from './readonly-signature-pad-demo';
 
 @Component({
-  selector: 'app-readonly-signature-pad-next-demo-container',
-  imports: [DemoContainer, ReadonlySignaturePadNextDemo],
+  selector: 'app-readonly-signature-pad-demo-container',
+  imports: [DemoContainer, ReadonlySignaturePadDemo],
   template: `
     <app-demo-container
       title="Read-only"
       [code]="code"
-      demoUrl="/demos/signature-pad-next/readonly-signature-pad-next-demo"
+      demoUrl="/demos/signature-pad/readonly-signature-pad-demo"
     >
-      <app-readonly-signature-pad-next-demo />
+      <app-readonly-signature-pad-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ReadonlySignaturePadNextDemoContainer {
+export class ReadonlySignaturePadDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  type ScSignatureNext,
-  type ScSignatureNextPoint,
-  ScSignaturePadNext,
+  type ScSignature,
+  type ScSignaturePoint,
+  ScSignaturePad,
 } from '@semantic-components/ui';
 
 /** A saved signature given back: read-only, drawn again at the pad's size; disabled, faded too. */
 @Component({
-  selector: 'app-readonly-signature-pad-next-demo',
-  imports: [ScSignaturePadNext],
+  selector: 'app-readonly-signature-pad-demo',
+  imports: [ScSignaturePad],
   template: \`
     <div class="grid w-full max-w-md gap-4 sm:grid-cols-2">
       <div class="space-y-1">
@@ -36,7 +36,7 @@ import {
           Read-only
         </p>
         <div
-          scSignaturePadNext
+          scSignaturePad
           readonly
           aria-labelledby="saved-readonly"
           class="h-24"
@@ -48,7 +48,7 @@ import {
           Disabled
         </p>
         <div
-          scSignaturePadNext
+          scSignaturePad
           disabled
           aria-labelledby="saved-disabled"
           class="h-24"
@@ -60,9 +60,9 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ReadonlySignaturePadNextDemo {
+export class ReadonlySignaturePadDemo {
   /** As if read back from where it was stored: loops, as handwriting, and a stroke under them. */
-  private readonly saved: ScSignatureNext = {
+  private readonly saved: ScSignature = {
     width: 400,
     height: 160,
     strokes: [
@@ -70,7 +70,7 @@ export class ReadonlySignaturePadNextDemo {
         color: 'currentColor',
         width: 3,
         // Loops, as handwriting: a cycloid with a lift.
-        points: Array.from({ length: 140 }, (_, i): ScSignatureNextPoint => {
+        points: Array.from({ length: 140 }, (_, i): ScSignaturePoint => {
           const t = (i / 139) * Math.PI * 8;
           return [
             50 + t * 11 - Math.sin(t) * 16,
@@ -82,7 +82,7 @@ export class ReadonlySignaturePadNextDemo {
       {
         color: 'currentColor',
         width: 3,
-        points: Array.from({ length: 20 }, (_, i): ScSignatureNextPoint => [
+        points: Array.from({ length: 20 }, (_, i): ScSignaturePoint => [
           70 + i * 13,
           122 + Math.sin(i / 3) * 2,
           0.5,

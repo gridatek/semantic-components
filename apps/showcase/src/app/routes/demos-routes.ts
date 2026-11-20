@@ -5465,81 +5465,13 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/signature-pad-next',
-    children: [
-      {
-        path: 'signature-pad-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/signature-pad-next-usage-demo').then(
-            (m) => m.SignaturePadNextUsageDemo,
-          ),
-      },
-      {
-        path: 'form-signature-pad-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/form-signature-pad-next-demo').then(
-            (m) => m.FormSignaturePadNextDemo,
-          ),
-      },
-      {
-        path: 'pen-signature-pad-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/pen-signature-pad-next-demo').then(
-            (m) => m.PenSignaturePadNextDemo,
-          ),
-      },
-      {
-        path: 'export-signature-pad-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/export-signature-pad-next-demo').then(
-            (m) => m.ExportSignaturePadNextDemo,
-          ),
-      },
-      {
-        path: 'readonly-signature-pad-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/readonly-signature-pad-next-demo').then(
-            (m) => m.ReadonlySignaturePadNextDemo,
-          ),
-      },
-      {
-        path: 'type-signature-pad-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/type-signature-pad-next-demo').then(
-            (m) => m.TypeSignaturePadNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-signature-pad-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad-next/demos/rtl-signature-pad-next-demo').then(
-            (m) => m.RtlSignaturePadNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/signature-pad',
     children: [
       {
-        path: 'basic-signature-pad-demo',
+        path: 'signature-pad-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/signature-pad/demos/basic-signature-pad-demo').then(
-            (m) => m.BasicSignaturePadDemo,
-          ),
-      },
-      {
-        path: 'pens-signature-pad-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad/demos/pens-signature-pad-demo').then(
-            (m) => m.PensSignaturePadDemo,
-          ),
-      },
-      {
-        path: 'type-signature-pad-demo',
-        loadComponent: () =>
-          import('../pages/docs/signature-pad/demos/type-signature-pad-demo').then(
-            (m) => m.TypeSignaturePadDemo,
+          import('../pages/docs/signature-pad/demos/signature-pad-usage-demo').then(
+            (m) => m.SignaturePadUsageDemo,
           ),
       },
       {
@@ -5550,10 +5482,38 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'pen-signature-pad-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad/demos/pen-signature-pad-demo').then(
+            (m) => m.PenSignaturePadDemo,
+          ),
+      },
+      {
         path: 'export-signature-pad-demo',
         loadComponent: () =>
           import('../pages/docs/signature-pad/demos/export-signature-pad-demo').then(
             (m) => m.ExportSignaturePadDemo,
+          ),
+      },
+      {
+        path: 'readonly-signature-pad-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad/demos/readonly-signature-pad-demo').then(
+            (m) => m.ReadonlySignaturePadDemo,
+          ),
+      },
+      {
+        path: 'type-signature-pad-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad/demos/type-signature-pad-demo').then(
+            (m) => m.TypeSignaturePadDemo,
+          ),
+      },
+      {
+        path: 'rtl-signature-pad-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad/demos/rtl-signature-pad-demo').then(
+            (m) => m.RtlSignaturePadDemo,
           ),
       },
     ],

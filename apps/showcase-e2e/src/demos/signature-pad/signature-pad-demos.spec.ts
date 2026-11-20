@@ -1,119 +1,149 @@
-import { type Page, expect, test } from '../../test';
+import { type Locator, type Page, expect, test } from '../../test';
 
-const surface = (page: Page) =>
-  page.locator('[data-slot="signature-pad-surface"]').first();
-const strokes = (page: Page) => surface(page).locator('path');
+const pad = (page: Page, name = 'Signature') =>
+  page.getByRole('img', { name, exact: true });
+const ink = (target: Locator) => target.locator('svg path');
 
-/** A stroke across the surface, from `from` to `to` (fractions of it). */
-async function draw(page: Page, from = 0.2, to = 0.7) {
-  const box = await surface(page).boundingBox();
-  if (!box) throw new Error('no surface');
-  const y = box.y + box.height / 2;
-  await page.mouse.move(box.x + box.width * from, y);
+/** A wave across the pad, with the mouse. */
+async function sign(page: Page, target: Locator, dy = 0): Promise<void> {
+  const box = await target.boundingBox();
+  if (!box) throw new Error('no pad');
+  const y = box.y + box.height / 2 + dy;
+  await page.mouse.move(box.x + 30, y);
   await page.mouse.down();
-  for (let i = 1; i <= 12; i++) {
-    await page.mouse.move(
-      box.x + box.width * (from + ((to - from) * i) / 12),
-      y + (i % 2 ? -12 : 12),
-    );
+  for (let i = 1; i <= 20; i++) {
+    await page.mouse.move(box.x + 30 + i * 12, y - Math.sin(i / 2) * 20);
   }
   await page.mouse.up();
 }
 
-test.describe('Basic', () => {
+test.describe('Usage', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/demos/signature-pad/basic-signature-pad-demo');
+    await page.goto('/demos/signature-pad/signature-pad-usage-demo');
+    await expect(pad(page)).toBeVisible();
   });
 
-  test('draws, undoes, redoes and clears', async ({ page }) => {
+  test('a named image, empty; a stroke draws ink, Undo takes it back', async ({
+    page,
+  }) => {
     const undo = page.getByRole('button', { name: 'Undo' });
-    const redo = page.getByRole('button', { name: 'Redo' });
-    const clear = page.getByRole('button', { name: 'Clear' });
+    await expect(pad(page)).toHaveAttribute('data-empty', '');
     await expect(undo).toBeDisabled();
-    await expect(clear).toBeDisabled();
-
-    await draw(page);
-    await draw(page, 0.3, 0.9);
-    await expect(strokes(page)).toHaveCount(2);
+    await sign(page, pad(page));
+    await expect(ink(pad(page))).toHaveCount(1);
+    await expect(pad(page)).not.toHaveAttribute('data-empty', /.*/);
     await undo.click();
-    await expect(strokes(page)).toHaveCount(1);
-    await redo.click();
-    await expect(strokes(page)).toHaveCount(2);
-    await clear.click();
-    await expect(strokes(page)).toHaveCount(0);
-    // Clearing is undoable too.
-    await undo.click();
-    await expect(strokes(page)).toHaveCount(2);
+    await expect(ink(pad(page))).toHaveCount(0);
+    await expect(undo).toBeDisabled();
   });
 
-  test('the keys, focused', async ({ page }) => {
-    await draw(page);
-    await expect(surface(page)).toBeFocused();
+  test('a tap is a dot; Clear takes all', async ({ page }) => {
+    await pad(page).click();
+    await expect(ink(pad(page))).toHaveCount(1);
+    await sign(page, pad(page), 20);
+    await expect(ink(pad(page))).toHaveCount(2);
+    await page.getByRole('button', { name: 'Clear' }).click();
+    await expect(ink(pad(page))).toHaveCount(0);
+  });
+
+  test('focused: Ctrl + Z takes the last stroke back, Delete clears', async ({
+    page,
+  }) => {
+    await sign(page, pad(page), -20);
+    await sign(page, pad(page), 20);
+    await expect(ink(pad(page))).toHaveCount(2);
+    await expect(pad(page)).toBeFocused();
     await page.keyboard.press('Control+z');
-    await expect(strokes(page)).toHaveCount(0);
-    await page.keyboard.press('Control+Shift+z');
-    await expect(strokes(page)).toHaveCount(1);
+    await expect(ink(pad(page))).toHaveCount(1);
     await page.keyboard.press('Delete');
-    await expect(strokes(page)).toHaveCount(0);
+    await expect(ink(pad(page))).toHaveCount(0);
   });
 });
 
-test('Pens: the colour and width chosen', async ({ page }) => {
-  await page.goto('/demos/signature-pad/pens-signature-pad-demo');
-  const blue = page.getByRole('button', { name: 'Blue' });
-  await blue.click();
-  await expect(blue).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.getByRole('button', { name: 'Ink' })).toHaveAttribute(
-    'aria-pressed',
-    'false',
-  );
-  await draw(page);
-  await expect(strokes(page)).toHaveAttribute('fill', '#1d4ed8');
-});
-
-test('Draw or type: a typed name signs', async ({ page }) => {
-  await page.goto('/demos/signature-pad/type-signature-pad-demo');
-  await expect(page.getByText('Not signed')).toBeVisible();
-  await page.getByRole('tab', { name: 'Type' }).click();
-  await page.getByLabel('Type your name').fill('Ada Lovelace');
-  await expect(page.getByText('Signed', { exact: true })).toBeVisible();
-  // Shown on the surface too.
-  await page.getByRole('tab', { name: 'Draw' }).click();
-  await expect(surface(page).locator('text')).toHaveText('Ada Lovelace');
-});
-
-test('Form: required, then signed', async ({ page }) => {
+test('Form: required — the error, then signed and shown back', async ({
+  page,
+}) => {
   await page.goto('/demos/signature-pad/form-signature-pad-demo');
+  await expect(pad(page)).toBeVisible();
   await page.getByRole('button', { name: 'Sign', exact: true }).click();
   await expect(page.getByText('Sign above.')).toBeVisible();
-  await expect(surface(page)).toHaveAttribute('data-invalid', 'true');
-  await page.getByLabel('Full name').fill('Ada Lovelace');
-  await draw(page);
-  await expect(page.getByText('Sign above.')).toBeHidden();
+  await expect(pad(page)).toHaveAttribute('aria-invalid', 'true');
+
+  await page.getByRole('textbox', { name: 'Full name' }).fill('Ada');
+  await sign(page, pad(page));
+  await expect(pad(page)).not.toHaveAttribute('aria-invalid', /.*/);
   await page.getByRole('button', { name: 'Sign', exact: true }).click();
-  await expect(page.getByRole('status')).toHaveText('Signed by Ada Lovelace.');
+  const status = page.getByRole('status');
+  await expect(status).toContainText('Signed by Ada');
+  await expect(
+    status.getByRole('img', { name: 'The signature' }),
+  ).toBeVisible();
 });
 
-test('Export: drawn again, and exported trimmed', async ({ page }) => {
+test('Pen: the strokes take the colour and width chosen', async ({ page }) => {
+  await page.goto('/demos/signature-pad/pen-signature-pad-demo');
+  await expect(pad(page)).toBeVisible();
+  await page.getByRole('button', { name: 'Blue' }).click();
+  await sign(page, pad(page));
+  await expect(ink(pad(page))).toHaveAttribute('fill', '#1d4ed8');
+});
+
+test('Export: a trimmed PNG and an SVG, downloaded', async ({ page }) => {
   await page.goto('/demos/signature-pad/export-signature-pad-demo');
-  await draw(page);
-  // The read-only copy draws the same value.
-  await expect(
-    page.getByRole('img', { name: 'Signature, read-only' }).locator('path'),
-  ).toHaveCount(1);
-  await expect(
-    page.getByRole('img', { name: 'The signature, as exported' }),
-  ).toBeVisible();
+  await expect(pad(page)).toBeVisible();
+  await sign(page, pad(page));
 
   const png = page.waitForEvent('download');
   await page.getByRole('button', { name: 'PNG' }).click();
   expect((await png).suggestedFilename()).toBe('signature.png');
+  const preview = page.getByRole('img', { name: 'The signature, as exported' });
+  await expect
+    .poll(() => preview.evaluate((img: HTMLImageElement) => img.naturalWidth))
+    .toBeGreaterThan(0);
 
   const svg = page.waitForEvent('download');
   await page.getByRole('button', { name: 'SVG' }).click();
-  const file = await svg;
-  const text = await (await file.createReadStream()).toArray();
-  expect(Buffer.concat(text).toString()).toMatch(
-    /^<svg[^>]+viewBox="[^"]+"><path d="M /,
+  expect((await svg).suggestedFilename()).toBe('signature.svg');
+});
+
+test('Read-only and disabled: a saved one drawn again, nothing added', async ({
+  page,
+}) => {
+  await page.goto('/demos/signature-pad/readonly-signature-pad-demo');
+  const readonly = pad(page, 'Read-only');
+  const disabled = pad(page, 'Disabled');
+  await expect(ink(readonly)).toHaveCount(2);
+  await expect(ink(disabled)).toHaveCount(2);
+  await sign(page, readonly);
+  await expect(ink(readonly)).toHaveCount(2);
+  await expect(disabled).toHaveAttribute('aria-disabled', 'true');
+  await expect(disabled).not.toHaveAttribute('tabindex', /.*/);
+});
+
+test('Type instead: one or the other, the typed name signs', async ({
+  page,
+}) => {
+  await page.goto('/demos/signature-pad/type-signature-pad-demo');
+  await expect(pad(page, 'Draw your signature')).toBeVisible();
+  await page.getByRole('button', { name: 'Sign', exact: true }).click();
+  await expect(
+    page.getByText('Sign above, or type your name below.'),
+  ).toBeVisible();
+  await page
+    .getByRole('textbox', { name: 'Or type your full name' })
+    .fill('Ada Lovelace');
+  await page.getByRole('button', { name: 'Sign', exact: true }).click();
+  await expect(page.getByRole('status')).toHaveText(
+    'Signed as “Ada Lovelace”.',
   );
+});
+
+test('RTL: named in Arabic, the ink as anywhere', async ({ page }) => {
+  await page.goto('/demos/signature-pad/rtl-signature-pad-demo');
+  const arabic = pad(page, 'التوقيع');
+  await expect(arabic).toBeVisible();
+  await sign(page, arabic);
+  await expect(ink(arabic)).toHaveCount(1);
+  await page.getByRole('button', { name: 'تراجع' }).click();
+  await expect(ink(arabic)).toHaveCount(0);
 });

@@ -99,7 +99,6 @@ export * from './notification-center';
 export * from './org-chart';
 export * from './scheduler';
 export * from './signature-pad';
-export * from './signature-pad-next';
 export * from './speed-dial';
 export * from './sortable-list';
 export * from './spotlight';

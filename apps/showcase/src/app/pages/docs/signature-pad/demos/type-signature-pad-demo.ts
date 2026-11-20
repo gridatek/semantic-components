@@ -1,70 +1,89 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, FormRoot, form, required } from '@angular/forms/signals';
 import {
+  ScButton,
+  ScField,
+  ScFieldDescription,
+  ScFieldErrors,
+  ScInput,
   ScLabel,
+  type ScSignature,
   ScSignaturePad,
-  ScSignaturePadClear,
-  ScSignaturePadLine,
-  ScSignaturePadSurface,
-  ScSignaturePadText,
-  ScTabs,
-  ScTabsList,
-  ScTabsPanel,
-  ScTabsPanelContent,
-  ScTabsTab,
 } from '@semantic-components/ui';
 
-/** Without a pointer, type your name: the text is the signature, in the input's font. One pad, two ways in. */
+/**
+ * Drawing needs a pointer: the way to sign with a keyboard is yours, a
+ * second field. The schema asks for one or the other.
+ */
 @Component({
   selector: 'app-type-signature-pad-demo',
   imports: [
     ScSignaturePad,
-    ScSignaturePadSurface,
-    ScSignaturePadLine,
-    ScSignaturePadText,
-    ScSignaturePadClear,
-    ScTabs,
-    ScTabsList,
-    ScTabsTab,
-    ScTabsPanel,
-    ScTabsPanelContent,
+    ScField,
     ScLabel,
+    ScInput,
+    ScFieldDescription,
+    ScFieldErrors,
+    ScButton,
+    FormField,
+    FormRoot,
   ],
   template: `
-    <div scSignaturePad #pad="scSignaturePad" class="w-full max-w-md">
-      <div scTabs value="draw">
-        <div scTabsList class="grid w-full grid-cols-2">
-          <button scTabsTab value="draw">Draw</button>
-          <button scTabsTab value="type">Type</button>
-        </div>
-        <div scTabsPanel value="draw">
-          <ng-template scTabsPanelContent>
-            <div scSignaturePadSurface aria-label="Signature">
-              <div scSignaturePadLine>× Sign here</div>
-            </div>
-          </ng-template>
-        </div>
-        <div scTabsPanel value="type">
-          <ng-template scTabsPanelContent>
-            <label scLabel for="signature-name" class="mb-2">
-              Type your name
-            </label>
-            <input
-              id="signature-name"
-              scSignaturePadText
-              style="font-family: 'Segoe Script', 'Snell Roundhand', 'Brush Script MT', cursive"
-            />
-          </ng-template>
-        </div>
+    <form [formRoot]="signForm" class="w-full max-w-md space-y-4">
+      <div scField>
+        <p id="drawn-label" class="text-sm font-medium">Draw your signature</p>
+        <div
+          scSignaturePad
+          [formField]="signForm.drawn"
+          aria-labelledby="drawn-label"
+        ></div>
+        <p scFieldErrors></p>
       </div>
-      <div class="mt-2 flex items-center justify-between text-sm">
-        <span class="text-muted-foreground" aria-live="polite">{{
-          pad.empty() ? 'Not signed' : 'Signed'
-        }}</span>
-        <button scSignaturePadClear size="sm">Clear</button>
+      <div scField>
+        <label scLabel for="typed-signature">Or type your full name</label>
+        <input
+          id="typed-signature"
+          scInput
+          class="font-serif italic"
+          [formField]="signForm.typed"
+        />
+        <p scFieldDescription>Typing your name signs as drawing does.</p>
       </div>
-    </div>
+      <button scButton type="submit">Sign</button>
+      @if (sent()) {
+        <p role="status" class="text-muted-foreground text-sm">
+          Signed {{ sent() }}.
+        </p>
+      }
+    </form>
   `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class TypeSignaturePadDemo {}
+export class TypeSignaturePadDemo {
+  private readonly model = signal<{
+    drawn: ScSignature | null;
+    typed: string;
+  }>({ drawn: null, typed: '' });
+
+  private readonly sent = signal('');
+
+  private readonly signForm = form(
+    this.model,
+    (path) => {
+      // One or the other: drawn, unless a name is typed.
+      required(path.drawn, {
+        when: ({ valueOf }) => !valueOf(path.typed).trim(),
+        message: 'Sign above, or type your name below.',
+      });
+    },
+    {
+      submission: {
+        action: async () =>
+          this.sent.set(
+            this.model().drawn ? 'by hand' : `as “${this.model().typed}”`,
+          ),
+      },
+    },
+  );
+}

@@ -1,61 +1,50 @@
 # Signature Pad
 
-Ink that follows the pen, a signature drawn or typed, its value plain data to store and draw again, and exports trimmed to the ink.
-
-## Architecture
-
-```
-scSignaturePad (value — two-way, a [formField]; penColor, penWidth — two-way; disabled, readonly)
-├── div[scSignaturePadSurface] — where you sign: SVG ink; name it
-│   └── [scSignaturePadLine]    — your "Sign here" line and text
-├── input[scSignaturePadText]   — the way without a pointer: a typed name is the signature
-└── buttons: Undo, Redo, Clear; [scSignaturePadColor], [scSignaturePadWidth] (pressed while chosen)
-```
+Sign with a pen, a mouse or a finger. One part, as signature_pad: the pad. Your buttons call it, your controls set its pen.
 
 ## Usage
 
 ```html
-<div scSignaturePad #pad="scSignaturePad" [formField]="form.signature">
-  <div scSignaturePadSurface aria-label="Signature">
-    <div scSignaturePadLine>× Sign here</div>
-  </div>
-  <button scSignaturePadUndo><svg siUndo2Icon></svg><span class="sr-only">Undo</span></button>
-  <button scSignaturePadRedo><svg siRedo2Icon></svg><span class="sr-only">Redo</span></button>
-  <button scSignaturePadClear size="sm">Clear</button>
-</div>
+<div scSignaturePad #pad="scSignaturePad" [formField]="form.signature" aria-label="Signature"></div>
+
+<button scButton variant="outline" (click)="pad.undo()" [disabled]="!pad.canUndo()">Undo</button>
+<button scButton variant="outline" (click)="pad.clear()" [disabled]="pad.empty()">Clear</button>
 ```
 
-## Value
+Anything inside the pad (a line, "Sign here" in your words) shows under the ink.
 
-`ScSignature | null` — plain JSON, to store and give back (the pad draws it again):
+## The pad
 
-- drawn: `{ width, height, strokes: [{ points: [x, y, pressure][], color, width }] }` — `width` × `height` is the surface it was drawn on; given back, it fits any surface.
-- typed: `{ text, font }` — the input's `font-family`.
+`div[scSignaturePad]`, in the style's textarea look (`h-40` by default; yours by class).
 
-A `[formField]`: put `required()` in the schema; `disabled`, `readonly`, `invalid` and `touched` come from it. In a `scField`, its errors describe the surface.
+| Input                  | Type                  | Default          |                                    |
+| ---------------------- | --------------------- | ---------------- | ---------------------------------- |
+| `value`                | `ScSignature \| null` | `null`           | Two-way, or a `[formField]`        |
+| `penColor`             | `string`              | `'currentColor'` | The next strokes' colour           |
+| `penWidth`             | `number`              | `3`              | Their width, at an even pressure   |
+| `disabled`, `readonly` | `boolean`             | `false`          | From the field, or set: no drawing |
 
-## Ink
+Through `#pad="scSignaturePad"`: `empty()`, `canUndo()`, `undo()` (the last stroke), `clear()`.
 
-Each stroke is a filled outline, wide as the pen is pressed — a pen's pressure, or, for a mouse or a finger, its speed (faster, thinner) — and smoothed. A tap is a dot. `penColor` (`currentColor` by default — the text's colour; black when exported) and `penWidth` (3) are two-way.
+## The value
+
+`{ width, height, strokes: [{ points: [x, y, pressure][], color, width }] }`, or `null` before any stroke. Plain JSON: store it, give it back, and the pad draws it again fitted to its size. The pressure is a pen's, or a mouse's and a finger's speed (faster, thinner). A tap is a dot.
 
 ## Export
 
-- `toSvg(padding?)` — an SVG document, trimmed to the ink.
-- `toBlob(type?, { scale, padding }?)` — an image, PNG by default (transparent; others on white), trimmed, at `scale` (2).
+Functions on the value, so a stored signature exports without a pad, trimmed to its ink:
 
-A typed signature is exported in its font.
+- `signatureToSvg(value, { padding })`: an SVG document (`''` without ink).
+- `signatureToBlob(value, { type, quality, scale, padding })`: an image, PNG by default (transparent; others on white), at `scale` 2. In the browser only.
 
-## Keyboard
-
-The surface, focused: Ctrl+Z undo, Ctrl+Shift+Z or Ctrl+Y redo, Delete or Backspace clear. Drawing needs a pointer: `scSignaturePadText` is the way to sign with a keyboard — offer it.
+`currentColor` ink is exported black.
 
 ## Accessibility
 
-- Name the surface (`aria-label`, or `aria-labelledby`); it is an image of the signature.
-- Offer the typed way (`scSignaturePadText`), labelled.
-- Say when it is signed if it matters (a polite live region from `pad.empty()`).
-- Colours and widths are `aria-pressed`; name them ("Blue", "Thick").
+- The pad is an image of the signature: name it (`aria-label`, `aria-labelledby`). In a `scField`, its errors and description are read with it; once touched and invalid, it is `aria-invalid`.
+- Focused: Ctrl + Z takes the last stroke back, Delete or Backspace clears it.
+- Drawing needs a pointer: offer a way to sign with a keyboard, such as a typed name as a second field, with the schema asking for one or the other (the "Type instead" demo).
 
 ## Not here
 
-An eraser, zoom, a background image, an uploaded image as the signature; legal e-signatures (a signature here is a picture, with no proof of who drew it).
+Redo, an eraser, a background image, a typed signature in the value (a separate field of yours); legal e-signatures (a signature here is a picture, with no proof of who drew it).

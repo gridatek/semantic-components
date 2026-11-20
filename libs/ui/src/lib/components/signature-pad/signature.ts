@@ -1,13 +1,13 @@
 /** A point of a stroke: where, and how hard (0–1). */
-export type ScSignatureNextPoint = readonly [
+export type ScSignaturePoint = readonly [
   x: number,
   y: number,
   pressure: number,
 ];
 
 /** A stroke: its points, its colour and the pen's width. */
-export interface ScSignatureNextStroke {
-  readonly points: readonly ScSignatureNextPoint[];
+export interface ScSignatureStroke {
+  readonly points: readonly ScSignaturePoint[];
   readonly color: string;
   /** The pen's width, at an even pressure. */
   readonly width: number;
@@ -17,20 +17,20 @@ export interface ScSignatureNextStroke {
  * A signature: its strokes, on a pad of `width` × `height` — plain data, to
  * store and give back (a pad draws it again, fitted to its size).
  */
-export interface ScSignatureNext {
+export interface ScSignature {
   readonly width: number;
   readonly height: number;
-  readonly strokes: readonly ScSignatureNextStroke[];
+  readonly strokes: readonly ScSignatureStroke[];
 }
 
 /** What `signatureToSvg` and `signatureToBlob` take. */
-export interface ScSignatureNextExportOptions {
+export interface ScSignatureExportOptions {
   /** Space round the ink, in the signature's pixels (8). */
   readonly padding?: number;
 }
 
 /** What `signatureToBlob` takes. */
-export interface ScSignatureNextBlobOptions extends ScSignatureNextExportOptions {
+export interface ScSignatureBlobOptions extends ScSignatureExportOptions {
   /** `image/png` (the default, transparent); others on white. */
   readonly type?: string;
   /** For JPEG and WebP: 0 to 1. */
@@ -51,11 +51,11 @@ const inkColor = (color: string) =>
  * pressed lighter the faster it moves.
  */
 export function nextPoint(
-  last: ScSignatureNextPoint | undefined,
+  last: ScSignaturePoint | undefined,
   x: number,
   y: number,
   pressure: number | null,
-): ScSignatureNextPoint {
+): ScSignaturePoint {
   if (!last) return [x, y, pressure ?? 0.5];
   const sx = last[0] + (x - last[0]) * (1 - STREAMLINE);
   const sy = last[1] + (y - last[1]) * (1 - STREAMLINE);
@@ -66,9 +66,9 @@ export function nextPoint(
 }
 
 /** A stroke's outline: a closed shape round its points, wide as pressed; a dot for a tap. */
-function outline(stroke: ScSignatureNextStroke): [number, number][] {
+function outline(stroke: ScSignatureStroke): [number, number][] {
   const points = stroke.points;
-  const radius = (p: ScSignatureNextPoint) =>
+  const radius = (p: ScSignaturePoint) =>
     (stroke.width / 2) * (0.35 + 1.3 * p[2]);
   if (points.length === 1) {
     const [x, y] = points[0];
@@ -100,7 +100,7 @@ function outline(stroke: ScSignatureNextStroke): [number, number][] {
 
 /** Half a circle round a stroke's end, from one side to the other. */
 function cap(
-  center: ScSignatureNextPoint,
+  center: ScSignaturePoint,
   from: [number, number],
   r: number,
 ): [number, number][] {
@@ -123,7 +123,7 @@ function arc(
 }
 
 /** A stroke as an SVG path: its outline, its corners rounded. */
-export function strokePath(stroke: ScSignatureNextStroke): string {
+export function strokePath(stroke: ScSignatureStroke): string {
   const shape = outline(stroke);
   if (!shape.length) return '';
   const round = (n: number) => Math.round(n * 100) / 100;
@@ -148,7 +148,7 @@ export function strokePath(stroke: ScSignatureNextStroke): string {
 
 /** The ink's bounds, `padding` round them; none without ink. */
 function bounds(
-  signature: ScSignatureNext,
+  signature: ScSignature,
   padding: number,
 ): { x: number; y: number; width: number; height: number } | null {
   const points = signature.strokes.flatMap(outline);
@@ -170,8 +170,8 @@ const escape = (text: string) =>
 
 /** The signature as an SVG document, trimmed to its ink ('' without ink). */
 export function signatureToSvg(
-  signature: ScSignatureNext,
-  { padding = 8 }: ScSignatureNextExportOptions = {},
+  signature: ScSignature,
+  { padding = 8 }: ScSignatureExportOptions = {},
 ): string {
   const box = bounds(signature, padding);
   if (!box) return '';
@@ -186,13 +186,13 @@ export function signatureToSvg(
 
 /** The signature as an image (PNG by default), trimmed to its ink. In the browser only. */
 export async function signatureToBlob(
-  signature: ScSignatureNext,
+  signature: ScSignature,
   {
     type = 'image/png',
     quality,
     scale = 2,
     padding = 8,
-  }: ScSignatureNextBlobOptions = {},
+  }: ScSignatureBlobOptions = {},
 ): Promise<Blob | null> {
   const box = bounds(signature, padding);
   if (!box) return null;
