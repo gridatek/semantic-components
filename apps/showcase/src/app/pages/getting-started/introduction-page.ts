@@ -128,7 +128,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           </li>
           <li>
             <strong>The icons.</strong> A part holds your
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">svg</code>
+            <code scTypeset>svg</code>
             and sizes it; swap Lucide for any set.
           </li>
           <li>

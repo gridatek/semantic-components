@@ -22,15 +22,12 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <section class="space-y-4">
         <h2 scTypeset appToc>Signal Forms only</h2>
         <p>
-          The library is built for Angular&apos;s Signal Forms (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+          The library is built for Angular&apos;s Signal Forms (<code scTypeset
             >&#64;angular/forms/signals</code
           >): no ngModel, no reactive forms. A control — an input, a select, a
           checkbox, a combobox, a date picker, the Number Group, the OTP Input…
           — takes its value, its state and its errors from the field you bind:
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >[formField]="profileForm.email"</code
-          >.
+          <code scTypeset>[formField]="profileForm.email"</code>.
         </p>
         <app-doc-code [code]="modelCode" language="angular-ts" />
       </section>
@@ -38,7 +35,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <section class="space-y-4">
         <h2 scTypeset appToc>A field</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scField</code>
+          <code scTypeset>scField</code>
           holds one control with its text: the label names it, a description and
           the errors are read with it (aria-describedby), and once it is touched
           and invalid, the field and its control say so (data-invalid,
@@ -48,7 +45,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p>
           The control is anything that takes [formField]: give it the
           field&apos;s
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scLabel</code>
+          <code scTypeset>scLabel</code>
           and nothing else. See
           <a scLink routerLink="/docs/components/field">Field</a> for rows,
           groups, choice cards and fieldsets.
@@ -62,16 +59,16 @@ import { TocHeading } from '../../components/toc/toc-heading';
           state are the schema&apos;s, not attributes on the control: the form
           knows them, checks them and hands them to the control (an input gets
           its
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">required</code>,
-          a Number Group its bounds). Give each validator a message: it is what
-          the errors show, in your words — and your translations.
+          <code scTypeset>required</code>, a Number Group its bounds). Give each
+          validator a message: it is what the errors show, in your words — and
+          your translations.
         </p>
         <app-doc-code [code]="schemaCode" />
         <p>
           The bounds of a slider, a number or a range are these rules too: with
           a form, the control takes them from the schema (Angular refuses
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[min]</code> or
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[max]</code>
+          <code scTypeset>[min]</code> or
+          <code scTypeset>[max]</code>
           beside [formField]). A range — a pair of values — gets them on each
           value:
         </p>
@@ -87,9 +84,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <h2 scTypeset appToc>Submitting</h2>
         <p>
           Bind the form to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&lt;form [formRoot]&gt;</code
-          >
+          <code scTypeset>&lt;form [formRoot]&gt;</code>
           and give it a submission action: on submit, every field is marked
           touched, the first invalid control takes the focus, and your action
           runs only once the form is valid.

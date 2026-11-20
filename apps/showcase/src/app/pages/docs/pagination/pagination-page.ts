@@ -61,17 +61,15 @@ interface ScApiRow {
         <p>
           A navigation round a list; every part is a directive on your element,
           the icons and the text are yours. Name the navigation with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">aria-label</code>
+          <code scTypeset>aria-label</code>
           and an icon-only button with an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">sr-only</code>
+          <code scTypeset>sr-only</code>
           span. The pages come from
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">pages()</code>
+          <code scTypeset>pages()</code>
           (the first and the last, the current one with a page either side,
           ellipses between; as many items wherever the current page is); the
           current one is marked
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >aria-current="page"</code
-          >.
+          <code scTypeset>aria-current="page"</code>.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -82,17 +80,13 @@ interface ScApiRow {
           Use buttons when the page changes in place, links when each page has
           its own URL: the href is yours (?page=2, a routerLink) and the link
           follows it; read the page from the URL into
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">currentPage</code
-          >. A disabled link goes nowhere on a click, but keeps its href: leave
-          it off for a link that should not open in a new tab either. Previous
-          and First turn disabled on the first page, Next and Last on the last:
-          they leave the tab order and say
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >aria-disabled</code
-          >. For rows per page, put a Select beside it and call
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >changePageSize()</code
-          >; to say which page is shown, a Status.
+          <code scTypeset>currentPage</code>. A disabled link goes nowhere on a
+          click, but keeps its href: leave it off for a link that should not
+          open in a new tab either. Previous and First turn disabled on the
+          first page, Next and Last on the last: they leave the tab order and
+          say <code scTypeset>aria-disabled</code>. For rows per page, put a
+          Select beside it and call <code scTypeset>changePageSize()</code>; to
+          say which page is shown, a Status.
         </p>
       </section>
 
@@ -113,9 +107,7 @@ interface ScApiRow {
         @for (part of parts; track part.name) {
           <h3 class="font-heading text-base font-medium">
             {{ part.name }} —
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
-              part.selector
-            }}</code>
+            <code scTypeset>{{ part.selector }}</code>
           </h3>
           <p>{{ part.description }}</p>
           @if (part.inputs.length) {

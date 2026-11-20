@@ -101,9 +101,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
         <h2 scTypeset appToc>Installation</h2>
         <p>
           It has its own entry point,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/ui/editor</code
-          >, built on
+          <code scTypeset>&#64;semantic-components/ui/editor</code>, built on
           <a
             href="https://tiptap.dev"
             target="_blank"
@@ -124,8 +122,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
         />
         <p>
           Then its styles, in your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
-          >:
+          <code scTypeset>styles.css</code>:
         </p>
         <div scCodeBlock>
           <div scCodeBlockHeader>
@@ -165,29 +162,18 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
         <h2 scTypeset appToc id="features">Features</h2>
         <p>
           The core,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/ui/editor</code
-          >, writes text, headings, lists and task lists, quotes, code blocks
-          and links, with undo and redo, the counts and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scEditorView</code
-          >, in HTML, JSON or text. It needs only what Tiptap&apos;s own install
-          asks for:
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;tiptap/core</code
-          >,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;tiptap/pm</code
-          >
+          <code scTypeset>&#64;semantic-components/ui/editor</code>, writes
+          text, headings, lists and task lists, quotes, code blocks and links,
+          with undo and redo, the counts and
+          <code scTypeset>scEditorView</code>, in HTML, JSON or text. It needs
+          only what Tiptap&apos;s own install asks for:
+          <code scTypeset>&#64;tiptap/core</code>,
+          <code scTypeset>&#64;tiptap/pm</code>
           and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;tiptap/starter-kit</code
-          >. Everything else is a feature, in its own entry point with its own
-          package: install it and provide it only when you use it. Give the
-          editor and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scEditorView</code
-          >
+          <code scTypeset>&#64;tiptap/starter-kit</code>. Everything else is a
+          feature, in its own entry point with its own package: install it and
+          provide it only when you use it. Give the editor and
+          <code scTypeset>scEditorView</code>
           the same features, so they hold the same documents.
         </p>
         <div scCodeBlock>
@@ -316,21 +302,16 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
         <p>
           The features are loaded with the editor, not on their own: a
           feature&apos;s package is small next to what every editor needs (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            scTypeset
             >&#64;tiptap/core</code
-          >, ProseMirror,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;tiptap/starter-kit</code
-          >), and loading it later would make the editor and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scEditorView</code
-          >
+          >, ProseMirror, <code scTypeset>&#64;tiptap/starter-kit</code>), and
+          loading it later would make the editor and
+          <code scTypeset>scEditorView</code>
           wait before showing a document. To keep the editor out of a
           page&apos;s first load, load the component that holds it lazily —
           everything, Tiptap&apos;s core too, is then split off. A lazy route
-          (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >loadComponent</code
-          >) does the same for a page with an editor.
+          (<code scTypeset>loadComponent</code>) does the same for a page with
+          an editor.
         </p>
         <div scCodeBlock>
           <div scCodeBlockHeader>
@@ -362,7 +343,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           one) and search and replace (Ctrl + F). Select some text for the
           floating toolbar. The page layout centres the text in a column of
           readable width. It uses every feature:
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+          <code scTypeset
             >provideEditor(withAlign(), withHighlight(), withImages(),
             withScripts(), withSearch(), withTables())</code
           >.
@@ -373,49 +354,41 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
         <h2 scTypeset appToc>Tables</h2>
         <p>
           The core and one feature,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >withTables()</code
-          >: the table menu inserts a table and edits the one at the selection,
-          its actions disabled where they don&apos;t apply. Tab moves between
-          cells; dragging a column&apos;s border resizes it.
+          <code scTypeset>withTables()</code>: the table menu inserts a table
+          and edits the one at the selection, its actions disabled where they
+          don&apos;t apply. Tab moves between cells; dragging a column&apos;s
+          border resizes it.
         </p>
         <app-tables-editor-demo-container />
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Images</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >withImages()</code
-          >
+          <code scTypeset>withImages()</code>
           and an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[upload]</code>
-          handler on the editor (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scEditorUploads</code
-          >): pick an image, or drop or paste one. Each is uploaded with its
-          progress — cancel it there — and inserted when it resolves, named
-          after its file.
+          <code scTypeset>[upload]</code>
+          handler on the editor (<code scTypeset>scEditorUploads</code>): pick
+          an image, or drop or paste one. Each is uploaded with its progress —
+          cancel it there — and inserted when it resolves, named after its file.
         </p>
         <app-images-editor-demo-container />
       </section>
       <section class="space-y-4">
         <h2 scTypeset appToc>Search and replace</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >withSearch()</code
-          >: the search button, or Ctrl / ⌘ + F in the document, opens the bar.
-          Enter and Shift + Enter step through the matches, Escape closes it.
+          <code scTypeset>withSearch()</code>: the search button, or Ctrl / ⌘ +
+          F in the document, opens the bar. Enter and Shift + Enter step through
+          the matches, Escape closes it.
         </p>
         <p>
           Whether the bar is open is yours: one signal, bound to what shows it
           and to the bar's
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[(open)]</code>.
-          Here a Collapsible, its trigger in the toolbar. The editor isn't tied
-          to it: where a search shows is a layout choice — a panel that pushes
-          the text down, a box over a corner, a dialog — and editors make it
-          differently. The editor does the search (its keys, focus and matches);
-          a Popover, a Sheet or an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&#64;if</code>
+          <code scTypeset>[(open)]</code>. Here a Collapsible, its trigger in
+          the toolbar. The editor isn't tied to it: where a search shows is a
+          layout choice — a panel that pushes the text down, a box over a
+          corner, a dialog — and editors make it differently. The editor does
+          the search (its keys, focus and matches); a Popover, a Sheet or an
+          <code scTypeset>&#64;if</code>
           work as well.
         </p>
         <app-search-editor-demo-container />
@@ -423,9 +396,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Floating toolbar</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scEditorBubbleMenu</code
-          >
+          <code scTypeset>scEditorBubbleMenu</code>
           shows by the selected text, here instead of a toolbar. It needs no
           provider: it adds itself to the editor.
         </p>
@@ -434,21 +405,15 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Signal Forms</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >[formField]</code
-          >
+          <code scTypeset>[formField]</code>
           on the editor: the value is the document's HTML.
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">required</code>
+          <code scTypeset>required</code>
           checks it,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scFieldErrors</code
-          >
+          <code scTypeset>scFieldErrors</code>
           shows the message once the document is left, and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">disabled</code>
+          <code scTypeset>disabled</code>
           from the schema follows the checkbox.
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >characterLimit</code
-          >
+          <code scTypeset>characterLimit</code>
           stops the text at 280 characters — its text, not its HTML.
         </p>
         <app-signal-forms-editor-demo-container />
@@ -456,9 +421,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Displaying the document</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scEditorView</code
-          >
+          <code scTypeset>scEditorView</code>
           shows what the editor wrote — a published post, a preview — in the
           editor's styles, without an editor. The HTML is read through the
           editor's schema, so only what the editor can hold is shown: no
@@ -469,22 +432,20 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Formats</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">format</code>
+          <code scTypeset>format</code>
           picks what the form holds:
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">html</code>
+          <code scTypeset>html</code>
           (the default),
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">json</code>
+          <code scTypeset>json</code>
           (Tiptap&apos;s JSON,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">null</code>
+          <code scTypeset>null</code>
           when empty),
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">markdown</code>
+          <code scTypeset>markdown</code>
           or
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">text</code>
+          <code scTypeset>text</code>
           (plain text, a line per paragraph). Switching it rewrites the value in
           the new format, and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scEditorView</code
-          >
+          <code scTypeset>scEditorView</code>
           shows any of them, given the same format.
         </p>
         <app-formats-editor-demo-container />
@@ -492,14 +453,12 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Layout</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">layout</code>
+          <code scTypeset>layout</code>
           on
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scEditorContent</code
-          >:
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">default</code>
+          <code scTypeset>scEditorContent</code>:
+          <code scTypeset>default</code>
           pads the text edge to edge, for a field or a comment box;
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">page</code>
+          <code scTypeset>page</code>
           sets it in a centred column of readable width with page margins, for a
           document. The toolbar follows.
         </p>
@@ -516,7 +475,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Read-only</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">readonly</code>
+          <code scTypeset>readonly</code>
           from the schema: the document can be read, selected and searched, not
           changed, and its buttons are disabled. Here it has no toolbar at all.
         </p>
@@ -544,29 +503,19 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Every part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>, and
-          the buttons take
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">disabled</code>.
-          What a part holds is read through its
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">exportAs</code>,
-          which is its selector&apos;s name (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >#link="scEditorLink"</code
-          >).
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >[formField]</code
-          >
+          <code scTypeset>class</code>, and the buttons take
+          <code scTypeset>disabled</code>. What a part holds is read through its
+          <code scTypeset>exportAs</code>, which is its selector&apos;s name
+          (<code scTypeset>#link="scEditorLink"</code>).
+          <code scTypeset>[formField]</code>
           sets the editor&apos;s value,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">disabled</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">readonly</code>,
+          <code scTypeset>disabled</code>, <code scTypeset>readonly</code>,
           errors and touched state.
         </p>
         @for (group of api; track group.entry) {
           <div class="space-y-2">
             <p class="text-sm font-medium">
-              <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
-                group.entry
-              }}</code>
+              <code scTypeset>{{ group.entry }}</code>
             </p>
             <app-parts-table [label]="group.entry" [parts]="group.parts" />
           </div>

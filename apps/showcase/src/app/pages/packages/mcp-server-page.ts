@@ -10,9 +10,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div class="space-y-2">
         <h1 scTypeset>MCP Server</h1>
         <p class="text-muted-foreground">
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/mcp-server</code
-          >
+          <code scTypeset>&#64;semantic-components/mcp-server</code>
           — the library&apos;s documentation for AI coding assistants (Claude
           Code, Cursor, Copilot…), over the Model Context Protocol, so they
           write the parts as they are rather than as they guess.

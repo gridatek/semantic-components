@@ -51,12 +51,10 @@ import { SmallMediaAlertDialogDemoContainer } from './demos/small-media-alert-di
         <p>
           Every part is a directive on your element. The dialog is in a
           template, rendered while it is open, over a backdrop; it is an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">alertdialog</code
-          >, named by its title and described by its description. Cancel and the
-          action close it; do the work on the action&apos;s
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">(click)</code>,
-          or follow
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[(open)]</code>.
+          <code scTypeset>alertdialog</code>, named by its title and described
+          by its description. Cancel and the action close it; do the work on the
+          action&apos;s <code scTypeset>(click)</code>, or follow
+          <code scTypeset>[(open)]</code>.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -94,8 +92,8 @@ import { SmallMediaAlertDialogDemoContainer } from './demos/small-media-alert-di
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Each part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the style (cn: a later class wins).
+          <code scTypeset>class</code>, merged over the style (cn: a later class
+          wins).
         </p>
         <app-parts-table label="Alert Dialog parts" [parts]="parts" />
       </section>

@@ -49,11 +49,9 @@ import { RtlChatDemoContainer } from './demos/rtl-chat-demo-container';
         <h2 scTypeset appToc>Anatomy</h2>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scrollAnchor</code
-          >
+          <code scTypeset>scrollAnchor</code>
           goes on the person&apos;s turn;
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">autoScroll</code>
+          <code scTypeset>autoScroll</code>
           follows the reply while the person stays at the live edge.
         </p>
       </section>

@@ -59,33 +59,23 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
         <ul class="list-disc space-y-2 ps-6">
           <li>
             The container scrolls a wide table sideways instead of the page.
-            Make it focusable and name it (<code
-              class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            Make it focusable and name it (<code scTypeset
               >tabindex="0" role="region" aria-label</code
             >) when it may scroll, so the keyboard can reach what is hidden.
           </li>
           <li>
             A header cell for a row, not a column, takes
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >scope="row"</code
-            >.
+            <code scTypeset>scope="row"</code>.
           </li>
           <li>
             A row is highlighted on hover, while it holds an expanded control
-            (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >aria-expanded</code
-            >, an open menu) and when it has
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >data-state="selected"</code
-            >.
+            (<code scTypeset>aria-expanded</code>, an open menu) and when it has
+            <code scTypeset>data-state="selected"</code>.
           </li>
           <li>
             Align numbers with
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">text-end</code
-            >, not
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >text-right</code
-            >: it follows the reading direction.
+            <code scTypeset>text-end</code>, not
+            <code scTypeset>text-right</code>: it follows the reading direction.
           </li>
         </ul>
       </section>
@@ -101,8 +91,8 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Each part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the style (cn: a later class wins).
+          <code scTypeset>class</code>, merged over the style (cn: a later class
+          wins).
         </p>
         <app-parts-table label="Table parts" [parts]="parts" />
       </section>

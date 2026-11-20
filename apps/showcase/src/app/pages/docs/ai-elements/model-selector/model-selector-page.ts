@@ -37,11 +37,9 @@ import { RtlModelSelectorDemoContainer } from './demos/rtl-model-selector-demo-c
           <a scLink routerLink="/docs/components/input-group">Input Group</a>
           of a
           <a scLink routerLink="/docs/ai-elements/prompt-input">Prompt Input</a
-          >. Choosing closes the menu (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >closeOnClick</code
-          >); the trigger shows the choice, its name says what it is
-          (&quot;Model: GPT-5&quot;, the word in hidden text).
+          >. Choosing closes the menu (<code scTypeset>closeOnClick</code>); the
+          trigger shows the choice, its name says what it is (&quot;Model:
+          GPT-5&quot;, the word in hidden text).
         </p>
       </section>
 

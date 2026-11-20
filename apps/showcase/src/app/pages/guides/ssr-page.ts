@@ -21,8 +21,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <section class="space-y-4">
         <h2 scTypeset appToc>Nothing to set up</h2>
         <p>
-          Add Angular&apos;s SSR to your app as usual (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+          Add Angular&apos;s SSR to your app as usual (<code scTypeset
             >ng add &#64;angular/ssr</code
           >); the library needs nothing more. No part touches a browser global —
           window, document, localStorage, matchMedia, observers, sizes — as it
@@ -57,9 +56,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
           Angular&apos;s server answers only the hosts you list (its protection
           against server-side request forgery): add your domains to the
           build&apos;s
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >security.allowedHosts</code
-          >, or every page answers 400.
+          <code scTypeset>security.allowedHosts</code>, or every page answers
+          400.
         </p>
         <app-doc-code [code]="hostsCode" language="json" />
       </section>

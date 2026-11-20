@@ -64,7 +64,7 @@ import { RtlPromptInputDemoContainer } from './demos/rtl-prompt-input-demo-conta
         <p>
           The two Model Selector menus go in the bottom addon, between the
           attach and send buttons: the first menu&apos;s
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ms-auto</code>
+          <code scTypeset>ms-auto</code>
           pushes both next to Send.
         </p>
       </section>

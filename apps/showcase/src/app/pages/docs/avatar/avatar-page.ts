@@ -66,30 +66,20 @@ import { SizesAvatarDemoContainer } from './demos/sizes-avatar-demo-container';
         <ul class="list-disc space-y-2 ps-6">
           <li>
             The image is rendered at once and loads in place, so
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >loading="lazy"</code
-            >
+            <code scTypeset>loading="lazy"</code>
             and
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >NgOptimizedImage</code
-            >
+            <code scTypeset>NgOptimizedImage</code>
             work. Until it has loaded, and if it fails, it is invisible (<code
-              class="bg-muted rounded px-1.5 py-0.5 text-sm"
+              scTypeset
               >data-loading</code
-            >,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >data-error</code
-            >) and the fallback shows through.
+            >, <code scTypeset>data-error</code>) and the fallback shows
+            through.
           </li>
           <li>
             Hidden with
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >visibility</code
-            >, not
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >display: none</code
-            >: an element with no box never enters the viewport, and a lazy
-            image would never load.
+            <code scTypeset>visibility</code>, not
+            <code scTypeset>display: none</code>: an element with no box never
+            enters the viewport, and a lazy image would never load.
           </li>
           <li>
             Rendered on the server, an image that loads before the app wakes up
@@ -98,7 +88,7 @@ import { SizesAvatarDemoContainer } from './demos/sizes-avatar-demo-container';
           <li>
             Loading, the image is not read: the fallback names the avatar. Give
             the image an
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">alt</code>
+            <code scTypeset>alt</code>
             for when it shows.
           </li>
         </ul>
@@ -122,8 +112,8 @@ import { SizesAvatarDemoContainer } from './demos/sizes-avatar-demo-container';
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Each part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the style (cn: a later class wins).
+          <code scTypeset>class</code>, merged over the style (cn: a later class
+          wins).
         </p>
         <app-parts-table label="Avatar parts" [parts]="parts" />
       </section>

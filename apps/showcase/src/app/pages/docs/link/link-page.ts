@@ -53,11 +53,9 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           One part, on a native link: its
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">href</code> (or
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">routerLink</code
-          >) is yours, and it needs one: the link never writes or invents one,
-          and an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&lt;a&gt;</code>
+          <code scTypeset>href</code> (or <code scTypeset>routerLink</code>) is
+          yours, and it needs one: the link never writes or invents one, and an
+          <code scTypeset>&lt;a&gt;</code>
           without an address is not a link (not focusable, not announced as
           one). For an action, use a button. An icon may go at either side,
           marked with its side.
@@ -80,18 +78,16 @@ import { WithIconLinkDemoContainer } from './demos/with-icon-link-demo-container
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScLink</code>
+          <code scTypeset>ScLink</code>
           is a directive on a native
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">a[scLink]</code>:
-          in text (the default), its classes are the style&apos;s
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">link</code>
+          <code scTypeset>a[scLink]</code>: in text (the default), its classes
+          are the style&apos;s
+          <code scTypeset>link</code>
           (its corners and focus ring); in a button&apos;s look, the
           style&apos;s button, as
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scButton</code
-          >&apos;s. Its address is the link&apos;s own:
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">href</code>, or
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">routerLink</code
-          >.
+          <code scTypeset>scButton</code>&apos;s. Its address is the link&apos;s
+          own: <code scTypeset>href</code>, or
+          <code scTypeset>routerLink</code>.
         </p>
         <app-api-table label="ScLink inputs" [inputs]="inputs" />
       </section>

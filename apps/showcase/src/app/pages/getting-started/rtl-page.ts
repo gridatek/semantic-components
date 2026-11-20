@@ -131,12 +131,10 @@ class RtlWithoutDir {}
         <h1 scTypeset>Right to left</h1>
         <p class="text-muted-foreground">
           The components follow the direction of the page: set it once, on
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&lt;html&gt;</code
-          >, and everything flips. Only an app that mixes directions — a
-          right-to-left box inside a left-to-right page, or the reverse — needs
-          one more thing: CDK's
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Dir</code>
+          <code scTypeset>&lt;html&gt;</code>, and everything flips. Only an app
+          that mixes directions — a right-to-left box inside a left-to-right
+          page, or the reverse — needs one more thing: CDK's
+          <code scTypeset>Dir</code>
           directive on that box.
         </p>
       </div>
@@ -146,9 +144,8 @@ class RtlWithoutDir {}
         <p class="text-muted-foreground">
           An app in Arabic, Hebrew or Persian: the direction goes on the
           document. Nothing else to do — the components read it (through CDK's
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >Directionality</code
-          >), and the popups, rendered at the end of the page, inherit it.
+          <code scTypeset>Directionality</code>), and the popups, rendered at
+          the end of the page, inherit it.
         </p>
         <ng-container
           [ngTemplateOutlet]="sample"
@@ -157,9 +154,7 @@ class RtlWithoutDir {}
         <p class="text-muted-foreground">
           With our i18n entry, it is done for you: the locale's direction goes
           on
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&lt;html&gt;</code
-          >
+          <code scTypeset>&lt;html&gt;</code>
           when the app starts.
         </p>
       </section>
@@ -170,20 +165,16 @@ class RtlWithoutDir {}
         <h2 scTypeset appToc>Mixed directions</h2>
         <p class="text-muted-foreground">
           A
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">dir="rtl"</code>
+          <code scTypeset>dir="rtl"</code>
           box in a left-to-right page: CSS flips its layout on its own, but what
           is decided in script — which side
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >inline-start</code
-          >
+          <code scTypeset>inline-start</code>
           is, where a popup opens, which arrow key goes to the next item — reads
           CDK's
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >Directionality</code
-          >, the document's by default. Import
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Dir</code> in the
-          component holding the box: on any element with a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">dir</code>
+          <code scTypeset>Directionality</code>, the document's by default.
+          Import <code scTypeset>Dir</code> in the component holding the box: on
+          any element with a
+          <code scTypeset>dir</code>
           attribute, it gives that direction to the components inside.
         </p>
         <ng-container
@@ -192,12 +183,9 @@ class RtlWithoutDir {}
         />
         <p class="text-muted-foreground">
           Both boxes below are right to left, and their tooltips open on
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >inline-start</code
-          >. Focus the buttons: with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Dir</code>, the
-          tooltip opens on the right; without it, on the left, as in the page
-          around it.
+          <code scTypeset>inline-start</code>. Focus the buttons: with
+          <code scTypeset>Dir</code>, the tooltip opens on the right; without
+          it, on the left, as in the page around it.
         </p>
         <div class="grid gap-4 sm:grid-cols-2">
           <div scFrame class="space-y-4 p-6">
@@ -218,54 +206,43 @@ class RtlWithoutDir {}
         <ul class="text-muted-foreground list-disc space-y-2 ps-6">
           <li>
             Our right-to-left examples import
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Dir</code>:
-            they are right-to-left boxes in a left-to-right page. Copied into an
-            app that is right to left on
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >&lt;html&gt;</code
-            >, it can go.
+            <code scTypeset>Dir</code>: they are right-to-left boxes in a
+            left-to-right page. Copied into an app that is right to left on
+            <code scTypeset>&lt;html&gt;</code>, it can go.
           </li>
           <li>
             Sides and alignments are logical:
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >side="inline-start"</code
-            >
+            <code scTypeset>side="inline-start"</code>
             and
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >alignment="end"</code
-            >
+            <code scTypeset>alignment="end"</code>
             flip with the direction;
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">left</code>
+            <code scTypeset>left</code>
             and
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">right</code>
+            <code scTypeset>right</code>
             stay put.
           </li>
           <li>
             Set
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">lang</code>
+            <code scTypeset>lang</code>
             with
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">dir</code>:
-            screen readers pronounce the text in that language.
+            <code scTypeset>dir</code>: screen readers pronounce the text in
+            that language.
           </li>
           <li>
             Popups render at the end of the page, outside the box. They get its
             direction through
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Dir</code>, not
-            its
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">lang</code>:
+            <code scTypeset>Dir</code>, not its <code scTypeset>lang</code>:
             write
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >dir="rtl" lang="ar"</code
-            >
+            <code scTypeset>dir="rtl" lang="ar"</code>
             again on the content you put in a portal (a select's popup, a
             dialog, a preview card).
           </li>
           <li>
             Dates, numbers and the week's first day follow
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">LOCALE_ID</code
-            >: provide it on the section's component, as above — every part
-            inside reads it, in its overlays too. The parts have no
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">locale</code>
+            <code scTypeset>LOCALE_ID</code>: provide it on the section's
+            component, as above — every part inside reads it, in its overlays
+            too. The parts have no
+            <code scTypeset>locale</code>
             input.
           </li>
           <li>
@@ -274,19 +251,13 @@ class RtlWithoutDir {}
             the categories from the right, the values on the right, pies and
             rings from 9 o'clock clockwise, treemaps and sankeys from the right,
             the arrows the way they're drawn — set
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >charts: &#123; followDirection: true &#125;</code
-            >
+            <code scTypeset>charts: &#123; followDirection: true &#125;</code>
             in
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >provideSemanticComponents</code
-            >
+            <code scTypeset>provideSemanticComponents</code>
             (a bilingual app: mirrored in Arabic only), or an axis's own
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">reversed</code>
+            <code scTypeset>reversed</code>
             and
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >orientation</code
-            >
+            <code scTypeset>orientation</code>
             — which win.
           </li>
         </ul>

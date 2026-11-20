@@ -49,11 +49,9 @@ import { SuggestionUsageDemoContainer } from './demos/suggestion-usage-demo-cont
         <h2 scTypeset appToc>Scrolling</h2>
         <p>
           The row scrolls sideways when the suggestions do not fit.
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scroll-fade-x</code
-          >
+          <code scTypeset>scroll-fade-x</code>
           fades the edge that has more to show, and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">shrink-0</code>
+          <code scTypeset>shrink-0</code>
           keeps each label on one line.
         </p>
       </section>

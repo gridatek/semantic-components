@@ -47,9 +47,8 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
         <p>
           Every part is a directive on your element. The title is the heading
           you choose (an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">h3</code>, an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">h4</code>…), at
-          the level that fits your page.
+          <code scTypeset>h3</code>, an <code scTypeset>h4</code>…), at the
+          level that fits your page.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -60,11 +59,9 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
           <li>
             The spacing between the sections and the inset of every part is one
             variable,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >--card-spacing</code
-            >, set by the style and by
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">size="sm"</code
-            >; change it with a class on the card.
+            <code scTypeset>--card-spacing</code>, set by the style and by
+            <code scTypeset>size="sm"</code>; change it with a class on the
+            card.
           </li>
           <li>
             An image as the first child sits at the top with no padding above
@@ -77,7 +74,7 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
           <li>
             A footer&apos;s look is the style&apos;s: a muted band with a line
             above in nova, a line in lyra, none in the others (add
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">border-t</code>
+            <code scTypeset>border-t</code>
             for one).
           </li>
         </ul>
@@ -96,8 +93,8 @@ import { SpacingCardDemoContainer } from './demos/spacing-card-demo-container';
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Each part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the style (cn: a later class wins).
+          <code scTypeset>class</code>, merged over the style (cn: a later class
+          wins).
         </p>
         <app-parts-table label="Card parts" [parts]="parts" />
       </section>

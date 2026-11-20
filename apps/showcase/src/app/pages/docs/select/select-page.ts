@@ -58,7 +58,7 @@ interface ScApiRow {
           The select round its label and trigger; the popup in a template,
           rendered while it is open. Every part is a directive on your element;
           the icons are yours. It needs a name: its label, or
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">aria-label</code>
+          <code scTypeset>aria-label</code>
           on the trigger.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
@@ -90,9 +90,7 @@ interface ScApiRow {
         @for (part of parts; track part.name) {
           <h3 class="font-heading text-base font-medium">
             {{ part.name }} —
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
-              part.selector
-            }}</code>
+            <code scTypeset>{{ part.selector }}</code>
           </h3>
           <p>{{ part.description }}</p>
           @if (part.inputs.length) {

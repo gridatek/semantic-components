@@ -73,16 +73,12 @@ interface ScApiRow {
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           The group on a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">div</code>, the
-          control in it (
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scInput</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scTextarea</code
-          >, or one of yours with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >data-slot="control"</code
-          >), then its addons: written after the control, so Tab reaches the
-          control first;
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">align</code>
+          <code scTypeset>div</code>, the control in it (
+          <code scTypeset>scInput</code>, <code scTypeset>scTextarea</code>, or
+          one of yours with <code scTypeset>data-slot="control"</code>), then
+          its addons: written after the control, so Tab reaches the control
+          first;
+          <code scTypeset>align</code>
           sets where they show.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
@@ -111,9 +107,7 @@ interface ScApiRow {
         @for (part of parts; track part.name) {
           <h3 class="font-heading text-base font-medium">
             {{ part.name }} —
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
-              part.selector
-            }}</code>
+            <code scTypeset>{{ part.selector }}</code>
           </h3>
           <p>{{ part.description }}</p>
           <app-api-table

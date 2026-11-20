@@ -66,10 +66,9 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           One part, on a native
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">input</code>. It
-          needs a name: a label — in a Field, the field links them — or
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">aria-label</code
-          >; in development it warns without one. A placeholder is not a name.
+          <code scTypeset>input</code>. It needs a name: a label — in a Field,
+          the field links them — or <code scTypeset>aria-label</code>; in
+          development it warns without one. A placeholder is not a name.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -78,16 +77,12 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
         <h2 scTypeset appToc>Forms</h2>
         <p>
           With
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[formField]</code
-          >, the form owns its state: its constraints (
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">required</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">disabled</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">email</code>…)
-          are declared in the form&apos;s schema, not on the input, and the
-          input is marked invalid (
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >aria-invalid</code
-          >) once the field is touched — the Invalid and Required examples.
+          <code scTypeset>[formField]</code>, the form owns its state: its
+          constraints ( <code scTypeset>required</code>,
+          <code scTypeset>disabled</code>, <code scTypeset>email</code>…) are
+          declared in the form&apos;s schema, not on the input, and the input is
+          marked invalid ( <code scTypeset>aria-invalid</code>) once the field
+          is touched — the Invalid and Required examples.
         </p>
       </section>
 
@@ -112,20 +107,14 @@ import { RtlInputDemoContainer } from './demos/rtl-input-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScInput</code>
+          <code scTypeset>ScInput</code>
           is a directive on a native
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >input[scInput]</code
-          >: its classes are the app&apos;s style&apos;s (
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >provideSemanticComponents(&#123; style &#125;)</code
-          >, nova by default). Every native attribute (
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">type</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">placeholder</code
-          >,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >autocomplete</code
-          >…) is the input&apos;s own.
+          <code scTypeset>input[scInput]</code>: its classes are the app&apos;s
+          style&apos;s (
+          <code scTypeset>provideSemanticComponents(&#123; style &#125;)</code>,
+          nova by default). Every native attribute (
+          <code scTypeset>type</code>, <code scTypeset>placeholder</code>,
+          <code scTypeset>autocomplete</code>…) is the input&apos;s own.
         </p>
         <app-api-table label="ScInput inputs" [inputs]="inputs" />
       </section>

@@ -70,14 +70,12 @@ interface ApiRow {
         <p>
           Every part is a directive on your element: the headings in your
           content, a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">nav</code>
+          <code scTypeset>nav</code>
           named by you, a list and its links. The
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">nav</code>
-          lists the headings (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >items()</code
-          >); links written by hand need no headings part. A scope is only for a
-          table of contents apart from the page&apos;s.
+          <code scTypeset>nav</code>
+          lists the headings (<code scTypeset>items()</code>); links written by
+          hand need no headings part. A scope is only for a table of contents
+          apart from the page&apos;s.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -90,15 +88,12 @@ interface ApiRow {
             the page — or of the box that scrolls it — and the last one,
             scrolled to the end. A heading&apos;s scroll margin is where it
             counts as reached: under a sticky header, the header&apos;s height
-            (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >scroll-mt-20</code
-            >).
+            (<code scTypeset>scroll-mt-20</code>).
           </li>
           <li>
             Its link is
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >aria-current="location"</code
-            >: a place in this page, not another page.
+            <code scTypeset>aria-current="location"</code>: a place in this
+            page, not another page.
           </li>
           <li>
             A link followed scrolls to its section and moves the focus to its
@@ -107,11 +102,9 @@ interface ApiRow {
           </li>
           <li>
             A link&apos;s address is this page at the section, not
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">#id</code>
+            <code scTypeset>#id</code>
             alone (which
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >&lt;base href="/"&gt;</code
-            >
+            <code scTypeset>&lt;base href="/"&gt;</code>
             makes the home page&apos;s): a new tab or a copied link opens there.
           </li>
           <li>
@@ -120,13 +113,11 @@ interface ApiRow {
             rendered on the server too.
           </li>
           <li>
-            A list taller than its place scrolls (<code
-              class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            A list taller than its place scrolls (<code scTypeset
               >overflow-y-auto</code
             >
             on the
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">nav</code>) and
-            keeps the active link in view.
+            <code scTypeset>nav</code>) and keeps the active link in view.
           </li>
         </ul>
       </section>
@@ -143,15 +134,15 @@ interface ApiRow {
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Each part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over its own (cn: a later class wins).
+          <code scTypeset>class</code>, merged over its own (cn: a later class
+          wins).
         </p>
         <app-parts-table label="Table of contents parts" [parts]="parts" />
 
         <h3 class="text-lg font-semibold">ScToc</h3>
         <p>
           Exported as
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scToc</code>.
+          <code scTypeset>scToc</code>.
         </p>
         <div
           scTableContainer

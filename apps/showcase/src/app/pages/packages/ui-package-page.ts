@@ -44,9 +44,7 @@ interface EntryPoint {
       <div class="space-y-2">
         <h1 scTypeset>UI</h1>
         <p class="text-muted-foreground">
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/ui</code
-          >
+          <code scTypeset>&#64;semantic-components/ui</code>
           — the components, the layouts and the utilities. The light ones in one
           entry point; those built on another library in entry points of their
           own, so an app carries that library only if it uses them.
@@ -57,16 +55,12 @@ interface EntryPoint {
         <h2 scTypeset appToc>The main entry point</h2>
         <p>
           Most components (Button, Dialog, Select, Sidebar, Menu…), the layouts,
-          and the utilities: the setup (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+          and the utilities: the setup (<code scTypeset
             >provideSemanticComponents</code
-          >), the theme (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >ScThemeManager</code
-          >), saved choices (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >ScStorage</code
-          >). It needs only Angular (core, common, router, forms, the CDK and
-          Aria), RxJS, class-variance-authority and cn.
+          >), the theme (<code scTypeset>ScThemeManager</code>), saved choices
+          (<code scTypeset>ScStorage</code>). It needs only Angular (core,
+          common, router, forms, the CDK and Aria), RxJS,
+          class-variance-authority and cn.
         </p>
         <app-doc-code [code]="mainCode" />
       </section>

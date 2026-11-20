@@ -65,16 +65,12 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
         </p>
         <ul class="list-disc space-y-2 ps-6">
           <li>
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >role="status"</code
-            >
+            <code scTypeset>role="status"</code>
             — polite: read when the screen reader is free. For most: saved,
             sent, updated.
           </li>
           <li>
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >role="alert"</code
-            >
+            <code scTypeset>role="alert"</code>
             — urgent: interrupts what is being read. Only for what needs action
             now: a failed payment, a lost connection.
           </li>
@@ -83,20 +79,15 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
             and show the alert inside it. Screen readers watch a live region
             that already exists and announce what changes in it; with the role
             on an alert added by
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&#64;if</code>,
-            the region and its text arrive together, and many (NVDA, JAWS,
-            VoiceOver, depending on the browser) start watching too late and say
-            nothing.
+            <code scTypeset>&#64;if</code>, the region and its text arrive
+            together, and many (NVDA, JAWS, VoiceOver, depending on the browser)
+            start watching too late and say nothing.
           </li>
           <li>
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >role="alert"</code
-            >
+            <code scTypeset>role="alert"</code>
             is more forgiving: browsers send an event when one is inserted, so
             on the alert itself it is usually read.
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >role="status"</code
-            >
+            <code scTypeset>role="status"</code>
             has no such event — the wrapper is the safe way for both.
           </li>
           <li>
@@ -128,8 +119,8 @@ import { StatusAlertDemoContainer } from './demos/status-alert-demo-container';
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Each part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the style (cn: a later class wins).
+          <code scTypeset>class</code>, merged over the style (cn: a later class
+          wins).
         </p>
         <app-parts-table label="Alert parts" [parts]="parts" />
       </section>

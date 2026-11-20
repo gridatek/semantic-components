@@ -28,6 +28,8 @@ import {
   ScField,
   ScFrame,
   ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
   ScLabel,
   ScLink,
   ScMenu,
@@ -49,8 +51,6 @@ import {
   ScToolbarSeparator,
   ScToolbarWidget,
   ScToolbarWidgetGroup,
-  ScInputGroup,
-  ScInputGroupAddon,
 } from '@semantic-components/ui';
 import {
   ScEditor,
@@ -634,7 +634,8 @@ editor.run((chain) =&gt; chain.toggleBold());</code></pre>
                       class="text-muted-foreground data-[state=none]:text-destructive text-sm whitespace-nowrap tabular-nums"
                     >
                       @if (results.state() === 'found') {
-                        {{ (results.index() ?? 0) + 1 }} of {{ results.count() }}
+                        {{ (results.index() ?? 0) + 1 }} of
+                        {{ results.count() }}
                       } @else if (results.state() === 'none') {
                         No results
                       }

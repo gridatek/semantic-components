@@ -50,7 +50,7 @@ import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-d
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           Every part is a directive on your element: a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">nav</code>
+          <code scTypeset>nav</code>
           named by you, an ordered list, the links and the separators as list
           items. The icons are yours.
         </p>
@@ -61,16 +61,13 @@ import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-d
         <h2 scTypeset appToc>Notes</h2>
         <ul class="list-disc space-y-2 ps-6">
           <li>
-            Name the navigation (<code
-              class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >aria-label</code
-            >), uniquely if the page has another.
+            Name the navigation (<code scTypeset>aria-label</code>), uniquely if
+            the page has another.
           </li>
           <li>
             The current page is not a link:
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >aria-current="page"</code
-            >, read as a link that goes nowhere.
+            <code scTypeset>aria-current="page"</code>, read as a link that goes
+            nowhere.
           </li>
           <li>
             The separators and the ellipsis are hidden from screen readers: the
@@ -98,8 +95,8 @@ import { SeparatorBreadcrumbDemoContainer } from './demos/separator-breadcrumb-d
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Each part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the style (cn: a later class wins).
+          <code scTypeset>class</code>, merged over the style (cn: a later class
+          wins).
         </p>
         <app-parts-table label="Breadcrumb parts" [parts]="parts" />
       </section>

@@ -27,13 +27,13 @@ import {
   ScCollapsibleTrigger,
   ScFrame,
   ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
   ScToggle,
   ScToolbar,
   ScToolbarSeparator,
   ScToolbarWidget,
   ScToolbarWidgetGroup,
-  ScInputGroup,
-  ScInputGroupAddon,
 } from '@semantic-components/ui';
 import {
   ScEditor,
@@ -163,7 +163,8 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
                       class="text-muted-foreground data-[state=none]:text-destructive text-sm whitespace-nowrap tabular-nums"
                     >
                       @if (results.state() === 'found') {
-                        {{ (results.index() ?? 0) + 1 }} of {{ results.count() }}
+                        {{ (results.index() ?? 0) + 1 }} of
+                        {{ results.count() }}
                       } @else if (results.state() === 'none') {
                         No results
                       }

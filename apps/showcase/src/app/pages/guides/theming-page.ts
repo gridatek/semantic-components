@@ -26,14 +26,10 @@ import { TocHeading } from '../../components/toc/toc-heading';
           rhea) is the components&apos; classes — shadcn&apos;s eight styles:
           corners, spacing, borders, the way a button or a field is built. You
           choose one when the app starts. The <strong>theme</strong> is your
-          CSS: shadcn&apos;s variables (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >--background</code
-          >,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--primary</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--radius</code
-          >…), which every style reads. Change the style to change how things
-          are shaped; change the theme to change their colours.
+          CSS: shadcn&apos;s variables (<code scTypeset>--background</code>,
+          <code scTypeset>--primary</code>, <code scTypeset>--radius</code>…),
+          which every style reads. Change the style to change how things are
+          shaped; change the theme to change their colours.
         </p>
         <app-doc-code [code]="styleCode" />
         <p>
@@ -48,19 +44,13 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p>
           The same names as shadcn/ui, so a theme from its generator or from
           tweakcn carries over: colours in OKLCH on
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">:root</code>,
-          their dark values on
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">.dark</code>, and
-          the corners from one
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--radius</code>.
-          Charts read
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--chart-1</code>
+          <code scTypeset>:root</code>, their dark values on
+          <code scTypeset>.dark</code>, and the corners from one
+          <code scTypeset>--radius</code>. Charts read
+          <code scTypeset>--chart-1</code>
           to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--chart-5</code>;
-          the sidebar its
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >--sidebar-…</code
-          >
+          <code scTypeset>--chart-5</code>; the sidebar its
+          <code scTypeset>--sidebar-…</code>
           variables.
         </p>
         <app-doc-code [code]="themeCode" language="css" />
@@ -69,11 +59,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <section class="space-y-4">
         <h2 scTypeset appToc>Dark mode</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >ScThemeManager</code
-          >
+          <code scTypeset>ScThemeManager</code>
           holds the mode — light, dark or system — and puts the
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">dark</code>
+          <code scTypeset>dark</code>
           class on the page&apos;s root when it is dark. There is no theme
           toggle part: any control of yours calls it, so a button, a switch or a
           menu with System in it all work.
@@ -90,11 +78,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <h2 scTypeset appToc>Colour schemes</h2>
         <p>
           Beside the mode, a colour scheme: a name of yours, set on the root as
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">data-theme</code>
+          <code scTypeset>data-theme</code>
           — write its variables under that attribute, and switch with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >setColorScheme('rose')</code
-          >. Kept like the mode.
+          <code scTypeset>setColorScheme('rose')</code>. Kept like the mode.
         </p>
         <app-doc-code [code]="schemeCode" language="css" />
       </section>

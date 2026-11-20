@@ -201,14 +201,9 @@ const STYLES: { name: ScStyleName; description: string }[] = [
           <li>
             <strong class="text-foreground">The theme</strong> says in which
             colors: the CSS variables in your
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >styles.css</code
-            >
-            (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >--primary</code
-            >,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--radius</code
-            >…), light and dark.
+            <code scTypeset>styles.css</code>
+            (<code scTypeset>--primary</code>,
+            <code scTypeset>--radius</code>…), light and dark.
           </li>
           <li>
             A style is set when the app starts: switching one means reloading.
@@ -230,38 +225,25 @@ const STYLES: { name: ScStyleName; description: string }[] = [
         </p>
         <ul class="list-disc space-y-2 ps-6">
           <li>
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >reduced-motion.css</code
-            >
+            <code scTypeset>reduced-motion.css</code>
             — what the components need whatever the theme: with reduced motion
             asked for, animations keep their fades and lose their movement.
           </li>
           <li>
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >typeset.css</code
-            >
+            <code scTypeset>typeset.css</code>
             and
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >&lt;style&gt;/typeset-variables.css</code
-            >
+            <code scTypeset>&lt;style&gt;/typeset-variables.css</code>
             — shadcn&apos;s typeset, for prose under
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scTypeset</code
-            >.
+            <code scTypeset>scTypeset</code>.
           </li>
           <li>
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >scrollbar.css</code
-            >
+            <code scTypeset>scrollbar.css</code>
             and
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >&lt;style&gt;/scrollbar-variables.css</code
-            >
+            <code scTypeset>&lt;style&gt;/scrollbar-variables.css</code>
             — every scrollbar of the page in the style&apos;s look.
           </li>
           <li>
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >&lt;style&gt;/editor.css</code
-            >
+            <code scTypeset>&lt;style&gt;/editor.css</code>
             — the Editor&apos;s document, if you use it.
           </li>
         </ul>

@@ -87,13 +87,9 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
             </h3>
             <p>
               Next, add a
-              <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-                >.postcssrc.json</code
-              >
+              <code scTypeset>.postcssrc.json</code>
               file in the file root of the project. Add the
-              <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-                >&#64;tailwindcss/postcss</code
-              >
+              <code scTypeset>&#64;tailwindcss/postcss</code>
               plugin into your PostCSS configuration.
             </p>
             <div scCodeBlock>
@@ -140,11 +136,9 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <app-package-manager-install packages="@fontsource-variable/geist" />
         <p>
           Your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code>
+          <code scTypeset>styles.css</code>
           imports it (it's in the file to copy, step 8):
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;import '&#64;fontsource-variable/geist';</code
-          >
+          <code scTypeset>&#64;import '&#64;fontsource-variable/geist';</code>
         </p>
       </section>
 
@@ -152,9 +146,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <h2 scTypeset appToc>5. Install icons</h2>
         <p>
           The examples use
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-icons/lucide-icons</code
-          >
+          <code scTypeset>&#64;semantic-icons/lucide-icons</code>
           — install it to copy them as they are.
         </p>
         <app-package-manager-install packages="@semantic-icons/lucide-icons" />
@@ -181,14 +173,10 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <app-package-manager-install packages="temporal-polyfill" />
         <p>
           Then list it in your build's
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">polyfills</code>
-          (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >angular.json</code
-          >):
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >"polyfills": ["temporal-polyfill/global"]</code
-          >. Once all browsers ship Temporal, remove both — your code stays as
-          it is.
+          <code scTypeset>polyfills</code>
+          (<code scTypeset>angular.json</code>):
+          <code scTypeset>"polyfills": ["temporal-polyfill/global"]</code>. Once
+          all browsers ship Temporal, remove both — your code stays as it is.
         </p>
       </section>
 
@@ -206,9 +194,9 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <h2 scTypeset appToc>8. Configure styles</h2>
         <p>
           As in shadcn/ui, the theme is your app's. Copy this into your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">styles.css</code
-          >: shadcn's nova theme (colors, radius, font) with our additions
-          marked "Not shadcn's", the library's styles, and the Tailwind sources.
+          <code scTypeset>styles.css</code>: shadcn's nova theme (colors,
+          radius, font) with our additions marked "Not shadcn's", the library's
+          styles, and the Tailwind sources.
         </p>
         <div scCodeBlock>
           <div scCodeBlockHeader>
@@ -253,12 +241,8 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <p>
           The components use nova. For another style, give it when the app
           starts, and point the second
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;source</code
-          >
-          at its file (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >…-styles-lyra.mjs</code
-          >):
+          <code scTypeset>&#64;source</code>
+          at its file (<code scTypeset>…-styles-lyra.mjs</code>):
         </p>
         <div scCodeBlock>
           <div scCodeBlockHeader>
@@ -293,9 +277,8 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <p>
           Optional: give your assistant the library&apos;s docs with the
           <a scLink routerLink="/docs/packages/mcp-server">MCP server</a>. Add
-          it to your project&apos;s
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">.mcp.json</code>;
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">npx -y</code>
+          it to your project&apos;s <code scTypeset>.mcp.json</code>;
+          <code scTypeset>npx -y</code>
           fetches it on first use, nothing to install.
         </p>
         <app-doc-code [code]="mcpCode" language="json" />

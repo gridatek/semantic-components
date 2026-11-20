@@ -61,9 +61,7 @@ import { RtlMessagePatternDemoContainer } from './demos/rtl-message-pattern-demo
           <li>
             <strong>Good response</strong> and <strong>Bad response</strong> are
             toggles: a fixed name, the state in
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >aria-pressed</code
-            >.
+            <code scTypeset>aria-pressed</code>.
           </li>
           <li><strong>Retry</strong> runs the turn again.</li>
           <li>

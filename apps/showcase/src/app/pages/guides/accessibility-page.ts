@@ -23,10 +23,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <h2 scTypeset appToc>Native elements first</h2>
         <p>
           A part is an attribute on your element — a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">button</code>, an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">input</code>, a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">header</code>, a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ul</code> — so it
+          <code scTypeset>button</code>, an <code scTypeset>input</code>, a
+          <code scTypeset>header</code>, a <code scTypeset>ul</code> — so it
           keeps what the browser gives it: its role, its focus, its form
           behaviour. A checkbox is a real checkbox, a switch a real one with
           role=&quot;switch&quot;, an OTP input one real input per character.

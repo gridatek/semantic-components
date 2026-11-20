@@ -109,12 +109,11 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
         <h2 scTypeset appToc>Tooltip and legend</h2>
         <p>
           Each series' name and color come from the chart's config; its color is
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >--color-&lt;key&gt;</code
-          >, for your own SVG too. You write what the tooltip and the legend
-          show, from their state (the category, an item per series): each part
-          you leave out isn't there, and the text and its format are yours. The
-          tooltip marks each value with a dot, a line or a dash.
+          <code scTypeset>--color-&lt;key&gt;</code>, for your own SVG too. You
+          write what the tooltip and the legend show, from their state (the
+          category, an item per series): each part you leave out isn't there,
+          and the text and its format are yours. The tooltip marks each value
+          with a dot, a line or a dash.
         </p>
         <app-tooltip-chart-demo-container />
       </section>
@@ -144,8 +143,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
         <p>
           The parts every chart shares, and their inputs; each series&apos; are
           on its own page. Each part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over its own.
+          <code scTypeset>class</code>, merged over its own.
         </p>
         <div
           scTableContainer

@@ -106,8 +106,8 @@ import { RtlAutocompleteDemoContainer } from './demos/rtl-autocomplete-demo-cont
         <p>
           The parts inside are the Combobox&apos;s: see its API reference. Each
           part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the style (cn: a later class wins).
+          <code scTypeset>class</code>, merged over the style (cn: a later class
+          wins).
         </p>
         <app-parts-table label="Autocomplete parts" [parts]="parts" />
       </section>

@@ -55,8 +55,7 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
         <h2 scTypeset appToc>Hover</h2>
         <p>
           With
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">hover</code>, the
-          divider follows the pointer.
+          <code scTypeset>hover</code>, the divider follows the pointer.
         </p>
         <app-hover-compare-demo-container />
       </section>
@@ -65,11 +64,11 @@ import { VerticalCompareDemoContainer } from './demos/vertical-compare-demo-cont
         <h2 scTypeset appToc>Handle only</h2>
         <p>
           With
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">handleOnly</code
-          >, only the handle drags — a page can scroll over the rest.
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">bounds</code>
+          <code scTypeset>handleOnly</code>, only the handle drags — a page can
+          scroll over the rest.
+          <code scTypeset>bounds</code>
           keeps it off the edges;
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">position</code>
+          <code scTypeset>position</code>
           is two-way; the handle is restyled from its class.
         </p>
         <app-handle-compare-demo-container />

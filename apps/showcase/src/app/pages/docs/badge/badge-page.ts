@@ -48,17 +48,12 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           One directive, on a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">span</code> or a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">div</code>; on an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">a</code>
+          <code scTypeset>span</code> or a <code scTypeset>div</code>; on an
+          <code scTypeset>a</code>
           it is a link, with a hover. An icon takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >data-icon="inline-start"</code
-          >
+          <code scTypeset>data-icon="inline-start"</code>
           or
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >"inline-end"</code
-          >: less padding on that side.
+          <code scTypeset>"inline-end"</code>: less padding on that side.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -77,9 +72,7 @@ import { VariantsBadgeDemoContainer } from './demos/variants-badge-demo-containe
         <h2 scTypeset appToc>API reference</h2>
         <h3 class="font-heading text-base font-medium">
           ScBadge —
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >div[scBadge], span[scBadge], a[scBadge]</code
-          >
+          <code scTypeset>div[scBadge], span[scBadge], a[scBadge]</code>
         </h3>
         <app-api-table label="ScBadge inputs" [inputs]="inputs" />
       </section>

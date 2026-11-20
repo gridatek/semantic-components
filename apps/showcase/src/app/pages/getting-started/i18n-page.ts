@@ -47,19 +47,15 @@ interface Step {
         </p>
         <p>
           Angular's i18n works in two ways. Its usual one builds the app once
-          per language (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >ng build --localize</code
-          >: an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">/en/</code>, an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">/fr/</code>…).
-          The other builds it once, and the browser loads the language's
+          per language (<code scTypeset>ng build --localize</code>: an
+          <code scTypeset>/en/</code>, an <code scTypeset>/fr/</code>…). The
+          other builds it once, and the browser loads the language's
           translations when the app starts. This page sets up the second, with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/ui/i18n</code
-          >: it picks the language, loads its translations before the app
-          starts, and sets the page's language and direction (right to left for
-          Arabic). One build to deploy; changing language reloads the page. The
-          dashboard app works this way, in English, French and Arabic.
+          <code scTypeset>&#64;semantic-components/ui/i18n</code>: it picks the
+          language, loads its translations before the app starts, and sets the
+          page's language and direction (right to left for Arabic). One build to
+          deploy; changing language reloads the page. The dashboard app works
+          this way, in English, French and Arabic.
         </p>
       </div>
 
@@ -67,19 +63,14 @@ interface Step {
         <h2 scTypeset appToc>1. Install Angular's localize</h2>
         <p>
           Then add
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;angular/localize/init</code
-          >
+          <code scTypeset>&#64;angular/localize/init</code>
           to your build's
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">polyfills</code>
+          <code scTypeset>polyfills</code>
           and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;angular/localize</code
-          >
+          <code scTypeset>&#64;angular/localize</code>
           to your app's tsconfig
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">types</code>.
-          Leave out the
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">localize</code>
+          <code scTypeset>types</code>. Leave out the
+          <code scTypeset>localize</code>
           build option: it makes one build per locale.
         </p>
         <app-package-manager-install packages="@angular/localize" />
@@ -121,9 +112,9 @@ interface Step {
           <li>
             Else the first of the browser's languages that the app offers — or
             its base:
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">fr-CA</code>
+            <code scTypeset>fr-CA</code>
             gives
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">fr</code>.
+            <code scTypeset>fr</code>.
           </li>
           <li>Else the source locale.</li>
         </ul>
@@ -131,23 +122,18 @@ interface Step {
           If its translations fail to load, the app starts in the source locale
           and says why in the console. A message missing from a file shows its
           source text.
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&lt;html dir&gt;</code
-          >
+          <code scTypeset>&lt;html dir&gt;</code>
           is the locale's
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">dir</code> when
-          you give one, else the platform's (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >Intl.Locale#getTextInfo()</code
-          >). Angular's
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">LOCALE_ID</code>
+          <code scTypeset>dir</code> when you give one, else the platform's
+          (<code scTypeset>Intl.Locale#getTextInfo()</code>). Angular's
+          <code scTypeset>LOCALE_ID</code>
           follows the locale, and with it the components' dates, numbers and
           calendars. They have no
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">locale</code>
+          <code scTypeset>locale</code>
           input: a section in another locale provides
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">LOCALE_ID</code>
+          <code scTypeset>LOCALE_ID</code>
           on its component —
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+          <code scTypeset
             >providers: [&#123; provide: LOCALE_ID, useValue: 'fr' &#125;]</code
           >
           — and every part inside follows it.
@@ -168,9 +154,7 @@ interface Step {
               @for (member of members; track member[0]) {
                 <tr>
                   <td class="p-3 align-top">
-                    <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
-                      member[0]
-                    }}</code>
+                    <code scTypeset>{{ member[0] }}</code>
                   </td>
                   <td class="text-muted-foreground p-3">{{ member[1] }}</td>
                 </tr>

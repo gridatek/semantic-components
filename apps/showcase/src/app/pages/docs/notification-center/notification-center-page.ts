@@ -31,8 +31,7 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
       <section class="space-y-4">
         <h2 scTypeset appToc>Inbox</h2>
         <p>
-          A bell with the unread count (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+          A bell with the unread count (<code scTypeset
             >scNotificationCount</code
           >, 9+ beyond nine), opening the notifications in a popover: all or
           unread, mark all as read, and on each notification its action, mark as
@@ -46,11 +45,9 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
         <h2 scTypeset appToc>By day</h2>
         <p>
           Sections by day, as most apps show them:
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">days()</code>
+          <code scTypeset>days()</code>
           groups what is shown by the user's calendar day, and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scNotificationDay</code
-          >
+          <code scTypeset>scNotificationDay</code>
           titles each in the app's language — today, yesterday, the weekday,
           then the date.
         </p>
@@ -61,9 +58,7 @@ import { InboxNotificationCenterDemoContainer } from './demos/inbox-notification
         <h2 scTypeset appToc>Empty</h2>
         <p>
           When nothing matches the filter,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scNotificationEmpty</code
-          >
+          <code scTypeset>scNotificationEmpty</code>
           holds what you write.
         </p>
         <app-empty-notification-center-demo-container />

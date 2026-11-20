@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
+import { ScTypeset } from '@semantic-components/ui';
 import {
   ScCodeBlock,
   ScCodeBlockActions,
@@ -19,6 +20,7 @@ import { PackageManagerInstall } from '../package-manager-install/package-manage
 @Component({
   selector: 'app-entry-install',
   imports: [
+    ScTypeset,
     PackageManagerInstall,
     ScCodeBlock,
     ScCodeBlockActions,
@@ -32,7 +34,7 @@ import { PackageManagerInstall } from '../package-manager-install/package-manage
   template: `
     <p class="text-muted-foreground">
       It has its own entry point,
-      <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{ path() }}</code
+      <code scTypeset>{{ path() }}</code
       >, built on
       <a
         [href]="href()"

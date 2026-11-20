@@ -36,9 +36,8 @@ import { RtlFileTreeDemoContainer } from './demos/rtl-file-tree-demo-container';
           on a ghost
           <a scLink routerLink="/docs/components/button">Button</a>; a file is a
           button, the selected one marked with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >aria-current</code
-          >. For a single file the agent read or edited, use a
+          <code scTypeset>aria-current</code>. For a single file the agent read
+          or edited, use a
           <a scLink routerLink="/docs/ai-elements/tool">Tool</a> line instead. A
           tree to browse with the arrow keys is the
           <a scLink routerLink="/docs/components/tree">Tree</a>.
@@ -49,9 +48,7 @@ import { RtlFileTreeDemoContainer } from './demos/rtl-file-tree-demo-container';
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           The nodes render themselves: an
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >ng-template</code
-          >
+          <code scTypeset>ng-template</code>
           that outputs itself for a folder&apos;s children.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />

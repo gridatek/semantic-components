@@ -62,14 +62,11 @@ import { RtlReasoningDemoContainer } from './demos/rtl-reasoning-demo-container'
             Then it opens while the model thinks and closes when it finishes —
             unless the person opened or closed it: their choice wins. The
             Collapsible&apos;s
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">open</code> is
-            your choice, else the running state.
+            <code scTypeset>open</code> is your choice, else the running state.
           </li>
           <li>
             The streamed text goes in a live region (here
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >aria-live="polite"</code
-            >
+            <code scTypeset>aria-live="polite"</code>
             on the trace), so &quot;Thinking&quot; and &quot;Thought&quot; are
             announced.
           </li>

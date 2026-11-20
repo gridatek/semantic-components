@@ -58,11 +58,9 @@ interface ScApiRow {
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           A group on a
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">div</code>, its
-          children what you put in it: inputs, selects, text, buttons, input
-          groups, other groups. Name it with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">aria-label</code
-          >: it is announced as a group.
+          <code scTypeset>div</code>, its children what you put in it: inputs,
+          selects, text, buttons, input groups, other groups. Name it with
+          <code scTypeset>aria-label</code>: it is announced as a group.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -108,9 +106,7 @@ interface ScApiRow {
         @for (part of parts; track part.name) {
           <h3 class="font-heading text-base font-medium">
             {{ part.name }} —
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">{{
-              part.selector
-            }}</code>
+            <code scTypeset>{{ part.selector }}</code>
           </h3>
           <p>{{ part.description }}</p>
           <app-api-table

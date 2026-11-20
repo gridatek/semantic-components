@@ -46,10 +46,8 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           One directive, on your element; its content fills it (an image with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">fill</code>, a
-          video with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">size-full</code
-          >).
+          <code scTypeset>fill</code>, a video with
+          <code scTypeset>size-full</code>).
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -58,32 +56,27 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
         <h2 scTypeset appToc>Notes</h2>
         <ul class="list-disc space-y-2 ps-6">
           <li>
-            Its width is yours — a class (<code
-              class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >w-full max-w-sm</code
+            Its width is yours — a class (<code scTypeset>w-full max-w-sm</code
             >) or its parent&apos;s; the height follows.
           </li>
           <li>
             The ratio goes through a CSS variable,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--ratio</code>,
-            not an inline style: a class can still change it, by breakpoint
-            (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            <code scTypeset>--ratio</code>, not an inline style: a class can
+            still change it, by breakpoint (<code scTypeset
               >max-sm:aspect-square</code
             >).
           </li>
           <li>
             It is
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">relative</code
-            >: what fills it can be placed inside it. It clips what overflows
-            its box, so a framed photo takes the frame&apos;s corners.
+            <code scTypeset>relative</code>: what fills it can be placed inside
+            it. It clips what overflows its box, so a framed photo takes the
+            frame&apos;s corners.
           </li>
           <li>
             Framed: add
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">scFrame</code>
+            <code scTypeset>scFrame</code>
             — the style&apos;s card radius, ring and shadow (a fixed
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >rounded-lg</code
-            >
+            <code scTypeset>rounded-lg</code>
             suits few styles).
           </li>
         </ul>
@@ -102,9 +95,7 @@ import { VideoAspectRatioDemoContainer } from './demos/video-aspect-ratio-demo-c
         <h2 scTypeset appToc>API reference</h2>
         <h3 class="font-heading text-base font-medium">
           ScAspectRatio —
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >[scAspectRatio]</code
-          >
+          <code scTypeset>[scAspectRatio]</code>
         </h3>
         <app-api-table label="ScAspectRatio inputs" [inputs]="inputs" />
       </section>

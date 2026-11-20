@@ -43,11 +43,9 @@ import { WorkingHoursSchedulerDemoContainer } from './demos/working-hours-schedu
         <h2 scTypeset appToc>Month</h2>
         <p>
           One view alone. A day shows
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">maxEvents</code>
+          <code scTypeset>maxEvents</code>
           and gives the rest to your
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >scSchedulerMoreTemplate</code
-          >.
+          <code scTypeset>scSchedulerMoreTemplate</code>.
         </p>
         <app-month-scheduler-demo-container />
       </section>
@@ -55,13 +53,8 @@ import { WorkingHoursSchedulerDemoContainer } from './demos/working-hours-schedu
       <section class="space-y-4">
         <h2 scTypeset appToc>Working hours</h2>
         <p>
-          A day from 8:00 to 18:00 (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >startHour</code
-          >,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">endHour</code>),
-          with taller hours (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+          A day from 8:00 to 18:00 (<code scTypeset>startHour</code>,
+          <code scTypeset>endHour</code>), with taller hours (<code scTypeset
             >--sc-scheduler-hour-height</code
           >).
         </p>

@@ -95,9 +95,8 @@ import { SubmenuMenubarDemoContainer } from './demos/submenu-menubar-demo-contai
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Each part takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over the style (cn: a later class wins). The menus&apos; parts
-          are the Menu&apos;s (see Menu).
+          <code scTypeset>class</code>, merged over the style (cn: a later class
+          wins). The menus&apos; parts are the Menu&apos;s (see Menu).
         </p>
         <app-parts-table label="Menubar parts" [parts]="parts" />
       </section>

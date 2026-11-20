@@ -145,29 +145,23 @@ import { WithIconButtonDemoContainer } from './demos/with-icon-button-demo-conta
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScButton</code>
+          <code scTypeset>ScButton</code>
           is a directive on a native
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >button[scButton]</code
-          >: its classes are the app&apos;s style&apos;s (
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >provideSemanticComponents(&#123; style &#125;)</code
-          >, nova by default).
+          <code scTypeset>button[scButton]</code>: its classes are the
+          app&apos;s style&apos;s (
+          <code scTypeset>provideSemanticComponents(&#123; style &#125;)</code>,
+          nova by default).
         </p>
         <app-api-table label="ScButton inputs" [inputs]="inputs" />
         <p>
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >ScButtonVariants</code
-          >
+          <code scTypeset>ScButtonVariants</code>
           (&#123; variant, size &#125;) is the type of every part that styles
           itself as a button: a link (
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">a[scLink]</code
-          >), an alert dialog&apos;s action and cancel, a carousel&apos;s
-          arrows, a calendar&apos;s buttons, a code block&apos;s copy… Each
-          takes
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">variant</code>
-          and <code class="bg-muted rounded px-1.5 py-0.5 text-sm">size</code>,
-          with defaults that suit its place.
+          <code scTypeset>a[scLink]</code>), an alert dialog&apos;s action and
+          cancel, a carousel&apos;s arrows, a calendar&apos;s buttons, a code
+          block&apos;s copy… Each takes
+          <code scTypeset>variant</code>
+          and <code scTypeset>size</code>, with defaults that suit its place.
         </p>
       </section>
     </div>

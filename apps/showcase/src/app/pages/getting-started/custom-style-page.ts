@@ -60,10 +60,9 @@ interface ScCodeSample {
         <h1 scTypeset>Custom style</h1>
         <p class="text-muted-foreground">
           A style is a plain object: every component's classes, typed by
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScStyle</code>.
-          To have your own look, start from one of ours: copy it into your app,
-          give it your name, then change what you want. The components read it
-          like any other style.
+          <code scTypeset>ScStyle</code>. To have your own look, start from one
+          of ours: copy it into your app, give it your name, then change what
+          you want. The components read it like any other style.
         </p>
       </div>
 
@@ -74,9 +73,7 @@ interface ScCodeSample {
           <a scLink [href]="sourceUrl" target="_blank" rel="noopener noreferrer"
             >the repository</a
           >
-          (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >libs/styles/nova/src</code
-          >
+          (<code scTypeset>libs/styles/nova/src</code>
           for nova) into your app. One file per component, plus the file that
           puts them together:
         </p>
@@ -106,9 +103,7 @@ interface ScCodeSample {
         <h2 scTypeset appToc>3. Use it</h2>
         <p>
           Give it to
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >provideSemanticComponents</code
-          >
+          <code scTypeset>provideSemanticComponents</code>
           when the app starts:
         </p>
         <ng-container
@@ -117,20 +112,13 @@ interface ScCodeSample {
         />
         <p>
           Keep
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;semantic-components/styles</code
-          >
-          installed: your files import its types (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
+          <code scTypeset>&#64;semantic-components/styles</code>
+          installed: your files import its types (<code scTypeset
             >import type</code
-          >, nothing else), and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >class-variance-authority</code
-          >, which you already have with the ui library. Tailwind scans your
-          app's files, so the style's classes need no
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;source</code
-          >
+          >, nothing else), and <code scTypeset>class-variance-authority</code>,
+          which you already have with the ui library. Tailwind scans your app's
+          files, so the style's classes need no
+          <code scTypeset>&#64;source</code>
           — remove the one for the style you used before.
         </p>
       </section>
@@ -141,21 +129,17 @@ interface ScCodeSample {
           Each file holds one component's classes, in Tailwind. Change a file,
           and every component that reads it follows — the cards and every framed
           box, for instance, take their corners, ring and shadow from
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">frame.ts</code>:
+          <code scTypeset>frame.ts</code>:
         </p>
         <ng-container
           [ngTemplateOutlet]="sample"
           [ngTemplateOutletContext]="{ $implicit: frame }"
         />
         <p>
-          Some keys are variant functions (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >cva</code
-          >, as in
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">button.ts</code
-          >): change the classes of a variant, keep its name — the components
-          ask for it by name. The
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">ScStyle</code>
+          Some keys are variant functions (<code scTypeset>cva</code>, as in
+          <code scTypeset>button.ts</code>): change the classes of a variant,
+          keep its name — the components ask for it by name. The
+          <code scTypeset>ScStyle</code>
           type keeps you whole: a key missing or of the wrong shape doesn't
           compile.
         </p>
@@ -166,9 +150,7 @@ interface ScCodeSample {
         <p>
           Then no copy: spread one of ours and replace the keys you change. It
           keeps our updates for the rest — and its
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >&#64;source</code
-          >
+          <code scTypeset>&#64;source</code>
           line, since its classes still come from the package.
         </p>
         <ng-container
@@ -191,14 +173,9 @@ interface ScCodeSample {
           </li>
           <li>
             The colors aren't in a style: they are your theme's CSS variables
-            (<code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >--primary</code
-            >,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">--radius</code
-            >…) in your
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >styles.css</code
-            >. A style says how things are drawn; the theme, in which colors.
+            (<code scTypeset>--primary</code>, <code scTypeset>--radius</code>…)
+            in your <code scTypeset>styles.css</code>. A style says how things
+            are drawn; the theme, in which colors.
           </li>
         </ul>
       </section>

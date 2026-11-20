@@ -50,9 +50,8 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           One directive, on an empty
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">div</code>, shown
-          with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">&#64;if</code>
+          <code scTypeset>div</code>, shown with
+          <code scTypeset>&#64;if</code>
           or inside an overlay.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
@@ -62,21 +61,17 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
         <h2 scTypeset appToc>Notes</h2>
         <ul class="list-disc space-y-2 ps-6">
           <li>
-            It fades in when shown and out when it goes (<code
-              class="bg-muted rounded px-1.5 py-0.5 text-sm"
+            It fades in when shown and out when it goes (<code scTypeset
               >animate.enter</code
             >
             /
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >animate.leave</code
-            >): Angular removes it once it has faded out.
+            <code scTypeset>animate.leave</code>): Angular removes it once it
+            has faded out.
           </li>
           <li>
-            It covers the window (<code
-              class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >fixed inset-0</code
-            >) behind the overlay&apos;s content;
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">absolute</code>
+            It covers the window (<code scTypeset>fixed inset-0</code>) behind
+            the overlay&apos;s content;
+            <code scTypeset>absolute</code>
             puts it over a positioned box instead.
           </li>
           <li>
@@ -87,16 +82,12 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
           <li>
             Its shade and blur are the style&apos;s — shadcn&apos;s overlay, the
             same behind every overlay of a style:
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-              >bg-black/10</code
-            >
+            <code scTypeset>bg-black/10</code>
             with a light blur in nova, vega and lyra,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">/80</code> in
-            maia and mira,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">/30</code>
+            <code scTypeset>/80</code> in maia and mira,
+            <code scTypeset>/30</code>
             with more blur in luma and rhea,
-            <code class="bg-muted rounded px-1.5 py-0.5 text-sm">/20</code> in
-            sera.
+            <code scTypeset>/20</code> in sera.
           </li>
         </ul>
       </section>
@@ -110,9 +101,7 @@ import { CustomBackdropDemoContainer } from './demos/custom-backdrop-demo-contai
         <h2 scTypeset appToc>API reference</h2>
         <h3 class="font-heading text-base font-medium">
           ScBackdrop —
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >div[scBackdrop]</code
-          >
+          <code scTypeset>div[scBackdrop]</code>
         </h3>
         <app-api-table label="ScBackdrop inputs" [inputs]="inputs" />
       </section>

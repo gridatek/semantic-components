@@ -77,15 +77,12 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
         <h2 scTypeset appToc>Open parameters</h2>
         <p>
           pdf.js's open parameters in the fragment of
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">src</code>
-          (<code class="bg-muted rounded px-1.5 py-0.5 text-sm">page</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">zoom</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">nameddest</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">search</code>,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">pagemode</code>)
-          are applied on load, or later with
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">applyHash</code>.
-          This document has page labels: the page field shows them.
+          <code scTypeset>src</code>
+          (<code scTypeset>page</code>, <code scTypeset>zoom</code>,
+          <code scTypeset>nameddest</code>, <code scTypeset>search</code>,
+          <code scTypeset>pagemode</code>) are applied on load, or later with
+          <code scTypeset>applyHash</code>. This document has page labels: the
+          page field shows them.
         </p>
         <app-pdf-viewer-open-parameters-demo-container />
       </section>
@@ -105,17 +102,15 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
         <p>
           Jumps — a link, a bookmark, a thumbnail, the page field — are
           remembered:
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Back</code>
+          <code scTypeset>Back</code>
           and
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">Forward</code>
+          <code scTypeset>Forward</code>
           return to where you were, in the viewer rather than the browser's
           history.
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">pageColors</code>
+          <code scTypeset>pageColors</code>
           draws the pages in your colours (a reading mode); in the system's
           high-contrast mode they follow its colours. With the browser's caret
-          browsing (F7) on, tell the viewer (<code
-            class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >caretBrowsing</code
+          browsing (F7) on, tell the viewer (<code scTypeset>caretBrowsing</code
           >) and <kbd scKbd>↑</kbd> / <kbd scKbd>↓</kbd> move the caret line by
           line through the text.
         </p>
@@ -125,14 +120,11 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
           around the pointer): past what a canvas can hold, the visible part is
           drawn sharp on its own. Tagged PDFs expose their structure — headings,
           lists, tables, figures with alt text — to screen readers. With
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >enablePermissions</code
-          >, a document that forbids copying, printing, annotating or filling in
-          its form is shown that way. Document properties (More → Document
-          properties… in the full example) come from
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >documentProperties()</code
-          >; the dialog and its text are yours.
+          <code scTypeset>enablePermissions</code>, a document that forbids
+          copying, printing, annotating or filling in its form is shown that
+          way. Document properties (More → Document properties… in the full
+          example) come from <code scTypeset>documentProperties()</code>; the
+          dialog and its text are yours.
         </p>
       </section>
 

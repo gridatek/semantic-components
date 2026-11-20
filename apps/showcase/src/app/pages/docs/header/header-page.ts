@@ -108,9 +108,9 @@ import { StickyHeaderDemoContainer } from './demos/sticky-header-demo-container'
         <h2 scTypeset appToc>API reference</h2>
         <p>
           The header and the toggle take
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">class</code>,
-          merged over their own (cn: a later class wins). The menu&apos;s
-          template has no element of its own: style the content you put in it.
+          <code scTypeset>class</code>, merged over their own (cn: a later class
+          wins). The menu&apos;s template has no element of its own: style the
+          content you put in it.
         </p>
         <app-parts-table label="Header parts" [parts]="parts" />
       </section>

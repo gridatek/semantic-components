@@ -46,9 +46,7 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
           One directive, beside another part or on a plain box. Only the look:
           clipping is the box&apos;s (the aspect ratio clips, the table&apos;s
           container scrolls; on a plain box with an image, add
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm"
-            >overflow-hidden</code
-          >).
+          <code scTypeset>overflow-hidden</code>).
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -63,13 +61,12 @@ import { TableFrameDemoContainer } from './demos/table-frame-demo-container';
         <h2 scTypeset appToc>API reference</h2>
         <h3 class="font-heading text-base font-medium">
           ScFrame —
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">[scFrame]</code>
+          <code scTypeset>[scFrame]</code>
         </h3>
         <p>
           The style&apos;s frame: the style&apos;s card radius, ring and shadow
           — square in lyra and sera,
-          <code class="bg-muted rounded px-1.5 py-0.5 text-sm">4xl</code> in
-          luma.
+          <code scTypeset>4xl</code> in luma.
         </p>
         <app-api-table label="ScFrame inputs" [inputs]="inputs" />
       </section>
