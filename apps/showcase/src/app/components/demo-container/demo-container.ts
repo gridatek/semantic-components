@@ -117,7 +117,7 @@ import { TocHeading } from '../toc/toc-heading';
           <pre
             scCodeBlockContent
             [id]="codeId"
-            [code]="code()"
+            [code]="shownCode()"
             [language]="language()"
             lineNumbers
             [class]="
@@ -173,6 +173,16 @@ export class DemoContainer {
   /** More than a few lines: folded under the demo, "View code" opens it. */
   private readonly long = computed(() => this.code().split('\n').length > 8);
   private readonly expanded = signal(false);
+  /**
+   * What is highlighted: folded, only the lines that show (a long demo's
+   * hundred lines are thousands of token spans — a heavy page to render and
+   * to check); the whole code once unfolded. Copy takes the whole code.
+   */
+  private readonly shownCode = computed(() =>
+    this.long() && !this.expanded()
+      ? this.code().split('\n').slice(0, 10).join('\n')
+      : this.code(),
+  );
   private readonly codeId = inject(_IdGenerator).getId('demo-code-');
   /**
    * Render the preview as an iframe of `demoUrl` instead of projected

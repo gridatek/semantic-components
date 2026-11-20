@@ -69,13 +69,19 @@ test('a page picked in the mobile menu: the menu closes at once, then the page c
   await page.getByRole('button', { name: 'Open menu' }).click();
   const menu = page.locator('[data-slot=header-menu]');
   await expect(menu).toBeVisible();
-  // The page picked is slow to load (its scripts held back a second): the
+  // The page picked is slow to load (its script held back a second): the
   // menu doesn't wait for it — closing is the header's, a fast page the app's
   // (docs/component-design-principles.md, "A Link Closes Its Popup at Once").
-  await page.route('**/*.js', async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    await route.continue();
-  });
+  await page.route(
+    '**/*.js',
+    async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await route.continue();
+    },
+    // Its first script only: the built app loads a route's chunks one after
+    // another, and a second each would outlast the checks below.
+    { times: 1 },
+  );
   await menu.getByRole('link', { name: 'Charts', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Open menu' })).toHaveAttribute(
     'aria-expanded',
@@ -121,6 +127,14 @@ for (const style of STYLES) {
       await test.step(`${width}px: the links`, async () => {
         await page.setViewportSize({ width, height: 600 });
         await page.goto('/');
+        // WebKit's media queries measure without the scrollbar (768 wide is
+        // 758 to them, below md): the width the browser sees as this one.
+        const scrollbar = await page.evaluate(() =>
+          matchMedia(`(min-width: ${innerWidth}px)`).matches
+            ? 0
+            : innerWidth - document.documentElement.clientWidth,
+        );
+        await page.setViewportSize({ width: width + scrollbar, height: 600 });
         await expect(nav).toBeVisible();
         await expect(toggle).toBeHidden();
         // A count in (shown from 768px): the button at its full width — ours

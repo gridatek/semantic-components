@@ -24,9 +24,10 @@ test('a slow navigation: the bar shows while the page loads, then goes', async (
   await page.setViewportSize({ width: 1440, height: 800 });
   await page.goto('/');
   await expect(bar(page)).toHaveAttribute('aria-hidden', 'true');
-  expect(await shown(page)).toBe(false);
+  // The first load's bar may still be fading out.
+  await expect.poll(() => shown(page)).toBe(false);
 
-  // The page picked is slow (its scripts held back a second).
+  // The page picked is slow (its scripts held back a second each).
   await page.route('**/*.js', async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     await route.continue();
@@ -39,7 +40,8 @@ test('a slow navigation: the bar shows while the page loads, then goes', async (
   // Still on the page left: the bar says the click was heard.
   await expect(page).toHaveURL(/\/$/);
 
-  await expect(page).toHaveURL(/\/charts$/);
+  // The built app loads the route's chunks one after another: a second each.
+  await expect(page).toHaveURL(/\/charts$/, { timeout: 20_000 });
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Charts');
   await expect.poll(() => shown(page)).toBe(false);
 });

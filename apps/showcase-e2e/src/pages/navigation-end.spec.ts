@@ -23,7 +23,8 @@ test('Header: Back with the mobile menu open closes it', async ({ page }) => {
   // A page in the app's history, reached from the menu.
   await open.click();
   await menu.getByRole('link', { name: 'Charts', exact: true }).click();
-  await expect(page).toHaveURL(/\/charts$/);
+  // Charts is a heavy route: under load (Firefox, WebKit) seconds to come.
+  await expect(page).toHaveURL(/\/charts$/, { timeout: 15_000 });
   await expect(menu).toHaveCount(0);
 
   await open.click();
@@ -67,7 +68,8 @@ test('Navigation Menu: Back with its panel open closes it', async ({
   });
   // A page in the app's history, reached from the bar.
   await bar.getByRole('link', { name: 'Charts', exact: true }).click();
-  await expect(page).toHaveURL(/\/charts$/);
+  // Charts is a heavy route: under load (Firefox, WebKit) seconds to come.
+  await expect(page).toHaveURL(/\/charts$/, { timeout: 15_000 });
 
   const trigger = bar.getByRole('button', { name: 'Components' });
   await trigger.click();
