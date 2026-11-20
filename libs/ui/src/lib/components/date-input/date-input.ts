@@ -60,6 +60,11 @@ export class ScDateInput implements FormValueControl<Temporal.PlainDate | null> 
   readonly value = model<Temporal.PlainDate | null>(null);
   /** In a date picker's range: the end it is. */
   readonly part = input<'start' | 'end' | undefined>(undefined);
+  // TODO(angular): minDate / maxDate go once Signal Forms' min() / max()
+  // take Temporal dates — the bounds then from the schema with a form, and
+  // [min] / [max] without one, as every control's ("Bounds Come From the
+  // Form", docs/component-design-principles.md; docs/todo.md, "Date bounds
+  // from the form"). Angular: https://github.com/angular/angular/issues/67643
   /** The first day; an earlier one is not read (in a picker: the picker's). */
   readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
   /** The last day; a later one is not read (in a picker: the picker's). */

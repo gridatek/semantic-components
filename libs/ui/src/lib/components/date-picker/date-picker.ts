@@ -51,6 +51,11 @@ export class ScDatePicker implements FormValueControl<ScCalendarValue> {
   readonly format = input<Intl.DateTimeFormatOptions>({ dateStyle: 'medium' });
   /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
   private readonly locale = inject(LOCALE_ID);
+  // TODO(angular): minDate / maxDate go once Signal Forms' min() / max()
+  // take Temporal dates — the bounds then from the schema with a form, and
+  // [min] / [max] without one, as every control's ("Bounds Come From the
+  // Form", docs/component-design-principles.md; docs/todo.md, "Date bounds
+  // from the form"). Angular: https://github.com/angular/angular/issues/67643
   /** The first day that can be picked — give it to the calendar too. */
   readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
   /** The last day that can be picked — give it to the calendar too. */
