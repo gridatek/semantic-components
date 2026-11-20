@@ -17,6 +17,16 @@ export const guidesRoutes: Route[] = [
         loadComponent: () => import('../pages/guides/theming-page'),
       },
       {
+        path: 'scrollbar',
+        title: 'Scrollbar - Semantic Components',
+        loadComponent: () => import('../pages/docs/scrollbar/scrollbar-page'),
+      },
+      {
+        path: 'typeset',
+        title: 'Typeset - Semantic Components',
+        loadComponent: () => import('../pages/docs/typeset/typeset-page'),
+      },
+      {
         path: 'forms',
         title: 'Forms - Semantic Components',
         loadComponent: () => import('../pages/guides/forms-page'),

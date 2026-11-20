@@ -856,7 +856,8 @@
     "description": "The browser's own scrollbars in your style's look — every scrollbar of the page, from one CSS file tuned by variables; your classes win.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Layout"
+    "category": "Layout",
+    "hidden": true
   },
   {
     "name": "Select",
@@ -1176,7 +1177,8 @@
     "description": "Styles for content you don't write the markup of — rendered markdown, a chat answer — in a typeset container, and the same look for a heading, a paragraph or a quote on its own. shadcn's one CSS file, tuned by three variables; components inside keep their look, your classes win.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display"
+    "category": "Data Display",
+    "hidden": true
   },
   {
     "name": "Video Player",

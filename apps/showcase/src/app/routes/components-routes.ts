@@ -535,11 +535,7 @@ export const componentsRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/scroll-area/scroll-area-page'),
       },
-      {
-        path: 'scrollbar',
-        title: 'Scrollbar - Semantic Components',
-        loadComponent: () => import('../pages/docs/scrollbar/scrollbar-page'),
-      },
+      { path: 'scrollbar', redirectTo: '/docs/guides/scrollbar' },
       {
         path: 'select',
         title: 'Select - Semantic Components',
@@ -759,11 +755,7 @@ export const componentsRoutes: Route[] = [
         title: 'Tree - Semantic Components',
         loadComponent: () => import('../pages/docs/tree/tree-page'),
       },
-      {
-        path: 'typeset',
-        title: 'Typeset - Semantic Components',
-        loadComponent: () => import('../pages/docs/typeset/typeset-page'),
-      },
+      { path: 'typeset', redirectTo: '/docs/guides/typeset' },
       {
         path: 'video-player',
         title: 'Video Player - Semantic Components',

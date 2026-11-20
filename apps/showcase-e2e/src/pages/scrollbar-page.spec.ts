@@ -4,19 +4,19 @@ import { expect, test } from '../test';
 
 test.describe('Scrollbar Page', () => {
   test('should have no accessibility violations', async ({ page }) => {
-    await page.goto('/docs/components/scrollbar');
+    await page.goto('/docs/guides/scrollbar');
     await expectNoA11yViolations(page);
   });
 
   test('should have no accessibility violations in dark mode', async ({
     page,
   }) => {
-    await page.goto('/docs/components/scrollbar');
+    await page.goto('/docs/guides/scrollbar');
     await expectNoA11yViolations(page, { dark: true });
   });
 
   test('API reference: every variable and class', async ({ page }) => {
-    await page.goto('/docs/components/scrollbar');
+    await page.goto('/docs/guides/scrollbar');
     const first = (name: string) =>
       page
         .getByRole('region', { name })
@@ -39,7 +39,7 @@ test.describe('Scrollbar Page', () => {
   test('the page fits a phone, its tables scrolling in their own box @mobile', async ({
     page,
   }) => {
-    await page.goto('/docs/components/scrollbar');
+    await page.goto('/docs/guides/scrollbar');
     await page
       .getByRole('heading', { name: 'API reference' })
       .scrollIntoViewIfNeeded();

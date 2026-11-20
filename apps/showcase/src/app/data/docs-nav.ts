@@ -44,6 +44,8 @@ export const guidePages: readonly DocsPage[] = [
     description: 'Styles, theme variables, dark mode',
   },
   { name: 'Custom style', path: '/docs/getting-started/custom-style' },
+  { name: 'Scrollbar', path: '/docs/guides/scrollbar' },
+  { name: 'Typeset', path: '/docs/guides/typeset' },
   {
     name: 'Forms',
     path: '/docs/guides/forms',

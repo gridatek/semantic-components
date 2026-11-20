@@ -4,21 +4,21 @@ import { expect, test } from '../test';
 
 test.describe('Typeset Page', () => {
   test('should have no accessibility violations', async ({ page }) => {
-    await page.goto('/docs/components/typeset');
+    await page.goto('/docs/guides/typeset');
     await expectNoA11yViolations(page);
   });
 
   test('should have no accessibility violations in dark mode', async ({
     page,
   }) => {
-    await page.goto('/docs/components/typeset');
+    await page.goto('/docs/guides/typeset');
     await expectNoA11yViolations(page, { dark: true });
   });
 
   test('API reference: the directive, every variable and class', async ({
     page,
   }) => {
-    await page.goto('/docs/components/typeset');
+    await page.goto('/docs/guides/typeset');
     const first = (name: string) =>
       page
         .getByRole('region', { name })
@@ -48,7 +48,7 @@ test.describe('Typeset Page', () => {
   test('the page fits a phone, its tables scrolling in their own box @mobile', async ({
     page,
   }) => {
-    await page.goto('/docs/components/typeset');
+    await page.goto('/docs/guides/typeset');
     await page
       .getByRole('heading', { name: 'API reference' })
       .scrollIntoViewIfNeeded();

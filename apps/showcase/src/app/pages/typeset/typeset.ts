@@ -62,12 +62,7 @@ interface Sample {
         heading, list, table and code block in it is set.
       </p>
       <div class="flex flex-wrap justify-center gap-2 pt-2">
-        <a
-          scLink
-          variant="button"
-          size="sm"
-          routerLink="/docs/components/typeset"
-        >
+        <a scLink variant="button" size="sm" routerLink="/docs/guides/typeset">
           Get started
         </a>
       </div>

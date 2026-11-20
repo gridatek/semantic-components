@@ -25,6 +25,8 @@ const pages = [
   '/docs/getting-started/i18n',
   '/docs/packages/mcp-server',
   '/docs/guides/theming',
+  '/docs/guides/scrollbar',
+  '/docs/guides/typeset',
   '/docs/guides/forms',
   '/docs/guides/accessibility',
   '/docs/guides/ssr',

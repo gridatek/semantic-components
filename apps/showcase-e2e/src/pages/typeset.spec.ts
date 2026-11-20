@@ -19,7 +19,7 @@ test.describe('Typeset Page', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Typeset');
     await expect(
       page.getByRole('link', { name: 'Get started', exact: true }),
-    ).toHaveAttribute('href', '/docs/components/typeset');
+    ).toHaveAttribute('href', '/docs/guides/typeset');
     const tabs = page.getByRole('tablist', { name: 'Samples' });
     await expect(tabs.getByRole('tab')).toHaveText([
       'Docs',
