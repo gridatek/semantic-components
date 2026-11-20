@@ -143,7 +143,7 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
                 scEditorSearchBar
                 [(open)]="searchOpen"
                 aria-label="Search and replace"
-                class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-2 gap-y-1.5 p-2"
+                class="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-x-2 gap-y-1.5 p-2"
               >
                 <input
                   scInput
@@ -152,7 +152,7 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
                   placeholder="Search…"
                   class="h-8 w-full"
                 />
-                <div class="flex items-center justify-end gap-2">
+                <div class="flex items-center justify-start gap-2">
                   <span
                     scEditorSearchResults
                     #results="scEditorSearchResults"
@@ -182,16 +182,16 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
                     <svg siChevronDownIcon></svg>
                     <span class="sr-only">Next match</span>
                   </button>
-                  <button
-                    scButton
-                    variant="ghost"
-                    size="icon-sm"
-                    scEditorSearchClose
-                  >
-                    <svg siXIcon></svg>
-                    <span class="sr-only">Close search</span>
-                  </button>
                 </div>
+                <button
+                  scButton
+                  variant="ghost"
+                  size="icon-sm"
+                  scEditorSearchClose
+                >
+                  <svg siXIcon></svg>
+                  <span class="sr-only">Close search</span>
+                </button>
                 <input
                   scInput
                   scEditorReplaceInput
@@ -199,7 +199,7 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
                   placeholder="Replace with…"
                   class="h-8 w-full"
                 />
-                <div class="flex items-center justify-end gap-2">
+                <div class="flex items-center justify-start gap-2">
                   <button scButton variant="outline" size="sm" scEditorReplace>
                     Replace
                   </button>
