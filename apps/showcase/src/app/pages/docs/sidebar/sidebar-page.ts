@@ -86,8 +86,9 @@ import { SubMenuSidebarDemoContainer } from './demos/sub-menu-sidebar-demo-conta
           </li>
           <li>
             The trigger says whether the sidebar is open (aria-expanded) and
-            which one (aria-controls): write its icon and its name. Ctrl or ⌘ +
-            B opens and closes it too (the provider&apos;s shortcut).
+            which one (aria-controls): write its icon and its name.
+            <kbd scKbd>Ctrl / ⌘ + B</kbd> opens and closes it too (the
+            provider&apos;s shortcut).
           </li>
           <li>
             The rail, its edge, is for the pointer only: out of the tab order

@@ -340,9 +340,9 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           block type and list menus (with task lists), blockquotes and code
           blocks, marks, highlight colours, links, superscript and subscript,
           alignment, tables (from the table menu), images (pick, drop or paste
-          one) and search and replace (Ctrl + F). Select some text for the
-          floating toolbar. The page layout centres the text in a column of
-          readable width. It uses every feature:
+          one) and search and replace (<kbd scKbd>Ctrl / ⌘ + F</kbd>). Select
+          some text for the floating toolbar. The page layout centres the text
+          in a column of readable width. It uses every feature:
           <code scTypeset
             >provideEditor(withAlign(), withHighlight(), withImages(),
             withScripts(), withSearch(), withTables())</code
@@ -356,8 +356,8 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           The core and one feature,
           <code scTypeset>withTables()</code>: the table menu inserts a table
           and edits the one at the selection, its actions disabled where they
-          don&apos;t apply. Tab moves between cells; dragging a column&apos;s
-          border resizes it.
+          don&apos;t apply. <kbd scKbd>Tab</kbd> moves between cells; dragging a
+          column&apos;s border resizes it.
         </p>
         <app-tables-editor-demo-container />
       </section>
@@ -376,9 +376,10 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
       <section class="space-y-4">
         <h2 scTypeset appToc>Search and replace</h2>
         <p>
-          <code scTypeset>withSearch()</code>: the search button, or Ctrl / ⌘ +
-          F in the document, opens the bar. Enter and Shift + Enter step through
-          the matches, Escape closes it.
+          <code scTypeset>withSearch()</code>: the search button, or
+          <kbd scKbd>Ctrl / ⌘ + F</kbd> in the document, opens the bar.
+          <kbd scKbd>Enter</kbd> and <kbd scKbd>Shift + Enter</kbd> step through
+          the matches, <kbd scKbd>Escape</kbd> closes it.
         </p>
         <p>
           Whether the bar is open is yours: one signal, bound to what shows it
