@@ -1,6 +1,6 @@
 import type { ScTimelineStyles } from '@semantic-components/styles';
 
-// Ours (shadcn has no timeline), in this style (a copy of nova): titles and descriptions as its
+// Ours (shadcn has no timeline), in nova: compact; text as its Item’s: titles and descriptions as its
 // Item's text, markers and rings as its badges and focus rings.
 export const timeline: ScTimelineStyles = {
   root: '[--sc-timeline-line:1.25rem]',
