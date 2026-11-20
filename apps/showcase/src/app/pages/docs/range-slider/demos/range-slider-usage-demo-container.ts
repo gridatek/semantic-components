@@ -19,10 +19,7 @@ import { RangeSliderUsageDemo } from './range-slider-usage-demo';
 })
 export class RangeSliderUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScRangeSlider,
-  ScRangeSliderThumb,
-} from '@semantic-components/ui';
+import { ScRangeSlider, ScRangeSliderThumb } from '@semantic-components/ui';
 
 /** Two thumbs on one track, the range between them: the value is the pair. */
 @Component({

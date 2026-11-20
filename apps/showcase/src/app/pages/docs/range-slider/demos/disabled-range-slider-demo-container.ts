@@ -19,10 +19,7 @@ import { DisabledRangeSliderDemo } from './disabled-range-slider-demo';
 })
 export class DisabledRangeSliderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScRangeSlider,
-  ScRangeSliderThumb,
-} from '@semantic-components/ui';
+import { ScRangeSlider, ScRangeSliderThumb } from '@semantic-components/ui';
 
 /** Disabled: neither thumb takes the pointer or the focus. */
 @Component({

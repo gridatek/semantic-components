@@ -247,6 +247,15 @@ A rule (the user, 2026-11-19). A popup holding links — the Header's mobile men
 - **Tested** (2026-11-19): `apps/showcase-e2e/src/pages/site-header.spec.ts` — the Header's menu closes on the click while the page picked still loads; `navigation-end.spec.ts` — Back with each popup open closes it. Checked by hand the same day: the Sidebar's sheet and the Navigation Menu's panel close on the click too, before the next page is there.
 - **How a link tells its popup**: `scNavigationMenuLink` calls its nearest `SC_NAVIGATION_MENU_LINK_HOST` (the Navigation Menu, the Header), unless `closeOnClick` is off; the Sidebar's buttons on an `a` close the sheet themselves; a Menu item closes its menu on activation.
 
+## Bounds Come From the Form
+
+A rule (the user, 2026-11-20). A control's bounds — the lowest and highest values it takes — are the form's: `min(…)` and `max(…)` in the `form()` schema, never inputs the consumer writes beside `[formField]`. One way, the same for every control, and the bounds validate too (a value outside them is an error).
+
+- **A number** (Slider, Number Group): `min(path.volume, 0); max(path.volume, 100);` — Signal Forms feeds the control's `min` / `max` inputs.
+- **A pair** (Range Slider): `applyEach(path.price, (value) => { min(value, 0); max(value, 1000); })` — each value's bounds; the control reads its first value's `min` and its second's `max` from the `[formField]` on it (`FormField`, `self: true`). No `minValue` / `maxValue`: a Signal Forms control's `min` and `max` are typed as its value, so a pair can't take them as inputs.
+- **Without a form**, a control keeps its defaults (a Range Slider 0 to 100). A Number Group or Slider bound by `[(value)]` can still take `[min]` / `[max]`: the same inputs the form feeds, not a second API.
+- **Not for dates yet**: Signal Forms' `min()` / `max()` take numbers, so Calendar, Date Picker and Date Input keep `minDate` / `maxDate`.
+
 ## Component Structure Template
 
 A part is a `@Directive` on the consumer's element — a `@Component` only when it needs a template of its own, encapsulation or a CDK base class. It sets no text (no default label: the consumer writes it), and a `data-slot` only when another component styles by it ([data-slot-pattern.md](data-slot-pattern.md)).

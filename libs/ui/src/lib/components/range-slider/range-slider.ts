@@ -10,7 +10,11 @@ import {
   output,
   signal,
 } from '@angular/core';
-import type { FormValueControl } from '@angular/forms/signals';
+import {
+  type FieldTree,
+  FormField,
+  type FormValueControl,
+} from '@angular/forms/signals';
 import { cn } from 'cn';
 import { bindInput } from '../../utils';
 import { ScField } from '../field';
@@ -55,12 +59,18 @@ export class ScRangeSlider implements FormValueControl<ScRangeSliderValue> {
 
   /** The range, from and to: two-way, or a [formField]. */
   readonly value = model<ScRangeSliderValue>([0, 100]);
-  // Not min / max: a Signal Forms control's min and max are its value's
-  // (a number's), and this value is a pair.
-  /** The track's lowest value. */
-  readonly minValue = input(0);
-  /** The track's highest value. */
-  readonly maxValue = input(100);
+  /** The [formField] on it: its schema gives the ends. */
+  private readonly formField = inject(FormField, {
+    self: true,
+    optional: true,
+  });
+  /**
+   * The track's ends: the schema's `min` of the first value and `max` of
+   * the second (`applyEach(path, (value) => { min(value, 0); max(value, 1000); })`),
+   * as Slider and Number Group take theirs; 0 and 100 without them.
+   */
+  readonly lowest = computed(() => this.itemState(0)?.min?.() ?? 0);
+  readonly highest = computed(() => this.itemState(1)?.max?.() ?? 100);
   readonly step = input(1);
   /** The steps the thumbs keep between them (0: they may meet). */
   readonly minStepsBetweenValues = input(0);
@@ -83,9 +93,9 @@ export class ScRangeSlider implements FormValueControl<ScRangeSliderValue> {
 
   /** Where each value is along the track, 0 to 1: the range is drawn from them. */
   readonly fractions = computed(() => {
-    const span = this.maxValue() - this.minValue();
+    const span = this.highest() - this.lowest();
     return this.value().map((v) =>
-      span > 0 ? (v - this.minValue()) / span : 0,
+      span > 0 ? (v - this.lowest()) / span : 0,
     ) as [number, number];
   });
 
@@ -128,8 +138,8 @@ export class ScRangeSlider implements FormValueControl<ScRangeSliderValue> {
     const gap = this.minStepsBetweenValues() * this.step();
     const next =
       index === 0
-        ? this.round(Math.min(Math.max(raw, this.minValue()), to - gap))
-        : this.round(Math.max(Math.min(raw, this.maxValue()), from + gap));
+        ? this.round(Math.min(Math.max(raw, this.lowest()), to - gap))
+        : this.round(Math.max(Math.min(raw, this.highest()), from + gap));
     const value: ScRangeSliderValue = index === 0 ? [next, to] : [from, next];
     if (value[0] !== from || value[1] !== to) this.value.set(value);
     return next;
@@ -145,16 +155,23 @@ export class ScRangeSlider implements FormValueControl<ScRangeSliderValue> {
     let value: ScRangeSliderValue;
     if (index === 0) {
       const next = this.round(
-        Math.min(Math.max(raw, this.minValue()), this.maxValue() - gap),
+        Math.min(Math.max(raw, this.lowest()), this.highest() - gap),
       );
       value = [next, Math.max(to, this.round(next + gap))];
     } else {
       const next = this.round(
-        Math.max(Math.min(raw, this.maxValue()), this.minValue() + gap),
+        Math.max(Math.min(raw, this.highest()), this.lowest() + gap),
       );
       value = [Math.min(from, this.round(next - gap)), next];
     }
     if (value[0] !== from || value[1] !== to) this.value.set(value);
+  }
+
+  /** The state of a value of the bound pair (its schema's min and max). */
+  private itemState(index: number) {
+    const pair = this.formField?.field() as
+      FieldTree<readonly number[]> | undefined;
+    return pair?.[index]?.();
   }
 
   /** Focuses the first thumb — Signal Forms does, to show an invalid field. */
@@ -238,9 +255,9 @@ export class ScRangeSlider implements FormValueControl<ScRangeSliderValue> {
     const fraction =
       length > 0 ? Math.min(1, Math.max(0, (offset - thumb / 2) / length)) : 0;
     const steps = Math.round(
-      (fraction * (this.maxValue() - this.minValue())) / this.step(),
+      (fraction * (this.highest() - this.lowest())) / this.step(),
     );
-    return this.round(this.minValue() + steps * this.step());
+    return this.round(this.lowest() + steps * this.step());
   }
 
   /** Rid of float noise (0.1 + 0.2): to the step's decimals. */

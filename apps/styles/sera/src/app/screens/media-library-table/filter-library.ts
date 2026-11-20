@@ -7,7 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { FormField, form } from '@angular/forms/signals';
+import { FormField, applyEach, form, max, min } from '@angular/forms/signals';
 import {
   ScButton,
   ScCalendar,
@@ -324,7 +324,13 @@ export class FilterLibrary {
   private readonly dateOptions = DATE_OPTIONS;
 
   private readonly model = signal(ALL());
-  private readonly filterForm = form(this.model);
+  private readonly filterForm = form(this.model, (path) =>
+    // The size slider's ends: 0 to 100 steps of MB_PER_STEP (100: no limit).
+    applyEach(path.size, (value) => {
+      min(value, 0);
+      max(value, 100);
+    }),
+  );
 
   private readonly minText = computed(
     () => `${this.model().size[0] * MB_PER_STEP} MB`,

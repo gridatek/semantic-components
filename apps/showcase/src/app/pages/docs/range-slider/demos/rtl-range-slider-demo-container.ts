@@ -20,10 +20,7 @@ import { RtlRangeSliderDemo } from './rtl-range-slider-demo';
 export class RtlRangeSliderDemoContainer {
   private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScRangeSlider,
-  ScRangeSliderThumb,
-} from '@semantic-components/ui';
+import { ScRangeSlider, ScRangeSliderThumb } from '@semantic-components/ui';
 
 /** In a right-to-left page: from the right, the arrows mirrored, the values in Arabic digits (LOCALE_ID). */
 @Component({

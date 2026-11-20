@@ -295,6 +295,29 @@ test.describe('Range Slider demos', () => {
     await expect(page.locator('pre')).toContainText('500');
   });
 
+  test('form: the ends are the schema’s (each value 0 to 1000)', async ({
+    page,
+  }) => {
+    await page.goto(demo('form-range-slider-demo'));
+    const lowest = page.getByRole('slider', { name: 'Lowest budget' });
+    const highest = page.getByRole('slider', { name: 'Highest budget' });
+    await expect(highest).toHaveAttribute('max', '1000');
+    await expect(lowest).toHaveAttribute('min', '0');
+    await highest.focus();
+    await page.keyboard.press('End');
+    await expect(highest).toHaveValue('1000');
+    await expect(page.locator('pre')).toContainText('1000');
+  });
+
+  test('label and value: the ends are its form’s too', async ({ page }) => {
+    await page.goto(demo('label-range-slider-demo'));
+    const to = page.getByRole('slider', { name: 'Maximum price' });
+    await expect(to).toHaveAttribute('max', '1000');
+    await to.focus();
+    await page.keyboard.press('End');
+    await expect(to).toHaveAttribute('aria-valuetext', '€1,000');
+  });
+
   test('disabled: neither thumb takes the focus or a press', async ({
     page,
   }) => {

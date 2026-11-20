@@ -67,6 +67,12 @@ import { TocHeading } from '../../components/toc/toc-heading';
           the errors show, in your words — and your translations.
         </p>
         <app-doc-code [code]="schemaCode" />
+        <p>
+          The bounds of a slider or a number are these rules too — the control
+          takes them from the form, never from an input of its own. A range (a
+          pair of values) gets them on each value:
+        </p>
+        <app-doc-code [code]="pairCode" />
       </section>
 
       <section class="space-y-4">
@@ -109,6 +115,14 @@ readonly profileForm = form(this.profile, (path) => {
   email(path.email, { message: 'That is not an email.' });
   disabled(path.plan, () => !this.canChangePlan());
 });`;
+
+  private readonly pairCode = `readonly priceForm = form(this.model, (path) =>
+  // <div scRangeSlider [formField]="priceForm.price">: its ends, 0 and 1000.
+  applyEach(path.price, (value) => {
+    min(value, 0);
+    max(value, 1000);
+  }),
+);`;
 
   private readonly submitCode = `readonly profileForm = form(this.profile, schema, {
   submission: {

@@ -19,6 +19,7 @@ import { LabelRangeSliderDemo } from './label-range-slider-demo';
 })
 export class LabelRangeSliderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, applyEach, form, max, min } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldDescription,
@@ -31,6 +32,7 @@ import {
 @Component({
   selector: 'app-label-range-slider-demo',
   imports: [
+    FormField,
     ScField,
     ScFieldDescription,
     ScLabel,
@@ -48,8 +50,7 @@ import {
       <div
         scRangeSlider
         #price="scRangeSlider"
-        [(value)]="range"
-        [maxValue]="1000"
+        [formField]="priceForm.price"
         [step]="10"
         [format]="{
           style: 'currency',
@@ -67,6 +68,14 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LabelRangeSliderDemo {
-  private readonly range = signal<readonly [number, number]>([200, 800]);
+  private readonly model = signal<{ price: readonly [number, number] }>({
+    price: [200, 800],
+  });
+  private readonly priceForm = form(this.model, (path) =>
+    applyEach(path.price, (value) => {
+      min(value, 0);
+      max(value, 1000);
+    }),
+  );
 }`;
 }

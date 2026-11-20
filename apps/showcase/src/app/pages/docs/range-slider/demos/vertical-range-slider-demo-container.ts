@@ -19,22 +19,14 @@ import { VerticalRangeSliderDemo } from './vertical-range-slider-demo';
 })
 export class VerticalRangeSliderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScRangeSlider,
-  ScRangeSliderThumb,
-} from '@semantic-components/ui';
+import { ScRangeSlider, ScRangeSliderThumb } from '@semantic-components/ui';
 
 /** Upright: the values grow upward, ArrowUp raises a thumb. */
 @Component({
   selector: 'app-vertical-range-slider-demo',
   imports: [ScRangeSlider, ScRangeSliderThumb],
   template: \`
-    <div
-      scRangeSlider
-      orientation="vertical"
-      [(value)]="range"
-      class="h-48"
-    >
+    <div scRangeSlider orientation="vertical" [(value)]="range" class="h-48">
       <input scRangeSliderThumb aria-label="Lowest" />
       <input scRangeSliderThumb aria-label="Highest" />
     </div>

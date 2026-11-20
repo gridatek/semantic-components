@@ -24,8 +24,8 @@ import { ScRangeSlider } from './range-slider';
     type: 'range',
     'data-slot': 'range-slider-thumb',
     '[id]': 'id()',
-    '[min]': 'slider.minValue()',
-    '[max]': 'slider.maxValue()',
+    '[min]': 'slider.lowest()',
+    '[max]': 'slider.highest()',
     '[step]': 'slider.step()',
     '[value]': 'current()',
     '[disabled]': 'slider.disabled()',
@@ -56,7 +56,7 @@ export class ScRangeSliderThumb {
   /** 0: from; 1: to. */
   private readonly index = computed(() => this.slider.indexOf(this.element));
   private readonly current = computed(
-    () => this.slider.value()[this.index()] ?? this.slider.minValue(),
+    () => this.slider.value()[this.index()] ?? this.slider.lowest(),
   );
 
   // The first takes the field's id: its label points to it.

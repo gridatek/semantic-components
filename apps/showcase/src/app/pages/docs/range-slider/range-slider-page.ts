@@ -50,7 +50,9 @@ import { VerticalRangeSliderDemoContainer } from './demos/vertical-range-slider-
         <p>
           A group holding the value and drawing the track; in it, a native range
           per thumb — the first is from, the second to. Each thumb is named by
-          you; the group by its field&apos;s label.
+          you; the group by its field&apos;s label. Its ends are the
+          form&apos;s: min and max on each value of the pair, in the schema
+          (applyEach).
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -122,7 +124,7 @@ export default class RangeSliderPage {
       name: 'ScRangeSlider',
       selector: 'div[scRangeSlider]',
       description:
-        "A group (named by its field's label) drawing the track and the range: value, the pair [from, to] (two-way, or a [formField]); minValue, maxValue, step; minStepsBetweenValues; orientation ('horizontal', 'vertical'); disabled; format (Intl.NumberFormat, in LOCALE_ID). exportAs scRangeSlider: formatted().",
+        "A group (named by its field's label) drawing the track and the range: value, the pair [from, to] (a [formField], or two-way); its ends from the form's schema (applyEach: min and max on each value; 0 and 100 without); step; minStepsBetweenValues; orientation ('horizontal', 'vertical'); disabled; format (Intl.NumberFormat, in LOCALE_ID). exportAs scRangeSlider: formatted(), lowest(), highest().",
     },
     {
       name: 'ScRangeSliderThumb',

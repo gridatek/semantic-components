@@ -19,10 +19,7 @@ import { StepsRangeSliderDemo } from './steps-range-slider-demo';
 })
 export class StepsRangeSliderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScRangeSlider,
-  ScRangeSliderThumb,
-} from '@semantic-components/ui';
+import { ScRangeSlider, ScRangeSliderThumb } from '@semantic-components/ui';
 
 /** By tens, and two steps apart at least (minStepsBetweenValues): the thumbs stop 20 short of each other. */
 @Component({

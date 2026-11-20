@@ -7,7 +7,7 @@ A range on one track: two thumbs that never cross, the range between them, in th
 ```html
 <div scField>
   <label scLabel>Price</label>
-  <div scRangeSlider [formField]="form.price" [maxValue]="1000" [step]="10" [format]="{ style: 'currency', currency: 'EUR' }" #range="scRangeSlider">
+  <div scRangeSlider [formField]="priceForm.price" [step]="10" [format]="{ style: 'currency', currency: 'EUR' }" #range="scRangeSlider">
     <input scRangeSliderThumb aria-label="Minimum price" />
     <input scRangeSliderThumb aria-label="Maximum price" />
   </div>
@@ -15,14 +15,26 @@ A range on one track: two thumbs that never cross, the range between them, in th
 </div>
 ```
 
+```ts
+readonly priceForm = form(signal({ price: [200, 800] as readonly [number, number] }), (path) =>
+  // The ends: each value from 0 to 1000.
+  applyEach(path.price, (value) => {
+    min(value, 0);
+    max(value, 1000);
+  }),
+);
+```
+
 ## Parts
 
-| Part                 | Selector                    | What it does                                                                                                                                                                                                                                                                                                                                                                                         |
-| -------------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScRangeSlider`      | `div[scRangeSlider]`        | A group (`role="group"`, named by its field's label). `value`: the pair, two-way or a `[formField]` (`FormValueControl<readonly [number, number]>`); `minValue` (0), `maxValue` (100), `step` (1), `minStepsBetweenValues` (0), `orientation` (`horizontal`, `vertical`), `disabled`, `format` (`Intl.NumberFormatOptions`, in `LOCALE_ID`). exportAs `scRangeSlider`: `formatted()`, `fractions()`. |
-| `ScRangeSliderThumb` | `input[scRangeSliderThumb]` | A native range (`type="range"` set by the part) in the style's slider thumb: the first in the page is from, the second to. It stops at the other (and `minStepsBetweenValues` short of it); `aria-valuetext` from `format`. The first takes the field's id, so the label points to it.                                                                                                               |
+| Part                 | Selector                    | What it does                                                                                                                                                                                                                                                                                                                                                                                              |
+| -------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScRangeSlider`      | `div[scRangeSlider]`        | A group (`role="group"`, named by its field's label). `value`: the pair, two-way or a `[formField]` (`FormValueControl<readonly [number, number]>`); `step` (1), `minStepsBetweenValues` (0), `orientation` (`horizontal`, `vertical`), `disabled`, `format` (`Intl.NumberFormatOptions`, in `LOCALE_ID`). exportAs `scRangeSlider`: `formatted()`, `fractions()`, `lowest()` and `highest()` (the ends). |
+| `ScRangeSliderThumb` | `input[scRangeSliderThumb]` | A native range (`type="range"` set by the part) in the style's slider thumb: the first in the page is from, the second to. It stops at the other (and `minStepsBetweenValues` short of it); `aria-valuetext` from `format`. The first takes the field's id, so the label points to it.                                                                                                                    |
 
-Not `min` / `max`: a Signal Forms control's `min` and `max` are its value's (a number's), and this value is a pair.
+## The ends come from the form
+
+As every control's bounds (docs/component-design-principles.md, "Bounds Come From the Form"): `min` and `max` in the schema, on each value of the pair (`applyEach`). The slider reads the first value's `min` and the second's `max` from the `[formField]` on it; they validate too (a value outside them is an error). Without a form, or without them: 0 and 100. No `min` / `max` inputs: a Signal Forms control's `min` and `max` are typed as its value, here a pair.
 
 ## Behaviour
 
