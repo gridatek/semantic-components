@@ -9,6 +9,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AspectRatioImageCropperNextDemoContainer } from './demos/aspect-ratio-image-cropper-next-demo-container';
+import { CircleImageCropperNextDemoContainer } from './demos/circle-image-cropper-next-demo-container';
 import { ControlledImageCropperNextDemoContainer } from './demos/controlled-image-cropper-next-demo-container';
 import { DisabledImageCropperNextDemoContainer } from './demos/disabled-image-cropper-next-demo-container';
 import { FrameImageCropperNextDemoContainer } from './demos/frame-image-cropper-next-demo-container';
@@ -28,6 +29,7 @@ import { RtlImageCropperNextDemoContainer } from './demos/rtl-image-cropper-next
     ComponentBadges,
     ImageCropperNextUsageDemoContainer,
     AspectRatioImageCropperNextDemoContainer,
+    CircleImageCropperNextDemoContainer,
     FrameImageCropperNextDemoContainer,
     GridImageCropperNextDemoContainer,
     ControlledImageCropperNextDemoContainer,
@@ -129,6 +131,7 @@ import { RtlImageCropperNextDemoContainer } from './demos/rtl-image-cropper-next
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <app-aspect-ratio-image-cropper-next-demo-container />
+        <app-circle-image-cropper-next-demo-container />
         <app-frame-image-cropper-next-demo-container />
         <app-grid-image-cropper-next-demo-container />
         <app-controlled-image-cropper-next-demo-container />

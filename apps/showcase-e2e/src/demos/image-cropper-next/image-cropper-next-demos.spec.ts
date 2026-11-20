@@ -288,3 +288,51 @@ test('RTL: the numbers in Arabic words, the image not mirrored', async ({
   await page.keyboard.press('ArrowLeft');
   await expectCrop(crop, '960 × 640 بكسل، عند 117، 80');
 });
+
+test.describe('Circle: a round crop moved over the image', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/demos/image-cropper-next/circle-image-cropper-next-demo');
+    // Square, centred, at four fifths of the image's height.
+    await expectCrop(selection(page), '640 by 640 pixels, at 280, 80');
+  });
+
+  test('dragged, it moves; a corner resizes it, still round', async ({
+    page,
+  }) => {
+    await expect(selection(page)).toHaveClass(/rounded-full/);
+    await drag(page, selection(page), -1000, 0);
+    // At the left edge: no further.
+    await expectCrop(selection(page), '640 by 640 pixels, at 0, 80');
+    await drag(page, handle(page, 'Bottom right corner'), -36, 0);
+    await expect
+      .poll(async () => {
+        const text = await selection(page).getAttribute('aria-valuetext');
+        const [width, , height] = (text ?? '').split(' ');
+        return Number(width) < 640 && width === height;
+      })
+      .toBe(true);
+  });
+
+  test('Crop makes a 256 px round PNG', async ({ page }) => {
+    await page.getByRole('button', { name: 'Crop', exact: true }).click();
+    const result = page.getByRole('img', { name: 'The cropped circle' });
+    await expect(result).toBeVisible();
+    await expect
+      .poll(() =>
+        result.evaluate((img: HTMLImageElement) => {
+          if (!img.complete || !img.naturalWidth) return null;
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const context = canvas.getContext('2d');
+          context?.drawImage(img, 0, 0);
+          return [
+            img.naturalWidth,
+            context?.getImageData(0, 0, 1, 1).data[3],
+            context?.getImageData(128, 128, 1, 1).data[3],
+          ];
+        }),
+      )
+      .toEqual([256, 0, 255]);
+  });
+});

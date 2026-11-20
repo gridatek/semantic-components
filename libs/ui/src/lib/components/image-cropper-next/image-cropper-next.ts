@@ -425,7 +425,10 @@ export class ScImageCropperNext {
       return;
     }
     event.preventDefault();
-    if (element.tabIndex >= 0) element.focus({ preventScroll: true });
+    // Focused for the keys that follow, without the keyboard's ring.
+    if (element.tabIndex >= 0) {
+      element.focus({ preventScroll: true, focusVisible: false });
+    }
     this.ɵendDrag();
     element.setPointerCapture?.(event.pointerId);
 

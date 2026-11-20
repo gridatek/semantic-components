@@ -3078,6 +3078,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'circle-image-cropper-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/image-cropper-next/demos/circle-image-cropper-next-demo').then(
+            (m) => m.CircleImageCropperNextDemo,
+          ),
+      },
+      {
         path: 'frame-image-cropper-next-demo',
         loadComponent: () =>
           import('../pages/docs/image-cropper-next/demos/frame-image-cropper-next-demo').then(
