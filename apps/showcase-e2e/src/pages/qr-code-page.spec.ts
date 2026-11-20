@@ -1,9 +1,33 @@
 import { expectNoA11yViolations } from '../axe';
-import { test } from '../test';
+import { expect, test } from '../test';
 
 test.describe('QR Code Page', () => {
-  test('should have no accessibility violations', async ({ page }) => {
+  test('sections in order, and no axe violations', async ({ page }) => {
     await page.goto('/docs/components/qr-code');
+    await expect(page.locator('h2')).toHaveText([
+      'Installation',
+      'Usage',
+      'Anatomy',
+      'Colours',
+      'Accessibility',
+      'Examples',
+      'API reference',
+    ]);
     await expectNoA11yViolations(page);
+  });
+
+  test('API reference: one part, its inputs and the export options', async ({
+    page,
+  }) => {
+    await page.goto('/docs/components/qr-code');
+    await expect(
+      page.getByRole('region', { name: 'QR Code parts' }).getByRole('row'),
+    ).toHaveCount(2);
+    await expect(
+      page.getByRole('region', { name: 'ScQrCode inputs' }),
+    ).toContainText('errorCorrection');
+    await expect(
+      page.getByRole('region', { name: 'Export options' }),
+    ).toContainText('background');
   });
 });

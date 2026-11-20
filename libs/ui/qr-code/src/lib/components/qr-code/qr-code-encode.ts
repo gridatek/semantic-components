@@ -1,18 +1,18 @@
 import { encode } from 'uqr';
 
 /** How much of the code can be damaged and still read: 7, 15, 25 or 30 %. */
-export type ScQrCodeNextErrorCorrection = 'L' | 'M' | 'Q' | 'H';
+export type ScQrCodeErrorCorrection = 'L' | 'M' | 'Q' | 'H';
 
 /** How a value is encoded. */
-export interface ScQrCodeNextOptions {
+export interface ScQrCodeOptions {
   /** `'M'` by default. */
-  readonly errorCorrection?: ScQrCodeNextErrorCorrection;
+  readonly errorCorrection?: ScQrCodeErrorCorrection;
   /** The quiet zone round the code, in modules: 4 by default, as the QR spec asks. */
   readonly margin?: number;
 }
 
 /** How an exported code looks. */
-export interface ScQrCodeNextExportOptions extends ScQrCodeNextOptions {
+export interface ScQrCodeExportOptions extends ScQrCodeOptions {
   /** The dark modules' colour: black by default. */
   readonly color?: string;
   /** The light modules' and margin's colour: white by default. */
@@ -22,7 +22,7 @@ export interface ScQrCodeNextExportOptions extends ScQrCodeNextOptions {
 }
 
 /** What `qrCodeToBlob` makes. */
-export interface ScQrCodeNextBlobOptions extends ScQrCodeNextExportOptions {
+export interface ScQrCodeBlobOptions extends ScQrCodeExportOptions {
   /** `image/png` by default. */
   readonly type?: string;
   /** For JPEG and WebP: 0 to 1. */
@@ -32,7 +32,7 @@ export interface ScQrCodeNextBlobOptions extends ScQrCodeNextExportOptions {
 /** The modules (`true`: dark), margin included. Throws when the value can't be encoded. */
 export function qrModules(
   value: string,
-  { errorCorrection = 'M', margin = 4 }: ScQrCodeNextOptions = {},
+  { errorCorrection = 'M', margin = 4 }: ScQrCodeOptions = {},
 ): boolean[][] {
   return encode(value, { ecc: errorCorrection, border: margin }).data;
 }
@@ -76,7 +76,7 @@ export function qrCodeToSvg(
     background = '#ffffff',
     size = 1024,
     ...options
-  }: ScQrCodeNextExportOptions = {},
+  }: ScQrCodeExportOptions = {},
 ): string {
   const modules = qrModules(value, options);
   const n = modules.length;
@@ -102,7 +102,7 @@ export async function qrCodeToBlob(
     type = 'image/png',
     quality,
     ...options
-  }: ScQrCodeNextBlobOptions = {},
+  }: ScQrCodeBlobOptions = {},
 ): Promise<Blob> {
   const modules = qrModules(value, options);
   const n = modules.length;

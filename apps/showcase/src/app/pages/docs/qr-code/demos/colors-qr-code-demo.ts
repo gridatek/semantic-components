@@ -1,21 +1,27 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import { ScQrCode } from '@semantic-components/ui/qr-code';
 
+/** Its colours are classes: the text colour for the dark modules, the background for the rest — dark on light, strong contrast, in both themes. */
 @Component({
   selector: 'app-colors-qr-code-demo',
-  imports: [ScQrCode],
+  imports: [ScFrame, ScQrCode],
   template: `
     <div class="flex flex-wrap gap-6">
       @for (item of colors; track item.label) {
-        <div class="flex flex-col items-center gap-1">
+        <figure class="flex flex-col items-center gap-1">
           <svg
             scQrCode
-            [value]="item.label"
-            [class]="'size-36 rounded-md ' + item.class"
-            [aria-label]="item.label + ' QR Code'"
+            scFrame
+            size="xs"
+            value="https://angular.dev"
+            [class]="'size-36 ' + item.class"
+            [attr.aria-label]="'QR code for angular.dev, ' + item.label"
           ></svg>
-          <p class="text-muted-foreground text-xs">{{ item.label }}</p>
-        </div>
+          <figcaption class="text-muted-foreground text-xs">
+            {{ item.label }}
+          </figcaption>
+        </figure>
       }
     </div>
   `,
@@ -24,9 +30,9 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
 })
 export class ColorsQrCodeDemo {
   private readonly colors = [
-    { class: 'bg-blue-100 text-blue-700', label: 'Blue' },
-    { class: 'bg-green-100 text-green-800', label: 'Green' },
-    { class: 'bg-purple-100 text-purple-700', label: 'Purple' },
-    { class: 'bg-rose-100 text-rose-700', label: 'Rose' },
+    { class: 'bg-blue-100 text-blue-800', label: 'Blue' },
+    { class: 'bg-green-100 text-green-900', label: 'Green' },
+    { class: 'bg-purple-100 text-purple-800', label: 'Purple' },
+    { class: 'bg-rose-100 text-rose-800', label: 'Rose' },
   ];
 }

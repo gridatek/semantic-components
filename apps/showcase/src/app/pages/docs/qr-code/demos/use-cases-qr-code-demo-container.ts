@@ -7,9 +7,9 @@ import { UseCasesQrCodeDemo } from './use-cases-qr-code-demo';
   imports: [DemoContainer, UseCasesQrCodeDemo],
   template: `
     <app-demo-container
-      title="Use Cases"
-      demoUrl="/demos/qr-code/use-cases-qr-code-demo"
+      title="Use cases"
       [code]="code"
+      demoUrl="/demos/qr-code/use-cases-qr-code-demo"
     >
       <app-use-cases-qr-code-demo />
     </app-demo-container>
@@ -21,21 +21,24 @@ export class UseCasesQrCodeDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScQrCode } from '@semantic-components/ui/qr-code';
 
+/** What a phone opens from a code: a link, a call, an email, a Wi-Fi network — each by its URI scheme. */
 @Component({
   selector: 'app-use-cases-qr-code-demo',
   imports: [ScQrCode],
   template: \`
     <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
       @for (item of useCases; track item.label) {
-        <div class="flex flex-col items-center gap-1">
+        <figure class="flex flex-col items-center gap-1">
           <svg
             scQrCode
-            [value]="item.value"
             class="size-28"
-            [aria-label]="item.label"
+            [value]="item.value"
+            [attr.aria-label]="'QR code: ' + item.label"
           ></svg>
-          <p class="text-muted-foreground text-xs">{{ item.label }}</p>
-        </div>
+          <figcaption class="text-muted-foreground text-xs">
+            {{ item.label }}
+          </figcaption>
+        </figure>
       }
     </div>
   \`,
@@ -44,10 +47,10 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
 })
 export class UseCasesQrCodeDemo {
   private readonly useCases = [
-    { value: 'https://angular.dev', label: 'Website URL' },
-    { value: 'tel:+1234567890', label: 'Phone Number' },
+    { value: 'https://angular.dev', label: 'Website' },
+    { value: 'tel:+1234567890', label: 'Phone' },
     { value: 'mailto:hello@example.com', label: 'Email' },
-    { value: 'WIFI:T:WPA;S:MyNetwork;P:password123;;', label: 'WiFi' },
+    { value: 'WIFI:T:WPA;S:MyNetwork;P:password123;;', label: 'Wi-Fi' },
   ];
 }`;
 }

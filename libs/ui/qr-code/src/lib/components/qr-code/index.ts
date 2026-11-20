@@ -1,4 +1,9 @@
 export { ScQrCode } from './qr-code';
-export { ScQrCodeDownload } from './qr-code-download';
-export type { ScQrCodeEcc } from './qr-code';
-export type { ScQrCodeDownloadFormat } from './qr-code-download';
+export {
+  type ScQrCodeBlobOptions,
+  type ScQrCodeErrorCorrection,
+  type ScQrCodeExportOptions,
+  type ScQrCodeOptions,
+  qrCodeToBlob,
+  qrCodeToSvg,
+} from './qr-code-encode';

@@ -1,36 +1,36 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RtlQrCodeNextDemo } from './rtl-qr-code-next-demo';
+import { RtlQrCodeDemo } from './rtl-qr-code-demo';
 
 @Component({
-  selector: 'app-rtl-qr-code-next-demo-container',
-  imports: [DemoContainer, RtlQrCodeNextDemo],
+  selector: 'app-rtl-qr-code-demo-container',
+  imports: [DemoContainer, RtlQrCodeDemo],
   template: `
     <app-demo-container
       title="RTL"
       [code]="code"
-      demoUrl="/demos/qr-code-next/rtl-qr-code-next-demo"
+      demoUrl="/demos/qr-code/rtl-qr-code-demo"
     >
-      <app-rtl-qr-code-next-demo />
+      <app-rtl-qr-code-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlQrCodeNextDemoContainer {
+export class RtlQrCodeDemoContainer {
   private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
-import { ScQrCodeNext } from '@semantic-components/ui/qr-code';
+import { ScQrCode } from '@semantic-components/ui/qr-code';
 
 /** In a right-to-left page: the code is never mirrored (scanners read it one way); its caption follows the page. */
 @Component({
-  selector: 'app-rtl-qr-code-next-demo',
-  imports: [Dir, ScLink, ScQrCodeNext],
+  selector: 'app-rtl-qr-code-demo',
+  imports: [Dir, ScLink, ScQrCode],
   template: \`
     <figure dir="rtl" lang="ar" class="flex flex-col items-center gap-2">
       <svg
-        scQrCodeNext
+        scQrCode
         value="https://angular.dev"
         aria-label="رمز QR لموقع angular.dev"
       ></svg>
@@ -43,5 +43,5 @@ import { ScQrCodeNext } from '@semantic-components/ui/qr-code';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlQrCodeNextDemo {}`;
+export class RtlQrCodeDemo {}`;
 }

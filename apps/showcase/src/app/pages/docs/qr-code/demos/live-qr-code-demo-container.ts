@@ -1,37 +1,37 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { LiveQrCodeNextDemo } from './live-qr-code-next-demo';
+import { LiveQrCodeDemo } from './live-qr-code-demo';
 
 @Component({
-  selector: 'app-live-qr-code-next-demo-container',
-  imports: [DemoContainer, LiveQrCodeNextDemo],
+  selector: 'app-live-qr-code-demo-container',
+  imports: [DemoContainer, LiveQrCodeDemo],
   template: `
     <app-demo-container
       title="Live"
       [code]="code"
-      demoUrl="/demos/qr-code-next/live-qr-code-next-demo"
+      demoUrl="/demos/qr-code/live-qr-code-demo"
     >
-      <app-live-qr-code-next-demo />
+      <app-live-qr-code-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LiveQrCodeNextDemoContainer {
+export class LiveQrCodeDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScButton, ScField, ScInput, ScLabel } from '@semantic-components/ui';
-import { ScQrCodeNext } from '@semantic-components/ui/qr-code';
+import { ScQrCode } from '@semantic-components/ui/qr-code';
 
 /** Drawn as you type. A value too long to encode draws nothing and sets error(). */
 @Component({
-  selector: 'app-live-qr-code-next-demo',
-  imports: [FormField, ScField, ScLabel, ScInput, ScButton, ScQrCodeNext],
+  selector: 'app-live-qr-code-demo',
+  imports: [FormField, ScField, ScLabel, ScInput, ScButton, ScQrCode],
   template: \`
     <div class="flex w-full max-w-sm flex-col items-center gap-4">
       <svg
-        scQrCodeNext
-        #qr="scQrCodeNext"
+        scQrCode
+        #qr="scQrCode"
         [value]="text()"
         aria-label="QR code for the text below"
       ></svg>
@@ -70,7 +70,7 @@ import { ScQrCodeNext } from '@semantic-components/ui/qr-code';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LiveQrCodeNextDemo {
+export class LiveQrCodeDemo {
   private readonly model = signal({ text: 'https://angular.dev' });
   private readonly textForm = form(this.model);
   private readonly text = computed(() => this.model().text);

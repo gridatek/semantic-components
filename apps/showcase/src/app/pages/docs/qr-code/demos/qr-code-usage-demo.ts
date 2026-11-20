@@ -1,15 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScLink } from '@semantic-components/ui';
-import { ScQrCodeNext } from '@semantic-components/ui/qr-code';
+import { ScQrCode } from '@semantic-components/ui/qr-code';
 
 /** A code, named for where it leads — and the same link beside it, for whoever can’t scan. */
 @Component({
-  selector: 'app-qr-code-next-usage-demo',
-  imports: [ScLink, ScQrCodeNext],
+  selector: 'app-qr-code-usage-demo',
+  imports: [ScLink, ScQrCode],
   template: `
     <figure class="flex flex-col items-center gap-2">
       <svg
-        scQrCodeNext
+        scQrCode
         value="https://angular.dev"
         aria-label="QR code for angular.dev"
       ></svg>
@@ -21,4 +21,4 @@ import { ScQrCodeNext } from '@semantic-components/ui/qr-code';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class QrCodeNextUsageDemo {}
+export class QrCodeUsageDemo {}

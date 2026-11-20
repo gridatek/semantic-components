@@ -1,6 +1,6 @@
 # QR Code
 
-A QR code drawn as SVG, encoded with [`uqr`](https://github.com/unjs/uqr) (a peer dependency), and a button to download it as PNG or SVG.
+A QR code drawn as one SVG path, encoded with [`uqr`](https://github.com/unjs/uqr) (an optional peer of `@semantic-components/ui`, for this entry point) — and, from the same value, a file to download or print.
 
 ## Usage
 
@@ -8,48 +8,40 @@ A QR code drawn as SVG, encoded with [`uqr`](https://github.com/unjs/uqr) (a pee
 <svg scQrCode value="https://angular.dev" aria-label="QR code for angular.dev"></svg>
 ```
 
-```html
-<svg scQrCode #qr="scQrCode" [value]="url()" aria-label="QR code for the event page"></svg>
-<button scQrCodeDownload [for]="qr" filename="event">PNG</button>
-<button scQrCodeDownload [for]="qr" filename="event" format="svg">SVG</button>
-```
+## The code
 
-## Parts
+`svg[scQrCode]` (`exportAs: 'scQrCode'`):
 
-### ScQrCode — `svg[scQrCode]` (`exportAs: 'scQrCode'`)
+| Input             | Type                       | Default  |                                                           |
+| ----------------- | -------------------------- | -------- | --------------------------------------------------------- |
+| `value`           | `string`                   | required | What it encodes: a URL, `mailto:`, `tel:`, `WIFI:`…       |
+| `errorCorrection` | `'L' \| 'M' \| 'Q' \| 'H'` | `'M'`    | How much can be damaged and still read: 7, 15, 25, 30 %   |
+| `margin`          | `number`                   | `4`      | The quiet zone round it, in modules (the spec asks for 4) |
 
-| Input        | Type                       | Default   | Description                                                     |
-| ------------ | -------------------------- | --------- | --------------------------------------------------------------- |
-| `value`      | `string`                   | required  | The text to encode (a URL, `mailto:`, `WIFI:`…)                 |
-| `ecc`        | `'L' \| 'M' \| 'Q' \| 'H'` | `'M'`     | Error correction: 7 / 15 / 25 / 30 % of the code can be damaged |
-| `quietZone`  | `number`                   | `4`       | Light margin around the code, in modules (the spec asks for 4)  |
-| `minVersion` | `number`                   | `1`       | Smallest QR version (1–40): keeps the size stable while typing  |
-| `boostEcc`   | `boolean`                  | `false`   | Use a higher error correction when it fits                      |
-| `mask`       | `number`                   | automatic | Mask pattern (0–7)                                              |
-| `aria-label` | attribute                  | none      | Its name — say what the code leads to (the library writes none) |
-| `class`      | `string`                   | `''`      | Additional CSS classes                                          |
+`error()`: why the value can't be encoded (`'Data too long'`), or `null`. Then nothing is drawn; the code keeps its place, hidden.
 
-Signals: `valid()` (there's a code to show), `error()` (why the value can't be encoded, e.g. `'Data too long'`, or `null`), `modules()` (the module matrix, quiet zone included), `path()` (the dark modules as one SVG path).
+## Colours
 
-- **Rendering:** one `<path>`, whatever the size.
-- **Colors:** dark modules use the text color, the quiet zone the background: dark on white by default, in both themes (many scanners can't read inverted codes). Recolor with classes, keeping strong contrast: `class="bg-blue-100 text-blue-700"`. Size it with `size-*` (default `size-52`).
-- **Too long:** a value that doesn't fit renders nothing and sets `error()` — it doesn't throw.
+Dark on white in both themes (`bg-white text-black`): many scanners can't read a code inverted. Recolour with classes — the text colour for the dark modules, the background for the rest (`bg-blue-100 text-blue-800`) — keeping dark on light and strong contrast. Size it with `size-*` (`size-52` by default).
 
-### ScQrCodeDownload — `button[scQrCodeDownload]`
+## Files
 
-Downloads the code, drawn from its modules — sharp at any size, in the colors shown on screen (white behind it when it has no background). Disabled while there's no code.
+Functions on a value — no component needed (an email, a printed page):
 
-| Input       | Type                          | Default     | Description                                              |
-| ----------- | ----------------------------- | ----------- | -------------------------------------------------------- |
-| `for`       | `ScQrCode`                    | required    | The code to download (`#qr="scQrCode"`)                  |
-| `filename`  | `string`                      | `'qrcode'`  | File name, without extension                             |
-| `format`    | `'png' \| 'svg'`              | `'png'`     | File format                                              |
-| `imageSize` | `number`                      | `1024`      | Width in pixels, rounded down to whole pixels per module |
-| `variant`   | `ScButtonVariants['variant']` | `'outline'` | The button's look, as `scButton`'s                       |
-| `size`      | `ScButtonVariants['size']`    | `'default'` | The button's size, as `scButton`'s                       |
-| `class`     | `string`                      | `''`        | Additional CSS classes                                   |
+- `qrCodeToSvg(value, options)`: an SVG document.
+- `qrCodeToBlob(value, options)`: an image, PNG by default. In the browser only.
+
+Options: `errorCorrection`, `margin`, `color` (`#000000`), `background` (`#ffffff`), `size` (1024 px, rounded down to whole pixels a module); for the blob, `type` and `quality`. Both throw when the value can't be encoded.
+
+Saving a file is yours (see the Download demo): `URL.createObjectURL(blob)` on a link with `download`.
 
 ## Accessibility
 
-- The code is `role="img"` with an accessible name (the one you give it: `aria-label`). Name what it opens, and put the same link or text next to it for people who can't scan.
-- Keep dark modules on a light background with strong contrast.
+- It is an image: name it (`aria-label`) for where it leads.
+- Put the same link or text beside it, for whoever can't scan.
+- A value too long to encode: say so from `error()`.
+- It is never mirrored right to left.
+
+## Not here
+
+A logo in the middle; dot or corner shapes.

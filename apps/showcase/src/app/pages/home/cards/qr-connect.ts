@@ -28,7 +28,7 @@ import { ScQrCode } from '@semantic-components/ui/qr-code';
           <svg
             scQrCode
             value="https://github.com/gridatek/semantic-components"
-            [quietZone]="0"
+            [margin]="0"
             class="size-40 text-black"
             aria-label="Connect device QR code"
           ></svg>

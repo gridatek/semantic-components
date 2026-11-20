@@ -1,17 +1,17 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import { ScButton, ScField, ScInput, ScLabel } from '@semantic-components/ui';
-import { ScQrCodeNext } from '@semantic-components/ui/qr-code';
+import { ScQrCode } from '@semantic-components/ui/qr-code';
 
 /** Drawn as you type. A value too long to encode draws nothing and sets error(). */
 @Component({
-  selector: 'app-live-qr-code-next-demo',
-  imports: [FormField, ScField, ScLabel, ScInput, ScButton, ScQrCodeNext],
+  selector: 'app-live-qr-code-demo',
+  imports: [FormField, ScField, ScLabel, ScInput, ScButton, ScQrCode],
   template: `
     <div class="flex w-full max-w-sm flex-col items-center gap-4">
       <svg
-        scQrCodeNext
-        #qr="scQrCodeNext"
+        scQrCode
+        #qr="scQrCode"
         [value]="text()"
         aria-label="QR code for the text below"
       ></svg>
@@ -50,7 +50,7 @@ import { ScQrCodeNext } from '@semantic-components/ui/qr-code';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LiveQrCodeNextDemo {
+export class LiveQrCodeDemo {
   private readonly model = signal({ text: 'https://angular.dev' });
   private readonly textForm = form(this.model);
   private readonly text = computed(() => this.model().text);

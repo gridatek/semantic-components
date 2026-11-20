@@ -8,8 +8,8 @@ import { DownloadQrCodeDemo } from './download-qr-code-demo';
   template: `
     <app-demo-container
       title="Download"
-      demoUrl="/demos/qr-code/download-qr-code-demo"
       [code]="code"
+      demoUrl="/demos/qr-code/download-qr-code-demo"
     >
       <app-download-qr-code-demo />
     </app-demo-container>
@@ -18,32 +18,33 @@ import { DownloadQrCodeDemo } from './download-qr-code-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DownloadQrCodeDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScQrCode, ScQrCodeDownload } from '@semantic-components/ui/qr-code';
+  private readonly code = `import { DOCUMENT } from '@angular/common';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { ScButton } from '@semantic-components/ui';
+import {
+  ScQrCode,
+  qrCodeToBlob,
+  qrCodeToSvg,
+} from '@semantic-components/ui/qr-code';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
+/** A file from the value, with the functions: qrCodeToBlob (PNG) and qrCodeToSvg — black on white, for print, at the size asked. */
 @Component({
   selector: 'app-download-qr-code-demo',
-  imports: [ScQrCode, ScQrCodeDownload, SiDownloadIcon],
+  imports: [ScButton, ScQrCode, SiDownloadIcon],
   template: \`
     <div class="flex flex-col items-center gap-4">
       <svg
         scQrCode
-        #qr="scQrCode"
-        [value]="'https://angular.dev'"
-        aria-label="QR Code for angular.dev"
+        [value]="value"
+        aria-label="QR code for angular.dev"
       ></svg>
       <div class="flex gap-2">
-        <button scQrCodeDownload [for]="qr" [filename]="'angular-qr'">
+        <button scButton variant="outline" (click)="png()">
           <svg siDownloadIcon></svg>
           PNG
         </button>
-        <button
-          scQrCodeDownload
-          [for]="qr"
-          [filename]="'angular-qr'"
-          format="svg"
-        >
+        <button scButton variant="outline" (click)="svg()">
           <svg siDownloadIcon></svg>
           SVG
         </button>
@@ -53,5 +54,27 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DownloadQrCodeDemo {}`;
+export class DownloadQrCodeDemo {
+  private readonly document = inject(DOCUMENT);
+  private readonly value = 'https://angular.dev';
+
+  private async png(): Promise<void> {
+    this.save(await qrCodeToBlob(this.value, { size: 1024 }), 'qr-code.png');
+  }
+
+  private svg(): void {
+    const svg = qrCodeToSvg(this.value, { size: 512 });
+    this.save(new Blob([svg], { type: 'image/svg+xml' }), 'qr-code.svg');
+  }
+
+  private save(blob: Blob, name: string): void {
+    const url = URL.createObjectURL(blob);
+    const link = this.document.createElement('a');
+    link.href = url;
+    link.download = name;
+    link.click();
+    // Time for the download to start before the file goes.
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+}`;
 }

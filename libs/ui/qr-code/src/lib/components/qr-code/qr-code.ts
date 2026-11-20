@@ -1,54 +1,18 @@
-import {
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  booleanAttribute,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { cn } from 'cn';
-import { encode } from 'uqr';
-
-/** Error correction: how much of the code can be damaged and still read. */
-export type ScQrCodeEcc = 'L' | 'M' | 'Q' | 'H';
-
-interface ScQrCodeEncoded {
-  modules: boolean[][];
-  error: string | null;
-}
-
-const EMPTY: ScQrCodeEncoded = { modules: [], error: null };
+import {
+  type ScQrCodeErrorCorrection,
+  qrModules,
+  qrPath,
+} from './qr-code-encode';
 
 /**
- * The dark modules as one SVG path: each run of dark modules in a row is one
- * rectangle. One element at any size, with no seams between modules.
- */
-function modulesPath(modules: readonly (readonly boolean[])[]): string {
-  let path = '';
-  modules.forEach((row, y) => {
-    let x = 0;
-    while (x < row.length) {
-      if (!row[x]) {
-        x++;
-        continue;
-      }
-      const start = x;
-      while (x < row.length && row[x]) x++;
-      path += `M${start} ${y}h${x - start}v1h${start - x}z`;
-    }
-  });
-  return path;
-}
-
-/**
- * A QR code, drawn as SVG (encoded with `uqr`). Dark modules use the text
- * color and the quiet zone the background — dark on white by default, in
- * both themes, since many scanners can't read inverted codes. Recolor with
- * classes (`bg-blue-100 text-blue-700`), keeping strong contrast.
- *
- * A value too long to encode renders nothing and sets `error()`.
+ * A QR code, drawn as one SVG path. Dark on white in both themes — many
+ * scanners can't read an inverted code; recolour with classes
+ * (`bg-blue-100 text-blue-700`), keeping strong contrast, and size it with
+ * `size-*`. Name it (`aria-label`): say where it leads. A value too long to
+ * encode draws nothing — its place kept, hidden — and sets `error()`.
  */
 @Component({
   selector: 'svg[scQrCode]',
@@ -63,7 +27,6 @@ function modulesPath(modules: readonly (readonly boolean[])[]): string {
     }
   `,
   host: {
-    'data-slot': 'qr-code',
     role: 'img',
     xmlns: 'http://www.w3.org/2000/svg',
     '[attr.viewBox]': 'viewBox()',
@@ -73,62 +36,51 @@ function modulesPath(modules: readonly (readonly boolean[])[]): string {
   encapsulation: ViewEncapsulation.None,
 })
 export class ScQrCode {
-  constructor() {
-    ɵwarnIfUnnamed('scQrCode');
-  }
-
-  readonly nativeElement =
-    inject<ElementRef<SVGSVGElement>>(ElementRef).nativeElement;
-
   readonly classInput = input<string>('', { alias: 'class' });
-  /** The text to encode (a URL, `mailto:`, `WIFI:`…). */
+  /** What it encodes: a URL, `mailto:`, `WIFI:`… */
   readonly value = input.required<string>();
-  readonly ecc = input<ScQrCodeEcc>('M');
-  /** Light margin around the code, in modules. The QR spec asks for 4. */
-  readonly quietZone = input(4);
-  /**
-   * Smallest QR version (1–40) to use. Raise it to keep the code the same
-   * size while the value changes length.
-   */
-  readonly minVersion = input(1);
-  /** Use a higher error correction when it fits without a larger code. */
-  readonly boostEcc = input(false, { transform: booleanAttribute });
-  /** Mask pattern (0–7); chosen automatically by default. */
-  readonly mask = input<number | undefined>(undefined);
+  /** How much can be damaged and still read: L 7 %, M 15 %, Q 25 %, H 30 %. */
+  readonly errorCorrection = input<ScQrCodeErrorCorrection>('M');
+  /** The quiet zone round it, in modules (the spec asks for 4). */
+  readonly margin = input(4);
 
-  private readonly encoded = computed((): ScQrCodeEncoded => {
+  private readonly encoded = computed(() => {
     const value = this.value();
-    if (!value) return EMPTY;
+    if (!value) return { modules: [] as boolean[][], error: null };
     try {
-      const { data } = encode(value, {
-        ecc: this.ecc(),
-        border: this.quietZone(),
-        minVersion: this.minVersion(),
-        boostEcc: this.boostEcc(),
-        maskPattern: this.mask() ?? -1,
+      const modules = qrModules(value, {
+        errorCorrection: this.errorCorrection(),
+        margin: this.margin(),
       });
-      return { modules: data, error: null };
+      return { modules, error: null };
     } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      return { modules: [], error: message };
+      return {
+        modules: [] as boolean[][],
+        error: error instanceof Error ? error.message : String(error),
+      };
     }
   });
 
-  /** The modules (`true` = dark), quiet zone included. */
-  readonly modules = computed(() => this.encoded().modules);
-  /** Why the value can't be encoded (e.g. `'Data too long'`), or `null`. */
+  /** Why the value can't be encoded (`'Data too long'`), or null. */
   readonly error = computed(() => this.encoded().error);
-  /** Whether there's a code to show. */
-  readonly valid = computed(() => this.modules().length > 0);
-  /** The dark modules as an SVG path, in a `modules × modules` box. */
-  readonly path = computed(() => modulesPath(this.modules()));
+
+  private readonly path = computed(() => qrPath(this.encoded().modules));
 
   private readonly viewBox = computed(() => {
-    const size = this.modules().length;
-    return `0 0 ${size} ${size}`;
+    const n = this.encoded().modules.length;
+    return n ? `0 0 ${n} ${n}` : null;
   });
 
   private readonly class = computed(() =>
-    cn('inline-block size-52 bg-white text-black', this.classInput()),
+    cn(
+      'inline-block size-52 bg-white text-black',
+      // Nothing to draw: its place kept, no empty white box.
+      !this.path() && 'invisible',
+      this.classInput(),
+    ),
   );
+
+  constructor() {
+    ɵwarnIfUnnamed('scQrCode');
+  }
 }

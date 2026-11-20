@@ -8,7 +8,7 @@ const modules = async (target: Locator) =>
   Number((await target.getAttribute('viewBox'))?.split(' ')[2]);
 
 test('Usage: a named image, one path, square', async ({ page }) => {
-  await page.goto('/demos/qr-code-next/qr-code-next-usage-demo');
+  await page.goto('/demos/qr-code/qr-code-usage-demo');
   const qr = code(page, 'QR code for angular.dev');
   await expect(qr).toBeVisible();
   await expect(qr.locator('path')).toHaveCount(1);
@@ -17,7 +17,7 @@ test('Usage: a named image, one path, square', async ({ page }) => {
 });
 
 test('Usage: dark on white in dark mode too', async ({ page }) => {
-  await page.goto('/demos/qr-code-next/qr-code-next-usage-demo');
+  await page.goto('/demos/qr-code/qr-code-usage-demo');
   const qr = code(page, 'QR code for angular.dev');
   await expect(qr).toBeVisible();
   await page.evaluate(() => document.documentElement.classList.add('dark'));
@@ -32,7 +32,7 @@ test('Usage: dark on white in dark mode too', async ({ page }) => {
 });
 
 test('Error correction: H is denser than L', async ({ page }) => {
-  await page.goto('/demos/qr-code-next/error-correction-qr-code-next-demo');
+  await page.goto('/demos/qr-code/error-correction-qr-code-demo');
   const low = code(page, /L — 7 %/);
   const high = code(page, /H — 30 %/);
   await expect(high).toHaveAttribute('viewBox', /^0 0/);
@@ -40,7 +40,7 @@ test('Error correction: H is denser than L', async ({ page }) => {
 });
 
 test('Margin: the quiet zone, in modules on each side', async ({ page }) => {
-  await page.goto('/demos/qr-code-next/margin-qr-code-next-demo');
+  await page.goto('/demos/qr-code/margin-qr-code-demo');
   const none = code(page, /margin 0/);
   const four = code(page, /margin 4/);
   await expect(four).toHaveAttribute('viewBox', /^0 0/);
@@ -50,7 +50,7 @@ test('Margin: the quiet zone, in modules on each side', async ({ page }) => {
 test('Live: drawn as you type; too long, an alert and no code', async ({
   page,
 }) => {
-  await page.goto('/demos/qr-code-next/live-qr-code-next-demo');
+  await page.goto('/demos/qr-code/live-qr-code-demo');
   const qr = code(page, 'QR code for the text below');
   await expect(qr).toBeVisible();
   const before = await qr.locator('path').getAttribute('d');
@@ -70,7 +70,7 @@ test('Live: drawn as you type; too long, an alert and no code', async ({
 test('Download: a PNG and an SVG, black on white, at the size asked', async ({
   page,
 }) => {
-  await page.goto('/demos/qr-code-next/download-qr-code-next-demo');
+  await page.goto('/demos/qr-code/download-qr-code-demo');
   await expect(code(page, 'QR code for angular.dev')).toBeVisible();
 
   const png = page.waitForEvent('download');
@@ -89,14 +89,14 @@ test('Download: a PNG and an SVG, black on white, at the size asked', async ({
 });
 
 test('Use cases: each scheme, named', async ({ page }) => {
-  await page.goto('/demos/qr-code-next/use-cases-qr-code-next-demo');
+  await page.goto('/demos/qr-code/use-cases-qr-code-demo');
   for (const name of ['Website', 'Phone', 'Email', 'Wi-Fi']) {
     await expect(code(page, `QR code: ${name}`)).toBeVisible();
   }
 });
 
 test('RTL: named in Arabic, never mirrored', async ({ page }) => {
-  await page.goto('/demos/qr-code-next/rtl-qr-code-next-demo');
+  await page.goto('/demos/qr-code/rtl-qr-code-demo');
   const qr = code(page, 'رمز QR لموقع angular.dev');
   await expect(qr).toBeVisible();
   await expect
