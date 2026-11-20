@@ -43,8 +43,11 @@ Every part inside an event is optional; put links, buttons or a collapsible in i
 
 ## Look
 
+The style draws it — its `timeline` key (ours: shadcn has no timeline): titles and descriptions as the style's Item text, the markers' corners and the current one's ring as its badges and focus rings, the gap between events, the line's colour, the item's corners and focus ring. Square markers in lyra and sera, uppercase titles in sera, more room in maia and luma, less in mira and rhea.
+
 Each event leaves room for its marker (before it, or above it across), the connector running from the marker to the next one. The marker is filled (complete, or no status), ringed (current) or muted (upcoming); the line after a complete event is the primary colour.
 
+- `--sc-timeline-line` (the style's) is the title line's height, which the markers line up with.
 - `--sc-timeline-marker` on the timeline sizes the markers (0.75rem; larger for an icon: `[--sc-timeline-marker:1.25rem]`).
 - `--sc-timeline-count` (the timeline) and `--sc-timeline-index` (each item): for a grid of your own, or staggered animations.
 - On each item: `data-complete`, `data-current`, `data-upcoming`, `data-orientation`, `data-first`, `data-last` — style its insides by state with `in-data-current:` and the like.
