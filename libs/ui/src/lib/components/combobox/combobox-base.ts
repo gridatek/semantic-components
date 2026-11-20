@@ -161,6 +161,8 @@ export abstract class ScComboboxBase<T = unknown> {
       ? this.formField?.descriptionIds().join(' ') || null
       : null,
   );
+  /** The highlighted option's label (an Autocomplete completes the text with it). */
+  readonly activeLabel = signal<string | null>(null);
   /** The value's element in a trigger (`scComboboxValue`): part of its name. */
   readonly valueId = signal<string | null>(null);
 
@@ -210,7 +212,7 @@ export abstract class ScComboboxBase<T = unknown> {
   }
 
   /** A value's label: `itemToStringLabel`, its option's text, or its string form. */
-  private labelOf(value: T): string {
+  protected labelOf(value: T): string {
     const label = this.itemToStringLabel()?.(value);
     if (label !== undefined) return label;
     const equal = this.isItemEqualToValue();

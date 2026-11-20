@@ -42,12 +42,19 @@ test('Usage: a combobox over a listbox; a click opens it, typing filters', async
   await expect(options(page)).toHaveCount(5);
   await page.keyboard.type('n');
   await expect(options(page)).toHaveText([/Next\.js/, /Nuxt\.js/]);
-  // As wide as its field.
-  const [field, popup] = [
-    await box(page.locator('[data-slot=input-group]')),
-    await box(page.locator('[data-slot=combobox-content]')),
-  ];
-  expect(Math.abs(field.width - popup.width)).toBeLessThan(2);
+  // As wide as its field: its layout width (getComputedStyle), not its box
+  // — the popup may still be scaling in (zoom-in-95) when measured.
+  const layoutWidth = (locator: Locator) =>
+    locator.evaluate((el) => parseFloat(getComputedStyle(el).width));
+  const field = await layoutWidth(page.locator('[data-slot=input-group]'));
+  await expect
+    .poll(async () =>
+      Math.abs(
+        field -
+          (await layoutWidth(page.locator('[data-slot=combobox-content]'))),
+      ),
+    )
+    .toBeLessThan(2);
 });
 
 test('Usage: the arrows and Enter pick; the input shows the value, focus stays', async ({

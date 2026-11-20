@@ -23,7 +23,7 @@ The value is the full international number (`+33612345678`), or `''` while nothi
         <div scComboboxPopup aria-label="Country">
           <div scInputGroup><input scInput scComboboxInput aria-label="Search countries" /></div>
           <div scComboboxEmpty>No countries found</div>
-          <ng-template scComboboxListContent>
+          <ng-template scComboboxListTemplate>
             <div scComboboxList aria-label="Countries">
               @for (country of matching(picker.query()); track country.code) {
               <div scComboboxItem [value]="country.code" [label]="country.name">

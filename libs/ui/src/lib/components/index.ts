@@ -3,6 +3,7 @@ export * from './alert';
 export * from './alert-dialog';
 export * from './aspect-ratio';
 export * from './autocomplete';
+export * from './autocomplete-next';
 export * from './avatar';
 export * from './backdrop';
 export * from './badge';

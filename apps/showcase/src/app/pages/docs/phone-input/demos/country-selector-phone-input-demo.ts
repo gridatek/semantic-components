@@ -6,7 +6,7 @@ import {
   ScComboboxInput,
   ScComboboxItem,
   ScComboboxList,
-  ScComboboxListContent,
+  ScComboboxListTemplate,
   ScComboboxPopup,
   ScComboboxPortal,
   ScComboboxTrigger,
@@ -38,7 +38,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScComboboxEmpty,
     ScComboboxItem,
     ScComboboxList,
-    ScComboboxListContent,
+    ScComboboxListTemplate,
     ScComboboxPopup,
     ScComboboxPortal,
     ScComboboxInput,
@@ -90,7 +90,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
                   />
                 </div>
                 <div scComboboxEmpty>No countries found</div>
-                <ng-template scComboboxListContent>
+                <ng-template scComboboxListTemplate>
                   <div scComboboxList aria-label="Countries">
                     @for (
                       country of matching(picker.query());

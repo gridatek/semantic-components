@@ -7,6 +7,7 @@ import {
   effect,
   inject,
   input,
+  untracked,
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
@@ -53,6 +54,14 @@ export class ScComboboxItem<T = unknown> {
       const label =
         this.option.label() || this.element.textContent?.trim() || '';
       this.root.registerLabel(this.option.value(), label);
+    });
+
+    // Highlighted: its label, for an Autocomplete's inline completion.
+    effect(() => {
+      if (!this.option.active()) return;
+      const label =
+        this.option.label() || this.element.textContent?.trim() || '';
+      untracked(() => this.root.activeLabel.set(label));
     });
 
     effect((onCleanup) => {

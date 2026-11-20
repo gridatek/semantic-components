@@ -66,6 +66,14 @@
     "hidden": true
   },
   {
+    "name": "Autocomplete Next",
+    "path": "autocomplete-next",
+    "description": "Free text with suggestions: the value is what is typed, a suggestion completes it; the Combobox’s parts.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Avatar",
     "path": "avatar",
     "description": "An image element with a fallback for representing users.",

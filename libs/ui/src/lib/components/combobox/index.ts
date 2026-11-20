@@ -9,7 +9,7 @@ export * from './combobox-group';
 export * from './combobox-input';
 export * from './combobox-item-indicator';
 export * from './combobox-item';
-export * from './combobox-list-content';
+export * from './combobox-list-template';
 export * from './combobox-list';
 export * from './combobox-matches';
 export * from './combobox-multiple';

@@ -209,7 +209,7 @@ export default class ComboboxPage {
 
   private readonly inside = {
     imports:
-      "import { ScComboboxValue, ScComboboxListContent } from '@semantic-components/ui';",
+      "import { ScComboboxValue, ScComboboxListTemplate } from '@semantic-components/ui';",
     markup: [
       '<div scField>',
       '  <label scLabel>…</label>',
@@ -222,7 +222,7 @@ export default class ComboboxPage {
       '      <div scComboboxPopup>',
       '        <div scInputGroup><input scInput scComboboxInput aria-label="…" /></div>',
       '        <div scComboboxEmpty>…</div>',
-      '        <ng-template scComboboxListContent>',
+      '        <ng-template scComboboxListTemplate>',
       '          <div scComboboxList aria-label="…">…</div>',
       '        </ng-template>',
       '      </div>',
@@ -282,8 +282,8 @@ export default class ComboboxPage {
         "The popup, rendered while open: as wide as its field, below it (above without room). data-empty while no option is rendered. With the search inside, a dialog named by the field's label (or its aria-label).",
     },
     {
-      name: 'ScComboboxListContent',
-      selector: 'ng-template[scComboboxListContent]',
+      name: 'ScComboboxListTemplate',
+      selector: 'ng-template[scComboboxListTemplate]',
       description:
         'The list, rendered by the search beside it: only when the search is inside the popup.',
     },

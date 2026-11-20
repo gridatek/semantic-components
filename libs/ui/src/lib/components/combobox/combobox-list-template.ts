@@ -6,8 +6,8 @@ import { Directive, TemplateRef, inject } from '@angular/core';
  * is the search beside it.
  */
 @Directive({
-  selector: 'ng-template[scComboboxListContent]',
+  selector: 'ng-template[scComboboxListTemplate]',
 })
-export class ScComboboxListContent {
+export class ScComboboxListTemplate {
   readonly templateRef = inject(TemplateRef);
 }

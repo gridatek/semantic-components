@@ -4349,6 +4349,81 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/autocomplete-next',
+    children: [
+      {
+        path: 'autocomplete-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete-next/demos/autocomplete-next-usage-demo').then(
+            (m) => m.AutocompleteNextUsageDemo,
+          ),
+      },
+      {
+        path: 'inline-autocomplete-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete-next/demos/inline-autocomplete-next-demo').then(
+            (m) => m.InlineAutocompleteNextDemo,
+          ),
+      },
+      {
+        path: 'groups-autocomplete-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete-next/demos/groups-autocomplete-next-demo').then(
+            (m) => m.GroupsAutocompleteNextDemo,
+          ),
+      },
+      {
+        path: 'async-autocomplete-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete-next/demos/async-autocomplete-next-demo').then(
+            (m) => m.AsyncAutocompleteNextDemo,
+          ),
+      },
+      {
+        path: 'auto-highlight-autocomplete-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete-next/demos/auto-highlight-autocomplete-next-demo').then(
+            (m) => m.AutoHighlightAutocompleteNextDemo,
+          ),
+      },
+      {
+        path: 'limit-autocomplete-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete-next/demos/limit-autocomplete-next-demo').then(
+            (m) => m.LimitAutocompleteNextDemo,
+          ),
+      },
+      {
+        path: 'form-autocomplete-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete-next/demos/form-autocomplete-next-demo').then(
+            (m) => m.FormAutocompleteNextDemo,
+          ),
+      },
+      {
+        path: 'input-group-autocomplete-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete-next/demos/input-group-autocomplete-next-demo').then(
+            (m) => m.InputGroupAutocompleteNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-autocomplete-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete-next/demos/disabled-autocomplete-next-demo').then(
+            (m) => m.DisabledAutocompleteNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-autocomplete-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/autocomplete-next/demos/rtl-autocomplete-next-demo').then(
+            (m) => m.RtlAutocompleteNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/range-slider',
     children: [
       {

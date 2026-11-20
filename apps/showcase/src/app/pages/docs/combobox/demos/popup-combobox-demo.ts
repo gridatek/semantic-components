@@ -6,7 +6,7 @@ import {
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxList,
-  ScComboboxListContent,
+  ScComboboxListTemplate,
   ScComboboxPopup,
   ScComboboxPortal,
   ScComboboxTrigger,
@@ -19,7 +19,7 @@ import {
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
-/** A trigger showing the value, the search inside the popup (the list in a scComboboxListContent template). In a field, the label names the trigger and the popup. */
+/** A trigger showing the value, the search inside the popup (the list in a scComboboxListTemplate template). In a field, the label names the trigger and the popup. */
 @Component({
   selector: 'app-popup-combobox-demo',
   imports: [
@@ -29,7 +29,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScComboboxItem,
     ScComboboxItemIndicator,
     ScComboboxList,
-    ScComboboxListContent,
+    ScComboboxListTemplate,
     ScComboboxPopup,
     ScComboboxPortal,
     ScComboboxTrigger,
@@ -60,7 +60,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               />
             </div>
             <div scComboboxEmpty>No items found.</div>
-            <ng-template scComboboxListContent>
+            <ng-template scComboboxListTemplate>
               <div scComboboxList aria-label="Countries">
                 @for (name of matching(cb.query()); track name) {
                   <div scComboboxItem [value]="name">

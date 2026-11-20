@@ -12,7 +12,7 @@ import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
 import { ScComboboxBase } from './combobox-base';
-import { ScComboboxListContent } from './combobox-list-content';
+import { ScComboboxListTemplate } from './combobox-list-template';
 
 /**
  * The popup: the list, its empty text, and — when a trigger opens it — the
@@ -63,7 +63,7 @@ export class ScComboboxPopup {
   /** Its name as a dialog: its trigger's `aria-label`, or its field's label, when not given. */
   readonly ariaLabel = input<string | null>(null, { alias: 'aria-label' });
 
-  private readonly listContent = contentChild(ScComboboxListContent);
+  private readonly listContent = contentChild(ScComboboxListTemplate);
 
   /** A trigger opened it: the search is inside. */
   private readonly withSearch = computed(() => !this.root.field());
