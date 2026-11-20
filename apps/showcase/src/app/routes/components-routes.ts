@@ -504,6 +504,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/progress/progress-page'),
       },
       {
+        path: 'qr-code-next',
+        title: 'QR Code Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/qr-code-next/qr-code-next-page'),
+      },
+      {
         path: 'qr-code',
         title: 'QR Code - Semantic Components',
         loadComponent: () => import('../pages/docs/qr-code/qr-code-page'),

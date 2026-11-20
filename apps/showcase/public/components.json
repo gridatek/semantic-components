@@ -749,6 +749,15 @@
     "category": "Data Display"
   },
   {
+    "name": "QR Code Next",
+    "path": "qr-code-next",
+    "description": "A QR code as one SVG path, named for where it leads; qrCodeToSvg and qrCodeToBlob make files.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Media",
+    "hidden": true
+  },
+  {
     "name": "QR Code",
     "path": "qr-code",
     "description": "Generate and display QR codes.",

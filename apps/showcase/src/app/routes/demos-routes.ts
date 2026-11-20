@@ -5075,6 +5075,74 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/qr-code-next',
+    children: [
+      {
+        path: 'qr-code-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/qr-code-next/demos/qr-code-next-usage-demo').then(
+            (m) => m.QrCodeNextUsageDemo,
+          ),
+      },
+      {
+        path: 'sizes-qr-code-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/qr-code-next/demos/sizes-qr-code-next-demo').then(
+            (m) => m.SizesQrCodeNextDemo,
+          ),
+      },
+      {
+        path: 'colors-qr-code-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/qr-code-next/demos/colors-qr-code-next-demo').then(
+            (m) => m.ColorsQrCodeNextDemo,
+          ),
+      },
+      {
+        path: 'error-correction-qr-code-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/qr-code-next/demos/error-correction-qr-code-next-demo').then(
+            (m) => m.ErrorCorrectionQrCodeNextDemo,
+          ),
+      },
+      {
+        path: 'margin-qr-code-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/qr-code-next/demos/margin-qr-code-next-demo').then(
+            (m) => m.MarginQrCodeNextDemo,
+          ),
+      },
+      {
+        path: 'live-qr-code-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/qr-code-next/demos/live-qr-code-next-demo').then(
+            (m) => m.LiveQrCodeNextDemo,
+          ),
+      },
+      {
+        path: 'download-qr-code-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/qr-code-next/demos/download-qr-code-next-demo').then(
+            (m) => m.DownloadQrCodeNextDemo,
+          ),
+      },
+      {
+        path: 'use-cases-qr-code-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/qr-code-next/demos/use-cases-qr-code-next-demo').then(
+            (m) => m.UseCasesQrCodeNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-qr-code-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/qr-code-next/demos/rtl-qr-code-next-demo').then(
+            (m) => m.RtlQrCodeNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/qr-code',
     children: [
       {
