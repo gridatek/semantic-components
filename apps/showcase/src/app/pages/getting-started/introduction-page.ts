@@ -54,7 +54,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
             scLink
             variant="button"
             size="sm"
-            routerLink="/docs/getting-started/installation"
+            routerLink="/docs/getting-started"
           >
             Get started
           </a>
@@ -245,8 +245,8 @@ export default class IntroductionPage {
 
   private readonly nextSteps = [
     {
-      name: 'Installation',
-      path: '/docs/getting-started/installation',
+      name: 'Get started',
+      path: '/docs/getting-started',
       description: 'set up an Angular app for the components.',
     },
     {

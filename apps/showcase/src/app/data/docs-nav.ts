@@ -13,7 +13,7 @@ export const gettingStartedPages: readonly DocsPage[] = [
     path: '/docs/about/credits',
     description: 'The projects we build on',
   },
-  { name: 'Installation', path: '/docs/getting-started/installation' },
+  { name: 'Get started', path: '/docs/getting-started' },
   { name: 'Components', path: '/docs/components' },
 ];
 

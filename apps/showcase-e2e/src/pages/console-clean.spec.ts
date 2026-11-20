@@ -19,7 +19,7 @@ const pages = [
   '/docs/getting-started/introduction',
   '/components',
   '/docs/components',
-  '/docs/getting-started/installation',
+  '/docs/getting-started',
   '/docs/packages/ui',
   '/docs/packages/styles',
   '/docs/getting-started/i18n',

@@ -8,8 +8,10 @@ export const gettingStartedRoutes: Route[] = [
     children: [
       {
         path: '',
-        redirectTo: 'introduction',
         pathMatch: 'full',
+        title: 'Get started - Semantic Components',
+        loadComponent: () =>
+          import('../pages/getting-started/get-started-page'),
       },
       {
         path: 'introduction',
@@ -17,15 +19,10 @@ export const gettingStartedRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/getting-started/introduction-page'),
       },
-      {
-        path: 'installation',
-        title: 'Installation - Semantic Components',
-        loadComponent: () =>
-          import('../pages/getting-started/installation-page'),
-      },
       // Their old addresses.
-      { path: 'ui', redirectTo: 'installation' },
-      { path: 'prerequisites', redirectTo: 'installation' },
+      { path: 'installation', redirectTo: '' },
+      { path: 'ui', redirectTo: '' },
+      { path: 'prerequisites', redirectTo: '' },
       { path: 'styles', redirectTo: '/docs/packages/styles' },
       { path: 'mcp-server', redirectTo: '/docs/packages/mcp-server' },
       {

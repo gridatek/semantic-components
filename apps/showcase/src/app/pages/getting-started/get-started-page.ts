@@ -21,7 +21,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
 import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo-container';
 
 @Component({
-  selector: 'app-ui-page',
+  selector: 'app-get-started-page',
   imports: [
     DocCode,
     RouterLink,
@@ -45,7 +45,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
   template: `
     <div class="space-y-12">
       <div class="space-y-2">
-        <h1 scTypeset>Installation</h1>
+        <h1 scTypeset>Get started</h1>
         <p class="text-muted-foreground">
           Everything an Angular app needs for the components: Angular Aria and
           the CDK, Tailwind CSS, the utilities and the font, then the packages
@@ -304,7 +304,7 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class InstallationPage {
+export default class GetStartedPage {
   private readonly postcssCode = `{
   "plugins": {
     "@tailwindcss/postcss": {}
