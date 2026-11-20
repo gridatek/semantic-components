@@ -30,6 +30,7 @@ import {
   ScButton,
   ScField,
   ScFieldErrors,
+  ScFrame,
   ScInput,
   ScLabel,
   ScStepper,
@@ -41,7 +42,8 @@ import {
   ScStepperPrevious,
   ScStepperSeparator,
   ScStepperTitle,
-  ScStepperTrigger, ScFrame } from '@semantic-components/ui';
+  ScStepperTrigger,
+} from '@semantic-components/ui';
 import { SiCheckIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 interface SignupModel {
@@ -51,7 +53,8 @@ interface SignupModel {
 
 @Component({
   selector: 'app-linear-stepper-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     FormField,
     FormRoot,
     ScButton,

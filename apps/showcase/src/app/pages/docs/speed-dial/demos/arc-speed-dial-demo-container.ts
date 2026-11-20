@@ -20,11 +20,13 @@ import { ArcSpeedDialDemo } from './arc-speed-dial-demo';
 export class ArcSpeedDialDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScSpeedDial,
   ScSpeedDialAction,
   ScSpeedDialLabel,
   ScSpeedDialList,
-  ScSpeedDialTrigger, ScFrame } from '@semantic-components/ui';
+  ScSpeedDialTrigger,
+} from '@semantic-components/ui';
 import {
   SiCopyIcon,
   SiPencilIcon,
@@ -36,7 +38,8 @@ import {
 /** Toward a corner — up-left for a button at the bottom right — the actions fan out on a quarter circle. Their labels are read, not shown. */
 @Component({
   selector: 'app-arc-speed-dial-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScSpeedDial,
     ScSpeedDialTrigger,
     ScSpeedDialList,

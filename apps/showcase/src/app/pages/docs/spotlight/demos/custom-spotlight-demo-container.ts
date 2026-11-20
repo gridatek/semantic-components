@@ -21,16 +21,19 @@ export class CustomSpotlightDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
-  ScSpotlightTitle, ScFrame } from '@semantic-components/ui';
+  ScSpotlightTitle,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** The dim and the cutout are classes: here a round cutout around an avatar, and a deeper dim. */
 @Component({
   selector: 'app-custom-spotlight-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScSpotlight,
     ScSpotlightTitle,
     ScSpotlightDescription,

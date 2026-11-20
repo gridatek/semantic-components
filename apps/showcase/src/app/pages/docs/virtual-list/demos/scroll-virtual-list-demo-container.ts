@@ -21,8 +21,10 @@ export class ScrollVirtualListDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScVirtualList,
-  ScVirtualListRow, ScFrame } from '@semantic-components/ui';
+  ScVirtualListRow,
+} from '@semantic-components/ui';
 
 /** scrollToIndex(index, with an alignment): row 5,000 at the start, the centre, the end — or, auto, only as far as needed. */
 @Component({
@@ -56,7 +58,8 @@ import {
       [count]="10_000"
       [estimate]="40"
       aria-label="Numbers"
-      scFrame class="h-80 w-full max-w-md overflow-y-auto"
+      scFrame
+      class="h-80 w-full max-w-md overflow-y-auto"
     >
       @for (row of list.rows(); track row.key) {
         <li

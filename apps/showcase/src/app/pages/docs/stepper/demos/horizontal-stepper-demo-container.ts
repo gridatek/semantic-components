@@ -19,6 +19,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldGroup,
+  ScFrame,
   ScInput,
   ScLabel,
   ScStepper,
@@ -32,12 +33,14 @@ import {
   ScStepperSeparator,
   ScStepperTitle,
   ScStepperTrigger,
-  ScTextarea, ScFrame } from '@semantic-components/ui';
+  ScTextarea,
+} from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-horizontal-stepper-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     FormField,
     ScStepper,
     ScStepperList,

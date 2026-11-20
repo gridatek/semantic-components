@@ -19,7 +19,7 @@ import { NavigationThemeToggleDemo } from './navigation-theme-toggle-demo';
 })
 export class NavigationThemeToggleDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
-import { ScButton, ScThemeManager, ScFrame } from '@semantic-components/ui';
+import { ScButton, ScFrame, ScThemeManager } from '@semantic-components/ui';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

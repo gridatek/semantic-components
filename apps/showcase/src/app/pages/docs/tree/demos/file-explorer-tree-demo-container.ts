@@ -20,12 +20,14 @@ import { FileExplorerTreeDemo } from './file-explorer-tree-demo';
 export class FileExplorerTreeDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScTree,
   ScTreeItem,
   ScTreeItemGroup,
   ScTreeItemIcon,
   ScTreeItemTrigger,
-  ScTreeItemTriggerIcon, ScFrame } from '@semantic-components/ui';
+  ScTreeItemTriggerIcon,
+} from '@semantic-components/ui';
 import {
   SiChevronRightIcon,
   SiFileIcon,
@@ -35,7 +37,8 @@ import {
 
 @Component({
   selector: 'app-file-explorer-tree-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScTree,
     ScTreeItem,
     ScTreeItemTrigger,

@@ -20,15 +20,18 @@ import { InfiniteVirtualListDemo } from './infinite-virtual-list-demo';
 export class InfiniteVirtualListDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScInfiniteScroll,
   ScInfiniteScrollStatus,
   ScVirtualList,
-  ScVirtualListRow, ScFrame } from '@semantic-components/ui';
+  ScVirtualListRow,
+} from '@semantic-components/ui';
 
 /** Long, and longer: the infinite scroll asks for 100 more near the end; the virtual list renders only what is seen. */
 @Component({
   selector: 'app-infinite-virtual-list-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScVirtualList,
     ScVirtualListRow,
     ScInfiniteScroll,
@@ -36,7 +39,8 @@ import {
   ],
   template: \`
     <div
-      scFrame class="h-96 w-full max-w-md overflow-y-auto"
+      scFrame
+      class="h-96 w-full max-w-md overflow-y-auto"
       tabindex="0"
       role="region"
       aria-label="Feed"

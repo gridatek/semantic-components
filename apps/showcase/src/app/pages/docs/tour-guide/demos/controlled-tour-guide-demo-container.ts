@@ -27,6 +27,7 @@ export class ControlledTourGuideDemoContainer {
 } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScInput,
   ScTourGuide,
   ScTourGuideClose,
@@ -34,13 +35,15 @@ import {
   ScTourGuideNext,
   ScTourGuidePrevious,
   ScTourGuideStep,
-  ScTourGuideTitle, ScFrame } from '@semantic-components/ui';
+  ScTourGuideTitle,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** Open and step are two-way: start at any step from outside; (finished) at Done — closed is not finished. */
 @Component({
   selector: 'app-controlled-tour-guide-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScTourGuide,
     ScTourGuideStep,
     ScTourGuideTitle,

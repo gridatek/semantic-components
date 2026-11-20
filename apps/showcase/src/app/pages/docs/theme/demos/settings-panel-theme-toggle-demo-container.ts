@@ -20,17 +20,20 @@ import { SettingsPanelThemeToggleDemo } from './settings-panel-theme-toggle-demo
 export class SettingsPanelThemeToggleDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
+  ScFrame,
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,
   ScNativeSelectOption,
   ScThemeManager,
-  ScThemeMode, ScFrame } from '@semantic-components/ui';
+  ScThemeMode,
+} from '@semantic-components/ui';
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-settings-panel-theme-toggle-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScNativeSelect,
     ScNativeSelectContainer,
     ScNativeSelectIcon,

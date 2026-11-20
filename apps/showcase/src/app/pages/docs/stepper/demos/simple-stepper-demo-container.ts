@@ -16,6 +16,7 @@ import { SimpleStepperDemo } from './simple-stepper-demo';
 export class SimpleStepperDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScStepper,
   ScStepperIndicator,
   ScStepperItem,
@@ -24,12 +25,14 @@ import {
   ScStepperPanel,
   ScStepperPrevious,
   ScStepperSeparator,
-  ScStepperTrigger, ScFrame } from '@semantic-components/ui';
+  ScStepperTrigger,
+} from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-simple-stepper-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScStepper,
     ScStepperList,
     ScStepperIndicator,

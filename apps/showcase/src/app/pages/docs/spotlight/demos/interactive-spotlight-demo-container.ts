@@ -21,17 +21,20 @@ export class InteractiveSpotlightDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScInput,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
-  ScSpotlightTitle, ScFrame } from '@semantic-components/ui';
+  ScSpotlightTitle,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** The element stays usable through the cutout — type in the search while it is lit; the rest of the page stays dimmed and blocked. Escape still closes. */
 @Component({
   selector: 'app-interactive-spotlight-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScSpotlight,
     ScSpotlightTitle,
     ScSpotlightDescription,

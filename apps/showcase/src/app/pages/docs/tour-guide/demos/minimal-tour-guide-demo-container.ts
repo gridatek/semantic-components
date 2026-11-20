@@ -21,19 +21,22 @@ export class MinimalTourGuideDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScInput,
   ScTourGuide,
   ScTourGuideClose,
   ScTourGuideDescription,
   ScTourGuideNext,
   ScTourGuideStep,
-  ScTourGuideTitle, ScFrame } from '@semantic-components/ui';
+  ScTourGuideTitle,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** Three steps, Next and Done — no progress, no Back. */
 @Component({
   selector: 'app-minimal-tour-guide-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScTourGuide,
     ScTourGuideStep,
     ScTourGuideTitle,

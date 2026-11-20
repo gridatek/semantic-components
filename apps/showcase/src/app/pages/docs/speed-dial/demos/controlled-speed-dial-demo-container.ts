@@ -21,11 +21,13 @@ export class ControlledSpeedDialDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScSpeedDial,
   ScSpeedDialAction,
   ScSpeedDialLabel,
   ScSpeedDialList,
-  ScSpeedDialTrigger, ScFrame } from '@semantic-components/ui';
+  ScSpeedDialTrigger,
+} from '@semantic-components/ui';
 import {
   SiCopyIcon,
   SiPencilIcon,
@@ -37,7 +39,8 @@ import {
 /** Open is two-way — here opened from outside too (a press outside closes it). A disabled action stays reachable, and does nothing. */
 @Component({
   selector: 'app-controlled-speed-dial-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScSpeedDial,
     ScSpeedDialTrigger,
     ScSpeedDialList,

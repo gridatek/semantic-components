@@ -20,11 +20,13 @@ import { DirectionsSpeedDialDemo } from './directions-speed-dial-demo';
 export class DirectionsSpeedDialDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScSpeedDial,
   ScSpeedDialAction,
   ScSpeedDialLabel,
   ScSpeedDialList,
-  ScSpeedDialTrigger, ScFrame } from '@semantic-components/ui';
+  ScSpeedDialTrigger,
+} from '@semantic-components/ui';
 import {
   SiCopyIcon,
   SiPencilIcon,
@@ -35,7 +37,8 @@ import {
 /** Up, down, left or right — the arrow keys follow: away from the button is the next action. */
 @Component({
   selector: 'app-directions-speed-dial-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScSpeedDial,
     ScSpeedDialTrigger,
     ScSpeedDialList,

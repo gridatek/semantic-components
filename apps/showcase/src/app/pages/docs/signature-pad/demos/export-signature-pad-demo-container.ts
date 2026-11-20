@@ -30,17 +30,20 @@ import {
 } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   type ScSignature,
   ScSignaturePad,
   ScSignaturePadClear,
   ScSignaturePadLine,
-  ScSignaturePadSurface, ScFrame } from '@semantic-components/ui';
+  ScSignaturePadSurface,
+} from '@semantic-components/ui';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
 /** The value is data — drawn again here, read-only and smaller. Exported, the image is trimmed to the ink: PNG or SVG. */
 @Component({
   selector: 'app-export-signature-pad-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScSignaturePad,
     ScSignaturePadSurface,
     ScSignaturePadLine,
@@ -98,7 +101,9 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
         <div class="space-y-1">
           <p class="text-muted-foreground">Trimmed PNG</p>
           <div
-            scFrame size="sm" class="flex h-20 items-center justify-center bg-white p-1"
+            scFrame
+            size="sm"
+            class="flex h-20 items-center justify-center bg-white p-1"
           >
             @if (preview(); as preview) {
               <img

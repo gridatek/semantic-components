@@ -35,7 +35,8 @@ import { ScFrame } from '@semantic-components/ui';
           tabindex="0"
           role="region"
           [attr.aria-label]="box.label"
-          scFrame class="h-48 w-40 overflow-auto p-4 text-sm"
+          scFrame
+          class="h-48 w-40 overflow-auto p-4 text-sm"
           [class]="box.class"
         >
           <p class="mb-2 font-medium">{{ box.label }}</p>

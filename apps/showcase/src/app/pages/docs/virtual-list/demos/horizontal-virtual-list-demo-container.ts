@@ -19,7 +19,11 @@ import { HorizontalVirtualListDemo } from './horizontal-virtual-list-demo';
 })
 export class HorizontalVirtualListDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScVirtualList, ScVirtualListRow, ScFrame } from '@semantic-components/ui';
+import {
+  ScFrame,
+  ScVirtualList,
+  ScVirtualListRow,
+} from '@semantic-components/ui';
 
 /** Along a row: days of a year, as a strip. Right to left, it starts at the right. */
 @Component({
@@ -35,7 +39,8 @@ import { ScVirtualList, ScVirtualListRow, ScFrame } from '@semantic-components/u
       [estimate]="96"
       [gap]="8"
       aria-label="Days"
-      scFrame class="h-28 w-full max-w-2xl overflow-x-auto"
+      scFrame
+      class="h-28 w-full max-w-2xl overflow-x-auto"
     >
       @for (row of list.rows(); track row.key) {
         <li [scVirtualListRow]="row" class="py-2">

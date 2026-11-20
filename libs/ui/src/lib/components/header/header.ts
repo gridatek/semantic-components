@@ -172,7 +172,7 @@ export class ScHeader implements ScNavigationMenuLinkHost {
       // by an invisible first item (::before, no width; its gap taken back):
       // a push menu wraps below as a line of its own, and the bar keeps its
       // place — a min-height would centre both lines together.
-      'bg-background relative z-40 flex flex-wrap items-center gap-x-4 border-b px-4 md:px-6',
+      'bg-background relative z-40 flex min-h-14 flex-wrap items-center gap-x-4 border-b px-4 md:px-6',
       "before:h-14 before:w-0 before:-me-4 before:content-['']",
       // Its links (a `nav` in the bar, a Navigation Menu): hidden below
       // `expand`, where the menu has them.

@@ -29,7 +29,8 @@ import { ScFrame } from '@semantic-components/ui';
       tabindex="0"
       role="region"
       aria-label="Tags"
-      scFrame class="h-72 w-48 overflow-auto p-4"
+      scFrame
+      class="h-72 w-48 overflow-auto p-4"
     >
       <p class="mb-4 text-sm leading-none font-medium">Tags</p>
       @for (tag of tags; track tag) {

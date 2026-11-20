@@ -19,7 +19,11 @@ import { PageVirtualListDemo } from './page-virtual-list-demo';
 })
 export class PageVirtualListDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScVirtualList, ScVirtualListRow, ScFrame } from '@semantic-components/ui';
+import {
+  ScFrame,
+  ScVirtualList,
+  ScVirtualListRow,
+} from '@semantic-components/ui';
 
 /** Without a size of its own, it takes its full height, and the page — or the box around it — scrolls. */
 @Component({
@@ -32,7 +36,8 @@ import { ScVirtualList, ScVirtualListRow, ScFrame } from '@semantic-components/u
       [count]="rows.length"
       [estimate]="40"
       aria-label="Log"
-      scFrame class="w-full max-w-md"
+      scFrame
+      class="w-full max-w-md"
     >
       @for (row of list.rows(); track row.key) {
         <li

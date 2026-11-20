@@ -21,17 +21,20 @@ export class SidesSpotlightDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
   type ScSpotlightSide,
-  ScSpotlightTitle, ScFrame } from '@semantic-components/ui';
+  ScSpotlightTitle,
+} from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** The card on the side you ask — logical, start and end follow the direction — flipping when there is no room. */
 @Component({
   selector: 'app-sides-spotlight-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScSpotlight,
     ScSpotlightTitle,
     ScSpotlightDescription,
@@ -40,9 +43,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: \`
-    <div
-      scFrame class="grid w-full max-w-xl place-items-center py-48"
-    >
+    <div scFrame class="grid w-full max-w-xl place-items-center py-48">
       <div #target class="bg-muted rounded-md px-6 py-3 text-sm font-medium">
         The target
       </div>

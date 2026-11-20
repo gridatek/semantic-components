@@ -256,9 +256,10 @@ test.describe('narrow', () => {
     await button.click();
     await expect(menu(page)).toBeVisible();
     await expect.poll(tops).toEqual(closed);
-    // The bar is still 56px tall; the menu is below it.
-    const menuTop = (await menu(page).boundingBox())?.y ?? 0;
-    expect(menuTop).toBeGreaterThanOrEqual(56);
+    // The bar is still 56px tall; the menu below it, once slid in.
+    await expect
+      .poll(async () => (await menu(page).boundingBox())?.y ?? 0)
+      .toBeGreaterThanOrEqual(56);
   });
 
   test('RTL: brand at the right, toggle at the left', async ({ page }) => {

@@ -143,67 +143,75 @@ const DRAFT = \`<p>The colour of the sky changes with the hour: the colour of da
                 scEditorSearchBar
                 [(open)]="searchOpen"
                 aria-label="Search and replace"
-                class="flex flex-wrap items-center gap-x-2 gap-y-1.5 p-2"
+                class="flex flex-col gap-1.5 p-2"
               >
-                <input
-                  scInput
-                  scEditorSearchInput
-                  aria-label="Search"
-                  placeholder="Search…"
-                  class="h-8 w-40"
-                />
-                <span
-                  scEditorSearchResults
-                  #results="scEditorSearchResults"
-                  class="text-muted-foreground data-[state=none]:text-destructive min-w-16 text-sm whitespace-nowrap tabular-nums"
-                >
-                  @if (results.state() === 'found') {
-                    {{ (results.index() ?? 0) + 1 }} of {{ results.count() }}
-                  } @else if (results.state() === 'none') {
-                    No results
-                  }
-                </span>
-                <button
-                  scButton
-                  variant="ghost"
-                  size="icon-sm"
-                  scEditorSearchPrevious
-                >
-                  <svg siChevronUpIcon></svg>
-                  <span class="sr-only">Previous match</span>
-                </button>
-                <button
-                  scButton
-                  variant="ghost"
-                  size="icon-sm"
-                  scEditorSearchNext
-                >
-                  <svg siChevronDownIcon></svg>
-                  <span class="sr-only">Next match</span>
-                </button>
-                <input
-                  scInput
-                  scEditorReplaceInput
-                  aria-label="Replace with"
-                  placeholder="Replace with…"
-                  class="h-8 w-40"
-                />
-                <button scButton variant="outline" size="sm" scEditorReplace>
-                  Replace
-                </button>
-                <button scButton variant="outline" size="sm" scEditorReplaceAll>
-                  Replace all
-                </button>
-                <button
-                  scButton
-                  variant="ghost"
-                  size="icon-sm"
-                  scEditorSearchClose
-                  class="ms-auto"
-                >
-                  <svg siXIcon></svg>
-                  <span class="sr-only">Close search</span>
-                </button>
+                <div class="flex flex-wrap items-center gap-2">
+                  <input
+                    scInput
+                    scEditorSearchInput
+                    aria-label="Search"
+                    placeholder="Search…"
+                    class="h-8 min-w-40 flex-1"
+                  />
+                  <span
+                    scEditorSearchResults
+                    #results="scEditorSearchResults"
+                    class="text-muted-foreground data-[state=none]:text-destructive min-w-16 text-sm whitespace-nowrap tabular-nums"
+                  >
+                    @if (results.state() === 'found') {
+                      {{ (results.index() ?? 0) + 1 }} of {{ results.count() }}
+                    } @else if (results.state() === 'none') {
+                      No results
+                    }
+                  </span>
+                  <button
+                    scButton
+                    variant="ghost"
+                    size="icon-sm"
+                    scEditorSearchPrevious
+                  >
+                    <svg siChevronUpIcon></svg>
+                    <span class="sr-only">Previous match</span>
+                  </button>
+                  <button
+                    scButton
+                    variant="ghost"
+                    size="icon-sm"
+                    scEditorSearchNext
+                  >
+                    <svg siChevronDownIcon></svg>
+                    <span class="sr-only">Next match</span>
+                  </button>
+                  <button
+                    scButton
+                    variant="ghost"
+                    size="icon-sm"
+                    scEditorSearchClose
+                  >
+                    <svg siXIcon></svg>
+                    <span class="sr-only">Close search</span>
+                  </button>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <input
+                    scInput
+                    scEditorReplaceInput
+                    aria-label="Replace with"
+                    placeholder="Replace with…"
+                    class="h-8 min-w-40 flex-1"
+                  />
+                  <button scButton variant="outline" size="sm" scEditorReplace>
+                    Replace
+                  </button>
+                  <button
+                    scButton
+                    variant="outline"
+                    size="sm"
+                    scEditorReplaceAll
+                  >
+                    Replace all
+                  </button>
+                </div>
               </div>
             </div>
           </div>

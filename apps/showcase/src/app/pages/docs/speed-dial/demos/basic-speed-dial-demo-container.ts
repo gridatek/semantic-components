@@ -20,11 +20,13 @@ import { BasicSpeedDialDemo } from './basic-speed-dial-demo';
 export class BasicSpeedDialDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScSpeedDial,
   ScSpeedDialAction,
   ScSpeedDialLabel,
   ScSpeedDialList,
-  ScSpeedDialTrigger, ScFrame } from '@semantic-components/ui';
+  ScSpeedDialTrigger,
+} from '@semantic-components/ui';
 import {
   SiCopyIcon,
   SiPencilIcon,
@@ -36,7 +38,8 @@ import {
 /** A button in a corner; its actions open upward, each named by the label beside it. From the keyboard: Enter, Space or an arrow opens it on the first action; the arrows move along, Escape closes. */
 @Component({
   selector: 'app-basic-speed-dial-demo',
-  imports: [ScFrame, 
+  imports: [
+    ScFrame,
     ScSpeedDial,
     ScSpeedDialTrigger,
     ScSpeedDialList,
