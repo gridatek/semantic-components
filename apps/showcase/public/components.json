@@ -896,6 +896,15 @@
     "category": "Navigation"
   },
   {
+    "name": "Signature Pad Next",
+    "path": "signature-pad-next",
+    "description": "Sign with a pen, a mouse or a finger: one part, ink that follows the pen, the strokes as a form value, exported trimmed to the ink.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms",
+    "hidden": true
+  },
+  {
     "name": "Signature Pad",
     "path": "signature-pad",
     "description": "A signature pad: pressure ink, drawn or typed, a value to store and redraw, trimmed PNG and SVG export.",

@@ -5465,6 +5465,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/signature-pad-next',
+    children: [
+      {
+        path: 'signature-pad-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/signature-pad-next-usage-demo').then(
+            (m) => m.SignaturePadNextUsageDemo,
+          ),
+      },
+      {
+        path: 'form-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/form-signature-pad-next-demo').then(
+            (m) => m.FormSignaturePadNextDemo,
+          ),
+      },
+      {
+        path: 'pen-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/pen-signature-pad-next-demo').then(
+            (m) => m.PenSignaturePadNextDemo,
+          ),
+      },
+      {
+        path: 'export-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/export-signature-pad-next-demo').then(
+            (m) => m.ExportSignaturePadNextDemo,
+          ),
+      },
+      {
+        path: 'readonly-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/readonly-signature-pad-next-demo').then(
+            (m) => m.ReadonlySignaturePadNextDemo,
+          ),
+      },
+      {
+        path: 'type-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/type-signature-pad-next-demo').then(
+            (m) => m.TypeSignaturePadNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-signature-pad-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/signature-pad-next/demos/rtl-signature-pad-next-demo').then(
+            (m) => m.RtlSignaturePadNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/signature-pad',
     children: [
       {
