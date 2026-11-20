@@ -85,7 +85,7 @@ test('Pen: the strokes take the colour and width chosen', async ({ page }) => {
   await expect(pad(page)).toBeVisible();
   await page.getByRole('button', { name: 'Blue' }).click();
   await sign(page, pad(page));
-  await expect(ink(pad(page))).toHaveAttribute('fill', '#1d4ed8');
+  await expect(ink(pad(page))).toHaveAttribute('fill', '#2563eb');
 });
 
 test('Export: a trimmed PNG and an SVG, downloaded', async ({ page }) => {
@@ -146,4 +146,11 @@ test('RTL: named in Arabic, the ink as anywhere', async ({ page }) => {
   await expect(ink(arabic)).toHaveCount(1);
   await page.getByRole('button', { name: 'تراجع' }).click();
   await expect(ink(arabic)).toHaveCount(0);
+});
+
+test('RTL: the hint above the pad describes it', async ({ page }) => {
+  await page.goto('/demos/signature-pad/rtl-signature-pad-demo');
+  await expect(pad(page, 'التوقيع')).toHaveAccessibleDescription(
+    'وقّع في المربع أدناه',
+  );
 });

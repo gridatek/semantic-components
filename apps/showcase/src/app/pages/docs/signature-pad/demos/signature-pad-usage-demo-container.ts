@@ -27,11 +27,7 @@ import { ScButton, ScSignaturePad } from '@semantic-components/ui';
   imports: [ScButton, ScSignaturePad],
   template: \`
     <div class="w-full max-w-md space-y-2">
-      <div
-        scSignaturePad
-        #pad="scSignaturePad"
-        aria-label="Signature"
-      ></div>
+      <div scSignaturePad #pad="scSignaturePad" aria-label="Signature"></div>
       <div class="flex justify-end gap-2">
         <button
           scButton

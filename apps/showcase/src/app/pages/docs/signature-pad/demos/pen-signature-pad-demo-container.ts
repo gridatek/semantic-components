@@ -26,7 +26,10 @@ import {
   ScToggleGroupItem,
 } from '@semantic-components/ui';
 
-/** The pen from your own controls: \`penColor\` and \`penWidth\` bound to toggle groups. Each stroke keeps its own. */
+/**
+ * The pen from your own controls: \`penColor\` and \`penWidth\` bound to toggle
+ * groups. Each stroke keeps its own — mid-tone inks, read on light and dark.
+ */
 @Component({
   selector: 'app-pen-signature-pad-demo',
   imports: [ScButton, ScSignaturePad, ScToggleGroup, ScToggleGroupItem],
@@ -87,8 +90,8 @@ import {
 export class PenSignaturePadDemo {
   private readonly colors = [
     { name: 'Ink', value: 'currentColor', swatch: 'currentColor' },
-    { name: 'Blue', value: '#1d4ed8', swatch: '#1d4ed8' },
-    { name: 'Red', value: '#b91c1c', swatch: '#b91c1c' },
+    { name: 'Blue', value: '#2563eb', swatch: '#2563eb' },
+    { name: 'Red', value: '#dc2626', swatch: '#dc2626' },
   ];
 
   private readonly color = signal(['currentColor']);

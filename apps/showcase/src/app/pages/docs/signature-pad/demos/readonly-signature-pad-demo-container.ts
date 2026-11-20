@@ -21,8 +21,8 @@ export class ReadonlySignaturePadDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   type ScSignature,
-  type ScSignaturePoint,
   ScSignaturePad,
+  type ScSignaturePoint,
 } from '@semantic-components/ui';
 
 /** A saved signature given back: read-only, drawn again at the pad's size; disabled, faded too. */

@@ -4,6 +4,7 @@ import {
   ScButton,
   ScField,
   ScFieldErrors,
+  ScFrame,
   ScInput,
   ScLabel,
   type ScSignature,
@@ -25,6 +26,7 @@ import {
     ScInput,
     ScFieldErrors,
     ScButton,
+    ScFrame,
     FormField,
     FormRoot,
   ],
@@ -62,7 +64,10 @@ import {
           <p class="text-muted-foreground text-sm">
             Signed by {{ model().name }}:
           </p>
-          <img [src]="signed" alt="The signature" class="max-h-20" />
+          <!-- As exported: black ink, so on white — paper — in dark mode too. -->
+          <div scFrame size="sm" class="flex h-20 items-center bg-white p-1">
+            <img [src]="signed" alt="The signature" class="max-h-full" />
+          </div>
         </div>
       }
     </form>

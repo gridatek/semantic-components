@@ -90,6 +90,8 @@ export class ScSignaturePad implements FormValueControl<ScSignature | null> {
   readonly penColor = input('currentColor');
   /** The pen's width, at an even pressure. */
   readonly penWidth = input(3);
+  /** Yours (a hint beside it); in a field, its description and errors join it. */
+  readonly ariaDescribedByInput = input('', { alias: 'aria-describedby' });
 
   /** Nothing signed. */
   readonly empty = computed(() => this.value() === null);
@@ -103,7 +105,10 @@ export class ScSignaturePad implements FormValueControl<ScSignature | null> {
     () => this.invalid() && this.touched(),
   );
   private readonly describedBy = computed(
-    () => this.field?.descriptionIds().join(' ') || null,
+    () =>
+      [this.ariaDescribedByInput(), ...(this.field?.descriptionIds() ?? [])]
+        .filter(Boolean)
+        .join(' ') || null,
   );
 
   /** The pad's size, as shown. */
