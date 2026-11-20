@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
@@ -12,6 +13,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-custom-spotlight-demo',
   imports: [
+    ScFrame,
     ScSpotlight,
     ScSpotlightTitle,
     ScSpotlightDescription,
@@ -20,7 +22,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div class="flex w-full max-w-xl items-center gap-3 rounded-lg border p-4">
+    <div scFrame class="flex w-full max-w-xl items-center gap-3 p-4">
       <span
         #avatar
         class="bg-primary text-primary-foreground grid size-10 place-items-center rounded-full font-medium"

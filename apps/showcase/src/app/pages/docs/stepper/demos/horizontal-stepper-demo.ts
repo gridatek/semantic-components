@@ -3,6 +3,7 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldGroup,
+  ScFrame,
   ScInput,
   ScLabel,
   ScStepper,
@@ -23,6 +24,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-horizontal-stepper-demo',
   imports: [
+    ScFrame,
     FormField,
     ScStepper,
     ScStepperList,
@@ -43,7 +45,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     ScTextarea,
   ],
   template: `
-    <div class="w-full max-w-2xl rounded-lg border p-6">
+    <div scFrame class="w-full max-w-2xl p-6">
       <div scStepper [(selectedIndex)]="selectedIndex">
         <div scStepperList>
           <div scStepperItem #item0="scStepperItem">

@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
@@ -13,6 +14,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-sides-spotlight-demo',
   imports: [
+    ScFrame,
     ScSpotlight,
     ScSpotlightTitle,
     ScSpotlightDescription,
@@ -21,9 +23,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div
-      class="grid w-full max-w-xl place-items-center rounded-lg border py-48"
-    >
+    <div scFrame class="grid w-full max-w-xl place-items-center py-48">
       <div #target class="bg-muted rounded-md px-6 py-3 text-sm font-medium">
         The target
       </div>

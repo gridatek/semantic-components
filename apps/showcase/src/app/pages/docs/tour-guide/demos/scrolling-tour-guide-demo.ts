@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScTourGuide,
   ScTourGuideClose,
   ScTourGuideDescription,
@@ -15,6 +16,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-scrolling-tour-guide-demo',
   imports: [
+    ScFrame,
     ScTourGuide,
     ScTourGuideStep,
     ScTourGuideTitle,
@@ -30,17 +32,17 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
       Tour the page
     </button>
     <div class="w-full max-w-2xl space-y-[60vh] py-8">
-      <section #first class="bg-card rounded-lg border p-6">
+      <section #first scFrame class="bg-card p-6">
         <h3 class="font-medium">The plans</h3>
         <p class="text-muted-foreground text-sm">
           Three of them, side by side.
         </p>
       </section>
-      <section #second class="bg-card rounded-lg border p-6">
+      <section #second scFrame class="bg-card p-6">
         <h3 class="font-medium">The questions</h3>
         <p class="text-muted-foreground text-sm">Asked often, answered here.</p>
       </section>
-      <section #third class="bg-card rounded-lg border p-6">
+      <section #third scFrame class="bg-card p-6">
         <h3 class="font-medium">Contact</h3>
         <p class="text-muted-foreground text-sm">A person, not a bot.</p>
       </section>

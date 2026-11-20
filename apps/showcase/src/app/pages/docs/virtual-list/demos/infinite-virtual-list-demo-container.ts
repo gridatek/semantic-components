@@ -23,13 +23,12 @@ import {
   ScInfiniteScroll,
   ScInfiniteScrollStatus,
   ScVirtualList,
-  ScVirtualListRow,
-} from '@semantic-components/ui';
+  ScVirtualListRow, ScFrame } from '@semantic-components/ui';
 
 /** Long, and longer: the infinite scroll asks for 100 more near the end; the virtual list renders only what is seen. */
 @Component({
   selector: 'app-infinite-virtual-list-demo',
-  imports: [
+  imports: [ScFrame, 
     ScVirtualList,
     ScVirtualListRow,
     ScInfiniteScroll,
@@ -37,7 +36,7 @@ import {
   ],
   template: \`
     <div
-      class="h-96 w-full max-w-md overflow-y-auto rounded-lg border"
+      scFrame class="h-96 w-full max-w-md overflow-y-auto"
       tabindex="0"
       role="region"
       aria-label="Feed"

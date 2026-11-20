@@ -20,6 +20,7 @@ import { CoverImageCropperDemo } from './cover-image-cropper-demo';
 export class CoverImageCropperDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
+  ScFrame,
   ScImageCropper,
   ScImageCropperGrid,
   ScImageCropperImage,
@@ -35,6 +36,7 @@ import {
 @Component({
   selector: 'app-cover-image-cropper-demo',
   imports: [
+    ScFrame,
     ScImageCropper,
     ScImageCropperStage,
     ScImageCropperImage,
@@ -49,7 +51,7 @@ import {
       [aspectRatio]="16 / 9"
       [(zoom)]="zoom"
     >
-      <div scImageCropperStage class="h-72 rounded-lg border">
+      <div scImageCropperStage scFrame class="h-72">
         <img
           scImageCropperImage
           src="/images/cropper-mountains.jpg"

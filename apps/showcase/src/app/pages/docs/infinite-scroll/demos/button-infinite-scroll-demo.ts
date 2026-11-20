@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScInfiniteScroll,
   ScInfiniteScrollMore,
   ScInfiniteScrollStatus,
@@ -13,14 +14,20 @@ interface Item {
 /** auto off: only the button asks — the footer stays within reach, and the reader decides. */
 @Component({
   selector: 'app-button-infinite-scroll-demo',
-  imports: [ScInfiniteScroll, ScInfiniteScrollMore, ScInfiniteScrollStatus],
+  imports: [
+    ScFrame,
+    ScInfiniteScroll,
+    ScInfiniteScrollMore,
+    ScInfiniteScrollStatus,
+  ],
   template: `
     <div class="grid w-full max-w-lg gap-3">
       <ul
         scInfiniteScroll
         #results="scInfiniteScroll"
         [auto]="false"
-        class="divide-y rounded-lg border"
+        scFrame
+        class="divide-y"
         [loading]="loading()"
         [done]="done()"
         (more)="load()"

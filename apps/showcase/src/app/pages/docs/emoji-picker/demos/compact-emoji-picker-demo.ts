@@ -10,6 +10,7 @@ import {
   ScEmojiPickerLoading,
   ScEmojiPickerRow,
   ScEmojiPickerViewport,
+  ScFrame,
   ScSpinner,
 } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
@@ -18,6 +19,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-compact-emoji-picker-demo',
   imports: [
+    ScFrame,
     ScEmojiPicker,
     ScEmojiPickerViewport,
     ScEmojiPickerLoading,
@@ -33,7 +35,8 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div
       scEmojiPicker
-      class="h-56 rounded-lg border shadow-md"
+      scFrame
+      class="h-56"
       [columns]="8"
       (emojiSelect)="selected.set($event)"
     >

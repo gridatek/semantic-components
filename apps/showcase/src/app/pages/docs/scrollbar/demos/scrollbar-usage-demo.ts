@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 
 /**
  * A plain box that scrolls: no directive. With scrollbar.css imported, its
@@ -6,12 +7,14 @@ import { Component, ViewEncapsulation } from '@angular/core';
  */
 @Component({
   selector: 'app-scrollbar-usage-demo',
+  imports: [ScFrame],
   template: `
     <div
       tabindex="0"
       role="region"
       aria-label="Tags"
-      class="h-72 w-48 overflow-auto rounded-md border p-4"
+      scFrame
+      class="h-72 w-48 overflow-auto p-4"
     >
       <p class="mb-4 text-sm leading-none font-medium">Tags</p>
       @for (tag of tags; track tag) {

@@ -19,14 +19,14 @@ import { NavigationThemeToggleDemo } from './navigation-theme-toggle-demo';
 })
 export class NavigationThemeToggleDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
-import { ScButton, ScThemeManager } from '@semantic-components/ui';
+import { ScButton, ScThemeManager, ScFrame } from '@semantic-components/ui';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-navigation-theme-toggle-demo',
-  imports: [ScButton, SiSunIcon, SiMoonIcon],
+  imports: [ScFrame, ScButton, SiSunIcon, SiMoonIcon],
   template: \`
-    <div class="flex items-center justify-between rounded-lg border p-4">
+    <div scFrame class="flex items-center justify-between p-4">
       <div class="space-y-0.5">
         <span class="text-base font-medium">Appearance</span>
         <p class="text-muted-foreground text-sm">

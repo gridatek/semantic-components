@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScSpeedDial,
   ScSpeedDialAction,
   ScSpeedDialLabel,
@@ -17,6 +18,7 @@ import {
 @Component({
   selector: 'app-directions-speed-dial-demo',
   imports: [
+    ScFrame,
     ScSpeedDial,
     ScSpeedDialTrigger,
     ScSpeedDialList,
@@ -30,7 +32,7 @@ import {
   template: `
     <div class="grid w-full gap-4 sm:grid-cols-2">
       @for (way of ways; track way.direction) {
-        <div class="bg-muted/30 relative h-56 rounded-lg border">
+        <div scFrame class="bg-muted/30 relative h-56">
           <div scSpeedDial [direction]="way.direction" [class]="way.place">
             <div scSpeedDialList>
               <button scSpeedDialAction (click)="last.set('Edit')">

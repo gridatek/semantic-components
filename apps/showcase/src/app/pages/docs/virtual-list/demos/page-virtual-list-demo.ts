@@ -1,10 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
+import {
+  ScFrame,
+  ScVirtualList,
+  ScVirtualListRow,
+} from '@semantic-components/ui';
 
 /** Without a size of its own, it takes its full height, and the page — or the box around it — scrolls. */
 @Component({
   selector: 'app-page-virtual-list-demo',
-  imports: [ScVirtualList, ScVirtualListRow],
+  imports: [ScFrame, ScVirtualList, ScVirtualListRow],
   template: `
     <ul
       scVirtualList
@@ -12,7 +16,8 @@ import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
       [count]="rows.length"
       [estimate]="40"
       aria-label="Log"
-      class="w-full max-w-md rounded-lg border"
+      scFrame
+      class="w-full max-w-md"
     >
       @for (row of list.rows(); track row.key) {
         <li

@@ -27,6 +27,7 @@ import {
   ScEmptyTitle,
   ScField,
   ScFieldDescription,
+  ScFrame,
   ScInput,
   ScLabel,
   ScMenu,
@@ -244,6 +245,7 @@ const INK_COLORS = [
 @Component({
   selector: 'app-pdf-viewer-demo',
   imports: [
+    ScFrame,
     NgTemplateOutlet,
     ScPdfViewer,
     ScPdfViewerContainer,
@@ -1645,9 +1647,7 @@ const INK_COLORS = [
             <div scPdfViewerCanvas>
               <!-- The selected annotation's toolbar -->
               <ng-template scPdfViewerAnnotationToolbar let-annotation>
-                <div
-                  class="bg-popover flex items-center gap-1 rounded-md border p-1 shadow-md"
-                >
+                <div scFrame class="bg-popover flex items-center gap-1 p-1">
                   @if (annotation.type === 'highlight') {
                     @for (color of highlightColors; track color.value) {
                       <button
@@ -1960,7 +1960,9 @@ const INK_COLORS = [
                 <div scTabsPanel value="image">
                   <ng-template scTabsPanelContent>
                     <div
-                      class="flex h-36 flex-col items-center justify-center gap-2 rounded-lg border bg-white"
+                      scFrame
+                      size="sm"
+                      class="flex h-36 flex-col items-center justify-center gap-2 bg-white"
                     >
                       @if (signature.image(); as preview) {
                         <img

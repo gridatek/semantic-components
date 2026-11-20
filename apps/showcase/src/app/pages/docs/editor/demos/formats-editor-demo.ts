@@ -160,7 +160,8 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
           [scEditorView]="noteForm.body().value()"
           [format]="format()"
           aria-label="Saved note"
-          class="rounded-lg border p-4 lg:mt-[49px]"
+          scFrame
+          class="p-4 lg:mt-[49px]"
         ></article>
       </div>
 

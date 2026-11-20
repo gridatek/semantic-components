@@ -8,6 +8,7 @@ import {
 import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -79,6 +80,7 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-rtl-gantt-demo',
   imports: [
+    ScFrame,
     Dir,
     ScTable,
     ScTableBody,
@@ -95,14 +97,7 @@ const columns = columnHelper.columns([
     ScGanttTimeline,
   ],
   template: `
-    <div
-      scGantt
-      dir="rtl"
-      lang="ar"
-      [from]="from"
-      [to]="to"
-      class="rounded-md border"
-    >
+    <div scGantt dir="rtl" lang="ar" [from]="from" [to]="to" scFrame>
       <table scTable scDataTableTreeGrid [table]="table" aria-label="الخطة">
         <thead scTableHeader>
           <tr scTableRow>

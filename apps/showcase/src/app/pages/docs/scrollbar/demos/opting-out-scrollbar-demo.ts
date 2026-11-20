@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 
 /**
  * Utilities on a box: no scrollbar, its room kept, or the browser's own bar
@@ -6,6 +7,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
  */
 @Component({
   selector: 'app-opting-out-scrollbar-demo',
+  imports: [ScFrame],
   template: `
     <div class="flex flex-wrap justify-center gap-6">
       @for (box of boxes; track box.label) {
@@ -13,7 +15,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
           tabindex="0"
           role="region"
           [attr.aria-label]="box.label"
-          class="h-48 w-40 overflow-auto rounded-md border p-4 text-sm"
+          scFrame
+          class="h-48 w-40 overflow-auto p-4 text-sm"
           [class]="box.class"
         >
           <p class="mb-2 font-medium">{{ box.label }}</p>

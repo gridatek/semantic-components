@@ -25,14 +25,13 @@ import {
   ScSpotlightClose,
   ScSpotlightDescription,
   type ScSpotlightSide,
-  ScSpotlightTitle,
-} from '@semantic-components/ui';
+  ScSpotlightTitle, ScFrame } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** The card on the side you ask — logical, start and end follow the direction — flipping when there is no room. */
 @Component({
   selector: 'app-sides-spotlight-demo',
-  imports: [
+  imports: [ScFrame, 
     ScSpotlight,
     ScSpotlightTitle,
     ScSpotlightDescription,
@@ -42,7 +41,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div
-      class="grid w-full max-w-xl place-items-center rounded-lg border py-48"
+      scFrame class="grid w-full max-w-xl place-items-center py-48"
     >
       <div #target class="bg-muted rounded-md px-6 py-3 text-sm font-medium">
         The target

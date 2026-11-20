@@ -24,14 +24,13 @@ import {
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
-  ScSpotlightTitle,
-} from '@semantic-components/ui';
+  ScSpotlightTitle, ScFrame } from '@semantic-components/ui';
 import { SiDownloadIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** A new feature, in the spotlight: the page dimmed and inert but for it, a card beside it, named by its title. Escape, a click on the dim, or Got it. */
 @Component({
   selector: 'app-basic-spotlight-demo',
-  imports: [
+  imports: [ScFrame, 
     ScSpotlight,
     ScSpotlightTitle,
     ScSpotlightDescription,
@@ -42,7 +41,7 @@ import { SiDownloadIcon, SiXIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div
-      class="flex w-full max-w-xl items-center justify-between rounded-lg border p-4"
+      scFrame class="flex w-full max-w-xl items-center justify-between p-4"
     >
       <span class="font-medium">Monthly report</span>
       <button #export scButton variant="outline" size="sm">

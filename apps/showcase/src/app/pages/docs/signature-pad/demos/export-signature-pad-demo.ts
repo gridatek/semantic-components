@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   type ScSignature,
   ScSignaturePad,
   ScSignaturePadClear,
@@ -22,6 +23,7 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-export-signature-pad-demo',
   imports: [
+    ScFrame,
     ScSignaturePad,
     ScSignaturePadSurface,
     ScSignaturePadLine,
@@ -79,7 +81,9 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
         <div class="space-y-1">
           <p class="text-muted-foreground">Trimmed PNG</p>
           <div
-            class="flex h-20 items-center justify-center rounded-md border bg-white p-1"
+            scFrame
+            size="sm"
+            class="flex h-20 items-center justify-center bg-white p-1"
           >
             @if (preview(); as preview) {
               <img

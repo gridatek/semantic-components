@@ -39,7 +39,7 @@ import {
       [key]="keyOf"
       [gap]="8"
       aria-label="Messages"
-      class="h-96 w-full max-w-md overflow-y-auto rounded-lg border p-0"
+      scFrame class="h-96 w-full max-w-md overflow-y-auto p-0"
     >
       @for (row of list.rows(); track row.key) {
         <li [scVirtualListRow]="row" class="px-3">

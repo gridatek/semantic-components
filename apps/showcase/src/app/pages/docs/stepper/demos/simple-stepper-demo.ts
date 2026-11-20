@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScStepper,
   ScStepperIndicator,
   ScStepperItem,
@@ -15,6 +16,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-simple-stepper-demo',
   imports: [
+    ScFrame,
     ScStepper,
     ScStepperList,
     ScStepperIndicator,
@@ -27,7 +29,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     SiCheckIcon,
   ],
   template: `
-    <div class="w-full max-w-2xl rounded-lg border p-6">
+    <div scFrame class="w-full max-w-2xl p-6">
       <div scStepper [(selectedIndex)]="selectedIndex">
         <div scStepperList>
           <div scStepperItem #item0="scStepperItem">

@@ -24,8 +24,7 @@ import {
   ScSpeedDialAction,
   ScSpeedDialLabel,
   ScSpeedDialList,
-  ScSpeedDialTrigger,
-} from '@semantic-components/ui';
+  ScSpeedDialTrigger, ScFrame } from '@semantic-components/ui';
 import {
   SiCopyIcon,
   SiPencilIcon,
@@ -37,7 +36,7 @@ import {
 /** Toward a corner — up-left for a button at the bottom right — the actions fan out on a quarter circle. Their labels are read, not shown. */
 @Component({
   selector: 'app-arc-speed-dial-demo',
-  imports: [
+  imports: [ScFrame, 
     ScSpeedDial,
     ScSpeedDialTrigger,
     ScSpeedDialList,
@@ -50,7 +49,7 @@ import {
     SiTrash2Icon,
   ],
   template: \`
-    <div class="bg-muted/30 relative h-80 w-full rounded-lg border">
+    <div scFrame class="bg-muted/30 relative h-80 w-full">
       <div scSpeedDial direction="up-left" class="absolute end-6 bottom-6">
         <div scSpeedDialList>
           <button scSpeedDialAction (click)="last.set('Edit')">

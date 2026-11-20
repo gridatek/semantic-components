@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScTree,
   ScTreeItem,
   ScTreeItemGroup,
@@ -17,6 +18,7 @@ import {
 @Component({
   selector: 'app-file-explorer-tree-demo',
   imports: [
+    ScFrame,
     ScTree,
     ScTreeItem,
     ScTreeItemTrigger,
@@ -29,7 +31,7 @@ import {
     SiImageIcon,
   ],
   template: `
-    <div class="w-full max-w-sm rounded-lg border p-4">
+    <div scFrame class="w-full max-w-sm p-4">
       <ul scTree aria-label="Project files">
         <li scTreeItem value="src" [expanded]="true">
           <div scTreeItemTrigger>

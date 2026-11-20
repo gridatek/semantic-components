@@ -34,14 +34,13 @@ import {
   ScTourGuideNext,
   ScTourGuidePrevious,
   ScTourGuideStep,
-  ScTourGuideTitle,
-} from '@semantic-components/ui';
+  ScTourGuideTitle, ScFrame } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** Open and step are two-way: start at any step from outside; (finished) at Done — closed is not finished. */
 @Component({
   selector: 'app-controlled-tour-guide-demo',
-  imports: [
+  imports: [ScFrame, 
     ScTourGuide,
     ScTourGuideStep,
     ScTourGuideTitle,
@@ -54,7 +53,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: \`
-    <div class="w-full max-w-2xl overflow-hidden rounded-lg border">
+    <div scFrame class="w-full max-w-2xl overflow-hidden">
       <header class="flex items-center gap-3 border-b p-3">
         <span class="font-semibold">Acme</span>
         <input
@@ -73,7 +72,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           <p>Reports</p>
         </div>
         <div class="space-y-3">
-          <div class="bg-card rounded-md border p-4 text-sm">
+          <div scFrame size="sm" class="bg-card p-4 text-sm">
             Your week, at a glance.
           </div>
           <button #create scButton>New project</button>

@@ -27,7 +27,8 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
         multi
         [(value)]="selected"
         aria-label="Produce"
-        class="rounded-lg border p-4"
+        scFrame
+        class="p-4"
       >
         <li scTreeItem value="fruits" [expanded]="true">
           <div scTreeItemTrigger>

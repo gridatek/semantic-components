@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScImageCropper,
   ScImageCropperHandle,
   ScImageCropperImage,
@@ -18,6 +19,7 @@ import {
 @Component({
   selector: 'app-avatar-image-cropper-demo',
   imports: [
+    ScFrame,
     ScImageCropper,
     ScImageCropperStage,
     ScImageCropperImage,
@@ -36,7 +38,7 @@ import {
       [aspectRatio]="1"
       [(zoom)]="zoom"
     >
-      <div scImageCropperStage class="h-72 rounded-lg border">
+      <div scImageCropperStage scFrame class="h-72">
         <img
           scImageCropperImage
           src="/images/cropper-mountains.jpg"

@@ -20,6 +20,7 @@ import { ByDayNotificationCenterDemo } from './by-day-notification-center-demo';
 export class ByDayNotificationCenterDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   type ScNotification,
   ScNotificationCenter,
   ScNotificationCenterHeader,
@@ -65,6 +66,7 @@ const hoursAgo = (hours: number) =>
 @Component({
   selector: 'app-by-day-notification-center-demo',
   imports: [
+    ScFrame,
     ScNotificationCenter,
     ScNotificationCenterHeader,
     ScNotificationCenterTitle,
@@ -100,7 +102,8 @@ const hoursAgo = (hours: number) =>
       #center="scNotificationCenter"
       [(notifications)]="notifications"
       aria-labelledby="by-day-notifications-title"
-      class="bg-card w-full max-w-md rounded-xl border"
+      scFrame
+      class="bg-card w-full max-w-md"
     >
       <div scNotificationCenterHeader>
         <h2 scNotificationCenterTitle id="by-day-notifications-title">

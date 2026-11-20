@@ -32,6 +32,7 @@ import {
   ScAudioPlayerTime,
   ScAudioPlayerVolume,
   ScAudioPlayerWaveform,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiPauseIcon,
@@ -56,6 +57,7 @@ interface Song {
 @Component({
   selector: 'app-player-audio-player-demo',
   imports: [
+    ScFrame,
     NgOptimizedImage,
     ScAudioPlayer,
     ScAudioPlayerMedia,
@@ -86,7 +88,8 @@ interface Song {
       [tracks]="songs"
       [(track)]="track"
       [metadata]="metadata()"
-      class="bg-card w-full max-w-sm space-y-4 rounded-xl border p-4"
+      scFrame
+      class="bg-card w-full max-w-sm space-y-4 p-4"
     >
       <audio scAudioPlayerMedia preload="metadata"></audio>
 

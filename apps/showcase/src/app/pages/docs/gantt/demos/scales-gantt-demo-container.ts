@@ -27,6 +27,7 @@ export class ScalesGanttDemoContainer {
 } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
+  ScFrame,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -99,6 +100,7 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-scales-gantt-demo',
   imports: [
+    ScFrame,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -120,13 +122,7 @@ const columns = columnHelper.columns([
       <button scToggleGroupItem value="week">Weeks</button>
       <button scToggleGroupItem value="month">Months</button>
     </div>
-    <div
-      scGantt
-      [from]="from"
-      [to]="to"
-      [scale]="scale()"
-      class="rounded-md border"
-    >
+    <div scGantt [from]="from" [to]="to" [scale]="scale()" scFrame>
       <table scTable scDataTableTreeGrid [table]="table" aria-label="Releases">
         <thead scTableHeader>
           <tr scTableRow>

@@ -16,6 +16,7 @@ import {
   ScEmojiPickerSearch,
   ScEmojiPickerSearchField,
   ScEmojiPickerViewport,
+  ScFrame,
   ScSpinner,
 } from '@semantic-components/ui';
 import {
@@ -37,6 +38,7 @@ import {
 @Component({
   selector: 'app-categories-emoji-picker-demo',
   imports: [
+    ScFrame,
     ScEmojiPicker,
     ScEmojiPickerCategoryNav,
     ScEmojiPickerCategoryButton,
@@ -69,7 +71,8 @@ import {
   template: `
     <div
       scEmojiPicker
-      class="h-[380px] rounded-lg border shadow-md"
+      scFrame
+      class="h-[380px]"
       recentLabel="Recently used"
       [(recent)]="recent"
       #picker="scEmojiPicker"

@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScInput,
   ScSpotlight,
   ScSpotlightClose,
@@ -13,6 +14,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-interactive-spotlight-demo',
   imports: [
+    ScFrame,
     ScSpotlight,
     ScSpotlightTitle,
     ScSpotlightDescription,
@@ -22,7 +24,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: `
-    <div class="flex w-full max-w-xl items-center gap-3 rounded-lg border p-4">
+    <div scFrame class="flex w-full max-w-xl items-center gap-3 p-4">
       <span class="font-medium">Library</span>
       <input
         #search

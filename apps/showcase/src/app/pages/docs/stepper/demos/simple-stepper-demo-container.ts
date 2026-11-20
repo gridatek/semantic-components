@@ -24,13 +24,12 @@ import {
   ScStepperPanel,
   ScStepperPrevious,
   ScStepperSeparator,
-  ScStepperTrigger,
-} from '@semantic-components/ui';
+  ScStepperTrigger, ScFrame } from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 
 @Component({
   selector: 'app-simple-stepper-demo',
-  imports: [
+  imports: [ScFrame, 
     ScStepper,
     ScStepperList,
     ScStepperIndicator,
@@ -43,7 +42,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     SiCheckIcon,
   ],
   template: \`
-    <div class="w-full max-w-2xl rounded-lg border p-6">
+    <div scFrame class="w-full max-w-2xl p-6">
       <div scStepper [(selectedIndex)]="selectedIndex">
         <div scStepperList>
           <div scStepperItem #item0="scStepperItem">

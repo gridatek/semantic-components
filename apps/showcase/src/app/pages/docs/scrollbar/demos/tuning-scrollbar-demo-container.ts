@@ -19,6 +19,7 @@ import { TuningScrollbarDemo } from './tuning-scrollbar-demo';
 })
 export class TuningScrollbarDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 
 /**
  * The variables on a box: its scrollbars, and those inside it. On :root,
@@ -26,6 +27,7 @@ export class TuningScrollbarDemoContainer {
  */
 @Component({
   selector: 'app-tuning-scrollbar-demo',
+  imports: [ScFrame],
   template: \`
     <div class="flex flex-wrap justify-center gap-6">
       @for (box of boxes; track box.label) {
@@ -33,7 +35,7 @@ export class TuningScrollbarDemoContainer {
           tabindex="0"
           role="region"
           [attr.aria-label]="box.label"
-          class="h-48 w-40 overflow-auto rounded-md border p-4 text-sm"
+          scFrame class="h-48 w-40 overflow-auto p-4 text-sm"
           [class]="box.class"
         >
           <p class="mb-2 font-medium">{{ box.label }}</p>

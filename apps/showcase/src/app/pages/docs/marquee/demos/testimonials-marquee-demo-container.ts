@@ -19,20 +19,18 @@ import { TestimonialsMarqueeDemo } from './testimonials-marquee-demo';
 })
 export class TestimonialsMarqueeDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
+import { ScFrame, ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
 
 /** Two rows, going opposite ways. */
 @Component({
   selector: 'app-testimonials-marquee-demo',
-  imports: [ScMarquee, ScMarqueeContent],
+  imports: [ScFrame, ScMarquee, ScMarqueeContent],
   template: \`
     <section aria-label="What people say" class="w-full space-y-4">
       <div scMarquee fade>
         <ng-template scMarqueeContent>
           @for (quote of quotes; track quote.name) {
-            <figure
-              class="bg-card w-64 rounded-lg border p-4 text-sm shadow-xs"
-            >
+            <figure scFrame class="bg-card w-64 p-4 text-sm">
               <blockquote>“{{ quote.text }}”</blockquote>
               <figcaption class="text-muted-foreground mt-2">
                 — {{ quote.name }}
@@ -44,9 +42,7 @@ import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
       <div scMarquee direction="right" fade>
         <ng-template scMarqueeContent>
           @for (quote of quotes; track quote.name) {
-            <figure
-              class="bg-card w-64 rounded-lg border p-4 text-sm shadow-xs"
-            >
+            <figure scFrame class="bg-card w-64 p-4 text-sm">
               <blockquote>“{{ quote.text }}”</blockquote>
               <figcaption class="text-muted-foreground mt-2">
                 — {{ quote.name }}

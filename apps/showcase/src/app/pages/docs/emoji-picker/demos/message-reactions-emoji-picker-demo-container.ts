@@ -35,6 +35,7 @@ import {
   ScEmojiPickerSearch,
   ScEmojiPickerSearchField,
   ScEmojiPickerViewport,
+  ScFrame,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -50,6 +51,7 @@ import {
 @Component({
   selector: 'app-message-reactions-emoji-picker-demo',
   imports: [
+    ScFrame,
     ScButton,
     ScPopoverProvider,
     ScPopoverTrigger,
@@ -74,7 +76,7 @@ import {
     SiSmilePlusIcon,
   ],
   template: \`
-    <div class="w-full max-w-md rounded-lg border p-4">
+    <div scFrame class="w-full max-w-md p-4">
       <p class="text-sm">
         This is a sample message that can have emoji reactions.
       </p>

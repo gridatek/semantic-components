@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScInfiniteScroll,
   ScInfiniteScrollMore,
   ScInfiniteScrollStatus,
@@ -13,10 +14,16 @@ interface Item {
 /** A load fails: auto off, so it does not ask again by itself; the status says so and the button tries again. */
 @Component({
   selector: 'app-error-infinite-scroll-demo',
-  imports: [ScInfiniteScroll, ScInfiniteScrollMore, ScInfiniteScrollStatus],
+  imports: [
+    ScFrame,
+    ScInfiniteScroll,
+    ScInfiniteScrollMore,
+    ScInfiniteScrollStatus,
+  ],
   template: `
     <div
-      class="h-80 w-full max-w-lg overflow-y-auto rounded-lg border"
+      scFrame
+      class="h-80 w-full max-w-lg overflow-y-auto"
       tabindex="0"
       role="region"
       aria-label="Orders"

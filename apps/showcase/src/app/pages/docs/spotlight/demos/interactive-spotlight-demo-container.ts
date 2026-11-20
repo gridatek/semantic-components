@@ -25,14 +25,13 @@ import {
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
-  ScSpotlightTitle,
-} from '@semantic-components/ui';
+  ScSpotlightTitle, ScFrame } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 
 /** The element stays usable through the cutout — type in the search while it is lit; the rest of the page stays dimmed and blocked. Escape still closes. */
 @Component({
   selector: 'app-interactive-spotlight-demo',
-  imports: [
+  imports: [ScFrame, 
     ScSpotlight,
     ScSpotlightTitle,
     ScSpotlightDescription,
@@ -42,7 +41,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     SiXIcon,
   ],
   template: \`
-    <div class="flex w-full max-w-xl items-center gap-3 rounded-lg border p-4">
+    <div scFrame class="flex w-full max-w-xl items-center gap-3 p-4">
       <span class="font-medium">Library</span>
       <input
         #search

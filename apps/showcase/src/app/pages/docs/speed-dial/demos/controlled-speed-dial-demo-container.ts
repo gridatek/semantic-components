@@ -25,8 +25,7 @@ import {
   ScSpeedDialAction,
   ScSpeedDialLabel,
   ScSpeedDialList,
-  ScSpeedDialTrigger,
-} from '@semantic-components/ui';
+  ScSpeedDialTrigger, ScFrame } from '@semantic-components/ui';
 import {
   SiCopyIcon,
   SiPencilIcon,
@@ -38,7 +37,7 @@ import {
 /** Open is two-way — here opened from outside too (a press outside closes it). A disabled action stays reachable, and does nothing. */
 @Component({
   selector: 'app-controlled-speed-dial-demo',
-  imports: [
+  imports: [ScFrame, 
     ScSpeedDial,
     ScSpeedDialTrigger,
     ScSpeedDialList,
@@ -52,7 +51,7 @@ import {
     SiTrash2Icon,
   ],
   template: \`
-    <div class="bg-muted/30 relative h-80 w-full rounded-lg border">
+    <div scFrame class="bg-muted/30 relative h-80 w-full">
       <div scSpeedDial [(open)]="open" class="absolute end-4 bottom-4">
         <div scSpeedDialList>
           <button scSpeedDialAction (click)="last.set('Edit')">

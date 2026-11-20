@@ -36,6 +36,7 @@ import {
   ScEmojiPickerSkinTone,
   ScEmojiPickerViewport,
   type ScEmojiSkinTone,
+  ScFrame,
   ScSpinner,
 } from '@semantic-components/ui';
 import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
@@ -44,6 +45,7 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-locale-emoji-picker-demo',
   imports: [
+    ScFrame,
     ScSpinner,
     ScEmojiPicker,
     ScEmojiPickerSearchField,
@@ -64,12 +66,7 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     SiLoaderCircleIcon,
   ],
   template: \`
-    <div
-      scEmojiPicker
-      class="rounded-lg border shadow-md"
-      [(skinTone)]="skinTone"
-      #picker="scEmojiPicker"
-    >
+    <div scEmojiPicker scFrame [(skinTone)]="skinTone" #picker="scEmojiPicker">
       <div scEmojiPickerSearchField>
         <svg siSearchIcon></svg>
         <input

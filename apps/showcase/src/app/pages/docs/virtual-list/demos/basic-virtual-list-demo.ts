@@ -1,10 +1,14 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
+import {
+  ScFrame,
+  ScVirtualList,
+  ScVirtualListRow,
+} from '@semantic-components/ui';
 
 /** 10,000 rows, a few dozen rendered: those in view, and five more each way. Each row is measured as it renders; its place in the whole list is aria-posinset of aria-setsize. */
 @Component({
   selector: 'app-basic-virtual-list-demo',
-  imports: [ScVirtualList, ScVirtualListRow],
+  imports: [ScFrame, ScVirtualList, ScVirtualListRow],
   template: `
     <ul
       scVirtualList
@@ -12,7 +16,8 @@ import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
       [count]="contacts.length"
       [estimate]="56"
       aria-label="Contacts"
-      class="h-96 w-full max-w-md overflow-y-auto rounded-lg border"
+      scFrame
+      class="h-96 w-full max-w-md overflow-y-auto"
     >
       @for (row of list.rows(); track row.key) {
         <li

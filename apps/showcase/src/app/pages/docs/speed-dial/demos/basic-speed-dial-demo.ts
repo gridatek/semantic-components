@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScSpeedDial,
   ScSpeedDialAction,
   ScSpeedDialLabel,
@@ -18,6 +19,7 @@ import {
 @Component({
   selector: 'app-basic-speed-dial-demo',
   imports: [
+    ScFrame,
     ScSpeedDial,
     ScSpeedDialTrigger,
     ScSpeedDialList,
@@ -30,7 +32,7 @@ import {
     SiTrash2Icon,
   ],
   template: `
-    <div class="bg-muted/30 relative h-80 w-full rounded-lg border">
+    <div scFrame class="bg-muted/30 relative h-80 w-full">
       <div scSpeedDial class="absolute end-4 bottom-4">
         <div scSpeedDialList>
           <button scSpeedDialAction (click)="last.set('Edit')">

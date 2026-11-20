@@ -27,6 +27,7 @@ export class MilestonesGanttDemoContainer {
 } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -119,6 +120,7 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-milestones-gantt-demo',
   imports: [
+    ScFrame,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -135,7 +137,7 @@ const columns = columnHelper.columns([
     ScGanttTimeline,
   ],
   template: \`
-    <div scGantt readonly [from]="from" [to]="to" class="rounded-md border">
+    <div scGantt readonly [from]="from" [to]="to" scFrame>
       <table scTable scDataTableTreeGrid [table]="table" aria-label="Rollout">
         <thead scTableHeader>
           <tr scTableRow>

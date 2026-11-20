@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScSpotlight,
   ScSpotlightClose,
   ScSpotlightDescription,
@@ -12,6 +13,7 @@ import { SiDownloadIcon, SiXIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-basic-spotlight-demo',
   imports: [
+    ScFrame,
     ScSpotlight,
     ScSpotlightTitle,
     ScSpotlightDescription,
@@ -21,9 +23,7 @@ import { SiDownloadIcon, SiXIcon } from '@semantic-icons/lucide-icons';
     SiDownloadIcon,
   ],
   template: `
-    <div
-      class="flex w-full max-w-xl items-center justify-between rounded-lg border p-4"
-    >
+    <div scFrame class="flex w-full max-w-xl items-center justify-between p-4">
       <span class="font-medium">Monthly report</span>
       <button #export scButton variant="outline" size="sm">
         <svg siDownloadIcon></svg>

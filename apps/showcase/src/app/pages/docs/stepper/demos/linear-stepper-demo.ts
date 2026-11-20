@@ -10,6 +10,7 @@ import {
   ScButton,
   ScField,
   ScFieldErrors,
+  ScFrame,
   ScInput,
   ScLabel,
   ScStepper,
@@ -33,6 +34,7 @@ interface SignupModel {
 @Component({
   selector: 'app-linear-stepper-demo',
   imports: [
+    ScFrame,
     FormField,
     FormRoot,
     ScButton,
@@ -54,7 +56,7 @@ interface SignupModel {
     SiXIcon,
   ],
   template: `
-    <form [formRoot]="signupForm" class="w-full max-w-xl rounded-lg border p-6">
+    <form [formRoot]="signupForm" scFrame class="w-full max-w-xl p-6">
       <div
         scStepper
         linear

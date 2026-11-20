@@ -18,6 +18,7 @@ export class FormMentionInputDemoContainer {
 import {
   ScButton,
   ScField,
+  ScFrame,
   ScLabel,
   ScMentionInput,
   ScMentionInputControl,
@@ -29,6 +30,7 @@ import type { ScMentionUser } from '@semantic-components/ui';
 @Component({
   selector: 'app-form-mention-input-demo',
   imports: [
+    ScFrame,
     ScButton,
     ScField,
     ScLabel,
@@ -38,7 +40,7 @@ import type { ScMentionUser } from '@semantic-components/ui';
     ScMentionInputSuggestionItem,
   ],
   template: \`
-    <div class="w-full max-w-lg space-y-3 rounded-lg border p-4">
+    <div scFrame class="w-full max-w-lg space-y-3 p-4">
       <div class="flex items-center gap-3">
         <div
           class="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-full text-sm font-medium"

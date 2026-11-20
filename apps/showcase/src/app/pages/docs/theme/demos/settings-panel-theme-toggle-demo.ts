@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
+  ScFrame,
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,
@@ -12,6 +13,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-settings-panel-theme-toggle-demo',
   imports: [
+    ScFrame,
     ScNativeSelect,
     ScNativeSelectContainer,
     ScNativeSelectIcon,
@@ -19,7 +21,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: `
-    <div class="w-[400px] rounded-lg border p-4">
+    <div scFrame class="w-[400px] p-4">
       <div class="space-y-4">
         <label class="flex items-center justify-between">
           <div class="space-y-0.5">

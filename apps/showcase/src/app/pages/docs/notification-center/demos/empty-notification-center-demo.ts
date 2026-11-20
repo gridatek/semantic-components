@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   type ScNotification,
   ScNotificationCenter,
   ScNotificationCenterHeader,
@@ -12,6 +13,7 @@ import { SiBellOffIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-empty-notification-center-demo',
   imports: [
+    ScFrame,
     ScNotificationCenter,
     ScNotificationCenterHeader,
     ScNotificationCenterTitle,
@@ -24,7 +26,8 @@ import { SiBellOffIcon } from '@semantic-icons/lucide-icons';
       #center="scNotificationCenter"
       [(notifications)]="notifications"
       aria-labelledby="empty-notifications-title"
-      class="bg-card w-full max-w-md rounded-xl border"
+      scFrame
+      class="bg-card w-full max-w-md"
     >
       <div scNotificationCenterHeader>
         <h2 scNotificationCenterTitle id="empty-notifications-title">

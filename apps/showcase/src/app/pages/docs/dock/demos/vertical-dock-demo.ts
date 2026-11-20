@@ -5,6 +5,7 @@ import {
   ScDockIndicator,
   ScDockItem,
   ScDockLabel,
+  ScFrame,
 } from '@semantic-components/ui';
 import {
   SiCompassIcon,
@@ -19,6 +20,7 @@ import {
 @Component({
   selector: 'app-vertical-dock-demo',
   imports: [
+    ScFrame,
     ScDock,
     ScDockItem,
     ScDockLabel,
@@ -33,7 +35,8 @@ import {
   ],
   template: `
     <div
-      class="flex h-[28rem] w-full items-center rounded-lg border bg-gradient-to-r from-emerald-100 to-teal-200 p-4 dark:from-emerald-950 dark:to-teal-950"
+      scFrame
+      class="flex h-[28rem] w-full items-center bg-gradient-to-r from-emerald-100 to-teal-200 p-4 dark:from-emerald-950 dark:to-teal-950"
     >
       <div scDock orientation="vertical" role="toolbar" aria-label="Apps">
         @for (app of apps; track app.name) {

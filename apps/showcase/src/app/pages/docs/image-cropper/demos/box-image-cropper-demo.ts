@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScImageCropper,
   ScImageCropperAspectRatio,
   ScImageCropperFlipHorizontal,
@@ -35,6 +36,7 @@ import {
 @Component({
   selector: 'app-box-image-cropper-demo',
   imports: [
+    ScFrame,
     ScImageCropper,
     ScImageCropperStage,
     ScImageCropperImage,
@@ -63,7 +65,7 @@ import {
   template: `
     <div scImageCropper #cropper="scImageCropper" [(zoom)]="zoom">
       <div class="flex flex-wrap gap-6">
-        <div scImageCropperStage class="h-80 min-w-0 flex-1 rounded-lg border">
+        <div scImageCropperStage scFrame class="h-80 min-w-0 flex-1">
           <img scImageCropperImage [src]="src()" alt="Mountains at dawn" />
           <div scImageCropperSelection aria-label="Crop area">
             <div scImageCropperGrid></div>
@@ -74,7 +76,7 @@ import {
         </div>
         <div class="space-y-2">
           <p class="text-sm font-medium">Preview</p>
-          <div scImageCropperPreview class="h-28 w-40 rounded-md border">
+          <div scImageCropperPreview scFrame size="sm" class="h-28 w-40">
             <img scImageCropperPreviewImage alt="The crop" />
           </div>
           <p class="text-muted-foreground text-xs tabular-nums">
@@ -133,7 +135,8 @@ import {
 
       <div class="flex flex-wrap items-center gap-2">
         <label
-          class="hover:bg-muted focus-within:ring-ring/50 inline-flex h-8 cursor-pointer items-center rounded-lg border px-2.5 text-sm font-medium focus-within:ring-3"
+          scFrame
+          class="hover:bg-muted focus-within:ring-ring/50 inline-flex h-8 cursor-pointer items-center px-2.5 text-sm font-medium focus-within:ring-3"
         >
           Open an image
           <input
@@ -152,7 +155,9 @@ import {
           <img
             [src]="result"
             alt="The cropped image"
-            class="max-h-48 rounded-md border"
+            scFrame
+            size="sm"
+            class="max-h-48"
           />
           <a scButton variant="outline" [href]="result" download="crop.png">
             Download

@@ -24,8 +24,7 @@ import {
   ScSpeedDialAction,
   ScSpeedDialLabel,
   ScSpeedDialList,
-  ScSpeedDialTrigger,
-} from '@semantic-components/ui';
+  ScSpeedDialTrigger, ScFrame } from '@semantic-components/ui';
 import {
   SiCopyIcon,
   SiPencilIcon,
@@ -37,7 +36,7 @@ import {
 /** A button in a corner; its actions open upward, each named by the label beside it. From the keyboard: Enter, Space or an arrow opens it on the first action; the arrows move along, Escape closes. */
 @Component({
   selector: 'app-basic-speed-dial-demo',
-  imports: [
+  imports: [ScFrame, 
     ScSpeedDial,
     ScSpeedDialTrigger,
     ScSpeedDialList,
@@ -50,7 +49,7 @@ import {
     SiTrash2Icon,
   ],
   template: \`
-    <div class="bg-muted/30 relative h-80 w-full rounded-lg border">
+    <div scFrame class="bg-muted/30 relative h-80 w-full">
       <div scSpeedDial class="absolute end-4 bottom-4">
         <div scSpeedDialList>
           <button scSpeedDialAction (click)="last.set('Edit')">

@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScVirtualList,
   ScVirtualListRow,
 } from '@semantic-components/ui';
@@ -8,7 +9,7 @@ import {
 /** scrollToIndex(index, with an alignment): row 5,000 at the start, the centre, the end — or, auto, only as far as needed. */
 @Component({
   selector: 'app-scroll-virtual-list-demo',
-  imports: [ScVirtualList, ScVirtualListRow, ScButton],
+  imports: [ScFrame, ScVirtualList, ScVirtualListRow, ScButton],
   template: `
     <div class="flex flex-wrap justify-center gap-2">
       @for (align of aligns; track align) {
@@ -37,7 +38,8 @@ import {
       [count]="10_000"
       [estimate]="40"
       aria-label="Numbers"
-      class="h-80 w-full max-w-md overflow-y-auto rounded-lg border"
+      scFrame
+      class="h-80 w-full max-w-md overflow-y-auto"
     >
       @for (row of list.rows(); track row.key) {
         <li

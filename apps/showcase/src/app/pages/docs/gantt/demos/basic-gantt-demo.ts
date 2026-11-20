@@ -7,6 +7,7 @@ import {
 } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -155,6 +156,7 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-basic-gantt-demo',
   imports: [
+    ScFrame,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -174,7 +176,7 @@ const columns = columnHelper.columns([
     SiChevronRightIcon,
   ],
   template: `
-    <div scGantt [from]="from" [to]="to" class="rounded-md border">
+    <div scGantt [from]="from" [to]="to" scFrame>
       <table scTable scDataTableTreeGrid [table]="table" aria-label="Plan">
         <thead scTableHeader>
           <tr scTableRow>

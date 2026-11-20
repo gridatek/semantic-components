@@ -1,18 +1,16 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
+import { ScFrame, ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
 
 /** A column, going up: give it a height. */
 @Component({
   selector: 'app-vertical-marquee-demo',
-  imports: [ScMarquee, ScMarqueeContent],
+  imports: [ScFrame, ScMarquee, ScMarqueeContent],
   template: `
     <section aria-label="Reviews" class="h-80">
       <div scMarquee direction="up" fade class="h-full">
         <ng-template scMarqueeContent>
           @for (quote of quotes; track quote.name) {
-            <figure
-              class="bg-card w-64 rounded-lg border p-4 text-sm shadow-xs"
-            >
+            <figure scFrame class="bg-card w-64 p-4 text-sm">
               <blockquote>“{{ quote.text }}”</blockquote>
               <figcaption class="text-muted-foreground mt-2">
                 — {{ quote.name }}

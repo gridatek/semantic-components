@@ -49,7 +49,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
     SiCheckIcon,
   ],
   template: \`
-    <div class="w-full max-w-xl rounded-lg border p-6">
+    <div scFrame class="w-full max-w-xl p-6">
       <div
         scStepper
         orientation="vertical"

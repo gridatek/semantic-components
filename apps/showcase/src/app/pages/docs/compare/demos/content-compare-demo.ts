@@ -6,6 +6,7 @@ import {
   ScCompareBefore,
   ScCompareHandle,
   ScCompareLabel,
+  ScFrame,
 } from '@semantic-components/ui';
 import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
 
@@ -13,6 +14,7 @@ import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-content-compare-demo',
   imports: [
+    ScFrame,
     NgTemplateOutlet,
     ScCompare,
     ScCompareBefore,
@@ -22,7 +24,7 @@ import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
     SiChevronsLeftRightIcon,
   ],
   template: `
-    <div scCompare class="w-full max-w-md rounded-xl border">
+    <div scCompare scFrame class="w-full max-w-md">
       <div scCompareBefore class="bg-background text-foreground p-8">
         <ng-container [ngTemplateOutlet]="card" />
       </div>
@@ -37,9 +39,7 @@ import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
     </div>
 
     <ng-template #card>
-      <div
-        class="bg-card text-card-foreground mt-6 space-y-3 rounded-xl border p-5 shadow-sm"
-      >
+      <div scFrame class="bg-card text-card-foreground mt-6 space-y-3 p-5">
         <p class="font-semibold">Team plan</p>
         <p class="text-muted-foreground text-sm">
           Everything in Pro, for up to ten people.

@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScInfiniteScroll,
   ScInfiniteScrollStatus,
 } from '@semantic-components/ui';
@@ -13,10 +14,11 @@ interface Message {
 /** direction="start": it opens at the end, and older messages come in above as the reader scrolls up — the one they were reading stays where it was. */
 @Component({
   selector: 'app-chat-infinite-scroll-demo',
-  imports: [ScInfiniteScroll, ScInfiniteScrollStatus],
+  imports: [ScFrame, ScInfiniteScroll, ScInfiniteScrollStatus],
   template: `
     <div
-      class="h-80 w-full max-w-md overflow-y-auto rounded-lg border"
+      scFrame
+      class="h-80 w-full max-w-md overflow-y-auto"
       tabindex="0"
       role="log"
       aria-label="Messages"

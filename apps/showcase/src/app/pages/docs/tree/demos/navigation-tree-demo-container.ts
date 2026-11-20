@@ -57,7 +57,7 @@ import {
         nav
         [(value)]="current"
         aria-label="Documentation"
-        class="rounded-lg border p-4"
+        scFrame class="p-4"
       >
         <li scTreeItem value="getting-started" [expanded]="true">
           <div scTreeItemTrigger>

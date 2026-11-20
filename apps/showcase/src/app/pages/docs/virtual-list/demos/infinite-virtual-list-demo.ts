@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScInfiniteScroll,
   ScInfiniteScrollStatus,
   ScVirtualList,
@@ -10,6 +11,7 @@ import {
 @Component({
   selector: 'app-infinite-virtual-list-demo',
   imports: [
+    ScFrame,
     ScVirtualList,
     ScVirtualListRow,
     ScInfiniteScroll,
@@ -17,7 +19,8 @@ import {
   ],
   template: `
     <div
-      class="h-96 w-full max-w-md overflow-y-auto rounded-lg border"
+      scFrame
+      class="h-96 w-full max-w-md overflow-y-auto"
       tabindex="0"
       role="region"
       aria-label="Feed"

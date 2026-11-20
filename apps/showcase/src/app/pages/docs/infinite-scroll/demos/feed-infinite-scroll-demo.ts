@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScInfiniteScroll,
   ScInfiniteScrollStatus,
   ScSpinner,
@@ -16,13 +17,14 @@ interface Item {
 @Component({
   selector: 'app-feed-infinite-scroll-demo',
   imports: [
+    ScFrame,
     ScInfiniteScroll,
     ScInfiniteScrollStatus,
     ScSpinner,
     SiLoaderCircleIcon,
   ],
   template: `
-    <div class="h-96 w-full max-w-lg overflow-y-auto rounded-lg border">
+    <div scFrame class="h-96 w-full max-w-lg overflow-y-auto">
       <div
         scInfiniteScroll
         role="feed"
@@ -35,7 +37,8 @@ interface Item {
         @for (item of items(); track item.id) {
           <article
             tabindex="0"
-            class="focus-visible:ring-ring/50 rounded-lg border p-3 outline-none focus-visible:ring-3"
+            scFrame
+            class="focus-visible:ring-ring/50 p-3 outline-none focus-visible:ring-3"
             [attr.aria-posinset]="$index + 1"
             [attr.aria-setsize]="done() ? items().length : -1"
             [attr.aria-labelledby]="'feed-' + item.id"

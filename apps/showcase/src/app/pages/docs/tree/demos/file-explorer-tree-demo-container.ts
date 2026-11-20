@@ -25,8 +25,7 @@ import {
   ScTreeItemGroup,
   ScTreeItemIcon,
   ScTreeItemTrigger,
-  ScTreeItemTriggerIcon,
-} from '@semantic-components/ui';
+  ScTreeItemTriggerIcon, ScFrame } from '@semantic-components/ui';
 import {
   SiChevronRightIcon,
   SiFileIcon,
@@ -36,7 +35,7 @@ import {
 
 @Component({
   selector: 'app-file-explorer-tree-demo',
-  imports: [
+  imports: [ScFrame, 
     ScTree,
     ScTreeItem,
     ScTreeItemTrigger,
@@ -49,7 +48,7 @@ import {
     SiImageIcon,
   ],
   template: \`
-    <div class="w-full max-w-sm rounded-lg border p-4">
+    <div scFrame class="w-full max-w-sm p-4">
       <ul scTree aria-label="Project files">
         <li scTreeItem value="src" [expanded]="true">
           <div scTreeItemTrigger>

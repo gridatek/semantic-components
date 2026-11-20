@@ -34,14 +34,13 @@ import {
   ScSignaturePad,
   ScSignaturePadClear,
   ScSignaturePadLine,
-  ScSignaturePadSurface,
-} from '@semantic-components/ui';
+  ScSignaturePadSurface, ScFrame } from '@semantic-components/ui';
 import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
 
 /** The value is data — drawn again here, read-only and smaller. Exported, the image is trimmed to the ink: PNG or SVG. */
 @Component({
   selector: 'app-export-signature-pad-demo',
-  imports: [
+  imports: [ScFrame, 
     ScSignaturePad,
     ScSignaturePadSurface,
     ScSignaturePadLine,
@@ -99,7 +98,7 @@ import { SiDownloadIcon } from '@semantic-icons/lucide-icons';
         <div class="space-y-1">
           <p class="text-muted-foreground">Trimmed PNG</p>
           <div
-            class="flex h-20 items-center justify-center rounded-md border bg-white p-1"
+            scFrame size="sm" class="flex h-20 items-center justify-center bg-white p-1"
           >
             @if (preview(); as preview) {
               <img
