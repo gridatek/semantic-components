@@ -20,77 +20,60 @@ import { FormRangeSliderDemo } from './form-range-slider-demo';
 export class FormRangeSliderDemoContainer {
   private readonly code = `import { JsonPipe } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { FormField, form, max, min } from '@angular/forms/signals';
+import { FormField, form, validate } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldErrors,
   ScFrame,
   ScLabel,
   ScRangeSlider,
-  ScRangeSliderEndThumb,
-  ScRangeSliderStartThumb,
+  ScRangeSliderThumb,
 } from '@semantic-components/ui';
 
-interface PriceRangeFormModel {
-  minPrice: number;
-  maxPrice: number;
-}
-
+/** One Signal Forms field, the pair: a rule on it (100 apart at least), its error once touched. */
 @Component({
   selector: 'app-form-range-slider-demo',
   imports: [
-    ScFrame,
-    ScRangeSlider,
-    ScRangeSliderStartThumb,
-    ScRangeSliderEndThumb,
-    ScField,
-    ScFieldErrors,
-    ScLabel,
     FormField,
     JsonPipe,
+    ScField,
+    ScFieldErrors,
+    ScFrame,
+    ScLabel,
+    ScRangeSlider,
+    ScRangeSliderThumb,
   ],
   template: \`
-    <div class="w-[320px] space-y-6">
+    <div class="flex w-full max-w-xs flex-col gap-4">
       <div scField>
-        <label scLabel>
-          Price range: {{ '$' + formModel().minPrice }} &ndash;
-          {{ '$' + formModel().maxPrice }}
-        </label>
-        <div scRangeSlider [step]="50">
-          <input
-            scRangeSliderStartThumb
-            [formField]="priceForm.minPrice"
-            aria-label="Minimum price"
-          />
-          <input
-            scRangeSliderEndThumb
-            [formField]="priceForm.maxPrice"
-            aria-label="Maximum price"
-          />
+        <label scLabel>Budget</label>
+        <div
+          scRangeSlider
+          [formField]="budgetForm.budget"
+          [maxValue]="1000"
+          [step]="50"
+        >
+          <input scRangeSliderThumb aria-label="Lowest budget" />
+          <input scRangeSliderThumb aria-label="Highest budget" />
         </div>
-        <p scFieldErrors></p>
+        <div scFieldErrors></div>
       </div>
-
-      <div scFrame class="bg-muted p-4">
-        <p class="text-sm font-medium">Form Values:</p>
-        <pre class="mt-2 text-xs">{{ formModel() | json }}</pre>
-      </div>
+      <pre scFrame class="bg-muted p-4 text-xs">{{ model() | json }}</pre>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class FormRangeSliderDemo {
-  private readonly formModel = signal<PriceRangeFormModel>({
-    minPrice: 100,
-    maxPrice: 750,
+  private readonly model = signal<{ budget: readonly [number, number] }>({
+    budget: [400, 450],
   });
-
-  private readonly priceForm = form(this.formModel, (path) => {
-    min(path.minPrice, 0);
-    max(path.minPrice, 1000);
-    min(path.maxPrice, 0);
-    max(path.maxPrice, 1000);
-  });
+  private readonly budgetForm = form(this.model, (path) =>
+    validate(path.budget, ({ value }) =>
+      value()[1] - value()[0] >= 100
+        ? null
+        : { kind: 'narrow', message: 'Leave 100 at least between them.' },
+    ),
+  );
 }`;
 }

@@ -1,84 +1,42 @@
 # Range Slider
 
-A dual-thumb range slider for selecting a numeric range between a minimum and maximum value. Each thumb implements `FormValueControl<number>`, so `[formField]` works on each thumb individually.
+A range on one track: two thumbs that never cross, the range between them, in the look of the app's Slider (the style's `slider` key: track, range, thumb). The value is the pair `[from, to]`, one Signal Forms field. Built from Base UI's range slider (shadcn's Slider, "Range"): one value for both thumbs, each thumb named, `minStepsBetweenValues`, `format`.
 
 ## Usage
 
 ```html
-<div scRangeSlider [step]="10">
-  <input scRangeSliderStartThumb [min]="0" [max]="1000" [(value)]="minValue" aria-label="Minimum price" />
-  <input scRangeSliderEndThumb [min]="0" [max]="1000" [(value)]="maxValue" aria-label="Maximum price" />
+<div scField>
+  <label scLabel>Price</label>
+  <div scRangeSlider [formField]="form.price" [maxValue]="1000" [step]="10" [format]="{ style: 'currency', currency: 'EUR' }" #range="scRangeSlider">
+    <input scRangeSliderThumb aria-label="Minimum price" />
+    <input scRangeSliderThumb aria-label="Maximum price" />
+  </div>
+  <p scFieldDescription>{{ range.formatted()[0] }} – {{ range.formatted()[1] }}</p>
 </div>
 ```
 
-### With Signal Forms
+## Parts
 
-```html
-<div scRangeSlider [step]="50">
-  <input scRangeSliderStartThumb [formField]="priceForm.minPrice" aria-label="Minimum price" />
-  <input scRangeSliderEndThumb [formField]="priceForm.maxPrice" aria-label="Maximum price" />
-</div>
-```
+| Part                 | Selector                    | What it does                                                                                                                                                                                                                                                                                                                                                                                         |
+| -------------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScRangeSlider`      | `div[scRangeSlider]`        | A group (`role="group"`, named by its field's label). `value`: the pair, two-way or a `[formField]` (`FormValueControl<readonly [number, number]>`); `minValue` (0), `maxValue` (100), `step` (1), `minStepsBetweenValues` (0), `orientation` (`horizontal`, `vertical`), `disabled`, `format` (`Intl.NumberFormatOptions`, in `LOCALE_ID`). exportAs `scRangeSlider`: `formatted()`, `fractions()`. |
+| `ScRangeSliderThumb` | `input[scRangeSliderThumb]` | A native range (`type="range"` set by the part) in the style's slider thumb: the first in the page is from, the second to. It stops at the other (and `minStepsBetweenValues` short of it); `aria-valuetext` from `format`. The first takes the field's id, so the label points to it.                                                                                                               |
 
-```typescript
-readonly priceForm = form(this.formModel, (path) => {
-  min(path.minPrice, 0);
-  max(path.minPrice, 1000);
-  min(path.maxPrice, 0);
-  max(path.maxPrice, 1000);
-});
-```
+Not `min` / `max`: a Signal Forms control's `min` and `max` are its value's (a number's), and this value is a pair.
 
-## Public API
+## Behaviour
 
-### `ScRangeSlider`
-
-Container directive that manages the track CSS gradients and click-to-snap behavior. Reads `min`/`max` from its child thumbs.
-
-**Selector:** `div[scRangeSlider]`
-
-| Input/Output | Type             | Default | Description                                       |
-| ------------ | ---------------- | ------- | ------------------------------------------------- |
-| `step`       | `input<number>`  | `1`     | Step increment                                    |
-| `disabled`   | `input<boolean>` | `false` | Disables both inputs                              |
-| `min`        | `computed`       | `0`     | Read from start thumb's `resolvedMin` (read-only) |
-| `max`        | `computed`       | `100`   | Read from end thumb's `resolvedMax` (read-only)   |
-
-### `ScRangeSliderStartThumb`
-
-Directive for the start (lower) value range input. Implements `FormValueControl<number>`.
-
-**Selector:** `input[scRangeSliderStartThumb]`
-
-| Input/Output | Type                         | Default     | Description                   |
-| ------------ | ---------------------------- | ----------- | ----------------------------- |
-| `value`      | `model<number>`              | `0`         | Two-way bound start value     |
-| `min`        | `input<number \| undefined>` | `undefined` | Minimum allowed value (→ 0)   |
-| `max`        | `input<number \| undefined>` | `undefined` | Maximum allowed value (→ 100) |
-
-Automatically clamps its value so it cannot exceed the end thumb's value.
-
-### `ScRangeSliderEndThumb`
-
-Directive for the end (upper) value range input. Implements `FormValueControl<number>`.
-
-**Selector:** `input[scRangeSliderEndThumb]`
-
-| Input/Output | Type                         | Default     | Description                   |
-| ------------ | ---------------------------- | ----------- | ----------------------------- |
-| `value`      | `model<number>`              | `100`       | Two-way bound end value       |
-| `min`        | `input<number \| undefined>` | `undefined` | Minimum allowed value (→ 0)   |
-| `max`        | `input<number \| undefined>` | `undefined` | Maximum allowed value (→ 100) |
-
-Automatically clamps its value so it cannot go below the start thumb's value.
-
-## Overlap handling
-
-When both thumbs are dragged to the same position the slider automatically keeps them usable:
-
-- **Track click**: when equidistant from both thumbs, the end thumb is preferred so the range can expand outward. The start thumb is only chosen when the click is at or below the current collapsed value.
-- **z-index swap**: the start thumb normally stacks above the end thumb (`z-10`). When both thumbs overlap in the lower half of the range, the start thumb drops to `z-0` so the end thumb becomes grabbable. In the upper half the start thumb stays on top so it can be dragged left.
+- **Thumbs never cross.** Dragged into the other, a thumb pushes it along (Base UI's `push`), the `minStepsBetweenValues` gap kept. On the keyboard it stops at the other instead: an arrow never moves a value you didn't focus. Home on "to" stops at "from".
+- **The pointer**: a press anywhere on it brings the nearer thumb, which follows the drag (the slider drives it; the thumbs take the pointer only for their hover). With both on one spot, the direction of the drag picks the one that can move.
+- **Vertical**: the native ranges turned (`writing-mode`), the values growing upward, `aria-orientation`.
+- **Right to left**: from on the right; the arrows mirrored (Safari's too, `rtlArrowStep`, shared with the Slider).
 
 ## Accessibility
 
-- Thumb inputs are native `<input type="range">` elements — provide `aria-label` attributes to describe each input.
+- Each thumb is a native range: Tab; the arrows by `step`, Page Up / Page Down by more, Home / End to the ends.
+- The consumer names each thumb (`aria-label`); in a field, the group is named by its label and each thumb is described by its description.
+- `format` reads the values out (`aria-valuetext`: "€200"). Invalid once touched (`aria-invalid` on both thumbs).
+
+## Style
+
+No key of its own: the Slider's (`slider.root`, `slider.track`, `slider.thumb`). The first thumb draws the track and the range between the thumbs' centres; the second's track is transparent.

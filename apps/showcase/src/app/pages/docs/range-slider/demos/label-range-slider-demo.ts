@@ -3,19 +3,19 @@ import {
   ScField,
   ScFieldDescription,
   ScLabel,
-  ScRangeSliderNext,
-  ScRangeSliderNextThumb,
+  ScRangeSlider,
+  ScRangeSliderThumb,
 } from '@semantic-components/ui';
 
 /** In a field, named by its label; the values in euros (format), read by screen readers and written beside it. */
 @Component({
-  selector: 'app-label-range-slider-next-demo',
+  selector: 'app-label-range-slider-demo',
   imports: [
     ScField,
     ScFieldDescription,
     ScLabel,
-    ScRangeSliderNext,
-    ScRangeSliderNextThumb,
+    ScRangeSlider,
+    ScRangeSliderThumb,
   ],
   template: `
     <div scField class="max-w-xs">
@@ -26,8 +26,8 @@ import {
         </span>
       </div>
       <div
-        scRangeSliderNext
-        #price="scRangeSliderNext"
+        scRangeSlider
+        #price="scRangeSlider"
         [(value)]="range"
         [maxValue]="1000"
         [step]="10"
@@ -37,8 +37,8 @@ import {
           maximumFractionDigits: 0,
         }"
       >
-        <input scRangeSliderNextThumb aria-label="Minimum price" />
-        <input scRangeSliderNextThumb aria-label="Maximum price" />
+        <input scRangeSliderThumb aria-label="Minimum price" />
+        <input scRangeSliderThumb aria-label="Maximum price" />
       </div>
       <p scFieldDescription>Nights from this price to that one.</p>
     </div>
@@ -46,6 +46,6 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LabelRangeSliderNextDemo {
+export class LabelRangeSliderDemo {
   private readonly range = signal<readonly [number, number]>([200, 800]);
 }

@@ -1,3 +1,6 @@
 export { ScRangeSlider } from './range-slider';
-export { ScRangeSliderEndThumb } from './range-slider-end-thumb';
-export { ScRangeSliderStartThumb } from './range-slider-start-thumb';
+export type {
+  ScRangeSliderOrientation,
+  ScRangeSliderValue,
+} from './range-slider';
+export { ScRangeSliderThumb } from './range-slider-thumb';

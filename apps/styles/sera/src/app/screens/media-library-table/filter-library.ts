@@ -7,7 +7,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { FormField, form, max, min } from '@angular/forms/signals';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScCalendar,
@@ -44,8 +44,7 @@ import {
   ScRadio,
   ScRadioGroup,
   ScRangeSlider,
-  ScRangeSliderEndThumb,
-  ScRangeSliderStartThumb,
+  ScRangeSliderThumb,
   scComboboxMatches,
 } from '@semantic-components/ui';
 import {
@@ -86,8 +85,8 @@ interface FilterModel {
   kinds: Record<AssetKind, boolean>;
   uploaded: AssetFilters['uploaded'];
   range: ScCalendarValue;
-  sizeMin: number;
-  sizeMax: number;
+  /** In steps of MB_PER_STEP: from, to (100: no limit). */
+  size: readonly [number, number];
   tags: string[];
 }
 
@@ -96,8 +95,7 @@ const ALL = (): FilterModel => ({
   kinds: { images: true, video: true, documents: true, audio: true },
   uploaded: 'any',
   range: null,
-  sizeMin: 0,
-  sizeMax: 100,
+  size: [0, 100],
   tags: [],
 });
 
@@ -142,8 +140,7 @@ const ALL = (): FilterModel => ({
     ScRadio,
     ScRadioGroup,
     ScRangeSlider,
-    ScRangeSliderEndThumb,
-    ScRangeSliderStartThumb,
+    ScRangeSliderThumb,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
@@ -246,17 +243,9 @@ const ALL = (): FilterModel => ({
                 <span>0 MB</span>
                 <span>500+ MB</span>
               </div>
-              <div scRangeSlider>
-                <input
-                  scRangeSliderStartThumb
-                  aria-label="Minimum size"
-                  [formField]="filterForm.sizeMin"
-                />
-                <input
-                  scRangeSliderEndThumb
-                  aria-label="Maximum size"
-                  [formField]="filterForm.sizeMax"
-                />
+              <div scRangeSlider [formField]="filterForm.size">
+                <input scRangeSliderThumb aria-label="Minimum size" />
+                <input scRangeSliderThumb aria-label="Maximum size" />
               </div>
               <div
                 class="flex items-center justify-between text-xs font-medium"
@@ -335,18 +324,13 @@ export class FilterLibrary {
   private readonly dateOptions = DATE_OPTIONS;
 
   private readonly model = signal(ALL());
-  private readonly filterForm = form(this.model, (path) => {
-    min(path.sizeMin, 0);
-    max(path.sizeMin, 100);
-    min(path.sizeMax, 0);
-    max(path.sizeMax, 100);
-  });
+  private readonly filterForm = form(this.model);
 
   private readonly minText = computed(
-    () => `${this.model().sizeMin * MB_PER_STEP} MB`,
+    () => `${this.model().size[0] * MB_PER_STEP} MB`,
   );
   private readonly maxText = computed(() => {
-    const size = this.model().sizeMax;
+    const size = this.model().size[1];
     return size === 100 ? '500+ MB' : `${size * MB_PER_STEP} MB`;
   });
 
@@ -377,8 +361,8 @@ export class FilterLibrary {
       uploaded: model.uploaded,
       from: from ?? null,
       to: to ?? null,
-      minMb: model.sizeMin * MB_PER_STEP,
-      maxMb: model.sizeMax === 100 ? null : model.sizeMax * MB_PER_STEP,
+      minMb: model.size[0] * MB_PER_STEP,
+      maxMb: model.size[1] === 100 ? null : model.size[1] * MB_PER_STEP,
       tags: model.tags,
     });
   }

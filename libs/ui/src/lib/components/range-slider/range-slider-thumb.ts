@@ -11,7 +11,7 @@ import {
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { rtlArrowStep } from '../slider/rtl-arrow-step';
-import { ScRangeSliderNext } from './range-slider-next';
+import { ScRangeSlider } from './range-slider';
 
 /**
  * One end of the range: a native range on the slider's track — the first
@@ -19,7 +19,7 @@ import { ScRangeSliderNext } from './range-slider-next';
  * browser's; it stops at the other thumb. Name it (`aria-label`).
  */
 @Directive({
-  selector: 'input[scRangeSliderNextThumb]',
+  selector: 'input[scRangeSliderThumb]',
   host: {
     type: 'range',
     'data-slot': 'range-slider-thumb',
@@ -39,11 +39,11 @@ import { ScRangeSliderNext } from './range-slider-next';
     '(keydown)': 'onKeydown($event)',
   },
 })
-export class ScRangeSliderNextThumb {
+export class ScRangeSliderThumb {
   private readonly styles = injectStyle().slider;
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
-  private readonly slider = inject(ScRangeSliderNext);
+  private readonly slider = inject(ScRangeSlider);
   private readonly direction = inject(Directionality);
   private readonly fallbackId = inject(_IdGenerator).getId(
     'sc-range-slider-thumb-',

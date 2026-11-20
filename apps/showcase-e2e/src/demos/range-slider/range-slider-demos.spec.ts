@@ -1,7 +1,7 @@
 import type { Locator, Page } from '@playwright/test';
 import { expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/range-slider-next/${name}`;
+const demo = (name: string) => `/demos/range-slider/${name}`;
 
 /**
  * Where a value sits on the slider, as the pointer goes: along the track,
@@ -64,11 +64,11 @@ async function pressAt(page: Page, slider: Locator, fraction: number) {
   await page.mouse.click(x, y);
 }
 
-test.describe('Range Slider Next demos', () => {
+test.describe('Range Slider demos', () => {
   test('usage: two named thumbs; each steps by its arrows and stops at the other', async ({
     page,
   }) => {
-    await page.goto(demo('range-slider-next-usage-demo'));
+    await page.goto(demo('range-slider-usage-demo'));
     const from = page.getByRole('slider', { name: 'Minimum' });
     const to = page.getByRole('slider', { name: 'Maximum' });
     await expect(from).toHaveValue('25');
@@ -90,8 +90,8 @@ test.describe('Range Slider Next demos', () => {
   test('usage: a focused thumb never hides the other under the range', async ({
     page,
   }) => {
-    await page.goto(demo('range-slider-next-usage-demo'));
-    const slider = page.locator('[scRangeSliderNext]');
+    await page.goto(demo('range-slider-usage-demo'));
+    const slider = page.locator('[scRangeSlider]');
     const from = page.getByRole('slider', { name: 'Minimum' });
     const to = page.getByRole('slider', { name: 'Maximum' });
     await expect(to).toHaveValue('75');
@@ -113,8 +113,8 @@ test.describe('Range Slider Next demos', () => {
   test('usage: a press on the track brings the nearer thumb, which follows the drag', async ({
     page,
   }) => {
-    await page.goto(demo('range-slider-next-usage-demo'));
-    const slider = page.locator('[scRangeSliderNext]');
+    await page.goto(demo('range-slider-usage-demo'));
+    const slider = page.locator('[scRangeSlider]');
     const from = page.getByRole('slider', { name: 'Minimum' });
     const to = page.getByRole('slider', { name: 'Maximum' });
 
@@ -138,8 +138,8 @@ test.describe('Range Slider Next demos', () => {
   test('usage: a thumb dragged into the other pushes it along', async ({
     page,
   }) => {
-    await page.goto(demo('range-slider-next-usage-demo'));
-    const slider = page.locator('[scRangeSliderNext]');
+    await page.goto(demo('range-slider-usage-demo'));
+    const slider = page.locator('[scRangeSlider]');
     const from = page.getByRole('slider', { name: 'Minimum' });
     const to = page.getByRole('slider', { name: 'Maximum' });
     await expect(to).toHaveValue('75');
@@ -164,8 +164,8 @@ test.describe('Range Slider Next demos', () => {
   });
 
   test('steps: a pushed thumb keeps the gap', async ({ page }) => {
-    await page.goto(demo('steps-range-slider-next-demo'));
-    const slider = page.locator('[scRangeSliderNext]');
+    await page.goto(demo('steps-range-slider-demo'));
+    const slider = page.locator('[scRangeSlider]');
     const from = page.getByRole('slider', { name: 'Minimum' });
     const to = page.getByRole('slider', { name: 'Maximum' });
     await expect(from).toHaveValue('30');
@@ -183,8 +183,8 @@ test.describe('Range Slider Next demos', () => {
   test('usage: both on one spot, the direction of the drag picks the thumb that can move', async ({
     page,
   }) => {
-    await page.goto(demo('range-slider-next-usage-demo'));
-    const slider = page.locator('[scRangeSliderNext]');
+    await page.goto(demo('range-slider-usage-demo'));
+    const slider = page.locator('[scRangeSlider]');
     const from = page.getByRole('slider', { name: 'Minimum' });
     const to = page.getByRole('slider', { name: 'Maximum' });
     const drag = async (a: number, b: number) => {
@@ -220,7 +220,7 @@ test.describe('Range Slider Next demos', () => {
   test('label and value: a group named by its label; the values read in euros', async ({
     page,
   }) => {
-    await page.goto(demo('label-range-slider-next-demo'));
+    await page.goto(demo('label-range-slider-demo'));
     const group = page.getByRole('group', { name: 'Price' });
     await expect(group).toBeVisible();
     const from = group.getByRole('slider', { name: 'Minimum price' });
@@ -241,7 +241,7 @@ test.describe('Range Slider Next demos', () => {
   });
 
   test('steps: by tens, and two steps apart at least', async ({ page }) => {
-    await page.goto(demo('steps-range-slider-next-demo'));
+    await page.goto(demo('steps-range-slider-demo'));
     const from = page.getByRole('slider', { name: 'Minimum' });
     const to = page.getByRole('slider', { name: 'Maximum' });
     await from.focus();
@@ -258,21 +258,21 @@ test.describe('Range Slider Next demos', () => {
   test('vertical: says so; ArrowUp raises, a press near the top brings the upper thumb', async ({
     page,
   }) => {
-    await page.goto(demo('vertical-range-slider-next-demo'));
+    await page.goto(demo('vertical-range-slider-demo'));
     const lowest = page.getByRole('slider', { name: 'Lowest' });
     const highest = page.getByRole('slider', { name: 'Highest' });
     await expect(lowest).toHaveAttribute('aria-orientation', 'vertical');
     await lowest.focus();
     await page.keyboard.press('ArrowUp');
     await expect(lowest).toHaveValue('21');
-    await pressAt(page, page.locator('[scRangeSliderNext]'), 0.9);
+    await pressAt(page, page.locator('[scRangeSlider]'), 0.9);
     await expect(highest).toHaveValue('90');
   });
 
   test('form: one field, the pair; its rule, once touched, marks both thumbs', async ({
     page,
   }) => {
-    await page.goto(demo('form-range-slider-next-demo'));
+    await page.goto(demo('form-range-slider-demo'));
     const lowest = page.getByRole('slider', { name: 'Lowest budget' });
     const highest = page.getByRole('slider', { name: 'Highest budget' });
     const errors = page.locator('[scFieldErrors]');
@@ -298,19 +298,19 @@ test.describe('Range Slider Next demos', () => {
   test('disabled: neither thumb takes the focus or a press', async ({
     page,
   }) => {
-    await page.goto(demo('disabled-range-slider-next-demo'));
+    await page.goto(demo('disabled-range-slider-demo'));
     const from = page.getByRole('slider', { name: 'Minimum' });
     await expect(from).toBeDisabled();
     await expect(page.getByRole('slider', { name: 'Maximum' })).toBeDisabled();
-    await pressAt(page, page.locator('[scRangeSliderNext]'), 0.1);
+    await pressAt(page, page.locator('[scRangeSlider]'), 0.1);
     await expect(from).toHaveValue('25');
   });
 
   test('RTL: from on the right; ← raises it, a press at the right end brings it', async ({
     page,
   }) => {
-    await page.goto(demo('rtl-range-slider-next-demo'));
-    const slider = page.locator('[scRangeSliderNext]');
+    await page.goto(demo('rtl-range-slider-demo'));
+    const slider = page.locator('[scRangeSlider]');
     const from = page.getByRole('slider', { name: 'الحد الأدنى' });
     const to = page.getByRole('slider', { name: 'الحد الأقصى' });
     await from.focus();

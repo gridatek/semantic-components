@@ -1,45 +1,48 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { VerticalRangeSliderNextDemo } from './vertical-range-slider-next-demo';
+import { VerticalRangeSliderDemo } from './vertical-range-slider-demo';
 
 @Component({
-  selector: 'app-vertical-range-slider-next-demo-container',
-  imports: [DemoContainer, VerticalRangeSliderNextDemo],
+  selector: 'app-vertical-range-slider-demo-container',
+  imports: [DemoContainer, VerticalRangeSliderDemo],
   template: `
     <app-demo-container
       title="Vertical"
-      demoUrl="/demos/range-slider-next/vertical-range-slider-next-demo"
+      demoUrl="/demos/range-slider/vertical-range-slider-demo"
       [code]="code"
     >
-      <app-vertical-range-slider-next-demo />
+      <app-vertical-range-slider-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class VerticalRangeSliderNextDemoContainer {
+export class VerticalRangeSliderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { ScRangeSliderNext, ScRangeSliderNextThumb } from '@semantic-components/ui';
+import {
+  ScRangeSlider,
+  ScRangeSliderThumb,
+} from '@semantic-components/ui';
 
 /** Upright: the values grow upward, ArrowUp raises a thumb. */
 @Component({
-  selector: 'app-vertical-range-slider-next-demo',
-  imports: [ScRangeSliderNext, ScRangeSliderNextThumb],
+  selector: 'app-vertical-range-slider-demo',
+  imports: [ScRangeSlider, ScRangeSliderThumb],
   template: \`
     <div
-      scRangeSliderNext
+      scRangeSlider
       orientation="vertical"
       [(value)]="range"
       class="h-48"
     >
-      <input scRangeSliderNextThumb aria-label="Lowest" />
-      <input scRangeSliderNextThumb aria-label="Highest" />
+      <input scRangeSliderThumb aria-label="Lowest" />
+      <input scRangeSliderThumb aria-label="Highest" />
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class VerticalRangeSliderNextDemo {
+export class VerticalRangeSliderDemo {
   private readonly range = signal<readonly [number, number]>([20, 60]);
 }`;
 }

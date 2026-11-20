@@ -794,19 +794,11 @@
   {
     "name": "Range Slider",
     "path": "range-slider",
-    "description": "A dual-thumb range slider for selecting a numeric range between a minimum and maximum value.",
+    "description": "A range on one track: two thumbs that never cross, in the Slider's look; the value is the pair, one Signal Forms field.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms",
     "hidden": true
-  },
-  {
-    "name": "Range Slider Next",
-    "path": "range-slider-next",
-    "description": "A range on one track: two thumbs that never cross, in the Slider's look; the value is the pair, one Signal Forms field.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
   },
   {
     "name": "Rating",
