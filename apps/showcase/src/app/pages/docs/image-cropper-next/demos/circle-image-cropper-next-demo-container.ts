@@ -20,9 +20,9 @@ import { CircleImageCropperNextDemo } from './circle-image-cropper-next-demo';
 export class CircleImageCropperNextDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  type ScImageCropNext,
   ScButton,
   ScFrame,
+  type ScImageCropNext,
   ScImageCropperNext,
   ScImageCropperNextHandle,
   ScImageCropperNextImage,

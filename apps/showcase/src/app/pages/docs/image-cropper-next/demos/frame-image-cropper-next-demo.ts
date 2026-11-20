@@ -17,7 +17,8 @@ import { SiRotateCwIcon } from '@semantic-icons/lucide-icons';
 
 /**
  * An avatar: the frame stays, the image moves under it — drag, wheel or
- * pinch. A live round preview; Save makes a 128 px round PNG.
+ * pinch. It starts zoomed in (a crop of 640 px in the middle: 125%), so it
+ * moves every way. A live round preview; Save makes a 128 px round PNG.
  */
 @Component({
   selector: 'app-frame-image-cropper-next-demo',
@@ -81,7 +82,13 @@ import { SiRotateCwIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class FrameImageCropperNextDemo {
-  private readonly crop = signal<ScImageCropNext | null>(null);
+  // Set before the image loads: kept. Zoom 1 would show its whole height.
+  private readonly crop = signal<ScImageCropNext | null>({
+    x: 280,
+    y: 80,
+    width: 640,
+    height: 640,
+  });
   private readonly result = signal<string | null>(null);
 
   private async save(): Promise<void> {

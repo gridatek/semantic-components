@@ -169,8 +169,8 @@ test('Aspect ratio: the toggle group sets it; wide refits about the middle', asy
 test.describe('Frame: the image moves under it', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/demos/image-cropper-next/frame-image-cropper-next-demo');
-    // All the frame: the largest square.
-    await expectCrop(selection(page), '800 by 800 pixels, at 200, 0');
+    // The demo starts zoomed in, so the image moves every way.
+    await expectCrop(selection(page), '640 by 640 pixels, at 280, 80');
   });
 
   test('no handles; dragging the image pans it', async ({ page }) => {
@@ -182,7 +182,16 @@ test.describe('Frame: the image moves under it', () => {
       .poll(async () =>
         Number(await selection(page).getAttribute('aria-valuenow')),
       )
-      .toBeLessThan(200);
+      .toBeLessThan(280);
+
+    // And down: the crop up, toward the top.
+    await drag(page, viewport, 0, 40);
+    await expect
+      .poll(async () => {
+        const text = await selection(page).getAttribute('aria-valuetext');
+        return Number(text?.split(', ').at(-1));
+      })
+      .toBeLessThan(80);
   });
 
   test('the wheel zooms at the pointer, the slider too', async ({ page }) => {
@@ -195,15 +204,16 @@ test.describe('Frame: the image moves under it', () => {
           (await zoom(page).getAttribute('aria-valuetext'))?.replace('%', ''),
         ),
       )
-      .toBeGreaterThan(100);
+      .toBeGreaterThan(125);
   });
 
+  // 125% shows as 1.3 (it moves in tenths): the next is 1.4.
   test('the slider zooms by a tenth', async ({ page }) => {
     await zoom(page).focus();
     await expect(zoom(page)).toBeFocused();
     await page.keyboard.press('ArrowRight');
-    await expect(zoom(page)).toHaveAttribute('aria-valuetext', '110%');
-    await expectCrop(selection(page), '727 by 727 pixels, at 236, 36');
+    await expect(zoom(page)).toHaveAttribute('aria-valuetext', '140%');
+    await expectCrop(selection(page), '571 by 571 pixels, at 314, 114');
   });
 
   test('Save makes a 128 px round PNG, its corners clear', async ({ page }) => {
