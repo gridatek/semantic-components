@@ -103,7 +103,7 @@ test('Basic: a link scrolls its box to the section, focus on its heading', async
         return el.getBoundingClientRect().top - (box?.top ?? 0);
       }),
     )
-    .toBeCloseTo(17, 0); // its 1px border, then its 16px scroll margin
+    .toBeCloseTo(16, 0); // its 16px scroll margin (the frame is a ring: no border)
   expect(await page.evaluate(() => window.scrollY)).toBe(0);
   // Read on: the reader's own scroll marks the section again.
   await scrollToEnd(page, box);
