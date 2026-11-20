@@ -43,7 +43,12 @@ export async function expectHydrated(page: Page, url: string): Promise<void> {
   // Drawn by the server (Angular marks its HTML), then hydrated: the app
   // marks <html> once hydrated and stable (main-ssr.ts). A page that
   // breaks never gets there: say so soon, not at the test's end.
-  expect(await response?.text()).toContain('ng-server-context');
+  // WebKit may have dropped the body already (a page of media fills its
+  // inspector cache): then the server's HTML once more, by a request.
+  const html = await (
+    response?.text() ?? Promise.reject(new Error('no response'))
+  ).catch(() => page.request.get(url).then((r) => r.text()));
+  expect(html).toContain('ng-server-context');
   await expect(page.locator('html')).toHaveAttribute('data-hydrated', '', {
     timeout: 10_000,
   });

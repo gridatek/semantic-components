@@ -63,6 +63,7 @@ test.describe('Guides and About pages', () => {
       'Components',
       'Charts',
       'Utilities',
+      'Recipes',
       'AI Elements',
     ]);
   });
