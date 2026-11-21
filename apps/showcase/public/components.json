@@ -319,6 +319,15 @@
     "hidden": true
   },
   {
+    "name": "Date Range Picker Next",
+    "path": "date-range-picker-next",
+    "description": "A range of days picked in a calendar, typed, or a preset — its own part; Apply, and how long it is.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms",
+    "hidden": true
+  },
+  {
     "name": "Dialog",
     "path": "dialog",
     "description": "A modal dialog that interrupts the user with important content.",
