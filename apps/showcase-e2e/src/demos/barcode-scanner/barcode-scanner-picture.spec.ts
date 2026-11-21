@@ -29,6 +29,8 @@ test.describe('From a picture (every browser)', () => {
   });
 });
 
+const usage = '/demos/barcode-scanner/barcode-scanner-usage-demo';
+
 test.describe('The camera, not to be had (every browser)', () => {
   /** The camera's answer, whatever the browser: refused, or none. */
   const answer = (name: string) =>
@@ -36,20 +38,20 @@ test.describe('The camera, not to be had (every browser)', () => {
 
   test('refused: says so', async ({ page }) => {
     await page.addInitScript(answer('NotAllowedError'));
-    await page.goto(demo('controls'));
+    await page.goto(usage);
     await page.getByRole('button', { name: 'Scan' }).click();
-    await expect(page.getByText('State: denied')).toBeVisible();
+    await expect(page.locator('[data-slot="barcode-scanner"]')).toHaveAttribute(
+      'data-state',
+      'denied',
+    );
     await expect(page.getByText('The camera was refused')).toBeVisible();
     // Off again: Scan, to try again.
-    await expect(page.getByRole('button', { name: 'Scan' })).toHaveAttribute(
-      'aria-pressed',
-      'false',
-    );
+    await expect(page.getByRole('button', { name: 'Scan' })).toBeVisible();
   });
 
   test('no camera: says so', async ({ page }) => {
     await page.addInitScript(answer('NotFoundError'));
-    await page.goto(demo('controls'));
+    await page.goto(usage);
     await page.getByRole('button', { name: 'Scan' }).click();
     await expect(page.getByText('No camera to use')).toBeVisible();
   });

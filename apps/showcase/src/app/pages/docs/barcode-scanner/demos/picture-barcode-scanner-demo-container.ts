@@ -24,13 +24,15 @@ import {
   ScBarcodeScanner,
   ScBarcodeScannerFile,
   ScButton,
+  ScFrame,
   ScLabel,
 } from '@semantic-components/ui';
+import './barcode-detector-polyfill';
 
 /** No camera needed: a picture — your file, or one of these — is read the same way. The way for anyone who cannot aim a camera. */
 @Component({
   selector: 'app-picture-barcode-scanner-demo',
-  imports: [ScBarcodeScanner, ScBarcodeScannerFile, ScButton, ScLabel],
+  imports: [ScBarcodeScanner, ScBarcodeScannerFile, ScButton, ScFrame, ScLabel],
   template: \`
     <div
       scBarcodeScanner
@@ -59,7 +61,7 @@ import {
           </button>
         }
       </div>
-      <div class="bg-muted space-y-1 rounded-md p-3 text-sm" aria-live="polite">
+      <div scFrame class="bg-muted space-y-1 p-3 text-sm" aria-live="polite">
         @for (code of codes(); track $index) {
           <p>
             <span class="text-muted-foreground">{{ code.format }}</span>

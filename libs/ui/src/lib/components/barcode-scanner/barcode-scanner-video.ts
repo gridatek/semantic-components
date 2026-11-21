@@ -2,7 +2,7 @@ import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { ScBarcodeScanner } from './barcode-scanner';
 
-/** Your `video`: the camera, filling the scanner (the front one, mirrored). */
+/** Your `video`: the camera, filling its frame. */
 @Directive({
   selector: 'video[scBarcodeScannerVideo]',
   host: {
@@ -19,11 +19,7 @@ export class ScBarcodeScannerVideo {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>
-    cn(
-      'block size-full bg-black object-cover',
-      this.scanner.camera() === 'user' && '-scale-x-100',
-      this.classInput(),
-    ),
+    cn('block size-full bg-black object-cover', this.classInput()),
   );
 
   constructor() {

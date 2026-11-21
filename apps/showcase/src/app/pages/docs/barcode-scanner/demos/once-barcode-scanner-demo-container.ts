@@ -23,15 +23,16 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   type ScBarcode,
   ScBarcodeScanner,
-  ScBarcodeScannerFinder,
   ScBarcodeScannerOverlay,
+  ScBarcodeScannerToggle,
   ScBarcodeScannerVideo,
-  ScButton,
   ScField,
+  ScFrame,
   ScInput,
   ScLabel,
 } from '@semantic-components/ui';
 import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
+import './barcode-detector-polyfill';
 
 /** Into a form: the first code fills the field, and the camera stops — turned off in (detected). */
 @Component({
@@ -40,9 +41,9 @@ import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
     ScBarcodeScanner,
     ScBarcodeScannerVideo,
     ScBarcodeScannerOverlay,
-    ScBarcodeScannerFinder,
-    ScButton,
+    ScBarcodeScannerToggle,
     ScField,
+    ScFrame,
     ScLabel,
     ScInput,
     FormField,
@@ -60,26 +61,20 @@ import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
         <label scLabel for="product-code">Product code</label>
         <div class="flex gap-2">
           <input id="product-code" scInput [formField]="productForm.code" />
-          <button
-            scButton
-            variant="outline"
-            [attr.aria-pressed]="scanning()"
-            (click)="scanning.set(!scanning())"
-          >
+          <button scBarcodeScannerToggle variant="outline">
             <svg siScanLineIcon></svg>
             {{ scanning() ? 'Cancel' : 'Scan' }}
           </button>
         </div>
       </div>
       @if (scanning()) {
-        <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-black">
+        <div scFrame class="relative aspect-4/3 overflow-hidden bg-black">
           <video scBarcodeScannerVideo></video>
           <svg scBarcodeScannerOverlay></svg>
-          <div scBarcodeScannerFinder></div>
           @switch (scanner.state()) {
             @case ('idle') {
               <p
-                class="absolute inset-0 grid place-items-center p-6 text-center text-sm text-white/80"
+                class="absolute inset-0 grid place-items-center p-6 text-center text-sm text-white"
               >
                 The camera is off.
               </p>

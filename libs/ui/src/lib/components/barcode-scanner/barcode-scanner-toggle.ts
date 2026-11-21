@@ -5,13 +5,15 @@ import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { type ScButtonVariants } from '../button/button';
 import { ScBarcodeScanner } from './barcode-scanner';
 
-/** Turns the camera on and off; pressed while on. Write its icon and name it ("Camera"). */
+/**
+ * Turns the camera on and off. Write its icon and its name from the state —
+ * Scan, Stop (`active()`): the name says what a press does.
+ */
 @Directive({
   selector: 'button[scBarcodeScannerToggle]',
   host: {
     type: 'button',
     'data-slot': 'barcode-scanner-toggle',
-    '[attr.aria-pressed]': 'scanner.active()',
     '[disabled]': 'scanner.state() === "unsupported"',
     '[class]': 'class()',
     '(click)': 'scanner.active.set(!scanner.active())',

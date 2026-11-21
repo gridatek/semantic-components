@@ -23,15 +23,16 @@ import { FormField, form } from '@angular/forms/signals';
 import {
   type ScBarcodeFormat,
   ScBarcodeScanner,
-  ScBarcodeScannerFinder,
   ScBarcodeScannerOverlay,
   ScBarcodeScannerToggle,
   ScBarcodeScannerVideo,
   ScField,
+  ScFrame,
   ScRadio,
   ScRadioGroup,
 } from '@semantic-components/ui';
 import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
+import './barcode-detector-polyfill';
 
 /** Only the formats you ask for — QR codes, or products (EAN, UPC); none asked, all the browser reads. */
 @Component({
@@ -40,7 +41,6 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
     ScBarcodeScanner,
     ScBarcodeScannerVideo,
     ScBarcodeScannerOverlay,
-    ScBarcodeScannerFinder,
     ScBarcodeScannerToggle,
     ScRadioGroup,
     ScRadio,
@@ -48,6 +48,7 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
     SiCameraIcon,
     SiCameraOffIcon,
     ScField,
+    ScFrame,
   ],
   template: \`
     <div class="flex items-center gap-4 text-sm">
@@ -73,14 +74,13 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
       (detected)="last.set($event.format + ': ' + $event.rawValue)"
       class="w-full max-w-md space-y-3"
     >
-      <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-black">
+      <div scFrame class="relative aspect-4/3 overflow-hidden bg-black">
         <video scBarcodeScannerVideo></video>
         <svg scBarcodeScannerOverlay></svg>
-        <div scBarcodeScannerFinder></div>
         @switch (scanner.state()) {
           @case ('idle') {
             <p
-              class="absolute inset-0 grid place-items-center p-6 text-center text-sm text-white/80"
+              class="absolute inset-0 grid place-items-center p-6 text-center text-sm text-white"
             >
               The camera is off.
             </p>

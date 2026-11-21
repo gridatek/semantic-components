@@ -58,7 +58,6 @@ export class ScBarcodeScannerOverlay {
   private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-0 size-full text-emerald-400',
-      this.scanner.camera() === 'user' && '-scale-x-100',
       this.classInput(),
     ),
   );

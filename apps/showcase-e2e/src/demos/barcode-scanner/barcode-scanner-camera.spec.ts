@@ -19,7 +19,7 @@ test.describe('The camera (Chromium: a video file as the camera)', () => {
   test.skip(({ browserName }) => browserName !== 'chromium', 'Chromium only');
 
   test('reads, and outlines the code', async ({ page }) => {
-    await page.goto(demo('camera'));
+    await page.goto('/demos/barcode-scanner/barcode-scanner-usage-demo');
     const scanner = page.locator('[data-slot="barcode-scanner"]');
     await expect(scanner).toHaveAttribute('data-state', 'idle');
     const toggle = page.getByRole('button', { name: 'Scan' });
@@ -65,13 +65,18 @@ test.describe('The camera (Chromium: a video file as the camera)', () => {
     ).toBeVisible();
   });
 
-  test('controls: no light, one camera', async ({ page }) => {
-    await page.goto(demo('controls'));
-    await page.getByRole('button', { name: 'Scan' }).click();
-    await expect(page.getByText('State: scanning')).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Light' })).toBeDisabled();
-    await expect(
-      page.getByRole('button', { name: 'Switch camera' }),
-    ).toBeDisabled();
+  test('right to left: the name follows the state', async ({ page }) => {
+    await page.goto(demo('rtl'));
+    await page.getByRole('button', { name: 'مسح' }).click();
+    await expect(page.locator('[data-slot="barcode-scanner"]')).toHaveAttribute(
+      'data-state',
+      'scanning',
+    );
+    await expect(page.getByText('تمت القراءة')).toBeVisible();
+    await page.getByRole('button', { name: 'إيقاف' }).click();
+    await expect(page.locator('[data-slot="barcode-scanner"]')).toHaveAttribute(
+      'data-state',
+      'idle',
+    );
   });
 });

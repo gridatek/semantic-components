@@ -834,10 +834,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/barcode-scanner',
     children: [
       {
-        path: 'camera-barcode-scanner-demo',
+        path: 'barcode-scanner-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/barcode-scanner/demos/camera-barcode-scanner-demo').then(
-            (m) => m.CameraBarcodeScannerDemo,
+          import('../pages/docs/barcode-scanner/demos/barcode-scanner-usage-demo').then(
+            (m) => m.BarcodeScannerUsageDemo,
           ),
       },
       {
@@ -862,10 +862,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'controls-barcode-scanner-demo',
+        path: 'rtl-barcode-scanner-demo',
         loadComponent: () =>
-          import('../pages/docs/barcode-scanner/demos/controls-barcode-scanner-demo').then(
-            (m) => m.ControlsBarcodeScannerDemo,
+          import('../pages/docs/barcode-scanner/demos/rtl-barcode-scanner-demo').then(
+            (m) => m.RtlBarcodeScannerDemo,
           ),
       },
     ],

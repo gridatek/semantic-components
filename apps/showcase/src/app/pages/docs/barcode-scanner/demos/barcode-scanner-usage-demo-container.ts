@@ -1,42 +1,43 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { CameraBarcodeScannerDemo } from './camera-barcode-scanner-demo';
+import { BarcodeScannerUsageDemo } from './barcode-scanner-usage-demo';
 
 @Component({
-  selector: 'app-camera-barcode-scanner-demo-container',
-  imports: [DemoContainer, CameraBarcodeScannerDemo],
+  selector: 'app-barcode-scanner-usage-demo-container',
+  imports: [DemoContainer, BarcodeScannerUsageDemo],
   template: `
     <app-demo-container
-      title="Camera"
+      title="Usage"
       [code]="code"
-      demoUrl="/demos/barcode-scanner/camera-barcode-scanner-demo"
+      demoUrl="/demos/barcode-scanner/barcode-scanner-usage-demo"
     >
-      <app-camera-barcode-scanner-demo />
+      <app-barcode-scanner-usage-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CameraBarcodeScannerDemoContainer {
+export class BarcodeScannerUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScBarcodeScanner,
-  ScBarcodeScannerFinder,
   ScBarcodeScannerOverlay,
   ScBarcodeScannerToggle,
   ScBarcodeScannerVideo,
+  ScFrame,
 } from '@semantic-components/ui';
 import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
+import './barcode-detector-polyfill';
 
 /** The camera, each code outlined where it is; each new one comes out of (detected) — here, said in a live region. */
 @Component({
-  selector: 'app-camera-barcode-scanner-demo',
+  selector: 'app-barcode-scanner-usage-demo',
   imports: [
     ScBarcodeScanner,
     ScBarcodeScannerVideo,
     ScBarcodeScannerOverlay,
-    ScBarcodeScannerFinder,
     ScBarcodeScannerToggle,
+    ScFrame,
     SiCameraIcon,
     SiCameraOffIcon,
   ],
@@ -47,14 +48,13 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
       (detected)="last.set($event.rawValue)"
       class="w-full max-w-md space-y-3"
     >
-      <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-black">
+      <div scFrame class="relative aspect-4/3 overflow-hidden bg-black">
         <video scBarcodeScannerVideo></video>
         <svg scBarcodeScannerOverlay></svg>
-        <div scBarcodeScannerFinder></div>
         @switch (scanner.state()) {
           @case ('idle') {
             <p
-              class="absolute inset-0 grid place-items-center p-6 text-center text-sm text-white/80"
+              class="absolute inset-0 grid place-items-center p-6 text-center text-sm text-white"
             >
               The camera is off.
             </p>
@@ -101,10 +101,10 @@ import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
       </div>
     </div>
   \`,
-  host: { class: 'flex w-full flex-col items-center gap-4' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CameraBarcodeScannerDemo {
+export class BarcodeScannerUsageDemo {
   private readonly last = signal('');
 }`;
 }

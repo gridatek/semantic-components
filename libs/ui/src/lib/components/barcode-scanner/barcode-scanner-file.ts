@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScBarcodeScanner } from './barcode-scanner';
 
 /**
@@ -18,16 +19,13 @@ import { ScBarcodeScanner } from './barcode-scanner';
 })
 export class ScBarcodeScannerFile {
   private readonly scanner = inject(ScBarcodeScanner);
+  private readonly inputStyles = injectStyle().input;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
+  // The style's input: it draws a file input too.
   private readonly class = computed(() =>
-    cn(
-      'border-input file:text-foreground h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-sm shadow-xs outline-none file:me-3 file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium',
-      'focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50',
-      'disabled:cursor-not-allowed disabled:opacity-50',
-      this.classInput(),
-    ),
+    cn(this.inputStyles, this.classInput()),
   );
 
   private async onChange(event: Event): Promise<void> {

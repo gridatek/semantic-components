@@ -47,10 +47,6 @@ export class ScBarcodeScanner {
   readonly active = model(false);
   /** The formats to read; none, all the browser can. */
   readonly formats = input<readonly ScBarcodeFormat[]>([]);
-  /** The camera: the one at the back (`environment`) or the front (`user`). */
-  readonly camera = model<'environment' | 'user'>('environment');
-  /** The camera's light, where it has one. */
-  readonly torch = model(false);
 
   /** Each new code read. */
   readonly detected = output<ScBarcode>();
@@ -60,10 +56,6 @@ export class ScBarcodeScanner {
   );
   /** The codes in the camera's frame now. */
   readonly codes = signal<readonly ScBarcode[]>([]);
-  /** The camera has a light. */
-  readonly hasTorch = signal(false);
-  /** More than one camera: one to switch to. */
-  readonly canSwitchCamera = signal(false);
 
   /** The video: set by `video[scBarcodeScannerVideo]`. */
   readonly ɵvideo = signal<HTMLVideoElement | null>(null);
@@ -87,34 +79,16 @@ export class ScBarcodeScanner {
         ? new Detector(formats.length ? { formats } : undefined)
         : null;
     });
-    // The camera, on and off (and again for the other one).
+    // The camera, on and off.
     effect(() => {
       const active = this.active();
       const video = this.ɵvideo();
-      const camera = this.camera();
       untracked(() => {
         this.stop();
-        if (active && video) void this.start(video, camera);
+        if (active && video) void this.start(video);
       });
     });
-    effect(() => {
-      const torch = this.torch();
-      const track = this.stream?.getVideoTracks()[0];
-      if (!track || !this.hasTorch()) return;
-      void track
-        .applyConstraints({
-          advanced: [{ torch } as MediaTrackConstraintSet],
-        })
-        .catch(() => undefined);
-    });
     inject(DestroyRef).onDestroy(() => this.stop());
-  }
-
-  /** The other camera. */
-  switchCamera(): void {
-    this.camera.update((camera) =>
-      camera === 'environment' ? 'user' : 'environment',
-    );
   }
 
   /** Reads the codes in a picture (a file, a blob, an image…); each comes out of `(detected)` too. */
@@ -135,10 +109,7 @@ export class ScBarcodeScanner {
     }
   }
 
-  private async start(
-    video: HTMLVideoElement,
-    camera: 'environment' | 'user',
-  ): Promise<void> {
+  private async start(video: HTMLVideoElement): Promise<void> {
     if (!this.detector) return;
     const run = ++this.run;
     const media = this.document.defaultView?.navigator.mediaDevices;
@@ -149,7 +120,8 @@ export class ScBarcodeScanner {
     this.state.set('starting');
     try {
       const stream = await media.getUserMedia({
-        video: { facingMode: camera },
+        // The one at the back, where there is one.
+        video: { facingMode: 'environment' },
         audio: false,
       });
       if (run !== this.run) {
@@ -159,14 +131,6 @@ export class ScBarcodeScanner {
       this.stream = stream;
       video.srcObject = stream;
       await video.play();
-      const track = stream.getVideoTracks()[0];
-      const capabilities = track?.getCapabilities?.() as
-        (MediaTrackCapabilities & { torch?: boolean }) | undefined;
-      this.hasTorch.set(!!capabilities?.torch);
-      const devices = await media.enumerateDevices();
-      this.canSwitchCamera.set(
-        devices.filter((device) => device.kind === 'videoinput').length > 1,
-      );
       this.state.set('scanning');
       this.watch(video, run);
     } catch (error) {
@@ -221,7 +185,6 @@ export class ScBarcodeScanner {
     if (video) video.srcObject = null;
     this.codes.set([]);
     this.seen.clear();
-    this.hasTorch.set(false);
     const state = this.state();
     if (state === 'starting' || state === 'scanning') this.state.set('idle');
   }
