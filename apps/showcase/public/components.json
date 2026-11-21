@@ -1036,8 +1036,7 @@
     "description": "A time picked on a clock face — hour, minute, second — by pointer or keyboard, each pick moving on; 12 hours with AM/PM or 24 on two rings.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Timeline",
