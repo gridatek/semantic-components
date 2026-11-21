@@ -69,6 +69,10 @@ Typed, in a field — the input and the trigger in an input group; there the tri
 </div>
 ```
 
+## Closing
+
+The same in every picker: each pick moves on to the next part — a day: one pick (several days: it never closes by itself), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse.
+
 ## API
 
 ### ScDatePicker — `div[scDatePicker]`, `#dp="scDatePicker"`

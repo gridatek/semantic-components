@@ -26,12 +26,14 @@ import { LocaleTimePickerDemoContainer } from './demos/locale-time-picker-demo-c
 import { NowTimePickerDemoContainer } from './demos/now-time-picker-demo-container';
 import { RangeTimePickerDemoContainer } from './demos/range-time-picker-demo-container';
 import { RtlTimePickerDemoContainer } from './demos/rtl-time-picker-demo-container';
+import { StaysOpenTimePickerDemoContainer } from './demos/stays-open-time-picker-demo-container';
 import { StepsTimePickerDemoContainer } from './demos/steps-time-picker-demo-container';
 import { TimePickerUsageDemoContainer } from './demos/time-picker-usage-demo-container';
 
 @Component({
   selector: 'app-time-picker-page',
   imports: [
+    StaysOpenTimePickerDemoContainer,
     ScKbd,
     ScTable,
     ScTableBody,
@@ -96,6 +98,15 @@ import { TimePickerUsageDemoContainer } from './demos/time-picker-usage-demo-con
           <code scTypeset>minTime</code> / <code scTypeset>maxTime</code>, or
           before <code scTypeset>startTime</code>, values can&apos;t be picked:
           an hour with no minute left, the minutes of the hour picked.
+        </p>
+        <p>
+          <strong>Closing</strong> — the same in every picker: each pick moves
+          on to the next part — the hour to the minutes, the minutes to AM/PM,
+          and the popover closes once the value is whole, focus back on the
+          trigger. With <code scTypeset>[closeOnPick]="false"</code> the picks
+          still move on, but it stays open until <kbd scKbd>Enter</kbd> (keeping
+          what is picked), <kbd scKbd>Escape</kbd> or a click outside. The arrow
+          keys only browse.
         </p>
         <p>
           The columns are written by the picker, from the locale: not markup of
@@ -180,6 +191,7 @@ import { TimePickerUsageDemoContainer } from './demos/time-picker-usage-demo-con
 
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
+        <app-stays-open-time-picker-demo-container />
         <app-hour-cycle-time-picker-demo-container />
         <app-steps-time-picker-demo-container />
         <app-limits-time-picker-demo-container />

@@ -64,6 +64,8 @@ export class ScDateRangePicker
   readonly unavailable = input<(date: Temporal.PlainDate) => boolean>(
     () => false,
   );
+  /** A pick that makes the value whole closes the popover; false: it stays open until Enter, Escape or a click outside. */
+  readonly closeOnPick = input(true, { transform: booleanAttribute });
   /** Picks are a draft, kept by `scDateRangePickerApply` — dropped on close. */
   readonly confirm = input(false, { transform: booleanAttribute });
   readonly disabled = input(false, { transform: booleanAttribute });
@@ -156,7 +158,7 @@ export class ScDateRangePicker
       return;
     }
     this.value.set(range);
-    if (range?.to) this.close();
+    if (this.closeOnPick() && range?.to) this.close();
   }
 
   /** The draft, kept — and closed. */

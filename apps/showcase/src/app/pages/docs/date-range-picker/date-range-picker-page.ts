@@ -68,12 +68,20 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
       <section class="space-y-4">
         <h2 scTypeset appToc>Picking</h2>
         <p>
-          The first click sets the start, the second the end; the popover closes
-          once the range is whole, focus back on the trigger. With
+          The first click sets the start, the second the end. With
           <code scTypeset>confirm</code>, picks and presets are a draft until
           Apply — Cancel, <kbd scKbd>Escape</kbd> or a click outside drop it.
           The calendar shows <code scTypeset>draft()</code> and reports to
           <code scTypeset>pick()</code>.
+        </p>
+        <p>
+          <strong>Closing</strong> — the same in every picker: each pick moves
+          on to the next part — the start to the end, and the popover closes
+          once the value is whole, focus back on the trigger. With
+          <code scTypeset>[closeOnPick]="false"</code> the picks still move on,
+          but it stays open until <kbd scKbd>Enter</kbd> (keeping what is
+          picked), <kbd scKbd>Escape</kbd> or a click outside. The arrow keys
+          only browse.
         </p>
         <p>
           Give the calendar the picker&apos;s

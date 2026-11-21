@@ -38,17 +38,21 @@ test.describe('Usage', () => {
     );
   });
 
-  test('a day picked sets the date and stays open; a time its parts; Enter closes', async ({
+  test('a day picked moves on to the time; each pick on to the next; the last one closes', async ({
     page,
   }) => {
     await open(page);
     await day(page, '2026-11-20').click();
     await expect(picked(page)).toHaveText('2026-11-20T14:30:00');
-    await expect(page.locator('[data-slot=time-picker-columns]')).toBeVisible();
-    await option(page, 'minute', '45').click();
-    await expect(picked(page)).toHaveText('2026-11-20T14:45:00');
+    // On to the time: the hour.
+    await expect(option(page, 'hour', '2')).toBeFocused();
     await option(page, 'hour', '9').click();
-    await page.keyboard.press('Enter');
+    await expect(option(page, 'minute', '30')).toBeFocused();
+    await option(page, 'minute', '45').click();
+    await expect(
+      column(page, 'AM/PM').locator('[aria-selected=true]'),
+    ).toBeFocused();
+    await option(page, 'AM/PM', 'PM').click();
     await expect(page.locator('[data-slot=time-picker-columns]')).toHaveCount(
       0,
     );

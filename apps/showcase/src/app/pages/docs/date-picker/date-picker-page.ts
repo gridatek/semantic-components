@@ -11,11 +11,13 @@ import { FormDatePickerDemoContainer } from './demos/form-date-picker-demo-conta
 import { LocaleDatePickerDemoContainer } from './demos/locale-date-picker-demo-container';
 import { MultipleDatePickerDemoContainer } from './demos/multiple-date-picker-demo-container';
 import { RtlDatePickerDemoContainer } from './demos/rtl-date-picker-demo-container';
+import { StaysOpenDatePickerDemoContainer } from './demos/stays-open-date-picker-demo-container';
 import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-container';
 
 @Component({
   selector: 'app-date-picker-page',
   imports: [
+    StaysOpenDatePickerDemoContainer,
     ScKbd,
     PartsTable,
     Anatomy,
@@ -70,9 +72,11 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
             <kbd scKbd>Space</kbd> picks.
           </li>
           <li>
-            A pick closes it, focus back on the trigger;
-            <kbd scKbd>Escape</kbd> closes it too. With confirm, picks are a
-            draft until Apply.
+            Closing, the same in every picker: a pick that makes the value whole
+            closes it, focus back on the trigger (several days: never by
+            itself); with [closeOnPick]="false" it stays open until
+            <kbd scKbd>Enter</kbd>, <kbd scKbd>Escape</kbd> or a click outside.
+            With confirm, picks are a draft until Apply.
           </li>
           <li>
             Name every icon button and the popover (an sr-only span, an
@@ -92,6 +96,7 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
 
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
+        <app-stays-open-date-picker-demo-container />
         <app-typed-date-picker-demo-container />
         <app-birth-date-picker-demo-container />
         <app-multiple-date-picker-demo-container />

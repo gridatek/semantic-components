@@ -80,6 +80,11 @@ export class ScTimePickerColumns {
     cn('bg-border flex gap-px', this.classInput()),
   );
 
+  /** Focus on the first column's option — a date-time picker's day picked: on to the time. */
+  focusFirst(): void {
+    this.columns()[0]?.focus();
+  }
+
   constructor() {
     // Open on the value: each column at its option, focus on the hour.
     afterNextRender(() => {

@@ -35,7 +35,7 @@ import { SC_TIME_COLUMNS, type ScTimePickerValue } from './time-columns';
         [attr.aria-disabled]="!picker.enabled(type(), value) || null"
         [attr.tabindex]="value === active() ? 0 : -1"
         [class]="optionClass()"
-        (click)="choose(value)"
+        (click)="pick(value)"
       >
         {{ label(value) }}
       </div>
@@ -133,6 +133,23 @@ export class ScTimePickerColumn {
     this.picker.pick(this.type(), value);
   }
 
+  /**
+   * A pick — a click, Space: the part set, then on to the next column; the
+   * last one picked and the value whole, the popover closes (`closeOnPick`).
+   * The arrows only browse: they set the part, and stay.
+   */
+  private pick(value: ScTimePickerValue): void {
+    if (!this.enabled(value)) return;
+    this.choose(value);
+    const next = this.next();
+    if (next) next.focus();
+    else if (
+      this.picker.closeOnPick() &&
+      this.picker.segmentedInput().current() !== null
+    )
+      this.picker.close();
+  }
+
   private onKeydown(event: KeyboardEvent): void {
     const values = this.values().filter((value) => this.enabled(value));
     const active = this.active();
@@ -157,7 +174,7 @@ export class ScTimePickerColumn {
         event.preventDefault();
         return;
       case ' ':
-        if (active !== undefined) this.choose(active);
+        if (active !== undefined) this.pick(active);
         event.preventDefault();
         return;
       case 'Enter':
@@ -173,6 +190,20 @@ export class ScTimePickerColumn {
     // Selection follows focus: the part is set as the option is reached.
     this.choose(next);
     this.focus();
+  }
+
+  /** The next column's option in the tab order, in the locale's order — none after the last. */
+  private next(): HTMLElement | undefined {
+    const root = this.host.closest('[data-slot="time-picker-columns"]');
+    if (!root) return undefined;
+    const columns = [
+      ...root.querySelectorAll<HTMLElement>('[data-slot="time-picker-column"]'),
+    ];
+    const column = columns[columns.indexOf(this.host) + 1];
+    return (
+      column?.querySelector<HTMLElement>('[role="option"][tabindex="0"]') ??
+      undefined
+    );
   }
 
   /** The column to the left or right, as they show (right to left too). */

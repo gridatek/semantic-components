@@ -65,10 +65,18 @@ import { StepsDateTimePickerDemoContainer } from './demos/steps-date-time-picker
         <p>
           A day picked in the calendar sets the input&apos;s date, a value
           picked in a column its time&apos;s part — at once, as typing does; the
-          value comes once both are there. The popover stays open for the other:
-          <kbd scKbd>Enter</kbd> in a column, <kbd scKbd>Escape</kbd> or a click
-          outside closes it, focus back on the button. It opens on the day,
-          focus in the calendar; the columns at the time.
+          value comes once both are there. It opens on the day, focus in the
+          calendar; the columns at the time.
+        </p>
+        <p>
+          <strong>Closing</strong> — the same in every picker: each pick moves
+          on to the next part — the day to the hour, the hour to the minutes,
+          the minutes to AM/PM, and the popover closes once the value is whole,
+          focus back on the trigger. With
+          <code scTypeset>[closeOnPick]="false"</code> the picks still move on,
+          but it stays open until <kbd scKbd>Enter</kbd> (keeping what is
+          picked), <kbd scKbd>Escape</kbd> or a click outside. The arrow keys
+          only browse.
         </p>
         <p>
           Give the calendar the picker&apos;s

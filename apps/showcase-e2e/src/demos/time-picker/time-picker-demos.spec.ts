@@ -36,13 +36,23 @@ test.describe('Usage', () => {
     );
   });
 
-  test('a click sets its part at once; it stays open', async ({ page }) => {
+  test('a click sets its part and moves on; the last one, the time whole, closes', async ({
+    page,
+  }) => {
     await open(page);
     await option(page, 'minute', '45').click();
     await expect(picked(page)).toHaveText('09:45:00');
+    await expect(
+      column(page, 'AM/PM').locator('[aria-selected=true]'),
+    ).toBeFocused();
     await option(page, 'AM/PM', 'PM').click();
     await expect(picked(page)).toHaveText('21:45:00');
-    await expect(page.locator('[data-slot=time-picker-columns]')).toBeVisible();
+    await expect(page.locator('[data-slot=time-picker-columns]')).toHaveCount(
+      0,
+    );
+    await expect(
+      page.getByRole('button', { name: 'Choose a time' }),
+    ).toBeFocused();
   });
 
   test('arrows pick in a column and move between columns; Enter closes, focus back on the button', async ({
@@ -199,4 +209,22 @@ test('RTL: the clock left to right, AM/PM where the locale puts it; the arrows a
   await page.keyboard.press('ArrowRight');
   await page.keyboard.press('ArrowRight');
   await expect(minute.locator('[aria-selected=true]')).toBeFocused();
+});
+
+test('Stays open: closeOnPick false — the picks move on, the columns stay', async ({
+  page,
+}) => {
+  await page.goto(demo('stays-open-time-picker'));
+  await open(page);
+  await option(page, 'hour', '10').click();
+  await option(page, 'minute', '15').click();
+  await option(page, 'AM/PM', 'PM').click();
+  await expect(picked(page)).toHaveText('22:15:00');
+  // Still open (the button says so at once; a closing popover would say no).
+  await expect(page.locator('[data-slot=time-picker-trigger]')).toHaveAttribute(
+    'aria-expanded',
+    'true',
+  );
+  await page.keyboard.press('Escape');
+  await expect(page.locator('[data-slot=time-picker-columns]')).toHaveCount(0);
 });

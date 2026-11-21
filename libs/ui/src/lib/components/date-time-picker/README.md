@@ -26,6 +26,10 @@ A day picked in the calendar sets the input's date parts; a value picked in a co
 
 On the first or last day of the limits, the times outside them can't be picked; on a day outside them, none.
 
+## Closing
+
+The same in every picker: each pick moves on to the next part (the day to the hour, then the minutes, then AM/PM), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse.
+
 ## API
 
 ### ScDateTimePicker — `div[scDateTimePicker]`, `#dtp="scDateTimePicker"`

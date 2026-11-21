@@ -54,6 +54,10 @@ One per part of the time input, in the locale's order (AM/PM first in Korean), t
 
 The columns are written by `scTimePickerColumns`, from the locale — not markup of yours, so not styled from it either: an option's look is the style's (`timePicker.option`, as its select item).
 
+## Closing
+
+The same in every picker: each pick moves on to the next part (the hour to the minutes, the minutes to AM/PM), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse.
+
 ## Keyboard
 
 | Key                | Does                                           |

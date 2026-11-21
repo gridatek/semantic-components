@@ -27,6 +27,10 @@ div[scDateRangePicker] ([(value)] / [formField], format, minDate, maxDate, unava
 
 The first click sets the start, the second the end; whole, it closes, focus back on the trigger. `confirm`: picks and presets are a draft (`draft()`, what the calendar shows) until Apply; Cancel, Escape or a click outside drop it. Give the calendar `minDate`, `maxDate` and `unavailable` too; a typed field takes them from the picker (through `SC_DATE_INPUT_HOST`).
 
+## Closing
+
+The same in every picker: each pick moves on to the next part (the start to the end), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse.
+
 ## Duration
 
 `days()` — both ends counted — and `nights()`, from the draft. `scDateRangePickerDuration` writes the days in the locale's words (`Intl.NumberFormat`, unit `day`: "5 days", "5 Tage"), said as it changes. `Intl` has no word for nights: write it from `nights()`.

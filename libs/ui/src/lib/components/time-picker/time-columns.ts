@@ -24,6 +24,8 @@ export interface ScTimeColumnsHost {
   pick(type: ScTimeInputPart, value: ScTimePickerValue): void;
   /** Closes the popover. */
   close(): void;
+  /** A pick moves on to the next column — and, the last one picked and the value whole, closes. */
+  readonly closeOnPick: Signal<boolean>;
   /** The columns take their box's height (beside a calendar), instead of their own. */
   readonly fillHeight?: boolean;
 }

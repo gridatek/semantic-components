@@ -3,6 +3,7 @@ import {
   Directive,
   ElementRef,
   LOCALE_ID,
+  booleanAttribute,
   computed,
   contentChild,
   effect,
@@ -55,6 +56,8 @@ export class ScTimePicker implements ScTimeColumnsHost {
   readonly minuteStep = input(1);
   /** Seconds between the second column's values. */
   readonly secondStep = input(1);
+  /** Each pick moves on to the next column, and the popover closes once the time is whole; false: it stays open until Enter, Escape or a click outside. */
+  readonly closeOnPick = input(true, { transform: booleanAttribute });
   /** A range's start: earlier times can't be picked; the duration counts from it. */
   readonly startTime = input<Temporal.PlainTime | undefined>(undefined);
 

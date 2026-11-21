@@ -161,3 +161,20 @@ test('Locale: French, typed day first', async ({ page }) => {
   await page.getByRole('button', { name: 'Choisir une date' }).click();
   await expect(page.getByRole('grid', { name: 'novembre 2026' })).toBeVisible();
 });
+
+test('Stays open: closeOnPick false — a day picked, the calendar stays', async ({
+  page,
+}) => {
+  await page.goto(demo('stays-open'));
+  await trigger(page).click();
+  await expect(calendar(page)).toBeVisible();
+  const first = page
+    .locator('[data-slot="calendar-cell"]:not([aria-disabled])')
+    .nth(5);
+  await first.click();
+  // Still open (the trigger says so at once; a closing popover would say no).
+  await expect(trigger(page)).toHaveAttribute('aria-expanded', 'true');
+  await expect(picked(page)).not.toHaveText('');
+  await page.keyboard.press('Escape');
+  await expect(calendar(page)).toHaveCount(0);
+});

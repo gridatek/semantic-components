@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
+  booleanAttribute,
   computed,
   contentChild,
   effect,
@@ -22,6 +23,7 @@ import {
   scTimeColumnValues,
   scTimeEnabled,
 } from '../time-picker/time-columns';
+import { ScTimePickerColumns } from '../time-picker/time-picker-columns';
 import { ScDateTimePickerTrigger } from './date-time-picker-trigger';
 
 /**
@@ -49,12 +51,18 @@ export class ScDateTimePicker implements ScTimeColumnsHost {
   readonly minuteStep = input(1);
   /** Seconds between the second column's values. */
   readonly secondStep = input(1);
+  /** A day picked moves on to the time, each time pick to the next column; the popover closes once the value is whole. False: it stays open until Enter, Escape or a click outside. */
+  readonly closeOnPick = input(true, { transform: booleanAttribute });
 
   /** The date-time input: the value, the locale, the clock, the limits. */
   readonly dateTimeInput = contentChild.required(ScDateTimeInput, {
     descendants: true,
   });
   private readonly popover = contentChild(ScPopoverProvider, {
+    descendants: true,
+  });
+  /** The time columns, in the popover: a day picked moves on to them. */
+  private readonly timeColumns = contentChild(ScTimePickerColumns, {
     descendants: true,
   });
   private readonly trigger = contentChild(
@@ -120,7 +128,7 @@ export class ScDateTimePicker implements ScTimeColumnsHost {
     });
   }
 
-  /** The calendar's `(valueChange)`: the day picked sets the date parts — the popover stays open for the time. */
+  /** The calendar's `(valueChange)`: the day picked sets the date parts — and on to the time. */
   pickDate(value: ScCalendarValue): void {
     if (!(value instanceof Temporal.PlainDate)) return;
     this.dateTimeInput().ɵsetParts({
@@ -128,6 +136,8 @@ export class ScDateTimePicker implements ScTimeColumnsHost {
       month: value.month,
       day: value.day,
     });
+    // On to the time.
+    this.timeColumns()?.focusFirst();
   }
 
   /** A time's part picked in its column: set, as typed. */
