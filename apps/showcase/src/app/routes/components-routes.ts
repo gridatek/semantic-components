@@ -609,12 +609,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/time-input/time-input-page'),
       },
       {
-        path: 'time-input-next',
-        title: 'Time Input Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/time-input-next/time-input-next-page'),
-      },
-      {
         path: 'time-clock',
         title: 'Time Clock - Semantic Components',
         loadComponent: () => import('../pages/docs/time-clock/time-clock-page'),

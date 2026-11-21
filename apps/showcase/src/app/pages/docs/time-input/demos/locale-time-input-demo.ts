@@ -1,21 +1,51 @@
-import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+import {
+  Component,
+  HostAttributeToken,
+  LOCALE_ID,
+  ViewEncapsulation,
+  inject,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 import { ScField, ScLabel, ScTimeInput } from '@semantic-components/ui';
 
-/** LOCALE_ID provided as 'fr-FR': 24 hours, the parts named in French. hourCycle overrides the locale’s 12 or 24 hours. */
+/** A field in the locale of its lang attribute. */
+@Component({
+  selector: 'app-locale-time',
+  imports: [ScField, ScLabel, ScTimeInput],
+  template: `
+    <div scField>
+      <label scLabel>{{ label() }}</label>
+      <div scTimeInput [(value)]="value"></div>
+    </div>
+  `,
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useFactory: () => inject(new HostAttributeToken('lang')),
+    },
+  ],
+  host: { class: 'block' },
+  encapsulation: ViewEncapsulation.None,
+})
+class LocaleTime {
+  readonly label = input.required<string>();
+  readonly value = model<Temporal.PlainTime | null>(null);
+}
+
+/** The same time in three locales: the parts' order, separators, clock and names are the locale's (LOCALE_ID). */
 @Component({
   selector: 'app-locale-time-input-demo',
-  imports: [ScTimeInput, ScField, ScLabel],
+  imports: [LocaleTime],
   template: `
-    <div scField class="w-40">
-      <label scLabel>Heure d’arrivée</label>
-      <div scTimeInput [(value)]="time"></div>
+    <div class="grid w-full max-w-md gap-4 sm:grid-cols-3">
+      <app-locale-time lang="en-GB" label="Arrival time" [(value)]="time" />
+      <app-locale-time lang="de-DE" label="Ankunftszeit" [(value)]="time" />
+      <app-locale-time lang="ko-KR" label="도착 시간" [(value)]="time" />
     </div>
-    <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ time()?.toString() ?? 'No time.' }}
-    </p>
   `,
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
-  host: { class: 'flex w-full flex-col items-center gap-3' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleTimeInputDemo {

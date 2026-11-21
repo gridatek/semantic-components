@@ -41,7 +41,6 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div
               scTimeInput
-              [step]="{ minutes: 15 }"
               [minTime]="open"
               [maxTime]="close"
               [(value)]="time"

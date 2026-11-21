@@ -6,33 +6,29 @@ import {
   ScTimeInput,
 } from '@semantic-components/ui';
 
-/** step, 15 minutes here, for the arrows; minTime and maxTime: a time outside them is marked. */
+/** minTime and maxTime: a time outside them is marked invalid. */
 @Component({
   selector: 'app-limits-time-input-demo',
-  imports: [ScTimeInput, ScField, ScLabel, ScFieldDescription],
+  imports: [ScField, ScFieldDescription, ScLabel, ScTimeInput],
   template: `
-    <div scField class="w-40">
-      <label scLabel>Opening</label>
+    <div scField class="w-44">
+      <label scLabel>Opening time</label>
       <div
         scTimeInput
-        [step]="{ minutes: 15 }"
         [minTime]="open"
         [maxTime]="close"
         [(value)]="time"
       ></div>
-      <p scFieldDescription>Between 9 AM and 5 PM.</p>
+      <p scFieldDescription>Between 9:00 AM and 5:30 PM.</p>
     </div>
-    <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ time()?.toString() ?? 'No time.' }}
-    </p>
   `,
-  host: { class: 'flex w-full flex-col items-center gap-3' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class LimitsTimeInputDemo {
   private readonly open = Temporal.PlainTime.from('09:00');
-  private readonly close = Temporal.PlainTime.from('17:00');
+  private readonly close = Temporal.PlainTime.from('17:30');
   private readonly time = signal<Temporal.PlainTime | null>(
-    Temporal.PlainTime.from('09:00'),
+    Temporal.PlainTime.from('10:00'),
   );
 }

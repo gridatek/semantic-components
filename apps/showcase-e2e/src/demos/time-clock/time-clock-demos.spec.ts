@@ -137,7 +137,7 @@ test('With a time input: one value', async ({ page }) => {
   await expect(picked(page)).toHaveText('08:15:00');
   await expect(dial(page)).toHaveAttribute('aria-valuenow', '8');
   await clickNumber(page, 9);
-  await expect(page.getByRole('spinbutton', { name: 'hour' })).toHaveText('9');
+  await expect(page.getByRole('spinbutton', { name: 'hour' })).toHaveValue('9');
 });
 
 test('In a form: required; booked', async ({ page }) => {

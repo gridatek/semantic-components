@@ -5963,95 +5963,20 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/time-input-next',
-    children: [
-      {
-        path: 'time-input-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-input-next/demos/time-input-next-usage-demo').then(
-            (m) => m.TimeInputNextUsageDemo,
-          ),
-      },
-      {
-        path: 'hour-cycle-time-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-input-next/demos/hour-cycle-time-input-next-demo').then(
-            (m) => m.HourCycleTimeInputNextDemo,
-          ),
-      },
-      {
-        path: 'limits-time-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-input-next/demos/limits-time-input-next-demo').then(
-            (m) => m.LimitsTimeInputNextDemo,
-          ),
-      },
-      {
-        path: 'locale-time-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-input-next/demos/locale-time-input-next-demo').then(
-            (m) => m.LocaleTimeInputNextDemo,
-          ),
-      },
-      {
-        path: 'disabled-time-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-input-next/demos/disabled-time-input-next-demo').then(
-            (m) => m.DisabledTimeInputNextDemo,
-          ),
-      },
-      {
-        path: 'read-only-time-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-input-next/demos/read-only-time-input-next-demo').then(
-            (m) => m.ReadOnlyTimeInputNextDemo,
-          ),
-      },
-      {
-        path: 'form-time-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-input-next/demos/form-time-input-next-demo').then(
-            (m) => m.FormTimeInputNextDemo,
-          ),
-      },
-      {
-        path: 'controlled-time-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-input-next/demos/controlled-time-input-next-demo').then(
-            (m) => m.ControlledTimeInputNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-time-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-input-next/demos/rtl-time-input-next-demo').then(
-            (m) => m.RtlTimeInputNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/time-input',
     children: [
       {
-        path: 'basic-time-input-demo',
+        path: 'time-input-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/time-input/demos/basic-time-input-demo').then(
-            (m) => m.BasicTimeInputDemo,
+          import('../pages/docs/time-input/demos/time-input-usage-demo').then(
+            (m) => m.TimeInputUsageDemo,
           ),
       },
       {
-        path: 'locale-time-input-demo',
+        path: 'hour-cycle-time-input-demo',
         loadComponent: () =>
-          import('../pages/docs/time-input/demos/locale-time-input-demo').then(
-            (m) => m.LocaleTimeInputDemo,
-          ),
-      },
-      {
-        path: 'seconds-time-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-input/demos/seconds-time-input-demo').then(
-            (m) => m.SecondsTimeInputDemo,
+          import('../pages/docs/time-input/demos/hour-cycle-time-input-demo').then(
+            (m) => m.HourCycleTimeInputDemo,
           ),
       },
       {
@@ -6062,10 +5987,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'form-time-input-demo',
+        path: 'locale-time-input-demo',
         loadComponent: () =>
-          import('../pages/docs/time-input/demos/form-time-input-demo').then(
-            (m) => m.FormTimeInputDemo,
+          import('../pages/docs/time-input/demos/locale-time-input-demo').then(
+            (m) => m.LocaleTimeInputDemo,
           ),
       },
       {
@@ -6073,6 +5998,34 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/time-input/demos/disabled-time-input-demo').then(
             (m) => m.DisabledTimeInputDemo,
+          ),
+      },
+      {
+        path: 'read-only-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-input/demos/read-only-time-input-demo').then(
+            (m) => m.ReadOnlyTimeInputDemo,
+          ),
+      },
+      {
+        path: 'form-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-input/demos/form-time-input-demo').then(
+            (m) => m.FormTimeInputDemo,
+          ),
+      },
+      {
+        path: 'controlled-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-input/demos/controlled-time-input-demo').then(
+            (m) => m.ControlledTimeInputDemo,
+          ),
+      },
+      {
+        path: 'rtl-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-input/demos/rtl-time-input-demo').then(
+            (m) => m.RtlTimeInputDemo,
           ),
       },
     ],

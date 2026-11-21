@@ -21,25 +21,22 @@ export class DisabledTimeInputDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScField, ScLabel, ScTimeInput } from '@semantic-components/ui';
 
-/** disabled: shown, not edited — out of the tab order. */
+/** Disabled: its parts leave the tab order. */
 @Component({
   selector: 'app-disabled-time-input-demo',
-  imports: [ScTimeInput, ScField, ScLabel],
+  imports: [ScField, ScLabel, ScTimeInput],
   template: \`
-    <div scField class="w-40">
-      <label scLabel>Check-out</label>
+    <div scField class="w-44">
+      <label scLabel>Start time</label>
       <div scTimeInput disabled [(value)]="time"></div>
     </div>
-    <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ time()?.toString() ?? 'No time.' }}
-    </p>
   \`,
-  host: { class: 'flex w-full flex-col items-center gap-3' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class DisabledTimeInputDemo {
   private readonly time = signal<Temporal.PlainTime | null>(
-    Temporal.PlainTime.from('11:00'),
+    Temporal.PlainTime.from('09:30'),
   );
 }`;
 }
