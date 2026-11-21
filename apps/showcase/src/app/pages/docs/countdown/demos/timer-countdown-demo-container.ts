@@ -110,7 +110,8 @@ export class TimerCountdownDemo {
 
   private tick(): void {
     if (!this.end) return;
-    const ms = this.end.epochMilliseconds - Temporal.Now.instant().epochMilliseconds;
+    const ms =
+      this.end.epochMilliseconds - Temporal.Now.instant().epochMilliseconds;
     this.left.set(Math.max(0, Math.ceil(ms / 1000)));
     if (this.left() === 0) this.stop();
   }

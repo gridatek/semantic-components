@@ -404,12 +404,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/menubar/menubar-page'),
       },
       {
-        path: 'multiselect',
-        title: 'Multiselect - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/multiselect/multiselect-page'),
-      },
-      {
         path: 'native-dialog',
         title: 'Native Dialog - Semantic Components',
         loadComponent: () =>
@@ -581,6 +575,12 @@ export const componentsRoutes: Route[] = [
         path: 'countdown',
         title: 'Countdown - Semantic Components',
         loadComponent: () => import('../pages/docs/countdown/countdown-page'),
+      },
+      {
+        path: 'multiselect',
+        title: 'Multiselect - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/multiselect/multiselect-page'),
       },
       {
         path: 'tags-input',

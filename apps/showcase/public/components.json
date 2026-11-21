@@ -580,15 +580,6 @@
     "category": "Data Display"
   },
   {
-    "name": "Multiselect",
-    "path": "multiselect",
-    "description": "A select component for multiple selections.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
     "name": "Native Dialog",
     "path": "native-dialog",
     "description": "A modal dialog built on the native HTML dialog element.",
@@ -970,6 +961,14 @@
     "name": "Countdown",
     "path": "countdown",
     "description": "The time left to a moment, or a timer, its digits rolling: a Number Ticker for each unit, the time from Temporal.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Recipes"
+  },
+  {
+    "name": "Multiselect",
+    "path": "multiselect",
+    "description": "Several values from a list, an array for Signal Forms: the Combobox with several values — chips for the chosen, a search for the list.",
     "status": "Experimental",
     "library": "ui",
     "category": "Recipes"

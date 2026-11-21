@@ -81,7 +81,10 @@ export class RtlCountdownDemo {
     );
     return [
       { name: this.names.of('day'), value: Math.floor(left / 86_400) },
-      { name: this.names.of('hour'), value: Math.floor((left % 86_400) / 3_600) },
+      {
+        name: this.names.of('hour'),
+        value: Math.floor((left % 86_400) / 3_600),
+      },
       { name: this.names.of('minute'), value: Math.floor((left % 3_600) / 60) },
       { name: this.names.of('second'), value: left % 60 },
     ];

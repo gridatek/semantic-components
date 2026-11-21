@@ -3828,18 +3828,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/multiselect',
-    children: [
-      {
-        path: 'basic-multiselect-demo',
-        loadComponent: () =>
-          import('../pages/docs/multiselect/demos/basic-multiselect-demo').then(
-            (m) => m.BasicMultiselectDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/native-select',
     children: [
       {
@@ -5763,6 +5751,39 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/countdown/demos/rtl-countdown-demo').then(
             (m) => m.RtlCountdownDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/multiselect',
+    children: [
+      {
+        path: 'multiselect-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/multiselect/demos/multiselect-usage-demo').then(
+            (m) => m.MultiselectUsageDemo,
+          ),
+      },
+      {
+        path: 'form-multiselect-demo',
+        loadComponent: () =>
+          import('../pages/docs/multiselect/demos/form-multiselect-demo').then(
+            (m) => m.FormMultiselectDemo,
+          ),
+      },
+      {
+        path: 'select-all-multiselect-demo',
+        loadComponent: () =>
+          import('../pages/docs/multiselect/demos/select-all-multiselect-demo').then(
+            (m) => m.SelectAllMultiselectDemo,
+          ),
+      },
+      {
+        path: 'rtl-multiselect-demo',
+        loadComponent: () =>
+          import('../pages/docs/multiselect/demos/rtl-multiselect-demo').then(
+            (m) => m.RtlMultiselectDemo,
           ),
       },
     ],
