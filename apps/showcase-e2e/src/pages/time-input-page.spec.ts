@@ -20,7 +20,7 @@ test.describe('Time Input Page', () => {
     await page.goto('/docs/components/time-input');
     await expect(
       page.getByRole('region', { name: 'Time Input parts' }).getByRole('row'),
-    ).toHaveCount(2);
+    ).toHaveCount(3);
     await expect(
       page.getByRole('region', { name: 'ScTimeInput inputs' }),
     ).toContainText('hourCycle');

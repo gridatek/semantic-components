@@ -17,12 +17,15 @@ import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { SC_FIELD } from '../field';
-
-/** A part of the time: its hour, minute, second, or AM/PM. */
-export type ScTimeInputPart = 'hour' | 'minute' | 'second' | 'dayPeriod';
+import {
+  SC_TIME_INPUT,
+  type ScTimeInputHost,
+  type ScTimeInputPart,
+  ScTimeInputSegment,
+} from './time-input-segment';
 
 /** A piece of the time as the locale writes it: a part to edit, or the text between. */
-export interface ScTimeInputSegment {
+export interface ScTimeInputSegmentData {
   readonly type: ScTimeInputPart | 'literal';
   /** A literal's text (`:`, ` h `…). */
   readonly text: string;
@@ -30,8 +33,8 @@ export interface ScTimeInputSegment {
 
 /** What the template lays out: the clock's digits as one left-to-right run, AM/PM and text around it. */
 type ScTimeInputItem =
-  | { readonly kind: 'clock'; readonly segments: ScTimeInputSegment[] }
-  | { readonly kind: 'segment'; readonly segment: ScTimeInputSegment };
+  | { readonly kind: 'clock'; readonly segments: ScTimeInputSegmentData[] }
+  | { readonly kind: 'segment'; readonly segment: ScTimeInputSegmentData };
 
 type ScTimeInputParts = Partial<
   Record<'hour' | 'minute' | 'second', number>
@@ -65,42 +68,14 @@ function digitOf(char: string): number | undefined {
     <ng-template #part let-segment>
       @let type = partOf(segment);
       <span class="inline-grid">
-        <!-- Its width: what it shows (or the empty mark), as text would be. -->
+        <input #partInput="scTimeInputSegment" [scTimeInputSegment]="type" />
+        <!-- Its width: what it shows (or the empty mark), as text would be —
+             after the input, whose part it reads. -->
         <span
           aria-hidden="true"
           class="invisible col-start-1 row-start-1 px-0.5 whitespace-pre tabular-nums"
-          >{{ text(type) || '––' }}</span
+          >{{ partInput.text() || '––' }}</span
         >
-        <input
-          type="text"
-          role="spinbutton"
-          size="1"
-          autocomplete="off"
-          autocorrect="off"
-          spellcheck="false"
-          placeholder="––"
-          data-slot="time-input-segment"
-          [attr.data-type]="type"
-          [attr.data-empty]="parts()[type] === undefined || null"
-          [attr.inputmode]="type === 'dayPeriod' ? 'text' : 'numeric'"
-          [value]="text(type)"
-          [disabled]="disabled()"
-          [readOnly]="readonly()"
-          [attr.aria-label]="names()[type]"
-          [attr.aria-valuemin]="range(type)[0]"
-          [attr.aria-valuemax]="range(type)[1]"
-          [attr.aria-valuenow]="valueNow(type)"
-          [attr.aria-valuetext]="text(type) || null"
-          [attr.aria-invalid]="showInvalid() || null"
-          [attr.aria-required]="required() || null"
-          [attr.aria-describedby]="describedBy()"
-          [class]="segmentClass()"
-          (focus)="typed = ''"
-          (keydown)="onKeydown($event, type)"
-          (beforeinput)="onBeforeInput($event, type)"
-          (input)="onInput($event, type)"
-          (paste)="onPaste($event)"
-        />
       </span>
     </ng-template>
 
@@ -133,7 +108,9 @@ function digitOf(char: string): number | undefined {
       }
     }
   `,
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, ScTimeInputSegment],
+  // Its parts (scTimeInputSegment) read it, and hand it what is typed.
+  providers: [{ provide: SC_TIME_INPUT, useExisting: ScTimeInput }],
   host: {
     'data-slot': 'time-input',
     role: 'group',
@@ -148,7 +125,9 @@ function digitOf(char: string): number | undefined {
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> {
+export class ScTimeInput
+  implements FormValueControl<Temporal.PlainTime | null>, ScTimeInputHost
+{
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {
     optional: true,
@@ -191,7 +170,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
       this.labelledByInput() ||
       (this.field && !this.ariaLabel ? `${this.field.id()}-label` : null),
   );
-  private readonly describedBy = computed(
+  readonly ɵdescribedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
@@ -216,7 +195,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   });
 
   /** The parts in the locale's order, with the text between them. */
-  readonly segments = computed<ScTimeInputSegment[]>(() =>
+  readonly segments = computed<ScTimeInputSegmentData[]>(() =>
     this.formatter()
       .formatToParts(Temporal.PlainTime.from('11:22:33'))
       .filter((part) =>
@@ -225,7 +204,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
         ),
       )
       .map((part) => ({
-        type: part.type as ScTimeInputSegment['type'],
+        type: part.type as ScTimeInputSegmentData['type'],
         text: part.type === 'literal' ? part.value : '',
       })),
   );
@@ -233,7 +212,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   /** The segments, the clock's run (hour to its last part) kept together. */
   private readonly layout = computed<ScTimeInputItem[]>(() => {
     const segments = this.segments();
-    const clock = (type: ScTimeInputSegment['type']) =>
+    const clock = (type: ScTimeInputSegmentData['type']) =>
       type === 'hour' || type === 'minute' || type === 'second';
     const first = segments.findIndex((s) => clock(s.type));
     let last = first;
@@ -293,21 +272,12 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
     );
   });
 
-  private readonly showInvalid = computed(
+  readonly showInvalid = computed(
     () => this.outOfRange() || (this.invalid() && this.touched()),
   );
 
   /** Digits typed into the focused part. */
   private typed = '';
-
-  private readonly segmentClass = computed(() =>
-    cn(
-      'col-start-1 row-start-1 w-0 min-w-full border-0 bg-transparent px-0.5 py-0 text-center tabular-nums caret-transparent outline-none selection:bg-transparent',
-      'placeholder:text-muted-foreground focus:bg-accent focus:text-accent-foreground focus:placeholder:text-accent-foreground',
-      'aria-invalid:text-destructive disabled:cursor-not-allowed',
-      this.styles.segment,
-    ),
-  );
 
   private readonly class = computed(() =>
     cn(
@@ -336,18 +306,33 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   }
 
   /** The part a segment edits (the template's context is untyped). */
-  private partOf(segment: ScTimeInputSegment): ScTimeInputPart {
+  private partOf(segment: ScTimeInputSegmentData): ScTimeInputPart {
     return segment.type as ScTimeInputPart;
   }
 
+  /** A part not typed yet. */
+  ɵempty(type: ScTimeInputPart): boolean {
+    return this.parts()[type] === undefined;
+  }
+
+  /** A part's name, in the locale's words. */
+  ɵname(type: ScTimeInputPart): string {
+    return this.names()[type];
+  }
+
+  /** A part focused: what was typed in another one is forgotten. */
+  ɵfocus(): void {
+    this.typed = '';
+  }
+
   /** A part's lowest and highest value (AM/PM: 0 and 1). */
-  private range(type: ScTimeInputPart): [number, number] {
+  ɵrange(type: ScTimeInputPart): [number, number] {
     if (type === 'hour') return this.twelveHours() ? [1, 12] : [0, 23];
     if (type === 'dayPeriod') return [0, 1];
     return [0, 59];
   }
 
-  private valueNow(type: ScTimeInputPart): number | null {
+  ɵvalueNow(type: ScTimeInputPart): number | null {
     const part = this.parts()[type];
     if (part === undefined) return null;
     if (type === 'dayPeriod') return part === 'am' ? 0 : 1;
@@ -364,7 +349,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   );
 
   /** A part as the locale writes it — empty when it is. */
-  private text(type: ScTimeInputPart): string {
+  ɵtext(type: ScTimeInputPart): string {
     const text = this.localeText(type);
     // A 12-hour clock ignores 2-digit for the hour (ICU): padded here.
     return type === 'hour' && this.leadingZeros() && [...text].length === 1
@@ -389,7 +374,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
     );
   }
 
-  private onKeydown(event: KeyboardEvent, type: ScTimeInputPart): void {
+  ɵkeydown(event: KeyboardEvent, type: ScTimeInputPart): void {
     const input = event.target as HTMLInputElement;
     const editable = !this.readonly() && !this.disabled();
     switch (event.key) {
@@ -411,7 +396,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
       case 'Home':
       case 'End':
         if (editable) {
-          const [min, max] = this.range(type);
+          const [min, max] = this.ɵrange(type);
           const home = event.key === 'Home';
           this.set(
             type,
@@ -437,7 +422,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   }
 
   /** What is typed, on any keyboard: the part takes it, the input's own text stays the part's. */
-  private onBeforeInput(event: InputEvent, type: ScTimeInputPart): void {
+  ɵbeforeInput(event: InputEvent, type: ScTimeInputPart): void {
     if (!event.cancelable) return;
     event.preventDefault();
     if (this.readonly() || this.disabled()) return;
@@ -458,18 +443,18 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
   }
 
   /** Input that couldn't be stopped (a phone's composition): taken, then the part's text back. */
-  private onInput(event: Event, type: ScTimeInputPart): void {
+  ɵinput(event: Event, type: ScTimeInputPart): void {
     const input = event.target as HTMLInputElement;
     const data = (event as InputEvent).data;
     if (data && !this.readonly() && !this.disabled()) {
       const char = [...data].pop() ?? '';
       if (char) this.type(char, type, input);
     }
-    input.value = this.text(type);
+    input.value = this.ɵtext(type);
   }
 
   /** A whole time pasted — `14:30`, `2:30 PM` — fills every part. */
-  private onPaste(event: ClipboardEvent): void {
+  ɵpaste(event: ClipboardEvent): void {
     event.preventDefault();
     if (this.readonly() || this.disabled()) return;
     this.paste(event.clipboardData?.getData('text') ?? '');
@@ -499,7 +484,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
       }
       return;
     }
-    const [min, max] = this.range(type);
+    const [min, max] = this.ɵrange(type);
     let typed = this.typed + digit;
     if (Number(typed) > max) typed = String(digit);
     this.typed = typed;
@@ -521,7 +506,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
     } else if (typeof part === 'number' && part >= 10) {
       const kept = Math.floor(part / 10);
       this.typed = String(kept);
-      this.set(type, kept >= this.range(type)[0] ? kept : undefined);
+      this.set(type, kept >= this.ɵrange(type)[0] ? kept : undefined);
     } else {
       this.typed = '';
       this.set(type, undefined);
@@ -540,7 +525,7 @@ export class ScTimeInput implements FormValueControl<Temporal.PlainTime | null> 
       return;
     }
     const current = part as number;
-    const [min, max] = this.range(type);
+    const [min, max] = this.ɵrange(type);
     const size = big ? BIG_STEP[type] : 1;
     const next =
       by > 0

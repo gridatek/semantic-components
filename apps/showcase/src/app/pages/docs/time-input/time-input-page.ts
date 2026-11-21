@@ -240,6 +240,12 @@ export default class TimeInputPage {
       description:
         'The group, its parts written from the locale: an input each (role spinbutton). data-empty, data-invalid, data-disabled, data-readonly; on a part, data-type and data-empty. exportAs scTimeInput: clear(), focus(options, part), segments(), twelveHours().',
     },
+    {
+      name: 'ScTimeInputSegment',
+      selector: 'input[scTimeInputSegment]',
+      description:
+        "A part: an input (spin button) the time input writes, one per part, from the locale — not one to place or style yourself; its look is the style's (timeInput.segment). data-type, data-empty. exportAs scTimeInputSegment: text().",
+    },
   ];
 
   private readonly inputs: ApiInput[] = [
