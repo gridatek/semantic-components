@@ -73,11 +73,11 @@ test.afterEach(() => {
   expect(errors).toEqual([]);
 });
 
-test('Burst: one canvas, hidden from readers, never in the way', async ({
+test('Usage (a burst): one canvas, hidden from readers, never in the way', async ({
   page,
 }) => {
   test.slow();
-  await page.goto(demo('burst'));
+  await page.goto('/demos/confetti/confetti-usage-demo');
   await expect(canvas(page)).toHaveCount(0);
   const button = page.getByRole('button', { name: 'Celebrate' });
   await button.click();

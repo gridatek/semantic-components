@@ -1,9 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScTypeset } from '@semantic-components/ui';
+import { Anatomy } from '../../../components/anatomy/anatomy';
+import {
+  type ApiInput,
+  ApiTable,
+} from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
+import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
-import { BurstConfettiDemoContainer } from './demos/burst-confetti-demo-container';
+import { ConfettiUsageDemoContainer } from './demos/confetti-usage-demo-container';
 import { CustomConfettiDemoContainer } from './demos/custom-confetti-demo-container';
 import { ElementConfettiDemoContainer } from './demos/element-confetti-demo-container';
 import { EventConfettiDemoContainer } from './demos/event-confetti-demo-container';
@@ -14,8 +20,11 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
 @Component({
   selector: 'app-confetti-page',
   imports: [
+    Anatomy,
+    ApiTable,
+    PartsTable,
     EntryInstall,
-    BurstConfettiDemoContainer,
+    ConfettiUsageDemoContainer,
     ElementConfettiDemoContainer,
     SidesConfettiDemoContainer,
     FireworksConfettiDemoContainer,
@@ -48,67 +57,159 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Burst</h2>
-        <p>
-          scConfettiTrigger on a button: a click bursts from it, in the theme’s
-          colours. Decorative — hidden from screen readers, never in the way,
-          and none for reduced motion.
-        </p>
-        <app-burst-confetti-demo-container />
+        <h2 scTypeset appToc>Usage</h2>
+        <app-confetti-usage-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>From the element</h2>
+        <h2 scTypeset appToc>Anatomy</h2>
         <p>
-          Each burst starts at the centre of what was clicked — wherever it is.
+          Two ways in, one effect: a trigger on your button (a click sets it
+          off), or the service from your code (after a form, on an event). Both
+          draw on one full-screen canvas, made on the first one; canvas-confetti
+          is loaded only then.
         </p>
+        <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Effects and colours</h2>
+        <p>
+          <code scTypeset>burst</code> (the default) bursts from the element
+          clicked — or the bottom middle, from code;
+          <code scTypeset>sides</code> fires two cannons from the edges of the
+          screen; <code scTypeset>fireworks</code> bursts here and there for
+          three seconds. The colours are the theme&apos;s chart colours (<code
+            scTypeset
+            >--chart-1</code
+          >
+          to <code scTypeset>--chart-5</code>), so they follow your theme and
+          dark mode; pass <code scTypeset>colors</code> for others.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Accessibility</h2>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            Decorative: the canvas is hidden from screen readers and never in
+            the way of the pointer.
+          </li>
+          <li>None at all when the reader asks for reduced motion.</li>
+          <li>
+            Say what it celebrates in words too — a status of yours («Welcome
+            aboard!»), as the form and event examples do.
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-8">
+        <h2 scTypeset appToc>Examples</h2>
         <app-element-confetti-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Sides</h2>
-        <p>
-          confettiEffect="sides": two cannons, from the edges of the screen.
-        </p>
         <app-sides-confetti-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Fireworks</h2>
-        <p>
-          confettiEffect="fireworks": bursts here and there, for three seconds —
-          or the duration you give.
-        </p>
         <app-fireworks-confetti-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Colours and shapes</h2>
-        <p>
-          Any CSS colours, circles and squares, bigger pieces, a wider spread.
-        </p>
         <app-custom-confetti-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>After a form</h2>
-        <p>
-          The service, from code: when the form is sent, sides() — and your
-          words for screen readers.
-        </p>
         <app-form-confetti-demo-container />
+        <app-event-confetti-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>On an event</h2>
-        <p>
-          The service, on an event — no button: when the last task is ticked, an
-          effect calls burst() from the list.
-        </p>
-        <app-event-confetti-demo-container />
+        <h2 scTypeset appToc>API reference</h2>
+        <app-parts-table label="Confetti parts" [parts]="parts" />
+        <app-api-table label="ScConfettiTrigger inputs" [inputs]="inputs" />
+        <app-api-table label="Confetti options" [inputs]="options" />
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class ConfettiPage {}
+export default class ConfettiPage {
+  private readonly anatomy = {
+    imports:
+      "import { ScConfetti, ScConfettiTrigger } from '@semantic-components/ui/confetti';",
+    markup: [
+      '<!-- On a click -->',
+      '<button scButton scConfettiTrigger>Celebrate</button>',
+      '<button scButton scConfettiTrigger confettiEffect="sides">Launch</button>',
+      '',
+      '<!-- From code -->',
+      'private readonly confetti = inject(ScConfetti);',
+      'await this.confetti.sides();',
+    ].join('\n'),
+  };
+
+  private readonly parts = [
+    {
+      name: 'ScConfettiTrigger',
+      selector: '[scConfettiTrigger]',
+      description:
+        'On your button (or any element): a click sets it off — a burst from its centre by default. Behaviour only: the element keeps its look. exportAs scConfettiTrigger: fire().',
+    },
+    {
+      name: 'ScConfetti',
+      selector: 'service',
+      description:
+        'From code: burst(options), sides(options), fireworks(options), reset(). Each settles when the confetti has fallen.',
+    },
+  ];
+
+  private readonly inputs: ApiInput[] = [
+    {
+      name: 'scConfettiTrigger',
+      type: 'ScConfettiFireworksOptions',
+      default: '{}',
+      description: 'The options (its value).',
+    },
+    {
+      name: 'confettiEffect',
+      type: "'burst' | 'sides' | 'fireworks'",
+      default: "'burst'",
+      description: 'Which effect a click sets off.',
+    },
+  ];
+
+  private readonly options: ApiInput[] = [
+    {
+      name: 'colors',
+      type: 'string[]',
+      default: 'the theme’s --chart-*',
+      description: 'Any CSS colours.',
+    },
+    {
+      name: 'shapes',
+      type: "('square' | 'circle' | 'star')[]",
+      default: "['square', 'circle']",
+      description: 'The pieces’ shapes.',
+    },
+    {
+      name: 'count, spread',
+      type: 'number',
+      default: '100, 70 (a burst)',
+      description: 'How many pieces, how wide (degrees).',
+    },
+    {
+      name: 'angle, velocity',
+      type: 'number',
+      default: 'canvas-confetti’s',
+      description: 'Which way (degrees), how fast.',
+    },
+    {
+      name: 'size, gravity',
+      type: 'number',
+      default: 'canvas-confetti’s (1)',
+      description: 'Bigger pieces; how fast they fall.',
+    },
+    {
+      name: 'origin',
+      type: '{ x, y } | Element',
+      default: 'the element clicked',
+      description: 'Where a burst starts: 0 to 1 of the screen, or an element.',
+    },
+    {
+      name: 'duration',
+      type: 'number',
+      default: '3000',
+      description: 'Fireworks: how long, in ms.',
+    },
+  ];
+}

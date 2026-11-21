@@ -24,6 +24,7 @@ import {
   ScAvatarFallback,
   ScBadge,
   ScButton,
+  ScFrame,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -34,7 +35,8 @@ import {
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
   ScSortableList,
-  ScSortableListItem, ScFrame } from '@semantic-components/ui';
+  ScSortableListItem,
+} from '@semantic-components/ui';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
 interface Task {

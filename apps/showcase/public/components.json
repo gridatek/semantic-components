@@ -242,8 +242,7 @@
     "description": "A burst, two cannons or fireworks in the theme’s colours; canvas-confetti only where it is used.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Context Menu",

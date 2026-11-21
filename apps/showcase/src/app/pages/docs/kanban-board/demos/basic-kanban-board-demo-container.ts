@@ -20,11 +20,13 @@ import { BasicKanbanBoardDemo } from './basic-kanban-board-demo';
 export class BasicKanbanBoardDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScSortableGroup,
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
   ScSortableList,
-  ScSortableListItem, ScFrame } from '@semantic-components/ui';
+  ScSortableListItem,
+} from '@semantic-components/ui';
 
 interface Task {
   readonly id: string;
@@ -34,8 +36,7 @@ interface Task {
 /** Cards dragged with the mouse, a finger (hold, then move) or a pen — or lifted by the keyboard: Space, the arrows, Space; Escape puts it back. Each keyboard step is announced, in your words. */
 @Component({
   selector: 'app-basic-kanban-board-demo',
-  imports: [
-    ScFrame,ScSortableGroup, ScSortableList, ScSortableListItem],
+  imports: [ScFrame, ScSortableGroup, ScSortableList, ScSortableListItem],
   template: \`
     <p id="basic-kanban-help" class="sr-only">
       Space lifts a card, the arrow keys move it, Space drops it, Escape puts it

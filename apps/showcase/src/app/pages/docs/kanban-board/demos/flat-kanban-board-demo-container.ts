@@ -20,11 +20,13 @@ import { FlatKanbanBoardDemo } from './flat-kanban-board-demo';
 export class FlatKanbanBoardDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
+  ScFrame,
   ScSortableGroup,
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
   ScSortableList,
-  ScSortableListItem, ScFrame } from '@semantic-components/ui';
+  ScSortableListItem,
+} from '@semantic-components/ui';
 
 interface Task {
   readonly id: string;
@@ -35,8 +37,7 @@ interface Task {
 /** Your data as it is stored — issues, each with a status: the board’s value made from it, and each move written back. */
 @Component({
   selector: 'app-flat-kanban-board-demo',
-  imports: [
-    ScFrame,ScSortableGroup, ScSortableList, ScSortableListItem],
+  imports: [ScFrame, ScSortableGroup, ScSortableList, ScSortableListItem],
   template: \`
     <p id="flat-kanban-help" class="sr-only">
       Space lifts a card, the arrow keys move it, Space drops it, Escape puts it

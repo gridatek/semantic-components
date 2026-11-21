@@ -1979,10 +1979,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/confetti',
     children: [
       {
-        path: 'burst-confetti-demo',
+        path: 'confetti-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/confetti/demos/burst-confetti-demo').then(
-            (m) => m.BurstConfettiDemo,
+          import('../pages/docs/confetti/demos/confetti-usage-demo').then(
+            (m) => m.ConfettiUsageDemo,
           ),
       },
       {

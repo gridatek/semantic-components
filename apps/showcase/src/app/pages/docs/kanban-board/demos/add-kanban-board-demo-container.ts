@@ -21,12 +21,14 @@ export class AddKanbanBoardDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScInput,
   ScSortableGroup,
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
   ScSortableList,
-  ScSortableListItem, ScFrame } from '@semantic-components/ui';
+  ScSortableListItem,
+} from '@semantic-components/ui';
 
 interface Task {
   readonly id: string;
