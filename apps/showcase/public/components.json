@@ -285,6 +285,15 @@
     "category": "Forms"
   },
   {
+    "name": "Date Range Input",
+    "path": "date-range-input",
+    "description": "A range of days typed in one box: your two Date Inputs, start and end; the field of a Date Range Picker.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms",
+    "hidden": true
+  },
+  {
     "name": "Date Time Input",
     "path": "date-time-input",
     "description": "A date and a time typed part by part, in the order and on the clock of its locale: a Temporal.PlainDateTime in a form.",

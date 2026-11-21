@@ -140,7 +140,7 @@ export const SC_SEGMENTED_INPUT_TEMPLATE = `
     '[attr.dir]': 'direction()',
     '[attr.aria-labelledby]': 'labelledBy()',
     '[attr.data-disabled]': 'isDisabled() || null',
-    '[attr.data-readonly]': 'readonly() || null',
+    '[attr.data-readonly]': 'isReadonly() || null',
     '[attr.data-invalid]': 'showInvalid() || null',
     '[attr.data-empty]': 'current() === null || null',
     '[class]': 'class()',
@@ -188,6 +188,10 @@ export abstract class ScSegmentedInput<V> {
   protected abstract fromIso(text: string): V | null;
   protected abstract same(a: V, b: V): boolean;
 
+  /** Read-only — or what it belongs to is. */
+  readonly isReadonly: Signal<boolean> = computed(() => this.readonly());
+  /** Required — or what it belongs to is. */
+  readonly isRequired: Signal<boolean> = computed(() => this.required());
   /** Disabled — or what it belongs to is. */
   readonly isDisabled: Signal<boolean> = computed(() => this.disabled());
   /** Invalid, shown: out of range, or invalid once touched. */
@@ -332,7 +336,9 @@ export abstract class ScSegmentedInput<V> {
     cn(
       this.styles.root,
       // In an input group: the group draws the box.
-      'in-data-[slot=input-group]:h-full in-data-[slot=input-group]:w-auto in-data-[slot=input-group]:flex-1 in-data-[slot=input-group]:rounded-none in-data-[slot=input-group]:border-0 in-data-[slot=input-group]:bg-transparent in-data-[slot=input-group]:shadow-none in-data-[slot=input-group]:ring-0 in-data-[slot=input-group]:has-[:focus-visible]:ring-0 in-data-[slot=input-group]:data-invalid:ring-0 dark:in-data-[slot=input-group]:bg-transparent',
+      // In a date range input: the range draws the box round both ends.
+      'in-data-[slot=date-range-input]:h-auto in-data-[slot=date-range-input]:w-auto in-data-[slot=date-range-input]:flex-none in-data-[slot=date-range-input]:rounded-none in-data-[slot=date-range-input]:border-0 in-data-[slot=date-range-input]:bg-transparent in-data-[slot=date-range-input]:p-0 in-data-[slot=date-range-input]:shadow-none in-data-[slot=date-range-input]:ring-0 in-data-[slot=date-range-input]:has-[:focus-visible]:ring-0 in-data-[slot=date-range-input]:data-invalid:ring-0 dark:in-data-[slot=date-range-input]:bg-transparent',
+      '[[data-slot=input-group]>&]:h-full [[data-slot=input-group]>&]:w-auto [[data-slot=input-group]>&]:flex-1 [[data-slot=input-group]>&]:rounded-none [[data-slot=input-group]>&]:border-0 [[data-slot=input-group]>&]:bg-transparent [[data-slot=input-group]>&]:shadow-none [[data-slot=input-group]>&]:ring-0 [[data-slot=input-group]>&]:has-[:focus-visible]:ring-0 [[data-slot=input-group]>&]:data-invalid:ring-0 dark:[[data-slot=input-group]>&]:bg-transparent',
       this.classInput(),
     ),
   );
@@ -484,7 +490,7 @@ export abstract class ScSegmentedInput<V> {
 
   ɵkeydown(event: KeyboardEvent, type: ScDateTimePart): void {
     const input = event.target as HTMLInputElement;
-    const editable = !this.readonly() && !this.isDisabled();
+    const editable = !this.isReadonly() && !this.isDisabled();
     switch (event.key) {
       case 'ArrowLeft':
       case 'ArrowRight':
@@ -531,7 +537,7 @@ export abstract class ScSegmentedInput<V> {
   ɵbeforeInput(event: InputEvent, type: ScDateTimePart): void {
     if (!event.cancelable) return;
     event.preventDefault();
-    if (this.readonly() || this.isDisabled()) return;
+    if (this.isReadonly() || this.isDisabled()) return;
     const input = event.target as HTMLInputElement;
     if (
       event.inputType === 'insertText' ||
@@ -551,7 +557,7 @@ export abstract class ScSegmentedInput<V> {
   ɵinput(event: Event, type: ScDateTimePart): void {
     const input = event.target as HTMLInputElement;
     const data = (event as InputEvent).data;
-    if (data && !this.readonly() && !this.isDisabled()) {
+    if (data && !this.isReadonly() && !this.isDisabled()) {
       const char = [...data].pop() ?? '';
       if (char) this.type(char, type, input);
     }
@@ -561,7 +567,7 @@ export abstract class ScSegmentedInput<V> {
   /** A whole value pasted — ISO, or its numbers in the locale's order — fills every part. */
   ɵpaste(event: ClipboardEvent): void {
     event.preventDefault();
-    if (this.readonly() || this.isDisabled()) return;
+    if (this.isReadonly() || this.isDisabled()) return;
     this.paste(event.clipboardData?.getData('text') ?? '');
   }
 
@@ -819,15 +825,27 @@ export abstract class ScSegmentedInput<V> {
     ];
   }
 
-  /** Focus on the part before or after, in the locale's order. */
+  /** The parts focus moves through: its own — or, an end of a date range input, both ends'. */
+  private reachable(): HTMLInputElement[] {
+    const range = this.host.closest('[data-slot="date-range-input"]');
+    return range
+      ? [
+          ...range.querySelectorAll<HTMLInputElement>(
+            '[data-slot="date-time-segment"]',
+          ),
+        ]
+      : this.inputs();
+  }
+
+  /** Focus on the part before or after, in the locale's order (on into a range's other end). */
   private move(from: HTMLElement, by: 1 | -1): void {
-    const all = this.inputs();
+    const all = this.reachable();
     all[all.indexOf(from as HTMLInputElement) + by]?.focus();
   }
 
   /** Focus on the part to the left or right, as they show (right to left too). */
   private moveOnScreen(from: HTMLElement, by: 1 | -1): void {
-    const all = this.inputs().sort(
+    const all = this.reachable().sort(
       (a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left,
     );
     all[all.indexOf(from as HTMLInputElement) + by]?.focus();

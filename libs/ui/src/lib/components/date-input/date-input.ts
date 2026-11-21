@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import type { ScCalendarRange } from '../calendar';
-import { ScDatePicker } from '../date-picker/date-picker';
 import { ScDateTimeSegment } from '../segmented-input/date-time-segment';
 import {
   SC_SEGMENTED_INPUT,
@@ -17,6 +16,7 @@ import {
   type ScDateTimeFields,
   ScSegmentedInput,
 } from '../segmented-input/segmented-input';
+import { SC_DATE_INPUT_HOST } from './date-input-host';
 
 /**
  * A date, typed part by part — day, month, year — in the order and with the
@@ -40,7 +40,8 @@ export class ScDateInput
   extends ScSegmentedInput<Temporal.PlainDate>
   implements FormValueControl<Temporal.PlainDate | null>
 {
-  private readonly picker = inject(ScDatePicker, { optional: true });
+  /** Its Date Picker or Date Range Input, if any: the value and the limits are its. */
+  private readonly picker = inject(SC_DATE_INPUT_HOST, { optional: true });
 
   /** The date: `[formField]` or `[(value)]`; `null` until every part is filled. In a date picker, the picker's. */
   readonly value = model<Temporal.PlainDate | null>(null);
@@ -58,6 +59,14 @@ export class ScDateInput
     () => false,
   );
 
+  /** Read-only — or its date range input is. */
+  override readonly isReadonly = computed(
+    () => this.readonly() || !!this.picker?.readonlyState?.(),
+  );
+  /** Required — or its date range input is. */
+  override readonly isRequired = computed(
+    () => this.required() || !!this.picker?.requiredState?.(),
+  );
   /** Disabled — or its date picker is. */
   override readonly isDisabled = computed(
     () => this.disabled() || !!this.picker?.disabled(),

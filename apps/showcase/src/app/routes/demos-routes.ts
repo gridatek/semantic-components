@@ -2436,6 +2436,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/date-range-input',
+    children: [
+      {
+        path: 'date-range-input-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-input/demos/date-range-input-usage-demo').then(
+            (m) => m.DateRangeInputUsageDemo,
+          ),
+      },
+      {
+        path: 'limits-date-range-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-input/demos/limits-date-range-input-demo').then(
+            (m) => m.LimitsDateRangeInputDemo,
+          ),
+      },
+      {
+        path: 'locale-date-range-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-input/demos/locale-date-range-input-demo').then(
+            (m) => m.LocaleDateRangeInputDemo,
+          ),
+      },
+      {
+        path: 'disabled-date-range-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-input/demos/disabled-date-range-input-demo').then(
+            (m) => m.DisabledDateRangeInputDemo,
+          ),
+      },
+      {
+        path: 'form-date-range-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-input/demos/form-date-range-input-demo').then(
+            (m) => m.FormDateRangeInputDemo,
+          ),
+      },
+      {
+        path: 'controlled-date-range-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-input/demos/controlled-date-range-input-demo').then(
+            (m) => m.ControlledDateRangeInputDemo,
+          ),
+      },
+      {
+        path: 'rtl-date-range-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-range-input/demos/rtl-date-range-input-demo').then(
+            (m) => m.RtlDateRangeInputDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/date-range-picker',
     children: [
       {

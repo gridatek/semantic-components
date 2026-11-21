@@ -22,6 +22,10 @@ import type {
   ScCalendarRange,
   ScCalendarValue,
 } from '../calendar';
+import {
+  SC_DATE_INPUT_HOST,
+  type ScDateInputHost,
+} from '../date-input/date-input-host';
 import { ScPopoverProvider } from '../popover';
 import { ScDatePickerTrigger } from './date-picker-trigger';
 
@@ -36,13 +40,17 @@ import { ScDatePickerTrigger } from './date-picker-trigger';
 @Directive({
   selector: 'div[scDatePicker]',
   exportAs: 'scDatePicker',
+  // Its date inputs (scDateInput, scDateRangeInput) write its value.
+  providers: [{ provide: SC_DATE_INPUT_HOST, useExisting: ScDatePicker }],
   host: {
     'data-slot': 'date-picker',
     '[attr.data-disabled]': 'disabled() || null',
     '[class]': 'class()',
   },
 })
-export class ScDatePicker implements FormValueControl<ScCalendarValue> {
+export class ScDatePicker
+  implements FormValueControl<ScCalendarValue>, ScDateInputHost
+{
   readonly classInput = input<string>('', { alias: 'class' });
 
   readonly value = model<ScCalendarValue>(null);

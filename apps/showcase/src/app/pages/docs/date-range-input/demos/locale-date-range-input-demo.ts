@@ -1,0 +1,35 @@
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+import {
+  type ScCalendarRange,
+  ScDateInput,
+  ScDateRangeInput,
+  ScField,
+  ScLabel,
+} from '@semantic-components/ui';
+
+/** LOCALE_ID provided as 'de-DE': each end day first, with dots. */
+@Component({
+  selector: 'app-locale-date-range-input-demo',
+  imports: [ScDateInput, ScDateRangeInput, ScField, ScLabel],
+  template: `
+    <div lang="de">
+      <div scField class="w-80">
+        <label scLabel>Aufenthalt</label>
+        <div scDateRangeInput [(value)]="stay">
+          <div scDateInput part="start" aria-label="Anreise"></div>
+          <span aria-hidden="true" class="text-muted-foreground">–</span>
+          <div scDateInput part="end" aria-label="Abreise"></div>
+        </div>
+      </div>
+    </div>
+  `,
+  providers: [{ provide: LOCALE_ID, useValue: 'de-DE' }],
+  host: { class: 'flex w-full flex-col items-center gap-3' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class LocaleDateRangeInputDemo {
+  private readonly stay = signal<ScCalendarRange | null>({
+    from: Temporal.PlainDate.from('2026-11-02'),
+    to: Temporal.PlainDate.from('2026-11-06'),
+  });
+}

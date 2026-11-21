@@ -253,6 +253,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/date-picker/date-picker-page'),
       },
       {
+        path: 'date-range-input',
+        title: 'Date Range Input - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/date-range-input/date-range-input-page'),
+      },
+      {
         path: 'date-time-input',
         title: 'Date Time Input - Semantic Components',
         loadComponent: () =>

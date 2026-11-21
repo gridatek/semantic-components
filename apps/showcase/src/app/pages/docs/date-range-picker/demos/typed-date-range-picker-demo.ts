@@ -9,6 +9,7 @@ import {
   ScDateInput,
   ScDatePicker,
   ScDatePickerTrigger,
+  ScDateRangeInput,
   ScInputGroup,
   ScInputGroupAddon,
   ScLabelText,
@@ -37,6 +38,7 @@ import {
     ScCalendarPrevious,
     ScCalendarNext,
     ScDateInput,
+    ScDateRangeInput,
     ScInputGroup,
     ScInputGroupAddon,
     ScLabelText,
@@ -49,15 +51,12 @@ import {
       <p scLabelText id="stay-label">Stay</p>
       <div scDatePicker #dp="scDatePicker" mode="range" [(value)]="range">
         <div scPopoverProvider [origin]="anchor" alignment="start">
-          <div
-            scInputGroup
-            cdkOverlayOrigin
-            #anchor="cdkOverlayOrigin"
-            aria-labelledby="stay-label"
-          >
-            <div scDateInput part="start" aria-label="Check-in"></div>
-            <span aria-hidden="true" class="text-muted-foreground">–</span>
-            <div scDateInput part="end" aria-label="Check-out"></div>
+          <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
+            <div scDateRangeInput aria-labelledby="stay-label">
+              <div scDateInput part="start" aria-label="Check-in"></div>
+              <span aria-hidden="true" class="text-muted-foreground">–</span>
+              <div scDateInput part="end" aria-label="Check-out"></div>
+            </div>
             <div scInputGroupAddon side="inline-end">
               <button scDatePickerTrigger #trigger="scDatePickerTrigger">
                 <svg siCalendarIcon></svg>
