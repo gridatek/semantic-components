@@ -274,8 +274,7 @@
     "description": "A date typed part by part, in the order of its locale: a number pad on a phone, a Temporal.PlainDate in a form, the day in a Date Picker.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Date Picker",

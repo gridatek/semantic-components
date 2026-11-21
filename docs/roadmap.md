@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its style's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (138 components): 63 with a shadcn counterpart · 136 with e2e demo tests · 138 with a page axe test · 101 with an RTL demo.
+Inventory (138 components): 63 with a shadcn counterpart · 136 with e2e demo tests · 138 with a page axe test · 102 with an RTL demo.
 
 ## The two lists
 
@@ -138,7 +138,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  10 | [Compare](../apps/showcase/src/app/pages/docs/compare)                         | ui      | —                                                                       |     5 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  11 | [Confetti](../apps/showcase/src/app/pages/docs/confetti)                       | ui      | —                                                                       |     2 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  12 | [Data Table](../apps/showcase/src/app/pages/docs/data-table)                   | ui      | button, checkbox, pagination                                            |    14 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
-|  13 | [Date Input](../apps/showcase/src/app/pages/docs/date-input)                   | ui      | date-picker, field, input                                               |     2 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  13 | [Date Input](../apps/showcase/src/app/pages/docs/date-input)                   | ui      | date-picker, field                                                      |     2 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  14 | [Date Picker](../apps/showcase/src/app/pages/docs/date-picker)                 | ui      | button, input-group, popover, select                                    |     6 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  15 | [Date Range Picker](../apps/showcase/src/app/pages/docs/date-range-picker)     | ui      | button, input-group, popover, select                                    |     6 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  16 | [Diff Viewer](../apps/showcase/src/app/pages/docs/diff-viewer)                 | ui      | code-block                                                              |     2 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
