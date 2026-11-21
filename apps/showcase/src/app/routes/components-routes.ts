@@ -583,6 +583,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/multiselect/multiselect-page'),
       },
       {
+        path: 'stat-card-recipe',
+        title: 'Stat Card - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/stat-card-recipe/stat-card-recipe-page'),
+      },
+      {
         path: 'tags-input',
         title: 'Tags Input - Semantic Components',
         loadComponent: () => import('../pages/docs/tags-input/tags-input-page'),

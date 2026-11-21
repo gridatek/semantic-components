@@ -974,6 +974,14 @@
     "category": "Recipes"
   },
   {
+    "name": "Stat Card",
+    "path": "stat-card-recipe",
+    "description": "One figure, how it changed and whether that is good news: a Card holding a description list, its numbers written by a Number Ticker.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Recipes"
+  },
+  {
     "name": "Tags Input",
     "path": "tags-input",
     "description": "Tags typed into one field, a list of strings: the Combobox with several values and an Add item for the text typed.",

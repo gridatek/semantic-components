@@ -5789,6 +5789,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/stat-card-recipe',
+    children: [
+      {
+        path: 'stat-card-recipe-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/stat-card-recipe/demos/stat-card-recipe-usage-demo').then(
+            (m) => m.StatCardRecipeUsageDemo,
+          ),
+      },
+      {
+        path: 'dashboard-stat-card-recipe-demo',
+        loadComponent: () =>
+          import('../pages/docs/stat-card-recipe/demos/dashboard-stat-card-recipe-demo').then(
+            (m) => m.DashboardStatCardRecipeDemo,
+          ),
+      },
+      {
+        path: 'good-stat-card-recipe-demo',
+        loadComponent: () =>
+          import('../pages/docs/stat-card-recipe/demos/good-stat-card-recipe-demo').then(
+            (m) => m.GoodStatCardRecipeDemo,
+          ),
+      },
+      {
+        path: 'rtl-stat-card-recipe-demo',
+        loadComponent: () =>
+          import('../pages/docs/stat-card-recipe/demos/rtl-stat-card-recipe-demo').then(
+            (m) => m.RtlStatCardRecipeDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/tags-input',
     children: [
       {

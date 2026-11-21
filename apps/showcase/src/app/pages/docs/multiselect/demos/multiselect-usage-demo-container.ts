@@ -20,7 +20,6 @@ import { MultiselectUsageDemo } from './multiselect-usage-demo';
 export class MultiselectUsageDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScComboboxMultiple,
   ScComboboxChip,
   ScComboboxChipRemove,
   ScComboboxChips,
@@ -29,6 +28,7 @@ import {
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxList,
+  ScComboboxMultiple,
   ScComboboxPopup,
   ScComboboxPortal,
 } from '@semantic-components/ui';

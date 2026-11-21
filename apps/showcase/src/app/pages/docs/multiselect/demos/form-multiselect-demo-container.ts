@@ -21,7 +21,6 @@ export class FormMultiselectDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, validate } from '@angular/forms/signals';
 import {
-  ScComboboxMultiple,
   ScComboboxChip,
   ScComboboxChipRemove,
   ScComboboxChips,
@@ -30,6 +29,7 @@ import {
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxList,
+  ScComboboxMultiple,
   ScComboboxPopup,
   ScComboboxPortal,
   ScField,

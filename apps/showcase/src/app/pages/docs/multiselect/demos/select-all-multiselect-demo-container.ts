@@ -21,7 +21,6 @@ export class SelectAllMultiselectDemoContainer {
   readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  ScComboboxMultiple,
   ScComboboxChip,
   ScComboboxChipRemove,
   ScComboboxChips,
@@ -30,6 +29,7 @@ import {
   ScComboboxItem,
   ScComboboxItemIndicator,
   ScComboboxList,
+  ScComboboxMultiple,
   ScComboboxPopup,
   ScComboboxPortal,
 } from '@semantic-components/ui';
