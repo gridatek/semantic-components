@@ -16,6 +16,13 @@ test.describe('Time Picker Next Page', () => {
     await expectNoA11yViolations(page);
   });
 
+  test('the columns open: no axe violations', async ({ page }) => {
+    await page.goto('/docs/components/time-picker-next');
+    await page.getByRole('button', { name: 'Choose a time' }).first().click();
+    await expect(page.getByRole('listbox', { name: 'hour' })).toBeVisible();
+    await expectNoA11yViolations(page);
+  });
+
   test('API reference: every part and the inputs', async ({ page }) => {
     await page.goto('/docs/components/time-picker-next');
     await expect(
