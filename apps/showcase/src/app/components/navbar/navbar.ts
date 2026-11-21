@@ -34,6 +34,7 @@ import {
 import { cn } from 'cn';
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
+import { DocsNavService } from '../../services/docs-nav-service';
 import { GithubService } from '../../services/github-service';
 import { styleFrom } from '../../styles';
 import { Logo } from '../logo/logo';
@@ -267,7 +268,9 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
 
       <!-- Mobile Menu -->
       <ng-template scHeaderMobileMenu>
-        <nav aria-label="Main">
+        <!-- The site's pages, then the docs' (the sidebar's groups): a long
+             menu, scrolling inside. -->
+        <nav aria-label="Main" class="flex flex-col gap-1">
           <a
             scNavigationMenuLink
             routerLink="/"
@@ -280,21 +283,21 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           </a>
           <a
             scNavigationMenuLink
-            routerLink="/components"
-            routerLinkActive="active"
-            #mobileComponentsRla="routerLinkActive"
-            [active]="mobileComponentsRla.isActive"
-          >
-            Components
-          </a>
-          <a
-            scNavigationMenuLink
             routerLink="/docs/getting-started"
             routerLinkActive="active"
             #mobileDocsRla="routerLinkActive"
             [active]="mobileDocsRla.isActive"
           >
             Documentation
+          </a>
+          <a
+            scNavigationMenuLink
+            routerLink="/components"
+            routerLinkActive="active"
+            #mobileComponentsRla="routerLinkActive"
+            [active]="mobileComponentsRla.isActive"
+          >
+            Components
           </a>
           <a
             scNavigationMenuLink
@@ -332,6 +335,33 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           >
             Customize
           </a>
+          @for (group of docsGroups(); track group.label) {
+            <div
+              [id]="'mobile-menu-group-' + $index"
+              class="text-muted-foreground px-2 pt-5 pb-1 text-xs font-medium"
+            >
+              {{ group.label }}
+            </div>
+            <ul
+              [attr.aria-labelledby]="'mobile-menu-group-' + $index"
+              class="flex flex-col gap-1"
+            >
+              @for (page of group.pages; track page.path) {
+                <li>
+                  <a
+                    scNavigationMenuLink
+                    [routerLink]="page.path"
+                    routerLinkActive
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    #pageRla="routerLinkActive"
+                    [active]="pageRla.isActive"
+                  >
+                    {{ page.name }}
+                  </a>
+                </li>
+              }
+            </ul>
+          }
         </nav>
       </ng-template>
     </header>
@@ -399,6 +429,9 @@ export default class Navbar {
   private readonly featuredComponents = computed(() =>
     this.componentsService.visibleComponents().slice(0, 5),
   );
+
+  /** The docs' pages, grouped as the sidebar shows them: the mobile menu lists them too. */
+  private readonly docsGroups = inject(DocsNavService).groups;
 
   private readonly github = inject(GithubService);
   private readonly starCount = this.github.starCount;
