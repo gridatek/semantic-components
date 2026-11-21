@@ -79,12 +79,17 @@ import { SidesConfettiDemoContainer } from './demos/sides-confetti-demo-containe
           clicked — or the bottom middle, from code;
           <code scTypeset>sides</code> fires two cannons from the edges of the
           screen; <code scTypeset>fireworks</code> bursts here and there for
-          three seconds. The colours are the theme&apos;s chart colours (<code
-            scTypeset
-            >--chart-1</code
-          >
-          to <code scTypeset>--chart-5</code>), so they follow your theme and
-          dark mode; pass <code scTypeset>colors</code> for others.
+          three seconds.
+        </p>
+        <p>
+          The colours are the theme&apos;s own confetti colours,
+          <code scTypeset>--sc-confetti-1</code> to
+          <code scTypeset>--sc-confetti-5</code>: five tokens in your
+          <code scTypeset>styles.css</code>, light and dark, as shadcn&apos;s
+          chart colours are — read each time it is fired, so they follow your
+          theme and dark mode. Without them, canvas-confetti&apos;s colours (and
+          a warning in development); pass <code scTypeset>colors</code> for
+          others.
         </p>
       </section>
 
@@ -172,7 +177,7 @@ export default class ConfettiPage {
     {
       name: 'colors',
       type: 'string[]',
-      default: 'the theme’s --chart-*',
+      default: '--sc-confetti-1 … 5',
       description: 'Any CSS colours.',
     },
     {
