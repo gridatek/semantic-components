@@ -116,7 +116,8 @@ test("Limits: what's outside can't be picked", async ({ page }) => {
     'aria-disabled',
     'true',
   );
-  await option(page, 'hour', '8').click({ force: true });
+  // A click on it anyway (it takes no pointer events): nothing changes.
+  await option(page, 'hour', '8').dispatchEvent('click');
   await expect(picked(page)).toHaveText('10:00:00');
 });
 
