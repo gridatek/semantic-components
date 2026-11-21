@@ -19,16 +19,18 @@ import { TickerMarqueeDemo } from './ticker-marquee-demo';
 })
 export class TickerMarqueeDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
+import { ScFrame, ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
 
 /** Headlines, with your separators — text is content like any other. */
 @Component({
   selector: 'app-ticker-marquee-demo',
-  imports: [ScMarquee, ScMarqueeContent],
+  imports: [ScFrame, ScMarquee, ScMarqueeContent],
   template: \`
     <section
+      scFrame
+      size="xs"
       aria-label="Headlines"
-      class="bg-primary text-primary-foreground w-full rounded-md py-2"
+      class="bg-primary text-primary-foreground w-full py-2"
     >
       <div scMarquee [speed]="80" [gap]="24">
         <ng-template scMarqueeContent>

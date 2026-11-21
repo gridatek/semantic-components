@@ -524,8 +524,7 @@
     "description": "Content written once and repeated to fill, speed in px/s, four directions, pauses for hover, focus and a button; still for reduced motion.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Masonry Grid",

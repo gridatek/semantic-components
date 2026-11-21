@@ -1,25 +1,26 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { LogosMarqueeDemo } from './logos-marquee-demo';
+import { MarqueeUsageDemo } from './marquee-usage-demo';
 
 @Component({
-  selector: 'app-logos-marquee-demo-container',
-  imports: [DemoContainer, LogosMarqueeDemo],
+  selector: 'app-marquee-usage-demo-container',
+  imports: [DemoContainer, MarqueeUsageDemo],
   template: `
     <app-demo-container
-      title="Logos"
+      title="Usage"
       [code]="code"
-      demoUrl="/demos/marquee/logos-marquee-demo"
+      demoUrl="/demos/marquee/marquee-usage-demo"
     >
-      <app-logos-marquee-demo />
+      <app-marquee-usage-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LogosMarqueeDemoContainer {
+export class MarqueeUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScLink,
   ScMarquee,
   ScMarqueeContent,
   ScMarqueePause,
@@ -28,8 +29,9 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
 
 /** Links, written once: the copies are out of reach. It waits under the pointer and with focus inside — Tab into it — and the button pauses it. */
 @Component({
-  selector: 'app-logos-marquee-demo',
+  selector: 'app-marquee-usage-demo',
   imports: [
+    ScLink,
     ScMarquee,
     ScMarqueeContent,
     ScMarqueePause,
@@ -42,8 +44,9 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
         <ng-template scMarqueeContent>
           @for (brand of brands; track brand) {
             <a
+              scLink
               href="#"
-              class="text-muted-foreground hover:text-foreground rounded text-xl font-semibold whitespace-nowrap"
+              class="text-muted-foreground hover:text-foreground text-xl font-semibold whitespace-nowrap no-underline"
             >
               {{ brand }}
             </a>
@@ -64,7 +67,7 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LogosMarqueeDemo {
+export class MarqueeUsageDemo {
   private readonly brands = [
     'Acme',
     'Globex',

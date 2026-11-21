@@ -3596,10 +3596,10 @@ export const demosRoutes: Route[] = [
     path: 'demos/marquee',
     children: [
       {
-        path: 'logos-marquee-demo',
+        path: 'marquee-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/marquee/demos/logos-marquee-demo').then(
-            (m) => m.LogosMarqueeDemo,
+          import('../pages/docs/marquee/demos/marquee-usage-demo').then(
+            (m) => m.MarqueeUsageDemo,
           ),
       },
       {

@@ -34,7 +34,7 @@ const speed = (page: Page, nth = 0) =>
 
 test.describe('Logos', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto(demo('logos'));
+    await page.goto('/demos/marquee/marquee-usage-demo');
     // Out of the way: under the pointer, it waits.
     await page.mouse.move(0, 400);
   });
