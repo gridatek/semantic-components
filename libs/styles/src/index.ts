@@ -510,6 +510,21 @@ export interface ScSegmentedInputStyles {
 }
 
 /**
+ * A time clock's parts that change from style to style — ours (shadcn has
+ * no time clock).
+ */
+export interface ScTimeClockStyles {
+  /** The face: its size and colour. */
+  face: string;
+  /** A number on the face: its text size. */
+  number: string;
+  /** A number on the inner ring (24 hours): its text size. */
+  numberInner: string;
+  /** The header's time: its size and weight. */
+  time: string;
+}
+
+/**
  * A time picker's parts that change from style to style — ours (shadcn has
  * no time picker).
  */
@@ -746,6 +761,7 @@ export interface ScStyle {
   tabs: ScTabsStyles;
   /** A multi-line text field. */
   textarea: string;
+  timeClock: ScTimeClockStyles;
   timePicker: ScTimePickerStyles;
   /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
   timeline: ScTimelineStyles;

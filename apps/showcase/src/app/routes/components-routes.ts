@@ -632,6 +632,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/time-clock/time-clock-page'),
       },
       {
+        path: 'time-clock-next',
+        title: 'Time Clock Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/time-clock-next/time-clock-next-page'),
+      },
+      {
         path: 'attachment',
         title: 'Attachment - Semantic Components',
         loadComponent: () => import('../pages/docs/attachment/attachment-page'),

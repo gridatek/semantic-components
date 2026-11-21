@@ -63,6 +63,7 @@ import { table } from './table';
 /** The maia style: `provideSemanticComponents({ style: maia })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
+import { timeClock } from './time-clock';
 import { timePicker } from './time-picker';
 import { timeline } from './timeline';
 import { toast } from './toast';
@@ -136,6 +137,7 @@ export const maia: ScStyle = {
   table,
   tabs,
   textarea,
+  timeClock,
   timePicker,
   timeline,
   toast,

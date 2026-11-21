@@ -63,6 +63,7 @@ import { table } from './table';
 /** The luma style: `provideSemanticComponents({ style: luma })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
+import { timeClock } from './time-clock';
 import { timePicker } from './time-picker';
 import { timeline } from './timeline';
 import { toast } from './toast';
@@ -136,6 +137,7 @@ export const luma: ScStyle = {
   table,
   tabs,
   textarea,
+  timeClock,
   timePicker,
   timeline,
   toast,

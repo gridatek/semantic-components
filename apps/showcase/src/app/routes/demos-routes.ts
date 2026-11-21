@@ -6284,6 +6284,67 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/time-clock-next',
+    children: [
+      {
+        path: 'basic-time-clock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock-next/demos/basic-time-clock-next-demo').then(
+            (m) => m.BasicTimeClockNextDemo,
+          ),
+      },
+      {
+        path: 'form-time-clock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock-next/demos/form-time-clock-next-demo').then(
+            (m) => m.FormTimeClockNextDemo,
+          ),
+      },
+      {
+        path: 'input-time-clock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock-next/demos/input-time-clock-next-demo').then(
+            (m) => m.InputTimeClockNextDemo,
+          ),
+      },
+      {
+        path: 'limits-time-clock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock-next/demos/limits-time-clock-next-demo').then(
+            (m) => m.LimitsTimeClockNextDemo,
+          ),
+      },
+      {
+        path: 'locale-time-clock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock-next/demos/locale-time-clock-next-demo').then(
+            (m) => m.LocaleTimeClockNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-time-clock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock-next/demos/rtl-time-clock-next-demo').then(
+            (m) => m.RtlTimeClockNextDemo,
+          ),
+      },
+      {
+        path: 'seconds-time-clock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock-next/demos/seconds-time-clock-next-demo').then(
+            (m) => m.SecondsTimeClockNextDemo,
+          ),
+      },
+      {
+        path: 'step-time-clock-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock-next/demos/step-time-clock-next-demo').then(
+            (m) => m.StepTimeClockNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/time-clock',
     children: [
       {
