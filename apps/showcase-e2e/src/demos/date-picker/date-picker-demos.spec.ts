@@ -111,17 +111,6 @@ test('Date of birth: opens on the years — on the days once set; 18 or older', 
   );
 });
 
-test('Range: written as one span; closed once whole', async ({ page }) => {
-  await page.goto(demo('range'));
-  await trigger(page).click();
-  await expect(page.getByRole('grid')).toHaveCount(2);
-  await day(page, '2026-10-12').click();
-  await expect(calendar(page)).toHaveCount(1);
-  await day(page, '2026-10-18').click();
-  await expect(calendar(page)).toHaveCount(0);
-  await expect(picked(page)).toHaveText('Oct 12 – 18, 2026');
-});
-
 test('Multiple: a list; it stays open', async ({ page }) => {
   await page.goto(demo('multiple'));
   await trigger(page).click();

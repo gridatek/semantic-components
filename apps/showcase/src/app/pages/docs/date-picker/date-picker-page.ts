@@ -36,8 +36,8 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
       <div class="space-y-2">
         <h1 scTypeset>Date Picker</h1>
         <p class="text-muted-foreground">
-          A day — or days, or a range — picked in the calendar, or typed;
-          written in the app’s language; a [formField].
+          A day — or several — picked in the calendar, or typed (a range: the
+          Date Range Picker); written in the app’s language; a [formField].
         </p>
         <app-component-badges path="date-picker" />
       </div>
@@ -155,7 +155,7 @@ export default class DatePickerPage {
       name: 'ScDatePicker',
       selector: 'div[scDatePicker]',
       description:
-        "Holds the value: [(value)] (a day, days or a range — the calendar's); mode ('single', 'multiple', 'range'); format (Intl options, dateStyle medium, in LOCALE_ID); minDate, maxDate, unavailable; confirm (picks a draft until Apply); a [formField] (disabled, invalid, touched). exportAs scDatePicker: text() (the value as written), draft(), pick(), apply(), cancel().",
+        "Holds the value: [(value)] (a day, or days — the calendar's); mode ('single', 'multiple'); format (Intl options, dateStyle medium, in LOCALE_ID); minDate, maxDate, unavailable; confirm (picks a draft until Apply); a [formField] (disabled, invalid, touched). exportAs scDatePicker: text() (the value as written), draft(), pick(), apply(), cancel().",
     },
     {
       name: 'ScDatePickerTrigger',

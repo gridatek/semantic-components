@@ -1,6 +1,6 @@
 # Date Picker
 
-A day, a range or several days, picked in a calendar in a popover — or typed, or a preset. Its value is the calendar's; `text()` is that value written in the app's language with `Intl` (a range as one span, several days as a list). A `[formField]`. It closes when a pick is done, and focus goes back to its trigger — or, `confirm`, picks are a draft until Apply.
+A day or several days, picked in a calendar in a popover — or typed, or a preset. Its value is the calendar's; `text()` is that value written in the app's language with `Intl` (several days as a list). A range is the [Date Range Picker](../date-range-picker/README.md)'s. A `[formField]`. It closes when a pick is done, and focus goes back to its trigger — or, `confirm`, picks are a draft until Apply.
 
 ## Architecture
 
@@ -8,7 +8,7 @@ A day, a range or several days, picked in a calendar in a popover — or typed, 
 div[scDatePicker] (mode, [(value)] / [formField], format,
 │                  minDate, maxDate, unavailable, confirm, disabled)
 │  text() · hasValue() · draft() · canApply() · pick(value) · apply() · cancel() · canPick(date)
-├── div[scDateInput] (part)  — typed part by part; a range: part="start" / "end"
+├── div[scDateInput]  — typed part by part
 └── div[scPopoverProvider]
     ├── button[scDatePickerTrigger]  — your icon and words
     └── ng-template[scPopoverPortal]
@@ -76,7 +76,7 @@ Typed, in a field — the input and the trigger in an input group; there the tri
 | Input                              | Type                                        | Default                   |
 | ---------------------------------- | ------------------------------------------- | ------------------------- |
 | `value`                            | `ScCalendarValue` (model)                   | `null`                    |
-| `mode`                             | `'single' \| 'multiple' \| 'range'`         | `'single'`                |
+| `mode`                             | `'single' \| 'multiple'`                    | `'single'`                |
 | `format`                           | `Intl.DateTimeFormatOptions`                | `{ dateStyle: 'medium' }` |
 | `minDate` / `maxDate`              | `Temporal.PlainDate \| undefined`           | —                         |
 | `unavailable`                      | `(date: Temporal.PlainDate) => boolean`     | `() => false`             |
@@ -88,17 +88,17 @@ Typed, in a field — the input and the trigger in an input group; there the tri
 | ------- | --------------------------------------------------------------------------------- |
 | `touch` | The calendar closed, or the input was left (Signal Forms marks the field touched) |
 
-| Member          | Description                                                                                                       |
-| --------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `text()`        | The value as written: a day, a range (`formatRange`), a list (`Intl.ListFormat`) — or `''`                        |
-| `hasValue()`    | `text()` is not empty                                                                                             |
-| `showInvalid()` | Invalid, once touched                                                                                             |
-| `draft()`       | What the calendar shows: the value — or, `confirm`, the picks not yet applied                                     |
-| `canApply()`    | The draft is a day, a whole range, or days                                                                        |
-| `pick(value)`   | The calendar's `(valueChange)` or a preset's: kept, closed for a day or a whole range — `confirm`: into the draft |
-| `apply()`       | The draft kept, closed                                                                                            |
-| `cancel()`      | Closed, the draft dropped                                                                                         |
-| `canPick(date)` | Within `minDate` / `maxDate`, not `unavailable`                                                                   |
+| Member          | Description                                                                                      |
+| --------------- | ------------------------------------------------------------------------------------------------ |
+| `text()`        | The value as written: a day, or a list (`Intl.ListFormat`) — or `''`                             |
+| `hasValue()`    | `text()` is not empty                                                                            |
+| `showInvalid()` | Invalid, once touched                                                                            |
+| `draft()`       | What the calendar shows: the value — or, `confirm`, the picks not yet applied                    |
+| `canApply()`    | The draft is a day, or days                                                                      |
+| `pick(value)`   | The calendar's `(valueChange)` or a preset's: kept, closed for a day — `confirm`: into the draft |
+| `apply()`       | The draft kept, closed                                                                           |
+| `cancel()`      | Closed, the draft dropped                                                                        |
+| `canPick(date)` | Within `minDate` / `maxDate`, not `unavailable`                                                  |
 
 ### ScDatePickerTrigger — `button[scDatePickerTrigger]`
 
@@ -108,7 +108,7 @@ Looks like a select trigger (`size`: default, sm) — in an input group, an icon
 
 A [date input](../date-input/README.md) in the picker is the picker's value; put `[formField]` on the picker. Typed part by part — day, month, year, in the locale's order — or pasted whole.
 
-Single mode — or, in range mode, one end: `part="start"` / `part="end"` (an end before the start, or a start after the end, is not one; an empty start clears the range). A day it can't pick — outside the limits, unavailable, an end on the wrong side — is written and marked `aria-invalid`. Takes its id and description from `scField`.
+Single mode. A day it can't pick — outside the limits, unavailable — is written and marked `aria-invalid`. Takes its id and description from `scField`. A range is typed in a [Date Range Input](../date-range-input/README.md), in a [Date Range Picker](../date-range-picker/README.md).
 
 shadcn's "Picker with Input" types into a plain text field; ours types part by part, as ui-sdk's Date Input does: one input for dates, with the number pad on phones.
 
@@ -120,18 +120,7 @@ A column of presets beside the calendar (`role="group"`: name it). Put the popov
 
 `[value]`: a ready value, picked as the calendar's would be (with `confirm`, into the draft). `aria-pressed` while it is the value. A ghost button (`variant`, `size`).
 
-`scDateRangePresets(labels, today?)` gives the common ranges — today, yesterday, the last 7 and 30 days, this month, last month — named by you:
-
-```ts
-readonly presets = scDateRangePresets({
-  today: 'Today',
-  yesterday: 'Yesterday',
-  last7Days: 'Last 7 days',
-  last30Days: 'Last 30 days',
-  thisMonth: 'This month',
-  lastMonth: 'Last month',
-});
-```
+The common ranges (`scDateRangePresets()`) are the [Date Range Picker](../date-range-picker/README.md)'s.
 
 ### ScDatePickerApply / ScDatePickerCancel — `button[scDatePickerApply]`, `button[scDatePickerCancel]`
 
