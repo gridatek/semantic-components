@@ -2936,32 +2936,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/image-annotator',
-    children: [
-      {
-        path: 'editor-image-annotator-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-annotator/demos/editor-image-annotator-demo').then(
-            (m) => m.EditorImageAnnotatorDemo,
-          ),
-      },
-      {
-        path: 'review-image-annotator-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-annotator/demos/review-image-annotator-demo').then(
-            (m) => m.ReviewImageAnnotatorDemo,
-          ),
-      },
-      {
-        path: 'read-only-image-annotator-demo',
-        loadComponent: () =>
-          import('../pages/docs/image-annotator/demos/read-only-image-annotator-demo').then(
-            (m) => m.ReadOnlyImageAnnotatorDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/compare',
     children: [
       {

@@ -307,12 +307,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/file-upload/file-upload-page'),
       },
       {
-        path: 'image-annotator',
-        title: 'Image Annotator - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/image-annotator/image-annotator-page'),
-      },
-      {
         path: 'compare',
         title: 'Compare - Semantic Components',
         loadComponent: () => import('../pages/docs/compare/compare-page'),

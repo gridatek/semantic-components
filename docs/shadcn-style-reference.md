@@ -52,7 +52,7 @@ The reference's classes are logical already; so are ours. A physical class in ou
 
 **2. Explicitly physical APIs.** Where a component takes a side by name — `side="left"`, `swipeDirection="left"`, `'top-right'` — the caller means literally left. Affects drawer, sheet, sidebar and toast-stack.
 
-**3. Spatial widgets.** Image cropper, image compare, image annotator and org-chart: handle offsets pair with physical resize cursors (`w-resize`), and mirroring a crop box or a diagram is wrong whatever the writing direction.
+**3. Spatial widgets.** Image cropper, image compare and org-chart: handle offsets pair with physical resize cursors (`w-resize`), and mirroring a crop box or a diagram is wrong whatever the writing direction.
 
 **4. Anything an overlay is coupled to.** The media progress fills are positioned over a slider; flipping one without the other's thumb math would desync them.
 
