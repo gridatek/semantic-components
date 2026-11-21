@@ -7,7 +7,7 @@ import { LimitsDateInputDemo } from './limits-date-input-demo';
   imports: [DemoContainer, LimitsDateInputDemo],
   template: `
     <app-demo-container
-      title="Limits"
+      title="Min and max"
       [code]="code"
       demoUrl="/demos/date-input/limits-date-input-demo"
     >
@@ -26,33 +26,30 @@ import {
   ScLabel,
 } from '@semantic-components/ui';
 
-/** minDate, maxDate and unavailable days: a date outside them is not read — marked. Here, weekdays from today on. */
+/** minDate and maxDate: a day outside them is marked invalid. */
 @Component({
   selector: 'app-limits-date-input-demo',
   imports: [ScDateInput, ScField, ScFieldDescription, ScLabel],
   template: \`
-    <div scField class="w-48">
-      <label scLabel>Delivery</label>
-      <input
+    <div scField class="w-44">
+      <label scLabel>Check-in</label>
+      <div
         scDateInput
-        placeholder="MM/DD/YYYY"
-        [minDate]="today"
-        [unavailable]="weekend"
-        [(value)]="date"
-      />
-      <p scFieldDescription>A weekday, from today.</p>
+        [minDate]="first"
+        [maxDate]="last"
+        [(value)]="checkIn"
+      ></div>
+      <p scFieldDescription>Any day in 2026.</p>
     </div>
-    <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ date()?.toString() ?? 'No date.' }}
-    </p>
   \`,
-  host: { class: 'flex w-full flex-col items-center gap-3' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class LimitsDateInputDemo {
-  private readonly today = Temporal.Now.plainDateISO();
-  private readonly date = signal<Temporal.PlainDate | null>(null);
-  /** Saturdays and Sundays. */
-  private readonly weekend = (date: Temporal.PlainDate) => date.dayOfWeek > 5;
+  private readonly first = Temporal.PlainDate.from('2026-01-01');
+  private readonly last = Temporal.PlainDate.from('2026-12-31');
+  private readonly checkIn = signal<Temporal.PlainDate | null>(
+    Temporal.PlainDate.from('2026-11-02'),
+  );
 }`;
 }

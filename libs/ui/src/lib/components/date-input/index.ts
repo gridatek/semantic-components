@@ -1,2 +1,2 @@
 export * from './date-input';
-export * from './segmented-date-input';
+export * from './date-input-segment';

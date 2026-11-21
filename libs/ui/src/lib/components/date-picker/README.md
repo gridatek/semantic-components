@@ -8,8 +8,7 @@ A day, a range or several days, picked in a calendar in a popover — or typed, 
 div[scDatePicker] (mode, [(value)] / [formField], format,
 │                  minDate, maxDate, unavailable, confirm, disabled)
 │  text() · hasValue() · draft() · canApply() · pick(value) · apply() · cancel() · canPick(date)
-├── input[scDateInput] (part)  — typed: the locale's numeric order, or ISO; a range: part="start" / "end"
-│   (or div[scSegmentedDateInput] — typed part by part)
+├── div[scDateInput] (part)  — typed part by part; a range: part="start" / "end"
 └── div[scPopoverProvider]
     ├── button[scDatePickerTrigger]  — your icon and words
     └── ng-template[scPopoverPortal]
@@ -55,7 +54,7 @@ Typed, in a field — the input and the trigger in an input group; there the tri
   <div scDatePicker #dp="scDatePicker" [formField]="form.start">
     <div scPopoverProvider [origin]="anchor" alignment="start">
       <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
-        <input scDateInput placeholder="MM/DD/YYYY" />
+        <div scDateInput></div>
         <div scInputGroupAddon side="inline-end">
           <button scDatePickerTrigger #trigger="scDatePickerTrigger">
             <svg siCalendarIcon></svg>
@@ -105,11 +104,13 @@ Typed, in a field — the input and the trigger in an input group; there the tri
 
 Looks like a select trigger (`size`: default, sm) — in an input group, an icon button (`variant`, `buttonSize`). Opens and closes the popover. `aria-haspopup="dialog"`, `aria-expanded`, `aria-invalid`; `data-placeholder` while there is no value.
 
-### Typed — `input[scDateInput]` or `div[scSegmentedDateInput]`
+### Typed — `div[scDateInput]`
 
-A [date input](../date-input/README.md) in the picker is the picker's value; put `[formField]` on the picker. The text one — the segmented one works the same way, part by part (a day it can't pick is written and marked):
+A [date input](../date-input/README.md) in the picker is the picker's value; put `[formField]` on the picker. Typed part by part — day, month, year, in the locale's order — or pasted whole.
 
-Single mode — or, in range mode, one end: `part="start"` / `part="end"` (an end before the start, or a start after the end, is not one; an empty start clears the range). Read on Enter and on leaving: the locale's numeric order (`10/14/2026`, `14/10/2026`, `14.10.2026`) or ISO (`2026-10-14`); a two-digit year is 20xx. Text that is not a day that can be picked stays, marked `aria-invalid`, until it is edited. Shows the value in the locale's numeric form. Takes its id and description from `scField`.
+Single mode — or, in range mode, one end: `part="start"` / `part="end"` (an end before the start, or a start after the end, is not one; an empty start clears the range). A day it can't pick — outside the limits, unavailable, an end on the wrong side — is written and marked `aria-invalid`. Takes its id and description from `scField`.
+
+shadcn's "Picker with Input" types into a plain text field; ours types part by part, as ui-sdk's Date Input does: one input for dates, with the number pad on phones.
 
 ### ScDatePickerPresets — `div[scDatePickerPresets]`
 

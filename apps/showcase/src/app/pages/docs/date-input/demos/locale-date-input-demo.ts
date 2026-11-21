@@ -1,25 +1,55 @@
-import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+import {
+  Component,
+  HostAttributeToken,
+  LOCALE_ID,
+  ViewEncapsulation,
+  inject,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 import { ScDateInput, ScField, ScLabel } from '@semantic-components/ui';
 
-/** LOCALE_ID provided as 'fr-FR': typed day first (14/10/2026). */
+/** A field in the locale of its lang attribute. */
 @Component({
-  selector: 'app-locale-date-input-demo',
+  selector: 'app-locale-date',
   imports: [ScDateInput, ScField, ScLabel],
   template: `
-    <div scField class="w-48">
-      <label scLabel>Date d’arrivée</label>
-      <input scDateInput placeholder="jj/mm/aaaa" [(value)]="date" />
+    <div scField>
+      <label scLabel>{{ label() }}</label>
+      <div scDateInput [(value)]="value"></div>
     </div>
-    <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ date()?.toString() ?? 'No date.' }}
-    </p>
   `,
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
-  host: { class: 'flex w-full flex-col items-center gap-3' },
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useFactory: () => inject(new HostAttributeToken('lang')),
+    },
+  ],
+  host: { class: 'block' },
+  encapsulation: ViewEncapsulation.None,
+})
+class LocaleDate {
+  readonly label = input.required<string>();
+  readonly value = model<Temporal.PlainDate | null>(null);
+}
+
+/** The same day in three locales: the parts' order, the separators and the names are the locale's (LOCALE_ID). */
+@Component({
+  selector: 'app-locale-date-input-demo',
+  imports: [LocaleDate],
+  template: `
+    <div class="grid w-full max-w-lg gap-4 sm:grid-cols-3">
+      <app-locale-date lang="en-GB" label="Date" [(value)]="day" />
+      <app-locale-date lang="de-DE" label="Datum" [(value)]="day" />
+      <app-locale-date lang="ja-JP" label="日付" [(value)]="day" />
+    </div>
+  `,
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleDateInputDemo {
-  private readonly date = signal<Temporal.PlainDate | null>(
-    Temporal.PlainDate.from('2026-10-14'),
+  private readonly day = signal<Temporal.PlainDate | null>(
+    Temporal.PlainDate.from('2026-11-02'),
   );
 }

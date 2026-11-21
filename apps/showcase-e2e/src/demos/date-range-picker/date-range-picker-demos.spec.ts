@@ -1,5 +1,5 @@
 import { collectErrors } from '../../interaction';
-import { type Page, expect, test } from '../../test';
+import { type Locator, type Page, expect, test } from '../../test';
 
 const demo = (name: string) =>
   `/demos/date-range-picker/${name}-date-range-picker-demo`;
@@ -9,6 +9,18 @@ const calendar = (page: Page) => page.locator('[data-slot="calendar"]');
 const day = (page: Page, date: string) =>
   page.locator(`[data-slot="calendar-cell"][data-date="${date}"]`);
 const picked = (page: Page) => page.getByTestId('picked');
+/** A date input's parts as they show, joined: `10/14/2026`. */
+const shown = (input: Locator) =>
+  input
+    .getByRole('spinbutton')
+    .evaluateAll((parts) =>
+      parts.map((part) => (part as HTMLInputElement).value).join('/'),
+    );
+/** A date typed into a date input, from its first part. */
+const typeDate = async (page: Page, input: Locator, digits: string) => {
+  await input.getByRole('spinbutton').first().focus();
+  await page.keyboard.type(digits);
+};
 
 let errors: string[];
 
@@ -53,23 +65,18 @@ test('Presets: picked and closed; pressed while the value', async ({
 
 test('Typed: each end; an end before the start marked', async ({ page }) => {
   await page.goto(demo('typed'));
-  const start = page.getByLabel('Check-in');
-  const end = page.getByLabel('Check-out');
-  await expect(start).toHaveValue('10/14/2026');
-  await expect(end).toHaveValue('10/18/2026');
-  await end.fill('10/10/2026');
-  await end.press('Enter');
-  await expect(end).toHaveAttribute('aria-invalid', 'true');
-  await expect(picked(page)).toHaveText('Oct 14 – 18, 2026');
-  await end.fill('10/20/2026');
-  await end.press('Enter');
-  await expect(end).not.toHaveAttribute('aria-invalid');
+  const start = page.getByRole('group', { name: 'Check-in' });
+  const end = page.getByRole('group', { name: 'Check-out' });
+  await expect.poll(() => shown(start)).toBe('10/14/2026');
+  await expect.poll(() => shown(end)).toBe('10/18/2026');
+  await typeDate(page, end, '10102026');
+  await expect(end).toHaveAttribute('data-invalid', 'true');
+  await typeDate(page, end, '10202026');
+  await expect(end).not.toHaveAttribute('data-invalid');
   await expect(picked(page)).toHaveText('Oct 14 – 20, 2026');
-  await start.fill('10/25/2026');
-  await start.press('Enter');
-  await expect(start).toHaveAttribute('aria-invalid', 'true');
-  await start.fill('2026-10-16');
-  await start.blur();
+  await typeDate(page, start, '10252026');
+  await expect(start).toHaveAttribute('data-invalid', 'true');
+  await typeDate(page, start, '10162026');
   await expect(picked(page)).toHaveText('Oct 16 – 20, 2026');
   await page.getByRole('button', { name: 'Choose dates' }).click();
   await expect(day(page, '2026-10-16')).toBeFocused();

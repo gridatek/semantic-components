@@ -12,7 +12,6 @@ import { LocaleDatePickerDemoContainer } from './demos/locale-date-picker-demo-c
 import { MultipleDatePickerDemoContainer } from './demos/multiple-date-picker-demo-container';
 import { RangeDatePickerDemoContainer } from './demos/range-date-picker-demo-container';
 import { RtlDatePickerDemoContainer } from './demos/rtl-date-picker-demo-container';
-import { SegmentedDatePickerDemoContainer } from './demos/segmented-date-picker-demo-container';
 import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-container';
 
 @Component({
@@ -23,7 +22,6 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
     Anatomy,
     DatePickerUsageDemoContainer,
     TypedDatePickerDemoContainer,
-    SegmentedDatePickerDemoContainer,
     BirthDatePickerDemoContainer,
     RangeDatePickerDemoContainer,
     MultipleDatePickerDemoContainer,
@@ -97,7 +95,6 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <app-typed-date-picker-demo-container />
-        <app-segmented-date-picker-demo-container />
         <app-birth-date-picker-demo-container />
         <app-range-date-picker-demo-container />
         <app-multiple-date-picker-demo-container />

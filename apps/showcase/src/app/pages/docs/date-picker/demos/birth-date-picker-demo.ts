@@ -54,7 +54,7 @@ import {
       <div scDatePicker #dp="scDatePicker" [maxDate]="adult" [(value)]="date">
         <div scPopoverProvider [origin]="anchor" alignment="start">
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
-            <input scDateInput placeholder="MM/DD/YYYY" />
+            <div scDateInput></div>
             <div scInputGroupAddon side="inline-end">
               <button scDatePickerTrigger #trigger="scDatePickerTrigger">
                 <svg siCalendarIcon></svg>

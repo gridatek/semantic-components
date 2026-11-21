@@ -10,36 +10,36 @@ import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 
 /** A part of the date: its day, month or year. */
-export type ScDateInputNextPart = 'day' | 'month' | 'year';
+export type ScDateInputPart = 'day' | 'month' | 'year';
 
 /** What a segment reads from its date input, and hands its events to. */
-export interface ScDateInputNextHost {
+export interface ScDateInputHost {
   readonly isDisabled: Signal<boolean>;
   readonly readonly: Signal<boolean>;
   readonly required: Signal<boolean>;
   /** Not a day that can be picked, or invalid once left. */
   readonly showInvalid: Signal<boolean>;
   readonly ɵdescribedBy: Signal<string | null>;
-  ɵempty(type: ScDateInputNextPart): boolean;
+  ɵempty(type: ScDateInputPart): boolean;
   /** The part as the locale writes it — empty when it is. */
-  ɵtext(type: ScDateInputNextPart): string;
+  ɵtext(type: ScDateInputPart): string;
   /** Its text for a screen reader: the month by its name. */
-  ɵvalueText(type: ScDateInputNextPart): string | null;
+  ɵvalueText(type: ScDateInputPart): string | null;
   /** Its name, in the locale's words. */
-  ɵname(type: ScDateInputNextPart): string;
-  ɵrange(type: ScDateInputNextPart): [number, number];
-  ɵvalueNow(type: ScDateInputNextPart): number | null;
+  ɵname(type: ScDateInputPart): string;
+  ɵrange(type: ScDateInputPart): [number, number];
+  ɵvalueNow(type: ScDateInputPart): number | null;
   ɵfocus(): void;
-  ɵblur(type: ScDateInputNextPart): void;
-  ɵkeydown(event: KeyboardEvent, type: ScDateInputNextPart): void;
-  ɵbeforeInput(event: InputEvent, type: ScDateInputNextPart): void;
-  ɵinput(event: Event, type: ScDateInputNextPart): void;
+  ɵblur(type: ScDateInputPart): void;
+  ɵkeydown(event: KeyboardEvent, type: ScDateInputPart): void;
+  ɵbeforeInput(event: InputEvent, type: ScDateInputPart): void;
+  ɵinput(event: Event, type: ScDateInputPart): void;
   ɵpaste(event: ClipboardEvent): void;
 }
 
-/** The date input a segment belongs to (`ScDateInputNext` provides itself). */
-export const SC_DATE_INPUT_NEXT = new InjectionToken<ScDateInputNextHost>(
-  'SC_DATE_INPUT_NEXT',
+/** The date input a segment belongs to (`ScDateInput` provides itself). */
+export const SC_DATE_INPUT = new InjectionToken<ScDateInputHost>(
+  'SC_DATE_INPUT',
 );
 
 /**
@@ -47,15 +47,15 @@ export const SC_DATE_INPUT_NEXT = new InjectionToken<ScDateInputNextHost>(
  * button; the number pad on a phone), named, ranged and described from its
  * date input, which keeps the state and reads what is typed.
  *
- * The date input's own part, not one to place: `div[scDateInputNext]` writes
+ * The date input's own part, not one to place: `div[scDateInput]` writes
  * one per part in its template, because the parts — their order and the text
  * between them — come from the locale, which the consumer can't know ahead.
  * So it can't be styled from the consumer's markup either: the look of a part
  * is the style's (`segmentedInput.segment`).
  */
 @Directive({
-  selector: 'input[scDateInputNextSegment]',
-  exportAs: 'scDateInputNextSegment',
+  selector: 'input[scDateInputSegment]',
+  exportAs: 'scDateInputSegment',
   host: {
     type: 'text',
     role: 'spinbutton',
@@ -64,7 +64,7 @@ export const SC_DATE_INPUT_NEXT = new InjectionToken<ScDateInputNextHost>(
     autocomplete: 'off',
     autocorrect: 'off',
     spellcheck: 'false',
-    'data-slot': 'date-input-next-segment',
+    'data-slot': 'date-input-segment',
     '[attr.data-type]': 'type()',
     '[attr.data-empty]': 'empty() || null',
     '[attr.placeholder]': 'placeholder()',
@@ -88,14 +88,14 @@ export const SC_DATE_INPUT_NEXT = new InjectionToken<ScDateInputNextHost>(
     '(paste)': 'onPaste($event)',
   },
 })
-export class ScDateInputNextSegment {
-  private readonly dateInput = inject(SC_DATE_INPUT_NEXT);
+export class ScDateInputSegment {
+  private readonly dateInput = inject(SC_DATE_INPUT);
   private readonly styles = injectStyle().segmentedInput;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The part it edits. */
-  readonly type = input.required<ScDateInputNextPart>({
-    alias: 'scDateInputNextSegment',
+  readonly type = input.required<ScDateInputPart>({
+    alias: 'scDateInputSegment',
   });
 
   /** What it shows: the part as the locale writes it, or nothing (its placeholder shows). */

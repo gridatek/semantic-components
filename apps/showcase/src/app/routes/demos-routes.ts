@@ -2185,88 +2185,13 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/date-input-next',
-    children: [
-      {
-        path: 'date-input-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-input-next/demos/date-input-next-usage-demo').then(
-            (m) => m.DateInputNextUsageDemo,
-          ),
-      },
-      {
-        path: 'limits-date-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-input-next/demos/limits-date-input-next-demo').then(
-            (m) => m.LimitsDateInputNextDemo,
-          ),
-      },
-      {
-        path: 'unavailable-date-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-input-next/demos/unavailable-date-input-next-demo').then(
-            (m) => m.UnavailableDateInputNextDemo,
-          ),
-      },
-      {
-        path: 'locale-date-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-input-next/demos/locale-date-input-next-demo').then(
-            (m) => m.LocaleDateInputNextDemo,
-          ),
-      },
-      {
-        path: 'disabled-date-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-input-next/demos/disabled-date-input-next-demo').then(
-            (m) => m.DisabledDateInputNextDemo,
-          ),
-      },
-      {
-        path: 'read-only-date-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-input-next/demos/read-only-date-input-next-demo').then(
-            (m) => m.ReadOnlyDateInputNextDemo,
-          ),
-      },
-      {
-        path: 'form-date-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-input-next/demos/form-date-input-next-demo').then(
-            (m) => m.FormDateInputNextDemo,
-          ),
-      },
-      {
-        path: 'controlled-date-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-input-next/demos/controlled-date-input-next-demo').then(
-            (m) => m.ControlledDateInputNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-date-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-input-next/demos/rtl-date-input-next-demo').then(
-            (m) => m.RtlDateInputNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/date-input',
     children: [
       {
-        path: 'basic-date-input-demo',
+        path: 'date-input-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/date-input/demos/basic-date-input-demo').then(
-            (m) => m.BasicDateInputDemo,
-          ),
-      },
-      {
-        path: 'locale-date-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-input/demos/locale-date-input-demo').then(
-            (m) => m.LocaleDateInputDemo,
+          import('../pages/docs/date-input/demos/date-input-usage-demo').then(
+            (m) => m.DateInputUsageDemo,
           ),
       },
       {
@@ -2277,10 +2202,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'form-date-input-demo',
+        path: 'unavailable-date-input-demo',
         loadComponent: () =>
-          import('../pages/docs/date-input/demos/form-date-input-demo').then(
-            (m) => m.FormDateInputDemo,
+          import('../pages/docs/date-input/demos/unavailable-date-input-demo').then(
+            (m) => m.UnavailableDateInputDemo,
+          ),
+      },
+      {
+        path: 'locale-date-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input/demos/locale-date-input-demo').then(
+            (m) => m.LocaleDateInputDemo,
           ),
       },
       {
@@ -2291,17 +2223,31 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'segmented-date-input-demo',
+        path: 'read-only-date-input-demo',
         loadComponent: () =>
-          import('../pages/docs/date-input/demos/segmented-date-input-demo').then(
-            (m) => m.SegmentedDateInputDemo,
+          import('../pages/docs/date-input/demos/read-only-date-input-demo').then(
+            (m) => m.ReadOnlyDateInputDemo,
           ),
       },
       {
-        path: 'segmented-locale-date-input-demo',
+        path: 'form-date-input-demo',
         loadComponent: () =>
-          import('../pages/docs/date-input/demos/segmented-locale-date-input-demo').then(
-            (m) => m.SegmentedLocaleDateInputDemo,
+          import('../pages/docs/date-input/demos/form-date-input-demo').then(
+            (m) => m.FormDateInputDemo,
+          ),
+      },
+      {
+        path: 'controlled-date-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input/demos/controlled-date-input-demo').then(
+            (m) => m.ControlledDateInputDemo,
+          ),
+      },
+      {
+        path: 'rtl-date-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input/demos/rtl-date-input-demo').then(
+            (m) => m.RtlDateInputDemo,
           ),
       },
     ],
@@ -2328,13 +2274,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/date-picker/demos/typed-date-picker-demo').then(
             (m) => m.TypedDatePickerDemo,
-          ),
-      },
-      {
-        path: 'segmented-date-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/date-picker/demos/segmented-date-picker-demo').then(
-            (m) => m.SegmentedDatePickerDemo,
           ),
       },
       {

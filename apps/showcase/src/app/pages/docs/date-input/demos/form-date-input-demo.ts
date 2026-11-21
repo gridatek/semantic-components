@@ -1,56 +1,71 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { FormField, FormRoot, form, required } from '@angular/forms/signals';
+import {
+  FormField,
+  FormRoot,
+  form,
+  required,
+  validate,
+} from '@angular/forms/signals';
 import {
   ScButton,
   ScDateInput,
   ScField,
+  ScFieldDescription,
   ScFieldErrors,
   ScLabel,
 } from '@semantic-components/ui';
 
-/** A [formField]: required, from the schema; marked once left. */
+/** A [formField]: required and not in the past, from the schema — their messages under it once left. */
 @Component({
   selector: 'app-form-date-input-demo',
   imports: [
     FormField,
     FormRoot,
+    ScButton,
     ScDateInput,
     ScField,
+    ScFieldDescription,
     ScFieldErrors,
     ScLabel,
-    ScButton,
   ],
   template: `
-    <form [formRoot]="signupForm" class="grid w-48 gap-3">
+    <form [formRoot]="bookingForm" class="grid w-56 gap-3">
       <div scField>
-        <label scLabel>Date of birth</label>
-        <input
-          scDateInput
-          placeholder="MM/DD/YYYY"
-          [formField]="signupForm.birth"
-        />
+        <label scLabel>Date</label>
+        <div scDateInput [formField]="bookingForm.date"></div>
+        <p scFieldDescription>From today on.</p>
         <div scFieldErrors></div>
       </div>
-      <button scButton type="submit" class="justify-self-start">Sign up</button>
-      @if (born()) {
-        <p class="text-sm" role="status">Born on {{ born() }}.</p>
+      <button scButton type="submit" class="justify-self-start">Book</button>
+      @if (booked()) {
+        <p class="text-sm" role="status">Booked for {{ booked() }}.</p>
       }
     </form>
   `,
-  host: { class: 'flex w-full flex-col items-center gap-3' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class FormDateInputDemo {
-  private readonly model = signal<{ birth: Temporal.PlainDate | null }>({
-    birth: null,
+  private readonly model = signal<{ date: Temporal.PlainDate | null }>({
+    date: null,
   });
-  private readonly born = signal('');
-  private readonly signupForm = form(
+  private readonly booked = signal('');
+  private readonly bookingForm = form(
     this.model,
-    (s) => required(s.birth, { message: 'Enter your date of birth.' }),
+    (s) => {
+      required(s.date, { message: 'Pick a date.' });
+      validate(s.date, ({ value }) => {
+        const date = value();
+        return date &&
+          Temporal.PlainDate.compare(date, Temporal.Now.plainDateISO()) < 0
+          ? { kind: 'past', message: 'Pick a day from today on.' }
+          : null;
+      });
+    },
     {
       submission: {
-        action: async () => this.born.set(this.model().birth?.toString() ?? ''),
+        action: async () =>
+          this.booked.set(this.model().date?.toString() ?? ''),
       },
     },
   );

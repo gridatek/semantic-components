@@ -1,26 +1,26 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { DateInputNextUsageDemo } from './date-input-next-usage-demo';
+import { DateInputUsageDemo } from './date-input-usage-demo';
 
 @Component({
-  selector: 'app-date-input-next-usage-demo-container',
-  imports: [DemoContainer, DateInputNextUsageDemo],
+  selector: 'app-date-input-usage-demo-container',
+  imports: [DemoContainer, DateInputUsageDemo],
   template: `
     <app-demo-container
       title="Usage"
       [code]="code"
-      demoUrl="/demos/date-input-next/date-input-next-usage-demo"
+      demoUrl="/demos/date-input/date-input-usage-demo"
     >
-      <app-date-input-next-usage-demo />
+      <app-date-input-usage-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DateInputNextUsageDemoContainer {
+export class DateInputUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScDateInputNext,
+  ScDateInput,
   ScField,
   ScFieldDescription,
   ScLabel,
@@ -28,19 +28,19 @@ import {
 
 /** A date in a field: named by its label, described by its description. */
 @Component({
-  selector: 'app-date-input-next-usage-demo',
-  imports: [ScDateInputNext, ScField, ScFieldDescription, ScLabel],
+  selector: 'app-date-input-usage-demo',
+  imports: [ScDateInput, ScField, ScFieldDescription, ScLabel],
   template: \`
     <div scField class="w-44">
       <label scLabel>Birthday</label>
-      <div scDateInputNext [(value)]="birthday"></div>
+      <div scDateInput [(value)]="birthday"></div>
       <p scFieldDescription>We send a card on the day.</p>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DateInputNextUsageDemo {
+export class DateInputUsageDemo {
   private readonly birthday = signal<Temporal.PlainDate | null>(null);
 }`;
 }

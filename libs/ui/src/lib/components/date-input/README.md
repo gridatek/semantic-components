@@ -1,61 +1,83 @@
 # Date Input
 
-A date, typed — two ways:
+A date typed part by part — day, month, year — in the order of its locale. Each part is an input: a number pad on a phone, digits that move on by themselves, arrows that step. In a form, a `Temporal.PlainDate`; in a [Date Picker](../date-picker/README.md), the picker's day.
 
-- **`ScDateInput`** (`input[scDateInput]`): a text input — the locale's numeric order or ISO, read on Enter or leaving.
-- **`ScSegmentedDateInput`** (`div[scSegmentedDateInput]`): part by part — month, day, year — each a spin button.
-
-Both are a `[formField]` with a `Temporal.PlainDate | null` value. In a [date picker](../date-picker/README.md) either one is the picker's value — a range's end with `part="start"` / `part="end"` — and takes the picker's limits; put `[formField]` on the picker.
+After ui-sdk's Date Input, as the [Time Input](../time-input/README.md).
 
 ## Usage
 
 ```html
 <div scField>
-  <label scLabel>Start date</label>
-  <input scDateInput placeholder="MM/DD/YYYY" [formField]="form.start" />
-</div>
-
-<div scField>
-  <label scLabel>Start date</label>
-  <div scSegmentedDateInput [formField]="form.start"></div>
+  <label scLabel>Birthday</label>
+  <div scDateInput [formField]="form.birthday"></div>
+  <p scFieldDescription>We send a card on the day.</p>
 </div>
 ```
 
-## ScDateInput — `input[scDateInput]`, `#di="scDateInput"`
+It writes its own parts from the locale (`Intl.DateTimeFormat#formatToParts`): their order and the text between them — so there is nothing to put inside it. In a field, its label names it, its description describes each part, its errors are the field's.
 
-Read on Enter and on leaving: the locale's numeric order (`10/14/2026`, `14/10/2026`, `14.10.2026`) or ISO (`2026-10-14`); a two-digit year is 20xx. Text that is not a day that can be picked — not a date, outside the limits, unavailable, a range's end on the wrong side — stays, marked `aria-invalid`, until it is edited; the value as it was. Emptied: `null`. Shows the value in the locale's numeric form. Takes its id and description from `scField`.
+## The value
 
-## ScSegmentedDateInput — `div[scSegmentedDateInput]`, `#di="scSegmentedDateInput"`
+`Temporal.PlainDate | null`, through `[formField]` or `[(value)]`: `null` until every part is filled, and again when one is emptied (the other parts are kept). The day stays within its month (January 31, then February: the 28th). A year of one or two digits, when left, is this century's (`27` → 2027). A whole date pasted — `2026-11-02`, or its numbers in the locale's order — fills every part.
 
-It writes its own parts — from `Intl.DateTimeFormat#formatToParts`, in the locale's order and with its separators — so there is nothing to put inside it. `null` until every part is filled. A day outside the limits is written and marked `aria-invalid`.
+In a date picker it is the picker's day — a range's end with `part="start"` / `part="end"` — and takes the picker's limits; put `[formField]` on the picker.
 
-| Key                     | Does                                                                    |
-| ----------------------- | ----------------------------------------------------------------------- |
-| Digits                  | Fill the part; it moves on once no digit can follow (`4`, `12`, `2026`) |
-| Arrow Up / Down         | Step the part (wrapping); an empty part starts at today                 |
-| Home / End              | The part's lowest / highest (the day's: the month's last)               |
-| Backspace / Delete      | Clear the part — on an empty one, go back                               |
-| Arrow Left / Right, Tab | The part before / after                                                 |
+## Keyboard
 
-Leaving the year with two digits typed makes it this century's (`27` → 2027). The day stays within its month: May 31 becomes April 30.
+| Key                | Does                                                                       |
+| ------------------ | -------------------------------------------------------------------------- |
+| Digits             | Fill the part; on to the next once no digit can follow (`4`, `12`, `2026`) |
+| Arrow Up / Down    | One up or down — the day and month wrap; an empty part starts at today     |
+| Page Up / Down     | The year by 5, the month by 3, the day by 7                                |
+| Home / End         | The part's lowest / highest (the day's: the month's last)                  |
+| Backspace          | A digit back, then the part emptied, then the part before                  |
+| Delete             | Empties the part                                                           |
+| Arrow Left / Right | The part to the left / right, as they show                                 |
+| `/` `.` `-`, Tab   | The next part (Tab: then out)                                              |
 
-`role="group"`, named by the field's label (`aria-labelledby`; an `aria-label` of its own wins); each part is a `spinbutton` named in the locale's words (`Intl.DisplayNames`: "month", "day", "year"), with `aria-valuenow` / `-min` / `-max` and `aria-valuetext` (the month's name).
+Digits and separators are read from the input events (`beforeinput`), not the keys: a phone's keyboard sends no key names. Arabic and Persian digits are read too.
 
-## Inputs (both)
+## API
 
-| Input                              | Type                                    | Default                  |
-| ---------------------------------- | --------------------------------------- | ------------------------ |
-| `value`                            | `Temporal.PlainDate \| null` (model)    | `null`                   |
-| `minDate` / `maxDate`              | `Temporal.PlainDate \| undefined`       | — (in a picker: its own) |
-| `unavailable`                      | `(date: Temporal.PlainDate) => boolean` | `() => false`            |
-| `part`                             | `'start' \| 'end' \| undefined`         | — (in a picker's range)  |
-| `disabled` / `invalid` / `touched` | `boolean`                               | `false`                  |
-| `id` / `class`                     | `string`                                | the field's id           |
+### ScDateInput — `div[scDateInput]`, `#d="scDateInput"`
+
+| Input                                                        | Type                                    | Default                  |
+| ------------------------------------------------------------ | --------------------------------------- | ------------------------ |
+| `value`                                                      | `Temporal.PlainDate \| null` (model)    | `null`                   |
+| `minDate` / `maxDate`                                        | `Temporal.PlainDate`: outside, invalid  | — (in a picker: its own) |
+| `unavailable`                                                | `(date: Temporal.PlainDate) => boolean` | `() => false`            |
+| `part`                                                       | `'start' \| 'end'`                      | — (in a picker's range)  |
+| `disabled` / `readonly` / `required` / `invalid` / `touched` | `boolean` (bound by `[formField]`)      | `false`                  |
+| `id` / `aria-labelledby` / `class`                           | `string`                                | the field's              |
 
 | Output  | When                                                            |
 | ------- | --------------------------------------------------------------- |
 | `touch` | Left (Signal Forms marks it touched; in a picker, the picker's) |
 
-| Member   | Description                                         |
-| -------- | --------------------------------------------------- |
-| `date()` | Its day: its value, or the picker's (a range's end) |
+| Member                 | Description                                                 |
+| ---------------------- | ----------------------------------------------------------- |
+| `clear()`              | Empties every part                                          |
+| `focus(options, part)` | Focus on a part — the first by default                      |
+| `segments()`           | The parts in the locale's order, with the text between them |
+| `date()`               | Its day: its value, or the picker's (a range's end)         |
+| `outOfRange()`         | Not a day that can be picked (marked invalid)               |
+
+`data-empty`, `data-invalid`, `data-disabled`, `data-readonly` on the group; `data-type` (`day`, `month`, `year`) and `data-empty` on each part.
+
+### ScDateInputSegment — `input[scDateInputSegment]`
+
+A part — day, month or year: an input (`role="spinbutton"`) named, ranged and described from its date input, which keeps the state and reads what is typed. The date input's own part, not one to place: `div[scDateInput]` writes one per part, because the parts — their order, the text between them — come from the locale. So it can't be styled from your markup either: its look is the style's (`segmentedInput.segment`).
+
+## Look
+
+The style's `segmentedInput` key, as the Time Input's: `root`, the style's input drawn round the parts, and `segment`, the corners of a focused part's highlight. Each part is as wide as what it shows; an empty one shows `––` (the year `––––`).
+
+## Accessibility
+
+- `role="group"`, named by the field's label; each part an input with `role="spinbutton"`, named in the locale's words (`Intl.DisplayNames`: "day", "month", "year"), with `aria-valuenow` / `-min` / `-max` / `-valuetext` (the month by its name); the text between the parts is hidden.
+- Out of range, unavailable, or invalid once left: `aria-invalid` on every part.
+- Its direction is its locale's — right to left in Arabic, left to right in English, whatever the page; the arrows follow the parts as they show.
+
+## Left out
+
+Native form submission (`name`, `form`: Signal Forms only); an "Empty" announcement and placeholders such as "mm/dd/yyyy" (words to translate — the library writes no text); a time in the same field (`scDateTimeInput`, next).

@@ -55,19 +55,9 @@ import {
             #anchor="cdkOverlayOrigin"
             aria-labelledby="stay-label"
           >
-            <input
-              scDateInput
-              part="start"
-              aria-label="Check-in"
-              placeholder="MM/DD/YYYY"
-            />
+            <div scDateInput part="start" aria-label="Check-in"></div>
             <span aria-hidden="true" class="text-muted-foreground">–</span>
-            <input
-              scDateInput
-              part="end"
-              aria-label="Check-out"
-              placeholder="MM/DD/YYYY"
-            />
+            <div scDateInput part="end" aria-label="Check-out"></div>
             <div scInputGroupAddon side="inline-end">
               <button scDatePickerTrigger #trigger="scDatePickerTrigger">
                 <svg siCalendarIcon></svg>
