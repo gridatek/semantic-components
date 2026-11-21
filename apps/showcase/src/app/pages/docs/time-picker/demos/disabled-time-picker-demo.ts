@@ -9,15 +9,15 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScTimeInput,
-  ScTimePickerNext,
-  ScTimePickerNextColumns,
-  ScTimePickerNextTrigger,
+  ScTimePicker,
+  ScTimePickerColumns,
+  ScTimePickerTrigger,
 } from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
 /** Disabled with its time input: the button too. */
 @Component({
-  selector: 'app-disabled-time-picker-next-demo',
+  selector: 'app-disabled-time-picker-demo',
   imports: [
     CdkOverlayOrigin,
     ScField,
@@ -28,20 +28,20 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     ScPopoverPortal,
     ScPopoverProvider,
     ScTimeInput,
-    ScTimePickerNext,
-    ScTimePickerNextColumns,
-    ScTimePickerNextTrigger,
+    ScTimePicker,
+    ScTimePickerColumns,
+    ScTimePickerTrigger,
     SiClockIcon,
   ],
   template: `
     <div scField class="w-44">
       <label scLabel>Start time</label>
-      <div scTimePickerNext>
+      <div scTimePicker>
         <div scPopoverProvider [origin]="anchor" alignment="start">
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div scTimeInput disabled [(value)]="time"></div>
             <div scInputGroupAddon side="inline-end">
-              <button scTimePickerNextTrigger>
+              <button scTimePickerTrigger>
                 <svg siClockIcon></svg>
                 <span class="sr-only">Choose a time</span>
               </button>
@@ -49,7 +49,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
           </div>
           <ng-template scPopoverPortal>
             <div scPopover class="w-auto p-0" aria-label="Choose a time">
-              <div scTimePickerNextColumns></div>
+              <div scTimePickerColumns></div>
             </div>
           </ng-template>
         </div>
@@ -59,7 +59,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DisabledTimePickerNextDemo {
+export class DisabledTimePickerDemo {
   private readonly time = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('09:30'),
   );

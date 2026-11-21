@@ -13,15 +13,25 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { ScPopoverProvider } from '../popover';
-import { ScTimeInput } from '../time-input';
+import { ScTimeInput, type ScTimeInputPart } from '../time-input';
 import { ScTimePickerTrigger } from './time-picker-trigger';
 
+/** A value in a column: an hour, a minute, a second — or AM / PM. */
+export type ScTimePickerValue = number | 'am' | 'pm';
+
+type DurationFormat = new (
+  locale: string,
+  options: { style: 'short' },
+) => { format(duration: Record<string, number>): string };
+
 /**
- * A time — typed in its `scTimeInput`, or picked from a list of times
- * (`scTimePickerList`, every `interval` minutes, within the input's
- * `minTime` / `maxTime`) in a popover. The value, the locale and the limits
- * are the input's: put `[formField]` on it. A pick closes the list, focus back
- * on the trigger.
+ * A time — typed in its `scTimeInput`, or picked in columns (hour | minute
+ * (| second) | AM/PM, `scTimePickerColumns`) in a popover. The value, the
+ * locale, the clock and the limits are the time input's: put `[formField]`
+ * on it. A pick sets its part at once, as typing does; Enter, Escape or a
+ * click outside closes, focus back on the trigger. For a range's end,
+ * `startTime`: earlier times can't be picked, and the duration
+ * (`scTimePickerDuration`) counts from it.
  */
 @Directive({
   selector: 'div[scTimePicker]',
@@ -32,11 +42,17 @@ import { ScTimePickerTrigger } from './time-picker-trigger';
   },
 })
 export class ScTimePicker {
-  readonly classInput = input<string>('', { alias: 'class' });
-  /** Minutes between the times in the list. */
-  readonly interval = input(30);
+  private readonly locale = inject(LOCALE_ID);
 
-  /** The time input: the value, the locale, the limits. */
+  readonly classInput = input<string>('', { alias: 'class' });
+  /** Minutes between the minute column's values. */
+  readonly minuteStep = input(1);
+  /** Seconds between the second column's values. */
+  readonly secondStep = input(1);
+  /** A range's start: earlier times can't be picked; the duration counts from it. */
+  readonly startTime = input<Temporal.PlainTime | undefined>(undefined);
+
+  /** The time input: the value, the locale, the clock, the limits. */
   readonly timeInput = contentChild.required(ScTimeInput, {
     descendants: true,
   });
@@ -48,60 +64,66 @@ export class ScTimePicker {
     { descendants: true, read: ElementRef<HTMLElement> },
   );
 
-  /** The times in the list: every `interval` minutes, within the limits. */
-  readonly times = computed(() => {
-    const input = this.timeInput();
-    const minutes = Math.max(1, this.interval());
-    const last = input.maxTime() ?? Temporal.PlainTime.from('23:59:59');
-    const times: Temporal.PlainTime[] = [];
-    let time = input.minTime() ?? Temporal.PlainTime.from('00:00');
-    while (Temporal.PlainTime.compare(time, last) <= 0) {
-      times.push(time);
-      const next = time.add({ minutes });
-      if (Temporal.PlainTime.compare(next, time) <= 0) break; // past midnight
-      time = next;
-    }
-    return times;
+  /** The columns' values, by part. */
+  readonly values = computed<Record<ScTimeInputPart, ScTimePickerValue[]>>(
+    () => {
+      const every = (step: number) =>
+        Array.from(
+          { length: Math.ceil(60 / Math.max(1, step)) },
+          (_, i) => i * Math.max(1, step),
+        );
+      return {
+        hour: this.timeInput().twelveHours()
+          ? [12, ...Array.from({ length: 11 }, (_, i) => i + 1)]
+          : Array.from({ length: 24 }, (_, i) => i),
+        minute: every(this.minuteStep()),
+        second: every(this.secondStep()),
+        dayPeriod: ['am', 'pm'],
+      };
+    },
+  );
+
+  /** The earliest time that can be picked: the later of `minTime` and `startTime`. */
+  private readonly earliest = computed(() => {
+    const min = this.timeInput().minTime();
+    const start = this.startTime();
+    if (!min || !start) return min ?? start;
+    return Temporal.PlainTime.compare(min, start) > 0 ? min : start;
   });
 
-  private readonly locale = inject(LOCALE_ID);
-
-  private readonly formatter = computed(() => {
-    const input = this.timeInput();
-    return new Intl.DateTimeFormat(this.locale, {
-      hour: 'numeric',
-      minute: '2-digit',
-      hourCycle: input.twelveHours() ? 'h12' : 'h23',
-    });
-  });
-
-  /** A time as the input's locale writes it. */
-  label(time: Temporal.PlainTime): string {
-    return this.formatter().format(time);
-  }
-
-  /** Where the list opens: the value, or the time before it — or the next time from now. */
-  readonly startIndex = computed(() => {
-    const times = this.times();
+  /** How long from `startTime` to the value — in the locale's words; empty without both. */
+  readonly duration = computed(() => {
+    const start = this.startTime();
     const value = this.timeInput().value();
-    const at = (time: Temporal.PlainTime) =>
-      times.findIndex((t) => Temporal.PlainTime.compare(t, time) > 0);
-    if (value) {
-      const after = at(value);
-      return Math.max(0, (after < 0 ? times.length : after) - 1);
-    }
-    const now = Temporal.Now.plainTimeISO();
-    const next = times.findIndex(
-      (t) => Temporal.PlainTime.compare(t, now) >= 0,
-    );
-    return Math.max(0, next);
+    if (!start || !value || Temporal.PlainTime.compare(value, start) <= 0)
+      return '';
+    const { hours, minutes, seconds } = start.until(value);
+    const Format = (Intl as unknown as { DurationFormat?: DurationFormat })
+      .DurationFormat;
+    const parts = {
+      ...(hours ? { hours } : {}),
+      ...(minutes ? { minutes } : {}),
+      ...(seconds ? { seconds } : {}),
+    };
+    if (Format)
+      return new Format(this.locale, { style: 'short' }).format(parts);
+    // No Intl.DurationFormat: each unit by itself.
+    return Object.entries(parts)
+      .map(([unit, amount]) =>
+        new Intl.NumberFormat(this.locale, {
+          style: 'unit',
+          unit: unit.slice(0, -1),
+          unitDisplay: 'short',
+        }).format(amount),
+      )
+      .join(' ');
   });
 
   private readonly class = computed(() => cn('block', this.classInput()));
 
   constructor() {
-    // The list closed: touched — and focus back on the trigger if it was in
-    // the panel, which leaves after its animation (Safari does not focus a
+    // Closed: touched — and focus back on the trigger if it was in the
+    // panel, which leaves after its animation (Safari does not focus a
     // clicked button: there is nothing for the panel to restore).
     const document = inject(DOCUMENT);
     let wasOpen = false;
@@ -123,9 +145,74 @@ export class ScTimePicker {
     });
   }
 
-  /** A time picked from the list: the value — and closed. */
-  pick(time: Temporal.PlainTime): void {
-    this.timeInput().value.set(time);
+  /** A part's value picked in its column: set, as typed. */
+  pick(type: ScTimeInputPart, value: ScTimePickerValue): void {
+    this.timeInput().ɵset(type, value);
+  }
+
+  /** The current time, on the steps — and closed. */
+  now(): void {
+    const now = Temporal.Now.plainTimeISO();
+    const granularity = this.timeInput().granularity();
+    const minuteStep = Math.max(1, this.minuteStep());
+    const secondStep = Math.max(1, this.secondStep());
+    this.timeInput().value.set(
+      Temporal.PlainTime.from({
+        hour: now.hour,
+        minute:
+          granularity === 'hour' ? 0 : now.minute - (now.minute % minuteStep),
+        second:
+          granularity === 'second' ? now.second - (now.second % secondStep) : 0,
+      }),
+    );
+    this.close();
+  }
+
+  /** Closes the popover. */
+  close(): void {
     this.popover()?.open.set(false);
+  }
+
+  /**
+   * A value can be picked: some time with it — and the other parts as they
+   * are — falls within `minTime` (or `startTime`) and `maxTime`.
+   */
+  enabled(type: ScTimeInputPart, value: ScTimePickerValue): boolean {
+    const earliest = this.earliest();
+    const latest = this.timeInput().maxTime();
+    if (!earliest && !latest) return true;
+    const input = this.timeInput();
+    const parts = input.parts();
+    const twelve = input.twelveHours();
+    const periods: ('am' | 'pm' | undefined)[] = !twelve
+      ? [undefined]
+      : type === 'dayPeriod'
+        ? [value as 'am' | 'pm']
+        : parts.dayPeriod
+          ? [parts.dayPeriod]
+          : ['am', 'pm'];
+    const to24 = (hour: number, period: 'am' | 'pm' | undefined) =>
+      twelve ? (hour % 12) + (period === 'pm' ? 12 : 0) : hour;
+    const within = (from: Temporal.PlainTime, to: Temporal.PlainTime) =>
+      (!earliest || Temporal.PlainTime.compare(to, earliest) >= 0) &&
+      (!latest || Temporal.PlainTime.compare(from, latest) <= 0);
+    const time = (hour: number, minute = 0, second = 0) =>
+      Temporal.PlainTime.from({ hour, minute, second });
+    return periods.some((period) => {
+      if (type === 'dayPeriod' && parts.hour === undefined)
+        return period === 'am'
+          ? within(time(0), time(11, 59, 59))
+          : within(time(12), time(23, 59, 59));
+      const hour = type === 'hour' ? (value as number) : (parts.hour as number);
+      if (hour === undefined) return true;
+      const h = to24(hour, period);
+      if (type === 'hour' || type === 'dayPeriod')
+        return within(time(h), time(h, 59, 59));
+      if (type === 'minute')
+        return within(time(h, value as number), time(h, value as number, 59));
+      if (parts.minute === undefined) return true;
+      const exact = time(h, parts.minute, value as number);
+      return within(exact, exact);
+    });
   }
 }

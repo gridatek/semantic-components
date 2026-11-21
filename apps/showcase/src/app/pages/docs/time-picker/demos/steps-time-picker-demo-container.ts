@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { DisabledTimePickerNextDemo } from './disabled-time-picker-next-demo';
+import { StepsTimePickerDemo } from './steps-time-picker-demo';
 
 @Component({
-  selector: 'app-disabled-time-picker-next-demo-container',
-  imports: [DemoContainer, DisabledTimePickerNextDemo],
+  selector: 'app-steps-time-picker-demo-container',
+  imports: [DemoContainer, StepsTimePickerDemo],
   template: `
     <app-demo-container
-      title="Disabled"
+      title="Steps"
       [code]="code"
-      demoUrl="/demos/time-picker-next/disabled-time-picker-next-demo"
+      demoUrl="/demos/time-picker/steps-time-picker-demo"
     >
-      <app-disabled-time-picker-next-demo />
+      <app-steps-time-picker-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DisabledTimePickerNextDemoContainer {
+export class StepsTimePickerDemoContainer {
   private readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
@@ -29,15 +29,15 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScTimeInput,
-  ScTimePickerNext,
-  ScTimePickerNextColumns,
-  ScTimePickerNextTrigger,
+  ScTimePicker,
+  ScTimePickerColumns,
+  ScTimePickerTrigger,
 } from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
-/** Disabled with its time input: the button too. */
+/** minuteStep: the minute column every 15 minutes. Typing still takes any minute. */
 @Component({
-  selector: 'app-disabled-time-picker-next-demo',
+  selector: 'app-steps-time-picker-demo',
   imports: [
     CdkOverlayOrigin,
     ScField,
@@ -48,20 +48,20 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     ScPopoverPortal,
     ScPopoverProvider,
     ScTimeInput,
-    ScTimePickerNext,
-    ScTimePickerNextColumns,
-    ScTimePickerNextTrigger,
+    ScTimePicker,
+    ScTimePickerColumns,
+    ScTimePickerTrigger,
     SiClockIcon,
   ],
   template: \`
     <div scField class="w-44">
-      <label scLabel>Start time</label>
-      <div scTimePickerNext>
+      <label scLabel>Call at</label>
+      <div scTimePicker [minuteStep]="15">
         <div scPopoverProvider [origin]="anchor" alignment="start">
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
-            <div scTimeInput disabled [(value)]="time"></div>
+            <div scTimeInput [(value)]="time"></div>
             <div scInputGroupAddon side="inline-end">
-              <button scTimePickerNextTrigger>
+              <button scTimePickerTrigger>
                 <svg siClockIcon></svg>
                 <span class="sr-only">Choose a time</span>
               </button>
@@ -69,19 +69,22 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
           </div>
           <ng-template scPopoverPortal>
             <div scPopover class="w-auto p-0" aria-label="Choose a time">
-              <div scTimePickerNextColumns></div>
+              <div scTimePickerColumns></div>
             </div>
           </ng-template>
         </div>
       </div>
     </div>
+    <p class="text-muted-foreground text-sm" data-testid="picked">
+      {{ time()?.toString() ?? 'No time.' }}
+    </p>
   \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DisabledTimePickerNextDemo {
+export class StepsTimePickerDemo {
   private readonly time = signal<Temporal.PlainTime | null>(
-    Temporal.PlainTime.from('09:30'),
+    Temporal.PlainTime.from('10:15'),
   );
 }`;
 }

@@ -10,10 +10,7 @@ import {
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import type { ScTimeInputPart } from '../time-input';
-import {
-  ScTimePickerNext,
-  type ScTimePickerNextValue,
-} from './time-picker-next';
+import { ScTimePicker, type ScTimePickerValue } from './time-picker';
 
 /**
  * One column of a time picker — its hours, minutes, seconds or AM/PM: a
@@ -21,14 +18,14 @@ import {
  * The arrows move through it and pick (the time input's part, at once);
  * Left / Right go to the next column, as they show; Enter closes.
  *
- * The time picker's own part, not one to place: `div[scTimePickerNextColumns]`
+ * The time picker's own part, not one to place: `div[scTimePickerColumns]`
  * writes one per part, because the parts — their order, AM/PM or not — come
  * from the locale. So it can't be styled from the consumer's markup either:
  * the look of an option is the style's (`timePicker.option`).
  */
 @Component({
-  selector: 'div[scTimePickerNextColumn]',
-  exportAs: 'scTimePickerNextColumn',
+  selector: 'div[scTimePickerColumn]',
+  exportAs: 'scTimePickerColumn',
   template: `
     @for (value of values(); track value) {
       <div
@@ -54,8 +51,8 @@ import {
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScTimePickerNextColumn {
-  private readonly picker = inject(ScTimePickerNext);
+export class ScTimePickerColumn {
+  private readonly picker = inject(ScTimePicker);
   private readonly styles = injectStyle().timePicker;
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -63,7 +60,7 @@ export class ScTimePickerNextColumn {
   readonly classInput = input<string>('', { alias: 'class' });
   /** The part it picks. */
   readonly type = input.required<ScTimeInputPart>({
-    alias: 'scTimePickerNextColumn',
+    alias: 'scTimePickerColumn',
   });
 
   private readonly values = computed(() => this.picker.values()[this.type()]);
@@ -120,15 +117,15 @@ export class ScTimePickerNextColumn {
       : this.options()[this.values().indexOf(active)];
   }
 
-  private label(value: ScTimePickerNextValue): string {
+  private label(value: ScTimePickerValue): string {
     return this.picker.timeInput().ɵpartText(this.type(), value);
   }
 
-  private enabled(value: ScTimePickerNextValue): boolean {
+  private enabled(value: ScTimePickerValue): boolean {
     return this.picker.enabled(this.type(), value);
   }
 
-  private choose(value: ScTimePickerNextValue): void {
+  private choose(value: ScTimePickerValue): void {
     if (!this.enabled(value)) return;
     this.active.set(value);
     this.picker.pick(this.type(), value);
@@ -138,7 +135,7 @@ export class ScTimePickerNextColumn {
     const values = this.values().filter((value) => this.enabled(value));
     const active = this.active();
     const at = active === undefined ? -1 : values.indexOf(active);
-    let next: ScTimePickerNextValue | undefined;
+    let next: ScTimePickerValue | undefined;
     switch (event.key) {
       case 'ArrowDown':
         next = values[Math.min(values.length - 1, at + 1)];

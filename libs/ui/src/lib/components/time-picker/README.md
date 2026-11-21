@@ -1,35 +1,38 @@
 # Time Picker
 
-A time — typed in a [time input](../time-input/README.md), or picked from a list of times in a popover: every `interval` minutes, within the input's `minTime` / `maxTime`, written in its locale and hour cycle.
+A time typed in a [Time Input](../time-input/README.md), or picked in columns — hour, minute, second, AM/PM — in a popover beside it: on the input's clock, locale and limits. For a range's end, how long it makes.
 
 ## Architecture
 
 ```
-div[scTimePicker] (interval)
-│  times() · label(time) · pick(time)
+div[scTimePicker] (minuteStep, secondStep, startTime)
+│  values() · enabled(part, value) · pick(part, value) · now() · close() · duration()
 └── div[scPopoverProvider]
     ├── div[scInputGroup]
-    │   ├── div[scTimeInput] ([formField], hourCycle, minTime, maxTime…)
+    │   ├── div[scTimeInput] ([formField], hourCycle, granularity, minTime, maxTime…)
     │   └── div[scInputGroupAddon]
     │       └── button[scTimePickerTrigger] — your icon and its name
     └── ng-template[scPopoverPortal]
-        └── div[scPopover]
-            └── div[scTimePickerList] — the times (a listbox): name it
+        └── div[scPopover] — name it
+            ├── div[scTimePickerColumns]
+            │   └── div[scTimePickerColumn] — one per part, written from the locale
+            ├── [scTimePickerDuration] — with startTime
+            └── button[scTimePickerNow] — your text
 ```
 
-The value and the limits are the time input's (the locale is `LOCALE_ID`): put `[formField]` on it; the picker reads them from there.
+The value, the locale, the clock and the limits are the time input's: put `[formField]` on it; the picker reads them from there.
 
 ## Usage
 
 ```html
 <div scField>
-  <label scLabel>Meeting</label>
+  <label scLabel>Meeting time</label>
   <div scTimePicker>
     <div scPopoverProvider [origin]="anchor" alignment="start">
       <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
-        <div scTimeInput [formField]="form.meeting"></div>
+        <div scTimeInput [formField]="form.time"></div>
         <div scInputGroupAddon side="inline-end">
-          <button scTimePickerTrigger #trigger="scTimePickerTrigger">
+          <button scTimePickerTrigger>
             <svg siClockIcon></svg>
             <span class="sr-only">Choose a time</span>
           </button>
@@ -37,7 +40,7 @@ The value and the limits are the time input's (the locale is `LOCALE_ID`): put `
       </div>
       <ng-template scPopoverPortal>
         <div scPopover class="w-auto p-0" aria-label="Choose a time">
-          <div scTimePickerList aria-label="Times"></div>
+          <div scTimePickerColumns></div>
         </div>
       </ng-template>
     </div>
@@ -45,32 +48,62 @@ The value and the limits are the time input's (the locale is `LOCALE_ID`): put `
 </div>
 ```
 
+## The columns
+
+One per part of the time input, in the locale's order (AM/PM first in Korean), the clock's left to right in any page. A pick sets that part at once, through the time input — as typing does: an hour alone leaves the value `null` until the minute is there. Outside `minTime` / `maxTime`, or before `startTime`, values are disabled: an hour with no minute left in range, the minutes of the hour picked.
+
+The columns are written by `scTimePickerColumns`, from the locale — not markup of yours, so not styled from it either: an option's look is the style's (`timePicker.option`, as its select item).
+
+## Keyboard
+
+| Key                | Does                                           |
+| ------------------ | ---------------------------------------------- |
+| Arrow Up / Down    | The value before / after in the column: picked |
+| Home / End         | The column's first / last value                |
+| Arrow Left / Right | The column to the left / right, as they show   |
+| Space              | Picks the focused value                        |
+| Enter              | Picks it and closes                            |
+| Escape             | Closes, focus back on the button               |
+
+It opens on the value — each column scrolled to it — focus on the hour.
+
 ## API
 
 ### ScTimePicker — `div[scTimePicker]`, `#tp="scTimePicker"`
 
-| Input      | Type     | Default |
-| ---------- | -------- | ------- |
-| `interval` | `number` | `30`    |
-| `class`    | `string` | `''`    |
+| Input        | Type                 | Default |
+| ------------ | -------------------- | ------- |
+| `minuteStep` | `number`             | `1`     |
+| `secondStep` | `number`             | `1`     |
+| `startTime`  | `Temporal.PlainTime` | —       |
+| `class`      | `string`             | `''`    |
 
-| Member         | Description                                                               |
-| -------------- | ------------------------------------------------------------------------- |
-| `timeInput()`  | Its time input                                                            |
-| `times()`      | The times in the list: from `minTime` (or midnight) to `maxTime`          |
-| `label(time)`  | A time as the input's locale writes it                                    |
-| `startIndex()` | Where the list opens: the value, the time before it, or the next from now |
-| `pick(time)`   | The value — and closed                                                    |
+| Member                 | Description                                                   |
+| ---------------------- | ------------------------------------------------------------- |
+| `timeInput()`          | Its time input                                                |
+| `values()`             | Each column's values                                          |
+| `enabled(part, value)` | Some time with it falls within the limits                     |
+| `pick(part, value)`    | Sets the time input's part                                    |
+| `now()`                | The current time, on the steps — and closed                   |
+| `close()`              | Closes the popover                                            |
+| `duration()`           | From `startTime` to the value, in the locale's words; or `''` |
 
 ### ScTimePickerTrigger — `button[scTimePickerTrigger]`
 
-An icon button that opens and closes the list: ghost in an input group (`buttonSize`, the group's corners), outline alone (`variant`). `aria-haspopup="dialog"`, `aria-expanded`; disabled with the input.
+Opens and closes the columns: ghost in an input group (`buttonSize`), outline alone (`variant`). `aria-haspopup="dialog"`, `aria-expanded`; disabled with the input. Write its icon and name.
 
-### ScTimePickerList — `div[scTimePickerList]`
+### ScTimePickerColumns, ScTimePickerColumn
 
-The times, as a listbox (Angular Aria): the value selected. It opens focused on the value — or the time before it, or the next time from now — scrolled into view. Arrows, Home / End and typing move; Enter, Space or a click picks.
+The columns, and one column — a listbox named in the locale's words (`Intl.DisplayNames`), its options `aria-selected` / `aria-disabled`. Written by the picker, not placed by you.
 
-## Accessibility
+### ScTimePickerNow — `button[scTimePickerNow]`
 
-- The list closes on a pick, Escape or a click outside; focus goes back to the trigger, and the input is marked touched.
-- Name the popover, the list and the icon-only trigger (`sr-only`).
+The style's button (`variant` ghost, `size` sm): `now()`. Write its text.
+
+### ScTimePickerDuration — `[scTimePickerDuration]`
+
+`duration()` as its text (`Intl.DurationFormat`, short: "1 hr, 30 min"), `aria-live="polite"`.
+
+## Left out
+
+The list of times (the columns replace it); a clock face in the popover (Time Clock, on its own); a range as one value (two pickers, the end's `startTime`).

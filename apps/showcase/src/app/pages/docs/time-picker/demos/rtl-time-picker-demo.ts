@@ -1,3 +1,4 @@
+import { Dir } from '@angular/cdk/bidi';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
@@ -9,16 +10,17 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScTimeInput,
-  ScTimePickerNext,
-  ScTimePickerNextColumns,
-  ScTimePickerNextTrigger,
+  ScTimePicker,
+  ScTimePickerColumns,
+  ScTimePickerTrigger,
 } from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
-/** LOCALE_ID provided as 'ko-KR': AM/PM's column first, the columns named in Korean. */
+/** In a right-to-left page: the clock's columns stay left to right, AM/PM where the locale puts it; the arrows follow the columns as they show. */
 @Component({
-  selector: 'app-locale-time-picker-next-demo',
+  selector: 'app-rtl-time-picker-demo',
   imports: [
+    Dir,
     CdkOverlayOrigin,
     ScField,
     ScInputGroup,
@@ -28,44 +30,41 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     ScPopoverPortal,
     ScPopoverProvider,
     ScTimeInput,
-    ScTimePickerNext,
-    ScTimePickerNextColumns,
-    ScTimePickerNextTrigger,
+    ScTimePicker,
+    ScTimePickerColumns,
+    ScTimePickerTrigger,
     SiClockIcon,
   ],
   template: `
-    <div lang="ko">
+    <div dir="rtl" lang="ar">
       <div scField class="w-44">
-        <label scLabel>회의 시간</label>
-        <div scTimePickerNext>
+        <label scLabel>وقت الاجتماع</label>
+        <div scTimePicker>
           <div scPopoverProvider [origin]="anchor" alignment="start">
             <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
               <div scTimeInput [(value)]="time"></div>
               <div scInputGroupAddon side="inline-end">
-                <button scTimePickerNextTrigger>
+                <button scTimePickerTrigger>
                   <svg siClockIcon></svg>
-                  <span class="sr-only">시간 선택</span>
+                  <span class="sr-only">اختر وقتًا</span>
                 </button>
               </div>
             </div>
             <ng-template scPopoverPortal>
-              <div scPopover class="w-auto p-0" aria-label="시간 선택">
-                <div scTimePickerNextColumns></div>
+              <div scPopover class="w-auto p-0" aria-label="اختر وقتًا">
+                <div scTimePickerColumns></div>
               </div>
             </ng-template>
           </div>
         </div>
       </div>
     </div>
-    <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ time()?.toString() ?? 'No time.' }}
-    </p>
   `,
-  providers: [{ provide: LOCALE_ID, useValue: 'ko-KR' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class LocaleTimePickerNextDemo {
+export class RtlTimePickerDemo {
   private readonly time = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('14:30'),
   );

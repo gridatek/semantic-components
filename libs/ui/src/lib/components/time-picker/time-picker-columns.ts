@@ -9,31 +9,31 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import type { ScTimeInputPart } from '../time-input';
-import { ScTimePickerNext } from './time-picker-next';
-import { ScTimePickerNextColumn } from './time-picker-next-column';
+import { ScTimePicker } from './time-picker';
+import { ScTimePickerColumn } from './time-picker-column';
 
 /**
  * The columns, in the popover: hour | minute (| second) | AM/PM, in the
  * locale's order — the clock's columns left to right in any page, as the time
  * input's parts. It opens on the value, focus on the hour.
  *
- * It writes its columns itself (`scTimePickerNextColumn`): which there are and
+ * It writes its columns itself (`scTimePickerColumn`): which there are and
  * in what order comes from the locale, which the consumer can't know ahead.
  */
 @Component({
-  selector: 'div[scTimePickerNextColumns]',
-  imports: [ScTimePickerNextColumn],
+  selector: 'div[scTimePickerColumns]',
+  imports: [ScTimePickerColumn],
   template: `
     @for (group of groups(); track $index) {
       @if (group.clock) {
         <div dir="ltr" class="flex gap-px">
           @for (type of group.types; track type) {
-            <div [scTimePickerNextColumn]="type"></div>
+            <div [scTimePickerColumn]="type"></div>
           }
         </div>
       } @else {
         @for (type of group.types; track type) {
-          <div [scTimePickerNextColumn]="type"></div>
+          <div [scTimePickerColumn]="type"></div>
         }
       }
     }
@@ -44,12 +44,12 @@ import { ScTimePickerNextColumn } from './time-picker-next-column';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScTimePickerNextColumns {
-  private readonly picker = inject(ScTimePickerNext);
+export class ScTimePickerColumns {
+  private readonly picker = inject(ScTimePicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly columns = viewChildren(ScTimePickerNextColumn);
+  private readonly columns = viewChildren(ScTimePickerColumn);
 
   /** The columns in the locale's order: the clock's together, AM/PM before or after. */
   private readonly groups = computed(() => {

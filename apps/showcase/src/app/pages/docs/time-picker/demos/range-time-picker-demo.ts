@@ -9,16 +9,16 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScTimeInput,
-  ScTimePickerNext,
-  ScTimePickerNextColumns,
-  ScTimePickerNextDuration,
-  ScTimePickerNextTrigger,
+  ScTimePicker,
+  ScTimePickerColumns,
+  ScTimePickerDuration,
+  ScTimePickerTrigger,
 } from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
 /** A start and an end: the end's startTime — earlier times can't be picked, and its duration counts from it. */
 @Component({
-  selector: 'app-range-time-picker-next-demo',
+  selector: 'app-range-time-picker-demo',
   imports: [
     CdkOverlayOrigin,
     ScField,
@@ -29,22 +29,22 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     ScPopoverPortal,
     ScPopoverProvider,
     ScTimeInput,
-    ScTimePickerNext,
-    ScTimePickerNextColumns,
-    ScTimePickerNextDuration,
-    ScTimePickerNextTrigger,
+    ScTimePicker,
+    ScTimePickerColumns,
+    ScTimePickerDuration,
+    ScTimePickerTrigger,
     SiClockIcon,
   ],
   template: `
     <div class="flex flex-wrap justify-center gap-4">
       <div scField class="w-44">
         <label scLabel>Start</label>
-        <div scTimePickerNext>
+        <div scTimePicker>
           <div scPopoverProvider [origin]="startAnchor" alignment="start">
             <div scInputGroup cdkOverlayOrigin #startAnchor="cdkOverlayOrigin">
               <div scTimeInput [(value)]="start"></div>
               <div scInputGroupAddon side="inline-end">
-                <button scTimePickerNextTrigger>
+                <button scTimePickerTrigger>
                   <svg siClockIcon></svg>
                   <span class="sr-only">Choose a start time</span>
                 </button>
@@ -56,7 +56,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
                 class="w-auto p-0"
                 aria-label="Choose a start time"
               >
-                <div scTimePickerNextColumns></div>
+                <div scTimePickerColumns></div>
               </div>
             </ng-template>
           </div>
@@ -64,12 +64,12 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scField class="w-44">
         <label scLabel>End</label>
-        <div scTimePickerNext [startTime]="start() ?? undefined">
+        <div scTimePicker [startTime]="start() ?? undefined">
           <div scPopoverProvider [origin]="endAnchor" alignment="start">
             <div scInputGroup cdkOverlayOrigin #endAnchor="cdkOverlayOrigin">
               <div scTimeInput [(value)]="end"></div>
               <div scInputGroupAddon side="inline-end">
-                <button scTimePickerNextTrigger>
+                <button scTimePickerTrigger>
                   <svg siClockIcon></svg>
                   <span class="sr-only">Choose an end time</span>
                 </button>
@@ -77,9 +77,9 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
             </div>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto p-0" aria-label="Choose an end time">
-                <div scTimePickerNextColumns></div>
+                <div scTimePickerColumns></div>
                 <div class="border-t px-3 py-2">
-                  <span scTimePickerNextDuration></span>
+                  <span scTimePickerDuration></span>
                 </div>
               </div>
             </ng-template>
@@ -91,7 +91,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RangeTimePickerNextDemo {
+export class RangeTimePickerDemo {
   private readonly start = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('09:00'),
   );

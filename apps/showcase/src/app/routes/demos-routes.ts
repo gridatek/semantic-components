@@ -5930,95 +5930,48 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/time-picker-next',
-    children: [
-      {
-        path: 'time-picker-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/time-picker-next-usage-demo').then(
-            (m) => m.TimePickerNextUsageDemo,
-          ),
-      },
-      {
-        path: 'hour-cycle-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/hour-cycle-time-picker-next-demo').then(
-            (m) => m.HourCycleTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'steps-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/steps-time-picker-next-demo').then(
-            (m) => m.StepsTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'limits-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/limits-time-picker-next-demo').then(
-            (m) => m.LimitsTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'range-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/range-time-picker-next-demo').then(
-            (m) => m.RangeTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'now-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/now-time-picker-next-demo').then(
-            (m) => m.NowTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'locale-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/locale-time-picker-next-demo').then(
-            (m) => m.LocaleTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'disabled-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/disabled-time-picker-next-demo').then(
-            (m) => m.DisabledTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'form-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/form-time-picker-next-demo').then(
-            (m) => m.FormTimePickerNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-time-picker-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-picker-next/demos/rtl-time-picker-next-demo').then(
-            (m) => m.RtlTimePickerNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/time-picker',
     children: [
       {
-        path: 'basic-time-picker-demo',
+        path: 'time-picker-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/time-picker/demos/basic-time-picker-demo').then(
-            (m) => m.BasicTimePickerDemo,
+          import('../pages/docs/time-picker/demos/time-picker-usage-demo').then(
+            (m) => m.TimePickerUsageDemo,
           ),
       },
       {
-        path: 'interval-time-picker-demo',
+        path: 'hour-cycle-time-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/time-picker/demos/interval-time-picker-demo').then(
-            (m) => m.IntervalTimePickerDemo,
+          import('../pages/docs/time-picker/demos/hour-cycle-time-picker-demo').then(
+            (m) => m.HourCycleTimePickerDemo,
+          ),
+      },
+      {
+        path: 'steps-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker/demos/steps-time-picker-demo').then(
+            (m) => m.StepsTimePickerDemo,
+          ),
+      },
+      {
+        path: 'limits-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker/demos/limits-time-picker-demo').then(
+            (m) => m.LimitsTimePickerDemo,
+          ),
+      },
+      {
+        path: 'range-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker/demos/range-time-picker-demo').then(
+            (m) => m.RangeTimePickerDemo,
+          ),
+      },
+      {
+        path: 'now-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker/demos/now-time-picker-demo').then(
+            (m) => m.NowTimePickerDemo,
           ),
       },
       {
@@ -6029,10 +5982,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'disabled-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker/demos/disabled-time-picker-demo').then(
+            (m) => m.DisabledTimePickerDemo,
+          ),
+      },
+      {
         path: 'form-time-picker-demo',
         loadComponent: () =>
           import('../pages/docs/time-picker/demos/form-time-picker-demo').then(
             (m) => m.FormTimePickerDemo,
+          ),
+      },
+      {
+        path: 'rtl-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker/demos/rtl-time-picker-demo').then(
+            (m) => m.RtlTimePickerDemo,
           ),
       },
     ],

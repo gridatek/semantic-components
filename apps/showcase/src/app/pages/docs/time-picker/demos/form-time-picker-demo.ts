@@ -13,43 +13,43 @@ import {
   ScPopoverProvider,
   ScTimeInput,
   ScTimePicker,
-  ScTimePickerList,
+  ScTimePickerColumns,
   ScTimePickerTrigger,
 } from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
-/** The [formField] is on the time input; the list fills it. Required — marked once the list closes or the input is left. */
+/** A [formField] on the time input: required, from the schema — its message under it once the columns close. */
 @Component({
   selector: 'app-form-time-picker-demo',
   imports: [
     CdkOverlayOrigin,
     FormField,
     FormRoot,
-    ScTimePicker,
-    ScTimePickerTrigger,
-    ScTimePickerList,
-    ScTimeInput,
+    ScButton,
+    ScField,
+    ScFieldErrors,
     ScInputGroup,
     ScInputGroupAddon,
-    ScPopoverProvider,
-    ScPopoverPortal,
-    ScPopover,
-    ScField,
     ScLabel,
-    ScFieldErrors,
-    ScButton,
+    ScPopover,
+    ScPopoverPortal,
+    ScPopoverProvider,
+    ScTimeInput,
+    ScTimePicker,
+    ScTimePickerColumns,
+    ScTimePickerTrigger,
     SiClockIcon,
   ],
   template: `
-    <form [formRoot]="tableForm" class="grid w-48 gap-3">
-      <div scField>
-        <label scLabel>Table at</label>
+    <form [formRoot]="callForm" class="grid w-48 gap-3">
+      <div scField class="w-full">
+        <label scLabel>Call at</label>
         <div scTimePicker>
           <div scPopoverProvider [origin]="anchor" alignment="start">
             <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
-              <div scTimeInput [formField]="tableForm.at"></div>
+              <div scTimeInput [formField]="callForm.at"></div>
               <div scInputGroupAddon side="inline-end">
-                <button scTimePickerTrigger #trigger="scTimePickerTrigger">
+                <button scTimePickerTrigger>
                   <svg siClockIcon></svg>
                   <span class="sr-only">Choose a time</span>
                 </button>
@@ -57,7 +57,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
             </div>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto p-0" aria-label="Choose a time">
-                <div scTimePickerList aria-label="Times"></div>
+                <div scTimePickerColumns></div>
               </div>
             </ng-template>
           </div>
@@ -66,7 +66,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
       </div>
       <button scButton type="submit" class="justify-self-start">Book</button>
       @if (booked()) {
-        <p class="text-sm" role="status">Table booked at {{ booked() }}.</p>
+        <p class="text-sm" role="status">Call booked at {{ booked() }}.</p>
       }
     </form>
   `,
@@ -78,7 +78,7 @@ export class FormTimePickerDemo {
     at: null,
   });
   private readonly booked = signal('');
-  private readonly tableForm = form(
+  private readonly callForm = form(
     this.model,
     (s) => required(s.at, { message: 'Pick a time.' }),
     {

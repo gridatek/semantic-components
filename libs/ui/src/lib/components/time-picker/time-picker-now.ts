@@ -2,14 +2,14 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button';
-import { ScTimePickerNext } from './time-picker-next';
+import { ScTimePicker } from './time-picker';
 
 /**
  * Sets the current time — on the picker's steps — and closes: the style's
  * button (ghost, small). Write its text ("Now").
  */
 @Directive({
-  selector: 'button[scTimePickerNextNow]',
+  selector: 'button[scTimePickerNow]',
   host: {
     'data-slot': 'time-picker-now',
     type: 'button',
@@ -19,9 +19,9 @@ import { ScTimePickerNext } from './time-picker-next';
     '(click)': 'picker.now()',
   },
 })
-export class ScTimePickerNextNow {
+export class ScTimePickerNow {
   private readonly buttonStyles = injectStyle().button;
-  private readonly picker = inject(ScTimePickerNext);
+  private readonly picker = inject(ScTimePicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');

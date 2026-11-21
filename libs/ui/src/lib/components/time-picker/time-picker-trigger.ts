@@ -9,8 +9,8 @@ import { ScPopoverProvider } from '../popover';
 import { ScTimePicker } from './time-picker';
 
 /**
- * Opens the list of times: an icon button — in an input group, beside the
- * time input, its corners the group's. Write its icon and name it.
+ * Opens the columns: an icon button — in an input group, beside the time
+ * input, its corners the group's. Write its icon and name it.
  */
 @Directive({
   selector: 'button[scTimePickerTrigger]',

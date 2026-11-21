@@ -995,15 +995,6 @@
   {
     "name": "Time Picker",
     "path": "time-picker",
-    "description": "A time input with a list of times to pick from.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
-    "name": "Time Picker Next",
-    "path": "time-picker-next",
     "description": "A time typed, or picked in columns — hour, minute, AM/PM — on the time input's clock and limits; a range's end shows how long.",
     "status": "Experimental",
     "library": "ui",

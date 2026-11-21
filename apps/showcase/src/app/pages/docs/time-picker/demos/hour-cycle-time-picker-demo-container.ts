@@ -1,4 +1,24 @@
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { HourCycleTimePickerDemo } from './hour-cycle-time-picker-demo';
+
+@Component({
+  selector: 'app-hour-cycle-time-picker-demo-container',
+  imports: [DemoContainer, HourCycleTimePickerDemo],
+  template: `
+    <app-demo-container
+      title="Hour cycle"
+      [code]="code"
+      demoUrl="/demos/time-picker/hour-cycle-time-picker-demo"
+    >
+      <app-hour-cycle-time-picker-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class HourCycleTimePickerDemoContainer {
+  private readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScField,
@@ -9,15 +29,15 @@ import {
   ScPopoverPortal,
   ScPopoverProvider,
   ScTimeInput,
-  ScTimePickerNext,
-  ScTimePickerNextColumns,
-  ScTimePickerNextTrigger,
+  ScTimePicker,
+  ScTimePickerColumns,
+  ScTimePickerTrigger,
 } from '@semantic-components/ui';
 import { SiClockIcon } from '@semantic-icons/lucide-icons';
 
 /** The time input's clock: AM/PM's column on a 12-hour clock, none on 24; a seconds column with granularity="second". */
 @Component({
-  selector: 'app-hour-cycle-time-picker-next-demo',
+  selector: 'app-hour-cycle-time-picker-demo',
   imports: [
     CdkOverlayOrigin,
     ScField,
@@ -28,21 +48,21 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
     ScPopoverPortal,
     ScPopoverProvider,
     ScTimeInput,
-    ScTimePickerNext,
-    ScTimePickerNextColumns,
-    ScTimePickerNextTrigger,
+    ScTimePicker,
+    ScTimePickerColumns,
+    ScTimePickerTrigger,
     SiClockIcon,
   ],
-  template: `
+  template: \`
     <div class="flex flex-wrap justify-center gap-4">
       <div scField class="w-44">
         <label scLabel>12-hour clock</label>
-        <div scTimePickerNext>
+        <div scTimePicker>
           <div scPopoverProvider [origin]="twelve" alignment="start">
             <div scInputGroup cdkOverlayOrigin #twelve="cdkOverlayOrigin">
               <div scTimeInput [hourCycle]="12" [(value)]="afternoon"></div>
               <div scInputGroupAddon side="inline-end">
-                <button scTimePickerNextTrigger>
+                <button scTimePickerTrigger>
                   <svg siClockIcon></svg>
                   <span class="sr-only">Choose a time</span>
                 </button>
@@ -50,7 +70,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
             </div>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto p-0" aria-label="Choose a time">
-                <div scTimePickerNextColumns></div>
+                <div scTimePickerColumns></div>
               </div>
             </ng-template>
           </div>
@@ -58,7 +78,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
       </div>
       <div scField class="w-44">
         <label scLabel>With seconds</label>
-        <div scTimePickerNext>
+        <div scTimePicker>
           <div scPopoverProvider [origin]="seconds" alignment="start">
             <div scInputGroup cdkOverlayOrigin #seconds="cdkOverlayOrigin">
               <div
@@ -68,7 +88,7 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
                 [(value)]="evening"
               ></div>
               <div scInputGroupAddon side="inline-end">
-                <button scTimePickerNextTrigger>
+                <button scTimePickerTrigger>
                   <svg siClockIcon></svg>
                   <span class="sr-only">Choose a time</span>
                 </button>
@@ -76,22 +96,23 @@ import { SiClockIcon } from '@semantic-icons/lucide-icons';
             </div>
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto p-0" aria-label="Choose a time">
-                <div scTimePickerNextColumns></div>
+                <div scTimePickerColumns></div>
               </div>
             </ng-template>
           </div>
         </div>
       </div>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class HourCycleTimePickerNextDemo {
+export class HourCycleTimePickerDemo {
   private readonly afternoon = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('14:30'),
   );
   private readonly evening = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('18:45:30'),
   );
+}`;
 }
