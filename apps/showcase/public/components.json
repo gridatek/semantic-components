@@ -1020,8 +1020,7 @@
     "description": "A time typed, or picked in columns — hour, minute, AM/PM — on the time input's clock and limits; a range's end shows how long.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Time Input",
