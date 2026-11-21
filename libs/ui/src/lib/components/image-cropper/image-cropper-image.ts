@@ -1,4 +1,11 @@
-import { Directive, ElementRef, computed, inject, input } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  afterNextRender,
+  computed,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from 'cn';
 import { ScImageCropper } from './image-cropper';
 
@@ -37,14 +44,22 @@ export class ScImageCropperImage {
 
   constructor() {
     this.cropper.ɵimage.set(this.element);
-    // Already loaded (from the cache, or before hydration): no load event comes.
-    if (this.element.complete && this.element.naturalWidth) this.onLoad();
+    // Already loaded (from the cache, or before hydration): no load event
+    // comes. Looked at after the first render, once [(crop)] is bound — a
+    // load reported before would take the crop for none, and the default
+    // would overwrite a crop given.
+    afterNextRender(() => {
+      if (this.element.complete && this.element.naturalWidth) this.onLoad();
+    });
   }
 
   private onLoad(): void {
-    this.cropper.ɵload({
-      width: this.element.naturalWidth,
-      height: this.element.naturalHeight,
-    });
+    this.cropper.ɵload(
+      {
+        width: this.element.naturalWidth,
+        height: this.element.naturalHeight,
+      },
+      this.element.currentSrc || this.element.src,
+    );
   }
 }

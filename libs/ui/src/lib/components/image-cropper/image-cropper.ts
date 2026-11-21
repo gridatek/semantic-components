@@ -262,7 +262,8 @@ export class ScImageCropper {
     cn('flex flex-col gap-4', this.classInput()),
   );
 
-  private loaded = false;
+  /** The image loaded last: the same one again keeps the crop. */
+  private loadedSrc: string | null = null;
   private drag: ScImageCropperDrag | null = null;
 
   constructor() {
@@ -289,11 +290,14 @@ export class ScImageCropper {
   }
 
   /** The image has loaded: a crop given before the first is kept; another image starts again. */
-  ɵload(natural: ScImageCropperSize): void {
-    const first = !this.loaded;
-    this.loaded = true;
+  ɵload(natural: ScImageCropperSize, src: string): void {
     this.error.set(false);
     this.ɵnatural.set(natural);
+    // The same image again — hydration sets the server's src once more,
+    // and it loads again: the crop stays.
+    if (src === this.loadedSrc) return;
+    const first = this.loadedSrc === null;
+    this.loadedSrc = src;
     const crop = this.crop();
     if (first && crop) {
       const shown = shownSize(natural, crop.rotation ?? 0);
