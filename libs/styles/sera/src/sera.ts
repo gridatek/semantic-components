@@ -62,6 +62,7 @@ import { table } from './table';
 /** The sera style: `provideSemanticComponents({ style: sera })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
+import { timeInput } from './time-input';
 import { timeline } from './timeline';
 import { toast } from './toast';
 import { toggle } from './toggle';
@@ -133,6 +134,7 @@ export const sera: ScStyle = {
   table,
   tabs,
   textarea,
+  timeInput,
   timeline,
   toast,
   toggle,

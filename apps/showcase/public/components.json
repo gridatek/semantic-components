@@ -1011,6 +1011,15 @@
     "hidden": true
   },
   {
+    "name": "Time Input Next",
+    "path": "time-input-next",
+    "description": "A time typed part by part, on the clock and in the order of its locale: a number pad on a phone, a Temporal.PlainTime in a form.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms",
+    "hidden": true
+  },
+  {
     "name": "Time Clock",
     "path": "time-clock",
     "description": "A time picked on a clock face, by pointer or keyboard.",

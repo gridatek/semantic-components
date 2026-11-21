@@ -497,6 +497,17 @@ export interface ScToggleGroupStyles {
   item: string;
 }
 
+/**
+ * A time input's parts that change from style to style — ours (shadcn has no
+ * time input): the style's input, drawn round the parts.
+ */
+export interface ScTimeInputStyles {
+  /** The box: the style's input — focus, disabled and invalid read from the group. */
+  root: string;
+  /** A part (hour, minute, AM/PM): the corners of its highlight. */
+  segment: string;
+}
+
 /** An OTP input's parts that change from style to style. */
 export interface ScOtpInputStyles {
   /** A group: one chunk of inputs, joined into one box (separate boxes in sera). */
@@ -724,6 +735,7 @@ export interface ScStyle {
   tabs: ScTabsStyles;
   /** A multi-line text field. */
   textarea: string;
+  timeInput: ScTimeInputStyles;
   /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
   timeline: ScTimelineStyles;
   toast: ScToastStyles;

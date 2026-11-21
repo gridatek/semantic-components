@@ -59,6 +59,7 @@ export * from './tabs';
 export * from './textarea';
 export * from './theme';
 export * from './time-input';
+export * from './time-input-next';
 export * from './time-picker';
 export * from './toast';
 export * from './toc';
