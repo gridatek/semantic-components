@@ -47,7 +47,11 @@ const BIG_STEP = { hours: 2, minutes: 15, seconds: 15 } as const;
       ></span>
       <span
         aria-hidden="true"
-        class="bg-primary absolute size-8 -translate-x-1/2 -translate-y-1/2 rounded-full"
+        [class]="
+          hand.onNumber
+            ? 'bg-primary absolute size-8 -translate-x-1/2 -translate-y-1/2 rounded-full'
+            : 'bg-primary absolute size-3 -translate-x-1/2 -translate-y-1/2 rounded-full'
+        "
         [style.left.%]="50 + hand.x"
         [style.top.%]="50 + hand.y"
       ></span>
@@ -179,24 +183,36 @@ export class ScTimeClockDial {
       (value.hour === 0 || value.hour > 12);
     const radius = inner ? INNER : OUTER;
     const radians = ((degrees - 90) * Math.PI) / 180;
+    // On a number (an hour, a minute or second in fives): the knob is the
+    // number's; between two, a small dot that touches neither.
+    const onNumber =
+      view === 'hours' ||
+      (view === 'minutes' ? value.minute : value.second) % 5 === 0;
     return {
       degrees,
       radius,
+      onNumber,
       x: radius * Math.cos(radians),
       y: radius * Math.sin(radians),
     };
   });
 
-  // A number not picked has the face's background: the hand passes under it
-  // (24 hours: the inner number on its line stays readable); the picked one
-  // lets the knob show.
   private readonly baseNumber =
-    'pointer-events-none absolute flex size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full tabular-nums data-selected:text-primary-foreground data-disabled:text-muted-foreground/50 bg-inherit data-selected:bg-transparent';
+    'pointer-events-none absolute flex size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full tabular-nums data-selected:text-primary-foreground data-disabled:text-muted-foreground/50';
   private readonly numberClass = computed(() =>
     cn(this.baseNumber, this.styles.number),
   );
+  // An inner number (24 hours) not picked has the face's background: the
+  // hand to an outer hour passes under it, and it stays readable. Smaller
+  // (24px): it reaches neither the knob nor its neighbours. The outer ones
+  // have none: no line passes under them, and the knob between two (a minute
+  // off the fives) is never bitten.
   private readonly innerClass = computed(() =>
-    cn(this.baseNumber, this.styles.numberInner),
+    cn(
+      this.baseNumber,
+      'size-6 bg-inherit data-selected:size-8 data-selected:bg-transparent',
+      this.styles.numberInner,
+    ),
   );
 
   private readonly class = computed(() =>
