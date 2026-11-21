@@ -101,15 +101,23 @@ export class ScTimePickerNextColumn {
 
   /** Focus on its active option, scrolled into view. */
   focus(): void {
-    const option = this.options()[this.values().indexOf(this.active()!)];
+    const option = this.activeOption();
     option?.focus({ preventScroll: true });
     this.scrollTo(option);
   }
 
   /** Its selected option (or active one) at the top, as it opens. */
   scrollToActive(): void {
-    const option = this.options()[this.values().indexOf(this.active()!)];
+    const option = this.activeOption();
     if (option) this.host.scrollTop = option.offsetTop - 4;
+  }
+
+  /** The active option's element (the active value read now, before the view updates). */
+  private activeOption(): HTMLElement | undefined {
+    const active = this.active();
+    return active === undefined
+      ? undefined
+      : this.options()[this.values().indexOf(active)];
   }
 
   private label(value: ScTimePickerNextValue): string {
@@ -128,7 +136,8 @@ export class ScTimePickerNextColumn {
 
   private onKeydown(event: KeyboardEvent): void {
     const values = this.values().filter((value) => this.enabled(value));
-    const at = values.indexOf(this.active()!);
+    const active = this.active();
+    const at = active === undefined ? -1 : values.indexOf(active);
     let next: ScTimePickerNextValue | undefined;
     switch (event.key) {
       case 'ArrowDown':
@@ -149,11 +158,11 @@ export class ScTimePickerNextColumn {
         event.preventDefault();
         return;
       case ' ':
-        if (this.active() !== undefined) this.choose(this.active()!);
+        if (active !== undefined) this.choose(active);
         event.preventDefault();
         return;
       case 'Enter':
-        if (this.active() !== undefined) this.choose(this.active()!);
+        if (active !== undefined) this.choose(active);
         this.picker.close();
         event.preventDefault();
         return;
