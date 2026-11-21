@@ -5742,6 +5742,32 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/countdown',
+    children: [
+      {
+        path: 'countdown-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/countdown/demos/countdown-usage-demo').then(
+            (m) => m.CountdownUsageDemo,
+          ),
+      },
+      {
+        path: 'timer-countdown-demo',
+        loadComponent: () =>
+          import('../pages/docs/countdown/demos/timer-countdown-demo').then(
+            (m) => m.TimerCountdownDemo,
+          ),
+      },
+      {
+        path: 'rtl-countdown-demo',
+        loadComponent: () =>
+          import('../pages/docs/countdown/demos/rtl-countdown-demo').then(
+            (m) => m.RtlCountdownDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/tags-input',
     children: [
       {

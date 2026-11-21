@@ -967,6 +967,14 @@
     "category": "Navigation"
   },
   {
+    "name": "Countdown",
+    "path": "countdown",
+    "description": "The time left to a moment, or a timer, its digits rolling: a Number Ticker for each unit, the time from Temporal.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Recipes"
+  },
+  {
     "name": "Tags Input",
     "path": "tags-input",
     "description": "Tags typed into one field, a list of strings: the Combobox with several values and an Add item for the text typed.",

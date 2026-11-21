@@ -578,6 +578,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tabs/tabs-page'),
       },
       {
+        path: 'countdown',
+        title: 'Countdown - Semantic Components',
+        loadComponent: () => import('../pages/docs/countdown/countdown-page'),
+      },
+      {
         path: 'tags-input',
         title: 'Tags Input - Semantic Components',
         loadComponent: () => import('../pages/docs/tags-input/tags-input-page'),
