@@ -25,12 +25,12 @@ import {
   ScTimeClockHeader,
 } from '@semantic-components/ui';
 
-/** step: 5 minutes — the hand snaps to them, the arrows move by them. */
+/** minuteStep: 5 minutes — the hand snaps to them, the arrows move by them. */
 @Component({
   selector: 'app-step-time-clock-demo',
   imports: [ScTimeClock, ScTimeClockHeader, ScTimeClockDial],
   template: \`
-    <div scTimeClock #clock="scTimeClock" [step]="5" [(value)]="time">
+    <div scTimeClock #clock="scTimeClock" [minuteStep]="5" [(value)]="time">
       <div scTimeClockHeader></div>
       <div
         scTimeClockDial

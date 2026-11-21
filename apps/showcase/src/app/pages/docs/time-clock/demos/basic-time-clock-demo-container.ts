@@ -7,7 +7,7 @@ import { BasicTimeClockDemo } from './basic-time-clock-demo';
   imports: [DemoContainer, BasicTimeClockDemo],
   template: `
     <app-demo-container
-      title="Basic"
+      title="Usage"
       [code]="code"
       demoUrl="/demos/time-clock/basic-time-clock-demo"
     >

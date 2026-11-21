@@ -94,7 +94,7 @@ test('24 hours: 13–00 on the inner ring', async ({ page }) => {
   await expect(picked(page)).toHaveText('21:45:00');
 });
 
-test('Step: from now, by 5 minutes', async ({ page }) => {
+test('Step: from now, by 5 minutes; Page Up by 15', async ({ page }) => {
   await page.goto(demo('step'));
   await expect(dial(page)).toHaveAttribute('aria-valuenow', '0');
   await expect(dial(page)).not.toHaveAttribute('aria-valuetext');
@@ -104,8 +104,9 @@ test('Step: from now, by 5 minutes', async ({ page }) => {
   await press(page, 'Enter');
   await press(page, 'ArrowUp');
   await expect(picked(page)).toHaveText('11:05:00');
+  // Page Up: minutes by 15, on its multiples (as the Time Input).
   await press(page, 'PageUp');
-  await expect(picked(page)).toHaveText('11:10:00');
+  await expect(picked(page)).toHaveText('11:15:00');
   await press(page, 'End');
   await expect(picked(page)).toHaveText('11:55:00');
 });
@@ -148,4 +149,36 @@ test('In a form: required; booked', async ({ page }) => {
   await clickNumber(page, 30);
   await page.getByRole('button', { name: 'Book a call' }).click();
   await expect(page.getByRole('status')).toHaveText('Call booked at 04:30.');
+});
+
+test('Seconds: hours, minutes, then seconds — each pick moves on', async ({
+  page,
+}) => {
+  await page.goto(demo('seconds'));
+  await expect(dial(page)).toHaveAccessibleName('hour');
+  await clickNumber(page, 14);
+  await expect(dial(page)).toHaveAccessibleName('minute');
+  await clickNumber(page, 45);
+  await expect(dial(page)).toHaveAccessibleName('second');
+  await clickNumber(page, 20);
+  await expect(dial(page)).toHaveAttribute('aria-valuetext', '14:45:20');
+  // Page Up: seconds by 15, on its multiples.
+  await dial(page).focus();
+  await press(page, 'PageUp');
+  await expect(dial(page)).toHaveAttribute('aria-valuetext', '14:45:30');
+  await expect(page.getByRole('button', { name: 'second' })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+});
+
+test('RTL: the face never turns; the numbers stay where a clock has them', async ({
+  page,
+}) => {
+  await page.goto(demo('rtl'));
+  const three = await number(page, 3).boundingBox();
+  const nine = await number(page, 9).boundingBox();
+  // 3 on the right, 9 on the left — in a right-to-left page too.
+  expect(three?.x ?? 0).toBeGreaterThan(nine?.x ?? 0);
+  await expect(dial(page)).toHaveAccessibleName('الساعات');
 });

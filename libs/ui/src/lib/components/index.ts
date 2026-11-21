@@ -100,7 +100,6 @@ export * from './signature-pad';
 export * from './sortable-list';
 export * from './stepper';
 export * from './time-clock';
-export * from './time-clock-next';
 export * from './timeline';
 export * from './transfer-list';
 export * from './virtual-list';

@@ -33,7 +33,7 @@ import {
     <div
       scTimeClock
       #clock="scTimeClock"
-      [step]="15"
+      [minuteStep]="15"
       [minTime]="open"
       [maxTime]="close"
       [(value)]="time"

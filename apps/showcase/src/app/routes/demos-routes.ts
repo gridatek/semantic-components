@@ -6284,67 +6284,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/time-clock-next',
-    children: [
-      {
-        path: 'basic-time-clock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-clock-next/demos/basic-time-clock-next-demo').then(
-            (m) => m.BasicTimeClockNextDemo,
-          ),
-      },
-      {
-        path: 'form-time-clock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-clock-next/demos/form-time-clock-next-demo').then(
-            (m) => m.FormTimeClockNextDemo,
-          ),
-      },
-      {
-        path: 'input-time-clock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-clock-next/demos/input-time-clock-next-demo').then(
-            (m) => m.InputTimeClockNextDemo,
-          ),
-      },
-      {
-        path: 'limits-time-clock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-clock-next/demos/limits-time-clock-next-demo').then(
-            (m) => m.LimitsTimeClockNextDemo,
-          ),
-      },
-      {
-        path: 'locale-time-clock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-clock-next/demos/locale-time-clock-next-demo').then(
-            (m) => m.LocaleTimeClockNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-time-clock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-clock-next/demos/rtl-time-clock-next-demo').then(
-            (m) => m.RtlTimeClockNextDemo,
-          ),
-      },
-      {
-        path: 'seconds-time-clock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-clock-next/demos/seconds-time-clock-next-demo').then(
-            (m) => m.SecondsTimeClockNextDemo,
-          ),
-      },
-      {
-        path: 'step-time-clock-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-clock-next/demos/step-time-clock-next-demo').then(
-            (m) => m.StepTimeClockNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/time-clock',
     children: [
       {
@@ -6355,24 +6294,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'locale-time-clock-demo',
+        path: 'form-time-clock-demo',
         loadComponent: () =>
-          import('../pages/docs/time-clock/demos/locale-time-clock-demo').then(
-            (m) => m.LocaleTimeClockDemo,
-          ),
-      },
-      {
-        path: 'step-time-clock-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-clock/demos/step-time-clock-demo').then(
-            (m) => m.StepTimeClockDemo,
-          ),
-      },
-      {
-        path: 'limits-time-clock-demo',
-        loadComponent: () =>
-          import('../pages/docs/time-clock/demos/limits-time-clock-demo').then(
-            (m) => m.LimitsTimeClockDemo,
+          import('../pages/docs/time-clock/demos/form-time-clock-demo').then(
+            (m) => m.FormTimeClockDemo,
           ),
       },
       {
@@ -6383,10 +6308,38 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'form-time-clock-demo',
+        path: 'limits-time-clock-demo',
         loadComponent: () =>
-          import('../pages/docs/time-clock/demos/form-time-clock-demo').then(
-            (m) => m.FormTimeClockDemo,
+          import('../pages/docs/time-clock/demos/limits-time-clock-demo').then(
+            (m) => m.LimitsTimeClockDemo,
+          ),
+      },
+      {
+        path: 'locale-time-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock/demos/locale-time-clock-demo').then(
+            (m) => m.LocaleTimeClockDemo,
+          ),
+      },
+      {
+        path: 'rtl-time-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock/demos/rtl-time-clock-demo').then(
+            (m) => m.RtlTimeClockDemo,
+          ),
+      },
+      {
+        path: 'seconds-time-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock/demos/seconds-time-clock-demo').then(
+            (m) => m.SecondsTimeClockDemo,
+          ),
+      },
+      {
+        path: 'step-time-clock-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-clock/demos/step-time-clock-demo').then(
+            (m) => m.StepTimeClockDemo,
           ),
       },
     ],

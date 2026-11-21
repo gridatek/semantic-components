@@ -1,46 +1,46 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { SecondsTimeClockNextDemo } from './seconds-time-clock-next-demo';
+import { SecondsTimeClockDemo } from './seconds-time-clock-demo';
 
 @Component({
-  selector: 'app-seconds-time-clock-next-demo-container',
-  imports: [DemoContainer, SecondsTimeClockNextDemo],
+  selector: 'app-seconds-time-clock-demo-container',
+  imports: [DemoContainer, SecondsTimeClockDemo],
   template: `
     <app-demo-container
       title="Seconds"
       [code]="code"
-      demoUrl="/demos/time-clock-next/seconds-time-clock-next-demo"
+      demoUrl="/demos/time-clock/seconds-time-clock-demo"
     >
-      <app-seconds-time-clock-next-demo />
+      <app-seconds-time-clock-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SecondsTimeClockNextDemoContainer {
+export class SecondsTimeClockDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScTimeClockNext,
-  ScTimeClockNextDial,
-  ScTimeClockNextHeader,
+  ScTimeClock,
+  ScTimeClockDial,
+  ScTimeClockHeader,
 } from '@semantic-components/ui';
 
 /** granularity="second", 24 hours: hours, minutes, then seconds — each pick moves on to the next; seconds every 5. */
 @Component({
-  selector: 'app-seconds-time-clock-next-demo',
-  imports: [ScTimeClockNext, ScTimeClockNextHeader, ScTimeClockNextDial],
+  selector: 'app-seconds-time-clock-demo',
+  imports: [ScTimeClock, ScTimeClockHeader, ScTimeClockDial],
   template: \`
     <div
-      scTimeClockNext
-      #clock="scTimeClockNext"
+      scTimeClock
+      #clock="scTimeClock"
       granularity="second"
       [hourCycle]="24"
       [secondStep]="5"
       [(value)]="time"
     >
-      <div scTimeClockNextHeader></div>
+      <div scTimeClockHeader></div>
       <div
-        scTimeClockNextDial
+        scTimeClockDial
         [attr.aria-label]="clock.names()[clock.view()]"
       ></div>
     </div>
@@ -51,7 +51,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class SecondsTimeClockNextDemo {
+export class SecondsTimeClockDemo {
   private readonly time = signal<Temporal.PlainTime | null>(
     Temporal.PlainTime.from('10:30'),
   );

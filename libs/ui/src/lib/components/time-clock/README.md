@@ -1,14 +1,14 @@
 # Time Clock
 
-A time picked on a clock face — the hour, then the minute — by pointer (mouse, touch, pen: click or drag) or keyboard. The numbers are the locale's; 12 hours with AM/PM, or 24 with 13–00 on an inner ring, as the locale has it. A `[formField]`: `Temporal.PlainTime`, or `null`.
+A time picked on a clock face — the hour, then the minute, then the second — by pointer (mouse, touch, pen: click or drag) or keyboard; each pick moves on to the next view, as in every picker. The numbers are the locale's; 12 hours with AM/PM, or 24 with 13–00 on an inner ring. A `[formField]`: `Temporal.PlainTime`, or `null`.
 
 ## Architecture
 
 ```
-div[scTimeClock] ([(value)] / [formField], [(view)], hourCycle,
-│                 step, minTime, maxTime, autoAdvance, disabled)
-│  text() · hourText() · minuteText() · period() · setHour() · setMinute() · setPeriod()
-├── div[scTimeClockHeader]  — the hour and the minute (buttons: the view), AM / PM in 12 hours
+div[scTimeClock] ([(value)] / [formField], [(view)], hourCycle, granularity,
+│                     minuteStep, secondStep, minTime, maxTime, disabled, readonly)
+│  views() · names() · text() · partText(view) · period() · setHour/Minute/Second() · setPeriod() · moveOn()
+├── div[scTimeClockHeader]  — the time, each part a button for its view; AM / PM in 12 hours
 └── div[scTimeClockDial]    — the face: a slider — name it, by view
 ```
 
@@ -19,37 +19,38 @@ Both parts write their own content: nothing to put inside them.
 ```html
 <div scTimeClock #clock="scTimeClock" [formField]="form.at">
   <div scTimeClockHeader></div>
-  <div scTimeClockDial [attr.aria-label]="clock.view() === 'hours' ? 'Hours' : 'Minutes'"></div>
+  <div scTimeClockDial [attr.aria-label]="clock.names()[clock.view()]"></div>
 </div>
 ```
 
-With a [time input](../../../../../ui/src/lib/components/time-input/README.md), give both the same value: type it, or pick it.
+With a [Time Input](../time-input/README.md), give both the same value: type it, or pick it.
+
+## Picking
+
+Drag or click the hand; let go, and the dial moves on to the next view (`granularity` says which there are). The header's buttons go back to any view. An empty clock starts at now. Outside `minTime` / `maxTime` the numbers are dimmed and can't be picked; switching AM/PM keeps the hour, or takes the nearest that can be.
 
 ## Keyboard (on the dial)
 
-| Key               | Does                                    |
-| ----------------- | --------------------------------------- |
-| Arrow Up / Right  | +1 hour, or + `step` minutes (wrapping) |
-| Arrow Down / Left | −1 hour, or − `step` minutes            |
-| Page Up / Down    | ±1 hour, or ±5 minutes                  |
-| Home / End        | 0 / 23 — or the first / last minute     |
-| Enter             | On to the minutes                       |
-
-An empty clock starts from now.
+| Key                           | Does                                                      |
+| ----------------------------- | --------------------------------------------------------- |
+| Arrow Up / Right, Down / Left | One hour, or one step of minutes or seconds (wrapping)    |
+| Page Up / Down                | Hours by 2, minutes and seconds by 15 — as the Time Input |
+| Home / End                    | The first / last value                                    |
+| Enter                         | On to the next view                                       |
 
 ## API
 
 ### ScTimeClock — `div[scTimeClock]`, `#clock="scTimeClock"`
 
-| Input                              | Type                                        | Default      |
-| ---------------------------------- | ------------------------------------------- | ------------ |
-| `value`                            | `Temporal.PlainTime \| null` (model)        | `null`       |
-| `view`                             | `'hours' \| 'minutes'` (model)              | `'hours'`    |
-| `hourCycle`                        | `'h12' \| 'h23' \| undefined`               | the locale's |
-| `step`                             | `number` (minutes)                          | `1`          |
-| `minTime` / `maxTime`              | `Temporal.PlainTime \| undefined`           | —            |
-| `autoAdvance`                      | `boolean` — on to the minutes after an hour | `true`       |
-| `disabled` / `invalid` / `touched` | `boolean`                                   | `false`      |
+| Input                                           | Type                                        | Default      |
+| ----------------------------------------------- | ------------------------------------------- | ------------ |
+| `value`                                         | `Temporal.PlainTime \| null` (model)        | `null`       |
+| `view`                                          | `'hours' \| 'minutes' \| 'seconds'` (model) | `'hours'`    |
+| `hourCycle`                                     | `12 \| 24`                                  | the locale's |
+| `granularity`                                   | `'hour' \| 'minute' \| 'second'`            | `'minute'`   |
+| `minuteStep` / `secondStep`                     | `number`                                    | `1`          |
+| `minTime` / `maxTime`                           | `Temporal.PlainTime`                        | —            |
+| `disabled` / `readonly` / `invalid` / `touched` | `boolean`                                   | `false`      |
 
 | Output  | When                                          |
 | ------- | --------------------------------------------- |
@@ -57,8 +58,12 @@ An empty clock starts from now.
 
 ### ScTimeClockHeader — `div[scTimeClockHeader]`
 
-The hour and the minute as the locale writes them, each a button for its view (`aria-pressed` while shown, named by `Intl.DisplayNames`); in 12 hours, AM and PM (the locale's words) — a period with no hour that can be picked is disabled; switching keeps the hour, or takes the nearest that can be picked.
+The time as the locale writes it, left to right in any page — each part a button for its view (`aria-pressed` while shown, named by `Intl.DisplayNames`); in 12 hours, AM and PM (the locale's words), a period with no hour that can be picked disabled.
 
 ### ScTimeClockDial — `div[scTimeClockDial]`
 
-`role="slider"`: `aria-valuenow` the hour (0–23) or the minute, `aria-valuetext` the whole time as the locale writes it ("10:30 AM"). The numbers are decorative; outside `minTime` / `maxTime` they are dimmed and can't be picked. Released after an hour was picked: on to the minutes.
+`role="slider"`: `aria-valuenow` the hour (0–23), minute or second, `aria-valuetext` the whole time as the locale writes it. The numbers are decorative; a number not picked has the face's background, so the hand passes under it. It never turns right to left (a clock is a clock).
+
+## Look
+
+The style's `timeClock` key: `face` (its size and colour), `number` and `numberInner` (the text sizes, the inner ring's smaller), `time` (the header's).
