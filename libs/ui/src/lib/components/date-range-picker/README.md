@@ -5,7 +5,7 @@ A range of days — picked in a calendar (the start, then the end), typed in a [
 ## Architecture
 
 ```
-div[scDateRangePicker] ([(value)] / [formField], format, minDate, maxDate, unavailable, confirm, disabled)
+div[scDateRangePicker] ([(value)] / [formField], format, minDate, maxDate, unavailable, closeOnPick, confirm, disabled)
 │  text() · hasValue() · draft() · canApply() · days() · nights() · pick(value) · apply() · cancel() · canPick(date)
 └── div[scPopoverProvider]
     ├── button[scDateRangePickerTrigger]                 — alone: your icon and text()
@@ -29,7 +29,7 @@ The first click sets the start, the second the end; whole, it closes, focus back
 
 ## Closing
 
-The same in every picker: each pick moves on to the next part (the start to the end), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse.
+The same in every picker: each pick moves on to the next part (the start to the end), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse. With `confirm`, nothing closes by itself: Apply (or Enter) keeps what is picked; Cancel, Escape or a click outside leave the value as it was before it opened.
 
 ## Duration
 

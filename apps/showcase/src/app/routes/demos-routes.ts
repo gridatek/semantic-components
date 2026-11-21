@@ -2324,6 +2324,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/date-time-picker',
     children: [
       {
+        path: 'confirm-date-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-picker/demos/confirm-date-time-picker-demo').then(
+            (m) => m.ConfirmDateTimePickerDemo,
+          ),
+      },
+      {
         path: 'date-time-picker-usage-demo',
         loadComponent: () =>
           import('../pages/docs/date-time-picker/demos/date-time-picker-usage-demo').then(
@@ -6122,6 +6129,13 @@ export const demosRoutes: Route[] = [
   {
     path: 'demos/time-picker',
     children: [
+      {
+        path: 'confirm-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/time-picker/demos/confirm-time-picker-demo').then(
+            (m) => m.ConfirmTimePickerDemo,
+          ),
+      },
       {
         path: 'stays-open-time-picker-demo',
         loadComponent: () =>

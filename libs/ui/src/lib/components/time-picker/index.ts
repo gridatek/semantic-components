@@ -5,3 +5,5 @@ export * from './time-picker-duration';
 export * from './time-picker-now';
 export * from './time-picker-trigger';
 export * from './time-columns';
+export * from './time-picker-apply';
+export * from './time-picker-cancel';

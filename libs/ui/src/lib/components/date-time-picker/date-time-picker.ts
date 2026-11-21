@@ -53,6 +53,16 @@ export class ScDateTimePicker implements ScTimeColumnsHost {
   readonly secondStep = input(1);
   /** A day picked moves on to the time, each time pick to the next column; the popover closes once the value is whole. False: it stays open until Enter, Escape or a click outside. */
   readonly closeOnPick = input(true, { transform: booleanAttribute });
+  /** Picks are tried out in the field, kept by Apply (or Enter); Cancel, Escape or a click outside put back the value from before it opened. */
+  readonly confirm = input(false, { transform: booleanAttribute });
+
+  /** The last column picked and the value whole, it closes: `closeOnPick`, and no `confirm`. */
+  readonly closesOnPick = computed(() => this.closeOnPick() && !this.confirm());
+  /** Apply can keep it: the value is whole. */
+  readonly canApply = computed(() => this.dateTimeInput().value() !== null);
+  /** The value when it opened: put back unless applied (`confirm`). */
+  private opened: Temporal.PlainDateTime | null = null;
+  private applied = false;
 
   /** The date-time input: the value, the locale, the clock, the limits. */
   readonly dateTimeInput = contentChild.required(ScDateTimeInput, {
@@ -113,6 +123,16 @@ export class ScDateTimePicker implements ScTimeColumnsHost {
     effect(() => {
       const open = this.popover()?.open() ?? false;
       untracked(() => {
+        if (!wasOpen && open) {
+          this.opened = this.dateTimeInput().value();
+          this.applied = false;
+        }
+        if (wasOpen && !open && this.confirm() && !this.applied) {
+          // Not applied: the value from before it opened.
+          const input = this.dateTimeInput();
+          input.clear();
+          if (this.opened) input.value.set(this.opened);
+        }
         if (wasOpen && !open) {
           this.dateTimeInput().touch.emit();
           const active = document.activeElement;
@@ -143,6 +163,18 @@ export class ScDateTimePicker implements ScTimeColumnsHost {
   /** A time's part picked in its column: set, as typed. */
   pick(type: ScTimeInputPart, value: ScTimePickerValue): void {
     this.dateTimeInput().ɵset(type, value);
+  }
+
+  /** Keeps what is picked, and closes — with `confirm`, once the value is whole. */
+  apply(): void {
+    if (this.confirm() && !this.canApply()) return;
+    this.applied = true;
+    this.close();
+  }
+
+  /** Closes — with `confirm`, the value from before it opened put back. */
+  cancel(): void {
+    this.close();
   }
 
   /** Closes the popover. */

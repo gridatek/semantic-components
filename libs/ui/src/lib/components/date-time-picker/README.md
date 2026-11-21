@@ -28,17 +28,19 @@ On the first or last day of the limits, the times outside them can't be picked; 
 
 ## Closing
 
-The same in every picker: each pick moves on to the next part (the day to the hour, then the minutes, then AM/PM), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse.
+The same in every picker: each pick moves on to the next part (the day to the hour, then the minutes, then AM/PM), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse. With `confirm`, nothing closes by itself: Apply (or Enter) keeps what is picked; Cancel, Escape or a click outside leave the value as it was before it opened.
 
 ## API
 
 ### ScDateTimePicker — `div[scDateTimePicker]`, `#dtp="scDateTimePicker"`
 
-| Input        | Type     | Default |
-| ------------ | -------- | ------- |
-| `minuteStep` | `number` | `1`     |
-| `secondStep` | `number` | `1`     |
-| `class`      | `string` | `''`    |
+| Input         | Type      | Default |
+| ------------- | --------- | ------- |
+| `minuteStep`  | `number`  | `1`     |
+| `secondStep`  | `number`  | `1`     |
+| `closeOnPick` | `boolean` | `true`  |
+| `confirm`     | `boolean` | `false` |
+| `class`       | `string`  | `''`    |
 
 | Member                                    | Description                                            |
 | ----------------------------------------- | ------------------------------------------------------ |
@@ -49,6 +51,10 @@ The same in every picker: each pick moves on to the next part (the day to the ho
 | `pick(part, value)`                       | A time's part, set (the columns)                       |
 | `enabled(part, value)`                    | A time can be picked on the day chosen                 |
 | `close()`                                 | Closes the popover                                     |
+
+### ScDateTimePickerApply / ScDateTimePickerCancel — `button[scDateTimePickerApply]`, `button[scDateTimePickerCancel]`
+
+With `confirm`, under the calendar and the columns: Apply keeps what is picked and closes — disabled until the value is whole; Cancel closes, the value from before put back. The style's buttons; your text.
 
 ### ScDateTimePickerTrigger — `button[scDateTimePickerTrigger]`
 

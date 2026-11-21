@@ -8,6 +8,7 @@ import {
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { ConfirmDateTimePickerDemoContainer } from './demos/confirm-date-time-picker-demo-container';
 import { DateTimePickerUsageDemoContainer } from './demos/date-time-picker-usage-demo-container';
 import { FormDateTimePickerDemoContainer } from './demos/form-date-time-picker-demo-container';
 import { LimitsDateTimePickerDemoContainer } from './demos/limits-date-time-picker-demo-container';
@@ -18,6 +19,7 @@ import { StepsDateTimePickerDemoContainer } from './demos/steps-date-time-picker
 @Component({
   selector: 'app-date-time-picker-page',
   imports: [
+    ConfirmDateTimePickerDemoContainer,
     ScKbd,
     ScTypeset,
     Anatomy,
@@ -76,7 +78,10 @@ import { StepsDateTimePickerDemoContainer } from './demos/steps-date-time-picker
           <code scTypeset>[closeOnPick]="false"</code> the picks still move on,
           but it stays open until <kbd scKbd>Enter</kbd> (keeping what is
           picked), <kbd scKbd>Escape</kbd> or a click outside. The arrow keys
-          only browse.
+          only browse. With <code scTypeset>confirm</code>, nothing closes by
+          itself: Apply (or <kbd scKbd>Enter</kbd>) keeps what is picked;
+          Cancel, <kbd scKbd>Escape</kbd> or a click outside leave the value as
+          it was before it opened.
         </p>
         <p>
           Give the calendar the picker&apos;s
@@ -111,6 +116,7 @@ import { StepsDateTimePickerDemoContainer } from './demos/steps-date-time-picker
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <app-steps-date-time-picker-demo-container />
+        <app-confirm-date-time-picker-demo-container />
         <app-limits-date-time-picker-demo-container />
         <app-locale-date-time-picker-demo-container />
         <app-form-date-time-picker-demo-container />
@@ -186,9 +192,29 @@ export default class DateTimePickerPage {
       description:
         'The Time Picker’s columns, for the time: [initialFocus]="false" here — the calendar takes the focus.',
     },
+    {
+      name: 'ScDateTimePickerApply / Cancel',
+      selector: 'button[scDateTimePickerApply], button[scDateTimePickerCancel]',
+      description:
+        'confirm: Apply keeps what is picked (disabled until the value is whole); Cancel puts back the value from before — closed either way. The style’s buttons; your text.',
+    },
   ];
 
   private readonly inputs: ApiInput[] = [
+    {
+      name: 'closeOnPick',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'Each pick moves on to the next part; the popover closes once the value is whole. False: it stays open until Enter, Escape or a click outside.',
+    },
+    {
+      name: 'confirm',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Nothing closes by itself: Apply (or Enter) keeps what is picked; Cancel, Escape or a click outside put back the value from before.',
+    },
     {
       name: 'minuteStep',
       type: 'number',

@@ -135,7 +135,8 @@ export class ScTimePickerColumn {
 
   /**
    * A pick — a click, Space: the part set, then on to the next column; the
-   * last one picked and the value whole, the popover closes (`closeOnPick`).
+   * last one picked and the value whole, the popover closes (`closeOnPick`;
+   * with `confirm`, only Apply or Enter does).
    * The arrows only browse: they set the part, and stay.
    */
   private pick(value: ScTimePickerValue): void {
@@ -144,7 +145,7 @@ export class ScTimePickerColumn {
     const next = this.next();
     if (next) next.focus();
     else if (
-      this.picker.closeOnPick() &&
+      this.picker.closesOnPick() &&
       this.picker.segmentedInput().current() !== null
     )
       this.picker.close();
@@ -179,7 +180,7 @@ export class ScTimePickerColumn {
         return;
       case 'Enter':
         if (active !== undefined) this.choose(active);
-        this.picker.close();
+        this.picker.apply();
         event.preventDefault();
         return;
       default:

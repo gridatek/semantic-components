@@ -81,7 +81,10 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
           <code scTypeset>[closeOnPick]="false"</code> the picks still move on,
           but it stays open until <kbd scKbd>Enter</kbd> (keeping what is
           picked), <kbd scKbd>Escape</kbd> or a click outside. The arrow keys
-          only browse.
+          only browse. With <code scTypeset>confirm</code>, nothing closes by
+          itself: Apply (or <kbd scKbd>Enter</kbd>) keeps what is picked;
+          Cancel, <kbd scKbd>Escape</kbd> or a click outside leave the value as
+          it was before it opened.
         </p>
         <p>
           Give the calendar the picker&apos;s
@@ -213,6 +216,13 @@ export default class DateRangePickerPage {
   ];
 
   private readonly inputs: ApiInput[] = [
+    {
+      name: 'closeOnPick',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'Each pick moves on to the next part; the popover closes once the value is whole. False: it stays open until Enter, Escape or a click outside.',
+    },
     {
       name: 'value',
       type: 'ScCalendarRange | null',

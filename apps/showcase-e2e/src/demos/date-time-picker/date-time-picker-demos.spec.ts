@@ -159,3 +159,32 @@ test('RTL: the calendar right, the clock’s columns left to right', async ({
     await left('[data-slot=time-picker-column][data-type=minute]'),
   );
 });
+
+test.describe('Apply (confirm)', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(demo('confirm-date-time-picker'));
+    await expect(picked(page)).toHaveText('2026-11-02T14:30:00');
+  });
+
+  test('the day and time tried out; Apply keeps them', async ({ page }) => {
+    const trigger = page.locator('[data-slot=date-time-picker-trigger]');
+    await open(page);
+    await day(page, '2026-11-20').click();
+    await option(page, 'hour', '9').click();
+    await option(page, 'minute', '45').click();
+    await option(page, 'AM/PM', 'AM').click();
+    await expect(picked(page)).toHaveText('2026-11-20T09:45:00');
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    await page.getByRole('button', { name: 'Apply' }).click();
+    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(picked(page)).toHaveText('2026-11-20T09:45:00');
+  });
+
+  test('Escape puts back the value from before', async ({ page }) => {
+    await open(page);
+    await day(page, '2026-11-20').click();
+    await expect(picked(page)).toHaveText('2026-11-20T14:30:00');
+    await page.keyboard.press('Escape');
+    await expect(picked(page)).toHaveText('2026-11-02T14:30:00');
+  });
+});

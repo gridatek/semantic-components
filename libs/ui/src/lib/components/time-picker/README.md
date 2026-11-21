@@ -56,7 +56,7 @@ The columns are written by `scTimePickerColumns`, from the locale — not markup
 
 ## Closing
 
-The same in every picker: each pick moves on to the next part (the hour to the minutes, the minutes to AM/PM), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse.
+The same in every picker: each pick moves on to the next part (the hour to the minutes, the minutes to AM/PM), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse. With `confirm`, nothing closes by itself: Apply (or Enter) keeps what is picked; Cancel, Escape or a click outside leave the value as it was before it opened.
 
 ## Keyboard
 
@@ -75,22 +75,26 @@ It opens on the value — each column scrolled to it — focus on the hour.
 
 ### ScTimePicker — `div[scTimePicker]`, `#tp="scTimePicker"`
 
-| Input        | Type                 | Default |
-| ------------ | -------------------- | ------- |
-| `minuteStep` | `number`             | `1`     |
-| `secondStep` | `number`             | `1`     |
-| `startTime`  | `Temporal.PlainTime` | —       |
-| `class`      | `string`             | `''`    |
+| Input         | Type                 | Default |
+| ------------- | -------------------- | ------- |
+| `minuteStep`  | `number`             | `1`     |
+| `secondStep`  | `number`             | `1`     |
+| `startTime`   | `Temporal.PlainTime` | —       |
+| `closeOnPick` | `boolean`            | `true`  |
+| `confirm`     | `boolean`            | `false` |
+| `class`       | `string`             | `''`    |
 
-| Member                 | Description                                                   |
-| ---------------------- | ------------------------------------------------------------- |
-| `timeInput()`          | Its time input                                                |
-| `values()`             | Each column's values                                          |
-| `enabled(part, value)` | Some time with it falls within the limits                     |
-| `pick(part, value)`    | Sets the time input's part                                    |
-| `now()`                | The current time, on the steps — and closed                   |
-| `close()`              | Closes the popover                                            |
-| `duration()`           | From `startTime` to the value, in the locale's words; or `''` |
+| Member                 | Description                                                                |
+| ---------------------- | -------------------------------------------------------------------------- |
+| `timeInput()`          | Its time input                                                             |
+| `values()`             | Each column's values                                                       |
+| `enabled(part, value)` | Some time with it falls within the limits                                  |
+| `pick(part, value)`    | Sets the time input's part                                                 |
+| `now()`                | The current time, on the steps — and closed                                |
+| `close()`              | Closes the popover                                                         |
+| `apply()`, `cancel()`  | `confirm`: keep what is picked / put back the value from before, and close |
+| `canApply()`           | The value is whole                                                         |
+| `duration()`           | From `startTime` to the value, in the locale's words; or `''`              |
 
 ### ScTimePickerTrigger — `button[scTimePickerTrigger]`
 
@@ -99,6 +103,10 @@ Opens and closes the columns: ghost in an input group (`buttonSize`), outline al
 ### ScTimePickerColumns, ScTimePickerColumn
 
 The columns, and one column — a listbox named in the locale's words (`Intl.DisplayNames`), its options `aria-selected` / `aria-disabled`. Written by the picker, not placed by you.
+
+### ScTimePickerApply / ScTimePickerCancel — `button[scTimePickerApply]`, `button[scTimePickerCancel]`
+
+With `confirm`, under the columns: Apply keeps what is picked and closes — disabled until the time is whole; Cancel closes, the time from before put back. The style's buttons (`variant` default / outline, `size` sm); your text.
 
 ### ScTimePickerNow — `button[scTimePickerNow]`
 

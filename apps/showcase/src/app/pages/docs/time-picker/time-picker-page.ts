@@ -18,6 +18,7 @@ import {
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { ConfirmTimePickerDemoContainer } from './demos/confirm-time-picker-demo-container';
 import { DisabledTimePickerDemoContainer } from './demos/disabled-time-picker-demo-container';
 import { FormTimePickerDemoContainer } from './demos/form-time-picker-demo-container';
 import { HourCycleTimePickerDemoContainer } from './demos/hour-cycle-time-picker-demo-container';
@@ -33,6 +34,7 @@ import { TimePickerUsageDemoContainer } from './demos/time-picker-usage-demo-con
 @Component({
   selector: 'app-time-picker-page',
   imports: [
+    ConfirmTimePickerDemoContainer,
     StaysOpenTimePickerDemoContainer,
     ScKbd,
     ScTable,
@@ -106,7 +108,10 @@ import { TimePickerUsageDemoContainer } from './demos/time-picker-usage-demo-con
           trigger. With <code scTypeset>[closeOnPick]="false"</code> the picks
           still move on, but it stays open until <kbd scKbd>Enter</kbd> (keeping
           what is picked), <kbd scKbd>Escape</kbd> or a click outside. The arrow
-          keys only browse.
+          keys only browse. With <code scTypeset>confirm</code>, nothing closes
+          by itself: Apply (or <kbd scKbd>Enter</kbd>) keeps what is picked;
+          Cancel, <kbd scKbd>Escape</kbd> or a click outside leave the value as
+          it was before it opened.
         </p>
         <p>
           The columns are written by the picker, from the locale: not markup of
@@ -192,6 +197,7 @@ import { TimePickerUsageDemoContainer } from './demos/time-picker-usage-demo-con
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <app-stays-open-time-picker-demo-container />
+        <app-confirm-time-picker-demo-container />
         <app-hour-cycle-time-picker-demo-container />
         <app-steps-time-picker-demo-container />
         <app-limits-time-picker-demo-container />
@@ -287,9 +293,29 @@ export default class TimePickerPage {
       description:
         'How long from startTime to the value, in the locale’s words (Intl.DurationFormat); empty without a start. aria-live.',
     },
+    {
+      name: 'ScTimePickerApply / Cancel',
+      selector: 'button[scTimePickerApply], button[scTimePickerCancel]',
+      description:
+        'confirm: Apply keeps what is picked (disabled until the value is whole); Cancel puts back the value from before — closed either way. The style’s buttons; your text.',
+    },
   ];
 
   private readonly inputs: ApiInput[] = [
+    {
+      name: 'closeOnPick',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'Each pick moves on to the next part; the popover closes once the value is whole. False: it stays open until Enter, Escape or a click outside.',
+    },
+    {
+      name: 'confirm',
+      type: 'boolean',
+      default: 'false',
+      description:
+        'Nothing closes by itself: Apply (or Enter) keeps what is picked; Cancel, Escape or a click outside put back the value from before.',
+    },
     {
       name: 'minuteStep',
       type: 'number',

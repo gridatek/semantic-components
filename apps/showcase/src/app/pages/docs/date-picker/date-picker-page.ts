@@ -76,7 +76,10 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
             closes it, focus back on the trigger (several days: never by
             itself); with [closeOnPick]="false" it stays open until
             <kbd scKbd>Enter</kbd>, <kbd scKbd>Escape</kbd> or a click outside.
-            With confirm, picks are a draft until Apply.
+            With confirm, nothing closes by itself: Apply (or
+            <kbd scKbd>Enter</kbd>) keeps what is picked; Cancel,
+            <kbd scKbd>Escape</kbd> or a click outside leave the value as it was
+            before it opened.
           </li>
           <li>
             Name every icon button and the popover (an sr-only span, an
@@ -160,7 +163,7 @@ export default class DatePickerPage {
       name: 'ScDatePicker',
       selector: 'div[scDatePicker]',
       description:
-        "Holds the value: [(value)] (a day, or days — the calendar's); mode ('single', 'multiple'); format (Intl options, dateStyle medium, in LOCALE_ID); minDate, maxDate, unavailable; confirm (picks a draft until Apply); a [formField] (disabled, invalid, touched). exportAs scDatePicker: text() (the value as written), draft(), pick(), apply(), cancel().",
+        "Holds the value: [(value)] (a day, or days — the calendar's); mode ('single', 'multiple'); format (Intl options, dateStyle medium, in LOCALE_ID); minDate, maxDate, unavailable; closeOnPick (a whole value closes it; default true); confirm (picks a draft until Apply); a [formField] (disabled, invalid, touched). exportAs scDatePicker: text() (the value as written), draft(), pick(), apply(), cancel().",
     },
     {
       name: 'ScDatePickerTrigger',

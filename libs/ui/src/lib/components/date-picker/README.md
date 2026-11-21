@@ -71,7 +71,7 @@ Typed, in a field — the input and the trigger in an input group; there the tri
 
 ## Closing
 
-The same in every picker: each pick moves on to the next part — a day: one pick (several days: it never closes by itself), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse.
+The same in every picker: each pick moves on to the next part — a day: one pick (several days: it never closes by itself), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse. With `confirm`, nothing closes by itself: Apply (or Enter) keeps what is picked; Cancel, Escape or a click outside leave the value as it was before it opened.
 
 ## API
 
@@ -84,6 +84,7 @@ The same in every picker: each pick moves on to the next part — a day: one pic
 | `format`                           | `Intl.DateTimeFormatOptions`                | `{ dateStyle: 'medium' }` |
 | `minDate` / `maxDate`              | `Temporal.PlainDate \| undefined`           | —                         |
 | `unavailable`                      | `(date: Temporal.PlainDate) => boolean`     | `() => false`             |
+| `closeOnPick`                      | `boolean` — a whole value closes it         | `true`                    |
 | `confirm`                          | `boolean` — picks are a draft until applied | `false`                   |
 | `disabled` / `invalid` / `touched` | `boolean`                                   | `false`                   |
 | `class`                            | `string`                                    | `''`                      |

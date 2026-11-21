@@ -58,6 +58,16 @@ export class ScTimePicker implements ScTimeColumnsHost {
   readonly secondStep = input(1);
   /** Each pick moves on to the next column, and the popover closes once the time is whole; false: it stays open until Enter, Escape or a click outside. */
   readonly closeOnPick = input(true, { transform: booleanAttribute });
+  /** Picks are tried out in the field, kept by Apply (or Enter); Cancel, Escape or a click outside put back the value from before it opened. */
+  readonly confirm = input(false, { transform: booleanAttribute });
+
+  /** The last column picked and the value whole, it closes: `closeOnPick`, and no `confirm`. */
+  readonly closesOnPick = computed(() => this.closeOnPick() && !this.confirm());
+  /** Apply can keep it: the value is whole. */
+  readonly canApply = computed(() => this.timeInput().value() !== null);
+  /** The value when it opened: put back unless applied (`confirm`). */
+  private opened: Temporal.PlainTime | null = null;
+  private applied = false;
   /** A range's start: earlier times can't be picked; the duration counts from it. */
   readonly startTime = input<Temporal.PlainTime | undefined>(undefined);
 
@@ -132,6 +142,16 @@ export class ScTimePicker implements ScTimeColumnsHost {
     effect(() => {
       const open = this.popover()?.open() ?? false;
       untracked(() => {
+        if (!wasOpen && open) {
+          this.opened = this.timeInput().value();
+          this.applied = false;
+        }
+        if (wasOpen && !open && this.confirm() && !this.applied) {
+          // Not applied: the value from before it opened.
+          const input = this.timeInput();
+          input.clear();
+          if (this.opened) input.value.set(this.opened);
+        }
         if (wasOpen && !open) {
           this.timeInput().touch.emit();
           const active = document.activeElement;
@@ -167,6 +187,19 @@ export class ScTimePicker implements ScTimeColumnsHost {
           granularity === 'second' ? now.second - (now.second % secondStep) : 0,
       }),
     );
+    this.applied = true;
+    this.close();
+  }
+
+  /** Keeps what is picked, and closes — with `confirm`, once the value is whole. */
+  apply(): void {
+    if (this.confirm() && !this.canApply()) return;
+    this.applied = true;
+    this.close();
+  }
+
+  /** Closes — with `confirm`, the value from before it opened put back. */
+  cancel(): void {
     this.close();
   }
 

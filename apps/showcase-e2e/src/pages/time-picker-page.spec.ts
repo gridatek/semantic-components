@@ -27,7 +27,7 @@ test.describe('Time Picker Page', () => {
     await page.goto('/docs/components/time-picker');
     await expect(
       page.getByRole('region', { name: 'Time Picker parts' }).getByRole('row'),
-    ).toHaveCount(7);
+    ).toHaveCount(8);
     await expect(
       page.getByRole('region', { name: 'ScTimePicker inputs' }),
     ).toContainText('startTime');

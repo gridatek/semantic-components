@@ -228,3 +228,40 @@ test('Stays open: closeOnPick false — the picks move on, the columns stay', as
   await page.keyboard.press('Escape');
   await expect(page.locator('[data-slot=time-picker-columns]')).toHaveCount(0);
 });
+
+test.describe('Apply (confirm)', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(demo('confirm-time-picker'));
+    await expect(picked(page)).toHaveText('09:30:00');
+  });
+
+  test('picks are tried out, nothing closes by itself; Apply keeps them', async ({
+    page,
+  }) => {
+    const trigger = page.locator('[data-slot=time-picker-trigger]');
+    await open(page);
+    await option(page, 'hour', '10').click();
+    await option(page, 'minute', '15').click();
+    await option(page, 'AM/PM', 'PM').click();
+    await expect(picked(page)).toHaveText('22:15:00');
+    await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    await page.getByRole('button', { name: 'Apply' }).click();
+    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+    await expect(picked(page)).toHaveText('22:15:00');
+  });
+
+  test('Cancel, or Escape, puts back the time from before', async ({
+    page,
+  }) => {
+    await open(page);
+    await option(page, 'hour', '11').click();
+    await expect(picked(page)).toHaveText('11:30:00');
+    await page.getByRole('button', { name: 'Cancel' }).click();
+    await expect(picked(page)).toHaveText('09:30:00');
+    await open(page);
+    await option(page, 'minute', '45').click();
+    await expect(picked(page)).toHaveText('09:45:00');
+    await page.keyboard.press('Escape');
+    await expect(picked(page)).toHaveText('09:30:00');
+  });
+});
