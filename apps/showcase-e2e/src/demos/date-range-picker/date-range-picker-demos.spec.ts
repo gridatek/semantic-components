@@ -4,7 +4,7 @@ import { type Locator, type Page, expect, test } from '../../test';
 const demo = (name: string) =>
   `/demos/date-range-picker/${name}-date-range-picker-demo`;
 const trigger = (page: Page) =>
-  page.locator('[data-slot="date-picker-trigger"]');
+  page.locator('[data-slot="date-range-picker-trigger"]');
 const calendar = (page: Page) => page.locator('[data-slot="calendar"]');
 const day = (page: Page, date: string) =>
   page.locator(`[data-slot="calendar-cell"][data-date="${date}"]`);
@@ -134,4 +134,28 @@ test('In a form: a whole range required; booked', async ({ page }) => {
   await expect(page.getByRole('status')).toHaveText(
     'Booked: Oct 28 – 30, 2026.',
   );
+});
+
+test('Duration: days by Intl, nights written by you; following the draft', async ({
+  page,
+}) => {
+  await page.goto(demo('duration'));
+  await trigger(page).click();
+  const duration = page.locator('[data-slot=date-range-picker-duration]');
+  await expect(duration).toHaveText('5 days');
+  await expect(page.getByText('4 nights')).toBeVisible();
+  await expect(duration).toHaveAttribute('aria-live', 'polite');
+  // A new start: no end yet, no length.
+  await day(page, '2026-11-10').click();
+  await expect(duration).toHaveText('');
+  await day(page, '2026-11-12').click();
+  await expect(picked(page)).toHaveText('Nov 10 – 12, 2026');
+});
+
+test('RTL: written in Arabic, right to left', async ({ page }) => {
+  await page.goto(demo('rtl'));
+  await expect(picked(page)).not.toHaveText('');
+  await expect(page.locator('[dir=rtl]').first()).toBeVisible();
+  await trigger(page).click();
+  await expect(calendar(page)).toBeVisible();
 });

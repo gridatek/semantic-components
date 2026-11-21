@@ -5,11 +5,11 @@ import {
   ScCalendarHeader,
   ScCalendarNext,
   ScCalendarPrevious,
-  type ScCalendarValue,
+  type ScCalendarRange,
   ScDateInput,
-  ScDatePicker,
-  ScDatePickerTrigger,
   ScDateRangeInput,
+  ScDateRangePicker,
+  ScDateRangePickerTrigger,
   ScInputGroup,
   ScInputGroupAddon,
   ScLabelText,
@@ -23,13 +23,13 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Each end typed — part="start" and part="end" in one input group: the locale’s numeric order or ISO; an end before the start is marked. The button in the field opens the calendar. */
+/** Typed in a scDateRangeInput — its two ends part by part, in one input group: the picker’s value and limits; an end before the start is marked. The button in the field opens the calendar. */
 @Component({
   selector: 'app-typed-date-range-picker-demo',
   imports: [
     CdkOverlayOrigin,
-    ScDatePicker,
-    ScDatePickerTrigger,
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -49,7 +49,7 @@ import {
   template: `
     <div class="grid w-80 gap-2">
       <p scLabelText id="stay-label">Stay</p>
-      <div scDatePicker #dp="scDatePicker" mode="range" [(value)]="range">
+      <div scDateRangePicker #dp="scDateRangePicker" [(value)]="range">
         <div scPopoverProvider [origin]="anchor" alignment="start">
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div scDateRangeInput aria-labelledby="stay-label">
@@ -58,7 +58,10 @@ import {
               <div scDateInput part="end" aria-label="Check-out"></div>
             </div>
             <div scInputGroupAddon side="inline-end">
-              <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+              <button
+                scDateRangePickerTrigger
+                #trigger="scDateRangePickerTrigger"
+              >
                 <svg siCalendarIcon></svg>
                 <span class="sr-only">Choose dates</span>
               </button>
@@ -70,7 +73,7 @@ import {
                 scCalendar
                 initialFocus
                 aria-label="Choose dates"
-                [mode]="dp.mode()"
+                mode="range"
                 [numberOfMonths]="2"
                 [value]="dp.draft()"
                 (valueChange)="dp.pick($event)"
@@ -99,7 +102,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TypedDateRangePickerDemo {
-  private readonly range = signal<ScCalendarValue>({
+  private readonly range = signal<ScCalendarRange | null>({
     from: Temporal.PlainDate.from('2026-10-14'),
     to: Temporal.PlainDate.from('2026-10-18'),
   });

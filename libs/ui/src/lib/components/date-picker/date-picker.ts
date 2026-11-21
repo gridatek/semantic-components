@@ -17,11 +17,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import type {
-  ScCalendarMode,
-  ScCalendarRange,
-  ScCalendarValue,
-} from '../calendar';
+import type { ScCalendarMode, ScCalendarValue } from '../calendar';
 import {
   SC_DATE_INPUT_HOST,
   type ScDateInputHost,
@@ -30,9 +26,9 @@ import { ScPopoverProvider } from '../popover';
 import { ScDatePickerTrigger } from './date-picker-trigger';
 
 /**
- * A date, picked in a calendar in a popover — or typed
- * (`scDateInput`; a range's ends: `part="start"` / `"end"`), or a
- * preset (`scDatePickerPreset`). Its value is the calendar's; `text()` is it
+ * A date — or several — picked in a calendar in a popover, or typed
+ * (`scDateInput`), or a preset (`scDatePickerPreset`). A range is the Date
+ * Range Picker's. Its value is the calendar's; `text()` is it
  * as written in the app's language. A `[formField]`. It closes on a pick (on
  * a whole range), focus back on its trigger — or, `confirm`, picks are a
  * draft until `scDatePickerApply`.
@@ -40,7 +36,7 @@ import { ScDatePickerTrigger } from './date-picker-trigger';
 @Directive({
   selector: 'div[scDatePicker]',
   exportAs: 'scDatePicker',
-  // Its date inputs (scDateInput, scDateRangeInput) write its value.
+  // Its date input (scDateInput) writes its value.
   providers: [{ provide: SC_DATE_INPUT_HOST, useExisting: ScDatePicker }],
   host: {
     'data-slot': 'date-picker',
@@ -54,7 +50,8 @@ export class ScDatePicker
   readonly classInput = input<string>('', { alias: 'class' });
 
   readonly value = model<ScCalendarValue>(null);
-  readonly mode = input<ScCalendarMode>('single');
+  /** A day, or several days (a range: the Date Range Picker). */
+  readonly mode = input<Exclude<ScCalendarMode, 'range'>>('single');
   /** How a day is written; `dateStyle: 'medium'` by default. */
   readonly format = input<Intl.DateTimeFormatOptions>({ dateStyle: 'medium' });
   /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
@@ -94,14 +91,14 @@ export class ScDatePicker
 
   /** What the calendar shows (`[value]="dp.draft()"`): the value — or, `confirm`, the picks not yet applied. */
   readonly draft = linkedSignal(() => this.value());
-  /** The draft can be applied: a day, a whole range, or days. */
+  /** The draft can be applied: a day, or days. */
   readonly canApply = computed(() => this.isDone(this.draft(), true));
 
   private readonly formatter = computed(
     () => new Intl.DateTimeFormat(this.locale, this.format()),
   );
 
-  /** The value, as written: a day, a range, or a list of days — or empty. */
+  /** The value, as written: a day, or a list of days — or empty. */
   readonly text = computed(() => {
     const value = this.value();
     const formatter = this.formatter();
@@ -115,13 +112,7 @@ export class ScDatePicker
         type: 'conjunction',
       }).format(days.map((day) => formatter.format(day)));
     }
-    const { from, to } = value as ScCalendarRange;
-    if (!from) return '';
-    if (!to) return formatter.format(from);
-    // Typed ends can be out of order (marked by the input): the earlier first.
-    return Temporal.PlainDate.compare(from, to) <= 0
-      ? formatter.formatRange(from, to)
-      : formatter.formatRange(to, from);
+    return '';
   });
 
   readonly hasValue = computed(() => this.text() !== '');
@@ -196,11 +187,9 @@ export class ScDatePicker
     this.popover()?.open.set(false);
   }
 
-  /** A day, a whole range — or, `days`, at least one of several days. */
+  /** A day — or, `days`, at least one of several days. */
   private isDone(value: ScCalendarValue, days = false): boolean {
-    const mode = this.mode();
-    if (mode === 'single') return !!value;
-    if (mode === 'range') return !!(value as ScCalendarRange | null)?.to;
+    if (this.mode() === 'single') return !!value;
     return days && !!(value as readonly Temporal.PlainDate[] | null)?.length;
   }
 }

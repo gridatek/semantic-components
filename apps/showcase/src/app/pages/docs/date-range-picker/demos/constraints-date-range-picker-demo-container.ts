@@ -24,9 +24,9 @@ import {
   ScCalendarHeader,
   ScCalendarNext,
   ScCalendarPrevious,
-  type ScCalendarValue,
-  ScDatePicker,
-  ScDatePickerTrigger,
+  type ScCalendarRange,
+  ScDateRangePicker,
+  ScDateRangePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -41,8 +41,8 @@ import {
 @Component({
   selector: 'app-constraints-date-range-picker-demo',
   imports: [
-    ScDatePicker,
-    ScDatePickerTrigger,
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -56,16 +56,18 @@ import {
   ],
   template: \`
     <div
-      scDatePicker
-      #dp="scDatePicker"
-      mode="range"
+      scDateRangePicker
+      #dp="scDateRangePicker"
       [minDate]="today"
       [maxDate]="latest"
       [(value)]="range"
       class="w-72"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-        <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+        <button
+          scDateRangePickerTrigger
+          #trigger="scDateRangePickerTrigger"
+        >
           <svg siCalendarIcon></svg>
           <span>{{ dp.text() || 'Pick dates' }}</span>
         </button>
@@ -75,7 +77,7 @@ import {
               scCalendar
               initialFocus
               aria-label="Choose dates"
-              [mode]="dp.mode()"
+              mode="range"
               [numberOfMonths]="2"
               [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
@@ -105,7 +107,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ConstraintsDateRangePickerDemo {
-  private readonly range = signal<ScCalendarValue>(null);
+  private readonly range = signal<ScCalendarRange | null>(null);
   private readonly today = Temporal.Now.plainDateISO();
   private readonly latest = this.today.add({ days: 90 });
 }`;

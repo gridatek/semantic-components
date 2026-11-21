@@ -18,7 +18,7 @@ export * from './context-menu';
 export * from './date-input';
 export * from './date-picker';
 export * from './date-range-input';
-export * from './date-range-picker-next';
+export * from './date-range-picker';
 export * from './date-time-input';
 export * from './date-time-picker';
 export * from './dialog';

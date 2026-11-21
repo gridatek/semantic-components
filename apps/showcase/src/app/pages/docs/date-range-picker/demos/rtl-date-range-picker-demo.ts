@@ -1,12 +1,13 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Dir } from '@angular/cdk/bidi';
+import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarRange,
-  ScDateRangePickerNext,
-  ScDateRangePickerNextTrigger,
+  ScDateRangePicker,
+  ScDateRangePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -17,12 +18,13 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** minDate and maxDate on the picker and its calendar: from today, up to 90 days ahead. */
+/** In a right-to-left page: the months right to left, the span written in Arabic. */
 @Component({
-  selector: 'app-constraints-date-range-picker-next-demo',
+  selector: 'app-rtl-date-range-picker-demo',
   imports: [
-    ScDateRangePickerNext,
-    ScDateRangePickerNextTrigger,
+    Dir,
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -36,42 +38,37 @@ import {
   ],
   template: `
     <div
-      scDateRangePickerNext
-      #dp="scDateRangePickerNext"
-      [minDate]="today"
-      [maxDate]="latest"
+      dir="rtl"
+      lang="ar"
+      scDateRangePicker
+      #dp="scDateRangePicker"
       [(value)]="range"
       class="w-72"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-        <button
-          scDateRangePickerNextTrigger
-          #trigger="scDateRangePickerNextTrigger"
-        >
+        <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
           <svg siCalendarIcon></svg>
-          <span>{{ dp.text() || 'Pick dates' }}</span>
+          <span>{{ dp.text() || 'اختر التواريخ' }}</span>
         </button>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto p-0" aria-label="Choose dates">
+          <div scPopover class="w-auto p-0" aria-label="اختر التواريخ">
             <div
               scCalendar
               initialFocus
-              aria-label="Choose dates"
+              aria-label="اختر التواريخ"
               mode="range"
               [numberOfMonths]="2"
               [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
-              [minDate]="today"
-              [maxDate]="latest"
             >
               <div scCalendarHeader>
                 <button scCalendarPrevious>
                   <svg siChevronLeftIcon></svg>
-                  <span class="sr-only">Previous month</span>
+                  <span class="sr-only">الشهر السابق</span>
                 </button>
                 <button scCalendarNext>
                   <svg siChevronRightIcon></svg>
-                  <span class="sr-only">Next month</span>
+                  <span class="sr-only">الشهر التالي</span>
                 </button>
               </div>
             </div>
@@ -80,14 +77,16 @@ import {
       </div>
     </div>
     <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ dp.text() || 'Nothing picked.' }}
+      {{ dp.text() || 'لم يُختر شيء.' }}
     </p>
   `,
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ConstraintsDateRangePickerNextDemo {
-  private readonly range = signal<ScCalendarRange | null>(null);
-  private readonly today = Temporal.Now.plainDateISO();
-  private readonly latest = this.today.add({ days: 90 });
+export class RtlDateRangePickerDemo {
+  private readonly range = signal<ScCalendarRange | null>({
+    from: Temporal.PlainDate.from('2026-11-02'),
+    to: Temporal.PlainDate.from('2026-11-06'),
+  });
 }

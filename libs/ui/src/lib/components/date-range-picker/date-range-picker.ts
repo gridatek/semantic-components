@@ -23,7 +23,7 @@ import {
   type ScDateInputHost,
 } from '../date-input/date-input-host';
 import { ScPopoverProvider } from '../popover';
-import { ScDateRangePickerNextTrigger } from './date-range-picker-next-trigger';
+import { ScDateRangePickerTrigger } from './date-range-picker-trigger';
 
 /**
  * A range of days — picked in a calendar in a popover (two clicks: the
@@ -34,19 +34,17 @@ import { ScDateRangePickerNextTrigger } from './date-range-picker-next-trigger';
  * `scDateRangePickerApply`.
  */
 @Directive({
-  selector: 'div[scDateRangePickerNext]',
-  exportAs: 'scDateRangePickerNext',
+  selector: 'div[scDateRangePicker]',
+  exportAs: 'scDateRangePicker',
   // Its typed field (scDateRangeInput) writes its value, within its limits.
-  providers: [
-    { provide: SC_DATE_INPUT_HOST, useExisting: ScDateRangePickerNext },
-  ],
+  providers: [{ provide: SC_DATE_INPUT_HOST, useExisting: ScDateRangePicker }],
   host: {
     'data-slot': 'date-range-picker',
     '[attr.data-disabled]': 'disabled() || null',
     '[class]': 'class()',
   },
 })
-export class ScDateRangePickerNext
+export class ScDateRangePicker
   implements FormValueControl<ScCalendarRange | null>, ScDateInputHost
 {
   private readonly locale = inject(LOCALE_ID);
@@ -78,7 +76,7 @@ export class ScDateRangePickerNext
     descendants: true,
   });
   private readonly trigger = contentChild(
-    forwardRef(() => ScDateRangePickerNextTrigger),
+    forwardRef(() => ScDateRangePickerTrigger),
     { descendants: true, read: ElementRef<HTMLElement> },
   );
 

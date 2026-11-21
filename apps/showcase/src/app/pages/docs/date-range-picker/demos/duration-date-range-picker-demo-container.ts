@@ -1,33 +1,33 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RangeDatePickerDemo } from './range-date-picker-demo';
+import { DurationDateRangePickerDemo } from './duration-date-range-picker-demo';
 
 @Component({
-  selector: 'app-range-date-picker-demo-container',
-  imports: [DemoContainer, RangeDatePickerDemo],
+  selector: 'app-duration-date-range-picker-demo-container',
+  imports: [DemoContainer, DurationDateRangePickerDemo],
   template: `
     <app-demo-container
-      title="Range"
-      description='A range over two months: written as one span ("Oct 12 – 18, 2026"), closed once both ends are picked.'
+      title="Duration"
       [code]="code"
-      demoUrl="/demos/date-picker/range-date-picker-demo"
+      demoUrl="/demos/date-range-picker/duration-date-range-picker-demo"
     >
-      <app-range-date-picker-demo />
+      <app-duration-date-range-picker-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RangeDatePickerDemoContainer {
+export class DurationDateRangePickerDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
   ScCalendarHeader,
   ScCalendarNext,
   ScCalendarPrevious,
-  type ScCalendarValue,
-  ScDatePicker,
-  ScDatePickerTrigger,
+  type ScCalendarRange,
+  ScDateRangePicker,
+  ScDateRangePickerDuration,
+  ScDateRangePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -38,12 +38,13 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** A range over two months: written as one span ("Oct 12 – 18, 2026"), closed once both ends are picked. */
+/** How long: scDateRangePickerDuration writes the days (Intl); nights() — a stay’s — is yours to write. */
 @Component({
-  selector: 'app-range-date-picker-demo',
+  selector: 'app-duration-date-range-picker-demo',
   imports: [
-    ScDatePicker,
-    ScDatePickerTrigger,
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
+    ScDateRangePickerDuration,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -57,27 +58,29 @@ import {
   ],
   template: \`
     <div
-      scDatePicker
-      #dp="scDatePicker"
-      mode="range"
-      [(value)]="stay"
-      class="w-fit"
+      scDateRangePicker
+      #dp="scDateRangePicker"
+      [(value)]="range"
+      class="w-72"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-        <button scDatePickerTrigger #trigger="scDatePickerTrigger" class="w-72">
+        <button
+          scDateRangePickerTrigger
+          #trigger="scDateRangePickerTrigger"
+        >
           <svg siCalendarIcon></svg>
-          <span>{{ dp.text() || 'Pick your dates' }}</span>
+          <span>{{ dp.text() || 'Pick dates' }}</span>
         </button>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto p-0" aria-label="Choose your dates">
+          <div scPopover class="w-auto gap-0 p-0" aria-label="Choose dates">
             <div
               scCalendar
               initialFocus
-              aria-label="Choose your dates"
-              [mode]="dp.mode()"
+              aria-label="Choose dates"
+              mode="range"
+              [numberOfMonths]="2"
               [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
-              [numberOfMonths]="2"
             >
               <div scCalendarHeader>
                 <button scCalendarPrevious>
@@ -90,6 +93,12 @@ import {
                 </button>
               </div>
             </div>
+            <div class="flex items-center justify-between border-t px-3 py-2">
+              <span scDateRangePickerDuration></span>
+              @if (dp.nights()) {
+                <span class="text-sm">{{ dp.nights() }} nights</span>
+              }
+            </div>
           </div>
         </ng-template>
       </div>
@@ -101,7 +110,10 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RangeDatePickerDemo {
-  private readonly stay = signal<ScCalendarValue>(null);
+export class DurationDateRangePickerDemo {
+  private readonly range = signal<ScCalendarRange | null>({
+    from: Temporal.PlainDate.from('2026-11-02'),
+    to: Temporal.PlainDate.from('2026-11-06'),
+  });
 }`;
 }

@@ -2,10 +2,10 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button';
-import type { ScCalendarRange, ScCalendarValue } from '../calendar';
+import type { ScCalendarValue } from '../calendar';
 import { ScDatePicker } from './date-picker';
 
-/** A ready value — today, the last 7 days…: picked as the calendar's would be. Write its text; pressed while it is the value. */
+/** A ready value — today, tomorrow…: picked as the calendar's would be. Write its text; pressed while it is the value. */
 @Directive({
   selector: 'button[scDatePickerPreset]',
   host: {
@@ -40,8 +40,6 @@ export class ScDatePickerPreset {
 }
 
 function same(a: ScCalendarValue, b: ScCalendarValue): boolean {
-  const day = (x?: Temporal.PlainDate, y?: Temporal.PlainDate) =>
-    x === y || (!!x && !!y && x.equals(y));
   if (!a || !b) return a === b;
   if (a instanceof Temporal.PlainDate || b instanceof Temporal.PlainDate)
     return (
@@ -59,7 +57,5 @@ function same(a: ScCalendarValue, b: ScCalendarValue): boolean {
       x.every((d) => y.some((e) => d.equals(e)))
     );
   }
-  const r = a as ScCalendarRange;
-  const s = b as ScCalendarRange;
-  return day(r.from, s.from) && day(r.to, s.to);
+  return false;
 }

@@ -1,4 +1,24 @@
-import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { RtlDateRangePickerDemo } from './rtl-date-range-picker-demo';
+
+@Component({
+  selector: 'app-rtl-date-range-picker-demo-container',
+  imports: [DemoContainer, RtlDateRangePickerDemo],
+  template: `
+    <app-demo-container
+      title="RTL"
+      [code]="code"
+      demoUrl="/demos/date-range-picker/rtl-date-range-picker-demo"
+    >
+      <app-rtl-date-range-picker-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class RtlDateRangePickerDemoContainer {
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCalendar,
@@ -6,8 +26,8 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarRange,
-  ScDateRangePickerNext,
-  ScDateRangePickerNextTrigger,
+  ScDateRangePicker,
+  ScDateRangePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -20,11 +40,11 @@ import {
 
 /** In a right-to-left page: the months right to left, the span written in Arabic. */
 @Component({
-  selector: 'app-rtl-date-range-picker-next-demo',
+  selector: 'app-rtl-date-range-picker-demo',
   imports: [
     Dir,
-    ScDateRangePickerNext,
-    ScDateRangePickerNextTrigger,
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -36,19 +56,19 @@ import {
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
-  template: `
+  template: \`
     <div
       dir="rtl"
       lang="ar"
-      scDateRangePickerNext
-      #dp="scDateRangePickerNext"
+      scDateRangePicker
+      #dp="scDateRangePicker"
       [(value)]="range"
       class="w-72"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
         <button
-          scDateRangePickerNextTrigger
-          #trigger="scDateRangePickerNextTrigger"
+          scDateRangePickerTrigger
+          #trigger="scDateRangePickerTrigger"
         >
           <svg siCalendarIcon></svg>
           <span>{{ dp.text() || 'اختر التواريخ' }}</span>
@@ -82,14 +102,15 @@ import {
     <p class="text-muted-foreground text-sm" data-testid="picked">
       {{ dp.text() || 'لم يُختر شيء.' }}
     </p>
-  `,
+  \`,
   providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlDateRangePickerNextDemo {
+export class RtlDateRangePickerDemo {
   private readonly range = signal<ScCalendarRange | null>({
     from: Temporal.PlainDate.from('2026-11-02'),
     to: Temporal.PlainDate.from('2026-11-06'),
   });
+}`;
 }

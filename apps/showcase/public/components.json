@@ -290,8 +290,7 @@
     "description": "A range of days typed in one box: your two Date Inputs, start and end; the field of a Date Range Picker.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Date Time Input",
@@ -312,20 +311,10 @@
   {
     "name": "Date Range Picker",
     "path": "date-range-picker",
-    "description": "The date picker in range mode, with presets, typed ends and Apply.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
-    "name": "Date Range Picker Next",
-    "path": "date-range-picker-next",
     "description": "A range of days picked in a calendar, typed, or a preset — its own part; Apply, and how long it is.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Dialog",

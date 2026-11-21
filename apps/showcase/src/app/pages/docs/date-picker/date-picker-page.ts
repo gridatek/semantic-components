@@ -10,7 +10,6 @@ import { DatePickerUsageDemoContainer } from './demos/date-picker-usage-demo-con
 import { FormDatePickerDemoContainer } from './demos/form-date-picker-demo-container';
 import { LocaleDatePickerDemoContainer } from './demos/locale-date-picker-demo-container';
 import { MultipleDatePickerDemoContainer } from './demos/multiple-date-picker-demo-container';
-import { RangeDatePickerDemoContainer } from './demos/range-date-picker-demo-container';
 import { RtlDatePickerDemoContainer } from './demos/rtl-date-picker-demo-container';
 import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-container';
 
@@ -23,7 +22,6 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
     DatePickerUsageDemoContainer,
     TypedDatePickerDemoContainer,
     BirthDatePickerDemoContainer,
-    RangeDatePickerDemoContainer,
     MultipleDatePickerDemoContainer,
     ConstraintsDatePickerDemoContainer,
     FormDatePickerDemoContainer,
@@ -96,7 +94,6 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
         <h2 scTypeset appToc>Examples</h2>
         <app-typed-date-picker-demo-container />
         <app-birth-date-picker-demo-container />
-        <app-range-date-picker-demo-container />
         <app-multiple-date-picker-demo-container />
         <app-constraints-date-picker-demo-container />
         <app-form-date-picker-demo-container />

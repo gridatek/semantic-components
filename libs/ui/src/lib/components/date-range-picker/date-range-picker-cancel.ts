@@ -2,11 +2,11 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button';
-import { ScDateRangePickerNext } from './date-range-picker-next';
+import { ScDateRangePicker } from './date-range-picker';
 
 /** `confirm`: closes, the draft dropped — as Escape does. Write its text. */
 @Directive({
-  selector: 'button[scDateRangePickerNextCancel]',
+  selector: 'button[scDateRangePickerCancel]',
   host: {
     'data-slot': 'date-range-picker-cancel',
     type: 'button',
@@ -14,10 +14,10 @@ import { ScDateRangePickerNext } from './date-range-picker-next';
     '(click)': 'picker.cancel()',
   },
 })
-export class ScDateRangePickerNextCancel {
+export class ScDateRangePickerCancel {
   private readonly buttonStyles = injectStyle().button;
 
-  private readonly picker = inject(ScDateRangePickerNext);
+  private readonly picker = inject(ScDateRangePicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');

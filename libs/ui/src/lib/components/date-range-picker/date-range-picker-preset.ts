@@ -3,11 +3,11 @@ import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button';
 import type { ScCalendarRange } from '../calendar';
-import { ScDateRangePickerNext } from './date-range-picker-next';
+import { ScDateRangePicker } from './date-range-picker';
 
 /** A ready range — today, the last 7 days…: picked as the calendar's would be. Write its text; pressed while it is the value. */
 @Directive({
-  selector: 'button[scDateRangePickerNextPreset]',
+  selector: 'button[scDateRangePickerPreset]',
   host: {
     'data-slot': 'date-range-picker-preset',
     type: 'button',
@@ -16,10 +16,10 @@ import { ScDateRangePickerNext } from './date-range-picker-next';
     '(click)': 'picker.pick(value())',
   },
 })
-export class ScDateRangePickerNextPreset {
+export class ScDateRangePickerPreset {
   private readonly buttonStyles = injectStyle().button;
 
-  private readonly picker = inject(ScDateRangePickerNext);
+  private readonly picker = inject(ScDateRangePicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The range it picks: `scDateRangePresets()` gives the common ones. */

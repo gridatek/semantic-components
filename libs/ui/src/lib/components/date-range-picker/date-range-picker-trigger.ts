@@ -6,7 +6,7 @@ import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button';
 import { ScInputGroup } from '../input-group';
 import { ScPopoverProvider } from '../popover';
-import { ScDateRangePickerNext } from './date-range-picker-next';
+import { ScDateRangePicker } from './date-range-picker';
 
 /**
  * Opens the calendar: the picker's value, as written — in the input look
@@ -16,8 +16,8 @@ import { ScDateRangePickerNext } from './date-range-picker-next';
  * `size`) — name it.
  */
 @Directive({
-  selector: 'button[scDateRangePickerNextTrigger]',
-  exportAs: 'scDateRangePickerNextTrigger',
+  selector: 'button[scDateRangePickerTrigger]',
+  exportAs: 'scDateRangePickerTrigger',
   hostDirectives: [CdkOverlayOrigin],
   host: {
     'data-slot': 'date-range-picker-trigger',
@@ -32,13 +32,13 @@ import { ScDateRangePickerNext } from './date-range-picker-next';
     '(click)': 'popover.open.update((open) => !open)',
   },
 })
-export class ScDateRangePickerNextTrigger {
+export class ScDateRangePickerTrigger {
   private readonly buttonStyles = injectStyle().button;
   private readonly groupButtonStyles = injectStyle().inputGroupButton;
   private readonly triggerStyles = injectStyle().select.trigger;
 
   private readonly popover = inject(ScPopoverProvider);
-  private readonly picker = inject(ScDateRangePickerNext);
+  private readonly picker = inject(ScDateRangePicker);
   private readonly group = inject(ScInputGroup, { optional: true });
   readonly overlayOrigin = inject(CdkOverlayOrigin);
 

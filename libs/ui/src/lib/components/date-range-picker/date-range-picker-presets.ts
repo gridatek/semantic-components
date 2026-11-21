@@ -3,14 +3,14 @@ import { cn } from 'cn';
 
 /** The presets, in a column beside the calendar. Name it (`aria-label`). */
 @Directive({
-  selector: 'div[scDateRangePickerNextPresets]',
+  selector: 'div[scDateRangePickerPresets]',
   host: {
     'data-slot': 'date-range-picker-presets',
     role: 'group',
     '[class]': 'class()',
   },
 })
-export class ScDateRangePickerNextPresets {
+export class ScDateRangePickerPresets {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>

@@ -4,9 +4,9 @@ import {
   ScCalendarHeader,
   ScCalendarNext,
   ScCalendarPrevious,
-  type ScCalendarValue,
-  ScDatePicker,
-  ScDatePickerTrigger,
+  type ScCalendarRange,
+  ScDateRangePicker,
+  ScDateRangePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -17,12 +17,12 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** mode="range" on the date picker, two months: written as one span ("Oct 12 – 18, 2026"); it closes once both ends are picked. */
+/** Two clicks in two months — the start, then the end: written as one span ("Oct 12 – 18, 2026"); it closes once both ends are picked. */
 @Component({
   selector: 'app-basic-date-range-picker-demo',
   imports: [
-    ScDatePicker,
-    ScDatePickerTrigger,
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -36,14 +36,13 @@ import {
   ],
   template: `
     <div
-      scDatePicker
-      #dp="scDatePicker"
-      mode="range"
+      scDateRangePicker
+      #dp="scDateRangePicker"
       [(value)]="range"
       class="w-72"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-        <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+        <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
           <svg siCalendarIcon></svg>
           <span>{{ dp.text() || 'Pick dates' }}</span>
         </button>
@@ -53,7 +52,7 @@ import {
               scCalendar
               initialFocus
               aria-label="Choose dates"
-              [mode]="dp.mode()"
+              mode="range"
               [numberOfMonths]="2"
               [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
@@ -81,5 +80,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class BasicDateRangePickerDemo {
-  private readonly range = signal<ScCalendarValue>(null);
+  private readonly range = signal<ScCalendarRange | null>(null);
 }

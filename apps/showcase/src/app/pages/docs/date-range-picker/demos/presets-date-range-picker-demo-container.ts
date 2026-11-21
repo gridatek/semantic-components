@@ -24,11 +24,11 @@ import {
   ScCalendarHeader,
   ScCalendarNext,
   ScCalendarPrevious,
-  type ScCalendarValue,
-  ScDatePicker,
-  ScDatePickerPreset,
-  ScDatePickerPresets,
-  ScDatePickerTrigger,
+  type ScCalendarRange,
+  ScDateRangePicker,
+  ScDateRangePickerPreset,
+  ScDateRangePickerPresets,
+  ScDateRangePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -40,12 +40,12 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** scDatePickerPreset buttons beside the calendar: a preset is picked as the calendar’s pick would be — and pressed while it is the value. scDateRangePresets gives the common ones, named by you. */
+/** scDateRangePickerPreset buttons beside the calendar: a preset is picked as the calendar’s pick would be — and pressed while it is the value. scDateRangePresets gives the common ones, named by you. */
 @Component({
   selector: 'app-presets-date-range-picker-demo',
   imports: [
-    ScDatePicker,
-    ScDatePickerTrigger,
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -53,22 +53,24 @@ import {
     ScCalendarHeader,
     ScCalendarPrevious,
     ScCalendarNext,
-    ScDatePickerPreset,
-    ScDatePickerPresets,
+    ScDateRangePickerPreset,
+    ScDateRangePickerPresets,
     SiCalendarIcon,
     SiChevronLeftIcon,
     SiChevronRightIcon,
   ],
   template: \`
     <div
-      scDatePicker
-      #dp="scDatePicker"
-      mode="range"
+      scDateRangePicker
+      #dp="scDateRangePicker"
       [(value)]="range"
       class="w-72"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-        <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+        <button
+          scDateRangePickerTrigger
+          #trigger="scDateRangePickerTrigger"
+        >
           <svg siCalendarIcon></svg>
           <span>{{ dp.text() || 'Pick dates' }}</span>
         </button>
@@ -78,9 +80,9 @@ import {
             class="w-auto flex-row gap-0 p-0"
             aria-label="Choose dates"
           >
-            <div scDatePickerPresets aria-label="Presets">
+            <div scDateRangePickerPresets aria-label="Presets">
               @for (preset of presets; track preset.label) {
-                <button scDatePickerPreset [value]="preset.value">
+                <button scDateRangePickerPreset [value]="preset.value">
                   {{ preset.label }}
                 </button>
               }
@@ -89,7 +91,7 @@ import {
               scCalendar
               initialFocus
               aria-label="Choose dates"
-              [mode]="dp.mode()"
+              mode="range"
               [numberOfMonths]="1"
               [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
@@ -117,7 +119,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PresetsDateRangePickerDemo {
-  private readonly range = signal<ScCalendarValue>(null);
+  private readonly range = signal<ScCalendarRange | null>(null);
   private readonly presets = scDateRangePresets({
     today: 'Today',
     yesterday: 'Yesterday',

@@ -5,13 +5,13 @@ import {
   ScCalendarHeader,
   ScCalendarNext,
   ScCalendarPrevious,
-  type ScCalendarValue,
-  ScDatePicker,
-  ScDatePickerApply,
-  ScDatePickerCancel,
-  ScDatePickerPreset,
-  ScDatePickerPresets,
-  ScDatePickerTrigger,
+  type ScCalendarRange,
+  ScDateRangePicker,
+  ScDateRangePickerApply,
+  ScDateRangePickerCancel,
+  ScDateRangePickerPreset,
+  ScDateRangePickerPresets,
+  ScDateRangePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -23,12 +23,12 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** confirm: picks and presets are a draft, kept by scDatePickerApply — Cancel, Escape or a click outside drop it. Two months and presets, as on an analytics page. */
+/** confirm: picks and presets are a draft, kept by scDateRangePickerApply — Cancel, Escape or a click outside drop it. Two months and presets, as on an analytics page. */
 @Component({
   selector: 'app-confirm-date-range-picker-demo',
   imports: [
-    ScDatePicker,
-    ScDatePickerTrigger,
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -36,10 +36,10 @@ import {
     ScCalendarHeader,
     ScCalendarPrevious,
     ScCalendarNext,
-    ScDatePickerPreset,
-    ScDatePickerPresets,
-    ScDatePickerApply,
-    ScDatePickerCancel,
+    ScDateRangePickerPreset,
+    ScDateRangePickerPresets,
+    ScDateRangePickerApply,
+    ScDateRangePickerCancel,
     ScCalendarFooter,
     SiCalendarIcon,
     SiChevronLeftIcon,
@@ -47,15 +47,14 @@ import {
   ],
   template: `
     <div
-      scDatePicker
-      #dp="scDatePicker"
-      mode="range"
+      scDateRangePicker
+      #dp="scDateRangePicker"
       confirm
       [(value)]="range"
       class="w-72"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-        <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+        <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
           <svg siCalendarIcon></svg>
           <span>{{ dp.text() || 'Pick dates' }}</span>
         </button>
@@ -65,9 +64,9 @@ import {
             class="w-auto flex-row gap-0 p-0"
             aria-label="Choose dates"
           >
-            <div scDatePickerPresets aria-label="Presets">
+            <div scDateRangePickerPresets aria-label="Presets">
               @for (preset of presets; track preset.label) {
-                <button scDatePickerPreset [value]="preset.value">
+                <button scDateRangePickerPreset [value]="preset.value">
                   {{ preset.label }}
                 </button>
               }
@@ -76,7 +75,7 @@ import {
               scCalendar
               initialFocus
               aria-label="Choose dates"
-              [mode]="dp.mode()"
+              mode="range"
               [numberOfMonths]="2"
               [value]="dp.draft()"
               (valueChange)="dp.pick($event)"
@@ -92,8 +91,8 @@ import {
                 </button>
               </div>
               <div scCalendarFooter class="justify-end">
-                <button scDatePickerCancel>Cancel</button>
-                <button scDatePickerApply>Apply</button>
+                <button scDateRangePickerCancel>Cancel</button>
+                <button scDateRangePickerApply>Apply</button>
               </div>
             </div>
           </div>
@@ -116,5 +115,7 @@ export class ConfirmDateRangePickerDemo {
     thisMonth: 'This month',
     lastMonth: 'Last month',
   });
-  private readonly range = signal<ScCalendarValue>(this.presets[2].value);
+  private readonly range = signal<ScCalendarRange | null>(
+    this.presets[2].value,
+  );
 }

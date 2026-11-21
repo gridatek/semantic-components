@@ -5,8 +5,9 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarRange,
-  ScDateRangePickerNext,
-  ScDateRangePickerNextTrigger,
+  ScDateRangePicker,
+  ScDateRangePickerDuration,
+  ScDateRangePickerTrigger,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -17,12 +18,13 @@ import {
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Two clicks in two months — the start, then the end: written as one span ("Oct 12 – 18, 2026"); it closes once both ends are picked. */
+/** How long: scDateRangePickerDuration writes the days (Intl); nights() — a stay’s — is yours to write. */
 @Component({
-  selector: 'app-basic-date-range-picker-next-demo',
+  selector: 'app-duration-date-range-picker-demo',
   imports: [
-    ScDateRangePickerNext,
-    ScDateRangePickerNextTrigger,
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
+    ScDateRangePickerDuration,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -36,21 +38,18 @@ import {
   ],
   template: `
     <div
-      scDateRangePickerNext
-      #dp="scDateRangePickerNext"
+      scDateRangePicker
+      #dp="scDateRangePicker"
       [(value)]="range"
       class="w-72"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-        <button
-          scDateRangePickerNextTrigger
-          #trigger="scDateRangePickerNextTrigger"
-        >
+        <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
           <svg siCalendarIcon></svg>
           <span>{{ dp.text() || 'Pick dates' }}</span>
         </button>
         <ng-template scPopoverPortal>
-          <div scPopover class="w-auto p-0" aria-label="Choose dates">
+          <div scPopover class="w-auto gap-0 p-0" aria-label="Choose dates">
             <div
               scCalendar
               initialFocus
@@ -71,6 +70,12 @@ import {
                 </button>
               </div>
             </div>
+            <div class="flex items-center justify-between border-t px-3 py-2">
+              <span scDateRangePickerDuration></span>
+              @if (dp.nights()) {
+                <span class="text-sm">{{ dp.nights() }} nights</span>
+              }
+            </div>
           </div>
         </ng-template>
       </div>
@@ -82,6 +87,9 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicDateRangePickerNextDemo {
-  private readonly range = signal<ScCalendarRange | null>(null);
+export class DurationDateRangePickerDemo {
+  private readonly range = signal<ScCalendarRange | null>({
+    from: Temporal.PlainDate.from('2026-11-02'),
+    to: Temporal.PlainDate.from('2026-11-06'),
+  });
 }

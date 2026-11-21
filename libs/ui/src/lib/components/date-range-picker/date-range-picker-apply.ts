@@ -2,11 +2,11 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button';
-import { ScDateRangePickerNext } from './date-range-picker-next';
+import { ScDateRangePicker } from './date-range-picker';
 
 /** `confirm`: keeps the draft and closes — disabled until the range is whole. Write its text. */
 @Directive({
-  selector: 'button[scDateRangePickerNextApply]',
+  selector: 'button[scDateRangePickerApply]',
   host: {
     'data-slot': 'date-range-picker-apply',
     type: 'button',
@@ -15,10 +15,10 @@ import { ScDateRangePickerNext } from './date-range-picker-next';
     '(click)': 'picker.apply()',
   },
 })
-export class ScDateRangePickerNextApply {
+export class ScDateRangePickerApply {
   private readonly buttonStyles = injectStyle().button;
 
-  private readonly picker = inject(ScDateRangePickerNext);
+  private readonly picker = inject(ScDateRangePicker);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('default');

@@ -7,9 +7,8 @@ import {
   ScCalendarNext,
   ScCalendarPrevious,
   type ScCalendarRange,
-  type ScCalendarValue,
-  ScDatePicker,
-  ScDatePickerTrigger,
+  ScDateRangePicker,
+  ScDateRangePickerTrigger,
   ScField,
   ScFieldErrors,
   ScLabel,
@@ -29,8 +28,8 @@ import {
   imports: [
     FormField,
     FormRoot,
-    ScDatePicker,
-    ScDatePickerTrigger,
+    ScDateRangePicker,
+    ScDateRangePickerTrigger,
     ScPopoverProvider,
     ScPopoverPortal,
     ScPopover,
@@ -51,9 +50,8 @@ import {
       <div scField>
         <label scLabel for="stay">Stay</label>
         <div
-          scDatePicker
-          #dp="scDatePicker"
-          mode="range"
+          scDateRangePicker
+          #dp="scDateRangePicker"
           [formField]="bookingForm.stay"
         >
           <div
@@ -63,8 +61,8 @@ import {
           >
             <button
               id="stay"
-              scDatePickerTrigger
-              #trigger="scDatePickerTrigger"
+              scDateRangePickerTrigger
+              #trigger="scDateRangePickerTrigger"
             >
               <svg siCalendarIcon></svg>
               <span>{{ dp.text() || 'Pick dates' }}</span>
@@ -75,7 +73,7 @@ import {
                   scCalendar
                   initialFocus
                   aria-label="Choose dates"
-                  [mode]="dp.mode()"
+                  mode="range"
                   [numberOfMonths]="2"
                   [value]="dp.draft()"
                   (valueChange)="dp.pick($event)"
@@ -107,7 +105,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormDateRangePickerDemo {
-  private readonly model = signal<{ stay: ScCalendarValue }>({ stay: null });
+  private readonly model = signal<{ stay: ScCalendarRange | null }>({
+    stay: null,
+  });
   private readonly booked = signal('');
   private readonly bookingForm = form(
     this.model,
@@ -120,7 +120,7 @@ export class FormDateRangePickerDemo {
     {
       submission: {
         action: async () => {
-          const stay = this.model().stay as ScCalendarRange | null;
+          const stay = this.model().stay;
           if (stay?.from && stay.to) {
             this.booked.set(
               new Intl.DateTimeFormat('en-US', {
