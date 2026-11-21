@@ -2500,39 +2500,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/dock',
-    children: [
-      {
-        path: 'apps-dock-demo',
-        loadComponent: () =>
-          import('../pages/docs/dock/demos/apps-dock-demo').then(
-            (m) => m.AppsDockDemo,
-          ),
-      },
-      {
-        path: 'navigation-dock-demo',
-        loadComponent: () =>
-          import('../pages/docs/dock/demos/navigation-dock-demo').then(
-            (m) => m.NavigationDockDemo,
-          ),
-      },
-      {
-        path: 'vertical-dock-demo',
-        loadComponent: () =>
-          import('../pages/docs/dock/demos/vertical-dock-demo').then(
-            (m) => m.VerticalDockDemo,
-          ),
-      },
-      {
-        path: 'plain-dock-demo',
-        loadComponent: () =>
-          import('../pages/docs/dock/demos/plain-dock-demo').then(
-            (m) => m.PlainDockDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/drawer',
     children: [
       {
@@ -5627,46 +5594,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/speed-dial',
-    children: [
-      {
-        path: 'basic-speed-dial-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial/demos/basic-speed-dial-demo').then(
-            (m) => m.BasicSpeedDialDemo,
-          ),
-      },
-      {
-        path: 'directions-speed-dial-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial/demos/directions-speed-dial-demo').then(
-            (m) => m.DirectionsSpeedDialDemo,
-          ),
-      },
-      {
-        path: 'arc-speed-dial-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial/demos/arc-speed-dial-demo').then(
-            (m) => m.ArcSpeedDialDemo,
-          ),
-      },
-      {
-        path: 'backdrop-speed-dial-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial/demos/backdrop-speed-dial-demo').then(
-            (m) => m.BackdropSpeedDialDemo,
-          ),
-      },
-      {
-        path: 'controlled-speed-dial-demo',
-        loadComponent: () =>
-          import('../pages/docs/speed-dial/demos/controlled-speed-dial-demo').then(
-            (m) => m.ControlledSpeedDialDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/spinner',
     children: [
       {
@@ -5723,39 +5650,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/spinner/demos/rtl-spinner-demo').then(
             (m) => m.RtlSpinnerDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/spotlight',
-    children: [
-      {
-        path: 'basic-spotlight-demo',
-        loadComponent: () =>
-          import('../pages/docs/spotlight/demos/basic-spotlight-demo').then(
-            (m) => m.BasicSpotlightDemo,
-          ),
-      },
-      {
-        path: 'interactive-spotlight-demo',
-        loadComponent: () =>
-          import('../pages/docs/spotlight/demos/interactive-spotlight-demo').then(
-            (m) => m.InteractiveSpotlightDemo,
-          ),
-      },
-      {
-        path: 'sides-spotlight-demo',
-        loadComponent: () =>
-          import('../pages/docs/spotlight/demos/sides-spotlight-demo').then(
-            (m) => m.SidesSpotlightDemo,
-          ),
-      },
-      {
-        path: 'custom-spotlight-demo',
-        loadComponent: () =>
-          import('../pages/docs/spotlight/demos/custom-spotlight-demo').then(
-            (m) => m.CustomSpotlightDemo,
           ),
       },
     ],
@@ -7520,39 +7414,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/tooltip/demos/rtl-tooltip-demo').then(
             (m) => m.RtlTooltipDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/tour-guide',
-    children: [
-      {
-        path: 'tour-tour-guide-demo',
-        loadComponent: () =>
-          import('../pages/docs/tour-guide/demos/tour-tour-guide-demo').then(
-            (m) => m.TourTourGuideDemo,
-          ),
-      },
-      {
-        path: 'minimal-tour-guide-demo',
-        loadComponent: () =>
-          import('../pages/docs/tour-guide/demos/minimal-tour-guide-demo').then(
-            (m) => m.MinimalTourGuideDemo,
-          ),
-      },
-      {
-        path: 'scrolling-tour-guide-demo',
-        loadComponent: () =>
-          import('../pages/docs/tour-guide/demos/scrolling-tour-guide-demo').then(
-            (m) => m.ScrollingTourGuideDemo,
-          ),
-      },
-      {
-        path: 'controlled-tour-guide-demo',
-        loadComponent: () =>
-          import('../pages/docs/tour-guide/demos/controlled-tour-guide-demo').then(
-            (m) => m.ControlledTourGuideDemo,
           ),
       },
     ],

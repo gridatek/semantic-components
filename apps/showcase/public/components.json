@@ -323,15 +323,6 @@
     "hidden": true
   },
   {
-    "name": "Dock",
-    "path": "dock",
-    "description": "Your links and buttons, magnified by distance to the pointer and on focus; labels, counts, dots.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Advanced",
-    "hidden": true
-  },
-  {
     "name": "Drawer",
     "path": "drawer",
     "description": "A panel at the edge of the screen that a swipe dismisses, with snap points and stacking — in the look of the app's style.",
@@ -928,30 +919,12 @@
     "hidden": true
   },
   {
-    "name": "Speed Dial",
-    "path": "speed-dial",
-    "description": "A floating button opening a menu of actions, in a line or on an arc, with a backdrop.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Buttons & Actions",
-    "hidden": true
-  },
-  {
     "name": "Spinner",
     "path": "spinner",
     "description": "A loading indicator animation.",
     "status": "Experimental",
     "library": "ui",
     "category": "Feedback"
-  },
-  {
-    "name": "Spotlight",
-    "path": "spotlight",
-    "description": "One element lit, your content in a native dialog; modal, or interactive through the cutout.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Overlay",
-    "hidden": true
   },
   {
     "name": "Stat Card",
@@ -1110,15 +1083,6 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Overlay"
-  },
-  {
-    "name": "Tour Guide",
-    "path": "tour-guide",
-    "description": "Steps as markup on their targets, a native modal dialog with a spotlight, flipping cards, scrolling, keys.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Advanced",
-    "hidden": true
   },
   {
     "name": "Trace",

@@ -275,11 +275,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/diff-viewer/diff-viewer-page'),
       },
       {
-        path: 'dock',
-        title: 'Dock - Semantic Components',
-        loadComponent: () => import('../pages/docs/dock/dock-page'),
-      },
-      {
         path: 'drawer',
         title: 'Drawer - Semantic Components',
         loadComponent: () => import('../pages/docs/drawer/drawer-page'),
@@ -569,19 +564,9 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/sortable-list/sortable-list-page'),
       },
       {
-        path: 'speed-dial',
-        title: 'Speed Dial - Semantic Components',
-        loadComponent: () => import('../pages/docs/speed-dial/speed-dial-page'),
-      },
-      {
         path: 'spinner',
         title: 'Spinner - Semantic Components',
         loadComponent: () => import('../pages/docs/spinner/spinner-page'),
-      },
-      {
-        path: 'spotlight',
-        title: 'Spotlight - Semantic Components',
-        loadComponent: () => import('../pages/docs/spotlight/spotlight-page'),
       },
       {
         path: 'stat-card',
@@ -738,11 +723,6 @@ export const componentsRoutes: Route[] = [
         path: 'tooltip',
         title: 'Tooltip - Semantic Components',
         loadComponent: () => import('../pages/docs/tooltip/tooltip-page'),
-      },
-      {
-        path: 'tour-guide',
-        title: 'Tour Guide - Semantic Components',
-        loadComponent: () => import('../pages/docs/tour-guide/tour-guide-page'),
       },
       {
         path: 'transfer-list',
