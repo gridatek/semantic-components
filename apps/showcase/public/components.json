@@ -99,7 +99,7 @@
   {
     "name": "Barcode Scanner",
     "path": "barcode-scanner",
-    "description": "Reads barcodes and QR codes from the camera or a picture, each code outlined where it is; on the standard BarcodeDetector, polyfilled by the app where the browser has none.",
+    "description": "Reads barcodes and QR codes from the camera or a picture, each code outlined where it is; with the browser's BarcodeDetector, or barcode-detector's where it has none.",
     "status": "Experimental",
     "library": "ui",
     "category": "Media"

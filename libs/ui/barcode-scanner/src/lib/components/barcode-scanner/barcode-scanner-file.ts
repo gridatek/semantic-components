@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
-import { injectStyle } from '../../config/style';
 import { ScBarcodeScanner } from './barcode-scanner';
 
 /**

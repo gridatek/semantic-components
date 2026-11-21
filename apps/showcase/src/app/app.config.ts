@@ -18,6 +18,7 @@ import {
   ScStorage,
   provideSemanticComponents,
 } from '@semantic-components/ui';
+import { withBarcodeScanner } from '@semantic-components/ui/barcode-scanner';
 import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 import { appRoutes } from './app-routes';
 import { STYLES, provideStyleSheets, styleFrom } from './styles';
@@ -34,6 +35,9 @@ export const appConfig: ApplicationConfig = {
       },
       // Code blocks highlighted with Shiki, each language loaded when first shown.
       withCodeHighlighter(),
+      // The scanner's decoder, where the browser has no BarcodeDetector: served
+      // with the site's assets (project.json), not a CDN.
+      withBarcodeScanner({ wasmUrl: '/zxing/zxing_reader.wasm' }),
     ),
     // The style picked on /customize (lyra by default): its cookie, read from
     // the request when the server renders — a page is drawn in it from the

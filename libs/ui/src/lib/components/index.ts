@@ -70,7 +70,6 @@ export * from './tree';
 export * from './typeset';
 export * from './attachment';
 export * from './audio-player';
-export * from './barcode-scanner';
 export * from './bubble';
 export * from './color-picker';
 export * from './compare';

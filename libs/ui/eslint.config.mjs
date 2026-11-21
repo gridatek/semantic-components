@@ -12,7 +12,10 @@ export default [
           ignoredFiles: ['{projectRoot}/eslint.config.{js,cjs,mjs,ts,cts,mts}'],
           // The data table's parts take the app's TanStack table without
           // importing TanStack: a peer for what they need, not for an import.
-          ignoredDependencies: ['@tanstack/angular-table'],
+          // The barcode scanner loads barcode-detector with a dynamic import
+          // (only where the browser has no BarcodeDetector), which the check
+          // doesn't see.
+          ignoredDependencies: ['@tanstack/angular-table', 'barcode-detector'],
         },
       ],
     },

@@ -1,18 +1,19 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
 import {
-  type ScBarcodeFormat,
-  ScBarcodeScanner,
-  ScBarcodeScannerOverlay,
-  ScBarcodeScannerToggle,
-  ScBarcodeScannerVideo,
   ScField,
   ScFrame,
   ScRadio,
   ScRadioGroup,
 } from '@semantic-components/ui';
+import {
+  type ScBarcodeFormat,
+  ScBarcodeScanner,
+  ScBarcodeScannerOverlay,
+  ScBarcodeScannerToggle,
+  ScBarcodeScannerVideo,
+} from '@semantic-components/ui/barcode-scanner';
 import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
-import './barcode-detector-polyfill';
 
 /** Only the formats you ask for — QR codes, or products (EAN, UPC); none asked, all the browser reads. */
 @Component({

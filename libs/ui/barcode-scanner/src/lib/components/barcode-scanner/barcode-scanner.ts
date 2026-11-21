@@ -13,11 +13,12 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import {
+  SC_BARCODE_SCANNER_CONFIG,
   type ScBarcode,
   type ScBarcodeDetector,
   type ScBarcodeFormat,
   type ScBarcodeScannerState,
-  barcodeDetector,
+  loadBarcodeDetector,
 } from './barcode';
 
 /** The same code, seen again within this time, is the same reading. */
@@ -26,8 +27,9 @@ const SEEN_FOR = 1500;
 /**
  * Reads barcodes — from the camera (`active`), or a picture (`scan()`,
  * `scBarcodeScannerFile`). Each new code comes out of `(detected)`; to
- * scan once, turn it off there. Written against the standard BarcodeDetector:
- * where the browser has none, the app adds it (a polyfill).
+ * scan once, turn it off there. It reads with the browser's BarcodeDetector —
+ * or, where there is none, barcode-detector's (an optional peer), loaded on
+ * the first scan.
  */
 @Directive({
   selector: '[scBarcodeScanner]',
@@ -40,6 +42,9 @@ const SEEN_FOR = 1500;
 })
 export class ScBarcodeScanner {
   private readonly document = inject(DOCUMENT);
+  private readonly wasmUrl = inject(SC_BARCODE_SCANNER_CONFIG, {
+    optional: true,
+  })?.wasmUrl;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -51,9 +56,7 @@ export class ScBarcodeScanner {
   /** Each new code read. */
   readonly detected = output<ScBarcode>();
 
-  readonly state = signal<ScBarcodeScannerState>(
-    barcodeDetector() ? 'idle' : 'unsupported',
-  );
+  readonly state = signal<ScBarcodeScannerState>('idle');
   /** The codes in the camera's frame now. */
   readonly codes = signal<readonly ScBarcode[]>([]);
 
@@ -65,19 +68,17 @@ export class ScBarcodeScanner {
   private readonly class = computed(() => cn('block', this.classInput()));
 
   private stream: MediaStream | null = null;
-  private detector: ScBarcodeDetector | null = null;
+  /** For the formats: made on the first scan, again when they change. */
+  private detector: Promise<ScBarcodeDetector | null> | null = null;
   private readonly seen = new Map<string, number>();
   /** Each start; a stale one stops itself. */
   private run = 0;
 
   constructor() {
-    // The detector, for the formats.
+    // Other formats: another detector, on the next frame.
     effect(() => {
-      const formats = this.formats();
-      const Detector = barcodeDetector();
-      this.detector = Detector
-        ? new Detector(formats.length ? { formats } : undefined)
-        : null;
+      this.formats();
+      this.detector = null;
     });
     // The camera, on and off.
     effect(() => {
@@ -93,11 +94,12 @@ export class ScBarcodeScanner {
 
   /** Reads the codes in a picture (a file, a blob, an image…); each comes out of `(detected)` too. */
   async scan(source: Blob | ImageBitmapSource): Promise<ScBarcode[]> {
-    if (!this.detector) return [];
+    const detector = await this.getDetector();
+    if (!detector) return [];
     const image =
       source instanceof Blob ? await createImageBitmap(source) : source;
     try {
-      const codes = await this.detector.detect(image);
+      const codes = await detector.detect(image);
       codes.forEach((code) => this.detected.emit(code));
       return codes;
     } catch {
@@ -110,14 +112,16 @@ export class ScBarcodeScanner {
   }
 
   private async start(video: HTMLVideoElement): Promise<void> {
-    if (!this.detector) return;
     const run = ++this.run;
+    this.state.set('starting');
+    // Nothing to read with: unsupported (getDetector says so).
+    if (!(await this.getDetector()) || run !== this.run) return;
     const media = this.document.defaultView?.navigator.mediaDevices;
     if (!media?.getUserMedia) {
       this.state.set('unavailable');
+      this.active.set(false);
       return;
     }
-    this.state.set('starting');
     try {
       const stream = await media.getUserMedia({
         // The one at the back, where there is one.
@@ -151,10 +155,11 @@ export class ScBarcodeScanner {
       video.requestVideoFrameCallback(() => void read());
     };
     const read = async () => {
-      if (run !== this.run || !this.detector) return;
+      const detector = await this.getDetector();
+      if (run !== this.run || !detector) return;
       this.ɵsize.set({ width: video.videoWidth, height: video.videoHeight });
       try {
-        const codes = await this.detector.detect(video);
+        const codes = await detector.detect(video);
         if (run !== this.run) return;
         this.codes.set(codes);
         this.report(codes);
@@ -164,6 +169,24 @@ export class ScBarcodeScanner {
       next();
     };
     next();
+  }
+
+  /** The detector for the formats: the browser's, or barcode-detector's, loaded once. */
+  private getDetector(): Promise<ScBarcodeDetector | null> {
+    this.detector ??= this.makeDetector(untracked(this.formats));
+    return this.detector;
+  }
+
+  private async makeDetector(
+    formats: readonly ScBarcodeFormat[],
+  ): Promise<ScBarcodeDetector | null> {
+    const Detector = await loadBarcodeDetector(this.wasmUrl);
+    if (!Detector) {
+      this.state.set('unsupported');
+      this.active.set(false);
+      return null;
+    }
+    return new Detector(formats.length ? { formats } : undefined);
   }
 
   /** New codes out; a code seen again (within a moment) is not new. */

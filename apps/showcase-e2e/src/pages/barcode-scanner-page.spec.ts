@@ -5,6 +5,7 @@ test.describe('Barcode Scanner Page', () => {
   test('sections in order, and no axe violations', async ({ page }) => {
     await page.goto('/docs/components/barcode-scanner');
     await expect(page.locator('h2')).toHaveText([
+      'Installation',
       'Usage',
       'Anatomy',
       'Reading',

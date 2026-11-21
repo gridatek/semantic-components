@@ -19,15 +19,14 @@ import { BarcodeScannerUsageDemo } from './barcode-scanner-usage-demo';
 })
 export class BarcodeScannerUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
   ScBarcodeScanner,
   ScBarcodeScannerOverlay,
   ScBarcodeScannerToggle,
   ScBarcodeScannerVideo,
-  ScFrame,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/barcode-scanner';
 import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
-import './barcode-detector-polyfill';
 
 /** The camera, each code outlined where it is; each new one comes out of (detected) — here, said in a live region. */
 @Component({

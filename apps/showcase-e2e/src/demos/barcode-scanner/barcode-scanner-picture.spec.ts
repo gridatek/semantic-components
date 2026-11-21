@@ -27,6 +27,23 @@ test.describe('From a picture (every browser)', () => {
       'https://semantic-components.dev',
     );
   });
+
+  test("the browser's own BarcodeDetector, where there is one: barcode-detector's decoder never loaded", async ({
+    page,
+  }) => {
+    // A browser with its own (it answers "native").
+    await page.addInitScript(
+      'globalThis.BarcodeDetector = class { detect() { return Promise.resolve([{ rawValue: "native", format: "qr_code", cornerPoints: [] }]); } };',
+    );
+    const decoder: string[] = [];
+    page.on('request', (request) => {
+      if (request.url().includes('zxing')) decoder.push(request.url());
+    });
+    await page.goto(demo('picture'));
+    await page.getByRole('button', { name: 'A QR code' }).click();
+    await expect(page.locator('[aria-live]')).toContainText('qr_code native');
+    expect(decoder).toEqual([]);
+  });
 });
 
 const usage = '/demos/barcode-scanner/barcode-scanner-usage-demo';

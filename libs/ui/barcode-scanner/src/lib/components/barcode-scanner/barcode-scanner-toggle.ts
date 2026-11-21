@@ -1,8 +1,10 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import {
+  type ScButtonVariants,
+  injectStyle,
+  ɵwarnIfUnnamed,
+} from '@semantic-components/ui';
 import { cn } from 'cn';
-import { injectStyle } from '../../config/style';
-import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
-import { type ScButtonVariants } from '../button/button';
 import { ScBarcodeScanner } from './barcode-scanner';
 
 /**

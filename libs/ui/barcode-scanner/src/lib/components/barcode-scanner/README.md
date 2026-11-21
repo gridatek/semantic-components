@@ -1,6 +1,8 @@
 # Barcode Scanner
 
-Reads barcodes and QR codes from the camera or a picture, each code outlined where it is; on the standard BarcodeDetector, polyfilled by the app where the browser has none.
+Reads barcodes and QR codes from the camera or a picture, each code outlined where it is; with the browser's BarcodeDetector, or barcode-detector's where it has none.
+
+`@semantic-components/ui/barcode-scanner`, with `barcode-detector` (an optional peer of ui) installed.
 
 ## Architecture
 
@@ -39,16 +41,16 @@ The frame (`relative`, its size, `overflow-hidden`) is yours; the video fills it
 
 ## States
 
-`state()`: `idle` (off), `starting` (asking for the camera), `scanning`, `denied` (refused — the camera turns off), `unavailable` (no camera, or it could not start), `unsupported` (no `BarcodeDetector`). Say what each means, and offer a picture when there is no camera. `data-state` on the scanner.
+`state()`: `idle` (off), `starting` (asking for the camera), `scanning`, `denied` (refused — the camera turns off), `unavailable` (no camera, or it could not start), `unsupported` (nothing to read with: no `BarcodeDetector`, and `barcode-detector` not installed). Say what each means, and offer a picture when there is no camera. `data-state` on the scanner.
 
 ## Browsers
 
-The scanner uses the global `BarcodeDetector` — the standard; Chromium on Android and macOS has it. Elsewhere the app adds it, as a polyfill — not the library: `barcode-detector/polyfill` (on zxing-wasm), imported where the scanner is used (or in the app's `polyfills`), its decoder served with the app's assets:
+The scanner reads with the browser's `BarcodeDetector` — the standard; Chromium on Android and macOS has it. Where there is none (Firefox, Safari, Chromium on Windows and Linux) it loads `barcode-detector/ponyfill` (on zxing-wasm) on the first scan, and only then: nothing is loaded where the browser has its own, and no global is set. Without `barcode-detector` installed, the state there is `unsupported`.
+
+The decoder (`zxing_reader.wasm`, about 1 MB) comes from zxing-wasm's CDN. To serve it with the app, copy it into the assets and say where:
 
 ```ts
-import { prepareZXingModule } from 'barcode-detector/polyfill';
-
-prepareZXingModule({ overrides: { locateFile: (path, prefix) => (path.endsWith('.wasm') ? `/zxing/${path}` : prefix + path) } });
+provideSemanticComponents({ style }, withBarcodeScanner({ wasmUrl: '/zxing/zxing_reader.wasm' }));
 ```
 
 ```json

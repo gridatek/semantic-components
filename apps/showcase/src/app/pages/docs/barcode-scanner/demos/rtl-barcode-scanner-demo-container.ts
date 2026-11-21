@@ -20,15 +20,14 @@ import { RtlBarcodeScannerDemo } from './rtl-barcode-scanner-demo';
 export class RtlBarcodeScannerDemoContainer {
   private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
   ScBarcodeScanner,
   ScBarcodeScannerOverlay,
   ScBarcodeScannerToggle,
   ScBarcodeScannerVideo,
-  ScFrame,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/barcode-scanner';
 import { SiCameraIcon, SiCameraOffIcon } from '@semantic-icons/lucide-icons';
-import './barcode-detector-polyfill';
 
 /** In a right-to-left page: your words, and the row, follow it; the camera's picture is never mirrored. */
 @Component({

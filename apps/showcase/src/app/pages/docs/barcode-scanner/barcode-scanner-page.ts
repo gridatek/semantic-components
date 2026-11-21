@@ -7,6 +7,7 @@ import {
 } from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { DocCode } from '../../../components/doc-code/doc-code';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BarcodeScannerUsageDemoContainer } from './demos/barcode-scanner-usage-demo-container';
@@ -23,6 +24,7 @@ import { RtlBarcodeScannerDemoContainer } from './demos/rtl-barcode-scanner-demo
     Anatomy,
     ApiTable,
     DocCode,
+    EntryInstall,
     PartsTable,
     TocHeading,
     ComponentBadges,
@@ -38,11 +40,21 @@ import { RtlBarcodeScannerDemoContainer } from './demos/rtl-barcode-scanner-demo
         <h1 scTypeset>Barcode Scanner</h1>
         <p class="text-muted-foreground">
           Reads barcodes and QR codes from the camera or a picture, each code
-          outlined where it is; on the standard BarcodeDetector, polyfilled by
-          the app where the browser has none.
+          outlined where it is; with the browser&apos;s BarcodeDetector, or
+          barcode-detector&apos;s where it has none.
         </p>
         <app-component-badges path="barcode-scanner" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Installation</h2>
+        <app-entry-install
+          entry="barcode-scanner"
+          library="barcode-detector"
+          href="https://github.com/Sec-ant/barcode-detector"
+          names="ScBarcodeScanner, ScBarcodeScannerVideo, ScBarcodeScannerOverlay, ScBarcodeScannerToggle, ScBarcodeScannerFile"
+        />
+      </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
@@ -73,21 +85,29 @@ import { RtlBarcodeScannerDemoContainer } from './demos/rtl-barcode-scanner-demo
         <p>
           <code scTypeset>state()</code>
           says where it is: idle, starting, scanning — or why not: denied (the
-          camera refused), unavailable (none), unsupported (no BarcodeDetector).
+          camera refused), unavailable (none), unsupported (nothing to read
+          with: no BarcodeDetector, and barcode-detector not installed).
         </p>
       </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Browsers</h2>
         <p>
-          It uses the browser&apos;s BarcodeDetector, which Chromium has on
-          Android and macOS. Elsewhere the app adds one:
+          It reads with the browser&apos;s BarcodeDetector, which Chromium has
+          on Android and macOS. Where there is none — Firefox, Safari, Chromium
+          on Windows and Linux — it loads
           <a scLink href="https://github.com/Sec-ant/barcode-detector"
             >barcode-detector</a
-          >, on zxing-wasm, its decoder served with the app&apos;s assets —
-          where the scanner is used, or in the app&apos;s polyfills.
+          >&apos;s on the first scan, and only then: nothing is loaded where the
+          browser has its own, and no global is set.
         </p>
-        <app-doc-code [code]="polyfill" language="typescript" />
+        <p>
+          Its decoder, zxing-wasm&apos;s (about 1 MB), comes from a CDN. To
+          serve it with your app instead, copy it into your assets and say where
+          it is with
+          <code scTypeset>withBarcodeScanner()</code>.
+        </p>
+        <app-doc-code [code]="setup" language="typescript" />
         <app-doc-code [code]="asset" language="json" />
       </section>
 
@@ -145,7 +165,7 @@ export default class BarcodeScannerPage {
       '  ScBarcodeScannerOverlay,',
       '  ScBarcodeScannerToggle,',
       '  ScBarcodeScannerVideo,',
-      "} from '@semantic-components/ui';",
+      "} from '@semantic-components/ui/barcode-scanner';",
     ].join('\n'),
     markup: [
       '<div scBarcodeScanner #scanner="scBarcodeScanner" (detected)="read($event)">',
@@ -159,16 +179,14 @@ export default class BarcodeScannerPage {
     ].join('\n'),
   };
 
-  private readonly polyfill = [
-    '// polyfills.ts, or beside the scanner',
-    "import { prepareZXingModule } from 'barcode-detector/polyfill';",
+  private readonly setup = [
+    '// app.config.ts',
+    "import { withBarcodeScanner } from '@semantic-components/ui/barcode-scanner';",
     '',
-    'prepareZXingModule({',
-    '  overrides: {',
-    '    locateFile: (path: string, prefix: string) =>',
-    "      path.endsWith('.wasm') ? `/zxing/${path}` : prefix + path,",
-    '  },',
-    '});',
+    'provideSemanticComponents(',
+    '  { style },',
+    "  withBarcodeScanner({ wasmUrl: '/zxing/zxing_reader.wasm' }),",
+    ');',
   ].join('\n');
 
   private readonly asset = [

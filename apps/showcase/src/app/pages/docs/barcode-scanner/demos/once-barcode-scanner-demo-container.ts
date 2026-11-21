@@ -20,19 +20,15 @@ import { OnceBarcodeScannerDemo } from './once-barcode-scanner-demo';
 export class OnceBarcodeScannerDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { ScField, ScFrame, ScInput, ScLabel } from '@semantic-components/ui';
 import {
   type ScBarcode,
   ScBarcodeScanner,
   ScBarcodeScannerOverlay,
   ScBarcodeScannerToggle,
   ScBarcodeScannerVideo,
-  ScField,
-  ScFrame,
-  ScInput,
-  ScLabel,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/barcode-scanner';
 import { SiScanLineIcon } from '@semantic-icons/lucide-icons';
-import './barcode-detector-polyfill';
 
 /** Into a form: the first code fills the field, and the camera stops — turned off in (detected). */
 @Component({
