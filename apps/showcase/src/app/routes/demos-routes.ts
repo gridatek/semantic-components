@@ -2166,46 +2166,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/countdown',
-    children: [
-      {
-        path: 'event-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/event-countdown-demo').then(
-            (m) => m.EventCountdownDemo,
-          ),
-      },
-      {
-        path: 'inline-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/inline-countdown-demo').then(
-            (m) => m.InlineCountdownDemo,
-          ),
-      },
-      {
-        path: 'timer-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/timer-countdown-demo').then(
-            (m) => m.TimerCountdownDemo,
-          ),
-      },
-      {
-        path: 'roll-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/roll-countdown-demo').then(
-            (m) => m.RollCountdownDemo,
-          ),
-      },
-      {
-        path: 'done-countdown-demo',
-        loadComponent: () =>
-          import('../pages/docs/countdown/demos/done-countdown-demo').then(
-            (m) => m.DoneCountdownDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/data-table',
     children: [
       {

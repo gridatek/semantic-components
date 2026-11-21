@@ -76,7 +76,6 @@ export * from './bubble';
 export * from './color-picker';
 export * from './compare';
 export * from './control-group';
-export * from './countdown';
 export * from './emoji-picker';
 export * from './image-cropper';
 export * from './infinite-scroll';
