@@ -47,11 +47,7 @@ const BIG_STEP = { hours: 2, minutes: 15, seconds: 15 } as const;
       ></span>
       <span
         aria-hidden="true"
-        [class]="
-          hand.onNumber
-            ? 'bg-primary absolute size-8 -translate-x-1/2 -translate-y-1/2 rounded-full'
-            : 'bg-primary absolute size-3 -translate-x-1/2 -translate-y-1/2 rounded-full'
-        "
+        class="bg-primary absolute size-8 -translate-x-1/2 -translate-y-1/2 rounded-full"
         [style.left.%]="50 + hand.x"
         [style.top.%]="50 + hand.y"
       ></span>
@@ -70,9 +66,21 @@ const BIG_STEP = { hours: 2, minutes: 15, seconds: 15 } as const;
         [class]="mark.inner ? innerClass() : numberClass()"
         [style.left.%]="50 + mark.x"
         [style.top.%]="50 + mark.y"
+        [style.background-image]="ink(mark)"
       >
         {{ mark.label }}
       </span>
+    }
+    @if (hand(); as hand) {
+      @if (!hand.onNumber) {
+        <!-- Between two numbers: a light dot in the knob (MUI's way). -->
+        <span
+          aria-hidden="true"
+          class="bg-primary-foreground absolute size-1 -translate-x-1/2 -translate-y-1/2 rounded-full"
+          [style.left.%]="50 + hand.x"
+          [style.top.%]="50 + hand.y"
+        ></span>
+      }
     }
   `,
   host: {
@@ -168,6 +176,22 @@ export class ScTimeClockDial {
     return [...outer, ...inner];
   });
 
+  /**
+   * A number's text, painted (Material's way): light where it is under the
+   * knob, its own colour elsewhere — a number half under the knob, half each.
+   * The knob's centre from the number's, in the dial's units (`cqw`).
+   */
+  private ink(mark: ScTimeClockMark): string {
+    const colour = mark.disabled
+      ? 'color-mix(in oklab, var(--muted-foreground) 50%, transparent)'
+      : 'var(--foreground)';
+    const hand = this.hand();
+    if (!hand) return `linear-gradient(${colour}, ${colour})`;
+    const x = `calc(${hand.x - mark.x}cqw + 1rem)`;
+    const y = `calc(${hand.y - mark.y}cqw + 1rem)`;
+    return `radial-gradient(circle 1rem at ${x} ${y}, var(--primary-foreground) 1rem, ${colour} 1rem)`;
+  }
+
   /** The hand: where it points, and how long it is. */
   private readonly hand = computed(() => {
     const value = this.clock.value();
@@ -183,8 +207,8 @@ export class ScTimeClockDial {
       (value.hour === 0 || value.hour > 12);
     const radius = inner ? INNER : OUTER;
     const radians = ((degrees - 90) * Math.PI) / 180;
-    // On a number (an hour, a minute or second in fives): the knob is the
-    // number's; between two, a small dot that touches neither.
+    // On a number (an hour, a minute or second in fives) — or between two:
+    // then a light dot in the knob (MUI's way).
     const onNumber =
       view === 'hours' ||
       (view === 'minutes' ? value.minute : value.second) % 5 === 0;
@@ -198,26 +222,18 @@ export class ScTimeClockDial {
   });
 
   private readonly baseNumber =
-    'pointer-events-none absolute flex size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full tabular-nums data-selected:text-primary-foreground data-disabled:text-muted-foreground/50';
+    'pointer-events-none absolute flex size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full tabular-nums bg-clip-text text-transparent';
   private readonly numberClass = computed(() =>
     cn(this.baseNumber, this.styles.number),
   );
-  // An inner number (24 hours) not picked has the face's background: the
-  // hand to an outer hour passes under it, and it stays readable. Smaller
-  // (24px): it reaches neither the knob nor its neighbours. The outer ones
-  // have none: no line passes under them, and the knob between two (a minute
-  // off the fives) is never bitten.
   private readonly innerClass = computed(() =>
-    cn(
-      this.baseNumber,
-      'size-6 bg-inherit data-selected:size-8 data-selected:bg-transparent',
-      this.styles.numberInner,
-    ),
+    cn(this.baseNumber, this.styles.numberInner),
   );
 
   private readonly class = computed(() =>
     cn(
-      'relative shrink-0 touch-none rounded-full outline-none select-none',
+      // A size container: its numbers place the knob in its units (cqw).
+      'relative shrink-0 touch-none rounded-full outline-none select-none [container-type:size]',
       'focus-visible:ring-ring/50 focus-visible:ring-3',
       'aria-disabled:pointer-events-none aria-disabled:opacity-50',
       this.styles.face,

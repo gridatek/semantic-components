@@ -62,7 +62,7 @@ The time as the locale writes it, left to right in any page — each part a butt
 
 ### ScTimeClockDial — `div[scTimeClockDial]`
 
-`role="slider"`: `aria-valuenow` the hour (0–23), minute or second, `aria-valuetext` the whole time as the locale writes it. The numbers are decorative; a number not picked has the face's background, so the hand passes under it. It never turns right to left (a clock is a clock).
+`role="slider"`: `aria-valuenow` the hour (0–23), minute or second, `aria-valuetext` the whole time as the locale writes it. The numbers are decorative. The knob is always whole: what falls under it of a number is painted light, the rest its own colour (Android Material); between two numbers, a light dot in it (MUI). It never turns right to left (a clock is a clock).
 
 ## Look
 
