@@ -37,8 +37,6 @@ type ScTimeInputNextParts = Partial<
   Record<'hour' | 'minute' | 'second', number>
 > & { dayPeriod?: 'am' | 'pm' };
 
-/** An empty part. */
-const EMPTY = '––';
 /** Page Up / Page Down: a bigger step. */
 const BIG_STEP = { hour: 2, minute: 15, second: 15 } as const;
 const NONE = Symbol('none');
