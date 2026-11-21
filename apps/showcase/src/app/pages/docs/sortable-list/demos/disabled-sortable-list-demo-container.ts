@@ -58,7 +58,6 @@ interface Item {
         <li
           [scSortableListItem]="item"
           aria-describedby="disabled-sortable-help"
-          class="px-3 py-2"
         >
           {{ item.label }}
         </li>

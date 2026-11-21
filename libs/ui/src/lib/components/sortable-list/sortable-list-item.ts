@@ -8,6 +8,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScSortableList } from './sortable-list';
 import { ScSortableListHandle } from './sortable-list-handle';
 
@@ -35,6 +36,7 @@ export class ScSortableListItem<T = unknown> {
   /** The list it is in. */
   readonly list = inject<ScSortableList<T>>(forwardRef(() => ScSortableList));
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  private readonly frame = injectStyle().frameSm;
 
   readonly item = input.required<T>({ alias: 'scSortableListItem' });
   readonly classInput = input<string>('', { alias: 'class' });
@@ -47,7 +49,9 @@ export class ScSortableListItem<T = unknown> {
 
   private readonly class = computed(() =>
     cn(
-      'bg-card text-card-foreground ring-foreground/10 relative rounded-lg text-sm ring-1 outline-none select-none',
+      // A small box in the style: its corners and ring.
+      this.frame,
+      'bg-card text-card-foreground relative px-3 py-2 text-sm outline-none select-none',
       'focus-visible:ring-ring/50 focus-visible:ring-3',
       !this.handle() && !this.list.off() && 'cursor-grab touch-manipulation',
       'data-dragging:z-10 data-dragging:cursor-grabbing data-dragging:shadow-lg',

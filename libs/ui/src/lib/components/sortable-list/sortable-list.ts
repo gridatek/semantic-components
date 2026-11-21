@@ -10,6 +10,7 @@ import {
   model,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScSortable, type ScSortableOrientation } from './sortable';
 import { ScSortableGroup } from './sortable-group';
 import { ScSortableListItem } from './sortable-list-item';
@@ -51,6 +52,8 @@ const LIST = 'list';
 })
 export class ScSortableList<T = unknown> {
   readonly element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  /** A drop zone's corners: the style's. */
+  private readonly corners = injectStyle().frameXs;
   /** The group it is linked in, if any: its value and moves are the group's. */
   private readonly group = inject<ScSortableGroup<T>>(
     forwardRef(() => ScSortableGroup),
@@ -134,7 +137,7 @@ export class ScSortableList<T = unknown> {
       this.orientation() === 'grid' && 'grid',
       this.dragging() && 'cursor-grabbing select-none',
       // In a group: a place to drop, all its height, lit while an item is over.
-      this.group && 'min-h-24 rounded-lg p-1 transition-colors',
+      this.group && cn('min-h-24 p-1 transition-colors', this.corners),
       this.isOver() && 'bg-accent/60',
       this.classInput(),
     ),

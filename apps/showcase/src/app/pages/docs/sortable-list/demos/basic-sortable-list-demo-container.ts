@@ -48,11 +48,7 @@ interface Item {
       class="w-full max-w-sm"
     >
       @for (item of list.items(); track item.id) {
-        <li
-          [scSortableListItem]="item"
-          aria-describedby="basic-sortable-help"
-          class="px-3 py-2"
-        >
+        <li [scSortableListItem]="item" aria-describedby="basic-sortable-help">
           {{ item.label }}
         </li>
       }

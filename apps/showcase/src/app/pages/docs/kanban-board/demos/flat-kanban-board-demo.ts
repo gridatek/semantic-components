@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
+  ScFrame,
   ScSortableGroup,
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
@@ -16,7 +17,7 @@ interface Task {
 /** Your data as it is stored — issues, each with a status: the board’s value made from it, and each move written back. */
 @Component({
   selector: 'app-flat-kanban-board-demo',
-  imports: [ScSortableGroup, ScSortableList, ScSortableListItem],
+  imports: [ScFrame, ScSortableGroup, ScSortableList, ScSortableListItem],
   template: `
     <p id="flat-kanban-help" class="sr-only">
       Space lifts a card, the arrow keys move it, Space drops it, Escape puts it
@@ -32,7 +33,9 @@ interface Task {
     >
       @for (column of columns; track column.id) {
         <div
-          class="bg-muted/50 flex w-64 shrink-0 flex-col gap-1 rounded-xl p-2"
+          scFrame
+          size="sm"
+          class="bg-muted/50 flex w-64 shrink-0 flex-col gap-1 p-2"
         >
           <h3
             [id]="'flat-' + column.id"
@@ -63,7 +66,9 @@ interface Task {
       }
     </div>
     <pre
-      class="bg-muted w-full overflow-x-auto rounded-md p-4 text-xs"
+      scFrame
+      size="sm"
+      class="bg-muted w-full overflow-x-auto p-4 text-xs"
       aria-label="Stored issues"
       >{{ stored() }}</pre>
   `,

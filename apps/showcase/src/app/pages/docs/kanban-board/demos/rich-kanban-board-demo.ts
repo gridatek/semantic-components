@@ -4,6 +4,7 @@ import {
   ScAvatarFallback,
   ScBadge,
   ScButton,
+  ScFrame,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -31,6 +32,7 @@ interface Task {
 @Component({
   selector: 'app-rich-kanban-board-demo',
   imports: [
+    ScFrame,
     ScSortableGroup,
     ScSortableList,
     ScSortableListItem,
@@ -60,7 +62,9 @@ interface Task {
     >
       @for (column of columns; track column.id) {
         <div
-          class="bg-muted/50 flex w-64 shrink-0 flex-col gap-1 rounded-xl p-2"
+          scFrame
+          size="sm"
+          class="bg-muted/50 flex w-64 shrink-0 flex-col gap-1 p-2"
         >
           <h3
             [id]="'rich-' + column.id"

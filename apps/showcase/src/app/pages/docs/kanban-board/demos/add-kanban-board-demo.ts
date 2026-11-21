@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScInput,
   ScSortableGroup,
   type ScSortableGroupAnnouncement,
@@ -18,6 +19,7 @@ interface Task {
 @Component({
   selector: 'app-add-kanban-board-demo',
   imports: [
+    ScFrame,
     ScSortableGroup,
     ScSortableList,
     ScSortableListItem,
@@ -38,7 +40,9 @@ interface Task {
     >
       @for (column of columns; track column.id) {
         <div
-          class="bg-muted/50 flex w-64 shrink-0 flex-col gap-1 rounded-xl p-2"
+          scFrame
+          size="sm"
+          class="bg-muted/50 flex w-64 shrink-0 flex-col gap-1 p-2"
         >
           <h3
             [id]="'add-' + column.id"

@@ -44,7 +44,7 @@ interface Item {
         <li
           [scSortableListItem]="item"
           aria-describedby="handle-sortable-help"
-          class="flex items-center gap-3 px-3 py-2"
+          class="flex items-center gap-3"
         >
           <span scSortableListHandle><svg siGripVerticalIcon></svg></span>
           <div scField orientation="horizontal">

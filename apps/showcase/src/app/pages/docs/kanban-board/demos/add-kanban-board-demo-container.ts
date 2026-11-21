@@ -26,8 +26,7 @@ import {
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
   ScSortableList,
-  ScSortableListItem,
-} from '@semantic-components/ui';
+  ScSortableListItem, ScFrame } from '@semantic-components/ui';
 
 interface Task {
   readonly id: string;
@@ -38,6 +37,7 @@ interface Task {
 @Component({
   selector: 'app-add-kanban-board-demo',
   imports: [
+    ScFrame,
     ScSortableGroup,
     ScSortableList,
     ScSortableListItem,
@@ -58,7 +58,9 @@ interface Task {
     >
       @for (column of columns; track column.id) {
         <div
-          class="bg-muted/50 flex w-64 shrink-0 flex-col gap-1 rounded-xl p-2"
+          scFrame
+          size="sm"
+          class="bg-muted/50 flex w-64 shrink-0 flex-col gap-1 p-2"
         >
           <h3
             [id]="'add-' + column.id"

@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScFrame,
   ScSortableGroup,
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
@@ -15,7 +16,7 @@ interface Task {
 /** Cards dragged with the mouse, a finger (hold, then move) or a pen — or lifted by the keyboard: Space, the arrows, Space; Escape puts it back. Each keyboard step is announced, in your words. */
 @Component({
   selector: 'app-basic-kanban-board-demo',
-  imports: [ScSortableGroup, ScSortableList, ScSortableListItem],
+  imports: [ScFrame, ScSortableGroup, ScSortableList, ScSortableListItem],
   template: `
     <p id="basic-kanban-help" class="sr-only">
       Space lifts a card, the arrow keys move it, Space drops it, Escape puts it
@@ -30,7 +31,9 @@ interface Task {
     >
       @for (column of columns; track column.id) {
         <div
-          class="bg-muted/50 flex w-64 shrink-0 flex-col gap-1 rounded-xl p-2"
+          scFrame
+          size="sm"
+          class="bg-muted/50 flex w-64 shrink-0 flex-col gap-1 p-2"
         >
           <h3
             [id]="'basic-' + column.id"
