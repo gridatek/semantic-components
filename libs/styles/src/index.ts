@@ -508,6 +508,15 @@ export interface ScTimeInputStyles {
   segment: string;
 }
 
+/**
+ * A time picker's parts that change from style to style — ours (shadcn has
+ * no time picker).
+ */
+export interface ScTimePickerStyles {
+  /** A column's option (an hour, a minute, AM/PM): as the style's select item — corners, padding, text. */
+  option: string;
+}
+
 /** An OTP input's parts that change from style to style. */
 export interface ScOtpInputStyles {
   /** A group: one chunk of inputs, joined into one box (separate boxes in sera). */
@@ -736,6 +745,7 @@ export interface ScStyle {
   /** A multi-line text field. */
   textarea: string;
   timeInput: ScTimeInputStyles;
+  timePicker: ScTimePickerStyles;
   /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
   timeline: ScTimelineStyles;
   toast: ScToastStyles;

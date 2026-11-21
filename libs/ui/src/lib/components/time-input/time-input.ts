@@ -350,16 +350,20 @@ export class ScTimeInput
 
   /** A part as the locale writes it — empty when it is. */
   ɵtext(type: ScTimeInputPart): string {
-    const text = this.localeText(type);
+    const part = this.parts()[type];
+    return part === undefined ? '' : this.ɵpartText(type, part);
+  }
+
+  /** A value of a part as the locale writes it: `9`, `09`, `PM` — the time picker's columns too. */
+  ɵpartText(type: ScTimeInputPart, value: number | 'am' | 'pm'): string {
+    const text = this.localeText(type, { ...this.parts(), [type]: value });
     // A 12-hour clock ignores 2-digit for the hour (ICU): padded here.
     return type === 'hour' && this.leadingZeros() && [...text].length === 1
       ? this.zero() + text
       : text;
   }
 
-  private localeText(type: ScTimeInputPart): string {
-    const parts = this.parts();
-    if (parts[type] === undefined) return '';
+  private localeText(type: ScTimeInputPart, parts: ScTimeInputParts): string {
     return (
       this.formatter()
         .formatToParts(
@@ -398,7 +402,7 @@ export class ScTimeInput
         if (editable) {
           const [min, max] = this.ɵrange(type);
           const home = event.key === 'Home';
-          this.set(
+          this.ɵset(
             type,
             type === 'dayPeriod' ? (home ? 'am' : 'pm') : home ? min : max,
           );
@@ -410,7 +414,7 @@ export class ScTimeInput
       case 'Delete':
         if (editable) {
           this.typed = '';
-          this.set(type, undefined);
+          this.ɵset(type, undefined);
         }
         break;
       default:
@@ -438,7 +442,7 @@ export class ScTimeInput
       this.backspace(type, input);
     } else if (event.inputType === 'deleteContentForward') {
       this.typed = '';
-      this.set(type, undefined);
+      this.ɵset(type, undefined);
     }
   }
 
@@ -470,7 +474,7 @@ export class ScTimeInput
     if (type === 'dayPeriod') {
       const period = this.periodOf(char);
       if (period) {
-        this.set(type, period);
+        this.ɵset(type, period);
         this.move(input, 1);
       }
       return;
@@ -489,7 +493,7 @@ export class ScTimeInput
     if (Number(typed) > max) typed = String(digit);
     this.typed = typed;
     const number = Number(typed);
-    if (number >= min) this.set(type, number);
+    if (number >= min) this.ɵset(type, number);
     // Whole once no digit can follow (`9`, `30`).
     if (typed.length >= 2 || number * 10 > max) {
       this.typed = '';
@@ -506,10 +510,10 @@ export class ScTimeInput
     } else if (typeof part === 'number' && part >= 10) {
       const kept = Math.floor(part / 10);
       this.typed = String(kept);
-      this.set(type, kept >= this.ɵrange(type)[0] ? kept : undefined);
+      this.ɵset(type, kept >= this.ɵrange(type)[0] ? kept : undefined);
     } else {
       this.typed = '';
-      this.set(type, undefined);
+      this.ɵset(type, undefined);
     }
   }
 
@@ -517,11 +521,11 @@ export class ScTimeInput
   private step(type: ScTimeInputPart, by: 1 | -1, big: boolean): void {
     const part = this.parts()[type];
     if (part === undefined) {
-      this.set(type, this.split(Temporal.Now.plainTimeISO(), true)[type]);
+      this.ɵset(type, this.split(Temporal.Now.plainTimeISO(), true)[type]);
       return;
     }
     if (type === 'dayPeriod') {
-      this.set(type, part === 'am' ? 'pm' : 'am');
+      this.ɵset(type, part === 'am' ? 'pm' : 'am');
       return;
     }
     const current = part as number;
@@ -532,7 +536,7 @@ export class ScTimeInput
         ? Math.floor(current / size) * size + size
         : Math.ceil(current / size) * size - size;
     const span = max - min + 1;
-    this.set(type, ((((next - min) % span) + span) % span) + min);
+    this.ɵset(type, ((((next - min) % span) + span) % span) + min);
   }
 
   /** A whole time, from text: ISO (`14:30`), or the clock's (`2:30 PM`). */
@@ -604,11 +608,11 @@ export class ScTimeInput
     all[all.indexOf(from as HTMLInputElement) + by]?.focus();
   }
 
-  /** A part set — the value once every part is there, else none. */
-  private set(
-    type: ScTimeInputPart,
-    part: number | 'am' | 'pm' | undefined,
-  ): void {
+  /**
+   * A part set — as typed, or picked in a time picker's column: the value
+   * once every part is there, else none.
+   */
+  ɵset(type: ScTimeInputPart, part: number | 'am' | 'pm' | undefined): void {
     const parts = { ...this.parts(), [type]: part };
     this.parts.set(parts);
     const granularity = this.granularity();

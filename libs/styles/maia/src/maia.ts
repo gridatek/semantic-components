@@ -63,6 +63,7 @@ import { table } from './table';
 import { tabs } from './tabs';
 import { textarea } from './textarea';
 import { timeInput } from './time-input';
+import { timePicker } from './time-picker';
 import { timeline } from './timeline';
 import { toast } from './toast';
 import { toggle } from './toggle';
@@ -135,6 +136,7 @@ export const maia: ScStyle = {
   tabs,
   textarea,
   timeInput,
+  timePicker,
   timeline,
   toast,
   toggle,

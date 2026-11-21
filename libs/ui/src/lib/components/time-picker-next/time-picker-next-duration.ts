@@ -1,0 +1,27 @@
+import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
+import { ScTimePickerNext } from './time-picker-next';
+
+/**
+ * How long from the picker's `startTime` to its value, in the locale's words
+ * (`Intl.DurationFormat`: "1 hr, 30 min") — said as it changes. Empty
+ * without a start, or before it.
+ */
+@Directive({
+  selector: '[scTimePickerNextDuration]',
+  host: {
+    'data-slot': 'time-picker-duration',
+    'aria-live': 'polite',
+    '[textContent]': 'picker.duration()',
+    '[class]': 'class()',
+  },
+})
+export class ScTimePickerNextDuration {
+  private readonly picker = inject(ScTimePickerNext);
+
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  private readonly class = computed(() =>
+    cn('text-muted-foreground text-sm tabular-nums', this.classInput()),
+  );
+}
