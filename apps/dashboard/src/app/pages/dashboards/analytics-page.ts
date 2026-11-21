@@ -11,12 +11,6 @@ import {
   ScProgressRange,
   ScProgressTrack,
   ScProgressValueText,
-  ScStatCard,
-  ScStatCardChange,
-  ScStatCardDescription,
-  ScStatCardIcon,
-  ScStatCardLabel,
-  ScStatCardValue,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -46,6 +40,14 @@ import {
   SiTrendingUpIcon,
   SiUsersIcon,
 } from '@semantic-icons/lucide-icons';
+import {
+  AppStatCard,
+  AppStatCardChange,
+  AppStatCardDescription,
+  AppStatCardIcon,
+  AppStatCardLabel,
+  AppStatCardValue,
+} from '../../components/stat-card';
 import { PageHeader } from '../../layout/page-header';
 import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
 import {
@@ -128,12 +130,12 @@ const COUNTRIES = [
     ScProgressRange,
     ScProgressTrack,
     ScProgressValueText,
-    ScStatCard,
-    ScStatCardChange,
-    ScStatCardDescription,
-    ScStatCardIcon,
-    ScStatCardLabel,
-    ScStatCardValue,
+    AppStatCard,
+    AppStatCardChange,
+    AppStatCardDescription,
+    AppStatCardIcon,
+    AppStatCardLabel,
+    AppStatCardValue,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -169,84 +171,84 @@ const COUNTRIES = [
     />
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.analytics.visitors"
             >Visitors</ng-container
           >
-          <svg siUsersIcon scStatCardIcon></svg>
+          <svg siUsersIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="45820"></dd>
+        <dd appStatCardValue [value]="45820"></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.124"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.analytics.fromLastMonth" scStatCardDescription>
+        <dd i18n="@@dashboards.analytics.fromLastMonth" appStatCardDescription>
           from last month
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.analytics.pageViews"
             >Page views</ng-container
           >
-          <svg siEyeIcon scStatCardIcon></svg>
+          <svg siEyeIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="128430"></dd>
+        <dd appStatCardValue [value]="128430"></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.087"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.analytics.fromLastMonth" scStatCardDescription>
+        <dd i18n="@@dashboards.analytics.fromLastMonth" appStatCardDescription>
           from last month
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.analytics.bounceRate"
             >Bounce rate</ng-container
           >
-          <svg siMousePointerClickIcon scStatCardIcon></svg>
+          <svg siMousePointerClickIcon appStatCardIcon></svg>
         </dt>
         <dd
-          scStatCardValue
+          appStatCardValue
           [value]="0.368"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         ></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           good="down"
           [value]="-0.021"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingDownIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.analytics.fromLastMonth" scStatCardDescription>
+        <dd i18n="@@dashboards.analytics.fromLastMonth" appStatCardDescription>
           from last month
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.analytics.avgSession"
             >Avg. session</ng-container
           >
-          <svg siClockIcon scStatCardIcon></svg>
+          <svg siClockIcon appStatCardIcon></svg>
         </dt>
-        <dd i18n="@@dashboards.analytics.n3m42s" scStatCardValue>3m 42s</dd>
+        <dd i18n="@@dashboards.analytics.n3m42s" appStatCardValue>3m 42s</dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.046"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.analytics.fromLastMonth" scStatCardDescription>
+        <dd i18n="@@dashboards.analytics.fromLastMonth" appStatCardDescription>
           from last month
         </dd>
       </dl>

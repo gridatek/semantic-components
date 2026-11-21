@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScKbd, ScTypeset } from '@semantic-components/ui';
+import { RouterLink } from '@angular/router';
+import { ScKbd, ScLink, ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicSortableListDemoContainer } from './demos/basic-sortable-list-demo-container';
@@ -12,6 +13,8 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
 @Component({
   selector: 'app-sortable-list-page',
   imports: [
+    RouterLink,
+    ScLink,
     ScKbd,
     BasicSortableListDemoContainer,
     HandleSortableListDemoContainer,
@@ -92,6 +95,21 @@ import { HorizontalSortableListDemoContainer } from './demos/horizontal-sortable
           <kbd scKbd>Tab</kbd> stops then.
         </p>
         <app-disabled-sortable-list-demo-container />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Linked lists</h2>
+        <p>
+          Several lists in a
+          <code scTypeset>scSortableGroup</code>
+          — each <code scTypeset>[scSortableList]="key"</code> — share one
+          value, your items by list: an item is dragged from list to list, or
+          lifted and carried across by the keyboard, each step announced with
+          its list. The group holds the value, the announce and disabled; it
+          lays nothing out. See the
+          <a scLink routerLink="/docs/components/kanban-board">Kanban Board</a>
+          recipe.
+        </p>
       </section>
     </div>
   `,

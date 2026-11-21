@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScKanbanBoard,
-  type ScKanbanBoardAnnouncement,
-  type ScKanbanBoardValue,
-  ScKanbanCard,
-  ScKanbanColumn,
+  ScSortableGroup,
+  type ScSortableGroupAnnouncement,
+  type ScSortableGroupValue,
+  ScSortableList,
+  ScSortableListItem,
 } from '@semantic-components/ui';
 
 interface Task {
@@ -15,18 +15,18 @@ interface Task {
 /** Cards dragged with the mouse, a finger (hold, then move) or a pen — or lifted by the keyboard: Space, the arrows, Space; Escape puts it back. Each keyboard step is announced, in your words. */
 @Component({
   selector: 'app-basic-kanban-board-demo',
-  imports: [ScKanbanBoard, ScKanbanColumn, ScKanbanCard],
+  imports: [ScSortableGroup, ScSortableList, ScSortableListItem],
   template: `
     <p id="basic-kanban-help" class="sr-only">
       Space lifts a card, the arrow keys move it, Space drops it, Escape puts it
       back.
     </p>
     <div
-      scKanbanBoard
-      #kanban="scKanbanBoard"
+      scSortableGroup
+      #kanban="scSortableGroup"
       [(value)]="board"
       [announce]="announce"
-      class="w-full"
+      class="flex w-full items-start gap-4 overflow-x-auto p-1"
     >
       @for (column of columns; track column.id) {
         <div
@@ -42,11 +42,14 @@ interface Task {
             }}</span>
           </h3>
           <ul
-            [scKanbanColumn]="column.id"
+            [scSortableList]="column.id"
             [attr.aria-labelledby]="'basic-' + column.id"
           >
             @for (task of kanban.items(column.id); track task.id) {
-              <li [scKanbanCard]="task" aria-describedby="basic-kanban-help">
+              <li
+                [scSortableListItem]="task"
+                aria-describedby="basic-kanban-help"
+              >
                 {{ task.title }}
               </li>
             }
@@ -69,7 +72,7 @@ export class BasicKanbanBoardDemo {
     doing: 'In progress',
     done: 'Done',
   };
-  private readonly board = signal<ScKanbanBoardValue<Task>>({
+  private readonly board = signal<ScSortableGroupValue<Task>>({
     todo: [
       { id: 't1', title: 'Write the release notes' },
       { id: 't2', title: 'Plan the next sprint' },
@@ -85,10 +88,10 @@ export class BasicKanbanBoardDemo {
   private readonly announce = ({
     type,
     item,
-    column,
+    list: column,
     position,
     count,
-  }: ScKanbanBoardAnnouncement<Task>) => {
+  }: ScSortableGroupAnnouncement<Task>) => {
     const where = `${this.titles[column]}, ${position} of ${count}`;
     return {
       lift: `Lifted ${item.title}, in ${where}.`,

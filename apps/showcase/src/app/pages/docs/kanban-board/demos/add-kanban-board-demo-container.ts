@@ -22,11 +22,11 @@ export class AddKanbanBoardDemoContainer {
 import {
   ScButton,
   ScInput,
-  ScKanbanBoard,
-  type ScKanbanBoardAnnouncement,
-  type ScKanbanBoardValue,
-  ScKanbanCard,
-  ScKanbanColumn,
+  ScSortableGroup,
+  type ScSortableGroupAnnouncement,
+  type ScSortableGroupValue,
+  ScSortableList,
+  ScSortableListItem,
 } from '@semantic-components/ui';
 
 interface Task {
@@ -37,18 +37,24 @@ interface Task {
 /** Adding a card, and a work-in-progress limit, are yours: here a field under each column, and In progress said to be over three. */
 @Component({
   selector: 'app-add-kanban-board-demo',
-  imports: [ScKanbanBoard, ScKanbanColumn, ScKanbanCard, ScButton, ScInput],
+  imports: [
+    ScSortableGroup,
+    ScSortableList,
+    ScSortableListItem,
+    ScButton,
+    ScInput,
+  ],
   template: \`
     <p id="add-kanban-help" class="sr-only">
       Space lifts a card, the arrow keys move it, Space drops it, Escape puts it
       back.
     </p>
     <div
-      scKanbanBoard
-      #kanban="scKanbanBoard"
+      scSortableGroup
+      #kanban="scSortableGroup"
       [(value)]="board"
       [announce]="announce"
-      class="w-full"
+      class="flex w-full items-start gap-4 overflow-x-auto p-1"
     >
       @for (column of columns; track column.id) {
         <div
@@ -75,11 +81,14 @@ interface Task {
             </p>
           }
           <ul
-            [scKanbanColumn]="column.id"
+            [scSortableList]="column.id"
             [attr.aria-labelledby]="'add-' + column.id"
           >
             @for (task of kanban.items(column.id); track task.id) {
-              <li [scKanbanCard]="task" aria-describedby="add-kanban-help">
+              <li
+                [scSortableListItem]="task"
+                aria-describedby="add-kanban-help"
+              >
                 {{ task.title }}
               </li>
             }
@@ -117,7 +126,7 @@ export class AddKanbanBoardDemo {
     doing: 'In progress',
     done: 'Done',
   };
-  private readonly board = signal<ScKanbanBoardValue<Task>>({
+  private readonly board = signal<ScSortableGroupValue<Task>>({
     todo: [
       { id: 'a1', title: 'Draft the agenda' },
       { id: 'a2', title: 'Book the room' },
@@ -154,10 +163,10 @@ export class AddKanbanBoardDemo {
   private readonly announce = ({
     type,
     item,
-    column,
+    list: column,
     position,
     count,
-  }: ScKanbanBoardAnnouncement<Task>) => {
+  }: ScSortableGroupAnnouncement<Task>) => {
     const where = \`\${this.titles[column]}, \${position} of \${count}\`;
     return {
       lift: \`Lifted \${item.title}, in \${where}.\`,

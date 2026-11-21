@@ -65,7 +65,6 @@ Not the whole content of X: the main section, beside another part. Check each on
 - [ ] `ScBubbleContent` (`div`, `button`, `a`): the bubble's text in its look, beside `scBubbleReactions`.
 - [ ] `ScMarkerContent` (`span`): the text, beside `scMarkerIcon`.
 - [ ] `ScMessageContent` (`div`): header and bubbles, beside `scMessageAvatar`.
-- [ ] `ScNotificationContent` (`div`): title, description, time, beside its icon.
 
 ## For each rename
 

@@ -18,16 +18,16 @@ import {
   ScField,
   ScFieldGroup,
   ScInput,
-  ScKanbanBoard,
-  type ScKanbanBoardAnnouncement,
-  type ScKanbanBoardValue,
-  ScKanbanCard,
-  ScKanbanColumn,
   ScLabel,
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,
   ScNativeSelectOption,
+  ScSortableGroup,
+  type ScSortableGroupAnnouncement,
+  type ScSortableGroupValue,
+  ScSortableList,
+  ScSortableListItem,
   ScToaster,
 } from '@semantic-components/ui';
 import {
@@ -66,7 +66,7 @@ const TAGS: readonly Tag[] = ['Design', 'Development', 'Research', 'Marketing'];
 const who = (...ids: number[]) =>
   ids.map((id) => PEOPLE.find((p) => p.id === id) as Person);
 
-const BOARD: ScKanbanBoardValue<Task> = {
+const BOARD: ScSortableGroupValue<Task> = {
   todo: [
     {
       id: 1,
@@ -165,9 +165,9 @@ const BOARD: ScKanbanBoardValue<Task> = {
     ScField,
     ScFieldGroup,
     ScInput,
-    ScKanbanBoard,
-    ScKanbanCard,
-    ScKanbanColumn,
+    ScSortableGroup,
+    ScSortableListItem,
+    ScSortableList,
     ScLabel,
     ScNativeSelect,
     ScNativeSelectContainer,
@@ -197,8 +197,8 @@ const BOARD: ScKanbanBoardValue<Task> = {
       back.
     </p>
     <div
-      scKanbanBoard
-      #kanban="scKanbanBoard"
+      scSortableGroup
+      #kanban="scSortableGroup"
       [(value)]="board"
       [announce]="announce"
       class="flex gap-4 overflow-x-auto pb-2"
@@ -228,13 +228,13 @@ const BOARD: ScKanbanBoardValue<Task> = {
             </button>
           </div>
           <ul
-            [scKanbanColumn]="column.id"
+            [scSortableList]="column.id"
             [attr.aria-labelledby]="'col-' + column.id"
             class="flex min-h-24 flex-col gap-3"
           >
             @for (task of kanban.items(column.id); track task.id) {
               <li
-                [scKanbanCard]="task"
+                [scSortableListItem]="task"
                 aria-describedby="kanban-help"
                 class="bg-card text-card-foreground ring-foreground/10 data-lifted:ring-ring flex flex-col gap-3 rounded-lg p-3 text-sm ring-1 data-dragging:shadow-lg data-lifted:ring-2"
               >
@@ -377,17 +377,17 @@ export class KanbanPage {
   private readonly toaster = inject(ScToaster);
   private readonly columns = COLUMNS;
   private readonly tags = TAGS;
-  private readonly board = signal<ScKanbanBoardValue<Task>>(BOARD);
+  private readonly board = signal<ScSortableGroupValue<Task>>(BOARD);
   private readonly titles = Object.fromEntries(
     COLUMNS.map((c) => [c.id, c.title]),
   );
   private readonly announce = ({
     type,
     item,
-    column,
+    list: column,
     position,
     count,
-  }: ScKanbanBoardAnnouncement<Task>) =>
+  }: ScSortableGroupAnnouncement<Task>) =>
     ({
       lift: `Lifted ${item.title}, in ${this.titles[column]}, ${position} of ${count}.`,
       move: `${item.title}: ${this.titles[column]}, ${position} of ${count}.`,

@@ -7,7 +7,7 @@ import { GoodStatCardDemo } from './good-stat-card-demo';
   imports: [DemoContainer, GoodStatCardDemo],
   template: `
     <app-demo-container
-      title="Good direction"
+      title="Good news"
       [code]="code"
       demoUrl="/demos/stat-card/good-stat-card-demo"
     >
@@ -18,81 +18,102 @@ import { GoodStatCardDemo } from './good-stat-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GoodStatCardDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScStatCard,
-  ScStatCardChange,
-  ScStatCardDescription,
-  ScStatCardLabel,
-  ScStatCardValue,
-} from '@semantic-components/ui';
-import {
-  SiTrendingDownIcon,
-  SiTrendingUpIcon,
-} from '@semantic-icons/lucide-icons';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScCard, ScCardBody, ScNumberTicker } from '@semantic-components/ui';
 
-/** When down is good news — costs, errors, wait times — say so with good="down": the colour follows the meaning, the sign the number. Unchanged is neither. */
+interface Stat {
+  readonly label: string;
+  readonly value: number;
+  readonly format: Intl.NumberFormatOptions;
+  readonly change: number;
+  readonly changeFormat: Intl.NumberFormatOptions;
+  /** The way that is good news: up (revenue), or down (costs). */
+  readonly good: 'up' | 'down';
+  readonly since: string;
+}
+
+const PERCENT: Intl.NumberFormatOptions = {
+  style: 'percent',
+  maximumFractionDigits: 1,
+  signDisplay: 'exceptZero',
+};
+
+/** Down can be good news: costs and errors falling are in the success colour — and said in words too, not only by colour. */
 @Component({
   selector: 'app-good-stat-card-demo',
-  imports: [
-    ScStatCard,
-    ScStatCardLabel,
-    ScStatCardValue,
-    ScStatCardChange,
-    ScStatCardDescription,
-    SiTrendingUpIcon,
-    SiTrendingDownIcon,
-  ],
+  imports: [ScCard, ScCardBody, ScNumberTicker],
   template: \`
-    <dl scStatCard class="w-56">
-      <dt scStatCardLabel>Cloud costs</dt>
-      <dd
-        scStatCardValue
-        [value]="8420"
-        [format]="{
-          style: 'currency',
-          currency: 'USD',
-          maximumFractionDigits: 0,
-        }"
-      ></dd>
-      <dd
-        scStatCardChange
-        [value]="-0.12"
-        [format]="{ style: 'percent', maximumFractionDigits: 1 }"
-        good="down"
-      >
-        <svg siTrendingDownIcon></svg>
-        <span class="sr-only">, good</span>
-      </dd>
-      <dd scStatCardDescription>from last month</dd>
-    </dl>
-    <dl scStatCard class="w-56">
-      <dt scStatCardLabel>Error rate</dt>
-      <dd
-        scStatCardValue
-        [value]="0.031"
-        [format]="{ style: 'percent', maximumFractionDigits: 1 }"
-      ></dd>
-      <dd
-        scStatCardChange
-        [value]="0.008"
-        [format]="{ style: 'percent', maximumFractionDigits: 1 }"
-        good="down"
-      >
-        <svg siTrendingUpIcon></svg>
-        <span class="sr-only">, bad</span>
-      </dd>
-      <dd scStatCardDescription>from last week</dd>
-    </dl>
-    <dl scStatCard class="w-56">
-      <dt scStatCardLabel>Open tickets</dt>
-      <dd scStatCardValue [value]="42"></dd>
-      <dd scStatCardChange [value]="0"></dd>
-      <dd scStatCardDescription>from yesterday</dd>
-    </dl>
+    <div class="grid w-full gap-4 sm:grid-cols-2">
+      @for (stat of stats; track stat.label) {
+        <div scCard>
+          <div scCardBody>
+            <dl class="grid gap-1">
+              <dt
+                class="text-muted-foreground flex items-center justify-between gap-2 text-sm font-medium [&_svg]:size-4"
+              >
+                {{ stat.label }}
+              </dt>
+              <dd class="text-2xl font-semibold tabular-nums">
+                <span
+                  scNumberTicker
+                  [value]="stat.value"
+                  [format]="stat.format"
+                ></span>
+              </dd>
+              <dd
+                class="flex items-center gap-1 text-xs tabular-nums"
+                [class]="tone(stat)"
+              >
+                <span
+                  scNumberTicker
+                  [value]="stat.change"
+                  [format]="stat.changeFormat"
+                ></span>
+                <span class="sr-only">{{ verdict(stat) }}</span>
+                <span class="text-muted-foreground">{{ stat.since }}</span>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      }
+    </div>
   \`,
-  host: { class: 'flex w-full flex-wrap justify-center gap-4' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class GoodStatCardDemo {}`;
+export class GoodStatCardDemo {
+  private readonly stats: readonly Stat[] = [
+    {
+      label: 'Cloud costs',
+      value: 1840,
+      format: { style: 'currency', currency: 'USD', maximumFractionDigits: 0 },
+      change: -0.12,
+      changeFormat: PERCENT,
+      good: 'down',
+      since: 'from last month',
+    },
+    {
+      label: 'Errors',
+      value: 37,
+      format: {},
+      change: 0.09,
+      changeFormat: PERCENT,
+      good: 'down',
+      since: 'from last week',
+    },
+  ];
+
+  /** Good news in the theme's success colour, bad in its destructive one; no change muted. */
+  private tone(stat: Stat): string {
+    if (stat.change === 0) return 'text-muted-foreground';
+    const up = stat.change > 0;
+    return up === (stat.good === 'up') ? 'text-success' : 'text-destructive';
+  }
+
+  /** The good or bad news, in words: read after the change. */
+  private verdict(stat: Stat): string {
+    if (stat.change === 0) return '';
+    return stat.change > 0 === (stat.good === 'up') ? '(good)' : '(bad)';
+  }
+}`;
 }

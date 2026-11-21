@@ -23,12 +23,6 @@ import {
   ScProgress,
   ScProgressCircle,
   ScProgressValueText,
-  ScStatCard,
-  ScStatCardChange,
-  ScStatCardDescription,
-  ScStatCardIcon,
-  ScStatCardLabel,
-  ScStatCardValue,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -55,6 +49,14 @@ import {
   SiTrendingUpIcon,
   SiUsersIcon,
 } from '@semantic-icons/lucide-icons';
+import {
+  AppStatCard,
+  AppStatCardChange,
+  AppStatCardDescription,
+  AppStatCardIcon,
+  AppStatCardLabel,
+  AppStatCardValue,
+} from '../../components/stat-card';
 import { ORDERS } from '../../data/orders';
 import { personById } from '../../data/people';
 import { PRODUCTS, thumbOf } from '../../data/products';
@@ -107,12 +109,12 @@ const REVENUE = [
     ScProgress,
     ScProgressCircle,
     ScProgressValueText,
-    ScStatCard,
-    ScStatCardChange,
-    ScStatCardDescription,
-    ScStatCardIcon,
-    ScStatCardLabel,
-    ScStatCardValue,
+    AppStatCard,
+    AppStatCardChange,
+    AppStatCardDescription,
+    AppStatCardIcon,
+    AppStatCardLabel,
+    AppStatCardValue,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -145,87 +147,87 @@ const REVENUE = [
     />
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.ecommerce.revenue"
             >Revenue</ng-container
           >
-          <svg siDollarSignIcon scStatCardIcon></svg>
+          <svg siDollarSignIcon appStatCardIcon></svg>
         </dt>
         <dd
-          scStatCardValue
+          appStatCardValue
           [value]="147000"
           [format]="{ style: 'currency', currency: 'USD', notation: 'compact' }"
         ></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.186"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.ecommerce.fromLastHalf" scStatCardDescription>
+        <dd i18n="@@dashboards.ecommerce.fromLastHalf" appStatCardDescription>
           from last half
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.ecommerce.orders"
             >Orders</ng-container
           >
-          <svg siShoppingCartIcon scStatCardIcon></svg>
+          <svg siShoppingCartIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="2384"></dd>
+        <dd appStatCardValue [value]="2384"></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.092"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.ecommerce.fromLastHalf" scStatCardDescription>
+        <dd i18n="@@dashboards.ecommerce.fromLastHalf" appStatCardDescription>
           from last half
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.ecommerce.customers"
             >Customers</ng-container
           >
-          <svg siUsersIcon scStatCardIcon></svg>
+          <svg siUsersIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="1126"></dd>
+        <dd appStatCardValue [value]="1126"></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.041"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.ecommerce.fromLastHalf" scStatCardDescription>
+        <dd i18n="@@dashboards.ecommerce.fromLastHalf" appStatCardDescription>
           from last half
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.ecommerce.conversion"
             >Conversion</ng-container
           >
-          <svg siPercentIcon scStatCardIcon></svg>
+          <svg siPercentIcon appStatCardIcon></svg>
         </dt>
         <dd
-          scStatCardValue
+          appStatCardValue
           [value]="0.032"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         ></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="-0.004"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingDownIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.ecommerce.fromLastHalf" scStatCardDescription>
+        <dd i18n="@@dashboards.ecommerce.fromLastHalf" appStatCardDescription>
           from last half
         </dd>
       </dl>

@@ -4,17 +4,17 @@ import {
   ScAvatarFallback,
   ScBadge,
   ScButton,
-  ScKanbanBoard,
-  type ScKanbanBoardAnnouncement,
-  type ScKanbanBoardValue,
-  ScKanbanCard,
-  ScKanbanColumn,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
   ScMenuPortal,
   ScMenuProvider,
   ScMenuTrigger,
+  ScSortableGroup,
+  type ScSortableGroupAnnouncement,
+  type ScSortableGroupValue,
+  ScSortableList,
+  ScSortableListItem,
 } from '@semantic-components/ui';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
@@ -31,9 +31,9 @@ interface Task {
 @Component({
   selector: 'app-rich-kanban-board-demo',
   imports: [
-    ScKanbanBoard,
-    ScKanbanColumn,
-    ScKanbanCard,
+    ScSortableGroup,
+    ScSortableList,
+    ScSortableListItem,
     ScAvatar,
     ScAvatarFallback,
     ScBadge,
@@ -52,11 +52,11 @@ interface Task {
       back.
     </p>
     <div
-      scKanbanBoard
-      #kanban="scKanbanBoard"
+      scSortableGroup
+      #kanban="scSortableGroup"
       [(value)]="board"
       [announce]="announce"
-      class="w-full"
+      class="flex w-full items-start gap-4 overflow-x-auto p-1"
     >
       @for (column of columns; track column.id) {
         <div
@@ -72,12 +72,12 @@ interface Task {
             }}</span>
           </h3>
           <ul
-            [scKanbanColumn]="column.id"
+            [scSortableList]="column.id"
             [attr.aria-labelledby]="'rich-' + column.id"
           >
             @for (task of kanban.items(column.id); track task.id) {
               <li
-                [scKanbanCard]="task"
+                [scSortableListItem]="task"
                 aria-describedby="rich-kanban-help"
                 class="grid gap-2"
               >
@@ -170,7 +170,7 @@ export class RichKanbanBoardDemo {
     medium: 'text-warning font-medium',
     low: 'text-muted-foreground',
   };
-  private readonly board = signal<ScKanbanBoardValue<Task>>({
+  private readonly board = signal<ScSortableGroupValue<Task>>({
     todo: [
       {
         id: 'r1',
@@ -214,10 +214,10 @@ export class RichKanbanBoardDemo {
   private readonly announce = ({
     type,
     item,
-    column,
+    list: column,
     position,
     count,
-  }: ScKanbanBoardAnnouncement<Task>) => {
+  }: ScSortableGroupAnnouncement<Task>) => {
     const where = `${this.titles[column]}, ${position} of ${count}`;
     return {
       lift: `Lifted ${item.title}, in ${where}.`,

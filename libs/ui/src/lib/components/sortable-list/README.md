@@ -11,7 +11,16 @@ Your array, reordered — dragged by mouse, touch or pen, or lifted and moved by
     └── [scSortableListHandle]    — optional: only it starts a drag
 ```
 
-It shares its engine with the kanban board (`sortable.ts`, beside it): a kanban is sortable lists, linked.
+## Linked lists
+
+```
+[scSortableGroup] ([(value)]: Record<key, T[]>, announce, disabled)
+│  items(key) · move(item, key, index) · active() · over()
+└── [scSortableList]="key"   — one of its lists (data-over while an item is dragged over it)
+    └── [scSortableListItem]="item"
+```
+
+Items go from list to list — dragged, or lifted and carried across by the keyboard; the group's `announce` gets the item's list. A kanban board is this (see the Kanban Board recipe). The group lays nothing out: your row of columns is your class.
 
 ## Usage
 

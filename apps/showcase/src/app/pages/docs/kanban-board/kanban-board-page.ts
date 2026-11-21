@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScKbd, ScTypeset } from '@semantic-components/ui';
-import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { RouterLink } from '@angular/router';
+import { ScKbd, ScLink, ScTypeset } from '@semantic-components/ui';
+import { Anatomy } from '../../../components/anatomy/anatomy';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { AddKanbanBoardDemoContainer } from './demos/add-kanban-board-demo-container';
 import { BasicKanbanBoardDemoContainer } from './demos/basic-kanban-board-demo-container';
@@ -10,67 +11,97 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
 @Component({
   selector: 'app-kanban-board-page',
   imports: [
+    Anatomy,
+    RouterLink,
     ScKbd,
+    ScLink,
+    ScTypeset,
     BasicKanbanBoardDemoContainer,
     RichKanbanBoardDemoContainer,
     FlatKanbanBoardDemoContainer,
     AddKanbanBoardDemoContainer,
     TocHeading,
-    ComponentBadges,
-    ScTypeset,
   ],
   template: `
     <div class="space-y-12">
       <div class="space-y-2">
         <h1 scTypeset>Kanban Board</h1>
         <p class="text-muted-foreground">
-          Your columns and cards, your items by column as its value — dragged by
-          mouse, touch or pen, or lifted and moved by the keyboard, each step
-          announced in your words.
+          A recipe: your columns and cards, your items by column as the value —
+          <a scLink routerLink="/docs/components/sortable-list"
+            >Sortable Lists</a
+          >, linked in a group. No component of its own.
         </p>
-        <app-component-badges path="kanban-board" />
       </div>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Basic</h2>
-        <p>
-          Cards dragged with the mouse, a finger (hold, then move) or a pen — or
-          lifted by the keyboard: <kbd scKbd>Space</kbd>, the arrows,
-          <kbd scKbd>Space</kbd>; <kbd scKbd>Escape</kbd> puts it back. Each
-          keyboard step is announced, in your words.
-        </p>
+        <h2 scTypeset appToc>Usage</h2>
         <app-basic-kanban-board-demo-container />
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Rich cards</h2>
+        <h2 scTypeset appToc>How it is made</h2>
         <p>
-          A card is yours: labels, a priority in words and the theme’s colours,
-          a due date, an avatar — and a “Move to…” menu, through move(), for
-          those who neither drag nor lift.
+          <code scTypeset>scSortableGroup</code>
+          holds the value — your items by column, replaced on each move. Each
+          column is a list of it,
+          <code scTypeset>[scSortableList]="column.id"</code>, its cards
+          <code scTypeset>scSortableListItem</code>s: dragged from column to
+          column, or lifted by the keyboard and carried across. The group&apos;s
+          <code scTypeset>items(column)</code>
+          is what to draw, its
+          <code scTypeset>move(item, column, index)</code>
+          a «Move to…» menu&apos;s.
         </p>
+        <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Accessibility</h2>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            Each card is a Tab stop: <kbd scKbd>Space</kbd> lifts it, the arrows
+            move it — down a column and across to the next —
+            <kbd scKbd>Space</kbd> drops it, <kbd scKbd>Escape</kbd> puts it
+            back.
+          </li>
+          <li>
+            Each step is announced, in your words: the group&apos;s
+            <code scTypeset>announce</code>
+            gets the card, its column, its place and the count.
+          </li>
+          <li>
+            Say how it works beside the board (aria-describedby on the cards),
+            and name each column (aria-labelledby its heading).
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-8">
+        <h2 scTypeset appToc>Examples</h2>
         <app-rich-kanban-board-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>From a flat list</h2>
-        <p>
-          Your data as it is stored — issues, each with a status: the board’s
-          value made from it, and each move written back.
-        </p>
         <app-flat-kanban-board-demo-container />
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Add and limit</h2>
-        <p>
-          Adding a card, and a work-in-progress limit, are yours: here a field
-          under each column, and In progress said to be over three.
-        </p>
         <app-add-kanban-board-demo-container />
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export default class KanbanBoardPage {}
+export default class KanbanBoardPage {
+  private readonly anatomy = {
+    imports:
+      "import { ScSortableGroup, ScSortableList, ScSortableListItem } from '@semantic-components/ui';",
+    markup: [
+      '<div scSortableGroup #board="scSortableGroup" [(value)]="tasks" [announce]="announce">',
+      '  @for (column of columns; track column.id) {',
+      '    <h3 [id]="column.id">{{ column.title }}</h3>',
+      '    <ul [scSortableList]="column.id" [attr.aria-labelledby]="column.id">',
+      '      @for (task of board.items(column.id); track task.id) {',
+      '        <li [scSortableListItem]="task" aria-describedby="help">{{ task.title }}</li>',
+      '      }',
+      '    </ul>',
+      '  }',
+      '</div>',
+    ].join('\n'),
+  };
+}

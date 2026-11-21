@@ -22,32 +22,29 @@ export class CardNumberTickerDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  ScStatCard,
-  ScStatCardDescription,
-  ScStatCardLabel,
-  ScStatCardValue,
+  ScCard,
+  ScCardBody,
+  ScNumberTicker,
 } from '@semantic-components/ui';
-import { ScNumberTicker } from '@semantic-components/ui';
 
-/** In the stat card’s value: the figure moves to its new value as the data comes in. */
+/** In a stat card (the recipe): the figure moves to its new value as the data comes in. */
 @Component({
   selector: 'app-card-number-ticker-demo',
-  imports: [
-    ScNumberTicker,
-    ScStatCard,
-    ScStatCardLabel,
-    ScStatCardValue,
-    ScStatCardDescription,
-    ScButton,
-  ],
+  imports: [ScNumberTicker, ScCard, ScCardBody, ScButton],
   template: \`
-    <dl scStatCard class="w-64">
-      <dt scStatCardLabel>Active users</dt>
-      <dd scStatCardValue>
-        <span scNumberTicker [value]="users()"></span>
-      </dd>
-      <dd scStatCardDescription>right now</dd>
-    </dl>
+    <div scCard class="w-64">
+      <div scCardBody>
+        <dl class="grid gap-1">
+          <dt class="text-muted-foreground text-sm font-medium">
+            Active users
+          </dt>
+          <dd class="text-2xl font-semibold tabular-nums">
+            <span scNumberTicker [value]="users()"></span>
+          </dd>
+          <dd class="text-muted-foreground text-xs">right now</dd>
+        </dl>
+      </div>
+    </div>
     <button scButton variant="outline" (click)="refresh()">Refresh</button>
   \`,
   host: { class: 'flex w-full flex-col items-center gap-4' },

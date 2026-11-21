@@ -427,12 +427,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/slider/slider-page'),
       },
       {
-        path: 'notification-center',
-        title: 'Notification Center - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/notification-center/notification-center-page'),
-      },
-      {
         path: 'number-group',
         title: 'Number Group - Semantic Components',
         loadComponent: () =>
@@ -552,11 +546,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/spinner/spinner-page'),
       },
       {
-        path: 'stat-card',
-        title: 'Stat Card - Semantic Components',
-        loadComponent: () => import('../pages/docs/stat-card/stat-card-page'),
-      },
-      {
         path: 'stepper',
         title: 'Stepper - Semantic Components',
         loadComponent: () => import('../pages/docs/stepper/stepper-page'),
@@ -583,10 +572,15 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/multiselect/multiselect-page'),
       },
       {
-        path: 'stat-card-recipe',
+        path: 'stat-card',
         title: 'Stat Card - Semantic Components',
+        loadComponent: () => import('../pages/docs/stat-card/stat-card-page'),
+      },
+      {
+        path: 'notification-center',
+        title: 'Notification Center - Semantic Components',
         loadComponent: () =>
-          import('../pages/docs/stat-card-recipe/stat-card-recipe-page'),
+          import('../pages/docs/notification-center/notification-center-page'),
       },
       {
         path: 'tags-input',

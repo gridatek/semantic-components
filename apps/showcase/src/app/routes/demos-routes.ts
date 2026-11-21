@@ -4397,32 +4397,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/notification-center',
-    children: [
-      {
-        path: 'by-day-notification-center-demo',
-        loadComponent: () =>
-          import('../pages/docs/notification-center/demos/by-day-notification-center-demo').then(
-            (m) => m.ByDayNotificationCenterDemo,
-          ),
-      },
-      {
-        path: 'inbox-notification-center-demo',
-        loadComponent: () =>
-          import('../pages/docs/notification-center/demos/inbox-notification-center-demo').then(
-            (m) => m.InboxNotificationCenterDemo,
-          ),
-      },
-      {
-        path: 'empty-notification-center-demo',
-        loadComponent: () =>
-          import('../pages/docs/notification-center/demos/empty-notification-center-demo').then(
-            (m) => m.EmptyNotificationCenterDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/frame',
     children: [
       {
@@ -5577,46 +5551,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/stat-card',
-    children: [
-      {
-        path: 'basic-stat-card-demo',
-        loadComponent: () =>
-          import('../pages/docs/stat-card/demos/basic-stat-card-demo').then(
-            (m) => m.BasicStatCardDemo,
-          ),
-      },
-      {
-        path: 'dashboard-stat-card-demo',
-        loadComponent: () =>
-          import('../pages/docs/stat-card/demos/dashboard-stat-card-demo').then(
-            (m) => m.DashboardStatCardDemo,
-          ),
-      },
-      {
-        path: 'formats-stat-card-demo',
-        loadComponent: () =>
-          import('../pages/docs/stat-card/demos/formats-stat-card-demo').then(
-            (m) => m.FormatsStatCardDemo,
-          ),
-      },
-      {
-        path: 'good-stat-card-demo',
-        loadComponent: () =>
-          import('../pages/docs/stat-card/demos/good-stat-card-demo').then(
-            (m) => m.GoodStatCardDemo,
-          ),
-      },
-      {
-        path: 'text-stat-card-demo',
-        loadComponent: () =>
-          import('../pages/docs/stat-card/demos/text-stat-card-demo').then(
-            (m) => m.TextStatCardDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/stepper',
     children: [
       {
@@ -5789,34 +5723,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/stat-card-recipe',
+    path: 'demos/stat-card',
     children: [
       {
-        path: 'stat-card-recipe-usage-demo',
+        path: 'stat-card-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/stat-card-recipe/demos/stat-card-recipe-usage-demo').then(
-            (m) => m.StatCardRecipeUsageDemo,
+          import('../pages/docs/stat-card/demos/stat-card-usage-demo').then(
+            (m) => m.StatCardUsageDemo,
           ),
       },
       {
-        path: 'dashboard-stat-card-recipe-demo',
+        path: 'dashboard-stat-card-demo',
         loadComponent: () =>
-          import('../pages/docs/stat-card-recipe/demos/dashboard-stat-card-recipe-demo').then(
-            (m) => m.DashboardStatCardRecipeDemo,
+          import('../pages/docs/stat-card/demos/dashboard-stat-card-demo').then(
+            (m) => m.DashboardStatCardDemo,
           ),
       },
       {
-        path: 'good-stat-card-recipe-demo',
+        path: 'good-stat-card-demo',
         loadComponent: () =>
-          import('../pages/docs/stat-card-recipe/demos/good-stat-card-recipe-demo').then(
-            (m) => m.GoodStatCardRecipeDemo,
+          import('../pages/docs/stat-card/demos/good-stat-card-demo').then(
+            (m) => m.GoodStatCardDemo,
           ),
       },
       {
-        path: 'rtl-stat-card-recipe-demo',
+        path: 'rtl-stat-card-demo',
         loadComponent: () =>
-          import('../pages/docs/stat-card-recipe/demos/rtl-stat-card-recipe-demo').then(
-            (m) => m.RtlStatCardRecipeDemo,
+          import('../pages/docs/stat-card/demos/rtl-stat-card-demo').then(
+            (m) => m.RtlStatCardDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/notification-center',
+    children: [
+      {
+        path: 'notification-center-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/notification-center/demos/notification-center-usage-demo').then(
+            (m) => m.NotificationCenterUsageDemo,
+          ),
+      },
+      {
+        path: 'by-day-notification-center-demo',
+        loadComponent: () =>
+          import('../pages/docs/notification-center/demos/by-day-notification-center-demo').then(
+            (m) => m.ByDayNotificationCenterDemo,
+          ),
+      },
+      {
+        path: 'rtl-notification-center-demo',
+        loadComponent: () =>
+          import('../pages/docs/notification-center/demos/rtl-notification-center-demo').then(
+            (m) => m.RtlNotificationCenterDemo,
           ),
       },
     ],

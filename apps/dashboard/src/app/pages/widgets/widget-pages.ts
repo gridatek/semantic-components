@@ -23,12 +23,6 @@ import {
   ScProgressRange,
   ScProgressTrack,
   ScProgressValueText,
-  ScStatCard,
-  ScStatCardChange,
-  ScStatCardDescription,
-  ScStatCardIcon,
-  ScStatCardLabel,
-  ScStatCardValue,
   ScToggle,
 } from '@semantic-components/ui';
 import {
@@ -50,6 +44,14 @@ import {
   SiTrendingUpIcon,
   SiUsersIcon,
 } from '@semantic-icons/lucide-icons';
+import {
+  AppStatCard,
+  AppStatCardChange,
+  AppStatCardDescription,
+  AppStatCardIcon,
+  AppStatCardLabel,
+  AppStatCardValue,
+} from '../../components/stat-card';
 import { PEOPLE } from '../../data/people';
 import { PRODUCTS } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
@@ -82,12 +84,12 @@ import { axisLabel, initials, money } from '../../shared/format';
     ScProgressRange,
     ScProgressTrack,
     ScProgressValueText,
-    ScStatCard,
-    ScStatCardChange,
-    ScStatCardDescription,
-    ScStatCardIcon,
-    ScStatCardLabel,
-    ScStatCardValue,
+    AppStatCard,
+    AppStatCardChange,
+    AppStatCardDescription,
+    AppStatCardIcon,
+    AppStatCardLabel,
+    AppStatCardValue,
     ScToggle,
     SiDollarSignIcon,
     SiHeartIcon,
@@ -107,82 +109,82 @@ import { axisLabel, initials, money } from '../../shared/format';
     />
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@widgets.widgetPages.revenue"
             >Revenue</ng-container
           >
-          <svg siDollarSignIcon scStatCardIcon></svg>
+          <svg siDollarSignIcon appStatCardIcon></svg>
         </dt>
         <dd
-          scStatCardValue
+          appStatCardValue
           [value]="45231.89"
           [format]="{ style: 'currency', currency: 'USD' }"
         ></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.201"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@widgets.widgetPages.fromLastMonth" scStatCardDescription>
+        <dd i18n="@@widgets.widgetPages.fromLastMonth" appStatCardDescription>
           from last month
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@widgets.widgetPages.subscriptions"
             >Subscriptions</ng-container
           >
-          <svg siUsersIcon scStatCardIcon></svg>
+          <svg siUsersIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="2350"></dd>
+        <dd appStatCardValue [value]="2350"></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="1.801"
           [format]="{ style: 'percent', maximumFractionDigits: 0 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@widgets.widgetPages.fromLastMonth" scStatCardDescription>
+        <dd i18n="@@widgets.widgetPages.fromLastMonth" appStatCardDescription>
           from last month
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@widgets.widgetPages.sales">Sales</ng-container>
-          <svg siShoppingBagIcon scStatCardIcon></svg>
+          <svg siShoppingBagIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="12234"></dd>
+        <dd appStatCardValue [value]="12234"></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.19"
           [format]="{ style: 'percent', maximumFractionDigits: 0 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@widgets.widgetPages.fromLastMonth" scStatCardDescription>
+        <dd i18n="@@widgets.widgetPages.fromLastMonth" appStatCardDescription>
           from last month
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@widgets.widgetPages.refunds"
             >Refunds</ng-container
           >
-          <svg siTrendingDownIcon scStatCardIcon></svg>
+          <svg siTrendingDownIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="573"></dd>
+        <dd appStatCardValue [value]="573"></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           good="down"
           [value]="-0.04"
           [format]="{ style: 'percent', maximumFractionDigits: 0 }"
         >
           <svg siTrendingDownIcon></svg>
         </dd>
-        <dd i18n="@@widgets.widgetPages.fromLastMonth" scStatCardDescription>
+        <dd i18n="@@widgets.widgetPages.fromLastMonth" appStatCardDescription>
           from last month
         </dd>
       </dl>

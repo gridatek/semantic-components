@@ -1,172 +1,84 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  Component,
+  LOCALE_ID,
+  ViewEncapsulation,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
+import {
+  ScButton,
   ScFrame,
-  type ScNotification,
-  ScNotificationCenter,
-  ScNotificationCenterHeader,
-  ScNotificationCenterTitle,
-  ScNotificationClearAll,
-  ScNotificationContent,
-  ScNotificationDay,
-  ScNotificationDescription,
-  ScNotificationDismiss,
-  ScNotificationEmpty,
-  ScNotificationFilter,
-  ScNotificationFilters,
-  ScNotificationIcon,
-  ScNotificationItem,
-  ScNotificationList,
-  ScNotificationMarkAllRead,
-  ScNotificationSection,
-  ScNotificationSectionTitle,
-  ScNotificationTime,
-  ScNotificationTitle,
-  ScNotificationUnread,
+  ScItem,
+  ScItemBody,
+  ScItemDescription,
+  ScItemGroup,
+  ScItemTitle,
 } from '@semantic-components/ui';
-import {
-  SiBellOffIcon,
-  SiCheckCheckIcon,
-  SiCircleCheckIcon,
-  SiInfoIcon,
-  SiMessageSquareIcon,
-  SiTrash2Icon,
-  SiTriangleAlertIcon,
-  SiXIcon,
-} from '@semantic-icons/lucide-icons';
 
-interface Notice extends ScNotification {
+interface Notice {
+  readonly id: string;
   readonly title: string;
-  readonly description?: string;
+  readonly at: Temporal.Instant;
 }
 
-const hoursAgo = (hours: number) =>
-  Temporal.Now.instant().subtract({ minutes: Math.round(hours * 60) });
-
-/** Notifications in sections by day, as most apps show them: days(), each titled by scNotificationDay. */
+/**
+ * A page section, grouped by the reader's calendar day — Today, Yesterday,
+ * then dates in the locale — with Clear all.
+ */
 @Component({
   selector: 'app-by-day-notification-center-demo',
   imports: [
+    ScButton,
     ScFrame,
-    ScNotificationCenter,
-    ScNotificationCenterHeader,
-    ScNotificationCenterTitle,
-    ScNotificationClearAll,
-    ScNotificationContent,
-    ScNotificationDay,
-    ScNotificationDescription,
-    ScNotificationDismiss,
-    ScNotificationEmpty,
-    ScNotificationFilter,
-    ScNotificationFilters,
-    ScNotificationIcon,
-    ScNotificationItem,
-    ScNotificationList,
-    ScNotificationMarkAllRead,
-    ScNotificationSection,
-    ScNotificationSectionTitle,
-    ScNotificationTime,
-    ScNotificationTitle,
-    ScNotificationUnread,
-    SiBellOffIcon,
-    SiCheckCheckIcon,
-    SiCircleCheckIcon,
-    SiInfoIcon,
-    SiMessageSquareIcon,
-    SiTrash2Icon,
-    SiTriangleAlertIcon,
-    SiXIcon,
+    ScItem,
+    ScItemBody,
+    ScItemDescription,
+    ScItemGroup,
+    ScItemTitle,
   ],
   template: `
     <section
-      scNotificationCenter
-      #center="scNotificationCenter"
-      [(notifications)]="notifications"
-      aria-labelledby="by-day-notifications-title"
       scFrame
-      class="bg-card w-full max-w-md"
+      aria-labelledby="activity-title"
+      class="flex w-full max-w-md flex-col gap-4 p-4"
     >
-      <div scNotificationCenterHeader>
-        <h2 scNotificationCenterTitle id="by-day-notifications-title">
-          Activity
-        </h2>
-        <div class="flex items-center gap-1">
-          <button size="icon-sm" scNotificationMarkAllRead>
-            <svg siCheckCheckIcon></svg>
-            <span class="sr-only">Mark all as read</span>
-          </button>
-          <button scNotificationClearAll>
-            <svg siTrash2Icon></svg>
-            <span class="sr-only">Clear all</span>
-          </button>
-        </div>
+      <div class="flex items-center justify-between">
+        <h3 id="activity-title" class="font-semibold">Activity</h3>
+        <button
+          scButton
+          variant="ghost"
+          size="sm"
+          [disabled]="!notifications().length"
+          (click)="notifications.set([])"
+        >
+          Clear all
+        </button>
       </div>
-
-      <div class="px-4 pt-3">
-        <div scNotificationFilters aria-label="Show">
-          <button scNotificationFilter="all">All</button>
-          <button scNotificationFilter="unread">
-            Unread ({{ center.unreadCount() }})
-          </button>
-        </div>
-      </div>
-
-      @if (center.visible().length) {
-        <div class="p-2">
-          @for (group of center.days(); track group.day.toString()) {
-            <div scNotificationSection>
-              <h3 scNotificationSectionTitle>
-                <time [scNotificationDay]="group.day"></time>
-              </h3>
-              <ul scNotificationList>
-                @for (notice of group.notifications; track notice.id) {
-                  <li [scNotification]="notice">
-                    <span scNotificationUnread>
-                      <span class="sr-only">Unread</span>
-                    </span>
-                    <span scNotificationIcon>
-                      @switch (notice.type) {
-                        @case ('message') {
-                          <svg siMessageSquareIcon></svg>
-                        }
-                        @case ('success') {
-                          <svg siCircleCheckIcon></svg>
-                        }
-                        @case ('warning') {
-                          <svg siTriangleAlertIcon></svg>
-                        }
-                        @default {
-                          <svg siInfoIcon></svg>
-                        }
-                      }
-                    </span>
-                    <div scNotificationContent>
-                      <div class="flex items-start justify-between gap-2">
-                        <p scNotificationTitle>{{ notice.title }}</p>
-                        <time scNotificationTime></time>
-                      </div>
-                      @if (notice.description) {
-                        <p scNotificationDescription>
-                          {{ notice.description }}
-                        </p>
-                      }
-                    </div>
-                    <button scNotificationDismiss>
-                      <svg siXIcon></svg>
-                      <span class="sr-only">{{
-                        'Dismiss ' + notice.title
-                      }}</span>
-                    </button>
-                  </li>
-                }
-              </ul>
-            </div>
-          }
-        </div>
-      } @else {
-        <div scNotificationEmpty>
-          <svg siBellOffIcon></svg>
-          <p>You're all caught up.</p>
-        </div>
+      @for (day of days(); track day.label) {
+        <section [attr.aria-label]="day.label" class="flex flex-col gap-1">
+          <h4
+            class="text-muted-foreground text-xs font-medium first-letter:uppercase"
+          >
+            {{ day.label }}
+          </h4>
+          <div scItemGroup role="list">
+            @for (notice of day.notices; track notice.id) {
+              <div scItem size="sm" role="listitem">
+                <div scItemBody>
+                  <div scItemTitle>{{ notice.title }}</div>
+                  <p scItemDescription>
+                    <time [attr.datetime]="notice.at.toString()">{{
+                      time(notice.at)
+                    }}</time>
+                  </p>
+                </div>
+              </div>
+            }
+          </div>
+        </section>
+      } @empty {
+        <p class="text-muted-foreground text-sm">Nothing yet.</p>
       }
     </section>
   `,
@@ -174,51 +86,55 @@ const hoursAgo = (hours: number) =>
   encapsulation: ViewEncapsulation.None,
 })
 export class ByDayNotificationCenterDemo {
-  private readonly notifications = signal<Notice[]>([
+  private readonly locale = inject(LOCALE_ID);
+  private readonly zone = Temporal.Now.timeZoneId();
+  private readonly now = Temporal.Now.instant();
+  private readonly relative = new Intl.RelativeTimeFormat(this.locale, {
+    numeric: 'auto',
+  });
+
+  private readonly notifications = signal<readonly Notice[]>([
     {
       id: '1',
-      title: 'New message from Alice',
-      description: 'Are you free for a quick call this afternoon?',
-      type: 'message',
-      timestamp: hoursAgo(0.1),
-      read: false,
+      title: 'Grace joined the team',
+      at: this.now.subtract({ minutes: 20 }),
     },
     {
       id: '2',
-      title: 'Storage almost full',
-      description: 'You have used 90% of your space.',
-      type: 'warning',
-      timestamp: hoursAgo(2),
-      read: false,
+      title: 'Weekly report ready',
+      at: this.now.subtract({ hours: 3 }),
     },
     {
       id: '3',
-      title: 'Bob mentioned you',
-      description: 'Great work on the new feature!',
-      type: 'message',
-      timestamp: hoursAgo(26),
-      read: false,
+      title: 'Password changed',
+      at: this.now.subtract({ hours: 30 }),
     },
     {
       id: '4',
-      title: 'Weekly report ready',
-      type: 'success',
-      timestamp: hoursAgo(30),
-      read: true,
-    },
-    {
-      id: '5',
-      title: 'Version 2.5 is out',
-      type: 'info',
-      timestamp: hoursAgo(24 * 5),
-      read: true,
-    },
-    {
-      id: '6',
-      title: 'Welcome to the team',
-      type: 'info',
-      timestamp: hoursAgo(24 * 12),
-      read: true,
+      title: 'New sign-in from Lisbon',
+      at: this.now.subtract({ hours: 80 }),
     },
   ]);
+
+  /** The notifications by calendar day, latest first. */
+  private readonly days = computed(() => {
+    const today = this.now.toZonedDateTimeISO(this.zone).toPlainDate();
+    const groups = new Map<string, Notice[]>();
+    for (const notice of this.notifications()) {
+      const day = notice.at.toZonedDateTimeISO(this.zone).toPlainDate();
+      const ago = today.since(day, { largestUnit: 'day' }).days;
+      const label =
+        ago < 2
+          ? this.relative.format(-ago, 'day')
+          : day.toLocaleString(this.locale, { dateStyle: 'medium' });
+      groups.set(label, [...(groups.get(label) ?? []), notice]);
+    }
+    return [...groups].map(([label, notices]) => ({ label, notices }));
+  });
+
+  private time(at: Temporal.Instant): string {
+    return at
+      .toZonedDateTimeISO(this.zone)
+      .toLocaleString(this.locale, { timeStyle: 'short' });
+  }
 }

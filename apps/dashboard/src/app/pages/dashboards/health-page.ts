@@ -23,12 +23,6 @@ import {
   ScProgress,
   ScProgressCircle,
   ScProgressValueText,
-  ScStatCard,
-  ScStatCardChange,
-  ScStatCardDescription,
-  ScStatCardIcon,
-  ScStatCardLabel,
-  ScStatCardValue,
 } from '@semantic-components/ui';
 import {
   ScChart,
@@ -48,6 +42,14 @@ import {
   SiTrendingDownIcon,
   SiTrendingUpIcon,
 } from '@semantic-icons/lucide-icons';
+import {
+  AppStatCard,
+  AppStatCardChange,
+  AppStatCardDescription,
+  AppStatCardIcon,
+  AppStatCardLabel,
+  AppStatCardValue,
+} from '../../components/stat-card';
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { ChartTooltip } from '../../shared/chart-parts';
@@ -140,12 +142,12 @@ interface Medication {
     ScProgress,
     ScProgressCircle,
     ScProgressValueText,
-    ScStatCard,
-    ScStatCardChange,
-    ScStatCardDescription,
-    ScStatCardIcon,
-    ScStatCardLabel,
-    ScStatCardValue,
+    AppStatCard,
+    AppStatCardChange,
+    AppStatCardDescription,
+    AppStatCardIcon,
+    AppStatCardLabel,
+    AppStatCardValue,
     ScChart,
     ScChartCategoryAxis,
     ScChartCursor,
@@ -170,57 +172,57 @@ interface Medication {
     />
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.health.restingHeartRate"
             >Resting heart rate</ng-container
           >
-          <svg siHeartPulseIcon scStatCardIcon></svg>
+          <svg siHeartPulseIcon appStatCardIcon></svg>
         </dt>
-        <dd i18n="@@dashboards.health.n58Bpm" scStatCardValue>58 bpm</dd>
-        <dd scStatCardChange good="down" [value]="-2">
+        <dd i18n="@@dashboards.health.n58Bpm" appStatCardValue>58 bpm</dd>
+        <dd appStatCardChange good="down" [value]="-2">
           <svg siTrendingDownIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.health.bpmFromLastWeek" scStatCardDescription>
+        <dd i18n="@@dashboards.health.bpmFromLastWeek" appStatCardDescription>
           bpm from last week
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.health.steps">Steps</ng-container>
-          <svg siFootprintsIcon scStatCardIcon></svg>
+          <svg siFootprintsIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="8432"></dd>
+        <dd appStatCardValue [value]="8432"></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.14"
           [format]="{ style: 'percent', maximumFractionDigits: 0 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.health.fromYesterday" scStatCardDescription>
+        <dd i18n="@@dashboards.health.fromYesterday" appStatCardDescription>
           from yesterday
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.health.sleep">Sleep</ng-container>
-          <svg siMoonIcon scStatCardIcon></svg>
+          <svg siMoonIcon appStatCardIcon></svg>
         </dt>
-        <dd i18n="@@dashboards.health.n7h24m" scStatCardValue>7h 24m</dd>
-        <dd i18n="@@dashboards.health.deepSleep1h52m" scStatCardDescription>
+        <dd i18n="@@dashboards.health.n7h24m" appStatCardValue>7h 24m</dd>
+        <dd i18n="@@dashboards.health.deepSleep1h52m" appStatCardDescription>
           deep sleep 1h 52m
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.health.calories"
             >Calories</ng-container
           >
-          <svg siFlameIcon scStatCardIcon></svg>
+          <svg siFlameIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="2140"></dd>
-        <dd i18n="@@dashboards.health.of2400Kcal" scStatCardDescription>
+        <dd appStatCardValue [value]="2140"></dd>
+        <dd i18n="@@dashboards.health.of2400Kcal" appStatCardDescription>
           of 2,400 kcal
         </dd>
       </dl>

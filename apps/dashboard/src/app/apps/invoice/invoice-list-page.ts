@@ -15,9 +15,6 @@ import {
   ScInputGroup,
   ScInputGroupAddon,
   ScLink,
-  ScStatCard,
-  ScStatCardLabel,
-  ScStatCardValue,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -36,6 +33,11 @@ import {
   SiSearchIcon,
   SiTrash2Icon,
 } from '@semantic-icons/lucide-icons';
+import {
+  AppStatCard,
+  AppStatCardLabel,
+  AppStatCardValue,
+} from '../../components/stat-card';
 import { PageHeader } from '../../layout/page-header';
 import { day, money } from '../../shared/format';
 import { label } from '../../shared/labels';
@@ -60,9 +62,9 @@ import {
     ScInputGroup,
     ScInputGroupAddon,
     ScLink,
-    ScStatCard,
-    ScStatCardLabel,
-    ScStatCardValue,
+    AppStatCard,
+    AppStatCardLabel,
+    AppStatCardValue,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -95,10 +97,10 @@ import {
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       @for (box of totals(); track box.label) {
-        <dl scStatCard>
-          <dt scStatCardLabel>{{ box.label }}</dt>
+        <dl appStatCard>
+          <dt appStatCardLabel>{{ box.label }}</dt>
           <dd
-            scStatCardValue
+            appStatCardValue
             [value]="box.amount"
             [format]="{ style: 'currency', currency: 'USD' }"
           ></dd>

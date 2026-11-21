@@ -18,95 +18,147 @@ import { DashboardStatCardDemo } from './dashboard-stat-card-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class DashboardStatCardDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import {
-  ScStatCard,
-  ScStatCardChange,
-  ScStatCardDescription,
-  ScStatCardIcon,
-  ScStatCardLabel,
-  ScStatCardValue,
-} from '@semantic-components/ui';
+  readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScCard, ScCardBody, ScNumberTicker } from '@semantic-components/ui';
 import {
   SiActivityIcon,
   SiCreditCardIcon,
   SiDollarSignIcon,
-  SiTrendingDownIcon,
-  SiTrendingUpIcon,
   SiUsersIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** A row of cards, each with an icon at the end of its label — two columns, then four as there is room. */
+interface Stat {
+  readonly label: string;
+  readonly value: number;
+  readonly format: Intl.NumberFormatOptions;
+  readonly change: number;
+  readonly changeFormat: Intl.NumberFormatOptions;
+  /** The way that is good news: up (revenue), or down (costs). */
+  readonly good: 'up' | 'down';
+  readonly since: string;
+}
+
+const PERCENT: Intl.NumberFormatOptions = {
+  style: 'percent',
+  maximumFractionDigits: 1,
+  signDisplay: 'exceptZero',
+};
+
+/** Four figures in a row, each with your icon: currency, a count, a fall, a plain number. */
 @Component({
   selector: 'app-dashboard-stat-card-demo',
   imports: [
-    ScStatCard,
-    ScStatCardLabel,
-    ScStatCardValue,
-    ScStatCardChange,
-    ScStatCardDescription,
-    ScStatCardIcon,
+    SiActivityIcon,
+    SiCreditCardIcon,
     SiDollarSignIcon,
     SiUsersIcon,
-    SiCreditCardIcon,
-    SiActivityIcon,
-    SiTrendingUpIcon,
-    SiTrendingDownIcon,
+    ScCard,
+    ScCardBody,
+    ScNumberTicker,
   ],
   template: \`
     <div class="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <dl scStatCard>
-        <dt scStatCardLabel>
-          Revenue <svg siDollarSignIcon scStatCardIcon></svg>
-        </dt>
-        <dd
-          scStatCardValue
-          [value]="45231.89"
-          [format]="{ style: 'currency', currency: 'USD' }"
-        ></dd>
-        <dd
-          scStatCardChange
-          [value]="0.201"
-          [format]="{ style: 'percent', maximumFractionDigits: 1 }"
-        >
-          <svg siTrendingUpIcon></svg>
-        </dd>
-        <dd scStatCardDescription>from last month</dd>
-      </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
-          Subscriptions <svg siUsersIcon scStatCardIcon></svg>
-        </dt>
-        <dd scStatCardValue [value]="2350"></dd>
-        <dd scStatCardChange [value]="180"><svg siTrendingUpIcon></svg></dd>
-        <dd scStatCardDescription>from last month</dd>
-      </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
-          Sales <svg siCreditCardIcon scStatCardIcon></svg>
-        </dt>
-        <dd scStatCardValue [value]="12234"></dd>
-        <dd
-          scStatCardChange
-          [value]="-0.043"
-          [format]="{ style: 'percent', maximumFractionDigits: 1 }"
-        >
-          <svg siTrendingDownIcon></svg>
-        </dd>
-        <dd scStatCardDescription>from last month</dd>
-      </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
-          Active now <svg siActivityIcon scStatCardIcon></svg>
-        </dt>
-        <dd scStatCardValue [value]="573"></dd>
-        <dd scStatCardChange [value]="201"><svg siTrendingUpIcon></svg></dd>
-        <dd scStatCardDescription>since last hour</dd>
-      </dl>
+      @for (stat of stats; track stat.label) {
+        <div scCard>
+          <div scCardBody>
+            <dl class="grid gap-1">
+              <dt
+                class="text-muted-foreground flex items-center justify-between gap-2 text-sm font-medium [&_svg]:size-4"
+              >
+                {{ stat.label }}
+                @switch (stat.icon) {
+                  @case ('dollar') {
+                    <svg siDollarSignIcon></svg>
+                  }
+                  @case ('users') {
+                    <svg siUsersIcon></svg>
+                  }
+                  @case ('card') {
+                    <svg siCreditCardIcon></svg>
+                  }
+                  @case ('activity') {
+                    <svg siActivityIcon></svg>
+                  }
+                }
+              </dt>
+              <dd class="text-2xl font-semibold tabular-nums">
+                <span
+                  scNumberTicker
+                  [value]="stat.value"
+                  [format]="stat.format"
+                ></span>
+              </dd>
+              <dd
+                class="flex items-center gap-1 text-xs tabular-nums"
+                [class]="tone(stat)"
+              >
+                <span
+                  scNumberTicker
+                  [value]="stat.change"
+                  [format]="stat.changeFormat"
+                ></span>
+                <span class="text-muted-foreground">{{ stat.since }}</span>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      }
     </div>
   \`,
-  host: { class: 'block w-full' },
+  host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DashboardStatCardDemo {}`;
+export class DashboardStatCardDemo {
+  private readonly stats: readonly (Stat & {
+    icon: 'dollar' | 'users' | 'card' | 'activity';
+  })[] = [
+    {
+      label: 'Revenue',
+      icon: 'dollar',
+      value: 45231.89,
+      format: { style: 'currency', currency: 'USD' },
+      change: 0.201,
+      changeFormat: PERCENT,
+      good: 'up',
+      since: 'from last month',
+    },
+    {
+      label: 'Subscriptions',
+      icon: 'users',
+      value: 2350,
+      format: {},
+      change: 180,
+      changeFormat: { signDisplay: 'exceptZero' },
+      good: 'up',
+      since: 'from last month',
+    },
+    {
+      label: 'Sales',
+      icon: 'card',
+      value: 12234,
+      format: {},
+      change: -0.043,
+      changeFormat: PERCENT,
+      good: 'up',
+      since: 'from last month',
+    },
+    {
+      label: 'Active now',
+      icon: 'activity',
+      value: 573,
+      format: {},
+      change: 0,
+      changeFormat: { signDisplay: 'exceptZero' },
+      good: 'up',
+      since: 'since last hour',
+    },
+  ];
+
+  /** Good news in the theme's success colour, bad in its destructive one; no change muted. */
+  private tone(stat: Stat): string {
+    if (stat.change === 0) return 'text-muted-foreground';
+    const up = stat.change > 0;
+    return up === (stat.good === 'up') ? 'text-success' : 'text-destructive';
+  }
+}`;
 }

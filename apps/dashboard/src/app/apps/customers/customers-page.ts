@@ -18,9 +18,6 @@ import {
   ScCard,
   ScCardBody,
   ScInput,
-  ScStatCard,
-  ScStatCardLabel,
-  ScStatCardValue,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -41,6 +38,11 @@ import {
   SiArrowUpIcon,
   SiChevronsUpDownIcon,
 } from '@semantic-icons/lucide-icons';
+import {
+  AppStatCard,
+  AppStatCardLabel,
+  AppStatCardValue,
+} from '../../components/stat-card';
 import { CUSTOMERS, type Customer } from '../../data/orders';
 import { personById } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
@@ -117,9 +119,9 @@ const columns = columnHelper.columns([
     ScCard,
     ScCardBody,
     ScInput,
-    ScStatCard,
-    ScStatCardLabel,
-    ScStatCardValue,
+    AppStatCard,
+    AppStatCardLabel,
+    AppStatCardValue,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -145,18 +147,20 @@ const columns = columnHelper.columns([
     />
 
     <div class="grid gap-4 sm:grid-cols-3">
-      <dl scStatCard>
-        <dt i18n="@@customers.customers" scStatCardLabel>Customers</dt>
-        <dd scStatCardValue [value]="rows.length"></dd>
+      <dl appStatCard>
+        <dt i18n="@@customers.customers" appStatCardLabel>Customers</dt>
+        <dd appStatCardValue [value]="rows.length"></dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>VIP</dt>
-        <dd scStatCardValue [value]="vip"></dd>
+      <dl appStatCard>
+        <dt appStatCardLabel>VIP</dt>
+        <dd appStatCardValue [value]="vip"></dd>
       </dl>
-      <dl scStatCard>
-        <dt i18n="@@customers.lifetimeSpend" scStatCardLabel>Lifetime spend</dt>
+      <dl appStatCard>
+        <dt i18n="@@customers.lifetimeSpend" appStatCardLabel>
+          Lifetime spend
+        </dt>
         <dd
-          scStatCardValue
+          appStatCardValue
           [value]="spent"
           [format]="{ style: 'currency', currency: 'USD' }"
         ></dd>

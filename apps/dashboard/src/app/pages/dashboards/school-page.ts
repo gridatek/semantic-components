@@ -15,12 +15,6 @@ import {
   ScItemGroup,
   ScItemMedia,
   ScItemTitle,
-  ScStatCard,
-  ScStatCardChange,
-  ScStatCardDescription,
-  ScStatCardIcon,
-  ScStatCardLabel,
-  ScStatCardValue,
   ScTable,
   ScTableBody,
   ScTableCell,
@@ -52,6 +46,14 @@ import {
   SiTrendingUpIcon,
   SiUsersIcon,
 } from '@semantic-icons/lucide-icons';
+import {
+  AppStatCard,
+  AppStatCardChange,
+  AppStatCardDescription,
+  AppStatCardIcon,
+  AppStatCardLabel,
+  AppStatCardValue,
+} from '../../components/stat-card';
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
@@ -171,12 +173,12 @@ const NOTICES = [
     ScItemGroup,
     ScItemMedia,
     ScItemTitle,
-    ScStatCard,
-    ScStatCardChange,
-    ScStatCardDescription,
-    ScStatCardIcon,
-    ScStatCardLabel,
-    ScStatCardValue,
+    AppStatCard,
+    AppStatCardChange,
+    AppStatCardDescription,
+    AppStatCardIcon,
+    AppStatCardLabel,
+    AppStatCardValue,
     ScTable,
     ScTableBody,
     ScTableCell,
@@ -214,69 +216,69 @@ const NOTICES = [
     />
 
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.school.students"
             >Students</ng-container
           >
-          <svg siGraduationCapIcon scStatCardIcon></svg>
+          <svg siGraduationCapIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="1240"></dd>
+        <dd appStatCardValue [value]="1240"></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.032"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.school.fromLastYear" scStatCardDescription>
+        <dd i18n="@@dashboards.school.fromLastYear" appStatCardDescription>
           from last year
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.school.teachers"
             >Teachers</ng-container
           >
-          <svg siUsersIcon scStatCardIcon></svg>
+          <svg siUsersIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="86"></dd>
-        <dd i18n="@@dashboards.school.n144StudentsEach" scStatCardDescription>
+        <dd appStatCardValue [value]="86"></dd>
+        <dd i18n="@@dashboards.school.n144StudentsEach" appStatCardDescription>
           14.4 students each
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.school.classes"
             >Classes</ng-container
           >
-          <svg siBookOpenIcon scStatCardIcon></svg>
+          <svg siBookOpenIcon appStatCardIcon></svg>
         </dt>
-        <dd scStatCardValue [value]="48"></dd>
-        <dd i18n="@@dashboards.school.across4Grades" scStatCardDescription>
+        <dd appStatCardValue [value]="48"></dd>
+        <dd i18n="@@dashboards.school.across4Grades" appStatCardDescription>
           across 4 grades
         </dd>
       </dl>
-      <dl scStatCard>
-        <dt scStatCardLabel>
+      <dl appStatCard>
+        <dt appStatCardLabel>
           <ng-container i18n="@@dashboards.school.attendanceToday"
             >Attendance today</ng-container
           >
-          <svg siCalendarCheckIcon scStatCardIcon></svg>
+          <svg siCalendarCheckIcon appStatCardIcon></svg>
         </dt>
         <dd
-          scStatCardValue
+          appStatCardValue
           [value]="0.937"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         ></dd>
         <dd
-          scStatCardChange
+          appStatCardChange
           [value]="0.012"
           [format]="{ style: 'percent', maximumFractionDigits: 1 }"
         >
           <svg siTrendingUpIcon></svg>
         </dd>
-        <dd i18n="@@dashboards.school.fromYesterday" scStatCardDescription>
+        <dd i18n="@@dashboards.school.fromYesterday" appStatCardDescription>
           from yesterday
         </dd>
       </dl>

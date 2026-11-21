@@ -1,58 +1,52 @@
-import { expect, test } from '../../test';
+import { type Page, expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/stat-card/${name}-stat-card-demo`;
+/** A stat's card, by its label. */
+const card = (page: Page, label: string) =>
+  page
+    .locator('[scCard]')
+    .filter({ has: page.getByText(label, { exact: true }) });
+/** Its numbers, as screen readers get them: the value, the change. */
+const numbers = (page: Page, label: string) =>
+  card(page, label).locator('[scNumberTicker] .sr-only');
+/** Its change's line. */
+const change = (page: Page, label: string) =>
+  card(page, label).locator('dd').nth(1);
 
-test('Basic: a description list, its value and signed change', async ({
+test('Usage: a label, its value and its change, written in the locale', async ({
   page,
 }) => {
-  await page.goto(demo('basic'));
-  const card = page.locator('dl[data-slot="stat-card"]');
-  await expect(card.locator('dt')).toHaveText('Revenue');
-  await expect(card.locator('[data-slot="stat-card-value"]')).toHaveText(
-    '$45,231.89',
-  );
-  const change = card.locator('[data-slot="stat-card-change"]');
-  await expect(change).toHaveText('+20.1%');
-  await expect(change).toHaveAttribute('data-trend', 'up');
-  await expect(change).toHaveAttribute('data-good', 'true');
+  await page.goto('/demos/stat-card/stat-card-usage-demo');
+  await expect(card(page, 'Revenue').locator('dt')).toHaveText('Revenue');
+  await expect(numbers(page, 'Revenue')).toHaveText(['$45,231.89', '+20.1%']);
+  await expect(change(page, 'Revenue')).toHaveClass(/text-success/);
 });
 
-test('Formats: in the card’s locale', async ({ page }) => {
-  await page.goto(demo('formats'));
-  const values = page.locator('[data-slot="stat-card-value"]');
-  await expect(values).toHaveText([
-    /^1,3\s?Mio\.$/,
-    /^512,4\s?GB$/,
-    /^89,50\s?€$/,
-  ]);
-  await expect(page.locator('[data-slot="stat-card-change"]')).toHaveText([
-    /^\+86\.000$/,
-    /^\+12,5\s?GB$/,
-    /^-2,10\s?€$/,
-  ]);
-});
-
-test('Good direction: down is good news, unchanged is neither', async ({
+test('Dashboard: a rise in success, a fall in destructive, no change muted', async ({
   page,
 }) => {
-  await page.goto(demo('good'));
-  const changes = page.locator('[data-slot="stat-card-change"]');
-  await expect(changes.nth(0)).toHaveAttribute('data-trend', 'down');
-  await expect(changes.nth(0)).toHaveAttribute('data-good', 'true');
-  await expect(changes.nth(1)).toHaveAttribute('data-trend', 'up');
-  await expect(changes.nth(1)).toHaveAttribute('data-good', 'false');
-  await expect(changes.nth(2)).toHaveAttribute('data-trend', 'none');
-  await expect(changes.nth(2)).not.toHaveAttribute('data-good');
-  await expect(changes.nth(2)).toHaveText('0');
-  // Colour from the theme: good and bad differ, unchanged is muted.
-  const colour = (n: number) =>
-    changes.nth(n).evaluate((el) => getComputedStyle(el).color);
-  expect(await colour(0)).not.toBe(await colour(1));
+  await page.goto('/demos/stat-card/dashboard-stat-card-demo');
+  await expect(page.locator('[scCard]')).toHaveCount(4);
+  await expect(numbers(page, 'Subscriptions')).toHaveText(['2,350', '+180']);
+  await expect(change(page, 'Sales')).toHaveClass(/text-destructive/);
+  await expect(numbers(page, 'Sales')).toHaveText(['12,234', '-4.3%']);
+  await expect(change(page, 'Active now')).toHaveClass(/text-muted-foreground/);
+  await expect(numbers(page, 'Active now')).toHaveText(['573', '0']);
 });
 
-test('Text value: your text, without a number', async ({ page }) => {
-  await page.goto(demo('text'));
-  await expect(page.locator('[data-slot="stat-card-value"]')).toHaveText(
-    'All systems normal',
-  );
+test('Good news: down is good for costs, up is bad for errors — said in words too', async ({
+  page,
+}) => {
+  await page.goto('/demos/stat-card/good-stat-card-demo');
+  await expect(change(page, 'Cloud costs')).toHaveClass(/text-success/);
+  await expect(change(page, 'Cloud costs')).toContainText('(good)');
+  await expect(change(page, 'Errors')).toHaveClass(/text-destructive/);
+  await expect(change(page, 'Errors')).toContainText('(bad)');
+});
+
+test('RTL: labelled in Arabic, its numbers written for it', async ({
+  page,
+}) => {
+  await page.goto('/demos/stat-card/rtl-stat-card-demo');
+  await expect(numbers(page, 'الإيرادات')).toHaveCount(2);
+  await expect(card(page, 'الإيرادات').locator('dt')).toHaveText('الإيرادات');
 });
