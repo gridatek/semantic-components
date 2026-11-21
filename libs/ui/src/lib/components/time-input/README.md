@@ -62,7 +62,7 @@ Digits, letters and separators are read from the input events (`beforeinput`), n
 | `twelveHours()`        | A 12-hour clock (with AM/PM), or 24                         |
 | `outOfRange()`         | The value is outside `minTime` / `maxTime` (marked invalid) |
 
-### ScTimeInputSegment — `input[scTimeInputSegment]`, `#p="scTimeInputSegment"`
+### ScDateTimeSegment — `input[scDateTimeSegment]`, `#p="scDateTimeSegment"`
 
 A part — hour, minute, second or AM/PM: an input (`role="spinbutton"`) named, ranged and described from its time input, which keeps the state and reads what is typed. The time input's own part, not one to place: `div[scTimeInput]` writes one per part, because the parts — their order, the text between them, AM/PM or not — come from the locale. So it can't be styled from your markup either: its look is the style's (`segmentedInput.segment`).
 

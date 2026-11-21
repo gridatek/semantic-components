@@ -14,10 +14,14 @@ import {
 import { cn } from 'cn';
 import { ScPopoverProvider } from '../popover';
 import { ScTimeInput, type ScTimeInputPart } from '../time-input';
+import {
+  SC_TIME_COLUMNS,
+  type ScTimeColumnsHost,
+  type ScTimePickerValue,
+  scTimeColumnValues,
+  scTimeEnabled,
+} from './time-columns';
 import { ScTimePickerTrigger } from './time-picker-trigger';
-
-/** A value in a column: an hour, a minute, a second — or AM / PM. */
-export type ScTimePickerValue = number | 'am' | 'pm';
 
 type DurationFormat = new (
   locale: string,
@@ -36,12 +40,14 @@ type DurationFormat = new (
 @Directive({
   selector: 'div[scTimePicker]',
   exportAs: 'scTimePicker',
+  // Its columns (scTimePickerColumns) read it, and set its time input's parts.
+  providers: [{ provide: SC_TIME_COLUMNS, useExisting: ScTimePicker }],
   host: {
     'data-slot': 'time-picker',
     '[class]': 'class()',
   },
 })
-export class ScTimePicker {
+export class ScTimePicker implements ScTimeColumnsHost {
   private readonly locale = inject(LOCALE_ID);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -65,23 +71,16 @@ export class ScTimePicker {
   );
 
   /** The columns' values, by part. */
-  readonly values = computed<Record<ScTimeInputPart, ScTimePickerValue[]>>(
-    () => {
-      const every = (step: number) =>
-        Array.from(
-          { length: Math.ceil(60 / Math.max(1, step)) },
-          (_, i) => i * Math.max(1, step),
-        );
-      return {
-        hour: this.timeInput().twelveHours()
-          ? [12, ...Array.from({ length: 11 }, (_, i) => i + 1)]
-          : Array.from({ length: 24 }, (_, i) => i),
-        minute: every(this.minuteStep()),
-        second: every(this.secondStep()),
-        dayPeriod: ['am', 'pm'],
-      };
-    },
+  readonly values = computed(() =>
+    scTimeColumnValues(
+      this.timeInput().twelveHours(),
+      this.minuteStep(),
+      this.secondStep(),
+    ),
   );
+
+  /** The input the columns set: its time input. */
+  readonly segmentedInput = computed(() => this.timeInput());
 
   /** The earliest time that can be picked: the later of `minTime` and `startTime`. */
   private readonly earliest = computed(() => {
@@ -178,41 +177,14 @@ export class ScTimePicker {
    * are — falls within `minTime` (or `startTime`) and `maxTime`.
    */
   enabled(type: ScTimeInputPart, value: ScTimePickerValue): boolean {
-    const earliest = this.earliest();
-    const latest = this.timeInput().maxTime();
-    if (!earliest && !latest) return true;
     const input = this.timeInput();
-    const parts = input.parts();
-    const twelve = input.twelveHours();
-    const periods: ('am' | 'pm' | undefined)[] = !twelve
-      ? [undefined]
-      : type === 'dayPeriod'
-        ? [value as 'am' | 'pm']
-        : parts.dayPeriod
-          ? [parts.dayPeriod]
-          : ['am', 'pm'];
-    const to24 = (hour: number, period: 'am' | 'pm' | undefined) =>
-      twelve ? (hour % 12) + (period === 'pm' ? 12 : 0) : hour;
-    const within = (from: Temporal.PlainTime, to: Temporal.PlainTime) =>
-      (!earliest || Temporal.PlainTime.compare(to, earliest) >= 0) &&
-      (!latest || Temporal.PlainTime.compare(from, latest) <= 0);
-    const time = (hour: number, minute = 0, second = 0) =>
-      Temporal.PlainTime.from({ hour, minute, second });
-    return periods.some((period) => {
-      if (type === 'dayPeriod' && parts.hour === undefined)
-        return period === 'am'
-          ? within(time(0), time(11, 59, 59))
-          : within(time(12), time(23, 59, 59));
-      const hour = type === 'hour' ? (value as number) : (parts.hour as number);
-      if (hour === undefined) return true;
-      const h = to24(hour, period);
-      if (type === 'hour' || type === 'dayPeriod')
-        return within(time(h), time(h, 59, 59));
-      if (type === 'minute')
-        return within(time(h, value as number), time(h, value as number, 59));
-      if (parts.minute === undefined) return true;
-      const exact = time(h, parts.minute, value as number);
-      return within(exact, exact);
-    });
+    return scTimeEnabled(
+      type,
+      value,
+      input.parts(),
+      input.twelveHours(),
+      this.earliest(),
+      input.maxTime(),
+    );
   }
 }

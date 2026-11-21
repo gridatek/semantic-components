@@ -248,8 +248,8 @@ export default class DateInputPage {
         "The group, its parts written from the locale, in the locale's direction. data-empty, data-invalid, data-disabled, data-readonly. exportAs scDateInput: clear(), focus(options, part), segments(), date().",
     },
     {
-      name: 'ScDateInputSegment',
-      selector: 'input[scDateInputSegment]',
+      name: 'ScDateTimeSegment',
+      selector: 'input[scDateTimeSegment]',
       description:
         "A part: an input (spin button) the date input writes, one per part, from the locale — not one to place or style yourself; its look is the style's (segmentedInput.segment). data-type, data-empty.",
     },

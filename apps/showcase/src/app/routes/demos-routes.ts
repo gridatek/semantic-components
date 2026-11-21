@@ -2253,6 +2253,121 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/date-time-input',
+    children: [
+      {
+        path: 'date-time-input-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-input/demos/date-time-input-usage-demo').then(
+            (m) => m.DateTimeInputUsageDemo,
+          ),
+      },
+      {
+        path: 'hour-cycle-date-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-input/demos/hour-cycle-date-time-input-demo').then(
+            (m) => m.HourCycleDateTimeInputDemo,
+          ),
+      },
+      {
+        path: 'limits-date-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-input/demos/limits-date-time-input-demo').then(
+            (m) => m.LimitsDateTimeInputDemo,
+          ),
+      },
+      {
+        path: 'locale-date-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-input/demos/locale-date-time-input-demo').then(
+            (m) => m.LocaleDateTimeInputDemo,
+          ),
+      },
+      {
+        path: 'disabled-date-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-input/demos/disabled-date-time-input-demo').then(
+            (m) => m.DisabledDateTimeInputDemo,
+          ),
+      },
+      {
+        path: 'read-only-date-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-input/demos/read-only-date-time-input-demo').then(
+            (m) => m.ReadOnlyDateTimeInputDemo,
+          ),
+      },
+      {
+        path: 'form-date-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-input/demos/form-date-time-input-demo').then(
+            (m) => m.FormDateTimeInputDemo,
+          ),
+      },
+      {
+        path: 'controlled-date-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-input/demos/controlled-date-time-input-demo').then(
+            (m) => m.ControlledDateTimeInputDemo,
+          ),
+      },
+      {
+        path: 'rtl-date-time-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-input/demos/rtl-date-time-input-demo').then(
+            (m) => m.RtlDateTimeInputDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/date-time-picker',
+    children: [
+      {
+        path: 'date-time-picker-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-picker/demos/date-time-picker-usage-demo').then(
+            (m) => m.DateTimePickerUsageDemo,
+          ),
+      },
+      {
+        path: 'steps-date-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-picker/demos/steps-date-time-picker-demo').then(
+            (m) => m.StepsDateTimePickerDemo,
+          ),
+      },
+      {
+        path: 'limits-date-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-picker/demos/limits-date-time-picker-demo').then(
+            (m) => m.LimitsDateTimePickerDemo,
+          ),
+      },
+      {
+        path: 'locale-date-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-picker/demos/locale-date-time-picker-demo').then(
+            (m) => m.LocaleDateTimePickerDemo,
+          ),
+      },
+      {
+        path: 'form-date-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-picker/demos/form-date-time-picker-demo').then(
+            (m) => m.FormDateTimePickerDemo,
+          ),
+      },
+      {
+        path: 'rtl-date-time-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-time-picker/demos/rtl-date-time-picker-demo').then(
+            (m) => m.RtlDateTimePickerDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/date-picker',
     children: [
       {

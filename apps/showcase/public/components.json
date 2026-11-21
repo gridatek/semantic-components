@@ -285,6 +285,22 @@
     "category": "Forms"
   },
   {
+    "name": "Date Time Input",
+    "path": "date-time-input",
+    "description": "A date and a time typed part by part, in the order and on the clock of its locale: a Temporal.PlainDateTime in a form.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
+    "name": "Date Time Picker",
+    "path": "date-time-picker",
+    "description": "A date and a time typed, or picked: the day in a calendar, the time in columns beside it, on the input's clock and limits.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Date Range Picker",
     "path": "date-range-picker",
     "description": "The date picker in range mode, with presets, typed ends and Apply.",

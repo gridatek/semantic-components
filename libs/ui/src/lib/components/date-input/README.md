@@ -64,7 +64,7 @@ Digits and separators are read from the input events (`beforeinput`), not the ke
 
 `data-empty`, `data-invalid`, `data-disabled`, `data-readonly` on the group; `data-type` (`day`, `month`, `year`) and `data-empty` on each part.
 
-### ScDateInputSegment — `input[scDateInputSegment]`
+### ScDateTimeSegment — `input[scDateTimeSegment]`
 
 A part — day, month or year: an input (`role="spinbutton"`) named, ranged and described from its date input, which keeps the state and reads what is typed. The date input's own part, not one to place: `div[scDateInput]` writes one per part, because the parts — their order, the text between them — come from the locale. So it can't be styled from your markup either: its look is the style's (`segmentedInput.segment`).
 

@@ -10,7 +10,7 @@ import {
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import type { ScTimeInputPart } from '../time-input';
-import { ScTimePicker, type ScTimePickerValue } from './time-picker';
+import { SC_TIME_COLUMNS, type ScTimePickerValue } from './time-columns';
 
 /**
  * One column of a time picker — its hours, minutes, seconds or AM/PM: a
@@ -52,7 +52,7 @@ import { ScTimePicker, type ScTimePickerValue } from './time-picker';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScTimePickerColumn {
-  private readonly picker = inject(ScTimePicker);
+  private readonly picker = inject(SC_TIME_COLUMNS);
   private readonly styles = injectStyle().timePicker;
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -66,7 +66,7 @@ export class ScTimePickerColumn {
   private readonly values = computed(() => this.picker.values()[this.type()]);
   /** The time input's part: selected. */
   readonly selected = computed(
-    () => this.picker.timeInput().parts()[this.type()],
+    () => this.picker.segmentedInput().parts()[this.type()],
   );
   /** The option in the tab order: the selected one, else the first that can be picked. */
   private readonly active = linkedSignal(
@@ -76,7 +76,7 @@ export class ScTimePickerColumn {
       ) ?? this.values().find((value) => this.enabled(value)),
   );
   private readonly name = computed(() =>
-    this.picker.timeInput().ɵname(this.type()),
+    this.picker.segmentedInput().ɵname(this.type()),
   );
 
   private readonly optionClass = computed(() =>
@@ -91,7 +91,9 @@ export class ScTimePickerColumn {
 
   private readonly class = computed(() =>
     cn(
-      'bg-popover relative flex max-h-56 min-w-14 flex-col gap-0.5 overflow-y-auto overscroll-contain p-1 outline-none',
+      'bg-popover relative flex min-w-14 flex-col gap-0.5 overflow-y-auto overscroll-contain p-1 outline-none',
+      // Beside a calendar, as tall as it (no height of its own); else at most 14rem.
+      this.picker.fillHeight ? 'h-0 min-h-full' : 'max-h-56',
       this.classInput(),
     ),
   );
@@ -118,7 +120,7 @@ export class ScTimePickerColumn {
   }
 
   private label(value: ScTimePickerValue): string {
-    return this.picker.timeInput().ɵpartText(this.type(), value);
+    return this.picker.segmentedInput().ɵpartText(this.type(), value);
   }
 
   private enabled(value: ScTimePickerValue): boolean {
