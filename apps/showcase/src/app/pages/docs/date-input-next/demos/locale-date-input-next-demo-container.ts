@@ -1,0 +1,76 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { LocaleDateInputNextDemo } from './locale-date-input-next-demo';
+
+@Component({
+  selector: 'app-locale-date-input-next-demo-container',
+  imports: [DemoContainer, LocaleDateInputNextDemo],
+  template: `
+    <app-demo-container
+      title="Locale"
+      [code]="code"
+      demoUrl="/demos/date-input-next/locale-date-input-next-demo"
+    >
+      <app-locale-date-input-next-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class LocaleDateInputNextDemoContainer {
+  private readonly code = `import {
+  Component,
+  HostAttributeToken,
+  LOCALE_ID,
+  ViewEncapsulation,
+  inject,
+  input,
+  model,
+  signal,
+} from '@angular/core';
+import { ScDateInputNext, ScField, ScLabel } from '@semantic-components/ui';
+
+/** A field in the locale of its lang attribute. */
+@Component({
+  selector: 'app-locale-date',
+  imports: [ScDateInputNext, ScField, ScLabel],
+  template: \`
+    <div scField>
+      <label scLabel>{{ label() }}</label>
+      <div scDateInputNext [(value)]="value"></div>
+    </div>
+  \`,
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useFactory: () => inject(new HostAttributeToken('lang')),
+    },
+  ],
+  host: { class: 'block' },
+  encapsulation: ViewEncapsulation.None,
+})
+class LocaleDate {
+  readonly label = input.required<string>();
+  readonly value = model<Temporal.PlainDate | null>(null);
+}
+
+/** The same day in three locales: the parts' order, the separators and the names are the locale's (LOCALE_ID). */
+@Component({
+  selector: 'app-locale-date-input-next-demo',
+  imports: [LocaleDate],
+  template: \`
+    <div class="grid w-full max-w-lg gap-4 sm:grid-cols-3">
+      <app-locale-date lang="en-GB" label="Date" [(value)]="day" />
+      <app-locale-date lang="de-DE" label="Datum" [(value)]="day" />
+      <app-locale-date lang="ja-JP" label="日付" [(value)]="day" />
+    </div>
+  \`,
+  host: { class: 'flex w-full justify-center' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class LocaleDateInputNextDemo {
+  private readonly day = signal<Temporal.PlainDate | null>(
+    Temporal.PlainDate.from('2026-11-02'),
+  );
+}`;
+}

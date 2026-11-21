@@ -244,7 +244,7 @@ export default class TimeInputPage {
       name: 'ScTimeInputSegment',
       selector: 'input[scTimeInputSegment]',
       description:
-        "A part: an input (spin button) the time input writes, one per part, from the locale — not one to place or style yourself; its look is the style's (timeInput.segment). data-type, data-empty. exportAs scTimeInputSegment: text().",
+        "A part: an input (spin button) the time input writes, one per part, from the locale — not one to place or style yourself; its look is the style's (segmentedInput.segment). data-type, data-empty. exportAs scTimeInputSegment: text().",
     },
   ];
 

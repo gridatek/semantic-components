@@ -2185,6 +2185,74 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/date-input-next',
+    children: [
+      {
+        path: 'date-input-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input-next/demos/date-input-next-usage-demo').then(
+            (m) => m.DateInputNextUsageDemo,
+          ),
+      },
+      {
+        path: 'limits-date-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input-next/demos/limits-date-input-next-demo').then(
+            (m) => m.LimitsDateInputNextDemo,
+          ),
+      },
+      {
+        path: 'unavailable-date-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input-next/demos/unavailable-date-input-next-demo').then(
+            (m) => m.UnavailableDateInputNextDemo,
+          ),
+      },
+      {
+        path: 'locale-date-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input-next/demos/locale-date-input-next-demo').then(
+            (m) => m.LocaleDateInputNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-date-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input-next/demos/disabled-date-input-next-demo').then(
+            (m) => m.DisabledDateInputNextDemo,
+          ),
+      },
+      {
+        path: 'read-only-date-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input-next/demos/read-only-date-input-next-demo').then(
+            (m) => m.ReadOnlyDateInputNextDemo,
+          ),
+      },
+      {
+        path: 'form-date-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input-next/demos/form-date-input-next-demo').then(
+            (m) => m.FormDateInputNextDemo,
+          ),
+      },
+      {
+        path: 'controlled-date-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input-next/demos/controlled-date-input-next-demo').then(
+            (m) => m.ControlledDateInputNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-date-input-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/date-input-next/demos/rtl-date-input-next-demo').then(
+            (m) => m.RtlDateInputNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/date-input',
     children: [
       {

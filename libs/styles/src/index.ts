@@ -498,10 +498,11 @@ export interface ScToggleGroupStyles {
 }
 
 /**
- * A time input's parts that change from style to style — ours (shadcn has no
- * time input): the style's input, drawn round the parts.
+ * A segmented input's parts that change from style to style — ours (shadcn
+ * has none): the time and date inputs, the style's input drawn round their
+ * parts.
  */
-export interface ScTimeInputStyles {
+export interface ScSegmentedInputStyles {
   /** The box: the style's input — focus, disabled and invalid read from the group. */
   root: string;
   /** A part (hour, minute, AM/PM): the corners of its highlight. */
@@ -734,6 +735,7 @@ export interface ScStyle {
   resizable: ScResizableStyles;
   scrollArea: ScScrollAreaStyles;
   select: ScSelectStyles;
+  segmentedInput: ScSegmentedInputStyles;
   sheet: ScSheetStyles;
   sidebar: ScSidebarStyles;
   slider: ScSliderStyles;
@@ -744,7 +746,6 @@ export interface ScStyle {
   tabs: ScTabsStyles;
   /** A multi-line text field. */
   textarea: string;
-  timeInput: ScTimeInputStyles;
   timePicker: ScTimePickerStyles;
   /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
   timeline: ScTimelineStyles;

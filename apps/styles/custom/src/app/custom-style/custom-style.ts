@@ -52,6 +52,7 @@ import { questionnaire } from './questionnaire';
 import { radioGroup } from './radio-group';
 import { resizable } from './resizable';
 import { scrollArea } from './scroll-area';
+import { segmentedInput } from './segmented-input';
 import { select } from './select';
 import { sheet } from './sheet';
 import { sidebar } from './sidebar';
@@ -62,7 +63,6 @@ import { table } from './table';
 /** The nova style: `provideSemanticComponents({ style: nova })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
-import { timeInput } from './time-input';
 import { timePicker } from './time-picker';
 import { timeline } from './timeline';
 import { toast } from './toast';
@@ -127,6 +127,7 @@ export const customStyle: ScStyle = {
   resizable,
   scrollArea,
   select,
+  segmentedInput,
   sheet,
   sidebar,
   skeleton,
@@ -135,7 +136,6 @@ export const customStyle: ScStyle = {
   table,
   tabs,
   textarea,
-  timeInput,
   timePicker,
   timeline,
   toast,

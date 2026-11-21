@@ -64,13 +64,13 @@ Digits, letters and separators are read from the input events (`beforeinput`), n
 
 ### ScTimeInputSegment — `input[scTimeInputSegment]`, `#p="scTimeInputSegment"`
 
-A part — hour, minute, second or AM/PM: an input (`role="spinbutton"`) named, ranged and described from its time input, which keeps the state and reads what is typed. The time input's own part, not one to place: `div[scTimeInput]` writes one per part, because the parts — their order, the text between them, AM/PM or not — come from the locale. So it can't be styled from your markup either: its look is the style's (`timeInput.segment`).
+A part — hour, minute, second or AM/PM: an input (`role="spinbutton"`) named, ranged and described from its time input, which keeps the state and reads what is typed. The time input's own part, not one to place: `div[scTimeInput]` writes one per part, because the parts — their order, the text between them, AM/PM or not — come from the locale. So it can't be styled from your markup either: its look is the style's (`segmentedInput.segment`).
 
 `data-empty`, `data-invalid`, `data-disabled`, `data-readonly` on the group; `data-type` (`hour`, `minute`, `second`, `dayPeriod`) and `data-empty` on each part.
 
 ## Look
 
-The style's `timeInput` key: `root`, the style's input drawn round the parts (focus, disabled and invalid read from the group), and `segment`, the corners of a focused part's highlight. Each part is as wide as what it shows.
+The style's `segmentedInput` key: `root`, the style's input drawn round the parts (focus, disabled and invalid read from the group), and `segment`, the corners of a focused part's highlight. Each part is as wide as what it shows.
 
 ## Accessibility
 

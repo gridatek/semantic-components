@@ -48,7 +48,7 @@ export const SC_TIME_INPUT = new InjectionToken<ScTimeInputHost>(
  * per part in its template, because the parts — their order, the text between
  * them, AM/PM or not — come from the locale, which the consumer can't know
  * ahead. So it can't be styled from the consumer's markup either: the
- * look of a part is the style's (`timeInput.segment`).
+ * look of a part is the style's (`segmentedInput.segment`).
  */
 @Directive({
   selector: 'input[scTimeInputSegment]',
@@ -86,7 +86,7 @@ export const SC_TIME_INPUT = new InjectionToken<ScTimeInputHost>(
 })
 export class ScTimeInputSegment {
   private readonly timeInput = inject(SC_TIME_INPUT);
-  private readonly styles = injectStyle().timeInput;
+  private readonly styles = injectStyle().segmentedInput;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The part it edits. */

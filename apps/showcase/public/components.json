@@ -278,6 +278,15 @@
     "hidden": true
   },
   {
+    "name": "Date Input Next",
+    "path": "date-input-next",
+    "description": "A date typed part by part, in the order of its locale: a number pad on a phone, a Temporal.PlainDate in a form, the day in a Date Picker.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms",
+    "hidden": true
+  },
+  {
     "name": "Date Picker",
     "path": "date-picker",
     "description": "A date picked in the calendar or typed, written in your language; a form field.",
