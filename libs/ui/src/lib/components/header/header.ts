@@ -6,6 +6,7 @@ import {
   ElementRef,
   ViewEncapsulation,
   afterNextRender,
+  afterRenderEffect,
   booleanAttribute,
   computed,
   contentChild,
@@ -193,6 +194,23 @@ export class ScHeader implements ScNavigationMenuLinkHost {
 
     const destroyRef = inject(DestroyRef);
     const element = this.element;
+
+    // Over the page, the menu takes all of it below the bar: the page behind
+    // is out of sight, so it doesn't scroll — no scrollbar, no keys moving it.
+    // Its scrollbar's room is kept, so nothing shifts.
+    afterRenderEffect((onCleanup) => {
+      if (!this.covers() || !this.mobileMenuOpen() || !this.menu()) return;
+      const root = element.ownerDocument.documentElement;
+      const window = element.ownerDocument.defaultView;
+      const scrollbar = !!window && window.innerWidth > root.clientWidth;
+      const { overflow, scrollbarGutter } = root.style;
+      root.style.overflow = 'hidden';
+      if (scrollbar) root.style.scrollbarGutter = 'stable';
+      onCleanup(() => {
+        root.style.overflow = overflow;
+        root.style.scrollbarGutter = scrollbarGutter;
+      });
+    });
     afterNextRender(() => {
       const window = element.ownerDocument.defaultView;
       if (!window) return;
