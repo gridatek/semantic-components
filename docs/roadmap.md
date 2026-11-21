@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its style's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (140 components): 63 with a shadcn counterpart · 138 with e2e demo tests · 140 with a page axe test · 104 with an RTL demo.
+Inventory (141 components): 63 with a shadcn counterpart · 139 with e2e demo tests · 141 with a page axe test · 105 with an RTL demo.
 
 ## The two lists
 
@@ -59,7 +59,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |   1 | [Button](../apps/showcase/src/app/pages/docs/button)                     | ui      | —                                       |     1 | yes                    |  [x]   | [x] |  [x]   | [x] | [x]  | [x] | [x]  | [x] | waiting |
 |   2 | [Link](../apps/showcase/src/app/pages/docs/link)                         | ui      | —                                       |     1 | button                 |  [x]   | [x] |  [x]   | [x] | [x]  | [x] | [x]  | [x] |    —    |
 |   3 | [Input](../apps/showcase/src/app/pages/docs/input)                       | ui      | field                                   |     1 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
-|   4 | [Input Group](../apps/showcase/src/app/pages/docs/input-group)           | ui      | combobox, kbd, select                   |     4 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|   4 | [Input Group](../apps/showcase/src/app/pages/docs/input-group)           | ui      | combobox, date-range-input, kbd, select |     4 | yes                    |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |   5 | [Control Group](../apps/showcase/src/app/pages/docs/control-group)       | ui      | button, input-group, select             |     3 | button-group           |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |   6 | [Select](../apps/showcase/src/app/pages/docs/select)                     | ui      | field, label                            |    16 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |   7 | [Pagination](../apps/showcase/src/app/pages/docs/pagination)             | ui      | button                                  |    10 | yes                    |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
@@ -120,7 +120,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |  62 | [Menubar](../apps/showcase/src/app/pages/docs/menubar)                   | ui      | menu                                    |     2 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  63 | [Preview Card](../apps/showcase/src/app/pages/docs/preview-card)         | ui      | —                                       |     4 | hover-card             |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 
-## List 2 — Not in shadcn (77)
+## List 2 — Not in shadcn (78)
 
 The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 
@@ -138,9 +138,9 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  10 | [Compare](../apps/showcase/src/app/pages/docs/compare)                         | ui      | —                                                                       |     5 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  11 | [Confetti](../apps/showcase/src/app/pages/docs/confetti)                       | ui      | —                                                                       |     2 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  12 | [Data Table](../apps/showcase/src/app/pages/docs/data-table)                   | ui      | button, checkbox, pagination                                            |    14 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
-|  13 | [Date Input](../apps/showcase/src/app/pages/docs/date-input)                   | ui      | date-picker                                                             |     1 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
-|  14 | [Date Picker](../apps/showcase/src/app/pages/docs/date-picker)                 | ui      | button, input-group, popover, select                                    |     6 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
-|  15 | [Date Range Picker](../apps/showcase/src/app/pages/docs/date-range-picker)     | ui      | button, input-group, popover, select                                    |     6 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  13 | [Date Input](../apps/showcase/src/app/pages/docs/date-input)                   | ui      | —                                                                       |     1 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  14 | [Date Picker](../apps/showcase/src/app/pages/docs/date-picker)                 | ui      | button, date-input, input-group, popover, select                        |     6 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  15 | [Date Range Picker](../apps/showcase/src/app/pages/docs/date-range-picker)     | ui      | button, date-input, input-group, popover, select                        |     6 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  16 | [Diff Viewer](../apps/showcase/src/app/pages/docs/diff-viewer)                 | ui      | code-block                                                              |     2 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  17 | [Editor](../apps/showcase/src/app/pages/docs/editor)                           | ui      | button, field, toggle                                                   |     9 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  18 | [Emoji Picker](../apps/showcase/src/app/pages/docs/emoji-picker)               | ui      | —                                                                       |    18 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
@@ -203,6 +203,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  75 | [Countdown](../apps/showcase/src/app/pages/docs/countdown)                     | ui      | —                                                                       |     0 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  76 | [Date Time Input](../apps/showcase/src/app/pages/docs/date-time-input)         | ui      | —                                                                       |     1 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  77 | [Date Time Picker](../apps/showcase/src/app/pages/docs/date-time-picker)       | ui      | button, date-time-input, input-group, popover, time-picker              |     2 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  78 | [Date Range Input](../apps/showcase/src/app/pages/docs/date-range-input)       | ui      | date-input, field                                                       |     1 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 
 ## Later
 
