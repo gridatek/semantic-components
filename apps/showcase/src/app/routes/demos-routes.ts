@@ -3624,6 +3624,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'rtl-marquee-demo',
+        loadComponent: () =>
+          import('../pages/docs/marquee/demos/rtl-marquee-demo').then(
+            (m) => m.RtlMarqueeDemo,
+          ),
+      },
+      {
         path: 'speed-marquee-demo',
         loadComponent: () =>
           import('../pages/docs/marquee/demos/speed-marquee-demo').then(

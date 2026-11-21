@@ -32,6 +32,33 @@ const speed = (page: Page, nth = 0) =>
       return Math.abs(to - from) / (Number(effect.getTiming().duration) / 1000);
     });
 
+/** Which way a track moves: -1 to the left (or up), 1 to the right (or down). */
+const way = (page: Page, nth = 0) =>
+  page
+    .locator('[data-slot="marquee-track"]')
+    .nth(nth)
+    .evaluate((track) => {
+      const effect = track.getAnimations()[0]?.effect as KeyframeEffect;
+      const [from, to] = effect
+        .getKeyframes()
+        .map((frame) =>
+          Number(/-?\d+(?:\.\d+)?/.exec(String(frame['transform']))?.[0] ?? 0),
+        );
+      return Math.sign(to - from);
+    });
+
+test('direction is logical: start goes left, end right; start goes right, right to left', async ({
+  page,
+}) => {
+  await page.goto('/demos/marquee/marquee-usage-demo');
+  await expect.poll(() => way(page)).toBe(-1);
+  await page.goto(demo('testimonials'));
+  // The second row: direction="end".
+  await expect.poll(() => way(page, 1)).toBe(1);
+  await page.goto(demo('rtl'));
+  await expect.poll(() => way(page)).toBe(1);
+});
+
 test.describe('Logos', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/demos/marquee/marquee-usage-demo');

@@ -5,7 +5,7 @@ Your content written once and repeated to fill, at a speed in pixels a second, i
 ## Architecture
 
 ```
-[scMarquee] (direction: left | right | up | down · speed — px/s · gap — px · paused — two-way · fade)
+[scMarquee] (direction: start | end | left | right | up | down · speed — px/s · gap — px · paused — two-way · fade)
 ├── <ng-template scMarqueeContent> — your content, written once
 └── button[scMarqueePause]          — pause / play, beside the content
 ```
@@ -32,6 +32,8 @@ Your content written once and repeated to fill, at a speed in pixels a second, i
 ```
 
 A vertical marquee needs a height (`class="h-80"`).
+
+`direction` is logical: `start` (the default) moves toward the reading start — to the left, and to the right in a right-to-left page, as Arabic tickers run; `end` the other way. Nothing to change for right to left. `left` and `right` are fixed: the same way whatever the page (start and end are turned into them, once).
 
 ## How it moves
 

@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
@@ -17,6 +18,13 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { ScMarqueeContent } from './marquee-content';
+
+/**
+ * Where a marquee moves to: toward the reading start or end (flipped right
+ * to left), left or right whatever the page, up or down.
+ */
+export type ScMarqueeDirection =
+  'start' | 'end' | 'left' | 'right' | 'up' | 'down';
 
 /**
  * Content that scrolls by, endlessly: your `scMarqueeContent` template,
@@ -73,8 +81,21 @@ import { ScMarqueeContent } from './marquee-content';
 export class ScMarquee {
   readonly classInput = input<string>('', { alias: 'class' });
 
-  /** Where it moves to. */
-  readonly direction = input<'left' | 'right' | 'up' | 'down'>('left');
+  /**
+   * Where it moves to: toward the reading start (left, or right in a
+   * right-to-left page) or end; `left` or `right` whatever the page; up or
+   * down.
+   */
+  readonly direction = input<ScMarqueeDirection>('start');
+  private readonly rtl = inject(Directionality).valueSignal;
+  /** The way it moves, as a side: start and end turned into left or right, once. */
+  private readonly side = computed<'left' | 'right' | 'up' | 'down'>(() => {
+    const direction = this.direction();
+    const rtl = this.rtl() === 'rtl';
+    if (direction === 'start') return rtl ? 'right' : 'left';
+    if (direction === 'end') return rtl ? 'left' : 'right';
+    return direction;
+  });
   /** How fast, in pixels a second — whatever the content's length. */
   readonly speed = input(40);
   /** The space between items, and between copies, in pixels. */
@@ -182,15 +203,21 @@ export class ScMarquee {
     afterRenderEffect(() => {
       const distance = this.copySize() + this.gap();
       const speed = this.speed();
-      const direction = this.direction();
+      const side = this.side();
+      const rtl = this.rtl() === 'rtl';
       const still = this.still();
       this.animation?.cancel();
       this.animation = null;
       if (still || !this.copySize() || speed <= 0) return;
       const axis = this.vertical() ? 'Y' : 'X';
+      // The copies follow the reading direction — to the left, right to left:
+      // the loop's forward way is left, or right right to left (and up).
+      const sign = !this.vertical() && rtl ? 1 : -1;
       const from = `translate${axis}(0)`;
-      const to = `translate${axis}(-${distance}px)`;
-      const backwards = direction === 'right' || direction === 'down';
+      const to = `translate${axis}(${sign * distance}px)`;
+      const backwards = this.vertical()
+        ? side === 'down'
+        : (side === 'left') === rtl;
       this.animation = this.track().nativeElement.animate(
         { transform: backwards ? [to, from] : [from, to] },
         { duration: (distance / speed) * 1000, iterations: Infinity },

@@ -9,6 +9,7 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { MarqueeUsageDemoContainer } from './demos/marquee-usage-demo-container';
+import { RtlMarqueeDemoContainer } from './demos/rtl-marquee-demo-container';
 import { SpeedMarqueeDemoContainer } from './demos/speed-marquee-demo-container';
 import { TestimonialsMarqueeDemoContainer } from './demos/testimonials-marquee-demo-container';
 import { TickerMarqueeDemoContainer } from './demos/ticker-marquee-demo-container';
@@ -27,6 +28,7 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
     VerticalMarqueeDemoContainer,
     TickerMarqueeDemoContainer,
     SpeedMarqueeDemoContainer,
+    RtlMarqueeDemoContainer,
     TocHeading,
     ComponentBadges,
   ],
@@ -68,6 +70,16 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
           It moves with the Web Animations API and pauses where it is. A
           vertical marquee needs a height.
         </p>
+        <p>
+          <code scTypeset>direction</code>
+          is logical: <code scTypeset>start</code> (the default) moves toward
+          the reading start — to the left, and to the right in a right-to-left
+          page, as Arabic news tickers run — <code scTypeset>end</code> the
+          other way; or <code scTypeset>up</code> and
+          <code scTypeset>down</code>. Nothing to change for right to left. For
+          a way that never flips, <code scTypeset>left</code> or
+          <code scTypeset>right</code>: start and end are turned into them.
+        </p>
       </section>
 
       <section class="space-y-4">
@@ -99,6 +111,7 @@ import { VerticalMarqueeDemoContainer } from './demos/vertical-marquee-demo-cont
         <app-vertical-marquee-demo-container />
         <app-ticker-marquee-demo-container />
         <app-speed-marquee-demo-container />
+        <app-rtl-marquee-demo-container />
       </section>
 
       <section class="space-y-4">
@@ -152,9 +165,10 @@ export default class MarqueePage {
   private readonly inputs: ApiInput[] = [
     {
       name: 'direction',
-      type: "'left' | 'right' | 'up' | 'down'",
-      default: "'left'",
-      description: 'Where it moves to.',
+      type: "'start' | 'end' | 'left' | 'right' | 'up' | 'down'",
+      default: "'start'",
+      description:
+        'Toward the reading start (right, right to left) or end; left or right whatever the page; up or down.',
     },
     {
       name: 'speed',

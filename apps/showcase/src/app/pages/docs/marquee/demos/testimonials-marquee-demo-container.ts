@@ -39,7 +39,7 @@ import { ScFrame, ScMarquee, ScMarqueeContent } from '@semantic-components/ui';
           }
         </ng-template>
       </div>
-      <div scMarquee direction="right" fade>
+      <div scMarquee direction="end" fade>
         <ng-template scMarqueeContent>
           @for (quote of quotes; track quote.name) {
             <figure scFrame class="bg-card w-64 p-4 text-sm">
