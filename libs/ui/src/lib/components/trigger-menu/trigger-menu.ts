@@ -26,6 +26,7 @@ import {
   type ScTokenInputMenuHost,
 } from '../token-input/token-input';
 import {
+  type ScToken,
   scTokenValueFlat,
   scTokenValueSplice,
 } from '../token-input/token-input-value';
@@ -43,6 +44,27 @@ interface ScTriggerMenuItemHost {
   item(): ScTriggerItem;
 }
 
+/**
+ * Where the menu reads what is typed and puts what is chosen: a Token Input's
+ * editor, or a textarea or input of its own (`scTriggerMenuInput`).
+ */
+export interface ScTriggerMenuField {
+  /** What the popup hangs from. */
+  element(): HTMLElement | undefined;
+  /** Its text, each token one object character (U+FFFC). */
+  text(): string;
+  caret(): number | null;
+  focused(): boolean;
+  editable(): boolean;
+  /** Where the character at `offset` is drawn, in the viewport. */
+  rectAt(offset: number): DOMRect | null;
+  /**
+   * The choice in place of `start` to `end` (the trigger and the query): a
+   * token — or, in a text field, its text — and a space.
+   */
+  insert(start: number, end: number, token: ScToken, text: string): void;
+}
+
 let nextId = 0;
 
 /** Below the trigger, above without room — until it is measured. */
@@ -58,8 +80,9 @@ const FALLBACK: ConnectedPosition[] = [
 
 /**
  * Suggestions as you type a trigger (`@` for people, `/` for commands) in a
- * Token Input: a list at the character, filtered by what follows it; the one
- * chosen becomes a token (and a space). Focus stays in the editor: ↓ / ↑
+ * Token Input — or a textarea or input (`scTriggerMenuInput`): a list at the
+ * character, filtered by what follows it; the one chosen becomes a token (in
+ * a text field, its text), and a space. Focus stays in the field: ↓ / ↑
  * highlight, Enter or Tab choose, Escape dismisses (Ctrl + Space brings it
  * back). Its template (`scTriggerMenuPortal`) holds the popup, the list and
  * its items (`menu.items()`, already filtered), the empty text.
@@ -98,7 +121,7 @@ const FALLBACK: ConnectedPosition[] = [
 export class ScTriggerMenu<
   T extends ScTriggerItem = ScTriggerItem,
 > implements ScTokenInputMenuHost {
-  private readonly root = inject(ScTokenInput);
+  private readonly tokenInput = inject(ScTokenInput, { optional: true });
   private readonly dir = inject(Directionality, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -120,14 +143,23 @@ export class ScTriggerMenu<
   /** Empty parts in its template: then it shows with nothing found. */
   readonly ɵempties = signal(0);
   readonly ɵitemParts = signal<readonly ScTriggerMenuItemHost[]>([]);
+  /** A textarea or input of its own. */
+  readonly ɵinput = signal<ScTriggerMenuField | undefined>(undefined);
+
+  /** The Token Input it is in, as a field. */
+  private readonly tokenField: ScTriggerMenuField | undefined = this.tokenInput
+    ? this.fieldOf(this.tokenInput)
+    : undefined;
+  /** Where it reads and writes: its own text field, or its Token Input. */
+  private readonly field = computed(() => this.ɵinput() ?? this.tokenField);
 
   /** The trigger typed before the caret, and what follows it. */
   readonly match = computed<ScTriggerMatch<T> | null>(() => {
-    const editor = this.root.ɵeditor();
-    if (!editor?.focused() || !this.root.editable()) return null;
-    const caret = editor.caret();
+    const field = this.field();
+    if (!field?.focused() || !field.editable()) return null;
+    const caret = field.caret();
     if (caret === null) return null;
-    const text = scTokenValueFlat(this.root.value()).slice(0, caret);
+    const text = field.text().slice(0, caret);
     let best: ScTriggerMatch<T> | null = null;
     for (const trigger of this.triggers()) {
       const start = text.lastIndexOf(trigger.char);
@@ -197,18 +229,19 @@ export class ScTriggerMenu<
     return this.ɵitemParts().find((part) => part.item() === active)?.id ?? null;
   });
 
-  /** The editor: what the popup hangs from. */
-  private readonly origin = computed(() => this.root.ɵeditor()?.element);
+  /** The field: what the popup hangs from. */
+  private readonly origin = computed(() => this.field()?.element());
 
   /** At the trigger character: below it, or above it without room. */
   private readonly positions = computed<ConnectedPosition[]>(() => {
     const match = this.match();
-    const editor = this.root.ɵeditor();
-    this.root.value();
-    if (!match || !editor) return FALLBACK;
-    const at = editor.rectAt(match.start);
+    const field = this.field();
+    const element = field?.element();
+    if (!match || !field || !element) return FALLBACK;
+    field.text();
+    const at = field.rectAt(match.start);
     if (!at) return FALLBACK;
-    const box = editor.element.getBoundingClientRect();
+    const box = element.getBoundingClientRect();
     const rtl = this.dir?.value === 'rtl';
     const offsetX = rtl ? at.right - box.right : at.left - box.left;
     return [
@@ -234,13 +267,16 @@ export class ScTriggerMenu<
   private readonly class = computed(() => cn('contents', this.classInput()));
 
   constructor() {
-    this.root.ɵmenu.set(this);
-    inject(DestroyRef).onDestroy(() => {
-      if (this.root.ɵmenu() === this) this.root.ɵmenu.set(undefined);
-    });
+    const root = this.tokenInput;
+    if (root) {
+      root.ɵmenu.set(this);
+      inject(DestroyRef).onDestroy(() => {
+        if (root.ɵmenu() === this) root.ɵmenu.set(undefined);
+      });
+    }
     // Focus gone: a dismissed or reverted trigger forgotten.
     effect(() => {
-      if (this.root.ɵeditor()?.focused()) return;
+      if (this.field()?.focused()) return;
       untracked(() => {
         this.dismissedAt.set(null);
         this.pinnedAt.set(null);
@@ -293,26 +329,40 @@ export class ScTriggerMenu<
     this.pinnedAt.set(start);
   }
 
-  /** An item chosen: its token in place of the trigger and the query, then a space. */
+  /** An item chosen: its token (its text) in place of the trigger and the query, then a space. */
   pick(item: T): void {
     const match = this.match();
-    if (!match || item.disabled) return;
-    const token = {
-      type: match.trigger.type,
-      value: item.value,
-      label: item.label,
-    };
-    this.root.ɵcaretBefore = match.end;
-    this.root.ɵcommit(
-      scTokenValueSplice(this.root.value(), match.start, match.end, [
-        token,
-        ' ',
-      ]),
-      'item-press',
-      match.start + 2,
+    const field = this.field();
+    if (!match || !field || item.disabled) return;
+    const { trigger } = match;
+    field.insert(
+      match.start,
+      match.end,
+      { type: trigger.type, value: item.value, label: item.label },
+      trigger.insert ? trigger.insert(item) : trigger.char + item.label,
     );
     this.pinnedAt.set(null);
     this.choose.emit(item);
+  }
+
+  /** A Token Input as a field: its editor, its value; a token put in. */
+  private fieldOf(root: ScTokenInput): ScTriggerMenuField {
+    return {
+      element: () => root.ɵeditor()?.element,
+      text: () => scTokenValueFlat(root.value()),
+      caret: () => root.ɵeditor()?.caret() ?? null,
+      focused: () => !!root.ɵeditor()?.focused(),
+      editable: () => root.editable(),
+      rectAt: (offset) => root.ɵeditor()?.rectAt(offset) ?? null,
+      insert: (start, end, token) => {
+        root.ɵcaretBefore = end;
+        root.ɵcommit(
+          scTokenValueSplice(root.value(), start, end, [token, ' ']),
+          'item-press',
+          start + 2,
+        );
+      },
+    };
   }
 
   private move(step: 1 | -1): void {

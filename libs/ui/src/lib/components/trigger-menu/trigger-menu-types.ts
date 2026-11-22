@@ -28,6 +28,12 @@ export interface ScTrigger<T extends ScTriggerItem = ScTriggerItem> {
    * start (`word`); only at the start of the text or a line (`start`).
    */
   readonly boundary?: 'word' | 'start';
+  /**
+   * In a textarea or input: the text an item puts in (a space follows). The
+   * trigger and the label by default (`@Hollis Grant`). A Token Input puts
+   * a token.
+   */
+  readonly insert?: (item: T) => string;
 }
 
 /** A trigger typed: from where to the caret, and what follows it. */

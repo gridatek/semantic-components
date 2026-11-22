@@ -19,8 +19,11 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { CommandsTriggerMenuDemoContainer } from './demos/commands-trigger-menu-demo-container';
+import { FormTriggerMenuDemoContainer } from './demos/form-trigger-menu-demo-container';
+import { InputTriggerMenuDemoContainer } from './demos/input-trigger-menu-demo-container';
 import { LoadingTriggerMenuDemoContainer } from './demos/loading-trigger-menu-demo-container';
 import { RtlTriggerMenuDemoContainer } from './demos/rtl-trigger-menu-demo-container';
+import { TextareaTriggerMenuDemoContainer } from './demos/textarea-trigger-menu-demo-container';
 import { TriggerMenuUsageDemoContainer } from './demos/trigger-menu-usage-demo-container';
 
 @Component({
@@ -43,6 +46,9 @@ import { TriggerMenuUsageDemoContainer } from './demos/trigger-menu-usage-demo-c
     TriggerMenuUsageDemoContainer,
     CommandsTriggerMenuDemoContainer,
     LoadingTriggerMenuDemoContainer,
+    TextareaTriggerMenuDemoContainer,
+    InputTriggerMenuDemoContainer,
+    FormTriggerMenuDemoContainer,
     RtlTriggerMenuDemoContainer,
   ],
   template: `
@@ -51,8 +57,9 @@ import { TriggerMenuUsageDemoContainer } from './demos/trigger-menu-usage-demo-c
         <h1 scTypeset>Trigger Menu</h1>
         <p class="text-muted-foreground">
           Suggestions as you type a trigger — &#64; for people, / for commands —
-          in a Token Input: a list at the character, filtered by what follows
-          it; the one chosen becomes a token.
+          in a Token Input, a textarea or an input: a list at the character,
+          filtered by what follows it; the one chosen becomes a token, or its
+          text.
         </p>
         <app-component-badges path="trigger-menu" />
       </div>
@@ -65,10 +72,12 @@ import { TriggerMenuUsageDemoContainer } from './demos/trigger-menu-usage-demo-c
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
-          Inside a Token Input. Its template is stamped in an overlay at the
-          trigger: the popup, the list of
-          <code scTypeset>menu.items()</code> (already filtered), the empty
-          text, a status.
+          Inside a Token Input — or around a textarea or an input with
+          <code scTypeset>scTriggerMenuInput</code> (its look from
+          <code scTypeset>scTextarea</code>, <code scTypeset>scInput</code>).
+          Its template is stamped in an overlay at the trigger: the popup, the
+          list of <code scTypeset>menu.items()</code> (already filtered), the
+          empty text, a status.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -84,7 +93,11 @@ import { TriggerMenuUsageDemoContainer } from './demos/trigger-menu-usage-demo-c
           label and keywords, or is given to a loader. With an empty part, the
           menu shows when nothing is found; without one, it closes until
           something matches. Choosing puts a token of the trigger&apos;s type,
-          and a space, in place of the trigger and the query.
+          and a space, in place of the trigger and the query — in a textarea or
+          an input, its text: the trigger and the label, or what the
+          trigger&apos;s <code scTypeset>insert</code> writes (<code scTypeset
+            >&#64;username</code
+          >); the value stays plain text.
         </p>
       </section>
 
@@ -151,6 +164,9 @@ import { TriggerMenuUsageDemoContainer } from './demos/trigger-menu-usage-demo-c
         <h2 scTypeset appToc>Examples</h2>
         <app-commands-trigger-menu-demo-container />
         <app-loading-trigger-menu-demo-container />
+        <app-textarea-trigger-menu-demo-container />
+        <app-input-trigger-menu-demo-container />
+        <app-form-trigger-menu-demo-container />
         <app-rtl-trigger-menu-demo-container />
       </section>
 
@@ -170,7 +186,7 @@ import { TriggerMenuUsageDemoContainer } from './demos/trigger-menu-usage-demo-c
 })
 export default class TriggerMenuPage {
   private readonly triggerShape =
-    "{ char, type, items, boundary?: 'word' | 'start' }";
+    "{ char, type, items, boundary?: 'word' | 'start', insert? }";
 
   private readonly anatomy = {
     imports:
@@ -200,7 +216,13 @@ export default class TriggerMenuPage {
       name: 'ScTriggerMenu',
       selector: 'div[scTriggerMenu]',
       description:
-        'The root, in a Token Input. exportAs scTriggerMenu: match(), items(), active(), loading(), visible(), pick(); (choose) the item chosen.',
+        'The root, in a Token Input or around a text field. exportAs scTriggerMenu: match(), items(), active(), loading(), visible(), pick(); (choose) the item chosen.',
+    },
+    {
+      name: 'ScTriggerMenuInput',
+      selector: 'textarea[scTriggerMenuInput], input[scTriggerMenuInput]',
+      description:
+        'A text field it suggests in: the value stays text; a choice is typed in (forms see it).',
     },
     {
       name: 'ScTriggerMenuPortal',
@@ -240,7 +262,7 @@ export default class TriggerMenuPage {
       type: 'ScTrigger[]',
       default: '—',
       description:
-        'The characters that open it: { char, type, items (an array or a loader), boundary? }.',
+        'The characters that open it: { char, type, items (an array or a loader), boundary?, insert? (the text an item puts in a text field) }.',
     },
   ];
 }

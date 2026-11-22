@@ -133,3 +133,70 @@ test('RTL: the list opens at the @, its start edge on the character', async ({
     })
     .toBeLessThan(2);
 });
+
+test.describe('In a textarea', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(demo('textarea-trigger-menu'));
+    await focus(page.getByRole('textbox', { name: 'Comment' }));
+  });
+
+  test('the value stays text; insert writes @username', async ({ page }) => {
+    const field = page.getByRole('textbox', { name: 'Comment' });
+    await type(page, 'Thanks @am');
+    await expect(options(page)).toHaveText([/Amara Diallo/]);
+    await expect(field).toHaveAttribute(
+      'aria-activedescendant',
+      (await options(page).first().getAttribute('id')) ?? '',
+    );
+    await press(page, 'Enter');
+    await expect(field).toHaveValue('Thanks @amara ');
+    await expect(page.getByTestId('picked')).toHaveText('Thanks @amara');
+    await type(page, 'and @ho');
+    await page.getByRole('option', { name: /Hollis/ }).click();
+    await expect(field).toHaveValue('Thanks @amara and @hollis ');
+    await expect(field).toBeFocused();
+  });
+
+  test('the list opens at the @ (on the second line too)', async ({ page }) => {
+    await type(page, 'Hi');
+    await press(page, 'Enter');
+    await type(page, 'and @');
+    await expect(options(page)).toHaveCount(4);
+    const field = page.getByRole('textbox', { name: 'Comment' });
+    const box = await field.boundingBox();
+    const popup = await page
+      .locator('[data-slot=trigger-menu-popup]')
+      .boundingBox();
+    // Below the second line, past the field's start.
+    expect(popup?.y ?? 0).toBeGreaterThan((box?.y ?? 0) + 30);
+    expect(popup?.x ?? 0).toBeGreaterThan((box?.x ?? 0) + 20);
+  });
+});
+
+test('In an input: # for a channel; nothing matched, nothing shown', async ({
+  page,
+}) => {
+  await page.goto(demo('input-trigger-menu'));
+  const field = page.getByRole('textbox', { name: 'Share in' });
+  await focus(field);
+  await type(page, '#des');
+  await expect(options(page)).toHaveText(['#design']);
+  await press(page, 'Tab');
+  await expect(field).toHaveValue('#design ');
+  await type(page, '#zz');
+  await expect(page.getByRole('listbox')).toHaveCount(0);
+});
+
+test('In a form: a mention typed into the value', async ({ page }) => {
+  await page.goto(demo('form-trigger-menu'));
+  await page.getByRole('button', { name: 'Post' }).click();
+  await expect(page.getByRole('alert')).toHaveText('Write a comment.');
+  await focus(page.getByRole('textbox', { name: 'Comment' }));
+  await type(page, 'Ask @ke');
+  await press(page, 'Enter');
+  await type(page, 'please');
+  await page.getByRole('button', { name: 'Post' }).click();
+  await expect(page.getByRole('status')).toHaveText(
+    'Posted: Ask @Kenji Watanabe please',
+  );
+});

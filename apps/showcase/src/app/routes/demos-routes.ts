@@ -3870,46 +3870,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/mention-input',
-    children: [
-      {
-        path: 'basic-mention-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/mention-input/demos/basic-mention-input-demo').then(
-            (m) => m.BasicMentionInputDemo,
-          ),
-      },
-      {
-        path: 'avatars-mention-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/mention-input/demos/avatars-mention-input-demo').then(
-            (m) => m.AvatarsMentionInputDemo,
-          ),
-      },
-      {
-        path: 'custom-trigger-mention-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/mention-input/demos/custom-trigger-mention-input-demo').then(
-            (m) => m.CustomTriggerMentionInputDemo,
-          ),
-      },
-      {
-        path: 'disabled-mention-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/mention-input/demos/disabled-mention-input-demo').then(
-            (m) => m.DisabledMentionInputDemo,
-          ),
-      },
-      {
-        path: 'form-mention-input-demo',
-        loadComponent: () =>
-          import('../pages/docs/mention-input/demos/form-mention-input-demo').then(
-            (m) => m.FormMentionInputDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/menubar',
     children: [
       {
@@ -6286,6 +6246,27 @@ export const demosRoutes: Route[] = [
   {
     path: 'demos/trigger-menu',
     children: [
+      {
+        path: 'textarea-trigger-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/trigger-menu/demos/textarea-trigger-menu-demo').then(
+            (m) => m.TextareaTriggerMenuDemo,
+          ),
+      },
+      {
+        path: 'input-trigger-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/trigger-menu/demos/input-trigger-menu-demo').then(
+            (m) => m.InputTriggerMenuDemo,
+          ),
+      },
+      {
+        path: 'form-trigger-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/trigger-menu/demos/form-trigger-menu-demo').then(
+            (m) => m.FormTriggerMenuDemo,
+          ),
+      },
       {
         path: 'trigger-menu-usage-demo',
         loadComponent: () =>

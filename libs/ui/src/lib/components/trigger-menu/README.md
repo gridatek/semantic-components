@@ -1,6 +1,6 @@
 # Trigger Menu
 
-Suggestions as you type a trigger — `@` for people, `/` for commands — in a [Token Input](../token-input/README.md): a list at the character, filtered by what follows it; the one chosen becomes a token (and a space). After ui-sdk's Trigger Menu. Focus never leaves the editor.
+Suggestions as you type a trigger — `@` for people, `/` for commands — in a [Token Input](../token-input/README.md), a textarea or an input: a list at the character, filtered by what follows it; the one chosen becomes a token — in a text field, its text — and a space. After ui-sdk's Trigger Menu. Focus never leaves the field. (It replaced the Mention Input, 2026-11-22.)
 
 ## Architecture
 
@@ -41,6 +41,17 @@ div[scTokenInput]
 triggers: ScTrigger[] = [{ char: '@', type: 'mention', items: people }];
 ```
 
+## In a textarea or an input
+
+```html
+<div scTriggerMenu #menu="scTriggerMenu" [triggers]="triggers">
+  <textarea scTextarea scTriggerMenuInput [formField]="form.comment"></textarea>
+  <ng-template scTriggerMenuPortal>…</ng-template>
+</div>
+```
+
+`scTriggerMenuInput` on a `<textarea>` or `<input>`: the value stays plain text; a choice is put in as typed (an `input` event: forms and bindings see it) — the trigger and the label, or what the trigger's `insert(item)` writes (`@${user.username}`), then a space. The look is the field's own (`scTextarea`, `scInput`). Not in the browser's undo history.
+
 ## Triggers
 
 `ScTrigger<T>`: `{ char, type, items, boundary? }`.
@@ -67,4 +78,4 @@ The style's combobox popup, list, items and empty text. The popup is placed at t
 
 ## Not yet
 
-On a plain `<textarea>` or `<input>` (the Mention Input's ground — to compare), commands with arguments, ghost-text hints, groups.
+Commands with arguments, ghost-text hints, groups.

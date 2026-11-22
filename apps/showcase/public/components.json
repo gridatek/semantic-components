@@ -557,15 +557,6 @@
     "hidden": true
   },
   {
-    "name": "Mention Input",
-    "path": "mention-input",
-    "description": "A textarea with inline mention suggestions triggered by a configurable character.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
     "name": "Menu",
     "path": "menu",
     "description": "A menu of actions from a button: groups, checkbox and radio items, submenus, shortcuts — in the look of the app's style.",
