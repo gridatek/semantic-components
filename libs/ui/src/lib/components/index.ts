@@ -46,6 +46,7 @@ export * from './pagination';
 export * from './password-group';
 export * from './popover';
 export * from './preview-card';
+export * from './preferences';
 export * from './progress';
 export * from './radio-group';
 export * from './range-slider';

@@ -736,6 +736,14 @@
     "category": "Overlay"
   },
   {
+    "name": "Preferences",
+    "path": "preferences",
+    "description": "A user’s choices from fixed lists — list or grid, density — kept (a cookie the server reads) and written as data-* attributes to style by.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Utilities"
+  },
+  {
     "name": "Preview Card",
     "path": "preview-card",
     "description": "A preview of a link's destination, shown on hover or keyboard focus — in the look of the app's style.",

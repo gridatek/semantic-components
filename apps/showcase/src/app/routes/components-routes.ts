@@ -641,6 +641,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/segmented-control/segmented-control-page'),
       },
       {
+        path: 'preferences',
+        title: 'Preferences - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/preferences/preferences-page'),
+      },
+      {
         path: 'token-input',
         title: 'Token Input - Semantic Components',
         loadComponent: () =>

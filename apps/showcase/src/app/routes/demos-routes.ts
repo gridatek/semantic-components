@@ -6647,6 +6647,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/preferences',
+    children: [
+      {
+        path: 'preferences-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/preferences/demos/preferences-usage-demo').then(
+            (m) => m.PreferencesUsageDemo,
+          ),
+      },
+      {
+        path: 'read-preference-demo',
+        loadComponent: () =>
+          import('../pages/docs/preferences/demos/read-preference-demo').then(
+            (m) => m.ReadPreferenceDemo,
+          ),
+      },
+      {
+        path: 'global-preference-demo',
+        loadComponent: () =>
+          import('../pages/docs/preferences/demos/global-preference-demo').then(
+            (m) => m.GlobalPreferenceDemo,
+          ),
+      },
+      {
+        path: 'several-preferences-demo',
+        loadComponent: () =>
+          import('../pages/docs/preferences/demos/several-preferences-demo').then(
+            (m) => m.SeveralPreferencesDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/time-clock',
     children: [
       {
