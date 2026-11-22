@@ -177,6 +177,14 @@
     "category": "Forms"
   },
   {
+    "name": "Code Block",
+    "path": "code-block",
+    "description": "Code to read and copy: highlighted, numbered, its lines marked.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Editor"
+  },
+  {
     "name": "Code Editor",
     "path": "code-editor",
     "description": "Code to edit: CodeMirror, colored by Shiki; a form field.",
@@ -184,14 +192,6 @@
     "library": "ui",
     "category": "Editor",
     "hidden": true
-  },
-  {
-    "name": "Code Block",
-    "path": "code-block",
-    "description": "Code to read and copy: highlighted, numbered, its lines marked.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Editor"
   },
   {
     "name": "Collapsible",
@@ -260,6 +260,14 @@
     "category": "Buttons & Actions"
   },
   {
+    "name": "Countdown",
+    "path": "countdown",
+    "description": "The time left to a moment, or a timer, its digits rolling: a Number Ticker for each unit, the time from Temporal.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Recipes"
+  },
+  {
     "name": "Data Table",
     "path": "data-table",
     "description": "Styled, accessible parts for TanStack Table data tables.",
@@ -293,6 +301,14 @@
     "category": "Forms"
   },
   {
+    "name": "Date Range Picker",
+    "path": "date-range-picker",
+    "description": "A range of days picked in a calendar, typed, or a preset — its own part; Apply, and how long it is.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Date Time Input",
     "path": "date-time-input",
     "description": "A date and a time typed part by part, in the order and on the clock of its locale: a Temporal.PlainDateTime in a form.",
@@ -304,14 +320,6 @@
     "name": "Date Time Picker",
     "path": "date-time-picker",
     "description": "A date and a time typed, or picked: the day in a calendar, the time in columns beside it, on the input's clock and limits.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms"
-  },
-  {
-    "name": "Date Range Picker",
-    "path": "date-range-picker",
-    "description": "A range of days picked in a calendar, typed, or a preset — its own part; Apply, and how long it is.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -589,6 +597,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Multiselect",
+    "path": "multiselect",
+    "description": "Several values from a list, an array for Signal Forms: the Combobox with several values — chips for the chosen, a search for the list.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Recipes"
+  },
+  {
     "name": "Native Dialog",
     "path": "native-dialog",
     "description": "A modal dialog built on the native HTML dialog element.",
@@ -612,6 +628,14 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Navigation"
+  },
+  {
+    "name": "Notification Center",
+    "path": "notification-center",
+    "description": "Notifications behind a bell or in a page section: a Popover, an Item for each, a Toggle Group to filter, the state in your signals.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Recipes"
   },
   {
     "name": "Number Group",
@@ -900,6 +924,14 @@
     "category": "Feedback"
   },
   {
+    "name": "Stat Card",
+    "path": "stat-card",
+    "description": "One figure, how it changed and whether that is good news: a Card holding a description list, its numbers written by a Number Ticker.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Recipes"
+  },
+  {
     "name": "Stepper",
     "path": "stepper",
     "description": "Guides users through a multi-step process.",
@@ -949,38 +981,6 @@
     "category": "Navigation"
   },
   {
-    "name": "Countdown",
-    "path": "countdown",
-    "description": "The time left to a moment, or a timer, its digits rolling: a Number Ticker for each unit, the time from Temporal.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Recipes"
-  },
-  {
-    "name": "Multiselect",
-    "path": "multiselect",
-    "description": "Several values from a list, an array for Signal Forms: the Combobox with several values — chips for the chosen, a search for the list.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Recipes"
-  },
-  {
-    "name": "Stat Card",
-    "path": "stat-card",
-    "description": "One figure, how it changed and whether that is good news: a Card holding a description list, its numbers written by a Number Ticker.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Recipes"
-  },
-  {
-    "name": "Notification Center",
-    "path": "notification-center",
-    "description": "Notifications behind a bell or in a page section: a Popover, an Item for each, a Toggle Group to filter, the state in your signals.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Recipes"
-  },
-  {
     "name": "Tags Input",
     "path": "tags-input",
     "description": "Tags typed into one field, a list of strings: the Combobox with several values and an Add item for the text typed.",
@@ -1006,9 +1006,9 @@
     "hidden": true
   },
   {
-    "name": "Time Picker",
-    "path": "time-picker",
-    "description": "A time typed, or picked in columns — hour, minute, AM/PM — on the time input's clock and limits; a range's end shows how long.",
+    "name": "Time Clock",
+    "path": "time-clock",
+    "description": "A time picked on a clock face — hour, minute, second — by pointer or keyboard, each pick moving on; 12 hours with AM/PM or 24 on two rings.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -1022,9 +1022,9 @@
     "category": "Forms"
   },
   {
-    "name": "Time Clock",
-    "path": "time-clock",
-    "description": "A time picked on a clock face — hour, minute, second — by pointer or keyboard, each pick moving on; 12 hours with AM/PM or 24 on two rings.",
+    "name": "Time Picker",
+    "path": "time-picker",
+    "description": "A time typed, or picked in columns — hour, minute, AM/PM — on the time input's clock and limits; a range's end shows how long.",
     "status": "Experimental",
     "library": "ui",
     "category": "Forms"
@@ -1036,24 +1036,6 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Data Display"
-  },
-  {
-    "name": "Token Input",
-    "path": "token-input",
-    "description": "A text field that holds tokens in its text — people mentioned, files attached — each moving, deleting and copying whole.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
-    "name": "Trigger Menu",
-    "path": "trigger-menu",
-    "description": "Suggestions as you type a trigger (@, /) in a Token Input: a list at the character; the one chosen becomes a token.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
   },
   {
     "name": "Toast",
@@ -1078,6 +1060,14 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Buttons & Actions"
+  },
+  {
+    "name": "Token Input",
+    "path": "token-input",
+    "description": "A text field that holds tokens in its text — people mentioned, files attached — each moving, deleting and copying whole.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
   },
   {
     "name": "Toolbar",
@@ -1122,6 +1112,15 @@
     "hidden": true
   },
   {
+    "name": "Tree Table",
+    "path": "tree-table",
+    "description": "A Data Table whose rows open on their children, as a tree grid: indented, opened by the arrows, selected with their children.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display",
+    "hidden": true
+  },
+  {
     "name": "Treemap Chart",
     "path": "treemap-chart",
     "description": "A series as boxes, each as large as its value — in groups if you like.",
@@ -1130,13 +1129,12 @@
     "category": "Charts"
   },
   {
-    "name": "Tree Table",
-    "path": "tree-table",
-    "description": "A Data Table whose rows open on their children, as a tree grid: indented, opened by the arrows, selected with their children.",
+    "name": "Trigger Menu",
+    "path": "trigger-menu",
+    "description": "Suggestions as you type a trigger (@, /) in a Token Input, a textarea or an input: a list at the character; the one chosen becomes a token, or its text.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Typeset",
