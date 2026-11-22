@@ -6,6 +6,7 @@ test('phone-input-next page: sections, and no axe violations', async ({
 }) => {
   await page.goto('/docs/components/phone-input-next');
   await expect(page.locator('h2')).toHaveText([
+    'Installation',
     'Usage',
     'Anatomy',
     'Country and number',

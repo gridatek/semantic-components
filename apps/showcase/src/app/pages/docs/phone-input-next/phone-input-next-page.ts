@@ -6,6 +6,9 @@ import {
   ApiTable,
 } from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { DocCode } from '../../../components/doc-code/doc-code';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
+import { PackageManagerInstall } from '../../../components/package-manager-install/package-manager-install';
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { DisabledPhoneInputNextDemoContainer } from './demos/disabled-phone-input-next-demo-container';
@@ -21,6 +24,9 @@ import { RtlPhoneInputNextDemoContainer } from './demos/rtl-phone-input-next-dem
   imports: [
     ScTypeset,
     Anatomy,
+    DocCode,
+    EntryInstall,
+    PackageManagerInstall,
     ApiTable,
     PartsTable,
     TocHeading,
@@ -44,6 +50,26 @@ import { RtlPhoneInputNextDemoContainer } from './demos/rtl-phone-input-next-dem
         </p>
         <app-component-badges path="phone-input-next" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Installation</h2>
+        <app-entry-install
+          entry="phone-input"
+          library="libphonenumber-js"
+          href="https://gitlab.com/catamphetamine/libphonenumber-js"
+          names="ScPhoneInputNext, ScPhoneInputNextCountry, ScPhoneInputNextFlag, ScPhoneInputNextNumber, phoneNumberNext"
+        />
+        <h3 scTypeset>Flags</h3>
+        <p>
+          The flags are country-flag-icons&apos; SVGs, served with your app — no
+          CDN. Install it, copy them into your assets, and say where they are
+          with <code scTypeset>withPhoneInput()</code>; only the flags shown are
+          loaded. Without it, the phone input works with no flags.
+        </p>
+        <app-package-manager-install packages="country-flag-icons" />
+        <app-doc-code [code]="asset" language="json" />
+        <app-doc-code [code]="setup" language="typescript" />
+      </section>
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Usage</h2>
@@ -145,6 +171,24 @@ import { RtlPhoneInputNextDemoContainer } from './demos/rtl-phone-input-next-dem
   encapsulation: ViewEncapsulation.None,
 })
 export default class PhoneInputNextPage {
+  private readonly asset = [
+    '// angular.json (or project.json): the flags, in the assets',
+    '{',
+    '  "glob": "*.svg",',
+    '  "input": "node_modules/country-flag-icons/3x2",',
+    '  "output": "flags"',
+    '}',
+  ].join('\n');
+
+  private readonly setup = [
+    "import { withPhoneInput } from '@semantic-components/ui/phone-input';",
+    '',
+    'provideSemanticComponents(',
+    '  { style },',
+    "  withPhoneInput({ flagUrl: '/flags/{XX}.svg' }),",
+    ');',
+  ].join('\n');
+
   private readonly anatomy = {
     imports:
       "import { ScPhoneInputNext, ScPhoneInputNextCountry, ScPhoneInputNextFlag, ScPhoneInputNextNumber } from '@semantic-components/ui/phone-input';",
