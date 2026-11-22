@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its style's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (147 components): 63 with a shadcn counterpart · 145 with e2e demo tests · 147 with a page axe test · 118 with an RTL demo.
+Inventory (148 components): 63 with a shadcn counterpart · 146 with e2e demo tests · 148 with a page axe test · 119 with an RTL demo.
 
 ## The two lists
 
@@ -120,7 +120,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |  62 | [Menubar](../apps/showcase/src/app/pages/docs/menubar)                   | ui      | menu                                    |     2 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  63 | [Preview Card](../apps/showcase/src/app/pages/docs/preview-card)         | ui      | —                                       |     4 | hover-card             |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 
-## List 2 — Not in shadcn (84)
+## List 2 — Not in shadcn (85)
 
 The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 
@@ -163,7 +163,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  35 | [Org Chart](../apps/showcase/src/app/pages/docs/org-chart)                     | ui      | tree                                                                    |     5 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  36 | [Password Group](../apps/showcase/src/app/pages/docs/password-group)           | ui      | button, field, input, input-group                                       |     9 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  37 | [PDF Viewer](../apps/showcase/src/app/pages/docs/pdf-viewer)                   | ui      | button, checkbox, dialog, input, progress, slider, switch, toggle-group |    90 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
-|  38 | [Phone Input](../apps/showcase/src/app/pages/docs/phone-input)                 | ui      | combobox, field, input, input-group                                     |     4 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  38 | [Phone Input](../apps/showcase/src/app/pages/docs/phone-input)                 | ui      | combobox, field, input, input-group                                     |     8 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  39 | [Pie Chart](../apps/showcase/src/app/pages/docs/pie-chart)                     | ui      | chart                                                                   |     1 |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  40 | [QR Code](../apps/showcase/src/app/pages/docs/qr-code)                         | ui      | —                                                                       |     1 |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  41 | [Radar Chart](../apps/showcase/src/app/pages/docs/radar-chart)                 | ui      | chart                                                                   |     1 |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
@@ -210,6 +210,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  82 | [Waterfall](../apps/showcase/src/app/pages/docs/waterfall)                     | ui      | table                                                                   |    11 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  83 | [Media Player](../apps/showcase/src/app/pages/docs/media-player)               | ui      | button, slider                                                          |    17 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  84 | [Playlist](../apps/showcase/src/app/pages/docs/playlist)                       | ui      | —                                                                       |     0 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  85 | [Phone Input Next](../apps/showcase/src/app/pages/docs/phone-input-next)       | ui      | combobox, field, input, input-group, phone-input                        |     4 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 
 ## Later
 
