@@ -69,6 +69,10 @@ A trigger alone is an upload button; the dropzone and the list are optional.
 - The list is one Tab stop; its items are focusable and read as what they hold. Name the list and each remove button.
 - `scFileInputStatus`: what was added, removed, kept out — your words.
 
+## Look
+
+The style's `fileInput` key, written from each style's own parts: `dropzone` as its Empty (corners, padding, the icon in its muted box), `item` as its outline Item at size sm, `preview` as the Item's image media, `size` as the Item's description. The trigger and the remove buttons are the style's buttons.
+
 ## Helpers
 
 `formatFileSize(bytes, locale)` — "68 bytes", "2 kB", "1.5 MB"; `fileRelativePath(file)`.

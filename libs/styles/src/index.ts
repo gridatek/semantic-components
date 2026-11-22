@@ -510,6 +510,21 @@ export interface ScSegmentedInputStyles {
 }
 
 /**
+ * A file input's parts that change from style to style — ours (shadcn has
+ * none): taken from the style's Empty and Item.
+ */
+export interface ScFileInputStyles {
+  /** The dropzone: as the Empty — corners, padding, gap, text, its icon's box. */
+  dropzone: string;
+  /** A file: as the outline Item at size sm — corners, padding, gap, text. */
+  item: string;
+  /** Its thumbnail: as the Item's image media — size, corners. */
+  preview: string;
+  /** Its size: as the Item's description — text. */
+  size: string;
+}
+
+/**
  * A time clock's parts that change from style to style — ours (shadcn has
  * no time clock).
  */
@@ -762,6 +777,7 @@ export interface ScStyle {
   /** A multi-line text field. */
   textarea: string;
   timeClock: ScTimeClockStyles;
+  fileInput: ScFileInputStyles;
   timePicker: ScTimePickerStyles;
   /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
   timeline: ScTimelineStyles;

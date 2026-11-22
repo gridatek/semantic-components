@@ -24,6 +24,7 @@ import { dialog } from './dialog';
 import { drawer } from './drawer';
 import { empty } from './empty';
 import { field } from './field';
+import { fileInput } from './file-input';
 import { frame, frameSm, frameXs } from './frame';
 import { input } from './input';
 import {
@@ -138,6 +139,7 @@ export const sera: ScStyle = {
   tabs,
   textarea,
   timeClock,
+  fileInput,
   timePicker,
   timeline,
   toast,

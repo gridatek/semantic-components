@@ -8,6 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScFileInputItem } from './file-input-item';
 
 /** An image's thumbnail (decorative: its name is beside it); for other files, your icon. */
@@ -28,6 +29,7 @@ import { ScFileInputItem } from './file-input-item';
 })
 export class ScFileInputItemPreview {
   private readonly item = inject(ScFileInputItem);
+  private readonly styles = injectStyle().fileInput;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -35,7 +37,8 @@ export class ScFileInputItemPreview {
 
   private readonly class = computed(() =>
     cn(
-      'bg-muted text-muted-foreground flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-md [&_svg:not([class*=size-])]:size-5',
+      'bg-muted text-muted-foreground flex shrink-0 items-center justify-center overflow-hidden [&_svg:not([class*=size-])]:size-4',
+      this.styles.preview,
       this.classInput(),
     ),
   );

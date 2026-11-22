@@ -9,6 +9,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScFileInput } from './file-input';
 import { scDroppedFiles, scFileAccepted } from './file-input-files';
 
@@ -39,6 +40,7 @@ import { scDroppedFiles, scFileAccepted } from './file-input-files';
 })
 export class ScFileInputDropzone {
   private readonly root = inject(ScFileInput);
+  private readonly styles = injectStyle().fileInput;
   private readonly document = inject(DOCUMENT);
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -60,11 +62,12 @@ export class ScFileInputDropzone {
 
   private readonly class = computed(() =>
     cn(
-      'border-input text-muted-foreground flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center text-sm transition-colors',
+      'text-muted-foreground flex flex-col items-center justify-center border border-dashed text-center transition-colors',
       'data-drag-accept:border-primary data-drag-accept:bg-accent data-drag-reject:border-destructive data-drag-reject:bg-destructive/5',
       'data-invalid:border-destructive',
-      "[&>svg]:pointer-events-none [&>svg]:shrink-0 [&>svg:not([class*='size-'])]:size-6",
+      '[&>svg]:pointer-events-none [&>svg]:shrink-0',
       'data-disabled:pointer-events-none data-disabled:opacity-50',
+      this.styles.dropzone,
       this.classInput(),
     ),
   );

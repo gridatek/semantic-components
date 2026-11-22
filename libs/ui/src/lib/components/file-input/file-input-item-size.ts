@@ -7,6 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScFileInputItem } from './file-input-item';
 
 const UNITS = ['byte', 'kilobyte', 'megabyte', 'gigabyte'] as const;
@@ -41,6 +42,7 @@ export function formatFileSize(bytes: number, locale: string): string {
 export class ScFileInputItemSize {
   private readonly item = inject(ScFileInputItem);
   private readonly locale = inject(LOCALE_ID);
+  private readonly styles = injectStyle().fileInput;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -50,7 +52,8 @@ export class ScFileInputItemSize {
 
   private readonly class = computed(() =>
     cn(
-      'text-muted-foreground shrink-0 text-xs tabular-nums',
+      'text-muted-foreground shrink-0 tabular-nums',
+      this.styles.size,
       this.classInput(),
     ),
   );
