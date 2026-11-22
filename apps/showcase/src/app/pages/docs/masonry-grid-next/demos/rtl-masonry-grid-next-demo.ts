@@ -1,6 +1,7 @@
 import { Dir } from '@angular/cdk/bidi';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScMasonryGridNext,
   ScMasonryGridNextItem,
 } from '@semantic-components/ui';
@@ -8,14 +9,16 @@ import {
 /** In a right-to-left page: the first column on the right, the rows read from the right. */
 @Component({
   selector: 'app-rtl-masonry-grid-next-demo',
-  imports: [Dir, ScMasonryGridNext, ScMasonryGridNextItem],
+  imports: [Dir, ScMasonryGridNext, ScMasonryGridNextItem, ScFrame],
   template: `
     <div dir="rtl" lang="ar" class="w-full">
       <ol scMasonryGridNext [columnWidth]="90" class="gap-2">
         @for (height of heights; track $index) {
           <li
             scMasonryGridNextItem
-            class="bg-muted grid place-items-center rounded-md text-xs font-medium"
+            scFrame
+            size="sm"
+            class="bg-muted grid place-items-center text-xs font-medium"
             [style.height.px]="height"
           >
             {{ $index + 1 }}

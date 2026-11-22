@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScMasonryGridNext,
   ScMasonryGridNextItem,
 } from '@semantic-components/ui';
@@ -7,7 +8,7 @@ import {
 /** Into the shortest column (balanced) — or, sequential, each into the next column in turn (predictable): the same tiles, both ways. */
 @Component({
   selector: 'app-order-masonry-grid-next-demo',
-  imports: [ScMasonryGridNext, ScMasonryGridNextItem],
+  imports: [ScMasonryGridNext, ScMasonryGridNextItem, ScFrame],
   template: `
     <div class="grid w-full gap-6 sm:grid-cols-2">
       @for (sequential of [false, true]; track sequential) {
@@ -24,7 +25,9 @@ import {
             @for (height of heights; track $index) {
               <li
                 scMasonryGridNextItem
-                class="bg-muted grid place-items-center rounded-md text-xs font-medium"
+                scFrame
+                size="sm"
+                class="bg-muted grid place-items-center text-xs font-medium"
                 [style.height.px]="height"
               >
                 {{ $index + 1 }}

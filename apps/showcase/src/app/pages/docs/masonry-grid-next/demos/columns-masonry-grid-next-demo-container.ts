@@ -20,6 +20,7 @@ import { ColumnsMasonryGridNextDemo } from './columns-masonry-grid-next-demo';
 export class ColumnsMasonryGridNextDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScFrame,
   ScMasonryGridNext,
   ScMasonryGridNextItem,
 } from '@semantic-components/ui';
@@ -27,7 +28,7 @@ import {
 /** maxColumns caps the count however wide; the gaps are your classes — wider across than down here (gap-x-6 gap-y-2). */
 @Component({
   selector: 'app-columns-masonry-grid-next-demo',
-  imports: [ScMasonryGridNext, ScMasonryGridNextItem],
+  imports: [ScMasonryGridNext, ScMasonryGridNextItem, ScFrame],
   template: \`
     <ul
       scMasonryGridNext
@@ -38,7 +39,9 @@ import {
       @for (height of heights; track $index) {
         <li
           scMasonryGridNextItem
-          class="bg-muted grid place-items-center rounded-md text-xs font-medium"
+          scFrame
+          size="sm"
+          class="bg-muted grid place-items-center text-xs font-medium"
           [style.height.px]="height"
         >
           {{ $index + 1 }}
