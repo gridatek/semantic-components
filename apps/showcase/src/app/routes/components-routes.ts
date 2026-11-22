@@ -625,6 +625,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/time-clock/time-clock-page'),
       },
       {
+        path: 'listbox',
+        title: 'Listbox - Semantic Components',
+        loadComponent: () => import('../pages/docs/listbox/listbox-page'),
+      },
+      {
         path: 'token-input',
         title: 'Token Input - Semantic Components',
         loadComponent: () =>

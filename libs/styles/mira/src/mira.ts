@@ -37,6 +37,7 @@ import { item } from './item';
 import { kbd } from './kbd';
 import { label } from './label';
 import { link } from './link';
+import { listbox } from './listbox';
 import { marker } from './marker';
 import { menu } from './menu';
 import { menubar } from './menubar';
@@ -140,6 +141,7 @@ export const mira: ScStyle = {
   textarea,
   timeClock,
   fileInput,
+  listbox,
   timePicker,
   timeline,
   toast,

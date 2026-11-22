@@ -539,6 +539,15 @@
     "category": "Buttons & Actions"
   },
   {
+    "name": "Listbox",
+    "path": "listbox",
+    "description": "One option or several, chosen from a list always in view — the WAI-ARIA keyboard, ranges and typeahead; a form field.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms",
+    "hidden": true
+  },
+  {
     "name": "Marker",
     "path": "marker",
     "description": "Label a point in a list or feed: a date divider, an unread boundary, or a short inline note.",

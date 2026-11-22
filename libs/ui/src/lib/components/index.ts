@@ -34,6 +34,7 @@ export * from './item';
 export * from './kbd';
 export * from './label';
 export * from './link';
+export * from './listbox';
 export * from './menu';
 export * from './menubar';
 export * from './native-select';

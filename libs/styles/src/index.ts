@@ -510,6 +510,16 @@ export interface ScSegmentedInputStyles {
 }
 
 /**
+ * A listbox's box, from style to style — ours (shadcn has none): as the
+ * style's textarea. Its options, indicator, group labels and separators are
+ * the combobox's.
+ */
+export interface ScListboxStyles {
+  /** The box: corners, border, background, padding. */
+  root: string;
+}
+
+/**
  * A file input's parts that change from style to style — ours (shadcn has
  * none): taken from the style's Empty and Item.
  */
@@ -778,6 +788,7 @@ export interface ScStyle {
   textarea: string;
   timeClock: ScTimeClockStyles;
   fileInput: ScFileInputStyles;
+  listbox: ScListboxStyles;
   timePicker: ScTimePickerStyles;
   /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
   timeline: ScTimelineStyles;

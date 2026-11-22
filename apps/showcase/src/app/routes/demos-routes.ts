@@ -6429,6 +6429,123 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/listbox',
+    children: [
+      {
+        path: 'listbox-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/listbox-usage-demo').then(
+            (m) => m.ListboxUsageDemo,
+          ),
+      },
+      {
+        path: 'multiple-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/multiple-listbox-demo').then(
+            (m) => m.MultipleListboxDemo,
+          ),
+      },
+      {
+        path: 'activation-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/activation-listbox-demo').then(
+            (m) => m.ActivationListboxDemo,
+          ),
+      },
+      {
+        path: 'manual-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/manual-listbox-demo').then(
+            (m) => m.ManualListboxDemo,
+          ),
+      },
+      {
+        path: 'virtual-focus-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/virtual-focus-listbox-demo').then(
+            (m) => m.VirtualFocusListboxDemo,
+          ),
+      },
+      {
+        path: 'deselectable-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/deselectable-listbox-demo').then(
+            (m) => m.DeselectableListboxDemo,
+          ),
+      },
+      {
+        path: 'groups-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/groups-listbox-demo').then(
+            (m) => m.GroupsListboxDemo,
+          ),
+      },
+      {
+        path: 'icons-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/icons-listbox-demo').then(
+            (m) => m.IconsListboxDemo,
+          ),
+      },
+      {
+        path: 'horizontal-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/horizontal-listbox-demo').then(
+            (m) => m.HorizontalListboxDemo,
+          ),
+      },
+      {
+        path: 'disabled-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/disabled-listbox-demo').then(
+            (m) => m.DisabledListboxDemo,
+          ),
+      },
+      {
+        path: 'read-only-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/read-only-listbox-demo').then(
+            (m) => m.ReadOnlyListboxDemo,
+          ),
+      },
+      {
+        path: 'form-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/form-listbox-demo').then(
+            (m) => m.FormListboxDemo,
+          ),
+      },
+      {
+        path: 'object-values-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/object-values-listbox-demo').then(
+            (m) => m.ObjectValuesListboxDemo,
+          ),
+      },
+      {
+        path: 'methods-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/methods-listbox-demo').then(
+            (m) => m.MethodsListboxDemo,
+          ),
+      },
+      {
+        path: 'scrollable-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/scrollable-listbox-demo').then(
+            (m) => m.ScrollableListboxDemo,
+          ),
+      },
+      {
+        path: 'rtl-listbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/listbox/demos/rtl-listbox-demo').then(
+            (m) => m.RtlListboxDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/time-clock',
     children: [
       {
