@@ -185,11 +185,16 @@ test('All features: the format select writes the colour again', async ({
   await open(page, 'all-features-color-picker-next');
   await expect(picked(page)).toHaveText('#0ea5e9');
   const format = page.getByRole('combobox', { name: 'Format' });
-  await format.selectOption('hsl');
+  const choose = async (label: string) => {
+    await format.click();
+    await page.getByRole('option', { name: label, exact: true }).click();
+    await expect(page.getByRole('listbox')).toHaveCount(0);
+  };
+  await choose('HSL');
   await expect(picked(page)).toHaveText(/hsl\(198\.\d+ 88\.\d+% 48\.\d+%\)/);
-  await format.selectOption('oklch');
+  await choose('OKLCH');
   await expect(picked(page)).toHaveText(/oklch\(0\.68\d* 0\.14\d* 237\.\d+\)/);
-  await format.selectOption('rgb');
+  await choose('RGB');
   await expect(picked(page)).toHaveText('rgb(14 165 233)');
   // A preset: written in the format chosen.
   await page.getByRole('radio', { name: 'Rose' }).click();

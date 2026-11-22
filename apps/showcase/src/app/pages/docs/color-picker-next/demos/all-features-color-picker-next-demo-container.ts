@@ -29,12 +29,23 @@ import {
   ScColorPickerNextSwatch,
   ScColorPickerNextSwatchItem,
   ScColorPickerNextSwatches,
-  ScNativeSelect,
-  ScNativeSelectContainer,
-  ScNativeSelectIcon,
-  ScNativeSelectOption,
+  ScSelect,
+  ScSelectIcon,
+  ScSelectItem,
+  ScSelectItemIndicator,
+  ScSelectItemText,
+  ScSelectLabel,
+  ScSelectList,
+  ScSelectPopup,
+  ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
 } from '@semantic-components/ui';
-import { SiChevronDownIcon, SiPipetteIcon } from '@semantic-icons/lucide-icons';
+import {
+  SiCheckIcon,
+  SiChevronDownIcon,
+  SiPipetteIcon,
+} from '@semantic-icons/lucide-icons';
 
 /** Every part: drag or choose a preset; pick HSL to write the colour again; type a name like "rebeccapurple" and press Enter. */
 @Component({
@@ -48,10 +59,18 @@ import { SiChevronDownIcon, SiPipetteIcon } from '@semantic-icons/lucide-icons';
     ScColorPickerNextSwatch,
     ScColorPickerNextSwatchItem,
     ScColorPickerNextSwatches,
-    ScNativeSelect,
-    ScNativeSelectContainer,
-    ScNativeSelectIcon,
-    ScNativeSelectOption,
+    ScSelect,
+    ScSelectIcon,
+    ScSelectItem,
+    ScSelectItemIndicator,
+    ScSelectItemText,
+    ScSelectLabel,
+    ScSelectList,
+    ScSelectPopup,
+    ScSelectPortal,
+    ScSelectTrigger,
+    ScSelectValue,
+    SiCheckIcon,
     SiChevronDownIcon,
     SiPipetteIcon,
   ],
@@ -77,20 +96,29 @@ import { SiChevronDownIcon, SiPipetteIcon } from '@semantic-icons/lucide-icons';
           <span scColorPickerNextSwatch></span>
         </div>
         <div class="flex gap-2">
-          <div scNativeSelectContainer class="w-28 shrink-0">
-            <select
-              scNativeSelect
-              aria-label="Format"
-              [value]="format()"
-              (change)="setFormat($event)"
-            >
-              @for (item of formats; track item.value) {
-                <option scNativeSelectOption [value]="item.value">
-                  {{ item.label }}
-                </option>
-              }
-            </select>
-            <svg siChevronDownIcon scNativeSelectIcon></svg>
+          <div
+            scSelect
+            class="w-28 shrink-0"
+            [items]="formats"
+            [(value)]="format"
+          >
+            <div scSelectLabel class="sr-only">Format</div>
+            <div scSelectTrigger class="w-full">
+              <span scSelectValue></span>
+              <svg scSelectIcon siChevronDownIcon></svg>
+            </div>
+            <ng-template scSelectPortal>
+              <div scSelectPopup>
+                <div scSelectList>
+                  @for (item of formats; track item.value) {
+                    <div scSelectItem [value]="item.value">
+                      <span scSelectItemText>{{ item.label }}</span>
+                      <span scSelectItemIndicator><svg siCheckIcon></svg></span>
+                    </div>
+                  }
+                </div>
+              </div>
+            </ng-template>
           </div>
           <input
             scColorPickerNextInput
@@ -134,9 +162,5 @@ export class AllFeaturesColorPickerNextDemo {
     { value: '#8b5cf6', name: 'Violet' },
     { value: '#18181b', name: 'Black' },
   ];
-
-  private setFormat(event: Event): void {
-    this.format.set((event.target as HTMLSelectElement).value as ScColorFormat);
-  }
 }`;
 }
