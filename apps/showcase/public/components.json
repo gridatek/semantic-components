@@ -48,15 +48,6 @@
     "category": "Data Display"
   },
   {
-    "name": "Audio Player",
-    "path": "audio-player",
-    "description": "An audio player: a playlist, a waveform, controls as parts, state two ways, keyboard shortcuts.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Media",
-    "hidden": true
-  },
-  {
     "name": "Autocomplete",
     "path": "autocomplete",
     "description": "Free text with suggestions: the value is what is typed, a suggestion completes it; the Combobox’s parts.",

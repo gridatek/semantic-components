@@ -669,32 +669,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/audio-player',
-    children: [
-      {
-        path: 'player-audio-player-demo',
-        loadComponent: () =>
-          import('../pages/docs/audio-player/demos/player-audio-player-demo').then(
-            (m) => m.PlayerAudioPlayerDemo,
-          ),
-      },
-      {
-        path: 'minimal-audio-player-demo',
-        loadComponent: () =>
-          import('../pages/docs/audio-player/demos/minimal-audio-player-demo').then(
-            (m) => m.MinimalAudioPlayerDemo,
-          ),
-      },
-      {
-        path: 'controlled-audio-player-demo',
-        loadComponent: () =>
-          import('../pages/docs/audio-player/demos/controlled-audio-player-demo').then(
-            (m) => m.ControlledAudioPlayerDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/avatar',
     children: [
       {

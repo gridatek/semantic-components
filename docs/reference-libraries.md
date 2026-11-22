@@ -584,7 +584,7 @@ Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shad
 - **A native range, styled by the `slider` preset key** (`root`, `track`, `thumb`): shadcn's classes on the browser's parts (`::-webkit-slider-runnable-track` / `::-moz-range-track`, `::-webkit-slider-thumb` / `::-moz-range-thumb`), hover, focus and active from the input; Chrome's thumb centred by the generator (`margin-block-start`).
 - **Sizes logical** (`block-*` thickness, `inline-*` along the track): `orientation="vertical"` is the native range turned (`writing-mode: vertical-lr`, `direction: rtl`), the same classes; `aria-orientation`.
 - **The range**: Firefox's `::-moz-range-progress`; on Chrome's track a fill up to the thumb's centre (shadcn's `thumbAlignment="edge"`): `thumb/2 + (100% - thumb) × value`. `var(--primary)`, so a section's colours apply.
-- **Its own `type="range"`**, as before: the markup needs none, and the audio and media players use it as a host directive (Checkbox and Switch do the same now: component-design-principles.md).
+- **Its own `type="range"`**, as before: the markup needs none, and the media player uses it as a host directive (Checkbox and Switch do the same now: component-design-principles.md).
 - **One thumb**: shadcn's Range and Multiple are left out (Range Slider is ours, in its turn).
 - **shadcn's examples**: Demo (the Usage), Controlled, Disabled, Vertical, RTL; ours kept: Form, Custom color.
 
