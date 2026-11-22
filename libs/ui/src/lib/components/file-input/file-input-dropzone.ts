@@ -63,7 +63,7 @@ export class ScFileInputDropzone {
       'border-input text-muted-foreground flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed p-6 text-center text-sm transition-colors',
       'data-drag-accept:border-primary data-drag-accept:bg-accent data-drag-reject:border-destructive data-drag-reject:bg-destructive/5',
       'data-invalid:border-destructive',
-      "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-6",
+      "[&>svg]:pointer-events-none [&>svg]:shrink-0 [&>svg:not([class*='size-'])]:size-6",
       'data-disabled:pointer-events-none data-disabled:opacity-50',
       this.classInput(),
     ),
