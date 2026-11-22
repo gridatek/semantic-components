@@ -75,7 +75,7 @@ import {
     SiPipetteIcon,
   ],
   template: \`
-    <div class="grid w-72 gap-3">
+    <div class="grid w-96 max-w-full gap-3">
       <div
         scColorPickerNext
         aria-label="Color"
@@ -98,7 +98,7 @@ import {
         <div class="flex gap-2">
           <div
             scSelect
-            class="w-28 shrink-0"
+            class="w-24 shrink-0"
             [items]="formats"
             [(value)]="format"
           >
