@@ -214,8 +214,10 @@ import { ValidationFileInputDemoContainer } from './demos/validation-file-input-
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Each part takes <code scTypeset>class</code>, merged over its own (cn:
-          a later class wins); the trigger and the remove buttons are the
-          style&apos;s buttons (<code scTypeset>variant</code>,
+          a later class wins). The look is the style&apos;s (<code scTypeset
+            >fileInput</code
+          >: from its Empty and its Item); the trigger and the remove buttons
+          are the style&apos;s buttons (<code scTypeset>variant</code>,
           <code scTypeset>size</code>).
         </p>
         <app-parts-table label="File Input parts" [parts]="parts" />
