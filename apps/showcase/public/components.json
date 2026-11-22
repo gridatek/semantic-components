@@ -544,8 +544,7 @@
     "description": "One option or several, chosen from a list always in view — the WAI-ARIA keyboard, ranges and typeahead; a form field.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Marker",
