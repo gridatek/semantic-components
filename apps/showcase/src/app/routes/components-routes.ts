@@ -635,6 +635,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/meter/meter-page'),
       },
       {
+        path: 'segmented-control',
+        title: 'Segmented Control - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/segmented-control/segmented-control-page'),
+      },
+      {
         path: 'token-input',
         title: 'Token Input - Semantic Components',
         loadComponent: () =>

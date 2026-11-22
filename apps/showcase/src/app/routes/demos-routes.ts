@@ -6593,6 +6593,60 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/segmented-control',
+    children: [
+      {
+        path: 'segmented-control-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/segmented-control/demos/segmented-control-usage-demo').then(
+            (m) => m.SegmentedControlUsageDemo,
+          ),
+      },
+      {
+        path: 'icons-segmented-control-demo',
+        loadComponent: () =>
+          import('../pages/docs/segmented-control/demos/icons-segmented-control-demo').then(
+            (m) => m.IconsSegmentedControlDemo,
+          ),
+      },
+      {
+        path: 'vertical-segmented-control-demo',
+        loadComponent: () =>
+          import('../pages/docs/segmented-control/demos/vertical-segmented-control-demo').then(
+            (m) => m.VerticalSegmentedControlDemo,
+          ),
+      },
+      {
+        path: 'disabled-segmented-control-demo',
+        loadComponent: () =>
+          import('../pages/docs/segmented-control/demos/disabled-segmented-control-demo').then(
+            (m) => m.DisabledSegmentedControlDemo,
+          ),
+      },
+      {
+        path: 'read-only-segmented-control-demo',
+        loadComponent: () =>
+          import('../pages/docs/segmented-control/demos/read-only-segmented-control-demo').then(
+            (m) => m.ReadOnlySegmentedControlDemo,
+          ),
+      },
+      {
+        path: 'form-segmented-control-demo',
+        loadComponent: () =>
+          import('../pages/docs/segmented-control/demos/form-segmented-control-demo').then(
+            (m) => m.FormSegmentedControlDemo,
+          ),
+      },
+      {
+        path: 'rtl-segmented-control-demo',
+        loadComponent: () =>
+          import('../pages/docs/segmented-control/demos/rtl-segmented-control-demo').then(
+            (m) => m.RtlSegmentedControlDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/time-clock',
     children: [
       {

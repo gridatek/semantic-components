@@ -54,6 +54,7 @@ import { questionnaire } from './questionnaire';
 import { radioGroup } from './radio-group';
 import { resizable } from './resizable';
 import { scrollArea } from './scroll-area';
+import { segmentedControl } from './segmented-control';
 import { segmentedInput } from './segmented-input';
 import { select } from './select';
 import { sheet } from './sheet';
@@ -142,6 +143,7 @@ export const rhea: ScStyle = {
   timeClock,
   fileInput,
   listbox,
+  segmentedControl,
   timePicker,
   timeline,
   toast,

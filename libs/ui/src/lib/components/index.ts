@@ -52,6 +52,7 @@ export * from './range-slider';
 export * from './rating';
 export * from './resizable';
 export * from './scroll-area';
+export * from './segmented-control';
 export * from './segmented-input';
 export * from './select';
 export * from './separator';

@@ -858,6 +858,14 @@
     "hidden": true
   },
   {
+    "name": "Segmented Control",
+    "path": "segmented-control",
+    "description": "One value from a short row of buttons, an indicator sliding to the one checked — a radio group with one Tab stop; a form field.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms"
+  },
+  {
     "name": "Select",
     "path": "select",
     "description": "A choice among a short list: a trigger showing the value, the options in a popup below it — a label, groups, scroll buttons, in each style's look, with Signal Forms.",

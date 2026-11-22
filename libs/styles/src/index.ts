@@ -510,6 +510,19 @@ export interface ScSegmentedInputStyles {
 }
 
 /**
+ * A segmented control's parts, from style to style — ours (shadcn has none):
+ * as the style's tabs.
+ */
+export interface ScSegmentedControlStyles {
+  /** The bar: as the tab list. */
+  root: string;
+  /** An item: as a tab (checked: `aria-checked`). */
+  item: string;
+  /** The indicator behind the checked item: as the selected tab's raised look. */
+  indicator: string;
+}
+
+/**
  * A listbox's box, from style to style — ours (shadcn has none): as the
  * style's textarea. Its options, indicator, group labels and separators are
  * the combobox's.
@@ -789,6 +802,7 @@ export interface ScStyle {
   timeClock: ScTimeClockStyles;
   fileInput: ScFileInputStyles;
   listbox: ScListboxStyles;
+  segmentedControl: ScSegmentedControlStyles;
   timePicker: ScTimePickerStyles;
   /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
   timeline: ScTimelineStyles;
