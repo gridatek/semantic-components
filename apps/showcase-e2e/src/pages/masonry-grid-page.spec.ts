@@ -1,9 +1,15 @@
 import { expectNoA11yViolations } from '../axe';
-import { test } from '../test';
+import { expect, test } from '../test';
 
-test.describe('Masonry Grid Page', () => {
-  test('should have no accessibility violations', async ({ page }) => {
-    await page.goto('/docs/components/masonry-grid');
-    await expectNoA11yViolations(page);
-  });
+test('masonry-grid page: sections, and no axe violations', async ({ page }) => {
+  await page.goto('/docs/components/masonry-grid');
+  await expect(page.locator('h2')).toHaveText([
+    'Usage',
+    'Anatomy',
+    'Layout',
+    'Accessibility',
+    'Examples',
+    'API reference',
+  ]);
+  await expectNoA11yViolations(page);
 });

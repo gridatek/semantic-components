@@ -19,7 +19,8 @@ import { ScMasonryGrid } from './masonry-grid';
   selector: '[scMasonryGridItem]',
   host: {
     'data-slot': 'masonry-grid-item',
-    '[style.grid-column]': 'grid.native() ? "span " + span() : null',
+    // The plain grid's and grid-lanes' span; ours, measured, sets a width.
+    '[style.grid-column]': 'span() > 1 ? "span " + span() : null',
     '[class]': 'class()',
   },
 })
@@ -32,12 +33,8 @@ export class ScMasonryGridItem {
 
   private readonly class = computed(() =>
     cn(
-      // Placed by us where the browser can't (`data-native` on the grid):
-      // a selector, not a class bound on `native()` — the server renders our
-      // layout (no CSS there to ask), and a class bound away while hydrating
-      // stays (WebKit's grid then collapsed). `data-placed` is ours only.
-      '[[data-slot=masonry-grid]:not([data-native])>&]:absolute',
-      'data-placed:transition-[inset-inline-start,top] data-placed:duration-300 data-placed:ease-out motion-reduce:transition-none',
+      // `data-placed`: written by the grid once an item has its first place.
+      'data-placed:transition-[translate] data-placed:duration-300 data-placed:ease-out motion-reduce:transition-none',
       this.classInput(),
     ),
   );

@@ -1,6 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScFrame,
+  ScCard,
+  ScCardDescription,
+  ScCardHeader,
+  ScCardTitle,
   ScMasonryGrid,
   ScMasonryGridItem,
 } from '@semantic-components/ui';
@@ -8,18 +11,24 @@ import {
 /** Text of any length — measured, never guessed; resize the window and it lays out again. The first card spans two columns. */
 @Component({
   selector: 'app-cards-masonry-grid-demo',
-  imports: [ScFrame, ScMasonryGrid, ScMasonryGridItem],
+  imports: [
+    ScCard,
+    ScCardDescription,
+    ScCardHeader,
+    ScCardTitle,
+    ScMasonryGrid,
+    ScMasonryGridItem,
+  ],
   template: `
-    <ul scMasonryGrid [columnWidth]="180" class="w-full">
+    <ul scMasonryGrid [columnWidth]="180" class="w-full gap-4">
       @for (note of notes; track note.title; let first = $first) {
-        <li
-          scMasonryGridItem
-          [span]="first ? 2 : 1"
-          scFrame
-          class="bg-card p-4"
-        >
-          <p class="font-medium">{{ note.title }}</p>
-          <p class="text-muted-foreground mt-1 text-sm">{{ note.text }}</p>
+        <li scMasonryGridItem [span]="first ? 2 : 1">
+          <div scCard size="sm">
+            <div scCardHeader>
+              <h3 scCardTitle>{{ note.title }}</h3>
+              <p scCardDescription>{{ note.text }}</p>
+            </div>
+          </div>
         </li>
       }
     </ul>

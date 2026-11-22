@@ -19,24 +19,35 @@ import { OrderMasonryGridDemo } from './order-masonry-grid-demo';
 })
 export class OrderMasonryGridDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
+import {
+  ScFrame,
+  ScMasonryGrid,
+  ScMasonryGridItem,
+} from '@semantic-components/ui';
 
-/** Into the shortest column (balanced) — or in turn, column after column (predictable): the same tiles, both ways. */
+/** Into the shortest column (balanced) — or, sequential, each into the next column in turn (predictable): the same tiles, both ways. */
 @Component({
   selector: 'app-order-masonry-grid-demo',
-  imports: [ScMasonryGrid, ScMasonryGridItem],
+  imports: [ScMasonryGrid, ScMasonryGridItem, ScFrame],
   template: \`
     <div class="grid w-full gap-6 sm:grid-cols-2">
-      @for (order of orders; track order) {
+      @for (sequential of [false, true]; track sequential) {
         <section class="space-y-2">
           <h3 class="text-sm font-medium">
-            {{ order === 'shortest' ? 'Shortest column' : 'In turn' }}
+            {{ sequential ? 'Sequential' : 'Shortest column' }}
           </h3>
-          <ol scMasonryGrid [order]="order" [columnWidth]="70" [gap]="8">
+          <ol
+            scMasonryGrid
+            [sequential]="sequential"
+            [columnWidth]="70"
+            class="gap-2"
+          >
             @for (height of heights; track $index) {
               <li
                 scMasonryGridItem
-                class="bg-muted grid place-items-center rounded-md text-xs font-medium"
+                scFrame
+                size="sm"
+                class="bg-muted grid place-items-center text-xs font-medium"
                 [style.height.px]="height"
               >
                 {{ $index + 1 }}
@@ -51,7 +62,6 @@ import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
   encapsulation: ViewEncapsulation.None,
 })
 export class OrderMasonryGridDemo {
-  private readonly orders = ['shortest', 'sequential'] as const;
   private readonly heights = [120, 50, 60, 70, 110, 40, 90, 60, 50];
 }`;
 }

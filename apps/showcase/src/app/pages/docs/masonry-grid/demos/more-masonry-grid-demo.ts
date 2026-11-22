@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
   ScMasonryGrid,
   ScMasonryGridItem,
 } from '@semantic-components/ui';
@@ -8,14 +9,16 @@ import {
 /** Items added, or removed: the grid lays out again, and the others move into place (not under reduced motion). */
 @Component({
   selector: 'app-more-masonry-grid-demo',
-  imports: [ScMasonryGrid, ScMasonryGridItem, ScButton],
+  imports: [ScButton, ScMasonryGrid, ScMasonryGridItem, ScFrame],
   template: `
     <div class="w-full space-y-4">
-      <ul scMasonryGrid [columnWidth]="140" class="w-full">
+      <ul scMasonryGrid [columnWidth]="140" class="w-full gap-3">
         @for (tile of tiles(); track tile.id) {
           <li
             scMasonryGridItem
-            class="bg-muted grid place-items-center rounded-md text-sm font-medium"
+            scFrame
+            size="sm"
+            class="bg-muted grid place-items-center text-sm font-medium"
             [style.height.px]="tile.height"
           >
             {{ tile.id }}

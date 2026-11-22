@@ -1,41 +1,51 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { PhotosMasonryGridDemo } from './photos-masonry-grid-demo';
+import { MasonryGridUsageDemo } from './masonry-grid-usage-demo';
 
 @Component({
-  selector: 'app-photos-masonry-grid-demo-container',
-  imports: [DemoContainer, PhotosMasonryGridDemo],
+  selector: 'app-masonry-grid-usage-demo-container',
+  imports: [DemoContainer, MasonryGridUsageDemo],
   template: `
     <app-demo-container
-      title="Photos"
+      title="Usage"
       [code]="code"
-      demoUrl="/demos/masonry-grid/photos-masonry-grid-demo"
+      demoUrl="/demos/masonry-grid/masonry-grid-usage-demo"
     >
-      <app-photos-masonry-grid-demo />
+      <app-masonry-grid-usage-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PhotosMasonryGridDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
+export class MasonryGridUsageDemoContainer {
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  ScFrame,
+  ScMasonryGrid,
+  ScMasonryGridItem,
+} from '@semantic-components/ui';
 
-/** Photos of different heights, each into the shortest column — as many columns of at least 200 px as fit. In a list: the order is the source's, row by row. */
+/** Photos of different heights: as many columns of at least 200px as fit, each photo into the shortest — in a list, the order the source’s, row by row. */
 @Component({
-  selector: 'app-photos-masonry-grid-demo',
-  imports: [ScMasonryGrid, ScMasonryGridItem],
+  selector: 'app-masonry-grid-usage-demo',
+  imports: [NgOptimizedImage, ScMasonryGrid, ScMasonryGridItem, ScFrame],
   template: \`
-    <ul scMasonryGrid [columnWidth]="200" [gap]="12" class="w-full">
+    <ul scMasonryGrid [columnWidth]="200" class="w-full gap-3">
       @for (photo of photos; track photo.name) {
-        <li scMasonryGridItem>
+        <!-- Each photo cropped to its shape: the item's box, the image filling it. -->
+        <li
+          scMasonryGridItem
+          scFrame
+          class="relative overflow-hidden"
+          [class]="photo.shape"
+        >
           <img
-            [src]="'/images/gallery/' + photo.name + '-thumb.jpg'"
+            [ngSrc]="'/images/gallery/' + photo.name + '-thumb.jpg'"
             [alt]="photo.alt"
-            width="400"
-            height="267"
-            class="w-full rounded-md object-cover"
-            [class]="photo.shape"
+            fill
+            priority
+            class="object-cover"
           />
         </li>
       }
@@ -44,7 +54,7 @@ import { ScMasonryGrid, ScMasonryGridItem } from '@semantic-components/ui';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PhotosMasonryGridDemo {
+export class MasonryGridUsageDemo {
   private readonly photos = [
     {
       name: 'forest',

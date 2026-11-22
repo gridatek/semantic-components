@@ -1,2 +1,2 @@
-export { ScMasonryGrid, type ScMasonryGridEntry } from './masonry-grid';
-export { ScMasonryGridItem } from './masonry-grid-item';
+export * from './masonry-grid';
+export * from './masonry-grid-item';

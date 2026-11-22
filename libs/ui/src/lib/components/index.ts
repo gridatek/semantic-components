@@ -93,7 +93,6 @@ export * from './lightbox';
 export * from './marker';
 export * from './marquee';
 export * from './masonry-grid';
-export * from './masonry-grid-next';
 export * from './message';
 export * from './message-scroller';
 export * from './questionnaire';

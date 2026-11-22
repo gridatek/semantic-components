@@ -555,20 +555,10 @@
   {
     "name": "Masonry Grid",
     "path": "masonry-grid",
-    "description": "Columns by width, the source order kept, re-laid out on any size change, spans, animated moves; native where possible.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Layout",
-    "hidden": true
-  },
-  {
-    "name": "Masonry Grid Next",
-    "path": "masonry-grid-next",
     "description": "Items of any height in columns by width, the source order kept: the shortest column or in turn, spans, gaps from your classes, a plain grid before measuring; native where possible.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Layout",
-    "hidden": true
+    "category": "Layout"
   },
   {
     "name": "Media Player",
