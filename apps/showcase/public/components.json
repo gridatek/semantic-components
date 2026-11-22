@@ -571,6 +571,15 @@
     "hidden": true
   },
   {
+    "name": "Media Player",
+    "path": "media-player",
+    "description": "A video or audio player: controls as parts that fit the player’s width, state two ways, captions, chapters, keyboard shortcuts.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Media",
+    "hidden": true
+  },
+  {
     "name": "Menu",
     "path": "menu",
     "description": "A menu of actions from a button: groups, checkbox and radio items, submenus, shortcuts — in the look of the app's style.",

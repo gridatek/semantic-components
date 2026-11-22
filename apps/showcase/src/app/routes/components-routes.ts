@@ -781,6 +781,12 @@ export const componentsRoutes: Route[] = [
       },
       { path: 'typeset', redirectTo: '/docs/guides/typeset' },
       {
+        path: 'media-player',
+        title: 'Media Player - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/media-player/media-player-page'),
+      },
+      {
         path: 'video-player',
         title: 'Video Player - Semantic Components',
         loadComponent: () =>

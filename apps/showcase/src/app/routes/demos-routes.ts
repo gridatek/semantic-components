@@ -8314,6 +8314,67 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/media-player',
+    children: [
+      {
+        path: 'media-player-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/media-player/demos/media-player-usage-demo').then(
+            (m) => m.MediaPlayerUsageDemo,
+          ),
+      },
+      {
+        path: 'responsive-media-player-demo',
+        loadComponent: () =>
+          import('../pages/docs/media-player/demos/responsive-media-player-demo').then(
+            (m) => m.ResponsiveMediaPlayerDemo,
+          ),
+      },
+      {
+        path: 'minimal-media-player-demo',
+        loadComponent: () =>
+          import('../pages/docs/media-player/demos/minimal-media-player-demo').then(
+            (m) => m.MinimalMediaPlayerDemo,
+          ),
+      },
+      {
+        path: 'captions-media-player-demo',
+        loadComponent: () =>
+          import('../pages/docs/media-player/demos/captions-media-player-demo').then(
+            (m) => m.CaptionsMediaPlayerDemo,
+          ),
+      },
+      {
+        path: 'controlled-media-player-demo',
+        loadComponent: () =>
+          import('../pages/docs/media-player/demos/controlled-media-player-demo').then(
+            (m) => m.ControlledMediaPlayerDemo,
+          ),
+      },
+      {
+        path: 'audio-media-player-demo',
+        loadComponent: () =>
+          import('../pages/docs/media-player/demos/audio-media-player-demo').then(
+            (m) => m.AudioMediaPlayerDemo,
+          ),
+      },
+      {
+        path: 'error-media-player-demo',
+        loadComponent: () =>
+          import('../pages/docs/media-player/demos/error-media-player-demo').then(
+            (m) => m.ErrorMediaPlayerDemo,
+          ),
+      },
+      {
+        path: 'rtl-media-player-demo',
+        loadComponent: () =>
+          import('../pages/docs/media-player/demos/rtl-media-player-demo').then(
+            (m) => m.RtlMediaPlayerDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/video-player',
     children: [
       {
