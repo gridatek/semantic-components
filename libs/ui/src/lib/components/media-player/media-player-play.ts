@@ -43,7 +43,7 @@ export class ScMediaPlayerPlay {
       scMediaPlayerButtonClass(this.player.kind()),
       this.player.kind() === 'video' && !this.inControls
         ? [
-            'absolute inset-0 z-30 m-auto size-14 rounded-full bg-black/50 transition-opacity duration-300 hover:bg-black/70 dark:hover:bg-black/70 [&_svg]:size-7',
+            'absolute inset-0 z-30 m-auto size-14 bg-black/50 transition-opacity duration-300 hover:bg-black/70 dark:hover:bg-black/70 [&_svg]:size-7',
             // Wide and playing: away; paused, or small: there.
             '@xl/media:group-not-data-paused/media:hidden',
             'group-data-idle/media:pointer-events-none group-data-idle/media:opacity-0',

@@ -13,6 +13,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 
 /** What the player plays: from its `scMediaPlayerMedia` element. */
@@ -79,6 +80,7 @@ export class ScMediaPlayer {
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly document = inject(DOCUMENT);
   private readonly locale = inject(LOCALE_ID);
+  private readonly styles = injectStyle().mediaPlayer;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -133,8 +135,15 @@ export class ScMediaPlayer {
     cn(
       'group/media @container/media relative isolate block outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
       this.kind() === 'video'
-        ? 'overflow-hidden rounded-lg bg-black text-white data-idle:cursor-none'
-        : 'rounded-lg border bg-card p-3 text-card-foreground',
+        ? cn(
+            'overflow-hidden bg-black text-white data-idle:cursor-none',
+            this.styles.frame,
+          )
+        : cn(
+            'bg-card text-card-foreground',
+            this.styles.frame,
+            this.styles.audio,
+          ),
       this.classInput(),
     ),
   );

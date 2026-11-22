@@ -7,6 +7,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScMediaPlayer } from './media-player';
 
 /**
@@ -27,6 +28,7 @@ import { ScMediaPlayer } from './media-player';
 })
 export class ScMediaPlayerPreview {
   private readonly player = inject(ScMediaPlayer);
+  private readonly styles = injectStyle().mediaPlayer;
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -34,10 +36,9 @@ export class ScMediaPlayerPreview {
 
   private readonly class = computed(() =>
     cn(
-      'pointer-events-none absolute z-30 -translate-y-full rounded-md px-2 py-1 text-center text-xs whitespace-nowrap tabular-nums',
-      this.player.kind() === 'video'
-        ? 'bg-black/85 text-white'
-        : 'bg-popover text-popover-foreground shadow-md',
+      // As the style's Tooltip.
+      'pointer-events-none absolute z-30 -translate-y-full bg-foreground px-3 py-1.5 text-center text-xs whitespace-nowrap text-background tabular-nums',
+      this.styles.preview,
       this.classInput(),
     ),
   );

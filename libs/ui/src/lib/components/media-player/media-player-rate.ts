@@ -35,7 +35,7 @@ export class ScMediaPlayerRate {
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
       scMediaPlayerButtonClass(this.player.kind()),
-      scMediaPlayerSmall(this.player.kind()),
+      scMediaPlayerSmall(this.player.kind(), 'medium'),
       this.classInput(),
     ),
   );

@@ -232,6 +232,16 @@ test('Responsive: the same template, small in a narrow box', async ({
   await expect(
     page.getByRole('button', { name: 'Back 10 seconds' }),
   ).toBeVisible();
+  // Medium: the speeds and loop go first; the skips stay.
+  await page.getByTestId('box').evaluate((box: HTMLElement) => {
+    box.style.width = '620px';
+  });
+  await expect(page.getByRole('button', { name: '1.5×' })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Loop' })).toHaveCount(0);
+  await expect(
+    page.getByRole('button', { name: 'Back 10 seconds' }),
+  ).toBeVisible();
+  // Small.
   await page.getByTestId('box').evaluate((box: HTMLElement) => {
     box.style.width = '380px';
   });

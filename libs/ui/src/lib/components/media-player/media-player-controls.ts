@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScMediaPlayer } from './media-player';
 
 /**
@@ -18,6 +19,7 @@ import { ScMediaPlayer } from './media-player';
 })
 export class ScMediaPlayerControls {
   private readonly player = inject(ScMediaPlayer);
+  private readonly styles = injectStyle().mediaPlayer;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -25,7 +27,8 @@ export class ScMediaPlayerControls {
     cn(
       'relative flex flex-wrap items-center gap-1',
       this.player.kind() === 'video' && [
-        'absolute inset-x-0 bottom-0 z-20 bg-linear-to-t from-black/80 to-transparent px-3 pt-10 pb-2 transition-opacity duration-300',
+        'absolute inset-x-0 bottom-0 z-20 bg-linear-to-t from-black/80 to-transparent pt-10 transition-opacity duration-300',
+        this.styles.controls,
         this.player.idle() && 'pointer-events-none opacity-0',
         this.player.hasCenterPlay() && !this.player.started() && 'hidden',
       ],

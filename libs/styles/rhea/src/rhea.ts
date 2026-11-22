@@ -39,6 +39,7 @@ import { label } from './label';
 import { link } from './link';
 import { listbox } from './listbox';
 import { marker } from './marker';
+import { mediaPlayer } from './media-player';
 import { menu } from './menu';
 import { menubar } from './menubar';
 import { message } from './message';
@@ -143,6 +144,7 @@ export const rhea: ScStyle = {
   textarea,
   timeClock,
   fileInput,
+  mediaPlayer,
   listbox,
   segmentedControl,
   waterfall,

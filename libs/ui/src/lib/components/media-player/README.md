@@ -46,11 +46,11 @@ What isn't a part is your markup, from the player's state: a spinner (`@if (play
 
 ## Small players
 
-The player is a container (`@container/media`), and the parts fit themselves to its width — one template, no script measuring it (the server's render is already right). Under 36rem (a video) or 24rem (an audio bar):
+The player is a container (`@container/media`), and the parts fit themselves to its width — one template, no script measuring it (the server's render is already right). In two steps: under 42rem (a video) or 28rem (an audio bar) the speeds and loop step aside; under 36rem or 24rem, the small layout:
 
 - A play outside the controls sits in the middle of the video; the controls' play steps aside. Wide, the middle play shows only while paused. With one, the controls wait for the first play.
 - The seek bar goes to the video's bottom edge.
-- The skips, the speeds, loop, picture-in-picture, the volume and — over a video — mute step aside. The time, captions and fullscreen stay.
+- The skips, picture-in-picture, the volume and — over a video — mute step aside too. The time, captions and fullscreen stay; the controls' row never overflows (checked in every style, from 300px).
 
 ## State
 
@@ -69,7 +69,7 @@ Focused in the player (never page-wide): Space or K play / pause, J / L ±10 s, 
 
 ## Styling
 
-Over a video, the parts are white: the style's buttons (`ghost`, `icon-sm`), sliders recoloured. An audio player is a card with the style's colours. Restyle from their classes; `--sc-media-player-track` holds the seek bar's layers.
+The style's `mediaPlayer` key: the frame (as its Card's: corners, ring, shadow), an audio card's padding and text (the Card's at size sm), the controls' padding (clear of the frame's corner), the preview's corners (its Tooltip's), a caption's (frameXs). Over a video the parts are white: the style's buttons (`ghost`, `icon-sm`; the middle play with the button's corners), its sliders recoloured; the preview is its Tooltip's look. Restyle from their classes; `--sc-media-player-track` holds the seek bar's layers.
 
 ## Not here
 

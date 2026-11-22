@@ -86,7 +86,8 @@ import { RtlMediaPlayerDemoContainer } from './demos/rtl-media-player-demo-conta
           The player is a container (<code scTypeset>@container/media</code>),
           and its parts fit themselves to its width — the template stays the
           same, and no script measures it (the server&apos;s render is right).
-          Under 576px:
+          Under 672px (an audio bar: 448px) the speeds and loop step aside;
+          under 576px (384px), the small layout:
         </p>
         <ul class="list-disc space-y-2 ps-6">
           <li>
@@ -95,9 +96,9 @@ import { RtlMediaPlayerDemoContainer } from './demos/rtl-media-player-demo-conta
             while paused.
           </li>
           <li>
-            The seek bar goes to the bottom edge; the skips, the speeds, loop,
-            picture-in-picture, the volume and (over a video) mute step aside.
-            The time, captions and fullscreen stay.
+            The seek bar goes to the bottom edge; the skips, picture-in-picture,
+            the volume and (over a video) mute step aside too. The time,
+            captions and fullscreen stay.
           </li>
           <li>
             With a play in the middle, the controls wait for the first play: the
@@ -188,6 +189,10 @@ import { RtlMediaPlayerDemoContainer } from './demos/rtl-media-player-demo-conta
           a later class wins). The buttons are the style&apos;s (<code scTypeset
             >variant</code
           >, <code scTypeset>size</code>: ghost, icon-sm); over a video, white.
+          The frame, an audio card, the controls&apos; padding and the
+          preview&apos;s corners are the style&apos;s (<code scTypeset
+            >mediaPlayer</code
+          >), after its Card and Tooltip.
         </p>
         <app-parts-table label="Media Player parts" [parts]="parts" />
         <app-api-table label="ScMediaPlayer inputs" [inputs]="inputs" />

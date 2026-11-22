@@ -6,6 +6,7 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScMediaPlayer } from './media-player';
 
 /**
@@ -16,10 +17,7 @@ import { ScMediaPlayer } from './media-player';
   selector: 'div[scMediaPlayerCaptionsDisplay]',
   template: `
     @for (line of player.cues(); track $index) {
-      <span
-        class="rounded bg-black/75 px-2 py-0.5 text-base leading-snug text-white @xl/media:text-lg"
-        >{{ line }}</span
-      >
+      <span [class]="cueClass">{{ line }}</span>
     }
   `,
   host: {
@@ -31,6 +29,12 @@ import { ScMediaPlayer } from './media-player';
 })
 export class ScMediaPlayerCaptionsDisplay {
   private readonly player = inject(ScMediaPlayer);
+  private readonly styles = injectStyle().mediaPlayer;
+
+  private readonly cueClass = cn(
+    'bg-black/75 px-2 py-0.5 text-base leading-snug text-white @xl/media:text-lg',
+    this.styles.cue,
+  );
 
   readonly classInput = input<string>('', { alias: 'class' });
 

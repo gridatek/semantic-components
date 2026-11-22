@@ -553,6 +553,20 @@ export interface ScFileInputStyles {
   size: string;
 }
 
+/** A media player's parts that change from style to style — ours (shadcn has none). */
+export interface ScMediaPlayerStyles {
+  /** The player's frame: the Card's corners, ring and shadow (`frame`). */
+  frame: string;
+  /** An audio player, a card: the Card's padding (size sm) and text. */
+  audio: string;
+  /** The controls over a video: their padding, clear of the frame's corner. */
+  controls: string;
+  /** The preview over the seek bar: the Tooltip's corners. */
+  preview: string;
+  /** A caption line: frameXs's corners. */
+  cue: string;
+}
+
 /**
  * A time clock's parts that change from style to style — ours (shadcn has
  * no time clock).
@@ -807,6 +821,7 @@ export interface ScStyle {
   textarea: string;
   timeClock: ScTimeClockStyles;
   fileInput: ScFileInputStyles;
+  mediaPlayer: ScMediaPlayerStyles;
   listbox: ScListboxStyles;
   segmentedControl: ScSegmentedControlStyles;
   waterfall: ScWaterfallStyles;
