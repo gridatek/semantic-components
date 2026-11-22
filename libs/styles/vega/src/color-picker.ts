@@ -7,6 +7,6 @@ export const colorPicker: ScColorPickerStyles = {
   thumb: 'rounded-full',
   slider:
     'rounded-full [&::-webkit-slider-thumb]:rounded-full [&::-moz-range-thumb]:rounded-full',
-  swatch: 'rounded-md',
+  swatch: 'size-9 rounded-md',
   option: 'rounded-md',
 };

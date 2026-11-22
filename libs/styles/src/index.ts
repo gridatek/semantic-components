@@ -468,7 +468,7 @@ export interface ScColorPickerStyles {
   thumb: string;
   /** A slider (a native range): its track, and its thumb (::-webkit-slider-thumb, ::-moz-range-thumb). */
   slider: string;
-  /** The swatch showing the colour. */
+  /** The swatch showing the colour: its corners, and its size — the style's icon button's, as the eyedropper beside it. */
   swatch: string;
   /** A preset. */
   option: string;
