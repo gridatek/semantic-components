@@ -14,6 +14,7 @@ Your `<video>` or `<audio>`, with controls as parts that fit the player's width 
 └── [scMediaPlayerControls] — one row that wraps; over a video, hides while it plays untouched
     ├── input[scMediaPlayerSeek] — a row of its own; loaded and chapters on its track
     ├── [scMediaPlayerPreview] — your text above it, where the pointer is
+    ├── div[scMediaPlayerWaveform] — or the media as bars: a seek bar for audio
     ├── buttons: Play, Skip ([scMediaPlayerSkip]="-10"), Mute, Rate ([scMediaPlayerRate]="1.5"),
     │   Loop, Captions, PictureInPicture, Fullscreen
     ├── input[scMediaPlayerVolume]
@@ -44,6 +45,10 @@ What isn't a part is your markup, from the player's state: a spinner (`@if (play
 </div>
 ```
 
+## Waveform
+
+`div[scMediaPlayerWaveform]`: the file playing (`player.src()`), read with Web Audio and drawn as `bars` (64), the part played filled — read again when another file plays. A slider: click or drag to seek; ← / → five seconds (as the text reads), Page Up / Page Down ten, Home, End; its value reads as the time. Without Web Audio (or a file it can't read, as another origin without CORS), its bars are flat and it still seeks. Its corners are the style's (`mediaPlayer.waveform`). Songs one after another: the [Playlist recipe](../../../../../../apps/showcase/src/app/pages/docs/playlist/playlist-page.ts).
+
 ## Small players
 
 The player is a container (`@container/media`), and the parts fit themselves to its width — one template, no script measuring it (the server's render is already right). In two steps: under 42rem (a video) or 28rem (an audio bar) the speeds and loop step aside; under 36rem or 24rem, the small layout:
@@ -54,7 +59,7 @@ The player is a container (`@container/media`), and the parts fit themselves to 
 
 ## State
 
-Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `loop`, `captions` (a track's id, or `null`). Read: `kind`, `duration`, `buffered`, `waiting`, `ended`, `error`, `started`, `fullscreen`, `pictureInPicture`, `idle`, `tracks()`, `chapters()`, `chapter()`, `cues()`, `preview()`. Methods: `toggle()`, `seekTo()`, `seekBy()`, `volumeBy()`, `rateBy()`, `toggleCaptions()`, `toggleFullscreen()`, `togglePictureInPicture()`, `toggleControls()`, `reload()`, `formatTime()` (in the app's language), `chapterAt()`. `metadata` shows in the system's media controls, whose keys play, pause and seek.
+Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `loop`, `captions` (a track's id, or `null`). Read: `kind`, `src`, `duration`, `buffered`, `waiting`, `ended`, `error`, `started`, `fullscreen`, `pictureInPicture`, `idle`, `tracks()`, `chapters()`, `chapter()`, `cues()`, `preview()`. Methods: `toggle()`, `seekTo()`, `seekBy()`, `volumeBy()`, `rateBy()`, `toggleCaptions()`, `toggleFullscreen()`, `togglePictureInPicture()`, `toggleControls()`, `reload()`, `formatTime()` (in the app's language), `chapterAt()`. `metadata` shows in the system's media controls, whose keys play, pause and seek.
 
 ## Keyboard
 
@@ -73,7 +78,7 @@ The style's `mediaPlayer` key: the frame (as its Card's: corners, ring, shadow),
 
 ## Not here
 
-Streaming (HLS, DASH: attach hls.js or shaka-player to the video), quality switching, a settings menu (your Menu with Rate buttons in it), thumbnails on the seek bar, ads, YouTube or Vimeo embeds, a playlist (the Audio Player's).
+Streaming (HLS, DASH: attach hls.js or shaka-player to the video), quality switching, a settings menu (your Menu with Rate buttons in it), thumbnails on the seek bar, ads, YouTube or Vimeo embeds, a playlist (your state: the Playlist recipe).
 
 ## References
 

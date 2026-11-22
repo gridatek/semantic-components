@@ -565,6 +565,8 @@ export interface ScMediaPlayerStyles {
   preview: string;
   /** A caption line: frameXs's corners. */
   cue: string;
+  /** The waveform: its box's corners (frameSm's) and its bars'. */
+  waveform: string;
 }
 
 /**

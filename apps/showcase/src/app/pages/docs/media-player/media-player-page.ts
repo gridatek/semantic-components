@@ -204,7 +204,7 @@ import { RtlMediaPlayerDemoContainer } from './demos/rtl-media-player-demo-conta
 export default class MediaPlayerPage {
   private readonly anatomy = {
     imports:
-      "import { ScMediaPlayer, ScMediaPlayerCaptions, ScMediaPlayerCaptionsDisplay, ScMediaPlayerControls, ScMediaPlayerFullscreen, ScMediaPlayerLoop, ScMediaPlayerMedia, ScMediaPlayerMute, ScMediaPlayerPictureInPicture, ScMediaPlayerPlay, ScMediaPlayerPreview, ScMediaPlayerRate, ScMediaPlayerSeek, ScMediaPlayerSkip, ScMediaPlayerTime, ScMediaPlayerVolume } from '@semantic-components/ui';",
+      "import { ScMediaPlayer, ScMediaPlayerCaptions, ScMediaPlayerCaptionsDisplay, ScMediaPlayerControls, ScMediaPlayerFullscreen, ScMediaPlayerLoop, ScMediaPlayerMedia, ScMediaPlayerMute, ScMediaPlayerPictureInPicture, ScMediaPlayerPlay, ScMediaPlayerPreview, ScMediaPlayerRate, ScMediaPlayerSeek, ScMediaPlayerSkip, ScMediaPlayerTime, ScMediaPlayerVolume, ScMediaPlayerWaveform } from '@semantic-components/ui';",
     markup: [
       '<div scMediaPlayer #player="scMediaPlayer" aria-label="Video: Sintel">',
       '  <video scMediaPlayerMedia src="…" poster="…"><track kind="captions" … /></video>',
@@ -275,6 +275,12 @@ export default class MediaPlayerPage {
       name: 'ScMediaPlayerSeek',
       selector: 'input[scMediaPlayerSeek]',
       description: 'The time, as a slider: loaded and chapters on its track.',
+    },
+    {
+      name: 'ScMediaPlayerWaveform',
+      selector: 'div[scMediaPlayerWaveform]',
+      description:
+        'The media as bars, read from its file: a seek bar for audio (bars input). See the Playlist recipe.',
     },
     {
       name: 'ScMediaPlayerPreview',

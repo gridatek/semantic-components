@@ -5879,6 +5879,25 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/playlist',
+    children: [
+      {
+        path: 'playlist-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/playlist/demos/playlist-usage-demo').then(
+            (m) => m.PlaylistUsageDemo,
+          ),
+      },
+      {
+        path: 'rtl-playlist-demo',
+        loadComponent: () =>
+          import('../pages/docs/playlist/demos/rtl-playlist-demo').then(
+            (m) => m.RtlPlaylistDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/countdown',
     children: [
       {

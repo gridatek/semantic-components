@@ -577,6 +577,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/countdown/countdown-page'),
       },
       {
+        path: 'playlist',
+        title: 'Playlist - Semantic Components',
+        loadComponent: () => import('../pages/docs/playlist/playlist-page'),
+      },
+      {
         path: 'multiselect',
         title: 'Multiselect - Semantic Components',
         loadComponent: () =>

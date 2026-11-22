@@ -14,3 +14,4 @@ export * from './media-player-seek';
 export * from './media-player-skip';
 export * from './media-player-time';
 export * from './media-player-volume';
+export * from './media-player-waveform';

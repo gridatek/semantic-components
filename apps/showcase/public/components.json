@@ -735,6 +735,14 @@
     "category": "Charts"
   },
   {
+    "name": "Playlist",
+    "path": "playlist",
+    "description": "A recipe: songs one after another on a Media Player — a waveform, next and previous, shuffle and repeat, the list to choose from.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Recipes"
+  },
+  {
     "name": "Popover",
     "path": "popover",
     "description": "Rich content in a panel beside its trigger — a dialog, modal or not, opened by a click or a hover, in the look of the app's style.",

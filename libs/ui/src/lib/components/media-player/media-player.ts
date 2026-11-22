@@ -104,6 +104,8 @@ export class ScMediaPlayer {
   /** How many plays sit over the video (not in the controls). */
   readonly ɵcenterPlays = signal(0);
 
+  /** The file playing (its `currentSrc`): set by `scMediaPlayerMedia` as it loads. */
+  readonly src = signal('');
   readonly duration = signal(0);
   /** How far it has loaded, in seconds. */
   readonly buffered = signal(0);

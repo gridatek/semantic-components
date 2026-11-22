@@ -40,7 +40,7 @@ import { ScMediaPlayer } from './media-player';
     '(ended)': 'sync()',
     '(seeked)': 'sync()',
     '(loadedmetadata)': 'onMetadata()',
-    '(loadstart)': 'player.error.set(null)',
+    '(loadstart)': 'player.error.set(null); player.src.set(element.currentSrc)',
     '(error)': 'player.error.set(element.error); player.waiting.set(false)',
     '(waiting)': 'player.waiting.set(true)',
     '(playing)': 'player.waiting.set(false); sync()',
@@ -91,6 +91,8 @@ export class ScMediaPlayerMedia {
         this.onMetadata();
       }
       if (this.element.error) this.player.error.set(this.element.error);
+      // Loading began before the page was live (a page from the server).
+      this.player.src.set(this.element.currentSrc);
       // Tracks listed after the metadata (WebKit, a page from the server):
       // read again.
       const tracks = this.element.textTracks;

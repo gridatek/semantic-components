@@ -3,7 +3,7 @@ import type { ScMediaPlayerStyles } from '@semantic-components/styles';
 // Ours (shadcn has no media player), in luma: the frame as the Card's (frame.ts),
 // the audio card's padding and text as the Card's at size sm, the controls'
 // padding clear of the frame's corner, the preview's corners as the Tooltip's,
-// a caption's as frameXs.
+// a caption's as frameXs, the waveform's box as frameSm (its bars round, or square).
 export const mediaPlayer: ScMediaPlayerStyles = {
   frame:
     'rounded-4xl shadow-md ring-1 ring-foreground/5 dark:ring-foreground/10',
@@ -11,4 +11,5 @@ export const mediaPlayer: ScMediaPlayerStyles = {
   controls: 'px-6 pb-4',
   preview: 'rounded-xl',
   cue: 'rounded-sm',
+  waveform: 'rounded-md [&_span]:rounded-full',
 };
