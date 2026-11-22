@@ -15,16 +15,14 @@ import {
   ScField,
   ScFieldDescription,
   ScFieldGroup,
-  ScFileUpload,
-  ScFileUploadDropzone,
-  ScFileUploadInput,
-  ScFileUploadItem,
-  ScFileUploadItemName,
-  ScFileUploadItemPreview,
-  ScFileUploadItemRemove,
-  ScFileUploadItemSize,
-  ScFileUploadList,
-  ScFileUploadTrigger,
+  ScFileInput,
+  ScFileInputDropzone,
+  ScFileInputItem,
+  ScFileInputItemPreview,
+  ScFileInputItemRemove,
+  ScFileInputItemSize,
+  ScFileInputList,
+  ScFileInputTrigger,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
@@ -76,16 +74,14 @@ import { PageHeader } from '../../layout/page-header';
     ScField,
     ScFieldDescription,
     ScFieldGroup,
-    ScFileUpload,
-    ScFileUploadDropzone,
-    ScFileUploadInput,
-    ScFileUploadItem,
-    ScFileUploadItemName,
-    ScFileUploadItemPreview,
-    ScFileUploadItemRemove,
-    ScFileUploadItemSize,
-    ScFileUploadList,
-    ScFileUploadTrigger,
+    ScFileInput,
+    ScFileInputDropzone,
+    ScFileInputItem,
+    ScFileInputItemPreview,
+    ScFileInputItemRemove,
+    ScFileInputItemSize,
+    ScFileInputList,
+    ScFileInputTrigger,
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
@@ -322,26 +318,25 @@ import { PageHeader } from '../../layout/page-header';
           </h2>
         </div>
         <div scCardBody>
-          <div scFileUpload #upload="scFileUpload" multiple>
-            <input scFileUploadInput />
-            <div scFileUploadDropzone>
+          <div scFileInput #upload="scFileInput" multiple>
+            <div scFileInputDropzone>
               <svg siUploadIcon></svg>
               <p i18n="@@form.dropFilesHere">Drop files here</p>
-              <button i18n="@@form.browseFiles" scFileUploadTrigger size="sm">
+              <button i18n="@@form.browseFiles" scFileInputTrigger size="sm">
                 Browse files
               </button>
             </div>
             <ul
               i18n-aria-label="@@form.chosenFiles"
-              scFileUploadList
+              scFileInputList
               aria-label="Chosen files"
             >
               @for (file of upload.value(); track file) {
-                <li scFileUploadItem [file]="file">
-                  <span scFileUploadItemPreview><svg siFileIcon></svg></span>
-                  <span scFileUploadItemName>{{ file.name }}</span>
-                  <span scFileUploadItemSize></span>
-                  <button scFileUploadItemRemove>
+                <li scFileInputItem [file]="file">
+                  <span scFileInputItemPreview><svg siFileIcon></svg></span>
+                  <span class="min-w-0 flex-1 truncate">{{ file.name }}</span>
+                  <span scFileInputItemSize></span>
+                  <button scFileInputItemRemove>
                     <svg siXIcon></svg>
                     <span i18n="@@form.remove" class="sr-only"
                       >Remove {{ file.name }}</span

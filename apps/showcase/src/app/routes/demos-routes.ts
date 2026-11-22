@@ -3156,46 +3156,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/file-upload',
-    children: [
-      {
-        path: 'basic-file-upload-demo',
-        loadComponent: () =>
-          import('../pages/docs/file-upload/demos/basic-file-upload-demo').then(
-            (m) => m.BasicFileUploadDemo,
-          ),
-      },
-      {
-        path: 'single-file-upload-demo',
-        loadComponent: () =>
-          import('../pages/docs/file-upload/demos/single-file-upload-demo').then(
-            (m) => m.SingleFileUploadDemo,
-          ),
-      },
-      {
-        path: 'rejections-file-upload-demo',
-        loadComponent: () =>
-          import('../pages/docs/file-upload/demos/rejections-file-upload-demo').then(
-            (m) => m.RejectionsFileUploadDemo,
-          ),
-      },
-      {
-        path: 'progress-file-upload-demo',
-        loadComponent: () =>
-          import('../pages/docs/file-upload/demos/progress-file-upload-demo').then(
-            (m) => m.ProgressFileUploadDemo,
-          ),
-      },
-      {
-        path: 'form-file-upload-demo',
-        loadComponent: () =>
-          import('../pages/docs/file-upload/demos/form-file-upload-demo').then(
-            (m) => m.FormFileUploadDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/compare',
     children: [
       {

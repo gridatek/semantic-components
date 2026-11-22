@@ -1,6 +1,6 @@
 # File Input
 
-Files picked, dropped or pasted — chosen, never uploaded — as a `File[]` for Signal Forms; those that break a rule kept out, with every reason. After ui-sdk's File Input; it replaces the File Upload.
+Files picked, dropped or pasted — chosen, never uploaded — as a `File[]` for Signal Forms; those that break a rule kept out, with every reason. After ui-sdk's File Input; it replaced the File Upload (2026-11-22).
 
 ## Architecture
 

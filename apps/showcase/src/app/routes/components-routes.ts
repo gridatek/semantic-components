@@ -319,12 +319,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/file-input/file-input-page'),
       },
       {
-        path: 'file-upload',
-        title: 'File Upload - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/file-upload/file-upload-page'),
-      },
-      {
         path: 'compare',
         title: 'Compare - Semantic Components',
         loadComponent: () => import('../pages/docs/compare/compare-page'),

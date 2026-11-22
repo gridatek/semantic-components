@@ -388,17 +388,7 @@
     "description": "Files picked, dropped or pasted — chosen, never uploaded — as a File[] for Signal Forms; those kept out, with every reason.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
-    "name": "File Upload",
-    "path": "file-upload",
-    "description": "Files picked or dropped, as a File[] for Signal Forms; rejections with their reason.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Focus Trap",

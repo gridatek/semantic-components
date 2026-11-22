@@ -34,10 +34,9 @@ import {
   ScField,
   ScFieldDescription,
   ScFieldGroup,
-  ScFileUpload,
-  ScFileUploadDropzone,
-  ScFileUploadInput,
-  ScFileUploadTrigger,
+  ScFileInput,
+  ScFileInputDropzone,
+  ScFileInputTrigger,
   ScFrame,
   ScInput,
   ScLabel,
@@ -123,10 +122,9 @@ const EMPTY_BODY = '<p></p>';
     ScField,
     ScFieldDescription,
     ScFieldGroup,
-    ScFileUpload,
-    ScFileUploadDropzone,
-    ScFileUploadInput,
-    ScFileUploadTrigger,
+    ScFileInput,
+    ScFileInputDropzone,
+    ScFileInputTrigger,
     ScFrame,
     ScInput,
     ScLabel,
@@ -352,28 +350,17 @@ const EMPTY_BODY = '<p></p>';
                 }
               </div>
             }
-            <div
-              scFileUpload
-              #upload="scFileUpload"
-              accept="image/*"
-              (valueChange)="choose($event)"
-            >
-              <input
-                i18n-aria-label="@@blog.edit.coverImage"
-                scFileUploadInput
-                aria-label="Cover image"
-              />
-              <div scFileUploadDropzone>
+            <div scFileInput accept="image/*" (valueChange)="choose($event)">
+              <div scFileInputDropzone>
                 <svg siUploadIcon></svg>
                 <p i18n="@@blog.edit.dropTheCoverImageHere">
                   Drop the cover image here
                 </p>
-                <button
-                  i18n="@@blog.edit.browseFiles"
-                  scFileUploadTrigger
-                  size="sm"
-                >
-                  Browse files
+                <button scFileInputTrigger size="sm">
+                  <span i18n="@@blog.edit.browseFiles">Browse files</span>
+                  <span i18n="@@blog.edit.coverImage" class="sr-only">
+                    Cover image
+                  </span>
                 </button>
               </div>
             </div>

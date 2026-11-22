@@ -18,10 +18,9 @@ import {
   ScField,
   ScFieldDescription,
   ScFieldGroup,
-  ScFileUpload,
-  ScFileUploadDropzone,
-  ScFileUploadInput,
-  ScFileUploadTrigger,
+  ScFileInput,
+  ScFileInputDropzone,
+  ScFileInputTrigger,
   ScFrame,
   ScInput,
   ScLabel,
@@ -64,10 +63,9 @@ interface Draft {
     ScField,
     ScFieldDescription,
     ScFieldGroup,
-    ScFileUpload,
-    ScFileUploadDropzone,
-    ScFileUploadInput,
-    ScFileUploadTrigger,
+    ScFileInput,
+    ScFileInputDropzone,
+    ScFileInputTrigger,
     ScFrame,
     ScInput,
     ScLabel,
@@ -215,23 +213,22 @@ interface Draft {
                 }
               </div>
             }
-            <div scFileUpload accept="image/*" (valueChange)="choose($event)">
-              <input
-                i18n-aria-label="@@ecommerce.productEdit.productPicture"
-                scFileUploadInput
-                aria-label="Product picture"
-              />
-              <div scFileUploadDropzone>
+            <div scFileInput accept="image/*" (valueChange)="choose($event)">
+              <div scFileInputDropzone>
                 <svg siUploadIcon></svg>
                 <p i18n="@@ecommerce.productEdit.dropAPictureHere">
                   Drop a picture here
                 </p>
-                <button
-                  i18n="@@ecommerce.productEdit.browseFiles"
-                  scFileUploadTrigger
-                  size="sm"
-                >
-                  Browse files
+                <button scFileInputTrigger size="sm">
+                  <span i18n="@@ecommerce.productEdit.browseFiles">
+                    Browse files
+                  </span>
+                  <span
+                    i18n="@@ecommerce.productEdit.productPicture"
+                    class="sr-only"
+                  >
+                    Product picture
+                  </span>
                 </button>
               </div>
             </div>
