@@ -1047,6 +1047,24 @@
     "category": "Data Display"
   },
   {
+    "name": "Token Input",
+    "path": "token-input",
+    "description": "A text field that holds tokens in its text — people mentioned, files attached — each moving, deleting and copying whole.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms",
+    "hidden": true
+  },
+  {
+    "name": "Trigger Menu",
+    "path": "trigger-menu",
+    "description": "Suggestions as you type a trigger (@, /) in a Token Input: a list at the character; the one chosen becomes a token.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms",
+    "hidden": true
+  },
+  {
     "name": "Toast",
     "path": "toast",
     "description": "A brief notification that appears temporarily.",

@@ -6284,6 +6284,107 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/trigger-menu',
+    children: [
+      {
+        path: 'trigger-menu-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/trigger-menu/demos/trigger-menu-usage-demo').then(
+            (m) => m.TriggerMenuUsageDemo,
+          ),
+      },
+      {
+        path: 'commands-trigger-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/trigger-menu/demos/commands-trigger-menu-demo').then(
+            (m) => m.CommandsTriggerMenuDemo,
+          ),
+      },
+      {
+        path: 'loading-trigger-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/trigger-menu/demos/loading-trigger-menu-demo').then(
+            (m) => m.LoadingTriggerMenuDemo,
+          ),
+      },
+      {
+        path: 'rtl-trigger-menu-demo',
+        loadComponent: () =>
+          import('../pages/docs/trigger-menu/demos/rtl-trigger-menu-demo').then(
+            (m) => m.RtlTriggerMenuDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/token-input',
+    children: [
+      {
+        path: 'token-input-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/token-input/demos/token-input-usage-demo').then(
+            (m) => m.TokenInputUsageDemo,
+          ),
+      },
+      {
+        path: 'mentions-token-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/token-input/demos/mentions-token-input-demo').then(
+            (m) => m.MentionsTokenInputDemo,
+          ),
+      },
+      {
+        path: 'prompt-token-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/token-input/demos/prompt-token-input-demo').then(
+            (m) => m.PromptTokenInputDemo,
+          ),
+      },
+      {
+        path: 'deletion-token-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/token-input/demos/deletion-token-input-demo').then(
+            (m) => m.DeletionTokenInputDemo,
+          ),
+      },
+      {
+        path: 'codec-token-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/token-input/demos/codec-token-input-demo').then(
+            (m) => m.CodecTokenInputDemo,
+          ),
+      },
+      {
+        path: 'form-token-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/token-input/demos/form-token-input-demo').then(
+            (m) => m.FormTokenInputDemo,
+          ),
+      },
+      {
+        path: 'methods-token-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/token-input/demos/methods-token-input-demo').then(
+            (m) => m.MethodsTokenInputDemo,
+          ),
+      },
+      {
+        path: 'submit-shortcut-token-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/token-input/demos/submit-shortcut-token-input-demo').then(
+            (m) => m.SubmitShortcutTokenInputDemo,
+          ),
+      },
+      {
+        path: 'rtl-token-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/token-input/demos/rtl-token-input-demo').then(
+            (m) => m.RtlTokenInputDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/time-clock',
     children: [
       {

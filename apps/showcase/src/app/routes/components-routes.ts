@@ -632,6 +632,18 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/time-clock/time-clock-page'),
       },
       {
+        path: 'token-input',
+        title: 'Token Input - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/token-input/token-input-page'),
+      },
+      {
+        path: 'trigger-menu',
+        title: 'Trigger Menu - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/trigger-menu/trigger-menu-page'),
+      },
+      {
         path: 'attachment',
         title: 'Attachment - Semantic Components',
         loadComponent: () => import('../pages/docs/attachment/attachment-page'),

@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its style's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (141 components): 63 with a shadcn counterpart · 139 with e2e demo tests · 141 with a page axe test · 107 with an RTL demo.
+Inventory (143 components): 63 with a shadcn counterpart · 141 with e2e demo tests · 143 with a page axe test · 109 with an RTL demo.
 
 ## The two lists
 
@@ -120,7 +120,7 @@ The components shadcn has: its look (the generated reference app, nova) and its 
 |  62 | [Menubar](../apps/showcase/src/app/pages/docs/menubar)                   | ui      | menu                                    |     2 | yes                    |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 |  63 | [Preview Card](../apps/showcase/src/app/pages/docs/preview-card)         | ui      | —                                       |     4 | hover-card             |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] | waiting |
 
-## List 2 — Not in shadcn (78)
+## List 2 — Not in shadcn (80)
 
 The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 
@@ -204,6 +204,8 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  76 | [Date Time Input](../apps/showcase/src/app/pages/docs/date-time-input)         | ui      | —                                                                       |     1 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  77 | [Date Time Picker](../apps/showcase/src/app/pages/docs/date-time-picker)       | ui      | button, date-time-input, input-group, popover, time-picker              |     4 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  78 | [Date Range Input](../apps/showcase/src/app/pages/docs/date-range-input)       | ui      | date-input, field                                                       |     1 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  79 | [Token Input](../apps/showcase/src/app/pages/docs/token-input)                 | ui      | combobox, field                                                         |     5 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  80 | [Trigger Menu](../apps/showcase/src/app/pages/docs/trigger-menu)               | ui      | combobox, token-input                                                   |     7 |  [ ]   | [x] |  [ ]   | [x] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 
 ## Later
 
