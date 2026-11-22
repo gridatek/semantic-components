@@ -204,20 +204,10 @@
   {
     "name": "Color Picker",
     "path": "color-picker",
-    "description": "A color picker: area and channel sliders with alpha, any CSS colour in, swatches, hex/rgb/hsl/oklch out; a form field.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
-    "name": "Color Picker Next",
-    "path": "color-picker-next",
     "description": "A colour on an area, sliders, fields, presets and the screen — in HSV, HSL, sRGB or OKLCH, held to a gamut; a CSS colour, a form field.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Combobox",

@@ -1,27 +1,27 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
+import { ɵwarnIfUnnamed } from '../../utils';
 import { type ScButtonVariants } from '../button/button';
 import { ScColorPicker } from './color-picker';
 
 /**
- * Picks a colour from the screen. Only some browsers can: show it while
- * `picker.canPickFromScreen()`. Write its icon and name it ("Pick from screen").
+ * Picks a colour from the screen — where the browser can; elsewhere it is
+ * disabled, `data-unsupported`. Write its icon and name it ("Pick from screen").
  */
 @Directive({
   selector: 'button[scColorPickerEyeDropper]',
   host: {
     type: 'button',
     'data-slot': 'color-picker-eye-dropper',
-    '[disabled]': 'picker.disabled()',
+    '[attr.data-unsupported]': 'picker.canPickFromScreen() ? null : ""',
+    '[disabled]': 'picker.disabled() || !picker.canPickFromScreen()',
     '[class]': 'class()',
     '(click)': 'picker.pickFromScreen()',
   },
 })
 export class ScColorPickerEyeDropper {
   private readonly buttonStyles = injectStyle().button;
-
   private readonly picker = inject(ScColorPicker);
 
   readonly classInput = input<string>('', { alias: 'class' });

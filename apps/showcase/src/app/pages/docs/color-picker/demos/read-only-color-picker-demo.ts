@@ -1,33 +1,33 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScColorPickerNext,
-  ScColorPickerNextArea,
-  ScColorPickerNextInput,
-  ScColorPickerNextSwatch,
+  ScColorPicker,
+  ScColorPickerArea,
+  ScColorPickerInput,
+  ScColorPickerSwatch,
 } from '@semantic-components/ui';
 
 /** readonly: focusable, its value read — not changed. */
 @Component({
-  selector: 'app-read-only-color-picker-next-demo',
+  selector: 'app-read-only-color-picker-demo',
   imports: [
-    ScColorPickerNext,
-    ScColorPickerNextArea,
-    ScColorPickerNextInput,
-    ScColorPickerNextSwatch,
+    ScColorPicker,
+    ScColorPickerArea,
+    ScColorPickerInput,
+    ScColorPickerSwatch,
   ],
   template: `
     <div class="grid w-64 gap-2">
       <div
-        scColorPickerNext
+        scColorPicker
         readonly
         aria-label="Brand color"
         class="grid gap-3"
         [(value)]="color"
       >
-        <div scColorPickerNextArea aria-label="Color"></div>
+        <div scColorPickerArea aria-label="Color"></div>
         <div class="flex gap-2">
-          <span scColorPickerNextSwatch></span>
-          <input scColorPickerNextInput aria-label="Hex" />
+          <span scColorPickerSwatch></span>
+          <input scColorPickerInput aria-label="Hex" />
         </div>
       </div>
       <p class="text-muted-foreground font-mono text-xs" data-testid="picked">
@@ -38,6 +38,6 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ReadOnlyColorPickerNextDemo {
+export class ReadOnlyColorPickerDemo {
   private readonly color = signal('#22c55e');
 }

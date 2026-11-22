@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its style's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (147 components): 63 with a shadcn counterpart · 145 with e2e demo tests · 147 with a page axe test · 114 with an RTL demo.
+Inventory (147 components): 63 with a shadcn counterpart · 145 with e2e demo tests · 147 with a page axe test · 115 with an RTL demo.
 
 ## The two lists
 
@@ -134,7 +134,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |   6 | [Bar Chart](../apps/showcase/src/app/pages/docs/bar-chart)                     | ui      | chart                                                                   |     1 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |   7 | [Barcode Scanner](../apps/showcase/src/app/pages/docs/barcode-scanner)         | ui      | button, input                                                           |     5 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |   8 | [Code Editor](../apps/showcase/src/app/pages/docs/code-editor)                 | ui      | field                                                                   |     1 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |
-|   9 | [Color Picker](../apps/showcase/src/app/pages/docs/color-picker)               | ui      | button, input                                                           |     8 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|   9 | [Color Picker](../apps/showcase/src/app/pages/docs/color-picker)               | ui      | button, field, input                                                    |     9 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  10 | [Compare](../apps/showcase/src/app/pages/docs/compare)                         | ui      | —                                                                       |     5 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  11 | [Confetti](../apps/showcase/src/app/pages/docs/confetti)                       | ui      | —                                                                       |     2 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  12 | [Data Table](../apps/showcase/src/app/pages/docs/data-table)                   | ui      | button, checkbox, pagination                                            |    14 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] | waiting |

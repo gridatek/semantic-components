@@ -1,62 +1,70 @@
 # Color Picker
 
-An area and channel sliders, with alpha; a field that takes any CSS colour; swatches as a radio group; the value in the format you choose — a form field.
+A colour, picked on an area, sliders, fields, presets or the screen — in HSV, HSL, sRGB or OKLCH, held to a gamut. Its value is a CSS colour; a `[formField]`. After ui-sdk's Color Picker (rewritten 2026-11-22).
 
 ## Architecture
 
 ```
-scColorPicker (value — two-way, a [formField]: a CSS colour; format; disabled)
-├── div[scColorPickerArea]                 — saturation × brightness: one thumb, a slider
-├── input[scColorPickerSlider]="'hue' | 'alpha'" — a native range on a painted track
-├── input[scColorPickerInput]              — type any CSS colour
-├── [scColorPickerSwatch]                  — the colour, on a checkerboard
-├── [scColorPickerSwatches]                — a radio group of…
-│   └── button[scColorPickerOption]="'#e11d48'"
-└── button[scColorPickerEyeDropper]        — from the screen (where the browser can)
+[scColorPicker] (value, space, format, gamut, disabled, readonly; (valueCommit))  — role group
+│  values() · channel() · set() · commit() · setColor() · parse() · css() · pickFromScreen()
+├── div[scColorPickerArea] (x, y)          — two channels: a slider; CSS or a canvas
+├── input[scColorPickerSlider]="'hue'"     — one channel on a native range; orientation
+├── input[scColorPickerInput]              — any CSS colour, on Enter or when left
+├── input[scColorPickerChannelInput]="'red'" — one channel as a number
+├── [scColorPickerSwatch]                  — the colour (decorative)
+├── [scColorPickerSwatches]                — presets: a radio group of…
+│   └── button[scColorPickerSwatchItem]="'#e11d48'"
+└── button[scColorPickerEyeDropper]        — from the screen; data-unsupported elsewhere
 ```
 
 ## Usage
 
 ```html
-<div scColorPicker #picker="scColorPicker" [(value)]="color">
-  <div scColorPickerArea aria-label="Saturation and brightness" [attr.aria-valuetext]="'Saturation ' + (picker.hsva().s | number: '1.0-0') + '%, brightness ' + (picker.hsva().v | number: '1.0-0') + '%'"></div>
+<div scColorPicker aria-label="Brand color" [formField]="form.color">
+  <div scColorPickerArea aria-label="Color"></div>
   <input scColorPickerSlider="hue" aria-label="Hue" />
-  <input scColorPickerSlider="alpha" aria-label="Opacity" />
   <span scColorPickerSwatch></span>
-  <input scColorPickerInput aria-label="Colour" />
+  <input scColorPickerInput aria-label="Hex" />
 </div>
 ```
 
-## Value
+## Spaces, formats, gamut
 
-A CSS colour string, written in `format`:
+| `space`         | Channels (their units)                     | Written as                    |
+| --------------- | ------------------------------------------ | ----------------------------- |
+| `hsv` (default) | hue 0–360°, saturation, brightness 0–100 % | `#0ea5e9`                     |
+| `hsl`           | hue, saturation, lightness                 | `hsl(198.63 88.66% 48.43%)`   |
+| `srgb`          | red, green, blue 0–255                     | `rgb(14 165 233)`             |
+| `oklch`         | lightness 0–100 %, chroma 0–0.4, hue       | `oklch(0.6847 0.1479 237.32)` |
 
-| `format` | Opaque                     | Transparent              |
-| -------- | -------------------------- | ------------------------ |
-| `hex`    | `#3b82f6`                  | `#3b82f680`              |
-| `rgb`    | `rgb(59 130 246)`          | `rgb(59 130 246 / 0.5)`  |
-| `hsl`    | `hsl(217 91% 60%)`         | `hsl(217 91% 60% / 0.5)` |
-| `oklch`  | `oklch(62.3% 0.188 259.8)` | `oklch(… / 0.5)`         |
+Alpha (0–100 %) in every space. `format` (`hex`, `rgb`, `hsl`, `oklch`) writes it another way. Any CSS colour goes in (an `oklch()` keeps its wide colours; others are read into sRGB by the browser). Empty is no colour. The hue — and black's saturation — are kept where the colour has none.
 
-Any CSS colour goes in — from outside, or typed in the field: hex, `rgb()`, `hsl()`, `oklch()`, `lab()`, `color()`, names. The browser reads it (into sRGB). Empty is no colour. Changing `format` writes the value again.
+The area takes any two channels (`x`, `y`; by default saturation × brightness, saturation × lightness, red × green, chroma × lightness), a slider any one. HSV saturation × brightness is CSS gradients; any other area is painted on a canvas (96 × 72, stretched).
 
-A `[formField]`: `required()` in your schema; `disabled` from it. The picker keeps its hue (and saturation) through greys and black, where the colour has none.
+`gamut`: `srgb` (default), `p3`, or `false`. Only OKLCH can leave sRGB. Past the gamut, the value is the nearest colour it holds (its chroma lowered) and the picker and its parts are `data-out-of-gamut`; let go (or any key), the colour moves there.
 
-Read: `hsva()` (hue 0–360, saturation and value 0–100, alpha 0–1), `rgba()`, `css()` (also `--sc-color-picker-value` on the picker). Methods: `set({ h, s, v, a })`, `setColor(css)`, `parse(css)`, `pickFromScreen()`; `canPickFromScreen()`.
+## Changes and commits
+
+`[(value)]` follows every step of a drag. `(valueCommit)` fires once a change finishes — a drag let go, a key, a preset, a field committed, the eyedropper — to save. `setColor(css)` from outside (false if it isn't a colour).
 
 ## Keyboard
 
-- Area: ← → saturation, ↑ ↓ brightness (Shift: 10), Page Up / Down brightness 10, Home / End saturation 0 / 100.
-- Sliders: native ranges.
-- Swatches: one stop in the tab order; the arrows (Home, End) move and choose.
+Area: ← → `x`, ↑ ↓ `y`, Shift ten steps, Page Up / Down `y` a tenth, Home / End `x` to its ends. Sliders: the arrows a step, Shift ten, Page Up / Down a tenth, Home / End (as the text reads). Field: Enter takes it, Escape puts the value back. Presets: one Tab stop, the arrows move and choose.
 
 ## Accessibility
 
-- Name the area, the sliders, the field, the swatches' group and each option (visually hidden text: "Rose").
-- Write the area's `aria-valuetext` from `picker.hsva()`; the texts are yours.
-- An invalid colour typed is `aria-invalid`; left, the field shows the colour again.
-- The swatch is decorative (`aria-hidden`): say the colour in text where it matters.
+- A group: name it (its field's label, or `aria-label`). Name the area, each slider, each input, the presets and each preset ("Rose").
+- The area reads its two values ("76 %, 96 %"), a slider its value ("120°"), in the app's language — no channel names of ours; your words in `aria-valuetext`.
+- The swatch is decorative: say the colour in text where it matters.
+
+## CSS variables
+
+`--sc-color-picker-color` (the picker, a preset), `--sc-color-picker-area-background`, `--sc-color-picker-area-x` / `--sc-color-picker-area-y` (the area), `--sc-color-picker-track`, `--sc-color-picker-thumb` (a slider).
+
+## Look
+
+The style's `colorPicker` key: corners of the area, the thumbs, the sliders, the swatch and the presets. The eyedropper is the style's button.
 
 ## Not here
 
-A colour wheel, colour names announced for you (yours to write), wide-gamut (P3) editing — OKLCH is a format, the area is sRGB — and a history of recent colours.
+Native form submission (`name`; Signal Forms only), a controller object, colours named for you, a colour wheel.

@@ -1,31 +1,31 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { PresetsColorPickerNextDemo } from './presets-color-picker-next-demo';
+import { PresetsColorPickerDemo } from './presets-color-picker-demo';
 
 @Component({
-  selector: 'app-presets-color-picker-next-demo-container',
-  imports: [DemoContainer, PresetsColorPickerNextDemo],
+  selector: 'app-presets-color-picker-demo-container',
+  imports: [DemoContainer, PresetsColorPickerDemo],
   template: `
     <app-demo-container
       title="Presets and channel inputs"
       [code]="code"
-      demoUrl="/demos/color-picker-next/presets-color-picker-next-demo"
+      demoUrl="/demos/color-picker/presets-color-picker-demo"
     >
-      <app-presets-color-picker-next-demo />
+      <app-presets-color-picker-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PresetsColorPickerNextDemoContainer {
+export class PresetsColorPickerDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScColorPickerNext,
-  ScColorPickerNextChannelInput,
-  ScColorPickerNextEyeDropper,
-  ScColorPickerNextSwatch,
-  ScColorPickerNextSwatchItem,
-  ScColorPickerNextSwatches,
+  ScColorPicker,
+  ScColorPickerChannelInput,
+  ScColorPickerEyeDropper,
+  ScColorPickerSwatch,
+  ScColorPickerSwatchItem,
+  ScColorPickerSwatches,
   ScField,
   ScLabel,
 } from '@semantic-components/ui';
@@ -33,14 +33,14 @@ import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
 
 /** space="srgb", format="hex": presets (a radio group), red, green and blue as numbers, the screen’s colours where the browser can. */
 @Component({
-  selector: 'app-presets-color-picker-next-demo',
+  selector: 'app-presets-color-picker-demo',
   imports: [
-    ScColorPickerNext,
-    ScColorPickerNextChannelInput,
-    ScColorPickerNextEyeDropper,
-    ScColorPickerNextSwatch,
-    ScColorPickerNextSwatchItem,
-    ScColorPickerNextSwatches,
+    ScColorPicker,
+    ScColorPickerChannelInput,
+    ScColorPickerEyeDropper,
+    ScColorPickerSwatch,
+    ScColorPickerSwatchItem,
+    ScColorPickerSwatches,
     ScField,
     ScLabel,
     SiPipetteIcon,
@@ -48,16 +48,16 @@ import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div class="grid w-72 gap-3">
       <div
-        scColorPickerNext
+        scColorPicker
         space="srgb"
         format="hex"
         aria-label="Color"
         class="grid gap-3"
         [(value)]="color"
       >
-        <div scColorPickerNextSwatches aria-label="Presets">
+        <div scColorPickerSwatches aria-label="Presets">
           @for (preset of presets; track preset.value) {
-            <button [scColorPickerNextSwatchItem]="preset.value">
+            <button [scColorPickerSwatchItem]="preset.value">
               <span class="sr-only">{{ preset.name }}</span>
             </button>
           }
@@ -66,14 +66,14 @@ import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
           @for (channel of channels; track channel.name) {
             <div scField class="w-16">
               <label scLabel>{{ channel.label }}</label>
-              <input [scColorPickerNextChannelInput]="channel.name" />
+              <input [scColorPickerChannelInput]="channel.name" />
             </div>
           }
-          <button scColorPickerNextEyeDropper>
+          <button scColorPickerEyeDropper>
             <svg siPipetteIcon></svg>
             <span class="sr-only">Pick from screen</span>
           </button>
-          <span scColorPickerNextSwatch></span>
+          <span scColorPickerSwatch></span>
         </div>
       </div>
       <p class="text-muted-foreground font-mono text-xs" data-testid="picked">
@@ -84,7 +84,7 @@ import { SiPipetteIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PresetsColorPickerNextDemo {
+export class PresetsColorPickerDemo {
   private readonly color = signal('#e11d48');
   private readonly channels = [
     { name: 'red', label: 'R' },

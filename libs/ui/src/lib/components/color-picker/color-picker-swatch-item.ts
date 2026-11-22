@@ -9,18 +9,18 @@ import {
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { ɵwarnIfUnnamed } from '../../utils';
-import { ScColorPickerNext } from './color-picker-next';
-import { SC_COLOR_CHECKERBOARD } from './color-picker-next-slider';
-import { ScColorPickerNextSwatches } from './color-picker-next-swatches';
+import { ScColorPicker } from './color-picker';
+import { SC_COLOR_CHECKERBOARD } from './color-picker-slider';
+import { ScColorPickerSwatches } from './color-picker-swatches';
 import { scColorToRgb } from './color-space';
 
 /**
- * A preset colour (`[scColorPickerNextSwatchItem]="'#e11d48'"`, any CSS
+ * A preset colour (`[scColorPickerSwatchItem]="'#e11d48'"`, any CSS
  * colour) in the swatches: a radio, checked while it is the colour — however
  * either is written. Name it ("Rose").
  */
 @Directive({
-  selector: 'button[scColorPickerNextSwatchItem]',
+  selector: 'button[scColorPickerSwatchItem]',
   host: {
     type: 'button',
     'data-slot': 'color-picker-swatch-item',
@@ -36,16 +36,16 @@ import { scColorToRgb } from './color-space';
     '(keydown)': 'onKeydown($event)',
   },
 })
-export class ScColorPickerNextSwatchItem {
-  private readonly picker = inject(ScColorPickerNext);
-  private readonly group = inject(ScColorPickerNextSwatches);
+export class ScColorPickerSwatchItem {
+  private readonly picker = inject(ScColorPicker);
+  private readonly group = inject(ScColorPickerSwatches);
   private readonly element =
     inject<ElementRef<HTMLButtonElement>>(ElementRef).nativeElement;
   private readonly styles = injectStyle().colorPicker;
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Its colour. */
-  readonly color = input('', { alias: 'scColorPickerNextSwatchItem' });
+  readonly color = input('', { alias: 'scColorPickerSwatchItem' });
 
   /** It is the colour — to the 8-bit channel (no colour: none is). */
   private readonly checked = computed(() => {
@@ -85,20 +85,10 @@ export class ScColorPickerNextSwatchItem {
   );
 
   constructor() {
-    ɵwarnIfUnnamed('scColorPickerNextSwatchItem');
+    ɵwarnIfUnnamed('scColorPickerSwatchItem');
     const self = { element: this.element, checked: this.checked };
-    // In document order.
-    this.group.items.update((items) =>
-      [...items, self].sort((a, b) =>
-        a.element.compareDocumentPosition(b.element) &
-        Node.DOCUMENT_POSITION_FOLLOWING
-          ? -1
-          : 1,
-      ),
-    );
-    inject(DestroyRef).onDestroy(() =>
-      this.group.items.update((items) => items.filter((item) => item !== self)),
-    );
+    this.group.register(self);
+    inject(DestroyRef).onDestroy(() => this.group.unregister(self));
   }
 
   private pick(): void {

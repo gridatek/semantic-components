@@ -1,35 +1,35 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScColorPickerNext,
-  ScColorPickerNextArea,
-  ScColorPickerNextInput,
-  ScColorPickerNextSlider,
-  ScColorPickerNextSwatch,
+  ScColorPicker,
+  ScColorPickerArea,
+  ScColorPickerInput,
+  ScColorPickerSlider,
+  ScColorPickerSwatch,
 } from '@semantic-components/ui';
 
 /** A brand colour: the area (saturation × brightness), the hue, the colour as text — any CSS colour typed, taken on Enter. */
 @Component({
-  selector: 'app-color-picker-next-usage-demo',
+  selector: 'app-color-picker-usage-demo',
   imports: [
-    ScColorPickerNext,
-    ScColorPickerNextArea,
-    ScColorPickerNextInput,
-    ScColorPickerNextSlider,
-    ScColorPickerNextSwatch,
+    ScColorPicker,
+    ScColorPickerArea,
+    ScColorPickerInput,
+    ScColorPickerSlider,
+    ScColorPickerSwatch,
   ],
   template: `
     <div class="grid w-64 gap-3">
       <div
-        scColorPickerNext
+        scColorPicker
         aria-label="Brand color"
         class="grid gap-3"
         [(value)]="color"
       >
-        <div scColorPickerNextArea aria-label="Color"></div>
-        <input scColorPickerNextSlider="hue" aria-label="Hue" />
+        <div scColorPickerArea aria-label="Color"></div>
+        <input scColorPickerSlider="hue" aria-label="Hue" />
         <div class="flex gap-2">
-          <span scColorPickerNextSwatch></span>
-          <input scColorPickerNextInput aria-label="Hex" />
+          <span scColorPickerSwatch></span>
+          <input scColorPickerInput aria-label="Hex" />
         </div>
       </div>
       <p class="text-muted-foreground font-mono text-xs" data-testid="picked">
@@ -40,6 +40,6 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ColorPickerNextUsageDemo {
+export class ColorPickerUsageDemo {
   private readonly color = signal('#0ea5e9');
 }

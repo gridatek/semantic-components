@@ -1,52 +1,47 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { CommitColorPickerNextDemo } from './commit-color-picker-next-demo';
+import { CommitColorPickerDemo } from './commit-color-picker-demo';
 
 @Component({
-  selector: 'app-commit-color-picker-next-demo-container',
-  imports: [DemoContainer, CommitColorPickerNextDemo],
+  selector: 'app-commit-color-picker-demo-container',
+  imports: [DemoContainer, CommitColorPickerDemo],
   template: `
     <app-demo-container
       title="Commit"
       [code]="code"
-      demoUrl="/demos/color-picker-next/commit-color-picker-next-demo"
+      demoUrl="/demos/color-picker/commit-color-picker-demo"
     >
-      <app-commit-color-picker-next-demo />
+      <app-commit-color-picker-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CommitColorPickerNextDemoContainer {
+export class CommitColorPickerDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  ScColorPickerNext,
-  ScColorPickerNextArea,
-  ScColorPickerNextSlider,
+  ScColorPicker,
+  ScColorPickerArea,
+  ScColorPickerSlider,
 } from '@semantic-components/ui';
 
 /** [(value)] follows every step; (valueCommit) once a change finishes — to save. setColor() from outside. */
 @Component({
-  selector: 'app-commit-color-picker-next-demo',
-  imports: [
-    ScButton,
-    ScColorPickerNext,
-    ScColorPickerNextArea,
-    ScColorPickerNextSlider,
-  ],
+  selector: 'app-commit-color-picker-demo',
+  imports: [ScButton, ScColorPicker, ScColorPickerArea, ScColorPickerSlider],
   template: \`
     <div class="grid w-64 gap-3">
       <div
-        scColorPickerNext
-        #picker="scColorPickerNext"
+        scColorPicker
+        #picker="scColorPicker"
         aria-label="Theme color"
         class="grid gap-3"
         [(value)]="color"
         (valueCommit)="saved.set($event)"
       >
-        <div scColorPickerNextArea aria-label="Color"></div>
-        <input scColorPickerNextSlider="hue" aria-label="Hue" />
+        <div scColorPickerArea aria-label="Color"></div>
+        <input scColorPickerSlider="hue" aria-label="Hue" />
       </div>
       <button
         scButton
@@ -67,7 +62,7 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CommitColorPickerNextDemo {
+export class CommitColorPickerDemo {
   private readonly color = signal('#f97316');
   private readonly saved = signal('—');
 }`;

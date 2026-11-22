@@ -1,38 +1,38 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScColorPickerNext,
-  ScColorPickerNextArea,
-  ScColorPickerNextInput,
-  ScColorPickerNextSlider,
-  ScColorPickerNextSwatch,
+  ScColorPicker,
+  ScColorPickerArea,
+  ScColorPickerInput,
+  ScColorPickerSlider,
+  ScColorPickerSwatch,
 } from '@semantic-components/ui';
 
 /** space="oklch", gamut="p3": chroma × lightness at the hue, wide colours held — past P3, the nearest it holds (data-out-of-gamut while dragging). */
 @Component({
-  selector: 'app-oklch-color-picker-next-demo',
+  selector: 'app-oklch-color-picker-demo',
   imports: [
-    ScColorPickerNext,
-    ScColorPickerNextArea,
-    ScColorPickerNextInput,
-    ScColorPickerNextSlider,
-    ScColorPickerNextSwatch,
+    ScColorPicker,
+    ScColorPickerArea,
+    ScColorPickerInput,
+    ScColorPickerSlider,
+    ScColorPickerSwatch,
   ],
   template: `
     <div class="grid w-64 gap-3">
       <div
-        scColorPickerNext
+        scColorPicker
         space="oklch"
         gamut="p3"
         aria-label="Color"
         class="grid gap-3"
         [(value)]="color"
       >
-        <div scColorPickerNextArea aria-label="Chroma and lightness"></div>
-        <input scColorPickerNextSlider="hue" aria-label="Hue" />
-        <input scColorPickerNextSlider="alpha" aria-label="Opacity" />
+        <div scColorPickerArea aria-label="Chroma and lightness"></div>
+        <input scColorPickerSlider="hue" aria-label="Hue" />
+        <input scColorPickerSlider="alpha" aria-label="Opacity" />
         <div class="flex gap-2">
-          <span scColorPickerNextSwatch></span>
-          <input scColorPickerNextInput aria-label="OKLCH" />
+          <span scColorPickerSwatch></span>
+          <input scColorPickerInput aria-label="OKLCH" />
         </div>
       </div>
       <p class="text-muted-foreground font-mono text-xs" data-testid="picked">
@@ -43,6 +43,6 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class OklchColorPickerNextDemo {
+export class OklchColorPickerDemo {
   private readonly color = signal('oklch(0.62 0.19 259)');
 }

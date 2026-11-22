@@ -1786,18 +1786,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/color-picker',
-    children: [
-      {
-        path: 'all-features-color-picker-demo',
-        loadComponent: () =>
-          import('../pages/docs/color-picker/demos/all-features-color-picker-demo').then(
-            (m) => m.AllFeaturesColorPickerDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/combobox',
     children: [
       {
@@ -6720,83 +6708,83 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/color-picker-next',
+    path: 'demos/color-picker',
     children: [
       {
-        path: 'all-features-color-picker-next-demo',
+        path: 'all-features-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/all-features-color-picker-next-demo').then(
-            (m) => m.AllFeaturesColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/all-features-color-picker-demo').then(
+            (m) => m.AllFeaturesColorPickerDemo,
           ),
       },
       {
-        path: 'color-picker-next-usage-demo',
+        path: 'color-picker-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/color-picker-next-usage-demo').then(
-            (m) => m.ColorPickerNextUsageDemo,
+          import('../pages/docs/color-picker/demos/color-picker-usage-demo').then(
+            (m) => m.ColorPickerUsageDemo,
           ),
       },
       {
-        path: 'spaces-color-picker-next-demo',
+        path: 'spaces-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/spaces-color-picker-next-demo').then(
-            (m) => m.SpacesColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/spaces-color-picker-demo').then(
+            (m) => m.SpacesColorPickerDemo,
           ),
       },
       {
-        path: 'oklch-color-picker-next-demo',
+        path: 'oklch-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/oklch-color-picker-next-demo').then(
-            (m) => m.OklchColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/oklch-color-picker-demo').then(
+            (m) => m.OklchColorPickerDemo,
           ),
       },
       {
-        path: 'presets-color-picker-next-demo',
+        path: 'presets-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/presets-color-picker-next-demo').then(
-            (m) => m.PresetsColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/presets-color-picker-demo').then(
+            (m) => m.PresetsColorPickerDemo,
           ),
       },
       {
-        path: 'popover-color-picker-next-demo',
+        path: 'popover-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/popover-color-picker-next-demo').then(
-            (m) => m.PopoverColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/popover-color-picker-demo').then(
+            (m) => m.PopoverColorPickerDemo,
           ),
       },
       {
-        path: 'disabled-color-picker-next-demo',
+        path: 'disabled-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/disabled-color-picker-next-demo').then(
-            (m) => m.DisabledColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/disabled-color-picker-demo').then(
+            (m) => m.DisabledColorPickerDemo,
           ),
       },
       {
-        path: 'read-only-color-picker-next-demo',
+        path: 'read-only-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/read-only-color-picker-next-demo').then(
-            (m) => m.ReadOnlyColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/read-only-color-picker-demo').then(
+            (m) => m.ReadOnlyColorPickerDemo,
           ),
       },
       {
-        path: 'commit-color-picker-next-demo',
+        path: 'commit-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/commit-color-picker-next-demo').then(
-            (m) => m.CommitColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/commit-color-picker-demo').then(
+            (m) => m.CommitColorPickerDemo,
           ),
       },
       {
-        path: 'form-color-picker-next-demo',
+        path: 'form-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/form-color-picker-next-demo').then(
-            (m) => m.FormColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/form-color-picker-demo').then(
+            (m) => m.FormColorPickerDemo,
           ),
       },
       {
-        path: 'rtl-color-picker-next-demo',
+        path: 'rtl-color-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/color-picker-next/demos/rtl-color-picker-next-demo').then(
-            (m) => m.RtlColorPickerNextDemo,
+          import('../pages/docs/color-picker/demos/rtl-color-picker-demo').then(
+            (m) => m.RtlColorPickerDemo,
           ),
       },
     ],

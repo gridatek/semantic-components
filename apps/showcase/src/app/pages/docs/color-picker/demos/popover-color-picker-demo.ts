@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
-  ScColorPickerNext,
-  ScColorPickerNextArea,
-  ScColorPickerNextInput,
-  ScColorPickerNextSlider,
+  ScColorPicker,
+  ScColorPickerArea,
+  ScColorPickerInput,
+  ScColorPickerSlider,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -13,13 +13,13 @@ import {
 
 /** In a popover: the trigger shows the colour; the picker inside edits it. */
 @Component({
-  selector: 'app-popover-color-picker-next-demo',
+  selector: 'app-popover-color-picker-demo',
   imports: [
     ScButton,
-    ScColorPickerNext,
-    ScColorPickerNextArea,
-    ScColorPickerNextInput,
-    ScColorPickerNextSlider,
+    ScColorPicker,
+    ScColorPickerArea,
+    ScColorPickerInput,
+    ScColorPickerSlider,
     ScPopover,
     ScPopoverPortal,
     ScPopoverProvider,
@@ -37,14 +37,14 @@ import {
       <ng-template scPopoverPortal>
         <div scPopover class="w-64">
           <div
-            scColorPickerNext
+            scColorPicker
             aria-label="Brand color"
             class="grid gap-3"
             [(value)]="color"
           >
-            <div scColorPickerNextArea aria-label="Color"></div>
-            <input scColorPickerNextSlider="hue" aria-label="Hue" />
-            <input scColorPickerNextInput aria-label="Hex" />
+            <div scColorPickerArea aria-label="Color"></div>
+            <input scColorPickerSlider="hue" aria-label="Hue" />
+            <input scColorPickerInput aria-label="Hex" />
           </div>
         </div>
       </ng-template>
@@ -53,6 +53,6 @@ import {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class PopoverColorPickerNextDemo {
+export class PopoverColorPickerDemo {
   private readonly color = signal('#8b5cf6');
 }
