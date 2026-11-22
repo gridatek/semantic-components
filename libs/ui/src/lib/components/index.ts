@@ -84,6 +84,7 @@ export * from './attachment';
 export * from './audio-player';
 export * from './bubble';
 export * from './color-picker';
+export * from './color-picker-next';
 export * from './compare';
 export * from './control-group';
 export * from './emoji-picker';

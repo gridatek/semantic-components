@@ -211,6 +211,15 @@
     "hidden": true
   },
   {
+    "name": "Color Picker Next",
+    "path": "color-picker-next",
+    "description": "A colour on an area, sliders, fields, presets and the screen — in HSV, HSL, sRGB or OKLCH, held to a gamut; a CSS colour, a form field.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms",
+    "hidden": true
+  },
+  {
     "name": "Combobox",
     "path": "combobox",
     "description": "A select to filter: an input over a list of options, one or several of which are its value.",

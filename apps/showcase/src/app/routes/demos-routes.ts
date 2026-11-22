@@ -6720,6 +6720,81 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/color-picker-next',
+    children: [
+      {
+        path: 'color-picker-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/color-picker-next-usage-demo').then(
+            (m) => m.ColorPickerNextUsageDemo,
+          ),
+      },
+      {
+        path: 'spaces-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/spaces-color-picker-next-demo').then(
+            (m) => m.SpacesColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'oklch-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/oklch-color-picker-next-demo').then(
+            (m) => m.OklchColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'presets-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/presets-color-picker-next-demo').then(
+            (m) => m.PresetsColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'popover-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/popover-color-picker-next-demo').then(
+            (m) => m.PopoverColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/disabled-color-picker-next-demo').then(
+            (m) => m.DisabledColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'read-only-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/read-only-color-picker-next-demo').then(
+            (m) => m.ReadOnlyColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'commit-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/commit-color-picker-next-demo').then(
+            (m) => m.CommitColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'form-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/form-color-picker-next-demo').then(
+            (m) => m.FormColorPickerNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/rtl-color-picker-next-demo').then(
+            (m) => m.RtlColorPickerNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/time-clock',
     children: [
       {
