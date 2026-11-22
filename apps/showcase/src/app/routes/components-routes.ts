@@ -314,6 +314,11 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/field/field-page'),
       },
       {
+        path: 'file-input',
+        title: 'File Input - Semantic Components',
+        loadComponent: () => import('../pages/docs/file-input/file-input-page'),
+      },
+      {
         path: 'file-upload',
         title: 'File Upload - Semantic Components',
         loadComponent: () =>

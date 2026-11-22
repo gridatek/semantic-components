@@ -25,6 +25,7 @@ export * from './dialog';
 export * from './drawer';
 export * from './empty';
 export * from './field';
+export * from './file-input';
 export * from './file-upload';
 export * from './frame';
 export * from './input';

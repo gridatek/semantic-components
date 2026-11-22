@@ -3053,6 +3053,109 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/file-input',
+    children: [
+      {
+        path: 'file-input-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/file-input-usage-demo').then(
+            (m) => m.FileInputUsageDemo,
+          ),
+      },
+      {
+        path: 'upload-button-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/upload-button-file-input-demo').then(
+            (m) => m.UploadButtonFileInputDemo,
+          ),
+      },
+      {
+        path: 'accepted-types-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/accepted-types-file-input-demo').then(
+            (m) => m.AcceptedTypesFileInputDemo,
+          ),
+      },
+      {
+        path: 'limits-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/limits-file-input-demo').then(
+            (m) => m.LimitsFileInputDemo,
+          ),
+      },
+      {
+        path: 'one-file-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/one-file-file-input-demo').then(
+            (m) => m.OneFileFileInputDemo,
+          ),
+      },
+      {
+        path: 'validation-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/validation-file-input-demo').then(
+            (m) => m.ValidationFileInputDemo,
+          ),
+      },
+      {
+        path: 'previews-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/previews-file-input-demo').then(
+            (m) => m.PreviewsFileInputDemo,
+          ),
+      },
+      {
+        path: 'uploading-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/uploading-file-input-demo').then(
+            (m) => m.UploadingFileInputDemo,
+          ),
+      },
+      {
+        path: 'attachments-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/attachments-file-input-demo').then(
+            (m) => m.AttachmentsFileInputDemo,
+          ),
+      },
+      {
+        path: 'page-drop-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/page-drop-file-input-demo').then(
+            (m) => m.PageDropFileInputDemo,
+          ),
+      },
+      {
+        path: 'folders-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/folders-file-input-demo').then(
+            (m) => m.FoldersFileInputDemo,
+          ),
+      },
+      {
+        path: 'camera-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/camera-file-input-demo').then(
+            (m) => m.CameraFileInputDemo,
+          ),
+      },
+      {
+        path: 'form-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/form-file-input-demo').then(
+            (m) => m.FormFileInputDemo,
+          ),
+      },
+      {
+        path: 'rtl-file-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/file-input/demos/rtl-file-input-demo').then(
+            (m) => m.RtlFileInputDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/file-upload',
     children: [
       {
