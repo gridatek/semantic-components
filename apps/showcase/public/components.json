@@ -562,6 +562,15 @@
     "hidden": true
   },
   {
+    "name": "Masonry Grid Next",
+    "path": "masonry-grid-next",
+    "description": "Items of any height in columns by width, the source order kept: the shortest column or in turn, spans, gaps from your classes, a plain grid before measuring; native where possible.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Layout",
+    "hidden": true
+  },
+  {
     "name": "Media Player",
     "path": "media-player",
     "description": "A video or audio player: controls as parts that fit the player’s width, state two ways, captions, chapters, keyboard shortcuts.",

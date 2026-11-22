@@ -3862,6 +3862,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/masonry-grid-next',
+    children: [
+      {
+        path: 'masonry-grid-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/masonry-grid-next/demos/masonry-grid-next-usage-demo').then(
+            (m) => m.MasonryGridNextUsageDemo,
+          ),
+      },
+      {
+        path: 'cards-masonry-grid-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/masonry-grid-next/demos/cards-masonry-grid-next-demo').then(
+            (m) => m.CardsMasonryGridNextDemo,
+          ),
+      },
+      {
+        path: 'order-masonry-grid-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/masonry-grid-next/demos/order-masonry-grid-next-demo').then(
+            (m) => m.OrderMasonryGridNextDemo,
+          ),
+      },
+      {
+        path: 'more-masonry-grid-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/masonry-grid-next/demos/more-masonry-grid-next-demo').then(
+            (m) => m.MoreMasonryGridNextDemo,
+          ),
+      },
+      {
+        path: 'columns-masonry-grid-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/masonry-grid-next/demos/columns-masonry-grid-next-demo').then(
+            (m) => m.ColumnsMasonryGridNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-masonry-grid-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/masonry-grid-next/demos/rtl-masonry-grid-next-demo').then(
+            (m) => m.RtlMasonryGridNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/masonry-grid',
     children: [
       {
