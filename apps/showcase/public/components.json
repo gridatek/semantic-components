@@ -1193,5 +1193,13 @@
     "library": "ui",
     "category": "Advanced",
     "hidden": true
+  },
+  {
+    "name": "Waterfall",
+    "path": "waterfall",
+    "description": "Spans — a page’s requests, a trace — as bars on a shared time axis; a span opens on those it started. A tree grid.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
   }
 ]

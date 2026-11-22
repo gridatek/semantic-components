@@ -647,6 +647,11 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/preferences/preferences-page'),
       },
       {
+        path: 'waterfall',
+        title: 'Waterfall - Semantic Components',
+        loadComponent: () => import('../pages/docs/waterfall/waterfall-page'),
+      },
+      {
         path: 'token-input',
         title: 'Token Input - Semantic Components',
         loadComponent: () =>

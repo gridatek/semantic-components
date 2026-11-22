@@ -79,6 +79,7 @@ export * from './tooltip';
 export * from './tree';
 export * from './trigger-menu';
 export * from './typeset';
+export * from './waterfall';
 export * from './attachment';
 export * from './audio-player';
 export * from './bubble';

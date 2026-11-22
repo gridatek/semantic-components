@@ -6680,6 +6680,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/waterfall',
+    children: [
+      {
+        path: 'waterfall-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/waterfall/demos/waterfall-usage-demo').then(
+            (m) => m.WaterfallUsageDemo,
+          ),
+      },
+      {
+        path: 'nested-waterfall-demo',
+        loadComponent: () =>
+          import('../pages/docs/waterfall/demos/nested-waterfall-demo').then(
+            (m) => m.NestedWaterfallDemo,
+          ),
+      },
+      {
+        path: 'zoom-waterfall-demo',
+        loadComponent: () =>
+          import('../pages/docs/waterfall/demos/zoom-waterfall-demo').then(
+            (m) => m.ZoomWaterfallDemo,
+          ),
+      },
+      {
+        path: 'large-waterfall-demo',
+        loadComponent: () =>
+          import('../pages/docs/waterfall/demos/large-waterfall-demo').then(
+            (m) => m.LargeWaterfallDemo,
+          ),
+      },
+      {
+        path: 'rtl-waterfall-demo',
+        loadComponent: () =>
+          import('../pages/docs/waterfall/demos/rtl-waterfall-demo').then(
+            (m) => m.RtlWaterfallDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/time-clock',
     children: [
       {

@@ -74,6 +74,7 @@ import { toggle } from './toggle';
 import { toggleGroup } from './toggle-group';
 import { tooltip } from './tooltip';
 import { trace } from './trace';
+import { waterfall } from './waterfall';
 
 export const maia: ScStyle = {
   accordion,
@@ -144,6 +145,7 @@ export const maia: ScStyle = {
   fileInput,
   listbox,
   segmentedControl,
+  waterfall,
   timePicker,
   timeline,
   toast,

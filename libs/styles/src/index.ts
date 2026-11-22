@@ -509,6 +509,12 @@ export interface ScSegmentedInputStyles {
   segment: string;
 }
 
+/** A waterfall's bar, from style to style — ours (shadcn has none); its rows are the table's. */
+export interface ScWaterfallStyles {
+  /** A span's bar: its corners, its colour. */
+  bar: string;
+}
+
 /**
  * A segmented control's parts, from style to style — ours (shadcn has none):
  * as the style's tabs.
@@ -803,6 +809,7 @@ export interface ScStyle {
   fileInput: ScFileInputStyles;
   listbox: ScListboxStyles;
   segmentedControl: ScSegmentedControlStyles;
+  waterfall: ScWaterfallStyles;
   timePicker: ScTimePickerStyles;
   /** A toggle's look (shadcn's toggleVariants): a button that stays pressed. */
   timeline: ScTimelineStyles;
