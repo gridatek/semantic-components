@@ -21,6 +21,11 @@
             "input": "apps/showcase/public"
           },
           {
+            "glob": "*.svg",
+            "input": "node_modules/country-flag-icons/3x2",
+            "output": "flags"
+          },
+          {
             "glob": "zxing_reader.wasm",
             "input": "node_modules/zxing-wasm/dist/reader",
             "output": "zxing"

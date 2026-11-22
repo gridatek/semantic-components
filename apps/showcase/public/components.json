@@ -717,6 +717,15 @@
     "hidden": true
   },
   {
+    "name": "Phone Input Next",
+    "path": "phone-input-next",
+    "description": "An international phone number: a searchable country picker, the number formatted as you type, E.164 out; your own flags; a form field.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Forms",
+    "hidden": true
+  },
+  {
     "name": "Pie Chart",
     "path": "pie-chart",
     "description": "A series as slices of a whole, each in its category's color: a pie, a donut with your text in its center, rings.",
