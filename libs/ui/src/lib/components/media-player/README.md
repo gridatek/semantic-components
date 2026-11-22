@@ -1,6 +1,6 @@
 # Media Player
 
-Your `<video>` or `<audio>`, with controls as parts that fit the player's width — its state two ways, captions, chapters, a preview on the seek bar, keyboard shortcuts, and the system's media controls. The name and the loop and speed keys after Dice UI's Media Player; the small layout after Vidstack's. Built to replace the [Video Player](../video-player/README.md).
+Your `<video>` or `<audio>`, with controls as parts that fit the player's width — its state two ways, captions, chapters, a preview on the seek bar, keyboard shortcuts, and the system's media controls. The name and the loop and speed keys after Dice UI's Media Player; the small layout after Vidstack's. It replaced the Video Player (2026-11-22).
 
 ## Architecture
 
@@ -74,3 +74,7 @@ The style's `mediaPlayer` key: the frame (as its Card's: corners, ring, shadow),
 ## Not here
 
 Streaming (HLS, DASH: attach hls.js or shaka-player to the video), quality switching, a settings menu (your Menu with Rate buttons in it), thumbnails on the seek bar, ads, YouTube or Vimeo embeds, a playlist (the Audio Player's).
+
+## References
+
+What it took from Vidstack, Media Chrome and Dice UI, and what is still open: [docs/reference-libraries.md](../../../../../../docs/reference-libraries.md#media-player).

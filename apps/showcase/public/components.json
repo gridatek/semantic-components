@@ -576,8 +576,7 @@
     "description": "A video or audio player: controls as parts that fit the player’s width, state two ways, captions, chapters, keyboard shortcuts.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Menu",
@@ -1182,15 +1181,6 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Data Display",
-    "hidden": true
-  },
-  {
-    "name": "Video Player",
-    "path": "video-player",
-    "description": "A video player: controls as parts, state two ways, captions, chapters, seek preview, keyboard shortcuts.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Media",
     "hidden": true
   },
   {

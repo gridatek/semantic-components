@@ -584,7 +584,7 @@ Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shad
 - **A native range, styled by the `slider` preset key** (`root`, `track`, `thumb`): shadcn's classes on the browser's parts (`::-webkit-slider-runnable-track` / `::-moz-range-track`, `::-webkit-slider-thumb` / `::-moz-range-thumb`), hover, focus and active from the input; Chrome's thumb centred by the generator (`margin-block-start`).
 - **Sizes logical** (`block-*` thickness, `inline-*` along the track): `orientation="vertical"` is the native range turned (`writing-mode: vertical-lr`, `direction: rtl`), the same classes; `aria-orientation`.
 - **The range**: Firefox's `::-moz-range-progress`; on Chrome's track a fill up to the thumb's centre (shadcn's `thumbAlignment="edge"`): `thumb/2 + (100% - thumb) × value`. `var(--primary)`, so a section's colours apply.
-- **Its own `type="range"`**, as before: the markup needs none, and the audio and video players use it as a host directive (Checkbox and Switch do the same now: component-design-principles.md).
+- **Its own `type="range"`**, as before: the markup needs none, and the audio and media players use it as a host directive (Checkbox and Switch do the same now: component-design-principles.md).
 - **One thumb**: shadcn's Range and Multiple are left out (Range Slider is ours, in its turn).
 - **shadcn's examples**: Demo (the Usage), Controlled, Disabled, Vertical, RTL; ours kept: Form, Custom color.
 
@@ -1018,6 +1018,10 @@ none gives the bars a keyboard (Kibo's drag is mouse only).
 **Open — to follow them later:** link types other than finish-to-start,
 moving the followers, drawing links or tasks by drag.
 
+## Media Player
+
+Rewritten 2026-11-22 from the Video Player: the name, `<audio>` too, loop and the speed keys after Dice UI's Media Player; the layout after Vidstack and Media Chrome.
+
 | Library                                      | What to read                                                                                                                                                                                                                                                                                                                                                   |
 | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Vidstack](https://vidstack.io)              | The default layout ([docs](https://vidstack.io/docs/player/components/layouts/default-layout/), [source](https://github.com/vidstack/player/blob/main/packages/vidstack/src/elements/define/layouts/default/video-layout.ts)); when the controls show and hide ([source](https://github.com/vidstack/player/blob/main/packages/vidstack/src/core/controls.ts)) |
@@ -1025,8 +1029,10 @@ moving the followers, drawing links or tasks by drag.
 
 **Taken:**
 
-- **A small layout below 576px of the player's width** (Vidstack's breakpoint; Tailwind's `@xl` container size): captions at the top (`scVideoPlayerTop`), play in the middle (`scVideoPlayerCenter`), time, title and fullscreen at the bottom (`scVideoPlayerBar`), the seek bar at the bottom edge. Out of it: the skips, mute, the volume slider, the speeds, picture-in-picture. The parts do it themselves (`@container/video`), not the template.
-- **Before the first play** (Vidstack's start duration): the poster, play and the length only (`scVideoPlayerStartDuration`); the controls from the first play on.
+- **A small layout below 576px of the player's width** (Vidstack's breakpoint; Tailwind's `@xl` container size): play in the middle (a `scMediaPlayerPlay` outside the controls), time, captions and fullscreen in the bar, the seek bar at the bottom edge. Out of it: the skips, mute, the volume slider, picture-in-picture. The parts do it themselves, with no layout parts (Top, Center, Bar, Progress were the Video Player's).
+- **A medium step** (Media Chrome's medium layout): below 672px the speeds and loop go first.
+- **Dice UI's** loop (`R`), speed keys (`<` / `>`), picture-in-picture key (`P`), `<audio>` in the same player.
+- **Before the first play** (Vidstack's start duration): the poster, play and the length only (the length is your markup: `@if (!player.started())`); the controls from the first play on.
 - **The controls hide only while playing,** after a rest; paused, they stay (both).
 - **On a touch screen, a tap on the playing video shows or hides the controls** — it doesn't pause (Vidstack, and the phones' own players).
 - **Ended: Replay** in place of Play.
@@ -1038,4 +1044,3 @@ moving the followers, drawing links or tasks by drag.
 - **The hide delay: 2 s** (both); ours is 2.5 s.
 - **Keep the controls while the pointer rests on them** (Media Chrome: not hidden while hovered); ours hide unless one has focus.
 - **Hide when the pointer leaves the player** — an option in Vidstack (`hideOnMouseLeave`, off by default).
-- **A medium layout** (Media Chrome, 420–590px): the center controls and the bar together.

@@ -8375,32 +8375,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/video-player',
-    children: [
-      {
-        path: 'player-video-player-demo',
-        loadComponent: () =>
-          import('../pages/docs/video-player/demos/player-video-player-demo').then(
-            (m) => m.PlayerVideoPlayerDemo,
-          ),
-      },
-      {
-        path: 'minimal-video-player-demo',
-        loadComponent: () =>
-          import('../pages/docs/video-player/demos/minimal-video-player-demo').then(
-            (m) => m.MinimalVideoPlayerDemo,
-          ),
-      },
-      {
-        path: 'controlled-video-player-demo',
-        loadComponent: () =>
-          import('../pages/docs/video-player/demos/controlled-video-player-demo').then(
-            (m) => m.ControlledVideoPlayerDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/virtual-list',
     children: [
       {
