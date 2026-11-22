@@ -604,6 +604,14 @@
     "category": "Data Display"
   },
   {
+    "name": "Meter",
+    "path": "meter",
+    "description": "A measurement within a known range — storage used, a quota, a score: a bar filled to it, the value written in the app’s language.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Data Display"
+  },
+  {
     "name": "Multiselect",
     "path": "multiselect",
     "description": "Several values from a list, an array for Signal Forms: the Combobox with several values — chips for the chosen, a search for the list.",

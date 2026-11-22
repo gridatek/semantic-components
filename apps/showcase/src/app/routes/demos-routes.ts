@@ -6546,6 +6546,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/meter',
+    children: [
+      {
+        path: 'meter-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/meter/demos/meter-usage-demo').then(
+            (m) => m.MeterUsageDemo,
+          ),
+      },
+      {
+        path: 'bounds-meter-demo',
+        loadComponent: () =>
+          import('../pages/docs/meter/demos/bounds-meter-demo').then(
+            (m) => m.BoundsMeterDemo,
+          ),
+      },
+      {
+        path: 'format-meter-demo',
+        loadComponent: () =>
+          import('../pages/docs/meter/demos/format-meter-demo').then(
+            (m) => m.FormatMeterDemo,
+          ),
+      },
+      {
+        path: 'locale-meter-demo',
+        loadComponent: () =>
+          import('../pages/docs/meter/demos/locale-meter-demo').then(
+            (m) => m.LocaleMeterDemo,
+          ),
+      },
+      {
+        path: 'value-label-meter-demo',
+        loadComponent: () =>
+          import('../pages/docs/meter/demos/value-label-meter-demo').then(
+            (m) => m.ValueLabelMeterDemo,
+          ),
+      },
+      {
+        path: 'rtl-meter-demo',
+        loadComponent: () =>
+          import('../pages/docs/meter/demos/rtl-meter-demo').then(
+            (m) => m.RtlMeterDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/time-clock',
     children: [
       {

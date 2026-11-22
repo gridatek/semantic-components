@@ -35,6 +35,7 @@ export * from './kbd';
 export * from './label';
 export * from './link';
 export * from './listbox';
+export * from './meter';
 export * from './menu';
 export * from './menubar';
 export * from './native-select';
