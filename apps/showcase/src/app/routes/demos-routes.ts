@@ -6723,6 +6723,13 @@ export const demosRoutes: Route[] = [
     path: 'demos/color-picker-next',
     children: [
       {
+        path: 'all-features-color-picker-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/color-picker-next/demos/all-features-color-picker-next-demo').then(
+            (m) => m.AllFeaturesColorPickerNextDemo,
+          ),
+      },
+      {
         path: 'color-picker-next-usage-demo',
         loadComponent: () =>
           import('../pages/docs/color-picker-next/demos/color-picker-next-usage-demo').then(

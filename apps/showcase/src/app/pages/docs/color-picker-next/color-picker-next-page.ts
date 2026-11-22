@@ -18,6 +18,7 @@ import {
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { AllFeaturesColorPickerNextDemoContainer } from './demos/all-features-color-picker-next-demo-container';
 import { ColorPickerNextUsageDemoContainer } from './demos/color-picker-next-usage-demo-container';
 import { CommitColorPickerNextDemoContainer } from './demos/commit-color-picker-next-demo-container';
 import { DisabledColorPickerNextDemoContainer } from './demos/disabled-color-picker-next-demo-container';
@@ -47,6 +48,7 @@ import { SpacesColorPickerNextDemoContainer } from './demos/spaces-color-picker-
     TocHeading,
     ComponentBadges,
     ColorPickerNextUsageDemoContainer,
+    AllFeaturesColorPickerNextDemoContainer,
     SpacesColorPickerNextDemoContainer,
     OklchColorPickerNextDemoContainer,
     PresetsColorPickerNextDemoContainer,
@@ -178,6 +180,7 @@ import { SpacesColorPickerNextDemoContainer } from './demos/spaces-color-picker-
 
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
+        <app-all-features-color-picker-next-demo-container />
         <app-spaces-color-picker-next-demo-container />
         <app-oklch-color-picker-next-demo-container />
         <app-presets-color-picker-next-demo-container />

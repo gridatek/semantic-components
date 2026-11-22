@@ -178,3 +178,26 @@ test('In a popover: the trigger shows the colour the picker edits', async ({
     page.getByRole('button', { name: 'Brand color' }).locator('span').first(),
   ).toHaveAttribute('style', /rgb\(255, 0, 0\)|#ff0000/);
 });
+
+test('All features: the format select writes the colour again', async ({
+  page,
+}) => {
+  await open(page, 'all-features-color-picker-next');
+  await expect(picked(page)).toHaveText('#0ea5e9');
+  const format = page.getByRole('combobox', { name: 'Format' });
+  await format.selectOption('hsl');
+  await expect(picked(page)).toHaveText(/hsl\(198\.\d+ 88\.\d+% 48\.\d+%\)/);
+  await format.selectOption('oklch');
+  await expect(picked(page)).toHaveText(/oklch\(0\.68\d* 0\.14\d* 237\.\d+\)/);
+  await format.selectOption('rgb');
+  await expect(picked(page)).toHaveText('rgb(14 165 233)');
+  // A preset: written in the format chosen.
+  await page.getByRole('radio', { name: 'Rose' }).click();
+  await expect(picked(page)).toHaveText('rgb(225 29 72)');
+  // A name typed: taken on Enter, in the format.
+  const field = page.getByRole('textbox', { name: 'Color value' });
+  await field.fill('rebeccapurple');
+  await field.press('Enter');
+  await expect(picked(page)).toHaveText('rgb(102 51 153)');
+  await expect(field).toHaveValue('rgb(102 51 153)');
+});
