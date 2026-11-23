@@ -15,15 +15,17 @@ test.describe('Carousel in its style', () => {
     }
   });
 
-  test(`the dots have the style's corners, their marks too`, async ({
+  test(`the indicators have the style's corners, their marks too`, async ({
     page,
   }) => {
-    const corners = currentStyle().carousel.dot.split(/\s+/).filter(Boolean);
-    await page.goto('/demos/carousel/dots-carousel-demo');
+    const corners = currentStyle()
+      .carousel.indicator.split(/\s+/)
+      .filter(Boolean);
+    await page.goto('/demos/carousel/indicators-carousel-demo');
     await expectClasses(
-      page.getByRole('button', { name: 'Slide 1', exact: true }),
+      page.getByRole('tab', { name: 'Slide 1', exact: true }),
       [...corners, ...corners.map((c) => `after:${c}`)].join(' '),
-      'dot',
+      'indicator',
     );
   });
 });

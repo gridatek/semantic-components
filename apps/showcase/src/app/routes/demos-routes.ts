@@ -1243,109 +1243,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/carousel-new',
-    children: [
-      {
-        path: 'carousel-new-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/carousel-new-usage-demo').then(
-            (m) => m.CarouselNewUsageDemo,
-          ),
-      },
-      {
-        path: 'sizes-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/sizes-carousel-new-demo').then(
-            (m) => m.SizesCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'spacing-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/spacing-carousel-new-demo').then(
-            (m) => m.SpacingCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'orientation-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/orientation-carousel-new-demo').then(
-            (m) => m.OrientationCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'loop-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/loop-carousel-new-demo').then(
-            (m) => m.LoopCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'align-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/align-carousel-new-demo').then(
-            (m) => m.AlignCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'pages-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/pages-carousel-new-demo').then(
-            (m) => m.PagesCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'indicators-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/indicators-carousel-new-demo').then(
-            (m) => m.IndicatorsCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'thumbnails-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/thumbnails-carousel-new-demo').then(
-            (m) => m.ThumbnailsCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'drag-free-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/drag-free-carousel-new-demo').then(
-            (m) => m.DragFreeCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'autoplay-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/autoplay-carousel-new-demo').then(
-            (m) => m.AutoplayCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'progress-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/progress-carousel-new-demo').then(
-            (m) => m.ProgressCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'controlled-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/controlled-carousel-new-demo').then(
-            (m) => m.ControlledCarouselNewDemo,
-          ),
-      },
-      {
-        path: 'rtl-carousel-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/carousel-new/demos/rtl-carousel-new-demo').then(
-            (m) => m.RtlCarouselNewDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/carousel',
     children: [
       {
@@ -1384,10 +1281,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'dots-carousel-demo',
+        path: 'indicators-carousel-demo',
         loadComponent: () =>
-          import('../pages/docs/carousel/demos/dots-carousel-demo').then(
-            (m) => m.DotsCarouselDemo,
+          import('../pages/docs/carousel/demos/indicators-carousel-demo').then(
+            (m) => m.IndicatorsCarouselDemo,
           ),
       },
       {
@@ -1531,6 +1428,32 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/bar-chart/demos/rtl-bar-chart-demo').then(
             (m) => m.RtlBarChartDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/lightbox',
+    children: [
+      {
+        path: 'lightbox-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/lightbox/demos/lightbox-usage-demo').then(
+            (m) => m.LightboxUsageDemo,
+          ),
+      },
+      {
+        path: 'article-lightbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/lightbox/demos/article-lightbox-demo').then(
+            (m) => m.ArticleLightboxDemo,
+          ),
+      },
+      {
+        path: 'rtl-lightbox-demo',
+        loadComponent: () =>
+          import('../pages/docs/lightbox/demos/rtl-lightbox-demo').then(
+            (m) => m.RtlLightboxDemo,
           ),
       },
     ],
@@ -3894,65 +3817,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/link/demos/rtl-link-demo').then(
             (m) => m.RtlLinkDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/lightbox-new',
-    children: [
-      {
-        path: 'lightbox-new-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox-new/demos/lightbox-new-usage-demo').then(
-            (m) => m.LightboxNewUsageDemo,
-          ),
-      },
-      {
-        path: 'article-lightbox-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox-new/demos/article-lightbox-new-demo').then(
-            (m) => m.ArticleLightboxNewDemo,
-          ),
-      },
-      {
-        path: 'rtl-lightbox-new-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox-new/demos/rtl-lightbox-new-demo').then(
-            (m) => m.RtlLightboxNewDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/lightbox',
-    children: [
-      {
-        path: 'gallery-lightbox-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox/demos/gallery-lightbox-demo').then(
-            (m) => m.GalleryLightboxDemo,
-          ),
-      },
-      {
-        path: 'zoom-lightbox-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox/demos/zoom-lightbox-demo').then(
-            (m) => m.ZoomLightboxDemo,
-          ),
-      },
-      {
-        path: 'article-lightbox-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox/demos/article-lightbox-demo').then(
-            (m) => m.ArticleLightboxDemo,
-          ),
-      },
-      {
-        path: 'controlled-lightbox-demo',
-        loadComponent: () =>
-          import('../pages/docs/lightbox/demos/controlled-lightbox-demo').then(
-            (m) => m.ControlledLightboxDemo,
           ),
       },
     ],

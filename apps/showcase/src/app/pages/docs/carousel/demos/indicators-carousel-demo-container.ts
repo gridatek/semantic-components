@@ -1,48 +1,52 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { DragFreeCarouselNewDemo } from './drag-free-carousel-new-demo';
+import { IndicatorsCarouselDemo } from './indicators-carousel-demo';
 
 @Component({
-  selector: 'app-drag-free-carousel-new-demo-container',
-  imports: [DemoContainer, DragFreeCarouselNewDemo],
+  selector: 'app-indicators-carousel-demo-container',
+  imports: [DemoContainer, IndicatorsCarouselDemo],
   template: `
     <app-demo-container
-      title="Drag free"
+      title="Indicators"
+      demoUrl="/demos/carousel/indicators-carousel-demo"
       [code]="code"
-      demoUrl="/demos/carousel-new/drag-free-carousel-new-demo"
     >
-      <app-drag-free-carousel-new-demo />
+      <app-indicators-carousel-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DragFreeCarouselNewDemoContainer {
+export class IndicatorsCarouselDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
-  ScCarouselNew,
-  ScCarouselNewItem,
-  ScCarouselNewNext,
-  ScCarouselNewPrevious,
-  ScCarouselNewTrack,
-  ScCarouselNewViewport,
+  ScCarousel,
+  ScCarouselIndicator,
+  ScCarouselIndicators,
+  ScCarouselItem,
+  ScCarouselNext,
+  ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
 } from '@semantic-components/ui/carousel';
 import {
   SiChevronLeftIcon,
   SiChevronRightIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Drag free: a swipe coasts to wherever it stops, no snapping; the nearest page becomes the current one. */
+/** Indicators: a tablist, a tab per position (positions(), from exportAs). A click goes there; ← → among them move it, Home and End to the ends; one tab stop. */
 @Component({
-  selector: 'app-drag-free-carousel-new-demo',
+  selector: 'app-indicators-carousel-demo',
   imports: [
-    ScCarouselNew,
-    ScCarouselNewItem,
-    ScCarouselNewNext,
-    ScCarouselNewPrevious,
-    ScCarouselNewTrack,
-    ScCarouselNewViewport,
+    ScCarousel,
+    ScCarouselIndicator,
+    ScCarouselIndicators,
+    ScCarouselItem,
+    ScCarouselNext,
+    ScCarouselPrevious,
+    ScCarouselTrack,
+    ScCarouselViewport,
     ScCard,
     ScCardBody,
     SiChevronLeftIcon,
@@ -50,19 +54,18 @@ import {
   ],
   template: \`
     <div
-      scCarouselNew
-      [dragFree]="true"
+      scCarousel
+      #carousel="scCarousel"
       aria-roledescription="carousel"
-      aria-label="Numbers, drag free"
-      class="w-full max-w-[12rem] sm:max-w-sm"
+      aria-label="Numbers, with indicators"
+      class="w-full max-w-[12rem] sm:max-w-xs"
     >
-      <div scCarouselNewViewport>
-        <div scCarouselNewTrack>
+      <div scCarouselViewport>
+        <div scCarouselTrack>
           @for (n of slides; track n) {
             <div
-              scCarouselNewItem
-              #slide="scCarouselNewItem"
-              class="basis-1/2 sm:basis-1/3"
+              scCarouselItem
+              #slide="scCarouselItem"
               aria-roledescription="slide"
               [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
             >
@@ -72,7 +75,7 @@ import {
                     scCardBody
                     class="flex aspect-square items-center justify-center p-6"
                   >
-                    <span class="text-2xl font-semibold">{{ n }}</span>
+                    <span class="text-4xl font-semibold">{{ n }}</span>
                   </div>
                 </div>
               </div>
@@ -80,20 +83,27 @@ import {
           }
         </div>
       </div>
-      <button scCarouselNewPrevious>
+      <button scCarouselPrevious>
         <svg siChevronLeftIcon></svg>
         <span class="sr-only">Previous slide</span>
       </button>
-      <button scCarouselNewNext>
+      <button scCarouselNext>
         <svg siChevronRightIcon></svg>
         <span class="sr-only">Next slide</span>
       </button>
+      <div scCarouselIndicators aria-label="Choose a slide" class="pt-2">
+        @for (i of carousel.positions(); track i) {
+          <button scCarouselIndicator [index]="i">
+            <span class="sr-only">Slide {{ i + 1 }}</span>
+          </button>
+        }
+      </div>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class DragFreeCarouselNewDemo {
-  private readonly slides = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+export class IndicatorsCarouselDemo {
+  private readonly slides = [1, 2, 3, 4, 5];
 }`;
 }

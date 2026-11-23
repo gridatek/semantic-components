@@ -63,7 +63,7 @@ export class ScCarousel {
   readonly api = this.apiSignal.asReadonly();
   /** How many positions it stops at (with several slides in view, fewer than the slides). */
   readonly count = signal(0);
-  /** Its positions, 0 … count − 1: one scCarouselDot each. */
+  /** Its positions, 0 … count − 1: one scCarouselIndicator each. */
   readonly positions = computed(() =>
     Array.from({ length: this.count() }, (_, i) => i),
   );
@@ -144,6 +144,8 @@ export class ScCarousel {
   }
 
   private onKeydown(event: KeyboardEvent): void {
+    // Handled inside (the indicators, a carousel within): not again.
+    if (event.defaultPrevented) return;
     if (event.altKey || event.ctrlKey || event.metaKey) return;
     let step: 1 | -1 | 0 = 0;
     if (this.orientation() === 'vertical') {

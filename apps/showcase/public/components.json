@@ -144,15 +144,6 @@
     "category": "Media"
   },
   {
-    "name": "Carousel New",
-    "path": "carousel-new",
-    "description": "A slideshow for cycling through elements: swipes, keys, indicators, autoplay with a play toggle.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Media",
-    "hidden": true
-  },
-  {
     "name": "Chart",
     "path": "chart",
     "description": "The parts every chart is made of, as shadcn/ui's: rows and series' names and colors, a plot with its grid, axes and cursor, a tooltip and a legend.",
@@ -513,20 +504,10 @@
   {
     "name": "Lightbox",
     "path": "lightbox",
-    "description": "A gallery of links opened in the native dialog, the thumbnail morphing in; zoom, pan, swipes, keys.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Media",
-    "hidden": true
-  },
-  {
-    "name": "Lightbox New",
-    "path": "lightbox-new",
     "description": "A recipe: photos opened large in a Dialog, a Carousel of them all — swipes, keys, a counter, thumbnails. No component of its own.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Recipes",
-    "hidden": true
+    "category": "Recipes"
   },
   {
     "name": "Line Chart",

@@ -7,7 +7,7 @@ import { ArticleLightboxDemo } from './article-lightbox-demo';
   imports: [DemoContainer, ArticleLightboxDemo],
   template: `
     <app-demo-container
-      title="In an article"
+      title="Article"
       [code]="code"
       demoUrl="/demos/lightbox/article-lightbox-demo"
     >
@@ -18,66 +18,254 @@ import { ArticleLightboxDemo } from './article-lightbox-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ArticleLightboxDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+  private readonly code = `import { A11yModule } from '@angular/cdk/a11y';
+import { NgOptimizedImage } from '@angular/common';
 import {
-  ScLightbox,
-  ScLightboxClose,
-  ScLightboxDialog,
-  ScLightboxImage,
-  ScLightboxTrigger,
+  Component,
+  ElementRef,
+  ViewEncapsulation,
+  afterRenderEffect,
+  signal,
+  viewChildren,
+} from '@angular/core';
+import {
+  ScAspectRatio,
+  ScDialog,
+  ScDialogClose,
+  ScDialogHeader,
+  ScDialogPortal,
+  ScDialogProvider,
+  ScDialogTitle,
+  ScFrame,
 } from '@semantic-components/ui';
-import { SiXIcon } from '@semantic-icons/lucide-icons';
+import {
+  ScCarousel,
+  ScCarouselItem,
+  ScCarouselNext,
+  ScCarouselPrevious,
+  ScCarouselTrack,
+  ScCarouselViewport,
+} from '@semantic-components/ui/carousel';
+import {
+  SiChevronLeftIcon,
+  SiChevronRightIcon,
+  SiXIcon,
+} from '@semantic-icons/lucide-icons';
 
-/** One image in the text, opened in place — no thumbnails, no counter needed. */
+/** Photos in an article: each opens the dialog at its own, and the carousel goes through all of the article’s. */
 @Component({
   selector: 'app-article-lightbox-demo',
   imports: [
-    ScLightbox,
-    ScLightboxTrigger,
-    ScLightboxDialog,
-    ScLightboxImage,
-    ScLightboxClose,
+    A11yModule,
+    NgOptimizedImage,
+    ScAspectRatio,
+    ScDialog,
+    ScDialogClose,
+    ScDialogHeader,
+    ScDialogPortal,
+    ScDialogProvider,
+    ScDialogTitle,
+    ScFrame,
+    ScCarousel,
+    ScCarouselItem,
+    ScCarouselNext,
+    ScCarouselPrevious,
+    ScCarouselTrack,
+    ScCarouselViewport,
+    SiChevronLeftIcon,
+    SiChevronRightIcon,
     SiXIcon,
   ],
   template: \`
-    <article scLightbox class="max-w-prose space-y-3 text-sm leading-relaxed">
-      <p>
-        The café opens at eight. By nine the long table fills with people who
-        came for one coffee and stay for three.
-      </p>
-      <a
-        scLightboxTrigger
-        href="/images/gallery/cafe.jpg"
-        class="float-end ms-4 mb-2 w-48"
-      >
-        <img
-          src="/images/gallery/cafe-thumb.jpg"
-          alt="A wooden table in a quiet café"
-          width="400"
-          height="267"
-          class="aspect-[3/2] w-full object-cover"
-        />
-      </a>
-      <p>
-        Light comes in from the street side, so the best seats are by the
-        window, where the wood is warm by noon. Nobody hurries; the owner knows
-        most people by their order.
-      </p>
-      <dialog scLightboxDialog aria-label="The café">
-        <div class="flex justify-end p-2">
-          <button scLightboxClose>
+    <div scDialogProvider [(open)]="open">
+      <article class="w-full max-w-prose text-sm leading-relaxed">
+        <button
+          type="button"
+          scFrame
+          size="sm"
+          class="focus-visible:ring-ring/50 float-end ms-4 mb-2 block w-40 overflow-hidden outline-none focus-visible:ring-[3px]"
+          (click)="show(0)"
+        >
+          <div scAspectRatio [ratio]="3 / 2">
+            <img
+              [ngSrc]="photos[0].thumb"
+              fill
+              priority
+              sizes="(min-width: 640px) 10vw, 30vw"
+              [alt]="photos[0].alt"
+              class="object-cover"
+            />
+          </div>
+        </button>
+        <p class="mb-3">
+          The café opens at eight. By nine the long table fills with people who
+          came for one coffee and stay for three. Light comes in from the
+          street side, so the best seats are by the window.
+        </p>
+        <button
+          type="button"
+          scFrame
+          size="sm"
+          class="focus-visible:ring-ring/50 float-start me-4 mb-2 block w-40 overflow-hidden outline-none focus-visible:ring-[3px]"
+          (click)="show(1)"
+        >
+          <div scAspectRatio [ratio]="3 / 2">
+            <img
+              [ngSrc]="photos[1].thumb"
+              fill
+              sizes="(min-width: 640px) 10vw, 30vw"
+              [alt]="photos[1].alt"
+              class="object-cover"
+            />
+          </div>
+        </button>
+        <p class="mb-3">
+          In the afternoon we walked down to the coast, where the rocks run
+          out into the water and the wind never quite stops.
+        </p>
+        <button
+          type="button"
+          scFrame
+          size="sm"
+          class="focus-visible:ring-ring/50 float-end ms-4 mb-2 block w-40 overflow-hidden outline-none focus-visible:ring-[3px]"
+          (click)="show(2)"
+        >
+          <div scAspectRatio [ratio]="3 / 2">
+            <img
+              [ngSrc]="photos[2].thumb"
+              fill
+              sizes="(min-width: 640px) 10vw, 30vw"
+              [alt]="photos[2].alt"
+              class="object-cover"
+            />
+          </div>
+        </button>
+        <p>
+          The way back went through the forest: an hour of shade, a path soft
+          with needles, and nobody else on it.
+        </p>
+      </article>
+      <ng-template scDialogPortal>
+        <div scDialog class="sm:max-w-3xl">
+          <button scDialogClose>
             <svg siXIcon></svg>
             <span class="sr-only">Close</span>
           </button>
+          <div scDialogHeader>
+            <h2 scDialogTitle>A day out</h2>
+          </div>
+          <div
+            scCarousel
+            [(activeIndex)]="index"
+            aria-roledescription="carousel"
+            aria-label="Photos"
+            class="grid gap-3"
+          >
+            <div class="relative">
+              <div scCarouselViewport cdkFocusInitial>
+                <div scCarouselTrack>
+                  @for (photo of photos; track photo.src) {
+                    <div
+                      scCarouselItem
+                      #slide="scCarouselItem"
+                      aria-roledescription="slide"
+                      [attr.aria-label]="
+                        slide.index() + 1 + ' of ' + slide.count()
+                      "
+                    >
+                      <div scAspectRatio scFrame [ratio]="3 / 2">
+                        <img
+                          [ngSrc]="photo.src"
+                          fill
+                          sizes="(min-width: 640px) 50vw, 100vw"
+                          [alt]="photo.alt"
+                          class="object-cover"
+                        />
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+              <button scCarouselPrevious variant="secondary" class="start-2">
+                <svg siChevronLeftIcon></svg>
+                <span class="sr-only">Previous photo</span>
+              </button>
+              <button scCarouselNext variant="secondary" class="end-2">
+                <svg siChevronRightIcon></svg>
+                <span class="sr-only">Next photo</span>
+              </button>
+            </div>
+            <p class="text-muted-foreground flex justify-between gap-4 text-sm">
+              <span>{{ photos[index()].alt }}</span>
+              <span class="tabular-nums" aria-hidden="true">
+                {{ index() + 1 }} / {{ photos.length }}
+              </span>
+            </p>
+            <div
+              role="group"
+              aria-label="Thumbnails"
+              class="flex gap-2 overflow-x-auto p-1"
+            >
+              @for (photo of photos; track photo.src; let i = $index) {
+                <button
+                  #thumb
+                  type="button"
+                  scFrame
+                  size="sm"
+                  class="focus-visible:ring-ring/50 block w-16 shrink-0 overflow-hidden outline-none focus-visible:ring-[3px]"
+                  [class.opacity-50]="index() !== i"
+                  [attr.aria-current]="index() === i || null"
+                  (click)="index.set(i)"
+                >
+                  <div scAspectRatio [ratio]="1">
+                    <img
+                      [ngSrc]="photo.thumb"
+                      fill
+                      sizes="10vw"
+                      alt=""
+                      class="object-cover"
+                    />
+                  </div>
+                  <span class="sr-only">{{ photo.alt }}</span>
+                </button>
+              }
+            </div>
+          </div>
         </div>
-        <div class="grid min-h-0 flex-1 place-items-center overflow-hidden p-4">
-          <img scLightboxImage alt="A wooden table in a quiet café" />
-        </div>
-      </dialog>
-    </article>
+      </ng-template>
+    </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ArticleLightboxDemo {}`;
+export class ArticleLightboxDemo {
+  private readonly open = signal(false);
+  /** The photo shown: the carousel's activeIndex. */
+  private readonly index = signal(0);
+  private readonly thumbs = viewChildren<ElementRef<HTMLElement>>('thumb');
+  private readonly photos = [
+    ['cafe', 'A street cafe'],
+    ['coast', 'A rocky coast'],
+    ['forest', 'A forest path'],
+  ].map(([name, alt]) => ({
+    src: \`/images/gallery/\${name}.jpg\`,
+    thumb: \`/images/gallery/\${name}-thumb.jpg\`,
+    alt,
+  }));
+
+  constructor() {
+    // The current thumbnail stays in view as the photo changes.
+    afterRenderEffect(() => {
+      this.thumbs()[this.index()]?.nativeElement.scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest',
+      });
+    });
+  }
+
+  private show(index: number): void {
+    this.index.set(index);
+    this.open.set(true);
+  }
+}`;
 }

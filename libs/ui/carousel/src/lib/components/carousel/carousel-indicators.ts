@@ -6,25 +6,25 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import { ScCarouselNew } from './carousel-new';
-import { ScCarouselNewIndicator } from './carousel-new-indicator';
+import { ScCarousel } from './carousel';
+import { ScCarouselIndicator } from './carousel-indicator';
 
 /**
  * The indicators' row, a tablist (name it: `aria-label`), inside the
- * carousel: one tab stop, the arrows move between its indicators and show
- * each one's page (mirrored right to left), Home and End the first and last.
+ * carousel: one tab stop; ← and → (mirrored right to left) move between its
+ * indicators and show each one's position, Home and End the first and last.
  */
 @Directive({
-  selector: 'div[scCarouselNewIndicators]',
+  selector: 'div[scCarouselIndicators]',
   host: {
     role: 'tablist',
     '[class]': 'class()',
     '(keydown)': 'onKeydown($event)',
   },
 })
-export class ScCarouselNewIndicators {
-  private readonly carousel = inject(ScCarouselNew);
-  private readonly indicators = contentChildren(ScCarouselNewIndicator, {
+export class ScCarouselIndicators {
+  private readonly carousel = inject(ScCarousel);
+  private readonly indicators = contentChildren(ScCarouselIndicator, {
     descendants: true,
   });
 
@@ -37,18 +37,19 @@ export class ScCarouselNewIndicators {
   private onKeydown(event: KeyboardEvent): void {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
     const indicators = this.indicators();
-    const at = indicators.findIndex((i) => i.selected());
     if (!indicators.length) return;
+    const at = Math.max(
+      0,
+      indicators.findIndex((i) => i.selected()),
+    );
     const rtl =
       getComputedStyle(event.currentTarget as Element).direction === 'rtl';
     let to: number;
     switch (event.key) {
       case rtl ? 'ArrowLeft' : 'ArrowRight':
-      case 'ArrowDown':
         to = (at + 1) % indicators.length;
         break;
       case rtl ? 'ArrowRight' : 'ArrowLeft':
-      case 'ArrowUp':
         to = (at - 1 + indicators.length) % indicators.length;
         break;
       case 'Home':
@@ -60,10 +61,10 @@ export class ScCarouselNewIndicators {
       default:
         return;
     }
-    // Handled here: the carousel's own keys leave it.
+    // Handled here: the carousel's own arrows leave it.
     event.preventDefault();
     const indicator = indicators[to];
-    this.carousel.goTo(indicator.page());
+    this.carousel.activeIndex.set(indicator.index());
     indicator.focus();
   }
 }

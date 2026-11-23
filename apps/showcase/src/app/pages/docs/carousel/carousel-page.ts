@@ -7,8 +7,8 @@ import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { ApiCarouselDemoContainer } from './demos/api-carousel-demo-container';
 import { CarouselUsageDemoContainer } from './demos/carousel-usage-demo-container';
-import { DotsCarouselDemoContainer } from './demos/dots-carousel-demo-container';
 import { ImagesCarouselDemoContainer } from './demos/images-carousel-demo-container';
+import { IndicatorsCarouselDemoContainer } from './demos/indicators-carousel-demo-container';
 import { MultipleCarouselDemoContainer } from './demos/multiple-carousel-demo-container';
 import { OrientationCarouselDemoContainer } from './demos/orientation-carousel-demo-container';
 import { PluginCarouselDemoContainer } from './demos/plugin-carousel-demo-container';
@@ -28,7 +28,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
     SpacingCarouselDemoContainer,
     OrientationCarouselDemoContainer,
     ApiCarouselDemoContainer,
-    DotsCarouselDemoContainer,
+    IndicatorsCarouselDemoContainer,
     PluginCarouselDemoContainer,
     MultipleCarouselDemoContainer,
     ImagesCarouselDemoContainer,
@@ -85,7 +85,15 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
           <li>
             With focus inside, the arrow keys move: <kbd scKbd>←</kbd> and
             <kbd scKbd>→</kbd> (mirrored right to left), <kbd scKbd>↑</kbd> and
-            <kbd scKbd>↓</kbd> when vertical.
+            <kbd scKbd>↓</kbd> when vertical. The viewport is a tab stop, and
+            takes focus when a slide is clicked, so the keys work from there
+            too.
+          </li>
+          <li>
+            The indicators are a tablist (name it), one tab stop: a tab per
+            position, the current one selected; <kbd scKbd>←</kbd> and
+            <kbd scKbd>→</kbd> move between them and show each one's slide,
+            <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> the first and last.
           </li>
           <li>
             The buttons are disabled at either end (unless it loops); name them
@@ -105,7 +113,7 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
         <app-spacing-carousel-demo-container />
         <app-orientation-carousel-demo-container />
         <app-api-carousel-demo-container />
-        <app-dots-carousel-demo-container />
+        <app-indicators-carousel-demo-container />
         <app-plugin-carousel-demo-container />
         <app-multiple-carousel-demo-container />
         <app-images-carousel-demo-container />
@@ -130,7 +138,8 @@ export default class CarouselPage {
     imports: [
       'import {',
       '  ScCarousel, ScCarouselViewport, ScCarouselTrack,',
-      '  ScCarouselItem, ScCarouselPrevious, ScCarouselNext, ScCarouselDot,',
+      '  ScCarouselItem, ScCarouselPrevious, ScCarouselNext,',
+      '  ScCarouselIndicators, ScCarouselIndicator,',
       "} from '@semantic-components/ui/carousel';",
     ].join('\n'),
     markup: [
@@ -147,9 +156,9 @@ export default class CarouselPage {
       '  <button scCarouselNext>',
       '    <svg siChevronRightIcon></svg><span class="sr-only">…</span>',
       '  </button>',
-      '  <div role="group" aria-label="…">',
+      '  <div scCarouselIndicators aria-label="…">',
       '    @for (i of carousel.positions(); track i) {',
-      '      <button scCarouselDot [index]="i"><span class="sr-only">…</span></button>',
+      '      <button scCarouselIndicator [index]="i"><span class="sr-only">…</span></button>',
       '    }',
       '  </div>',
       '</div>',
@@ -166,7 +175,8 @@ export default class CarouselPage {
     {
       name: 'ScCarouselViewport',
       selector: 'div[scCarouselViewport]',
-      description: "Embla's viewport: the window the slides move in.",
+      description:
+        "Embla's viewport: the window the slides move in. A tab stop, focused by a click on a slide, so the arrows work from there.",
     },
     {
       name: 'ScCarouselTrack',
@@ -187,10 +197,16 @@ export default class CarouselPage {
         "The style's button (variant 'outline', size 'icon-sm', the style's corners) outside either end; disabled when it can't move; your icon, mirrored right to left.",
     },
     {
-      name: 'ScCarouselDot',
-      selector: 'button[scCarouselDot]',
+      name: 'ScCarouselIndicators',
+      selector: 'div[scCarouselIndicators]',
       description:
-        'A position’s dot (index): a click goes there; the current one has aria-current and is wider. A 24px target that draws its mark, in the style’s corners. Write its name; put the dots in a group of yours, inside the carousel.',
+        'A tablist (name it), inside the carousel: one tab stop; ← → (mirrored right to left), Home and End move between its indicators and show their slides.',
+    },
+    {
+      name: 'ScCarouselIndicator',
+      selector: 'button[scCarouselIndicator]',
+      description:
+        'A position’s tab (index): a click goes there; the current one is selected (aria-selected) and wider. A 24px target that draws its mark, in the style’s corners. Write its name.',
     },
   ];
 }

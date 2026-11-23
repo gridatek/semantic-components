@@ -745,12 +745,12 @@ export interface ScNavigationMenuStyles {
   popup: string;
 }
 
-/** A carousel's corners: its Previous and Next buttons', and its dots'. */
+/** A carousel's corners: its Previous and Next buttons', and its indicators'. */
 export interface ScCarouselStyles {
   /** Previous and Next: empty where the style's button keeps its own. */
   button: string;
-  /** scCarouselDot: its focus ring and its mark. */
-  dot: string;
+  /** scCarouselIndicator: its focus ring and its mark. */
+  indicator: string;
 }
 
 export interface ScStyle {
