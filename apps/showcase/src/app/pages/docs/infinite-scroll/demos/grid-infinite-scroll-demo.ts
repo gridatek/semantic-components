@@ -1,9 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScFrame,
-  ScInfiniteScroll,
-  ScInfiniteScrollStatus,
-} from '@semantic-components/ui';
+import { ScFrame, ScInfiniteScroll } from '@semantic-components/ui';
 
 interface Item {
   readonly id: number;
@@ -13,7 +9,7 @@ interface Item {
 /** Any layout: here a grid of products. The first page does not fill the box — it asks again, until the box is full or there is no more. */
 @Component({
   selector: 'app-grid-infinite-scroll-demo',
-  imports: [ScFrame, ScInfiniteScroll, ScInfiniteScrollStatus],
+  imports: [ScFrame, ScInfiniteScroll],
   template: `
     <div
       scFrame
@@ -37,7 +33,10 @@ interface Item {
           </li>
         }
       </ul>
-      <p scInfiniteScrollStatus class="pb-3">
+      <p
+        role="status"
+        class="text-muted-foreground flex min-h-6 items-center justify-center gap-2 pb-3 text-sm [&>svg]:size-4 [&>svg]:shrink-0"
+      >
         @if (loading()) {
           Loading…
         } @else if (done()) {

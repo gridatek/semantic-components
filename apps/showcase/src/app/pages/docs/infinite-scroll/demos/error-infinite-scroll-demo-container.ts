@@ -19,12 +19,7 @@ import { ErrorInfiniteScrollDemo } from './error-infinite-scroll-demo';
 })
 export class ErrorInfiniteScrollDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScFrame,
-  ScInfiniteScroll,
-  ScInfiniteScrollMore,
-  ScInfiniteScrollStatus,
-} from '@semantic-components/ui';
+import { ScButton, ScFrame, ScInfiniteScroll } from '@semantic-components/ui';
 
 interface Item {
   readonly id: number;
@@ -34,12 +29,7 @@ interface Item {
 /** A load fails: auto off, so it does not ask again by itself; the status says so and the button tries again. */
 @Component({
   selector: 'app-error-infinite-scroll-demo',
-  imports: [
-    ScFrame,
-    ScInfiniteScroll,
-    ScInfiniteScrollMore,
-    ScInfiniteScrollStatus,
-  ],
+  imports: [ScButton, ScFrame, ScInfiniteScroll],
   template: \`
     <div
       scFrame
@@ -62,7 +52,11 @@ interface Item {
         }
       </ul>
       <div class="grid justify-items-center gap-2 p-3">
-        <p scInfiniteScrollStatus [class.text-destructive]="failed()">
+        <p
+          role="status"
+          class="text-muted-foreground flex min-h-6 items-center justify-center gap-2 text-sm [&>svg]:size-4 [&>svg]:shrink-0"
+          [class.text-destructive]="failed()"
+        >
           @if (loading()) {
             Loading…
           } @else if (failed()) {
@@ -72,7 +66,16 @@ interface Item {
           }
         </p>
         @if (failed()) {
-          <button [scInfiniteScrollMore]="orders">Try again</button>
+          @if (!orders.done()) {
+            <button
+              scButton
+              variant="outline"
+              [disabled]="orders.loading()"
+              (click)="orders.loadMore()"
+            >
+              Try again
+            </button>
+          }
         }
       </div>
     </div>

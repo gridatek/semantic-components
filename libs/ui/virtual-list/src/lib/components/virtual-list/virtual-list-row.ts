@@ -7,18 +7,15 @@ import {
   input,
 } from '@angular/core';
 import { cn } from 'cn';
-import {
-  ScVirtualListNext,
-  type ScVirtualListNextItem,
-} from './virtual-list-next';
+import { ScVirtualList, type ScVirtualListItem } from './virtual-list';
 
 /**
- * A row of a `scVirtualListNext`: your element, given its place (in its lane)
+ * A row of a `scVirtualList`: your element, given its place (in its lane)
  * and measured as it renders and whenever it changes size — `aria-posinset`
  * and `aria-setsize` say where it is in the whole list.
  */
 @Directive({
-  selector: '[scVirtualListNextRow]',
+  selector: '[scVirtualListRow]',
   host: {
     'data-slot': 'virtual-list-row',
     '[attr.data-index]': 'row().index',
@@ -28,14 +25,14 @@ import {
     '[class]': 'class()',
   },
 })
-export class ScVirtualListNextRow {
-  private readonly list = inject(ScVirtualListNext);
+export class ScVirtualListRow {
+  private readonly list = inject(ScVirtualList);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly row = input.required<ScVirtualListNextItem>({
-    alias: 'scVirtualListNextRow',
+  readonly row = input.required<ScVirtualListItem>({
+    alias: 'scVirtualListRow',
   });
 
   /** Its place: along the list, and across it in its lane. */

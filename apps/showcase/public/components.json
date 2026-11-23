@@ -432,20 +432,10 @@
   {
     "name": "Infinite Scroll",
     "path": "infinite-scroll",
-    "description": "More near the end or the start, with whatever scrolls; a Load more button and a status.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Advanced",
-    "hidden": true
-  },
-  {
-    "name": "Infinite Scroll Next",
-    "path": "infinite-scroll-next",
     "description": "More near the end or the start (a chat), with whatever scrolls; it fills the box, keeps the reading place, and gives a feed its keys.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Input",
@@ -1191,20 +1181,10 @@
   {
     "name": "Virtual List",
     "path": "virtual-list",
-    "description": "Only what is seen rendered, rows measured as they render; a box or the page; down, along or in lanes.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Advanced",
-    "hidden": true
-  },
-  {
-    "name": "Virtual List Next",
-    "path": "virtual-list-next",
     "description": "Only what is seen rendered, on TanStack Virtual: rows measured, a box or the page, along or in lanes, a chat that opens at the end; rows on the server.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Waterfall",

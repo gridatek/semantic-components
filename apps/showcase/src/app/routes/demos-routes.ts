@@ -3219,53 +3219,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/infinite-scroll-next',
-    children: [
-      {
-        path: 'feed-infinite-scroll-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/feed-infinite-scroll-next-demo').then(
-            (m) => m.FeedInfiniteScrollNextDemo,
-          ),
-      },
-      {
-        path: 'button-infinite-scroll-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/button-infinite-scroll-next-demo').then(
-            (m) => m.ButtonInfiniteScrollNextDemo,
-          ),
-      },
-      {
-        path: 'error-infinite-scroll-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/error-infinite-scroll-next-demo').then(
-            (m) => m.ErrorInfiniteScrollNextDemo,
-          ),
-      },
-      {
-        path: 'chat-infinite-scroll-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/chat-infinite-scroll-next-demo').then(
-            (m) => m.ChatInfiniteScrollNextDemo,
-          ),
-      },
-      {
-        path: 'grid-infinite-scroll-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/grid-infinite-scroll-next-demo').then(
-            (m) => m.GridInfiniteScrollNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-infinite-scroll-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll-next/demos/rtl-infinite-scroll-next-demo').then(
-            (m) => m.RtlInfiniteScrollNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/infinite-scroll',
     children: [
       {
@@ -3273,13 +3226,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/infinite-scroll/demos/feed-infinite-scroll-demo').then(
             (m) => m.FeedInfiniteScrollDemo,
-          ),
-      },
-      {
-        path: 'grid-infinite-scroll-demo',
-        loadComponent: () =>
-          import('../pages/docs/infinite-scroll/demos/grid-infinite-scroll-demo').then(
-            (m) => m.GridInfiniteScrollDemo,
           ),
       },
       {
@@ -3301,6 +3247,20 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/infinite-scroll/demos/chat-infinite-scroll-demo').then(
             (m) => m.ChatInfiniteScrollDemo,
+          ),
+      },
+      {
+        path: 'grid-infinite-scroll-demo',
+        loadComponent: () =>
+          import('../pages/docs/infinite-scroll/demos/grid-infinite-scroll-demo').then(
+            (m) => m.GridInfiniteScrollDemo,
+          ),
+      },
+      {
+        path: 'rtl-infinite-scroll-demo',
+        loadComponent: () =>
+          import('../pages/docs/infinite-scroll/demos/rtl-infinite-scroll-demo').then(
+            (m) => m.RtlInfiniteScrollDemo,
           ),
       },
     ],
@@ -8471,74 +8431,20 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/virtual-list-next',
-    children: [
-      {
-        path: 'virtual-list-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/virtual-list-next/demos/virtual-list-next-usage-demo').then(
-            (m) => m.VirtualListNextUsageDemo,
-          ),
-      },
-      {
-        path: 'variable-virtual-list-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/virtual-list-next/demos/variable-virtual-list-next-demo').then(
-            (m) => m.VariableVirtualListNextDemo,
-          ),
-      },
-      {
-        path: 'page-virtual-list-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/virtual-list-next/demos/page-virtual-list-next-demo').then(
-            (m) => m.PageVirtualListNextDemo,
-          ),
-      },
-      {
-        path: 'horizontal-virtual-list-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/virtual-list-next/demos/horizontal-virtual-list-next-demo').then(
-            (m) => m.HorizontalVirtualListNextDemo,
-          ),
-      },
-      {
-        path: 'grid-virtual-list-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/virtual-list-next/demos/grid-virtual-list-next-demo').then(
-            (m) => m.GridVirtualListNextDemo,
-          ),
-      },
-      {
-        path: 'chat-virtual-list-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/virtual-list-next/demos/chat-virtual-list-next-demo').then(
-            (m) => m.ChatVirtualListNextDemo,
-          ),
-      },
-      {
-        path: 'scroll-to-virtual-list-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/virtual-list-next/demos/scroll-to-virtual-list-next-demo').then(
-            (m) => m.ScrollToVirtualListNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-virtual-list-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/virtual-list-next/demos/rtl-virtual-list-next-demo').then(
-            (m) => m.RtlVirtualListNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/virtual-list',
     children: [
       {
-        path: 'basic-virtual-list-demo',
+        path: 'infinite-virtual-list-demo',
         loadComponent: () =>
-          import('../pages/docs/virtual-list/demos/basic-virtual-list-demo').then(
-            (m) => m.BasicVirtualListDemo,
+          import('../pages/docs/virtual-list/demos/infinite-virtual-list-demo').then(
+            (m) => m.InfiniteVirtualListDemo,
+          ),
+      },
+      {
+        path: 'virtual-list-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list/demos/virtual-list-usage-demo').then(
+            (m) => m.VirtualListUsageDemo,
           ),
       },
       {
@@ -8546,6 +8452,13 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/virtual-list/demos/variable-virtual-list-demo').then(
             (m) => m.VariableVirtualListDemo,
+          ),
+      },
+      {
+        path: 'page-virtual-list-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list/demos/page-virtual-list-demo').then(
+            (m) => m.PageVirtualListDemo,
           ),
       },
       {
@@ -8563,24 +8476,24 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'page-virtual-list-demo',
+        path: 'chat-virtual-list-demo',
         loadComponent: () =>
-          import('../pages/docs/virtual-list/demos/page-virtual-list-demo').then(
-            (m) => m.PageVirtualListDemo,
+          import('../pages/docs/virtual-list/demos/chat-virtual-list-demo').then(
+            (m) => m.ChatVirtualListDemo,
           ),
       },
       {
-        path: 'scroll-virtual-list-demo',
+        path: 'scroll-to-virtual-list-demo',
         loadComponent: () =>
-          import('../pages/docs/virtual-list/demos/scroll-virtual-list-demo').then(
-            (m) => m.ScrollVirtualListDemo,
+          import('../pages/docs/virtual-list/demos/scroll-to-virtual-list-demo').then(
+            (m) => m.ScrollToVirtualListDemo,
           ),
       },
       {
-        path: 'infinite-virtual-list-demo',
+        path: 'rtl-virtual-list-demo',
         loadComponent: () =>
-          import('../pages/docs/virtual-list/demos/infinite-virtual-list-demo').then(
-            (m) => m.InfiniteVirtualListDemo,
+          import('../pages/docs/virtual-list/demos/rtl-virtual-list-demo').then(
+            (m) => m.RtlVirtualListDemo,
           ),
       },
     ],

@@ -1,46 +1,38 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScButton, ScFrame } from '@semantic-components/ui';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { VirtualListUsageDemo } from './virtual-list-usage-demo';
+
+@Component({
+  selector: 'app-virtual-list-usage-demo-container',
+  imports: [DemoContainer, VirtualListUsageDemo],
+  template: `
+    <app-demo-container
+      title="Usage"
+      [code]="code"
+      demoUrl="/demos/virtual-list/virtual-list-usage-demo"
+    >
+      <app-virtual-list-usage-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class VirtualListUsageDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
-  ScVirtualListNext,
-  ScVirtualListNextRow,
+  ScVirtualList,
+  ScVirtualListRow,
 } from '@semantic-components/ui/virtual-list';
 
-/** scrollToIndex(): to any row — even one never rendered — at the start, the centre or the end, at once or smoothly. */
+/** 10,000 rows, a few dozen rendered: those in view and five more each way, each measured as it renders; its place in the whole list is aria-posinset of aria-setsize. */
 @Component({
-  selector: 'app-scroll-to-virtual-list-next-demo',
-  imports: [ScButton, ScFrame, ScVirtualListNext, ScVirtualListNextRow],
-  template: `
-    <div class="flex flex-wrap justify-center gap-2">
-      <button
-        scButton
-        variant="outline"
-        size="sm"
-        (click)="list.scrollToIndex(0, { align: 'start' })"
-      >
-        First
-      </button>
-      <button
-        scButton
-        variant="outline"
-        size="sm"
-        (click)="
-          list.scrollToIndex(4999, { align: 'center', behavior: 'smooth' })
-        "
-      >
-        5,000 (centred, smooth)
-      </button>
-      <button
-        scButton
-        variant="outline"
-        size="sm"
-        (click)="list.scrollToIndex(9999, { align: 'end' })"
-      >
-        Last
-      </button>
-    </div>
+  selector: 'app-virtual-list-usage-demo',
+  imports: [ScFrame, ScVirtualList, ScVirtualListRow],
+  template: \`
     <ul
-      scVirtualListNext
-      #list="scVirtualListNext"
+      scVirtualList
+      #list="scVirtualList"
       [count]="contacts.length"
       [estimate]="56"
       aria-label="Contacts"
@@ -49,7 +41,7 @@ import {
     >
       @for (row of list.rows(); track row.key) {
         <li
-          [scVirtualListNextRow]="row"
+          [scVirtualListRow]="row"
           tabindex="0"
           class="focus-visible:ring-ring/50 border-b px-4 py-2 outline-none focus-visible:ring-3 focus-visible:ring-inset"
         >
@@ -66,11 +58,11 @@ import {
         {{ list.count() }}
       }
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollToVirtualListNextDemo {
+export class VirtualListUsageDemo {
   private readonly names = [
     'Ada',
     'Grace',
@@ -90,4 +82,5 @@ export class ScrollToVirtualListNextDemo {
       email: name.toLowerCase().replace(' ', '.') + '@example.com',
     };
   });
+}`;
 }

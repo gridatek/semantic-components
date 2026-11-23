@@ -9,5 +9,5 @@ A long list rendered only where it is seen, for the Semantic Components library,
 ## Usage
 
 ```ts
-import { ScVirtualListNext, ScVirtualListNextRow } from '@semantic-components/ui/virtual-list';
+import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui/virtual-list';
 ```

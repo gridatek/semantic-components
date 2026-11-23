@@ -1,35 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicVirtualListDemo } from './basic-virtual-list-demo';
-
-@Component({
-  selector: 'app-basic-virtual-list-demo-container',
-  imports: [DemoContainer, BasicVirtualListDemo],
-  template: `
-    <app-demo-container
-      title="Basic"
-      [code]="code"
-      demoUrl="/demos/virtual-list/basic-virtual-list-demo"
-    >
-      <app-basic-virtual-list-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class BasicVirtualListDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
-  ScFrame,
   ScVirtualList,
   ScVirtualListRow,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/virtual-list';
 
-/** 10,000 rows, a few dozen rendered: those in view, and five more each way. Each row is measured as it renders; its place in the whole list is aria-posinset of aria-setsize. */
+/** 10,000 rows, a few dozen rendered: those in view and five more each way, each measured as it renders; its place in the whole list is aria-posinset of aria-setsize. */
 @Component({
-  selector: 'app-basic-virtual-list-demo',
+  selector: 'app-virtual-list-usage-demo',
   imports: [ScFrame, ScVirtualList, ScVirtualListRow],
-  template: \`
+  template: `
     <ul
       scVirtualList
       #list="scVirtualList"
@@ -58,31 +38,28 @@ import {
         {{ list.count() }}
       }
     </p>
-  \`,
+  `,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicVirtualListDemo {
+export class VirtualListUsageDemo {
+  private readonly names = [
+    'Ada',
+    'Grace',
+    'Alan',
+    'Katherine',
+    'Margaret',
+    'Hedy',
+    'Linus',
+    'Barbara',
+    'Dennis',
+    'Radia',
+  ];
   private readonly contacts = Array.from({ length: 10_000 }, (_, i) => {
-    const name =
-      [
-        'Ada',
-        'Grace',
-        'Alan',
-        'Katherine',
-        'Margaret',
-        'Hedy',
-        'Linus',
-        'Barbara',
-        'Dennis',
-        'Radia',
-      ][i % 10] +
-      ' ' +
-      (i + 1);
+    const name = this.names[i % 10] + ' ' + (i + 1);
     return {
       name,
       email: name.toLowerCase().replace(' ', '.') + '@example.com',
     };
   });
-}`;
 }

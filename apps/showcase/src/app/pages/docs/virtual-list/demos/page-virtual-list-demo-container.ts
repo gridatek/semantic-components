@@ -7,7 +7,7 @@ import { PageVirtualListDemo } from './page-virtual-list-demo';
   imports: [DemoContainer, PageVirtualListDemo],
   template: `
     <app-demo-container
-      title="Page scroll"
+      title="The page scrolls"
       [code]="code"
       demoUrl="/demos/virtual-list/page-virtual-list-demo"
     >
@@ -19,13 +19,13 @@ import { PageVirtualListDemo } from './page-virtual-list-demo';
 })
 export class PageVirtualListDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
-  ScFrame,
   ScVirtualList,
   ScVirtualListRow,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/virtual-list';
 
-/** Without a size of its own, it takes its full height, and the page — or the box around it — scrolls. */
+/** Without a size of its own it takes its full height, and the page — or the box around it — scrolls it. */
 @Component({
   selector: 'app-page-virtual-list-demo',
   imports: [ScFrame, ScVirtualList, ScVirtualListRow],
@@ -33,8 +33,8 @@ import {
     <ul
       scVirtualList
       #list="scVirtualList"
-      [count]="rows.length"
-      [estimate]="40"
+      [count]="entries.length"
+      [estimate]="33"
       aria-label="Log"
       scFrame
       class="w-full max-w-md"
@@ -44,12 +44,11 @@ import {
           [scVirtualListRow]="row"
           class="border-b px-4 py-2 font-mono text-xs"
         >
-          {{ rows[row.index] }}
+          {{ entries[row.index] }}
         </li>
       }
     </ul>
-    <!-- Shown above the list (order-first) and stuck there, so the range
-      follows the scroll — written after it: it reads the list's inputs. -->
+    <!-- Shown above the list (order-first) and stuck there; written after it: it reads the list. -->
     <p
       class="text-muted-foreground bg-background sticky top-14 z-10 order-first w-full max-w-md py-1 text-center text-sm"
       data-testid="range"
@@ -64,7 +63,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PageVirtualListDemo {
-  private readonly rows = Array.from(
+  private readonly entries = Array.from(
     { length: 500 },
     (_, i) => 'Entry ' + (i + 1) + ': all good',
   );

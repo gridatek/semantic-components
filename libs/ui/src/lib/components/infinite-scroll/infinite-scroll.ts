@@ -22,6 +22,9 @@ import { cn } from 'cn';
  * start (a chat's older messages). Around your list: it scrolls with what
  * scrolls — itself, the box it is in, or the page — and asks again after
  * each load while the end is still near, so the content always fills it.
+ * A `role="feed"` gets the feed's keys (WAI-ARIA): Page Down / Page Up move
+ * between its `role="article"` items — Page Down on the last asks for more —
+ * Ctrl+End / Ctrl+Home leave it after or before.
  */
 @Component({
   selector: '[scInfiniteScroll]',
@@ -51,6 +54,7 @@ import { cn } from 'cn';
     '[attr.data-loading]': 'loading() || null',
     '[attr.data-done]': 'done() || null',
     '[class]': 'class()',
+    '(keydown)': 'onKeydown($event)',
   },
   encapsulation: ViewEncapsulation.None,
 })
@@ -68,7 +72,7 @@ export class ScInfiniteScroll {
   readonly distance = input(200);
   /** Where more is loaded: after the content, or before it (a chat). */
   readonly direction = input<'end' | 'start'>('end');
-  /** Asks by itself as the reader scrolls; off, only the More button does. */
+  /** Asks by itself as the reader scrolls; off, only loadMore() does (your button). */
   readonly auto = input(true, { transform: booleanAttribute });
   /** Load more: set `loading` while you do. */
   readonly more = output<void>();
@@ -142,7 +146,7 @@ export class ScInfiniteScroll {
     }
   }
 
-  /** Asks for more now (the More button): unless loading or done. */
+  /** Asks for more now (your Load more button): unless loading or done. */
   loadMore(): void {
     if (this.loading() || this.done()) return;
     if (this.direction() === 'start') {
@@ -150,6 +154,35 @@ export class ScInfiniteScroll {
       this.kept = scroller.scrollHeight - scroller.scrollTop;
     }
     this.more.emit();
+  }
+
+  /** The feed's keys: on a `role="feed"`, between its articles. */
+  private onKeydown(event: KeyboardEvent): void {
+    if (this.host.getAttribute('role') !== 'feed') return;
+    const articles = Array.from(
+      // An <article> is one without saying so.
+      this.host.querySelectorAll<HTMLElement>('article, [role="article"]'),
+    );
+    const at = articles.findIndex((article) =>
+      article.contains(event.target as Node),
+    );
+    if (event.ctrlKey && (event.key === 'End' || event.key === 'Home')) {
+      const out = focusableOutside(this.host, event.key === 'End');
+      if (!out) return;
+      event.preventDefault();
+      out.focus();
+      return;
+    }
+    if (event.ctrlKey || event.altKey || event.metaKey) return;
+    if (event.key !== 'PageDown' && event.key !== 'PageUp') return;
+    event.preventDefault();
+    const next = at + (event.key === 'PageDown' ? 1 : -1);
+    if (next >= articles.length) {
+      // The last: keyboard readers load more, as scrolling ones do.
+      this.loadMore();
+      return;
+    }
+    articles[Math.max(0, next)]?.focus();
   }
 
   /** Content came in before: the reader stays where they were. */
@@ -195,4 +228,25 @@ function scrollParent(element: HTMLElement): HTMLElement | null {
     }
   }
   return null;
+}
+
+/** The first focusable element after `feed` (or the last before it). */
+function focusableOutside(
+  feed: HTMLElement,
+  after: boolean,
+): HTMLElement | null {
+  const all = Array.from(
+    feed.ownerDocument.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter(
+    (element) => !feed.contains(element) && element.offsetParent !== null,
+  );
+  const position = (element: HTMLElement) =>
+    feed.compareDocumentPosition(element);
+  return after
+    ? (all.find((e) => position(e) & Node.DOCUMENT_POSITION_FOLLOWING) ?? null)
+    : ([...all]
+        .reverse()
+        .find((e) => position(e) & Node.DOCUMENT_POSITION_PRECEDING) ?? null);
 }

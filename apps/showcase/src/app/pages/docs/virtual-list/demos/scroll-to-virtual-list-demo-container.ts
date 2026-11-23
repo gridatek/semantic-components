@@ -1,34 +1,34 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ScrollToVirtualListNextDemo } from './scroll-to-virtual-list-next-demo';
+import { ScrollToVirtualListDemo } from './scroll-to-virtual-list-demo';
 
 @Component({
-  selector: 'app-scroll-to-virtual-list-next-demo-container',
-  imports: [DemoContainer, ScrollToVirtualListNextDemo],
+  selector: 'app-scroll-to-virtual-list-demo-container',
+  imports: [DemoContainer, ScrollToVirtualListDemo],
   template: `
     <app-demo-container
       title="Scroll to a row"
       [code]="code"
-      demoUrl="/demos/virtual-list-next/scroll-to-virtual-list-next-demo"
+      demoUrl="/demos/virtual-list/scroll-to-virtual-list-demo"
     >
-      <app-scroll-to-virtual-list-next-demo />
+      <app-scroll-to-virtual-list-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollToVirtualListNextDemoContainer {
+export class ScrollToVirtualListDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import { ScButton, ScFrame } from '@semantic-components/ui';
 import {
-  ScVirtualListNext,
-  ScVirtualListNextRow,
+  ScVirtualList,
+  ScVirtualListRow,
 } from '@semantic-components/ui/virtual-list';
 
 /** scrollToIndex(): to any row — even one never rendered — at the start, the centre or the end, at once or smoothly. */
 @Component({
-  selector: 'app-scroll-to-virtual-list-next-demo',
-  imports: [ScButton, ScFrame, ScVirtualListNext, ScVirtualListNextRow],
+  selector: 'app-scroll-to-virtual-list-demo',
+  imports: [ScButton, ScFrame, ScVirtualList, ScVirtualListRow],
   template: \`
     <div class="flex flex-wrap justify-center gap-2">
       <button
@@ -59,8 +59,8 @@ import {
       </button>
     </div>
     <ul
-      scVirtualListNext
-      #list="scVirtualListNext"
+      scVirtualList
+      #list="scVirtualList"
       [count]="contacts.length"
       [estimate]="56"
       aria-label="Contacts"
@@ -69,7 +69,7 @@ import {
     >
       @for (row of list.rows(); track row.key) {
         <li
-          [scVirtualListNextRow]="row"
+          [scVirtualListRow]="row"
           tabindex="0"
           class="focus-visible:ring-ring/50 border-b px-4 py-2 outline-none focus-visible:ring-3 focus-visible:ring-inset"
         >
@@ -90,7 +90,7 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScrollToVirtualListNextDemo {
+export class ScrollToVirtualListDemo {
   private readonly names = [
     'Ada',
     'Grace',

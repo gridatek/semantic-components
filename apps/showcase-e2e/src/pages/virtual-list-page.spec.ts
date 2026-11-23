@@ -1,9 +1,17 @@
 import { expectNoA11yViolations } from '../axe';
-import { test } from '../test';
+import { expect, test } from '../test';
 
-test.describe('Virtual List Page', () => {
-  test('should have no accessibility violations', async ({ page }) => {
-    await page.goto('/docs/components/virtual-list');
-    await expectNoA11yViolations(page);
-  });
+test('virtual-list page: sections, and no axe violations', async ({ page }) => {
+  await page.goto('/docs/components/virtual-list');
+  await expect(page.locator('h2')).toHaveText([
+    'Installation',
+    'Usage',
+    'Anatomy',
+    'Sizes and scrolling',
+    'With the infinite scroll',
+    'Accessibility',
+    'Examples',
+    'API reference',
+  ]);
+  await expectNoA11yViolations(page);
 });

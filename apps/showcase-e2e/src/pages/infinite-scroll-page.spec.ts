@@ -1,9 +1,18 @@
 import { expectNoA11yViolations } from '../axe';
-import { test } from '../test';
+import { expect, test } from '../test';
 
-test.describe('Infinite Scroll Page', () => {
-  test('should have no accessibility violations', async ({ page }) => {
-    await page.goto('/docs/components/infinite-scroll');
-    await expectNoA11yViolations(page);
-  });
+test('infinite-scroll page: sections, and no axe violations', async ({
+  page,
+}) => {
+  await page.goto('/docs/components/infinite-scroll');
+  await expect(page.locator('h2')).toHaveText([
+    'Usage',
+    'Anatomy',
+    'How it asks',
+    'Keyboard',
+    'Accessibility',
+    'Examples',
+    'API reference',
+  ]);
+  await expectNoA11yViolations(page);
 });

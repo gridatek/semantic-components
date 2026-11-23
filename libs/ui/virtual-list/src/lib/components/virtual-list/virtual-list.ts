@@ -28,10 +28,10 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 
-/** A row as the list lays it out: render it with `[scVirtualListNextRow]`. */
-export type ScVirtualListNextItem = VirtualItem;
+/** A row as the list lays it out: render it with `[scVirtualListRow]`. */
+export type ScVirtualListItem = VirtualItem;
 
-export type ScVirtualListNextAlign = 'start' | 'center' | 'end' | 'auto';
+export type ScVirtualListAlign = 'start' | 'center' | 'end' | 'auto';
 
 /** What scrolls the list: itself, a box around it, or the page. */
 type ScScroller = Element | Window;
@@ -40,13 +40,13 @@ type ScScroller = Element | Window;
  * A long list rendered only where it is seen, on TanStack Virtual's engine:
  * rows measured as they render, in a box that scrolls (give it a size and an
  * overflow) or the page; down, along, or in lanes. Render `rows()` with
- * `[scVirtualListNextRow]`, read your data by `row.index`, track by
+ * `[scVirtualListRow]`, read your data by `row.index`, track by
  * `row.key`. `anchor="end"`: a chat — it opens at the end, keeps its place as
  * older rows come in above, and follows new ones while at the end.
  */
 @Component({
-  selector: '[scVirtualListNext]',
-  exportAs: 'scVirtualListNext',
+  selector: '[scVirtualList]',
+  exportAs: 'scVirtualList',
   template: `
     <ng-content />
     @if (spacerTag === 'li') {
@@ -77,7 +77,7 @@ type ScScroller = Element | Window;
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScVirtualListNext {
+export class ScVirtualList {
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly document = inject(DOCUMENT);
@@ -194,7 +194,7 @@ export class ScVirtualListNext {
   );
 
   /** The rows to render now. */
-  readonly rows = computed<readonly ScVirtualListNextItem[]>(() => {
+  readonly rows = computed<readonly ScVirtualListItem[]>(() => {
     // Before the engine watches the page (the server, the first paint): the
     // first rows, stacked by their estimate — the same on both sides.
     if (!this.mounted()) return this.initialRows();
@@ -204,26 +204,24 @@ export class ScVirtualListNext {
   });
 
   /** The first `initialCount` rows, laid out by the estimate. */
-  private readonly initialRows = computed<readonly ScVirtualListNextItem[]>(
-    () => {
-      const count = Math.min(this.initialCount(), this.count());
-      const lanes = Math.max(1, this.lanes());
-      const size = this.estimate();
-      const gap = this.gap();
-      const key = this.key();
-      return Array.from({ length: count }, (_, index) => {
-        const start = Math.floor(index / lanes) * (size + gap);
-        return {
-          key: key(index),
-          index,
-          start,
-          end: start + size,
-          size,
-          lane: index % lanes,
-        };
-      });
-    },
-  );
+  private readonly initialRows = computed<readonly ScVirtualListItem[]>(() => {
+    const count = Math.min(this.initialCount(), this.count());
+    const lanes = Math.max(1, this.lanes());
+    const size = this.estimate();
+    const gap = this.gap();
+    const key = this.key();
+    return Array.from({ length: count }, (_, index) => {
+      const start = Math.floor(index / lanes) * (size + gap);
+      return {
+        key: key(index),
+        index,
+        start,
+        end: start + size,
+        size,
+        lane: index % lanes,
+      };
+    });
+  });
 
   /** The whole list's length along its axis (px). */
   readonly size = computed(() => {
@@ -287,7 +285,7 @@ export class ScVirtualListNext {
   scrollToIndex(
     index: number,
     options: {
-      align?: ScVirtualListNextAlign;
+      align?: ScVirtualListAlign;
       behavior?: 'auto' | 'smooth';
     } = {},
   ): void {
@@ -309,7 +307,7 @@ export class ScVirtualListNext {
     this.virtualizer.cancelScroll();
   }
 
-  /** A row, measured as it renders and again when it changes: `[scVirtualListNextRow]`. */
+  /** A row, measured as it renders and again when it changes: `[scVirtualListRow]`. */
   measure(element: Element): void {
     if (this.mounted()) this.virtualizer.measureElement(element);
   }

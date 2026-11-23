@@ -19,24 +19,16 @@ import { InfiniteVirtualListDemo } from './infinite-virtual-list-demo';
 })
 export class InfiniteVirtualListDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScFrame, ScInfiniteScroll } from '@semantic-components/ui';
 import {
-  ScFrame,
-  ScInfiniteScroll,
-  ScInfiniteScrollStatus,
   ScVirtualList,
   ScVirtualListRow,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/virtual-list';
 
 /** Long, and longer: the infinite scroll asks for 100 more near the end; the virtual list renders only what is seen. */
 @Component({
   selector: 'app-infinite-virtual-list-demo',
-  imports: [
-    ScFrame,
-    ScVirtualList,
-    ScVirtualListRow,
-    ScInfiniteScroll,
-    ScInfiniteScrollStatus,
-  ],
+  imports: [ScFrame, ScInfiniteScroll, ScVirtualList, ScVirtualListRow],
   template: \`
     <div
       scFrame
@@ -55,7 +47,7 @@ import {
           scVirtualList
           #list="scVirtualList"
           [count]="items().length"
-          [estimate]="40"
+          [estimate]="37"
           aria-label="Items"
         >
           @for (row of list.rows(); track row.key) {
@@ -65,7 +57,10 @@ import {
           }
         </ul>
       </div>
-      <p scInfiniteScrollStatus class="py-2">
+      <p
+        role="status"
+        class="text-muted-foreground flex min-h-6 items-center justify-center py-2 text-sm"
+      >
         @if (loading()) {
           Loading…
         } @else if (items().length >= 1000) {

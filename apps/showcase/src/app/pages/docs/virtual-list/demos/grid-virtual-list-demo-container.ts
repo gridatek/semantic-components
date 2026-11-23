@@ -18,13 +18,18 @@ import { GridVirtualListDemo } from './grid-virtual-list-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class GridVirtualListDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
-import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
+import {
+  ScVirtualList,
+  ScVirtualListRow,
+} from '@semantic-components/ui/virtual-list';
 
 /** In lanes: photos in three columns, each placed in the lane that ends first. */
 @Component({
   selector: 'app-grid-virtual-list-demo',
-  imports: [ScVirtualList, ScVirtualListRow],
+  imports: [NgOptimizedImage, ScFrame, ScVirtualList, ScVirtualListRow],
   template: \`
     <ul
       scVirtualList
@@ -39,11 +44,15 @@ import { ScVirtualList, ScVirtualListRow } from '@semantic-components/ui';
     >
       @for (row of list.rows(); track row.key) {
         <li [scVirtualListRow]="row">
-          <img
-            [src]="'/images/gallery/' + photos[row.index] + '-thumb.jpg'"
-            [alt]="photos[row.index] + ' ' + (row.index + 1)"
-            class="aspect-square w-full rounded-lg object-cover"
-          />
+          <div scFrame class="relative aspect-square overflow-hidden">
+            <img
+              [ngSrc]="'/images/gallery/' + photos[row.index] + '-thumb.jpg'"
+              [alt]="photos[row.index] + ' ' + (row.index + 1)"
+              fill
+              [priority]="row.index < 6"
+              class="object-cover"
+            />
+          </div>
         </li>
       }
     </ul>
@@ -70,7 +79,7 @@ export class GridVirtualListDemo {
   ];
   private readonly photos = Array.from(
     { length: 600 },
-    (_, i) => this.names[i % 8],
+    (_, i) => this.names[i % this.names.length],
   );
 }`;
 }

@@ -1,21 +1,35 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ChatVirtualListDemo } from './chat-virtual-list-demo';
+
+@Component({
+  selector: 'app-chat-virtual-list-demo-container',
+  imports: [DemoContainer, ChatVirtualListDemo],
+  template: `
+    <app-demo-container
+      title="Chat"
+      [code]="code"
+      demoUrl="/demos/virtual-list/chat-virtual-list-demo"
+    >
+      <app-chat-virtual-list-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ChatVirtualListDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { ScButton, ScFrame, ScInput } from '@semantic-components/ui';
 import {
-  ScVirtualListNext,
-  ScVirtualListNextRow,
+  ScVirtualList,
+  ScVirtualListRow,
 } from '@semantic-components/ui/virtual-list';
 
 /** anchor="end", a chat: it opens at the end; older messages come in above and the one you read stays put; at the end, new ones are followed — read back, they are not. */
 @Component({
-  selector: 'app-chat-virtual-list-next-demo',
-  imports: [
-    ScButton,
-    ScFrame,
-    ScInput,
-    ScVirtualListNext,
-    ScVirtualListNextRow,
-  ],
-  template: `
+  selector: 'app-chat-virtual-list-demo',
+  imports: [ScButton, ScFrame, ScInput, ScVirtualList, ScVirtualListRow],
+  template: \`
     <div class="grid w-full max-w-md gap-2">
       <button
         scButton
@@ -27,8 +41,8 @@ import {
         Load older
       </button>
       <ol
-        scVirtualListNext
-        #list="scVirtualListNext"
+        scVirtualList
+        #list="scVirtualList"
         anchor="end"
         tabindex="0"
         [count]="messages().length"
@@ -40,7 +54,7 @@ import {
         class="h-80 overflow-y-auto"
       >
         @for (row of list.rows(); track row.key) {
-          <li [scVirtualListNextRow]="row" class="px-3">
+          <li [scVirtualListRow]="row" class="px-3">
             <div scFrame size="sm" class="bg-muted p-2 text-sm">
               <span class="font-medium">{{ messages()[row.index].from }}:</span>
               {{ messages()[row.index].text }}
@@ -64,11 +78,11 @@ import {
         {{ messages().length }} messages
       </p>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ChatVirtualListNextDemo {
+export class ChatVirtualListDemo {
   private readonly names = [
     'Ada',
     'Grace',
@@ -114,4 +128,5 @@ export class ChatVirtualListNextDemo {
     this.messages.update((list) => [...list, { id, from: 'You', text }]);
     this.draft.set('');
   }
+}`;
 }

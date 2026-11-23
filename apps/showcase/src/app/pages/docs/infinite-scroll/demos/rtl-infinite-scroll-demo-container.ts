@@ -1,30 +1,26 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RtlInfiniteScrollNextDemo } from './rtl-infinite-scroll-next-demo';
+import { RtlInfiniteScrollDemo } from './rtl-infinite-scroll-demo';
 
 @Component({
-  selector: 'app-rtl-infinite-scroll-next-demo-container',
-  imports: [DemoContainer, RtlInfiniteScrollNextDemo],
+  selector: 'app-rtl-infinite-scroll-demo-container',
+  imports: [DemoContainer, RtlInfiniteScrollDemo],
   template: `
     <app-demo-container
       title="RTL"
       [code]="code"
-      demoUrl="/demos/infinite-scroll-next/rtl-infinite-scroll-next-demo"
+      demoUrl="/demos/infinite-scroll/rtl-infinite-scroll-demo"
     >
-      <app-rtl-infinite-scroll-next-demo />
+      <app-rtl-infinite-scroll-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlInfiniteScrollNextDemoContainer {
+export class RtlInfiniteScrollDemoContainer {
   private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScFrame,
-  ScInfiniteScrollNext,
-  ScSpinner,
-} from '@semantic-components/ui';
+import { ScFrame, ScInfiniteScroll, ScSpinner } from '@semantic-components/ui';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 interface Item {
@@ -34,14 +30,14 @@ interface Item {
 
 /** In a right-to-left page: the same feed, the same keys — your words in the reader's language. */
 @Component({
-  selector: 'app-rtl-infinite-scroll-next-demo',
-  imports: [Dir, ScFrame, ScInfiniteScrollNext, ScSpinner, SiLoaderCircleIcon],
+  selector: 'app-rtl-infinite-scroll-demo',
+  imports: [Dir, ScFrame, ScInfiniteScroll, ScSpinner, SiLoaderCircleIcon],
   providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   template: \`
     <div dir="rtl" lang="ar" class="flex w-full flex-col items-center gap-3">
       <div scFrame class="h-72 w-full max-w-lg overflow-y-auto">
         <div
-          scInfiniteScrollNext
+          scInfiniteScroll
           role="feed"
           aria-label="الأخبار"
           class="grid gap-2 p-3"
@@ -70,7 +66,8 @@ interface Item {
         class="text-muted-foreground flex min-h-6 items-center justify-center gap-2 text-sm [&>svg]:size-4 [&>svg]:shrink-0"
       >
         @if (loading()) {
-          <svg scSpinner siLoaderCircleIcon aria-label="جارٍ التحميل"></svg> مقالات أخرى…
+          <svg scSpinner siLoaderCircleIcon aria-label="جارٍ التحميل"></svg>
+          مقالات أخرى…
         } @else if (done()) {
           هذا كل شيء.
         }
@@ -80,7 +77,7 @@ interface Item {
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlInfiniteScrollNextDemo {
+export class RtlInfiniteScrollDemo {
   private readonly items = signal<Item[]>(page(0));
   private readonly loading = signal(false);
   private readonly done = signal(false);

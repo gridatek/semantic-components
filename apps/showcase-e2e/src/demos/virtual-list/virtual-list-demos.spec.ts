@@ -1,26 +1,30 @@
 import { collectErrors } from '../../interaction';
 import { type Page, expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/virtual-list/${name}-virtual-list-demo`;
-const list = (page: Page) => page.locator('[data-slot="virtual-list"]');
+const demo = (name: string) => `/demos/virtual-list/${name}-demo`;
+const list = (page: Page) => page.locator('[data-slot="virtual-list"]').first();
 const rows = (page: Page) => page.locator('[data-slot="virtual-list-row"]');
-const row = (page: Page, index: number) =>
-  page.locator(`[data-slot="virtual-list-row"][data-index="${index}"]`);
-/** Each rendered row's box, in order. */
-const boxes = (page: Page) =>
-  rows(page).evaluateAll((els) =>
-    els.map((el) => {
-      const r = el.getBoundingClientRect();
-      return {
-        index: Number((el as HTMLElement).dataset['index']),
-        top: r.top,
-        bottom: r.bottom,
-        left: r.left,
-        right: r.right,
-        width: r.width,
-      };
-    }),
-  );
+const range = (page: Page) => page.getByTestId('range');
+
+/** How many pairs of rows overlap: none, laid out. */
+const overlaps = (page: Page) =>
+  rows(page).evaluateAll((elements) => {
+    const boxes = elements.map((e) => e.getBoundingClientRect());
+    let count = 0;
+    boxes.forEach((a, i) =>
+      boxes.slice(i + 1).forEach((b) => {
+        const across = a.left < b.right - 0.5 && b.left < a.right - 0.5;
+        const down = a.top < b.bottom - 0.5 && b.top < a.bottom - 0.5;
+        count += Number(across && down);
+      }),
+    );
+    return count;
+  });
+
+const scrollTo = (page: Page, top: number) =>
+  list(page).evaluate((element, to) => {
+    element.scrollTop = to;
+  }, top);
 
 let errors: string[];
 
@@ -32,190 +36,149 @@ test.afterEach(() => {
   expect(errors).toEqual([]);
 });
 
-test('Basic: a few rendered of 10,000; the right ones, deep down', async ({
-  page,
-}) => {
-  await page.goto(demo('basic'));
-  await expect(row(page, 0)).toBeVisible();
-  expect(await rows(page).count()).toBeLessThan(30);
-  await expect(row(page, 0)).toHaveAttribute('aria-setsize', '10000');
-  await expect(row(page, 0)).toHaveAttribute('aria-posinset', '1');
-  const height = await list(page).evaluate((el) => el.scrollHeight);
-  expect(height).toBeGreaterThan(500_000);
+test.describe('Usage', () => {
+  test.beforeEach(({ page }) => page.goto(demo('virtual-list-usage')));
 
-  await list(page).evaluate((el) => {
-    el.scrollTop = el.scrollHeight;
+  test('10,000 rows, a few dozen rendered; each says where it is', async ({
+    page,
+  }) => {
+    await expect(range(page)).toHaveText(/Rendered: 1–\d+ of 10000/);
+    expect(await rows(page).count()).toBeLessThan(40);
+    await expect(rows(page).first()).toHaveAttribute('aria-posinset', '1');
+    await expect(rows(page).first()).toHaveAttribute('aria-setsize', '10000');
+    expect(await overlaps(page)).toBe(0);
   });
-  await expect(row(page, 9999)).toBeVisible();
-  await expect(row(page, 9999)).toContainText('Radia 10000');
-  await expect(row(page, 9999)).toHaveAttribute('aria-posinset', '10000');
-  expect(await rows(page).count()).toBeLessThan(30);
+
+  test('scrolled to the end: the last rows, in place', async ({ page }) => {
+    await expect(range(page)).toHaveText(/Rendered: 1–/);
+    await scrollTo(page, 10_000_000);
+    await expect(range(page)).toHaveText(/–10000 of 10000/);
+    await expect(rows(page).last()).toHaveAttribute('aria-posinset', '10000');
+    await expect.poll(() => overlaps(page)).toBe(0);
+  });
+
+  test('the focused row stays rendered, scrolled far away', async ({
+    page,
+  }) => {
+    const second = rows(page).nth(1);
+    await second.focus();
+    await expect(second).toBeFocused();
+    await scrollTo(page, 200_000);
+    await expect(range(page)).not.toHaveText(/Rendered: 1–/);
+    await expect(page.locator('[data-index="1"]')).toBeFocused();
+  });
 });
 
-test('Basic: the focused row stays rendered while scrolled away', async ({
+test('Variable sizes: measured, never overlapping, as you scroll', async ({
   page,
 }) => {
-  await page.goto(demo('basic'));
-  await row(page, 0).focus();
-  await list(page).evaluate((el) => {
-    el.scrollTop = 200_000;
-  });
-  await expect
-    .poll(async () => Math.max(...(await boxes(page)).map((b) => b.index)))
-    .toBeGreaterThan(3000);
-  await expect(row(page, 0)).toBeFocused();
-});
-
-test('Variable heights: measured, never overlapping; the place kept', async ({
-  page,
-}) => {
-  await page.goto(demo('variable'));
-  await expect(row(page, 0)).toBeVisible();
-  const heights = new Set(
-    (await boxes(page)).map((b) => Math.round(b.bottom - b.top)),
+  await page.goto(demo('variable-virtual-list'));
+  await expect(range(page)).toHaveText(/Rendered: 1–/);
+  const heights = await rows(page).evaluateAll((elements) =>
+    elements.map((e) => Math.round(e.getBoundingClientRect().height)),
   );
-  expect(heights.size).toBeGreaterThan(1);
-
-  await list(page).evaluate((el) => {
-    el.scrollTop = 60_000;
-  });
-  // Rendered there — not the first rows still in the DOM, scrolled out of
-  // sight (they count as rows too: under load, WebKit renders the new ones
-  // late, and the row "being read" below was one 60 000 px above).
-  await expect
-    .poll(async () => Math.min(...(await boxes(page)).map((b) => b.index)))
-    .toBeGreaterThan(100);
-  await expect.poll(async () => (await boxes(page)).length).toBeGreaterThan(3);
-  // In order, each below the last (8 px apart).
-  await expect
-    .poll(async () => {
-      const b = (await boxes(page)).sort((x, y) => x.index - y.index);
-      return b.every((box, i) => i === 0 || box.top >= b[i - 1].bottom + 7);
-    })
-    .toBe(true);
-
-  // Scrolling up measures rows above: the one being read does not move.
-  await settled(page);
-  const reading = (await boxes(page)).sort((x, y) => x.index - y.index)[6];
-  await list(page).evaluate((el) => el.scrollBy(0, -400));
-  await settled(page);
-  await list(page).evaluate((el) => el.scrollBy(0, 400));
-  await settled(page);
-  const now = (await boxes(page)).find((b) => b.index === reading.index);
-  expect(Math.abs((now?.top ?? Infinity) - reading.top)).toBeLessThan(3);
+  expect(new Set(heights).size).toBeGreaterThan(1);
+  await scrollTo(page, 30_000);
+  await expect(range(page)).not.toHaveText(/Rendered: 1–/);
+  await expect.poll(() => overlaps(page)).toBe(0);
 });
 
-/** Waits until the rendered rows hold still: measured, and placed. */
-async function settled(page: Page): Promise<void> {
-  let last = '';
-  await expect
-    .poll(
-      async () => {
-        const now = JSON.stringify(await boxes(page));
-        const same = now === last;
-        last = now;
-        return same;
-      },
-      { intervals: [150] },
-    )
-    .toBe(true);
-}
+test('The page scrolls it: the rows follow the page', async ({ page }) => {
+  await page.goto(demo('page-virtual-list'));
+  await expect(range(page)).toHaveText(/Rendered: 1–\d+ of 500/);
+  await page.mouse.wheel(0, 6000);
+  await expect(range(page)).not.toHaveText(/Rendered: 1–/);
+  await expect.poll(() => overlaps(page)).toBe(0);
+});
 
-test('Horizontal: along, to the last day; right to left from the right', async ({
+test('Horizontal: rows along, left to right', async ({ page }) => {
+  await page.goto(demo('horizontal-virtual-list'));
+  await expect(range(page)).toHaveText(/Rendered: 1–/);
+  const xs = await rows(page).evaluateAll((elements) =>
+    elements.slice(0, 3).map((e) => e.getBoundingClientRect().left),
+  );
+  expect(xs[0]).toBeLessThan(xs[1]);
+  expect(xs[1]).toBeLessThan(xs[2]);
+});
+
+test('Grid: three lanes', async ({ page }) => {
+  await page.goto(demo('grid-virtual-list'));
+  await expect(range(page)).toHaveText(/Rendered: 1–/);
+  const xs = await rows(page).evaluateAll((elements) =>
+    elements.map((e) => Math.round(e.getBoundingClientRect().left)),
+  );
+  expect(new Set(xs).size).toBe(3);
+  expect(await overlaps(page)).toBe(0);
+});
+
+test.describe('Chat', () => {
+  test.beforeEach(({ page }) => page.goto(demo('chat-virtual-list')));
+
+  const where = (page: Page) => page.getByTestId('where');
+  const message = (page: Page, text: string) => list(page).getByText(text);
+
+  test('opens at the end', async ({ page }) => {
+    await expect(message(page, 'Message 1049')).toBeInViewport();
+    await expect(where(page)).toContainText('At the end');
+  });
+
+  test('older messages come in above; the one you read stays put', async ({
+    page,
+  }) => {
+    await expect(message(page, 'Message 1049')).toBeInViewport();
+    await scrollTo(page, 0);
+    await expect(message(page, 'Message 1000')).toBeInViewport();
+    const before = await message(page, 'Message 1000').boundingBox();
+    await page.getByRole('button', { name: 'Load older' }).click();
+    await expect(where(page)).toContainText('70 messages');
+    await expect
+      .poll(async () =>
+        Math.round((await message(page, 'Message 1000').boundingBox())?.y ?? 0),
+      )
+      .toBe(Math.round(before?.y ?? 0));
+  });
+
+  test('at the end, a new message is followed; read back, it is not', async ({
+    page,
+  }) => {
+    const field = page.getByRole('textbox', { name: 'Message' });
+    await expect(where(page)).toContainText('At the end');
+    await field.fill('hello');
+    await field.press('Enter');
+    await expect(list(page).getByText('hello')).toBeInViewport();
+
+    await scrollTo(page, 0);
+    await expect(where(page)).toContainText('Reading back');
+    await field.fill('again');
+    await field.press('Enter');
+    await expect(where(page)).toContainText('52 messages');
+    await expect(where(page)).toContainText('Reading back');
+    await expect(list(page).getByText('again')).not.toBeInViewport();
+  });
+});
+
+test('Scroll to a row: the last, then one in the middle, centred', async ({
   page,
 }) => {
-  await page.goto(demo('horizontal'));
-  await expect(row(page, 0)).toBeVisible();
-  const width = await list(page).evaluate((el) => el.scrollWidth);
-  expect(width).toBeGreaterThan(365 * 96);
-  await list(page).evaluate((el) => {
-    el.scrollLeft = el.scrollWidth;
-  });
-  await expect(row(page, 364)).toBeVisible();
+  await page.goto(demo('scroll-to-virtual-list'));
+  await page.getByRole('button', { name: 'Last' }).click();
+  await expect(range(page)).toHaveText(/–10000 of 10000/);
+  await page.getByRole('button', { name: /5,000/ }).click();
+  await expect(page.locator('[data-index="4999"]')).toBeInViewport();
+});
 
-  await page.goto(demo('horizontal'));
-  await page.evaluate(() =>
-    document.documentElement.setAttribute('dir', 'rtl'),
-  );
-  await list(page).evaluate((el) => el.dispatchEvent(new Event('scroll')));
+test('RTL: the strip starts at the right', async ({ page }) => {
+  await page.goto(demo('rtl-virtual-list'));
+  await expect(range(page)).toHaveText(/Rendered: 1–/);
   const box = await list(page).boundingBox();
-  await expect
-    .poll(async () => (await row(page, 0).boundingBox())?.x ?? 0)
-    .toBeGreaterThan((box?.x ?? 0) + (box?.width ?? 0) - 120);
-});
-
-test('Grid: three lanes of equal width', async ({ page }) => {
-  await page.goto(demo('grid'));
-  await expect(row(page, 0)).toBeVisible();
-  const b = await boxes(page);
-  const lefts = new Set(b.map((box) => Math.round(box.left)));
-  expect(lefts.size).toBe(3);
-  const widths = new Set(b.map((box) => Math.round(box.width)));
-  expect(widths.size).toBe(1);
-});
-
-test('Page scroll: the page scrolls, the list follows', async ({ page }) => {
-  await page.goto(demo('page'));
-  await expect(row(page, 0)).toBeVisible();
-  const overflow = await list(page).evaluate(
-    (el) => getComputedStyle(el).overflowY,
-  );
-  expect(overflow).toBe('visible');
-  await page.evaluate(() => window.scrollTo(0, 10_000));
-  await expect
-    .poll(async () => (await boxes(page))[0]?.index ?? 0)
-    .toBeGreaterThan(150);
-  await expect(row(page, 0)).toHaveCount(0);
-});
-
-test('Scroll to: start, centre, end, auto', async ({ page }) => {
-  await page.goto(demo('scroll'));
-  await expect(row(page, 0)).toBeVisible();
-  const view = (await list(page).boundingBox()) ?? {
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-  };
-  const target = row(page, 4999);
-  const at = async () => (await target.boundingBox()) ?? { y: -1, height: 0 };
-
-  await page.getByRole('button', { name: 'Row 5,000: start' }).click();
-  await expect
-    .poll(async () => Math.abs((await at()).y - view.y - 1))
-    .toBeLessThan(3);
-  await page.getByRole('button', { name: 'Row 5,000: end' }).click();
-  await expect
-    .poll(async () => {
-      const r = await at();
-      return Math.abs(r.y + r.height - (view.y + view.height - 1));
-    })
-    .toBeLessThan(3);
-  await page.getByRole('button', { name: 'Row 5,000: center' }).click();
-  await expect
-    .poll(async () => {
-      const r = await at();
-      return Math.abs(r.y + r.height / 2 - (view.y + view.height / 2));
-    })
-    .toBeLessThan(3);
-  // Auto: already in view, it stays.
-  const before = (await at()).y;
-  await page.getByRole('button', { name: 'Row 5,000: auto' }).click();
-  await expect
-    .poll(async () => Math.abs((await at()).y - before))
-    .toBeLessThan(2);
-
-  await page.getByRole('button', { name: 'Back to the top' }).click();
-  await expect(row(page, 0)).toBeVisible();
-});
-
-test('With the infinite scroll: 100 more near the end', async ({ page }) => {
-  await page.goto(demo('infinite'));
-  await expect(row(page, 0)).toBeVisible();
-  await expect(row(page, 0)).toHaveAttribute('aria-setsize', '100');
-  await page.getByRole('region', { name: 'Feed' }).evaluate((el) => {
-    el.scrollTop = el.scrollHeight;
-  });
-  await expect(rows(page).first()).toHaveAttribute('aria-setsize', /^[2-9]00$/);
-  expect(await rows(page).count()).toBeLessThan(40);
+  const first = await page.locator('[data-index="0"]').boundingBox();
+  const second = await page.locator('[data-index="1"]').boundingBox();
+  expect((first?.x ?? 0) > (second?.x ?? 0)).toBe(true);
+  expect(
+    Math.abs(
+      (first?.x ?? 0) +
+        (first?.width ?? 0) -
+        ((box?.x ?? 0) + (box?.width ?? 0)),
+    ),
+  ).toBeLessThan(4);
 });

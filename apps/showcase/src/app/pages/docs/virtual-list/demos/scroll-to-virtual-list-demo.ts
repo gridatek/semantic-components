@@ -1,15 +1,43 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ScButton, ScFrame } from '@semantic-components/ui';
 import {
-  ScFrame,
   ScVirtualList,
   ScVirtualListRow,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/virtual-list';
 
-/** 10,000 rows, a few dozen rendered: those in view, and five more each way. Each row is measured as it renders; its place in the whole list is aria-posinset of aria-setsize. */
+/** scrollToIndex(): to any row — even one never rendered — at the start, the centre or the end, at once or smoothly. */
 @Component({
-  selector: 'app-basic-virtual-list-demo',
-  imports: [ScFrame, ScVirtualList, ScVirtualListRow],
+  selector: 'app-scroll-to-virtual-list-demo',
+  imports: [ScButton, ScFrame, ScVirtualList, ScVirtualListRow],
   template: `
+    <div class="flex flex-wrap justify-center gap-2">
+      <button
+        scButton
+        variant="outline"
+        size="sm"
+        (click)="list.scrollToIndex(0, { align: 'start' })"
+      >
+        First
+      </button>
+      <button
+        scButton
+        variant="outline"
+        size="sm"
+        (click)="
+          list.scrollToIndex(4999, { align: 'center', behavior: 'smooth' })
+        "
+      >
+        5,000 (centred, smooth)
+      </button>
+      <button
+        scButton
+        variant="outline"
+        size="sm"
+        (click)="list.scrollToIndex(9999, { align: 'end' })"
+      >
+        Last
+      </button>
+    </div>
     <ul
       scVirtualList
       #list="scVirtualList"
@@ -42,23 +70,21 @@ import {
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicVirtualListDemo {
+export class ScrollToVirtualListDemo {
+  private readonly names = [
+    'Ada',
+    'Grace',
+    'Alan',
+    'Katherine',
+    'Margaret',
+    'Hedy',
+    'Linus',
+    'Barbara',
+    'Dennis',
+    'Radia',
+  ];
   private readonly contacts = Array.from({ length: 10_000 }, (_, i) => {
-    const name =
-      [
-        'Ada',
-        'Grace',
-        'Alan',
-        'Katherine',
-        'Margaret',
-        'Hedy',
-        'Linus',
-        'Barbara',
-        'Dennis',
-        'Radia',
-      ][i % 10] +
-      ' ' +
-      (i + 1);
+    const name = this.names[i % 10] + ' ' + (i + 1);
     return {
       name,
       email: name.toLowerCase().replace(' ', '.') + '@example.com',

@@ -1,21 +1,41 @@
-import { Dir } from '@angular/cdk/bidi';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { RtlVirtualListDemo } from './rtl-virtual-list-demo';
+
+@Component({
+  selector: 'app-rtl-virtual-list-demo-container',
+  imports: [DemoContainer, RtlVirtualListDemo],
+  template: `
+    <app-demo-container
+      title="RTL"
+      [code]="code"
+      demoUrl="/demos/virtual-list/rtl-virtual-list-demo"
+    >
+      <app-rtl-virtual-list-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class RtlVirtualListDemoContainer {
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScFrame } from '@semantic-components/ui';
 import {
-  ScVirtualListNext,
-  ScVirtualListNextRow,
+  ScVirtualList,
+  ScVirtualListRow,
 } from '@semantic-components/ui/virtual-list';
 
 /** In a right-to-left page: a strip starts at the right and runs as the text reads. */
 @Component({
-  selector: 'app-rtl-virtual-list-next-demo',
-  imports: [Dir, ScFrame, ScVirtualListNext, ScVirtualListNextRow],
+  selector: 'app-rtl-virtual-list-demo',
+  imports: [Dir, ScFrame, ScVirtualList, ScVirtualListRow],
   providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
-  template: `
+  template: \`
     <div dir="rtl" lang="ar" class="flex w-full flex-col items-center gap-3">
       <ul
-        scVirtualListNext
-        #list="scVirtualListNext"
+        scVirtualList
+        #list="scVirtualList"
         tabindex="0"
         orientation="horizontal"
         [count]="days.length"
@@ -26,7 +46,7 @@ import {
         class="h-28 w-full max-w-2xl overflow-x-auto"
       >
         @for (row of list.rows(); track row.key) {
-          <li [scVirtualListNextRow]="row" class="py-2">
+          <li [scVirtualListRow]="row" class="py-2">
             <div
               scFrame
               size="sm"
@@ -45,10 +65,11 @@ import {
         {{ list.count() }}
       }
     </p>
-  `,
+  \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlVirtualListNextDemo {
+export class RtlVirtualListDemo {
   private readonly days = Array.from({ length: 365 }, (_, i) => i + 1);
+}`;
 }

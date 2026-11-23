@@ -1,21 +1,21 @@
-# Virtual List Next
+# Virtual List
 
-A long list rendered only where it is seen — rows measured as they render, in a box or the page, down, along or in lanes; a chat that opens at its end. Our parts over TanStack Virtual's engine (`@tanstack/virtual-core`), as the Data Table over TanStack Table. Being built to replace the Virtual List of `@semantic-components/ui`.
+A long list rendered only where it is seen — rows measured as they render, in a box or the page, down, along or in lanes; a chat that opens at its end. Our parts over TanStack Virtual's engine (`@tanstack/virtual-core`), as the Data Table over TanStack Table. It replaced the Virtual List of `@semantic-components/ui`, our own engine (2026-11-23).
 
 ## Architecture
 
 ```
-[scVirtualListNext] (count, estimate, key, overscan, orientation, lanes, gap, anchor, follow, initialCount)
+[scVirtualList] (count, estimate, key, overscan, orientation, lanes, gap, anchor, follow, initialCount)
 │  rows() · range() · size() · scrollToIndex(index, { align, behavior }) · scrollToEnd() · isAtEnd() · cancelScroll()
-└── [scVirtualListNextRow]="row"   — placed (in its lane), measured; aria-posinset / aria-setsize; data-index
+└── [scVirtualListRow]="row"   — placed (in its lane), measured; aria-posinset / aria-setsize; data-index
 ```
 
 ## Usage
 
 ```html
-<ul scVirtualListNext #list="scVirtualListNext" [count]="contacts.length" [estimate]="56" aria-label="Contacts" class="h-96 overflow-y-auto">
+<ul scVirtualList #list="scVirtualList" [count]="contacts.length" [estimate]="56" aria-label="Contacts" class="h-96 overflow-y-auto">
   @for (row of list.rows(); track row.key) {
-  <li [scVirtualListNextRow]="row">{{ contacts[row.index].name }}</li>
+  <li [scVirtualListRow]="row">{{ contacts[row.index].name }}</li>
   }
 </ul>
 ```

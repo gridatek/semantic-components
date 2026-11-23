@@ -5,8 +5,7 @@ const demo = (name: string) =>
   `/demos/infinite-scroll/${name}-infinite-scroll-demo`;
 const scroller = (page: Page) => page.locator('.overflow-y-auto').first();
 // The feed's status line (a spinner inside it is a status of its own).
-const status = (page: Page) =>
-  page.locator('[data-slot=infinite-scroll-status]');
+const status = (page: Page) => page.locator('p[role=status]').first();
 
 /** Scrolls the box to its end (or start). */
 const scrollTo = (box: Locator, where: 'end' | 'start') =>
@@ -36,7 +35,7 @@ test('Feed: fills the box, more near the end, then all said', async ({
 
   await scrollTo(scroller(page), 'end');
   await expect(feed).toHaveAttribute('aria-busy', 'true');
-  await expect(status(page)).toContainText('Loading more articles');
+  await expect(status(page)).toContainText('More articles');
   await expect(articles).toHaveCount(16);
 
   for (const count of [24, 32, 40]) {
@@ -132,4 +131,63 @@ test('Chat: opens at the end; older above, the reader kept in place', async ({
     timeout: 10_000,
   });
   await expect(messages).toHaveCount(60);
+});
+
+test('Feed keys: Page Down and Page Up between articles; more on the last', async ({
+  page,
+}) => {
+  await page.goto(demo('feed'));
+  const feed = page.getByRole('feed', { name: 'News' });
+  const articles = feed.getByRole('article');
+  await expect(articles).toHaveCount(8);
+  await articles.first().focus();
+  await page.keyboard.press('PageDown');
+  await expect(articles.nth(1)).toBeFocused();
+  await page.keyboard.press('PageDown');
+  await expect(articles.nth(2)).toBeFocused();
+  await page.keyboard.press('PageUp');
+  await expect(articles.nth(1)).toBeFocused();
+  // On the last: more comes in, and Page Down moves on into it.
+  await articles.last().focus();
+  await page.keyboard.press('PageDown');
+  await expect(articles).toHaveCount(16);
+  await page.keyboard.press('PageDown');
+  await expect(articles.nth(8)).toBeFocused();
+});
+
+test('Feed keys: Ctrl+End and Ctrl+Home leave the feed', async ({ page }) => {
+  // On the docs page: what comes before and after the feed can take focus.
+  await page.goto('/docs/components/infinite-scroll');
+  const feed = page.getByRole('feed', { name: 'News' });
+  const article = feed.getByRole('article').nth(2);
+  const outside = () =>
+    page.evaluate(() => {
+      const focused = document.activeElement;
+      const feedElement = document.querySelector('[role=feed]');
+      if (
+        !focused ||
+        focused === document.body ||
+        feedElement?.contains(focused)
+      )
+        return 'none';
+      return feedElement &&
+        feedElement.compareDocumentPosition(focused) &
+          Node.DOCUMENT_POSITION_FOLLOWING
+        ? 'after'
+        : 'before';
+    });
+  await article.focus();
+  await page.keyboard.press('Control+End');
+  await expect.poll(outside).toBe('after');
+  await article.focus();
+  await page.keyboard.press('Control+Home');
+  await expect.poll(outside).toBe('before');
+});
+
+test('RTL: the same feed, read from the right', async ({ page }) => {
+  await page.goto(demo('rtl'));
+  const feed = page.getByRole('feed', { name: 'الأخبار' });
+  await expect(feed.getByRole('article')).toHaveCount(8);
+  await scrollTo(scroller(page), 'end');
+  await expect(feed.getByRole('article')).toHaveCount(16);
 });

@@ -7,7 +7,7 @@ import { VariableVirtualListDemo } from './variable-virtual-list-demo';
   imports: [DemoContainer, VariableVirtualListDemo],
   template: `
     <app-demo-container
-      title="Variable heights"
+      title="Variable sizes"
       [code]="code"
       demoUrl="/demos/virtual-list/variable-virtual-list-demo"
     >
@@ -19,13 +19,13 @@ import { VariableVirtualListDemo } from './variable-virtual-list-demo';
 })
 export class VariableVirtualListDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
-  ScFrame,
   ScVirtualList,
   ScVirtualListRow,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/virtual-list';
 
-/** Rows of any height — messages, long and short: estimated first, then measured; the list and its scrollbar follow, and the reader keeps their place as rows above settle. */
+/** Rows of any height — messages long and short: estimated, then measured; the list and its scrollbar follow, and you keep your place as rows above settle. */
 @Component({
   selector: 'app-variable-virtual-list-demo',
   imports: [ScFrame, ScVirtualList, ScVirtualListRow],
@@ -35,16 +35,16 @@ import {
       #list="scVirtualList"
       tabindex="0"
       [count]="messages.length"
-      [estimate]="72"
+      [estimate]="96"
       [key]="keyOf"
       [gap]="8"
       aria-label="Messages"
       scFrame
-      class="h-96 w-full max-w-md overflow-y-auto p-0"
+      class="h-96 w-full max-w-md overflow-y-auto"
     >
       @for (row of list.rows(); track row.key) {
-        <li [scVirtualListRow]="row" class="px-3">
-          <div scFrame class="bg-muted p-3 text-sm">
+        <li [scVirtualListRow]="row" class="px-3 first:pt-3">
+          <div scFrame size="sm" class="bg-muted p-3 text-sm">
             <p class="font-medium">{{ messages[row.index].from }}</p>
             <p>{{ messages[row.index].text }}</p>
           </div>
@@ -66,20 +66,21 @@ export class VariableVirtualListDemo {
     'the plan for the release is ready and the team would like your thoughts before friday when we meet to decide'.split(
       ' ',
     );
+  private readonly names = [
+    'Ada',
+    'Grace',
+    'Alan',
+    'Katherine',
+    'Margaret',
+    'Hedy',
+    'Linus',
+    'Barbara',
+    'Dennis',
+    'Radia',
+  ];
   private readonly messages = Array.from({ length: 2_000 }, (_, i) => ({
     id: 'm' + i,
-    from: [
-      'Ada',
-      'Grace',
-      'Alan',
-      'Katherine',
-      'Margaret',
-      'Hedy',
-      'Linus',
-      'Barbara',
-      'Dennis',
-      'Radia',
-    ][i % 10],
+    from: this.names[i % 10],
     text:
       this.words.slice(0, 4 + ((i * 7) % 18)).join(' ') +
       '.' +

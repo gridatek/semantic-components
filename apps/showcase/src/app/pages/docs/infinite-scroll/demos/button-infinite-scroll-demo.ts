@@ -1,10 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScFrame,
-  ScInfiniteScroll,
-  ScInfiniteScrollMore,
-  ScInfiniteScrollStatus,
-} from '@semantic-components/ui';
+import { ScButton, ScFrame, ScInfiniteScroll } from '@semantic-components/ui';
 
 interface Item {
   readonly id: number;
@@ -14,12 +9,7 @@ interface Item {
 /** auto off: only the button asks — the footer stays within reach, and the reader decides. */
 @Component({
   selector: 'app-button-infinite-scroll-demo',
-  imports: [
-    ScFrame,
-    ScInfiniteScroll,
-    ScInfiniteScrollMore,
-    ScInfiniteScrollStatus,
-  ],
+  imports: [ScButton, ScFrame, ScInfiniteScroll],
   template: `
     <div class="grid w-full max-w-lg gap-3">
       <ul
@@ -36,7 +26,10 @@ interface Item {
           <li class="p-3 text-sm">{{ item.title }}</li>
         }
       </ul>
-      <p scInfiniteScrollStatus>
+      <p
+        role="status"
+        class="text-muted-foreground flex min-h-6 items-center justify-center gap-2 text-sm [&>svg]:size-4 [&>svg]:shrink-0"
+      >
         @if (loading()) {
           Loading…
         } @else if (done()) {
@@ -45,9 +38,17 @@ interface Item {
           {{ items().length }} results shown.
         }
       </p>
-      <button [scInfiniteScrollMore]="results" class="justify-self-center">
-        Load more
-      </button>
+      @if (!results.done()) {
+        <button
+          scButton
+          variant="outline"
+          class="justify-self-center"
+          [disabled]="results.loading()"
+          (click)="results.loadMore()"
+        >
+          Load more
+        </button>
+      }
     </div>
   `,
   host: { class: 'flex w-full flex-col items-center gap-3' },

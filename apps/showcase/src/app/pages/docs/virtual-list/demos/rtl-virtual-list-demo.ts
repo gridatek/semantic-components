@@ -1,41 +1,21 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RtlVirtualListNextDemo } from './rtl-virtual-list-next-demo';
-
-@Component({
-  selector: 'app-rtl-virtual-list-next-demo-container',
-  imports: [DemoContainer, RtlVirtualListNextDemo],
-  template: `
-    <app-demo-container
-      title="RTL"
-      [code]="code"
-      demoUrl="/demos/virtual-list-next/rtl-virtual-list-next-demo"
-    >
-      <app-rtl-virtual-list-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class RtlVirtualListNextDemoContainer {
-  private readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
 import { ScFrame } from '@semantic-components/ui';
 import {
-  ScVirtualListNext,
-  ScVirtualListNextRow,
+  ScVirtualList,
+  ScVirtualListRow,
 } from '@semantic-components/ui/virtual-list';
 
 /** In a right-to-left page: a strip starts at the right and runs as the text reads. */
 @Component({
-  selector: 'app-rtl-virtual-list-next-demo',
-  imports: [Dir, ScFrame, ScVirtualListNext, ScVirtualListNextRow],
+  selector: 'app-rtl-virtual-list-demo',
+  imports: [Dir, ScFrame, ScVirtualList, ScVirtualListRow],
   providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
-  template: \`
+  template: `
     <div dir="rtl" lang="ar" class="flex w-full flex-col items-center gap-3">
       <ul
-        scVirtualListNext
-        #list="scVirtualListNext"
+        scVirtualList
+        #list="scVirtualList"
         tabindex="0"
         orientation="horizontal"
         [count]="days.length"
@@ -46,7 +26,7 @@ import {
         class="h-28 w-full max-w-2xl overflow-x-auto"
       >
         @for (row of list.rows(); track row.key) {
-          <li [scVirtualListNextRow]="row" class="py-2">
+          <li [scVirtualListRow]="row" class="py-2">
             <div
               scFrame
               size="sm"
@@ -65,11 +45,10 @@ import {
         {{ list.count() }}
       }
     </p>
-  \`,
+  `,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlVirtualListNextDemo {
+export class RtlVirtualListDemo {
   private readonly days = Array.from({ length: 365 }, (_, i) => i + 1);
-}`;
 }

@@ -19,11 +19,7 @@ import { ChatInfiniteScrollDemo } from './chat-infinite-scroll-demo';
 })
 export class ChatInfiniteScrollDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
-import {
-  ScFrame,
-  ScInfiniteScroll,
-  ScInfiniteScrollStatus,
-} from '@semantic-components/ui';
+import { ScFrame, ScInfiniteScroll } from '@semantic-components/ui';
 
 interface Message {
   readonly id: number;
@@ -34,7 +30,7 @@ interface Message {
 /** direction="start": it opens at the end, and older messages come in above as the reader scrolls up — the one they were reading stays where it was. */
 @Component({
   selector: 'app-chat-infinite-scroll-demo',
-  imports: [ScFrame, ScInfiniteScroll, ScInfiniteScrollStatus],
+  imports: [ScFrame, ScInfiniteScroll],
   template: \`
     <div
       scFrame
@@ -43,7 +39,10 @@ interface Message {
       role="log"
       aria-label="Messages"
     >
-      <p scInfiniteScrollStatus class="pt-2">
+      <p
+        role="status"
+        class="text-muted-foreground flex min-h-6 items-center justify-center gap-2 pt-2 text-sm [&>svg]:size-4 [&>svg]:shrink-0"
+      >
         @if (loading()) {
           Loading older messages…
         } @else if (done()) {
