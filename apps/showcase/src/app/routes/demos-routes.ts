@@ -1243,6 +1243,109 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/carousel-new',
+    children: [
+      {
+        path: 'carousel-new-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/carousel-new-usage-demo').then(
+            (m) => m.CarouselNewUsageDemo,
+          ),
+      },
+      {
+        path: 'sizes-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/sizes-carousel-new-demo').then(
+            (m) => m.SizesCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'spacing-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/spacing-carousel-new-demo').then(
+            (m) => m.SpacingCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'orientation-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/orientation-carousel-new-demo').then(
+            (m) => m.OrientationCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'loop-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/loop-carousel-new-demo').then(
+            (m) => m.LoopCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'align-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/align-carousel-new-demo').then(
+            (m) => m.AlignCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'pages-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/pages-carousel-new-demo').then(
+            (m) => m.PagesCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'indicators-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/indicators-carousel-new-demo').then(
+            (m) => m.IndicatorsCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'thumbnails-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/thumbnails-carousel-new-demo').then(
+            (m) => m.ThumbnailsCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'drag-free-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/drag-free-carousel-new-demo').then(
+            (m) => m.DragFreeCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'autoplay-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/autoplay-carousel-new-demo').then(
+            (m) => m.AutoplayCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'progress-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/progress-carousel-new-demo').then(
+            (m) => m.ProgressCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'controlled-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/controlled-carousel-new-demo').then(
+            (m) => m.ControlledCarouselNewDemo,
+          ),
+      },
+      {
+        path: 'rtl-carousel-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/demos/rtl-carousel-new-demo').then(
+            (m) => m.RtlCarouselNewDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/carousel',
     children: [
       {
@@ -3791,6 +3894,32 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/link/demos/rtl-link-demo').then(
             (m) => m.RtlLinkDemo,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'demos/lightbox-new',
+    children: [
+      {
+        path: 'lightbox-new-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/lightbox-new/demos/lightbox-new-usage-demo').then(
+            (m) => m.LightboxNewUsageDemo,
+          ),
+      },
+      {
+        path: 'article-lightbox-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/lightbox-new/demos/article-lightbox-new-demo').then(
+            (m) => m.ArticleLightboxNewDemo,
+          ),
+      },
+      {
+        path: 'rtl-lightbox-new-demo',
+        loadComponent: () =>
+          import('../pages/docs/lightbox-new/demos/rtl-lightbox-new-demo').then(
+            (m) => m.RtlLightboxNewDemo,
           ),
       },
     ],

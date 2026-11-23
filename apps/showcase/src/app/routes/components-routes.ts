@@ -165,6 +165,12 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/carousel/carousel-page'),
       },
       {
+        path: 'carousel-new',
+        title: 'Carousel New - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/carousel-new/carousel-new-page'),
+      },
+      {
         path: 'chart',
         title: 'Chart - Semantic Components',
         loadComponent: () => import('../pages/docs/chart/chart-page'),
@@ -386,6 +392,12 @@ export const componentsRoutes: Route[] = [
         path: 'lightbox',
         title: 'Lightbox - Semantic Components',
         loadComponent: () => import('../pages/docs/lightbox/lightbox-page'),
+      },
+      {
+        path: 'lightbox-new',
+        title: 'Lightbox New - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/lightbox-new/lightbox-new-page'),
       },
       {
         path: 'marquee',
