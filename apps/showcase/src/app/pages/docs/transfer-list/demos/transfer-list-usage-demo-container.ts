@@ -119,6 +119,14 @@ const SIDES = [
                 [disabled]="item.disabled ?? false"
                 (dblclick)="move(side.key, [item.id])"
               >
+                <!-- The option is the control: its box only shows the selection (inert). -->
+                <input
+                  type="checkbox"
+                  scCheckbox
+                  inert
+                  [checked]="selected[side.key]().includes(item.id)"
+                  [disabled]="item.disabled ?? false"
+                />
                 {{ item.label }}
               </div>
             }
