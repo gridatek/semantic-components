@@ -132,7 +132,6 @@ export class ScVirtualListNext {
       const gap = this.gap();
       const anchor = this.anchor();
       const follow = this.follow() ?? anchor === 'end';
-      const initial = this.initialCount() * (estimate + gap);
       const focused = this.focused();
       const scroller = this.scroller();
       const inWindow = !!scroller && scroller === this.document.defaultView;
@@ -148,9 +147,6 @@ export class ScVirtualListNext {
         anchorTo: anchor,
         followOnAppend: follow ? 'auto' : false,
         scrollMargin: this.margin(),
-        initialRect: vertical
-          ? { width: 0, height: initial / lanes }
-          : { width: initial / lanes, height: 0 },
         // The focused row stays rendered: focus is never lost to scrolling.
         rangeExtractor: (range) => {
           const indexes = defaultRangeExtractor(range);
@@ -199,13 +195,43 @@ export class ScVirtualListNext {
 
   /** The rows to render now. */
   readonly rows = computed<readonly ScVirtualListNextItem[]>(() => {
+    // Before the engine watches the page (the server, the first paint): the
+    // first rows, stacked by their estimate — the same on both sides.
+    if (!this.mounted()) return this.initialRows();
     this.version();
     this.options();
     return [...this.virtualizer.getVirtualItems()];
   });
 
+  /** The first `initialCount` rows, laid out by the estimate. */
+  private readonly initialRows = computed<readonly ScVirtualListNextItem[]>(
+    () => {
+      const count = Math.min(this.initialCount(), this.count());
+      const lanes = Math.max(1, this.lanes());
+      const size = this.estimate();
+      const gap = this.gap();
+      const key = this.key();
+      return Array.from({ length: count }, (_, index) => {
+        const start = Math.floor(index / lanes) * (size + gap);
+        return {
+          key: key(index),
+          index,
+          start,
+          end: start + size,
+          size,
+          lane: index % lanes,
+        };
+      });
+    },
+  );
+
   /** The whole list's length along its axis (px). */
   readonly size = computed(() => {
+    if (!this.mounted()) {
+      // Estimated: the scrollbar about right from the first paint.
+      const rows = Math.ceil(this.count() / Math.max(1, this.lanes()));
+      return Math.max(0, rows * (this.estimate() + this.gap()) - this.gap());
+    }
     this.version();
     this.options();
     return this.virtualizer.getTotalSize();
