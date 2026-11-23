@@ -107,7 +107,6 @@ export * from './sortable-list';
 export * from './stepper';
 export * from './time-clock';
 export * from './timeline';
-export * from './transfer-list';
 export * from './virtual-list';
 export * from './number-ticker';
 export * from './focus-trap';

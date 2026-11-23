@@ -1131,11 +1131,10 @@
   {
     "name": "Transfer List",
     "path": "transfer-list",
-    "description": "One value (the chosen ids, a form field), two listbox sides, keyboard moves, search, reorder.",
+    "description": "A recipe: two listboxes and one value — the chosen ids, in order; search, select all, move with the keys or a double-click, reorder. No component of its own.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Recipes"
   },
   {
     "name": "Tree",

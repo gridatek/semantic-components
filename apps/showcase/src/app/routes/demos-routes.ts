@@ -5928,6 +5928,39 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/transfer-list',
+    children: [
+      {
+        path: 'transfer-list-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/transfer-list/demos/transfer-list-usage-demo').then(
+            (m) => m.TransferListUsageDemo,
+          ),
+      },
+      {
+        path: 'ordered-transfer-list-demo',
+        loadComponent: () =>
+          import('../pages/docs/transfer-list/demos/ordered-transfer-list-demo').then(
+            (m) => m.OrderedTransferListDemo,
+          ),
+      },
+      {
+        path: 'form-transfer-list-demo',
+        loadComponent: () =>
+          import('../pages/docs/transfer-list/demos/form-transfer-list-demo').then(
+            (m) => m.FormTransferListDemo,
+          ),
+      },
+      {
+        path: 'rtl-transfer-list-demo',
+        loadComponent: () =>
+          import('../pages/docs/transfer-list/demos/rtl-transfer-list-demo').then(
+            (m) => m.RtlTransferListDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/countdown',
     children: [
       {
@@ -8238,39 +8271,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/tooltip/demos/rtl-tooltip-demo').then(
             (m) => m.RtlTooltipDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/transfer-list',
-    children: [
-      {
-        path: 'basic-transfer-list-demo',
-        loadComponent: () =>
-          import('../pages/docs/transfer-list/demos/basic-transfer-list-demo').then(
-            (m) => m.BasicTransferListDemo,
-          ),
-      },
-      {
-        path: 'form-transfer-list-demo',
-        loadComponent: () =>
-          import('../pages/docs/transfer-list/demos/form-transfer-list-demo').then(
-            (m) => m.FormTransferListDemo,
-          ),
-      },
-      {
-        path: 'ordered-transfer-list-demo',
-        loadComponent: () =>
-          import('../pages/docs/transfer-list/demos/ordered-transfer-list-demo').then(
-            (m) => m.OrderedTransferListDemo,
-          ),
-      },
-      {
-        path: 'many-transfer-list-demo',
-        loadComponent: () =>
-          import('../pages/docs/transfer-list/demos/many-transfer-list-demo').then(
-            (m) => m.ManyTransferListDemo,
           ),
       },
     ],
