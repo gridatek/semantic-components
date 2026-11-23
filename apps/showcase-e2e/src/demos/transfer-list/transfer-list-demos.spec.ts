@@ -30,6 +30,12 @@ test.describe('Usage', () => {
     await press(page, 'ArrowDown');
     await press(page, 'Shift+Space');
     await expect(selected(page, 'Available')).toHaveText(['Delete', 'Share']);
+    // Each option's box shows it: checked while selected, not a control of its own.
+    const box = (name: string) =>
+      list(page, 'Available').getByRole('option', { name }).locator('input');
+    await expect(box('Delete')).toBeChecked();
+    await expect(box('Export')).not.toBeChecked();
+    await expect(box('Delete')).toHaveAttribute('inert', '');
     await press(page, 'Enter');
     await expect(value(page)).toHaveText('Value: read, write, delete, share');
     await expect(selected(page, 'Granted')).toHaveText(['Delete', 'Share']);

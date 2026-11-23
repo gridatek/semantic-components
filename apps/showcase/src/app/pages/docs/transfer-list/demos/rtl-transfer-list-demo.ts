@@ -10,7 +10,6 @@ import {
   ScButton,
   ScCheckbox,
   ScInput,
-  ScListbox,
   ScListboxItem,
   ScListboxMultiple,
 } from '@semantic-components/ui';
@@ -52,7 +51,6 @@ const SIDES = [
     ScButton,
     ScCheckbox,
     ScInput,
-    ScListbox,
     ScListboxItem,
     ScListboxMultiple,
     SiChevronLeftIcon,

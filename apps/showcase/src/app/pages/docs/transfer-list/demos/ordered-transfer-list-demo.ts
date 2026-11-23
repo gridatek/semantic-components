@@ -2,7 +2,6 @@ import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScButton,
   ScCheckbox,
-  ScListbox,
   ScListboxItem,
   ScListboxMultiple,
 } from '@semantic-components/ui';
@@ -44,7 +43,6 @@ const SIDES = [
   imports: [
     ScButton,
     ScCheckbox,
-    ScListbox,
     ScListboxItem,
     ScListboxMultiple,
     SiChevronDownIcon,

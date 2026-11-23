@@ -106,7 +106,7 @@ import { TransferListUsageDemoContainer } from './demos/transfer-list-usage-demo
 export default class TransferListPage {
   private readonly anatomy = {
     imports:
-      "import { ScButton, ScCheckbox, ScInput, ScListbox, ScListboxItem, ScListboxMultiple } from '@semantic-components/ui';",
+      "import { ScButton, ScCheckbox, ScInput, ScListboxItem, ScListboxMultiple } from '@semantic-components/ui';",
     markup: [
       '@for (side of sides; track side.key) {',
       '  <input type="checkbox" scCheckbox [checked]="allSelected(side.key)" (checkedChange)="selectAll(side.key, $event)" />',

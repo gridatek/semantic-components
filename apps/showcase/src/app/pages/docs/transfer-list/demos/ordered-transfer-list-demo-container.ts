@@ -22,7 +22,6 @@ export class OrderedTransferListDemoContainer {
 import {
   ScButton,
   ScCheckbox,
-  ScListbox,
   ScListboxItem,
   ScListboxMultiple,
 } from '@semantic-components/ui';
@@ -64,7 +63,6 @@ const SIDES = [
   imports: [
     ScButton,
     ScCheckbox,
-    ScListbox,
     ScListboxItem,
     ScListboxMultiple,
     SiChevronDownIcon,
