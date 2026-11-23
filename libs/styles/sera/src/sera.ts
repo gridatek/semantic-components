@@ -63,6 +63,7 @@ import { sheet } from './sheet';
 import { sidebar } from './sidebar';
 import { skeleton } from './skeleton';
 import { slider } from './slider';
+import { sortable } from './sortable';
 import { switchStyles } from './switch';
 import { table } from './table';
 /** The sera style: `provideSemanticComponents({ style: sera })`. */
@@ -147,6 +148,7 @@ export const sera: ScStyle = {
   fileInput,
   mediaPlayer,
   compare,
+  sortable,
   listbox,
   segmentedControl,
   waterfall,

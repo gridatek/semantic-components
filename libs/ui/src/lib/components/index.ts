@@ -104,6 +104,7 @@ export * from './org-chart';
 export * from './scheduler';
 export * from './signature-pad';
 export * from './sortable-list';
+export * from './sortable-next';
 export * from './stepper';
 export * from './time-clock';
 export * from './timeline';

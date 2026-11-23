@@ -553,6 +553,16 @@ export interface ScFileInputStyles {
   size: string;
 }
 
+/** A sortable item's moments that change from style to style — ours (shadcn has none). */
+export interface ScSortableStyles {
+  /** Dragged by the pointer: raised. */
+  dragging: string;
+  /** Lifted by the keyboard. */
+  lifted: string;
+  /** Just dropped, for a moment. */
+  dropped: string;
+}
+
 /** A compare's parts that change from style to style — ours (shadcn has none). */
 export interface ScCompareStyles {
   /** The handle's knob (its ::after): its corners. */
@@ -833,6 +843,7 @@ export interface ScStyle {
   fileInput: ScFileInputStyles;
   mediaPlayer: ScMediaPlayerStyles;
   compare: ScCompareStyles;
+  sortable: ScSortableStyles;
   listbox: ScListboxStyles;
   segmentedControl: ScSegmentedControlStyles;
   waterfall: ScWaterfallStyles;

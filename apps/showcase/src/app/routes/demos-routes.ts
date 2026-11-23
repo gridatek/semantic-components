@@ -5702,6 +5702,67 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/sortable-next',
+    children: [
+      {
+        path: 'sortable-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-next/demos/sortable-next-usage-demo').then(
+            (m) => m.SortableNextUsageDemo,
+          ),
+      },
+      {
+        path: 'handle-sortable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-next/demos/handle-sortable-next-demo').then(
+            (m) => m.HandleSortableNextDemo,
+          ),
+      },
+      {
+        path: 'horizontal-sortable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-next/demos/horizontal-sortable-next-demo').then(
+            (m) => m.HorizontalSortableNextDemo,
+          ),
+      },
+      {
+        path: 'grid-sortable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-next/demos/grid-sortable-next-demo').then(
+            (m) => m.GridSortableNextDemo,
+          ),
+      },
+      {
+        path: 'buttons-sortable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-next/demos/buttons-sortable-next-demo').then(
+            (m) => m.ButtonsSortableNextDemo,
+          ),
+      },
+      {
+        path: 'linked-sortable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-next/demos/linked-sortable-next-demo').then(
+            (m) => m.LinkedSortableNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-sortable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-next/demos/disabled-sortable-next-demo').then(
+            (m) => m.DisabledSortableNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-sortable-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/sortable-next/demos/rtl-sortable-next-demo').then(
+            (m) => m.RtlSortableNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/sortable-list',
     children: [
       {

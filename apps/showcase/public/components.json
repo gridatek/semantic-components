@@ -949,6 +949,15 @@
     "hidden": true
   },
   {
+    "name": "Sortable Next",
+    "path": "sortable-next",
+    "description": "Your array reordered by any pointer or the keyboard, announced in your words; a list, a row, a grid or linked lists; the others glide to make room.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Advanced",
+    "hidden": true
+  },
+  {
     "name": "Spinner",
     "path": "spinner",
     "description": "A loading indicator animation.",

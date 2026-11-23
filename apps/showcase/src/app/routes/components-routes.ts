@@ -546,6 +546,12 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/sortable-list/sortable-list-page'),
       },
       {
+        path: 'sortable-next',
+        title: 'Sortable Next - Semantic Components',
+        loadComponent: () =>
+          import('../pages/docs/sortable-next/sortable-next-page'),
+      },
+      {
         path: 'spinner',
         title: 'Spinner - Semantic Components',
         loadComponent: () => import('../pages/docs/spinner/spinner-page'),
