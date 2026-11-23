@@ -31,11 +31,11 @@ import {
   ScMenuPortal,
   ScMenuProvider,
   ScMenuTrigger,
+  ScSortable,
   ScSortableGroup,
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
-  ScSortableList,
-  ScSortableListItem,
+  ScSortableItem,
 } from '@semantic-components/ui';
 import { SiEllipsisIcon } from '@semantic-icons/lucide-icons';
 
@@ -54,8 +54,8 @@ interface Task {
   imports: [
     ScFrame,
     ScSortableGroup,
-    ScSortableList,
-    ScSortableListItem,
+    ScSortable,
+    ScSortableItem,
     ScAvatar,
     ScAvatarFallback,
     ScBadge,
@@ -96,12 +96,12 @@ interface Task {
             }}</span>
           </h3>
           <ul
-            [scSortableList]="column.id"
+            [scSortable]="column.id"
             [attr.aria-labelledby]="'rich-' + column.id"
           >
             @for (task of kanban.items(column.id); track task.id) {
               <li
-                [scSortableListItem]="task"
+                [scSortableItem]="task"
                 aria-describedby="rich-kanban-help"
                 class="grid gap-2"
               >

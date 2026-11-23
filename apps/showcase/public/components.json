@@ -940,22 +940,12 @@
     "category": "Forms"
   },
   {
-    "name": "Sortable List",
-    "path": "sortable-list",
-    "description": "Your array reordered by any pointer or the keyboard, announced in your words; down, along, or as a grid.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Advanced",
-    "hidden": true
-  },
-  {
-    "name": "Sortable Next",
-    "path": "sortable-next",
+    "name": "Sortable",
+    "path": "sortable",
     "description": "Your array reordered by any pointer or the keyboard, announced in your words; a list, a row, a grid or linked lists; the others glide to make room.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Spinner",

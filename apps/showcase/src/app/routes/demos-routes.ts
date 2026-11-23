@@ -5702,109 +5702,62 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/sortable-next',
+    path: 'demos/sortable',
     children: [
       {
-        path: 'sortable-next-usage-demo',
+        path: 'sortable-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/sortable-next/demos/sortable-next-usage-demo').then(
-            (m) => m.SortableNextUsageDemo,
+          import('../pages/docs/sortable/demos/sortable-usage-demo').then(
+            (m) => m.SortableUsageDemo,
           ),
       },
       {
-        path: 'handle-sortable-next-demo',
+        path: 'handle-sortable-demo',
         loadComponent: () =>
-          import('../pages/docs/sortable-next/demos/handle-sortable-next-demo').then(
-            (m) => m.HandleSortableNextDemo,
+          import('../pages/docs/sortable/demos/handle-sortable-demo').then(
+            (m) => m.HandleSortableDemo,
           ),
       },
       {
-        path: 'horizontal-sortable-next-demo',
+        path: 'horizontal-sortable-demo',
         loadComponent: () =>
-          import('../pages/docs/sortable-next/demos/horizontal-sortable-next-demo').then(
-            (m) => m.HorizontalSortableNextDemo,
+          import('../pages/docs/sortable/demos/horizontal-sortable-demo').then(
+            (m) => m.HorizontalSortableDemo,
           ),
       },
       {
-        path: 'grid-sortable-next-demo',
+        path: 'grid-sortable-demo',
         loadComponent: () =>
-          import('../pages/docs/sortable-next/demos/grid-sortable-next-demo').then(
-            (m) => m.GridSortableNextDemo,
+          import('../pages/docs/sortable/demos/grid-sortable-demo').then(
+            (m) => m.GridSortableDemo,
           ),
       },
       {
-        path: 'buttons-sortable-next-demo',
+        path: 'buttons-sortable-demo',
         loadComponent: () =>
-          import('../pages/docs/sortable-next/demos/buttons-sortable-next-demo').then(
-            (m) => m.ButtonsSortableNextDemo,
+          import('../pages/docs/sortable/demos/buttons-sortable-demo').then(
+            (m) => m.ButtonsSortableDemo,
           ),
       },
       {
-        path: 'linked-sortable-next-demo',
+        path: 'linked-sortable-demo',
         loadComponent: () =>
-          import('../pages/docs/sortable-next/demos/linked-sortable-next-demo').then(
-            (m) => m.LinkedSortableNextDemo,
+          import('../pages/docs/sortable/demos/linked-sortable-demo').then(
+            (m) => m.LinkedSortableDemo,
           ),
       },
       {
-        path: 'disabled-sortable-next-demo',
+        path: 'disabled-sortable-demo',
         loadComponent: () =>
-          import('../pages/docs/sortable-next/demos/disabled-sortable-next-demo').then(
-            (m) => m.DisabledSortableNextDemo,
+          import('../pages/docs/sortable/demos/disabled-sortable-demo').then(
+            (m) => m.DisabledSortableDemo,
           ),
       },
       {
-        path: 'rtl-sortable-next-demo',
+        path: 'rtl-sortable-demo',
         loadComponent: () =>
-          import('../pages/docs/sortable-next/demos/rtl-sortable-next-demo').then(
-            (m) => m.RtlSortableNextDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/sortable-list',
-    children: [
-      {
-        path: 'basic-sortable-list-demo',
-        loadComponent: () =>
-          import('../pages/docs/sortable-list/demos/basic-sortable-list-demo').then(
-            (m) => m.BasicSortableListDemo,
-          ),
-      },
-      {
-        path: 'handle-sortable-list-demo',
-        loadComponent: () =>
-          import('../pages/docs/sortable-list/demos/handle-sortable-list-demo').then(
-            (m) => m.HandleSortableListDemo,
-          ),
-      },
-      {
-        path: 'horizontal-sortable-list-demo',
-        loadComponent: () =>
-          import('../pages/docs/sortable-list/demos/horizontal-sortable-list-demo').then(
-            (m) => m.HorizontalSortableListDemo,
-          ),
-      },
-      {
-        path: 'grid-sortable-list-demo',
-        loadComponent: () =>
-          import('../pages/docs/sortable-list/demos/grid-sortable-list-demo').then(
-            (m) => m.GridSortableListDemo,
-          ),
-      },
-      {
-        path: 'buttons-sortable-list-demo',
-        loadComponent: () =>
-          import('../pages/docs/sortable-list/demos/buttons-sortable-list-demo').then(
-            (m) => m.ButtonsSortableListDemo,
-          ),
-      },
-      {
-        path: 'disabled-sortable-list-demo',
-        loadComponent: () =>
-          import('../pages/docs/sortable-list/demos/disabled-sortable-list-demo').then(
-            (m) => m.DisabledSortableListDemo,
+          import('../pages/docs/sortable/demos/rtl-sortable-demo').then(
+            (m) => m.RtlSortableDemo,
           ),
       },
     ],

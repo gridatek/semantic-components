@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScFrame,
+  ScSortable,
   ScSortableGroup,
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
-  ScSortableList,
-  ScSortableListItem,
+  ScSortableItem,
 } from '@semantic-components/ui';
 
 interface Task {
@@ -16,7 +16,7 @@ interface Task {
 /** Cards dragged with the mouse, a finger (hold, then move) or a pen — or lifted by the keyboard: Space, the arrows, Space; Escape puts it back. Each keyboard step is announced, in your words. */
 @Component({
   selector: 'app-basic-kanban-board-demo',
-  imports: [ScFrame, ScSortableGroup, ScSortableList, ScSortableListItem],
+  imports: [ScFrame, ScSortableGroup, ScSortable, ScSortableItem],
   template: `
     <p id="basic-kanban-help" class="sr-only">
       Space lifts a card, the arrow keys move it, Space drops it, Escape puts it
@@ -45,14 +45,11 @@ interface Task {
             }}</span>
           </h3>
           <ul
-            [scSortableList]="column.id"
+            [scSortable]="column.id"
             [attr.aria-labelledby]="'basic-' + column.id"
           >
             @for (task of kanban.items(column.id); track task.id) {
-              <li
-                [scSortableListItem]="task"
-                aria-describedby="basic-kanban-help"
-              >
+              <li [scSortableItem]="task" aria-describedby="basic-kanban-help">
                 {{ task.title }}
               </li>
             }

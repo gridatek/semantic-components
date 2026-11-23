@@ -28,9 +28,8 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
         <h1 scTypeset>Kanban Board</h1>
         <p class="text-muted-foreground">
           A recipe: your columns and cards, your items by column as the value —
-          <a scLink routerLink="/docs/components/sortable-list"
-            >Sortable Lists</a
-          >, linked in a group. No component of its own.
+          <a scLink routerLink="/docs/components/sortable">Sortable</a>
+          lists, linked in a group. No component of its own.
         </p>
       </div>
 
@@ -45,9 +44,9 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
           <code scTypeset>scSortableGroup</code>
           holds the value — your items by column, replaced on each move. Each
           column is a list of it,
-          <code scTypeset>[scSortableList]="column.id"</code>, its cards
-          <code scTypeset>scSortableListItem</code>s: dragged from column to
-          column, or lifted by the keyboard and carried across. The group&apos;s
+          <code scTypeset>[scSortable]="column.id"</code>, its cards
+          <code scTypeset>scSortableItem</code>s: dragged from column to column,
+          or lifted by the keyboard and carried across. The group&apos;s
           <code scTypeset>items(column)</code>
           is what to draw, its
           <code scTypeset>move(item, column, index)</code>
@@ -90,14 +89,14 @@ import { RichKanbanBoardDemoContainer } from './demos/rich-kanban-board-demo-con
 export default class KanbanBoardPage {
   private readonly anatomy = {
     imports:
-      "import { ScSortableGroup, ScSortableList, ScSortableListItem } from '@semantic-components/ui';",
+      "import { ScSortableGroup, ScSortable, ScSortableItem } from '@semantic-components/ui';",
     markup: [
       '<div scSortableGroup #board="scSortableGroup" [(value)]="tasks" [announce]="announce">',
       '  @for (column of columns; track column.id) {',
       '    <h3 [id]="column.id">{{ column.title }}</h3>',
-      '    <ul [scSortableList]="column.id" [attr.aria-labelledby]="column.id">',
+      '    <ul [scSortable]="column.id" [attr.aria-labelledby]="column.id">',
       '      @for (task of board.items(column.id); track task.id) {',
-      '        <li [scSortableListItem]="task" aria-describedby="help">{{ task.title }}</li>',
+      '        <li [scSortableItem]="task" aria-describedby="help">{{ task.title }}</li>',
       '      }',
       '    </ul>',
       '  }',

@@ -23,11 +23,11 @@ import {
   ScNativeSelectContainer,
   ScNativeSelectIcon,
   ScNativeSelectOption,
+  ScSortable,
   ScSortableGroup,
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
-  ScSortableList,
-  ScSortableListItem,
+  ScSortableItem,
   ScToaster,
 } from '@semantic-components/ui';
 import {
@@ -166,8 +166,8 @@ const BOARD: ScSortableGroupValue<Task> = {
     ScFieldGroup,
     ScInput,
     ScSortableGroup,
-    ScSortableListItem,
-    ScSortableList,
+    ScSortableItem,
+    ScSortable,
     ScLabel,
     ScNativeSelect,
     ScNativeSelectContainer,
@@ -228,13 +228,13 @@ const BOARD: ScSortableGroupValue<Task> = {
             </button>
           </div>
           <ul
-            [scSortableList]="column.id"
+            [scSortable]="column.id"
             [attr.aria-labelledby]="'col-' + column.id"
             class="flex min-h-24 flex-col gap-3"
           >
             @for (task of kanban.items(column.id); track task.id) {
               <li
-                [scSortableListItem]="task"
+                [scSortableItem]="task"
                 aria-describedby="kanban-help"
                 class="bg-card text-card-foreground ring-foreground/10 data-lifted:ring-ring flex flex-col gap-3 rounded-lg p-3 text-sm ring-1 data-dragging:shadow-lg data-lifted:ring-2"
               >

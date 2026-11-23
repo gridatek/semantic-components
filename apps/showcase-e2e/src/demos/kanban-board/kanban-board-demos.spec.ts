@@ -5,11 +5,11 @@ const demo = (name: string) => `/demos/kanban-board/${name}-kanban-board-demo`;
 const column = (page: Page, name: string) =>
   page.getByRole('list', { name: new RegExp(`^${name}`) });
 const card = (page: Page, title: string) =>
-  page.locator('[data-slot="sortable-list-item"]', { hasText: title });
+  page.locator('[data-slot="sortable-item"]', { hasText: title });
 /** A column's cards' texts, in order. */
 const titles = (list: Locator) =>
   list
-    .locator('[data-slot="sortable-list-item"]')
+    .locator('[data-slot="sortable-item"]')
     .evaluateAll((cards) => cards.map((c) => c.textContent?.trim() ?? ''));
 const said = (page: Page) => page.locator('.cdk-live-announcer-element');
 /** Where it is on screen. */

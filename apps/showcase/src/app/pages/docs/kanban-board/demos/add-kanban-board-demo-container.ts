@@ -23,11 +23,11 @@ import {
   ScButton,
   ScFrame,
   ScInput,
+  ScSortable,
   ScSortableGroup,
   type ScSortableGroupAnnouncement,
   type ScSortableGroupValue,
-  ScSortableList,
-  ScSortableListItem,
+  ScSortableItem,
 } from '@semantic-components/ui';
 
 interface Task {
@@ -41,8 +41,8 @@ interface Task {
   imports: [
     ScFrame,
     ScSortableGroup,
-    ScSortableList,
-    ScSortableListItem,
+    ScSortable,
+    ScSortableItem,
     ScButton,
     ScInput,
   ],
@@ -85,14 +85,11 @@ interface Task {
             </p>
           }
           <ul
-            [scSortableList]="column.id"
+            [scSortable]="column.id"
             [attr.aria-labelledby]="'add-' + column.id"
           >
             @for (task of kanban.items(column.id); track task.id) {
-              <li
-                [scSortableListItem]="task"
-                aria-describedby="add-kanban-help"
-              >
+              <li [scSortableItem]="task" aria-describedby="add-kanban-help">
                 {{ task.title }}
               </li>
             }
