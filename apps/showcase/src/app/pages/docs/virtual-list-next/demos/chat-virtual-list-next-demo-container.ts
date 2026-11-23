@@ -60,7 +60,7 @@ import {
         class="h-80 overflow-y-auto"
       >
         @for (row of list.rows(); track row.key) {
-          <li [scVirtualListNextRow]="row" class="px-3 first:pt-3">
+          <li [scVirtualListNextRow]="row" class="px-3">
             <div scFrame size="sm" class="bg-muted p-2 text-sm">
               <span class="font-medium">{{ messages()[row.index].from }}:</span>
               {{ messages()[row.index].text }}
