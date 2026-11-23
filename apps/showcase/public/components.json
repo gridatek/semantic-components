@@ -439,6 +439,15 @@
     "hidden": true
   },
   {
+    "name": "Infinite Scroll Next",
+    "path": "infinite-scroll-next",
+    "description": "More near the end or the start (a chat), with whatever scrolls; it fills the box, keeps the reading place, and gives a feed its keys.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Advanced",
+    "hidden": true
+  },
+  {
     "name": "Input",
     "path": "input",
     "description": "A native text field in the look of the app's style: in a Field it takes the label and description; with Signal Forms it shows itself invalid once touched.",

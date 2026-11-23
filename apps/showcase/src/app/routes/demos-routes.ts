@@ -3219,6 +3219,53 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/infinite-scroll-next',
+    children: [
+      {
+        path: 'feed-infinite-scroll-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/infinite-scroll-next/demos/feed-infinite-scroll-next-demo').then(
+            (m) => m.FeedInfiniteScrollNextDemo,
+          ),
+      },
+      {
+        path: 'button-infinite-scroll-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/infinite-scroll-next/demos/button-infinite-scroll-next-demo').then(
+            (m) => m.ButtonInfiniteScrollNextDemo,
+          ),
+      },
+      {
+        path: 'error-infinite-scroll-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/infinite-scroll-next/demos/error-infinite-scroll-next-demo').then(
+            (m) => m.ErrorInfiniteScrollNextDemo,
+          ),
+      },
+      {
+        path: 'chat-infinite-scroll-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/infinite-scroll-next/demos/chat-infinite-scroll-next-demo').then(
+            (m) => m.ChatInfiniteScrollNextDemo,
+          ),
+      },
+      {
+        path: 'grid-infinite-scroll-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/infinite-scroll-next/demos/grid-infinite-scroll-next-demo').then(
+            (m) => m.GridInfiniteScrollNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-infinite-scroll-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/infinite-scroll-next/demos/rtl-infinite-scroll-next-demo').then(
+            (m) => m.RtlInfiniteScrollNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/infinite-scroll',
     children: [
       {

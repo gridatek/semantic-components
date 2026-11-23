@@ -89,6 +89,7 @@ export * from './control-group';
 export * from './emoji-picker';
 export * from './image-cropper';
 export * from './infinite-scroll';
+export * from './infinite-scroll-next';
 export * from './lightbox';
 export * from './marker';
 export * from './marquee';
