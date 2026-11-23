@@ -30,6 +30,16 @@ async function drag(
   at: { x: number; y: number },
   grip: Locator = from,
 ): Promise<void> {
+  // The others settled first: a glide still running shows them where they were.
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          document.getAnimations().filter((a) => a.playState === 'running')
+            .length,
+      ),
+    )
+    .toBe(0);
   const start = await box(grip);
   const end = await box(to);
   await page.mouse.move(start.x + 8, start.y + start.height / 2);
