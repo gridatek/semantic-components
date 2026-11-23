@@ -99,8 +99,8 @@ import {
         </button>
         <p class="mb-3">
           The café opens at eight. By nine the long table fills with people who
-          came for one coffee and stay for three. Light comes in from the
-          street side, so the best seats are by the window.
+          came for one coffee and stay for three. Light comes in from the street
+          side, so the best seats are by the window.
         </p>
         <button
           type="button"
@@ -120,8 +120,8 @@ import {
           </div>
         </button>
         <p class="mb-3">
-          In the afternoon we walked down to the coast, where the rocks run
-          out into the water and the wind never quite stops.
+          In the afternoon we walked down to the coast, where the rocks run out
+          into the water and the wind never quite stops.
         </p>
         <button
           type="button"
