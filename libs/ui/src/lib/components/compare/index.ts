@@ -1,5 +1,5 @@
-export { ScCompare } from './compare';
-export { ScCompareAfter } from './compare-after';
-export { ScCompareBefore } from './compare-before';
-export { ScCompareHandle } from './compare-handle';
-export { ScCompareLabel } from './compare-label';
+export * from './compare';
+export * from './compare-after';
+export * from './compare-before';
+export * from './compare-handle';
+export * from './compare-label';

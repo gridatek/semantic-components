@@ -30,6 +30,10 @@ export class ScCompareAfter {
   private readonly class = computed(() =>
     cn(
       'pointer-events-none absolute inset-0 block size-full',
+      // Moved by the keys: it glides there (not under reduced motion).
+      this.compare.gliding()
+        ? 'transition-[clip-path] duration-150 ease-out motion-reduce:transition-none'
+        : '',
       '[&:is(img,video)]:object-cover',
       this.classInput(),
     ),

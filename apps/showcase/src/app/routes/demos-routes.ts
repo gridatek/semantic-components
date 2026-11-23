@@ -3118,60 +3118,20 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/compare-next',
-    children: [
-      {
-        path: 'compare-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/compare-next/demos/compare-next-usage-demo').then(
-            (m) => m.CompareNextUsageDemo,
-          ),
-      },
-      {
-        path: 'content-compare-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/compare-next/demos/content-compare-next-demo').then(
-            (m) => m.ContentCompareNextDemo,
-          ),
-      },
-      {
-        path: 'vertical-compare-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/compare-next/demos/vertical-compare-next-demo').then(
-            (m) => m.VerticalCompareNextDemo,
-          ),
-      },
-      {
-        path: 'hover-compare-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/compare-next/demos/hover-compare-next-demo').then(
-            (m) => m.HoverCompareNextDemo,
-          ),
-      },
-      {
-        path: 'handle-compare-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/compare-next/demos/handle-compare-next-demo').then(
-            (m) => m.HandleCompareNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-compare-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/compare-next/demos/rtl-compare-next-demo').then(
-            (m) => m.RtlCompareNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/compare',
     children: [
       {
-        path: 'basic-compare-demo',
+        path: 'compare-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/compare/demos/basic-compare-demo').then(
-            (m) => m.BasicCompareDemo,
+          import('../pages/docs/compare/demos/compare-usage-demo').then(
+            (m) => m.CompareUsageDemo,
+          ),
+      },
+      {
+        path: 'content-compare-demo',
+        loadComponent: () =>
+          import('../pages/docs/compare/demos/content-compare-demo').then(
+            (m) => m.ContentCompareDemo,
           ),
       },
       {
@@ -3196,10 +3156,10 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'content-compare-demo',
+        path: 'rtl-compare-demo',
         loadComponent: () =>
-          import('../pages/docs/compare/demos/content-compare-demo').then(
-            (m) => m.ContentCompareDemo,
+          import('../pages/docs/compare/demos/rtl-compare-demo').then(
+            (m) => m.RtlCompareDemo,
           ),
       },
     ],

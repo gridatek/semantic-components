@@ -11,11 +11,14 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 
+/** Who drags the divider: `true` only the handle; `'touch'` only the handle on a touch screen (the page still scrolls), anywhere with a mouse or a pen. */
+export type ScCompareHandleOnly = boolean | 'touch';
+
 /**
- * Two things compared, one over the other, split by a divider: your
- * `scCompareBefore` and `scCompareAfter` — images, videos, or any content —
- * and a `scCompareHandle`, the divider's slider. `position` is how much of
- * the before shows, from the start (or the top).
+ * Two things compared, one over the other, split by a divider you drag —
+ * photos before and after an edit, two themes of a design, any content.
+ * `[(position)]`: how much of the before shows, 0–100 from the start (the
+ * top, when vertical).
  */
 @Directive({
   selector: '[scCompare]',
@@ -44,31 +47,39 @@ export class ScCompare {
   readonly orientation = input<'horizontal' | 'vertical'>('horizontal');
   /** The divider follows the pointer, without a press. */
   readonly hover = input(false, { transform: booleanAttribute });
-  /** Only the handle drags the divider; elsewhere does nothing. */
-  readonly handleOnly = input(false, { transform: booleanAttribute });
+  /** Only the handle drags: always, never, or on a touch screen (the default). */
+  readonly handleOnly = input<ScCompareHandleOnly, unknown>('touch', {
+    transform: (value: unknown) =>
+      value === 'touch' ? 'touch' : booleanAttribute(value),
+  });
   /** How close to the edges the divider goes, in percent. */
   readonly bounds = input(0);
+  /** An arrow key's step, in percent (Shift: ten of them). */
+  readonly step = input(1);
 
   readonly dragging = signal(false);
+  /** Moved by the keyboard: the divider glides (not while dragged). */
+  readonly gliding = signal(false);
   readonly rtl = computed(() => this.direction.valueSignal() === 'rtl');
 
   private readonly class = computed(() =>
     cn(
       // Its own stacking context: the handle stays under what covers it (a sticky header).
       'relative isolate block overflow-hidden select-none',
-      this.hover() || !this.handleOnly()
+      this.hover() || this.handleOnly() !== true
         ? this.orientation() === 'vertical'
           ? 'cursor-ns-resize'
           : 'cursor-ew-resize'
         : '',
-      'data-dragging:touch-none',
+      this.dragging() && 'touch-none',
       this.classInput(),
     ),
   );
 
   /** Sets the position, within the bounds. */
-  setPosition(value: number): void {
+  setPosition(value: number, glide = false): void {
     const min = this.bounds();
+    this.gliding.set(glide);
     this.position.set(
       Math.round(Math.min(100 - min, Math.max(min, value)) * 100) / 100,
     );
@@ -79,7 +90,11 @@ export class ScCompare {
     const onHandle = (event.target as Element).closest(
       '[data-slot="compare-handle"]',
     );
-    if (this.handleOnly() && !onHandle) return;
+    const handleOnly = this.handleOnly();
+    const onlyTheHandle =
+      handleOnly === true ||
+      (handleOnly === 'touch' && event.pointerType === 'touch');
+    if (onlyTheHandle && !onHandle) return;
     this.element.setPointerCapture(event.pointerId);
     this.dragging.set(true);
     // A press elsewhere jumps the divider there; on the handle, it stays.

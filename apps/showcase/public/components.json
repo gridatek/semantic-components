@@ -219,20 +219,10 @@
   {
     "name": "Compare",
     "path": "compare",
-    "description": "Two things compared, split by a divider: photos before and after, two themes, any content.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Media",
-    "hidden": true
-  },
-  {
-    "name": "Compare Next",
-    "path": "compare-next",
     "description": "Two things compared, split by a divider: photos before and after, two themes, any content; the style’s knob, a touch-friendly drag.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Confetti",

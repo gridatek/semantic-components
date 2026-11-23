@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCompare,
@@ -5,13 +6,16 @@ import {
   ScCompareBefore,
   ScCompareHandle,
   ScCompareLabel,
+  ScFrame,
 } from '@semantic-components/ui';
 import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
 
-/** Only the handle drags (a page can scroll over the rest); the handle restyled, its position shown. */
+/** Only the handle drags, on any screen (a page scrolls over the rest); within 5% of the edges, arrows by 5%; the handle restyled, its position said. */
 @Component({
   selector: 'app-handle-compare-demo',
   imports: [
+    ScFrame,
+    NgOptimizedImage,
     ScCompare,
     ScCompareBefore,
     ScCompareAfter,
@@ -24,18 +28,24 @@ import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
       <div
         scCompare
         handleOnly
+        [step]="5"
         [bounds]="5"
         [(position)]="position"
-        class="aspect-3/2 rounded-lg"
+        scFrame
+        class="aspect-3/2"
       >
         <img
           scCompareBefore
-          src="/images/compare-before.jpg"
+          ngSrc="/images/compare-before.jpg"
+          fill
+          priority
           alt="Mountains at dawn, as shot: grey and flat"
         />
         <img
           scCompareAfter
-          src="/images/cropper-mountains.jpg"
+          ngSrc="/images/cropper-mountains.jpg"
+          fill
+          priority
           alt="The same photo, edited: warm light and deep colours"
         />
         <span scCompareLabel="before">Before</span>
@@ -43,7 +53,7 @@ import { SiGripVerticalIcon } from '@semantic-icons/lucide-icons';
         <div
           scCompareHandle
           aria-label="Before and after"
-          [attr.aria-valuetext]="position() + '% before'"
+          [aria-valuetext]="position() + '% before'"
           class="*:text-black before:bg-amber-400 after:bg-amber-400"
         >
           <svg siGripVerticalIcon></svg>

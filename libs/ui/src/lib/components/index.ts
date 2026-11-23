@@ -85,7 +85,6 @@ export * from './attachment';
 export * from './bubble';
 export * from './color-picker';
 export * from './compare';
-export * from './compare-next';
 export * from './control-group';
 export * from './emoji-picker';
 export * from './image-cropper';

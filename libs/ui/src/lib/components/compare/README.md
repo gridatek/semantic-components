@@ -1,60 +1,48 @@
 # Compare
 
-Two things compared, one over the other, split by a divider you drag: photos before and after an edit, two themes of a design, two versions of a page — any content.
+Two things compared, one over the other, split by a divider you drag: photos before and after an edit, two themes of a design, two versions of a page — any content. After react-compare-slider and img-comparison-slider (rewritten 2026-11-23).
 
 ## Architecture
 
 ```
-scCompare (position, orientation, hover, handleOnly, bounds)
-├── [scCompareBefore] — yours: an img, a video, any content; it sizes the compare
-├── [scCompareAfter] — yours: laid over it, shown after the divider
-├── [scCompareLabel]="before" / "after" — your text, in its corner
-└── [scCompareHandle] — the divider's slider: name it, your icon inside
+[scCompare] (position — two-way · orientation · handleOnly · hover · bounds · step)
+├── [scCompareBefore] — yours: an img, a video, any content; it sizes the box
+├── [scCompareAfter]  — yours: laid over it, shown past the divider (clipped at --sc-compare-position)
+├── [scCompareLabel]="before" | "after" — your text, in its corner; fades while covered
+└── [scCompareHandle] — the divider's slider: the line and the knob, your icon inside
 ```
 
 ## Usage
 
 ```html
-<div scCompare class="aspect-3/2 w-full rounded-lg">
-  <img scCompareBefore src="/before.jpg" alt="The photo, as shot" />
-  <img scCompareAfter src="/after.jpg" alt="The photo, edited" />
+<div scCompare scFrame class="aspect-3/2 w-full">
+  <img scCompareBefore ngSrc="/before.jpg" fill priority alt="The photo, as shot" />
+  <img scCompareAfter ngSrc="/after.jpg" fill priority alt="The photo, edited" />
   <span scCompareLabel="before">Before</span>
   <span scCompareLabel="after">After</span>
-  <div scCompareHandle aria-label="Before and after">
-    <svg siChevronsLeftRightIcon></svg>
-  </div>
+  <div scCompareHandle aria-label="Before and after"><svg siChevronsLeftRightIcon></svg></div>
 </div>
 ```
 
-Any content compares the same way — the same card in two themes:
+## Dragging
 
-```html
-<div scCompare class="rounded-xl border">
-  <div scCompareBefore class="bg-background p-8"><app-card /></div>
-  <div scCompareAfter class="dark bg-background p-8"><app-card /></div>
-  <div scCompareHandle aria-label="Light and dark theme"><svg siChevronsLeftRightIcon></svg></div>
-</div>
-```
+- With a mouse or a pen, a press anywhere moves the divider there and drags it. On a touch screen only the handle drags — the page still scrolls over the photo (react-compare-slider's rule). `handleOnly`: `'touch'` (the default), `true` (everywhere), `false` (never).
+- `hover`: the divider follows the pointer without a press. `bounds`: how close to the edges it goes (%).
+- Before and after fill the same box: an image or a video covers it (`object-fit: cover`), so two of different sizes line up. The after is clipped at `--sc-compare-position` — no layout in script.
 
-## Inputs
+## Keyboard
 
-| On `scCompare` | Type                         | Default        |                                                           |
-| -------------- | ---------------------------- | -------------- | --------------------------------------------------------- |
-| `position`     | `number` (two-way)           | `50`           | How much of the before shows, 0–100, from the start (top) |
-| `orientation`  | `'horizontal' \| 'vertical'` | `'horizontal'` |                                                           |
-| `hover`        | `boolean`                    | `false`        | The divider follows the pointer, without a press          |
-| `handleOnly`   | `boolean`                    | `false`        | Only the handle drags (a page scrolls over the rest)      |
-| `bounds`       | `number`                     | `0`            | How close to the edges the divider goes, in percent       |
-
-Before and after fill the same box: an image or a video covers it (`object-fit: cover`), so two of different sizes line up. The after is clipped at `--sc-compare-position` — no layout in JavaScript.
+On the handle (a WAI-ARIA slider): the arrows move the divider their way — as the text reads; up and down when vertical — by `step` (1%), Shift ten steps; Page Up / Page Down ten percent up the slider (forward across, up when vertical) and down; Home / End to the bounds. Moved by the keys the divider glides (0.15s, not under reduced motion); dragged, it follows at once.
 
 ## Accessibility
 
-- The handle is the slider (`role="slider"`, `aria-valuenow`, `aria-orientation`): focusable, named by you. Write its `aria-valuetext` when a percentage says too little ("30% before").
-- Arrows move it (Shift: by 10), Page Up / Down by 10, Home and End to the ends — right to left, the arrows follow the text's direction.
-- Labels are your text; each fades while the divider covers its side.
-- Pointer events: mouse, touch and pen; a press anywhere moves the divider there (unless `handleOnly`).
+- The handle is the slider (`role="slider"`, `aria-valuenow`, `aria-valuemin` / `-max` at the bounds, `aria-orientation`): focusable, named by you. It reads its position as a percentage in the app's language (`LOCALE_ID`); your words in `aria-valuetext` (`[aria-valuetext]="position() + '% before'"`).
+- Each photo has its `alt`; labels are your text.
 
-## Styling
+## Look
 
-The handle is a line and a round knob: restyle them from its class — `before:` is the line, `after:` the knob (`class="before:bg-amber-400 after:bg-amber-400"`).
+The style's `compare` key: the knob's corners (round; square in lyra and sera) and the labels' (as `frameSm`). The knob takes the theme's colours (`bg-background`, a border, a shadow); the line stays light over photos. Restyle from the handle's class: `before:` the line, `after:` the knob.
+
+## Not here
+
+A `clip` option (which side is clipped), iframes, a handle following the pointer outside the box.

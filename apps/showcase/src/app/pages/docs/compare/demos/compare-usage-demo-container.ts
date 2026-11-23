@@ -1,37 +1,41 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { BasicCompareDemo } from './basic-compare-demo';
+import { CompareUsageDemo } from './compare-usage-demo';
 
 @Component({
-  selector: 'app-basic-compare-demo-container',
-  imports: [DemoContainer, BasicCompareDemo],
+  selector: 'app-compare-usage-demo-container',
+  imports: [DemoContainer, CompareUsageDemo],
   template: `
     <app-demo-container
-      title="Basic"
+      title="Usage"
       [code]="code"
-      demoUrl="/demos/compare/basic-compare-demo"
+      demoUrl="/demos/compare/compare-usage-demo"
     >
-      <app-basic-compare-demo />
+      <app-compare-usage-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicCompareDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+export class CompareUsageDemoContainer {
+  private readonly code = `import { NgOptimizedImage } from '@angular/common';
+import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCompare,
   ScCompareAfter,
   ScCompareBefore,
   ScCompareHandle,
   ScCompareLabel,
+  ScFrame,
 } from '@semantic-components/ui';
 import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
 
 /** Two photos, before and after an edit: drag the divider, click anywhere, or use the keys on it. */
 @Component({
-  selector: 'app-basic-compare-demo',
+  selector: 'app-compare-usage-demo',
   imports: [
+    ScFrame,
+    NgOptimizedImage,
     ScCompare,
     ScCompareBefore,
     ScCompareAfter,
@@ -40,15 +44,19 @@ import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
     SiChevronsLeftRightIcon,
   ],
   template: \`
-    <div scCompare class="aspect-3/2 w-full max-w-2xl rounded-lg">
+    <div scCompare scFrame class="aspect-3/2 w-full max-w-2xl">
       <img
         scCompareBefore
-        src="/images/compare-before.jpg"
+        ngSrc="/images/compare-before.jpg"
+        fill
+        priority
         alt="Mountains at dawn, as shot: grey and flat"
       />
       <img
         scCompareAfter
-        src="/images/cropper-mountains.jpg"
+        ngSrc="/images/cropper-mountains.jpg"
+        fill
+        priority
         alt="The same photo, edited: warm light and deep colours"
       />
       <span scCompareLabel="before">Before</span>
@@ -61,5 +69,5 @@ import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicCompareDemo {}`;
+export class CompareUsageDemo {}`;
 }

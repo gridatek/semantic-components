@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScCompare,
@@ -5,6 +6,7 @@ import {
   ScCompareBefore,
   ScCompareHandle,
   ScCompareLabel,
+  ScFrame,
 } from '@semantic-components/ui';
 import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
 
@@ -12,6 +14,8 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-vertical-compare-demo',
   imports: [
+    ScFrame,
+    NgOptimizedImage,
     ScCompare,
     ScCompareBefore,
     ScCompareAfter,
@@ -23,16 +27,21 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
     <div
       scCompare
       orientation="vertical"
-      class="aspect-3/2 w-full max-w-2xl rounded-lg"
+      scFrame
+      class="aspect-3/2 w-full max-w-2xl"
     >
       <img
         scCompareBefore
-        src="/images/compare-before.jpg"
+        ngSrc="/images/compare-before.jpg"
+        fill
+        priority
         alt="Mountains at dawn, as shot: grey and flat"
       />
       <img
         scCompareAfter
-        src="/images/cropper-mountains.jpg"
+        ngSrc="/images/cropper-mountains.jpg"
+        fill
+        priority
         alt="The same photo, edited: warm light and deep colours"
       />
       <span scCompareLabel="before">Before</span>

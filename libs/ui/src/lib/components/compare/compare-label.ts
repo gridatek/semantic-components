@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 import { ScCompare } from './compare';
 
 /**
@@ -17,6 +18,7 @@ import { ScCompare } from './compare';
 })
 export class ScCompareLabel {
   private readonly compare = inject(ScCompare);
+  private readonly styles = injectStyle().compare;
 
   readonly side = input.required<'before' | 'after'>({
     alias: 'scCompareLabel',
@@ -32,8 +34,10 @@ export class ScCompareLabel {
 
   private readonly class = computed(() =>
     cn(
-      'pointer-events-none absolute z-[5] m-3 rounded-md bg-black/60 px-2 py-1 text-xs font-medium text-white transition-opacity',
-      'data-covered:opacity-0',
+      'pointer-events-none absolute z-[5] m-3 bg-black/60 px-2 py-1 text-xs font-medium text-white transition-opacity motion-reduce:transition-none',
+      this.styles.label,
+      // Its side too small to show it: it fades.
+      this.covered() && 'opacity-0',
       this.compare.orientation() === 'vertical'
         ? this.side() === 'before'
           ? 'start-0 top-0'
