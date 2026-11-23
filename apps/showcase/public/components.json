@@ -1189,6 +1189,15 @@
     "hidden": true
   },
   {
+    "name": "Virtual List Next",
+    "path": "virtual-list-next",
+    "description": "Only what is seen rendered, on TanStack Virtual: rows measured, a box or the page, along or in lanes, a chat that opens at the end; rows on the server.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Advanced",
+    "hidden": true
+  },
+  {
     "name": "Waterfall",
     "path": "waterfall",
     "description": "Spans — a page’s requests, a trace — as bars on a shared time axis; a span opens on those it started. A tree grid.",

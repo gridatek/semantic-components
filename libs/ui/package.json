@@ -31,6 +31,7 @@
     "embla-carousel": ">=8.6.0",
     "pdfjs-dist": ">=6.4.299",
     "@tanstack/angular-table": ">=9.3.1",
+    "@tanstack/virtual-core": ">=3.19.13",
     "@tiptap/core": ">=3.32.0",
     "@tiptap/extension-bubble-menu": ">=3.32.0",
     "@tiptap/extension-file-handler": ">=3.32.0",
@@ -84,6 +85,9 @@
       "optional": true
     },
     "@tanstack/angular-table": {
+      "optional": true
+    },
+    "@tanstack/virtual-core": {
       "optional": true
     },
     "@tiptap/core": {

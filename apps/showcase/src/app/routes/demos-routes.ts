@@ -8424,6 +8424,67 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/virtual-list-next',
+    children: [
+      {
+        path: 'virtual-list-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/virtual-list-next-usage-demo').then(
+            (m) => m.VirtualListNextUsageDemo,
+          ),
+      },
+      {
+        path: 'variable-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/variable-virtual-list-next-demo').then(
+            (m) => m.VariableVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'page-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/page-virtual-list-next-demo').then(
+            (m) => m.PageVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'horizontal-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/horizontal-virtual-list-next-demo').then(
+            (m) => m.HorizontalVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'grid-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/grid-virtual-list-next-demo').then(
+            (m) => m.GridVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'chat-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/chat-virtual-list-next-demo').then(
+            (m) => m.ChatVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'scroll-to-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/scroll-to-virtual-list-next-demo').then(
+            (m) => m.ScrollToVirtualListNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-virtual-list-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/virtual-list-next/demos/rtl-virtual-list-next-demo').then(
+            (m) => m.RtlVirtualListNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/virtual-list',
     children: [
       {

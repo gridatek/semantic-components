@@ -1,0 +1,75 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { RtlVirtualListNextDemo } from './rtl-virtual-list-next-demo';
+
+@Component({
+  selector: 'app-rtl-virtual-list-next-demo-container',
+  imports: [DemoContainer, RtlVirtualListNextDemo],
+  template: `
+    <app-demo-container
+      title="RTL"
+      [code]="code"
+      demoUrl="/demos/virtual-list-next/rtl-virtual-list-next-demo"
+    >
+      <app-rtl-virtual-list-next-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class RtlVirtualListNextDemoContainer {
+  private readonly code = `import { Dir } from '@angular/cdk/bidi';
+import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
+import {
+  ScVirtualListNext,
+  ScVirtualListNextRow,
+} from '@semantic-components/ui/virtual-list';
+
+/** In a right-to-left page: a strip starts at the right and runs as the text reads. */
+@Component({
+  selector: 'app-rtl-virtual-list-next-demo',
+  imports: [Dir, ScFrame, ScVirtualListNext, ScVirtualListNextRow],
+  providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
+  template: \`
+    <div dir="rtl" lang="ar" class="flex w-full flex-col items-center gap-3">
+      <ul
+        scVirtualListNext
+        #list="scVirtualListNext"
+        tabindex="0"
+        orientation="horizontal"
+        [count]="days.length"
+        [estimate]="96"
+        [gap]="8"
+        aria-label="الأيام"
+        scFrame
+        class="h-28 w-full max-w-2xl overflow-x-auto"
+      >
+        @for (row of list.rows(); track row.key) {
+          <li [scVirtualListNextRow]="row" class="py-2">
+            <div
+              scFrame
+              size="sm"
+              class="bg-muted grid h-full w-24 place-content-center text-center text-sm"
+            >
+              <span class="text-muted-foreground text-xs">يوم</span>
+              <span class="text-lg font-semibold">{{ days[row.index] }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+    <p class="text-muted-foreground text-sm" data-testid="range">
+      @if (list.range(); as range) {
+        Rendered: {{ range.first + 1 }}–{{ range.last + 1 }} of
+        {{ list.count() }}
+      }
+    </p>
+  \`,
+  host: { class: 'flex w-full flex-col items-center gap-3' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class RtlVirtualListNextDemo {
+  private readonly days = Array.from({ length: 365 }, (_, i) => i + 1);
+}`;
+}
