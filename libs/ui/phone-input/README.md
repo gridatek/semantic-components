@@ -5,10 +5,10 @@ An international phone number input for the Semantic Components library: a count
 ## Contents
 
 - **Components**: Phone input, country picker, number field, flag
-- **Utilities**: `phoneCountries()` (the country list), `phoneNumber()` (a Signal Forms rule)
+- **Utilities**: `phoneCountries()` (the country list), `phoneNumber()` (a Signal Forms rule), `withPhoneInput()` (the flags, self-hosted)
 
 ## Usage
 
 ```ts
-import { ScPhoneInput, ScPhoneInputCountry, ScPhoneInputFlag, ScPhoneInputNumber, phoneCountries, phoneNumber } from '@semantic-components/ui/phone-input';
+import { ScPhoneInput, ScPhoneInputCountry, ScPhoneInputFlag, ScPhoneInputNumber, phoneNumber, withPhoneInput } from '@semantic-components/ui/phone-input';
 ```

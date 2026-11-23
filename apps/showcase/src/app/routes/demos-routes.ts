@@ -4967,67 +4967,55 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/phone-input-next',
-    children: [
-      {
-        path: 'phone-input-next-usage-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input-next/demos/phone-input-next-usage-demo').then(
-            (m) => m.PhoneInputNextUsageDemo,
-          ),
-      },
-      {
-        path: 'preferred-phone-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input-next/demos/preferred-phone-input-next-demo').then(
-            (m) => m.PreferredPhoneInputNextDemo,
-          ),
-      },
-      {
-        path: 'only-phone-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input-next/demos/only-phone-input-next-demo').then(
-            (m) => m.OnlyPhoneInputNextDemo,
-          ),
-      },
-      {
-        path: 'example-phone-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input-next/demos/example-phone-input-next-demo').then(
-            (m) => m.ExamplePhoneInputNextDemo,
-          ),
-      },
-      {
-        path: 'form-phone-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input-next/demos/form-phone-input-next-demo').then(
-            (m) => m.FormPhoneInputNextDemo,
-          ),
-      },
-      {
-        path: 'disabled-phone-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input-next/demos/disabled-phone-input-next-demo').then(
-            (m) => m.DisabledPhoneInputNextDemo,
-          ),
-      },
-      {
-        path: 'rtl-phone-input-next-demo',
-        loadComponent: () =>
-          import('../pages/docs/phone-input-next/demos/rtl-phone-input-next-demo').then(
-            (m) => m.RtlPhoneInputNextDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/phone-input',
     children: [
       {
-        path: 'country-selector-phone-input-demo',
+        path: 'phone-input-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/phone-input/demos/country-selector-phone-input-demo').then(
-            (m) => m.CountrySelectorPhoneInputDemo,
+          import('../pages/docs/phone-input/demos/phone-input-usage-demo').then(
+            (m) => m.PhoneInputUsageDemo,
+          ),
+      },
+      {
+        path: 'preferred-phone-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/phone-input/demos/preferred-phone-input-demo').then(
+            (m) => m.PreferredPhoneInputDemo,
+          ),
+      },
+      {
+        path: 'only-phone-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/phone-input/demos/only-phone-input-demo').then(
+            (m) => m.OnlyPhoneInputDemo,
+          ),
+      },
+      {
+        path: 'example-phone-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/phone-input/demos/example-phone-input-demo').then(
+            (m) => m.ExamplePhoneInputDemo,
+          ),
+      },
+      {
+        path: 'form-phone-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/phone-input/demos/form-phone-input-demo').then(
+            (m) => m.FormPhoneInputDemo,
+          ),
+      },
+      {
+        path: 'disabled-phone-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/phone-input/demos/disabled-phone-input-demo').then(
+            (m) => m.DisabledPhoneInputDemo,
+          ),
+      },
+      {
+        path: 'rtl-phone-input-demo',
+        loadComponent: () =>
+          import('../pages/docs/phone-input/demos/rtl-phone-input-demo').then(
+            (m) => m.RtlPhoneInputDemo,
           ),
       },
     ],

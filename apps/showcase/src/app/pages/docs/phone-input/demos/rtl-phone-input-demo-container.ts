@@ -1,23 +1,23 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { RtlPhoneInputNextDemo } from './rtl-phone-input-next-demo';
+import { RtlPhoneInputDemo } from './rtl-phone-input-demo';
 
 @Component({
-  selector: 'app-rtl-phone-input-next-demo-container',
-  imports: [DemoContainer, RtlPhoneInputNextDemo],
+  selector: 'app-rtl-phone-input-demo-container',
+  imports: [DemoContainer, RtlPhoneInputDemo],
   template: `
     <app-demo-container
       title="RTL"
       [code]="code"
-      demoUrl="/demos/phone-input-next/rtl-phone-input-next-demo"
+      demoUrl="/demos/phone-input/rtl-phone-input-demo"
     >
-      <app-rtl-phone-input-next-demo />
+      <app-rtl-phone-input-demo />
     </app-demo-container>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlPhoneInputNextDemoContainer {
+export class RtlPhoneInputDemoContainer {
   private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
@@ -38,16 +38,16 @@ import {
   ScLabel,
 } from '@semantic-components/ui';
 import {
-  ScPhoneInputNext,
-  ScPhoneInputNextCountry,
-  ScPhoneInputNextFlag,
-  ScPhoneInputNextNumber,
+  ScPhoneInput,
+  ScPhoneInputCountry,
+  ScPhoneInputFlag,
+  ScPhoneInputNumber,
 } from '@semantic-components/ui/phone-input';
 import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 /** In a right-to-left page: the picker at the start, the countries named in the locale’s language — the number left to right, as numbers are. */
 @Component({
-  selector: 'app-rtl-phone-input-next-demo',
+  selector: 'app-rtl-phone-input-demo',
   imports: [
     Dir,
     ScCombobox,
@@ -65,10 +65,10 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScInputGroup,
     ScInputGroupAddon,
     ScLabel,
-    ScPhoneInputNext,
-    ScPhoneInputNextCountry,
-    ScPhoneInputNextFlag,
-    ScPhoneInputNextNumber,
+    ScPhoneInput,
+    ScPhoneInputCountry,
+    ScPhoneInputFlag,
+    ScPhoneInputNumber,
     SiChevronDownIcon,
     SiSearchIcon,
   ],
@@ -79,20 +79,16 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
         <div scField>
           <label scLabel>رقم الهاتف</label>
           <div
-            scPhoneInputNext
-            #phone="scPhoneInputNext"
+            scPhoneInput
+            #phone="scPhoneInput"
             defaultCountry="EG"
             [(value)]="number"
           >
-            <div
-              scCombobox
-              scPhoneInputNextCountry
-              #country="scPhoneInputNextCountry"
-            >
+            <div scCombobox scPhoneInputCountry #country="scPhoneInputCountry">
               <button scComboboxTrigger variant="ghost">
                 <span class="sr-only">البلد</span>
                 <span scComboboxValue class="flex items-center gap-2">
-                  <img scPhoneInputNextFlag alt="" />
+                  <img scPhoneInputFlag alt="" />
                   <span dir="ltr">+{{ phone.callingCode() }}</span>
                 </span>
                 <svg siChevronDownIcon></svg>
@@ -119,11 +115,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
                           [value]="item.code"
                           [label]="item.name"
                         >
-                          <img
-                            scPhoneInputNextFlag
-                            [country]="item.code"
-                            alt=""
-                          />
+                          <img scPhoneInputFlag [country]="item.code" alt="" />
                           <span class="flex-1">{{ item.name }}</span>
                           <span class="text-muted-foreground" dir="ltr"
                             >+{{ item.callingCode }}</span
@@ -135,7 +127,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
                 </div>
               </ng-template>
             </div>
-            <input scPhoneInputNextNumber />
+            <input scPhoneInputNumber />
           </div>
         </div>
       </div>
@@ -144,7 +136,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class RtlPhoneInputNextDemo {
+export class RtlPhoneInputDemo {
   private readonly number = signal('');
 }`;
 }

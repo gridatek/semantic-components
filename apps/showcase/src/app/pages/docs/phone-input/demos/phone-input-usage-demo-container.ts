@@ -1,5 +1,24 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { FormField, form, required } from '@angular/forms/signals';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { PhoneInputUsageDemo } from './phone-input-usage-demo';
+
+@Component({
+  selector: 'app-phone-input-usage-demo-container',
+  imports: [DemoContainer, PhoneInputUsageDemo],
+  template: `
+    <app-demo-container
+      title="Usage"
+      [code]="code"
+      demoUrl="/demos/phone-input/phone-input-usage-demo"
+    >
+      <app-phone-input-usage-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class PhoneInputUsageDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCombobox,
   ScComboboxEmpty,
@@ -12,8 +31,6 @@ import {
   ScComboboxTrigger,
   ScComboboxValue,
   ScField,
-  ScFieldErrors,
-  ScFrame,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
@@ -24,28 +41,24 @@ import {
   ScPhoneInputCountry,
   ScPhoneInputFlag,
   ScPhoneInputNumber,
-  phoneCountries,
-  phoneNumber,
 } from '@semantic-components/ui/phone-input';
 import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
+/** A country — searched by name, code or dial code — and the number, formatted as you type; its value the whole number, E.164. Type +44… and the country follows. */
 @Component({
-  selector: 'app-country-selector-phone-input-demo',
+  selector: 'app-phone-input-usage-demo',
   imports: [
-    ScFrame,
-    FormField,
     ScCombobox,
     ScComboboxEmpty,
+    ScComboboxInput,
     ScComboboxItem,
     ScComboboxList,
     ScComboboxListTemplate,
     ScComboboxPopup,
     ScComboboxPortal,
-    ScComboboxInput,
     ScComboboxTrigger,
     ScComboboxValue,
     ScField,
-    ScFieldErrors,
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
@@ -57,22 +70,22 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
     SiSearchIcon,
   ],
-  template: `
-    <div class="flex w-full max-w-sm flex-col gap-4">
+  template: \`
+    <div class="grid w-full max-w-sm gap-3">
       <div scField>
         <label scLabel>Phone number</label>
         <div
           scPhoneInput
-          [formField]="contactForm.phone"
-          defaultCountry="US"
           #phone="scPhoneInput"
+          defaultCountry="US"
+          [(value)]="number"
         >
-          <div scCombobox scPhoneInputCountry #picker="scCombobox">
-            <button scComboboxTrigger>
+          <div scCombobox scPhoneInputCountry #country="scPhoneInputCountry">
+            <button scComboboxTrigger variant="ghost">
               <span class="sr-only">Country</span>
               <span scComboboxValue class="flex items-center gap-2">
                 <img scPhoneInputFlag alt="" />
-                +{{ phone.callingCode() }}
+                <span dir="ltr">+{{ phone.callingCode() }}</span>
               </span>
               <svg siChevronDownIcon></svg>
             </button>
@@ -86,23 +99,23 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
                     scInput
                     scComboboxInput
                     aria-label="Search countries"
-                    placeholder="Search countries..."
+                    placeholder="Search countries…"
                   />
                 </div>
                 <div scComboboxEmpty>No countries found</div>
                 <ng-template scComboboxListTemplate>
                   <div scComboboxList aria-label="Countries">
-                    @for (
-                      country of matching(picker.query());
-                      track country.code
-                    ) {
+                    @for (item of country.results(); track item.code) {
                       <div
                         scComboboxItem
-                        [value]="country.code"
-                        [label]="country.name"
+                        [value]="item.code"
+                        [label]="item.name"
                       >
-                        <img scPhoneInputFlag [country]="country.code" alt="" />
-                        {{ country.name }} +{{ country.callingCode }}
+                        <img scPhoneInputFlag [country]="item.code" alt="" />
+                        <span class="flex-1">{{ item.name }}</span>
+                        <span class="text-muted-foreground" dir="ltr"
+                          >+{{ item.callingCode }}</span
+                        >
                       </div>
                     }
                   </div>
@@ -112,35 +125,16 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
           </div>
           <input scPhoneInputNumber />
         </div>
-        <div scFieldErrors></div>
       </div>
-
-      <p scFrame class="bg-muted p-4 text-sm">
-        Value: {{ model().phone || '—' }}
+      <p class="text-muted-foreground text-sm" data-testid="value">
+        Value: {{ number() || '—' }}
       </p>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class CountrySelectorPhoneInputDemo {
-  private readonly countries = phoneCountries('en');
-
-  /** By name, by code ("fr") or by calling code ("+33" or "33"). */
-  private matching(text: string) {
-    const query = text.trim().toLowerCase().replace(/^\+/, '');
-    if (!query) return this.countries;
-    return this.countries.filter(
-      (c) =>
-        c.name.toLowerCase().includes(query) ||
-        c.code.toLowerCase() === query ||
-        c.callingCode.startsWith(query),
-    );
-  }
-
-  private readonly model = signal({ phone: '' });
-  private readonly contactForm = form(this.model, (s) => {
-    required(s.phone, { message: 'Enter your phone number' });
-    phoneNumber(s.phone, { message: 'Enter a valid phone number' });
-  });
+export class PhoneInputUsageDemo {
+  private readonly number = signal('');
+}`;
 }

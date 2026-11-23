@@ -465,12 +465,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/phone-input/phone-input-page'),
       },
       {
-        path: 'phone-input-next',
-        title: 'Phone Input Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/phone-input-next/phone-input-next-page'),
-      },
-      {
         path: 'popover',
         title: 'Popover - Semantic Components',
         loadComponent: () => import('../pages/docs/popover/popover-page'),

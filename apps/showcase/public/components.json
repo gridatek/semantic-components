@@ -710,20 +710,10 @@
   {
     "name": "Phone Input",
     "path": "phone-input",
-    "description": "An input for international phone numbers.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Forms",
-    "hidden": true
-  },
-  {
-    "name": "Phone Input Next",
-    "path": "phone-input-next",
     "description": "An international phone number: a searchable country picker, the number formatted as you type, E.164 out; your own flags; a form field.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Forms",
-    "hidden": true
+    "category": "Forms"
   },
   {
     "name": "Pie Chart",

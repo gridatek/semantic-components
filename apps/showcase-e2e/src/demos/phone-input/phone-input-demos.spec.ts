@@ -1,7 +1,7 @@
 import { collectErrors, press, type } from '../../interaction';
 import { type Page, expect, test } from '../../test';
 
-const demo = (name: string) => `/demos/phone-input-next/${name}-demo`;
+const demo = (name: string) => `/demos/phone-input/${name}-demo`;
 const trigger = (page: Page) =>
   page.locator('[data-slot=combobox-trigger]').first();
 const flag = (page: Page) => trigger(page).locator('img');
@@ -25,7 +25,7 @@ test.afterEach(() => {
 });
 
 test.describe('Usage', () => {
-  test.beforeEach(({ page }) => page.goto(demo('phone-input-next-usage')));
+  test.beforeEach(({ page }) => page.goto(demo('phone-input-usage')));
 
   test('the picker: named, its dial code and flag; a country picked', async ({
     page,
@@ -112,7 +112,7 @@ test.describe('Usage', () => {
 });
 
 test('Preferred: these first, then the rest by name', async ({ page }) => {
-  await page.goto(demo('preferred-phone-input-next'));
+  await page.goto(demo('preferred-phone-input'));
   await trigger(page).click();
   const options = page.getByRole('option');
   await expect(options.nth(0)).toContainText('France');
@@ -122,7 +122,7 @@ test('Preferred: these first, then the rest by name', async ({ page }) => {
 });
 
 test('Only some countries: the list is those', async ({ page }) => {
-  await page.goto(demo('only-phone-input-next'));
+  await page.goto(demo('only-phone-input'));
   await trigger(page).click();
   await expect(page.getByRole('option')).toHaveText([
     /Denmark/,
@@ -136,7 +136,7 @@ test('Only some countries: the list is those', async ({ page }) => {
 test('Example placeholder: the country’s example, as written', async ({
   page,
 }) => {
-  await page.goto(demo('example-phone-input-next'));
+  await page.goto(demo('example-phone-input'));
   const input = page.getByLabel('Phone number');
   await expect(input).toHaveAttribute('placeholder', '7400 123456');
   await pick(page, 'fra', /France/);
@@ -144,7 +144,7 @@ test('Example placeholder: the country’s example, as written', async ({
 });
 
 test('Form: required, then strict; saved once valid', async ({ page }) => {
-  await page.goto(demo('form-phone-input-next'));
+  await page.goto(demo('form-phone-input'));
   const input = page.getByLabel('Phone number');
   await page.getByRole('button', { name: 'Save' }).click();
   await expect(page.getByText('Enter your phone number.')).toBeVisible();
@@ -160,7 +160,7 @@ test('Form: required, then strict; saved once valid', async ({ page }) => {
 });
 
 test('Disabled and read-only: shown, not changed', async ({ page }) => {
-  await page.goto(demo('disabled-phone-input-next'));
+  await page.goto(demo('disabled-phone-input'));
   const disabled = page.getByLabel('Disabled');
   await expect(disabled).toHaveValue('(415) 555-0123');
   await expect(disabled).toBeDisabled();
@@ -172,7 +172,7 @@ test('Disabled and read-only: shown, not changed', async ({ page }) => {
 test('RTL: names in Arabic; the number and dial code left to right', async ({
   page,
 }) => {
-  await page.goto(demo('rtl-phone-input-next'));
+  await page.goto(demo('rtl-phone-input'));
   const input = page.getByLabel('رقم الهاتف');
   await expect(input).toHaveAttribute('dir', 'ltr');
   await expect(trigger(page).locator('[dir=ltr]')).toHaveText('+20');

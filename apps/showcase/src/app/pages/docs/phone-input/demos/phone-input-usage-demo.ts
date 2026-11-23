@@ -1,24 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { ExamplePhoneInputNextDemo } from './example-phone-input-next-demo';
-
-@Component({
-  selector: 'app-example-phone-input-next-demo-container',
-  imports: [DemoContainer, ExamplePhoneInputNextDemo],
-  template: `
-    <app-demo-container
-      title="Example placeholder"
-      [code]="code"
-      demoUrl="/demos/phone-input-next/example-phone-input-next-demo"
-    >
-      <app-example-phone-input-next-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class ExamplePhoneInputNextDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScCombobox,
   ScComboboxEmpty,
@@ -37,17 +17,16 @@ import {
   ScLabel,
 } from '@semantic-components/ui';
 import {
-  ScPhoneInputNext,
-  ScPhoneInputNextCountry,
-  ScPhoneInputNextFlag,
-  ScPhoneInputNextNumber,
+  ScPhoneInput,
+  ScPhoneInputCountry,
+  ScPhoneInputFlag,
+  ScPhoneInputNumber,
 } from '@semantic-components/ui/phone-input';
 import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
-import examples from 'libphonenumber-js/mobile/examples';
 
-/** examples: the placeholder is an example number of the country, as it would be written — libphonenumber-js’ examples, imported by you. */
+/** A country — searched by name, code or dial code — and the number, formatted as you type; its value the whole number, E.164. Type +44… and the country follows. */
 @Component({
-  selector: 'app-example-phone-input-next-demo',
+  selector: 'app-phone-input-usage-demo',
   imports: [
     ScCombobox,
     ScComboboxEmpty,
@@ -64,32 +43,28 @@ import examples from 'libphonenumber-js/mobile/examples';
     ScInputGroup,
     ScInputGroupAddon,
     ScLabel,
-    ScPhoneInputNext,
-    ScPhoneInputNextCountry,
-    ScPhoneInputNextFlag,
-    ScPhoneInputNextNumber,
+    ScPhoneInput,
+    ScPhoneInputCountry,
+    ScPhoneInputFlag,
+    ScPhoneInputNumber,
     SiChevronDownIcon,
     SiSearchIcon,
   ],
-  template: \`
+  template: `
     <div class="grid w-full max-w-sm gap-3">
       <div scField>
         <label scLabel>Phone number</label>
         <div
-          scPhoneInputNext
-          #phone="scPhoneInputNext"
-          defaultCountry="GB"
+          scPhoneInput
+          #phone="scPhoneInput"
+          defaultCountry="US"
           [(value)]="number"
         >
-          <div
-            scCombobox
-            scPhoneInputNextCountry
-            #country="scPhoneInputNextCountry"
-          >
+          <div scCombobox scPhoneInputCountry #country="scPhoneInputCountry">
             <button scComboboxTrigger variant="ghost">
               <span class="sr-only">Country</span>
               <span scComboboxValue class="flex items-center gap-2">
-                <img scPhoneInputNextFlag alt="" />
+                <img scPhoneInputFlag alt="" />
                 <span dir="ltr">+{{ phone.callingCode() }}</span>
               </span>
               <svg siChevronDownIcon></svg>
@@ -116,11 +91,7 @@ import examples from 'libphonenumber-js/mobile/examples';
                         [value]="item.code"
                         [label]="item.name"
                       >
-                        <img
-                          scPhoneInputNextFlag
-                          [country]="item.code"
-                          alt=""
-                        />
+                        <img scPhoneInputFlag [country]="item.code" alt="" />
                         <span class="flex-1">{{ item.name }}</span>
                         <span class="text-muted-foreground" dir="ltr"
                           >+{{ item.callingCode }}</span
@@ -132,19 +103,17 @@ import examples from 'libphonenumber-js/mobile/examples';
               </div>
             </ng-template>
           </div>
-          <input scPhoneInputNextNumber [examples]="examples" />
+          <input scPhoneInputNumber />
         </div>
       </div>
       <p class="text-muted-foreground text-sm" data-testid="value">
         Value: {{ number() || '—' }}
       </p>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ExamplePhoneInputNextDemo {
+export class PhoneInputUsageDemo {
   private readonly number = signal('');
-  private readonly examples = examples;
-}`;
 }

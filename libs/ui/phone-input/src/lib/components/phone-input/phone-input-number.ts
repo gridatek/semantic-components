@@ -2,6 +2,7 @@ import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Directive,
   ElementRef,
+  HostAttributeToken,
   computed,
   effect,
   inject,
@@ -9,8 +10,10 @@ import {
 } from '@angular/core';
 import { SC_FIELD, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
+import { type Examples, getExampleNumber } from 'libphonenumber-js';
+import type { ScPhoneInput } from './phone-input';
 import { PHONE_SEPARATOR } from './phone-input-text';
-import { SC_PHONE_INPUT } from './phone-input-types';
+import { SC_PHONE_INPUT } from './phone-input-token';
 
 /** A character that's part of the number (not formatting). */
 const isSignificant = (char: string): boolean => /[\d+]/.test(char);
@@ -29,9 +32,11 @@ function positionAfter(text: string, count: number): number {
 }
 
 /**
- * The number field of a `scPhoneInput`: formats as you type (in the
- * country's national format, or international after a `+`) and keeps the
- * caret where it was. Labelled by the enclosing field's label.
+ * The number field of a `scPhoneInput`: formats as you type (the
+ * country's format, or international after a `+`) and keeps the caret where
+ * it was. Named by its field's label. With `examples` (libphonenumber-js'
+ * `libphonenumber-js/mobile/examples`, imported by you: kept out of the
+ * bundle otherwise), its placeholder is an example number of the country.
  */
 @Directive({
   selector: 'input[scPhoneInputNumber]',
@@ -39,8 +44,11 @@ function positionAfter(text: string, count: number): number {
     type: 'tel',
     inputmode: 'tel',
     autocomplete: 'tel',
+    // A number reads left to right, in any language: its groups stay in order.
+    dir: 'ltr',
     'data-slot': 'control',
     '[id]': 'id()',
+    '[attr.placeholder]': 'placeholder()',
     '[attr.aria-invalid]': '(phone.touched() && phone.invalid()) || null',
     '[attr.aria-required]': 'phone.required() || null',
     '[attr.aria-describedby]': 'describedBy()',
@@ -53,14 +61,21 @@ function positionAfter(text: string, count: number): number {
 })
 export class ScPhoneInputNumber {
   private readonly inputStyles = injectStyle().input;
-  private readonly phone = inject(SC_PHONE_INPUT);
+  private readonly phone: ScPhoneInput = inject(SC_PHONE_INPUT);
   private readonly field = inject(SC_FIELD, { optional: true });
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
   private readonly fallbackId = inject(_IdGenerator).getId('sc-phone-input-');
+  /** Your own placeholder, when there are no examples. */
+  private readonly ownPlaceholder = inject(
+    new HostAttributeToken('placeholder'),
+    { optional: true },
+  );
 
   readonly idInput = input('', { alias: 'id' });
   readonly classInput = input<string>('', { alias: 'class' });
+  /** Example numbers (libphonenumber-js' examples): the placeholder shows the country's. */
+  readonly examples = input<Examples | null>(null);
 
   private readonly id = computed(
     () => this.idInput() || this.field?.id() || this.fallbackId,
@@ -69,8 +84,19 @@ export class ScPhoneInputNumber {
     () => this.field?.descriptionIds().join(' ') || null,
   );
 
+  /** An example number of the country, as it would be shown — or yours. */
+  private readonly placeholder = computed(() => {
+    const examples = this.examples();
+    const country = this.phone.country();
+    if (!examples || !country) return this.ownPlaceholder;
+    const example = getExampleNumber(country, examples);
+    return example
+      ? this.phone.format(example.nationalNumber)
+      : this.ownPlaceholder;
+  });
+
   private readonly class = computed(() =>
-    cn(this.inputStyles, this.classInput()),
+    cn(this.inputStyles, 'rtl:text-end', this.classInput()),
   );
 
   constructor() {
@@ -102,8 +128,7 @@ export class ScPhoneInputNumber {
   /**
    * Backspace/Delete next to a formatting character (a space, a bracket)
    * removes the digit beyond it — otherwise reformatting would put the
-   * character straight back. A character the format wouldn't put back (a
-   * separator just typed at the end) is deleted normally.
+   * character straight back.
    */
   private onKeydown(event: KeyboardEvent): void {
     const forward = event.key === 'Delete';

@@ -1,9 +1,16 @@
 import { expectNoA11yViolations } from '../axe';
-import { test } from '../test';
+import { expect, test } from '../test';
 
-test.describe('Phone Input Page', () => {
-  test('should have no accessibility violations', async ({ page }) => {
-    await page.goto('/docs/components/phone-input');
-    await expectNoA11yViolations(page);
-  });
+test('phone-input page: sections, and no axe violations', async ({ page }) => {
+  await page.goto('/docs/components/phone-input');
+  await expect(page.locator('h2')).toHaveText([
+    'Installation',
+    'Usage',
+    'Anatomy',
+    'Country and number',
+    'Accessibility',
+    'Examples',
+    'API reference',
+  ]);
+  await expectNoA11yViolations(page);
 });

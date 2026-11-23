@@ -1,7 +1,25 @@
-import { Component, ViewEncapsulation, signal } from '@angular/core';
-import { FormField, FormRoot, form, required } from '@angular/forms/signals';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ExamplePhoneInputDemo } from './example-phone-input-demo';
+
+@Component({
+  selector: 'app-example-phone-input-demo-container',
+  imports: [DemoContainer, ExamplePhoneInputDemo],
+  template: `
+    <app-demo-container
+      title="Example placeholder"
+      [code]="code"
+      demoUrl="/demos/phone-input/example-phone-input-demo"
+    >
+      <app-example-phone-input-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ExamplePhoneInputDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
-  ScButton,
   ScCombobox,
   ScComboboxEmpty,
   ScComboboxInput,
@@ -13,28 +31,24 @@ import {
   ScComboboxTrigger,
   ScComboboxValue,
   ScField,
-  ScFieldErrors,
   ScInput,
   ScInputGroup,
   ScInputGroupAddon,
   ScLabel,
 } from '@semantic-components/ui';
 import {
-  ScPhoneInputNext,
-  ScPhoneInputNextCountry,
-  ScPhoneInputNextFlag,
-  ScPhoneInputNextNumber,
-  phoneNumberNext,
+  ScPhoneInput,
+  ScPhoneInputCountry,
+  ScPhoneInputFlag,
+  ScPhoneInputNumber,
 } from '@semantic-components/ui/phone-input';
 import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
+import examples from 'libphonenumber-js/mobile/examples';
 
-/** A [formField]: required, and phoneNumberNext() — strict here: the digits checked, not only the length. */
+/** examples: the placeholder is an example number of the country, as it would be written — libphonenumber-js’ examples, imported by you. */
 @Component({
-  selector: 'app-form-phone-input-next-demo',
+  selector: 'app-example-phone-input-demo',
   imports: [
-    FormField,
-    FormRoot,
-    ScButton,
     ScCombobox,
     ScComboboxEmpty,
     ScComboboxInput,
@@ -46,37 +60,32 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScComboboxTrigger,
     ScComboboxValue,
     ScField,
-    ScFieldErrors,
     ScInput,
     ScInputGroup,
     ScInputGroupAddon,
     ScLabel,
-    ScPhoneInputNext,
-    ScPhoneInputNextCountry,
-    ScPhoneInputNextFlag,
-    ScPhoneInputNextNumber,
+    ScPhoneInput,
+    ScPhoneInputCountry,
+    ScPhoneInputFlag,
+    ScPhoneInputNumber,
     SiChevronDownIcon,
     SiSearchIcon,
   ],
-  template: `
-    <form [formRoot]="contactForm" class="grid w-full max-w-sm gap-3">
+  template: \`
+    <div class="grid w-full max-w-sm gap-3">
       <div scField>
         <label scLabel>Phone number</label>
         <div
-          scPhoneInputNext
-          #phone="scPhoneInputNext"
-          defaultCountry="US"
-          [formField]="contactForm.phone"
+          scPhoneInput
+          #phone="scPhoneInput"
+          defaultCountry="GB"
+          [(value)]="number"
         >
-          <div
-            scCombobox
-            scPhoneInputNextCountry
-            #country="scPhoneInputNextCountry"
-          >
+          <div scCombobox scPhoneInputCountry #country="scPhoneInputCountry">
             <button scComboboxTrigger variant="ghost">
               <span class="sr-only">Country</span>
               <span scComboboxValue class="flex items-center gap-2">
-                <img scPhoneInputNextFlag alt="" />
+                <img scPhoneInputFlag alt="" />
                 <span dir="ltr">+{{ phone.callingCode() }}</span>
               </span>
               <svg siChevronDownIcon></svg>
@@ -103,11 +112,7 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
                         [value]="item.code"
                         [label]="item.name"
                       >
-                        <img
-                          scPhoneInputNextFlag
-                          [country]="item.code"
-                          alt=""
-                        />
+                        <img scPhoneInputFlag [country]="item.code" alt="" />
                         <span class="flex-1">{{ item.name }}</span>
                         <span class="text-muted-foreground" dir="ltr"
                           >+{{ item.callingCode }}</span
@@ -119,35 +124,19 @@ import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
               </div>
             </ng-template>
           </div>
-          <input scPhoneInputNextNumber />
+          <input scPhoneInputNumber [examples]="examples" />
         </div>
-        <div scFieldErrors></div>
       </div>
-      <button scButton type="submit" class="justify-self-start">Save</button>
-      @if (saved()) {
-        <p class="text-sm" role="status">{{ saved() }}</p>
-      }
-    </form>
-  `,
+      <p class="text-muted-foreground text-sm" data-testid="value">
+        Value: {{ number() || '—' }}
+      </p>
+    </div>
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class FormPhoneInputNextDemo {
-  private readonly model = signal({ phone: '' });
-  private readonly saved = signal('');
-  private readonly contactForm = form(
-    this.model,
-    (s) => {
-      required(s.phone, { message: 'Enter your phone number.' });
-      phoneNumberNext(s.phone, {
-        strict: true,
-        message: 'Enter a valid phone number.',
-      });
-    },
-    {
-      submission: {
-        action: async () => this.saved.set(`Saved ${this.model().phone}.`),
-      },
-    },
-  );
+export class ExamplePhoneInputDemo {
+  private readonly number = signal('');
+  private readonly examples = examples;
+}`;
 }

@@ -1,124 +1,62 @@
 # Phone Input
 
-An international phone number: a country picker and a number field that formats as you type. Parsing, formatting and validation come from [`libphonenumber-js`](https://gitlab.com/catamphetamine/libphonenumber-js) (a peer dependency).
+An international phone number: a country, searched by name, code or dial code, and the number, formatted as you type — its value the whole number in E.164. On libphonenumber-js. After react-phone-number-input, intl-tel-input and react-international-phone (rewritten 2026-11-23).
 
-The value is the full international number (`+33612345678`), or `''` while nothing is typed. It's what was typed, not necessarily a valid number — validate it with `phoneNumber()`.
+## Architecture
+
+```
+div[scPhoneInput] (value — E.164 · country — two-way · defaultCountry · disabled, readonly)   — role group
+├── div[scCombobox][scPhoneInputCountry] (countries · preferred) — your combobox: the country both ways; results()
+│   ├── button[scComboboxTrigger] — img[scPhoneInputFlag], the dial code (phone.callingCode())
+│   └── … your popup: search input, @for (item of country.results()) scComboboxItem
+└── input[scPhoneInputNumber] (examples) — the number, formatted as you type
+```
 
 ## Usage
 
-```html
-<div scField>
-  <label scLabel>Phone number</label>
-  <div scPhoneInput [formField]="contactForm.phone" defaultCountry="US" #phone="scPhoneInput">
-    <div scCombobox scPhoneInputCountry #picker="scCombobox">
-      <button scComboboxTrigger>
-        <span class="sr-only">Country</span>
-        <span scComboboxValue class="flex items-center gap-2">
-          <img scPhoneInputFlag alt="" />
-          +{{ phone.callingCode() }}
-        </span>
-        <svg siChevronDownIcon></svg>
-      </button>
-      <ng-template scComboboxPortal>
-        <div scComboboxPopup aria-label="Country">
-          <div scInputGroup><input scInput scComboboxInput aria-label="Search countries" /></div>
-          <div scComboboxEmpty>No countries found</div>
-          <ng-template scComboboxListTemplate>
-            <div scComboboxList aria-label="Countries">
-              @for (country of matching(picker.query()); track country.code) {
-              <div scComboboxItem [value]="country.code" [label]="country.name">
-                <img scPhoneInputFlag [country]="country.code" alt="" />
-                {{ country.name }} +{{ country.callingCode }}
-              </div>
-              }
-            </div>
-          </ng-template>
-        </div>
-      </ng-template>
-    </div>
-    <input scPhoneInputNumber />
-  </div>
-  <div scFieldErrors></div>
-</div>
+```ts
+// app.config.ts — the flags, served with your app (no CDN):
+provideSemanticComponents({}, withPhoneInput({ flagUrl: '/flags/{XX}.svg' }));
 ```
-
-```typescript
-readonly countries = phoneCountries('en');
-readonly model = signal({ phone: '' });
-readonly contactForm = form(this.model, (s) => {
-  required(s.phone);
-  phoneNumber(s.phone, { message: 'Enter a valid phone number' });
-});
-```
-
-The country picker is a regular `scCombobox` (see Combobox), its trigger with the search inside the popup: the trigger content, the list and its filtering (by `picker.query()`) are yours. The field's label names the number, not the picker: name the trigger (a `sr-only` "Country" before its value) and the popup (`aria-label`).
-
-### Flags
-
-Like `react-phone-number-input`, flags are images, not code: `<img scPhoneInputFlag>` loads the country's flag from the phone input's `flagUrl`, so no flag is in your bundle and each loads only when shown (`loading="lazy"`). The default is the [`country-flag-icons`](https://gitlab.com/catamphetamine/country-flag-icons) 3x2 SVGs on their GitHub pages. To self-host, copy them into your assets and point `flagUrl` at them:
 
 ```json
-// project.json → build options → assets
+// project.json / angular.json — assets: country-flag-icons' SVGs at /flags
 { "glob": "*.svg", "input": "node_modules/country-flag-icons/3x2", "output": "flags" }
 ```
 
 ```html
-<div scPhoneInput flagUrl="flags/{XX}.svg">…</div>
+<div scField>
+  <label scLabel>Phone number</label>
+  <div scPhoneInput #phone="scPhoneInput" defaultCountry="US" [formField]="form.phone">
+    <div scCombobox scPhoneInputCountry #country="scPhoneInputCountry">
+      <button scComboboxTrigger variant="ghost">
+        <span class="sr-only">Country</span>
+        <span scComboboxValue><img scPhoneInputFlag alt="" /> <span dir="ltr">+{{ phone.callingCode() }}</span></span>
+        <svg siChevronDownIcon></svg>
+      </button>
+      <ng-template scComboboxPortal>…search input… @for (item of country.results(); track item.code) {…}</ng-template>
+    </div>
+    <input scPhoneInputNumber />
+  </div>
+</div>
 ```
 
-Any other flag set works the same way (`{XX}` is the upper-case code, `{xx}` the lower-case one).
+## Country and number
 
-## Parts
-
-### ScPhoneInput — `div[scPhoneInput]` (`exportAs: 'scPhoneInput'`)
-
-Holds the state and draws the group (border, focus ring, invalid state). A Signal Forms control: bind it with `[formField]`, or `[(value)]`.
-
-| Input / model    | Type                              | Default                  | Description                            |
-| ---------------- | --------------------------------- | ------------------------ | -------------------------------------- |
-| `[(value)]`      | `string`                          | `''`                     | The full international number          |
-| `[(country)]`    | `ScPhoneCountryCode \| undefined` | —                        | The selected country (`'FR'`)          |
-| `defaultCountry` | `ScPhoneCountryCode`              | —                        | The country to start with              |
-| `flagUrl`        | `string`                          | `country-flag-icons` 3x2 | Flag image URL, `{XX}` / `{xx}` = code |
-| `disabled`       | `boolean`                         | `false`                  | Bound by `[formField]`                 |
-| `readonly`       | `boolean`                         | `false`                  | Bound by `[formField]`                 |
-| `class`          | `string`                          | `''`                     | Additional CSS classes                 |
-
-Signals: `callingCode()` (`'33'`), `text()` (the formatted number as shown).
-
-- Typing or pasting a number that starts with `+` switches the country (`+44…` → GB).
-- Switching the country keeps the national digits typed so far.
-- A value set from outside (initial value, form reset) is parsed: the country follows it and the number is shown in its national format.
-
-### ScPhoneInputCountry — `div[scCombobox][scPhoneInputCountry]`
-
-Makes the combobox the country picker: its value is the country code, kept in sync both ways. Disabled and read-only follow the phone input.
-
-### ScPhoneInputNumber — `input[scPhoneInputNumber]`
-
-The number (`type="tel"`, `autocomplete="tel"`). Formats as you type — in the country's national format, or international after a `+` — and keeps the caret in place. Backspace or Delete next to a space or bracket removes the digit beyond it. Labelled by the field's label.
-
-Typing the spaces yourself works too: a space typed where the format puts one shows straight away (`6` then Space → `6 `), so `6 66 00 65 94` reads exactly as typed at every step. A space where the format has none is dropped.
-
-### ScPhoneInputFlag — `img[scPhoneInputFlag]`
-
-A 3:2 flag image from `flagUrl`: the selected country, or `[country]`. Hidden while there's no country. Write `alt=""` when the country's name or code is beside it, a real `alt` when the flag stands alone.
-
-| Input     | Type                 | Default              | Description            |
-| --------- | -------------------- | -------------------- | ---------------------- |
-| `country` | `ScPhoneCountryCode` | the selected country | Whose flag             |
-| `class`   | `string`             | `''`                 | Additional CSS classes |
-
-### phoneCountries(locale?)
-
-Every country with a numbering plan, as `ScPhoneCountry` (`{ code, name, callingCode }`), named in `locale` with `Intl.DisplayNames` and sorted by name.
-
-### phoneNumber(path, { message? })
-
-Signal Forms rule: a non-empty value must be a valid phone number (error kind `phoneNumber`). Write its `message` — the library has none. Add `required()` to refuse an empty one.
+- **Value:** the whole number, E.164 (`+33612345678`); empty when there is none. A Signal Forms control.
+- **Dial code:** in the picker, apart from the number — it can't be deleted (intl-tel-input's `separateDialCode`). A number typed or pasted with `+` chooses its country.
+- **Typing:** the country's format as you type; a separator typed first shows at once if the format has one there; Backspace over formatting removes the digit beyond it; the caret stays put. Without the trunk prefix (`6 12 34 56 78`), digits are grouped as the international format does.
+- **The list:** every country with a numbering plan, named in the app's language (`LOCALE_ID`, `Intl.DisplayNames`). `countries` keeps only some; `preferred` puts some first, then the rest by name. `results()` matches the picker's search against the name (accents ignored), its initials (`uk`), the code (`fr`) and the dial code (`+33`, `33`).
+- **Flags:** your app's (`withPhoneInput({ flagUrl })`, `{XX}`/`{xx}` the code); none set, none shown. Their corners are the style's `frameXs`.
+- **Placeholder:** with `[examples]` (libphonenumber-js' `libphonenumber-js/mobile/examples`, imported by you — kept out of the bundle otherwise) an example number of the country, as it would be written; else your `placeholder`.
+- **Validation:** `phoneNumber(path, { strict?, message? })` — by default the length fits the country (`isPossiblePhoneNumber`, react-phone-number-input's advice: numbering plans change); `strict`, the digits too (`isValidPhoneNumber`). Empty passes: add `required`.
 
 ## Accessibility
 
-- The phone input is a `role="group"`; the number field is labelled by the field's `scLabel`, the country trigger by its `aria-label`.
-- `aria-invalid` on the number field once the control is touched and invalid; errors from `scFieldErrors` are linked through the field.
-- The country picker is a combobox with a searchable listbox (see Combobox).
+- The number is named by its field's label; the picker by your text ("Country"), its button reading that and the dial code.
+- The number reads left to right in any language (`dir="ltr"`, aligned to the start of a right-to-left row) — its groups stay in order. Wrap the dial code you show in `dir="ltr"` too.
+- The list is the Combobox's: arrows, type to search, Enter, Escape.
+
+## Not here
+
+Guessing the country from the IP (intl-tel-input's lookup: your code, into `defaultCountry`), number types (mobile, fixed line), extensions, native form posts.

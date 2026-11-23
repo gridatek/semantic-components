@@ -4,23 +4,24 @@ import {
   type SchemaPathRules,
   validate,
 } from '@angular/forms/signals';
-import { isValidPhoneNumber } from 'libphonenumber-js';
+import { isPossiblePhoneNumber, isValidPhoneNumber } from 'libphonenumber-js';
 
 /**
- * Signal Forms rule: the value, if not empty, is a valid phone number in
- * international form (`+33612345678`) — what `scPhoneInput` produces. Use
- * with `required()` to also refuse an empty value.
+ * A Signal Forms rule: the value is a phone number (empty passes — add
+ * `required` for that). By default its length fits its country (the check
+ * react-phone-number-input recommends: numbering plans change, a stricter
+ * check can refuse real numbers); `strict`, its digits too.
  */
 export function phoneNumber<TPathKind extends PathKind = PathKind.Root>(
   path: SchemaPath<string, SchemaPathRules.Supported, TPathKind>,
-  config?: { message?: string },
+  config?: { strict?: boolean; message?: string },
 ): void {
   validate(path, ({ value }) => {
     const number = value();
-    if (!number || isValidPhoneNumber(number)) return undefined;
-    return {
-      kind: 'phoneNumber',
-      message: config?.message,
-    };
+    if (!number) return undefined;
+    const ok = config?.strict
+      ? isValidPhoneNumber(number)
+      : isPossiblePhoneNumber(number);
+    return ok ? undefined : { kind: 'phoneNumber', message: config?.message };
   });
 }

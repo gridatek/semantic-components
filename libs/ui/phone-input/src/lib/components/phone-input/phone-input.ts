@@ -1,7 +1,6 @@
 import {
   Directive,
   ElementRef,
-  type OnInit,
   booleanAttribute,
   computed,
   contentChild,
@@ -22,49 +21,42 @@ import {
   parsePhoneNumberFromString,
 } from 'libphonenumber-js';
 import { ScPhoneInputNumber } from './phone-input-number';
-import { SC_PHONE_INPUT, type ScPhoneCountryCode } from './phone-input-types';
+import { SC_PHONE_INPUT } from './phone-input-token';
+import type { ScPhoneCountryCode } from './phone-input-types';
 
 /**
- * A phone number: a country (`scPhoneInputCountry`) and the number
- * (`scPhoneInputNumber`), formatted as you type with `libphonenumber-js`.
- *
- * The value is the full international number (`+33612345678`), or `''` while
- * nothing is typed. It's whatever was typed, not necessarily valid: validate
- * it with `phoneNumber()` in your `form()` schema. Typing or pasting a number
- * with `+` switches the country.
+ * A phone number: a country (`scPhoneInputCountry` on your combobox) and
+ * the number (`input[scPhoneInputNumber]`), in one row — the style's input
+ * group. Its value is the whole number in E.164 (`+33612345678`), empty when
+ * there is none: a Signal Forms control. The country's dial code shows in the
+ * picker, apart from the number — it can't be deleted; a number typed with
+ * `+` chooses its country.
  */
 @Directive({
   selector: 'div[scPhoneInput]',
   exportAs: 'scPhoneInput',
   providers: [{ provide: SC_PHONE_INPUT, useExisting: ScPhoneInput }],
   host: {
-    'data-slot': 'input-group',
+    'data-slot': 'phone-input',
     role: 'group',
     '[attr.data-disabled]': 'disabled() || null',
     '[class]': 'class()',
     '(focusout)': 'onFocusout($event)',
   },
 })
-export class ScPhoneInput implements FormValueControl<string>, OnInit {
+export class ScPhoneInput implements FormValueControl<string> {
   private readonly groupStyles = injectStyle().inputGroup;
-  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  /** The full international number. Bind with `[formField]` or `[(value)]`. */
+  /** The whole number, E.164: `[formField]` or `[(value)]`. */
   readonly value = model('');
-  /** The selected country. */
+  /** The country chosen: two-way. */
   readonly country = model<ScPhoneCountryCode | undefined>(undefined);
-  /** The country to start with when the value doesn't say. */
+  /** The country to start with, when the value doesn't say. */
   readonly defaultCountry = input<ScPhoneCountryCode | undefined>(undefined);
-  /**
-   * Where `scPhoneInputFlag` images come from: `{XX}` / `{xx}` is replaced by
-   * the country code. Defaults to the `country-flag-icons` 3x2 SVGs; point it
-   * at your own copy to self-host.
-   */
-  readonly flagUrl = input(
-    'https://purecatamphetamine.github.io/country-flag-icons/3x2/{XX}.svg',
-  );
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly readonly = input(false, { transform: booleanAttribute });
   readonly required = input(false, { transform: booleanAttribute });
@@ -72,9 +64,9 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
   readonly touched = input(false, { transform: booleanAttribute });
   readonly touch = output<void>();
 
-  /** The number as shown in the input (formatted). */
+  /** The number as shown in the field (formatted). */
   readonly text = signal('');
-  /** The country's calling code, without `+` (`'33'`). */
+  /** The country's dial code, without `+` (`'33'`). */
   readonly callingCode = computed(() => {
     const country = this.country();
     return country ? getCountryCallingCode(country) : '';
@@ -87,14 +79,22 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
   private readonly class = computed(() =>
     cn(
       this.groupStyles,
-      // The country trigger sits flush in the group, with a divider.
-      '[&_[data-slot=combobox]]:h-full [&_[data-slot=combobox]]:min-w-0 [&_[data-slot=combobox]]:shrink-0',
-      '[&_[data-slot=combobox-trigger]]:h-full [&_[data-slot=combobox-trigger]]:gap-1 [&_[data-slot=combobox-trigger]]:rounded-none [&_[data-slot=combobox-trigger]]:border-0 [&_[data-slot=combobox-trigger]]:border-e [&_[data-slot=combobox-trigger]]:border-input [&_[data-slot=combobox-trigger]]:bg-transparent [&_[data-slot=combobox-trigger]]:focus-visible:ring-0',
+      // The picker, seated in the row: as tall as it, as wide as its content,
+      // a line after it (the trigger's ghost look is its own variant).
+      '*:data-[slot=combobox]:h-full *:data-[slot=combobox]:shrink-0',
+      '[&>[data-slot=combobox]>[data-slot=combobox-trigger]]:h-full [&>[data-slot=combobox]>[data-slot=combobox-trigger]]:w-auto [&>[data-slot=combobox]>[data-slot=combobox-trigger]]:gap-1.5 [&>[data-slot=combobox]>[data-slot=combobox-trigger]]:rounded-none [&>[data-slot=combobox]>[data-slot=combobox-trigger]]:border-e [&>[data-slot=combobox]>[data-slot=combobox-trigger]]:border-input',
       this.classInput(),
     ),
   );
 
   constructor() {
+    // No country yet: the default one.
+    effect(() => {
+      const fallback = this.defaultCountry();
+      untracked(() => {
+        if (!this.country() && fallback) this.country.set(fallback);
+      });
+    });
     // A value written from outside (initial value, form reset): show it.
     effect(() => {
       const value = this.value();
@@ -104,14 +104,10 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
     });
   }
 
-  ngOnInit(): void {
-    if (!this.country()) this.country.set(this.defaultCountry());
-  }
-
   /**
-   * Formats what was typed or pasted, and updates the value (and country).
-   * `keepSeparator`: the text ends with a space (or `-`, …) — typed, or left by
-   * deleting the digit after it. Keep it if the format puts one there next.
+   * Formats what was typed or pasted, and updates the value — and the
+   * country, when the text starts with `+`. `keepSeparator`: the text ends
+   * with a space (or `-`, …): kept if the format puts one there next.
    */
   type(raw: string, keepSeparator = false): void {
     const typer = new AsYouType(this.country());
@@ -146,13 +142,13 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
 
   private onFocusout(event: FocusEvent): void {
     const next = event.relatedTarget as Node | null;
-    if (!next || !this.host.nativeElement.contains(next)) this.touch.emit();
+    if (!next || !this.element.contains(next)) this.touch.emit();
   }
 
   /**
    * National formats include the trunk prefix (`06 12 34 56 78` in France), so
    * a number typed without it comes back as bare digits. Group those like the
-   * international format instead, minus the calling code the trigger shows
+   * international format instead, minus the dial code the picker shows
    * (`6 12 34 56 78`).
    */
   private withoutTrunkPrefix(text: string, typer: AsYouType): string {
@@ -168,8 +164,8 @@ export class ScPhoneInput implements FormValueControl<string>, OnInit {
 
   /**
    * The format only adds a separator once the digit after it is typed (`6`,
-   * then `6 6`). When the user types it first, show it now — the format's
-   * own separator, found by formatting one more digit (`6` + space → `6 `).
+   * then `6 6`). Typed first, it shows now — the format's own separator,
+   * found by formatting one more digit (`6` + space → `6 `).
    */
   private withNextSeparator(text: string, raw: string): string {
     const next = this.format(`${raw}0`);

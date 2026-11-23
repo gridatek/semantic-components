@@ -17,17 +17,16 @@ import {
   ScLabel,
 } from '@semantic-components/ui';
 import {
-  ScPhoneInputNext,
-  ScPhoneInputNextCountry,
-  ScPhoneInputNextFlag,
-  ScPhoneInputNextNumber,
+  ScPhoneInput,
+  ScPhoneInputCountry,
+  ScPhoneInputFlag,
+  ScPhoneInputNumber,
 } from '@semantic-components/ui/phone-input';
 import { SiChevronDownIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
-import examples from 'libphonenumber-js/mobile/examples';
 
-/** examples: the placeholder is an example number of the country, as it would be written — libphonenumber-js’ examples, imported by you. */
+/** preferred: these countries first, in this order, then the rest by name. */
 @Component({
-  selector: 'app-example-phone-input-next-demo',
+  selector: 'app-preferred-phone-input-demo',
   imports: [
     ScCombobox,
     ScComboboxEmpty,
@@ -44,10 +43,10 @@ import examples from 'libphonenumber-js/mobile/examples';
     ScInputGroup,
     ScInputGroupAddon,
     ScLabel,
-    ScPhoneInputNext,
-    ScPhoneInputNextCountry,
-    ScPhoneInputNextFlag,
-    ScPhoneInputNextNumber,
+    ScPhoneInput,
+    ScPhoneInputCountry,
+    ScPhoneInputFlag,
+    ScPhoneInputNumber,
     SiChevronDownIcon,
     SiSearchIcon,
   ],
@@ -56,20 +55,21 @@ import examples from 'libphonenumber-js/mobile/examples';
       <div scField>
         <label scLabel>Phone number</label>
         <div
-          scPhoneInputNext
-          #phone="scPhoneInputNext"
-          defaultCountry="GB"
+          scPhoneInput
+          #phone="scPhoneInput"
+          defaultCountry="FR"
           [(value)]="number"
         >
           <div
             scCombobox
-            scPhoneInputNextCountry
-            #country="scPhoneInputNextCountry"
+            scPhoneInputCountry
+            #country="scPhoneInputCountry"
+            [preferred]="preferred"
           >
             <button scComboboxTrigger variant="ghost">
               <span class="sr-only">Country</span>
               <span scComboboxValue class="flex items-center gap-2">
-                <img scPhoneInputNextFlag alt="" />
+                <img scPhoneInputFlag alt="" />
                 <span dir="ltr">+{{ phone.callingCode() }}</span>
               </span>
               <svg siChevronDownIcon></svg>
@@ -96,11 +96,7 @@ import examples from 'libphonenumber-js/mobile/examples';
                         [value]="item.code"
                         [label]="item.name"
                       >
-                        <img
-                          scPhoneInputNextFlag
-                          [country]="item.code"
-                          alt=""
-                        />
+                        <img scPhoneInputFlag [country]="item.code" alt="" />
                         <span class="flex-1">{{ item.name }}</span>
                         <span class="text-muted-foreground" dir="ltr"
                           >+{{ item.callingCode }}</span
@@ -112,7 +108,7 @@ import examples from 'libphonenumber-js/mobile/examples';
               </div>
             </ng-template>
           </div>
-          <input scPhoneInputNextNumber [examples]="examples" />
+          <input scPhoneInputNumber />
         </div>
       </div>
       <p class="text-muted-foreground text-sm" data-testid="value">
@@ -123,7 +119,7 @@ import examples from 'libphonenumber-js/mobile/examples';
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class ExamplePhoneInputNextDemo {
+export class PreferredPhoneInputDemo {
   private readonly number = signal('');
-  private readonly examples = examples;
+  private readonly preferred = ['FR', 'BE', 'CH'] as const;
 }
