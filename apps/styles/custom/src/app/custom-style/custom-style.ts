@@ -18,6 +18,7 @@ import { codeBlock } from './code-block';
 import { colorPicker } from './color-picker';
 import { combobox } from './combobox';
 import { command } from './command';
+import { compare } from './compare';
 import { contextMenu } from './context-menu';
 import { controlGroup, controlGroupText } from './control-group';
 import { dialog } from './dialog';
@@ -145,6 +146,7 @@ export const customStyle: ScStyle = {
   timeClock,
   fileInput,
   mediaPlayer,
+  compare,
   listbox,
   segmentedControl,
   waterfall,

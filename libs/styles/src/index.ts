@@ -553,6 +553,14 @@ export interface ScFileInputStyles {
   size: string;
 }
 
+/** A compare's parts that change from style to style — ours (shadcn has none). */
+export interface ScCompareStyles {
+  /** The handle's knob (its ::after): its corners. */
+  knob: string;
+  /** A label's corners. */
+  label: string;
+}
+
 /** A media player's parts that change from style to style — ours (shadcn has none). */
 export interface ScMediaPlayerStyles {
   /** The player's frame: the Card's corners, ring and shadow (`frame`). */
@@ -824,6 +832,7 @@ export interface ScStyle {
   timeClock: ScTimeClockStyles;
   fileInput: ScFileInputStyles;
   mediaPlayer: ScMediaPlayerStyles;
+  compare: ScCompareStyles;
   listbox: ScListboxStyles;
   segmentedControl: ScSegmentedControlStyles;
   waterfall: ScWaterfallStyles;

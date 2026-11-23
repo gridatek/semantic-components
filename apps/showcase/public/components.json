@@ -226,6 +226,15 @@
     "hidden": true
   },
   {
+    "name": "Compare Next",
+    "path": "compare-next",
+    "description": "Two things compared, split by a divider: photos before and after, two themes, any content; the style’s knob, a touch-friendly drag.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Media",
+    "hidden": true
+  },
+  {
     "name": "Confetti",
     "path": "confetti",
     "description": "A burst, two cannons or fireworks in the theme’s colours; canvas-confetti only where it is used.",
