@@ -120,7 +120,7 @@ export class ScVirtualListNext {
   /** The engine is watching the page: rows can be measured. */
   readonly mounted = signal(false);
 
-  protected readonly spacerTag = /^(UL|OL)$/.test(this.host.tagName)
+  private readonly spacerTag = /^(UL|OL)$/.test(this.host.tagName)
     ? 'li'
     : 'div';
 

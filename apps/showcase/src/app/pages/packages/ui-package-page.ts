@@ -251,5 +251,10 @@ import { ScCarousel, ScCarouselItem } from '@semantic-components/ui/carousel';`;
       holds: 'QR Code',
       needs: ['uqr'],
     },
+    {
+      path: 'virtual-list',
+      holds: 'Virtual List',
+      needs: ['@tanstack/virtual-core'],
+    },
   ];
 }
