@@ -53,10 +53,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scFrame class="w-full max-w-md p-6">
-      <div
-        scStepper
-        [(selectedIndex)]="step"
-      >
+      <div scStepper [(selectedIndex)]="step">
         <div scStepperList aria-label="Checkout steps">
           @for (s of steps; track s.title) {
             <div scStepperItem #item="scStepperItem">
@@ -94,20 +91,20 @@ export class NumbersStepperDemo {
   private readonly steps = [
     {
       title: 'Cart',
-      content: 'Step 1 of 4: your cart.'
+      content: 'Step 1 of 4: your cart.',
     },
     {
       title: 'Address',
-      content: 'Step 2 of 4: where it goes.'
+      content: 'Step 2 of 4: where it goes.',
     },
     {
       title: 'Payment',
-      content: 'Step 3 of 4: how you pay.'
+      content: 'Step 3 of 4: how you pay.',
     },
     {
       title: 'Confirm',
-      content: 'Step 4 of 4: check and order.'
-    }
+      content: 'Step 4 of 4: check and order.',
+    },
   ];
 }`;
 }

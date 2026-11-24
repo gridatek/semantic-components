@@ -1,7 +1,7 @@
 import { InjectionToken, Injector } from '@angular/core';
 
-/** What the scheduler shows: a month's weeks, a week's days, or a day. */
-export type ScSchedulerView = 'month' | 'week' | 'day';
+/** What the scheduler shows: a month's weeks, a week's days, a day, or a month's events as a list. */
+export type ScSchedulerView = 'month' | 'week' | 'day' | 'agenda';
 
 /** An event the scheduler places; add your own fields (title, colour…). */
 export interface ScSchedulerEventData {
@@ -9,7 +9,7 @@ export interface ScSchedulerEventData {
   readonly start: Temporal.ZonedDateTime;
   /** Exclusive: an event from 9:00 to 10:00 ends at 10:00. */
   readonly end: Temporal.ZonedDateTime;
-  /** In the all-day row (week, day), and first in a month's day. */
+  /** A bar across its days (the month, the all-day row), first in a day. */
   readonly allDay?: boolean;
 }
 
@@ -18,9 +18,31 @@ export interface ScSchedulerEventContext<
   T extends ScSchedulerEventData = ScSchedulerEventData,
 > {
   readonly event: T;
-  /** Where it is shown: a month's day, the all-day row, or the time grid. */
-  readonly place: 'month' | 'all-day' | 'time';
+  /** Where it is shown: a month's week, the all-day row, the time grid, or the agenda. */
+  readonly place: 'month' | 'all-day' | 'time' | 'agenda';
+  /** The day it is shown on (a bar: its first day in the row). */
   readonly day: Temporal.PlainDate;
+  /** A bar that goes on before this row (its start corners square). */
+  readonly continuesBefore?: boolean;
+  /** A bar that goes on after this row (its end corners square). */
+  readonly continuesAfter?: boolean;
+}
+
+/** A slot picked to create an event: a time range, or whole days. */
+export interface ScSchedulerSlot {
+  readonly start: Temporal.ZonedDateTime;
+  /** Exclusive. */
+  readonly end: Temporal.ZonedDateTime;
+  readonly allDay: boolean;
+}
+
+/** An event moved or resized: its new times, for you to save (the scheduler shows `events`). */
+export interface ScSchedulerEventChange<
+  T extends ScSchedulerEventData = ScSchedulerEventData,
+> {
+  readonly event: T;
+  readonly start: Temporal.ZonedDateTime;
+  readonly end: Temporal.ZonedDateTime;
 }
 
 export const SC_SCHEDULER_EVENT = new InjectionToken<ScSchedulerEventContext>(

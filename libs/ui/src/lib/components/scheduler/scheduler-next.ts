@@ -10,7 +10,6 @@ import { ScScheduler } from './scheduler';
   selector: 'button[scSchedulerNext]',
   host: {
     type: 'button',
-    'data-slot': 'scheduler-next',
     '[class]': 'class()',
     '(click)': 'scheduler.next()',
   },

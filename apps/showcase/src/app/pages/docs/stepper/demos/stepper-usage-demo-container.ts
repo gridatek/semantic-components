@@ -51,10 +51,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scFrame class="w-full max-w-2xl p-6">
-      <div
-        scStepper
-        [(selectedIndex)]="step"
-      >
+      <div scStepper [(selectedIndex)]="step">
         <div scStepperList aria-label="Sign-up steps">
           @for (s of steps; track s.title) {
             <div scStepperItem #item="scStepperItem">
@@ -96,18 +93,18 @@ export class StepperUsageDemo {
     {
       title: 'Account',
       description: 'Your email and password',
-      content: 'Step 1: choose the email you sign in with, and a password.'
+      content: 'Step 1: choose the email you sign in with, and a password.',
     },
     {
       title: 'Profile',
       description: 'You and your team',
-      content: 'Step 2: your name, your role, and who you work with.'
+      content: 'Step 2: your name, your role, and who you work with.',
     },
     {
       title: 'Plan',
       description: 'Free or Pro',
-      content: 'Step 3: start free, or take Pro for the whole team.'
-    }
+      content: 'Step 3: start free, or take Pro for the whole team.',
+    },
   ];
 }`;
 }

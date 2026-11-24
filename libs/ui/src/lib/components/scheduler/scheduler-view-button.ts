@@ -13,7 +13,6 @@ import type { ScSchedulerView } from './scheduler-types';
   selector: 'button[scSchedulerViewButton]',
   host: {
     type: 'button',
-    'data-slot': 'scheduler-view-button',
     '[attr.aria-pressed]': 'pressed()',
     '[class]': 'class()',
     '(click)': 'scheduler.view.set(viewName())',

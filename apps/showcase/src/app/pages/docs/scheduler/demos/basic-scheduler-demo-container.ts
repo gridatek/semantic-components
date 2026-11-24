@@ -1,18 +1,17 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { UsageCode } from '../../../../components/usage-code/usage-code';
 import { BasicSchedulerDemo } from './basic-scheduler-demo';
 
 @Component({
   selector: 'app-basic-scheduler-demo-container',
-  imports: [DemoContainer, BasicSchedulerDemo],
+  imports: [UsageCode, BasicSchedulerDemo],
   template: `
-    <app-demo-container
-      title="Basic"
+    <app-usage-code
       [code]="code"
       demoUrl="/demos/scheduler/basic-scheduler-demo"
     >
-      <app-basic-scheduler-demo />
-    </app-demo-container>
+      <ng-template><app-basic-scheduler-demo /></ng-template>
+    </app-usage-code>
   `,
   host: { class: 'block w-full' },
   encapsulation: ViewEncapsulation.None,
@@ -21,6 +20,7 @@ export class BasicSchedulerDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScScheduler,
+  ScSchedulerAgenda,
   ScSchedulerEvent,
   type ScSchedulerEventData,
   ScSchedulerEventTemplate,
@@ -45,7 +45,7 @@ interface Meeting extends ScSchedulerEventData {
   readonly title: string;
 }
 
-/** Month, week and day views, with a toolbar; click an event to select it. */
+/** Month, week, day and agenda views, with a toolbar; click an event to select it. */
 @Component({
   selector: 'app-basic-scheduler-demo',
   imports: [
@@ -57,6 +57,7 @@ interface Meeting extends ScSchedulerEventData {
     ScSchedulerViewButton,
     ScSchedulerMonth,
     ScSchedulerTimeGrid,
+    ScSchedulerAgenda,
     ScSchedulerEventTemplate,
     ScSchedulerEvent,
     ScSchedulerEventTime,
@@ -89,13 +90,20 @@ interface Meeting extends ScSchedulerEventData {
           <button scSchedulerViewButton="month">Month</button>
           <button scSchedulerViewButton="week">Week</button>
           <button scSchedulerViewButton="day">Day</button>
+          <button scSchedulerViewButton="agenda">Agenda</button>
         </div>
       </div>
 
-      @if (scheduler.view() === 'month') {
-        <div scSchedulerMonth class="flex-1"></div>
-      } @else {
-        <div scSchedulerTimeGrid class="flex-1"></div>
+      @switch (scheduler.view()) {
+        @case ('month') {
+          <div scSchedulerMonth class="flex-1"></div>
+        }
+        @case ('agenda') {
+          <div scSchedulerAgenda class="flex-1">No events this month.</div>
+        }
+        @default {
+          <div scSchedulerTimeGrid class="flex-1"></div>
+        }
       }
 
       <ng-template [scSchedulerEventTemplate]="events" let-event>

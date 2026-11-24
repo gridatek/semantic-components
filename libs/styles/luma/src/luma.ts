@@ -55,6 +55,7 @@ import { progress } from './progress';
 import { questionnaire } from './questionnaire';
 import { radioGroup } from './radio-group';
 import { resizable } from './resizable';
+import { scheduler } from './scheduler';
 import { scrollArea } from './scroll-area';
 import { segmentedControl } from './segmented-control';
 import { segmentedInput } from './segmented-input';
@@ -148,6 +149,7 @@ export const luma: ScStyle = {
   fileInput,
   mediaPlayer,
   compare,
+  scheduler,
   sortable,
   listbox,
   segmentedControl,

@@ -6,9 +6,9 @@ import { cn } from 'cn';
  * changes.
  */
 @Directive({
-  selector: '[scSchedulerTitle]',
+  selector:
+    'h1[scSchedulerTitle], h2[scSchedulerTitle], h3[scSchedulerTitle], div[scSchedulerTitle]',
   host: {
-    'data-slot': 'scheduler-title',
     'aria-live': 'polite',
     '[class]': 'class()',
   },

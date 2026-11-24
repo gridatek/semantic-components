@@ -9,7 +9,6 @@ import { ScScheduler } from './scheduler';
   selector: 'button[scSchedulerToday]',
   host: {
     type: 'button',
-    'data-slot': 'scheduler-today',
     '[class]': 'class()',
     '(click)': 'scheduler.goToToday()',
   },

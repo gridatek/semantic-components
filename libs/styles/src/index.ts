@@ -555,6 +555,14 @@ export interface ScFileInputStyles {
   size: string;
 }
 
+/** A scheduler's corners that change from style to style — ours (shadcn has none). */
+export interface ScSchedulerStyles {
+  /** A day's number (today filled): round, or square. */
+  day: string;
+  /** An event: a line, a bar, a block. */
+  event: string;
+}
+
 /** A sortable item's moments that change from style to style — ours (shadcn has none). */
 export interface ScSortableStyles {
   /** Dragged by the pointer: raised. */
@@ -845,6 +853,7 @@ export interface ScStyle {
   fileInput: ScFileInputStyles;
   mediaPlayer: ScMediaPlayerStyles;
   compare: ScCompareStyles;
+  scheduler: ScSchedulerStyles;
   sortable: ScSortableStyles;
   listbox: ScListboxStyles;
   segmentedControl: ScSegmentedControlStyles;

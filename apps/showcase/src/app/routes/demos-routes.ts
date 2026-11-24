@@ -4377,6 +4377,34 @@ export const demosRoutes: Route[] = [
     path: 'demos/scheduler',
     children: [
       {
+        path: 'editable-scheduler-demo',
+        loadComponent: () =>
+          import('../pages/docs/scheduler/demos/editable-scheduler-demo').then(
+            (m) => m.EditableSchedulerDemo,
+          ),
+      },
+      {
+        path: 'multi-day-scheduler-demo',
+        loadComponent: () =>
+          import('../pages/docs/scheduler/demos/multi-day-scheduler-demo').then(
+            (m) => m.MultiDaySchedulerDemo,
+          ),
+      },
+      {
+        path: 'agenda-scheduler-demo',
+        loadComponent: () =>
+          import('../pages/docs/scheduler/demos/agenda-scheduler-demo').then(
+            (m) => m.AgendaSchedulerDemo,
+          ),
+      },
+      {
+        path: 'rtl-scheduler-demo',
+        loadComponent: () =>
+          import('../pages/docs/scheduler/demos/rtl-scheduler-demo').then(
+            (m) => m.RtlSchedulerDemo,
+          ),
+      },
+      {
         path: 'basic-scheduler-demo',
         loadComponent: () =>
           import('../pages/docs/scheduler/demos/basic-scheduler-demo').then(

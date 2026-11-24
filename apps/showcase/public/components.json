@@ -815,11 +815,10 @@
   {
     "name": "Scheduler",
     "path": "scheduler",
-    "description": "Events in month, week and day views, built from parts: overlapping events side by side, all-day events, now.",
+    "description": "Events in month, week, day and agenda views, built from parts: bars across days, overlaps side by side; pick a time to create, drag or use the keys to move.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Advanced",
-    "hidden": true
+    "category": "Advanced"
   },
   {
     "name": "Scroll Area",

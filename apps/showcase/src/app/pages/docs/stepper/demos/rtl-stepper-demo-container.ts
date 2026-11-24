@@ -58,10 +58,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
   template: \`
     <div dir="rtl" lang="ar" scFrame class="w-full max-w-2xl p-6">
-      <div
-        scStepper
-        [(selectedIndex)]="step"
-      >
+      <div scStepper [(selectedIndex)]="step">
         <div scStepperList aria-label="خطوات التسجيل">
           @for (s of steps; track s.title) {
             <div scStepperItem #item="scStepperItem">
@@ -103,18 +100,18 @@ export class RtlStepperDemo {
     {
       title: 'الحساب',
       description: 'بريدك وكلمة المرور',
-      content: 'الخطوة ١: اختر البريد الذي تدخل به، وكلمة مرور.'
+      content: 'الخطوة ١: اختر البريد الذي تدخل به، وكلمة مرور.',
     },
     {
       title: 'الملف الشخصي',
       description: 'أنت وفريقك',
-      content: 'الخطوة ٢: اسمك، ودورك، ومن تعمل معهم.'
+      content: 'الخطوة ٢: اسمك، ودورك، ومن تعمل معهم.',
     },
     {
       title: 'الخطة',
       description: 'مجانية أو احترافية',
-      content: 'الخطوة ٣: ابدأ مجانًا، أو اختر الاحترافية للفريق كله.'
-    }
+      content: 'الخطوة ٣: ابدأ مجانًا، أو اختر الاحترافية للفريق كله.',
+    },
   ];
 }`;
 }

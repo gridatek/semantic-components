@@ -2,7 +2,7 @@
 
 Every component brought to the same bar: shadcn's look, tested, mobile first, right to left, in light and dark, rendered on the server. One component at a time, in the order the user names, each through [component-rewrite-process.md](component-rewrite-process.md). Two lists: the components shadcn has (**List 1**: its look and parts are the reference), and the ones it doesn't (**List 2**: shadcn's tokens and patterns, our design). The order of each list is the user's work order: changed only by hand, in this document — `scripts/roadmap.mjs` keeps every row where it is, refreshes its columns, and adds a new component at the end of its list; **Built on** (the components it imports, and those it shapes inside it — the `data-slot` its styles, or its style's, read: a button group shapes its buttons, input groups and selects) and **Parts** (the components, directives and services it declares) show where it sits. Each row ticked when it meets the definition of done.
 
-Inventory (144 components): 63 with a shadcn counterpart · 142 with e2e demo tests · 144 with a page axe test · 126 with an RTL demo.
+Inventory (144 components): 63 with a shadcn counterpart · 142 with e2e demo tests · 144 with a page axe test · 127 with an RTL demo.
 
 ## The two lists
 
@@ -169,7 +169,7 @@ The components shadcn doesn't have: shadcn's tokens and patterns, our parts.
 |  41 | [Rating](../apps/showcase/src/app/pages/docs/rating)                           | ui      | field                                                                   |     2 |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  42 | [Sankey Chart](../apps/showcase/src/app/pages/docs/sankey-chart)               | ui      | chart                                                                   |     1 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  43 | [Scatter Chart](../apps/showcase/src/app/pages/docs/scatter-chart)             | ui      | chart                                                                   |     1 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
-|  44 | [Scheduler](../apps/showcase/src/app/pages/docs/scheduler)                     | ui      | button                                                                  |    13 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
+|  44 | [Scheduler](../apps/showcase/src/app/pages/docs/scheduler)                     | ui      | button                                                                  |    14 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  45 | [Select On Focus](../apps/showcase/src/app/pages/docs/select-on-focus)         | ui      | —                                                                       |     1 |  [ ]   | [ ] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  46 | [Signature Pad](../apps/showcase/src/app/pages/docs/signature-pad)             | ui      | field, textarea                                                         |     1 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |
 |  47 | [Stat Card](../apps/showcase/src/app/pages/docs/stat-card)                     | ui      | —                                                                       |     0 |  [ ]   | [x] |  [ ]   | [ ] | [ ]  | [ ] | [ ]  | [ ] |    —    |

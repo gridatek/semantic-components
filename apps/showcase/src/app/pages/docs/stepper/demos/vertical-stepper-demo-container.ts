@@ -73,24 +73,22 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
                   }
                 </span>
                 <span scStepperTitle>{{ s.title }}</span>
-                <span scStepperDescription>{{
-                  s.description
-                }}</span>
+                <span scStepperDescription>{{ s.description }}</span>
               </button>
               <div scStepperConnector></div>
             </div>
           }
         </div>
         <div class="flex flex-1 flex-col justify-between gap-6">
-        @for (s of steps; track s.title) {
-          <div scStepperPanel [step]="$index">
-            <p class="text-muted-foreground text-sm">{{ s.content }}</p>
+          @for (s of steps; track s.title) {
+            <div scStepperPanel [step]="$index">
+              <p class="text-muted-foreground text-sm">{{ s.content }}</p>
+            </div>
+          }
+          <div class="flex justify-between gap-2">
+            <button scStepperPrevious>Back</button>
+            <button scStepperNext>Continue</button>
           </div>
-        }
-        <div class="flex justify-between gap-2">
-          <button scStepperPrevious>Back</button>
-          <button scStepperNext>Continue</button>
-        </div>
         </div>
       </div>
     </div>
@@ -104,18 +102,18 @@ export class VerticalStepperDemo {
     {
       title: 'Account',
       description: 'Your email and password',
-      content: 'Step 1: choose the email you sign in with, and a password.'
+      content: 'Step 1: choose the email you sign in with, and a password.',
     },
     {
       title: 'Profile',
       description: 'You and your team',
-      content: 'Step 2: your name, your role, and who you work with.'
+      content: 'Step 2: your name, your role, and who you work with.',
     },
     {
       title: 'Plan',
       description: 'Free or Pro',
-      content: 'Step 3: start free, or take Pro for the whole team.'
-    }
+      content: 'Step 3: start free, or take Pro for the whole team.',
+    },
   ];
 }`;
 }

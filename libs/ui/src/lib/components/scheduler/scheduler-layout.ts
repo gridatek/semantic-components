@@ -55,6 +55,135 @@ export function eventsOn<T extends ScSchedulerEventData>(
     );
 }
 
+/** The local days an event covers in `timeZone` (its end exclusive). */
+export function eventDays(
+  event: ScSchedulerEventData,
+  timeZone: string,
+): { first: Temporal.PlainDate; last: Temporal.PlainDate } {
+  const first = event.start.withTimeZone(timeZone).toPlainDate();
+  const end = event.end.withTimeZone(timeZone);
+  // Ending at midnight: the day before is its last.
+  const last =
+    end.toPlainTime().equals(Temporal.PlainTime.from('00:00')) &&
+    Temporal.ZonedDateTime.compare(event.end, event.start) > 0
+      ? end.toPlainDate().subtract({ days: 1 })
+      : end.toPlainDate();
+  return {
+    first,
+    last: Temporal.PlainDate.compare(last, first) < 0 ? first : last,
+  };
+}
+
+/** Whether an event is drawn as a bar: all day, or over more than one day. */
+export function isBar(event: ScSchedulerEventData, timeZone: string): boolean {
+  if (event.allDay) return true;
+  const { first, last } = eventDays(event, timeZone);
+  return !first.equals(last);
+}
+
+/** An event's piece in a row of days: its column, its span, its lane. */
+export interface ScSchedulerSegment<T> {
+  readonly event: T;
+  /** From 0. */
+  readonly column: number;
+  readonly span: number;
+  /** From 0: the line it is drawn on. */
+  readonly lane: number;
+  readonly continuesBefore: boolean;
+  readonly continuesAfter: boolean;
+}
+
+/**
+ * Lays a row of days out (a month's week, the all-day row): each event a
+ * piece across its days in the row, on the first lane free — bars first,
+ * longer first, then by start. With `maxLanes`, the pieces past the last lane
+ * (or on it, where a day has more) are left out; each day says how many it
+ * left out.
+ */
+export function layoutRow<T extends ScSchedulerEventData>(
+  events: readonly T[],
+  days: readonly Temporal.PlainDate[],
+  timeZone: string,
+  maxLanes = Infinity,
+): { segments: ScSchedulerSegment<T>[]; more: number[] } {
+  const first = days[0];
+  const last = days[days.length - 1];
+  const pieces = events
+    .map((event) => {
+      const span = eventDays(event, timeZone);
+      if (
+        Temporal.PlainDate.compare(span.last, first) < 0 ||
+        Temporal.PlainDate.compare(span.first, last) > 0
+      ) {
+        return null;
+      }
+      const from =
+        Temporal.PlainDate.compare(span.first, first) < 0 ? first : span.first;
+      const to =
+        Temporal.PlainDate.compare(span.last, last) > 0 ? last : span.last;
+      const column = first.until(from).days;
+      return {
+        event,
+        column,
+        span: from.until(to).days + 1,
+        continuesBefore: Temporal.PlainDate.compare(span.first, first) < 0,
+        continuesAfter: Temporal.PlainDate.compare(span.last, last) > 0,
+        bar: isBar(event, timeZone),
+      };
+    })
+    .filter((piece) => piece !== null)
+    .sort(
+      (a, b) =>
+        a.column - b.column ||
+        Number(b.bar) - Number(a.bar) ||
+        b.span - a.span ||
+        Temporal.ZonedDateTime.compare(a.event.start, b.event.start),
+    );
+
+  // Each lane: which columns are taken.
+  const lanes: boolean[][] = [];
+  const placed = pieces.map((piece) => {
+    let lane = 0;
+    while (
+      lanes[lane]?.slice(piece.column, piece.column + piece.span).some(Boolean)
+    ) {
+      lane++;
+    }
+    lanes[lane] ??= Array.from({ length: days.length }, () => false);
+    for (let i = piece.column; i < piece.column + piece.span; i++) {
+      lanes[lane][i] = true;
+    }
+    return { ...piece, lane };
+  });
+
+  const perDay = days.map((_, day) =>
+    placed.filter((p) => p.column <= day && day < p.column + p.span),
+  );
+  // A day with more than the lanes: its last lane says how many more.
+  const crowded = perDay.map((pieces) => pieces.length > maxLanes);
+  const shown = placed.filter((piece) => {
+    if (piece.lane >= maxLanes) return false;
+    if (piece.lane < maxLanes - 1) return true;
+    return !crowded
+      .slice(piece.column, piece.column + piece.span)
+      .some(Boolean);
+  });
+  const more = perDay.map(
+    (pieces) => pieces.filter((piece) => !shown.includes(piece)).length,
+  );
+  return {
+    segments: shown.map((piece) => ({
+      event: piece.event,
+      column: piece.column,
+      span: piece.span,
+      lane: piece.lane,
+      continuesBefore: piece.continuesBefore,
+      continuesAfter: piece.continuesAfter,
+    })),
+    more,
+  };
+}
+
 /** Where a timed event sits in its day's column, in percent. */
 export interface ScSchedulerPlacement<T> {
   readonly event: T;

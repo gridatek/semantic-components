@@ -1,4 +1,5 @@
 export { ScScheduler } from './scheduler';
+export { ScSchedulerAgenda } from './scheduler-agenda';
 export { ScSchedulerEvent } from './scheduler-event';
 export { ScSchedulerEventTemplate } from './scheduler-event-template';
 export { ScSchedulerEventTime } from './scheduler-event-time';
@@ -16,7 +17,9 @@ export { ScSchedulerToday } from './scheduler-today';
 export { ScSchedulerViewButton } from './scheduler-view-button';
 export {
   SC_SCHEDULER_EVENT,
-  type ScSchedulerEventData,
+  type ScSchedulerEventChange,
   type ScSchedulerEventContext,
+  type ScSchedulerEventData,
+  type ScSchedulerSlot,
   type ScSchedulerView,
 } from './scheduler-types';
