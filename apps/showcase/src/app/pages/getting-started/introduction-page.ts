@@ -262,7 +262,8 @@ export default class IntroductionPage {
     {
       name: 'Theming',
       path: '/docs/guides/theming',
-      description: 'your colours, dark mode, colour schemes.',
+      description:
+        'the preset: style, theme (shadcn’s CSS variables) and mode.',
     },
   ];
 }

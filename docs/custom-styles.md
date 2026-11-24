@@ -36,7 +36,7 @@ Let a consumer restyle the whole library with their own style, once the library 
 
 ## Theme vs style
 
-- Colors, radius and fonts are the theme's CSS variables (`styles.css`), not the style: the docs must say which to change for what. A style says how parts are drawn; the theme, in which colors.
+- The theme is every CSS variable shadcn gives (`styles.css`: colours, radius, fonts, charts, sidebar), not the style: the docs must say which to change for what. A style says how parts are drawn; the theme, with which values.
 
 ## Styles are fixed at start (decided, 2026-11-13)
 

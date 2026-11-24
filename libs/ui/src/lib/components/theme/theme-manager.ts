@@ -3,7 +3,7 @@ import { Service, computed, effect, inject, signal } from '@angular/core';
 import { SC_CONFIG } from '../../config/config';
 import { ScStorage } from '../../utils/storage/storage';
 
-export type ScThemeMode = 'light' | 'dark' | 'system';
+export type ScMode = 'light' | 'dark' | 'system';
 
 /** Where the user's choices are kept (a cookie, copied to `localStorage`). */
 const MODE_KEY = 'sc-mode';
@@ -26,7 +26,7 @@ export class ScThemeManager {
     this.document.defaultView?.matchMedia?.('(prefers-color-scheme: dark)') ??
     null;
 
-  readonly mode = signal<ScThemeMode>(
+  readonly mode = signal<ScMode>(
     this.getStored(MODE_KEY, this.preset?.mode ?? 'system', this.isValidMode),
   );
 
@@ -63,7 +63,7 @@ export class ScThemeManager {
     });
   }
 
-  setMode(mode: ScThemeMode): void {
+  setMode(mode: ScMode): void {
     this.mode.set(mode);
     this.store(MODE_KEY, mode);
   }
@@ -78,7 +78,7 @@ export class ScThemeManager {
     this.store(THEME_KEY, theme);
   }
 
-  private isValidMode(value: string): value is ScThemeMode {
+  private isValidMode(value: string): value is ScMode {
     return value === 'light' || value === 'dark' || value === 'system';
   }
 

@@ -194,9 +194,9 @@ import { ButtonUsageDemoContainer } from '../docs/button/demos/button-usage-demo
         <h2 scTypeset appToc>8. Configure styles</h2>
         <p>
           As in shadcn/ui, the theme is your app's. Copy this into your
-          <code scTypeset>styles.css</code>: shadcn's nova theme (colors,
-          radius, font) with our additions marked "Not shadcn's", the library's
-          styles, and the Tailwind sources.
+          <code scTypeset>styles.css</code>: shadcn's nova theme (its CSS
+          variables: colors, radius, fonts, charts, sidebar) with our additions
+          marked "Not shadcn's", the library's styles, and the Tailwind sources.
         </p>
         <div scCodeBlock>
           <div scCodeBlockHeader>

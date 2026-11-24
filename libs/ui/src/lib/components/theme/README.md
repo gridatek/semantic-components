@@ -1,6 +1,6 @@
 # Theme
 
-How the app looks is its **preset**, three things: the style (how the parts are drawn), the theme (their colours) and the mode (light, dark or the system's). The style is fixed when the app starts; the theme and the mode change while it runs — `ScThemeManager` holds them. No part of its own: any control of yours calls it. Documented in the Theming guide (`/docs/guides/theming`), with a one-click toggle and a Light / Dark / System menu.
+How the app looks is its **preset**, three things: the style (how the parts are drawn), the theme (every CSS variable shadcn gives: colours, radius, fonts, charts, sidebar) and the mode (light, dark or the system's). The style is fixed when the app starts; the theme and the mode change while it runs — `ScThemeManager` holds them. No part of its own: any control of yours calls it. Documented in the Theming guide (`/docs/guides/theming`), with a one-click toggle and a Light / Dark / System menu.
 
 ## The preset
 
@@ -17,11 +17,11 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-| Part    | Type          | Default     | What it is                                                                                      |
-| ------- | ------------- | ----------- | ----------------------------------------------------------------------------------------------- |
-| `style` | `ScStyle`     | nova        | The parts' classes, from `@semantic-components/styles`: fixed when the app starts               |
-| `theme` | `string`      | `'default'` | The colours: `[data-theme]` on the page's root (`'default'` sets none); the user's choice first |
-| `mode`  | `ScThemeMode` | `'system'`  | Light, dark or the system's: `dark` on the page's root; the user's choice first                 |
+| Part    | Type      | Default     | What it is                                                                                                               |
+| ------- | --------- | ----------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `style` | `ScStyle` | nova        | The parts' classes, from `@semantic-components/styles`: fixed when the app starts                                        |
+| `theme` | `string`  | `'default'` | shadcn's CSS variables, under a name: `[data-theme]` on the page's root (`'default'` sets none); the user's choice first |
+| `mode`  | `ScMode`  | `'system'`  | Light, dark or the system's: `dark` on the page's root; the user's choice first                                          |
 
 ## ScThemeManager
 
@@ -47,12 +47,12 @@ export class ModeButton {
 
 | Member         | Type                        | What it is                             |
 | -------------- | --------------------------- | -------------------------------------- |
-| `mode`         | `Signal<ScThemeMode>`       | The mode chosen: light, dark or system |
+| `mode`         | `Signal<ScMode>`            | The mode chosen: light, dark or system |
 | `resolvedMode` | `Signal<'light' \| 'dark'>` | The mode shown (system resolved)       |
 | `isDark`       | `Signal<boolean>`           | Dark now                               |
 | `isLight`      | `Signal<boolean>`           | Light now                              |
 | `theme`        | `Signal<string>`            | The theme (`'default'`, or a name)     |
-| `setMode`      | `(mode: ScThemeMode)`       | Picks the mode, and keeps it           |
+| `setMode`      | `(mode: ScMode)`            | Picks the mode, and keeps it           |
 | `toggleMode`   | `()`                        | Light ⇄ dark (from the mode shown)     |
 | `setTheme`     | `(theme: string)`           | Picks the theme, and keeps it          |
 
@@ -60,12 +60,13 @@ A menu with Light, Dark and System keeps the way back to the system's, which a o
 
 ## Named themes
 
-Write each theme's variables under its name; `setTheme('rose')` puts it on the page's root:
+Write each theme's variables under its name (any of shadcn's: colours, `--radius`, `--font-sans`…); `setTheme('rose')` puts it on the page's root:
 
 ```css
 [data-theme='rose'] {
   --primary: oklch(0.645 0.246 16.439);
   --ring: oklch(0.645 0.246 16.439);
+  --radius: 1rem;
 }
 ```
 

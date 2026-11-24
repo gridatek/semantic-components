@@ -172,10 +172,13 @@ interface ScCodeSample {
             the type will ask for.
           </li>
           <li>
-            The colors aren't in a style: they are your theme's CSS variables
-            (<code scTypeset>--primary</code>, <code scTypeset>--radius</code>…)
-            in your <code scTypeset>styles.css</code>. A style says how things
-            are drawn; the theme, in which colors.
+            The theme isn't in a style: it is every CSS variable shadcn gives —
+            colours, radius, fonts, charts, sidebar (<code scTypeset
+              >--primary</code
+            >, <code scTypeset>--radius</code>,
+            <code scTypeset>--font-sans</code>…) — in your
+            <code scTypeset>styles.css</code>. A style says how things are
+            drawn; the theme, with which values.
           </li>
         </ul>
       </section>

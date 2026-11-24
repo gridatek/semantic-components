@@ -16,7 +16,7 @@ In each app, `src/components/ui/*.tsx` holds every component with its **classes 
 - **Read the `.tsx`**, class for class — no theme CSS to look up.
 - **One style against another** is a diff of two files (`diff presets/nova/… presets/maia/…`).
 - **The classes are already RTL-ready**: the CLI ran with `--rtl`, so they are logical (`ms-*`, `pe-*`, `start-*`, `text-start`) with `rtl:` variants where needed (`rtl:translate-x-1/2`, `rtl:rotate-180`) — compare them with ours as they are.
-- The theme (colors, radius): `src/styles.css`.
+- The theme (its CSS variables: colours, radius, fonts, charts, sidebar): `src/styles.css`.
 
 Regenerate with its `setup.sh` (`sh setup.sh`, `sh setup.sh vega maia`, `BASE=radix sh setup.sh`), or refresh one app inside it with `npx shadcn@latest add --all -y -o` and read the `git diff`.
 

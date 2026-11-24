@@ -16,9 +16,9 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuTrigger,
+  type ScMode,
   ScSidebarMenuButton,
   ScThemeManager,
-  type ScThemeMode,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,
@@ -115,7 +115,7 @@ export class ThemeMenu {
 
   private readonly themeManager = inject(ScThemeManager);
 
-  private readonly modes: readonly { value: ScThemeMode; label: string }[] = [
+  private readonly modes: readonly { value: ScMode; label: string }[] = [
     { value: 'light', label: 'Light' },
     { value: 'dark', label: 'Dark' },
     { value: 'system', label: 'System' },

@@ -6,7 +6,7 @@ import {
   makeEnvironmentProviders,
 } from '@angular/core';
 import type { ScStyle } from '@semantic-components/styles';
-import type { ScThemeMode } from '../components/theme/theme-manager';
+import type { ScMode } from '../components/theme/theme-manager';
 import type { ScToasterConfig } from '../components/toast/toast-types';
 
 /**
@@ -29,15 +29,16 @@ export interface ScConfig {
 
 /**
  * How the app looks, three things: the style (how the parts are drawn), the
- * theme (their colours) and the mode (light or dark).
+ * theme (every CSS variable shadcn gives: colours, radius, fonts…) and the mode
+ * (light or dark).
  */
 export interface ScPreset {
   /** The parts' classes: a style from `@semantic-components/styles`; nova by default. Fixed when the app starts. */
   style?: ScStyle;
-  /** The colours: `[data-theme]` on the page's root (`'default'`, the default, sets none). The user's choice, kept, comes first: `ScThemeManager`. */
+  /** shadcn's CSS variables, under a name: `[data-theme]` on the page's root (`'default'`, the default, sets none). The user's choice, kept, comes first: `ScThemeManager`. */
   theme?: string;
   /** Light, dark or the system's (the default). The user's choice, kept, comes first: `ScThemeManager`. */
-  mode?: ScThemeMode;
+  mode?: ScMode;
 }
 
 export const SC_CONFIG = new InjectionToken<ScConfig>('SC_CONFIG', {

@@ -23,10 +23,10 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
         <h1 scTypeset>Theming</h1>
         <p class="text-muted-foreground">
           Three things decide how your app looks — together, its preset: the
-          style (how the components are drawn), the theme (the colours, radius
-          and fonts they are drawn in) and the mode (light, dark or the
-          system&apos;s). The user&apos;s theme and mode are kept from one visit
-          to the next.
+          style (how the components are drawn), the theme (every CSS variable
+          shadcn gives: colours, radius, fonts, charts, sidebar) and the mode
+          (light, dark or the system&apos;s). The user&apos;s theme and mode are
+          kept from one visit to the next.
         </p>
       </div>
 
@@ -36,7 +36,7 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
           A <strong>style</strong> (nova, vega, maia, lyra, mira, luma, sera,
           rhea) is the components&apos; classes — shadcn&apos;s eight styles:
           corners, spacing, borders, the way a button or a field is built; fixed
-          when the app starts. The <strong>theme</strong> is your CSS:
+          when the app starts. The <strong>theme</strong> is your CSS: all of
           shadcn&apos;s variables, which every style reads, and a named theme if
           you have several. The <strong>mode</strong> is light or dark: the
           first one, until the user picks.
@@ -53,10 +53,13 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
         <h2 scTypeset appToc>Theme</h2>
         <p>
           The same variables as shadcn/ui, so a theme from its generator or from
-          tweakcn carries over: colours in OKLCH on
+          tweakcn carries over — all of them, not only the colours: colours in
+          OKLCH on
           <code scTypeset>:root</code>, their dark values on
-          <code scTypeset>.dark</code>, and the corners from one
-          <code scTypeset>--radius</code>. Charts read
+          <code scTypeset>.dark</code>, the corners from one
+          <code scTypeset>--radius</code>, the fonts from
+          <code scTypeset>--font-sans</code> and
+          <code scTypeset>--font-heading</code>. Charts read
           <code scTypeset>--chart-1</code>
           to
           <code scTypeset>--chart-5</code>; the sidebar its
@@ -65,7 +68,8 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
         </p>
         <app-doc-code [code]="themeCode" language="css" />
         <p>
-          Several themes: give each a name, write its variables under
+          Several themes: give each a name, write its variables (any of them,
+          the radius and the fonts too) under
           <code scTypeset>[data-theme]</code>, and set it — the preset&apos;s
           <code scTypeset>theme</code> at first,
           <code scTypeset>ScThemeManager</code>&apos;s
@@ -136,6 +140,7 @@ export const appConfig = {
   private readonly namedThemeCode = `[data-theme='rose'] {
   --primary: oklch(0.645 0.246 16.439);
   --ring: oklch(0.645 0.246 16.439);
+  --radius: 1rem;
 }`;
 
   private readonly modeCode = `import { ScThemeManager } from '@semantic-components/ui';

@@ -36,11 +36,11 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <p>
           Hydration keeps the server&apos;s HTML, so what changes classes or
           markup must be known to the server too. The choices the library keeps
-          — the theme&apos;s mode and colour scheme, the sidebar open or closed,
-          the language — are cookies (with a localStorage copy for where cookies
-          aren&apos;t kept), read from the request on the server: a dark page is
-          drawn dark from the first paint, with no flash. Keep your own choices
-          the same way.
+          — the mode and the theme, the sidebar open or closed, the language —
+          are cookies (with a localStorage copy for where cookies aren&apos;t
+          kept), read from the request on the server: a dark page is drawn dark
+          from the first paint, with no flash. Keep your own choices the same
+          way.
         </p>
         <app-doc-code [code]="storageCode" />
         <p>

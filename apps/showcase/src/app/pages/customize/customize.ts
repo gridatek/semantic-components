@@ -11,9 +11,9 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuTrigger,
+  type ScMode,
   ScStorage,
   ScThemeManager,
-  type ScThemeMode,
 } from '@semantic-components/ui';
 import {
   SiBaselineIcon,
@@ -211,7 +211,7 @@ export default class Customize {
   private readonly current = styleFrom(inject(ScStorage));
 
   private readonly themeManager = inject(ScThemeManager);
-  private readonly modes: readonly { value: ScThemeMode; label: string }[] = [
+  private readonly modes: readonly { value: ScMode; label: string }[] = [
     { value: 'light', label: 'Light' },
     { value: 'dark', label: 'Dark' },
     { value: 'system', label: 'System' },
