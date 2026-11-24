@@ -5,9 +5,9 @@ import { ScStorage } from '../../utils/storage/storage';
 
 export type ScMode = 'light' | 'dark' | 'system';
 
-/** Where the user's choices are kept (a cookie, copied to `localStorage`). */
-const MODE_KEY = 'sc-mode';
-const THEME_KEY = 'sc-theme';
+/** Where the user's choices are kept (a cookie, copied to `localStorage`): `sc-mode`, `sc-theme` with the default prefix. */
+const MODE_KEY = 'mode';
+const THEME_KEY = 'theme';
 
 /**
  * The theme and the mode, while the app runs: the user's choices, kept (a
@@ -30,7 +30,7 @@ export class ScThemeManager {
     this.getStored(MODE_KEY, this.preset?.mode ?? 'system', this.isValidMode),
   );
 
-  /** The colours: `'default'`, or the name your CSS gives `[data-theme]`. */
+  /** shadcn's CSS variables, by name: `'default'`, or the name your CSS gives `[data-theme]`. */
   readonly theme = signal<string>(
     this.getStored(THEME_KEY, this.preset?.theme ?? 'default'),
   );

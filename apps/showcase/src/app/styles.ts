@@ -30,7 +30,7 @@ export const STYLES: Record<ScStyleName, ScStyle> = {
   rhea,
 };
 
-const KEY = 'sc-style';
+const KEY = 'style';
 
 /**
  * The style chosen on /customize, from `ScStorage`: its cookie in the browser

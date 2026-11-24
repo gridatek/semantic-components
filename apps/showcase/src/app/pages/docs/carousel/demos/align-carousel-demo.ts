@@ -104,7 +104,7 @@ type Align = 'start' | 'center' | 'end';
                   <img
                     [ngSrc]="photo.src"
                     fill
-                    [priority]="$index >= 1 && $index <= 3"
+                    [priority]="$index <= 3"
                     sizes="(min-width: 640px) 25vw, 40vw"
                     [alt]="photo.alt"
                     class="object-cover"

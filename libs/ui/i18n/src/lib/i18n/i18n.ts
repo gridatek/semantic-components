@@ -2,11 +2,11 @@ import { DOCUMENT } from '@angular/common';
 import { LOCALE_ID, Service, inject } from '@angular/core';
 import { ScStorage } from '@semantic-components/ui';
 import {
+  LOCALE_KEY,
   SC_I18N_CONFIG,
   type ScI18nConfig,
   type ScLocale,
   localeDir,
-  storageKey,
 } from './i18n-config';
 
 /**
@@ -46,7 +46,7 @@ export class ScI18n {
       !this.locales.some((locale) => locale.id === id)
     )
       return;
-    this.storage.set(storageKey(this.config), id);
+    this.storage.set(LOCALE_KEY, id);
     this.document.defaultView?.location.reload();
   }
 

@@ -72,4 +72,4 @@ Write each theme's variables under its name (any of shadcn's: colours, `--radius
 
 ## Kept
 
-The user's mode and theme are kept with `ScStorage`: cookies (`sc-mode`, `sc-theme`) the server reads too, copied to `localStorage`. A page rendered on the server is drawn in the user's mode and theme from the first paint; "system" needs the browser, so the server draws it light. Until the user picks, the preset's `mode` and `theme` apply.
+The user's mode and theme are kept with `ScStorage`: cookies (`sc-mode`, `sc-theme`: the setup's `storagePrefix`, then the choice) the server reads too, copied to `localStorage`. A page rendered on the server is drawn in the user's mode and theme from the first paint; "system" needs the browser, so the server draws it light. Until the user picks, the preset's `mode` and `theme` apply.

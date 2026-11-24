@@ -44,10 +44,11 @@ export class ScSidebarProvider {
   readonly open = model(true);
   /**
    * Where the open state is kept: a cookie (read on the server too, so the
-   * page is drawn as left), copied to `localStorage`. Give each sidebar its
-   * own key; `null` keeps nothing.
+   * page is drawn as left), copied to `localStorage`, after the setup's
+   * `storagePrefix` (`sc-sidebar-state`). Give each sidebar its own key;
+   * `null` keeps nothing.
    */
-  readonly storageKey = input<string | null>('sc-sidebar-state');
+  readonly storageKey = input<string | null>('sidebar-state');
   /** With Ctrl or ⌘, opens and closes the sidebar; `null`: no shortcut. */
   readonly shortcut = input<string | null>('b');
 

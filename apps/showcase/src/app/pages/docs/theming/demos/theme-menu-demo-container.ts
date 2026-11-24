@@ -29,8 +29,8 @@ import {
   ScMenuRadioGroup,
   ScMenuRadioItem,
   ScMenuTrigger,
-  ScThemeManager,
   type ScMode,
+  ScThemeManager,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,

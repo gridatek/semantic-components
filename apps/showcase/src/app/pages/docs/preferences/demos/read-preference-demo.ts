@@ -10,7 +10,7 @@ const view = definePreference({
   attribute: 'data-view',
   values: ['list', 'grid'],
   defaultValue: 'list',
-  storageKey: 'sc-demo-read-view',
+  storageKey: 'demo-read-view',
 });
 
 /** A switch elsewhere: it reads and sets the same preference. */

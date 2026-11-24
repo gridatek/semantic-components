@@ -37,7 +37,7 @@ const density = definePreference({
   attribute: 'data-density',
   values: ['comfortable', 'compact'],
   defaultValue: 'comfortable',
-  storageKey: 'sc-demo-density',
+  storageKey: 'demo-density',
   global: true,
 });
 

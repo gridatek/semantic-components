@@ -53,12 +53,14 @@ import { SiChevronsLeftRightIcon } from '@semantic-icons/lucide-icons';
           scCompareBefore
           ngSrc="/images/compare-before.jpg"
           fill
+          priority
           alt="جبال عند الفجر، كما صُوّرت"
         />
         <img
           scCompareAfter
           ngSrc="/images/cropper-mountains.jpg"
           fill
+          priority
           alt="الصورة نفسها بعد التعديل"
         />
         <span scCompareLabel="before">قبل</span>

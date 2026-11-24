@@ -8,6 +8,7 @@ import {
 import type { ScStyle } from '@semantic-components/styles';
 import type { ScMode } from '../components/theme/theme-manager';
 import type { ScToasterConfig } from '../components/toast/toast-types';
+import { SC_STORAGE_PREFIX } from '../utils/storage/storage';
 
 /**
  * The libraries' settings, a part for each component. Another library adds
@@ -24,6 +25,13 @@ import type { ScToasterConfig } from '../components/toast/toast-types';
 export interface ScConfig {
   /** How the app looks: its style, its theme and its mode. */
   preset?: ScPreset;
+  /**
+   * Starts the name of every choice `ScStorage` keeps (cookies and their
+   * `localStorage` copies): `<prefix>-mode`, `<prefix>-sidebar-state`… — so
+   * two apps on one domain keep theirs apart. No dash: the library adds it.
+   * `sc` by default.
+   */
+  storagePrefix?: string;
   toaster?: ScToasterConfig;
 }
 
@@ -86,8 +94,13 @@ export function provideSemanticComponents(
       return merged as ScConfig;
     },
   };
+  const prefix: Provider[] =
+    config.storagePrefix === undefined
+      ? []
+      : [{ provide: SC_STORAGE_PREFIX, useValue: config.storagePrefix }];
   return makeEnvironmentProviders([
     provider,
+    ...prefix,
     ...features.flatMap((feature) => feature.providers),
   ]);
 }
