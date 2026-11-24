@@ -22,26 +22,26 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
       <div class="space-y-2">
         <h1 scTypeset>Theming</h1>
         <p class="text-muted-foreground">
-          Two things decide how your app looks: the style — how the components
-          are drawn — and the theme — which colours, radius and fonts they are
-          drawn in. Light, dark or the system&apos;s, kept from one visit to the
-          next.
+          Three things decide how your app looks — together, its preset: the
+          style (how the components are drawn), the theme (the colours, radius
+          and fonts they are drawn in) and the mode (light, dark or the
+          system&apos;s). The user&apos;s theme and mode are kept from one visit
+          to the next.
         </p>
       </div>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Style and theme</h2>
+        <h2 scTypeset appToc>The preset</h2>
         <p>
           A <strong>style</strong> (nova, vega, maia, lyra, mira, luma, sera,
           rhea) is the components&apos; classes — shadcn&apos;s eight styles:
-          corners, spacing, borders, the way a button or a field is built. You
-          choose one when the app starts. The <strong>theme</strong> is your
-          CSS: shadcn&apos;s variables (<code scTypeset>--background</code>,
-          <code scTypeset>--primary</code>, <code scTypeset>--radius</code>…),
-          which every style reads. Change the style to change how things are
-          shaped; change the theme to change their colours.
+          corners, spacing, borders, the way a button or a field is built; fixed
+          when the app starts. The <strong>theme</strong> is your CSS:
+          shadcn&apos;s variables, which every style reads, and a named theme if
+          you have several. The <strong>mode</strong> is light or dark: the
+          first one, until the user picks.
         </p>
-        <app-doc-code [code]="styleCode" />
+        <app-doc-code [code]="presetCode" />
         <p>
           See
           <a scLink routerLink="/docs/packages/styles">Styles</a> for the eight,
@@ -50,9 +50,9 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>The theme&apos;s variables</h2>
+        <h2 scTypeset appToc>Theme</h2>
         <p>
-          The same names as shadcn/ui, so a theme from its generator or from
+          The same variables as shadcn/ui, so a theme from its generator or from
           tweakcn carries over: colours in OKLCH on
           <code scTypeset>:root</code>, their dark values on
           <code scTypeset>.dark</code>, and the corners from one
@@ -64,17 +64,26 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
           variables.
         </p>
         <app-doc-code [code]="themeCode" language="css" />
+        <p>
+          Several themes: give each a name, write its variables under
+          <code scTypeset>[data-theme]</code>, and set it — the preset&apos;s
+          <code scTypeset>theme</code> at first,
+          <code scTypeset>ScThemeManager</code>&apos;s
+          <code scTypeset>setTheme('rose')</code>
+          when the user picks (<code scTypeset>'default'</code>: none).
+        </p>
+        <app-doc-code [code]="namedThemeCode" language="css" />
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Dark mode</h2>
+        <h2 scTypeset appToc>Mode</h2>
         <p>
           <code scTypeset>ScThemeManager</code>
           holds the mode — light, dark or system — and puts the
           <code scTypeset>dark</code>
-          class on the page&apos;s root when it is dark. There is no theme
-          toggle part: any control of yours calls it, so a button, a switch or a
-          menu with System in it all work.
+          class on the page&apos;s root when it is dark. There is no toggle
+          part: any control of yours calls it, so a button, a switch or a menu
+          with System in it all work.
         </p>
         <app-doc-code [code]="modeCode" language="angular-ts" />
         <p>
@@ -84,41 +93,27 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
         <app-theme-toggle-demo-container />
         <app-theme-menu-demo-container />
         <p>
-          The choice is kept in a cookie (and copied to localStorage), so a page
-          rendered on the server is drawn in the right mode from the first
-          paint. System needs the browser: the server draws it light.
+          The user&apos;s mode and theme are kept in cookies (<code scTypeset
+            >sc-mode</code
+          >, <code scTypeset>sc-theme</code>, copied to localStorage), so a page
+          rendered on the server is drawn right from the first paint. System
+          needs the browser: the server draws it light.
         </p>
-        <p>
-          Its defaults — the mode at first, the colour scheme, where they are
-          kept — are the config&apos;s
-          <code scTypeset>theme</code>:
-          <code scTypeset
-            >provideSemanticComponents(&#123; theme: &#123; defaultMode: 'dark'
-            &#125; &#125;)</code
-          >.
-        </p>
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Colour schemes</h2>
-        <p>
-          Beside the mode, a colour scheme: a name of yours, set on the root as
-          <code scTypeset>data-theme</code>
-          — write its variables under that attribute, and switch with
-          <code scTypeset>setColorScheme('rose')</code>. Kept like the mode.
-        </p>
-        <app-doc-code [code]="schemeCode" language="css" />
       </section>
     </div>
   `,
   encapsulation: ViewEncapsulation.None,
 })
 export default class ThemingPage {
-  private readonly styleCode = `import { provideSemanticComponents } from '@semantic-components/ui';
+  private readonly presetCode = `import { provideSemanticComponents } from '@semantic-components/ui';
 import { lyra } from '@semantic-components/styles/lyra';
 
 export const appConfig = {
-  providers: [provideSemanticComponents({ style: lyra })],
+  providers: [
+    provideSemanticComponents({
+      preset: { style: lyra, theme: 'rose', mode: 'dark' },
+    }),
+  ],
 };`;
 
   private readonly themeCode = `:root {
@@ -138,20 +133,20 @@ export const appConfig = {
   /* … */
 }`;
 
+  private readonly namedThemeCode = `[data-theme='rose'] {
+  --primary: oklch(0.645 0.246 16.439);
+  --ring: oklch(0.645 0.246 16.439);
+}`;
+
   private readonly modeCode = `import { ScThemeManager } from '@semantic-components/ui';
 
-export class ThemeButton {
+export class ModeButton {
   protected readonly theme = inject(ScThemeManager);
 }
 
 // <button scButton variant="outline" size="icon" (click)="theme.toggleMode()">
 //   @if (theme.isDark()) { <svg siSunIcon></svg> } @else { <svg siMoonIcon></svg> }
-//   <span class="sr-only">Toggle theme</span>
+//   <span class="sr-only">Toggle the mode</span>
 // </button>
 // …or theme.setMode('system')`;
-
-  private readonly schemeCode = `[data-theme='rose'] {
-  --primary: oklch(0.645 0.246 16.439);
-  --ring: oklch(0.645 0.246 16.439);
-}`;
 }

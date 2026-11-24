@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Preview Card in its style', () => {
   test(`the card has their style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/preview-card/sides-preview-card-demo');
     await page.getByRole('button', { name: 'bottom' }).hover();
     for (const [target, wanted, what] of [
@@ -19,7 +19,7 @@ test.describe('Preview Card in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

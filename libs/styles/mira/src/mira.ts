@@ -67,7 +67,7 @@ import { slider } from './slider';
 import { sortable } from './sortable';
 import { switchStyles } from './switch';
 import { table } from './table';
-/** The mira style: `provideSemanticComponents({ style: mira })`. */
+/** The mira style: `provideSemanticComponents({ preset: { style: mira } })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
 import { timeClock } from './time-clock';

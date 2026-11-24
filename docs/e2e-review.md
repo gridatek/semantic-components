@@ -20,7 +20,7 @@ Playwright lists 3,422 tests for two projects alone; the nightly runs the suite 
 1. **Tests check behaviour a user sees, by role.** 2,004 `getByRole` calls in 251 files against 700 `page.locator(`. Titles say the behaviour ("Sticky, Hides on Scroll: away going down, back going up"), not the implementation.
 2. **Almost no hard waits.** 6 `waitForTimeout` in 391 files, and 4 of them carry a comment saying time itself is what is tested (a tooltip's grace period, a chart that must _not_ draw). 375 `expect.poll` in 145 files instead.
 3. **No leftovers.** 0 `test.only`, 0 `fixme`. All 10 `test.skip` are conditional with a stated reason (clipboard read is Chromium-only, no Web Audio in the build, SSR job only).
-4. **A clear structure.** One folder per kind of test, each a Playwright project (`demos`, `pages`, `presets-<name>`, `mobile`), documented in `docs/e2e-testing.md` with a "where a new test goes" table. The style is the project, not a loop in the spec.
+4. **A clear structure.** One folder per kind of test, each a Playwright project (`demos`, `pages`, `styles-<name>`, `mobile`), documented in `docs/e2e-testing.md` with a "where a new test goes" table. The style is the project, not a loop in the spec.
 5. **Shared helpers that encode real knowledge**, each with a comment saying why: `press` (paced keys for `@angular/aria`), `focus` (retries until focusable), `expectNoA11yViolations` (settles fonts and animations first), `expectTargetSize` (WCAG 2.5.8), `expectRtl` / `expectInlineOrder`, `expectHydrated`.
 6. **Wide coverage per component**, beyond the happy path: axe in light and dark on every docs page, console errors (129 specs use `collectErrors`), RTL, phone width and target size (84 specs tagged `@mobile`), hydration of every route (`ssr.spec.ts` reads the routes files), all eight styles.
 7. **Layout is measured the stable way.** 153 `toHaveCSS` and `getComputedStyle` reads, `openStill()` to switch transitions off, and a rule in CLAUDE.md to measure layout, not `getBoundingClientRect()`, on animated elements.
@@ -46,13 +46,13 @@ Not all 82 are equally risky **(verify)**: a single-element `locator.evaluate` o
 
 ### 2. The same boilerplate in over 100 files
 
-| Repeated                                                                             | Where                                                                  | Should be                                          |
-| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------- | -------------------------------------------------- |
-| `let errors` + `beforeEach(collectErrors)` + `afterEach(expect(errors).toEqual([]))` | 103 files, 147 assertions                                              | an automatic fixture in `test.ts`                  |
-| `async function expectClasses` copied locally                                        | 8 preset specs; only 1 imports the shared one from `presets/preset.ts` | the shared one                                     |
-| `function framesOf`                                                                  | 3 chart specs, byte-identical                                          | a helper (`looks.ts`)                              |
-| local `settled()`                                                                    | 5 specs                                                                | a helper                                           |
-| the `sc-preset` cookie set by hand, with `baseURL ?? 'http://localhost:4200'`        | 11 specs, 13 hard-coded URLs                                           | `test.use({ preset: 'nova' })` as a fixture option |
+| Repeated                                                                             | Where                                                               | Should be                                         |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------- | ------------------------------------------------- |
+| `let errors` + `beforeEach(collectErrors)` + `afterEach(expect(errors).toEqual([]))` | 103 files, 147 assertions                                           | an automatic fixture in `test.ts`                 |
+| `async function expectClasses` copied locally                                        | 8 style specs; only 1 imports the shared one from `styles/style.ts` | the shared one                                    |
+| `function framesOf`                                                                  | 3 chart specs, byte-identical                                       | a helper (`looks.ts`)                             |
+| local `settled()`                                                                    | 5 specs                                                             | a helper                                          |
+| the `sc-style` cookie set by hand, with `baseURL ?? 'http://localhost:4200'`         | 11 specs, 13 hard-coded URLs                                        | `test.use({ style: 'nova' })` as a fixture option |
 
 The cost is real: the `framesOf` fix on 2026-11-16 had to be applied three times. Because the console check is opt-in, **33 of 161 demo specs have none**, and nobody decided that.
 
@@ -90,7 +90,7 @@ Three fixes of 2026-11-16 retry the user's action with `toPass` because WebKit u
 2. **Stop unwaited reads**: fix the `evaluateAll` / `count()` / `page.evaluate` cases first (about 60), and add a lint rule (`no-restricted-syntax` on `evaluateAll`/`count` not inside `expect.poll`, or a small custom rule).
 3. **Raise `expect.timeout` for Firefox and WebKit** in the config (for example 10 s), then delete the per-test `timeout:` values that only exist for that.
 4. **Report flaky tests**: fail the nightly, or post the list, when the "flaky" count is not 0.
-5. **Move the copies into helpers**: `framesOf`, `settled`, `expectClasses`, and a `preset` fixture option for the cookie.
+5. **Move the copies into helpers**: `framesOf`, `settled`, `expectClasses`, and a `style` fixture option for the cookie.
 6. **One load per page for axe** (light then dark in one test), and drop the nova duplicate between `pages` and `styles-nova` if it is confirmed.
 7. **Clear the 60 lint warnings**, then turn warnings into errors for the e2e project so they stay at 0.
 8. **Look at the three retried interactions in a real Safari** before treating them as test-only problems.

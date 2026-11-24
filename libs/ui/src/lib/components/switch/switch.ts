@@ -81,7 +81,7 @@ export class ScSwitch implements FormCheckboxControl {
       this.styles.track,
       // The thumb: at the track's start, centred by its margins — not a
       // transform, which isn't snapped to pixels (uneven edges at 125%); the
-      // preset moves it.
+      // style moves it.
       "before:absolute before:inset-y-0 before:start-0 before:my-auto before:content-['']",
       this.styles.thumb,
       this.classInput(),

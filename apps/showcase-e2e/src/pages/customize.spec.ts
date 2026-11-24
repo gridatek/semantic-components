@@ -11,7 +11,7 @@ test.describe('Customize Page', () => {
     test.slow(browserName !== 'chromium');
   });
 
-  // One after the other, in one worker (Nx's preset runs a file's tests side
+  // One after the other, in one worker (Nx's style runs a file's tests side
   // by side): four of this page at once, beside other pages, froze WebKit's
   // pages for more than the 90 s of a test. 'default', not 'serial': a
   // failure doesn't skip the rest.

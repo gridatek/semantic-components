@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Switch in its style', () => {
   test(`a switch has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/switch/placement-switch-demo');
     for (const [target, wanted, what] of [
       [
@@ -22,7 +22,7 @@ test.describe('Switch in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

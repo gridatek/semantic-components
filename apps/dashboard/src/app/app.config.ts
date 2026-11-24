@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     // nova: shadcn's base-nova, the reference's own style.
-    provideSemanticComponents({ style: nova }, withI18n(I18N)),
+    provideSemanticComponents({ preset: { style: nova } }, withI18n(I18N)),
     provideRouter(
       appRoutes,
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),

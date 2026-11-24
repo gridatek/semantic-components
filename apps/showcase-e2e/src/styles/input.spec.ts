@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Input in its style', () => {
   test(`the input has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/input/basic-input-demo');
     const target = page.getByRole('textbox', { name: 'Text' });
     const classes = twMerge(styles.input).split(/\s+/).filter(Boolean);
@@ -16,7 +16,7 @@ test.describe('Input in its style', () => {
           ((await target.getAttribute('class')) ?? '').split(/\s+/),
         );
         return classes.filter((c) => !have.has(c));
-      }, `${preset} classes missing`)
+      }, `${style} classes missing`)
       .toEqual([]);
   });
 });

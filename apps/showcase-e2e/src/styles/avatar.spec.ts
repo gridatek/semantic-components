@@ -4,7 +4,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Avatar in its style', () => {
   test(`the group count has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/avatar/group-count-avatar-demo');
     const count = page.locator('[scAvatarGroupCount]');
     const wanted = styles.avatarGroupCount.split(/\s+/).filter(Boolean);
@@ -14,7 +14,7 @@ test.describe('Avatar in its style', () => {
           ((await count.getAttribute('class')) ?? '').split(/\s+/),
         );
         return wanted.filter((c) => !have.has(c));
-      }, `${preset} group count`)
+      }, `${style} group count`)
       .toEqual([]);
   });
 });

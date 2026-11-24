@@ -48,8 +48,8 @@ import { VerticalSliderDemoContainer } from './demos/vertical-slider-demo-contai
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
-          A native range input: the browser draws its track and thumb, the
-          preset styles them. A [formField] or [(value)] binds it; a label or
+          A native range input: the browser draws its track and thumb, the style
+          restyles them. A [formField] or [(value)] binds it; a label or
           aria-label names it.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />

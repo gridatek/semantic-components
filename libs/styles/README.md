@@ -23,7 +23,7 @@ import { lyra } from '@semantic-components/styles/lyra';
 import { provideSemanticComponents } from '@semantic-components/ui';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideSemanticComponents({ style: lyra })],
+  providers: [provideSemanticComponents({ preset: { style: lyra } })],
 };
 ```
 

@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Native Select in its style', () => {
   test(`the select has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/native-select/native-select-usage-demo');
     for (const [target, wanted, what] of [
       [
@@ -27,7 +27,7 @@ test.describe('Native Select in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

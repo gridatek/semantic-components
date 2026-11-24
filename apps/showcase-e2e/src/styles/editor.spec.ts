@@ -25,7 +25,7 @@ test.describe('Editor in its style', () => {
   test(`a task's box has the style's checkbox corners, in the editor and the display`, async ({
     page,
   }) => {
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/editor/view-editor-demo');
     const editor = '[role=textbox][aria-label="Post"]';
     const view = 'article[aria-label="Published post"]';
@@ -33,8 +33,8 @@ test.describe('Editor in its style', () => {
     await expect(page.locator(`${view} h1`)).toHaveText('Release notes');
     for (const document of [editor, view])
       await expect
-        .poll(() => boxCorners(page, document), `${preset}: ${document}`)
-        .toBe(CHECKBOX_CORNERS[preset]);
+        .poll(() => boxCorners(page, document), `${style}: ${document}`)
+        .toBe(CHECKBOX_CORNERS[style]);
   });
 });
 

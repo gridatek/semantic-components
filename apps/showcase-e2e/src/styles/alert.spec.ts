@@ -21,36 +21,36 @@ test.describe('Alert in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/alert/action-alert-demo');
     const alert = page.locator('[scAlert]');
     // The demo's max-w-md merged over the style's (cn).
     await expectClasses(
       alert,
       twMerge(`${styles.alert.alert({ variant: 'default' })} max-w-md`),
-      `${preset} alert`,
+      `${style} alert`,
     );
     await expectClasses(
       alert.locator('[scAlertTitle]'),
       styles.alert.title,
-      `${preset} title`,
+      `${style} title`,
     );
     await expectClasses(
       alert.locator('[scAlertDescription]'),
       styles.alert.description,
-      `${preset} description`,
+      `${style} description`,
     );
     await expectClasses(
       alert.locator('[scAlertAction]'),
       styles.alert.action,
-      `${preset} action`,
+      `${style} action`,
     );
 
     await page.goto('/demos/alert/destructive-alert-demo');
     await expectClasses(
       page.locator('[scAlert]'),
       twMerge(`${styles.alert.alert({ variant: 'destructive' })} max-w-md`),
-      `${preset} destructive`,
+      `${style} destructive`,
     );
   });
 });

@@ -14,8 +14,8 @@ import { appRoutes } from './app-routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    // The Sera preset, the whole app's: chosen at start, as in any app.
-    provideSemanticComponents({ style: sera }),
+    // The Sera style, the whole app's: chosen at start, as in any app.
+    provideSemanticComponents({ preset: { style: sera } }),
     provideRouter(
       appRoutes,
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),

@@ -6,7 +6,7 @@ import {
   makeEnvironmentProviders,
 } from '@angular/core';
 import type { ScStyle } from '@semantic-components/styles';
-import type { ScThemeConfig } from '../components/theme/theme-manager';
+import type { ScThemeMode } from '../components/theme/theme-manager';
 import type { ScToasterConfig } from '../components/toast/toast-types';
 
 /**
@@ -22,11 +22,22 @@ import type { ScToasterConfig } from '../components/toast/toast-types';
  * ```
  */
 export interface ScConfig {
-  /** The components' classes: a style from `@semantic-components/styles`; nova by default. */
-  style?: ScStyle;
-  /** Light, dark or the system's at first, the colour scheme, where they are kept: `ScThemeManager`'s. */
-  theme?: Partial<ScThemeConfig>;
+  /** How the app looks: its style, its theme and its mode. */
+  preset?: ScPreset;
   toaster?: ScToasterConfig;
+}
+
+/**
+ * How the app looks, three things: the style (how the parts are drawn), the
+ * theme (their colours) and the mode (light or dark).
+ */
+export interface ScPreset {
+  /** The parts' classes: a style from `@semantic-components/styles`; nova by default. Fixed when the app starts. */
+  style?: ScStyle;
+  /** The colours: `[data-theme]` on the page's root (`'default'`, the default, sets none). The user's choice, kept, comes first: `ScThemeManager`. */
+  theme?: string;
+  /** Light, dark or the system's (the default). The user's choice, kept, comes first: `ScThemeManager`. */
+  mode?: ScThemeMode;
 }
 
 export const SC_CONFIG = new InjectionToken<ScConfig>('SC_CONFIG', {
@@ -53,7 +64,7 @@ export function makeScFeature<Kind extends string>(
 /**
  * Sets up the libraries: their settings — each part falls back to its
  * component's defaults — and the features of their entries:
- * `provideSemanticComponents({ style: nova }, withCodeHighlighter())`.
+ * `provideSemanticComponents({ preset: { style: nova } }, withCodeHighlighter())`.
  * Given again lower down (a lazy route), its parts merge into those above.
  */
 export function provideSemanticComponents(

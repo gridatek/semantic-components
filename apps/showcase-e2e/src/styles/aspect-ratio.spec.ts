@@ -4,7 +4,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Aspect Ratio in its style', () => {
   test(`scFrame has its style's frame`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/aspect-ratio/aspect-ratio-usage-demo');
     const frame = page.locator('[scFrame]');
     const wanted = styles.frame.split(/\s+/).filter(Boolean);
@@ -14,7 +14,7 @@ test.describe('Aspect Ratio in its style', () => {
           ((await frame.getAttribute('class')) ?? '').split(/\s+/),
         );
         return wanted.filter((c) => !have.has(c));
-      }, `${preset} frame`)
+      }, `${style} frame`)
       .toEqual([]);
   });
 });

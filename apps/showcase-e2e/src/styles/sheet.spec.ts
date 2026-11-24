@@ -7,7 +7,7 @@ test.describe('Sheet in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/sheet/sheet-usage-demo');
     await page.getByRole('button', { name: 'Open' }).click();
     for (const [target, wanted, what] of [
@@ -32,7 +32,7 @@ test.describe('Sheet in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

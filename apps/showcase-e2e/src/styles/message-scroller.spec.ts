@@ -7,7 +7,7 @@ test.describe('Message Scroller in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/message-scroller/message-scroller-usage-demo');
     for (const [target, wanted, what] of [
       [
@@ -31,7 +31,7 @@ test.describe('Message Scroller in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

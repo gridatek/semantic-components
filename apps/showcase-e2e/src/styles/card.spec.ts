@@ -21,39 +21,39 @@ test.describe('Card in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/card/card-usage-demo');
     const card = page.locator('[scCard]');
     // The frame, the card's own, then the demo's (cn).
     await expectClasses(
       card,
       twMerge(`${styles.frame} ${styles.card.card} w-full max-w-sm`),
-      `${preset} card`,
+      `${style} card`,
     );
     await expectClasses(
       card.locator('[scCardHeader]'),
       styles.card.header,
-      `${preset} header`,
+      `${style} header`,
     );
     await expectClasses(
       card.locator('[scCardTitle]'),
       styles.card.title,
-      `${preset} title`,
+      `${style} title`,
     );
     await expectClasses(
       card.locator('[scCardDescription]'),
       styles.card.description,
-      `${preset} description`,
+      `${style} description`,
     );
     await expectClasses(
       card.locator('[scCardBody]'),
       styles.card.body,
-      `${preset} content`,
+      `${style} content`,
     );
     await expectClasses(
       card.locator('[scCardFooter]'),
       twMerge(`${styles.card.footer} flex-col gap-2`),
-      `${preset} footer`,
+      `${style} footer`,
     );
   });
 });

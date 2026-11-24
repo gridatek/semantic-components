@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Input Group in its style', () => {
   test(`the group has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/input-group/input-group-usage-demo');
     const target = page.locator('[data-slot=input-group]');
     const classes = twMerge(styles.inputGroup).split(/\s+/).filter(Boolean);
@@ -16,7 +16,7 @@ test.describe('Input Group in its style', () => {
           ((await target.getAttribute('class')) ?? '').split(/\s+/),
         );
         return classes.filter((c) => !have.has(c));
-      }, `${preset} classes missing`)
+      }, `${style} classes missing`)
       .toEqual([]);
   });
 });

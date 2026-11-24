@@ -20,28 +20,28 @@ test.describe('Pagination in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/pagination/ellipsis-pagination-demo');
     const nav = page.getByRole('navigation', { name: 'Products' });
     await expectClasses(
       nav.locator('[scPaginationList]'),
       styles.pagination.list,
-      `${preset} list classes missing`,
+      `${style} list classes missing`,
     );
     await expectClasses(
       nav.locator('[scPaginationEllipsis]').first(),
       styles.pagination.ellipsis,
-      `${preset} ellipsis classes missing`,
+      `${style} ellipsis classes missing`,
     );
     await expectClasses(
       nav.getByRole('button', { name: 'Previous' }),
       styles.pagination.previous,
-      `${preset} Previous classes missing`,
+      `${style} Previous classes missing`,
     );
     await expectClasses(
       nav.getByRole('button', { name: 'Next' }),
       styles.pagination.next,
-      `${preset} Next classes missing`,
+      `${style} Next classes missing`,
     );
   });
 });

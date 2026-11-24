@@ -67,7 +67,7 @@ import { slider } from './slider';
 import { sortable } from './sortable';
 import { switchStyles } from './switch';
 import { table } from './table';
-/** The rhea style: `provideSemanticComponents({ style: rhea })`. */
+/** The rhea style: `provideSemanticComponents({ preset: { style: rhea } })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
 import { timeClock } from './time-clock';

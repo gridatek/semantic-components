@@ -80,11 +80,11 @@ test("Corners: its arcs the style's — square in Lyra, rounded in Nova", async 
   page,
   baseURL,
 }) => {
-  const arcsIn = async (preset: string) => {
+  const arcsIn = async (style: string) => {
     await page.context().addCookies([
       {
         name: 'sc-style',
-        value: preset,
+        value: style,
         url: baseURL ?? 'http://localhost:4200',
       },
     ]);

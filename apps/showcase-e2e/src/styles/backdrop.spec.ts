@@ -4,7 +4,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Backdrop in its style', () => {
   test(`the backdrop has its style's shade and blur`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/backdrop/backdrop-usage-demo');
     await page.getByRole('button', { name: 'Backdrop' }).click();
     const backdrop = page.locator('[scBackdrop]');
@@ -15,7 +15,7 @@ test.describe('Backdrop in its style', () => {
           ((await backdrop.getAttribute('class')) ?? '').split(/\s+/),
         );
         return wanted.filter((c) => !have.has(c));
-      }, `${preset} backdrop`)
+      }, `${style} backdrop`)
       .toEqual([]);
   });
 });

@@ -10,7 +10,7 @@ export interface ScBadgeVariants {
 
 /**
  * A badge in the app's style: its classes are the style's
- * (`provideSemanticComponents({ style })`), chosen when the app starts.
+ * (`provideSemanticComponents({ preset: { style } })`), chosen when the app starts.
  */
 @Directive({
   // `a` is included so the style's `[a]:hover:*` classes can match: a badge

@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Marker in its style', () => {
   test(`a marker and its icon have their style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/marker/border-marker-demo');
     for (const [target, wanted, what] of [
       [
@@ -27,7 +27,7 @@ test.describe('Marker in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Toggle Group in its style', () => {
   test(`an item has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/toggle-group/spacing-toggle-group-demo');
     for (const [target, wanted, what] of [
       [
@@ -22,7 +22,7 @@ test.describe('Toggle Group in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Tabs in its style', () => {
   test(`the list and a tab have their style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/tabs/tabs-usage-demo');
     for (const [target, wanted, what] of [
       [page.getByRole('tablist'), styles.tabs.list({}), 'list'],
@@ -19,7 +19,7 @@ test.describe('Tabs in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

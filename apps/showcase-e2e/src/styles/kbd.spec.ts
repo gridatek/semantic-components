@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Kbd in its style', () => {
   test(`a key has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/kbd/kbd-usage-demo');
     for (const [target, wanted, what] of [
       [page.locator('[data-slot="kbd"]').first(), styles.kbd, 'kbd'],
@@ -18,7 +18,7 @@ test.describe('Kbd in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

@@ -7,7 +7,7 @@ test.describe('Trace in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/trace/trace-usage-demo');
     for (const [target, wanted, what] of [
       [
@@ -35,7 +35,7 @@ test.describe('Trace in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

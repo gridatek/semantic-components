@@ -172,11 +172,11 @@ test("Corners: the style's — square ends in Lyra, rounded in Nova", async ({
   baseURL,
 }) => {
   // An arc's path: its two edges, and a small arc at each rounded corner.
-  const arcsIn = async (preset: string) => {
+  const arcsIn = async (style: string) => {
     await page.context().addCookies([
       {
         name: 'sc-style',
-        value: preset,
+        value: style,
         url: baseURL ?? 'http://localhost:4200',
       },
     ]);

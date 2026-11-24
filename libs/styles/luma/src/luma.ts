@@ -67,7 +67,7 @@ import { slider } from './slider';
 import { sortable } from './sortable';
 import { switchStyles } from './switch';
 import { table } from './table';
-/** The luma style: `provideSemanticComponents({ style: luma })`. */
+/** The luma style: `provideSemanticComponents({ preset: { style: luma } })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
 import { timeClock } from './time-clock';

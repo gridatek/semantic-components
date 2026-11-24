@@ -20,23 +20,23 @@ test.describe('Breadcrumb in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/breadcrumb/ellipsis-breadcrumb-demo');
     const s = styles.breadcrumb;
     await expectClasses(
       page.locator('[scBreadcrumbList]'),
       s.list,
-      `${preset} list`,
+      `${style} list`,
     );
     await expectClasses(
       page.locator('[scBreadcrumbItem]').first(),
       s.item,
-      `${preset} item`,
+      `${style} item`,
     );
     await expectClasses(
       page.locator('[scBreadcrumbEllipsis]'),
       s.ellipsis,
-      `${preset} ellipsis`,
+      `${style} ellipsis`,
     );
   });
 });

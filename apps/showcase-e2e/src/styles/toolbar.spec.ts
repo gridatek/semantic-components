@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Toolbar in its style', () => {
   test(`its frame has the style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/toolbar/toolbar-usage-demo');
     for (const [target, wanted, what] of [
       [page.locator('[data-slot=toolbar]').first(), styles.frame, 'toolbar'],
@@ -18,7 +18,7 @@ test.describe('Toolbar in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

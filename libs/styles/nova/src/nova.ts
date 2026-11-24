@@ -67,7 +67,7 @@ import { slider } from './slider';
 import { sortable } from './sortable';
 import { switchStyles } from './switch';
 import { table } from './table';
-/** The nova style: `provideSemanticComponents({ style: nova })`. */
+/** The nova style: `provideSemanticComponents({ preset: { style: nova } })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
 import { timeClock } from './time-clock';

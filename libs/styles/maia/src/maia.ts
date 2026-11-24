@@ -67,7 +67,7 @@ import { slider } from './slider';
 import { sortable } from './sortable';
 import { switchStyles } from './switch';
 import { table } from './table';
-/** The maia style: `provideSemanticComponents({ style: maia })`. */
+/** The maia style: `provideSemanticComponents({ preset: { style: maia } })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
 import { timeClock } from './time-clock';

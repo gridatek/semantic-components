@@ -22,7 +22,7 @@ export interface ScButtonVariants {
 
 /**
  * A button in the app's style: its classes are the style's
- * (`provideSemanticComponents({ style })`, from `@semantic-components/styles`;
+ * (`provideSemanticComponents({ preset: { style } })`, from `@semantic-components/styles`;
  * nova by default), chosen when the app starts.
  *
  * `disabled` with `softDisabled`: disabled but still reachable — announced

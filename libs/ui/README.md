@@ -8,7 +8,7 @@ The Semantic Components library: components and utilities.
 - **Layouts**: Auth layout, Sidebar layout, Stacked layout
 - **Class merging**: the parts use shadcn's `cn` package (a peer); in your own classes, `import { cn } from 'cn'`
 - **Styles**: the components' classes come from the app's style
-  (`provideSemanticComponents({ style })`, from `@semantic-components/styles`;
+  (`provideSemanticComponents({ preset: { style } })`, from `@semantic-components/styles`;
   nova by default)
 
 ## Usage

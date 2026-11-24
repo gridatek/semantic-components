@@ -20,32 +20,32 @@ test.describe('Table in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/table/table-usage-demo');
     const table = page.getByRole('table');
-    await expectClasses(table, styles.table.table, `${preset} table`);
+    await expectClasses(table, styles.table.table, `${style} table`);
     // The second column: no class of the demo's own.
     await expectClasses(
       table.getByRole('columnheader').nth(1),
       styles.table.headerCell,
-      `${preset} header cell`,
+      `${style} header cell`,
     );
     await expectClasses(
       table.getByRole('cell').nth(1),
       styles.table.cell,
-      `${preset} cell`,
+      `${style} cell`,
     );
     await expectClasses(
       table.locator('caption'),
       styles.table.caption,
-      `${preset} caption`,
+      `${style} caption`,
     );
 
     await page.goto('/demos/table/scrolling-table-demo');
     await expectClasses(
       page.getByRole('region', { name: 'Orders' }),
       styles.frame,
-      `${preset} frame`,
+      `${style} frame`,
     );
   });
 });

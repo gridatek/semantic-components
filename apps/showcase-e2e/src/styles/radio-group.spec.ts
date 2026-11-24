@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Radio Group in its style', () => {
   test(`the group and a radio have their style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/radio-group/fieldset-radio-group-demo');
     for (const [target, wanted, what] of [
       [page.locator('[scRadioGroup]'), styles.radioGroup.group, 'group'],
@@ -23,7 +23,7 @@ test.describe('Radio Group in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

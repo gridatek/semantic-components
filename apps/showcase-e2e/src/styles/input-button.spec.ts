@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Input Button in its style', () => {
   test(`it has its style's input classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/input-button/full-width-input-button-demo');
     for (const [target, wanted, what] of [
       [
@@ -22,7 +22,7 @@ test.describe('Input Button in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

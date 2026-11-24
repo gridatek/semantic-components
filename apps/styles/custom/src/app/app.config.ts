@@ -12,7 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     // The app's own style: a copy of nova it can change (custom-style/), kept
     // in step with nova by scripts/sync-custom-style.mjs.
-    provideSemanticComponents({ style: customStyle }),
+    provideSemanticComponents({ preset: { style: customStyle } }),
     provideRouter(appRoutes),
   ],
 };

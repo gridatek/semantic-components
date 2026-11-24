@@ -183,7 +183,7 @@ export default class PhoneInputPage {
     "import { withPhoneInput } from '@semantic-components/ui/phone-input';",
     '',
     'provideSemanticComponents(',
-    '  { style },',
+    '  { preset: { style } },',
     "  withPhoneInput({ flagUrl: '/flags/{XX}.svg' }),",
     ');',
   ].join('\n');

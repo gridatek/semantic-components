@@ -45,7 +45,7 @@ interface ScApiRow {
         <p class="text-muted-foreground">
           An input or a select joined with its buttons into one control: shared
           borders, the outer corners rounded, in the look of the app&apos;s
-          preset. Text and input groups join in too.
+          style. Text and input groups join in too.
         </p>
         <app-component-badges path="control-group" />
       </div>

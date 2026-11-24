@@ -1,137 +1,74 @@
 # Theme
 
-Configurable theme management with mode switching (light/dark/system) and color scheme support. Consumers provide their own styles.
+How the app looks is its **preset**, three things: the style (how the parts are drawn), the theme (their colours) and the mode (light, dark or the system's). The style is fixed when the app starts; the theme and the mode change while it runs — `ScThemeManager` holds them. No part of its own: any control of yours calls it. Documented in the Theming guide (`/docs/guides/theming`), with a one-click toggle and a Light / Dark / System menu.
 
-## Architecture
-
-- **`ScThemeManager`** — Singleton service managing two independent axes: mode (light/dark/system) and color scheme. Handles persistence and system preference detection.
-- **The config`s `theme`** — its defaults and storage keys: `provideSemanticComponents({ theme: { defaultMode: 'dark' } })`.
-- Documented in the Theming guide (`/docs/guides/theming`): dark mode, with a one-click toggle and a Light / Dark / System menu, and colour schemes. It has no component page: no part of its own.
-
-## Usage
-
-No part of its own: any control calls the manager.
-
-### One click (light ⇄ dark)
-
-```html
-<button scButton variant="outline" size="icon" (click)="themeManager.toggleMode()">
-  @if (themeManager.isDark()) {
-  <svg siSunIcon></svg>
-  <span class="sr-only">Switch to light theme</span>
-  } @else {
-  <svg siMoonIcon></svg>
-  <span class="sr-only">Switch to dark theme</span>
-  }
-</button>
-```
-
-### A menu: Light, Dark, System
-
-The way back to the OS's theme, which a one-click button loses. The Menu's radio items, the mode as their value:
-
-```html
-<div scMenuProvider alignment="end">
-  <button scButton scMenuTrigger variant="outline" size="icon">
-    <svg siSunIcon></svg>
-    <span class="sr-only">Theme</span>
-  </button>
-  <ng-template scMenuPortal>
-    <div scMenu>
-      <ng-template scMenuContent>
-        <div scMenuRadioGroup [value]="themeManager.mode()" (valueChange)="setMode($event)">
-          <div scMenuRadioItem value="light">…Light</div>
-          <div scMenuRadioItem value="dark">…Dark</div>
-          <div scMenuRadioItem value="system">…System</div>
-        </div>
-      </ng-template>
-    </div>
-  </ng-template>
-</div>
-```
-
-### Using ScThemeManager directly
+## The preset
 
 ```typescript
-import { ScThemeManager } from '@semantic-components/ui';
-
-export class MyComponent {
-  private themeManager = inject(ScThemeManager);
-
-  mode = this.themeManager.mode; // Signal<ScThemeMode>
-  resolvedMode = this.themeManager.resolvedMode; // Signal<'light' | 'dark'>
-  isDark = this.themeManager.isDark; // Signal<boolean>
-  isLight = this.themeManager.isLight; // Signal<boolean>
-  colorScheme = this.themeManager.colorScheme; // Signal<string>
-
-  setDark() {
-    this.themeManager.setMode('dark');
-  }
-
-  toggle() {
-    this.themeManager.toggleMode();
-  }
-
-  setColorScheme() {
-    this.themeManager.setColorScheme('rose');
-  }
-}
-```
-
-### Settings
-
-The config's `theme` part:
-
-```typescript
+import { lyra } from '@semantic-components/styles/lyra';
 import { provideSemanticComponents } from '@semantic-components/ui';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideSemanticComponents({
-      theme: {
-        defaultMode: 'dark',
-        defaultColorScheme: 'blue',
-        modeStorageKey: 'my-app-mode',
-        colorSchemeStorageKey: 'my-app-color',
-      },
+      preset: { style: lyra, theme: 'rose', mode: 'dark' },
     }),
   ],
 });
 ```
 
+| Part    | Type          | Default     | What it is                                                                                      |
+| ------- | ------------- | ----------- | ----------------------------------------------------------------------------------------------- |
+| `style` | `ScStyle`     | nova        | The parts' classes, from `@semantic-components/styles`: fixed when the app starts               |
+| `theme` | `string`      | `'default'` | The colours: `[data-theme]` on the page's root (`'default'` sets none); the user's choice first |
+| `mode`  | `ScThemeMode` | `'system'`  | Light, dark or the system's: `dark` on the page's root; the user's choice first                 |
+
 ## ScThemeManager
 
-Singleton service for theme state.
+```typescript
+import { ScThemeManager } from '@semantic-components/ui';
 
-| Property       | Type                        | Description                              |
-| -------------- | --------------------------- | ---------------------------------------- |
-| `mode`         | `Signal<ScThemeMode>`       | Current mode ('light', 'dark', 'system') |
-| `resolvedMode` | `Signal<'light' \| 'dark'>` | Actual applied mode (resolves 'system')  |
-| `isDark`       | `Signal<boolean>`           | Whether dark mode is currently active    |
-| `isLight`      | `Signal<boolean>`           | Whether light mode is currently active   |
-| `colorScheme`  | `Signal<string>`            | Current color scheme                     |
+export class ModeButton {
+  protected readonly theme = inject(ScThemeManager);
+}
+```
 
-| Method           | Parameters            | Description                   |
-| ---------------- | --------------------- | ----------------------------- |
-| `setMode`        | `mode: ScThemeMode`   | Set the mode explicitly       |
-| `toggleMode`     | none                  | Toggle between light and dark |
-| `setColorScheme` | `colorScheme: string` | Set the color scheme          |
+```html
+<button scButton variant="outline" size="icon" (click)="theme.toggleMode()">
+  @if (theme.isDark()) {
+  <svg siSunIcon></svg>
+  <span class="sr-only">Switch to light mode</span>
+  } @else {
+  <svg siMoonIcon></svg>
+  <span class="sr-only">Switch to dark mode</span>
+  }
+</button>
+```
 
-## Settings (`theme`)
+| Member         | Type                        | What it is                             |
+| -------------- | --------------------------- | -------------------------------------- |
+| `mode`         | `Signal<ScThemeMode>`       | The mode chosen: light, dark or system |
+| `resolvedMode` | `Signal<'light' \| 'dark'>` | The mode shown (system resolved)       |
+| `isDark`       | `Signal<boolean>`           | Dark now                               |
+| `isLight`      | `Signal<boolean>`           | Light now                              |
+| `theme`        | `Signal<string>`            | The theme (`'default'`, or a name)     |
+| `setMode`      | `(mode: ScThemeMode)`       | Picks the mode, and keeps it           |
+| `toggleMode`   | `()`                        | Light ⇄ dark (from the mode shown)     |
+| `setTheme`     | `(theme: string)`           | Picks the theme, and keeps it          |
 
-The config's `theme` part (`ScThemeConfig`), every option optional.
+A menu with Light, Dark and System keeps the way back to the system's, which a one-click button loses: the Menu's radio items, `[value]="theme.mode()"`, `(valueChange)="theme.setMode($event)"`.
 
-| Option                  | Type          | Default            | Description                    |
-| ----------------------- | ------------- | ------------------ | ------------------------------ |
-| `defaultMode`           | `ScThemeMode` | `'system'`         | Initial mode                   |
-| `defaultColorScheme`    | `string`      | `'default'`        | Initial color scheme           |
-| `modeStorageKey`        | `string`      | `'sc-theme-mode'`  | Where the mode is kept         |
-| `colorSchemeStorageKey` | `string`      | `'sc-theme-color'` | Where the color scheme is kept |
+## Named themes
 
-## Persistence
+Write each theme's variables under its name; `setTheme('rose')` puts it on the page's root:
 
-Mode and color scheme are kept apart (each a cookie, copied to `localStorage` — see [storage](../../utils/storage/README.md)) and restored on page load — read on the server too, when a route is rendered per request, so a dark page is drawn dark from the first paint. (`system` needs the browser: the server draws it light.)
+```css
+[data-theme='rose'] {
+  --primary: oklch(0.645 0.246 16.439);
+  --ring: oklch(0.645 0.246 16.439);
+}
+```
 
-## Accessibility
+## Kept
 
-Consumers are responsible for providing accessible labels, either via `sr-only` spans inside the button or `aria-label` on the button element.
+The user's mode and theme are kept with `ScStorage`: cookies (`sc-mode`, `sc-theme`) the server reads too, copied to `localStorage`. A page rendered on the server is drawn in the user's mode and theme from the first paint; "system" needs the browser, so the server draws it light. Until the user picks, the preset's `mode` and `theme` apply.

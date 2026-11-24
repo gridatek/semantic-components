@@ -5,29 +5,18 @@ import { ScStorage } from '../../utils/storage/storage';
 
 export type ScThemeMode = 'light' | 'dark' | 'system';
 
-/** The theme's settings: the config's `theme` part. */
-export interface ScThemeConfig {
-  defaultMode: ScThemeMode;
-  defaultColorScheme: string;
-  /** Where the mode is kept (a cookie, copied to `localStorage`). */
-  modeStorageKey: string;
-  /** Where the color scheme is kept. */
-  colorSchemeStorageKey: string;
-}
+/** Where the user's choices are kept (a cookie, copied to `localStorage`). */
+const MODE_KEY = 'sc-mode';
+const THEME_KEY = 'sc-theme';
 
-const defaultConfig: ScThemeConfig = {
-  defaultMode: 'system',
-  defaultColorScheme: 'default',
-  modeStorageKey: 'sc-theme-mode',
-  colorSchemeStorageKey: 'sc-theme-color',
-};
-
+/**
+ * The theme and the mode, while the app runs: the user's choices, kept (a
+ * cookie the server reads too), else the preset's (`provideSemanticComponents({ preset: { theme, mode } })`).
+ * The mode puts `dark` on the page's root; the theme, `data-theme`.
+ */
 @Service()
 export class ScThemeManager {
-  private readonly config = {
-    ...defaultConfig,
-    ...inject(SC_CONFIG).theme,
-  };
+  private readonly preset = inject(SC_CONFIG).preset;
 
   private readonly storage = inject(ScStorage);
   private readonly document = inject(DOCUMENT);
@@ -38,18 +27,12 @@ export class ScThemeManager {
     null;
 
   readonly mode = signal<ScThemeMode>(
-    this.getStored(
-      this.config.modeStorageKey,
-      this.config.defaultMode,
-      this.isValidMode,
-    ),
+    this.getStored(MODE_KEY, this.preset?.mode ?? 'system', this.isValidMode),
   );
 
-  readonly colorScheme = signal<string>(
-    this.getStored(
-      this.config.colorSchemeStorageKey,
-      this.config.defaultColorScheme,
-    ),
+  /** The colours: `'default'`, or the name your CSS gives `[data-theme]`. */
+  readonly theme = signal<string>(
+    this.getStored(THEME_KEY, this.preset?.theme ?? 'default'),
   );
 
   // A signal so `resolvedMode` re-evaluates when the OS theme changes.
@@ -72,7 +55,7 @@ export class ScThemeManager {
     });
 
     effect(() => {
-      this.applyColorScheme(this.colorScheme());
+      this.applyTheme(this.theme());
     });
 
     this.darkMediaQuery?.addEventListener('change', () => {
@@ -82,7 +65,7 @@ export class ScThemeManager {
 
   setMode(mode: ScThemeMode): void {
     this.mode.set(mode);
-    this.store(this.config.modeStorageKey, mode);
+    this.store(MODE_KEY, mode);
   }
 
   toggleMode(): void {
@@ -90,9 +73,9 @@ export class ScThemeManager {
     this.setMode(current === 'dark' ? 'light' : 'dark');
   }
 
-  setColorScheme(colorScheme: string): void {
-    this.colorScheme.set(colorScheme);
-    this.store(this.config.colorSchemeStorageKey, colorScheme);
+  setTheme(theme: string): void {
+    this.theme.set(theme);
+    this.store(THEME_KEY, theme);
   }
 
   private isValidMode(value: string): value is ScThemeMode {
@@ -128,12 +111,12 @@ export class ScThemeManager {
     }
   }
 
-  private applyColorScheme(colorScheme: string): void {
+  private applyTheme(theme: string): void {
     const root = this.document.documentElement;
-    if (colorScheme === 'default') {
+    if (theme === 'default') {
       root.removeAttribute('data-theme');
     } else {
-      root.setAttribute('data-theme', colorScheme);
+      root.setAttribute('data-theme', theme);
     }
   }
 }

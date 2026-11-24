@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Menu in its style', () => {
   test(`an item has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/menu/menu-usage-demo');
     await page.getByRole('button', { name: 'Open' }).click();
     const target = page.getByRole('menuitem', { name: 'Profile' });
@@ -17,7 +17,7 @@ test.describe('Menu in its style', () => {
           ((await target.getAttribute('class')) ?? '').split(/\s+/),
         );
         return classes.filter((c) => !have.has(c));
-      }, `${preset} classes missing`)
+      }, `${style} classes missing`)
       .toEqual([]);
   });
 });

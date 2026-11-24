@@ -7,7 +7,7 @@ test.describe('Menubar in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/menubar/menubar-usage-demo');
     const bar = page.getByRole('menubar', { name: 'Browser' });
     const file = bar.getByRole('menuitem', { name: 'File', exact: true });
@@ -29,7 +29,7 @@ test.describe('Menubar in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

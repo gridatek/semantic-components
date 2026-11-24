@@ -184,7 +184,7 @@ export default class BarcodeScannerPage {
     "import { withBarcodeScanner } from '@semantic-components/ui/barcode-scanner';",
     '',
     'provideSemanticComponents(',
-    '  { style },',
+    '  { preset: { style } },',
     "  withBarcodeScanner({ wasmUrl: '/zxing/zxing_reader.wasm' }),",
     ');',
   ].join('\n');

@@ -113,9 +113,9 @@ import { TypedDatePickerDemoContainer } from './demos/typed-date-picker-demo-con
         <h2 scTypeset appToc>API reference</h2>
         <p>
           Each part takes
-          <code scTypeset>class</code>, merged over the preset (cn: a later
-          class wins). The calendar and the popover are their own components:
-          see Calendar and Popover.
+          <code scTypeset>class</code>, merged over the style (cn: a later class
+          wins). The calendar and the popover are their own components: see
+          Calendar and Popover.
         </p>
         <app-parts-table label="Date Picker parts" [parts]="parts" />
       </section>
@@ -186,7 +186,7 @@ export default class DatePickerPage {
       name: 'ScDatePickerApply, ScDatePickerCancel',
       selector: 'button[scDatePickerApply], button[scDatePickerCancel]',
       description:
-        "With confirm: Apply keeps the draft and closes (disabled until it is whole); Cancel drops it, as Escape. The preset's button (default / outline, sm); your text.",
+        "With confirm: Apply keeps the draft and closes (disabled until it is whole); Cancel drops it, as Escape. The style's button (default / outline, sm); your text.",
     },
   ];
 }

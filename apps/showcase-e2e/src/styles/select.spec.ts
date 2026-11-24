@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Select in its style', () => {
   test(`the trigger has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/select/select-usage-demo');
     const target = page.getByRole('combobox', { name: 'Theme' });
     // The demo widens it: w-full over the style's w-fit.
@@ -19,7 +19,7 @@ test.describe('Select in its style', () => {
           ((await target.getAttribute('class')) ?? '').split(/\s+/),
         );
         return classes.filter((c) => !have.has(c));
-      }, `${preset} classes missing`)
+      }, `${style} classes missing`)
       .toEqual([]);
   });
 });

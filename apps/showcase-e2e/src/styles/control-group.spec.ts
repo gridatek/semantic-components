@@ -22,17 +22,17 @@ test.describe('Control Group in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/control-group/text-control-group-demo');
     await expectClasses(
       page.getByRole('group', { name: 'Website' }),
       split(styles.controlGroup({ orientation: 'horizontal' })),
-      `${preset} group classes missing`,
+      `${style} group classes missing`,
     );
     await expectClasses(
       page.getByText('https://'),
       split(styles.controlGroupText),
-      `${preset} text classes missing`,
+      `${style} text classes missing`,
     );
   });
 });

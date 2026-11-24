@@ -6,7 +6,7 @@ import {
 
 /**
  * Where the scanner's decoder is served, where the browser has no
- * BarcodeDetector: `provideSemanticComponents({ style }, withBarcodeScanner({
+ * BarcodeDetector: `provideSemanticComponents({ preset: { style } }, withBarcodeScanner({
  * wasmUrl: '/zxing/zxing_reader.wasm' }))`. Without it, zxing-wasm's CDN.
  */
 export function withBarcodeScanner(

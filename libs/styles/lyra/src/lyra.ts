@@ -67,7 +67,7 @@ import { slider } from './slider';
 import { sortable } from './sortable';
 import { switchStyles } from './switch';
 import { table } from './table';
-/** The lyra style: `provideSemanticComponents({ style: lyra })`. */
+/** The lyra style: `provideSemanticComponents({ preset: { style: lyra } })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
 import { timeClock } from './time-clock';

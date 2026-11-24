@@ -10,12 +10,12 @@ import { SC_CONTEXT_MENU } from '../context-menu/context-menu-types';
  * same parts serve all three.
  */
 export function injectMenuStyles(): Signal<ScMenuStyles> {
-  const preset = injectStyle();
+  const style = injectStyle();
   const menu = inject(Menu, { optional: true });
   const contextMenu = inject(SC_CONTEXT_MENU, { optional: true });
   return computed(() => {
-    if (menu && inMenuBar(menu as Menu<unknown>)) return preset.menubar.menu;
-    return contextMenu ? preset.contextMenu : preset.menu;
+    if (menu && inMenuBar(menu as Menu<unknown>)) return style.menubar.menu;
+    return contextMenu ? style.contextMenu : style.menu;
   });
 }
 

@@ -155,7 +155,7 @@ And shadcn's eight styles — nova, vega, maia, lyra, mira, luma, sera, rhea —
 ```typescript
 import { nova } from '@semantic-components/styles/nova';
 
-provideSemanticComponents({ style: nova });
+provideSemanticComponents({ preset: { style: nova } });
 ```
 
 What an entry needs set up comes with it, as a feature of the same call — the Angular way, as `provideRouter(routes, withComponentInputBinding())`: one place to set the library up, and an app that doesn't use an entry doesn't load it.
@@ -164,7 +164,7 @@ What an entry needs set up comes with it, as a feature of the same call — the 
 import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 import { withI18n } from '@semantic-components/ui/i18n';
 
-provideSemanticComponents({ style: nova }, withCodeHighlighter(), withI18n(I18N));
+provideSemanticComponents({ preset: { style: nova } }, withCodeHighlighter(), withI18n(I18N));
 ```
 
 ```typescript

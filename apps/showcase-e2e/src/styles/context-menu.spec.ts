@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Context Menu in its style', () => {
   test(`an item has the context menu's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/context-menu/basic-context-menu-demo');
     await page.locator('[scContextMenuTrigger]').click({ button: 'right' });
     const target = page.getByRole('menuitem', { name: 'Back' });
@@ -19,7 +19,7 @@ test.describe('Context Menu in its style', () => {
           ((await target.getAttribute('class')) ?? '').split(/\s+/),
         );
         return classes.filter((c) => !have.has(c));
-      }, `${preset} classes missing`)
+      }, `${style} classes missing`)
       .toEqual([]);
   });
 });

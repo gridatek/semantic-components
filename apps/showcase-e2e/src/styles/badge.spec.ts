@@ -13,7 +13,7 @@ const VARIANTS = [
 test.describe('Badge in its style', () => {
   test(`each variant has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/badge/variants-badge-demo');
     const badges = page.locator('[scBadge]');
     for (const [i, variant] of VARIANTS.entries()) {
@@ -26,7 +26,7 @@ test.describe('Badge in its style', () => {
             ((await badges.nth(i).getAttribute('class')) ?? '').split(/\s+/),
           );
           return wanted.filter((c) => !have.has(c));
-        }, `${preset} ${variant}`)
+        }, `${style} ${variant}`)
         .toEqual([]);
     }
   });

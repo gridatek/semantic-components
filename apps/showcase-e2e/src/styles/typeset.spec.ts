@@ -5,12 +5,12 @@ test.describe('Typeset in its style', () => {
   test(`code blocks and inline code take the style's corners`, async ({
     page,
   }) => {
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/typeset');
     // The style's file, linked at start.
     await expect(page.locator('link#typeset-variables')).toHaveAttribute(
       'href',
-      `typeset-variables-${preset}.css`,
+      `typeset-variables-${style}.css`,
     );
     const content = page.locator('article.typeset');
     await expect(content.locator('pre').first()).toBeVisible();
@@ -42,7 +42,7 @@ test.describe('Typeset in its style', () => {
     expect(corners.pre).toBe(corners.block);
     expect(corners.code).toBe(corners.inline);
     // Square in the square styles, rounded in the others.
-    const square = preset === 'lyra' || preset === 'sera';
+    const square = style === 'lyra' || style === 'sera';
     expect(corners.pre === '0px').toBe(square);
     expect(corners.code === '0px').toBe(square);
   });
@@ -50,7 +50,7 @@ test.describe('Typeset in its style', () => {
   test(`headings take the style's weight, tracking and case (sera's: uppercase, wider)`, async ({
     page,
   }) => {
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/typeset');
     const heading = page.locator('article.typeset h2').first();
     await expect(heading).toBeVisible();
@@ -71,7 +71,7 @@ test.describe('Typeset in its style', () => {
           (parseFloat(style.letterSpacing) || 0) / parseFloat(style.fontSize),
       };
     });
-    const sera = preset === 'sera';
+    const sera = style === 'sera';
     expect(look.weight).toBe('600');
     expect(look.transform).toBe(sera ? 'uppercase' : 'none');
     expect(look.tracking).toBeCloseTo(sera ? 0.05 : 0, 3);

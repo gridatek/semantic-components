@@ -486,6 +486,6 @@ export default class GetStartedPage {
 import { provideSemanticComponents } from '@semantic-components/ui';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideSemanticComponents({ style: lyra })],
+  providers: [provideSemanticComponents({ preset: { style: lyra } })],
 };`;
 }

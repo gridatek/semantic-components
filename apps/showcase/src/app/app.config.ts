@@ -51,7 +51,7 @@ export const appConfig: ApplicationConfig = {
       useFactory: () => ({
         toaster: { hotkey: ['altKey', 'KeyT'] },
         charts: { followDirection: true },
-        style: STYLES[styleFrom(inject(ScStorage))],
+        preset: { style: STYLES[styleFrom(inject(ScStorage))] },
       }),
     },
     // The style's stylesheets (Typeset's variables, the editor), linked at start.

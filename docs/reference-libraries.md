@@ -71,7 +71,7 @@ where shadcn's `ChartTooltipContent` takes props.
 
 ## Collapsible: rewritten
 
-Rewritten 2026-11-11: built beside the old one as Collapsible Next, switched in. Base UI's Collapsible (root, trigger, panel); shadcn adds no classes, so no preset key.
+Rewritten 2026-11-11: built beside the old one as Collapsible Next, switched in. Base UI's Collapsible (root, trigger, panel); shadcn adds no classes, so no style key.
 
 - **No Angular Aria**: it has no disclosure pattern. The old one was Aria's Accordion, its trigger wired by `[panel]="x.panel"`, its content in `ng-template scCollapsibleContent` inside `scCollapsibleBody` (padding and animate classes of its own).
 - **The state on the root**: `[(open)]` (Base UI's `open` / `onOpenChange`), not the trigger's `[(expanded)]`; `disabled` there too. The trigger finds its panel itself (`aria-controls`).
@@ -106,7 +106,7 @@ A native text field (`input[scInput]`). A shadcn component: Base UI and shadcn's
 **Taken:**
 
 - **The name rule**, as Base UI: a label or `aria-label`, and a dev warning without one (`ɵwarnIfUnnamed`).
-- **Each preset's look**, from its own `input.tsx`; the parts that look like an input share it.
+- **Each style's look**, from its own `input.tsx`; the parts that look like an input share it.
 - **Not Base UI's state attributes**: Signal Forms holds that state (`touched`, `dirty`, `invalid`), and `aria-invalid` / `disabled` are what the styles read.
 
 ## Input Group
@@ -119,7 +119,7 @@ An input or a textarea with addons in one box (`div[scInputGroup]`). A shadcn co
 
 **Taken:**
 
-- **The parts and behaviour**, with a button part of our own selector (`button[scInputGroupButton]`) on the preset's button.
+- **The parts and behaviour**, with a button part of our own selector (`button[scInputGroupButton]`) on the style's button.
 - **Not the input and textarea parts**: the group shapes `scInput` / `scTextarea` itself, so there is one input, not two.
 - **Not shadcn's `align` on the addon** (the user, 2026-11-13): it picks an edge of the control, so it is `side` — `inline-start`, `inline-end`, `top`, `bottom` (shadcn's `block-start` / `block-end`), the words of every `side` here; `alignment` stays for a place along an edge.
 
@@ -168,8 +168,8 @@ The native table elements, styled (`table[scTable]`). A shadcn component; Base U
 
 **Taken:**
 
-- **The parts and each preset's look** (the table's text size, header cell, cell, caption — the rest is the same in every style); the row's `has-aria-expanded` highlight.
-- **A frame on the container**: `scFrame` (the user, 2026-11-04; first a `bordered` input) — shadcn's Table has none, its examples hard-code `rounded-md border`, which suits no style but vega and mira. The preset's `frame`: the style's card radius, ring and shadow.
+- **The parts and each style's look** (the table's text size, header cell, cell, caption — the rest is the same in every style); the row's `has-aria-expanded` highlight.
+- **A frame on the container**: `scFrame` (the user, 2026-11-04; first a `bordered` input) — shadcn's Table has none, its examples hard-code `rounded-md border`, which suits no style but vega and mira. The style's `frame`: the style's card radius, ring and shadow.
 - **The container as a part of its own** (`scTableContainer`): a directive on `table` can't wrap it. Named and focusable when it scrolls (axe's `scrollable-region-focusable`).
 - **Not**: the Actions example (a row's menu) and anything a Data Table does — sorting, selection, pages are on its page (the user, 2026-11-04).
 
@@ -184,7 +184,7 @@ A box of related content (`div[scCard]`). A shadcn component; Base UI has no car
 
 **Taken:**
 
-- **The parts, `size` and `--card-spacing`**, each preset's look; the examples, our way (Signal Forms, a local image, the Toggle Group).
+- **The parts, `size` and `--card-spacing`**, each style's look; the examples, our way (Signal Forms, a local image, the Toggle Group).
 - **`ScCardBody`**, not shadcn's `CardContent` (the user, 2026-11-13: a section between a header and a footer is a Body — docs/content-body-naming.md).
 - **Not**: the old Form, Notification and Stats demos (the user: replaced by better ones; stats are the Stat Card's).
 
@@ -199,9 +199,9 @@ A short label (`span[scBadge]`). A shadcn component; Base UI has no badge, so sh
 
 **Taken:**
 
-- **Each preset's cva** (`injectStyle().badge({ variant })`, as the button's); `badgeVariants` left the public API.
+- **Each style's cva** (`injectStyle().badge({ variant })`, as the button's); `badgeVariants` left the public API.
 - **The examples**, our way: our Spinner (named, a status), the link on `a[scBadge]` with a `routerLink`.
-- **The Tags Input's tags follow the preset; the Notification Center's count doesn't** (the user, 2026-11-04): a counter keeps a filled pill — sera's badges are bare text.
+- **The Tags Input's tags follow the style; the Notification Center's count doesn't** (the user, 2026-11-04): a counter keeps a filled pill — sera's badges are bare text.
 
 ## Alert
 
@@ -214,7 +214,7 @@ A callout (`div[scAlert]`). A shadcn component; Base UI and Radix have none, so 
 
 **Taken:**
 
-- **The parts, the variants and each preset's look.**
+- **The parts, the variants and each style's look.**
 - **`success` and `warning` variants, not shadcn's** (the user, 2026-11-11, with the Toast's colours): each style's `destructive` with the theme's `--sc-success` / `--sc-warning`; the description in the full colour (they sit at 4.5:1: no `/90`). No `info`: the default with an info icon is one. The Success and warning example.
 - **Not `role="alert"` on every alert** (the user, 2026-11-04): no role by default; the consumer adds `role="status"` or `role="alert"` on a region that is there from the start, when the alert appears after an action. The page's Announcing section and the Announced example say how.
 
@@ -230,8 +230,8 @@ A modal dialog asking for an answer (`div[scAlertDialog]`). A shadcn component: 
 **Taken:**
 
 - **Escape closes it** (Base UI, and the WAI-ARIA pattern) — ours ignored it until 2026-11-04; a click outside still doesn't.
-- **shadcn's parts, `size` and each preset's look**, without its placement and animation classes (the CDK overlay, Angular's `animate.enter`/`leave`).
-- **shadcn's width** (2026-11-11, the user, after the Dialog's): `w-screen`, capped by the preset's `max-w` for the size — the CDK's pane is as wide as its content, so a short alert stayed narrow.
+- **shadcn's parts, `size` and each style's look**, without its placement and animation classes (the CDK overlay, Angular's `animate.enter`/`leave`).
+- **shadcn's width** (2026-11-11, the user, after the Dialog's): `w-screen`, capped by the style's `max-w` for the size — the CDK's pane is as wide as its content, so a short alert stayed narrow.
 - **Not**: Base UI's handles and payloads (detached triggers), nested dialogs, `initialFocus`/`finalFocus` (the focus trap takes the first button and gives focus back).
 
 ## Avatar
@@ -246,7 +246,7 @@ A person's picture (`span[scAvatar]`). A shadcn component: Base UI's Avatar (loc
 **Taken:**
 
 - **Base UI's loading, as its `keepMounted`** (the user, 2026-11-04): ours hid the image with `display: none` until loaded — a lazy image never loaded — and missed an image loaded before hydration. Now stacked, `visibility`, `data-loading`/`data-error`, `img.complete` checked on start; the state in attributes (hydration).
-- **shadcn's parts, outline and examples**; only the group count from the preset.
+- **shadcn's parts, outline and examples**; only the group count from the style.
 - **Not**: the fallback's `delay`.
 
 ## Aspect Ratio
@@ -274,7 +274,7 @@ Where the page is (`nav[scBreadcrumb]`). A shadcn component; Base UI has none, s
 
 **Taken:**
 
-- **The parts and each preset's look** — ours mixed vega's list with nova's item.
+- **The parts and each style's look** — ours mixed vega's list with nova's item.
 - **The separator's icon turned right to left**, whatever the icon (ours has no default; a slash or a dot looks the same turned).
 - **Not**: shadcn's default `aria-label="breadcrumb"`, chevron and ellipsis icon, nor its `sr-only` "More" inside the hidden ellipsis — the consumer writes the name and the icons.
 
@@ -290,7 +290,7 @@ A menu of actions from a button (`div[scMenuProvider]`; rewritten 2026-11-05, sw
 
 **Taken:**
 
-- **The parts and each preset's look**, from each style's `dropdown-menu.tsx`, as the `menu` preset key.
+- **The parts and each style's look**, from each style's `dropdown-menu.tsx`, as the `menu` style key.
 - **Base UI's highlight**: `data-highlighted` on the active item, none after a click open until the pointer moves or a key is pressed; the first ArrowDown then shows the first item.
 - **Checkbox and radio items that stay open**, `[(checked)]` and the group's `[(value)]`.
 - **The menu takes the trigger's direction and language** — no `dir` on the menu.
@@ -308,7 +308,7 @@ A row of menus (`[scMenubar]`): shadcn's Menubar. A shadcn component, so no web 
 
 **Taken:**
 
-- **The look of each preset**, as the `menubar` key: the bar, its triggers, and the Menu's parts in a bar (where shadcn's menubar part wraps a dropdown part, its classes merged over it).
+- **The look of each style**, as the `menubar` key: the bar, its triggers, and the Menu's parts in a bar (where shadcn's menubar part wraps a dropdown part, its classes merged over it).
 - **The same parts as the Menu** — not shadcn's MenubarItem, MenubarCheckboxItem…: a Menu part reads the menu bar's look when it is in one.
 - **The placement**, mirrored right to left; **the bar's arrows follow its area's direction**, not only the document's.
 - **Not**: shadcn's trigger with no focus style — ours has a focus ring.
@@ -324,7 +324,7 @@ A menu at the pointer (`div[scContextMenu]`): shadcn's Context Menu. A shadcn co
 
 **Taken:**
 
-- **The look of each preset**, as the `contextMenu` key, read by the Menu's parts in a context menu — not shadcn's ContextMenuItem, ContextMenuCheckboxItem…
+- **The look of each style**, as the `contextMenu` key, read by the Menu's parts in a context menu — not shadcn's ContextMenuItem, ContextMenuCheckboxItem…
 - **The highlight**: none after a right-click or a long press; the first item after Shift+F10 or the Menu key.
 - **The placement**, and `side` — as `'start'` / `'end'` for shadcn's left / right, so it mirrors right to left.
 - **The menu in a portal, as the Menu's** (`ng-template scMenuPortal`, rendered while open), with `side` and `[(open)]` on the root, `div[scContextMenu]` (the name freed by the old part, a `div` whose menu was created with the page; the root was `scContextMenuProvider`).
@@ -344,7 +344,7 @@ Tabs and their panels (`[scTabs]`; rewritten and switched in 2026-11-05): shadcn
 **Taken:**
 
 - **Base UI's state**: `[(value)]` and `orientation` on the root only (they were on the list too); `activateOnFocus` (default off) and `wrap` on the list. Aria's `selectionMode` and `focusMode` are not exposed.
-- **Each preset's look**, as the `tabs` key.
+- **Each style's look**, as the `tabs` key.
 - **The list's arrows follow its area's direction**, not only the document's.
 - **A disabled tab is reached by the arrows**: the tab part removes a native `disabled` (it would take the tab out of focus).
 - **Not**: content written straight in a panel, nor Base UI's `keepMounted` — Aria allows a panel's content only in its template, created when shown, destroyed when hidden (tried: a template inside the panel's own view does not satisfy Aria's content query). Documented as a limitation. Not Base UI's Indicator nor `data-activation-direction` (shadcn uses neither).
@@ -359,7 +359,7 @@ Code to read and copy (`div[scCodeBlock]`, entry `ui/code-block`): shadcn's Code
 
 **Taken:**
 
-- **Each preset's look**, as the `codeBlock` key (it had nova's only).
+- **Each style's look**, as the `codeBlock` key (it had nova's only).
 - **The examples**, in shadcn's order. Show More is composition, not a part: a max height on the code, your button in the footer (`aria-expanded`).
 - **Terminal output** (`language="ansi"`): Shiki's own; its dim text in `--muted-foreground`, not at half opacity.
 - **Not**: the integrations (Trace, Message, Chat, Typeset, Markdown, Streaming) — on those components' pages; shadcn's `aria-label="Copy"` default — the copy button's name is yours.
@@ -380,11 +380,11 @@ A window over the page (`div[scDialogProvider]`): shadcn's Dialog. Its styles, i
 
 **Taken:**
 
-- **Close is behaviour only**, on any button — all of them (not followed since 2026-11-05, below). `scDialogClose` was the ✕ with its look and place built in (a Cancel with it went to the corner); then it was behaviour only on a `scButton`; since the user's revision (2026-11-05) it is the preset's button again (`variant`, `size`: ghost / icon-sm by default, `variant="outline" size="default"` for Cancel), and the dialog places a close that is its direct child (`data-slot="dialog-close"`) where the preset says — no second part. Unlike the other libraries, the look is ours.
+- **Close is behaviour only**, on any button — all of them (not followed since 2026-11-05, below). `scDialogClose` was the ✕ with its look and place built in (a Cancel with it went to the corner); then it was behaviour only on a `scButton`; since the user's revision (2026-11-05) it is the style's button again (`variant`, `size`: ghost / icon-sm by default, `variant="outline" size="default"` for Cancel), and the dialog places a close that is its direct child (`data-slot="dialog-close"`) where the style says — no second part. Unlike the other libraries, the look is ours.
 - **Code first closes through the state** (`[(open)]`) — everyone. Not Material's result value: ours live in the template.
-- **Each preset's look**, as the `dialog` key (the ✕'s place and fill too: `top-2 end-2` to `top-5 end-5`, `bg-secondary` in luma, sera, rhea).
+- **Each style's look**, as the `dialog` key (the ✕'s place and fill too: `top-2 end-2` to `top-5 end-5`, `bg-secondary` in luma, sera, rhea).
 - **The direction and language of where it is opened**, given to the dialog (rendered at the end of the page).
-- **shadcn's width** (2026-11-11, the user, after the Command dialog opened narrow and collapsed while zooming in): `w-screen` on `scDialog`, capped by the preset's `max-w` — the CDK's pane is as wide as its content, so the preset's `w-full` alone left short dialogs narrow.
+- **shadcn's width** (2026-11-11, the user, after the Command dialog opened narrow and collapsed while zooming in): `w-screen` on `scDialog`, capped by the style's `max-w` — the CDK's pane is as wide as its content, so the style's `w-full` alone left short dialogs narrow.
 
 ## Accordion
 
@@ -399,7 +399,7 @@ Items whose panels open and close (`[scAccordion]`; rewritten and switched in 20
 **Taken:**
 
 - **Base UI's state** on the root: `[(value)]` and `multiple` (one at a time by default — Aria's default is several), the item's `value`; the trigger in a real heading (`h2`–`h6`).
-- **Each preset's look**, as the `accordion` key; one chevron turned (`scAccordionTriggerIcon`) for shadcn's two swapped.
+- **Each style's look**, as the `accordion` key; one chevron turned (`scAccordionTriggerIcon`) for shadcn's two swapped.
 - **The panel animates its height both ways**: a transition on height and display (`starting:h-0`, `[[inert]]:h-0`), the content kept after the first opening (Aria's `preserveContent`, set from `@angular/aria/private`).
 - **The item connects its trigger and panel** (nothing to wire), though Aria's trigger declares `panel` a required input (every template would have to bind it, `NG8008`): the trigger and panel parts **extend** Aria's directives — the trigger redeclares `panel` as optional — and register with their item as they are created; it sets the panel before Aria's trigger reads it (`ngOnInit`). No official way in angular/components: `[panel]="ref"` is Aria's design since #32855 (it was matching ids before; #32977), Aria is in developer preview. Relies on Aria's classes staying extendable. - **Not** `hiddenUntilFound` (Aria's template). Aria's arrow keys stay (APG and Base UI dropped them).
 
@@ -413,8 +413,8 @@ A file and its upload state (`div[scAttachment]`; restyled 2026-11-05): shadcn's
 
 **Taken:**
 
-- **Each preset's look**, as the `attachment` key (`root({ size, orientation })`, `media({ variant })`, the rest as strings).
-- **An action part** (`scAttachmentAction`): shadcn's examples put a ghost icon button in the actions; ours styles itself from the preset's button (ghost, icon-xs), `type="button"`.
+- **Each style's look**, as the `attachment` key (`root({ size, orientation })`, `media({ variant })`, the rest as strings).
+- **An action part** (`scAttachmentAction`): shadcn's examples put a ghost icon button in the actions; ours styles itself from the style's button (ghost, icon-xs), `type="button"`.
 - **The trigger** on a link or a button (`type="button"`), with `scDialogTrigger` for a dialog — shadcn's examples wrap a link or a dialog trigger.
 - **The error's description** in the full destructive colour (shadcn: `/80`, 4.36:1 in dark).
 
@@ -428,7 +428,7 @@ A message's surface (`div[scBubble]`; restyled 2026-11-05): shadcn's Bubble. A s
 
 **Taken:**
 
-- **Each preset's look** for what changes, as the `bubble` key (`content`, `reactions`); the variants, alignment and positions stay in the parts.
+- **Each style's look** for what changes, as the `bubble` key (`content`, `reactions`); the variants, alignment and positions stay in the parts.
 - **Reactions at the end by default**, `data-side` / `data-align` set, as shadcn's (ours were at the start).
 - **Links and buttons**: `scBubbleContent` on a `button` (`type="button"`) or an `a` for shadcn's `render`.
 - **The examples**: Variants, Alignment, Group, Links and buttons, Reactions, Show more (our Collapsible: the first paragraph, the rest in its panel, for shadcn's swapped text), Tooltip, Popover, RTL.
@@ -444,7 +444,7 @@ Questions one at a time (`form[scQuestionnaire]`; built 2026-10-29, restyled 202
 
 **Taken:**
 
-- **Each preset's look**, as the `questionnaire` key (13 strings); `data-checked` / `data-disabled` read as `:has(>input:checked / :disabled)`, the check icon (yours) as `[&>svg]:`.
+- **Each style's look**, as the `questionnaire` key (13 strings); `data-checked` / `data-disabled` read as `:has(>input:checked / :disabled)`, the check icon (yours) as `[&>svg]:`.
 - **The examples**, the Angular way: Validation is a validator in the schema (Submit goes back to the question left wrong); Conditional an `@if` with `required(…, { when })`; Navigation state reads `active()?.answered()`; Resume sets the model and `item`; Custom progress draws steps inside the part; Animated a `starting:` transition; Card names each question with `aria-labelledby`.
 - **Not** `QuestionnaireInput` beside choices: free answers stay your `scInput` / `scTextarea` (one field can't hold a choice and free text). Freeform is a question answered in words.
 
@@ -458,7 +458,7 @@ An agent's steps (`div[scTrace]`; built 2026-10-29, restyled 2026-11-05): shadcn
 
 **Taken:**
 
-- **Each preset's look**, as the `trace` key (`root`, `line`, `icon`, `collapsibleIcon`, `collapsibleTrigger`, `collapsiblePanelContent`), with our contrast fixes (a pending step dims its icon only) and the output at the lines' size.
+- **Each style's look**, as the `trace` key (`root`, `line`, `icon`, `collapsibleIcon`, `collapsibleTrigger`, `collapsiblePanelContent`), with our contrast fixes (a pending step dims its icon only) and the output at the lines' size.
 - **All the examples**; the Usage, Reasoning and Tool ones without the AI SDK: Usage a static turn, Reasoning and Tool replay their states on a timer (a Replay button), in a live region.
 - **Open state** through the Collapsible's `[(open)]`, "open while running, your click wins" as `choice() ?? running()`.
 
@@ -472,7 +472,7 @@ A note between messages (`div[scMarker]`; restyled 2026-11-05): shadcn's Marker.
 
 **Taken:**
 
-- **Each preset's look** for what changes, as the `marker` key (`root`, `icon`); the variants and the content stay in the parts.
+- **Each style's look** for what changes, as the `marker` key (`root`, `icon`); the variants and the content stay in the parts.
 - **A button host** (`button[scMarker]`, `type="button"`) for shadcn's `render={<button />}`; the hover colour is the part's (shadcn's example writes it in the consumer's className).
 - **The examples**: Variants, Status (our Spinner), Shimmer, Separator, Border, With icon, Links and buttons, RTL.
 
@@ -486,7 +486,7 @@ A key (`kbd[scKbd]`; restyled 2026-11-05): shadcn's Kbd. A shadcn component, so 
 
 **Taken:**
 
-- **Each preset's look** as the `kbd` key (a string); the group stays in the part.
+- **Each style's look** as the `kbd` key (a string); the group stays in the part.
 - **The examples**: Group, Button, Input group, RTL — ours (Shortcuts, Arrow keys, Function keys…) folded into Usage. Symbols named in sr-only text.
 - **Not yet** the Tooltip example: our tooltip takes plain text (docs/todo.md).
 
@@ -500,7 +500,7 @@ A row of a conversation (`div[scMessage]`; restyled 2026-11-05): shadcn's Messag
 
 **Taken:**
 
-- **Each preset's look** as the `message` key (`group`, `root`, `content`, `header`, `footer`); the avatar stays in its part. The footer's `justify-end` on your messages, which ours lacked.
+- **Each style's look** as the `message` key (`group`, `root`, `content`, `header`, `footer`); the avatar stays in its part. The footer's `justify-end` on your messages, which ours lacked.
 - **The examples**: Avatar, Group, Header and footer, Actions, Attachment (ours), Status (a Marker, from shadcn's accessibility notes), Pattern (Copy → Copied; feedback with `aria-pressed`), RTL.
 - **Not** Markdown (no Markdown component), nor the Pattern's local `MessageAction` (button + tooltip): actions are your `scButton`s, named in sr-only text.
 
@@ -514,7 +514,7 @@ A conversation that scrolls itself (`div[scMessageScroller]`; built 2026-10-29, 
 
 **Taken:**
 
-- **The rows' gap** as the `messageScrollerContent` preset key; the jump is the preset's button already.
+- **The rows' gap** as the `messageScrollerContent` style key; the jump is the style's button already.
 - **Every Core concept as an example**: Anchoring turns (an "Anchor the reply" toggle), Group chat (a marker as the anchor), Keeping context visible (the peek), Following the live edge, Opening saved threads, Loading earlier messages, Animating new messages (a `starting:` transition, not height), Jumping to messages, Tracking the reader's position (a jump menu from `visibility()`), Reading scroll state (`scrollable()`), RTL.
 - **Not** the "Avoiding a flash on reload" script: React SSR-specific; our viewport stays hidden until positioned (`data-pending-scroll`).
 
@@ -528,7 +528,7 @@ A row of content (`div[scItem]`; restyled 2026-11-05): shadcn's Item. A shadcn c
 
 **Taken:**
 
-- **Each preset's look** as the `item` key (`root({ variant, size })`, `media({ variant })`, `body`, `title`, `description`); shadcn's `dropdown-menu-content` slot is our menu's (`menu`), its `item-content` our `item-body`.
+- **Each style's look** as the `item` key (`root({ variant, size })`, `media({ variant })`, `body`, `title`, `description`); shadcn's `dropdown-menu-content` slot is our menu's (`menu`), its `item-content` our `item-body`.
 - **`data-slot="item"`** and a `button` host (shadcn's `render`).
 - **The examples**, images local (`NgOptimizedImage`), avatars as initials.
 - **Not** `role="list"` built into the group (axe fails without listitems): the consumer says it, and not on a link item (`aria-allowed-role`).
@@ -543,7 +543,7 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 
 **Taken:**
 
-- **Each preset's look** as the `empty` key (`root`, `header`, `media({ variant })`, `title`, `description`, `body` — shadcn's EmptyContent).
+- **Each style's look** as the `empty` key (`root`, `header`, `media({ variant })`, `title`, `description`, `body` — shadcn's EmptyContent).
 - **The title on a heading** (`h2`–`h6`) as well as a `div`: shadcn's is a `div`; a heading can be found by heading.
 - **The examples**; links that look like buttons are `a[scLink]` (shadcn: `Button render={<a />}`); Card is inside a real Card.
 
@@ -551,8 +551,8 @@ An empty state (`div[scEmpty]`; restyled 2026-11-05): shadcn's Empty. A shadcn c
 
 Restyled 2026-11-10: shadcn's Radio Group in each style, and its examples.
 
-- **The `radioGroup` preset key**: `group` (`gap-2` / `gap-3`), `item` (the radio), `dot`. Our radio is a native input: Base UI's `data-checked:` / `aria-checked:` are `checked:`; shadcn's dot span is our `::before`, its classes `checked:before:…` (shown only when checked, no scale transition).
-- **A radio field's text** takes the `label` preset at normal weight and case — shadcn's `FieldLabel className="font-normal"` beside a radio (sera's uppercase drops there); medium with a description. Its radio column is `auto` (sera's radio is `size-4.5`).
+- **The `radioGroup` style key**: `group` (`gap-2` / `gap-3`), `item` (the radio), `dot`. Our radio is a native input: Base UI's `data-checked:` / `aria-checked:` are `checked:`; shadcn's dot span is our `::before`, its classes `checked:before:…` (shown only when checked, no scale transition).
+- **A radio field's text** takes the `label` style at normal weight and case — shadcn's `FieldLabel className="font-normal"` beside a radio (sera's uppercase drops there); medium with a description. Its radio column is `auto` (sera's radio is `size-4.5`).
 - **The group holds the choice** (2026-11-10, the user): `ScRadioGroup` implements `FormValueControl` — `[formField]` or `[(value)]` on the group, `value` on each radio (as Base UI's RadioGroup); it checks the matching radio, names them alike, emits `touch` when focus leaves it. The radio sets its own `type`. Signal Forms' own native-radio binding (a `[formField]` on each) still works, with `type="radio"` written: Angular types a native input's `[formField]` by the template's `type` (compiler `TcbNativeFieldOp`), so a union-typed field fails without it.
 - **shadcn's examples**: Demo (the Usage), Description, Choice card, Fieldset, Disabled (one option: a plain disabled radio — Signal Forms owns a bound field's `disabled`), Invalid (required, touched), RTL; ours kept: Horizontal, In a form, Custom theme.
 
@@ -560,9 +560,9 @@ Restyled 2026-11-10: shadcn's Radio Group in each style, and its examples.
 
 Rewritten 2026-11-10: shadcn's Checkbox in each style, and its examples. Restyled first (a box drawn by the field beside a transparent input, the field required), then rebuilt beside it as Checkbox Next — the input drawing itself — and switched in (the user: one element, works alone, nothing hidden).
 
-- **The `checkbox` preset key**: `item`, shadcn's root class on the native input (`appearance-none`): `data-checked:` as `:checked` and again as `:indeterminate`. `mark`: its `::before`, the style's icon as a mask (lucide in nova, vega, luma, sera, rhea; hugeicons' Tick02 in maia, mira; phosphor in lyra — `strokeWidth 2` as shadcn's), `size-3.5` (shadcn's indicator). The mask reads `--sc-checkbox-check` / `--sc-checkbox-indeterminate` first (the user): a consumer's own shape (the Custom mark example).
+- **The `checkbox` style key**: `item`, shadcn's root class on the native input (`appearance-none`): `data-checked:` as `:checked` and again as `:indeterminate`. `mark`: its `::before`, the style's icon as a mask (lucide in nova, vega, luma, sera, rhea; hugeicons' Tick02 in maia, mira; phosphor in lyra — `strokeWidth 2` as shadcn's), `size-3.5` (shadcn's indicator). The mask reads `--sc-checkbox-check` / `--sc-checkbox-indeterminate` first (the user): a consumer's own shape (the Custom mark example).
 - **Indeterminate filled** like checked, with a minus: Base UI's root has no `data-checked` when indeterminate (shadcn draws only a check); Radix's shadcn fills it. A minus from the same icon set. A click clears the native `indeterminate`; the input sets it back to its own.
-- **The field is optional**: a checkbox alone (a table row) draws itself; `scField orientation="horizontal"` only lays out the checkbox and its text (the separate `scField orientation="horizontal"` merged into it, 2026-11-14) — the `label` preset at normal weight and case, as the radio field's; its box column `auto` (sera's box is `size-4.5`). In a `scField` (a card label) its description is read with it.
+- **The field is optional**: a checkbox alone (a table row) draws itself; `scField orientation="horizontal"` only lays out the checkbox and its text (the separate `scField orientation="horizontal"` merged into it, 2026-11-14) — the `label` style at normal weight and case, as the radio field's; its box column `auto` (sera's box is `size-4.5`). In a `scField` (a card label) its description is read with it.
 - **shadcn's examples**: Demo (the Usage), Description, Group (a fieldset), Disabled, Invalid (required, touched), Table, RTL; ours kept: Indeterminate, Signal Forms, Form (two-way, no form, in a Card), Custom theme; new: Custom mark. Basic, Label and With description dropped (shadcn's cover them).
 - **Gone**: `ScCheckboxVisual`, `SC_CHECKBOX_FIELD` / `ScCheckboxContext`, the field's `data-state` / `data-disabled` (style by `has-checked:`, `has-disabled:`).
 
@@ -570,10 +570,10 @@ Rewritten 2026-11-10: shadcn's Checkbox in each style, and its examples. Restyle
 
 Rewritten 2026-11-10 as Checkbox was: built beside the old one as Switch Next (the old one not restyled: the user), compared, switched in. shadcn's Switch in each style, and its examples.
 
-- **The `switch` preset key**: `track`, shadcn's root class on the native checkbox (`role="switch"`, `appearance-none`): `data-checked:` / `data-unchecked:` / `data-disabled:` as `:checked` / `:not(:checked)` / `:disabled`. `thumb`: its `::before` (shadcn's thumb classes under `before:`; its `group-data-[size=…]/switch:` the input's own `data-[size=…]:`), centred by its margins, moved by the preset's `translate-x`.
+- **The `switch` style key**: `track`, shadcn's root class on the native checkbox (`role="switch"`, `appearance-none`): `data-checked:` / `data-unchecked:` / `data-disabled:` as `:checked` / `:not(:checked)` / `:disabled`. `thumb`: its `::before` (shadcn's thumb classes under `before:`; its `group-data-[size=…]/switch:` the input's own `data-[size=…]:`), centred by its margins, moved by the style's `translate-x`.
 - **`size`** (`default`, `sm`) as shadcn's, on the input as `data-size`.
 - **Lyra square**, a deliberate divergence: track and thumb `rounded-none`, true squares on a 4px grid (see shadcn-style-reference.md).
-- **The field is optional**: `scField orientation="horizontal"` only lays out a switch and its text (the separate `scField orientation="horizontal"` merged into it, 2026-11-14) — first at the start, last at the end — in the `label` preset at normal weight. A switch alone or in a `scField` (a card label) draws itself.
+- **The field is optional**: `scField orientation="horizontal"` only lays out a switch and its text (the separate `scField orientation="horizontal"` merged into it, 2026-11-14) — first at the start, last at the end — in the `label` style at normal weight. A switch alone or in a `scField` (a card label) draws itself.
 - **shadcn's examples**: Demo (the Usage), Description, Choice card, Disabled, Invalid, Sizes, RTL; ours kept: State, Signal Forms; Input first and Input last merged into Placement.
 - **Gone**: `ScSwitchVisual`, `SC_SWITCH_FIELD` / `ScSwitchContext`, the field's `data-state` / `data-disabled` (style by `has-checked:`, `has-disabled:`).
 
@@ -581,7 +581,7 @@ Rewritten 2026-11-10 as Checkbox was: built beside the old one as Switch Next (t
 
 Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shadcn's Slider in each style, and its examples.
 
-- **A native range, styled by the `slider` preset key** (`root`, `track`, `thumb`): shadcn's classes on the browser's parts (`::-webkit-slider-runnable-track` / `::-moz-range-track`, `::-webkit-slider-thumb` / `::-moz-range-thumb`), hover, focus and active from the input; Chrome's thumb centred by the generator (`margin-block-start`).
+- **A native range, styled by the `slider` style key** (`root`, `track`, `thumb`): shadcn's classes on the browser's parts (`::-webkit-slider-runnable-track` / `::-moz-range-track`, `::-webkit-slider-thumb` / `::-moz-range-thumb`), hover, focus and active from the input; Chrome's thumb centred by the generator (`margin-block-start`).
 - **Sizes logical** (`block-*` thickness, `inline-*` along the track): `orientation="vertical"` is the native range turned (`writing-mode: vertical-lr`, `direction: rtl`), the same classes; `aria-orientation`.
 - **The range**: Firefox's `::-moz-range-progress`; on Chrome's track a fill up to the thumb's centre (shadcn's `thumbAlignment="edge"`): `thumb/2 + (100% - thumb) × value`. `var(--primary)`, so a section's colours apply.
 - **Its own `type="range"`**, as before: the markup needs none, and the media player uses it as a host directive (Checkbox and Switch do the same now: component-design-principles.md).
@@ -592,7 +592,7 @@ Rewritten 2026-11-10: built beside the old one as Slider Next, switched in. shad
 
 Rewritten 2026-11-12: built beside the one of 2026-10-30 as Sidebar Next (the user: "sidebar avec next process"), switched in. Its users (the showcase's docs layout, the blocks dashboard, `ScSidebarLayout`, the Sidebar Layout page) needed no change: the parts and names are the same. shadcn's own component (Base UI has none), so no web research: its `sidebar.tsx` in the 8 styles, its docs and 14 examples.
 
-- **The `sidebar` preset key** (15 strings and the menu button's `cva`): the styles differ on 2 to 17 lines — corners (lyra, sera square; luma, rhea `rounded-xl` items, `rounded-2xl` floating and inset), spacing (`px-3 py-2`, `gap-0.5` items, `gap-2` groups in luma, rhea, sera), lyra's `text-xs`, sera's uppercase labels, the input's background, the large button's height. The frame (gap, container, rail), the provider, footer, separator and sub-menu are the same everywhere: in the parts. Adapted: the menu button's `data-[sidebar=menu-action]` reads our `data-slot`; rhea's `hsl(var(--sidebar-border))` is `var(--sidebar-border)` (our colours are oklch).
+- **The `sidebar` style key** (15 strings and the menu button's `cva`): the styles differ on 2 to 17 lines — corners (lyra, sera square; luma, rhea `rounded-xl` items, `rounded-2xl` floating and inset), spacing (`px-3 py-2`, `gap-0.5` items, `gap-2` groups in luma, rhea, sera), lyra's `text-xs`, sera's uppercase labels, the input's background, the large button's height. The frame (gap, container, rail), the provider, footer, separator and sub-menu are the same everywhere: in the parts. Adapted: the menu button's `data-[sidebar=menu-action]` reads our `data-slot`; rhea's `hsl(var(--sidebar-border))` is `var(--sidebar-border)` (our colours are oklch).
 - **The tooltip** (the user's choice, A): `[tooltip]` stays (shadcn's API), now built from the Tooltip's own `scTooltip` and `scTooltipArrow` — they read a context token (`SC_TOOLTIP_CONTEXT`) the provider gives, and the sidebar's panel gives too. The copied panel classes are gone. Its button is described by it while it shows (a signal: before, the attribute didn't follow).
 - **The scrollbar shown** (the user's choice, A — Base UI over shadcn): `no-scrollbar` left out of the content, `hideScrollbar` brings it back.
 - **No lifecycle hook**: the provider's `ngOnInit` is an effect that reads the saved state once.
@@ -608,7 +608,7 @@ Rewritten 2026-11-11: built beside the old one as Combobox Next, switched in 202
 - **Two roots, by the `multiple` attribute**: `T | null` and `T[]`, each exact for `[formField]`.
 - **`itemToStringLabel`** for a value's label before the list has opened (the user's choice over the Select's `items`); object values.
 - **Base UI's behaviour**: the input shows the value's label, a list opened on a value shows every option, text that is no option goes on closing, emptying the input clears one value; several: picking toggles and keeps the list open, Backspace removes the last chip, the arrows reach the chips. `autoHighlight`, `highlightItemOnHover`, `loopFocus`, `openOnInputClick`, `isItemEqualToValue`.
-- **The `combobox` preset key** (15 strings): Base UI's states as Aria shows them (`data-highlighted:` → `data-[active=true]:`, `data-disabled:` → `aria-disabled:`), its positioner variables and `data-open:` / `data-closed:` left out (the CDK, `animate.enter` / `animate.leave`). The popup is as wide as its field (shadcn's is 28px wider).
+- **The `combobox` style key** (15 strings): Base UI's states as Aria shows them (`data-highlighted:` → `data-[active=true]:`, `data-disabled:` → `aria-disabled:`), its positioner variables and `data-open:` / `data-closed:` left out (the CDK, `animate.enter` / `animate.leave`). The popup is as wide as its field (shadcn's is 28px wider).
 - **Aria's limits, kept and documented**: keys pressed in one frame move the highlight once (checked on 22.2.6); Home / End go to the list while open.
 - **Left out**: virtualization, grid, `limit`, `modal`, inline, Creatable; Arrow, Backdrop, Positioner, Collection, Row, Label parts.
 - **Examples**: shadcn's Demo (the Usage), Multiple, Clear, Groups, Custom items, Invalid, Disabled, Auto highlight, Popup, Input group, RTL; ours: Form, Async search. shadcn's Basic is its Demo.
@@ -628,7 +628,7 @@ Rewritten 2026-11-11 (the user: "check what other libs do"): built beside the ol
 | spartan (`@spartan-ng/brain`, 117k)                    | An Angular Command with its own engine                                                                                                                                                                     |
 | WAI-ARIA combobox pattern                              | Roles and keys of a list autocomplete                                                                                                                                                                      |
 
-- **Taken**: shadcn's parts and look (the `command` preset key, 13 strings); cmdk's built-in filter (text, `value`, `keywords`; `filter`, `shouldFilter`, `forceMount`), its hiding of empty groups and of separators while searching, its ARIA and vim bindings, Alt+arrows between groups; Bits UI's link items; Base UI's `loopFocus`, `highlightItemOnHover`, the first match always highlighted, a status live region (cmdk announces nothing).
+- **Taken**: shadcn's parts and look (the `command` style key, 13 strings); cmdk's built-in filter (text, `value`, `keywords`; `filter`, `shouldFilter`, `forceMount`), its hiding of empty groups and of separators while searching, its ARIA and vim bindings, Alt+arrows between groups; Bits UI's link items; Base UI's `loopFocus`, `highlightItemOnHover`, the first match always highlighted, a status live region (cmdk announces nothing).
 - **Ours**: the CDK's `ActiveDescendantKeyManager`, not Aria (the user's choice, A): no `ng-template` wrapper, no coalesced keys (checked on Aria 22.2.6), hidden items skipped. Home/End stay the search's (cmdk takes them for the list). The search applied as typed, so an Enter right after typing never runs a hidden item (a bug found while building).
 - **Left out**: re-sorting by score (fights `@for`), grid, virtualization, a built-in ⌘K listener, nested pages (an example), shadcn's check icon, cmdk's Loading.
 - **Examples**: shadcn's Demo (the Usage), Basic, Shortcuts, Groups, Scrollable, Dialog (⌘J with TanStack Hotkeys, `injectHotkey`); ours: Keywords, Async search, Pages, Links; RTL.
@@ -637,10 +637,10 @@ Rewritten 2026-11-11 (the user: "check what other libs do"): built beside the ol
 
 Rewritten 2026-11-12 (the user: "navigation-menu with next process"): built beside the one of 2026-10-29 as Navigation Menu Next, switched in. Its users kept their markup (same part names); the showcase header and the blocks navbar now write their panels as the Usage does (the user: "follow our example and dogfood"). A shadcn component, so no web research: shadcn's reference app (`navigation-menu.tsx` in each style), its 2 examples, Base UI's Navigation Menu docs.
 
-- **The `navigationMenu` preset key** (`trigger`, `link`, `content`, `popup`), generated from the 8 styles: corners (lyra and sera square, luma `rounded-3xl`), padding (maia, luma, sera `p-2.5 pe-3`, links `p-3`), text (lyra `text-xs`, mira `text-xs/relaxed`), focus ring, the box's shadow and ring. Base UI's `data-popup-open:` is `aria-expanded:` (our trigger's); shadcn's `in-data-[slot=navigation-menu-content]:` link classes are resolved into `link`. The old one had nova's classes in the parts.
+- **The `navigationMenu` style key** (`trigger`, `link`, `content`, `popup`), generated from the 8 styles: corners (lyra and sera square, luma `rounded-3xl`), padding (maia, luma, sera `p-2.5 pe-3`, links `p-3`), text (lyra `text-xs`, mira `text-xs/relaxed`), focus ring, the box's shadow and ring. Base UI's `data-popup-open:` is `aria-expanded:` (our trigger's); shadcn's `in-data-[slot=navigation-menu-content]:` link classes are resolved into `link`. The old one had nova's classes in the parts.
 - **`align`** (`start`, `center`, `end`; shadcn's root prop): the panel and the shared box line up under the trigger. Centred by `transform`, apart from the slide's `translate`.
 - **`alignment`, not `align`** (the user, 2026-11-13): Base UI and shadcn name it `align`; ours is `alignment` on every part that had it, since `align` on a `div` is an HTML attribute the browser reads as text alignment.
-- **`closeOnClick` on checkbox and radio items** (2026-11-13): Base UI's `Menu.CheckboxItem` / `Menu.RadioItem` prop, default false (`Menu.Item`'s is true) — the same here; the showcase's theme and preset menus set it.
+- **`closeOnClick` on checkbox and radio items** (2026-11-13): Base UI's `Menu.CheckboxItem` / `Menu.RadioItem` prop, default false (`Menu.Item`'s is true) — the same here; the showcase's theme and style menus set it.
 - **`closeOnClick` on links** (default true — Base UI's is false: a page shown without reloading would keep the menu open; the user left it to me).
 - **Kept**: the disclosure pattern, panels inside their items and always in the page (Tab order, crawlers), the shared box, the slide from the side you came from, the keyboard.
 - **`data-slot` only on the link** (the panel styles its links by it).
@@ -651,7 +651,7 @@ Rewritten 2026-11-12 (the user: "navigation-menu with next process"): built besi
 
 Rewritten 2026-11-12: built beside the old one as Carousel Next, switched in (no users outside its page). Still on Embla (`embla-carousel`, an optional peer of the `@semantic-components/ui/carousel` entry point). A shadcn component, so no web research: shadcn's reference app (`carousel.tsx` in each style) and its 8 examples.
 
-- **The `carousel` preset key** (a string): the buttons' corners — `rounded-full` in nova, vega, maia, mira and luma, `rounded-2xl` in rhea, none in lyra and sera (the preset's button keeps its own); the old one hard-coded `rounded-full`.
+- **The `carousel` style key** (a string): the buttons' corners — `rounded-full` in nova, vega, maia, mira and luma, `rounded-2xl` in rhea, none in lyra and sera (the style's button keeps its own); the old one hard-coded `rounded-full`.
 - **Embla restarts** when `options`, `plugins` or `orientation` change (the old one read them once); its `direction` from the page's `dir` unless given.
 - **Keys follow direction**: ← and → mirrored right to left, ↑ and ↓ when vertical (shadcn's: ← → only, never mirrored).
 - **Names are the consumer's**: the region's and each slide's `aria-roledescription` and `aria-label` (shadcn hard-codes "carousel" and "slide"). The slide gives `index()` and `count()` for "2 of 5", right from the first render: slides register with the root, so no Embla is needed (the server too).
@@ -665,7 +665,7 @@ Rewritten 2026-11-12: built beside the old one as Carousel Next, switched in (no
 
 Rewritten 2026-11-11: built beside the old one as Native Select Next, switched in. Its users (the PDF Viewer, two Theme examples) moved to the container, chevron and option parts. shadcn's Native Select (`native-select.tsx` in each style, its docs' examples); Base UI has none.
 
-- **The `nativeSelect` preset key** (`select`, `icon`), copied as shadcn writes them: heights 6 to 10, corners, backgrounds (`bg-input/…` in maia, mira, luma, rhea), lyra's `text-xs` and `ring-1`, sera's underline; the chevron's place (`end-3.5` maia, `end-1.5` and smaller in mira, `end-0` sera). The wrapper's classes are the same in every style: in the container part.
+- **The `nativeSelect` style key** (`select`, `icon`), copied as shadcn writes them: heights 6 to 10, corners, backgrounds (`bg-input/…` in maia, mira, luma, rhea), lyra's `text-xs` and `ring-1`, sera's underline; the chevron's place (`end-3.5` maia, `end-1.5` and smaller in mira, `end-0` sera). The wrapper's classes are the same in every style: in the container part.
 - **Parts**: the select (`size`, the field's id and description, `[formField]`, `aria-invalid` once touched), the container (it carries its select's `data-size`, for mira's icon), your chevron (`aria-hidden` by the part: the old one wasn't hidden), option and optgroup with shadcn's `bg-[Canvas] text-[CanvasText]` (the old ones had no classes).
 - **Not taken**: the customizable select (`appearance: base-select`), Chromium only, not in shadcn's.
 - **Examples**: shadcn's Demo (the Usage, in a field), Groups, Disabled, Invalid (Signal Forms, its error), RTL; ours: Sizes. shadcn's "Native Select vs Select" note as a section of the page.
@@ -674,7 +674,7 @@ Rewritten 2026-11-11: built beside the old one as Native Select Next, switched i
 
 Restyled 2026-11-11: shadcn's Toast (Base UI's, `toast.tsx` in each style; it replaced Sonner) and its examples.
 
-- **The `toast` preset key** (`toast`, `list`): the toast's look, only its corners changing (`rounded-2xl`; mira `rounded-md`; lyra and sera none), and the same corners on the stack's focus ring.
+- **The `toast` style key** (`toast`, `list`): the toast's look, only its corners changing (`rounded-2xl`; mira `rounded-md`; lyra and sera none), and the same corners on the stack's focus ring.
 - **shadcn's look**: the title `font-medium`, the description muted, the variants colour the title, description and icon, the Alert's way — `success`, `warning`, `error`; `info` neutral, its icon enough (the user, 2026-11-11; shadcn's colours only the error icon) — `max-w-sm`, shadcn's stack (12px peek, 12px gap, 10% smaller each). An `info` variant (shadcn's types).
 - **The close at the end of the row**, always shown (ghost `icon-sm`, muted, its hit area larger): it was in the corner, shown on hover or focus.
 - **Kept, ours**: `ScToaster`'s API (`show` / `update` / `promise` / `dismiss`, `variant`, `duration`), the template written in the app, six positions, the hotkey, swipe.
@@ -685,7 +685,7 @@ Restyled 2026-11-11: shadcn's Toast (Base UI's, `toast.tsx` in each style; it re
 
 Restyled 2026-11-10: shadcn's Toggle in each style, and its examples.
 
-- **The `toggle` preset key**: each style's `toggleVariants` cva, copied (`variant` default / outline, `size` sm / default / lg) — the corners (none in lyra and sera), text (`text-xs` in lyra and mira, sera's uppercase), heights (mira 7, sera 10, vega/maia/luma 9) differ by style.
+- **The `toggle` style key**: each style's `toggleVariants` cva, copied (`variant` default / outline, `size` sm / default / lg) — the corners (none in lyra and sera), text (`text-xs` in lyra and mira, sera's uppercase), heights (mira 7, sera 10, vega/maia/luma 9) differ by style.
 - **`toggleVariants` gone**: its 31 users (the editor's buttons, the toolbar's toggle, the toggle group's items) read `injectStyle().toggle`, so they take each style's look too.
 - **`disabled` a boolean attribute**; `data-state` kept (shadcn's classes and the toolbar style by it).
 - **shadcn's examples**: Demo (the Usage: Bookmark, outline sm, the icon filled when pressed), Outline, With text, Sizes, Disabled, RTL — named by their text, not shadcn's `aria-label` beside it; ours kept: Toolbar. Basic dropped.
@@ -695,7 +695,7 @@ Restyled 2026-11-10: shadcn's Toggle in each style, and its examples.
 Built 2026-11-10 (the user). shadcn has none; Base UI's CheckboxGroup (`@base-ui/react/docs/react/components/checkbox-group.md`).
 
 - **Taken**: shared state for a series of checkboxes — the group's `value` is the ticked checkboxes' values, each checkbox its `value`; `allValues` and a `parent` checkbox (all / none, mixed when some); nested parents (a `parent` heading a group inside a group, the two joined by the consumer as Base UI's example); `disabled` / `data-disabled`.
-- **Ours**: the group is the Signal Forms control (`FormValueControl<T[]>`: `[formField]` on the group, typed by it — values of any type, not only strings), `touch` when focus leaves it, invalid passed to its checkboxes. On a `div` inside the fieldset (shadcn's field preset styles `data-slot="checkbox-group"`), not on the fieldset.
+- **Ours**: the group is the Signal Forms control (`FormValueControl<T[]>`: `[formField]` on the group, typed by it — values of any type, not only strings), `touch` when focus leaves it, invalid passed to its checkboxes. On a `div` inside the fieldset (shadcn's field style styles `data-slot="checkbox-group"`), not on the fieldset.
 - **Left out**: `render`, `nativeButton` (React), `onValueChange`'s event details (Signal Forms and `[(value)]`).
 - **Examples**: Base UI's Usage (Apples), Parent checkbox, Nested parent, Form; ours: Disabled, RTL.
 
@@ -703,7 +703,7 @@ Built 2026-11-10 (the user). shadcn has none; Base UI's CheckboxGroup (`@base-ui
 
 Rewritten 2026-11-10, in place (the user): shadcn's look, Base UI's API.
 
-- **The `toggleGroup` preset key** (`group`, `item`): each style's `toggle-group.tsx` classes as they are — corners (lg, md, 3xl, 2xl, none), the joined items' padding and shadow, `data-[state=on]`; the items' look stays the `toggle` key's.
+- **The `toggleGroup` style key** (`group`, `item`): each style's `toggle-group.tsx` classes as they are — corners (lg, md, 3xl, 2xl, none), the joined items' padding and shadow, `data-[state=on]`; the items' look stays the `toggle` key's.
 - **Base UI's API**: `value` always an array, `multiple` (a boolean) for Radix's `type` — "single" gone; one pressed can be released (none). The group a Signal Forms control (`FormValueControl<T[]>`: `[formField]` on the group), values of any type; `touch` when focus leaves it. `spacing` defaults to 2, as shadcn's.
 - **Keyboard**: one Tab stop, the arrows, Home / End, `loopFocus` — the CDK's `FocusKeyManager` (`role="group"`, as Base UI). Angular Aria's Toolbar was weighed: its `role="toolbar"` is the toolbar's; the consumer chooses between a toggle group and a toolbar (`scToolbarWidgetGroup`), each with one keyboard (the user).
 - **Migrated**: `type="single"` dropped, `type="multiple"` → `multiple`, single string values → one-item arrays (`[value]="[x()]"`, `$event[0]`) in the demos (PDF viewer, editor, Gantt, charts, card, diff viewer, code editor, components list) and the PDF viewer's settings part.
@@ -717,14 +717,14 @@ Rewritten 2026-11-10, in place. shadcn has none; Base UI's Toolbar for the featu
 - **Toggles in a widget group**: the group holds their pressed values (an array, `multiple`, `FormValueControl`), `scToggle` with a `value` reads it (the `SC_TOGGLE_VALUES` token). Gone: `ScToolbarToggle`, `ScToolbarToggleGroup`, the toolbar-level `values`.
 - **Base UI's features kept**: `loopFocus` (Aria's `wrap`), disabled widgets still focusable (Aria's `softDisabled`, Base UI's `focusableWhenDisabled`), a group with `disabled`, the input last.
 - **Fixed on the way**: `scLink` in a toolbar takes the widget's roving tabindex (its own binding made it a second Tab stop); the arrows mirrored in a `dir="rtl"` section (since 2026-11-13: CDK's `Dir` on the section, Aria reads its `Directionality`).
-- **Look**: the preset's `frame` (each style's card corners and ring), `p-1 gap-1`.
+- **Look**: the style's `frame` (each style's card corners and ring), `p-1 gap-1`.
 - **Examples**: Base UI's Usage (alignment toggles, $ and % buttons, a font Select, a link), With Menu, With Tooltip, With input; ours: Vertical, Disabled, RTL.
 
 ## OTP Input (was OTP Field): rewritten
 
 Rewritten 2026-11-11: built beside the old one as OTP Field Next, switched in; renamed OTP Input on 2026-11-19 (in this library a Field is `scField`: a label, a control and its text — this is the control, shadcn's Input OTP; its inputs are `scOtpInputSlot`, shadcn's slots). Base UI's OTP Field (one real input per character) in shadcn's Input OTP look.
 
-- **The `otpInput` preset key** (`group`, `input`, `separator`), each style's `input-otp.tsx`: slot sizes 7 to 10, corners, sera's separate underlined boxes. shadcn's slot is a div with a fake caret; ours a real input — its `data-[active=true]:` is `:focus`.
+- **The `otpInput` style key** (`group`, `input`, `separator`), each style's `input-otp.tsx`: slot sizes 7 to 10, corners, sera's separate underlined boxes. shadcn's slot is a div with a fake caret; ours a real input — its `data-[active=true]:` is `:focus`.
 - **Groups are chunks** (a joined box each, separators between), as shadcn's; the old one joined neighbouring inputs in one group.
 - **The root is the row**, in a `scField` (its label, description and errors round it; the first input takes its id) — as Base UI's OTP Field in a Field. The old root was itself a field.
 - **Base UI's options added**: `normalizeValue`, `mask`, `readOnly`, `complete()`, `data-complete` / `data-filled` / `data-focused`. Left out: `autoSubmit`, `form` / `name` (native forms).
@@ -735,32 +735,32 @@ Rewritten 2026-11-11: built beside the old one as OTP Field Next, switched in; r
 
 Restyled 2026-11-07. Our own component — shadcn has none; its docs site's search trigger is a secondary button.
 
-- **The preset's `input` look** (the user's choice over the outline button, 2026-11-07): it looks like the text fields beside it in every style — sera's underline, luma's and rhea's filled box — with muted text and a sized icon. No key of its own.
+- **The style's `input` look** (the user's choice over the outline button, 2026-11-07): it looks like the text fields beside it in every style — sera's underline, luma's and rhea's filled box — with muted text and a sized icon. No key of its own.
 - **Examples**: Usage (a search with its shortcut), Full width, Icon only (a collapsed sidebar), RTL.
 
 ## Textarea: restyled
 
 Restyled 2026-11-07: shadcn's Textarea in each style, and its 6 examples.
 
-- **The `textarea` preset key**, a string as `input`: corners, padding, background, ring and text size per style (sera's an underline only).
-- **No Input Group classes in the part**: the group's preset already styles its textarea (`[&>textarea[data-slot=control]]`), as it does an input.
+- **The `textarea` style key**, a string as `input`: corners, padding, background, ring and text size per style (sera's an underline only).
+- **No Input Group classes in the part**: the group's style already styles its textarea (`[&>textarea[data-slot=control]]`), as it does an input.
 - **shadcn's examples**: Demo (the Usage), Field, Disabled, Invalid (ours from Signal Forms, once touched — not a static `aria-invalid`), Button, RTL; ours kept: In a form, Max length, Rows.
 
 ## Field: restyled
 
 Restyled 2026-11-07: shadcn's Field parts in each style, and its 13 examples.
 
-- **The `field` preset key**: `set`, `legend`, `group`, `field` (its base: the orientation layouts stay in the part, the same everywhere), `contentWrapper` (shadcn's FieldContent; was `body`), `title`, `description`, `separator`, `error` — the spacing (field `gap-2`/`3`, group `gap-4` to `10`, set, legend margin) and text (`text-xs` in lyra and mira, sera's uppercase legend and title). shadcn's `field-content` / `field-label` slots and `data-horizontal` become our `field-content-wrapper` / `label` and `data-[orientation=horizontal]`.
+- **The `field` style key**: `set`, `legend`, `group`, `field` (its base: the orientation layouts stay in the part, the same everywhere), `contentWrapper` (shadcn's FieldContent; was `body`), `title`, `description`, `separator`, `error` — the spacing (field `gap-2`/`3`, group `gap-4` to `10`, set, legend margin) and text (`text-xs` in lyra and mira, sera's uppercase legend and title). shadcn's `field-content` / `field-label` slots and `data-horizontal` become our `field-content-wrapper` / `label` and `data-[orientation=horizontal]`.
 - **ScLabelText** reads the `title` (shadcn's FieldTitle).
-- **One field for every control** (2026-11-14, the user: "use scField only"): the separate `scCheckboxField`, `scSwitchField` and `scRadioField` merged into `scField orientation="horizontal"`, as shadcn writes `<Field orientation="horizontal">` round a Checkbox or Switch. The three controls provide `SC_FIELD_CHOICE`; the field reads it (a direct content child) and picks its classes in `computed()` — a grid, the control at the start (written first, the field as wide as its content unless it has a content wrapper) or the end (written last), the description under the label — so a consumer's class still wins. A `label[scField]` takes the label preset at normal weight, and dims with a disabled control. Checked against 61 demos, screenshots before and after: the differences are shadcn's Field look (an invalid field's text in red, a disabled one's dimmed).
-- **Select in a field**: its label part (`scSelectLabel`) takes the `label` preset, and the `field` classes in a field (shadcn's FieldLabel); the select root is `contents` there, so its label and trigger take the field's gap — in line with the field's other labels.
+- **One field for every control** (2026-11-14, the user: "use scField only"): the separate `scCheckboxField`, `scSwitchField` and `scRadioField` merged into `scField orientation="horizontal"`, as shadcn writes `<Field orientation="horizontal">` round a Checkbox or Switch. The three controls provide `SC_FIELD_CHOICE`; the field reads it (a direct content child) and picks its classes in `computed()` — a grid, the control at the start (written first, the field as wide as its content unless it has a content wrapper) or the end (written last), the description under the label — so a consumer's class still wins. A `label[scField]` takes the label style at normal weight, and dims with a disabled control. Checked against 61 demos, screenshots before and after: the differences are shadcn's Field look (an invalid field's text in red, a disabled one's dimmed).
+- **Select in a field**: its label part (`scSelectLabel`) takes the `label` style, and the `field` classes in a field (shadcn's FieldLabel); the select root is `contents` there, so its label and trigger take the field's gap — in line with the field's other labels.
 - **shadcn's examples ported**: Demo (the Usage: a payment form), Input, Textarea, Select, Slider (one value: our slider has one thumb), Fieldset, Checkbox, Radio, Switch, Choice card, Field group, Responsive, RTL; ours kept: Errors (Signal Forms), Separator.
 
 ## Label: restyled
 
 Restyled 2026-11-07: shadcn's Label and FieldLabel in each style, and its two examples (Demo, RTL).
 
-- **The `label` preset key**: `label` (Label: `text-sm font-medium leading-none` mostly; `text-xs` lyra, `text-xs/relaxed` mira, sera's uppercase — back to normal case beside a checkbox, radio or switch) and `field` (FieldLabel: the choice card's border, corners, padding, ring, checked tint). Before, our label had FieldLabel's classes only, and no text size of its own.
+- **The `label` style key**: `label` (Label: `text-sm font-medium leading-none` mostly; `text-xs` lyra, `text-xs/relaxed` mira, sera's uppercase — back to normal case beside a checkbox, radio or switch) and `field` (FieldLabel: the choice card's border, corners, padding, ring, checked tint). Before, our label had FieldLabel's classes only, and no text size of its own.
 - **One part**: the field look is added in a field (its context injected) or around one (a content query) — shadcn's Label and FieldLabel are two.
 - **Checked tint by `:checked`** (`has-checked:`, mapped from shadcn's `has-data-checked:`): our checkboxes and radios are native inputs.
 - **A field inside a label is not a group**: `role="group"` hid the card's texts from its control's name (axe's `label` rule; Chrome named it). `ScField` drops the role inside a label.
@@ -778,7 +778,7 @@ Restyled 2026-11-06 (the parts stay): shadcn's Calendar (react-day-picker) in ea
 
 Restyled 2026-11-06 (the parts are the 2026-10-29 rewrite's): shadcn's Progress in each style.
 
-- **The `progress` preset key**: the track (its height and corners change most: `h-0.5` sera, `h-1` nova, lyra, mira, `h-1.5` vega, `h-2` rhea, `h-3` maia, luma), the label and the value text, from each style's `progress.tsx`. The range is the same everywhere. The circle is ours alone (shadcn has none); its `arc` field gives its ends: square in lyra and sera, whose corners are square (the user, 2026-11-06), round elsewhere.
+- **The `progress` style key**: the track (its height and corners change most: `h-0.5` sera, `h-1` nova, lyra, mira, `h-1.5` vega, `h-2` rhea, `h-3` maia, luma), the label and the value text, from each style's `progress.tsx`. The range is the same everywhere. The circle is ours alone (shadcn has none); its `arc` field gives its ends: square in lyra and sera, whose corners are square (the user, 2026-11-06), round elsewhere.
 - **shadcn's examples added**: Demo (the Usage: a bar further along a moment after it appears) and Controlled (on our Slider); the page in the standard sections.
 
 ## Resizable
@@ -795,7 +795,7 @@ Panels resized by the handles between them (`div[scResizablePanelGroup]`; rewrit
 
 - **Keyboard and screen readers, which the old one had none of**: a focusable separator named by you, valued by the panel before it; the arrows by 10% (mirrored right to left), Home and End to the limits, Enter shuts or opens a collapsible panel.
 - **Sizes in % only**; `collapsible` (shut below half its minimum) and `collapsedSize`; `[(layout)]` in place of `defaultLayout` / `onLayoutChanged`.
-- **The grip is a part you write** (`scResizableHandleGrip`), not `withHandle`; the `resizable` preset key holds its look.
+- **The grip is a part you write** (`scResizableHandleGrip`), not `withHandle`; the `resizable` style key holds its look.
 - **Plain classes for the handle's orientation** (the rule in .claude/CLAUDE.md), a logical hit area (`start-1/2`, `rtl:`).
 - Not taken: react-resizable-panels' Grid, separator preview mode, `groupResizeBehavior`, `disabled`, px / rem / vh sizes.
 
@@ -803,10 +803,10 @@ Panels resized by the handles between them (`div[scResizablePanelGroup]`; rewrit
 
 A line between sections (`div[scSeparator]`; restyled 2026-11-06): shadcn's Separator, Base UI's. A shadcn component, so no web research: shadcn's reference app and its 5 examples, Base UI's Separator docs.
 
-| Library                                                                                                | What to read                                                             |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| shadcn Separator (`shadcn-reference/presets/*/separator.tsx`, `apps/v4/examples/base/separator-*.tsx`) | The same in all 8 styles: no preset key; Demo, List, Menu, Vertical, RTL |
-| Base UI Separator (`@base-ui/react/docs`)                                                              | `orientation` only; always `role="separator"`                            |
+| Library                                                                                                | What to read                                                            |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
+| shadcn Separator (`shadcn-reference/presets/*/separator.tsx`, `apps/v4/examples/base/separator-*.tsx`) | The same in all 8 styles: no style key; Demo, List, Menu, Vertical, RTL |
+| Base UI Separator (`@base-ui/react/docs`)                                                              | `orientation` only; always `role="separator"`                           |
 
 **Taken:**
 
@@ -822,7 +822,7 @@ A placeholder while content loads (`div[scSkeleton]`; restyled 2026-11-06): shad
 
 **Taken:**
 
-- **The `skeleton` preset key**, a string as `kbd`: `animate-pulse bg-muted` and each style's corners (`rounded-md`, `rounded-xl` in maia, `rounded-2xl` in luma and rhea, none in lyra and sera).
+- **The `skeleton` style key**, a string as `kbd`: `animate-pulse bg-muted` and each style's corners (`rounded-md`, `rounded-xl` in maia, `rounded-2xl` in luma and rhea, none in lyra and sera).
 - **Still with reduced motion** (`motion-reduce:animate-none`; the user's "ok", 2026-11-06): shadcn's keeps pulsing.
 - **`aria-busy` on the region, in the docs**: the skeleton stays empty and silent, as shadcn's.
 
@@ -837,7 +837,7 @@ Something loading (`svg[scSpinner]`; restyled 2026-11-05): shadcn's Spinner. A s
 **Taken:**
 
 - **A named status, read out**: the spinner removes its icon's `aria-hidden` (it hid every spinner from screen readers until 2026-11-05). Named even beside words that say it, as shadcn's (the user's choice: one rule).
-- **No preset key**: `size-4 animate-spin` in every style.
+- **No style key**: `size-4 animate-spin` in every style.
 - **The examples**; Input group's textarea stays enabled (a disabled group dims its words below 4.5:1 — docs/todo.md).
 
 ## Button: disabled yet reachable
@@ -850,7 +850,7 @@ A disabled button that keeps its focus and hover — so a tooltip can say why (2
 | Base UI          | `focusableWhenDisabled` (Button)                                   | No native `disabled`, `aria-disabled`, focusable, not pressed.                                                                       |
 | Angular Material | `disabledInteractive` (MatButton; app-wide in `MAT_BUTTON_CONFIG`) | No native `disabled`, `aria-disabled`, focusable, takes events — its docs name tooltips; your own `aria-disabled` wins (an input).   |
 
-**Taken:** Angular Aria's name (the user, 2026-11-06), default `false`; Base UI's behaviour — we stop the click (capture phase, before your handlers), so you don't have to as with Material. The preset's `aria-disabled:pointer-events-none` is undone (`aria-disabled:pointer-events-auto aria-disabled:cursor-not-allowed`, replacing it) so the hover stays.
+**Taken:** Angular Aria's name (the user, 2026-11-06), default `false`; Base UI's behaviour — we stop the click (capture phase, before your handlers), so you don't have to as with Material. The style's `aria-disabled:pointer-events-none` is undone (`aria-disabled:pointer-events-auto aria-disabled:cursor-not-allowed`, replacing it) so the hover stays.
 
 ## Popover
 
@@ -863,7 +863,7 @@ Rich content beside its trigger (`div[scPopoverProvider]`; rewritten and switche
 
 **Taken:**
 
-- **Each preset's look** as the `popover` key (`popup`, `header`, `title`, `description`).
+- **Each style's look** as the `popover` key (`popup`, `header`, `title`, `description`).
 - **Base UI's `modal`, not modal by default** (the old one always trapped focus): focus moves in and back; Tab out of it closes it and goes on from the trigger; `'trap-focus'` and `true` (the page blocked) on demand — `ScFocusTrap` got an off switch for it.
 - **A dialog named and described** (`aria-labelledby` its title, `aria-describedby` its description), the trigger's `aria-controls`.
 - **`openOnHover`**: Base UI's infotip, a click still opening it.
@@ -902,7 +902,7 @@ A panel at the edge of the screen that a swipe dismisses (`div[scDrawerProvider]
 **Taken:**
 
 - **Base UI's API**: `swipeDirection` (physical, down by default) plus our `inline-start` / `inline-end`; `snapPoints` (fractions of the screen or pixels) and `[(snapPoint)]`; `modal`; `disablePointerDismissal`; `data-swipe-ignore`.
-- **Mechanics in the part, look in the preset**: the `drawer` preset key keeps colours, corners and borders by `data-swipe-direction`, an inset and the handle's bar; the part sets the panel's transform while dragged — Base UI's CSS variables (`--drawer-swipe-movement-*`, `--stack-*`) aren't recreated.
+- **Mechanics in the part, look in the style**: the `drawer` style key keeps colours, corners and borders by `data-swipe-direction`, an inset and the handle's bar; the part sets the panel's transform while dragged — Base UI's CSS variables (`--drawer-swipe-movement-*`, `--stack-*`) aren't recreated.
 - **Swiping** (the user's "ok", 2026-11-06): a mouse by the handle or the panel's edges (text stays selectable), a finger or a pen from anywhere but a field; it closes past half its size or on a flick, otherwise settles back or rests at the nearest snap point.
 - **A simple stack** (the user's choice): the drawer behind scales to 95% and dims; Base UI's peek and height matching aren't copied.
 - **The handle on a button** moves to the next snap point: snap points reachable from the keyboard.
@@ -920,9 +920,9 @@ A dialog at the edge of the screen (`div[scSheetProvider]`; rewritten and switch
 
 **Taken:**
 
-- **Sheet keeps its own parts** (the user, 2026-11-06: not Dialog's parts with a sheet panel) and **its own `sheet` preset key** per style; the backdrop is the shared `backdrop` key (the same as Dialog's in every style).
+- **Sheet keeps its own parts** (the user, 2026-11-06: not Dialog's parts with a sheet panel) and **its own `sheet` style key** per style; the backdrop is the shared `backdrop` key (the same as Dialog's in every style).
 - **Angular's animations** (`animate.enter` / `animate.leave`, tw-animate): shadcn's starting and ending states become each side's `slide-in-from-*-10` / `slide-out-to-*-10` — the rule in .claude/CLAUDE.md (an `sc-leaving` class keeping shadcn's transitions was tried and dropped).
-- **The ✕ is yours** (`scSheetClose`, the preset's button), placed by the panel (`[&>[data-slot=sheet-close]]:…`); shadcn's content draws it (`showCloseButton`).
+- **The ✕ is yours** (`scSheetClose`, the style's button), placed by the panel (`[&>[data-slot=sheet-close]]:…`); shadcn's content draws it (`showCloseButton`).
 - **Logical sides** (`inline-start`, `inline-end`), the helpers shared with Tooltip and Popover; `dir` and `lang` carried from where it opened (as Dialog).
 - **Title and description register their ids**: a sheet without a title (the Sidebar's on phones) isn't labelled by nothing.
 
@@ -942,7 +942,7 @@ A short label on hover or keyboard focus (`div[scTooltipProvider]`; rewritten an
 - **Its behaviour**: delay 600 (shadcn's provider: 0), focus opens at once, close on click and Escape, hoverable (WCAG 1.4.13), not on touch, a warm group that also closes the one before.
 - **APG's description**: `aria-describedby` while open.
 - **A disabled button explained**: `scButton`'s `softDisabled` (Button: disabled yet reachable, below), not shadcn's span (mouse only).
-- **The arrow your part**; the `data-slot` is `tooltip` (Kbd's preset reads it).
+- **The arrow your part**; the `data-slot` is `tooltip` (Kbd's style reads it).
 - **Not** `trackCursorAxis`, detached handles, payloads, multiple triggers. The sidebar keeps a text `tooltip` of its own (docs/todo.md).
 
 ## Control Group
@@ -957,7 +957,7 @@ An input or a select joined with its buttons (`div[scControlGroup]`): shadcn's B
 **Taken:**
 
 - **shadcn's model**: a plain group, Tab to each button — not Base UI's Toolbar (arrow keys), which is a component of its own. The page says when to use a Toggle Group or a Toolbar instead, as shadcn's "ButtonGroup vs ToggleGroup".
-- **Each preset's look**, from its own `button-group.tsx`; the text on a `label` too, for shadcn's `render={<Label />}`.
+- **Each style's look**, from its own `button-group.tsx`; the text on a `label` too, for shadcn's `render={<Label />}`.
 
 ## Tree Table
 

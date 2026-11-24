@@ -67,7 +67,7 @@ import { slider } from './slider';
 import { sortable } from './sortable';
 import { switchStyles } from './switch';
 import { table } from './table';
-/** The sera style: `provideSemanticComponents({ style: sera })`. */
+/** The sera style: `provideSemanticComponents({ preset: { style: sera } })`. */
 import { tabs } from './tabs';
 import { textarea } from './textarea';
 import { timeClock } from './time-clock';

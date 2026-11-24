@@ -50,7 +50,7 @@ The scanner reads with the browser's `BarcodeDetector` — the standard; Chromiu
 The decoder (`zxing_reader.wasm`, about 1 MB) comes from zxing-wasm's CDN. To serve it with the app, copy it into the assets and say where:
 
 ```ts
-provideSemanticComponents({ style }, withBarcodeScanner({ wasmUrl: '/zxing/zxing_reader.wasm' }));
+provideSemanticComponents({ preset: { style } }, withBarcodeScanner({ wasmUrl: '/zxing/zxing_reader.wasm' }));
 ```
 
 ```json

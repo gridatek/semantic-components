@@ -226,7 +226,7 @@ export const myStyle: ScStyle = {
 import { myStyle } from './my-style';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideSemanticComponents({ style: myStyle })],
+  providers: [provideSemanticComponents({ preset: { style: myStyle } })],
 };`,
   };
 

@@ -5,7 +5,7 @@ import { currentStyle, styleName } from './style';
 test.describe('Skeleton in its style', () => {
   test(`a skeleton has its style's classes`, async ({ page }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/skeleton/text-skeleton-demo');
     for (const [target, wanted, what] of [
       [page.locator('[scSkeleton]').first(), styles.skeleton, 'skeleton'],
@@ -18,7 +18,7 @@ test.describe('Skeleton in its style', () => {
             ((await target.getAttribute('class')) ?? '').split(/\s+/),
           );
           return classes.filter((c) => !have.has(c));
-        }, `${preset} ${what} classes missing`)
+        }, `${style} ${what} classes missing`)
         .toEqual([]);
     }
   });

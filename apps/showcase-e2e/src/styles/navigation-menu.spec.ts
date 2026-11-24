@@ -20,29 +20,29 @@ test.describe('Navigation Menu in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await page.goto('/demos/navigation-menu/navigation-menu-usage-demo');
     const n = styles.navigationMenu;
     await expectClasses(
       page.getByRole('button', { name: 'Getting started' }),
       n.trigger,
-      `${preset} trigger`,
+      `${style} trigger`,
     );
     await expectClasses(
       page.locator('[scNavigationMenuContent]').first(),
       n.content,
-      `${preset} content`,
+      `${style} content`,
     );
     // The panel's links: the style's, but for the transition (the part's).
     await expectClasses(
       page.locator('[scNavigationMenuContent] a').first(),
       n.link.replace(/\btransition-all\b/, ''),
-      `${preset} link`,
+      `${style} link`,
     );
     await expectClasses(
       page.locator('nav > div[aria-hidden]'),
       n.popup,
-      `${preset} box`,
+      `${style} box`,
     );
   });
 });

@@ -22,7 +22,7 @@ test.describe('Alert Dialog in its style', () => {
     page,
   }) => {
     const styles = currentStyle();
-    const preset = styleName();
+    const style = styleName();
     await openStill(page, '/demos/alert-dialog/media-alert-dialog-demo');
     await page.getByRole('button', { name: 'Share Project' }).click();
     const dialog = page.getByRole('alertdialog');
@@ -30,12 +30,12 @@ test.describe('Alert Dialog in its style', () => {
     await expectClasses(
       page.locator('[scBackdrop]'),
       styles.backdrop,
-      `${preset} backdrop`,
+      `${style} backdrop`,
     );
     await expectClasses(
       dialog,
       twMerge(`relative max-w-[calc(100%-2rem)] text-sm ${s.content} w-screen`),
-      `${preset} dialog`,
+      `${style} dialog`,
     );
     for (const [part, classes] of [
       ['[scAlertDialogHeader]', s.header],
@@ -44,6 +44,6 @@ test.describe('Alert Dialog in its style', () => {
       ['[scAlertDialogDescription]', s.description],
       ['[scAlertDialogFooter]', s.footer],
     ] as const)
-      await expectClasses(dialog.locator(part), classes, `${preset} ${part}`);
+      await expectClasses(dialog.locator(part), classes, `${style} ${part}`);
   });
 });
