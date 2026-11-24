@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScLink, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
@@ -7,6 +7,9 @@ import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { DataTableUsageDemoContainer } from './demos/data-table-usage-demo-container';
 import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo-container';
+import { PaymentsDataTableDemoContainer } from './demos/payments-data-table-demo-container';
+import { PinnedDataTableDemoContainer } from './demos/pinned-data-table-demo-container';
+import { RtlDataTableDemoContainer } from './demos/rtl-data-table-demo-container';
 
 @Component({
   selector: 'app-data-table-page',
@@ -16,6 +19,11 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
     DataTableUsageDemoContainer,
     EntryInstall,
     FeaturedDataTableDemoContainer,
+    PaymentsDataTableDemoContainer,
+    PinnedDataTableDemoContainer,
+    RtlDataTableDemoContainer,
+    ScKbd,
+    ScLink,
     TocHeading,
     ComponentBadges,
     ScTypeset,
@@ -54,76 +62,93 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
           data table&apos;s parts render it, one attribute per element: each
           brings the look of the part it stands for (the Table&apos;s, the
           Input&apos;s, the Pagination&apos;s). The checkboxes are the
-          exception: they go on an <code>scCheckbox</code>. The provider holds
-          the table once, for the parts that need it: the filter, "select all",
-          the pagination, a tree grid. Add the parts for what you need: sorting,
-          filtering, selection, paging, column visibility, a tree.
+          exception: they go on an <code scTypeset>scCheckbox</code>. The
+          provider holds the table once, for the parts that need it: the filter,
+          "select all", the pagination, a tree grid. Add the parts for what you
+          need: sorting, filtering, selection, paging, column visibility, a
+          tree.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
 
-      <section class="space-y-3">
-        <h2 scTypeset appToc>How it works</h2>
-        <p class="text-sm">
-          <a
-            href="https://tanstack.com/table"
-            class="font-medium underline underline-offset-4"
-          >
-            TanStack Table
-          </a>
-          owns the logic and state; these parts render and wire it. Build the
-          table with TanStack, give it to
-          <code>scDataTableProvider</code>, and render it with the data
-          table&apos;s parts — no <code>scTable</code>, <code>scInput</code> or
-          <code>scPagination</code> beside them; the checkbox parts on an
-          <code>scCheckbox</code>. Icons stay in your template.
+      <section class="space-y-4">
+        <h2 scTypeset appToc>TanStack Table</h2>
+        <p>
+          <a scLink href="https://tanstack.com/table">TanStack Table</a>
+          keeps the state — sorting, filters, selection, the page, the columns
+          shown and pinned — and these parts render it and send your clicks
+          back. Register the features of the parts you use with
+          <code scTypeset>tableFeatures()</code>: TanStack only gives a table
+          the methods of its features. The parts are typed structurally, so they
+          don&apos;t pin a TanStack version.
         </p>
-        <ul class="text-muted-foreground list-inside list-disc text-sm">
+        <ul class="list-disc space-y-2 ps-6">
           <li>
-            Sort state and pinning with
-            <code>scDataTableHeaderCell</code>
-            and
-            <code>scDataTableCell</code>
+            Sorting: <code scTypeset>rowSortingFeature</code> and a sorted row
+            model, the sort button in the header cell.
           </li>
           <li>
-            Sorting with
-            <code>scDataTableSortButton</code>
+            Filtering: <code scTypeset>globalFilteringFeature</code> or
+            <code scTypeset>columnFilteringFeature</code> and a filtered row
+            model.
           </li>
           <li>
-            Selection with
-            <code>scDataTableSelectAll</code>
-            and
-            <code>scDataTableSelectRow</code>
+            Selection: <code scTypeset>rowSelectionFeature</code>; select all
+            covers the page (<code scTypeset>scope="all"</code>: every row).
           </li>
           <li>
-            Filtering with
-            <code>scDataTableGlobalFilter</code>
-            and
-            <code>scDataTableColumnFilter</code>
+            Pages: <code scTypeset>rowPaginationFeature</code> and a paginated
+            row model; the Pagination&apos;s parts inside
+            <code scTypeset>scDataTablePagination</code>.
           </li>
           <li>
-            Paging with
-            <code>scDataTablePagination</code>, the Pagination&apos;s parts
-            inside
+            Columns shown: <code scTypeset>columnVisibilityFeature</code> — a
+            Menu&apos;s checkbox items, or
+            <code scTypeset>scDataTableColumnVisibility</code> checkboxes in a
+            Popover.
           </li>
           <li>
-            Column visibility with
-            <code>scDataTableColumnVisibility</code>
-            checkboxes, e.g. in a
-            <code>scPopover</code>
+            Pinned columns: <code scTypeset>columnPinningFeature</code>; with
+            several on one side, column sizing gives their offsets.
           </li>
         </ul>
-        <p class="text-muted-foreground text-sm">
-          The parts are typed structurally, so they don't pin a TanStack
-          version. Install the npm package
-          <code>&#64;tanstack/angular-table</code>
-          alongside the library.
-        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Accessibility</h2>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            A sortable column&apos;s header says how it is sorted (<code
+              scTypeset
+              >aria-sort</code
+            >); its button sorts it, <kbd scKbd>Shift</kbd> + click adds it to
+            the sort.
+          </li>
+          <li>
+            Name every checkbox ("Select all", "Select row" or the row&apos;s
+            name), every filter, and the buttons of a row (a span with sr-only).
+          </li>
+          <li>The pagination is a navigation landmark: name it.</li>
+          <li>
+            A table wider than its box scrolls: make the box a named region that
+            takes focus (<code scTypeset>tabindex="0"</code>,
+            <code scTypeset>role="region"</code>,
+            <code scTypeset>aria-label</code>), so the keyboard scrolls it too —
+            the Pinned Columns example.
+          </li>
+          <li>
+            A change the page doesn&apos;t show — a copied id — said in a live
+            region.
+          </li>
+        </ul>
       </section>
 
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
+        <app-payments-data-table-demo-container />
         <app-featured-data-table-demo-container />
+        <app-pinned-data-table-demo-container />
+        <app-rtl-data-table-demo-container />
       </section>
 
       <section class="space-y-4">

@@ -27,9 +27,9 @@ import { SC_SELECT } from './select-tokens';
     '(pointermove)': 'onPointerMove()',
   },
 })
-export class ScSelectItem {
+export class ScSelectItem<T = unknown> {
   private readonly select = inject(SC_SELECT);
-  private readonly option = inject<Option<string>>(Option);
+  private readonly option = inject<Option<T>>(Option);
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly styles = injectStyle().select;
   private readonly onPointerMove = useActiveOption(this.option);

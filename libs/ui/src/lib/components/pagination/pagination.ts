@@ -97,7 +97,7 @@ export class ScPagination {
 
   /**
    * Changes the page size and goes back to page 1 — from a page-size picker
-   * of yours (a Select: `(valueChange)="pagination.changePageSize(+$event)"`).
+   * of yours (a Select: `(valueChange)="pagination.changePageSize($event)"`).
    */
   changePageSize(pageSize: number): void {
     if (pageSize <= 0 || pageSize === this.pageSize()) return;

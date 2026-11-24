@@ -2,7 +2,7 @@ import type { Combobox } from '@angular/aria/combobox';
 import { type ElementRef, InjectionToken } from '@angular/core';
 import type { ScSelect } from './select';
 
-export const SC_SELECT = new InjectionToken<ScSelect>('SC_SELECT');
+export const SC_SELECT = new InjectionToken<ScSelect<unknown>>('SC_SELECT');
 
 export interface ScSelectTriggerContext {
   readonly combobox: Combobox;
@@ -16,8 +16,8 @@ export const SC_SELECT_TRIGGER = new InjectionToken<ScSelectTriggerContext>(
 );
 
 /** A `{ value, label }` pair: the label shown for a value before the list has opened. */
-export interface ScSelectItemData {
-  value: string;
+export interface ScSelectItemData<T = string> {
+  value: T;
   label: string;
 }
 

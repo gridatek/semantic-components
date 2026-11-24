@@ -100,7 +100,7 @@ export class UsersTable {
   <nav scDataTablePagination #pagination="scPagination">
     <p scPaginationStatus>Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}</p>
     <!-- scPaginationList / scPaginationPrevious / scPaginationNext… as usual;
-       rows per page: a Select calling pagination.changePageSize(+$event) -->
+       rows per page: a Select calling pagination.changePageSize($event) -->
   </nav>
 </div>
 ```

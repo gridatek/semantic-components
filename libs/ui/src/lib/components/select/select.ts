@@ -49,8 +49,9 @@ const positions: ConnectedPosition[] = [
 
 /**
  * A choice among a short list of options, as Base UI's Select: a trigger
- * showing the value, a list in a popup. Its value is a string, bound with
- * `[formField]` or `[(value)]`. The popup opens below the trigger — above it
+ * showing the value, a list in a popup. Its value is the options' — a
+ * string, a number, an object (`T`) — bound with `[formField]` or
+ * `[(value)]`; `''` (the default) or `null` selects none. The popup opens below the trigger — above it
  * without room — as wide as the trigger. For a long list to filter, use a
  * Combobox.
  */
@@ -98,13 +99,16 @@ const positions: ConnectedPosition[] = [
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class ScSelect implements FormValueControl<string> {
+export class ScSelect<T = string> implements FormValueControl<T> {
   /** In a field: its label and trigger are the field's, spaced as its others. */
   private readonly inField = !!inject(SC_FIELD, { optional: true });
   readonly classInput = input<string>('', { alias: 'class' });
 
-  /** The selected option's value. Bind with `[formField]` or `[(value)]`. */
-  readonly value = model('');
+  /**
+   * The selected option's value. Bind with `[formField]` or `[(value)]`;
+   * none selected: `''` — the default, whatever `T` — or `null`.
+   */
+  readonly value = model<T>('' as T);
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly readonly = input(false, { transform: booleanAttribute });
   readonly required = input(false, { transform: booleanAttribute });
@@ -114,7 +118,7 @@ export class ScSelect implements FormValueControl<string> {
    * The options' labels, for showing the value before the list has first
    * opened (the options render only then). Optional.
    */
-  readonly items = input<readonly ScSelectItemData[]>([]);
+  readonly items = input<readonly ScSelectItemData<T>[]>([]);
 
   readonly trigger = contentChild(SC_SELECT_TRIGGER);
   private readonly label = contentChild(ScSelectLabel);
@@ -123,20 +127,23 @@ export class ScSelect implements FormValueControl<string> {
   private readonly portal = contentChild.required(ScSelectPortal);
 
   readonly open = computed(() => this.trigger()?.combobox.expanded() ?? false);
-  readonly hasValue = computed(() => this.value() !== '');
+  readonly hasValue = computed(() => {
+    const value: unknown = this.value();
+    return value !== '' && value !== null && value !== undefined;
+  });
 
   /** Where the popup opened: below the trigger, or above it. */
   readonly side = signal<ScSelectSide>('bottom');
   private readonly positions = positions;
 
   /** Labels of options seen so far, or given by `items`. */
-  private readonly labels = signal<ReadonlyMap<string, string>>(new Map());
+  private readonly labels = signal<ReadonlyMap<T, string>>(new Map());
   readonly selectedLabel = computed(() => {
     const value = this.value();
     return (
       this.items().find((item) => item.value === value)?.label ||
       this.labels().get(value) ||
-      value
+      (this.hasValue() ? String(value) : '')
     );
   });
 
@@ -149,7 +156,7 @@ export class ScSelect implements FormValueControl<string> {
     ),
   );
 
-  registerLabel(value: string, label: string): void {
+  registerLabel(value: T, label: string): void {
     // Untracked: items call this from an effect that must not depend on it.
     if (untracked(this.labels).get(value) === label) return;
     this.labels.update((labels) => new Map(labels).set(value, label));
@@ -162,7 +169,7 @@ export class ScSelect implements FormValueControl<string> {
   }
 
   /** Selects a value, closes the popup and returns focus to the trigger. */
-  select(value: string): void {
+  select(value: T): void {
     this.value.set(value);
     this.close();
   }

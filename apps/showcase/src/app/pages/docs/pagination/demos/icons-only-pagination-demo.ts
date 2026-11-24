@@ -67,8 +67,8 @@ import {
     >
       <div
         scSelect
-        [value]="'' + pagination.pageSize()"
-        (valueChange)="pagination.changePageSize(+$event)"
+        [value]="pagination.pageSize()"
+        (valueChange)="pagination.changePageSize($event)"
         class="flex-row items-center"
       >
         <div scSelectLabel>Rows per page</div>
@@ -81,7 +81,7 @@ import {
             <div scSelectList>
               <div scSelectGroup>
                 @for (size of sizes; track size) {
-                  <div scSelectItem [value]="'' + size">
+                  <div scSelectItem [value]="size">
                     <span scSelectItemText>{{ size }}</span>
                     <span scSelectItemIndicator><svg siCheckIcon></svg></span>
                   </div>

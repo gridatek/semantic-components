@@ -6,7 +6,11 @@ import { FeaturedDataTableDemo } from './featured-data-table-demo';
   selector: 'app-featured-data-table-demo-container',
   imports: [DemoContainer, FeaturedDataTableDemo],
   template: `
-    <app-demo-container title="Full Featured" [code]="code">
+    <app-demo-container
+      title="Full Featured"
+      demoUrl="/demos/data-table/featured-data-table-demo"
+      [code]="code"
+    >
       <app-featured-data-table-demo />
     </app-demo-container>
   `,
@@ -523,8 +527,8 @@ const SAMPLE_DATA: User[] = [
         >
           <div
             scSelect
-            [value]="'' + pagination.pageSize()"
-            (valueChange)="pagination.changePageSize(+$event)"
+            [value]="pagination.pageSize()"
+            (valueChange)="pagination.changePageSize($event)"
             class="flex-row items-center"
           >
             <div scSelectLabel>Rows per page</div>
@@ -537,7 +541,7 @@ const SAMPLE_DATA: User[] = [
                 <div scSelectList>
                   <div scSelectGroup>
                     @for (size of [5, 10, 20]; track size) {
-                      <div scSelectItem [value]="'' + size">
+                      <div scSelectItem [value]="size">
                         <span scSelectItemText>{{ size }}</span>
                         <span scSelectItemIndicator
                           ><svg siCheckIcon></svg

@@ -30,7 +30,7 @@ import { SC_SELECT } from './select-tokens';
 })
 export class ScSelectList {
   private readonly select = inject(SC_SELECT);
-  private readonly listbox = inject<Listbox<string>>(Listbox);
+  private readonly listbox = inject<Listbox<unknown>>(Listbox);
   private readonly widget = inject(ComboboxWidget);
   private readonly styles = injectStyle().select;
 
@@ -48,7 +48,9 @@ export class ScSelectList {
     // select → listbox
     effect(() => {
       const value = this.select.value();
-      untracked(() => this.listbox.value.set(value === '' ? [] : [value]));
+      untracked(() =>
+        this.listbox.value.set(this.select.hasValue() ? [value] : []),
+      );
     });
 
     // listbox → select

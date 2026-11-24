@@ -2172,6 +2172,27 @@ export const demosRoutes: Route[] = [
             (m) => m.FeaturedDataTableDemo,
           ),
       },
+      {
+        path: 'payments-data-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/data-table/demos/payments-data-table-demo').then(
+            (m) => m.PaymentsDataTableDemo,
+          ),
+      },
+      {
+        path: 'pinned-data-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/data-table/demos/pinned-data-table-demo').then(
+            (m) => m.PinnedDataTableDemo,
+          ),
+      },
+      {
+        path: 'rtl-data-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/data-table/demos/rtl-data-table-demo').then(
+            (m) => m.RtlDataTableDemo,
+          ),
+      },
     ],
   },
   {

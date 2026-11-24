@@ -160,13 +160,14 @@ export default class SelectPage {
       inputs: [
         {
           name: 'value',
-          type: 'string',
+          type: 'T (string by default)',
           default: "''",
-          description: 'The selected option’s value; empty: none.',
+          description:
+            "The selected option’s value — a string, a number, an object, as its options’; '' or null: none.",
         },
         {
           name: 'items',
-          type: '{ value: string; label: string }[]',
+          type: '{ value: T; label: string }[]',
           default: '[]',
           description:
             'The options’ labels, to show the value before the list has first opened.',
@@ -232,7 +233,7 @@ export default class SelectPage {
       inputs: [
         {
           name: 'value',
-          type: 'string',
+          type: 'T',
           default: '—',
           description: 'Its value: the select’s when chosen.',
         },
