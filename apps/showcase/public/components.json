@@ -997,15 +997,6 @@
     "category": "Forms"
   },
   {
-    "name": "Theme",
-    "path": "theme",
-    "description": "Theme management with mode switching and color scheme support.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Utilities",
-    "hidden": true
-  },
-  {
     "name": "Time Clock",
     "path": "time-clock",
     "description": "A time picked on a clock face — hour, minute, second — by pointer or keyboard, each pick moving on; 12 hours with AM/PM or 24 on two rings.",

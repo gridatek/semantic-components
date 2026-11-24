@@ -1,16 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  InjectionToken,
-  Service,
-  computed,
-  effect,
-  inject,
-  signal,
-} from '@angular/core';
+import { Service, computed, effect, inject, signal } from '@angular/core';
+import { SC_CONFIG } from '../../config/config';
 import { ScStorage } from '../../utils/storage/storage';
 
 export type ScThemeMode = 'light' | 'dark' | 'system';
 
+/** The theme's settings: the config's `theme` part. */
 export interface ScThemeConfig {
   defaultMode: ScThemeMode;
   defaultColorScheme: string;
@@ -27,15 +22,11 @@ const defaultConfig: ScThemeConfig = {
   colorSchemeStorageKey: 'sc-theme-color',
 };
 
-export const SC_THEME_CONFIG = new InjectionToken<Partial<ScThemeConfig>>(
-  'SC_THEME_CONFIG',
-);
-
 @Service()
 export class ScThemeManager {
   private readonly config = {
     ...defaultConfig,
-    ...inject(SC_THEME_CONFIG, { optional: true }),
+    ...inject(SC_CONFIG).theme,
   };
 
   private readonly storage = inject(ScStorage);

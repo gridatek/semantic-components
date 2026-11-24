@@ -5,7 +5,8 @@ Configurable theme management with mode switching (light/dark/system) and color 
 ## Architecture
 
 - **`ScThemeManager`** — Singleton service managing two independent axes: mode (light/dark/system) and color scheme. Handles persistence and system preference detection.
-- **`SC_THEME_CONFIG`** — Injection token for customizing defaults and storage keys.
+- **The config`s `theme`** — its defaults and storage keys: `provideSemanticComponents({ theme: { defaultMode: 'dark' } })`.
+- Documented in the Theming guide (`/docs/guides/theming`): dark mode, with a one-click toggle and a Light / Dark / System menu, and colour schemes. It has no component page: no part of its own.
 
 ## Usage
 
@@ -77,22 +78,23 @@ export class MyComponent {
 }
 ```
 
-### Custom configuration
+### Settings
+
+The config's `theme` part:
 
 ```typescript
-import { SC_THEME_CONFIG } from '@semantic-components/ui';
+import { provideSemanticComponents } from '@semantic-components/ui';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    {
-      provide: SC_THEME_CONFIG,
-      useValue: {
+    provideSemanticComponents({
+      theme: {
         defaultMode: 'dark',
         defaultColorScheme: 'blue',
         modeStorageKey: 'my-app-mode',
         colorSchemeStorageKey: 'my-app-color',
       },
-    },
+    }),
   ],
 });
 ```
@@ -115,9 +117,9 @@ Singleton service for theme state.
 | `toggleMode`     | none                  | Toggle between light and dark |
 | `setColorScheme` | `colorScheme: string` | Set the color scheme          |
 
-## SC_THEME_CONFIG
+## Settings (`theme`)
 
-Injection token for overriding defaults.
+The config's `theme` part (`ScThemeConfig`), every option optional.
 
 | Option                  | Type          | Default            | Description                    |
 | ----------------------- | ------------- | ------------------ | ------------------------------ |

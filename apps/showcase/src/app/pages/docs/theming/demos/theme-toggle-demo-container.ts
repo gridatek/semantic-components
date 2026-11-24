@@ -1,12 +1,32 @@
-import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { DemoContainer } from '../../../../components/demo-container/demo-container';
+import { ThemeToggleDemo } from './theme-toggle-demo';
+
+@Component({
+  selector: 'app-theme-toggle-demo-container',
+  imports: [DemoContainer, ThemeToggleDemo],
+  template: `
+    <app-demo-container
+      title="One click"
+      [code]="code"
+      demoUrl="/demos/theming/theme-toggle-demo"
+    >
+      <app-theme-toggle-demo />
+    </app-demo-container>
+  `,
+  host: { class: 'block w-full' },
+  encapsulation: ViewEncapsulation.None,
+})
+export class ThemeToggleDemoContainer {
+  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { ScButton, ScThemeManager } from '@semantic-components/ui';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 /** One click between light and dark: any button calling toggleMode(); its name follows the state. */
 @Component({
-  selector: 'app-basic-theme-toggle-demo',
+  selector: 'app-theme-toggle-demo',
   imports: [ScButton, SiSunIcon, SiMoonIcon],
-  template: `
+  template: \`
     <div class="flex items-center gap-4">
       <button
         scButton
@@ -26,10 +46,11 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
         Current: {{ themeManager.resolvedMode() }}
       </span>
     </div>
-  `,
+  \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class BasicThemeToggleDemo {
+export class ThemeToggleDemo {
   private readonly themeManager = inject(ScThemeManager);
+}`;
 }

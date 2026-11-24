@@ -6,6 +6,7 @@ import {
   makeEnvironmentProviders,
 } from '@angular/core';
 import type { ScStyle } from '@semantic-components/styles';
+import type { ScThemeConfig } from '../components/theme/theme-manager';
 import type { ScToasterConfig } from '../components/toast/toast-types';
 
 /**
@@ -23,6 +24,8 @@ import type { ScToasterConfig } from '../components/toast/toast-types';
 export interface ScConfig {
   /** The components' classes: a style from `@semantic-components/styles`; nova by default. */
   style?: ScStyle;
+  /** Light, dark or the system's at first, the colour scheme, where they are kept: `ScThemeManager`'s. */
+  theme?: Partial<ScThemeConfig>;
   toaster?: ScToasterConfig;
 }
 

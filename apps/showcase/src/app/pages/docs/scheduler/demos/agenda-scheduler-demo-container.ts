@@ -23,13 +23,13 @@ import {
   ScScheduler,
   ScSchedulerAgenda,
   ScSchedulerEvent,
+  type ScSchedulerEventData,
   ScSchedulerEventTemplate,
   ScSchedulerEventTime,
   ScSchedulerNext,
   ScSchedulerPrevious,
   ScSchedulerTitle,
   ScSchedulerToday,
-  type ScSchedulerEventData,
   type ScSchedulerView,
 } from '@semantic-components/ui';
 import {
@@ -115,9 +115,22 @@ function meetings(): Meeting[] {
   };
   return [
     { id: 'standup', title: 'Stand-up', ...at(0, '09:00', { minutes: 15 }) },
-    { id: 'review', title: 'Design review', ...at(0, '10:00', { minutes: 90 }) },
-    { id: 'conference', title: 'Conference', allDay: true, ...at(2, '00:00', { days: 2 }) },
-    { id: 'planning', title: 'Sprint planning', ...at(5, '14:00', { hours: 2 }) },
+    {
+      id: 'review',
+      title: 'Design review',
+      ...at(0, '10:00', { minutes: 90 }),
+    },
+    {
+      id: 'conference',
+      title: 'Conference',
+      allDay: true,
+      ...at(2, '00:00', { days: 2 }),
+    },
+    {
+      id: 'planning',
+      title: 'Sprint planning',
+      ...at(5, '14:00', { hours: 2 }),
+    },
     { id: 'retro', title: 'Retrospective', ...at(9, '17:00', { hours: 1 }) },
   ];
 }`;

@@ -23,6 +23,7 @@ import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScScheduler,
   ScSchedulerEvent,
+  type ScSchedulerEventData,
   ScSchedulerEventTemplate,
   ScSchedulerEventTime,
   ScSchedulerMonth,
@@ -33,9 +34,8 @@ import {
   ScSchedulerTimeGrid,
   ScSchedulerTitle,
   ScSchedulerToday,
-  ScSchedulerViewButton,
-  type ScSchedulerEventData,
   type ScSchedulerView,
+  ScSchedulerViewButton,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -139,10 +139,23 @@ function meetings(): Meeting[] {
     return { start, end: start.add(duration) };
   };
   return [
-    { id: 'standup', title: 'اجتماع الصباح', ...at(0, '09:00', { minutes: 30 }) },
-    { id: 'review', title: 'مراجعة التصميم', ...at(0, '11:00', { minutes: 90 }) },
+    {
+      id: 'standup',
+      title: 'اجتماع الصباح',
+      ...at(0, '09:00', { minutes: 30 }),
+    },
+    {
+      id: 'review',
+      title: 'مراجعة التصميم',
+      ...at(0, '11:00', { minutes: 90 }),
+    },
     { id: 'lunch', title: 'غداء الفريق', ...at(-1, '12:30', { hours: 1 }) },
-    { id: 'conference', title: 'مؤتمر', allDay: true, ...at(1, '00:00', { days: 2 }) },
+    {
+      id: 'conference',
+      title: 'مؤتمر',
+      allDay: true,
+      ...at(1, '00:00', { days: 2 }),
+    },
   ];
 }`;
 }

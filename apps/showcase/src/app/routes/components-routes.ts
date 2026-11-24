@@ -590,11 +590,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/textarea/textarea-page'),
       },
       {
-        path: 'theme',
-        title: 'Theme - Semantic Components',
-        loadComponent: () => import('../pages/docs/theme/theme-page'),
-      },
-      {
         path: 'time-picker',
         title: 'Time Picker - Semantic Components',
         loadComponent: () =>

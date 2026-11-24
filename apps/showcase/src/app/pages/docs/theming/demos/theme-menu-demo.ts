@@ -1,24 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { DemoContainer } from '../../../../components/demo-container/demo-container';
-import { MenuThemeDemo } from './menu-theme-demo';
-
-@Component({
-  selector: 'app-menu-theme-demo-container',
-  imports: [DemoContainer, MenuThemeDemo],
-  template: `
-    <app-demo-container
-      title="Menu"
-      demoUrl="/demos/theme/menu-theme-demo"
-      [code]="code"
-    >
-      <app-menu-theme-demo />
-    </app-demo-container>
-  `,
-  host: { class: 'block w-full' },
-  encapsulation: ViewEncapsulation.None,
-})
-export class MenuThemeDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation, inject } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import {
   ScButton,
   ScMenu,
@@ -41,7 +21,7 @@ import {
 
 /** Light, Dark or System (the OS's) in a menu: the mode is the radio group's value. */
 @Component({
-  selector: 'app-menu-theme-demo',
+  selector: 'app-theme-menu-demo',
   imports: [
     ScButton,
     ScMenu,
@@ -57,7 +37,7 @@ import {
     SiMoonIcon,
     SiSunIcon,
   ],
-  template: \`
+  template: `
     <div scMenuProvider alignment="end">
       <button scButton scMenuTrigger variant="outline" size="icon">
         @switch (themeManager.mode()) {
@@ -92,11 +72,11 @@ import {
         </div>
       </ng-template>
     </div>
-  \`,
+  `,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
-export class MenuThemeDemo {
+export class ThemeMenuDemo {
   private readonly themeManager = inject(ScThemeManager);
 
   private readonly modes: readonly { value: ScThemeMode; label: string }[] = [
@@ -109,5 +89,4 @@ export class MenuThemeDemo {
     const mode = this.modes.find((m) => m.value === value);
     if (mode) this.themeManager.setMode(mode.value);
   }
-}`;
 }

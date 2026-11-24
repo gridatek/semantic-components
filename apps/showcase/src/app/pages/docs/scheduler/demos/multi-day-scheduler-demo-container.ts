@@ -22,6 +22,7 @@ export class MultiDaySchedulerDemoContainer {
 import {
   ScScheduler,
   ScSchedulerEvent,
+  type ScSchedulerEventData,
   ScSchedulerEventTemplate,
   ScSchedulerEventTime,
   ScSchedulerMonth,
@@ -32,9 +33,8 @@ import {
   ScSchedulerTimeGrid,
   ScSchedulerTitle,
   ScSchedulerToday,
-  ScSchedulerViewButton,
-  type ScSchedulerEventData,
   type ScSchedulerView,
+  ScSchedulerViewButton,
 } from '@semantic-components/ui';
 import {
   SiChevronLeftIcon,
@@ -133,8 +133,18 @@ function meetings(): Meeting[] {
     return { start, end: start.add(duration) };
   };
   return [
-    { id: 'trip', title: 'Trip to Lisbon', allDay: true, ...at(-2, '00:00', { days: 6 }) },
-    { id: 'conference', title: 'Conference', allDay: true, ...at(1, '00:00', { days: 2 }) },
+    {
+      id: 'trip',
+      title: 'Trip to Lisbon',
+      allDay: true,
+      ...at(-2, '00:00', { days: 6 }),
+    },
+    {
+      id: 'conference',
+      title: 'Conference',
+      allDay: true,
+      ...at(1, '00:00', { days: 2 }),
+    },
     { id: 'launch', title: 'Night launch', ...at(0, '21:00', { hours: 6 }) },
     { id: 'standup', title: 'Stand-up', ...at(1, '09:00', { minutes: 15 }) },
     { id: 'review', title: 'Design review', ...at(1, '10:00', { hours: 1 }) },

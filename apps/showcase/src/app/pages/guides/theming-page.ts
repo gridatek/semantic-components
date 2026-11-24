@@ -3,10 +3,20 @@ import { RouterLink } from '@angular/router';
 import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { DocCode } from '../../components/doc-code/doc-code';
 import { TocHeading } from '../../components/toc/toc-heading';
+import { ThemeMenuDemoContainer } from '../docs/theming/demos/theme-menu-demo-container';
+import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-demo-container';
 
 @Component({
   selector: 'app-theming-page',
-  imports: [DocCode, RouterLink, ScLink, ScTypeset, TocHeading],
+  imports: [
+    DocCode,
+    RouterLink,
+    ScLink,
+    ScTypeset,
+    TocHeading,
+    ThemeToggleDemoContainer,
+    ThemeMenuDemoContainer,
+  ],
   template: `
     <div class="space-y-12">
       <div class="space-y-2">
@@ -68,9 +78,24 @@ import { TocHeading } from '../../components/toc/toc-heading';
         </p>
         <app-doc-code [code]="modeCode" language="angular-ts" />
         <p>
+          One click goes between light and dark; a menu keeps the way back to
+          the system&apos;s, which a single button loses.
+        </p>
+        <app-theme-toggle-demo-container />
+        <app-theme-menu-demo-container />
+        <p>
           The choice is kept in a cookie (and copied to localStorage), so a page
           rendered on the server is drawn in the right mode from the first
           paint. System needs the browser: the server draws it light.
+        </p>
+        <p>
+          Its defaults — the mode at first, the colour scheme, where they are
+          kept — are the config&apos;s
+          <code scTypeset>theme</code>:
+          <code scTypeset
+            >provideSemanticComponents(&#123; theme: &#123; defaultMode: 'dark'
+            &#125; &#125;)</code
+          >.
         </p>
       </section>
 

@@ -6233,41 +6233,20 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/theme',
+    path: 'demos/theming',
     children: [
       {
-        path: 'basic-theme-toggle-demo',
+        path: 'theme-toggle-demo',
         loadComponent: () =>
-          import('../pages/docs/theme/demos/basic-theme-toggle-demo').then(
-            (m) => m.BasicThemeToggleDemo,
+          import('../pages/docs/theming/demos/theme-toggle-demo').then(
+            (m) => m.ThemeToggleDemo,
           ),
       },
       {
-        path: 'menu-theme-demo',
+        path: 'theme-menu-demo',
         loadComponent: () =>
-          import('../pages/docs/theme/demos/menu-theme-demo').then(
-            (m) => m.MenuThemeDemo,
-          ),
-      },
-      {
-        path: 'theme-select-demo',
-        loadComponent: () =>
-          import('../pages/docs/theme/demos/theme-select-demo').then(
-            (m) => m.ThemeSelectDemo,
-          ),
-      },
-      {
-        path: 'navigation-theme-toggle-demo',
-        loadComponent: () =>
-          import('../pages/docs/theme/demos/navigation-theme-toggle-demo').then(
-            (m) => m.NavigationThemeToggleDemo,
-          ),
-      },
-      {
-        path: 'settings-panel-theme-toggle-demo',
-        loadComponent: () =>
-          import('../pages/docs/theme/demos/settings-panel-theme-toggle-demo').then(
-            (m) => m.SettingsPanelThemeToggleDemo,
+          import('../pages/docs/theming/demos/theme-menu-demo').then(
+            (m) => m.ThemeMenuDemo,
           ),
       },
     ],

@@ -179,11 +179,37 @@ function tasksAroundToday(): Task[] {
   const violet = 'var(--color-violet-600)';
   const amber = 'var(--color-amber-600)';
   return [
-    { id: 'write', title: 'Write the brief', color: blue, ...at(0, '09:00', { hours: 1 }) },
-    { id: 'review', title: 'Review designs', color: violet, ...at(0, '11:00', { minutes: 90 }) },
-    { id: 'call', title: 'Client call', color: amber, ...at(1, '10:00', { minutes: 45 }) },
-    { id: 'plan', title: 'Plan the sprint', color: blue, ...at(-1, '14:00', { hours: 2 }) },
-    { id: 'offsite', title: 'Offsite', color: violet, allDay: true, ...at(2, '00:00', { days: 2 }) },
+    {
+      id: 'write',
+      title: 'Write the brief',
+      color: blue,
+      ...at(0, '09:00', { hours: 1 }),
+    },
+    {
+      id: 'review',
+      title: 'Review designs',
+      color: violet,
+      ...at(0, '11:00', { minutes: 90 }),
+    },
+    {
+      id: 'call',
+      title: 'Client call',
+      color: amber,
+      ...at(1, '10:00', { minutes: 45 }),
+    },
+    {
+      id: 'plan',
+      title: 'Plan the sprint',
+      color: blue,
+      ...at(-1, '14:00', { hours: 2 }),
+    },
+    {
+      id: 'offsite',
+      title: 'Offsite',
+      color: violet,
+      allDay: true,
+      ...at(2, '00:00', { days: 2 }),
+    },
   ];
 }`;
 }
