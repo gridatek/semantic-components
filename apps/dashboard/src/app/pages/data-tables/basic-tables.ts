@@ -16,16 +16,13 @@ import {
   ScEmptyHeader,
   ScEmptyMedia,
   ScEmptyTitle,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
 } from '@semantic-components/ui';
 import {
+  ScDataTable,
+  ScDataTableBody,
   ScDataTableCell,
+  ScDataTableContainer,
+  ScDataTableHeader,
   ScDataTableHeaderCell,
   ScDataTableRow,
 } from '@semantic-components/ui/data-table';
@@ -69,14 +66,11 @@ const IMPORTS = [
   ScEmptyHeader,
   ScEmptyMedia,
   ScEmptyTitle,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
+  ScDataTable,
+  ScDataTableBody,
   ScDataTableCell,
+  ScDataTableContainer,
+  ScDataTableHeader,
   ScDataTableHeaderCell,
   ScDataTableRow,
   SiInboxIcon,
@@ -105,24 +99,24 @@ const IMPORTS = [
         </p>
       </div>
       <div scCardBody>
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th scTableHeaderCell scDataTableHeaderCell>
+                    <th scDataTableHeaderCell>
                       {{ header.column.columnDef.header }}
                     </th>
                   }
                 </tr>
               }
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
+                <tr scDataTableRow [row]="row">
                   @for (cell of row.getVisibleCells(); track cell.id) {
-                    <td scTableCell scDataTableCell>
+                    <td scDataTableCell>
                       <app-staff-cell
                         [column]="cell.column.id"
                         [member]="row.original"
@@ -131,9 +125,9 @@ const IMPORTS = [
                   }
                 </tr>
               } @empty {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   <td
-                    scTableCell
+                    scDataTableCell
                     [attr.colspan]="table.getAllLeafColumns().length"
                   >
                     <div scEmpty>
@@ -202,24 +196,24 @@ export class BasicTablePage {
         </p>
       </div>
       <div scCardBody>
-        <div scTableContainer class="text-xs [&_td]:py-1 [&_th]:h-8">
-          <table scTable>
-            <thead scTableHeader>
+        <div scDataTableContainer class="text-xs [&_td]:py-1 [&_th]:h-8">
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th scTableHeaderCell scDataTableHeaderCell>
+                    <th scDataTableHeaderCell>
                       {{ header.column.columnDef.header }}
                     </th>
                   }
                 </tr>
               }
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
+                <tr scDataTableRow [row]="row">
                   @for (cell of row.getVisibleCells(); track cell.id) {
-                    <td scTableCell scDataTableCell>
+                    <td scDataTableCell>
                       <app-staff-cell
                         [column]="cell.column.id"
                         [member]="row.original"
@@ -228,9 +222,9 @@ export class BasicTablePage {
                   }
                 </tr>
               } @empty {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   <td
-                    scTableCell
+                    scDataTableCell
                     [attr.colspan]="table.getAllLeafColumns().length"
                   >
                     <div scEmpty>
@@ -301,28 +295,28 @@ export class DenseTablePage {
       <div scCardBody>
         <div
           i18n-aria-label="@@dataTables.basicTables.teamScrollable"
-          scTableContainer
+          scDataTableContainer
           tabindex="0"
           aria-label="Team, scrollable"
           class="[&_thead]:bg-card max-h-[28rem] overflow-y-auto [&_thead]:sticky [&_thead]:top-0 [&_thead]:z-10"
         >
-          <table scTable>
-            <thead scTableHeader>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th scTableHeaderCell scDataTableHeaderCell>
+                    <th scDataTableHeaderCell>
                       {{ header.column.columnDef.header }}
                     </th>
                   }
                 </tr>
               }
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
+                <tr scDataTableRow [row]="row">
                   @for (cell of row.getVisibleCells(); track cell.id) {
-                    <td scTableCell scDataTableCell>
+                    <td scDataTableCell>
                       <app-staff-cell
                         [column]="cell.column.id"
                         [member]="row.original"
@@ -331,9 +325,9 @@ export class DenseTablePage {
                   }
                 </tr>
               } @empty {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   <td
-                    scTableCell
+                    scDataTableCell
                     [attr.colspan]="table.getAllLeafColumns().length"
                   >
                     <div scEmpty>
@@ -399,24 +393,24 @@ export class StickyTablePage {
         </p>
       </div>
       <div scCardBody>
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th scTableHeaderCell scDataTableHeaderCell>
+                    <th scDataTableHeaderCell>
                       {{ header.column.columnDef.header }}
                     </th>
                   }
                 </tr>
               }
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
+                <tr scDataTableRow [row]="row">
                   @for (cell of row.getVisibleCells(); track cell.id) {
-                    <td scTableCell scDataTableCell>
+                    <td scDataTableCell>
                       <app-staff-cell
                         [column]="cell.column.id"
                         [member]="row.original"
@@ -425,9 +419,9 @@ export class StickyTablePage {
                   }
                 </tr>
               } @empty {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   <td
-                    scTableCell
+                    scDataTableCell
                     [attr.colspan]="table.getAllLeafColumns().length"
                   >
                     <div scEmpty>

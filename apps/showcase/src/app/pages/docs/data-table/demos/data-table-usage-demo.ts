@@ -7,18 +7,13 @@ import {
   tableFeatures,
 } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
-  ScFrame,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-} from '@semantic-components/ui';
-import {
+  ScDataTable,
+  ScDataTableBody,
   ScDataTableCell,
+  ScDataTableContainer,
+  ScDataTableHeader,
   ScDataTableHeaderCell,
   ScDataTableRow,
   ScDataTableSortButton,
@@ -56,13 +51,6 @@ const columns = columnHelper.columns([
   selector: 'app-data-table-usage-demo',
   imports: [
     ScFrame,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     ScDataTableCell,
     ScDataTableHeaderCell,
     ScDataTableRow,
@@ -70,19 +58,19 @@ const columns = columnHelper.columns([
     SiArrowDownIcon,
     SiArrowUpIcon,
     SiChevronsUpDownIcon,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
   ],
   template: `
-    <div scTableContainer scFrame class="w-full max-w-lg">
-      <table scTable>
-        <thead scTableHeader>
+    <div scDataTableContainer scFrame class="w-full max-w-lg">
+      <table scDataTable>
+        <thead scDataTableHeader>
           @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
-            <tr scTableRow>
+            <tr scDataTableRow>
               @for (header of headerGroup.headers; track header.id) {
-                <th
-                  scTableHeaderCell
-                  scDataTableHeaderCell
-                  [column]="header.column"
-                >
+                <th scDataTableHeaderCell [column]="header.column">
                   @if (header.column.getCanSort()) {
                     <button
                       scDataTableSortButton
@@ -112,14 +100,14 @@ const columns = columnHelper.columns([
             </tr>
           }
         </thead>
-        <tbody scTableBody>
+        <tbody scDataTableBody>
           @for (row of table.getRowModel().rows; track row.id) {
-            <tr scTableRow scDataTableRow [row]="row">
-              <td scTableCell scDataTableCell class="capitalize">
+            <tr scDataTableRow [row]="row">
+              <td scDataTableCell class="capitalize">
                 {{ row.original.status }}
               </td>
-              <td scTableCell scDataTableCell>{{ row.original.email }}</td>
-              <td scTableCell scDataTableCell class="text-end font-medium">
+              <td scDataTableCell>{{ row.original.email }}</td>
+              <td scDataTableCell class="text-end font-medium">
                 {{ amount.format(row.original.amount) }}
               </td>
             </tr>

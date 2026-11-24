@@ -4,7 +4,7 @@ import { syncDataTableCheckbox } from './data-table-checkbox';
 import type { ScDataTableHideableColumn } from './data-table-types';
 
 /**
- * Shows/hides a column. Works alone or with `scCheckbox`.
+ * Shows/hides a column. On an `scCheckbox`.
  *
  * ```html
  * <input type="checkbox" scCheckbox scDataTableColumnVisibility [column]="column" />

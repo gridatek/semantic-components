@@ -1,12 +1,6 @@
-import {
-  Directive,
-  ElementRef,
-  computed,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
-import { cn } from 'cn';
+import { Directive, ElementRef, computed, inject, signal } from '@angular/core';
+import { ScTable } from '@semantic-components/ui';
+import { ScDataTableProvider } from './data-table-provider';
 import type {
   ScDataTableTreePosition,
   ScDataTableTreeRow,
@@ -18,19 +12,22 @@ import type {
  * tab stop, the rows below it — ↑/↓ between them, → opens a row or goes into
  * it, ← closes it or goes up to its parent (mirrored in right-to-left), Home
  * and End, Space selects, Enter opens or closes. Each `scDataTableRow` says
- * its level, its place and whether it is open.
+ * its level, its place and whether it is open. In the Table's look; its table
+ * from `scDataTableProvider`.
  *
  * ```html
- * <table scTable scDataTableTreeGrid [table]="table" aria-label="Files">…</table>
+ * <div scDataTableProvider [table]="table">
+ *   <table scDataTableTreeGrid aria-label="Files">…</table>
+ * </div>
  * ```
  */
 @Directive({
   selector: 'table[scDataTableTreeGrid]',
   exportAs: 'scDataTableTreeGrid',
+  hostDirectives: [{ directive: ScTable, inputs: ['class'] }],
   host: {
     role: 'treegrid',
     '[attr.aria-multiselectable]': 'selectable() || null',
-    '[class]': 'class()',
     '(keydown)': 'onKeydown($event)',
   },
 })
@@ -38,8 +35,8 @@ export class ScDataTableTreeGrid {
   private readonly element =
     inject<ElementRef<HTMLTableElement>>(ElementRef).nativeElement;
 
-  readonly table = input.required<ScDataTableTreeTable>();
-  readonly classInput = input<string>('', { alias: 'class' });
+  private readonly table = inject(ScDataTableProvider)
+    .table as () => ScDataTableTreeTable;
 
   /** The rows shown, in order. */
   readonly rows = computed(() => this.table().getRowModel().rows);
@@ -71,8 +68,6 @@ export class ScDataTableTreeGrid {
   });
 
   private readonly elements = new Map<string, HTMLElement>();
-
-  private readonly class = computed(() => cn(this.classInput()));
 
   /** A row's element, to focus it. */
   register(id: string, element: HTMLElement): () => void {

@@ -35,8 +35,8 @@ const DAY_WIDTH: Record<ScGanttScaleUnit, number> = {
  * `(dateChange)` / `(progressChange)`, which your data applies.
  *
  * ```html
- * <div scGantt [from]="from" [to]="to" scale="day">
- *   <table scTable scDataTableTreeGrid [table]="table" aria-label="Plan">…</table>
+ * <div scGantt scDataTableProvider [table]="table" [from]="from" [to]="to" scale="day">
+ *   <table scDataTableTreeGrid aria-label="Plan">…</table>
  * </div>
  * ```
  */

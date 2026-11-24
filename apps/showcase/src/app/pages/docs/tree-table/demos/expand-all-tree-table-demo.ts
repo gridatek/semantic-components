@@ -7,16 +7,13 @@ import {
 } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-} from '@semantic-components/ui';
-import {
+  ScDataTableBody,
+  ScDataTableCell,
   ScDataTableExpand,
   ScDataTableExpandAll,
+  ScDataTableHeader,
+  ScDataTableHeaderCell,
+  ScDataTableProvider,
   ScDataTableRow,
   ScDataTableTreeCell,
   ScDataTableTreeGrid,
@@ -84,12 +81,7 @@ const FILES: FileNode[] = [
 @Component({
   selector: 'app-expand-all-tree-table-demo',
   imports: [
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
+    ScDataTableProvider,
     ScDataTableExpand,
     ScDataTableExpandAll,
     ScDataTableRow,
@@ -99,47 +91,53 @@ const FILES: FileNode[] = [
     SiChevronsUpDownIcon,
     SiFileIcon,
     SiFolderIcon,
+    ScDataTableHeader,
+    ScDataTableBody,
+    ScDataTableHeaderCell,
+    ScDataTableCell,
   ],
   template: `
-    <div class="flex justify-end">
-      <button scDataTableExpandAll [table]="table">
-        <svg siChevronsUpDownIcon></svg>
-        {{ table.getIsAllRowsExpanded() ? 'Collapse all' : 'Expand all' }}
-      </button>
-    </div>
-    <table scTable scDataTableTreeGrid [table]="table" aria-label="Files">
-      <thead scTableHeader>
-        <tr scTableRow>
-          <th scTableHeaderCell>Name</th>
-          <th scTableHeaderCell>Size</th>
-          <th scTableHeaderCell>Modified</th>
-        </tr>
-      </thead>
-      <tbody scTableBody>
-        @for (row of table.getRowModel().rows; track row.id) {
-          <tr scTableRow scDataTableRow [row]="row">
-            <td scTableCell>
-              <div scDataTableTreeCell [row]="row">
-                <button scDataTableExpand [row]="row">
-                  <svg siChevronRightIcon></svg>
-                  <span class="sr-only">Open {{ row.original.name }}</span>
-                </button>
-                @if (row.original.children) {
-                  <svg siFolderIcon></svg>
-                } @else {
-                  <svg siFileIcon></svg>
-                }
-                <span class="truncate">{{ row.original.name }}</span>
-              </div>
-            </td>
-            <td scTableCell>{{ row.original.size }}</td>
-            <td scTableCell>{{ row.original.modified }}</td>
+    <div scDataTableProvider [table]="table" class="flex flex-col gap-4">
+      <div class="flex justify-end">
+        <button scDataTableExpandAll>
+          <svg siChevronsUpDownIcon></svg>
+          {{ table.getIsAllRowsExpanded() ? 'Collapse all' : 'Expand all' }}
+        </button>
+      </div>
+      <table scDataTableTreeGrid aria-label="Files">
+        <thead scDataTableHeader>
+          <tr scDataTableRow>
+            <th scDataTableHeaderCell>Name</th>
+            <th scDataTableHeaderCell>Size</th>
+            <th scDataTableHeaderCell>Modified</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody scDataTableBody>
+          @for (row of table.getRowModel().rows; track row.id) {
+            <tr scDataTableRow [row]="row">
+              <td scDataTableCell>
+                <div scDataTableTreeCell [row]="row">
+                  <button scDataTableExpand [row]="row">
+                    <svg siChevronRightIcon></svg>
+                    <span class="sr-only">Open {{ row.original.name }}</span>
+                  </button>
+                  @if (row.original.children) {
+                    <svg siFolderIcon></svg>
+                  } @else {
+                    <svg siFileIcon></svg>
+                  }
+                  <span class="truncate">{{ row.original.name }}</span>
+                </div>
+              </td>
+              <td scDataTableCell>{{ row.original.size }}</td>
+              <td scDataTableCell>{{ row.original.modified }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   `,
-  host: { class: 'flex w-full max-w-2xl flex-col gap-4' },
+  host: { class: 'block w-full max-w-2xl' },
   encapsulation: ViewEncapsulation.None,
 })
 export class ExpandAllTreeTableDemo {

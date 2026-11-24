@@ -38,7 +38,6 @@ import {
   ScCheckbox,
   ScField,
   ScFrame,
-  ScInput,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -46,7 +45,6 @@ import {
   ScMenuProvider,
   ScMenuSeparator,
   ScMenuTrigger,
-  ScPagination,
   ScPaginationFirst,
   ScPaginationItem,
   ScPaginationLast,
@@ -69,20 +67,18 @@ import {
   ScSelectPortal,
   ScSelectTrigger,
   ScSelectValue,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
 } from '@semantic-components/ui';
 import {
+  ScDataTable,
+  ScDataTableBody,
   ScDataTableCell,
   ScDataTableColumnVisibility,
+  ScDataTableContainer,
   ScDataTableGlobalFilter,
+  ScDataTableHeader,
   ScDataTableHeaderCell,
   ScDataTablePagination,
+  ScDataTableProvider,
   ScDataTableRow,
   ScDataTableSelectAll,
   ScDataTableSelectRow,
@@ -259,12 +255,12 @@ const SAMPLE_DATA: User[] = [
 @Component({
   selector: 'app-featured-data-table-demo',
   imports: [
+    ScCheckbox,
+    ScDataTableProvider,
     SiChevronDownIcon,
     SiCheckIcon,
     ScBadge,
     ScButton,
-    ScCheckbox,
-    ScInput,
     ScMenu,
     ScMenuContent,
     ScMenuItem,
@@ -272,7 +268,6 @@ const SAMPLE_DATA: User[] = [
     ScMenuProvider,
     ScMenuSeparator,
     ScMenuTrigger,
-    ScPagination,
     ScPopover,
     ScPopoverPortal,
     ScPopoverProvider,
@@ -300,13 +295,6 @@ const SAMPLE_DATA: User[] = [
     ScSelectValue,
     ScPaginationPrevious,
     ScFrame,
-    ScTable,
-    ScTableContainer,
-    ScTableBody,
-    ScTableCell,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     ScDataTableCell,
     ScDataTableColumnVisibility,
     ScDataTableGlobalFilter,
@@ -329,14 +317,16 @@ const SAMPLE_DATA: User[] = [
     SiEyeIcon,
     SiTrash2Icon,
     ScField,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
   ],
   template: \`
-    <div class="w-full max-w-4xl space-y-4">
+    <div scDataTableProvider [table]="table" class="w-full max-w-4xl space-y-4">
       <div class="flex items-center justify-between gap-2">
         <input
-          scInput
           scDataTableGlobalFilter
-          [table]="table"
           placeholder="Search all columns..."
           aria-label="Search users"
           class="max-w-sm"
@@ -365,20 +355,16 @@ const SAMPLE_DATA: User[] = [
         </div>
       </div>
 
-      <div scTableContainer scFrame>
-        <table scTable>
-          <thead scTableHeader>
+      <div scDataTableContainer scFrame>
+        <table scDataTable>
+          <thead scDataTableHeader>
             @for (
               headerGroup of table.getHeaderGroups();
               track headerGroup.id
             ) {
-              <tr scTableRow>
+              <tr scDataTableRow>
                 @for (header of headerGroup.headers; track header.id) {
-                  <th
-                    scTableHeaderCell
-                    scDataTableHeaderCell
-                    [column]="header.column"
-                  >
+                  <th scDataTableHeaderCell [column]="header.column">
                     @switch (header.column.id) {
                       @case ('select') {
                         <label scField orientation="horizontal">
@@ -387,7 +373,6 @@ const SAMPLE_DATA: User[] = [
                             scCheckbox
                             scDataTableSelectAll
                             aria-label="Select all rows"
-                            [table]="table"
                           />
                         </label>
                       }
@@ -420,11 +405,11 @@ const SAMPLE_DATA: User[] = [
               </tr>
             }
           </thead>
-          <tbody scTableBody>
+          <tbody scDataTableBody>
             @for (row of table.getRowModel().rows; track row.id) {
-              <tr scTableRow scDataTableRow [row]="row">
+              <tr scDataTableRow [row]="row">
                 @for (cell of row.getVisibleCells(); track cell.id) {
-                  <td scTableCell scDataTableCell [column]="cell.column">
+                  <td scDataTableCell [column]="cell.column">
                     @switch (cell.column.id) {
                       @case ('select') {
                         <label scField orientation="horizontal">
@@ -508,9 +493,9 @@ const SAMPLE_DATA: User[] = [
                 }
               </tr>
             } @empty {
-              <tr scTableRow>
+              <tr scDataTableRow>
                 <td
-                  scTableCell
+                  scDataTableCell
                   [attr.colspan]="table.getVisibleLeafColumns().length"
                   class="text-muted-foreground h-24 text-center"
                 >
@@ -531,10 +516,8 @@ const SAMPLE_DATA: User[] = [
         </div>
 
         <nav
-          scPagination
           scDataTablePagination
           #pagination="scPagination"
-          [table]="table"
           aria-label="Users pages"
           class="mx-0 w-auto flex-wrap items-center gap-4"
         >

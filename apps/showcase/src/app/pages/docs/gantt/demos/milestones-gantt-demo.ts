@@ -6,16 +6,13 @@ import {
   tableFeatures,
 } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
-  ScFrame,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-} from '@semantic-components/ui';
-import {
+  ScDataTableBody,
+  ScDataTableCell,
+  ScDataTableHeader,
+  ScDataTableHeaderCell,
+  ScDataTableProvider,
   ScDataTableRow,
   ScDataTableTreeGrid,
 } from '@semantic-components/ui/data-table';
@@ -100,13 +97,8 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-milestones-gantt-demo',
   imports: [
+    ScDataTableProvider,
     ScFrame,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     ScDataTableRow,
     ScDataTableTreeGrid,
     ScGantt,
@@ -115,15 +107,27 @@ const columns = columnHelper.columns([
     ScGanttMarker,
     ScGanttScale,
     ScGanttTimeline,
+    ScDataTableHeader,
+    ScDataTableBody,
+    ScDataTableHeaderCell,
+    ScDataTableCell,
   ],
   template: `
-    <div scGantt readonly [from]="from" [to]="to" scFrame>
-      <table scTable scDataTableTreeGrid [table]="table" aria-label="Rollout">
-        <thead scTableHeader>
-          <tr scTableRow>
-            <th scTableHeaderCell class="align-bottom">Step</th>
-            <th scTableHeaderCell class="align-bottom">Owner</th>
-            <th scTableHeaderCell scGanttTimeline>
+    <div
+      scGantt
+      scDataTableProvider
+      [table]="table"
+      readonly
+      [from]="from"
+      [to]="to"
+      scFrame
+    >
+      <table scDataTableTreeGrid aria-label="Rollout">
+        <thead scDataTableHeader>
+          <tr scDataTableRow>
+            <th scDataTableHeaderCell class="align-bottom">Step</th>
+            <th scDataTableHeaderCell class="align-bottom">Owner</th>
+            <th scDataTableHeaderCell scGanttTimeline>
               <span class="sr-only">Timeline</span>
               <div scGanttScale>
                 <svg scGanttLinks></svg>
@@ -132,12 +136,12 @@ const columns = columnHelper.columns([
             </th>
           </tr>
         </thead>
-        <tbody scTableBody>
+        <tbody scDataTableBody>
           @for (row of table.getRowModel().rows; track row.id) {
-            <tr scTableRow scDataTableRow [row]="row">
-              <td scTableCell>{{ row.original.name }}</td>
-              <td scTableCell>{{ row.original.owner }}</td>
-              <td scTableCell scGanttTimeline>
+            <tr scDataTableRow [row]="row">
+              <td scDataTableCell>{{ row.original.name }}</td>
+              <td scDataTableCell>{{ row.original.owner }}</td>
+              <td scDataTableCell scGanttTimeline>
                 <div
                   scGanttBar
                   [id]="row.original.id"

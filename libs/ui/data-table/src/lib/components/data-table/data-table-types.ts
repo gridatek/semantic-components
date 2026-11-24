@@ -106,3 +106,27 @@ export function dataTableColumnLabel(
   const header = column.columnDef.header;
   return typeof header === 'string' && header ? header : column.id;
 }
+
+/**
+ * The table `scDataTableProvider` holds: TanStack's. Each part calls only the
+ * methods of its feature, so all are optional here — register the features
+ * of the parts you use (pagination for `scDataTablePagination`, selection
+ * for `scDataTableSelectAll`…).
+ */
+export interface ScDataTableTable {
+  getRowModel?(): { rows: readonly object[] };
+  /** Its state, one atom per feature's (`globalFilter`, `pagination`…). */
+  atoms?: object;
+  getRowCount?(): number;
+  setPageIndex?(pageIndex: number): void;
+  setPageSize?(pageSize: number): void;
+  setGlobalFilter?(value: string): void;
+  getIsAllRowsExpanded?(): boolean;
+  toggleAllRowsExpanded?(expanded?: boolean): void;
+  getIsAllPageRowsSelected?(): boolean;
+  getIsSomePageRowsSelected?(): boolean;
+  toggleAllPageRowsSelected?(value?: boolean): void;
+  getIsAllRowsSelected?(): boolean;
+  getIsSomeRowsSelected?(): boolean;
+  toggleAllRowsSelected?(value?: boolean): void;
+}

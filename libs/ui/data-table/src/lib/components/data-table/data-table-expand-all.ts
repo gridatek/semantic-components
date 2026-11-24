@@ -1,15 +1,17 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { injectStyle } from '@semantic-components/ui';
 import type { ScButtonVariants } from '@semantic-components/ui';
 import { cn } from 'cn';
+import { ScDataTableProvider } from './data-table-provider';
 import type { ScDataTableExpandAllTable } from './data-table-types';
 
 /**
  * Opens every row, or closes them all when all are open — `aria-expanded`
- * says which. Your icon and its name inside.
+ * says which. Your icon and its name inside; the table from
+ * `scDataTableProvider`.
  *
  * ```html
- * <button scDataTableExpandAll [table]="table">Expand all</button>
+ * <button scDataTableExpandAll>Expand all</button>
  * ```
  */
 @Directive({
@@ -23,8 +25,9 @@ import type { ScDataTableExpandAllTable } from './data-table-types';
 })
 export class ScDataTableExpandAll {
   private readonly buttonStyles = injectStyle().button;
+  private readonly table = inject(ScDataTableProvider)
+    .table as () => ScDataTableExpandAllTable;
 
-  readonly table = input.required<ScDataTableExpandAllTable>();
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
   readonly size = input<ScButtonVariants['size']>('sm');

@@ -1,8 +1,15 @@
 export * from './data-table-types';
 export { dataTablePinnedClasses } from './data-table-pinning';
+export { ScDataTableProvider } from './data-table-provider';
+export { ScDataTableContainer } from './data-table-container';
+export { ScDataTable } from './data-table';
+export { ScDataTableCaption } from './data-table-caption';
+export { ScDataTableHeader } from './data-table-header';
+export { ScDataTableBody } from './data-table-body';
+export { ScDataTableFooter } from './data-table-footer';
+export { ScDataTableRow } from './data-table-row';
 export { ScDataTableHeaderCell } from './data-table-header-cell';
 export { ScDataTableCell } from './data-table-cell';
-export { ScDataTableRow } from './data-table-row';
 export { ScDataTableSortButton } from './data-table-sort-button';
 export { ScDataTableSelectAll } from './data-table-select-all';
 export { ScDataTableSelectRow } from './data-table-select-row';

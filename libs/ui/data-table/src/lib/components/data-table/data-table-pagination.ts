@@ -1,37 +1,29 @@
-import {
-  DestroyRef,
-  Directive,
-  computed,
-  effect,
-  inject,
-  input,
-} from '@angular/core';
+import { DestroyRef, Directive, computed, effect, inject } from '@angular/core';
 import { ScPagination, bindInput } from '@semantic-components/ui';
-import { cn } from 'cn';
+import { ScDataTableProvider } from './data-table-provider';
 import type { ScDataTablePaginationTable } from './data-table-types';
 
 /**
- * Connects an `scPagination` to the table: page, page size and row count come
- * from the table, and page changes go back to it. Compose the pagination's
- * parts (buttons, page links, size select) as usual.
+ * The table's pagination: the Pagination, its page, page size and row count
+ * from the table (`scDataTableProvider`'s), its page changes back to it.
+ * Compose the Pagination's parts inside as usual; `#pagination="scPagination"`
+ * reads its state.
  *
  * ```html
- * <nav scPagination scDataTablePagination [table]="table">…</nav>
+ * <nav scDataTablePagination aria-label="Pages">…</nav>
  * ```
  */
 @Directive({
-  selector: '[scPagination][scDataTablePagination]',
-  host: {
-    '[class]': 'class()',
-  },
+  selector: 'nav[scDataTablePagination], div[scDataTablePagination]',
+  hostDirectives: [
+    { directive: ScPagination, inputs: ['class', 'siblings', 'boundaries'] },
+  ],
 })
 export class ScDataTablePagination {
-  readonly table = input.required<ScDataTablePaginationTable>();
-  readonly classInput = input<string>('', { alias: 'class' });
+  private readonly table = inject(ScDataTableProvider)
+    .table as () => ScDataTablePaginationTable;
 
   private readonly state = computed(() => this.table().atoms.pagination.get());
-
-  private readonly class = computed(() => cn(this.classInput()));
 
   constructor() {
     const pagination = inject(ScPagination, { self: true });
@@ -42,7 +34,6 @@ export class ScDataTablePagination {
       pagination.totalItems,
       computed(() => this.table().getRowCount()),
     );
-
     const subscription = pagination.change.subscribe(({ page, pageSize }) => {
       const table = this.table();
       if (pageSize !== this.state().pageSize) table.setPageSize(pageSize);

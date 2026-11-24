@@ -1,31 +1,31 @@
 import { Directive, computed, input } from '@angular/core';
-import { cn } from 'cn';
+import { ScInput } from '@semantic-components/ui';
 import type { ScDataTableFilterableColumn } from './data-table-types';
 
 /**
- * Filters one column as you type (empty clears it). Use with `scInput`; give
- * it a name, e.g. `[attr.aria-label]="'Filter ' + header.column.id"`.
+ * Filters one column as you type (empty clears it): an input in the Input's
+ * look. Give it a name, e.g. `[attr.aria-label]="'Filter ' + header.column.id"`.
  *
  * ```html
- * <input scInput scDataTableColumnFilter [column]="header.column" />
+ * <input scDataTableColumnFilter [column]="header.column" />
  * ```
  */
 @Directive({
   selector: 'input[scDataTableColumnFilter]',
+  hostDirectives: [
+    { directive: ScInput, inputs: ['class', 'id', 'aria-describedby'] },
+  ],
   host: {
     '[value]': 'value()',
     '(input)': 'onInput($event)',
-    '[class]': 'class()',
   },
 })
 export class ScDataTableColumnFilter {
   readonly column = input.required<ScDataTableFilterableColumn>();
-  readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly value = computed(() =>
     String(this.column().getFilterValue() ?? ''),
   );
-  private readonly class = computed(() => cn(this.classInput()));
 
   private onInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;

@@ -19,27 +19,23 @@ import {
   ScButton,
   ScCard,
   ScCardBody,
-  ScInput,
   ScLink,
-  ScPagination,
   ScPaginationItem,
   ScPaginationList,
   ScPaginationNext,
   ScPaginationPrevious,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
   ScToaster,
 } from '@semantic-components/ui';
 import {
+  ScDataTable,
+  ScDataTableBody,
   ScDataTableCell,
+  ScDataTableContainer,
   ScDataTableGlobalFilter,
+  ScDataTableHeader,
   ScDataTableHeaderCell,
   ScDataTablePagination,
+  ScDataTableProvider,
   ScDataTableRow,
   ScDataTableSortButton,
 } from '@semantic-components/ui/data-table';
@@ -95,26 +91,18 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-blog-manage-page',
   imports: [
+    ScDataTableProvider,
     NgOptimizedImage,
     RouterLink,
     ScBadge,
     ScButton,
     ScCard,
     ScCardBody,
-    ScInput,
     ScLink,
-    ScPagination,
     ScPaginationItem,
     ScPaginationList,
     ScPaginationNext,
     ScPaginationPrevious,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     ScDataTableCell,
     ScDataTableGlobalFilter,
     ScDataTableHeaderCell,
@@ -131,6 +119,10 @@ const columns = columnHelper.columns([
     SiPlusIcon,
     SiTrash2Icon,
     PageHeader,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
   ],
   template: `
     <app-page-header
@@ -145,29 +137,28 @@ const columns = columnHelper.columns([
     </app-page-header>
 
     <div scCard>
-      <div scCardBody class="flex flex-col gap-4">
+      <div
+        scCardBody
+        scDataTableProvider
+        [table]="table"
+        class="flex flex-col gap-4"
+      >
         <input
           i18n-aria-label="@@blog.manage.searchPosts"
           i18n-placeholder="@@blog.manage.searchPosts2"
-          scInput
           scDataTableGlobalFilter
-          [table]="table"
           type="search"
           placeholder="Search posts…"
           aria-label="Search posts"
           class="max-w-sm"
         />
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th
-                      scTableHeaderCell
-                      scDataTableHeaderCell
-                      [column]="header.column"
-                    >
+                    <th scDataTableHeaderCell [column]="header.column">
                       <button
                         scDataTableSortButton
                         #sort="scDataTableSortButton"
@@ -190,7 +181,7 @@ const columns = columnHelper.columns([
                   }
                   <th
                     i18n="@@blog.manage.actions"
-                    scTableHeaderCell
+                    scDataTableHeaderCell
                     class="text-end"
                   >
                     Actions
@@ -198,10 +189,10 @@ const columns = columnHelper.columns([
                 </tr>
               }
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
-                  <td scTableCell scDataTableCell>
+                <tr scDataTableRow [row]="row">
+                  <td scDataTableCell>
                     <div class="flex items-center gap-3">
                       <span
                         class="bg-muted relative block h-10 w-16 shrink-0 overflow-hidden rounded-md"
@@ -220,10 +211,10 @@ const columns = columnHelper.columns([
                       </span>
                     </div>
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     {{ labelOf(row.original.category) }}
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     <span
                       scBadge
                       [variant]="
@@ -235,13 +226,13 @@ const columns = columnHelper.columns([
                       >{{ labelOf(row.original.status) }}</span
                     >
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     {{ dayOf(row.original.date) }}
                   </td>
-                  <td scTableCell scDataTableCell class="tabular-nums">
+                  <td scDataTableCell class="tabular-nums">
                     {{ countOf(row.original.views) }}
                   </td>
-                  <td scTableCell class="text-end whitespace-nowrap">
+                  <td scDataTableCell class="text-end whitespace-nowrap">
                     <a
                       scLink
                       variant="ghost"
@@ -278,10 +269,10 @@ const columns = columnHelper.columns([
                   </td>
                 </tr>
               } @empty {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   <td
                     i18n="@@blog.manage.noPostsMatch"
-                    scTableCell
+                    scDataTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
                   >
@@ -294,10 +285,8 @@ const columns = columnHelper.columns([
         </div>
         <nav
           i18n-aria-label="@@blog.manage.postPages"
-          scPagination
           scDataTablePagination
           #pagination="scPagination"
-          [table]="table"
           aria-label="Post pages"
           class="mx-0 w-auto items-center justify-end gap-4"
         >

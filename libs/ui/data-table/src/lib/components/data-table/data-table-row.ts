@@ -6,7 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { cn } from 'cn';
+import { ScTableRow } from '@semantic-components/ui';
 import { ScDataTableTreeGrid } from './data-table-tree-grid';
 import type { ScDataTableTreeRow } from './data-table-types';
 
@@ -17,14 +17,18 @@ import type { ScDataTableTreeRow } from './data-table-types';
 type ScDataTableRowState = Partial<ScDataTableTreeRow>;
 
 /**
- * A body row bound to its row: `data-state="selected"` while selected (the
- * `scTableRow` styles use it). Use with `scTableRow`. In a tree grid
+ * A row, in the Table's look. Bound to its row (`[row]`, in the body):
+ * `data-state="selected"` while selected, which the look shows. In a tree grid
  * (`scDataTableTreeGrid`): a row of the tree — its level, its place among its
  * siblings, open or not, and in the tab order when it is the one focused.
  */
 @Directive({
   selector: 'tr[scDataTableRow]',
+  hostDirectives: [{ directive: ScTableRow, inputs: ['class'] }],
   host: {
+    // Its focus ring, in a tree grid (the only rows that take focus).
+    class:
+      'focus-visible:outline-ring/50 outline-none focus-visible:outline-2 focus-visible:-outline-offset-2',
     '[attr.data-state]': 'row()?.getIsSelected?.() ? "selected" : null',
     '[attr.data-row-id]': 'tree ? row()?.id : null',
     '[attr.aria-level]': 'tree ? (row()?.depth ?? 0) + 1 : null',
@@ -34,7 +38,6 @@ type ScDataTableRowState = Partial<ScDataTableTreeRow>;
     '[attr.aria-selected]':
       'tree?.selectable() ? !!row()?.getIsSelected?.() : null',
     '[attr.tabindex]': 'tree ? (focused() ? 0 : -1) : null',
-    '[class]': 'class()',
     '(focusin)': 'onFocus()',
   },
 })
@@ -44,8 +47,6 @@ export class ScDataTableRow {
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly row = input<ScDataTableRowState>();
-  readonly classInput = input<string>('', { alias: 'class' });
-
   private readonly position = computed(() => {
     const id = this.row()?.id;
     return this.tree && id ? this.tree.positions().get(id) : undefined;
@@ -60,14 +61,6 @@ export class ScDataTableRow {
 
   private readonly focused = computed(
     () => !!this.tree && this.tree.focusedId() === this.row()?.id,
-  );
-
-  private readonly class = computed(() =>
-    cn(
-      this.tree &&
-        'focus-visible:outline-ring/50 outline-none focus-visible:outline-2 focus-visible:-outline-offset-2',
-      this.classInput(),
-    ),
   );
 
   constructor() {

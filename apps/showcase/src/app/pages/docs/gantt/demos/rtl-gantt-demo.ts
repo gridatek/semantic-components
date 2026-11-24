@@ -7,16 +7,13 @@ import {
 } from '@tanstack/angular-table';
 import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+import { ScFrame } from '@semantic-components/ui';
 import {
-  ScFrame,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
-} from '@semantic-components/ui';
-import {
+  ScDataTableBody,
+  ScDataTableCell,
+  ScDataTableHeader,
+  ScDataTableHeaderCell,
+  ScDataTableProvider,
   ScDataTableRow,
   ScDataTableTreeGrid,
 } from '@semantic-components/ui/data-table';
@@ -80,14 +77,9 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-rtl-gantt-demo',
   imports: [
+    ScDataTableProvider,
     ScFrame,
     Dir,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     ScDataTableRow,
     ScDataTableTreeGrid,
     ScGantt,
@@ -95,14 +87,27 @@ const columns = columnHelper.columns([
     ScGanttLinks,
     ScGanttScale,
     ScGanttTimeline,
+    ScDataTableHeader,
+    ScDataTableBody,
+    ScDataTableHeaderCell,
+    ScDataTableCell,
   ],
   template: `
-    <div scGantt dir="rtl" lang="ar" [from]="from" [to]="to" scFrame>
-      <table scTable scDataTableTreeGrid [table]="table" aria-label="الخطة">
-        <thead scTableHeader>
-          <tr scTableRow>
-            <th scTableHeaderCell class="align-bottom">المهمة</th>
-            <th scTableHeaderCell scGanttTimeline>
+    <div
+      scGantt
+      scDataTableProvider
+      [table]="table"
+      dir="rtl"
+      lang="ar"
+      [from]="from"
+      [to]="to"
+      scFrame
+    >
+      <table scDataTableTreeGrid aria-label="الخطة">
+        <thead scDataTableHeader>
+          <tr scDataTableRow>
+            <th scDataTableHeaderCell class="align-bottom">المهمة</th>
+            <th scDataTableHeaderCell scGanttTimeline>
               <span class="sr-only">الجدول الزمني</span>
               <div scGanttScale>
                 <svg scGanttLinks></svg>
@@ -110,11 +115,11 @@ const columns = columnHelper.columns([
             </th>
           </tr>
         </thead>
-        <tbody scTableBody>
+        <tbody scDataTableBody>
           @for (row of table.getRowModel().rows; track row.id) {
-            <tr scTableRow scDataTableRow [row]="row">
-              <td scTableCell>{{ row.original.name }}</td>
-              <td scTableCell scGanttTimeline>
+            <tr scDataTableRow [row]="row">
+              <td scDataTableCell>{{ row.original.name }}</td>
+              <td scDataTableCell scGanttTimeline>
                 <div
                   scGanttBar
                   [id]="row.original.id"

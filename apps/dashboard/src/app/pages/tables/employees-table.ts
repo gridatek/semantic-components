@@ -21,27 +21,23 @@ import {
   ScCardBody,
   ScCardHeader,
   ScCardTitle,
-  ScInput,
-  ScPagination,
   ScPaginationFirst,
   ScPaginationItem,
   ScPaginationLast,
   ScPaginationList,
   ScPaginationNext,
   ScPaginationPrevious,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
 } from '@semantic-components/ui';
 import {
+  ScDataTable,
+  ScDataTableBody,
   ScDataTableCell,
+  ScDataTableContainer,
   ScDataTableGlobalFilter,
+  ScDataTableHeader,
   ScDataTableHeaderCell,
   ScDataTablePagination,
+  ScDataTableProvider,
   ScDataTableRow,
   ScDataTableSortButton,
 } from '@semantic-components/ui/data-table';
@@ -93,6 +89,7 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-employees-table',
   imports: [
+    ScDataTableProvider,
     ScAvatar,
     ScAvatarFallback,
     ScAvatarImage,
@@ -101,21 +98,12 @@ const columns = columnHelper.columns([
     ScCardBody,
     ScCardHeader,
     ScCardTitle,
-    ScInput,
-    ScPagination,
     ScPaginationFirst,
     ScPaginationItem,
     ScPaginationLast,
     ScPaginationList,
     ScPaginationNext,
     ScPaginationPrevious,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     ScDataTableCell,
     ScDataTableGlobalFilter,
     ScDataTableHeaderCell,
@@ -129,6 +117,10 @@ const columns = columnHelper.columns([
     SiChevronsLeftIcon,
     SiChevronsRightIcon,
     SiChevronsUpDownIcon,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
   ],
   template: `
     <div scCard>
@@ -141,29 +133,28 @@ const columns = columnHelper.columns([
           Data Table
         </h2>
       </div>
-      <div scCardBody class="flex flex-col gap-4">
+      <div
+        scCardBody
+        scDataTableProvider
+        [table]="table"
+        class="flex flex-col gap-4"
+      >
         <input
           i18n-aria-label="@@tables.employeesTable.searchEmployees"
           i18n-placeholder="@@tables.employeesTable.searchEmployees2"
-          scInput
           scDataTableGlobalFilter
-          [table]="table"
           type="search"
           placeholder="Search employees…"
           aria-label="Search employees"
           class="max-w-sm"
         />
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th
-                      scTableHeaderCell
-                      scDataTableHeaderCell
-                      [column]="header.column"
-                    >
+                    <th scDataTableHeaderCell [column]="header.column">
                       <button
                         scDataTableSortButton
                         #sort="scDataTableSortButton"
@@ -187,10 +178,10 @@ const columns = columnHelper.columns([
                 </tr>
               }
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
-                  <td scTableCell scDataTableCell>
+                <tr scDataTableRow [row]="row">
+                  <td scDataTableCell>
                     <div class="flex items-center gap-3">
                       <span scAvatar class="size-8">
                         <img scAvatarImage [src]="row.original.avatar" alt="" />
@@ -201,16 +192,16 @@ const columns = columnHelper.columns([
                       <span class="font-medium">{{ row.original.name }}</span>
                     </div>
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     {{ row.original.position }}
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     {{ labelOf(row.original.department) }}
                   </td>
-                  <td scTableCell scDataTableCell class="tabular-nums">
+                  <td scDataTableCell class="tabular-nums">
                     {{ salaryOf(row.original.salary) }}
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     <span
                       scBadge
                       [variant]="
@@ -225,10 +216,10 @@ const columns = columnHelper.columns([
                   </td>
                 </tr>
               } @empty {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   <td
                     i18n="@@tables.employeesTable.noEmployeesMatch"
-                    scTableCell
+                    scDataTableCell
                     colspan="5"
                     class="text-muted-foreground h-24 text-center"
                   >
@@ -241,10 +232,8 @@ const columns = columnHelper.columns([
         </div>
         <nav
           i18n-aria-label="@@tables.employeesTable.employeePages"
-          scPagination
           scDataTablePagination
           #pagination="scPagination"
-          [table]="table"
           aria-label="Employee pages"
           class="mx-0 w-auto flex-wrap items-center justify-end gap-4"
         >

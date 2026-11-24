@@ -44,10 +44,15 @@ import {
   ScToaster,
 } from '@semantic-components/ui';
 import {
+  ScDataTable,
+  ScDataTableBody,
   ScDataTableCell,
   ScDataTableColumnVisibility,
+  ScDataTableContainer,
   ScDataTableExpand,
+  ScDataTableHeader,
   ScDataTableHeaderCell,
+  ScDataTableProvider,
   ScDataTableRow,
   ScDataTableSelectAll,
   ScDataTableSelectRow,
@@ -96,14 +101,22 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
 @Component({
   selector: 'app-row-selection-table-page',
   imports: [
+    ScCheckbox,
+    ScDataTableProvider,
     ...BASE,
     ...CELLS,
     ScButton,
-    ScCheckbox,
     ScField,
     ScDataTableSelectAll,
     ScDataTableSelectRow,
     SiTrash2Icon,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
+    ScDataTableRow,
+    ScDataTableHeaderCell,
+    ScDataTableCell,
   ],
   template: `
     <app-page-header
@@ -121,14 +134,19 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
           Tick rows, or all of them from the header
         </p>
       </div>
-      <div scCardBody class="flex flex-col gap-4">
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+      <div
+        scCardBody
+        scDataTableProvider
+        [table]="table"
+        class="flex flex-col gap-4"
+      >
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th scTableHeaderCell scDataTableHeaderCell>
+                    <th scDataTableHeaderCell>
                       @if (header.column.id === 'select') {
                         <label scField orientation="horizontal">
                           <input
@@ -137,7 +155,6 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
                             type="checkbox"
                             scCheckbox
                             scDataTableSelectAll
-                            [table]="table"
                             aria-label="Select all rows"
                           />
                         </label>
@@ -149,11 +166,11 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
                 </tr>
               }
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
+                <tr scDataTableRow [row]="row">
                   @for (cell of row.getVisibleCells(); track cell.id) {
-                    <td scTableCell scDataTableCell>
+                    <td scDataTableCell>
                       @if (cell.column.id === 'select') {
                         <label scField orientation="horizontal">
                           <input
@@ -261,10 +278,10 @@ const visibilityHelper = createColumnHelper<
 @Component({
   selector: 'app-column-visibility-table-page',
   imports: [
+    ScCheckbox,
     ...BASE,
     ...CELLS,
     ScButton,
-    ScCheckbox,
     ScField,
     ScPopover,
     ScPopoverPortal,
@@ -272,6 +289,13 @@ const visibilityHelper = createColumnHelper<
     ScPopoverTrigger,
     ScDataTableColumnVisibility,
     SiColumns3Icon,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
+    ScDataTableRow,
+    ScDataTableHeaderCell,
+    ScDataTableCell,
   ],
   template: `
     <app-page-header
@@ -320,24 +344,24 @@ const visibilityHelper = createColumnHelper<
             </div>
           </ng-template>
         </div>
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th scTableHeaderCell scDataTableHeaderCell>
+                    <th scDataTableHeaderCell>
                       {{ header.column.columnDef.header }}
                     </th>
                   }
                 </tr>
               }
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
+                <tr scDataTableRow [row]="row">
                   @for (cell of row.getVisibleCells(); track cell.id) {
-                    <td scTableCell scDataTableCell>
+                    <td scDataTableCell>
                       <app-staff-cell
                         [column]="cell.column.id"
                         [member]="row.original"
@@ -398,7 +422,17 @@ export class ColumnVisibilityTablePage {
 /** Editable (Pro TanStack tables): cells you type into; the data follows. */
 @Component({
   selector: 'app-editable-table-page',
-  imports: [...BASE, ScInput],
+  imports: [
+    ...BASE,
+    ScInput,
+    ScTable,
+    ScTableContainer,
+    ScTableHeader,
+    ScTableBody,
+    ScTableRow,
+    ScTableHeaderCell,
+    ScTableCell,
+  ],
   template: `
     <app-page-header
       i18n-title="@@dataTables.interactiveTables.editable"
@@ -545,6 +579,13 @@ export class EditableTablePage {
     SiArrowDownIcon,
     SiArrowUpIcon,
     SiGripVerticalIcon,
+    ScTable,
+    ScTableContainer,
+    ScTableHeader,
+    ScTableBody,
+    ScTableRow,
+    ScTableHeaderCell,
+    ScTableCell,
   ],
   template: `
     <app-page-header
@@ -713,6 +754,12 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
     ScProgressValueText,
     ScDataTableExpand,
     SiChevronRightIcon,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
+    ScDataTableHeaderCell,
+    ScDataTableCell,
   ],
   template: `
     <app-page-header
@@ -731,47 +778,47 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
         </p>
       </div>
       <div scCardBody>
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
-              <tr scTableRow>
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
+              <tr scDataTableRow>
                 <th
                   i18n="@@dataTables.interactiveTables.details"
-                  scTableHeaderCell
+                  scDataTableHeaderCell
                   class="w-10"
                 >
                   <span class="sr-only">Details</span>
                 </th>
                 <th
                   i18n="@@dataTables.interactiveTables.name"
-                  scTableHeaderCell
+                  scDataTableHeaderCell
                 >
                   Name
                 </th>
                 <th
                   i18n="@@dataTables.interactiveTables.role"
-                  scTableHeaderCell
+                  scDataTableHeaderCell
                 >
                   Role
                 </th>
                 <th
                   i18n="@@dataTables.interactiveTables.department"
-                  scTableHeaderCell
+                  scDataTableHeaderCell
                 >
                   Department
                 </th>
                 <th
                   i18n="@@dataTables.interactiveTables.projects"
-                  scTableHeaderCell
+                  scDataTableHeaderCell
                 >
                   Projects
                 </th>
               </tr>
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
-                  <td scTableCell>
+                <tr scDataTableRow [row]="row">
+                  <td scDataTableCell>
                     <button scDataTableExpand [row]="row">
                       <svg
                         siChevronRightIcon
@@ -784,19 +831,21 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
                       >
                     </button>
                   </td>
-                  <td scTableCell>
+                  <td scDataTableCell>
                     <app-staff-cell column="name" [member]="row.original" />
                   </td>
-                  <td scTableCell>{{ labelOf(row.original.role) }}</td>
-                  <td scTableCell>{{ labelOf(row.original.department) }}</td>
-                  <td scTableCell class="tabular-nums">
+                  <td scDataTableCell>{{ labelOf(row.original.role) }}</td>
+                  <td scDataTableCell>
+                    {{ labelOf(row.original.department) }}
+                  </td>
+                  <td scDataTableCell class="tabular-nums">
                     {{ row.original.projects.length }}
                   </td>
                 </tr>
                 @if (row.getIsExpanded()) {
-                  <tr scTableRow class="bg-muted/30 hover:bg-muted/30">
-                    <td scTableCell></td>
-                    <td scTableCell colspan="4">
+                  <tr scDataTableRow class="bg-muted/30 hover:bg-muted/30">
+                    <td scDataTableCell></td>
+                    <td scDataTableCell colspan="4">
                       <div class="grid gap-4 py-2 sm:grid-cols-3">
                         @for (
                           project of row.original.projects;

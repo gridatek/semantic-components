@@ -1,16 +1,17 @@
-import { Directive, computed, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { ɵwarnIfUnnamed } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { syncDataTableCheckbox } from './data-table-checkbox';
+import { ScDataTableProvider } from './data-table-provider';
 import type { ScDataTableSelectAllTable } from './data-table-types';
 
 /**
  * "Select all" checkbox: checked when every row is selected, indeterminate
  * when some are. `scope="page"` (default) covers the current page, `"all"`
- * every row. Works alone or with `scCheckbox`.
+ * every row. On an `scCheckbox`; the table from `scDataTableProvider`.
  *
  * ```html
- * <input type="checkbox" scCheckbox scDataTableSelectAll aria-label="Select all rows" [table]="table" />
+ * <input type="checkbox" scCheckbox scDataTableSelectAll aria-label="Select all rows" />
  * ```
  */
 @Directive({
@@ -21,7 +22,8 @@ import type { ScDataTableSelectAllTable } from './data-table-types';
   },
 })
 export class ScDataTableSelectAll {
-  readonly table = input.required<ScDataTableSelectAllTable>();
+  private readonly table = inject(ScDataTableProvider)
+    .table as () => ScDataTableSelectAllTable;
   readonly scope = input<'page' | 'all'>('page');
   readonly classInput = input<string>('', { alias: 'class' });
 

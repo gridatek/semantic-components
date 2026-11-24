@@ -17,19 +17,16 @@ import {
   ScBadge,
   ScCard,
   ScCardBody,
-  ScInput,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
 } from '@semantic-components/ui';
 import {
+  ScDataTable,
+  ScDataTableBody,
   ScDataTableCell,
+  ScDataTableContainer,
   ScDataTableGlobalFilter,
+  ScDataTableHeader,
   ScDataTableHeaderCell,
+  ScDataTableProvider,
   ScDataTableRow,
   ScDataTableSortButton,
 } from '@semantic-components/ui/data-table';
@@ -112,23 +109,16 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-customers-page',
   imports: [
+    ScDataTableProvider,
     ScAvatar,
     ScAvatarFallback,
     ScAvatarImage,
     ScBadge,
     ScCard,
     ScCardBody,
-    ScInput,
     AppStatCard,
     AppStatCardLabel,
     AppStatCardValue,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     ScDataTableCell,
     ScDataTableGlobalFilter,
     ScDataTableHeaderCell,
@@ -138,6 +128,10 @@ const columns = columnHelper.columns([
     SiArrowUpIcon,
     SiChevronsUpDownIcon,
     PageHeader,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
   ],
   template: `
     <app-page-header
@@ -168,29 +162,28 @@ const columns = columnHelper.columns([
     </div>
 
     <div scCard>
-      <div scCardBody class="flex flex-col gap-4">
+      <div
+        scCardBody
+        scDataTableProvider
+        [table]="table"
+        class="flex flex-col gap-4"
+      >
         <input
           i18n-aria-label="@@customers.searchCustomers"
           i18n-placeholder="@@customers.searchCustomers2"
-          scInput
           scDataTableGlobalFilter
-          [table]="table"
           type="search"
           placeholder="Search customers…"
           aria-label="Search customers"
           class="max-w-xs"
         />
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th
-                      scTableHeaderCell
-                      scDataTableHeaderCell
-                      [column]="header.column"
-                    >
+                    <th scDataTableHeaderCell [column]="header.column">
                       <button
                         scDataTableSortButton
                         #sort="scDataTableSortButton"
@@ -214,10 +207,10 @@ const columns = columnHelper.columns([
                 </tr>
               }
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
-                  <td scTableCell scDataTableCell>
+                <tr scDataTableRow [row]="row">
+                  <td scDataTableCell>
                     <div class="flex items-center gap-3">
                       <span scAvatar class="size-8">
                         <img scAvatarImage [src]="row.original.avatar" alt="" />
@@ -233,19 +226,19 @@ const columns = columnHelper.columns([
                       </span>
                     </div>
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     {{ row.original.location }}
                   </td>
-                  <td scTableCell scDataTableCell class="tabular-nums">
+                  <td scDataTableCell class="tabular-nums">
                     {{ row.original.orders }}
                   </td>
-                  <td scTableCell scDataTableCell class="tabular-nums">
+                  <td scDataTableCell class="tabular-nums">
                     {{ moneyOf(row.original.spent) }}
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     {{ dayOf(row.original.since) }}
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     <span
                       scBadge
                       [variant]="
@@ -260,10 +253,10 @@ const columns = columnHelper.columns([
                   </td>
                 </tr>
               } @empty {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   <td
                     i18n="@@customers.noCustomersMatch"
-                    scTableCell
+                    scDataTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
                   >

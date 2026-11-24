@@ -5,7 +5,7 @@ import { ScDataTableTreeGrid } from './data-table-tree-grid';
 import type { ScDataTableSelectableRow } from './data-table-types';
 
 /**
- * A row's selection checkbox; disabled when the row can't be selected —
+ * A row's selection, on an `scCheckbox`; disabled when the row can't be selected —
  * half-ticked when only some of its sub-rows are (a tree table). Give
  * it a name, e.g. `[attr.aria-label]="'Select ' + row.original.name"`.
  *

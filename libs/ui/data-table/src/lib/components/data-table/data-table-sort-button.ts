@@ -1,4 +1,5 @@
 import { Directive, computed, input } from '@angular/core';
+import { type ScButtonVariants, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import type { ScDataTableSortableColumn } from './data-table-types';
 
@@ -31,16 +32,20 @@ import type { ScDataTableSortableColumn } from './data-table-types';
 export class ScDataTableSortButton {
   readonly column = input.required<ScDataTableSortableColumn>();
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('sm');
+
+  private readonly buttonStyles = injectStyle().button;
 
   /** `'asc'`, `'desc'` or `false`. */
   readonly direction = computed(() => this.column().getIsSorted());
 
   private readonly class = computed(() =>
     cn(
-      '-ms-2 inline-flex h-8 items-center gap-1.5 rounded-md px-2 font-medium outline-none transition-colors',
-      'hover:bg-accent hover:text-accent-foreground focus-visible:ring-3 focus-visible:ring-ring/50',
-      'disabled:pointer-events-none',
-      '[&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground data-sort:[&_svg]:text-foreground',
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
+      // Its text in line with the column's: the button's padding before it.
+      '-ms-2.5',
+      '[&_svg]:text-muted-foreground data-sort:[&_svg]:text-foreground',
       this.classInput(),
     ),
   );

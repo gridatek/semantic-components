@@ -28,16 +28,15 @@ export class ScalesGanttDemoContainer {
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScFrame,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
   ScToggleGroup,
   ScToggleGroupItem,
 } from '@semantic-components/ui';
 import {
+  ScDataTableBody,
+  ScDataTableCell,
+  ScDataTableHeader,
+  ScDataTableHeaderCell,
+  ScDataTableProvider,
   ScDataTableRow,
   ScDataTableTreeGrid,
 } from '@semantic-components/ui/data-table';
@@ -100,13 +99,8 @@ const columns = columnHelper.columns([
 @Component({
   selector: 'app-scales-gantt-demo',
   imports: [
+    ScDataTableProvider,
     ScFrame,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     ScToggleGroup,
     ScToggleGroupItem,
     ScDataTableRow,
@@ -115,6 +109,10 @@ const columns = columnHelper.columns([
     ScGanttBar,
     ScGanttScale,
     ScGanttTimeline,
+    ScDataTableHeader,
+    ScDataTableBody,
+    ScDataTableHeaderCell,
+    ScDataTableCell,
   ],
   template: \`
     <div scToggleGroup variant="outline" aria-label="Scale" [(value)]="choice">
@@ -122,22 +120,30 @@ const columns = columnHelper.columns([
       <button scToggleGroupItem value="week">Weeks</button>
       <button scToggleGroupItem value="month">Months</button>
     </div>
-    <div scGantt [from]="from" [to]="to" [scale]="scale()" scFrame>
-      <table scTable scDataTableTreeGrid [table]="table" aria-label="Releases">
-        <thead scTableHeader>
-          <tr scTableRow>
-            <th scTableHeaderCell class="align-bottom">Release</th>
-            <th scTableHeaderCell scGanttTimeline>
+    <div
+      scGantt
+      scDataTableProvider
+      [table]="table"
+      [from]="from"
+      [to]="to"
+      [scale]="scale()"
+      scFrame
+    >
+      <table scDataTableTreeGrid aria-label="Releases">
+        <thead scDataTableHeader>
+          <tr scDataTableRow>
+            <th scDataTableHeaderCell class="align-bottom">Release</th>
+            <th scDataTableHeaderCell scGanttTimeline>
               <span class="sr-only">Timeline</span>
               <div scGanttScale></div>
             </th>
           </tr>
         </thead>
-        <tbody scTableBody>
+        <tbody scDataTableBody>
           @for (row of table.getRowModel().rows; track row.id) {
-            <tr scTableRow scDataTableRow [row]="row">
-              <td scTableCell>{{ row.original.name }}</td>
-              <td scTableCell scGanttTimeline>
+            <tr scDataTableRow [row]="row">
+              <td scDataTableCell>{{ row.original.name }}</td>
+              <td scDataTableCell scGanttTimeline>
                 <div
                   scGanttBar
                   [start]="row.original.start"

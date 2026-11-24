@@ -20,12 +20,10 @@ import {
   ScCardDescription,
   ScCardHeader,
   ScCardTitle,
-  ScInput,
   ScNativeSelect,
   ScNativeSelectContainer,
   ScNativeSelectIcon,
   ScNativeSelectOption,
-  ScPagination,
   ScPaginationFirst,
   ScPaginationItem,
   ScPaginationLast,
@@ -41,11 +39,16 @@ import {
   ScTableRow,
 } from '@semantic-components/ui';
 import {
+  ScDataTable,
+  ScDataTableBody,
   ScDataTableCell,
   ScDataTableColumnFilter,
+  ScDataTableContainer,
   ScDataTableGlobalFilter,
+  ScDataTableHeader,
   ScDataTableHeaderCell,
   ScDataTablePagination,
+  ScDataTableProvider,
   ScDataTableRow,
 } from '@semantic-components/ui/data-table';
 import {
@@ -123,7 +126,17 @@ const IMPORTS = [
 /** Sorting (Pro TanStack tables): a click on a header sorts by it; Shift adds a second. */
 @Component({
   selector: 'app-sorting-table-page',
-  imports: [...IMPORTS, SortHeader],
+  imports: [
+    ...IMPORTS,
+    SortHeader,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
+    ScDataTableRow,
+    ScDataTableHeaderCell,
+    ScDataTableCell,
+  ],
   template: `
     <app-page-header
       i18n-title="@@dataTables.queryTables.sorting"
@@ -139,17 +152,13 @@ const IMPORTS = [
         </p>
       </div>
       <div scCardBody>
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th
-                      scTableHeaderCell
-                      scDataTableHeaderCell
-                      [column]="header.column"
-                    >
+                    <th scDataTableHeaderCell [column]="header.column">
                       <app-sort-header
                         [column]="header.column"
                         [label]="$any(header.column.columnDef.header)"
@@ -160,11 +169,11 @@ const IMPORTS = [
               }
             </thead>
 
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
+                <tr scDataTableRow [row]="row">
                   @for (cell of row.getVisibleCells(); track cell.id) {
-                    <td scTableCell scDataTableCell [column]="cell.column">
+                    <td scDataTableCell [column]="cell.column">
                       <app-staff-cell
                         [column]="cell.column.id"
                         [member]="row.original"
@@ -173,10 +182,10 @@ const IMPORTS = [
                   }
                 </tr>
               } @empty {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   <td
                     i18n="@@dataTables.queryTables.noOneMatches"
-                    scTableCell
+                    scDataTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
                   >
@@ -212,10 +221,17 @@ export class SortingTablePage {
 @Component({
   selector: 'app-filtering-table-page',
   imports: [
+    ScDataTableProvider,
     ...IMPORTS,
-    ScInput,
     ScDataTableColumnFilter,
     ScDataTableGlobalFilter,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
+    ScDataTableRow,
+    ScDataTableHeaderCell,
+    ScDataTableCell,
   ],
   template: `
     <app-page-header
@@ -233,26 +249,28 @@ export class SortingTablePage {
           Search everything, or narrow one column at a time
         </p>
       </div>
-      <div scCardBody class="flex flex-col gap-4">
+      <div
+        scCardBody
+        scDataTableProvider
+        [table]="table"
+        class="flex flex-col gap-4"
+      >
         <input
           i18n-aria-label="@@dataTables.queryTables.searchAllColumns"
           i18n-placeholder="@@dataTables.queryTables.searchAllColumns2"
-          scInput
           scDataTableGlobalFilter
-          [table]="table"
           type="search"
           placeholder="Search all columns…"
           aria-label="Search all columns"
           class="max-w-sm"
         />
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
                     <th
-                      scTableHeaderCell
                       scDataTableHeaderCell
                       [column]="header.column"
                       class="align-top"
@@ -261,7 +279,6 @@ export class SortingTablePage {
                         {{ header.column.columnDef.header }}
                         @if (header.column.getCanFilter()) {
                           <input
-                            scInput
                             scDataTableColumnFilter
                             [column]="header.column"
                             type="search"
@@ -278,11 +295,11 @@ export class SortingTablePage {
               }
             </thead>
 
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
+                <tr scDataTableRow [row]="row">
                   @for (cell of row.getVisibleCells(); track cell.id) {
-                    <td scTableCell scDataTableCell [column]="cell.column">
+                    <td scDataTableCell [column]="cell.column">
                       <app-staff-cell
                         [column]="cell.column.id"
                         [member]="row.original"
@@ -291,10 +308,10 @@ export class SortingTablePage {
                   }
                 </tr>
               } @empty {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   <td
                     i18n="@@dataTables.queryTables.noOneMatches"
-                    scTableCell
+                    scDataTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
                   >
@@ -339,13 +356,13 @@ export class FilteringTablePage {
 @Component({
   selector: 'app-pagination-table-page',
   imports: [
+    ScDataTableProvider,
     ...IMPORTS,
     SortHeader,
     ScNativeSelect,
     ScNativeSelectContainer,
     ScNativeSelectIcon,
     ScNativeSelectOption,
-    ScPagination,
     ScPaginationFirst,
     ScPaginationItem,
     ScPaginationLast,
@@ -358,6 +375,13 @@ export class FilteringTablePage {
     SiChevronRightIcon,
     SiChevronsLeftIcon,
     SiChevronsRightIcon,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
+    ScDataTableRow,
+    ScDataTableHeaderCell,
+    ScDataTableCell,
   ],
   template: `
     <app-page-header
@@ -372,18 +396,19 @@ export class FilteringTablePage {
           {{ total }} people, a page at a time
         </p>
       </div>
-      <div scCardBody class="flex flex-col gap-4">
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+      <div
+        scCardBody
+        scDataTableProvider
+        [table]="table"
+        class="flex flex-col gap-4"
+      >
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th
-                      scTableHeaderCell
-                      scDataTableHeaderCell
-                      [column]="header.column"
-                    >
+                    <th scDataTableHeaderCell [column]="header.column">
                       <app-sort-header
                         [column]="header.column"
                         [label]="$any(header.column.columnDef.header)"
@@ -394,11 +419,11 @@ export class FilteringTablePage {
               }
             </thead>
 
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
+                <tr scDataTableRow [row]="row">
                   @for (cell of row.getVisibleCells(); track cell.id) {
-                    <td scTableCell scDataTableCell [column]="cell.column">
+                    <td scDataTableCell [column]="cell.column">
                       <app-staff-cell
                         [column]="cell.column.id"
                         [member]="row.original"
@@ -407,10 +432,10 @@ export class FilteringTablePage {
                   }
                 </tr>
               } @empty {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   <td
                     i18n="@@dataTables.queryTables.noOneMatches"
-                    scTableCell
+                    scDataTableCell
                     colspan="6"
                     class="text-muted-foreground h-24 text-center"
                   >
@@ -444,10 +469,8 @@ export class FilteringTablePage {
 
           <nav
             i18n-aria-label="@@dataTables.queryTables.pages"
-            scPagination
             scDataTablePagination
             #pagination="scPagination"
-            [table]="table"
             aria-label="Pages"
             class="mx-0 w-auto flex-wrap items-center justify-end gap-4"
           >

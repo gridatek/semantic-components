@@ -1,32 +1,28 @@
-import { Directive, computed, input } from '@angular/core';
-import { cn } from 'cn';
+import { Directive, input } from '@angular/core';
+import { ScTableCell } from '@semantic-components/ui';
 import { dataTablePinnedClasses, dataTablePinning } from './data-table-pinning';
 import type { ScDataTableCellColumn } from './data-table-types';
 
 /**
- * A body cell bound to its column, for sticky pinned columns. Use with
- * `scTableCell`.
+ * A body cell, in the Table's look; bound to its column, it sticks when the
+ * column is pinned. A cell of no column (a "No results." row) takes none.
  *
  * ```html
- * <td scTableCell scDataTableCell [column]="cell.column">…</td>
+ * <td scDataTableCell [column]="cell.column">…</td>
  * ```
  */
 @Directive({
   selector: 'td[scDataTableCell]',
+  hostDirectives: [{ directive: ScTableCell, inputs: ['class'] }],
   host: {
+    class: dataTablePinnedClasses,
     '[attr.data-pinned]': 'pinning.pinned() || null',
     '[style.inset-inline-start.px]': 'pinning.offsetStart()',
     '[style.inset-inline-end.px]': 'pinning.offsetEnd()',
-    '[class]': 'class()',
   },
 })
 export class ScDataTableCell {
   readonly column = input<ScDataTableCellColumn>();
-  readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly pinning = dataTablePinning(this.column);
-
-  private readonly class = computed(() =>
-    cn(dataTablePinnedClasses, this.classInput()),
-  );
 }

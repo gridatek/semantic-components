@@ -16,12 +16,12 @@ A Gantt chart is a Data Table with a timeline column: each row's bar runs from i
 ## Quick Start
 
 ```html
-<div scGantt [from]="from" [to]="to" scale="day">
-  <table scTable scDataTableTreeGrid [table]="table" aria-label="Plan">
-    <thead scTableHeader>
-      <tr scTableRow>
-        <th scTableHeaderCell class="align-bottom">Task</th>
-        <th scTableHeaderCell scGanttTimeline>
+<div scGantt scDataTableProvider [table]="table" [from]="from" [to]="to" scale="day">
+  <table scDataTableTreeGrid aria-label="Plan">
+    <thead scDataTableHeader>
+      <tr scDataTableRow>
+        <th scDataTableHeaderCell class="align-bottom">Task</th>
+        <th scDataTableHeaderCell scGanttTimeline>
           <span class="sr-only">Timeline</span>
           <div scGanttScale>
             <svg scGanttLinks></svg>
@@ -30,11 +30,11 @@ A Gantt chart is a Data Table with a timeline column: each row's bar runs from i
         </th>
       </tr>
     </thead>
-    <tbody scTableBody>
+    <tbody scDataTableBody>
       @for (row of table.getRowModel().rows; track row.id) {
-      <tr scTableRow scDataTableRow [row]="row">
-        <td scTableCell>{{ row.original.name }}</td>
-        <td scTableCell scGanttTimeline>
+      <tr scDataTableRow [row]="row">
+        <td scDataTableCell>{{ row.original.name }}</td>
+        <td scDataTableCell scGanttTimeline>
           <div scGanttBar [id]="row.original.id" [start]="row.original.start" [end]="row.original.end" [progress]="row.original.progress" [dependencies]="row.original.dependsOn" (dateChange)="move(row.original, $event)" (progressChange)="advance(row.original, $event)">{{ row.original.name }}</div>
         </td>
       </tr>

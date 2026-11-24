@@ -1,6 +1,6 @@
 # Data Table
 
-Styled, accessible parts for data tables powered by [TanStack Table](https://tanstack.com/table). TanStack owns the logic and state (sorting, filtering, paging, selection, visibility, pinning…); these parts render and wire it. You compose them with the `scTable` primitives from `@semantic-components/ui`, and the icons stay in your template.
+Styled, accessible parts for data tables powered by [TanStack Table](https://tanstack.com/table). TanStack owns the logic and state (sorting, filtering, paging, selection, visibility, pinning…); these parts render and wire it. One attribute per element: each part brings the look of the one it stands for (the Table's, the Input's, the Pagination's) — no `scTable`, `scInput` or `scPagination` beside it. The checkbox parts are the exception: they go on an `scCheckbox`. `scDataTableProvider` holds the table once, for the parts that need it. The icons stay in your template.
 
 The parts are **typed structurally**: each one only declares the few methods it calls, so this library has no dependency on TanStack and doesn't pin its version. Pass TanStack's own `table`, `column` and `row` objects.
 
@@ -11,7 +11,7 @@ npm install @semantic-components/ui @tanstack/angular-table
 ```
 
 ```typescript
-import { ScDataTableCell, ScDataTableColumnVisibility, ScDataTableGlobalFilter, ScDataTableHeaderCell, ScDataTablePagination, ScDataTableRow, ScDataTableSelectAll, ScDataTableSelectRow, ScDataTableSortButton } from '@semantic-components/ui/data-table';
+import { ScDataTable, ScDataTableBody, ScDataTableCell, ScDataTableColumnVisibility, ScDataTableContainer, ScDataTableGlobalFilter, ScDataTableHeader, ScDataTableHeaderCell, ScDataTablePagination, ScDataTableProvider, ScDataTableRow, ScDataTableSelectAll, ScDataTableSelectRow, ScDataTableSortButton } from '@semantic-components/ui/data-table';
 ```
 
 ## Usage
@@ -51,56 +51,58 @@ export class UsersTable {
 ### 2. The markup (these parts)
 
 ```html
-<input scInput scDataTableGlobalFilter [table]="table" aria-label="Search users" placeholder="Search…" />
+<div scDataTableProvider [table]="table">
+  <input scDataTableGlobalFilter aria-label="Search users" placeholder="Search…" />
 
-<table scTable>
-  <thead scTableHeader>
-    @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
-    <tr scTableRow>
-      @for (header of headerGroup.headers; track header.id) {
-      <th scTableHeaderCell scDataTableHeaderCell [column]="header.column">
-        @if (header.column.id === 'select') {
-        <label scField orientation="horizontal">
-          <input type="checkbox" scCheckbox scDataTableSelectAll aria-label="Select all rows" [table]="table" />
-        </label>
-        } @else {
-        <button scDataTableSortButton #sort="scDataTableSortButton" [column]="header.column">
-          {{ header.column.columnDef.header }} @switch (sort.direction()) { @case ('asc') {
-          <svg siArrowUpIcon></svg>
-          } @case ('desc') {
-          <svg siArrowDownIcon></svg>
-          } @default {
-          <svg siChevronsUpDownIcon></svg>
-          } }
-        </button>
+  <table scDataTable>
+    <thead scDataTableHeader>
+      @for (headerGroup of table.getHeaderGroups(); track headerGroup.id) {
+      <tr scDataTableRow>
+        @for (header of headerGroup.headers; track header.id) {
+        <th scDataTableHeaderCell [column]="header.column">
+          @if (header.column.id === 'select') {
+          <label scField orientation="horizontal">
+            <input type="checkbox" scCheckbox scDataTableSelectAll aria-label="Select all rows" />
+          </label>
+          } @else {
+          <button scDataTableSortButton #sort="scDataTableSortButton" [column]="header.column">
+            {{ header.column.columnDef.header }} @switch (sort.direction()) { @case ('asc') {
+            <svg siArrowUpIcon></svg>
+            } @case ('desc') {
+            <svg siArrowDownIcon></svg>
+            } @default {
+            <svg siChevronsUpDownIcon></svg>
+            } }
+          </button>
+          }
+        </th>
         }
-      </th>
+      </tr>
       }
-    </tr>
-    }
-  </thead>
-  <tbody scTableBody>
-    @for (row of table.getRowModel().rows; track row.id) {
-    <tr scTableRow scDataTableRow [row]="row">
-      @for (cell of row.getVisibleCells(); track cell.id) {
-      <td scTableCell scDataTableCell [column]="cell.column">
-        @if (cell.column.id === 'select') {
-        <label scField orientation="horizontal">
-          <input type="checkbox" scCheckbox scDataTableSelectRow [row]="row" [attr.aria-label]="'Select ' + row.original.name" />
-        </label>
-        } @else { {{ cell.getValue() }} }
-      </td>
+    </thead>
+    <tbody scDataTableBody>
+      @for (row of table.getRowModel().rows; track row.id) {
+      <tr scDataTableRow [row]="row">
+        @for (cell of row.getVisibleCells(); track cell.id) {
+        <td scDataTableCell [column]="cell.column">
+          @if (cell.column.id === 'select') {
+          <label scField orientation="horizontal">
+            <input type="checkbox" scCheckbox scDataTableSelectRow [row]="row" [attr.aria-label]="'Select ' + row.original.name" />
+          </label>
+          } @else { {{ cell.getValue() }} }
+        </td>
+        }
+      </tr>
       }
-    </tr>
-    }
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
-<nav scPagination scDataTablePagination #pagination="scPagination" [table]="table">
-  <p scPaginationStatus>Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}</p>
-  <!-- scPaginationList / scPaginationPrevious / scPaginationNext… as usual;
+  <nav scDataTablePagination #pagination="scPagination">
+    <p scPaginationStatus>Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}</p>
+    <!-- scPaginationList / scPaginationPrevious / scPaginationNext… as usual;
        rows per page: a Select calling pagination.changePageSize(+$event) -->
-</nav>
+  </nav>
+</div>
 ```
 
 ### Column visibility
@@ -135,24 +137,26 @@ Set `enableHiding: false` on columns that shouldn't be listed (selection, action
 
 ## Parts
 
-| Part                          | Selector                                            | Input            | Does                                                                                                         |
-| ----------------------------- | --------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------ |
-| `ScDataTableHeaderCell`       | `th[scDataTableHeaderCell]`                         | `column`         | `aria-sort` on sortable columns; sticky when pinned (`data-pinned="start\|end"`, offsets with column sizing) |
-| `ScDataTableCell`             | `td[scDataTableCell]`                               | `column`         | Sticky when its column is pinned                                                                             |
-| `ScDataTableRow`              | `tr[scDataTableRow]`                                | `row`            | `data-state="selected"` while selected                                                                       |
-| `ScDataTableSortButton`       | `button[scDataTableSortButton]`                     | `column`         | Click sorts, Shift+click multi-sorts; `direction()` for your icons (`exportAs`)                              |
-| `ScDataTableSelectAll`        | `input[type=checkbox][scDataTableSelectAll]`        | `table`, `scope` | Checked / indeterminate from the selection; `scope="page"` (default) or `"all"`; named "Select all rows"     |
-| `ScDataTableSelectRow`        | `input[type=checkbox][scDataTableSelectRow]`        | `row`            | Row selection; disabled when the row can't be selected                                                       |
-| `ScDataTableGlobalFilter`     | `input[scDataTableGlobalFilter]`                    | `table`          | Global filter as you type (`type="search"`)                                                                  |
-| `ScDataTableColumnFilter`     | `input[scDataTableColumnFilter]`                    | `column`         | Column filter as you type (empty clears it)                                                                  |
-| `ScDataTablePagination`       | `[scPagination][scDataTablePagination]`             | `table`          | Feeds `scPagination` (page, size, row count) and sends its changes back                                      |
-| `ScDataTableColumnVisibility` | `input[type=checkbox][scDataTableColumnVisibility]` | `column`         | Shows/hides its column                                                                                       |
-| `ScDataTableTreeGrid`         | `table[scDataTableTreeGrid]`                        | `table`          | A tree table (below): `role="treegrid"`, one tab stop, the keyboard                                          |
-| `ScDataTableTreeCell`         | `div[scDataTableTreeCell]`                          | `row`            | The first cell's content, indented by the row's depth                                                        |
-| `ScDataTableExpand`           | `button[scDataTableExpand]`                         | `row`            | Opens/closes the row's children; your chevron (pointing to the end) and its name inside                      |
-| `ScDataTableExpandAll`        | `button[scDataTableExpandAll]`                      | `table`          | Opens every row, or closes them all; `aria-expanded`                                                         |
+| Part                                                                                                                     | Selector                                                                                                                                                           | Input                    | Does                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `ScDataTableProvider`                                                                                                    | `div[scDataTableProvider]`                                                                                                                                         | `table`                  | Holds TanStack's table for the parts around it and in it: the filter, select all, the pagination, a tree grid                     |
+| `ScDataTableContainer`, `ScDataTable`, `ScDataTableHeader`, `ScDataTableBody`, `ScDataTableFooter`, `ScDataTableCaption` | `div[scDataTableContainer]`, `table[scDataTable]`, `thead[scDataTableHeader]`, `tbody[scDataTableBody]`, `tfoot[scDataTableFooter]`, `caption[scDataTableCaption]` |                          | The box (it scrolls sideways), the table and its sections, in the Table's look                                                    |
+| `ScDataTableHeaderCell`                                                                                                  | `th[scDataTableHeaderCell]`                                                                                                                                        | `column`                 | In the Table's look; `aria-sort` on sortable columns; sticky when pinned (`data-pinned="start\|end"`, offsets with column sizing) |
+| `ScDataTableCell`                                                                                                        | `td[scDataTableCell]`                                                                                                                                              | `column`                 | In the Table's look; sticky when its column is pinned                                                                             |
+| `ScDataTableRow`                                                                                                         | `tr[scDataTableRow]`                                                                                                                                               | `row`                    | In the Table's look; `data-state="selected"` while selected                                                                       |
+| `ScDataTableSortButton`                                                                                                  | `button[scDataTableSortButton]`                                                                                                                                    | `column`                 | The style's button (ghost, sm); click sorts, Shift+click multi-sorts; `direction()` for your icons (`exportAs`)                   |
+| `ScDataTableSelectAll`                                                                                                   | `input[type=checkbox][scDataTableSelectAll]`                                                                                                                       | `scope`                  | Checked / indeterminate from the selection; `scope="page"` (default) or `"all"`; named "Select all rows"                          |
+| `ScDataTableSelectRow`                                                                                                   | `input[type=checkbox][scDataTableSelectRow]`                                                                                                                       | `row`                    | Row selection; disabled when the row can't be selected                                                                            |
+| `ScDataTableGlobalFilter`                                                                                                | `input[scDataTableGlobalFilter]`                                                                                                                                   |                          | Global filter as you type (`type="search"`)                                                                                       |
+| `ScDataTableColumnFilter`                                                                                                | `input[scDataTableColumnFilter]`                                                                                                                                   | `column`                 | Column filter as you type (empty clears it)                                                                                       |
+| `ScDataTablePagination`                                                                                                  | `nav[scDataTablePagination]`, `div[scDataTablePagination]`                                                                                                         | `siblings`, `boundaries` | The Pagination (`exportAs` `scPagination`), its page, size and row count from the table, its changes back                         |
+| `ScDataTableColumnVisibility`                                                                                            | `input[type=checkbox][scDataTableColumnVisibility]`                                                                                                                | `column`                 | Shows/hides its column                                                                                                            |
+| `ScDataTableTreeGrid`                                                                                                    | `table[scDataTableTreeGrid]`                                                                                                                                       |                          | A tree table, in the Table's look (below): `role="treegrid"`, one tab stop, the keyboard                                          |
+| `ScDataTableTreeCell`                                                                                                    | `div[scDataTableTreeCell]`                                                                                                                                         | `row`                    | The first cell's content, indented by the row's depth                                                                             |
+| `ScDataTableExpand`                                                                                                      | `button[scDataTableExpand]`                                                                                                                                        | `row`                    | Opens/closes the row's children; your chevron (pointing to the end) and its name inside                                           |
+| `ScDataTableExpandAll`                                                                                                   | `button[scDataTableExpandAll]`                                                                                                                                     |                          | Opens every row, or closes them all; `aria-expanded`                                                                              |
 
-The checkbox parts work alone or together with `scCheckbox` (they then drive its `checked` / `indeterminate`). A row's checkbox is half-ticked while only some of its sub-rows are selected.
+The checkbox parts go on an `scCheckbox`: they drive its `checked` / `indeterminate`. The filters are inputs in the Input's look. A row's checkbox is half-ticked while only some of its sub-rows are selected.
 
 ## Tree table
 
@@ -173,22 +177,24 @@ readonly table = injectTable(() => ({
 ```
 
 ```html
-<table scTable scDataTableTreeGrid [table]="table" aria-label="Files">
-  … @for (row of table.getRowModel().rows; track row.id) {
-  <tr scTableRow scDataTableRow [row]="row">
-    <td scTableCell>
-      <div scDataTableTreeCell [row]="row">
-        <button scDataTableExpand [row]="row">
-          <svg siChevronRightIcon></svg>
-          <span class="sr-only">Open {{ row.original.name }}</span>
-        </button>
-        {{ row.original.name }}
-      </div>
-    </td>
-    …
-  </tr>
-  }
-</table>
+<div scDataTableProvider [table]="table">
+  <table scDataTableTreeGrid aria-label="Files">
+    … @for (row of table.getRowModel().rows; track row.id) {
+    <tr scDataTableRow [row]="row">
+      <td scDataTableCell>
+        <div scDataTableTreeCell [row]="row">
+          <button scDataTableExpand [row]="row">
+            <svg siChevronRightIcon></svg>
+            <span class="sr-only">Open {{ row.original.name }}</span>
+          </button>
+          {{ row.original.name }}
+        </div>
+      </td>
+      …
+    </tr>
+    }
+  </table>
+</div>
 ```
 
 - **Keyboard** (WAI-ARIA treegrid): the rows are one tab stop. ↑/↓ move between them; → opens a row, or goes into it once open; ← closes it, or goes up to its parent (both mirrored in right-to-left); Home and End go to the first and last rows; Enter opens or closes; Space selects (with `rowSelectionFeature`).

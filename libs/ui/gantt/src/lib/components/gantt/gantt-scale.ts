@@ -24,7 +24,7 @@ interface ScGanttScaleSpan {
  * the timeline starts.
  *
  * ```html
- * <th scTableHeaderCell scGanttTimeline>
+ * <th scDataTableHeaderCell scGanttTimeline>
  *   <span class="sr-only">Timeline</span>
  *   <div scGanttScale>
  *     <svg scGanttLinks></svg>

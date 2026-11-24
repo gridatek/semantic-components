@@ -17,16 +17,13 @@ import {
   ScCardBody,
   ScCardHeader,
   ScCardTitle,
-  ScTable,
-  ScTableBody,
-  ScTableCell,
-  ScTableContainer,
-  ScTableHeader,
-  ScTableHeaderCell,
-  ScTableRow,
 } from '@semantic-components/ui';
 import {
+  ScDataTable,
+  ScDataTableBody,
   ScDataTableCell,
+  ScDataTableContainer,
+  ScDataTableHeader,
   ScDataTableHeaderCell,
   ScDataTableRow,
   ScDataTableSortButton,
@@ -79,13 +76,6 @@ const columns = columnHelper.columns([
     ScCardBody,
     ScCardHeader,
     ScCardTitle,
-    ScTable,
-    ScTableBody,
-    ScTableCell,
-    ScTableContainer,
-    ScTableHeader,
-    ScTableHeaderCell,
-    ScTableRow,
     ScDataTableCell,
     ScDataTableHeaderCell,
     ScDataTableRow,
@@ -94,6 +84,10 @@ const columns = columnHelper.columns([
     SiArrowUpIcon,
     SiBriefcaseBusinessIcon,
     SiChevronsUpDownIcon,
+    ScDataTableContainer,
+    ScDataTable,
+    ScDataTableHeader,
+    ScDataTableBody,
   ],
   template: `
     <div scCard>
@@ -106,17 +100,13 @@ const columns = columnHelper.columns([
         </h2>
       </div>
       <div scCardBody>
-        <div scTableContainer>
-          <table scTable>
-            <thead scTableHeader>
+        <div scDataTableContainer>
+          <table scDataTable>
+            <thead scDataTableHeader>
               @for (group of table.getHeaderGroups(); track group.id) {
-                <tr scTableRow>
+                <tr scDataTableRow>
                   @for (header of group.headers; track header.id) {
-                    <th
-                      scTableHeaderCell
-                      scDataTableHeaderCell
-                      [column]="header.column"
-                    >
+                    <th scDataTableHeaderCell [column]="header.column">
                       <button
                         scDataTableSortButton
                         #sort="scDataTableSortButton"
@@ -140,10 +130,10 @@ const columns = columnHelper.columns([
                 </tr>
               }
             </thead>
-            <tbody scTableBody>
+            <tbody scDataTableBody>
               @for (row of table.getRowModel().rows; track row.id) {
-                <tr scTableRow scDataTableRow [row]="row">
-                  <td scTableCell scDataTableCell>
+                <tr scDataTableRow [row]="row">
+                  <td scDataTableCell>
                     <div class="flex flex-col">
                       <span class="font-medium">{{
                         row.original.project
@@ -153,7 +143,7 @@ const columns = columnHelper.columns([
                       }}</span>
                     </div>
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     <div class="flex items-center gap-3">
                       <span scAvatar class="size-8">
                         <img scAvatarImage [src]="row.original.avatar" alt="" />
@@ -169,15 +159,15 @@ const columns = columnHelper.columns([
                       </div>
                     </div>
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     <span scBadge [variant]="badge(row.original.status)">
                       {{ labelOf(row.original.status) }}
                     </span>
                   </td>
-                  <td scTableCell scDataTableCell class="tabular-nums">
+                  <td scDataTableCell class="tabular-nums">
                     {{ priceOf(row.original.price) }}
                   </td>
-                  <td scTableCell scDataTableCell>
+                  <td scDataTableCell>
                     {{ dayOf(row.original.deadline) }}
                   </td>
                 </tr>

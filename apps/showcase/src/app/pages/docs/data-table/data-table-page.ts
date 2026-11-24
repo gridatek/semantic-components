@@ -38,7 +38,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
           entry="data-table"
           library="@tanstack/angular-table"
           href="https://tanstack.com/table"
-          names="ScDataTableHeaderCell, ScDataTableCell, ScDataTableRow"
+          names="ScDataTableProvider, ScDataTable, ScDataTableRow, ScDataTableCell"
         />
       </section>
 
@@ -51,10 +51,13 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           TanStack Table builds the table (its columns, rows and state); the
-          table parts render it, and a data table part on a header cell, a cell
-          or a row binds it to its column or row. Add the parts for what you
-          need: sorting, filtering, selection, paging, column visibility, a
-          tree.
+          data table&apos;s parts render it, one attribute per element: each
+          brings the look of the part it stands for (the Table&apos;s, the
+          Input&apos;s, the Pagination&apos;s). The checkboxes are the
+          exception: they go on an <code>scCheckbox</code>. The provider holds
+          the table once, for the parts that need it: the filter, "select all",
+          the pagination, a tree grid. Add the parts for what you need: sorting,
+          filtering, selection, paging, column visibility, a tree.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -69,8 +72,11 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
             TanStack Table
           </a>
           owns the logic and state; these parts render and wire it. Build the
-          table with TanStack, render it with the table primitives, and add a
-          part where you need behavior. Icons stay in your template.
+          table with TanStack, give it to
+          <code>scDataTableProvider</code>, and render it with the data
+          table&apos;s parts — no <code>scTable</code>, <code>scInput</code> or
+          <code>scPagination</code> beside them; the checkbox parts on an
+          <code>scCheckbox</code>. Icons stay in your template.
         </p>
         <ul class="text-muted-foreground list-inside list-disc text-sm">
           <li>
@@ -97,9 +103,8 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
           </li>
           <li>
             Paging with
-            <code>scDataTablePagination</code>
-            on an
-            <code>scPagination</code>
+            <code>scDataTablePagination</code>, the Pagination&apos;s parts
+            inside
           </li>
           <li>
             Column visibility with
@@ -124,7 +129,7 @@ import { FeaturedDataTableDemoContainer } from './demos/featured-data-table-demo
       <section class="space-y-4">
         <h2 scTypeset appToc>API reference</h2>
         <p>
-          Each part takes class, merged over its own (cn: a later class wins).
+          Each part takes class, merged over its look (cn: a later class wins).
           The parts are typed structurally: pass TanStack&apos;s own table,
           column and row objects.
         </p>
@@ -138,98 +143,114 @@ export default class DataTablePage {
   private readonly anatomy = {
     imports: [
       'import {',
-      '  ScDataTableHeaderCell, ScDataTableCell, ScDataTableRow, ScDataTableSortButton,',
+      '  ScDataTableProvider, ScDataTableContainer, ScDataTable, ScDataTableHeader,',
+      '  ScDataTableBody, ScDataTableRow, ScDataTableHeaderCell, ScDataTableCell, ScDataTableSortButton,',
       '  ScDataTableSelectAll, ScDataTableSelectRow, ScDataTableGlobalFilter,',
       '  ScDataTableColumnFilter, ScDataTableColumnVisibility, ScDataTablePagination,',
       "} from '@semantic-components/ui/data-table';",
     ].join('\n'),
     markup: [
-      '<input scInput scDataTableGlobalFilter [table]="table" aria-label="…" />',
-      '<div scTableContainer>',
-      '  <table scTable>',
-      '    <thead scTableHeader>',
-      '      <tr scTableRow>',
-      '        <th scTableHeaderCell scDataTableHeaderCell [column]="…">',
-      '          <input type="checkbox" scCheckbox scDataTableSelectAll [table]="table" />',
-      '          <button scDataTableSortButton [column]="…">…</button>',
-      '        </th>',
-      '      </tr>',
-      '    </thead>',
-      '    <tbody scTableBody>',
-      '      <tr scTableRow scDataTableRow [row]="row">',
-      '        <td scTableCell scDataTableCell [column]="…">',
-      '          <input type="checkbox" scCheckbox scDataTableSelectRow [row]="row" />',
-      '        </td>',
-      '      </tr>',
-      '    </tbody>',
-      '  </table>',
+      '<div scDataTableProvider [table]="table">',
+      '  <input scDataTableGlobalFilter aria-label="…" />',
+      '  <div scDataTableContainer>',
+      '    <table scDataTable>',
+      '      <thead scDataTableHeader>',
+      '        <tr scDataTableRow>',
+      '          <th scDataTableHeaderCell [column]="…">',
+      '            <input type="checkbox" scCheckbox scDataTableSelectAll aria-label="…" />',
+      '            <button scDataTableSortButton [column]="…">…</button>',
+      '          </th>',
+      '        </tr>',
+      '      </thead>',
+      '      <tbody scDataTableBody>',
+      '        <tr scDataTableRow [row]="row">',
+      '          <td scDataTableCell [column]="…">',
+      '            <input type="checkbox" scCheckbox scDataTableSelectRow [row]="row" />',
+      '          </td>',
+      '        </tr>',
+      '      </tbody>',
+      '    </table>',
+      '  </div>',
+      '  <nav scDataTablePagination aria-label="…">…</nav>',
       '</div>',
-      '<nav scPagination scDataTablePagination [table]="table">…</nav>',
     ].join('\n'),
   };
 
   private readonly parts = [
     {
+      name: 'ScDataTableProvider',
+      selector: 'div[scDataTableProvider]',
+      description:
+        "[table]: TanStack's table, held for the parts around it and in it — the filter, select all, the pagination, a tree grid. Wraps them.",
+    },
+    {
+      name: 'ScDataTableContainer, ScDataTable, ScDataTableHeader, ScDataTableBody, ScDataTableFooter, ScDataTableCaption',
+      selector:
+        'div[scDataTableContainer], table[scDataTable], thead[scDataTableHeader], tbody[scDataTableBody], tfoot[scDataTableFooter], caption[scDataTableCaption]',
+      description:
+        "The table's box (it scrolls sideways), the table and its sections, in the Table's look.",
+    },
+    {
       name: 'ScDataTableHeaderCell',
       selector: 'th[scDataTableHeaderCell]',
       description:
-        'A header cell bound to its column ([column]): aria-sort while sortable, sticky when pinned. With scTableHeaderCell.',
+        "A header cell, in the Table's look; bound to its column ([column]): aria-sort while sortable, sticky when pinned.",
     },
     {
       name: 'ScDataTableCell',
       selector: 'td[scDataTableCell]',
       description:
-        'A body cell bound to its column ([column]): sticky when pinned. With scTableCell.',
+        "A cell, in the Table's look; bound to its column ([column]): sticky when pinned.",
     },
     {
       name: 'ScDataTableRow',
       selector: 'tr[scDataTableRow]',
       description:
-        'A body row bound to its row ([row]): data-state="selected" while selected; in a tree grid, its level, place and open state. With scTableRow.',
+        'A row, in the Table\'s look; bound to its row ([row], in the body): data-state="selected" while selected; in a tree grid, its level, place and open state.',
     },
     {
       name: 'ScDataTableSortButton',
       selector: 'button[scDataTableSortButton]',
       description:
-        '[column]: sorts it on click (Shift+click adds to a multi-sort). Your icons, from direction() (exportAs scDataTableSortButton).',
+        "[column]: sorts it on click (Shift+click adds to a multi-sort). The style's button (variant ghost, size sm by default). Your icons, from direction() (exportAs scDataTableSortButton).",
     },
     {
       name: 'ScDataTableSelectAll',
       selector: 'input[type="checkbox"][scDataTableSelectAll]',
       description:
-        "[table]: checked when every row is selected, indeterminate when some are. scope ('page', default, or 'all'). Alone or with scCheckbox; name it.",
+        "Checked when every row is selected, indeterminate when some are. scope ('page', default, or 'all'). On an scCheckbox; name it.",
     },
     {
       name: 'ScDataTableSelectRow',
       selector: 'input[type="checkbox"][scDataTableSelectRow]',
       description:
-        "[row]: the row's selection; disabled when it can't be selected, half-ticked when only some sub-rows are. Name it.",
+        "[row]: the row's selection; disabled when it can't be selected, half-ticked when only some sub-rows are. On an scCheckbox; name it.",
     },
     {
       name: 'ScDataTableGlobalFilter, ScDataTableColumnFilter',
       selector:
         'input[scDataTableGlobalFilter], input[scDataTableColumnFilter]',
       description:
-        'Filter the whole table ([table]) or one column ([column]) as you type; empty clears it. With scInput; name them.',
+        "Filter the whole table or one column ([column]) as you type; empty clears it. In the Input's look; name them.",
     },
     {
       name: 'ScDataTableColumnVisibility',
       selector: 'input[type="checkbox"][scDataTableColumnVisibility]',
       description:
-        '[column]: shows or hides it. Alone or with scCheckbox — in a popover, say.',
+        '[column]: shows or hides it. On an scCheckbox — in a popover, say.',
     },
     {
       name: 'ScDataTablePagination',
-      selector: '[scPagination][scDataTablePagination]',
+      selector: 'nav[scDataTablePagination], div[scDataTablePagination]',
       description:
-        "[table]: the pagination's page, page size and row count from the table, page changes back to it. Compose the pagination's parts as usual.",
+        "The Pagination, its page, page size and row count from the table, its page changes back to it (exportAs scPagination). Compose the Pagination's parts inside as usual.",
     },
     {
       name: 'ScDataTableTreeGrid, ScDataTableTreeCell, ScDataTableExpand, ScDataTableExpandAll',
       selector:
         'table[scDataTableTreeGrid], div[scDataTableTreeCell], button[scDataTableExpand], button[scDataTableExpandAll]',
       description:
-        'A tree table (WAI-ARIA treegrid): one tab stop, ↑ ↓ between rows, → / ← open, close or move in and out (mirrored right to left); the first cell indented by depth with its expand button; open or close all.',
+        'A tree table (WAI-ARIA treegrid): one tab stop, ↑ ↓ between rows, → / ← open, close or move in and out (mirrored right to left); the first cell indented by depth with its expand button; open or close all. The tree grid is the table itself, in the Table look.',
     },
   ];
 }

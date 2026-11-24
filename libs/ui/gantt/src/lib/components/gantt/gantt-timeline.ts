@@ -8,8 +8,8 @@ import { ScGantt } from './gantt';
  * Monday); the header cell holds the scale.
  *
  * ```html
- * <th scTableHeaderCell scGanttTimeline>…<div scGanttScale>…</div></th>
- * <td scTableCell scGanttTimeline><div scGanttBar …>…</div></td>
+ * <th scDataTableHeaderCell scGanttTimeline>…<div scGanttScale>…</div></th>
+ * <td scDataTableCell scGanttTimeline><div scGanttBar …>…</div></td>
  * ```
  */
 @Directive({
