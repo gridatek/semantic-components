@@ -100,8 +100,9 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
           The user&apos;s mode and theme are kept in cookies (<code scTypeset
             >sc-mode</code
           >, <code scTypeset>sc-theme</code>, copied to localStorage), so a page
-          rendered on the server is drawn right from the first paint. System
-          needs the browser: the server draws it light.
+          rendered on the server is drawn right from the first paint. System is
+          the browser&apos;s: a small script the server puts in the page&apos;s
+          head applies it before the first paint.
         </p>
       </section>
     </div>

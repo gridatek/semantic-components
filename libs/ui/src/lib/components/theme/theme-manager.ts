@@ -1,7 +1,16 @@
-import { DOCUMENT } from '@angular/common';
-import { Service, computed, effect, inject, signal } from '@angular/core';
+import { DOCUMENT, isPlatformServer } from '@angular/common';
+import {
+  CSP_NONCE,
+  PLATFORM_ID,
+  Service,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { SC_CONFIG } from '../../config/config';
 import { ScStorage } from '../../utils/storage/storage';
+import { themeScript } from './theme-script';
 
 export type ScMode = 'light' | 'dark' | 'system';
 
@@ -12,7 +21,10 @@ const THEME_KEY = 'theme';
 /**
  * The theme and the mode, while the app runs: the user's choices, kept (a
  * cookie the server reads too), else the preset's (`provideSemanticComponents({ preset: { theme, mode } })`).
- * The mode puts `dark` on the page's root; the theme, `data-theme`.
+ * The mode puts `dark` on the page's root; the theme, `data-theme`. On the
+ * server, a script at the top of `<head>` does it again before the first
+ * paint: "system" from the browser's `prefers-color-scheme`, and the user's
+ * choices on a prerendered page (no request, no cookie).
  */
 @Service()
 export class ScThemeManager {
@@ -61,6 +73,8 @@ export class ScThemeManager {
     this.darkMediaQuery?.addEventListener('change', () => {
       this.systemMode.set(this.getSystemMode());
     });
+
+    if (isPlatformServer(inject(PLATFORM_ID))) this.addScript();
   }
 
   setMode(mode: ScMode): void {
@@ -96,6 +110,25 @@ export class ScThemeManager {
 
   private store(key: string, value: string): void {
     this.storage.set(key, value);
+  }
+
+  /** The script that sets the mode and the theme before the first paint (`themeScript`); once, at the top of `<head>`. */
+  private addScript(): void {
+    const head = this.document.head;
+    if (!head || head.querySelector('script#sc-theme-script')) return;
+    const script = this.document.createElement('script');
+    script.id = 'sc-theme-script';
+    const nonce = inject(CSP_NONCE, { optional: true });
+    if (nonce) script.setAttribute('nonce', nonce);
+    script.textContent = themeScript({
+      modeKey: this.storage.key(MODE_KEY),
+      themeKey: this.storage.key(THEME_KEY),
+      mode: this.preset?.mode ?? 'system',
+      theme: this.preset?.theme ?? 'default',
+    });
+    // After the charset, which must stay in the first 1024 bytes.
+    const charset = head.querySelector('meta[charset]');
+    head.insertBefore(script, charset ? charset.nextSibling : head.firstChild);
   }
 
   private getSystemMode(): 'light' | 'dark' {

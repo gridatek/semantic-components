@@ -49,8 +49,10 @@ import { TocHeading } from '../../components/toc/toc-heading';
         <app-doc-code [code]="storageCode" />
         <p>
           A prerendered page has no request: it is drawn with the defaults, and
-          the browser applies the choices as it starts. The system theme needs
-          the browser too: the server draws it light.
+          the browser applies the choices as it starts. The mode and the theme
+          don&apos;t wait for it: a small script in the page&apos;s head sets
+          them before the first paint — the system&apos;s mode, which only the
+          browser knows, included.
         </p>
       </section>
 

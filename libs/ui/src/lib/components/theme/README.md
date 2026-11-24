@@ -72,4 +72,6 @@ Write each theme's variables under its name (any of shadcn's: colours, `--radius
 
 ## Kept
 
-The user's mode and theme are kept with `ScStorage`: cookies (`sc-mode`, `sc-theme`: the setup's `storagePrefix`, then the choice) the server reads too, copied to `localStorage`. A page rendered on the server is drawn in the user's mode and theme from the first paint; "system" needs the browser, so the server draws it light. Until the user picks, the preset's `mode` and `theme` apply.
+The user's mode and theme are kept with `ScStorage`: cookies (`sc-mode`, `sc-theme`: the setup's `storagePrefix`, then the choice) the server reads too, copied to `localStorage`. A page rendered on the server is drawn in the user's mode and theme from the first paint. Until the user picks, the preset's `mode` and `theme` apply.
+
+Only the browser knows the system's mode, and a prerendered page has no cookie to read: on the server, `ScThemeManager` puts a small script in `<head>` (after the charset, `id="sc-theme-script"`) that sets `dark` and `data-theme` before the first paint — "system" from `prefers-color-scheme`, the choices from the cookie or its `localStorage` copy. With a CSP, it takes Angular's nonce (`CSP_NONCE`). Inject `ScThemeManager` where the app starts (a header's mode menu does), so it is there on every page.
