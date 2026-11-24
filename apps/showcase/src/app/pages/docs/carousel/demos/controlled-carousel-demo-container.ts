@@ -56,22 +56,22 @@ import {
           <div scCarouselTrack>
             @for (n of slides; track n) {
               <div
-              scCarouselItem
-              #slide="scCarouselItem"
-              aria-roledescription="slide"
-              [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
-            >
-              <div class="p-1">
-                <div scCard>
-                  <div
-                    scCardBody
-                    class="flex aspect-square items-center justify-center p-6"
-                  >
-                    <span class="text-4xl font-semibold">{{ n }}</span>
+                scCarouselItem
+                #slide="scCarouselItem"
+                aria-roledescription="slide"
+                [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
+              >
+                <div class="p-1">
+                  <div scCard>
+                    <div
+                      scCardBody
+                      class="flex aspect-square items-center justify-center p-6"
+                    >
+                      <span class="text-4xl font-semibold">{{ n }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
             }
           </div>
         </div>

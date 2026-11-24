@@ -17,7 +17,7 @@ A window over the page, which waits until it is closed: the page behind it can't
         <h2 scDialogTitle>Edit profile</h2>
         <p scDialogDescription>Make changes to your profile here.</p>
       </div>
-      …
+      <div scDialogBody>…</div>
       <div scDialogFooter>
         <button scDialogClose variant="outline" size="default">Cancel</button>
         <button scButton (click)="save()">Save changes</button>
@@ -41,15 +41,16 @@ Narrow it with a `max-w` of your own (`class="sm:max-w-md"`), or set a width (`c
 
 ## API reference
 
-| Part                                   | Selector                                        | Inputs                                                                                                                                   |
-| -------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScDialogProvider`                     | `div[scDialogProvider], span[scDialogProvider]` | `open` (`[(open)]`), `class` — renders the dialog centred over the backdrop                                                              |
-| `ScDialogTrigger`                      | `button[scDialogTrigger]`                       | `class` — opens it; behaviour only                                                                                                       |
-| `ScDialogPortal`, `ScDialog`           | `ng-template[scDialogPortal]`, `div[scDialog]`  | `class` — role `dialog`, modal; named by its title, described by its description; takes the direction and language of where it is opened |
-| `ScDialogClose`                        | `button[scDialogClose]`                         | `class`, `variant` (`ghost`), `size` (`icon-sm`), `type` — closes it; the style's button                                                 |
-| `ScDialogHeader`, `ScDialogFooter`     | `div[…]`                                        | `class`                                                                                                                                  |
-| `ScDialogTitle`, `ScDialogDescription` | `h2[scDialogTitle]`, `p[scDialogDescription]`   | `class`                                                                                                                                  |
+| Part                                   | Selector                                        | Inputs                                                                                                                                              |
+| -------------------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScDialogProvider`                     | `div[scDialogProvider], span[scDialogProvider]` | `open` (`[(open)]`), `class` — renders the dialog centred over the backdrop                                                                         |
+| `ScDialogTrigger`                      | `button[scDialogTrigger]`                       | `class` — opens it; behaviour only                                                                                                                  |
+| `ScDialogPortal`, `ScDialog`           | `ng-template[scDialogPortal]`, `div[scDialog]`  | `class` — role `dialog`, modal; named by its title, described by its description; takes the direction and language of where it is opened            |
+| `ScDialogClose`                        | `button[scDialogClose]`                         | `class`, `variant` (`ghost`), `size` (`icon-sm`), `type` — closes it; the style's button                                                            |
+| `ScDialogHeader`, `ScDialogFooter`     | `div[…]`                                        | `class`                                                                                                                                             |
+| `ScDialogBody`                         | `div[scDialogBody]`                             | `class` — the content between the header and the footer: past half the screen it scrolls, edge to edge (the style's `dialog.body`), while they stay |
+| `ScDialogTitle`, `ScDialogDescription` | `h2[scDialogTitle]`, `p[scDialogDescription]`   | `class`                                                                                                                                             |
 
 `scDialogProvider`: On a `span`, it fits in running text — inside a `<p>`, where a `div` is not allowed; it renders `display: contents` either way.
 
-Every part's classes are the style's (`injectStyle().dialog`: `content`, `close` — the ✕'s place and fill —, `header`, `footer`, `title`, `description`): shadcn's Dialog, in each style. The backdrop is the shared `backdrop` key.
+Every part's classes are the style's (`injectStyle().dialog`: `content`, `close` — the ✕'s place and fill —, `header`, `body`, `footer`, `title`, `description`): shadcn's Dialog, in each style. The backdrop is the shared `backdrop` key.

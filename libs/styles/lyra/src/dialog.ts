@@ -9,6 +9,9 @@ export const dialog: ScDialogStyles = {
   close:
     '[&>[data-slot=dialog-close]]:absolute [&>[data-slot=dialog-close]]:top-2 [&>[data-slot=dialog-close]]:end-2',
   header: 'flex flex-col gap-1 text-start',
+  // The body: the panel's content between header and footer, scrolling
+  // edge to edge past half the screen (shadcn's scrollable-content example).
+  body: '-mx-4 max-h-[50vh] overflow-y-auto px-4',
   footer: 'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end',
   title: 'font-heading text-sm font-medium',
   description:

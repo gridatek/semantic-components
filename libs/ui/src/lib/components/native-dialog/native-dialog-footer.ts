@@ -1,6 +1,8 @@
 import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectStyle } from '../../config/style';
 
+/** The actions, at the end (stacked, reversed, on a phone). */
 @Directive({
   selector: 'div[scNativeDialogFooter]',
   host: {
@@ -8,12 +10,10 @@ import { cn } from 'cn';
   },
 })
 export class ScNativeDialogFooter {
+  private readonly styles = injectStyle().dialog;
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() =>
-    cn(
-      'bg-muted/50 -mx-4 -mb-4 rounded-b-xl border-t p-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end',
-      this.classInput(),
-    ),
+    cn(this.styles.footer, this.classInput()),
   );
 }

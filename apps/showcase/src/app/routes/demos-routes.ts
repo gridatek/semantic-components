@@ -2598,10 +2598,45 @@ export const demosRoutes: Route[] = [
     path: 'demos/native-dialog',
     children: [
       {
-        path: 'native-dialog-demo',
+        path: 'native-dialog-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/native-dialog/demos/native-dialog-demo').then(
-            (m) => m.NativeDialogDemo,
+          import('../pages/docs/native-dialog/demos/native-dialog-usage-demo').then(
+            (m) => m.NativeDialogUsageDemo,
+          ),
+      },
+      {
+        path: 'close-button-native-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-dialog/demos/close-button-native-dialog-demo').then(
+            (m) => m.CloseButtonNativeDialogDemo,
+          ),
+      },
+      {
+        path: 'no-close-button-native-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-dialog/demos/no-close-button-native-dialog-demo').then(
+            (m) => m.NoCloseButtonNativeDialogDemo,
+          ),
+      },
+      {
+        path: 'sticky-footer-native-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-dialog/demos/sticky-footer-native-dialog-demo').then(
+            (m) => m.StickyFooterNativeDialogDemo,
+          ),
+      },
+      {
+        path: 'scrollable-content-native-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-dialog/demos/scrollable-content-native-dialog-demo').then(
+            (m) => m.ScrollableContentNativeDialogDemo,
+          ),
+      },
+      {
+        path: 'rtl-native-dialog-demo',
+        loadComponent: () =>
+          import('../pages/docs/native-dialog/demos/rtl-native-dialog-demo').then(
+            (m) => m.RtlNativeDialogDemo,
           ),
       },
     ],

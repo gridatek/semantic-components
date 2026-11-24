@@ -22,6 +22,7 @@ export class ScrollableContentDialogDemoContainer {
 import {
   ScButton,
   ScDialog,
+  ScDialogBody,
   ScDialogClose,
   ScDialogDescription,
   ScDialogHeader,
@@ -41,6 +42,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScDialogTrigger,
     ScDialogPortal,
     ScDialog,
+    ScDialogBody,
     ScDialogClose,
     ScDialogHeader,
     ScDialogTitle,
@@ -62,7 +64,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
             <h2 scDialogTitle>Scrollable Content</h2>
             <p scDialogDescription>This is a dialog with scrollable content.</p>
           </div>
-          <div class="no-scrollbar -mx-4 max-h-[50vh] overflow-y-auto px-4">
+          <div scDialogBody>
             @for (paragraph of paragraphs; track $index) {
               <p class="mb-4 leading-normal">{{ paragraph }}</p>
             }

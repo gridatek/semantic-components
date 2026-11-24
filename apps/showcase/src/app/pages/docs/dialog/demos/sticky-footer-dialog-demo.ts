@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
   ScDialog,
+  ScDialogBody,
   ScDialogClose,
   ScDialogDescription,
   ScDialogFooter,
@@ -22,6 +23,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
     ScDialogTrigger,
     ScDialogPortal,
     ScDialog,
+    ScDialogBody,
     ScDialogClose,
     ScDialogHeader,
     ScDialogTitle,
@@ -45,7 +47,7 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
               content scrolls.
             </p>
           </div>
-          <div class="no-scrollbar -mx-4 max-h-[50vh] overflow-y-auto px-4">
+          <div scDialogBody>
             @for (paragraph of paragraphs; track $index) {
               <p class="mb-4 leading-normal">{{ paragraph }}</p>
             }

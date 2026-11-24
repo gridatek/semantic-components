@@ -156,7 +156,10 @@ export class AlignCarouselDemo {
   ];
   private readonly align = signal<Align>('center');
   private readonly photos = [
-    { src: '/images/gallery/mountains.jpg', alt: 'Mountains under a clear sky' },
+    {
+      src: '/images/gallery/mountains.jpg',
+      alt: 'Mountains under a clear sky',
+    },
     { src: '/images/gallery/coast.jpg', alt: 'A rocky coast' },
     { src: '/images/gallery/forest.jpg', alt: 'A forest path' },
     { src: '/images/gallery/gorge.jpg', alt: 'A river in a gorge' },

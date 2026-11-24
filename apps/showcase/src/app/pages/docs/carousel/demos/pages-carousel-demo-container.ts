@@ -22,13 +22,13 @@ export class PagesCarouselDemoContainer {
 import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   ScCarousel,
+  ScCarouselIndicator,
+  ScCarouselIndicators,
   ScCarouselItem,
   ScCarouselNext,
   ScCarouselPrevious,
   ScCarouselTrack,
   ScCarouselViewport,
-  ScCarouselIndicator,
-  ScCarouselIndicators,
 } from '@semantic-components/ui/carousel';
 import {
   SiChevronLeftIcon,

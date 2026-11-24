@@ -18,7 +18,13 @@ import { ProgressCarouselDemo } from './progress-carousel-demo';
   encapsulation: ViewEncapsulation.None,
 })
 export class ProgressCarouselDemoContainer {
-  private readonly code = `import { Component, ViewEncapsulation, effect, signal, viewChild } from '@angular/core';
+  private readonly code = `import {
+  Component,
+  ViewEncapsulation,
+  effect,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { ScCard, ScCardBody } from '@semantic-components/ui';
 import {
   ScCarousel,

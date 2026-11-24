@@ -1,10 +1,10 @@
 export { ScNativeDialogProvider } from './native-dialog-provider';
 export { ScNativeDialogTrigger } from './native-dialog-trigger';
+export { ScNativeDialogPortal } from './native-dialog-portal';
 export { ScNativeDialog } from './native-dialog';
-export { ScNativeDialogContent } from './native-dialog-content';
-export { ScNativeDialogClose } from './native-dialog-close';
 export { ScNativeDialogHeader } from './native-dialog-header';
-export { ScNativeDialogBody } from './native-dialog-body';
 export { ScNativeDialogTitle } from './native-dialog-title';
 export { ScNativeDialogDescription } from './native-dialog-description';
+export { ScNativeDialogBody } from './native-dialog-body';
 export { ScNativeDialogFooter } from './native-dialog-footer';
+export { ScNativeDialogClose } from './native-dialog-close';

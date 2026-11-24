@@ -24,6 +24,7 @@ test.describe('Dialog Page', () => {
       'ScDialogPortal, ScDialog',
       'ScDialogClose',
       'ScDialogHeader, ScDialogFooter',
+      'ScDialogBody',
       'ScDialogTitle, ScDialogDescription',
     ]);
   });

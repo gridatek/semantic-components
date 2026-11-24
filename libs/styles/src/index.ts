@@ -194,6 +194,8 @@ export interface ScDialogStyles {
   /** A close straight in the panel (the ✕): its place and fill, as `[&>[data-slot=dialog-close]]:…` classes. */
   close: string;
   header: string;
+  /** The content between header and footer: it scrolls past half the screen, edge to edge (the panel's padding). */
+  body: string;
   footer: string;
   title: string;
   description: string;

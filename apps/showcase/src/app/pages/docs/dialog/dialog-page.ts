@@ -103,7 +103,7 @@ export default class DialogPage {
       'import {',
       '  ScDialogProvider, ScDialogTrigger, ScDialogPortal, ScDialog,',
       '  ScDialogClose, ScDialogHeader, ScDialogTitle, ScDialogDescription,',
-      '  ScDialogFooter,',
+      '  ScDialogBody, ScDialogFooter,',
       "} from '@semantic-components/ui';",
     ].join('\n'),
     markup: [
@@ -116,7 +116,7 @@ export default class DialogPage {
       '        <h2 scDialogTitle>…</h2>',
       '        <p scDialogDescription>…</p>',
       '      </div>',
-      '      …',
+      '      <div scDialogBody>…</div>',
       '      <div scDialogFooter>',
       '        <button scDialogClose variant="outline" size="default">Cancel</button>',
       '        <button scButton (click)="save()">…</button>',
@@ -155,6 +155,12 @@ export default class DialogPage {
       name: 'ScDialogHeader, ScDialogFooter',
       selector: 'div[scDialogHeader], div[scDialogFooter]',
       description: 'The title and description; the buttons.',
+    },
+    {
+      name: 'ScDialogBody',
+      selector: 'div[scDialogBody]',
+      description:
+        'The content between them: past half the screen it scrolls, edge to edge, while the header and the footer stay.',
     },
     {
       name: 'ScDialogTitle, ScDialogDescription',

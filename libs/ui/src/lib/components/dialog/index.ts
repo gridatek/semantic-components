@@ -5,5 +5,6 @@ export { ScDialog } from './dialog';
 export { ScDialogHeader } from './dialog-header';
 export { ScDialogTitle } from './dialog-title';
 export { ScDialogDescription } from './dialog-description';
+export { ScDialogBody } from './dialog-body';
 export { ScDialogFooter } from './dialog-footer';
 export { ScDialogClose } from './dialog-close';
