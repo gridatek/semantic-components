@@ -22,6 +22,7 @@ import {
   ScRadio,
   ScRadioGroup,
   ScStepper,
+  ScStepperConnector,
   ScStepperDescription,
   ScStepperIndicator,
   ScStepperItem,
@@ -29,7 +30,6 @@ import {
   ScStepperNext,
   ScStepperPanel,
   ScStepperPrevious,
-  ScStepperSeparator,
   ScStepperTitle,
   ScStepperTrigger,
   ScToaster,
@@ -70,7 +70,7 @@ const EMPTY = {
     ScStepperNext,
     ScStepperPanel,
     ScStepperPrevious,
-    ScStepperSeparator,
+    ScStepperConnector,
     ScStepperTitle,
     ScStepperTrigger,
     SiCheckIcon,
@@ -124,8 +124,8 @@ const EMPTY = {
                     <span scStepperDescription>Email and password</span>
                   </span>
                 </button>
+                <div scStepperConnector></div>
               </div>
-              <div scStepperSeparator [step]="0"></div>
               <div
                 scStepperItem
                 [stepControl]="wizardForm.profile"
@@ -147,8 +147,8 @@ const EMPTY = {
                     <span scStepperDescription>You and your team</span>
                   </span>
                 </button>
+                <div scStepperConnector></div>
               </div>
-              <div scStepperSeparator [step]="1"></div>
               <div
                 scStepperItem
                 [stepControl]="wizardForm.plan"

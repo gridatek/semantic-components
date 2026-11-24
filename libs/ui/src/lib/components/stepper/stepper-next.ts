@@ -2,13 +2,9 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
-import { SC_STEPPER } from './stepper-types';
+import { ScStepper } from './stepper';
 
-/**
- * Goes to the next step. In `linear` mode an invalid step stays (its errors
- * show instead). Not rendered as disabled on the last step — use it there for
- * your own "Finish" action, or hide it.
- */
+/** Goes to the next step: the style's button. Refused (`linear`, the step's form invalid), the form shows its errors. */
 @Directive({
   selector: 'button[scStepperNext]',
   host: {
@@ -19,12 +15,11 @@ import { SC_STEPPER } from './stepper-types';
 })
 export class ScStepperNext {
   private readonly buttonStyles = injectStyle().button;
-
-  private readonly stepper = inject(SC_STEPPER);
+  private readonly stepper = inject(ScStepper);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('default');
-  readonly size = input<ScButtonVariants['size']>('lg');
+  readonly size = input<ScButtonVariants['size']>('default');
 
   private readonly class = computed(() =>
     cn(

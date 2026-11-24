@@ -2,9 +2,9 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
-import { SC_STEPPER } from './stepper-types';
+import { ScStepper } from './stepper';
 
-/** Goes to the previous step; disabled on the first one. */
+/** Goes to the previous step: the style's button (outline); disabled on the first one. */
 @Directive({
   selector: 'button[scStepperPrevious]',
   host: {
@@ -16,12 +16,11 @@ import { SC_STEPPER } from './stepper-types';
 })
 export class ScStepperPrevious {
   private readonly buttonStyles = injectStyle().button;
-
-  private readonly stepper = inject(SC_STEPPER);
+  private readonly stepper = inject(ScStepper);
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('outline');
-  readonly size = input<ScButtonVariants['size']>('lg');
+  readonly size = input<ScButtonVariants['size']>('default');
 
   private readonly class = computed(() =>
     cn(

@@ -21,6 +21,9 @@ export class CloseButtonNativeDialogDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ScButton,
+  ScField,
+  ScInput,
+  ScLabel,
   ScNativeDialog,
   ScNativeDialogClose,
   ScNativeDialogDescription,
@@ -30,9 +33,6 @@ import {
   ScNativeDialogProvider,
   ScNativeDialogTitle,
   ScNativeDialogTrigger,
-  ScField,
-  ScInput,
-  ScLabel,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
 

@@ -14,13 +14,13 @@ import {
   ScInput,
   ScLabel,
   ScStepper,
+  ScStepperConnector,
   ScStepperIndicator,
   ScStepperItem,
   ScStepperList,
   ScStepperNext,
   ScStepperPanel,
   ScStepperPrevious,
-  ScStepperSeparator,
   ScStepperTitle,
   ScStepperTrigger,
 } from '@semantic-components/ui';
@@ -31,6 +31,7 @@ interface SignupModel {
   profile: { name: string };
 }
 
+/** Linear: each step's form valid before the next — Next, a later step or the keys are refused, and the step shows its errors (its indicator failed). */
 @Component({
   selector: 'app-linear-stepper-demo',
   imports: [
@@ -49,7 +50,7 @@ interface SignupModel {
     ScStepperNext,
     ScStepperPanel,
     ScStepperPrevious,
-    ScStepperSeparator,
+    ScStepperConnector,
     ScStepperTitle,
     ScStepperTrigger,
     SiCheckIcon,
@@ -63,7 +64,7 @@ interface SignupModel {
         [(selectedIndex)]="selectedIndex"
         #stepper="scStepper"
       >
-        <div scStepperList>
+        <div scStepperList aria-label="Sign-up steps">
           <div
             scStepperItem
             [stepControl]="signupForm.account"
@@ -75,7 +76,7 @@ interface SignupModel {
                   @case ('complete') {
                     <svg siCheckIcon></svg>
                   }
-                  @case ('error') {
+                  @case ('failed') {
                     <svg siXIcon></svg>
                   }
                   @default {
@@ -85,8 +86,8 @@ interface SignupModel {
               </span>
               <span scStepperTitle>Account</span>
             </button>
+            <div scStepperConnector></div>
           </div>
-          <div scStepperSeparator [step]="0"></div>
           <div
             scStepperItem
             [stepControl]="signupForm.profile"
@@ -98,7 +99,7 @@ interface SignupModel {
                   @case ('complete') {
                     <svg siCheckIcon></svg>
                   }
-                  @case ('error') {
+                  @case ('failed') {
                     <svg siXIcon></svg>
                   }
                   @default {
@@ -108,13 +109,14 @@ interface SignupModel {
               </span>
               <span scStepperTitle>Profile</span>
             </button>
+            <div scStepperConnector></div>
           </div>
-          <div scStepperSeparator [step]="1"></div>
           <div scStepperItem #review="scStepperItem">
             <button scStepperTrigger>
               <span scStepperIndicator>3</span>
               <span scStepperTitle>Review</span>
             </button>
+            <div scStepperConnector></div>
           </div>
         </div>
 

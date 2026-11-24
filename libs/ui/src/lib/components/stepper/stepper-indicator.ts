@@ -1,49 +1,59 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { SC_STEPPER_ITEM } from './stepper-types';
+import { injectStyle } from '../../config/style';
+import { ScStepperItem } from './stepper-item';
+import { ScStepperTrigger } from './stepper-trigger';
 
 /**
- * The step's circle: shows its state (active, complete, error, inactive) and
- * holds the number or an icon — yours to choose from `state()` / `step()`.
- *
- * ```html
- * <span scStepperIndicator #indicator="scStepperIndicator">
- *   @switch (indicator.state()) {
- *     @case ('complete') { <svg siCheckIcon></svg> }
- *     @case ('error') { <svg siXIcon></svg> }
- *     @default { {{ indicator.step() + 1 }} }
- *   }
- * </span>
- * ```
+ * The step's mark, in its trigger: a number or your icon. As the Timeline's
+ * markers (the style's `timeline` corners and ring): filled when complete,
+ * ringed when current, muted when upcoming, the destructive colour when
+ * failed. As large as the style's icon buttons (`--sc-stepper-indicator`).
  */
 @Directive({
-  selector: '[scStepperIndicator]',
+  selector: 'span[scStepperIndicator]',
   exportAs: 'scStepperIndicator',
   host: {
-    'data-slot': 'stepper-indicator',
-    '[attr.data-state]': 'state()',
     '[class]': 'class()',
   },
 })
 export class ScStepperIndicator {
-  private readonly item = inject(SC_STEPPER_ITEM);
+  private readonly item = inject(ScStepperItem);
+  private readonly trigger = inject(ScStepperTrigger, { optional: true });
+  private readonly styles = injectStyle();
+  /** The style's button text size (`text-sm`, `text-xs`), for the number. */
+  private readonly textSize =
+    this.styles
+      .button({ size: 'icon' })
+      .split(/\s+/)
+      .find((c) => /^text-(xs|sm|base)$/.test(c)) ?? 'text-sm';
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  /** The step's state: `'active'`, `'complete'`, `'error'` or `'inactive'`. */
-  readonly state = computed(() => this.item.status());
-  /** The step's index (0-based). */
-  readonly step = computed(() => this.item.index());
+  /** The step's status. */
+  readonly status = this.item.status;
+  /** The step's place, from 0. */
+  readonly step = this.item.index;
 
-  private readonly class = computed(() =>
-    cn(
-      'inline-flex size-10 shrink-0 items-center justify-center rounded-full border-2 text-sm font-medium transition-colors',
-      'data-[state=complete]:border-primary data-[state=complete]:bg-primary data-[state=complete]:text-primary-foreground',
-      'data-[state=active]:border-primary data-[state=active]:text-primary',
-      'data-[state=error]:border-destructive data-[state=error]:text-destructive',
-      'data-[state=inactive]:border-muted data-[state=inactive]:text-muted-foreground',
-      "[&_svg:not([class*='size-'])]:size-4",
+  private readonly class = computed(() => {
+    const status = this.status();
+    return cn(
+      'inline-flex size-(--sc-stepper-indicator) shrink-0 items-center justify-center font-medium tabular-nums transition-colors motion-reduce:transition-none',
+      this.textSize,
+      this.trigger?.twoLines() && 'row-span-2',
+      this.styles.timeline.marker,
+      "[&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0",
+      status === 'current'
+        ? cn(
+            'bg-background text-foreground ring-primary ring-inset',
+            this.styles.timeline.markerRing,
+          )
+        : status === 'upcoming'
+          ? 'bg-muted text-muted-foreground ring-border ring-1 ring-inset'
+          : status === 'failed'
+            ? 'bg-destructive text-white'
+            : 'bg-primary text-primary-foreground',
       this.classInput(),
-    ),
-  );
+    );
+  });
 }

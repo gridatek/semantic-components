@@ -1,38 +1,36 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { SC_STEPPER } from './stepper-types';
+import { injectStyle } from '../../config/style';
+import { ScStepper } from './stepper';
 
 /**
- * The content of step `step` (`role="tabpanel"`, labelled by its trigger),
- * shown while it's current. Hidden panels keep their content.
+ * Step `[step]`'s content, a tabpanel named by its trigger: shown while that
+ * step is (hidden ones keep their content). Outside the list.
  */
 @Directive({
-  selector: '[scStepperPanel]',
+  selector: 'div[scStepperPanel]',
   host: {
     role: 'tabpanel',
     '[id]': 'stepper.panelId(step())',
     '[attr.aria-labelledby]': 'stepper.triggerId(step())',
-    '[attr.tabindex]': 'isActive() ? 0 : null',
-    '[hidden]': '!isActive()',
+    '[attr.tabindex]': 'shown() ? 0 : null',
+    '[hidden]': '!shown()',
     '[class]': 'class()',
   },
 })
 export class ScStepperPanel {
-  private readonly stepper = inject(SC_STEPPER);
+  private readonly stepper = inject(ScStepper);
+  private readonly styles = injectStyle().timeline;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  /** Index of the step this panel belongs to (0-based). */
+  /** The step it belongs to, from 0. */
   readonly step = input.required<number>();
 
-  private readonly isActive = computed(() =>
-    this.stepper.isStepActive(this.step()),
+  private readonly shown = computed(
+    () => this.stepper.selectedIndex() === this.step(),
   );
 
   private readonly class = computed(() =>
-    cn(
-      'mt-4 rounded-md outline-none',
-      'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-      this.classInput(),
-    ),
+    cn('outline-none', this.styles.item, this.classInput()),
   );
 }

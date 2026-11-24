@@ -53,7 +53,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   ],
   template: \`
     <div scNativeDialogProvider>
-      <button scButton variant="outline" scNativeDialogTrigger>Sticky Footer</button>
+      <button scButton variant="outline" scNativeDialogTrigger>
+        Sticky Footer
+      </button>
       <ng-template scNativeDialogPortal>
         <dialog scNativeDialog>
           <button scNativeDialogClose>

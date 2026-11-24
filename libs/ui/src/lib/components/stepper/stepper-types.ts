@@ -1,13 +1,17 @@
-import { InjectionToken } from '@angular/core';
-import type { ScStepper } from './stepper';
-import type { ScStepperItem } from './stepper-item';
+import type { Signal } from '@angular/core';
 
 export type ScStepperOrientation = 'horizontal' | 'vertical';
 
-/** A step's state: the current one, done, invalid after a visit, or ahead. */
-export type ScStepperState = 'active' | 'complete' | 'error' | 'inactive';
+/**
+ * Where a step is, in the Timeline's words: done, the one shown, ahead, or
+ * left invalid.
+ */
+export type ScStepperStatus = 'complete' | 'current' | 'upcoming' | 'failed';
 
-export const SC_STEPPER = new InjectionToken<ScStepper>('SC_STEPPER');
-export const SC_STEPPER_ITEM = new InjectionToken<ScStepperItem>(
-  'SC_STEPPER_ITEM',
-);
+/** A step's form: a Signal Forms field (`form.account`), its state when called. */
+export type ScStepperControl = () => {
+  readonly valid: Signal<boolean>;
+  readonly pending: Signal<boolean>;
+  markAsTouched(): void;
+  reset(): void;
+};

@@ -62,7 +62,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
           </button>
           <div scNativeDialogHeader>
             <h2 scNativeDialogTitle>Scrollable Content</h2>
-            <p scNativeDialogDescription>This is a dialog with scrollable content.</p>
+            <p scNativeDialogDescription>
+              This is a dialog with scrollable content.
+            </p>
           </div>
           <div scNativeDialogBody>
             @for (paragraph of paragraphs; track $index) {

@@ -1,14 +1,22 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { Directionality } from '@angular/cdk/bidi';
+import {
+  Directive,
+  computed,
+  contentChildren,
+  inject,
+  input,
+} from '@angular/core';
 import { cn } from 'cn';
-import { SC_STEPPER } from './stepper-types';
+import { ScStepper } from './stepper';
+import { ScStepperTrigger } from './stepper-trigger';
 
 /**
- * The row of steps (`role="tablist"`): one Tab stop; the arrow keys (and
- * Home/End) move between steps and select them — as far as the CDK stepper
- * allows (linear mode, validity).
+ * The steps, a tablist: one Tab stop; ← → (mirrored right to left), ↑ ↓ when
+ * vertical, Home and End move between them, and the step shown follows when
+ * it can be reached.
  */
 @Directive({
-  selector: '[scStepperList]',
+  selector: 'div[scStepperList]',
   host: {
     role: 'tablist',
     '[attr.aria-orientation]': 'stepper.orientation()',
@@ -17,25 +25,53 @@ import { SC_STEPPER } from './stepper-types';
   },
 })
 export class ScStepperList {
-  private readonly stepper = inject(SC_STEPPER);
+  private readonly stepper = inject(ScStepper);
+  private readonly direction = inject(Directionality).valueSignal;
+  private readonly triggers = contentChildren(ScStepperTrigger, {
+    descendants: true,
+  });
 
   readonly classInput = input<string>('', { alias: 'class' });
 
-  private readonly class = computed(() => {
-    const isVertical = this.stepper.orientation() === 'vertical';
-    return cn(
-      'flex',
-      isVertical ? 'flex-col gap-2' : 'flex-row items-start',
+  private readonly class = computed(() =>
+    cn(
+      this.stepper.orientation() === 'vertical'
+        ? 'flex flex-col'
+        : 'flex items-center gap-3',
       this.classInput(),
-    );
-  });
+    ),
+  );
 
   private onKeydown(event: KeyboardEvent): void {
-    const cdk = this.stepper.cdk;
-    const before = cdk._getFocusIndex();
-    cdk._onKeydown(event);
-    const after = cdk._getFocusIndex();
-    // Selection follows focus.
-    if (after !== null && after !== before) this.stepper.goToStep(after);
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    const count = this.stepper.stepCount();
+    if (!count) return;
+    const at = this.stepper.focusIndex();
+    const vertical = this.stepper.orientation() === 'vertical';
+    const rtl = this.direction() === 'rtl';
+    let to: number;
+    switch (event.key) {
+      case vertical ? 'ArrowDown' : rtl ? 'ArrowLeft' : 'ArrowRight':
+        to = Math.min(at + 1, count - 1);
+        break;
+      case vertical ? 'ArrowUp' : rtl ? 'ArrowRight' : 'ArrowLeft':
+        to = Math.max(at - 1, 0);
+        break;
+      case 'Home':
+        to = 0;
+        break;
+      case 'End':
+        to = count - 1;
+        break;
+      default:
+        return;
+    }
+    event.preventDefault();
+    this.stepper.focusIndex.set(to);
+    this.triggers()
+      .find((trigger) => trigger.index() === to)
+      ?.focus();
+    // The step shown follows, when it can be reached.
+    this.stepper.goToStep(to);
   }
 }

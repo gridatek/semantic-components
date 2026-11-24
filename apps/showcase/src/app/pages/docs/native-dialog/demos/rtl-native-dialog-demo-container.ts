@@ -22,6 +22,10 @@ export class RtlNativeDialogDemoContainer {
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
+  ScField,
+  ScFieldGroup,
+  ScInput,
+  ScLabel,
   ScNativeDialog,
   ScNativeDialogClose,
   ScNativeDialogDescription,
@@ -31,10 +35,6 @@ import {
   ScNativeDialogProvider,
   ScNativeDialogTitle,
   ScNativeDialogTrigger,
-  ScField,
-  ScFieldGroup,
-  ScInput,
-  ScLabel,
   ScSelectOnFocus,
 } from '@semantic-components/ui';
 import { SiXIcon } from '@semantic-icons/lucide-icons';
@@ -64,7 +64,9 @@ import { SiXIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div dir="rtl" lang="ar">
       <div scNativeDialogProvider [(open)]="open">
-        <button scButton variant="outline" scNativeDialogTrigger>فتح الحوار</button>
+        <button scButton variant="outline" scNativeDialogTrigger>
+          فتح الحوار
+        </button>
         <ng-template scNativeDialogPortal>
           <dialog scNativeDialog class="sm:max-w-sm">
             <button scNativeDialogClose>

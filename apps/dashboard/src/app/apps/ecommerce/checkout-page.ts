@@ -37,13 +37,13 @@ import {
   ScRadioGroup,
   ScSeparator,
   ScStepper,
+  ScStepperConnector,
   ScStepperIndicator,
   ScStepperItem,
   ScStepperList,
   ScStepperNext,
   ScStepperPanel,
   ScStepperPrevious,
-  ScStepperSeparator,
   ScStepperTitle,
   ScStepperTrigger,
   ScToaster,
@@ -102,7 +102,7 @@ import { CartStore } from './shop-store';
     ScStepperNext,
     ScStepperPanel,
     ScStepperPrevious,
-    ScStepperSeparator,
+    ScStepperConnector,
     ScStepperTitle,
     ScStepperTrigger,
     SiCheckIcon,
@@ -201,8 +201,8 @@ import { CartStore } from './shop-store';
                         >Cart</span
                       >
                     </button>
+                    <div scStepperConnector></div>
                   </div>
-                  <div scStepperSeparator [step]="0"></div>
                   <div
                     scStepperItem
                     [stepControl]="checkoutForm.delivery"
@@ -220,8 +220,8 @@ import { CartStore } from './shop-store';
                         >Delivery</span
                       >
                     </button>
+                    <div scStepperConnector></div>
                   </div>
-                  <div scStepperSeparator [step]="1"></div>
                   <div
                     scStepperItem
                     [stepControl]="checkoutForm.payment"

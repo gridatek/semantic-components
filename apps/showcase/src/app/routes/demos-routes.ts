@@ -5817,17 +5817,17 @@ export const demosRoutes: Route[] = [
     path: 'demos/stepper',
     children: [
       {
-        path: 'linear-stepper-demo',
+        path: 'stepper-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/stepper/demos/linear-stepper-demo').then(
-            (m) => m.LinearStepperDemo,
+          import('../pages/docs/stepper/demos/stepper-usage-demo').then(
+            (m) => m.StepperUsageDemo,
           ),
       },
       {
-        path: 'horizontal-stepper-demo',
+        path: 'numbers-stepper-demo',
         loadComponent: () =>
-          import('../pages/docs/stepper/demos/horizontal-stepper-demo').then(
-            (m) => m.HorizontalStepperDemo,
+          import('../pages/docs/stepper/demos/numbers-stepper-demo').then(
+            (m) => m.NumbersStepperDemo,
           ),
       },
       {
@@ -5838,10 +5838,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'simple-stepper-demo',
+        path: 'linear-stepper-demo',
         loadComponent: () =>
-          import('../pages/docs/stepper/demos/simple-stepper-demo').then(
-            (m) => m.SimpleStepperDemo,
+          import('../pages/docs/stepper/demos/linear-stepper-demo').then(
+            (m) => m.LinearStepperDemo,
+          ),
+      },
+      {
+        path: 'rtl-stepper-demo',
+        loadComponent: () =>
+          import('../pages/docs/stepper/demos/rtl-stepper-demo').then(
+            (m) => m.RtlStepperDemo,
           ),
       },
     ],
