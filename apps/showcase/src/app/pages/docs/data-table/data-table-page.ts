@@ -89,8 +89,11 @@ import { RtlDataTableDemoContainer } from './demos/rtl-data-table-demo-container
           </li>
           <li>
             Filtering: <code scTypeset>globalFilteringFeature</code> or
-            <code scTypeset>columnFilteringFeature</code> and a filtered row
-            model.
+            <code scTypeset>columnFilteringFeature</code>, a filtered row model
+            and the filter functions you name (<code scTypeset
+              >filterFns: &#123; includesString &#125;</code
+            >, a column&apos;s
+            <code scTypeset>filterFn: 'includesString'</code>).
           </li>
           <li>
             Selection: <code scTypeset>rowSelectionFeature</code>; select all

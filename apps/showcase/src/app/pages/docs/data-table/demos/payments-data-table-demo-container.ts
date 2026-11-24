@@ -25,6 +25,7 @@ export class PaymentsDataTableDemoContainer {
   createFilteredRowModel,
   createPaginatedRowModel,
   createSortedRowModel,
+  filterFn_includesString,
   injectTable,
   rowPaginationFeature,
   rowSelectionFeature,
@@ -94,6 +95,7 @@ const features = tableFeatures({
   sortedRowModel: createSortedRowModel(),
   paginatedRowModel: createPaginatedRowModel(),
   sortFns: { alphanumeric: sortFn_alphanumeric },
+  filterFns: { includesString: filterFn_includesString },
 });
 
 const columnHelper = createColumnHelper<typeof features, Payment>();
@@ -105,7 +107,10 @@ const columns = columnHelper.columns([
     enableHiding: false,
   }),
   columnHelper.accessor('status', { header: 'Status', enableSorting: false }),
-  columnHelper.accessor('email', { header: 'Email' }),
+  columnHelper.accessor('email', {
+    header: 'Email',
+    filterFn: 'includesString',
+  }),
   columnHelper.accessor('amount', { header: 'Amount', enableSorting: false }),
   columnHelper.display({
     id: 'actions',

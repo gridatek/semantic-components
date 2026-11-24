@@ -8,7 +8,8 @@ test.describe('Data Table Page', () => {
       'Installation',
       'Usage',
       'Anatomy',
-      'How it works',
+      'TanStack Table',
+      'Accessibility',
       'Examples',
       'API reference',
     ]);

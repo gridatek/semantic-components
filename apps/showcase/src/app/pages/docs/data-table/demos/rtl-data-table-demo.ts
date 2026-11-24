@@ -4,6 +4,7 @@ import {
   createFilteredRowModel,
   createPaginatedRowModel,
   createSortedRowModel,
+  filterFn_includesString,
   injectTable,
   rowPaginationFeature,
   rowSelectionFeature,
@@ -72,6 +73,7 @@ const features = tableFeatures({
   sortedRowModel: createSortedRowModel(),
   paginatedRowModel: createPaginatedRowModel(),
   sortFns: { alphanumeric: sortFn_alphanumeric },
+  filterFns: { includesString: filterFn_includesString },
 });
 
 const columnHelper = createColumnHelper<typeof features, Payment>();
@@ -79,7 +81,10 @@ const columnHelper = createColumnHelper<typeof features, Payment>();
 const columns = columnHelper.columns([
   columnHelper.display({ id: 'select', enableSorting: false }),
   columnHelper.accessor('status', { header: 'الحالة', enableSorting: false }),
-  columnHelper.accessor('email', { header: 'البريد الإلكتروني' }),
+  columnHelper.accessor('email', {
+    header: 'البريد الإلكتروني',
+    filterFn: 'includesString',
+  }),
   columnHelper.accessor('amount', { header: 'المبلغ' }),
 ]);
 
