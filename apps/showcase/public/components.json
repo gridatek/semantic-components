@@ -1103,11 +1103,10 @@
   {
     "name": "Tree Table",
     "path": "tree-table",
-    "description": "A Data Table whose rows open on their children, as a tree grid: indented, opened by the arrows, selected with their children.",
+    "description": "A recipe: a Data Table whose rows open on their children, as a tree grid — indented, opened by the arrows, sorted and selected with their children. No component of its own.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Recipes"
   },
   {
     "name": "Treemap Chart",

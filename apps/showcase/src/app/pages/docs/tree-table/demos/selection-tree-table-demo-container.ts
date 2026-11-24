@@ -27,10 +27,11 @@ export class SelectionTreeTableDemoContainer {
   tableFeatures,
 } from '@tanstack/angular-table';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScCheckbox, ScField } from '@semantic-components/ui';
+import { ScCheckbox, ScField, ScFrame } from '@semantic-components/ui';
 import {
   ScDataTableBody,
   ScDataTableCell,
+  ScDataTableContainer,
   ScDataTableExpand,
   ScDataTableHeader,
   ScDataTableHeaderCell,
@@ -104,6 +105,8 @@ const FILES: FileNode[] = [
 @Component({
   selector: 'app-selection-tree-table-demo',
   imports: [
+    ScDataTableContainer,
+    ScFrame,
     ScCheckbox,
     ScDataTableProvider,
     ScDataTableExpand,
@@ -123,58 +126,60 @@ const FILES: FileNode[] = [
   ],
   template: \`
     <div scDataTableProvider [table]="table" class="flex flex-col gap-4">
-      <table scDataTableTreeGrid aria-label="Files">
-        <thead scDataTableHeader>
-          <tr scDataTableRow>
-            <th scDataTableHeaderCell class="w-10">
-              <label scField orientation="horizontal">
-                <input
-                  type="checkbox"
-                  scCheckbox
-                  scDataTableSelectAll
-                  aria-label="Select all files"
-                />
-              </label>
-            </th>
-            <th scDataTableHeaderCell>Name</th>
-            <th scDataTableHeaderCell>Size</th>
-            <th scDataTableHeaderCell>Modified</th>
-          </tr>
-        </thead>
-        <tbody scDataTableBody>
-          @for (row of table.getRowModel().rows; track row.id) {
-            <tr scDataTableRow [row]="row">
-              <td scDataTableCell>
+      <div scDataTableContainer scFrame>
+        <table scDataTableTreeGrid aria-label="Files">
+          <thead scDataTableHeader>
+            <tr scDataTableRow>
+              <th scDataTableHeaderCell class="w-10">
                 <label scField orientation="horizontal">
                   <input
                     type="checkbox"
                     scCheckbox
-                    scDataTableSelectRow
-                    [row]="row"
-                    [attr.aria-label]="'Select ' + row.original.name"
+                    scDataTableSelectAll
+                    aria-label="Select all files"
                   />
                 </label>
-              </td>
-              <td scDataTableCell>
-                <div scDataTableTreeCell [row]="row">
-                  <button scDataTableExpand [row]="row">
-                    <svg siChevronRightIcon></svg>
-                    <span class="sr-only">Open {{ row.original.name }}</span>
-                  </button>
-                  @if (row.original.children) {
-                    <svg siFolderIcon></svg>
-                  } @else {
-                    <svg siFileIcon></svg>
-                  }
-                  <span class="truncate">{{ row.original.name }}</span>
-                </div>
-              </td>
-              <td scDataTableCell>{{ row.original.size }}</td>
-              <td scDataTableCell>{{ row.original.modified }}</td>
+              </th>
+              <th scDataTableHeaderCell>Name</th>
+              <th scDataTableHeaderCell>Size</th>
+              <th scDataTableHeaderCell>Modified</th>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
+          <tbody scDataTableBody>
+            @for (row of table.getRowModel().rows; track row.id) {
+              <tr scDataTableRow [row]="row">
+                <td scDataTableCell>
+                  <label scField orientation="horizontal">
+                    <input
+                      type="checkbox"
+                      scCheckbox
+                      scDataTableSelectRow
+                      [row]="row"
+                      [attr.aria-label]="'Select ' + row.original.name"
+                    />
+                  </label>
+                </td>
+                <td scDataTableCell>
+                  <div scDataTableTreeCell [row]="row">
+                    <button scDataTableExpand [row]="row">
+                      <svg siChevronRightIcon></svg>
+                      <span class="sr-only">Open {{ row.original.name }}</span>
+                    </button>
+                    @if (row.original.children) {
+                      <svg siFolderIcon></svg>
+                    } @else {
+                      <svg siFileIcon></svg>
+                    }
+                    <span class="truncate">{{ row.original.name }}</span>
+                  </div>
+                </td>
+                <td scDataTableCell>{{ row.original.size }}</td>
+                <td scDataTableCell>{{ row.original.modified }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
       <p class="text-muted-foreground text-sm" aria-live="polite">
         {{ table.getSelectedRowModel().flatRows.length }} selected
       </p>

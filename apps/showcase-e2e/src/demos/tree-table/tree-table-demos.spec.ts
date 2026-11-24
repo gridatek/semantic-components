@@ -132,3 +132,27 @@ test('RTL: mirrored; ← opens, → closes', async ({ page }) => {
   await press(page, 'ArrowRight');
   await expect(src).toHaveAttribute('aria-expanded', 'false');
 });
+
+test('Sorting: each folder sorted among itself, the tree kept', async ({
+  page,
+}) => {
+  await page.goto(demo('sorting'));
+  await expect(rows(page)).toHaveCount(12);
+  const size = page.getByRole('columnheader', { name: 'Size' });
+  await expect(size).toHaveAttribute('aria-sort', 'none');
+  await size.getByRole('button').click();
+  // Numbers: the largest first.
+  await expect(size).toHaveAttribute('aria-sort', 'descending');
+  await expect
+    .poll(() =>
+      rows(page).evaluateAll((all) =>
+        all.map((r) => r.getAttribute('aria-level')),
+      ),
+    )
+    .toEqual(['1', '2', '2', '1', '2', '2', '3', '3', '3', '2', '1', '1']);
+  await expect(rows(page).nth(0)).toContainText('public');
+  await expect(rows(page).nth(1)).toContainText('favicon.ico');
+  await expect(rows(page).nth(3)).toContainText('src');
+  await expect(rows(page).nth(4)).toContainText('styles.css');
+  await expect(rows(page).nth(11)).toContainText('package.json');
+});

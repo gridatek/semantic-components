@@ -7249,6 +7249,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'sorting-tree-table-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-table/demos/sorting-tree-table-demo').then(
+            (m) => m.SortingTreeTableDemo,
+          ),
+      },
+      {
         path: 'filter-tree-table-demo',
         loadComponent: () =>
           import('../pages/docs/tree-table/demos/filter-tree-table-demo').then(

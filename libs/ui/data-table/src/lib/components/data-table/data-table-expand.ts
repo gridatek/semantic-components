@@ -43,7 +43,12 @@ export class ScDataTableExpand {
   private readonly class = computed(() =>
     cn(
       this.buttonStyles({ variant: this.variant(), size: this.size() }),
-      '[&_svg]:transition-transform data-[state=open]:[&_svg]:rotate-90 rtl:data-[state=closed]:[&_svg]:-scale-x-100',
+      // The chevron points to the end: down when open, mirrored right to
+      // left when closed.
+      '[&_svg]:transition-transform',
+      this.row().getIsExpanded()
+        ? '[&_svg]:rotate-90'
+        : 'rtl:[&_svg]:-scale-x-100',
       !this.row().getCanExpand() && 'invisible',
       this.classInput(),
     ),
