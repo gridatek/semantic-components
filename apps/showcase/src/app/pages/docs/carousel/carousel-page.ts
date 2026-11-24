@@ -5,16 +5,22 @@ import { ComponentBadges } from '../../../components/component-badges/component-
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
+import { AlignCarouselDemoContainer } from './demos/align-carousel-demo-container';
 import { ApiCarouselDemoContainer } from './demos/api-carousel-demo-container';
 import { CarouselUsageDemoContainer } from './demos/carousel-usage-demo-container';
+import { ControlledCarouselDemoContainer } from './demos/controlled-carousel-demo-container';
+import { DragFreeCarouselDemoContainer } from './demos/drag-free-carousel-demo-container';
 import { ImagesCarouselDemoContainer } from './demos/images-carousel-demo-container';
 import { IndicatorsCarouselDemoContainer } from './demos/indicators-carousel-demo-container';
 import { MultipleCarouselDemoContainer } from './demos/multiple-carousel-demo-container';
 import { OrientationCarouselDemoContainer } from './demos/orientation-carousel-demo-container';
+import { PagesCarouselDemoContainer } from './demos/pages-carousel-demo-container';
 import { PluginCarouselDemoContainer } from './demos/plugin-carousel-demo-container';
+import { ProgressCarouselDemoContainer } from './demos/progress-carousel-demo-container';
 import { RtlCarouselDemoContainer } from './demos/rtl-carousel-demo-container';
 import { SizesCarouselDemoContainer } from './demos/sizes-carousel-demo-container';
 import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-container';
+import { ThumbnailsCarouselDemoContainer } from './demos/thumbnails-carousel-demo-container';
 
 @Component({
   selector: 'app-carousel-page',
@@ -32,6 +38,12 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
     PluginCarouselDemoContainer,
     MultipleCarouselDemoContainer,
     ImagesCarouselDemoContainer,
+    ControlledCarouselDemoContainer,
+    ProgressCarouselDemoContainer,
+    DragFreeCarouselDemoContainer,
+    ThumbnailsCarouselDemoContainer,
+    PagesCarouselDemoContainer,
+    AlignCarouselDemoContainer,
     RtlCarouselDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -114,6 +126,12 @@ import { SpacingCarouselDemoContainer } from './demos/spacing-carousel-demo-cont
         <app-orientation-carousel-demo-container />
         <app-api-carousel-demo-container />
         <app-indicators-carousel-demo-container />
+        <app-align-carousel-demo-container />
+        <app-pages-carousel-demo-container />
+        <app-thumbnails-carousel-demo-container />
+        <app-drag-free-carousel-demo-container />
+        <app-progress-carousel-demo-container />
+        <app-controlled-carousel-demo-container />
         <app-plugin-carousel-demo-container />
         <app-multiple-carousel-demo-container />
         <app-images-carousel-demo-container />

@@ -8,20 +8,23 @@ const demo = (name: string) => `/demos/carousel/${name}`;
  * content, since the gap before it (their padding) is outside by design.
  */
 async function shown(page: Page): Promise<string[]> {
-  return page.locator('[scCarouselViewport]').evaluate((viewport) => {
-    const box = viewport.getBoundingClientRect();
-    return [...viewport.querySelectorAll('[scCarouselItem]')]
-      .filter((slide) => {
-        const r = (slide.firstElementChild ?? slide).getBoundingClientRect();
-        return (
-          r.left >= box.left - 1 &&
-          r.right <= box.right + 1 &&
-          r.top >= box.top - 1 &&
-          r.bottom <= box.bottom + 1
-        );
-      })
-      .map((slide) => slide.getAttribute('aria-label') ?? '');
-  });
+  return page
+    .locator('[scCarouselViewport]')
+    .first()
+    .evaluate((viewport) => {
+      const box = viewport.getBoundingClientRect();
+      return [...viewport.querySelectorAll('[scCarouselItem]')]
+        .filter((slide) => {
+          const r = (slide.firstElementChild ?? slide).getBoundingClientRect();
+          return (
+            r.left >= box.left - 1 &&
+            r.right <= box.right + 1 &&
+            r.top >= box.top - 1 &&
+            r.bottom <= box.bottom + 1
+          );
+        })
+        .map((slide) => slide.getAttribute('aria-label') ?? '');
+    });
 }
 
 test.describe('Carousel demos', () => {
@@ -187,6 +190,122 @@ test.describe('Carousel demos', () => {
     await expect(viewport).toBeFocused();
     await page.keyboard.press('ArrowRight');
     await expect.poll(() => shown(page)).toEqual(['2 of 5']);
+  });
+
+  test('align: centred, the neighbours peek in; starts on the third', async ({
+    page,
+  }) => {
+    await page.goto(demo('align-carousel-demo'));
+    // Centred: the third whole, the second and fourth cut at the edges.
+    await expect.poll(() => shown(page)).toEqual(['3 of 6']);
+    const peek = await page.locator('[scCarouselItem]').evaluateAll((all) => {
+      const viewport =
+        all[0].parentElement!.parentElement!.getBoundingClientRect();
+      return all.map((slide) => {
+        const r = slide.getBoundingClientRect();
+        return r.right > viewport.left + 1 && r.left < viewport.right - 1;
+      });
+    });
+    expect(peek).toEqual([false, true, true, true, false, false]);
+  });
+
+  test('pages: three slides a page, an indicator per page', async ({
+    page,
+  }) => {
+    await page.goto(demo('pages-carousel-demo'));
+    const tabs = page.getByRole('tab');
+    // 8 slides, 3 a page: the last two join the last page.
+    await expect(tabs).toHaveCount(3);
+    await expect
+      .poll(() => shown(page))
+      .toEqual(['1 of 8', '2 of 8', '3 of 8']);
+    await page.getByRole('button', { name: 'Next slide' }).click();
+    await expect
+      .poll(() => shown(page))
+      .toEqual(['4 of 8', '5 of 8', '6 of 8']);
+    await tabs.nth(2).click();
+    await expect
+      .poll(() => shown(page))
+      .toEqual(['6 of 8', '7 of 8', '8 of 8']);
+  });
+
+  test('thumbnails: a thumbnail shows its photo; the strip follows the gallery', async ({
+    page,
+  }) => {
+    await page.goto(demo('thumbnails-carousel-demo'));
+    const strip = page.getByRole('region', { name: 'Thumbnails' });
+    const thumb = (name: string) => strip.getByRole('button', { name });
+    await expect(thumb('Mountains under a clear sky')).toHaveAttribute(
+      'aria-current',
+      'true',
+    );
+    await thumb('A forest path').click();
+    await expect.poll(() => shown(page)).toEqual(['3 of 8']);
+    await expect(thumb('A forest path')).toHaveAttribute(
+      'aria-current',
+      'true',
+    );
+
+    // The gallery to its last photo: its thumbnail comes into the strip.
+    const next = page.getByRole('button', { name: 'Next photo' });
+    for (let i = 0; i < 5; i++) await next.click();
+    await expect.poll(() => shown(page)).toEqual(['8 of 8']);
+    await expect(thumb('A waterfall')).toHaveAttribute('aria-current', 'true');
+    const box = await strip.locator('[scCarouselViewport]').boundingBox();
+    await expect
+      .poll(async () => {
+        const t = await thumb('A waterfall').boundingBox();
+        return t!.x + t!.width <= box!.x + box!.width + 1;
+      })
+      .toBe(true);
+  });
+
+  test('drag free: a fling coasts past the next slide', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto(demo('drag-free-carousel-demo'));
+    const viewport = page.locator('[scCarouselViewport]');
+    await expect(page.locator('[scCarouselItem]')).toHaveCount(10);
+    const box = (await viewport.boundingBox())!;
+    const y = box.y + box.height / 2;
+    await page.mouse.move(box.x + box.width * 0.9, y);
+    await page.mouse.down();
+    for (let i = 1; i <= 5; i++) {
+      await page.mouse.move(box.x + box.width * (0.9 - i * 0.15), y);
+    }
+    await page.mouse.up();
+    // Not snapped back to a slide's start: it rests wherever it coasts.
+    await expect
+      .poll(() => shown(page).then((s) => s[0] ?? ''), { timeout: 10_000 })
+      .not.toBe('1 of 10');
+  });
+
+  test('progress: the bar follows the scroll', async ({ page }) => {
+    await page.goto(demo('progress-carousel-demo'));
+    const bar = page.getByTestId('progress');
+    const scale = () =>
+      bar.evaluate((e) => new DOMMatrix(getComputedStyle(e).transform).a);
+    await expect.poll(scale).toBe(0);
+    const viewport = page.locator('[scCarouselViewport]');
+    await viewport.focus();
+    await expect(viewport).toBeFocused();
+    for (let i = 0; i < 6; i++) await page.keyboard.press('ArrowRight');
+    await expect.poll(scale).toBeCloseTo(1, 2);
+  });
+
+  test('controlled: buttons outside, [(activeIndex)] both ways', async ({
+    page,
+  }) => {
+    await page.goto(demo('controlled-carousel-demo'));
+    const position = page.getByTestId('position');
+    await expect(position).toHaveText('Slide 1 of 5');
+    const next = page.getByRole('button', { name: 'Next', exact: true });
+    await next.click();
+    await expect(position).toHaveText('Slide 2 of 5');
+    await expect.poll(() => shown(page)).toEqual(['2 of 5']);
+    await page.getByRole('button', { name: 'Show the last slide' }).click();
+    await expect.poll(() => shown(page)).toEqual(['5 of 5']);
+    await expect(position).toHaveText('Slide 5 of 5');
+    await expect(next).toBeDisabled();
   });
 
   test('plugin: autoplay moves on; Pause stops it and becomes Play', async ({

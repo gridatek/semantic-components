@@ -33,7 +33,6 @@ These add behaviour to whatever button the consumer writes, `scButton` or anothe
 
 And these keep a look of their own, as they are not buttons to the eye:
 
-- **Controls over media** — the lightbox's (white on a dark photo).
 - **Items in lists and grids** — emoji, swatches, suggestions, outline items, dock items, presets, the tag chip's delete.
 - **Parts with a design of their own** — the sidebar's, the navigation menu trigger, the date pickers' triggers, the stepper trigger, the speed dial.
 

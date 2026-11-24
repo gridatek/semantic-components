@@ -22,7 +22,7 @@ A dimmed, blurred layer that fades in and out behind dialogs, drawers, and other
 | ------- | -------- | -------- | ---------------------- |
 | `class` | `string` | No       | Additional CSS classes |
 
-It fades in when shown and out when it goes (`animate.enter` / `animate.leave`): Angular removes it once it has faded out. Show it with `@if`, or as part of an overlay (the dialog, alert dialog, drawer and sheet render it in theirs; the lightbox, a native `<dialog>`, has its own `::backdrop`).
+It fades in when shown and out when it goes (`animate.enter` / `animate.leave`): Angular removes it once it has faded out. Show it with `@if`, or as part of an overlay (the dialog, alert dialog, drawer and sheet render it in theirs).
 
 Its shade and blur come from the style (`backdrop`, shadcn's overlay — the same in every overlay of a style): `bg-black/10` with a light blur in nova, vega and lyra, `/80` in maia and mira, `/30` with more blur in luma and rhea, `/20` in sera.
 

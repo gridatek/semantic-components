@@ -1246,6 +1246,48 @@ export const demosRoutes: Route[] = [
     path: 'demos/carousel',
     children: [
       {
+        path: 'align-carousel-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel/demos/align-carousel-demo').then(
+            (m) => m.AlignCarouselDemo,
+          ),
+      },
+      {
+        path: 'pages-carousel-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel/demos/pages-carousel-demo').then(
+            (m) => m.PagesCarouselDemo,
+          ),
+      },
+      {
+        path: 'thumbnails-carousel-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel/demos/thumbnails-carousel-demo').then(
+            (m) => m.ThumbnailsCarouselDemo,
+          ),
+      },
+      {
+        path: 'drag-free-carousel-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel/demos/drag-free-carousel-demo').then(
+            (m) => m.DragFreeCarouselDemo,
+          ),
+      },
+      {
+        path: 'progress-carousel-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel/demos/progress-carousel-demo').then(
+            (m) => m.ProgressCarouselDemo,
+          ),
+      },
+      {
+        path: 'controlled-carousel-demo',
+        loadComponent: () =>
+          import('../pages/docs/carousel/demos/controlled-carousel-demo').then(
+            (m) => m.ControlledCarouselDemo,
+          ),
+      },
+      {
         path: 'carousel-usage-demo',
         loadComponent: () =>
           import('../pages/docs/carousel/demos/carousel-usage-demo').then(
