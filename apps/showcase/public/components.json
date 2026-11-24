@@ -250,11 +250,10 @@
   {
     "name": "Data Table",
     "path": "data-table",
-    "description": "Styled, accessible parts for TanStack Table data tables.",
+    "description": "A TanStack table in the Table's look, one attribute per element: sorting, filters, selection, columns shown and pinned, pages.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Data Display",
-    "hidden": true
+    "category": "Data Display"
   },
   {
     "name": "Date Input",
