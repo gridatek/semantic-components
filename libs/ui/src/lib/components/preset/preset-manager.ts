@@ -27,7 +27,7 @@ const THEME_KEY = 'sc-theme';
  * choices on a prerendered page (no request, no cookie).
  */
 @Service()
-export class ScThemeManager {
+export class ScPresetManager {
   private readonly preset = inject(SC_CONFIG).preset;
 
   private readonly storage = inject(ScStorage);

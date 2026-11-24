@@ -6,7 +6,7 @@ import {
   makeEnvironmentProviders,
 } from '@angular/core';
 import type { ScStyle } from '@semantic-components/styles';
-import type { ScMode } from '../components/theme/theme-manager';
+import type { ScMode } from '../components/preset/preset-manager';
 import type { ScToasterConfig } from '../components/toast/toast-types';
 
 /**
@@ -35,9 +35,9 @@ export interface ScConfig {
 export interface ScPreset {
   /** The parts' classes: a style from `@semantic-components/styles`; nova by default. Fixed when the app starts. */
   style?: ScStyle;
-  /** shadcn's CSS variables, under a name: `[data-theme]` on the page's root (`'default'`, the default, sets none). The user's choice, kept, comes first: `ScThemeManager`. */
+  /** shadcn's CSS variables, under a name: `[data-theme]` on the page's root (`'default'`, the default, sets none). The user's choice, kept, comes first: `ScPresetManager`. */
   theme?: string;
-  /** Light, dark or the system's (the default). The user's choice, kept, comes first: `ScThemeManager`. */
+  /** Light, dark or the system's (the default). The user's choice, kept, comes first: `ScPresetManager`. */
   mode?: ScMode;
 }
 

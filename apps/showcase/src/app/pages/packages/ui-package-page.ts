@@ -57,7 +57,7 @@ interface EntryPoint {
           Most components (Button, Dialog, Select, Sidebar, Menu…), the layouts,
           and the utilities: the setup (<code scTypeset
             >provideSemanticComponents</code
-          >), the theme (<code scTypeset>ScThemeManager</code>), saved choices
+          >), the theme (<code scTypeset>ScPresetManager</code>), saved choices
           (<code scTypeset>ScStorage</code>). It needs only Angular (core,
           common, router, forms, the CDK and Aria), RxJS,
           class-variance-authority and cn.
@@ -108,7 +108,7 @@ interface EntryPoint {
   encapsulation: ViewEncapsulation.None,
 })
 export default class UiPackagePage {
-  private readonly mainCode = `import { ScButton, ScThemeManager, provideSemanticComponents } from '@semantic-components/ui';`;
+  private readonly mainCode = `import { ScButton, ScPresetManager, provideSemanticComponents } from '@semantic-components/ui';`;
 
   private readonly entryCode = `
 

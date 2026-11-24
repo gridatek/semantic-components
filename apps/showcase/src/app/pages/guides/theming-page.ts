@@ -72,7 +72,7 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
           the radius and the fonts too) under
           <code scTypeset>[data-theme]</code>, and set it — the preset&apos;s
           <code scTypeset>theme</code> at first,
-          <code scTypeset>ScThemeManager</code>&apos;s
+          <code scTypeset>ScPresetManager</code>&apos;s
           <code scTypeset>setTheme('rose')</code>
           when the user picks (<code scTypeset>'default'</code>: none).
         </p>
@@ -82,7 +82,7 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
       <section class="space-y-4">
         <h2 scTypeset appToc>Mode</h2>
         <p>
-          <code scTypeset>ScThemeManager</code>
+          <code scTypeset>ScPresetManager</code>
           holds the mode — light, dark or system — and puts the
           <code scTypeset>dark</code>
           class on the page&apos;s root when it is dark. There is no toggle
@@ -144,15 +144,15 @@ export const appConfig = {
   --radius: 1rem;
 }`;
 
-  private readonly modeCode = `import { ScThemeManager } from '@semantic-components/ui';
+  private readonly modeCode = `import { ScPresetManager } from '@semantic-components/ui';
 
 export class ModeButton {
-  protected readonly theme = inject(ScThemeManager);
+  protected readonly preset = inject(ScPresetManager);
 }
 
-// <button scButton variant="outline" size="icon" (click)="theme.toggleMode()">
-//   @if (theme.isDark()) { <svg siSunIcon></svg> } @else { <svg siMoonIcon></svg> }
+// <button scButton variant="outline" size="icon" (click)="preset.toggleMode()">
+//   @if (preset.isDark()) { <svg siSunIcon></svg> } @else { <svg siMoonIcon></svg> }
 //   <span class="sr-only">Toggle the mode</span>
 // </button>
-// …or theme.setMode('system')`;
+// …or preset.setMode('system')`;
 }

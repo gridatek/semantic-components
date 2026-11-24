@@ -25,6 +25,6 @@ The same, in the browser, for code that runs before the app (no injector) — li
 
 ## Used by
 
-- `ScThemeManager`: `sc-mode`, `sc-theme` (the user's mode and theme; the preset's apply until they pick).
+- `ScPresetManager`: `sc-mode`, `sc-theme` (the user's mode and theme; the preset's apply until they pick).
 - `ScSidebarProvider`: `sc-sidebar-state` (its `storageKey` input).
 - `ScI18n` / `loadLocale()`: `sc-locale` (the config's `storageKey`).

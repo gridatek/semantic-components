@@ -10,7 +10,7 @@ import {
   ScMenuRadioItem,
   ScMenuTrigger,
   type ScMode,
-  ScThemeManager,
+  ScPresetManager,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,
@@ -40,7 +40,7 @@ import {
   template: `
     <div scMenuProvider alignment="end">
       <button scButton scMenuTrigger variant="outline" size="icon">
-        @switch (themeManager.mode()) {
+        @switch (presetManager.mode()) {
           @case ('light') {
             <svg siSunIcon></svg>
           }
@@ -58,7 +58,7 @@ import {
           <ng-template scMenuContent>
             <div
               scMenuRadioGroup
-              [value]="themeManager.mode()"
+              [value]="presetManager.mode()"
               (valueChange)="setMode($event)"
             >
               @for (mode of modes; track mode.value) {
@@ -77,7 +77,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ThemeMenuDemo {
-  private readonly themeManager = inject(ScThemeManager);
+  private readonly presetManager = inject(ScPresetManager);
 
   private readonly modes: readonly { value: ScMode; label: string }[] = [
     { value: 'light', label: 'Light' },
@@ -87,6 +87,6 @@ export class ThemeMenuDemo {
 
   private setMode(value: string | null): void {
     const mode = this.modes.find((m) => m.value === value);
-    if (mode) this.themeManager.setMode(mode.value);
+    if (mode) this.presetManager.setMode(mode.value);
   }
 }

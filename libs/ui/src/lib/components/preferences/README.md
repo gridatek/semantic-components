@@ -44,4 +44,4 @@ readonly view = injectPreference(view); // view.value(): 'list' | 'grid'; view.s
 
 ## Not here
 
-The theme (light, dark, system): `ScThemeManager`. A choice that can be cancelled (`onValueChange`): the value is a signal — choose before you `set`. Session-only storage, a script for prerendered pages, client hints.
+The theme (light, dark, system): `ScPresetManager`. A choice that can be cancelled (`onValueChange`): the value is a signal — choose before you `set`. Session-only storage, a script for prerendered pages, client hints.

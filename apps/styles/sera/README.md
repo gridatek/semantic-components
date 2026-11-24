@@ -14,7 +14,7 @@ npx nx serve sera   # http://localhost:4202
 
 ## Pages
 
-The header holds the Sera mark, the pages (named as their titles), and the theme menu (Light, Dark, System: the library's `ScThemeManager`). On a phone they move into a menu. Below it is the page, then a footer (`layouts/site-layout.ts`). Every page uses one column: content up to 1400px, with sides of the screens' `--gap` (`px-(--page-gutter)`, `styles.css`).
+The header holds the Sera mark, the pages (named as their titles), and the theme menu (Light, Dark, System: the library's `ScPresetManager`). On a phone they move into a menu. Below it is the page, then a footer (`layouts/site-layout.ts`). Every page uses one column: content up to 1400px, with sides of the screens' `--gap` (`px-(--page-gutter)`, `styles.css`).
 
 | Route           | Page                                                                                                        | From (`src/app/`)                                        |
 | --------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |

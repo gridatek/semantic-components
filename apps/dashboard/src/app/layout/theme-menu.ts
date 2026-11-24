@@ -10,7 +10,7 @@ import {
   ScMenuRadioItem,
   ScMenuTrigger,
   type ScMode,
-  ScThemeManager,
+  ScPresetManager,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,
@@ -18,7 +18,7 @@ import {
   SiSunIcon,
 } from '@semantic-icons/lucide-icons';
 
-/** Light, dark or the system's: the library's theme manager (saved, a cookie). */
+/** Light, dark or the system's: the library's preset manager (saved, a cookie). */
 @Component({
   selector: 'app-theme-menu',
   imports: [
@@ -38,7 +38,7 @@ import {
   template: `
     <div scMenuProvider alignment="end">
       <button scButton scMenuTrigger variant="ghost" size="icon">
-        @if (theme.isDark()) {
+        @if (preset.isDark()) {
           <svg siMoonIcon></svg>
         } @else {
           <svg siSunIcon></svg>
@@ -50,7 +50,7 @@ import {
           <ng-template scMenuContent>
             <div
               scMenuRadioGroup
-              [value]="theme.mode()"
+              [value]="preset.mode()"
               (valueChange)="setMode($event)"
             >
               @for (mode of modes; track mode.value) {
@@ -69,7 +69,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class ThemeMenu {
-  private readonly theme = inject(ScThemeManager);
+  private readonly preset = inject(ScPresetManager);
   private readonly modes: { value: ScMode; label: string }[] = [
     { value: 'light', label: $localize`:@@layout.themeMenu.light:Light` },
     { value: 'dark', label: $localize`:@@layout.themeMenu.dark:Dark` },
@@ -78,6 +78,6 @@ export class ThemeMenu {
 
   private setMode(mode: string | null): void {
     if (mode === 'light' || mode === 'dark' || mode === 'system')
-      this.theme.setMode(mode);
+      this.preset.setMode(mode);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
-import { ScButton, ScThemeManager } from '@semantic-components/ui';
+import { ScButton, ScPresetManager } from '@semantic-components/ui';
 import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
 
 /** One click between light and dark: any button calling toggleMode(); its name follows the state. */
@@ -12,9 +12,9 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
         scButton
         variant="outline"
         size="icon"
-        (click)="themeManager.toggleMode()"
+        (click)="presetManager.toggleMode()"
       >
-        @if (themeManager.isDark()) {
+        @if (presetManager.isDark()) {
           <svg siSunIcon></svg>
           <span class="sr-only">Switch to light theme</span>
         } @else {
@@ -23,7 +23,7 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
         }
       </button>
       <span class="text-muted-foreground text-sm">
-        Current: {{ themeManager.resolvedMode() }}
+        Current: {{ presetManager.resolvedMode() }}
       </span>
     </div>
   `,
@@ -31,5 +31,5 @@ import { SiMoonIcon, SiSunIcon } from '@semantic-icons/lucide-icons';
   encapsulation: ViewEncapsulation.None,
 })
 export class ThemeToggleDemo {
-  private readonly themeManager = inject(ScThemeManager);
+  private readonly presetManager = inject(ScPresetManager);
 }

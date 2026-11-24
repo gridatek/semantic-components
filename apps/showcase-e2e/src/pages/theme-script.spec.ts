@@ -3,7 +3,7 @@
 import { type Page, expect, test } from '@playwright/test';
 
 /**
- * The script the server puts in `<head>` (ScThemeManager, theme-script.ts)
+ * The script the server puts in `<head>` (ScPresetManager, theme-script.ts)
  * draws the page in the user's mode before the app runs: "system" from
  * `prefers-color-scheme`, which the server can't know, and a choice only the
  * `localStorage` copy holds. The app's scripts are blocked, so what the page

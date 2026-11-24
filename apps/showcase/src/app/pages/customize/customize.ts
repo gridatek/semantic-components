@@ -12,8 +12,8 @@ import {
   ScMenuRadioItem,
   ScMenuTrigger,
   type ScMode,
+  ScPresetManager,
   ScStorage,
-  ScThemeManager,
 } from '@semantic-components/ui';
 import {
   SiBaselineIcon,
@@ -117,7 +117,7 @@ import { PreviewCards } from './cards/preview-cards';
                   <span class="text-muted-foreground text-xs">Mode</span>
                   <span class="text-sm font-medium">{{ modeLabel() }}</span>
                 </span>
-                @switch (themeManager.mode()) {
+                @switch (presetManager.mode()) {
                   @case ('light') {
                     <svg siSunIcon [class]="icon"></svg>
                   }
@@ -134,7 +134,7 @@ import { PreviewCards } from './cards/preview-cards';
                   <ng-template scMenuContent>
                     <div
                       scMenuRadioGroup
-                      [value]="themeManager.mode()"
+                      [value]="presetManager.mode()"
                       (valueChange)="setMode($event)"
                     >
                       @for (mode of modes; track mode.value) {
@@ -210,19 +210,19 @@ export default class Customize {
   private readonly names = Object.keys(STYLES) as ScStyleName[];
   private readonly current = styleFrom(inject(ScStorage));
 
-  private readonly themeManager = inject(ScThemeManager);
+  private readonly presetManager = inject(ScPresetManager);
   private readonly modes: readonly { value: ScMode; label: string }[] = [
     { value: 'light', label: 'Light' },
     { value: 'dark', label: 'Dark' },
     { value: 'system', label: 'System' },
   ];
   private readonly modeLabel = computed(
-    () => this.modes.find((m) => m.value === this.themeManager.mode())?.label,
+    () => this.modes.find((m) => m.value === this.presetManager.mode())?.label,
   );
 
   private setMode(value: string | null): void {
     const mode = this.modes.find((m) => m.value === value);
-    if (mode) this.themeManager.setMode(mode.value);
+    if (mode) this.presetManager.setMode(mode.value);
   }
 
   /** An option's card: its name and value, an icon at the end. */
