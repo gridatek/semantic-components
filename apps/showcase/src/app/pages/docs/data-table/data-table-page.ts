@@ -274,11 +274,28 @@ export default class DataTablePage {
         "The Pagination, its page, page size and row count from the table, its page changes back to it (exportAs scPagination). Compose the Pagination's parts inside as usual.",
     },
     {
-      name: 'ScDataTableTreeGrid, ScDataTableTreeCell, ScDataTableExpand, ScDataTableExpandAll',
-      selector:
-        'table[scDataTableTreeGrid], div[scDataTableTreeCell], button[scDataTableExpand], button[scDataTableExpandAll]',
+      name: 'ScDataTableTreeGrid',
+      selector: 'table[scDataTableTreeGrid]',
       description:
-        'A tree table (WAI-ARIA treegrid): one tab stop, ↑ ↓ between rows, → / ← open, close or move in and out (mirrored right to left); the first cell indented by depth with its expand button; open or close all. The tree grid is the table itself, in the Table look.',
+        "A tree table (WAI-ARIA treegrid), in the Table's look; its table from scDataTableProvider. One tab stop: ↑ ↓ between rows, → / ← open, close or move in and out (mirrored right to left), Home and End, Enter opens, Space selects (exportAs scDataTableTreeGrid).",
+    },
+    {
+      name: 'ScDataTableTreeCell',
+      selector: 'div[scDataTableTreeCell]',
+      description:
+        "[row]: a tree row's first cell content, indented by its depth — the expand button, then the rest, in a line.",
+    },
+    {
+      name: 'ScDataTableExpand',
+      selector: 'button[scDataTableExpand]',
+      description:
+        "[row]: opens or closes its children; variant (ghost) and size (icon-xs), the style's button. Your chevron (pointing to the end) and its name inside; unseen on a row without children. In a tree grid, out of the tab order.",
+    },
+    {
+      name: 'ScDataTableExpandAll',
+      selector: 'button[scDataTableExpandAll]',
+      description:
+        "Opens every row, or closes them all (aria-expanded); the table from scDataTableProvider; variant (outline) and size (sm), the style's button.",
     },
   ];
 }
