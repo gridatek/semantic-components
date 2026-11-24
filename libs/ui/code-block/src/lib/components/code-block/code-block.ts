@@ -28,25 +28,6 @@ export class ScCodeBlock {
 
   private readonly class = computed(() => {
     const root = this.styles.root({ variant: this.variant() });
-    return cn(root, editorStates(root), this.classInput());
+    return cn(root, this.classInput());
   });
-}
-
-/**
- * A code editor in the block (the Code Editor): the style's focus look for
- * the code, given to the editor while it has focus; a ring when invalid.
- */
-function editorStates(root: string): string {
-  const focused = 'has-[>[data-slot=code-block-content]:focus-visible]:';
-  return [
-    ...root
-      .split(/s+/)
-      .filter((c) => c.includes(focused))
-      .map((c) =>
-        c.replace(focused, 'has-[>[data-slot=code-editor]:focus-within]:'),
-      ),
-    'has-[>[data-slot=code-editor][data-invalid]]:ring-3',
-    'has-[>[data-slot=code-editor][data-invalid]]:ring-destructive/20',
-    'has-[>[data-slot=code-editor][data-invalid]]:border-destructive',
-  ].join(' ');
 }

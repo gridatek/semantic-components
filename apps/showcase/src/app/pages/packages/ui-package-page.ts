@@ -147,18 +147,6 @@ import { ScCarousel, ScCarouselItem } from '@semantic-components/ui/carousel';`;
       needs: ['shiki'],
     },
     {
-      path: 'code-editor',
-      holds: 'Code Editor',
-      needs: [
-        '@codemirror/commands',
-        '@codemirror/language',
-        '@codemirror/language-data',
-        '@codemirror/state',
-        '@codemirror/view',
-        '@lezer/highlight',
-      ],
-    },
-    {
       path: 'confetti',
       holds: 'Confetti',
       needs: ['canvas-confetti'],
@@ -167,11 +155,6 @@ import { ScCarousel, ScCarouselItem } from '@semantic-components/ui/carousel';`;
       path: 'data-table',
       holds: 'Data Table, Tree Table',
       needs: ['@tanstack/angular-table'],
-    },
-    {
-      path: 'diff-viewer',
-      holds: 'Diff Viewer',
-      needs: ['diff'],
     },
     {
       path: 'editor',

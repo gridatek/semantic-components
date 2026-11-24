@@ -181,12 +181,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/checkbox-group/checkbox-group-page'),
       },
       {
-        path: 'code-editor',
-        title: 'Code Editor - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/code-editor-page'),
-      },
-      {
         path: 'code-block',
         title: 'Code Block - Semantic Components',
         loadComponent: () => import('../pages/docs/code-block/code-block-page'),
@@ -274,12 +268,6 @@ export const componentsRoutes: Route[] = [
         path: 'dialog',
         title: 'Dialog - Semantic Components',
         loadComponent: () => import('../pages/docs/dialog/dialog-page'),
-      },
-      {
-        path: 'diff-viewer',
-        title: 'Diff Viewer - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer/diff-viewer-page'),
       },
       {
         path: 'drawer',
@@ -713,12 +701,6 @@ export const componentsRoutes: Route[] = [
         path: 'gantt',
         title: 'Gantt - Semantic Components',
         loadComponent: () => import('../pages/docs/gantt/gantt-page'),
-      },
-      {
-        path: 'json-viewer',
-        title: 'JSON Viewer - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/json-viewer/json-viewer-page'),
       },
       {
         path: 'trace',

@@ -20,12 +20,6 @@
       "@semantic-components/ui/confetti": ["libs/ui/confetti/src/index.ts"],
       "@semantic-components/ui": ["libs/ui/src/index.ts"],
       "@semantic-components/ui/code-block": ["libs/ui/code-block/src/index.ts"],
-      "@semantic-components/ui/code-editor": [
-        "libs/ui/code-editor/src/index.ts"
-      ],
-      "@semantic-components/ui/diff-viewer": [
-        "libs/ui/diff-viewer/src/index.ts"
-      ],
       "@semantic-components/ui/barcode-scanner": [
         "libs/ui/barcode-scanner/src/index.ts"
       ],

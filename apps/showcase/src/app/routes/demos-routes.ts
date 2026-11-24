@@ -1657,46 +1657,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/code-editor',
-    children: [
-      {
-        path: 'basic-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/basic-code-editor-demo').then(
-            (m) => m.BasicCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'form-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/form-code-editor-demo').then(
-            (m) => m.FormCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'languages-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/languages-code-editor-demo').then(
-            (m) => m.LanguagesCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'wrap-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/wrap-code-editor-demo').then(
-            (m) => m.WrapCodeEditorDemo,
-          ),
-      },
-      {
-        path: 'readonly-code-editor-demo',
-        loadComponent: () =>
-          import('../pages/docs/code-editor/demos/readonly-code-editor-demo').then(
-            (m) => m.ReadonlyCodeEditorDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/code-block',
     children: [
       {
@@ -2642,46 +2602,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/native-dialog/demos/native-dialog-demo').then(
             (m) => m.NativeDialogDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/diff-viewer',
-    children: [
-      {
-        path: 'split-diff-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer/demos/split-diff-viewer-demo').then(
-            (m) => m.SplitDiffViewerDemo,
-          ),
-      },
-      {
-        path: 'unified-diff-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer/demos/unified-diff-viewer-demo').then(
-            (m) => m.UnifiedDiffViewerDemo,
-          ),
-      },
-      {
-        path: 'folded-diff-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer/demos/folded-diff-viewer-demo').then(
-            (m) => m.FoldedDiffViewerDemo,
-          ),
-      },
-      {
-        path: 'whitespace-diff-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer/demos/whitespace-diff-viewer-demo').then(
-            (m) => m.WhitespaceDiffViewerDemo,
-          ),
-      },
-      {
-        path: 'identical-diff-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/diff-viewer/demos/identical-diff-viewer-demo').then(
-            (m) => m.IdenticalDiffViewerDemo,
           ),
       },
     ],
@@ -7545,53 +7465,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/gantt/demos/rtl-gantt-demo').then(
             (m) => m.RtlGanttDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/json-viewer',
-    children: [
-      {
-        path: 'basic-json-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/json-viewer/demos/basic-json-viewer-demo').then(
-            (m) => m.BasicJsonViewerDemo,
-          ),
-      },
-      {
-        path: 'summary-json-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/json-viewer/demos/summary-json-viewer-demo').then(
-            (m) => m.SummaryJsonViewerDemo,
-          ),
-      },
-      {
-        path: 'large-json-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/json-viewer/demos/large-json-viewer-demo').then(
-            (m) => m.LargeJsonViewerDemo,
-          ),
-      },
-      {
-        path: 'controls-json-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/json-viewer/demos/controls-json-viewer-demo').then(
-            (m) => m.ControlsJsonViewerDemo,
-          ),
-      },
-      {
-        path: 'types-json-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/json-viewer/demos/types-json-viewer-demo').then(
-            (m) => m.TypesJsonViewerDemo,
-          ),
-      },
-      {
-        path: 'rtl-json-viewer-demo',
-        loadComponent: () =>
-          import('../pages/docs/json-viewer/demos/rtl-json-viewer-demo').then(
-            (m) => m.RtlJsonViewerDemo,
           ),
       },
     ],

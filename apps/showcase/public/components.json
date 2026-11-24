@@ -176,15 +176,6 @@
     "category": "Editor"
   },
   {
-    "name": "Code Editor",
-    "path": "code-editor",
-    "description": "Code to edit: CodeMirror, colored by Shiki; a form field.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Editor",
-    "hidden": true
-  },
-  {
     "name": "Collapsible",
     "path": "collapsible",
     "description": "A trigger that shows and hides a panel of content.",
@@ -320,15 +311,6 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Feedback"
-  },
-  {
-    "name": "Diff Viewer",
-    "path": "diff-viewer",
-    "description": "Two texts compared, line by line and word by word: split or unified, highlighted.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Editor",
-    "hidden": true
   },
   {
     "name": "Drawer",
@@ -467,15 +449,6 @@
     "status": "Experimental",
     "library": "ui",
     "category": "Layout"
-  },
-  {
-    "name": "JSON Viewer",
-    "path": "json-viewer",
-    "description": "A JSON value as a tree: type-coloured values, objects and arrays that open and close, long arrays in ranges, copy.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Data Display",
-    "hidden": true
   },
   {
     "name": "Kanban Board",

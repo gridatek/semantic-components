@@ -86,4 +86,4 @@ Layout parts, each a `div` with its `class`.
 
 ## Styles
 
-Every part's classes are the style's (`injectStyle().codeBlock`: `root` by variant, `header`, `title`, `actions`, `content`, `code`, `line` by mark, `footer`): shadcn's Code Block, in each style. A code editor in the block (the Code Editor) takes the style's focus look for the code.
+Every part's classes are the style's (`injectStyle().codeBlock`: `root` by variant, `header`, `title`, `actions`, `content`, `code`, `line` by mark, `footer`): shadcn's Code Block, in each style.
