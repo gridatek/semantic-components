@@ -18,7 +18,7 @@ export interface ScPreferenceDefinition<V extends string = string> {
   readonly values: readonly V[];
   /** Its value while none is saved (or the one saved isn't in `values`). */
   readonly defaultValue: V;
-  /** Kept under this name, after the setup's `storagePrefix` (a cookie the server reads, copied to `localStorage`); without it, for the app's life. */
+  /** Kept under this name (a cookie the server reads, copied to `localStorage`); without it, for the app's life. */
   readonly storageKey?: string;
   /** On `<html>`, for the whole page — not on the element that applies it. */
   readonly global?: boolean;
@@ -63,10 +63,7 @@ export class ScPreferences {
     // Another tab chose: here too.
     const onStorage = (event: StorageEvent) => {
       for (const [definition, { value }] of this.instances) {
-        if (
-          !definition.storageKey ||
-          event.key !== this.storage.key(definition.storageKey)
-        )
+        if (!definition.storageKey || event.key !== definition.storageKey)
           continue;
         value.set(this.valid(definition, event.newValue));
       }

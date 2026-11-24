@@ -37,7 +37,7 @@ readonly view = injectPreference(view); // view.value(): 'list' | 'grid'; view.s
 
 ## Kept
 
-- With a `storageKey`, through `ScStorage`: a cookie (a year, the whole site) copied to `localStorage`, named after the setup's `storagePrefix` (`storageKey: 'app-view'` → `sc-app-view`). The server reads the request's cookie, so a page rendered per request is drawn as the user left it, with no script. A prerendered page has no request: its default until the app starts.
+- With a `storageKey`, through `ScStorage`: a cookie (a year, the whole site) copied to `localStorage`. The server reads the request's cookie, so a page rendered per request is drawn as the user left it, with no script. A prerendered page has no request: its default until the app starts.
 - Another tab's choice comes through (the `storage` event).
 - Without a `storageKey`: for the app's life.
 - A saved value that isn't one of its `values` is ignored: the default.

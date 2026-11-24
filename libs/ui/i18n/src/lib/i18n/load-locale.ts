@@ -2,10 +2,10 @@ import { registerLocaleData } from '@angular/common';
 import { loadTranslations } from '@angular/localize';
 import { readStorage } from '@semantic-components/ui';
 import {
-  LOCALE_KEY,
   type ScI18nConfig,
   chooseLocale,
   localeDir,
+  storageKey,
 } from './i18n-config';
 
 /**
@@ -13,17 +13,12 @@ import {
  * picks the locale — the one chosen before, else the browser's, else the
  * source one — loads its translations and locale data, and sets `<html lang>`,
  * `<html dir>` and `$localize.locale`, which Angular's `LOCALE_ID` follows.
- * If they fail to load: the source locale. In the browser. An app whose
- * setup gives a `storagePrefix` gives it here too: the choice is read before
- * the setup exists.
+ * If they fail to load: the source locale. In the browser.
  */
-export async function loadLocale(
-  config: ScI18nConfig,
-  options: { storagePrefix?: string } = {},
-): Promise<void> {
+export async function loadLocale(config: ScI18nConfig): Promise<void> {
   let locale = chooseLocale(
     config,
-    readStorage(LOCALE_KEY, options.storagePrefix),
+    readStorage(storageKey(config)),
     navigator.languages,
   );
   if (locale !== config.sourceLocale) {

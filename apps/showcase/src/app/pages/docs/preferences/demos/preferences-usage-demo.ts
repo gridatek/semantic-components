@@ -13,7 +13,7 @@ const view = definePreference({
   attribute: 'data-view',
   values: ['list', 'grid'],
   defaultValue: 'list',
-  storageKey: 'demo-view',
+  storageKey: 'sc-demo-view',
 });
 
 @Component({

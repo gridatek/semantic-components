@@ -78,11 +78,11 @@ Our Collapsible around an item:
 
 ### ScSidebarProvider — `div[scSidebarProvider]`
 
-| Input        | Type                | Default           | Description                                                                                      |
-| ------------ | ------------------- | ----------------- | ------------------------------------------------------------------------------------------------ |
-| `open`       | `boolean` (two-way) | `true`            | Open on wide screens                                                                             |
-| `storageKey` | `string \| null`    | `'sidebar-state'` | Where the state is kept, after the setup's `storagePrefix` (`sc-sidebar-state`); `null`: nowhere |
-| `shortcut`   | `string \| null`    | `'b'`             | With Ctrl/⌘, toggles; `null`: no shortcut                                                        |
+| Input        | Type                | Default              | Description                               |
+| ------------ | ------------------- | -------------------- | ----------------------------------------- |
+| `open`       | `boolean` (two-way) | `true`               | Open on wide screens                      |
+| `storageKey` | `string \| null`    | `'sc-sidebar-state'` | Where the state is kept; `null`: nowhere  |
+| `shortcut`   | `string \| null`    | `'b'`                | With Ctrl/⌘, toggles; `null`: no shortcut |
 
 ### ScSidebar — `aside[scSidebar]`, `div[scSidebar]`
 

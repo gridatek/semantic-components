@@ -14,9 +14,9 @@ import { themeScript } from './theme-script';
 
 export type ScMode = 'light' | 'dark' | 'system';
 
-/** Where the user's choices are kept (a cookie, copied to `localStorage`): `sc-mode`, `sc-theme` with the default prefix. */
-const MODE_KEY = 'mode';
-const THEME_KEY = 'theme';
+/** Where the user's choices are kept (a cookie, copied to `localStorage`). */
+const MODE_KEY = 'sc-mode';
+const THEME_KEY = 'sc-theme';
 
 /**
  * The theme and the mode, while the app runs: the user's choices, kept (a
@@ -121,8 +121,8 @@ export class ScThemeManager {
     const nonce = inject(CSP_NONCE, { optional: true });
     if (nonce) script.setAttribute('nonce', nonce);
     script.textContent = themeScript({
-      modeKey: this.storage.key(MODE_KEY),
-      themeKey: this.storage.key(THEME_KEY),
+      modeKey: MODE_KEY,
+      themeKey: THEME_KEY,
       mode: this.preset?.mode ?? 'system',
       theme: this.preset?.theme ?? 'default',
     });

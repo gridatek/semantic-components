@@ -39,12 +39,8 @@ import { TocHeading } from '../../components/toc/toc-heading';
           — the mode and the theme, the sidebar open or closed, the language —
           are cookies (with a localStorage copy for where cookies aren&apos;t
           kept), read from the request on the server: a dark page is drawn dark
-          from the first paint, with no flash. Their names start with the
-          setup&apos;s <code scTypeset>storagePrefix</code> (<code scTypeset
-            >sc</code
-          >
-          by default: <code scTypeset>sc-mode</code>), so two apps on one domain
-          keep theirs apart. Keep your own choices the same way.
+          from the first paint, with no flash. Keep your own choices the same
+          way.
         </p>
         <app-doc-code [code]="storageCode" />
         <p>
@@ -85,8 +81,8 @@ export default class SsrPage {
   private readonly storageCode = `import { ScStorage } from '@semantic-components/ui';
 
 const storage = inject(ScStorage);
-storage.get('density'); // sc-density: the request's cookie on the server; the browser's otherwise
-storage.set('density', 'compact'); // a cookie for a year, and its localStorage copy`;
+storage.get('my-app-density'); // the request's cookie on the server; the browser's otherwise
+storage.set('my-app-density', 'compact'); // a cookie for a year, and its localStorage copy`;
 
   private readonly hostsCode = `"security": {
   "allowedHosts": ["example.com", "*.example.com"]
