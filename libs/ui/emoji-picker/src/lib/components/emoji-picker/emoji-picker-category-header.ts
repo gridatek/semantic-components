@@ -2,7 +2,7 @@ import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { ScEmojiPickerState } from './emoji-picker-state';
 
-/** A category's header (write its `label`): sticks while its rows scroll. */
+/** A category's header (its `label`): sticks while its rows scroll. Drawn by `scEmojiPickerList`. */
 @Directive({
   selector: 'div[scEmojiPickerCategoryHeader]',
   host: {

@@ -4,8 +4,8 @@ import { ScEmojiPickerState } from './emoji-picker-state';
 import type { ScEmojiListCategory as Category } from './emoji-picker-types';
 
 /**
- * A category's place in the list, over its rows: holds its
- * `scEmojiPickerCategoryHeader`, which sticks while the rows scroll.
+ * A category's place in the list, over its rows: holds its header, which
+ * sticks while the rows scroll. Drawn by `scEmojiPickerList`.
  */
 @Directive({
   selector: 'div[scEmojiPickerCategory]',

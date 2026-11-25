@@ -3,7 +3,7 @@ import { cn } from 'cn';
 import { ScEmojiPickerState } from './emoji-picker-state';
 import type { ScEmojiListRow as Row } from './emoji-picker-types';
 
-/** A row of emojis (write its `emojis` as `scEmojiPickerEmoji` buttons). */
+/** A row of emojis (`role="row"`). Drawn by `scEmojiPickerList`. */
 @Directive({
   selector: 'div[scEmojiPickerRow]',
   host: {

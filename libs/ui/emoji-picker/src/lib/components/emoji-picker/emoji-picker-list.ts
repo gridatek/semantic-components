@@ -1,25 +1,50 @@
 import {
+  Component,
   DestroyRef,
-  Directive,
   ElementRef,
+  ViewEncapsulation,
   afterRenderEffect,
   computed,
   inject,
   input,
 } from '@angular/core';
 import { cn } from 'cn';
+import { ScEmojiPickerCategory } from './emoji-picker-category';
+import { ScEmojiPickerCategoryHeader } from './emoji-picker-category-header';
+import { ScEmojiPickerEmoji } from './emoji-picker-emoji';
+import { ScEmojiPickerRow } from './emoji-picker-row';
 import { ScEmojiPickerState } from './emoji-picker-state';
 
 /**
- * The emoji grid, virtualised: only the rows in view are drawn. Write, in
- * it, every category (`categories()`, each a `scEmojiPickerCategory` with
- * its `scEmojiPickerCategoryHeader`) and the rows in view (`rows()`, each a
- * `scEmojiPickerRow` of `scEmojiPickerEmoji` buttons). Give it an
- * `aria-label`.
+ * The emoji grid, virtualised: only the rows in view are drawn. It draws
+ * them itself — every category with its header (sticky while its rows
+ * scroll), and the rows in view, each a row of emoji buttons: they hold only
+ * the data (the emojis, their names, the categories' names, in the locale),
+ * none of your words. Give it an `aria-label`.
  */
-@Directive({
+@Component({
   selector: 'div[scEmojiPickerList]',
-  exportAs: 'scEmojiPickerList',
+  imports: [
+    ScEmojiPickerCategory,
+    ScEmojiPickerCategoryHeader,
+    ScEmojiPickerRow,
+    ScEmojiPickerEmoji,
+  ],
+  template: `
+    @for (category of categories(); track category.key) {
+      <div [scEmojiPickerCategory]="category">
+        <div scEmojiPickerCategoryHeader>{{ category.label }}</div>
+      </div>
+    }
+    @for (row of rows(); track row.index) {
+      <div [scEmojiPickerRow]="row">
+        @for (emoji of row.emojis; track emoji.columnIndex) {
+          <button [scEmojiPickerEmoji]="emoji">{{ emoji.emoji }}</button>
+        }
+      </div>
+    }
+  `,
+  encapsulation: ViewEncapsulation.None,
   host: {
     'data-slot': 'emoji-picker-list',
     role: 'grid',
@@ -45,9 +70,9 @@ export class ScEmojiPickerList {
   );
 
   /** Every category (their headers stick while their rows scroll). */
-  readonly categories = computed(() => this.state.layout().categories);
+  private readonly categories = computed(() => this.state.layout().categories);
   /** The rows in view. */
-  readonly rows = this.state.visibleRows;
+  private readonly rows = this.state.visibleRows;
 
   constructor() {
     const element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;

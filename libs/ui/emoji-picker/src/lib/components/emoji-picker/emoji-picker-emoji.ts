@@ -5,8 +5,8 @@ import { ScEmojiPickerState } from './emoji-picker-state';
 import type { ScEmojiListEmoji as Emoji } from './emoji-picker-types';
 
 /**
- * An emoji of the list (write `emoji.emoji` in it): picks it; `data-active`
- * when hovered or moved to with the arrow keys. Named by its label.
+ * An emoji of the list: picks it; `data-active` when hovered or moved to
+ * with the arrow keys. Named by its label. Drawn by `scEmojiPickerList`.
  */
 @Directive({
   selector: 'button[scEmojiPickerEmoji]',

@@ -2,7 +2,10 @@ import { Directionality } from '@angular/cdk/bidi';
 import {
   Directive,
   ElementRef,
+  Injector,
   LOCALE_ID,
+  afterNextRender,
+  booleanAttribute,
   computed,
   effect,
   inject,
@@ -11,6 +14,7 @@ import {
   output,
   untracked,
 } from '@angular/core';
+import { ScPopoverProvider } from '@semantic-components/ui';
 import { cn } from 'cn';
 import {
   SC_EMOJI_SKIN_TONES,
@@ -31,10 +35,12 @@ const ARROW_KEYS = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
  * scrolling list of every category with sticky headers — virtualised —
  * through which the arrow keys move from the search field, Enter picking.
  * Write its parts: `scEmojiPickerSearch`, `scEmojiPickerViewport` with
- * `scEmojiPickerList` and its categories, rows and emojis,
- * `scEmojiPickerLoading`, `scEmojiPickerEmpty`, and what you like around
- * (`activeEmoji()` for a preview, `scEmojiPickerSkinTone`,
- * `scEmojiPickerCategoryNav`).
+ * `scEmojiPickerList` (which draws the emojis), `scEmojiPickerLoading`,
+ * `scEmojiPickerEmpty`, and what you like around (`scEmojiPickerPreview`,
+ * `scEmojiPickerSkinTone`, `scEmojiPickerCategoryNav`).
+ *
+ * In a popover, a pick closes it (`closeOnPick`); with `insertInto`, the
+ * emoji goes into your field, at its caret.
  */
 @Directive({
   selector: 'div[scEmojiPicker]',
@@ -54,6 +60,9 @@ export class ScEmojiPicker {
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly direction = inject(Directionality);
+  private readonly injector = inject(Injector);
+  /** The popover it's in, if any: a pick closes it. */
+  private readonly popover = inject(ScPopoverProvider, { optional: true });
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
@@ -76,6 +85,16 @@ export class ScEmojiPicker {
   readonly maxRecent = input(20);
   /** The name of a first category of the recent emojis; none without it. */
   readonly recentLabel = input<string | null>(null);
+  /** In a popover: a pick closes it (`false`: it stays open for more). */
+  readonly closeOnPick = input(true, { transform: booleanAttribute });
+  /**
+   * Your text field: a pick goes into it at its caret (replacing what's
+   * selected), the field told as by typing (`input` event: its form value
+   * follows), and focus back in it after the caret.
+   */
+  readonly insertInto = input<HTMLInputElement | HTMLTextAreaElement | null>(
+    null,
+  );
 
   /** An emoji was picked. */
   readonly emojiSelect = output<ScEmoji>();
@@ -138,12 +157,39 @@ export class ScEmojiPicker {
   /** Picks an emoji: emitted, and first of the recent ones. */
   select(emoji: ScEmoji): void {
     this.emojiSelect.emit(emoji);
+    const field = this.insertInto();
+    if (field) this.insert(field, emoji.emoji);
     const base = skinToneVariation(emoji.emoji, 'none');
     this.recent.update((recent) =>
       [
         { emoji: base, label: emoji.label },
         ...recent.filter((e) => e.emoji !== base),
       ].slice(0, this.maxRecent()),
+    );
+    if (this.closeOnPick()) this.popover?.close();
+  }
+
+  /** An emoji into a field, at its caret; then the field's focus. */
+  private insert(
+    field: HTMLInputElement | HTMLTextAreaElement,
+    text: string,
+  ): void {
+    const end = field.value.length;
+    field.setRangeText(
+      text,
+      field.selectionStart ?? end,
+      field.selectionEnd ?? end,
+      'end',
+    );
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+    const caret = field.selectionEnd;
+    // After the popover is gone (it gives focus back to its trigger).
+    afterNextRender(
+      () => {
+        field.focus();
+        field.setSelectionRange(caret, caret);
+      },
+      { injector: this.injector },
     );
   }
 
