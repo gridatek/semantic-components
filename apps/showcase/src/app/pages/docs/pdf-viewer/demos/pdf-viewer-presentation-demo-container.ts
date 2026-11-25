@@ -21,6 +21,7 @@ export class PdfViewerPresentationDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
   ScButton,
+  ScFieldTitle,
   ScInput,
   ScPopover,
   ScPopoverPortal,
@@ -61,6 +62,7 @@ import { cn } from 'cn';
 @Component({
   selector: 'app-pdf-viewer-presentation-demo',
   imports: [
+    ScFieldTitle,
     ScPdfViewer,
     ScPdfViewerContainer,
     ScPdfViewerToolbar,
@@ -97,8 +99,8 @@ import { cn } from 'cn';
       fileName="handbook"
       #viewer="scPdfViewer"
     >
-      <div scPdfViewerContainer class="flex size-full flex-col">
-        <div scPdfViewerToolbar aria-label="Handbook" class="py-1.5">
+      <div scPdfViewerContainer class="size-full">
+        <div scPdfViewerToolbar aria-label="Handbook">
           <input scInput scPdfViewerPageInput aria-label="Page" />
           <span class="text-muted-foreground text-sm">
             @if (viewer.pageLabels()) {
@@ -126,12 +128,7 @@ import { cn } from 'cn';
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto gap-4">
                 <div class="grid gap-2">
-                  <p
-                    id="presentation-demo-scrolling"
-                    class="text-muted-foreground text-xs font-medium"
-                  >
-                    Scrolling
-                  </p>
+                  <p id="presentation-demo-scrolling" scFieldTitle>Scrolling</p>
                   <div
                     scToggleGroup
                     scPdfViewerSetting="scrollMode"
@@ -148,12 +145,7 @@ import { cn } from 'cn';
                   </div>
                 </div>
                 <div class="grid gap-2">
-                  <p
-                    id="presentation-demo-spreads"
-                    class="text-muted-foreground text-xs font-medium"
-                  >
-                    Spreads
-                  </p>
+                  <p id="presentation-demo-spreads" scFieldTitle>Spreads</p>
                   <div
                     scToggleGroup
                     scPdfViewerSetting="spreadMode"

@@ -15,7 +15,7 @@ export class ScPdfViewerToolbar {
 
   private readonly class = computed(() =>
     cn(
-      'flex items-center gap-2 px-3 py-2 bg-background border-b',
+      'flex items-center gap-1 px-3 py-2 bg-background border-b',
       // Vertical separators (scSeparator): short and centered on the row.
       '*:data-[orientation=vertical]:mx-1 *:data-[orientation=vertical]:h-5 *:data-[orientation=vertical]:self-center',
       this.classInput(),

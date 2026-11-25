@@ -50,6 +50,8 @@ export { ScPdfViewerFindResultsInfo } from './pdf-viewer-find-results-info';
 
 // Settings (view options, annotation tool options) on the consumer's controls
 export { ScPdfViewerSetting } from './pdf-viewer-setting';
+export { ScPdfViewerColor } from './pdf-viewer-color';
+export type { ScPdfViewerColorSetting } from './pdf-viewer-color';
 
 // Dialogs (on the consumer's scDialogProvider)
 export { ScPdfViewerDialog } from './pdf-viewer-dialog';

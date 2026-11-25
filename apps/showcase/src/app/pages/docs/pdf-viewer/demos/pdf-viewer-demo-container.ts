@@ -27,6 +27,7 @@ import {
   signal,
 } from '@angular/core';
 import {
+  ScBadge,
   ScButton,
   ScCheckbox,
   ScDialog,
@@ -45,6 +46,7 @@ import {
   ScEmptyTitle,
   ScField,
   ScFieldDescription,
+  ScFieldTitle,
   ScFrame,
   ScInput,
   ScLabel,
@@ -96,6 +98,7 @@ import {
   ScPdfViewerAttachment,
   ScPdfViewerBack,
   ScPdfViewerCanvas,
+  ScPdfViewerColor,
   ScPdfViewerComment,
   ScPdfViewerCommentCancel,
   ScPdfViewerCommentEdit,
@@ -303,6 +306,7 @@ const INK_COLORS = [
     ScPdfViewerCommentInput,
     ScPdfViewerCommentCancel,
     ScPdfViewerCommentShow,
+    ScPdfViewerColor,
     ScPdfViewerCommentEdit,
     ScPdfViewerCommentRemove,
     ScPdfViewerDialog,
@@ -331,7 +335,9 @@ const INK_COLORS = [
     ScSeparator,
     ScInput,
     ScTextarea,
+    ScBadge,
     ScField,
+    ScFieldTitle,
     ScLabel,
     ScFieldDescription,
     ScCheckbox,
@@ -428,15 +434,12 @@ const INK_COLORS = [
       [enablePermissions]="true"
       #viewer="scPdfViewer"
     >
-      <div
-        scPdfViewerContainer
-        class="flex size-full flex-col rounded-none border-0"
-      >
+      <div scPdfViewerContainer class="size-full">
         <!-- Toolbar -->
         <div
           scPdfViewerToolbar
           aria-label="PDF viewer toolbar"
-          class="flex-wrap gap-1 px-2 py-1.5"
+          class="flex-wrap"
         >
           <div scTooltipProvider side="bottom">
             <button scPdfViewerSidebarToggle scTooltipTrigger>
@@ -579,12 +582,7 @@ const INK_COLORS = [
             <ng-template scPopoverPortal>
               <div scPopover class="w-auto gap-4">
                 <div class="grid gap-2">
-                  <p
-                    id="pdf-demo-cursor"
-                    class="text-muted-foreground text-xs font-medium"
-                  >
-                    Cursor
-                  </p>
+                  <p id="pdf-demo-cursor" scFieldTitle>Cursor</p>
                   <div
                     scToggleGroup
                     scPdfViewerSetting="cursorTool"
@@ -597,12 +595,7 @@ const INK_COLORS = [
                   </div>
                 </div>
                 <div class="grid gap-2">
-                  <p
-                    id="pdf-demo-scrolling"
-                    class="text-muted-foreground text-xs font-medium"
-                  >
-                    Scrolling
-                  </p>
+                  <p id="pdf-demo-scrolling" scFieldTitle>Scrolling</p>
                   <div
                     scToggleGroup
                     scPdfViewerSetting="scrollMode"
@@ -619,12 +612,7 @@ const INK_COLORS = [
                   </div>
                 </div>
                 <div class="grid gap-2">
-                  <p
-                    id="pdf-demo-spreads"
-                    class="text-muted-foreground text-xs font-medium"
-                  >
-                    Spreads
-                  </p>
+                  <p id="pdf-demo-spreads" scFieldTitle>Spreads</p>
                   <div
                     scToggleGroup
                     scPdfViewerSetting="spreadMode"
@@ -708,17 +696,15 @@ const INK_COLORS = [
                 @switch (viewer.toolSettings()) {
                   @case ('highlight') {
                     <div
-                      scToggleGroup
-                      scPdfViewerSetting="highlightColor"
-                      size="sm"
+                      role="group"
                       aria-label="Highlight colour"
+                      class="flex flex-wrap gap-2"
                     >
                       @for (color of highlightColors; track color.value) {
-                        <button scToggleGroupItem [value]="color.value">
-                          <span
-                            class="ring-foreground/20 size-4 rounded-full ring-1"
-                            [style.background-color]="color.value"
-                          ></span>
+                        <button
+                          [scPdfViewerColor]="color.value"
+                          setting="highlightColor"
+                        >
                           <span class="sr-only">{{ color.name }}</span>
                         </button>
                       }
@@ -737,25 +723,20 @@ const INK_COLORS = [
                     </div>
                     <label scField orientation="horizontal">
                       Show all
-                      <input
-                        scSwitch
-                        scPdfViewerSetting="highlightShowAll"
-                      />
+                      <input scSwitch scPdfViewerSetting="highlightShowAll" />
                     </label>
                   }
                   @case ('freetext') {
                     <div
-                      scToggleGroup
-                      scPdfViewerSetting="freetextColor"
-                      size="sm"
+                      role="group"
                       aria-label="Text colour"
+                      class="flex flex-wrap gap-2"
                     >
                       @for (color of inkColors; track color.value) {
-                        <button scToggleGroupItem [value]="color.value">
-                          <span
-                            class="ring-foreground/20 size-4 rounded-full ring-1"
-                            [style.background-color]="color.value"
-                          ></span>
+                        <button
+                          [scPdfViewerColor]="color.value"
+                          setting="freetextColor"
+                        >
                           <span class="sr-only">{{ color.name }}</span>
                         </button>
                       }
@@ -775,17 +756,15 @@ const INK_COLORS = [
                   }
                   @case ('ink') {
                     <div
-                      scToggleGroup
-                      scPdfViewerSetting="inkColor"
-                      size="sm"
+                      role="group"
                       aria-label="Drawing colour"
+                      class="flex flex-wrap gap-2"
                     >
                       @for (color of inkColors; track color.value) {
-                        <button scToggleGroupItem [value]="color.value">
-                          <span
-                            class="ring-foreground/20 size-4 rounded-full ring-1"
-                            [style.background-color]="color.value"
-                          ></span>
+                        <button
+                          [scPdfViewerColor]="color.value"
+                          setting="inkColor"
+                        >
                           <span class="sr-only">{{ color.name }}</span>
                         </button>
                       }
@@ -963,13 +942,13 @@ const INK_COLORS = [
 
         <!-- Find bar -->
         @if (viewer.findOpen()) {
-          <div scPdfViewerFindbar class="flex-wrap border-b px-2 py-1.5">
+          <div scPdfViewerFindbar>
             <input
               scInput
               scPdfViewerFindInput
               aria-label="Find in document"
               placeholder="Find in document…"
-              class="h-8 w-56"
+              class="w-56"
             />
             <div scTooltipProvider>
               <button scPdfViewerFindPrevious scTooltipTrigger>
@@ -989,19 +968,19 @@ const INK_COLORS = [
                 <div scTooltip>Next match<span scTooltipArrow></span></div>
               </ng-template>
             </div>
-            <label scField orientation="horizontal" class="ms-2 text-sm">
+            <label scField orientation="horizontal" class="ms-2">
               <input scCheckbox scPdfViewerSetting="findHighlightAll" />
               Highlight all
             </label>
-            <label scField orientation="horizontal" class="text-sm">
+            <label scField orientation="horizontal">
               <input scCheckbox scPdfViewerSetting="findMatchCase" />
               Match case
             </label>
-            <label scField orientation="horizontal" class="text-sm">
+            <label scField orientation="horizontal">
               <input scCheckbox scPdfViewerSetting="findMatchDiacritics" />
               Match diacritics
             </label>
-            <label scField orientation="horizontal" class="text-sm">
+            <label scField orientation="horizontal">
               <input scCheckbox scPdfViewerSetting="findEntireWord" />
               Whole words
             </label>
@@ -1104,9 +1083,9 @@ const INK_COLORS = [
                 >
                   <ng-template scTabsPanelContent>
                     <div
-                      role="toolbar"
+                      scPdfViewerToolbar
                       aria-label="Organise pages"
-                      class="bg-background sticky top-0 z-10 flex flex-wrap items-center gap-0.5 border-b px-2 py-1"
+                      class="sticky top-0 z-10 flex-wrap"
                     >
                       <div scTooltipProvider>
                         <button scPdfViewerInsertPages scTooltipTrigger>
@@ -1135,10 +1114,7 @@ const INK_COLORS = [
                       @if (viewer.pageSelection().length) {
                         <div scSeparator orientation="vertical"></div>
                         <div scTooltipProvider>
-                          <button
-                            scPdfViewerMovePagesEarlier
-                            scTooltipTrigger
-                          >
+                          <button scPdfViewerMovePagesEarlier scTooltipTrigger>
                             <svg siArrowUpIcon></svg>
                             <span class="sr-only">Move earlier</span>
                           </button>
@@ -1149,10 +1125,7 @@ const INK_COLORS = [
                           </ng-template>
                         </div>
                         <div scTooltipProvider>
-                          <button
-                            scPdfViewerMovePagesLater
-                            scTooltipTrigger
-                          >
+                          <button scPdfViewerMovePagesLater scTooltipTrigger>
                             <svg siArrowDownIcon></svg>
                             <span class="sr-only">Move later</span>
                           </button>
@@ -1262,12 +1235,9 @@ const INK_COLORS = [
                         No outline in this document.
                       </p>
                     } @else {
-                      <div class="flex gap-1 border-b px-2 py-1">
+                      <div scPdfViewerToolbar aria-label="Outline">
                         <div scTooltipProvider>
-                          <button
-                            scPdfViewerOutlineExpandAll
-                            scTooltipTrigger
-                          >
+                          <button scPdfViewerOutlineExpandAll scTooltipTrigger>
                             <svg siChevronsUpDownIcon></svg>
                             <span class="sr-only">Expand all</span>
                           </button>
@@ -1368,10 +1338,7 @@ const INK_COLORS = [
                         @for (layer of viewer.layers(); track layer.id) {
                           <li>
                             <label scField orientation="horizontal">
-                              <input
-                                scCheckbox
-                                [scPdfViewerLayer]="layer"
-                              />
+                              <input scCheckbox [scPdfViewerLayer]="layer" />
                               {{ layer.name }}
                             </label>
                           </li>
@@ -1385,10 +1352,8 @@ const INK_COLORS = [
                 <div scTabsPanel value="comments" class="min-h-0 flex-1">
                   <ng-template scTabsPanelContent>
                     <div class="flex h-full flex-col">
-                      <div
-                        class="flex items-center justify-between gap-2 border-b px-3 py-2"
-                      >
-                        <h3 class="text-sm font-medium">
+                      <div scPdfViewerToolbar aria-label="Comments">
+                        <h3 scFieldTitle>
                           Comments ({{ viewer.comments().length }})
                         </h3>
                       </div>
@@ -1436,16 +1401,10 @@ const INK_COLORS = [
                               class="flex items-center justify-between gap-2"
                             >
                               <button
-                                scButton
-                                variant="link"
                                 size="xs"
-                                class="h-auto px-0"
                                 [scPdfViewerCommentShow]="comment"
                               >
-                                <span
-                                  class="bg-primary text-primary-foreground grid size-5 place-items-center rounded-full text-[0.65rem]"
-                                  aria-hidden="true"
-                                >
+                                <span scBadge aria-hidden="true">
                                   {{ index + 1 }}
                                 </span>
                                 Page {{ viewer.pageLabel(comment.pageNumber) }}
@@ -1454,7 +1413,7 @@ const INK_COLORS = [
                                 {{ comment.date?.toLocaleString() }}
                               </span>
                             </div>
-                            <p class="text-sm">{{ comment.text }}</p>
+                            <p>{{ comment.text }}</p>
                             <div class="flex justify-end gap-1">
                               <button [scPdfViewerCommentEdit]="comment">
                                 Edit
@@ -1486,18 +1445,11 @@ const INK_COLORS = [
                 </div>
               </div>
             </aside>
-            <div
-              scPdfViewerSidebarResizer
-              aria-label="Resize sidebar"
-            ></div>
+            <div scPdfViewerSidebarResizer aria-label="Resize sidebar"></div>
           }
 
           <div scPdfViewerContent class="flex-1">
-            <div
-              scProgress
-              scPdfViewerLoadingBar
-              aria-label="Loading document"
-            >
+            <div scProgress scPdfViewerLoadingBar aria-label="Loading document">
               <div scProgressTrack><div scProgressRange></div></div>
             </div>
             <div scPdfViewerLoading>
@@ -1686,10 +1638,7 @@ const INK_COLORS = [
                   Alt text describes the image for people who can't see it.
                 </p>
               </div>
-              <form
-                scPdfViewerAltTextForm
-                #altForm="scPdfViewerAltTextForm"
-              >
+              <form scPdfViewerAltTextForm #altForm="scPdfViewerAltTextForm">
                 <div scRadioGroup aria-label="Alternative text">
                   <div scField orientation="horizontal">
                     <input

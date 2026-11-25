@@ -6,6 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
@@ -30,6 +31,8 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
       z-index: 50 !important;
       width: 100vw !important;
       height: 100vh !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
     }
 
     /* Presentation mode: only the pages, on black. */
@@ -41,6 +44,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
     [data-slot='pdf-viewer-container'][data-presenting] {
       border: 0;
       border-radius: 0;
+      box-shadow: none;
       background: #000;
     }
 
@@ -57,8 +61,11 @@ export class ScPdfViewerContainer {
 
   readonly classInput = input<string>('', { alias: 'class' });
 
+  /** The style's frame (as `scFrame`'s). */
+  private readonly frame = injectStyle().frame;
+
   private readonly class = computed(() =>
-    cn('bg-background border rounded-lg overflow-hidden', this.classInput()),
+    cn('bg-background overflow-hidden', this.frame, this.classInput()),
   );
 
   constructor() {

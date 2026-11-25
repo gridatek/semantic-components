@@ -8,6 +8,7 @@ import {
   ScDialogPortal,
   ScDialogProvider,
   ScDialogTitle,
+  ScFieldTitle,
   ScProgress,
   ScProgressRange,
   ScProgressTrack,
@@ -45,6 +46,7 @@ import { cn } from 'cn';
 @Component({
   selector: 'app-pdf-viewer-form-demo',
   imports: [
+    ScFieldTitle,
     ScPdfViewer,
     ScPdfViewerContainer,
     ScPdfViewerToolbar,
@@ -86,9 +88,9 @@ import { cn } from 'cn';
       initialZoom="page-width"
       #viewer="scPdfViewer"
     >
-      <div scPdfViewerContainer class="flex size-full flex-col">
-        <div scPdfViewerToolbar aria-label="Order form" class="py-1.5">
-          <span class="text-sm font-medium">Order form</span>
+      <div scPdfViewerContainer class="size-full">
+        <div scPdfViewerToolbar aria-label="Order form">
+          <span scFieldTitle>Order form</span>
           <div scPdfViewerSpacer></div>
           <div scTooltipProvider>
             <button scPdfViewerPrint scTooltipTrigger>

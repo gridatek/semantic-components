@@ -28,9 +28,8 @@ import type {
  * - a single `scToggleGroup` — `editorMode` (the annotation tools: nothing
  *   pressed is `none`; disabled while the document forbids changes),
  *   `cursorTool`, `scrollMode`, `spreadMode`, `pageColors` (page colours by
- *   name, `''` for the document's own), `highlightColor`, `freetextColor`,
- *   `inkColor` (items' values are the modes, names, or CSS colours — e.g.
- *   `var(--sc-pdf-viewer-highlight-1)`);
+ *   name, `''` for the document's own) — items' values are the modes or
+ *   names (colours: `scPdfViewerColor` swatches);
  * - `scTabs` — `sidebarView` (the tabs' values are the views);
  * - a `scSlider` — `highlightThickness`, `freetextSize`, `inkThickness`,
  *   `inkOpacity` (set its `min` / `max` / `step`);

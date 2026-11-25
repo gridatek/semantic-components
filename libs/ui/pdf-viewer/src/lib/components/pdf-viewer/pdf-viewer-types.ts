@@ -189,12 +189,9 @@ export type ScPdfViewerSettingKey =
   | 'cursorTool'
   | 'scrollMode'
   | 'spreadMode'
-  | 'highlightColor'
   | 'highlightThickness'
   | 'highlightShowAll'
-  | 'freetextColor'
   | 'freetextSize'
-  | 'inkColor'
   | 'inkThickness'
   | 'inkOpacity';
 

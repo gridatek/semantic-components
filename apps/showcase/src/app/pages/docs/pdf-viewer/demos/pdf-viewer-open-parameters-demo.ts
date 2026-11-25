@@ -43,8 +43,8 @@ import { cn } from 'cn';
       fileName="handbook"
       #viewer="scPdfViewer"
     >
-      <div scPdfViewerContainer class="flex size-full flex-col">
-        <div scPdfViewerToolbar aria-label="Handbook" class="flex-wrap py-1.5">
+      <div scPdfViewerContainer class="size-full">
+        <div scPdfViewerToolbar aria-label="Handbook" class="flex-wrap">
           <input scInput scPdfViewerPageInput aria-label="Page" />
           <span class="text-muted-foreground text-sm" data-testid="page-count">
             @if (viewer.pageLabels()) {

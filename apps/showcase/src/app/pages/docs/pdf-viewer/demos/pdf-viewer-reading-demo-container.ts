@@ -97,12 +97,8 @@ import { cn } from 'cn';
       fileName="handbook"
       #viewer="scPdfViewer"
     >
-      <div scPdfViewerContainer class="flex size-full flex-col">
-        <div
-          scPdfViewerToolbar
-          aria-label="Reading"
-          class="flex-wrap gap-y-1.5 py-1.5"
-        >
+      <div scPdfViewerContainer class="size-full">
+        <div scPdfViewerToolbar aria-label="Reading" class="flex-wrap">
           <div scPdfViewerNav aria-label="History">
             <div scTooltipProvider>
               <button scPdfViewerBack scTooltipTrigger>
@@ -139,7 +135,7 @@ import { cn } from 'cn';
             <button scToggleGroupItem value="sepia">Sepia</button>
             <button scToggleGroupItem value="dark">Dark</button>
           </div>
-          <label scField orientation="horizontal" class="text-sm">
+          <label scField orientation="horizontal">
             Caret browsing
             <input scSwitch scPdfViewerSetting="caretBrowsing" />
           </label>

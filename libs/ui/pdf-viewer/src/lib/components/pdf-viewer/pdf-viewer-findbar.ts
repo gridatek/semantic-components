@@ -1,25 +1,23 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
-import { SC_PDF_VIEWER } from './pdf-viewer';
 
-@Component({
+/**
+ * The find bar's row, under the toolbar — the toolbar's look: put the find
+ * field, its buttons, options and results in it.
+ */
+@Directive({
   selector: '[scPdfViewerFindbar]',
-  template: ` <ng-content /> `,
   host: {
+    'data-slot': 'pdf-viewer-findbar',
     '[class]': 'class()',
   },
-  encapsulation: ViewEncapsulation.None,
 })
 export class ScPdfViewerFindbar {
-  private readonly pdfViewer = inject(SC_PDF_VIEWER);
   readonly classInput = input<string>('', { alias: 'class' });
   private readonly class = computed(() =>
-    cn('flex items-center gap-2', this.classInput()),
+    cn(
+      'flex flex-wrap items-center gap-2 px-3 py-2 bg-background border-b',
+      this.classInput(),
+    ),
   );
 }
