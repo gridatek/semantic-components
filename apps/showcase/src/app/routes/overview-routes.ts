@@ -27,21 +27,6 @@ export const overviewRoutes: Route[] = [
         loadComponent: () => import('../pages/overview/components-page'),
       },
       {
-        path: 'custom-style',
-        title: 'Custom style - Semantic Components',
-        loadComponent: () => import('../pages/overview/custom-style-page'),
-      },
-      {
-        path: 'i18n',
-        title: 'Internationalization - Semantic Components',
-        loadComponent: () => import('../pages/overview/i18n-page'),
-      },
-      {
-        path: 'rtl',
-        title: 'Right to left - Semantic Components',
-        loadComponent: () => import('../pages/overview/rtl-page'),
-      },
-      {
         path: 'credits',
         title: 'Credits - Semantic Components',
         loadComponent: () => import('../pages/overview/credits-page'),
@@ -82,9 +67,10 @@ export const overviewRoutes: Route[] = [
         redirectTo: '/docs/overview/get-started',
       },
       { path: 'introduction', redirectTo: '/docs/overview/introduction' },
-      { path: 'custom-style', redirectTo: '/docs/overview/custom-style' },
-      { path: 'i18n', redirectTo: '/docs/overview/i18n' },
-      { path: 'rtl', redirectTo: '/docs/overview/rtl' },
+      // Guides now.
+      { path: 'custom-style', redirectTo: '/docs/guides/custom-style' },
+      { path: 'i18n', redirectTo: '/docs/guides/i18n' },
+      { path: 'rtl', redirectTo: '/docs/guides/rtl' },
       { path: 'installation', redirectTo: '/docs/overview/get-started' },
       { path: 'ui', redirectTo: '/docs/overview/get-started' },
       { path: 'prerequisites', redirectTo: '/docs/overview/get-started' },

@@ -3,7 +3,7 @@ import { test } from '../test';
 
 test.describe('Internationalization Page', () => {
   test('should have no accessibility violations', async ({ page }) => {
-    await page.goto('/docs/overview/i18n');
+    await page.goto('/docs/guides/i18n');
     await expectNoA11yViolations(page);
   });
 });

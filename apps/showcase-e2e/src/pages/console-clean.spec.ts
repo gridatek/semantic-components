@@ -23,7 +23,7 @@ const pages = [
   '/docs/overview/get-started',
   '/docs/packages/ui',
   '/docs/packages/styles',
-  '/docs/overview/i18n',
+  '/docs/guides/i18n',
   '/docs/packages/mcp-server',
   '/docs/guides/theming',
   '/docs/guides/scrollbar',

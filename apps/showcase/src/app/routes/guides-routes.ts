@@ -41,6 +41,21 @@ export const guidesRoutes: Route[] = [
         title: 'Server-side rendering - Semantic Components',
         loadComponent: () => import('../pages/guides/ssr-page'),
       },
+      {
+        path: 'custom-style',
+        title: 'Custom style - Semantic Components',
+        loadComponent: () => import('../pages/guides/custom-style-page'),
+      },
+      {
+        path: 'i18n',
+        title: 'Internationalization - Semantic Components',
+        loadComponent: () => import('../pages/guides/i18n-page'),
+      },
+      {
+        path: 'rtl',
+        title: 'Right to left - Semantic Components',
+        loadComponent: () => import('../pages/guides/rtl-page'),
+      },
     ],
   },
 ];

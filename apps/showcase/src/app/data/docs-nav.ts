@@ -53,7 +53,7 @@ export const guidePages: readonly DocsPage[] = [
     path: '/docs/guides/theming',
     description: 'Styles, theme variables, dark mode',
   },
-  { name: 'Custom style', path: '/docs/overview/custom-style' },
+  { name: 'Custom style', path: '/docs/guides/custom-style' },
   { name: 'Scrollbar', path: '/docs/guides/scrollbar' },
   { name: 'Typeset', path: '/docs/guides/typeset' },
   {
@@ -66,8 +66,8 @@ export const guidePages: readonly DocsPage[] = [
     path: '/docs/guides/accessibility',
     description: 'WCAG AA, keyboard, focus, names',
   },
-  { name: 'Internationalization', path: '/docs/overview/i18n' },
-  { name: 'Right to left', path: '/docs/overview/rtl' },
+  { name: 'Internationalization', path: '/docs/guides/i18n' },
+  { name: 'Right to left', path: '/docs/guides/rtl' },
   {
     name: 'Server-side rendering',
     path: '/docs/guides/ssr',

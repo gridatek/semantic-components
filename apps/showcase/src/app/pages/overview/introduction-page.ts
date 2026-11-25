@@ -367,7 +367,7 @@ export const appConfig: ApplicationConfig = {
     },
     {
       name: 'Custom styles',
-      path: '/docs/overview/custom-style',
+      path: '/docs/guides/custom-style',
       description: 'create your own brand style, in the style structure.',
     },
     {

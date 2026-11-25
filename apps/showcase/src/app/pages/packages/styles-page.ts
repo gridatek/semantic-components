@@ -144,7 +144,7 @@ const STYLES: { name: ScStyleName; description: string }[] = [
             scLink
             variant="outline"
             size="sm"
-            routerLink="/docs/overview/custom-style"
+            routerLink="/docs/guides/custom-style"
           >
             Make your own
           </a>
@@ -209,7 +209,7 @@ const STYLES: { name: ScStyleName; description: string }[] = [
             A style is set when the app starts: switching one means reloading.
             To change only a few classes, spread a style and replace its keys —
             see
-            <a scLink routerLink="/docs/overview/custom-style">Custom style</a>.
+            <a scLink routerLink="/docs/guides/custom-style">Custom style</a>.
           </li>
         </ul>
       </section>
