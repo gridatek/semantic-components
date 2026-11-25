@@ -34,7 +34,7 @@ import {
   imports: [ScDateInput, ScDateRangeInput, ScField, ScLabel, ScButton],
   template: \`
     <div class="flex items-end gap-2">
-      <div scField class="w-80">
+      <div scField class="w-full max-w-80">
         <label scLabel>Stay</label>
         <div scDateRangeInput #stayInput="scDateRangeInput" [(value)]="stay">
           <div scDateInput part="start" aria-label="Check-in"></div>

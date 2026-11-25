@@ -121,3 +121,24 @@ test('RTL: the start at the right', async ({ page }) => {
   await expect(end(page, 'الوصول')).toBeVisible();
   expect(await left('المغادرة')).toBeLessThan(await left('الوصول'));
 });
+
+test('In the docs on a phone (280px): the field shrinks to the width it has, both ends whole inside it', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto(demo('date-range-input-usage'));
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  const field = page.locator('[scField]');
+  await expect(field).toBeVisible();
+  const f = await field.boundingBox();
+  expect(f?.x).toBeGreaterThanOrEqual(40 - 0.5);
+  expect((f?.x ?? 0) + (f?.width ?? 0)).toBeLessThanOrEqual(360 - 40 + 0.5);
+  // Its ends: none cut by the field.
+  const range = await page.locator('[scDateRangeInput]').boundingBox();
+  expect((range?.x ?? 0) + (range?.width ?? 0)).toBeLessThanOrEqual(
+    (f?.x ?? 0) + (f?.width ?? 0) + 0.5,
+  );
+});

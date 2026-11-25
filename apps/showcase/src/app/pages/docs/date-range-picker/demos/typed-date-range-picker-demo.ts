@@ -47,7 +47,7 @@ import {
     SiChevronRightIcon,
   ],
   template: `
-    <div class="grid w-80 gap-2">
+    <div class="grid w-full max-w-80 gap-2">
       <p scLabelText id="stay-label">Stay</p>
       <div scDateRangePicker #dp="scDateRangePicker" [(value)]="range">
         <div scPopoverProvider [origin]="anchor" alignment="start">

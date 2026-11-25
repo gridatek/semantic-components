@@ -33,8 +33,8 @@ import {
   selector: 'app-rtl-date-range-input-demo',
   imports: [Dir, ScDateInput, ScDateRangeInput, ScField, ScLabel],
   template: \`
-    <div dir="rtl" lang="ar">
-      <div scField class="w-80">
+    <div dir="rtl" lang="ar" class="flex w-full flex-col items-center gap-3">
+      <div scField class="w-full max-w-80">
         <label scLabel>الإقامة</label>
         <div scDateRangeInput [(value)]="stay">
           <div scDateInput part="start" aria-label="الوصول"></div>

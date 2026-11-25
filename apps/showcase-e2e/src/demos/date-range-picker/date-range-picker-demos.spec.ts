@@ -159,3 +159,26 @@ test('RTL: written in Arabic, right to left', async ({ page }) => {
   await trigger(page).click();
   await expect(calendar(page)).toBeVisible();
 });
+
+test('Typed, in the docs on a phone (280px): the field shrinks to the width it has, both ends and its button whole inside it', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto(demo('typed'));
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  const group = page.locator('[data-slot=input-group]');
+  await expect(group).toBeVisible();
+  const g = await group.boundingBox();
+  expect(g?.x).toBeGreaterThanOrEqual(40 - 0.5);
+  expect((g?.x ?? 0) + (g?.width ?? 0)).toBeLessThanOrEqual(360 - 40 + 0.5);
+  // Nothing of it cut: its ends and its button inside it.
+  for (const part of [page.locator('[scDateInput]').last(), trigger(page)]) {
+    const p = await part.boundingBox();
+    expect((p?.x ?? 0) + (p?.width ?? 0)).toBeLessThanOrEqual(
+      (g?.x ?? 0) + (g?.width ?? 0) + 0.5,
+    );
+  }
+});

@@ -32,8 +32,8 @@ import {
   selector: 'app-locale-date-range-input-demo',
   imports: [ScDateInput, ScDateRangeInput, ScField, ScLabel],
   template: \`
-    <div lang="de">
-      <div scField class="w-80">
+    <div lang="de" class="flex w-full flex-col items-center gap-3">
+      <div scField class="w-full max-w-80">
         <label scLabel>Aufenthalt</label>
         <div scDateRangeInput [(value)]="stay">
           <div scDateInput part="start" aria-label="Anreise"></div>

@@ -24,7 +24,7 @@ import {
     ScFieldErrors,
   ],
   template: `
-    <form [formRoot]="bookingForm" class="grid w-80 gap-3">
+    <form [formRoot]="bookingForm" class="grid w-full max-w-80 gap-3">
       <div scField class="w-full">
         <label scLabel>Stay</label>
         <div scDateRangeInput [formField]="bookingForm.stay">

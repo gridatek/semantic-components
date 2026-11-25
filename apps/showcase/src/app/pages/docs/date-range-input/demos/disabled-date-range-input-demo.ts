@@ -12,7 +12,7 @@ import {
   selector: 'app-disabled-date-range-input-demo',
   imports: [ScDateInput, ScDateRangeInput, ScField, ScLabel],
   template: `
-    <div scField class="w-80">
+    <div scField class="w-full max-w-80">
       <label scLabel>Stay</label>
       <div scDateRangeInput disabled [(value)]="stay">
         <div scDateInput part="start" aria-label="Check-in"></div>
