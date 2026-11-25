@@ -330,11 +330,10 @@
   {
     "name": "Emoji Picker",
     "path": "emoji-picker",
-    "description": "A picker for selecting emojis.",
+    "description": "A searchable emoji picker: one virtualised list of every category, skin tones, the emojis’ names in 28 languages, and only the emojis the system draws — Emojibase’s data, bundled with your app.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Empty",

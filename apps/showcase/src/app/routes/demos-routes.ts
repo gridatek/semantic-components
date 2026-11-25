@@ -2769,6 +2769,13 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
+        path: 'rtl-emoji-picker-demo',
+        loadComponent: () =>
+          import('../pages/docs/emoji-picker/demos/rtl-emoji-picker-demo').then(
+            (m) => m.RtlEmojiPickerDemo,
+          ),
+      },
+      {
         path: 'quick-reactions-emoji-picker-demo',
         loadComponent: () =>
           import('../pages/docs/emoji-picker/demos/quick-reactions-emoji-picker-demo').then(

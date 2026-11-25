@@ -104,8 +104,11 @@ import {
               </div>
               <div scEmojiPickerViewport>
                 <span scEmojiPickerLoading>
-                  <svg scSpinner siLoaderCircleIcon></svg>
-                  <span class="sr-only">Loading emojis…</span>
+                  <svg
+                    scSpinner
+                    siLoaderCircleIcon
+                    aria-label="Loading emojis"
+                  ></svg>
                 </span>
                 <span scEmojiPickerEmpty>No emoji found.</span>
                 <span scEmojiPickerError>Couldn't load the emojis.</span>

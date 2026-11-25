@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import {
   Directive,
   ElementRef,
@@ -52,6 +53,7 @@ export class ScEmojiPicker {
   private readonly state = inject(ScEmojiPickerState);
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  private readonly direction = inject(Directionality);
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
@@ -180,7 +182,16 @@ export class ScEmojiPicker {
       if (this.state.selectActive()) event.preventDefault();
     } else if (ARROW_KEYS.includes(event.key)) {
       event.preventDefault();
-      this.state.move(event.key as Parameters<ScEmojiPickerState['move']>[0]);
+      let key = event.key as Parameters<ScEmojiPickerState['move']>[0];
+      // Right to left, the next emoji is on the left: ← moves on.
+      if (
+        this.direction.value === 'rtl' &&
+        key !== 'ArrowUp' &&
+        key !== 'ArrowDown'
+      ) {
+        key = key === 'ArrowLeft' ? 'ArrowRight' : 'ArrowLeft';
+      }
+      this.state.move(key);
     }
   }
 

@@ -1,4 +1,5 @@
 import { Directive, computed, inject, input } from '@angular/core';
+import { type ScButtonVariants, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScEmojiPicker } from './emoji-picker';
 import { SC_EMOJI_FONT_FAMILY, skinToneVariation } from './emoji-picker-data';
@@ -21,11 +22,14 @@ import { SC_EMOJI_FONT_FAMILY, skinToneVariation } from './emoji-picker-data';
   },
 })
 export class ScEmojiPickerSkinTone {
+  private readonly buttonStyles = injectStyle().button;
   private readonly picker = inject(ScEmojiPicker);
 
   /** The emoji showing the tone. */
   readonly emoji = input('✋', { alias: 'scEmojiPickerSkinTone' });
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon-sm');
 
   private readonly font = SC_EMOJI_FONT_FAMILY;
 
@@ -36,7 +40,9 @@ export class ScEmojiPickerSkinTone {
 
   private readonly class = computed(() =>
     cn(
-      'hover:bg-accent focus-visible:ring-ring/50 flex size-7 shrink-0 items-center justify-center rounded-sm text-base outline-none focus-visible:ring-3',
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
+      // An emoji, not an icon: the text's size.
+      'text-base',
       this.classInput(),
     ),
   );
