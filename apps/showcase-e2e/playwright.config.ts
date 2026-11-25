@@ -62,7 +62,8 @@ export default defineConfig({
   //   demos, pages — behaviour and each docs page, in nova, desktop Chrome;
   //   styles-nova … styles-rhea — src/styles in that style (its cookie,
   //     from metadata.style in test.ts): classes, axe;
-  //   mobile — the @mobile tests of demos and pages, on a phone.
+  //   mobile — on a phone: src/mobile (every route fits the screen), and the
+  //     @mobile tests of demos and pages.
   // ALL_BROWSERS (nightly) adds demos and pages in Firefox and WebKit, and an
   // iPhone.
   projects: [
@@ -111,7 +112,7 @@ export default defineConfig({
     ).map(([name, device]) => ({
       name,
       testDir: './src',
-      testMatch: /(demos|pages)[/\\].*\.spec\.ts$/,
+      testMatch: /(demos|pages|mobile)[/\\].*\.spec\.ts$/,
       use: { ...device },
       grep: /@mobile/,
     })),

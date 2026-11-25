@@ -26,12 +26,12 @@ npx playwright test -c apps/showcase-e2e/playwright.config.ts --project=styles-n
 
 **Playwright is the only test tool** (the user, 2026-11-12): Vitest and its unit tests are gone (see _Still to do_). `apps/showcase-e2e` stays one Nx project — `nx affected` decides when it runs — and its `src` has a folder per kind of test, each a **Playwright project** in `playwright.config.ts` (not a separate Nx project):
 
-| Folder        | Project(s)                    | What it checks                                                                                                                |
-| ------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| `demos/`      | `demos`                       | behaviour: keys, clicks, state, output — in nova, desktop Chrome                                                              |
-| `pages/`      | `pages`                       | each docs page: its sections, API reference, axe; the console (`console-clean.spec.ts`), the table of contents, SSR hydration |
-| `styles/`     | `styles-nova` … `styles-rhea` | in that style: each component's classes (`<name>.spec.ts`), every visible docs page's axe, light and dark (`pages.spec.ts`)   |
-| — (`@mobile`) | `mobile`                      | the `@mobile` tests of `demos/` and `pages/`, on a phone (Pixel 7)                                                            |
+| Folder    | Project(s)                    | What it checks                                                                                                                       |
+| --------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `demos/`  | `demos`                       | behaviour: keys, clicks, state, output — in nova, desktop Chrome                                                                     |
+| `pages/`  | `pages`                       | each docs page: its sections, API reference, axe; the console (`console-clean.spec.ts`), the table of contents, SSR hydration        |
+| `styles/` | `styles-nova` … `styles-rhea` | in that style: each component's classes (`<name>.spec.ts`), every visible docs page's axe, light and dark (`pages.spec.ts`)          |
+| `mobile/` | `mobile`                      | on a phone (Pixel 7): every page and every demo fits the screen (`reflow.spec.ts`); and the `@mobile` tests of `demos/` and `pages/` |
 
 With `ALL_BROWSERS` (the nightly) there are also `demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit` and the iPhone `mobile-webkit`.
 
@@ -43,13 +43,13 @@ With `ALL_BROWSERS` (the nightly) there are also `demos-firefox`, `pages-firefox
 
 ### Where a new test goes
 
-| You test…                                                    | Put it in                                                                                                                                                                  |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| what a demo does (keys, clicks, a value, an output)          | `demos/<name>/<demo>.spec.ts` (or `<name>-demos.spec.ts`)                                                                                                                  |
-| a docs page (its sections, API reference, a page-wide check) | `pages/<name>-page.spec.ts`                                                                                                                                                |
-| a style's look (its classes)                                 | `styles/<name>.spec.ts` — **never loop over the styles**: read the one running with `currentStyle()` / `styleName()`, and check with `expectClasses()` (`styles/style.ts`) |
-| a phone (small screen, touch, on-screen keyboard)            | a test tagged `@mobile` in the component's demos or page spec (for now — see _Still to do_)                                                                                |
-| a page's look in pixels                                      | `styles/`, tagged `@visual` (coming)                                                                                                                                       |
+| You test…                                                    | Put it in                                                                                                                                                                    |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| what a demo does (keys, clicks, a value, an output)          | `demos/<name>/<demo>.spec.ts` (or `<name>-demos.spec.ts`)                                                                                                                    |
+| a docs page (its sections, API reference, a page-wide check) | `pages/<name>-page.spec.ts`                                                                                                                                                  |
+| a style's look (its classes)                                 | `styles/<name>.spec.ts` — **never loop over the styles**: read the one running with `currentStyle()` / `styleName()`, and check with `expectClasses()` (`styles/style.ts`)   |
+| a phone (small screen, touch, on-screen keyboard)            | a test tagged `@mobile` in the component's demos or page spec (for now — see _Still to do_); fitting the screen is already checked for every route (`mobile/reflow.spec.ts`) |
+| a page's look in pixels                                      | `styles/`, tagged `@visual` (coming)                                                                                                                                         |
 
 Specs outside `styles/` run in nova (`test.ts` sets it); the showcase itself opens in lyra. A spec may still set its own `sc-style` cookie: it replaces the project's.
 
@@ -72,6 +72,15 @@ npx playwright test src/styles/foo.spec.ts --project=styles-nova --project=style
 
 A group is a `matrix.include` entry in `ci.yml`: its name and its `--project` flags. Branch protection's required checks name these jobs.
 
+### Every route on a phone
+
+`mobile/reflow.spec.ts` opens every page and every demo route (read from `app-routes.ts` and `routes/*-routes.ts`; not the redirects, not the parents of children only) on a Pixel 7 and checks that nothing is wider than the screen — WCAG 1.4.10 Reflow, the check teams run at phone widths: the page never scrolls sideways, nothing is cut off at its edge. A new route is tested without a line to add.
+
+- **Each element is measured, not the page's width.** The docs' `main` clips what passes its edge (`overflow-x-clip`): `scrollWidth` would say all is well while a table or a demo is cut off. An element fails when it passes the screen's edge and no ancestor of its own scrolls or clips it sideways — the page (`html`, `body`, the docs' `main`) doesn't count.
+- **What is wide on purpose passes**: a box that scrolls (a table, a code block) or a component that clips (a carousel's other slides, a marquee).
+- **The failure names the culprits**: the outermost elements past the edge (tag, `data-slot`, classes, left…right of the width), ten at most.
+- **Measured at rest**, as in `axe.ts`: network idle (not forever), fonts in, animations finished, then asked again for up to 5 s (a masonry placing its items, a chart taking its width).
+
 ### Limits, and the way forward
 
 This layout is a step, not the end: the suite will grow (visual tests, more components, more style checks), and it will need reworking again. What we know:
@@ -87,7 +96,8 @@ This layout is a step, not the end: the suite will grow (visual tests, more comp
 
 ### Still to do
 
-- **`mobile/`**: move the 87 `@mobile` tests out of the demos and page specs into `src/mobile` (55 of them sit inside `describe` blocks, with their `beforeEach`); then the `mobile` project is a folder like the others, not a tag.
+- **`mobile/`**: the folder exists (`reflow.spec.ts`); move the 87 `@mobile` tests out of the demos and page specs into it (55 of them sit inside `describe` blocks, with their `beforeEach`); then the `mobile` project is a folder like the others, not a tag.
+- **More phone checks**: touch targets (axe's `target-size`, WCAG 2.2 2.5.8 — off in axe by default) on every route; a 320 px width (WCAG's reflow width; the Pixel 7 is 412).
 - **Visual tests**: `@visual`, in `styles/` — see above.
 - **The unit tests to port**: Vitest went on 2026-11-12 (`vitest`, `jsdom`, the showcase's `test` target and `tsconfig.spec.json`, CI's _Unit tests_ step) with its 64 tests, not yet in Playwright: `checkbox-group-form`, `field-errors`, `field-label`, `form-control-invalid`, `radio-form`, `text-control-form-state` (forms: a field's errors, its label, invalid states), `toaster`, `qr-code`, `intersection-observer`, `query-param-state` and `query-param-state-demo` — `apps/showcase/src/app/<name>.spec.ts` in git history (before the commit that removes them). Port what still matters as behaviour tests in `demos/`.
 - **Measure**: the first CI runs give each group's time — the base for the next split.
