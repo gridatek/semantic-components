@@ -110,9 +110,12 @@ import { PdfViewerNextReadingDemoContainer } from './demos/pdf-viewer-next-readi
           rotation — as in pdf.js (<code scTypeset>rememberView</code>, on by
           default).
           <code scTypeset>pageColors</code>
-          draws the pages in your colours (a reading mode); in the system's
-          high-contrast mode they follow its colours. With the browser's caret
-          browsing (F7) on, tell the viewer (<code scTypeset>caretBrowsing</code
+          draws the pages in your theme's colours, by name (a reading mode:
+          <code scTypeset>--sc-pdf-viewer-sepia-foreground</code> on
+          <code scTypeset>--sc-pdf-viewer-sepia-background</code>); in the
+          system's high-contrast mode they follow its colours. With the
+          browser's caret browsing (F7) on, tell the viewer (<code scTypeset
+            >caretBrowsing</code
           >) and <kbd scKbd>↑</kbd> / <kbd scKbd>↓</kbd> move the caret line by
           line through the text.
         </p>

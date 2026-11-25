@@ -159,6 +159,7 @@ export class ScPdfViewerNextCanvas {
       this.watchSize();
       this.watchDevicePixelRatio();
       this.watchFocus();
+      this.watchPageNames();
     });
 
     // pdf.js's viewer, built again when one of its options changes.
@@ -224,9 +225,31 @@ export class ScPdfViewerNextCanvas {
 
   private destroyed = false;
 
+  /** pdf.js named a page (its translation, later): ours again. */
+  private watchPageNames(): void {
+    const view = this.viewer().nativeElement.ownerDocument.defaultView;
+    if (!view?.MutationObserver) return;
+    const observer = new view.MutationObserver((records) => {
+      if (
+        records.some((record) =>
+          (record.target as Element).classList?.contains('page'),
+        )
+      ) {
+        this.pagesShown.update((count) => count + 1);
+      }
+    });
+    observer.observe(this.viewer().nativeElement, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['aria-label', 'role'],
+    });
+    this.destroyRef.onDestroy(() => observer.disconnect());
+  }
+
   /**
    * Names pdf.js's pages with `pageName`, or takes their landmark role and
-   * name off. pdf.js's words for the name go: they would come back.
+   * name off. pdf.js translates its name into them later (and again when a
+   * label changes): `watchPageNames` puts ours back then.
    */
   private namePages(
     engine: ScPdfEngine,
@@ -236,18 +259,17 @@ export class ScPdfViewerNextCanvas {
     for (let index = 0; index < viewer.pagesCount; index++) {
       const div = viewer.getPageView(index)?.div as HTMLElement | undefined;
       if (!div) continue;
-      div.removeAttribute('data-l10n-id');
-      div.removeAttribute('data-l10n-args');
       const page = index + 1;
-      if (name) {
-        div.setAttribute('role', 'region');
-        div.setAttribute(
-          'aria-label',
-          name(page, this.pdfViewer.pageLabel(page)),
-        );
-      } else {
-        div.removeAttribute('role');
-        div.removeAttribute('aria-label');
+      const label = name ? name(page, this.pdfViewer.pageLabel(page)) : null;
+      // Only what differs: the observer below sees these changes too.
+      if (div.getAttribute('aria-label') !== label) {
+        if (label === null) div.removeAttribute('aria-label');
+        else div.setAttribute('aria-label', label);
+      }
+      const role = name ? 'region' : null;
+      if (div.getAttribute('role') !== role) {
+        if (role === null) div.removeAttribute('role');
+        else div.setAttribute('role', role);
       }
     }
   }

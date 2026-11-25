@@ -2064,6 +2064,13 @@ export class ScPdfViewerNext {
     this.detachEngine?.();
     this.detachEngine = null;
     this.engine.set(null);
+    // Its editors go with it: the next viewer has its own.
+    this.uiManager = null;
+    this.commentsUiManager = null;
+    this.editorsReady.set(false);
+    this.editorParamsKnown = false;
+    this.editorParams.clear();
+    this.requestedEditorMode = null;
   }
 
   /** The loaded document into pdf.js's viewer (once both are there). */
