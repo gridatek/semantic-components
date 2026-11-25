@@ -1,6 +1,6 @@
 # Scroll Area
 
-A native scroll container with custom scrollbars — shadcn's Scroll Area (Base UI's) in the look of the app's style (`scrollArea` key: the thumb, in the theme's muted-foreground, 3:1 to be seen). The scrollbar as Base UI's: a track (the foreground at 12%), hidden at rest, fading in while the pointer is over the area and shown at once while it scrolls.
+A native scroll container with custom scrollbars — shadcn's Scroll Area (Base UI's) in the look of the app's style (`scrollArea` key: the thumb, in the theme's muted-foreground, 3:1 to be seen). The scrollbar as Base UI's: a track (the foreground at 12%), hidden at rest, fading in while the pointer is over the area and shown at once while it scrolls. Its corners on the box's edge take the box's radius (`rounded-e-[inherit]`, `rounded-b-[inherit]` across), so the track stays inside a rounded box.
 
 ## Usage
 

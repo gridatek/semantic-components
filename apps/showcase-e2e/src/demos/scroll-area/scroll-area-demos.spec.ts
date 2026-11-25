@@ -70,6 +70,39 @@ test('Usage: overflows down only; one scrollbar, its thumb as long as the share 
   expect(Math.abs(thumb.height - (track.height - 2) * share)).toBeLessThan(2);
 });
 
+/** Each corner's radius: top-left, top-right, bottom-right, bottom-left. */
+const radii = (locator: Locator) =>
+  locator.evaluate((el) => {
+    const style = getComputedStyle(el);
+    return [
+      style.borderTopLeftRadius,
+      style.borderTopRightRadius,
+      style.borderBottomRightRadius,
+      style.borderBottomLeftRadius,
+    ];
+  });
+
+for (const [name, orientation, edge] of [
+  ['scroll-area-usage', 'vertical', [1, 2]],
+  ['rtl-scroll-area', 'vertical', [0, 3]],
+  ['horizontal-scroll-area', 'horizontal', [2, 3]],
+] as const)
+  test(`The track follows the box's corners: ${name}, its ${orientation} bar rounded as the box on the box's edge only`, async ({
+    page,
+  }) => {
+    await page.goto(`/demos/scroll-area/${name}-demo`);
+    await viewport(page).first().hover();
+    const scrollbar = bar(page, orientation).first();
+    await expect(scrollbar).toHaveCSS('opacity', '1');
+    const box = await radii(root(page).first());
+    expect(box[edge[0]]).not.toBe('0px');
+    expect(await radii(scrollbar)).toEqual(
+      box.map((radius, corner) =>
+        (edge as readonly number[]).includes(corner) ? radius : '0px',
+      ),
+    );
+  });
+
 test('Default scrollbar: one vertical scrollbar and its thumb when you write none', async ({
   page,
 }) => {

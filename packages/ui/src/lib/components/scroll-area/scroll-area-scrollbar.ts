@@ -84,9 +84,11 @@ export class ScScrollAreaScrollbar {
       // at rest, it fades in over the area and shows at once as it scrolls.
       this.shown() ? 'opacity-100' : 'pointer-events-none opacity-0',
       this.area.scrolling() && 'duration-0',
+      // Its corners on the box's edge rounded as the box's (inherited from
+      // the area, its parent): the track stays inside a rounded box.
       this.orientation() === 'vertical'
-        ? 'end-0 top-0 bottom-(--sc-scroll-area-corner-size) w-2.5 border-s border-s-transparent'
-        : 'start-0 end-(--sc-scroll-area-corner-size) bottom-0 h-2.5 flex-col border-t border-t-transparent',
+        ? 'end-0 top-0 bottom-(--sc-scroll-area-corner-size) w-2.5 rounded-e-[inherit] border-s border-s-transparent'
+        : 'start-0 end-(--sc-scroll-area-corner-size) bottom-0 h-2.5 flex-col rounded-b-[inherit] border-t border-t-transparent',
       this.classInput(),
     ),
   );
