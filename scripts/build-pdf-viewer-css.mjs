@@ -5,17 +5,18 @@
 // (its dialogs, sidebars, message bars…) and without its global
 // `color-scheme`; without its images (the icons are yours: scPdfViewerIcon,
 // your annotation toolbar), its cursors behind variables of ours; its colours
-// on the theme's tokens (pdf-viewer-theme.css, appended). Run again when
+// on the theme's tokens (scripts/pdf-viewer-theme.css, appended). Run again when
 // pdfjs-dist is upgraded, and compare.
 //
 //   node scripts/build-pdf-viewer-css.mjs [--list]
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import * as prettier from 'prettier';
 
 const root = join(import.meta.dirname, '..');
 const source = join(root, 'node_modules/pdfjs-dist/web/pdf_viewer.css');
 const out = join(root, 'libs/styles/src/pdf-viewer.css');
-const theme = join(root, 'libs/styles/src/pdf-viewer-theme.css');
+const theme = join(root, 'scripts/pdf-viewer-theme.css');
 const list = process.argv.includes('--list');
 
 /** pdf.js's application, which the library's parts replace. */
@@ -220,19 +221,23 @@ const header = `/*
  * --sc-pdf-viewer-ink-cursor, --sc-pdf-viewer-highlight-cursor,
  * --sc-pdf-viewer-free-highlight-cursor, --sc-pdf-viewer-freetext-cursor.
  * Then the library's look, on the theme's tokens:
- * pdf-viewer-theme.css, below. Don't edit the part from pdf.js by hand:
+ * scripts/pdf-viewer-theme.css, below. Don't edit the part from pdf.js by hand:
  * change the script, or the theme part.
  */
 `;
+const built = [
+  licence.join('\n').trim(),
+  header,
+  css.trim(),
+  '',
+  readFileSync(theme, 'utf8').trim(),
+  '',
+].join('\n');
+// Formatted as the repository's files are: an upgrade's diff shows only
+// what pdf.js changed.
+const prettierOptions = (await prettier.resolveConfig(out)) ?? {};
 writeFileSync(
   out,
-  [
-    licence.join('\n').trim(),
-    header,
-    css.trim(),
-    '',
-    readFileSync(theme, 'utf8').trim(),
-    '',
-  ].join('\n'),
+  await prettier.format(built, { ...prettierOptions, filepath: out }),
 );
 console.log(`${out}: ${kept.length} of ${blocks.length} blocks`);
