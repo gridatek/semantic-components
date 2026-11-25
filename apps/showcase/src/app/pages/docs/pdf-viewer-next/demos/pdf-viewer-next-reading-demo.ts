@@ -1,10 +1,4 @@
-import {
-  Component,
-  ViewEncapsulation,
-  computed,
-  input,
-  signal,
-} from '@angular/core';
+import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
   ScField,
   ScInput,
