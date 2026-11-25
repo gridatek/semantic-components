@@ -20,6 +20,6 @@ test.describe('Countdown Page (a recipe)', () => {
       .getByRole('listitem')
       .getByRole('link', { name: /Countdown/ })
       .click();
-    await expect(page).toHaveURL(/\/docs\/components\/countdown$/);
+    await expect(page).toHaveURL(/\/docs\/recipes\/countdown$/);
   });
 });

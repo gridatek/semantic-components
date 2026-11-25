@@ -20,6 +20,6 @@ test.describe('Stat Card Page (a recipe)', () => {
       .getByRole('listitem')
       .getByRole('link', { name: /Stat Card/ })
       .click();
-    await expect(page).toHaveURL(/\/docs\/components\/stat-card$/);
+    await expect(page).toHaveURL(/\/docs\/recipes\/stat-card$/);
   });
 });

@@ -20,6 +20,6 @@ test.describe('Notification Center Page (a recipe)', () => {
       .getByRole('listitem')
       .getByRole('link', { name: /Notification Center/ })
       .click();
-    await expect(page).toHaveURL(/\/docs\/components\/notification-center$/);
+    await expect(page).toHaveURL(/\/docs\/recipes\/notification-center$/);
   });
 });

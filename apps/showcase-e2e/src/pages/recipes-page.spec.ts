@@ -13,7 +13,7 @@ test.describe('Recipes', () => {
       .getByRole('listitem')
       .getByRole('link', { name: /Tags Input/ })
       .click();
-    await expect(page).toHaveURL(/\/docs\/components\/tags-input$/);
+    await expect(page).toHaveURL(/\/docs\/recipes\/tags-input$/);
   });
 
   test('the sidebar: a Recipes group, its index first', async ({ page }) => {

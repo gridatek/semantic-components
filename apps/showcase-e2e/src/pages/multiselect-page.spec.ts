@@ -20,6 +20,6 @@ test.describe('Multiselect Page (a recipe)', () => {
       .getByRole('listitem')
       .getByRole('link', { name: /Multiselect/ })
       .click();
-    await expect(page).toHaveURL(/\/docs\/components\/multiselect$/);
+    await expect(page).toHaveURL(/\/docs\/recipes\/multiselect$/);
   });
 });

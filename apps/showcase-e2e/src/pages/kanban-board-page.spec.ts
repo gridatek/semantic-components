@@ -20,6 +20,6 @@ test.describe('Kanban Board Page (a recipe)', () => {
       .getByRole('listitem')
       .getByRole('link', { name: /Kanban Board/ })
       .click();
-    await expect(page).toHaveURL(/\/docs\/components\/kanban-board$/);
+    await expect(page).toHaveURL(/\/docs\/recipes\/kanban-board$/);
   });
 });
