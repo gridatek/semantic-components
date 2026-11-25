@@ -14,6 +14,9 @@ test.describe('SSR', () => {
     '/',
     ...routesOf('apps/showcase/src/app/routes/overview-routes.ts'),
     ...routesOf('apps/showcase/src/app/routes/components-routes.ts'),
+    ...routesOf('apps/showcase/src/app/routes/charts-routes.ts'),
+    ...routesOf('apps/showcase/src/app/routes/utilities-routes.ts'),
+    ...routesOf('apps/showcase/src/app/routes/recipes-routes.ts'),
     ...routesOf('apps/showcase/src/app/routes/demos-routes.ts'),
   ];
 

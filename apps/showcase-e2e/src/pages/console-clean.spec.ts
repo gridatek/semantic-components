@@ -8,12 +8,20 @@ import { expect, test } from '../test';
  * console: the library's development checks (an unnamed control…) warn
  * there, so a warning is a bug to fix — or, later, an error.
  */
-const components: { path: string; hidden?: boolean }[] = JSON.parse(
-  readFileSync(
-    join(__dirname, '../../../showcase/public/components.json'),
-    'utf8',
-  ),
-);
+/** A component's page: under its sidebar group's address. */
+const SECTIONS: Record<string, string> = {
+  Charts: 'charts',
+  Utilities: 'utilities',
+  Recipes: 'recipes',
+};
+
+const components: { path: string; category: string; hidden?: boolean }[] =
+  JSON.parse(
+    readFileSync(
+      join(__dirname, '../../../showcase/public/components.json'),
+      'utf8',
+    ),
+  );
 
 const pages = [
   '/docs/overview/introduction',
@@ -34,7 +42,7 @@ const pages = [
   '/docs/overview/credits',
   ...components
     .filter((c) => !c.hidden)
-    .map((c) => `/docs/components/${c.path}`),
+    .map((c) => `/docs/${SECTIONS[c.category] ?? 'components'}/${c.path}`),
 ];
 
 test.describe('Console clean', () => {

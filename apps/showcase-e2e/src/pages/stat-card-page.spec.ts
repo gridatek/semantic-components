@@ -3,7 +3,7 @@ import { expect, test } from '../test';
 
 test.describe('Stat Card Page (a recipe)', () => {
   test('sections in order, and no axe violations', async ({ page }) => {
-    await page.goto('/docs/components/stat-card');
+    await page.goto('/docs/recipes/stat-card');
     await expect(page.locator('h2')).toHaveText([
       'Usage',
       'How it is made',

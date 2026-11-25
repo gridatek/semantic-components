@@ -3,7 +3,7 @@ import { expect, test } from '../test';
 
 test.describe('Focus Trap Page', () => {
   test('sections in order, and no axe violations', async ({ page }) => {
-    await page.goto('/docs/components/focus-trap');
+    await page.goto('/docs/utilities/focus-trap');
     await expect(page.locator('h2')).toHaveText([
       'Usage',
       'Anatomy',

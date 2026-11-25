@@ -41,6 +41,10 @@ export const overviewRoutes: Route[] = [
         title: 'Changelog - Semantic Components',
         loadComponent: () => import('../pages/overview/changelog-page'),
       },
+      // Guides now (they were here briefly).
+      { path: 'custom-style', redirectTo: '/docs/guides/custom-style' },
+      { path: 'i18n', redirectTo: '/docs/guides/i18n' },
+      { path: 'rtl', redirectTo: '/docs/guides/rtl' },
     ],
   },
   // Their old addresses (they were "About").

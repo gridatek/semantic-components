@@ -124,7 +124,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
           @for (type of types; track type.path) {
             <a
               scFrame
-              [routerLink]="'/docs/components/' + type.path"
+              [routerLink]="'/docs/charts/' + type.path"
               class="hover:bg-accent p-6 transition-colors"
             >
               <h3 class="leading-none font-semibold tracking-tight">

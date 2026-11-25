@@ -68,7 +68,7 @@ test('Link Component: a routerLink goes there in the app', async ({ page }) => {
     .getByRole('navigation', { name: 'Site' })
     .getByRole('link', { name: 'Components' })
     .click();
-  await expect(page).toHaveURL(/\/docs\/components$/);
+  await expect(page).toHaveURL(/\/docs\/overview\/components$/);
 });
 
 test('Custom Separator: your icon between the steps', async ({ page }) => {

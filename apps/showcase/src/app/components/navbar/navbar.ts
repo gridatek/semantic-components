@@ -32,6 +32,7 @@ import {
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
+import { docsPath } from '../../data/components';
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
 import { DocsNavService } from '../../services/docs-nav-service';
@@ -116,10 +117,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
               >
                 @for (component of featuredComponents(); track component.path) {
                   <li>
-                    <a
-                      scNavigationMenuLink
-                      [routerLink]="'/docs/components/' + component.path"
-                    >
+                    <a scNavigationMenuLink [routerLink]="docsPath(component)">
                       <div class="flex flex-col gap-1 text-sm">
                         <div class="leading-none font-medium">
                           {{ component.name }}
@@ -372,6 +370,9 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
   encapsulation: ViewEncapsulation.None,
 })
 export default class Navbar {
+  /** A component's page: its sidebar group's address. */
+  private readonly docsPath = docsPath;
+
   /** A shortcut as this platform writes it (⌘K, Ctrl+K). */
   private readonly format = injectFormatForDisplay();
   readonly classInput = input<string>('', { alias: 'class' });

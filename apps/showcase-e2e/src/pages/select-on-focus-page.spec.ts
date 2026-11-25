@@ -3,7 +3,7 @@ import { expect, test } from '../test';
 
 test.describe('Select On Focus Page', () => {
   test('sections in order, and no axe violations', async ({ page }) => {
-    await page.goto('/docs/components/select-on-focus');
+    await page.goto('/docs/utilities/select-on-focus');
     await expect(page.locator('h2')).toHaveText([
       'Usage',
       'Anatomy',

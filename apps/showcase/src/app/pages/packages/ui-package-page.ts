@@ -125,19 +125,19 @@ import { ScCarousel, ScCarouselItem } from '@semantic-components/ui/carousel';`;
       path: 'charts',
       holds:
         'Charts: area, bar, line, pie, radar, radial, scatter, funnel, sunburst',
-      link: '/docs/components/chart',
+      link: '/docs/charts/chart',
       needs: ['d3-scale', 'd3-shape'],
     },
     {
       path: 'charts/sankey',
       holds: 'Sankey chart',
-      link: '/docs/components/sankey-chart',
+      link: '/docs/charts/sankey-chart',
       needs: ['d3-sankey', 'd3-shape'],
     },
     {
       path: 'charts/treemap',
       holds: 'Treemap chart',
-      link: '/docs/components/treemap-chart',
+      link: '/docs/charts/treemap-chart',
       needs: ['d3-hierarchy'],
     },
     {

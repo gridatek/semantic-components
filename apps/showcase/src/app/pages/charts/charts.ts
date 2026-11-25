@@ -98,12 +98,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
         radial and more. Copy them into your app.
       </p>
       <div class="flex flex-wrap justify-center gap-2 pt-2">
-        <a
-          scLink
-          variant="button"
-          size="sm"
-          routerLink="/docs/components/chart"
-        >
+        <a scLink variant="button" size="sm" routerLink="/docs/charts/chart">
           Get started
         </a>
       </div>
@@ -233,7 +228,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               to pick.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/area-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/area-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-area-chart-demo-container />
@@ -259,7 +254,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               Side by side, stacked, below zero, across; labels on them.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/bar-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/bar-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-bar-chart-demo-container />
@@ -289,7 +284,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               points.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/line-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/line-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-line-chart-demo-container />
@@ -315,7 +310,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               Slices of a whole: a pie, a donut with its total, rings.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/pie-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/pie-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-pie-chart-demo-container />
@@ -341,7 +336,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               Polygons over the categories, on a polygon or circle grid.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/radar-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/radar-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-radar-chart-demo-container />
@@ -370,7 +365,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               A ring per row, on its track, stacked on a half circle.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/radial-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/radial-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-radial-chart-demo-container />
@@ -400,7 +395,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               Points at two values, sized by a third: bubbles.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/scatter-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/scatter-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-scatter-chart-demo-container />
@@ -428,7 +423,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               Stages narrowing to the next, named and valued.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/funnel-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/funnel-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-funnel-chart-demo-container />
@@ -456,7 +451,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               Boxes as large as their value, in groups if you like.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/treemap-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/treemap-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-treemap-chart-demo-container />
@@ -484,7 +479,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               Groups inside, their rows around them.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/sunburst-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/sunburst-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-sunburst-chart-demo-container />
@@ -512,7 +507,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               Flows between nodes, as thick as their value.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/sankey-chart">Docs</a>
+          <a scLink routerLink="/docs/charts/sankey-chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-sankey-chart-demo-container />
@@ -533,7 +528,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
               dash.
             </p>
           </div>
-          <a scLink routerLink="/docs/components/chart">Docs</a>
+          <a scLink routerLink="/docs/charts/chart">Docs</a>
         </div>
         <div class="grid gap-8 lg:grid-cols-2">
           <app-tooltip-chart-demo-container />

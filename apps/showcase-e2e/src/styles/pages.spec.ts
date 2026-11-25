@@ -8,12 +8,20 @@ import { expect, test } from '../test';
  * violation, light and dark. One load per page — the components' style
  * specs beside this one check their classes.
  */
-const components: { path: string; hidden?: boolean }[] = JSON.parse(
-  readFileSync(
-    join(__dirname, '../../../showcase/public/components.json'),
-    'utf8',
-  ),
-);
+/** A component's page: under its sidebar group's address. */
+const SECTIONS: Record<string, string> = {
+  Charts: 'charts',
+  Utilities: 'utilities',
+  Recipes: 'recipes',
+};
+
+const components: { path: string; category: string; hidden?: boolean }[] =
+  JSON.parse(
+    readFileSync(
+      join(__dirname, '../../../showcase/public/components.json'),
+      'utf8',
+    ),
+  );
 
 const pages = [
   '/docs/overview/introduction',
@@ -24,7 +32,7 @@ const pages = [
   '/docs/guides/typeset',
   ...components
     .filter((c) => !c.hidden)
-    .map((c) => `/docs/components/${c.path}`),
+    .map((c) => `/docs/${SECTIONS[c.category] ?? 'components'}/${c.path}`),
 ];
 
 test.describe('Docs pages in their style', () => {

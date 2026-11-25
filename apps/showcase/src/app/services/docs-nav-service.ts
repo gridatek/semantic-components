@@ -1,5 +1,5 @@
 import { Service, computed, inject } from '@angular/core';
-import { ComponentItem } from '../data/components';
+import { ComponentItem, docsPath } from '../data/components';
 import {
   type DocsPage,
   aiElementPages,
@@ -22,7 +22,7 @@ export interface DocsNavGroup {
 const toPages = (items: readonly ComponentItem[]): DocsPage[] =>
   items.map((item) => ({
     name: item.name,
-    path: '/docs/components/' + item.path,
+    path: docsPath(item),
     description: item.description,
   }));
 

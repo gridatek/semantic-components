@@ -3,7 +3,7 @@ import { expect, test } from '../test';
 
 test.describe('Multiselect Page (a recipe)', () => {
   test('sections in order, and no axe violations', async ({ page }) => {
-    await page.goto('/docs/components/multiselect');
+    await page.goto('/docs/recipes/multiselect');
     await expect(page.locator('h2')).toHaveText([
       'Usage',
       'How it is made',

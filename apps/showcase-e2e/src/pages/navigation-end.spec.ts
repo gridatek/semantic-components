@@ -46,7 +46,7 @@ test("Sidebar: Back with the phone's sheet open closes it", async ({
   await toggle.click();
   await expect(sheet).toBeVisible();
   await sheet.locator('a[href="/docs/overview/components"]').click();
-  await expect(page).toHaveURL(/\/docs\/components$/);
+  await expect(page).toHaveURL(/\/docs\/overview\/components$/);
   await expect(sheet).toHaveCount(0);
 
   await toggle.click();

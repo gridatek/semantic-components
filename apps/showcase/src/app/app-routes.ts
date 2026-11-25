@@ -1,12 +1,14 @@
 import { Route } from '@angular/router';
 import { StackedLayout } from './components/stacked-layout/stacked-layout';
 import { aiElementsRoutes } from './routes/ai-elements-routes';
+import { chartsRoutes } from './routes/charts-routes';
 import { componentsRoutes } from './routes/components-routes';
 import { demosRoutes } from './routes/demos-routes';
 import { guidesRoutes } from './routes/guides-routes';
 import { overviewRoutes } from './routes/overview-routes';
 import { packagesRoutes } from './routes/packages-routes';
 import { recipesRoutes } from './routes/recipes-routes';
+import { utilitiesRoutes } from './routes/utilities-routes';
 
 export const appRoutes: Route[] = [
   ...demosRoutes,
@@ -15,6 +17,8 @@ export const appRoutes: Route[] = [
   ...recipesRoutes,
   ...guidesRoutes,
   ...componentsRoutes,
+  ...chartsRoutes,
+  ...utilitiesRoutes,
   ...aiElementsRoutes,
   {
     path: '',

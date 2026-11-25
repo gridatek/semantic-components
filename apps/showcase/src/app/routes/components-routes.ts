@@ -35,11 +35,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/number-ticker/number-ticker-page'),
       },
       {
-        path: 'area-chart',
-        title: 'Area Chart - Semantic Components',
-        loadComponent: () => import('../pages/docs/area-chart/area-chart-page'),
-      },
-      {
         path: 'aspect-ratio',
         title: 'Aspect Ratio - Semantic Components',
         loadComponent: () =>
@@ -56,64 +51,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/frame/frame-page'),
       },
       {
-        path: 'pie-chart',
-        title: 'Pie Chart - Semantic Components',
-        loadComponent: () => import('../pages/docs/pie-chart/pie-chart-page'),
-      },
-      {
-        path: 'radar-chart',
-        title: 'Radar Chart - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/radar-chart/radar-chart-page'),
-      },
-      {
-        path: 'radial-chart',
-        title: 'Radial Chart - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/radial-chart/radial-chart-page'),
-      },
-      {
-        path: 'sankey-chart',
-        title: 'Sankey Chart - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/sankey-chart/sankey-chart-page'),
-      },
-      {
-        path: 'sunburst-chart',
-        title: 'Sunburst Chart - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/sunburst-chart/sunburst-chart-page'),
-      },
-      {
-        path: 'treemap-chart',
-        title: 'Treemap Chart - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/treemap-chart/treemap-chart-page'),
-      },
-      {
-        path: 'funnel-chart',
-        title: 'Funnel Chart - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/funnel-chart/funnel-chart-page'),
-      },
-      {
-        path: 'scatter-chart',
-        title: 'Scatter Chart - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/scatter-chart/scatter-chart-page'),
-      },
-      {
-        path: 'focus-trap',
-        title: 'Focus Trap - Semantic Components',
-        loadComponent: () => import('../pages/docs/focus-trap/focus-trap-page'),
-      },
-      {
-        path: 'select-on-focus',
-        title: 'Select On Focus - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/select-on-focus/select-on-focus-page'),
-      },
-      {
         path: 'autocomplete',
         title: 'Autocomplete - Semantic Components',
         loadComponent: () =>
@@ -128,11 +65,6 @@ export const componentsRoutes: Route[] = [
         path: 'badge',
         title: 'Badge - Semantic Components',
         loadComponent: () => import('../pages/docs/badge/badge-page'),
-      },
-      {
-        path: 'bar-chart',
-        title: 'Bar Chart - Semantic Components',
-        loadComponent: () => import('../pages/docs/bar-chart/bar-chart-page'),
       },
       {
         path: 'barcode-scanner',
@@ -164,11 +96,6 @@ export const componentsRoutes: Route[] = [
         path: 'carousel',
         title: 'Carousel - Semantic Components',
         loadComponent: () => import('../pages/docs/carousel/carousel-page'),
-      },
-      {
-        path: 'chart',
-        title: 'Chart - Semantic Components',
-        loadComponent: () => import('../pages/docs/chart/chart-page'),
       },
       {
         path: 'checkbox',
@@ -346,12 +273,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/otp-input/otp-input-page'),
       },
       {
-        path: 'kanban-board',
-        title: 'Kanban Board - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/kanban-board/kanban-board-page'),
-      },
-      {
         path: 'kbd',
         title: 'Kbd - Semantic Components',
         loadComponent: () => import('../pages/docs/kbd/kbd-page'),
@@ -362,19 +283,9 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/label/label-page'),
       },
       {
-        path: 'line-chart',
-        title: 'Line Chart - Semantic Components',
-        loadComponent: () => import('../pages/docs/line-chart/line-chart-page'),
-      },
-      {
         path: 'link',
         title: 'Link - Semantic Components',
         loadComponent: () => import('../pages/docs/link/link-page'),
-      },
-      {
-        path: 'lightbox',
-        title: 'Lightbox - Semantic Components',
-        loadComponent: () => import('../pages/docs/lightbox/lightbox-page'),
       },
       {
         path: 'marquee',
@@ -549,38 +460,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/tabs/tabs-page'),
       },
       {
-        path: 'countdown',
-        title: 'Countdown - Semantic Components',
-        loadComponent: () => import('../pages/docs/countdown/countdown-page'),
-      },
-      {
-        path: 'playlist',
-        title: 'Playlist - Semantic Components',
-        loadComponent: () => import('../pages/docs/playlist/playlist-page'),
-      },
-      {
-        path: 'multiselect',
-        title: 'Multiselect - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/multiselect/multiselect-page'),
-      },
-      {
-        path: 'stat-card',
-        title: 'Stat Card - Semantic Components',
-        loadComponent: () => import('../pages/docs/stat-card/stat-card-page'),
-      },
-      {
-        path: 'notification-center',
-        title: 'Notification Center - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/notification-center/notification-center-page'),
-      },
-      {
-        path: 'tags-input',
-        title: 'Tags Input - Semantic Components',
-        loadComponent: () => import('../pages/docs/tags-input/tags-input-page'),
-      },
-      {
         path: 'textarea',
         title: 'Textarea - Semantic Components',
         loadComponent: () => import('../pages/docs/textarea/textarea-page'),
@@ -616,12 +495,6 @@ export const componentsRoutes: Route[] = [
         title: 'Segmented Control - Semantic Components',
         loadComponent: () =>
           import('../pages/docs/segmented-control/segmented-control-page'),
-      },
-      {
-        path: 'preferences',
-        title: 'Preferences - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/preferences/preferences-page'),
       },
       {
         path: 'waterfall',
@@ -671,11 +544,6 @@ export const componentsRoutes: Route[] = [
         path: 'tree',
         title: 'Tree - Semantic Components',
         loadComponent: () => import('../pages/docs/tree/tree-page'),
-      },
-      {
-        path: 'tree-table',
-        title: 'Tree Table - Semantic Components',
-        loadComponent: () => import('../pages/docs/tree-table/tree-table-page'),
       },
       {
         path: 'header',
@@ -739,12 +607,6 @@ export const componentsRoutes: Route[] = [
         title: 'Tooltip - Semantic Components',
         loadComponent: () => import('../pages/docs/tooltip/tooltip-page'),
       },
-      {
-        path: 'transfer-list',
-        title: 'Transfer List - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/transfer-list/transfer-list-page'),
-      },
       { path: 'typeset', redirectTo: '/docs/guides/typeset' },
       {
         path: 'media-player',
@@ -763,10 +625,40 @@ export const componentsRoutes: Route[] = [
         title: 'Table - Semantic Components',
         loadComponent: () => import('../pages/docs/table/table-page'),
       },
+      // Their old addresses: charts, utilities and recipes have their own.
+      { path: 'area-chart', redirectTo: '/docs/charts/area-chart' },
+      { path: 'bar-chart', redirectTo: '/docs/charts/bar-chart' },
+      { path: 'chart', redirectTo: '/docs/charts/chart' },
+      { path: 'countdown', redirectTo: '/docs/recipes/countdown' },
+      { path: 'focus-trap', redirectTo: '/docs/utilities/focus-trap' },
+      { path: 'funnel-chart', redirectTo: '/docs/charts/funnel-chart' },
+      { path: 'kanban-board', redirectTo: '/docs/recipes/kanban-board' },
+      { path: 'lightbox', redirectTo: '/docs/recipes/lightbox' },
+      { path: 'line-chart', redirectTo: '/docs/charts/line-chart' },
+      { path: 'multiselect', redirectTo: '/docs/recipes/multiselect' },
       {
-        path: '**',
-        redirectTo: '',
+        path: 'notification-center',
+        redirectTo: '/docs/recipes/notification-center',
       },
+      { path: 'pie-chart', redirectTo: '/docs/charts/pie-chart' },
+      { path: 'playlist', redirectTo: '/docs/recipes/playlist' },
+      { path: 'preferences', redirectTo: '/docs/utilities/preferences' },
+      { path: 'radar-chart', redirectTo: '/docs/charts/radar-chart' },
+      { path: 'radial-chart', redirectTo: '/docs/charts/radial-chart' },
+      { path: 'sankey-chart', redirectTo: '/docs/charts/sankey-chart' },
+      { path: 'scatter-chart', redirectTo: '/docs/charts/scatter-chart' },
+      {
+        path: 'select-on-focus',
+        redirectTo: '/docs/utilities/select-on-focus',
+      },
+      { path: 'stat-card', redirectTo: '/docs/recipes/stat-card' },
+      { path: 'sunburst-chart', redirectTo: '/docs/charts/sunburst-chart' },
+      { path: 'tags-input', redirectTo: '/docs/recipes/tags-input' },
+      { path: 'transfer-list', redirectTo: '/docs/recipes/transfer-list' },
+      { path: 'tree-table', redirectTo: '/docs/recipes/tree-table' },
+      { path: 'treemap-chart', redirectTo: '/docs/charts/treemap-chart' },
+      // Anything else: the list of components.
+      { path: '**', redirectTo: '/docs/overview/components' },
     ],
   },
 ];

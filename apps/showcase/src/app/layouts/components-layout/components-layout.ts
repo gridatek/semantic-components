@@ -21,6 +21,7 @@ import { cn } from 'cn';
 import { filter } from 'rxjs';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc-service';
+import { docsPath } from '../../data/components';
 import { ComponentsService } from '../../services/components-service';
 
 @Component({
@@ -37,7 +38,7 @@ import { ComponentsService } from '../../services/components-service';
 
           @for (item of components(); track item.path) {
             <a
-              [routerLink]="'/docs/components/' + item.path"
+              [routerLink]="docsPath(item)"
               routerLinkActive="bg-accent text-accent-foreground"
               class="hover:bg-accent hover:text-accent-foreground block rounded-md px-3 py-2 text-sm transition-colors"
             >
@@ -71,6 +72,9 @@ import { ComponentsService } from '../../services/components-service';
   encapsulation: ViewEncapsulation.None,
 })
 export class ComponentsLayout {
+  /** A component's page: its sidebar group's address. */
+  private readonly docsPath = docsPath;
+
   readonly classInput = input<string>('', { alias: 'class' });
   private readonly class = computed(() => cn('block', this.classInput()));
 

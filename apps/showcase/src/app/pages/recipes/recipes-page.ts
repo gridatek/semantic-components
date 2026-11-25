@@ -26,7 +26,7 @@ import { ComponentsService } from '../../services/components-service';
           <li class="contents">
             <a
               scFrame
-              [routerLink]="'/docs/components/' + recipe.path"
+              [routerLink]="'/docs/recipes/' + recipe.path"
               class="hover:bg-accent p-6 transition-colors"
             >
               <h2 class="text-base leading-none font-semibold tracking-tight">

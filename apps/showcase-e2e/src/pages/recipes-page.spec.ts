@@ -17,7 +17,7 @@ test.describe('Recipes', () => {
   });
 
   test('the sidebar: a Recipes group, its index first', async ({ page }) => {
-    await page.goto('/docs/components/tags-input');
+    await page.goto('/docs/recipes/tags-input');
     const nav = page.getByRole('navigation', { name: 'Documentation' });
     await expect(nav.getByRole('button', { name: 'Recipes' })).toHaveAttribute(
       'aria-expanded',

@@ -98,7 +98,7 @@ import { SunburstChartUsageDemoContainer } from './demos/sunburst-chart-usage-de
           The series&apos; inputs. The chart, its plot, axes, tooltip and legend
           are on the
           <a
-            routerLink="/docs/components/chart"
+            routerLink="/docs/charts/chart"
             class="underline underline-offset-4"
             >Chart</a
           >

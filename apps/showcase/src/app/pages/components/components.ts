@@ -14,7 +14,7 @@ import {
   ScToggleGroupItem,
 } from '@semantic-components/ui';
 import { ComponentStatusBadge } from '../../components/component-status-badge/component-status-badge';
-import { ComponentCategory } from '../../data/components';
+import { ComponentCategory, docsPath } from '../../data/components';
 import { ComponentsService } from '../../services/components-service';
 
 /** Components: every component, filtered by category, each card to its docs. */
@@ -90,7 +90,7 @@ import { ComponentsService } from '../../services/components-service';
         @for (item of filteredComponents(); track item.path) {
           <a
             scFrame
-            [routerLink]="'/docs/components/' + item.path"
+            [routerLink]="docsPath(item)"
             class="group hover:bg-accent relative p-6 transition-colors"
           >
             <h3 class="leading-none font-semibold tracking-tight">
@@ -112,6 +112,9 @@ import { ComponentsService } from '../../services/components-service';
   encapsulation: ViewEncapsulation.None,
 })
 export default class Components {
+  /** A component's page: its sidebar group's address. */
+  private readonly docsPath = docsPath;
+
   private readonly componentsService = inject(ComponentsService);
 
   private readonly categories: ComponentCategory[] = [

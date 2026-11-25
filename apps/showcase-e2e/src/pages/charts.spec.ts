@@ -23,7 +23,7 @@ test.describe('Charts Page', () => {
     await expect(page.locator('[data-slot=chart]')).toHaveCount(36);
     await expect(
       page.getByRole('link', { name: 'Docs' }).first(),
-    ).toHaveAttribute('href', '/docs/components/area-chart');
+    ).toHaveAttribute('href', '/docs/charts/area-chart');
 
     // A type's link: to its section, below the header and the types bar.
     const types = page.getByRole('navigation', { name: 'Chart types' });

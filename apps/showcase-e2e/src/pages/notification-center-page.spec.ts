@@ -3,7 +3,7 @@ import { expect, test } from '../test';
 
 test.describe('Notification Center Page (a recipe)', () => {
   test('sections in order, and no axe violations', async ({ page }) => {
-    await page.goto('/docs/components/notification-center');
+    await page.goto('/docs/recipes/notification-center');
     await expect(page.locator('h2')).toHaveText([
       'Usage',
       'How it is made',

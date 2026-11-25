@@ -67,6 +67,7 @@ import { PageNav } from '../../components/page-nav/page-nav';
 import { ThemeMenu } from '../../components/theme-menu/theme-menu';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc-service';
+import { docsPath } from '../../data/components';
 import {
   aiElementPages,
   guidePages,
@@ -77,6 +78,13 @@ import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
 import { ConfigService } from '../../services/config-service';
 import { DocsNavService } from '../../services/docs-nav-service';
+
+/** The sidebar groups with a page listing them: their breadcrumb links to it. */
+const GROUP_PAGES: Partial<Record<string, string>> = {
+  Components: '/docs/overview/components',
+  Charts: '/charts',
+  Recipes: '/docs/recipes',
+};
 
 @Component({
   selector: 'app-docs-layout',
@@ -323,7 +331,7 @@ import { DocsNavService } from '../../services/docs-nav-service';
                         <li scSidebarMenuSubItem>
                           <a
                             scSidebarMenuSubButton
-                            [routerLink]="'/docs/components/' + item.path"
+                            [routerLink]="docsPath(item)"
                             routerLinkActive
                             #rla="routerLinkActive"
                             [active]="rla.isActive"
@@ -362,7 +370,7 @@ import { DocsNavService } from '../../services/docs-nav-service';
                           <li scSidebarMenuSubItem>
                             <a
                               scSidebarMenuSubButton
-                              [routerLink]="'/docs/components/' + item.path"
+                              [routerLink]="docsPath(item)"
                               routerLinkActive
                               #chartRla="routerLinkActive"
                               [active]="chartRla.isActive"
@@ -402,7 +410,7 @@ import { DocsNavService } from '../../services/docs-nav-service';
                           <li scSidebarMenuSubItem>
                             <a
                               scSidebarMenuSubButton
-                              [routerLink]="'/docs/components/' + item.path"
+                              [routerLink]="docsPath(item)"
                               routerLinkActive
                               #utilRla="routerLinkActive"
                               [active]="utilRla.isActive"
@@ -454,7 +462,7 @@ import { DocsNavService } from '../../services/docs-nav-service';
                           <li scSidebarMenuSubItem>
                             <a
                               scSidebarMenuSubButton
-                              [routerLink]="'/docs/components/' + item.path"
+                              [routerLink]="docsPath(item)"
                               routerLinkActive
                               #recipeRla="routerLinkActive"
                               [active]="recipeRla.isActive"
@@ -585,6 +593,9 @@ import { DocsNavService } from '../../services/docs-nav-service';
   encapsulation: ViewEncapsulation.None,
 })
 export class DocsLayout {
+  /** A component's page: its sidebar group's address. */
+  private readonly docsPath = docsPath;
+
   /** A shortcut as this platform writes it (⌘K, Ctrl+K). */
   private readonly format = injectFormatForDisplay();
   readonly classInput = input<string>('', { alias: 'class' });
@@ -620,34 +631,26 @@ export class DocsLayout {
   );
 
   /**
-   * The header's breadcrumb: a component, under the list of components
-   * (Docs › Components › Button); any other page, under its sidebar group
-   * (Docs › Overview › Introduction, Docs › Guides › Theming).
+   * The header's breadcrumb: every page under its sidebar group, as its
+   * address is (Docs › Overview › Introduction, Docs › Components › Button,
+   * Docs › Charts › Bar Chart, Docs › AI Elements › Chat). A group with a
+   * page of its own links to it.
    */
   private readonly crumbs = computed<{ name: string; path?: string }[]>(() => {
     const url = this.url();
     const docs = { name: 'Docs', path: '/docs/overview/introduction' };
     const named = this.pages().find((page) => page.path === url);
-    if (url.startsWith('/docs/components/')) {
-      const components = {
-        name: 'Components',
-        path: '/docs/overview/components',
-      };
-      const slug = url.slice('/docs/components/'.length);
-      const item = this.componentsService
-        .components()
-        .find((c) => c.path === slug);
-      return [docs, components, { name: named?.name ?? item?.name ?? slug }];
-    }
     if (!named) return [docs];
     const group = this.docsNav
       .groups()
-      .find(
-        (g) => g.kind === 'page' && g.pages.some((page) => page.path === url),
-      );
-    return group
-      ? [docs, { name: group.label }, { name: named.name }]
-      : [docs, { name: named.name }];
+      .find((g) => g.pages.some((page) => page.path === url));
+    if (!group) return [docs, { name: named.name }];
+    const groupPath = GROUP_PAGES[group.label];
+    return [
+      docs,
+      { name: group.label, path: groupPath === url ? undefined : groupPath },
+      { name: named.name },
+    ];
   });
 
   /** Every docs page, in the sidebar's order: the bottom's previous and next. */
