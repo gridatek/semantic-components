@@ -4,7 +4,7 @@ import { type Page, expect, test } from '../test';
  * A popup with links closes when a navigation is over, whatever started it —
  * here the Back button, with the popup open: the Header's mobile menu, the
  * Sidebar's sheet on a phone, the Navigation Menu's panel. See
- * docs/component-design-principles.md, "A Link Closes Its Popup at Once".
+ * docs/principles/component-design-principles.md, "A Link Closes Its Popup at Once".
  */
 
 /** GitHub's stars, answered here (its API refuses bursts: 403). */

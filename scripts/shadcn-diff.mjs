@@ -11,7 +11,7 @@
 // ../shadcn-reference next to this repo. With --presets, ours aren't read:
 // per part, the classes every style shares, then what each style changes. An aid for the
 // roadmap's Styles column — reading both still decides (logical properties,
-// decomposition and deliberate divergences: docs/shadcn-style-reference.md).
+// decomposition and deliberate divergences: docs/guides/shadcn-style-reference.md).
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';

@@ -82,4 +82,4 @@ Streaming (HLS, DASH: attach hls.js or shaka-player to the video), quality switc
 
 ## References
 
-What it took from Vidstack, Media Chrome and Dice UI, and what is still open: [docs/reference-libraries.md](../../../../../../docs/reference-libraries.md#media-player).
+What it took from Vidstack, Media Chrome and Dice UI, and what is still open: [docs/guides/reference-libraries.md](../../../../../../docs/guides/reference-libraries.md#media-player).

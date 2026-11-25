@@ -7,7 +7,7 @@ This repository uses **Angular Signal Forms** (`@angular/forms/signals`) exclusi
 - One forms API instead of three — nothing to choose between
 - State lives in a plain signal, so `computed()` and `effect()` work on it directly
 - Validation, disabled state, touched/dirty state and error messages all come from the same field object
-- `ScField`, `ScInput` and `ScTextarea` read Signal Forms state automatically (see [ScField + Signal Forms](./sc-field-signal-forms.md))
+- `ScField`, `ScInput` and `ScTextarea` read Signal Forms state automatically (see [the form-control contract](form-control-contract.md))
 - Smaller bundles — `FormsModule` and `ReactiveFormsModule` never get pulled in
 
 ## The Core Pattern
@@ -162,7 +162,7 @@ export class LoginComponent {
 }
 ```
 
-See [ScField + Signal Forms](./sc-field-signal-forms.md) for how `ScField`, `ScInput` and `ScTextarea` pick up invalid/disabled state automatically, and the [Signal Forms documentation](https://angular.dev/guide/forms/signals/overview) for the full API.
+See [the form-control contract](form-control-contract.md) for how `ScField`, `ScInput` and `ScTextarea` pick up invalid/disabled state automatically, and the [Signal Forms documentation](https://angular.dev/guide/forms/signals/overview) for the full API.
 
 ## Bindings That Are Not Forms
 

@@ -59,7 +59,7 @@ export class ScDatePicker
   // TODO(angular): minDate / maxDate go once Signal Forms' min() / max()
   // take Temporal dates — the bounds then from the schema with a form, and
   // [min] / [max] without one, as every control's ("Bounds Come From the
-  // Form", docs/component-design-principles.md; docs/todo.md, "Date bounds
+  // Form", docs/principles/component-design-principles.md; docs/todo.md, "Date bounds
   // from the form"). Angular: https://github.com/angular/angular/issues/67643
   /** The first day that can be picked — give it to the calendar too. */
   readonly minDate = input<Temporal.PlainDate | undefined>(undefined);

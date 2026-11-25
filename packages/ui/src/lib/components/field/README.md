@@ -314,7 +314,7 @@ Errors are automatically read from the parent `ScField`'s `FormField` directive 
 
 ## Styling
 
-Some field components use `data-slot` for CSS-based layout detection by parent/sibling components. `data-slot` is not mandatory — it is only present when another component references it in its styles. See [data-slot-pattern.md](../../../../../../docs/data-slot-pattern.md) for details.
+Some field components use `data-slot` for CSS-based layout detection by parent/sibling components. `data-slot` is not mandatory — it is only present when another component references it in its styles. See [data-slot-pattern.md](../../../../../../docs/principles/data-slot-pattern.md) for details.
 
 Active data-slots in field components:
 

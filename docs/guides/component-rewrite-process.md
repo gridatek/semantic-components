@@ -6,7 +6,7 @@ The goal is not to port the old code: it is to keep the old component's **big id
 
 ## 1. Look outside first
 
-**A component shadcn has** (List 1 of the [roadmap](roadmap.md)): no web search, no downloads. Follow **Base UI** — shadcn's nova is built on it: its parts, behaviour and keyboard from Base UI (its docs in `shadcn-reference/presets/nova/node_modules/@base-ui/react/docs`), its look from shadcn's generated reference app. The steps below are for the components shadcn doesn't have.
+**A component shadcn has**: no web search, no downloads. Follow **Base UI** — shadcn's nova is built on it: its parts, behaviour and keyboard from Base UI (its docs in `shadcn-reference/presets/nova/node_modules/@base-ui/react/docs`), its look from shadcn's generated reference app. The steps below are for the components shadcn doesn't have.
 
 1. **Who is used the most.** Weekly npm downloads of the main packages (React, Angular, Vue, framework-agnostic), with a small script in the scratchpad:
 
@@ -56,7 +56,7 @@ Build it to the project's rules (`.claude/CLAUDE.md`, memory):
 
 - Parts are directives on the consumer's elements; one per file; `classInput` + `cn()` on each.
 - The consumer writes markup, text, icons and accessible names — no default strings; icon buttons named with `sr-only` text.
-- Button parts style themselves with the style's button, `injectStyle().button(…)` (`docs/button-parts-styling.md`).
+- Button parts style themselves with the style's button, `injectStyle().button(…)` (`docs/principles/button-parts-styling.md`).
 - Signals, `model()` for two-way state, `computed()` for the rest; Signal Forms only.
 - Web platform APIs as globals: `Temporal`, never `Date` (`project-future-browsers` memory).
 - Axe and WCAG AA from the start: keyboard, focus, names, contrast.

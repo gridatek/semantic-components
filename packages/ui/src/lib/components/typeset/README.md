@@ -22,7 +22,7 @@ We started from shadcn's `typeset.css` and no longer follow it exactly. What's o
 - **The style's corners**: code blocks and images as its Code Block (`--sc-typeset-radius`); inline code, keys and highlights as its Kbd (`--sc-typeset-radius-inline`). shadcn's highlight has a fixed `0.2em`.
 - **Headings h1 to h4 take the style's weight, tracking and case**: `--sc-typeset-heading-weight`, `--sc-typeset-heading-tracking`, `--sc-typeset-heading-case`. shadcn's Typeset has no such variables. They're 600, `normal` and `none` in every style but sera (uppercase, `0.05em`: its titles). **Writing your own values?** Set these three too: they have no fallback, and without `--sc-typeset-heading-weight` headings lose their bold.
 
-The full list: "Deliberate divergences" in `docs/shadcn-style-reference.md`.
+The full list: "Deliberate divergences" in `docs/guides/shadcn-style-reference.md`.
 
 ## Two ways
 

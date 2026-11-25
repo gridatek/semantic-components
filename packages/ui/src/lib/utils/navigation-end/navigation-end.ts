@@ -14,7 +14,7 @@ import { filter } from 'rxjs';
  * skipped (the same page) — whatever started it: a popup with links closes,
  * never left open on a page it no longer matches (the Back button, a link
  * elsewhere). Nothing without a Router. In an injection context; stops with
- * it. See docs/component-design-principles.md, "A Link Closes Its Popup at
+ * it. See docs/principles/component-design-principles.md, "A Link Closes Its Popup at
  * Once".
  */
 export function onNavigationEnd(fn: () => void): void {

@@ -71,7 +71,7 @@ test('a page picked in the mobile menu: the menu closes at once, then the page c
   await expect(menu).toBeVisible();
   // The page picked is slow to load (its script held back a second): the
   // menu doesn't wait for it — closing is the header's, a fast page the app's
-  // (docs/component-design-principles.md, "A Link Closes Its Popup at Once").
+  // (docs/principles/component-design-principles.md, "A Link Closes Its Popup at Once").
   await page.route(
     '**/*.js',
     async (route) => {

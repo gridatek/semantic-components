@@ -18,7 +18,7 @@ test.afterEach(() => {
 
 /**
  * Width over height of the part. Polled: in WebKit it may take its ratio a
- * moment late (ScAspectRatio's FIXME(webkit), docs/webkit-workarounds.md).
+ * moment late (ScAspectRatio's FIXME(webkit), docs/testing/webkit-workarounds.md).
  */
 async function ratioOf(page: import('@playwright/test').Page) {
   const b = await box(page.locator('[scAspectRatio]'));

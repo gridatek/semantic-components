@@ -6,7 +6,7 @@
  * themselves; Safari (WebKit) doesn't, and focus went back to the page.
  * Check again with each WebKit release; drop it once Safari focuses pressed
  * buttons (specs: "focus back" in the dialog, drawer and command demos).
- * See docs/webkit-workarounds.md.
+ * See docs/testing/webkit-workarounds.md.
  */
 export function ɵfocusOnPress(trigger: HTMLElement): void {
   trigger.focus();

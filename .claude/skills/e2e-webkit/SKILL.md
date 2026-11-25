@@ -5,7 +5,7 @@ description: Run, reproduce and fix the showcase's e2e tests in WebKit (and Fire
 
 # E2E in WebKit
 
-CI runs Chromium (`ci.yml`); **Firefox and WebKit run only in `nightly-e2e.yml`** (`ALL_BROWSERS=1`: the `demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit` and iPhone `mobile-webkit` projects), CSR and SSR, two shards each, 4 workers, 2 retries. See [docs/e2e-testing.md](../../../docs/e2e-testing.md) for the suite itself.
+CI runs Chromium (`ci.yml`); **Firefox and WebKit run only in `nightly-e2e.yml`** (`ALL_BROWSERS=1`: the `demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit` and iPhone `mobile-webkit` projects), CSR and SSR, two shards each, 4 workers, 2 retries. See [docs/testing/e2e-testing.md](../../../docs/testing/e2e-testing.md) for the suite itself.
 
 ## 1. Read the failure on CI
 

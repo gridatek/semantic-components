@@ -49,7 +49,7 @@ One part can't style both. Written on a Cancel (`<button scButton variant="outli
 
 ### What other libraries do
 
-Every one with a close part makes it **behaviour only**, on any button: Base UI (`Dialog.Close`), Angular Material (`mat-dialog-close`: no classes at all), Ark UI (`Dialog.CloseTrigger`), React Aria (`slot="close"`), Headless UI (`CloseButton`). A styled ✕ is a separate thing, when there is one: shadcn draws it inside `DialogContent`, Mantine has `Modal.CloseButton`. Code that runs before closing (Save) never goes through the close part: it closes through the state. Details: [reference-libraries.md](reference-libraries.md#dialog).
+Every one with a close part makes it **behaviour only**, on any button: Base UI (`Dialog.Close`), Angular Material (`mat-dialog-close`: no classes at all), Ark UI (`Dialog.CloseTrigger`), React Aria (`slot="close"`), Headless UI (`CloseButton`). A styled ✕ is a separate thing, when there is one: shadcn draws it inside `DialogContent`, Mantine has `Modal.CloseButton`. Code that runs before closing (Save) never goes through the close part: it closes through the state. Details: [reference-libraries.md](../guides/reference-libraries.md#dialog).
 
 ### What we weighed
 

@@ -1,6 +1,6 @@
 # RTL demos
 
-Every component has a demo in right-to-left, with Arabic written in the demo — no translation layer, no locale switch: the text is part of the example, as English is in the others. It shows the component mirrored, and it is what the RTL column of the [roadmap](roadmap.md) ticks.
+Every component has a demo in right-to-left, with Arabic written in the demo — no translation layer, no locale switch: the text is part of the example, as English is in the others. It shows the component mirrored.
 
 ## The demo
 

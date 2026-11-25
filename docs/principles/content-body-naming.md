@@ -69,6 +69,6 @@ Not the whole content of X: the main section, beside another part. Check each on
 ## For each rename
 
 - The class, the selector, the file name (`card-body.ts`), its export in `index.ts`.
-- Templates in the apps (showcase, blocks), the README, the API reference on the docs page, [why-semantic-components.md](why-semantic-components.md); then `node scripts/sync-demo-code.mjs`.
+- Templates in the apps (showcase, blocks), the README, the API reference on the docs page, [why-semantic-components.md](../why-semantic-components.md); then `node scripts/sync-demo-code.mjs`.
 - The style key, when the part has one (a `content` key becomes `body`, in the eight styles and the blocks copy).
 - No alias for the old name (pre-release).

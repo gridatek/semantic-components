@@ -6,7 +6,7 @@ Let a consumer restyle the whole library with their own style, once the library 
 
 - A style is a plain object typed by `ScStyle` (`packages/styles/src/index.ts`), given at start: `provideSemanticComponents({ preset: { style } })`. The parts read it with `injectStyle()`, so nothing ties them to our eight styles.
 - Tried in an app: the custom app (`apps/styles/custom`) holds a copy of nova in `src/app/custom-style/` (export `customStyle`), used by its `app.config.ts` and kept in step with nova by `scripts/sync-custom-style.mjs`. A change there (a red `frame`, tried in the former blocks app) shows in that app only. It works as is.
-- A draft page exists in the showcase: Getting Started → Custom style (`pages/guides/custom-style-page.ts`). Hide or trim it until this is a feature.
+- The showcase's guide shows today's way, by hand: Guides → Custom style (`/docs/guides/custom-style`, `pages/guides/custom-style-page.ts`). What follows is how to make it a feature.
 
 ## Ways to give a consumer their own style
 

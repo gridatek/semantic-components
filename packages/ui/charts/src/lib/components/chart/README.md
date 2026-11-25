@@ -2,7 +2,7 @@
 
 Charts made of parts, as [shadcn/ui's](https://ui.shadcn.com/charts) (Recharts): a plot (`svg`) holding a grid, axes, a cursor and series — areas, bars, lines, stacked or not — and around it a tooltip and a legend. Drawn with d3's scales and shapes (`d3-scale`, `d3-shape`, peers of this entry), in SVG of ours.
 
-Recharts' API, shadcn's look, our drawing: before fixing a bug, writing these docs or adding an option, see how Recharts does it — [docs/reference-libraries.md](../../../../../../../docs/reference-libraries.md#charts).
+Recharts' API, shadcn's look, our drawing: before fixing a bug, writing these docs or adding an option, see how Recharts does it — [docs/guides/reference-libraries.md](../../../../../../../docs/guides/reference-libraries.md#charts).
 
 ## Usage
 

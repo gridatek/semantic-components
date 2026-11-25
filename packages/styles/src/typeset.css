@@ -14,7 +14,7 @@
  * highlights take the style's corners (`--sc-typeset-radius`,
  * `--sc-typeset-radius-inline`; shadcn's highlight has 0.2em); headings h1 to h4
  * take the style's weight, tracking and case (`--sc-typeset-heading-*`). See
- * "Deliberate divergences" in docs/shadcn-style-reference.md.
+ * "Deliberate divergences" in docs/guides/shadcn-style-reference.md.
  */
 
 @layer components {

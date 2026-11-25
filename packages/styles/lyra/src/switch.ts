@@ -6,7 +6,7 @@ import type { ScSwitchStyles } from '@semantic-components/styles';
 // size from the input's data-size).
 // Square here: sera's switch (its square track, the thumb inset 1px on every side), with
 // lyra's own focus ring — shadcn's lyra switch is nova's, round; ours follows lyra's other
-// parts (the user: a deliberate divergence, docs/shadcn-style-reference.md).
+// parts (the user: a deliberate divergence, docs/guides/shadcn-style-reference.md).
 export const switchStyles: ScSwitchStyles = {
   track:
     'peer group/switch relative inline-flex shrink-0 items-center rounded-none border transition-all outline-none group-has-[:focus-visible]/field-label:ring-0 after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-1 aria-invalid:ring-destructive/20 data-[size=default]:h-4.5 data-[size=default]:w-8.25 data-[size=sm]:h-3.5 data-[size=sm]:w-6.25 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 checked:border-primary checked:bg-primary group-has-[:focus-visible]/field-label:checked:border-primary not-checked:border-input/50 not-checked:bg-input group-has-[:focus-visible]/field-label:not-checked:border-input/50 disabled:cursor-not-allowed disabled:opacity-50',

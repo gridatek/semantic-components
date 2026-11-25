@@ -22,7 +22,7 @@ A box of related content: a header with its title, description and action, the b
 
 ## Anatomy
 
-shadcn's parts, each a directive on your element — its `CardContent` is `scCardBody` here: the section between the header and the footer is a body, and `…Content` names a component's whole content ([content-body-naming.md](../../../../../../docs/content-body-naming.md)).
+shadcn's parts, each a directive on your element — its `CardContent` is `scCardBody` here: the section between the header and the footer is a body, and `…Content` names a component's whole content ([content-body-naming.md](../../../../../../docs/principles/content-body-naming.md)).
 
 ```html
 <div scCard>

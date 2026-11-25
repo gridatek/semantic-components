@@ -2,7 +2,7 @@ import { type Locator, expect } from '@playwright/test';
 
 /**
  * Right-to-left checks, for the RTL demos (`<div dir="rtl" lang="ar">`, see
- * docs/rtl-demos.md).
+ * docs/guides/rtl-demos.md).
  */
 
 /** The element is laid out right to left. */

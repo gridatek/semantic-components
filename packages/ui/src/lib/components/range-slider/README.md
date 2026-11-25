@@ -34,7 +34,7 @@ readonly priceForm = form(signal({ price: [200, 800] as readonly [number, number
 
 ## The ends
 
-As every control's bounds (docs/component-design-principles.md, "Bounds Come From the Form"), one way per case:
+As every control's bounds (docs/principles/component-design-principles.md, "Bounds Come From the Form"), one way per case:
 
 - **With a form**, the schema's: `min` and `max` on each value of the pair (`applyEach`). The slider reads the first value's `min` and the second's `max` from the `[formField]` on it; they validate too (a value outside them is an error). Angular refuses `[min]` / `[max]` beside `[formField]` (NG8022).
 - **Without a form**, `[min]` and `[max]`, as a Slider's: `<div scRangeSlider [(value)]="clip" [min]="0" [max]="duration">` — a clip's trim, a live filter, a chart's zoom.

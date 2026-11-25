@@ -51,6 +51,6 @@ Sideways only: one `<div scScrollAreaScrollbar orientation="horizontal">`. Your 
 
 - **The viewport in your markup**: shadcn's ScrollArea renders the viewport, a vertical scrollbar and the corner itself. Ours renders the scrollbar by default, which yours replace (Base UI's anatomy: every part yours); the viewport stays yours — it wraps your content.
 - **Its state is `ScScrollAreaState`**, provided by the root: what the parts inject (the root renders the default scrollbar, which reads it — one class for both would import itself).
-- **`scScrollAreaViewportContent`** is Base UI's `ScrollArea.Content`, named after the viewport it sits in: a part's content takes its parent's name ([content-body-naming.md](../../../../../../docs/content-body-naming.md)).
+- **`scScrollAreaViewportContent`** is Base UI's `ScrollArea.Content`, named after the viewport it sits in: a part's content takes its parent's name ([content-body-naming.md](../../../../../../docs/principles/content-body-naming.md)).
 - **No `--scroll-area-corner-height` / `-width` measured** (Base UI's): the corner is the scrollbars' size (`--sc-scroll-area-corner-size`, 0.625rem while both overflow).
 - **The variables carry our `--sc-` prefix**: `--sc-scroll-area-overflow-{x,y}-{start,end}` are Base UI's `--scroll-area-overflow-{x,y}-{start,end}` — rename them in a snippet taken from shadcn.

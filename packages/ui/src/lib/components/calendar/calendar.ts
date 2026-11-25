@@ -99,7 +99,7 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   // TODO(angular): minDate / maxDate go once Signal Forms' min() / max()
   // take Temporal dates — the bounds then from the schema with a form, and
   // [min] / [max] without one, as every control's ("Bounds Come From the
-  // Form", docs/component-design-principles.md; docs/todo.md, "Date bounds
+  // Form", docs/principles/component-design-principles.md; docs/todo.md, "Date bounds
   // from the form"). Angular: https://github.com/angular/angular/issues/67643
   readonly minDate = input<Temporal.PlainDate | undefined>(undefined);
   readonly maxDate = input<Temporal.PlainDate | undefined>(undefined);

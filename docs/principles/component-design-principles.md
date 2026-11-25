@@ -256,6 +256,24 @@ A rule (the user, 2026-11-20). A control's bounds — the lowest and highest val
 - **Without a form** — a clip's trim, a live filter, a chart's zoom — `[min]` and `[max]`, the same for every control. Never both: Angular refuses `[min]` / `[max]` beside `[formField]` (NG8022), so it is one way per case. A Slider's or Number Group's `min` / `max` inputs are the ones the form feeds; a Range Slider's are `minInput` / `maxInput` in the class (written `[min]` / `[max]`, as `classInput` is `[class]`), since a Signal Forms control's `min` property is typed as its value — a pair there — and they ignore what the form binds into them. Without either: the defaults (a Range Slider 0 to 100).
 - **Not for dates yet**: Signal Forms' `min()` / `max()` take numbers, so Calendar, Date Picker and Date Input keep `minDate` / `maxDate` — to move once Angular takes dates (docs/todo.md, "Date bounds from the form").
 
+## A Provider and Its Parts
+
+A component is not one directive with many inputs (`[hasCloseButton]`, `[iconPosition]`): it is a set of parts the consumer assembles in their template, each a directive on their own element (a part is a `@Directive` unless it needs a template of its own).
+
+- **One part holds the state** — the provider or the root (`scDialogProvider`, `scPdfViewer`, `scEmojiPicker`). Its parts reach it through dependency injection: `inject(ScDialogProvider)`, or an `InjectionToken` named `SC_…` when parts must not depend on the class (`SC_PDF_VIEWER`, `SC_PDF_ANNOTATION`). A part finds it by where it sits — in a portal's template too, since the template's injector is where it was declared.
+- **Names say the place**: Provider › X › Content › Header / Body / Footer (see [content-body-naming.md](content-body-naming.md)); a part is named for its role (`scDialogTrigger`, `scDialogTitle`, `scDialogClose`).
+- **Leave out what you don't need, put your markup between parts**: no part requires another one to be present, except where it reads its provider.
+- **One template, stamped by the part**: where the consumer would repeat markup (a cell, a toolbar on each annotation), they write one `<ng-template scX>` and the part stamps it — never the same markup copied per item.
+
+## State in the Template
+
+UI state is a binding, not a method call: no `dialog.open()` from a service, no `modal.show()`.
+
+- **State is a model**: `[(open)]="isOpen"` on the provider; the consumer reads and writes a signal of their own. A trigger (`scDialogTrigger`) toggles it from the template.
+- **What a part offers is read through `exportAs`**: `#viewer="scPdfViewer"`, then `viewer.currentPage()` in the template, `viewer.goBack()` from a button. Members other parts or templates read are public; the rest private.
+- **Derived state is `computed()`**, effects only bridge to the outside (the DOM, a third-party engine); signals throughout, so the template updates without zone or manual detection.
+- **The trade-off**: the template is longer than one `<sc-dialog [config]>` — and every element, word and icon in it is the consumer's to change. That is the library's bargain (see [the "why" article](../why-semantic-components.md)).
+
 ## Component Structure Template
 
 A part is a `@Directive` on the consumer's element — a `@Component` only when it needs a template of its own, encapsulation or a CDK base class. It sets no text (no default label: the consumer writes it), and a `data-slot` only when another component styles by it ([data-slot-pattern.md](data-slot-pattern.md)).

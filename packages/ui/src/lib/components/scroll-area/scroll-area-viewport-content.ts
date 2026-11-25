@@ -4,7 +4,7 @@ import { cn } from 'cn';
 /**
  * What scrolls, inside the viewport: at least as wide as its content, so a
  * row wider than the box overflows sideways. Base UI's ScrollArea.Content,
- * named after the viewport it sits in (docs/content-body-naming.md).
+ * named after the viewport it sits in (docs/principles/content-body-naming.md).
  */
 @Directive({
   selector: 'div[scScrollAreaViewportContent]',

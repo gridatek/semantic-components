@@ -67,7 +67,7 @@ export class ScAspectRatio {
    * style has the ratio, its box hasn't. Chrome and Firefox apply it. Only a
    * new box fixes it (`display: none`, then back). Check again with each
    * WebKit release; drop it once WebKit applies it (specs: the aspect ratio
-   * and frame demos). See docs/webkit-workarounds.md.
+   * and frame demos). See docs/testing/webkit-workarounds.md.
    */
   private fixWebKitLayout(): void {
     const element = this.element;

@@ -29,7 +29,7 @@ const FADE = 300;
  * A thin bar at the top of the page while a navigation runs — a slow one
  * only: it shows after 150ms, grows toward 80% while the page loads, fills
  * and fades when it's there. The page you leave may show meanwhile (a link
- * closes its popup at once, docs/component-design-principles.md): the bar says
+ * closes its popup at once, docs/principles/component-design-principles.md): the bar says
  * the click was heard. Decorative (`aria-hidden`); listens in the browser
  * only, after the first render.
  */

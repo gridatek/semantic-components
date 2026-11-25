@@ -140,5 +140,4 @@ difference only showed on the field's `data-disabled`.
 ## Related
 
 - [signal-forms-migration.md](signal-forms-migration.md)
-- [sc-field-signal-forms.md](sc-field-signal-forms.md)
 - PRs: #1515 (aria-invalid), #1516 (disabled)
