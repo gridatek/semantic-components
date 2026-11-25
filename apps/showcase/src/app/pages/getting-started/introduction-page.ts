@@ -45,9 +45,9 @@ import { TocHeading } from '../../components/toc/toc-heading';
       <div class="space-y-4">
         <h1 scTypeset>Introduction</h1>
         <p class="text-muted-foreground text-lg text-balance">
-          Semantic Components is a UI library for modern Angular: the look of
-          shadcn/ui, in all eight of its styles, made of parts you put on your
-          own elements.
+          An accessible, semi-headless UI library for Angular: the component
+          logic decoupled from its look — shadcn/ui&apos;s eight styles, or your
+          own — with Tailwind CSS.
         </p>
         <div class="flex flex-wrap gap-2">
           <a
@@ -65,23 +65,124 @@ import { TocHeading } from '../../components/toc/toc-heading';
       </div>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>The big idea</h2>
+        <h2 scTypeset appToc>Why Semantic Components?</h2>
         <p>
-          A component library usually makes you choose. A component that draws
-          everything itself is quick to start with, but its markup, its words
-          and its layout are its own, and you fight it as soon as you need
-          something else. Copying a component&apos;s source into your app, as
-          shadcn/ui does, gives you all of it — and leaves you to maintain the
-          copy.
+          Building a modern web application in Angular often means choosing
+          between two compromises:
+        </p>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            <strong>Monolithic component kits.</strong> Fast to install on day
+            one, painful on day thirty: you end up fighting encapsulated styles,
+            writing brittle <code scTypeset>::ng-deep</code> overrides, and
+            wrestling with components that take thirty inputs just to position
+            an icon.
+          </li>
+          <li>
+            <strong>Copying the source code.</strong> You own the files
+            completely — and your team is on the hook for keeping them in sync
+            by hand whenever upstream updates a component, fixes a bug or
+            improves its accessibility.
+          </li>
+        </ul>
+        <p>
+          <strong>Semantic Components gives you the best of both.</strong> It
+          divides the responsibility down the middle:
+          <strong>you own the markup, the elements and the layout</strong>;
+          <strong
+            >the library handles keyboard navigation, accessibility, focus and
+            the interchangeable styles (nova, vega, maia…)</strong
+          >. When a bug is fixed, a style refined or accessibility improved, you
+          get it with a package update — without rewriting your templates.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Decoupling component logic from visual styles</h2>
+        <p>
+          What does <strong>semi-headless</strong> mean here? Headless libraries
+          give you unstyled primitives and leave the styling to you — CSS
+          modules, Sass or your own utility classes. Tightly coupled libraries
+          hard-code their CSS into their components.
         </p>
         <p>
-          Semantic Components splits the work in two. A component is a set of
-          parts, and each part is a directive on an element you write.
-          <strong
-            >The markup, the words and the icons are yours; the behaviour, the
-            accessibility and the look are the library&apos;s</strong
-          >
-          — and they improve each time you update the package.
+          Semantic Components takes the middle way: the component logic is
+          decoupled from the look, but styling follows
+          <strong>one contract</strong> — Tailwind CSS and a typed style
+          structure. Two packages:
+        </p>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            <strong>The logic</strong>
+            (<code scTypeset>&#64;semantic-components/ui</code>): attribute
+            directives on native elements, WAI-ARIA accessibility, keyboard
+            navigation, focus management and signals. Each part reads its
+            classes from the style with <code scTypeset>injectStyle()</code>,
+            without tying you to any CSS.
+          </li>
+          <li>
+            <strong>The look</strong>
+            (<code scTypeset>&#64;semantic-components/styles</code>):
+            shadcn/ui&apos;s eight styles, ready to use — nova, vega, maia,
+            lyra, mira, luma, sera and rhea.
+          </li>
+          <li>
+            <strong>Or your own design system.</strong> A style is a plain
+            TypeScript object of the <code scTypeset>ScStyle</code> structure:
+            build one from scratch, or start from one of the eight, and provide
+            it with
+            <code scTypeset
+              >provideSemanticComponents(&#123; preset: &#123; style: myStyle
+              &#125; &#125;)</code
+            >.
+          </li>
+        </ul>
+
+        <h3 scTypeset>Only your style&apos;s CSS</h3>
+        <p>
+          You choose the style through Angular&apos;s dependency injection, and
+          Tailwind&apos;s <code scTypeset>&#64;source</code> scans the library
+          and that style&apos;s entry point only — no other style&apos;s classes
+          in your CSS. Switching styles is a two-line change:
+        </p>
+        <app-doc-code [code]="providerCode" language="typescript" />
+        <app-doc-code [code]="sourceCssCode" language="css" />
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Named for their role</h2>
+        <p>
+          Every directive is named for its <strong>exact role</strong> in the
+          interface, on the native element that has that role. Elsewhere, a
+          button might get <code scTypeset>matTooltip="Save"</code> — though the
+          button isn&apos;t a tooltip, it opens one. Here:
+        </p>
+        <ul class="list-disc space-y-2 ps-6">
+          <li>
+            The button is <code scTypeset>button[scTooltipTrigger]</code>; the
+            bubble it shows is <code scTypeset>div[scTooltip]</code>.
+          </li>
+          <li>
+            The dialog opener is <code scTypeset>scDialogTrigger</code>, the
+            panel <code scTypeset>div[scDialog]</code>, its heading
+            <code scTypeset>h2[scDialogTitle]</code>, and its dismiss action
+            <code scTypeset>button[scDialogClose]</code>.
+          </li>
+        </ul>
+        <p>
+          Because each directive says what it does, you know how the pieces fit
+          before reading a line of documentation.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Composable by design</h2>
+        <p>
+          Instead of monolithic black boxes with dozens of inputs (<code
+            scTypeset
+            >[hasCloseButton]="true"</code
+          >, <code scTypeset>[iconPosition]="'left'"</code>), a component is
+          small, focused parts that you assemble in your template:
         </p>
         <div class="grid gap-4 lg:grid-cols-2">
           <div scCodeBlock class="min-w-0">
@@ -99,11 +200,11 @@ import { TocHeading } from '../../components/toc/toc-heading';
           >
             <div scCard class="w-full max-w-xs">
               <div scCardHeader>
-                <h3 scCardTitle>Deploy</h3>
-                <p scCardDescription>Ship the preview to production.</p>
+                <h3 scCardTitle>Deploy project</h3>
+                <p scCardDescription>Ship your latest preview to production.</p>
               </div>
               <div scCardBody>
-                <span scBadge variant="secondary">Ready</span>
+                <span scBadge variant="secondary">Production</span>
               </div>
               <div scCardFooter>
                 <button scButton class="w-full">Deploy now</button>
@@ -111,92 +212,73 @@ import { TocHeading } from '../../components/toc/toc-heading';
             </div>
           </div>
         </div>
-      </section>
 
-      <section class="space-y-4">
-        <h2 scTypeset appToc>What is yours</h2>
-        <ul class="list-disc space-y-2 ps-6">
-          <li>
-            <strong>The markup.</strong> You choose the elements, their order
-            and the layout around them; leave out a part you don&apos;t need,
-            put your own markup between two.
-          </li>
-          <li>
-            <strong>The words.</strong> No part writes text: every label, button
-            name and message is in your template, in your language — so
-            translating is yours, with Angular&apos;s tools.
-          </li>
-          <li>
-            <strong>The icons.</strong> A part holds your
-            <code scTypeset>svg</code>
-            and sizes it; swap Lucide for any set.
-          </li>
-          <li>
-            <strong>The theme.</strong> Colours, radius and fonts are your CSS
-            variables — shadcn&apos;s names, so its themes carry over.
-          </li>
-        </ul>
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>What is the library&apos;s</h2>
-        <ul class="list-disc space-y-2 ps-6">
-          <li>
-            <strong>Behaviour.</strong> Opening and closing, positioning,
-            keyboard, focus, typeahead — on Angular Aria and the CDK.
-          </li>
-          <li>
-            <strong>Accessibility.</strong> Roles, states and names wired
-            between the parts, to WCAG AA; every page checked with axe, in light
-            and dark.
-          </li>
-          <li>
-            <strong>The look.</strong> Each part&apos;s classes in the style
-            your app chose — one of shadcn/ui&apos;s eight. Your class merges
-            over them.
-          </li>
-          <li>
-            <strong>Forms.</strong> Every control is a Signal Forms control: its
-            value, its errors and its state come from the field you bind.
-          </li>
-          <li>
-            <strong>Direction and the server.</strong> Right to left built in;
-            rendered on the server and hydrated without a mismatch.
-          </li>
-        </ul>
-      </section>
-
-      <section class="space-y-4">
-        <h2 scTypeset appToc>Named for their role</h2>
+        <h3 scTypeset>Several parts on one element</h3>
         <p>
-          Each part says what it is in the interface: the button that opens a
-          dialog is its trigger, the heading in it is its title. And each goes
-          on the native element that has that role — a title on a heading, a
-          trigger on a button — so the page keeps what the browser gives it.
-          Parts stack: one button can be a dialog&apos;s trigger and a
-          toolbar&apos;s widget at once. The template describes the page, and
-          state is a binding:
+          Parts are attribute directives on native elements, so one element can
+          take several — no wrapper elements:
+        </p>
+        <app-doc-code [code]="stackingCode" language="angular-html" />
+        <p>
+          One native button, three responsibilities: its look (<code scTypeset
+            >scButton</code
+          >), opening a drawer (<code scTypeset>scDrawerTrigger</code>) and
+          showing a tooltip (<code scTypeset>scTooltipTrigger</code>).
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Declarative state</h2>
+        <p>
+          Take a dialog. Many Angular libraries open one from a service, in
+          code. Here, the dialog — its trigger, its content and its close button
+          — lives in your component&apos;s template:
         </p>
         <app-doc-code [code]="dialogCode" language="angular-html" />
+        <p>
+          The dialog&apos;s provider shares its state with its parts through
+          Angular&apos;s dependency injection. Its
+          <code scTypeset>open</code> state is a binding: when
+          <code scTypeset>isOpen()</code> changes, the dialog opens or closes,
+          with its animations, and nothing to tear down by hand.
+        </p>
       </section>
 
       <section class="space-y-4">
-        <h2 scTypeset appToc>Modern Angular only</h2>
+        <h2 scTypeset appToc>Built for modern Angular</h2>
         <p>
-          Deliberate choices, for the Angular to come rather than the one before
-          — so it isn&apos;t for every project:
+          Built from the ground up for today&apos;s Angular, without the older
+          ways:
         </p>
         <ul class="list-disc space-y-2 ps-6">
-          <li>Zoneless and OnPush, signals throughout.</li>
-          <li>Standalone only: no NgModules, no forRoot().</li>
-          <li>Signal Forms only: no ngModel, no reactive forms.</li>
           <li>
-            Attribute selectors only (button[scButton]): no custom elements, no
-            wrappers.
+            <strong>Signals and OnPush.</strong> Inputs, outputs and models are
+            signals; it runs zoneless.
           </li>
           <li>
-            Direction and language from Angular (Directionality, LOCALE_ID), not
-            inputs on each part.
+            <strong>Standalone only.</strong> No NgModules, no
+            <code scTypeset>forRoot()</code>: import the directives you use in
+            your component.
+          </li>
+          <li>
+            <strong>Temporal for dates and times.</strong> Built on the TC39
+            Temporal API (<code scTypeset>Temporal.PlainDate</code>,
+            <code scTypeset>Temporal.PlainTime</code>): no mutable JavaScript
+            <code scTypeset>Date</code>, and no third-party date library.
+          </li>
+          <li>
+            <strong>Signal Forms.</strong> Every control is a Signal Forms
+            control (<code scTypeset>FormValueControl</code>): typed values and
+            validation from the field you bind.
+          </li>
+          <li>
+            <strong>Server-side rendering.</strong> Rendered on the server and
+            hydrated without a mismatch; browser-only APIs are guarded.
+          </li>
+          <li>
+            <strong>Direction and locale.</strong> Right to left built in, from
+            Angular&apos;s <code scTypeset>Directionality</code> and
+            <code scTypeset>LOCALE_ID</code> — not inputs on each part.
           </li>
         </ul>
       </section>
@@ -217,14 +299,39 @@ import { TocHeading } from '../../components/toc/toc-heading';
   encapsulation: ViewEncapsulation.None,
 })
 export default class IntroductionPage {
+  private readonly providerCode = `// app.config.ts
+import { nova } from '@semantic-components/styles/nova';
+import { provideSemanticComponents } from '@semantic-components/ui';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideSemanticComponents({ preset: { style: nova } })],
+};`;
+
+  private readonly sourceCssCode = `/* styles.css: the library, and your style's file only */
+@source '../node_modules/@semantic-components/ui';
+@source '../node_modules/@semantic-components/styles/fesm2022/semantic-components-styles-nova.mjs';`;
+
+  private readonly stackingCode = `<div scDrawerProvider>
+  <div scTooltipProvider>
+    <button scButton variant="outline" size="icon" scDrawerTrigger scTooltipTrigger>
+      <svg siMenuIcon></svg>
+      <span class="sr-only">Open navigation</span>
+    </button>
+    <ng-template scTooltipPortal>
+      <div scTooltip>Open navigation</div>
+    </ng-template>
+  </div>
+  <!-- the drawer -->
+</div>`;
+
   private readonly example = [
     '<div scCard>',
     '  <div scCardHeader>',
-    '    <h3 scCardTitle>Deploy</h3>',
-    '    <p scCardDescription>Ship the preview to production.</p>',
+    '    <h3 scCardTitle>Deploy project</h3>',
+    '    <p scCardDescription>Ship your latest preview to production.</p>',
     '  </div>',
     '  <div scCardBody>',
-    '    <span scBadge variant="secondary">Ready</span>',
+    '    <span scBadge variant="secondary">Production</span>',
     '  </div>',
     '  <div scCardFooter>',
     '    <button scButton class="w-full">Deploy now</button>',
@@ -232,13 +339,22 @@ export default class IntroductionPage {
     '</div>',
   ].join('\n');
 
-  private readonly dialogCode = `<div scDialogProvider [(open)]="editing">
-  <button scButton scDialogTrigger variant="outline">Edit profile</button>
+  private readonly dialogCode = `<div scDialogProvider [(open)]="isOpen">
+  <button scButton variant="outline" scDialogTrigger>Edit profile</button>
+
   <ng-template scDialogPortal>
     <div scDialog>
-      <h2 scDialogTitle>Edit profile</h2>
-      <p scDialogDescription>Make changes to your profile here.</p>
-      …
+      <div scDialogHeader>
+        <h2 scDialogTitle>Edit profile</h2>
+        <p scDialogDescription>Make changes to your profile here.</p>
+      </div>
+
+      <!-- your form -->
+
+      <div scDialogFooter>
+        <button scDialogClose variant="outline" size="default">Cancel</button>
+        <button scButton type="submit">Save changes</button>
+      </div>
     </div>
   </ng-template>
 </div>`;
@@ -247,23 +363,27 @@ export default class IntroductionPage {
     {
       name: 'Get started',
       path: '/docs/getting-started',
-      description: 'set up an Angular app for the components.',
+      description: 'set up an Angular app with Tailwind CSS and the CDK.',
+    },
+    {
+      name: 'Custom styles',
+      path: '/docs/getting-started/custom-style',
+      description: 'create your own brand style, in the style structure.',
     },
     {
       name: 'Components',
-      path: '/docs/components',
-      description: 'every component, with its examples and API.',
+      path: '/components',
+      description: '140+ accessible components, with live examples.',
     },
     {
       name: 'Styles',
       path: '/docs/packages/styles',
-      description: 'the eight looks, side by side.',
+      description: "shadcn's eight styles (nova, vega, lyra…) side by side.",
     },
     {
-      name: 'Theming',
+      name: 'Theming guide',
       path: '/docs/guides/theming',
-      description:
-        'the preset: style, theme (shadcn’s CSS variables) and mode.',
+      description: 'colour palettes, radius, fonts and dark mode.',
     },
   ];
 }
