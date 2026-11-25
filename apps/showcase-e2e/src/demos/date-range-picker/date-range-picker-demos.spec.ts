@@ -182,3 +182,27 @@ test('Typed, in the docs on a phone (280px): the field shrinks to the width it h
     );
   }
 });
+
+test('RTL: the day names fit their columns (Arabic’s narrow form), the full names still read', async ({
+  page,
+}) => {
+  await page.goto(demo('rtl'));
+  await trigger(page).click();
+  await expect(calendar(page)).toBeVisible();
+  const names = await calendar(page)
+    .locator('thead th')
+    .evaluateAll((columns) =>
+      columns.map((th) => ({
+        fits:
+          (
+            th.querySelector('[aria-hidden=true]') as Element
+          ).getBoundingClientRect().width <=
+          th.getBoundingClientRect().width + 0.5,
+        read: th.querySelector('.sr-only')?.textContent?.trim() ?? '',
+      })),
+    );
+  expect(names.length).toBeGreaterThan(0);
+  for (const name of names) expect(name.fits).toBe(true);
+  // The full name for screen readers: السبت, not its letter.
+  expect(names[0].read.length).toBeGreaterThan(1);
+});

@@ -122,17 +122,29 @@ export class ScCalendarMonth {
 
   readonly month = input.required<Temporal.PlainYearMonth>();
 
-  /** The week's days, from its first: short, and in full. */
+  /**
+   * The week's days, from its first: shown, and in full (read). Shown short
+   * ("Sun", "lun.") — or narrow where a language's short names are words of
+   * their own (Arabic's الأحد, Persian, Hebrew: over 4 letters), too wide
+   * for a day's column: a letter each (ح ن ث…). From the locale, so the
+   * server draws the same.
+   */
   private readonly weekdays = computed(() => {
     const locale = this.locale;
     const start = this.calendar.weekStart();
-    return Array.from({ length: 7 }, (_, i) => {
-      const day = MONDAY.add({ days: (start - 1 + i) % 7 });
-      return {
-        short: day.toLocaleString(locale, { weekday: 'short' }),
-        long: day.toLocaleString(locale, { weekday: 'long' }),
-      };
-    });
+    const days = Array.from({ length: 7 }, (_, i) =>
+      MONDAY.add({ days: (start - 1 + i) % 7 }),
+    );
+    const short = days.map((day) =>
+      day.toLocaleString(locale, { weekday: 'short' }),
+    );
+    const narrow = short.some((name) => [...name].length > 4);
+    return days.map((day, i) => ({
+      short: narrow
+        ? day.toLocaleString(locale, { weekday: 'narrow' })
+        : short[i],
+      long: day.toLocaleString(locale, { weekday: 'long' }),
+    }));
   });
 
   /** Its weeks: whole, from the week's first day — six, with fixedWeeks. */
