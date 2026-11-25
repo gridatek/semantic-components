@@ -208,8 +208,9 @@ export default class ScrollbarPage {
     },
     {
       name: '--sc-scrollbar-thumb',
-      value: 'var(--color-border)',
-      description: "The thumb's colour.",
+      value: 'var(--color-muted-foreground)',
+      description:
+        "The thumb's colour: 3:1 on the page, as WCAG asks of a scrollbar the page styles (shadcn's border colour is 1.3:1).",
     },
     {
       name: '--sc-scrollbar-track',

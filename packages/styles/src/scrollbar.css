@@ -2,7 +2,9 @@
  * The browser's scrollbars in the style's look — every scrollbar of the
  * page: the page's own, a list, a textarea, a code block, a third-party
  * widget. shadcn's Scroll Area thumb on the native bar: 10px, no track, the
- * thumb inset by 1px, the theme's border colour, the style's corners.
+ * thumb inset by 1px, the style's corners — in the theme's muted-foreground,
+ * not shadcn's border colour (1.3:1 on white, hard to see): a scrollbar styled
+ * by the page needs 3:1 against what it is on (WCAG 1.4.11).
  *
  *   @import '@semantic-components/styles/scrollbar.css';
  *   @import '@semantic-components/styles/<style>/scrollbar-variables.css';
@@ -38,8 +40,8 @@
     --sc-scrollbar-size: 0.625rem;
     --sc-scrollbar-inset: 1px;
     --sc-scrollbar-thumb: var(
-      --color-border,
-      color-mix(in oklab, currentColor 20%, transparent)
+      --color-muted-foreground,
+      color-mix(in oklab, currentColor 55%, transparent)
     );
     --sc-scrollbar-track: transparent;
     --sc-scrollbar-radius: calc(infinity * 1px);

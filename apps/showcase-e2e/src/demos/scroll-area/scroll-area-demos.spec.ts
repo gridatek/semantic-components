@@ -1,6 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 import { collectErrors, press } from '../../interaction';
-import { box } from '../../looks';
+import { box, thumbContrast } from '../../looks';
 import { expectNoHorizontalScroll } from '../../mobile';
 import { expect, test } from '../../test';
 
@@ -19,6 +19,20 @@ test.beforeEach(({ page }) => {
 
 test.afterEach(() => {
   expect(errors).toEqual([]);
+});
+
+test('Usage: the thumb stands out — 3:1 on the box (WCAG 1.4.11), light and dark', async ({
+  page,
+}) => {
+  await page.goto('/demos/scroll-area/scroll-area-usage-demo');
+  const thumb = page.locator('[scScrollAreaThumb]');
+  await expect(thumb).toBeAttached();
+  expect(await thumbContrast(root(page), thumb)).toBeGreaterThanOrEqual(3);
+  // The theme's dark colours: a demo's route follows the class (as qr-code's spec).
+  await page.evaluate(() => document.documentElement.classList.add('dark'));
+  await expect
+    .poll(() => thumbContrast(root(page), thumb))
+    .toBeGreaterThanOrEqual(3);
 });
 
 test('Usage: overflows down only; one scrollbar, its thumb as long as the share in view', async ({

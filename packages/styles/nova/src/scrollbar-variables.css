@@ -1,14 +1,14 @@
 /*
  * The scrollbars' variables in nova, for ui's scrollbar.css (its rules):
- * import both. shadcn's Scroll Area thumb in nova — the theme's border
- * colour, its corners round, as its Scroll Area thumb (rounded-full). At zero specificity: yours on :root, or on a box,
+ * import both. shadcn's Scroll Area thumb in nova — in the theme's
+ * muted-foreground (not shadcn's border colour: 3:1 to be seen, WCAG 1.4.11), its corners round, as its Scroll Area thumb (rounded-full). At zero specificity: yours on :root, or on a box,
  * win.
  */
 @layer components {
   :where(:root) {
     --sc-scrollbar-thumb: var(
-      --color-border,
-      color-mix(in oklab, currentColor 20%, transparent)
+      --color-muted-foreground,
+      color-mix(in oklab, currentColor 55%, transparent)
     );
     --sc-scrollbar-radius: calc(infinity * 1px);
   }

@@ -29,6 +29,12 @@ test.describe('Scrollbar Page', () => {
       '--sc-scrollbar-track',
       '--sc-scrollbar-radius',
     ]);
+    // The thumb's default: the theme's muted-foreground (3:1, WCAG 1.4.11).
+    await expect(
+      page
+        .getByRole('region', { name: 'Scrollbar variables' })
+        .getByRole('row', { name: /--sc-scrollbar-thumb/ }),
+    ).toContainText('var(--color-muted-foreground)');
     await expect(first('Scrollbar classes')).toHaveText([
       'no-scrollbar, scrollbar-none',
       'scrollbar-gutter-stable',

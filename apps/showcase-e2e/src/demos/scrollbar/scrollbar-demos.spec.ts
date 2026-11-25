@@ -1,6 +1,10 @@
 import { type Locator } from '@playwright/test';
 import { collectErrors } from '../../interaction';
-import { expectScrollbarWidth, expectStyledScrollbar } from '../../looks';
+import {
+  expectScrollbarWidth,
+  expectStyledScrollbar,
+  thumbContrast,
+} from '../../looks';
 import { expectNoHorizontalScroll } from '../../mobile';
 import { expect, test } from '../../test';
 
@@ -25,6 +29,20 @@ test.beforeEach(({ page }) => {
 
 test.afterEach(() => {
   expect(errors).toEqual([]);
+});
+
+test('Usage: the thumb stands out — 3:1 on its box (WCAG 1.4.11), light and dark', async ({
+  page,
+  browserName,
+}) => {
+  test.skip(browserName !== 'chromium', 'the thumb is read in Chromium only');
+  await page.goto('/demos/scrollbar/scrollbar-usage-demo');
+  const box = page.getByRole('region', { name: 'Tags' });
+  await expectStyledScrollbar(box);
+  expect(await thumbContrast(box)).toBeGreaterThanOrEqual(3);
+  // The theme's dark colours: a demo's route follows the class (as qr-code's spec).
+  await page.evaluate(() => document.documentElement.classList.add('dark'));
+  await expect.poll(() => thumbContrast(box)).toBeGreaterThanOrEqual(3);
 });
 
 test('Usage: a plain box that scrolls has the styled scrollbar; a tab stop that scrolls by the keyboard', async ({
