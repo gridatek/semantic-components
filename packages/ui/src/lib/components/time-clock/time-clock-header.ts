@@ -43,8 +43,8 @@ import { ScTimeClock } from './time-clock';
           <button
             type="button"
             data-slot="time-clock-period"
-            [class]="periodClass"
-            [attr.aria-pressed]="!!clock.value() && clock.period() === period"
+            [class]="periodClasses()[period]"
+            [attr.aria-pressed]="pressedPeriod() === period"
             [disabled]="clock.locked() || !clock.canPickPeriod(period)"
             (click)="clock.setPeriod(period)"
           >
@@ -77,10 +77,26 @@ export class ScTimeClockHeader {
     ),
   );
   private readonly separatorClass = computed(() => cn(this.styles.time));
-  private readonly periodClass = cn(
-    this.buttonStyles({ variant: 'outline', size: 'xs' }),
-    'aria-pressed:bg-primary aria-pressed:text-primary-foreground aria-pressed:border-primary',
+  /** The period of the time picked; none while there is none. */
+  private readonly pressedPeriod = computed(() =>
+    this.clock.value() ? this.clock.period() : null,
   );
+  /**
+   * The pressed one filled (the default button), the other outlined: chosen
+   * here, not by `aria-pressed:` classes, which the outline's dark background
+   * outranks.
+   */
+  private readonly periodClasses = computed(() => {
+    const pressed = this.pressedPeriod();
+    const look = (period: 'am' | 'pm') =>
+      cn(
+        this.buttonStyles({
+          variant: pressed === period ? 'default' : 'outline',
+          size: 'xs',
+        }),
+      );
+    return { am: look('am'), pm: look('pm') };
+  });
 
   private readonly class = computed(() =>
     cn('flex items-center gap-3', this.classInput()),

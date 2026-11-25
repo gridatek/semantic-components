@@ -63,6 +63,16 @@ test.describe('Console clean', () => {
           new URL(m.location().url || page.url()).pathname.startsWith('/demos/')
         )
           return;
+        // Under SSR, NgOptimizedImage's height check on a fill image already
+        // loaded (the server's page loaded it) runs as hydration starts, before
+        // the bindings put back its box's classes: zero, wrongly. Angular's
+        // false positive (angular/angular#69636); CSR still checks it.
+        if (
+          process.env['SSR'] &&
+          m.text().includes('NG02952') &&
+          m.text().includes('height of the fill-mode image is zero')
+        )
+          return;
         if (m.type() === 'warning' || m.type() === 'error')
           messages.push(`${m.type()}: ${m.text().split('\n')[0]}`);
       });

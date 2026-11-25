@@ -95,7 +95,9 @@ export class ScMasonryGrid {
     });
     inject(DestroyRef).onDestroy(() => {
       this.observer?.disconnect();
-      this.view?.cancelAnimationFrame(this.frame);
+      // A frame is only ever asked for in the browser: the server has no
+      // cancelAnimationFrame.
+      if (this.frame) this.view?.cancelAnimationFrame(this.frame);
     });
     // Its settings, or its items, changed.
     afterRenderEffect(() => {

@@ -4434,6 +4434,7 @@ export const demosRoutes: Route[] = [
       },
       {
         path: 'basic-scheduler-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/scheduler/demos/basic-scheduler-demo').then(
             (m) => m.BasicSchedulerDemo,
@@ -5841,6 +5842,7 @@ export const demosRoutes: Route[] = [
     children: [
       {
         path: 'stepper-usage-demo',
+        data: { fullPage: true },
         loadComponent: () =>
           import('../pages/docs/stepper/demos/stepper-usage-demo').then(
             (m) => m.StepperUsageDemo,

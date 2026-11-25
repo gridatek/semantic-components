@@ -262,15 +262,15 @@ function main() {
   const visiblePaths = loadVisibleComponentPaths();
 
   const libraries = libs.flatMap(([dir, pkg]) => [
-    scanLibrary(join(ROOT, 'libs', dir), pkg, visiblePaths),
-    ...scanEntryLibraries(join(ROOT, 'libs', dir), pkg, visiblePaths),
+    scanLibrary(join(ROOT, 'packages', dir), pkg, visiblePaths),
+    ...scanEntryLibraries(join(ROOT, 'packages', dir), pkg, visiblePaths),
   ]);
 
   const guides = scanGuides();
 
   // Read version from root ui package
   const uiPkg = JSON.parse(
-    readFileSync(join(ROOT, 'libs', 'ui', 'package.json'), 'utf-8'),
+    readFileSync(join(ROOT, 'packages', 'ui', 'package.json'), 'utf-8'),
   );
 
   const manifest: Manifest = {
@@ -280,7 +280,7 @@ function main() {
     guides,
   };
 
-  const outDir = join(ROOT, 'libs', 'mcp-server', 'src', 'data');
+  const outDir = join(ROOT, 'packages', 'mcp-server', 'src', 'data');
   mkdirSync(outDir, { recursive: true });
 
   const outPath = join(outDir, 'manifest.json');

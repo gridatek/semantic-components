@@ -1,11 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScTypeset } from '@semantic-components/ui';
+import { ScLink, ScTypeset } from '@semantic-components/ui';
 import { DocCode } from '../../components/doc-code/doc-code';
 import { TocHeading } from '../../components/toc/toc-heading';
 
 @Component({
   selector: 'app-ssr-page',
-  imports: [DocCode, ScTypeset, TocHeading],
+  imports: [DocCode, ScLink, ScTypeset, TocHeading],
   template: `
     <div class="space-y-12">
       <div class="space-y-2">
@@ -71,6 +71,21 @@ import { TocHeading } from '../../components/toc/toc-heading';
           console: a hydration mismatch shows as an NG05xx message in
           development. The library&apos;s own components are tested this way —
           every demo rendered on the server, then hydrated.
+        </p>
+        <p>
+          One warning there is Angular&apos;s, not yours: NG02952, &quot;the
+          height of the fill-mode image is zero&quot;, on a
+          <code scTypeset>fill</code> image in a box sized by bound classes (a
+          carousel slide, a masonry item). The server&apos;s page has loaded the
+          image, so NgOptimizedImage measures it as hydration starts, before the
+          bindings put the box&apos;s classes back. The page is right once
+          hydrated, and the check runs in development only (<a
+            scLink
+            href="https://github.com/angular/angular/issues/69636"
+            target="_blank"
+            rel="noopener noreferrer"
+            >angular/angular#69636</a
+          >). Without SSR the same check is a real one.
         </p>
       </section>
     </div>
