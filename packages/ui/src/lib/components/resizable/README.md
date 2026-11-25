@@ -18,12 +18,12 @@ The panels are the group's direct children, a handle between each two. A group n
 
 ## Parts
 
-| Part                    | Selector                     | What it does                                                                                                                          |
-| ----------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScResizablePanelGroup` | `div[scResizablePanelGroup]` | `orientation` (`horizontal`, `vertical`); `[(layout)]`: the panels' sizes in %, in order — to save a layout and restore it            |
-| `ScResizablePanel`      | `div[scResizablePanel]`      | `defaultSize` (else a share of what is left), `minSize`, `maxSize` (%); `collapsible`, `collapsedSize`; `data-collapsed`              |
-| `ScResizableHandle`     | `div[scResizableHandle]`     | The splitter: drag, or the keyboard. `role="separator"`, `aria-valuenow` / `-min` / `-max`, `aria-controls`; `data-dragging`. Name it |
-| `ScResizableHandleGrip` | `div[scResizableHandleGrip]` | Its grip, in the style's look; `aria-hidden`                                                                                          |
+| Part                    | Selector                     | What it does                                                                                                                                                                                                                       |
+| ----------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScResizablePanelGroup` | `div[scResizablePanelGroup]` | `orientation` (`horizontal`, `vertical`); `[(layout)]`: the panels' sizes in %, in order — to save a layout and restore it; clips its content (as react-resizable-panels): a handle dragged to the edge stays inside a rounded box |
+| `ScResizablePanel`      | `div[scResizablePanel]`      | `defaultSize` (else a share of what is left), `minSize`, `maxSize` (%); `collapsible`, `collapsedSize`; `data-collapsed`                                                                                                           |
+| `ScResizableHandle`     | `div[scResizableHandle]`     | The splitter: drag, or the keyboard. `role="separator"`, `aria-valuenow` / `-min` / `-max`, `aria-controls`; `data-dragging`. Name it                                                                                              |
+| `ScResizableHandleGrip` | `div[scResizableHandleGrip]` | Its grip, in the style's look; `aria-hidden`                                                                                                                                                                                       |
 
 A collapsible panel shuts to `collapsedSize` when dragged below half its minimum, or on Enter; Enter opens it again to its size before.
 

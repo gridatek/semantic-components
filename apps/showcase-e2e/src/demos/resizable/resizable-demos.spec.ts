@@ -52,6 +52,25 @@ test('Keyboard: arrows by 10%, Home and End to the limits', async ({
   await expect(h).toHaveAttribute('aria-valuenow', '0');
 });
 
+test('Dragged to the edge: the handle stays inside the rounded box (the group clips, as react-resizable-panels); no text selected', async ({
+  page,
+}) => {
+  await page.goto('/demos/resizable/resizable-usage-demo');
+  const outer = page.locator('[scResizablePanelGroup]').first();
+  const h = handle(page, 'Resize One');
+  const group = await box(outer);
+  const grip = await box(h.locator('[scResizableHandleGrip]'));
+  // From the grip, past the box's start, across the panels' text.
+  await page.mouse.move(grip.x + grip.width / 2, grip.y + grip.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(group.x - 40, group.y + 20, { steps: 10 });
+  await page.mouse.up();
+  await expect(h).toHaveAttribute('aria-valuenow', '0');
+  // What passes the box's edge is clipped to its rounded corners.
+  await expect(outer).toHaveCSS('overflow', 'hidden');
+  expect(await page.evaluate(() => String(getSelection()))).toBe('');
+});
+
 test('Drag: the panels beside it follow the pointer', async ({ page }) => {
   await page.goto(demo('handle'));
   const h = handle(page, 'Resize Sidebar');

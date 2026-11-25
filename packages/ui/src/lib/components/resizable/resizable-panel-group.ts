@@ -47,7 +47,9 @@ export class ScResizablePanelGroup {
 
   private readonly class = computed(() =>
     cn(
-      'flex size-full',
+      // Clips what passes its edge (react-resizable-panels' group, inline
+      // overflow: hidden): a handle dragged to the edge stays in its corners.
+      'flex size-full overflow-hidden',
       // Plain classes, not data-[orientation=…]: (they'd outrank yours).
       this.orientation() === 'vertical' ? 'flex-col' : 'flex-row',
       this.classInput(),
