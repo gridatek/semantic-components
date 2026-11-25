@@ -244,6 +244,12 @@ const STYLES: { name: ScStyleName; description: string }[] = [
             <code scTypeset>&lt;style&gt;/editor.css</code>
             — the Editor&apos;s document, if you use it.
           </li>
+          <li>
+            <code scTypeset>pdf-viewer.css</code>
+            — the PDF Viewer&apos;s pages and what pdf.js draws on them (text,
+            links, form fields), in place of pdf.js&apos;s own
+            <code scTypeset>pdf_viewer.css</code>, if you use it.
+          </li>
         </ul>
       </section>
     </div>
