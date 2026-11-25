@@ -290,3 +290,48 @@ test.describe('shadcn’s examples', () => {
     await expect(page.locator('[scCalendar]')).toHaveCSS('direction', 'rtl');
   });
 });
+
+/** The calendar's box and its first day cell's, in the page. */
+const sizes = (page: Page) =>
+  page.evaluate(() => {
+    const calendar = document.querySelector('[data-slot=calendar]') as Element;
+    const cell = document.querySelector('[data-slot=calendar-cell]') as Element;
+    const [c, d] = [
+      calendar.getBoundingClientRect(),
+      cell.getBoundingClientRect(),
+    ];
+    const box = (calendar.parentElement as Element).getBoundingClientRect();
+    return {
+      inside: c.left >= box.left - 0.5 && c.right <= box.right + 0.5,
+      cell: [d.width, d.height],
+    };
+  });
+
+test('In a box narrower than its cells: they shrink to fit, still square', async ({
+  page,
+}) => {
+  await page.goto('/demos/calendar/calendar-usage-demo');
+  await expect(page.locator('[data-slot=calendar-cell]').first()).toBeVisible();
+  // 200px: less than its 7 cells of --spacing(8) and its padding.
+  await page
+    .locator('[data-slot=calendar]')
+    .evaluate(
+      (el) => ((el.parentElement as HTMLElement).style.width = '200px'),
+    );
+  const { inside, cell } = await sizes(page);
+  expect(inside).toBe(true);
+  expect(cell[0]).toBeLessThan(32);
+  expect(cell[0]).toBeCloseTo(cell[1], 0);
+});
+
+test('RTL on a phone: the calendar in the width it has, its cells shrunk, still square', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto(demo('rtl'));
+  await expect(page.locator('[data-slot=calendar-cell]').first()).toBeVisible();
+  const { inside, cell } = await sizes(page);
+  expect(inside).toBe(true);
+  expect(cell[0]).toBeLessThan(48);
+  expect(cell[0]).toBeCloseTo(cell[1], 0);
+});

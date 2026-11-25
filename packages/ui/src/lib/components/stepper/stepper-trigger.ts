@@ -61,8 +61,10 @@ export class ScStepperTrigger {
 
   private readonly class = computed(() =>
     cn(
-      // The indicator, then the title over the description.
-      'grid shrink-0 grid-cols-[auto_1fr] items-center gap-x-3 text-start outline-none',
+      // The indicator, then the title over the description (col-start-2).
+      // Implicit columns, not a template: a hidden title (sr-only, out of
+      // the grid) makes no second column, so no gap beside the number.
+      'grid shrink-0 auto-cols-[auto_1fr] items-center gap-x-3 text-start outline-none',
       this.styles.item,
       !this.item.reachable() && 'cursor-not-allowed',
       this.classInput(),

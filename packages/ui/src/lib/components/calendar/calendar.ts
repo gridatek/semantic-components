@@ -233,7 +233,10 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
 
   private readonly class = computed(() =>
     cn(
-      'group/calendar flex w-fit flex-col gap-4',
+      // At most its box's width: in a narrower box its cells shrink (still
+      // square) — without it, the month's table (its width the cells') sets
+      // its least width, and it spills out.
+      'group/calendar flex w-fit max-w-full flex-col gap-4',
       this.styles,
       this.disabled() && 'pointer-events-none opacity-50',
       this.classInput(),

@@ -27,7 +27,7 @@ import {
     SiChevronRightIcon,
   ],
   template: `
-    <div dir="rtl" lang="ar">
+    <div dir="rtl" lang="ar" class="max-w-full">
       <div
         scCalendar
         #cal="scCalendar"

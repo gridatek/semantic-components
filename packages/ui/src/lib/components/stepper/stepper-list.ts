@@ -37,7 +37,8 @@ export class ScStepperList {
     cn(
       this.stepper.orientation() === 'vertical'
         ? 'flex flex-col'
-        : 'flex items-center gap-3',
+        : // Across, a container: its titles go by its width (ScStepperTitle).
+          '@container/stepper-list flex items-center gap-3',
       this.classInput(),
     ),
   );

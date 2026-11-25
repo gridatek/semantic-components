@@ -1,6 +1,6 @@
 import { collectErrors, press } from '../../interaction';
 import { expectNoHorizontalScroll } from '../../mobile';
-import { expect, test } from '../../test';
+import { type Page, expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/stepper/${name}-demo`;
 
@@ -96,6 +96,57 @@ test('Numbers only: the titles hidden, still naming the tabs', async ({
   await expect(page.locator('[scStepperTitle]').first()).toHaveClass(
     /\bsr-only\b/,
   );
+});
+
+test('Numbers only: each step as wide as its number — no room kept for the hidden title', async ({
+  page,
+}) => {
+  await page.goto(demo('numbers-stepper'));
+  await expect(page.getByRole('tab')).toHaveCount(4);
+  const widths = await page
+    .getByRole('tab')
+    .evaluateAll((tabs) =>
+      tabs.map((tab) => [
+        tab.getBoundingClientRect().width,
+        (
+          tab.querySelector('[scStepperIndicator]') as Element
+        ).getBoundingClientRect().width,
+      ]),
+    );
+  for (const [tab, indicator] of widths) expect(tab).toBeCloseTo(indicator, 0);
+});
+
+/** Whether each step's title is in sight (not sr-only: out of the flow). */
+const titlesShown = (page: Page) =>
+  page
+    .locator('[scStepperTitle]')
+    .evaluateAll((titles) =>
+      titles.map((t) => getComputedStyle(t).position !== 'absolute'),
+    );
+
+test('A wide list: every step’s title in sight', async ({ page }) => {
+  await page.goto(demo('stepper-usage'));
+  await expect(page.getByRole('tab')).toHaveCount(3);
+  expect(await titlesShown(page)).toEqual([true, true, true]);
+});
+
+test('A narrow list (a phone): only the current step’s title in sight, the others read by screen readers; the steps fit', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto(demo('stepper-usage'));
+  await expect(page.getByRole('tab')).toHaveCount(3);
+  await expect.poll(() => titlesShown(page)).toEqual([true, false, false]);
+  // Still each tab's name.
+  await expect(page.getByRole('tab').nth(1)).toHaveAccessibleName(/Profile/);
+  const list = await page.locator('[scStepperList]').boundingBox();
+  const last = await page.getByRole('tab').last().boundingBox();
+  expect((last?.x ?? 0) + (last?.width ?? 0)).toBeLessThanOrEqual(
+    (list?.x ?? 0) + (list?.width ?? 0) + 0.5,
+  );
+  // The title in sight follows the current step.
+  await page.getByRole('button', { name: 'Continue' }).click();
+  await expect.poll(() => titlesShown(page)).toEqual([false, true, false]);
 });
 
 test('Vertical: ↓ and ↑ move; the connector runs down under the indicator', async ({
