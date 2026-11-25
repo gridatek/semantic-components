@@ -55,7 +55,7 @@ The select and multiselect demos store icon _names_ (`'tag'`, `'star'`…) and m
 ### 5. Drop the workarounds when Angular catches up — S each
 
 - `bindInput` / `setInput` (`utils/bind-input`) write to input signal nodes through `@angular/core/primitives/signals`. Replace with host-directive bindings once [angular/angular#50510](https://github.com/angular/angular/issues/50510) ships.
-- `ScComboboxListTemplate` (the list's template when the search is inside the popup) is a plain template marker, and `ScAriaTreeItem` / `ScAriaOrgChartItem` make required Aria inputs optional, only because required inputs of host directives can't be hidden (same issue).
+- `ScComboboxListTemplate` (the list's template when the search is inside the popup) is a plain template marker only because required inputs of host directives can't be hidden (same issue). The Tree avoids it by building on Aria's tree patterns (`@angular/aria/private`) instead of its directives.
 - Menu bar Escape (`ScMenubar`) and menu Tab (`ScMenu`) handling — see the upstream drafts.
 
 ## Upstream

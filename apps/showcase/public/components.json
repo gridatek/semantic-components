@@ -634,15 +634,6 @@
     "category": "Data Display"
   },
   {
-    "name": "Org Chart",
-    "path": "org-chart",
-    "description": "Your people as nested lists, laid out as a chart and joined by lines; a tree for the keyboard.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Data Display",
-    "hidden": true
-  },
-  {
     "name": "OTP Input",
     "path": "otp-input",
     "description": "A one-time code, one input per character, in the look of the app's style.",
@@ -1094,15 +1085,6 @@
   {
     "name": "Tree",
     "path": "tree",
-    "description": "A hierarchical view of nested items.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Data Display",
-    "hidden": true
-  },
-  {
-    "name": "Tree Next",
-    "path": "tree-next",
     "description": "A hierarchy of files, pages or choices, its branches opening on their children: Angular Aria's tree — selection, checkboxes, links, children loaded on first open.",
     "status": "Experimental",
     "library": "ui",

@@ -78,7 +78,7 @@ import { toggle } from './toggle';
 import { toggleGroup } from './toggle-group';
 import { tooltip } from './tooltip';
 import { trace } from './trace';
-import { treeNext } from './tree-next';
+import { tree } from './tree';
 import { waterfall } from './waterfall';
 
 export const lyra: ScStyle = {
@@ -151,7 +151,7 @@ export const lyra: ScStyle = {
   mediaPlayer,
   compare,
   scheduler,
-  treeNext,
+  tree,
   sortable,
   listbox,
   segmentedControl,

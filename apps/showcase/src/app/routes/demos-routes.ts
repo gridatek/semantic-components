@@ -4797,53 +4797,6 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/org-chart',
-    children: [
-      {
-        path: 'basic-org-chart-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart/demos/basic-org-chart-demo').then(
-            (m) => m.BasicOrgChartDemo,
-          ),
-      },
-      {
-        path: 'avatars-org-chart-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart/demos/avatars-org-chart-demo').then(
-            (m) => m.AvatarsOrgChartDemo,
-          ),
-      },
-      {
-        path: 'across-org-chart-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart/demos/across-org-chart-demo').then(
-            (m) => m.AcrossOrgChartDemo,
-          ),
-      },
-      {
-        path: 'collapsible-org-chart-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart/demos/collapsible-org-chart-demo').then(
-            (m) => m.CollapsibleOrgChartDemo,
-          ),
-      },
-      {
-        path: 'selection-org-chart-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart/demos/selection-org-chart-demo').then(
-            (m) => m.SelectionOrgChartDemo,
-          ),
-      },
-      {
-        path: 'data-org-chart-demo',
-        loadComponent: () =>
-          import('../pages/docs/org-chart/demos/data-org-chart-demo').then(
-            (m) => m.DataOrgChartDemo,
-          ),
-      },
-    ],
-  },
-  {
     path: 'demos/password-group',
     children: [
       {
@@ -7225,69 +7178,69 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
-    path: 'demos/tree-next',
+    path: 'demos/tree',
     children: [
       {
-        path: 'tree-next-usage-demo',
+        path: 'tree-usage-demo',
         loadComponent: () =>
-          import('../pages/docs/tree-next/demos/tree-next-usage-demo').then(
-            (m) => m.TreeNextUsageDemo,
+          import('../pages/docs/tree/demos/tree-usage-demo').then(
+            (m) => m.TreeUsageDemo,
           ),
       },
       {
-        path: 'data-tree-next-demo',
+        path: 'data-tree-demo',
         loadComponent: () =>
-          import('../pages/docs/tree-next/demos/data-tree-next-demo').then(
-            (m) => m.DataTreeNextDemo,
+          import('../pages/docs/tree/demos/data-tree-demo').then(
+            (m) => m.DataTreeDemo,
           ),
       },
       {
-        path: 'multiple-tree-next-demo',
+        path: 'multiple-tree-demo',
         loadComponent: () =>
-          import('../pages/docs/tree-next/demos/multiple-tree-next-demo').then(
-            (m) => m.MultipleTreeNextDemo,
+          import('../pages/docs/tree/demos/multiple-tree-demo').then(
+            (m) => m.MultipleTreeDemo,
           ),
       },
       {
-        path: 'checkboxes-tree-next-demo',
+        path: 'checkboxes-tree-demo',
         loadComponent: () =>
-          import('../pages/docs/tree-next/demos/checkboxes-tree-next-demo').then(
-            (m) => m.CheckboxesTreeNextDemo,
+          import('../pages/docs/tree/demos/checkboxes-tree-demo').then(
+            (m) => m.CheckboxesTreeDemo,
           ),
       },
       {
-        path: 'links-tree-next-demo',
+        path: 'links-tree-demo',
         loadComponent: () =>
-          import('../pages/docs/tree-next/demos/links-tree-next-demo').then(
-            (m) => m.LinksTreeNextDemo,
+          import('../pages/docs/tree/demos/links-tree-demo').then(
+            (m) => m.LinksTreeDemo,
           ),
       },
       {
-        path: 'disabled-tree-next-demo',
+        path: 'disabled-tree-demo',
         loadComponent: () =>
-          import('../pages/docs/tree-next/demos/disabled-tree-next-demo').then(
-            (m) => m.DisabledTreeNextDemo,
+          import('../pages/docs/tree/demos/disabled-tree-demo').then(
+            (m) => m.DisabledTreeDemo,
           ),
       },
       {
-        path: 'lazy-tree-next-demo',
+        path: 'lazy-tree-demo',
         loadComponent: () =>
-          import('../pages/docs/tree-next/demos/lazy-tree-next-demo').then(
-            (m) => m.LazyTreeNextDemo,
+          import('../pages/docs/tree/demos/lazy-tree-demo').then(
+            (m) => m.LazyTreeDemo,
           ),
       },
       {
-        path: 'controller-tree-next-demo',
+        path: 'controller-tree-demo',
         loadComponent: () =>
-          import('../pages/docs/tree-next/demos/controller-tree-next-demo').then(
-            (m) => m.ControllerTreeNextDemo,
+          import('../pages/docs/tree/demos/controller-tree-demo').then(
+            (m) => m.ControllerTreeDemo,
           ),
       },
       {
-        path: 'rtl-tree-next-demo',
+        path: 'rtl-tree-demo',
         loadComponent: () =>
-          import('../pages/docs/tree-next/demos/rtl-tree-next-demo').then(
-            (m) => m.RtlTreeNextDemo,
+          import('../pages/docs/tree/demos/rtl-tree-demo').then(
+            (m) => m.RtlTreeDemo,
           ),
       },
     ],
@@ -8413,32 +8366,6 @@ export const demosRoutes: Route[] = [
         loadComponent: () =>
           import('../pages/docs/typeset/demos/text-typeset-demo').then(
             (m) => m.TextTypesetDemo,
-          ),
-      },
-    ],
-  },
-  {
-    path: 'demos/tree',
-    children: [
-      {
-        path: 'file-explorer-tree-demo',
-        loadComponent: () =>
-          import('../pages/docs/tree/demos/file-explorer-tree-demo').then(
-            (m) => m.FileExplorerTreeDemo,
-          ),
-      },
-      {
-        path: 'navigation-tree-demo',
-        loadComponent: () =>
-          import('../pages/docs/tree/demos/navigation-tree-demo').then(
-            (m) => m.NavigationTreeDemo,
-          ),
-      },
-      {
-        path: 'simple-tree-demo',
-        loadComponent: () =>
-          import('../pages/docs/tree/demos/simple-tree-demo').then(
-            (m) => m.SimpleTreeDemo,
           ),
       },
     ],

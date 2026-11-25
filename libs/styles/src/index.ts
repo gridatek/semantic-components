@@ -556,7 +556,7 @@ export interface ScFileInputStyles {
 }
 
 /** A tree's row that changes from style to style — ours (shadcn has none): its menu item's size and corners. */
-export interface ScTreeNextStyles {
+export interface ScTreeStyles {
   /** A row: an item's label. */
   label: string;
 }
@@ -860,7 +860,7 @@ export interface ScStyle {
   mediaPlayer: ScMediaPlayerStyles;
   compare: ScCompareStyles;
   scheduler: ScSchedulerStyles;
-  treeNext: ScTreeNextStyles;
+  tree: ScTreeStyles;
   sortable: ScSortableStyles;
   listbox: ScListboxStyles;
   segmentedControl: ScSegmentedControlStyles;

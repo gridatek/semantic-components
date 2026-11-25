@@ -426,11 +426,6 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/number-group/number-group-page'),
       },
       {
-        path: 'org-chart',
-        title: 'Org Chart - Semantic Components',
-        loadComponent: () => import('../pages/docs/org-chart/org-chart-page'),
-      },
-      {
         path: 'pagination',
         title: 'Pagination - Semantic Components',
         loadComponent: () => import('../pages/docs/pagination/pagination-page'),
@@ -672,9 +667,9 @@ export const componentsRoutes: Route[] = [
           import('../pages/docs/questionnaire/questionnaire-page'),
       },
       {
-        path: 'tree-next',
-        title: 'Tree Next - Semantic Components',
-        loadComponent: () => import('../pages/docs/tree-next/tree-next-page'),
+        path: 'tree',
+        title: 'Tree - Semantic Components',
+        loadComponent: () => import('../pages/docs/tree/tree-page'),
       },
       {
         path: 'tree-table',
@@ -753,11 +748,6 @@ export const componentsRoutes: Route[] = [
         title: 'Transfer List - Semantic Components',
         loadComponent: () =>
           import('../pages/docs/transfer-list/transfer-list-page'),
-      },
-      {
-        path: 'tree',
-        title: 'Tree - Semantic Components',
-        loadComponent: () => import('../pages/docs/tree/tree-page'),
       },
       { path: 'typeset', redirectTo: '/docs/guides/typeset' },
       {
