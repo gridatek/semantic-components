@@ -384,15 +384,6 @@
     "category": "Charts"
   },
   {
-    "name": "Gantt",
-    "path": "gantt",
-    "description": "A Data Table with a timeline column: bars, progress, milestones, links, markers; dragged or moved from the keyboard.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Data Display",
-    "hidden": true
-  },
-  {
     "name": "Header",
     "path": "header",
     "description": "A site's top bar, the page's banner: your brand, the Navigation Menu's links and your actions; on narrow screens a toggle and a menu that covers the page below the bar. It can stay at the top, or slide away as the page scrolls. For an app's navigation beside the page, use a Sidebar.",

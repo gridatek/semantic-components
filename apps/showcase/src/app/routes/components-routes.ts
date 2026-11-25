@@ -693,11 +693,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/sidebar/sidebar-page'),
       },
       {
-        path: 'gantt',
-        title: 'Gantt - Semantic Components',
-        loadComponent: () => import('../pages/docs/gantt/gantt-page'),
-      },
-      {
         path: 'trace',
         title: 'Trace - Semantic Components',
         loadComponent: () => import('../pages/docs/trace/trace-page'),

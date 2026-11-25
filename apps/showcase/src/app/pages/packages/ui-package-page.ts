@@ -209,11 +209,6 @@ import { ScCarousel, ScCarouselItem } from '@semantic-components/ui/carousel';`;
       needs: ['@tiptap/extension-table'],
     },
     {
-      path: 'gantt',
-      holds: 'Gantt',
-      needs: ['@tanstack/angular-table'],
-    },
-    {
       path: 'i18n',
       holds: 'Languages at run time',
       link: '/docs/getting-started/i18n',

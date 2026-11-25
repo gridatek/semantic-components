@@ -1004,7 +1004,7 @@ Mermaid and Highcharts draw Gantts among many charts and are left aside).
 None documents an accessible Gantt: no ARIA pattern exists for one, and
 none gives the bars a keyboard (Kibo's drag is mouse only).
 
-**Taken** (built 2026-10-29, `@semantic-components/ui/gantt`):
+**Taken** (built 2026-10-29, `@semantic-components/ui/gantt`; removed 2026-11-25 — the user didn't like it; this research is for a new one):
 
 - **A timeline column for the Data Table**, its own entry (the user's
   choice): the task list is the tree grid, as SVAR's grid beside the chart.
