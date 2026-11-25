@@ -21,10 +21,11 @@ const THEME_KEY = 'sc-theme';
 /**
  * The theme and the mode, while the app runs: the user's choices, kept (a
  * cookie the server reads too), else the preset's (`provideSemanticComponents({ preset: { theme, mode } })`).
- * The mode puts `dark` on the page's root; the theme, `data-theme`. On the
- * server, a script at the top of `<head>` does it again before the first
- * paint: "system" from the browser's `prefers-color-scheme`, and the user's
- * choices on a prerendered page (no request, no cookie).
+ * The mode puts `dark` on the page's root, and sets its `color-scheme`
+ * (see `applyMode`); the theme, `data-theme`. On the server, a script at
+ * the top of `<head>` does it again before the first paint: "system" from
+ * the browser's `prefers-color-scheme`, and the user's choices on a
+ * prerendered page (no request, no cookie).
  */
 @Service()
 export class ScPresetManager {
@@ -135,6 +136,23 @@ export class ScPresetManager {
     return this.darkMediaQuery?.matches ? 'dark' : 'light';
   }
 
+  /**
+   * The mode shown, on the page's root: the `dark` class (the theme's dark
+   * values), and `color-scheme` — `light` or `dark`, never both.
+   *
+   * `color-scheme` tells the browser which mode the page is in: its own
+   * parts follow it (scrollbars, native form controls, the default canvas
+   * and text colours), and so does every `light-dark()` in the page's CSS.
+   * Without it, they follow the operating system, not the mode chosen here:
+   * a site switched to light on a system in dark would show dark scrollbars
+   * and native controls.
+   *
+   * It's set inline, on `<html>`: an inline style wins over any stylesheet
+   * rule, whatever its order. A stylesheet you import can't override it —
+   * pdf.js's `pdf_viewer.css` sets `:root { color-scheme: light dark }`
+   * for the whole page (pdf.js issue 19886), which would otherwise hand
+   * these back to the system.
+   */
   private applyMode(mode: 'light' | 'dark'): void {
     const root = this.document.documentElement;
     if (mode === 'dark') {
@@ -142,6 +160,7 @@ export class ScPresetManager {
     } else {
       root.classList.remove('dark');
     }
+    root.style.colorScheme = mode;
   }
 
   private applyTheme(theme: string): void {

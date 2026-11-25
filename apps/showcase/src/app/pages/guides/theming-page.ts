@@ -89,6 +89,31 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
           part: any control of yours calls it, so a button, a switch or a menu
           with System in it all work.
         </p>
+        <p>
+          The mode also sets the page&apos;s
+          <code scTypeset>color-scheme</code>
+          — <code scTypeset>light</code> or <code scTypeset>dark</code>, inline
+          on <code scTypeset>&lt;html&gt;</code>. It tells the browser which
+          mode the page is in: what the browser draws itself follows it —
+          scrollbars, native form controls, the default colours — and so does
+          every <code scTypeset>light-dark()</code> in your CSS. Without it,
+          they follow the operating system: switched to light on a system in
+          dark, the page would show dark scrollbars and native controls. Inline,
+          no stylesheet overrides it — not even one that sets
+          <code scTypeset>:root &#123; color-scheme: light dark &#125;</code>
+          for the whole page, as pdf.js&apos;s
+          <code scTypeset>pdf_viewer.css</code> does (<a
+            href="https://github.com/mozilla/pdf.js/issues/19886"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium underline underline-offset-4"
+            >pdf.js issue 19886</a
+          >). An app without <code scTypeset>ScPresetManager</code> sets it
+          itself, the same way:
+          <code scTypeset
+            >document.documentElement.style.colorScheme = 'dark'</code
+          >.
+        </p>
         <app-doc-code [code]="modeCode" language="angular-ts" />
         <p>
           One click goes between light and dark; a menu keeps the way back to

@@ -23,6 +23,8 @@ test.describe('Theme script', () => {
     await withoutApp(page);
     await expect(page.locator('html')).toHaveClass(/\bdark\b/);
     await expect(page.locator('html')).not.toHaveAttribute('data-theme');
+    // The browser's own parts too, over pdf_viewer.css's `light dark`.
+    await expect(page.locator('html')).toHaveCSS('color-scheme', 'dark');
   });
 
   test('the system in light: light', async ({ page }) => {
@@ -38,6 +40,8 @@ test.describe('Theme script', () => {
     await page.emulateMedia({ colorScheme: 'dark' });
     await withoutApp(page);
     await expect(page.locator('html')).not.toHaveClass(/\bdark\b/);
+    // Not the system's: the scrollbars and native controls are light too.
+    await expect(page.locator('html')).toHaveCSS('color-scheme', 'light');
   });
 
   test('a choice in localStorage only (no cookie): applied', async ({

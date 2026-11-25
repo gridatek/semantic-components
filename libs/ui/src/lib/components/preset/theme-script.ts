@@ -17,8 +17,11 @@ function literal(value: string): string {
 /**
  * The script the server puts at the top of `<head>`: before the first paint,
  * it reads the user's mode and theme (the cookie, else its `localStorage`
- * copy; else the preset's) and sets `dark` and `data-theme` on the page's
- * root — "system" from `prefers-color-scheme`, which only the browser knows.
+ * copy; else the preset's) and sets `dark`, `color-scheme` and
+ * `data-theme` on the page's root — "system" from `prefers-color-scheme`,
+ * which only the browser knows. `color-scheme` as `ScPresetManager` sets
+ * it (inline, so no stylesheet overrides it): the browser's own parts —
+ * scrollbars, native controls — are in the page's mode from the first paint.
  * A page rendered on the server is then drawn in the right mode from the
  * first paint, prerendered pages and "system" included. Plain ES5, no
  * module: it runs before the app.
@@ -50,6 +53,7 @@ export function themeScript(options: ScThemeScriptOptions): string {
         window.matchMedia('(prefers-color-scheme: dark)').matches);
     if (dark) root.classList.add('dark');
     else root.classList.remove('dark');
+    root.style.colorScheme = dark ? 'dark' : 'light';
     var theme = read(${literal(options.themeKey)}) || ${literal(options.theme)};
     if (theme === 'default') root.removeAttribute('data-theme');
     else root.setAttribute('data-theme', theme);

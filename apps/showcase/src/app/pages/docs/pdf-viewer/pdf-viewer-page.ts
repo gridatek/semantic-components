@@ -64,6 +64,22 @@ import { PdfViewerUsageDemoContainer } from './demos/pdf-viewer-usage-demo-conta
           <code scTypeset>pdfjs-dist</code>&apos;s folders yourself for an
           offline or strict-CSP app.
         </p>
+        <p>
+          <code scTypeset>pdf_viewer.css</code> sets
+          <code scTypeset>:root &#123; color-scheme: light dark &#125;</code>
+          for the whole page, not only the viewer (<a
+            href="https://github.com/mozilla/pdf.js/issues/19886"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium underline underline-offset-4"
+            >pdf.js issue 19886</a
+          >): scrollbars and native controls would follow the operating
+          system&apos;s mode instead of your app&apos;s.
+          <code scTypeset>ScPresetManager</code> sets the page&apos;s
+          <code scTypeset>color-scheme</code> inline with the mode, which no
+          stylesheet overrides — nothing to do with it (the Theming guide&apos;s
+          Mode). Without it, set it yourself the same way.
+        </p>
       </section>
 
       <section class="space-y-4">

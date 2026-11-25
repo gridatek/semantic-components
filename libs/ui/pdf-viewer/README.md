@@ -22,4 +22,6 @@ import { ScPdfViewer, ScPdfViewerCanvas, ScPdfViewerContainer, ScPdfViewerConten
 
 Also import PDF.js's viewer styles in your `styles.css`: `@import 'pdfjs-dist/web/pdf_viewer.css';`
 
+That stylesheet sets `:root { color-scheme: light dark; }` for the whole page, not only the viewer ([pdf.js issue 19886](https://github.com/mozilla/pdf.js/issues/19886)): the browser's own parts — scrollbars, native form controls — would follow the operating system's mode instead of your app's. `ScPresetManager` sets the page's `color-scheme` inline on `<html>` with the mode, which no stylesheet overrides: nothing to do with it. Without it, set it yourself the same way (`document.documentElement.style.colorScheme = 'light'` or `'dark'`) — see the preset's README, "The mode tells the browser".
+
 See `src/lib/components/pdf-viewer/README.md` for every part.

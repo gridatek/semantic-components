@@ -201,6 +201,7 @@ pdf.js draws the pages and its toolbars with `pdf_viewer.css`; the canvas gives 
 
 - **The page frame** — pages 8px apart and from the edges, on the theme's background, with a small shadow (pdf.js's frame is a transparent border its application draws a shadow image in). In forced colours, pdf.js's outline stays.
 - **pdf.js's toolbars on the pages** — its editors' toolbars and colour picker, the alt-text button and tooltip, the comment buttons — take the theme's tokens (`--popover`, `--border`, `--accent`, `--primary`, `--ring`, `--radius`), as a popover. pdf.js sets their variables on its own elements in an unlayered stylesheet, so only important declarations override them; in forced colours, pdf.js's system colours stay.
+- **Light or dark** — pdf.js's other colours (selection outlines, form fields, tooltips on the pages) are written with `light-dark()`: they follow the page's `color-scheme`, which `ScPresetManager` sets with the app's mode (inline, over `pdf_viewer.css`'s global `:root { color-scheme: light dark }` — [pdf.js issue 19886](https://github.com/mozilla/pdf.js/issues/19886)).
 
 ### Presentation mode
 
