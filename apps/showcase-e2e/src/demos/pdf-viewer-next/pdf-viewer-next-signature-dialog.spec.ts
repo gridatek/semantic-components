@@ -1,0 +1,47 @@
+import { collectErrors, press } from '../../interaction';
+import { expect, test } from '../../test';
+
+test.describe('PDF Viewer Next Signature Dialog', () => {
+  test('tabs: one tab stop, arrows, linked panels', async ({ page }) => {
+    const errors = collectErrors(page);
+    await page.goto('/demos/pdf-viewer-next/pdf-viewer-next-demo');
+    await page.getByRole('button', { name: 'Signature' }).first().click();
+    await page.getByRole('button', { name: 'Add new signature' }).click();
+    const tablist = page.getByRole('tablist', { name: 'Signature type' });
+    await expect(tablist).toBeVisible();
+
+    const tabs = tablist.getByRole('tab');
+    await expect(tabs).toHaveText(['Type', 'Draw', 'Image']);
+    await expect(tabs.first()).toHaveAttribute('aria-selected', 'true');
+    await expect(tabs.nth(1)).toHaveAttribute('tabindex', '-1');
+
+    await tabs.first().focus();
+    await press(page, 'ArrowRight');
+    await expect(tabs.nth(1)).toBeFocused();
+    await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true');
+
+    const panelId = await tabs.nth(1).getAttribute('aria-controls');
+    const panel = page.locator(`[id="${panelId}"]`);
+    await expect(panel).toBeVisible();
+    await expect(panel.locator('canvas')).toBeVisible();
+    await expect(page.getByLabel('Thickness')).toBeVisible();
+    expect(errors).toEqual([]);
+  });
+
+  test('focus stays in the dialog once the popover that opened it is gone', async ({
+    page,
+  }) => {
+    const errors = collectErrors(page);
+    await page.goto('/demos/pdf-viewer-next/pdf-viewer-next-demo');
+    await page.getByRole('button', { name: 'Signature' }).first().click();
+    const add = page.getByRole('button', { name: 'Add new signature' });
+    await add.click();
+    const dialog = page.getByRole('dialog', { name: 'Add a signature' });
+    await expect(dialog).toBeVisible();
+
+    // The popover closed (its focus trap gone): focus isn't taken back to its trigger.
+    await expect(add).toHaveCount(0);
+    await expect(dialog.locator(':focus')).toHaveCount(1);
+    expect(errors).toEqual([]);
+  });
+});

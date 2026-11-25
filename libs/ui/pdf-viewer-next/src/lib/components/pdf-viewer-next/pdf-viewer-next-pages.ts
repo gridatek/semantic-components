@@ -1,0 +1,73 @@
+import { Directive, computed, inject, input, signal } from '@angular/core';
+import { cn } from 'cn';
+import { SC_PDF_VIEWER_NEXT } from './pdf-viewer-next';
+
+/**
+ * A list of the pages (`viewer.pageNumbers()`), e.g. thumbnails, organised as
+ * pdf.js's: put a `scPdfViewerNextPageItem` per page in it. Drag items to reorder
+ * pages (the selected ones together); Delete, Ctrl+C / X / V delete, copy,
+ * cut and paste the selected pages while focus is in the list. Give it an
+ * `aria-label`.
+ */
+@Directive({
+  selector: '[scPdfViewerNextPages]',
+  host: {
+    'data-slot': 'pdf-viewer-pages',
+    '[class]': 'class()',
+    '(keydown)': 'onKeydown($event)',
+  },
+})
+export class ScPdfViewerNextPages {
+  private readonly pdfViewer = inject(SC_PDF_VIEWER_NEXT);
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  private readonly class = computed(() => cn(this.classInput()));
+
+  /** The pages being dragged. */
+  readonly dragged = signal<readonly number[]>([]);
+  /** Where they'd land: next to a page, before or after it. */
+  readonly dropTarget = signal<{ page: number; after: boolean } | null>(null);
+
+  /** Starts dragging a page — the selection when it's selected. */
+  startDrag(page: number): void {
+    const selection = this.pdfViewer.pageSelection();
+    this.dragged.set(selection.includes(page) ? selection : [page]);
+  }
+
+  drop(): void {
+    const target = this.dropTarget();
+    const pages = this.dragged();
+    this.endDrag();
+    if (!target || !pages.length) return;
+    const moved = this.pdfViewer.movePages(
+      [...pages],
+      target.after ? target.page + 1 : target.page,
+    );
+    this.pdfViewer.selectedPages.set(new Set(moved));
+  }
+
+  endDrag(): void {
+    this.dragged.set([]);
+    this.dropTarget.set(null);
+  }
+
+  private onKeydown(event: KeyboardEvent): void {
+    const viewer = this.pdfViewer;
+    const selection = viewer.pageSelection();
+    const mod = event.ctrlKey || event.metaKey;
+    const key = event.key.toLowerCase();
+    if (event.key === 'Delete' && selection.length) {
+      viewer.deletePages(selection);
+    } else if (mod && key === 'c' && selection.length) {
+      viewer.copyPages(selection);
+    } else if (mod && key === 'x' && selection.length) {
+      viewer.cutPages(selection);
+    } else if (mod && key === 'v' && viewer.pageClipboard()) {
+      viewer.pastePages();
+    } else {
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+  }
+}

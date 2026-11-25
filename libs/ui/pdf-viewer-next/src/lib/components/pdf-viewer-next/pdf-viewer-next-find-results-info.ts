@@ -1,0 +1,30 @@
+import { Directive, computed, inject, input } from '@angular/core';
+import { cn } from 'cn';
+import { SC_PDF_VIEWER_NEXT } from './pdf-viewer-next';
+
+/**
+ * Where the find results are announced (`role="status"`). Write its text
+ * from `viewer.findState()`, `findCurrentMatchIndex()` and
+ * `findTotalMatches()` — e.g. "3 of 12", "Phrase not found".
+ * `data-state` is the find state (`not-found` is styled destructive).
+ */
+@Directive({
+  selector: '[scPdfViewerNextFindResultsInfo]',
+  host: {
+    'data-slot': 'pdf-viewer-find-results-info',
+    role: 'status',
+    '[attr.data-state]': 'pdfViewer.findState()',
+    '[class]': 'class()',
+  },
+})
+export class ScPdfViewerNextFindResultsInfo {
+  private readonly pdfViewer = inject(SC_PDF_VIEWER_NEXT);
+  readonly classInput = input<string>('', { alias: 'class' });
+
+  private readonly class = computed(() =>
+    cn(
+      'text-muted-foreground text-sm tabular-nums whitespace-nowrap data-[state=not-found]:text-destructive',
+      this.classInput(),
+    ),
+  );
+}

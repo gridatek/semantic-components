@@ -667,6 +667,15 @@
     "hidden": true
   },
   {
+    "name": "PDF Viewer Next",
+    "path": "pdf-viewer-next",
+    "description": "pdf.js's viewer as parts: its PDFViewer draws the pages (text, links, forms, find); the toolbars, sidebar, find bar and dialogs are yours.",
+    "status": "Experimental",
+    "library": "ui",
+    "category": "Media",
+    "hidden": true
+  },
+  {
     "name": "Phone Input",
     "path": "phone-input",
     "description": "An international phone number: a searchable country picker, the number formatted as you type, E.164 out; your own flags; a form field.",

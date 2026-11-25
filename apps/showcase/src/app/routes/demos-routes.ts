@@ -4973,6 +4973,46 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/pdf-viewer-next',
+    children: [
+      {
+        path: 'pdf-viewer-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer-next/demos/pdf-viewer-next-demo').then(
+            (m) => m.PdfViewerNextDemo,
+          ),
+      },
+      {
+        path: 'pdf-viewer-next-form-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer-next/demos/pdf-viewer-next-form-demo').then(
+            (m) => m.PdfViewerNextFormDemo,
+          ),
+      },
+      {
+        path: 'pdf-viewer-next-open-parameters-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer-next/demos/pdf-viewer-next-open-parameters-demo').then(
+            (m) => m.PdfViewerNextOpenParametersDemo,
+          ),
+      },
+      {
+        path: 'pdf-viewer-next-presentation-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer-next/demos/pdf-viewer-next-presentation-demo').then(
+            (m) => m.PdfViewerNextPresentationDemo,
+          ),
+      },
+      {
+        path: 'pdf-viewer-next-reading-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer-next/demos/pdf-viewer-next-reading-demo').then(
+            (m) => m.PdfViewerNextReadingDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/phone-input',
     children: [
       {
