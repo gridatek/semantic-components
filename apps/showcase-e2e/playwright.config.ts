@@ -62,7 +62,8 @@ export default defineConfig({
   //   demos, pages — behaviour and each docs page, in nova, desktop Chrome;
   //   styles-nova … styles-rhea — src/styles in that style (its cookie,
   //     from metadata.style in test.ts): classes, axe;
-  //   mobile — on a phone: src/mobile (every route fits the screen), and the
+  //   mobile — on a phone: src/mobile (every page and demo at 360px: the
+  //     screen, a demo's width in its frame, its overlays), and the
   //     @mobile tests of demos and pages.
   // ALL_BROWSERS (nightly) adds demos and pages in Firefox and WebKit, and an
   // iPhone.

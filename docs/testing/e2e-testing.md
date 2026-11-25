@@ -26,12 +26,12 @@ npx playwright test -c apps/showcase-e2e/playwright.config.ts --project=styles-n
 
 **Playwright is the only test tool** (the user, 2026-11-12): Vitest and its unit tests are gone (see _Still to do_). `apps/showcase-e2e` stays one Nx project — `nx affected` decides when it runs — and its `src` has a folder per kind of test, each a **Playwright project** in `playwright.config.ts` (not a separate Nx project):
 
-| Folder    | Project(s)                    | What it checks                                                                                                                       |
-| --------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `demos/`  | `demos`                       | behaviour: keys, clicks, state, output — in nova, desktop Chrome                                                                     |
-| `pages/`  | `pages`                       | each docs page: its sections, API reference, axe; the console (`console-clean.spec.ts`), the table of contents, SSR hydration        |
-| `styles/` | `styles-nova` … `styles-rhea` | in that style: each component's classes (`<name>.spec.ts`), every visible docs page's axe, light and dark (`pages.spec.ts`)          |
-| `mobile/` | `mobile`                      | on a phone (Pixel 7): every page and every demo fits the screen (`reflow.spec.ts`); and the `@mobile` tests of `demos/` and `pages/` |
+| Folder    | Project(s)                    | What it checks                                                                                                                                                                         |
+| --------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `demos/`  | `demos`                       | behaviour: keys, clicks, state, output — in nova, desktop Chrome                                                                                                                       |
+| `pages/`  | `pages`                       | each docs page: its sections, API reference, axe; the console (`console-clean.spec.ts`), the table of contents, SSR hydration                                                          |
+| `styles/` | `styles-nova` … `styles-rhea` | in that style: each component's classes (`<name>.spec.ts`), every visible docs page's axe, light and dark (`pages.spec.ts`)                                                            |
+| `mobile/` | `mobile`                      | on a phone: every page and every demo at 360 px — the screen, a demo's width in its frame, its overlays (`reflow.spec.ts`); and the `@mobile` tests of `demos/` and `pages/` (Pixel 7) |
 
 With `ALL_BROWSERS` (the nightly) there are also `demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit` and the iPhone `mobile-webkit`.
 
@@ -74,12 +74,15 @@ A group is a `matrix.include` entry in `ci.yml`: its name and its `--project` fl
 
 ### Every route on a phone
 
-`mobile/reflow.spec.ts` opens every page and every demo route (read from `app-routes.ts` and `routes/*-routes.ts`; not the redirects, not the parents of children only) on a Pixel 7 and checks that nothing is wider than the screen — WCAG 1.4.10 Reflow, the check teams run at phone widths: the page never scrolls sideways, nothing is cut off at its edge. A new route is tested without a line to add.
+`mobile/reflow.spec.ts` opens every page and every demo route (read from `app-routes.ts` and `routes/*-routes.ts`; not the redirects, not the parents of children only) on a phone **360 px wide** — Android's most common width; the Pixel 7's 412 hid what narrower phones cut off (an Honor 400 at its default display size is about 370). A new route is tested without a line to add.
 
-- **Each element is measured, not the page's width.** The docs' `main` clips what passes its edge (`overflow-x-clip`): `scrollWidth` would say all is well while a table or a demo is cut off. An element fails when it passes the screen's edge and no ancestor of its own scrolls or clips it sideways — the page (`html`, `body`, the docs' `main`) doesn't count.
-- **What is wide on purpose passes**: a box that scrolls (a table, a code block) or a component that clips (a carousel's other slides, a marquee).
-- **The failure names the culprits**: the outermost elements past the edge (tag, `data-slot`, classes, left…right of the width), ten at most.
-- **Measured at rest**, as in `axe.ts`: network idle (not forever), fonts in, animations finished, then asked again for up to 5 s (a masonry placing its items, a chart taking its width).
+- **Pages: nothing wider than the screen** — WCAG 1.4.10 Reflow: the page never scrolls sideways, nothing is cut off at its edge.
+- **Demos: in the width the docs give them.** On a docs page an example sits in a frame inside the page's margin: 24 px + the frame's padding (`p-10`, 40 px) a side, so at 360 px a demo has 232 px. On its route the test sets the shell's gutter (`app-root`'s padding) to those 64 px — the demo as wide as in its frame, the screen still 360 px for its overlays. A demo wider than that is cut by its frame on a phone (a `w-80` trigger, 320 px). A full-page demo (`fullPage: true`) has the whole screen, as on its route.
+- **Demos: their overlays on the screen.** Each trigger in the demo (`aria-haspopup`, `role="combobox"`; the first 8) is tapped; what opens (CDK's panes, an open `dialog`, a `:popover-open`) must be whole on the screen, both ways; then Escape (the page loaded again if it stays open). A combobox that opens only as you type opens nothing here.
+- **Each element is measured, not the page's width.** The docs' `main` clips what passes its edge (`overflow-x-clip`): `scrollWidth` would say all is well while a table or a demo is cut off. An element fails when it passes the edge and no ancestor of its own scrolls or clips it — the page (`html`, `body`, the docs' `main`) doesn't count; a demo's `position: fixed` boxes (the screen's, not the demo's) are left out of its width.
+- **What is wide on purpose passes**: a box that scrolls (a table, a code block, a menu's list) or a part that clips (a carousel's other slides, a marquee, a `clip-path`).
+- **The failure names the culprits**: the outermost elements past the edge (tag, `data-slot`, classes, where they are and the edges they pass), and for an overlay the trigger's name.
+- **Measured at rest**, as in `axe.ts`: network idle (not forever), fonts in, animations finished, then asked again for a few seconds (a masonry placing its items, a chart taking its width, an overlay finding its place).
 
 ### Limits, and the way forward
 
@@ -97,7 +100,7 @@ This layout is a step, not the end: the suite will grow (visual tests, more comp
 ### Still to do
 
 - **`mobile/`**: the folder exists (`reflow.spec.ts`); move the 87 `@mobile` tests out of the demos and page specs into it (55 of them sit inside `describe` blocks, with their `beforeEach`); then the `mobile` project is a folder like the others, not a tag.
-- **More phone checks**: touch targets (axe's `target-size`, WCAG 2.2 2.5.8 — off in axe by default) on every route; a 320 px width (WCAG's reflow width; the Pixel 7 is 412).
+- **More phone checks**: touch targets (axe's `target-size`, WCAG 2.2 2.5.8 — off in axe by default) on every route; a 320 px width (WCAG's reflow width).
 - **Visual tests**: `@visual`, in `styles/` — see above.
 - **The unit tests to port**: Vitest went on 2026-11-12 (`vitest`, `jsdom`, the showcase's `test` target and `tsconfig.spec.json`, CI's _Unit tests_ step) with its 64 tests, not yet in Playwright: `checkbox-group-form`, `field-errors`, `field-label`, `form-control-invalid`, `radio-form`, `text-control-form-state` (forms: a field's errors, its label, invalid states), `toaster`, `qr-code`, `intersection-observer`, `query-param-state` and `query-param-state-demo` — `apps/showcase/src/app/<name>.spec.ts` in git history (before the commit that removes them). Port what still matters as behaviour tests in `demos/`.
 - **Measure**: the first CI runs give each group's time — the base for the next split.

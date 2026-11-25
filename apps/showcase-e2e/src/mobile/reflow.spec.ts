@@ -1,24 +1,46 @@
 import { workspaceRoot } from '@nx/devkit';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { expect, test } from '../test';
+import { type Page, expect, test } from '../test';
 
 /**
- * Every page and every demo on a phone: nothing wider than the screen. The
- * page never scrolls sideways and nothing is cut off at its edge (WCAG 1.4.10
- * Reflow); what is wide scrolls in a box of its own (a table, a code block)
- * or is clipped on purpose by its component (a carousel's other slides, a
- * marquee). The docs' `main` clips what passes its edge (`overflow-x-clip`),
- * so the page's width alone would hide it: each element is measured.
+ * Every page and every demo on a phone 360px wide — Android's most common
+ * width (the Pixel 7's 412 hid what a narrower phone cuts off):
+ *
+ * - nothing wider than the screen: the page never scrolls sideways and
+ *   nothing is cut off at its edge (WCAG 1.4.10 Reflow);
+ * - a demo in the width the docs give it: their frame's padding (`p-10`) and
+ *   margin take 64px a side — a demo wider than that is cut by its frame.
+ *   On its route the shell's gutter is set to those 64px, the screen still
+ *   360px wide (a full-page demo has the whole screen, as on its route);
+ * - every overlay a demo opens (`aria-haspopup`, a combobox: a popover, a
+ *   menu, a select, a dialog, a sheet) on the screen, whole.
+ *
+ * What is wide on purpose passes: a box that scrolls (a table, a code block)
+ * or a part that clips (a carousel's other slides, a marquee, a `clip-path`).
+ * The docs' `main` clips what passes its edge (`overflow-x-clip`), so the
+ * page's width alone would hide it: each element is measured.
  */
 
+const WIDTH = 360;
+/** The docs' page margin (24px) and an example frame's padding (40px). */
+const DOCS_GUTTER = 64;
+/** The most overlays opened in a demo: the first ones. */
+const MAX_TRIGGERS = 8;
+
+interface ScRoute {
+  readonly path: string;
+  /** A layout's demo: the whole screen, no gutter. */
+  readonly fullPage: boolean;
+}
+
 /** The routes that show a page: no redirect, no parent of children only. */
-function pagesOf(file: string): string[] {
+function routesOf(file: string): ScRoute[] {
   const lines = readFileSync(
     join(workspaceRoot, 'apps/showcase/src/app', file),
     'utf8',
   ).split('\n');
-  const routes: string[] = [];
+  const routes: ScRoute[] = [];
   let parent = '';
   lines.forEach((line, i) => {
     const match = line.match(/^( +)path: '([^']*)'/);
@@ -34,124 +56,315 @@ function pagesOf(file: string): string[] {
     const top = indent.length === 4;
     if (top) parent = path;
     if (own.some((l) => /redirectTo|children:/.test(l))) return;
-    routes.push(
-      '/' + (top ? [path] : [parent, path]).filter(Boolean).join('/'),
-    );
+    routes.push({
+      path: '/' + (top ? [path] : [parent, path]).filter(Boolean).join('/'),
+      fullPage: own.some((l) => /fullPage: true/.test(l)),
+    });
   });
   return routes;
 }
 
-const routes = [
-  ...new Set([
-    ...pagesOf('app-routes.ts'),
-    ...[
-      'overview',
-      'packages',
-      'guides',
-      'components',
-      'charts',
-      'utilities',
-      'recipes',
-      'ai-elements',
-      'demos',
-    ].flatMap((file) => pagesOf(`routes/${file}-routes.ts`)),
-  ]),
+const pages = [
+  ...new Map(
+    [
+      'app-routes.ts',
+      ...[
+        'overview',
+        'packages',
+        'guides',
+        'components',
+        'charts',
+        'utilities',
+        'recipes',
+        'ai-elements',
+      ].map((name) => `routes/${name}-routes.ts`),
+    ]
+      .flatMap(routesOf)
+      .map((route) => [route.path, route]),
+  ).values(),
 ];
+const demos = routesOf('routes/demos-routes.ts');
 
 test.describe('On a phone', { tag: '@mobile' }, () => {
-  for (const route of routes)
-    test(`${route}: nothing wider than the screen`, async ({ page }) => {
-      await page.goto(route);
-      // The route's page in: the shell's outlet followed by it.
-      await expect(page.locator('app-root > router-outlet + *')).toBeAttached({
-        timeout: 15_000,
-      });
-      // Its code and images loaded (not forever: some never idle), its fonts
-      // in, and what slides in arrived — measured at rest, as in axe.ts.
-      await page
-        .waitForLoadState('networkidle', { timeout: 10_000 })
-        .catch(() => undefined);
-      await page.evaluate(async () => {
-        await document.fonts.ready;
-        const deadline = performance.now() + 3000;
-        const running = () =>
-          document
-            .getAnimations()
-            .filter(
-              (a) =>
-                a.playState === 'running' &&
-                a.effect?.getComputedTiming().iterations !== Infinity,
-            );
-        for (
-          let left = running();
-          left.length && performance.now() < deadline;
-          left = running()
-        )
-          await Promise.race([
-            Promise.allSettled(left.map((a) => a.finished)),
-            new Promise((r) => setTimeout(r, deadline - performance.now())),
-          ]);
-        running().forEach((a) => a.finish());
-      });
-      // Asked again until it holds: a layout measured once it has settled
-      // (a masonry placing its items, a chart taking its width).
+  test.use({ viewport: { width: WIDTH, height: 780 } });
+
+  for (const { path } of pages)
+    test(`${path}: nothing wider than the screen`, async ({ page }) => {
+      await open(page, path);
       await expect
-        .poll(() => page.evaluate(overflowing), { timeout: 5_000 })
+        .poll(() => page.evaluate(measure, { demo: false }), { timeout: 5_000 })
         .toEqual([]);
     });
+
+  for (const { path, fullPage } of demos) {
+    const gutter = fullPage ? null : DOCS_GUTTER;
+
+    test(`${path}: in its width, its overlays on the screen`, async ({
+      page,
+    }) => {
+      test.setTimeout(120_000);
+      await open(page, path, gutter);
+      await expect
+        .poll(() => page.evaluate(measure, { demo: !fullPage }), {
+          timeout: 5_000,
+        })
+        .toEqual([]);
+      expect(await overlayProblems(page, path, gutter)).toEqual([]);
+    });
+  }
 });
 
 /**
- * The elements past the screen's edge that nothing of their own holds: no
- * ancestor scrolls or clips them sideways, but the page (`html`, `body`, the
- * docs' `main`). Only the outermost of each: its children follow it.
+ * Each overlay the demo opens, in turn — opened, measured at rest, closed
+ * (the page loaded again if it stays open) — and what each shows past the
+ * screen's edges.
  */
-function overflowing(): string[] {
+async function overlayProblems(
+  page: Page,
+  path: string,
+  gutter: number | null,
+): Promise<string[]> {
+  const triggers = page.locator(
+    'app-root > router-outlet + * :is([aria-haspopup]:not([aria-haspopup="false"]), [role="combobox"])',
+  );
+  const count = Math.min(await triggers.count(), MAX_TRIGGERS);
+  const problems: string[] = [];
+  for (let i = 0; i < count; i++) {
+    const trigger = triggers.nth(i);
+    const usable =
+      (await trigger.isVisible()) &&
+      (await trigger.isEnabled()) &&
+      (await trigger.getAttribute('aria-disabled')) !== 'true';
+    if (!usable) continue;
+    const name = await trigger.evaluate((element) =>
+      (element.getAttribute('aria-label') ?? element.textContent ?? '')
+        .replace(/s+/g, ' ')
+        .trim()
+        .slice(0, 40),
+    );
+    await trigger.scrollIntoViewIfNeeded();
+    await trigger.tap();
+    // Some open as you type (a combobox's input): nothing to measure.
+    const opened = await page
+      .waitForFunction(overlayCount, undefined, { timeout: 2_000 })
+      .then(() => true)
+      .catch(() => false);
+    if (opened) {
+      await page.evaluate(settle);
+      const found = await until(page, measureOverlays, 3_000);
+      problems.push(...found.map((p) => `"${name}" opens ${p}`));
+    }
+    // Closed, the page as it was for the next one.
+    await page.keyboard.press('Escape');
+    const closed = await page
+      .waitForFunction(`!(${overlayCount})()`, undefined, { timeout: 2_000 })
+      .then(() => true)
+      .catch(() => false);
+    if (!closed) await open(page, path, gutter);
+  }
+  return problems;
+}
+
+/** `measure` asked again until it finds nothing, or `timeout` ms: what it finds last. */
+async function until(
+  page: Page,
+  measure: () => string[],
+  timeout: number,
+): Promise<string[]> {
+  const deadline = Date.now() + timeout;
+  for (;;) {
+    const found = await page.evaluate(measure);
+    if (!found.length || Date.now() > deadline) return found;
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+}
+
+/**
+ * The route's page, at rest: in, its code and images loaded (not forever:
+ * some never idle), its fonts in, what slides in arrived — as in axe.ts. A
+ * demo given the docs' gutter: its width as in its frame.
+ */
+async function open(page: Page, path: string, gutter: number | null = null) {
+  await page.goto(path);
+  await expect(page.locator('app-root > router-outlet + *')).toBeAttached({
+    timeout: 15_000,
+  });
+  if (gutter !== null)
+    await page.addStyleTag({
+      content: `app-root { padding-inline: ${gutter}px !important; }`,
+    });
+  await page
+    .waitForLoadState('networkidle', { timeout: 10_000 })
+    .catch(() => undefined);
+  await page.evaluate(settle);
+}
+
+/** Fonts in, and what animates (not forever) at its end. */
+async function settle(): Promise<void> {
+  await document.fonts.ready;
+  const deadline = performance.now() + 3000;
+  const running = () =>
+    document
+      .getAnimations()
+      .filter(
+        (a) =>
+          a.playState === 'running' &&
+          a.effect?.getComputedTiming().iterations !== Infinity,
+      );
+  for (
+    let left = running();
+    left.length && performance.now() < deadline;
+    left = running()
+  )
+    await Promise.race([
+      Promise.allSettled(left.map((a) => a.finished)),
+      new Promise((r) => setTimeout(r, deadline - performance.now())),
+    ]);
+  running().forEach((a) => a.finish());
+}
+
+/** The overlays open: CDK's panes with a size, open dialogs and popovers. */
+function overlayCount(): number {
+  return [
+    ...document.querySelectorAll(
+      '.cdk-overlay-pane, dialog[open], [popover]:popover-open',
+    ),
+  ].filter((e) => {
+    const r = e.getBoundingClientRect();
+    return r.width > 0 && r.height > 0;
+  }).length;
+}
+
+/**
+ * The elements past the screen's edge that nothing of their own holds — no
+ * ancestor scrolls or clips them sideways, but the page (`html`, `body`, the
+ * docs' `main`) — and, for a demo, past the width it is given: the shell's
+ * gutter (its padding). Only the outermost of each: its children follow it.
+ */
+function measure({ demo }: { demo: boolean }): string[] {
   const width = document.documentElement.clientWidth;
+  const root = document.querySelector('app-root');
+  const content = root?.querySelector(':scope > router-outlet + *');
   const page = new Set<Element>([
     document.documentElement,
     document.body,
     ...document.querySelectorAll('main[data-slot="sidebar-inset"]'),
   ]);
-  /**
-   * Held by an ancestor of its own that scrolls or clips sideways — or
-   * clipped by a `clip-path`, its own or an ancestor's (a treemap's boxes
-   * before they slide in): the box measured is not what shows.
-   */
-  const held = (element: Element) => {
+  /** Held by its own `clip-path`, or by an ancestor that scrolls or clips. */
+  const held = (element: Element, top: Set<Element>) => {
     if (getComputedStyle(element).clipPath !== 'none') return true;
-    for (
-      let a = element.parentElement;
-      a && !page.has(a);
-      a = a.parentElement
-    ) {
+    for (let a = element.parentElement; a && !top.has(a); a = a.parentElement) {
       const style = getComputedStyle(a);
       if (style.overflowX !== 'visible' || style.clipPath !== 'none')
         return true;
     }
     return false;
   };
-  const past = (element: Element) => {
+  /** In a fixed box: the screen's, not the page's (a toast, a bar). */
+  const fixed = (element: Element) => {
+    for (let a: Element | null = element; a; a = a.parentElement)
+      if (getComputedStyle(a).position === 'fixed') return true;
+    return false;
+  };
+  const shown = (element: Element) => {
     const style = getComputedStyle(element);
     if (style.visibility === 'hidden' || style.display === 'contents')
       return false;
-    const rect = element.getBoundingClientRect();
-    if (!rect.width || !rect.height) return false;
-    return rect.right > width + 1 || rect.left < -1;
+    const r = element.getBoundingClientRect();
+    return r.width > 0 && r.height > 0;
   };
-  const found = [...document.body.querySelectorAll('*')].filter(
-    (element) => past(element) && !held(element),
+  const label = (element: Element, [from, to]: [number, number]) => {
+    const r = element.getBoundingClientRect();
+    const slot = element.getAttribute('data-slot');
+    const classes = (element.getAttribute('class') ?? '').slice(0, 80);
+    return (
+      `<${element.tagName.toLowerCase()}${slot ? ` data-slot="${slot}"` : ''}` +
+      ` class="${classes}"> ${Math.round(r.left)}…${Math.round(r.right)}` +
+      ` past ${Math.round(from)}…${Math.round(to)}`
+    );
+  };
+  /** The outermost elements of `scope` past [from, to]. */
+  const past = (
+    scope: Element[],
+    top: Set<Element>,
+    [from, to]: [number, number],
+  ) => {
+    const found = scope.filter((element) => {
+      if (!shown(element) || held(element, top)) return false;
+      const r = element.getBoundingClientRect();
+      return r.right > to + 1 || r.left < from - 1;
+    });
+    return found
+      .filter((element) => !found.includes(element.parentElement as Element))
+      .slice(0, 10)
+      .map((element) => label(element, [from, to]));
+  };
+
+  const screen = past([...document.body.querySelectorAll('*')], page, [
+    0,
+    width,
+  ]);
+  if (!demo || !root || !content) return screen;
+  // The demo's width: the shell's box, less its gutter.
+  const box = root.getBoundingClientRect();
+  const style = getComputedStyle(root);
+  const area: [number, number] = [
+    box.left + parseFloat(style.paddingLeft),
+    box.right - parseFloat(style.paddingRight),
+  ];
+  const inDemo = [content, ...content.querySelectorAll('*')].filter(
+    (element) => !fixed(element),
   );
-  return found
-    .filter((element) => !found.includes(element.parentElement as Element))
-    .slice(0, 10)
-    .map((element) => {
-      const rect = element.getBoundingClientRect();
-      const slot = element.getAttribute('data-slot');
-      const classes = (element.getAttribute('class') ?? '').slice(0, 80);
+  return [
+    ...screen,
+    ...past(inDemo, new Set([root]), area).map((p) => `the demo's width: ${p}`),
+  ];
+}
+
+/** What the open overlays show past the screen's edges, held by nothing of theirs. */
+function measureOverlays(): string[] {
+  const [width, height] = [
+    document.documentElement.clientWidth,
+    window.innerHeight,
+  ];
+  const found: string[] = [];
+  for (const overlay of document.querySelectorAll(
+    '.cdk-overlay-pane, dialog[open], [popover]:popover-open',
+  )) {
+    const elements = [overlay, ...overlay.querySelectorAll('*')].filter((e) => {
+      const style = getComputedStyle(e);
+      if (style.visibility === 'hidden' || style.display === 'contents')
+        return false;
+      const r = e.getBoundingClientRect();
+      if (!r.width || !r.height) return false;
+      // Held by its own clip, or a box of the overlay's that scrolls or clips.
+      if (style.clipPath !== 'none') return false;
+      if (e !== overlay)
+        for (let a = e.parentElement; a; a = a.parentElement) {
+          const s = getComputedStyle(a);
+          if (s.overflowX !== 'visible' || s.overflowY !== 'visible')
+            return false;
+          if (a === overlay) break;
+        }
       return (
-        `<${element.tagName.toLowerCase()}${slot ? ` data-slot="${slot}"` : ''}` +
-        ` class="${classes}"> ${Math.round(rect.left)}…${Math.round(rect.right)} of ${width}`
+        r.left < -1 ||
+        r.right > width + 1 ||
+        r.top < -1 ||
+        r.bottom > height + 1
       );
     });
+    const outer = elements.filter(
+      (e) => !elements.includes(e.parentElement as Element),
+    );
+    for (const e of outer.slice(0, 5)) {
+      const r = e.getBoundingClientRect();
+      const slot = e.getAttribute('data-slot');
+      found.push(
+        `<${e.tagName.toLowerCase()}${slot ? ` data-slot="${slot}"` : ''}>` +
+          ` ${Math.round(r.left)}…${Math.round(r.right)} × ${Math.round(r.top)}…${Math.round(r.bottom)}` +
+          ` past the screen (${width} × ${height})`,
+      );
+    }
+  }
+  return found;
 }

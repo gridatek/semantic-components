@@ -61,10 +61,14 @@ import {
       #dp="scDatePicker"
       mode="multiple"
       [(value)]="days"
-      class="w-fit"
+      class="w-full max-w-80"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-        <button scDatePickerTrigger #trigger="scDatePickerTrigger" class="w-80">
+        <button
+          scDatePickerTrigger
+          #trigger="scDatePickerTrigger"
+          class="w-full"
+        >
           <svg siCalendarIcon></svg>
           <span>{{ dp.text() || 'Pick days' }}</span>
         </button>
