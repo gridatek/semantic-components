@@ -2,7 +2,7 @@
 
 A composable PDF viewer built on [PDF.js](https://mozilla.github.io/pdf.js/) (`pdfjs-dist`, a peer dependency): navigation, zoom, rotation, find, text selection, links, forms, annotations (highlight, text, drawing, images, signatures, comments), saving, printing, presentation mode and page organisation.
 
-**You write the markup; the library adds behaviour.** Every element, text, icon and accessible name is in your template — usually `@semantic-components/ui` components (`scButton`, `scInput`, `scToggleGroup`, `scDialog`…). The viewer's parts are directives on them: they add behaviour, ARIA wiring, state (`data-*` attributes) and default classes you can adjust with `class`. The library ships no text at all, so everything is yours to word and translate. Only the pages themselves — what pdf.js draws — are rendered by the library.
+**pdf.js's viewer, your interface.** The pages are pdf.js's own `PDFViewer`, wired as pdf.js's viewer application wires it (`web/app.js`): its rendering, text, link, form, structure and annotation-editor layers, its find controller, link service, scripting sandbox and page map. Everything around them — toolbars, sidebar, find bar, dialogs, the undo bar — is your template: usually `@semantic-components/ui` components (`scButton`, `scInput`, `scToggleGroup`, `scDialog`…), with the viewer's parts as directives on them adding behaviour, ARIA wiring, state (`data-*` attributes) and default classes you can adjust with `class`. The library ships no text: yours is yours to word and translate. pdf.js's own words on the pages (its editors' toolbar buttons) are its English, or the app's language when the page links pdf.js's locale files (`<link rel="resource" type="application/l10n" href="…/locale/locale.json">`).
 
 ## Usage
 
@@ -41,7 +41,7 @@ A composable PDF viewer built on [PDF.js](https://mozilla.github.io/pdf.js/) (`p
 </div>
 ```
 
-The demo (`apps/showcase/.../pdf-viewer-demo.ts`) writes out everything: find bar, sidebar (pages with organisation, outline, attachments, layers, comments), annotation tools and their options, the annotation toolbar, comment markers, signatures and all dialogs.
+The demo (`apps/showcase/.../pdf-viewer-demo.ts`) writes out everything: find bar, sidebar (pages with organisation, outline, attachments, layers, comments), annotation tools and their options, signatures and all dialogs.
 
 Parts look up the viewer by dependency injection: put them inside `scPdfViewer`. That includes `ng-template`s you render elsewhere (e.g. a recursive outline): declare them inside it.
 
@@ -59,53 +59,58 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 
 `ScPdfViewer` (`[scPdfViewer]`, `exportAs: 'scPdfViewer'`) holds the document and all state; your template reads it (`viewer.currentPage()`, `viewer.findState()`…) to write its text.
 
-- **Inputs**: `src`, `fileName` (download / print name, without `.pdf`), `initialPage`, `initialZoom`, `assetsUrl` (where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and colour profiles are — unpkg by default; host `pdfjs-dist`'s folders yourself for offline or strict-CSP apps), `workerSrc`, `sandboxSrc`, `wasmSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`, `enableAutoLinking` (URLs and email addresses in the text become links; on by default), `enablePermissions` (follow the document's permissions — no copying, printing, adding annotations or filling in forms when it forbids them; off by default, as in pdf.js), `pageColors` (`{ foreground, background }` to draw the pages with; unset, they follow the system's high-contrast mode), `caretBrowsing` (the browser's caret browsing, F7, is on — the page can't tell, so say when your app knows).
-- **Two-way**: `sidebarOpen`, `sidebarView`, `cursorTool`, `scrollMode`, `spreadMode`, `savedSignatures`.
+- **Inputs**: `src`, `fileName` (download / print name, without `.pdf`), `initialPage`, `initialZoom`, `assetsUrl` (where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and colour profiles are — unpkg by default; host `pdfjs-dist`'s folders yourself for offline or strict-CSP apps), `workerSrc`, `sandboxSrc`, `wasmSrc`, `keyboardShortcuts`, `autoPrint`, `enableScripting`, `enableAutoLinking` (URLs and email addresses in the text become links; on by default), `enablePermissions` (follow the document's permissions — no copying, printing, adding annotations or filling in forms when it forbids them; off by default, as in pdf.js), `rememberView` (a document reopens where it was left — page, zoom, scroll, rotation — as pdf.js's view history; on by default).
+- **Two-way**: `sidebarOpen`, `sidebarView`, `cursorTool`, `scrollMode`, `spreadMode`, `savedSignatures`, `pageColors` (page colours by name — `sepia` draws the pages in your theme's `--sc-pdf-viewer-sepia-foreground` on `--sc-pdf-viewer-sepia-background`; `''`, the document's own, or the system's in high-contrast mode), `caretBrowsing` (the browser's caret browsing, F7, is on — the page can't tell, so say when your app knows).
 - **Outputs**: `loaded`, `pageChange`, `zoomChange`, `errorEvent` (`ScPdfLoadError`), `fileOpened`.
-- **State for your text**: `currentPage()`, `totalPages()`, `pageLabels()` / `pageLabel(n)`, `zoom()`, `isLoading()`, `loadProgress()`, `error()` (`{ kind: 'invalid' | 'missing' | 'network' | 'password' | 'unknown' }`), `findState()`, `findCurrentMatchIndex()`, `findTotalMatches()`, `undoable()` (`{ kind, count }`), `printProgress()`, `outline()`, `attachments()`, `layers()`, `comments()`, `savedSignatures()`, `pageSelection()`, `canGoBack()` / `canGoForward()`, `canCopy()` / `canPrint()` / `canEdit()` / `canFillForms()`…
+- **State for your text**: `currentPage()`, `totalPages()`, `pageLabels()` / `pageLabel(n)`, `zoom()`, `isLoading()`, `loadProgress()`, `error()` (`{ kind: 'invalid' | 'missing' | 'network' | 'password' | 'unknown' }`), `findState()`, `findCurrentMatchIndex()`, `findTotalMatches()`, `undoable()` (`{ kind, count, annotation? }`), `editorState()` (pdf.js's: `hasSomethingToUndo`, `hasSelectedEditor`…), `currentView()` (the open parameters of where the pages are, for a link to it), `pendingComment()`, `toolSettings()` (the tool whose settings to show: `'highlight'`, `'freetext'`, `'ink'` or null), `insertFailed()` (the name of a file that couldn't be inserted), `printProgress()`, `outline()`, `attachments()`, `layers()`, `comments()`, `savedSignatures()`, `pageSelection()`, `canGoBack()` / `canGoForward()`, `canCopy()` / `canPrint()` / `canEdit()` / `canFillForms()`…
 
 ## Parts
 
 ### Layout
 
-| Part                   | Selector                 | Does                                                                                                        |
-| ---------------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| `ScPdfViewerContainer` | `[scPdfViewerContainer]` | The frame; the fullscreen element.                                                                          |
-| `ScPdfViewerToolbar`   | `[scPdfViewerToolbar]`   | A toolbar row (`role="toolbar"`) — name it.                                                                 |
-| `ScPdfViewerNav`       | `[scPdfViewerNav]`       | Groups page controls (`role="group"`) — name it.                                                            |
-| `ScPdfViewerZoom`      | `[scPdfViewerZoom]`      | Groups zoom controls (`role="group"`) — name it.                                                            |
-| `ScPdfViewerSpacer`    | `[scPdfViewerSpacer]`    | Pushes what follows to the end.                                                                             |
-| `ScPdfViewerContent`   | `[scPdfViewerContent]`   | The page area. Opens a file dropped on it (`data-dragging`; `[dropFiles]="false"` turns it off).            |
-| `ScPdfViewerCanvas`    | `div[scPdfViewerCanvas]` | The pages, with text, link, form and annotation layers. `pageName`: a function naming each page (a region). |
+| Part                   | Selector                 | Does                                                                                                                                                                                           |
+| ---------------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScPdfViewerContainer` | `[scPdfViewerContainer]` | The frame; the fullscreen element.                                                                                                                                                             |
+| `ScPdfViewerToolbar`   | `[scPdfViewerToolbar]`   | A toolbar row (`role="toolbar"`) — name it.                                                                                                                                                    |
+| `ScPdfViewerNav`       | `[scPdfViewerNav]`       | Groups page controls (`role="group"`) — name it.                                                                                                                                               |
+| `ScPdfViewerZoom`      | `[scPdfViewerZoom]`      | Groups zoom controls (`role="group"`) — name it.                                                                                                                                               |
+| `ScPdfViewerSpacer`    | `[scPdfViewerSpacer]`    | Pushes what follows to the end.                                                                                                                                                                |
+| `ScPdfViewerContent`   | `[scPdfViewerContent]`   | The page area. Opens a file dropped on it (`data-dragging`; `[dropFiles]="false"` turns it off).                                                                                               |
+| `ScPdfViewerCanvas`    | `div[scPdfViewerCanvas]` | pdf.js's viewer: the pages, with their text, link, form, structure and annotation-editor layers. `pageName`: a function naming each page, which makes the pages landmarks (see Accessibility). |
 
 ### Buttons
 
 Each styles its button (the style's button, `ghost` by default): pick another look with `variant` and `size`, as on `scButton`. Write its icon and text, and name the icon-only ones.
 
-| Part                                    | Does                                     | Disabled when                                       |
-| --------------------------------------- | ---------------------------------------- | --------------------------------------------------- |
-| `scPdfViewerPrevPage` / `NextPage`      | Previous / next page                     | on the first / last page                            |
-| `scPdfViewerBack` / `Forward`           | Back to before the last jump, or again   | with nowhere to go                                  |
-| `scPdfViewerZoomIn` / `ZoomOut`         | Zoom a step (×1.1, as pdf.js)            | at 2500% / 10%                                      |
-| `scPdfViewerRotateLeft` / `RotateRight` | Rotate the pages                         | —                                                   |
-| `scPdfViewerPrint`                      | Print (with the `print` dialog)          | until the document loads, or if it forbids printing |
-| `scPdfViewerDownload`                   | Download, with annotations and form data | until the document loads                            |
-| `scPdfViewerFullscreen`                 | Toggle fullscreen (`aria-pressed`)       | —                                                   |
-| `scPdfViewerFindToggle`                 | Open / close the find bar                | —                                                   |
-| `scPdfViewerFindPrevious` / `FindNext`  | Previous / next match                    | while there are none                                |
-| `scPdfViewerRetry`                      | Load again after an error                | —                                                   |
-| `scPdfViewerUndo` / `UndoDismiss`       | Undo / close what the undo bar offers    | —                                                   |
+| Part                                    | Does                                                  | Disabled when                                       |
+| --------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |
+| `scPdfViewerPrevPage` / `NextPage`      | Previous / next page                                  | on the first / last page                            |
+| `scPdfViewerBack` / `Forward`           | Back to before the last jump, or again                | with nowhere to go                                  |
+| `scPdfViewerZoomIn` / `ZoomOut`         | Zoom a step (×1.1, as pdf.js)                         | at 2500% / 10%                                      |
+| `scPdfViewerRotateLeft` / `RotateRight` | Rotate the pages                                      | —                                                   |
+| `scPdfViewerPrint`                      | Print (with the `print` dialog)                       | until the document loads, or if it forbids printing |
+| `scPdfViewerDownload`                   | Download, with annotations and form data              | until the document loads                            |
+| `scPdfViewerFullscreen`                 | Toggle fullscreen (`aria-pressed`)                    | —                                                   |
+| `scPdfViewerFindToggle`                 | Open / close the find bar                             | —                                                   |
+| `scPdfViewerSidebarToggle`              | Open / close the sidebar (`aria-pressed`)             | —                                                   |
+| `scPdfViewerPresentation`               | Presentation mode (`aria-pressed`)                    | until the document loads                            |
+| `scPdfViewerOpenFile`                   | Ask for a PDF and open it                             | —                                                   |
+| `scPdfViewerAddImage`                   | Ask for an image and place it (pdf.js's image editor) | while the document forbids changes                  |
+| `scPdfViewerFindPrevious` / `FindNext`  | Previous / next match                                 | while there are none                                |
+| `scPdfViewerRetry`                      | Load again after an error                             | —                                                   |
+| `scPdfViewerUndo` / `UndoDismiss`       | Undo / close what the undo bar offers                 | —                                                   |
 
 ### Fields and settings
 
-| Part                         | Use on                                     | Does                                                                                                                                                                                                                                                      |
-| ---------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScPdfViewerPageInput`       | `input[scInput]`                           | The current page — the label when the document has page labels; accepts a label or a number. Write the count next to it.                                                                                                                                  |
-| `ScPdfViewerZoomSelect`      | `select` (`#zoom="scPdfViewerZoomSelect"`) | Binds the zoom. Write the options: `auto`, `page-actual`, `page-fit`, `page-width`, `zoom.scales()`, and `zoom.customZoom()` while it's set.                                                                                                              |
-| `ScPdfViewerFindbar`         | any                                        | The find bar row.                                                                                                                                                                                                                                         |
-| `ScPdfViewerFindInput`       | `input[scInput]`                           | Searches as you type; Enter / Shift+Enter: next / previous.                                                                                                                                                                                               |
-| `ScPdfViewerFindResultsInfo` | any                                        | Where results are announced (`role="status"`, `data-state`); write "3 of 12" etc. from the viewer.                                                                                                                                                        |
-| `ScPdfViewerSetting`         | `scToggleGroup` / `scSlider` / `scSwitch`  | `scPdfViewerSetting="…"` binds a setting both ways: `cursorTool`, `scrollMode`, `spreadMode`, `highlightColor`, `highlightThickness`, `highlightShowAll`, `freetextColor`, `freetextSize`, `inkColor`, `inkThickness`, `inkOpacity`. You write the items. |
+| Part                         | Use on                                                              | Does                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ---------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScPdfViewerPageInput`       | `input[scInput]`                                                    | The current page — the label when the document has page labels; accepts a label or a number. Write the count next to it.                                                                                                                                                                                                                                                                                                                                                                        |
+| `ScPdfViewerZoomSelect`      | `select` (`#zoom="scPdfViewerZoomSelect"`)                          | Binds the zoom. Write the options: `auto`, `page-actual`, `page-fit`, `page-width`, `zoom.scales()`, and `zoom.customZoom()` while it's set.                                                                                                                                                                                                                                                                                                                                                    |
+| `ScPdfViewerFindbar`         | any                                                                 | The find bar row.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `ScPdfViewerFindInput`       | `input[scInput]`                                                    | Searches as you type; Enter / Shift+Enter: next / previous.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `ScPdfViewerFindResultsInfo` | any                                                                 | Where results are announced (`role="status"`, `data-state`); write "3 of 12" etc. from the viewer.                                                                                                                                                                                                                                                                                                                                                                                              |
+| `ScPdfViewerSetting`         | `scToggleGroup` / `scTabs` / `scSlider` / `scSwitch` / `scCheckbox` | `scPdfViewerSetting="…"` binds a setting both ways: `editorMode` (the tools — nothing pressed is `none`; disabled while the document forbids changes), `sidebarView` (tabs), `cursorTool`, `scrollMode`, `spreadMode`, `pageColors`, `highlightColor`, `highlightThickness`, `highlightShowAll`, `freetextColor`, `freetextSize`, `inkColor`, `inkThickness`, `inkOpacity`, `findHighlightAll`, `findMatchCase`, `findEntireWord`, `findMatchDiacritics`, `caretBrowsing`. You write the items. |
+| `ScPdfViewerMenu`            | `scMenu`                                                            | Runs commands: each item's `value` — `open`, `download`, `print`, `presentation`, `fullscreen`, `first-page`, `last-page`, `rotate-right`, `rotate-left`, `properties`. You write the items.                                                                                                                                                                                                                                                                                                    |
 
 ### States
 
@@ -121,30 +126,29 @@ Each styles its button (the style's button, `ghost` by default): pick another lo
 
 Write the `scDialogProvider`, `scDialog` and content; `scPdfViewerDialog` on the provider opens it when the viewer needs it and tells the viewer when it's closed (`scDialogClose`, Escape, a click outside).
 
-| `scPdfViewerDialog=` | Closing it…       | Parts inside                                                                                                                                                                                                                                                                                                                                 |
-| -------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `password`           | gives up          | `form[scPdfViewerPasswordForm]` (`password()`, `incorrect()`), `input[scPdfViewerPasswordInput]`                                                                                                                                                                                                                                             |
-| `print`              | cancels the print | `[scProgress][scPdfViewerPrintProgress]`; `viewer.printProgress()` for text                                                                                                                                                                                                                                                                  |
-| `altText`            | discards          | `form[scPdfViewerAltTextForm]` (`text()`, `decorative()`), `textarea[scPdfViewerAltTextInput]`, `input[scPdfViewerAltTextKind="describe" \| "decorative"]`                                                                                                                                                                                   |
-| `signature`          | discards          | `[scPdfViewerSignatureForm]` (`mode()` for tabs, `strokes()`, `image()`, `thickness`, `saveForReuse`), `input[scPdfViewerSignatureName]`, `canvas[scPdfViewerSignaturePad]`, `input[type=file][scPdfViewerSignatureImage]`, `input[scPdfViewerSignatureDescription]`, `button[scPdfViewerSignatureClear]`, `button[scPdfViewerSignatureAdd]` |
-| `properties`         | closes            | none: write `viewer.documentProperties()` (file name and size, title, author, subject, keywords, dates as `Temporal.Instant`, creator, producer, PDF version, language, page count, the current page's size in points with its `paper` — `'a4'`, `'letter'`… — and `orientation`, `linearized`); open it with `viewer.openProperties()`      |
+| `scPdfViewerDialog=`                                      | Closing it…                                | Parts inside                                                                                                                                                                                                                                                                                                                                                                                              |
+| --------------------------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `password`                                                | gives up                                   | `form[scPdfViewerPasswordForm]` (`password()`, `incorrect()`), `input[scPdfViewerPasswordInput]`                                                                                                                                                                                                                                                                                                          |
+| `print`                                                   | cancels the print                          | `[scProgress][scPdfViewerPrintProgress]`; `viewer.printProgress()` for text                                                                                                                                                                                                                                                                                                                               |
+| `altText` (pdf.js's alt-text button on an image opens it) | discards                                   | `form[scPdfViewerAltTextForm]` (`text()`, `decorative()`), `textarea[scPdfViewerAltTextInput]`, `input[scPdfViewerAltTextKind="describe" \| "decorative"]`                                                                                                                                                                                                                                                |
+| `signature` (a new signature editor waits for it)         | discards, and pdf.js's waiting editor goes | `[scPdfViewerSignatureForm]` (`strokes()`, `image()`, `thickness`, `saveForReuse`), `[scTabs][scPdfViewerSignatureMode]` (tabs `type`, `draw`, `image`), `input[scPdfViewerSignatureName]`, `canvas[scPdfViewerSignaturePad]`, `button[scPdfViewerSignatureImage]` (asks for the image), `input[scPdfViewerSignatureDescription]`, `button[scPdfViewerSignatureClear]`, `button[scPdfViewerSignatureAdd]` |
+| `properties`                                              | closes                                     | none: write `viewer.documentProperties()` (file name and size, title, author, subject, keywords, dates as `Temporal.Instant`, creator, producer, PDF version, language, page count, the current page's size in points with its `paper` — `'a4'`, `'letter'`… — and `orientation`, `linearized`); open it with `viewer.openProperties()`                                                                   |
 
-Saved signatures: write your list of `viewer.savedSignatures()` with `button[scPdfViewerSignaturePlace]`, `button[scPdfViewerSignatureRemove]` and `button[scPdfViewerSignatureNew]` (opens the dialog).
+Saved signatures: write your list of `viewer.savedSignatures()` with `button[scPdfViewerSignaturePlace]` (places it: pdf.js's signature editor turns the image into lines), `button[scPdfViewerSignatureRemove]` and `button[scPdfViewerSignatureNew]` (a new signature editor, which opens the dialog).
 
 ### Annotations
 
-Set the tool with `viewer.setEditorMode('highlight' | 'freetext' | 'ink' | 'comment' | 'none')`; write the tools (e.g. a `scToggleGroup`) and their options (`scPdfViewerSetting`). The canvas draws the annotations with your theme; what you place on the pages is yours, as templates inside `div[scPdfViewerCanvas]`:
+pdf.js's annotation editors: `viewer.setEditorMode('highlight' | 'freetext' | 'ink' | 'stamp' | 'signature' | 'comment' | 'none')` (again: off), or your tools — a `scToggleGroup` with `scPdfViewerSetting="editorMode"` — and their options (`scPdfViewerSetting`, kept in step with pdf.js both ways: selecting an annotation shows its own; `viewer.toolSettings()` says which tool's to show). pdf.js draws, selects, moves and resizes them, with its toolbar on each one (colour, alt text, comment, delete); in `none`, a double-click opens one for editing, as in pdf.js. Deleting offers your undo bar (`undoable()`: `annotation-deleted` with its type, `annotations-deleted`, `comment-deleted`).
 
-| Template                                    | Context                                                        | Use in it                                                                                                                       |
-| ------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `ng-template[scPdfViewerAnnotationToolbar]` | `$implicit`: the selected annotation                           | `button[scPdfViewerAnnotationDelete]`, `button[scPdfViewerAnnotationAltText]`, `button[scPdfViewerAnnotationColor]` (+ `color`) |
-| `ng-template[scPdfViewerCommentMarker]`     | `$implicit` (null while placing), `index`, `active`, `pending` | `button[scPdfViewerCommentShow]`                                                                                                |
+**Colours** are the theme's CSS variables, as the editor's highlight colours: `var(--sc-pdf-viewer-highlight-1)` to `-5` (pdf.js's yellow, green, blue, pink, red — its own colour picker on the page shows them too) and `var(--sc-pdf-viewer-ink-1)` to `-4` (text and drawings) — the values of your swatches. Define them in your `styles.css` (unset, pdf.js's colours and black, red, blue, green); there's no dark variant: they're written into the PDF. pdf.js gets them as real colours, and a selected annotation's colour shows as its swatch.
 
-`input[type=file][scPdfViewerAddImage]` places an image on the current page. Select an annotation by clicking it; drag to move, drag a corner of an image to resize, double-click text to edit it, Delete to delete, Escape to deselect. Annotations stay editable and are written into the PDF on download; opening another document clears them.
+`button[scPdfViewerAddImage]` places an image on the current page (pdf.js's image editor). Annotations are kept in pdf.js's annotation storage with the form data: written into the PDF on download, printed, carried by page organisation; opening another document clears them.
 
 ### Comments
 
-Write your list of `viewer.comments()`: `[scPdfViewerComment]` per comment (`data-active`, scrolled into view when picked), `button[scPdfViewerCommentShow]`, `button[scPdfViewerCommentRemove]`, `button[scPdfViewerCommentAdd]` (the comment tool, `aria-pressed`), and while `viewer.pendingComment()` is set a `form[scPdfViewerCommentForm]` with `textarea[scPdfViewerCommentInput]` and `button[scPdfViewerCommentCancel]`. `viewer.updateComment(id, text)` edits one.
+As in pdf.js, a comment belongs to an annotation: the comment button of pdf.js's toolbar on it asks for one — `viewer.pendingComment()` (`{ id, pageNumber, text }`) is set; write a `form[scPdfViewerCommentForm]` with `textarea[scPdfViewerCommentInput]` and `button[scPdfViewerCommentCancel]` while it is. pdf.js then shows a comment button on the annotation.
+
+Write your list of `viewer.comments()` (`{ id, pageNumber, text, date, color }` — the document's own and those written here): `[scPdfViewerComment]` per comment (`data-active`, scrolled into view when picked), `button[scPdfViewerCommentShow]` (shows its annotation), `button[scPdfViewerCommentEdit]` (edits it in your comment form), `button[scPdfViewerCommentRemove]` (undoable; the document's own stay). The `comment` editor mode is pdf.js's comment mode. As there, the comments show in the sidebar (`sidebarView` `comments`) in comment mode, while one is written, and when one is picked.
 
 ### Sidebar views
 
@@ -164,7 +168,9 @@ Write your list of `viewer.comments()`: `[scPdfViewerComment]` per comment (`dat
 
 ### Page organisation
 
-Each change rebuilds the document with pdf.js's `extractPages` — form data comes along, annotations and comments follow their pages — and can be undone from the undo bar. Buttons act on `viewer.pageSelection()`: `scPdfViewerMovePagesEarlier`, `MovePagesLater`, `CopyPages`, `CutPages`, `PastePages` (after the current page), `DeletePages`, `ExportPages` (download just those), `InsertPages` (merge another PDF; `insertFailed` when it isn't one). The methods behind them are on the viewer: `movePages`, `deletePages`, `copyPages`, `cutPages`, `pastePages`, `insertFile`, `exportPages`.
+As pdf.js's: its page map (`pagesMapper`) moves, deletes, copies and pastes pages, and its viewer moves their views — with their annotations, comments and form data — without rebuilding the file. Every change can be undone from the undo bar. Downloading writes the pages in their new order. Inserting another PDF rebuilds the document (from what it is now, annotations and order included).
+
+Buttons act on `viewer.pageSelection()`: `scPdfViewerMovePagesEarlier`, `MovePagesLater`, `CopyPages`, `CutPages`, `PastePages` (after the current page; pages keep their labels), `DeletePages`, `ExportPages` (download just those), `InsertPages` (merge another PDF; `insertFailed` when it isn't one). The methods behind them are on the viewer: `movePages`, `deletePages`, `copyPages`, `cutPages`, `pastePages`, `insertFile`, `exportPages`.
 
 ## Behaviour
 
@@ -172,12 +178,13 @@ Each change rebuilds the document with pdf.js's `extractPages` — form data com
 
 - **The document's preferences** — its page mode opens the sidebar (`sidebarView`); its page layout sets the scroll and spread modes (unless you changed them); its open action goes to a destination, or prints.
 - **Open parameters** in the fragment of `src`: `doc.pdf#page=3`, `#zoom=150` (also `page-width`, `page-fit`, `auto`, `page-actual`, or `150,left,top`), `#nameddest=intro` or `#intro`, `#search=word`, `#pagemode=thumbs|bookmarks|attachments|layers|none`. `viewer.applyHash('page=3')` applies them later.
+- **Where it was left** — a document opened again goes back to its page, zoom, scroll and rotation (`rememberView`), unless open parameters or its open action say otherwise.
 - **Back / Forward** — jumps (links, bookmarks, thumbnails, the page input, destinations) are remembered, with where the pages were scrolled to: `viewer.goBack()` / `goForward()`, or `scPdfViewerBack` / `Forward`. The viewer keeps this history itself, not the browser's (your app owns that).
 - **Auto-print** — a document that asks to print on opening is printed (`[autoPrint]="false"` turns it off). Printing renders the pages in a hidden frame: no pop-up.
 
 ### Forms
 
-- **AcroForm** fields render as inputs over the page (pdf.js's annotation layer, styled by `pdfjs-dist/web/pdf_viewer.css` — import it in your global styles), named from the document. Their values are kept, saved and printed.
+- **AcroForm** fields render as inputs over the page (pdf.js's annotation layer, styled by `pdfjs-dist/web/pdf_viewer.css` — import it in your global styles), named from the document (pdf.js gives their name to the wrapping section only; the viewer gives it to the field). Their values are kept, saved and printed.
 - **XFA** forms render as HTML.
 - **Scripts** — calculations, formatting, validation, actions — run in pdf.js's sandbox (`[enableScripting]="false"` turns them off).
 - **Tagged PDFs** — the page's structure (headings, paragraphs, lists, tables, figures with their alt text, links) is exposed to assistive technology, as in pdf.js's viewer; artifacts (running headers, page numbers) are hidden from it.
@@ -185,8 +192,15 @@ Each change rebuilds the document with pdf.js's `extractPages` — form data com
 
 ### Saving and printing
 
-- **Download** saves the document with the annotations, comments and form data written into it (Highlight, FreeText, Ink and Stamp annotations; comments as a note with a popup). Without changes it downloads the original file. `viewer.saveDocument()` gives the bytes; `viewer.hasChanges()` tells whether there's anything to save.
+- **Download** saves the document as pdf.js does, with the annotations, comments and form data written into it and the pages in their order. Without changes it downloads the original file. `viewer.saveDocument()` gives the bytes; `viewer.hasChanges()` tells whether there's anything to save.
 - **Print** prints the saved file, so annotations and filled-in fields are on paper too.
+
+### Look
+
+pdf.js draws the pages and its toolbars with `pdf_viewer.css`; the canvas gives them the library's look:
+
+- **The page frame** — pages 8px apart and from the edges, on the theme's background, with a small shadow (pdf.js's frame is a transparent border its application draws a shadow image in). In forced colours, pdf.js's outline stays.
+- **pdf.js's toolbars on the pages** — its editors' toolbars and colour picker, the alt-text button and tooltip, the comment buttons — take the theme's tokens (`--popover`, `--border`, `--accent`, `--primary`, `--ring`, `--radius`), as a popover. pdf.js sets their variables on its own elements in an unlayered stylesheet, so only important declarations override them; in forced colours, pdf.js's system colours stay.
 
 ### Presentation mode
 
@@ -198,13 +212,11 @@ pdf.js's shortcuts work while focus is in the viewer (`[keyboardShortcuts]="fals
 
 ## Performance
 
-- The document shows as soon as its first page is read: pages are laid out at the first page's size and corrected when drawn.
-- Only pages near the viewport are drawn; the others are released and redrawn on return, so memory stays flat on long documents. Thumbnails render when they scroll near view, one at a time.
-- Canvas pixels line up with the screen's (the page's size is rounded so the ratio is exact), so text stays crisp. Canvases are capped at 16.7 megapixels; past that (high zoom on a dense screen) the page is drawn lower and a detail canvas draws the visible part sharp, again as you scroll. Pages redraw when the window moves to a screen with another pixel density.
-- After 30 s without drawing, pdf.js's caches (fonts, images) are freed.
-- Find extracts each page's text once per document, in parallel batches.
+pdf.js's viewer's: only pages near the viewport are drawn (its rendering queue), the others released; a detail canvas draws the visible part sharp at high zoom on dense screens; pages redraw at the screen's density. Thumbnails render when they scroll near view, one at a time, and follow their pages through page organisation. After 30 s without drawing, pdf.js's caches (fonts, images) are freed.
 
 ## Accessibility
+
+- **Pages are landmarks only when you name them.** pdf.js's viewer makes every page a region landmark named "Page N"; the library takes that off unless you give `pageName` on the canvas (`(page, label) => 'Report, page ' + label`). Why: on a page with two viewers, or in a document whose page labels repeat its numbers, pdf.js's names repeat — screen readers can't tell those landmarks apart, and axe rejects them (`landmark-unique`) — and a long document floods the list of landmarks a screen reader user moves through. Name the pages when your page has one viewer, or with something that tells the viewers apart (the document's title).
 
 - Parts add the roles and states (`toolbar`, `group`, `status`, `alert`, `separator`, `aria-pressed`, `aria-current`, `aria-expanded`, `aria-invalid`…); you give the names. Icon-only buttons, toolbars, groups, the zoom select, the resizer and the signature pad need an `aria-label`.
 - Live regions (find results, the undo bar, loading) stay in place, so what you write in them is announced.
@@ -214,4 +226,4 @@ pdf.js's shortcuts work while focus is in the viewer (`[keyboardShortcuts]="fals
 
 ## Find
 
-As in pdf.js: words hyphenated at a line end are found whole, phrases match across line breaks, ligatures and compatibility characters (`ﬁ`, `½`) and curly quotes match their plain forms, line breaks between Chinese, Japanese or Korean characters are ignored, and spaces around punctuation are optional. Match case, whole words and accents are options (`findMatchCase`, `findEntireWord`, `findMatchDiacritics`).
+pdf.js's find controller: words hyphenated at a line end are found whole, phrases match across line breaks, ligatures and compatibility characters (`ﬁ`, `½`) and curly quotes match their plain forms, line breaks between Chinese, Japanese or Korean characters are ignored, and spaces around punctuation are optional. Match case, whole words and accents are options (`findMatchCase`, `findEntireWord`, `findMatchDiacritics`).

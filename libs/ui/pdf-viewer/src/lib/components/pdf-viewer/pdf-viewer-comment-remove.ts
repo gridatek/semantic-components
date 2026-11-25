@@ -5,7 +5,8 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfComment } from './pdf-viewer-types';
 
 /**
- * Deletes a comment. Use and name it.
+ * Deletes a comment written in the viewer (the document's own stay),
+ * undoable from the undo bar. Use and name it.
  */
 @Directive({
   selector: 'button[scPdfViewerCommentRemove]',

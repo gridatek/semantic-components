@@ -37,7 +37,7 @@ test.describe('PDF Viewer reading', () => {
   }) => {
     const errors = collectErrors(page);
     await openPdf(page, 'tagged.pdf', taggedPdf());
-    const tree = page.locator('canvas[data-page="1"] .structTree');
+    const tree = page.locator('.page[data-page-number="1"] canvas .structTree');
 
     // The heading owns its text in the text layer.
     const heading = tree.locator('[role="heading"][aria-level="1"]');
@@ -77,9 +77,9 @@ test.describe('PDF Viewer reading', () => {
     ).toBeEnabled();
 
     await openPdf(page, 'locked.pdf', lockedPdf());
-    await expect(page.locator('div[data-page="1"] .textLayer')).toContainText(
-      'A locked document',
-    );
+    await expect(
+      page.locator('.page[data-page-number="1"] .textLayer'),
+    ).toContainText('A locked document');
     await expect(print).toBeDisabled();
     await expect(
       tools.getByRole('button', { name: 'Highlight' }),
@@ -88,7 +88,7 @@ test.describe('PDF Viewer reading', () => {
     // Copying the text puts nothing on the clipboard.
     const copied = await page.evaluate(() => {
       const span = document.querySelector(
-        'div[data-page="1"] .textLayer span[role="presentation"]',
+        '.page[data-page-number="1"] .textLayer span[role="presentation"]',
       ) as HTMLElement;
       document.getSelection()?.selectAllChildren(span);
       const clipboardData = new DataTransfer();
@@ -139,7 +139,10 @@ test.describe('PDF Viewer reading', () => {
     test('high zoom: the visible part is drawn sharp', async ({ page }) => {
       const errors = collectErrors(page);
       await openPdf(page, 'find.pdf', findPdf());
-      const detail = page.locator('canvas[data-detail-page="1"]');
+      // pdf.js's detail canvas: the second one in the page's canvas wrapper.
+      const DETAIL =
+        '.page[data-page-number="1"] .canvasWrapper canvas + canvas';
+      const detail = page.locator(DETAIL);
       await expect(detail).toBeHidden();
 
       // 400%: too big a canvas at twice the density.
@@ -157,8 +160,10 @@ test.describe('PDF Viewer reading', () => {
               ) / 10
             : 0;
         }, selector);
-      await expect.poll(() => density('canvas[data-detail-page="1"]')).toBe(2);
-      expect(await density('canvas[data-page="1"]')).toBeLessThan(2);
+      await expect.poll(() => density(DETAIL)).toBe(2);
+      expect(
+        await density('.page[data-page-number="1"] .canvasWrapper canvas'),
+      ).toBeLessThan(2);
       expect(errors).toEqual([]);
     });
   });
@@ -191,7 +196,7 @@ test.describe('PDF Viewer reading', () => {
       .poll(() =>
         page.evaluate(() => {
           const canvas = document.querySelector<HTMLCanvasElement>(
-            'canvas[data-page="1"]',
+            '.page[data-page-number="1"] canvas',
           );
           const pixel = canvas?.getContext('2d')?.getImageData(2, 2, 1, 1).data;
           return pixel ? Array.from(pixel.slice(0, 3)) : null;

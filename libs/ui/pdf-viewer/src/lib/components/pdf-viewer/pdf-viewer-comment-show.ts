@@ -5,7 +5,7 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfComment } from './pdf-viewer-types';
 
 /**
- * Selects a comment and shows its page.
+ * Selects a comment and shows its annotation on the page.
  */
 @Directive({
   selector: 'button[scPdfViewerCommentShow]',

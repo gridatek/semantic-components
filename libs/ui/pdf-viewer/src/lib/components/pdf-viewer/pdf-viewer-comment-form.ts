@@ -3,10 +3,11 @@ import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
- * Writes the comment just placed on a page (`viewer.pendingComment()`):
- * submitting posts it (`#form="scPdfViewerCommentForm"`, `form.text()`).
- * Show it while a comment is pending; put a `scPdfViewerCommentInput` and a
- * `scPdfViewerCommentCancel` button in it.
+ * Writes an annotation's comment (`viewer.pendingComment()`, asked by the
+ * comment button of pdf.js's toolbar on the annotation), starting from its
+ * text: submitting posts it (`#form="scPdfViewerCommentForm"`,
+ * `form.text()`). Show it while a comment is pending; put a
+ * `scPdfViewerCommentInput` and a `scPdfViewerCommentCancel` button in it.
  */
 @Directive({
   selector: 'form[scPdfViewerCommentForm]',
@@ -23,7 +24,7 @@ export class ScPdfViewerCommentForm {
 
   private readonly class = computed(() => cn(this.classInput()));
 
-  readonly text = signal('');
+  readonly text = signal(this.pdfViewer.pendingComment()?.text ?? '');
 
   private submit(event: Event): void {
     event.preventDefault();

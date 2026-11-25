@@ -1,5 +1,9 @@
 import { Directive, computed, inject, input } from '@angular/core';
-import { type ScButtonVariants, injectStyle } from '@semantic-components/ui';
+import {
+  type ScButtonVariants,
+  ScPopoverProvider,
+  injectStyle,
+} from '@semantic-components/ui';
 import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 import type { ScPdfSignatureData } from './pdf-viewer-types';
@@ -14,13 +18,15 @@ import type { ScPdfSignatureData } from './pdf-viewer-types';
     type: 'button',
     '[class]': 'class()',
     '(click)':
-      'pdfViewer.placeSignature(signature().dataUrl, signature().description)',
+      'pdfViewer.placeSignature(signature().dataUrl, signature().description); popover?.open.set(false)',
   },
 })
 export class ScPdfViewerSignaturePlace {
   private readonly buttonStyles = injectStyle().button;
 
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
+  /** The popover of your list of signatures, which closes. */
+  private readonly popover = inject(ScPopoverProvider, { optional: true });
   readonly signature = input.required<ScPdfSignatureData>({
     alias: 'scPdfViewerSignaturePlace',
   });

@@ -18,7 +18,9 @@ import type { ScPdfLayer } from './pdf-viewer-types';
 export class ScPdfViewerLayer {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
 
-  readonly layer = input.required<ScPdfLayer>({ alias: 'scPdfViewerLayer' });
+  readonly layer = input.required<ScPdfLayer>({
+    alias: 'scPdfViewerLayer',
+  });
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() => cn(this.classInput()));

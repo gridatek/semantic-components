@@ -42,6 +42,7 @@ import {
   ScPdfViewerContent,
   ScPdfViewerLoading,
   ScPdfViewerPageInput,
+  ScPdfViewerPresentation,
   ScPdfViewerSetting,
   ScPdfViewerSpacer,
   ScPdfViewerToolbar,
@@ -64,6 +65,7 @@ import { cn } from 'cn';
     ScPdfViewerContainer,
     ScPdfViewerToolbar,
     ScPdfViewerPageInput,
+    ScPdfViewerPresentation,
     ScPdfViewerSpacer,
     ScPdfViewerSetting,
     ScPdfViewerContent,
@@ -168,12 +170,7 @@ import { cn } from 'cn';
             </ng-template>
           </div>
           <div scPdfViewerSpacer></div>
-          <button
-            scButton
-            size="sm"
-            [disabled]="!viewer.pdfDocument()"
-            (click)="viewer.togglePresentation()"
-          >
+          <button scPdfViewerPresentation variant="default" size="sm">
             <svg siPresentationIcon></svg>
             Present
           </button>

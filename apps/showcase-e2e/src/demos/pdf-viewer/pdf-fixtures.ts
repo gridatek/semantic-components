@@ -254,6 +254,6 @@ export async function openPdf(
   });
   // Its text is drawn.
   await expect(
-    page.locator('div[data-page="1"] .textLayer span').first(),
+    page.locator('.page[data-page-number="1"] .textLayer span').first(),
   ).toBeAttached();
 }

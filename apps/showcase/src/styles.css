@@ -130,7 +130,7 @@
   --sc-editor-highlight-5: oklch(0.92 0.07 20);
   --sc-editor-search-match: oklch(0.945 0.12 100 / 60%);
   --sc-editor-search-current: oklch(0.85 0.14 65);
-  /* The PDF viewer's colours (scPdfViewerNextSetting values): highlights
+  /* The PDF viewer's colours (scPdfViewerSetting values): highlights
      (pdf.js's yellow, green, blue, pink, red) and text and drawings — written
      into the PDF, the same in dark mode — and the reading modes' page colours
      (pageColors="sepia" | "dark"). */

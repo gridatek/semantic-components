@@ -12,8 +12,8 @@ import type { ScPdfComment } from './pdf-viewer-types';
 
 /**
  * A comment in your list of `viewer.comments()`. Marked `data-active` when
- * it's picked — here (`scPdfViewerCommentShow`) or by its marker on the page
- * — and scrolled into view then.
+ * it's picked — here (`scPdfViewerCommentShow`) or by its button on the
+ * page — and scrolled into view then.
  */
 @Directive({
   selector: '[scPdfViewerComment]',

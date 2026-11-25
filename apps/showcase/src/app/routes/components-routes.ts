@@ -442,12 +442,6 @@ export const componentsRoutes: Route[] = [
         loadComponent: () => import('../pages/docs/pdf-viewer/pdf-viewer-page'),
       },
       {
-        path: 'pdf-viewer-next',
-        title: 'PDF Viewer Next - Semantic Components',
-        loadComponent: () =>
-          import('../pages/docs/pdf-viewer-next/pdf-viewer-next-page'),
-      },
-      {
         path: 'phone-input',
         title: 'Phone Input - Semantic Components',
         loadComponent: () =>

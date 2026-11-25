@@ -1,34 +1,49 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { DOCUMENT, Directive, computed, inject, input } from '@angular/core';
+import { type ScButtonVariants, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { ScPdfViewerSignatureForm } from './pdf-viewer-signature-form';
 
 /**
- * Picks the image of a signature in a `scPdfViewerSignatureForm`
- * (`form.image()`). Use on an `input type="file"` — hide it and open it from
- * your own button (`#file`, `file.click()`), and preview `form.image()`.
+ * Asks for the image of a signature in a `scPdfViewerSignatureForm`
+ * (`form.image()` — preview it). Write its text.
  */
 @Directive({
-  selector: 'input[type="file"][scPdfViewerSignatureImage]',
+  selector: 'button[scPdfViewerSignatureImage]',
   host: {
+    type: 'button',
     'data-slot': 'pdf-viewer-signature-image',
-    accept: 'image/*',
     '[class]': 'class()',
-    '(change)': 'pick($event)',
+    '(click)': 'choose()',
   },
 })
 export class ScPdfViewerSignatureImage {
+  private readonly buttonStyles = injectStyle().button;
+
   private readonly form = inject(ScPdfViewerSignatureForm);
+  private readonly document = inject(DOCUMENT);
+
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('outline');
+  readonly size = input<ScButtonVariants['size']>('default');
 
-  private readonly class = computed(() => cn(this.classInput()));
+  private readonly class = computed(() =>
+    cn(
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
 
-  private pick(event: Event): void {
-    const field = event.target as HTMLInputElement;
-    const file = field.files?.[0];
-    field.value = '';
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => this.form.image.set(reader.result as string);
-    reader.readAsDataURL(file);
+  private choose(): void {
+    const field = this.document.createElement('input');
+    field.type = 'file';
+    field.accept = 'image/*';
+    field.addEventListener('change', () => {
+      const file = field.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => this.form.image.set(reader.result as string);
+      reader.readAsDataURL(file);
+    });
+    field.click();
   }
 }

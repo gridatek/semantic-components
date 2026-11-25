@@ -4,7 +4,7 @@ import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
- * Gives up on the comment being placed or written.
+ * Gives up on the comment being written.
  */
 @Directive({
   selector: 'button[scPdfViewerCommentCancel]',

@@ -21,6 +21,8 @@ export { ScPdfViewerRotateRight } from './pdf-viewer-rotate-right';
 export { ScPdfViewerDownload } from './pdf-viewer-download';
 export { ScPdfViewerPrint } from './pdf-viewer-print';
 export { ScPdfViewerFullscreen } from './pdf-viewer-fullscreen';
+export { ScPdfViewerPresentation } from './pdf-viewer-presentation';
+export { ScPdfViewerOpenFile } from './pdf-viewer-open-file';
 export { ScPdfViewerSpacer } from './pdf-viewer-spacer';
 
 // Content
@@ -28,13 +30,6 @@ export { ScPdfViewerContent } from './pdf-viewer-content';
 
 // Canvas renderer, and what you place on its pages
 export { ScPdfViewerCanvas } from './pdf-viewer-canvas';
-export { ScPdfViewerAnnotationToolbar } from './pdf-viewer-annotation-toolbar';
-export type { ScPdfAnnotationToolbarContext } from './pdf-viewer-annotation-toolbar';
-export { ScPdfViewerCommentMarker } from './pdf-viewer-comment-marker';
-export type { ScPdfCommentMarkerContext } from './pdf-viewer-comment-marker';
-export { ScPdfViewerAnnotationDelete } from './pdf-viewer-annotation-delete';
-export { ScPdfViewerAnnotationAltText } from './pdf-viewer-annotation-alt-text';
-export { ScPdfViewerAnnotationColor } from './pdf-viewer-annotation-color';
 export { ScPdfViewerAddImage } from './pdf-viewer-add-image';
 
 // State components
@@ -46,6 +41,7 @@ export { ScPdfViewerRetry } from './pdf-viewer-retry';
 
 // Find components
 export { ScPdfViewerFindToggle } from './pdf-viewer-find-toggle';
+export { ScPdfViewerMenu } from './pdf-viewer-menu';
 export { ScPdfViewerFindbar } from './pdf-viewer-findbar';
 export { ScPdfViewerFindInput } from './pdf-viewer-find-input';
 export { ScPdfViewerFindNext } from './pdf-viewer-find-next';
@@ -78,6 +74,7 @@ export type {
 export { ScPdfViewerSignatureName } from './pdf-viewer-signature-name';
 export { ScPdfViewerSignaturePad } from './pdf-viewer-signature-pad';
 export { ScPdfViewerSignatureImage } from './pdf-viewer-signature-image';
+export { ScPdfViewerSignatureMode } from './pdf-viewer-signature-mode';
 export { ScPdfViewerSignatureDescription } from './pdf-viewer-signature-description';
 export { ScPdfViewerSignatureAdd } from './pdf-viewer-signature-add';
 export { ScPdfViewerSignatureClear } from './pdf-viewer-signature-clear';
@@ -87,14 +84,15 @@ export { ScPdfViewerSignatureNew } from './pdf-viewer-signature-new';
 
 // Comments
 export { ScPdfViewerComment } from './pdf-viewer-comment';
-export { ScPdfViewerCommentAdd } from './pdf-viewer-comment-add';
 export { ScPdfViewerCommentForm } from './pdf-viewer-comment-form';
 export { ScPdfViewerCommentInput } from './pdf-viewer-comment-input';
 export { ScPdfViewerCommentCancel } from './pdf-viewer-comment-cancel';
 export { ScPdfViewerCommentShow } from './pdf-viewer-comment-show';
 export { ScPdfViewerCommentRemove } from './pdf-viewer-comment-remove';
+export { ScPdfViewerCommentEdit } from './pdf-viewer-comment-edit';
 
 // Sidebar
+export { ScPdfViewerSidebarToggle } from './pdf-viewer-sidebar-toggle';
 export { ScPdfViewerSidebarResizer } from './pdf-viewer-sidebar-resizer';
 export { ScPdfViewerLayer } from './pdf-viewer-layer';
 export { ScPdfViewerAttachment } from './pdf-viewer-attachment';
@@ -129,6 +127,7 @@ export { ScPdfViewerUndoDismiss } from './pdf-viewer-undo-dismiss';
 // Types
 export type {
   ScPdfViewerSettingKey,
+  ScPdfViewerCommand,
   ScPdfLayer,
   ScPdfAttachment,
   ScPdfPageColors,
@@ -142,9 +141,8 @@ export type {
   ScPdfOutlineItem,
   ScPdfDestination,
   ScPdfEditorMode,
-  ScPdfEditorAnnotation,
+  ScPdfAnnotationType,
   ScPdfFindState,
-  ScPdfPageMatchInfo,
   ScPdfLoadEvent,
   ScPdfPageChangeEvent,
   ScPdfZoomChangeEvent,

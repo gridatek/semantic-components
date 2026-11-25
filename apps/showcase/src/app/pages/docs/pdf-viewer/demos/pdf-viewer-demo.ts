@@ -1,12 +1,10 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ViewEncapsulation,
   computed,
-  effect,
   input,
   signal,
-  viewChild,
 } from '@angular/core';
 import {
   ScButton,
@@ -69,29 +67,20 @@ import {
   ScTooltipTrigger,
 } from '@semantic-components/ui';
 import {
-  type ScPdfDocumentProperties,
-  type ScPdfEditorMode,
   type ScPdfOutlineItem,
-  type ScPdfPaperSize,
-  type ScPdfSidebarView,
   ScPdfViewer,
   ScPdfViewerAddImage,
   ScPdfViewerAltTextForm,
   ScPdfViewerAltTextInput,
   ScPdfViewerAltTextKind,
-  ScPdfViewerAnnotationAltText,
-  ScPdfViewerAnnotationColor,
-  ScPdfViewerAnnotationDelete,
-  ScPdfViewerAnnotationToolbar,
   ScPdfViewerAttachment,
   ScPdfViewerBack,
   ScPdfViewerCanvas,
   ScPdfViewerComment,
-  ScPdfViewerCommentAdd,
   ScPdfViewerCommentCancel,
+  ScPdfViewerCommentEdit,
   ScPdfViewerCommentForm,
   ScPdfViewerCommentInput,
-  ScPdfViewerCommentMarker,
   ScPdfViewerCommentRemove,
   ScPdfViewerCommentShow,
   ScPdfViewerContainer,
@@ -116,10 +105,12 @@ import {
   ScPdfViewerLayer,
   ScPdfViewerLoading,
   ScPdfViewerLoadingBar,
+  ScPdfViewerMenu,
   ScPdfViewerMovePagesEarlier,
   ScPdfViewerMovePagesLater,
   ScPdfViewerNav,
   ScPdfViewerNextPage,
+  ScPdfViewerOpenFile,
   ScPdfViewerOutlineCollapseAll,
   ScPdfViewerOutlineExpandAll,
   ScPdfViewerOutlineFindCurrent,
@@ -138,11 +129,13 @@ import {
   ScPdfViewerRetry,
   ScPdfViewerSetting,
   ScPdfViewerSidebarResizer,
+  ScPdfViewerSidebarToggle,
   ScPdfViewerSignatureAdd,
   ScPdfViewerSignatureClear,
   ScPdfViewerSignatureDescription,
   ScPdfViewerSignatureForm,
   ScPdfViewerSignatureImage,
+  ScPdfViewerSignatureMode,
   ScPdfViewerSignatureName,
   ScPdfViewerSignatureNew,
   ScPdfViewerSignaturePad,
@@ -203,43 +196,21 @@ import {
 import { cn } from 'cn';
 
 /** Your names for the standard paper sizes. */
-const PAPER_NAMES: Record<ScPdfPaperSize, string> = {
-  a3: 'A3',
-  a4: 'A4',
-  letter: 'Letter',
-  legal: 'Legal',
-};
-
-/** The tools in the toolbar's toggle group. */
-const TOOLS: readonly ScPdfEditorMode[] = [
-  'highlight',
-  'freetext',
-  'ink',
-  'comment',
-];
-
-/** Tools with an options panel. */
-const TOOLS_WITH_OPTIONS: readonly ScPdfEditorMode[] = [
-  'highlight',
-  'freetext',
-  'ink',
-];
-
-/** The swatches offered for highlights (as pdf.js's). */
+/** The swatches offered for highlights: the theme's (as pdf.js's). */
 const HIGHLIGHT_COLORS = [
-  { name: 'Yellow', value: '#FFFF98' },
-  { name: 'Green', value: '#53FFBC' },
-  { name: 'Blue', value: '#80EBFF' },
-  { name: 'Pink', value: '#FFCBE6' },
-  { name: 'Red', value: '#FF4F5F' },
+  { name: 'Yellow', value: 'var(--sc-pdf-viewer-highlight-1)' },
+  { name: 'Green', value: 'var(--sc-pdf-viewer-highlight-2)' },
+  { name: 'Blue', value: 'var(--sc-pdf-viewer-highlight-3)' },
+  { name: 'Pink', value: 'var(--sc-pdf-viewer-highlight-4)' },
+  { name: 'Red', value: 'var(--sc-pdf-viewer-highlight-5)' },
 ];
 
-/** The swatches offered for text and drawings. */
+/** The swatches offered for text and drawings: the theme's. */
 const INK_COLORS = [
-  { name: 'Black', value: '#000000' },
-  { name: 'Red', value: '#E11D48' },
-  { name: 'Blue', value: '#2563EB' },
-  { name: 'Green', value: '#16A34A' },
+  { name: 'Black', value: 'var(--sc-pdf-viewer-ink-1)' },
+  { name: 'Red', value: 'var(--sc-pdf-viewer-ink-2)' },
+  { name: 'Blue', value: 'var(--sc-pdf-viewer-ink-3)' },
+  { name: 'Green', value: 'var(--sc-pdf-viewer-ink-4)' },
 ];
 
 @Component({
@@ -247,6 +218,7 @@ const INK_COLORS = [
   imports: [
     ScFrame,
     NgTemplateOutlet,
+    DecimalPipe,
     ScPdfViewer,
     ScPdfViewerContainer,
     ScPdfViewerToolbar,
@@ -265,6 +237,10 @@ const INK_COLORS = [
     ScPdfViewerDownload,
     ScPdfViewerSpacer,
     ScPdfViewerFindToggle,
+    ScPdfViewerMenu,
+    ScPdfViewerOpenFile,
+    ScPdfViewerSidebarToggle,
+    ScPdfViewerSignatureMode,
     ScPdfViewerFindbar,
     ScPdfViewerFindInput,
     ScPdfViewerFindNext,
@@ -277,11 +253,6 @@ const INK_COLORS = [
     ScPdfViewerEmpty,
     ScPdfViewerRetry,
     ScPdfViewerCanvas,
-    ScPdfViewerAnnotationToolbar,
-    ScPdfViewerAnnotationDelete,
-    ScPdfViewerAnnotationAltText,
-    ScPdfViewerAnnotationColor,
-    ScPdfViewerCommentMarker,
     ScPdfViewerAddImage,
     ScPdfViewerUndoBar,
     ScPdfViewerUndo,
@@ -308,11 +279,11 @@ const INK_COLORS = [
     ScPdfViewerAttachment,
     ScPdfViewerLayer,
     ScPdfViewerComment,
-    ScPdfViewerCommentAdd,
     ScPdfViewerCommentForm,
     ScPdfViewerCommentInput,
     ScPdfViewerCommentCancel,
     ScPdfViewerCommentShow,
+    ScPdfViewerCommentEdit,
     ScPdfViewerCommentRemove,
     ScPdfViewerDialog,
     ScPdfViewerPasswordForm,
@@ -434,10 +405,7 @@ const INK_COLORS = [
       class="size-full"
       [src]="pdfSrc()"
       [fileName]="fileName()"
-      [(sidebarOpen)]="sidebarOpen"
-      [(sidebarView)]="sidebarTab"
       [enablePermissions]="true"
-      (fileOpened)="fileName.set($event.name.replace('.pdf', ''))"
       #viewer="scPdfViewer"
     >
       <div
@@ -451,14 +419,7 @@ const INK_COLORS = [
           class="flex-wrap gap-1 px-2 py-1.5"
         >
           <div scTooltipProvider side="bottom">
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              [attr.aria-pressed]="sidebarOpen()"
-              scTooltipTrigger
-              (click)="sidebarOpen.set(!sidebarOpen())"
-            >
+            <button scPdfViewerSidebarToggle scTooltipTrigger>
               <svg siPanelLeftIcon></svg>
               <span class="sr-only">Sidebar</span>
             </button>
@@ -666,9 +627,7 @@ const INK_COLORS = [
           <div
             scToggleGroup
             aria-label="Annotation tool"
-            [disabled]="!viewer.canEdit()"
-            [value]="[selectedTool()]"
-            (valueChange)="setTool($event[0])"
+            scPdfViewerSetting="editorMode"
           >
             <div scTooltipProvider side="bottom">
               <button scToggleGroupItem value="highlight" scTooltipTrigger>
@@ -714,7 +673,7 @@ const INK_COLORS = [
                 scPopoverTrigger
                 variant="ghost"
                 size="icon"
-                [disabled]="!activeTool()"
+                [disabled]="!viewer.toolSettings()"
                 scTooltipTrigger
               >
                 <svg siSlidersHorizontalIcon></svg>
@@ -726,7 +685,7 @@ const INK_COLORS = [
             </div>
             <ng-template scPopoverPortal>
               <div scPopover class="w-60 gap-4">
-                @switch (activeTool()) {
+                @switch (viewer.toolSettings()) {
                   @case ('highlight') {
                     <div
                       scToggleGroup
@@ -839,13 +798,7 @@ const INK_COLORS = [
             </ng-template>
           </div>
           <div scTooltipProvider side="bottom">
-            <button
-              scButton
-              variant="ghost"
-              size="icon"
-              scTooltipTrigger
-              (click)="imageInput.click()"
-            >
+            <button scPdfViewerAddImage scTooltipTrigger>
               <svg siImageIcon></svg>
               <span class="sr-only">Add image</span>
             </button>
@@ -853,13 +806,7 @@ const INK_COLORS = [
               <div scTooltip>Add image<span scTooltipArrow></span></div>
             </ng-template>
           </div>
-          <input #imageInput type="file" scPdfViewerAddImage class="hidden" />
-          <div
-            scPopoverProvider
-            side="bottom"
-            alignment="end"
-            [(open)]="signaturesOpen"
-          >
+          <div scPopoverProvider side="bottom" alignment="end">
             <div scTooltipProvider side="bottom">
               <button
                 scButton
@@ -889,7 +836,6 @@ const INK_COLORS = [
                           variant="outline"
                           class="h-16 w-full bg-white p-1 hover:bg-white dark:bg-white"
                           [scPdfViewerSignaturePlace]="signature"
-                          (click)="signaturesOpen.set(false)"
                         >
                           <img
                             [src]="signature.dataUrl"
@@ -926,11 +872,7 @@ const INK_COLORS = [
                     No saved signatures yet.
                   </p>
                 }
-                <button
-                  scPdfViewerSignatureNew
-                  class="w-full"
-                  (click)="signaturesOpen.set(false)"
-                >
+                <button scPdfViewerSignatureNew class="w-full">
                   Add new signature
                 </button>
               </div>
@@ -975,14 +917,14 @@ const INK_COLORS = [
               </ng-template>
             </div>
             <ng-template scMenuPortal>
-              <div scMenu (itemSelected)="onMenuItem($event)">
+              <div scMenu scPdfViewerMenu>
                 <ng-template scMenuContent>
                   <div scMenuItem value="open">Open file…</div>
                   <div scMenuItem value="presentation">Presentation mode</div>
                   <div scMenuItem value="fullscreen">Full screen</div>
                   <div scMenuSeparator></div>
-                  <div scMenuItem value="first">Go to first page</div>
-                  <div scMenuItem value="last">Go to last page</div>
+                  <div scMenuItem value="first-page">Go to first page</div>
+                  <div scMenuItem value="last-page">Go to last page</div>
                   <div scMenuSeparator></div>
                   <div scMenuItem value="rotate-right">Rotate clockwise</div>
                   <div scMenuItem value="rotate-left">
@@ -1025,44 +967,19 @@ const INK_COLORS = [
               </ng-template>
             </div>
             <label scField orientation="horizontal" class="ms-2 text-sm">
-              <input
-                scCheckbox
-                [checked]="viewer.findHighlightAll()"
-                (checkedChange)="setHighlightAll($event)"
-              />
+              <input scCheckbox scPdfViewerSetting="findHighlightAll" />
               Highlight all
             </label>
             <label scField orientation="horizontal" class="text-sm">
-              <input
-                scCheckbox
-                [checked]="viewer.findMatchCase()"
-                (checkedChange)="
-                  viewer.findMatchCase.set($event);
-                  viewer.find(viewer.findQuery())
-                "
-              />
+              <input scCheckbox scPdfViewerSetting="findMatchCase" />
               Match case
             </label>
             <label scField orientation="horizontal" class="text-sm">
-              <input
-                scCheckbox
-                [checked]="viewer.findMatchDiacritics()"
-                (checkedChange)="
-                  viewer.findMatchDiacritics.set($event);
-                  viewer.find(viewer.findQuery())
-                "
-              />
+              <input scCheckbox scPdfViewerSetting="findMatchDiacritics" />
               Match diacritics
             </label>
             <label scField orientation="horizontal" class="text-sm">
-              <input
-                scCheckbox
-                [checked]="viewer.findEntireWord()"
-                (checkedChange)="
-                  viewer.findEntireWord.set($event);
-                  viewer.find(viewer.findQuery())
-                "
-              />
+              <input scCheckbox scPdfViewerSetting="findEntireWord" />
               Whole words
             </label>
             <span scPdfViewerFindResultsInfo class="ms-auto">
@@ -1089,7 +1006,7 @@ const INK_COLORS = [
 
         <!-- Sidebar + content -->
         <div class="relative flex min-h-0 flex-1">
-          @if (sidebarOpen()) {
+          @if (viewer.sidebarOpen()) {
             <aside
               class="bg-background flex shrink-0 flex-col border-e"
               aria-label="Document sidebar"
@@ -1098,8 +1015,7 @@ const INK_COLORS = [
               <div
                 scTabs
                 class="flex min-h-0 flex-1 flex-col"
-                [value]="sidebarTab()"
-                (valueChange)="setSidebarTab($event)"
+                scPdfViewerSetting="sidebarView"
               >
                 <div
                   scTabsList
@@ -1170,11 +1086,7 @@ const INK_COLORS = [
                       class="bg-background sticky top-0 z-10 flex flex-wrap items-center gap-0.5 border-b px-2 py-1"
                     >
                       <div scTooltipProvider>
-                        <button
-                          scPdfViewerInsertPages
-                          scTooltipTrigger
-                          (insertFailed)="insertFailed.set($event.name)"
-                        >
+                        <button scPdfViewerInsertPages scTooltipTrigger>
                           <svg siFilePlusIcon></svg>
                           <span class="sr-only">Insert file</span>
                         </button>
@@ -1273,7 +1185,7 @@ const INK_COLORS = [
                         </span>
                       }
                     </div>
-                    @if (insertFailed(); as file) {
+                    @if (viewer.insertFailed(); as file) {
                       <p
                         class="text-destructive px-3 pt-2 text-xs"
                         role="alert"
@@ -1444,18 +1356,7 @@ const INK_COLORS = [
                         <h3 class="text-sm font-medium">
                           Comments ({{ viewer.comments().length }})
                         </h3>
-                        @if (!viewer.pendingComment()) {
-                          <button scPdfViewerCommentAdd>Add</button>
-                        }
                       </div>
-                      @if (viewer.editorMode() === 'comment') {
-                        <p
-                          class="text-muted-foreground border-b p-3 text-sm"
-                          role="status"
-                        >
-                          Click on a page to place your comment.
-                        </p>
-                      }
                       @if (viewer.pendingComment(); as pending) {
                         <form
                           scPdfViewerCommentForm
@@ -1515,72 +1416,32 @@ const INK_COLORS = [
                                 Page {{ viewer.pageLabel(comment.pageNumber) }}
                               </button>
                               <span class="text-muted-foreground text-xs">
-                                {{ comment.date }}
+                                {{ comment.date?.toLocaleString() }}
                               </span>
                             </div>
-                            @if (editingComment() === comment.id) {
-                              <textarea
-                                scTextarea
-                                rows="2"
-                                aria-label="Edit comment"
-                                [value]="comment.text"
-                                #edit
-                              ></textarea>
-                              <div class="flex justify-end gap-2">
-                                <button
-                                  scButton
-                                  size="sm"
-                                  variant="ghost"
-                                  (click)="editingComment.set(null)"
-                                >
-                                  Cancel
-                                </button>
-                                <button
-                                  scButton
-                                  size="sm"
-                                  (click)="
-                                    viewer.updateComment(
-                                      comment.id,
-                                      edit.value
-                                    );
-                                    editingComment.set(null)
-                                  "
-                                >
-                                  Save
-                                </button>
-                              </div>
-                            } @else {
-                              <p class="text-sm">{{ comment.text }}</p>
-                              <div class="flex justify-end gap-1">
-                                <button
-                                  scButton
-                                  size="sm"
-                                  variant="ghost"
-                                  (click)="editingComment.set(comment.id)"
-                                >
-                                  Edit
-                                </button>
-                                <button
-                                  scButton
-                                  size="sm"
-                                  variant="ghost"
-                                  class="text-destructive"
-                                  [scPdfViewerCommentRemove]="comment"
-                                >
-                                  Delete
-                                </button>
-                              </div>
-                            }
+                            <p class="text-sm">{{ comment.text }}</p>
+                            <div class="flex justify-end gap-1">
+                              <button [scPdfViewerCommentEdit]="comment">
+                                Edit
+                              </button>
+                              <button
+                                scButton
+                                size="sm"
+                                variant="ghost"
+                                class="text-destructive"
+                                [scPdfViewerCommentRemove]="comment"
+                              >
+                                Delete
+                              </button>
+                            </div>
                           </li>
                         } @empty {
-                          @if (
-                            !viewer.pendingComment() &&
-                            viewer.editorMode() !== 'comment'
-                          ) {
+                          @if (!viewer.pendingComment()) {
                             <li
                               class="text-muted-foreground p-4 text-center text-sm"
                             >
-                              No comments yet.
+                              No comments yet. Select an annotation on the page,
+                              then its comment button.
                             </li>
                           }
                         }
@@ -1640,92 +1501,11 @@ const INK_COLORS = [
                 <div scEmptyDescription>Open a PDF to view it here.</div>
               </div>
               <div scEmptyBody>
-                <button scButton (click)="viewer.openFile()">Open file…</button>
+                <button scPdfViewerOpenFile>Open file…</button>
               </div>
             </div>
 
-            <div scPdfViewerCanvas>
-              <!-- The selected annotation's toolbar -->
-              <ng-template scPdfViewerAnnotationToolbar let-annotation>
-                <div scFrame class="bg-popover flex items-center gap-1 p-1">
-                  @if (annotation.type === 'highlight') {
-                    @for (color of highlightColors; track color.value) {
-                      <button
-                        scButton
-                        variant="ghost"
-                        size="icon-xs"
-                        [scPdfViewerAnnotationColor]="annotation"
-                        [color]="color.value"
-                      >
-                        <span
-                          class="ring-foreground/20 size-3.5 rounded-full ring-1"
-                          [style.background-color]="color.value"
-                        ></span>
-                        <span class="sr-only">{{ color.name }}</span>
-                      </button>
-                    }
-                  }
-                  @if (
-                    annotation.type === 'stamp' ||
-                    annotation.type === 'signature'
-                  ) {
-                    <button
-                      scButton
-                      variant="outline"
-                      size="xs"
-                      class="max-w-32 truncate"
-                      [scPdfViewerAnnotationAltText]="annotation"
-                    >
-                      @if (annotation.isDecorative) {
-                        Decorative
-                      } @else if (annotation.altText) {
-                        {{ annotation.altText }}
-                      } @else {
-                        Add alt text
-                      }
-                    </button>
-                  }
-                  <button
-                    scButton
-                    variant="outline"
-                    size="xs"
-                    [scPdfViewerAnnotationDelete]="annotation"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </ng-template>
-
-              <!-- Comment markers -->
-              <ng-template
-                scPdfViewerCommentMarker
-                let-comment
-                let-index="index"
-                let-active="active"
-                let-pending="pending"
-              >
-                @if (pending) {
-                  <span
-                    class="border-primary bg-background text-primary grid size-6 place-items-center rounded-full border-2 text-xs font-medium shadow-sm"
-                    aria-hidden="true"
-                  >
-                    +
-                  </span>
-                } @else if (comment) {
-                  <button
-                    scButton
-                    size="icon-xs"
-                    class="rounded-full shadow-sm"
-                    [class.ring-3]="active"
-                    [class.ring-ring/50]="active"
-                    [scPdfViewerCommentShow]="comment"
-                    [attr.aria-label]="'Comment ' + (index + 1)"
-                  >
-                    {{ index + 1 }}
-                  </button>
-                }
-              </ng-template>
-            </div>
+            <div scPdfViewerCanvas></div>
           </div>
 
           <!-- Undo bar -->
@@ -1734,10 +1514,29 @@ const INK_COLORS = [
               <span>
                 @switch (undo.kind) {
                   @case ('annotation-deleted') {
-                    Annotation deleted
+                    @switch (undo.annotation) {
+                      @case ('highlight') {
+                        Highlight removed
+                      }
+                      @case ('freetext') {
+                        Text removed
+                      }
+                      @case ('ink') {
+                        Drawing removed
+                      }
+                      @case ('stamp') {
+                        Image removed
+                      }
+                      @default {
+                        Signature removed
+                      }
+                    }
                   }
-                  @case ('annotations-cleared') {
-                    {{ undo.count }} annotations cleared
+                  @case ('annotations-deleted') {
+                    {{ undo.count }} annotations removed
+                  }
+                  @case ('comment-deleted') {
+                    Comment removed
                   }
                   @case ('pages-moved') {
                     {{ undo.count === 1 ? 'Page' : undo.count + ' pages' }}
@@ -1903,11 +1702,7 @@ const INK_COLORS = [
                 <h2 scDialogTitle>Add a signature</h2>
               </div>
 
-              <div
-                scTabs
-                [value]="signature.mode()"
-                (valueChange)="signature.setMode($event)"
-              >
+              <div scTabs scPdfViewerSignatureMode>
                 <div scTabsList aria-label="Signature type" activateOnFocus>
                   <button scTabsTab value="type">Type</button>
                   <button scTabsTab value="draw">Draw</button>
@@ -1971,20 +1766,10 @@ const INK_COLORS = [
                           class="max-h-32 max-w-full object-contain"
                         />
                       } @else {
-                        <button
-                          scButton
-                          variant="outline"
-                          (click)="signatureFile.click()"
-                        >
+                        <button scPdfViewerSignatureImage>
                           Choose an image…
                         </button>
                       }
-                      <input
-                        #signatureFile
-                        type="file"
-                        scPdfViewerSignatureImage
-                        class="hidden"
-                      />
                     </div>
                   </ng-template>
                 </div>
@@ -2077,7 +1862,17 @@ const INK_COLORS = [
                 <dt class="text-muted-foreground">File name</dt>
                 <dd class="break-words">{{ props.fileName }}</dd>
                 <dt class="text-muted-foreground">File size</dt>
-                <dd>{{ fileSize(props.fileSize) }}</dd>
+                <dd>
+                  @if (props.fileSize === null) {
+                    —
+                  } @else if (props.fileSize < 1024) {
+                    {{ props.fileSize }} B
+                  } @else if (props.fileSize < 1048576) {
+                    {{ props.fileSize / 1024 | number: '1.1-1' }} KB
+                  } @else {
+                    {{ props.fileSize / 1048576 | number: '1.1-1' }} MB
+                  }
+                </dd>
                 <dt class="text-muted-foreground">Title</dt>
                 <dd class="break-words">{{ props.title ?? '—' }}</dd>
                 <dt class="text-muted-foreground">Author</dt>
@@ -2099,7 +1894,33 @@ const INK_COLORS = [
                 <dt class="text-muted-foreground">Page count</dt>
                 <dd>{{ props.pageCount }}</dd>
                 <dt class="text-muted-foreground">Page size</dt>
-                <dd>{{ pageSize(props.pageSize) }}</dd>
+                <dd>
+                  @if (props.pageSize; as size) {
+                    {{ size.width / 72 | number: '1.2-2' }} ×
+                    {{ size.height / 72 | number: '1.2-2' }} in ({{
+                      (size.width / 72) * 25.4 | number: '1.0-0'
+                    }}
+                    ×
+                    {{ (size.height / 72) * 25.4 | number: '1.0-0' }} mm,
+                    @switch (size.paper) {
+                      @case ('a3') {
+                        A3,
+                      }
+                      @case ('a4') {
+                        A4,
+                      }
+                      @case ('letter') {
+                        Letter,
+                      }
+                      @case ('legal') {
+                        Legal,
+                      }
+                    }
+                    {{ size.orientation }})
+                  } @else {
+                    —
+                  }
+                </dd>
                 <dt class="text-muted-foreground">Fast Web View</dt>
                 <dd>{{ props.linearized ? 'Yes' : 'No' }}</dd>
               </dl>
@@ -2127,118 +1948,16 @@ export class PdfViewerDemo {
     cn('block h-dvh w-full', this.classInput()),
   );
 
-  private readonly viewerRef = viewChild<ScPdfViewer>('viewer');
-
   private readonly pdfSrc = signal(
     'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf',
   );
   private readonly fileName = signal('tracemonkey');
 
-  private readonly sidebarOpen = signal(false);
-  private readonly sidebarTab = signal<ScPdfSidebarView>('thumbnails');
-  private readonly signaturesOpen = signal(false);
-  /** The comment being edited in the list. */
-  private readonly editingComment = signal<string | null>(null);
-  /** The name of a file that couldn't be inserted. */
-  private readonly insertFailed = signal<string | null>(null);
-
   private readonly highlightColors = HIGHLIGHT_COLORS;
   private readonly inkColors = INK_COLORS;
-
-  /** The tool selected in the toggle group, if any. */
-  private readonly selectedTool = computed(() => {
-    const mode = this.viewerRef()?.editorMode() ?? 'none';
-    return TOOLS.includes(mode) ? mode : null;
-  });
-
-  /** The active tool, if it has options. */
-  private readonly activeTool = computed(() => {
-    const mode = this.viewerRef()?.editorMode() ?? 'none';
-    return TOOLS_WITH_OPTIONS.includes(mode) ? mode : null;
-  });
-
-  constructor() {
-    // Placing or picking a comment shows the comments.
-    effect(() => {
-      const viewer = this.viewerRef();
-      if (!viewer) return;
-      if (
-        viewer.editorMode() === 'comment' ||
-        viewer.pendingComment() ||
-        viewer.activeCommentId()
-      ) {
-        this.sidebarOpen.set(true);
-        this.sidebarTab.set('comments');
-      }
-    });
-  }
-
-  private setTool(value: string | string[] | null): void {
-    this.viewerRef()?.setEditorMode(
-      typeof value === 'string' ? (value as ScPdfEditorMode) : 'none',
-    );
-  }
-
-  private setSidebarTab(value: unknown): void {
-    this.sidebarTab.set(value as ScPdfSidebarView);
-  }
-
-  private setHighlightAll(value: boolean): void {
-    const viewer = this.viewerRef();
-    if (!viewer) return;
-    viewer.findHighlightAll.set(value);
-    viewer.findTrigger.update((v) => v + 1);
-  }
 
   /** Types the outline template's context. */
   private asOutline(items: unknown): ScPdfOutlineItem[] {
     return items as ScPdfOutlineItem[];
-  }
-
-  private onMenuItem(value: unknown): void {
-    const viewer = this.viewerRef();
-    if (!viewer) return;
-    switch (value) {
-      case 'open':
-        viewer.openFile();
-        break;
-      case 'presentation':
-        viewer.togglePresentation();
-        break;
-      case 'fullscreen':
-        viewer.toggleFullscreen();
-        break;
-      case 'first':
-        viewer.goToPage(1);
-        break;
-      case 'last':
-        viewer.goToPage(viewer.totalPages());
-        break;
-      case 'rotate-right':
-        viewer.rotateRight();
-        break;
-      case 'rotate-left':
-        viewer.rotateLeft();
-        break;
-      case 'properties':
-        viewer.openProperties();
-        break;
-    }
-  }
-
-  private fileSize(bytes: number | null): string {
-    if (bytes === null) return '—';
-    if (bytes < 1024) return `${bytes} B`;
-    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-  }
-
-  /** E.g. "8.27 × 11.69 in (210 × 297 mm, A4, portrait)". */
-  private pageSize(size: ScPdfDocumentProperties['pageSize']): string {
-    if (!size) return '—';
-    const inches = (points: number) => (points / 72).toFixed(2);
-    const mm = (points: number) => ((points / 72) * 25.4).toFixed(0);
-    const paper = size.paper ? `${PAPER_NAMES[size.paper]}, ` : '';
-    return `${inches(size.width)} × ${inches(size.height)} in (${mm(size.width)} × ${mm(size.height)} mm, ${paper}${size.orientation})`;
   }
 }

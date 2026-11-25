@@ -4,6 +4,7 @@ import {
   Directive,
   ElementRef,
   InjectionToken,
+  type WritableSignal,
   afterNextRender,
   computed,
   effect,
@@ -24,18 +25,39 @@ import {
   version,
 } from 'pdfjs-dist';
 import { moveCaret } from './pdf-viewer-caret-browsing';
-import type { ScPdfNormalizedText } from './pdf-viewer-find';
-import { findInPage, normalizeText } from './pdf-viewer-find';
+import {
+  HIGHLIGHT_COLORS,
+  INK_COLORS,
+  colorSetting,
+  resolveColor,
+  resolvePageColors,
+} from './pdf-viewer-colors';
+import type {
+  ScPdfJsComment,
+  ScPdfJsEditor,
+  ScPdfJsUiManager,
+} from './pdf-viewer-editing';
+import {
+  EDITOR_MODES,
+  EDITOR_PARAMS,
+  SIGNATURE_HEIGHT,
+  editorManagers,
+  toComment,
+  undoneAnnotation,
+} from './pdf-viewer-editing';
+import {
+  SCROLL_MODES,
+  SPREAD_MODES,
+  type ScPdfEngine,
+  type ScPdfHistoryEntry,
+} from './pdf-viewer-engine';
 import { loadDocumentProperties } from './pdf-viewer-properties';
-import { annotationStorageValues } from './pdf-viewer-save';
-import { ScPdfScripting } from './pdf-viewer-scripting';
 import type {
   ScPdfAttachment,
   ScPdfComment,
   ScPdfCursorTool,
   ScPdfDestination,
   ScPdfDocumentProperties,
-  ScPdfEditorAnnotation,
   ScPdfEditorMode,
   ScPdfFindState,
   ScPdfLayer,
@@ -44,7 +66,6 @@ import type {
   ScPdfOutlineItem,
   ScPdfPageChangeEvent,
   ScPdfPageColors,
-  ScPdfPageMatchInfo,
   ScPdfScrollMode,
   ScPdfSidebarView,
   ScPdfSignatureData,
@@ -69,13 +90,65 @@ const AUTO_PRINT = /\bprint\s*\(/;
 /** How long without rendering before pdf.js's caches are freed (as pdf.js). */
 const CLEANUP_TIMEOUT = 30_000;
 
+/** pdf.js's named zooms. */
+const NAMED_ZOOMS = new Set([
+  'auto',
+  'page-actual',
+  'page-fit',
+  'page-width',
+  'page-height',
+]);
+
 /** Back / Forward remembers this many places. */
 const MAX_HISTORY = 50;
 
-/** A place in the document: a page, and how far down it (0–1). */
-interface ScPdfPlace {
-  page: number;
-  top: number;
+/** pdf.js's find states (`FindState`), by our names. */
+const FIND_STATES: Record<number, ScPdfFindState> = {
+  0: 'found',
+  1: 'not-found',
+  2: 'wrapped',
+  3: 'pending',
+};
+
+/**
+ * pdf.js's editor mode (`AnnotationEditorType`). Its typings give the getter
+ * the setter's type; it's the mode's number.
+ */
+function editorModeOf(engine: ScPdfEngine): number {
+  return engine.viewer.annotationEditorMode as unknown as number;
+}
+
+/**
+ * The pages a page map says (`getPageMappingForSaving`, `extractPages`),
+ * written out — with the annotations on them.
+ */
+function extractMapped(
+  doc: PDFDocumentProxy,
+  mapping: unknown,
+): Promise<Uint8Array> {
+  const { pageInfos, copyLevels } = mapping as {
+    pageInfos: Parameters<PDFDocumentProxy['extractPages']>[0];
+    copyLevels: Parameters<PDFDocumentProxy['extractPages']>[1];
+  };
+  return doc.extractPages(pageInfos, copyLevels);
+}
+
+/** The editor settings that are colours. */
+const COLOR_PARAMS = new Set<number>([
+  EDITOR_PARAMS.HIGHLIGHT_COLOR,
+  EDITOR_PARAMS.FREETEXT_COLOR,
+  EDITOR_PARAMS.INK_COLOR,
+]);
+
+/** A pdf.js mode number by our name. */
+function modeName<T extends string>(
+  modes: Record<T, number>,
+  mode: number,
+  fallback: T,
+): T {
+  return (
+    (Object.keys(modes) as T[]).find((name) => modes[name] === mode) ?? fallback
+  );
 }
 
 /** The document's `PageLayout` as scroll and spread modes. */
@@ -102,14 +175,6 @@ const HASH_PAGE_MODES: Record<string, ScPdfSidebarView> = {
   bookmarks: 'outline',
   attachments: 'attachments',
   layers: 'layers',
-};
-
-const NAMED_ZOOMS: Record<string, ScPdfZoomLevel> = {
-  auto: 'auto',
-  'page-actual': 'page-actual',
-  'page-fit': 'page-fit',
-  'page-height': 'page-fit',
-  'page-width': 'page-width',
 };
 
 /** pdf.js's outline item, as `getOutline()` returns it. */
@@ -150,8 +215,6 @@ type ScPdfPageEntry =
       /** 0-based page index in `data`. */
       index: number;
       /** Annotations / comments of `data`'s pages (page = index + 1). */
-      annotations?: ScPdfEditorAnnotation[];
-      comments?: ScPdfComment[];
     };
 
 /**
@@ -296,34 +359,37 @@ export class ScPdfViewer {
    */
   readonly enablePermissions = input(false);
   /**
-   * Colours to draw the pages with (e.g. a dark reading mode). Unset, the
-   * pages follow the system's high-contrast mode (forced colours), drawn
-   * in its `CanvasText` on `Canvas`, as in pdf.js.
+   * Colours to draw the pages with (a reading mode), by name: `sepia` draws
+   * them in your theme's `--sc-pdf-viewer-sepia-foreground` on
+   * `--sc-pdf-viewer-sepia-background`. `''`: the document's own — or, in
+   * the system's high-contrast mode (forced colours), its `CanvasText` on
+   * `Canvas`, as in pdf.js.
    */
-  readonly pageColors = input<ScPdfPageColors | null>(null);
+  readonly pageColors = model('');
   /**
    * The browser's caret browsing (F7) is on: ↑ / ↓ move the caret a line
    * in the pages' text, as pdf.js does. The page can't tell, so say when
    * your app knows (as pdf.js's `supportsCaretBrowsingMode`).
    */
-  readonly caretBrowsing = input(false);
+  readonly caretBrowsing = model(false);
 
   /** The system's high-contrast mode is on. */
   private readonly forcedColors = signal(false);
 
-  /** The colours pages are drawn with, or null for their own. */
+  /**
+   * The colours pages are drawn with (CSS — the theme's variables), or null
+   * for their own. The real colours are read where they're drawn.
+   */
   readonly appliedPageColors = computed((): ScPdfPageColors | null => {
-    const colors =
-      this.pageColors() ??
-      (this.forcedColors()
-        ? { foreground: 'CanvasText', background: 'Canvas' }
-        : null);
-    // pdf.js needs both, and real colours.
-    return colors &&
-      typeof CSS !== 'undefined' &&
-      CSS.supports('color', colors.foreground) &&
-      CSS.supports('color', colors.background)
-      ? colors
+    const name = this.pageColors();
+    if (name) {
+      return {
+        foreground: `var(--sc-pdf-viewer-${name}-foreground)`,
+        background: `var(--sc-pdf-viewer-${name}-background)`,
+      };
+    }
+    return this.forcedColors()
+      ? { foreground: 'CanvasText', background: 'Canvas' }
       : null;
   });
   /** URL of `pdf.sandbox.mjs`, if not under `assetsUrl`. */
@@ -343,6 +409,11 @@ export class ScPdfViewer {
   readonly keyboardShortcuts = input(true);
   /** Print when the document asks to on opening (as pdf.js). */
   readonly autoPrint = input(true);
+  /**
+   * Reopens a document where it was left — page, zoom, scroll, rotation — as
+   * pdf.js's view history does (kept in the browser's storage).
+   */
+  readonly rememberView = input(true);
   /** Whether the sidebar is open (F4 toggles it). Bind `[(sidebarOpen)]`. */
   readonly sidebarOpen = model(false);
   /**
@@ -373,15 +444,9 @@ export class ScPdfViewer {
   readonly isFullscreen = signal(false);
   /** Presentation mode: one page at a time, fit to the screen, fullscreen. */
   readonly presenting = signal(false);
-  /** Pages copied or cut, for `pastePages`: a PDF of them, and what was on them. */
-  readonly pageClipboard = signal<{
-    data: Uint8Array;
-    count: number;
-    /** On page 1…count of the copied pages. */
-    annotations: ScPdfEditorAnnotation[];
-    comments: ScPdfComment[];
-  } | null>(null);
-  /** The document is being rebuilt (page organisation). */
+  /** Pages copied or cut, for `pastePages` (pdf.js's page map holds them). */
+  readonly pageClipboard = signal<{ count: number; cut: boolean } | null>(null);
+  /** The document is being rebuilt (another file inserted). */
   readonly organizing = signal(false);
 
   /** The view before presentation mode, restored after it. */
@@ -395,20 +460,6 @@ export class ScPdfViewer {
 
   // PDF.js document
   readonly pdfDocument = signal<PDFDocumentProxy | null>(null);
-
-  // Navigation trigger — incremented to signal canvas to scroll to currentPage
-  readonly navigateTrigger = signal(0);
-  /**
-   * The page the last navigation goes to — not `currentPage`, which pages
-   * passed while scrolling change.
-   */
-  readonly navigatePage = signal(1);
-  /** Where on the page the last navigation goes, from 0 (top) to 1 (bottom). */
-  readonly navigateTop = signal(0);
-  /** Whether the last navigation scrolls smoothly (not while a document opens). */
-  readonly navigateSmooth = signal(true);
-  /** Navigations right now are part of opening a document: instant. */
-  private openingNavigation = false;
 
   /** The document's page labels (e.g. "iv", "A-1"), or null to show numbers. */
   readonly pageLabels = signal<string[] | null>(null);
@@ -533,11 +584,11 @@ export class ScPdfViewer {
   }
 
   /** The selected pages one place earlier (-1) or later (1); they stay selected. */
-  async moveSelectedPages(delta: -1 | 1): Promise<void> {
+  moveSelectedPages(delta: -1 | 1): void {
     const pages = this.pageSelection();
     if (!pages.length) return;
     const before = delta < 0 ? pages[0] - 1 : pages[pages.length - 1] + 2;
-    this.selectedPages.set(new Set(await this.movePages(pages, before)));
+    this.selectedPages.set(new Set(this.movePages(pages, before)));
   }
 
   /** Thumbnails rendered for the current document (object URLs). */
@@ -558,8 +609,11 @@ export class ScPdfViewer {
       this.thumbnailsDocument = doc;
     }
     const rotation = this.rotation();
-    const pageColors = this.appliedPageColors();
-    const key = `${pageNumber}:${width}:${rotation}:${JSON.stringify(pageColors)}`;
+    const pageColors = resolvePageColors(
+      this.appliedPageColors(),
+      this.document.documentElement,
+    );
+    const key = `${doc.pagesMapper.getPageId(pageNumber)}:${width}:${rotation}:${JSON.stringify(pageColors)}`;
     let thumbnail = this.thumbnails.get(key);
     if (!thumbnail) {
       thumbnail = this.thumbnailQueue.then(async () => {
@@ -661,32 +715,6 @@ export class ScPdfViewer {
     hasJSActions: boolean;
   }>({ fieldObjects: null, hasJSActions: false });
 
-  /** Pages drawn with their form fields in the DOM (for page scripts). */
-  private readonly renderedPageNumbers = new Set<number>();
-
-  /** The document's JavaScript, run in pdf.js's sandbox. */
-  readonly scripting = new ScPdfScripting(
-    {
-      currentPage: () => this.currentPage(),
-      totalPages: () => this.totalPages(),
-      goToPage: (page) => this.goToPage(page),
-      goToNextPage: () => this.goToNextPage(),
-      goToPrevPage: () => this.goToPrevPage(),
-      setScriptZoom: (value) => this.setScriptZoom(value),
-      zoomIn: () => this.zoomIn(),
-      zoomOut: () => this.zoomOut(),
-      print: () => this.printWithProgress(),
-      download: () => this.download(),
-      isPageRendered: (page) => this.renderedPageNumbers.has(page),
-      isPresenting: () => this.presenting(),
-    },
-    () => ({
-      sandboxSrc:
-        this.sandboxSrc() || `${this.assetsUrl()}build/pdf.sandbox.min.mjs`,
-      wasmSrc: this.wasmSrc() || `${this.assetsUrl()}wasm/`,
-    }),
-  );
-
   /** Page layout set from the last document, so the next can replace it. */
   private documentLayout: [ScPdfScrollMode, ScPdfSpreadMode] | null = null;
 
@@ -700,30 +728,28 @@ export class ScPdfViewer {
   readonly findState = signal<ScPdfFindState>('idle');
   readonly findCurrentMatchIndex = signal(0);
   readonly findTotalMatches = signal(0);
-  readonly pageMatches = signal<ScPdfPageMatchInfo[]>([]);
-  readonly findTrigger = signal(0);
-
-  /** Each page's text, extracted once per document for find. */
-  private pageTexts: Promise<ScPdfNormalizedText[]> | null = null;
-  private pageTextsDocument: PDFDocumentProxy | null = null;
-  /** Increments with each search, so an older one can't overwrite a newer one. */
-  private findToken = 0;
-
   // Editor state
   readonly editorMode = signal<ScPdfEditorMode>('none');
-  readonly editorAnnotations = signal<ScPdfEditorAnnotation[]>([]);
-  readonly editorTrigger = signal(0);
-  /** The annotation selected on the page (its toolbar shows), or null. */
-  readonly selectedAnnotationId = signal<string | null>(null);
-
+  /** The tool whose settings to show (highlight, text, drawing), or null. */
+  readonly toolSettings = computed(() => {
+    const mode = this.editorMode();
+    return mode === 'highlight' || mode === 'freetext' || mode === 'ink'
+      ? mode
+      : null;
+  });
   // Editor params
-  /** pdf.js's default highlight yellow. */
-  readonly highlightColor = signal('#FFFF98');
+  /**
+   * Colours are CSS colours — the theme's variables: `var(--sc-pdf-viewer-highlight-1)`
+   * to `-5` for highlights (pdf.js's yellow, green, blue, pink, red),
+   * `var(--sc-pdf-viewer-ink-1)` to `-4` for text and drawings. pdf.js gets
+   * them as real colours (they're written into the PDF).
+   */
+  readonly highlightColor = signal<string>(HIGHLIGHT_COLORS[0]);
   readonly highlightThickness = signal(12);
   readonly highlightShowAll = signal(true);
-  readonly freetextColor = signal('#000000');
+  readonly freetextColor = signal<string>(INK_COLORS[0]);
   readonly freetextSize = signal(12);
-  readonly inkColor = signal('#000000');
+  readonly inkColor = signal<string>(INK_COLORS[0]);
   readonly inkThickness = signal(1);
   readonly inkOpacity = signal(1);
 
@@ -736,8 +762,6 @@ export class ScPdfViewer {
 
   // Alt text state
   readonly altTextDialogOpen = signal(false);
-  readonly altTextAnnotationId = signal<string | null>(null);
-
   /** The document's optional content (layers), and whether each shows. */
   readonly layers = signal<ScPdfLayer[]>([]);
   /** The layers' visibility as pdf.js renders it (with the pages). */
@@ -752,12 +776,16 @@ export class ScPdfViewer {
   readonly savedSignatures = model<ScPdfSignatureData[]>([]);
 
   // Comment state
+  /** The comments on annotations: the document's, and those written here. */
   readonly comments = signal<ScPdfComment[]>([]);
-  /** Where a comment is being added (the comment tool's click), until posted. */
+  /**
+   * The comment being written — an annotation's comment button (in pdf.js's
+   * toolbar on the page) — with its current text, until posted.
+   */
   readonly pendingComment = signal<{
+    id: string;
     pageNumber: number;
-    x: number;
-    y: number;
+    text: string;
   } | null>(null);
   /** The comment picked on the page or in the list. */
   readonly activeCommentId = signal<string | null>(null);
@@ -765,6 +793,8 @@ export class ScPdfViewer {
   /** What the undo bar can undo now (shown for a few seconds), or null. */
   readonly undoable = signal<ScPdfUndoable | null>(null);
   private undoAction: (() => void) | null = null;
+  /** Run once the undo bar closes without undoing (pdf.js frees deleted pages). */
+  private undoCleanup: (() => void) | null = null;
   private undoTimeout: ReturnType<typeof setTimeout> | null = null;
 
   // Print progress state
@@ -774,9 +804,6 @@ export class ScPdfViewer {
 
   // Sidebar
   readonly sidebarWidth = signal(200);
-
-  private editorIdCounter = 0;
-  private commentIdCounter = 0;
 
   // Container element ref for fullscreen
   private containerElement: ElementRef<HTMLElement> | null = null;
@@ -852,18 +879,79 @@ export class ScPdfViewer {
       });
     });
 
-    // Page scripts: the previous page closes, the new one opens.
-    let previousPage = this.currentPage();
+    // A find option changed: the search again (as pdf.js's find bar).
+    const findOptions: [() => boolean, string][] = [
+      [this.findMatchCase, 'casesensitivitychange'],
+      [this.findEntireWord, 'entirewordchange'],
+      [this.findHighlightAll, 'highlightallchange'],
+      [this.findMatchDiacritics, 'diacriticmatchingchange'],
+    ];
+    for (const [option, type] of findOptions) {
+      let first = true;
+      effect(() => {
+        option();
+        if (first) {
+          first = false;
+          return;
+        }
+        untracked(() => this.findOptionChanged(type));
+      });
+    }
+
+    // The view's settings, into pdf.js's viewer.
     effect(() => {
-      const page = this.currentPage();
-      untracked(() => this.scripting.pageChanged(previousPage, page));
-      previousPage = page;
+      const engine = this.engine();
+      const mode = SCROLL_MODES[this.scrollMode()];
+      if (engine && engine.viewer.scrollMode !== mode)
+        engine.viewer.scrollMode = mode;
+    });
+    effect(() => {
+      const engine = this.engine();
+      const mode = SPREAD_MODES[this.spreadMode()];
+      if (engine && engine.viewer.spreadMode !== mode)
+        engine.viewer.spreadMode = mode;
+    });
+    effect(() => {
+      const engine = this.engine();
+      const rotation = this.rotation();
+      if (
+        engine?.viewer.pdfDocument &&
+        engine.viewer.pagesRotation !== rotation
+      )
+        engine.viewer.pagesRotation = rotation;
+    });
+    // Once the pages are laid out (the initial view sets the first zoom).
+    effect(() => {
+      const engine = this.engine();
+      const value = String(this.zoom());
+      if (
+        engine?.viewer.pagesCount &&
+        engine.viewer.currentScaleValue !== value
+      )
+        engine.viewer.currentScaleValue = value;
+    });
+
+    this.watchEditing();
+
+    // As pdf.js's comment mode: the comments show in the sidebar — in
+    // comment mode, while one is written, when one is picked.
+    effect(() => {
+      if (
+        this.editorMode() === 'comment' ||
+        this.pendingComment() ||
+        this.activeCommentId()
+      ) {
+        untracked(() => {
+          this.sidebarView.set('comments');
+          this.sidebarOpen.set(true);
+        });
+      }
     });
 
     this.destroyRef.onDestroy(() => {
       if (this.cleanupTimeout) clearTimeout(this.cleanupTimeout);
       this.releaseThumbnails();
-      this.scripting.destroy();
+      this.detachEngine?.();
       this.loadingTask?.destroy();
       this.pdfDocument()?.loadingTask.destroy();
       if (this.undoTimeout) {
@@ -902,10 +990,7 @@ export class ScPdfViewer {
   private async open(
     source: { url: string } | { data: Uint8Array } | null,
     hash = '',
-    {
-      keepAnnotations = false,
-      page,
-    }: { keepAnnotations?: boolean; page?: number } = {},
+    { rebuilt = false, page }: { rebuilt?: boolean; page?: number } = {},
   ): Promise<void> {
     this.loadingTask?.destroy();
     this.loadingTask = null;
@@ -915,14 +1000,13 @@ export class ScPdfViewer {
     this.pdfDocument.set(null);
     previous?.loadingTask.destroy();
     this.clearFind();
-    this.pendingComment.set(null);
-    // Annotations and comments belong to the document — except when it's
-    // the same one rebuilt (page organisation), which remaps them itself.
-    if (!keepAnnotations) {
+    this.engine()?.setDocument(null);
+    // pdf.js's editors belong to the document they edit.
+    this.closeEditing();
+    // The same document rebuilt (page organisation) keeps its undo.
+    if (!rebuilt) {
       this.clearPageSelection();
-      this.editorAnnotations.set([]);
-      this.comments.set([]);
-      this.activeCommentId.set(null);
+      this.editorMode.set('none');
       this.closeUndoBar();
     }
     this.error.set(null);
@@ -930,18 +1014,20 @@ export class ScPdfViewer {
     this.passwordCallback = null;
     this.loadProgress.set(null);
     this.pageLabels.set(null);
+    this.documentPageLabels = null;
+    this.cutCleanup = null;
+    this.pageClipboard.set(null);
     this.outline.set([]);
     this.formInfo.set({ fieldObjects: null, hasJSActions: false });
     this.layers.set([]);
     this.optionalContent.set(null);
     this.attachments.set([]);
     this.outlineExpanded.set(new Set());
-    this.history.set({ entries: [], index: -1 });
+    this.historyState.set({ entries: [], index: -1 });
+    this.currentView.set(null);
     this.permissions.set(null);
     this.propertiesDialogOpen.set(false);
     this.releaseThumbnails();
-    this.renderedPageNumbers.clear();
-    this.scripting.setDocument(null);
 
     if (!source) {
       this.isLoading.set(false);
@@ -988,12 +1074,11 @@ export class ScPdfViewer {
       if (!this.canEdit()) this.editorMode.set('none');
       this.pdfDocument.set(doc);
       this.totalPages.set(doc.numPages);
-      // Navigated (not just set), so the canvas goes there once laid out.
-      this.openingNavigation = true;
-      this.goToPage(
-        Math.min(Math.max(1, page ?? this.initialPage()), doc.numPages),
+      this.openingPage = Math.min(
+        Math.max(1, page ?? this.initialPage()),
+        doc.numPages,
       );
-      this.openingNavigation = false;
+      this.showDocument();
       this.isLoading.set(false);
       this.passwordRequired.set(false);
       this.loadProgress.set(1);
@@ -1096,12 +1181,14 @@ export class ScPdfViewer {
     if (doc !== this.pdfDocument()) return;
     this.formInfo.set({ fieldObjects, hasJSActions });
     this.loadLayers(doc);
-    if (this.enableScripting()) this.scripting.setDocument(doc);
 
-    this.pageLabels.set(usefulPageLabels(labels, doc.numPages));
+    this.documentPageLabels = usefulPageLabels(labels, doc.numPages);
+    this.pageLabels.set(this.documentPageLabels);
+    this.engine()?.viewer.setPageLabels(this.pageLabels());
     this.outline.set(outline);
     this.outlineExpanded.set(new Set(openOutlineIds(outline)));
     this.loadAttachments(doc);
+    this.loadComments(doc);
     this.applyPageLayout(pageLayout);
 
     const view = pageMode ? PAGE_MODES[pageMode] : undefined;
@@ -1110,15 +1197,13 @@ export class ScPdfViewer {
       this.sidebarOpen.set(true);
     }
 
+    // Where it opens (as pdf.js's setInitialView): the open parameters,
+    // else the document's open action, else where it was left.
     const openDest = field(openAction, 'dest');
-    // Where the document opens is jumped to, not scrolled to (as pdf.js).
-    this.openingNavigation = true;
-    try {
-      if (hash) await this.applyHash(hash);
-      else if (openDest) await this.goToDestination(openDest);
-    } finally {
-      this.openingNavigation = false;
-    }
+    this.openingHash = hash;
+    this.openingDest = openDest;
+    this.documentRead = true;
+    this.applyInitialView();
     if (doc !== this.pdfDocument()) return;
 
     const scripts = values(jsActions).flatMap((list) =>
@@ -1256,92 +1341,15 @@ export class ScPdfViewer {
     }
   }
 
-  /** Goes to a destination (see `resolveDestination`), with its zoom. */
-  async goToDestination(dest: unknown): Promise<void> {
-    const target = await this.resolveDestination(dest);
-    if (!target) return;
-    if (target.zoom !== undefined) this.setZoom(target.zoom);
-    this.jumpToPage(target.pageNumber, target.top);
-  }
-
-  /** Goes to a bookmark's destination, or opens its web link. */
-  goToOutlineItem(item: ScPdfOutlineItem): void {
-    if (item.url) {
-      this.document.defaultView?.open(item.url, '_blank', 'noopener');
-      return;
-    }
-    if (!item.pageNumber) return;
-    if (item.zoom !== undefined) this.setZoom(item.zoom);
-    this.jumpToPage(item.pageNumber, item.top);
-  }
-
   /**
    * Applies pdf.js's open parameters — `page`, `zoom` (`150`, `page-width`,
    * `150,0,720`…), `nameddest`, `search`, `pagemode` — or a bare named
-   * destination (`#chapter-2`). `src`'s fragment is applied on load.
+   * destination (`#chapter-2`), with pdf.js's link service. `src`'s
+   * fragment is applied on load.
    */
-  async applyHash(hash: string): Promise<void> {
-    const doc = this.pdfDocument();
+  applyHash(hash: string): void {
     hash = hash.replace(/^#/, '');
-    if (!doc || !hash) return;
-
-    if (!hash.includes('=')) {
-      let dest: unknown = decodeURIComponent(hash);
-      try {
-        const parsed: unknown = JSON.parse(dest as string);
-        dest = Array.isArray(parsed) ? parsed : String(parsed);
-      } catch {
-        // A name.
-      }
-      await this.goToDestination(dest);
-      return;
-    }
-
-    // Keys are case-insensitive, as in pdf.js.
-    const params = new Map(
-      [...new URLSearchParams(hash)].map(([key, value]) => [
-        key.toLowerCase(),
-        value,
-      ]),
-    );
-
-    const pageMode = params.get('pagemode');
-    if (pageMode === 'none') {
-      this.sidebarOpen.set(false);
-    } else if (pageMode && HASH_PAGE_MODES[pageMode]) {
-      this.sidebarView.set(HASH_PAGE_MODES[pageMode]);
-      this.sidebarOpen.set(true);
-    }
-
-    let pdfTop: unknown = null;
-    const zoom = params.get('zoom');
-    if (zoom) {
-      const [scale, , top] = zoom.split(',');
-      const percent = parseFloat(scale);
-      const level: ScPdfZoomLevel | undefined = Number.isFinite(percent)
-        ? Math.min(MAX_SCALE, Math.max(MIN_SCALE, percent / 100))
-        : NAMED_ZOOMS[scale];
-      if (level !== undefined) this.setZoom(level);
-      if (top !== undefined) pdfTop = parseFloat(top);
-    }
-
-    const nameddest = params.get('nameddest');
-    const page = parseInt(params.get('page') ?? '', 10);
-    if (nameddest) {
-      await this.goToDestination(nameddest);
-    } else if (Number.isInteger(page)) {
-      const pageNumber = Math.min(Math.max(1, page), doc.numPages);
-      this.jumpToPage(
-        pageNumber,
-        await this.topOnPage(doc, pageNumber, pdfTop),
-      );
-    }
-
-    const search = params.get('search');
-    if (search) {
-      this.findOpen.set(true);
-      this.find(search);
-    }
+    if (hash) this.engine()?.linkService.setHash(hash);
   }
 
   /** A page's label, or its number when the document has none. */
@@ -1358,172 +1366,6 @@ export class ScPdfViewer {
     return Number.isInteger(page) && page >= 1 && page <= this.totalPages()
       ? page
       : null;
-  }
-
-  /** The previous page — the previous spread in page scroll mode. */
-  goToPrevPage(): void {
-    if (!this.canGoPrev()) return;
-    if (this.scrollMode() === 'page') {
-      const [first] = this.spreadOf(this.currentPage());
-      this.goToPage(this.spreadOf(Math.max(1, first - 1))[0]);
-    } else {
-      this.goToPage(this.currentPage() - 1);
-    }
-  }
-
-  /** The next page — the next spread in page scroll mode. */
-  goToNextPage(): void {
-    if (!this.canGoNext()) return;
-    if (this.scrollMode() === 'page') {
-      const [, last] = this.spreadOf(this.currentPage());
-      this.goToPage(Math.min(this.totalPages(), last + 1));
-    } else {
-      this.goToPage(this.currentPage() + 1);
-    }
-  }
-
-  /** The first and last page of the spread holding `page`. */
-  spreadOf(page: number): [number, number] {
-    const mode = this.spreadMode();
-    if (mode === 'none') return [page, page];
-    // Odd spreads pair 1–2, 3–4…; even spreads show 1 alone, then 2–3, 4–5…
-    const first =
-      mode === 'odd'
-        ? page % 2 === 1
-          ? page
-          : page - 1
-        : page === 1
-          ? 1
-          : page % 2 === 0
-            ? page
-            : page - 1;
-    const last =
-      mode === 'even' && first === 1
-        ? 1
-        : Math.min(first + 1, this.totalPages());
-    return [first, last];
-  }
-
-  /**
-   * Where the user was before each jump (a link, a bookmark, a thumbnail,
-   * the page input…), for Back and Forward, as pdf.js's history — kept in
-   * the viewer, not the browser's history (the app owns that).
-   */
-  private readonly history = signal<{ entries: ScPdfPlace[]; index: number }>({
-    entries: [],
-    index: -1,
-  });
-  readonly canGoBack = computed(() => this.history().index > 0);
-  readonly canGoForward = computed(() => {
-    const { entries, index } = this.history();
-    return index < entries.length - 1;
-  });
-  /** Where the pages are scrolled to (the canvas tells). */
-  private locator: (() => ScPdfPlace) | null = null;
-
-  /** @internal The canvas tells where the pages are scrolled to. */
-  setLocator(locator: (() => ScPdfPlace) | null): void {
-    this.locator = locator;
-  }
-
-  private location(): ScPdfPlace {
-    return this.locator?.() ?? { page: this.currentPage(), top: 0 };
-  }
-
-  /** Goes to a page, remembering where it came from (Back returns there). */
-  jumpToPage(page: number, top = 0): void {
-    if (page < 1 || page > this.totalPages()) return;
-    if (!this.openingNavigation) {
-      const from = this.location();
-      const to = { page, top };
-      this.history.update(({ entries, index }) => {
-        const kept = entries.slice(0, index + 1);
-        // The current entry is where the user is now (they may have scrolled).
-        kept.splice(Math.max(0, kept.length - 1), 1, from);
-        if (from.page !== to.page || Math.abs(from.top - to.top) > 0.01) {
-          kept.push(to);
-        }
-        const trimmed = kept.slice(-MAX_HISTORY);
-        return { entries: trimmed, index: trimmed.length - 1 };
-      });
-    }
-    this.goToPage(page, top);
-  }
-
-  /** Back to where the user was before the last jump. */
-  goBack(): void {
-    this.moveInHistory(-1);
-  }
-
-  /** Forward again, after going back. */
-  goForward(): void {
-    this.moveInHistory(1);
-  }
-
-  private moveInHistory(delta: number): void {
-    const { entries, index } = this.history();
-    const target = entries[index + delta];
-    if (!target) return;
-    const updated = entries.slice();
-    updated[index] = this.location();
-    this.history.set({ entries: updated, index: index + delta });
-    this.goToPage(target.page, target.top);
-  }
-
-  /** Goes to a page; `top` is where on it, from 0 (top) to 1 (bottom). */
-  goToPage(page: number, top = 0): void {
-    if (page >= 1 && page <= this.totalPages()) {
-      this.navigatePage.set(page);
-      this.navigateTop.set(top);
-      this.navigateSmooth.set(!this.openingNavigation);
-      this.currentPage.set(page);
-      this.navigateTrigger.update((v) => v + 1);
-      this.pageChange.emit({
-        currentPage: page,
-        totalPages: this.totalPages(),
-      });
-    }
-  }
-
-  /** Zooms in a step: ×1.1, rounded up to a tenth, as pdf.js (up to 2500%). */
-  zoomIn(): void {
-    this.setZoom(this.zoomStep(1.1, Math.ceil));
-  }
-
-  /** Zooms out a step: ÷1.1, rounded down to a tenth, as pdf.js (to 10%). */
-  zoomOut(): void {
-    this.setZoom(this.zoomStep(1 / 1.1, Math.floor));
-  }
-
-  private zoomStep(delta: number, round: (x: number) => number): number {
-    const scale =
-      round(Number((this.currentScale() * delta).toFixed(2)) * 10) / 10;
-    return Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale));
-  }
-
-  /** Multiplies the current scale (wheel and pinch zoom). */
-  zoomBy(factor: number): void {
-    const scale = Math.min(
-      MAX_SCALE,
-      Math.max(MIN_SCALE, this.currentScale() * factor),
-    );
-    this.setZoom(Math.round(scale * 1000) / 1000);
-  }
-
-  setZoom(level: ScPdfZoomLevel): void {
-    this.zoom.set(level);
-    this.zoomChange.emit({
-      zoom: level,
-      scale: typeof level === 'number' ? level : 1,
-    });
-  }
-
-  rotateLeft(): void {
-    this.rotation.update((r) => (((r - 90) % 360) + 360) % 360);
-  }
-
-  rotateRight(): void {
-    this.rotation.update((r) => (r + 90) % 360);
   }
 
   /** Downloads the document as it was loaded. */
@@ -1543,42 +1385,48 @@ export class ScPdfViewer {
     );
   }
 
-  /** Whether there's anything to write into the file: annotations, comments, form data. */
+  /**
+   * Whether there's anything to write into the file: annotations, comments,
+   * form data, pages reorganised.
+   */
   hasChanges(): boolean {
+    const doc = this.pdfDocument();
     return (
-      this.editorAnnotations().length > 0 ||
-      this.comments().some((comment) => comment.text.trim()) ||
-      (this.pdfDocument()?.annotationStorage.size ?? 0) > 0
+      !!doc &&
+      (doc.annotationStorage.size > 0 || doc.pagesMapper.hasBeenAltered())
     );
   }
 
   /**
-   * The document with the viewer's annotations and comments, and the form
-   * data, written into it — a new PDF file's bytes.
+   * The document with the annotations, comments and form data written into
+   * it, its pages in their order — a new PDF file's bytes (as pdf.js saves).
    */
   async saveDocument(): Promise<Uint8Array> {
     const doc = this.pdfDocument();
     if (!doc) throw new Error('No document to save.');
-    await this.scripting.willSave();
-    const storage = doc.annotationStorage;
-    const values = await annotationStorageValues(
-      doc,
-      this.editorAnnotations(),
-      this.comments(),
-    );
-    for (const [key, value] of values) storage.setValue(key, value);
+    const scripting = this.engine()?.scriptingManager;
+    await scripting?.dispatchWillSave();
     try {
-      return await doc.saveDocument();
+      const mapper = doc.pagesMapper;
+      return mapper.hasBeenAltered()
+        ? await extractMapped(doc, mapper.getPageMappingForSaving())
+        : await doc.saveDocument();
     } finally {
-      // They stay editable in the viewer; only the file gets them.
-      for (const key of values.keys()) storage.remove(key);
-      this.scripting.didSave();
+      scripting?.dispatchDidSave();
     }
   }
 
-  // Page organisation (as pdf.js's): each change rebuilds the document with
-  // pdf.js's extractPages — form data carried over, the viewer's annotations
-  // and comments following their pages — and can be undone.
+  // Page organisation, as pdf.js's: the document's page map (`pagesMapper`)
+  // moves, deletes, copies and pastes pages, and pdf.js's viewer moves their
+  // views — their annotations with them — without rebuilding the file;
+  // saving writes them in their new order. Inserting another file rebuilds it.
+
+  /** The document's page labels, by its own page number (they follow their pages). */
+  private documentPageLabels: string[] | null = null;
+  /** @internal Counts page edits: a page number may show another page since. */
+  readonly pageEdits = signal(0);
+  /** Cut pages, kept for a paste: what frees them if none comes. */
+  private cutCleanup: (() => void) | null = null;
 
   /** All page numbers, in order. */
   private allPages(): number[] {
@@ -1593,99 +1441,199 @@ export class ScPdfViewer {
       .sort((a, b) => a - b);
   }
 
+  /** Each page's own number in the document, in their current order. */
+  private pageOrder(doc: PDFDocumentProxy): number[] {
+    return this.allPages().map((page) => doc.pagesMapper.getPageId(page));
+  }
+
+  /**
+   * Tells pdf.js's viewer and find controller the pages changed (they move
+   * their views, text and annotations), then the viewer's own state.
+   */
+  private pagesEdited(
+    doc: PDFDocumentProxy,
+    type: string,
+    pageNumbers: number[] = [],
+    {
+      hasBeenCut = false,
+      focus,
+    }: { hasBeenCut?: boolean; focus?: number } = {},
+  ): void {
+    const engine = this.engine();
+    engine?.eventBus.dispatch('pagesedited', {
+      source: this,
+      pagesMapper: doc.pagesMapper,
+      type,
+      pageNumbers,
+      hasBeenCut,
+    });
+    if (type === 'copy' || type === 'cancelCopy' || type === 'cleanSavedData') {
+      return;
+    }
+    const total = doc.pagesMapper.pagesNumber;
+    this.totalPages.set(total);
+    this.pageEdits.update((count) => count + 1);
+    const labels = this.documentPageLabels;
+    this.pageLabels.set(
+      labels ? this.pageOrder(doc).map((id) => labels[id - 1]) : null,
+    );
+    const page = Math.min(Math.max(1, focus ?? this.currentPage()), total);
+    if (engine) engine.viewer.currentPageNumber = page;
+    this.currentPage.set(page);
+  }
+
   /**
    * Moves pages to just before `beforePage` (past the end: to the end),
-   * keeping their order. Resolves with their new page numbers.
+   * keeping their order — undoable. Returns their new page numbers.
    */
-  async movePages(
-    pageNumbers: number[],
-    beforePage: number,
-  ): Promise<number[]> {
+  movePages(pageNumbers: number[], beforePage: number): number[] {
+    const doc = this.pdfDocument();
     const moving = this.pageSet(pageNumbers);
-    if (!moving.length) return [];
-    const rest = this.allPages().filter((p) => !moving.includes(p));
-    rest.splice(rest.filter((p) => p < beforePage).length, 0, ...moving);
-    const start = rest.indexOf(moving[0]) + 1;
-    await this.rebuild(
-      rest.map((page) => ({ page })),
-      { kind: 'pages-moved', count: moving.length },
-      { focusPage: start },
+    if (!doc || !moving.length) return [];
+    const order = this.pageOrder(doc);
+    const index = Math.max(0, beforePage - 1);
+    const start =
+      Math.min(
+        index - moving.filter((page) => page - 1 < index).length,
+        this.totalPages() - moving.length,
+      ) + 1;
+    doc.pagesMapper.movePages(new Set(moving), moving, index);
+    this.pagesEdited(doc, 'move', moving, { focus: start });
+    this.showUndoBar({ kind: 'pages-moved', count: moving.length }, () =>
+      this.restoreOrder(doc, order),
     );
     return moving.map((_, i) => start + i);
   }
 
-  /** Deletes pages (not all of them). */
-  deletePages(pageNumbers: number[]): Promise<void> {
+  /** Puts the pages back in an order they had (undoing a move). */
+  private restoreOrder(doc: PDFDocumentProxy, order: number[]): void {
+    if (doc !== this.pdfDocument()) return;
+    const mapper = doc.pagesMapper;
+    order.forEach((id, position) => {
+      let from = position + 1;
+      while (from <= mapper.pagesNumber && mapper.getPageId(from) !== id) {
+        from++;
+      }
+      if (from > mapper.pagesNumber || from === position + 1) return;
+      mapper.movePages(new Set([from]), [from], position);
+      this.pagesEdited(doc, 'move', [from]);
+    });
+  }
+
+  /** Deletes pages (not all of them) — undoable. */
+  deletePages(pageNumbers: number[]): void {
+    const doc = this.pdfDocument();
     const removing = this.pageSet(pageNumbers);
-    if (!removing.length || removing.length >= this.totalPages()) {
-      return Promise.resolve();
+    if (!doc || !removing.length || removing.length >= this.totalPages()) {
+      return;
     }
-    return this.rebuild(
-      this.allPages()
-        .filter((p) => !removing.includes(p))
-        .map((page) => ({ page })),
+    this.removePages(doc, removing, 'delete');
+    this.showUndoBar(
       { kind: 'pages-deleted', count: removing.length },
+      () => this.restorePages(doc),
+      // No undo any more: pdf.js frees the deleted pages.
+      () => this.freeDeletedPages(doc),
     );
   }
 
   /** Copies pages (with their annotations, comments and form data) for `pastePages`. */
-  async copyPages(pageNumbers: number[]): Promise<void> {
+  copyPages(pageNumbers: number[]): void {
     const doc = this.pdfDocument();
     const pages = this.pageSet(pageNumbers);
     if (!doc || !pages.length) return;
-    const data = await doc.extractPages([
-      { document: null, includePages: pages.map((p) => p - 1) },
-    ]);
-    const onPages = <T extends { pageNumber: number }>(items: T[]): T[] =>
-      items
-        .filter((item) => pages.includes(item.pageNumber))
-        .map((item) => ({
-          ...item,
-          pageNumber: pages.indexOf(item.pageNumber) + 1,
-        }));
-    this.pageClipboard.set({
-      data,
-      count: pages.length,
-      annotations: onPages(this.editorAnnotations()),
-      comments: onPages(this.comments()),
+    this.dropClipboard();
+    doc.pagesMapper.copyPages(Uint32Array.from(pages));
+    this.pagesEdited(doc, 'copy', pages);
+    this.pageClipboard.set({ count: pages.length, cut: false });
+  }
+
+  /** Cuts pages — paste them elsewhere to move them; undoable. */
+  cutPages(pageNumbers: number[]): void {
+    const doc = this.pdfDocument();
+    const pages = this.pageSet(pageNumbers);
+    if (!doc || !pages.length || pages.length >= this.totalPages()) return;
+    this.dropClipboard();
+    doc.pagesMapper.copyPages(Uint32Array.from(pages));
+    this.pagesEdited(doc, 'copy', pages);
+    this.removePages(doc, pages, 'cut');
+    this.pageClipboard.set({ count: pages.length, cut: true });
+    // Pasted, the cut pages are moved; never pasted, they're freed.
+    this.cutCleanup = () => this.freeDeletedPages(doc);
+    this.showUndoBar({ kind: 'pages-deleted', count: pages.length }, () => {
+      this.cutCleanup = null;
+      this.dropClipboard();
+      this.restorePages(doc);
     });
   }
 
-  /** Copies pages, then deletes them — paste them elsewhere to move them. */
-  async cutPages(pageNumbers: number[]): Promise<void> {
-    await this.copyPages(pageNumbers);
-    await this.deletePages(pageNumbers);
-  }
-
-  /** Pastes the copied / cut pages after `afterPage` (0: at the start). */
-  pastePages(afterPage = this.currentPage()): Promise<void> {
+  /** Pastes the copied / cut pages after `afterPage` (0: at the start) — undoable. */
+  pastePages(afterPage = this.currentPage()): void {
+    const doc = this.pdfDocument();
     const clip = this.pageClipboard();
-    if (!clip) return Promise.resolve();
-    const entries: ScPdfPageEntry[] = this.allPages().map((page) => ({
-      page,
-    }));
-    entries.splice(
-      afterPage,
-      0,
-      ...Array.from({ length: clip.count }, (_, index) => ({
-        data: clip.data,
-        index,
-        annotations: clip.annotations,
-        comments: clip.comments,
-      })),
-    );
-    return this.rebuild(
-      entries,
-      { kind: 'pages-pasted', count: clip.count },
-      { focusPage: afterPage + 1 },
-    );
+    if (!doc || !clip) return;
+    const at = Math.min(Math.max(0, afterPage), this.totalPages());
+    // The cut pages' views are the pasted ones now: nothing to free.
+    this.cutCleanup = null;
+    doc.pagesMapper.pastePages(at);
+    this.pageClipboard.set(null);
+    this.pagesEdited(doc, 'paste', [], {
+      hasBeenCut: clip.cut,
+      focus: at + 1,
+    });
+    const pasted = Array.from({ length: clip.count }, (_, i) => at + 1 + i);
+    this.showUndoBar({ kind: 'pages-pasted', count: clip.count }, () => {
+      if (doc !== this.pdfDocument()) return;
+      this.removePages(doc, pasted, 'delete');
+      this.freeDeletedPages(doc);
+    });
   }
 
-  /** Inserts the pages of another PDF after `afterPage` (merging files). */
+  private removePages(
+    doc: PDFDocumentProxy,
+    pages: number[],
+    type: 'delete' | 'cut',
+  ): void {
+    doc.pagesMapper.deletePages(pages);
+    this.pagesEdited(doc, type, pages);
+    this.selectedPages.set(new Set());
+  }
+
+  /** Undoes the last deletion (pdf.js keeps the deleted pages until freed). */
+  private restorePages(doc: PDFDocumentProxy): void {
+    if (doc !== this.pdfDocument()) return;
+    doc.pagesMapper.cancelDelete();
+    this.pagesEdited(doc, 'cancelDelete');
+  }
+
+  private freeDeletedPages(doc: PDFDocumentProxy): void {
+    if (doc !== this.pdfDocument()) return;
+    doc.pagesMapper.cleanSavedData();
+    this.pagesEdited(doc, 'cleanSavedData');
+  }
+
+  /** The clipboard replaced: cut pages never pasted are freed. */
+  private dropClipboard(): void {
+    const doc = this.pdfDocument();
+    this.cutCleanup?.();
+    this.cutCleanup = null;
+    if (doc && this.pageClipboard()) {
+      doc.pagesMapper.cancelCopy();
+      this.pagesEdited(doc, 'cancelCopy');
+    }
+    this.pageClipboard.set(null);
+  }
+
+  /** The name of the file `insertFile` couldn't insert (not a PDF), until the next one. */
+  readonly insertFailed = signal<string | null>(null);
+
+  /** Inserts the pages of another PDF after `afterPage` (merging files) — undoable. */
   async insertFile(
     file: File | Uint8Array,
     afterPage = this.totalPages(),
   ): Promise<boolean> {
+    const doc = this.pdfDocument();
+    if (!doc || this.organizing()) return false;
+    this.insertFailed.set(null);
     const data =
       file instanceof Uint8Array
         ? file
@@ -1700,23 +1648,47 @@ export class ScPdfViewer {
       count = other.numPages;
       other.loadingTask.destroy();
     } catch {
-      // Not a PDF (or unreadable): the consumer says so.
+      // Not a PDF (or unreadable): you say so.
+      this.insertFailed.set(file instanceof File ? file.name : '');
       return false;
     }
-    const entries: ScPdfPageEntry[] = this.allPages().map((page) => ({
-      page,
-    }));
-    entries.splice(
-      afterPage,
-      0,
-      ...Array.from({ length: count }, (_, index) => ({ data, index })),
-    );
-    await this.rebuild(
-      entries,
-      { kind: 'pages-inserted', count },
-      { focusPage: afterPage + 1 },
-    );
-    return true;
+    this.organizing.set(true);
+    try {
+      // The document as it is — annotations, form data, page order — is
+      // the base, and what Undo goes back to.
+      const before = {
+        data: await this.saveDocument(),
+        page: this.currentPage(),
+      };
+      const base = await getDocument({
+        data: before.data.slice(),
+        ...this.loadOptions(),
+      }).promise;
+      let merged: Uint8Array;
+      try {
+        const entries: ScPdfPageEntry[] = this.allPages().map((page) => ({
+          page,
+        }));
+        entries.splice(
+          afterPage,
+          0,
+          ...Array.from({ length: count }, (_, index) => ({ data, index })),
+        );
+        merged = await base.extractPages(pageInfos(entries));
+      } finally {
+        base.loadingTask.destroy();
+      }
+      await this.replaceDocument(merged, afterPage + 1);
+      this.showUndoBar({ kind: 'pages-inserted', count }, () =>
+        this.replaceDocument(before.data, before.page),
+      );
+      return true;
+    } catch (error) {
+      console.error('Page organisation:', error);
+      return false;
+    } finally {
+      this.organizing.set(false);
+    }
   }
 
   /** Downloads a PDF of just these pages, with their annotations, comments and form data. */
@@ -1724,114 +1696,15 @@ export class ScPdfViewer {
     const doc = this.pdfDocument();
     const pages = this.pageSet(pageNumbers);
     if (!doc || !pages.length) return;
-    const onPages = <T extends { pageNumber: number }>(items: T[]): T[] =>
-      items.filter((item) => pages.includes(item.pageNumber));
-    const values = await annotationStorageValues(
-      doc,
-      onPages(this.editorAnnotations()),
-      onPages(this.comments()),
-    );
-    const storage = doc.annotationStorage;
-    for (const [key, value] of values) storage.setValue(key, value);
-    let data: Uint8Array;
-    try {
-      data = await doc.extractPages([
-        { document: null, includePages: pages.map((p) => p - 1) },
-      ]);
-    } finally {
-      for (const key of values.keys()) storage.remove(key);
-    }
+    const data = await extractMapped(doc, doc.pagesMapper.extractPages(pages));
     this.saveAs(
       new Blob([data as Uint8Array<ArrayBuffer>], { type: 'application/pdf' }),
       `${this.downloadName()} (${pages.length === 1 ? `page ${pages[0]}` : `${pages.length} pages`}).pdf`,
     );
   }
 
-  /** Rebuilds the document from `entries` (its pages and others), undoably. */
-  private async rebuild(
-    entries: ScPdfPageEntry[],
-    undo: ScPdfUndoable,
-    { focusPage }: { focusPage?: number } = {},
-  ): Promise<void> {
-    const doc = this.pdfDocument();
-    if (!doc || this.organizing() || !entries.length) return;
-    this.organizing.set(true);
-    try {
-      // For undo: the document as it is (form data included), and the rest.
-      const before = {
-        data: await doc.extractPages([{ document: null }]),
-        annotations: this.editorAnnotations(),
-        comments: this.comments(),
-        page: this.currentPage(),
-      };
-      const data = await doc.extractPages(pageInfos(entries));
-      const { annotations, comments } = this.remapToEntries(entries);
-      const moved = entries.findIndex(
-        (entry) => 'page' in entry && entry.page === before.page,
-      );
-      await this.replaceDocument(
-        data,
-        annotations,
-        comments,
-        focusPage ??
-          (moved >= 0 ? moved + 1 : Math.min(before.page, entries.length)),
-      );
-      this.showUndoBar(undo, () =>
-        this.replaceDocument(
-          before.data,
-          before.annotations,
-          before.comments,
-          before.page,
-        ),
-      );
-    } catch (error) {
-      console.error('Page organisation:', error);
-    } finally {
-      this.organizing.set(false);
-    }
-  }
-
-  /** The annotations and comments of each entry's source page, on its new page. */
-  private remapToEntries(entries: ScPdfPageEntry[]): {
-    annotations: ScPdfEditorAnnotation[];
-    comments: ScPdfComment[];
-  } {
-    const annotations: ScPdfEditorAnnotation[] = [];
-    const comments: ScPdfComment[] = [];
-    const usedIds = new Set<string>();
-    entries.forEach((entry, position) => {
-      const [sourceAnnotations, sourceComments, sourcePage] =
-        'page' in entry
-          ? [this.editorAnnotations(), this.comments(), entry.page]
-          : [entry.annotations ?? [], entry.comments ?? [], entry.index + 1];
-      for (const ann of sourceAnnotations) {
-        if (ann.pageNumber !== sourcePage) continue;
-        // A page placed twice gets its annotations twice: fresh ids.
-        const id = usedIds.has(ann.id)
-          ? `editor-${++this.editorIdCounter}`
-          : ann.id;
-        usedIds.add(id);
-        annotations.push({ ...ann, id, pageNumber: position + 1 });
-      }
-      for (const comment of sourceComments) {
-        if (comment.pageNumber !== sourcePage) continue;
-        const id = usedIds.has(comment.id)
-          ? `comment-${++this.commentIdCounter}`
-          : comment.id;
-        usedIds.add(id);
-        comments.push({ ...comment, id, pageNumber: position + 1 });
-      }
-    });
-    return { annotations, comments };
-  }
-
   /** Shows a rebuilt document in place of the current one. */
-  private async replaceDocument(
-    data: Uint8Array,
-    annotations: ScPdfEditorAnnotation[],
-    comments: ScPdfComment[],
-    page: number,
-  ): Promise<void> {
+  private async replaceDocument(data: Uint8Array, page: number): Promise<void> {
     // It's a local file now (download name kept; Retry reloads this).
     this.localFile.set(
       new File(
@@ -1842,34 +1715,8 @@ export class ScPdfViewer {
         },
       ),
     );
-    this.editorAnnotations.set(annotations);
-    this.comments.set(comments);
-    this.editorTrigger.update((v) => v + 1);
-    // The pages are renumbered (movePages re-selects the moved ones).
     this.clearPageSelection();
-    await this.open({ data }, '', { keepAnnotations: true, page });
-  }
-
-  /** A page was drawn (its form fields are in the DOM) — for page scripts. */
-  pageRendered(pageNumber: number): void {
-    this.renderedPageNumbers.add(pageNumber);
-    this.scripting.pageRendered(pageNumber);
-  }
-
-  /** A page was released (scrolled far away). */
-  pageReleased(pageNumber: number): void {
-    this.renderedPageNumbers.delete(pageNumber);
-  }
-
-  /** A zoom asked for by a script: a scale, or Acrobat's zoom types. */
-  private setScriptZoom(value: number | string): void {
-    if (typeof value === 'number' && value > 0) {
-      this.setZoom(Math.min(MAX_SCALE, Math.max(MIN_SCALE, value)));
-    } else if (value === 'FitPage' || value === 'FitHeight') {
-      this.setZoom('page-fit');
-    } else if (value === 'FitWidth' || value === 'FitVisibleWidth') {
-      this.setZoom('page-width');
-    }
+    await this.open({ data }, '', { rebuilt: true, page });
   }
 
   private saveAs(blob: Blob, filename: string): void {
@@ -1895,7 +1742,7 @@ export class ScPdfViewer {
     // page shows them as the PDF will.
     let printed: PDFDocumentProxy = doc;
     try {
-      await this.scripting.willPrint();
+      await this.engine()?.scriptingManager?.dispatchWillPrint();
       if (this.hasChanges()) {
         printed = await getDocument({
           data: await this.saveDocument(),
@@ -1933,7 +1780,7 @@ export class ScPdfViewer {
       if (!this.printCancelled) {
         this.printDialogOpen.set(false);
         await this.printImages(urls);
-        this.scripting.didPrint();
+        this.engine()?.scriptingManager?.dispatchDidPrint();
         return;
       }
     } catch (err) {
@@ -2036,27 +1883,6 @@ export class ScPdfViewer {
     this.fail({ kind: 'password', error: null });
   }
 
-  // Signature methods
-  openSignatureDialog(): void {
-    this.signatureDialogOpen.set(true);
-  }
-
-  closeSignatureDialog(): void {
-    this.signatureDialogOpen.set(false);
-    if (this.editorMode() === 'signature') this.editorMode.set('none');
-  }
-
-  /** Opens the alt-text dialog for an image annotation. */
-  openAltText(annotationId: string): void {
-    this.altTextAnnotationId.set(annotationId);
-    this.altTextDialogOpen.set(true);
-  }
-
-  closeAltText(): void {
-    this.altTextDialogOpen.set(false);
-    this.altTextAnnotationId.set(null);
-  }
-
   /** The `properties` dialog is open. */
   readonly propertiesDialogOpen = signal(false);
   /** The document's properties, loaded when the dialog opens. */
@@ -2082,29 +1908,6 @@ export class ScPdfViewer {
     this.propertiesDialogOpen.set(false);
   }
 
-  /** Shows or hides a layer (optional content group); the pages redraw. */
-  setLayerVisible(id: string, visible: boolean): void {
-    const config = this.optionalContent();
-    if (!config) return;
-    config.setVisibility(id, visible);
-    this.layers.update((layers) =>
-      layers.map((layer) => (layer.id === id ? { ...layer, visible } : layer)),
-    );
-  }
-
-  /** Applies a link's SetOCGState action (layers shown, hidden or toggled). */
-  applyLayerState(action: unknown): void {
-    const config = this.optionalContent();
-    if (!config) return;
-    config.setOCGState(action as Parameters<typeof config.setOCGState>[0]);
-    this.layers.update((layers) =>
-      layers.map((layer) => {
-        const visible = config.getGroup(layer.id)?.visible ?? layer.visible;
-        return visible === layer.visible ? layer : { ...layer, visible };
-      }),
-    );
-  }
-
   /** The document's attached files. */
   private async loadAttachments(doc: PDFDocumentProxy): Promise<void> {
     const attachments = await doc.getAttachments().catch(() => null);
@@ -2119,18 +1922,6 @@ export class ScPdfViewer {
         return { filename, content, id };
       }),
     );
-  }
-
-  /** The document's layers, with their default visibility. */
-  private async loadLayers(doc: PDFDocumentProxy): Promise<void> {
-    const config = await doc.getOptionalContentConfig().catch(() => null);
-    if (doc !== this.pdfDocument()) return;
-    this.optionalContent.set(config);
-    const layers: ScPdfLayer[] = [];
-    for (const [id, group] of config ?? []) {
-      layers.push({ id, name: group.name ?? id, visible: group.visible });
-    }
-    this.layers.set(layers);
   }
 
   addSavedSignature(sig: Omit<ScPdfSignatureData, 'id'>): void {
@@ -2148,82 +1939,988 @@ export class ScPdfViewer {
     );
   }
 
-  /** Places a signature image on the current page. */
-  placeSignature(dataUrl: string, description = ''): void {
-    this.addEditorAnnotation({
-      type: 'signature',
-      pageNumber: this.currentPage(),
-      x: 0.3,
-      y: 0.8,
-      imageDataUrl: dataUrl,
-      width: 0.25,
-      height: 0.1,
-      description,
-    });
-    this.editorMode.set('none');
-  }
-
-  // Comment methods
-  addComment(comment: Omit<ScPdfComment, 'id'>): string {
-    const id = `comment-${++this.commentIdCounter}`;
-    this.comments.update((list) => [...list, { ...comment, id }]);
-    return id;
-  }
-
-  removeComment(id: string): void {
-    this.comments.update((list) => list.filter((c) => c.id !== id));
-    if (this.activeCommentId() === id) this.activeCommentId.set(null);
-  }
-
-  /** Starts a comment at a point of a page (positions are 0–1 of the page). */
-  startComment(pageNumber: number, x: number, y: number): void {
-    this.pendingComment.set({ pageNumber, x, y });
-    this.editorMode.set('none');
-  }
-
-  cancelComment(): void {
-    this.pendingComment.set(null);
-  }
-
-  /** Posts the pending comment (or one on the current page) and selects it. */
-  postComment(text: string, author = 'User'): void {
-    const place = this.pendingComment() ?? {
-      pageNumber: this.currentPage(),
-      x: 0.5,
-      y: 0.1,
-    };
-    const id = this.addComment({
-      ...place,
-      text,
-      author,
-      date: Temporal.Now.plainDateTimeISO().toLocaleString(),
-      color: '#FFFF00',
-    });
-    this.pendingComment.set(null);
-    this.activeCommentId.set(id);
-  }
-
-  /** Selects a comment and shows its page. */
-  showComment(id: string): void {
-    const comment = this.comments().find((c) => c.id === id);
-    if (!comment) return;
-    this.activeCommentId.set(id);
-    if (comment.pageNumber !== this.currentPage()) {
-      this.goToPage(comment.pageNumber);
-    }
-  }
-
-  updateComment(id: string, text: string): void {
-    this.comments.update((list) =>
-      list.map((c) => (c.id === id ? { ...c, text } : c)),
-    );
-  }
-
   // Find methods
   /**
    * pdf.js's keyboard shortcuts. Only while focus is in the viewer, and not
    * while typing in a field (apart from Escape and Ctrl/⌘ shortcuts).
    */
+  // ── pdf.js's viewer ──────────────────────────────────────────────────
+
+  /** pdf.js's viewer components, once the canvas has created them. */
+  readonly engine = signal<ScPdfEngine | null>(null);
+  private detachEngine: (() => void) | null = null;
+
+  /** Where the document opens, until its pages are laid out. */
+  private openingPage = 1;
+  private openingHash = '';
+  private openingDest: unknown = null;
+  /** Its pages are laid out: the initial view can be set. */
+  private pagesReady = false;
+  /** Its settings are read (open action, page mode…): the initial view can be set. */
+  private documentRead = false;
+
+  /** The current view's open parameters (`page=3&zoom=150,0,720`), for a link to it. */
+  readonly currentView = signal<string | null>(null);
+
+  /**
+   * @internal The canvas hands over pdf.js's viewer: its events feed the
+   * viewer's state, as pdf.js's application listens to them (`web/app.js`).
+   */
+  attachEngine(engine: ScPdfEngine): void {
+    this.detachEngine?.();
+    const off = [
+      engine.on<{ pageNumber: number }>('pagechanging', ({ pageNumber }) => {
+        if (pageNumber === this.currentPage()) return;
+        this.currentPage.set(pageNumber);
+        this.pageChange.emit({
+          currentPage: pageNumber,
+          totalPages: this.totalPages(),
+        });
+      }),
+      engine.on<{ scale: number; presetValue?: string }>(
+        'scalechanging',
+        ({ scale, presetValue }) => {
+          this.currentScale.set(scale);
+          const level = (presetValue as ScPdfZoomLevel | undefined) ?? scale;
+          this.zoom.set(level);
+          this.zoomChange.emit({ zoom: level, scale });
+        },
+      ),
+      engine.on<{ pagesRotation: number }>(
+        'rotationchanging',
+        ({ pagesRotation }) => this.rotation.set(pagesRotation),
+      ),
+      engine.on<{ mode: number }>('scrollmodechanged', ({ mode }) =>
+        this.scrollMode.set(modeName(SCROLL_MODES, mode, 'vertical')),
+      ),
+      engine.on<{ mode: number }>('spreadmodechanged', ({ mode }) =>
+        this.spreadMode.set(modeName(SPREAD_MODES, mode, 'none')),
+      ),
+      engine.on('pagesinit', () => {
+        this.pagesReady = true;
+        this.applyInitialView();
+        // The layers pdf.js draws the pages with: shown and hidden from here.
+        const doc = this.pdfDocument();
+        engine.viewer.optionalContentConfigPromise.then((config) => {
+          if (doc === this.pdfDocument() && config) this.setLayers(config);
+        });
+      }),
+      engine.on('pagerendered', () => this.scheduleCleanup()),
+      ...this.listenToEditors(engine),
+      engine.on<{ mode: string }>('pagemode', ({ mode }) => {
+        if (mode === 'none') {
+          this.sidebarOpen.set(false);
+        } else if (HASH_PAGE_MODES[mode]) {
+          this.sidebarView.set(HASH_PAGE_MODES[mode]);
+          this.sidebarOpen.set(true);
+        }
+      }),
+      engine.on<{ query: string | string[] }>(
+        'findfromurlhash',
+        ({ query }) => {
+          // A phrase in quotes, else each word (pdf.js's `search`).
+          this.findOpen.set(true);
+          this.findQuery.set(Array.isArray(query) ? query.join(' ') : query);
+          this.dispatchFind('', false, query);
+        },
+      ),
+      engine.on<{
+        location: {
+          pageNumber: number;
+          scale: number | string;
+          rotation: number;
+          top: number;
+          left: number;
+          pdfOpenParams: string;
+        };
+      }>('updateviewarea', ({ location }) => {
+        this.lastLocation = location;
+        this.currentView.set(location.pdfOpenParams.replace(/^#/, ''));
+        this.storeView(location);
+      }),
+      engine.on<{ matchesCount: { current: number; total: number } }>(
+        'updatefindmatchescount',
+        ({ matchesCount }) => this.updateMatches(matchesCount),
+      ),
+      engine.on<{
+        state: number;
+        previous: boolean;
+        matchesCount: { current: number; total: number };
+      }>('updatefindcontrolstate', ({ state, matchesCount }) => {
+        this.updateMatches(matchesCount);
+        this.findState.set(FIND_STATES[state] ?? 'idle');
+      }),
+    ];
+    this.detachEngine = () => off.forEach((stop) => stop());
+    this.engine.set(engine);
+    this.showDocument();
+  }
+
+  /** @internal The canvas is gone: so is pdf.js's viewer. */
+  releaseEngine(engine: ScPdfEngine): void {
+    if (this.engine() !== engine) return;
+    this.detachEngine?.();
+    this.detachEngine = null;
+    this.engine.set(null);
+    // Its editors go with it: the next viewer has its own.
+    this.uiManager = null;
+    this.commentsUiManager = null;
+    this.editorsReady.set(false);
+    this.editorParamsKnown = false;
+    this.editorParams.clear();
+    this.requestedEditorMode = null;
+  }
+
+  /** The loaded document into pdf.js's viewer (once both are there). */
+  private showDocument(): void {
+    const engine = this.engine();
+    const doc = this.pdfDocument();
+    if (!engine || !doc || engine.viewer.pdfDocument === doc) return;
+    this.pagesReady = false;
+    this.initialViewSet = false;
+    engine.viewer.scrollMode = SCROLL_MODES[this.scrollMode()];
+    engine.viewer.spreadMode = SPREAD_MODES[this.spreadMode()];
+    engine.setDocument(doc);
+    engine.viewer.setPageLabels(this.pageLabels());
+  }
+
+  /**
+   * The view the document opens with, as pdf.js's `setInitialView`: the
+   * open parameters of `src`, else its open action's destination, else
+   * where it was left (`rememberView`), else `initialPage` and
+   * `initialZoom`. Once the pages are laid out and the document read.
+   */
+  private applyInitialView(): void {
+    const engine = this.engine();
+    const doc = this.pdfDocument();
+    if (!engine || !doc || !this.pagesReady || !this.documentRead) return;
+    this.documentRead = false;
+    const stored = this.storedView(doc);
+    engine.viewer.pagesRotation = stored?.rotation ?? this.rotation();
+    engine.viewer.currentScaleValue = String(this.initialZoom());
+    if (this.openingHash) {
+      this.applyHash(this.openingHash);
+    } else if (this.openingDest) {
+      engine.linkService.goToDestination(this.openingDest as never);
+    } else if (stored) {
+      engine.linkService.setHash(
+        `page=${stored.page}&zoom=${stored.zoom},${stored.left},${stored.top}`,
+      );
+    } else {
+      engine.viewer.currentPageNumber = this.openingPage;
+    }
+    this.initialViewSet = true;
+  }
+
+  // ── View history: a document reopens where it was left ──────────────
+
+  private lastLocation: { pageNumber: number; top: number } | null = null;
+  /** Where the user goes is remembered only after the initial view (as pdf.js). */
+  private initialViewSet = false;
+
+  private viewKey(doc: PDFDocumentProxy): string {
+    return `sc-pdf-view:${doc.fingerprints[0]}`;
+  }
+
+  private storedView(doc: PDFDocumentProxy): {
+    page: number;
+    zoom: string | number;
+    left: number;
+    top: number;
+    rotation: number;
+  } | null {
+    if (!this.rememberView()) return null;
+    try {
+      const raw = this.document.defaultView?.localStorage.getItem(
+        this.viewKey(doc),
+      );
+      const view = raw ? JSON.parse(raw) : null;
+      // As pdf.js: a page, and a zoom it knows.
+      return Number.isInteger(view?.page) &&
+        (typeof view.zoom === 'number' || NAMED_ZOOMS.has(view.zoom))
+        ? view
+        : null;
+    } catch {
+      return null;
+    }
+  }
+
+  private storeView(location: {
+    pageNumber: number;
+    scale: number | string;
+    rotation: number;
+    top: number;
+    left: number;
+  }): void {
+    const doc = this.pdfDocument();
+    if (!doc || !this.initialViewSet) return;
+    try {
+      this.document.defaultView?.localStorage.setItem(
+        this.viewKey(doc),
+        JSON.stringify({
+          page: location.pageNumber,
+          zoom: location.scale,
+          left: location.left,
+          top: location.top,
+          rotation: location.rotation,
+        }),
+      );
+    } catch {
+      // No storage: nothing remembered.
+    }
+  }
+
+  // ── Navigation ──────────────────────────────────────────────────────
+
+  /**
+   * Back / Forward: where the user was before each jump (a link, a
+   * bookmark, a thumbnail, the page input…) — kept in the viewer, as pdf.js's
+   * history, but not in the browser's (the app's router owns that).
+   */
+  private readonly historyState = signal<{
+    entries: ScPdfHistoryEntry[];
+    index: number;
+  }>({ entries: [], index: -1 });
+  readonly canGoBack = computed(() => this.historyState().index > 0);
+  readonly canGoForward = computed(() => {
+    const { entries, index } = this.historyState();
+    return index < entries.length - 1;
+  });
+
+  /** @internal What pdf.js's link service records before a jump. */
+  readonly historyAdapter = {
+    pushCurrentPosition: () => this.remember(this.here()),
+    push: ({
+      explicitDest,
+      pageNumber,
+    }: {
+      explicitDest: unknown[];
+      pageNumber: number;
+    }) => this.remember({ pageNumber, destArray: explicitDest }, true),
+    pushPage: (pageNumber: number) =>
+      this.remember({ pageNumber, destArray: null }, true),
+    back: () => this.goBack(),
+    forward: () => this.goForward(),
+  };
+
+  /** Where the pages are now: a place to come back to. */
+  private here(): ScPdfHistoryEntry {
+    const location = this.lastLocation;
+    const page = location?.pageNumber ?? this.currentPage();
+    return {
+      pageNumber: page,
+      destArray: location
+        ? [null, { name: 'XYZ' }, null, location.top, null]
+        : null,
+    };
+  }
+
+  private remember(entry: ScPdfHistoryEntry, isTarget = false): void {
+    this.historyState.update(({ entries, index }) => {
+      const kept = entries.slice(0, index + 1);
+      if (!isTarget) {
+        // Where the user is now replaces the current entry (they may have scrolled).
+        kept.splice(Math.max(0, kept.length - 1), 1, entry);
+      } else {
+        const last = kept[kept.length - 1];
+        if (
+          !last ||
+          last.pageNumber !== entry.pageNumber ||
+          JSON.stringify(last.destArray) !== JSON.stringify(entry.destArray)
+        )
+          kept.push(entry);
+      }
+      const trimmed = kept.slice(-MAX_HISTORY);
+      return { entries: trimmed, index: trimmed.length - 1 };
+    });
+  }
+
+  /** Back to where the user was before the last jump. */
+  goBack(): void {
+    this.moveInHistory(-1);
+  }
+
+  /** Forward again, after going back. */
+  goForward(): void {
+    this.moveInHistory(1);
+  }
+
+  private moveInHistory(delta: number): void {
+    const { entries, index } = this.historyState();
+    const target = entries[index + delta];
+    if (!target) return;
+    const updated = entries.slice();
+    updated[index] = this.here();
+    this.historyState.set({ entries: updated, index: index + delta });
+    this.scrollTo(target);
+  }
+
+  private scrollTo({ pageNumber, destArray }: ScPdfHistoryEntry): void {
+    this.engine()?.viewer.scrollPageIntoView({
+      pageNumber,
+      destArray: (destArray ?? undefined) as never,
+    });
+  }
+
+  /** Goes to a page, remembering where it came from (Back returns there). */
+  jumpToPage(page: number, top = 0): void {
+    if (page < 1 || page > this.totalPages()) return;
+    this.remember(this.here());
+    this.remember({ pageNumber: page, destArray: null }, true);
+    this.goToPage(page, top);
+  }
+
+  /** Goes to a page; `top` is where on it, from 0 (top) to 1 (bottom). */
+  goToPage(page: number, top = 0): void {
+    const engine = this.engine();
+    if (page < 1 || page > this.totalPages()) return;
+    if (!engine) {
+      this.openingPage = page;
+      return;
+    }
+    if (!top) {
+      engine.viewer.currentPageNumber = page;
+      return;
+    }
+    const view = engine.viewer.getPageView(page - 1)?.pdfPage?.view as
+      number[] | undefined;
+    const y = view ? view[3] - top * (view[3] - view[1]) : null;
+    engine.viewer.scrollPageIntoView({
+      pageNumber: page,
+      destArray: [null, { name: 'XYZ' }, null, y, null] as never,
+    });
+  }
+
+  /** The previous page — the previous spread in page scroll mode (pdf.js's). */
+  goToPrevPage(): void {
+    this.engine()?.viewer.previousPage();
+  }
+
+  /** The next page — the next spread in page scroll mode (pdf.js's). */
+  goToNextPage(): void {
+    this.engine()?.viewer.nextPage();
+  }
+
+  /** Goes to a destination — a name or an explicit array — with its zoom (pdf.js's link service). */
+  async goToDestination(dest: unknown): Promise<void> {
+    await this.engine()?.linkService.goToDestination(dest as never);
+  }
+
+  /** Goes to a bookmark's destination, or opens its web link. */
+  goToOutlineItem(item: ScPdfOutlineItem): void {
+    if (item.url) {
+      this.document.defaultView?.open(item.url, '_blank', 'noopener');
+      return;
+    }
+    if (!item.pageNumber) return;
+    if (item.zoom !== undefined) this.setZoom(item.zoom);
+    this.jumpToPage(item.pageNumber, item.top);
+  }
+
+  // ── Zoom and rotation ───────────────────────────────────────────────
+
+  /** Zooms in a step (pdf.js's steps, up to 2500%). */
+  zoomIn(): void {
+    this.engine()?.viewer.increaseScale();
+  }
+
+  /** Zooms out a step (pdf.js's steps, down to 10%). */
+  zoomOut(): void {
+    this.engine()?.viewer.decreaseScale();
+  }
+
+  /** Multiplies the scale around a point of the pages (wheel and pinch zoom). */
+  zoomBy(factor: number, origin?: [number, number]): void {
+    this.engine()?.viewer.updateScale({
+      scaleFactor: factor,
+      origin,
+    } as never);
+  }
+
+  setZoom(level: ScPdfZoomLevel): void {
+    this.zoom.set(level);
+  }
+
+  rotateLeft(): void {
+    this.rotation.update((r) => (((r - 90) % 360) + 360) % 360);
+  }
+
+  rotateRight(): void {
+    this.rotation.update((r) => (r + 90) % 360);
+  }
+
+  // ── Find (pdf.js's find controller) ─────────────────────────────────
+
+  /** Finds `query`: the first match from the current page on. */
+  find(query: string): void {
+    this.findQuery.set(query);
+    if (!query) {
+      this.clearFind();
+      return;
+    }
+    this.dispatchFind('');
+  }
+
+  findNext(): void {
+    if (this.findQuery()) this.dispatchFind('again');
+  }
+
+  findPrevious(): void {
+    if (this.findQuery()) this.dispatchFind('again', true);
+  }
+
+  clearFind(): void {
+    this.findQuery.set('');
+    this.findState.set('idle');
+    this.findCurrentMatchIndex.set(0);
+    this.findTotalMatches.set(0);
+    this.engine()?.eventBus.dispatch('findbarclose', { source: this });
+  }
+
+  /** @internal An option changed: the search again, as pdf.js's find bar. */
+  findOptionChanged(type: string): void {
+    if (this.findQuery()) this.dispatchFind(type);
+  }
+
+  private dispatchFind(
+    type: string,
+    findPrevious = false,
+    query: string | string[] = this.findQuery(),
+  ): void {
+    this.engine()?.eventBus.dispatch('find', {
+      source: this,
+      type,
+      query,
+      caseSensitive: this.findMatchCase(),
+      entireWord: this.findEntireWord(),
+      highlightAll: this.findHighlightAll(),
+      findPrevious,
+      matchDiacritics: this.findMatchDiacritics(),
+    });
+  }
+
+  private updateMatches({
+    current,
+    total,
+  }: {
+    current: number;
+    total: number;
+  }): void {
+    this.findTotalMatches.set(total);
+    this.findCurrentMatchIndex.set(Math.max(0, current - 1));
+  }
+
+  // ── Layers ──────────────────────────────────────────────────────────
+
+  private setLayers(config: ScPdfOptionalContentConfig): void {
+    this.optionalContent.set(config);
+    const layers: ScPdfLayer[] = [];
+    for (const [id, group] of config) {
+      layers.push({ id, name: group.name ?? id, visible: group.visible });
+    }
+    this.layers.set(layers);
+  }
+
+  /** Before pdf.js's viewer has it: the document's own layers. */
+  private async loadLayers(doc: PDFDocumentProxy): Promise<void> {
+    if (this.optionalContent()) return;
+    const config = await doc.getOptionalContentConfig().catch(() => null);
+    if (doc === this.pdfDocument() && config && !this.optionalContent())
+      this.setLayers(config);
+  }
+
+  /** Shows or hides a layer; the pages redraw. */
+  setLayerVisible(id: string, visible: boolean): void {
+    const config = this.optionalContent();
+    if (!config) return;
+    config.setVisibility(id, visible);
+    this.redrawLayers(config);
+  }
+
+  /** A link's action on layers (pdf.js's `SetOCGState`). */
+  applyLayerState(action: unknown): void {
+    const config = this.optionalContent();
+    if (!config) return;
+    config.setOCGState(action as Parameters<typeof config.setOCGState>[0]);
+    this.redrawLayers(config);
+  }
+
+  private redrawLayers(config: ScPdfOptionalContentConfig): void {
+    this.layers.update((layers) =>
+      layers.map((layer) => {
+        const visible = config.getGroup(layer.id)?.visible ?? layer.visible;
+        return visible === layer.visible ? layer : { ...layer, visible };
+      }),
+    );
+    const engine = this.engine();
+    if (engine)
+      engine.viewer.optionalContentConfigPromise = Promise.resolve(config);
+  }
+
+  // ── Editing: pdf.js's annotation editors ────────────────────────────
+
+  /** pdf.js's editors' manager for the open document, once its viewer made it. */
+  private uiManager: ScPdfJsUiManager | null = null;
+  private readonly editorsReady = signal(false);
+  /** The mode asked of pdf.js, until it says it's there. */
+  private requestedEditorMode: number | null = null;
+
+  /** What pdf.js's editors say of the editing: undo, redo, a selection… */
+  readonly editorState = signal<{
+    isEditing?: boolean;
+    isEmpty?: boolean;
+    hasSomethingToUndo?: boolean;
+    hasSomethingToRedo?: boolean;
+    hasSelectedEditor?: boolean;
+  }>({});
+
+  /** The editor settings, by pdf.js's parameter. */
+  private readonly editorSettings: [number, WritableSignal<unknown>][] = [
+    [EDITOR_PARAMS.HIGHLIGHT_COLOR, this.highlightColor],
+    [EDITOR_PARAMS.HIGHLIGHT_THICKNESS, this.highlightThickness],
+    [EDITOR_PARAMS.HIGHLIGHT_SHOW_ALL, this.highlightShowAll],
+    [EDITOR_PARAMS.FREETEXT_COLOR, this.freetextColor],
+    [EDITOR_PARAMS.FREETEXT_SIZE, this.freetextSize],
+    [EDITOR_PARAMS.INK_COLOR, this.inkColor],
+    [EDITOR_PARAMS.INK_THICKNESS, this.inkThickness],
+    [EDITOR_PARAMS.INK_OPACITY, this.inkOpacity],
+  ] as [number, WritableSignal<unknown>][];
+  /** The settings' values as pdf.js has them (to tell its changes from ours). */
+  private readonly editorParams = new Map<number, unknown>();
+  /** pdf.js has told its editors' settings: it takes ours from then on. */
+  private editorParamsKnown = false;
+
+  /** @internal The dialogs and bar pdf.js's editors ask for: the viewer's. */
+  readonly editorManagers = editorManagers({
+    editAltText: (uiManager, editor) => this.editAltText(uiManager, editor),
+    getSignature: (editor) => this.getSignature(editor),
+    setCommentsUiManager: (uiManager) => (this.commentsUiManager = uiManager),
+    // The comment is written in your part of the viewer.
+    commentDialogElement: () =>
+      this.containerElement?.nativeElement ??
+      (this.engine()?.viewer.container as HTMLElement),
+    editComment: (editor) => this.askComment(editor),
+    setComments: (comments) => this.setComments(comments),
+    updateComment: (comment) => this.putComment(comment),
+    removeComments: (ids) => this.dropComments(ids),
+    showComment: (editor) => this.activeCommentId.set(editor?.uid ?? null),
+    showUndo: (undo, what) => this.showUndoBar(undoneAnnotation(what), undo),
+    hideUndo: () => this.closeUndoBar(),
+  });
+
+  /** pdf.js's editing events, into the viewer's state (as its application). */
+  private listenToEditors(engine: ScPdfEngine): (() => void)[] {
+    return [
+      engine.on<{ uiManager: ScPdfJsUiManager }>(
+        'annotationeditoruimanager',
+        ({ uiManager }) => {
+          this.uiManager = uiManager;
+          this.editorParamsKnown = false;
+          this.editorParams.clear();
+          this.editorsReady.set(true);
+        },
+      ),
+      // pdf.js's editors ask for a mode (a double-click on a text box…).
+      engine.on<{ mode: number }>('switchannotationeditormode', (event) =>
+        this.switchEditorMode(engine, event.mode, event),
+      ),
+      engine.on<{ mode: number }>('annotationeditormodechanged', ({ mode }) => {
+        this.requestedEditorMode = null;
+        this.editorMode.set(modeName(EDITOR_MODES, mode, 'none'));
+      }),
+      engine.on<{ details: [number, unknown][] }>(
+        'annotationeditorparamschanged',
+        ({ details }) => {
+          if (!this.editorParamsKnown) {
+            // Its editors are ready: they take the viewer's settings.
+            this.editorParamsKnown = true;
+            for (const [type, setting] of this.editorSettings) {
+              this.pushEditorParam(engine, type, untracked(setting));
+            }
+            return;
+          }
+          // An annotation selected (its settings), or changed on the page.
+          for (const [type, reported] of details) {
+            const setting = this.editorSettings.find(([t]) => t === type)?.[1];
+            const value =
+              setting && COLOR_PARAMS.has(type)
+                ? colorSetting(
+                    String(reported),
+                    String(untracked(setting)),
+                    type === EDITOR_PARAMS.HIGHLIGHT_COLOR
+                      ? HIGHLIGHT_COLORS
+                      : INK_COLORS,
+                    engine.viewer.container,
+                  )
+                : reported;
+            this.editorParams.set(type, value);
+            setting?.set(value);
+          }
+        },
+      ),
+      engine.on<{ details: Record<string, boolean> }>(
+        'editingstateschanged',
+        ({ details }) => this.editorState.set({ ...details }),
+      ),
+    ];
+  }
+
+  /** The viewer's mode and settings, into pdf.js's editors. */
+  private watchEditing(): void {
+    effect(() => {
+      const engine = this.engine();
+      const mode = EDITOR_MODES[this.editorMode()];
+      if (engine && this.editorsReady()) {
+        untracked(() => this.switchEditorMode(engine, mode));
+      }
+    });
+    for (const [type, setting] of this.editorSettings) {
+      effect(() => {
+        const value = setting();
+        const engine = this.engine();
+        if (engine && this.editorsReady() && this.editorParamsKnown) {
+          untracked(() => this.pushEditorParam(engine, type, value));
+        }
+      });
+    }
+    // A dialog closed (Escape, outside click): its editor is done with.
+    effect(() => {
+      if (!this.altTextDialogOpen()) untracked(() => this.closeAltText());
+    });
+    effect(() => {
+      if (!this.signatureDialogOpen()) {
+        untracked(() => this.closeSignatureDialog());
+      }
+    });
+  }
+
+  private switchEditorMode(
+    engine: ScPdfEngine,
+    mode: number,
+    options: object = {},
+  ): void {
+    const viewer = engine.viewer;
+    if (
+      !this.uiManager ||
+      editorModeOf(engine) === mode ||
+      this.requestedEditorMode === mode
+    ) {
+      return;
+    }
+    this.requestedEditorMode = mode;
+    viewer.annotationEditorMode = { ...options, mode } as never;
+  }
+
+  private pushEditorParam(
+    engine: ScPdfEngine,
+    type: number,
+    value: unknown,
+  ): void {
+    if (this.editorParams.get(type) === value) return;
+    this.editorParams.set(type, value);
+    engine.eventBus.dispatch('switchannotationeditorparams', {
+      source: this,
+      type,
+      value: COLOR_PARAMS.has(type)
+        ? (resolveColor(String(value), engine.viewer.container) ?? value)
+        : value,
+    });
+  }
+
+  /** pdf.js in an editor mode (as asked of it). */
+  private enterEditorMode(
+    engine: ScPdfEngine,
+    mode: ScPdfEditorMode,
+  ): Promise<void> {
+    const type = EDITOR_MODES[mode];
+    this.editorMode.set(mode);
+    if (editorModeOf(engine) === type) return Promise.resolve();
+    return new Promise((resolve) => {
+      const off = engine.on<{ mode: number }>(
+        'annotationeditormodechanged',
+        (event) => {
+          if (event.mode !== type) return;
+          off();
+          resolve();
+        },
+      );
+      this.switchEditorMode(engine, type);
+    });
+  }
+
+  /** A new editor in a mode — pdf.js's "add" (an image, a signature). */
+  private async createEditor(
+    mode: ScPdfEditorMode,
+    value?: object,
+  ): Promise<void> {
+    const engine = this.engine();
+    if (!engine || !this.canEdit()) return;
+    // Just opened: pdf.js's editors come with its first page.
+    if (!this.uiManager) {
+      await new Promise<void>((resolve) => {
+        const off = engine.on('annotationeditoruimanager', () => {
+          off();
+          resolve();
+        });
+      });
+    }
+    if (engine !== this.engine()) return;
+    await this.enterEditorMode(engine, mode);
+    // Its editor types register with the first editor layer drawn, and
+    // report their settings then: before, it would drop the new editor.
+    if (!this.editorParamsKnown) {
+      await new Promise<void>((resolve) => {
+        const off = engine.on('annotationeditorparamschanged', () => {
+          off();
+          resolve();
+        });
+      });
+    }
+    if (engine !== this.engine()) return;
+    engine.eventBus.dispatch('switchannotationeditorparams', {
+      source: this,
+      type: EDITOR_PARAMS.CREATE,
+      value,
+    });
+  }
+
+  /** The editor tool: `none`, or one of pdf.js's editors (again: off). */
+  setEditorMode(mode: ScPdfEditorMode): void {
+    // The document forbids adding annotations (see `enablePermissions`).
+    if (mode !== 'none' && !this.canEdit()) return;
+    this.editorMode.set(this.editorMode() === mode ? 'none' : mode);
+  }
+
+  /** Places an image on the current page (pdf.js's image editor). */
+  addImage(file: File): void {
+    this.createEditor('stamp', { bitmapFile: file });
+  }
+
+  /** The editors of a document closed or rebuilt. */
+  private closeEditing(): void {
+    this.uiManager = null;
+    this.commentsUiManager = null;
+    this.editorsReady.set(false);
+    this.requestedEditorMode = null;
+    this.editorState.set({});
+    this.closeAltText();
+    this.signatureEditor = null;
+    this.pendingSignature = null;
+    this.signatureDialogOpen.set(false);
+    this.cancelComment();
+    this.commentData.clear();
+    this.comments.set([]);
+    this.activeCommentId.set(null);
+  }
+
+  // ── Alt text (pdf.js's alt-text button on an image) ─────────────────
+
+  private altTextEditor: {
+    uiManager: ScPdfJsUiManager;
+    editor: ScPdfJsEditor;
+  } | null = null;
+  /** The alt text being edited (the `altText` dialog): its description, or decorative. */
+  readonly altText = signal<{ text: string; decorative: boolean } | null>(null);
+
+  private editAltText(
+    uiManager: ScPdfJsUiManager,
+    editor: ScPdfJsEditor,
+  ): void {
+    // Its keys (Delete…) are the dialog's while it's open, as in pdf.js.
+    uiManager.removeEditListeners();
+    this.altTextEditor = { uiManager, editor };
+    const data = editor.altTextData;
+    this.altText.set({
+      text: data?.altText ?? '',
+      decorative: !!data?.decorative,
+    });
+    this.altTextDialogOpen.set(true);
+  }
+
+  /** Saves the alt text and closes the dialog. */
+  saveAltText(text: string, decorative: boolean): void {
+    const current = this.altTextEditor;
+    if (current) {
+      current.editor.altTextData = {
+        altText: decorative ? '' : text.trim(),
+        decorative,
+      };
+    }
+    this.closeAltText();
+  }
+
+  closeAltText(): void {
+    this.altTextDialogOpen.set(false);
+    const current = this.altTextEditor;
+    if (!current) return;
+    this.altTextEditor = null;
+    this.altText.set(null);
+    current.editor.altTextFinish();
+    current.uiManager.addEditListeners();
+  }
+
+  // ── Signatures (pdf.js's signature editor) ──────────────────────────
+
+  /** A signature editor waiting for its signature (the dialog is open). */
+  private signatureEditor: ScPdfJsEditor | null = null;
+  /** A signature to give the next one. */
+  private pendingSignature: { dataUrl: string; description: string } | null =
+    null;
+
+  /** A new signature: pdf.js's editor waits for it in the `signature` dialog. */
+  openSignatureDialog(): void {
+    this.createEditor('signature');
+  }
+
+  /** Closes the dialog — without a signature, its waiting editor goes. */
+  closeSignatureDialog(): void {
+    this.signatureDialogOpen.set(false);
+    this.signatureEditor?.remove();
+    this.signatureEditor = null;
+  }
+
+  /** Places a signature image on the current page (pdf.js turns it into lines). */
+  placeSignature(dataUrl: string, description = ''): void {
+    const editor = this.signatureEditor;
+    if (editor) {
+      this.signatureEditor = null;
+      this.fillSignature(editor, { dataUrl, description });
+      return;
+    }
+    this.pendingSignature = { dataUrl, description };
+    this.createEditor('signature');
+  }
+
+  private getSignature(editor: ScPdfJsEditor): void {
+    const pending = this.pendingSignature;
+    this.pendingSignature = null;
+    if (pending) {
+      this.fillSignature(editor, pending);
+    } else {
+      this.signatureEditor = editor;
+      this.signatureDialogOpen.set(true);
+    }
+  }
+
+  private async fillSignature(
+    editor: ScPdfJsEditor,
+    { dataUrl, description }: { dataUrl: string; description: string },
+  ): Promise<void> {
+    try {
+      const blob = await (await fetch(dataUrl)).blob();
+      const bitmap = await createImageBitmap(blob);
+      const data = editor.getFromImage?.(bitmap);
+      editor.addSignature?.(data, SIGNATURE_HEIGHT, description, null);
+    } catch {
+      editor.remove();
+    }
+  }
+
+  // ── Comments (pdf.js's: on annotations, listed in its comment mode) ─
+
+  private commentsUiManager: ScPdfJsUiManager | null = null;
+  /** pdf.js's description of each comment (its page, its place). */
+  private readonly commentData = new Map<string, ScPdfJsComment>();
+  /** The annotation whose comment is being written. */
+  private commentEditor: ScPdfJsEditor | null = null;
+
+  /** The document's own comments (pdf.js lists them in its comment mode). */
+  private async loadComments(doc: PDFDocumentProxy): Promise<void> {
+    const annotations = (await doc
+      // pdf.js's editable types: text boxes, highlights, images, drawings.
+      .getAnnotationsByType(new Set([3, 9, 13, 15]), null as never)
+      .catch(() => [])) as ScPdfJsComment[] | null;
+    if (doc !== this.pdfDocument() || this.commentData.size) return;
+    this.setComments(
+      (annotations ?? []).filter(
+        (annotation) => annotation.popupRef && annotation.contentsObj?.str,
+      ),
+    );
+  }
+
+  private setComments(comments: ScPdfJsComment[]): void {
+    this.commentData.clear();
+    for (const comment of comments) this.commentData.set(comment.id, comment);
+    this.listComments();
+  }
+
+  private putComment(comment: ScPdfJsComment): void {
+    this.commentData.set(comment.id, comment);
+    this.listComments();
+  }
+
+  private dropComments(ids: string[]): void {
+    for (const id of ids) this.commentData.delete(id);
+    if (ids.includes(this.activeCommentId() ?? '')) {
+      this.activeCommentId.set(null);
+    }
+    this.listComments();
+  }
+
+  private listComments(): void {
+    this.comments.set(
+      [...this.commentData.values()]
+        .map(toComment)
+        .sort((a, b) => a.pageNumber - b.pageNumber),
+    );
+  }
+
+  /** Edits a comment (one made in the viewer) in the comment form. */
+  editComment(id: string): void {
+    const editor = this.commentsUiManager?.getEditor(id);
+    if (editor) this.askComment(editor);
+  }
+
+  /** pdf.js's comment button on an annotation: its comment, to write. */
+  private askComment(editor: ScPdfJsEditor): void {
+    this.commentEditor = editor;
+    const comment = editor.comment;
+    this.pendingComment.set({
+      id: editor.uid,
+      pageNumber: editor.pageIndex + 1,
+      text: typeof comment === 'object' && comment ? (comment.text ?? '') : '',
+    });
+  }
+
+  /** Saves the comment being written (`pendingComment`). */
+  postComment(text: string): void {
+    const editor = this.commentEditor;
+    this.cancelComment();
+    if (!editor) return;
+    editor.comment = text;
+    this.activeCommentId.set(editor.uid);
+  }
+
+  cancelComment(): void {
+    this.commentEditor = null;
+    this.pendingComment.set(null);
+  }
+
+  /** Changes a comment's text (one made in the viewer). */
+  updateComment(id: string, text: string): void {
+    const editor = this.commentsUiManager?.getEditor(id);
+    if (editor) editor.comment = text;
+  }
+
+  /** Deletes a comment (one made in the viewer) — undoable from the undo bar. */
+  removeComment(id: string): void {
+    const uiManager = this.commentsUiManager;
+    const editor = uiManager?.getEditor(id);
+    if (uiManager && editor) uiManager.deleteComment(editor, editor.comment);
+  }
+
+  /** Shows a comment's annotation, and picks it. */
+  showComment(id: string): void {
+    const data = this.commentData.get(id);
+    if (!data) return;
+    this.activeCommentId.set(id);
+    const [x = 0, , , y = 0] = data.rect ?? [];
+    this.engine()?.linkService.goToXY(data.pageIndex + 1, x, y);
+    if (this.commentsUiManager?.getEditor(id)) {
+      this.commentsUiManager.selectComment(data.pageIndex, id);
+    }
+  }
+
   private onKeydown(event: KeyboardEvent): void {
     if (!this.keyboardShortcuts() || event.defaultPrevented) return;
     const ctrl = event.ctrlKey || event.metaKey;
@@ -2435,243 +3132,15 @@ export class ScPdfViewer {
     }
   }
 
-  async find(query: string): Promise<void> {
-    this.findQuery.set(query);
-    if (!query) {
-      this.clearFind();
-      return;
-    }
-
-    const doc = this.pdfDocument();
-    if (!doc) return;
-
-    const token = ++this.findToken;
-    this.findState.set('pending');
-    const pageTexts = await this.documentTexts(doc);
-    // A newer search started, or the document changed, meanwhile.
-    if (token !== this.findToken || doc !== this.pdfDocument()) return;
-
-    const options = {
-      matchCase: this.findMatchCase(),
-      entireWord: this.findEntireWord(),
-      matchDiacritics: this.findMatchDiacritics(),
-    };
-    // Normalised as the pages' text is (a line break is a space…).
-    const normalizedQuery = normalizeText(query).text;
-    const allMatches: ScPdfPageMatchInfo[] = [];
-    let total = 0;
-
-    for (const pageText of pageTexts) {
-      // Offsets in the page's text (items, "\n" after each line), which
-      // the text layer highlights.
-      const found = findInPage(normalizedQuery, pageText, options);
-      total += found.length;
-      allMatches.push({
-        matches: found.map(([start]) => start),
-        matchesLength: found.map(([, length]) => length),
-      });
-    }
-
-    this.pageMatches.set(allMatches);
-    this.findTotalMatches.set(total);
-
-    if (total === 0) {
-      this.findState.set('not-found');
-      this.findCurrentMatchIndex.set(0);
-    } else {
-      // Find first match on or after current page
-      const currentPageIdx = this.currentPage() - 1;
-      let found = false;
-
-      for (let i = 0; i < allMatches.length; i++) {
-        const pageIdx = (currentPageIdx + i) % allMatches.length;
-        if (allMatches[pageIdx].matches.length > 0) {
-          this.goToPage(pageIdx + 1);
-          found = true;
-          break;
-        }
-      }
-
-      // Compute correct global index
-      if (found) {
-        for (let p = 0; p < allMatches.length; p++) {
-          const pageIdx = (currentPageIdx + p) % allMatches.length;
-          if (allMatches[pageIdx].matches.length > 0) {
-            let gi = 0;
-            for (let j = 0; j < pageIdx; j++) {
-              gi += allMatches[j].matches.length;
-            }
-            this.findCurrentMatchIndex.set(gi);
-            break;
-          }
-        }
-      }
-
-      this.findState.set('found');
-    }
-
-    this.findTrigger.update((v) => v + 1);
-  }
-
-  findNext(): void {
-    const total = this.findTotalMatches();
-    if (total === 0) return;
-
-    const next = (this.findCurrentMatchIndex() + 1) % total;
-    this.findCurrentMatchIndex.set(next);
-    this.scrollToMatch(next);
-    this.findState.set(next === 0 ? 'wrapped' : 'found');
-    this.findTrigger.update((v) => v + 1);
-  }
-
-  findPrevious(): void {
-    const total = this.findTotalMatches();
-    if (total === 0) return;
-
-    const prev = (this.findCurrentMatchIndex() - 1 + total) % total;
-    this.findCurrentMatchIndex.set(prev);
-    this.scrollToMatch(prev);
-    this.findState.set(prev === total - 1 ? 'wrapped' : 'found');
-    this.findTrigger.update((v) => v + 1);
-  }
-
-  clearFind(): void {
-    this.findToken++;
-    this.findQuery.set('');
-    this.findState.set('idle');
-    this.findCurrentMatchIndex.set(0);
-    this.findTotalMatches.set(0);
-    this.pageMatches.set([]);
-    this.findTrigger.update((v) => v + 1);
-  }
-
-  /**
-   * The text of every page, normalised for searching (see `normalizeText`),
-   * extracted once per document — a few pages at a time in parallel — and
-   * shared by the searches.
-   */
-  private documentTexts(doc: PDFDocumentProxy): Promise<ScPdfNormalizedText[]> {
-    if (this.pageTexts && this.pageTextsDocument === doc) {
-      return this.pageTexts;
-    }
-    this.pageTextsDocument = doc;
-    this.pageTexts = (async () => {
-      const texts: ScPdfNormalizedText[] = Array.from(
-        { length: doc.numPages },
-        () => ({ text: '', diffs: null, hasDiacritics: false }),
-      );
-      const batch = 8;
-      for (let start = 1; start <= doc.numPages; start += batch) {
-        const pages = Array.from(
-          { length: Math.min(batch, doc.numPages - start + 1) },
-          (_, i) => start + i,
-        );
-        await Promise.all(
-          pages.map(async (pageNumber) => {
-            try {
-              const page = await doc.getPage(pageNumber);
-              const content = await page.getTextContent();
-              let text = '';
-              for (const item of content.items) {
-                if ('str' in item) {
-                  text += item.str;
-                  if (item.hasEOL) text += '\n';
-                }
-              }
-              texts[pageNumber - 1] = normalizeText(text);
-            } catch {
-              // A page whose text can't be read just has no matches.
-            }
-          }),
-        );
-      }
-      return texts;
-    })();
-    return this.pageTexts;
-  }
-
-  private scrollToMatch(globalIndex: number): void {
-    const allMatches = this.pageMatches();
-    let count = 0;
-    for (let p = 0; p < allMatches.length; p++) {
-      if (count + allMatches[p].matches.length > globalIndex) {
-        this.goToPage(p + 1);
-        return;
-      }
-      count += allMatches[p].matches.length;
-    }
-  }
-
-  // Editor methods
-  setEditorMode(mode: ScPdfEditorMode): void {
-    // The document forbids adding annotations (see `enablePermissions`).
-    if (mode !== 'none' && !this.canEdit()) return;
-    if (mode === 'signature') {
-      // Signature mode opens a dialog instead of toggling
-      if (this.editorMode() === 'signature') {
-        this.editorMode.set('none');
-      } else {
-        this.editorMode.set('signature');
-        this.signatureDialogOpen.set(true);
-      }
-      return;
-    }
-    this.editorMode.set(this.editorMode() === mode ? 'none' : mode);
-  }
-
-  addEditorAnnotation(annotation: Omit<ScPdfEditorAnnotation, 'id'>): void {
-    const id = `editor-${++this.editorIdCounter}`;
-    this.editorAnnotations.update((list) => [...list, { ...annotation, id }]);
-    this.editorTrigger.update((v) => v + 1);
-  }
-
-  updateEditorAnnotation(
-    id: string,
-    changes: Partial<Omit<ScPdfEditorAnnotation, 'id'>>,
-  ): void {
-    this.editorAnnotations.update((list) =>
-      list.map((a) => (a.id === id ? { ...a, ...changes } : a)),
-    );
-    this.editorTrigger.update((v) => v + 1);
-  }
-
-  removeEditorAnnotation(id: string): void {
-    const removed = this.editorAnnotations().find((a) => a.id === id);
-    if (this.selectedAnnotationId() === id) this.selectedAnnotationId.set(null);
-    this.editorAnnotations.update((list) => list.filter((a) => a.id !== id));
-    this.editorTrigger.update((v) => v + 1);
-
-    // Show undo bar
-    if (removed) {
-      this.showUndoBar({ kind: 'annotation-deleted', count: 1 }, () => {
-        this.editorAnnotations.update((list) => [...list, removed]);
-        this.editorTrigger.update((v) => v + 1);
-      });
-    }
-  }
-
-  clearEditorAnnotations(): void {
-    const prev = this.editorAnnotations();
-    this.editorAnnotations.set([]);
-    this.editorTrigger.update((v) => v + 1);
-
-    if (prev.length > 0) {
-      this.showUndoBar(
-        { kind: 'annotations-cleared', count: prev.length },
-        () => {
-          this.editorAnnotations.set(prev);
-          this.editorTrigger.update((v) => v + 1);
-        },
-      );
-    }
-  }
-
   // Undo bar
-  private showUndoBar(undo: ScPdfUndoable, action: () => void): void {
-    if (this.undoTimeout) {
-      clearTimeout(this.undoTimeout);
-    }
+  private showUndoBar(
+    undo: ScPdfUndoable,
+    action: () => void,
+    cleanup: (() => void) | null = null,
+  ): void {
+    this.closeUndoBar();
     this.undoAction = action;
+    this.undoCleanup = cleanup;
     this.undoable.set(undo);
 
     this.undoTimeout = setTimeout(() => {
@@ -2680,16 +3149,19 @@ export class ScPdfViewer {
   }
 
   undoLastAction(): void {
-    if (this.undoAction) {
-      this.undoAction();
-      this.undoAction = null;
-    }
+    const action = this.undoAction;
+    this.undoAction = null;
+    this.undoCleanup = null;
+    action?.();
     this.closeUndoBar();
   }
 
   closeUndoBar(): void {
     this.undoable.set(null);
     this.undoAction = null;
+    const cleanup = this.undoCleanup;
+    this.undoCleanup = null;
+    cleanup?.();
     if (this.undoTimeout) {
       clearTimeout(this.undoTimeout);
       this.undoTimeout = null;

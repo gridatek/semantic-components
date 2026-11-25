@@ -660,15 +660,6 @@
   {
     "name": "PDF Viewer",
     "path": "pdf-viewer",
-    "description": "Document viewer with navigation and zoom controls.",
-    "status": "Experimental",
-    "library": "ui",
-    "category": "Media",
-    "hidden": true
-  },
-  {
-    "name": "PDF Viewer Next",
-    "path": "pdf-viewer-next",
     "description": "pdf.js's viewer as parts: its PDFViewer draws the pages (text, links, forms, find); the toolbars, sidebar, find bar and dialogs are yours.",
     "status": "Experimental",
     "library": "ui",

@@ -55,7 +55,6 @@ export class ScPdfViewerPan {
     left: number;
     top: number;
   } | null = null;
-  private pinch: { distance: number } | null = null;
 
   /** Presentation mode: the cursor hides after a few seconds still. */
   private readonly cursorIdle = signal(false);
@@ -121,27 +120,30 @@ export class ScPdfViewerPan {
       );
     };
 
+    // Two fingers pinch (pdf.js's viewer leaves touch to its application).
+    let pinch: number | null = null;
     const distance = (touches: TouchList): number =>
       Math.hypot(
         touches[0].clientX - touches[1].clientX,
         touches[0].clientY - touches[1].clientY,
       );
     const onTouchStart = (event: TouchEvent): void => {
-      if (event.touches.length === 2) {
-        this.pinch = { distance: distance(event.touches) };
-      }
+      if (event.touches.length === 2) pinch = distance(event.touches);
     };
     const onTouchMove = (event: TouchEvent): void => {
-      if (!this.pinch || event.touches.length !== 2) return;
+      if (pinch === null || event.touches.length !== 2) return;
       event.preventDefault();
+      if (this.pdfViewer.presenting()) return;
       const now = distance(event.touches);
-      const midX = (event.touches[0].clientX + event.touches[1].clientX) / 2;
-      const midY = (event.touches[0].clientY + event.touches[1].clientY) / 2;
-      this.zoomAround(now / this.pinch.distance, midX, midY);
-      this.pinch.distance = now;
+      this.zoomAround(
+        now / pinch,
+        (event.touches[0].clientX + event.touches[1].clientX) / 2,
+        (event.touches[0].clientY + event.touches[1].clientY) / 2,
+      );
+      pinch = now;
     };
     const onTouchEnd = (event: TouchEvent): void => {
-      if (event.touches.length < 2) this.pinch = null;
+      if (event.touches.length < 2) pinch = null;
     };
 
     container.addEventListener('wheel', onWheel, { passive: false });
@@ -156,26 +158,9 @@ export class ScPdfViewerPan {
     });
   }
 
-  /** Zooms by `factor`, keeping the point under (clientX, clientY) in place. */
+  /** Zooms by `factor`, around the point under the pointer (pdf.js's `updateScale`). */
   private zoomAround(factor: number, clientX: number, clientY: number): void {
-    const container = this.container;
-    if (factor === 1) return;
-    const before = this.pdfViewer.currentScale();
-    this.pdfViewer.zoomBy(factor);
-    // zoomBy sets a number: the new scale.
-    const after = this.pdfViewer.zoom();
-    const ratio = typeof after === 'number' ? after / before : 1;
-
-    const rect = container.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
-    const contentX = container.scrollLeft + x;
-    const contentY = container.scrollTop + y;
-    // Once the pages are laid out at the new scale.
-    requestAnimationFrame(() => {
-      container.scrollLeft = contentX * ratio - x;
-      container.scrollTop = contentY * ratio - y;
-    });
+    if (factor !== 1) this.pdfViewer.zoomBy(factor, [clientX, clientY]);
   }
 
   private onPresentationPointerMove(): void {

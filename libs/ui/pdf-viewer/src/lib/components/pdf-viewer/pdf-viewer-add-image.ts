@@ -1,50 +1,52 @@
-import { Directive, computed, inject, input } from '@angular/core';
+import { DOCUMENT, Directive, computed, inject, input } from '@angular/core';
+import { type ScButtonVariants, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
- * Places a chosen image on the current page as an image annotation (a
- * stamp), about 15% of the page wide. Use on an `input type="file"` — hide
- * it and open it from your own button (`#image`, `image.click()`).
+ * Asks for an image and places it on the current page — pdf.js's image
+ * editor, in its image mode. Disabled while the document forbids changes.
+ * Name it.
  */
 @Directive({
-  selector: 'input[type="file"][scPdfViewerAddImage]',
+  selector: 'button[scPdfViewerAddImage]',
   host: {
+    type: 'button',
     'data-slot': 'pdf-viewer-add-image',
-    accept: 'image/*',
+    '[disabled]': 'disabled()',
     '[class]': 'class()',
-    '(change)': 'add($event)',
+    '(click)': 'choose()',
   },
 })
 export class ScPdfViewerAddImage {
+  private readonly buttonStyles = injectStyle().button;
+
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
+  private readonly document = inject(DOCUMENT);
+
   readonly classInput = input<string>('', { alias: 'class' });
+  readonly variant = input<ScButtonVariants['variant']>('ghost');
+  readonly size = input<ScButtonVariants['size']>('icon');
 
-  private readonly class = computed(() => cn(this.classInput()));
+  private readonly disabled = computed(
+    () => !this.pdfViewer.pdfDocument() || !this.pdfViewer.canEdit(),
+  );
 
-  private add(event: Event): void {
-    const field = event.target as HTMLInputElement;
-    const file = field.files?.[0];
-    field.value = '';
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = reader.result as string;
-      const image = new Image();
-      image.onload = () => {
-        const width = 0.15;
-        this.pdfViewer.addEditorAnnotation({
-          type: 'stamp',
-          pageNumber: this.pdfViewer.currentPage(),
-          imageDataUrl: dataUrl,
-          width,
-          height: width * (image.height / image.width),
-          x: 0.4,
-          y: 0.4,
-        });
-      };
-      image.src = dataUrl;
-    };
-    reader.readAsDataURL(file);
+  private readonly class = computed(() =>
+    cn(
+      this.buttonStyles({ variant: this.variant(), size: this.size() }),
+      this.classInput(),
+    ),
+  );
+
+  private choose(): void {
+    const field = this.document.createElement('input');
+    field.type = 'file';
+    field.accept = 'image/*';
+    field.addEventListener('change', () => {
+      const file = field.files?.[0];
+      if (file) this.pdfViewer.addImage(file);
+    });
+    field.click();
   }
 }

@@ -34,12 +34,12 @@ export class ScPdfViewerPages {
     this.dragged.set(selection.includes(page) ? selection : [page]);
   }
 
-  async drop(): Promise<void> {
+  drop(): void {
     const target = this.dropTarget();
     const pages = this.dragged();
     this.endDrag();
     if (!target || !pages.length) return;
-    const moved = await this.pdfViewer.movePages(
+    const moved = this.pdfViewer.movePages(
       [...pages],
       target.after ? target.page + 1 : target.page,
     );

@@ -1,19 +1,12 @@
-import {
-  DOCUMENT,
-  Directive,
-  computed,
-  inject,
-  input,
-  output,
-} from '@angular/core';
+import { DOCUMENT, Directive, computed, inject, input } from '@angular/core';
 import { type ScButtonVariants, injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
 
 /**
  * Asks for a PDF and inserts its pages after the current page (merging
- * files). `insertFailed` fires when the file isn't a readable PDF — say so.
- *
+ * files). When the file isn't a readable PDF, `viewer.insertFailed()` has
+ * its name — say so.
  */
 @Directive({
   selector: 'button[scPdfViewerInsertPages]',
@@ -37,8 +30,6 @@ export class ScPdfViewerInsertPages {
   private readonly disabled = computed(
     () => !this.pdfViewer.pdfDocument() || this.pdfViewer.organizing(),
   );
-  /** The chosen file couldn't be read as a PDF. */
-  readonly insertFailed = output<File>();
 
   private readonly class = computed(() =>
     cn(
@@ -51,14 +42,10 @@ export class ScPdfViewerInsertPages {
     const field = this.document.createElement('input');
     field.type = 'file';
     field.accept = '.pdf,application/pdf';
-    field.addEventListener('change', async () => {
+    field.addEventListener('change', () => {
       const file = field.files?.[0];
       if (!file) return;
-      const inserted = await this.pdfViewer.insertFile(
-        file,
-        this.pdfViewer.currentPage(),
-      );
-      if (!inserted) this.insertFailed.emit(file);
+      this.pdfViewer.insertFile(file, this.pdfViewer.currentPage());
     });
     field.click();
   }

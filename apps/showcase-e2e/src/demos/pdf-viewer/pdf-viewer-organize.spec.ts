@@ -20,7 +20,8 @@ async function openHandbook(page: Page): Promise<void> {
 }
 
 /** The text of the first page. */
-const firstPage = (page: Page) => page.locator('div[data-page="1"] .textLayer');
+const firstPage = (page: Page) =>
+  page.locator('.page[data-page-number="1"] .textLayer');
 
 test.describe('PDF Viewer document features', () => {
   test('outline: opens as the document asks, goes to bookmarks', async ({
@@ -89,14 +90,14 @@ test.describe('PDF Viewer document features', () => {
     await page.getByRole('button', { name: 'Delete' }).click();
     await expect(pageCount).toContainText('of 5', { timeout: 10_000 });
 
-    // Copy page i and paste it after the current page. Pages from another
-    // document (the clipboard) drop the page labels: plain numbers now.
+    // Copy page i and paste it after the current page (as pdf.js: in the
+    // same document, the pages keep their labels).
     await page
       .getByRole('checkbox', { name: 'Select page i', exact: true })
       .check();
     await page.getByRole('button', { name: 'Copy' }).click();
     await page.getByRole('button', { name: 'Paste' }).click();
-    await expect(pageCount).toHaveText('/ 6', { timeout: 10_000 });
+    await expect(pageCount).toContainText('of 6', { timeout: 10_000 });
 
     expect(errors).toEqual([]);
   });

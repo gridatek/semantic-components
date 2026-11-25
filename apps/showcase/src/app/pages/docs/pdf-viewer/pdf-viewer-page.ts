@@ -26,7 +26,7 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
   template: `
     <div class="space-y-12">
       <div class="space-y-2">
-        <h1 scTypeset>Pdf Viewer</h1>
+        <h1 scTypeset>PDF Viewer</h1>
         <p class="text-muted-foreground">
           A document viewer for PDF files — navigation, zoom, find, annotations,
           forms, presentation mode and page organisation — assembled from parts.
@@ -106,11 +106,16 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
           and
           <code scTypeset>Forward</code>
           return to where you were, in the viewer rather than the browser's
-          history.
+          history. A document reopens where it was left — page, zoom, scroll,
+          rotation — as in pdf.js (<code scTypeset>rememberView</code>, on by
+          default).
           <code scTypeset>pageColors</code>
-          draws the pages in your colours (a reading mode); in the system's
-          high-contrast mode they follow its colours. With the browser's caret
-          browsing (F7) on, tell the viewer (<code scTypeset>caretBrowsing</code
+          draws the pages in your theme's colours, by name (a reading mode:
+          <code scTypeset>--sc-pdf-viewer-sepia-foreground</code> on
+          <code scTypeset>--sc-pdf-viewer-sepia-background</code>); in the
+          system's high-contrast mode they follow its colours. With the
+          browser's caret browsing (F7) on, tell the viewer (<code scTypeset
+            >caretBrowsing</code
           >) and <kbd scKbd>↑</kbd> / <kbd scKbd>↓</kbd> move the caret line by
           line through the text.
         </p>
@@ -125,6 +130,16 @@ import { PdfViewerReadingDemoContainer } from './demos/pdf-viewer-reading-demo-c
           way. Document properties (More → Document properties… in the full
           example) come from <code scTypeset>documentProperties()</code>; the
           dialog and its text are yours.
+        </p>
+        <p>
+          Pages are landmarks only when you name them:
+          <code scTypeset>pageName</code> on the canvas, e.g.
+          <code scTypeset>(page, label) =&gt; 'Report, page ' + label</code>.
+          pdf.js's viewer makes every page a region named "Page N"; with two
+          viewers on a page (as here), or labels that repeat page numbers, those
+          names repeat — screen readers can't tell the landmarks apart — and a
+          long document floods the list of landmarks. Name them when your page
+          has one viewer, or with something that tells the viewers apart.
         </p>
       </section>
 

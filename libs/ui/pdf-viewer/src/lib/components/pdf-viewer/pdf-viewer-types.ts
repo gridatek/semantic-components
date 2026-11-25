@@ -28,7 +28,8 @@ export interface ScPdfLoadError {
 /** What the undo bar can undo, and how many items it concerns. */
 export type ScPdfUndoKind =
   | 'annotation-deleted'
-  | 'annotations-cleared'
+  | 'annotations-deleted'
+  | 'comment-deleted'
   | 'pages-moved'
   | 'pages-deleted'
   | 'pages-pasted'
@@ -37,15 +38,16 @@ export type ScPdfUndoKind =
 export interface ScPdfUndoable {
   kind: ScPdfUndoKind;
   count: number;
+  /** The deleted annotation's type (`annotation-deleted`). */
+  annotation?: ScPdfAnnotationType;
 }
+
+/** The annotations pdf.js's editors make. */
+export type ScPdfAnnotationType =
+  'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature';
 
 export type ScPdfFindState =
   'idle' | 'found' | 'not-found' | 'wrapped' | 'pending';
-
-export interface ScPdfPageMatchInfo {
-  matches: number[];
-  matchesLength: number[];
-}
 
 export type ScPdfEditorMode =
   'none' | 'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature' | 'comment';
@@ -91,34 +93,6 @@ export interface ScPdfDestination {
   zoom?: ScPdfZoomLevel;
 }
 
-export interface ScPdfEditorAnnotation {
-  id: string;
-  type: 'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature';
-  pageNumber: number;
-  // Highlight: array of rects relative to the page (0-1 normalized)
-  rects?: { x: number; y: number; width: number; height: number }[];
-  color?: string;
-  opacity?: number;
-  // FreeText
-  text?: string;
-  x?: number;
-  y?: number;
-  fontSize?: number;
-  fontColor?: string;
-  // Ink: array of strokes, each stroke is array of {x,y} points (0-1 normalized)
-  strokes?: { x: number; y: number }[][];
-  strokeWidth?: number;
-  // Stamp / Signature
-  imageDataUrl?: string;
-  width?: number;
-  height?: number;
-  // Alt text
-  altText?: string;
-  isDecorative?: boolean;
-  // Description (for signatures)
-  description?: string;
-}
-
 export interface ScPdfSignatureData {
   id: string;
   dataUrl: string;
@@ -127,15 +101,18 @@ export interface ScPdfSignatureData {
   height: number;
 }
 
+/**
+ * A comment on an annotation — one made in the viewer, or the document's
+ * own — as pdf.js's comment mode lists them.
+ */
 export interface ScPdfComment {
   id: string;
   pageNumber: number;
-  x: number;
-  y: number;
   text: string;
-  author: string;
-  date: string;
-  color: string;
+  /** When it was written, if known. */
+  date: Temporal.Instant | null;
+  /** Its annotation's colour (CSS), if any. */
+  color: string | null;
 }
 
 /** A file attached to the document. */
@@ -201,6 +178,14 @@ export interface ScPdfPageColors {
 
 /** A viewer setting the consumer's controls bind to (`scPdfViewerSetting`). */
 export type ScPdfViewerSettingKey =
+  | 'editorMode'
+  | 'sidebarView'
+  | 'pageColors'
+  | 'findHighlightAll'
+  | 'findMatchCase'
+  | 'findEntireWord'
+  | 'findMatchDiacritics'
+  | 'caretBrowsing'
   | 'cursorTool'
   | 'scrollMode'
   | 'spreadMode'
@@ -212,3 +197,16 @@ export type ScPdfViewerSettingKey =
   | 'inkColor'
   | 'inkThickness'
   | 'inkOpacity';
+
+/** What a menu item does (its value, in a `scPdfViewerMenu`). */
+export type ScPdfViewerCommand =
+  | 'open'
+  | 'download'
+  | 'print'
+  | 'presentation'
+  | 'fullscreen'
+  | 'first-page'
+  | 'last-page'
+  | 'rotate-right'
+  | 'rotate-left'
+  | 'properties';

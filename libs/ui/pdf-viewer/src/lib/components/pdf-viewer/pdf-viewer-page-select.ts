@@ -17,7 +17,9 @@ import { SC_PDF_VIEWER } from './pdf-viewer';
 export class ScPdfViewerPageSelect {
   private readonly pdfViewer = inject(SC_PDF_VIEWER);
 
-  readonly page = input.required<number>({ alias: 'scPdfViewerPageSelect' });
+  readonly page = input.required<number>({
+    alias: 'scPdfViewerPageSelect',
+  });
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() => cn(this.classInput()));
