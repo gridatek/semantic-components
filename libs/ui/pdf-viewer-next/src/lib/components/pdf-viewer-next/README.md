@@ -2,7 +2,7 @@
 
 A composable PDF viewer built on [PDF.js](https://mozilla.github.io/pdf.js/) (`pdfjs-dist`, a peer dependency): navigation, zoom, rotation, find, text selection, links, forms, annotations (highlight, text, drawing, images, signatures, comments), saving, printing, presentation mode and page organisation.
 
-**pdf.js's viewer, your interface.** The pages are pdf.js's own `PDFViewer`, wired as pdf.js's viewer application wires it (`web/app.js`): its rendering, text, link, form, structure and annotation-editor layers, its find controller, link service, scripting sandbox and page map. Everything around them — toolbars, sidebar, find bar, dialogs, the undo bar — is your template: usually `@semantic-components/ui` components (`scButton`, `scInput`, `scToggleGroup`, `scDialog`…), with the viewer's parts as directives on them adding behaviour, ARIA wiring, state (`data-*` attributes) and default classes you can adjust with `class`. The library ships no text: yours is yours to word and translate. pdf.js's own words on the pages (page names, its editors' toolbar buttons) are its English, or the app's language when the page links pdf.js's locale files (`<link rel="resource" type="application/l10n" href="…/locale/locale.json">`).
+**pdf.js's viewer, your interface.** The pages are pdf.js's own `PDFViewer`, wired as pdf.js's viewer application wires it (`web/app.js`): its rendering, text, link, form, structure and annotation-editor layers, its find controller, link service, scripting sandbox and page map. Everything around them — toolbars, sidebar, find bar, dialogs, the undo bar — is your template: usually `@semantic-components/ui` components (`scButton`, `scInput`, `scToggleGroup`, `scDialog`…), with the viewer's parts as directives on them adding behaviour, ARIA wiring, state (`data-*` attributes) and default classes you can adjust with `class`. The library ships no text: yours is yours to word and translate. pdf.js's own words on the pages (its editors' toolbar buttons) are its English, or the app's language when the page links pdf.js's locale files (`<link rel="resource" type="application/l10n" href="…/locale/locale.json">`).
 
 ## Usage
 
@@ -68,15 +68,15 @@ providers: [{ provide: OverlayContainer, useClass: FullscreenOverlayContainer }]
 
 ### Layout
 
-| Part                       | Selector                     | Does                                                                                             |
-| -------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ |
-| `ScPdfViewerNextContainer` | `[scPdfViewerNextContainer]` | The frame; the fullscreen element.                                                               |
-| `ScPdfViewerNextToolbar`   | `[scPdfViewerNextToolbar]`   | A toolbar row (`role="toolbar"`) — name it.                                                      |
-| `ScPdfViewerNextNav`       | `[scPdfViewerNextNav]`       | Groups page controls (`role="group"`) — name it.                                                 |
-| `ScPdfViewerNextZoom`      | `[scPdfViewerNextZoom]`      | Groups zoom controls (`role="group"`) — name it.                                                 |
-| `ScPdfViewerNextSpacer`    | `[scPdfViewerNextSpacer]`    | Pushes what follows to the end.                                                                  |
-| `ScPdfViewerNextContent`   | `[scPdfViewerNextContent]`   | The page area. Opens a file dropped on it (`data-dragging`; `[dropFiles]="false"` turns it off). |
-| `ScPdfViewerNextCanvas`    | `div[scPdfViewerNextCanvas]` | pdf.js's viewer: the pages, with their text, link, form, structure and annotation-editor layers. |
+| Part                       | Selector                     | Does                                                                                                                                                                                           |
+| -------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScPdfViewerNextContainer` | `[scPdfViewerNextContainer]` | The frame; the fullscreen element.                                                                                                                                                             |
+| `ScPdfViewerNextToolbar`   | `[scPdfViewerNextToolbar]`   | A toolbar row (`role="toolbar"`) — name it.                                                                                                                                                    |
+| `ScPdfViewerNextNav`       | `[scPdfViewerNextNav]`       | Groups page controls (`role="group"`) — name it.                                                                                                                                               |
+| `ScPdfViewerNextZoom`      | `[scPdfViewerNextZoom]`      | Groups zoom controls (`role="group"`) — name it.                                                                                                                                               |
+| `ScPdfViewerNextSpacer`    | `[scPdfViewerNextSpacer]`    | Pushes what follows to the end.                                                                                                                                                                |
+| `ScPdfViewerNextContent`   | `[scPdfViewerNextContent]`   | The page area. Opens a file dropped on it (`data-dragging`; `[dropFiles]="false"` turns it off).                                                                                               |
+| `ScPdfViewerNextCanvas`    | `div[scPdfViewerNextCanvas]` | pdf.js's viewer: the pages, with their text, link, form, structure and annotation-editor layers. `pageName`: a function naming each page, which makes the pages landmarks (see Accessibility). |
 
 ### Buttons
 
@@ -201,6 +201,8 @@ pdf.js's shortcuts work while focus is in the viewer (`[keyboardShortcuts]="fals
 pdf.js's viewer's: only pages near the viewport are drawn (its rendering queue), the others released; a detail canvas draws the visible part sharp at high zoom on dense screens; pages redraw at the screen's density. Thumbnails render when they scroll near view, one at a time, and follow their pages through page organisation. After 30 s without drawing, pdf.js's caches (fonts, images) are freed.
 
 ## Accessibility
+
+- **Pages are landmarks only when you name them.** pdf.js's viewer makes every page a region landmark named "Page N"; the library takes that off unless you give `pageName` on the canvas (`(page, label) => 'Report, page ' + label`). Why: on a page with two viewers, or in a document whose page labels repeat its numbers, pdf.js's names repeat — screen readers can't tell those landmarks apart, and axe rejects them (`landmark-unique`) — and a long document floods the list of landmarks a screen reader user moves through. Name the pages when your page has one viewer, or with something that tells the viewers apart (the document's title).
 
 - Parts add the roles and states (`toolbar`, `group`, `status`, `alert`, `separator`, `aria-pressed`, `aria-current`, `aria-expanded`, `aria-invalid`…); you give the names. Icon-only buttons, toolbars, groups, the zoom select, the resizer and the signature pad need an `aria-label`.
 - Live regions (find results, the undo bar, loading) stay in place, so what you write in them is announced.

@@ -79,6 +79,26 @@ export class ScPdfViewerNextCanvas {
       `url("${this.pdfViewer.assetsUrl()}web/images/comment-editButton.svg")`,
   );
 
+  /**
+   * Each page's accessible name — your words, e.g.
+   * `(page, label) => 'Report, page ' + label`. With it, the pages are named
+   * regions (landmarks); without it, they aren't.
+   *
+   * pdf.js's viewer makes every page a landmark named "Page N". The library
+   * doesn't by default: a page with two viewers, or a document whose labels
+   * repeat its numbers, gets landmarks with the same name (which screen
+   * readers can't tell apart, and axe's `landmark-unique` rejects), and a
+   * long document floods the landmark list. Name them when your page has one
+   * viewer, or with something that tells the viewers apart (the document's
+   * title).
+   */
+  readonly pageName = input<((page: number, label: string) => string) | null>(
+    null,
+  );
+
+  /** pdf.js's pages are there (or changed): they're named again. */
+  private readonly pagesShown = signal(0);
+
   /** pdf.js's viewer components, once loaded (in the browser only). */
   private readonly module = signal<ScPdfViewerModule | null>(null);
 
@@ -123,11 +143,30 @@ export class ScPdfViewerNextCanvas {
       const stopKeepingFocus = engine.on('pagechanging', () =>
         this.keepFocus(),
       );
+      // New page views: when laid out, rendered (a cut page pasted is a
+      // clone), and moved.
+      const shown = () => this.pagesShown.update((count) => count + 1);
+      const stopNaming = [
+        engine.on('pagesinit', shown),
+        engine.on('pagerendered', shown),
+        engine.on('pagesedited', shown),
+      ];
       onCleanup(() => {
         stopKeepingFocus();
+        stopNaming.forEach((stop) => stop());
         this.pdfViewer.releaseEngine(engine);
         engine.destroy();
       });
+    });
+
+    // The pages' names: yours, or none (see `pageName`).
+    effect(() => {
+      this.pagesShown();
+      this.pdfViewer.pageEdits();
+      this.pdfViewer.pageLabels();
+      const name = this.pageName();
+      const engine = this.pdfViewer.engine();
+      if (engine) untracked(() => this.namePages(engine, name));
     });
 
     this.destroyRef.onDestroy(() => {
@@ -138,6 +177,34 @@ export class ScPdfViewerNextCanvas {
   }
 
   private destroyed = false;
+
+  /**
+   * Names pdf.js's pages with `pageName`, or takes their landmark role and
+   * name off. pdf.js's words for the name go: they would come back.
+   */
+  private namePages(
+    engine: ScPdfEngine,
+    name: ((page: number, label: string) => string) | null,
+  ): void {
+    const viewer = engine.viewer;
+    for (let index = 0; index < viewer.pagesCount; index++) {
+      const div = viewer.getPageView(index)?.div as HTMLElement | undefined;
+      if (!div) continue;
+      div.removeAttribute('data-l10n-id');
+      div.removeAttribute('data-l10n-args');
+      const page = index + 1;
+      if (name) {
+        div.setAttribute('role', 'region');
+        div.setAttribute(
+          'aria-label',
+          name(page, this.pdfViewer.pageLabel(page)),
+        );
+      } else {
+        div.removeAttribute('role');
+        div.removeAttribute('aria-label');
+      }
+    }
+  }
 
   // ── Focus ───────────────────────────────────────────────────────────
 

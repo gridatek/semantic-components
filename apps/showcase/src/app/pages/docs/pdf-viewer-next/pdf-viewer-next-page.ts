@@ -128,6 +128,16 @@ import { PdfViewerNextReadingDemoContainer } from './demos/pdf-viewer-next-readi
           example) come from <code scTypeset>documentProperties()</code>; the
           dialog and its text are yours.
         </p>
+        <p>
+          Pages are landmarks only when you name them:
+          <code scTypeset>pageName</code> on the canvas, e.g.
+          <code scTypeset>(page, label) =&gt; 'Report, page ' + label</code>.
+          pdf.js's viewer makes every page a region named "Page N"; with two
+          viewers on a page (as here), or labels that repeat page numbers, those
+          names repeat — screen readers can't tell the landmarks apart — and a
+          long document floods the list of landmarks. Name them when your page
+          has one viewer, or with something that tells the viewers apart.
+        </p>
       </section>
 
       <section class="space-y-4">
