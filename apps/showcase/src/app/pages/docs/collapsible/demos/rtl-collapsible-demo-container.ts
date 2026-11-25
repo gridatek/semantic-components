@@ -42,7 +42,7 @@ import { SiChevronsUpDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronsUpDownIcon,
   ],
   template: \`
-    <div dir="rtl" lang="ar">
+    <div dir="rtl" lang="ar" class="flex w-full justify-center">
       <div scCollapsible [(open)]="open" class="flex w-[350px] flex-col gap-2">
         <div class="flex items-center justify-between gap-4 ps-4">
           <h3 class="text-sm font-semibold">الطلب #4189</h3>

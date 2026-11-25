@@ -147,3 +147,16 @@ test('Open, at rest: the panel clips nothing (its content’s rings and shadows 
   await trigger.click();
   await expect(panel).toHaveCSS('overflow', 'hidden');
 });
+
+test('RTL on a phone: shrunk to the width it has, as the Usage demo', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto(demo('rtl'));
+  const collapsible = page.locator('[scCollapsible]');
+  await expect(collapsible).toBeVisible();
+  // The demo's route: the screen less its 16px gutter a side.
+  const box = await collapsible.boundingBox();
+  expect(box?.x).toBeGreaterThanOrEqual(16 - 0.5);
+  expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(360 - 16 + 0.5);
+});
