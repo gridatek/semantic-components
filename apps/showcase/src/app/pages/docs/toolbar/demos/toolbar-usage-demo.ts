@@ -52,7 +52,11 @@ import {
     SiTextAlignStartIcon,
   ],
   template: `
-    <div scToolbar aria-label="Spreadsheet formatting">
+    <div
+      scToolbar
+      aria-label="Spreadsheet formatting"
+      class="max-w-full overflow-x-auto"
+    >
       <div scToolbarWidgetGroup aria-label="Alignment" [(value)]="alignment">
         <button scToolbarWidget scToggle size="sm" value="start">
           <svg siTextAlignStartIcon></svg>

@@ -48,7 +48,7 @@ div[scWaterfall] ([items], range, [(value)], [(expanded)], format, barLabel)   r
 - `rows()`: the rows shown — those whose parents are open (spans start closed). `[(expanded)]`: the open ones; `[(value)]`: the selected one.
 - A bar is a share of `range` (by default the first start to the last end): `--sc-waterfall-start`, `--sc-waterfall-size`, from the start of the line (the right, right to left); out of the range, held to its edge. Change `range` to zoom: bars and ticks follow.
 - Times: `format` — number format options for ms (`120 ms` by default) or a function — in the app's language (`LOCALE_ID`). A bar's label: its times as a range (`120–460 ms`, `Intl.NumberFormat#formatRange`), or `barLabel(item, { start, duration, range })`.
-- Marks: a line through every bar at their time; `data-outside` (and hidden) when the range doesn't hold them. Ticks: round times (1, 2 or 5 × a power of ten), at most `maxTicks`; a tick's label is moved back by its place, so the first and last stay inside the axis.
+- Marks: a line through every bar at their time; `data-outside` (and hidden) when the range doesn't hold them. Past the middle of the range, a mark's text goes before its line (the line, its end border, still at its time), so it stays inside the axis. Ticks: round times (1, 2 or 5 × a power of ten), at most `maxTicks` and one every 80px of the axis's width (d3's `ticks(width / 80)`; measured in the browser — the server draws `maxTicks`), so a phone's narrow axis gets fewer, never on top of each other; a tick's label is moved back by its place, so the first and last stay inside the axis.
 
 ## Keyboard
 

@@ -113,10 +113,22 @@ function overflowing(): string[] {
     document.body,
     ...document.querySelectorAll('main[data-slot="sidebar-inset"]'),
   ]);
-  /** Held by an ancestor of its own that scrolls or clips sideways. */
+  /**
+   * Held by an ancestor of its own that scrolls or clips sideways — or
+   * clipped by a `clip-path`, its own or an ancestor's (a treemap's boxes
+   * before they slide in): the box measured is not what shows.
+   */
   const held = (element: Element) => {
-    for (let a = element.parentElement; a && !page.has(a); a = a.parentElement)
-      if (getComputedStyle(a).overflowX !== 'visible') return true;
+    if (getComputedStyle(element).clipPath !== 'none') return true;
+    for (
+      let a = element.parentElement;
+      a && !page.has(a);
+      a = a.parentElement
+    ) {
+      const style = getComputedStyle(a);
+      if (style.overflowX !== 'visible' || style.clipPath !== 'none')
+        return true;
+    }
     return false;
   };
   const past = (element: Element) => {

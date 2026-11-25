@@ -230,7 +230,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/area-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-area-chart-demo-container />
           <app-stacked-area-chart-demo-container />
           <app-expanded-area-chart-demo-container />
@@ -256,7 +256,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/bar-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-bar-chart-demo-container />
           <app-multiple-bar-chart-demo-container />
           <app-stacked-bar-chart-demo-container />
@@ -286,7 +286,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/line-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-line-chart-demo-container />
           <app-multiple-line-chart-demo-container />
           <app-step-line-chart-demo-container />
@@ -312,7 +312,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/pie-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-pie-chart-demo-container />
           <app-donut-chart-demo-container />
           <app-stacked-pie-chart-demo-container />
@@ -338,7 +338,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/radar-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-radar-chart-demo-container />
           <app-multiple-radar-chart-demo-container />
           <app-lines-radar-chart-demo-container />
@@ -367,7 +367,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/radial-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-radial-chart-demo-container />
           <app-stacked-radial-chart-demo-container />
           <app-grid-radial-chart-demo-container />
@@ -397,7 +397,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/scatter-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-scatter-chart-demo-container />
           <app-bubble-scatter-chart-demo-container />
         </div>
@@ -425,7 +425,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/funnel-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-funnel-chart-demo-container />
           <app-label-funnel-chart-demo-container />
         </div>
@@ -453,7 +453,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/treemap-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-treemap-chart-demo-container />
           <app-grouped-treemap-chart-demo-container />
         </div>
@@ -481,7 +481,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/sunburst-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-sunburst-chart-demo-container />
           <app-label-sunburst-chart-demo-container />
         </div>
@@ -509,7 +509,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/sankey-chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-sankey-chart-demo-container />
         </div>
       </section>
@@ -530,7 +530,7 @@ import { TreemapChartDemoContainer } from '../docs/treemap-chart/demos/treemap-c
           </div>
           <a scLink routerLink="/docs/charts/chart">Docs</a>
         </div>
-        <div class="grid gap-8 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <app-tooltip-chart-demo-container />
         </div>
       </section>
