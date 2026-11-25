@@ -3,9 +3,10 @@
 // pdf.js's own (pdfjs-dist/web/pdf_viewer.css): what the pages need (their
 // layers, pdf.js's editors, the page view), without pdf.js's application
 // (its dialogs, sidebars, message bars…) and without its global
-// `color-scheme`; the images it still draws inlined, each behind a variable
-// of ours; its colours on the theme's tokens (pdf-viewer-theme.css,
-// appended). Run again when pdfjs-dist is upgraded, and compare.
+// `color-scheme`; without its images (the icons are yours: scPdfViewerIcon,
+// your annotation toolbar), its cursors behind variables of ours; its colours
+// on the theme's tokens (pdf-viewer-theme.css, appended). Run again when
+// pdfjs-dist is upgraded, and compare.
 //
 //   node scripts/build-pdf-viewer-css.mjs [--list]
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -15,7 +16,6 @@ const root = join(import.meta.dirname, '..');
 const source = join(root, 'node_modules/pdfjs-dist/web/pdf_viewer.css');
 const out = join(root, 'libs/styles/src/pdf-viewer.css');
 const theme = join(root, 'libs/styles/src/pdf-viewer-theme.css');
-const imagesFrom = join(root, 'node_modules/pdfjs-dist/web/images');
 const list = process.argv.includes('--list');
 
 /** pdf.js's application, which the library's parts replace. */
@@ -154,11 +154,16 @@ css = css.replace(
 // pdf.js's `light dark` would hand the browser's parts back to the system.
 css = css.replace(/^\s*color-scheme: light dark;\n/gm, '');
 /**
- * The images pdf.js still draws, inlined — no files to host — each behind a
- * variable of ours, which your CSS can set (`--sc-pdf-viewer-ink-cursor:
- * url(my-pen.svg) 0 16, pointer;`): pdf.js's variable for it takes ours, its
- * image as the fallback. Cursors take their whole value (the image, its hot
- * spot, the cursor without images); the others, the image (`url(…)`).
+ * The library draws no icons: pdf.js's images go. Its icons on the pages are
+ * your templates (`scPdfViewerIcon`: the comment button, the missing
+ * alt-text badge, a page being drawn, the play button on media; your
+ * annotation toolbar), and pdf.js's
+ * pseudo-elements that drew them are off (pdf-viewer-theme.css).
+ *
+ * Its editing cursors are CSS — no template can be a cursor: pdf.js's
+ * cursor without its image (`pointer`, `text`), behind a variable of ours
+ * your CSS can set to one of yours (`--sc-pdf-viewer-ink-cursor: url(pen.svg)
+ * 0 16, pointer;`).
  */
 const CURSORS = {
   '--editorFreeText-editing-cursor': '--sc-pdf-viewer-freetext-cursor',
@@ -167,78 +172,39 @@ const CURSORS = {
   '--editorFreeHighlight-editing-cursor':
     '--sc-pdf-viewer-free-highlight-cursor',
 };
-const IMAGES = {
-  // The badge on an image without alt text.
-  'altText_warning.svg': '--sc-pdf-viewer-alt-text-missing-icon',
-  // The button by an annotation with a comment (the theme part sets
-  // pdf.js's variable for it: pdf.js's application stylesheet does).
-  'comment-editButton.svg': '--sc-pdf-viewer-comment-icon',
-  // A page being drawn.
-  'loading-icon.gif': '--sc-pdf-viewer-page-loading-image',
-};
-/**
- * The images of pdf.js's buttons in its toolbar on an annotation: your
- * toolbar replaces them (scPdfViewerAnnotationToolbar), their variables go.
- */
-const TOOLBAR_IMAGES = new Set([
-  'editor-toolbar-delete.svg',
-  'toolbarButton-editorHighlight.svg',
-  'altText_add.svg',
-  'altText_done.svg',
-  'toolbarButton-menuArrow.svg',
-]);
+const IMAGE_URL = /url\((["']?)images\/([^"')]+)\1\)/;
 
-/** An image as a data: URL. */
-function dataUrl(file) {
-  const bytes = readFileSync(join(imagesFrom, file));
-  if (file.endsWith('.svg')) {
-    const svg = bytes
-      .toString('utf8')
-      .replace(/<!--[^]*?-->/g, '')
-      .replace(/\s+/g, ' ')
-      .replace(/> </g, '><')
-      .trim()
-      .replace(/"/g, "'");
-    const encoded = svg.replace(/[%#<>{}\r\n]/g, (c) => encodeURIComponent(c));
-    return `url("data:image/svg+xml,${encoded}")`;
-  }
-  const type = file.endsWith('.gif') ? 'image/gif' : 'image/png';
-  return `url("data:${type};base64,${bytes.toString('base64')}")`;
-}
-
-const IMAGE_URL = /url\((["']?)images\/([^"')]+)\1\)/g;
-/** pdf.js's images in a stylesheet, inlined behind our variables. */
-function inlineImages(text) {
-  // Its toolbar buttons' images: gone with them.
-  text = text.replace(
-    /^\s*--[\w-]+:\s*url\((["']?)images\/([^"')]+)\1\)[^;]*;\n/gm,
-    (line, _, file) => (TOOLBAR_IMAGES.has(file) ? '' : line),
-  );
-  // The cursors: their whole value.
+/** pdf.js's images out of a stylesheet; its cursors behind our variables. */
+function dropImages(text) {
+  // The cursors: pdf.js's own without its image (the keyword it falls back
+  // to), behind ours.
   text = text.replace(
     /(--editor\w+-editing-cursor):\s*([^;]+);/g,
     (all, name, value) => {
       const ours = CURSORS[name];
       if (!ours) throw new Error('A cursor of pdf.js not known: ' + name);
-      const inlined = value
-        .replace(/\s+/g, ' ')
-        .trim()
-        .replace(IMAGE_URL, (_, quote, file) => dataUrl(file));
-      return `${name}: var(${ours}, ${inlined});`;
+      const keyword = value.trim().split(',').pop().trim();
+      if (!/^[a-z-]+$/.test(keyword))
+        throw new Error(`No cursor keyword in ${name}: ${value}`);
+      return `${name}: var(${ours}, ${keyword});`;
     },
   );
-  // The other images: their url().
-  text = text.replace(IMAGE_URL, (_, quote, file) => {
-    const ours = IMAGES[file];
-    if (!ours)
-      throw new Error(
-        `An image of pdf.js not known: ${file} (add it to IMAGES or TOOLBAR_IMAGES)`,
-      );
-    return `var(${ours}, ${dataUrl(file)})`;
-  });
+  // A declaration whose value is one of its images: gone.
+  text = text.replace(
+    new RegExp(`^\\s*[\\w-]+:\\s*[^;]*${IMAGE_URL.source}[^;]*;\\n`, 'gm'),
+    '',
+  );
+  // An icon pdf.js writes inline (the play button on embedded media): gone.
+  text = text.replace(
+    /^\s*background-image:\s*url\(["']?data:image\/svg\+xml,[^;]*;\n/gm,
+    '',
+  );
+  if (IMAGE_URL.test(text)) {
+    throw new Error('An image of pdf.js left: ' + text.match(IMAGE_URL)[0]);
+  }
   return text;
 }
-css = inlineImages(css);
+css = dropImages(css);
 
 const header = `/*
  * The PDF Viewer's stylesheet — import it in place of pdf.js's
@@ -248,12 +214,12 @@ const header = `/*
  * pdf.js's application (its dialogs, sidebars, message bars, undo bar, its
  * toolbar buttons on an annotation: the library's parts are those) and
  * without its global \`:root { color-scheme: light dark }\` (pdf.js issue
- * 19886). The images pdf.js still draws are inlined, each behind a variable
- * you can set: --sc-pdf-viewer-ink-cursor, --sc-pdf-viewer-highlight-cursor,
- * --sc-pdf-viewer-free-highlight-cursor, --sc-pdf-viewer-freetext-cursor
- * (their whole cursor value), --sc-pdf-viewer-alt-text-missing-icon,
- * --sc-pdf-viewer-comment-icon, --sc-pdf-viewer-page-loading-image (an
- * image). Then the library's look, on the theme's tokens:
+ * 19886), and without pdf.js's images: the icons on the pages are yours
+ * (scPdfViewerIcon). Its editing cursors are pdf.js's without images, each
+ * behind a variable you can set to yours (its whole cursor value):
+ * --sc-pdf-viewer-ink-cursor, --sc-pdf-viewer-highlight-cursor,
+ * --sc-pdf-viewer-free-highlight-cursor, --sc-pdf-viewer-freetext-cursor.
+ * Then the library's look, on the theme's tokens:
  * pdf-viewer-theme.css, below. Don't edit the part from pdf.js by hand:
  * change the script, or the theme part.
  */
@@ -265,7 +231,7 @@ writeFileSync(
     header,
     css.trim(),
     '',
-    inlineImages(readFileSync(theme, 'utf8')).trim(),
+    readFileSync(theme, 'utf8').trim(),
     '',
   ].join('\n'),
 );

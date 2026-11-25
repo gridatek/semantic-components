@@ -131,11 +131,13 @@ import { PdfViewerUsageDemoContainer } from './demos/pdf-viewer-usage-demo-conta
             The look is the library&apos;s: its stylesheet is pdf.js&apos;s,
             rebuilt — the pages in the style&apos;s frame, what pdf.js draws on
             them in the theme&apos;s colours, without pdf.js&apos;s application
-            and its global <code scTypeset>color-scheme</code>. The images
-            pdf.js still draws (its editing cursors, a few badges) are inlined
-            in it, each behind a
-            <code scTypeset>--sc-pdf-viewer-…</code> variable you can set.
-            Annotation colours are the theme&apos;s CSS variables —
+            and its global <code scTypeset>color-scheme</code>. It has no
+            images: the library draws no icons. The few pdf.js shows on the
+            pages — the comment button by an annotation, a page being drawn… —
+            are your templates (<code scTypeset>scPdfViewerIcon</code>), stamped
+            into pdf.js&apos;s elements; its editing cursors are plain, and
+            <code scTypeset>--sc-pdf-viewer-…-cursor</code> variables take
+            yours. Annotation colours are the theme&apos;s CSS variables —
             <code scTypeset>--sc-pdf-viewer-highlight-1</code> to
             <code scTypeset>-5</code>,
             <code scTypeset>--sc-pdf-viewer-ink-1</code> to
@@ -325,6 +327,7 @@ export default class PdfViewerPage {
       '  ScPdfViewerContent, ScPdfViewerLoading, ScPdfViewerError,',
       '  ScPdfViewerCanvas, ScPdfViewerAnnotationToolbar,',
       '  ScPdfViewerAnnotationComment, ScPdfViewerAnnotationDelete,',
+      '  ScPdfViewerIcon,',
       "} from '@semantic-components/ui/pdf-viewer';",
     ].join('\n'),
     markup: [
@@ -343,6 +346,7 @@ export default class PdfViewerPage {
       '        <button scPdfViewerAnnotationComment>…</button>',
       '        <button scPdfViewerAnnotationDelete>…</button>',
       '      </ng-template>',
+      '      <ng-template scPdfViewerIcon="comment">…</ng-template>',
       '    </div>',
       '  </div>',
       '</div>',
@@ -721,6 +725,12 @@ export default class PdfViewerPage {
       selector: 'ng-template[scPdfViewerAnnotationToolbar]',
       description:
         "Your toolbar on a selected annotation (let-annotation: { id, type, pageNumber }), stamped where pdf.js puts its own; the style's popover.",
+    },
+    {
+      name: 'ScPdfViewerIcon',
+      selector: 'ng-template[scPdfViewerIcon]',
+      description:
+        "Your icon in pdf.js's places on the pages: comment (the button by an annotation), alt-text-missing, media-play, page-loading.",
     },
     {
       name: 'ScPdfViewerAnnotationComment, ScPdfViewerAnnotationAltText, ScPdfViewerAnnotationDelete',

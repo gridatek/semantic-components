@@ -108,6 +108,7 @@ import {
   ScPdfViewerFindbar,
   ScPdfViewerForward,
   ScPdfViewerGoToPage,
+  ScPdfViewerIcon,
   ScPdfViewerInsertPages,
   ScPdfViewerLayer,
   ScPdfViewerLoading,
@@ -171,6 +172,7 @@ import {
   SiChevronsDownUpIcon,
   SiChevronsUpDownIcon,
   SiCircleAlertIcon,
+  SiCirclePlayIcon,
   SiClipboardPasteIcon,
   SiCopyIcon,
   SiDownloadIcon,
@@ -180,6 +182,7 @@ import {
   SiFileTextIcon,
   SiHighlighterIcon,
   SiImageIcon,
+  SiImageOffIcon,
   SiLayersIcon,
   SiLayoutGridIcon,
   SiListTreeIcon,
@@ -187,6 +190,7 @@ import {
   SiLocateFixedIcon,
   SiMessageSquareIcon,
   SiMessageSquarePlusIcon,
+  SiMessageSquareTextIcon,
   SiPanelLeftIcon,
   SiPaperclipIcon,
   SiPenIcon,
@@ -295,6 +299,7 @@ const INK_COLORS = [
     ScPdfViewerAnnotationDelete,
     ScPdfViewerAnnotationToolbar,
     ScPdfViewerColor,
+    ScPdfViewerIcon,
     ScPdfViewerCommentEdit,
     ScPdfViewerCommentRemove,
     ScPdfViewerDialog,
@@ -384,6 +389,7 @@ const INK_COLORS = [
     SiChevronsDownUpIcon,
     SiChevronsUpDownIcon,
     SiCircleAlertIcon,
+    SiCirclePlayIcon,
     SiClipboardPasteIcon,
     SiCopyIcon,
     SiDownloadIcon,
@@ -393,6 +399,7 @@ const INK_COLORS = [
     SiFileTextIcon,
     SiHighlighterIcon,
     SiImageIcon,
+    SiImageOffIcon,
     SiLayersIcon,
     SiLayoutGridIcon,
     SiListTreeIcon,
@@ -400,6 +407,7 @@ const INK_COLORS = [
     SiLocateFixedIcon,
     SiMessageSquareIcon,
     SiMessageSquarePlusIcon,
+    SiMessageSquareTextIcon,
     SiPanelLeftIcon,
     SiPaperclipIcon,
     SiPenIcon,
@@ -1492,6 +1500,24 @@ const INK_COLORS = [
             </div>
 
             <div scPdfViewerCanvas></div>
+
+            <!-- pdf.js's icons on the pages: yours -->
+            <ng-template scPdfViewerIcon="comment">
+              <svg siMessageSquareTextIcon></svg>
+            </ng-template>
+            <ng-template scPdfViewerIcon="alt-text-missing">
+              <svg siImageOffIcon></svg>
+            </ng-template>
+            <ng-template scPdfViewerIcon="media-play">
+              <svg siCirclePlayIcon></svg>
+            </ng-template>
+            <ng-template scPdfViewerIcon="page-loading">
+              <svg
+                scSpinner
+                siLoaderCircleIcon
+                aria-label="Drawing the page"
+              ></svg>
+            </ng-template>
 
             <!-- The toolbar on a selected annotation -->
             <ng-template scPdfViewerAnnotationToolbar let-annotation>

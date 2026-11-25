@@ -16,9 +16,6 @@
   --pdfViewer-padding-bottom: 8px;
   --spreadHorizontalWrapped-margin-LR: 4px;
   --page-bg-color: var(--background);
-  /* The icon of pdf.js's comment buttons by annotations (its application's
-     stylesheet has it): inlined by the build, as --sc-pdf-viewer-comment-icon. */
-  --comment-edit-button-icon: url(images/comment-editButton.svg);
 }
 
 [data-slot='pdf-viewer-canvas'] .pdfViewer .page {
@@ -35,6 +32,39 @@
   [data-slot='pdf-viewer-canvas'] .pdfViewer .page {
     box-shadow: none;
   }
+}
+
+/*
+ * pdf.js's icons on the pages are yours (scPdfViewerIcon, stamped into its
+ * elements): the pseudo-elements it drew its images in are off — the comment
+ * button by an annotation, the badge on an image without alt text, the
+ * spinner of a page being drawn. Your icon takes the colour pdf.js gives the
+ * place (currentColor), state by state.
+ */
+[data-slot='pdf-viewer-canvas'] .annotationCommentButton::before,
+[data-slot='pdf-viewer-canvas'] .noAltTextBadge::before,
+[data-slot='pdf-viewer-canvas'] .pdfViewer .page.loadingIcon::after {
+  content: none;
+}
+
+[data-slot='pdf-viewer-canvas'] .annotationCommentButton {
+  color: var(--comment-button-fg);
+
+  &:hover {
+    color: var(--comment-button-hover-fg);
+  }
+
+  &:active {
+    color: var(--comment-button-active-fg);
+  }
+
+  &.selected {
+    color: var(--comment-button-selected-fg);
+  }
+}
+
+[data-slot='pdf-viewer-canvas'] .noAltTextBadge {
+  color: var(--no-alt-text-badge-fg-color);
 }
 
 /*

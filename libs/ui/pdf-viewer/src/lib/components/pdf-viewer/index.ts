@@ -164,3 +164,5 @@ export type { ScPdfAnnotationToolbarContext } from './pdf-viewer-annotation-tool
 export { ScPdfViewerAnnotationDelete } from './pdf-viewer-annotation-delete';
 export { ScPdfViewerAnnotationComment } from './pdf-viewer-annotation-comment';
 export { ScPdfViewerAnnotationAltText } from './pdf-viewer-annotation-alt-text';
+export { ScPdfViewerIcon } from './pdf-viewer-icon';
+export type { ScPdfViewerIconName } from './pdf-viewer-icon';

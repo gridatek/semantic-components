@@ -1,7 +1,6 @@
 import {
   ApplicationRef,
   Directive,
-  type EmbeddedViewRef,
   InjectionToken,
   Injector,
   TemplateRef,
@@ -12,7 +11,7 @@ import {
 import { injectStyle } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
-import type { ScPdfEngine } from './pdf-viewer-engine';
+import { stampTemplates } from './pdf-viewer-stamp';
 import type { ScPdfAnnotation, ScPdfAnnotationType } from './pdf-viewer-types';
 
 /** The annotation a toolbar is for: its parts act on it. */
@@ -60,10 +59,23 @@ export class ScPdfViewerAnnotationToolbar {
   );
 
   constructor() {
+    // Into each toolbar pdf.js makes for an annotation (`div.editToolbar`
+    // in its element: made when it's first selected, shown and hidden by
+    // pdf.js since).
     effect((onCleanup) => {
       const engine = this.pdfViewer.engine();
       if (!engine) return;
-      onCleanup(untracked(() => this.stampToolbars(engine)));
+      const stop = untracked(() =>
+        stampTemplates({
+          container: engine.viewer.container as HTMLElement,
+          selector: '.annotationEditorLayer .editToolbar',
+          template: this.template,
+          injector: this.injector,
+          appRef: this.appRef,
+          stampFor: (toolbar) => this.stampFor(toolbar),
+        }),
+      );
+      onCleanup(stop);
     });
   }
 
@@ -74,89 +86,33 @@ export class ScPdfViewerAnnotationToolbar {
     return !!context;
   }
 
-  /**
-   * Stamps the template into each toolbar pdf.js makes for an annotation
-   * (`div.editToolbar` in the annotation's element: made when it's first
-   * selected, shown and hidden by pdf.js since), and takes it out when the
-   * toolbar goes.
-   */
-  private stampToolbars(engine: ScPdfEngine): () => void {
-    const container = engine.viewer.container as HTMLElement;
-    const view = container.ownerDocument.defaultView;
-    if (!view?.MutationObserver) return () => undefined;
-    const stamped = new Map<
-      HTMLElement,
-      { box: HTMLElement; ref: EmbeddedViewRef<ScPdfAnnotationToolbarContext> }
-    >();
-
-    const stamp = (toolbar: HTMLElement): void => {
-      if (stamped.has(toolbar)) return;
-      const id = toolbar.parentElement?.id;
-      const editor = id ? this.pdfViewer.annotationEditor(id) : undefined;
-      if (!editor) return;
-      const annotation: ScPdfAnnotation = {
-        id: editor.id,
-        type: editor.editorType as ScPdfAnnotationType,
-        pageNumber: editor.pageIndex + 1,
-      };
-      const box = container.ownerDocument.createElement('div');
-      box.dataset['slot'] = 'pdf-viewer-annotation-toolbar';
-      box.className = this.boxClass;
-      // Focus in the toolbar: the annotation stays selected, uncommitted —
-      // what pdf.js's own toolbar buttons do. After your parts' handlers
-      // (bubbling), before the annotation's.
-      box.addEventListener('focusin', (event) => {
-        editor._focusEventsAllowed = false;
-        event.stopPropagation();
-      });
-      box.addEventListener('focusout', (event) => {
-        editor._focusEventsAllowed = true;
-        event.stopPropagation();
-      });
-      toolbar.append(box);
-      const ref = this.template.createEmbeddedView(
-        { $implicit: annotation },
-        Injector.create({
-          providers: [{ provide: SC_PDF_ANNOTATION, useValue: annotation }],
-          parent: this.injector,
-        }),
-      );
-      box.append(...ref.rootNodes);
-      this.appRef.attachView(ref);
-      ref.detectChanges();
-      stamped.set(toolbar, { box, ref });
+  private stampFor(toolbar: HTMLElement) {
+    const id = toolbar.parentElement?.id;
+    const editor = id ? this.pdfViewer.annotationEditor(id) : undefined;
+    if (!editor) return null;
+    const annotation: ScPdfAnnotation = {
+      id: editor.id,
+      type: editor.editorType as ScPdfAnnotationType,
+      pageNumber: editor.pageIndex + 1,
     };
-
-    const unstamp = (toolbar: HTMLElement): void => {
-      const entry = stamped.get(toolbar);
-      if (!entry) return;
-      stamped.delete(toolbar);
-      entry.ref.destroy();
-      entry.box.remove();
-    };
-
-    const toolbarsIn = (node: Node): HTMLElement[] =>
-      node instanceof view.HTMLElement
-        ? node.matches('.editToolbar')
-          ? [node]
-          : Array.from(node.querySelectorAll<HTMLElement>('.editToolbar'))
-        : [];
-
-    const observer = new view.MutationObserver((records) => {
-      for (const record of records) {
-        record.addedNodes.forEach((node) => toolbarsIn(node).forEach(stamp));
-      }
-      // Gone with its annotation (deleted, or its page let go).
-      for (const toolbar of [...stamped.keys()]) {
-        if (!toolbar.isConnected) unstamp(toolbar);
-      }
+    const box = toolbar.ownerDocument.createElement('div');
+    box.dataset['slot'] = 'pdf-viewer-annotation-toolbar';
+    box.className = this.boxClass;
+    // Focus in the toolbar: the annotation stays selected, uncommitted —
+    // what pdf.js's own toolbar buttons do. After your parts' handlers
+    // (bubbling), before the annotation's.
+    box.addEventListener('focusin', (event) => {
+      editor._focusEventsAllowed = false;
+      event.stopPropagation();
     });
-    observer.observe(container, { childList: true, subtree: true });
-    toolbarsIn(container).forEach(stamp);
-
-    return () => {
-      observer.disconnect();
-      [...stamped.keys()].forEach(unstamp);
+    box.addEventListener('focusout', (event) => {
+      editor._focusEventsAllowed = true;
+      event.stopPropagation();
+    });
+    return {
+      context: { $implicit: annotation },
+      providers: [{ provide: SC_PDF_ANNOTATION, useValue: annotation }],
+      box,
     };
   }
 }

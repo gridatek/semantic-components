@@ -222,22 +222,33 @@ The pages and what pdf.js draws on them are styled by the library's stylesheet, 
 - **What pdf.js's pages need, kept** — their text, annotation, XFA and structure layers, pdf.js's annotation editors (with the comment buttons by annotations, the alt-text badge and tooltip), the page view. pdf.js's application is left out — its toolbar, sidebars, dialogs, find bar, message bars, undo bar, the buttons of its toolbar on an annotation: the library's parts are those (your annotation toolbar's box is pdf.js's, only placing it).
 - **pdf.js's global `color-scheme`, dropped** — `pdf_viewer.css` sets `:root { color-scheme: light dark; }` for the whole page, not only the viewer ([pdf.js issue 19886](https://github.com/mozilla/pdf.js/issues/19886)): the browser's own parts (scrollbars, native form controls) and every `light-dark()` would follow the operating system's mode instead of the app's. Ours doesn't set it: the page's `color-scheme` stays the app's (`ScPresetManager` sets it with the mode, see the preset's README). The text, annotation and XFA layers keep pdf.js's `color-scheme: only light`: the pages are drawn light, whatever the mode.
 - **pdf.js's colours on the theme's tokens** — the variables of what it draws on the pages take `--popover`, `--border`, `--accent`, `--primary`, `--ring`, `--muted` and the theme's shadows; its `6px` corners, `--radius`. Its forced-colours rules stay, with their system colours.
-- **The page frame** — `pdf-viewer-theme.css`, appended to the built file: pages 8px apart and from the edges, on the theme's background, with a small shadow (pdf.js's frame is a transparent border its application draws a shadow image in); in forced colours, a `CanvasText` border instead. pdf.js's buttons on the pages (the comment buttons) take the browser's button font, as pdf.js expects (Tailwind's preflight would give them the page's, and their icons would leave them) — not yours, in your annotation toolbar — and their icon (pdf.js's application defines it). pdf.js's box for the annotation toolbar loses its look: yours has the style's.
-- **pdf.js's images, inlined** — the ones pdf.js still draws: no files to host or to copy. Each is behind a variable of yours, which your CSS can set, anywhere (`:root`, the viewer): pdf.js's variable for it takes yours, pdf.js's image as the fallback. The library draws no icons of its own (your annotation toolbar has yours); these are pdf.js's cursors and badges on the pages.
-
-  | Variable                                | What                                                      | Value                                        |
-  | --------------------------------------- | --------------------------------------------------------- | -------------------------------------------- |
-  | `--sc-pdf-viewer-ink-cursor`            | The cursor while drawing                                  | a whole cursor: `url(pen.svg) 0 16, pointer` |
-  | `--sc-pdf-viewer-highlight-cursor`      | The cursor over text, highlighting                        | a whole cursor                               |
-  | `--sc-pdf-viewer-free-highlight-cursor` | The cursor highlighting freely (off text)                 | a whole cursor                               |
-  | `--sc-pdf-viewer-freetext-cursor`       | The cursor placing text (pdf.js's image on dense screens) | a whole cursor                               |
-  | `--sc-pdf-viewer-alt-text-missing-icon` | The badge on an image without alt text                    | an image: `url(…)`                           |
-  | `--sc-pdf-viewer-comment-icon`          | The comment button by an annotation with a comment        | an image (a mask: drawn in the text colour)  |
-  | `--sc-pdf-viewer-page-loading-image`    | A page being drawn                                        | an image                                     |
-
+- **The page frame** — `pdf-viewer-theme.css`, appended to the built file: pages 8px apart and from the edges, on the theme's background, with a small shadow (pdf.js's frame is a transparent border its application draws a shadow image in); in forced colours, a `CanvasText` border instead. pdf.js's buttons on the pages (the comment buttons) take the browser's button font, as pdf.js expects (Tailwind's preflight would give them the page's, and their icons would leave them) — not yours, in your annotation toolbar. pdf.js's box for the annotation toolbar loses its look: yours has the style's.
+- **No images** — pdf.js's are dropped, its icons and the ones it writes inline alike: the library draws no icons. See "Icons" below.
 - **The colours of the pages themselves** — highlights, ink, reading colours — are your theme's variables (see "Colours" above).
 
-When pdfjs-dist is upgraded, run the script again: `node scripts/build-pdf-viewer-css.mjs --list` shows what's kept and what's dropped (compare with the last version: a new pdf.js section may need a rule), then without `--list` it writes the stylesheet, the images inlined (an image pdf.js starts drawing stops the script: give it a variable in `IMAGES`, or drop it with `TOOLBAR_IMAGES`). Don't edit the built part by hand: change the script's rules, or `pdf-viewer-theme.css`.
+When pdfjs-dist is upgraded, run the script again: `node scripts/build-pdf-viewer-css.mjs --list` shows what's kept and what's dropped (compare with the last version: a new pdf.js section may need a rule), then without `--list` it writes the stylesheet, pdf.js's images dropped (a new editing cursor stops the script: give it a variable in `CURSORS`; a new icon needs a place in `scPdfViewerIcon`). Don't edit the built part by hand: change the script's rules, or `pdf-viewer-theme.css`.
+
+### Icons
+
+The library draws no icons — yours are in your templates, the annotation toolbar's included. pdf.js shows a few on the pages itself, in elements it builds: an `<ng-template scPdfViewerIcon="…">` is stamped into each, as pdf.js makes them (pdf.js's image is off: without your template, there's none).
+
+| Name               | Where                                                                                     | E.g.                                                      |
+| ------------------ | ----------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `comment`          | The button by an annotation with a comment (pdf.js names it)                              | `<svg siMessageSquareTextIcon></svg>`                     |
+| `alt-text-missing` | The badge on an image without alt text                                                    | `<svg siImageOffIcon></svg>`                              |
+| `media-play`       | The button that plays a video or sound in the document (pdf.js names it: the file's name) | `<svg siCirclePlayIcon></svg>`                            |
+| `page-loading`     | A page being drawn: shown while it is                                                     | `<svg scSpinner siLoaderCircleIcon aria-label="…"></svg>` |
+
+The library sizes your icon for the place, and it takes the colour pdf.js gives it (`currentColor`: the comment button's, state by state). Why templates and not CSS images: an image in a stylesheet is the library's icon, which you'd have to override in CSS — and couldn't swap for your icon set's component; a template is yours, as every icon in the library.
+
+**Cursors** are the exception: pdf.js's editing cursors are CSS, and no template can be a cursor. They're pdf.js's without its images (`pointer`, `text`), each behind a variable your CSS can set to yours (its whole cursor value: `--sc-pdf-viewer-ink-cursor: url(pen.svg) 0 16, pointer;`):
+
+| Variable                                | The cursor                     |
+| --------------------------------------- | ------------------------------ |
+| `--sc-pdf-viewer-ink-cursor`            | While drawing                  |
+| `--sc-pdf-viewer-highlight-cursor`      | Over text, highlighting        |
+| `--sc-pdf-viewer-free-highlight-cursor` | Highlighting freely (off text) |
+| `--sc-pdf-viewer-freetext-cursor`       | Placing text                   |
 
 ### Presentation mode
 
