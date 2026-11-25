@@ -26,17 +26,19 @@ import { ScTimePickerColumn } from './time-picker-column';
   imports: [ScTimePickerColumn],
   template: `
     @for (group of groups(); track $index) {
-      @if (group.clock) {
-        <div dir="ltr" class="flex gap-px">
-          @for (type of group.types; track type) {
-            <div [scTimePickerColumn]="type"></div>
-          }
-        </div>
-      } @else {
+      <!-- Each group in a box of its own, the clock's in its order in right
+        to left too. Grows as the columns it holds: given room (under a
+        calendar on a phone), every column the same width — each group alike,
+        so a column's padding counts the same in all of them. -->
+      <div
+        class="flex basis-0 gap-px"
+        [attr.dir]="group.clock ? 'ltr' : null"
+        [style.flex-grow]="group.types.length"
+      >
         @for (type of group.types; track type) {
           <div [scTimePickerColumn]="type"></div>
         }
-      }
+      </div>
     }
   `,
   host: {

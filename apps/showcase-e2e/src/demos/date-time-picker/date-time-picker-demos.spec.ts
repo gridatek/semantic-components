@@ -8,6 +8,12 @@ const column = (page: Page, name: string) =>
   page.getByRole('listbox', { name, exact: true });
 const option = (page: Page, columnName: string, name: string) =>
   column(page, columnName).getByRole('option', { name, exact: true });
+/** Transitions and animations off: a box read mid-zoom isn't its own (as looks.ts' openStill). */
+const still = (page: Page) =>
+  page.addStyleTag({
+    content:
+      '*, *::before, *::after { transition: none !important; animation-duration: 0s !important; animation-delay: 0s !important; }',
+  });
 const open = async (page: Page) => {
   await page.locator('[data-slot=date-time-picker-trigger]').click();
   await expect(page.locator('[data-slot=time-picker-columns]')).toBeVisible();
@@ -65,6 +71,7 @@ test.describe('Usage', () => {
   test('a wide screen: the columns beside the calendar, as tall as it', async ({
     page,
   }) => {
+    await still(page);
     await open(page);
     const calendar = await page.locator('[data-slot=calendar]').boundingBox();
     const columns = await page
@@ -80,6 +87,7 @@ test.describe('Usage', () => {
     page,
   }) => {
     await page.setViewportSize({ width: 360, height: 780 });
+    await still(page);
     await open(page);
     const popover = await page.locator('[data-slot=popover]').boundingBox();
     expect(popover?.x).toBeGreaterThanOrEqual(5 - 0.5);
@@ -103,6 +111,22 @@ test.describe('Usage', () => {
         ),
       )
       .toBe(true);
+  });
+
+  test('a phone: the hour, the minute and AM/PM share the width equally', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 360, height: 780 });
+    await still(page);
+    await open(page);
+    const widths = await page
+      .locator('[data-slot=time-picker-columns] [role=listbox]')
+      .evaluateAll((columns) =>
+        columns.map((c) => c.getBoundingClientRect().width),
+      );
+    expect(widths).toHaveLength(3);
+    for (const width of widths)
+      expect(Math.abs(width - widths[0])).toBeLessThanOrEqual(1);
   });
 
   test('Escape closes, focus back on the button', async ({ page }) => {
