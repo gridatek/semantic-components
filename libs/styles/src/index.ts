@@ -555,6 +555,12 @@ export interface ScFileInputStyles {
   size: string;
 }
 
+/** A tree's row that changes from style to style — ours (shadcn has none): its menu item's size and corners. */
+export interface ScTreeNextStyles {
+  /** A row: an item's label. */
+  label: string;
+}
+
 /** A scheduler's corners that change from style to style — ours (shadcn has none). */
 export interface ScSchedulerStyles {
   /** A day's number (today filled): round, or square. */
@@ -854,6 +860,7 @@ export interface ScStyle {
   mediaPlayer: ScMediaPlayerStyles;
   compare: ScCompareStyles;
   scheduler: ScSchedulerStyles;
+  treeNext: ScTreeNextStyles;
   sortable: ScSortableStyles;
   listbox: ScListboxStyles;
   segmentedControl: ScSegmentedControlStyles;

@@ -78,6 +78,7 @@ export * from './toggle-group';
 export * from './toolbar';
 export * from './tooltip';
 export * from './tree';
+export * from './tree-next';
 export * from './trigger-menu';
 export * from './typeset';
 export * from './waterfall';

@@ -7225,6 +7225,74 @@ export const demosRoutes: Route[] = [
     ],
   },
   {
+    path: 'demos/tree-next',
+    children: [
+      {
+        path: 'tree-next-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-next/demos/tree-next-usage-demo').then(
+            (m) => m.TreeNextUsageDemo,
+          ),
+      },
+      {
+        path: 'data-tree-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-next/demos/data-tree-next-demo').then(
+            (m) => m.DataTreeNextDemo,
+          ),
+      },
+      {
+        path: 'multiple-tree-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-next/demos/multiple-tree-next-demo').then(
+            (m) => m.MultipleTreeNextDemo,
+          ),
+      },
+      {
+        path: 'checkboxes-tree-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-next/demos/checkboxes-tree-next-demo').then(
+            (m) => m.CheckboxesTreeNextDemo,
+          ),
+      },
+      {
+        path: 'links-tree-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-next/demos/links-tree-next-demo').then(
+            (m) => m.LinksTreeNextDemo,
+          ),
+      },
+      {
+        path: 'disabled-tree-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-next/demos/disabled-tree-next-demo').then(
+            (m) => m.DisabledTreeNextDemo,
+          ),
+      },
+      {
+        path: 'lazy-tree-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-next/demos/lazy-tree-next-demo').then(
+            (m) => m.LazyTreeNextDemo,
+          ),
+      },
+      {
+        path: 'controller-tree-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-next/demos/controller-tree-next-demo').then(
+            (m) => m.ControllerTreeNextDemo,
+          ),
+      },
+      {
+        path: 'rtl-tree-next-demo',
+        loadComponent: () =>
+          import('../pages/docs/tree-next/demos/rtl-tree-next-demo').then(
+            (m) => m.RtlTreeNextDemo,
+          ),
+      },
+    ],
+  },
+  {
     path: 'demos/tree-table',
     children: [
       {
