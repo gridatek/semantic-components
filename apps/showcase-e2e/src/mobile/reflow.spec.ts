@@ -389,11 +389,31 @@ function measureOverlays(): string[] {
             return false;
           if (a === overlay) break;
         }
+      // A drawer at a snap point: the rest of it waits past the edge it
+      // slides from, by design (Base UI's --drawer-snap-point-offset) — a
+      // drag or its handle brings it in. That edge only; the others count.
+      const drawer = e.closest('[data-snap-points]');
+      const swipe = drawer?.getAttribute('data-swipe-direction');
+      const rtl = drawer ? getComputedStyle(drawer).direction === 'rtl' : false;
+      const from =
+        swipe === 'inline-start'
+          ? rtl
+            ? 'right'
+            : 'left'
+          : swipe === 'inline-end'
+            ? rtl
+              ? 'left'
+              : 'right'
+            : swipe === 'down'
+              ? 'bottom'
+              : swipe === 'up'
+                ? 'top'
+                : swipe;
       return (
-        r.left < -1 ||
-        r.right > width + 1 ||
-        r.top < -1 ||
-        r.bottom > height + 1
+        (from !== 'left' && r.left < -1) ||
+        (from !== 'right' && r.right > width + 1) ||
+        (from !== 'top' && r.top < -1) ||
+        (from !== 'bottom' && r.bottom > height + 1)
       );
     });
     const outer = elements.filter(
