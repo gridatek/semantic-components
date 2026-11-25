@@ -15,6 +15,16 @@ export const gettingStartedPages: readonly DocsPage[] = [
   },
   { name: 'Get started', path: '/docs/getting-started' },
   { name: 'Components', path: '/docs/components' },
+  {
+    name: 'Roadmap',
+    path: '/docs/about/roadmap',
+    description: 'Where the library is going',
+  },
+  {
+    name: 'Changelog',
+    path: '/docs/about/changelog',
+    description: 'What changed',
+  },
 ];
 
 /** The three packages, one page each. */

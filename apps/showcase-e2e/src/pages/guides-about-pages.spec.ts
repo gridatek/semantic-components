@@ -14,7 +14,9 @@ const pages = [
     title: 'Server-side rendering',
     group: 'Guides',
   },
+  { path: '/docs/about/changelog', title: 'Changelog', group: 'Overview' },
   { path: '/docs/about/credits', title: 'Credits', group: 'Overview' },
+  { path: '/docs/about/roadmap', title: 'Roadmap', group: 'Overview' },
 ];
 
 test.describe('Guides and About pages', () => {
