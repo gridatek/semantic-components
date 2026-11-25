@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 // Builds libs/styles/src/pdf-viewer.css — the PDF Viewer's stylesheet — from
 // pdf.js's own (pdfjs-dist/web/pdf_viewer.css): what the pages need (their
-// layers, pdf.js's editors and its toolbars on the pages, the page view),
-// without pdf.js's application (its dialogs, sidebars, message bars…) and
-// without its global `color-scheme`; its images next to ours; its colours on
-// the theme's tokens (pdf-viewer-theme.css, appended). Run again when
-// pdfjs-dist is upgraded, and compare.
+// layers, pdf.js's editors, the page view), without pdf.js's application
+// (its dialogs, sidebars, message bars…) and without its global
+// `color-scheme`; the images it still draws inlined, each behind a variable
+// of ours; its colours on the theme's tokens (pdf-viewer-theme.css,
+// appended). Run again when pdfjs-dist is upgraded, and compare.
 //
 //   node scripts/build-pdf-viewer-css.mjs [--list]
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = join(import.meta.dirname, '..');
@@ -16,7 +16,6 @@ const source = join(root, 'node_modules/pdfjs-dist/web/pdf_viewer.css');
 const out = join(root, 'libs/styles/src/pdf-viewer.css');
 const theme = join(root, 'libs/styles/src/pdf-viewer-theme.css');
 const imagesFrom = join(root, 'node_modules/pdfjs-dist/web/images');
-const imagesTo = join(root, 'libs/styles/src/pdf-viewer-images');
 const list = process.argv.includes('--list');
 
 /** pdf.js's application, which the library's parts replace. */
@@ -154,28 +153,109 @@ css = css.replace(
 // The page's own `color-scheme` (ScPresetManager's, the app's mode) rules:
 // pdf.js's `light dark` would hand the browser's parts back to the system.
 css = css.replace(/^\s*color-scheme: light dark;\n/gm, '');
-// Its images, next to ours (and the comment button's icon, which pdf.js's
-// application stylesheet defines: the theme part uses it).
-const images = new Set(['comment-editButton.svg']);
-css = css.replace(/url\((["']?)images\/([^"')]+)\1\)/g, (_, quote, file) => {
-  images.add(file);
-  return `url(${quote}pdf-viewer-images/${file}${quote})`;
-});
-mkdirSync(imagesTo, { recursive: true });
-for (const file of images) {
-  copyFileSync(join(imagesFrom, file), join(imagesTo, file));
+/**
+ * The images pdf.js still draws, inlined — no files to host — each behind a
+ * variable of ours, which your CSS can set (`--sc-pdf-viewer-ink-cursor:
+ * url(my-pen.svg) 0 16, pointer;`): pdf.js's variable for it takes ours, its
+ * image as the fallback. Cursors take their whole value (the image, its hot
+ * spot, the cursor without images); the others, the image (`url(…)`).
+ */
+const CURSORS = {
+  '--editorFreeText-editing-cursor': '--sc-pdf-viewer-freetext-cursor',
+  '--editorInk-editing-cursor': '--sc-pdf-viewer-ink-cursor',
+  '--editorHighlight-editing-cursor': '--sc-pdf-viewer-highlight-cursor',
+  '--editorFreeHighlight-editing-cursor':
+    '--sc-pdf-viewer-free-highlight-cursor',
+};
+const IMAGES = {
+  // The badge on an image without alt text.
+  'altText_warning.svg': '--sc-pdf-viewer-alt-text-missing-icon',
+  // The button by an annotation with a comment (the theme part sets
+  // pdf.js's variable for it: pdf.js's application stylesheet does).
+  'comment-editButton.svg': '--sc-pdf-viewer-comment-icon',
+  // A page being drawn.
+  'loading-icon.gif': '--sc-pdf-viewer-page-loading-image',
+};
+/**
+ * The images of pdf.js's buttons in its toolbar on an annotation: your
+ * toolbar replaces them (scPdfViewerAnnotationToolbar), their variables go.
+ */
+const TOOLBAR_IMAGES = new Set([
+  'editor-toolbar-delete.svg',
+  'toolbarButton-editorHighlight.svg',
+  'altText_add.svg',
+  'altText_done.svg',
+  'toolbarButton-menuArrow.svg',
+]);
+
+/** An image as a data: URL. */
+function dataUrl(file) {
+  const bytes = readFileSync(join(imagesFrom, file));
+  if (file.endsWith('.svg')) {
+    const svg = bytes
+      .toString('utf8')
+      .replace(/<!--[^]*?-->/g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/> </g, '><')
+      .trim()
+      .replace(/"/g, "'");
+    const encoded = svg.replace(/[%#<>{}\r\n]/g, (c) => encodeURIComponent(c));
+    return `url("data:image/svg+xml,${encoded}")`;
+  }
+  const type = file.endsWith('.gif') ? 'image/gif' : 'image/png';
+  return `url("data:${type};base64,${bytes.toString('base64')}")`;
 }
+
+const IMAGE_URL = /url\((["']?)images\/([^"')]+)\1\)/g;
+/** pdf.js's images in a stylesheet, inlined behind our variables. */
+function inlineImages(text) {
+  // Its toolbar buttons' images: gone with them.
+  text = text.replace(
+    /^\s*--[\w-]+:\s*url\((["']?)images\/([^"')]+)\1\)[^;]*;\n/gm,
+    (line, _, file) => (TOOLBAR_IMAGES.has(file) ? '' : line),
+  );
+  // The cursors: their whole value.
+  text = text.replace(
+    /(--editor\w+-editing-cursor):\s*([^;]+);/g,
+    (all, name, value) => {
+      const ours = CURSORS[name];
+      if (!ours) throw new Error('A cursor of pdf.js not known: ' + name);
+      const inlined = value
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(IMAGE_URL, (_, quote, file) => dataUrl(file));
+      return `${name}: var(${ours}, ${inlined});`;
+    },
+  );
+  // The other images: their url().
+  text = text.replace(IMAGE_URL, (_, quote, file) => {
+    const ours = IMAGES[file];
+    if (!ours)
+      throw new Error(
+        `An image of pdf.js not known: ${file} (add it to IMAGES or TOOLBAR_IMAGES)`,
+      );
+    return `var(${ours}, ${dataUrl(file)})`;
+  });
+  return text;
+}
+css = inlineImages(css);
 
 const header = `/*
  * The PDF Viewer's stylesheet — import it in place of pdf.js's
  * (pdfjs-dist/web/pdf_viewer.css). Built by scripts/build-pdf-viewer-css.mjs
  * from pdf.js's: what the pages need (their text, annotation, XFA and
- * structure layers, pdf.js's annotation editors and its toolbars on the
- * pages, the page view), without pdf.js's application (its dialogs, sidebars,
- * message bars, undo bar: the library's parts are those) and without its
- * global \`:root { color-scheme: light dark }\` (pdf.js issue 19886). Then the
- * library's look, on the theme's tokens: pdf-viewer-theme.css, below. Don't
- * edit the part from pdf.js by hand: change the script, or the theme part.
+ * structure layers, pdf.js's annotation editors, the page view), without
+ * pdf.js's application (its dialogs, sidebars, message bars, undo bar, its
+ * toolbar buttons on an annotation: the library's parts are those) and
+ * without its global \`:root { color-scheme: light dark }\` (pdf.js issue
+ * 19886). The images pdf.js still draws are inlined, each behind a variable
+ * you can set: --sc-pdf-viewer-ink-cursor, --sc-pdf-viewer-highlight-cursor,
+ * --sc-pdf-viewer-free-highlight-cursor, --sc-pdf-viewer-freetext-cursor
+ * (their whole cursor value), --sc-pdf-viewer-alt-text-missing-icon,
+ * --sc-pdf-viewer-comment-icon, --sc-pdf-viewer-page-loading-image (an
+ * image). Then the library's look, on the theme's tokens:
+ * pdf-viewer-theme.css, below. Don't edit the part from pdf.js by hand:
+ * change the script, or the theme part.
  */
 `;
 writeFileSync(
@@ -185,10 +265,8 @@ writeFileSync(
     header,
     css.trim(),
     '',
-    readFileSync(theme, 'utf8').trim(),
+    inlineImages(readFileSync(theme, 'utf8')).trim(),
     '',
   ].join('\n'),
 );
-console.log(
-  `${out}: ${kept.length} of ${blocks.length} blocks, ${images.size} images`,
-);
+console.log(`${out}: ${kept.length} of ${blocks.length} blocks`);

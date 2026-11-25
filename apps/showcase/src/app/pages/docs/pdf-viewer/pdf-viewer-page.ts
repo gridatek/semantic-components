@@ -129,11 +129,13 @@ import { PdfViewerUsageDemoContainer } from './demos/pdf-viewer-usage-demo-conta
           </li>
           <li>
             The look is the library&apos;s: its stylesheet is pdf.js&apos;s,
-            rebuilt — the pages in the style&apos;s frame, pdf.js&apos;s
-            toolbars on the pages in the theme&apos;s colours, without
-            pdf.js&apos;s application and its global
-            <code scTypeset>color-scheme</code>. Annotation colours are the
-            theme&apos;s CSS variables —
+            rebuilt — the pages in the style&apos;s frame, what pdf.js draws on
+            them in the theme&apos;s colours, without pdf.js&apos;s application
+            and its global <code scTypeset>color-scheme</code>. The images
+            pdf.js still draws (its editing cursors, a few badges) are inlined
+            in it, each behind a
+            <code scTypeset>--sc-pdf-viewer-…</code> variable you can set.
+            Annotation colours are the theme&apos;s CSS variables —
             <code scTypeset>--sc-pdf-viewer-highlight-1</code> to
             <code scTypeset>-5</code>,
             <code scTypeset>--sc-pdf-viewer-ink-1</code> to
@@ -159,12 +161,14 @@ import { PdfViewerUsageDemoContainer } from './demos/pdf-viewer-usage-demo-conta
         <h2 scTypeset appToc>Annotations and comments</h2>
         <p>
           pdf.js&apos;s editors draw highlights, text, drawings, images and
-          signatures, with its toolbar on each one (colour, alt text, comment,
-          delete); your tools set the editor mode and its settings. A comment
-          belongs to an annotation, as in pdf.js: its comment button asks for
-          one, and your comment form writes it. Deleting offers your undo bar.
-          Signatures are made in your dialog — typed, drawn or from an image —
-          and saved for reuse in
+          signatures; your tools set the editor mode and its settings. The
+          toolbar on a selected annotation is yours — a template the viewer
+          stamps where pdf.js puts its own, so it follows the annotation — with
+          your colours, comment, alt-text and delete buttons, your icons and
+          words. A comment belongs to an annotation, as in pdf.js: your
+          toolbar&apos;s comment button asks for one, and your comment form
+          writes it. Deleting offers your undo bar. Signatures are made in your
+          dialog — typed, drawn or from an image — and saved for reuse in
           <code scTypeset>savedSignatures</code>.
         </p>
       </section>
@@ -319,7 +323,8 @@ export default class PdfViewerPage {
       'import {',
       '  ScPdfViewer, ScPdfViewerContainer, ScPdfViewerToolbar,',
       '  ScPdfViewerContent, ScPdfViewerLoading, ScPdfViewerError,',
-      '  ScPdfViewerCanvas,',
+      '  ScPdfViewerCanvas, ScPdfViewerAnnotationToolbar,',
+      '  ScPdfViewerAnnotationComment, ScPdfViewerAnnotationDelete,',
       "} from '@semantic-components/ui/pdf-viewer';",
     ].join('\n'),
     markup: [
@@ -334,6 +339,10 @@ export default class PdfViewerPage {
       '      <div scPdfViewerLoading>…</div>',
       '      <div scEmpty scPdfViewerError>…</div>',
       '      <div scPdfViewerCanvas></div>',
+      '      <ng-template scPdfViewerAnnotationToolbar let-annotation>',
+      '        <button scPdfViewerAnnotationComment>…</button>',
+      '        <button scPdfViewerAnnotationDelete>…</button>',
+      '      </ng-template>',
       '    </div>',
       '  </div>',
       '</div>',
@@ -707,6 +716,19 @@ export default class PdfViewerPage {
   ];
 
   private readonly comments = [
+    {
+      name: 'ScPdfViewerAnnotationToolbar',
+      selector: 'ng-template[scPdfViewerAnnotationToolbar]',
+      description:
+        "Your toolbar on a selected annotation (let-annotation: { id, type, pageNumber }), stamped where pdf.js puts its own; the style's popover.",
+    },
+    {
+      name: 'ScPdfViewerAnnotationComment, ScPdfViewerAnnotationAltText, ScPdfViewerAnnotationDelete',
+      selector:
+        'button[scPdfViewerAnnotationComment], button[scPdfViewerAnnotationAltText], button[scPdfViewerAnnotationDelete]',
+      description:
+        "In it: writes the annotation's comment; an image's alt text (data-done once it has one); removes it (undoable).",
+    },
     {
       name: 'ScPdfViewerAddImage',
       selector: 'button[scPdfViewerAddImage]',

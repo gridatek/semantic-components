@@ -2531,7 +2531,7 @@ export class ScPdfViewer {
 
   /** @internal The dialogs and bar pdf.js's editors ask for: the viewer's. */
   readonly editorManagers = editorManagers({
-    editAltText: (uiManager, editor) => this.editAltText(uiManager, editor),
+    editAltText: (uiManager, editor) => this.openAltText(uiManager, editor),
     getSignature: (editor) => this.getSignature(editor),
     setCommentsUiManager: (uiManager) => (this.commentsUiManager = uiManager),
     // The comment is written in your part of the viewer.
@@ -2738,6 +2738,46 @@ export class ScPdfViewer {
     this.editorMode.set(this.editorMode() === mode ? 'none' : mode);
   }
 
+  // ── Annotations being edited (your annotation toolbar) ──────────────
+
+  /** @internal pdf.js's editor of an annotation. */
+  annotationEditor(id: string): ScPdfJsEditor | undefined {
+    return this.uiManager?.getEditor(id);
+  }
+
+  /**
+   * Removes an annotation — with the others selected with it, as pdf.js's
+   * toolbar does. Undoable (the undo bar).
+   */
+  removeAnnotation(id: string): void {
+    const uiManager = this.uiManager;
+    const editor = uiManager?.getEditor(id);
+    if (!uiManager || !editor) return;
+    if (!editor.isSelected) uiManager.setSelected(editor);
+    uiManager.delete();
+  }
+
+  /** Writes an annotation's comment: it's `pendingComment()` then, in your comment form. */
+  commentAnnotation(id: string): void {
+    this.uiManager?.getEditor(id)?.editComment();
+  }
+
+  /** Edits an image's alt text: it's `altText()` then, in your dialog. */
+  editAltText(id: string): void {
+    const uiManager = this.uiManager;
+    const editor = uiManager?.getEditor(id);
+    if (!uiManager || !editor) return;
+    editor.createAltText();
+    this.openAltText(uiManager, editor);
+  }
+
+  /** An image has its alt text (or is decorative). */
+  hasAltText(id: string): boolean {
+    // Read again when an alt text is saved.
+    this.altText();
+    return !!this.uiManager?.getEditor(id)?.hasAltText();
+  }
+
   /** Places an image on the current page (pdf.js's image editor). */
   addImage(file: File): void {
     this.createEditor('stamp', { bitmapFile: file });
@@ -2769,7 +2809,7 @@ export class ScPdfViewer {
   /** The alt text being edited (the `altText` dialog): its description, or decorative. */
   readonly altText = signal<{ text: string; decorative: boolean } | null>(null);
 
-  private editAltText(
+  private openAltText(
     uiManager: ScPdfJsUiManager,
     editor: ScPdfJsEditor,
   ): void {

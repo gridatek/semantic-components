@@ -16,8 +16,9 @@
   --pdfViewer-padding-bottom: 8px;
   --spreadHorizontalWrapped-margin-LR: 4px;
   --page-bg-color: var(--background);
-  /* pdf.js's comment buttons' icon (its application's stylesheet has it). */
-  --comment-edit-button-icon: url(pdf-viewer-images/comment-editButton.svg);
+  /* The icon of pdf.js's comment buttons by annotations (its application's
+     stylesheet has it): inlined by the build, as --sc-pdf-viewer-comment-icon. */
+  --comment-edit-button-icon: url(images/comment-editButton.svg);
 }
 
 [data-slot='pdf-viewer-canvas'] .pdfViewer .page {
@@ -37,11 +38,37 @@
 }
 
 /*
- * pdf.js's buttons on the pages (its toolbars on annotations, the comment
- * buttons) take the browser's button font, as pdf.js expects — Tailwind's
- * preflight would have them inherit the page layer's (`font: inherit`),
- * which is scaled to the page: the icons would leave their buttons.
+ * pdf.js's buttons on the pages (the comment buttons by annotations) take
+ * the browser's button font, as pdf.js expects — Tailwind's preflight would
+ * have them inherit the page layer's (`font: inherit`), which is scaled to
+ * the page: the icons would leave their buttons. Not yours, in your
+ * annotation toolbar.
  */
-:is(.annotationEditorLayer, .annotationLayer, .textLayer) button {
+:is(.annotationEditorLayer, .annotationLayer, .textLayer)
+  button:not([data-slot='pdf-viewer-annotation-toolbar'] *) {
   font: revert;
+}
+
+/*
+ * The toolbar on a selected annotation is yours (scPdfViewerAnnotationToolbar:
+ * the style's popover, your buttons): pdf.js's box only places it — in the
+ * annotation, which it follows — and its buttons are hidden. Without yours,
+ * annotations have no toolbar.
+ */
+[data-slot='pdf-viewer-canvas'] .annotationEditorLayer .editToolbar {
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+[data-slot='pdf-viewer-canvas'] .annotationEditorLayer .editToolbar > .buttons {
+  display: none;
+}
+
+[data-slot='pdf-viewer-canvas']
+  .annotationEditorLayer
+  .editToolbar:not(:has(> [data-slot='pdf-viewer-annotation-toolbar'])) {
+  display: none;
 }

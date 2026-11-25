@@ -52,6 +52,17 @@ export type ScPdfFindState =
 export type ScPdfEditorMode =
   'none' | 'highlight' | 'freetext' | 'ink' | 'stamp' | 'signature' | 'comment';
 
+/**
+ * An annotation being edited — the one a toolbar
+ * (`scPdfViewerAnnotationToolbar`) is for.
+ */
+export interface ScPdfAnnotation {
+  /** pdf.js's id for it (the viewer's annotation methods take it). */
+  readonly id: string;
+  readonly type: ScPdfAnnotationType;
+  readonly pageNumber: number;
+}
+
 /** Select text, or drag the pages to scroll. */
 export type ScPdfCursorTool = 'select' | 'hand';
 

@@ -142,6 +142,7 @@ export type {
   ScPdfSidebarView,
   ScPdfOutlineItem,
   ScPdfDestination,
+  ScPdfAnnotation,
   ScPdfEditorMode,
   ScPdfAnnotationType,
   ScPdfFindState,
@@ -155,3 +156,11 @@ export type {
   ScPdfSignatureData,
   ScPdfComment,
 } from './pdf-viewer-types';
+export {
+  SC_PDF_ANNOTATION,
+  ScPdfViewerAnnotationToolbar,
+} from './pdf-viewer-annotation-toolbar';
+export type { ScPdfAnnotationToolbarContext } from './pdf-viewer-annotation-toolbar';
+export { ScPdfViewerAnnotationDelete } from './pdf-viewer-annotation-delete';
+export { ScPdfViewerAnnotationComment } from './pdf-viewer-annotation-comment';
+export { ScPdfViewerAnnotationAltText } from './pdf-viewer-annotation-alt-text';

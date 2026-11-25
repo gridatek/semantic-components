@@ -34,7 +34,17 @@ export const SIGNATURE_HEIGHT = 40;
 
 /** What the viewer uses of a pdf.js editor (`AnnotationEditor`). */
 export interface ScPdfJsEditor {
+  /** Its id: its element's, and `getEditor`'s key. */
+  readonly id: string;
   readonly uid: string;
+  /** Its element on the page (its toolbar goes in it). */
+  readonly div: HTMLElement | null;
+  readonly isSelected: boolean;
+  /**
+   * Off while focus is in its toolbar: focus there doesn't select it again,
+   * or commit it (pdf.js's own toolbar buttons do the same).
+   */
+  _focusEventsAllowed: boolean;
   readonly pageIndex: number;
   readonly editorType: string;
   /** Alt text (images): `{ altText, decorative }`. */
@@ -44,6 +54,11 @@ export interface ScPdfJsEditor {
   comment: { text?: string | null } | string | null;
   getData(): ScPdfJsComment;
   remove(): void;
+  /** Opens its comment for writing (pdf.js's comment manager: ours). */
+  editComment(): unknown;
+  /** Its alt text (images): made with its toolbar. */
+  createAltText(): unknown;
+  hasAltText(): boolean;
   /** A signature from an image (`SignatureEditor`). */
   getFromImage?(bitmap: ImageBitmap): unknown;
   addSignature?(
@@ -57,6 +72,10 @@ export interface ScPdfJsEditor {
 /** What the viewer uses of pdf.js's `AnnotationEditorUIManager`. */
 export interface ScPdfJsUiManager {
   getEditor(id: string): ScPdfJsEditor | undefined;
+  /** Selects one editor (and no other). */
+  setSelected(editor: ScPdfJsEditor): void;
+  /** Deletes the selected editors (undoable: the undo bar). */
+  delete(): void;
   removeEditListeners(): void;
   addEditListeners(): void;
   selectComment(pageIndex: number, uid: string): void;

@@ -95,6 +95,10 @@ import {
   ScPdfViewerAltTextForm,
   ScPdfViewerAltTextInput,
   ScPdfViewerAltTextKind,
+  ScPdfViewerAnnotationAltText,
+  ScPdfViewerAnnotationComment,
+  ScPdfViewerAnnotationDelete,
+  ScPdfViewerAnnotationToolbar,
   ScPdfViewerAttachment,
   ScPdfViewerBack,
   ScPdfViewerCanvas,
@@ -306,6 +310,10 @@ const INK_COLORS = [
     ScPdfViewerCommentInput,
     ScPdfViewerCommentCancel,
     ScPdfViewerCommentShow,
+    ScPdfViewerAnnotationAltText,
+    ScPdfViewerAnnotationComment,
+    ScPdfViewerAnnotationDelete,
+    ScPdfViewerAnnotationToolbar,
     ScPdfViewerColor,
     ScPdfViewerCommentEdit,
     ScPdfViewerCommentRemove,
@@ -1504,6 +1512,78 @@ const INK_COLORS = [
             </div>
 
             <div scPdfViewerCanvas></div>
+
+            <!-- The toolbar on a selected annotation -->
+            <ng-template scPdfViewerAnnotationToolbar let-annotation>
+              @switch (annotation.type) {
+                @case ('highlight') {
+                  <div
+                    role="group"
+                    aria-label="Highlight colour"
+                    class="flex items-center gap-1.5 px-1"
+                  >
+                    @for (color of highlightColors; track color.value) {
+                      <button
+                        class="size-5"
+                        [scPdfViewerColor]="color.value"
+                        setting="highlightColor"
+                      >
+                        <span class="sr-only">{{ color.name }}</span>
+                      </button>
+                    }
+                  </div>
+                  <div scSeparator orientation="vertical"></div>
+                }
+                @case ('freetext') {
+                  <div
+                    role="group"
+                    aria-label="Text colour"
+                    class="flex items-center gap-1.5 px-1"
+                  >
+                    @for (color of inkColors; track color.value) {
+                      <button
+                        class="size-5"
+                        [scPdfViewerColor]="color.value"
+                        setting="freetextColor"
+                      >
+                        <span class="sr-only">{{ color.name }}</span>
+                      </button>
+                    }
+                  </div>
+                  <div scSeparator orientation="vertical"></div>
+                }
+                @case ('ink') {
+                  <div
+                    role="group"
+                    aria-label="Drawing colour"
+                    class="flex items-center gap-1.5 px-1"
+                  >
+                    @for (color of inkColors; track color.value) {
+                      <button
+                        class="size-5"
+                        [scPdfViewerColor]="color.value"
+                        setting="inkColor"
+                      >
+                        <span class="sr-only">{{ color.name }}</span>
+                      </button>
+                    }
+                  </div>
+                  <div scSeparator orientation="vertical"></div>
+                }
+                @case ('stamp') {
+                  <button scPdfViewerAnnotationAltText>Alt text</button>
+                  <div scSeparator orientation="vertical"></div>
+                }
+              }
+              <button scPdfViewerAnnotationComment>
+                <svg siMessageSquarePlusIcon></svg>
+                <span class="sr-only">Comment</span>
+              </button>
+              <button scPdfViewerAnnotationDelete>
+                <svg siTrash2Icon></svg>
+                <span class="sr-only">Delete</span>
+              </button>
+            </ng-template>
           </div>
 
           <!-- Undo bar -->
