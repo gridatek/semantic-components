@@ -5,18 +5,25 @@ import type { ScPdfPageColors } from './pdf-viewer-types';
  * editor's highlight colours): pdf.js's five highlight colours, and the
  * colours for text and drawings. These are their values when the theme
  * doesn't define them — pdf.js's highlight colours, and black, red, blue,
- * green.
+ * green — in oklch, as the theme's.
+ *
+ * One set, light and dark mode alike: unlike the editor's, these colours
+ * are written into the PDF file (pdf.js reads the variable when an
+ * annotation is drawn — `resolveColor`). The pages stay white in dark mode,
+ * so a dark-mode value would draw dark highlights over the text, or ink too
+ * light to see on the page — and would be saved so, in the file and on
+ * paper, the same document differing by the mode it was annotated in.
  */
 const DEFAULT_COLORS: Record<string, string> = {
-  '--sc-pdf-viewer-highlight-1': '#FFFF98',
-  '--sc-pdf-viewer-highlight-2': '#53FFBC',
-  '--sc-pdf-viewer-highlight-3': '#80EBFF',
-  '--sc-pdf-viewer-highlight-4': '#FFCBE6',
-  '--sc-pdf-viewer-highlight-5': '#FF4F5F',
-  '--sc-pdf-viewer-ink-1': '#000000',
-  '--sc-pdf-viewer-ink-2': '#E11D48',
-  '--sc-pdf-viewer-ink-3': '#2563EB',
-  '--sc-pdf-viewer-ink-4': '#16A34A',
+  '--sc-pdf-viewer-highlight-1': 'oklch(0.978 0.125 108.512)',
+  '--sc-pdf-viewer-highlight-2': 'oklch(0.896 0.169 162.965)',
+  '--sc-pdf-viewer-highlight-3': 'oklch(0.8831 0.1026 211.128)',
+  '--sc-pdf-viewer-highlight-4': 'oklch(0.895 0.068 345.997)',
+  '--sc-pdf-viewer-highlight-5': 'oklch(0.678 0.211 19.899)',
+  '--sc-pdf-viewer-ink-1': 'oklch(0 0 0)',
+  '--sc-pdf-viewer-ink-2': 'oklch(0.586 0.222 17.585)',
+  '--sc-pdf-viewer-ink-3': 'oklch(0.546 0.215 262.881)',
+  '--sc-pdf-viewer-ink-4': 'oklch(0.627 0.17 149.214)',
 };
 
 /** The highlight colours, as pdf.js names them (its colour picker's names). */
@@ -80,12 +87,20 @@ export function resolvePageColors(
   return foreground && background ? { foreground, background } : null;
 }
 
+/** pdf.js's own highlight colours, in its option's hex. */
+const PDFJS_HIGHLIGHT_COLORS = [
+  '#FFFF98',
+  '#53FFBC',
+  '#80EBFF',
+  '#FFCBE6',
+  '#FF4F5F',
+];
+
 /** pdf.js's highlight colours option (yellow=#FFFF98,…), from the theme's. */
 export function highlightColorsOption(context: Element): string {
   return HIGHLIGHT_NAMES.map((name, i) => {
     const color =
-      resolveColor(HIGHLIGHT_COLORS[i], context) ??
-      DEFAULT_COLORS[`--sc-pdf-viewer-highlight-${i + 1}`];
+      resolveColor(HIGHLIGHT_COLORS[i], context) ?? PDFJS_HIGHLIGHT_COLORS[i];
     return `${name}=${color}`;
   }).join(',');
 }

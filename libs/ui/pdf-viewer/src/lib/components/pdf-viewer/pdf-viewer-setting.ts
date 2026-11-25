@@ -27,14 +27,14 @@ import type {
  *
  * - a single `scToggleGroup` — `editorMode` (the annotation tools: nothing
  *   pressed is `none`; disabled while the document forbids changes),
- *   `cursorTool`, `scrollMode`, `spreadMode`, `pageColors` (page colours by
- *   name, `''` for the document's own) — items' values are the modes or
- *   names (colours: `scPdfViewerColor` swatches);
+ *   `cursorTool`, `scrollMode`, `spreadMode` — items' values are the modes
+ *   (colours: `scPdfViewerColor` swatches);
  * - `scTabs` — `sidebarView` (the tabs' values are the views);
  * - a `scSlider` — `highlightThickness`, `freetextSize`, `inkThickness`,
  *   `inkOpacity` (set its `min` / `max` / `step`);
  * - a `scSwitch` or `scCheckbox` — `highlightShowAll`, `findHighlightAll`,
- *   `findMatchCase`, `findEntireWord`, `findMatchDiacritics`, `caretBrowsing`.
+ *   `findMatchCase`, `findEntireWord`, `findMatchDiacritics`, `caretBrowsing`,
+ *   `pageColors`.
  *
  * Write the control, its items and labels. A toggle group never ends up with
  * nothing selected (but the tools': none is a tool): a setting always has a

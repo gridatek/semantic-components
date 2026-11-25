@@ -359,13 +359,14 @@ export class ScPdfViewer {
    */
   readonly enablePermissions = input(false);
   /**
-   * Colours to draw the pages with (a reading mode), by name: `sepia` draws
-   * them in your theme's `--sc-pdf-viewer-sepia-foreground` on
-   * `--sc-pdf-viewer-sepia-background`. `''`: the document's own — or, in
-   * the system's high-contrast mode (forced colours), its `CanvasText` on
-   * `Canvas`, as in pdf.js.
+   * Draw the pages in the theme's page colours (a reading mode): its
+   * `--sc-pdf-viewer-page-foreground` on `--sc-pdf-viewer-page` — light and
+   * dark values as every theme colour (`.dark`), the pages following the
+   * app's mode. Off: the document's own colours — or, in the system's
+   * high-contrast mode (forced colours), its `CanvasText` on `Canvas`, as in
+   * pdf.js.
    */
-  readonly pageColors = model('');
+  readonly pageColors = model(false);
   /**
    * The browser's caret browsing (F7) is on: ↑ / ↓ move the caret a line
    * in the pages' text, as pdf.js does. The page can't tell, so say when
@@ -375,17 +376,24 @@ export class ScPdfViewer {
 
   /** The system's high-contrast mode is on. */
   private readonly forcedColors = signal(false);
+  /**
+   * The page's root changed its mode or theme (`dark`, `data-theme`…): the
+   * theme's page colours have other values, to read again.
+   */
+  private readonly themeChanges = signal(0);
 
   /**
    * The colours pages are drawn with (CSS — the theme's variables), or null
    * for their own. The real colours are read where they're drawn.
    */
   readonly appliedPageColors = computed((): ScPdfPageColors | null => {
-    const name = this.pageColors();
-    if (name) {
+    if (this.pageColors()) {
+      // A new object when the mode or theme changes: the pages are drawn
+      // again, in the colours the variables have then.
+      this.themeChanges();
       return {
-        foreground: `var(--sc-pdf-viewer-${name}-foreground)`,
-        background: `var(--sc-pdf-viewer-${name}-background)`,
+        foreground: 'var(--sc-pdf-viewer-page-foreground)',
+        background: 'var(--sc-pdf-viewer-page)',
       };
     }
     return this.forcedColors()
@@ -742,7 +750,8 @@ export class ScPdfViewer {
    * Colours are CSS colours — the theme's variables: `var(--sc-pdf-viewer-highlight-1)`
    * to `-5` for highlights (pdf.js's yellow, green, blue, pink, red),
    * `var(--sc-pdf-viewer-ink-1)` to `-4` for text and drawings. pdf.js gets
-   * them as real colours (they're written into the PDF).
+   * them as real colours: they're written into the PDF, so they have one
+   * value for light and dark mode (see pdf-viewer-colors.ts).
    */
   readonly highlightColor = signal<string>(HIGHLIGHT_COLORS[0]);
   readonly highlightThickness = signal(12);
@@ -848,6 +857,35 @@ export class ScPdfViewer {
         this.destroyRef.onDestroy(() =>
           forcedColors.removeEventListener('change', onChange),
         );
+      }
+
+      // The mode or theme changing on the page's root (ScPresetManager's
+      // `dark`, `color-scheme`, `data-theme`).
+      // Only when the page colours' values change: an overlay's scroll
+      // blocking touches the root's class and style too.
+      const view = this.document.defaultView;
+      if (view?.MutationObserver) {
+        const root = this.document.documentElement;
+        const values = () => {
+          const style = view.getComputedStyle(root);
+          return (
+            style.getPropertyValue('--sc-pdf-viewer-page') +
+            '|' +
+            style.getPropertyValue('--sc-pdf-viewer-page-foreground')
+          );
+        };
+        let last = values();
+        const themes = new view.MutationObserver(() => {
+          const now = values();
+          if (now === last) return;
+          last = now;
+          this.themeChanges.update((count) => count + 1);
+        });
+        themes.observe(this.document.documentElement, {
+          attributes: true,
+          attributeFilter: ['class', 'style', 'data-theme'],
+        });
+        this.destroyRef.onDestroy(() => themes.disconnect());
       }
 
       this.initWorker();

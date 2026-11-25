@@ -4,8 +4,6 @@ import {
   ScInput,
   ScSpinner,
   ScSwitch,
-  ScToggleGroup,
-  ScToggleGroupItem,
   ScTooltip,
   ScTooltipArrow,
   ScTooltipPortal,
@@ -56,8 +54,6 @@ import { cn } from 'cn';
     ScInput,
     ScSpinner,
     ScSwitch,
-    ScToggleGroup,
-    ScToggleGroupItem,
     ScTooltipProvider,
     ScTooltipTrigger,
     ScTooltipPortal,
@@ -104,17 +100,10 @@ import { cn } from 'cn';
             ({{ viewer.currentPage() }} of {{ viewer.totalPages() }})
           </span>
           <div scPdfViewerSpacer></div>
-          <div
-            scToggleGroup
-            variant="outline"
-            size="sm"
-            aria-label="Page colours"
-            scPdfViewerSetting="pageColors"
-          >
-            <button scToggleGroupItem value="">Default</button>
-            <button scToggleGroupItem value="sepia">Sepia</button>
-            <button scToggleGroupItem value="dark">Dark</button>
-          </div>
+          <label scField orientation="horizontal">
+            Reading colours
+            <input scSwitch scPdfViewerSetting="pageColors" />
+          </label>
           <label scField orientation="horizontal">
             Caret browsing
             <input scSwitch scPdfViewerSetting="caretBrowsing" />

@@ -122,7 +122,18 @@ import { PdfViewerUsageDemoContainer } from './demos/pdf-viewer-usage-demo-conta
             <code scTypeset>--sc-pdf-viewer-highlight-1</code> to
             <code scTypeset>-5</code>,
             <code scTypeset>--sc-pdf-viewer-ink-1</code> to
-            <code scTypeset>-4</code> — written into the PDF as they are.
+            <code scTypeset>-4</code> — in oklch, written into the PDF as they
+            are.
+          </li>
+          <li>
+            Those colours have one value for light and dark mode — on
+            <code scTypeset>:root</code>, never under
+            <code scTypeset>.dark</code> — unlike the editor&apos;s highlights,
+            which only colour the screen. In dark mode the pages are still
+            white, as in pdf.js: a dark-mode highlight would darken the text
+            under it, a dark-mode ink be too light to see — and they&apos;d be
+            saved so, in the file and on paper, the same document differing by
+            the mode it was annotated in.
           </li>
         </ul>
       </section>
@@ -249,10 +260,11 @@ import { PdfViewerUsageDemoContainer } from './demos/pdf-viewer-usage-demo-conta
           Reading: jumps are remembered — Back and Forward return to where you
           were, in the viewer rather than the browser&apos;s history — and a
           document reopens where it was left (<code scTypeset>rememberView</code
-          >). <code scTypeset>pageColors</code> draws the pages in your
-          theme&apos;s colours, by name (a reading mode:
-          <code scTypeset>--sc-pdf-viewer-sepia-foreground</code> on
-          <code scTypeset>--sc-pdf-viewer-sepia-background</code>). With the
+          >). <code scTypeset>pageColors</code> draws the pages in the
+          theme&apos;s page colours (a reading mode:
+          <code scTypeset>--sc-pdf-viewer-page-foreground</code> on
+          <code scTypeset>--sc-pdf-viewer-page</code>, light and dark values as
+          every theme colour — the pages follow the app&apos;s mode). With the
           browser&apos;s caret browsing (<kbd scKbd>F7</kbd>) on, tell the
           viewer (<code scTypeset>caretBrowsing</code>) and <kbd scKbd>↑</kbd> /
           <kbd scKbd>↓</kbd> move the caret line by line through the text.
@@ -405,10 +417,10 @@ export default class PdfViewerPage {
     },
     {
       name: '[(pageColors)]',
-      type: 'string',
-      default: "''",
+      type: 'boolean',
+      default: 'false',
       description:
-        "Page colours by name: --sc-pdf-viewer-<name>-foreground on -background ('', the document's own).",
+        "The pages in the theme's page colours: --sc-pdf-viewer-page-foreground on --sc-pdf-viewer-page, following the app's mode. Off: the document's own.",
     },
     {
       name: '[(caretBrowsing)]',

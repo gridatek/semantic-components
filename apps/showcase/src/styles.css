@@ -130,23 +130,27 @@
   --sc-editor-highlight-5: oklch(0.92 0.07 20);
   --sc-editor-search-match: oklch(0.945 0.12 100 / 60%);
   --sc-editor-search-current: oklch(0.85 0.14 65);
-  /* The PDF viewer's colours (scPdfViewerSetting values): highlights
-     (pdf.js's yellow, green, blue, pink, red) and text and drawings — written
-     into the PDF, the same in dark mode — and the reading modes' page colours
-     (pageColors="sepia" | "dark"). */
-  --sc-pdf-viewer-highlight-1: #ffff98;
-  --sc-pdf-viewer-highlight-2: #53ffbc;
-  --sc-pdf-viewer-highlight-3: #80ebff;
-  --sc-pdf-viewer-highlight-4: #ffcbe6;
-  --sc-pdf-viewer-highlight-5: #ff4f5f;
-  --sc-pdf-viewer-ink-1: #000000;
-  --sc-pdf-viewer-ink-2: #e11d48;
-  --sc-pdf-viewer-ink-3: #2563eb;
-  --sc-pdf-viewer-ink-4: #16a34a;
-  --sc-pdf-viewer-sepia-foreground: #5b4636;
-  --sc-pdf-viewer-sepia-background: #f4ecd8;
-  --sc-pdf-viewer-dark-foreground: #e4e4e7;
-  --sc-pdf-viewer-dark-background: #18181b;
+  /* The PDF viewer's colours. Highlights (pdf.js's yellow, green, blue, pink,
+     red) and text and drawings (the scPdfViewerColor swatches) are written
+     into the PDF file: here only, with no .dark values — unlike the editor's
+     highlights above, which only colour the screen. In dark mode the pages
+     are still drawn white, and a dark-mode value would be saved into the
+     file: dark highlights over the text, light ink invisible on the page and
+     on paper. */
+  --sc-pdf-viewer-highlight-1: oklch(0.978 0.125 108.512);
+  --sc-pdf-viewer-highlight-2: oklch(0.896 0.169 162.965);
+  --sc-pdf-viewer-highlight-3: oklch(0.8831 0.1026 211.128);
+  --sc-pdf-viewer-highlight-4: oklch(0.895 0.068 345.997);
+  --sc-pdf-viewer-highlight-5: oklch(0.678 0.211 19.899);
+  --sc-pdf-viewer-ink-1: oklch(0 0 0);
+  --sc-pdf-viewer-ink-2: oklch(0.586 0.222 17.585);
+  --sc-pdf-viewer-ink-3: oklch(0.546 0.215 262.881);
+  --sc-pdf-viewer-ink-4: oklch(0.627 0.17 149.214);
+  /* The PDF viewer's page colours ([pageColors]="true", a reading mode):
+     only on screen, so light here and dark under .dark, as every theme
+     colour. */
+  --sc-pdf-viewer-page: oklch(0.944 0.028 88.752);
+  --sc-pdf-viewer-page-foreground: oklch(0.412 0.038 58.735);
 }
 
 .dark {
@@ -197,6 +201,8 @@
   --sc-editor-highlight-5: oklch(0.42 0.1 20);
   --sc-editor-search-match: oklch(0.45 0.09 95 / 60%);
   --sc-editor-search-current: oklch(0.52 0.13 55);
+  --sc-pdf-viewer-page: oklch(0.21 0.006 285.885);
+  --sc-pdf-viewer-page-foreground: oklch(0.92 0.004 286.32);
 }
 
 @layer base {
