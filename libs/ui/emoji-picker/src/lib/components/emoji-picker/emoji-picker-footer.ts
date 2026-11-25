@@ -2,8 +2,8 @@ import { Directive, computed, input } from '@angular/core';
 import { cn } from 'cn';
 
 /**
- * A row under the list, as wide as it: e.g. a preview of `activeEmoji()`
- * and a `scEmojiPickerSkinTone` button.
+ * A row under the list, as wide as it: e.g. a `scEmojiPickerPreview` and a
+ * `scEmojiPickerSkinTone` button.
  */
 @Directive({
   selector: 'div[scEmojiPickerFooter]',

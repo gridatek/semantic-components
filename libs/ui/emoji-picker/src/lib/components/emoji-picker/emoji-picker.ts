@@ -2,9 +2,7 @@ import { Directionality } from '@angular/cdk/bidi';
 import {
   Directive,
   ElementRef,
-  Injector,
   LOCALE_ID,
-  afterNextRender,
   booleanAttribute,
   computed,
   effect,
@@ -60,7 +58,6 @@ export class ScEmojiPicker {
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly direction = inject(Directionality);
-  private readonly injector = inject(Injector);
   /** The popover it's in, if any: a pick closes it. */
   private readonly popover = inject(ScPopoverProvider, { optional: true });
 
@@ -182,15 +179,11 @@ export class ScEmojiPicker {
       'end',
     );
     field.dispatchEvent(new Event('input', { bubbles: true }));
+    // Focus in the field now, before a popover closes: focus has left it,
+    // so it doesn't give it back to its trigger.
     const caret = field.selectionEnd;
-    // After the popover is gone (it gives focus back to its trigger).
-    afterNextRender(
-      () => {
-        field.focus();
-        field.setSelectionRange(caret, caret);
-      },
-      { injector: this.injector },
-    );
+    field.focus();
+    field.setSelectionRange(caret, caret);
   }
 
   /** The next skin tone, round (a skin tone button). */

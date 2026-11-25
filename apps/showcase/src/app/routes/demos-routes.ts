@@ -2776,17 +2776,17 @@ export const demosRoutes: Route[] = [
           ),
       },
       {
-        path: 'quick-reactions-emoji-picker-demo',
+        path: 'reactions-emoji-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/emoji-picker/demos/quick-reactions-emoji-picker-demo').then(
-            (m) => m.QuickReactionsEmojiPickerDemo,
+          import('../pages/docs/emoji-picker/demos/reactions-emoji-picker-demo').then(
+            (m) => m.ReactionsEmojiPickerDemo,
           ),
       },
       {
-        path: 'message-reactions-emoji-picker-demo',
+        path: 'custom-data-emoji-picker-demo',
         loadComponent: () =>
-          import('../pages/docs/emoji-picker/demos/message-reactions-emoji-picker-demo').then(
-            (m) => m.MessageReactionsEmojiPickerDemo,
+          import('../pages/docs/emoji-picker/demos/custom-data-emoji-picker-demo').then(
+            (m) => m.CustomDataEmojiPickerDemo,
           ),
       },
     ],

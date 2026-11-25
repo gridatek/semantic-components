@@ -3,13 +3,9 @@ import { ScFrame, ScSpinner } from '@semantic-components/ui';
 import {
   type ScEmoji,
   ScEmojiPicker,
-  ScEmojiPickerCategory,
-  ScEmojiPickerCategoryHeader,
-  ScEmojiPickerEmoji,
   ScEmojiPickerError,
   ScEmojiPickerList,
   ScEmojiPickerLoading,
-  ScEmojiPickerRow,
   ScEmojiPickerViewport,
 } from '@semantic-components/ui/emoji-picker';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
@@ -24,10 +20,6 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
     ScEmojiPickerLoading,
     ScEmojiPickerError,
     ScEmojiPickerList,
-    ScEmojiPickerCategory,
-    ScEmojiPickerCategoryHeader,
-    ScEmojiPickerRow,
-    ScEmojiPickerEmoji,
     ScSpinner,
     SiLoaderCircleIcon,
   ],
@@ -44,20 +36,7 @@ import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
           <svg scSpinner siLoaderCircleIcon aria-label="Loading emojis"></svg>
         </span>
         <span scEmojiPickerError>Couldn't load the emojis.</span>
-        <div scEmojiPickerList aria-label="Emojis" #list="scEmojiPickerList">
-          @for (category of list.categories(); track category.key) {
-            <div [scEmojiPickerCategory]="category">
-              <div scEmojiPickerCategoryHeader>{{ category.label }}</div>
-            </div>
-          }
-          @for (row of list.rows(); track row.index) {
-            <div [scEmojiPickerRow]="row">
-              @for (emoji of row.emojis; track emoji.columnIndex) {
-                <button [scEmojiPickerEmoji]="emoji">{{ emoji.emoji }}</button>
-              }
-            </div>
-          }
-        </div>
+        <div scEmojiPickerList aria-label="Emojis"></div>
       </div>
     </div>
     <p class="text-muted-foreground mt-4 text-sm" aria-live="polite">

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScButton,
   ScPopover,
@@ -11,15 +11,12 @@ import {
   type ScEmoji,
   ScEmojiPicker,
   ScEmojiPickerAnnouncer,
-  ScEmojiPickerCategory,
-  ScEmojiPickerCategoryHeader,
-  ScEmojiPickerEmoji,
   ScEmojiPickerEmpty,
   ScEmojiPickerError,
   ScEmojiPickerFooter,
   ScEmojiPickerList,
   ScEmojiPickerLoading,
-  ScEmojiPickerRow,
+  ScEmojiPickerPreview,
   ScEmojiPickerSearch,
   ScEmojiPickerSearchField,
   ScEmojiPickerSkinTone,
@@ -31,6 +28,7 @@ import {
   SiSmilePlusIcon,
 } from '@semantic-icons/lucide-icons';
 
+/** In a popover: the search field takes focus, a pick closes it. */
 @Component({
   selector: 'app-trigger-emoji-picker-demo',
   imports: [
@@ -49,11 +47,8 @@ import {
     ScEmojiPickerError,
     ScEmojiPickerAnnouncer,
     ScEmojiPickerList,
-    ScEmojiPickerCategory,
-    ScEmojiPickerCategoryHeader,
-    ScEmojiPickerRow,
-    ScEmojiPickerEmoji,
     ScEmojiPickerFooter,
+    ScEmojiPickerPreview,
     ScEmojiPickerSkinTone,
     SiSearchIcon,
     SiLoaderCircleIcon,
@@ -62,20 +57,17 @@ import {
   template: `
     <div scPopoverProvider>
       <button scButton variant="outline" scPopoverTrigger>
-        <svg siSmilePlusIcon></svg>
         @if (selected(); as emoji) {
-          {{ emoji.emoji }}
+          <span aria-hidden="true">{{ emoji.emoji }}</span>
+          <span class="sr-only">{{ emoji.label }}</span>
         } @else {
-          Add an emoji
+          <svg siSmilePlusIcon></svg>
         }
+        Status
       </button>
       <ng-template scPopoverPortal>
         <div scPopover class="w-fit p-0">
-          <div
-            scEmojiPicker
-            #picker="scEmojiPicker"
-            (emojiSelect)="pick($event)"
-          >
+          <div scEmojiPicker (emojiSelect)="selected.set($event)">
             <div scEmojiPickerSearchField>
               <svg siSearchIcon></svg>
               <input
@@ -95,49 +87,11 @@ import {
               <span scEmojiPickerEmpty>No emoji found.</span>
               <span scEmojiPickerError>Couldn't load the emojis.</span>
               <span scEmojiPickerAnnouncer></span>
-              <div
-                scEmojiPickerList
-                aria-label="Emojis"
-                #list="scEmojiPickerList"
-              >
-                @for (category of list.categories(); track category.key) {
-                  <div [scEmojiPickerCategory]="category">
-                    <div scEmojiPickerCategoryHeader>{{ category.label }}</div>
-                  </div>
-                }
-                @for (row of list.rows(); track row.index) {
-                  <div [scEmojiPickerRow]="row">
-                    @for (emoji of row.emojis; track emoji.columnIndex) {
-                      <button [scEmojiPickerEmoji]="emoji">
-                        {{ emoji.emoji }}
-                      </button>
-                    }
-                  </div>
-                }
-              </div>
+              <div scEmojiPickerList aria-label="Emojis"></div>
             </div>
             <div scEmojiPickerFooter>
-              @if (picker.activeEmoji(); as emoji) {
-                <span
-                  class="flex size-7 flex-none items-center justify-center text-lg"
-                >
-                  {{ emoji.emoji }}
-                </span>
-                <span class="text-secondary-foreground truncate text-xs">
-                  {{ emoji.label }}
-                </span>
-              } @else {
-                <span
-                  class="text-muted-foreground ms-1.5 flex h-7 items-center truncate text-xs"
-                >
-                  Select an emoji…
-                </span>
-              }
-              <button
-                scEmojiPickerSkinTone
-                #tone="scEmojiPickerSkinTone"
-                class="ms-auto"
-              >
+              <div scEmojiPickerPreview>Select an emoji…</div>
+              <button scEmojiPickerSkinTone #tone="scEmojiPickerSkinTone">
                 {{ tone.variation() }}
                 <span class="sr-only">Change skin tone</span>
               </button>
@@ -151,11 +105,5 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TriggerEmojiPickerDemo {
-  private readonly popover = viewChild.required(ScPopoverProvider);
   private readonly selected = signal<ScEmoji | null>(null);
-
-  private pick(emoji: ScEmoji): void {
-    this.selected.set(emoji);
-    this.popover().close();
-  }
 }

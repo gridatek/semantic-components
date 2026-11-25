@@ -14,69 +14,54 @@ You write the markup and every piece of text — placeholders, labels, empty and
 ## Usage
 
 ```html
-<div scEmojiPicker (emojiSelect)="pick($event)" #picker="scEmojiPicker">
+<div scEmojiPicker (emojiSelect)="pick($event)">
   <div scEmojiPickerSearchField>
     <svg siSearchIcon></svg>
     <input scEmojiPickerSearch placeholder="Search…" aria-label="Search emojis" />
   </div>
   <div scEmojiPickerViewport>
-    <span scEmojiPickerLoading><svg scSpinner aria-label="Loading" siLoaderCircleIcon></svg></span>
+    <span scEmojiPickerLoading><svg scSpinner siLoaderCircleIcon aria-label="Loading emojis"></svg></span>
     <span scEmojiPickerEmpty>No emoji found.</span>
     <span scEmojiPickerError>Couldn't load the emojis.</span>
     <span scEmojiPickerAnnouncer></span>
-    <div scEmojiPickerList aria-label="Emojis" #list="scEmojiPickerList">
-      @for (category of list.categories(); track category.key) {
-      <div [scEmojiPickerCategory]="category">
-        <div scEmojiPickerCategoryHeader>{{ category.label }}</div>
-      </div>
-      } @for (row of list.rows(); track row.index) {
-      <div [scEmojiPickerRow]="row">
-        @for (emoji of row.emojis; track emoji.columnIndex) {
-        <button [scEmojiPickerEmoji]="emoji">{{ emoji.emoji }}</button>
-        }
-      </div>
-      }
-    </div>
+    <div scEmojiPickerList aria-label="Emojis"></div>
   </div>
   <div scEmojiPickerFooter>
-    @if (picker.activeEmoji(); as emoji) {
-    <span class="text-lg">{{ emoji.emoji }}</span>
-    <span class="truncate text-xs">{{ emoji.label }}</span>
-    } @else {
-    <span class="text-muted-foreground text-xs">Select an emoji…</span>
-    }
-    <button scEmojiPickerSkinTone #tone="scEmojiPickerSkinTone" class="ms-auto" aria-label="Change skin tone">{{ tone.variation() }}</button>
+    <div scEmojiPickerPreview>Select an emoji…</div>
+    <button scEmojiPickerSkinTone #tone="scEmojiPickerSkinTone">
+      {{ tone.variation() }}
+      <span class="sr-only">Change skin tone</span>
+    </button>
   </div>
 </div>
 ```
 
-In a popover, put it in a `scPopover` (with `p-0`) opened by your `scButton`; the search field takes focus.
+The list draws the emojis itself — the categories with their headers, and only the rows in view: they hold nothing but the data (the emojis, their names, the categories' names), so there's nothing of yours to write in them.
+
+In a popover, put it in a `scPopover` (with `p-0`) opened by your `scButton`: the search field takes focus, and a pick closes the popover (`closeOnPick`; `[closeOnPick]="false"` keeps it open for more). With `[insertInto]="field"` (your `input` or `textarea`), a pick goes into the field at its caret, its value follows (an `input` event: a `[formField]` updates), and focus is back in it, after the emoji.
 
 ## Parts
 
-| Part                          | Selector                                         | Does                                                                                                                                                                                                                                     |
-| ----------------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScEmojiPicker`               | `div[scEmojiPicker]`                             | The picker (`exportAs: 'scEmojiPicker'`). Arrow keys / Enter while focus is in the search field or the list.                                                                                                                             |
-| `ScEmojiPickerSearchField`    | `div[scEmojiPickerSearchField]`                  | The search row: your icon, then the field.                                                                                                                                                                                               |
-| `ScEmojiPickerSearch`         | `input[scEmojiPickerSearch]`                     | Filters as you type (by name, then keywords); the first result becomes active.                                                                                                                                                           |
-| `ScEmojiPickerViewport`       | `div[scEmojiPickerViewport]`                     | The scrolling frame (focusable: the arrows work from it too).                                                                                                                                                                            |
-| `ScEmojiPickerList`           | `div[scEmojiPickerList]`                         | The grid (`role="grid"`, `exportAs: 'scEmojiPickerList'`): `categories()` — all of them — and `rows()` — the ones in view. Give it an `aria-label`.                                                                                      |
-| `ScEmojiPickerCategory`       | `div[scEmojiPickerCategory]="category"`          | A category's place over its rows; holds its header.                                                                                                                                                                                      |
-| `ScEmojiPickerCategoryHeader` | `div[scEmojiPickerCategoryHeader]`               | Write `category.label`; sticks while the rows scroll (`[sticky]="false"` on the picker: not).                                                                                                                                            |
-| `ScEmojiPickerRow`            | `div[scEmojiPickerRow]="row"`                    | A row (`role="row"`) of `row.emojis`.                                                                                                                                                                                                    |
-| `ScEmojiPickerEmoji`          | `button[scEmojiPickerEmoji]="emoji"`             | Write `emoji.emoji`; picks it. `data-active` when hovered or moved to; named by its label.                                                                                                                                               |
-| `ScEmojiPickerLoading`        | `[scEmojiPickerLoading]`                         | Shown while the data loads.                                                                                                                                                                                                              |
-| `ScEmojiPickerEmpty`          | `[scEmojiPickerEmpty]`                           | Shown when nothing matches (`exportAs: 'scEmojiPickerEmpty'`, `search()` for your text).                                                                                                                                                 |
-| `ScEmojiPickerError`          | `[scEmojiPickerError]`                           | Shown (`role="alert"`) when the data couldn't be loaded.                                                                                                                                                                                 |
-| `ScEmojiPickerAnnouncer`      | `[scEmojiPickerAnnouncer]`                       | Visually hidden live region: says the emoji moved to with the keyboard (focus stays in the search field).                                                                                                                                |
-| `ScEmojiPickerFooter`         | `div[scEmojiPickerFooter]`                       | A row under the list, as wide as it.                                                                                                                                                                                                     |
-| `ScEmojiPickerSkinTone`       | `button[scEmojiPickerSkinTone]`                  | Cycles the skin tone; `variation()` is its emoji (`✋`, or yours: `scEmojiPickerSkinTone="👍"`) in the current tone. Give it a name (`picker.skinToneNames()`). The style's button: `variant` (`ghost`), `size` (`icon-sm`).             |
-| `ScEmojiPickerCategoryNav`    | `div[scEmojiPickerCategoryNav]`                  | A toolbar of category buttons (one Tab stop, arrow keys). Give it an `aria-label`.                                                                                                                                                       |
-| `ScEmojiPickerCategoryButton` | `button[scEmojiPickerCategoryButton]="category"` | Scrolls to the category (`picker.categories()`); `aria-pressed` on the one at the top. Write its icon — `category.key` (`smileys-emotion`, `people-body`… `recent`) to choose. The style's toggle: `variant` (`default`), `size` (`sm`). |
+| Part                          | Selector                                         | Does                                                                                                                                                                                                                                                                         |
+| ----------------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScEmojiPicker`               | `div[scEmojiPicker]`                             | The picker (`exportAs: 'scEmojiPicker'`). Arrow keys / Enter while focus is in the search field or the list.                                                                                                                                                                 |
+| `ScEmojiPickerSearchField`    | `div[scEmojiPickerSearchField]`                  | The search row: your icon, then the field.                                                                                                                                                                                                                                   |
+| `ScEmojiPickerSearch`         | `input[scEmojiPickerSearch]`                     | Filters as you type (by name, then keywords); the first result becomes active.                                                                                                                                                                                               |
+| `ScEmojiPickerViewport`       | `div[scEmojiPickerViewport]`                     | The scrolling frame (focusable: the arrows work from it too).                                                                                                                                                                                                                |
+| `ScEmojiPickerList`           | `div[scEmojiPickerList]`                         | The grid (`role="grid"`): draws the emojis — only the rows in view (`role="row"`, `gridcell` buttons named by their labels, `data-active` on the active one) — under their categories, whose headers stick (`[sticky]="false"` on the picker: not). Give it an `aria-label`. |
+| `ScEmojiPickerLoading`        | `[scEmojiPickerLoading]`                         | Shown while the data loads.                                                                                                                                                                                                                                                  |
+| `ScEmojiPickerEmpty`          | `[scEmojiPickerEmpty]`                           | Shown when nothing matches (`exportAs: 'scEmojiPickerEmpty'`, `search()` for your text).                                                                                                                                                                                     |
+| `ScEmojiPickerError`          | `[scEmojiPickerError]`                           | Shown (`role="alert"`) when the data couldn't be loaded.                                                                                                                                                                                                                     |
+| `ScEmojiPickerAnnouncer`      | `[scEmojiPickerAnnouncer]`                       | Visually hidden live region: says the emoji moved to with the keyboard (focus stays in the search field).                                                                                                                                                                    |
+| `ScEmojiPickerFooter`         | `div[scEmojiPickerFooter]`                       | A row under the list, as wide as it.                                                                                                                                                                                                                                         |
+| `ScEmojiPickerPreview`        | `div[scEmojiPickerPreview]`                      | In the footer: the emoji hovered or moved to with the keyboard, and its name — or, while there's none, your text (`Select an emoji…`).                                                                                                                                       |
+| `ScEmojiPickerSkinTone`       | `button[scEmojiPickerSkinTone]`                  | Cycles the skin tone; `variation()` is its emoji (`✋`, or yours: `scEmojiPickerSkinTone="👍"`) in the current tone. Give it a name (`picker.skinToneNames()`). The style's button: `variant` (`ghost`), `size` (`icon-sm`).                                                 |
+| `ScEmojiPickerCategoryNav`    | `div[scEmojiPickerCategoryNav]`                  | A toolbar of category buttons (one Tab stop, arrow keys). Give it an `aria-label`.                                                                                                                                                                                           |
+| `ScEmojiPickerCategoryButton` | `button[scEmojiPickerCategoryButton]="category"` | Scrolls to the category (`picker.categories()`); `aria-pressed` on the one at the top. Write its icon — `category.key` (`smileys-emotion`, `people-body`… `recent`) to choose. The style's toggle: `variant` (`default`), `size` (`sm`).                                     |
 
 ## `scEmojiPicker`
 
-- **Inputs**: `columns` (`10`), `emojiVersion` (the newest Emoji version to show; by default the newest the system draws), `data` (your own `ScEmojiData` instead), `sticky` (`true`), `maxRecent` (`20`), `recentLabel` (the name of a first category of the recent emojis — none without it).
+- **Inputs**: `columns` (`10`), `emojiVersion` (the newest Emoji version to show; by default the newest the system draws), `data` (your own `ScEmojiData` instead), `sticky` (`true`), `maxRecent` (`20`), `recentLabel` (the name of a first category of the recent emojis — none without it), `closeOnPick` (`true`: in a popover, a pick closes it), `insertInto` (your `input` or `textarea`: a pick goes in at its caret).
 - **Two-way**: `skinTone` (`'none' | 'light' | 'medium-light' | 'medium' | 'medium-dark' | 'dark'`), `recent` (`ScEmoji[]`, latest first — keep it to restore it).
 - **Output**: `emojiSelect` (`{ emoji, label }`).
 - **State for your text**: `loading()`, `failed()`, `empty()`, `search()`, `activeEmoji()`, `categories()`, `currentCategory()`, `skinToneNames()`.

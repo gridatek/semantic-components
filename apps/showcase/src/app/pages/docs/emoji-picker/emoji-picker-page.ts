@@ -9,10 +9,10 @@ import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicEmojiPickerDemoContainer } from './demos/basic-emoji-picker-demo-container';
 import { CategoriesEmojiPickerDemoContainer } from './demos/categories-emoji-picker-demo-container';
 import { CompactEmojiPickerDemoContainer } from './demos/compact-emoji-picker-demo-container';
+import { CustomDataEmojiPickerDemoContainer } from './demos/custom-data-emoji-picker-demo-container';
 import { InputEmojiPickerDemoContainer } from './demos/input-emoji-picker-demo-container';
 import { LocaleEmojiPickerDemoContainer } from './demos/locale-emoji-picker-demo-container';
-import { MessageReactionsEmojiPickerDemoContainer } from './demos/message-reactions-emoji-picker-demo-container';
-import { QuickReactionsEmojiPickerDemoContainer } from './demos/quick-reactions-emoji-picker-demo-container';
+import { ReactionsEmojiPickerDemoContainer } from './demos/reactions-emoji-picker-demo-container';
 import { RtlEmojiPickerDemoContainer } from './demos/rtl-emoji-picker-demo-container';
 import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-demo-container';
 
@@ -29,8 +29,8 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
     LocaleEmojiPickerDemoContainer,
     CompactEmojiPickerDemoContainer,
     InputEmojiPickerDemoContainer,
-    QuickReactionsEmojiPickerDemoContainer,
-    MessageReactionsEmojiPickerDemoContainer,
+    ReactionsEmojiPickerDemoContainer,
+    CustomDataEmojiPickerDemoContainer,
     RtlEmojiPickerDemoContainer,
     TocHeading,
     ComponentBadges,
@@ -85,9 +85,10 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
           The picker holds the data, the search and the active emoji; the list
-          gives you its categories and the rows in view, which you draw. The
-          rest is yours — the search field&apos;s icon, the states&apos; text, a
-          footer, a category toolbar — with parts on your elements.
+          draws the emojis — only the rows in view — under their categories. The
+          rest is yours: the search field&apos;s icon, the states&apos; text, a
+          footer with a preview and a skin tone, a category toolbar — parts on
+          your elements.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -169,7 +170,9 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>
         <p>
-          In a popover, opened by your button; the search field takes focus.
+          In a popover, opened by your button: the search field takes focus, and
+          a pick closes it (<code scTypeset>closeOnPick</code>;
+          <code scTypeset>false</code> keeps it open for more).
         </p>
         <app-trigger-emoji-picker-demo-container />
         <p>
@@ -184,12 +187,27 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
           is yours to translate. A skin tone applies to the whole list.
         </p>
         <app-locale-emoji-picker-demo-container />
-        <p>Just the list: fewer columns, no search, no footer.</p>
+        <p>
+          Just the list: fewer columns (<code scTypeset>columns</code>), no
+          search, no footer.
+        </p>
         <app-compact-emoji-picker-demo-container />
-        <p>Inserting into a message, at the caret.</p>
+        <p>
+          Into a message: with <code scTypeset>insertInto</code>, the emoji goes
+          in at the caret, the form value follows, and focus is back in the
+          field after it.
+        </p>
         <app-input-emoji-picker-demo-container />
-        <app-quick-reactions-emoji-picker-demo-container />
-        <app-message-reactions-emoji-picker-demo-container />
+        <p>
+          Reactions: a few quick ones, the rest from the picker. A reaction is a
+          toggle — yours or not — with its count.
+        </p>
+        <app-reactions-emoji-picker-demo-container />
+        <p>
+          Your own emojis (<code scTypeset>data</code>): a team&apos;s set, with
+          its categories, names and search words. The picker works the same.
+        </p>
+        <app-custom-data-emoji-picker-demo-container />
         <p>
           Right to left: the rows, the category toolbar and the arrow keys run
           from the right. Emojibase has no Arabic, so the emojis&apos; names are
@@ -222,13 +240,11 @@ export default class EmojiPickerPage {
       '  ScEmojiPicker, ScEmojiPickerSearchField, ScEmojiPickerSearch,',
       '  ScEmojiPickerViewport, ScEmojiPickerLoading, ScEmojiPickerEmpty,',
       '  ScEmojiPickerError, ScEmojiPickerAnnouncer, ScEmojiPickerList,',
-      '  ScEmojiPickerCategory, ScEmojiPickerCategoryHeader,',
-      '  ScEmojiPickerRow, ScEmojiPickerEmoji, ScEmojiPickerFooter,',
-      '  ScEmojiPickerSkinTone,',
+      '  ScEmojiPickerFooter, ScEmojiPickerPreview, ScEmojiPickerSkinTone,',
       "} from '@semantic-components/ui/emoji-picker';",
     ].join('\n'),
     markup: [
-      '<div scEmojiPicker #picker="scEmojiPicker">',
+      '<div scEmojiPicker>',
       '  <div scEmojiPickerSearchField>',
       '    <input scEmojiPickerSearch aria-label="…" />',
       '  </div>',
@@ -237,16 +253,10 @@ export default class EmojiPickerPage {
       '    <span scEmojiPickerEmpty>…</span>',
       '    <span scEmojiPickerError>…</span>',
       '    <span scEmojiPickerAnnouncer></span>',
-      '    <div scEmojiPickerList aria-label="…" #list="scEmojiPickerList">',
-      '      <div [scEmojiPickerCategory]="category">',
-      '        <div scEmojiPickerCategoryHeader>…</div>',
-      '      </div>',
-      '      <div [scEmojiPickerRow]="row">',
-      '        <button [scEmojiPickerEmoji]="emoji">…</button>',
-      '      </div>',
-      '    </div>',
+      '    <div scEmojiPickerList aria-label="…"></div>',
       '  </div>',
       '  <div scEmojiPickerFooter>',
+      '    <div scEmojiPickerPreview>…</div>',
       '    <button scEmojiPickerSkinTone>…</button>',
       '  </div>',
       '</div>',
@@ -307,6 +317,20 @@ export default class EmojiPickerPage {
         'The name of a first category of the recent emojis; none without it.',
     },
     {
+      name: 'closeOnPick',
+      type: 'boolean',
+      default: 'true',
+      description:
+        'In a popover, a pick closes it; false: it stays open for more.',
+    },
+    {
+      name: 'insertInto',
+      type: 'HTMLInputElement | HTMLTextAreaElement | null',
+      default: 'null',
+      description:
+        'Your text field: a pick goes in at its caret, its value follows (an input event), focus is back in it.',
+    },
+    {
       name: '(emojiSelect)',
       type: 'ScEmoji',
       default: '—',
@@ -319,7 +343,7 @@ export default class EmojiPickerPage {
       name: 'ScEmojiPicker',
       selector: 'div[scEmojiPicker]',
       description:
-        'The picker (#picker="scEmojiPicker"): activeEmoji(), categories(), currentCategory(), skinToneNames(), loading(), failed(), empty(), search(); focus(), scrollToCategory(i), nextSkinTone().',
+        'The picker (#picker="scEmojiPicker"): categories() for a toolbar, skinToneNames(), activeEmoji(), loading(), failed(), empty(), search(); focus(), scrollToCategory(i), nextSkinTone().',
     },
     {
       name: 'ScEmojiPickerSearchField',
@@ -342,21 +366,7 @@ export default class EmojiPickerPage {
       name: 'ScEmojiPickerList',
       selector: 'div[scEmojiPickerList]',
       description:
-        'The grid (#list="scEmojiPickerList"): categories() — all — and rows() — the ones in view. Name it.',
-    },
-    {
-      name: 'ScEmojiPickerCategory, ScEmojiPickerCategoryHeader',
-      selector:
-        'div[scEmojiPickerCategory]="category", div[scEmojiPickerCategoryHeader]',
-      description:
-        "A category's place over its rows; its header (write category.label), sticky.",
-    },
-    {
-      name: 'ScEmojiPickerRow, ScEmojiPickerEmoji',
-      selector:
-        'div[scEmojiPickerRow]="row", button[scEmojiPickerEmoji]="emoji"',
-      description:
-        'A row of row.emojis; an emoji (write emoji.emoji): picks it, data-active when hovered or moved to.',
+        'The grid: draws the emojis — only the rows in view — under their categories, whose headers stick. Name it.',
     },
   ];
 
@@ -390,6 +400,12 @@ export default class EmojiPickerPage {
       name: 'ScEmojiPickerFooter',
       selector: 'div[scEmojiPickerFooter]',
       description: 'A row under the list, as wide as it.',
+    },
+    {
+      name: 'ScEmojiPickerPreview',
+      selector: 'div[scEmojiPickerPreview]',
+      description:
+        "The emoji hovered or moved to and its name; your text (Select an emoji…) while there's none.",
     },
     {
       name: 'ScEmojiPickerSkinTone',

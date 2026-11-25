@@ -24,16 +24,12 @@ import {
   type ScEmoji,
   ScEmojiPicker,
   ScEmojiPickerAnnouncer,
-  ScEmojiPickerCategory,
   ScEmojiPickerCategoryButton,
-  ScEmojiPickerCategoryHeader,
   ScEmojiPickerCategoryNav,
-  ScEmojiPickerEmoji,
   ScEmojiPickerEmpty,
   ScEmojiPickerError,
   ScEmojiPickerList,
   ScEmojiPickerLoading,
-  ScEmojiPickerRow,
   ScEmojiPickerSearch,
   ScEmojiPickerSearchField,
   ScEmojiPickerViewport,
@@ -69,10 +65,6 @@ import {
     ScEmojiPickerError,
     ScEmojiPickerAnnouncer,
     ScEmojiPickerList,
-    ScEmojiPickerCategory,
-    ScEmojiPickerCategoryHeader,
-    ScEmojiPickerRow,
-    ScEmojiPickerEmoji,
     ScSpinner,
     SiClockIcon,
     SiSmileIcon,
@@ -91,7 +83,6 @@ import {
     <div
       scEmojiPicker
       scFrame
-      class="h-[380px]"
       recentLabel="Recently used"
       [(recent)]="recent"
       #picker="scEmojiPicker"
@@ -149,20 +140,7 @@ import {
         <span scEmojiPickerEmpty>No emoji found.</span>
         <span scEmojiPickerError>Couldn't load the emojis.</span>
         <span scEmojiPickerAnnouncer></span>
-        <div scEmojiPickerList aria-label="Emojis" #list="scEmojiPickerList">
-          @for (category of list.categories(); track category.key) {
-            <div [scEmojiPickerCategory]="category">
-              <div scEmojiPickerCategoryHeader>{{ category.label }}</div>
-            </div>
-          }
-          @for (row of list.rows(); track row.index) {
-            <div [scEmojiPickerRow]="row">
-              @for (emoji of row.emojis; track emoji.columnIndex) {
-                <button [scEmojiPickerEmoji]="emoji">{{ emoji.emoji }}</button>
-              }
-            </div>
-          }
-        </div>
+        <div scEmojiPickerList aria-label="Emojis"></div>
       </div>
     </div>
   \`,

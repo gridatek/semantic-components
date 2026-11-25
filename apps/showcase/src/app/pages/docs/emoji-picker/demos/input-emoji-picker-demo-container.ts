@@ -19,13 +19,8 @@ import { InputEmojiPickerDemo } from './input-emoji-picker-demo';
 })
 export class InputEmojiPickerDemoContainer {
   private readonly code = `import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import {
-  Component,
-  ElementRef,
-  ViewEncapsulation,
-  signal,
-  viewChild,
-} from '@angular/core';
+import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { FormField, form } from '@angular/forms/signals';
 import {
   ScButton,
   ScInput,
@@ -38,17 +33,12 @@ import {
   ScSpinner,
 } from '@semantic-components/ui';
 import {
-  type ScEmoji,
   ScEmojiPicker,
   ScEmojiPickerAnnouncer,
-  ScEmojiPickerCategory,
-  ScEmojiPickerCategoryHeader,
-  ScEmojiPickerEmoji,
   ScEmojiPickerEmpty,
   ScEmojiPickerError,
   ScEmojiPickerList,
   ScEmojiPickerLoading,
-  ScEmojiPickerRow,
   ScEmojiPickerSearch,
   ScEmojiPickerSearchField,
   ScEmojiPickerViewport,
@@ -59,10 +49,15 @@ import {
   SiSmileIcon,
 } from '@semantic-icons/lucide-icons';
 
+/**
+ * Into a message: the emoji goes in at the caret (\`insertInto\`), the form
+ * value follows, and focus is back in the field after it.
+ */
 @Component({
   selector: 'app-input-emoji-picker-demo',
   imports: [
     CdkOverlayOrigin,
+    FormField,
     ScButton,
     ScInput,
     ScInputGroup,
@@ -81,25 +76,20 @@ import {
     ScEmojiPickerError,
     ScEmojiPickerAnnouncer,
     ScEmojiPickerList,
-    ScEmojiPickerCategory,
-    ScEmojiPickerCategoryHeader,
-    ScEmojiPickerRow,
-    ScEmojiPickerEmoji,
+    SiSmileIcon,
     SiSearchIcon,
     SiLoaderCircleIcon,
-    SiSmileIcon,
   ],
   template: \`
     <div class="w-full max-w-sm">
       <div scPopoverProvider [origin]="origin" alignment="end">
         <div scInputGroup cdkOverlayOrigin #origin="cdkOverlayOrigin">
           <input
-            #message
+            #field
             scInput
             aria-label="Message"
             placeholder="Type a message…"
-            [value]="text()"
-            (input)="text.set(message.value)"
+            [formField]="messageForm.text"
           />
           <div scInputGroupAddon side="inline-end">
             <button scButton variant="ghost" size="icon-xs" scPopoverTrigger>
@@ -110,12 +100,7 @@ import {
         </div>
         <ng-template scPopoverPortal>
           <div scPopover class="w-fit p-0">
-            <div
-              scEmojiPicker
-              [columns]="8"
-              class="h-[300px]"
-              (emojiSelect)="insert($event)"
-            >
+            <div scEmojiPicker [insertInto]="field">
               <div scEmojiPickerSearchField>
                 <svg siSearchIcon></svg>
                 <input
@@ -135,59 +120,22 @@ import {
                 <span scEmojiPickerEmpty>No emoji found.</span>
                 <span scEmojiPickerError>Couldn't load the emojis.</span>
                 <span scEmojiPickerAnnouncer></span>
-                <div
-                  scEmojiPickerList
-                  aria-label="Emojis"
-                  #list="scEmojiPickerList"
-                >
-                  @for (category of list.categories(); track category.key) {
-                    <div [scEmojiPickerCategory]="category">
-                      <div scEmojiPickerCategoryHeader>
-                        {{ category.label }}
-                      </div>
-                    </div>
-                  }
-                  @for (row of list.rows(); track row.index) {
-                    <div [scEmojiPickerRow]="row">
-                      @for (emoji of row.emojis; track emoji.columnIndex) {
-                        <button [scEmojiPickerEmoji]="emoji">
-                          {{ emoji.emoji }}
-                        </button>
-                      }
-                    </div>
-                  }
-                </div>
+                <div scEmojiPickerList aria-label="Emojis"></div>
               </div>
             </div>
           </div>
         </ng-template>
       </div>
+      <p class="text-muted-foreground mt-4 text-sm">
+        Value: {{ message().text || '—' }}
+      </p>
     </div>
   \`,
   host: { class: 'flex w-full justify-center' },
   encapsulation: ViewEncapsulation.None,
 })
 export class InputEmojiPickerDemo {
-  private readonly popover = viewChild.required(ScPopoverProvider);
-  private readonly message =
-    viewChild.required<ElementRef<HTMLInputElement>>('message');
-
-  private readonly text = signal('');
-
-  /** Inserts the emoji where the cursor was, and puts it after it. */
-  private insert(emoji: ScEmoji): void {
-    const field = this.message().nativeElement;
-    const start = field.selectionStart ?? field.value.length;
-    const end = field.selectionEnd ?? start;
-    this.text.set(
-      field.value.slice(0, start) + emoji.emoji + field.value.slice(end),
-    );
-    this.popover().close();
-    const caret = start + emoji.emoji.length;
-    setTimeout(() => {
-      field.focus();
-      field.setSelectionRange(caret, caret);
-    });
-  }
+  private readonly message = signal({ text: '' });
+  private readonly messageForm = form(this.message);
 }`;
 }

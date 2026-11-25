@@ -23,15 +23,12 @@ import { ScFrame, ScSpinner } from '@semantic-components/ui';
 import {
   ScEmojiPicker,
   ScEmojiPickerAnnouncer,
-  ScEmojiPickerCategory,
-  ScEmojiPickerCategoryHeader,
-  ScEmojiPickerEmoji,
   ScEmojiPickerEmpty,
   ScEmojiPickerError,
   ScEmojiPickerFooter,
   ScEmojiPickerList,
   ScEmojiPickerLoading,
-  ScEmojiPickerRow,
+  ScEmojiPickerPreview,
   ScEmojiPickerSearch,
   ScEmojiPickerSearchField,
   ScEmojiPickerSkinTone,
@@ -55,10 +52,7 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
     ScEmojiPickerError,
     ScEmojiPickerAnnouncer,
     ScEmojiPickerList,
-    ScEmojiPickerCategory,
-    ScEmojiPickerCategoryHeader,
-    ScEmojiPickerRow,
-    ScEmojiPickerEmoji,
+    ScEmojiPickerPreview,
     ScEmojiPickerFooter,
     ScEmojiPickerSkinTone,
     SiSearchIcon,
@@ -81,45 +75,11 @@ import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
         <span scEmojiPickerEmpty>Aucun emoji trouvé.</span>
         <span scEmojiPickerError>Impossible de charger les emojis.</span>
         <span scEmojiPickerAnnouncer></span>
-        <div scEmojiPickerList aria-label="Emojis" #list="scEmojiPickerList">
-          @for (category of list.categories(); track category.key) {
-            <div [scEmojiPickerCategory]="category">
-              <div scEmojiPickerCategoryHeader>{{ category.label }}</div>
-            </div>
-          }
-          @for (row of list.rows(); track row.index) {
-            <div [scEmojiPickerRow]="row">
-              @for (emoji of row.emojis; track emoji.columnIndex) {
-                <button [scEmojiPickerEmoji]="emoji">
-                  {{ emoji.emoji }}
-                </button>
-              }
-            </div>
-          }
-        </div>
+        <div scEmojiPickerList aria-label="Emojis"></div>
       </div>
       <div scEmojiPickerFooter>
-        @if (picker.activeEmoji(); as emoji) {
-          <span
-            class="flex size-7 flex-none items-center justify-center text-lg"
-          >
-            {{ emoji.emoji }}
-          </span>
-          <span class="text-secondary-foreground truncate text-xs">
-            {{ emoji.label }}
-          </span>
-        } @else {
-          <span
-            class="text-muted-foreground ms-1.5 flex h-7 items-center truncate text-xs"
-          >
-            Choisissez un emoji…
-          </span>
-        }
-        <button
-          scEmojiPickerSkinTone
-          #tone="scEmojiPickerSkinTone"
-          class="ms-auto"
-        >
+        <div scEmojiPickerPreview>Choisissez un emoji…</div>
+        <button scEmojiPickerSkinTone #tone="scEmojiPickerSkinTone">
           {{ tone.variation() }}
           <span class="sr-only">
             Teint :
