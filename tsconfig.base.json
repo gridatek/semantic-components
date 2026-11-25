@@ -17,68 +17,74 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@semantic-components/ui/confetti": ["libs/ui/confetti/src/index.ts"],
-      "@semantic-components/ui": ["libs/ui/src/index.ts"],
-      "@semantic-components/ui/code-block": ["libs/ui/code-block/src/index.ts"],
+      "@semantic-components/ui/confetti": ["packages/ui/confetti/src/index.ts"],
+      "@semantic-components/ui": ["packages/ui/src/index.ts"],
+      "@semantic-components/ui/code-block": [
+        "packages/ui/code-block/src/index.ts"
+      ],
       "@semantic-components/ui/barcode-scanner": [
-        "libs/ui/barcode-scanner/src/index.ts"
+        "packages/ui/barcode-scanner/src/index.ts"
       ],
-      "@semantic-components/ui/carousel": ["libs/ui/carousel/src/index.ts"],
+      "@semantic-components/ui/carousel": ["packages/ui/carousel/src/index.ts"],
       "@semantic-components/ui/phone-input": [
-        "libs/ui/phone-input/src/index.ts"
+        "packages/ui/phone-input/src/index.ts"
       ],
-      "@semantic-components/ui/data-table": ["libs/ui/data-table/src/index.ts"],
+      "@semantic-components/ui/data-table": [
+        "packages/ui/data-table/src/index.ts"
+      ],
       "@semantic-components/ui/virtual-list": [
-        "libs/ui/virtual-list/src/index.ts"
+        "packages/ui/virtual-list/src/index.ts"
       ],
-      "@semantic-components/ui/qr-code": ["libs/ui/qr-code/src/index.ts"],
-      "@semantic-components/ui/pdf-viewer": ["libs/ui/pdf-viewer/src/index.ts"],
+      "@semantic-components/ui/qr-code": ["packages/ui/qr-code/src/index.ts"],
+      "@semantic-components/ui/pdf-viewer": [
+        "packages/ui/pdf-viewer/src/index.ts"
+      ],
       "@semantic-components/ui/emoji-picker": [
-        "libs/ui/emoji-picker/src/index.ts"
+        "packages/ui/emoji-picker/src/index.ts"
       ],
-      "@semantic-components/ui/editor": ["libs/ui/editor/src/index.ts"],
+      "@semantic-components/ui/editor": ["packages/ui/editor/src/index.ts"],
       "@semantic-components/ui/editor/align": [
-        "libs/ui/editor/align/src/index.ts"
+        "packages/ui/editor/align/src/index.ts"
       ],
       "@semantic-components/ui/editor/bubble-menu": [
-        "libs/ui/editor/bubble-menu/src/index.ts"
+        "packages/ui/editor/bubble-menu/src/index.ts"
       ],
       "@semantic-components/ui/editor/highlight": [
-        "libs/ui/editor/highlight/src/index.ts"
+        "packages/ui/editor/highlight/src/index.ts"
       ],
       "@semantic-components/ui/editor/images": [
-        "libs/ui/editor/images/src/index.ts"
+        "packages/ui/editor/images/src/index.ts"
       ],
       "@semantic-components/ui/editor/markdown": [
-        "libs/ui/editor/markdown/src/index.ts"
+        "packages/ui/editor/markdown/src/index.ts"
       ],
       "@semantic-components/ui/editor/scripts": [
-        "libs/ui/editor/scripts/src/index.ts"
+        "packages/ui/editor/scripts/src/index.ts"
       ],
       "@semantic-components/ui/editor/search": [
-        "libs/ui/editor/search/src/index.ts"
+        "packages/ui/editor/search/src/index.ts"
       ],
       "@semantic-components/ui/editor/tables": [
-        "libs/ui/editor/tables/src/index.ts"
+        "packages/ui/editor/tables/src/index.ts"
       ],
-      "@semantic-components/ui/charts": ["libs/ui/charts/src/index.ts"],
+      "@semantic-components/ui/charts": ["packages/ui/charts/src/index.ts"],
       "@semantic-components/ui/charts/sankey": [
-        "libs/ui/charts/sankey/src/index.ts"
+        "packages/ui/charts/sankey/src/index.ts"
       ],
       "@semantic-components/ui/charts/treemap": [
-        "libs/ui/charts/treemap/src/index.ts"
+        "packages/ui/charts/treemap/src/index.ts"
       ],
-      "@semantic-components/ui/i18n": ["libs/ui/i18n/src/index.ts"],
-      "@semantic-components/styles": ["libs/styles/src/index.ts"],
-      "@semantic-components/styles/lyra": ["libs/styles/lyra/src/index.ts"],
-      "@semantic-components/styles/nova": ["libs/styles/nova/src/index.ts"],
-      "@semantic-components/mcp-server": ["libs/mcp-server/src/index.ts"],
-      "@semantic-components/styles/vega": ["libs/styles/vega/src/index.ts"],
-      "@semantic-components/styles/maia": ["libs/styles/maia/src/index.ts"],
-      "@semantic-components/styles/mira": ["libs/styles/mira/src/index.ts"],
-      "@semantic-components/styles/luma": ["libs/styles/luma/src/index.ts"],
-      "@semantic-components/styles/sera": ["libs/styles/sera/src/index.ts"],
-      "@semantic-components/styles/rhea": ["libs/styles/rhea/src/index.ts"]
+      "@semantic-components/ui/i18n": ["packages/ui/i18n/src/index.ts"],
+      "@semantic-components/styles": ["packages/styles/src/index.ts"],
+      "@semantic-components/styles/lyra": ["packages/styles/lyra/src/index.ts"],
+      "@semantic-components/styles/nova": ["packages/styles/nova/src/index.ts"],
+      "@semantic-components/mcp-server": ["packages/mcp-server/src/index.ts"],
+      "@semantic-components/styles/vega": ["packages/styles/vega/src/index.ts"],
+      "@semantic-components/styles/maia": ["packages/styles/maia/src/index.ts"],
+      "@semantic-components/styles/mira": ["packages/styles/mira/src/index.ts"],
+      "@semantic-components/styles/luma": ["packages/styles/luma/src/index.ts"],
+      "@semantic-components/styles/sera": ["packages/styles/sera/src/index.ts"],
+      "@semantic-components/styles/rhea": ["packages/styles/rhea/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

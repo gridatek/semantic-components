@@ -4,10 +4,10 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/geist';
-@import '../../../libs/styles/src/reduced-motion.css';
-@import '../../../libs/styles/src/typeset.css';
-@import '../../../libs/styles/nova/src/typeset-variables.css';
-@import '../../../libs/styles/nova/src/editor.css';
+@import '../../../packages/styles/src/reduced-motion.css';
+@import '../../../packages/styles/src/typeset.css';
+@import '../../../packages/styles/nova/src/typeset-variables.css';
+@import '../../../packages/styles/nova/src/editor.css';
 
 /*
  * The dashboard: shadcndashboard's screens (MIT) on our components, in the

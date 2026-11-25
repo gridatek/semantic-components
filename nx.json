@@ -58,7 +58,7 @@
     }
   },
   "release": {
-    "projects": ["libs/*"],
+    "projects": ["packages/*"],
     "version": {
       "preVersionCommand": "npx nx run-many -t build",
       "manifestRootsToUpdate": ["{projectRoot}", "dist/{projectRoot}"],

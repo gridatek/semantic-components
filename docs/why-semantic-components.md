@@ -168,7 +168,7 @@ provideSemanticComponents({ preset: { style: nova } }, withCodeHighlighter(), wi
 ```
 
 ```typescript
-// libs/styles/nova/src/button.ts — shadcn's nova, as a cva
+// packages/styles/nova/src/button.ts — shadcn's nova, as a cva
 export const button = cva('group/button inline-flex shrink-0 items-center justify-center rounded-lg border ...', {
   variants: {
     variant: {

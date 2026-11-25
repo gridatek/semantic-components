@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/libs/styles",
+  "dest": "../../dist/packages/styles",
   "assets": [
     "./src/typeset.css",
     "./src/scrollbar.css",

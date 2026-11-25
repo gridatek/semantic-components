@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Compares a component's classes with shadcn's, part by part (data-slot).
 //
-//   node scripts/shadcn-diff.mjs button            # ours: libs/*/…/components/button
+//   node scripts/shadcn-diff.mjs button            # ours: packages/*/…/components/button
 //   node scripts/shadcn-diff.mjs dropdown-menu menu # shadcn's name, then ours
 //   node scripts/shadcn-diff.mjs button --preset=vega  # against another style
 //   node scripts/shadcn-diff.mjs button --presets  # shadcn's, style by style
@@ -42,9 +42,9 @@ if (!existsSync(shadcnFile)) {
 }
 
 const ourDir = [
-  `libs/ui/src/lib/components/${ourName}`,
-  `libs/ui/${ourName}/src`,
-  `libs/${ourName}/src`,
+  `packages/ui/src/lib/components/${ourName}`,
+  `packages/ui/${ourName}/src`,
+  `packages/${ourName}/src`,
 ]
   .map((dir) => join(root, dir))
   .find(existsSync);
@@ -108,7 +108,7 @@ function ourParts(dir) {
   };
   walk(dir);
   // Classes moved into the styles (nova, the default): read there too.
-  const preset = join(root, `libs/styles/nova/src/${ourName}.ts`);
+  const preset = join(root, `packages/styles/nova/src/${ourName}.ts`);
   if (existsSync(preset)) files.push(preset);
   for (const file of files) {
     const source = readFileSync(file, 'utf8');

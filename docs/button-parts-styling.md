@@ -22,7 +22,7 @@ A part on a `button` (`scPdfViewerZoomIn`, `scTransferListMoveToTarget`…):
 <button scPdfViewerZoomIn variant="outline" size="icon-sm">…</button>
 ```
 
-Model: `libs/ui/src/lib/components/pagination/pagination-last.ts`.
+Model: `packages/ui/src/lib/components/pagination/pagination-last.ts`.
 
 ## Exceptions: behaviour only
 

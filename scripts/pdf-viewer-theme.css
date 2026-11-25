@@ -1,5 +1,5 @@
 /*
- * The library's look, appended to libs/styles/src/pdf-viewer.css by
+ * The library's look, appended to packages/styles/src/pdf-viewer.css by
  * scripts/build-pdf-viewer-css.mjs (only the built file is shipped: this is
  * its source): what isn't one of pdf.js's colours —
  * those are the theme's tokens already, above.

@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['libs/mcp-server/src/index.ts'],
+  entry: ['packages/mcp-server/src/index.ts'],
   format: ['esm'],
   clean: true,
   dts: false,

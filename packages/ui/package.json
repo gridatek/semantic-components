@@ -10,7 +10,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/gridatek/semantic-components",
-    "directory": "libs/ui"
+    "directory": "packages/ui"
   },
   "peerDependencies": {
     "@angular/core": ">=22.2.3",

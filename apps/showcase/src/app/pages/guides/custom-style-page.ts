@@ -73,7 +73,7 @@ interface ScCodeSample {
           <a scLink [href]="sourceUrl" target="_blank" rel="noopener noreferrer"
             >the repository</a
           >
-          (<code scTypeset>libs/styles/nova/src</code>
+          (<code scTypeset>packages/styles/nova/src</code>
           for nova) into your app. One file per component, plus the file that
           puts them together:
         </p>
@@ -188,7 +188,7 @@ interface ScCodeSample {
 })
 export default class CustomStylePage {
   private readonly sourceUrl =
-    'https://github.com/gridatek/semantic-components/tree/main/libs/styles/nova/src';
+    'https://github.com/gridatek/semantic-components/tree/main/packages/styles/nova/src';
 
   private readonly tree: ScCodeSample = {
     title: 'src/app/my-style/',

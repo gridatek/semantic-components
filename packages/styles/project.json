@@ -1,22 +1,22 @@
 {
-  "name": "ui",
+  "name": "styles",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/ui/src",
+  "sourceRoot": "packages/styles/src",
   "prefix": "sc",
   "projectType": "library",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/angular:ng-packagr-lite",
+      "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "defaultConfiguration": "production",
       "options": {
-        "project": "libs/ui/ng-package.json",
-        "tsConfig": "libs/ui/tsconfig.lib.json"
+        "project": "packages/styles/ng-package.json",
+        "tsConfig": "packages/styles/tsconfig.lib.json"
       },
       "configurations": {
         "production": {
-          "tsConfig": "libs/ui/tsconfig.lib.prod.json"
+          "tsConfig": "packages/styles/tsconfig.lib.prod.json"
         },
         "development": {}
       }

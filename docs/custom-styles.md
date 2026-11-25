@@ -4,13 +4,13 @@ Let a consumer restyle the whole library with their own style, once the library 
 
 ## Where we are (2026-11-13)
 
-- A style is a plain object typed by `ScStyle` (`libs/styles/src/index.ts`), given at start: `provideSemanticComponents({ preset: { style } })`. The parts read it with `injectStyle()`, so nothing ties them to our eight styles.
+- A style is a plain object typed by `ScStyle` (`packages/styles/src/index.ts`), given at start: `provideSemanticComponents({ preset: { style } })`. The parts read it with `injectStyle()`, so nothing ties them to our eight styles.
 - Tried in an app: the custom app (`apps/styles/custom`) holds a copy of nova in `src/app/custom-style/` (export `customStyle`), used by its `app.config.ts` and kept in step with nova by `scripts/sync-custom-style.mjs`. A change there (a red `frame`, tried in the former blocks app) shows in that app only. It works as is.
 - A draft page exists in the showcase: Getting Started → Custom style (`pages/guides/custom-style-page.ts`). Hide or trim it until this is a feature.
 
 ## Ways to give a consumer their own style
 
-1. **Copy a folder by hand**: copy `libs/styles/<style>/src` into the app, rename the export, pass it in. What blocks does. Simple; the copy never gets our fixes.
+1. **Copy a folder by hand**: copy `packages/styles/<style>/src` into the app, rename the export, pass it in. What blocks does. Simple; the copy never gets our fixes.
 2. **Spread one of ours**: `{ ...nova, frame: '…' }` for a few changes; the rest stays ours and updates with the package (needs that style's `@source`).
 3. **An Nx generator**: `nx g @semantic-components/styles:style --name=my-nova --from=nova`, which writes the copy, either:
    - into a folder of an app (`--directory=src/app/my-nova`), or

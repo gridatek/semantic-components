@@ -5,7 +5,7 @@
  * 1. Every instance member (field, method, accessor) of the Angular projects
  *    is made `private`, except what Angular requires to be visible:
  *    `input()`, `output()`, `model()` (NG1053), plus `static`, `abstract`,
- *    `override`, `declare` and decorated members, and ES `#fields`. In `libs`,
+ *    `override`, `declare` and decorated members, and ES `#fields`. In `packages`,
  *    the public members of parts with `exportAs`, of services and of plain
  *    classes stay public: they're the published API, used where the repo can't see.
  * 2. Every project is type-checked with `ngc` (templates included — Angular
@@ -38,8 +38,8 @@ const PROJECTS = [
   'apps/dashboard/tsconfig.app.json',
   'apps/styles/sera/tsconfig.app.json',
   'apps/styles/custom/tsconfig.app.json',
-  'libs/ui/tsconfig.lib.json',
-  'libs/styles/tsconfig.lib.json',
+  'packages/ui/tsconfig.lib.json',
+  'packages/styles/tsconfig.lib.json',
 ];
 
 const SOURCES = [
@@ -47,8 +47,8 @@ const SOURCES = [
   'apps/dashboard/src/**/*.ts',
   'apps/styles/sera/src/**/*.ts',
   'apps/styles/custom/src/**/*.ts',
-  'libs/ui/**/src/**/*.ts',
-  'libs/styles/src/**/*.ts',
+  'packages/ui/**/src/**/*.ts',
+  'packages/styles/src/**/*.ts',
   '!**/*.spec.ts',
   '!**/*.test.ts',
   '!**/node_modules/**',
@@ -117,7 +117,7 @@ function eligible(m) {
 function isLibraryApi(cls) {
   // ts-morph's paths use `/`; `root` uses `\` on Windows: compare relatively.
   const path = relative(root, cls.getSourceFile().getFilePath());
-  if (!/^libs[\\/]/.test(path)) return false;
+  if (!/^packages[\\/]/.test(path)) return false;
   const decorator = cls
     .getDecorators()
     .find((d) => ['Component', 'Directive', 'Pipe'].includes(d.getName()));

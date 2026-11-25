@@ -882,8 +882,8 @@ TestBed.configureTestingModule({
 
 ## Resources
 
-- [Number Implementation](../libs/ui/src/lib/components/number-group/)
-- [Password Implementation](../libs/ui/src/lib/components/password/)
+- [Number Implementation](../packages/ui/src/lib/components/number-group/)
+- [Password Implementation](../packages/ui/src/lib/components/password/)
 - [Angular Dependency Injection](https://angular.dev/guide/di)
 - [Angular Signals](https://angular.dev/guide/signals)
 

@@ -60,8 +60,8 @@ const walk = (dir, files = []) => {
 };
 /**
  * The component folders inside a library's entry points
- * (`libs/ui/charts/src/lib/components/area-chart`, and in theirs:
- * `libs/ui/charts/treemap/src/lib/components/treemap-chart`), by name.
+ * (`packages/ui/charts/src/lib/components/area-chart`, and in theirs:
+ * `packages/ui/charts/treemap/src/lib/components/treemap-chart`), by name.
  */
 const entryComponents = (lib) => {
   const found = new Map();
@@ -77,16 +77,16 @@ const entryComponents = (lib) => {
       } else visit(path);
     }
   };
-  visit(at('libs', lib));
+  visit(at('packages', lib));
   return found;
 };
 const entries = new Map(LIBRARIES.map((lib) => [lib, entryComponents(lib)]));
 /** A component's code: its folder, or its entry point. */
 const sourceOf = (path, lib) =>
   [
-    `libs/${lib}/src/lib/components/${path}`,
-    `libs/${lib}/${path}/src`,
-    `libs/${path}/src`,
+    `packages/${lib}/src/lib/components/${path}`,
+    `packages/${lib}/${path}/src`,
+    `packages/${path}/src`,
   ]
     .map((dir) => at(dir))
     .find(existsSync) ?? entries.get(lib)?.get(path);
@@ -124,9 +124,9 @@ const rows = registry.map((item) => {
 // Built on: the components whose exports a component imports, and those whose
 // `data-slot` its styles (or its style's) read — a button group shapes the
 // buttons, inputs and selects in it.
-const presetFiles = readdirSync(at('libs/styles'), { withFileTypes: true })
-  .filter((entry) => existsSync(at('libs/styles', entry.name, 'src')))
-  .flatMap((entry) => walk(at('libs/styles', entry.name, 'src')));
+const presetFiles = readdirSync(at('packages/styles'), { withFileTypes: true })
+  .filter((entry) => existsSync(at('packages/styles', entry.name, 'src')))
+  .flatMap((entry) => walk(at('packages/styles', entry.name, 'src')));
 /** The components declaring each `data-slot`. */
 const declaring = new Map();
 for (const row of rows)

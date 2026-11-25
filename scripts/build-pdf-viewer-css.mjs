@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Builds libs/styles/src/pdf-viewer.css — the PDF Viewer's stylesheet — from
+// Builds packages/styles/src/pdf-viewer.css — the PDF Viewer's stylesheet — from
 // pdf.js's own (pdfjs-dist/web/pdf_viewer.css): what the pages need (their
 // layers, pdf.js's editors, the page view), without pdf.js's application
 // (its dialogs, sidebars, message bars…) and without its global
@@ -15,7 +15,7 @@ import * as prettier from 'prettier';
 
 const root = join(import.meta.dirname, '..');
 const source = join(root, 'node_modules/pdfjs-dist/web/pdf_viewer.css');
-const out = join(root, 'libs/styles/src/pdf-viewer.css');
+const out = join(root, 'packages/styles/src/pdf-viewer.css');
 const theme = join(root, 'scripts/pdf-viewer-theme.css');
 const list = process.argv.includes('--list');
 

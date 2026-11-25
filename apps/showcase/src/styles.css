@@ -5,10 +5,10 @@
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/geist';
 @import '@fontsource-variable/noto-sans-arabic';
-@import '../../../libs/styles/src/reduced-motion.css';
-@import '../../../libs/styles/src/typeset.css';
-@import '../../../libs/styles/src/scrollbar.css';
-@import '../../../libs/styles/src/pdf-viewer.css';
+@import '../../../packages/styles/src/reduced-motion.css';
+@import '../../../packages/styles/src/typeset.css';
+@import '../../../packages/styles/src/scrollbar.css';
+@import '../../../packages/styles/src/pdf-viewer.css';
 
 /* Playwright selectors such as `[role=treeitem]:visible` look like arbitrary
    variants and would be compiled into invalid CSS. */

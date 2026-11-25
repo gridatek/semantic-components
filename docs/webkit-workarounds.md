@@ -4,7 +4,7 @@ Where Safari (WebKit) differs from Chrome and Firefox and the lib works
 around it. Each workaround is marked `FIXME(webkit)` in the code:
 
 ```sh
-grep -rn "FIXME(webkit)" libs
+grep -rn "FIXME(webkit)" packages
 ```
 
 Check them again with each WebKit release (the `demos-webkit` and
@@ -16,7 +16,7 @@ Safari behaves like the others, and remove its section here.
 ### A pressed button isn't focused
 
 - **Where:** `ɵfocusOnPress()` in
-  `libs/ui/src/lib/utils/focus-on-press/focus-on-press.ts`, called by the
+  `packages/ui/src/lib/utils/focus-on-press/focus-on-press.ts`, called by the
   triggers of Dialog, Alert Dialog, Sheet, Drawer and Popover.
 - **What:** Chrome and Firefox focus a button when it is clicked. Safari on
   macOS doesn't: focus stays on the page (`document.activeElement` is the
@@ -35,7 +35,7 @@ Safari behaves like the others, and remove its section here.
 
 ### A range's arrow keys aren't mirrored right to left
 
-- **Where:** `onKeydown()` in `libs/ui/src/lib/components/slider/slider.ts`.
+- **Where:** `onKeydown()` in `packages/ui/src/lib/components/slider/slider.ts`.
 - **What:** the slider is a native `<input type="range">`. Right to left, it
   is drawn mirrored in every browser (its minimum on the right). Chrome and
   Firefox mirror its arrow keys too (← raises it); Safari doesn't (→ raises
@@ -52,7 +52,7 @@ Safari behaves like the others, and remove its section here.
 ### A late `aspect-ratio` isn't applied to a stretched flex item
 
 - **Where:** `fixWebKitLayout()` in
-  `libs/ui/src/lib/components/aspect-ratio/aspect-ratio.ts`.
+  `packages/ui/src/lib/components/aspect-ratio/aspect-ratio.ts`.
 - **What:** a flex item stretched in a row (`align-items: stretch`, the
   default) that has been laid out once ignores an `aspect-ratio` it gets
   afterwards. That can be a stylesheet loading late, a breakpoint, or a new

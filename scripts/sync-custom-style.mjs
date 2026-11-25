@@ -16,7 +16,7 @@ import {
 } from 'node:fs';
 import { join } from 'node:path';
 
-const SOURCE = 'libs/styles/nova/src';
+const SOURCE = 'packages/styles/nova/src';
 const TARGET = 'apps/styles/custom/src/app/custom-style';
 const check = process.argv.includes('--check');
 

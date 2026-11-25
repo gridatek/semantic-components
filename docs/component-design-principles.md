@@ -273,7 +273,7 @@ import { cn } from '../../utils';
   },
 })
 export class ScComponentName {
-  // What changes from style to style: the style's (libs/styles/<style>/src).
+  // What changes from style to style: the style's (packages/styles/<style>/src).
   private readonly styles = injectStyle().componentName;
 
   // Class input for custom styling, merged last.

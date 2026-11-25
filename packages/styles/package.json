@@ -10,7 +10,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/gridatek/semantic-components",
-    "directory": "libs/styles"
+    "directory": "packages/styles"
   },
   "peerDependencies": {
     "class-variance-authority": ">=0.7.1"
