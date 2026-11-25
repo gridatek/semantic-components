@@ -3,8 +3,8 @@ import { ComponentItem } from '../data/components';
 import {
   type DocsPage,
   aiElementPages,
-  gettingStartedPages,
   guidePages,
+  overviewPages,
   packagePages,
 } from '../data/docs-nav';
 import { ComponentsService } from './components-service';
@@ -40,7 +40,7 @@ export class DocsNavService {
       {
         label: 'Overview',
         kind: 'page' as const,
-        pages: gettingStartedPages,
+        pages: overviewPages,
       },
       {
         label: 'Packages',

@@ -54,7 +54,7 @@ import {
       </nav>
       <div class="ms-auto flex items-center gap-2">
         <a scLink variant="ghost" href="/docs/components/header">Sign in</a>
-        <a scLink variant="button" href="/docs/getting-started/introduction"
+        <a scLink variant="button" href="/docs/overview/introduction"
           >Get started</a
         >
         <button scHeaderMobileMenuToggle class="-me-2">

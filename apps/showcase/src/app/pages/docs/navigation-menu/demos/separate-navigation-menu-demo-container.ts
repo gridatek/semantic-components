@@ -134,7 +134,7 @@ import {
         <li scNavigationMenuItem>
           <a
             scNavigationMenuLink
-            routerLink="/docs/getting-started"
+            routerLink="/docs/overview/get-started"
             routerLinkActive
             #docs="routerLinkActive"
             [active]="docs.isActive"
@@ -151,12 +151,12 @@ import {
 export class SeparateNavigationMenuDemo {
   private readonly gettingStarted = [
     {
-      link: '/docs/getting-started/introduction',
+      link: '/docs/overview/introduction',
       title: 'Introduction',
       text: 'Accessible Angular components, styled with Tailwind.',
     },
     {
-      link: '/docs/getting-started/prerequisites',
+      link: '/docs/overview/get-started',
       title: 'Installation',
       text: 'How to install dependencies and structure your app.',
     },

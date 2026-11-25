@@ -6,10 +6,11 @@ export const componentsRoutes: Route[] = [
     path: 'docs/components',
     component: DocsLayout,
     children: [
+      // Its old address: the list is an Overview page now.
       {
         path: '',
-        title: 'Components - Semantic Components',
-        loadComponent: () => import('../pages/docs/components/components-page'),
+        pathMatch: 'full',
+        redirectTo: '/docs/overview/components',
       },
       {
         path: 'accordion',

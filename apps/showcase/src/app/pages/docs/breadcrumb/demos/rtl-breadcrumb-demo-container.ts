@@ -94,7 +94,7 @@ import {
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>
-          <a scBreadcrumbLink routerLink="/docs/components">المكونات</a>
+          <a scBreadcrumbLink routerLink="/docs/overview/components">المكونات</a>
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>

@@ -2,7 +2,7 @@ import { expect, test } from '../test';
 
 test.describe('Command palette', () => {
   test('the sidebar’s every page, each to the same place', async ({ page }) => {
-    await page.goto('/docs/getting-started/introduction');
+    await page.goto('/docs/overview/introduction');
     const nav = page.getByRole('navigation', { name: 'Documentation' });
     // The lists arrive with components.json.
     await expect.poll(() => nav.locator('a[href]').count()).toBeGreaterThan(50);

@@ -41,7 +41,9 @@ import {
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>
-          <a scBreadcrumbLink routerLink="/docs/components">Components</a>
+          <a scBreadcrumbLink routerLink="/docs/overview/components"
+            >Components</a
+          >
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>

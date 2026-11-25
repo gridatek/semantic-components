@@ -95,7 +95,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           <li scNavigationMenuItem>
             <a
               scNavigationMenuLink
-              routerLink="/docs/getting-started"
+              routerLink="/docs/overview/get-started"
               routerLinkActive
               #docsRla="routerLinkActive"
               [active]="docsRla.isActive"
@@ -250,7 +250,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           scLink
           variant="button"
           [class]="getStartedClass"
-          routerLink="/docs/getting-started"
+          routerLink="/docs/overview/get-started"
         >
           Get Started
         </a>
@@ -283,7 +283,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           </a>
           <a
             scNavigationMenuLink
-            routerLink="/docs/getting-started"
+            routerLink="/docs/overview/get-started"
             routerLinkActive="active"
             #mobileDocsRla="routerLinkActive"
             [active]="mobileDocsRla.isActive"

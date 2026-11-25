@@ -84,7 +84,7 @@ import {
           scLink
           variant="button"
           class="mt-3"
-          href="/docs/getting-started/introduction"
+          href="/docs/overview/introduction"
           >Get started</a
         >
       </ng-template>

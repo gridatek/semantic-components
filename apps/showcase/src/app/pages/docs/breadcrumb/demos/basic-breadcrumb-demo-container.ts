@@ -49,7 +49,7 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>
-          <a scBreadcrumbLink href="/docs/components">Components</a>
+          <a scBreadcrumbLink href="/docs/overview/components">Components</a>
         </li>
         <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
         <li scBreadcrumbItem>

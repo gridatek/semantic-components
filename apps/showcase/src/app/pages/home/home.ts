@@ -27,7 +27,7 @@ import { HomeCards } from './cards/home-cards';
         Angular Aria and the CDK: parts you compose, in the look of your style.
       </p>
       <div class="flex w-full items-center justify-center gap-2 pt-2">
-        <a scLink variant="button" routerLink="/docs/getting-started">
+        <a scLink variant="button" routerLink="/docs/overview/get-started">
           Get Started
         </a>
         <a scLink variant="secondary" routerLink="/components">

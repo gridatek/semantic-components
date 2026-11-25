@@ -6,23 +6,23 @@ export interface DocsPage {
 }
 
 /** Overview: the library and installing it. */
-export const gettingStartedPages: readonly DocsPage[] = [
-  { name: 'Introduction', path: '/docs/getting-started/introduction' },
+export const overviewPages: readonly DocsPage[] = [
+  { name: 'Introduction', path: '/docs/overview/introduction' },
   {
     name: 'Credits',
-    path: '/docs/about/credits',
+    path: '/docs/overview/credits',
     description: 'The projects we build on',
   },
-  { name: 'Get started', path: '/docs/getting-started' },
-  { name: 'Components', path: '/docs/components' },
+  { name: 'Get started', path: '/docs/overview/get-started' },
+  { name: 'Components', path: '/docs/overview/components' },
   {
     name: 'Roadmap',
-    path: '/docs/about/roadmap',
+    path: '/docs/overview/roadmap',
     description: 'Where the library is going',
   },
   {
     name: 'Changelog',
-    path: '/docs/about/changelog',
+    path: '/docs/overview/changelog',
     description: 'What changed',
   },
 ];
@@ -53,7 +53,7 @@ export const guidePages: readonly DocsPage[] = [
     path: '/docs/guides/theming',
     description: 'Styles, theme variables, dark mode',
   },
-  { name: 'Custom style', path: '/docs/getting-started/custom-style' },
+  { name: 'Custom style', path: '/docs/overview/custom-style' },
   { name: 'Scrollbar', path: '/docs/guides/scrollbar' },
   { name: 'Typeset', path: '/docs/guides/typeset' },
   {
@@ -66,8 +66,8 @@ export const guidePages: readonly DocsPage[] = [
     path: '/docs/guides/accessibility',
     description: 'WCAG AA, keyboard, focus, names',
   },
-  { name: 'Internationalization', path: '/docs/getting-started/i18n' },
-  { name: 'Right to left', path: '/docs/getting-started/rtl' },
+  { name: 'Internationalization', path: '/docs/overview/i18n' },
+  { name: 'Right to left', path: '/docs/overview/rtl' },
   {
     name: 'Server-side rendering',
     path: '/docs/guides/ssr',

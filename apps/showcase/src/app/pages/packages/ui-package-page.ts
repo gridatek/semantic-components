@@ -211,7 +211,7 @@ import { ScCarousel, ScCarouselItem } from '@semantic-components/ui/carousel';`;
     {
       path: 'i18n',
       holds: 'Languages at run time',
-      link: '/docs/getting-started/i18n',
+      link: '/docs/overview/i18n',
       needs: ['@angular/localize'],
     },
     {

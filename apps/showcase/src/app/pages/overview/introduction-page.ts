@@ -54,7 +54,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
             scLink
             variant="button"
             size="sm"
-            routerLink="/docs/getting-started"
+            routerLink="/docs/overview/get-started"
           >
             Get started
           </a>
@@ -362,12 +362,12 @@ export const appConfig: ApplicationConfig = {
   private readonly nextSteps = [
     {
       name: 'Get started',
-      path: '/docs/getting-started',
+      path: '/docs/overview/get-started',
       description: 'set up an Angular app with Tailwind CSS and the CDK.',
     },
     {
       name: 'Custom styles',
-      path: '/docs/getting-started/custom-style',
+      path: '/docs/overview/custom-style',
       description: 'create your own brand style, in the style structure.',
     },
     {

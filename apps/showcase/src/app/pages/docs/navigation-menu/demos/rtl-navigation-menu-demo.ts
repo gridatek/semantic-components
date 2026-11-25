@@ -117,7 +117,7 @@ import {
           <li scNavigationMenuItem>
             <a
               scNavigationMenuLink
-              routerLink="/docs/getting-started"
+              routerLink="/docs/overview/get-started"
               routerLinkActive
               #docs="routerLinkActive"
               [active]="docs.isActive"
@@ -136,12 +136,12 @@ import {
 export class RtlNavigationMenuDemo {
   private readonly gettingStarted = [
     {
-      link: '/docs/getting-started/introduction',
+      link: '/docs/overview/introduction',
       title: 'مقدمة',
       text: 'مكونات Angular سهلة الوصول، منسقة بـ Tailwind.',
     },
     {
-      link: '/docs/getting-started/prerequisites',
+      link: '/docs/overview/get-started',
       title: 'التثبيت',
       text: 'كيف تثبت المتطلبات وتنظم تطبيقك.',
     },

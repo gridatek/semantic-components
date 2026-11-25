@@ -1,21 +1,19 @@
 import { Route } from '@angular/router';
 import { StackedLayout } from './components/stacked-layout/stacked-layout';
-import { aboutRoutes } from './routes/about-routes';
 import { aiElementsRoutes } from './routes/ai-elements-routes';
 import { componentsRoutes } from './routes/components-routes';
 import { demosRoutes } from './routes/demos-routes';
-import { gettingStartedRoutes } from './routes/getting-started-routes';
 import { guidesRoutes } from './routes/guides-routes';
+import { overviewRoutes } from './routes/overview-routes';
 import { packagesRoutes } from './routes/packages-routes';
 import { recipesRoutes } from './routes/recipes-routes';
 
 export const appRoutes: Route[] = [
   ...demosRoutes,
-  ...gettingStartedRoutes,
+  ...overviewRoutes,
   ...packagesRoutes,
   ...recipesRoutes,
   ...guidesRoutes,
-  ...aboutRoutes,
   ...componentsRoutes,
   ...aiElementsRoutes,
   {

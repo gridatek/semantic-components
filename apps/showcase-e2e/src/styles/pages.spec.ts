@@ -16,9 +16,9 @@ const components: { path: string; hidden?: boolean }[] = JSON.parse(
 );
 
 const pages = [
-  '/docs/getting-started/introduction',
+  '/docs/overview/introduction',
   '/components',
-  '/docs/components',
+  '/docs/overview/components',
   // Guides the style draws (out of the components' list).
   '/docs/guides/scrollbar',
   '/docs/guides/typeset',

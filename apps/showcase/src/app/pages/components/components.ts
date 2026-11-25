@@ -47,7 +47,7 @@ import { ComponentsService } from '../../services/components-service';
           scLink
           variant="button"
           size="sm"
-          routerLink="/docs/getting-started/introduction"
+          routerLink="/docs/overview/introduction"
         >
           Get started
         </a>

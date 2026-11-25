@@ -39,13 +39,13 @@ test("Sidebar: Back with the phone's sheet open closes it", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 700 });
-  await page.goto('/docs/getting-started/introduction');
+  await page.goto('/docs/overview/introduction');
   const toggle = page.getByRole('button', { name: 'Toggle Sidebar' }).first();
   const sheet = page.getByRole('dialog');
   // A page in the app's history, reached from the sheet.
   await toggle.click();
   await expect(sheet).toBeVisible();
-  await sheet.locator('a[href="/docs/components"]').click();
+  await sheet.locator('a[href="/docs/overview/components"]').click();
   await expect(page).toHaveURL(/\/docs\/components$/);
   await expect(sheet).toHaveCount(0);
 

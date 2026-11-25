@@ -12,7 +12,7 @@ test.describe('SSR', () => {
 
   const routes = [
     '/',
-    ...routesOf('apps/showcase/src/app/routes/getting-started-routes.ts'),
+    ...routesOf('apps/showcase/src/app/routes/overview-routes.ts'),
     ...routesOf('apps/showcase/src/app/routes/components-routes.ts'),
     ...routesOf('apps/showcase/src/app/routes/demos-routes.ts'),
   ];

@@ -88,7 +88,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           <li>
             Right to left is built in: logical sides, mirrored icons and arrow
             keys, from Angular&apos;s Directionality — see
-            <a scLink routerLink="/docs/getting-started/rtl">Right to left</a>.
+            <a scLink routerLink="/docs/overview/rtl">Right to left</a>.
           </li>
           <li>
             Targets are at least 24 px on touch screens (WCAG 2.5.8), and every

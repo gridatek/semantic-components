@@ -13,9 +13,9 @@ import {
   ScToggleGroupItem,
   ScTypeset,
 } from '@semantic-components/ui';
-import { ComponentStatusBadge } from '../../../components/component-status-badge/component-status-badge';
-import { ComponentCategory } from '../../../data/components';
-import { ComponentsService } from '../../../services/components-service';
+import { ComponentStatusBadge } from '../../components/component-status-badge/component-status-badge';
+import { ComponentCategory } from '../../data/components';
+import { ComponentsService } from '../../services/components-service';
 
 @Component({
   selector: 'app-components-page',

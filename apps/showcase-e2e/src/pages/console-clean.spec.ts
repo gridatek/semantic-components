@@ -16,14 +16,14 @@ const components: { path: string; hidden?: boolean }[] = JSON.parse(
 );
 
 const pages = [
-  '/docs/getting-started/introduction',
+  '/docs/overview/introduction',
   '/components',
-  '/docs/components',
+  '/docs/overview/components',
   '/docs/recipes',
-  '/docs/getting-started',
+  '/docs/overview/get-started',
   '/docs/packages/ui',
   '/docs/packages/styles',
-  '/docs/getting-started/i18n',
+  '/docs/overview/i18n',
   '/docs/packages/mcp-server',
   '/docs/guides/theming',
   '/docs/guides/scrollbar',
@@ -31,7 +31,7 @@ const pages = [
   '/docs/guides/forms',
   '/docs/guides/accessibility',
   '/docs/guides/ssr',
-  '/docs/about/credits',
+  '/docs/overview/credits',
   ...components
     .filter((c) => !c.hidden)
     .map((c) => `/docs/components/${c.path}`),

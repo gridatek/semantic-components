@@ -69,8 +69,8 @@ import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc-service';
 import {
   aiElementPages,
-  gettingStartedPages,
   guidePages,
+  overviewPages,
   packagePages,
 } from '../../data/docs-nav';
 import { CommandPaletteService } from '../../services/command-palette-service';
@@ -202,7 +202,7 @@ import { DocsNavService } from '../../services/docs-nav-service';
                   </button>
                   <div scCollapsiblePanel hiddenUntilFound>
                     <ul scSidebarMenuSub>
-                      @for (page of gettingStartedPages; track page.path) {
+                      @for (page of overviewPages; track page.path) {
                         <li scSidebarMenuSubItem>
                           <a
                             scSidebarMenuSubButton
@@ -604,7 +604,7 @@ export class DocsLayout {
   private readonly charts = this.componentsService.visibleCharts;
   private readonly utilities = this.componentsService.visibleUtilities;
   private readonly recipes = this.componentsService.visibleRecipes;
-  private readonly gettingStartedPages = gettingStartedPages;
+  private readonly overviewPages = overviewPages;
   private readonly guidePages = guidePages;
   private readonly packagePages = packagePages;
   private readonly aiElementPages = aiElementPages;
@@ -619,14 +619,20 @@ export class DocsLayout {
     { initialValue: this.router.url.split(/[?#]/)[0] },
   );
 
-  /** The header's breadcrumb: Docs › Components › Button. */
+  /**
+   * The header's breadcrumb: a component, under the list of components
+   * (Docs › Components › Button); any other page, under its sidebar group
+   * (Docs › Overview › Introduction, Docs › Guides › Theming).
+   */
   private readonly crumbs = computed<{ name: string; path?: string }[]>(() => {
     const url = this.url();
-    const docs = { name: 'Docs', path: '/docs/getting-started/introduction' };
-    const components = { name: 'Components', path: '/docs/components' };
-    if (url === components.path) return [docs, components];
+    const docs = { name: 'Docs', path: '/docs/overview/introduction' };
     const named = this.pages().find((page) => page.path === url);
     if (url.startsWith('/docs/components/')) {
+      const components = {
+        name: 'Components',
+        path: '/docs/overview/components',
+      };
       const slug = url.slice('/docs/components/'.length);
       const item = this.componentsService
         .components()
@@ -634,14 +640,10 @@ export class DocsLayout {
       return [docs, components, { name: named?.name ?? item?.name ?? slug }];
     }
     if (!named) return [docs];
-    // A guide or an about page: its group between (Docs › Guides › Theming).
     const group = this.docsNav
       .groups()
       .find(
-        (g) =>
-          g.kind === 'page' &&
-          g.label !== 'Overview' &&
-          g.pages.some((page) => page.path === url),
+        (g) => g.kind === 'page' && g.pages.some((page) => page.path === url),
       );
     return group
       ? [docs, { name: group.label }, { name: named.name }]
