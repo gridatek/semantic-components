@@ -47,14 +47,16 @@ The frame (`relative`, its size, `overflow-hidden`) is yours; the video fills it
 
 The scanner reads with the browser's `BarcodeDetector` — the standard; Chromium on Android and macOS has it. Where there is none (Firefox, Safari, Chromium on Windows and Linux) it loads `barcode-detector/ponyfill` (on zxing-wasm) on the first scan, and only then: nothing is loaded where the browser has its own, and no global is set. Without `barcode-detector` installed, the state there is `unsupported`.
 
-The decoder (`zxing_reader.wasm`, about 1 MB) comes from zxing-wasm's CDN. To serve it with the app, copy it into the assets and say where:
-
-```ts
-provideSemanticComponents({ preset: { style } }, withBarcodeScanner({ wasmUrl: '/zxing/zxing_reader.wasm' }));
-```
+The decoder (`zxing_reader.wasm`, about 1 MB) is served by your app, never by a CDN: copy it into your assets — it's looked for at `/zxing/zxing_reader.wasm` (`SC_BARCODE_WASM_URL`):
 
 ```json
 { "glob": "zxing_reader.wasm", "input": "node_modules/zxing-wasm/dist/reader", "output": "zxing" }
+```
+
+Elsewhere, say where with `withBarcodeScanner()`:
+
+```ts
+provideSemanticComponents({ preset: { style } }, withBarcodeScanner({ wasmUrl: '/assets/zxing_reader.wasm' }));
 ```
 
 ## Accessibility

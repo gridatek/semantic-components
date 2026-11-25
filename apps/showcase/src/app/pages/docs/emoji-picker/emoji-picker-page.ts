@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ScTypeset } from '@semantic-components/ui';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { TocHeading } from '../../../components/toc/toc-heading';
 import { BasicEmojiPickerDemoContainer } from './demos/basic-emoji-picker-demo-container';
 import { CategoriesEmojiPickerDemoContainer } from './demos/categories-emoji-picker-demo-container';
@@ -14,6 +15,7 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
 @Component({
   selector: 'app-emoji-picker-page',
   imports: [
+    EntryInstall,
     BasicEmojiPickerDemoContainer,
     CategoriesEmojiPickerDemoContainer,
     LocaleEmojiPickerDemoContainer,
@@ -50,10 +52,27 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
             class="font-medium underline underline-offset-4"
           >
             Emojibase's</a
-          >, fetched when first needed and kept in the browser.
+          >, bundled with your app: each locale is loaded the first time it's
+          shown, from your app — no CDN.
         </p>
         <app-component-badges path="emoji-picker" />
       </div>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>Installation</h2>
+        <app-entry-install
+          entry="emoji-picker"
+          library="emojibase-data"
+          href="https://emojibase.dev"
+          names="ScEmojiPicker, ScEmojiPickerSearch, ScEmojiPickerViewport, ScEmojiPickerList"
+        />
+        <p>
+          The data is bundled with your app: each of Emojibase&apos;s locales is
+          a chunk of its own, downloaded the first time a picker shows it.
+          Nothing is fetched from a CDN and there&apos;s nothing to host — and
+          the emojis are the ones your app was built and tested with.
+        </p>
+      </section>
 
       <section class="space-y-8">
         <h2 scTypeset appToc>Examples</h2>

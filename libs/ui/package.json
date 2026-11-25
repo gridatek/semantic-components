@@ -30,6 +30,8 @@
     "libphonenumber-js": ">=1.13.15",
     "embla-carousel": ">=8.6.0",
     "pdfjs-dist": ">=6.4.299",
+    "emojibase": ">=18.0.0",
+    "emojibase-data": ">=18.0.0",
     "@tanstack/angular-table": ">=9.3.1",
     "@tanstack/virtual-core": ">=3.19.13",
     "@tiptap/core": ">=3.32.0",
@@ -75,6 +77,12 @@
       "optional": true
     },
     "pdfjs-dist": {
+      "optional": true
+    },
+    "emojibase": {
+      "optional": true
+    },
+    "emojibase-data": {
       "optional": true
     },
     "@tanstack/angular-table": {

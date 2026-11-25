@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import {
-  SC_EMOJIBASE_URL,
   SC_EMOJI_SKIN_TONES,
   loadEmojiData,
   skinToneVariation,
@@ -66,8 +65,6 @@ export class ScEmojiPicker {
    * draws (newer emojis would show as boxes).
    */
   readonly emojiVersion = input<number | null>(null);
-  /** Where Emojibase's data is (`${url}/${locale}/data.json`): a CDN by default; host it yourself if you like. */
-  readonly emojibaseUrl = input(SC_EMOJIBASE_URL);
   /** Your emojis instead of Emojibase's. */
   readonly data = input<ScEmojiData | null>(null);
   /** Category headers stick to the top while their emojis scroll. */
@@ -118,7 +115,6 @@ export class ScEmojiPicker {
     effect(() => {
       const data = this.data();
       const locale = this.locale;
-      const url = this.emojibaseUrl();
       const version = this.emojiVersion();
       untracked(() => {
         const current = ++request;
@@ -129,7 +125,7 @@ export class ScEmojiPicker {
         }
         this.state.data.set(null);
         if (typeof window === 'undefined') return;
-        loadEmojiData(locale, url, version).then(
+        loadEmojiData(locale, version).then(
           (loaded) => current === request && this.state.data.set(loaded),
           () => current === request && this.state.failed.set(true),
         );

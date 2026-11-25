@@ -28,6 +28,7 @@ library is an optional peer: install it only for the entry point you use.
 | `@semantic-components/ui/carousel`     | `embla-carousel`          |
 | `@semantic-components/ui/confetti`     | `canvas-confetti`         |
 | `@semantic-components/ui/data-table`   | `@tanstack/angular-table` |
+| `@semantic-components/ui/emoji-picker` | `emojibase-data`          |
 | `@semantic-components/ui/pdf-viewer`   | `pdfjs-dist`              |
 | `@semantic-components/ui/phone-input`  | `libphonenumber-js`       |
 | `@semantic-components/ui/qr-code`      | `uqr`                     |

@@ -1,10 +1,8 @@
 import { collectErrors } from '../../interaction';
 import { expect, test } from '../../test';
-import { serveEmojibase } from './emojibase';
 
 test.describe('Emoji picker', () => {
   test.beforeEach(async ({ page }) => {
-    await serveEmojibase(page);
     await page.goto('/demos/emoji-picker/basic-emoji-picker-demo');
     await expect(page.getByRole('grid', { name: 'Emojis' })).toBeVisible();
   });

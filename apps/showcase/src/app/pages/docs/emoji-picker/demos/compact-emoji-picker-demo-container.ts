@@ -19,6 +19,7 @@ import { CompactEmojiPickerDemo } from './compact-emoji-picker-demo';
 })
 export class CompactEmojiPickerDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScFrame, ScSpinner } from '@semantic-components/ui';
 import {
   type ScEmoji,
   ScEmojiPicker,
@@ -30,9 +31,7 @@ import {
   ScEmojiPickerLoading,
   ScEmojiPickerRow,
   ScEmojiPickerViewport,
-  ScFrame,
-  ScSpinner,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/emoji-picker';
 import { SiLoaderCircleIcon } from '@semantic-icons/lucide-icons';
 
 /** Just the list: fewer columns, no search, no footer. */

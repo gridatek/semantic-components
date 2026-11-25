@@ -5,9 +5,10 @@ import {
 } from './barcode';
 
 /**
- * Where the scanner's decoder is served, where the browser has no
- * BarcodeDetector: `provideSemanticComponents({ preset: { style } }, withBarcodeScanner({
- * wasmUrl: '/zxing/zxing_reader.wasm' }))`. Without it, zxing-wasm's CDN.
+ * Where your app serves the scanner's decoder, where the browser has no
+ * BarcodeDetector, when not at `SC_BARCODE_WASM_URL`
+ * (`/zxing/zxing_reader.wasm`): `provideSemanticComponents({ preset: { style }
+ * }, withBarcodeScanner({ wasmUrl: '/assets/zxing_reader.wasm' }))`.
  */
 export function withBarcodeScanner(
   config: ScBarcodeScannerConfig,

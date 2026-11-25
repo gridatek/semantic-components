@@ -5,7 +5,6 @@ export { ScEmojiPickerCategoryButton } from './emoji-picker-category-button';
 export { ScEmojiPickerCategoryHeader } from './emoji-picker-category-header';
 export { ScEmojiPickerCategoryNav } from './emoji-picker-category-nav';
 export {
-  SC_EMOJIBASE_URL,
   SC_EMOJI_SKIN_TONES,
   isEmojiSupported,
   loadEmojiData,

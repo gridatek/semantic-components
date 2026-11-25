@@ -18,7 +18,6 @@ import {
   ScStorage,
   provideSemanticComponents,
 } from '@semantic-components/ui';
-import { withBarcodeScanner } from '@semantic-components/ui/barcode-scanner';
 import { withCodeHighlighter } from '@semantic-components/ui/code-block';
 import { withPhoneInput } from '@semantic-components/ui/phone-input';
 import { appRoutes } from './app-routes';
@@ -38,7 +37,6 @@ export const appConfig: ApplicationConfig = {
       withCodeHighlighter(),
       // The scanner's decoder, where the browser has no BarcodeDetector: served
       // with the site's assets (project.json), not a CDN.
-      withBarcodeScanner({ wasmUrl: '/zxing/zxing_reader.wasm' }),
       // The phone input's flags: country-flag-icons' SVGs, served with the
       // site's assets (project.json), not a CDN.
       withPhoneInput({ flagUrl: '/flags/{XX}.svg' }),

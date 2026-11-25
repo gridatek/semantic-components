@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScFrame, ScSpinner } from '@semantic-components/ui';
 import {
   type ScEmoji,
   ScEmojiPicker,
@@ -16,9 +17,7 @@ import {
   ScEmojiPickerSearchField,
   ScEmojiPickerSkinTone,
   ScEmojiPickerViewport,
-  ScFrame,
-  ScSpinner,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/emoji-picker';
 import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 @Component({

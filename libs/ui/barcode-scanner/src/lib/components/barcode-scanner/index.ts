@@ -1,4 +1,5 @@
 export {
+  SC_BARCODE_WASM_URL,
   type ScBarcode,
   type ScBarcodeFormat,
   type ScBarcodeScannerConfig,

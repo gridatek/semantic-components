@@ -19,6 +19,7 @@ import { CategoriesEmojiPickerDemo } from './categories-emoji-picker-demo';
 })
 export class CategoriesEmojiPickerDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { ScFrame, ScSpinner } from '@semantic-components/ui';
 import {
   type ScEmoji,
   ScEmojiPicker,
@@ -36,9 +37,7 @@ import {
   ScEmojiPickerSearch,
   ScEmojiPickerSearchField,
   ScEmojiPickerViewport,
-  ScFrame,
-  ScSpinner,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/emoji-picker';
 import {
   SiClockIcon,
   SiFlagIcon,

@@ -6,45 +6,165 @@ import type {
 } from './emoji-picker-types';
 
 /**
- * Emoji data from Emojibase, as Frimousse loads it: fetched once per locale,
- * kept in `localStorage` (checked for updates once per session), with the
- * emojis this system can't draw left out.
+ * Emoji data from Emojibase (the `emojibase-data` package, a peer of this
+ * entry point): bundled with your app, each locale's a chunk of its own,
+ * loaded the first time a picker needs it — no CDN, nothing to host, and the
+ * data your app was built and tested with. The emojis this system can't draw
+ * are left out.
  */
 
-/** Where Emojibase's data is fetched from by default. */
-export const SC_EMOJIBASE_URL = 'https://cdn.jsdelivr.net/npm/emojibase-data';
+/** A locale's Emojibase data: its emojis and their names. */
+type ScEmojibaseLoad = () => Promise<
+  [{ default: unknown }, { default: unknown }]
+>;
 
-/** The locales Emojibase has data for. */
-const EMOJIBASE_LOCALES = [
-  'bn',
-  'da',
-  'de',
-  'en-gb',
-  'en',
-  'es-mx',
-  'es',
-  'et',
-  'fi',
-  'fr',
-  'hi',
-  'hu',
-  'it',
-  'ja',
-  'ko',
-  'lt',
-  'ms',
-  'nb',
-  'nl',
-  'pl',
-  'pt',
-  'ru',
-  'sv',
-  'th',
-  'uk',
-  'vi',
-  'zh-hant',
-  'zh',
-];
+/**
+ * Emojibase's locales, each loaded by its own imports: the bundler makes a
+ * chunk of each, so an app only downloads the locales it shows. (Written out
+ * one by one: a bundler can't split an import whose path is computed.)
+ */
+const EMOJIBASE_DATA: Record<string, ScEmojibaseLoad> = {
+  bn: () =>
+    Promise.all([
+      import('emojibase-data/bn/data.json'),
+      import('emojibase-data/bn/messages.json'),
+    ]),
+  da: () =>
+    Promise.all([
+      import('emojibase-data/da/data.json'),
+      import('emojibase-data/da/messages.json'),
+    ]),
+  de: () =>
+    Promise.all([
+      import('emojibase-data/de/data.json'),
+      import('emojibase-data/de/messages.json'),
+    ]),
+  'en-gb': () =>
+    Promise.all([
+      import('emojibase-data/en-gb/data.json'),
+      import('emojibase-data/en-gb/messages.json'),
+    ]),
+  en: () =>
+    Promise.all([
+      import('emojibase-data/en/data.json'),
+      import('emojibase-data/en/messages.json'),
+    ]),
+  'es-mx': () =>
+    Promise.all([
+      import('emojibase-data/es-mx/data.json'),
+      import('emojibase-data/es-mx/messages.json'),
+    ]),
+  es: () =>
+    Promise.all([
+      import('emojibase-data/es/data.json'),
+      import('emojibase-data/es/messages.json'),
+    ]),
+  et: () =>
+    Promise.all([
+      import('emojibase-data/et/data.json'),
+      import('emojibase-data/et/messages.json'),
+    ]),
+  fi: () =>
+    Promise.all([
+      import('emojibase-data/fi/data.json'),
+      import('emojibase-data/fi/messages.json'),
+    ]),
+  fr: () =>
+    Promise.all([
+      import('emojibase-data/fr/data.json'),
+      import('emojibase-data/fr/messages.json'),
+    ]),
+  hi: () =>
+    Promise.all([
+      import('emojibase-data/hi/data.json'),
+      import('emojibase-data/hi/messages.json'),
+    ]),
+  hu: () =>
+    Promise.all([
+      import('emojibase-data/hu/data.json'),
+      import('emojibase-data/hu/messages.json'),
+    ]),
+  it: () =>
+    Promise.all([
+      import('emojibase-data/it/data.json'),
+      import('emojibase-data/it/messages.json'),
+    ]),
+  ja: () =>
+    Promise.all([
+      import('emojibase-data/ja/data.json'),
+      import('emojibase-data/ja/messages.json'),
+    ]),
+  ko: () =>
+    Promise.all([
+      import('emojibase-data/ko/data.json'),
+      import('emojibase-data/ko/messages.json'),
+    ]),
+  lt: () =>
+    Promise.all([
+      import('emojibase-data/lt/data.json'),
+      import('emojibase-data/lt/messages.json'),
+    ]),
+  ms: () =>
+    Promise.all([
+      import('emojibase-data/ms/data.json'),
+      import('emojibase-data/ms/messages.json'),
+    ]),
+  nb: () =>
+    Promise.all([
+      import('emojibase-data/nb/data.json'),
+      import('emojibase-data/nb/messages.json'),
+    ]),
+  nl: () =>
+    Promise.all([
+      import('emojibase-data/nl/data.json'),
+      import('emojibase-data/nl/messages.json'),
+    ]),
+  pl: () =>
+    Promise.all([
+      import('emojibase-data/pl/data.json'),
+      import('emojibase-data/pl/messages.json'),
+    ]),
+  pt: () =>
+    Promise.all([
+      import('emojibase-data/pt/data.json'),
+      import('emojibase-data/pt/messages.json'),
+    ]),
+  ru: () =>
+    Promise.all([
+      import('emojibase-data/ru/data.json'),
+      import('emojibase-data/ru/messages.json'),
+    ]),
+  sv: () =>
+    Promise.all([
+      import('emojibase-data/sv/data.json'),
+      import('emojibase-data/sv/messages.json'),
+    ]),
+  th: () =>
+    Promise.all([
+      import('emojibase-data/th/data.json'),
+      import('emojibase-data/th/messages.json'),
+    ]),
+  uk: () =>
+    Promise.all([
+      import('emojibase-data/uk/data.json'),
+      import('emojibase-data/uk/messages.json'),
+    ]),
+  vi: () =>
+    Promise.all([
+      import('emojibase-data/vi/data.json'),
+      import('emojibase-data/vi/messages.json'),
+    ]),
+  'zh-hant': () =>
+    Promise.all([
+      import('emojibase-data/zh-hant/data.json'),
+      import('emojibase-data/zh-hant/messages.json'),
+    ]),
+  zh: () =>
+    Promise.all([
+      import('emojibase-data/zh/data.json'),
+      import('emojibase-data/zh/messages.json'),
+    ]),
+};
 
 /** Emojis are drawn with these fonts (the system's colour emoji font). */
 export const SC_EMOJI_FONT_FAMILY =
@@ -60,6 +180,7 @@ export const SC_EMOJI_SKIN_TONES: ScEmojiSkinTone[] = [
   'dark',
 ];
 
+/** The session's check of the emojis this system draws. */
 const STORAGE_KEY = 'sc-emoji-picker';
 
 interface ScEmojibaseEmoji {
@@ -79,17 +200,12 @@ interface ScEmojibaseMessages {
   skinTones: { key: string; message: string }[];
 }
 
-interface ScEmojiPickerCachedData {
-  etags: [string | null, string | null];
-  data: ScEmojiData;
-}
-
 /** The locale, if Emojibase has it — otherwise English. */
 export function emojibaseLocale(locale: string): string {
   const lower = locale.toLowerCase();
-  if (EMOJIBASE_LOCALES.includes(lower)) return lower;
+  if (lower in EMOJIBASE_DATA) return lower;
   const language = lower.split('-')[0];
-  return EMOJIBASE_LOCALES.includes(language) ? language : 'en';
+  return language in EMOJIBASE_DATA ? language : 'en';
 }
 
 function capitalize(text: string): string {
@@ -163,85 +279,25 @@ function toEmojiData(
   return { locale, emojis: list, categories, skinTones };
 }
 
-async function fetchJson<T>(
-  url: string,
-  signal?: AbortSignal,
-): Promise<{ json: T; etag: string | null }> {
-  const response = await fetch(url, { signal });
-  if (!response.ok) throw new Error(`${response.status} ${url}`);
-  return {
-    json: (await response.json()) as T,
-    etag: response.headers.get('etag'),
-  };
-}
+/** Each locale's data, loaded once and shared by the pickers that need it. */
+const loaded = new Map<string, Promise<ScEmojiData>>();
 
-async function fetchEtag(url: string, signal?: AbortSignal) {
-  try {
-    return (await fetch(url, { method: 'HEAD', signal })).headers.get('etag');
-  } catch {
-    return null;
-  }
-}
-
-/** One load per data set at a time, shared by the pickers that need it. */
-const pending = new Map<string, Promise<ScEmojiData>>();
-
-/** Emojibase's data for a locale: cached, revalidated once per session. */
-function loadEmojibaseData(
-  baseUrl: string,
-  locale: string,
-): Promise<ScEmojiData> {
-  const key = `${STORAGE_KEY}/${baseUrl}/${locale}`;
-  let load = pending.get(key);
+/** Emojibase's data for a locale, in the picker's shape. */
+function loadEmojibaseData(locale: string): Promise<ScEmojiData> {
+  let load = loaded.get(locale);
   if (!load) {
-    load = readEmojibaseData(baseUrl, locale, key).finally(() =>
-      pending.delete(key),
+    load = EMOJIBASE_DATA[locale]().then(([emojis, messages]) =>
+      toEmojiData(
+        locale,
+        emojis.default as ScEmojibaseEmoji[],
+        messages.default as ScEmojibaseMessages,
+      ),
     );
-    pending.set(key, load);
+    // A failed load (offline) is tried again next time.
+    load.catch(() => loaded.delete(locale));
+    loaded.set(locale, load);
   }
   return load;
-}
-
-async function readEmojibaseData(
-  baseUrl: string,
-  locale: string,
-  key: string,
-): Promise<ScEmojiData> {
-  const emojisUrl = `${baseUrl}/${locale}/data.json`;
-  const messagesUrl = `${baseUrl}/${locale}/messages.json`;
-  const sessionKey = `${STORAGE_KEY}/revalidated`;
-  const revalidated =
-    readStorage<string[]>(() => sessionStorage, sessionKey) ?? [];
-  const cached = readStorage<ScEmojiPickerCachedData>(() => localStorage, key);
-
-  if (cached) {
-    if (revalidated.includes(key)) return cached.data;
-    // Unchanged since cached? (If the check fails, the cache will do.)
-    const etags = await Promise.all([
-      fetchEtag(emojisUrl),
-      fetchEtag(messagesUrl),
-    ]);
-    const unchanged =
-      !etags[0] ||
-      !etags[1] ||
-      (etags[0] === cached.etags[0] && etags[1] === cached.etags[1]);
-    if (unchanged) {
-      writeStorage(() => sessionStorage, sessionKey, [...revalidated, key]);
-      return cached.data;
-    }
-  }
-
-  const [emojis, messages] = await Promise.all([
-    fetchJson<ScEmojibaseEmoji[]>(emojisUrl),
-    fetchJson<ScEmojibaseMessages>(messagesUrl),
-  ]);
-  const data = toEmojiData(locale, emojis.json, messages.json);
-  writeStorage(() => localStorage, key, {
-    etags: [emojis.etag, messages.etag],
-    data,
-  } satisfies ScEmojiPickerCachedData);
-  writeStorage(() => sessionStorage, sessionKey, [...revalidated, key]);
-  return data;
 }
 
 let context: CanvasRenderingContext2D | null | undefined;
@@ -311,18 +367,14 @@ function emojiSupport(emojis: ScEmojiDataEmoji[]): ScEmojiSupport {
 }
 
 /**
- * The picker's data for a locale, from Emojibase at `baseUrl`: without the
- * emojis newer than `emojiVersion` — by default, than the system draws.
+ * The picker's data for a locale, from Emojibase: without the emojis newer
+ * than `emojiVersion` — by default, than the system draws.
  */
 export async function loadEmojiData(
   locale: string,
-  baseUrl = SC_EMOJIBASE_URL,
   emojiVersion?: number | null,
 ): Promise<ScEmojiData> {
-  const data = await loadEmojibaseData(
-    baseUrl.replace(/\/$/, ''),
-    emojibaseLocale(locale),
-  );
+  const data = await loadEmojibaseData(emojibaseLocale(locale));
   const support = emojiSupport(data.emojis);
   const version = emojiVersion ?? support.version;
   return {

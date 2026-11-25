@@ -48,9 +48,18 @@ interface ScBarcodeDetectorClass {
 
 /** The app's settings for the scanner: `withBarcodeScanner()`. */
 export interface ScBarcodeScannerConfig {
-  /** Where zxing-wasm's decoder is served; zxing-wasm's CDN when not given. */
+  /**
+   * Where your app serves zxing-wasm's decoder (`zxing_reader.wasm`):
+   * `SC_BARCODE_WASM_URL` when not given. Never a CDN.
+   */
   readonly wasmUrl?: string;
 }
+
+/**
+ * Where the decoder is by default: served by your app, copied into its
+ * assets from `node_modules/zxing-wasm/dist/reader` (output `zxing`).
+ */
+export const SC_BARCODE_WASM_URL = '/zxing/zxing_reader.wasm';
 
 export const SC_BARCODE_SCANNER_CONFIG =
   new InjectionToken<ScBarcodeScannerConfig>('SC_BARCODE_SCANNER_CONFIG');
@@ -63,21 +72,20 @@ let ponyfill: Promise<ScBarcodeDetectorClass | null> | undefined;
  * barcode-detector is not installed either.
  */
 export function loadBarcodeDetector(
-  wasmUrl?: string,
+  wasmUrl = SC_BARCODE_WASM_URL,
 ): Promise<ScBarcodeDetectorClass | null> {
   const native = (globalThis as { BarcodeDetector?: ScBarcodeDetectorClass })
     .BarcodeDetector;
   if (native) return Promise.resolve(native);
   ponyfill ??= import('barcode-detector/ponyfill')
     .then(({ BarcodeDetector, prepareZXingModule }) => {
-      if (wasmUrl) {
-        prepareZXingModule({
-          overrides: {
-            locateFile: (path: string, prefix: string) =>
-              path.endsWith('.wasm') ? wasmUrl : prefix + path,
-          },
-        });
-      }
+      // The app's copy, not zxing-wasm's CDN.
+      prepareZXingModule({
+        overrides: {
+          locateFile: (path: string, prefix: string) =>
+            path.endsWith('.wasm') ? wasmUrl : prefix + path,
+        },
+      });
       return BarcodeDetector as unknown as ScBarcodeDetectorClass;
     })
     .catch(() => null);

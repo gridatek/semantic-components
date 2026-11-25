@@ -14,8 +14,15 @@ export default [
           // importing TanStack: a peer for what they need, not for an import.
           // The barcode scanner loads barcode-detector with a dynamic import
           // (only where the browser has no BarcodeDetector), which the check
-          // doesn't see.
-          ignoredDependencies: ['@tanstack/angular-table', 'barcode-detector'],
+          // doesn't see. So does the emoji picker with Emojibase's data (one
+          // dynamic import per locale file of emojibase-data; emojibase is
+          // that data's types).
+          ignoredDependencies: [
+            '@tanstack/angular-table',
+            'barcode-detector',
+            'emojibase',
+            'emojibase-data',
+          ],
         },
       ],
     },

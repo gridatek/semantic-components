@@ -3,6 +3,7 @@ import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ApiTable } from '../../../components/api-table/api-table';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
+import { DocCode } from '../../../components/doc-code/doc-code';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
 import { PartsTable } from '../../../components/parts-table/parts-table';
 import { TocHeading } from '../../../components/toc/toc-heading';
@@ -22,6 +23,7 @@ import { PdfViewerUsageDemoContainer } from './demos/pdf-viewer-usage-demo-conta
     Anatomy,
     ApiTable,
     ComponentBadges,
+    DocCode,
     EntryInstall,
     PartsTable,
     TocHeading,
@@ -87,11 +89,14 @@ import { PdfViewerUsageDemoContainer } from './demos/pdf-viewer-usage-demo-conta
           below).
         </p>
         <p>
-          pdf.js&apos;s worker, fonts, scripting sandbox and images load from
-          <code scTypeset>assetsUrl</code> (unpkg by default): host
-          <code scTypeset>pdfjs-dist</code>&apos;s folders yourself for an
-          offline or strict-CSP app.
+          pdf.js&apos;s own files — its worker, scripting sandbox, fonts, CMaps
+          (Chinese, Japanese, Korean text), wasm image decoders, colour profiles
+          and the icons of a document&apos;s notes — are served by your app,
+          never by a CDN: copy them into your assets. The viewer looks for them
+          at <code scTypeset>/pdfjs/</code>;
+          <code scTypeset>assetsUrl</code> for elsewhere.
         </p>
+        <app-doc-code [code]="assets" language="json" />
       </section>
 
       <section class="space-y-4">
@@ -353,6 +358,15 @@ export default class PdfViewerPage {
     ].join('\n'),
   };
 
+  private readonly assets = [
+    "// angular.json: pdf.js's files, in the assets",
+    '{',
+    '  "glob": "{build/pdf.worker.min.mjs,build/pdf.sandbox.min.mjs,cmaps/**,standard_fonts/**,wasm/**,iccs/**,web/images/annotation-*.svg}",',
+    '  "input": "node_modules/pdfjs-dist",',
+    '  "output": "pdfjs"',
+    '}',
+  ].join('\n');
+
   private readonly inputs = [
     {
       name: 'src',
@@ -384,7 +398,7 @@ export default class PdfViewerPage {
     {
       name: 'assetsUrl',
       type: 'string',
-      default: 'unpkg',
+      default: "'/pdfjs/'",
       description:
         "Where pdf.js's worker, sandbox, fonts, CMaps, wasm decoders and images are (pdfjs-dist's folders).",
     },

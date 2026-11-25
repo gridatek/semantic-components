@@ -22,7 +22,6 @@ import {
   GlobalWorkerOptions,
   PermissionFlag,
   getDocument,
-  version,
 } from 'pdfjs-dist';
 import { moveCaret } from './pdf-viewer-caret-browsing';
 import {
@@ -338,11 +337,12 @@ export class ScPdfViewer {
    * Base URL of the `pdfjs-dist` package's files (trailing slash): the
    * worker, the scripting sandbox, and the fonts, CMaps (Chinese, Japanese,
    * Korean text), wasm image decoders and colour profiles pdf.js loads as
-   * needed. Defaults to unpkg for the installed version; host them yourself
-   * for offline or strict-CSP apps (`pdfjs-dist`'s `build`, `cmaps`,
-   * `standard_fonts`, `wasm` and `iccs` folders).
+   * needed, and the icons of a document's own notes. Served by your app,
+   * never by a CDN: copy them into your assets (`pdfjs-dist`'s `build`
+   * worker and sandbox, `cmaps`, `standard_fonts`, `wasm`, `iccs` and
+   * `web/images/annotation-*.svg`), at `/pdfjs/` by default.
    */
-  readonly assetsUrl = input(`https://unpkg.com/pdfjs-dist@${version}/`);
+  readonly assetsUrl = input('/pdfjs/');
   /** URL of `pdf.worker.mjs`, if not under `assetsUrl`. */
   readonly workerSrc = input<string>('');
   /**

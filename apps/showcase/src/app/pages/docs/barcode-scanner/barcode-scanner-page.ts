@@ -102,13 +102,16 @@ import { RtlBarcodeScannerDemoContainer } from './demos/rtl-barcode-scanner-demo
           browser has its own, and no global is set.
         </p>
         <p>
-          Its decoder, zxing-wasm&apos;s (about 1 MB), comes from a CDN. To
-          serve it with your app instead, copy it into your assets and say where
-          it is with
+          Its decoder, zxing-wasm&apos;s (about 1 MB), is served by your app,
+          never by a CDN: copy it into your assets, where it&apos;s looked for
+          (<code scTypeset>/zxing/zxing_reader.wasm</code>).
+        </p>
+        <app-doc-code [code]="asset" language="json" />
+        <p>
+          Elsewhere, say where it is with
           <code scTypeset>withBarcodeScanner()</code>.
         </p>
         <app-doc-code [code]="setup" language="typescript" />
-        <app-doc-code [code]="asset" language="json" />
       </section>
 
       <section class="space-y-4">
@@ -185,7 +188,7 @@ export default class BarcodeScannerPage {
     '',
     'provideSemanticComponents(',
     '  { preset: { style } },',
-    "  withBarcodeScanner({ wasmUrl: '/zxing/zxing_reader.wasm' }),",
+    "  withBarcodeScanner({ wasmUrl: '/assets/zxing_reader.wasm' }),",
     ');',
   ].join('\n');
 

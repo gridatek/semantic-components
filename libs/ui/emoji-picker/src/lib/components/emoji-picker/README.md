@@ -76,7 +76,7 @@ In a popover, put it in a `scPopover` (with `p-0`) opened by your `scButton`; th
 
 ## `scEmojiPicker`
 
-- **Inputs**: `columns` (`10`), `emojiVersion` (the newest Emoji version to show; by default the newest the system draws), `emojibaseUrl` (where Emojibase's data is fetched from — jsDelivr by default; host the `emojibase-data` package's locale folders yourself if you like), `data` (your own `ScEmojiData` instead), `sticky` (`true`), `maxRecent` (`20`), `recentLabel` (the name of a first category of the recent emojis — none without it).
+- **Inputs**: `columns` (`10`), `emojiVersion` (the newest Emoji version to show; by default the newest the system draws), `data` (your own `ScEmojiData` instead), `sticky` (`true`), `maxRecent` (`20`), `recentLabel` (the name of a first category of the recent emojis — none without it).
 - **Two-way**: `skinTone` (`'none' | 'light' | 'medium-light' | 'medium' | 'medium-dark' | 'dark'`), `recent` (`ScEmoji[]`, latest first — keep it to restore it).
 - **Output**: `emojiSelect` (`{ emoji, label }`).
 - **State for your text**: `loading()`, `failed()`, `empty()`, `search()`, `activeEmoji()`, `categories()`, `currentCategory()`, `skinToneNames()`.
@@ -84,7 +84,7 @@ In a popover, put it in a `scPopover` (with `p-0`) opened by your `scButton`; th
 
 ## Data
 
-Emojibase's `data.json` and `messages.json` for the locale are fetched once, kept in `localStorage` and checked for updates (by ETag) once per session; the emojis are then filtered to what the system draws (country flags too — Windows has none). `loadEmojiData(locale)` gives the same data outside the picker; `skinToneVariation(emoji, tone)` an emoji in a tone.
+Emojibase's `data.json` and `messages.json` for the locale come from the `emojibase-data` package, bundled with your app: each locale is a chunk of its own (one dynamic import per file, which the bundler splits), downloaded the first time a picker shows it and cached by the browser with the rest of your app. No CDN — nothing to host, nothing fetched from another origin, and the data your app was built and tested with; a new Emojibase comes with an upgrade of the package. The emojis are then filtered to what the system draws (country flags too — Windows has none). `loadEmojiData(locale)` gives the same data outside the picker; `skinToneVariation(emoji, tone)` an emoji in a tone.
 
 ## Accessibility
 

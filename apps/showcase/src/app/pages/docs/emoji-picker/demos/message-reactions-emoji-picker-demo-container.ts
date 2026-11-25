@@ -21,6 +21,14 @@ export class MessageReactionsEmojiPickerDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal, viewChild } from '@angular/core';
 import {
   ScButton,
+  ScFrame,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
+  ScSpinner,
+} from '@semantic-components/ui';
+import {
   type ScEmoji,
   ScEmojiPicker,
   ScEmojiPickerAnnouncer,
@@ -35,13 +43,7 @@ import {
   ScEmojiPickerSearch,
   ScEmojiPickerSearchField,
   ScEmojiPickerViewport,
-  ScFrame,
-  ScPopover,
-  ScPopoverPortal,
-  ScPopoverProvider,
-  ScPopoverTrigger,
-  ScSpinner,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/emoji-picker';
 import {
   SiLoaderCircleIcon,
   SiSearchIcon,

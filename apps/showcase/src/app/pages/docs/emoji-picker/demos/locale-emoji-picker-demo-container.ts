@@ -19,6 +19,7 @@ import { LocaleEmojiPickerDemo } from './locale-emoji-picker-demo';
 })
 export class LocaleEmojiPickerDemoContainer {
   private readonly code = `import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+import { ScFrame, ScSpinner } from '@semantic-components/ui';
 import {
   ScEmojiPicker,
   ScEmojiPickerAnnouncer,
@@ -36,9 +37,7 @@ import {
   ScEmojiPickerSkinTone,
   ScEmojiPickerViewport,
   type ScEmojiSkinTone,
-  ScFrame,
-  ScSpinner,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/emoji-picker';
 import { SiLoaderCircleIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 
 /** In French: the emojis' names, the search and your text; a skin tone. */

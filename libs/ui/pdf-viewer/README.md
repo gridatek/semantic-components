@@ -24,4 +24,14 @@ Also import the viewer's stylesheet in your `styles.css`: `@import '@semantic-co
 
 Then define the viewer's colours in your theme, as every colour of it — light on `:root`, dark under `.dark`: `--sc-pdf-viewer-highlight-1` to `-5`, `--sc-pdf-viewer-ink-1` to `-4` (written into the PDF: the `:root` value is the one saved, whatever the mode), `--sc-pdf-viewer-page` and `--sc-pdf-viewer-page-foreground` (reading colours, on screen only). See "Colours" and "Look" in the component's README.
 
+pdf.js's own files — its worker, scripting sandbox, fonts, CMaps (Chinese, Japanese, Korean text), wasm image decoders, colour profiles and the icons of a document's notes — are served by your app, never by a CDN. Copy them into your assets (`angular.json`); the viewer looks for them at `/pdfjs/` (`assetsUrl` for elsewhere):
+
+```json
+{
+  "glob": "{build/pdf.worker.min.mjs,build/pdf.sandbox.min.mjs,cmaps/**,standard_fonts/**,wasm/**,iccs/**,web/images/annotation-*.svg}",
+  "input": "node_modules/pdfjs-dist",
+  "output": "pdfjs"
+}
+```
+
 See `src/lib/components/pdf-viewer/README.md` for every part.

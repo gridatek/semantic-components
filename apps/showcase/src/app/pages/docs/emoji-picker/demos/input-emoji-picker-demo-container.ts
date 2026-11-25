@@ -28,6 +28,16 @@ import {
 } from '@angular/core';
 import {
   ScButton,
+  ScInput,
+  ScInputGroup,
+  ScInputGroupAddon,
+  ScPopover,
+  ScPopoverPortal,
+  ScPopoverProvider,
+  ScPopoverTrigger,
+  ScSpinner,
+} from '@semantic-components/ui';
+import {
   type ScEmoji,
   ScEmojiPicker,
   ScEmojiPickerAnnouncer,
@@ -42,15 +52,7 @@ import {
   ScEmojiPickerSearch,
   ScEmojiPickerSearchField,
   ScEmojiPickerViewport,
-  ScInput,
-  ScInputGroup,
-  ScInputGroupAddon,
-  ScPopover,
-  ScPopoverPortal,
-  ScPopoverProvider,
-  ScPopoverTrigger,
-  ScSpinner,
-} from '@semantic-components/ui';
+} from '@semantic-components/ui/emoji-picker';
 import {
   SiLoaderCircleIcon,
   SiSearchIcon,
