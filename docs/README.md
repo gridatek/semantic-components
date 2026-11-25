@@ -14,11 +14,10 @@ How the library is built, and how to work on it. The user-facing documentation i
 
 ## Guides — how we work
 
-- [component-rewrite-process.md](guides/component-rewrite-process.md) — rebuilding a component: research, a `Next` beside the old one, compare, swap in.
 - [writing-a-component-page.md](guides/writing-a-component-page.md) — a component's page: its sections, demos, routes, tests.
 - [rtl-demos.md](guides/rtl-demos.md) — the right-to-left demo every component has.
 - [shadcn-style-reference.md](guides/shadcn-style-reference.md) — finding shadcn's styles in the generated reference app, comparing them with ours, CSS variable names.
-- [reference-libraries.md](guides/reference-libraries.md) — for what shadcn doesn't have: the libraries we follow, what we took, what is open.
+- [reference-libraries.md](guides/reference-libraries.md) — how we research a component (Base UI for shadcn's, the most used libraries for the others), and for what shadcn doesn't have: the libraries we follow, what we took, what is open.
 
 ## Testing
 

@@ -5,7 +5,35 @@ another library, as its charts do to Recharts — the libraries we follow: what
 they do, what we took, and what is still open. We follow their behaviour and
 layout — never their CSS; the look stays ours (shadcn's tokens).
 
-Check them before deciding how a component behaves — don't guess.
+Check them before deciding how a component behaves — don't guess. Changes are
+made in place, on the component as it is.
+
+## How we research
+
+**A component shadcn has**: no web search, no downloads. Follow **Base UI** —
+shadcn's nova is built on it: its parts, behaviour and keyboard from Base UI (its
+docs in `shadcn-reference/presets/nova/node_modules/@base-ui/react/docs`), its
+look from shadcn's generated reference app
+([shadcn-style-reference.md](shadcn-style-reference.md)).
+
+**A component shadcn doesn't have**:
+
+1. **Who is used the most.** Weekly npm downloads of the main packages (React,
+   Angular, Vue, framework-agnostic), with a small script:
+
+   ```js
+   const names = ['react-easy-crop', 'react-image-crop', 'cropperjs', 'ngx-image-cropper'];
+   for (const name of names) {
+     const res = await fetch(`https://api.npmjs.org/downloads/point/last-week/${name}`);
+     console.log((await res.json()).downloads, name);
+   }
+   ```
+
+2. **What the best ones do.** Their features, interaction model, API shape and
+   accessibility (keyboard, screen readers) — usually the weakest point, and
+   where we can do better.
+3. **Write down what we take from each** — features and layout, never their CSS
+   — in a section of this file, with what is still open.
 
 ## Charts
 
