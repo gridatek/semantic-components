@@ -85,7 +85,8 @@ export async function expectStyledScrollbar(
  * A scrollbar thumb's contrast on what it is drawn over — WCAG 1.4.11 wants
  * 3:1 for a scrollbar the page styles. The native one (`::-webkit-scrollbar-thumb`,
  * read in Chromium only), or a drawn thumb (a Scroll Area's). Its background:
- * the first one painted from the box up (the page's white if none). Colours
+ * what is painted under it — the page's white, the boxes up from it, and its
+ * track (the native `::-webkit-scrollbar-track`, or the drawn bar). Colours
  * through a canvas: `oklch()` and transparency become the sRGB that shows.
  */
 export async function thumbContrast(
@@ -97,11 +98,23 @@ export async function thumbContrast(
     const thumbColor = drawn
       ? getComputedStyle(drawn).backgroundColor
       : getComputedStyle(el, '::-webkit-scrollbar-thumb').backgroundColor;
+    const painted = (color: string) =>
+      color !== 'rgba(0, 0, 0, 0)' && color !== 'transparent';
     const backgrounds: string[] = [];
-    for (let a: Element | null = el; a; a = a.parentElement) {
+    for (
+      let a: Element | null = drawn ? drawn.parentElement : el;
+      a;
+      a = a.parentElement
+    ) {
       const color = getComputedStyle(a).backgroundColor;
-      if (color !== 'rgba(0, 0, 0, 0)' && color !== 'transparent')
-        backgrounds.unshift(color);
+      if (painted(color)) backgrounds.unshift(color);
+    }
+    if (!drawn) {
+      const track = getComputedStyle(
+        el,
+        '::-webkit-scrollbar-track',
+      ).backgroundColor;
+      if (painted(track)) backgrounds.push(track);
     }
     const context = document.createElement('canvas').getContext('2d', {
       willReadFrequently: true,

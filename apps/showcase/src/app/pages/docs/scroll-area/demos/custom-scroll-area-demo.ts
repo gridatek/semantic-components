@@ -36,10 +36,7 @@ import {
           }
         </div>
       </div>
-      <div
-        scScrollAreaScrollbar
-        class="w-1.5 opacity-0 transition-opacity data-hovering:opacity-100 data-scrolling:opacity-100"
-      >
+      <div scScrollAreaScrollbar class="w-1.5">
         <div scScrollAreaThumb class="bg-primary"></div>
       </div>
     </div>

@@ -21,7 +21,9 @@ const MIN_THUMB = 16;
  * A scrollbar along one axis (`orientation`: vertical by default), at the
  * box's end or bottom; hidden while that axis doesn't overflow. A press on
  * its track jumps there. `data-hovering` while the pointer is over the area,
- * `data-scrolling` while it scrolls. As Base UI's ScrollArea.Scrollbar.
+ * `data-scrolling` while it scrolls. As Base UI's ScrollArea.Scrollbar, and
+ * its look: a track (the foreground at 12%), hidden at rest, shown while
+ * hovered or scrolling.
  */
 @Directive({
   selector: 'div[scScrollAreaScrollbar]',
@@ -67,11 +69,21 @@ export class ScScrollAreaScrollbar {
     Math.max(0, this.track() - this.thumbLength()),
   );
 
+  /** Shown while the pointer is over the area or it scrolls (Base UI's). */
+  private readonly shown = computed(
+    () => this.area.hovering() || this.area.scrolling(),
+  );
+
   private readonly class = computed(() =>
     cn(
-      'absolute flex touch-none p-px transition-colors select-none',
-      // Plain classes, not data-[orientation=…]: variants: those outrank
-      // yours in specificity, and cn can't merge them.
+      // Base UI's track: the theme's foreground at 12% (black on light, white
+      // on dark) — the area the thumb moves in, seen. shadcn draws none.
+      'bg-foreground/12 absolute flex touch-none p-px transition-opacity select-none',
+      // Plain classes, not data-[orientation=…] / data-hovering: variants:
+      // those outrank yours in specificity, and cn can't merge them. Hidden
+      // at rest, it fades in over the area and shows at once as it scrolls.
+      this.shown() ? 'opacity-100' : 'pointer-events-none opacity-0',
+      this.area.scrolling() && 'duration-0',
       this.orientation() === 'vertical'
         ? 'end-0 top-0 bottom-(--sc-scroll-area-corner-size) w-2.5 border-s border-s-transparent'
         : 'start-0 end-(--sc-scroll-area-corner-size) bottom-0 h-2.5 flex-col border-t border-t-transparent',

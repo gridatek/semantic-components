@@ -31,7 +31,7 @@ test.afterEach(() => {
   expect(errors).toEqual([]);
 });
 
-test('Usage: the thumb stands out — 3:1 on its box (WCAG 1.4.11), light and dark', async ({
+test('Usage: a track, the thumb 3:1 on it (WCAG 1.4.11), light and dark', async ({
   page,
   browserName,
 }) => {
@@ -39,6 +39,12 @@ test('Usage: the thumb stands out — 3:1 on its box (WCAG 1.4.11), light and da
   await page.goto('/demos/scrollbar/scrollbar-usage-demo');
   const box = page.getByRole('region', { name: 'Tags' });
   await expectStyledScrollbar(box);
+  // Its track painted: the area the thumb moves in, seen (as Base UI's).
+  expect(
+    await box.evaluate(
+      (el) => getComputedStyle(el, '::-webkit-scrollbar-track').backgroundColor,
+    ),
+  ).not.toBe('rgba(0, 0, 0, 0)');
   expect(await thumbContrast(box)).toBeGreaterThanOrEqual(3);
   // The theme's dark colours: a demo's route follows the class (as qr-code's spec).
   await page.evaluate(() => document.documentElement.classList.add('dark'));

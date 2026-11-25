@@ -35,6 +35,12 @@ test.describe('Scrollbar Page', () => {
         .getByRole('region', { name: 'Scrollbar variables' })
         .getByRole('row', { name: /--sc-scrollbar-thumb/ }),
     ).toContainText('var(--color-muted-foreground)');
+    // The track's: Base UI's, the foreground at 12%.
+    await expect(
+      page
+        .getByRole('region', { name: 'Scrollbar variables' })
+        .getByRole('row', { name: /--sc-scrollbar-track/ }),
+    ).toContainText('var(--color-foreground) 12%');
     await expect(first('Scrollbar classes')).toHaveText([
       'no-scrollbar, scrollbar-none',
       'scrollbar-gutter-stable',

@@ -214,8 +214,9 @@ export default class ScrollbarPage {
     },
     {
       name: '--sc-scrollbar-track',
-      value: 'transparent',
-      description: "The track's colour, and the corner's.",
+      value: 'color-mix(in oklab, var(--color-foreground) 12%, transparent)',
+      description:
+        "The track's colour, and the corner's: Base UI's, the foreground at 12% — the area the thumb moves in (shadcn draws none).",
     },
     {
       name: '--sc-scrollbar-radius',

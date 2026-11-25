@@ -21,18 +21,33 @@ test.afterEach(() => {
   expect(errors).toEqual([]);
 });
 
-test('Usage: the thumb stands out — 3:1 on the box (WCAG 1.4.11), light and dark', async ({
+test('Default scrollbar, as Base UI: hidden at rest, shown over the box and while it scrolls; a track, the thumb 3:1 on it (WCAG 1.4.11), light and dark', async ({
   page,
 }) => {
   await page.goto('/demos/scroll-area/scroll-area-usage-demo');
+  const scrollbar = bar(page, 'vertical');
   const thumb = page.locator('[scScrollAreaThumb]');
-  await expect(thumb).toBeAttached();
+  const opacity = () =>
+    scrollbar.evaluate((el) => getComputedStyle(el).opacity);
+  await page.mouse.move(0, 0);
+  await expect.poll(opacity).toBe('0');
+  // Over the box: it fades in.
+  await viewport(page).hover();
+  await expect.poll(opacity).toBe('1');
+  // Its track: a colour of its own, the thumb readable on it.
+  await expect(scrollbar).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
   expect(await thumbContrast(root(page), thumb)).toBeGreaterThanOrEqual(3);
   // The theme's dark colours: a demo's route follows the class (as qr-code's spec).
   await page.evaluate(() => document.documentElement.classList.add('dark'));
   await expect
     .poll(() => thumbContrast(root(page), thumb))
     .toBeGreaterThanOrEqual(3);
+  // The pointer away, it hides; scrolling shows it at once.
+  await page.mouse.move(0, 0);
+  await expect.poll(opacity).toBe('0');
+  await viewport(page).evaluate((el) => el.scrollBy(0, 40));
+  await expect(scrollbar).toHaveAttribute('data-scrolling', '');
+  await expect.poll(opacity).toBe('1');
 });
 
 test('Usage: overflows down only; one scrollbar, its thumb as long as the share in view', async ({
