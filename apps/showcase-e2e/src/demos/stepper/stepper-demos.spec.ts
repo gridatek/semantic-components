@@ -124,6 +124,31 @@ const titlesShown = (page: Page) =>
       titles.map((t) => getComputedStyle(t).position !== 'absolute'),
     );
 
+/** The widths of the connectors in sight (not the last step's, hidden). */
+const connectorWidths = (page: Page) =>
+  page
+    .locator('[scStepperConnector]')
+    .evaluateAll((connectors) =>
+      connectors
+        .map((c) => c.getBoundingClientRect().width)
+        .filter((width) => width > 0),
+    );
+
+for (const [screen, viewport] of [
+  ['a wide screen', { width: 1280, height: 720 }],
+  ['a phone', { width: 360, height: 780 }],
+] as const)
+  test(`Across, on ${screen}: the connectors all the same length, whatever the titles`, async ({
+    page,
+  }) => {
+    await page.setViewportSize(viewport);
+    await page.goto(demo('stepper-usage'));
+    await expect(page.getByRole('tab')).toHaveCount(3);
+    await expect.poll(() => connectorWidths(page)).toHaveLength(2);
+    const [first, second] = await connectorWidths(page);
+    expect(Math.abs(first - second)).toBeLessThanOrEqual(1);
+  });
+
 test('A wide list: every step’s title in sight', async ({ page }) => {
   await page.goto(demo('stepper-usage'));
   await expect(page.getByRole('tab')).toHaveCount(3);

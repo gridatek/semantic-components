@@ -86,6 +86,7 @@ No key of its own: the style's `timeline` (marker corners and ring, line colour,
 ## Keyboard and screen readers
 
 - The list is a tablist, each trigger a tab, each panel its tabpanel. Put the title in the trigger: it names the tab (hide it with `sr-only` for numbers only).
+- Across, the connectors are all the same length, whatever the titles: each step grows from its content (`flex-auto`), the room left shared equally, and only its connector takes it (as MUI's).
 - Across, in a list narrower than 28rem (a phone), only the current step's title is in sight; the others are `sr-only`, still naming their tabs (as Kong's and Wix's steppers). The list is a container (`@container/stepper-list`): it goes by its own width, not the screen's — so it needs a width from its parent (it can't size to its content). A hidden title takes no room: the trigger's second column exists only for a title or description in sight.
 - One Tab stop: the step shown's trigger, then the one focused last. Arrows, Home and End move between steps; the step shown follows when it can be reached.
 - A step that can't be reached is `aria-disabled`, still focusable.

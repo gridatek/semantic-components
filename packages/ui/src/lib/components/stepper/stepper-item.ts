@@ -88,7 +88,10 @@ export class ScStepperItem {
     cn(
       this.stepper.orientation() === 'vertical'
         ? 'flex flex-col'
-        : cn('flex items-center gap-3', !this.isLast() && 'flex-1'),
+        : // From its content (the trigger, the connector's least width), the
+          // room left shared equally: only the connector grows in it, so every
+          // connector is as long, whatever the titles (as MUI's).
+          cn('flex items-center gap-3', !this.isLast() && 'flex-auto'),
       this.classInput(),
     ),
   );
