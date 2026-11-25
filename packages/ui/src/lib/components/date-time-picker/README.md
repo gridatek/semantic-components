@@ -13,16 +13,16 @@ div[scDateTimePicker] (minuteStep, secondStep)
     │   └── div[scInputGroupAddon]
     │       └── button[scDateTimePickerTrigger] — your icon and its name
     └── ng-template[scPopoverPortal]
-        └── div[scPopover] class="w-auto flex-row gap-0 p-0" — name it
+        └── div[scPopover] class="w-auto flex-col gap-0 p-0 sm:flex-row" — name it
             ├── div[scCalendar] initialFocus [value]="dtp.date()" [minDate] [maxDate] [unavailable] (valueChange)="dtp.pickDate($event)"
-            └── div[scTimePickerColumns] [initialFocus]="false"
+            └── div[scTimePickerColumns] [initialFocus]="false" class="border-t sm:border-t-0 sm:border-s"
 ```
 
 The value, the locale, the clock and the limits are the input's: put `[formField]` on it. The calendar is yours (its header, its buttons' names); give it the picker's `date()`, `minDate()`, `maxDate()` and `unavailable()` — the input's.
 
 ## Picking
 
-A day picked in the calendar sets the input's date parts; a value picked in a column, its time's part — at once, as typing does: the value comes once both are there. The popover stays open for the other; Enter in a column, Escape or a click outside closes it, focus back on the trigger. It opens on the day (focus in the calendar), the columns at the time — as tall as the calendar, scrolling.
+A day picked in the calendar sets the input's date parts; a value picked in a column, its time's part — at once, as typing does: the value comes once both are there. The popover stays open for the other; Enter in a column, Escape or a click outside closes it, focus back on the trigger. It opens on the day (focus in the calendar), the columns at the time — beside the calendar and as tall as it; on a phone (below `sm`) under it, as wide as it and at most 14rem tall, scrolling (the calendar and the columns side by side are wider than a phone: 383px). Stacked as MUI's Date Time Picker does on mobile: the date, then the time.
 
 On the first or last day of the limits, the times outside them can't be picked; on a day outside them, none.
 

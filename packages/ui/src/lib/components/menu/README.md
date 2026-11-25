@@ -54,7 +54,7 @@ A menu of actions from a button: groups, checkbox and radio items, submenus, sho
 </div>
 ```
 
-The menu takes its trigger's direction and language (`dir`, `lang`); its submenus open at the reading end.
+The menu takes its trigger's direction and language (`dir`, `lang`); its submenus open at the reading end. A submenu sits 4px beside its menu, its first item level with the item that opens it; with no room on either side (a phone), it is pushed onto the screen whole, 5px from its edge. Its gap is a margin on its side facing the menu, not a CDK offset: the CDK pushes an overlay without its offsets and adds them after ([angular/components#23503](https://github.com/angular/components/issues/23503), closed unfixed), which put a pushed submenu past the edge by its gap.
 
 ## Keyboard
 

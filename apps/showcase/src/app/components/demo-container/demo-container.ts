@@ -222,7 +222,9 @@ export class DemoContainer {
     // Framed in the app's style (scFrame): its radius, ring and shadow.
     this.framed()
       ? 'overflow-hidden'
-      : 'flex min-h-56 items-center justify-center p-10',
+      : // Not shadcn's p-10 on a phone: 16px, the demo 280px of a 360px
+        // screen (with p-10, 232: a w-64 field was cut by the frame).
+        'flex min-h-56 items-center justify-center p-4 sm:p-10',
   );
 
   private readonly devMode = this.config.devMode;

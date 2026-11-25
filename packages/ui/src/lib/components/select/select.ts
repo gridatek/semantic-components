@@ -84,6 +84,8 @@ const positions: ConnectedPosition[] = [
           }"
           [cdkConnectedOverlayOpen]="open()"
           [cdkConnectedOverlayPositions]="positions"
+          cdkConnectedOverlayPush
+          [cdkConnectedOverlayViewportMargin]="5"
           (positionChange)="onPositionChange($event)"
         >
           <ng-container [scPortalOutlet]="portal()" />

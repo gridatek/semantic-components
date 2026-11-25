@@ -3,6 +3,7 @@ import { Directionality } from '@angular/cdk/bidi';
 import {
   CdkConnectedOverlay,
   CdkOverlayOrigin,
+  type ConnectedOverlayPositionChange,
   OverlayModule,
 } from '@angular/cdk/overlay';
 import { NgTemplateOutlet } from '@angular/common';
@@ -56,9 +57,22 @@ export type ScMenuItemVariant = 'default' | 'destructive';
         [cdkConnectedOverlayOpen]="submenuOpen()"
         [cdkConnectedOverlay]="{ origin: overlayOrigin, usePopover: 'inline' }"
         [cdkConnectedOverlayPositions]="positions()"
+        cdkConnectedOverlayPush
+        [cdkConnectedOverlayViewportMargin]="5"
         cdkAttachPopoverAsChild
+        (positionChange)="onSubmenuPosition($event)"
       >
-        <ng-container [ngTemplateOutlet]="portal.templateRef" />
+        <!-- The gap from its menu, a margin: part of the overlay's size. -->
+        <div
+          [style.margin-inline-start.px]="
+            submenuSide() === 'end' ? submenuGaps().end : 0
+          "
+          [style.margin-inline-end.px]="
+            submenuSide() === 'start' ? submenuGaps().start : 0
+          "
+        >
+          <ng-container [ngTemplateOutlet]="portal.templateRef" />
+        </div>
       </ng-template>
     }
   `,
@@ -103,39 +117,50 @@ export class ScMenuItem {
   private readonly overlay = viewChild(CdkConnectedOverlay);
 
   /**
-   * Beside its menu, at the reading end — at the other end if there is no
-   * room — a gap from the menu's edge, whatever the style's padding. The
-   * CDK mirrors start and end in right to left, not the offsets: they are
-   * turned here. Measured as the submenu opens.
+   * Its distance from this item on each side — past the menu's edge (the
+   * style's padding) and a gap: toward the reading end, and toward the
+   * start. Measured as the submenu opens.
    */
-  private readonly positions = computed(() => {
+  private readonly submenuGaps = computed(() => {
     let [right, left] = [SUBMENU_GAP, SUBMENU_GAP];
-    const rtl = this.directionality.value === 'rtl';
     if (this.submenuOpen()) {
       const item = this.menuItem.element.getBoundingClientRect();
       const menu = this.parentMenu.element.getBoundingClientRect();
       right += menu.right - item.right;
       left += item.left - menu.left;
     }
-    return [
-      {
-        originX: 'end' as const,
-        originY: 'top' as const,
-        overlayX: 'start' as const,
-        overlayY: 'top' as const,
-        offsetX: rtl ? -left : right,
-        offsetY: -this.submenuInset(),
-      },
-      {
-        originX: 'start' as const,
-        originY: 'top' as const,
-        overlayX: 'end' as const,
-        overlayY: 'top' as const,
-        offsetX: rtl ? right : -left,
-        offsetY: -this.submenuInset(),
-      },
-    ];
+    return this.directionality.value === 'rtl'
+      ? { end: left, start: right }
+      : { end: right, start: left };
   });
+
+  /** The side the CDK put it on: the reading end, or the start (no room). */
+  private readonly submenuSide = signal<'end' | 'start'>('end');
+
+  /**
+   * Beside its menu, at the reading end — at the other end if there is no
+   * room. The gap is a margin on its side facing the menu, not an offset:
+   * the CDK pushes an overlay onto the screen without its offsets, then adds
+   * them (angular/components#23503) — a submenu pushed in on a phone went
+   * past the edge by its gap. Lifted by its inset (an offset: up, away from
+   * the bottom it is pushed from), its first row level with this item.
+   */
+  private readonly positions = computed(() => [
+    {
+      originX: 'end' as const,
+      originY: 'top' as const,
+      overlayX: 'start' as const,
+      overlayY: 'top' as const,
+      offsetY: -this.submenuInset(),
+    },
+    {
+      originX: 'start' as const,
+      originY: 'top' as const,
+      overlayX: 'end' as const,
+      overlayY: 'top' as const,
+      offsetY: -this.submenuInset(),
+    },
+  ]);
 
   private readonly class = computed(() =>
     cn(
@@ -186,6 +211,12 @@ export class ScMenuItem {
         queueMicrotask(() => this.overlay()?.overlayRef?.updatePosition());
       },
     });
+  }
+
+  private onSubmenuPosition(change: ConnectedOverlayPositionChange): void {
+    this.submenuSide.set(
+      change.connectionPair.overlayX === 'start' ? 'end' : 'start',
+    );
   }
 
   private keydown(event: KeyboardEvent): void {

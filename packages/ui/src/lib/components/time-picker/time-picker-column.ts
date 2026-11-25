@@ -92,8 +92,12 @@ export class ScTimePickerColumn {
   private readonly class = computed(() =>
     cn(
       'bg-popover relative flex min-w-14 flex-col gap-0.5 overflow-y-auto overscroll-contain p-1 outline-none',
-      // Beside a calendar, as tall as it (no height of its own); else at most 14rem.
-      this.picker.fillHeight ? 'h-0 min-h-full' : 'max-h-56',
+      // In a date-time picker: on a phone (below sm) under the calendar,
+      // sharing its width, at most 14rem; from sm beside it, as tall as it (no
+      // height of its own). Else at most 14rem.
+      this.picker.fillHeight
+        ? 'max-h-56 flex-1 sm:h-0 sm:min-h-full sm:max-h-none sm:flex-none'
+        : 'max-h-56',
       this.classInput(),
     ),
   );

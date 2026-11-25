@@ -46,6 +46,8 @@ export type ScMenuSide = 'top' | 'bottom';
         [cdkConnectedOverlayOpen]="expanded()"
         [cdkConnectedOverlay]="{ origin, usePopover: 'inline' }"
         [cdkConnectedOverlayPositions]="positions()"
+        cdkConnectedOverlayPush
+        [cdkConnectedOverlayViewportMargin]="5"
         cdkAttachPopoverAsChild
       >
         <ng-container [ngTemplateOutlet]="menuPortal().templateRef" />

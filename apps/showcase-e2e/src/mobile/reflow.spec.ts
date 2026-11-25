@@ -9,10 +9,11 @@ import { type Page, expect, test } from '../test';
  *
  * - nothing wider than the screen: the page never scrolls sideways and
  *   nothing is cut off at its edge (WCAG 1.4.10 Reflow);
- * - a demo in the width the docs give it: their frame's padding (`p-10`) and
- *   margin take 64px a side — a demo wider than that is cut by its frame.
- *   On its route the shell's gutter is set to those 64px, the screen still
- *   360px wide (a full-page demo has the whole screen, as on its route);
+ * - a demo not cut by its frame: on a phone the docs' margin (24px) and the
+ *   frame's padding (`p-4`, 16px) leave it 280px. On its route the shell's
+ *   gutter is set to those 40px (the screen still 360px wide), and the demo
+ *   may reach into the padding, not past the frame's border, where it clips
+ *   (a full-page demo has the whole screen, as on its route);
  * - every overlay a demo opens (`aria-haspopup`, a combobox: a popover, a
  *   menu, a select, a dialog, a sheet) on the screen, whole.
  *
@@ -23,8 +24,16 @@ import { type Page, expect, test } from '../test';
  */
 
 const WIDTH = 360;
-/** The docs' page margin (24px) and an example frame's padding (40px). */
-const DOCS_GUTTER = 64;
+/**
+ * The docs' page margin (24px) and an example frame's padding on a phone
+ * (16px, `p-4`; `p-10` from `sm`): a demo there has 280px of 360.
+ */
+const DOCS_GUTTER = 40;
+/**
+ * The frame's padding: a demo laid out in its 280px may reach into it —
+ * nothing is cut — but not past it, where the frame clips (`overflow-hidden`).
+ */
+const FRAME_PADDING = 16;
 /** The most overlays opened in a demo: the first ones. */
 const MAX_TRIGGERS = 8;
 
@@ -88,11 +97,32 @@ const demos = routesOf('routes/demos-routes.ts');
 test.describe('On a phone', { tag: '@mobile' }, () => {
   test.use({ viewport: { width: WIDTH, height: 780 } });
 
+  test("the docs give a demo the screen less the gutter: an example's frame on a phone", async ({
+    page,
+  }) => {
+    await open(page, '/docs/components/button');
+    const preview = page
+      .locator('app-demo-container [scFrame] > :first-child')
+      .first();
+    await expect(preview).toBeVisible();
+    const content = await preview.evaluate((el) => {
+      const style = getComputedStyle(el);
+      return (
+        el.getBoundingClientRect().width -
+        parseFloat(style.paddingLeft) -
+        parseFloat(style.paddingRight)
+      );
+    });
+    expect(Math.round(content)).toBe(WIDTH - 2 * DOCS_GUTTER);
+  });
+
   for (const { path } of pages)
     test(`${path}: nothing wider than the screen`, async ({ page }) => {
       await open(page, path);
       await expect
-        .poll(() => page.evaluate(measure, { demo: false }), { timeout: 5_000 })
+        .poll(() => page.evaluate(measure, { demo: false, allowance: 0 }), {
+          timeout: 5_000,
+        })
         .toEqual([]);
     });
 
@@ -105,9 +135,16 @@ test.describe('On a phone', { tag: '@mobile' }, () => {
       test.setTimeout(120_000);
       await open(page, path, gutter);
       await expect
-        .poll(() => page.evaluate(measure, { demo: !fullPage }), {
-          timeout: 5_000,
-        })
+        .poll(
+          () =>
+            page.evaluate(measure, {
+              demo: !fullPage,
+              allowance: FRAME_PADDING,
+            }),
+          {
+            timeout: 5_000,
+          },
+        )
         .toEqual([]);
       expect(await overlayProblems(page, path, gutter)).toEqual([]);
     });
@@ -241,7 +278,13 @@ function overlayCount(): number {
  * docs' `main`) — and, for a demo, past the width it is given: the shell's
  * gutter (its padding). Only the outermost of each: its children follow it.
  */
-function measure({ demo }: { demo: boolean }): string[] {
+function measure({
+  demo,
+  allowance,
+}: {
+  demo: boolean;
+  allowance: number;
+}): string[] {
   const width = document.documentElement.clientWidth;
   const root = document.querySelector('app-root');
   const content = root?.querySelector(':scope > router-outlet + *');
@@ -309,15 +352,15 @@ function measure({ demo }: { demo: boolean }): string[] {
   const box = root.getBoundingClientRect();
   const style = getComputedStyle(root);
   const area: [number, number] = [
-    box.left + parseFloat(style.paddingLeft),
-    box.right - parseFloat(style.paddingRight),
+    box.left + parseFloat(style.paddingLeft) - allowance,
+    box.right - parseFloat(style.paddingRight) + allowance,
   ];
   const inDemo = [content, ...content.querySelectorAll('*')].filter(
     (element) => !fixed(element),
   );
   return [
     ...screen,
-    ...past(inDemo, new Set([root]), area).map((p) => `the demo's width: ${p}`),
+    ...past(inDemo, new Set([root]), area).map((p) => `cut by its frame: ${p}`),
   ];
 }
 

@@ -193,6 +193,49 @@ test('Submenu: ArrowRight opens it on its first item, ArrowLeft closes it; neste
   await expect.poll(() => openMenuCount(page)).toBe(0);
 });
 
+/** Opens the standalone demo's Share submenu by the keyboard: its menu and the submenu. */
+async function openShare(page: Page) {
+  await openStill(page, demo('standalone'));
+  const menu = page.getByRole('menu', { name: 'Edit' });
+  // Each key once the state it needs is there (as the Standalone test).
+  await expect(menu).toBeVisible();
+  await page.keyboard.press('Tab');
+  await expect(page.getByRole('menuitem', { name: 'Cut' })).toBeFocused();
+  await press(page, 'End');
+  await press(page, 'ArrowUp');
+  await expect(page.getByRole('menuitem', { name: 'Share' })).toBeFocused();
+  await press(page, 'ArrowRight');
+  await expect(page.getByRole('menuitem', { name: 'Email' })).toBeFocused();
+  return {
+    menu,
+    // In the menu's DOM (a popover attached as a child): not the one named Edit.
+    submenu: page.locator('[role="menu"]:not([aria-label="Edit"])'),
+  };
+}
+
+test('Submenu beside its menu: 4px from its edge, its first item level with the item that opens it', async ({
+  page,
+}) => {
+  const { menu, submenu } = await openShare(page);
+  const [m, s] = [await box(menu), await box(submenu)];
+  expect(s.x - (m.x + m.width)).toBeCloseTo(4, 0);
+  const [share, email] = [
+    await box(page.getByRole('menuitem', { name: 'Share' })),
+    await box(page.getByRole('menuitem', { name: 'Email' })),
+  ];
+  expect(email.y).toBeCloseTo(share.y, 0);
+});
+
+test('Submenu on a phone: no room on either side, it is pushed onto the screen whole, 5px from its edge', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  const { submenu } = await openShare(page);
+  const s = await box(submenu);
+  expect(s.x).toBeGreaterThanOrEqual(5 - 0.5);
+  expect(s.x + s.width).toBeLessThanOrEqual(360 - 5 + 0.5);
+});
+
 test('Standalone: shown with no trigger, nothing highlighted until used; one tab stop; Enter chooses; its submenu', async ({
   page,
 }) => {

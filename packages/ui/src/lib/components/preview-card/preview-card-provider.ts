@@ -49,6 +49,8 @@ export type ScPreviewCardSide = ScOverlayLogicalSide;
         [cdkConnectedOverlayOrigin]="origin"
         [cdkConnectedOverlayOpen]="open()"
         [cdkConnectedOverlayPositions]="positions()"
+        cdkConnectedOverlayPush
+        [cdkConnectedOverlayViewportMargin]="5"
         [cdkConnectedOverlayDisableClose]="true"
         (overlayOutsideClick)="onOutsideClick($event)"
         (overlayKeydown)="onKeydown($event)"

@@ -91,7 +91,7 @@ import {
               class="w-auto gap-0 p-0"
               aria-label="Choose a date and time"
             >
-              <div class="flex">
+              <div class="flex flex-col sm:flex-row">
                 <div
                   scCalendar
                   initialFocus
@@ -116,7 +116,7 @@ import {
                 <div
                   scTimePickerColumns
                   [initialFocus]="false"
-                  class="border-s"
+                  class="border-t sm:border-s sm:border-t-0"
                 ></div>
               </div>
               <div class="flex justify-end gap-2 border-t p-2">

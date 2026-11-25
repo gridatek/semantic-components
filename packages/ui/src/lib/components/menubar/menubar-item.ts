@@ -42,6 +42,8 @@ import { ScMenubar } from './menubar';
         [cdkConnectedOverlayOpen]="rendered()"
         [cdkConnectedOverlay]="{ origin: overlayOrigin, usePopover: 'inline' }"
         [cdkConnectedOverlayPositions]="positions()"
+        cdkConnectedOverlayPush
+        [cdkConnectedOverlayViewportMargin]="5"
         cdkAttachPopoverAsChild
       >
         <ng-container [ngTemplateOutlet]="portal.templateRef" />

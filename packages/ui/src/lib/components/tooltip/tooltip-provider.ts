@@ -52,6 +52,8 @@ export type ScTooltipSide = ScOverlayLogicalSide;
         [cdkConnectedOverlayOrigin]="trigger.overlayOrigin"
         [cdkConnectedOverlayOpen]="open()"
         [cdkConnectedOverlayPositions]="positions()"
+        cdkConnectedOverlayPush
+        [cdkConnectedOverlayViewportMargin]="5"
         [cdkConnectedOverlayDisableClose]="true"
         (overlayKeydown)="onKeydown($event)"
         (positionChange)="onPositionChange($event)"

@@ -74,6 +74,8 @@ export type ScContextMenuSide = ScOverlayLogicalSide;
         backdropClass: 'cdk-overlay-transparent-backdrop',
       }"
       [cdkConnectedOverlayPositions]="positions()"
+      cdkConnectedOverlayPush
+      [cdkConnectedOverlayViewportMargin]="5"
       (backdropClick)="close()"
       (overlayKeydown)="onOverlayKeydown($event)"
       cdkAttachPopoverAsChild

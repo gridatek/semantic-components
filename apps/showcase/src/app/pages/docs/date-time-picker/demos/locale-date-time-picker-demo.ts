@@ -65,7 +65,7 @@ import {
             <ng-template scPopoverPortal>
               <div
                 scPopover
-                class="w-auto flex-row gap-0 p-0"
+                class="w-auto flex-col gap-0 p-0 sm:flex-row"
                 aria-label="Datum und Uhrzeit wählen"
               >
                 <div
@@ -92,7 +92,7 @@ import {
                 <div
                   scTimePickerColumns
                   [initialFocus]="false"
-                  class="border-s"
+                  class="border-t sm:border-s sm:border-t-0"
                 ></div>
               </div>
             </ng-template>

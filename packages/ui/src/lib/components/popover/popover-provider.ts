@@ -61,6 +61,8 @@ export type ScPopoverModal = boolean | 'trap-focus';
         [cdkConnectedOverlayOrigin]="origin"
         [cdkConnectedOverlayOpen]="open()"
         [cdkConnectedOverlayPositions]="positions()"
+        cdkConnectedOverlayPush
+        [cdkConnectedOverlayViewportMargin]="5"
         [cdkConnectedOverlayDisableClose]="true"
         [cdkConnectedOverlayHasBackdrop]="modal() === true"
         cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"

@@ -62,6 +62,49 @@ test.describe('Usage', () => {
     ).toBeFocused();
   });
 
+  test('a wide screen: the columns beside the calendar, as tall as it', async ({
+    page,
+  }) => {
+    await open(page);
+    const calendar = await page.locator('[data-slot=calendar]').boundingBox();
+    const columns = await page
+      .locator('[data-slot=time-picker-columns]')
+      .boundingBox();
+    expect(columns?.x).toBeGreaterThanOrEqual(
+      (calendar?.x ?? 0) + (calendar?.width ?? 0) - 1,
+    );
+    expect(columns?.height).toBeCloseTo(calendar?.height ?? 0, 0);
+  });
+
+  test('a phone: the time under the calendar, the popover whole on the screen; the columns as wide as the calendar, scrolling', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 360, height: 780 });
+    await open(page);
+    const popover = await page.locator('[data-slot=popover]').boundingBox();
+    expect(popover?.x).toBeGreaterThanOrEqual(5 - 0.5);
+    expect((popover?.x ?? 0) + (popover?.width ?? 0)).toBeLessThanOrEqual(
+      360 - 5 + 0.5,
+    );
+    expect((popover?.y ?? 0) + (popover?.height ?? 0)).toBeLessThanOrEqual(780);
+    const calendar = await page.locator('[data-slot=calendar]').boundingBox();
+    const columns = page.locator('[data-slot=time-picker-columns]');
+    const box = await columns.boundingBox();
+    expect(box?.y).toBeGreaterThanOrEqual(
+      (calendar?.y ?? 0) + (calendar?.height ?? 0) - 1,
+    );
+    expect(box?.width).toBeCloseTo(calendar?.width ?? 0, 0);
+    // Tall enough to pick from, and the hours scroll.
+    expect(box?.height).toBeGreaterThan(120);
+    await expect
+      .poll(() =>
+        column(page, 'hour').evaluate(
+          (el) => el.scrollHeight > el.clientHeight,
+        ),
+      )
+      .toBe(true);
+  });
+
   test('Escape closes, focus back on the button', async ({ page }) => {
     await open(page);
     await expect(day(page, '2026-11-02')).toBeFocused();
