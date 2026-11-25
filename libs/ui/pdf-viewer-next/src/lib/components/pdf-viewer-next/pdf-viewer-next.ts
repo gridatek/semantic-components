@@ -25,6 +25,13 @@ import {
   version,
 } from 'pdfjs-dist';
 import { moveCaret } from './pdf-viewer-next-caret-browsing';
+import {
+  HIGHLIGHT_COLORS,
+  INK_COLORS,
+  colorSetting,
+  resolveColor,
+  resolvePageColors,
+} from './pdf-viewer-next-colors';
 import type {
   ScPdfJsComment,
   ScPdfJsEditor,
@@ -125,6 +132,13 @@ function extractMapped(
   };
   return doc.extractPages(pageInfos, copyLevels);
 }
+
+/** The editor settings that are colours. */
+const COLOR_PARAMS = new Set<number>([
+  EDITOR_PARAMS.HIGHLIGHT_COLOR,
+  EDITOR_PARAMS.FREETEXT_COLOR,
+  EDITOR_PARAMS.INK_COLOR,
+]);
 
 /** A pdf.js mode number by our name. */
 function modeName<T extends string>(
@@ -347,34 +361,37 @@ export class ScPdfViewerNext {
    */
   readonly enablePermissions = input(false);
   /**
-   * Colours to draw the pages with (e.g. a dark reading mode). Unset, the
-   * pages follow the system's high-contrast mode (forced colours), drawn
-   * in its `CanvasText` on `Canvas`, as in pdf.js.
+   * Colours to draw the pages with (a reading mode), by name: `sepia` draws
+   * them in your theme's `--sc-pdf-viewer-sepia-foreground` on
+   * `--sc-pdf-viewer-sepia-background`. `''`: the document's own — or, in
+   * the system's high-contrast mode (forced colours), its `CanvasText` on
+   * `Canvas`, as in pdf.js.
    */
-  readonly pageColors = input<ScPdfPageColors | null>(null);
+  readonly pageColors = model('');
   /**
    * The browser's caret browsing (F7) is on: ↑ / ↓ move the caret a line
    * in the pages' text, as pdf.js does. The page can't tell, so say when
    * your app knows (as pdf.js's `supportsCaretBrowsingMode`).
    */
-  readonly caretBrowsing = input(false);
+  readonly caretBrowsing = model(false);
 
   /** The system's high-contrast mode is on. */
   private readonly forcedColors = signal(false);
 
-  /** The colours pages are drawn with, or null for their own. */
+  /**
+   * The colours pages are drawn with (CSS — the theme's variables), or null
+   * for their own. The real colours are read where they're drawn.
+   */
   readonly appliedPageColors = computed((): ScPdfPageColors | null => {
-    const colors =
-      this.pageColors() ??
-      (this.forcedColors()
-        ? { foreground: 'CanvasText', background: 'Canvas' }
-        : null);
-    // pdf.js needs both, and real colours.
-    return colors &&
-      typeof CSS !== 'undefined' &&
-      CSS.supports('color', colors.foreground) &&
-      CSS.supports('color', colors.background)
-      ? colors
+    const name = this.pageColors();
+    if (name) {
+      return {
+        foreground: `var(--sc-pdf-viewer-${name}-foreground)`,
+        background: `var(--sc-pdf-viewer-${name}-background)`,
+      };
+    }
+    return this.forcedColors()
+      ? { foreground: 'CanvasText', background: 'Canvas' }
       : null;
   });
   /** URL of `pdf.sandbox.mjs`, if not under `assetsUrl`. */
@@ -594,7 +611,10 @@ export class ScPdfViewerNext {
       this.thumbnailsDocument = doc;
     }
     const rotation = this.rotation();
-    const pageColors = this.appliedPageColors();
+    const pageColors = resolvePageColors(
+      this.appliedPageColors(),
+      this.document.documentElement,
+    );
     const key = `${doc.pagesMapper.getPageId(pageNumber)}:${width}:${rotation}:${JSON.stringify(pageColors)}`;
     let thumbnail = this.thumbnails.get(key);
     if (!thumbnail) {
@@ -712,14 +732,26 @@ export class ScPdfViewerNext {
   readonly findTotalMatches = signal(0);
   // Editor state
   readonly editorMode = signal<ScPdfEditorMode>('none');
+  /** The tool whose settings to show (highlight, text, drawing), or null. */
+  readonly toolSettings = computed(() => {
+    const mode = this.editorMode();
+    return mode === 'highlight' || mode === 'freetext' || mode === 'ink'
+      ? mode
+      : null;
+  });
   // Editor params
-  /** pdf.js's default highlight yellow. */
-  readonly highlightColor = signal('#FFFF98');
+  /**
+   * Colours are CSS colours — the theme's variables: `var(--sc-pdf-viewer-highlight-1)`
+   * to `-5` for highlights (pdf.js's yellow, green, blue, pink, red),
+   * `var(--sc-pdf-viewer-ink-1)` to `-4` for text and drawings. pdf.js gets
+   * them as real colours (they're written into the PDF).
+   */
+  readonly highlightColor = signal<string>(HIGHLIGHT_COLORS[0]);
   readonly highlightThickness = signal(12);
   readonly highlightShowAll = signal(true);
-  readonly freetextColor = signal('#000000');
+  readonly freetextColor = signal<string>(INK_COLORS[0]);
   readonly freetextSize = signal(12);
-  readonly inkColor = signal('#000000');
+  readonly inkColor = signal<string>(INK_COLORS[0]);
   readonly inkThickness = signal(1);
   readonly inkOpacity = signal(1);
 
@@ -902,6 +934,21 @@ export class ScPdfViewerNext {
     });
 
     this.watchEditing();
+
+    // As pdf.js's comment mode: the comments show in the sidebar — in
+    // comment mode, while one is written, when one is picked.
+    effect(() => {
+      if (
+        this.editorMode() === 'comment' ||
+        this.pendingComment() ||
+        this.activeCommentId()
+      ) {
+        untracked(() => {
+          this.sidebarView.set('comments');
+          this.sidebarOpen.set(true);
+        });
+      }
+    });
 
     this.destroyRef.onDestroy(() => {
       if (this.cleanupTimeout) clearTimeout(this.cleanupTimeout);
@@ -1578,6 +1625,9 @@ export class ScPdfViewerNext {
     this.pageClipboard.set(null);
   }
 
+  /** The name of the file `insertFile` couldn't insert (not a PDF), until the next one. */
+  readonly insertFailed = signal<string | null>(null);
+
   /** Inserts the pages of another PDF after `afterPage` (merging files) — undoable. */
   async insertFile(
     file: File | Uint8Array,
@@ -1585,6 +1635,7 @@ export class ScPdfViewerNext {
   ): Promise<boolean> {
     const doc = this.pdfDocument();
     if (!doc || this.organizing()) return false;
+    this.insertFailed.set(null);
     const data =
       file instanceof Uint8Array
         ? file
@@ -1599,7 +1650,8 @@ export class ScPdfViewerNext {
       count = other.numPages;
       other.loadingTask.destroy();
     } catch {
-      // Not a PDF (or unreadable): the consumer says so.
+      // Not a PDF (or unreadable): you say so.
+      this.insertFailed.set(file instanceof File ? file.name : '');
       return false;
     }
     this.organizing.set(true);
@@ -2442,7 +2494,7 @@ export class ScPdfViewerNext {
     commentDialogElement: () =>
       this.containerElement?.nativeElement ??
       (this.engine()?.viewer.container as HTMLElement),
-    editComment: (editor) => this.editComment(editor),
+    editComment: (editor) => this.askComment(editor),
     setComments: (comments) => this.setComments(comments),
     updateComment: (comment) => this.putComment(comment),
     removeComments: (ids) => this.dropComments(ids),
@@ -2483,9 +2535,21 @@ export class ScPdfViewerNext {
             return;
           }
           // An annotation selected (its settings), or changed on the page.
-          for (const [type, value] of details) {
+          for (const [type, reported] of details) {
+            const setting = this.editorSettings.find(([t]) => t === type)?.[1];
+            const value =
+              setting && COLOR_PARAMS.has(type)
+                ? colorSetting(
+                    String(reported),
+                    String(untracked(setting)),
+                    type === EDITOR_PARAMS.HIGHLIGHT_COLOR
+                      ? HIGHLIGHT_COLORS
+                      : INK_COLORS,
+                    engine.viewer.container,
+                  )
+                : reported;
             this.editorParams.set(type, value);
-            this.editorSettings.find(([t]) => t === type)?.[1].set(value);
+            setting?.set(value);
           }
         },
       ),
@@ -2552,7 +2616,9 @@ export class ScPdfViewerNext {
     engine.eventBus.dispatch('switchannotationeditorparams', {
       source: this,
       type,
-      value,
+      value: COLOR_PARAMS.has(type)
+        ? (resolveColor(String(value), engine.viewer.container) ?? value)
+        : value,
     });
   }
 
@@ -2794,8 +2860,14 @@ export class ScPdfViewerNext {
     );
   }
 
+  /** Edits a comment (one made in the viewer) in the comment form. */
+  editComment(id: string): void {
+    const editor = this.commentsUiManager?.getEditor(id);
+    if (editor) this.askComment(editor);
+  }
+
   /** pdf.js's comment button on an annotation: its comment, to write. */
-  private editComment(editor: ScPdfJsEditor): void {
+  private askComment(editor: ScPdfJsEditor): void {
     this.commentEditor = editor;
     const comment = editor.comment;
     this.pendingComment.set({

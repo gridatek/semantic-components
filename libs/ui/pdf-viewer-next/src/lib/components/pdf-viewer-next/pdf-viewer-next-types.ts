@@ -178,6 +178,14 @@ export interface ScPdfPageColors {
 
 /** A viewer setting the consumer's controls bind to (`scPdfViewerNextSetting`). */
 export type ScPdfViewerNextSettingKey =
+  | 'editorMode'
+  | 'sidebarView'
+  | 'pageColors'
+  | 'findHighlightAll'
+  | 'findMatchCase'
+  | 'findEntireWord'
+  | 'findMatchDiacritics'
+  | 'caretBrowsing'
   | 'cursorTool'
   | 'scrollMode'
   | 'spreadMode'
@@ -189,3 +197,16 @@ export type ScPdfViewerNextSettingKey =
   | 'inkColor'
   | 'inkThickness'
   | 'inkOpacity';
+
+/** What a menu item does (its value, in a `scPdfViewerNextMenu`). */
+export type ScPdfViewerNextCommand =
+  | 'open'
+  | 'download'
+  | 'print'
+  | 'presentation'
+  | 'fullscreen'
+  | 'first-page'
+  | 'last-page'
+  | 'rotate-right'
+  | 'rotate-left'
+  | 'properties';

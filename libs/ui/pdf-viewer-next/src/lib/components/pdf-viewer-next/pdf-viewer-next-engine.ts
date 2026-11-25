@@ -1,7 +1,6 @@
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import type * as PdfViewerModule from 'pdfjs-dist/web/pdf_viewer.mjs';
 import type { editorManagers } from './pdf-viewer-next-editing';
-import { HIGHLIGHT_COLORS } from './pdf-viewer-next-editing';
 import type { ScPdfScrollMode, ScPdfSpreadMode } from './pdf-viewer-next-types';
 
 /** pdf.js's viewer components (`pdfjs-dist/web/pdf_viewer.mjs`). */
@@ -82,7 +81,10 @@ export interface ScPdfEngineOptions {
   enableScripting: boolean;
   enableAutoLinking: boolean;
   enablePermissions: boolean;
+  /** Real colours (the theme's, read where the pages are). */
   pageColors: { foreground: string; background: string } | null;
+  /** pdf.js's highlight colours (`yellow=#FFFF98,…`), from the theme's. */
+  highlightColors: string;
   history: ScPdfHistoryAdapter;
   /** Where pdf.js announces what its editors do (an alert region). */
   viewerAlert: HTMLElement;
@@ -168,7 +170,7 @@ export class ScPdfEngine {
       viewerAlert: options.viewerAlert,
       // Its annotation editors (pdf.js turns them off when the document
       // forbids changes), with the viewer's dialogs and undo bar.
-      annotationEditorHighlightColors: HIGHLIGHT_COLORS,
+      annotationEditorHighlightColors: options.highlightColors,
       ...options.managers,
     } as ConstructorParameters<ScPdfViewerModule['PDFViewer']>[0]);
     this.linkService.setViewer(this.viewer);

@@ -19,7 +19,6 @@ import {
   ScTooltipTrigger,
 } from '@semantic-components/ui';
 import {
-  type ScPdfPageColors,
   ScPdfViewerNext,
   ScPdfViewerNextBack,
   ScPdfViewerNextCanvas,
@@ -29,6 +28,7 @@ import {
   ScPdfViewerNextLoading,
   ScPdfViewerNextNav,
   ScPdfViewerNextPageInput,
+  ScPdfViewerNextSetting,
   ScPdfViewerNextSpacer,
   ScPdfViewerNextToolbar,
 } from '@semantic-components/ui/pdf-viewer-next';
@@ -40,11 +40,6 @@ import {
 import { cn } from 'cn';
 
 /** Your reading modes: the pages' text and lines, on a background. */
-const READING_MODES: Record<string, ScPdfPageColors | null> = {
-  default: null,
-  sepia: { foreground: '#5b4636', background: '#f4ecd8' },
-  dark: { foreground: '#e4e4e7', background: '#18181b' },
-};
 
 /**
  * Reading: Back / Forward after jumping to a page, page colours (a reading
@@ -78,6 +73,7 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
     SiArrowRightIcon,
     SiLoaderCircleIcon,
     ScField,
+    ScPdfViewerNextSetting,
   ],
   template: `
     <div
@@ -85,8 +81,6 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
       class="size-full"
       src="/pdf/handbook.pdf"
       fileName="handbook"
-      [pageColors]="pageColors()"
-      [caretBrowsing]="caretBrowsing()"
       #viewer="scPdfViewerNext"
     >
       <div scPdfViewerNextContainer class="flex size-full flex-col">
@@ -125,20 +119,15 @@ const READING_MODES: Record<string, ScPdfPageColors | null> = {
             variant="outline"
             size="sm"
             aria-label="Page colours"
-            [value]="[readingMode()]"
-            (valueChange)="setReadingMode($event[0])"
+            scPdfViewerNextSetting="pageColors"
           >
-            <button scToggleGroupItem value="default">Default</button>
+            <button scToggleGroupItem value="">Default</button>
             <button scToggleGroupItem value="sepia">Sepia</button>
             <button scToggleGroupItem value="dark">Dark</button>
           </div>
           <label scField orientation="horizontal" class="text-sm">
             Caret browsing
-            <input
-              scSwitch
-              [checked]="caretBrowsing()"
-              (change)="setCaretBrowsing($event)"
-            />
+            <input scSwitch scPdfViewerNextSetting="caretBrowsing" />
           </label>
         </div>
         <div scPdfViewerNextContent>
@@ -161,22 +150,4 @@ export class PdfViewerNextReadingDemo {
   private readonly class = computed(() =>
     cn('block h-dvh w-full', this.classInput()),
   );
-
-  private readonly readingMode = signal('default');
-  private readonly pageColors = computed(
-    () => READING_MODES[this.readingMode()] ?? null,
-  );
-  /** Turn on with the browser's caret browsing (F7). */
-  private readonly caretBrowsing = signal(false);
-
-  private setReadingMode(value: unknown): void {
-    const [mode] = Array.isArray(value) ? value : [value];
-    if (typeof mode === 'string' && mode in READING_MODES) {
-      this.readingMode.set(mode);
-    }
-  }
-
-  private setCaretBrowsing(event: Event): void {
-    this.caretBrowsing.set((event.target as HTMLInputElement).checked);
-  }
 }

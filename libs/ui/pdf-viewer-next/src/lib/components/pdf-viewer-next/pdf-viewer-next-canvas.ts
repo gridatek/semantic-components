@@ -14,6 +14,10 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { SC_PDF_VIEWER_NEXT } from './pdf-viewer-next';
+import {
+  highlightColorsOption,
+  resolvePageColors,
+} from './pdf-viewer-next-colors';
 import type { ScPdfViewerModule } from './pdf-viewer-next-engine';
 import { ScPdfEngine, loadViewerModule } from './pdf-viewer-next-engine';
 import { ScPdfViewerNextPan } from './pdf-viewer-next-pan';
@@ -166,6 +170,14 @@ export class ScPdfViewerNextCanvas {
         () =>
           new ScPdfEngine(module, {
             ...options,
+            // The theme's colours, as real colours.
+            pageColors: resolvePageColors(
+              options.pageColors,
+              this.container().nativeElement,
+            ),
+            highlightColors: highlightColorsOption(
+              this.container().nativeElement,
+            ),
             container: this.container().nativeElement,
             viewer: this.viewer().nativeElement,
             history: this.pdfViewer.historyAdapter,

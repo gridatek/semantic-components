@@ -21,6 +21,8 @@ export { ScPdfViewerNextRotateRight } from './pdf-viewer-next-rotate-right';
 export { ScPdfViewerNextDownload } from './pdf-viewer-next-download';
 export { ScPdfViewerNextPrint } from './pdf-viewer-next-print';
 export { ScPdfViewerNextFullscreen } from './pdf-viewer-next-fullscreen';
+export { ScPdfViewerNextPresentation } from './pdf-viewer-next-presentation';
+export { ScPdfViewerNextOpenFile } from './pdf-viewer-next-open-file';
 export { ScPdfViewerNextSpacer } from './pdf-viewer-next-spacer';
 
 // Content
@@ -39,6 +41,7 @@ export { ScPdfViewerNextRetry } from './pdf-viewer-next-retry';
 
 // Find components
 export { ScPdfViewerNextFindToggle } from './pdf-viewer-next-find-toggle';
+export { ScPdfViewerNextMenu } from './pdf-viewer-next-menu';
 export { ScPdfViewerNextFindbar } from './pdf-viewer-next-findbar';
 export { ScPdfViewerNextFindInput } from './pdf-viewer-next-find-input';
 export { ScPdfViewerNextFindNext } from './pdf-viewer-next-find-next';
@@ -71,6 +74,7 @@ export type {
 export { ScPdfViewerNextSignatureName } from './pdf-viewer-next-signature-name';
 export { ScPdfViewerNextSignaturePad } from './pdf-viewer-next-signature-pad';
 export { ScPdfViewerNextSignatureImage } from './pdf-viewer-next-signature-image';
+export { ScPdfViewerNextSignatureMode } from './pdf-viewer-next-signature-mode';
 export { ScPdfViewerNextSignatureDescription } from './pdf-viewer-next-signature-description';
 export { ScPdfViewerNextSignatureAdd } from './pdf-viewer-next-signature-add';
 export { ScPdfViewerNextSignatureClear } from './pdf-viewer-next-signature-clear';
@@ -85,8 +89,10 @@ export { ScPdfViewerNextCommentInput } from './pdf-viewer-next-comment-input';
 export { ScPdfViewerNextCommentCancel } from './pdf-viewer-next-comment-cancel';
 export { ScPdfViewerNextCommentShow } from './pdf-viewer-next-comment-show';
 export { ScPdfViewerNextCommentRemove } from './pdf-viewer-next-comment-remove';
+export { ScPdfViewerNextCommentEdit } from './pdf-viewer-next-comment-edit';
 
 // Sidebar
+export { ScPdfViewerNextSidebarToggle } from './pdf-viewer-next-sidebar-toggle';
 export { ScPdfViewerNextSidebarResizer } from './pdf-viewer-next-sidebar-resizer';
 export { ScPdfViewerNextLayer } from './pdf-viewer-next-layer';
 export { ScPdfViewerNextAttachment } from './pdf-viewer-next-attachment';
@@ -121,6 +127,7 @@ export { ScPdfViewerNextUndoDismiss } from './pdf-viewer-next-undo-dismiss';
 // Types
 export type {
   ScPdfViewerNextSettingKey,
+  ScPdfViewerNextCommand,
   ScPdfLayer,
   ScPdfAttachment,
   ScPdfPageColors,

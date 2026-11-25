@@ -29,10 +29,6 @@ export const EDITOR_PARAMS = {
   HIGHLIGHT_SHOW_ALL: 34,
 } as const;
 
-/** pdf.js's highlight colours (its `highlightEditorColors` option). */
-export const HIGHLIGHT_COLORS =
-  'yellow=#FFFF98,green=#53FFBC,blue=#80EBFF,pink=#FFCBE6,red=#FF4F5F';
-
 /** A placed signature's height on the page, in PDF units (as pdf.js). */
 export const SIGNATURE_HEIGHT = 40;
 

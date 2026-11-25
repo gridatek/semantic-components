@@ -27,7 +27,7 @@ export const SC_PDF_SIGNATURE_FONT =
 /**
  * Creates a signature — typed, drawn or from an image — in the `signature`
  * dialog (`#signature="scPdfViewerNextSignatureForm"`, e.g. on its `scDialog`).
- * Bind `signature.mode()` to tabs (`signature.setMode($event)`), and put
+ * Put `scPdfViewerNextSignatureMode` on tabs (type, draw, image), and
  * `scPdfViewerNextSignatureName`, `scPdfViewerNextSignaturePad` (with a slider on
  * `signature.thickness`), `scPdfViewerNextSignatureImage`,
  * `scPdfViewerNextSignatureDescription`, a checkbox on `signature.saveForReuse`,
