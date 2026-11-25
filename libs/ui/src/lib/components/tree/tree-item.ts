@@ -1,10 +1,4 @@
-import {
-  DeferredContentAware,
-  TreeItemPattern,
-  convertGetterSetterToWritableSignalLike,
-  sortDirectives,
-} from '@angular/aria/private';
-import { _IdGenerator } from '@angular/cdk/a11y';
+import type { TreeItemGroup } from '@angular/aria/tree';
 import {
   DestroyRef,
   Directive,
@@ -15,41 +9,37 @@ import {
   inject,
   input,
   signal,
+  untracked,
 } from '@angular/core';
 import { cn } from 'cn';
+import { bindInput, setInput } from '../../utils';
 import type { ScTree } from './tree';
+import { ScTreeAriaItem } from './tree-aria-item';
 import { SC_TREE } from './tree-tokens';
 
 /** The item a group's children belong to: given by `scTreeGroupContent`. */
 export abstract class ScTreeParent<V = unknown> {
   abstract readonly owner: ScTreeItem<V>;
+  /** Angular Aria's group: the children's `parent`. */
+  abstract readonly ariaGroup: TreeItemGroup<V>;
 }
 
 /**
- * An item: Angular Aria's tree item pattern, its place found by its tree or
- * group — no `parent` to pass. A branch when it holds a `scTreeGroup`.
- * Its row is `scTreeItemLabel`; it takes the focus. Children from data,
- * in a template of yours: stamp it with `ngTemplateOutletInjector="outlet"`
- * so they find this item.
+ * An item: Angular Aria's tree item (`ngTreeItem`), its place found by its
+ * tree or group — no `parent` to pass. A branch when it holds a `scTreeGroup`.
+ * Its row is `scTreeItemLabel`; it takes the focus. Children from data, in a
+ * template of yours: stamp it with `ngTemplateOutletInjector="outlet"` so
+ * they find this item.
  */
 @Directive({
   selector: 'li[scTreeItem]',
   exportAs: 'scTreeItem',
-  // Its group's content renders the first time it opens, then stays.
-  hostDirectives: [DeferredContentAware],
+  hostDirectives: [
+    { directive: ScTreeAriaItem, inputs: ['value', 'disabled'] },
+  ],
   host: {
-    role: 'treeitem',
-    '[id]': 'pattern.id()',
-    '[attr.aria-expanded]': 'branch() ? expanded() : null',
-    '[attr.aria-selected]': 'pattern.selected()',
-    '[attr.aria-current]': 'pattern.current()',
-    '[attr.aria-disabled]': 'pattern.disabled()',
-    '[attr.aria-level]': 'pattern.level()',
-    '[attr.aria-setsize]': 'pattern.setsize()',
-    '[attr.aria-posinset]': 'pattern.posinset()',
     '[attr.aria-checked]': 'ariaChecked()',
     '[attr.aria-busy]': 'loading() || null',
-    '[tabindex]': 'pattern.tabIndex()',
     '[class]': 'class()',
     '(focus)': 'onFocus()',
     '(blur)': 'focusVisible.set(false)',
@@ -57,24 +47,19 @@ export abstract class ScTreeParent<V = unknown> {
 })
 export class ScTreeItem<V = string> {
   private readonly tree = inject(SC_TREE) as ScTree<V>;
+  /** Angular Aria's item, under this one. */
+  readonly ariaItem = inject<ScTreeAriaItem<V>>(ScTreeAriaItem);
   readonly element =
     inject<ElementRef<HTMLLIElement>>(ElementRef).nativeElement;
-  private readonly fallbackId = inject(_IdGenerator).getId('sc-tree-item-');
-  private readonly deferred = inject(DeferredContentAware);
+  private readonly parent = inject(ScTreeParent, {
+    optional: true,
+  }) as ScTreeParent<V> | null;
 
   /** The item whose group holds this one; `null` at the top. */
-  readonly parentItem: ScTreeItem<V> | null =
-    (inject(ScTreeParent, { optional: true })?.owner as ScTreeItem<V> | null) ??
-    null;
+  readonly parentItem: ScTreeItem<V> | null = this.parent?.owner ?? null;
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly idInput = input('', { alias: 'id' });
-  readonly value = input.required<V>();
-  readonly disabledInput = input(false, {
-    alias: 'disabled',
-    transform: booleanAttribute,
-  });
-  /** Its text for typeahead; its own text by default. */
+  /** Its text for typeahead; its row's text by default. */
   readonly label = input<string>();
   /** Selectable, in a tree that selects: off, an item that only opens (a folder). */
   readonly selectable = input(true, { transform: booleanAttribute });
@@ -83,19 +68,27 @@ export class ScTreeItem<V = string> {
   /** Its children failed to load: the label's `data-failed`. */
   readonly failed = input(false, { transform: booleanAttribute });
 
+  readonly value = computed(() => this.ariaItem.value());
   /** Holds a group: a branch. */
   readonly branch = signal(false);
   readonly expanded = computed(
     () => this.branch() && this.tree.isExpanded(this.value()),
   );
-  readonly selected = computed(() => !!this.pattern.selected());
-  readonly current = computed(() => !!this.pattern.current());
-  readonly level = computed(() => this.pattern.level());
+  readonly selected = computed(() => !!this.ariaItem.selected());
+  readonly current = computed(() => {
+    const current = this.tree.current();
+    return current !== null && current === this.value();
+  });
+  readonly level = computed(() => this.ariaItem.level());
   readonly isDisabled = computed(
-    () => this.disabledInput() || this.tree.disabled(),
+    () => this.ariaItem.disabled() || this.ariaItem.tree().disabled(),
   );
   readonly checkState = computed(() =>
     this.tree.checkable() ? this.tree.checkState(this) : null,
+  );
+  /** Selectable now: a tree that selects, and this item. */
+  readonly selectableNow = computed(
+    () => this.tree.itemsSelectable() && this.selectable(),
   );
   /** Focused from the keyboard: its row shows the ring. */
   readonly focusVisible = signal(false);
@@ -108,35 +101,6 @@ export class ScTreeItem<V = string> {
   /** Its row: its text is what typeahead matches. */
   readonly labelElement = signal<HTMLElement | null>(null);
 
-  /** Angular Aria's tree item pattern. */
-  readonly pattern: TreeItemPattern<V> = new TreeItemPattern<V>({
-    id: computed(() => this.idInput() || this.fallbackId),
-    value: this.value,
-    element: () => this.element,
-    disabled: this.disabledInput,
-    selectable: computed(
-      () => this.tree.itemsSelectable() && this.selectable(),
-    ),
-    // Its row's text, not its children's.
-    searchTerm: computed(
-      () => this.label() ?? this.labelElement()?.textContent?.trim() ?? '',
-    ),
-    // Open or closed: the tree's list.
-    expanded: convertGetterSetterToWritableSignalLike(
-      () => this.tree.isExpanded(this.value()),
-      (open: boolean) => this.tree.setExpanded(this.value(), open),
-    ),
-    hasChildren: this.branch,
-    children: computed(() =>
-      this.tree
-        .childrenOf(this)
-        .sort(sortDirectives)
-        .map((child) => child.pattern),
-    ),
-    tree: () => this.tree.pattern,
-    parent: () => this.parentItem?.pattern ?? this.tree.pattern,
-  });
-
   private readonly ariaChecked = computed(() => {
     const state = this.checkState();
     if (!state) return null;
@@ -148,11 +112,37 @@ export class ScTreeItem<V = string> {
   );
 
   constructor() {
-    this.deferred.preserveContent.set(true);
-    // Before the render: its group's content shows on the first one.
-    effect(() => this.deferred.contentVisible.set(this.expanded()));
+    // Its place: the group it is in, else the tree — set before Aria's item
+    // registers.
+    setInput(
+      this.ariaItem.parent,
+      this.parent ? this.parent.ariaGroup : this.tree.ariaTree,
+    );
+    // A group's content stays once rendered: it closes with its animation,
+    // and its items keep their place for reveal and the checkboxes.
+    this.ariaItem.preserveContent.set(true);
+    bindInput(this.ariaItem.selectable, this.selectableNow);
+    // Typeahead: its row's text, not its children's.
+    bindInput(
+      this.ariaItem.label,
+      computed(
+        () => this.label() ?? this.labelElement()?.textContent?.trim() ?? '',
+      ),
+    );
+
     this.tree.register(this);
     inject(DestroyRef).onDestroy(() => this.tree.unregister(this));
+
+    // The tree's expanded list → Aria's item, and back.
+    effect(() => {
+      const open = this.tree.isExpanded(this.value());
+      untracked(() => {
+        if (this.ariaItem.expanded() !== open) this.ariaItem.expanded.set(open);
+      });
+    });
+    this.ariaItem.expanded.subscribe((open) =>
+      this.tree.setExpanded(this.value(), open),
+    );
   }
 
   /** Its ancestors, nearest first. */

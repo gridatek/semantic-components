@@ -45,7 +45,7 @@ const SETTINGS: Setting[] = [
   { id: 'billing', name: 'Billing' },
 ];
 
-/** From code, through #tree="scTree": open every branch, close them all, or reveal one item — its ancestors opened, scrolled to and focused. */
+/** From code, through #tree="scTree": open every branch, close them all, or reveal one item — its ancestors opened, scrolled to; here selected too. */
 @Component({
   selector: 'app-controller-tree-demo',
   imports: [
@@ -84,7 +84,13 @@ const SETTINGS: Setting[] = [
         </button>
       </div>
       <div scFrame class="w-64 p-2">
-        <ul scTree #tree="scTree" aria-label="Settings" [(expanded)]="expanded">
+        <ul
+          scTree
+          #tree="scTree"
+          aria-label="Settings"
+          [(expanded)]="expanded"
+          [(value)]="selected"
+        >
           <ng-container
             [ngTemplateOutlet]="branch"
             [ngTemplateOutletContext]="{ $implicit: settings }"
@@ -122,12 +128,14 @@ const SETTINGS: Setting[] = [
 export class ControllerTreeDemo {
   private readonly settings = SETTINGS;
   private readonly expanded = signal<string[]>([]);
+  private readonly selected = signal<string[]>([]);
 
   /** Its ancestors are in your data: opened, then revealed once rendered. */
   private findTwoFactor(tree: ScTree): void {
     this.expanded.update((open) => [
       ...new Set([...open, 'account', 'security']),
     ]);
+    this.selected.set(['two-factor']);
     tree.reveal('two-factor');
   }
 }

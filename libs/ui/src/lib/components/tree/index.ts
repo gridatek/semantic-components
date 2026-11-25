@@ -1,3 +1,5 @@
+export * from './tree-aria-item';
+export * from './tree-aria-group';
 export * from './tree';
 export * from './tree-item';
 export * from './tree-item-label';

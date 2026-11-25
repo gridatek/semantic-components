@@ -30,6 +30,9 @@ import { SC_TREE } from './tree-tokens';
     'aria-hidden': 'true',
     '[class]': 'class()',
     '(click)': 'onClick($event)',
+    // A press doesn't focus it (hidden from screen readers): the item
+    // takes the focus, as on a press on its row.
+    '(mousedown)': '$event.preventDefault()',
   },
 })
 export class ScTreeItemCheckbox {

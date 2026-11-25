@@ -209,7 +209,7 @@ export default class TreePage {
       name: 'ScTree',
       selector: 'ul[scTree]',
       description:
-        "The tree (name it). [(value)], mode ('single', 'multiple', 'none'), activation ('manual', 'automatic'), [(expanded)], expandOnPress (true), checkable, [(checked)], checkStrategy ('trunk', 'independent'), current, disabled, focusableWhenDisabled (true). exportAs scTree: expandAll(), collapseAll(), reveal(value), focus(value).",
+        "The tree (name it). [(value)], mode ('single', 'multiple', 'none'), activation ('manual', 'automatic'), [(expanded)], expandOnPress (true), checkable, [(checked)], checkStrategy ('trunk', 'independent'), current, disabled, focusableWhenDisabled (true). exportAs scTree: expandAll(), collapseAll(), reveal(value).",
     },
     {
       name: 'ScTreeItem',

@@ -1,16 +1,8 @@
-import {
-  SortedCollection,
-  TreePattern,
-  convertGetterSetterToWritableSignalLike,
-  sortDirectives,
-} from '@angular/aria/private';
-import { _IdGenerator } from '@angular/cdk/a11y';
-import { Directionality } from '@angular/cdk/bidi';
+import { Tree } from '@angular/aria/tree';
 import {
   DestroyRef,
   Directive,
   ElementRef,
-  afterNextRender,
   afterRenderEffect,
   booleanAttribute,
   computed,
@@ -21,6 +13,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
+import { bindInput } from '../../utils';
 import type { ScTreeItem } from './tree-item';
 import { SC_TREE } from './tree-tokens';
 
@@ -42,9 +35,9 @@ export type ScTreeCheckState = 'checked' | 'unchecked' | 'mixed';
 
 /**
  * A hierarchy of files, pages or choices, its branches opening on their
- * children: Angular Aria's tree pattern (its keyboard, selection, typeahead
- * and ARIA), its items found by their place — no `parent` to pass. Its items
- * (`scTreeItem`) are yours; name it.
+ * children: Angular Aria's tree (`ngTree`) — its keyboard, selection,
+ * typeahead and ARIA. Its items (`scTreeItem`) are yours, and find their tree
+ * and their parent by their place; name it.
  *
  * ```html
  * <ul scTree aria-label="Files" [(expanded)]="open">
@@ -62,29 +55,27 @@ export type ScTreeCheckState = 'checked' | 'unchecked' | 'mixed';
 @Directive({
   selector: 'ul[scTree]',
   exportAs: 'scTree',
+  hostDirectives: [
+    {
+      directive: Tree,
+      inputs: ['value', 'disabled'],
+      outputs: ['valueChange'],
+    },
+  ],
   providers: [{ provide: SC_TREE, useExisting: ScTree }],
   host: {
-    role: 'tree',
-    '[id]': 'id()',
-    '[attr.aria-multiselectable]': 'pattern.multi()',
-    '[attr.aria-disabled]': 'pattern.disabled()',
-    '[tabindex]': 'pattern.tabIndex()',
     '[attr.data-checkable]': 'checkable() ? "" : null',
     '[class]': 'class()',
     '(keydown)': 'onKeydown($event)',
-    '(click)': 'onClick($event)',
-    '(focusin)': 'pattern.onFocusIn()',
   },
 })
 export class ScTree<V = string> {
-  readonly element =
+  /** Angular Aria's tree, under this one. */
+  readonly ariaTree = inject<Tree<V>>(Tree);
+  private readonly element =
     inject<ElementRef<HTMLUListElement>>(ElementRef).nativeElement;
-  private readonly fallbackId = inject(_IdGenerator).getId('sc-tree-');
 
   readonly classInput = input<string>('', { alias: 'class' });
-  readonly idInput = input('', { alias: 'id' });
-  /** The selected values. */
-  readonly value = model<V[]>([]);
   /** How many items can be selected. */
   readonly mode = input<ScTreeMode>('single');
   /** `automatic`: moving the focus selects (single mode). */
@@ -99,25 +90,21 @@ export class ScTree<V = string> {
   readonly checked = model<V[]>([]);
   readonly checkStrategy = input<ScTreeCheckStrategy>('trunk');
   /**
-   * The page shown: its item says so (`aria-current="page"`) and is the tab
-   * stop — a navigation tree. Open its ancestors with `expanded`.
+   * The page shown: its item says so (`aria-current="page"`) — a navigation
+   * tree. Open its ancestors with `expanded`.
    */
   readonly current = input<V | null>(null);
-  readonly disabled = input(false, { transform: booleanAttribute });
   /** Disabled items stay focusable, so they can be found and read. */
   readonly focusableWhenDisabled = input(true, {
     transform: booleanAttribute,
   });
-
-  readonly id = computed(() => this.idInput() || this.fallbackId);
 
   /** Items are selectable: a mode that selects, or a current page to mark. */
   readonly itemsSelectable = computed(
     () => this.mode() !== 'none' || this.current() !== null,
   );
 
-  /** The items, in the page's order. */
-  private readonly collection = new SortedCollection<ScTreeItem<V>>();
+  private readonly items = signal<ReadonlySet<ScTreeItem<V>>>(new Set());
 
   /** Expand all on: branches open as they appear, until one is closed. */
   readonly expandingAll = signal(false);
@@ -125,91 +112,39 @@ export class ScTree<V = string> {
   /** An item to show once it is there (`reveal`). */
   private readonly revealing = signal<{ value: V } | null>(null);
 
-  /** Angular Aria's tree pattern: the keyboard, selection, focus, typeahead. */
-  readonly pattern: TreePattern<V> = new TreePattern<V>({
-    id: this.id,
-    element: () => this.element,
-    items: computed(() =>
-      this.collection.orderedItems().map((item) => item.pattern),
-    ),
-    activeItem: signal(undefined),
-    // A navigation tree's value is its current page: a press there doesn't
-    // write yours.
-    value: convertGetterSetterToWritableSignalLike(
-      () => {
-        const current = this.current();
-        return current === null ? this.value() : [current];
-      },
-      (value: V[]) => {
-        if (untracked(this.current) === null) this.value.set(value);
-      },
-    ),
-    multi: computed(() => this.mode() === 'multiple'),
-    selectionMode: computed(() =>
-      this.activation() === 'automatic' ? 'follow' : 'explicit',
-    ),
-    focusMode: () => 'roving',
-    disabled: this.disabled,
-    softDisabled: this.focusableWhenDisabled,
-    wrap: () => true,
-    orientation: () => 'vertical',
-    typeaheadDelay: () => 500,
-    nav: computed(() => this.current() !== null),
-    currentType: () => 'page',
-    textDirection: inject(Directionality).valueSignal,
-  });
-
   private readonly class = computed(() =>
     cn('flex flex-col gap-px outline-none', this.classInput()),
   );
 
   constructor() {
-    afterNextRender(() => this.collection.startObserving(this.element));
-    inject(DestroyRef).onDestroy(() => this.collection.stopObserving());
-    // As Aria's tree: its tab stop set, and found again when its item goes.
-    // In the page's order: an item registers before it is attached, where
-    // the collection can't place it — sorted again once it is (and before
-    // a key or a press reads the order).
+    bindInput(
+      this.ariaTree.multi,
+      computed(() => this.mode() === 'multiple'),
+    );
+    bindInput(
+      this.ariaTree.selectionMode,
+      computed(() =>
+        this.activation() === 'automatic' ? 'follow' : 'explicit',
+      ),
+    );
+    bindInput(
+      this.ariaTree.nav,
+      computed(() => this.current() !== null),
+    );
+    bindInput(this.ariaTree.softDisabled, this.focusableWhenDisabled);
+    // A navigation tree: its value is the current page.
     afterRenderEffect({
       write: () => {
-        this.collection.orderedItems();
-        untracked(() => this.sortItems());
-      },
-    });
-    afterRenderEffect({
-      write: () => {
-        this.pattern.setDefaultStateEffect();
-        // A navigation tree's tab stop: its current page, until one moves.
         const current = this.current();
-        if (current === null || this.pattern.hasBeenInteracted()) return;
-        const item = this.find(current);
-        if (item && untracked(this.pattern.inputs.activeItem) !== item.pattern)
-          untracked(() => this.pattern.inputs.activeItem.set(item.pattern));
+        if (current === null) return;
+        untracked(() => {
+          const value = this.ariaTree.value();
+          if (value.length !== 1 || value[0] !== current)
+            this.ariaTree.value.set([current]);
+        });
       },
     });
-    // Disabled items no longer focusable: the tab stop off one.
-    afterRenderEffect({
-      write: () => {
-        if (this.focusableWhenDisabled()) return;
-        const active = untracked(this.pattern.inputs.activeItem);
-        if (active?.disabled())
-          untracked(() => {
-            this.pattern.treeBehavior.unfocus();
-            this.pattern.setDefaultState();
-          });
-      },
-    });
-    afterRenderEffect({
-      write: () => {
-        const items = this.pattern.inputs.items();
-        const active = untracked(() => this.pattern.inputs.activeItem());
-        if (active && !items.includes(active)) {
-          this.pattern.treeBehavior.unfocus();
-          this.pattern.setDefaultState();
-        }
-      },
-    });
-    // Reveal: its ancestors opened, then scrolled to and focused.
+    // Reveal: its ancestors opened, then scrolled to.
     afterRenderEffect({
       write: () => {
         const revealing = this.revealing();
@@ -226,33 +161,43 @@ export class ScTree<V = string> {
             return;
           }
           this.revealing.set(null);
-          this.focus(revealing.value);
           item.element.scrollIntoView({ block: 'nearest' });
         });
       },
     });
+    // Before Aria's handlers (capture): the indicator and the checkbox
+    // select nothing; Space checks.
+    const onPress = (event: MouseEvent) => this.beforePress(event);
+    const onSpace = (event: KeyboardEvent) => this.checkOnSpace(event);
+    this.element.addEventListener('click', onPress, true);
+    this.element.addEventListener('keydown', onSpace, true);
+    inject(DestroyRef).onDestroy(() => {
+      this.element.removeEventListener('click', onPress, true);
+      this.element.removeEventListener('keydown', onSpace, true);
+    });
   }
 
   register(item: ScTreeItem<V>): void {
-    this.collection.register(item);
+    this.items.update((items) => new Set(items).add(item));
   }
 
   unregister(item: ScTreeItem<V>): void {
-    this.collection.unregister(item);
+    this.items.update((items) => {
+      const next = new Set(items);
+      next.delete(item);
+      return next;
+    });
   }
 
   /** The item of this value, once it is rendered. */
   find(value: V): ScTreeItem<V> | undefined {
-    return this.collection
-      .orderedItems()
-      .find((item) => item.value() === value);
+    for (const item of this.items()) if (item.value() === value) return item;
+    return undefined;
   }
 
-  /** An item's children, as rendered, in order. */
+  /** An item's children, as rendered. */
   childrenOf(item: ScTreeItem<V>): ScTreeItem<V>[] {
-    return this.collection
-      .orderedItems()
-      .filter((child) => child.parentItem === item);
+    return [...this.items()].filter((child) => child.parentItem === item);
   }
 
   isExpanded(value: V): boolean {
@@ -269,8 +214,7 @@ export class ScTree<V = string> {
 
   /** Opens every branch, and those that appear while it is on. */
   expandAll(): void {
-    const branches = this.collection
-      .orderedItems()
+    const branches = [...this.items()]
       .filter((item) => item.branch())
       .map((item) => item.value());
     this.expanded.update((open) => [
@@ -286,20 +230,11 @@ export class ScTree<V = string> {
   }
 
   /**
-   * Shows an item: opens its ancestors, scrolls to it and focuses it — once
-   * it is rendered (an ancestor never opened: open it with `expanded`).
+   * Shows an item: opens its ancestors and scrolls to it — once it is
+   * rendered (an ancestor never opened: open it with `expanded`).
    */
   reveal(value: V): void {
     this.revealing.set({ value });
-  }
-
-  /** Focuses an item: the tree's tab stop from then on. */
-  focus(value: V): void {
-    this.sortItems();
-    const item = this.find(value);
-    if (!item) return;
-    this.pattern.treeBehavior.goto(item.pattern);
-    item.element.focus();
   }
 
   /** An item's checkbox state. */
@@ -374,70 +309,65 @@ export class ScTree<V = string> {
     ]);
   }
 
-  /** The items in the page's order again, if one was placed before it was attached. */
-  private sortItems(): void {
-    const items = this.collection.orderedItems();
-    const unsorted = items.some(
-      (item, i) => i > 0 && sortDirectives(items[i - 1], item) > 0,
-    );
-    if (!unsorted) return;
-    this.collection.unregister(items[0]);
-    this.collection.register(items[0]);
-  }
-
-  /** The item of an event: the nearest one around its target. */
-  private itemOf(event: Event): ScTreeItem<V> | undefined {
-    const element = (event.target as Element).closest?.('li[scTreeItem]');
-    return this.collection
-      .orderedItems()
-      .find((item) => item.element === element);
-  }
-
-  /** The focused item: the pattern's active one. */
-  private activeItem(): ScTreeItem<V> | undefined {
-    const active = this.pattern.inputs.activeItem();
-    return this.collection
-      .orderedItems()
-      .find((item) => item.pattern === active);
-  }
-
-  private onKeydown(event: KeyboardEvent): void {
-    this.sortItems();
-    const plain =
-      !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey;
-    const item = this.activeItem();
-    // Checkboxes: Space checks the focused item.
-    if (plain && item && event.key === ' ' && this.checkable()) {
-      event.preventDefault();
-      this.toggleCheck(item);
-      return;
-    }
-    this.pattern.onKeydown(event);
-    // A link's row: Enter follows it.
-    if (plain && item && event.key === 'Enter') item.followLink();
+  /** The item around a node: the nearest one. */
+  private itemAt(node: EventTarget | null): ScTreeItem<V> | undefined {
+    const element = (node as Element | null)?.closest?.('li[scTreeItem]');
+    for (const item of this.items()) if (item.element === element) return item;
+    return undefined;
   }
 
   /**
-   * A press on a row: the pattern selects, and opens or closes the branch —
-   * not when `expandOnPress` is off. On the indicator: it opens or closes
-   * only; on the checkbox: it checks only (`scTreeItemCheckbox`). Both
-   * focus their item, nothing selected.
+   * Before Aria's press (capture), which focuses the item, selects it and
+   * opens or closes it. On the indicator or the checkbox, the selection is
+   * kept as it was — the indicator only opens or closes, the checkbox only
+   * checks; the checkbox and, with `expandOnPress` off, the row don't open
+   * or close it. Put back once Aria has handled the press.
    */
-  private onClick(event: PointerEvent): void {
-    this.sortItems();
-    const item = this.itemOf(event);
-    if (!item) return this.pattern.onClick(event);
+  private beforePress(event: MouseEvent): void {
+    const item = this.itemAt(event.target);
+    if (!item) return;
     const target = event.target as Node;
+    const onIndicator = !!item.indicator?.contains(target);
+    const onCheckbox = !!item.checkbox?.contains(target);
+    const keepOpen =
+      item.branch() && (onCheckbox || (!this.expandOnPress() && !onIndicator));
     const value = item.value();
-    const was = this.isExpanded(value);
-    if (item.indicator?.contains(target) || item.checkbox?.contains(target)) {
-      if (this.disabled()) return;
-      this.pattern.treeBehavior.goto(item.pattern);
-      if (item.indicator?.contains(target) && !item.isDisabled())
-        this.setExpanded(value, !was);
+    const wasOpen = this.isExpanded(value);
+    const selection = this.ariaTree.value();
+    // Added now, during the capture: called in the bubble phase, after Aria's.
+    const after = (handled: Event) => {
+      if (handled !== event) return;
+      if (onIndicator || onCheckbox) {
+        const now = this.ariaTree.value();
+        if (
+          now.length !== selection.length ||
+          now.some((v, i) => v !== selection[i])
+        )
+          this.ariaTree.value.set(selection);
+      }
+      if (keepOpen) this.setExpanded(value, wasOpen);
+    };
+    this.element.addEventListener('click', after, { once: true });
+  }
+
+  private onKeydown(event: KeyboardEvent): void {
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey)
       return;
-    }
-    this.pattern.onClick(event);
-    if (item.branch() && !this.expandOnPress()) this.setExpanded(value, was);
+    const item = this.itemAt(event.target);
+    if (!item || event.target !== item.element) return;
+    // A link's row: Enter follows it.
+    if (event.key === 'Enter') item.followLink();
+  }
+
+  /** Before Aria's keys (capture): Space checks the focused item. */
+  private checkOnSpace(event: KeyboardEvent): void {
+    if (event.key !== ' ' || !this.checkable()) return;
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey)
+      return;
+    const item = this.itemAt(event.target);
+    if (!item || event.target !== item.element) return;
+    event.preventDefault();
+    event.stopPropagation();
+    this.toggleCheck(item);
   }
 }

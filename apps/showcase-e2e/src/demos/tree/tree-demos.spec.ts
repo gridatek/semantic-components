@@ -100,6 +100,8 @@ test('Checkboxes: a branch checks what it holds; mixed while some is', async ({
   await expect(item(page, 'Frontend')).toHaveAttribute('aria-checked', 'mixed');
   await expect(page.getByText('Checked: styles')).toBeVisible();
   await row(page, 'Data').locator('input').click();
+  // The box doesn't take the focus (it is hidden): its item does.
+  await expect(item(page, 'Data')).toBeFocused();
   await expect(item(page, 'SQL')).toHaveAttribute('aria-checked', 'true');
   await expect(item(page, 'Backend')).toHaveAttribute('aria-checked', 'mixed');
   await expect(page.getByText('Checked: styles, data')).toBeVisible();
@@ -120,16 +122,19 @@ test('Checkboxes: a branch checks what it holds; mixed while some is', async ({
   );
 });
 
-test('Links: the current page is the tab stop; Enter follows a link', async ({
+test('Links: the current page says so; Enter follows a link', async ({
   page,
 }) => {
   await page.goto(demo('links-tree'));
   const installation = item(page, 'Installation');
   await expect(installation).toHaveAttribute('aria-current', 'page');
-  await expect(installation).toHaveAttribute('tabindex', '0');
   await expect(installation).not.toHaveAttribute('aria-selected');
-  await installation.focus();
-  await press(page, 'ArrowUp');
+  // The tab stop: the first row (Aria's).
+  const first = item(page, 'Getting Started');
+  await expect(first).toHaveAttribute('tabindex', '0');
+  await first.focus();
+  await press(page, 'ArrowDown');
+  await expect(item(page, 'Introduction')).toBeFocused();
   await press(page, 'Enter');
   await expect(page.getByText('Showing: introduction')).toBeVisible();
   await expect(item(page, 'Introduction')).toHaveAttribute(
@@ -147,13 +152,18 @@ test('Disabled: focusable by default, skipped when not', async ({ page }) => {
   await item(page, 'Current plans').focus();
   for (let i = 0; i < 3; i++) await press(page, 'ArrowDown');
   await expect(item(page, 'Enterprise')).toBeFocused();
-  // Not focusable: the keys skip the disabled ones.
+});
+
+test('Disabled, not focusable: the keys skip them', async ({ page }) => {
+  await page.goto(demo('disabled-tree'));
   await page.getByRole('switch').click();
   await item(page, 'Current plans').focus();
   await press(page, 'ArrowDown');
   await press(page, 'ArrowDown');
-  await press(page, 'ArrowDown');
   await expect(item(page, 'Pro')).toBeFocused();
+  // Enterprise and Legacy plans skipped: round to the first row.
+  await press(page, 'ArrowDown');
+  await expect(item(page, 'Current plans')).toBeFocused();
 });
 
 test('Loading Children: busy, loaded; a failure retried on the next open', async ({
@@ -188,9 +198,14 @@ test('Controller: expand all, collapse all, reveal', async ({ page }) => {
   await expect(item(page, 'Push')).toBeVisible();
   await page.getByRole('button', { name: 'Collapse all' }).click();
   await expect(item(page, 'Profile')).toBeHidden();
+  // Found: its ancestors opened, scrolled to — and here selected.
   await page.getByRole('button', { name: 'Find Two-factor' }).click();
-  await expect(item(page, 'Two-factor')).toBeFocused();
-  await expect(item(page, 'Two-factor')).toHaveAttribute('tabindex', '0');
+  await expect(item(page, 'Two-factor')).toBeVisible();
+  await expect(item(page, 'Two-factor')).toHaveAttribute(
+    'aria-selected',
+    'true',
+  );
+  await expect(item(page, 'Two-factor')).toBeInViewport();
 });
 
 test('RTL: ← opens and goes in, → goes out', async ({ page }) => {
