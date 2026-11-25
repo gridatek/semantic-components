@@ -188,6 +188,13 @@ Buttons act on `viewer.pageSelection()`: `scPdfViewerNextMovePagesEarlier`, `Mov
 - **Download** saves the document as pdf.js does, with the annotations, comments and form data written into it and the pages in their order. Without changes it downloads the original file. `viewer.saveDocument()` gives the bytes; `viewer.hasChanges()` tells whether there's anything to save.
 - **Print** prints the saved file, so annotations and filled-in fields are on paper too.
 
+### Look
+
+pdf.js draws the pages and its toolbars with `pdf_viewer.css`; the canvas gives them the library's look:
+
+- **The page frame** — pages 8px apart and from the edges, on the theme's background, with a small shadow (pdf.js's frame is a transparent border its application draws a shadow image in). In forced colours, pdf.js's outline stays.
+- **pdf.js's toolbars on the pages** — its editors' toolbars and colour picker, the alt-text button and tooltip, the comment buttons — take the theme's tokens (`--popover`, `--border`, `--accent`, `--primary`, `--ring`, `--radius`), as a popover. pdf.js sets their variables on its own elements in an unlayered stylesheet, so only important declarations override them; in forced colours, pdf.js's system colours stay.
+
 ### Presentation mode
 
 `viewer.togglePresentation()` (Ctrl+Alt+P): one page at a time, fitted to the screen on black, fullscreen, toolbar hidden. Click / → / Space for the next page, Shift+click / ← for the previous, the wheel or a swipe either way; the cursor hides when still. Escape leaves and restores the view. `data-presenting` on the viewer while it's on.
