@@ -53,6 +53,7 @@ import {
         #cal="scCalendar"
         aria-label="الموعد"
         [(value)]="date"
+        weekdayFormat="long"
         scFrame
         class="[--cell-size:--spacing(12)]"
       >

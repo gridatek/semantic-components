@@ -335,3 +335,27 @@ test('RTL on a phone: the calendar in the width it has, its cells shrunk, still 
   expect(cell[0]).toBeLessThan(48);
   expect(cell[0]).toBeCloseTo(cell[1], 0);
 });
+
+test('RTL: the day names in full (weekdayFormat="long"): its cells have room for them', async ({
+  page,
+}) => {
+  await page.goto(demo('rtl'));
+  const names = page.locator(
+    '[data-slot=calendar] thead th [aria-hidden=true]',
+  );
+  await expect(names.first()).toBeVisible();
+  // Saturday first in Arabic: in full, not its letter.
+  await expect(names.first()).toHaveText('السبت');
+  const fit = await page
+    .locator('[data-slot=calendar] thead th')
+    .evaluateAll((columns) =>
+      columns.every(
+        (th) =>
+          (
+            th.querySelector('[aria-hidden=true]') as Element
+          ).getBoundingClientRect().width <=
+          th.getBoundingClientRect().width + 0.5,
+      ),
+    );
+  expect(fit).toBe(true);
+});

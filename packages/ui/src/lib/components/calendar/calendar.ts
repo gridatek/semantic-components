@@ -26,6 +26,12 @@ import { ScCalendarYears } from './calendar-years';
 
 export type ScCalendarMode = 'single' | 'multiple' | 'range';
 export type ScCalendarView = 'day' | 'month' | 'year';
+/**
+ * How the day names show over the columns, as `Intl`'s `weekday`: `short`
+ * ("Sun"; narrow where a language's short names are whole words, as
+ * Arabic's), `long` ("Sunday", where the cells have room), `narrow` ("S").
+ */
+export type ScCalendarWeekdayFormat = 'narrow' | 'short' | 'long';
 
 /** A range: from a day to a day — the second missing while it is picked. */
 export interface ScCalendarRange {
@@ -116,6 +122,8 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   /** Always six weeks: the height holds still from month to month. */
   readonly fixedWeeks = input(false, { transform: booleanAttribute });
   readonly showWeekNumbers = input(false, { transform: booleanAttribute });
+  /** The day names over the columns: short by default. */
+  readonly weekdayFormat = input<ScCalendarWeekdayFormat>('short');
   /**
    * The view it opens on while empty — `year` for a birth date, far from
    * today. With a value it opens on that value's days: the year is known,

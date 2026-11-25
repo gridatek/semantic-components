@@ -123,11 +123,11 @@ export class ScCalendarMonth {
   readonly month = input.required<Temporal.PlainYearMonth>();
 
   /**
-   * The week's days, from its first: shown, and in full (read). Shown short
-   * ("Sun", "lun.") — or narrow where a language's short names are words of
-   * their own (Arabic's الأحد, Persian, Hebrew: over 4 letters), too wide
-   * for a day's column: a letter each (ح ن ث…). From the locale, so the
-   * server draws the same.
+   * The week's days, from its first: shown, and in full (read). Shown as the
+   * calendar's `weekdayFormat` — `short` narrows where a language's short
+   * names are words of their own (Arabic's الأحد, Persian, Hebrew: over 4
+   * letters), too wide for a day's column: a letter each (ح ن ث…). From the
+   * locale, so the server draws the same.
    */
   private readonly weekdays = computed(() => {
     const locale = this.locale;
@@ -135,16 +135,16 @@ export class ScCalendarMonth {
     const days = Array.from({ length: 7 }, (_, i) =>
       MONDAY.add({ days: (start - 1 + i) % 7 }),
     );
-    const short = days.map((day) =>
-      day.toLocaleString(locale, { weekday: 'short' }),
-    );
-    const narrow = short.some((name) => [...name].length > 4);
-    return days.map((day, i) => ({
-      short: narrow
-        ? day.toLocaleString(locale, { weekday: 'narrow' })
-        : short[i],
-      long: day.toLocaleString(locale, { weekday: 'long' }),
-    }));
+    const name = (weekday: 'narrow' | 'short' | 'long') =>
+      days.map((day) => day.toLocaleString(locale, { weekday }));
+    const long = name('long');
+    let shown = name(this.calendar.weekdayFormat());
+    if (
+      this.calendar.weekdayFormat() === 'short' &&
+      shown.some((n) => [...n].length > 4)
+    )
+      shown = name('narrow');
+    return days.map((_, i) => ({ short: shown[i], long: long[i] }));
   });
 
   /** Its weeks: whole, from the week's first day — six, with fixedWeeks. */
