@@ -660,11 +660,10 @@
   {
     "name": "PDF Viewer",
     "path": "pdf-viewer",
-    "description": "pdf.js's viewer as parts: its PDFViewer draws the pages (text, links, forms, find); the toolbars, sidebar, find bar and dialogs are yours.",
+    "description": "A document viewer: pdf.js's own viewer for the pages — find, forms, annotations, signatures, comments, page organisation — and your toolbars, sidebar and dialogs around it.",
     "status": "Experimental",
     "library": "ui",
-    "category": "Media",
-    "hidden": true
+    "category": "Media"
   },
   {
     "name": "Phone Input",

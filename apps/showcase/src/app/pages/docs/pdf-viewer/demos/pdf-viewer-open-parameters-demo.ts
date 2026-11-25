@@ -40,6 +40,7 @@ import { cn } from 'cn';
       scPdfViewer
       class="size-full"
       src="/pdf/handbook.pdf#nameddest=chapter-2"
+      [rememberView]="false"
       fileName="handbook"
       #viewer="scPdfViewer"
     >

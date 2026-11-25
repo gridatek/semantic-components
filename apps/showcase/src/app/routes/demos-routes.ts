@@ -4936,6 +4936,20 @@ export const demosRoutes: Route[] = [
     path: 'demos/pdf-viewer',
     children: [
       {
+        path: 'pdf-viewer-usage-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer/demos/pdf-viewer-usage-demo').then(
+            (m) => m.PdfViewerUsageDemo,
+          ),
+      },
+      {
+        path: 'pdf-viewer-rtl-demo',
+        loadComponent: () =>
+          import('../pages/docs/pdf-viewer/demos/pdf-viewer-rtl-demo').then(
+            (m) => m.PdfViewerRtlDemo,
+          ),
+      },
+      {
         path: 'pdf-viewer-demo',
         loadComponent: () =>
           import('../pages/docs/pdf-viewer/demos/pdf-viewer-demo').then(
