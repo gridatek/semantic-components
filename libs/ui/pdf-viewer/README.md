@@ -20,8 +20,8 @@ You write the markup — usually `@semantic-components/ui` components — and al
 import { ScPdfViewer, ScPdfViewerCanvas, ScPdfViewerContainer, ScPdfViewerContent, ScPdfViewerToolbar } from '@semantic-components/ui/pdf-viewer';
 ```
 
-Also import PDF.js's viewer styles in your `styles.css`: `@import 'pdfjs-dist/web/pdf_viewer.css';`
+Also import the viewer's stylesheet in your `styles.css`: `@import '@semantic-components/styles/pdf-viewer.css';` — in place of pdf.js's (`pdfjs-dist/web/pdf_viewer.css`; don't import both). It's pdf.js's stylesheet rebuilt for the library: what the pages need (their layers, pdf.js's editors and its toolbars on them), the library's look on your theme's tokens, and without pdf.js's global `:root { color-scheme: light dark; }` ([pdf.js issue 19886](https://github.com/mozilla/pdf.js/issues/19886)), which would hand the browser's own parts — scrollbars, native form controls — to the operating system's mode instead of your app's. Its images are next to it (`pdf-viewer-images/`).
 
-That stylesheet sets `:root { color-scheme: light dark; }` for the whole page, not only the viewer ([pdf.js issue 19886](https://github.com/mozilla/pdf.js/issues/19886)): the browser's own parts — scrollbars, native form controls — would follow the operating system's mode instead of your app's. `ScPresetManager` sets the page's `color-scheme` inline on `<html>` with the mode, which no stylesheet overrides: nothing to do with it. Without it, set it yourself the same way (`document.documentElement.style.colorScheme = 'light'` or `'dark'`) — see the preset's README, "The mode tells the browser".
+Then define the viewer's colours in your theme, as every colour of it — light on `:root`, dark under `.dark`: `--sc-pdf-viewer-highlight-1` to `-5`, `--sc-pdf-viewer-ink-1` to `-4` (written into the PDF: the `:root` value is the one saved, whatever the mode), `--sc-pdf-viewer-page` and `--sc-pdf-viewer-page-foreground` (reading colours, on screen only). See "Colours" and "Look" in the component's README.
 
 See `src/lib/components/pdf-viewer/README.md` for every part.

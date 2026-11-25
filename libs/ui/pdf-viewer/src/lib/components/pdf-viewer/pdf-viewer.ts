@@ -750,8 +750,9 @@ export class ScPdfViewer {
    * Colours are CSS colours — the theme's variables: `var(--sc-pdf-viewer-highlight-1)`
    * to `-5` for highlights (pdf.js's yellow, green, blue, pink, red),
    * `var(--sc-pdf-viewer-ink-1)` to `-4` for text and drawings. pdf.js gets
-   * them as real colours: they're written into the PDF, so they have one
-   * value for light and dark mode (see pdf-viewer-colors.ts).
+   * them as real colours, and writes them into the PDF: the variable's
+   * `:root` value, whatever the mode; its `.dark` value shows on dark pages
+   * only (see pdf-viewer-colors.ts).
    */
   readonly highlightColor = signal<string>(HIGHLIGHT_COLORS[0]);
   readonly highlightThickness = signal(12);
@@ -2659,8 +2660,16 @@ export class ScPdfViewer {
     engine.eventBus.dispatch('switchannotationeditorparams', {
       source: this,
       type,
+      // The colour pdf.js shows: a highlight's dark side on dark pages
+      // (pdf.js saves its `:root` side), else the colour saved.
       value: COLOR_PARAMS.has(type)
-        ? (resolveColor(String(value), engine.viewer.container) ?? value)
+        ? (resolveColor(
+            String(value),
+            engine.viewer.container,
+            type === EDITOR_PARAMS.HIGHLIGHT_COLOR && engine.pagesDark
+              ? 'shown'
+              : 'saved',
+          ) ?? value)
         : value,
     });
   }

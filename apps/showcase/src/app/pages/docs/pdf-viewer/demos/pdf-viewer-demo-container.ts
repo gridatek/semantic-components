@@ -625,6 +625,10 @@ const INK_COLORS = [
                     <button scToggleGroupItem value="even">Even</button>
                   </div>
                 </div>
+                <label scField orientation="horizontal">
+                  Reading colours
+                  <input scSwitch scPdfViewerSetting="pageColors" />
+                </label>
               </div>
             </ng-template>
           </div>
@@ -1453,7 +1457,7 @@ const INK_COLORS = [
               <div scProgressTrack><div scProgressRange></div></div>
             </div>
             <div scPdfViewerLoading>
-              <svg scSpinner siLoaderCircleIcon></svg>
+              <svg scSpinner siLoaderCircleIcon aria-label="Loading"></svg>
               Loading document…
             </div>
             <div scEmpty scPdfViewerError>

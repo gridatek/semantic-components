@@ -1,0 +1,47 @@
+/*
+ * The library's look (pdf-viewer-theme.css, appended by
+ * scripts/build-pdf-viewer-css.mjs): what isn't one of pdf.js's colours —
+ * those are the theme's tokens already, above.
+ */
+
+/*
+ * The page frame: pages 8px apart and from the edges, on the theme's
+ * background, with a small shadow — in place of pdf.js's (a transparent
+ * border its application draws a shadow image in). In forced colours,
+ * pdf.js's outline.
+ */
+[data-slot='pdf-viewer-canvas'] {
+  --page-margin: 8px auto 0;
+  --page-border: 0 solid transparent;
+  --pdfViewer-padding-bottom: 8px;
+  --spreadHorizontalWrapped-margin-LR: 4px;
+  --page-bg-color: var(--background);
+  /* pdf.js's comment buttons' icon (its application's stylesheet has it). */
+  --comment-edit-button-icon: url(pdf-viewer-images/comment-editButton.svg);
+}
+
+[data-slot='pdf-viewer-canvas'] .pdfViewer .page {
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.1),
+    0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+@media (forced-colors: active) {
+  [data-slot='pdf-viewer-canvas'] {
+    --page-border: 1px solid CanvasText;
+  }
+
+  [data-slot='pdf-viewer-canvas'] .pdfViewer .page {
+    box-shadow: none;
+  }
+}
+
+/*
+ * pdf.js's buttons on the pages (its toolbars on annotations, the comment
+ * buttons) take the browser's button font, as pdf.js expects — Tailwind's
+ * preflight would have them inherit the page layer's (`font: inherit`),
+ * which is scaled to the page: the icons would leave their buttons.
+ */
+:is(.annotationEditorLayer, .annotationLayer, .textLayer) button {
+  font: revert;
+}

@@ -56,29 +56,41 @@ import { PdfViewerUsageDemoContainer } from './demos/pdf-viewer-usage-demo-conta
           names="ScPdfViewer"
         />
         <p>
-          Import pdf.js&apos;s viewer styles in your
+          Import the viewer&apos;s stylesheet in your
           <code scTypeset>styles.css</code>:
-          <code scTypeset>@import 'pdfjs-dist/web/pdf_viewer.css';</code>.
-          pdf.js&apos;s worker, fonts, scripting sandbox and images load from
-          <code scTypeset>assetsUrl</code> (unpkg by default): host
-          <code scTypeset>pdfjs-dist</code>&apos;s folders yourself for an
-          offline or strict-CSP app.
-        </p>
-        <p>
-          <code scTypeset>pdf_viewer.css</code> sets
+          <code scTypeset
+            >@import '@semantic-components/styles/pdf-viewer.css';</code
+          >
+          — in place of pdf.js&apos;s <code scTypeset>pdf_viewer.css</code>.
+          It&apos;s pdf.js&apos;s, rebuilt for the library: what the pages need,
+          the library&apos;s look on your theme&apos;s tokens, and without the
           <code scTypeset>:root &#123; color-scheme: light dark &#125;</code>
-          for the whole page, not only the viewer (<a
+          pdf.js&apos;s sets for the whole page (<a
             href="https://github.com/mozilla/pdf.js/issues/19886"
             target="_blank"
             rel="noopener noreferrer"
             class="font-medium underline underline-offset-4"
             >pdf.js issue 19886</a
-          >): scrollbars and native controls would follow the operating
+          >), which would hand scrollbars and native controls to the operating
           system&apos;s mode instead of your app&apos;s.
-          <code scTypeset>ScPresetManager</code> sets the page&apos;s
-          <code scTypeset>color-scheme</code> inline with the mode, which no
-          stylesheet overrides — nothing to do with it (the Theming guide&apos;s
-          Mode). Without it, set it yourself the same way.
+        </p>
+        <p>
+          Then define the viewer&apos;s colours in your theme, as every colour
+          of it — light on <code scTypeset>:root</code>, dark under
+          <code scTypeset>.dark</code>:
+          <code scTypeset>--sc-pdf-viewer-highlight-1</code> to
+          <code scTypeset>-5</code>,
+          <code scTypeset>--sc-pdf-viewer-ink-1</code> to
+          <code scTypeset>-4</code>,
+          <code scTypeset>--sc-pdf-viewer-page</code> and
+          <code scTypeset>--sc-pdf-viewer-page-foreground</code> (see pdf.js,
+          below).
+        </p>
+        <p>
+          pdf.js&apos;s worker, fonts, scripting sandbox and images load from
+          <code scTypeset>assetsUrl</code> (unpkg by default): host
+          <code scTypeset>pdfjs-dist</code>&apos;s folders yourself for an
+          offline or strict-CSP app.
         </p>
       </section>
 
@@ -116,24 +128,29 @@ import { PdfViewerUsageDemoContainer } from './demos/pdf-viewer-usage-demo-conta
             text: yours is yours to word and translate.
           </li>
           <li>
-            The look is the library&apos;s: the pages in the style&apos;s frame,
-            pdf.js&apos;s toolbars on the pages in the theme&apos;s colours.
-            Annotation colours are the theme&apos;s CSS variables —
+            The look is the library&apos;s: its stylesheet is pdf.js&apos;s,
+            rebuilt — the pages in the style&apos;s frame, pdf.js&apos;s
+            toolbars on the pages in the theme&apos;s colours, without
+            pdf.js&apos;s application and its global
+            <code scTypeset>color-scheme</code>. Annotation colours are the
+            theme&apos;s CSS variables —
             <code scTypeset>--sc-pdf-viewer-highlight-1</code> to
             <code scTypeset>-5</code>,
             <code scTypeset>--sc-pdf-viewer-ink-1</code> to
-            <code scTypeset>-4</code> — in oklch, written into the PDF as they
-            are.
+            <code scTypeset>-4</code> — in oklch, light on
+            <code scTypeset>:root</code> and dark under
+            <code scTypeset>.dark</code>.
           </li>
           <li>
-            Those colours have one value for light and dark mode — on
-            <code scTypeset>:root</code>, never under
-            <code scTypeset>.dark</code> — unlike the editor&apos;s highlights,
-            which only colour the screen. In dark mode the pages are still
-            white, as in pdf.js: a dark-mode highlight would darken the text
-            under it, a dark-mode ink be too light to see — and they&apos;d be
-            saved so, in the file and on paper, the same document differing by
-            the mode it was annotated in.
+            Those colours are written into the PDF, and the file mustn&apos;t
+            depend on the mode it was annotated in: what&apos;s saved is always
+            the <code scTypeset>:root</code> value, which the viewer reads from
+            your stylesheet, even in dark mode. The
+            <code scTypeset>.dark</code> values are only shown: highlights on
+            dark pages (reading colours in dark mode), through pdf.js&apos;s
+            on-screen variants of its colours, which it maps back to the saved
+            ones when it saves. On the document&apos;s white pages, and for text
+            and drawings, the saved colours show — as they print.
           </li>
         </ul>
       </section>

@@ -101,8 +101,10 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
           dark, the page would show dark scrollbars and native controls. Inline,
           no stylesheet overrides it — not even one that sets
           <code scTypeset>:root &#123; color-scheme: light dark &#125;</code>
-          for the whole page, as pdf.js&apos;s
-          <code scTypeset>pdf_viewer.css</code> does (<a
+          for the whole page, as pdf.js&apos;s own
+          <code scTypeset>pdf_viewer.css</code> does (the PDF Viewer&apos;s
+          stylesheet leaves that rule out;
+          <a
             href="https://github.com/mozilla/pdf.js/issues/19886"
             target="_blank"
             rel="noopener noreferrer"

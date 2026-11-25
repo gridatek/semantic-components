@@ -149,7 +149,7 @@ import { cn } from 'cn';
         </div>
         <div scPdfViewerContent>
           <div scPdfViewerLoading>
-            <svg scSpinner siLoaderCircleIcon></svg>
+            <svg scSpinner siLoaderCircleIcon aria-label="Loading"></svg>
             Loading the handbook…
           </div>
           <div scPdfViewerCanvas></div>

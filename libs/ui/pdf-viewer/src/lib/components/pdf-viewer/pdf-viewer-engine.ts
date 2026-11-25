@@ -85,6 +85,8 @@ export interface ScPdfEngineOptions {
   pageColors: { foreground: string; background: string } | null;
   /** pdf.js's highlight colours (`yellow=#FFFF98,…`), from the theme's. */
   highlightColors: string;
+  /** The pages are drawn dark: highlights show their dark side. */
+  pagesDark: boolean;
   history: ScPdfHistoryAdapter;
   /** Where pdf.js announces what its editors do (an alert region). */
   viewerAlert: HTMLElement;
@@ -109,6 +111,8 @@ export class ScPdfEngine {
     ScPdfViewerModule['PDFScriptingManager']
   > | null;
   readonly viewer: InstanceType<ScPdfViewerModule['PDFViewer']>;
+  /** The pages are drawn dark (reading colours in dark mode): highlights show their dark side. */
+  readonly pagesDark: boolean;
   /** pdf.js's own words in the pages (their names, its editors' buttons). */
   readonly l10n: InstanceType<ScPdfViewerModule['GenericL10n']>;
 
@@ -126,6 +130,7 @@ export class ScPdfEngine {
       GenericL10n,
       LinkTarget,
     } = module;
+    this.pagesDark = options.pagesDark;
     this.eventBus = new EventBus();
     this.linkService = new PDFLinkService({
       eventBus: this.eventBus,

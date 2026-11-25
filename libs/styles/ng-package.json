@@ -6,6 +6,8 @@
     "./src/scrollbar.css",
     "./src/reduced-motion.css",
     "./src/editor-base.css",
+    "./src/pdf-viewer.css",
+    "./src/pdf-viewer-images/**/*",
     "./nova/src/typeset-variables.css",
     "./nova/src/editor.css",
     "./nova/src/scrollbar-variables.css",

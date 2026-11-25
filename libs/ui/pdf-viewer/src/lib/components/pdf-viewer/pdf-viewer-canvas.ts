@@ -14,39 +14,18 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { SC_PDF_VIEWER } from './pdf-viewer';
-import { highlightColorsOption, resolvePageColors } from './pdf-viewer-colors';
+import {
+  highlightColorsOption,
+  isDarkColor,
+  resolveColor,
+  resolvePageColors,
+} from './pdf-viewer-colors';
 import type { ScPdfViewerModule } from './pdf-viewer-engine';
 import { ScPdfEngine, loadViewerModule } from './pdf-viewer-engine';
 import { ScPdfViewerPan } from './pdf-viewer-pan';
 
 /** Named zooms follow the container's size (pdf.js's `webViewerResize`). */
 const FITTED_ZOOMS = new Set(['auto', 'page-fit', 'page-width']);
-
-/**
- * The library's page frame, in place of pdf.js's (a 9px transparent border
- * its application draws a shadow image in): pages 8px apart and from the
- * edges, on the theme's background, with a small shadow. In forced colours,
- * pdf.js's outline stays.
- */
-const PAGE_FRAME = cn(
-  '[--page-margin:8px_auto_0] [--page-border:0_solid_transparent] [--pdfViewer-padding-bottom:8px] [--spreadHorizontalWrapped-margin-LR:4px] [--page-bg-color:var(--background)] [&_.page]:shadow-sm',
-  'forced-colors:[--page-border:1px_solid_CanvasText] forced-colors:[&_.page]:shadow-none',
-);
-
-/**
- * pdf.js's toolbars on the pages — its editors' (colour picker included),
- * the alt-text button and tooltip, the comment buttons — in the theme's
- * colours and radius, as a popover. pdf.js sets these variables on its
- * elements, unlayered: only important declarations override them. Not in
- * forced colours, where pdf.js's system colours stay.
- */
-const PDFJS_THEME = cn(
-  'not-forced-colors:[&_.editToolbar]:[--editor-toolbar-bg-color:var(--popover)]! not-forced-colors:[&_.editToolbar]:[--editor-toolbar-fg-color:var(--popover-foreground)]! not-forced-colors:[&_.editToolbar]:[--editor-toolbar-border-color:var(--border)]! not-forced-colors:[&_.editToolbar]:[--editor-toolbar-hover-border-color:var(--border)]! not-forced-colors:[&_.editToolbar]:[--editor-toolbar-hover-bg-color:var(--accent)]! not-forced-colors:[&_.editToolbar]:[--editor-toolbar-hover-fg-color:var(--accent-foreground)]! not-forced-colors:[&_.editToolbar]:[--editor-toolbar-focus-outline-color:var(--ring)]! not-forced-colors:[&_.editToolbar]:[--editor-toolbar-shadow:0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)]!',
-  'not-forced-colors:[&_.editToolbar]:[--alt-text-done-color:var(--popover-foreground)]! not-forced-colors:[&_.editToolbar]:[--alt-text-warning-color:var(--primary)]! not-forced-colors:[&_.editToolbar_*]:[--alt-text-tooltip-bg:var(--popover)]! not-forced-colors:[&_.editToolbar_*]:[--alt-text-tooltip-fg:var(--popover-foreground)]! not-forced-colors:[&_.editToolbar_*]:[--alt-text-tooltip-border:var(--border)]!',
-  'not-forced-colors:[&_.colorPicker]:[--selected-outline-color:var(--ring)]! not-forced-colors:[&_.colorPicker]:[--hover-outline-color:var(--ring)]! not-forced-colors:[&_.colorPicker]:[--swatch-border-color:var(--border)]!',
-  'not-forced-colors:[&_.annotationCommentButton]:[--comment-button-bg:var(--popover)]! not-forced-colors:[&_.annotationCommentButton]:[--comment-button-fg:var(--popover-foreground)]! not-forced-colors:[&_.annotationCommentButton]:[--comment-button-border-color:var(--border)]! not-forced-colors:[&_.annotationCommentButton]:[--comment-button-hover-bg:var(--accent)]! not-forced-colors:[&_.annotationCommentButton]:[--comment-button-hover-fg:var(--accent-foreground)]! not-forced-colors:[&_.annotationCommentButton]:[--comment-button-active-bg:var(--primary)]! not-forced-colors:[&_.annotationCommentButton]:[--comment-button-active-fg:var(--primary-foreground)]! not-forced-colors:[&_.annotationCommentButton]:[--comment-button-selected-bg:var(--primary)]! not-forced-colors:[&_.annotationCommentButton]:[--comment-button-selected-fg:var(--primary-foreground)]! not-forced-colors:[&_.annotationCommentButton]:[--comment-button-focus-outline-color:var(--ring)]!',
-  '[&_.editToolbar]:rounded-md! [&_.editToolbar_.dropdown]:rounded-md!',
-);
 
 /**
  * The pages: pdf.js's `PDFViewer` in its container (`div.container >
@@ -64,7 +43,6 @@ const PDFJS_THEME = cn(
       [class]="containerClass"
       scPdfViewerPan
       role="document"
-      [style.--comment-edit-button-icon]="commentIcon()"
       tabindex="0"
     >
       <div #viewer class="pdfViewer"></div>
@@ -87,15 +65,13 @@ export class ScPdfViewerCanvas {
     cn('relative block h-full w-full', this.classInput()),
   );
 
-  /** pdf.js's scroll container: its frame and theme for pdf.js's pages. */
+  /**
+   * pdf.js's scroll container. The pages' look — frame, pdf.js's toolbars on
+   * them, its colours on the theme's tokens — is the stylesheet's
+   * (@semantic-components/styles: pdf-viewer.css).
+   */
   private readonly containerClass = cn(
     'absolute inset-0 touch-pan-x touch-pan-y overflow-auto outline-none data-hand:cursor-grab data-idle:cursor-none data-panning:cursor-grabbing data-idle:[&_*]:cursor-none data-hand:[&_.textLayer]:pointer-events-none',
-    // pdf.js's buttons on the pages take the browser's button font, as
-    // pdf.js expects — not the page layer's, which Tailwind's preflight
-    // would have them inherit (`font: inherit`).
-    '[&_.annotationEditorLayer_button]:[font:revert]',
-    PAGE_FRAME,
-    PDFJS_THEME,
   );
 
   private readonly container =
@@ -104,15 +80,6 @@ export class ScPdfViewerCanvas {
     viewChild.required<ElementRef<HTMLDivElement>>('viewer');
   private readonly alert =
     viewChild.required<ElementRef<HTMLDivElement>>('alert');
-
-  /**
-   * The icon of pdf.js's comment buttons: its application's stylesheet
-   * defines it, not `pdf_viewer.css`.
-   */
-  private readonly commentIcon = computed(
-    () =>
-      `url("${this.pdfViewer.assetsUrl()}web/images/comment-editButton.svg")`,
-  );
 
   /**
    * Each page's accessible name — your words, e.g.
@@ -164,25 +131,26 @@ export class ScPdfViewerCanvas {
       const module = this.module();
       const options = this.options();
       if (!module) return;
-      const engine = untracked(
-        () =>
-          new ScPdfEngine(module, {
-            ...options,
-            // The theme's colours, as real colours.
-            pageColors: resolvePageColors(
-              options.pageColors,
-              this.container().nativeElement,
-            ),
-            highlightColors: highlightColorsOption(
-              this.container().nativeElement,
-            ),
-            container: this.container().nativeElement,
-            viewer: this.viewer().nativeElement,
-            history: this.pdfViewer.historyAdapter,
-            viewerAlert: this.alert().nativeElement,
-            managers: this.pdfViewer.editorManagers,
-          }),
-      );
+      const engine = untracked(() => {
+        const container = this.container().nativeElement;
+        // The theme's colours, as real colours; dark pages show the
+        // highlights' dark side (see pdf-viewer-colors.ts).
+        const pageColors = resolvePageColors(options.pageColors, container);
+        const background =
+          pageColors && resolveColor(pageColors.background, container, 'shown');
+        const pagesDark = !!background && isDarkColor(background);
+        return new ScPdfEngine(module, {
+          ...options,
+          pageColors,
+          pagesDark,
+          highlightColors: highlightColorsOption(container, pagesDark),
+          container,
+          viewer: this.viewer().nativeElement,
+          history: this.pdfViewer.historyAdapter,
+          viewerAlert: this.alert().nativeElement,
+          managers: this.pdfViewer.editorManagers,
+        });
+      });
       untracked(() => this.pdfViewer.attachEngine(engine));
       const stopKeepingFocus = engine.on('pagechanging', () =>
         this.keepFocus(),

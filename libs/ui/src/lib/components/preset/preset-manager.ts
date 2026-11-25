@@ -149,9 +149,10 @@ export class ScPresetManager {
    *
    * It's set inline, on `<html>`: an inline style wins over any stylesheet
    * rule, whatever its order. A stylesheet you import can't override it —
-   * pdf.js's `pdf_viewer.css` sets `:root { color-scheme: light dark }`
-   * for the whole page (pdf.js issue 19886), which would otherwise hand
-   * these back to the system.
+   * pdf.js's own `pdf_viewer.css`, for one, sets `:root { color-scheme:
+   * light dark }` for the whole page (pdf.js issue 19886; the PDF Viewer's
+   * stylesheet leaves that rule out), which would otherwise hand these back
+   * to the system.
    */
   private applyMode(mode: 'light' | 'dark'): void {
     const root = this.document.documentElement;
