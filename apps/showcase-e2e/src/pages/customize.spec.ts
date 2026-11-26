@@ -42,6 +42,29 @@ test.describe('Customize Page', () => {
     ).toBeVisible();
   });
 
+  test("the demos' placeholder links stay on this page (a bare # is the home page's)", async ({
+    page,
+  }) => {
+    await page.goto('/customize');
+    await expect(
+      page.getByRole('link', { name: 'email settings' }),
+    ).toBeVisible(shown);
+    // Every link of the page's content that would leave for the home page.
+    await expect
+      .poll(() =>
+        page
+          .locator('main a[href]')
+          .evaluateAll((links) =>
+            (links as HTMLAnchorElement[])
+              .filter((a) => a.pathname === '/')
+              .map(
+                (a) => `${a.textContent?.trim()} (${a.getAttribute('href')})`,
+              ),
+          ),
+      )
+      .toEqual([]);
+  });
+
   test("shadcn's Create demos, both pages, at work", async ({ page }) => {
     const messages: string[] = [];
     page.on('console', (m) => {

@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScCard,
   ScCardBody,
@@ -10,7 +11,14 @@ import {
 /** A short explainer, a link in its text. */
 @Component({
   selector: 'app-preview-index-investing',
-  imports: [ScCard, ScCardBody, ScCardDescription, ScCardHeader, ScCardTitle],
+  imports: [
+    RouterLink,
+    ScCard,
+    ScCardBody,
+    ScCardDescription,
+    ScCardHeader,
+    ScCardTitle,
+  ],
   template: `
     <div scCard>
       <div scCardHeader>
@@ -19,7 +27,9 @@ import {
       </div>
       <div scCardBody>
         <p scCardDescription class="mt-3 text-sm leading-relaxed">
-          <a href="#" class="hover:text-primary underline underline-offset-4"
+          <a
+            routerLink="."
+            class="hover:text-primary underline underline-offset-4"
             >Over time</a
           >, this smooths out the average cost of your investments. When prices
           drop, your fixed amount buys more shares. When prices rise, you buy

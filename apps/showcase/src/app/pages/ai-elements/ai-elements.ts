@@ -46,7 +46,8 @@ import { ChatUsageDemo } from '../docs/ai-elements/chat/demos/chat-usage-demo';
         >
           Start with Chat
         </a>
-        <a scLink variant="ghost" size="sm" href="#patterns">
+        <!-- The router's link: a bare #patterns is the home page's (base href /). -->
+        <a scLink variant="ghost" size="sm" routerLink="." fragment="patterns">
           Browse the patterns
         </a>
       </div>

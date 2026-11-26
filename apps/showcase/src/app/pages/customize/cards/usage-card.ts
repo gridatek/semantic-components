@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScCard,
   ScCardBody,
@@ -18,6 +19,7 @@ const CIRCUMFERENCE = 2 * Math.PI * 42.5;
 @Component({
   selector: 'app-preview-usage-card',
   imports: [
+    RouterLink,
     ScCard,
     ScCardBody,
     ScCardHeader,
@@ -40,7 +42,7 @@ const CIRCUMFERENCE = 2 * Math.PI * 42.5;
             <div role="listitem">
               <a
                 scItem
-                href="#"
+                routerLink="."
                 size="xs"
                 class="px-0 group-hover/item-group:bg-transparent"
               >

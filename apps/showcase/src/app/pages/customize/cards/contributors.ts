@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScAvatar,
   ScAvatarFallback,
@@ -15,6 +16,7 @@ import {
 @Component({
   selector: 'app-preview-contributors',
   imports: [
+    RouterLink,
     ScAvatar,
     ScAvatarFallback,
     ScAvatarImage,
@@ -49,7 +51,7 @@ import {
         </ul>
       </div>
       <div scCardFooter>
-        <a href="#" class="text-sm underline underline-offset-4">
+        <a routerLink="." class="text-sm underline underline-offset-4">
           + 810 contributors
         </a>
       </div>

@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScAlert,
   ScAlertDescription,
@@ -22,6 +23,7 @@ import { SiCircleCheckIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-preview-activate-agent-dialog',
   imports: [
+    RouterLink,
     ScAlert,
     ScAlertDescription,
     ScBadge,
@@ -45,11 +47,13 @@ import { SiCircleCheckIcon } from '@semantic-icons/lucide-icons';
         <h2 scCardTitle>Ship faster &amp; safer with Vercel Agent</h2>
         <p scCardDescription>
           Your use is subject to Vercel's
-          <a href="#" class="underline underline-offset-4"
+          <a routerLink="." class="underline underline-offset-4"
             >Public Beta Agreement</a
           >
           and
-          <a href="#" class="underline underline-offset-4">AI Product Terms</a>.
+          <a routerLink="." class="underline underline-offset-4"
+            >AI Product Terms</a
+          >.
         </p>
       </div>
       <div scCardBody class="flex flex-col gap-4">

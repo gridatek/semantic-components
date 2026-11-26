@@ -5,6 +5,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScCard,
@@ -69,6 +70,7 @@ import {
 @Component({
   selector: 'app-preview-codespaces-card',
   imports: [
+    RouterLink,
     ScFrame,
     ScButton,
     ScCard,
@@ -236,7 +238,8 @@ import {
                     Create Codespace
                   </button>
                   <a
-                    href="#learn-more"
+                    routerLink="."
+                    fragment="learn-more"
                     class="text-muted-foreground text-xs underline underline-offset-4"
                   >
                     Learn more about codespaces

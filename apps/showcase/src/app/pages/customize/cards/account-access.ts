@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScCard,
@@ -28,6 +29,7 @@ import {
 @Component({
   selector: 'app-preview-account-access',
   imports: [
+    RouterLink,
     FormField,
     ScButton,
     ScCard,
@@ -65,7 +67,7 @@ import {
             <div class="flex items-center justify-between">
               <label scLabel>Current Password</label>
               <a
-                href="#"
+                routerLink="."
                 class="text-muted-foreground hover:text-foreground text-xs font-medium tracking-wider uppercase"
                 >Forgot?</a
               >
@@ -79,7 +81,7 @@ import {
           <svg siLockKeyholeIcon></svg>
           Update Security
         </button>
-        <a scItem variant="muted" href="#" class="w-full">
+        <a scItem variant="muted" routerLink="." class="w-full">
           <div scItemMedia variant="icon">
             <svg siCircleAlertIcon class="text-destructive"></svg>
           </div>

@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form } from '@angular/forms/signals';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScCard,
@@ -25,6 +26,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-preview-github-profile',
   imports: [
+    RouterLink,
     FormField,
     ScButton,
     ScCard,
@@ -76,7 +78,7 @@ import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             </div>
             <p scFieldDescription>
               You can manage verified email addresses in your
-              <a href="#email-settings">email settings</a>.
+              <a routerLink="." fragment="email-settings">email settings</a>.
             </p>
           </div>
           <div scField>
