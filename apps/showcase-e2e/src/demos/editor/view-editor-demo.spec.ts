@@ -200,3 +200,21 @@ test.describe('View Editor Demo', () => {
     }
   });
 });
+
+test('In the docs on a phone (280px): the editor and the published post in the width they have', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 900 });
+  await page.goto('/demos/editor/view-editor-demo');
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  await expect(view(page)).toBeVisible();
+  for (const part of [editor(page), view(page)]) {
+    const box = await part.boundingBox();
+    expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(
+      360 - 40 + 0.5,
+    );
+  }
+});

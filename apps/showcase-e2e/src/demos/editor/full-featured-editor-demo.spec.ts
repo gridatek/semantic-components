@@ -352,3 +352,18 @@ test.describe('Full Featured Editor Demo', () => {
     await expect(article(page).locator('table')).toHaveCount(0);
   });
 });
+
+test('In the docs on a phone (280px): Clear Content and Insert Sample Content in the width they have — the second under the first', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 900 });
+  await page.goto('/demos/editor/full-featured-editor-demo');
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  const insert = page.getByRole('button', { name: 'Insert Sample Content' });
+  await expect(insert).toBeVisible();
+  const box = await insert.boundingBox();
+  expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(360 - 40 + 0.5);
+});

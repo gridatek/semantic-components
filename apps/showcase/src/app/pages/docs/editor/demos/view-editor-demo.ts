@@ -55,7 +55,7 @@ import {
     SiTextQuoteIcon,
   ],
   template: `
-    <div class="grid w-full gap-6 lg:grid-cols-2">
+    <div class="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
       <div scEditor [formField]="postForm.body" class="flex flex-col gap-2">
         <div scToolbar aria-label="Formatting" class="w-full flex-wrap">
           <div scToolbarWidgetGroup>

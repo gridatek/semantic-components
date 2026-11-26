@@ -138,3 +138,35 @@ test('On a phone: the demos fit, every target 24px @mobile', async ({
     await expectTargetSize(page.locator('body'), 24);
   }
 });
+
+test('Usage, in the docs on a phone (280px): the tabs in the width they have, scrolling; the last one reached by the keyboard, in sight', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto('/demos/tabs/tabs-usage-demo');
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  const list = page.getByRole('tablist');
+  await expect(list).toBeVisible();
+  const box = await list.boundingBox();
+  expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(360 - 40 + 0.5);
+  // The first whole, from the list's start (centred content that overflows
+  // spills past both edges, its start out of reach).
+  const first = await page.getByRole('tab', { name: 'Overview' }).boundingBox();
+  expect(first?.x).toBeGreaterThanOrEqual((box?.x ?? 0) - 0.5);
+  // Overview focused, End to the last: Settings, scrolled into sight.
+  await page.getByRole('tab', { name: 'Overview' }).focus();
+  await page.keyboard.press('End');
+  const settings = page.getByRole('tab', { name: 'Settings' });
+  await expect(settings).toBeFocused();
+  await expect
+    .poll(async () => {
+      const [s, l] = [await settings.boundingBox(), await list.boundingBox()];
+      return (
+        (s?.x ?? 0) + (s?.width ?? 0) <= (l?.x ?? 0) + (l?.width ?? 0) + 0.5
+      );
+    })
+    .toBe(true);
+});
