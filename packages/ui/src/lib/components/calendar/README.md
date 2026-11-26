@@ -64,7 +64,7 @@ Empty, it is `null` (Signal Forms' empty: `required` works). A `[formField]`: `d
 ## Language
 
 - The locale is `LOCALE_ID` (the app's, or one provided for a section): the day and month names, the heading, each day's full date — all from `Intl`.
-- `firstDayOfWeek` (1 Monday – 7 Sunday): the locale's by default (`Intl.Locale` week info).
+- `firstDayOfWeek` (`'mon'` … `'sun'`, `ScFirstDayOfWeek`: Unicode's names, as `Intl.Locale` takes them): the locale's by default (`Intl.Locale` week info).
 
 ## Keyboard
 

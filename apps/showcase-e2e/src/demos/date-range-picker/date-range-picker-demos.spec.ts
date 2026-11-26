@@ -209,7 +209,7 @@ test('RTL: the day names fit their columns (Arabic’s narrow form), the full na
   expect(names[0].read.length).toBeGreaterThan(1);
 });
 
-test('RTL: the week from Sunday (firstDayOfWeek="7")', async ({ page }) => {
+test('RTL: the week from Sunday (firstDayOfWeek="sun")', async ({ page }) => {
   await page.goto(demo('rtl'));
   await trigger(page).click();
   await expect(

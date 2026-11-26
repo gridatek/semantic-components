@@ -14,6 +14,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
+import { type ScFirstDayOfWeek, ɵweekStart } from '../../utils';
 import { ScSchedulerEventTemplate } from './scheduler-event-template';
 import { daysFrom, monthWeeks, startOfWeek } from './scheduler-layout';
 import { ScSchedulerMoreTemplate } from './scheduler-more-template';
@@ -25,14 +26,6 @@ import type {
 } from './scheduler-types';
 
 /** The locale's first day of the week (1 = Monday … 7 = Sunday), Monday if unknown. */
-function firstDayOf(locale: string): number {
-  const info = new Intl.Locale(locale) as unknown as {
-    getWeekInfo?: () => { firstDay: number };
-    weekInfo?: { firstDay: number };
-  };
-  return info.getWeekInfo?.().firstDay ?? info.weekInfo?.firstDay ?? 1;
-}
-
 /**
  * A scheduler: its events, the view (month, week, day, agenda) and the date
  * it shows. Put its parts inside — the toolbar's buttons and title, a view
@@ -66,8 +59,12 @@ export class ScScheduler<
   readonly date = model<Temporal.PlainDate>(Temporal.Now.plainDateISO());
   /** Where the events are placed (the user's own by default). */
   readonly timeZone = input<string>(Temporal.Now.timeZoneId());
-  /** 1 = Monday … 7 = Sunday; the locale's by default. */
-  readonly firstDayOfWeek = input<number>(firstDayOf(this.locale));
+  /** The week's first day, `'mon'` … `'sun'`; the locale's by default. */
+  readonly firstDayOfWeek = input<ScFirstDayOfWeek | undefined>(undefined);
+  /** The week's first day as Temporal counts it, 1 (Monday) – 7 (Sunday). */
+  readonly weekStart = computed(() =>
+    ɵweekStart(this.locale, this.firstDayOfWeek(), 1),
+  );
   /** Empty days and times can be picked: `slotPick`. */
   readonly pickable = input(false, { transform: booleanAttribute });
   /** Events can be moved and resized: `eventChange`. */
@@ -118,9 +115,7 @@ export class ScScheduler<
   });
 
   /** The weeks shown in the month view. */
-  readonly weeks = computed(() =>
-    monthWeeks(this.date(), this.firstDayOfWeek()),
-  );
+  readonly weeks = computed(() => monthWeeks(this.date(), this.weekStart()));
 
   /** The days shown: the month's weeks, the week, the day, or the month's days (agenda). */
   readonly days = computed(() => {
@@ -129,7 +124,7 @@ export class ScScheduler<
       case 'month':
         return this.weeks().flat();
       case 'week':
-        return daysFrom(startOfWeek(date, this.firstDayOfWeek()), 7);
+        return daysFrom(startOfWeek(date, this.weekStart()), 7);
       case 'day':
         return [date];
       case 'agenda':

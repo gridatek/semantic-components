@@ -30,7 +30,7 @@ import {
     <div dir="rtl" lang="ar" class="max-w-full">
       <div
         scCalendar
-        [firstDayOfWeek]="7"
+        firstDayOfWeek="sun"
         #cal="scCalendar"
         aria-label="الموعد"
         [(value)]="date"

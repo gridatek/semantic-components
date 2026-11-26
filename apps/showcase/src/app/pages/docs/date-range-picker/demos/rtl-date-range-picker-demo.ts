@@ -54,7 +54,7 @@ import {
           <div scPopover class="w-auto p-0" aria-label="اختر التواريخ">
             <div
               scCalendar
-              [firstDayOfWeek]="7"
+              firstDayOfWeek="sun"
               initialFocus
               aria-label="اختر التواريخ"
               mode="range"

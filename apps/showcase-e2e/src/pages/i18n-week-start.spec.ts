@@ -39,7 +39,7 @@ test('Set on a locale: Sunday for Arabic (Intl reads it); the others as they are
   const sunday = {
     ...c,
     locales: c.locales.map((l) =>
-      l.id === 'ar' ? { ...l, firstDayOfWeek: 7 } : l,
+      l.id === 'ar' ? { ...l, firstDayOfWeek: 'sun' } : l,
     ),
   };
   const id = withWeekStart(sunday, 'ar');
@@ -53,7 +53,7 @@ test('Its region kept', () => {
   const sunday = {
     ...c,
     locales: c.locales.map((l) =>
-      l.id === 'pt-BR' ? { ...l, firstDayOfWeek: 7 } : l,
+      l.id === 'pt-BR' ? { ...l, firstDayOfWeek: 'sun' } : l,
     ),
   };
   expect(withWeekStart(sunday, 'pt-BR')).toBe('pt-BR-u-fw-sun');

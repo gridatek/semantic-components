@@ -179,7 +179,7 @@ test('Stays open: closeOnPick false — a day picked, the calendar stays', async
   await expect(calendar(page)).toHaveCount(0);
 });
 
-test('RTL: the week from Sunday (firstDayOfWeek="7")', async ({ page }) => {
+test('RTL: the week from Sunday (firstDayOfWeek="sun")', async ({ page }) => {
   await page.goto(demo('rtl'));
   await trigger(page).click();
   await expect(

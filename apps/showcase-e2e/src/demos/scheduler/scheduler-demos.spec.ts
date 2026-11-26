@@ -306,7 +306,7 @@ test('RTL: in the month, ← goes on to the next day', async ({ page }) => {
   await expect.poll(() => focusedDay(page)).toBe('2026-10-16');
 });
 
-test('RTL: the week from Sunday (firstDayOfWeek="7")', async ({ page }) => {
+test('RTL: the week from Sunday (firstDayOfWeek="sun")', async ({ page }) => {
   await page.goto('/demos/scheduler/rtl-scheduler-demo');
   await page.getByRole('button', { name: 'أسبوع' }).click();
   const first = page.locator('[data-day]').first();

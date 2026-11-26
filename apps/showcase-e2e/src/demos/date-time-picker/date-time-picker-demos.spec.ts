@@ -256,7 +256,7 @@ test.describe('Apply (confirm)', () => {
   });
 });
 
-test('RTL: the week from Sunday (firstDayOfWeek="7")', async ({ page }) => {
+test('RTL: the week from Sunday (firstDayOfWeek="sun")', async ({ page }) => {
   await page.goto(demo('rtl-date-time-picker'));
   await open(page);
   await expect(

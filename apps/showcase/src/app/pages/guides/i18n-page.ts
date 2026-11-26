@@ -147,8 +147,9 @@ interface Step {
         <p>
           Each locale has its own, from <code scTypeset>Intl</code>: Saturday
           for <code scTypeset>ar</code>. Where yours differs, say it in the
-          config: <code scTypeset>firstDayOfWeek</code>, 1 (Monday) to 7
-          (Sunday), on the locale.
+          config: <code scTypeset>firstDayOfWeek</code> on the locale, by the
+          day's name — <code scTypeset>'mon'</code> to
+          <code scTypeset>'sun'</code>, as Unicode writes them.
         </p>
         <p>
           <code scTypeset>Intl</code> follows the week as it is lived: in
@@ -234,9 +235,9 @@ export default class I18nPage {
     { id: 'en', label: 'English' },
     { id: 'fr', label: 'Français' },
     // Sunday: Intl says Saturday for ar.
-    { id: 'ar', label: 'العربية', dir: 'rtl', firstDayOfWeek: 7 },
+    { id: 'ar', label: 'العربية', dir: 'rtl', firstDayOfWeek: 'sun' },
     // Morocco: Intl says Monday (Sunday is off); Sunday here, the first by its name.
-    { id: 'ar-MA', label: 'العربية (المغرب)', dir: 'rtl', firstDayOfWeek: 7 },
+    { id: 'ar-MA', label: 'العربية (المغرب)', dir: 'rtl', firstDayOfWeek: 'sun' },
   ],
   localeData: {
     fr: () => import('@angular/common/locales/fr'),

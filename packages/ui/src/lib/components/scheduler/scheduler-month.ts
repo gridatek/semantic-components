@@ -233,7 +233,7 @@ export class ScSchedulerMonth {
     if (!target.dataset['dayButton'] || event.altKey || event.ctrlKey) return;
     const date = this.scheduler.date();
     const rtl = this.direction() === 'rtl';
-    const weekStart = startOfWeek(date, this.scheduler.firstDayOfWeek());
+    const weekStart = startOfWeek(date, this.scheduler.weekStart());
     let to: Temporal.PlainDate;
     switch (event.key) {
       case 'ArrowLeft':
