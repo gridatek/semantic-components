@@ -62,6 +62,74 @@ test.describe('PDF Viewer reading', () => {
     expect(errors).toEqual([]);
   });
 
+  test('another file dropped while the first still fetches its pages: the first let go quietly (no "Transport destroyed")', async ({
+    page,
+  }) => {
+    const errors = collectErrors(page);
+    // A busy worker, as on CI: pdf.js's requests for the sample's other pages
+    // still being worked on when the file is dropped — held 1s, answered
+    // before the worker hears it's done with (Terminate), as a busy one would.
+    await page.addInitScript(() => {
+      const send = Worker.prototype.postMessage;
+      const held: (() => void)[] = [];
+      const flush = () => held.splice(0).forEach((go) => go());
+      Worker.prototype.postMessage = function (
+        this: Worker,
+        message: unknown,
+        ...rest: never[]
+      ) {
+        const m = message as { action?: string; data?: { pageIndex?: number } };
+        const go = () => send.call(this, message, ...rest);
+        if (m?.action === 'GetPage' && (m.data?.pageIndex ?? 0) > 0) {
+          held.push(go);
+          setTimeout(flush, 1000);
+        } else {
+          if (m?.action === 'Terminate') flush();
+          go();
+        }
+      } as typeof send;
+    });
+    await page.goto('/demos/pdf-viewer/pdf-viewer-demo');
+    // Dropped the moment the sample's first page is drawn: pdf.js has just
+    // asked for all the others, none answered yet.
+    const bytes = [...findPdf()];
+    await page.evaluate((bytes) => {
+      const observer = new MutationObserver(() => {
+        if (
+          !document.querySelector('.page[data-page-number="1"] .textLayer span')
+        )
+          return;
+        observer.disconnect();
+        const data = new DataTransfer();
+        data.items.add(
+          new File([new Uint8Array(bytes)], 'find.pdf', {
+            type: 'application/pdf',
+          }),
+        );
+        const content = document.querySelector(
+          '[data-slot=pdf-viewer-content]',
+        );
+        content?.dispatchEvent(
+          new DragEvent('drop', {
+            dataTransfer: data,
+            bubbles: true,
+            cancelable: true,
+          }),
+        );
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    }, bytes);
+    await expect(page.getByTestId('page-count')).toHaveText('/ 1', {
+      timeout: 20_000,
+    });
+    await expect(
+      page.locator('.page[data-page-number="1"] .textLayer'),
+    ).toContainText('cat and cat and cat');
+    // The sample was let go once its pages were in: nothing came late.
+    await expect(page.locator('.page')).toHaveCount(1);
+    expect(errors).toEqual([]);
+  });
+
   test('permissions: a locked document cannot be printed, copied or annotated', async ({
     page,
   }) => {

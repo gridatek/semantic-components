@@ -839,6 +839,8 @@ export class ScPdfViewer {
 
   /** The document being loaded; destroyed when another load starts. */
   private loadingTask: PDFDocumentLoadingTask | null = null;
+  /** Counts `open()` calls: one overtaken while it waits stops. */
+  private opening = 0;
   private workerReady = false;
 
   constructor() {
@@ -1031,8 +1033,17 @@ export class ScPdfViewer {
     hash = '',
     { rebuilt = false, page }: { rebuilt?: boolean; page?: number } = {},
   ): Promise<void> {
+    const ticket = ++this.opening;
     this.loadingTask?.destroy();
     this.loadingTask = null;
+
+    // The previous document's pages still coming in (a file opened as the
+    // first loads): wait for them, 2s at most, to let it go quietly.
+    if (this.pdfDocument()) {
+      await this.engine()?.pagesSettled(2000);
+      // Overtaken meanwhile: the later one goes on.
+      if (ticket !== this.opening) return;
+    }
 
     // Release the previous document once nothing renders it any more.
     const previous = this.pdfDocument();

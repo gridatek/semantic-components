@@ -207,6 +207,25 @@ export class ScPdfEngine {
     this.viewer.setDocument(doc as never);
   }
 
+  /**
+   * Once the viewer has every page of its document — pdf.js asks for them all
+   * after the first is drawn — or after `ms`. A document let go while its
+   * worker still answers for them logs "Transport destroyed" for each.
+   */
+  pagesSettled(ms: number): Promise<void> {
+    const pages = this.viewer.pagesPromise;
+    if (!pages) return Promise.resolve();
+    return new Promise((resolve) => {
+      const timer = setTimeout(resolve, ms);
+      pages
+        .catch(() => undefined)
+        .then(() => {
+          clearTimeout(timer);
+          resolve();
+        });
+    });
+  }
+
   /** Listens to one of pdf.js's events; returns the way to stop. */
   on<T>(name: string, listener: (event: T) => void): () => void {
     this.eventBus.on(name, listener as never);

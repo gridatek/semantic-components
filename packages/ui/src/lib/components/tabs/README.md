@@ -40,6 +40,8 @@ Angular Aria renders a panel only through its template: content written straight
 
 Tab enters the list on the selected tab, then goes on to its panel. ArrowLeft and ArrowRight move between the tabs (mirrored right to left, by the list's own direction), ArrowUp and ArrowDown when vertical; Home and End go to the ends. Enter or Space selects — or the arrows select as they move, with `activateOnFocus`. A disabled tab is reached, not selected.
 
+A tab is scrolled wholly into sight when it takes focus: tabs that don't fit (a phone) go in a box that scrolls — `<div class="max-w-full overflow-x-auto"><div scTabsList>…</div></div>` — and the keyboard brings the one it reaches into view (the browser would leave a partly hidden one where it is).
+
 ## API reference
 
 | Part                 | Selector                          | Inputs                                                                                                            |

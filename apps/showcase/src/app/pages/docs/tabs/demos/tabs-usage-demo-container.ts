@@ -44,11 +44,14 @@ import {
   ],
   template: \`
     <div scTabs value="overview" class="w-full max-w-sm">
-      <div scTabsList class="max-w-full justify-center-safe overflow-x-auto">
-        <button scTabsTab value="overview">Overview</button>
-        <button scTabsTab value="analytics">Analytics</button>
-        <button scTabsTab value="reports">Reports</button>
-        <button scTabsTab value="settings">Settings</button>
+      <!-- A box that scrolls where the tabs don't fit (a phone). -->
+      <div class="max-w-full overflow-x-auto">
+        <div scTabsList>
+          <button scTabsTab value="overview">Overview</button>
+          <button scTabsTab value="analytics">Analytics</button>
+          <button scTabsTab value="reports">Reports</button>
+          <button scTabsTab value="settings">Settings</button>
+        </div>
       </div>
       <div scTabsPanel value="overview">
         <ng-template scTabsPanelContent>

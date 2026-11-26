@@ -139,34 +139,36 @@ test('On a phone: the demos fit, every target 24px @mobile', async ({
   }
 });
 
-test('Usage, in the docs on a phone (280px): the tabs in the width they have, scrolling; the last one reached by the keyboard, in sight', async ({
+test('Usage, in the docs on a phone (280px): the tabs scroll in their box; the first whole; the last reached by the keyboard, scrolled into sight', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 360, height: 780 });
   await page.goto('/demos/tabs/tabs-usage-demo');
-  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  // The docs' frame on a phone: 40px a side (their margin and its padding);
+  // the tabs' text a little wider, as Linux and Android render it.
   await page.addStyleTag({
-    content: 'app-root { padding-inline: 40px !important; }',
+    content:
+      'app-root { padding-inline: 40px !important; } [role=tab] { letter-spacing: 0.08em; }',
   });
   const list = page.getByRole('tablist');
   await expect(list).toBeVisible();
-  const box = await list.boundingBox();
-  expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(360 - 40 + 0.5);
-  // The first whole, from the list's start (centred content that overflows
-  // spills past both edges, its start out of reach).
+  // Its box: what scrolls, in the 280px it has.
+  const scroller = list.locator('xpath=..');
+  const box = await scroller.boundingBox();
+  const right = (box?.x ?? 0) + (box?.width ?? 0);
+  expect(right).toBeLessThanOrEqual(360 - 40 + 0.5);
+  // The first whole, from the box's start.
   const first = await page.getByRole('tab', { name: 'Overview' }).boundingBox();
   expect(first?.x).toBeGreaterThanOrEqual((box?.x ?? 0) - 0.5);
-  // Overview focused, End to the last: Settings, scrolled into sight.
+  // Overview focused, End to the last: Settings, wholly in sight.
   await page.getByRole('tab', { name: 'Overview' }).focus();
   await page.keyboard.press('End');
   const settings = page.getByRole('tab', { name: 'Settings' });
   await expect(settings).toBeFocused();
   await expect
     .poll(async () => {
-      const [s, l] = [await settings.boundingBox(), await list.boundingBox()];
-      return (
-        (s?.x ?? 0) + (s?.width ?? 0) <= (l?.x ?? 0) + (l?.width ?? 0) + 0.5
-      );
+      const s = await settings.boundingBox();
+      return (s?.x ?? 0) + (s?.width ?? 0);
     })
-    .toBe(true);
+    .toBeLessThanOrEqual(right + 0.5);
 });
