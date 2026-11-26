@@ -185,3 +185,28 @@ test('RTL: the Arabic date right to left, the clock left to right', async ({
   // The clock: the hour before the minute, left to right.
   expect(await at('hour')).toBeLessThan(await at('minute'));
 });
+
+test('Controlled, in the docs on a phone (280px): Clear under the field, not squeezing it; both inside the frame', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto(demo('controlled-date-time-input'));
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  const field = page.locator('[scField]');
+  const clear = page.getByRole('button', { name: 'Clear' });
+  await expect(field).toBeVisible();
+  const [f, c] = [await field.boundingBox(), await clear.boundingBox()];
+  // No room beside the field: Clear under it (text a few pixels wider on
+  // Linux and Android would push the row out of the frame).
+  expect(c?.y).toBeGreaterThanOrEqual((f?.y ?? 0) + (f?.height ?? 0) - 0.5);
+  // Not cut by the frame (into its 16px padding at most).
+  for (const box of [f, c]) {
+    expect(box?.x).toBeGreaterThanOrEqual(24 - 0.5);
+    expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(
+      360 - 24 + 0.5,
+    );
+  }
+});

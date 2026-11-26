@@ -11,8 +11,8 @@ import {
   selector: 'app-controlled-date-time-input-demo',
   imports: [ScButton, ScDateTimeInput, ScField, ScLabel],
   template: `
-    <div class="flex items-end gap-2">
-      <div scField class="w-64">
+    <div class="flex w-full flex-wrap items-end justify-center gap-2">
+      <div scField class="w-64 max-w-full">
         <label scLabel>Reminder</label>
         <div
           scDateTimeInput
