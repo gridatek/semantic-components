@@ -171,9 +171,11 @@ test('Typed, in the docs on a phone (280px): the field shrinks to the width it h
   });
   const group = page.locator('[data-slot=input-group]');
   await expect(group).toBeVisible();
+  // Not cut by the frame: into its 16px padding at most (as the phone test),
+  // a few pixels there where text renders wider (Linux, Android).
   const g = await group.boundingBox();
-  expect(g?.x).toBeGreaterThanOrEqual(40 - 0.5);
-  expect((g?.x ?? 0) + (g?.width ?? 0)).toBeLessThanOrEqual(360 - 40 + 0.5);
+  expect(g?.x).toBeGreaterThanOrEqual(24 - 0.5);
+  expect((g?.x ?? 0) + (g?.width ?? 0)).toBeLessThanOrEqual(360 - 24 + 0.5);
   // Nothing of it cut: its ends and its button inside it.
   for (const part of [page.locator('[scDateInput]').last(), trigger(page)]) {
     const p = await part.boundingBox();

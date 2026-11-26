@@ -133,12 +133,45 @@ test('In the docs on a phone (280px): the field shrinks to the width it has, bot
   });
   const field = page.locator('[scField]');
   await expect(field).toBeVisible();
+  // Not cut by the frame: into its 16px padding at most (as the phone test),
+  // a few pixels there where text renders wider (Linux, Android).
   const f = await field.boundingBox();
-  expect(f?.x).toBeGreaterThanOrEqual(40 - 0.5);
-  expect((f?.x ?? 0) + (f?.width ?? 0)).toBeLessThanOrEqual(360 - 40 + 0.5);
+  expect(f?.x).toBeGreaterThanOrEqual(24 - 0.5);
+  expect((f?.x ?? 0) + (f?.width ?? 0)).toBeLessThanOrEqual(360 - 24 + 0.5);
   // Its ends: none cut by the field.
   const range = await page.locator('[scDateRangeInput]').boundingBox();
   expect((range?.x ?? 0) + (range?.width ?? 0)).toBeLessThanOrEqual(
     (f?.x ?? 0) + (f?.width ?? 0) + 0.5,
+  );
+});
+
+test('Controlled, in the docs on a phone (280px): the field and Clear inside the frame, both dates inside the field', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto(demo('controlled-date-range-input'));
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  const range = page.locator('[scDateRangeInput]');
+  await expect(range).toBeVisible();
+  const right = async (locator: Locator) => {
+    const box = await locator.boundingBox();
+    return (box?.x ?? 0) + (box?.width ?? 0);
+  };
+  // Not cut by the frame (into its 16px padding at most).
+  for (const part of [range, page.getByRole('button', { name: 'Clear' })])
+    expect(await right(part)).toBeLessThanOrEqual(360 - 24 + 0.5);
+  // No room beside the field: Clear under it, not squeezing it (text a few
+  // pixels wider on Linux and Android would push the row out of the frame).
+  const field = await page.locator('[scField]').boundingBox();
+  const clear = await page.getByRole('button', { name: 'Clear' }).boundingBox();
+  expect(clear?.y).toBeGreaterThanOrEqual(
+    (field?.y ?? 0) + (field?.height ?? 0) - 0.5,
+  );
+  // The dates inside the field's own box, the second one too.
+  expect(await right(page.locator('[scDateInput]').last())).toBeLessThanOrEqual(
+    (await right(range)) + 0.5,
   );
 });

@@ -33,8 +33,8 @@ import {
   selector: 'app-controlled-date-range-input-demo',
   imports: [ScDateInput, ScDateRangeInput, ScField, ScLabel, ScButton],
   template: \`
-    <div class="flex items-end gap-2">
-      <div scField class="w-full max-w-80">
+    <div class="flex w-full flex-wrap items-end justify-center gap-2">
+      <div scField class="w-80 max-w-full">
         <label scLabel>Stay</label>
         <div scDateRangeInput #stayInput="scDateRangeInput" [(value)]="stay">
           <div scDateInput part="start" aria-label="Check-in"></div>
