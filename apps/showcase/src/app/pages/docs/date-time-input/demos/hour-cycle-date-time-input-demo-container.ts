@@ -26,7 +26,7 @@ import { ScDateTimeInput, ScField, ScLabel } from '@semantic-components/ui';
   selector: 'app-hour-cycle-date-time-input-demo',
   imports: [ScDateTimeInput, ScField, ScLabel],
   template: \`
-    <div class="grid grid-cols-1 w-full max-w-xl gap-4 sm:grid-cols-2">
+    <div class="grid w-full max-w-xl grid-cols-1 gap-4 sm:grid-cols-2">
       <div scField>
         <label scLabel>24 hours, with seconds</label>
         <div

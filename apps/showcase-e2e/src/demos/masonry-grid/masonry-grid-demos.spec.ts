@@ -45,11 +45,15 @@ const overlaps = async (page: Page, nth = 0) => {
   return count;
 };
 
-/** Laid out by us: the grid takes its items out of the flow. */
+/**
+ * Laid out: by us (the grid takes its items out of the flow, `block`), or by
+ * the browser where it can (`grid-lanes`: WebKit) — by the same rules, which
+ * the tests check either way.
+ */
 const laidOut = (page: Page, nth = 0) =>
   expect
     .poll(() => grid(page, nth).evaluate((g: HTMLElement) => g.style.display))
-    .toBe('block');
+    .toMatch(/^(block|grid-lanes)$/);
 
 let errors: string[];
 
