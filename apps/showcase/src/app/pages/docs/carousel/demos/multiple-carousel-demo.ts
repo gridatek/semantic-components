@@ -42,7 +42,7 @@ import {
             <div
               scCarouselItem
               #slide="scCarouselItem"
-              class="sm:basis-1/2 lg:basis-1/3"
+              class="basis-1/2 lg:basis-1/3"
               aria-roledescription="slide"
               [attr.aria-label]="slide.index() + 1 + ' of ' + slide.count()"
             >

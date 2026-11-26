@@ -393,3 +393,18 @@ test('Pages: Previous and Next centred on the slides, not on the carousel with i
   ])
     await expect.poll(() => middle(button)).toBeCloseTo(slides, 0);
 });
+
+test('Several in view, on a phone too: two slides side by side, not one big one', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto('/demos/carousel/multiple-carousel-demo');
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  await expect(
+    page.getByRole('region', { name: 'Several in view' }),
+  ).toBeVisible();
+  await expect.poll(() => shown(page)).toEqual(['1 of 5', '2 of 5']);
+});

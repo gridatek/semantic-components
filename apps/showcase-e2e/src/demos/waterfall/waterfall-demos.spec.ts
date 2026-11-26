@@ -154,3 +154,39 @@ test('RTL: ← opens, the bars from the right', async ({ page }) => {
   // Ends at the range's end: the cell's left edge.
   expect(Math.abs((bar?.x ?? 0) - (cell?.x ?? 0))).toBeLessThan(1);
 });
+
+test('In the docs on a phone (280px): the waterfall in the width it has, scrolling sideways — the timeline reached, its rows whole', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto(demo('waterfall-usage'));
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  const waterfall = page.getByRole('treegrid');
+  await expect(waterfall).toBeVisible();
+  // Its box: the waterfall's scroll container, in the 280px it has.
+  const box = waterfall.locator('xpath=..');
+  const b = await box.boundingBox();
+  expect((b?.x ?? 0) + (b?.width ?? 0)).toBeLessThanOrEqual(360 - 40 + 0.5);
+  // Scrolled to its end: the timeline's header in sight, and every row as
+  // long as the waterfall (its lines and hover not cut where it scrolls).
+  await box.evaluate((el) => (el.scrollLeft = el.scrollWidth));
+  const timeline = waterfall.getByRole('columnheader', { name: 'Timeline' });
+  await expect
+    .poll(async () => {
+      const [t, s] = [await timeline.boundingBox(), await box.boundingBox()];
+      return (
+        (t?.x ?? 0) + (t?.width ?? 0) <= (s?.x ?? 0) + (s?.width ?? 0) + 0.5
+      );
+    })
+    .toBe(true);
+  const short = await waterfall.evaluate(
+    (grid) =>
+      [...grid.querySelectorAll('[role=row]')].filter(
+        (row) => row.getBoundingClientRect().width < grid.scrollWidth - 0.5,
+      ).length,
+  );
+  expect(short).toBe(0);
+});

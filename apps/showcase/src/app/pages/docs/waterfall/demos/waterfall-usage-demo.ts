@@ -32,39 +32,44 @@ import { SiChevronRightIcon } from '@semantic-icons/lucide-icons';
     SiChevronRightIcon,
   ],
   template: `
-    <div
-      scWaterfall
-      #waterfall="scWaterfall"
-      aria-label="Network requests"
-      class="w-full max-w-2xl"
-      [items]="requests"
-      [barLabel]="label"
-    >
-      <div scWaterfallHeaderRow>
-        <div scWaterfallColumnHeader class="w-48">Name</div>
-        <div scWaterfallColumnHeader class="w-20">Size</div>
-        <div
-          scWaterfallColumnHeader
-          aria-label="Timeline"
-          class="min-w-24 flex-1"
-        >
-          <div scWaterfallAxis [maxTicks]="5">
-            <span scWaterfallMark [time]="620">DOMContentLoaded</span>
+    <!-- Its box scrolls sideways where its columns don't fit (a phone). -->
+    <div class="w-full max-w-2xl overflow-x-auto">
+      <div
+        scWaterfall
+        #waterfall="scWaterfall"
+        aria-label="Network requests"
+        class="min-w-max"
+        [items]="requests"
+        [barLabel]="label"
+      >
+        <div scWaterfallHeaderRow>
+          <div scWaterfallColumnHeader class="w-48">Name</div>
+          <div scWaterfallColumnHeader class="w-20">Size</div>
+          <div
+            scWaterfallColumnHeader
+            aria-label="Timeline"
+            class="min-w-24 flex-1"
+          >
+            <div scWaterfallAxis [maxTicks]="5">
+              <span scWaterfallMark [time]="620">DOMContentLoaded</span>
+            </div>
           </div>
         </div>
+        @for (row of waterfall.rows(); track row.item.value) {
+          <div scWaterfallRow [row]="row">
+            <div scWaterfallRowHeader>
+              <button scWaterfallIndicator>
+                <svg siChevronRightIcon></svg>
+              </button>
+              {{ row.item.label }}
+            </div>
+            <div scWaterfallCell class="w-20 tabular-nums">
+              {{ sizes[row.item.value] }}
+            </div>
+            <div scWaterfallBar></div>
+          </div>
+        }
       </div>
-      @for (row of waterfall.rows(); track row.item.value) {
-        <div scWaterfallRow [row]="row">
-          <div scWaterfallRowHeader>
-            <button scWaterfallIndicator><svg siChevronRightIcon></svg></button>
-            {{ row.item.label }}
-          </div>
-          <div scWaterfallCell class="w-20 tabular-nums">
-            {{ sizes[row.item.value] }}
-          </div>
-          <div scWaterfallBar></div>
-        </div>
-      }
     </div>
   `,
   host: { class: 'flex w-full justify-center pt-4' },
