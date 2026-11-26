@@ -46,12 +46,13 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     // SSR (the CI job `ssr`): the `ssr` build on its Node server. Otherwise, on
-    // CI, the built app on a file server: the build step has made it, and the
-    // dev server's Node crashes under the whole suite (a V8 fast-API bug).
+    // CI, the built app on a file server: the build step has made it (or the
+    // nightly's build job, downloaded), so not built again — and the dev
+    // server's Node crashes under the whole suite (a V8 fast-API bug).
     command: process.env['SSR']
       ? 'npx nx run showcase:serve-ssr'
       : process.env['CI']
-        ? 'npx nx run showcase:serve-static'
+        ? 'npx nx run showcase:serve-static --excludeTaskDependencies'
         : 'npx nx run showcase:serve',
     url: 'http://localhost:4200',
     reuseExistingServer: true,

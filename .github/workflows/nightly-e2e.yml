@@ -14,8 +14,48 @@ permissions:
 # phone too: ALL_BROWSERS), both ways the apps can run — client-side (csr),
 # and rendered on the server — three shards per engine, side by side.
 jobs:
+  # The showcase built once per mode, for all its shards (an artifact): one
+  # build, the same app tested everywhere, instead of one per job.
+  build:
+    name: build (${{ matrix.mode }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        include:
+          - mode: csr
+            build: npx nx build showcase
+          - mode: ssr
+            build: npx nx build showcase -c ssr
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm i
+
+      # The showcase's settings aren't in git: the tests' own
+      # (scripts/showcase-config.mjs).
+      - name: Create showcase config
+        run: node scripts/showcase-config.mjs test
+
+      - name: Build
+        run: ${{ matrix.build }}
+
+      - name: Upload the build
+        uses: actions/upload-artifact@v7
+        with:
+          name: showcase-${{ matrix.mode }}
+          path: dist/apps/showcase/
+          retention-days: 1
+
   # The apps as built by default (client-side).
   csr:
+    needs: build
     name: csr (${{ matrix.browser }} ${{ matrix.shard }})
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -45,15 +85,18 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      # Built first: the e2e server (serve-static) then starts from the cache,
-      # within Playwright's start timeout.
       # The showcase's settings aren't in git: the tests' own
       # (scripts/showcase-config.mjs).
       - name: Create showcase config
         run: node scripts/showcase-config.mjs test
 
-      - name: Build
-        run: npx nx build showcase
+      # The build job's: the e2e server (serve-static, without its build)
+      # serves it.
+      - name: Download the build
+        uses: actions/download-artifact@v7
+        with:
+          name: showcase-csr
+          path: dist/apps/showcase/
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps ${{ matrix.browser }}
@@ -78,6 +121,7 @@ jobs:
   # jobs per browser engine, side by side: two each ran close to the 60-minute
   # limit.
   ssr:
+    needs: build
     name: ssr (${{ matrix.browser }} ${{ matrix.shard }})
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -113,8 +157,12 @@ jobs:
       - name: Create showcase config
         run: node scripts/showcase-config.mjs test
 
-      - name: Build (SSR)
-        run: npx nx build showcase -c ssr
+      # The build job's: its Node server (serve-ssr) runs it.
+      - name: Download the build (SSR)
+        uses: actions/download-artifact@v7
+        with:
+          name: showcase-ssr
+          path: dist/apps/showcase/
 
       # Its own engine only.
       - name: Install Playwright Browsers
