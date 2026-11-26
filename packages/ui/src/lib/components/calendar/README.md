@@ -1,13 +1,13 @@
 # Calendar
 
-Days, months and years in the app's language — every word from `Intl`, the week as the locale has it (the day names short — "Sun", "lun." — or narrow where the language's short names are whole words, as Arabic's: ح ن ث…, the full name still read) — one day, several, or a range; reached by the keyboard across months; a `[formField]`. In the look of the app's preset (`calendar` key, shadcn's per style: the padding, the cells' size `--cell-size` and corners `--cell-radius`; no background in a card's content or a popover). Change the cells in your class: `class="[--cell-size:--spacing(10)]"`. It is as wide as its cells by default; give it a width (`class="w-full"`) and the cells grow to fill it, as shadcn's do. In a box narrower than its cells, they shrink to fit (still square) instead of spilling out (it is `max-w-full`; a wrapper of yours in a flex row — a `dir`/`lang` div — needs `max-w-full` too, or its least width stays the cells') — not shadcn's, whose cells keep `--cell-size` and overflow.
+Days, months and years in the app's language — every word from `Intl`, the week as the locale has it (the day names as `weekdayFormat`: `short` by default — "Sun", "lun.", or narrow where the language's short names are whole words, as Arabic's: ح ن ث… —, `long` where the cells have room — falling back to short, measured in the browser, when a name doesn't fit its column —, or `narrow`; the full name always read) — one day, several, or a range; reached by the keyboard across months; a `[formField]`. In the look of the app's preset (`calendar` key, shadcn's per style: the padding, the cells' size `--cell-size` and corners `--cell-radius`; no background in a card's content or a popover). Change the cells in your class: `class="[--cell-size:--spacing(10)]"`. It is as wide as its cells by default; give it a width (`class="w-full"`) and the cells grow to fill it, as shadcn's do. In a box narrower than its cells, they shrink to fit (still square) instead of spilling out (it is `max-w-full`; a wrapper of yours in a flex row — a `dir`/`lang` div — needs `max-w-full` too, or its least width stays the cells') — not shadcn's, whose cells keep `--cell-size` and overflow.
 
 ## Architecture
 
 ```
 div[scCalendar] (mode, [(value)] / [formField], minDate, maxDate, unavailable,
 │                    firstDayOfWeek, numberOfMonths, showOutsideDays, fixedWeeks,
-│                    showWeekNumbers, startView, disabled)
+│                    showWeekNumbers, weekdayFormat, startView, disabled)
 │  heading() · view() · focused() · previous() · next() · zoomOut() · goToToday() · clear()
 ├── div[scCalendarHeader]
 │   ├── button[scCalendarPrevious]   — your icon and words

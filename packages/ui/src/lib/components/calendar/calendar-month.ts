@@ -1,12 +1,17 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
+  DestroyRef,
+  ElementRef,
   LOCALE_ID,
   ViewEncapsulation,
+  afterNextRender,
+  afterRenderEffect,
   computed,
   forwardRef,
   inject,
   input,
+  signal,
 } from '@angular/core';
 import { cn } from 'cn';
 import { ScCalendar } from './calendar';
@@ -52,9 +57,25 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
           @for (name of weekdays(); track name.long) {
             <th
               scope="col"
-              class="text-muted-foreground min-w-0 flex-1 text-[0.8rem] font-normal"
+              class="text-muted-foreground relative min-w-0 flex-1 text-[0.8rem] font-normal"
             >
-              <span aria-hidden="true">{{ name.short }}</span>
+              @if (calendar.weekdayFormat() === 'long') {
+                <!-- In full where it fits; else out of sight (still measured)
+                  and the short form shown. -->
+                <span
+                  aria-hidden="true"
+                  data-weekday-long
+                  class="whitespace-nowrap"
+                  [class.invisible]="!longFits()"
+                  [class.absolute]="!longFits()"
+                  >{{ name.long }}</span
+                >
+                @if (!longFits()) {
+                  <span aria-hidden="true">{{ name.compact }}</span>
+                }
+              } @else {
+                <span aria-hidden="true">{{ name.shown }}</span>
+              }
               <span class="sr-only">{{ name.long }}</span>
             </th>
           }
@@ -123,11 +144,12 @@ export class ScCalendarMonth {
   readonly month = input.required<Temporal.PlainYearMonth>();
 
   /**
-   * The week's days, from its first: shown, and in full (read). Shown as the
-   * calendar's `weekdayFormat` — `short` narrows where a language's short
-   * names are words of their own (Arabic's الأحد, Persian, Hebrew: over 4
-   * letters), too wide for a day's column: a letter each (ح ن ث…). From the
-   * locale, so the server draws the same.
+   * The week's days, from its first: shown as the calendar's `weekdayFormat`,
+   * compact (the `short` form, a `long` one's fallback), and in full (read).
+   * `short` narrows where a language's short names are words of their own
+   * (Arabic's الأحد, Persian, Hebrew: over 4 letters), too wide for a day's
+   * column: a letter each (ح ن ث…). From the locale, so the server draws the
+   * same.
    */
   private readonly weekdays = computed(() => {
     const locale = this.locale;
@@ -138,14 +160,53 @@ export class ScCalendarMonth {
     const name = (weekday: 'narrow' | 'short' | 'long') =>
       days.map((day) => day.toLocaleString(locale, { weekday }));
     const long = name('long');
-    let shown = name(this.calendar.weekdayFormat());
-    if (
-      this.calendar.weekdayFormat() === 'short' &&
-      shown.some((n) => [...n].length > 4)
-    )
-      shown = name('narrow');
-    return days.map((_, i) => ({ short: shown[i], long: long[i] }));
+    const short = name('short');
+    const compact = short.some((n) => [...n].length > 4)
+      ? name('narrow')
+      : short;
+    const format = this.calendar.weekdayFormat();
+    const shown =
+      format === 'long' ? long : format === 'narrow' ? name('narrow') : compact;
+    return days.map((_, i) => ({
+      shown: shown[i],
+      compact: compact[i],
+      long: long[i],
+    }));
   });
+
+  /**
+   * With `long`: whether every full name fits its column — measured in the
+   * browser, after rendering and as the month's width changes (its cells
+   * shrink in a narrow box). The server draws them in full.
+   */
+  private readonly longFits = signal(true);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+
+  constructor() {
+    const measure = () => {
+      if (this.calendar.weekdayFormat() !== 'long') return;
+      this.longFits.set(
+        [...this.element.querySelectorAll('[data-weekday-long]')].every(
+          (name) =>
+            name.getBoundingClientRect().width <=
+            (name.parentElement as Element).getBoundingClientRect().width + 0.5,
+        ),
+      );
+    };
+    // The names or the format changed.
+    afterRenderEffect(() => {
+      this.weekdays();
+      measure();
+    });
+    // Its width changed.
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const observer = new ResizeObserver(measure);
+      observer.observe(this.element);
+      destroyRef.onDestroy(() => observer.disconnect());
+    });
+  }
 
   /** Its weeks: whole, from the week's first day — six, with fixedWeeks. */
   private readonly weeks = computed(() => {

@@ -164,7 +164,7 @@ export default class CalendarPage {
       name: 'ScCalendar',
       selector: 'div[scCalendar]',
       description:
-        "[(value)], mode ('single', 'multiple', 'range'), minDate, maxDate, unavailable, firstDayOfWeek, numberOfMonths, showOutsideDays, fixedWeeks, showWeekNumbers, startView (the view it opens on while empty; with a value, its days); a [formField]. Its cells from the preset's --cell-size and --cell-radius.",
+        "[(value)], mode ('single', 'multiple', 'range'), minDate, maxDate, unavailable, firstDayOfWeek, numberOfMonths, showOutsideDays, fixedWeeks, showWeekNumbers, weekdayFormat ('short', 'long', 'narrow': the day names — short by default, narrow where a language's short names are whole words; long falls back to short where a name doesn't fit its column), startView (the view it opens on while empty; with a value, its days); a [formField]. Its cells from the preset's --cell-size and --cell-radius.",
     },
     {
       name: 'ScCalendarHeader, ScCalendarHeading',

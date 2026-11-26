@@ -359,3 +359,31 @@ test('RTL: the day names in full (weekdayFormat="long"): its cells have room for
     );
   expect(fit).toBe(true);
 });
+
+test('RTL on a phone: a full day name wider than its column, the short form shown instead — every name in sight fits', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto(demo('rtl'));
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  await expect(page.locator('[data-slot=calendar-cell]').first()).toBeVisible();
+  const shown = () =>
+    page.locator('[data-slot=calendar] thead th').evaluateAll((columns) =>
+      columns.map((th) => {
+        const name = [...th.querySelectorAll('[aria-hidden=true]')].find(
+          (span) => getComputedStyle(span).visibility !== 'hidden',
+        ) as Element;
+        return {
+          text: name.textContent?.trim() ?? '',
+          fits:
+            name.getBoundingClientRect().width <=
+            th.getBoundingClientRect().width + 0.5,
+        };
+      }),
+    );
+  await expect.poll(async () => (await shown())[0].text).toBe('س');
+  for (const name of await shown()) expect(name.fits).toBe(true);
+});

@@ -29,6 +29,8 @@ test.describe('Calendar Page', () => {
       'ScCalendarDay',
       'ScCalendarFooter, ScCalendarToday, ScCalendarClear',
     ]);
+    // Its inputs: the day names' form among them.
+    await expect(table.getByRole('row').nth(1)).toContainText('weekdayFormat');
   });
 
   test('the page fits a phone, its tables scrolling in their own box @mobile', async ({
