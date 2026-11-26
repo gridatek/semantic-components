@@ -48,12 +48,21 @@ const overlaps = async (page: Page, nth = 0) => {
 /**
  * Laid out: by us (the grid takes its items out of the flow, `block`), or by
  * the browser where it can (`grid-lanes`: WebKit) — by the same rules, which
- * the tests check either way.
+ * the tests check either way. And still: a later layout (Firefox lays out
+ * again as sizes settle) glides the items — none moving any more.
  */
-const laidOut = (page: Page, nth = 0) =>
-  expect
+const laidOut = async (page: Page, nth = 0) => {
+  await expect
     .poll(() => grid(page, nth).evaluate((g: HTMLElement) => g.style.display))
     .toMatch(/^(block|grid-lanes)$/);
+  await expect
+    .poll(() =>
+      grid(page, nth).evaluate(
+        (g: HTMLElement) => g.getAnimations({ subtree: true }).length,
+      ),
+    )
+    .toBe(0);
+};
 
 let errors: string[];
 
@@ -172,10 +181,17 @@ test('RTL: the first column on the right', async ({ page }) => {
   await page.goto(demo('rtl'));
   await expect(items(page)).toHaveCount(9);
   await laidOut(page);
-  const [a, b] = await boxes(items(page));
-  expect(a.x).toBeGreaterThan(b.x);
   const g = await grid(page).boundingBox();
-  // Flush with the right edge.
-  expect(Math.abs(a.x + a.w - ((g?.x ?? 0) + (g?.width ?? 0)))).toBeLessThan(2);
-  expect(await overlaps(page)).toBe(0);
+  // Polled: a layout may still start (sizes settling).
+  await expect
+    .poll(async () => {
+      const [a, b] = await boxes(items(page));
+      return {
+        firstOnTheRight: a.x > b.x,
+        // Flush with the right edge.
+        flush: Math.abs(a.x + a.w - ((g?.x ?? 0) + (g?.width ?? 0))) < 2,
+        overlaps: await overlaps(page),
+      };
+    })
+    .toEqual({ firstOnTheRight: true, flush: true, overlaps: 0 });
 });
