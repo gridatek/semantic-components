@@ -255,3 +255,11 @@ test.describe('Apply (confirm)', () => {
     await expect(picked(page)).toHaveText('2026-11-02T14:30:00');
   });
 });
+
+test('RTL: the week from Sunday (firstDayOfWeek="7")', async ({ page }) => {
+  await page.goto(demo('rtl-date-time-picker'));
+  await open(page);
+  await expect(
+    page.locator('[data-slot=calendar] thead th .sr-only').first(),
+  ).toHaveText('الأحد');
+});

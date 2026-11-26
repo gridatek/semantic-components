@@ -344,8 +344,8 @@ test('RTL: the day names in full (weekdayFormat="long"): its cells have room for
     '[data-slot=calendar] thead th [aria-hidden=true]',
   );
   await expect(names.first()).toBeVisible();
-  // Saturday first in Arabic: in full, not its letter.
-  await expect(names.first()).toHaveText('السبت');
+  // Sunday first (firstDayOfWeek="7"): in full, not its letter.
+  await expect(names.first()).toHaveText('الأحد');
   const fit = await page
     .locator('[data-slot=calendar] thead th')
     .evaluateAll((columns) =>
@@ -384,6 +384,13 @@ test('RTL on a phone: a full day name wider than its column, the short form show
         };
       }),
     );
-  await expect.poll(async () => (await shown())[0].text).toBe('س');
+  await expect.poll(async () => (await shown())[0].text).toBe('ح');
   for (const name of await shown()) expect(name.fits).toBe(true);
+});
+
+test('RTL: the week from Sunday (firstDayOfWeek="7")', async ({ page }) => {
+  await page.goto(demo('rtl'));
+  await expect(
+    page.locator('[data-slot=calendar] thead th .sr-only').first(),
+  ).toHaveText('الأحد');
 });

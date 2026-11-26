@@ -178,3 +178,11 @@ test('Stays open: closeOnPick false — a day picked, the calendar stays', async
   await page.keyboard.press('Escape');
   await expect(calendar(page)).toHaveCount(0);
 });
+
+test('RTL: the week from Sunday (firstDayOfWeek="7")', async ({ page }) => {
+  await page.goto(demo('rtl'));
+  await trigger(page).click();
+  await expect(
+    page.locator('[data-slot=calendar] thead th .sr-only').first(),
+  ).toHaveText('الأحد');
+});

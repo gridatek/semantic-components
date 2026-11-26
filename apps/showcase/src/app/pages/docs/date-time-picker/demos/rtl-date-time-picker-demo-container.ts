@@ -92,6 +92,7 @@ import {
               >
                 <div
                   scCalendar
+                  [firstDayOfWeek]="7"
                   initialFocus
                   aria-label="اختر التاريخ"
                   [value]="dtp.date()"

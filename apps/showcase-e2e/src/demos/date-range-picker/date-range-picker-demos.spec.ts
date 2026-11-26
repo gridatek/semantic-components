@@ -206,3 +206,11 @@ test('RTL: the day names fit their columns (Arabic’s narrow form), the full na
   // The full name for screen readers: السبت, not its letter.
   expect(names[0].read.length).toBeGreaterThan(1);
 });
+
+test('RTL: the week from Sunday (firstDayOfWeek="7")', async ({ page }) => {
+  await page.goto(demo('rtl'));
+  await trigger(page).click();
+  await expect(
+    page.locator('[data-slot=calendar] thead th .sr-only').first(),
+  ).toHaveText('الأحد');
+});
