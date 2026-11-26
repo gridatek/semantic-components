@@ -17,7 +17,7 @@ import {
   ScToaster,
 } from '@semantic-components/ui';
 
-/** Boxed Two Steps: the code sent to the phone (shadcndashboard's auth2/two-steps). */
+/** Boxed Two Steps: the code sent to the phone. */
 @Component({
   selector: 'app-two-steps-page',
   imports: [

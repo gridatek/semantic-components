@@ -137,8 +137,9 @@ export default class PreferencesPage {
     {
       name: 'defaultValue',
       type: 'V',
-      default: '—',
-      description: 'Its value while none is saved.',
+      default: 'undefined',
+      description:
+        'Its value while none is saved. Left out: undefined until the user chooses (no attribute), and set(undefined) forgets a choice.',
     },
     {
       name: 'storageKey',

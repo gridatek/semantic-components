@@ -32,7 +32,7 @@ import { ThemeMenu } from './theme-menu';
 
 /**
  * The header: the sidebar's toggle, the search, and on the end the theme,
- * messages, notifications and the profile's menu (shadcndashboard's).
+ * messages, notifications and the profile's menu.
  */
 @Component({
   selector: 'app-header',

@@ -244,6 +244,8 @@ Angular's `LOCALE_ID` is `en-US` until an app provides another, and the library 
 
 Where a default depends on the locale and the browser can't give it, the part takes `en-US`'s: Sunday as the week's first day when `Intl` has no week info (Firefox has no `getWeekInfo`) — the Calendar and the Scheduler alike, through `ɵweekStart()` (`packages/ui/src/lib/utils/week-start`). A new default of this kind follows `en-US` too — not ISO, not another library's habit.
 
+The week's first day, in order: the user's choice (`injectFirstDayOfWeek()`, which the app offers in its settings: always a day — theirs once picked, kept as a cookie the server reads, else the locale's), then the part's `firstDayOfWeek`, then the locale's (the app's own setting is inside it: an i18n locale's `firstDayOfWeek`, carried in the tag as `-u-fw-`), then Sunday. The user decides over the app.
+
 ## A Link Closes Its Popup at Once
 
 A rule (the user, 2026-11-19). A popup holding links — the Header's mobile menu, the Navigation Menu's panel, the Sidebar's sheet on a phone, a Menu — closes as soon as one of its links is followed, on the click. It never waits for the Router to finish: a menu that stays open while the next page loads looks stuck, and the user can't tell why nothing moves. That's what the web does (shadcn's site, GitHub, Next.js apps).

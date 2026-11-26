@@ -61,7 +61,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
 
-/** The form page: every kind of input, as shadcndashboard's Form page shows them. */
+/** The form page: every kind of input. */
 @Component({
   selector: 'app-form-page',
   imports: [

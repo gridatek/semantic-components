@@ -41,7 +41,7 @@ const dashboards: Route[] = [
   },
 ];
 
-/** The pages: shadcndashboard's free ones and its Pro theme pages. */
+/** The pages. */
 const pages: Route[] = [
   {
     path: 'pages/tables',
@@ -531,7 +531,7 @@ const signIn: Route[] = [
   },
 ];
 
-/** shadcndashboard's routes (src/routes/Router.tsx), its screens lazy-loaded. */
+/** The app's routes, its screens lazy-loaded. */
 export const appRoutes: Route[] = [
   // The app: the sidebar, the header, the page.
   {

@@ -1,6 +1,5 @@
 /**
- * The sidebar's links: shadcndashboard's sections (sidebar/sidebaritems.ts),
- * its free screens and the Pro ones, each made here.
+ * The sidebar's links: its sections and their screens.
  */
 
 export type NavIcon =

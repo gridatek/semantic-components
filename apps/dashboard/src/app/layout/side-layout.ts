@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { SiLayoutDashboardIcon } from '@semantic-icons/lucide-icons';
 
 /**
- * The sign-in screens' side variant (shadcndashboard's auth1): a picture and
+ * The sign-in screens' side variant: a picture and
  * a word on one half, the form on the other; the picture drops on phones.
  */
 @Component({

@@ -1,4 +1,4 @@
-/** Support tickets: shadcndashboard's (src/api/ticket/ticket-data.ts). */
+/** Support tickets. */
 
 export type TicketStatus = 'Open' | 'Pending' | 'Closed';
 

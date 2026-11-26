@@ -1,4 +1,4 @@
-/** The shop's products: the images are shadcndashboard's (src/assets/images/products). */
+/** The shop's products (their images: THIRD-PARTY-NOTICES.md). */
 
 export type ProductCategory = 'Books' | 'Electronics' | 'Fashion' | 'Toys';
 

@@ -170,6 +170,16 @@ interface Step {
           <code scTypeset>firstDayOfWeek</code> input.
         </p>
         <p>
+          The user's choice comes first, when your app offers one:
+          <code scTypeset>injectFirstDayOfWeek()</code> — always a day: theirs
+          once they pick (kept as the cookie
+          <code scTypeset>sc-first-day-of-week</code>, read on the server too),
+          else the locale's. Then a calendar's own
+          <code scTypeset>firstDayOfWeek</code>, then the locale's — your
+          setting on it included — then Sunday, as <code scTypeset>en-US</code>,
+          where the browser can't tell.
+        </p>
+        <p>
           A locale with its country works alike:
           <code scTypeset>ar-MA</code> (Morocco) is given as
           <code scTypeset>ar-MA-u-fw-sun</code>, its country kept. Its id is the

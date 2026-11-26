@@ -1,7 +1,6 @@
 /**
- * The blog's posts and comments: shadcndashboard's (src/api/blog/blogdata.ts),
- * its random names and numbers (chance, lodash) written out, so every load
- * shows the same. Dates are ISO dates (Temporal).
+ * The blog's posts and comments, names and numbers written out, so every
+ * load shows the same. Dates are ISO dates (Temporal).
  */
 
 export interface BlogAuthor {

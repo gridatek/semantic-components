@@ -64,7 +64,7 @@ Empty, it is `null` (Signal Forms' empty: `required` works). A `[formField]`: `d
 ## Language
 
 - The locale is `LOCALE_ID` (the app's, or one provided for a section): the day and month names, the heading, each day's full date — all from `Intl`.
-- `firstDayOfWeek` (`'mon'` … `'sun'`, `ScFirstDayOfWeek`: Unicode's names, as `Intl.Locale` takes them): the locale's by default (`Intl.Locale` week info; Sunday where the browser has none — Firefox — as `en-US`, Angular's default locale).
+- `firstDayOfWeek` (`'mon'` … `'sun'`, `ScFirstDayOfWeek`: Unicode's names, as `Intl.Locale` takes them). The week's first day, in order: the user's choice first (`injectFirstDayOfWeek()`: always a day — theirs, kept as the cookie `sc-first-day-of-week` once they pick, else the locale's), then the part's `firstDayOfWeek`, then the locale's (`Intl`, with the app's own set on its i18n locale), then Sunday (`en-US`, where the browser has none — Firefox). The pickers' calendars alike.
 
 ## Keyboard
 

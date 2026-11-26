@@ -50,7 +50,7 @@ interface Address {
   taxNo: string;
 }
 
-/** The user profile: who, how to reach them, where (shadcndashboard's). */
+/** The user profile: who, how to reach them, where. */
 @Component({
   selector: 'app-user-profile-page',
   imports: [
@@ -383,10 +383,10 @@ export class UserProfilePage {
       label: $localize`:@@userProfile.facebook:Facebook`,
       href: 'https://www.facebook.com/wrappixel',
     },
-    { label: 'X', href: 'https://x.com/shadcndashboard' },
+    { label: 'X', href: 'https://x.com' },
     {
       label: $localize`:@@userProfile.github:GitHub`,
-      href: 'https://github.com/shadcndashboard',
+      href: 'https://github.com/gridatek/semantic-components',
     },
     {
       label: $localize`:@@userProfile.dribbble:Dribbble`,

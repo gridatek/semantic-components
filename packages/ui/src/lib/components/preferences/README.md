@@ -29,11 +29,11 @@ readonly view = injectPreference(view); // view.value(): 'list' | 'grid'; view.s
 
 ## Parts
 
-| Part                                     | What it does                                                                                                                                                     |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `definePreference(options)`              | Declares a preference: `attribute` (`data-…`), `values`, `defaultValue`, `storageKey?`, `global?` (on `<html>`). Its values' types are kept (`'list' \| 'grid'`) |
-| `injectPreference(definition)`           | Its instance, the same everywhere in the app: `value()` (a signal), `set(value)` (false when not one of its values, or unchanged)                                |
-| `[scPreferences]` (`ScPreferencesApply`) | Writes each preference's attribute on its element — or on `<html>` for a `global` one — and keeps it up to date; removes it when it goes                         |
+| Part                                     | What it does                                                                                                                                                                                                                                                      |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `definePreference(options)`              | Declares a preference: `attribute` (`data-…`), `values`, `defaultValue?` (left out: `undefined` until the user chooses, no attribute; `set(undefined)` forgets a choice), `storageKey?`, `global?` (on `<html>`). Its values' types are kept (`'list' \| 'grid'`) |
+| `injectPreference(definition)`           | Its instance, the same everywhere in the app: `value()` (a signal), `set(value)` (false when not one of its values, or unchanged)                                                                                                                                 |
+| `[scPreferences]` (`ScPreferencesApply`) | Writes each preference's attribute on its element — or on `<html>` for a `global` one — and keeps it up to date; removes it when it goes                                                                                                                          |
 
 ## Kept
 
@@ -41,6 +41,10 @@ readonly view = injectPreference(view); // view.value(): 'list' | 'grid'; view.s
 - Another tab's choice comes through (the `storage` event).
 - Without a `storageKey`: for the app's life.
 - A saved value that isn't one of its `values` is ignored: the default.
+
+## The library's own
+
+- The user's first day of the week — `injectFirstDayOfWeek()`: `value()` is always a day (theirs once they pick, kept as `sc-first-day-of-week`; else the locale's), `set('mon')` keeps one. Calendars, pickers and the scheduler follow it before their own `firstDayOfWeek`. Offer it in your settings, its choices from `SC_DAYS_OF_WEEK`.
 
 ## Not here
 

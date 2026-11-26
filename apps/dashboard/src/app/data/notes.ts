@@ -1,4 +1,4 @@
-/** Notes: shadcndashboard's (src/api/notes/notedata.ts). */
+/** Notes. */
 
 /** A note's colour: one of the theme's tokens, as the reference's. */
 export type NoteColor =

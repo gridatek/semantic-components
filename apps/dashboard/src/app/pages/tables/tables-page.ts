@@ -27,7 +27,7 @@ import { EmployeesTable } from './employees-table';
 
 type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
 
-/** The tables page: shadcndashboard's five tables. */
+/** The tables page: five tables. */
 @Component({
   selector: 'app-tables-page',
   imports: [

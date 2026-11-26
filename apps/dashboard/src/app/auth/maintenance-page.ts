@@ -10,7 +10,7 @@ import {
 } from '@semantic-components/ui';
 import { SiWrenchIcon } from '@semantic-icons/lucide-icons';
 
-/** The maintenance page (shadcndashboard's auth/maintenance). */
+/** The maintenance page. */
 @Component({
   selector: 'app-maintenance-page',
   imports: [

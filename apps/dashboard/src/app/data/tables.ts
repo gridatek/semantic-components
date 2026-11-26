@@ -1,4 +1,4 @@
-/** The tables page's rows: shadcndashboard's (src/components/tables). */
+/** The tables page's rows. */
 
 export type Priority = 'Low' | 'Medium' | 'High';
 

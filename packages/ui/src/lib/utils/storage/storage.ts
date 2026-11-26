@@ -40,6 +40,17 @@ export function writeStorage(name: string, value: string): void {
   }
 }
 
+/** Forgets a choice, in the browser: its cookie and its copy. */
+export function removeStorage(name: string): void {
+  if (!globalThis.document) return;
+  globalThis.document.cookie = `${name}=; path=/; max-age=0; samesite=lax`;
+  try {
+    globalThis.localStorage?.removeItem(name);
+  } catch {
+    // No storage: the cookie alone.
+  }
+}
+
 /**
  * The user's choices, kept as cookies: read in the browser and, while the server
  * renders a request, from it — so a page rendered per request is drawn as the
@@ -60,5 +71,10 @@ export class ScStorage {
   /** Kept a year, for the whole site; nothing on the server. */
   set(name: string, value: string): void {
     if (this.browser) writeStorage(name, value);
+  }
+
+  /** Forgotten: the next read is `null`. */
+  remove(name: string): void {
+    if (this.browser) removeStorage(name);
   }
 }

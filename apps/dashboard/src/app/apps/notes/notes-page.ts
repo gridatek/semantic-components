@@ -45,7 +45,7 @@ import { PageHeader } from '../../layout/page-header';
 import { dayTime } from '../../shared/format';
 import { NotesStore } from '../../shared/stores';
 
-/** Notes: the list, a search, the chosen note to edit, its colour (shadcndashboard's Notes app). */
+/** Notes: the list, a search, the chosen note to edit, its colour. */
 @Component({
   selector: 'app-notes-page',
   imports: [

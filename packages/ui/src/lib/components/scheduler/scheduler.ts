@@ -14,7 +14,11 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
-import { type ScFirstDayOfWeek, ɵweekStart } from '../../utils';
+import {
+  type ScFirstDayOfWeek,
+  ɵchosenFirstDayOfWeek,
+  ɵweekStart,
+} from '../../utils';
 import { ScSchedulerEventTemplate } from './scheduler-event-template';
 import { daysFrom, monthWeeks, startOfWeek } from './scheduler-layout';
 import { ScSchedulerMoreTemplate } from './scheduler-more-template';
@@ -59,12 +63,17 @@ export class ScScheduler<
   readonly date = model<Temporal.PlainDate>(Temporal.Now.plainDateISO());
   /** Where the events are placed (the user's own by default). */
   readonly timeZone = input<string>(Temporal.Now.timeZoneId());
-  /** The week's first day, `'mon'` … `'sun'`; the locale's by default. */
+  /**
+   * The week's first day, `'mon'` … `'sun'` — unless the user chose one
+   * (`injectFirstDayOfWeek()`); left out, the locale's.
+   */
   readonly firstDayOfWeek = input<ScFirstDayOfWeek | undefined>(undefined);
   /** The week's first day as Temporal counts it, 1 (Monday) – 7 (Sunday). */
   readonly weekStart = computed(() =>
-    ɵweekStart(this.locale, this.firstDayOfWeek()),
+    ɵweekStart(this.locale, this.chosenWeekStart() ?? this.firstDayOfWeek()),
   );
+  /** The user's first day, once chosen: before the part's. */
+  private readonly chosenWeekStart = ɵchosenFirstDayOfWeek();
   /** Empty days and times can be picked: `slotPick`. */
   readonly pickable = input(false, { transform: booleanAttribute });
   /** Events can be moved and resized: `eventChange`. */

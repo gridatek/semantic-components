@@ -17,7 +17,7 @@ export interface Crumb {
 }
 
 /**
- * A page's title and where it is (shadcndashboard's BreadcrumbComp): the
+ * A page's title and where it is: the
  * title as the page's h1, the trail from Home. Actions go in its content.
  */
 @Component({

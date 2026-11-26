@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, input } from '@angular/core';
 import { ScButton, ScSeparator } from '@semantic-components/ui';
 import { SiGithubIcon, SiGlobeIcon } from '@semantic-icons/lucide-icons';
 
-/** Sign in with Google or GitHub, then "or" (shadcndashboard's social-buttons). */
+/** Sign in with Google or GitHub, then "or". */
 @Component({
   selector: 'app-social-buttons',
   imports: [ScButton, ScSeparator, SiGithubIcon, SiGlobeIcon],

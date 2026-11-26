@@ -146,8 +146,7 @@ const NAMES = [
 ];
 
 /**
- * Icons: a set from @semantic-icons/lucide-icons (shadcndashboard shows
- * Iconify's), searchable by name. Each is a directive on an svg — written out
+ * Icons: a set from @semantic-icons/lucide-icons, searchable by name. Each is a directive on an svg — written out
  * here, as an app imports the ones it uses.
  */
 @Component({

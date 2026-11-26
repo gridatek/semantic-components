@@ -41,9 +41,8 @@ import { NAV, type NavLink } from './nav';
 import { SidebarIcon } from './nav-icon';
 
 /**
- * The app's frame: the sidebar (shadcndashboard's sections, a group's pages
- * folded under it), the header and the page; the attribution its license
- * asks for in the footer.
+ * The app's frame: the sidebar (its sections, a group's pages folded under
+ * it), the header and the page; the library it's built with, in the footer.
  */
 @Component({
   selector: 'app-full-layout',
@@ -207,16 +206,10 @@ import { SidebarIcon } from './nav-icon';
           <router-outlet />
         </div>
         <footer
-          i18n="@@layout.fullLayout.screensAndDataFromShadcndashboard"
+          i18n="@@layout.fullLayout.builtWithSemanticComponents"
           class="text-muted-foreground border-t px-4 py-4 text-sm md:px-6"
         >
-          Screens and data from
-          <a
-            class="text-foreground underline underline-offset-4"
-            href="https://github.com/shadcndashboard/shadcndashboard"
-            >shadcndashboard</a
-          >
-          (MIT). Components:
+          Built with
           <a
             class="text-foreground underline underline-offset-4"
             href="https://github.com/gridatek/semantic-components"

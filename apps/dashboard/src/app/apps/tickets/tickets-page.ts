@@ -41,7 +41,7 @@ import { TicketsStore } from '../../shared/stores';
 
 type Filter = 'All' | TicketStatus;
 
-/** Tickets: counts by status (they filter), a search, the list (shadcndashboard's Tickets app). */
+/** Tickets: counts by status (they filter), a search, the list. */
 @Component({
   selector: 'app-tickets-page',
   imports: [

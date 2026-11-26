@@ -101,7 +101,7 @@ import { BlogStore } from '../../shared/stores';
 
 const EMPTY_BODY = '<p></p>';
 
-/** Blog Create and Blog Edit: one form, a post's or a new one (shadcndashboard's blogadd / blogedit). */
+/** Blog Create and Blog Edit: one form, a post's or a new one. */
 @Component({
   selector: 'app-blog-edit-page',
   imports: [

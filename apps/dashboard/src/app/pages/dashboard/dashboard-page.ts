@@ -45,7 +45,7 @@ import { SalesOverview } from './sales-overview';
 type Greeting =
   'Good Morning' | 'Good Afternoon' | 'Good Evening' | 'Good Night';
 
-/** The time of day's greeting (shadcndashboard's OverviewTab). */
+/** The time of day's greeting. */
 function greeting(): Greeting {
   const hour = Temporal.Now.plainTimeISO().hour;
   if (hour >= 5 && hour < 12) return 'Good Morning';
@@ -54,7 +54,7 @@ function greeting(): Greeting {
   return 'Good Night';
 }
 
-/** The Modern dashboard: shadcndashboard's home screen. */
+/** The Modern dashboard: the home screen. */
 @Component({
   selector: 'app-dashboard-page',
   imports: [

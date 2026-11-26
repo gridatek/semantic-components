@@ -1,9 +1,9 @@
 # Dashboard
 
-An admin dashboard built with Semantic Components, complete: every screen of
-[shadcndashboard](https://github.com/shadcndashboard/shadcndashboard)'s sidebar
-— its free version's screens and data, and the screens it lists as Pro —
-rebuilt in Angular with this repository's library. It sits outside
+An admin dashboard built with Semantic Components, complete: the screens of
+an open-source admin template (MIT, see
+[THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)) and the ones its menu lists
+as Pro, rebuilt in Angular with this repository's library. It sits outside
 `apps/styles` on purpose: it isn't a style's showcase, it's an app — a second
 test, after Sera, that the library carries a real product.
 
@@ -14,10 +14,8 @@ npx nx serve dashboard   # http://localhost:4203
 ## Where it comes from
 
 - **The free screens** (Modern dashboard, Table, Form, User Profile, Notes,
-  Blog, Tickets, Icons, the sign-in screens): shadcndashboard's free version —
-  its routes (`src/routes/Router.tsx`), its sidebar
-  (`sidebar/sidebaritems.ts`), its data (`src/api/*`,
-  `src/components/tables/*`, the dashboard's cards).
+  Blog, Tickets, Icons, the sign-in screens): the template's — its routes, its
+  sidebar, its data (the tables, the dashboard's cards).
 - **The Pro screens** (the other dashboards, AI, Calendar, Chats, Email,
   Contacts, Invoice, the Pro User Profile, Ecommerce, Kanban, Customers,
   Orders, the theme pages, form layouts, data tables, charts, widgets, the
@@ -32,7 +30,9 @@ npx nx serve dashboard   # http://localhost:4203
 - **Not its CSS.** The look is the library's: the **nova** style (shadcn's
   base-nova, the reference's own style), shadcn's **neutral** theme and
   **Geist**. The app writes layout classes, not looks.
-- **License.** MIT; the footer credits shadcndashboard, as its README asks.
+- **License.** MIT: the template's notice is kept in
+  [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md), for its screens, data and
+  images.
 
 What differs from the reference, deliberately:
 
@@ -83,7 +83,7 @@ What differs from the reference, deliberately:
 | Route                                                                                                                                                         | Screen                                                                                                                                                             | Library parts                                                                                |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
 | `/pages/tables`, `/pages/form`, `/pages/user-profile`                                                                                                         | The free pages                                                                                                                                                     | Table, Field, Dialog…                                                                        |
-| `/pages/account-settings`                                                                                                                                     | Account, security (password, two-step, sessions), notifications, billing                                                                                           | Tabs, Switch, Field, Signal Forms (`validate`)                                               |
+| `/pages/account-settings`                                                                                                                                     | Account (with the week's first day: `injectFirstDayOfWeek()`, kept, every calendar follows it), security (password, two-step, sessions), notifications, billing    | Tabs, Switch, Field, Signal Forms (`validate`)                                               |
 | `/pages/faq`                                                                                                                                                  | Questions by topic, searchable                                                                                                                                     | Accordion, Input Group                                                                       |
 | `/pages/pricing`                                                                                                                                              | Monthly or yearly, three plans, a comparison                                                                                                                       | Switch, Card, Table                                                                          |
 | `/pages/roles`                                                                                                                                                | Roles, the permission matrix, each member's role                                                                                                                   | Checkbox, Avatar Group, Native Select                                                        |

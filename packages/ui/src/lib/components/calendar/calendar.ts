@@ -19,7 +19,11 @@ import {
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { type ScFirstDayOfWeek, ɵweekStart } from '../../utils';
+import {
+  type ScFirstDayOfWeek,
+  ɵchosenFirstDayOfWeek,
+  ɵweekStart,
+} from '../../utils';
 import { ScCalendarDay } from './calendar-day';
 import { ScCalendarMonth } from './calendar-month';
 import { ScCalendarMonths } from './calendar-months';
@@ -116,7 +120,10 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   );
   /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
   private readonly locale = inject(LOCALE_ID);
-  /** The week's first day, `'mon'` … `'sun'`; the locale's by default. */
+  /**
+   * The week's first day, `'mon'` … `'sun'` — unless the user chose one
+   * (`injectFirstDayOfWeek()`); left out, the locale's.
+   */
   readonly firstDayOfWeek = input<ScFirstDayOfWeek | undefined>(undefined);
   readonly numberOfMonths = input(1);
   readonly showOutsideDays = input(true, { transform: booleanAttribute });
@@ -198,8 +205,10 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
 
   /** The week's first day as Temporal counts it, 1 (Monday) – 7 (Sunday). */
   readonly weekStart = computed(() =>
-    ɵweekStart(this.locale, this.firstDayOfWeek()),
+    ɵweekStart(this.locale, this.chosenWeekStart() ?? this.firstDayOfWeek()),
   );
+  /** The user's first day, once chosen: before the part's. */
+  private readonly chosenWeekStart = ɵchosenFirstDayOfWeek();
 
   /** What is shown: the month(s), the year, or the years. */
   readonly heading = computed(() => {

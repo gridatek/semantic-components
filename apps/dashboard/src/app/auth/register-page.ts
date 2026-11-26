@@ -27,7 +27,7 @@ import {
 import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 import { SocialButtons } from './social-buttons';
 
-/** Boxed Register (shadcndashboard's auth2/register). */
+/** Boxed Register. */
 @Component({
   selector: 'app-register-page',
   imports: [

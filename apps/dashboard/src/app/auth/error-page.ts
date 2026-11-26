@@ -10,7 +10,7 @@ import {
 } from '@semantic-components/ui';
 import { SiCircleAlertIcon } from '@semantic-icons/lucide-icons';
 
-/** The 404 page (shadcndashboard's auth/error). */
+/** The 404 page. */
 @Component({
   selector: 'app-error-page',
   imports: [

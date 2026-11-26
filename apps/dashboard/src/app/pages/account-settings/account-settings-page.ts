@@ -1,5 +1,12 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
+import {
+  Component,
+  LOCALE_ID,
+  ViewEncapsulation,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   FormField,
   email,
@@ -9,6 +16,7 @@ import {
   validate,
 } from '@angular/forms/signals';
 import {
+  SC_DAYS_OF_WEEK,
   ScAvatar,
   ScAvatarFallback,
   ScAvatarImage,
@@ -27,6 +35,17 @@ import {
   ScFieldGroup,
   ScInput,
   ScLabel,
+  ScSelect,
+  ScSelectIcon,
+  ScSelectItem,
+  ScSelectItemIndicator,
+  ScSelectItemText,
+  ScSelectLabel,
+  ScSelectList,
+  ScSelectPopup,
+  ScSelectPortal,
+  ScSelectTrigger,
+  ScSelectValue,
   ScSeparator,
   ScSwitch,
   ScTable,
@@ -43,8 +62,11 @@ import {
   ScTabsTab,
   ScTextarea,
   ScToaster,
+  injectFirstDayOfWeek,
 } from '@semantic-components/ui';
 import {
+  SiCheckIcon,
+  SiChevronDownIcon,
   SiDownloadIcon,
   SiLaptopIcon,
   SiSmartphoneIcon,
@@ -76,6 +98,17 @@ import { PageHeader } from '../../layout/page-header';
     ScFieldGroup,
     ScInput,
     ScLabel,
+    ScSelect,
+    ScSelectIcon,
+    ScSelectItem,
+    ScSelectItemIndicator,
+    ScSelectItemText,
+    ScSelectLabel,
+    ScSelectList,
+    ScSelectPopup,
+    ScSelectPortal,
+    ScSelectTrigger,
+    ScSelectValue,
     ScSeparator,
     ScSwitch,
     ScTable,
@@ -91,6 +124,8 @@ import { PageHeader } from '../../layout/page-header';
     ScTabsPanelContent,
     ScTabsTab,
     ScTextarea,
+    SiCheckIcon,
+    SiChevronDownIcon,
     SiDownloadIcon,
     SiLaptopIcon,
     SiSmartphoneIcon,
@@ -125,85 +160,138 @@ import { PageHeader } from '../../layout/page-header';
 
       <div scTabsPanel value="account">
         <ng-template scTabsPanelContent>
-          <form (submit)="saveAccount($event)">
-            <div scCard>
-              <div scCardHeader>
-                <h2 i18n="@@accountSettings.profile" scCardTitle>Profile</h2>
-                <p i18n="@@accountSettings.howOthersSeeYou" scCardDescription>
-                  How others see you
-                </p>
-              </div>
-              <div scCardBody class="flex flex-col gap-6">
-                <div class="flex items-center gap-4">
-                  <span scAvatar class="size-16">
-                    <img scAvatarImage [src]="me.avatar" alt="" />
-                    <span scAvatarFallback>MA</span>
-                  </span>
-                  <p
-                    i18n="@@accountSettings.jpgOrPngUpTo"
-                    class="text-muted-foreground text-sm"
-                  >
-                    JPG or PNG, up to 800 KB.
+          <div class="flex flex-col gap-4">
+            <form (submit)="saveAccount($event)">
+              <div scCard>
+                <div scCardHeader>
+                  <h2 i18n="@@accountSettings.profile" scCardTitle>Profile</h2>
+                  <p i18n="@@accountSettings.howOthersSeeYou" scCardDescription>
+                    How others see you
                   </p>
                 </div>
-                <div scFieldGroup class="grid gap-4 md:grid-cols-2">
-                  <div scField>
-                    <label i18n="@@accountSettings.fullName" scLabel
-                      >Full name</label
+                <div scCardBody class="flex flex-col gap-6">
+                  <div class="flex items-center gap-4">
+                    <span scAvatar class="size-16">
+                      <img scAvatarImage [src]="me.avatar" alt="" />
+                      <span scAvatarFallback>MA</span>
+                    </span>
+                    <p
+                      i18n="@@accountSettings.jpgOrPngUpTo"
+                      class="text-muted-foreground text-sm"
                     >
-                    <input
-                      scInput
-                      autocomplete="name"
-                      [formField]="accountForm.name"
-                    />
-                    <div scFieldErrors></div>
+                      JPG or PNG, up to 800 KB.
+                    </p>
                   </div>
-                  <div scField>
-                    <label i18n="@@accountSettings.email" scLabel>Email</label>
-                    <input
-                      scInput
-                      type="email"
-                      autocomplete="email"
-                      [formField]="accountForm.email"
-                    />
-                    <div scFieldErrors></div>
+                  <div scFieldGroup class="grid gap-4 md:grid-cols-2">
+                    <div scField>
+                      <label i18n="@@accountSettings.fullName" scLabel
+                        >Full name</label
+                      >
+                      <input
+                        scInput
+                        autocomplete="name"
+                        [formField]="accountForm.name"
+                      />
+                      <div scFieldErrors></div>
+                    </div>
+                    <div scField>
+                      <label i18n="@@accountSettings.email" scLabel
+                        >Email</label
+                      >
+                      <input
+                        scInput
+                        type="email"
+                        autocomplete="email"
+                        [formField]="accountForm.email"
+                      />
+                      <div scFieldErrors></div>
+                    </div>
+                    <div scField>
+                      <label i18n="@@accountSettings.phone" scLabel
+                        >Phone</label
+                      >
+                      <input
+                        scInput
+                        type="tel"
+                        autocomplete="tel"
+                        [formField]="accountForm.phone"
+                      />
+                    </div>
+                    <div scField>
+                      <label i18n="@@accountSettings.location" scLabel
+                        >Location</label
+                      >
+                      <input scInput [formField]="accountForm.location" />
+                    </div>
+                    <div scField class="md:col-span-2">
+                      <label i18n="@@accountSettings.bio" scLabel>Bio</label>
+                      <textarea
+                        scTextarea
+                        rows="3"
+                        [formField]="accountForm.bio"
+                      ></textarea>
+                    </div>
                   </div>
-                  <div scField>
-                    <label i18n="@@accountSettings.phone" scLabel>Phone</label>
-                    <input
-                      scInput
-                      type="tel"
-                      autocomplete="tel"
-                      [formField]="accountForm.phone"
-                    />
-                  </div>
-                  <div scField>
-                    <label i18n="@@accountSettings.location" scLabel
-                      >Location</label
-                    >
-                    <input scInput [formField]="accountForm.location" />
-                  </div>
-                  <div scField class="md:col-span-2">
-                    <label i18n="@@accountSettings.bio" scLabel>Bio</label>
-                    <textarea
-                      scTextarea
-                      rows="3"
-                      [formField]="accountForm.bio"
-                    ></textarea>
+                </div>
+                <div scCardFooter class="justify-end">
+                  <button
+                    i18n="@@accountSettings.saveChanges"
+                    scButton
+                    type="submit"
+                  >
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <div scCard>
+              <div scCardHeader>
+                <h2 i18n="@@accountSettings.dateAndTime" scCardTitle>
+                  Date and time
+                </h2>
+                <p
+                  i18n="@@accountSettings.dateAndTimeDescription"
+                  scCardDescription
+                >
+                  How calendars show the week, kept on this device
+                </p>
+              </div>
+              <div scCardBody>
+                <div scField class="w-full max-w-xs">
+                  <div
+                    scSelect
+                    [items]="weekStarts()"
+                    [value]="weekStart.value()"
+                    (valueChange)="chooseWeekStart($event)"
+                    class="w-full"
+                  >
+                    <div i18n="@@accountSettings.weekStartsOn" scSelectLabel>
+                      Week starts on
+                    </div>
+                    <div scSelectTrigger>
+                      <span scSelectValue></span>
+                      <svg scSelectIcon siChevronDownIcon></svg>
+                    </div>
+                    <ng-template scSelectPortal>
+                      <div scSelectPopup>
+                        <div scSelectList>
+                          @for (day of weekStarts(); track day.value) {
+                            <div scSelectItem [value]="day.value">
+                              <span scSelectItemText>{{ day.label }}</span>
+                              <span scSelectItemIndicator>
+                                <svg siCheckIcon></svg>
+                              </span>
+                            </div>
+                          }
+                        </div>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </div>
-              <div scCardFooter class="justify-end">
-                <button
-                  i18n="@@accountSettings.saveChanges"
-                  scButton
-                  type="submit"
-                >
-                  Save changes
-                </button>
-              </div>
             </div>
-          </form>
+          </div>
         </ng-template>
       </div>
 
@@ -524,6 +612,26 @@ export class AccountSettingsPage {
   };
 
   private readonly toaster = inject(ScToaster);
+  private readonly locale = inject(LOCALE_ID);
+
+  /** The user's first day of the week: calendars and the scheduler follow it. */
+  private readonly weekStart = injectFirstDayOfWeek();
+  /** The days, named in the language. */
+  private readonly weekStarts = computed(() => {
+    const monday = Temporal.PlainDate.from('2024-01-01');
+    return SC_DAYS_OF_WEEK.map((value, i) => ({
+      value: value as string,
+      label: monday.add({ days: i }).toLocaleString(this.locale, {
+        weekday: 'long',
+      }),
+    }));
+  });
+
+  /** The day picked: kept, every calendar follows it. */
+  private chooseWeekStart(value: string): void {
+    const day = SC_DAYS_OF_WEEK.find((d) => d === value);
+    if (day) this.weekStart.set(day);
+  }
   private readonly me = ME;
 
   private readonly account = signal({

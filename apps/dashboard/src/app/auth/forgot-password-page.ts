@@ -16,7 +16,7 @@ import {
   ScToaster,
 } from '@semantic-components/ui';
 
-/** Boxed Forgot Password (shadcndashboard's auth2/forgot-password). */
+/** Boxed Forgot Password. */
 @Component({
   selector: 'app-forgot-password-page',
   imports: [

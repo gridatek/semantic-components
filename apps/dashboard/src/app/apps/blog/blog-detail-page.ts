@@ -44,7 +44,7 @@ import { count, day, initials, today } from '../../shared/format';
 import { label } from '../../shared/labels';
 import { BlogStore } from '../../shared/stores';
 
-/** Blog Detail: the post, then its comments and a reply box (shadcndashboard's). */
+/** Blog Detail: the post, then its comments and a reply box. */
 @Component({
   selector: 'app-blog-detail-page',
   imports: [

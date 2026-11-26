@@ -21,7 +21,7 @@ import {
 import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
 import { SocialButtons } from './social-buttons';
 
-/** Boxed Login (shadcndashboard's auth2/login). */
+/** Boxed Login. */
 @Component({
   selector: 'app-login-page',
   imports: [

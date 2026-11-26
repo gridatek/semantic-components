@@ -47,6 +47,8 @@ export class ScPreferencesApply {
           ? this.document.documentElement
           : this.host;
         const value = this.preferences.get(definition).value();
+        // Nothing chosen (no default): no attribute.
+        if (value === undefined) continue;
         this.renderer.setAttribute(target, definition.attribute, value);
         written.push([target, definition.attribute]);
       }

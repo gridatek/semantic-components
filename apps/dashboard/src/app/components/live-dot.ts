@@ -2,8 +2,8 @@ import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import { cn } from 'cn';
 
 /**
- * A small dot that pulses: something is live or new (shadcndashboard's
- * "Update" banner). Decorative — say what it means in the text beside it.
+ * A small dot that pulses: something is live or new (an "Update"
+ * banner). Decorative — say what it means in the text beside it.
  * Still for reduced motion. The library has none: a candidate for it.
  */
 @Component({

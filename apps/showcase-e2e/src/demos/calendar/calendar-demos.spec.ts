@@ -394,3 +394,20 @@ test('RTL: the week from Sunday (firstDayOfWeek="sun")', async ({ page }) => {
     page.locator('[data-slot=calendar] thead th .sr-only').first(),
   ).toHaveText('الأحد');
 });
+
+test("The user's first day (injectFirstDayOfWeek(), kept as a cookie) before the part's: Monday, where the demo says Sunday", async ({
+  page,
+  baseURL,
+}) => {
+  await page.context().addCookies([
+    {
+      name: 'sc-first-day-of-week',
+      value: 'mon',
+      url: baseURL ?? 'http://localhost:4200',
+    },
+  ]);
+  await page.goto(demo('rtl'));
+  await expect(
+    page.locator('[data-slot=calendar] thead th .sr-only').first(),
+  ).toHaveText('الاثنين');
+});

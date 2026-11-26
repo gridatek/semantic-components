@@ -1,4 +1,4 @@
-/** The dashboard's figures: shadcndashboard's (src/components/dashboards/modern). */
+/** The dashboard's figures. */
 
 export type SalesPoint = {
   readonly date: string;
