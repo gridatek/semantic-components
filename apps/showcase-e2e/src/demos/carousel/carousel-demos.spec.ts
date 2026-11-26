@@ -86,9 +86,39 @@ test.describe('Carousel demos', () => {
     await expect.poll(() => shown(page)).toEqual(['1 of 5', '2 of 5']);
   });
 
+  for (const [numberingSystem, one, label] of [
+    ['latn', '1', '1 من 5'],
+    ['arab', '١', '١ من ٥'],
+  ] as const)
+    test(`RTL: the slides' numbers and names in the user's digits (${numberingSystem})`, async ({
+      page,
+      baseURL,
+    }) => {
+      await page.context().addCookies([
+        {
+          name: 'sc-numbering-system',
+          value: numberingSystem,
+          url: baseURL ?? 'http://localhost:4200',
+        },
+      ]);
+      await page.goto(demo('rtl-carousel-demo'));
+      const first = page.locator('[scCarouselItem]').first();
+      await expect(first).toHaveText(one);
+      await expect(first).toHaveAttribute('aria-label', label);
+    });
+
   test('RTL: from the right; ← goes on, → goes back; the icons mirrored', async ({
     page,
+    baseURL,
   }) => {
+    // Latin digits, whatever the engine's default for Arabic.
+    await page.context().addCookies([
+      {
+        name: 'sc-numbering-system',
+        value: 'latn',
+        url: baseURL ?? 'http://localhost:4200',
+      },
+    ]);
     await page.goto(demo('rtl-carousel-demo'));
     const viewport = page.locator('[scCarouselViewport]');
     const first = page.locator('[scCarouselItem]').first();

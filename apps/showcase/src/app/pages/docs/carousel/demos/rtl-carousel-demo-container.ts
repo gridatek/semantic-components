@@ -20,7 +20,11 @@ import { RtlCarouselDemo } from './rtl-carousel-demo';
 export class RtlCarouselDemoContainer {
   private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
-import { ScCard, ScCardBody } from '@semantic-components/ui';
+import {
+  ScCard,
+  ScCardBody,
+  injectFormatNumber,
+} from '@semantic-components/ui';
 import {
   ScCarousel,
   ScCarouselItem,
@@ -65,7 +69,11 @@ import {
                 scCarouselItem
                 #slide="scCarouselItem"
                 aria-roledescription="شريحة"
-                [attr.aria-label]="slide.index() + 1 + ' من ' + slide.count()"
+                [attr.aria-label]="
+                  formatNumber(slide.index() + 1) +
+                  ' من ' +
+                  formatNumber(slide.count())
+                "
               >
                 <div class="p-1">
                   <div scCard>
@@ -73,7 +81,9 @@ import {
                       scCardBody
                       class="flex aspect-square items-center justify-center p-6"
                     >
-                      <span class="text-4xl font-semibold">{{ n }}</span>
+                      <span class="text-4xl font-semibold">{{
+                        formatNumber(n)
+                      }}</span>
                     </div>
                   </div>
                 </div>
@@ -97,6 +107,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlCarouselDemo {
-  private readonly slides = ['١', '٢', '٣', '٤', '٥'];
+  private readonly slides = [1, 2, 3, 4, 5];
+  // In the user's digits: Latin or Arabic-Indic, whichever they chose.
+  private readonly formatNumber = injectFormatNumber();
 }`;
 }
