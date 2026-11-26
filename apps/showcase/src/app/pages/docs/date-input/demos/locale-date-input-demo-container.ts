@@ -59,7 +59,7 @@ class LocaleDate {
   selector: 'app-locale-date-input-demo',
   imports: [LocaleDate],
   template: \`
-    <div class="grid grid-cols-1 w-full max-w-lg gap-4 sm:grid-cols-3">
+    <div class="grid w-full max-w-lg grid-cols-1 gap-4 sm:grid-cols-3">
       <app-locale-date lang="en-GB" label="Date" [(value)]="day" />
       <app-locale-date lang="de-DE" label="Datum" [(value)]="day" />
       <app-locale-date lang="ja-JP" label="日付" [(value)]="day" />

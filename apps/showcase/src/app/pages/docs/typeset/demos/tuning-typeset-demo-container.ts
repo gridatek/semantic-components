@@ -28,7 +28,7 @@ export class TuningTypesetDemoContainer {
 @Component({
   selector: 'app-tuning-typeset-demo',
   template: \`
-    <div class="grid grid-cols-1 w-full max-w-3xl gap-8 md:grid-cols-2">
+    <div class="grid w-full max-w-3xl grid-cols-1 gap-8 md:grid-cols-2">
       <article class="typeset">
         <h3>Docs</h3>
         <p>The defaults: roomy, for reading a page from top to bottom.</p>
