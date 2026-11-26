@@ -85,7 +85,7 @@ import { ChatUsageDemo } from '../docs/ai-elements/chat/demos/chat-usage-demo';
         takes inside a turn — reasoning, tools, plans — are built on the Trace,
         so every step has the same shape.
       </p>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         @for (pattern of patterns; track pattern.path) {
           <a
             scItem

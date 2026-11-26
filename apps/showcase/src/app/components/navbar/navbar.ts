@@ -113,7 +113,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
             </button>
             <div scNavigationMenuContent>
               <ul
-                class="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
+                class="grid w-[400px] grid-cols-1 gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]"
               >
                 @for (component of featuredComponents(); track component.path) {
                   <li>

@@ -993,8 +993,14 @@ export class ScPdfViewer {
       if (this.cleanupTimeout) clearTimeout(this.cleanupTimeout);
       this.releaseThumbnails();
       this.detachEngine?.();
-      this.loadingTask?.destroy();
-      this.pdfDocument()?.loadingTask.destroy();
+      // Let go once its pages are in (its viewer's, or the one just
+      // released), 2s at most: sooner, pdf.js logs "Transport destroyed".
+      const task = this.loadingTask;
+      const doc = this.pdfDocument();
+      void (this.engine()?.pagesSettled(2000) ?? this.releasing).then(() => {
+        task?.destroy();
+        doc?.loadingTask.destroy();
+      });
       if (this.undoTimeout) {
         clearTimeout(this.undoTimeout);
       }
@@ -1999,6 +2005,8 @@ export class ScPdfViewer {
   /** pdf.js's viewer components, once the canvas has created them. */
   readonly engine = signal<ScPdfEngine | null>(null);
   private detachEngine: (() => void) | null = null;
+  /** The pages of the viewer last released: the document waits for them. */
+  private releasing: Promise<void> = Promise.resolve();
 
   /** Where the document opens, until its pages are laid out. */
   private openingPage = 1;
@@ -2109,6 +2117,7 @@ export class ScPdfViewer {
   /** @internal The canvas is gone: so is pdf.js's viewer. */
   releaseEngine(engine: ScPdfEngine): void {
     if (this.engine() !== engine) return;
+    this.releasing = engine.pagesSettled(2000);
     this.detachEngine?.();
     this.detachEngine = null;
     this.engine.set(null);

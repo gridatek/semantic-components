@@ -9,7 +9,9 @@ import { ScFrame, ScToc, ScTocLink, ScTocList } from '@semantic-components/ui';
   selector: 'app-links-toc-demo',
   imports: [ScFrame, ScToc, ScTocLink, ScTocList],
   template: `
-    <div class="grid w-full max-w-2xl gap-6 sm:grid-cols-[minmax(0,1fr)_10rem]">
+    <div
+      class="grid w-full max-w-2xl grid-cols-1 gap-6 sm:grid-cols-[minmax(0,1fr)_10rem]"
+    >
       <div
         tabindex="0"
         role="region"

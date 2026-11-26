@@ -23,7 +23,7 @@ const PERCENT: Intl.NumberFormatOptions = {
   selector: 'app-good-stat-card-demo',
   imports: [ScCard, ScCardBody, ScNumberTicker],
   template: `
-    <div class="grid w-full gap-4 sm:grid-cols-2">
+    <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
       @for (stat of stats; track stat.label) {
         <div scCard>
           <div scCardBody>

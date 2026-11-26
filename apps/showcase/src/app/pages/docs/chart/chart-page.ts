@@ -120,7 +120,7 @@ import { TooltipChartDemoContainer } from './demos/tooltip-chart-demo-container'
 
       <section class="space-y-4">
         <h2 scTypeset appToc>Chart types</h2>
-        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           @for (type of types; track type.path) {
             <a
               scFrame

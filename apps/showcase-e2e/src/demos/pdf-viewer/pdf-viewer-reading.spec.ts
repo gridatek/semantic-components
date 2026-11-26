@@ -1,3 +1,4 @@
+import { type Page } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 import { expect, test } from '../../test';
 import { findPdf, lockedPdf, openPdf, taggedPdf } from './pdf-fixtures';
@@ -66,29 +67,7 @@ test.describe('PDF Viewer reading', () => {
     page,
   }) => {
     const errors = collectErrors(page);
-    // A busy worker, as on CI: pdf.js's requests for the sample's other pages
-    // still being worked on when the file is dropped — held 1s, answered
-    // before the worker hears it's done with (Terminate), as a busy one would.
-    await page.addInitScript(() => {
-      const send = Worker.prototype.postMessage;
-      const held: (() => void)[] = [];
-      const flush = () => held.splice(0).forEach((go) => go());
-      Worker.prototype.postMessage = function (
-        this: Worker,
-        message: unknown,
-        ...rest: never[]
-      ) {
-        const m = message as { action?: string; data?: { pageIndex?: number } };
-        const go = () => send.call(this, message, ...rest);
-        if (m?.action === 'GetPage' && (m.data?.pageIndex ?? 0) > 0) {
-          held.push(go);
-          setTimeout(flush, 1000);
-        } else {
-          if (m?.action === 'Terminate') flush();
-          go();
-        }
-      } as typeof send;
-    });
+    await busyWorker(page);
     await page.goto('/demos/pdf-viewer/pdf-viewer-demo');
     // Dropped the moment the sample's first page is drawn: pdf.js has just
     // asked for all the others, none answered yet.
@@ -127,6 +106,41 @@ test.describe('PDF Viewer reading', () => {
     ).toContainText('cat and cat and cat');
     // The sample was let go once its pages were in: nothing came late.
     await expect(page.locator('.page')).toHaveCount(1);
+    expect(errors).toEqual([]);
+  });
+
+  test('the page left while its documents still fetch their pages: let go quietly (no "Transport destroyed")', async ({
+    page,
+  }) => {
+    const errors = collectErrors(page);
+    await busyWorker(page);
+    // Accordion's page loaded once, so going back to it is instant.
+    await page.goto('/docs/components/accordion');
+    await page
+      .locator('a[href="/docs/components/pdf-viewer"]')
+      .first()
+      .evaluate((a: HTMLElement) => a.click());
+    await expect(
+      page.getByRole('heading', { level: 1, name: 'PDF Viewer' }),
+    ).toBeVisible();
+    // Left the moment pdf.js asks for a sample's other pages.
+    await page.evaluate(() =>
+      addEventListener(
+        'pdf-pages-asked',
+        () =>
+          document
+            .querySelector<HTMLElement>('a[href="/docs/components/accordion"]')
+            ?.click(),
+        { once: true },
+      ),
+    );
+    await expect(
+      page.getByRole('heading', { level: 1, name: 'Accordion' }),
+    ).toBeVisible({ timeout: 20_000 });
+    // Nothing on the page marks the old viewers done: the held answers come
+    // within 1s, the viewers wait 2s at most.
+    // eslint-disable-next-line playwright/no-wait-for-timeout
+    await page.waitForTimeout(2500);
     expect(errors).toEqual([]);
   });
 
@@ -274,3 +288,35 @@ test.describe('PDF Viewer reading', () => {
     expect(errors).toEqual([]);
   });
 });
+
+/**
+ * A busy worker, as on CI (the sample streamed from far away): pdf.js's
+ * requests for a document's other pages still being worked on — held 1s,
+ * answered before the worker hears it's done with (Terminate), as a busy one
+ * would. A document let go meanwhile gets the answers after it's gone. Fires
+ * `pdf-pages-asked` on the window as a request is held.
+ */
+function busyWorker(page: Page): Promise<void> {
+  return page.addInitScript(() => {
+    const send = Worker.prototype.postMessage;
+    const held: (() => void)[] = [];
+    const flush = () => held.splice(0).forEach((go) => go());
+    Worker.prototype.postMessage = function (
+      this: Worker,
+      message: unknown,
+      ...rest: never[]
+    ) {
+      const m = message as { action?: string; data?: { pageIndex?: number } };
+      const go = () => send.call(this, message, ...rest);
+      if (m?.action === 'GetPage' && (m.data?.pageIndex ?? 0) > 0) {
+        held.push(go);
+        setTimeout(flush, 1000);
+        // pdf.js has just asked: the moment to let the document go.
+        dispatchEvent(new Event('pdf-pages-asked'));
+      } else {
+        if (m?.action === 'Terminate') flush();
+        go();
+      }
+    } as typeof send;
+  });
+}

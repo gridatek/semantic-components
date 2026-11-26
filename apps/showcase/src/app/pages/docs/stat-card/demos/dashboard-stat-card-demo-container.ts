@@ -57,7 +57,7 @@ const PERCENT: Intl.NumberFormatOptions = {
     ScNumberTicker,
   ],
   template: \`
-    <div class="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="grid grid-cols-1 w-full gap-4 sm:grid-cols-2 lg:grid-cols-4">
       @for (stat of stats; track stat.label) {
         <div scCard>
           <div scCardBody>

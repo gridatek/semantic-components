@@ -10,7 +10,7 @@ import {
   selector: 'app-order-masonry-grid-demo',
   imports: [ScMasonryGrid, ScMasonryGridItem, ScFrame],
   template: `
-    <div class="grid w-full gap-6 sm:grid-cols-2">
+    <div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
       @for (sequential of [false, true]; track sequential) {
         <section class="space-y-2">
           <h3 class="text-sm font-medium">

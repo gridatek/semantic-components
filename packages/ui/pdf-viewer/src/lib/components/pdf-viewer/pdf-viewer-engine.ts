@@ -232,9 +232,14 @@ export class ScPdfEngine {
     return () => this.eventBus.off(name, listener as never);
   }
 
-  /** Closes the document: its pages, its scripts' sandbox. */
+  /**
+   * Closes the document: its pages, its scripts' sandbox — once its pages are
+   * in (`pagesSettled`, 2s at most), so it's let go quietly.
+   */
   destroy(): void {
-    this.setDocument(null);
-    this.l10n.destroy();
+    void this.pagesSettled(2000).then(() => {
+      this.setDocument(null);
+      this.l10n.destroy();
+    });
   }
 }

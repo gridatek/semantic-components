@@ -157,7 +157,7 @@ const STYLES: { name: ScStyleName; description: string }[] = [
           The same card, field, badges and buttons in each. The app picks one
           when it starts; without one, the components use nova.
         </p>
-        <div class="grid gap-4 md:grid-cols-2">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           @for (style of styles; track style.name) {
             <section
               scFrame

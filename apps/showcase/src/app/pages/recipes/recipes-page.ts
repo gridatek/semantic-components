@@ -21,7 +21,7 @@ import { ComponentsService } from '../../services/components-service';
         </p>
       </div>
 
-      <ul class="grid gap-4 md:grid-cols-2">
+      <ul class="grid grid-cols-1 gap-4 md:grid-cols-2">
         @for (recipe of recipes(); track recipe.path) {
           <li class="contents">
             <a

@@ -120,7 +120,7 @@ const SAMPLES: Record<ScEditorFormat, ScEditorValue> = {
         <button scButton type="button" (click)="load()">Load sample</button>
       </div>
 
-      <div class="grid gap-6 lg:grid-cols-2">
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div
           scEditor
           [formField]="noteForm.body"

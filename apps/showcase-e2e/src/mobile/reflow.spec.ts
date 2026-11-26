@@ -124,6 +124,7 @@ test.describe('On a phone', { tag: '@mobile' }, () => {
           timeout: 5_000,
         })
         .toEqual([]);
+      expect(await page.evaluate(gridsWithoutColumn)).toEqual([]);
     });
 
   for (const { path, fullPage } of demos) {
@@ -146,10 +147,39 @@ test.describe('On a phone', { tag: '@mobile' }, () => {
           },
         )
         .toEqual([]);
+      expect(await page.evaluate(gridsWithoutColumn)).toEqual([]);
       expect(await overlayProblems(page, path, gutter)).toEqual([]);
     });
   }
 });
+
+/**
+ * Grids given columns from a breakpoint (`sm:grid-cols-2`) but none below
+ * it: on a phone their one implicit column grows to its content's width (a
+ * command, a table, a long word) instead of the screen's — past it on Linux's
+ * wider text. They declare it: `grid-cols-1`.
+ */
+function gridsWithoutColumn(): string[] {
+  // Read from the classes: the browser reports an implicit column's resolved
+  // width, as it does a declared one's.
+  const fromBreakpoint =
+    /(^|\s)(sm|md|lg|xl|2xl|min-\[\d+px\]|@[\w/-]+):grid-cols-/;
+  const below = /(^|\s)(grid-cols-|\[grid-template)/;
+  return [...document.querySelectorAll<HTMLElement>('app-root *')]
+    .filter((el) => {
+      const classes = el.getAttribute('class') ?? '';
+      return (
+        fromBreakpoint.test(classes) &&
+        !below.test(classes) &&
+        !el.style.gridTemplateColumns &&
+        /grid/.test(getComputedStyle(el).display)
+      );
+    })
+    .map(
+      (el) =>
+        `<${el.tagName.toLowerCase()} class="${el.getAttribute('class')?.slice(0, 60)}">`,
+    );
+}
 
 /**
  * Each overlay the demo opens, in turn — opened, measured at rest, closed

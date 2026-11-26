@@ -46,7 +46,7 @@ import { HomeUiElements } from './ui-elements';
       class="bg-muted dark:bg-background relative flex w-full max-w-none flex-col gap-(--gap) overflow-hidden p-4 pb-0! [--gap:--spacing(6)] min-[1900px]:p-12 min-[1900px]:[--gap:--spacing(10)]! sm:p-12 sm:[--gap:--spacing(8)] lg:p-6 lg:[--gap:--spacing(6)]"
     >
       <div
-        class="relative z-10 mx-auto grid w-full gap-(--gap) min-[1400px]:grid-cols-4! min-[1900px]:grid-cols-5! md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 xl:max-w-[1600px] 2xl:max-w-[1900px]"
+        class="relative z-10 mx-auto grid w-full grid-cols-1 gap-(--gap) min-[1400px]:grid-cols-4! min-[1900px]:grid-cols-5! md:max-w-3xl md:grid-cols-2 lg:max-w-none lg:grid-cols-3 xl:max-w-[1600px] 2xl:max-w-[1900px]"
       >
         <div class="flex flex-col items-start gap-(--gap)">
           <app-home-ui-elements />

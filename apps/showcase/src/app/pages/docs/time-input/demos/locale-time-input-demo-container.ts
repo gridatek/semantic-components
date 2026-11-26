@@ -59,7 +59,7 @@ class LocaleTime {
   selector: 'app-locale-time-input-demo',
   imports: [LocaleTime],
   template: \`
-    <div class="grid w-full max-w-md gap-4 sm:grid-cols-3">
+    <div class="grid grid-cols-1 w-full max-w-md gap-4 sm:grid-cols-3">
       <app-locale-time lang="en-GB" label="Arrival time" [(value)]="time" />
       <app-locale-time lang="de-DE" label="Ankunftszeit" [(value)]="time" />
       <app-locale-time lang="ko-KR" label="도착 시간" [(value)]="time" />

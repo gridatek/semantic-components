@@ -187,7 +187,7 @@ class RtlWithoutDir {}
           <code scTypeset>Dir</code>, the tooltip opens on the right; without
           it, on the left, as in the page around it.
         </p>
-        <div class="grid gap-4 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div scFrame class="space-y-4 p-6">
             <h3 class="text-sm font-medium">With Dir</h3>
             <app-rtl-with-dir />

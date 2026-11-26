@@ -59,7 +59,7 @@ class LocaleDateTime {
   selector: 'app-locale-date-time-input-demo',
   imports: [LocaleDateTime],
   template: \`
-    <div class="grid w-full max-w-2xl gap-4 sm:grid-cols-3">
+    <div class="grid grid-cols-1 w-full max-w-2xl gap-4 sm:grid-cols-3">
       <app-locale-date-time
         lang="en-GB"
         label="Departure"

@@ -6,7 +6,7 @@ import { ScField, ScLabel, ScTimeInput } from '@semantic-components/ui';
   selector: 'app-hour-cycle-time-input-demo',
   imports: [ScField, ScLabel, ScTimeInput],
   template: `
-    <div class="grid w-full max-w-md gap-4 sm:grid-cols-2">
+    <div class="grid w-full max-w-md grid-cols-1 gap-4 sm:grid-cols-2">
       <div scField>
         <label scLabel>12-hour clock</label>
         <div scTimeInput [hourCycle]="12" [(value)]="afternoon"></div>

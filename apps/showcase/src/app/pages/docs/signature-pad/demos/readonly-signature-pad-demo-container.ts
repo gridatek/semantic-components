@@ -30,7 +30,7 @@ import {
   selector: 'app-readonly-signature-pad-demo',
   imports: [ScSignaturePad],
   template: \`
-    <div class="grid w-full max-w-md gap-4 sm:grid-cols-2">
+    <div class="grid grid-cols-1 w-full max-w-md gap-4 sm:grid-cols-2">
       <div class="space-y-1">
         <p id="saved-readonly" class="text-muted-foreground text-sm">
           Read-only

@@ -184,7 +184,7 @@ import { TocHeading } from '../../components/toc/toc-heading';
           >, <code scTypeset>[iconPosition]="'left'"</code>), a component is
           small, focused parts that you assemble in your template:
         </p>
-        <div class="grid gap-4 lg:grid-cols-2">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
           <div scCodeBlock class="min-w-0">
             <pre
               scCodeBlockContent

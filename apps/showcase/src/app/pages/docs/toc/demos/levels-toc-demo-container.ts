@@ -35,7 +35,7 @@ import {
   template: \`
     <div
       scTocScope
-      class="grid w-full max-w-2xl gap-6 sm:grid-cols-[minmax(0,1fr)_10rem]"
+      class="grid grid-cols-1 w-full max-w-2xl gap-6 sm:grid-cols-[minmax(0,1fr)_10rem]"
     >
       <div
         tabindex="0"
