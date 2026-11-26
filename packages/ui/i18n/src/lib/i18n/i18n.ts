@@ -5,6 +5,7 @@ import {
   SC_I18N_CONFIG,
   type ScI18nConfig,
   type ScLocale,
+  findLocale,
   localeDir,
   storageKey,
 } from './i18n-config';
@@ -29,9 +30,9 @@ export class ScI18n {
   /** The locales offered. */
   readonly locales = this.config.locales;
 
-  /** The locale in use: `LOCALE_ID`'s, or its base (`en` for `en-US`), else the source one. */
-  readonly locale: ScLocale = this.find(inject(LOCALE_ID)) ??
-    this.find(this.config.sourceLocale) ?? {
+  /** The locale in use: `LOCALE_ID`'s (its extensions aside: `ar` for `ar-u-fw-sun`), or its base (`en` for `en-US`), else the source one. */
+  readonly locale: ScLocale = findLocale(this.config, inject(LOCALE_ID)) ??
+    findLocale(this.config, this.config.sourceLocale) ?? {
       id: this.config.sourceLocale,
       label: this.config.sourceLocale,
     };
@@ -48,15 +49,5 @@ export class ScI18n {
       return;
     this.storage.set(storageKey(this.config), id);
     this.document.defaultView?.location.reload();
-  }
-
-  private find(id: string): ScLocale | undefined {
-    const lower = id.toLowerCase();
-    return (
-      this.locales.find((locale) => locale.id.toLowerCase() === lower) ??
-      this.locales.find(
-        (locale) => locale.id.toLowerCase() === lower.split('-')[0],
-      )
-    );
   }
 }

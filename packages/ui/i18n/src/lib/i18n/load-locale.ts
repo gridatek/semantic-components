@@ -6,13 +6,16 @@ import {
   chooseLocale,
   localeDir,
   storageKey,
+  withWeekStart,
 } from './i18n-config';
 
 /**
  * Before bootstrapping, in `main.ts` (the app's code imported after it):
  * picks the locale — the one chosen before, else the browser's, else the
  * source one — loads its translations and locale data, and sets `<html lang>`,
- * `<html dir>` and `$localize.locale`, which Angular's `LOCALE_ID` follows.
+ * `<html dir>` and `$localize.locale`, which Angular's `LOCALE_ID` follows:
+ * the locale carrying the week's first day when the config sets one
+ * (`ar-u-fw-sun`), which every calendar reads.
  * If they fail to load: the source locale. In the browser.
  */
 export async function loadLocale(config: ScI18nConfig): Promise<void> {
@@ -28,7 +31,12 @@ export async function loadLocale(config: ScI18nConfig): Promise<void> {
         config.localeData?.[locale]?.(),
       ]);
       loadTranslations(translations);
-      if (data) registerLocaleData(data.default);
+      if (data) {
+        registerLocaleData(data.default);
+        // Under the id Angular is given too: its pipes look it up by it.
+        const id = withWeekStart(config, locale);
+        if (id !== locale) registerLocaleData(data.default, id);
+      }
     } catch (error) {
       console.error(
         `"${locale}" could not be loaded; "${config.sourceLocale}" instead.`,
@@ -37,7 +45,7 @@ export async function loadLocale(config: ScI18nConfig): Promise<void> {
       locale = config.sourceLocale;
     }
   }
-  $localize.locale = locale;
+  $localize.locale = withWeekStart(config, locale);
   const html = document.documentElement;
   html.lang = locale;
   html.dir = localeDir(config, locale);

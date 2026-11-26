@@ -54,6 +54,7 @@ The translations, one file per locale but the source one: `public/i18n/<id>.json
 - **Picks** the locale chosen before (`storageKey`, `sc-locale` by default: a cookie, copied to `localStorage`), else the first of the browser's languages offered (or its base: `fr` for `fr-CA`), else the source one. A stored ID not offered is ignored.
 - **Loads** its translations and locale data together; if either fails, the source locale, with an error in the console. A message missing from a file shows the source text.
 - **Sets** `<html lang>`, `<html dir>` (the locale's `dir`; left out, `Intl.Locale#getTextInfo()`'s) and `$localize.locale`, before the app starts. Angular's `LOCALE_ID` follows `$localize.locale` — and the library's dates, numbers and calendars follow `LOCALE_ID`, with nothing to provide; the CDK's direction is right from the first render.
+- **The week's first day**: each locale's own (`Intl`), unless the config says it — `firstDayOfWeek`, 1 (Monday) to 7 (Sunday), for every locale, or on a locale (`{ id: 'ar', label: 'العربية', firstDayOfWeek: 7 }`), which wins. The locale Angular is given then carries it as Unicode writes it (`ar-u-fw-sun`): `Intl` reads it, and so every calendar and picker. Its translations and `<html lang>` keep the locale's id. One calendar can still say its own (its `firstDayOfWeek` input).
 
 ## ScI18n
 

@@ -9,6 +9,7 @@ import {
   ScCodeBlockTitle,
 } from '@semantic-components/ui/code-block';
 import { SiCheckIcon, SiCopyIcon } from '@semantic-icons/lucide-icons';
+import { DocCode } from '../../components/doc-code/doc-code';
 import { PackageManagerInstall } from '../../components/package-manager-install/package-manager-install';
 import { TocHeading } from '../../components/toc/toc-heading';
 
@@ -23,6 +24,7 @@ interface Step {
 @Component({
   selector: 'app-i18n-page',
   imports: [
+    DocCode,
     ScFrame,
     ScCodeBlock,
     ScCodeBlockHeader,
@@ -141,6 +143,26 @@ interface Step {
       </section>
 
       <section class="space-y-4">
+        <h2 scTypeset appToc>The week's first day</h2>
+        <p>
+          Each locale has its own, from <code scTypeset>Intl</code> — and for a
+          language alone, its likeliest country's: Saturday for
+          <code scTypeset>ar</code> (Egypt's). Where yours differs, say it in
+          the config: <code scTypeset>firstDayOfWeek</code>, 1 (Monday) to 7
+          (Sunday), for every locale, or on one locale, which wins.
+        </p>
+        <app-doc-code [code]="weekStartCode" />
+        <p>
+          The locale Angular is given then carries it, as Unicode writes it —
+          <code scTypeset>ar-u-fw-sun</code> — and every calendar and picker
+          starts its weeks there. Its translations and
+          <code scTypeset>&lt;html lang&gt;</code> keep the locale's id. One
+          calendar can still say its own: its
+          <code scTypeset>firstDayOfWeek</code> input.
+        </p>
+      </section>
+
+      <section class="space-y-4">
         <h2 scTypeset appToc>ScI18n</h2>
         <div scFrame class="overflow-x-auto">
           <table class="w-full text-sm">
@@ -192,6 +214,18 @@ interface Step {
   encapsulation: ViewEncapsulation.None,
 })
 export default class I18nPage {
+  private readonly weekStartCode = `export const I18N: ScI18nConfig = {
+  sourceLocale: 'en',
+  // Every locale: Sunday.
+  firstDayOfWeek: 7,
+  locales: [
+    { id: 'en', label: 'English' },
+    // This one: Monday.
+    { id: 'fr', label: 'Français', firstDayOfWeek: 1 },
+    { id: 'ar', label: 'العربية', dir: 'rtl' },
+  ],
+};`;
+
   private readonly steps: readonly Step[] = [
     {
       title: 'List your locales',

@@ -8,6 +8,11 @@ export interface ScLocale {
   label: string;
   /** Its writing direction; left out, the platform's (`Intl.Locale#getTextInfo()`). */
   dir?: 'ltr' | 'rtl';
+  /**
+   * Its week's first day, 1 (Monday) – 7 (Sunday): over the config's
+   * `firstDayOfWeek`. Left out, the config's, else the locale's own (`Intl`).
+   */
+  firstDayOfWeek?: number;
 }
 
 /**
@@ -19,6 +24,12 @@ export interface ScI18nConfig {
   sourceLocale: string;
   /** Every locale offered, the source one included. */
   locales: readonly ScLocale[];
+  /**
+   * The week's first day in every locale, 1 (Monday) – 7 (Sunday), unless a
+   * locale has its own: Sunday for Arabic, say, where `Intl` gives Saturday.
+   * Left out, each locale's own. Every calendar follows it.
+   */
+  firstDayOfWeek?: number;
   /**
    * Angular's locale data, for its pipes: lazy imports written in the app,
    * so each one is a chunk of its own —
@@ -59,6 +70,40 @@ export function chooseLocale(
     if (match) return match;
   }
   return config.sourceLocale;
+}
+
+/**
+ * The locale offered for an id — the one Angular has, its extensions aside
+ * (`ar` for `ar-u-fw-sun`) — or for its base (`fr` for `fr-CA`).
+ */
+export function findLocale(
+  config: ScI18nConfig,
+  id: string,
+): ScLocale | undefined {
+  const base = new Intl.Locale(id).baseName.toLowerCase();
+  return (
+    config.locales.find((locale) => locale.id.toLowerCase() === base) ??
+    config.locales.find(
+      (locale) => locale.id.toLowerCase() === base.split('-')[0],
+    )
+  );
+}
+
+/** Unicode's names for the days, Monday first (its `fw` key). */
+const WEEKDAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] as const;
+
+/**
+ * The locale Angular is given (`LOCALE_ID`): the id, carrying the week's
+ * first day when the config sets one — the locale's, else every locale's —
+ * as Unicode's `fw` (`ar-u-fw-sun`), which `Intl` reads, and so every
+ * calendar. Its translations and `<html lang>` keep the id itself.
+ */
+export function withWeekStart(config: ScI18nConfig, id: string): string {
+  const day = findLocale(config, id)?.firstDayOfWeek ?? config.firstDayOfWeek;
+  if (!day) return id;
+  return new Intl.Locale(id, {
+    firstDayOfWeek: WEEKDAYS[day - 1],
+  } as Intl.LocaleOptions).toString();
 }
 
 /** The locale's writing direction: the app's, else the platform's. */
