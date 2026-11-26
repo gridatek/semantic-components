@@ -174,3 +174,20 @@ test('RTL: mirrored — the months from the right, the values on the right; ← 
   await press(page, 'ArrowLeft');
   await expect(tooltip(page)).toContainText('فبراير');
 });
+
+test('Interactive, in the docs on a phone (280px): the time ranges in the width they have, each still named in full', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto('/demos/area-chart/interactive-area-chart-demo');
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  const ranges = page.getByRole('group', { name: 'Time range' });
+  await expect(ranges).toBeVisible();
+  const box = await ranges.boundingBox();
+  expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(360 - 40 + 0.5);
+  for (const name of ['Last 3 months', 'Last 30 days', 'Last 7 days'])
+    await expect(ranges.getByRole('button', { name })).toBeVisible();
+});

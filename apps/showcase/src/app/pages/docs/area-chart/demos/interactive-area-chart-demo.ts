@@ -62,9 +62,15 @@ import {
       [value]="[range()]"
       (valueChange)="choose($event[0])"
     >
-      <button scToggleGroupItem value="90">Last 3 months</button>
-      <button scToggleGroupItem value="30">Last 30 days</button>
-      <button scToggleGroupItem value="7">Last 7 days</button>
+      <button scToggleGroupItem value="90">
+        <span class="max-sm:sr-only">Last</span> 3 months
+      </button>
+      <button scToggleGroupItem value="30">
+        <span class="max-sm:sr-only">Last</span> 30 days
+      </button>
+      <button scToggleGroupItem value="7">
+        <span class="max-sm:sr-only">Last</span> 7 days
+      </button>
     </div>
     <div scChart [config]="config" [data]="data()">
       <svg
