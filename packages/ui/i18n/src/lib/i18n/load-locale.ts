@@ -14,7 +14,7 @@ import {
  * picks the locale — the one chosen before, else the browser's, else the
  * source one — loads its translations and locale data, and sets `<html lang>`,
  * `<html dir>` and `$localize.locale`, which Angular's `LOCALE_ID` follows:
- * the locale carrying the week's first day when the config sets one
+ * the locale carrying the week's first day when the locale sets one
  * (`ar-u-fw-sun`), which every calendar reads.
  * If they fail to load: the source locale. In the browser.
  */

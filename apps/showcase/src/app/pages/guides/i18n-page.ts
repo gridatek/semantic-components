@@ -149,7 +149,7 @@ interface Step {
           language alone, its likeliest country's: Saturday for
           <code scTypeset>ar</code> (Egypt's). Where yours differs, say it in
           the config: <code scTypeset>firstDayOfWeek</code>, 1 (Monday) to 7
-          (Sunday), for every locale, or on one locale, which wins.
+          (Sunday), on the locale.
         </p>
         <p>
           <code scTypeset>Intl</code> follows the week as it is lived: in
@@ -231,13 +231,11 @@ interface Step {
 export default class I18nPage {
   private readonly weekStartCode = `export const I18N: ScI18nConfig = {
   sourceLocale: 'en',
-  // Every locale: Sunday.
-  firstDayOfWeek: 7,
   locales: [
     { id: 'en', label: 'English' },
-    // This one: Monday.
-    { id: 'fr', label: 'Français', firstDayOfWeek: 1 },
-    { id: 'ar', label: 'العربية', dir: 'rtl' },
+    { id: 'fr', label: 'Français' },
+    // Sunday: Intl says Saturday for ar (Egypt's).
+    { id: 'ar', label: 'العربية', dir: 'rtl', firstDayOfWeek: 7 },
     // Morocco: Intl says Monday (Sunday is off); Sunday here, the first by its name.
     { id: 'ar-MA', label: 'العربية (المغرب)', dir: 'rtl', firstDayOfWeek: 7 },
   ],

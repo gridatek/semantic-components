@@ -23,8 +23,6 @@ export const scComboboxTemplate = `
         }"
         [cdkConnectedOverlayOpen]="open()"
         [cdkConnectedOverlayPositions]="positions"
-        cdkConnectedOverlayPush
-        [cdkConnectedOverlayViewportMargin]="5"
         (positionChange)="onPositionChange($event)"
       >
         <ng-container [scPortalOutlet]="portal()" />
@@ -43,8 +41,6 @@ export const scComboboxTemplate = `
         }"
         [cdkConnectedOverlayOpen]="open()"
         [cdkConnectedOverlayPositions]="positions"
-        cdkConnectedOverlayPush
-        [cdkConnectedOverlayViewportMargin]="5"
         (positionChange)="onPositionChange($event)"
         (overlayOutsideClick)="onOutsideClick($event)"
       >

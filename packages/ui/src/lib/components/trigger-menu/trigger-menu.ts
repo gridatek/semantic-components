@@ -104,8 +104,6 @@ const FALLBACK: ConnectedPosition[] = [
         }"
         [cdkConnectedOverlayOpen]="!!match()"
         [cdkConnectedOverlayPositions]="positions()"
-        cdkConnectedOverlayPush
-        [cdkConnectedOverlayViewportMargin]="5"
         (positionChange)="onPositionChange($event)"
       >
         @if (portal(); as portal) {
