@@ -73,6 +73,15 @@ test.describe('Console clean', () => {
           m.text().includes('height of the fill-mode image is zero')
         )
           return;
+        // WebKit's guess about the server's preload hints (the route's own
+        // chunks): one imported later than a few seconds after load — hydration
+        // on a busy runner — reads as preloaded for nothing. A chunk's
+        // timing, not a warning from the page.
+        if (
+          process.env['SSR'] &&
+          m.text().includes('was preloaded using link preload but not used')
+        )
+          return;
         // The Media Player's error demo plays a broken file on purpose (to
         // show its error state): Firefox reports any media that fails to
         // load. That file only — another media failure still counts.

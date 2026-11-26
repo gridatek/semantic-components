@@ -1,5 +1,6 @@
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import type * as PdfViewerModule from 'pdfjs-dist/web/pdf_viewer.mjs';
+import { afterPageRequests } from './pdf-pages-in-flight';
 import type { editorManagers } from './pdf-viewer-editing';
 import type { ScPdfScrollMode, ScPdfSpreadMode } from './pdf-viewer-types';
 
@@ -208,22 +209,17 @@ export class ScPdfEngine {
   }
 
   /**
-   * Once the viewer has every page of its document — pdf.js asks for them all
-   * after the first is drawn — or after `ms`. A document let go while its
-   * worker still answers for them logs "Transport destroyed" for each.
+   * Lets go of its document (`setDocument(null)`) once none of its page
+   * requests is waiting — `ms` at most. Sooner, an answer coming in breaks
+   * pdf.js's viewer; and its transport may be destroyed only after.
    */
-  pagesSettled(ms: number): Promise<void> {
-    const pages = this.viewer.pagesPromise;
-    if (!pages) return Promise.resolve();
-    return new Promise((resolve) => {
-      const timer = setTimeout(resolve, ms);
-      pages
-        .catch(() => undefined)
-        .then(() => {
-          clearTimeout(timer);
-          resolve();
-        });
-    });
+  letGo(ms: number): Promise<void> {
+    return new Promise((resolve) =>
+      afterPageRequests(this.viewer.pdfDocument as never, ms, () => {
+        this.setDocument(null);
+        resolve();
+      }),
+    );
   }
 
   /** Listens to one of pdf.js's events; returns the way to stop. */
@@ -232,14 +228,15 @@ export class ScPdfEngine {
     return () => this.eventBus.off(name, listener as never);
   }
 
+  private destroyed: Promise<void> | null = null;
+
   /**
-   * Closes the document: its pages, its scripts' sandbox — once its pages are
-   * in (`pagesSettled`, 2s at most), so it's let go quietly.
+   * Closes the document — its pages, its scripts' sandbox — once its page
+   * requests are answered (`letGo`, 10s at most). Resolves once it has: only
+   * then may its transport be destroyed. Called again, the same promise.
    */
-  destroy(): void {
-    void this.pagesSettled(2000).then(() => {
-      this.setDocument(null);
-      this.l10n.destroy();
-    });
+  destroy(): Promise<void> {
+    this.destroyed ??= this.letGo(10_000).then(() => this.l10n.destroy());
+    return this.destroyed;
   }
 }

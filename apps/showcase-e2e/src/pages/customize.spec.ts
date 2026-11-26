@@ -68,9 +68,19 @@ test.describe('Customize Page', () => {
     await expect(
       kitchen.getByRole('slider', { name: 'Brightness' }),
     ).toBeDisabled();
-    // Its dialog opens on its first field and closes.
+    // Its dialog opens on its first field and closes. Focus in it before the
+    // key: WebKit on CI still opens it when the key would come.
     await page.getByRole('button', { name: 'Share Feedback' }).click();
-    await expect(page.getByRole('dialog')).toBeVisible();
+    await expect(page.getByRole('dialog')).toBeVisible(shown);
+    await expect
+      .poll(
+        () =>
+          page.evaluate(
+            () => !!document.activeElement?.closest('[role=dialog]'),
+          ),
+        shown,
+      )
+      .toBe(true);
     await page.keyboard.press('Escape');
     await expect(page.getByRole('dialog')).toHaveCount(0, shown);
     expect(messages).toEqual([]);
@@ -157,12 +167,14 @@ test.describe('Customize Page', () => {
     await expect(
       chart.locator('[data-slot=chart-category-axis] text').first(),
     ).toHaveText('M');
-    await plot.focus();
-    await expect(page.locator('[data-slot=chart-tooltip]')).toContainText(
-      'Monday',
-    );
-    await expect(page.locator('[data-slot=chart-tooltip]')).toContainText(
-      '84%',
-    );
+    // Focused again until it answers: on CI (WebKit, the largest page) the
+    // first focus may come before the chart listens (still hydrating).
+    const tooltip = page.locator('[data-slot=chart-tooltip]');
+    await expect(async () => {
+      await plot.blur();
+      await plot.focus();
+      await expect(tooltip).toContainText('Monday', { timeout: 2000 });
+    }).toPass(shown);
+    await expect(tooltip).toContainText('84%');
   });
 });

@@ -167,7 +167,7 @@ export class ScPdfViewerCanvas {
         stopKeepingFocus();
         stopNaming.forEach((stop) => stop());
         this.pdfViewer.releaseEngine(engine);
-        engine.destroy();
+        void engine.destroy();
       });
     });
 

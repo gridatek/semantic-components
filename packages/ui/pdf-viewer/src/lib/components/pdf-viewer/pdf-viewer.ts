@@ -23,6 +23,7 @@ import {
   PermissionFlag,
   getDocument,
 } from 'pdfjs-dist';
+import { pageRequestsAnswered, trackPageRequests } from './pdf-pages-in-flight';
 import { moveCaret } from './pdf-viewer-caret-browsing';
 import {
   HIGHLIGHT_COLORS,
@@ -1004,14 +1005,18 @@ export class ScPdfViewer {
       if (this.cleanupTimeout) clearTimeout(this.cleanupTimeout);
       this.releaseThumbnails();
       this.detachEngine?.();
-      // Let go once its pages are in (its viewer's, or the one just
-      // released), 2s at most: sooner, pdf.js logs "Transport destroyed".
+      // Let go once its viewer has (its own, or the one just released) and
+      // its page requests are answered: sooner, pdf.js logs "Transport
+      // destroyed".
       const task = this.loadingTask;
       const doc = this.pdfDocument();
-      void (this.engine()?.pagesSettled(2000) ?? this.releasing).then(() => {
-        task?.destroy();
-        doc?.loadingTask.destroy();
-      });
+      const engine = this.engine();
+      void (engine ? engine.destroy() : this.releasing)
+        .then(() => pageRequestsAnswered(doc, 10_000))
+        .then(() => {
+          task?.destroy();
+          doc?.loadingTask.destroy();
+        });
       if (this.undoTimeout) {
         clearTimeout(this.undoTimeout);
       }
@@ -1055,19 +1060,23 @@ export class ScPdfViewer {
     this.loadingTask = null;
 
     // The previous document's pages still coming in (a file opened as the
-    // first loads): wait for them, 2s at most, to let it go quietly.
+    // first loads): its viewer lets go once they're in, 2s at most.
     if (this.pdfDocument()) {
-      await this.engine()?.pagesSettled(2000);
+      await this.engine()?.letGo(2000);
       // Overtaken meanwhile: the later one goes on.
       if (ticket !== this.opening) return;
     }
 
     // Release the previous document once nothing renders it any more.
+    // The viewer first: a transport destroyed under it, pdf.js still asks for
+    // its pages ("Transport destroyed").
     const previous = this.pdfDocument();
     this.pdfDocument.set(null);
-    previous?.loadingTask.destroy();
-    this.clearFind();
     this.engine()?.setDocument(null);
+    void pageRequestsAnswered(previous, 10_000).then(() =>
+      previous?.loadingTask.destroy(),
+    );
+    this.clearFind();
     // pdf.js's editors belong to the document they edit.
     this.closeEditing();
     // The same document rebuilt (page organisation) keeps its undo.
@@ -1132,6 +1141,8 @@ export class ScPdfViewer {
 
     try {
       const doc = await task.promise;
+      // Before any page is asked for: it's let go once they're answered.
+      trackPageRequests(doc);
       if (task !== this.loadingTask) return;
       // Known before the pages are drawn (forms may be read-only).
       const permissions = await doc.getPermissions().catch(() => null);
@@ -2128,7 +2139,7 @@ export class ScPdfViewer {
   /** @internal The canvas is gone: so is pdf.js's viewer. */
   releaseEngine(engine: ScPdfEngine): void {
     if (this.engine() !== engine) return;
-    this.releasing = engine.pagesSettled(2000);
+    this.releasing = engine.destroy();
     this.detachEngine?.();
     this.detachEngine = null;
     this.engine.set(null);
