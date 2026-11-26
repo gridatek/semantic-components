@@ -145,10 +145,9 @@ interface Step {
       <section class="space-y-4">
         <h2 scTypeset appToc>The week's first day</h2>
         <p>
-          Each locale has its own, from <code scTypeset>Intl</code> — and for a
-          language alone, its likeliest country's: Saturday for
-          <code scTypeset>ar</code> (Egypt's). Where yours differs, say it in
-          the config: <code scTypeset>firstDayOfWeek</code>, 1 (Monday) to 7
+          Each locale has its own, from <code scTypeset>Intl</code>: Saturday
+          for <code scTypeset>ar</code>. Where yours differs, say it in the
+          config: <code scTypeset>firstDayOfWeek</code>, 1 (Monday) to 7
           (Sunday), on the locale.
         </p>
         <p>
@@ -234,7 +233,7 @@ export default class I18nPage {
   locales: [
     { id: 'en', label: 'English' },
     { id: 'fr', label: 'Français' },
-    // Sunday: Intl says Saturday for ar (Egypt's).
+    // Sunday: Intl says Saturday for ar.
     { id: 'ar', label: 'العربية', dir: 'rtl', firstDayOfWeek: 7 },
     // Morocco: Intl says Monday (Sunday is off); Sunday here, the first by its name.
     { id: 'ar-MA', label: 'العربية (المغرب)', dir: 'rtl', firstDayOfWeek: 7 },
