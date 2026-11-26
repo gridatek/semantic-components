@@ -146,10 +146,12 @@ interface Step {
         <h2 scTypeset appToc>The week's first day</h2>
         <p>
           Each locale has its own, from <code scTypeset>Intl</code>: Saturday
-          for <code scTypeset>ar</code>. Where yours differs, say it in the
-          config: <code scTypeset>firstDayOfWeek</code> on the locale, by the
-          day's name — <code scTypeset>'mon'</code> to
-          <code scTypeset>'sun'</code>, as Unicode writes them.
+          for <code scTypeset>ar</code>; where the browser can't tell (Firefox),
+          Sunday, as <code scTypeset>en-US</code> — Angular's default locale,
+          and the library's. Where yours differs, say it in the config:
+          <code scTypeset>firstDayOfWeek</code> on the locale, by the day's name
+          — <code scTypeset>'mon'</code> to <code scTypeset>'sun'</code>, as
+          Unicode writes them.
         </p>
         <p>
           <code scTypeset>Intl</code> follows the week as it is lived: in

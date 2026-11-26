@@ -198,7 +198,7 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
 
   /** The week's first day as Temporal counts it, 1 (Monday) – 7 (Sunday). */
   readonly weekStart = computed(() =>
-    ɵweekStart(this.locale, this.firstDayOfWeek(), 7),
+    ɵweekStart(this.locale, this.firstDayOfWeek()),
   );
 
   /** What is shown: the month(s), the year, or the years. */

@@ -238,6 +238,12 @@ A rule (the user, 2026-11-13). The consumer speaks logical first — `side="inli
 
 Names: `side` is the edge (`top`, `bottom`, `inline-start`, `inline-end`, `left`, `right`); `alignment` is the place along it (`start`, `center`, `end`); their offsets `sideOffset` and `alignmentOffset`. `start` / `end` never name a side.
 
+## The Default Locale: `en-US`, as Angular's
+
+Angular's `LOCALE_ID` is `en-US` until an app provides another, and the library follows it: every part reads `LOCALE_ID` (no part has a `locale` input), so with nothing provided it is `en-US` — dates, numbers, the words from `Intl`, the week.
+
+Where a default depends on the locale and the browser can't give it, the part takes `en-US`'s: Sunday as the week's first day when `Intl` has no week info (Firefox has no `getWeekInfo`) — the Calendar and the Scheduler alike, through `ɵweekStart()` (`packages/ui/src/lib/utils/week-start`). A new default of this kind follows `en-US` too — not ISO, not another library's habit.
+
 ## A Link Closes Its Popup at Once
 
 A rule (the user, 2026-11-19). A popup holding links — the Header's mobile menu, the Navigation Menu's panel, the Sidebar's sheet on a phone, a Menu — closes as soon as one of its links is followed, on the click. It never waits for the Router to finish: a menu that stays open while the next page loads looks stuck, and the user can't tell why nothing moves. That's what the web does (shadcn's site, GitHub, Next.js apps).

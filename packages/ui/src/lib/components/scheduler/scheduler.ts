@@ -63,7 +63,7 @@ export class ScScheduler<
   readonly firstDayOfWeek = input<ScFirstDayOfWeek | undefined>(undefined);
   /** The week's first day as Temporal counts it, 1 (Monday) – 7 (Sunday). */
   readonly weekStart = computed(() =>
-    ɵweekStart(this.locale, this.firstDayOfWeek(), 1),
+    ɵweekStart(this.locale, this.firstDayOfWeek()),
   );
   /** Empty days and times can be picked: `slotPick`. */
   readonly pickable = input(false, { transform: booleanAttribute });

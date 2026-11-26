@@ -19,18 +19,17 @@ const DAYS: readonly ScFirstDayOfWeek[] = [
 
 /**
  * The week's first day as Temporal counts it, 1 (Monday) – 7 (Sunday): the
- * one given, else the locale's (`Intl.Locale` week info), else `fallback`
- * where the browser has none.
+ * one given, else the locale's (`Intl.Locale` week info), else Sunday where
+ * the browser has none (Firefox) — as `en-US`, Angular's default locale.
  */
 export function ɵweekStart(
   locale: string,
   given: ScFirstDayOfWeek | undefined,
-  fallback: number,
 ): number {
   if (given) return DAYS.indexOf(given) + 1;
   const info = new Intl.Locale(locale) as Intl.Locale & {
     getWeekInfo?: () => { firstDay: number };
     weekInfo?: { firstDay: number };
   };
-  return info.getWeekInfo?.().firstDay ?? info.weekInfo?.firstDay ?? fallback;
+  return info.getWeekInfo?.().firstDay ?? info.weekInfo?.firstDay ?? 7;
 }
