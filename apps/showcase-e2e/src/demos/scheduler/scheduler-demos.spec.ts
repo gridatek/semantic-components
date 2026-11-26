@@ -305,3 +305,13 @@ test('RTL: in the month, ← goes on to the next day', async ({ page }) => {
   await page.keyboard.press('ArrowLeft');
   await expect.poll(() => focusedDay(page)).toBe('2026-10-16');
 });
+
+test('RTL: the week from Sunday (firstDayOfWeek="7")', async ({ page }) => {
+  await page.goto('/demos/scheduler/rtl-scheduler-demo');
+  await page.getByRole('button', { name: 'أسبوع' }).click();
+  const first = page.locator('[data-day]').first();
+  await expect(first).toBeVisible();
+  // Its day: a Sunday (Temporal's dayOfWeek 7).
+  const key = (await first.getAttribute('data-day')) ?? '';
+  expect(Temporal.PlainDate.from(key).dayOfWeek).toBe(7);
+});

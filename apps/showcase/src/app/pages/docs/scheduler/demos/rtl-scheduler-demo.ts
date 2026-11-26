@@ -55,6 +55,7 @@ interface Meeting extends ScSchedulerEventData {
       [events]="events"
       [(view)]="view"
       [(date)]="date"
+      [firstDayOfWeek]="7"
       dir="rtl"
       lang="ar"
       class="h-[36rem]"
