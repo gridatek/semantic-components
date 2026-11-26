@@ -341,7 +341,7 @@ export const appConfig: ApplicationConfig = {
     },
     {
       title: 'Write your switcher',
-      text: 'From ScI18n, with any of the components — here a select. Each name in its own language (lang); choosing one reloads the page in it.',
+      text: 'From ScI18n, with any of the components — here a select. Each name in its own language (lang); choosing one reloads the page in it, and the user’s other tabs with it.',
       file: 'locale-select.html',
       language: 'angular-html',
       code: `<div scSelect [value]="i18n.locale.id" (valueChange)="i18n.setLocale($event)">

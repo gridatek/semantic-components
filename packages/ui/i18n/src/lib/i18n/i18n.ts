@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { LOCALE_ID, Service, inject } from '@angular/core';
+import { DestroyRef, LOCALE_ID, Service, inject } from '@angular/core';
 import { ScStorage } from '@semantic-components/ui';
 import {
   SC_I18N_CONFIG,
@@ -14,7 +14,8 @@ import {
  * The app's locales (`withI18n()`) and the one in use
  * (`LOCALE_ID`, set by `loadLocale()`) — for the page's life: switching
  * reloads it, since templates are translated once, when they are created.
- * Write your switcher from it (a select, a menu, buttons).
+ * Write your switcher from it (a select, a menu, buttons). A language chosen
+ * in another tab reloads this one in it too.
  */
 @Service()
 export class ScI18n {
@@ -39,6 +40,20 @@ export class ScI18n {
 
   /** Its writing direction: its `dir`, else the platform's. */
   readonly dir = localeDir(this.config, this.locale.id);
+
+  constructor() {
+    // Another tab chose a language: this one reloads in it (its choice,
+    // already kept). Forgotten, a tab keeps its own until its next load.
+    const stop = this.storage.watch(storageKey(this.config), (saved) => {
+      if (
+        saved &&
+        saved !== this.locale.id &&
+        this.locales.some((locale) => locale.id === saved)
+      )
+        this.document.defaultView?.location.reload();
+    });
+    inject(DestroyRef).onDestroy(stop);
+  }
 
   /** Keeps the choice and reloads the page in it; nothing for the locale in use or one not offered. */
   setLocale(id: string): void {

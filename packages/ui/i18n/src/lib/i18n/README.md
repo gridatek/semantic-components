@@ -74,7 +74,7 @@ A switcher of yours:
 
 ## Limits
 
-- Switching reloads the page: templates are translated once, when created.
+- Switching reloads the page: templates are translated once, when created. The user's other tabs reload in the new language at once (from `withI18n()`, on every page, with a switcher or not).
 - No locale in the URL: the choice lives in a cookie — no per-locale links or SEO.
 - Missing translations are not checked at build time: check them in CI.
 - In the browser. A server renders the source locale: Angular evaluates a component's messages once per process (when it first creates its template), so one server can't render requests in different locales. Server-rendered locales need Angular's build-time i18n — a build per locale.

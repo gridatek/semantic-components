@@ -252,7 +252,9 @@ Digits, in order: the user's choice (`injectNumberingSystem()`), the app's (an i
 
 A choice kept with `ScStorage` (a cookie the server reads, copied to `localStorage`) that sets how the app looks everywhere — the mode, the theme, a preference such as the week's first day — reaches the user's other tabs at once: the browser fires the `storage` event in each of them, and `ScStorage.watch()` hands the new value on. A tab left light after the user chose dark looks broken.
 
-Not every choice: the sidebar's state is the tab's own layout (another tab opens with the last one kept), and the language reloads the page, which would lose another tab's work — the others take it at their next load.
+The language too, though it reloads the page: the other tabs reload in it at once (`ScI18n`, started by `withI18n()`). Someone changing the language wants it everywhere; a tab left in the old one, or half in each, looks broken.
+
+Not every choice: the sidebar's state is the tab's own layout (another tab opens with the last one kept).
 
 ## A Link Closes Its Popup at Once
 
