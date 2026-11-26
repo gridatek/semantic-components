@@ -1,8 +1,5 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
-  DOCUMENT,
   DestroyRef,
-  PLATFORM_ID,
   Service,
   type Signal,
   inject,
@@ -62,7 +59,6 @@ export interface ScPreference<
 @Service()
 export class ScPreferences {
   private readonly storage = inject(ScStorage);
-  private readonly document = inject(DOCUMENT);
   private readonly instances = new Map<
     ScPreferenceDefinition,
     {
@@ -71,21 +67,11 @@ export class ScPreferences {
     }
   >();
 
+  /** Watching other tabs: stopped with the app. */
+  private readonly stops: (() => void)[] = [];
+
   constructor() {
-    if (!isPlatformBrowser(inject(PLATFORM_ID))) return;
-    const window = this.document.defaultView;
-    // Another tab chose: here too.
-    const onStorage = (event: StorageEvent) => {
-      for (const [definition, { value }] of this.instances) {
-        if (!definition.storageKey || event.key !== definition.storageKey)
-          continue;
-        value.set(this.valid(definition, event.newValue));
-      }
-    };
-    window?.addEventListener('storage', onStorage);
-    inject(DestroyRef).onDestroy(() =>
-      window?.removeEventListener('storage', onStorage),
-    );
+    inject(DestroyRef).onDestroy(() => this.stops.forEach((stop) => stop()));
   }
 
   /** The preference's instance. */
@@ -127,6 +113,13 @@ export class ScPreferences {
       };
       entry = { preference, value };
       this.instances.set(definition, entry);
+      // Another tab chose: here too.
+      if (definition.storageKey)
+        this.stops.push(
+          this.storage.watch(definition.storageKey, (saved) =>
+            value.set(this.valid(definition, saved)),
+          ),
+        );
     }
     return entry.preference as unknown as ScPreference<V, D>;
   }

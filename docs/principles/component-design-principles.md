@@ -246,6 +246,12 @@ Where a default depends on the locale and the browser can't give it, the part ta
 
 The week's first day, in order: the user's choice (`injectFirstDayOfWeek()`, which the app offers in its settings: always a day — theirs once picked, kept as a cookie the server reads, else the locale's), then the part's `firstDayOfWeek`, then the locale's (the app's own setting is inside it: an i18n locale's `firstDayOfWeek`, carried in the tag as `-u-fw-`), then Sunday. The user decides over the app.
 
+## Saved Choices Follow the User's Tabs
+
+A choice kept with `ScStorage` (a cookie the server reads, copied to `localStorage`) that sets how the app looks everywhere — the mode, the theme, a preference such as the week's first day — reaches the user's other tabs at once: the browser fires the `storage` event in each of them, and `ScStorage.watch()` hands the new value on. A tab left light after the user chose dark looks broken.
+
+Not every choice: the sidebar's state is the tab's own layout (another tab opens with the last one kept), and the language reloads the page, which would lose another tab's work — the others take it at their next load.
+
 ## A Link Closes Its Popup at Once
 
 A rule (the user, 2026-11-19). A popup holding links — the Header's mobile menu, the Navigation Menu's panel, the Sidebar's sheet on a phone, a Menu — closes as soon as one of its links is followed, on the click. It never waits for the Router to finish: a menu that stays open while the next page loads looks stuck, and the user can't tell why nothing moves. That's what the web does (shadcn's site, GitHub, Next.js apps).

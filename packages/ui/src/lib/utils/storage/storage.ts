@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID, REQUEST, Service, inject } from '@angular/core';
+import { DOCUMENT, PLATFORM_ID, REQUEST, Service, inject } from '@angular/core';
 
 /** A year: a choice of the user's lasts until changed. */
 const MAX_AGE = 60 * 60 * 24 * 365;
@@ -62,6 +62,7 @@ export function removeStorage(name: string): void {
 export class ScStorage {
   private readonly request = inject(REQUEST, { optional: true });
   private readonly browser = isPlatformBrowser(inject(PLATFORM_ID));
+  private readonly document = inject(DOCUMENT);
 
   get(name: string): string | null {
     if (this.browser) return readStorage(name);
@@ -76,5 +77,23 @@ export class ScStorage {
   /** Forgotten: the next read is `null`. */
   remove(name: string): void {
     if (this.browser) removeStorage(name);
+  }
+
+  /**
+   * Another tab changed the choice: `onChange` gets its new value (`null`:
+   * forgotten). The browser tells the other tabs of a site when its
+   * `localStorage` changes (the `storage` event), and every choice is
+   * copied there. Returns the way to stop; nothing on the server.
+   */
+  watch(name: string, onChange: (value: string | null) => void): () => void {
+    const window = this.browser ? this.document.defaultView : null;
+    if (!window) return () => undefined;
+    const listener = (event: StorageEvent) => {
+      // A key, or all of them (`key` null: the storage cleared).
+      if (event.key === name) onChange(event.newValue);
+      else if (event.key === null) onChange(readStorage(name));
+    };
+    window.addEventListener('storage', listener);
+    return () => window.removeEventListener('storage', listener);
   }
 }

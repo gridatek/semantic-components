@@ -4,7 +4,7 @@ How the library is built, and how to work on it. The user-facing documentation i
 
 ## Principles — how a component is designed
 
-- [component-design-principles.md](principles/component-design-principles.md) — the main reference: naming, the consumer writes the content, a provider and its parts, state in the template, accessibility, sides and directions, the default locale (`en-US`, as Angular's), links in popups, bounds from the form.
+- [component-design-principles.md](principles/component-design-principles.md) — the main reference: naming, the consumer writes the content, a provider and its parts, state in the template, accessibility, sides and directions, the default locale (`en-US`, as Angular's), saved choices across tabs, links in popups, bounds from the form.
 - [button-parts-styling.md](principles/button-parts-styling.md) — a part on a `button` styles itself (variant and size), and the exceptions.
 - [content-body-naming.md](principles/content-body-naming.md) — Provider › X › Content › Header / Body / Footer, and the parts still to rename.
 - [data-slot-pattern.md](principles/data-slot-pattern.md) — a `data-slot` only when another component styles by it.

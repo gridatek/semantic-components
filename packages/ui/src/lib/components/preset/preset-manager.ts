@@ -1,6 +1,7 @@
 import { DOCUMENT, isPlatformServer } from '@angular/common';
 import {
   CSP_NONCE,
+  DestroyRef,
   PLATFORM_ID,
   Service,
   computed,
@@ -60,21 +61,40 @@ export class ScPresetManager {
   });
 
   readonly isDark = computed(() => this.resolvedMode() === 'dark');
+  /** Its nonce, for the style that pauses transitions (a strict CSP). */
+  private readonly nonce = inject(CSP_NONCE, { optional: true });
   readonly isLight = computed(() => this.resolvedMode() === 'light');
 
   constructor() {
     effect(() => {
-      this.applyMode(this.resolvedMode());
+      const mode = this.resolvedMode();
+      this.switchLooks(() => this.applyMode(mode));
     });
 
     effect(() => {
-      this.applyTheme(this.theme());
+      const theme = this.theme();
+      this.switchLooks(() => this.applyTheme(theme));
     });
 
     this.darkMediaQuery?.addEventListener('change', () => {
       this.systemMode.set(this.getSystemMode());
     });
 
+    // Another tab chose a mode or a theme: here too (its choice, already
+    // kept; forgotten, the preset's).
+    const stops = [
+      this.storage.watch(MODE_KEY, (saved) =>
+        this.mode.set(
+          saved && this.isValidMode(saved)
+            ? saved
+            : (this.preset?.mode ?? 'system'),
+        ),
+      ),
+      this.storage.watch(THEME_KEY, (saved) =>
+        this.theme.set(saved ?? this.preset?.theme ?? 'default'),
+      ),
+    ];
+    inject(DestroyRef).onDestroy(() => stops.forEach((stop) => stop()));
     if (isPlatformServer(inject(PLATFORM_ID))) this.addScript();
   }
 
@@ -111,6 +131,31 @@ export class ScPresetManager {
 
   private store(key: string, value: string): void {
     this.storage.set(key, value);
+  }
+
+  /**
+   * A change of mode or theme, switched, not faded: transitions off while the
+   * new colours are computed, back two frames later. Faded, a tab coming
+   * back showed the old mode's colours, then a slow change; every button
+   * and field with a colour transition faded between the two.
+   */
+  private switchLooks(change: () => void): void {
+    const view = this.document.defaultView;
+    // The server: nothing transitions.
+    if (!view?.requestAnimationFrame) {
+      change();
+      return;
+    }
+    const pause = this.document.createElement('style');
+    if (this.nonce) pause.setAttribute('nonce', this.nonce);
+    pause.textContent = '*,*::before,*::after{transition:none!important}';
+    this.document.head.appendChild(pause);
+    change();
+    // The new colours computed now, with nothing to transition.
+    void view.getComputedStyle(this.document.documentElement).color;
+    view.requestAnimationFrame(() =>
+      view.requestAnimationFrame(() => pause.remove()),
+    );
   }
 
   /** The script that sets the mode and the theme before the first paint (`themeScript`); once, at the top of `<head>`. */

@@ -173,9 +173,9 @@ interface Step {
           The user's choice comes first, when your app offers one:
           <code scTypeset>injectFirstDayOfWeek()</code> — always a day: theirs
           once they pick (kept as the cookie
-          <code scTypeset>sc-first-day-of-week</code>, read on the server too),
-          else the locale's. Then a calendar's own
-          <code scTypeset>firstDayOfWeek</code>, then the locale's — your
+          <code scTypeset>sc-first-day-of-week</code>, read on the server too;
+          their other tabs follow at once), else the locale's. Then a calendar's
+          own <code scTypeset>firstDayOfWeek</code>, then the locale's — your
           setting on it included — then Sunday, as <code scTypeset>en-US</code>,
           where the browser can't tell.
         </p>

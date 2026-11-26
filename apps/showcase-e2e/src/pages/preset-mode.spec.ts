@@ -52,3 +52,36 @@ test.describe('Preset mode: color-scheme', () => {
       .toBe('rgb(0, 0, 255)');
   });
 });
+
+test.describe('Preset mode: across tabs', () => {
+  test('dark chosen in one tab: the other tab turns dark too, and back', async ({
+    page,
+    baseURL,
+  }) => {
+    await page
+      .context()
+      .addCookies([{ name: 'sc-mode', value: 'light', url: baseURL ?? '' }]);
+    const other = await page.context().newPage();
+    await page.goto('/demos/theming/theme-toggle-demo');
+    await other.goto('/demos/theming/theme-toggle-demo');
+    await expect(other.locator('html')).not.toHaveClass(/\bdark\b/);
+
+    await page.getByRole('button', { name: 'Switch to dark theme' }).click();
+    await expect(page.locator('html')).toHaveClass(/\bdark\b/);
+    // The other tab: the browser's storage event.
+    await expect(other.locator('html')).toHaveClass(/\bdark\b/);
+    // Switched, not faded: no colour transition from the old mode (seen as
+    // the old colours, then a slow change, on coming back to the tab).
+    expect(
+      await other.evaluate(
+        () =>
+          document.getAnimations().filter((a) => a instanceof CSSTransition)
+            .length,
+      ),
+    ).toBe(0);
+    await expect(other.locator('html')).toHaveCSS('color-scheme', 'dark');
+
+    await page.getByRole('button', { name: 'Switch to light theme' }).click();
+    await expect(other.locator('html')).not.toHaveClass(/\bdark\b/);
+  });
+});
