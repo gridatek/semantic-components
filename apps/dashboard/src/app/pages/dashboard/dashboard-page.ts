@@ -38,7 +38,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { LiveDot } from '../../components/live-dot';
 import { ASSETS, KPIS } from '../../data/dashboard';
-import { day, today } from '../../shared/format';
+import { compact, count, day, percent, today } from '../../shared/format';
 import { ProjectsOrders } from './projects-orders';
 import { SalesOverview } from './sales-overview';
 
@@ -161,7 +161,8 @@ function greeting(): Greeting {
             <span class="text-muted-foreground">· {{ date }}</span>
           </div>
           <p i18n="@@dashboard.salesRevenueIncreased40In">
-            Sales revenue increased <strong>40%</strong> in 1 week
+            Sales revenue increased
+            <strong>{{ percentOf(0.4) }}</strong> in {{ countOf(1) }} week
           </p>
         </div>
         <button scButton variant="outline">
@@ -209,7 +210,7 @@ function greeting(): Greeting {
               </span>
               <div>
                 <p class="text-2xl font-semibold tabular-nums">
-                  {{ asset.value }}
+                  {{ countOf(asset.value) }}
                 </p>
                 <p class="text-muted-foreground text-sm">{{ asset.title }}</p>
               </div>
@@ -228,7 +229,7 @@ function greeting(): Greeting {
                 <p class="text-sm">{{ kpi.title }}</p>
                 <div class="flex items-center gap-2">
                   <p class="text-2xl font-semibold tabular-nums">
-                    {{ kpi.value }}
+                    {{ compactOf(kpi.value) }}
                   </p>
                   <span
                     scBadge
@@ -237,7 +238,7 @@ function greeting(): Greeting {
                     <span class="sr-only">{{
                       kpi.trend === 'up' ? t.up : t.down
                     }}</span>
-                    {{ kpi.change }}
+                    {{ percentOf(kpi.change) }}
                   </span>
                 </div>
               </div>
@@ -288,6 +289,10 @@ export class DashboardPage {
     'Good Night': $localize`:@@dashboard.goodNightCameron:Good Night, Cameron`,
   }[this.hello];
   private readonly date = day(today());
+  /** Its numbers, in the user's numbering system. */
+  private readonly countOf = count;
+  private readonly compactOf = compact;
+  private readonly percentOf = percent;
   private readonly assets = ASSETS;
   private readonly kpis = KPIS;
   private readonly ranges = [

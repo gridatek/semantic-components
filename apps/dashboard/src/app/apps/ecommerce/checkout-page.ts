@@ -58,7 +58,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { thumbOf } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { money } from '../../shared/format';
+import { count, money } from '../../shared/format';
 import { CartStore } from './shop-store';
 
 /** Checkout (Pro Ecommerce): the cart, delivery, payment — steps in order. */
@@ -194,7 +194,7 @@ import { CartStore } from './shop-store';
                         @if (cartStep.status() === 'complete') {
                           <svg siCheckIcon></svg>
                         } @else {
-                          1
+                          {{ countOf(1) }}
                         }
                       </span>
                       <span i18n="@@ecommerce.checkout.cart" scStepperTitle
@@ -213,7 +213,7 @@ import { CartStore } from './shop-store';
                         @if (deliveryStep.status() === 'complete') {
                           <svg siCheckIcon></svg>
                         } @else {
-                          2
+                          {{ countOf(2) }}
                         }
                       </span>
                       <span i18n="@@ecommerce.checkout.delivery" scStepperTitle
@@ -232,7 +232,7 @@ import { CartStore } from './shop-store';
                         @if (paymentStep.status() === 'complete') {
                           <svg siCheckIcon></svg>
                         } @else {
-                          3
+                          {{ countOf(3) }}
                         }
                       </span>
                       <span i18n="@@ecommerce.checkout.payment" scStepperTitle
@@ -519,7 +519,9 @@ import { CartStore } from './shop-store';
           <div scCardBody class="flex flex-col gap-3 text-sm">
             @for (line of cart.lines(); track line.product.id) {
               <div class="flex justify-between gap-2">
-                <span>{{ line.product.name }} × {{ line.quantity }}</span>
+                <span
+                  >{{ line.product.name }} × {{ countOf(line.quantity) }}</span
+                >
                 <span class="tabular-nums">{{
                   moneyOf(line.quantity * line.product.price)
                 }}</span>
@@ -559,6 +561,9 @@ import { CartStore } from './shop-store';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckoutPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     apps: $localize`:@@ecommerce.checkout.apps:Apps`,

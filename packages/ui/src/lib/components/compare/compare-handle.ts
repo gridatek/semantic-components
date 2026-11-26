@@ -1,6 +1,7 @@
-import { Directive, LOCALE_ID, computed, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { injectDisplayLocale } from '../../utils';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 import { ScCompare } from './compare';
 
@@ -29,10 +30,15 @@ import { ScCompare } from './compare';
 export class ScCompareHandle {
   private readonly compare = inject(ScCompare);
   private readonly styles = injectStyle().compare;
-  private readonly percent = new Intl.NumberFormat(inject(LOCALE_ID), {
-    style: 'percent',
-    maximumFractionDigits: 0,
-  });
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
+  private readonly percent = computed(
+    () =>
+      new Intl.NumberFormat(this.displayLocale(), {
+        style: 'percent',
+        maximumFractionDigits: 0,
+      }),
+  );
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly ariaValueText = input<string | null>(null, {
@@ -41,7 +47,7 @@ export class ScCompareHandle {
 
   private readonly value = computed(() => Math.round(this.compare.position()));
   private readonly valueText = computed(
-    () => this.ariaValueText() ?? this.percent.format(this.value() / 100),
+    () => this.ariaValueText() ?? this.percent().format(this.value() / 100),
   );
 
   private readonly class = computed(() => {

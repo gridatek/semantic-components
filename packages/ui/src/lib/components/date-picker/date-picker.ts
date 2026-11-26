@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
-  LOCALE_ID,
   booleanAttribute,
   computed,
   contentChild,
@@ -17,6 +16,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
+import { injectDisplayLocale } from '../../utils';
 import type { ScCalendarMode, ScCalendarValue } from '../calendar';
 import {
   SC_DATE_INPUT_HOST,
@@ -54,8 +54,8 @@ export class ScDatePicker
   readonly mode = input<Exclude<ScCalendarMode, 'range'>>('single');
   /** How a day is written; `dateStyle: 'medium'` by default. */
   readonly format = input<Intl.DateTimeFormatOptions>({ dateStyle: 'medium' });
-  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   // TODO(angular): minDate / maxDate go once Signal Forms' min() / max()
   // take Temporal dates — the bounds then from the schema with a form, and
   // [min] / [max] without one, as every control's ("Bounds Come From the
@@ -97,7 +97,7 @@ export class ScDatePicker
   readonly canApply = computed(() => this.isDone(this.draft(), true));
 
   private readonly formatter = computed(
-    () => new Intl.DateTimeFormat(this.locale, this.format()),
+    () => new Intl.DateTimeFormat(this.displayLocale(), this.format()),
   );
 
   /** The value, as written: a day, or a list of days — or empty. */
@@ -110,7 +110,7 @@ export class ScDatePicker
       const days = [...(value as readonly Temporal.PlainDate[])].sort(
         Temporal.PlainDate.compare,
       );
-      return new Intl.ListFormat(this.locale, {
+      return new Intl.ListFormat(this.displayLocale(), {
         type: 'conjunction',
       }).format(days.map((day) => formatter.format(day)));
     }

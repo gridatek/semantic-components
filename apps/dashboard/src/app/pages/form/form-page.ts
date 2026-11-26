@@ -60,6 +60,7 @@ import {
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
+import { count } from '../../shared/format';
 
 /** The form page: every kind of input. */
 @Component({
@@ -221,7 +222,7 @@ import { PageHeader } from '../../layout/page-header';
                 <div scInputGroupAddon><svg siCreditCardIcon></svg></div>
               </div>
               <p i18n="@@form.n16DigitsNoSpaces" scFieldDescription>
-                16 digits, no spaces.
+                {{ countOf(16) }} digits, no spaces.
               </p>
             </div>
           </div>
@@ -423,6 +424,9 @@ import { PageHeader } from '../../layout/page-header';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     form: $localize`:@@form.form:Form`,

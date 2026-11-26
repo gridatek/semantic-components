@@ -27,7 +27,7 @@ import {
 } from '@semantic-components/ui/charts';
 import { PageHeader } from '../../layout/page-header';
 import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
-import { axisLabel } from '../../shared/format';
+import { axisLabel, count } from '../../shared/format';
 
 /** Visitors by month and device: the charts' shared series. */
 const MONTHS = [
@@ -664,7 +664,7 @@ export class BarChartsPage extends ChartPage {
                   text-anchor="middle"
                   class="fill-foreground text-3xl font-bold"
                 >
-                  {{ total }}
+                  {{ countOf(total) }}
                 </text>
                 <text
                   text-anchor="middle"
@@ -714,6 +714,9 @@ export class BarChartsPage extends ChartPage {
   encapsulation: ViewEncapsulation.None,
 })
 export class PieChartsPage extends ChartPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     charts: $localize`:@@charts.chartPages.charts:Charts`,

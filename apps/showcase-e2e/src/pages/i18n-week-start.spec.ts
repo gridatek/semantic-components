@@ -4,7 +4,7 @@ import { expect, test } from '@playwright/test';
 import {
   type ScI18nConfig,
   findLocale,
-  withWeekStart,
+  localeTag,
 } from '../../../../packages/ui/i18n/src/lib/i18n/i18n-config';
 
 /**
@@ -31,7 +31,7 @@ const firstDay = (id: string) => {
 };
 
 test('Nothing set: the locale as it is, its own first day', () => {
-  expect(withWeekStart(config(), 'ar')).toBe('ar');
+  expect(localeTag(config(), 'ar')).toBe('ar');
 });
 
 test('Set on a locale: Sunday for Arabic (Intl reads it); the others as they are', () => {
@@ -42,10 +42,10 @@ test('Set on a locale: Sunday for Arabic (Intl reads it); the others as they are
       l.id === 'ar' ? { ...l, firstDayOfWeek: 'sun' } : l,
     ),
   };
-  const id = withWeekStart(sunday, 'ar');
+  const id = localeTag(sunday, 'ar');
   expect(id).toBe('ar-u-fw-sun');
   expect(firstDay(id)).toBe(7);
-  expect(withWeekStart(sunday, 'fr')).toBe('fr');
+  expect(localeTag(sunday, 'fr')).toBe('fr');
 });
 
 test('Its region kept', () => {
@@ -56,7 +56,7 @@ test('Its region kept', () => {
       l.id === 'pt-BR' ? { ...l, firstDayOfWeek: 'sun' } : l,
     ),
   };
-  expect(withWeekStart(sunday, 'pt-BR')).toBe('pt-BR-u-fw-sun');
+  expect(localeTag(sunday, 'pt-BR')).toBe('pt-BR-u-fw-sun');
 });
 
 test('The locale found from the id Angular has, its first day in it', () => {
@@ -65,4 +65,23 @@ test('The locale found from the id Angular has, its first day in it', () => {
   expect(findLocale(c, 'pt-BR-u-fw-sun')?.id).toBe('pt-BR');
   expect(findLocale(c, 'fr-CA')?.id).toBe('fr');
   expect(findLocale(c, 'de')).toBeUndefined();
+});
+
+test('The numbering system set on a locale: carried as nu, alone or with the week; Intl writes its digits', () => {
+  const c = config();
+  const set = (patch: object) => ({
+    ...c,
+    locales: c.locales.map((l) => (l.id === 'ar' ? { ...l, ...patch } : l)),
+  });
+  expect(localeTag(set({ numberingSystem: 'latn' }), 'ar')).toBe(
+    'ar-u-nu-latn',
+  );
+  expect(
+    localeTag(set({ numberingSystem: 'latn', firstDayOfWeek: 'sun' }), 'ar'),
+  ).toBe('ar-u-fw-sun-nu-latn');
+  expect(
+    new Intl.NumberFormat(
+      localeTag(set({ numberingSystem: 'arab' }), 'ar'),
+    ).format(12),
+  ).toBe('١٢');
 });

@@ -16,6 +16,7 @@ import {
 import { cn } from 'cn';
 import {
   type ScFirstDayOfWeek,
+  injectDisplayLocale,
   ɵchosenFirstDayOfWeek,
   ɵweekStart,
 } from '../../utils';
@@ -53,6 +54,8 @@ export class ScScheduler<
   T extends ScSchedulerEventData = ScSchedulerEventData,
 > {
   private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   private readonly announcer = inject(LiveAnnouncer);
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -147,20 +150,20 @@ export class ScScheduler<
     switch (this.view()) {
       case 'month':
       case 'agenda':
-        return date.toLocaleString(this.locale, {
+        return date.toLocaleString(this.displayLocale(), {
           month: 'long',
           year: 'numeric',
         });
       case 'week': {
         const days = this.days();
-        return new Intl.DateTimeFormat(this.locale, {
+        return new Intl.DateTimeFormat(this.displayLocale(), {
           month: 'short',
           day: 'numeric',
           year: 'numeric',
         }).formatRange(days[0], days[days.length - 1]);
       }
       case 'day':
-        return date.toLocaleString(this.locale, { dateStyle: 'full' });
+        return date.toLocaleString(this.displayLocale(), { dateStyle: 'full' });
     }
   });
 
@@ -240,7 +243,7 @@ export class ScScheduler<
     const from = start.withTimeZone(zone).toPlainDateTime();
     const to = end.withTimeZone(zone).toPlainDateTime();
     if (allDay) {
-      return new Intl.DateTimeFormat(this.locale, {
+      return new Intl.DateTimeFormat(this.displayLocale(), {
         weekday: 'short',
         month: 'short',
         day: 'numeric',
@@ -249,7 +252,7 @@ export class ScScheduler<
         to.toPlainDate().subtract({ days: 1 }),
       );
     }
-    return new Intl.DateTimeFormat(this.locale, {
+    return new Intl.DateTimeFormat(this.displayLocale(), {
       weekday: 'short',
       month: 'short',
       day: 'numeric',

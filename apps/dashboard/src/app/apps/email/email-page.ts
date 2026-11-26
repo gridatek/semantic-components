@@ -52,7 +52,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ME, PEOPLE, type Person } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { LOCALE, dayTime, initials } from '../../shared/format';
+import { count, dayTime, displayLocale, initials } from '../../shared/format';
 
 type Folder = 'inbox' | 'sent' | 'drafts' | 'spam' | 'trash';
 
@@ -286,7 +286,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
                   i18n="@@email.unread"
                   class="text-muted-foreground ms-auto text-xs tabular-nums"
                 >
-                  {{ unread }}<span class="sr-only"> unread</span>
+                  {{ countOf(unread) }}<span class="sr-only"> unread</span>
                 </span>
               }
             </button>
@@ -520,6 +520,9 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class EmailPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     apps: $localize`:@@email.apps:Apps`,
@@ -578,10 +581,13 @@ export class EmailPage {
   private readonly when = dayTime;
 
   private shortDate(iso: string): string {
-    return Temporal.PlainDate.from(iso.slice(0, 10)).toLocaleString(LOCALE, {
-      month: 'short',
-      day: 'numeric',
-    });
+    return Temporal.PlainDate.from(iso.slice(0, 10)).toLocaleString(
+      displayLocale(),
+      {
+        month: 'short',
+        day: 'numeric',
+      },
+    );
   }
 
   private unreadIn(folder: Folder | 'starred'): number {

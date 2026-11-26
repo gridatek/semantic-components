@@ -1,5 +1,6 @@
-import { Directive, LOCALE_ID, computed, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectDisplayLocale } from '../../utils';
 import { ScDateRangePicker } from './date-range-picker';
 
 /**
@@ -19,14 +20,15 @@ import { ScDateRangePicker } from './date-range-picker';
 })
 export class ScDateRangePickerDuration {
   private readonly picker = inject(ScDateRangePicker);
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly text = computed(() => {
     const days = this.picker.days();
     return days
-      ? new Intl.NumberFormat(this.locale, {
+      ? new Intl.NumberFormat(this.displayLocale(), {
           style: 'unit',
           unit: 'day',
           unitDisplay: 'long',

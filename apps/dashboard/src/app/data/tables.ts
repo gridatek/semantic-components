@@ -10,7 +10,8 @@ export interface ProjectRow {
   readonly avatar: string;
   readonly project: string;
   readonly priority: Priority;
-  readonly budget: string;
+  /** In dollars. */
+  readonly budget: number;
 }
 
 export const PROJECT_ROWS: readonly ProjectRow[] = [
@@ -21,7 +22,7 @@ export const PROJECT_ROWS: readonly ProjectRow[] = [
     avatar: 'images/profile/user-1.png',
     project: 'Elite Admin',
     priority: 'Low',
-    budget: '3.9k',
+    budget: 3900,
   },
   {
     id: 2,
@@ -30,7 +31,7 @@ export const PROJECT_ROWS: readonly ProjectRow[] = [
     avatar: 'images/profile/user-2.png',
     project: 'Flexy Admin',
     priority: 'Medium',
-    budget: '24.5k',
+    budget: 24500,
   },
   {
     id: 3,
@@ -39,7 +40,7 @@ export const PROJECT_ROWS: readonly ProjectRow[] = [
     avatar: 'images/profile/user-3.png',
     project: 'Material Pro',
     priority: 'High',
-    budget: '12.8k',
+    budget: 12800,
   },
   {
     id: 4,
@@ -48,7 +49,7 @@ export const PROJECT_ROWS: readonly ProjectRow[] = [
     avatar: 'images/profile/user-4.png',
     project: 'Xtreme Admin',
     priority: 'Low',
-    budget: '4.8k',
+    budget: 4800,
   },
   {
     id: 5,
@@ -57,7 +58,7 @@ export const PROJECT_ROWS: readonly ProjectRow[] = [
     avatar: 'images/profile/user-5.png',
     project: 'Helping Hands WP Theme',
     priority: 'High',
-    budget: '9.3k',
+    budget: 9300,
   },
 ];
 

@@ -17,6 +17,7 @@ import {
   SiChevronRightIcon,
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
+import { count } from '../../shared/format';
 import { label } from '../../shared/labels';
 import { ProfileHeader } from './profile-header';
 
@@ -134,7 +135,7 @@ const PHOTOS: readonly Photo[] = [
       <h2 i18n="@@userProfile.gallery.photos" class="text-lg font-semibold">
         Photos
         <span class="text-muted-foreground font-normal">{{
-          shown().length
+          countOf(shown().length)
         }}</span>
       </h2>
       <div
@@ -213,7 +214,7 @@ const PHOTOS: readonly Photo[] = [
                 i18n="@@userProfile.gallery.of"
                 class="text-muted-foreground text-sm tabular-nums"
               >
-                {{ index() + 1 }} of {{ shown().length }}
+                {{ countOf(index() + 1) }} of {{ countOf(shown().length) }}
               </span>
               <button scButton variant="outline" size="icon" (click)="step(1)">
                 <svg siChevronRightIcon class="rtl:-scale-x-100"></svg>
@@ -231,6 +232,9 @@ const PHOTOS: readonly Photo[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class GalleryPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   private readonly albums: readonly Album[] = [
     'All',

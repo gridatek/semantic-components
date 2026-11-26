@@ -1,4 +1,4 @@
-import { NgOptimizedImage, PercentPipe } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
@@ -56,7 +56,16 @@ import { PEOPLE } from '../../data/people';
 import { PRODUCTS } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
 import { ChartTooltip } from '../../shared/chart-parts';
-import { axisLabel, initials, money } from '../../shared/format';
+import {
+  axisLabel,
+  compact,
+  count,
+  initials,
+  money,
+  monthDay,
+  percent,
+  unit,
+} from '../../shared/format';
 
 /** Widget cards (Pro): figures, people, a product, progress — ready to reuse. */
 @Component({
@@ -212,7 +221,7 @@ import { axisLabel, initials, money } from '../../shared/format';
               >
                 Posts
               </dt>
-              <dd class="font-semibold">124</dd>
+              <dd class="font-semibold">{{ countOf(124) }}</dd>
             </div>
             <div>
               <dt
@@ -221,9 +230,7 @@ import { axisLabel, initials, money } from '../../shared/format';
               >
                 Followers
               </dt>
-              <dd i18n="@@widgets.widgetPages.n32k" class="font-semibold">
-                3.2K
-              </dd>
+              <dd class="font-semibold">{{ compactOf(3200) }}</dd>
             </div>
             <div>
               <dt
@@ -232,7 +239,7 @@ import { axisLabel, initials, money } from '../../shared/format';
               >
                 Following
               </dt>
-              <dd class="font-semibold">410</dd>
+              <dd class="font-semibold">{{ countOf(410) }}</dd>
             </div>
           </dl>
         </div>
@@ -273,8 +280,8 @@ import { axisLabel, initials, money } from '../../shared/format';
           <p scCardDescription class="flex items-center gap-1">
             <svg siStarIcon class="size-3.5 fill-current"></svg>
             <ng-container i18n="@@widgets.widgetPages.reviews"
-              >{{ product.rating }} ·
-              {{ product.reviews }} reviews</ng-container
+              >{{ countOf(product.rating) }} ·
+              {{ countOf(product.reviews) }} reviews</ng-container
             >
           </p>
           <div scCardAction>
@@ -315,7 +322,7 @@ import { axisLabel, initials, money } from '../../shared/format';
             Project Apollo
           </h2>
           <p i18n="@@widgets.widgetPages.dueMay30" scCardDescription>
-            Due May 30
+            Due {{ monthDayOf('May 30') }}
           </p>
           <div i18n="@@widgets.widgetPages.onTrack" scCardAction>
             <span scBadge variant="secondary">On track</span>
@@ -326,7 +333,7 @@ import { axisLabel, initials, money } from '../../shared/format';
             <span i18n="@@widgets.widgetPages.progress" scProgressLabel
               >Progress</span
             >
-            <span scProgressValueText>68%</span>
+            <span scProgressValueText>{{ percentOf(0.68) }}</span>
             <div scProgressTrack><div scProgressRange></div></div>
           </div>
           <div class="flex items-center justify-between">
@@ -337,12 +344,12 @@ import { axisLabel, initials, money } from '../../shared/format';
                   <span scAvatarFallback>{{ initialsOf(p.name) }}</span>
                 </span>
               }
-              <div scAvatarGroupCount>+3</div>
+              <div scAvatarGroupCount>+{{ countOf(3) }}</div>
             </div>
             <span
               i18n="@@widgets.widgetPages.n14Of21Tasks"
               class="text-muted-foreground text-sm"
-              >14 of 21 tasks</span
+              >{{ countOf(14) }} of {{ countOf(21) }} tasks</span
             >
           </div>
         </div>
@@ -353,6 +360,18 @@ import { axisLabel, initials, money } from '../../shared/format';
   encapsulation: ViewEncapsulation.None,
 })
 export class WidgetCardsPage {
+  /** In the user's numbering system. */
+  private readonly percentOf = percent;
+
+  /** In the user's numbering system. */
+  private readonly monthDayOf = monthDay;
+
+  /** In the user's numbering system. */
+  private readonly compactOf = compact;
+
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     widgets: $localize`:@@widgets.widgetPages.widgets:Widgets`,
@@ -384,7 +403,6 @@ const WEEK = [
 @Component({
   selector: 'app-widget-charts-page',
   imports: [
-    PercentPipe,
     ScCard,
     ScCardBody,
     ScCardDescription,
@@ -415,7 +433,7 @@ const WEEK = [
           <p i18n="@@widgets.widgetPages.visitorsThisWeek" scCardDescription>
             Visitors this week
           </p>
-          <h2 scCardTitle class="text-2xl tabular-nums">328</h2>
+          <h2 scCardTitle class="text-2xl tabular-nums">{{ countOf(328) }}</h2>
         </div>
         <div scCardBody>
           <div scChart [config]="config" [data]="week" class="h-20 w-full">
@@ -436,7 +454,7 @@ const WEEK = [
           <p i18n="@@widgets.widgetPages.ordersThisWeek" scCardDescription>
             Orders this week
           </p>
-          <h2 scCardTitle class="text-2xl tabular-nums">1,204</h2>
+          <h2 scCardTitle class="text-2xl tabular-nums">{{ countOf(1204) }}</h2>
         </div>
         <div scCardBody>
           <div scChart [config]="config" [data]="week" class="h-20 w-full">
@@ -457,7 +475,7 @@ const WEEK = [
           <p i18n="@@widgets.widgetPages.signUpsThisWeek" scCardDescription>
             Sign-ups this week
           </p>
-          <h2 scCardTitle class="text-2xl tabular-nums">86</h2>
+          <h2 scCardTitle class="text-2xl tabular-nums">{{ countOf(86) }}</h2>
         </div>
         <div scCardBody>
           <div scChart [config]="config" [data]="week" class="h-20 w-full">
@@ -478,12 +496,8 @@ const WEEK = [
           <p i18n="@@widgets.widgetPages.storageUsed" scCardDescription>
             Storage used
           </p>
-          <h2
-            i18n="@@widgets.widgetPages.n74Gb"
-            scCardTitle
-            class="text-2xl tabular-nums"
-          >
-            74 GB
+          <h2 scCardTitle class="text-2xl tabular-nums">
+            {{ unitOf(74, 'gigabyte') }}
           </h2>
         </div>
         <div scCardBody class="flex justify-center">
@@ -496,7 +510,7 @@ const WEEK = [
           >
             <svg scProgressCircle [thickness]="6"></svg>
             <span scProgressValueText class="text-sm font-semibold">{{
-              0.74 | percent
+              percentOf(0.74)
             }}</span>
           </div>
         </div>
@@ -542,7 +556,7 @@ const WEEK = [
                 ></span>
                 {{ deviceConfig[d.device].label }}
                 <span class="text-muted-foreground tabular-nums">{{
-                  d.share | percent
+                  percentOf(d.share)
                 }}</span>
               </li>
             }
@@ -569,7 +583,7 @@ const WEEK = [
               >
                 <svg scProgressCircle [thickness]="6"></svg>
                 <span scProgressValueText class="text-sm font-semibold">{{
-                  goal.value | percent
+                  percentOf(goal.value)
                 }}</span>
               </div>
               <span class="text-sm font-medium">{{ goal.team }}</span>
@@ -583,6 +597,12 @@ const WEEK = [
   encapsulation: ViewEncapsulation.None,
 })
 export class WidgetChartsPage {
+  /** In the user's numbering system. */
+  private readonly unitOf = unit;
+
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     widgets: $localize`:@@widgets.widgetPages.widgets:Widgets`,
@@ -630,5 +650,7 @@ export class WidgetChartsPage {
       value: 0.57,
     },
   ];
-  private readonly percentOf = (value: number) => `${Math.round(value * 100)}%`;
+  /** A whole percent, in the user's numbering system. */
+  private readonly percentOf = (value: number) =>
+    percent(Math.round(value * 100) / 100);
 }

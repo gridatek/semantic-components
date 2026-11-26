@@ -295,7 +295,8 @@ const columns = columnHelper.columns([
             class="text-sm font-medium"
             aria-live="polite"
           >
-            Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
+            Page {{ countOf(pagination.currentPage()) }} of
+            {{ countOf(pagination.totalPages()) }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>

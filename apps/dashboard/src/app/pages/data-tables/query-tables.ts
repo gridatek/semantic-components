@@ -60,6 +60,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { STAFF, type StaffMember } from '../../data/staff';
 import { PageHeader } from '../../layout/page-header';
+import { count } from '../../shared/format';
 import { SortHeader, StaffCell } from './table-parts';
 
 const features = tableFeatures({
@@ -327,7 +328,8 @@ export class SortingTablePage {
           class="text-muted-foreground text-sm"
           aria-live="polite"
         >
-          {{ table.getFilteredRowModel().rows.length }} of {{ total }} people
+          {{ countOf(table.getFilteredRowModel().rows.length) }} of
+          {{ countOf(total) }} people
         </p>
       </div>
     </div>
@@ -336,6 +338,9 @@ export class SortingTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class FilteringTablePage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     dataTables: $localize`:@@dataTables.queryTables.dataTables:Data Tables`,
@@ -393,7 +398,7 @@ export class FilteringTablePage {
       <div scCardHeader>
         <h2 i18n="@@dataTables.queryTables.team" scCardTitle>Team</h2>
         <p i18n="@@dataTables.queryTables.peopleAPageAtA" scCardDescription>
-          {{ total }} people, a page at a time
+          {{ countOf(total) }} people, a page at a time
         </p>
       </div>
       <div
@@ -460,7 +465,9 @@ export class FilteringTablePage {
                 (change)="table.setPageSize(+$any($event.target).value)"
               >
                 @for (n of sizes; track n) {
-                  <option scNativeSelectOption [value]="n">{{ n }}</option>
+                  <option scNativeSelectOption [value]="n">
+                    {{ countOf(n) }}
+                  </option>
                 }
               </select>
               <svg siChevronDownIcon scNativeSelectIcon></svg>
@@ -479,8 +486,8 @@ export class FilteringTablePage {
               class="text-sm font-medium"
               aria-live="polite"
             >
-              Page {{ pagination.currentPage() }} of
-              {{ pagination.totalPages() }}
+              Page {{ countOf(pagination.currentPage()) }} of
+              {{ countOf(pagination.totalPages()) }}
             </span>
             <ul scPaginationList>
               <li scPaginationItem>
@@ -533,6 +540,9 @@ export class FilteringTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class PaginationTablePage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     dataTables: $localize`:@@dataTables.queryTables.dataTables:Data Tables`,

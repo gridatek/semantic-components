@@ -77,7 +77,7 @@ import { label } from '../../shared/labels';
             </span>
             <span class="flex items-center gap-1.5">
               <svg siMessageCircleIcon></svg>
-              {{ post().comments.length
+              {{ countOf(post().comments.length)
               }}<span i18n="@@blog.card.comments" class="sr-only">
                 comments</span
               >

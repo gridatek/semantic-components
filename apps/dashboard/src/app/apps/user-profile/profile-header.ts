@@ -10,6 +10,7 @@ import { SiMapPinIcon } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
 import { ME } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
+import { count } from '../../shared/format';
 import { label } from '../../shared/labels';
 
 /**
@@ -59,7 +60,7 @@ import { label } from '../../shared/labels';
             >
               Posts
             </dt>
-            <dd class="font-semibold tabular-nums">938</dd>
+            <dd class="font-semibold tabular-nums">{{ countOf(938) }}</dd>
           </div>
           <div>
             <dt
@@ -68,7 +69,7 @@ import { label } from '../../shared/labels';
             >
               Followers
             </dt>
-            <dd class="font-semibold tabular-nums">3,586</dd>
+            <dd class="font-semibold tabular-nums">{{ countOf(3586) }}</dd>
           </div>
           <div>
             <dt
@@ -77,7 +78,7 @@ import { label } from '../../shared/labels';
             >
               Following
             </dt>
-            <dd class="font-semibold tabular-nums">2,659</dd>
+            <dd class="font-semibold tabular-nums">{{ countOf(2659) }}</dd>
           </div>
         </dl>
       </div>
@@ -102,6 +103,9 @@ import { label } from '../../shared/labels';
   encapsulation: ViewEncapsulation.None,
 })
 export class ProfileHeader {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

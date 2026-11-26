@@ -55,6 +55,7 @@ import {
   axisLabel,
   compact,
   count,
+  duration,
   percent,
 } from '../../shared/format';
 
@@ -240,7 +241,7 @@ const COUNTRIES = [
           >
           <svg siClockIcon appStatCardIcon></svg>
         </dt>
-        <dd i18n="@@dashboards.analytics.n3m42s" appStatCardValue>3m 42s</dd>
+        <dd appStatCardValue>{{ durationOf({ minutes: 3, seconds: 42 }) }}</dd>
         <dd
           appStatCardChange
           [value]="0.046"
@@ -276,21 +277,21 @@ const COUNTRIES = [
                 scToggleGroupItem
                 value="7d"
               >
-                7 days
+                {{ countOf(7) }} days
               </button>
               <button
                 i18n="@@dashboards.analytics.n30Days"
                 scToggleGroupItem
                 value="30d"
               >
-                30 days
+                {{ countOf(30) }} days
               </button>
               <button
                 i18n="@@dashboards.analytics.n90Days"
                 scToggleGroupItem
                 value="90d"
               >
-                90 days
+                {{ countOf(90) }} days
               </button>
             </div>
           </div>
@@ -354,7 +355,7 @@ const COUNTRIES = [
                   text-anchor="middle"
                   class="fill-foreground text-2xl font-bold"
                 >
-                  {{ totalVisits }}
+                  {{ totalVisits() }}
                 </text>
                 <text
                   text-anchor="middle"
@@ -473,8 +474,8 @@ export class AnalyticsPage {
     TRAFFIC[this.range()].map((row) => ({ ...row, date: axisLabel(row.date) })),
   );
   private readonly sources = SOURCES.map((row) => ({ ...row }));
-  private readonly totalVisits = compact(
-    SOURCES.reduce((sum, row) => sum + row.visits, 0),
+  private readonly totalVisits = computed(() =>
+    compact(SOURCES.reduce((sum, row) => sum + row.visits, 0)),
   );
   private readonly pages = PAGES;
   private readonly countries = COUNTRIES;
@@ -512,6 +513,7 @@ export class AnalyticsPage {
     },
   };
   private readonly countOf = count;
+  private readonly durationOf = duration;
   private readonly percentOf = percent;
 
   private choose(value: readonly string[]): void {

@@ -5,7 +5,6 @@ import {
   Component,
   ElementRef,
   Injector,
-  LOCALE_ID,
   ViewEncapsulation,
   afterNextRender,
   computed,
@@ -16,6 +15,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { injectDisplayLocale, injectFormatNumber } from '../../utils';
 import { ScScheduler } from './scheduler';
 import { ScSchedulerDayPointer } from './scheduler-day-pointer';
 import { eventsOn, layoutRow, placeTimed } from './scheduler-layout';
@@ -63,13 +63,13 @@ interface ScSchedulerTimeRange {
                 [attr.aria-current]="column.today ? 'date' : null"
                 (click)="scheduler.goTo(column.day, 'day')"
               >
-                {{ column.day.day }}
+                {{ formatNumber(column.day.day) }}
               </button>
             } @else {
               <span
                 [class]="column.number"
                 [attr.aria-current]="column.today ? 'date' : null"
-                >{{ column.day.day }}</span
+                >{{ formatNumber(column.day.day) }}</span
               >
             }
           </div>
@@ -216,7 +216,10 @@ interface ScSchedulerTimeRange {
 export class ScSchedulerTimeGrid {
   private readonly scheduler = inject(ScScheduler);
   private readonly injector = inject(Injector);
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly locale = injectDisplayLocale();
+  /** Its numbers (the days), in the user's numbering system. */
+  private readonly formatNumber = injectFormatNumber();
   private readonly announcer = inject(LiveAnnouncer);
   private readonly direction = inject(Directionality).valueSignal;
   private readonly host =
@@ -248,7 +251,7 @@ export class ScSchedulerTimeGrid {
     ).map((value) => ({
       value,
       label: Temporal.PlainTime.from({ hour: value }).toLocaleString(
-        this.locale,
+        this.locale(),
         { hour: 'numeric' },
       ),
     })),
@@ -288,8 +291,8 @@ export class ScSchedulerTimeGrid {
         day,
         key: day.toString(),
         today: isToday,
-        weekday: day.toLocaleString(this.locale, { weekday: 'short' }),
-        label: day.toLocaleString(this.locale, { dateStyle: 'full' }),
+        weekday: day.toLocaleString(this.locale(), { weekday: 'short' }),
+        label: day.toLocaleString(this.locale(), { dateStyle: 'full' }),
         background: cn(
           'row-[1/-1]',
           i < this.scheduler.days().length - 1 && 'border-e',

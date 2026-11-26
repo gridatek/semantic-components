@@ -17,6 +17,7 @@ import {
 } from '@angular/forms/signals';
 import {
   SC_DAYS_OF_WEEK,
+  SC_NUMBERING_SYSTEMS,
   ScAvatar,
   ScAvatarFallback,
   ScAvatarImage,
@@ -63,6 +64,7 @@ import {
   ScTextarea,
   ScToaster,
   injectFirstDayOfWeek,
+  injectNumberingSystem,
 } from '@semantic-components/ui';
 import {
   SiCheckIcon,
@@ -73,6 +75,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ME } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
+import { count, unit, wholeMoney } from '../../shared/format';
 
 /** Account Settings (Pro): the account, security, notifications, billing. */
 @Component({
@@ -179,7 +182,7 @@ import { PageHeader } from '../../layout/page-header';
                       i18n="@@accountSettings.jpgOrPngUpTo"
                       class="text-muted-foreground text-sm"
                     >
-                      JPG or PNG, up to 800 KB.
+                      JPG or PNG, up to {{ unitOf(800, 'kilobyte') }}.
                     </p>
                   </div>
                   <div scFieldGroup class="grid gap-4 md:grid-cols-2">
@@ -257,7 +260,7 @@ import { PageHeader } from '../../layout/page-header';
                   How calendars show the week, kept on this device
                 </p>
               </div>
-              <div scCardBody>
+              <div scCardBody class="flex flex-wrap gap-4">
                 <div scField class="w-full max-w-xs">
                   <div
                     scSelect
@@ -289,6 +292,40 @@ import { PageHeader } from '../../layout/page-header';
                     </ng-template>
                   </div>
                 </div>
+                <div scField class="w-full max-w-xs">
+                  <div
+                    scSelect
+                    [items]="numberingSystems"
+                    [value]="numberingSystem.value()"
+                    (valueChange)="chooseNumberingSystem($event)"
+                    class="w-full"
+                  >
+                    <div i18n="@@accountSettings.numbers" scSelectLabel>
+                      Numbers
+                    </div>
+                    <div scSelectTrigger>
+                      <span scSelectValue></span>
+                      <svg scSelectIcon siChevronDownIcon></svg>
+                    </div>
+                    <ng-template scSelectPortal>
+                      <div scSelectPopup>
+                        <div scSelectList>
+                          @for (
+                            system of numberingSystems;
+                            track system.value
+                          ) {
+                            <div scSelectItem [value]="system.value">
+                              <span scSelectItemText>{{ system.label }}</span>
+                              <span scSelectItemIndicator>
+                                <svg siCheckIcon></svg>
+                              </span>
+                            </div>
+                          }
+                        </div>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -308,7 +345,7 @@ import { PageHeader } from '../../layout/page-header';
                     i18n="@@accountSettings.atLeast8Characters"
                     scCardDescription
                   >
-                    At least 8 characters
+                    At least {{ countOf(8) }} characters
                   </p>
                 </div>
                 <div scCardBody>
@@ -508,7 +545,9 @@ import { PageHeader } from '../../layout/page-header';
                   class="flex items-baseline gap-2"
                 >
                   <span class="text-3xl font-semibold">Pro</span>
-                  <span class="text-muted-foreground">$49 / month</span>
+                  <span class="text-muted-foreground"
+                    >{{ wholeMoneyOf(49) }} / month</span
+                  >
                 </div>
               </div>
               <div scCard>
@@ -605,6 +644,15 @@ import { PageHeader } from '../../layout/page-header';
   encapsulation: ViewEncapsulation.None,
 })
 export class AccountSettingsPage {
+  /** In the user's numbering system. */
+  private readonly wholeMoneyOf = wholeMoney;
+
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
+  /** In the user's numbering system. */
+  private readonly unitOf = unit;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     pages: $localize`:@@accountSettings.pages:Pages`,
@@ -626,6 +674,22 @@ export class AccountSettingsPage {
       }),
     }));
   });
+
+  /** The user's numbering system: what the parts write follows it. */
+  private readonly numberingSystem = injectNumberingSystem();
+  /** Each shown by its own digits: no words to translate. */
+  private readonly numberingSystems = SC_NUMBERING_SYSTEMS.map((value) => ({
+    value: value as string,
+    label: new Intl.NumberFormat(`en-u-nu-${value}`, {
+      useGrouping: false,
+    }).format(1234567890),
+  }));
+
+  /** The numbering system picked: kept, the parts follow it. */
+  private chooseNumberingSystem(value: string): void {
+    const system = SC_NUMBERING_SYSTEMS.find((s) => s === value);
+    if (system) this.numberingSystem.set(system);
+  }
 
   /** The day picked: kept, every calendar follows it. */
   private chooseWeekStart(value: string): void {

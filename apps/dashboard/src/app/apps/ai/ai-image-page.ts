@@ -48,6 +48,7 @@ import {
   SiSparklesIcon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
+import { count } from '../../shared/format';
 import { label } from '../../shared/labels';
 
 type Ratio = 'square' | 'portrait' | 'landscape';
@@ -278,7 +279,7 @@ const SETS: readonly (readonly string[])[] = [
                   >
                     <svg siDownloadIcon></svg>
                     <span i18n="@@ai.image.downloadVersion" class="sr-only"
-                      >Download version {{ i + 1 }}</span
+                      >Download version {{ countOf(i + 1) }}</span
                     >
                   </a>
                 </li>
@@ -293,6 +294,9 @@ const SETS: readonly (readonly string[])[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class AiImagePage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

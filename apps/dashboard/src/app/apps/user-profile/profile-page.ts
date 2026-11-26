@@ -25,13 +25,14 @@ import {
   SiSendIcon,
 } from '@semantic-icons/lucide-icons';
 import { ME } from '../../data/people';
-import { LOCALE, now } from '../../shared/format';
+import { count, day, today } from '../../shared/format';
 import { label } from '../../shared/labels';
 import { ProfileHeader } from './profile-header';
 
 interface Post {
   readonly id: number;
   readonly text: string;
+  /** An ISO date. */
   readonly when: string;
   readonly image?: string;
   readonly likes: number;
@@ -173,7 +174,7 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
                 <div class="flex flex-col">
                   <span class="text-sm font-medium">{{ me.name }}</span>
                   <span class="text-muted-foreground text-xs">{{
-                    post.when
+                    dayOf(post.when)
                   }}</span>
                 </div>
               </div>
@@ -199,7 +200,7 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
                   (pressedChange)="like(post.id)"
                 >
                   <svg siHeartIcon></svg>
-                  {{ post.likes }}
+                  {{ countOf(post.likes) }}
                   <span i18n="@@userProfile.profile.likesLike" class="sr-only"
                     >likes — like</span
                   >
@@ -208,7 +209,7 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
                   class="text-muted-foreground flex items-center gap-1 text-sm"
                 >
                   <svg siMessageSquareIcon class="size-4"></svg>
-                  {{ post.comments }}
+                  {{ countOf(post.comments) }}
                   <span i18n="@@userProfile.profile.comments" class="sr-only"
                     >comments</span
                   >
@@ -224,6 +225,12 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
   encapsulation: ViewEncapsulation.None,
 })
 export class ProfilePage {
+  /** In the user's numbering system. */
+  private readonly dayOf = day;
+
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   private readonly me = ME;
   private readonly photos = PHOTOS;
@@ -232,7 +239,7 @@ export class ProfilePage {
     {
       id: 2,
       text: 'New dashboard screens are up — one look across forty pages, carried by the style.',
-      when: 'Apr 27, 2026',
+      when: '2026-04-27',
       image: 'images/image-ai/leptop2.jpg',
       likes: 128,
       liked: true,
@@ -241,7 +248,7 @@ export class ProfilePage {
     {
       id: 1,
       text: 'Spent the weekend glazing bowls. The blue one cracked; the rest survived.',
-      when: 'Apr 20, 2026',
+      when: '2026-04-20',
       likes: 64,
       liked: false,
       comments: 6,
@@ -252,11 +259,7 @@ export class ProfilePage {
     event.preventDefault();
     const text = this.draft().trim();
     if (!text) return;
-    const when = Temporal.PlainDateTime.from(now()).toLocaleString(LOCALE, {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    });
+    const when = today();
     this.posts.update((posts) => [
       { id: posts.length + 1, text, when, likes: 0, liked: false, comments: 0 },
       ...posts,

@@ -30,6 +30,7 @@ import {
   ScToaster,
 } from '@semantic-components/ui';
 import { PageHeader } from '../../layout/page-header';
+import { count } from '../../shared/format';
 
 const EMPTY = {
   username: '',
@@ -99,7 +100,7 @@ const EMPTY = {
                 i18n="@@forms.formValidation.n3OrMoreLettersNumbers"
                 scFieldDescription
               >
-                3 or more letters, numbers or underscores.
+                {{ countOf(3) }} or more letters, numbers or underscores.
               </p>
               <div scFieldErrors></div>
             </div>
@@ -117,7 +118,7 @@ const EMPTY = {
               <label i18n="@@forms.formValidation.age" scLabel>Age</label>
               <input scInput type="number" [formField]="signupForm.age" />
               <p i18n="@@forms.formValidation.from18To120" scFieldDescription>
-                From 18 to 120.
+                From {{ countOf(18) }} to {{ countOf(120) }}.
               </p>
               <div scFieldErrors></div>
             </div>
@@ -142,7 +143,7 @@ const EMPTY = {
                 i18n="@@forms.formValidation.n8OrMoreCharactersOne"
                 scFieldDescription
               >
-                8 or more characters, one of them a number.
+                {{ countOf(8) }} or more characters, one of them a number.
               </p>
               <div scFieldErrors></div>
             </div>
@@ -192,6 +193,9 @@ const EMPTY = {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormValidationPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     forms: $localize`:@@forms.formValidation.forms:Forms`,

@@ -1,7 +1,6 @@
 import {
   Directive,
   ElementRef,
-  LOCALE_ID,
   booleanAttribute,
   computed,
   inject,
@@ -16,7 +15,7 @@ import {
   type FormValueControl,
 } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { bindInput } from '../../utils';
+import { bindInput, injectDisplayLocale } from '../../utils';
 import { ScField } from '../field';
 
 /** A range slider's orientation. */
@@ -70,7 +69,8 @@ export class ScRangeSlider implements FormValueControl<ScRangeSliderValue> {
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   /** The field it is in: its label names the group, its state follows it. */
   readonly field = inject(ScField, { optional: true });
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
 
   /** The range, from and to: two-way, or a [formField]. */
   readonly value = model<ScRangeSliderValue>([0, 100]);
@@ -118,7 +118,7 @@ export class ScRangeSlider implements FormValueControl<ScRangeSliderValue> {
 
   /** The values as they read: for the text you write round it. */
   readonly formatted = computed(() => {
-    const format = new Intl.NumberFormat(this.locale, this.format());
+    const format = new Intl.NumberFormat(this.displayLocale(), this.format());
     return this.value().map((v) => format.format(v)) as [string, string];
   });
 

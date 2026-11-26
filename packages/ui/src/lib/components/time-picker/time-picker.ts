@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
-  LOCALE_ID,
   booleanAttribute,
   computed,
   contentChild,
@@ -13,6 +12,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectDisplayLocale } from '../../utils';
 import { ScPopoverProvider } from '../popover';
 import { ScTimeInput, type ScTimeInputPart } from '../time-input';
 import {
@@ -49,7 +49,8 @@ type DurationFormat = new (
   },
 })
 export class ScTimePicker implements ScTimeColumnsHost {
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Minutes between the minute column's values. */
@@ -118,11 +119,11 @@ export class ScTimePicker implements ScTimeColumnsHost {
       ...(seconds ? { seconds } : {}),
     };
     if (Format)
-      return new Format(this.locale, { style: 'short' }).format(parts);
+      return new Format(this.displayLocale(), { style: 'short' }).format(parts);
     // No Intl.DurationFormat: each unit by itself.
     return Object.entries(parts)
       .map(([unit, amount]) =>
-        new Intl.NumberFormat(this.locale, {
+        new Intl.NumberFormat(this.displayLocale(), {
           style: 'unit',
           unit: unit.slice(0, -1),
           unitDisplay: 'short',

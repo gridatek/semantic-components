@@ -1,12 +1,12 @@
 import {
   Component,
-  LOCALE_ID,
   ViewEncapsulation,
   computed,
   forwardRef,
   inject,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectDisplayLocale } from '../../utils';
 import { ScCalendar } from './calendar';
 
 /**
@@ -55,7 +55,8 @@ import { ScCalendar } from './calendar';
 })
 export class ScCalendarMonths {
   private readonly calendar = inject(forwardRef(() => ScCalendar));
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly locale = injectDisplayLocale();
 
   private readonly year = computed(() => this.calendar.focused().year);
 
@@ -91,11 +92,11 @@ export class ScCalendarMonths {
   private short(month: Temporal.PlainYearMonth): string {
     return month
       .toPlainDate({ day: 1 })
-      .toLocaleString(this.locale, { month: 'short' });
+      .toLocaleString(this.locale(), { month: 'short' });
   }
 
   private long(month: Temporal.PlainYearMonth): string {
-    return month.toPlainDate({ day: 1 }).toLocaleString(this.locale, {
+    return month.toPlainDate({ day: 1 }).toLocaleString(this.locale(), {
       month: 'long',
       year: 'numeric',
     });

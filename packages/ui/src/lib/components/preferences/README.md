@@ -45,6 +45,7 @@ readonly view = injectPreference(view); // view.value(): 'list' | 'grid'; view.s
 ## The library's own
 
 - The user's first day of the week — `injectFirstDayOfWeek()`: `value()` is always a day (theirs once they pick, kept as `sc-first-day-of-week`; else the locale's), `set('mon')` keeps one. Calendars, pickers and the scheduler follow it before their own `firstDayOfWeek`. Offer it in your settings, its choices from `SC_DAYS_OF_WEEK`.
+- The user's numbering system — `injectNumberingSystem()`: `value()` always one (`'latn'`, `'arab'`, `'arabext'`; theirs once they pick, kept as `sc-numbering-system`; else the locale's), `set()` keeps it. Its choices from `SC_NUMBERING_SYSTEMS`.
 
 ## Not here
 

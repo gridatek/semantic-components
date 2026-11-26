@@ -1,4 +1,10 @@
-import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   ScBadge,
   ScButton,
@@ -20,14 +26,15 @@ import {
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
+import { count, wholeMoney } from '../../shared/format';
 
-const PLANS = [
+const plans = () => [
   {
     name: $localize`:@@pricing.starter:Starter`,
     monthly: 19,
     text: $localize`:@@pricing.forOnePersonAndA:For one person and a first dashboard.`,
     features: [
-      $localize`:@@pricing.n1User:1 user`,
+      $localize`:@@pricing.n1User:${count(1)}:count: user`,
       $localize`:@@pricing.allDashboards:All dashboards`,
       $localize`:@@pricing.chartsAndTables:Charts and tables`,
       $localize`:@@pricing.emailSupport:Email support`,
@@ -39,7 +46,7 @@ const PLANS = [
     monthly: 49,
     text: $localize`:@@pricing.forAGrowingProductAnd:For a growing product and its apps.`,
     features: [
-      $localize`:@@pricing.n5Users:5 users`,
+      $localize`:@@pricing.n5Users:${count(5)}:count: users`,
       $localize`:@@pricing.everythingInStarter:Everything in Starter`,
       $localize`:@@pricing.allApps:All apps`,
       $localize`:@@pricing.prioritySupport:Priority support`,
@@ -60,13 +67,13 @@ const PLANS = [
   },
 ];
 
-const COMPARE: readonly {
+const compare = (): readonly {
   feature: string;
   plans: readonly (boolean | string)[];
-}[] = [
+}[] => [
   {
     feature: $localize`:@@pricing.users:Users`,
-    plans: ['1', '5', $localize`:@@pricing.unlimited:Unlimited`],
+    plans: [count(1), count(5), $localize`:@@pricing.unlimited:Unlimited`],
   },
   {
     feature: $localize`:@@pricing.dashboards:Dashboards`,
@@ -133,7 +140,7 @@ const COMPARE: readonly {
         Plans for every size
       </h2>
       <p i18n="@@pricing.startFreeFor14Days" class="text-muted-foreground">
-        Start free for 14 days. No card needed.
+        Start free for {{ countOf(14) }} days. No card needed.
       </p>
       <div class="flex items-center gap-3">
         <span i18n="@@pricing.monthly" class="text-sm font-medium"
@@ -150,13 +157,13 @@ const COMPARE: readonly {
         />
         <span i18n="@@pricing.yearly" class="text-sm font-medium">Yearly</span>
         <span i18n="@@pricing.n2MonthsFree" scBadge variant="secondary"
-          >2 months free</span
+          >{{ countOf(2) }} months free</span
         >
       </div>
     </div>
 
     <div class="mx-auto grid w-full max-w-5xl gap-4 md:grid-cols-3">
-      @for (plan of plans; track plan.name) {
+      @for (plan of plans(); track plan.name) {
         <div
           scCard
           [class.ring-2]="plan.popular"
@@ -173,9 +180,9 @@ const COMPARE: readonly {
           </div>
           <div scCardBody class="flex flex-1 flex-col gap-6">
             <p>
-              <span class="text-4xl font-semibold tabular-nums"
-                >\${{ price(plan.monthly) }}</span
-              >
+              <span class="text-4xl font-semibold tabular-nums">{{
+                wholeMoneyOf(price(plan.monthly))
+              }}</span>
               <span class="text-muted-foreground">
                 {{ yearly() ? t.perYear : t.perMonth }}</span
               >
@@ -213,13 +220,13 @@ const COMPARE: readonly {
             <thead scTableHeader>
               <tr scTableRow>
                 <th i18n="@@pricing.feature" scTableHeaderCell>Feature</th>
-                @for (plan of plans; track plan.name) {
+                @for (plan of plans(); track plan.name) {
                   <th scTableHeaderCell class="text-center">{{ plan.name }}</th>
                 }
               </tr>
             </thead>
             <tbody scTableBody>
-              @for (row of compare; track row.feature) {
+              @for (row of compare(); track row.feature) {
                 <tr scTableRow>
                   <th scTableCell scope="row" class="text-start font-medium">
                     {{ row.feature }}
@@ -256,6 +263,12 @@ const COMPARE: readonly {
   encapsulation: ViewEncapsulation.None,
 })
 export class PricingPage {
+  /** In the user's numbering system. */
+  private readonly wholeMoneyOf = wholeMoney;
+
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     perYear: $localize`:@@pricing.year:/ year`,
@@ -265,8 +278,8 @@ export class PricingPage {
   };
 
   private readonly toaster = inject(ScToaster);
-  private readonly plans = PLANS;
-  private readonly compare = COMPARE;
+  private readonly plans = computed(plans);
+  private readonly compare = computed(compare);
   private readonly yearly = signal(false);
 
   /** A year is ten months. */

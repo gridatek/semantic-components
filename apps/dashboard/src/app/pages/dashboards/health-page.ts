@@ -1,4 +1,3 @@
-import { PercentPipe } from '@angular/common';
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScAvatar,
@@ -53,7 +52,14 @@ import {
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { ChartTooltip } from '../../shared/chart-parts';
-import { initials } from '../../shared/format';
+import {
+  count,
+  duration,
+  initials,
+  percent,
+  weekdayTime,
+  when,
+} from '../../shared/format';
 
 const HEART = [
   { time: '00:00', bpm: 58 },
@@ -73,17 +79,20 @@ const RINGS = [
   {
     name: $localize`:@@dashboards.health.move:Move`,
     value: 0.82,
-    detail: $localize`:@@dashboards.health.n410Of500Kcal:410 of 500 kcal`,
+    detail: () =>
+      $localize`:@@dashboards.health.n410Of500Kcal:${count(410)}:done: of ${count(500)}:goal: kcal`,
   },
   {
     name: $localize`:@@dashboards.health.exercise:Exercise`,
     value: 0.64,
-    detail: $localize`:@@dashboards.health.n19Of30Min:19 of 30 min`,
+    detail: () =>
+      $localize`:@@dashboards.health.n19Of30Min:${count(19)}:done: of ${count(30)}:goal: min`,
   },
   {
     name: $localize`:@@dashboards.health.stand:Stand`,
     value: 0.92,
-    detail: $localize`:@@dashboards.health.n11Of12Hours:11 of 12 hours`,
+    detail: () =>
+      $localize`:@@dashboards.health.n11Of12Hours:${count(11)}:done: of ${count(12)}:goal: hours`,
   },
 ];
 
@@ -91,19 +100,19 @@ const APPOINTMENTS = [
   {
     personId: 6,
     title: $localize`:@@dashboards.health.annualCheckUp:Annual check-up`,
-    when: $localize`:@@dashboards.health.tueMay5930:Tue, May 5 · 9:30`,
+    when: '2026-05-05T09:30',
     kind: $localize`:@@dashboards.health.inPerson:In person`,
   },
   {
     personId: 9,
     title: $localize`:@@dashboards.health.physiotherapy:Physiotherapy`,
-    when: $localize`:@@dashboards.health.thuMay71700:Thu, May 7 · 17:00`,
+    when: '2026-05-07T17:00',
     kind: $localize`:@@dashboards.health.inPerson:In person`,
   },
   {
     personId: 4,
     title: $localize`:@@dashboards.health.nutritionFollowUp:Nutrition follow-up`,
-    when: $localize`:@@dashboards.health.monMay111215:Mon, May 11 · 12:15`,
+    when: '2026-05-11T12:15',
     kind: $localize`:@@dashboards.health.video:Video`,
   },
 ];
@@ -119,7 +128,6 @@ interface Medication {
 @Component({
   selector: 'app-health-page',
   imports: [
-    PercentPipe,
     ScAvatar,
     ScAvatarFallback,
     ScAvatarImage,
@@ -179,7 +187,9 @@ interface Medication {
           >
           <svg siHeartPulseIcon appStatCardIcon></svg>
         </dt>
-        <dd i18n="@@dashboards.health.n58Bpm" appStatCardValue>58 bpm</dd>
+        <dd i18n="@@dashboards.health.n58Bpm" appStatCardValue>
+          {{ countOf(58) }} bpm
+        </dd>
         <dd appStatCardChange good="down" [value]="-2">
           <svg siTrendingDownIcon></svg>
         </dd>
@@ -209,9 +219,9 @@ interface Medication {
           <ng-container i18n="@@dashboards.health.sleep">Sleep</ng-container>
           <svg siMoonIcon appStatCardIcon></svg>
         </dt>
-        <dd i18n="@@dashboards.health.n7h24m" appStatCardValue>7h 24m</dd>
+        <dd appStatCardValue>{{ durationOf({ hours: 7, minutes: 24 }) }}</dd>
         <dd i18n="@@dashboards.health.deepSleep1h52m" appStatCardDescription>
-          deep sleep 1h 52m
+          deep sleep {{ durationOf({ hours: 1, minutes: 52 }) }}
         </dd>
       </dl>
       <dl appStatCard>
@@ -223,7 +233,7 @@ interface Medication {
         </dt>
         <dd appStatCardValue [value]="2140"></dd>
         <dd i18n="@@dashboards.health.of2400Kcal" appStatCardDescription>
-          of 2,400 kcal
+          of {{ countOf(2400) }} kcal
         </dd>
       </dl>
     </div>
@@ -240,7 +250,7 @@ interface Medication {
           <div
             scChart
             [config]="heartConfig"
-            [data]="heart"
+            [data]="heart()"
             class="h-72 w-full"
           >
             <svg
@@ -268,7 +278,7 @@ interface Medication {
           </p>
         </div>
         <div scCardBody class="grid grid-cols-3 gap-4">
-          @for (ring of rings; track ring.name) {
+          @for (ring of rings(); track ring.name) {
             <div class="flex flex-col items-center gap-2 text-center">
               <div
                 scProgress
@@ -278,7 +288,7 @@ interface Medication {
               >
                 <svg scProgressCircle [thickness]="6"></svg>
                 <span scProgressValueText class="text-sm font-semibold">{{
-                  ring.value | percent
+                  percentOf(ring.value)
                 }}</span>
               </div>
               <span class="text-sm font-medium">{{ ring.name }}</span>
@@ -314,7 +324,7 @@ interface Medication {
                 <div scItemBody>
                   <div scItemTitle>{{ visit.title }}</div>
                   <p i18n="@@dashboards.health.dr" scItemDescription>
-                    Dr. {{ visit.person.name }} · {{ visit.when }}
+                    Dr. {{ visit.person.name }} · {{ whenOf(visit.when) }}
                   </p>
                 </div>
                 <div scItemActions>
@@ -330,7 +340,7 @@ interface Medication {
         <div scCardHeader>
           <h2 i18n="@@dashboards.health.medication" scCardTitle>Medication</h2>
           <p i18n="@@dashboards.health.ofTaken" scCardDescription>
-            {{ taken() }} of {{ meds().length }} taken
+            {{ countOf(taken()) }} of {{ countOf(meds().length) }} taken
           </p>
         </div>
         <div scCardBody class="flex flex-col gap-3">
@@ -359,20 +369,31 @@ interface Medication {
   encapsulation: ViewEncapsulation.None,
 })
 export class HealthPage {
+  /** In the user's numbering system. */
+  private readonly percentOf = percent;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     dashboards: $localize`:@@dashboards.health.dashboards:Dashboards`,
     health: $localize`:@@dashboards.health.health:Health`,
   };
 
-  private readonly heart = HEART.map((row) => ({ ...row }));
+  /** The hours as the locale writes them. */
+  private readonly heart = computed(() =>
+    HEART.map((row) => ({ ...row, time: when(row.time) })),
+  );
   private readonly heartConfig: ScChartConfig = {
     bpm: {
       label: $localize`:@@dashboards.health.heartRate:Heart rate`,
       color: 'var(--chart-3)',
     },
   };
-  private readonly rings = RINGS;
+  private readonly rings = computed(() =>
+    RINGS.map((ring) => ({ ...ring, detail: ring.detail() })),
+  );
+  private readonly countOf = count;
+  private readonly durationOf = duration;
+  private readonly whenOf = weekdayTime;
   private readonly appointments = APPOINTMENTS.map((visit) => ({
     ...visit,
     person: PEOPLE.find((p) => p.id === visit.personId) ?? PEOPLE[0],
@@ -381,25 +402,25 @@ export class HealthPage {
     {
       id: 1,
       name: $localize`:@@dashboards.health.vitaminD:Vitamin D`,
-      dose: $localize`:@@dashboards.health.n1000IuMorning:1,000 IU, morning`,
+      dose: $localize`:@@dashboards.health.n1000IuMorning:${count(1000)}:amount: IU, morning`,
       taken: true,
     },
     {
       id: 2,
       name: $localize`:@@dashboards.health.omega3:Omega-3`,
-      dose: $localize`:@@dashboards.health.n1CapsuleLunch:1 capsule, lunch`,
+      dose: $localize`:@@dashboards.health.n1CapsuleLunch:${count(1)}:amount: capsule, lunch`,
       taken: true,
     },
     {
       id: 3,
       name: $localize`:@@dashboards.health.magnesium:Magnesium`,
-      dose: $localize`:@@dashboards.health.n200MgEvening:200 mg, evening`,
+      dose: $localize`:@@dashboards.health.n200MgEvening:${count(200)}:amount: mg, evening`,
       taken: false,
     },
     {
       id: 4,
       name: $localize`:@@dashboards.health.iron:Iron`,
-      dose: $localize`:@@dashboards.health.n14MgEvening:14 mg, evening`,
+      dose: $localize`:@@dashboards.health.n14MgEvening:${count(14)}:amount: mg, evening`,
       taken: false,
     },
   ]);
@@ -407,7 +428,7 @@ export class HealthPage {
     () => this.meds().filter((med) => med.taken).length,
   );
   private readonly initialsOf = initials;
-  private readonly bpmOf = (value: number) => `${value} bpm`;
+  private readonly bpmOf = (value: number) => `${count(value)} bpm`;
 
   private toggle(id: number): void {
     this.meds.update((meds) =>

@@ -69,37 +69,39 @@ export const SALES: Record<SalesPeriod, readonly SalesPoint[]> = {
 
 export interface Asset {
   readonly title: string;
-  readonly value: string;
+  readonly value: number;
   readonly icon: 'users' | 'file' | 'briefcase' | 'bookmark';
 }
 
 export const ASSETS: readonly Asset[] = [
   {
     title: $localize`:@@data.dashboard.employees:Employees`,
-    value: '96',
+    value: 96,
     icon: 'users',
   },
   {
     title: $localize`:@@data.dashboard.projects:Projects`,
-    value: '356',
+    value: 356,
     icon: 'file',
   },
   {
     title: $localize`:@@data.dashboard.clients:Clients`,
-    value: '3,650',
+    value: 3650,
     icon: 'briefcase',
   },
   {
     title: $localize`:@@data.dashboard.events:Events`,
-    value: '86',
+    value: 86,
     icon: 'bookmark',
   },
 ];
 
 export interface Kpi {
   readonly title: string;
-  readonly value: string;
-  readonly change: string;
+  /** Written compact: 714K. */
+  readonly value: number;
+  /** A share: 0.4 is 40%. */
+  readonly change: number;
   /** Up (good) or down (bad): the badge's variant. */
   readonly trend: 'up' | 'down';
   readonly icon: 'handbag' | 'users' | 'box';
@@ -108,22 +110,22 @@ export interface Kpi {
 export const KPIS: readonly Kpi[] = [
   {
     title: $localize`:@@data.dashboard.weeklySales:Weekly sales`,
-    value: '714k',
-    change: '40%',
+    value: 714_000,
+    change: 0.4,
     trend: 'up',
     icon: 'handbag',
   },
   {
     title: $localize`:@@data.dashboard.newUsers:New users`,
-    value: '1.35m',
-    change: '20%',
+    value: 1_350_000,
+    change: 0.2,
     trend: 'down',
     icon: 'users',
   },
   {
     title: $localize`:@@data.dashboard.purchaseOrders:Purchase Orders`,
-    value: '1.72m',
-    change: '40%',
+    value: 1_720_000,
+    change: 0.4,
     trend: 'up',
     icon: 'box',
   },

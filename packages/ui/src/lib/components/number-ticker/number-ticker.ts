@@ -4,7 +4,6 @@ import {
   Component,
   DestroyRef,
   ElementRef,
-  LOCALE_ID,
   ViewEncapsulation,
   afterNextRender,
   computed,
@@ -15,6 +14,7 @@ import {
   untracked,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectDisplayLocale } from '../../utils';
 import { type ScEasing, scEasing } from '../../utils/easing';
 
 /** How a change is shown: the number counting, or each digit rolling. */
@@ -98,8 +98,8 @@ export class ScNumberTicker {
   readonly value = input.required<number>();
   /** How it is written: currency, percent, compact, a unit, decimals… */
   readonly format = input<Intl.NumberFormatOptions>({});
-  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   readonly effect = input<ScNumberTickerEffect>('count');
   /** How long a change takes, in milliseconds. */
   readonly duration = input(1000);
@@ -119,7 +119,7 @@ export class ScNumberTicker {
   private frame = 0;
 
   private readonly formatter = computed(
-    () => new Intl.NumberFormat(this.locale, this.format()),
+    () => new Intl.NumberFormat(this.displayLocale(), this.format()),
   );
 
   /** The value, as written — what screen readers get. */
@@ -139,7 +139,7 @@ export class ScNumberTicker {
 
   /** The digits 0–9, in the app's language. */
   private readonly glyphs = computed(() => {
-    const format = new Intl.NumberFormat(this.locale);
+    const format = new Intl.NumberFormat(this.displayLocale());
     return Array.from({ length: 10 }, (_, digit) => format.format(digit));
   });
 

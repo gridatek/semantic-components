@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, computed } from '@angular/core';
 import {
   ScAvatar,
   ScAvatarFallback,
@@ -57,7 +57,14 @@ import {
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
-import { axisLabel, initials } from '../../shared/format';
+import {
+  axisLabel,
+  count,
+  hour,
+  initials,
+  monthDay,
+  percent,
+} from '../../shared/format';
 
 const ATTENDANCE = [
   { day: 'Mon', present: 1162, absent: 78 },
@@ -70,25 +77,25 @@ const ATTENDANCE = [
 const EXAMS = [
   {
     subject: $localize`:@@dashboards.school.mathematics:Mathematics`,
-    grade: $localize`:@@dashboards.school.grade10:Grade 10`,
+    grade: 10,
     date: 'May 4',
     room: $localize`:@@dashboards.school.hallA:Hall A`,
   },
   {
     subject: $localize`:@@dashboards.school.physics:Physics`,
-    grade: $localize`:@@dashboards.school.grade11:Grade 11`,
+    grade: 11,
     date: 'May 6',
     room: $localize`:@@dashboards.school.lab2:Lab 2`,
   },
   {
     subject: $localize`:@@dashboards.school.englishLiterature:English Literature`,
-    grade: $localize`:@@dashboards.school.grade9:Grade 9`,
+    grade: 9,
     date: 'May 7',
     room: $localize`:@@dashboards.school.room14:Room 14`,
   },
   {
     subject: $localize`:@@dashboards.school.history:History`,
-    grade: $localize`:@@dashboards.school.grade12:Grade 12`,
+    grade: 12,
     date: 'May 11',
     room: $localize`:@@dashboards.school.hallB:Hall B`,
   },
@@ -97,40 +104,41 @@ const EXAMS = [
 const STUDENTS = [
   {
     personId: 6,
-    grade: $localize`:@@dashboards.school.grade12:Grade 12`,
+    grade: 12,
     average: 96.4,
-    attendance: '99%',
+    attendance: 0.99,
   },
   {
     personId: 2,
-    grade: $localize`:@@dashboards.school.grade11:Grade 11`,
+    grade: 11,
     average: 94.8,
-    attendance: '97%',
+    attendance: 0.97,
   },
   {
     personId: 9,
-    grade: $localize`:@@dashboards.school.grade12:Grade 12`,
+    grade: 12,
     average: 93.1,
-    attendance: '98%',
+    attendance: 0.98,
   },
   {
     personId: 4,
-    grade: $localize`:@@dashboards.school.grade10:Grade 10`,
+    grade: 10,
     average: 92.7,
-    attendance: '96%',
+    attendance: 0.96,
   },
   {
     personId: 7,
-    grade: $localize`:@@dashboards.school.grade9:Grade 9`,
+    grade: 9,
     average: 91.9,
-    attendance: '100%',
+    attendance: 1,
   },
 ];
 
 const NOTICES = [
   {
     title: $localize`:@@dashboards.school.scienceFair:Science fair`,
-    text: $localize`:@@dashboards.school.projectsGoUpInThe:Projects go up in the gym on Friday; parents welcome from 3 pm.`,
+    text: () =>
+      $localize`:@@dashboards.school.projectsGoUpInThe:Projects go up in the gym on Friday; parents welcome from ${hour(15)}:time:.`,
     at: '2026-04-24',
     status: 'complete' as const,
   },
@@ -148,7 +156,8 @@ const NOTICES = [
   },
   {
     title: $localize`:@@dashboards.school.sportsDay:Sports day`,
-    text: $localize`:@@dashboards.school.onTheFieldFrom9:On the field from 9 am; bring water and a hat.`,
+    text: () =>
+      $localize`:@@dashboards.school.onTheFieldFrom9:On the field from ${hour(9)}:time:; bring water and a hat.`,
     at: '2026-05-22',
     status: 'upcoming' as const,
   },
@@ -244,7 +253,7 @@ const NOTICES = [
         </dt>
         <dd appStatCardValue [value]="86"></dd>
         <dd i18n="@@dashboards.school.n144StudentsEach" appStatCardDescription>
-          14.4 students each
+          {{ countOf(14.4) }} students each
         </dd>
       </dl>
       <dl appStatCard>
@@ -256,7 +265,7 @@ const NOTICES = [
         </dt>
         <dd appStatCardValue [value]="48"></dd>
         <dd i18n="@@dashboards.school.across4Grades" appStatCardDescription>
-          across 4 grades
+          across {{ countOf(4) }} grades
         </dd>
       </dl>
       <dl appStatCard>
@@ -334,11 +343,13 @@ const NOTICES = [
                   scItemMedia
                   class="bg-muted flex size-10 flex-col items-center justify-center rounded-md text-xs leading-tight font-medium"
                 >
-                  {{ exam.date }}
+                  {{ monthDayOf(exam.date) }}
                 </div>
                 <div scItemBody>
                   <div scItemTitle>{{ exam.subject }}</div>
-                  <p scItemDescription>{{ exam.grade }} · {{ exam.room }}</p>
+                  <p scItemDescription>
+                    {{ gradeOf(exam.grade) }} · {{ exam.room }}
+                  </p>
                 </div>
               </div>
             }
@@ -405,13 +416,15 @@ const NOTICES = [
                       </div>
                     </td>
                     <td scTableCell>
-                      <span scBadge variant="outline">{{ student.grade }}</span>
+                      <span scBadge variant="outline">{{
+                        gradeOf(student.grade)
+                      }}</span>
                     </td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ student.average }}
+                      {{ countOf(student.average) }}
                     </td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ student.attendance }}
+                      {{ percentOf(student.attendance) }}
                     </td>
                   </tr>
                 }
@@ -433,7 +446,7 @@ const NOTICES = [
             scTimeline
             aria-label="Notices"
           >
-            @for (notice of notices; track notice.title) {
+            @for (notice of notices(); track notice.title) {
               <li scTimelineItem [status]="notice.status">
                 <span scTimelineMarker></span>
                 <span scTimelineConnector></span>
@@ -476,9 +489,20 @@ export class SchoolPage {
     ...student,
     person: PEOPLE.find((p) => p.id === student.personId) ?? PEOPLE[0],
   }));
-  private readonly notices = NOTICES.map((notice) => ({
-    ...notice,
-    at: Temporal.PlainDate.from(notice.at),
-  }));
+  private readonly notices = computed(() =>
+    NOTICES.map((notice) => ({
+      ...notice,
+      text: typeof notice.text === 'function' ? notice.text() : notice.text,
+      at: Temporal.PlainDate.from(notice.at),
+    })),
+  );
+  private readonly countOf = count;
+  private readonly percentOf = percent;
+  private readonly monthDayOf = monthDay;
+
+  /** A grade, its number in the user's numbering system. */
+  private gradeOf(grade: number): string {
+    return $localize`:@@dashboards.school.gradeN:Grade ${count(grade)}:grade:`;
+  }
   private readonly initialsOf = initials;
 }

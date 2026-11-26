@@ -90,7 +90,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { initials } from '../../shared/format';
+import { count, initials } from '../../shared/format';
 
 const TITLES: Record<string, string> = {
   button: $localize`:@@ui.element.button:Button`,
@@ -347,7 +347,7 @@ const TITLES: Record<string, string> = {
                   <span scAvatarFallback>{{ initialsOf(person.name) }}</span>
                 </span>
               }
-              <div scAvatarGroupCount>+{{ people.length - 5 }}</div>
+              <div scAvatarGroupCount>+{{ countOf(people.length - 5) }}</div>
             </div>
           </section>
         </div>
@@ -372,7 +372,9 @@ const TITLES: Record<string, string> = {
                 >Verified</ng-container
               ></span
             >
-            <span scBadge class="rounded-full tabular-nums">8</span>
+            <span scBadge class="rounded-full tabular-nums">{{
+              countOf(8)
+            }}</span>
           </div>
         </section>
       }
@@ -836,6 +838,9 @@ const TITLES: Record<string, string> = {
   encapsulation: ViewEncapsulation.None,
 })
 export class UiElementPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     uiElements: $localize`:@@ui.element.uiElements:UI Elements`,

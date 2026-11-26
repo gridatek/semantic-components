@@ -25,7 +25,7 @@ import {
   SiUserMinusIcon,
 } from '@semantic-icons/lucide-icons';
 import { PEOPLE, type Person } from '../../data/people';
-import { initials } from '../../shared/format';
+import { count, initials } from '../../shared/format';
 import { label } from '../../shared/labels';
 import { ProfileHeader } from './profile-header';
 
@@ -59,7 +59,7 @@ import { ProfileHeader } from './profile-header';
       <h2 i18n="@@userProfile.friends.friends2" class="text-lg font-semibold">
         Friends
         <span class="text-muted-foreground font-normal">{{
-          shown().length
+          countOf(shown().length)
         }}</span>
       </h2>
       <div scInputGroup class="max-w-xs">
@@ -135,6 +135,9 @@ import { ProfileHeader } from './profile-header';
   encapsulation: ViewEncapsulation.None,
 })
 export class FriendsPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   private readonly toaster = inject(ScToaster);
   private readonly query = signal('');

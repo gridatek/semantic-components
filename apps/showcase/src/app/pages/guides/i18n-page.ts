@@ -190,6 +190,29 @@ interface Step {
       </section>
 
       <section class="space-y-4">
+        <h2 scTypeset appToc>Digits</h2>
+        <p>
+          Each locale writes its own digits, from
+          <code scTypeset>Intl</code>. Where yours differs, set
+          <code scTypeset>numberingSystem</code> on the locale —
+          <code scTypeset>'latn'</code> 123, <code scTypeset>'arab'</code> ١٢٣,
+          <code scTypeset>'arabext'</code> ۱۲۳ — and it travels in the locale
+          tag as <code scTypeset>ar-u-nu-latn</code>.
+        </p>
+        <p>
+          The user's choice comes first, when your app offers one:
+          <code scTypeset>injectNumberingSystem()</code>, kept as the cookie
+          <code scTypeset>sc-numbering-system</code>. Every part shows its
+          numbers and dates in it at once, and the user's other tabs follow;
+          values and what is typed stay Latin. Your own numbers match with
+          <code scTypeset>injectFormatNumber()</code>, your dates with
+          <code scTypeset>injectDisplayLocale()</code>. Angular's pipes read the
+          locale once, at start: an app that keeps them reloads the page on a
+          change.
+        </p>
+      </section>
+
+      <section class="space-y-4">
         <h2 scTypeset appToc>ScI18n</h2>
         <div scFrame class="overflow-x-auto">
           <table class="w-full text-sm">

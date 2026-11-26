@@ -1,5 +1,6 @@
-import { Directive, LOCALE_ID, computed, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
+import { injectDisplayLocale } from '../../utils';
 import { ScScheduler } from './scheduler';
 import { isBar } from './scheduler-layout';
 import { SC_SCHEDULER_EVENT } from './scheduler-types';
@@ -21,7 +22,8 @@ import { SC_SCHEDULER_EVENT } from './scheduler-types';
 export class ScSchedulerEventTime {
   private readonly context = inject(SC_SCHEDULER_EVENT);
   private readonly scheduler = inject(ScScheduler);
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly locale = injectDisplayLocale();
 
   readonly classInput = input<string>('', { alias: 'class' });
 
@@ -47,12 +49,12 @@ export class ScSchedulerEventTime {
     if (place === 'month') {
       return bar
         ? ''
-        : new Intl.DateTimeFormat(this.locale, {
+        : new Intl.DateTimeFormat(this.locale(), {
             hour: 'numeric',
             minute: '2-digit',
           }).format(this.start());
     }
-    const format = new Intl.DateTimeFormat(this.locale, {
+    const format = new Intl.DateTimeFormat(this.locale(), {
       ...(bar ? { month: 'short', day: 'numeric' } : {}),
       hour: 'numeric',
       minute: '2-digit',

@@ -22,6 +22,7 @@ import {
 } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
+import { count } from '../../shared/format';
 import { label } from '../../shared/labels';
 
 type Category = 'Communication' | 'Project management' | 'Marketing';
@@ -166,7 +167,7 @@ const INTEGRATIONS: readonly Integration[] = [
       <span
         i18n="@@integrations.connected"
         class="text-muted-foreground ms-auto text-sm"
-        >{{ connectedCount() }} connected</span
+        >{{ countOf(connectedCount()) }} connected</span
       >
     </div>
 
@@ -230,6 +231,9 @@ const INTEGRATIONS: readonly Integration[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class IntegrationsPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

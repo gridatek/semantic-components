@@ -42,7 +42,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ME, PEOPLE, type Person } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { initials } from '../../shared/format';
+import { bytes, count, initials, when } from '../../shared/format';
 import { label } from '../../shared/labels';
 
 interface ChatLine {
@@ -53,7 +53,8 @@ interface ChatLine {
   readonly file?: {
     readonly name: string;
     readonly icon: string;
-    readonly size: string;
+    /** In bytes. */
+    readonly size: number;
   };
 }
 
@@ -88,7 +89,7 @@ const THREADS: readonly Thread[] = [
         file: {
           name: 'pricing-copy.fig',
           icon: 'images/files/icon-figma.svg',
-          size: '1.2 MB',
+          size: 1_200_000,
         },
       },
       {
@@ -130,7 +131,7 @@ const THREADS: readonly Thread[] = [
         file: {
           name: 'may-campaign.zip',
           icon: 'images/files/icon-zip-folder.svg',
-          size: '24 MB',
+          size: 24_000_000,
         },
       },
     ],
@@ -183,7 +184,7 @@ const THREADS: readonly Thread[] = [
         file: {
           name: 'support-april.pdf',
           icon: 'images/files/icon-adobe.svg',
-          size: '860 KB',
+          size: 860_000,
         },
       },
     ],
@@ -284,7 +285,7 @@ const THREADS: readonly Thread[] = [
                   <div scItemTitle class="w-full justify-between">
                     {{ thread.person.name }}
                     <span class="text-muted-foreground text-xs font-normal">{{
-                      thread.last.time
+                      whenOf(thread.last.time)
                     }}</span>
                   </div>
                   <p scItemDescription class="line-clamp-1">
@@ -297,7 +298,7 @@ const THREADS: readonly Thread[] = [
                     i18n="@@chats.unread"
                     class="bg-primary text-primary-foreground flex size-5 shrink-0 items-center justify-center rounded-full text-xs"
                   >
-                    {{ thread.unread }}
+                    {{ countOf(thread.unread) }}
                     <span class="sr-only">unread</span>
                   </span>
                 }
@@ -389,13 +390,13 @@ const THREADS: readonly Thread[] = [
                                     file.name
                                   }}</span>
                                   <span class="text-muted-foreground text-xs">{{
-                                    file.size
+                                    bytesOf(file.size)
                                   }}</span>
                                 </span>
                               </div>
                             </div>
                           }
-                          <div scMessageFooter>{{ line.time }}</div>
+                          <div scMessageFooter>{{ whenOf(line.time) }}</div>
                         </div>
                       </div>
                     </div>
@@ -507,6 +508,15 @@ const THREADS: readonly Thread[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ChatsPage {
+  /** In the user's numbering system. */
+  private readonly bytesOf = bytes;
+
+  /** In the user's numbering system. */
+  private readonly whenOf = when;
+
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

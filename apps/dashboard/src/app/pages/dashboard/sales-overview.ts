@@ -1,4 +1,3 @@
-import { DecimalPipe } from '@angular/common';
 import { Component, ViewEncapsulation, computed, signal } from '@angular/core';
 import {
   ScBadge,
@@ -46,14 +45,13 @@ import {
   SiTrendingUpIcon,
 } from '@semantic-icons/lucide-icons';
 import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
-import { monthDay } from '../../shared/format';
+import { change, compact, count, money, monthDay } from '../../shared/format';
 import { label } from '../../shared/labels';
 
 /** Sales Overview: new and existing users over a period, as two lines. */
 @Component({
   selector: 'app-sales-overview',
   imports: [
-    DecimalPipe,
     ScBadge,
     ScCard,
     ScCardAction,
@@ -107,7 +105,7 @@ import { label } from '../../shared/labels';
             scSelect
             [value]="period()"
             (valueChange)="choose($event)"
-            [items]="periods"
+            [items]="periods()"
           >
             <div
               i18n-aria-label="@@dashboard.salesOverview.period"
@@ -123,7 +121,7 @@ import { label } from '../../shared/labels';
               <div scSelectPopup>
                 <div scSelectList>
                   <div scSelectGroup>
-                    @for (item of periods; track item.value) {
+                    @for (item of periods(); track item.value) {
                       <div scSelectItem [value]="item.value">
                         <span scSelectItemText>{{ item.label }}</span>
                         <span scSelectItemIndicator
@@ -149,8 +147,10 @@ import { label } from '../../shared/labels';
             i18n="@@dashboard.salesOverview.n124500022Vs"
             class="flex flex-wrap items-baseline gap-2"
           >
-            <span class="text-2xl font-semibold tabular-nums">$12,450.00</span>
-            <span scBadge variant="secondary">+22%</span>
+            <span class="text-2xl font-semibold tabular-nums">{{
+              moneyOf(12450)
+            }}</span>
+            <span scBadge variant="secondary">{{ changeOf(0.22) }}</span>
             <span class="text-muted-foreground text-sm">vs last month</span>
           </div>
         </div>
@@ -183,7 +183,7 @@ import { label } from '../../shared/labels';
                   >
                     <span scChartTooltipIndicator></span>
                     <span scChartTooltipName>{{ item.name }}</span>
-                    <span scChartTooltipValue>{{ item.value | number }}k</span>
+                    <span scChartTooltipValue>{{ countOf(item.value) }}k</span>
                   </div>
                 }
               </div>
@@ -205,15 +205,19 @@ import { label } from '../../shared/labels';
   encapsulation: ViewEncapsulation.None,
 })
 export class SalesOverview {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+  private readonly moneyOf = money;
+  private readonly changeOf = change;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     newAndExistingUsers: $localize`:@@dashboard.salesOverview.newAndExistingUsers:New and existing users, `,
   };
 
-  private readonly periods = SALES_PERIODS.map((value) => ({
-    value,
-    label: label(value),
-  }));
+  private readonly periods = computed(() =>
+    SALES_PERIODS.map((value) => ({ value, label: label(value) })),
+  );
   private readonly period = signal<SalesPeriod>('Last 30 Days');
   private readonly data = computed(() =>
     SALES[this.period()].map((point) => ({
@@ -235,8 +239,8 @@ export class SalesOverview {
   /** Half the dates on the axis when there are many. */
   private readonly everyOther = (date: string, index: number) =>
     this.data().length > 10 && index % 3 !== 0 ? '' : date;
-  private readonly thousands = (value: number) =>
-    value === 0 ? '0' : `${value}k`;
+  /** Thousands on the axis: 10 → 10K. */
+  private readonly thousands = (value: number) => compact(value * 1000);
 
   private choose(value: unknown): void {
     if (SALES_PERIODS.includes(value as SalesPeriod))

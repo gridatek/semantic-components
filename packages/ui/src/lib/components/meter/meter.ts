@@ -1,13 +1,6 @@
-import {
-  Directive,
-  LOCALE_ID,
-  computed,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { Directive, computed, input, signal } from '@angular/core';
 import { cn } from 'cn';
-import { ɵwarnIfUnnamed } from '../../utils';
+import { injectDisplayLocale, ɵwarnIfUnnamed } from '../../utils';
 
 /** How the value is written: number format options, or yours. */
 export type ScMeterFormat =
@@ -46,7 +39,8 @@ export interface ScMeterValueLabelDetails {
   },
 })
 export class ScMeter {
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The reading. */
@@ -81,8 +75,12 @@ export class ScMeter {
     const format = this.format();
     if (typeof format === 'function') return format(this.value());
     return format.style === 'percent'
-      ? new Intl.NumberFormat(this.locale, format).format(this.percent() / 100)
-      : new Intl.NumberFormat(this.locale, format).format(this.value());
+      ? new Intl.NumberFormat(this.displayLocale(), format).format(
+          this.percent() / 100,
+        )
+      : new Intl.NumberFormat(this.displayLocale(), format).format(
+          this.value(),
+        );
   });
   private readonly valueText = computed(() => {
     const label = this.valueLabel();

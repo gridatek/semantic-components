@@ -3,7 +3,6 @@ import {
   DestroyRef,
   Directive,
   ElementRef,
-  LOCALE_ID,
   Renderer2,
   computed,
   effect,
@@ -12,6 +11,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { injectDisplayLocale } from '../../utils';
 import { ScTimelineItem } from './timeline-item';
 
 /** A moment the time can write. */
@@ -37,7 +37,8 @@ export type ScTimelineMoment =
 })
 export class ScTimelineTime {
   private readonly styles = injectStyle().timeline;
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly id = input(inject(_IdGenerator).getId('sc-timeline-time-'));
@@ -55,7 +56,7 @@ export class ScTimelineTime {
     if (!value) return null;
     const dateOnly = value instanceof Temporal.PlainDate;
     return value.toLocaleString(
-      this.locale,
+      this.displayLocale(),
       this.options() ??
         (dateOnly
           ? { dateStyle: 'medium' }

@@ -43,7 +43,7 @@ import {
 import { CUSTOMERS, type Customer } from '../../data/orders';
 import { personById } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { day, initials, money } from '../../shared/format';
+import { count, day, initials, money } from '../../shared/format';
 import { label } from '../../shared/labels';
 
 interface CustomerRow {
@@ -230,7 +230,7 @@ const columns = columnHelper.columns([
                     {{ row.original.location }}
                   </td>
                   <td scDataTableCell class="tabular-nums">
-                    {{ row.original.orders }}
+                    {{ countOf(row.original.orders) }}
                   </td>
                   <td scDataTableCell class="tabular-nums">
                     {{ moneyOf(row.original.spent) }}
@@ -274,6 +274,9 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomersPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

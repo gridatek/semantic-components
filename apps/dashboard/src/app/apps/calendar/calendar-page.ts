@@ -43,6 +43,7 @@ import {
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
+import { count } from '../../shared/format';
 
 type Category = 'work' | 'personal' | 'important' | 'travel';
 
@@ -313,7 +314,7 @@ function seed(): CalendarEvent[] {
         </ng-template>
         <ng-template scSchedulerMoreTemplate let-count let-day="day">
           <button i18n="@@calendar.more" [scSchedulerMore]="day">
-            {{ count }} more
+            {{ countOf(count) }} more
           </button>
         </ng-template>
       </div>
@@ -411,6 +412,9 @@ function seed(): CalendarEvent[] {
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendarPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     apps: $localize`:@@calendar.apps:Apps`,

@@ -1,13 +1,13 @@
 import {
   Component,
   DestroyRef,
-  LOCALE_ID,
   ViewEncapsulation,
   booleanAttribute,
   computed,
   inject,
   input,
 } from '@angular/core';
+import { injectFormatNumber } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { optionalBoolean } from './chart-axis-input';
 import { type ScChartAxisSide, ScChartState } from './chart-state';
@@ -47,7 +47,8 @@ const LINE = 16;
 })
 export class ScChartCategoryAxis {
   private readonly state = inject(ScChartState);
-  private readonly numbers = new Intl.NumberFormat(inject(LOCALE_ID));
+  /** Its numbers, in the user's numbering system. */
+  private readonly formatNumber = injectFormatNumber();
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** A category's label (`'January'` → `'Jan'`). */
@@ -87,7 +88,7 @@ export class ScChartCategoryAxis {
       const format = this.tickFormatter();
       return scale.ticks(5).map((value, index) => ({
         index,
-        label: format(this.numbers.format(value), index),
+        label: format(this.formatNumber(value), index),
         x: scale(value),
         y: this.above() ? top - 8 : bottom + 8,
         anchor: 'middle',

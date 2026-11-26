@@ -32,6 +32,7 @@ import {
   SiTrash2Icon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
+import { count } from '../../shared/format';
 
 interface Member {
   name: string;
@@ -97,7 +98,7 @@ const blank = (): Member => ({ name: '', email: '', role: 'Editor' });
                 i18n="@@forms.formRepeater.person"
                 class="text-muted-foreground px-1 text-xs"
               >
-                Person {{ i + 1 }}
+                Person {{ countOf(i + 1) }}
               </legend>
               <div scField>
                 <label i18n="@@forms.formRepeater.name" scLabel>Name</label>
@@ -149,7 +150,7 @@ const blank = (): Member => ({ name: '', email: '', role: 'Editor' });
               >
                 <svg siTrash2Icon></svg>
                 <span i18n="@@forms.formRepeater.removePerson" class="sr-only"
-                  >Remove person {{ i + 1 }}</span
+                  >Remove person {{ countOf(i + 1) }}</span
                 >
               </button>
             </fieldset>
@@ -172,7 +173,7 @@ const blank = (): Member => ({ name: '', email: '', role: 'Editor' });
           <span
             i18n="@@forms.formRepeater.of10"
             class="text-muted-foreground text-sm"
-            >{{ model().members.length }} of 10</span
+            >{{ countOf(model().members.length) }} of {{ countOf(10) }}</span
           >
           <button
             i18n="@@forms.formRepeater.sendInvitations"
@@ -189,6 +190,9 @@ const blank = (): Member => ({ name: '', email: '', role: 'Editor' });
   encapsulation: ViewEncapsulation.None,
 })
 export class FormRepeaterPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     forms: $localize`:@@forms.formRepeater.forms:Forms`,

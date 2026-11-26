@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
-  LOCALE_ID,
   booleanAttribute,
   computed,
   contentChild,
@@ -17,6 +16,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
+import { injectDisplayLocale } from '../../utils';
 import type { ScCalendarRange, ScCalendarValue } from '../calendar';
 import {
   SC_DATE_INPUT_HOST,
@@ -47,7 +47,8 @@ import { ScDateRangePickerTrigger } from './date-range-picker-trigger';
 export class ScDateRangePicker
   implements FormValueControl<ScCalendarRange | null>, ScDateInputHost
 {
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** The range: `[formField]` or `[(value)]` — `{ from, to }`, or `null`. */
@@ -93,7 +94,7 @@ export class ScDateRangePicker
   );
 
   private readonly formatter = computed(
-    () => new Intl.DateTimeFormat(this.locale, this.format()),
+    () => new Intl.DateTimeFormat(this.displayLocale(), this.format()),
   );
 
   /** The value, as one span ("Oct 12 – 18, 2026") — or a start alone, or empty. */

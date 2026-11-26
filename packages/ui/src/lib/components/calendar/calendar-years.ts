@@ -6,6 +6,7 @@ import {
   inject,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectFormatNumber } from '../../utils';
 import { ScCalendar } from './calendar';
 
 /**
@@ -41,7 +42,7 @@ import { ScCalendar } from './calendar';
                   [class]="cellClass(year)"
                   (click)="pick(year)"
                 >
-                  {{ year }}
+                  {{ formatNumber(year, { useGrouping: false }) }}
                 </td>
               }
             </tr>
@@ -54,6 +55,9 @@ import { ScCalendar } from './calendar';
   encapsulation: ViewEncapsulation.None,
 })
 export class ScCalendarYears {
+  /** Its years, in the user's numbering system (no grouping: 2026, ٢٠٢٦). */
+  private readonly formatNumber = injectFormatNumber();
+
   private readonly calendar = inject(forwardRef(() => ScCalendar));
 
   private readonly focusedYear = computed(() => this.calendar.focused().year);

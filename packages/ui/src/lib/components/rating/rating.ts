@@ -2,7 +2,6 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ElementRef,
-  LOCALE_ID,
   ViewEncapsulation,
   booleanAttribute,
   computed,
@@ -15,7 +14,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { bindInput } from '../../utils';
+import { bindInput, injectDisplayLocale } from '../../utils';
 import { ScField } from '../field';
 import { ScRatingIcon } from './rating-icon';
 
@@ -84,7 +83,8 @@ export class ScRating implements FormValueControl<number | null> {
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   /** The field it is in: its label names it, its description describes it. */
   readonly field = inject(ScField, { optional: true });
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
 
   /** The score: `null` while not rated. Two-way, or a [formField]. */
   readonly value = model<number | null>(null);
@@ -127,7 +127,7 @@ export class ScRating implements FormValueControl<number | null> {
   readonly text = computed(() => {
     const template = this.valueText();
     if (!template) return '';
-    const number = new Intl.NumberFormat(this.locale, {
+    const number = new Intl.NumberFormat(this.displayLocale(), {
       maximumFractionDigits: 2,
     });
     return template

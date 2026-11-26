@@ -151,7 +151,7 @@ import { BlogStore } from '../../shared/stores';
               <span class="flex items-center gap-1.5">
                 <svg siMessageCircleIcon></svg
                 ><ng-container i18n="@@blog.detail.comments"
-                  >{{ comments().length }} comments</ng-container
+                  >{{ countOf(comments().length) }} comments</ng-container
                 >
               </span>
             </div>
@@ -163,7 +163,7 @@ import { BlogStore } from '../../shared/stores';
         <div scCard>
           <div scCardHeader>
             <h2 i18n="@@blog.detail.comments2" scCardTitle>
-              Comments ({{ comments().length }})
+              Comments ({{ countOf(comments().length) }})
             </h2>
           </div>
           <div scCardBody class="flex flex-col gap-6">

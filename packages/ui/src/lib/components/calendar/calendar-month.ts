@@ -3,7 +3,6 @@ import {
   Component,
   DestroyRef,
   ElementRef,
-  LOCALE_ID,
   ViewEncapsulation,
   afterRenderEffect,
   computed,
@@ -13,6 +12,7 @@ import {
   signal,
 } from '@angular/core';
 import { cn } from 'cn';
+import { injectDisplayLocale } from '../../utils';
 import { ScCalendar } from './calendar';
 
 interface ScCalendarDay {
@@ -146,7 +146,8 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
 })
 export class ScCalendarMonth {
   private readonly calendar = inject(forwardRef(() => ScCalendar));
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly locale = injectDisplayLocale();
 
   readonly month = input.required<Temporal.PlainYearMonth>();
 
@@ -159,7 +160,7 @@ export class ScCalendarMonth {
    * same.
    */
   private readonly weekdays = computed(() => {
-    const locale = this.locale;
+    const locale = this.locale();
     const start = this.calendar.weekStart();
     const days = Array.from({ length: 7 }, (_, i) =>
       MONDAY.add({ days: (start - 1 + i) % 7 }),
@@ -254,11 +255,11 @@ export class ScCalendarMonth {
   }
 
   private number(date: Temporal.PlainDate): string {
-    return date.toLocaleString(this.locale, { day: 'numeric' });
+    return date.toLocaleString(this.locale(), { day: 'numeric' });
   }
 
   private fullDate(date: Temporal.PlainDate): string {
-    return date.toLocaleString(this.locale, { dateStyle: 'full' });
+    return date.toLocaleString(this.locale(), { dateStyle: 'full' });
   }
 
   private context(day: ScCalendarDay) {

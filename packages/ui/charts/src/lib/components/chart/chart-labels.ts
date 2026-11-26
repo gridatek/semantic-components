@@ -1,12 +1,12 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   Component,
-  LOCALE_ID,
   ViewEncapsulation,
   computed,
   inject,
   input,
 } from '@angular/core';
+import { injectFormatNumber } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { SC_CHART_SERIES, type ScChartLabelPosition } from './chart-series';
 import { ScChartState } from './chart-state';
@@ -62,7 +62,8 @@ import { ScChartState } from './chart-state';
 export class ScChartLabels {
   private readonly series = inject(SC_CHART_SERIES);
   private readonly state = inject(ScChartState);
-  private readonly numbers = new Intl.NumberFormat(inject(LOCALE_ID));
+  /** Its numbers, in the user's numbering system. */
+  private readonly formatNumber = injectFormatNumber();
   /** The paths' ids' prefix: unique in the page. */
   private readonly id = inject(_IdGenerator).getId('sc-chart-labels-');
 
@@ -78,7 +79,7 @@ export class ScChartLabels {
   private readonly labels = computed(() => {
     const categories = this.state.categories();
     const format =
-      this.formatter() ?? ((value: number) => this.numbers.format(value));
+      this.formatter() ?? ((value: number) => this.formatNumber(value));
     return this.series
       .labelPoints(this.position(), this.offset())
       .map((point) => ({

@@ -36,6 +36,7 @@ import {
 } from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
+import { count, wholeMoney } from '../../shared/format';
 
 const EMPTY = {
   account: { email: '', password: '' },
@@ -113,7 +114,7 @@ const EMPTY = {
                     @if (s1.status() === 'complete') {
                       <svg siCheckIcon></svg>
                     } @else {
-                      1
+                      {{ countOf(1) }}
                     }
                   </span>
                   <span
@@ -136,7 +137,7 @@ const EMPTY = {
                     @if (s2.status() === 'complete') {
                       <svg siCheckIcon></svg>
                     } @else {
-                      2
+                      {{ countOf(2) }}
                     }
                   </span>
                   <span
@@ -159,7 +160,7 @@ const EMPTY = {
                     @if (s3.status() === 'complete') {
                       <svg siCheckIcon></svg>
                     } @else {
-                      3
+                      {{ countOf(3) }}
                     }
                   </span>
                   <span
@@ -252,9 +253,11 @@ const EMPTY = {
                             p.label
                           }}</span
                         >
-                        <span class="text-muted-foreground font-normal">{{
-                          p.price
-                        }}</span>
+                        <span
+                          i18n="@@forms.formWizard.perMonth"
+                          class="text-muted-foreground font-normal"
+                          >{{ wholeMoneyOf(p.price) }} / month</span
+                        >
                       </label>
                     }
                   </div>
@@ -322,6 +325,12 @@ const EMPTY = {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormWizardPage {
+  /** In the user's numbering system. */
+  private readonly wholeMoneyOf = wholeMoney;
+
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     forms: $localize`:@@forms.formWizard.forms:Forms`,
@@ -334,17 +343,17 @@ export class FormWizardPage {
     {
       value: 'starter',
       label: $localize`:@@forms.formWizard.starter:Starter`,
-      price: '$19 / month',
+      price: 19,
     },
     {
       value: 'pro',
       label: $localize`:@@forms.formWizard.pro:Pro`,
-      price: '$49 / month',
+      price: 49,
     },
     {
       value: 'team',
       label: $localize`:@@forms.formWizard.team:Team`,
-      price: '$99 / month',
+      price: 99,
     },
   ];
   private readonly model = signal(structuredClone(EMPTY));

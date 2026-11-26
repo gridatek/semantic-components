@@ -21,6 +21,7 @@ import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import {
   type ScFirstDayOfWeek,
+  injectDisplayLocale,
   ɵchosenFirstDayOfWeek,
   ɵweekStart,
 } from '../../utils';
@@ -120,6 +121,8 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   );
   /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
   private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   /**
    * The week's first day, `'mon'` … `'sun'` — unless the user chose one
    * (`injectFirstDayOfWeek()`); left out, the locale's.
@@ -212,7 +215,7 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
 
   /** What is shown: the month(s), the year, or the years. */
   readonly heading = computed(() => {
-    const locale = this.locale;
+    const locale = this.displayLocale();
     const view = this.view();
     const first = this.first();
     if (view === 'year') {
@@ -256,7 +259,7 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   );
 
   monthHeading(month: Temporal.PlainYearMonth): string {
-    return month.toPlainDate({ day: 1 }).toLocaleString(this.locale, {
+    return month.toPlainDate({ day: 1 }).toLocaleString(this.displayLocale(), {
       month: 'long',
       year: 'numeric',
     });

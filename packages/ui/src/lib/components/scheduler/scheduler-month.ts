@@ -4,7 +4,6 @@ import {
   Component,
   ElementRef,
   Injector,
-  LOCALE_ID,
   ViewEncapsulation,
   afterRenderEffect,
   computed,
@@ -14,6 +13,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { injectDisplayLocale, injectFormatNumber } from '../../utils';
 import { ScScheduler } from './scheduler';
 import { ScSchedulerDayPointer } from './scheduler-day-pointer';
 import { layoutRow, startOfWeek } from './scheduler-layout';
@@ -65,7 +65,7 @@ import { schedulerEventInjector } from './scheduler-types';
               [tabIndex]="cell.focused ? 0 : -1"
               (click)="scheduler.goTo(cell.day, 'day')"
             >
-              {{ cell.day.day }}
+              {{ formatNumber(cell.day.day) }}
             </button>
             @for (item of cell.segments; track item.key) {
               <div
@@ -116,7 +116,10 @@ import { schedulerEventInjector } from './scheduler-types';
 export class ScSchedulerMonth {
   private readonly scheduler = inject(ScScheduler);
   private readonly injector = inject(Injector);
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly locale = injectDisplayLocale();
+  /** Its numbers (the days), in the user's numbering system. */
+  private readonly formatNumber = injectFormatNumber();
   private readonly direction = inject(Directionality).valueSignal;
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
@@ -147,8 +150,8 @@ export class ScSchedulerMonth {
 
   private readonly weekdays = computed(() =>
     (this.scheduler.weeks()[0] ?? []).map((day) => ({
-      short: day.toLocaleString(this.locale, { weekday: 'short' }),
-      long: day.toLocaleString(this.locale, { weekday: 'long' }),
+      short: day.toLocaleString(this.locale(), { weekday: 'short' }),
+      long: day.toLocaleString(this.locale(), { weekday: 'long' }),
     })),
   );
 
@@ -170,7 +173,7 @@ export class ScSchedulerMonth {
             day,
             key: day.toString(),
             column: `${i + 1}`,
-            label: day.toLocaleString(this.locale, { dateStyle: 'full' }),
+            label: day.toLocaleString(this.locale(), { dateStyle: 'full' }),
             today: isToday,
             focused: day.equals(date),
             more: more[i],

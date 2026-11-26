@@ -3,7 +3,6 @@ import {
   Component,
   DestroyRef,
   InjectionToken,
-  LOCALE_ID,
   ViewEncapsulation,
   booleanAttribute,
   computed,
@@ -16,7 +15,7 @@ import {
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { bindInput } from '../../utils';
+import { bindInput, injectDisplayLocale } from '../../utils';
 import { ScField } from '../field';
 import { decimalPlaces, numberFormatter, parseNumber } from './number-format';
 
@@ -119,8 +118,8 @@ export class ScNumberGroup implements FormValueControl<number | null> {
   readonly largeStep = input(10);
   /** Steps land on multiples of `step` (from `min`, or 0). */
   readonly snapOnStep = input(false, { transform: booleanAttribute });
-  /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   /** How the value is written (currency, percent, unit, decimals…). */
   readonly format = input<Intl.NumberFormatOptions>({});
   /** The mouse wheel steps the value while the input has focus. */
@@ -165,7 +164,7 @@ export class ScNumberGroup implements FormValueControl<number | null> {
   }
 
   readonly formatter = computed(() =>
-    numberFormatter(this.locale, this.format()),
+    numberFormatter(this.displayLocale(), this.format()),
   );
 
   /** The value as written, for `aria-valuetext` and the input. */

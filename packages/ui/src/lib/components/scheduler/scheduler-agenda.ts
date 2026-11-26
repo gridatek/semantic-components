@@ -2,7 +2,6 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   Injector,
-  LOCALE_ID,
   ViewEncapsulation,
   computed,
   inject,
@@ -10,6 +9,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { injectDisplayLocale, injectFormatNumber } from '../../utils';
 import { ScScheduler } from './scheduler';
 import { eventsOn } from './scheduler-layout';
 import { schedulerEventInjector } from './scheduler-types';
@@ -37,7 +37,7 @@ import { schedulerEventInjector } from './scheduler-types';
               <span
                 class="flex size-8 items-center justify-center text-sm font-semibold"
                 [class]="day.number"
-                >{{ day.day.day }}</span
+                >{{ formatNumber(day.day.day) }}</span
               >
             </div>
             <ul
@@ -71,7 +71,10 @@ import { schedulerEventInjector } from './scheduler-types';
 export class ScSchedulerAgenda {
   private readonly scheduler = inject(ScScheduler);
   private readonly injector = inject(Injector);
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly locale = injectDisplayLocale();
+  /** Its numbers (the days), in the user's numbering system. */
+  private readonly formatNumber = injectFormatNumber();
   private readonly style = injectStyle();
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -92,8 +95,8 @@ export class ScSchedulerAgenda {
       .map(({ day, on }) => ({
         day,
         key: day.toString(),
-        weekday: day.toLocaleString(this.locale, { weekday: 'short' }),
-        label: day.toLocaleString(this.locale, { dateStyle: 'full' }),
+        weekday: day.toLocaleString(this.locale(), { weekday: 'short' }),
+        label: day.toLocaleString(this.locale(), { dateStyle: 'full' }),
         number: cn(
           this.style.scheduler.day,
           day.equals(today) && 'bg-primary text-primary-foreground',

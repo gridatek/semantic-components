@@ -39,7 +39,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { PRODUCT_CATEGORIES, type Product, thumbOf } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { day, money } from '../../shared/format';
+import { count, day, money } from '../../shared/format';
 import { label } from '../../shared/labels';
 import { ProductStore } from './shop-store';
 
@@ -230,11 +230,11 @@ import { ProductStore } from './shop-store';
                         i18n="@@ecommerce.productList.low"
                         scBadge
                         variant="outline"
-                        >Low · {{ product.stock }}</span
+                        >Low · {{ countOf(product.stock) }}</span
                       >
                     } @else {
                       <span scBadge variant="secondary">{{
-                        product.stock
+                        countOf(product.stock)
                       }}</span>
                     }
                   </td>
@@ -297,6 +297,9 @@ import { ProductStore } from './shop-store';
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductListPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

@@ -40,7 +40,7 @@ import {
   SiTrash2Icon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
-import { money } from '../../shared/format';
+import { count, money } from '../../shared/format';
 import { label } from '../../shared/labels';
 import {
   INVOICE_STATUSES,
@@ -159,7 +159,7 @@ interface Draft {
               class="grid items-end gap-3 sm:grid-cols-[1fr_6rem_8rem_8rem_auto]"
             >
               <legend i18n="@@invoice.edit.item" class="sr-only">
-                Item {{ i + 1 }}
+                Item {{ countOf(i + 1) }}
               </legend>
               <div scField>
                 <label i18n="@@invoice.edit.description" scLabel
@@ -192,7 +192,7 @@ interface Draft {
               >
                 <svg siTrash2Icon></svg>
                 <span i18n="@@invoice.edit.removeItem" class="sr-only"
-                  >Remove item {{ i + 1 }}</span
+                  >Remove item {{ countOf(i + 1) }}</span
                 >
               </button>
             </fieldset>
@@ -256,6 +256,9 @@ interface Draft {
   encapsulation: ViewEncapsulation.None,
 })
 export class InvoiceEditPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

@@ -17,7 +17,7 @@ import {
   SiUserPlusIcon,
 } from '@semantic-icons/lucide-icons';
 import { PEOPLE } from '../../data/people';
-import { initials } from '../../shared/format';
+import { count, initials } from '../../shared/format';
 import { ProfileHeader } from './profile-header';
 
 /** Followers (Pro User Profile): who follows, followed back or not. */
@@ -52,7 +52,7 @@ import { ProfileHeader } from './profile-header';
       >
         Followers
         <span class="text-muted-foreground font-normal">{{
-          shown().length
+          countOf(shown().length)
         }}</span>
       </h2>
       <div scInputGroup class="max-w-xs">
@@ -125,6 +125,9 @@ import { ProfileHeader } from './profile-header';
   encapsulation: ViewEncapsulation.None,
 })
 export class FollowersPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly query = signal('');
   private readonly following = signal(new Set([2, 4, 7]));
   private readonly shown = computed(() => {

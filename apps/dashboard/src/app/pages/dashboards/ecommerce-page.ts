@@ -1,4 +1,4 @@
-import { NgOptimizedImage, PercentPipe } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
@@ -65,9 +65,11 @@ import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
 import {
   axisLabel,
   compactMoney,
+  count,
   day,
   initials,
   money,
+  percent,
 } from '../../shared/format';
 import { label } from '../../shared/labels';
 import { orderBadge } from '../../shared/status';
@@ -86,7 +88,6 @@ const REVENUE = [
   selector: 'app-ecommerce-page',
   imports: [
     NgOptimizedImage,
-    PercentPipe,
     RouterLink,
     ScAvatar,
     ScAvatarFallback,
@@ -276,7 +277,7 @@ const REVENUE = [
             Yearly goal
           </h2>
           <p i18n="@@dashboards.ecommerce.n147kOf204k" scCardDescription>
-            $147K of $204K
+            {{ compactMoneyOf(147000) }} of {{ compactMoneyOf(204000) }}
           </p>
         </div>
         <div scCardBody class="flex flex-col items-center gap-4">
@@ -289,14 +290,15 @@ const REVENUE = [
           >
             <svg scProgressCircle [thickness]="6"></svg>
             <span scProgressValueText class="text-2xl font-semibold">{{
-              0.72 | percent
+              percentOf(0.72)
             }}</span>
           </div>
           <p
             i18n="@@dashboards.ecommerce.n57kToGoAtThis"
             class="text-muted-foreground text-center text-sm"
           >
-            $57K to go — at this pace, reached in October.
+            {{ compactMoneyOf(57000) }} to go — at this pace, reached in
+            October.
           </p>
         </div>
       </div>
@@ -406,7 +408,7 @@ const REVENUE = [
                 <div scItemBody>
                   <div scItemTitle>{{ product.name }}</div>
                   <p i18n="@@dashboards.ecommerce.reviews" scItemDescription>
-                    {{ product.reviews }} reviews ·
+                    {{ countOf(product.reviews) }} reviews ·
                     {{ labelOf(product.category) }}
                   </p>
                 </div>
@@ -429,6 +431,11 @@ const REVENUE = [
   encapsulation: ViewEncapsulation.None,
 })
 export class EcommercePage {
+  /** In the user's numbering system. */
+  private readonly percentOf = percent;
+  private readonly countOf = count;
+  private readonly compactMoneyOf = compactMoney;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

@@ -25,6 +25,7 @@ import {
   ScPasswordToggle,
 } from '@semantic-components/ui';
 import { SiEyeIcon, SiEyeOffIcon } from '@semantic-icons/lucide-icons';
+import { count } from '../shared/format';
 import { SocialButtons } from './social-buttons';
 
 /** Boxed Register. */
@@ -108,7 +109,7 @@ import { SocialButtons } from './social-buttons';
                 </button>
               </div>
               <p i18n="@@auth.register.atLeast8Characters" scFieldDescription>
-                At least 8 characters.
+                At least {{ countOf(8) }} characters.
               </p>
             </div>
             <button
@@ -135,6 +136,9 @@ import { SocialButtons } from './social-buttons';
   encapsulation: ViewEncapsulation.None,
 })
 export class RegisterPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly router = inject(Router);
   private readonly model = signal({ name: '', email: '', password: '' });
   private readonly registerForm = form(this.model, (path) => {

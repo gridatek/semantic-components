@@ -68,7 +68,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { STAFF, type StaffMember } from '../../data/staff';
 import { PageHeader } from '../../layout/page-header';
-import { money } from '../../shared/format';
+import { count, money, percent } from '../../shared/format';
 import { label } from '../../shared/labels';
 import { StaffCell } from './table-parts';
 
@@ -200,8 +200,8 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
             class="text-muted-foreground text-sm"
             aria-live="polite"
           >
-            {{ table.getSelectedRowModel().rows.length }} of
-            {{ table.getRowModel().rows.length }} selected
+            {{ countOf(table.getSelectedRowModel().rows.length) }} of
+            {{ countOf(table.getRowModel().rows.length) }} selected
           </p>
           <button
             scButton
@@ -223,6 +223,9 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
   encapsulation: ViewEncapsulation.None,
 })
 export class RowSelectionTablePage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -660,7 +663,7 @@ export class EditableTablePage {
                       <svg siGripVerticalIcon class="size-4"></svg>
                     </span>
                   </td>
-                  <td scTableCell class="tabular-nums">{{ i + 1 }}</td>
+                  <td scTableCell class="tabular-nums">{{ countOf(i + 1) }}</td>
                   <td scTableCell>
                     <app-staff-cell column="name" [member]="member" />
                   </td>
@@ -712,6 +715,9 @@ export class EditableTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class DragDropTablePage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -839,7 +845,7 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
                     {{ labelOf(row.original.department) }}
                   </td>
                   <td scDataTableCell class="tabular-nums">
-                    {{ row.original.projects.length }}
+                    {{ countOf(row.original.projects.length) }}
                   </td>
                 </tr>
                 @if (row.getIsExpanded()) {
@@ -853,9 +859,9 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
                         ) {
                           <div scProgress [value]="project.progress">
                             <span scProgressLabel>{{ project.name }}</span>
-                            <span scProgressValueText
-                              >{{ project.progress }}%</span
-                            >
+                            <span scProgressValueText>{{
+                              percentOf(project.progress / 100)
+                            }}</span>
                             <div scProgressTrack>
                               <div scProgressRange></div>
                             </div>
@@ -876,6 +882,12 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
   encapsulation: ViewEncapsulation.None,
 })
 export class ExpandingTablePage {
+  /** In the user's numbering system. */
+  private readonly percentOf = percent;
+
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

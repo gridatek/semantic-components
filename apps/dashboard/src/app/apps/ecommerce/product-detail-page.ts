@@ -47,7 +47,7 @@ import {
 import { PEOPLE } from '../../data/people';
 import { PRODUCTS, thumbOf } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { initials, money } from '../../shared/format';
+import { count, initials, money, wholeMoney } from '../../shared/format';
 import { label } from '../../shared/labels';
 import { CartStore, ProductStore } from './shop-store';
 
@@ -144,7 +144,7 @@ const REVIEWS = [
                   i18n="@@ecommerce.productDetail.inStock"
                   scBadge
                   variant="outline"
-                  >{{ product.stock }} in stock</span
+                  >{{ countOf(product.stock) }} in stock</span
                 >
               } @else {
                 <span
@@ -159,8 +159,8 @@ const REVIEWS = [
             <span class="text-muted-foreground flex items-center gap-1 text-sm">
               <svg siStarIcon class="size-4 fill-current"></svg>
               <ng-container i18n="@@ecommerce.productDetail.reviews"
-                >{{ product.rating }} ·
-                {{ product.reviews }} reviews</ng-container
+                >{{ countOf(product.rating) }} ·
+                {{ countOf(product.reviews) }} reviews</ng-container
               >
             </span>
             <div class="flex items-baseline gap-3">
@@ -259,13 +259,13 @@ const REVIEWS = [
                 <svg siTruckIcon></svg>
                 <ng-container
                   i18n="@@ecommerce.productDetail.freeDeliveryOver100"
-                  >Free delivery over $100</ng-container
+                  >Free delivery over {{ wholeMoneyOf(100) }}</ng-container
                 >
               </li>
               <li class="flex items-center gap-2">
                 <svg siShieldCheckIcon></svg>
                 <ng-container i18n="@@ecommerce.productDetail.n30DayReturns"
-                  >30-day returns</ng-container
+                  >{{ countOf(30) }}-day returns</ng-container
                 >
               </li>
             </ul>
@@ -289,7 +289,7 @@ const REVIEWS = [
                 scTabsTab
                 value="reviews"
               >
-                Reviews ({{ reviews.length }})
+                Reviews ({{ countOf(reviews.length) }})
               </button>
             </div>
             <div scTabsPanel value="description">
@@ -330,7 +330,7 @@ const REVIEWS = [
                         >
                           <svg siStarIcon class="size-3.5 fill-current"></svg>
                           <ng-container i18n="@@ecommerce.productDetail.of5"
-                            >{{ review.rating }} of 5 ·
+                            >{{ countOf(review.rating) }} of 5 ·
                             {{ review.date }}</ng-container
                           >
                         </span>
@@ -397,6 +397,12 @@ const REVIEWS = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductDetailPage {
+  /** In the user's numbering system. */
+  private readonly wholeMoneyOf = wholeMoney;
+
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

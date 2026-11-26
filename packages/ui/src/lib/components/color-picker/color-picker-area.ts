@@ -1,7 +1,6 @@
 import {
   Component,
   ElementRef,
-  LOCALE_ID,
   ViewEncapsulation,
   afterRenderEffect,
   computed,
@@ -11,7 +10,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { ɵwarnIfUnnamed } from '../../utils';
+import { injectDisplayLocale, ɵwarnIfUnnamed } from '../../utils';
 import { ScColorPicker } from './color-picker';
 import {
   SC_COLOR_AREA_CHANNELS,
@@ -81,7 +80,8 @@ const HEIGHT = 72;
 })
 export class ScColorPickerArea {
   private readonly picker = inject(ScColorPicker);
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   private readonly styles = injectStyle().colorPicker;
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -120,7 +120,7 @@ export class ScColorPickerArea {
   private readonly valueText = computed(
     () =>
       this.ariaValueText() ??
-      `${scFormatChannel(this.xChannel(), this.picker.channel(this.xChannel()), this.locale)}, ${scFormatChannel(this.yChannel(), this.picker.channel(this.yChannel()), this.locale)}`,
+      `${scFormatChannel(this.xChannel(), this.picker.channel(this.xChannel()), this.displayLocale())}, ${scFormatChannel(this.yChannel(), this.picker.channel(this.yChannel()), this.displayLocale())}`,
   );
 
   /** Saturation × brightness in HSV: CSS gradients; any other pair: a canvas. */

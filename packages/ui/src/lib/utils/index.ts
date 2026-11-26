@@ -8,3 +8,4 @@ export * from './open-delay';
 export * from './overlay-positions';
 export * from './storage';
 export * from './week-start';
+export * from './numbering-system';

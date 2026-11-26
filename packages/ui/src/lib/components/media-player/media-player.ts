@@ -3,7 +3,6 @@ import {
   DestroyRef,
   Directive,
   ElementRef,
-  LOCALE_ID,
   computed,
   effect,
   inject,
@@ -14,6 +13,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { injectDisplayLocale } from '../../utils';
 import { ɵwarnIfUnnamed } from '../../utils/accessible-name/accessible-name';
 
 /** What the player plays: from its `scMediaPlayerMedia` element. */
@@ -79,7 +79,8 @@ export class ScMediaPlayer {
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
   private readonly document = inject(DOCUMENT);
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   private readonly styles = injectStyle().mediaPlayer;
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -151,10 +152,13 @@ export class ScMediaPlayer {
   );
 
   private idleTimer: ReturnType<typeof setTimeout> | undefined;
-  private readonly durationFormat = new Intl.DurationFormat(this.locale, {
-    style: 'digital',
-    hoursDisplay: 'auto',
-  });
+  private readonly durationFormat = computed(
+    () =>
+      new Intl.DurationFormat(this.displayLocale(), {
+        style: 'digital',
+        hoursDisplay: 'auto',
+      }),
+  );
 
   constructor() {
     ɵwarnIfUnnamed('scMediaPlayer');
@@ -309,7 +313,7 @@ export class ScMediaPlayer {
   /** A time, written in the app's language: "1:05", "1:02:05". */
   formatTime(seconds: number): string {
     const total = Math.max(0, Math.floor(seconds || 0));
-    return this.durationFormat.format({
+    return this.durationFormat().format({
       hours: Math.floor(total / 3600),
       minutes: Math.floor((total % 3600) / 60),
       seconds: total % 60,

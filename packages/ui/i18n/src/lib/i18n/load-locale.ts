@@ -5,8 +5,8 @@ import {
   type ScI18nConfig,
   chooseLocale,
   localeDir,
+  localeTag,
   storageKey,
-  withWeekStart,
 } from './i18n-config';
 
 /**
@@ -34,7 +34,7 @@ export async function loadLocale(config: ScI18nConfig): Promise<void> {
       if (data) {
         registerLocaleData(data.default);
         // Under the id Angular is given too: its pipes look it up by it.
-        const id = withWeekStart(config, locale);
+        const id = localeTag(config, locale);
         if (id !== locale) registerLocaleData(data.default, id);
       }
     } catch (error) {
@@ -45,7 +45,7 @@ export async function loadLocale(config: ScI18nConfig): Promise<void> {
       locale = config.sourceLocale;
     }
   }
-  $localize.locale = withWeekStart(config, locale);
+  $localize.locale = localeTag(config, locale);
   const html = document.documentElement;
   html.lang = locale;
   html.dir = localeDir(config, locale);

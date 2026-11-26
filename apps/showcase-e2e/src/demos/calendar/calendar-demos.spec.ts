@@ -411,3 +411,31 @@ test("The user's first day (injectFirstDayOfWeek(), kept as a cookie) before the
     page.locator('[data-slot=calendar] thead th .sr-only').first(),
   ).toHaveText('الاثنين');
 });
+
+test("The user's numbering system (kept as a cookie): the days and the heading in Arabic digits, an English calendar", async ({
+  page,
+  baseURL,
+}) => {
+  await page.context().addCookies([
+    {
+      name: 'sc-numbering-system',
+      value: 'arab',
+      url: baseURL ?? 'http://localhost:4200',
+    },
+  ]);
+  await page.goto('/demos/calendar/calendar-usage-demo');
+  const cells = page.locator('[data-slot=calendar-cell]');
+  await expect(cells.first()).toBeVisible();
+  // Every day written in Arabic-Indic digits (٠–٩) — its full date, for
+  // screen readers, too — and none in Latin ones.
+  await expect
+    .poll(() =>
+      cells.evaluateAll((all) =>
+        all.every((c) => /^[٠-٩]/.test(c.textContent?.trim() ?? '')),
+      ),
+    )
+    .toBe(true);
+  await expect(page.locator('[data-slot=calendar]').first()).not.toContainText(
+    /[0-9]/,
+  );
+});

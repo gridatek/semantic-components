@@ -51,7 +51,7 @@ import { ORDERS, ORDER_STATUSES } from '../../data/orders';
 import { personById } from '../../data/people';
 import { PRODUCTS } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { day, initials, money } from '../../shared/format';
+import { count, day, initials, money } from '../../shared/format';
 import { label } from '../../shared/labels';
 import { orderBadge } from '../../shared/status';
 
@@ -60,6 +60,7 @@ interface OrderRow {
   readonly customer: string;
   readonly avatar: string;
   readonly product: string;
+  readonly quantity: number;
   readonly date: string;
   readonly total: number;
   readonly payment: string;
@@ -72,7 +73,8 @@ const ROWS: OrderRow[] = ORDERS.map((o) => {
     id: o.id,
     customer: person.name,
     avatar: person.avatar,
-    product: `${PRODUCTS.find((p) => p.id === o.productId)?.name ?? ''} × ${o.quantity}`,
+    product: PRODUCTS.find((p) => p.id === o.productId)?.name ?? '',
+    quantity: o.quantity,
     date: o.date,
     total: o.total,
     payment: o.payment,
@@ -236,7 +238,8 @@ const columns = columnHelper.columns([
                     </div>
                   </td>
                   <td scDataTableCell>
-                    {{ row.original.product }}
+                    {{ row.original.product }} ×
+                    {{ countOf(row.original.quantity) }}
                   </td>
                   <td scDataTableCell>
                     {{ dayOf(row.original.date) }}
@@ -280,7 +283,8 @@ const columns = columnHelper.columns([
             class="text-sm font-medium"
             aria-live="polite"
           >
-            Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
+            Page {{ countOf(pagination.currentPage()) }} of
+            {{ countOf(pagination.totalPages()) }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
@@ -308,6 +312,9 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class OrdersPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

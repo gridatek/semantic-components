@@ -75,6 +75,7 @@ import {
   SiZapIcon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
+import { count } from '../../shared/format';
 
 const NAMES = [
   'activity',
@@ -250,7 +251,7 @@ const NAMES = [
       class="text-muted-foreground text-sm"
       aria-live="polite"
     >
-      {{ shown() }} of {{ total }} icons
+      {{ countOf(shown()) }} of {{ countOf(total) }} icons
     </p>
     <ul
       class="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8"
@@ -687,6 +688,9 @@ const NAMES = [
   encapsulation: ViewEncapsulation.None,
 })
 export class IconsPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     icons: $localize`:@@icons.icons:Icons`,

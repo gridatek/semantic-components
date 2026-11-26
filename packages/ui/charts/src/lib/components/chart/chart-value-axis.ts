@@ -1,7 +1,6 @@
 import {
   Component,
   DestroyRef,
-  LOCALE_ID,
   ViewEncapsulation,
   booleanAttribute,
   computed,
@@ -9,6 +8,7 @@ import {
   inject,
   input,
 } from '@angular/core';
+import { injectFormatNumber } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { optionalBoolean } from './chart-axis-input';
 import { type ScChartAxisSide, ScChartState } from './chart-state';
@@ -41,7 +41,8 @@ import { type ScChartAxisSide, ScChartState } from './chart-state';
 })
 export class ScChartValueAxis {
   private readonly state = inject(ScChartState);
-  private readonly numbers = new Intl.NumberFormat(inject(LOCALE_ID));
+  /** Its numbers, in the user's numbering system. */
+  private readonly formatNumber = injectFormatNumber();
 
   readonly classInput = input<string>('', { alias: 'class' });
   /** Beside the plot: the room its labels take, in px. */
@@ -77,7 +78,7 @@ export class ScChartValueAxis {
     // Beside the plot: on its left, or its right (labels away from it).
     const onRight = this.state.sideAxisSide() === 'right';
     const format =
-      this.tickFormatter() ?? ((v: number) => this.numbers.format(v));
+      this.tickFormatter() ?? ((v: number) => this.formatNumber(v));
     const vertical = this.vertical();
     return this.state.valueTicks().map((value) => ({
       value,

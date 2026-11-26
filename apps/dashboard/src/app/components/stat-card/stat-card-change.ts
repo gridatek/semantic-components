@@ -1,11 +1,11 @@
 import {
   Component,
-  LOCALE_ID,
   ViewEncapsulation,
   computed,
   inject,
   input,
 } from '@angular/core';
+import { injectDisplayLocale } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { AppStatCard } from './stat-card';
 
@@ -33,7 +33,8 @@ export type AppStatCardGood = 'up' | 'down';
 })
 export class AppStatCardChange {
   private readonly card = inject(AppStatCard);
-  private readonly locale = inject(LOCALE_ID);
+  /** The locale, in the user's numbering system. */
+  private readonly locale = injectDisplayLocale();
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = input.required<number>();
@@ -52,7 +53,7 @@ export class AppStatCardChange {
   });
 
   private readonly text = computed(() =>
-    new Intl.NumberFormat(this.locale, {
+    new Intl.NumberFormat(this.locale(), {
       ...this.format(),
       signDisplay: 'exceptZero',
     }).format(this.value()),

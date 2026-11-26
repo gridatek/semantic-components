@@ -1,5 +1,8 @@
 import { InjectionToken } from '@angular/core';
-import type { ScFirstDayOfWeek } from '@semantic-components/ui';
+import type {
+  ScFirstDayOfWeek,
+  ScNumberingSystem,
+} from '@semantic-components/ui';
 
 /** A locale the app offers. */
 export interface ScLocale {
@@ -14,6 +17,12 @@ export interface ScLocale {
    * `Intl` gives Saturday or Monday. Left out, the locale's own (`Intl`).
    */
   firstDayOfWeek?: ScFirstDayOfWeek;
+  /**
+   * How its digits are written, `'latn'` · `'arab'` · `'arabext'`: `'latn'`
+   * for Arabic in a Western-digit app, say. Left out, the locale's own
+   * (`Intl`). The user's choice, once made, comes first.
+   */
+  numberingSystem?: ScNumberingSystem;
 }
 
 /**
@@ -85,15 +94,19 @@ export function findLocale(
 }
 
 /**
- * The locale Angular is given (`LOCALE_ID`): the id, carrying the week's
- * first day when the locale sets one, as Unicode's `fw` (`ar-u-fw-sun`), which `Intl` reads, and so every
- * calendar. Its translations and `<html lang>` keep the id itself.
+ * The locale Angular is given (`LOCALE_ID`): the id, carrying what the
+ * locale sets as Unicode writes it — the week's first day (`fw`), the
+ * numbering system (`nu`): `ar-u-fw-sun-nu-latn` — which `Intl` reads, and
+ * so every part. Its translations and `<html lang>` keep the id itself.
  */
-export function withWeekStart(config: ScI18nConfig, id: string): string {
-  const firstDayOfWeek = findLocale(config, id)?.firstDayOfWeek;
-  if (!firstDayOfWeek) return id;
+export function localeTag(config: ScI18nConfig, id: string): string {
+  const locale = findLocale(config, id);
+  const firstDayOfWeek = locale?.firstDayOfWeek;
+  const numberingSystem = locale?.numberingSystem;
+  if (!firstDayOfWeek && !numberingSystem) return id;
   return new Intl.Locale(id, {
-    firstDayOfWeek,
+    ...(firstDayOfWeek && { firstDayOfWeek }),
+    ...(numberingSystem && { numberingSystem }),
   } as Intl.LocaleOptions).toString();
 }
 

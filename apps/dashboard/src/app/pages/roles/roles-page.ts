@@ -34,7 +34,7 @@ import {
 import { SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { initials } from '../../shared/format';
+import { count, initials } from '../../shared/format';
 import { label } from '../../shared/labels';
 
 type Role = 'Admin' | 'Editor' | 'Viewer';
@@ -142,12 +142,12 @@ function defaults(): Set<string> {
               }
               @if (membersOf(role.name).length > 3) {
                 <div scAvatarGroupCount>
-                  +{{ membersOf(role.name).length - 3 }}
+                  +{{ countOf(membersOf(role.name).length - 3) }}
                 </div>
               }
             </div>
             <span i18n="@@roles.members" class="text-muted-foreground text-sm"
-              >{{ membersOf(role.name).length }} members</span
+              >{{ countOf(membersOf(role.name).length) }} members</span
             >
           </div>
         </div>
@@ -284,6 +284,9 @@ function defaults(): Set<string> {
   encapsulation: ViewEncapsulation.None,
 })
 export class RolesPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

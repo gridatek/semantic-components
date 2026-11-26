@@ -1,12 +1,5 @@
-import {
-  Directive,
-  ElementRef,
-  LOCALE_ID,
-  computed,
-  effect,
-  inject,
-} from '@angular/core';
-import { bindInput, ɵwarnIfUnnamed } from '../../utils';
+import { Directive, ElementRef, computed, effect, inject } from '@angular/core';
+import { bindInput, injectDisplayLocale, ɵwarnIfUnnamed } from '../../utils';
 import { ScSlider } from '../slider/slider';
 import { ScImageCropper } from './image-cropper';
 
@@ -28,13 +21,18 @@ export class ScImageCropperZoom {
   private readonly slider = inject(ScSlider, { self: true });
   private readonly element =
     inject<ElementRef<HTMLInputElement>>(ElementRef).nativeElement;
-  private readonly percent = new Intl.NumberFormat(inject(LOCALE_ID), {
-    style: 'percent',
-    maximumFractionDigits: 0,
-  });
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
+  private readonly percent = computed(
+    () =>
+      new Intl.NumberFormat(this.displayLocale(), {
+        style: 'percent',
+        maximumFractionDigits: 0,
+      }),
+  );
 
   private readonly text = computed(() =>
-    this.percent.format(this.cropper.zoom()),
+    this.percent().format(this.cropper.zoom()),
   );
 
   constructor() {

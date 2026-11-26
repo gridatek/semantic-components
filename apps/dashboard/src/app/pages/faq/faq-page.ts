@@ -24,6 +24,7 @@ import {
   SiSearchIcon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
+import { hour } from '../../shared/format';
 
 const TOPICS: readonly {
   title: string;
@@ -193,8 +194,8 @@ const TOPICS: readonly {
               <ng-container i18n="@@faq.chat">Chat</ng-container>
             </h2>
             <p i18n="@@faq.openAChatWeekdays9" scCardDescription>
-              <a scLink routerLink="/apps/chats">Open a chat</a> — weekdays, 9
-              to 6.
+              <a scLink routerLink="/apps/chats">Open a chat</a> — weekdays,
+              {{ hourOf(9) }} to {{ hourOf(18) }}.
             </p>
           </div>
         </div>
@@ -205,6 +206,9 @@ const TOPICS: readonly {
   encapsulation: ViewEncapsulation.None,
 })
 export class FaqPage {
+  /** In the user's numbering system. */
+  private readonly hourOf = hour;
+
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     pages: $localize`:@@faq.pages:Pages`,

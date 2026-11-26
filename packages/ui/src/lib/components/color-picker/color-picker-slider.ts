@@ -1,8 +1,8 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { Directive, LOCALE_ID, computed, inject, input } from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { ɵwarnIfUnnamed } from '../../utils';
+import { injectDisplayLocale, ɵwarnIfUnnamed } from '../../utils';
 import { ScColorPicker } from './color-picker';
 import {
   SC_COLOR_CHANNELS,
@@ -52,7 +52,8 @@ const STOPS = 12;
 export class ScColorPickerSlider {
   private readonly picker = inject(ScColorPicker);
   private readonly directionality = inject(Directionality);
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   private readonly styles = injectStyle().colorPicker;
 
   readonly classInput = input<string>('', { alias: 'class' });
@@ -72,7 +73,7 @@ export class ScColorPickerSlider {
       scFormatChannel(
         this.channel(),
         this.picker.channel(this.channel()),
-        this.locale,
+        this.displayLocale(),
       ),
   );
 

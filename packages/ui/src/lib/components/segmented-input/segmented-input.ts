@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { injectDisplayLocale } from '../../utils';
 import { SC_FIELD } from '../field';
 
 /** A part of a date and time: what a segment edits. */
@@ -157,6 +158,8 @@ export abstract class ScSegmentedInput<V> {
   private readonly styles = injectStyle().segmentedInput;
   /** The locale: `LOCALE_ID` — the app's, or one provided for this section. */
   protected readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input('', { alias: 'id' });
@@ -221,7 +224,7 @@ export abstract class ScSegmentedInput<V> {
   });
 
   private readonly formatter = computed(
-    () => new Intl.DateTimeFormat(this.locale, this.formatOptions()),
+    () => new Intl.DateTimeFormat(this.displayLocale(), this.formatOptions()),
   );
 
   /** The parts in the locale's order, with the text between them. */
@@ -279,7 +282,7 @@ export abstract class ScSegmentedInput<V> {
 
   /** Each part's name, in the locale's words. */
   private readonly names = computed(() => {
-    const names = new Intl.DisplayNames(this.locale, {
+    const names = new Intl.DisplayNames(this.displayLocale(), {
       type: 'dateTimeField',
     });
     return Object.fromEntries(
@@ -298,19 +301,19 @@ export abstract class ScSegmentedInput<V> {
   });
 
   private readonly digits = computed(() => ({
-    two: new Intl.NumberFormat(this.locale, {
+    two: new Intl.NumberFormat(this.displayLocale(), {
       minimumIntegerDigits: 2,
       useGrouping: false,
     }),
-    four: new Intl.NumberFormat(this.locale, {
+    four: new Intl.NumberFormat(this.displayLocale(), {
       minimumIntegerDigits: 4,
       useGrouping: false,
     }),
-    plain: new Intl.NumberFormat(this.locale, { useGrouping: false }),
+    plain: new Intl.NumberFormat(this.displayLocale(), { useGrouping: false }),
   }));
 
   private readonly monthName = computed(
-    () => new Intl.DateTimeFormat(this.locale, { month: 'long' }),
+    () => new Intl.DateTimeFormat(this.displayLocale(), { month: 'long' }),
   );
 
   /** The parts typed so far: the value's — kept while one is still empty. */
@@ -451,7 +454,7 @@ export abstract class ScSegmentedInput<V> {
       second: parts.second ?? 0,
     });
     const text =
-      new Intl.DateTimeFormat(this.locale, {
+      new Intl.DateTimeFormat(this.displayLocale(), {
         hour: this.leadingZeros() ? '2-digit' : 'numeric',
         minute: '2-digit',
         second: '2-digit',

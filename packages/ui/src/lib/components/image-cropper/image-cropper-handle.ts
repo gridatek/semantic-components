@@ -1,13 +1,6 @@
-import {
-  Directive,
-  ElementRef,
-  LOCALE_ID,
-  computed,
-  inject,
-  input,
-} from '@angular/core';
+import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { ɵwarnIfUnnamed } from '../../utils';
+import { injectDisplayLocale, ɵwarnIfUnnamed } from '../../utils';
 import { ScImageCropper } from './image-cropper';
 import type { ScImageCropperHandlePosition } from './image-cropper-geometry';
 import { cropValueText } from './image-cropper-value-text';
@@ -55,7 +48,11 @@ export class ScImageCropperHandle {
   private readonly cropper = inject(ScImageCropper);
   private readonly element =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
-  private readonly number = new Intl.NumberFormat(inject(LOCALE_ID));
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
+  private readonly number = computed(
+    () => new Intl.NumberFormat(this.displayLocale()),
+  );
 
   readonly position = input.required<ScImageCropperHandlePosition>({
     alias: 'scImageCropperHandle',
@@ -100,7 +97,7 @@ export class ScImageCropperHandle {
 
   private readonly text = computed(() => {
     const crop = this.cropper.crop();
-    return crop ? cropValueText(this.valueText(), crop, this.number) : null;
+    return crop ? cropValueText(this.valueText(), crop, this.number()) : null;
   });
 
   /** Its centre, on the selection's edge or corner. */

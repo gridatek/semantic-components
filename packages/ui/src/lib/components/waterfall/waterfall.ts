@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { ɵwarnIfUnnamed } from '../../utils';
+import { injectDisplayLocale, ɵwarnIfUnnamed } from '../../utils';
 import { type ScWaterfallItem, scWaterfallRows } from './waterfall-data';
 
 /** How a time is written: number format options for ms, or yours. */
@@ -51,6 +51,8 @@ const PAGE = 10;
 })
 export class ScWaterfall {
   private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   private readonly directionality = inject(Directionality);
   private readonly styles = injectStyle().table;
 
@@ -115,7 +117,7 @@ export class ScWaterfall {
     const format = this.format();
     return typeof format === 'function'
       ? null
-      : new Intl.NumberFormat(this.locale, format);
+      : new Intl.NumberFormat(this.displayLocale(), format);
   });
 
   private readonly class = computed(() =>

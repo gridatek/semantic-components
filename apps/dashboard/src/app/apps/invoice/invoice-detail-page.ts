@@ -34,7 +34,7 @@ import {
   SiPrinterIcon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
-import { day, money } from '../../shared/format';
+import { count, day, money, percent } from '../../shared/format';
 import { label } from '../../shared/labels';
 import {
   InvoiceStore,
@@ -213,7 +213,7 @@ import {
                   <tr scTableRow>
                     <td scTableCell>{{ line.description }}</td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ line.quantity }}
+                      {{ countOf(line.quantity) }}
                     </td>
                     <td scTableCell class="text-end tabular-nums">
                       {{ moneyOf(line.price) }}
@@ -245,7 +245,7 @@ import {
                     colspan="3"
                     class="text-end"
                   >
-                    Tax ({{ invoice.taxRate }}%)
+                    Tax ({{ percentOf(invoice.taxRate / 100) }})
                   </td>
                   <td scTableCell class="text-end tabular-nums">
                     {{ moneyOf(total() - subtotal()) }}
@@ -292,6 +292,12 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class InvoiceDetailPage {
+  /** In the user's numbering system. */
+  private readonly percentOf = percent;
+
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

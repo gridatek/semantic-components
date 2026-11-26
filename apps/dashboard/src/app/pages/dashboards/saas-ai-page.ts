@@ -1,4 +1,10 @@
-import { Component, ViewEncapsulation, inject, signal } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {
   ScAvatar,
@@ -64,6 +70,7 @@ import {
   axisLabel,
   compact,
   compactMoney,
+  count,
   day,
   initials,
   money,
@@ -310,7 +317,7 @@ const SIGNUPS = [
             Accounts by plan
           </h2>
           <p i18n="@@dashboards.saasAi.accounts2" scCardDescription>
-            {{ totalAccounts }} accounts
+            {{ totalAccounts() }} accounts
           </p>
         </div>
         <div scCardBody>
@@ -347,7 +354,8 @@ const SIGNUPS = [
             <div scProgress [value]="model.tokens" [max]="model.quota">
               <span scProgressLabel>{{ model.name }}</span>
               <span i18n="@@dashboards.saasAi.mM" scProgressValueText
-                >{{ model.tokens }}M / {{ model.quota }}M</span
+                >{{ compactOf(model.tokens * 1e6) }} /
+                {{ compactOf(model.quota * 1e6) }}</span
               >
               <div scProgressTrack><div scProgressRange></div></div>
             </div>
@@ -470,6 +478,9 @@ const SIGNUPS = [
   encapsulation: ViewEncapsulation.None,
 })
 export class SaasAiPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -487,8 +498,8 @@ export class SaasAiPage {
     ...row,
     plan: label(row.plan),
   }));
-  private readonly totalAccounts = compact(
-    PLANS.reduce((sum, row) => sum + row.accounts, 0),
+  private readonly totalAccounts = computed(() =>
+    compact(PLANS.reduce((sum, row) => sum + row.accounts, 0)),
   );
   private readonly models = MODELS;
   private readonly signups = SIGNUPS.map((signup) => ({
@@ -505,6 +516,7 @@ export class SaasAiPage {
     },
   };
   private readonly moneyOf = money;
+  private readonly compactOf = compact;
   private readonly dayOf = day;
   private readonly initialsOf = initials;
   private readonly shortMoney = (value: number) => compactMoney(value);

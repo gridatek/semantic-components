@@ -44,7 +44,7 @@ import {
   type ProductCategory,
 } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { money } from '../../shared/format';
+import { count, money } from '../../shared/format';
 import { label } from '../../shared/labels';
 import { CartStore, ProductStore } from './shop-store';
 
@@ -93,7 +93,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
       <a scLink variant="outline" routerLink="/apps/ecommerce/checkout">
         <svg siShoppingCartIcon></svg>
         <ng-container i18n="@@ecommerce.shop.cart">Cart</ng-container>
-        <span scBadge>{{ cart.count() }}</span>
+        <span scBadge>{{ countOf(cart.count()) }}</span>
         <span i18n="@@ecommerce.shop.items" class="sr-only">items</span>
       </a>
     </app-page-header>
@@ -178,7 +178,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
             class="text-muted-foreground text-sm"
             aria-live="polite"
           >
-            {{ shown().length }} products
+            {{ countOf(shown().length) }} products
           </span>
           <div scNativeSelectContainer class="ms-auto w-48">
             <select
@@ -271,8 +271,8 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                   >
                     <svg siStarIcon class="size-4 fill-current"></svg>
                     <ng-container i18n="@@ecommerce.shop.reviews"
-                      >{{ product.rating }} ·
-                      {{ product.reviews }} reviews</ng-container
+                      >{{ countOf(product.rating) }} ·
+                      {{ countOf(product.reviews) }} reviews</ng-container
                     >
                   </span>
                   <div class="mt-auto flex items-center gap-2 pt-2">
@@ -325,6 +325,9 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShopPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

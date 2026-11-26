@@ -315,3 +315,26 @@ test('RTL: the week from Sunday (firstDayOfWeek="sun")', async ({ page }) => {
   const key = (await first.getAttribute('data-day')) ?? '';
   expect(Temporal.PlainDate.from(key).dayOfWeek).toBe(7);
 });
+
+test("The user's numbering system (kept as a cookie): the heading, the days and the hours in Arabic digits", async ({
+  page,
+  baseURL,
+}) => {
+  await page.context().addCookies([
+    {
+      name: 'sc-numbering-system',
+      value: 'arab',
+      url: baseURL ?? 'http://localhost:4200',
+    },
+  ]);
+  await page.goto('/demos/scheduler/basic-scheduler-demo');
+  const scheduler = page.locator('app-basic-scheduler-demo');
+  await expect(scheduler).toContainText(/[٠-٩]/);
+  // Latin digits only in what the app wrote: an event's title ("1:1 with
+  // Sam"), not in what the scheduler formats.
+  await expect
+    .poll(async () =>
+      ((await scheduler.textContent()) ?? '').replaceAll('1:1 with Sam', ''),
+    )
+    .not.toMatch(/[0-9]/);
+});

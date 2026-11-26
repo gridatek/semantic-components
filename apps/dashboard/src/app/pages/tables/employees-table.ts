@@ -51,7 +51,7 @@ import {
   SiChevronsUpDownIcon,
 } from '@semantic-icons/lucide-icons';
 import { EMPLOYEES, type Employee } from '../../data/tables';
-import { initials, money } from '../../shared/format';
+import { count, initials, money } from '../../shared/format';
 import { label } from '../../shared/labels';
 
 const features = tableFeatures({
@@ -242,7 +242,8 @@ const columns = columnHelper.columns([
             class="text-sm font-medium"
             aria-live="polite"
           >
-            Page {{ pagination.currentPage() }} of {{ pagination.totalPages() }}
+            Page {{ countOf(pagination.currentPage()) }} of
+            {{ countOf(pagination.totalPages()) }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
@@ -294,6 +295,9 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class EmployeesTable {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly labelOf = label;
   private readonly table = injectTable(() => ({
     features,

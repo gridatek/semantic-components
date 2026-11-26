@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
+import { injectDisplayLocale } from '../../utils';
 import { scHourCycle } from '../segmented-input/segmented-input';
 
 /** What the dial shows: the hours, the minutes or the seconds. */
@@ -37,6 +38,8 @@ export type ScTimeClockView = 'hours' | 'minutes' | 'seconds';
 })
 export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> {
   private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   private readonly host =
     inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
@@ -82,7 +85,7 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
 
   private readonly formatter = computed(() => {
     const granularity = this.granularity();
-    return new Intl.DateTimeFormat(this.locale, {
+    return new Intl.DateTimeFormat(this.displayLocale(), {
       hour: 'numeric',
       minute: granularity === 'hour' ? undefined : '2-digit',
       second: granularity === 'second' ? '2-digit' : undefined,
@@ -120,7 +123,7 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
   /** AM or PM, as the locale writes it. */
   periodText(period: 'am' | 'pm'): string {
     return (
-      new Intl.DateTimeFormat(this.locale, {
+      new Intl.DateTimeFormat(this.displayLocale(), {
         hour: 'numeric',
         hourCycle: 'h12',
       })
@@ -133,7 +136,7 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
 
   /** Each view's name, in the locale's words. */
   readonly names = computed(() => {
-    const names = new Intl.DisplayNames(this.locale, {
+    const names = new Intl.DisplayNames(this.displayLocale(), {
       type: 'dateTimeField',
     });
     return {
@@ -145,8 +148,8 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
 
   /** The numbers on the dial, in the locale's digits. */
   readonly number = computed(() => ({
-    plain: new Intl.NumberFormat(this.locale, { useGrouping: false }),
-    padded: new Intl.NumberFormat(this.locale, {
+    plain: new Intl.NumberFormat(this.displayLocale(), { useGrouping: false }),
+    padded: new Intl.NumberFormat(this.displayLocale(), {
       minimumIntegerDigits: 2,
       useGrouping: false,
     }),

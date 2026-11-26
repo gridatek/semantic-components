@@ -1,6 +1,5 @@
 import {
   Component,
-  LOCALE_ID,
   ViewEncapsulation,
   computed,
   inject,
@@ -8,6 +7,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { injectDisplayLocale } from '../../utils';
 import { ScFileInputItem } from './file-input-item';
 
 const UNITS = ['byte', 'kilobyte', 'megabyte', 'gigabyte'] as const;
@@ -41,13 +41,14 @@ export function formatFileSize(bytes: number, locale: string): string {
 })
 export class ScFileInputItemSize {
   private readonly item = inject(ScFileInputItem);
-  private readonly locale = inject(LOCALE_ID);
+  /** What it shows: the locale, in the user's numbering system. */
+  private readonly displayLocale = injectDisplayLocale();
   private readonly styles = injectStyle().fileInput;
 
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly text = computed(() =>
-    formatFileSize(this.item.file().size, this.locale),
+    formatFileSize(this.item.file().size, this.displayLocale()),
   );
 
   private readonly class = computed(() =>

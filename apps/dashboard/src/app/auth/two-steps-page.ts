@@ -16,6 +16,7 @@ import {
   ScSeparator,
   ScToaster,
 } from '@semantic-components/ui';
+import { count } from '../shared/format';
 
 /** Boxed Two Steps: the code sent to the phone. */
 @Component({
@@ -57,7 +58,7 @@ import {
         >
           <div scField class="w-fit">
             <label i18n="@@auth.twoSteps.typeYour6DigitsSecurity" scLabel
-              >Type your 6 digits security code</label
+              >Type your {{ countOf(6) }} digits security code</label
             >
             <div
               scOtpInput
@@ -109,6 +110,9 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class TwoStepsPage {
+  /** In the user's numbering system. */
+  private readonly countOf = count;
+
   private readonly router = inject(Router);
   private readonly toaster = inject(ScToaster);
   private readonly model = signal({ code: '' });
