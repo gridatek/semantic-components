@@ -151,6 +151,13 @@ interface Step {
           the config: <code scTypeset>firstDayOfWeek</code>, 1 (Monday) to 7
           (Sunday), for every locale, or on one locale, which wins.
         </p>
+        <p>
+          <code scTypeset>Intl</code> follows the week as it is lived: in
+          Morocco it starts on Monday, Sunday being a day off. Yet in Arabic
+          Sunday is the first day by its name — الأحد, from أحد, one; the days
+          to Thursday are numbered after it — and many people count from it. Set
+          Sunday where your users do.
+        </p>
         <app-doc-code [code]="weekStartCode" />
         <p>
           The locale Angular is given then carries it, as Unicode writes it —
@@ -231,7 +238,7 @@ export default class I18nPage {
     // This one: Monday.
     { id: 'fr', label: 'Français', firstDayOfWeek: 1 },
     { id: 'ar', label: 'العربية', dir: 'rtl' },
-    // A country's: Morocco, Sunday (Intl says Monday).
+    // Morocco: Intl says Monday (Sunday is off); Sunday here, the first by its name.
     { id: 'ar-MA', label: 'العربية (المغرب)', dir: 'rtl', firstDayOfWeek: 7 },
   ],
   localeData: {

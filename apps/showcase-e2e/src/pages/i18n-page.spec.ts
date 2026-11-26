@@ -14,6 +14,8 @@ test.describe('Internationalization Page', () => {
     // A locale with its country too: Morocco's, its data and file by its id.
     await expect(section).toContainText('ar-MA-u-fw-sun');
     await expect(section).toContainText("'ar-MA'");
+    // Why Sunday, where Intl says Monday: the first by its name.
+    await expect(section).toContainText('الأحد');
   });
 
   test('should have no accessibility violations', async ({ page }) => {
