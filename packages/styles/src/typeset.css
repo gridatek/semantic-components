@@ -13,7 +13,8 @@
  * set as in a container; code blocks, images, inline code, keys and
  * highlights take the style's corners (`--sc-typeset-radius`,
  * `--sc-typeset-radius-inline`; shadcn's highlight has 0.2em); headings h1 to h4
- * take the style's weight, tracking and case (`--sc-typeset-heading-*`). See
+ * take the style's weight, tracking and case (`--sc-typeset-heading-*`); inline
+ * code breaks a long token where it must (`overflow-wrap: anywhere`). See
  * "Deliberate divergences" in docs/guides/shadcn-style-reference.md.
  */
 
@@ -286,6 +287,9 @@
       font-size: 0.85em;
       border-radius: var(--sc-typeset-radius-inline);
       padding: 0.125em 0.3em;
+      /* Ours, not shadcn's: a long token (document.documentElement.style…)
+         breaks where it must, not past the column on a phone. */
+      overflow-wrap: anywhere;
     }
 
     /* Code blocks. */

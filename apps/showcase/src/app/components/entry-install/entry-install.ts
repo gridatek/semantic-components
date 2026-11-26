@@ -83,5 +83,7 @@ export class EntryInstall {
   private readonly code = computed(
     () => `import { ${this.names()} } from '${this.path()}';`,
   );
-  private readonly class = computed(() => cn('grid gap-4', this.classInput()));
+  private readonly class = computed(() =>
+    cn('grid grid-cols-1 gap-4', this.classInput()),
+  );
 }

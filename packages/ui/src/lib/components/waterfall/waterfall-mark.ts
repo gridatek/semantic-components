@@ -6,8 +6,8 @@ import { ScWaterfall } from './waterfall';
 /**
  * A moment across every row — "DOMContentLoaded" — in the axis: your text at
  * its time (`--sc-waterfall-mark`), a line through the bars. Past the middle of
- * the range, the text on the line's other side: inside the axis, on a narrow
- * screen too. `data-outside` when the range doesn't hold it.
+ * the range, the text on the line's other side; cut (an ellipsis) to the
+ * room on its side, inside the axis on a narrow screen too. `data-outside` when the range doesn't hold it.
  */
 @Directive({
   selector: '[scWaterfallMark]',
@@ -17,6 +17,7 @@ import { ScWaterfall } from './waterfall';
     '[style.--sc-waterfall-mark]': 'place() + "%"',
     '[style.inset-inline-start.%]': 'place()',
     '[style.transform]': 'shift()',
+    '[style.max-width.%]': 'room()',
     '[class]': 'class()',
   },
 })
@@ -33,6 +34,13 @@ export class ScWaterfallMark {
   );
   /** Its text before the line rather than after it: past the middle. */
   private readonly before = computed(() => this.place() > 50);
+  /**
+   * The room on its side of its line, in % of the axis: the text cut to it
+   * (a narrow axis, a phone), not over the columns beside.
+   */
+  private readonly room = computed(() =>
+    this.before() ? this.place() : 100 - this.place(),
+  );
   /** Moved back by its own width, the line (its end border) at its time. */
   private readonly shift = computed(() => {
     if (!this.before()) return null;
@@ -47,7 +55,7 @@ export class ScWaterfallMark {
 
   private readonly class = computed(() =>
     cn(
-      'text-foreground absolute -top-4 text-xs whitespace-nowrap',
+      'text-foreground absolute -top-4 overflow-hidden text-xs text-ellipsis whitespace-nowrap',
       this.before() ? 'border-e pe-1' : 'border-s ps-1',
       this.outside() && 'hidden',
       this.classInput(),

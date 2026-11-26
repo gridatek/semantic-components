@@ -31,7 +31,7 @@ export interface PageNavItem {
     @if (previous() || next()) {
       <nav
         aria-label="Previous and next page"
-        class="mt-16 flex items-center gap-4"
+        class="mt-16 flex flex-wrap items-center gap-4"
       >
         @if (previous(); as page) {
           <a scLink variant="secondary" size="sm" [routerLink]="page.path">

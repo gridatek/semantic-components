@@ -190,3 +190,21 @@ test('In the docs on a phone (280px): the waterfall in the width it has, scrolli
   );
   expect(short).toBe(0);
 });
+
+test('On a phone, a narrow axis: a mark’s text cut to the room on its side of its line, inside the axis — not over the Size column', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto(demo('waterfall-usage'));
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  const axis = page.locator('[data-slot=waterfall-axis]');
+  const mark = page.locator('[data-slot=waterfall-mark]');
+  await expect(mark).toBeVisible();
+  const [a, m] = [await axis.boundingBox(), await mark.boundingBox()];
+  expect(m?.x).toBeGreaterThanOrEqual((a?.x ?? 0) - 0.5);
+  expect((m?.x ?? 0) + (m?.width ?? 0)).toBeLessThanOrEqual(
+    (a?.x ?? 0) + (a?.width ?? 0) + 0.5,
+  );
+});

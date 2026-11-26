@@ -70,3 +70,21 @@ test.describe('Typeset Page', () => {
     await expectNoA11yViolations(page, { dark: true });
   });
 });
+
+test.describe('Inline code', () => {
+  test('on a phone, a long one wraps inside the text column (Theming: document.documentElement.style.colorScheme…)', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 360, height: 800 });
+    await page.goto('/docs/guides/theming');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    const past = await page.evaluate(() => {
+      const column = document.querySelector('main h1')?.parentElement;
+      const right = column?.getBoundingClientRect().right ?? innerWidth;
+      return [...document.querySelectorAll('main :not(pre) > code')]
+        .filter((code) => code.getBoundingClientRect().right > right + 0.5)
+        .map((code) => code.textContent?.trim().slice(0, 50));
+    });
+    expect(past).toEqual([]);
+  });
+});
