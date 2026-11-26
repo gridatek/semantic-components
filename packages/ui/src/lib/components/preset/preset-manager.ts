@@ -61,6 +61,8 @@ export class ScPresetManager {
   });
 
   readonly isDark = computed(() => this.resolvedMode() === 'dark');
+  /** The next change came from another tab: switched, not faded. */
+  private readonly fromOtherTab = { mode: false, theme: false };
   /** Its nonce, for the style that pauses transitions (a strict CSP). */
   private readonly nonce = inject(CSP_NONCE, { optional: true });
   readonly isLight = computed(() => this.resolvedMode() === 'light');
@@ -68,12 +70,19 @@ export class ScPresetManager {
   constructor() {
     effect(() => {
       const mode = this.resolvedMode();
-      this.switchLooks(() => this.applyMode(mode));
+      // Chosen here: its transitions fade it. From another tab: switched.
+      if (this.fromOtherTab.mode) {
+        this.fromOtherTab.mode = false;
+        this.switchLooks(() => this.applyMode(mode));
+      } else this.applyMode(mode);
     });
 
     effect(() => {
       const theme = this.theme();
-      this.switchLooks(() => this.applyTheme(theme));
+      if (this.fromOtherTab.theme) {
+        this.fromOtherTab.theme = false;
+        this.switchLooks(() => this.applyTheme(theme));
+      } else this.applyTheme(theme);
     });
 
     this.darkMediaQuery?.addEventListener('change', () => {
@@ -83,16 +92,18 @@ export class ScPresetManager {
     // Another tab chose a mode or a theme: here too (its choice, already
     // kept; forgotten, the preset's).
     const stops = [
-      this.storage.watch(MODE_KEY, (saved) =>
+      this.storage.watch(MODE_KEY, (saved) => {
+        this.fromOtherTab.mode = true;
         this.mode.set(
           saved && this.isValidMode(saved)
             ? saved
             : (this.preset?.mode ?? 'system'),
-        ),
-      ),
-      this.storage.watch(THEME_KEY, (saved) =>
-        this.theme.set(saved ?? this.preset?.theme ?? 'default'),
-      ),
+        );
+      }),
+      this.storage.watch(THEME_KEY, (saved) => {
+        this.fromOtherTab.theme = true;
+        this.theme.set(saved ?? this.preset?.theme ?? 'default');
+      }),
     ];
     inject(DestroyRef).onDestroy(() => stops.forEach((stop) => stop()));
     if (isPlatformServer(inject(PLATFORM_ID))) this.addScript();
@@ -134,10 +145,10 @@ export class ScPresetManager {
   }
 
   /**
-   * A change of mode or theme, switched, not faded: transitions off while the
-   * new colours are computed, back two frames later. Faded, a tab coming
-   * back showed the old mode's colours, then a slow change; every button
-   * and field with a colour transition faded between the two.
+   * A change from another tab, switched, not faded: transitions off while
+   * the new colours are computed, back two frames later. Faded, the tab
+   * showed the old mode's colours on coming back, then a slow change. The
+   * tab where the user chose keeps its fade.
    */
   private switchLooks(change: () => void): void {
     const view = this.document.defaultView;

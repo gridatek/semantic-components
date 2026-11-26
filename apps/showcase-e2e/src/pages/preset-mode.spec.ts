@@ -65,9 +65,24 @@ test.describe('Preset mode: across tabs', () => {
     await page.goto('/demos/theming/theme-toggle-demo');
     await other.goto('/demos/theming/theme-toggle-demo');
     await expect(other.locator('html')).not.toHaveClass(/\bdark\b/);
+    // The tab clicked keeps its fade: transitions never paused there.
+    await page.evaluate(() => {
+      const w = window as unknown as { paused: boolean };
+      w.paused = false;
+      new MutationObserver((records) => {
+        for (const record of records)
+          for (const node of record.addedNodes)
+            if (node.textContent?.includes('transition:none')) w.paused = true;
+      }).observe(document.head, { childList: true });
+    });
 
     await page.getByRole('button', { name: 'Switch to dark theme' }).click();
     await expect(page.locator('html')).toHaveClass(/\bdark\b/);
+    expect(
+      await page.evaluate(
+        () => (window as unknown as { paused: boolean }).paused,
+      ),
+    ).toBe(false);
     // The other tab: the browser's storage event.
     await expect(other.locator('html')).toHaveClass(/\bdark\b/);
     // Switched, not faded: no colour transition from the old mode (seen as
