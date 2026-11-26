@@ -17,33 +17,38 @@ import { ScCalendar } from './calendar';
 @Component({
   selector: '[scCalendarMonths]',
   template: `
-    <table
-      role="grid"
-      class="w-[calc(var(--cell-size)*7)] max-w-full min-w-full table-fixed border-collapse"
-      [attr.aria-label]="year()"
-      (keydown)="onKeydown($event)"
-    >
-      <tbody>
-        @for (row of rows(); track $index) {
-          <tr class="flex w-full">
-            @for (month of row; track month.toString()) {
-              <td
-                data-slot="calendar-cell-month"
-                [attr.tabindex]="isFocused(month) ? 0 : -1"
-                [attr.aria-selected]="isFocused(month)"
-                [attr.aria-disabled]="isOut(month) || null"
-                [attr.aria-current]="isCurrent(month) ? 'date' : null"
-                [class]="cellClass(month)"
-                (click)="pick(month)"
-              >
-                <span aria-hidden="true">{{ short(month) }}</span>
-                <span class="sr-only">{{ long(month) }}</span>
-              </td>
-            }
-          </tr>
-        }
-      </tbody>
-    </table>
+    <!-- Its size on a box, not the table: WebKit ignores a table's
+      max-width (a phone's calendar ran past its frame), and a table's
+      percentage width grows in a box sized to its content (a popover). -->
+    <div class="w-[calc(var(--cell-size)*7)] max-w-full min-w-full">
+      <table
+        role="grid"
+        class="w-full table-fixed border-collapse"
+        [attr.aria-label]="year()"
+        (keydown)="onKeydown($event)"
+      >
+        <tbody>
+          @for (row of rows(); track $index) {
+            <tr class="flex w-full">
+              @for (month of row; track month.toString()) {
+                <td
+                  data-slot="calendar-cell-month"
+                  [attr.tabindex]="isFocused(month) ? 0 : -1"
+                  [attr.aria-selected]="isFocused(month)"
+                  [attr.aria-disabled]="isOut(month) || null"
+                  [attr.aria-current]="isCurrent(month) ? 'date' : null"
+                  [class]="cellClass(month)"
+                  (click)="pick(month)"
+                >
+                  <span aria-hidden="true">{{ short(month) }}</span>
+                  <span class="sr-only">{{ long(month) }}</span>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   `,
   host: { 'data-slot': 'calendar-months', class: 'w-full' },
   encapsulation: ViewEncapsulation.None,

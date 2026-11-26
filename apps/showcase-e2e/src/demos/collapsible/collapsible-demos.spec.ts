@@ -56,6 +56,8 @@ test('Hidden until found: closed, hidden="until-found"; a find match opens it', 
 }) => {
   await page.goto(demo('hidden-until-found'));
   const trigger = page.getByRole('button', { name: 'Shipping details' });
+  // Its panel named first: read at once, under load, it was #null.
+  await expect(trigger).toHaveAttribute('aria-controls', /.+/);
   const panel = page.locator(`#${await trigger.getAttribute('aria-controls')}`);
   await expect(panel).toHaveAttribute('hidden', 'until-found');
   // What find-in-page does on a match inside it.

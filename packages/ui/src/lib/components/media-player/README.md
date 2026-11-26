@@ -59,7 +59,7 @@ The player is a container (`@container/media`), and the parts fit themselves to 
 
 ## State
 
-Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `loop`, `captions` (a track's id, or `null`). Read: `kind`, `src`, `duration`, `buffered`, `waiting`, `ended`, `error`, `started`, `fullscreen`, `pictureInPicture`, `idle`, `tracks()`, `chapters()`, `chapter()`, `cues()`, `preview()`. Methods: `toggle()`, `seekTo()`, `seekBy()`, `volumeBy()`, `rateBy()`, `toggleCaptions()`, `toggleFullscreen()`, `togglePictureInPicture()`, `toggleControls()`, `reload()`, `formatTime()` (in the app's language), `chapterAt()`. `metadata` shows in the system's media controls, whose keys play, pause and seek.
+Two-way: `paused`, `currentTime`, `volume`, `muted`, `playbackRate`, `loop`, `captions` (a track's id, or `null`). Read: `kind`, `src`, `duration`, `buffered`, `waiting`, `ended`, `error`, `started`, `fullscreen`, `pictureInPicture`, `idle`, `tracks()`, `chapters()`, `chapter()`, `cues()`, `preview()`. Methods: `toggle()`, `seekTo()`, `seekBy()`, `volumeBy()`, `rateBy()`, `toggleCaptions()`, `toggleFullscreen()`, `togglePictureInPicture()`, `toggleControls()`, `reload()`, `formatTime()` (in the app's language), `chapterAt()`. A `seekTo()` or `seekBy()` before the media knows its length (a waveform drawn first) waits for it — WebKit drops a time set earlier. `metadata` shows in the system's media controls, whose keys play, pause and seek.
 
 ## Keyboard
 

@@ -621,10 +621,13 @@ const INK_COLORS = [
                     <button scToggleGroupItem value="even">Even</button>
                   </div>
                 </div>
-                <label scField orientation="horizontal">
-                  Reading colours
+                <div scField orientation="horizontal">
+                  <label scLabel>Reading colours</label>
                   <input scSwitch scPdfViewerSetting="pageColors" />
-                </label>
+                  @if (!viewer.pageColorsSupported()) {
+                    <p scFieldDescription>Not available in this browser.</p>
+                  }
+                </div>
               </div>
             </ng-template>
           </div>

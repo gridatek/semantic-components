@@ -31,6 +31,10 @@ test.describe('PDF Viewer colours', () => {
     page,
   }) => {
     await page.goto('/demos/pdf-viewer/pdf-viewer-demo');
+    test.skip(
+      !(await canRecolour(page)),
+      'No canvas filter (WebKit): pages are not recoloured — the next test',
+    );
     const text = page.locator('.textLayer span').filter({ hasText: /\w{4,}/ });
     // The first load fetches pdf.js's worker.
     await expect(text.first()).toBeVisible({ timeout: 20_000 });
@@ -95,4 +99,22 @@ test.describe('PDF Viewer colours', () => {
     expect(g).toBeCloseTo(1, 1);
     expect(b).toBeCloseTo(152 / 255, 1);
   });
+
+  test('where pages cannot be recoloured (WebKit: no canvas filter), Reading colours is off and says why', async ({
+    page,
+  }) => {
+    await page.goto('/demos/pdf-viewer/pdf-viewer-demo');
+    test.skip(await canRecolour(page), 'The browser recolours pages');
+    await page.getByRole('button', { name: 'View options' }).click();
+    const colours = page.getByRole('switch', { name: 'Reading colours' });
+    await expect(colours).toBeDisabled();
+    await expect(colours).toHaveAccessibleDescription(
+      'Not available in this browser.',
+    );
+  });
 });
+
+/** The browser draws a canvas through a filter, as pdf.js recolours pages. */
+function canRecolour(page: Page): Promise<boolean> {
+  return page.evaluate(() => 'filter' in CanvasRenderingContext2D.prototype);
+}

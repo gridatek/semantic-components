@@ -1,7 +1,9 @@
 import { Component, ViewEncapsulation, computed, input } from '@angular/core';
 import {
   ScField,
+  ScFieldDescription,
   ScInput,
+  ScLabel,
   ScSpinner,
   ScSwitch,
   ScTooltip,
@@ -63,6 +65,8 @@ import { cn } from 'cn';
     SiArrowRightIcon,
     SiLoaderCircleIcon,
     ScField,
+    ScFieldDescription,
+    ScLabel,
     ScPdfViewerSetting,
   ],
   template: `
@@ -100,10 +104,13 @@ import { cn } from 'cn';
             ({{ viewer.currentPage() }} of {{ viewer.totalPages() }})
           </span>
           <div scPdfViewerSpacer></div>
-          <label scField orientation="horizontal">
-            Reading colours
+          <div scField orientation="horizontal">
+            <label scLabel>Reading colours</label>
             <input scSwitch scPdfViewerSetting="pageColors" />
-          </label>
+            @if (!viewer.pageColorsSupported()) {
+              <p scFieldDescription>Not available in this browser.</p>
+            }
+          </div>
           <label scField orientation="horizontal">
             Caret browsing
             <input scSwitch scPdfViewerSetting="caretBrowsing" />

@@ -203,12 +203,24 @@ export class ScHeader implements ScNavigationMenuLinkHost {
       const root = element.ownerDocument.documentElement;
       const window = element.ownerDocument.defaultView;
       const scrollbar = !!window && window.innerWidth > root.clientWidth;
+      const body = element.ownerDocument.body;
+      const width = body.getBoundingClientRect().width;
+      // A scrollbar on the left (right to left, in Chromium) or the right.
+      const side = root.clientLeft > 0 ? 'paddingLeft' : 'paddingRight';
       const { overflow, scrollbarGutter } = root.style;
+      const padding = root.style[side];
       root.style.overflow = 'hidden';
       if (scrollbar) root.style.scrollbarGutter = 'stable';
+      // WebKit drops the root's gutter all the same: its room as padding.
+      const lost = body.getBoundingClientRect().width - width;
+      if (window && lost > 0.5) {
+        const now = parseFloat(window.getComputedStyle(root)[side]) || 0;
+        root.style[side] = `${now + lost}px`;
+      }
       onCleanup(() => {
         root.style.overflow = overflow;
         root.style.scrollbarGutter = scrollbarGutter;
+        root.style[side] = padding;
       });
     });
     afterNextRender(() => {

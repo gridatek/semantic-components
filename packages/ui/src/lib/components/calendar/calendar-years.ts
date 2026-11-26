@@ -16,34 +16,39 @@ import { ScCalendar } from './calendar';
 @Component({
   selector: '[scCalendarYears]',
   template: `
-    <table
-      role="grid"
-      class="w-[calc(var(--cell-size)*7)] max-w-full min-w-full table-fixed border-collapse"
-      [attr.aria-label]="calendar.heading()"
-      (keydown)="onKeydown($event)"
-    >
-      <tbody>
-        @for (row of rows(); track $index) {
-          <tr class="flex w-full">
-            @for (year of row; track year) {
-              <td
-                data-slot="calendar-cell-year"
-                [attr.tabindex]="tabIndex(year)"
-                [attr.aria-selected]="year === focusedYear()"
-                [attr.aria-disabled]="isOut(year) || null"
-                [attr.aria-current]="
-                  year === calendar.today().year ? 'date' : null
-                "
-                [class]="cellClass(year)"
-                (click)="pick(year)"
-              >
-                {{ year }}
-              </td>
-            }
-          </tr>
-        }
-      </tbody>
-    </table>
+    <!-- Its size on a box, not the table: WebKit ignores a table's
+      max-width (a phone's calendar ran past its frame), and a table's
+      percentage width grows in a box sized to its content (a popover). -->
+    <div class="w-[calc(var(--cell-size)*7)] max-w-full min-w-full">
+      <table
+        role="grid"
+        class="w-full table-fixed border-collapse"
+        [attr.aria-label]="calendar.heading()"
+        (keydown)="onKeydown($event)"
+      >
+        <tbody>
+          @for (row of rows(); track $index) {
+            <tr class="flex w-full">
+              @for (year of row; track year) {
+                <td
+                  data-slot="calendar-cell-year"
+                  [attr.tabindex]="tabIndex(year)"
+                  [attr.aria-selected]="year === focusedYear()"
+                  [attr.aria-disabled]="isOut(year) || null"
+                  [attr.aria-current]="
+                    year === calendar.today().year ? 'date' : null
+                  "
+                  [class]="cellClass(year)"
+                  (click)="pick(year)"
+                >
+                  {{ year }}
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   `,
   host: { 'data-slot': 'calendar-years', class: 'w-full' },
   encapsulation: ViewEncapsulation.None,

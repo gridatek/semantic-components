@@ -27,8 +27,14 @@ test.describe('Bubble Menu Editor Demo', () => {
     await page.keyboard.press('End');
     await expect(bubble(page)).toBeHidden();
 
-    await page.keyboard.press('Shift+Home');
-    await expect(bubble(page)).toBeVisible();
+    // The line selected: shown. Again if it didn't take — WebKit, just
+    // focused, puts the editor's caret back over a selection now and then
+    // (Shift+Home selecting nothing, or a moment); a user selects again.
+    await expect(async () => {
+      await page.keyboard.press('End');
+      await page.keyboard.press('Shift+Home');
+      await expect(bubble(page)).toBeVisible({ timeout: 1_500 });
+    }).toPass({ timeout: 15_000 });
     // By the text: its centre over the selection, not pushed to an edge.
     const text = await page.evaluate(() => {
       const r = getSelection()?.getRangeAt(0).getBoundingClientRect();

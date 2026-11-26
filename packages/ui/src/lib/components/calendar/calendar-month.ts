@@ -5,7 +5,6 @@ import {
   ElementRef,
   LOCALE_ID,
   ViewEncapsulation,
-  afterNextRender,
   afterRenderEffect,
   computed,
   forwardRef,
@@ -38,101 +37,109 @@ const MONDAY = Temporal.PlainDate.from('2024-01-01');
   imports: [NgTemplateOutlet],
   template: `
     <ng-content />
-    <table
-      role="grid"
-      class="max-w-full min-w-full table-fixed border-collapse"
+    <!-- Its size on a box, not the table: WebKit ignores a table's
+      max-width (a phone's calendar ran past its frame), and a table's
+      percentage width grows in a box sized to its content (a popover). -->
+    <div
+      class="max-w-full min-w-full"
       [class]="
         calendar.showWeekNumbers()
           ? 'w-[calc(var(--cell-size)*8)]'
           : 'w-[calc(var(--cell-size)*7)]'
       "
-      [attr.aria-label]="calendar.monthHeading(month())"
-      (keydown)="calendar.onDayKeydown($event)"
     >
-      <thead>
-        <tr class="flex w-full">
-          @if (calendar.showWeekNumbers()) {
-            <td class="w-(--cell-size) shrink-0"></td>
-          }
-          @for (name of weekdays(); track name.long) {
-            <th
-              scope="col"
-              class="text-muted-foreground relative min-w-0 flex-1 text-[0.8rem] font-normal"
-            >
-              @if (calendar.weekdayFormat() === 'long') {
-                <!-- In full where it fits; else out of sight (still measured)
-                  and the short form shown. -->
-                <span
-                  aria-hidden="true"
-                  data-weekday-long
-                  class="whitespace-nowrap"
-                  [class.invisible]="!longFits()"
-                  [class.absolute]="!longFits()"
-                  >{{ name.long }}</span
-                >
-                @if (!longFits()) {
-                  <span aria-hidden="true">{{ name.compact }}</span>
-                }
-              } @else {
-                <span aria-hidden="true">{{ name.shown }}</span>
-              }
-              <span class="sr-only">{{ name.long }}</span>
-            </th>
-          }
-        </tr>
-      </thead>
-      <tbody>
-        @for (week of weeks(); track week[0].key) {
-          <tr class="mt-1 flex w-full">
+      <table
+        role="grid"
+        class="w-full table-fixed border-collapse"
+        [attr.aria-label]="calendar.monthHeading(month())"
+        (keydown)="calendar.onDayKeydown($event)"
+      >
+        <thead>
+          <tr class="flex w-full">
             @if (calendar.showWeekNumbers()) {
+              <td class="w-(--cell-size) shrink-0"></td>
+            }
+            @for (name of weekdays(); track name.long) {
               <th
-                scope="row"
-                class="text-muted-foreground grid w-(--cell-size) shrink-0 place-items-center text-[0.8rem] font-normal"
+                scope="col"
+                class="text-muted-foreground relative min-w-0 flex-1 text-[0.8rem] font-normal"
               >
-                {{ weekNumber(week) }}
+                @if (calendar.weekdayFormat() === 'long') {
+                  <!-- In full where it fits; else out of sight (still measured)
+                  and the short form shown. A box (inline-block): a resize
+                  observer sees no inline element. -->
+                  <span
+                    aria-hidden="true"
+                    data-weekday-long
+                    class="inline-block whitespace-nowrap"
+                    [class.invisible]="!longFits()"
+                    [class.absolute]="!longFits()"
+                    >{{ name.long }}</span
+                  >
+                  @if (!longFits()) {
+                    <span aria-hidden="true">{{ name.compact }}</span>
+                  }
+                } @else {
+                  <span aria-hidden="true">{{ name.shown }}</span>
+                }
+                <span class="sr-only">{{ name.long }}</span>
               </th>
             }
-            @for (day of week; track day.key) {
-              @if (day.blank) {
-                <td class="aspect-square min-w-0 flex-1"></td>
-              } @else {
-                <td
-                  data-slot="calendar-cell"
-                  [attr.data-date]="day.key"
-                  [attr.tabindex]="tabIndex(day)"
-                  [attr.cdkFocusInitial]="
-                    calendar.initialFocus() && tabIndex(day) === 0 ? '' : null
-                  "
-                  [attr.aria-selected]="
-                    day.outside ? null : calendar.isSelected(day.date)
-                  "
-                  [attr.aria-disabled]="
-                    calendar.isUnavailable(day.date) || null
-                  "
-                  [attr.aria-current]="
-                    day.date.equals(calendar.today()) ? 'date' : null
-                  "
-                  [attr.data-outside]="day.outside || null"
-                  [attr.data-range]="calendar.rangePart(day.date)"
-                  [class]="cellClass(day)"
-                  (click)="pick(day)"
-                  (pointerenter)="preview(day)"
-                >
-                  <span aria-hidden="true">{{ number(day.date) }}</span>
-                  <span class="sr-only">{{ fullDate(day.date) }}</span>
-                  @if (calendar.dayTemplate(); as custom) {
-                    <ng-container
-                      [ngTemplateOutlet]="custom.template"
-                      [ngTemplateOutletContext]="context(day)"
-                    />
-                  }
-                </td>
-              }
-            }
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (week of weeks(); track week[0].key) {
+            <tr class="mt-1 flex w-full">
+              @if (calendar.showWeekNumbers()) {
+                <th
+                  scope="row"
+                  class="text-muted-foreground grid w-(--cell-size) shrink-0 place-items-center text-[0.8rem] font-normal"
+                >
+                  {{ weekNumber(week) }}
+                </th>
+              }
+              @for (day of week; track day.key) {
+                @if (day.blank) {
+                  <td class="aspect-square min-w-0 flex-1"></td>
+                } @else {
+                  <td
+                    data-slot="calendar-cell"
+                    [attr.data-date]="day.key"
+                    [attr.tabindex]="tabIndex(day)"
+                    [attr.cdkFocusInitial]="
+                      calendar.initialFocus() && tabIndex(day) === 0 ? '' : null
+                    "
+                    [attr.aria-selected]="
+                      day.outside ? null : calendar.isSelected(day.date)
+                    "
+                    [attr.aria-disabled]="
+                      calendar.isUnavailable(day.date) || null
+                    "
+                    [attr.aria-current]="
+                      day.date.equals(calendar.today()) ? 'date' : null
+                    "
+                    [attr.data-outside]="day.outside || null"
+                    [attr.data-range]="calendar.rangePart(day.date)"
+                    [class]="cellClass(day)"
+                    (click)="pick(day)"
+                    (pointerenter)="preview(day)"
+                  >
+                    <span aria-hidden="true">{{ number(day.date) }}</span>
+                    <span class="sr-only">{{ fullDate(day.date) }}</span>
+                    @if (calendar.dayTemplate(); as custom) {
+                      <ng-container
+                        [ngTemplateOutlet]="custom.template"
+                        [ngTemplateOutletContext]="context(day)"
+                      />
+                    }
+                  </td>
+                }
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   `,
   host: { 'data-slot': 'calendar-month', class: 'w-full' },
   encapsulation: ViewEncapsulation.None,
@@ -194,17 +201,20 @@ export class ScCalendarMonth {
         ),
       );
     };
-    // The names or the format changed.
+    // Measured again when its width changes, or a name's: its font can come
+    // late (Noto Sans Arabic in WebKit: 30.8px in the fallback, then 42.9px,
+    // past its column, the month's width unchanged).
+    let observer: ResizeObserver | null = null;
+    inject(DestroyRef).onDestroy(() => observer?.disconnect());
+    // The names or the format changed: the names watched are the ones shown.
     afterRenderEffect(() => {
       this.weekdays();
-      measure();
-    });
-    // Its width changed.
-    const destroyRef = inject(DestroyRef);
-    afterNextRender(() => {
-      const observer = new ResizeObserver(measure);
+      observer ??= new ResizeObserver(measure);
+      observer.disconnect();
       observer.observe(this.element);
-      destroyRef.onDestroy(() => observer.disconnect());
+      for (const name of this.element.querySelectorAll('[data-weekday-long]'))
+        observer.observe(name);
+      measure();
     });
   }
 

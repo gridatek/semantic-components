@@ -34,7 +34,8 @@ import type {
  *   `inkOpacity` (set its `min` / `max` / `step`);
  * - a `scSwitch` or `scCheckbox` — `highlightShowAll`, `findHighlightAll`,
  *   `findMatchCase`, `findEntireWord`, `findMatchDiacritics`, `caretBrowsing`,
- *   `pageColors`.
+ *   `pageColors` (disabled where the browser can't draw them:
+ *   `pageColorsSupported()`).
  *
  * Write the control, its items and labels. A toggle group never ends up with
  * nothing selected (but the tools': none is a tool): a setting always has a
@@ -85,6 +86,19 @@ export class ScPdfViewerSetting {
       bindInput(
         toggleGroup.disabled,
         computed(() => this.tools() && !this.pdfViewer.canEdit()),
+      );
+    }
+
+    // Page colours where the browser can't draw them (WebKit): off.
+    const onOff = switchControl ?? checkbox;
+    if (onOff) {
+      bindInput(
+        onOff.disabled,
+        computed(
+          () =>
+            this.setting() === 'pageColors' &&
+            !this.pdfViewer.pageColorsSupported(),
+        ),
       );
     }
 

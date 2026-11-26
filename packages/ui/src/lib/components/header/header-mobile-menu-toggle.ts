@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
+import { ɵfocusOnPress } from '../../utils';
 import { type ScButtonVariants } from '../button/button';
 import { ScHeader } from './header';
 
@@ -43,6 +44,8 @@ import { ScHeader } from './header';
 export class ScHeaderMobileMenuToggle {
   private readonly buttonStyles = injectStyle().button;
   private readonly header = inject(ScHeader);
+  private readonly element =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly variant = input<ScButtonVariants['variant']>('ghost');
@@ -56,11 +59,14 @@ export class ScHeaderMobileMenuToggle {
   );
 
   private toggle(): void {
+    // Focused, so the keys reach the header (Escape closes the menu) and
+    // focus goes back to it: WebKit leaves it on the page.
+    ɵfocusOnPress(this.element);
     this.header.mobileMenuOpen.set(!this.header.mobileMenuOpen());
   }
 
   constructor() {
-    this.header.toggle.set(inject(ElementRef).nativeElement);
+    this.header.toggle.set(this.element);
     inject(DestroyRef).onDestroy(() => this.header.toggle.set(null));
   }
 }

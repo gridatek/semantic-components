@@ -377,6 +377,12 @@ export class ScPdfViewer {
   /** The system's high-contrast mode is on. */
   private readonly forcedColors = signal(false);
   /**
+   * The browser can draw pages in other colours (`pageColors`): pdf.js
+   * recolours them with a canvas `filter`, which WebKit (Safari) lacks — a
+   * `pageColors` switch is disabled there. Say why in your markup.
+   */
+  readonly pageColorsSupported = signal(true);
+  /**
    * The page's root changed its mode or theme (`dark`, `data-theme`…): the
    * theme's page colours have other values, to read again.
    */
@@ -849,6 +855,11 @@ export class ScPdfViewer {
 
     // Browser only: the worker, the first document, fullscreen tracking.
     afterNextRender(() => {
+      const canvas = (
+        this.document.defaultView as
+          (Window & { CanvasRenderingContext2D?: { prototype: object } }) | null
+      )?.CanvasRenderingContext2D;
+      this.pageColorsSupported.set(!!canvas && 'filter' in canvas.prototype);
       // High contrast mode, before the pages are drawn.
       const forcedColors = this.document.defaultView?.matchMedia(
         '(forced-colors: active)',

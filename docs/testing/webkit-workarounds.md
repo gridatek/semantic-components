@@ -17,7 +17,7 @@ Safari behaves like the others, and remove its section here.
 
 - **Where:** `ɵfocusOnPress()` in
   `packages/ui/src/lib/utils/focus-on-press/focus-on-press.ts`, called by the
-  triggers of Dialog, Alert Dialog, Sheet, Drawer and Popover.
+  triggers of Dialog, Alert Dialog, Sheet, Drawer and Popover, and the Header's mobile menu toggle (Escape, heard by the header, closes the menu only with focus inside it).
 - **What:** Chrome and Firefox focus a button when it is clicked. Safari on
   macOS doesn't: focus stays on the page (`document.activeElement` is the
   body). An overlay gives focus back to where it was on close, so after

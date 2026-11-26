@@ -101,9 +101,10 @@ test.describe('PDF Viewer reading', () => {
     await expect(page.getByTestId('page-count')).toHaveText('/ 1', {
       timeout: 20_000,
     });
+    // Drawn: as long as openPdf allows (WebKit on CI is slower).
     await expect(
       page.locator('.page[data-page-number="1"] .textLayer'),
-    ).toContainText('cat and cat and cat');
+    ).toContainText('cat and cat and cat', { timeout: 20_000 });
     // The sample was let go once its pages were in: nothing came late.
     await expect(page.locator('.page')).toHaveCount(1);
     expect(errors).toEqual([]);

@@ -26,13 +26,19 @@ test('Variants: each its own look', async ({ page }) => {
     'Outline',
     'Ghost',
   ]);
-  const looks = await badges.evaluateAll((all) =>
-    all.map((badge) => {
-      const style = getComputedStyle(badge);
-      return `${style.backgroundColor} ${style.color} ${style.borderColor}`;
-    }),
-  );
-  expect(new Set(looks).size).toBe(looks.length);
+  // Polled: under load (WebKit on CI) the looks were read before the styles
+  // had landed — three alike.
+  await expect
+    .poll(async () => {
+      const looks = await badges.evaluateAll((all) =>
+        all.map((badge) => {
+          const style = getComputedStyle(badge);
+          return `${style.backgroundColor} ${style.color} ${style.borderColor}`;
+        }),
+      );
+      return new Set(looks).size;
+    })
+    .toBe(5);
 });
 
 test('With Icon: less padding on the icon’s side', async ({ page }) => {

@@ -6,7 +6,7 @@ A site's top bar, the page's banner: your brand, the Navigation Menu's links and
 
 - **Responsive** — the links show from `expand` (`sm`, `md`, `lg`); below it, the toggle and the menu
 - **Your markup** — the brand and the actions are your own elements, laid out as you like; the toggle goes wherever you put it (beside your actions, say)
-- **Disclosure menu** — `aria-expanded`, `aria-controls`; by default it covers the page below the bar, see-through and blurred as shadcn's (scrolling inside if it is taller), opening at once and fading out in 100ms; the page behind it doesn't scroll while it is open (no scrollbar, its room kept so nothing shifts); with `mobileMenu="push"` it pushes the page down, fading and sliding in and out
+- **Disclosure menu** — `aria-expanded`, `aria-controls`; by default it covers the page below the bar, see-through and blurred as shadcn's (scrolling inside if it is taller), opening at once and fading out in 100ms; the page behind it doesn't scroll while it is open (no scrollbar, its room kept so nothing shifts — `scrollbar-gutter`, and in WebKit, which drops the root's gutter all the same, the same room as padding); with `mobileMenu="push"` it pushes the page down, fading and sliding in and out
 - **Closes by itself** — Escape (focus back on the toggle), a link followed (at once, on the click: a fast next page is your app's — e.g. `withPreloading` on its router), a navigation ending (done, cancelled, failed), the window growing wide enough; covering the page, a click or the focus outside the bar too
 - **`[(mobileMenuOpen)]`** — the mobile menu's state, two-way
 - **Sticky**, and **hides on scroll** (away going down, back going up)
@@ -88,6 +88,6 @@ The menu's content, below `expand`: a named `nav` with `scNavigationMenuLink`s (
 - One banner (`header`), named navigation landmarks, none nested.
 - The toggle: `aria-expanded`, `aria-controls` the menu; a name that follows the state.
 - The menu is not modal: Tab moves through it and on. Closed, it isn't in the page at all.
-- Escape in the bar closes the menu and gives the toggle back the focus.
+- Escape in the bar closes the menu and gives the toggle back the focus. The toggle takes the focus when pressed (Safari leaves it on the page, where Escape wasn't heard).
 - `aria-current="page"` on the current link.
 - Under `prefers-reduced-motion` nothing animates: the menu opens and closes at once, and hiding on scroll hides without sliding.

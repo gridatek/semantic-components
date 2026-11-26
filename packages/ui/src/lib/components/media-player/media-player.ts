@@ -222,10 +222,21 @@ export class ScMediaPlayer {
     this.paused.update((paused) => !paused);
   }
 
-  /** Jumps to `seconds`, within the media. */
+  /**
+   * Jumps to `seconds`, within the media. Before it knows its length (a
+   * waveform shown first), the jump waits for it: within 0 it was lost.
+   */
   seekTo(seconds: number): void {
+    // 1: HTMLMediaElement.HAVE_METADATA (a browser global).
+    if ((this.ɵmedia()?.readyState ?? 1) < 1) {
+      this.pendingSeek = Math.max(0, seconds);
+      return;
+    }
     this.currentTime.set(Math.min(Math.max(0, seconds), this.duration()));
   }
+
+  /** A jump asked before the media knew its length, made once it does. */
+  private pendingSeek: number | null = null;
 
   seekBy(seconds: number): void {
     this.seekTo(this.currentTime() + seconds);
@@ -380,6 +391,10 @@ export class ScMediaPlayer {
 
   /** The media's state, into the player: called by `scMediaPlayerMedia`. */
   ɵsync(media: HTMLMediaElement): void {
+    if (this.pendingSeek !== null && Number.isFinite(media.duration)) {
+      this.currentTime.set(Math.min(this.pendingSeek, media.duration));
+      this.pendingSeek = null;
+    }
     this.take('paused', this.paused, media.paused);
     this.take('currentTime', this.currentTime, media.currentTime);
     this.take('volume', this.volume, media.volume);

@@ -53,6 +53,10 @@ test('playing, the next song plays at once; the end moves on', async ({
 test('previous: the start first, then the song before', async ({ page }) => {
   await page.getByRole('button', { name: 'Next song' }).click();
   await expect.poll(() => file(page)).toBe('sneaky-snitch.mp3');
+  // Its length known: WebKit drops a time set before it.
+  await expect
+    .poll(() => audio(page).evaluate((a: HTMLAudioElement) => a.readyState))
+    .toBeGreaterThanOrEqual(1);
   await audio(page).evaluate((a: HTMLAudioElement) => {
     a.currentTime = 10;
   });

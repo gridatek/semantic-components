@@ -236,13 +236,53 @@ export function lockedPdf(): Buffer {
   return Buffer.from(pdf, 'latin1');
 }
 
-/** Opens a PDF (without page labels) in the full demo with More → Open file…. */
+/** The demo's sample, from far away (pdf.js's site): 14 pages. */
+const SAMPLE =
+  'https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf';
+
+/** A stand-in for the sample: two pages, here at once. */
+const samplePdf = () =>
+  buildPdf(({ add, set, ref }) => {
+    const catalog = add();
+    const pages = add();
+    const font = add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
+    const kids = [1, 2].map((n) => {
+      const content = add(stream(`BT /F1 24 Tf 72 700 Td (Sample ${n}) Tj ET`));
+      return add(
+        `<< /Type /Page /Parent ${ref(pages)} /MediaBox [0 0 612 792] /Resources << /Font << /F1 ${ref(font)} >> >> /Contents ${ref(content)} >>`,
+      );
+    });
+    set(
+      pages,
+      `<< /Type /Pages /Kids [${kids.map(ref).join(' ')}] /Count 2 >>`,
+    );
+    set(catalog, `<< /Type /Catalog /Pages ${ref(pages)} >>`);
+    return catalog;
+  });
+
+/**
+ * Opens a PDF (without page labels) in the full demo with More → Open file….
+ * The demo's sample is served here, not fetched: on CI (WebKit, slow) it was
+ * still streaming its 14 pages when the file replaced it — past the 2s the
+ * viewer waits for them — and pdf.js logged "Transport destroyed" for each.
+ */
 export async function openPdf(
   page: Page,
   name: string,
   buffer: Buffer,
 ): Promise<void> {
+  await page.route(SAMPLE, (route) =>
+    route.fulfill({
+      contentType: 'application/pdf',
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      body: samplePdf(),
+    }),
+  );
   await page.goto('/demos/pdf-viewer/pdf-viewer-demo');
+  // The sample in: two pages.
+  await expect(page.getByTestId('page-count')).toHaveText('/ 2', {
+    timeout: 20_000,
+  });
   await page.getByRole('button', { name: 'More' }).click();
   const [chooser] = await Promise.all([
     page.waitForEvent('filechooser'),
