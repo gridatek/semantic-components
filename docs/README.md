@@ -22,6 +22,7 @@ How the library is built, and how to work on it. The user-facing documentation i
 ## Testing
 
 - [e2e-testing.md](testing/e2e-testing.md) — the Playwright suite: projects, running specs, CSR and SSR.
+- [firefox-and-webkit.md](testing/firefox-and-webkit.md) — running and fixing the e2e tests in the nightly's browsers: reading its failures, running them locally, what breaks there and the fix.
 - [webkit-workarounds.md](testing/webkit-workarounds.md) — where Safari differs and the library works around it (`FIXME(webkit)` in the code).
 
 ## Maintenance

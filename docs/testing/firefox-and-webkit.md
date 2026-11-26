@@ -1,11 +1,6 @@
----
-name: e2e-webkit
-description: Run, reproduce and fix the showcase's e2e tests in WebKit (and Firefox) — the Nightly E2E's browsers. Use when writing or changing an e2e test (to write it so it holds in WebKit and Firefox, without running them), when a nightly-e2e.yml job fails, when a test passes in Chromium but not in WebKit/Firefox, or when asked to run the tests in Safari/WebKit locally (Windows/macOS: natively; Fedora: in podman).
----
+# E2E in Firefox and WebKit
 
-# E2E in WebKit
-
-CI runs Chromium (`ci.yml`); **Firefox and WebKit run only in `nightly-e2e.yml`** (`ALL_BROWSERS=1`: the `demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit` and iPhone `mobile-webkit` projects), CSR and SSR, two shards each, 4 workers, 2 retries. See [docs/testing/e2e-testing.md](../../../docs/testing/e2e-testing.md) for the suite itself.
+CI runs Chromium (`ci.yml`); **Firefox and WebKit run only in `nightly-e2e.yml`** (`ALL_BROWSERS=1`: the `demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit` and iPhone `mobile-webkit` projects), CSR and SSR, two shards each, 4 workers, 2 retries. See [e2e-testing.md](e2e-testing.md) for the suite itself.
 
 ## 1. Read the failure on CI
 

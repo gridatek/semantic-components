@@ -33,7 +33,7 @@ npx playwright test -c apps/showcase-e2e/playwright.config.ts --project=styles-n
 | `styles/` | `styles-nova` … `styles-rhea` | in that style: each component's classes (`<name>.spec.ts`), every visible docs page's axe, light and dark (`pages.spec.ts`)                                                            |
 | `mobile/` | `mobile`                      | on a phone: every page and every demo at 360 px — the screen, a demo's width in its frame, its overlays (`reflow.spec.ts`); and the `@mobile` tests of `demos/` and `pages/` (Pixel 7) |
 
-With `ALL_BROWSERS` (the nightly) there are also `demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit` and the iPhone `mobile-webkit`.
+With `ALL_BROWSERS` (the nightly) there are also `demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit` and the iPhone `mobile-webkit`. Running and fixing them: [firefox-and-webkit.md](firefox-and-webkit.md).
 
 ### Why (the reorganisation of 2026-11-12)
 
