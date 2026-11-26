@@ -160,6 +160,14 @@ interface Step {
           calendar can still say its own: its
           <code scTypeset>firstDayOfWeek</code> input.
         </p>
+        <p>
+          A locale with its country works alike:
+          <code scTypeset>ar-MA</code> (Morocco) is given as
+          <code scTypeset>ar-MA-u-fw-sun</code>, its country kept. Its id is the
+          key of its locale data (<code scTypeset>'ar-MA'</code>, from
+          <code scTypeset>@angular/common/locales/ar-MA</code>) and the name of
+          its translations (<code scTypeset>i18n/ar-MA.json</code>).
+        </p>
       </section>
 
       <section class="space-y-4">
@@ -223,7 +231,14 @@ export default class I18nPage {
     // This one: Monday.
     { id: 'fr', label: 'Français', firstDayOfWeek: 1 },
     { id: 'ar', label: 'العربية', dir: 'rtl' },
+    // A country's: Morocco, Sunday (Intl says Monday).
+    { id: 'ar-MA', label: 'العربية (المغرب)', dir: 'rtl', firstDayOfWeek: 7 },
   ],
+  localeData: {
+    fr: () => import('@angular/common/locales/fr'),
+    ar: () => import('@angular/common/locales/ar'),
+    'ar-MA': () => import('@angular/common/locales/ar-MA'),
+  },
 };`;
 
   private readonly steps: readonly Step[] = [

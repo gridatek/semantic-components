@@ -11,6 +11,9 @@ test.describe('Internationalization Page', () => {
       .locator('xpath=ancestor::section[1]');
     await expect(section).toContainText('firstDayOfWeek');
     await expect(section).toContainText('ar-u-fw-sun');
+    // A locale with its country too: Morocco's, its data and file by its id.
+    await expect(section).toContainText('ar-MA-u-fw-sun');
+    await expect(section).toContainText("'ar-MA'");
   });
 
   test('should have no accessibility violations', async ({ page }) => {
