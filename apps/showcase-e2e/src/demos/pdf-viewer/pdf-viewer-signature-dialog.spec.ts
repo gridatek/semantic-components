@@ -1,14 +1,18 @@
 import { collectErrors, press } from '../../interaction';
 import { expect, test } from '../../test';
+import { serveSample } from './pdf-fixtures';
 
 test.describe('PDF Viewer Signature Dialog', () => {
   test('tabs: one tab stop, arrows, linked panels', async ({ page }) => {
     const errors = collectErrors(page);
+    await serveSample(page);
     await page.goto('/demos/pdf-viewer/pdf-viewer-demo');
     await page.getByRole('button', { name: 'Signature' }).first().click();
     await page.getByRole('button', { name: 'Add new signature' }).click();
     const tablist = page.getByRole('tablist', { name: 'Signature type' });
-    await expect(tablist).toBeVisible();
+    // pdf.js's editors ready first (its worker, on a first load): 20s, as the
+    // other PDF tests give it.
+    await expect(tablist).toBeVisible({ timeout: 20_000 });
 
     const tabs = tablist.getByRole('tab');
     await expect(tabs).toHaveText(['Type', 'Draw', 'Image']);
@@ -32,12 +36,13 @@ test.describe('PDF Viewer Signature Dialog', () => {
     page,
   }) => {
     const errors = collectErrors(page);
+    await serveSample(page);
     await page.goto('/demos/pdf-viewer/pdf-viewer-demo');
     await page.getByRole('button', { name: 'Signature' }).first().click();
     const add = page.getByRole('button', { name: 'Add new signature' });
     await add.click();
     const dialog = page.getByRole('dialog', { name: 'Add a signature' });
-    await expect(dialog).toBeVisible();
+    await expect(dialog).toBeVisible({ timeout: 20_000 });
 
     // The popover closed (its focus trap gone): focus isn't taken back to its trigger.
     await expect(add).toHaveCount(0);

@@ -1,7 +1,13 @@
 import { type Page } from '@playwright/test';
 import { collectErrors } from '../../interaction';
 import { expect, test } from '../../test';
-import { findPdf, lockedPdf, openPdf, taggedPdf } from './pdf-fixtures';
+import {
+  findPdf,
+  lockedPdf,
+  openPdf,
+  serveSample,
+  taggedPdf,
+} from './pdf-fixtures';
 
 test.describe('PDF Viewer reading', () => {
   test('find: hyphenated words, phrases across lines, several matches in a line', async ({
@@ -115,15 +121,19 @@ test.describe('PDF Viewer reading', () => {
   }) => {
     const errors = collectErrors(page);
     await busyWorker(page);
+    // The samples here: 7 viewers fetching 14 pages each from pdf.js's site
+    // slowed a whole WebKit job on CI. Two pages still leave one asked for.
+    await serveSample(page);
     // Accordion's page loaded once, so going back to it is instant.
     await page.goto('/docs/components/accordion');
     await page
       .locator('a[href="/docs/components/pdf-viewer"]')
       .first()
       .evaluate((a: HTMLElement) => a.click());
+    // A heavy page (7 viewers): as long as the PDF tests allow (WebKit on CI).
     await expect(
       page.getByRole('heading', { level: 1, name: 'PDF Viewer' }),
-    ).toBeVisible();
+    ).toBeVisible({ timeout: 20_000 });
     // Left the moment pdf.js asks for a sample's other pages.
     await page.evaluate(() =>
       addEventListener(

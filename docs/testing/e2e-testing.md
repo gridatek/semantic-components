@@ -68,7 +68,7 @@ npx playwright test src/styles/foo.spec.ts --project=styles-nova --project=style
 | `ci.yml` — `csr`     | lint, translations, build (affected)                                                                                                                                                             |
 | `ci.yml` — `csr-e2e` | 8 jobs: `demos-1`, `demos-2` (`--shard`), `pages`, `styles-nova-vega`, `styles-maia-lyra`, `styles-mira-luma`, `styles-sera-rhea`, `mobile` — each only when the change affects the e2e projects |
 | `ci.yml` — `ssr`     | the same 8 groups against the server-rendered build (not required)                                                                                                                               |
-| `nightly-e2e.yml`    | Firefox and WebKit (CI runs Chromium), two shards each, client-side and server-rendered                                                                                                          |
+| `nightly-e2e.yml`    | Firefox and WebKit (CI runs Chromium), three shards each, client-side and server-rendered                                                                                                        |
 
 A group is a `matrix.include` entry in `ci.yml`: its name and its `--project` flags. Branch protection's required checks name these jobs.
 
@@ -116,7 +116,7 @@ Both apps are static by default; SSR is the `ssr` build configuration. The CI jo
 | `npx nx serve showcase -c ssr`  | the dev server, with SSR (rebuilds as you edit)               | looking at SSR locally                |
 | `npx nx run showcase:serve-ssr` | the built app on its Node server (`dist/…/server/server.mjs`) | CI's `ssr` job — what production runs |
 
-The nightly workflow (`nightly-e2e.yml`) runs both ways — jobs `csr` and `ssr` — in the browsers CI doesn't (`ALL_BROWSERS`): Firefox and WebKit (`demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit`, the iPhone `mobile-webkit`), two shards each; the pull requests' CI runs Chromium, every project.
+The nightly workflow (`nightly-e2e.yml`) runs both ways — jobs `csr` and `ssr` — in the browsers CI doesn't (`ALL_BROWSERS`): Firefox and WebKit (`demos-firefox`, `pages-firefox`, `demos-webkit`, `pages-webkit`, the iPhone `mobile-webkit`), three shards each (2026-11-26: two ran near the 60-minute limit); the pull requests' CI runs Chromium, every project.
 
 `serve-ssr` needs a build first (`npx nx build showcase -c ssr`); with `SSR=1`, the Playwright config starts it instead of `serve-static`. Its log goes to `dist/ssr-showcase.log`.
 

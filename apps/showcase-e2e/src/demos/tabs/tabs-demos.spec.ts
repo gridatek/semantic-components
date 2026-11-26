@@ -143,7 +143,9 @@ test('Usage, in the docs on a phone (280px): the tabs scroll in their box; the f
   page,
 }) => {
   await page.setViewportSize({ width: 360, height: 780 });
-  await page.goto('/demos/tabs/tabs-usage-demo');
+  // Still: the tabs' text size settles just after load (16px to 14px, with a
+  // transition) — read mid-way, they grew after Settings was scrolled to.
+  await openStill(page, '/demos/tabs/tabs-usage-demo');
   // The docs' frame on a phone: 40px a side (their margin and its padding);
   // the tabs' text a little wider, as Linux and Android render it.
   await page.addStyleTag({

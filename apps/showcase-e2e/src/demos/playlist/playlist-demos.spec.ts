@@ -155,6 +155,11 @@ test('the waveform: read from the file, a slider over the time', async ({
 test.describe('RTL', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/demos/playlist/rtl-playlist-demo');
+    // Its length known, as for the usage demo: under load (WebKit on CI) it
+    // came after the 5s a seek is given.
+    await expect
+      .poll(() => audio(page).evaluate((a: HTMLAudioElement) => a.duration))
+      .toBeGreaterThan(30);
   });
 
   test('the waveform runs right to left', async ({ page }) => {

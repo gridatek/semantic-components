@@ -261,6 +261,21 @@ const samplePdf = () =>
   });
 
 /**
+ * The demo's sample served here (a two-page stand-in), not fetched from
+ * pdf.js's site: on a slow runner its 14 pages kept the viewer busy past a
+ * test's waits. Before `goto`.
+ */
+export function serveSample(page: Page): Promise<void> {
+  return page.route(SAMPLE, (route) =>
+    route.fulfill({
+      contentType: 'application/pdf',
+      headers: { 'Access-Control-Allow-Origin': '*' },
+      body: samplePdf(),
+    }),
+  );
+}
+
+/**
  * Opens a PDF (without page labels) in the full demo with More → Open file….
  * The demo's sample is served here, not fetched: on CI (WebKit, slow) it was
  * still streaming its 14 pages when the file replaced it — past the 2s the
@@ -271,13 +286,7 @@ export async function openPdf(
   name: string,
   buffer: Buffer,
 ): Promise<void> {
-  await page.route(SAMPLE, (route) =>
-    route.fulfill({
-      contentType: 'application/pdf',
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      body: samplePdf(),
-    }),
-  );
+  await serveSample(page);
   await page.goto('/demos/pdf-viewer/pdf-viewer-demo');
   // The sample in: two pages.
   await expect(page.getByTestId('page-count')).toHaveText('/ 2', {

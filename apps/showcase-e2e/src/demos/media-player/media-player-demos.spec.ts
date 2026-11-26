@@ -310,6 +310,9 @@ test('Audio: a bar — plays, skips, no fullscreen', async ({ page }) => {
   await media(page).evaluate((v: HTMLMediaElement) => {
     v.currentTime = 20;
   });
+  // The player at 20 too (its seek bar says so): a click before counted from
+  // 0 (WebKit on CI, the seek landing late).
+  await expect(page.getByRole('slider', { name: 'Seek' })).toHaveValue('20');
   await page.getByRole('button', { name: 'Back 10 seconds' }).click();
   await expect.poll(() => time(page)).toBeCloseTo(10, 0);
 });

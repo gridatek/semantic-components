@@ -12,7 +12,7 @@ permissions:
 # The e2e tests in the browsers the pull requests' CI doesn't run (it runs
 # Chromium, every project): Firefox and WebKit (demos and pages; WebKit's
 # phone too: ALL_BROWSERS), both ways the apps can run — client-side (csr),
-# and rendered on the server — two shards per engine, side by side.
+# and rendered on the server — three shards per engine, side by side.
 jobs:
   # The apps as built by default (client-side).
   csr:
@@ -22,18 +22,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        browser: [firefox, webkit]
+        # Three shards: two ran near the 60-minute limit (SSR in WebKit, 41
+        # minutes, then cut off at 60), and more tests are coming.
+        shard: [1/3, 2/3, 3/3]
+        # Each engine's projects.
         include:
           - browser: firefox
-            shard: 1/2
-            showcase: --project=demos-firefox --project=pages-firefox
-          - browser: firefox
-            shard: 2/2
             showcase: --project=demos-firefox --project=pages-firefox
           - browser: webkit
-            shard: 1/2
-            showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
-          - browser: webkit
-            shard: 2/2
             showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
     env:
       ALL_BROWSERS: true
@@ -77,9 +74,9 @@ jobs:
 
   # The apps rendered on the server (the `ssr` build, on its Node server), then
   # hydrated: every e2e test again, plus `ssr.spec.ts` (every page hydrates),
-  # in every browser — as CI's `ssr` job, which runs Chromium only. One job
-  # per browser engine, side by side: all of them in one ran close to the
-  # 60-minute limit.
+  # in every browser — as CI's `ssr` job, which runs Chromium only. Three
+  # jobs per browser engine, side by side: two each ran close to the 60-minute
+  # limit.
   ssr:
     name: ssr (${{ matrix.browser }} ${{ matrix.shard }})
     runs-on: ubuntu-latest
@@ -87,18 +84,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        browser: [firefox, webkit]
+        # Three shards: two ran near the 60-minute limit (SSR in WebKit, 41
+        # minutes, then cut off at 60), and more tests are coming.
+        shard: [1/3, 2/3, 3/3]
+        # Each engine's projects.
         include:
           - browser: firefox
-            shard: 1/2
-            showcase: --project=demos-firefox --project=pages-firefox
-          - browser: firefox
-            shard: 2/2
             showcase: --project=demos-firefox --project=pages-firefox
           - browser: webkit
-            shard: 1/2
-            showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
-          - browser: webkit
-            shard: 2/2
             showcase: --project=demos-webkit --project=pages-webkit --project=mobile-webkit
     env:
       ALL_BROWSERS: true
