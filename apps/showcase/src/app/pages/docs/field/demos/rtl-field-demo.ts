@@ -26,21 +26,6 @@ import {
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
-const MONTHS = [
-  '٠١',
-  '٠٢',
-  '٠٣',
-  '٠٤',
-  '٠٥',
-  '٠٦',
-  '٠٧',
-  '٠٨',
-  '٠٩',
-  '١٠',
-  '١١',
-  '١٢',
-];
-
 /** In a right-to-left page: the payment form, in Arabic. */
 @Component({
   selector: 'app-rtl-field-demo',
@@ -93,7 +78,7 @@ const MONTHS = [
                   <div scSelect [(value)]="month" [items]="months">
                     <div scSelectLabel>الشهر</div>
                     <div scSelectTrigger>
-                      <span scSelectValue></span>
+                      <span scSelectValue placeholder="الشهر"></span>
                       <svg scSelectIcon siChevronDownIcon></svg>
                     </div>
                     <ng-template scSelectPortal>
@@ -116,7 +101,7 @@ const MONTHS = [
                   <div scSelect [(value)]="year" [items]="years">
                     <div scSelectLabel>السنة</div>
                     <div scSelectTrigger>
-                      <span scSelectValue></span>
+                      <span scSelectValue placeholder="السنة"></span>
                       <svg scSelectIcon siChevronDownIcon></svg>
                     </div>
                     <ng-template scSelectPortal>
@@ -193,9 +178,9 @@ export class RtlFieldDemo {
     '10',
     '11',
     '12',
-  ].map((value, i) => ({
+  ].map((value) => ({
     value,
-    label: MONTHS[i],
+    label: value,
   }));
   private readonly years = Array.from({ length: 10 }, (_, i) => ({
     value: String(2026 + i),

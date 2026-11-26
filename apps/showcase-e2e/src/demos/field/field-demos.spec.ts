@@ -24,7 +24,9 @@ test('Usage: each control named by its label; the selects’ labels in line with
   await expect(
     page.getByRole('textbox', { name: 'Card Number' }),
   ).toHaveAccessibleDescription('Enter your 16-digit card number');
-  await expect(page.getByRole('combobox', { name: 'Month' })).toBeVisible();
+  // Nothing picked yet: the placeholders.
+  await expect(page.getByRole('combobox', { name: 'Month' })).toHaveText('MM');
+  await expect(page.getByRole('combobox', { name: 'Year' })).toHaveText('YYYY');
   await expect(
     page.getByRole('checkbox', { name: 'Same as shipping address' }),
   ).toBeChecked();
@@ -84,4 +86,22 @@ test('Responsive: stacked when narrow, side by side when wide', async ({
   await expect(field).toHaveCSS('flex-direction', 'column');
   await page.setViewportSize({ width: 1280, height: 800 });
   await expect(field).toHaveCSS('flex-direction', 'row');
+});
+
+test('RTL: the placeholders, then the months as written (01 … 12), the picked one in the trigger', async ({
+  page,
+}) => {
+  await page.goto(demo('rtl'));
+  const month = page.getByRole('combobox', { name: 'الشهر' });
+  await expect(month).toHaveText('الشهر');
+  await expect(page.getByRole('combobox', { name: 'السنة' })).toHaveText(
+    'السنة',
+  );
+  await month.click();
+  const options = page.getByRole('option');
+  await expect(options).toHaveCount(12);
+  await expect(options.first()).toHaveText('01');
+  await expect(options.last()).toHaveText('12');
+  await page.getByRole('option', { name: '03' }).click();
+  await expect(month).toHaveText('03');
 });
