@@ -59,6 +59,8 @@ In a form the value is the array: an empty array is not empty to Signal Forms' `
 | Ctrl + Z                    | Undo                                                                                         |
 | Ctrl + Shift + Z / Ctrl + Y | Redo                                                                                         |
 
+A text that ends with a token ends with a line break (`<br data-sc-end>`, not part of the value): the caret can go after the token in every browser (Firefox, without it, puts it before).
+
 ## API
 
 ### ScTokenInput — `div[scTokenInput]`, `#input="scTokenInput"`

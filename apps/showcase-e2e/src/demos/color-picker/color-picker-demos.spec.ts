@@ -73,7 +73,9 @@ test('Spaces: HSL, hue × lightness on a canvas, written as hsl()', async ({
   page,
 }) => {
   await open(page, 'spaces-color-picker');
-  await expect(picked(page)).toHaveText(/hsl\(/);
+  // The demo's hsl() read as itself: no 8-bit round trip, which each browser
+  // rounds its own way (Chromium 199.9 80.39%, Firefox 200 80.31% 50.2%).
+  await expect(picked(page)).toHaveText('hsl(200 80% 50%)');
   await expect(
     page.locator('[data-slot=color-picker-area] canvas'),
   ).toBeAttached();
@@ -81,7 +83,7 @@ test('Spaces: HSL, hue × lightness on a canvas, written as hsl()', async ({
   await expect(saturation).toHaveAttribute('aria-orientation', 'vertical');
   await focus(saturation);
   await press(page, 'Shift+ArrowDown');
-  await expect(picked(page)).toHaveText(/hsl\(199\.9 70\.39% 50%\)/);
+  await expect(picked(page)).toHaveText('hsl(200 70% 50%)');
 });
 
 test('OKLCH in P3: past the gamut, the nearest colour; let go, there', async ({
@@ -91,16 +93,22 @@ test('OKLCH in P3: past the gamut, the nearest colour; let go, there', async ({
   await expect(picked(page)).toHaveText('oklch(0.62 0.19 259)');
   const area = page.getByRole('slider', { name: 'Chroma and lightness' });
   const box = await area.boundingBox();
+  // On a whole pixel: Firefox sends the pointer's position in whole pixels,
+  // Chromium as given. 30% from the top: lightness about 0.7.
+  const y = Math.round((box?.y ?? 0) + (box?.height ?? 0) * 0.3);
+  const lightness = 1 - (y - (box?.y ?? 0)) / (box?.height ?? 1);
   await page.mouse.move(
-    (box?.x ?? 0) + (box?.width ?? 0) * 0.95,
-    (box?.y ?? 0) + (box?.height ?? 0) * 0.3,
+    Math.round((box?.x ?? 0) + (box?.width ?? 0) * 0.95),
+    y,
   );
   await page.mouse.down();
   await expect(picker(page)).toHaveAttribute('data-out-of-gamut');
   await page.mouse.up();
   await expect(picker(page)).not.toHaveAttribute('data-out-of-gamut');
   // Chroma lowered to what P3 holds (asked: 0.38).
-  await expect(picked(page)).toHaveText(/oklch\(0\.7 0\.1\d+ 259\)/);
+  await expect(picked(page)).toHaveText(
+    new RegExp(`oklch\\(${+lightness.toFixed(4)} 0\\.1\\d+ 259\\)`),
+  );
 });
 
 test('Presets and channels: a radio group; a channel held to its range', async ({

@@ -259,13 +259,26 @@ test('The others glide to make room; the dropped item shows it a moment', async 
   await page.goto(demo('basic'));
   await item(page, 'Accessibility').focus();
   await press(page, 'Space');
+  // Performance watched every frame from now: its glide lasts 150ms, which a
+  // poll from the test can miss under load (Firefox on CI). The glide only (a
+  // script's animation), not a CSS transition of its look.
+  const seen = await item(page, 'Performance').evaluateHandle((element) => {
+    const state = { glided: false };
+    const watch = () => {
+      const glide = element
+        .getAnimations()
+        .some(
+          (a) => !(a instanceof CSSTransition || a instanceof CSSAnimation),
+        );
+      if (glide) state.glided = true;
+      else requestAnimationFrame(watch);
+    };
+    requestAnimationFrame(watch);
+    return state;
+  });
   await press(page, 'ArrowUp');
-  // Performance made room: it glides (an animation on it), Accessibility doesn't.
-  await expect
-    .poll(() =>
-      item(page, 'Performance').evaluate((e) => e.getAnimations().length),
-    )
-    .toBeGreaterThan(0);
+  // Performance made room: it glides there.
+  await expect.poll(() => seen.evaluate((s) => s.glided)).toBe(true);
   await press(page, 'Space');
   await expect(item(page, 'Accessibility')).toHaveAttribute('data-dropped');
   await expect(item(page, 'Accessibility')).toHaveClass(/bg-accent/);

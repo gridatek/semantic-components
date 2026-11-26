@@ -1,4 +1,4 @@
-import { collectErrors, press } from '../../interaction';
+import { allowClipboard, collectErrors, press } from '../../interaction';
 import { expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/data-table/${name}-data-table-demo`;
@@ -68,7 +68,7 @@ test.describe('Payments', () => {
   });
 
   test("a row's menu: copying its id is said", async ({ page }) => {
-    await page.context().grantPermissions(['clipboard-write']);
+    await allowClipboard(page);
     await page.getByRole('button', { name: 'Open menu' }).first().click();
     await page.getByRole('menuitem', { name: 'Copy payment ID' }).click();
     await expect(page.locator('p[aria-live="polite"]')).toHaveText(

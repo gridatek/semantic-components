@@ -29,6 +29,7 @@ import {
   scColorInGamut,
   scColorIntoGamut,
   scColorToRgb,
+  scParseHsl,
   scParseOklch,
 } from './color-space';
 
@@ -221,6 +222,18 @@ export class ScColorPicker implements FormValueControl<string> {
             space,
             scColorToRgb('oklch', oklch),
             oklch.alpha ?? 100,
+            keep,
+          );
+    }
+    // hsl() as itself: exact, the same in every browser.
+    const hsl = scParseHsl(css);
+    if (hsl) {
+      return space === 'hsl'
+        ? hsl
+        : scColorFromRgb(
+            space,
+            scColorToRgb('hsl', hsl),
+            hsl.alpha ?? 100,
             keep,
           );
     }

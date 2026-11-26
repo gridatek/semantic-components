@@ -73,6 +73,11 @@ test.describe('Console clean', () => {
           m.text().includes('height of the fill-mode image is zero')
         )
           return;
+        // The Media Player's error demo plays a broken file on purpose (to
+        // show its error state): Firefox reports any media that fails to
+        // load. That file only — another media failure still counts.
+        if (m.text().includes('Media resource data:video/mp4;base64,AAAA '))
+          return;
         if (m.type() === 'warning' || m.type() === 'error')
           messages.push(`${m.type()}: ${m.text().split('\n')[0]}`);
       });

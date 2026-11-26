@@ -447,16 +447,18 @@ export class ScSortableEngine<T> {
     return true;
   }
 
-  /** How many items a grid container shows on its first row. */
+  /**
+   * How many items a grid container shows on its first row — by layout, not
+   * transforms: an item still gliding into the row (just after a move) is in
+   * it already.
+   */
   private perRow(container: string): number {
     const refs = this.options
       .items()
       .filter((ref) => ref.containerId() === container);
     if (!refs.length) return 1;
-    const top = refs[0].element.getBoundingClientRect().top;
-    const row = refs.filter(
-      (ref) => Math.abs(ref.element.getBoundingClientRect().top - top) < 2,
-    );
+    const top = refs[0].element.offsetTop;
+    const row = refs.filter((ref) => Math.abs(ref.element.offsetTop - top) < 2);
     return Math.max(1, row.length);
   }
 

@@ -306,7 +306,15 @@ test.describe('Circle: a round crop moved over the image', () => {
     page,
   }) => {
     await expect(selection(page)).toHaveClass(/rounded-full/);
-    await drag(page, selection(page), -1000, 0);
+    // To the window's left edge, past the image's (not out of the window:
+    // Playwright's Firefox then reports the pointer at 0, -85).
+    const box = await selection(page).boundingBox();
+    await drag(
+      page,
+      selection(page),
+      1 - ((box?.x ?? 0) + (box?.width ?? 0) / 2),
+      0,
+    );
     // At the left edge: no further.
     await expectCrop(selection(page), '640 by 640 pixels, at 0, 80');
     await drag(page, handle(page, 'Bottom right corner'), -36, 0);

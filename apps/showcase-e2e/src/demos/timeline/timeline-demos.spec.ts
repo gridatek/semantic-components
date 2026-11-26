@@ -211,3 +211,25 @@ test('Horizontal, narrow: it scrolls across, and to the event focused', async ({
   await expect(event(page, 'Launch')).toBeFocused();
   await expect(event(page, 'Launch')).toBeInViewport();
 });
+
+test('Events stamped by @for: in the page’s order, the first the tab stop — on every load', async ({
+  page,
+}) => {
+  // Each event registers before it's in the page: sorted then, their order
+  // was the browser's guess for nodes apart (Firefox: 1 2 3 0, now and then).
+  for (let load = 0; load < 10; load++) {
+    await page.goto('/demos/timeline/horizontal-timeline-demo');
+    const events = page.locator('[scTimelineItem]');
+    await expect(events).toHaveCount(4);
+    await expect
+      .poll(() =>
+        events.evaluateAll((all) =>
+          all.map((e) =>
+            getComputedStyle(e).getPropertyValue('--sc-timeline-index').trim(),
+          ),
+        ),
+      )
+      .toEqual(['0', '1', '2', '3']);
+    await expect(event(page, 'Kickoff')).toHaveAttribute('tabindex', '0');
+  }
+});

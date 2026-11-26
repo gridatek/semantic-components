@@ -56,7 +56,7 @@ Vertical, the events are the rows of one grid (subgrid) — the opposite, the li
 
 ## Keyboard and screen readers
 
-- One tab stop: Tab enters on the current event, else the first, then on the one focused last; it goes on to the links and buttons inside an event.
+- One tab stop: Tab enters on the current event, else the first, then on the one focused last; it goes on to the links and buttons inside an event. A horizontal timeline that scrolls is not a tab stop of its own (`tabindex="-1"`: Firefox would make it one); an event focused scrolls into view. The events are put in the page's order when read, not as each registers (a `@for` stamps them before they are in the page).
 - ↑ ↓ (vertical) or ← → (horizontal, mirrored right to left) between events, on the event itself; Home and End; `loop` off stops at the ends.
 - A feed: role `feed`, its events `article`s with `aria-posinset` / `aria-setsize`, `aria-busy` while loading; Page Up and Page Down between articles from anywhere in one.
 - The current event is `aria-current="step"`. A status shown only by the marker is seen, not read: say it in the title or description too.

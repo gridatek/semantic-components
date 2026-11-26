@@ -219,13 +219,15 @@ test.describe('Attachments', () => {
     await message.evaluate((element) => {
       const data = new DataTransfer();
       data.items.add(new File(['x'], 'shot.png', { type: 'image/png' }));
-      element.dispatchEvent(
-        new ClipboardEvent('paste', {
-          clipboardData: data,
-          bubbles: true,
-          cancelable: true,
-        }),
-      );
+      const paste = new ClipboardEvent('paste', {
+        clipboardData: data,
+        bubbles: true,
+        cancelable: true,
+      });
+      // Firefox ignores the clipboardData given to a made-up event (an empty
+      // one instead): set on the event itself, as a real paste carries it.
+      Object.defineProperty(paste, 'clipboardData', { value: data });
+      element.dispatchEvent(paste);
     });
     await expect(items(page)).toHaveText([/shot\.png/]);
     await message.fill('Hello');

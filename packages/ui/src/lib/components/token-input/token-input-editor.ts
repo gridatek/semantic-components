@@ -286,9 +286,14 @@ export class ScTokenInputEditor implements ScTokenInputEditorHost {
     for (const chip of this.chips.values())
       if (!shown.has(chip.span)) this.destroyChip(chip);
     this.chips = kept;
-    // A last new line shows only with a line break after it.
+    // A last new line shows only with a line break after it; a last token
+    // needs one for the caret to go after it (Firefox puts it before the
+    // token otherwise: Ctrl+End, then Backspace, took the space before it).
     const last = value[value.length - 1];
-    if (typeof last === 'string' && last.endsWith('\n')) {
+    if (
+      last !== undefined &&
+      (typeof last !== 'string' || last.endsWith('\n'))
+    ) {
       const end = this.document.createElement('br');
       end.setAttribute('data-sc-end', '');
       nodes.push(end);

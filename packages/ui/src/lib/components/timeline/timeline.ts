@@ -37,6 +37,9 @@ export interface ScTimelineEntry {
     '[attr.role]': 'feed() ? "feed" : "list"',
     '[attr.aria-busy]': 'feed() && busy() ? true : null',
     '[attr.data-orientation]': 'orientation()',
+    // Horizontal, it scrolls when narrow: Firefox then makes it a tab stop of
+    // its own. One tab stop (the event), which scrolls to itself.
+    '[attr.tabindex]': 'orientation() === "horizontal" ? -1 : null',
     '[attr.data-busy]': 'feed() && busy() ? "" : null',
     '[style.--sc-timeline-count]': 'entries().length',
     '[class]': 'class()',
@@ -57,8 +60,20 @@ export class ScTimeline {
   /** Loading more (aria-busy): in a feed. */
   readonly busy = input(false, { transform: booleanAttribute });
 
-  /** The events, in the page's order. */
-  readonly entries = signal<readonly ScTimelineEntry[]>([]);
+  /** The events, as they registered. */
+  private readonly registered = signal<readonly ScTimelineEntry[]>([]);
+  /**
+   * The events, in the page's order: sorted when read (their bindings), once
+   * they're in place — not as each registers, in its constructor, before a
+   * `@for` puts it in the page: nodes apart have no order (Firefox guessed
+   * 1 2 3 0 now and then).
+   */
+  readonly entries = computed(() =>
+    [...this.registered()].sort((a, b) =>
+      // 4: b follows a (Node.DOCUMENT_POSITION_FOLLOWING, a browser global).
+      a.element.compareDocumentPosition(b.element) & 4 ? -1 : 1,
+    ),
+  );
   /** The event focused last. */
   private readonly lastFocused = signal<string | null>(null);
 
@@ -102,18 +117,13 @@ export class ScTimeline {
       ?.element.focus();
   }
 
-  /** An event: kept in the page's order. */
+  /** An event (put in order by `entries`). */
   ɵadd(entry: ScTimelineEntry): void {
-    this.entries.update((entries) =>
-      [...entries, entry].sort((a, b) =>
-        // 4: b follows a (Node.DOCUMENT_POSITION_FOLLOWING, a browser global).
-        a.element.compareDocumentPosition(b.element) & 4 ? -1 : 1,
-      ),
-    );
+    this.registered.update((entries) => [...entries, entry]);
   }
 
   ɵremove(entry: ScTimelineEntry): void {
-    this.entries.update((entries) => entries.filter((e) => e !== entry));
+    this.registered.update((entries) => entries.filter((e) => e !== entry));
   }
 
   ɵfocused(value: string): void {

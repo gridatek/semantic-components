@@ -303,6 +303,28 @@ export function scParseOklch(text: string): ScColorValues | null {
   };
 }
 
+const HSL =
+  /^hsla?\(\s*([\d.]+)(?:deg)?\s*(?:,\s*|\s+)([\d.]+)%?\s*(?:,\s*|\s+)([\d.]+)%?\s*(?:[,/]\s*([\d.]+)(%?))?\s*\)$/i;
+
+/**
+ * An `hsl()` colour read as itself — modern or comma syntax, `hsla()` too —
+ * not through the browser's 8-bit sRGB, which each one rounds its own way;
+ * null otherwise.
+ */
+export function scParseHsl(text: string): ScColorValues | null {
+  const match = HSL.exec(text.trim());
+  if (!match) return null;
+  const [, h, s, l, a, aPercent] = match;
+  const alpha = a === undefined ? 1 : aPercent ? +a / 100 : +a;
+  const clamp = (n: number) => Math.min(100, Math.max(0, n));
+  return {
+    hue: +h % 360,
+    saturation: clamp(+s),
+    lightness: clamp(+l),
+    alpha: Math.min(1, Math.max(0, alpha)) * 100,
+  };
+}
+
 /** A channel's value, written in a language: "76 %", "120°", "0.148", "59". */
 export function scFormatChannel(
   name: ScColorChannel,

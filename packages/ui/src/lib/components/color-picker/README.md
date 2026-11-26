@@ -37,7 +37,7 @@ A colour, picked on an area, sliders, fields, presets or the screen — in HSV, 
 | `srgb`          | red, green, blue 0–255                     | `rgb(14 165 233)`             |
 | `oklch`         | lightness 0–100 %, chroma 0–0.4, hue       | `oklch(0.6847 0.1479 237.32)` |
 
-Alpha (0–100 %) in every space. `format` (`hex`, `rgb`, `hsl`, `oklch`) writes it another way. Any CSS colour goes in (an `oklch()` keeps its wide colours; others are read into sRGB by the browser). Empty is no colour. The hue — and black's saturation — are kept where the colour has none.
+Alpha (0–100 %) in every space. `format` (`hex`, `rgb`, `hsl`, `oklch`) writes it another way. Any CSS colour goes in: `oklch()` and `hsl()` are read as themselves (exact, the same in every browser; an `oklch()` keeps its wide colours); others are read into 8-bit sRGB by the browser, which each rounds its own way (`hsl(200 80% 50%)` was `#19a2e6` in Chromium, `#1aa2e6` in Firefox). Empty is no colour. The hue — and black's saturation — are kept where the colour has none.
 
 The area takes any two channels (`x`, `y`; by default saturation × brightness, saturation × lightness, red × green, chroma × lightness), a slider any one. HSV saturation × brightness is CSS gradients; any other area is painted on a canvas (96 × 72, stretched).
 

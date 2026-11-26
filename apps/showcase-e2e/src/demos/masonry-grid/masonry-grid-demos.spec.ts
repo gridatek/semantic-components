@@ -146,15 +146,22 @@ test('Columns and gaps: at most three; the gaps from the classes', async ({
   await page.goto(demo('columns'));
   await expect(items(page)).toHaveCount(9);
   await laidOut(page);
-  const all = await boxes(items(page));
-  const columns = new Set(all.map((b) => b.x));
-  expect(columns.size).toBe(3);
-  const [a, b] = all;
-  // gap-x-6: 24px across.
-  expect(b.x - (a.x + a.w)).toBe(24);
-  // gap-y-2: 8px down, under the first.
-  const under = all.find((x, i) => i > 0 && x.x === a.x);
-  expect((under?.y ?? 0) - (a.y + a.h)).toBe(8);
+  // Polled: a later layout (Firefox lays out again as sizes settle) moves the
+  // items with a transition — read once they're there.
+  await expect
+    .poll(async () => {
+      const all = await boxes(items(page));
+      const [a, b] = all;
+      const under = all.find((x, i) => i > 0 && x.x === a.x);
+      return {
+        columns: new Set(all.map((box) => box.x)).size,
+        // gap-x-6: 24px across.
+        across: b.x - (a.x + a.w),
+        // gap-y-2: 8px down, under the first.
+        down: (under?.y ?? 0) - (a.y + a.h),
+      };
+    })
+    .toEqual({ columns: 3, across: 24, down: 8 });
 });
 
 test('RTL: the first column on the right', async ({ page }) => {
