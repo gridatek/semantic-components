@@ -32,7 +32,8 @@ export class ScCarouselPrevious {
       'absolute touch-manipulation',
       this.corners,
       isHorizontal
-        ? 'inset-y-0 -start-12 my-auto rtl:[&_svg]:rotate-180'
+        ? // Centred on the slides (the viewport writes where it sits).
+          'top-[var(--sc-carousel-viewport-top,0px)] bottom-[var(--sc-carousel-viewport-bottom,0px)] -start-12 my-auto rtl:[&_svg]:rotate-180'
         : '-top-12 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 rotate-90',
       this.classInput(),
     );

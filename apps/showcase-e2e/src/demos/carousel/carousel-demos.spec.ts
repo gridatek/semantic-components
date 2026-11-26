@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test';
+import type { Locator, Page } from '@playwright/test';
 import { expect, test } from '../../test';
 
 const demo = (name: string) => `/demos/carousel/${name}`;
@@ -358,4 +358,38 @@ test.describe('Carousel demos', () => {
     await expect(page.getByRole('group')).toHaveCount(5);
     await expect(page.getByRole('button', { name: 'Next slide' })).toBeHidden();
   });
+});
+
+test('Several in view, in the docs on a phone (280px): the carousel in the width it has, not cut by the frame', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 780 });
+  await page.goto('/demos/carousel/multiple-carousel-demo');
+  // The docs' frame on a phone: 40px a side (their margin and its padding).
+  await page.addStyleTag({
+    content: 'app-root { padding-inline: 40px !important; }',
+  });
+  const carousel = page.getByRole('region', { name: 'Several in view' });
+  await expect(carousel).toBeVisible();
+  const box = await carousel.boundingBox();
+  expect(box?.x).toBeGreaterThanOrEqual(40 - 0.5);
+  expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(360 - 40 + 0.5);
+});
+
+test('Pages: Previous and Next centred on the slides, not on the carousel with its dots under them', async ({
+  page,
+}) => {
+  await page.goto('/demos/carousel/pages-carousel-demo');
+  const viewport = page.locator('[scCarouselViewport]');
+  await expect(viewport).toBeVisible();
+  const middle = async (locator: Locator) => {
+    const box = await locator.boundingBox();
+    return (box?.y ?? 0) + (box?.height ?? 0) / 2;
+  };
+  const slides = await middle(viewport);
+  for (const button of [
+    page.getByRole('button', { name: 'Previous slide' }),
+    page.getByRole('button', { name: 'Next slide' }),
+  ])
+    await expect.poll(() => middle(button)).toBeCloseTo(slides, 0);
 });

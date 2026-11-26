@@ -132,7 +132,7 @@ const efforts = [
           [formField]="composer.text"
           (keydown.enter)="sendOnEnter($event)"
         ></textarea>
-        <div scInputGroupAddon side="bottom">
+        <div scInputGroupAddon side="bottom" class="max-sm:gap-1">
           <button
             scInputGroupButton
             type="button"
@@ -191,7 +191,7 @@ const efforts = [
               size="sm"
               variant="outline"
             >
-              <span class="text-muted-foreground">Effort</span>
+              <span class="text-muted-foreground max-sm:sr-only">Effort</span>
               {{ currentEffort().name }}
               <svg siChevronDownIcon></svg>
             </button>

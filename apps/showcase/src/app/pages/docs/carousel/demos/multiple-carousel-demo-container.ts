@@ -53,7 +53,7 @@ import {
       scCarousel
       aria-roledescription="carousel"
       aria-label="Several in view"
-      class="mx-auto max-w-xs sm:max-w-sm"
+      class="mx-auto w-full max-w-xs sm:max-w-sm"
       [options]="{ align: 'start' }"
     >
       <div scCarouselViewport>
