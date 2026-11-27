@@ -46,7 +46,6 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
 import { injectFormats } from '../../shared/formats';
-import { label } from '../../shared/labels';
 
 /** Sales Overview: new and existing users over a period, as two lines. */
 @Component({
@@ -213,8 +212,9 @@ export class SalesOverview {
     newAndExistingUsers: $localize`:@@dashboard.salesOverview.newAndExistingUsers:New and existing users, `,
   };
 
+  /** The periods, named with their number in the user's digits. */
   private readonly periods = computed(() =>
-    SALES_PERIODS.map((value) => ({ value, label: label(value) })),
+    SALES_PERIODS.map((value) => ({ value, label: this.periodLabel(value) })),
   );
   private readonly period = signal<SalesPeriod>('Last 30 Days');
   private readonly data = computed(() =>
@@ -243,5 +243,16 @@ export class SalesOverview {
   private choose(value: unknown): void {
     if (SALES_PERIODS.includes(value as SalesPeriod))
       this.period.set(value as SalesPeriod);
+  }
+
+  private periodLabel(period: SalesPeriod): string {
+    switch (period) {
+      case 'Last 7 Days':
+        return $localize`:@@shared.labels.last7Days:Last ${this.f.count(7)}:days: Days`;
+      case 'Last 30 Days':
+        return $localize`:@@shared.labels.last30Days:Last ${this.f.count(30)}:days: Days`;
+      case 'Last 90 Days':
+        return $localize`:@@shared.labels.last90Days:Last ${this.f.count(90)}:days: Days`;
+    }
   }
 }

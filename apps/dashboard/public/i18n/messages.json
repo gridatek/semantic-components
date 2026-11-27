@@ -1032,6 +1032,9 @@
     "dashboard.salesOverview.newAndExistingUsers": "New and existing users, ",
     "dashboard.salesOverview.newUser": "New User",
     "dashboard.salesOverview.existingUser": "Existing User",
+    "shared.labels.last7Days": "Last {$days} Days",
+    "shared.labels.last30Days": "Last {$days} Days",
+    "shared.labels.last90Days": "Last {$days} Days",
     "dashboards.analytics.analytics": "Analytics",
     "dashboards.analytics.visitors": "Visitors",
     "dashboards.analytics.fromLastMonth": " from last month ",
@@ -1867,9 +1870,6 @@
     "shared.labels.travel": "Travel",
     "shared.labels.square": "square",
     "shared.labels.portrait": "portrait",
-    "shared.labels.landscape": "landscape",
-    "shared.labels.last7Days": "Last {$days} Days",
-    "shared.labels.last30Days": "Last {$days} Days",
-    "shared.labels.last90Days": "Last {$days} Days"
+    "shared.labels.landscape": "landscape"
   }
 }
