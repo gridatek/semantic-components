@@ -7,6 +7,7 @@ import {
   localeDir,
   localeTag,
   storageKey,
+  translationLocaleOf,
 } from './i18n-config';
 
 /**
@@ -26,11 +27,16 @@ export async function loadLocale(config: ScI18nConfig): Promise<void> {
   );
   if (locale !== config.sourceLocale) {
     try {
+      // Its translations, perhaps another locale's (`ar` for `ar-MA`):
+      // none for the source one. Its locale data, its own.
+      const from = translationLocaleOf(config, locale);
       const [translations, data] = await Promise.all([
-        (config.loadTranslations ?? fetchTranslations)(locale),
+        from === config.sourceLocale
+          ? undefined
+          : (config.loadTranslations ?? fetchTranslations)(from),
         config.localeData?.[locale]?.(),
       ]);
-      loadTranslations(translations);
+      if (translations) loadTranslations(translations);
       if (data) {
         registerLocaleData(data.default);
         // Under the id Angular is given too: its pipes look it up by it.

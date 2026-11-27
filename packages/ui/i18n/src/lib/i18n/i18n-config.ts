@@ -23,6 +23,13 @@ export interface ScLocale {
    * (`Intl`). The user's choice, once made, comes first.
    */
   numberingSystem?: ScNumberingSystem;
+  /**
+   * The locale whose translations it reads: `'ar'` for `ar-EG` and
+   * `ar-MA`, one translation for both, each still its own locale (months,
+   * digits, clock from `Intl`). The source locale: nothing is loaded. Left
+   * out, its own.
+   */
+  translationLocale?: string;
 }
 
 /**
@@ -41,9 +48,9 @@ export interface ScI18nConfig {
    */
   localeData?: Readonly<Record<string, () => Promise<{ default: unknown }>>>;
   /**
-   * A locale's translations (message id → text). By default the
-   * `translations` of `i18n/<id>.json`, as `ng extract-i18n --format json`
-   * writes them.
+   * A locale's translations (message id → text), called with its
+   * `translationLocale`. By default the `translations` of `i18n/<id>.json`,
+   * as `ng extract-i18n --format json` writes them.
    */
   loadTranslations?: (id: string) => Promise<Record<string, string>>;
   /** Where the choice is kept: a cookie, copied to `localStorage`. Default `sc-locale`. */
@@ -108,6 +115,13 @@ export function localeTag(config: ScI18nConfig, id: string): string {
     ...(firstDayOfWeek && { firstDayOfWeek }),
     ...(numberingSystem && { numberingSystem }),
   } as Intl.LocaleOptions).toString();
+}
+
+/** The locale whose translations a locale reads: its `translationLocale`, else itself. */
+export function translationLocaleOf(config: ScI18nConfig, id: string): string {
+  return (
+    config.locales.find((locale) => locale.id === id)?.translationLocale ?? id
+  );
 }
 
 /** The locale's writing direction: the app's, else the platform's. */

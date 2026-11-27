@@ -185,7 +185,8 @@ interface Step {
           <code scTypeset>ar-MA-u-fw-sun</code>, its country kept. Its id is the
           key of its locale data (<code scTypeset>'ar-MA'</code>, from
           <code scTypeset>@angular/common/locales/ar-MA</code>) and the name of
-          its translations (<code scTypeset>i18n/ar-MA.json</code>).
+          its translations (<code scTypeset>i18n/ar-MA.json</code>), unless it
+          reads another locale's (below).
         </p>
       </section>
 
@@ -212,6 +213,21 @@ interface Step {
           locale once, at start: an app that keeps them reloads the page on a
           change.
         </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 scTypeset appToc>One translation, several locales</h2>
+        <p>
+          Egyptian and Moroccan readers each get their own locale — months,
+          digits, separators and clock from <code scTypeset>Intl</code> — from
+          one translation: <code scTypeset>translationLocale</code> on a locale
+          names the locale whose translations it reads. Its locale data, its
+          <code scTypeset>&lt;html lang&gt;</code> and the locale Angular is
+          given stay its own. Naming the source locale loads nothing:
+          <code scTypeset>en-GB</code> reads <code scTypeset>en</code>'s
+          templates. Left out, a locale reads its own.
+        </p>
+        <app-doc-code [code]="translationLocaleCode" />
       </section>
 
       <section class="space-y-4">
@@ -279,6 +295,20 @@ export default class I18nPage {
   localeData: {
     fr: () => import('@angular/common/locales/fr'),
     ar: () => import('@angular/common/locales/ar'),
+    'ar-MA': () => import('@angular/common/locales/ar-MA'),
+  },
+};`;
+
+  private readonly translationLocaleCode = `export const I18N: ScI18nConfig = {
+  sourceLocale: 'en',
+  locales: [
+    { id: 'en', label: 'English' },
+    // Both read i18n/ar.json; each is still its own locale.
+    { id: 'ar-EG', label: 'العربية (مصر)', dir: 'rtl', translationLocale: 'ar' },
+    { id: 'ar-MA', label: 'العربية (المغرب)', dir: 'rtl', translationLocale: 'ar' },
+  ],
+  localeData: {
+    'ar-EG': () => import('@angular/common/locales/ar-EG'),
     'ar-MA': () => import('@angular/common/locales/ar-MA'),
   },
 };`;
