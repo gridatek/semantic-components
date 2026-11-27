@@ -1,6 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { cn } from 'cn';
-import { injectDisplayLocale } from '../../utils';
+import { injectDisplayLocale, ɵkeepDigitOrder } from '../../utils';
 import { ScScheduler } from './scheduler';
 import { isBar } from './scheduler-layout';
 import { SC_SCHEDULER_EVENT } from './scheduler-types';
@@ -42,7 +42,10 @@ export class ScSchedulerEventTime {
     this.start().toString({ smallestUnit: 'minute' }),
   );
 
-  private readonly text = computed(() => {
+  private readonly text = computed(() =>
+    ɵkeepDigitOrder(this.locale(), this.written()),
+  );
+  private readonly written = computed(() => {
     const { event, place } = this.context;
     if (event.allDay) return '';
     const bar = isBar(event, this.scheduler.timeZone());

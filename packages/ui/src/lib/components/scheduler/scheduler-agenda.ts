@@ -9,7 +9,11 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { injectDisplayLocale, injectFormatNumber } from '../../utils';
+import {
+  injectDisplayLocale,
+  injectFormatNumber,
+  ɵkeepDigitOrder,
+} from '../../utils';
 import { ScScheduler } from './scheduler';
 import { eventsOn } from './scheduler-layout';
 import { schedulerEventInjector } from './scheduler-types';
@@ -96,7 +100,10 @@ export class ScSchedulerAgenda {
         day,
         key: day.toString(),
         weekday: day.toLocaleString(this.locale(), { weekday: 'short' }),
-        label: day.toLocaleString(this.locale(), { dateStyle: 'full' }),
+        label: ɵkeepDigitOrder(
+          this.locale(),
+          day.toLocaleString(this.locale(), { dateStyle: 'full' }),
+        ),
         number: cn(
           this.style.scheduler.day,
           day.equals(today) && 'bg-primary text-primary-foreground',

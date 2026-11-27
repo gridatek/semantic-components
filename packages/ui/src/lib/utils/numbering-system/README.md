@@ -47,3 +47,7 @@ All three follow a change of the user's choice at once, in a template. Angular's
 ## In the parts
 
 Every part formats what it shows with `injectDisplayLocale()` or `injectFormatNumber()`, never with `LOCALE_ID` directly — Calendar, Scheduler, the date, time and number fields, the pickers, Time Clock, Meter, Rating, Range Slider, Number Ticker, Timeline, Waterfall, Color Picker, File Input's size, Compare, Image Cropper, Media Player, the charts. `LOCALE_ID` stays for what isn't shown digits: the week's first day, the hour cycle, a direction, reading a typed AM/PM. A number field shows the user's digits and reads both those and Latin ones.
+
+## Arabic-Indic digits in left-to-right text
+
+To the bidi algorithm, Arabic-Indic digits (`٠`–`٩`) are "Arabic numbers": in left-to-right text, what stands between two runs of them (`, `, `–`, `/`) is laid out right to left, so `Nov ٢٧, ٢٠٢٦` is drawn `Nov ٢٠٢٦ ,٢٧`. Unicode's own Arabic patterns carry marks that keep their order (`٢٧‏/١١‏/٢٠٢٦`); an English pattern has none. So `injectFormatDate()`, `injectFormatNumber()` and the parts that write two runs in one text (the Scheduler's heading, spans and day names, its event times, the Timeline's time) put a left-to-right mark (U+200E) after each run, in a left-to-right locale only. Right to left, Persian digits (`۰`–`۹`, European numbers to the algorithm) and Latin ones are left as they are. Copied, the text carries the invisible marks.

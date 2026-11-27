@@ -201,3 +201,37 @@ test('RTL: the week from Sunday (firstDayOfWeek="sun")', async ({ page }) => {
     page.locator('[data-slot=calendar] thead th .sr-only').first(),
   ).toHaveText('الأحد');
 });
+
+test("English with the user's Arabic-Indic digits: the date drawn in order, the day before the year", async ({
+  page,
+  baseURL,
+}) => {
+  await page.context().addCookies([
+    {
+      name: 'sc-numbering-system',
+      value: 'arab',
+      url: baseURL ?? 'http://localhost:4200',
+    },
+  ]);
+  await page.goto(demo('usage'));
+  await trigger(page).click();
+  await day(page, '2026-10-22').click();
+  await expect(trigger(page)).toContainText('Oct');
+  // Where each run is drawn: the bidi algorithm laid ", " between two runs
+  // of Arabic-Indic digits right to left — "Oct ٢٠٢٦ ,٢٢".
+  const [dayX, yearX] = await trigger(page)
+    .locator('span')
+    .evaluate((span) => {
+      const node = span.firstChild as Text;
+      const text = node.data;
+      const at = (part: string) => {
+        const range = document.createRange();
+        const start = text.indexOf(part);
+        range.setStart(node, start);
+        range.setEnd(node, start + part.length);
+        return range.getBoundingClientRect().left;
+      };
+      return [at('٢٢'), at('٢٠٢٦')];
+    });
+  expect(dayX).toBeLessThan(yearX);
+});

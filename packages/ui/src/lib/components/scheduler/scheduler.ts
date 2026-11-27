@@ -18,6 +18,7 @@ import {
   type ScFirstDayOfWeek,
   injectDisplayLocale,
   ɵchosenFirstDayOfWeek,
+  ɵkeepDigitOrder,
   ɵweekStart,
 } from '../../utils';
 import { ScSchedulerEventTemplate } from './scheduler-event-template';
@@ -145,7 +146,10 @@ export class ScScheduler<
   });
 
   /** What is shown, in the app's language: "October 2026", "Oct 12 – 18, 2026"… */
-  readonly label = computed(() => {
+  readonly label = computed(() =>
+    ɵkeepDigitOrder(this.displayLocale(), this.written()),
+  );
+  private readonly written = computed(() => {
     const date = this.date();
     switch (this.view()) {
       case 'month':
@@ -235,6 +239,14 @@ export class ScScheduler<
 
   /** A time range in the app's language: "Tue, Oct 14, 10:30 – 12:00 PM". */
   describe(
+    start: Temporal.ZonedDateTime,
+    end: Temporal.ZonedDateTime,
+    allDay: boolean,
+  ): string {
+    return ɵkeepDigitOrder(this.displayLocale(), this.span(start, end, allDay));
+  }
+
+  private span(
     start: Temporal.ZonedDateTime,
     end: Temporal.ZonedDateTime,
     allDay: boolean,

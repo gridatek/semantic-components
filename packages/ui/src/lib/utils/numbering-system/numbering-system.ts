@@ -5,6 +5,7 @@ import {
   injectPreference,
 } from '../../components/preferences/preference';
 import { formatDate } from './format-date';
+import { ɵkeepDigitOrder } from './keep-digit-order';
 
 /**
  * How digits are written, as Unicode names it — `Intl`'s `numberingSystem`,
@@ -106,7 +107,8 @@ export function injectFormatNumber(): ScFormatNumber {
       format = new Intl.NumberFormat(locale(), options);
       formats.set(key, format);
     }
-    return format.format(value);
+    // Arabic-Indic digits in left-to-right text: kept in order.
+    return ɵkeepDigitOrder(locale(), format.format(value));
   };
 }
 

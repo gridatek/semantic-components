@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { injectDisplayLocale } from '../../utils';
+import { injectDisplayLocale, ɵkeepDigitOrder } from '../../utils';
 import { ScTimelineItem } from './timeline-item';
 
 /** A moment the time can write. */
@@ -55,12 +55,16 @@ export class ScTimelineTime {
     const value = this.value();
     if (!value) return null;
     const dateOnly = value instanceof Temporal.PlainDate;
-    return value.toLocaleString(
+    // Arabic-Indic digits in left-to-right text: kept in order.
+    return ɵkeepDigitOrder(
       this.displayLocale(),
-      this.options() ??
-        (dateOnly
-          ? { dateStyle: 'medium' }
-          : { dateStyle: 'medium', timeStyle: 'short' }),
+      value.toLocaleString(
+        this.displayLocale(),
+        this.options() ??
+          (dateOnly
+            ? { dateStyle: 'medium' }
+            : { dateStyle: 'medium', timeStyle: 'short' }),
+      ),
     );
   });
 

@@ -1,12 +1,22 @@
 import type { ScCalendarValue } from '../../components/calendar/calendar';
+import { ɵkeepDigitOrder } from './keep-digit-order';
 
 /**
  * A calendar's value as written, with `Intl`: a day (`dateStyle: 'medium'`
  * unless `options` say), days as a list in order, a range as one span
  * (`formatRange`: "Oct 12 – 18, 2026"; a start alone, a day) — nothing, `''`.
+ * Arabic-Indic digits in left-to-right text kept in order (`ɵkeepDigitOrder`).
  * `injectFormatDate()` gives it the user's locale and digits.
  */
 export function formatDate(
+  locale: string,
+  value: ScCalendarValue,
+  options: Intl.DateTimeFormatOptions = { dateStyle: 'medium' },
+): string {
+  return ɵkeepDigitOrder(locale, written(locale, value, options));
+}
+
+function written(
   locale: string,
   value: ScCalendarValue,
   options: Intl.DateTimeFormatOptions = { dateStyle: 'medium' },

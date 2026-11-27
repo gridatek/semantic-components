@@ -15,7 +15,11 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { injectDisplayLocale, injectFormatNumber } from '../../utils';
+import {
+  injectDisplayLocale,
+  injectFormatNumber,
+  ɵkeepDigitOrder,
+} from '../../utils';
 import { ScScheduler } from './scheduler';
 import { ScSchedulerDayPointer } from './scheduler-day-pointer';
 import { eventsOn, layoutRow, placeTimed } from './scheduler-layout';
@@ -292,7 +296,10 @@ export class ScSchedulerTimeGrid {
         key: day.toString(),
         today: isToday,
         weekday: day.toLocaleString(this.locale(), { weekday: 'short' }),
-        label: day.toLocaleString(this.locale(), { dateStyle: 'full' }),
+        label: ɵkeepDigitOrder(
+          this.locale(),
+          day.toLocaleString(this.locale(), { dateStyle: 'full' }),
+        ),
         background: cn(
           'row-[1/-1]',
           i < this.scheduler.days().length - 1 && 'border-e',
