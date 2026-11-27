@@ -86,11 +86,11 @@ test.describe('Customize Page', () => {
     await kitchen.getByRole('button', { name: 'Nightlight' }).click();
     await expect(
       kitchen.getByRole('slider', { name: 'Brightness' }),
-    ).toHaveValue('15');
+    ).toHaveValue('15', shown);
     await kitchen.getByRole('switch', { name: 'Kitchen Island' }).click();
     await expect(
       kitchen.getByRole('slider', { name: 'Brightness' }),
-    ).toBeDisabled();
+    ).toBeDisabled(shown);
     // Its dialog opens on its first field and closes. Focus in it before the
     // key: WebKit on CI still opens it when the key would come.
     await page.getByRole('button', { name: 'Share Feedback' }).click();

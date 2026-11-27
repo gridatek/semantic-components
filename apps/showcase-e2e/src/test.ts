@@ -1,4 +1,4 @@
-import { test as base } from '@playwright/test';
+import { type Response, test as base } from '@playwright/test';
 
 export * from '@playwright/test';
 
@@ -22,23 +22,29 @@ export const test = base.extend({
       },
     ]);
     if (process.env['SSR']) {
-      // The app marks <html> once hydrated and stable (main-ssr.ts).
-      const hydrated = () =>
-        page
+      // The app marks <html> once hydrated and stable (main-ssr.ts). Up to a
+      // minute: the largest page (/customize) hydrates past 15 s in WebKit on
+      // a busy runner, and a test going on clicked into a page not listening
+      // yet. A response that isn't a page (a file): nothing to wait for.
+      const hydrated = async (response: Response | null) => {
+        if (response && !response.headers()['content-type']?.includes('html'))
+          return;
+        await page
           .locator('html[data-hydrated]')
-          .waitFor({ state: 'attached', timeout: 15_000 })
-          // A page without the app (a file, an error): nothing to wait for.
+          .waitFor({ state: 'attached', timeout: 60_000 })
+          // A page without the app (an error): nothing to wait for.
           .catch(() => undefined);
+      };
       const goto = page.goto.bind(page);
       const reload = page.reload.bind(page);
       page.goto = async (...args) => {
         const response = await goto(...args);
-        await hydrated();
+        await hydrated(response);
         return response;
       };
       page.reload = async (...args) => {
         const response = await reload(...args);
-        await hydrated();
+        await hydrated(response);
         return response;
       };
     }
