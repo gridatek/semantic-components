@@ -10,7 +10,7 @@ div[scDatePicker] (mode, [(value)] / [formField],
 │  hasValue() · draft() · canApply() · pick(value) · apply() · cancel() · canPick(date)
 ├── div[scDateInput]  — typed part by part
 └── div[scPopoverProvider]
-    ├── button[scDatePickerTrigger]  — your icon and words
+    ├── button[scInputButton][scDatePickerTrigger]  — your button: its look, your icon and words
     └── ng-template[scPopoverPortal]
         └── div[scPopover]
             ├── div[scDatePickerPresets]
@@ -28,7 +28,7 @@ The calendar is the [calendar](../calendar/README.md), written in full: its head
 ```html
 <div scDatePicker #dp="scDatePicker" [(value)]="date">
   <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-    <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+    <button scInputButton scDatePickerTrigger #trigger="scDatePickerTrigger">
       <svg siCalendarIcon></svg>
       <span>{{ formatDate(date()) || 'Pick a date' }}</span>
     </button>
@@ -46,7 +46,7 @@ The calendar is the [calendar](../calendar/README.md), written in full: its head
 </div>
 ```
 
-Typed, in a field — the input and the trigger in an input group; there the trigger is an icon button (`variant` ghost, `buttonSize` icon-xs):
+Typed, in a field — the input and the trigger in an input group; there the trigger goes on the group's icon button (`scInputGroupButton size="icon-xs"`):
 
 ```html
 <div scField>
@@ -56,7 +56,7 @@ Typed, in a field — the input and the trigger in an input group; there the tri
       <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
         <div scDateInput></div>
         <div scInputGroupAddon side="inline-end">
-          <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+          <button scInputGroupButton size="icon-xs" scDatePickerTrigger #trigger="scDatePickerTrigger">
             <svg siCalendarIcon></svg>
             <span class="sr-only">Choose a date</span>
           </button>
@@ -122,7 +122,7 @@ The same in every picker: each pick moves on to the next part — a day: one pic
 
 ### ScDatePickerTrigger — `button[scDatePickerTrigger]`
 
-Looks like a select trigger (`size`: default, sm) — in an input group, an icon button (`variant`, `buttonSize`). Opens and closes the popover. `aria-haspopup="dialog"`, `aria-expanded`, `aria-invalid`; `data-placeholder` while there is no value.
+Behaviour only, on your button — which brings the look: `scInputButton` (a field's look, muted while `data-placeholder`), or `scInputGroupButton` in an input group. Opens and closes the popover. `aria-haspopup="dialog"`, `aria-expanded`, `aria-invalid`; `data-placeholder` while there is no value.
 
 ### Typed — `div[scDateInput]`
 

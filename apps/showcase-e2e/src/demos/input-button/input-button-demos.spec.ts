@@ -20,6 +20,13 @@ test('Usage: a button named by its text and its shortcut’s names', async ({
   const button = page.getByRole('button', { name: /Search\.\.\./ });
   await expect(button).toHaveAttribute('type', 'button');
   await expect(button).toHaveAccessibleName(/Command/);
+  // Its text a placeholder (data-placeholder): muted.
+  await expect(button).toHaveAttribute('data-placeholder');
+  const [text, body] = [
+    await button.evaluate((e) => getComputedStyle(e).color),
+    await page.evaluate(() => getComputedStyle(document.body).color),
+  ];
+  expect(text).not.toBe(body);
 });
 
 test('Icon only: named by its sr-only text', async ({ page }) => {

@@ -11,6 +11,7 @@ import {
   ScDateRangePickerTrigger,
   ScField,
   ScFieldErrors,
+  ScInputButton,
   ScLabel,
   ScPopover,
   ScPopoverPortal,
@@ -27,6 +28,7 @@ import {
 @Component({
   selector: 'app-form-date-range-picker-demo',
   imports: [
+    ScInputButton,
     FormField,
     FormRoot,
     ScDateRangePicker,
@@ -61,6 +63,7 @@ import {
             alignment="start"
           >
             <button
+              scInputButton
               id="stay"
               scDateRangePickerTrigger
               #trigger="scDateRangePickerTrigger"

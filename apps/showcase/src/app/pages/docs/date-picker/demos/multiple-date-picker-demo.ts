@@ -7,6 +7,7 @@ import {
   type ScCalendarValue,
   ScDatePicker,
   ScDatePickerTrigger,
+  ScInputButton,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -22,6 +23,7 @@ import {
 @Component({
   selector: 'app-multiple-date-picker-demo',
   imports: [
+    ScInputButton,
     ScDatePicker,
     ScDatePickerTrigger,
     ScPopoverProvider,
@@ -45,6 +47,7 @@ import {
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
         <button
+          scInputButton
           scDatePickerTrigger
           #trigger="scDatePickerTrigger"
           class="w-full"

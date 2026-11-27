@@ -8,7 +8,7 @@ A range of days — picked in a calendar (the start, then the end), typed in a [
 div[scDateRangePicker] ([(value)] / [formField], format, minDate, maxDate, unavailable, closeOnPick, confirm, disabled)
 │  hasValue() · draft() · canApply() · days() · nights() · pick(value) · apply() · cancel() · canPick(date)
 └── div[scPopoverProvider]
-    ├── button[scDateRangePickerTrigger]                 — alone: your icon and the value as written
+    ├── button[scInputButton][scDateRangePickerTrigger]  — alone: your button, your icon and the value as written
     │   (or div[scInputGroup] > div[scDateRangeInput] + an icon trigger — typed)
     └── ng-template[scPopoverPortal]
         └── div[scPopover]

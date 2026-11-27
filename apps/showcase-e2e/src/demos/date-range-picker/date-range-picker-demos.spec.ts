@@ -1,6 +1,16 @@
 import { collectErrors } from '../../interaction';
 import { type Locator, type Page, expect, test } from '../../test';
 
+/**
+ * The trigger's text in the page's text colour (not muted) — poll it: the
+ * input look fades its colour (`transition-colors`).
+ */
+function inTextColour(target: Locator): Promise<boolean> {
+  return target.evaluate(
+    (e) => getComputedStyle(e).color === getComputedStyle(document.body).color,
+  );
+}
+
 const demo = (name: string) =>
   `/demos/date-range-picker/${name}-date-range-picker-demo`;
 const trigger = (page: Page) =>
@@ -35,6 +45,10 @@ test.afterEach(() => {
 
 test('Basic: one span; closed once whole, focus back', async ({ page }) => {
   await page.goto(demo('basic'));
+  // The developer's input button: muted while empty, the span in the text
+  // colour once picked.
+  await expect(trigger(page)).toHaveAttribute('scInputButton');
+  await expect.poll(() => inTextColour(trigger(page))).toBe(false);
   await trigger(page).click();
   await expect(page.getByRole('grid')).toHaveCount(2);
   await day(page, '2026-10-12').click();
@@ -43,6 +57,7 @@ test('Basic: one span; closed once whole, focus back', async ({ page }) => {
   await expect(calendar(page)).toHaveCount(0);
   await expect(trigger(page)).toBeFocused();
   await expect(picked(page)).toHaveText('Oct 12 – 18, 2026');
+  await expect.poll(() => inTextColour(trigger(page))).toBe(true);
 });
 
 test('Presets: picked and closed; pressed while the value', async ({

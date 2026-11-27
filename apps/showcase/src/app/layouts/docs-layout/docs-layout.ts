@@ -168,6 +168,7 @@ const GROUP_PAGES: Partial<Record<string, string>> = {
 
           <button
             scInputButton
+            data-placeholder
             class="w-full group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-0"
             (click)="openCommandPalette()"
           >

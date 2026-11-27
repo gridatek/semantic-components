@@ -198,6 +198,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
              (Ctrl/⌘ K opens it either way). -->
         <button
           scInputButton
+          data-placeholder
           [class]="searchBoxClass"
           (click)="openCommandPalette()"
         >

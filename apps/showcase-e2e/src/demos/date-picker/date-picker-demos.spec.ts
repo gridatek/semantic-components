@@ -1,6 +1,16 @@
 import { collectErrors, press } from '../../interaction';
 import { type Locator, type Page, expect, test } from '../../test';
 
+/**
+ * The trigger's text in the page's text colour (not muted) — poll it: the
+ * input look fades its colour (`transition-colors`).
+ */
+function inTextColour(target: Locator): Promise<boolean> {
+  return target.evaluate(
+    (e) => getComputedStyle(e).color === getComputedStyle(document.body).color,
+  );
+}
+
 const demo = (name: string) =>
   name === 'usage'
     ? '/demos/date-picker/date-picker-usage-demo'
@@ -37,7 +47,11 @@ test.afterEach(() => {
 
 test('Usage: focus on the day; a pick closes, focus back', async ({ page }) => {
   await page.goto(demo('usage'));
+  // The trigger is the developer's input button: its look, muted while
+  // empty — the date, once picked, in the text colour.
+  await expect(trigger(page)).toHaveAttribute('scInputButton');
   await expect(trigger(page)).toHaveAttribute('data-placeholder');
+  await expect.poll(() => inTextColour(trigger(page))).toBe(false);
   await expect(trigger(page)).toHaveAttribute('aria-haspopup', 'dialog');
   await trigger(page).click();
   await expect(trigger(page)).toHaveAttribute('aria-expanded', 'true');
@@ -48,6 +62,7 @@ test('Usage: focus on the day; a pick closes, focus back', async ({ page }) => {
   await expect(trigger(page)).toBeFocused();
   await expect(trigger(page)).toContainText('Oct 23, 2026');
   await expect(trigger(page)).not.toHaveAttribute('data-placeholder');
+  await expect.poll(() => inTextColour(trigger(page))).toBe(true);
   // Escape: closed, the value kept.
   await trigger(page).click();
   await expect(day(page, '2026-10-23')).toBeFocused();

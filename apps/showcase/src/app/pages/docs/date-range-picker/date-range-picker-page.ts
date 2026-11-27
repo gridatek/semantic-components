@@ -156,7 +156,7 @@ export default class DateRangePickerPage {
     markup: [
       '<div scDateRangePicker #dp="scDateRangePicker" [(value)]="range">',
       '  <div scPopoverProvider [origin]="trigger.overlayOrigin">',
-      '    <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">',
+      '    <button scInputButton scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">',
       "      …icon… {{ formatDate(range()) || 'Pick dates' }}",
       '    </button>',
       '    <ng-template scPopoverPortal>',
@@ -187,7 +187,7 @@ export default class DateRangePickerPage {
       name: 'ScDateRangePickerTrigger',
       selector: 'button[scDateRangePickerTrigger]',
       description:
-        'Opens the calendar: the select trigger’s look alone (size), an icon button in an input group (variant, buttonSize). data-placeholder while empty.',
+        'Opens the calendar — behaviour only, on your button: scInputButton alone (muted while data-placeholder, set while empty), scInputGroupButton in an input group.',
     },
     {
       name: 'ScDateRangePickerPresets',

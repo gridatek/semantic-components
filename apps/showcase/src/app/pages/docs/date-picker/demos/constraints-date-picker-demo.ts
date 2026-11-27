@@ -11,6 +11,7 @@ import {
   ScDatePickerTrigger,
   ScInputGroup,
   ScInputGroupAddon,
+  ScInputGroupButton,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -26,6 +27,7 @@ import {
 @Component({
   selector: 'app-constraints-date-picker-demo',
   imports: [
+    ScInputGroupButton,
     CdkOverlayOrigin,
     ScInputGroup,
     ScInputGroupAddon,
@@ -57,7 +59,12 @@ import {
         <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
           <div scDateInput aria-label="Delivery date"></div>
           <div scInputGroupAddon side="inline-end">
-            <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+            <button
+              scInputGroupButton
+              size="icon-xs"
+              scDatePickerTrigger
+              #trigger="scDatePickerTrigger"
+            >
               <svg siCalendarIcon></svg>
               <span class="sr-only">Choose a delivery date</span>
             </button>

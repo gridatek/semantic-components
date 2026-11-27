@@ -6,7 +6,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-input-button-usage-demo',
   imports: [ScInputButton, ScKbd, SiSearchIcon],
   template: `
-    <button scInputButton class="max-w-sm">
+    <button scInputButton data-placeholder class="max-w-sm">
       <svg siSearchIcon></svg>
       <span class="flex-1">Search...</span>
       <kbd scKbd>⌘<span class="sr-only"> Command</span>J</kbd>

@@ -12,6 +12,7 @@ import {
   ScDateRangePickerTrigger,
   ScInputGroup,
   ScInputGroupAddon,
+  ScInputGroupButton,
   ScLabelText,
   ScPopover,
   ScPopoverPortal,
@@ -28,6 +29,7 @@ import {
 @Component({
   selector: 'app-typed-date-range-picker-demo',
   imports: [
+    ScInputGroupButton,
     CdkOverlayOrigin,
     ScDateRangePicker,
     ScDateRangePickerTrigger,
@@ -60,6 +62,8 @@ import {
             </div>
             <div scInputGroupAddon side="inline-end">
               <button
+                scInputGroupButton
+                size="icon-xs"
                 scDateRangePickerTrigger
                 #trigger="scDateRangePickerTrigger"
               >

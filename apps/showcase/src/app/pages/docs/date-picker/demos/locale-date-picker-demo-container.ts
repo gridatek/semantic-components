@@ -32,6 +32,7 @@ import {
   ScDatePickerTrigger,
   ScInputGroup,
   ScInputGroupAddon,
+  ScInputGroupButton,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -47,6 +48,7 @@ import {
 @Component({
   selector: 'app-locale-date-picker-demo',
   imports: [
+    ScInputGroupButton,
     CdkOverlayOrigin,
     ScInputGroup,
     ScInputGroupAddon,
@@ -70,7 +72,12 @@ import {
         <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
           <div scDateInput aria-label="Date d’arrivée"></div>
           <div scInputGroupAddon side="inline-end">
-            <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+            <button
+              scInputGroupButton
+              size="icon-xs"
+              scDatePickerTrigger
+              #trigger="scDatePickerTrigger"
+            >
               <svg siCalendarIcon></svg>
               <span class="sr-only">Choisir une date</span>
             </button>

@@ -8,7 +8,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   imports: [ScInputButton, ScKbd, SiSearchIcon],
   template: `
     <div class="w-full max-w-2xl">
-      <button scInputButton class="w-full">
+      <button scInputButton data-placeholder class="w-full">
         <svg siSearchIcon></svg>
         <span class="flex-1">Search documentation...</span>
         <kbd scKbd>⌘<span class="sr-only"> Command</span>J</kbd>

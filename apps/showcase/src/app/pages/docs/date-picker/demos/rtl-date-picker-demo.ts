@@ -8,6 +8,7 @@ import {
   type ScCalendarValue,
   ScDatePicker,
   ScDatePickerTrigger,
+  ScInputButton,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -23,6 +24,7 @@ import {
 @Component({
   selector: 'app-rtl-date-picker-demo',
   imports: [
+    ScInputButton,
     Dir,
     ScDatePicker,
     ScDatePickerTrigger,
@@ -46,6 +48,7 @@ import {
           alignment="start"
         >
           <button
+            scInputButton
             scDatePickerTrigger
             #trigger="scDatePickerTrigger"
             class="w-64"

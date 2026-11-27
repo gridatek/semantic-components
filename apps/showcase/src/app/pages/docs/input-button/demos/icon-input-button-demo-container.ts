@@ -27,7 +27,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   selector: 'app-icon-input-button-demo',
   imports: [ScInputButton, SiSearchIcon],
   template: \`
-    <button scInputButton class="size-8 justify-center p-0">
+    <button scInputButton data-placeholder class="size-8 justify-center p-0">
       <svg siSearchIcon></svg>
       <span class="sr-only">Search</span>
     </button>

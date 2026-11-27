@@ -39,6 +39,7 @@ import {
   ScFileInputTrigger,
   ScFrame,
   ScInput,
+  ScInputButton,
   ScLabel,
   ScLink,
   ScPopover,
@@ -106,6 +107,7 @@ const EMPTY_BODY = '<p></p>';
 @Component({
   selector: 'app-blog-edit-page',
   imports: [
+    ScInputButton,
     FormField,
     NgOptimizedImage,
     RouterLink,
@@ -507,6 +509,7 @@ const EMPTY_BODY = '<p></p>';
                 alignment="start"
               >
                 <button
+                  scInputButton
                   scDatePickerTrigger
                   #trigger="scDatePickerTrigger"
                   class="w-full"

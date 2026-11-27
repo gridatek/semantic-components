@@ -41,6 +41,7 @@ import {
   ScFieldDescription,
   ScFrame,
   ScInput,
+  ScInputButton,
   ScKbd,
   ScLabel,
   ScPopover,
@@ -117,6 +118,7 @@ const TITLES: Record<string, string> = {
 @Component({
   selector: 'app-ui-element-page',
   imports: [
+    ScInputButton,
     ScAccordion,
     ScAccordionHeader,
     ScAccordionItem,
@@ -789,6 +791,7 @@ const TITLES: Record<string, string> = {
               alignment="start"
             >
               <button
+                scInputButton
                 scDatePickerTrigger
                 #trigger="scDatePickerTrigger"
                 class="w-full"

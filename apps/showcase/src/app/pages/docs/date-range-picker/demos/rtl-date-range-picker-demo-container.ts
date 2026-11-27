@@ -28,6 +28,7 @@ import {
   type ScCalendarRange,
   ScDateRangePicker,
   ScDateRangePickerTrigger,
+  ScInputButton,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -43,6 +44,7 @@ import {
 @Component({
   selector: 'app-rtl-date-range-picker-demo',
   imports: [
+    ScInputButton,
     Dir,
     ScDateRangePicker,
     ScDateRangePickerTrigger,
@@ -67,7 +69,11 @@ import {
       class="w-72"
     >
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-        <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
+        <button
+          scInputButton
+          scDateRangePickerTrigger
+          #trigger="scDateRangePickerTrigger"
+        >
           <svg siCalendarIcon></svg>
           <span>{{ formatDate(range()) || 'اختر التواريخ' }}</span>
         </button>

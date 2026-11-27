@@ -7,6 +7,7 @@ import {
   type ScCalendarValue,
   ScDatePicker,
   ScDatePickerTrigger,
+  ScInputButton,
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
@@ -22,6 +23,7 @@ import {
 @Component({
   selector: 'app-date-picker-usage-demo',
   imports: [
+    ScInputButton,
     ScDatePicker,
     ScDatePickerTrigger,
     ScPopoverProvider,
@@ -38,7 +40,12 @@ import {
   template: `
     <div scDatePicker #dp="scDatePicker" [(value)]="date" class="w-fit">
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
-        <button scDatePickerTrigger #trigger="scDatePickerTrigger" class="w-64">
+        <button
+          scInputButton
+          scDatePickerTrigger
+          #trigger="scDatePickerTrigger"
+          class="w-64"
+        >
           <svg siCalendarIcon></svg>
           <span>{{ formatDate(date()) || 'Pick a date' }}</span>
         </button>

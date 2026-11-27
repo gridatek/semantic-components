@@ -136,7 +136,7 @@ export default class DatePickerPage {
     markup: [
       '<div scDatePicker #dp="scDatePicker" [(value)]="…">',
       '  <div scPopoverProvider [origin]="trigger.overlayOrigin">',
-      '    <button scDatePickerTrigger #trigger="scDatePickerTrigger">…</button>',
+      '    <button scInputButton scDatePickerTrigger #trigger="scDatePickerTrigger">…</button>',
       '    <ng-template scPopoverPortal>',
       '      <div scPopover aria-label="…">',
       '        <div scDatePickerPresets aria-label="…">',
@@ -169,7 +169,7 @@ export default class DatePickerPage {
       name: 'ScDatePickerTrigger',
       selector: 'button[scDatePickerTrigger]',
       description:
-        "Opens the calendar. On its own: the input look, size ('default', 'sm'), your icon and text (data-placeholder while empty). In an input group: an icon button, variant ('ghost') and buttonSize ('icon-xs') — name it. exportAs scDatePickerTrigger: overlayOrigin.",
+        "Opens the calendar — behaviour only, on your button: scInputButton (a field's look, muted while data-placeholder, set while empty), or scInputGroupButton in an input group (icon only: name it). Your icon and text. exportAs scDatePickerTrigger: overlayOrigin.",
     },
     {
       name: 'ScDatePickerPresets',

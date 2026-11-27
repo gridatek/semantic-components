@@ -29,7 +29,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
   imports: [Dir, ScInputButton, ScKbd, SiSearchIcon],
   template: \`
     <div dir="rtl" lang="ar" class="flex w-full justify-center">
-      <button scInputButton class="max-w-sm">
+      <button scInputButton data-placeholder class="max-w-sm">
         <svg siSearchIcon></svg>
         <span class="flex-1">بحث...</span>
         <kbd scKbd>⌘<span class="sr-only"> Command</span>J</kbd>

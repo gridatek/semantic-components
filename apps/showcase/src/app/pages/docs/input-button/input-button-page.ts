@@ -28,8 +28,8 @@ import { RtlInputButtonDemoContainer } from './demos/rtl-input-button-demo-conta
       <div class="space-y-2">
         <h1 scTypeset>Input Button</h1>
         <p class="text-muted-foreground">
-          A button that looks like a text field, to open a search or a command
-          palette. In the look of the app&apos;s style&apos;s input.
+          A button that looks like a text field, to open a search, a command
+          palette or a picker. In the look of the app&apos;s style&apos;s input.
         </p>
         <app-component-badges path="input-button" />
       </div>
@@ -87,7 +87,7 @@ export default class InputButtonPage {
   private readonly anatomy = {
     imports: "import { ScInputButton } from '@semantic-components/ui';",
     markup: [
-      '<button scInputButton>',
+      '<button scInputButton data-placeholder>',
       '  <svg …></svg>',
       '  <span class="flex-1">…</span>',
       '  <kbd scKbd>…</kbd>',
@@ -100,7 +100,7 @@ export default class InputButtonPage {
       name: 'ScInputButton',
       selector: 'button[scInputButton]',
       description:
-        'A button in the style\'s input look: muted text, its icon sized; type="button".',
+        'A button in the style\'s input look: its text muted while data-placeholder (yours on a search; a picker\'s trigger sets it while empty), a long text cut, its icon sized; type="button".',
     },
   ];
 }

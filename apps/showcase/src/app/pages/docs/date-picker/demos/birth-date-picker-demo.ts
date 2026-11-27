@@ -13,6 +13,7 @@ import {
   ScFieldDescription,
   ScInputGroup,
   ScInputGroupAddon,
+  ScInputGroupButton,
   ScLabel,
   ScPopover,
   ScPopoverPortal,
@@ -29,6 +30,7 @@ import {
 @Component({
   selector: 'app-birth-date-picker-demo',
   imports: [
+    ScInputGroupButton,
     CdkOverlayOrigin,
     ScInputGroup,
     ScInputGroupAddon,
@@ -57,7 +59,12 @@ import {
           <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
             <div scDateInput></div>
             <div scInputGroupAddon side="inline-end">
-              <button scDatePickerTrigger #trigger="scDatePickerTrigger">
+              <button
+                scInputGroupButton
+                size="icon-xs"
+                scDatePickerTrigger
+                #trigger="scDatePickerTrigger"
+              >
                 <svg siCalendarIcon></svg>
                 <span class="sr-only">Choose your date of birth</span>
               </button>
