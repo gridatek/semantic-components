@@ -1870,6 +1870,7 @@
     "shared.labels.landscape": "أفقي",
     "shared.labels.last7Days": "آخر {$days} أيام",
     "shared.labels.last30Days": "آخر {$days} يومًا",
-    "shared.labels.last90Days": "آخر {$days} يومًا"
+    "shared.labels.last90Days": "آخر {$days} يومًا",
+    "accountSettings.clock": "الساعة"
   }
 }

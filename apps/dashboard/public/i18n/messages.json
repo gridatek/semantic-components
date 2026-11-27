@@ -900,6 +900,7 @@
     "accountSettings.dateAndTimeDescription": " How calendars show the week, kept on this device ",
     "accountSettings.weekStartsOn": " Week starts on ",
     "accountSettings.numbers": " Numbers ",
+    "accountSettings.clock": " Clock ",
     "accountSettings.password": " Password ",
     "accountSettings.atLeast8Characters": "At least {$INTERPOLATION} characters",
     "accountSettings.currentPassword": "Current password",

@@ -3,6 +3,7 @@ import {
   definePreference,
   injectPreference,
 } from '../../components/preferences/preference';
+import { ɵHOUR_CYCLE } from '../hour-cycle/hour-cycle';
 import { type ScFormatDateValue, formatDate } from './format-date';
 import { type ScFormatDurationValue, formatDuration } from './format-duration';
 import { ɵkeepDigitOrder } from './keep-digit-order';
@@ -67,8 +68,9 @@ export function injectNumberingSystem(): ScNumberingSystemPreference {
 }
 
 /**
- * The locale to show with: `LOCALE_ID`, in the user's numbering system once
- * they chose one (`en-u-nu-arab`) — what the parts format with. Give it to
+ * The locale to show with: `LOCALE_ID`, in the user's numbering system and
+ * on their clock once they chose them (`en-u-hc-h23-nu-arab`) — what the
+ * parts format with. Give it to
  * `Intl` or `toLocaleString` for your own dates and times
  * (`date.toLocaleString(locale(), { dateStyle: 'long' })`), so they read as
  * the parts' do. For what is shown only: values and parsing stay `latn`.
@@ -76,10 +78,15 @@ export function injectNumberingSystem(): ScNumberingSystemPreference {
 export function injectDisplayLocale(): Signal<string> {
   const locale = inject(LOCALE_ID);
   const chosen = injectPreference(ɵNUMBERING_SYSTEM).value;
+  const clock = injectPreference(ɵHOUR_CYCLE).value;
   return computed(() => {
     const numberingSystem = chosen();
-    return numberingSystem
-      ? new Intl.Locale(locale, { numberingSystem }).toString()
+    const hourCycle = clock();
+    return numberingSystem || hourCycle
+      ? new Intl.Locale(locale, {
+          ...(numberingSystem ? { numberingSystem } : {}),
+          ...(hourCycle ? { hourCycle } : {}),
+        }).toString()
       : locale;
   });
 }

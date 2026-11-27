@@ -17,6 +17,7 @@ import {
 } from '@angular/forms/signals';
 import {
   SC_DAYS_OF_WEEK,
+  SC_HOUR_CYCLES,
   SC_NUMBERING_SYSTEMS,
   ScAvatar,
   ScAvatarFallback,
@@ -64,6 +65,7 @@ import {
   ScTextarea,
   ScToaster,
   injectFirstDayOfWeek,
+  injectHourCycle,
   injectNumberingSystem,
 } from '@semantic-components/ui';
 import {
@@ -316,6 +318,37 @@ import { injectFormats } from '../../shared/formats';
                           ) {
                             <div scSelectItem [value]="system.value">
                               <span scSelectItemText>{{ system.label }}</span>
+                              <span scSelectItemIndicator>
+                                <svg siCheckIcon></svg>
+                              </span>
+                            </div>
+                          }
+                        </div>
+                      </div>
+                    </ng-template>
+                  </div>
+                </div>
+                <div scField class="w-full max-w-xs">
+                  <div
+                    scSelect
+                    [items]="hourCycles()"
+                    [value]="hourCycle.value()"
+                    (valueChange)="chooseHourCycle($event)"
+                    class="w-full"
+                  >
+                    <div i18n="@@accountSettings.clock" scSelectLabel>
+                      Clock
+                    </div>
+                    <div scSelectTrigger>
+                      <span scSelectValue></span>
+                      <svg scSelectIcon siChevronDownIcon></svg>
+                    </div>
+                    <ng-template scSelectPortal>
+                      <div scSelectPopup>
+                        <div scSelectList>
+                          @for (cycle of hourCycles(); track cycle.value) {
+                            <div scSelectItem [value]="cycle.value">
+                              <span scSelectItemText>{{ cycle.label }}</span>
                               <span scSelectItemIndicator>
                                 <svg siCheckIcon></svg>
                               </span>
@@ -683,6 +716,26 @@ export class AccountSettingsPage {
       useGrouping: false,
     }).format(1234567890),
   }));
+
+  /** The user's clock: every time the parts write follows it. */
+  private readonly hourCycle = injectHourCycle();
+  /** Each shown by the same time on that clock — 3:05 PM, 15:05 — in the reader's words and digits. */
+  private readonly hourCycles = computed(() =>
+    SC_HOUR_CYCLES.map((value) => ({
+      value: value as string,
+      label: this.f.date(Temporal.PlainTime.from('15:05'), {
+        hour: 'numeric',
+        minute: '2-digit',
+        hourCycle: value,
+      }),
+    })),
+  );
+
+  /** The clock picked: kept, every time follows it. */
+  private chooseHourCycle(value: string): void {
+    const cycle = SC_HOUR_CYCLES.find((c) => c === value);
+    if (cycle) this.hourCycle.set(cycle);
+  }
 
   /** The numbering system picked: kept, the parts follow it. */
   private chooseNumberingSystem(value: string): void {

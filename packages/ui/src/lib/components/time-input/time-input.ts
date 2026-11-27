@@ -8,6 +8,7 @@ import {
   model,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
+import { ɵchosenHourCycle } from '../../utils';
 import { ScDateTimeSegment } from '../segmented-input/date-time-segment';
 import {
   SC_SEGMENTED_INPUT,
@@ -44,6 +45,8 @@ export class ScTimeInput
 {
   /** The time: `[formField]` or `[(value)]`; `null` until every part is filled. */
   readonly value = model<Temporal.PlainTime | null>(null);
+  /** The user's clock, if they chose one: before this part's `hourCycle`. */
+  private readonly chosenHourCycle = ɵchosenHourCycle();
   /** A 12- or 24-hour clock; the locale's by default. */
   readonly hourCycle = input<12 | 24 | undefined>(undefined);
   /** The smallest part it shows. */
@@ -66,7 +69,11 @@ export class ScTimeInput
         hour: 'numeric',
         minute: granularity === 'hour' ? undefined : '2-digit',
         second: granularity === 'second' ? '2-digit' : undefined,
-        hourCycle: scHourCycle(this.locale, this.hourCycle()),
+        hourCycle: scHourCycle(
+          this.locale,
+          this.hourCycle(),
+          this.chosenHourCycle(),
+        ),
       };
     },
   );

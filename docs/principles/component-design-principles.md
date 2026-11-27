@@ -246,6 +246,8 @@ Where a default depends on the locale and the browser can't give it, the part ta
 
 The week's first day, in order: the user's choice (`injectFirstDayOfWeek()`, which the app offers in its settings: always a day — theirs once picked, kept as a cookie the server reads, else the locale's), then the part's `firstDayOfWeek`, then the locale's (the app's own setting is inside it: an i18n locale's `firstDayOfWeek`, carried in the tag as `-u-fw-`), then Sunday. The user decides over the app.
 
+The clock, in order: the user's choice (`injectHourCycle()`, 12 or 24 hours), the part's `hourCycle`, the locale's.
+
 Digits, in order: the user's choice (`injectNumberingSystem()`), the app's (an i18n locale's `numberingSystem`, carried as `-u-nu-`), the locale's own, then `latn`. A part formats what it shows with `injectDisplayLocale()` or `injectFormatNumber()` — never `LOCALE_ID` directly — and keeps values and parsing Latin.
 
 ## Saved Choices Follow the User's Tabs

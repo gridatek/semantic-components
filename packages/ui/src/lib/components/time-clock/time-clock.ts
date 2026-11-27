@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { injectDisplayLocale } from '../../utils';
+import { injectDisplayLocale, ɵchosenHourCycle } from '../../utils';
 import { scHourCycle } from '../segmented-input/segmented-input';
 
 /** What the dial shows: the hours, the minutes or the seconds. */
@@ -48,6 +48,8 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
   readonly value = model<Temporal.PlainTime | null>(null);
   /** What the dial shows; each pick moves on to the next. */
   readonly view = model<ScTimeClockView>('hours');
+  /** The user's clock, if they chose one: before this part's `hourCycle`. */
+  private readonly chosenHourCycle = ɵchosenHourCycle();
   /** A 12- or 24-hour clock; the locale's by default. */
   readonly hourCycle = input<12 | 24 | undefined>(undefined);
   /** The smallest part it picks. */
@@ -69,7 +71,9 @@ export class ScTimeClock implements FormValueControl<Temporal.PlainTime | null> 
 
   /** 12 hours (with AM/PM), or 24. */
   readonly twelveHours = computed(
-    () => scHourCycle(this.locale, this.hourCycle()) === 'h12',
+    () =>
+      scHourCycle(this.locale, this.hourCycle(), this.chosenHourCycle()) ===
+      'h12',
   );
 
   /** The views it has, in order. */

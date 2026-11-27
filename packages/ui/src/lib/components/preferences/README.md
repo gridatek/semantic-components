@@ -46,6 +46,7 @@ readonly view = injectPreference(view); // view.value(): 'list' | 'grid'; view.s
 
 - The user's first day of the week — `injectFirstDayOfWeek()`: `value()` is always a day (theirs once they pick, kept as `sc-first-day-of-week`; else the locale's), `set('mon')` keeps one. Calendars, pickers and the scheduler follow it before their own `firstDayOfWeek`. Offer it in your settings, its choices from `SC_DAYS_OF_WEEK`.
 - The user's numbering system — `injectNumberingSystem()`: `value()` always one (`'latn'`, `'arab'`, `'arabext'`; theirs once they pick, kept as `sc-numbering-system`; else the locale's), `set()` keeps it. Its choices from `SC_NUMBERING_SYSTEMS`.
+- The user's clock — `injectHourCycle()`: `value()` always one (`'h12'` 3:05 PM, `'h23'` 15:05; theirs once they pick, kept as `sc-hour-cycle`; else the locale's), `set()` keeps it. The time fields, the Time Clock and every time shown follow it before a part's own `hourCycle`. Its choices from `SC_HOUR_CYCLES` — show each by a time on that clock (`hourCycle` in `injectFormatDate()`'s options).
 
 ## Not here
 

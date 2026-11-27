@@ -202,8 +202,10 @@ interface Step {
         <p>
           The user's choice comes first, when your app offers one:
           <code scTypeset>injectNumberingSystem()</code>, kept as the cookie
-          <code scTypeset>sc-numbering-system</code>. Every part shows its
-          numbers and dates in it at once, and the user's other tabs follow;
+          <code scTypeset>sc-numbering-system</code> — and their clock,
+          <code scTypeset>injectHourCycle()</code> (12 or 24 hours, kept as
+          <code scTypeset>sc-hour-cycle</code>). Every part shows its numbers,
+          dates and times in them at once, and the user's other tabs follow;
           values and what is typed stay Latin. Your own numbers match with
           <code scTypeset>injectFormatNumber()</code>, your dates with
           <code scTypeset>injectDisplayLocale()</code>. Angular's pipes read the

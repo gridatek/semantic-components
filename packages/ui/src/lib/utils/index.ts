@@ -3,6 +3,7 @@ export * from './active-option';
 export * from './bind-input';
 export * from './easing';
 export * from './focus-on-press';
+export * from './hour-cycle';
 export * from './navigation-end';
 export * from './open-delay';
 export * from './overlay-positions';

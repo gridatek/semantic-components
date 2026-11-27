@@ -1870,6 +1870,7 @@
     "shared.labels.landscape": "paysage",
     "shared.labels.last7Days": "{$days} derniers jours",
     "shared.labels.last30Days": "{$days} derniers jours",
-    "shared.labels.last90Days": "{$days} derniers jours"
+    "shared.labels.last90Days": "{$days} derniers jours",
+    "accountSettings.clock": "Horloge"
   }
 }

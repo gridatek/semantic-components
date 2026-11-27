@@ -855,11 +855,13 @@ export abstract class ScSegmentedInput<V> {
   }
 }
 
-/** The hour's cycle: the one asked, or the locale's. */
+/** The hour's cycle: the user's (`injectHourCycle()`), else the one asked, else the locale's. */
 export function scHourCycle(
   locale: string,
   cycle: 12 | 24 | undefined,
+  chosen?: 'h12' | 'h23',
 ): 'h12' | 'h23' {
+  if (chosen) return chosen;
   if (cycle) return cycle === 12 ? 'h12' : 'h23';
   const resolved = new Intl.DateTimeFormat(locale, {
     hour: 'numeric',
