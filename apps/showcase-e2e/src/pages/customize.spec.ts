@@ -140,7 +140,7 @@ test.describe('Customize Page', () => {
     ).toBeDisabled(shown);
     // Its dialog opens on its first field and closes. Focus in it before the
     // key: WebKit on CI still opens it when the key would come.
-    await reach(page.locator('app-preview-feedback-form'));
+    await reach(page.locator('app-preview-typography-specimen'));
     await page.getByRole('button', { name: 'Share Feedback' }).click();
     await expect(page.getByRole('dialog')).toBeVisible(shown);
     await expect
