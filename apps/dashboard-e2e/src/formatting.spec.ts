@@ -1,6 +1,6 @@
+import { expect, test } from '@playwright/test';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
-import { expect, test } from '../test';
 
 /**
  * The dashboard is the library's test app: every figure it shows goes
@@ -9,7 +9,7 @@ import { expect, test } from '../test';
  * order), composed by `injectFormats()` (shared/formats.ts) — never its own
  * `Intl`. Plain logic on its sources: no page.
  */
-const root = join(__dirname, '../../../..');
+const root = join(__dirname, '../../..');
 const app = join(root, 'apps/dashboard/src/app');
 
 /** Formatting that shows no figure, or each choice in its own digits on purpose. */

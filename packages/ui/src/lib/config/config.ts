@@ -25,6 +25,28 @@ export interface ScConfig {
   /** How the app looks: its style, its theme and its mode. */
   preset?: ScPreset;
   toaster?: ScToasterConfig;
+  /**
+   * The names the user's choices are kept under (cookies, copied to
+   * `localStorage`), each `sc-…` by default. Two apps on one host share
+   * cookies whatever their port: give each its own names. The language's
+   * is i18n's `storageKey` (read before the app), the sidebar's its
+   * `storageKey` input.
+   */
+  storageKeys?: ScStorageKeys;
+}
+
+/** The library's saved choices, by name: each left out keeps its `sc-…` name. */
+export interface ScStorageKeys {
+  /** Light, dark or system (`ScPresetManager`): `sc-mode`. */
+  readonly mode?: string;
+  /** The theme (`ScPresetManager`): `sc-theme`. */
+  readonly theme?: string;
+  /** The digits (`injectNumberingSystem()`): `sc-numbering-system`. */
+  readonly numberingSystem?: string;
+  /** The week's first day (`injectFirstDayOfWeek()`): `sc-first-day-of-week`. */
+  readonly firstDayOfWeek?: string;
+  /** The clock (`injectHourCycle()`): `sc-hour-cycle`. */
+  readonly hourCycle?: string;
 }
 
 /**

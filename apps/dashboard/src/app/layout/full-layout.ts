@@ -78,7 +78,11 @@ import { SidebarIcon } from './nav-icon';
     SidebarIcon,
   ],
   template: `
-    <div scSidebarProvider class="min-h-svh">
+    <div
+      scSidebarProvider
+      storageKey="dashboard-sidebar-state"
+      class="min-h-svh"
+    >
       <aside
         i18n-aria-label="@@layout.fullLayout.sidebar"
         scSidebar

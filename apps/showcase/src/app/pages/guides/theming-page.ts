@@ -129,7 +129,10 @@ import { ThemeToggleDemoContainer } from '../docs/theming/demos/theme-toggle-dem
           >, <code scTypeset>sc-theme</code>, copied to localStorage), so a page
           rendered on the server is drawn right from the first paint. System is
           the browser&apos;s: a small script the server puts in the page&apos;s
-          head applies it before the first paint.
+          head applies it before the first paint. Another app on the same host
+          shares those cookies: name yours with
+          <code scTypeset>storageKeys</code> in
+          <code scTypeset>provideSemanticComponents()</code>.
         </p>
       </section>
     </div>

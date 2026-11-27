@@ -29,7 +29,9 @@ The same, in the browser, for code that runs before the app (no injector) — li
 
 ## Used by
 
-- `ScPresetManager`: `sc-mode`, `sc-theme` (the user's mode and theme; the preset's apply until they pick) — followed across tabs.
-- `ScPreferences`: each preference's `storageKey` (the week's first day: `sc-first-day-of-week`; the numbering system: `sc-numbering-system`) — followed across tabs.
+Each name below is the default. Cookies belong to the host, whatever the port: two apps on one host (a dev machine's `localhost:4200` and `:4203`, two apps on one domain) share them — give each app its own names. The library's fixed choices are named in the setup, `provideSemanticComponents({ storageKeys: { mode: 'myapp-mode', numberingSystem: 'myapp-numbering-system', … } })`, each one left out keeping its `sc-` name (no prefix: some are read before the app starts, where a name has to be given whole); the language and the sidebar have their own setting (below).
+
+- `ScPresetManager`: `sc-mode`, `sc-theme` (`storageKeys.mode`, `.theme`; the user's mode and theme; the preset's apply until they pick) — followed across tabs. The server's pre-paint script reads the same names.
+- `ScPreferences`: each preference's `storageKey` (the week's first day: `sc-first-day-of-week`, `storageKeys.firstDayOfWeek`; the numbering system: `sc-numbering-system`, `.numberingSystem`; the clock: `sc-hour-cycle`, `.hourCycle`) — followed across tabs.
 - `ScSidebarProvider`: `sc-sidebar-state` (its `storageKey` input) — not followed across tabs: the layout is the tab's own; another tab opens with the last one kept.
 - `ScI18n` / `loadLocale()`: `sc-locale` (the config's `storageKey`) — followed across tabs: a language chosen in one reloads the others in it at once (`withI18n()` starts `ScI18n` on every page).

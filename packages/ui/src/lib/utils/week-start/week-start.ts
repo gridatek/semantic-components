@@ -49,6 +49,7 @@ export const ɵFIRST_DAY_OF_WEEK = definePreference({
   attribute: 'data-first-day-of-week',
   values: SC_DAYS_OF_WEEK,
   storageKey: 'sc-first-day-of-week',
+  storageKeyName: 'firstDayOfWeek',
   global: true,
 });
 

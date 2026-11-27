@@ -5,6 +5,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { SC_CONFIG, type ScStorageKeys } from '../../config/config';
 import { ScStorage } from '../../utils/storage';
 
 /**
@@ -26,6 +27,8 @@ export interface ScPreferenceDefinition<
   readonly storageKey?: string;
   /** On `<html>`, for the whole page — not on the element that applies it. */
   readonly global?: boolean;
+  /** @internal The library's own: renamed by the app's `storageKeys` (this entry), else `storageKey`. */
+  readonly storageKeyName?: keyof ScStorageKeys;
 }
 
 /** A preference, declared once in a file of yours; `injectPreference` gives its value. */
@@ -59,6 +62,7 @@ export interface ScPreference<
 @Service()
 export class ScPreferences {
   private readonly storage = inject(ScStorage);
+  private readonly storageKeys = inject(SC_CONFIG).storageKeys;
   private readonly instances = new Map<
     ScPreferenceDefinition,
     {
@@ -80,13 +84,13 @@ export class ScPreferences {
   ): ScPreference<V, D> {
     let entry = this.instances.get(definition);
     if (!entry) {
+      // The app's name for a library choice, else the definition's.
+      const key =
+        (definition.storageKeyName &&
+          this.storageKeys?.[definition.storageKeyName]) ||
+        definition.storageKey;
       const value = signal<string | undefined>(
-        this.valid(
-          definition,
-          definition.storageKey
-            ? this.storage.get(definition.storageKey)
-            : null,
-        ),
+        this.valid(definition, key ? this.storage.get(key) : null),
       );
       const preference: ScPreference = {
         definition: definition as ScPreferenceDefinition,
@@ -96,8 +100,7 @@ export class ScPreferences {
             // Forgotten: its default, or nothing.
             if (value() === definition.defaultValue) return false;
             value.set(definition.defaultValue);
-            if (definition.storageKey)
-              this.storage.remove(definition.storageKey);
+            if (key) this.storage.remove(key);
             return true;
           }
           if (
@@ -106,17 +109,16 @@ export class ScPreferences {
           )
             return false;
           value.set(next);
-          if (definition.storageKey)
-            this.storage.set(definition.storageKey, next);
+          if (key) this.storage.set(key, next);
           return true;
         },
       };
       entry = { preference, value };
       this.instances.set(definition, entry);
       // Another tab chose: here too.
-      if (definition.storageKey)
+      if (key)
         this.stops.push(
-          this.storage.watch(definition.storageKey, (saved) =>
+          this.storage.watch(key, (saved) =>
             value.set(this.valid(definition, saved)),
           ),
         );

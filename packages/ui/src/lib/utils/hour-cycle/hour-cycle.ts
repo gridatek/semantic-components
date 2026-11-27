@@ -23,6 +23,7 @@ export const ɵHOUR_CYCLE = definePreference({
   attribute: 'data-hour-cycle',
   values: SC_HOUR_CYCLES,
   storageKey: 'sc-hour-cycle',
+  storageKeyName: 'hourCycle',
   global: true,
 });
 

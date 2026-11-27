@@ -16,8 +16,6 @@ import { themeScript } from './theme-script';
 export type ScMode = 'light' | 'dark' | 'system';
 
 /** Where the user's choices are kept (a cookie, copied to `localStorage`). */
-const MODE_KEY = 'sc-mode';
-const THEME_KEY = 'sc-theme';
 
 /**
  * The theme and the mode, while the app runs: the user's choices, kept (a
@@ -31,6 +29,11 @@ const THEME_KEY = 'sc-theme';
 @Service()
 export class ScPresetManager {
   private readonly preset = inject(SC_CONFIG).preset;
+  /** Where the mode and the theme are kept: the app's names, else `sc-mode`, `sc-theme`. */
+  private readonly keys = {
+    mode: inject(SC_CONFIG).storageKeys?.mode ?? 'sc-mode',
+    theme: inject(SC_CONFIG).storageKeys?.theme ?? 'sc-theme',
+  };
 
   private readonly storage = inject(ScStorage);
   private readonly document = inject(DOCUMENT);
@@ -41,12 +44,16 @@ export class ScPresetManager {
     null;
 
   readonly mode = signal<ScMode>(
-    this.getStored(MODE_KEY, this.preset?.mode ?? 'system', this.isValidMode),
+    this.getStored(
+      this.keys.mode,
+      this.preset?.mode ?? 'system',
+      this.isValidMode,
+    ),
   );
 
   /** shadcn's CSS variables, by name: `'default'`, or the name your CSS gives `[data-theme]`. */
   readonly theme = signal<string>(
-    this.getStored(THEME_KEY, this.preset?.theme ?? 'default'),
+    this.getStored(this.keys.theme, this.preset?.theme ?? 'default'),
   );
 
   // A signal so `resolvedMode` re-evaluates when the OS theme changes.
@@ -92,7 +99,7 @@ export class ScPresetManager {
     // Another tab chose a mode or a theme: here too (its choice, already
     // kept; forgotten, the preset's).
     const stops = [
-      this.storage.watch(MODE_KEY, (saved) => {
+      this.storage.watch(this.keys.mode, (saved) => {
         this.fromOtherTab.mode = true;
         this.mode.set(
           saved && this.isValidMode(saved)
@@ -100,7 +107,7 @@ export class ScPresetManager {
             : (this.preset?.mode ?? 'system'),
         );
       }),
-      this.storage.watch(THEME_KEY, (saved) => {
+      this.storage.watch(this.keys.theme, (saved) => {
         this.fromOtherTab.theme = true;
         this.theme.set(saved ?? this.preset?.theme ?? 'default');
       }),
@@ -111,7 +118,7 @@ export class ScPresetManager {
 
   setMode(mode: ScMode): void {
     this.mode.set(mode);
-    this.store(MODE_KEY, mode);
+    this.store(this.keys.mode, mode);
   }
 
   toggleMode(): void {
@@ -121,7 +128,7 @@ export class ScPresetManager {
 
   setTheme(theme: string): void {
     this.theme.set(theme);
-    this.store(THEME_KEY, theme);
+    this.store(this.keys.theme, theme);
   }
 
   private isValidMode(value: string): value is ScMode {
@@ -178,8 +185,8 @@ export class ScPresetManager {
     const nonce = inject(CSP_NONCE, { optional: true });
     if (nonce) script.setAttribute('nonce', nonce);
     script.textContent = themeScript({
-      modeKey: MODE_KEY,
-      themeKey: THEME_KEY,
+      modeKey: this.keys.mode,
+      themeKey: this.keys.theme,
       mode: this.preset?.mode ?? 'system',
       theme: this.preset?.theme ?? 'default',
     });

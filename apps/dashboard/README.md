@@ -233,7 +233,7 @@ Not the library's, but met on the way:
 
 ## Not done yet
 
-- No e2e specs for this app (checked by a scripted run, above, and by hand).
+- Its e2e project (`apps/dashboard-e2e`) covers the library's behaviour here — the saved choices under the dashboard's own names (`dashboard-…`, set in `app.config.ts`, `i18n.ts` and the sidebar), the digits' order, the language followed by other tabs, its formatting only through the library — not each screen.
 - Dark mode, phone widths and RTL aren't reviewed screen by screen.
 - Hidden (non-shadcn) components carry several screens — Scheduler, Kanban
   Board, Stepper, Stat Card, Timeline, Number Group — as they are today.

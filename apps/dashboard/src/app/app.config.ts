@@ -17,7 +17,21 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     // nova: shadcn's base-nova, the reference's own style.
-    provideSemanticComponents({ preset: { style: nova } }, withI18n(I18N)),
+    provideSemanticComponents(
+      {
+        preset: { style: nova },
+        // Its own names: cookies are the host's, whatever the port, and the
+        // showcase (4200) read the dashboard's choices under the library's.
+        storageKeys: {
+          mode: 'dashboard-mode',
+          theme: 'dashboard-theme',
+          numberingSystem: 'dashboard-numbering-system',
+          firstDayOfWeek: 'dashboard-first-day-of-week',
+          hourCycle: 'dashboard-hour-cycle',
+        },
+      },
+      withI18n(I18N),
+    ),
     provideRouter(
       appRoutes,
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),

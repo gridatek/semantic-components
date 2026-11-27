@@ -32,6 +32,7 @@ export const ɵNUMBERING_SYSTEM = definePreference({
   attribute: 'data-numbering-system',
   values: SC_NUMBERING_SYSTEMS,
   storageKey: 'sc-numbering-system',
+  storageKeyName: 'numberingSystem',
   global: true,
 });
 
