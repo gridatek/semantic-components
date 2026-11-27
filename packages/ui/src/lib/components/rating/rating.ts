@@ -15,7 +15,7 @@ import {
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { bindInput, injectDisplayLocale } from '../../utils';
-import { ScField } from '../field';
+import { ScField, ɵregisterFieldControl } from '../field';
 import { ScRatingIcon } from './rating-icon';
 
 /**
@@ -264,6 +264,8 @@ export class ScRating implements FormValueControl<number | null> {
   }
 
   constructor() {
+    // Named by its field's label: no `for` at it, a click on it focuses it.
+    ɵregisterFieldControl();
     // The field it is in follows it (`data-disabled`, `data-invalid`).
     const field = this.field;
     if (field) {

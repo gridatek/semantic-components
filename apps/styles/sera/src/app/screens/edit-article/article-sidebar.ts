@@ -23,7 +23,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -71,7 +70,6 @@ const ISSUE_ITEMS = ISSUES.map((issue) => ({
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -90,8 +88,8 @@ const ISSUE_ITEMS = ISSUES.map((issue) => ({
         <div scCardBody>
           <div scFieldGroup>
             <div scField>
+              <label scLabel>Issue</label>
               <div scSelect [formField]="fields().issue" [items]="issues">
-                <div scSelectLabel>Issue</div>
                 <div scSelectTrigger>
                   <span scSelectValue></span>
                   <svg scSelectIcon siChevronDownIcon></svg>

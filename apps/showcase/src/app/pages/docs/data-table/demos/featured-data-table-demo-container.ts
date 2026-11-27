@@ -42,6 +42,7 @@ import {
   ScCheckbox,
   ScField,
   ScFrame,
+  ScLabel,
   ScMenu,
   ScMenuContent,
   ScMenuItem,
@@ -65,7 +66,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -259,6 +259,7 @@ const SAMPLE_DATA: User[] = [
 @Component({
   selector: 'app-featured-data-table-demo',
   imports: [
+    ScLabel,
     ScCheckbox,
     ScDataTableProvider,
     SiChevronDownIcon,
@@ -291,7 +292,6 @@ const SAMPLE_DATA: User[] = [
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -525,33 +525,34 @@ const SAMPLE_DATA: User[] = [
           aria-label="Users pages"
           class="mx-0 w-auto flex-wrap items-center gap-4"
         >
-          <div
-            scSelect
-            [value]="pagination.pageSize()"
-            (valueChange)="pagination.changePageSize($event)"
-            class="flex-row items-center"
-          >
-            <div scSelectLabel>Rows per page</div>
-            <div scSelectTrigger size="sm" class="w-18">
-              <span scSelectValue></span>
-              <svg scSelectIcon siChevronDownIcon></svg>
-            </div>
-            <ng-template scSelectPortal>
-              <div scSelectPopup>
-                <div scSelectList>
-                  <div scSelectGroup>
-                    @for (size of [5, 10, 20]; track size) {
-                      <div scSelectItem [value]="size">
-                        <span scSelectItemText>{{ size }}</span>
-                        <span scSelectItemIndicator
-                          ><svg siCheckIcon></svg
-                        ></span>
-                      </div>
-                    }
+          <div scField orientation="horizontal" class="w-fit">
+            <label scLabel>Rows per page</label>
+            <div
+              scSelect
+              [value]="pagination.pageSize()"
+              (valueChange)="pagination.changePageSize($event)"
+            >
+              <div scSelectTrigger size="sm" class="w-18">
+                <span scSelectValue></span>
+                <svg scSelectIcon siChevronDownIcon></svg>
+              </div>
+              <ng-template scSelectPortal>
+                <div scSelectPopup>
+                  <div scSelectList>
+                    <div scSelectGroup>
+                      @for (size of [5, 10, 20]; track size) {
+                        <div scSelectItem [value]="size">
+                          <span scSelectItemText>{{ size }}</span>
+                          <span scSelectItemIndicator
+                            ><svg siCheckIcon></svg
+                          ></span>
+                        </div>
+                      }
+                    </div>
                   </div>
                 </div>
-              </div>
-            </ng-template>
+              </ng-template>
+            </div>
           </div>
           <span class="text-sm font-medium" aria-live="polite">
             Page {{ pagination.currentPage() }} of

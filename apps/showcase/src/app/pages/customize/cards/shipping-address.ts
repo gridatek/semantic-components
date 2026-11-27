@@ -19,7 +19,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -56,7 +55,6 @@ interface ScShippingOption {
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -95,13 +93,13 @@ interface ScShippingOption {
               />
             </div>
             <div scField>
+              <label scLabel>State</label>
               <div
                 scSelect
                 class="w-full"
                 [items]="states"
                 [formField]="address.state"
               >
-                <label scSelectLabel>State</label>
                 <div scSelectTrigger class="w-full">
                   <span scSelectValue></span>
                   <svg scSelectIcon siChevronDownIcon></svg>
@@ -131,13 +129,13 @@ interface ScShippingOption {
               <input scInput placeholder="94102" [formField]="address.zip" />
             </div>
             <div scField>
+              <label scLabel>Country</label>
               <div
                 scSelect
                 class="w-full"
                 [items]="countries"
                 [formField]="address.country"
               >
-                <label scSelectLabel>Country</label>
                 <div scSelectTrigger class="w-full">
                   <span scSelectValue></span>
                   <svg scSelectIcon siChevronDownIcon></svg>

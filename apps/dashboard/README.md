@@ -203,8 +203,8 @@ And two app helpers that point at a library gap:
    screens build the line from two `scSeparator`s.
 2. **`scEmptyTitle` can't be an `h1`**: a standalone 404 adds its own.
 3. **No coloured input states** (warning, info, success): left out.
-4. **A select's label goes inside it** (`scSelectLabel`); one beside it
-   leaves the select unnamed, silently.
+4. **A select's label is its field's** (`<label scLabel>` before it in a
+   `scField`); a select outside a field needs `aria-label` on its trigger.
 5. **Cards are `div` only**: a card that is a `section`, `article`, `li` or
    `form` needs a wrapper (met again and again in the new screens: posts,
    grid items, forms).

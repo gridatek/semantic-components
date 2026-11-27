@@ -5,26 +5,28 @@ A choice among a short list of options — a trigger showing the value, the opti
 ## Usage
 
 ```html
-<div scSelect [formField]="form.theme" [items]="themes" class="w-48">
-  <div scSelectLabel>Theme</div>
-  <div scSelectTrigger>
-    <span scSelectValue placeholder="Select a theme"></span>
-    <svg scSelectIcon siChevronDownIcon></svg>
-  </div>
-  <ng-template scSelectPortal>
-    <div scSelectPopup>
-      <div scSelectList>
-        <div scSelectGroup>
-          @for (item of themes; track item.value) {
-          <div scSelectItem [value]="item.value">
-            <span scSelectItemText>{{ item.label }}</span>
-            <span scSelectItemIndicator><svg siCheckIcon></svg></span>
+<div scField class="w-48">
+  <label scLabel>Theme</label>
+  <div scSelect [formField]="form.theme" [items]="themes">
+    <div scSelectTrigger>
+      <span scSelectValue placeholder="Select a theme"></span>
+      <svg scSelectIcon siChevronDownIcon></svg>
+    </div>
+    <ng-template scSelectPortal>
+      <div scSelectPopup>
+        <div scSelectList>
+          <div scSelectGroup>
+            @for (item of themes; track item.value) {
+            <div scSelectItem [value]="item.value">
+              <span scSelectItemText>{{ item.label }}</span>
+              <span scSelectItemIndicator><svg siCheckIcon></svg></span>
+            </div>
+            }
           </div>
-          }
         </div>
       </div>
-    </div>
-  </ng-template>
+    </ng-template>
+  </div>
 </div>
 ```
 
@@ -34,7 +36,6 @@ Base UI's parts, each a directive on your element:
 
 ```html
 <div scSelect>
-  <div scSelectLabel></div>
   <div scSelectTrigger>
     <span scSelectValue></span>
     <svg scSelectIcon></svg>
@@ -58,7 +59,7 @@ Base UI's parts, each a directive on your element:
 </div>
 ```
 
-The root sets the width — its content's by default, or yours (`class="w-48"`); the trigger fills it and the list matches the trigger. Its label sits above its trigger. It needs a name: its label, or `aria-label` on the trigger.
+The root sets the width — its content's by default, or yours (`class="w-48"`); the trigger fills it and the list matches the trigger. In a field it is `display: contents`: the field sets the width, and its label sits above the trigger. It needs a name: its field's label (`<label scLabel>`, before it in the `scField`), or `aria-label` on the trigger. The label has no `for` — the trigger is no native control — and names the trigger and the list (`aria-labelledby`); a click on it focuses the trigger without opening the list.
 
 ## Positioning
 
@@ -73,7 +74,6 @@ Focus stays on the trigger (APG select-only combobox). Enter, Space or the arrow
 | Part                                                 | Selector                                          | Inputs                                                                                                                                                                                                                            |
 | ---------------------------------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ScSelect`                                           | `div[scSelect]`                                   | `value` (`[formField]` or `[(value)]`; any type — a string, a number, an object; `''` or `null`: none), `items` (`{ value, label }[]`: labels before the list has opened), `disabled`, `readonly`, `required`, `invalid`, `class` |
-| `ScSelectLabel`                                      | `div[scSelectLabel]`, `label[scSelectLabel]`      | `id`, `class` — names the trigger and the list; a click focuses the trigger                                                                                                                                                       |
 | `ScSelectTrigger`                                    | `div[scSelectTrigger]`, `button[scSelectTrigger]` | `size` (`'default'` 32px, `'sm'` 28px), `id`, `class` — in a field, described by its description and errors                                                                                                                       |
 | `ScSelectValue`                                      | `span[scSelectValue]`                             | `placeholder`, `class` — its content, if any, shows the value your way                                                                                                                                                            |
 | `ScSelectIcon`                                       | `svg[scSelectIcon]`                               | `class` — flips while the list is open                                                                                                                                                                                            |

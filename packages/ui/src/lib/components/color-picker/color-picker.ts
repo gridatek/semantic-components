@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { SC_FIELD } from '../field';
+import { ɵregisterFieldControl } from '../field';
 import {
   SC_COLOR_CHANNELS,
   SC_COLOR_SPACE_FORMAT,
@@ -74,7 +74,7 @@ const BLACK: ScColorValues = {
 })
 export class ScColorPicker implements FormValueControl<string> {
   private readonly document = inject(DOCUMENT);
-  private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = ɵregisterFieldControl();
   private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {
     optional: true,
   });

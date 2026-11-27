@@ -53,7 +53,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -143,7 +142,6 @@ const EMPTY_BODY = '<p></p>';
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -410,12 +408,12 @@ const EMPTY_BODY = '<p></p>';
           <div scCardBody>
             <div scFieldGroup>
               <div scField>
+                <label i18n="@@blog.edit.category" scLabel>Category</label>
                 <div
                   scSelect
                   [formField]="postForm.category"
                   [items]="categories"
                 >
-                  <div i18n="@@blog.edit.category" scSelectLabel>Category</div>
                   <div scSelectTrigger class="w-full">
                     <span
                       i18n-placeholder="@@blog.edit.chooseACategory"

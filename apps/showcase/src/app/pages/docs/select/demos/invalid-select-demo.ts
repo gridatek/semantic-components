@@ -3,13 +3,13 @@ import { FormField, form, required } from '@angular/forms/signals';
 import {
   ScField,
   ScFieldErrors,
+  ScLabel,
   ScSelect,
   ScSelectGroup,
   ScSelectIcon,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -22,6 +22,7 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-invalid-select-demo',
   imports: [
+    ScLabel,
     FormField,
     ScField,
     ScFieldErrors,
@@ -31,7 +32,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -42,13 +42,13 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div scField class="w-full max-w-48">
+      <label scLabel>Fruit</label>
       <div
         scSelect
         [formField]="fruitForm.fruit"
         [items]="fruits"
         class="w-full"
       >
-        <div scSelectLabel>Fruit</div>
         <div scSelectTrigger>
           <span scSelectValue placeholder="Select a fruit"></span>
           <svg scSelectIcon siChevronDownIcon></svg>

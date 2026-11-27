@@ -16,7 +16,7 @@ import {
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { injectDisplayLocale } from '../../utils';
-import { SC_FIELD } from '../field';
+import { ɵregisterFieldControl } from '../field';
 
 /** A part of a date and time: what a segment edits. */
 export type ScDateTimePart =
@@ -149,7 +149,7 @@ export const SC_SEGMENTED_INPUT_TEMPLATE = `
   },
 })
 export abstract class ScSegmentedInput<V> {
-  protected readonly field = inject(SC_FIELD, { optional: true });
+  protected readonly field = ɵregisterFieldControl();
   private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {
     optional: true,
   });

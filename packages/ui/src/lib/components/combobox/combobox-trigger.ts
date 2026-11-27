@@ -3,7 +3,6 @@ import {
   Directive,
   ElementRef,
   HostAttributeToken,
-  afterNextRender,
   computed,
   effect,
   inject,
@@ -12,6 +11,7 @@ import {
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { type ScButtonVariants } from '../button/button';
+import { ɵregisterFieldControl } from '../field';
 import { ScComboboxBase } from './combobox-base';
 
 /**
@@ -96,20 +96,12 @@ export class ScComboboxTrigger {
       if (this.root.labelId()) element.setAttribute('aria-labelledby', name);
     });
 
-    // A click on that label focuses it without opening it (it is not the
-    // label's `for`: a label's click would press the button).
-    const destroyRef = inject(DestroyRef);
-    afterNextRender(() => {
-      const labelId = this.besideInput() ? null : this.root.labelId();
-      const labelElement = labelId ? document.getElementById(labelId) : null;
-      if (!labelElement) return;
-      const focus = () => element.focus();
-      labelElement.addEventListener('click', focus);
-      destroyRef.onDestroy(() =>
-        labelElement.removeEventListener('click', focus),
-      );
-    });
-    destroyRef.onDestroy(() => this.root.triggerElement.set(undefined));
+    // Named by its field's label (not beside an input, nor a part of
+    // another control: the phone input's country picker): no `for` at it —
+    // a label's click would press the button — and a click on the label
+    // focuses it without opening it.
+    ɵregisterFieldControl(() => !this.besideInput() && !!this.root.labelId());
+    inject(DestroyRef).onDestroy(() => this.root.triggerElement.set(undefined));
   }
 
   private onArrowDown(event: Event): void {

@@ -1,12 +1,13 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
+  ScField,
+  ScLabel,
   ScSelect,
   ScSelectGroup,
   ScSelectIcon,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -18,13 +19,14 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-select-usage-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScSelect,
     ScSelectGroup,
     ScSelectIcon,
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -34,28 +36,30 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     SiChevronDownIcon,
   ],
   template: `
-    <div scSelect [(value)]="theme" [items]="themes" class="w-full max-w-48">
-      <div scSelectLabel>Theme</div>
-      <div scSelectTrigger>
-        <span scSelectValue placeholder="Select a theme"></span>
-        <svg scSelectIcon siChevronDownIcon></svg>
-      </div>
-      <ng-template scSelectPortal>
-        <div scSelectPopup>
-          <div scSelectList>
-            <div scSelectGroup>
-              @for (item of themes; track item.value) {
-                <div scSelectItem [value]="item.value">
-                  <span scSelectItemText>{{ item.label }}</span>
-                  <span scSelectItemIndicator>
-                    <svg siCheckIcon></svg>
-                  </span>
-                </div>
-              }
+    <div scField class="w-full max-w-48">
+      <label scLabel>Theme</label>
+      <div scSelect [(value)]="theme" [items]="themes">
+        <div scSelectTrigger>
+          <span scSelectValue placeholder="Select a theme"></span>
+          <svg scSelectIcon siChevronDownIcon></svg>
+        </div>
+        <ng-template scSelectPortal>
+          <div scSelectPopup>
+            <div scSelectList>
+              <div scSelectGroup>
+                @for (item of themes; track item.value) {
+                  <div scSelectItem [value]="item.value">
+                    <span scSelectItemText>{{ item.label }}</span>
+                    <span scSelectItemIndicator>
+                      <svg siCheckIcon></svg>
+                    </span>
+                  </div>
+                }
+              </div>
             </div>
           </div>
-        </div>
-      </ng-template>
+        </ng-template>
+      </div>
     </div>
   `,
   host: { class: 'flex w-full justify-center' },

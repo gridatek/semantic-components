@@ -21,7 +21,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -57,7 +56,6 @@ import {
     ScSelect,
     ScSelectGroup,
     ScSelectIcon,
-    ScSelectLabel,
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
@@ -88,13 +86,13 @@ import {
       <div scCardBody>
         <div scFieldGroup>
           <div scField>
+            <label scLabel>Preferred Currency</label>
             <div
               scSelect
               [(value)]="currency"
               [items]="currencies"
               class="w-full"
             >
-              <label scSelectLabel>Preferred Currency</label>
               <div scSelectTrigger class="w-full">
                 <span scSelectValue></span>
                 <svg scSelectIcon siChevronDownIcon></svg>

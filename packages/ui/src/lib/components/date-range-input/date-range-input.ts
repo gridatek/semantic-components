@@ -17,7 +17,7 @@ import {
   SC_DATE_INPUT_HOST,
   type ScDateInputHost,
 } from '../date-input/date-input-host';
-import { SC_FIELD } from '../field';
+import { ɵregisterFieldControl } from '../field';
 
 /**
  * A range of days, typed: your two `scDateInput`s — `part="start"` and
@@ -51,7 +51,7 @@ import { SC_FIELD } from '../field';
   },
 })
 export class ScDateRangeInput implements FormValueControl<ScCalendarRange | null> {
-  private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = ɵregisterFieldControl();
   /** A Date Range Picker it is in: the value and the limits are its. */
   private readonly picker = inject(SC_DATE_INPUT_HOST, {
     optional: true,

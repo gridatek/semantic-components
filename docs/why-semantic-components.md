@@ -90,32 +90,35 @@ Each component is a set of small, focused pieces that you assemble yourself. The
 The Select is a good example of how far this goes:
 
 ```html
-<div scSelect [formField]="form.label" [items]="items">
-  <div scSelectLabel>Label</div>
-  <div scSelectTrigger>
-    <span scSelectValue placeholder="Select a label"></span>
-    <svg scSelectIcon siChevronDownIcon></svg>
-  </div>
-  <ng-template scSelectPortal>
-    <div scSelectPopup>
-      <div scSelectList>
-        <div scSelectGroup>
-          @for (item of items; track item.value) {
-          <div scSelectItem [value]="item.value">
-            <span scSelectItemText><svg siTagIcon></svg> {{ item.label }}</span>
-            <span scSelectItemIndicator><svg siCheckIcon></svg></span>
+<div scField>
+  <label scLabel>Label</label>
+  <div scSelect [formField]="form.label" [items]="items">
+    <div scSelectTrigger>
+      <span scSelectValue placeholder="Select a label"></span>
+      <svg scSelectIcon siChevronDownIcon></svg>
+    </div>
+    <ng-template scSelectPortal>
+      <div scSelectPopup>
+        <div scSelectList>
+          <div scSelectGroup>
+            @for (item of items; track item.value) {
+            <div scSelectItem [value]="item.value">
+              <span scSelectItemText><svg siTagIcon></svg> {{ item.label }}</span>
+              <span scSelectItemIndicator><svg siCheckIcon></svg></span>
+            </div>
+            }
           </div>
-          }
         </div>
       </div>
-    </div>
-  </ng-template>
+    </ng-template>
+  </div>
 </div>
 ```
 
 - **You own the structure** — the trigger layout, the item layout, the icons, the display value
 - **You extend freely** — want a custom empty state in the list? A header above the items? Just add it
 - **The library handles behavior** — keyboard navigation, selection state, ARIA attributes — you handle the markup
+- **One label, the field's** — `<label scLabel>` names every control in a `scField`: a native one by `for`, a custom one (a select's trigger, a date input, a listbox) by `aria-labelledby`, with no `for` and a click that focuses it
 
 This also composes across components. A button can be a drawer trigger, a tooltip trigger, and an icon button all at once:
 

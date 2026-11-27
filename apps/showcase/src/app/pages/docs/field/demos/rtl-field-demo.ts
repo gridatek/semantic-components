@@ -16,7 +16,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -46,7 +45,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -75,8 +73,8 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               </div>
               <div class="grid grid-cols-3 gap-4">
                 <div scField>
+                  <label scLabel>الشهر</label>
                   <div scSelect [(value)]="month" [items]="months">
-                    <div scSelectLabel>الشهر</div>
                     <div scSelectTrigger>
                       <span scSelectValue placeholder="الشهر"></span>
                       <svg scSelectIcon siChevronDownIcon></svg>
@@ -98,8 +96,8 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
                   </div>
                 </div>
                 <div scField>
+                  <label scLabel>السنة</label>
                   <div scSelect [(value)]="year" [items]="years">
-                    <div scSelectLabel>السنة</div>
                     <div scSelectTrigger>
                       <span scSelectValue placeholder="السنة"></span>
                       <svg scSelectIcon siChevronDownIcon></svg>

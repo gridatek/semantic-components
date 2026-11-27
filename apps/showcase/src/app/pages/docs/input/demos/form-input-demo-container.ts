@@ -39,7 +39,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -65,7 +64,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -111,8 +109,8 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
             />
           </div>
           <div scField>
+            <label scLabel>Country</label>
             <div scSelect [formField]="contactForm.country" class="w-full">
-              <div scSelectLabel>Country</div>
               <div scSelectTrigger>
                 <span scSelectValue>{{ countryLabel() }}</span>
                 <svg scSelectIcon siChevronDownIcon></svg>

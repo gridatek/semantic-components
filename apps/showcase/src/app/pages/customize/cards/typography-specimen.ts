@@ -24,7 +24,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectOnFocus,
   ScSelectPopup,
@@ -67,7 +66,6 @@ import {
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectOnFocus,
     ScSelectPopup,
@@ -137,13 +135,13 @@ import {
                   </div>
                 </div>
                 <div scField>
+                  <label scLabel>Category</label>
                   <div
                     scSelect
                     class="w-full"
                     [items]="categories"
                     [formField]="feedback.category"
                   >
-                    <label scSelectLabel>Category</label>
                     <div scSelectTrigger class="w-full">
                       <span scSelectValue></span>
                       <svg scSelectIcon siChevronDownIcon></svg>

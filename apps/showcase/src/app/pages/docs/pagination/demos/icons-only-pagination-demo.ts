@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScField,
+  ScLabel,
   ScPagination,
   ScPaginationItem,
   ScPaginationList,
@@ -12,7 +14,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -33,6 +34,8 @@ import {
 @Component({
   selector: 'app-icons-only-pagination-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScPagination,
     ScPaginationItem,
     ScPaginationList,
@@ -45,7 +48,6 @@ import {
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -65,31 +67,32 @@ import {
       [pageSize]="25"
       class="flex-wrap items-center justify-between gap-4"
     >
-      <div
-        scSelect
-        [value]="pagination.pageSize()"
-        (valueChange)="pagination.changePageSize($event)"
-        class="flex-row items-center"
-      >
-        <div scSelectLabel>Rows per page</div>
-        <div scSelectTrigger class="w-20">
-          <span scSelectValue></span>
-          <svg scSelectIcon siChevronDownIcon></svg>
-        </div>
-        <ng-template scSelectPortal>
-          <div scSelectPopup>
-            <div scSelectList>
-              <div scSelectGroup>
-                @for (size of sizes; track size) {
-                  <div scSelectItem [value]="size">
-                    <span scSelectItemText>{{ size }}</span>
-                    <span scSelectItemIndicator><svg siCheckIcon></svg></span>
-                  </div>
-                }
+      <div scField orientation="horizontal" class="w-fit">
+        <label scLabel>Rows per page</label>
+        <div
+          scSelect
+          [value]="pagination.pageSize()"
+          (valueChange)="pagination.changePageSize($event)"
+        >
+          <div scSelectTrigger class="w-20">
+            <span scSelectValue></span>
+            <svg scSelectIcon siChevronDownIcon></svg>
+          </div>
+          <ng-template scSelectPortal>
+            <div scSelectPopup>
+              <div scSelectList>
+                <div scSelectGroup>
+                  @for (size of sizes; track size) {
+                    <div scSelectItem [value]="size">
+                      <span scSelectItemText>{{ size }}</span>
+                      <span scSelectItemIndicator><svg siCheckIcon></svg></span>
+                    </div>
+                  }
+                </div>
               </div>
             </div>
-          </div>
-        </ng-template>
+          </ng-template>
+        </div>
       </div>
       <div class="flex items-center gap-2">
         <p scPaginationStatus>

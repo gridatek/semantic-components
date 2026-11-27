@@ -20,6 +20,15 @@ In a field it names the field's control by itself:
 </div>
 ```
 
+A custom control — a select's or a combobox's trigger, a date or time input, a listbox, a rating, a segmented control, a token input, a color picker — registers itself with its field: the label then has no `for` (a `for` ties only to a native control: an input, a select, a textarea), the control is named by it (`aria-labelledby`), and a click on the label focuses the control — a group's first focusable part — without opening it:
+
+```html
+<div scField>
+  <label scLabel>Birthday</label>
+  <div scDateInput [formField]="form.birthday"></div>
+</div>
+```
+
 Around a field, it is a choice card — the whole card picks:
 
 ```html
@@ -45,6 +54,7 @@ Around a field, it is a choice card — the whole card picks:
 
 - A real label: a press on it focuses or toggles its control. In a field it is linked by `for`; around a control, by wrapping it.
 - A field's group of controls (radios, checkboxes) is named by the label's id (`<field id>-label`), not by `for`.
+- A custom control is named the same way, with no `for` at it: a press on the label focuses the control (a group's first focusable part), as a native label's would. A control of yours does it with `ɵregisterFieldControl()` in its constructor.
 - A field inside a label (a choice card) is not a `group`: its texts name the control.
 
 ## Not shadcn's

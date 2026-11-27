@@ -24,7 +24,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -66,7 +65,6 @@ import {
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -102,13 +100,13 @@ import {
           </div>
           @for (select of selects; track select.label) {
             <div scField>
+              <label scLabel>{{ select.label }}</label>
               <div
                 scSelect
                 class="w-full"
                 [items]="select.items"
                 [formField]="transfer[select.key]"
               >
-                <label scSelectLabel>{{ select.label }}</label>
                 <div scSelectTrigger class="w-full">
                   <span scSelectValue></span>
                   <svg scSelectIcon siChevronDownIcon></svg>

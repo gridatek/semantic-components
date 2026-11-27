@@ -22,12 +22,12 @@ export class SelectFieldDemoContainer {
 import {
   ScField,
   ScFieldDescription,
+  ScLabel,
   ScSelect,
   ScSelectIcon,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -36,10 +36,11 @@ import {
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 
-/** A select in a field: its own label part (scSelectLabel), the field’s description. */
+/** A select in a field: named by the field’s label, described by its description. */
 @Component({
   selector: 'app-select-field-demo',
   imports: [
+    ScLabel,
     ScField,
     ScFieldDescription,
     ScSelect,
@@ -47,7 +48,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -59,8 +59,8 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   template: \`
     <div class="w-full max-w-xs">
       <div scField>
+        <label scLabel>Department</label>
         <div scSelect [(value)]="department" [items]="departments">
-          <div scSelectLabel>Department</div>
           <div scSelectTrigger>
             <span scSelectValue></span>
             <svg scSelectIcon siChevronDownIcon></svg>

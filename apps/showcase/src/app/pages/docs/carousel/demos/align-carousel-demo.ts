@@ -2,13 +2,14 @@ import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import {
   ScAspectRatio,
+  ScField,
   ScFrame,
+  ScLabel,
   ScSelect,
   ScSelectIcon,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -36,6 +37,8 @@ type Align = 'start' | 'center' | 'end';
 @Component({
   selector: 'app-align-carousel-demo',
   imports: [
+    ScField,
+    ScLabel,
     NgOptimizedImage,
     ScAspectRatio,
     ScFrame,
@@ -44,7 +47,6 @@ type Align = 'start' | 'center' | 'end';
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -63,24 +65,26 @@ type Align = 'start' | 'center' | 'end';
   ],
   template: `
     <div class="flex w-full flex-col items-center gap-6">
-      <div scSelect class="w-40" [items]="alignments" [(value)]="align">
-        <div scSelectLabel class="sr-only">Align</div>
-        <div scSelectTrigger class="w-full">
-          <span scSelectValue></span>
-          <svg scSelectIcon siChevronDownIcon></svg>
-        </div>
-        <ng-template scSelectPortal>
-          <div scSelectPopup>
-            <div scSelectList>
-              @for (item of alignments; track item.value) {
-                <div scSelectItem [value]="item.value">
-                  <span scSelectItemText>{{ item.label }}</span>
-                  <span scSelectItemIndicator><svg siCheckIcon></svg></span>
-                </div>
-              }
-            </div>
+      <div scField class="w-40">
+        <label class="sr-only" scLabel>Align</label>
+        <div scSelect [items]="alignments" [(value)]="align">
+          <div scSelectTrigger class="w-full">
+            <span scSelectValue></span>
+            <svg scSelectIcon siChevronDownIcon></svg>
           </div>
-        </ng-template>
+          <ng-template scSelectPortal>
+            <div scSelectPopup>
+              <div scSelectList>
+                @for (item of alignments; track item.value) {
+                  <div scSelectItem [value]="item.value">
+                    <span scSelectItemText>{{ item.label }}</span>
+                    <span scSelectItemIndicator><svg siCheckIcon></svg></span>
+                  </div>
+                }
+              </div>
+            </div>
+          </ng-template>
+        </div>
       </div>
       <div
         scCarousel

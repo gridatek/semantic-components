@@ -99,22 +99,24 @@ export async function expectNoA11yViolations(
  * The page's labels tied to no control (WAVE's "Orphaned form label"), as
  * HTML: axe checks from the control's side only — a control with no name —
  * so a `<label>` naming nothing passes it. Tied: by `for` or by wrapping
- * (`label.control`), or named by a custom control's `aria-labelledby`.
- * Left out as axe leaves them: what is inert, disabled, in the Usage's
+ * (`label.control`), or named by a custom control's `aria-labelledby` — a
+ * field's label, which then has no `for`: a `for` tying to nothing (a
+ * custom control, an id not there) fails even so. Left out as axe leaves them: what is inert, disabled, in the Usage's
  * dev-only iframe (another document).
  */
 export async function orphanLabels(page: Page): Promise<string[]> {
   return page.locator('label').evaluateAll((labels) => {
     const referenced = new Set(
       [...document.querySelectorAll('[aria-labelledby]')].flatMap((e) =>
-        (e.getAttribute('aria-labelledby') ?? '').split(/s+/),
+        (e.getAttribute('aria-labelledby') ?? '').split(/\s+/),
       ),
     );
     return (labels as HTMLLabelElement[])
       .filter(
         (label) =>
           !label.control &&
-          !(label.id && referenced.has(label.id)) &&
+          (label.hasAttribute('for') ||
+            !(label.id && referenced.has(label.id))) &&
           !label.closest('[inert], [data-disabled="true"]'),
       )
       .map((label) => label.outerHTML);

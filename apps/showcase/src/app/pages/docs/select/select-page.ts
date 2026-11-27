@@ -55,9 +55,12 @@ interface ScApiRow {
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
-          The select round its label and trigger; the popup in a template,
-          rendered while it is open. Every part is a directive on your element;
-          the icons are yours. It needs a name: its label, or
+          The select round its trigger; the popup in a template, rendered while
+          it is open. Every part is a directive on your element; the icons are
+          yours. It needs a name: its field's label (<code scTypeset
+            >scLabel</code
+          >, before it in a <code scTypeset>scField</code>: a click on it
+          focuses the trigger without opening the list), or
           <code scTypeset>aria-label</code>
           on the trigger.
         </p>
@@ -109,7 +112,7 @@ export default class SelectPage {
   private readonly anatomy = {
     imports: [
       'import {',
-      '  ScSelect, ScSelectLabel, ScSelectTrigger,',
+      '  ScSelect, ScSelectTrigger,',
       '  ScSelectValue, ScSelectIcon, ScSelectPortal,',
       '  ScSelectPopup, ScSelectScrollUpButton, ScSelectList,',
       '  ScSelectGroup, ScSelectGroupLabel, ScSelectItem,',
@@ -119,7 +122,6 @@ export default class SelectPage {
     ].join('\n'),
     markup: [
       '<div scSelect [formField]="form.fruit" [items]="fruits">',
-      '  <div scSelectLabel>Label</div>',
       '  <div scSelectTrigger>',
       '    <span scSelectValue placeholder="…"></span>',
       '    <svg scSelectIcon></svg>',
@@ -156,7 +158,7 @@ export default class SelectPage {
       name: 'ScSelect',
       selector: 'div[scSelect]',
       description:
-        'The select: its value, bound with [formField] or [(value)]. It sets the width (its content’s by default, or a class): the trigger fills it, the list matches the trigger. Its label above its trigger.',
+        'The select: its value, bound with [formField] or [(value)]. It sets the width (its content’s by default, or a class): the trigger fills it, the list matches the trigger. In a field, named by the field’s label.',
       inputs: [
         {
           name: 'value',
@@ -180,13 +182,6 @@ export default class SelectPage {
         },
         this.classRow,
       ],
-    },
-    {
-      name: 'ScSelectLabel',
-      selector: 'div[scSelectLabel], label[scSelectLabel]',
-      description:
-        'Names the trigger and the list. A click on it focuses the trigger without opening the list.',
-      inputs: [this.classRow],
     },
     {
       name: 'ScSelectTrigger',

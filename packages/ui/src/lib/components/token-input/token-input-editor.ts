@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { SC_FIELD } from '../field';
+import { ɵregisterFieldControl } from '../field';
 import { ScTokenInput, type ScTokenInputEditorHost } from './token-input';
 import {
   SC_TOKEN_INPUT_TOKEN,
@@ -95,7 +95,7 @@ const ELEMENT = 1;
 })
 export class ScTokenInputEditor implements ScTokenInputEditorHost {
   private readonly root = inject(ScTokenInput);
-  private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = ɵregisterFieldControl();
   private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {
     optional: true,
   });

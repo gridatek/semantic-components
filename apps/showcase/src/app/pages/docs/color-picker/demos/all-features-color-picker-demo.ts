@@ -9,12 +9,13 @@ import {
   ScColorPickerSwatch,
   ScColorPickerSwatchItem,
   ScColorPickerSwatches,
+  ScField,
+  ScLabel,
   ScSelect,
   ScSelectIcon,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -31,6 +32,8 @@ import {
 @Component({
   selector: 'app-all-features-color-picker-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScColorPicker,
     ScColorPickerArea,
     ScColorPickerEyeDropper,
@@ -44,7 +47,6 @@ import {
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -76,29 +78,28 @@ import {
           <span scColorPickerSwatch></span>
         </div>
         <div class="flex gap-2">
-          <div
-            scSelect
-            class="w-24 shrink-0"
-            [items]="formats"
-            [(value)]="format"
-          >
-            <div scSelectLabel class="sr-only">Format</div>
-            <div scSelectTrigger class="w-full">
-              <span scSelectValue></span>
-              <svg scSelectIcon siChevronDownIcon></svg>
-            </div>
-            <ng-template scSelectPortal>
-              <div scSelectPopup>
-                <div scSelectList>
-                  @for (item of formats; track item.value) {
-                    <div scSelectItem [value]="item.value">
-                      <span scSelectItemText>{{ item.label }}</span>
-                      <span scSelectItemIndicator><svg siCheckIcon></svg></span>
-                    </div>
-                  }
-                </div>
+          <div scField class="w-24 shrink-0">
+            <label class="sr-only" scLabel>Format</label>
+            <div scSelect [items]="formats" [(value)]="format">
+              <div scSelectTrigger class="w-full">
+                <span scSelectValue></span>
+                <svg scSelectIcon siChevronDownIcon></svg>
               </div>
-            </ng-template>
+              <ng-template scSelectPortal>
+                <div scSelectPopup>
+                  <div scSelectList>
+                    @for (item of formats; track item.value) {
+                      <div scSelectItem [value]="item.value">
+                        <span scSelectItemText>{{ item.label }}</span>
+                        <span scSelectItemIndicator
+                          ><svg siCheckIcon></svg
+                        ></span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </ng-template>
+            </div>
           </div>
           <input scColorPickerInput aria-label="Color value" class="min-w-0" />
         </div>

@@ -33,12 +33,15 @@ test('Usage: named by its label; a click picks a theme, the list closes', async 
   await expect(trigger).toBeFocused();
 });
 
-test('Label: a click focuses the trigger without opening the list', async ({
+test("Label: the field's, which names it (no `for`: the trigger is no native control); a click focuses the trigger without opening the list", async ({
   page,
 }) => {
   await openStill(page, demo('groups'));
   const trigger = page.getByRole('combobox', { name: 'Food' });
-  await page.getByText('Food', { exact: true }).click();
+  const label = page.locator('[scField] > label[scLabel]', { hasText: 'Food' });
+  await expect(label).not.toHaveAttribute('for');
+  await expect(page.locator('[scSelectLabel]')).toHaveCount(0);
+  await label.click();
   await expect(trigger).toBeFocused();
   await expect(trigger).toHaveAttribute('aria-expanded', 'false');
 });

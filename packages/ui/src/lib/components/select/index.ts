@@ -5,7 +5,6 @@ export { ScSelectIcon } from './select-icon';
 export { ScSelectItem } from './select-item';
 export { ScSelectItemIndicator } from './select-item-indicator';
 export { ScSelectItemText } from './select-item-text';
-export { ScSelectLabel } from './select-label';
 export { ScSelectList } from './select-list';
 export { ScSelectPopup } from './select-popup';
 export { ScSelectPortal } from './select-portal';

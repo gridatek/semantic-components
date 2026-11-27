@@ -27,7 +27,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -99,7 +98,6 @@ const SETS: readonly (readonly string[])[] = [
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -148,13 +146,13 @@ const SETS: readonly (readonly string[])[] = [
                 ></textarea>
               </div>
               <div scField>
+                <label i18n="@@ai.image.style" scLabel>Style</label>
                 <div
                   scSelect
                   [value]="style()"
                   (valueChange)="style.set($any($event))"
                   [items]="styles"
                 >
-                  <label i18n="@@ai.image.style" scSelectLabel>Style</label>
                   <div scSelectTrigger class="w-full">
                     <span scSelectValue></span>
                     <svg scSelectIcon siChevronDownIcon></svg>

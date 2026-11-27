@@ -137,6 +137,17 @@ test.describe('Rating demos', () => {
     await expect(page.locator('pre')).toContainText('"stars": 1');
   });
 
+  test('its label names it (no `for`: it is no native control); a click on the label focuses it', async ({
+    page,
+  }) => {
+    await page.goto(demo('form-rating-demo'));
+    const label = page.locator('label[scLabel]', { hasText: 'Your rating' });
+    await expect(label).not.toHaveAttribute('for');
+    const rating = page.getByRole('slider', { name: 'Your rating' });
+    await label.click();
+    await expect(rating).toBeFocused();
+  });
+
   test('read-only: an image named by its value text, any score, no focus', async ({
     page,
   }) => {

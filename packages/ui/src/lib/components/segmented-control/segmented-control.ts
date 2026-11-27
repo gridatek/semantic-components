@@ -16,7 +16,7 @@ import {
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
-import { SC_FIELD } from '../field';
+import { ɵregisterFieldControl } from '../field';
 
 /** An item, as its control reaches it. */
 export interface ScSegmentedControlItemRef<T> {
@@ -62,7 +62,7 @@ export class ScSegmentedControl<
 > implements FormValueControl<T | null> {
   private readonly directionality = inject(Directionality);
   private readonly styles = injectStyle().segmentedControl;
-  private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = ɵregisterFieldControl();
   private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {
     optional: true,
   });

@@ -170,3 +170,7 @@ test.describe('My Component Demo', () => {
 ```
 
 Prefer `getByRole()` and aria queries for accessibility-friendly selectors.
+
+### Accessibility checks
+
+Page-level only: `expectNoA11yViolations(page)` (`src/axe.ts`) runs axe on the settled page, then checks what axe doesn't — **orphaned labels** (WAVE's "Orphaned form label"): a `<label>` tied to no control. axe checks from the control's side (a control with no name), so a label naming nothing passed it. Tied means by `for` or by wrapping (`label.control`), or named by a custom control's `aria-labelledby`; a `for` that ties to nothing (a custom control, an id not there) fails even so. What is inert or disabled is left out, as axe leaves it. `ScField` ties its label itself: `for` and the control's `id` for a native control; for a custom one (a select's trigger, a date input, a listbox…), which registers itself with the field, no `for` and the control's `aria-labelledby`. WAVE knows only `for` and wrapping, so it still lists those as orphaned: the check accepts them. The check alone is in `pages/orphan-labels.spec.ts`.

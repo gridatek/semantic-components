@@ -23,6 +23,16 @@ test.describe('Usage', () => {
   });
 });
 
+test('its label names the group (no `for`: a group is no native control); a click on the label focuses its first part', async ({
+  page,
+}) => {
+  await page.goto(demo('date-input-usage'));
+  const label = page.locator('label[scLabel]', { hasText: 'Birthday' });
+  await expect(label).not.toHaveAttribute('for');
+  await label.click();
+  await expect(part(page, 'month')).toBeFocused();
+});
+
 test.describe('Controlled', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(demo('controlled-date-input'));

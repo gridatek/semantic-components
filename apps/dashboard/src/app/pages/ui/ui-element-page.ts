@@ -55,7 +55,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -166,7 +165,6 @@ const TITLES: Record<string, string> = {
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -577,13 +575,13 @@ const TITLES: Record<string, string> = {
         <section scFrame class="flex max-w-sm flex-col gap-4 p-6">
           <h2 i18n="@@ui.element.aFruit" class="font-medium">A fruit</h2>
           <div scField>
+            <label i18n="@@ui.element.fruit" scLabel>Fruit</label>
             <div
               scSelect
               [value]="fruit()"
               (valueChange)="fruit.set($any($event))"
               [items]="fruits"
             >
-              <label i18n="@@ui.element.fruit" scSelectLabel>Fruit</label>
               <div scSelectTrigger class="w-full">
                 <span scSelectValue></span>
                 <svg scSelectIcon siChevronDownIcon></svg>

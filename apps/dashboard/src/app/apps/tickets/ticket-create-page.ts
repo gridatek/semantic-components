@@ -19,7 +19,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -57,7 +56,6 @@ import { TicketsStore } from '../../shared/stores';
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -109,10 +107,10 @@ import { TicketsStore } from '../../shared/stores';
             </div>
             <div class="grid gap-4 sm:grid-cols-2">
               <div scField>
+                <label i18n="@@tickets.ticketCreate.assignTo" scLabel>
+                  Assign To
+                </label>
                 <div scSelect [formField]="ticketForm.agent" [items]="agents">
-                  <div i18n="@@tickets.ticketCreate.assignTo" scSelectLabel>
-                    Assign To
-                  </div>
                   <div scSelectTrigger class="w-full">
                     <span
                       i18n-placeholder="@@tickets.ticketCreate.chooseAnAgent"
@@ -140,14 +138,14 @@ import { TicketsStore } from '../../shared/stores';
                 </div>
               </div>
               <div scField>
+                <label i18n="@@tickets.ticketCreate.status" scLabel>
+                  Status
+                </label>
                 <div
                   scSelect
                   [formField]="ticketForm.status"
                   [items]="statuses"
                 >
-                  <div i18n="@@tickets.ticketCreate.status" scSelectLabel>
-                    Status
-                  </div>
                   <div scSelectTrigger class="w-full">
                     <span scSelectValue></span>
                     <svg scSelectIcon siChevronDownIcon></svg>

@@ -42,7 +42,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -108,7 +107,6 @@ import { injectFormats } from '../../shared/formats';
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -264,6 +262,9 @@ import { injectFormats } from '../../shared/formats';
               </div>
               <div scCardBody class="flex flex-wrap gap-4">
                 <div scField class="w-full max-w-xs">
+                  <label i18n="@@accountSettings.weekStartsOn" scLabel>
+                    Week starts on
+                  </label>
                   <div
                     scSelect
                     [items]="weekStarts()"
@@ -271,9 +272,6 @@ import { injectFormats } from '../../shared/formats';
                     (valueChange)="chooseWeekStart($event)"
                     class="w-full"
                   >
-                    <div i18n="@@accountSettings.weekStartsOn" scSelectLabel>
-                      Week starts on
-                    </div>
                     <div scSelectTrigger>
                       <span scSelectValue></span>
                       <svg scSelectIcon siChevronDownIcon></svg>
@@ -295,6 +293,9 @@ import { injectFormats } from '../../shared/formats';
                   </div>
                 </div>
                 <div scField class="w-full max-w-xs">
+                  <label i18n="@@accountSettings.numbers" scLabel>
+                    Numbers
+                  </label>
                   <div
                     scSelect
                     [items]="numberingSystems"
@@ -302,9 +303,6 @@ import { injectFormats } from '../../shared/formats';
                     (valueChange)="chooseNumberingSystem($event)"
                     class="w-full"
                   >
-                    <div i18n="@@accountSettings.numbers" scSelectLabel>
-                      Numbers
-                    </div>
                     <div scSelectTrigger>
                       <span scSelectValue></span>
                       <svg scSelectIcon siChevronDownIcon></svg>
@@ -329,6 +327,7 @@ import { injectFormats } from '../../shared/formats';
                   </div>
                 </div>
                 <div scField class="w-full max-w-xs">
+                  <label i18n="@@accountSettings.clock" scLabel> Clock </label>
                   <div
                     scSelect
                     [items]="hourCycles()"
@@ -336,9 +335,6 @@ import { injectFormats } from '../../shared/formats';
                     (valueChange)="chooseHourCycle($event)"
                     class="w-full"
                   >
-                    <div i18n="@@accountSettings.clock" scSelectLabel>
-                      Clock
-                    </div>
                     <div scSelectTrigger>
                       <span scSelectValue></span>
                       <svg scSelectIcon siChevronDownIcon></svg>

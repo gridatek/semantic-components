@@ -62,9 +62,9 @@ shadcn's parts, each a directive on your element; the icons and the text are you
 Not a part: put a Select beside it and call `changePageSize()`, which goes back to page 1.
 
 ```html
-<div scSelect [value]="pagination.pageSize()" (valueChange)="pagination.changePageSize($event)">
-  <div scSelectLabel>Rows per page</div>
-  …
+<div scField orientation="horizontal" class="w-fit">
+  <label scLabel>Rows per page</label>
+  <div scSelect [value]="pagination.pageSize()" (valueChange)="pagination.changePageSize($event)">…</div>
 </div>
 ```
 

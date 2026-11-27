@@ -18,7 +18,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -50,7 +49,6 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -79,13 +77,13 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           <div class="grid grid-cols-2 gap-3">
             @for (select of selects; track select.key) {
               <div scField>
+                <label scLabel>{{ select.label }}</label>
                 <div
                   scSelect
                   class="w-full"
                   [items]="select.items"
                   [formField]="bug[select.key]"
                 >
-                  <label scSelectLabel>{{ select.label }}</label>
                   <div scSelectTrigger class="w-full">
                     <span scSelectValue></span>
                     <svg scSelectIcon siChevronDownIcon></svg>

@@ -1,5 +1,6 @@
 import { _IdGenerator } from '@angular/cdk/a11y';
 import {
+  DestroyRef,
   Directive,
   ElementRef,
   InjectionToken,
@@ -7,9 +8,11 @@ import {
   WritableSignal,
   computed,
   contentChild,
+  effect,
   inject,
   input,
   signal,
+  untracked,
 } from '@angular/core';
 import { FormField } from '@angular/forms/signals';
 import { type VariantProps, cva } from 'class-variance-authority';
@@ -43,9 +46,38 @@ export interface ScFieldContext {
    * the field outside it — the scrub area around the label — to reach it.
    */
   control: WritableSignal<unknown>;
+  /**
+   * A custom control named by the field's label (`aria-labelledby`): a
+   * group, a listbox, a slider, a trigger — no native input for its `for`.
+   * The label then has no `for`, and a click on it focuses this element.
+   */
+  customControl: WritableSignal<HTMLElement | null>;
 }
 
 export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
+
+/**
+ * Called in a custom control's constructor: in a field, registers its element
+ * as the field's custom control — named by the field's label, which points
+ * no `for` at it and, clicked, focuses it. `when`: only while it holds (a
+ * combobox trigger beside an input is not the one named). Returns the field.
+ */
+export function ɵregisterFieldControl(
+  when?: () => boolean,
+): ScFieldContext | null {
+  const field = inject(SC_FIELD, { optional: true });
+  if (!field) return null;
+  const element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  const release = () => {
+    if (untracked(field.customControl) === element)
+      field.customControl.set(null);
+  };
+  if (when)
+    effect(() => (when() ? field.customControl.set(element) : release()));
+  else field.customControl.set(element);
+  inject(DestroyRef).onDestroy(release);
+  return field;
+}
 
 /**
  * A checkbox, a radio or a switch: a horizontal field around one lays itself
@@ -85,6 +117,8 @@ export class ScField implements ScFieldContext {
   readonly descriptionIds = signal<string[]>([]);
   /** The control that registered itself (see ScFieldContext). */
   readonly control = signal<unknown>(null);
+  /** The custom control named by its label (see ScFieldContext). */
+  readonly customControl = signal<HTMLElement | null>(null);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScFieldVariants['orientation']>('vertical');
   readonly invalidInput = input<boolean>(false, { alias: 'invalid' });

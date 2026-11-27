@@ -1,12 +1,13 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
+  ScField,
+  ScLabel,
   ScSelect,
   ScSelectGroup,
   ScSelectIcon,
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -19,13 +20,14 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-disabled-select-demo',
   imports: [
+    ScField,
+    ScLabel,
     ScSelect,
     ScSelectGroup,
     ScSelectIcon,
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -37,37 +39,34 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div class="grid w-full max-w-48 gap-6">
       @for (select of selects; track select.label) {
-        <div
-          scSelect
-          [disabled]="select.disabled"
-          [items]="fruits"
-          class="w-full"
-        >
-          <div scSelectLabel>{{ select.label }}</div>
-          <div scSelectTrigger>
-            <span scSelectValue placeholder="Select a fruit"></span>
-            <svg scSelectIcon siChevronDownIcon></svg>
-          </div>
-          <ng-template scSelectPortal>
-            <div scSelectPopup>
-              <div scSelectList>
-                <div scSelectGroup>
-                  @for (item of fruits; track item.value) {
-                    <div
-                      scSelectItem
-                      [value]="item.value"
-                      [disabled]="item.disabled"
-                    >
-                      <span scSelectItemText>{{ item.label }}</span>
-                      <span scSelectItemIndicator>
-                        <svg siCheckIcon></svg>
-                      </span>
-                    </div>
-                  }
+        <div scField class="w-full">
+          <label scLabel>{{ select.label }}</label>
+          <div scSelect [disabled]="select.disabled" [items]="fruits">
+            <div scSelectTrigger>
+              <span scSelectValue placeholder="Select a fruit"></span>
+              <svg scSelectIcon siChevronDownIcon></svg>
+            </div>
+            <ng-template scSelectPortal>
+              <div scSelectPopup>
+                <div scSelectList>
+                  <div scSelectGroup>
+                    @for (item of fruits; track item.value) {
+                      <div
+                        scSelectItem
+                        [value]="item.value"
+                        [disabled]="item.disabled"
+                      >
+                        <span scSelectItemText>{{ item.label }}</span>
+                        <span scSelectItemIndicator>
+                          <svg siCheckIcon></svg>
+                        </span>
+                      </div>
+                    }
+                  </div>
                 </div>
               </div>
-            </div>
-          </ng-template>
+            </ng-template>
+          </div>
         </div>
       }
     </div>

@@ -39,7 +39,6 @@ import {
   ScSelectItem,
   ScSelectItemIndicator,
   ScSelectItemText,
-  ScSelectLabel,
   ScSelectList,
   ScSelectPopup,
   ScSelectPortal,
@@ -99,7 +98,6 @@ import { injectFormats } from '../../shared/formats';
     ScSelectItem,
     ScSelectItemIndicator,
     ScSelectItemText,
-    ScSelectLabel,
     ScSelectList,
     ScSelectPopup,
     ScSelectPortal,
@@ -150,8 +148,8 @@ import { injectFormats } from '../../shared/formats';
               />
             </div>
             <div scField>
+              <label i18n="@@form.selectInput" scLabel>Select Input</label>
               <div scSelect [formField]="inputs.country" [items]="countries">
-                <div i18n="@@form.selectInput" scSelectLabel>Select Input</div>
                 <div scSelectTrigger class="w-full">
                   <span
                     i18n-placeholder="@@form.selectAnOption"

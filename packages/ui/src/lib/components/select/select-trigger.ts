@@ -11,13 +11,13 @@ import {
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { bindInput } from '../../utils';
-import { SC_FIELD } from '../field';
+import { ɵregisterFieldControl } from '../field';
 import { SC_SELECT, SC_SELECT_TRIGGER } from './select-tokens';
 import { openOnTypeahead } from './select-typeahead';
 
 /**
- * The select's button: a combobox showing the value. Named by the select's
- * label (`scSelectLabel`), or by `aria-label`.
+ * The select's button: a combobox showing the value. Named by its field's
+ * label (`scLabel`), or by `aria-label`.
  */
 @Directive({
   selector: 'div[scSelectTrigger], button[scSelectTrigger]',
@@ -44,7 +44,7 @@ export class ScSelectTrigger {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
   private readonly styles = injectStyle().select;
-  private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = ɵregisterFieldControl();
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input(inject(_IdGenerator).getId('sc-select-trigger-'), {

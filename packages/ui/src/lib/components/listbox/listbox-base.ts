@@ -13,7 +13,7 @@ import {
 import { cn } from 'cn';
 import { injectStyle } from '../../config/style';
 import { type ScTargetInput, bindInput } from '../../utils';
-import { SC_FIELD } from '../field';
+import { ɵregisterFieldControl } from '../field';
 
 /** An option part, as its listbox lists them. */
 export interface ScListboxItemHost<T> {
@@ -46,7 +46,7 @@ export interface ScListboxItemHost<T> {
 })
 export abstract class ScListboxBase<T> {
   protected readonly listbox = inject<Listbox<T>>(Listbox);
-  private readonly field = inject(SC_FIELD, { optional: true });
+  private readonly field = ɵregisterFieldControl();
   private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {
     optional: true,
   });

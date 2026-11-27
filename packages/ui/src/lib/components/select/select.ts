@@ -21,7 +21,6 @@ import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { SC_FIELD } from '../field';
 import { ScPortalOutlet } from '../portal-outlet/portal-outlet';
-import { ScSelectLabel } from './select-label';
 import { ScSelectPortal } from './select-portal';
 import {
   SC_SELECT,
@@ -100,8 +99,8 @@ const positions: ConnectedPosition[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ScSelect<T = string> implements FormValueControl<T> {
-  /** In a field: its label and trigger are the field's, spaced as its others. */
-  private readonly inField = !!inject(SC_FIELD, { optional: true });
+  /** In a field: the field's label names it; its trigger spaced as the field's others. */
+  private readonly field = inject(SC_FIELD, { optional: true });
   readonly classInput = input<string>('', { alias: 'class' });
 
   /**
@@ -121,9 +120,10 @@ export class ScSelect<T = string> implements FormValueControl<T> {
   readonly items = input<readonly ScSelectItemData<T>[]>([]);
 
   readonly trigger = contentChild(SC_SELECT_TRIGGER);
-  private readonly label = contentChild(ScSelectLabel);
-  /** The label's id: it names the trigger and the list. */
-  readonly labelId = computed(() => this.label()?.id() ?? null);
+  /** Its field's label's id: it names the trigger and the list. */
+  readonly labelId = computed(() =>
+    this.field ? `${this.field.id()}-label` : null,
+  );
   private readonly portal = contentChild.required(ScSelectPortal);
 
   readonly open = computed(() => this.trigger()?.combobox.expanded() ?? false);
@@ -149,11 +149,8 @@ export class ScSelect<T = string> implements FormValueControl<T> {
 
   private readonly class = computed(() =>
     // It sets the width — its content's by default; the trigger fills it,
-    // the list matches the trigger. Its label above its trigger.
-    cn(
-      this.inField ? 'contents' : 'flex w-fit flex-col gap-2',
-      this.classInput(),
-    ),
+    // the list matches the trigger. In a field, the field's.
+    cn(this.field ? 'contents' : 'flex w-fit flex-col', this.classInput()),
   );
 
   registerLabel(value: T, label: string): void {
