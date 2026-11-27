@@ -512,10 +512,10 @@ const SAMPLE_DATA: User[] = [
               [value]="pagination.pageSize()"
               (valueChange)="pagination.changePageSize($event)"
             >
-              <div scSelectTrigger size="sm" class="w-18">
+              <button scSelectTrigger size="sm" class="w-18">
                 <span scSelectValue></span>
                 <svg scSelectIcon siChevronDownIcon></svg>
-              </div>
+              </button>
               <ng-template scSelectPortal>
                 <div scSelectPopup>
                   <div scSelectList>

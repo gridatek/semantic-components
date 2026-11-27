@@ -111,10 +111,10 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
           <div scField>
             <label scLabel>Country</label>
             <div scSelect [formField]="contactForm.country" class="w-full">
-              <div scSelectTrigger>
+              <button scSelectTrigger>
                 <span scSelectValue>{{ countryLabel() }}</span>
                 <svg scSelectIcon siChevronDownIcon></svg>
-              </div>
+              </button>
               <ng-template scSelectPortal>
                 <div scSelectPopup>
                   <div scSelectList>

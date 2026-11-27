@@ -90,10 +90,10 @@ const ISSUE_ITEMS = ISSUES.map((issue) => ({
             <div scField>
               <label scLabel>Issue</label>
               <div scSelect [formField]="fields().issue" [items]="issues">
-                <div scSelectTrigger>
+                <button scSelectTrigger>
                   <span scSelectValue></span>
                   <svg scSelectIcon siChevronDownIcon></svg>
-                </div>
+                </button>
                 <ng-template scSelectPortal>
                   <div scSelectPopup>
                     <div scSelectList>

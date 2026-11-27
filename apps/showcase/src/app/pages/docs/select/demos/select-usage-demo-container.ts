@@ -55,10 +55,10 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
     <div scField class="w-full max-w-48">
       <label scLabel>Theme</label>
       <div scSelect [(value)]="theme" [items]="themes">
-        <div scSelectTrigger>
+        <button scSelectTrigger>
           <span scSelectValue placeholder="Select a theme"></span>
           <svg scSelectIcon siChevronDownIcon></svg>
-        </div>
+        </button>
         <ng-template scSelectPortal>
           <div scSelectPopup>
             <div scSelectList>

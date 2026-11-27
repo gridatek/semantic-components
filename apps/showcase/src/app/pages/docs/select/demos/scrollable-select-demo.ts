@@ -50,10 +50,10 @@ import {
     <div scField class="w-full max-w-64">
       <label scLabel>Timezone</label>
       <div scSelect [(value)]="zone" [items]="items">
-        <div scSelectTrigger>
+        <button scSelectTrigger>
           <span scSelectValue placeholder="Select a timezone"></span>
           <svg scSelectIcon siChevronDownIcon></svg>
-        </div>
+        </button>
         <ng-template scSelectPortal>
           <div scSelectPopup>
             <div scSelectScrollUpButton>

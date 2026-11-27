@@ -49,10 +49,10 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
         [items]="fruits"
         class="w-full"
       >
-        <div scSelectTrigger>
+        <button scSelectTrigger>
           <span scSelectValue placeholder="Select a fruit"></span>
           <svg scSelectIcon siChevronDownIcon></svg>
-        </div>
+        </button>
         <ng-template scSelectPortal>
           <div scSelectPopup>
             <div scSelectList>

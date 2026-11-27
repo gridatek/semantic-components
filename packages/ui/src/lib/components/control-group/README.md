@@ -93,7 +93,7 @@ The input takes the room left (`flex-1`).
 <div scControlGroup aria-label="Payment">
   <div scControlGroup>
     <div scSelect [formField]="form.currency">
-      <div scSelectTrigger aria-label="Currency">…</div>
+      <button scSelectTrigger aria-label="Currency">…</button>
       …
     </div>
     <input scInput [formField]="form.amount" aria-label="Amount" />

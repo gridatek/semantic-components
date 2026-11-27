@@ -120,7 +120,7 @@ function greeting(): Greeting {
           <span i18n="@@dashboard.refresh" class="sr-only">Refresh</span>
         </button>
         <div scSelect [(value)]="range" [items]="ranges">
-          <div
+          <button
             i18n-aria-label="@@dashboard.range"
             scSelectTrigger
             aria-label="Range"
@@ -129,7 +129,7 @@ function greeting(): Greeting {
             <svg siCalendarDaysIcon></svg>
             <span scSelectValue></span>
             <svg scSelectIcon siChevronDownIcon></svg>
-          </div>
+          </button>
           <ng-template scSelectPortal>
             <div scSelectPopup>
               <div scSelectList>

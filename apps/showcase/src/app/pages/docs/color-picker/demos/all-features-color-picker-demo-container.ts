@@ -101,10 +101,10 @@ import {
           <div scField class="w-24 shrink-0">
             <label class="sr-only" scLabel>Format</label>
             <div scSelect [items]="formats" [(value)]="format">
-              <div scSelectTrigger class="w-full">
+              <button scSelectTrigger class="w-full">
                 <span scSelectValue></span>
                 <svg scSelectIcon siChevronDownIcon></svg>
-              </div>
+              </button>
               <ng-template scSelectPortal>
                 <div scSelectPopup>
                   <div scSelectList>

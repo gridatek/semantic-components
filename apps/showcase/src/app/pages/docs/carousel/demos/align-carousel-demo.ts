@@ -68,10 +68,10 @@ type Align = 'start' | 'center' | 'end';
       <div scField class="w-40">
         <label class="sr-only" scLabel>Align</label>
         <div scSelect [items]="alignments" [(value)]="align">
-          <div scSelectTrigger class="w-full">
+          <button scSelectTrigger class="w-full">
             <span scSelectValue></span>
             <svg scSelectIcon siChevronDownIcon></svg>
-          </div>
+          </button>
           <ng-template scSelectPortal>
             <div scSelectPopup>
               <div scSelectList>

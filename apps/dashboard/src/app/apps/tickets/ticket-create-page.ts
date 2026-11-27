@@ -111,14 +111,14 @@ import { TicketsStore } from '../../shared/stores';
                   Assign To
                 </label>
                 <div scSelect [formField]="ticketForm.agent" [items]="agents">
-                  <div scSelectTrigger class="w-full">
+                  <button scSelectTrigger class="w-full">
                     <span
                       i18n-placeholder="@@tickets.ticketCreate.chooseAnAgent"
                       scSelectValue
                       placeholder="Choose an agent"
                     ></span>
                     <svg scSelectIcon siChevronDownIcon></svg>
-                  </div>
+                  </button>
                   <ng-template scSelectPortal>
                     <div scSelectPopup>
                       <div scSelectList>
@@ -146,10 +146,10 @@ import { TicketsStore } from '../../shared/stores';
                   [formField]="ticketForm.status"
                   [items]="statuses"
                 >
-                  <div scSelectTrigger class="w-full">
+                  <button scSelectTrigger class="w-full">
                     <span scSelectValue></span>
                     <svg scSelectIcon siChevronDownIcon></svg>
-                  </div>
+                  </button>
                   <ng-template scSelectPortal>
                     <div scSelectPopup>
                       <div scSelectList>

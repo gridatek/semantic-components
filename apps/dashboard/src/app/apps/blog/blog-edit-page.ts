@@ -414,14 +414,14 @@ const EMPTY_BODY = '<p></p>';
                   [formField]="postForm.category"
                   [items]="categories"
                 >
-                  <div scSelectTrigger class="w-full">
+                  <button scSelectTrigger class="w-full">
                     <span
                       i18n-placeholder="@@blog.edit.chooseACategory"
                       scSelectValue
                       placeholder="Choose a category"
                     ></span>
                     <svg scSelectIcon siChevronDownIcon></svg>
-                  </div>
+                  </button>
                   <ng-template scSelectPortal>
                     <div scSelectPopup>
                       <div scSelectList>

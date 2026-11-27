@@ -68,10 +68,10 @@ import {
       <div scControlGroup aria-label="Payment">
         <div scControlGroup>
           <div scSelect [formField]="paymentForm.currency">
-            <div scSelectTrigger class="font-mono" aria-label="Currency">
+            <button scSelectTrigger class="font-mono" aria-label="Currency">
               <span scSelectValue>{{ paymentForm.currency().value() }}</span>
               <svg scSelectIcon siChevronDownIcon></svg>
-            </div>
+            </button>
             <ng-template scSelectPortal>
               <div scSelectPopup class="min-w-36">
                 <div scSelectList>

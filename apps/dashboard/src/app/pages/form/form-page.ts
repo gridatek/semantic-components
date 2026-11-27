@@ -150,14 +150,14 @@ import { injectFormats } from '../../shared/formats';
             <div scField>
               <label i18n="@@form.selectInput" scLabel>Select Input</label>
               <div scSelect [formField]="inputs.country" [items]="countries">
-                <div scSelectTrigger class="w-full">
+                <button scSelectTrigger class="w-full">
                   <span
                     i18n-placeholder="@@form.selectAnOption"
                     scSelectValue
                     placeholder="Select an option"
                   ></span>
                   <svg scSelectIcon siChevronDownIcon></svg>
-                </div>
+                </button>
                 <ng-template scSelectPortal>
                   <div scSelectPopup>
                     <div scSelectList>

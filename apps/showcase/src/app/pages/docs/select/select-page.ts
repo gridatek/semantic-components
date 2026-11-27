@@ -122,10 +122,10 @@ export default class SelectPage {
     ].join('\n'),
     markup: [
       '<div scSelect [formField]="form.fruit" [items]="fruits">',
-      '  <div scSelectTrigger>',
+      '  <button scSelectTrigger>',
       '    <span scSelectValue placeholder="…"></span>',
       '    <svg scSelectIcon></svg>',
-      '  </div>',
+      '  </button>',
       '  <ng-template scSelectPortal>',
       '    <div scSelectPopup>',
       '      <div scSelectScrollUpButton><svg></svg></div>',
@@ -185,9 +185,9 @@ export default class SelectPage {
     },
     {
       name: 'ScSelectTrigger',
-      selector: 'div[scSelectTrigger], button[scSelectTrigger]',
+      selector: 'button[scSelectTrigger]',
       description:
-        'The combobox showing the value. In a field, described by its description and errors.',
+        'The combobox showing the value: a native button, which the field’s label ties to by for (a click on the label focuses it, without opening the list). In a field, the field’s id; described by its description and errors.',
       inputs: [
         {
           name: 'size',

@@ -71,10 +71,10 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               <div scField>
                 <label scLabel>Month</label>
                 <div scSelect [(value)]="month" [items]="months">
-                  <div scSelectTrigger>
+                  <button scSelectTrigger>
                     <span scSelectValue placeholder="MM"></span>
                     <svg scSelectIcon siChevronDownIcon></svg>
-                  </div>
+                  </button>
                   <ng-template scSelectPortal>
                     <div scSelectPopup>
                       <div scSelectList>
@@ -94,10 +94,10 @@ import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
               <div scField>
                 <label scLabel>Year</label>
                 <div scSelect [(value)]="year" [items]="years">
-                  <div scSelectTrigger>
+                  <button scSelectTrigger>
                     <span scSelectValue placeholder="YYYY"></span>
                     <svg scSelectIcon siChevronDownIcon></svg>
-                  </div>
+                  </button>
                   <ng-template scSelectPortal>
                     <div scSelectPopup>
                       <div scSelectList>

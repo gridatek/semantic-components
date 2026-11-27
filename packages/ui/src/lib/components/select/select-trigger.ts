@@ -16,16 +16,18 @@ import { SC_SELECT, SC_SELECT_TRIGGER } from './select-tokens';
 import { openOnTypeahead } from './select-typeahead';
 
 /**
- * The select's button: a combobox showing the value. Named by its field's
- * label (`scLabel`), or by `aria-label`.
+ * The select's button — a native one, which the field's label (`scLabel`)
+ * ties to by `for` — a combobox showing the value. Named by that label, or
+ * by `aria-label`. In a field, the field's id.
  */
 @Directive({
-  selector: 'div[scSelectTrigger], button[scSelectTrigger]',
+  selector: 'button[scSelectTrigger]',
   hostDirectives: [Combobox],
   providers: [{ provide: SC_SELECT_TRIGGER, useExisting: ScSelectTrigger }],
   host: {
     // Read by the control group and the input group (its focus ring).
     'data-slot': 'select-trigger',
+    type: 'button',
     '[id]': 'id()',
     '[attr.aria-labelledby]': 'select.labelId()',
     '[attr.aria-describedby]': 'describedBy()',
@@ -52,7 +54,8 @@ export class ScSelectTrigger {
   });
   readonly size = input<'default' | 'sm'>('default');
 
-  private readonly id = computed(() => this.idInput());
+  /** In a field, the field's: its label's `for`. */
+  private readonly id = computed(() => this.field?.id() ?? this.idInput());
   /** In a field, its description and errors. */
   private readonly describedBy = computed(
     () => this.field?.descriptionIds().join(' ') || null,

@@ -92,14 +92,14 @@ import {
                 [items]="roles"
                 [formField]="invite.role"
               >
-                <div
+                <button
                   scSelectTrigger
                   class="w-full"
                   [attr.aria-label]="'Role ' + (i + 1)"
                 >
                   <span scSelectValue></span>
                   <svg scSelectIcon siChevronDownIcon></svg>
-                </div>
+                </button>
                 <ng-template scSelectPortal>
                   <div scSelectPopup>
                     <div scSelectList>

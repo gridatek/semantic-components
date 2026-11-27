@@ -93,10 +93,10 @@ import {
               [items]="currencies"
               class="w-full"
             >
-              <div scSelectTrigger class="w-full">
+              <button scSelectTrigger class="w-full">
                 <span scSelectValue></span>
                 <svg scSelectIcon siChevronDownIcon></svg>
-              </div>
+              </button>
               <ng-template scSelectPortal>
                 <div scSelectPopup>
                   <div scSelectList>

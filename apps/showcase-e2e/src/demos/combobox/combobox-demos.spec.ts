@@ -269,10 +269,20 @@ test('Popup: a trigger opens a dialog with the search; a pick closes it, focus b
   await page.goto(demo('popup'));
   const trigger = page.getByRole('button', { name: /^Country/ });
   await expect(trigger).toHaveText(/Algeria/);
-  // Named by the field's label and the value it shows; the label focuses it.
+  // Named by the field's label and the value it shows; the label, tied to it
+  // by `for` (WAVE reads it so), focuses it without opening it.
   await expect(trigger).toHaveAccessibleName('Country Algeria');
-  await page.getByText('Country', { exact: true }).click();
+  const label = page.locator('[scField] > label[scLabel]', {
+    hasText: 'Country',
+  });
+  expect(
+    await label.evaluate(
+      (l: HTMLLabelElement) => l.control?.getAttribute('data-slot') ?? null,
+    ),
+  ).toBe('combobox-trigger');
+  await label.click();
   await expect(trigger).toBeFocused();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
   await expect(trigger).toHaveAttribute('aria-haspopup', 'dialog');
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: 'Country' });

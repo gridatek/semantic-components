@@ -33,20 +33,27 @@ test('Usage: named by its label; a click picks a theme, the list closes', async 
   await expect(trigger).toBeFocused();
 });
 
-test("Label: the field's, which names it (no `for`: the trigger is no native control); a click focuses the trigger without opening the list", async ({
+test("Label: the field's, tied to the trigger — a native button — by `for`; a click on it focuses the trigger without opening the list", async ({
   page,
 }) => {
   await openStill(page, demo('groups'));
   const trigger = page.getByRole('combobox', { name: 'Food' });
   const label = page.locator('[scField] > label[scLabel]', { hasText: 'Food' });
-  await expect(label).not.toHaveAttribute('for');
+  await expect(trigger).toHaveJSProperty('tagName', 'BUTTON');
+  await expect(trigger).toHaveAttribute('type', 'button');
+  // Tied as WAVE reads it: the label's control is the trigger.
+  expect(
+    await label.evaluate(
+      (l: HTMLLabelElement) => l.control?.getAttribute('data-slot') ?? null,
+    ),
+  ).toBe('select-trigger');
   await expect(page.locator('[scSelectLabel]')).toHaveCount(0);
   await label.click();
   await expect(trigger).toBeFocused();
   await expect(trigger).toHaveAttribute('aria-expanded', 'false');
 });
 
-test('Keyboard: Enter opens, the arrows move, Enter picks; type-ahead; Escape closes', async ({
+test('Keyboard: Enter opens, the arrows move, Enter picks; type-ahead; Escape closes; Space opens too', async ({
   page,
 }) => {
   await openStill(page, demo('groups'));
@@ -70,6 +77,12 @@ test('Keyboard: Enter opens, the arrows move, Enter picks; type-ahead; Escape cl
   await press(page, 'Escape');
   await expect(trigger).toHaveAttribute('aria-expanded', 'false');
   await expect(trigger).toHaveText('Blueberry');
+  // Space opens it, and it stays open: the click a button fires as Space
+  // comes up doesn't close it again.
+  await press(page, ' ');
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+  await page.waitForTimeout(300); // eslint-disable-line playwright/no-wait-for-timeout
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true');
 });
 
 test('The list opens below, as wide as the trigger: the trigger stays in sight', async ({

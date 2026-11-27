@@ -107,10 +107,10 @@ import {
                 [items]="select.items"
                 [formField]="transfer[select.key]"
               >
-                <div scSelectTrigger class="w-full">
+                <button scSelectTrigger class="w-full">
                   <span scSelectValue></span>
                   <svg scSelectIcon siChevronDownIcon></svg>
-                </div>
+                </button>
                 <ng-template scSelectPortal>
                   <div scSelectPopup>
                     <div scSelectList>

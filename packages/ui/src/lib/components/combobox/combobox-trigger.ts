@@ -26,6 +26,7 @@ import { ScComboboxBase } from './combobox-base';
   host: {
     'data-slot': 'combobox-trigger',
     type: 'button',
+    '[attr.id]': 'fieldId()',
     '[attr.tabindex]': 'besideInput() ? -1 : null',
     '[attr.aria-haspopup]': 'besideInput() ? null : "dialog"',
     '[attr.aria-expanded]': 'besideInput() ? null : root.open()',
@@ -51,6 +52,13 @@ export class ScComboboxTrigger {
 
   /** The input is the field: this is the chevron at its end. */
   private readonly besideInput = computed(() => !!this.root.field());
+  /** Its field's, when named by it: the label's `for`. */
+  private field: ReturnType<typeof ɵregisterFieldControl> = null;
+  private readonly fieldId = computed(() =>
+    !this.besideInput() && this.root.labelId() && this.field
+      ? this.field.id()
+      : null,
+  );
 
   private readonly class = computed(() =>
     cn(
@@ -100,7 +108,9 @@ export class ScComboboxTrigger {
     // another control: the phone input's country picker): no `for` at it —
     // a label's click would press the button — and a click on the label
     // focuses it without opening it.
-    ɵregisterFieldControl(() => !this.besideInput() && !!this.root.labelId());
+    this.field = ɵregisterFieldControl(
+      () => !this.besideInput() && !!this.root.labelId(),
+    );
     inject(DestroyRef).onDestroy(() => this.root.triggerElement.set(undefined));
   }
 

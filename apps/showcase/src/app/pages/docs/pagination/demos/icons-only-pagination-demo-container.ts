@@ -94,10 +94,10 @@ import {
           [value]="pagination.pageSize()"
           (valueChange)="pagination.changePageSize($event)"
         >
-          <div scSelectTrigger class="w-20">
+          <button scSelectTrigger class="w-20">
             <span scSelectValue></span>
             <svg scSelectIcon siChevronDownIcon></svg>
-          </div>
+          </button>
           <ng-template scSelectPortal>
             <div scSelectPopup>
               <div scSelectList>

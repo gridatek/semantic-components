@@ -45,7 +45,7 @@ import {
       [value]="i18n.locale.id"
       (valueChange)="i18n.setLocale($any($event))"
     >
-      <div
+      <button
         scSelectTrigger
         size="sm"
         aria-label="Language"
@@ -61,7 +61,7 @@ import {
           {{ i18n.locale.label }}
         </span>
         <svg scSelectIcon siChevronDownIcon></svg>
-      </div>
+      </button>
       <ng-template scSelectPortal>
         <div scSelectPopup>
           <div scSelectList>

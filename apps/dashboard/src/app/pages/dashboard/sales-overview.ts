@@ -106,7 +106,7 @@ import { injectFormats } from '../../shared/formats';
             (valueChange)="choose($event)"
             [items]="periods()"
           >
-            <div
+            <button
               i18n-aria-label="@@dashboard.salesOverview.period"
               scSelectTrigger
               size="sm"
@@ -115,7 +115,7 @@ import { injectFormats } from '../../shared/formats';
             >
               <span scSelectValue></span>
               <svg scSelectIcon siChevronDownIcon></svg>
-            </div>
+            </button>
             <ng-template scSelectPortal>
               <div scSelectPopup>
                 <div scSelectList>

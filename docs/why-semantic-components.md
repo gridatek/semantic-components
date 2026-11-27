@@ -93,10 +93,10 @@ The Select is a good example of how far this goes:
 <div scField>
   <label scLabel>Label</label>
   <div scSelect [formField]="form.label" [items]="items">
-    <div scSelectTrigger>
+    <button scSelectTrigger>
       <span scSelectValue placeholder="Select a label"></span>
       <svg scSelectIcon siChevronDownIcon></svg>
-    </div>
+    </button>
     <ng-template scSelectPortal>
       <div scSelectPopup>
         <div scSelectList>
@@ -118,7 +118,7 @@ The Select is a good example of how far this goes:
 - **You own the structure** — the trigger layout, the item layout, the icons, the display value
 - **You extend freely** — want a custom empty state in the list? A header above the items? Just add it
 - **The library handles behavior** — keyboard navigation, selection state, ARIA attributes — you handle the markup
-- **One label, the field's** — `<label scLabel>` names every control in a `scField`: a native one by `for`, a custom one (a select's trigger, a date input, a listbox) by `aria-labelledby`, with no `for` and a click that focuses it
+- **One label, the field's** — `<label scLabel>` names every control in a `scField`: a native one by `for`, a custom one by `aria-labelledby` and a click that focuses it — the select's trigger a native button, tied by `for` too
 
 This also composes across components. A button can be a drawer trigger, a tooltip trigger, and an icon button all at once:
 

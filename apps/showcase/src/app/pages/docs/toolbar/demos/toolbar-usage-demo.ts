@@ -80,10 +80,15 @@ import {
       </div>
       <div scToolbarSeparator></div>
       <div scSelect [(value)]="font" [items]="fonts">
-        <div scToolbarWidget scSelectTrigger aria-label="Font" class="h-8 w-32">
+        <button
+          scToolbarWidget
+          scSelectTrigger
+          aria-label="Font"
+          class="h-8 w-32"
+        >
           <span scSelectValue></span>
           <svg scSelectIcon siChevronsUpDownIcon></svg>
-        </div>
+        </button>
         <ng-template scSelectPortal>
           <div scSelectPopup>
             <div scSelectList>

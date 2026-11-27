@@ -8,10 +8,10 @@ A choice among a short list of options — a trigger showing the value, the opti
 <div scField class="w-48">
   <label scLabel>Theme</label>
   <div scSelect [formField]="form.theme" [items]="themes">
-    <div scSelectTrigger>
+    <button scSelectTrigger>
       <span scSelectValue placeholder="Select a theme"></span>
       <svg scSelectIcon siChevronDownIcon></svg>
-    </div>
+    </button>
     <ng-template scSelectPortal>
       <div scSelectPopup>
         <div scSelectList>
@@ -36,10 +36,10 @@ Base UI's parts, each a directive on your element:
 
 ```html
 <div scSelect>
-  <div scSelectTrigger>
+  <button scSelectTrigger>
     <span scSelectValue></span>
     <svg scSelectIcon></svg>
-  </div>
+  </button>
   <ng-template scSelectPortal>
     <div scSelectPopup>
       <div scSelectScrollUpButton><svg></svg></div>
@@ -59,7 +59,7 @@ Base UI's parts, each a directive on your element:
 </div>
 ```
 
-The root sets the width — its content's by default, or yours (`class="w-48"`); the trigger fills it and the list matches the trigger. In a field it is `display: contents`: the field sets the width, and its label sits above the trigger. It needs a name: its field's label (`<label scLabel>`, before it in the `scField`), or `aria-label` on the trigger. The label has no `for` — the trigger is no native control — and names the trigger and the list (`aria-labelledby`); a click on it focuses the trigger without opening the list.
+The root sets the width — its content's by default, or yours (`class="w-48"`); the trigger fills it and the list matches the trigger. In a field it is `display: contents`: the field sets the width, and its label sits above the trigger. It needs a name: its field's label (`<label scLabel>`, before it in the `scField`), or `aria-label` on the trigger. The trigger is a native `<button>`: the label ties to it by `for` (the trigger takes the field's id) and names the trigger and the list (`aria-labelledby`); a click on it focuses the trigger without opening the list.
 
 ## Positioning
 
@@ -71,20 +71,20 @@ Focus stays on the trigger (APG select-only combobox). Enter, Space or the arrow
 
 ## API reference
 
-| Part                                                 | Selector                                          | Inputs                                                                                                                                                                                                                            |
-| ---------------------------------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScSelect`                                           | `div[scSelect]`                                   | `value` (`[formField]` or `[(value)]`; any type — a string, a number, an object; `''` or `null`: none), `items` (`{ value, label }[]`: labels before the list has opened), `disabled`, `readonly`, `required`, `invalid`, `class` |
-| `ScSelectTrigger`                                    | `div[scSelectTrigger]`, `button[scSelectTrigger]` | `size` (`'default'` 32px, `'sm'` 28px), `id`, `class` — in a field, described by its description and errors                                                                                                                       |
-| `ScSelectValue`                                      | `span[scSelectValue]`                             | `placeholder`, `class` — its content, if any, shows the value your way                                                                                                                                                            |
-| `ScSelectIcon`                                       | `svg[scSelectIcon]`                               | `class` — flips while the list is open                                                                                                                                                                                            |
-| `ScSelectPortal`                                     | `ng-template[scSelectPortal]`                     | —                                                                                                                                                                                                                                 |
-| `ScSelectPopup`                                      | `div[scSelectPopup]`                              | `class` — the scroll container                                                                                                                                                                                                    |
-| `ScSelectScrollUpButton`, `ScSelectScrollDownButton` | `div[…]`                                          | `class` — shown while there is more; hovering scrolls; `aria-hidden`                                                                                                                                                              |
-| `ScSelectList`                                       | `div[scSelectList]`                               | `class` — the listbox                                                                                                                                                                                                             |
-| `ScSelectGroup`, `ScSelectGroupLabel`                | `div[…]`                                          | `class` — a `group` named by its label                                                                                                                                                                                            |
-| `ScSelectItem`                                       | `div[scSelectItem]`                               | `value`, `label`, `disabled`, `class`                                                                                                                                                                                             |
-| `ScSelectItemText`, `ScSelectItemIndicator`          | `span[…]`                                         | `class` — the indicator shows on the selected option only                                                                                                                                                                         |
-| `ScSelectSeparator`                                  | `div[scSelectSeparator]`                          | `class`                                                                                                                                                                                                                           |
+| Part                                                 | Selector                      | Inputs                                                                                                                                                                                                                            |
+| ---------------------------------------------------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScSelect`                                           | `div[scSelect]`               | `value` (`[formField]` or `[(value)]`; any type — a string, a number, an object; `''` or `null`: none), `items` (`{ value, label }[]`: labels before the list has opened), `disabled`, `readonly`, `required`, `invalid`, `class` |
+| `ScSelectTrigger`                                    | `button[scSelectTrigger]`     | `size` (`'default'` 32px, `'sm'` 28px), `id`, `class` — a native button (`type="button"`); in a field, the field's id (its label's `for`), described by its description and errors                                                |
+| `ScSelectValue`                                      | `span[scSelectValue]`         | `placeholder`, `class` — its content, if any, shows the value your way                                                                                                                                                            |
+| `ScSelectIcon`                                       | `svg[scSelectIcon]`           | `class` — flips while the list is open                                                                                                                                                                                            |
+| `ScSelectPortal`                                     | `ng-template[scSelectPortal]` | —                                                                                                                                                                                                                                 |
+| `ScSelectPopup`                                      | `div[scSelectPopup]`          | `class` — the scroll container                                                                                                                                                                                                    |
+| `ScSelectScrollUpButton`, `ScSelectScrollDownButton` | `div[…]`                      | `class` — shown while there is more; hovering scrolls; `aria-hidden`                                                                                                                                                              |
+| `ScSelectList`                                       | `div[scSelectList]`           | `class` — the listbox                                                                                                                                                                                                             |
+| `ScSelectGroup`, `ScSelectGroupLabel`                | `div[…]`                      | `class` — a `group` named by its label                                                                                                                                                                                            |
+| `ScSelectItem`                                       | `div[scSelectItem]`           | `value`, `label`, `disabled`, `class`                                                                                                                                                                                             |
+| `ScSelectItemText`, `ScSelectItemIndicator`          | `span[…]`                     | `class` — the indicator shows on the selected option only                                                                                                                                                                         |
+| `ScSelectSeparator`                                  | `div[scSelectSeparator]`      | `class`                                                                                                                                                                                                                           |
 
 Every part's classes are the style's (`injectStyle().select`): shadcn's Select on Radix, in each style. Its parts and behaviour follow Base UI.
 

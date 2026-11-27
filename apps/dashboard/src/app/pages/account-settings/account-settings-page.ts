@@ -272,10 +272,10 @@ import { injectFormats } from '../../shared/formats';
                     (valueChange)="chooseWeekStart($event)"
                     class="w-full"
                   >
-                    <div scSelectTrigger>
+                    <button scSelectTrigger>
                       <span scSelectValue></span>
                       <svg scSelectIcon siChevronDownIcon></svg>
-                    </div>
+                    </button>
                     <ng-template scSelectPortal>
                       <div scSelectPopup>
                         <div scSelectList>
@@ -303,10 +303,10 @@ import { injectFormats } from '../../shared/formats';
                     (valueChange)="chooseNumberingSystem($event)"
                     class="w-full"
                   >
-                    <div scSelectTrigger>
+                    <button scSelectTrigger>
                       <span scSelectValue></span>
                       <svg scSelectIcon siChevronDownIcon></svg>
-                    </div>
+                    </button>
                     <ng-template scSelectPortal>
                       <div scSelectPopup>
                         <div scSelectList>
@@ -335,10 +335,10 @@ import { injectFormats } from '../../shared/formats';
                     (valueChange)="chooseHourCycle($event)"
                     class="w-full"
                   >
-                    <div scSelectTrigger>
+                    <button scSelectTrigger>
                       <span scSelectValue></span>
                       <svg scSelectIcon siChevronDownIcon></svg>
-                    </div>
+                    </button>
                     <ng-template scSelectPortal>
                       <div scSelectPopup>
                         <div scSelectList>
