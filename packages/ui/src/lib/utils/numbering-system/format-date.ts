@@ -1,0 +1,35 @@
+import type { ScCalendarValue } from '../../components/calendar/calendar';
+
+/**
+ * A calendar's value as written, with `Intl`: a day (`dateStyle: 'medium'`
+ * unless `options` say), days as a list in order, a range as one span
+ * (`formatRange`: "Oct 12 – 18, 2026"; a start alone, a day) — nothing, `''`.
+ * `injectFormatDate()` gives it the user's locale and digits.
+ */
+export function formatDate(
+  locale: string,
+  value: ScCalendarValue,
+  options: Intl.DateTimeFormatOptions = { dateStyle: 'medium' },
+): string {
+  if (!value) return '';
+  const format = new Intl.DateTimeFormat(locale, options);
+  if (value instanceof Temporal.PlainDate) return format.format(value);
+  if (Array.isArray(value)) {
+    const days = [...(value as readonly Temporal.PlainDate[])].sort(
+      Temporal.PlainDate.compare,
+    );
+    return new Intl.ListFormat(locale, { type: 'conjunction' }).format(
+      days.map((day) => format.format(day)),
+    );
+  }
+  const { from, to } = value as Exclude<
+    ScCalendarValue,
+    Temporal.PlainDate | readonly Temporal.PlainDate[] | null
+  >;
+  if (!from) return '';
+  if (!to) return format.format(from);
+  // Typed ends can be out of order (marked by the field): the earlier first.
+  return Temporal.PlainDate.compare(from, to) <= 0
+    ? format.formatRange(from, to)
+    : format.formatRange(to, from);
+}

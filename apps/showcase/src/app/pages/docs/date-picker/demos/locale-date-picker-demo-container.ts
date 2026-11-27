@@ -35,6 +35,7 @@ import {
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
+  injectFormatDate,
 } from '@semantic-components/ui';
 import {
   SiCalendarIcon,
@@ -64,13 +65,7 @@ import {
     SiChevronRightIcon,
   ],
   template: \`
-    <div
-      scDatePicker
-      #dp="scDatePicker"
-      [format]="{ dateStyle: 'long' }"
-      [(value)]="date"
-      class="w-64"
-    >
+    <div scDatePicker #dp="scDatePicker" [(value)]="date" class="w-64">
       <div scPopoverProvider [origin]="anchor" alignment="start">
         <div scInputGroup cdkOverlayOrigin #anchor="cdkOverlayOrigin">
           <div scDateInput aria-label="Date d’arrivée"></div>
@@ -107,7 +102,7 @@ import {
       </div>
     </div>
     <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ dp.text() || 'Nothing picked.' }}
+      {{ formatDate(date(), { dateStyle: 'long' }) || 'Nothing picked.' }}
     </p>
   \`,
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
@@ -115,6 +110,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class LocaleDatePickerDemo {
+  // The value as written: Intl's, in the user's digits — or your own format.
+  private readonly formatDate = injectFormatDate();
   private readonly date = signal<ScCalendarValue>(
     Temporal.PlainDate.from('2026-10-14'),
   );

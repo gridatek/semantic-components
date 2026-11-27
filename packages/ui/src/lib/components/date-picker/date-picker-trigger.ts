@@ -11,7 +11,8 @@ import { ScDatePicker } from './date-picker';
 /**
  * Opens the calendar: the picker's value, as written — in the input look
  * (the select trigger's). Write its icon and text
- * (`{{ dp.text() || 'Pick a date' }}`); `data-placeholder` while empty.
+ * (`{{ formatDate(date()) || 'Pick a date' }}`, `injectFormatDate()` or your
+ * own); `data-placeholder` while empty.
  * In an input group, with a typed input: an icon button (`variant`,
  * `size`) — name it.
  */

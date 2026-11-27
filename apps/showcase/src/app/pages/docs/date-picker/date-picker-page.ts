@@ -163,7 +163,7 @@ export default class DatePickerPage {
       name: 'ScDatePicker',
       selector: 'div[scDatePicker]',
       description:
-        "Holds the value: [(value)] (a day, or days — the calendar's); mode ('single', 'multiple'); format (Intl options, dateStyle medium, in LOCALE_ID); minDate, maxDate, unavailable; closeOnPick (a whole value closes it; default true); confirm (picks a draft until Apply); a [formField] (disabled, invalid, touched). exportAs scDatePicker: text() (the value as written), draft(), pick(), apply(), cancel().",
+        "Holds the value: [(value)] (a day, or days — the calendar's); mode ('single', 'multiple'); minDate, maxDate, unavailable; closeOnPick (a whole value closes it; default true); confirm (picks a draft until Apply); a [formField] (disabled, invalid, touched). exportAs scDatePicker: hasValue(), draft(), pick(), apply(), cancel(). The trigger writes the value: injectFormatDate() (the user's locale and digits), or your own format.",
     },
     {
       name: 'ScDatePickerTrigger',

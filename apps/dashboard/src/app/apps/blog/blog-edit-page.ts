@@ -66,6 +66,7 @@ import {
   ScToolbarSeparator,
   ScToolbarWidget,
   ScToolbarWidgetGroup,
+  injectFormatDate,
 } from '@semantic-components/ui';
 import {
   ScEditor,
@@ -511,7 +512,7 @@ const EMPTY_BODY = '<p></p>';
                   class="w-full"
                 >
                   <svg siCalendarIcon></svg>
-                  <span>{{ dp.text() || t.pickADate }}</span>
+                  <span>{{ formatDate(date()) || t.pickADate }}</span>
                 </button>
                 <ng-template scPopoverPortal>
                   <div
@@ -570,6 +571,8 @@ const EMPTY_BODY = '<p></p>';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogEditPage {
+  // The value as written: Intl's, in the user's digits — or your own format.
+  private readonly formatDate = injectFormatDate();
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     blogEdit: $localize`:@@blog.edit.blogEdit:Blog Edit`,

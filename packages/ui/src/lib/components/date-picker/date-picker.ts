@@ -16,7 +16,6 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { injectDisplayLocale } from '../../utils';
 import type { ScCalendarMode, ScCalendarValue } from '../calendar';
 import {
   SC_DATE_INPUT_HOST,
@@ -28,8 +27,8 @@ import { ScDatePickerTrigger } from './date-picker-trigger';
 /**
  * A date — or several — picked in a calendar in a popover, or typed
  * (`scDateInput`), or a preset (`scDatePickerPreset`). A range is the Date
- * Range Picker's. Its value is the calendar's; `text()` is it
- * as written in the app's language. A `[formField]`. It closes on a pick (on
+ * Range Picker's. Its value is the calendar's; your trigger writes it
+ * (`injectFormatDate()`, or your own format). A `[formField]`. It closes on a pick (on
  * a whole range), focus back on its trigger — or, `confirm`, picks are a
  * draft until `scDatePickerApply`.
  */
@@ -52,10 +51,6 @@ export class ScDatePicker
   readonly value = model<ScCalendarValue>(null);
   /** A day, or several days (a range: the Date Range Picker). */
   readonly mode = input<Exclude<ScCalendarMode, 'range'>>('single');
-  /** How a day is written; `dateStyle: 'medium'` by default. */
-  readonly format = input<Intl.DateTimeFormatOptions>({ dateStyle: 'medium' });
-  /** What it shows: the locale, in the user's numbering system. */
-  private readonly displayLocale = injectDisplayLocale();
   // TODO(angular): minDate / maxDate go once Signal Forms' min() / max()
   // take Temporal dates — the bounds then from the schema with a form, and
   // [min] / [max] without one, as every control's ("Bounds Come From the
@@ -96,28 +91,11 @@ export class ScDatePicker
   /** The draft can be applied: a day, or days. */
   readonly canApply = computed(() => this.isDone(this.draft(), true));
 
-  private readonly formatter = computed(
-    () => new Intl.DateTimeFormat(this.displayLocale(), this.format()),
-  );
-
-  /** The value, as written: a day, or a list of days — or empty. */
-  readonly text = computed(() => {
+  /** A day, or days, picked — your trigger's text from it: `injectFormatDate()`, or your own. */
+  readonly hasValue = computed(() => {
     const value = this.value();
-    const formatter = this.formatter();
-    if (!value) return '';
-    if (value instanceof Temporal.PlainDate) return formatter.format(value);
-    if (Array.isArray(value)) {
-      const days = [...(value as readonly Temporal.PlainDate[])].sort(
-        Temporal.PlainDate.compare,
-      );
-      return new Intl.ListFormat(this.displayLocale(), {
-        type: 'conjunction',
-      }).format(days.map((day) => formatter.format(day)));
-    }
-    return '';
+    return Array.isArray(value) ? value.length > 0 : !!value;
   });
-
-  readonly hasValue = computed(() => this.text() !== '');
 
   private readonly class = computed(() =>
     cn('flex w-full items-center gap-2', this.classInput()),

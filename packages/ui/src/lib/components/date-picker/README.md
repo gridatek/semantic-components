@@ -1,13 +1,13 @@
 # Date Picker
 
-A day or several days, picked in a calendar in a popover — or typed, or a preset. Its value is the calendar's; `text()` is that value written in the app's language with `Intl` (several days as a list). A range is the [Date Range Picker](../date-range-picker/README.md)'s. A `[formField]`. It closes when a pick is done, and focus goes back to its trigger — or, `confirm`, picks are a draft until Apply.
+A day or several days, picked in a calendar in a popover — or typed, or a preset. Its value is the calendar's; your trigger writes it — with `injectFormatDate()` (the user's locale and digits, several days as a list) or your own format. A range is the [Date Range Picker](../date-range-picker/README.md)'s. A `[formField]`. It closes when a pick is done, and focus goes back to its trigger — or, `confirm`, picks are a draft until Apply.
 
 ## Architecture
 
 ```
-div[scDatePicker] (mode, [(value)] / [formField], format,
+div[scDatePicker] (mode, [(value)] / [formField],
 │                  minDate, maxDate, unavailable, confirm, disabled)
-│  text() · hasValue() · draft() · canApply() · pick(value) · apply() · cancel() · canPick(date)
+│  hasValue() · draft() · canApply() · pick(value) · apply() · cancel() · canPick(date)
 ├── div[scDateInput]  — typed part by part
 └── div[scPopoverProvider]
     ├── button[scDatePickerTrigger]  — your icon and words
@@ -30,7 +30,7 @@ The calendar is the [calendar](../calendar/README.md), written in full: its head
   <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
     <button scDatePickerTrigger #trigger="scDatePickerTrigger">
       <svg siCalendarIcon></svg>
-      <span>{{ dp.text() || 'Pick a date' }}</span>
+      <span>{{ formatDate(date()) || 'Pick a date' }}</span>
     </button>
     <ng-template scPopoverPortal>
       <div scPopover class="w-auto p-0" aria-label="Choose a date">
@@ -69,6 +69,23 @@ Typed, in a field — the input and the trigger in an input group; there the tri
 </div>
 ```
 
+## Writing the value
+
+The picker writes no text: your trigger does, from the value. `injectFormatDate()` writes it as the parts write theirs — the user's locale and digits, live; a day `dateStyle: 'medium'` unless your options say, several days as a list:
+
+```typescript
+import { injectFormatDate } from '@semantic-components/ui';
+
+private readonly date = signal<ScCalendarValue>(null);
+private readonly formatDate = injectFormatDate();
+```
+
+```html
+<span>{{ formatDate(date()) || 'Pick a date' }}</span> <span>{{ formatDate(date(), { dateStyle: 'long' }) || 'Pick a date' }}</span>
+```
+
+Or your own format: any function of the value (`date()?.toLocaleString(…)`, a date library).
+
 ## Closing
 
 The same in every picker: each pick moves on to the next part — a day: one pick (several days: it never closes by itself), and the popover closes once the value is whole, focus back on the trigger. `[closeOnPick]="false"`: the picks still move on, but it stays open until Enter (keeping what is picked), Escape or a click outside. The arrow keys only browse. With `confirm`, nothing closes by itself: Apply (or Enter) keeps what is picked; Cancel, Escape or a click outside leave the value as it was before it opened.
@@ -77,17 +94,16 @@ The same in every picker: each pick moves on to the next part — a day: one pic
 
 ### ScDatePicker — `div[scDatePicker]`, `#dp="scDatePicker"`
 
-| Input                              | Type                                        | Default                   |
-| ---------------------------------- | ------------------------------------------- | ------------------------- |
-| `value`                            | `ScCalendarValue` (model)                   | `null`                    |
-| `mode`                             | `'single' \| 'multiple'`                    | `'single'`                |
-| `format`                           | `Intl.DateTimeFormatOptions`                | `{ dateStyle: 'medium' }` |
-| `minDate` / `maxDate`              | `Temporal.PlainDate \| undefined`           | —                         |
-| `unavailable`                      | `(date: Temporal.PlainDate) => boolean`     | `() => false`             |
-| `closeOnPick`                      | `boolean` — a whole value closes it         | `true`                    |
-| `confirm`                          | `boolean` — picks are a draft until applied | `false`                   |
-| `disabled` / `invalid` / `touched` | `boolean`                                   | `false`                   |
-| `class`                            | `string`                                    | `''`                      |
+| Input                              | Type                                        | Default       |
+| ---------------------------------- | ------------------------------------------- | ------------- |
+| `value`                            | `ScCalendarValue` (model)                   | `null`        |
+| `mode`                             | `'single' \| 'multiple'`                    | `'single'`    |
+| `minDate` / `maxDate`              | `Temporal.PlainDate \| undefined`           | —             |
+| `unavailable`                      | `(date: Temporal.PlainDate) => boolean`     | `() => false` |
+| `closeOnPick`                      | `boolean` — a whole value closes it         | `true`        |
+| `confirm`                          | `boolean` — picks are a draft until applied | `false`       |
+| `disabled` / `invalid` / `touched` | `boolean`                                   | `false`       |
+| `class`                            | `string`                                    | `''`          |
 
 | Output  | When                                                                              |
 | ------- | --------------------------------------------------------------------------------- |
@@ -95,8 +111,7 @@ The same in every picker: each pick moves on to the next part — a day: one pic
 
 | Member          | Description                                                                                      |
 | --------------- | ------------------------------------------------------------------------------------------------ |
-| `text()`        | The value as written: a day, or a list (`Intl.ListFormat`) — or `''`                             |
-| `hasValue()`    | `text()` is not empty                                                                            |
+| `hasValue()`    | A day, or days, picked (the trigger's `data-placeholder` while not)                              |
 | `showInvalid()` | Invalid, once touched                                                                            |
 | `draft()`       | What the calendar shows: the value — or, `confirm`, the picks not yet applied                    |
 | `canApply()`    | The draft is a day, or days                                                                      |

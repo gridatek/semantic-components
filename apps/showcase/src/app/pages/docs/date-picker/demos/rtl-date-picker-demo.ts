@@ -11,6 +11,7 @@ import {
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
+  injectFormatDate,
 } from '@semantic-components/ui';
 import {
   SiCalendarIcon,
@@ -50,7 +51,7 @@ import {
             class="w-64"
           >
             <svg siCalendarIcon></svg>
-            <span>{{ dp.text() || 'اختر تاريخًا' }}</span>
+            <span>{{ formatDate(date()) || 'اختر تاريخًا' }}</span>
           </button>
           <ng-template scPopoverPortal>
             <div scPopover class="w-auto p-0" aria-label="اختر تاريخًا">
@@ -80,7 +81,7 @@ import {
         </div>
       </div>
       <p class="text-muted-foreground text-sm" data-testid="picked">
-        {{ dp.text() || 'لم يُختر شيء.' }}
+        {{ formatDate(date()) || 'لم يُختر شيء.' }}
       </p>
     </div>
   `,
@@ -89,5 +90,7 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlDatePickerDemo {
+  // The value as written: Intl's, in the user's digits — or your own format.
+  private readonly formatDate = injectFormatDate();
   private readonly date = signal<ScCalendarValue>(null);
 }

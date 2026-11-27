@@ -56,11 +56,11 @@ import { TypedDateRangePickerDemoContainer } from './demos/typed-date-range-pick
       <section class="space-y-4">
         <h2 scTypeset appToc>Anatomy</h2>
         <p>
-          The picker holds a trigger — alone, showing
-          <code scTypeset>text()</code>, or an icon beside your
-          <code scTypeset>scDateRangeInput</code> in an input group — and the
-          popover: your Calendar in range mode, and if you want presets beside
-          it, the duration and Apply / Cancel under it.
+          The picker holds a trigger — alone, showing the value as you write it
+          (<code scTypeset>injectFormatDate()</code>, or your own format), or an
+          icon beside your <code scTypeset>scDateRangeInput</code> in an input
+          group — and the popover: your Calendar in range mode, and if you want
+          presets beside it, the duration and Apply / Cancel under it.
         </p>
         <app-anatomy [imports]="anatomy.imports" [markup]="anatomy.markup" />
       </section>
@@ -157,7 +157,7 @@ export default class DateRangePickerPage {
       '<div scDateRangePicker #dp="scDateRangePicker" [(value)]="range">',
       '  <div scPopoverProvider [origin]="trigger.overlayOrigin">',
       '    <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">',
-      "      …icon… {{ dp.text() || 'Pick dates' }}",
+      "      …icon… {{ formatDate(range()) || 'Pick dates' }}",
       '    </button>',
       '    <ng-template scPopoverPortal>',
       '      <div scPopover aria-label="Choose dates">',
@@ -181,7 +181,7 @@ export default class DateRangePickerPage {
       name: 'ScDateRangePicker',
       selector: 'div[scDateRangePicker]',
       description:
-        'The root: { from, to }. exportAs scDateRangePicker: text(), hasValue(), draft(), canApply(), days(), nights(), pick(value), apply(), cancel(), canPick(date).',
+        'The root: { from, to }. exportAs scDateRangePicker: hasValue(), draft(), canApply(), days(), nights(), pick(value), apply(), cancel(), canPick(date).',
     },
     {
       name: 'ScDateRangePickerTrigger',
@@ -228,12 +228,6 @@ export default class DateRangePickerPage {
       type: 'ScCalendarRange | null',
       default: 'null',
       description: 'Two-way, or [formField]: { from, to }.',
-    },
-    {
-      name: 'format',
-      type: 'Intl.DateTimeFormatOptions',
-      default: "{ dateStyle: 'medium' }",
-      description: 'How text() writes a day.',
     },
     {
       name: 'minDate, maxDate',

@@ -1,8 +1,10 @@
 import { LOCALE_ID, type Signal, computed, inject } from '@angular/core';
+import type { ScCalendarValue } from '../../components/calendar/calendar';
 import {
   definePreference,
   injectPreference,
 } from '../../components/preferences/preference';
+import { formatDate } from './format-date';
 
 /**
  * How digits are written, as Unicode names it — `Intl`'s `numberingSystem`,
@@ -106,4 +108,22 @@ export function injectFormatNumber(): ScFormatNumber {
     }
     return format.format(value);
   };
+}
+
+/** Writes a calendar's value as shown: `Intl.DateTimeFormat`'s options. */
+export type ScFormatDate = (
+  value: ScCalendarValue,
+  options?: Intl.DateTimeFormatOptions,
+) => string;
+
+/**
+ * A picker's value as written, for your trigger — in the user's numbering
+ * system, live: `{{ formatDate(date()) || 'Pick a date' }}`. A day
+ * (`dateStyle: 'medium'` unless `options` say), days as a list in order,
+ * a range as one span ("Oct 12 – 18, 2026") — nothing, `''`. Your own
+ * format: your options, or your own function instead.
+ */
+export function injectFormatDate(): ScFormatDate {
+  const locale = injectDisplayLocale();
+  return (value, options) => formatDate(locale(), value, options);
 }

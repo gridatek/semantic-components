@@ -73,6 +73,7 @@ import {
   ScTooltipPortal,
   ScTooltipProvider,
   ScTooltipTrigger,
+  injectFormatDate,
 } from '@semantic-components/ui';
 import {
   SiArrowRightIcon,
@@ -793,7 +794,7 @@ const TITLES: Record<string, string> = {
                 class="w-full"
               >
                 <svg siCalendarIcon></svg>
-                <span>{{ dp.text() || t.pickADate }}</span>
+                <span>{{ formatDate(date()) || t.pickADate }}</span>
               </button>
               <ng-template scPopoverPortal>
                 <div
@@ -838,6 +839,8 @@ const TITLES: Record<string, string> = {
   encapsulation: ViewEncapsulation.None,
 })
 export class UiElementPage {
+  // The value as written: Intl's, in the user's digits — or your own format.
+  private readonly formatDate = injectFormatDate();
   /** In the user's numbering system. */
   private readonly countOf = count;
 

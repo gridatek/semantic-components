@@ -11,6 +11,7 @@ import {
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
+  injectFormatDate,
 } from '@semantic-components/ui';
 import {
   SiCalendarIcon,
@@ -48,7 +49,7 @@ import {
       <div scPopoverProvider [origin]="trigger.overlayOrigin" alignment="start">
         <button scDateRangePickerTrigger #trigger="scDateRangePickerTrigger">
           <svg siCalendarIcon></svg>
-          <span>{{ dp.text() || 'اختر التواريخ' }}</span>
+          <span>{{ formatDate(range()) || 'اختر التواريخ' }}</span>
         </button>
         <ng-template scPopoverPortal>
           <div scPopover class="w-auto p-0" aria-label="اختر التواريخ">
@@ -78,7 +79,7 @@ import {
       </div>
     </div>
     <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ dp.text() || 'لم يُختر شيء.' }}
+      {{ formatDate(range()) || 'لم يُختر شيء.' }}
     </p>
   `,
   providers: [{ provide: LOCALE_ID, useValue: 'ar' }],
@@ -86,6 +87,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class RtlDateRangePickerDemo {
+  // The value as written: Intl's, in the user's digits — or your own format.
+  private readonly formatDate = injectFormatDate();
   private readonly range = signal<ScCalendarRange | null>({
     from: Temporal.PlainDate.from('2026-11-02'),
     to: Temporal.PlainDate.from('2026-11-06'),

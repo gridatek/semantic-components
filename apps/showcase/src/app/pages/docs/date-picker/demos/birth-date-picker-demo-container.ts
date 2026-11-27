@@ -38,6 +38,7 @@ import {
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
+  injectFormatDate,
 } from '@semantic-components/ui';
 import {
   SiCalendarIcon,
@@ -142,13 +143,15 @@ import {
       <p scFieldDescription>You must be 18 or older.</p>
     </div>
     <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ dp.text() || 'Nothing picked.' }}
+      {{ formatDate(date()) || 'Nothing picked.' }}
     </p>
   \`,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class BirthDatePickerDemo {
+  // The value as written: Intl's, in the user's digits — or your own format.
+  private readonly formatDate = injectFormatDate();
   /** 18 years old today, at the latest. */
   private readonly adult = Temporal.Now.plainDateISO().subtract({ years: 18 });
   private readonly date = signal<ScCalendarValue>(null);

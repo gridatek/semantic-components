@@ -16,6 +16,7 @@ import {
   ScPopover,
   ScPopoverPortal,
   ScPopoverProvider,
+  injectFormatDate,
 } from '@semantic-components/ui';
 import {
   SiCalendarIcon,
@@ -95,13 +96,15 @@ import {
       </div>
     </div>
     <p class="text-muted-foreground text-sm" data-testid="picked">
-      {{ dp.text() || 'Nothing picked.' }}
+      {{ formatDate(range()) || 'Nothing picked.' }}
     </p>
   `,
   host: { class: 'flex w-full flex-col items-center gap-3' },
   encapsulation: ViewEncapsulation.None,
 })
 export class TypedDateRangePickerDemo {
+  // The value as written: Intl's, in the user's digits — or your own format.
+  private readonly formatDate = injectFormatDate();
   private readonly range = signal<ScCalendarRange | null>({
     from: Temporal.PlainDate.from('2026-10-14'),
     to: Temporal.PlainDate.from('2026-10-18'),

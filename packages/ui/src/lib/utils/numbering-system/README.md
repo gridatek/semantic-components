@@ -24,22 +24,25 @@ Show each choice by its own digits (`new Intl.NumberFormat('en-u-nu-arab').forma
 ## Your own numbers and dates, as the parts write theirs
 
 ```typescript
-import { injectDisplayLocale, injectFormatNumber } from '@semantic-components/ui';
+import { injectDisplayLocale, injectFormatDate, injectFormatNumber } from '@semantic-components/ui';
 
 readonly formatNumber = injectFormatNumber();
+readonly formatDate = injectFormatDate();
 readonly locale = injectDisplayLocale();
 ```
 
 ```html
 <span>{{ formatNumber(total) }}</span>
 <span>{{ formatNumber(year, { useGrouping: false }) }}</span>
+<span>{{ formatDate(date()) || 'Pick a date' }}</span>
 <time>{{ due().toLocaleString(locale(), { dateStyle: 'long' }) }}</time>
 ```
 
 - `injectFormatNumber()` — `formatNumber(value, options?)`: `Intl.NumberFormat`'s options; one formatter per locale and options, cached.
+- `injectFormatDate()` — `formatDate(value, options?)`: a calendar's value (a picker's) as written — a day (`dateStyle: 'medium'` unless the options say), days as a list in order, a range as one span (`formatRange`); `''` for none.
 - `injectDisplayLocale()` — the locale to show with: `LOCALE_ID`, in the user's numbering system once they chose one (`en-u-nu-arab`). Give it to `Intl` or `toLocaleString` for anything else.
 
-Both follow a change of the user's choice at once, in a template. Angular's pipes (`DecimalPipe`, `DatePipe`) read `LOCALE_ID` once, at start: an app that keeps them reloads the page when the user changes it (the cookie is read again).
+All three follow a change of the user's choice at once, in a template. Angular's pipes (`DecimalPipe`, `DatePipe`) read `LOCALE_ID` once, at start: an app that keeps them reloads the page when the user changes it (the cookie is read again).
 
 ## In the parts
 

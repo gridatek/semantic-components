@@ -16,7 +16,6 @@ import {
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
-import { injectDisplayLocale } from '../../utils';
 import type { ScCalendarRange, ScCalendarValue } from '../calendar';
 import {
   SC_DATE_INPUT_HOST,
@@ -28,8 +27,8 @@ import { ScDateRangePickerTrigger } from './date-range-picker-trigger';
 /**
  * A range of days — picked in a calendar in a popover (two clicks: the
  * start, then the end), or typed in your `scDateRangeInput`, or a preset.
- * Its value is `{ from, to }`; `text()` is it as one span in the app's
- * language ("Oct 12 – 18, 2026"). A `[formField]`. It closes once whole, focus
+ * Its value is `{ from, to }`; your trigger writes it (`injectFormatDate()`:
+ * one span, "Oct 12 – 18, 2026" — or your own format). A `[formField]`. It closes once whole, focus
  * back on its trigger — or, `confirm`, picks are a draft until
  * `scDateRangePickerApply`.
  */
@@ -47,14 +46,9 @@ import { ScDateRangePickerTrigger } from './date-range-picker-trigger';
 export class ScDateRangePicker
   implements FormValueControl<ScCalendarRange | null>, ScDateInputHost
 {
-  /** What it shows: the locale, in the user's numbering system. */
-  private readonly displayLocale = injectDisplayLocale();
-
   readonly classInput = input<string>('', { alias: 'class' });
   /** The range: `[formField]` or `[(value)]` — `{ from, to }`, or `null`. */
   readonly value = model<ScCalendarRange | null>(null);
-  /** How a day is written in `text()`; `dateStyle: 'medium'` by default. */
-  readonly format = input<Intl.DateTimeFormatOptions>({ dateStyle: 'medium' });
   // TODO(angular): the bounds go once Signal Forms' min() / max() take
   // Temporal dates (docs/todo.md, "Date bounds from the form").
   /** The first day that can be picked — give `minDate()` to the calendar. */
@@ -93,23 +87,8 @@ export class ScDateRangePicker
     () => !!this.draft()?.from && !!this.draft()?.to,
   );
 
-  private readonly formatter = computed(
-    () => new Intl.DateTimeFormat(this.displayLocale(), this.format()),
-  );
-
-  /** The value, as one span ("Oct 12 – 18, 2026") — or a start alone, or empty. */
-  readonly text = computed(() => {
-    const value = this.value();
-    if (!value?.from) return '';
-    const formatter = this.formatter();
-    const { from, to } = value;
-    if (!to) return formatter.format(from);
-    // Typed ends can be out of order (marked by the field): the earlier first.
-    return Temporal.PlainDate.compare(from, to) <= 0
-      ? formatter.formatRange(from, to)
-      : formatter.formatRange(to, from);
-  });
-  readonly hasValue = computed(() => this.text() !== '');
+  /** A start picked — your trigger's text from the value: `injectFormatDate()` ("Oct 12 – 18, 2026"), or your own. */
+  readonly hasValue = computed(() => !!this.value()?.from);
 
   /** The draft's days, both ends counted (a weekend: 2); 0 until both are there. */
   readonly days = computed(() => {

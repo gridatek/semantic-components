@@ -6,9 +6,9 @@ A range of days — picked in a calendar (the start, then the end), typed in a [
 
 ```
 div[scDateRangePicker] ([(value)] / [formField], format, minDate, maxDate, unavailable, closeOnPick, confirm, disabled)
-│  text() · hasValue() · draft() · canApply() · days() · nights() · pick(value) · apply() · cancel() · canPick(date)
+│  hasValue() · draft() · canApply() · days() · nights() · pick(value) · apply() · cancel() · canPick(date)
 └── div[scPopoverProvider]
-    ├── button[scDateRangePickerTrigger]                 — alone: your icon and text()
+    ├── button[scDateRangePickerTrigger]                 — alone: your icon and the value as written
     │   (or div[scInputGroup] > div[scDateRangeInput] + an icon trigger — typed)
     └── ng-template[scPopoverPortal]
         └── div[scPopover]
@@ -21,7 +21,7 @@ div[scDateRangePicker] ([(value)] / [formField], format, minDate, maxDate, unava
 
 ## The value
 
-`ScCalendarRange | null` — `{ from, to }` — through `[formField]` or `[(value)]`. `text()` writes it as one span (`Intl.DateTimeFormat#formatRange`: "Oct 12 – 18, 2026"); a start alone, as a day.
+`ScCalendarRange | null` — `{ from, to }` — through `[formField]` or `[(value)]`. Your trigger writes it: `injectFormatDate()` gives one span (`Intl.DateTimeFormat#formatRange`: "Oct 12 – 18, 2026"), a start alone as a day, in the user's locale and digits — or write your own format.
 
 ## Picking
 
