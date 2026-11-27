@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScHeader,
   ScHeaderMobileMenu,
@@ -17,6 +18,7 @@ import {
 @Component({
   selector: 'app-push-header-demo',
   imports: [
+    RouterLink,
     ScHeader,
     ScNavigationMenu,
     ScNavigationMenuItem,
@@ -36,7 +38,10 @@ import {
       aria-label="Acme, push"
       #header="scHeader"
     >
-      <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
+      <a
+        class="flex items-center gap-2 font-semibold [&>svg]:size-6"
+        routerLink="."
+      >
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
@@ -46,7 +51,7 @@ import {
             <li scNavigationMenuItem>
               <a
                 scNavigationMenuLink
-                href="#"
+                routerLink="."
                 [active]="link === current()"
                 (click)="go($event, link)"
               >
@@ -70,7 +75,7 @@ import {
           @for (link of links; track link) {
             <a
               scNavigationMenuLink
-              href="#"
+              routerLink="."
               [active]="link === current()"
               (click)="go($event, link)"
             >

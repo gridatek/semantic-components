@@ -23,6 +23,7 @@ export class SkeletonSidebarDemoContainer {
   inject,
   signal,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScSidebar,
@@ -49,6 +50,7 @@ import {
 @Component({
   selector: 'app-skeleton-sidebar-demo',
   imports: [
+    RouterLink,
     ScButton,
     ScSidebar,
     ScSidebarContent,
@@ -85,7 +87,7 @@ import {
                   <li scSidebarMenuItem>
                     <a
                       scSidebarMenuButton
-                      href="#"
+                      routerLink="."
                       (click)="$event.preventDefault()"
                     >
                       <svg siFrameIcon></svg>
@@ -95,7 +97,7 @@ import {
                   <li scSidebarMenuItem>
                     <a
                       scSidebarMenuButton
-                      href="#"
+                      routerLink="."
                       (click)="$event.preventDefault()"
                     >
                       <svg siChartPieIcon></svg>
@@ -105,7 +107,7 @@ import {
                   <li scSidebarMenuItem>
                     <a
                       scSidebarMenuButton
-                      href="#"
+                      routerLink="."
                       (click)="$event.preventDefault()"
                     >
                       <svg siMapIcon></svg>

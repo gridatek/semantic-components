@@ -16,6 +16,7 @@ import { UsageCode } from '../../../../components/usage-code/usage-code';
 })
 export class HeaderUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScHeader,
   ScHeaderMobileMenu,
@@ -35,6 +36,7 @@ import {
 @Component({
   selector: 'app-header-usage-demo',
   imports: [
+    RouterLink,
     ScHeader,
     ScHeaderMobileMenu,
     ScHeaderMobileMenuToggle,
@@ -49,7 +51,10 @@ import {
   ],
   template: \`
     <header scHeader class="border-b-0" #header="scHeader">
-      <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
+      <a
+        class="flex items-center gap-2 font-semibold [&>svg]:size-6"
+        routerLink="."
+      >
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
@@ -60,7 +65,7 @@ import {
             <li scNavigationMenuItem>
               <a
                 scNavigationMenuLink
-                href="#"
+                routerLink="."
                 [active]="link === current()"
                 (click)="go($event, link)"
               >
@@ -72,7 +77,7 @@ import {
       </nav>
 
       <div class="ms-auto flex items-center gap-2">
-        <a scLink variant="button" href="#">Get started</a>
+        <a scLink variant="button" routerLink=".">Get started</a>
         <button scHeaderMobileMenuToggle class="-me-2">
           @if (header.mobileMenuOpen()) {
             <svg siXIcon></svg>
@@ -89,7 +94,7 @@ import {
           @for (link of links; track link) {
             <a
               scNavigationMenuLink
-              href="#"
+              routerLink="."
               [active]="link === current()"
               (click)="go($event, link)"
             >

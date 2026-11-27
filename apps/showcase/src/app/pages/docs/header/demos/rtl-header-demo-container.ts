@@ -20,6 +20,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
 export class RtlHeaderDemoContainer {
   private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScHeader,
   ScHeaderMobileMenu,
@@ -38,6 +39,7 @@ import {
 @Component({
   selector: 'app-rtl-header-demo',
   imports: [
+    RouterLink,
     Dir,
     ScHeader,
     ScNavigationMenu,
@@ -55,7 +57,7 @@ import {
       <header scHeader class="border-b-0" aria-label="أكمي" #header="scHeader">
         <a
           class="flex items-center gap-2 font-semibold [&>svg]:size-6"
-          href="#"
+          routerLink="."
         >
           <svg siGalleryVerticalEndIcon></svg>
           أكمي
@@ -66,7 +68,7 @@ import {
               <li scNavigationMenuItem>
                 <a
                   scNavigationMenuLink
-                  href="#"
+                  routerLink="."
                   [active]="link === current()"
                   (click)="go($event, link)"
                 >
@@ -90,7 +92,7 @@ import {
             @for (link of links; track link) {
               <a
                 scNavigationMenuLink
-                href="#"
+                routerLink="."
                 [active]="link === current()"
                 (click)="go($event, link)"
               >

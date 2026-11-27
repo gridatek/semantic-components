@@ -5,6 +5,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScAvatar,
   ScAvatarFallback,
@@ -57,6 +58,7 @@ import {
 @Component({
   selector: 'app-shadcn',
   imports: [
+    RouterLink,
     ScFrame,
     ScAvatar,
     ScAvatarFallback,
@@ -158,7 +160,7 @@ import {
                         >Password</label
                       >
                       <a
-                        href="#"
+                        routerLink="."
                         class="text-primary text-sm font-medium underline-offset-4 hover:underline"
                         i18n="@@shadcn.login.forgot"
                       >
@@ -185,7 +187,7 @@ import {
                   >
                     Don't have an account?
                     <a
-                      href="#"
+                      routerLink="."
                       class="text-primary font-medium underline-offset-4 hover:underline"
                     >
                       Sign up
@@ -1032,7 +1034,7 @@ import {
                         deployed v2.4.1 to production
                       </p>
                       <a
-                        href="#"
+                        routerLink="."
                         class="text-primary text-sm underline-offset-4 hover:underline"
                         i18n="@@shadcn.event.viewDetails"
                       >
@@ -1071,7 +1073,7 @@ import {
                         commented on PR #94 — Dark mode
                       </p>
                       <a
-                        href="#"
+                        routerLink="."
                         class="text-primary text-sm underline-offset-4 hover:underline"
                         i18n="@@shadcn.event.viewDetails"
                       >
@@ -1110,7 +1112,7 @@ import {
                         merged feat/auth-refresh → main
                       </p>
                       <a
-                        href="#"
+                        routerLink="."
                         class="text-primary text-sm underline-offset-4 hover:underline"
                         i18n="@@shadcn.event.viewDetails"
                       >
@@ -1153,7 +1155,7 @@ import {
                         triggered alert on API p95 latency spike
                       </p>
                       <a
-                        href="#"
+                        routerLink="."
                         class="text-primary text-sm underline-offset-4 hover:underline"
                         i18n="@@shadcn.event.viewDetails"
                       >

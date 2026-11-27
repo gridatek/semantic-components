@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScFrame,
   ScMarker,
@@ -11,6 +12,7 @@ import { SiGitBranchIcon, SiRotateCcwIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-links-buttons-marker-demo',
   imports: [
+    RouterLink,
     ScFrame,
     ScMarker,
     ScMarkerIcon,
@@ -20,7 +22,7 @@ import { SiGitBranchIcon, SiRotateCcwIcon } from '@semantic-icons/lucide-icons';
   ],
   template: `
     <div class="flex w-full max-w-sm flex-col gap-8 py-6">
-      <a scMarker href="#links-and-buttons">
+      <a scMarker routerLink="." fragment="links-and-buttons">
         <span scMarkerIcon><svg siGitBranchIcon></svg></span>
         <span scMarkerContent>View the pull request</span>
       </a>

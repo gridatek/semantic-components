@@ -1,5 +1,6 @@
 import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScItem,
@@ -19,6 +20,7 @@ import {
 @Component({
   selector: 'app-rtl-item-demo',
   imports: [
+    RouterLink,
     Dir,
     ScButton,
     ScItem,
@@ -43,7 +45,7 @@ import {
           <button scButton size="sm" variant="outline">مراجعة</button>
         </div>
       </div>
-      <a scItem variant="outline" size="sm" href="#rtl">
+      <a scItem variant="outline" size="sm" routerLink="." fragment="rtl">
         <div scItemMedia><svg siBadgeCheckIcon class="size-5"></svg></div>
         <div scItemBody>
           <div scItemTitle>تم التحقق من ملفك الشخصي.</div>

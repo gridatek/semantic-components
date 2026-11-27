@@ -19,6 +19,7 @@ import { StepsTaskDemo } from './steps-task-demo';
 })
 export class StepsTaskDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScCollapsible,
   ScCollapsiblePanel,
@@ -37,6 +38,7 @@ import { SiFileTextIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-steps-task-demo',
   imports: [
+    RouterLink,
     ScCollapsible,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
@@ -65,7 +67,7 @@ import { SiFileTextIcon, SiSearchIcon } from '@semantic-icons/lucide-icons';
                 <span scTraceIcon><svg siSearchIcon></svg></span>
                 <span scTraceTitle>Searched for app/page.tsx</span>
               </span>
-              <a href="#app/page.tsx">
+              <a routerLink="." fragment="app/page.tsx">
                 <span scTraceLine>
                   <span scTraceIcon><svg siFileTextIcon></svg></span>
                   <span scTraceTitle>Read app/page.tsx</span>

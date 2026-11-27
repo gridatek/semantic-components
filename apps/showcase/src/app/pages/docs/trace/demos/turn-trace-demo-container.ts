@@ -19,6 +19,7 @@ import { TurnTraceDemo } from './turn-trace-demo';
 })
 export class TurnTraceDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScCollapsible,
   ScCollapsiblePanel,
@@ -48,6 +49,7 @@ import {
 @Component({
   selector: 'app-turn-trace-demo',
   imports: [
+    RouterLink,
     ScCollapsible,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
@@ -149,7 +151,7 @@ import {
             </div>
             <p>Node is installed and pnpm is not. Reading the docs config.</p>
             <div scTrace>
-              <a href="#whole-turn">
+              <a routerLink="." fragment="whole-turn">
                 <span scTraceLine>
                   <span scTraceIcon><svg siFileTextIcon></svg></span>
                   <span scTraceTitle

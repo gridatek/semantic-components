@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScLink,
@@ -29,6 +30,7 @@ import {
 @Component({
   selector: 'app-toolbar-usage-demo',
   imports: [
+    RouterLink,
     ScButton,
     ScLink,
     ScSelect,
@@ -98,7 +100,7 @@ import {
         </ng-template>
       </div>
       <div scToolbarSeparator></div>
-      <a scToolbarWidget scLink variant="link" size="sm" href="#"
+      <a scToolbarWidget scLink variant="link" size="sm" routerLink="."
         >Edited 51m ago</a
       >
     </div>

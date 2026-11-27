@@ -17,6 +17,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
 })
 export class SubMenuSidebarDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScSidebar,
   ScSidebarContent,
@@ -39,6 +40,7 @@ import { SiPanelLeftIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-sub-menu-sidebar-demo',
   imports: [
+    RouterLink,
     ScSidebar,
     ScSidebarContent,
     ScSidebarGroup,
@@ -67,7 +69,7 @@ import { SiPanelLeftIcon } from '@semantic-icons/lucide-icons';
                   <li scSidebarMenuItem>
                     <a
                       scSidebarMenuButton
-                      href="#"
+                      routerLink="."
                       (click)="$event.preventDefault()"
                     >
                       <span>{{ section.title }}</span>
@@ -77,7 +79,7 @@ import { SiPanelLeftIcon } from '@semantic-icons/lucide-icons';
                         <li scSidebarMenuSubItem>
                           <a
                             scSidebarMenuSubButton
-                            href="#"
+                            routerLink="."
                             (click)="$event.preventDefault()"
                           >
                             <span>{{ page }}</span>

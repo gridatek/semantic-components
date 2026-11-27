@@ -15,6 +15,7 @@ import { ItemUsageDemo } from './item-usage-demo';
 })
 export class ItemUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScItem,
@@ -32,6 +33,7 @@ import {
 @Component({
   selector: 'app-item-usage-demo',
   imports: [
+    RouterLink,
     ScButton,
     ScItem,
     ScItemActions,
@@ -53,7 +55,7 @@ import {
           <button scButton variant="outline" size="sm">Action</button>
         </div>
       </div>
-      <a scItem variant="outline" size="sm" href="#usage">
+      <a scItem variant="outline" size="sm" routerLink="." fragment="usage">
         <div scItemMedia><svg siBadgeCheckIcon class="size-5"></svg></div>
         <div scItemBody>
           <div scItemTitle>Your profile has been verified.</div>

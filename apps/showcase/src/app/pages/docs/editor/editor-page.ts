@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScKbd,
   ScTable,
@@ -45,6 +46,7 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
 @Component({
   selector: 'app-editor-page',
   imports: [
+    RouterLink,
     ScCodeBlock,
     ScCodeBlockHeader,
     ScCodeBlockTitle,
@@ -112,7 +114,8 @@ import { ViewEditorDemoContainer } from './demos/view-editor-demo-container';
           — optional peers of ui: install its core where you use the editor.
           Each feature adds its own package; see
           <a
-            href="#features"
+            routerLink="."
+            fragment="features"
             class="text-foreground underline underline-offset-4"
             >Features</a
           >.

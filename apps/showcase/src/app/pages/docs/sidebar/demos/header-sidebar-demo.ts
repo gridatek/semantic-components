@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScMenu,
   ScMenuContent,
@@ -33,6 +34,7 @@ import {
 @Component({
   selector: 'app-header-sidebar-demo',
   imports: [
+    RouterLink,
     ScMenu,
     ScMenuContent,
     ScMenuItem,
@@ -90,7 +92,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siHouseIcon></svg>
@@ -100,7 +102,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siInboxIcon></svg>
@@ -110,7 +112,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siCalendarIcon></svg>
@@ -120,7 +122,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siSearchIcon></svg>
@@ -130,7 +132,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siSettingsIcon></svg>

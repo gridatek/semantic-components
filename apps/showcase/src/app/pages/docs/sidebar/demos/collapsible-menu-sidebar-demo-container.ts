@@ -17,6 +17,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
 })
 export class CollapsibleMenuSidebarDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScCollapsible,
   ScCollapsiblePanel,
@@ -44,6 +45,7 @@ import {
 @Component({
   selector: 'app-collapsible-menu-sidebar-demo',
   imports: [
+    RouterLink,
     ScCollapsible,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
@@ -89,7 +91,7 @@ import {
                           <li scSidebarMenuSubItem>
                             <a
                               scSidebarMenuSubButton
-                              href="#"
+                              routerLink="."
                               (click)="$event.preventDefault()"
                             >
                               <span>{{ page }}</span>

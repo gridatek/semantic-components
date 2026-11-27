@@ -25,7 +25,7 @@ test('Usage: an item with its action; a link item named by its text', async ({
   await expect(items(page)).toHaveCount(2);
   await expect(
     page.getByRole('link', { name: 'Your profile has been verified.' }),
-  ).toHaveAttribute('href', '#usage');
+  ).toHaveAttribute('href', '/demos/item/item-usage-demo#usage');
 });
 
 test('Variant and Size: each marked; smaller each time', async ({ page }) => {

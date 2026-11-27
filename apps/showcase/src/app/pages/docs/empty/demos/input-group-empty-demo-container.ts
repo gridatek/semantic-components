@@ -19,6 +19,7 @@ import { InputGroupEmptyDemo } from './input-group-empty-demo';
 })
 export class InputGroupEmptyDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScEmpty,
   ScEmptyBody,
@@ -36,6 +37,7 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-input-group-empty-demo',
   imports: [
+    RouterLink,
     ScEmpty,
     ScEmptyBody,
     ScEmptyDescription,
@@ -67,7 +69,8 @@ import { SiSearchIcon } from '@semantic-icons/lucide-icons';
           <div scInputGroupAddon side="inline-end"><kbd scKbd>/</kbd></div>
         </div>
         <div scEmptyDescription>
-          Need help? <a href="#input-group">Contact support</a>
+          Need help?
+          <a routerLink="." fragment="input-group">Contact support</a>
         </div>
       </div>
     </div>

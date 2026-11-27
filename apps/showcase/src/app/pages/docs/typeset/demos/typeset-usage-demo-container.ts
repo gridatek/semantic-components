@@ -30,9 +30,9 @@ export class TypesetUsageDemoContainer {
       <h3>The King's Plan</h3>
       <p>
         The king thought long and hard, and finally came up with
-        <a href="#">a brilliant plan</a>: he would tax the jokes in the kingdom.
-        The tax was <strong>one gold coin</strong> per joke, collected by
-        <code>jokeTax()</code>.
+        <a href="/docs/guides/typeset">a brilliant plan</a>: he would tax the
+        jokes in the kingdom. The tax was <strong>one gold coin</strong> per
+        joke, collected by <code>jokeTax()</code>.
       </p>
       <blockquote>
         “After all,” he said, “everyone enjoys a good joke, so it’s only fair

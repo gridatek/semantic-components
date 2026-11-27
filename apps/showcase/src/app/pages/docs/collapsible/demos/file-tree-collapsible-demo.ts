@@ -1,5 +1,6 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScCard,
@@ -27,6 +28,7 @@ interface ScFileTreeItem {
 @Component({
   selector: 'app-file-tree-collapsible-demo',
   imports: [
+    RouterLink,
     NgTemplateOutlet,
     ScButton,
     ScCard,
@@ -89,7 +91,7 @@ interface ScFileTreeItem {
         <a
           scLink
           variant="link"
-          href="#"
+          routerLink="."
           size="sm"
           class="text-foreground w-full justify-start gap-2"
         >

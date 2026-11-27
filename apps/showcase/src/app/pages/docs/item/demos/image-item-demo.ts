@@ -1,5 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScItem,
   ScItemBody,
@@ -13,6 +14,7 @@ import {
 @Component({
   selector: 'app-image-item-demo',
   imports: [
+    RouterLink,
     NgOptimizedImage,
     ScItem,
     ScItemBody,
@@ -24,7 +26,7 @@ import {
   template: `
     <div class="flex w-full max-w-md flex-col gap-6">
       <div scItemGroup class="gap-4">
-        <a scItem variant="outline" href="#image">
+        <a scItem variant="outline" routerLink="." fragment="image">
           <div scItemMedia variant="image" class="relative">
             <img ngSrc="/images/gallery/cafe-thumb.jpg" fill alt="" />
           </div>
@@ -36,7 +38,7 @@ import {
             <p scItemDescription>3:45</p>
           </div>
         </a>
-        <a scItem variant="outline" href="#image">
+        <a scItem variant="outline" routerLink="." fragment="image">
           <div scItemMedia variant="image" class="relative">
             <img ngSrc="/images/gallery/summit-thumb.jpg" fill alt="" />
           </div>
@@ -48,7 +50,7 @@ import {
             <p scItemDescription>4:05</p>
           </div>
         </a>
-        <a scItem variant="outline" href="#image">
+        <a scItem variant="outline" routerLink="." fragment="image">
           <div scItemMedia variant="image" class="relative">
             <img ngSrc="/images/gallery/forest-thumb.jpg" fill alt="" />
           </div>

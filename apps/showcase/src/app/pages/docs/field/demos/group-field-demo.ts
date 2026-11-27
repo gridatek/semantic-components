@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScCheckbox,
   ScField,
@@ -14,6 +15,7 @@ import {
 @Component({
   selector: 'app-group-field-demo',
   imports: [
+    RouterLink,
     ScCheckbox,
     ScFieldDescription,
     ScFieldGroup,
@@ -43,7 +45,7 @@ import {
         <legend scLegend variant="label">Tasks</legend>
         <p scFieldDescription>
           Get notified when tasks you&apos;ve created have updates.
-          <a href="#tasks">Manage tasks</a>
+          <a routerLink="." fragment="tasks">Manage tasks</a>
         </p>
         <div scFieldGroup class="gap-3">
           <div scField orientation="horizontal">

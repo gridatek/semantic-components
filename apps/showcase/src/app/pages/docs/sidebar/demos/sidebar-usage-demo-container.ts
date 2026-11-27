@@ -16,6 +16,7 @@ import { UsageCode } from '../../../../components/usage-code/usage-code';
 })
 export class SidebarUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScSidebar,
   ScSidebarContent,
@@ -46,6 +47,7 @@ import {
 @Component({
   selector: 'app-sidebar-usage-demo',
   imports: [
+    RouterLink,
     ScSidebar,
     ScSidebarContent,
     ScSidebarFooter,
@@ -77,7 +79,7 @@ import {
               <a
                 scSidebarMenuButton
                 size="lg"
-                href="#"
+                routerLink="."
                 (click)="$event.preventDefault()"
               >
                 <span
@@ -103,7 +105,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     [active]="active() === 'Home'"
                     (click)="go($event, 'Home')"
                   >
@@ -114,7 +116,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     [active]="active() === 'Inbox'"
                     (click)="go($event, 'Inbox')"
                   >
@@ -125,7 +127,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     [active]="active() === 'Calendar'"
                     (click)="go($event, 'Calendar')"
                   >
@@ -136,7 +138,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     [active]="active() === 'Search'"
                     (click)="go($event, 'Search')"
                   >
@@ -147,7 +149,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     [active]="active() === 'Settings'"
                     (click)="go($event, 'Settings')"
                   >

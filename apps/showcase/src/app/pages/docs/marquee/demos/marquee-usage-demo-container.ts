@@ -19,6 +19,7 @@ import { MarqueeUsageDemo } from './marquee-usage-demo';
 })
 export class MarqueeUsageDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScLink,
   ScMarquee,
@@ -31,6 +32,7 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-marquee-usage-demo',
   imports: [
+    RouterLink,
     ScLink,
     ScMarquee,
     ScMarqueeContent,
@@ -45,7 +47,7 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
           @for (brand of brands; track brand) {
             <a
               scLink
-              href="#"
+              routerLink="."
               class="text-muted-foreground hover:text-foreground text-xl font-semibold whitespace-nowrap no-underline"
             >
               {{ brand }}

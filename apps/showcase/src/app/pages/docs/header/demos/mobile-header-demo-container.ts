@@ -19,6 +19,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
 })
 export class MobileHeaderDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScHeader,
   ScHeaderMobileMenu,
@@ -38,6 +39,7 @@ import {
 @Component({
   selector: 'app-mobile-header-demo',
   imports: [
+    RouterLink,
     ScLink,
     ScHeader,
     ScNavigationMenu,
@@ -58,7 +60,10 @@ import {
       #header="scHeader"
       [(mobileMenuOpen)]="open"
     >
-      <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
+      <a
+        class="flex items-center gap-2 font-semibold [&>svg]:size-6"
+        routerLink="."
+      >
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
@@ -68,7 +73,7 @@ import {
             <li scNavigationMenuItem>
               <a
                 scNavigationMenuLink
-                href="#"
+                routerLink="."
                 [active]="link === current()"
                 (click)="go($event, link)"
               >
@@ -92,7 +97,7 @@ import {
           @for (link of links; track link) {
             <a
               scNavigationMenuLink
-              href="#"
+              routerLink="."
               [active]="link === current()"
               (click)="go($event, link)"
             >

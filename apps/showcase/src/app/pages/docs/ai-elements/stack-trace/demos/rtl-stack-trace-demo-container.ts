@@ -20,6 +20,7 @@ import { RtlStackTraceDemo } from './rtl-stack-trace-demo';
 export class RtlStackTraceDemoContainer {
   private readonly code = `import { Dir } from '@angular/cdk/bidi';
 import { Component, LOCALE_ID, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScCollapsible,
   ScCollapsiblePanel,
@@ -38,6 +39,7 @@ import { SiFileCodeIcon, SiTerminalIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-rtl-stack-trace-demo',
   imports: [
+    RouterLink,
     Dir,
     ScCollapsible,
     ScCollapsiblePanel,
@@ -67,13 +69,13 @@ import { SiFileCodeIcon, SiTerminalIcon } from '@semantic-icons/lucide-icons';
               TypeError: Cannot read properties of undefined (reading 'email')
             </p>
             <div scTrace>
-              <a href="#prisma/seed.ts:27">
+              <a routerLink="." fragment="prisma/seed.ts:27">
                 <span scTraceLine>
                   <span scTraceIcon><svg siFileCodeIcon></svg></span>
                   <span scTraceTitle>seedUsers في prisma/seed.ts:27</span>
                 </span>
               </a>
-              <a href="#prisma/seed.ts:51">
+              <a routerLink="." fragment="prisma/seed.ts:51">
                 <span scTraceLine>
                   <span scTraceIcon><svg siFileCodeIcon></svg></span>
                   <span scTraceTitle>main في prisma/seed.ts:51</span>

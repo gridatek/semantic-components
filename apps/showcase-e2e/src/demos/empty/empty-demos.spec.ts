@@ -59,7 +59,7 @@ test('Card: the empty state in a card, its actions a link and a button', async (
   await page.goto(demo('card'));
   await expect(
     page.getByRole('link', { name: 'Create project' }),
-  ).toHaveAttribute('href', '#card');
+  ).toHaveAttribute('href', '/demos/empty/card-empty-demo#card');
   await expect(
     page.getByRole('button', { name: 'Import project' }),
   ).toBeVisible();

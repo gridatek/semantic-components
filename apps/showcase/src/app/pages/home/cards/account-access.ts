@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScCard,
@@ -27,6 +28,7 @@ import {
 @Component({
   selector: 'app-home-account-access',
   imports: [
+    RouterLink,
     ScButton,
     ScCard,
     ScCardBody,
@@ -63,7 +65,7 @@ import {
             <div class="flex items-center justify-between">
               <label scLabel>Current Password</label>
               <a
-                href="#"
+                routerLink="."
                 class="text-muted-foreground hover:text-foreground text-xs font-medium tracking-wider uppercase"
                 >Forgot?</a
               >
@@ -81,7 +83,7 @@ import {
           <svg siLockIcon></svg>
           Update Security
         </button>
-        <a scItem variant="muted" href="#" class="w-full">
+        <a scItem variant="muted" routerLink="." class="w-full">
           <div scItemMedia variant="icon">
             <svg siCircleAlertIcon class="text-destructive"></svg>
           </div>

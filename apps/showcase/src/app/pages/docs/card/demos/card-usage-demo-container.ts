@@ -22,6 +22,7 @@ import {
   form,
   required,
 } from '@angular/forms/signals';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScCard,
@@ -41,6 +42,7 @@ import {
 @Component({
   selector: 'app-card-usage-demo',
   imports: [
+    RouterLink,
     FormField,
     FormRoot,
     ScButton,
@@ -81,7 +83,9 @@ import {
             <div scField>
               <div class="flex items-center">
                 <label scLabel>Password</label>
-                <a scLink href="#" class="ms-auto"> Forgot your password? </a>
+                <a scLink routerLink="." class="ms-auto">
+                  Forgot your password?
+                </a>
               </div>
               <input scInput type="password" [formField]="loginForm.password" />
             </div>

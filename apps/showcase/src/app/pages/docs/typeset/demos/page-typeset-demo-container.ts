@@ -19,6 +19,7 @@ import { PageTypesetDemo } from './page-typeset-demo';
 })
 export class PageTypesetDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ScBadge, ScButton } from '@semantic-components/ui';
 
 /**
@@ -28,14 +29,14 @@ import { ScBadge, ScButton } from '@semantic-components/ui';
  */
 @Component({
   selector: 'app-page-typeset-demo',
-  imports: [ScBadge, ScButton],
+  imports: [RouterLink, ScBadge, ScButton],
   template: \`
     <article class="typeset w-full max-w-prose">
       <nav class="not-typeset flex gap-4 text-sm" aria-label="Blog">
-        <a href="#" class="text-muted-foreground hover:text-foreground">
+        <a routerLink="." class="text-muted-foreground hover:text-foreground">
           Blog
         </a>
-        <a href="#" class="text-muted-foreground hover:text-foreground">
+        <a routerLink="." class="text-muted-foreground hover:text-foreground">
           Archive
         </a>
       </nav>

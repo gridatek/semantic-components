@@ -81,7 +81,10 @@ test('Links and buttons: named by their content; a button of type button', async
   await page.goto(demo('links-buttons'));
   await expect(
     page.getByRole('link', { name: 'View the pull request' }),
-  ).toHaveAttribute('href', '#links-and-buttons');
+  ).toHaveAttribute(
+    'href',
+    '/demos/marker/links-buttons-marker-demo#links-and-buttons',
+  );
   const revert = page.getByRole('button', { name: 'Revert this change' });
   await expect(revert).toHaveAttribute('type', 'button');
   await revert.click();

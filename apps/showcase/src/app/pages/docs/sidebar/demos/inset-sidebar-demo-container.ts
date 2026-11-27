@@ -17,6 +17,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
 })
 export class InsetSidebarDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScSidebar,
   ScSidebarContent,
@@ -45,6 +46,7 @@ import {
 @Component({
   selector: 'app-inset-sidebar-demo',
   imports: [
+    RouterLink,
     ScSidebar,
     ScSidebarContent,
     ScSidebarGroup,
@@ -74,7 +76,7 @@ import {
               <a
                 scSidebarMenuButton
                 size="lg"
-                href="#"
+                routerLink="."
                 (click)="$event.preventDefault()"
               >
                 <span
@@ -100,7 +102,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siHouseIcon></svg>
@@ -110,7 +112,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siInboxIcon></svg>
@@ -120,7 +122,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siCalendarIcon></svg>
@@ -130,7 +132,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siSearchIcon></svg>
@@ -140,7 +142,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siSettingsIcon></svg>

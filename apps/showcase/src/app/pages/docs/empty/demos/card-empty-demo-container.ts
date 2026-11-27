@@ -19,6 +19,7 @@ import { CardEmptyDemo } from './card-empty-demo';
 })
 export class CardEmptyDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScCard,
@@ -37,6 +38,7 @@ import { SiArrowUpRightIcon, SiFolderIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-card-empty-demo',
   imports: [
+    RouterLink,
     ScButton,
     ScCard,
     ScCardBody,
@@ -64,10 +66,18 @@ import { SiArrowUpRightIcon, SiFolderIcon } from '@semantic-icons/lucide-icons';
           </div>
           <div scEmptyBody>
             <div class="flex gap-2">
-              <a scLink variant="button" href="#card">Create project</a>
+              <a scLink variant="button" routerLink="." fragment="card"
+                >Create project</a
+              >
               <button scButton variant="outline">Import project</button>
             </div>
-            <a scLink variant="link" href="#card" class="text-muted-foreground">
+            <a
+              scLink
+              variant="link"
+              routerLink="."
+              fragment="card"
+              class="text-muted-foreground"
+            >
               Learn more <svg siArrowUpRightIcon></svg>
             </a>
           </div>

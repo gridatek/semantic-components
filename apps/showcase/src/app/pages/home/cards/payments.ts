@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScBreadcrumb,
   ScBreadcrumbItem,
@@ -36,6 +37,7 @@ import {
 @Component({
   selector: 'app-home-payments',
   imports: [
+    RouterLink,
     ScBreadcrumb,
     ScBreadcrumbItem,
     ScBreadcrumbLink,
@@ -71,7 +73,7 @@ import {
         <nav scBreadcrumb aria-label="Payments path">
           <ol scBreadcrumbList>
             <li scBreadcrumbItem>
-              <a scBreadcrumbLink href="#">Home</a>
+              <a scBreadcrumbLink routerLink=".">Home</a>
             </li>
             <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
             <li scBreadcrumbItem>
@@ -103,7 +105,7 @@ import {
       <div scCardBody>
         <div scItemGroup role="list">
           <div role="listitem" class="w-full">
-            <a scItem variant="muted" href="#">
+            <a scItem variant="muted" routerLink=".">
               <div scItemMedia variant="icon"><svg siSettingsIcon></svg></div>
               <div scItemBody>
                 <div scItemTitle>Change transfer limit</div>
@@ -118,7 +120,7 @@ import {
             </a>
           </div>
           <div role="listitem" class="w-full">
-            <a scItem variant="muted" href="#">
+            <a scItem variant="muted" routerLink=".">
               <div scItemMedia variant="icon"><svg siCalendarIcon></svg></div>
               <div scItemBody>
                 <div scItemTitle>Scheduled transfers</div>
@@ -133,7 +135,7 @@ import {
             </a>
           </div>
           <div role="listitem" class="w-full">
-            <a scItem variant="muted" href="#">
+            <a scItem variant="muted" routerLink=".">
               <div scItemMedia variant="icon"><svg siRefreshCwIcon></svg></div>
               <div scItemBody>
                 <div scItemTitle>Recurring card payments</div>

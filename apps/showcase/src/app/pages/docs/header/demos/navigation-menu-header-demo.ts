@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScHeader,
   ScHeaderMobileMenu,
@@ -21,6 +22,7 @@ import {
 @Component({
   selector: 'app-navigation-menu-header-demo',
   imports: [
+    RouterLink,
     ScHeader,
     ScHeaderMobileMenu,
     ScHeaderMobileMenuToggle,
@@ -43,7 +45,10 @@ import {
       aria-label="Acme, with menus"
       #header="scHeader"
     >
-      <a class="flex items-center gap-2 font-semibold [&>svg]:size-6" href="#">
+      <a
+        class="flex items-center gap-2 font-semibold [&>svg]:size-6"
+        routerLink="."
+      >
         <svg siGalleryVerticalEndIcon></svg>
         Acme
       </a>
@@ -58,7 +63,7 @@ import {
               <ul class="grid w-72 gap-1">
                 @for (product of products; track product) {
                   <li>
-                    <a scNavigationMenuLink href="#">{{ product }}</a>
+                    <a scNavigationMenuLink routerLink=".">{{ product }}</a>
                   </li>
                 }
               </ul>
@@ -66,7 +71,7 @@ import {
           </li>
           @for (link of links.slice(1); track link) {
             <li scNavigationMenuItem>
-              <a scNavigationMenuLink href="#">{{ link }}</a>
+              <a scNavigationMenuLink routerLink=".">{{ link }}</a>
             </li>
           }
         </ul>
@@ -85,7 +90,7 @@ import {
           @for (link of links; track link) {
             <a
               scNavigationMenuLink
-              href="#"
+              routerLink="."
               [active]="link === current()"
               (click)="go($event, link)"
             >

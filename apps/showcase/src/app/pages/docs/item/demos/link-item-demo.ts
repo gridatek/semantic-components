@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScItem,
   ScItemActions,
@@ -15,6 +16,7 @@ import {
 @Component({
   selector: 'app-link-item-demo',
   imports: [
+    RouterLink,
     ScItem,
     ScItemActions,
     ScItemBody,
@@ -25,7 +27,7 @@ import {
   ],
   template: `
     <div class="flex w-full max-w-md flex-col gap-4">
-      <a scItem href="#link">
+      <a scItem routerLink="." fragment="link">
         <div scItemBody>
           <div scItemTitle>Visit our documentation</div>
           <p scItemDescription>Learn how to get started with our components.</p>

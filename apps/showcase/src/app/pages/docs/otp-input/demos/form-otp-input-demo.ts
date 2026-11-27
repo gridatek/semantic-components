@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation, signal } from '@angular/core';
 import { FormField, form, minLength, required } from '@angular/forms/signals';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScCard,
@@ -23,6 +24,7 @@ import { SiMinusIcon, SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
 @Component({
   selector: 'app-form-otp-input-demo',
   imports: [
+    RouterLink,
     SiMinusIcon,
     ScField,
     FormField,
@@ -78,7 +80,7 @@ import { SiMinusIcon, SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
             </div>
           </div>
           <p scFieldDescription>
-            <a href="#">I no longer have access to this email address.</a>
+            <a routerLink=".">I no longer have access to this email address.</a>
           </p>
           <p scFieldErrors></p>
         </div>
@@ -87,7 +89,9 @@ import { SiMinusIcon, SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
         <button scButton type="button" (click)="verify()">Verify</button>
         <p class="text-muted-foreground text-sm">
           Having trouble signing in?
-          <a href="#" class="hover:text-primary underline underline-offset-4"
+          <a
+            routerLink="."
+            class="hover:text-primary underline underline-offset-4"
             >Contact support</a
           >
         </p>

@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScButton,
   ScEmpty,
@@ -17,6 +18,7 @@ import {
 @Component({
   selector: 'app-empty-usage-demo',
   imports: [
+    RouterLink,
     ScButton,
     ScEmpty,
     ScEmptyBody,
@@ -48,7 +50,8 @@ import {
         scLink
         variant="link"
         size="sm"
-        href="#usage"
+        routerLink="."
+        fragment="usage"
         class="text-muted-foreground"
       >
         Learn More <svg siArrowUpRightIcon></svg>

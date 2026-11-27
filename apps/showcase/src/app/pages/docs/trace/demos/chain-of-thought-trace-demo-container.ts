@@ -19,6 +19,7 @@ import { ChainOfThoughtTraceDemo } from './chain-of-thought-trace-demo';
 })
 export class ChainOfThoughtTraceDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScBadge,
   ScCollapsible,
@@ -47,6 +48,7 @@ import {
 @Component({
   selector: 'app-chain-of-thought-trace-demo',
   imports: [
+    RouterLink,
     ScBadge,
     ScCollapsible,
     ScCollapsiblePanel,
@@ -99,7 +101,7 @@ import {
                   </div>
                 </div>
               </div>
-              <a href="#chain-of-thought">
+              <a routerLink="." fragment="chain-of-thought">
                 <span scTraceLine>
                   <span scTraceIcon><svg siFileTextIcon></svg></span>
                   <span scTraceTitle>Read the last twelve deploys</span>

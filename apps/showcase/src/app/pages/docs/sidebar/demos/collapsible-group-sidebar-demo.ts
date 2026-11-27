@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScCollapsible,
   ScCollapsiblePanel,
@@ -26,6 +27,7 @@ import {
 @Component({
   selector: 'app-collapsible-group-sidebar-demo',
   imports: [
+    RouterLink,
     ScCollapsible,
     ScCollapsiblePanel,
     ScCollapsibleTrigger,
@@ -64,7 +66,7 @@ import {
                   <li scSidebarMenuItem>
                     <a
                       scSidebarMenuButton
-                      href="#"
+                      routerLink="."
                       (click)="$event.preventDefault()"
                     >
                       <svg siLifeBuoyIcon></svg>
@@ -74,7 +76,7 @@ import {
                   <li scSidebarMenuItem>
                     <a
                       scSidebarMenuButton
-                      href="#"
+                      routerLink="."
                       (click)="$event.preventDefault()"
                     >
                       <svg siSendIcon></svg>

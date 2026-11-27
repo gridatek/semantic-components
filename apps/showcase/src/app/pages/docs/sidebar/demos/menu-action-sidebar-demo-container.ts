@@ -17,6 +17,7 @@ import { DemoContainer } from '../../../../components/demo-container/demo-contai
 })
 export class MenuActionSidebarDemoContainer {
   private readonly code = `import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScMenu,
   ScMenuContent,
@@ -49,6 +50,7 @@ import {
 @Component({
   selector: 'app-menu-action-sidebar-demo',
   imports: [
+    RouterLink,
     ScMenu,
     ScMenuContent,
     ScMenuItem,
@@ -84,7 +86,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siFrameIcon></svg>
@@ -112,7 +114,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siChartPieIcon></svg>
@@ -140,7 +142,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                   >
                     <svg siMapIcon></svg>

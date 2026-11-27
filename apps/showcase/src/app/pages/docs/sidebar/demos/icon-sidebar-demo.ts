@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   ScSidebar,
   ScSidebarContent,
@@ -28,6 +29,7 @@ import {
 @Component({
   selector: 'app-icon-sidebar-demo',
   imports: [
+    RouterLink,
     ScSidebar,
     ScSidebarContent,
     ScSidebarGroup,
@@ -58,7 +60,7 @@ import {
               <a
                 scSidebarMenuButton
                 size="lg"
-                href="#"
+                routerLink="."
                 (click)="$event.preventDefault()"
               >
                 <span
@@ -84,7 +86,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                     tooltip="Home"
                   >
@@ -95,7 +97,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                     tooltip="Inbox"
                   >
@@ -106,7 +108,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                     tooltip="Calendar"
                   >
@@ -117,7 +119,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                     tooltip="Search"
                   >
@@ -128,7 +130,7 @@ import {
                 <li scSidebarMenuItem>
                   <a
                     scSidebarMenuButton
-                    href="#"
+                    routerLink="."
                     (click)="$event.preventDefault()"
                     tooltip="Settings"
                   >
