@@ -139,74 +139,205 @@ import { PreviewWeeklyFitnessSummary } from './weekly-fitness-summary';
   ],
   template: `
     <!-- Three columns at most, as many as the frame (not the window) fits:
-      each card whole, in the order shadcn's Create shows them. -->
+      each card whole, in the order shadcn's Create shows them. Each card a
+      deferred block: rendered at once (on immediate), and under SSR
+      hydrated as it comes into view — all at once, the page's 281
+      components took WebKit 57 s on CI, unusable meanwhile. -->
     <div
       class="columns-1 gap-6 *:mb-6 *:break-inside-avoid @3xl:columns-2 @6xl:columns-3"
     >
-      <app-preview-contribution-history />
-      <app-home-empty-distribute-track />
-      <app-preview-qr-connect />
-      <app-preview-dividend-income />
-      <app-preview-index-investing />
-      <app-preview-syncing-state />
-      <app-preview-payout-threshold />
-      <app-preview-claimable-balance />
-      <app-preview-preferences />
-      <app-preview-savings-progress />
-      <app-preview-kitchen-island />
-      <app-preview-savings-targets />
-      <app-preview-recent-transactions />
-      <app-preview-sidebar-nav />
-      <app-preview-faq />
-      <app-preview-payments />
-      <app-preview-front-door />
-      <app-preview-release-catalog />
-      <app-preview-account-access />
-      <app-preview-card-overview />
-      <app-preview-transfer-funds />
-      <app-preview-cover-art />
-      <app-preview-loading-card />
-      <app-preview-receiving-method />
-      <app-preview-power-usage />
-      <app-preview-empty-connect-bank />
-      <app-preview-upcoming-payments />
-      <app-preview-roller-shades />
-      <app-preview-stock-performance />
-      <app-preview-empty-explore-catalog />
-      <app-home-new-milestone />
-      <app-preview-social-links />
-      <app-preview-notification-settings />
-      <app-preview-style-overview />
-      <app-preview-typography-specimen />
-      <app-preview-codespaces-card />
-      <app-preview-invoice />
-      <app-preview-icon-preview-grid />
-      <app-preview-ui-elements />
-      <app-preview-observability-card />
-      <app-preview-shipping-address />
-      <app-preview-environment-variables />
-      <app-preview-bar-chart-card />
-      <app-preview-invite-team />
-      <app-preview-activate-agent-dialog />
-      <app-preview-skeleton-loading />
-      <app-preview-pie-chart-card />
-      <app-preview-no-team-members />
-      <app-preview-report-bug />
-      <app-preview-contributors />
-      <app-preview-feedback-form />
-      <app-preview-book-appointment />
-      <app-preview-sleep-report />
-      <app-preview-github-profile />
-      <app-preview-weekly-fitness-summary />
-      <app-preview-file-upload />
-      <app-preview-analytics-card />
-      <app-preview-usage-card />
-      <app-preview-shortcuts />
-      <app-preview-anomaly-alert />
-      <app-preview-live-waveform />
-      <app-preview-visitors />
-      <app-preview-contributions-activity />
-      <app-preview-not-found />
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-contribution-history />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-home-empty-distribute-track />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-qr-connect />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-dividend-income />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-index-investing />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-syncing-state />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-payout-threshold />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-claimable-balance />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-preferences />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-savings-progress />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-kitchen-island />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-savings-targets />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-recent-transactions />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-sidebar-nav />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-faq />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-payments />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-front-door />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-release-catalog />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-account-access />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-card-overview />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-transfer-funds />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-cover-art />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-loading-card />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-receiving-method />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-power-usage />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-empty-connect-bank />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-upcoming-payments />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-roller-shades />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-stock-performance />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-empty-explore-catalog />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-home-new-milestone />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-social-links />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-notification-settings />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-style-overview />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-typography-specimen />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-codespaces-card />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-invoice />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-icon-preview-grid />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-ui-elements />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-observability-card />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-shipping-address />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-environment-variables />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-bar-chart-card />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-invite-team />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-activate-agent-dialog />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-skeleton-loading />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-pie-chart-card />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-no-team-members />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-report-bug />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-contributors />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-feedback-form />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-book-appointment />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-sleep-report />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-github-profile />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-weekly-fitness-summary />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-file-upload />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-analytics-card />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-usage-card />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-shortcuts />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-anomaly-alert />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-live-waveform />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-visitors />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-contributions-activity />
+      }
+      @defer (on immediate; hydrate on viewport) {
+        <app-preview-not-found />
+      }
     </div>
   `,
   host: { class: '@container block' },

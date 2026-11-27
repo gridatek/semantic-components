@@ -27,6 +27,9 @@ test('the user’s choices kept under the dashboard’s names, none under the li
     .click();
   await page.getByRole('menuitemradio', { name: /dark/i }).click();
   await expect(page.locator('html')).toHaveClass(/\bdark\b/);
+  // The sidebar: closed (its provider's storageKey input).
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: 'Toggle sidebar' }).click();
 
   await expect
     .poll(async () =>
@@ -38,6 +41,7 @@ test('the user’s choices kept under the dashboard’s names, none under the li
         'dashboard-hour-cycle',
         'dashboard-mode',
         'dashboard-numbering-system',
+        'dashboard-sidebar-state',
       ]),
     );
   const names = (await page.context().cookies()).map((cookie) => cookie.name);

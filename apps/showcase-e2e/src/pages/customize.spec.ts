@@ -1,6 +1,6 @@
 import { expectNoA11yViolations } from '../axe';
 import { fromOtherSite } from '../interaction';
-import { expect, test } from '../test';
+import { type Locator, expect, test } from '../test';
 
 test.describe('Customize Page', () => {
   // The largest page: in Firefox and WebKit, beside the other workers, it
@@ -19,6 +19,17 @@ test.describe('Customize Page', () => {
 
   // To show, and to close (its leave animation, on WebKit's lagging clock).
   const shown = { timeout: 30_000 };
+
+  /**
+   * A card brought into view and used once it has hydrated, as a reader
+   * would: under SSR each keeps the server's HTML (marked `ngh`) until it
+   * comes into view — a click in the moment its hydration starts was lost.
+   * Without SSR, at once.
+   */
+  async function reach(card: Locator): Promise<void> {
+    await card.scrollIntoViewIfNeeded();
+    await expect(card).not.toHaveAttribute('ngh', /.*/, shown);
+  }
 
   test('the style card picks a style, which reloads in it', async ({
     page,
@@ -69,11 +80,42 @@ test.describe('Customize Page', () => {
       .toEqual([]);
   });
 
+  test('SSR: the cards hydrate as they come into view, not all at once', async ({
+    page,
+  }) => {
+    test.skip(!process.env['SSR'], 'The CI job `ssr` only');
+    // Angular's development log of the hydration: on CI, WebKit hydrated
+    // all the cards at once (281 components) and took 57 s, the page
+    // unusable meanwhile.
+    const logs: string[] = [];
+    page.on('console', (m) => logs.push(m.text()));
+    await page.goto('/customize');
+    await expect
+      .poll(
+        () => logs.find((text) => text.startsWith('Angular hydrated')),
+        shown,
+      )
+      .toBeTruthy();
+    const log = logs.find((text) => text.startsWith('Angular hydrated')) ?? '';
+    const [, components] = /hydrated (\d+) component/.exec(log) ?? [];
+    const [, deferred] =
+      /(\d+) defer block\(s\) were configured/.exec(log) ?? [];
+    // Every card a deferred block, hydrated when it shows…
+    expect(Number(deferred)).toBeGreaterThanOrEqual(50);
+    // …so the page's first hydration is the cards in view, not all of them.
+    expect(Number(components)).toBeLessThan(150);
+  });
+
   test("shadcn's Create demos, both pages, at work", async ({ page }) => {
     const messages: string[] = [];
     page.on('console', (m) => {
       // The avatars are GitHub's, as in shadcn's demos.
       if (fromOtherSite(m, page)) return;
+      // The cards hydrate as they come into view (`@defer (hydrate on
+      // viewport)`); built for the browser only there is nothing to hydrate,
+      // and Angular's development check says so (NG0508): they render at
+      // once (`on immediate`), as before.
+      if (!process.env['SSR'] && m.text().includes('NG0508')) return;
       if (m.type() === 'warning' || m.type() === 'error')
         messages.push(m.text().split('\n')[0]);
     });
@@ -87,6 +129,7 @@ test.describe('Customize Page', () => {
     ).toBeVisible();
     // The scenes set the sliders; off disables them.
     const kitchen = page.locator('app-preview-kitchen-island');
+    await reach(kitchen);
     await kitchen.getByRole('button', { name: 'Nightlight' }).click();
     await expect(
       kitchen.getByRole('slider', { name: 'Brightness' }),
@@ -97,6 +140,7 @@ test.describe('Customize Page', () => {
     ).toBeDisabled(shown);
     // Its dialog opens on its first field and closes. Focus in it before the
     // key: WebKit on CI still opens it when the key would come.
+    await reach(page.locator('app-preview-feedback-form'));
     await page.getByRole('button', { name: 'Share Feedback' }).click();
     await expect(page.getByRole('dialog')).toBeVisible(shown);
     await expect
@@ -191,6 +235,7 @@ test.describe('Customize Page', () => {
     });
     await plot.waitFor({ state: 'attached', ...shown });
     // Seen, it enters: scrolled to, as a reader would.
+    await reach(page.locator('app-preview-sleep-report'));
     await plot.scrollIntoViewIfNeeded();
     await expect(plot).toBeVisible();
     // Per hour, the topmost drawn segment (the highest on screen): rounded.
@@ -228,6 +273,7 @@ test.describe('Customize Page', () => {
       name: 'Workout load by day, Monday to Sunday',
     });
     await plot.waitFor({ state: 'attached', ...shown });
+    await reach(page.locator('app-preview-weekly-fitness-summary'));
     await plot.scrollIntoViewIfNeeded();
     // A bar per day, each over its track (the whole 0 to 100).
     const chart = page.locator('[data-slot=chart]', { has: plot });

@@ -34,6 +34,7 @@ import { SiPlusIcon } from '@semantic-icons/lucide-icons';
         <img
           ngSrc="/images/gallery/coast.jpg"
           fill
+          priority
           alt="A rocky coast"
           class="z-20 object-cover brightness-60 grayscale"
         />
