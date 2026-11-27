@@ -1,10 +1,10 @@
 import { LOCALE_ID, type Signal, computed, inject } from '@angular/core';
-import type { ScCalendarValue } from '../../components/calendar/calendar';
 import {
   definePreference,
   injectPreference,
 } from '../../components/preferences/preference';
-import { formatDate } from './format-date';
+import { type ScFormatDateValue, formatDate } from './format-date';
+import { type ScFormatDurationValue, formatDuration } from './format-duration';
 import { ɵkeepDigitOrder } from './keep-digit-order';
 
 /**
@@ -112,20 +112,42 @@ export function injectFormatNumber(): ScFormatNumber {
   };
 }
 
-/** Writes a calendar's value as shown: `Intl.DateTimeFormat`'s options. */
+export type { ScFormatDateValue } from './format-date';
+export type { ScFormatDurationValue } from './format-duration';
+
+/** Writes a date or a time as shown: `Intl.DateTimeFormat`'s options. */
 export type ScFormatDate = (
-  value: ScCalendarValue,
+  value: ScFormatDateValue,
   options?: Intl.DateTimeFormatOptions,
 ) => string;
 
 /**
- * A picker's value as written, for your trigger — in the user's numbering
- * system, live: `{{ formatDate(date()) || 'Pick a date' }}`. A day
- * (`dateStyle: 'medium'` unless `options` say), days as a list in order,
- * a range as one span ("Oct 12 – 18, 2026") — nothing, `''`. Your own
- * format: your options, or your own function instead.
+ * A date or a time as written — in the user's numbering system, live: a
+ * picker's value for your trigger (`{{ formatDate(date()) || 'Pick a date' }}`),
+ * or any Temporal date, date-time, time or zoned moment. A day
+ * `dateStyle: 'medium'` unless `options` say (a date-time: with the short
+ * time; a time: `timeStyle: 'short'`), days as a list in order, a range as
+ * one span ("Oct 12 – 18, 2026") — nothing, `''`. Your own format: your
+ * options, or your own function instead.
  */
 export function injectFormatDate(): ScFormatDate {
   const locale = injectDisplayLocale();
   return (value, options) => formatDate(locale(), value, options);
+}
+
+/** Writes a duration as shown: `Intl.DurationFormat`'s options. */
+export type ScFormatDuration = (
+  value: ScFormatDurationValue,
+  options?: Intl.DurationFormatOptions,
+) => string;
+
+/**
+ * A duration as written — in the user's numbering system, live:
+ * `{{ formatDuration({ minutes: 3, seconds: 42 }, { style: 'narrow' }) }}`
+ * ("3m 42s"), or a Temporal duration. `Intl.DurationFormat`'s options;
+ * "1 hr, 30 min" by default.
+ */
+export function injectFormatDuration(): ScFormatDuration {
+  const locale = injectDisplayLocale();
+  return (value, options) => formatDuration(locale(), value, options);
 }

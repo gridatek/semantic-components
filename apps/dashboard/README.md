@@ -124,8 +124,10 @@ own i18n, translated in the browser (one build).
   translated where they're shown: `labelOf(order.status)`
   (`shared/labels.ts`).
 - Numbers, money and dates follow the locale and the user's digits
-  (`shared/format.ts` formats in `displayLocale`, which the root sets from the
-  library's `injectDisplayLocale()`, live): data keeps numbers and ISO dates,
+  (`shared/format.ts` goes through the library's `injectFormatNumber()`,
+  `injectFormatDate()` and `injectFormatDuration()`, taken once as the app
+  starts — the dashboard shows what the library writes, Arabic-Indic digits
+  in order in English): data keeps numbers and ISO dates,
   and a template shows them through a function (`countOf(n)`,
   `moneyOf(n)`, `dayOf(iso)`), never raw. A number in a message is a
   placeholder (`Last ${count(7)}:days: Days`), and data with numbers in its

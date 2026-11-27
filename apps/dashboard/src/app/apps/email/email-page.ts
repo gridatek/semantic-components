@@ -52,7 +52,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ME, PEOPLE, type Person } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { count, dayTime, displayLocale, initials } from '../../shared/format';
+import { count, date, dayTime, initials } from '../../shared/format';
 
 type Folder = 'inbox' | 'sent' | 'drafts' | 'spam' | 'trash';
 
@@ -581,13 +581,10 @@ export class EmailPage {
   private readonly when = dayTime;
 
   private shortDate(iso: string): string {
-    return Temporal.PlainDate.from(iso.slice(0, 10)).toLocaleString(
-      displayLocale(),
-      {
-        month: 'short',
-        day: 'numeric',
-      },
-    );
+    return date(Temporal.PlainDate.from(iso.slice(0, 10)), {
+      month: 'short',
+      day: 'numeric',
+    });
   }
 
   private unreadIn(folder: Folder | 'starred'): number {

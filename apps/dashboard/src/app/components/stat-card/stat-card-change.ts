@@ -5,7 +5,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { injectDisplayLocale } from '@semantic-components/ui';
+import { injectFormatNumber } from '@semantic-components/ui';
 import { cn } from 'cn';
 import { AppStatCard } from './stat-card';
 
@@ -33,8 +33,8 @@ export type AppStatCardGood = 'up' | 'down';
 })
 export class AppStatCardChange {
   private readonly card = inject(AppStatCard);
-  /** The locale, in the user's numbering system. */
-  private readonly locale = injectDisplayLocale();
+  /** Numbers as the library writes them: the user's digits, in order. */
+  private readonly formatNumber = injectFormatNumber();
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly value = input.required<number>();
@@ -53,10 +53,10 @@ export class AppStatCardChange {
   });
 
   private readonly text = computed(() =>
-    new Intl.NumberFormat(this.locale(), {
+    this.formatNumber(this.value(), {
       ...this.format(),
       signDisplay: 'exceptZero',
-    }).format(this.value()),
+    }),
   );
 
   private readonly class = computed(() =>

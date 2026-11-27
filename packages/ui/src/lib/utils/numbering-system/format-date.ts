@@ -2,26 +2,49 @@ import type { ScCalendarValue } from '../../components/calendar/calendar';
 import { ɵkeepDigitOrder } from './keep-digit-order';
 
 /**
- * A calendar's value as written, with `Intl`: a day (`dateStyle: 'medium'`
- * unless `options` say), days as a list in order, a range as one span
- * (`formatRange`: "Oct 12 – 18, 2026"; a start alone, a day) — nothing, `''`.
+ * What `formatDate` writes: a calendar's value (a day, days, a range of
+ * days), a date with its time, a time, or a moment in a time zone.
+ */
+export type ScFormatDateValue =
+  | ScCalendarValue
+  | Temporal.PlainDateTime
+  | Temporal.PlainTime
+  | Temporal.ZonedDateTime;
+
+/**
+ * A date or a time as written, with `Intl` — `options` say how, else: a day
+ * `dateStyle: 'medium'`, a date with its time (or a zoned moment) the medium
+ * date and the short time, a time `timeStyle: 'short'`; days as a list in
+ * order, a range as one span (`formatRange`: "Oct 12 – 18, 2026"; a start
+ * alone, a day) — nothing, `''`.
  * Arabic-Indic digits in left-to-right text kept in order (`ɵkeepDigitOrder`).
  * `injectFormatDate()` gives it the user's locale and digits.
  */
 export function formatDate(
   locale: string,
-  value: ScCalendarValue,
-  options: Intl.DateTimeFormatOptions = { dateStyle: 'medium' },
+  value: ScFormatDateValue,
+  options?: Intl.DateTimeFormatOptions,
 ): string {
   return ɵkeepDigitOrder(locale, written(locale, value, options));
 }
 
 function written(
   locale: string,
-  value: ScCalendarValue,
-  options: Intl.DateTimeFormatOptions = { dateStyle: 'medium' },
+  value: ScFormatDateValue,
+  given: Intl.DateTimeFormatOptions | undefined,
 ): string {
   if (!value) return '';
+  if (
+    value instanceof Temporal.PlainDateTime ||
+    value instanceof Temporal.ZonedDateTime
+  )
+    return value.toLocaleString(
+      locale,
+      given ?? { dateStyle: 'medium', timeStyle: 'short' },
+    );
+  if (value instanceof Temporal.PlainTime)
+    return value.toLocaleString(locale, given ?? { timeStyle: 'short' });
+  const options = given ?? { dateStyle: 'medium' };
   const format = new Intl.DateTimeFormat(locale, options);
   if (value instanceof Temporal.PlainDate) return format.format(value);
   if (Array.isArray(value)) {

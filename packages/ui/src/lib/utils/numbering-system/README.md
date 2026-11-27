@@ -24,10 +24,11 @@ Show each choice by its own digits (`new Intl.NumberFormat('en-u-nu-arab').forma
 ## Your own numbers and dates, as the parts write theirs
 
 ```typescript
-import { injectDisplayLocale, injectFormatDate, injectFormatNumber } from '@semantic-components/ui';
+import { injectDisplayLocale, injectFormatDate, injectFormatDuration, injectFormatNumber } from '@semantic-components/ui';
 
 readonly formatNumber = injectFormatNumber();
 readonly formatDate = injectFormatDate();
+readonly formatDuration = injectFormatDuration();
 readonly locale = injectDisplayLocale();
 ```
 
@@ -35,14 +36,16 @@ readonly locale = injectDisplayLocale();
 <span>{{ formatNumber(total) }}</span>
 <span>{{ formatNumber(year, { useGrouping: false }) }}</span>
 <span>{{ formatDate(date()) || 'Pick a date' }}</span>
-<time>{{ due().toLocaleString(locale(), { dateStyle: 'long' }) }}</time>
+<time>{{ formatDate(due(), { dateStyle: 'long' }) }}</time>
+<span>{{ formatDuration({ minutes: 3, seconds: 42 }, { style: 'narrow' }) }}</span>
 ```
 
 - `injectFormatNumber()` — `formatNumber(value, options?)`: `Intl.NumberFormat`'s options; one formatter per locale and options, cached.
-- `injectFormatDate()` — `formatDate(value, options?)`: a calendar's value (a picker's) as written — a day (`dateStyle: 'medium'` unless the options say), days as a list in order, a range as one span (`formatRange`); `''` for none.
-- `injectDisplayLocale()` — the locale to show with: `LOCALE_ID`, in the user's numbering system once they chose one (`en-u-nu-arab`). Give it to `Intl` or `toLocaleString` for anything else.
+- `injectFormatDate()` — `formatDate(value, options?)`: a date or a time as written, `Intl.DateTimeFormat`'s options — a Temporal date (`dateStyle: 'medium'` unless the options say), date-time or zoned moment (with the short time), time (`timeStyle: 'short'`), or a picker's value: days as a list in order, a range as one span (`formatRange`); `''` for none.
+- `injectFormatDuration()` — `formatDuration(value, options?)`: a Temporal duration or its parts, `Intl.DurationFormat`'s options ("1 hr, 30 min"; `narrow` "3m 42s"; `digital` "1:05:09").
+- `injectDisplayLocale()` — the locale to show with: `LOCALE_ID`, in the user's numbering system once they chose one (`en-u-nu-arab`). Give it to `Intl` for what the three don't write (a list, a relative time) — without their digit order (below).
 
-All three follow a change of the user's choice at once, in a template. Angular's pipes (`DecimalPipe`, `DatePipe`) read `LOCALE_ID` once, at start: an app that keeps them reloads the page when the user changes it (the cookie is read again).
+They follow a change of the user's choice at once, in a template. Angular's pipes (`DecimalPipe`, `DatePipe`) read `LOCALE_ID` once, at start: an app that keeps them reloads the page when the user changes it (the cookie is read again).
 
 ## In the parts
 
@@ -50,4 +53,4 @@ Every part formats what it shows with `injectDisplayLocale()` or `injectFormatNu
 
 ## Arabic-Indic digits in left-to-right text
 
-To the bidi algorithm, Arabic-Indic digits (`٠`–`٩`) are "Arabic numbers": in left-to-right text, what stands between two runs of them (`, `, `–`, `/`) is laid out right to left, so `Nov ٢٧, ٢٠٢٦` is drawn `Nov ٢٠٢٦ ,٢٧`. Unicode's own Arabic patterns carry marks that keep their order (`٢٧‏/١١‏/٢٠٢٦`); an English pattern has none. So `injectFormatDate()`, `injectFormatNumber()` and the parts that write two runs in one text (the Scheduler's heading, spans and day names, its event times, the Timeline's time) put a left-to-right mark (U+200E) after each run, in a left-to-right locale only. Right to left, Persian digits (`۰`–`۹`, European numbers to the algorithm) and Latin ones are left as they are. Copied, the text carries the invisible marks.
+To the bidi algorithm, Arabic-Indic digits (`٠`–`٩`) are "Arabic numbers": in left-to-right text, what stands between two runs of them (`, `, `–`, `/`) is laid out right to left, so `Nov ٢٧, ٢٠٢٦` is drawn `Nov ٢٠٢٦ ,٢٧`. Unicode's own Arabic patterns carry marks that keep their order (`٢٧‏/١١‏/٢٠٢٦`); an English pattern has none. So `injectFormatNumber()`, `injectFormatDate()`, `injectFormatDuration()` and the parts that write two runs in one text (the Scheduler's heading, spans and day names, its event times, the Timeline's time) put a left-to-right mark (U+200E) after each run, in a left-to-right locale only. Right to left, Persian digits (`۰`–`۹`, European numbers to the algorithm) and Latin ones are left as they are. Copied, the text carries the invisible marks.
