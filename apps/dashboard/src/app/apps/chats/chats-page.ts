@@ -42,7 +42,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ME, PEOPLE, type Person } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { bytes, count, initials, when } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 interface ChatLine {
@@ -285,7 +285,7 @@ const THREADS: readonly Thread[] = [
                   <div scItemTitle class="w-full justify-between">
                     {{ thread.person.name }}
                     <span class="text-muted-foreground text-xs font-normal">{{
-                      whenOf(thread.last.time)
+                      f.when(thread.last.time)
                     }}</span>
                   </div>
                   <p scItemDescription class="line-clamp-1">
@@ -298,7 +298,7 @@ const THREADS: readonly Thread[] = [
                     i18n="@@chats.unread"
                     class="bg-primary text-primary-foreground flex size-5 shrink-0 items-center justify-center rounded-full text-xs"
                   >
-                    {{ countOf(thread.unread) }}
+                    {{ f.count(thread.unread) }}
                     <span class="sr-only">unread</span>
                   </span>
                 }
@@ -390,13 +390,13 @@ const THREADS: readonly Thread[] = [
                                     file.name
                                   }}</span>
                                   <span class="text-muted-foreground text-xs">{{
-                                    bytesOf(file.size)
+                                    f.bytes(file.size)
                                   }}</span>
                                 </span>
                               </div>
                             </div>
                           }
-                          <div scMessageFooter>{{ whenOf(line.time) }}</div>
+                          <div scMessageFooter>{{ f.when(line.time) }}</div>
                         </div>
                       </div>
                     </div>
@@ -508,14 +508,13 @@ const THREADS: readonly Thread[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ChatsPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly bytesOf = bytes;
 
   /** In the user's numbering system. */
-  private readonly whenOf = when;
 
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */

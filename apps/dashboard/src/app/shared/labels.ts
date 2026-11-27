@@ -1,5 +1,3 @@
-import { count } from './format';
-
 /**
  * The words the data holds as values — statuses, categories, roles, plans —
  * translated where they're shown. The data keeps its English values (the
@@ -95,17 +93,8 @@ const LABELS: Record<string, string> = {
   landscape: $localize`:@@shared.labels.landscape:landscape`,
 };
 
-/** Labels with a number: written when shown, in the user's numbering system. */
-const NUMBERED: Record<string, () => string> = {
-  // The Modern dashboard's periods.
-  'Last 7 Days': () =>
-    $localize`:@@shared.labels.last7Days:Last ${count(7)}:days: Days`,
-  'Last 30 Days': () =>
-    $localize`:@@shared.labels.last30Days:Last ${count(30)}:days: Days`,
-  'Last 90 Days': () =>
-    $localize`:@@shared.labels.last90Days:Last ${count(90)}:days: Days`,
-};
-
+// Labels with a number are written where they're shown, with the figures
+// formatted there (the Sales Overview's periods).
 export function label(value: string): string {
-  return NUMBERED[value]?.() ?? LABELS[value] ?? value;
+  return LABELS[value] ?? value;
 }

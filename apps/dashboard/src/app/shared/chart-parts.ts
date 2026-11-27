@@ -18,7 +18,7 @@ import {
   ScChartTooltipProvider,
   ScChartTooltipValue,
 } from '@semantic-components/ui/charts';
-import { count } from './format';
+import { injectFormats } from './formats';
 
 /**
  * The app's chart tooltip, the same on every chart: put it inside a
@@ -58,7 +58,10 @@ import { count } from './format';
   encapsulation: ViewEncapsulation.None,
 })
 export class ChartTooltip {
-  readonly format = input<(value: number) => string>(count);
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
+  /** How a value is written: a count by default. */
+  readonly format = input<(value: number) => string>(this.f.count);
   readonly indicator = input<ScChartIndicator>('dot');
   /** Pies and rings: the item is the category, no label above it. */
   readonly hideLabel = input(false, { transform: booleanAttribute });

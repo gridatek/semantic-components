@@ -98,7 +98,7 @@ import {
   type BlogStatus,
 } from '../../data/blog';
 import { PageHeader } from '../../layout/page-header';
-import { today } from '../../shared/format';
+import { today } from '../../shared/formats';
 import { BlogStore } from '../../shared/stores';
 
 const EMPTY_BODY = '<p></p>';

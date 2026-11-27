@@ -51,7 +51,7 @@ import { ORDERS, ORDER_STATUSES } from '../../data/orders';
 import { personById } from '../../data/people';
 import { PRODUCTS } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { count, day, initials, money } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { orderBadge } from '../../shared/status';
 
@@ -239,13 +239,13 @@ const columns = columnHelper.columns([
                   </td>
                   <td scDataTableCell>
                     {{ row.original.product }} ×
-                    {{ countOf(row.original.quantity) }}
+                    {{ f.count(row.original.quantity) }}
                   </td>
                   <td scDataTableCell>
-                    {{ dayOf(row.original.date) }}
+                    {{ f.day(row.original.date) }}
                   </td>
                   <td scDataTableCell class="tabular-nums">
-                    {{ moneyOf(row.original.total) }}
+                    {{ f.money(row.original.total) }}
                   </td>
                   <td scDataTableCell>
                     {{ labelOf(row.original.payment) }}
@@ -283,8 +283,8 @@ const columns = columnHelper.columns([
             class="text-sm font-medium"
             aria-live="polite"
           >
-            Page {{ countOf(pagination.currentPage()) }} of
-            {{ countOf(pagination.totalPages()) }}
+            Page {{ f.count(pagination.currentPage()) }} of
+            {{ f.count(pagination.totalPages()) }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
@@ -312,8 +312,9 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class OrdersPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -332,8 +333,6 @@ export class OrdersPage {
 
   private readonly statuses = ORDER_STATUSES;
   private readonly status = signal<string>('All');
-  private readonly dayOf = day;
-  private readonly moneyOf = money;
   private readonly initialsOf = initials;
   private readonly badgeOf = orderBadge;
 

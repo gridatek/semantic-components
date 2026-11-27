@@ -43,7 +43,7 @@ import {
 import { CUSTOMERS, type Customer } from '../../data/orders';
 import { personById } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { count, day, initials, money } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 interface CustomerRow {
@@ -230,13 +230,13 @@ const columns = columnHelper.columns([
                     {{ row.original.location }}
                   </td>
                   <td scDataTableCell class="tabular-nums">
-                    {{ countOf(row.original.orders) }}
+                    {{ f.count(row.original.orders) }}
                   </td>
                   <td scDataTableCell class="tabular-nums">
-                    {{ moneyOf(row.original.spent) }}
+                    {{ f.money(row.original.spent) }}
                   </td>
                   <td scDataTableCell>
-                    {{ dayOf(row.original.since) }}
+                    {{ f.day(row.original.since) }}
                   </td>
                   <td scDataTableCell>
                     <span
@@ -274,8 +274,9 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomersPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -294,7 +295,5 @@ export class CustomersPage {
   private readonly rows = ROWS;
   private readonly vip = ROWS.filter((r) => r.status === 'VIP').length;
   private readonly spent = ROWS.reduce((sum, r) => sum + r.spent, 0);
-  private readonly dayOf = day;
-  private readonly moneyOf = money;
   private readonly initialsOf = initials;
 }

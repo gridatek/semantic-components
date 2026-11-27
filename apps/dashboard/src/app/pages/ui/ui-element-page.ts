@@ -92,7 +92,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { count, initials } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 
 const TITLES: Record<string, string> = {
   button: $localize`:@@ui.element.button:Button`,
@@ -350,7 +350,7 @@ const TITLES: Record<string, string> = {
                   <span scAvatarFallback>{{ initialsOf(person.name) }}</span>
                 </span>
               }
-              <div scAvatarGroupCount>+{{ countOf(people.length - 5) }}</div>
+              <div scAvatarGroupCount>+{{ f.count(people.length - 5) }}</div>
             </div>
           </section>
         </div>
@@ -376,7 +376,7 @@ const TITLES: Record<string, string> = {
               ></span
             >
             <span scBadge class="rounded-full tabular-nums">{{
-              countOf(8)
+              f.count(8)
             }}</span>
           </div>
         </section>
@@ -842,10 +842,11 @@ const TITLES: Record<string, string> = {
   encapsulation: ViewEncapsulation.None,
 })
 export class UiElementPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   // The value as written: Intl's, in the user's digits — or your own format.
   private readonly formatDate = injectFormatDate();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

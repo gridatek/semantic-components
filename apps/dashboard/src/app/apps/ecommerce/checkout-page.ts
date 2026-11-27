@@ -58,7 +58,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { thumbOf } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { count, money } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { CartStore } from './shop-store';
 
 /** Checkout (Pro Ecommerce): the cart, delivery, payment — steps in order. */
@@ -194,7 +194,7 @@ import { CartStore } from './shop-store';
                         @if (cartStep.status() === 'complete') {
                           <svg siCheckIcon></svg>
                         } @else {
-                          {{ countOf(1) }}
+                          {{ f.count(1) }}
                         }
                       </span>
                       <span i18n="@@ecommerce.checkout.cart" scStepperTitle
@@ -213,7 +213,7 @@ import { CartStore } from './shop-store';
                         @if (deliveryStep.status() === 'complete') {
                           <svg siCheckIcon></svg>
                         } @else {
-                          {{ countOf(2) }}
+                          {{ f.count(2) }}
                         }
                       </span>
                       <span i18n="@@ecommerce.checkout.delivery" scStepperTitle
@@ -232,7 +232,7 @@ import { CartStore } from './shop-store';
                         @if (paymentStep.status() === 'complete') {
                           <svg siCheckIcon></svg>
                         } @else {
-                          {{ countOf(3) }}
+                          {{ f.count(3) }}
                         }
                       </span>
                       <span i18n="@@ecommerce.checkout.payment" scStepperTitle
@@ -261,7 +261,7 @@ import { CartStore } from './shop-store';
                             line.product.name
                           }}</span>
                           <span class="text-muted-foreground text-sm"
-                            >{{ moneyOf(line.product.price) }} each</span
+                            >{{ f.money(line.product.price) }} each</span
                           >
                         </div>
                         <div scField class="w-32">
@@ -300,7 +300,7 @@ import { CartStore } from './shop-store';
                           </div>
                         </div>
                         <span class="w-24 text-end font-medium tabular-nums">
-                          {{ moneyOf(line.quantity * line.product.price) }}
+                          {{ f.money(line.quantity * line.product.price) }}
                         </span>
                         <button
                           scButton
@@ -520,10 +520,10 @@ import { CartStore } from './shop-store';
             @for (line of cart.lines(); track line.product.id) {
               <div class="flex justify-between gap-2">
                 <span
-                  >{{ line.product.name }} × {{ countOf(line.quantity) }}</span
+                  >{{ line.product.name }} × {{ f.count(line.quantity) }}</span
                 >
                 <span class="tabular-nums">{{
-                  moneyOf(line.quantity * line.product.price)
+                  f.money(line.quantity * line.product.price)
                 }}</span>
               </div>
             }
@@ -533,7 +533,7 @@ import { CartStore } from './shop-store';
               class="flex justify-between"
             >
               <span class="text-muted-foreground">Subtotal</span>
-              <span class="tabular-nums">{{ moneyOf(cart.subtotal()) }}</span>
+              <span class="tabular-nums">{{ f.money(cart.subtotal()) }}</span>
             </div>
             <div
               i18n="@@ecommerce.checkout.shipping"
@@ -541,7 +541,7 @@ import { CartStore } from './shop-store';
             >
               <span class="text-muted-foreground">Shipping</span>
               <span class="tabular-nums">{{
-                cart.shipping() ? moneyOf(cart.shipping()) : t.free
+                cart.shipping() ? f.money(cart.shipping()) : t.free
               }}</span>
             </div>
           </div>
@@ -551,7 +551,7 @@ import { CartStore } from './shop-store';
             class="justify-between font-semibold"
           >
             <span>Total</span>
-            <span class="tabular-nums">{{ moneyOf(cart.total()) }}</span>
+            <span class="tabular-nums">{{ f.money(cart.total()) }}</span>
           </div>
         </div>
       </div>
@@ -561,8 +561,9 @@ import { CartStore } from './shop-store';
   encapsulation: ViewEncapsulation.None,
 })
 export class CheckoutPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -604,7 +605,6 @@ export class CheckoutPage {
       },
     );
   });
-  private readonly moneyOf = money;
   private readonly thumbOf = thumbOf;
   private readonly Math = Math;
 

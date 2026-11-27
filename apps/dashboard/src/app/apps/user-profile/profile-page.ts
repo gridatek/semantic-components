@@ -25,7 +25,7 @@ import {
   SiSendIcon,
 } from '@semantic-icons/lucide-icons';
 import { ME } from '../../data/people';
-import { count, day, today } from '../../shared/format';
+import { injectFormats, today } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { ProfileHeader } from './profile-header';
 
@@ -174,7 +174,7 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
                 <div class="flex flex-col">
                   <span class="text-sm font-medium">{{ me.name }}</span>
                   <span class="text-muted-foreground text-xs">{{
-                    dayOf(post.when)
+                    f.day(post.when)
                   }}</span>
                 </div>
               </div>
@@ -200,7 +200,7 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
                   (pressedChange)="like(post.id)"
                 >
                   <svg siHeartIcon></svg>
-                  {{ countOf(post.likes) }}
+                  {{ f.count(post.likes) }}
                   <span i18n="@@userProfile.profile.likesLike" class="sr-only"
                     >likes — like</span
                   >
@@ -209,7 +209,7 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
                   class="text-muted-foreground flex items-center gap-1 text-sm"
                 >
                   <svg siMessageSquareIcon class="size-4"></svg>
-                  {{ countOf(post.comments) }}
+                  {{ f.count(post.comments) }}
                   <span i18n="@@userProfile.profile.comments" class="sr-only"
                     >comments</span
                   >
@@ -225,11 +225,11 @@ const PHOTOS = [1, 2, 3, 4, 5, 6].map(
   encapsulation: ViewEncapsulation.None,
 })
 export class ProfilePage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly dayOf = day;
 
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   private readonly me = ME;

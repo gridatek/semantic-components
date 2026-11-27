@@ -56,16 +56,7 @@ import { PEOPLE } from '../../data/people';
 import { PRODUCTS } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
 import { ChartTooltip } from '../../shared/chart-parts';
-import {
-  axisLabel,
-  compact,
-  count,
-  initials,
-  money,
-  monthDay,
-  percent,
-  unit,
-} from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 
 /** Widget cards (Pro): figures, people, a product, progress — ready to reuse. */
 @Component({
@@ -221,7 +212,7 @@ import {
               >
                 Posts
               </dt>
-              <dd class="font-semibold">{{ countOf(124) }}</dd>
+              <dd class="font-semibold">{{ f.count(124) }}</dd>
             </div>
             <div>
               <dt
@@ -230,7 +221,7 @@ import {
               >
                 Followers
               </dt>
-              <dd class="font-semibold">{{ compactOf(3200) }}</dd>
+              <dd class="font-semibold">{{ f.compact(3200) }}</dd>
             </div>
             <div>
               <dt
@@ -239,7 +230,7 @@ import {
               >
                 Following
               </dt>
-              <dd class="font-semibold">{{ countOf(410) }}</dd>
+              <dd class="font-semibold">{{ f.count(410) }}</dd>
             </div>
           </dl>
         </div>
@@ -280,8 +271,8 @@ import {
           <p scCardDescription class="flex items-center gap-1">
             <svg siStarIcon class="size-3.5 fill-current"></svg>
             <ng-container i18n="@@widgets.widgetPages.reviews"
-              >{{ countOf(product.rating) }} ·
-              {{ countOf(product.reviews) }} reviews</ng-container
+              >{{ f.count(product.rating) }} ·
+              {{ f.count(product.reviews) }} reviews</ng-container
             >
           </p>
           <div scCardAction>
@@ -304,7 +295,7 @@ import {
           class="justify-between"
         >
           <span class="text-lg font-semibold tabular-nums">{{
-            moneyOf(product.price)
+            f.money(product.price)
           }}</span>
           <a
             scLink
@@ -322,7 +313,7 @@ import {
             Project Apollo
           </h2>
           <p i18n="@@widgets.widgetPages.dueMay30" scCardDescription>
-            Due {{ monthDayOf('May 30') }}
+            Due {{ f.monthDay('May 30') }}
           </p>
           <div i18n="@@widgets.widgetPages.onTrack" scCardAction>
             <span scBadge variant="secondary">On track</span>
@@ -333,7 +324,7 @@ import {
             <span i18n="@@widgets.widgetPages.progress" scProgressLabel
               >Progress</span
             >
-            <span scProgressValueText>{{ percentOf(0.68) }}</span>
+            <span scProgressValueText>{{ f.percent(0.68) }}</span>
             <div scProgressTrack><div scProgressRange></div></div>
           </div>
           <div class="flex items-center justify-between">
@@ -344,12 +335,12 @@ import {
                   <span scAvatarFallback>{{ initialsOf(p.name) }}</span>
                 </span>
               }
-              <div scAvatarGroupCount>+{{ countOf(3) }}</div>
+              <div scAvatarGroupCount>+{{ f.count(3) }}</div>
             </div>
             <span
               i18n="@@widgets.widgetPages.n14Of21Tasks"
               class="text-muted-foreground text-sm"
-              >{{ countOf(14) }} of {{ countOf(21) }} tasks</span
+              >{{ f.count(14) }} of {{ f.count(21) }} tasks</span
             >
           </div>
         </div>
@@ -360,17 +351,15 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class WidgetCardsPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly percentOf = percent;
 
   /** In the user's numbering system. */
-  private readonly monthDayOf = monthDay;
 
   /** In the user's numbering system. */
-  private readonly compactOf = compact;
 
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -386,7 +375,6 @@ export class WidgetCardsPage {
   private readonly following = signal(false);
   private readonly liked = signal(true);
   private readonly initialsOf = initials;
-  private readonly moneyOf = money;
 }
 
 const WEEK = [
@@ -433,7 +421,7 @@ const WEEK = [
           <p i18n="@@widgets.widgetPages.visitorsThisWeek" scCardDescription>
             Visitors this week
           </p>
-          <h2 scCardTitle class="text-2xl tabular-nums">{{ countOf(328) }}</h2>
+          <h2 scCardTitle class="text-2xl tabular-nums">{{ f.count(328) }}</h2>
         </div>
         <div scCardBody>
           <div scChart [config]="config" [data]="week" class="h-20 w-full">
@@ -454,7 +442,7 @@ const WEEK = [
           <p i18n="@@widgets.widgetPages.ordersThisWeek" scCardDescription>
             Orders this week
           </p>
-          <h2 scCardTitle class="text-2xl tabular-nums">{{ countOf(1204) }}</h2>
+          <h2 scCardTitle class="text-2xl tabular-nums">{{ f.count(1204) }}</h2>
         </div>
         <div scCardBody>
           <div scChart [config]="config" [data]="week" class="h-20 w-full">
@@ -475,7 +463,7 @@ const WEEK = [
           <p i18n="@@widgets.widgetPages.signUpsThisWeek" scCardDescription>
             Sign-ups this week
           </p>
-          <h2 scCardTitle class="text-2xl tabular-nums">{{ countOf(86) }}</h2>
+          <h2 scCardTitle class="text-2xl tabular-nums">{{ f.count(86) }}</h2>
         </div>
         <div scCardBody>
           <div scChart [config]="config" [data]="week" class="h-20 w-full">
@@ -497,7 +485,7 @@ const WEEK = [
             Storage used
           </p>
           <h2 scCardTitle class="text-2xl tabular-nums">
-            {{ unitOf(74, 'gigabyte') }}
+            {{ f.unit(74, 'gigabyte') }}
           </h2>
         </div>
         <div scCardBody class="flex justify-center">
@@ -597,11 +585,11 @@ const WEEK = [
   encapsulation: ViewEncapsulation.None,
 })
 export class WidgetChartsPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly unitOf = unit;
 
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -611,7 +599,7 @@ export class WidgetChartsPage {
 
   private readonly week = WEEK.map((row) => ({
     ...row,
-    day: axisLabel(row.day),
+    day: this.f.axisLabel(row.day),
   }));
   private readonly config: ScChartConfig = {
     value: {
@@ -652,5 +640,5 @@ export class WidgetChartsPage {
   ];
   /** A whole percent, in the user's numbering system. */
   private readonly percentOf = (value: number) =>
-    percent(Math.round(value * 100) / 100);
+    this.f.percent(Math.round(value * 100) / 100);
 }

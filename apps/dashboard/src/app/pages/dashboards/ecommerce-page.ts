@@ -62,15 +62,7 @@ import { personById } from '../../data/people';
 import { PRODUCTS, thumbOf } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
 import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
-import {
-  axisLabel,
-  compactMoney,
-  count,
-  day,
-  initials,
-  money,
-  percent,
-} from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { orderBadge } from '../../shared/status';
 
@@ -265,7 +257,7 @@ const REVENUE = [
               <g scChartBar key="lastYear" />
               <g scChartBar key="thisYear" />
             </svg>
-            <app-chart-tooltip [format]="moneyOf" indicator="dashed" />
+            <app-chart-tooltip [format]="f.money" indicator="dashed" />
             <app-chart-legend />
           </div>
         </div>
@@ -277,7 +269,7 @@ const REVENUE = [
             Yearly goal
           </h2>
           <p i18n="@@dashboards.ecommerce.n147kOf204k" scCardDescription>
-            {{ compactMoneyOf(147000) }} of {{ compactMoneyOf(204000) }}
+            {{ f.compactMoney(147000) }} of {{ f.compactMoney(204000) }}
           </p>
         </div>
         <div scCardBody class="flex flex-col items-center gap-4">
@@ -290,14 +282,14 @@ const REVENUE = [
           >
             <svg scProgressCircle [thickness]="6"></svg>
             <span scProgressValueText class="text-2xl font-semibold">{{
-              percentOf(0.72)
+              f.percent(0.72)
             }}</span>
           </div>
           <p
             i18n="@@dashboards.ecommerce.n57kToGoAtThis"
             class="text-muted-foreground text-center text-sm"
           >
-            {{ compactMoneyOf(57000) }} to go — at this pace, reached in
+            {{ f.compactMoney(57000) }} to go — at this pace, reached in
             October.
           </p>
         </div>
@@ -363,9 +355,9 @@ const REVENUE = [
                       </div>
                     </td>
                     <td scTableCell>{{ order.product }}</td>
-                    <td scTableCell>{{ dayOf(order.date) }}</td>
+                    <td scTableCell>{{ f.day(order.date) }}</td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ moneyOf(order.total) }}
+                      {{ f.money(order.total) }}
                     </td>
                     <td scTableCell>
                       <span scBadge [variant]="badgeOf(order.status)">{{
@@ -408,12 +400,12 @@ const REVENUE = [
                 <div scItemBody>
                   <div scItemTitle>{{ product.name }}</div>
                   <p i18n="@@dashboards.ecommerce.reviews" scItemDescription>
-                    {{ countOf(product.reviews) }} reviews ·
+                    {{ f.count(product.reviews) }} reviews ·
                     {{ labelOf(product.category) }}
                   </p>
                 </div>
                 <span class="text-sm font-medium tabular-nums">{{
-                  moneyOf(product.price)
+                  f.money(product.price)
                 }}</span>
               </a>
             }
@@ -431,10 +423,8 @@ const REVENUE = [
   encapsulation: ViewEncapsulation.None,
 })
 export class EcommercePage {
-  /** In the user's numbering system. */
-  private readonly percentOf = percent;
-  private readonly countOf = count;
-  private readonly compactMoneyOf = compactMoney;
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -444,7 +434,7 @@ export class EcommercePage {
 
   private readonly revenue = REVENUE.map((row) => ({
     ...row,
-    month: axisLabel(row.month),
+    month: this.f.axisLabel(row.month),
   }));
   private readonly revenueConfig: ScChartConfig = {
     thisYear: {
@@ -464,10 +454,8 @@ export class EcommercePage {
   private readonly bestSellers = [...PRODUCTS]
     .sort((a, b) => b.reviews - a.reviews)
     .slice(0, 5);
-  private readonly moneyOf = money;
-  private readonly dayOf = day;
   private readonly initialsOf = initials;
   private readonly badgeOf = orderBadge;
   private readonly thumbOf = thumbOf;
-  private readonly short = (value: number) => compactMoney(value);
+  private readonly short = (value: number) => this.f.compactMoney(value);
 }

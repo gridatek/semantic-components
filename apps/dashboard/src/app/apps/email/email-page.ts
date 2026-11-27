@@ -52,7 +52,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ME, PEOPLE, type Person } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { count, date, dayTime, initials } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 
 type Folder = 'inbox' | 'sent' | 'drafts' | 'spam' | 'trash';
 
@@ -286,7 +286,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
                   i18n="@@email.unread"
                   class="text-muted-foreground ms-auto text-xs tabular-nums"
                 >
-                  {{ countOf(unread) }}<span class="sr-only"> unread</span>
+                  {{ f.count(unread) }}<span class="sr-only"> unread</span>
                 </span>
               }
             </button>
@@ -437,7 +437,7 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
                 }}</span>
               </div>
               <span class="text-muted-foreground ms-auto text-xs">{{
-                when(mail.date)
+                f.dayTime(mail.date)
               }}</span>
             </div>
             <p class="text-sm whitespace-pre-line">{{ mail.body }}</p>
@@ -520,8 +520,9 @@ const FOLDERS: readonly { value: Folder | 'starred'; label: string }[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class EmailPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -578,10 +579,9 @@ export class EmailPage {
   });
 
   private readonly initialsOf = initials;
-  private readonly when = dayTime;
 
   private shortDate(iso: string): string {
-    return date(Temporal.PlainDate.from(iso.slice(0, 10)), {
+    return this.f.date(Temporal.PlainDate.from(iso.slice(0, 10)), {
       month: 'short',
       day: 'numeric',
     });

@@ -39,7 +39,7 @@ import {
   AppStatCardValue,
 } from '../../components/stat-card';
 import { PageHeader } from '../../layout/page-header';
-import { day, money } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import {
   INVOICE_STATUSES,
@@ -180,10 +180,10 @@ import {
                       }}</span>
                     </div>
                   </td>
-                  <td scTableCell>{{ dayOf(invoice.issued) }}</td>
-                  <td scTableCell>{{ dayOf(invoice.due) }}</td>
+                  <td scTableCell>{{ f.day(invoice.issued) }}</td>
+                  <td scTableCell>{{ f.day(invoice.due) }}</td>
                   <td scTableCell class="text-end tabular-nums">
-                    {{ moneyOf(total(invoice)) }}
+                    {{ f.money(total(invoice)) }}
                   </td>
                   <td scTableCell>
                     <span scBadge [variant]="badgeOf(invoice.status)">{{
@@ -250,6 +250,8 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class InvoiceListPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -299,8 +301,6 @@ export class InvoiceListPage {
     ];
   });
   private readonly total = totalOf;
-  private readonly dayOf = day;
-  private readonly moneyOf = money;
   private readonly badgeOf = invoiceBadge;
 
   private remove(invoice: Invoice): void {

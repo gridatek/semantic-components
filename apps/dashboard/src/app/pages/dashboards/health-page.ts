@@ -52,14 +52,7 @@ import {
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { ChartTooltip } from '../../shared/chart-parts';
-import {
-  count,
-  duration,
-  initials,
-  percent,
-  weekdayTime,
-  when,
-} from '../../shared/format';
+import { type AppFormats, initials, injectFormats } from '../../shared/formats';
 
 const HEART = [
   { time: '00:00', bpm: 58 },
@@ -79,20 +72,20 @@ const RINGS = [
   {
     name: $localize`:@@dashboards.health.move:Move`,
     value: 0.82,
-    detail: () =>
-      $localize`:@@dashboards.health.n410Of500Kcal:${count(410)}:done: of ${count(500)}:goal: kcal`,
+    detail: (f: AppFormats) =>
+      $localize`:@@dashboards.health.n410Of500Kcal:${f.count(410)}:done: of ${f.count(500)}:goal: kcal`,
   },
   {
     name: $localize`:@@dashboards.health.exercise:Exercise`,
     value: 0.64,
-    detail: () =>
-      $localize`:@@dashboards.health.n19Of30Min:${count(19)}:done: of ${count(30)}:goal: min`,
+    detail: (f: AppFormats) =>
+      $localize`:@@dashboards.health.n19Of30Min:${f.count(19)}:done: of ${f.count(30)}:goal: min`,
   },
   {
     name: $localize`:@@dashboards.health.stand:Stand`,
     value: 0.92,
-    detail: () =>
-      $localize`:@@dashboards.health.n11Of12Hours:${count(11)}:done: of ${count(12)}:goal: hours`,
+    detail: (f: AppFormats) =>
+      $localize`:@@dashboards.health.n11Of12Hours:${f.count(11)}:done: of ${f.count(12)}:goal: hours`,
   },
 ];
 
@@ -188,7 +181,7 @@ interface Medication {
           <svg siHeartPulseIcon appStatCardIcon></svg>
         </dt>
         <dd i18n="@@dashboards.health.n58Bpm" appStatCardValue>
-          {{ countOf(58) }} bpm
+          {{ f.count(58) }} bpm
         </dd>
         <dd appStatCardChange good="down" [value]="-2">
           <svg siTrendingDownIcon></svg>
@@ -219,9 +212,9 @@ interface Medication {
           <ng-container i18n="@@dashboards.health.sleep">Sleep</ng-container>
           <svg siMoonIcon appStatCardIcon></svg>
         </dt>
-        <dd appStatCardValue>{{ durationOf({ hours: 7, minutes: 24 }) }}</dd>
+        <dd appStatCardValue>{{ f.duration({ hours: 7, minutes: 24 }) }}</dd>
         <dd i18n="@@dashboards.health.deepSleep1h52m" appStatCardDescription>
-          deep sleep {{ durationOf({ hours: 1, minutes: 52 }) }}
+          deep sleep {{ f.duration({ hours: 1, minutes: 52 }) }}
         </dd>
       </dl>
       <dl appStatCard>
@@ -233,7 +226,7 @@ interface Medication {
         </dt>
         <dd appStatCardValue [value]="2140"></dd>
         <dd i18n="@@dashboards.health.of2400Kcal" appStatCardDescription>
-          of {{ countOf(2400) }} kcal
+          of {{ f.count(2400) }} kcal
         </dd>
       </dl>
     </div>
@@ -288,7 +281,7 @@ interface Medication {
               >
                 <svg scProgressCircle [thickness]="6"></svg>
                 <span scProgressValueText class="text-sm font-semibold">{{
-                  percentOf(ring.value)
+                  f.percent(ring.value)
                 }}</span>
               </div>
               <span class="text-sm font-medium">{{ ring.name }}</span>
@@ -324,7 +317,8 @@ interface Medication {
                 <div scItemBody>
                   <div scItemTitle>{{ visit.title }}</div>
                   <p i18n="@@dashboards.health.dr" scItemDescription>
-                    Dr. {{ visit.person.name }} · {{ whenOf(visit.when) }}
+                    Dr. {{ visit.person.name }} ·
+                    {{ f.weekdayTime(visit.when) }}
                   </p>
                 </div>
                 <div scItemActions>
@@ -340,7 +334,7 @@ interface Medication {
         <div scCardHeader>
           <h2 i18n="@@dashboards.health.medication" scCardTitle>Medication</h2>
           <p i18n="@@dashboards.health.ofTaken" scCardDescription>
-            {{ countOf(taken()) }} of {{ countOf(meds().length) }} taken
+            {{ f.count(taken()) }} of {{ f.count(meds().length) }} taken
           </p>
         </div>
         <div scCardBody class="flex flex-col gap-3">
@@ -369,8 +363,9 @@ interface Medication {
   encapsulation: ViewEncapsulation.None,
 })
 export class HealthPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly percentOf = percent;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -380,7 +375,7 @@ export class HealthPage {
 
   /** The hours as the locale writes them. */
   private readonly heart = computed(() =>
-    HEART.map((row) => ({ ...row, time: when(row.time) })),
+    HEART.map((row) => ({ ...row, time: this.f.when(row.time) })),
   );
   private readonly heartConfig: ScChartConfig = {
     bpm: {
@@ -389,11 +384,8 @@ export class HealthPage {
     },
   };
   private readonly rings = computed(() =>
-    RINGS.map((ring) => ({ ...ring, detail: ring.detail() })),
+    RINGS.map((ring) => ({ ...ring, detail: ring.detail(this.f) })),
   );
-  private readonly countOf = count;
-  private readonly durationOf = duration;
-  private readonly whenOf = weekdayTime;
   private readonly appointments = APPOINTMENTS.map((visit) => ({
     ...visit,
     person: PEOPLE.find((p) => p.id === visit.personId) ?? PEOPLE[0],
@@ -402,25 +394,25 @@ export class HealthPage {
     {
       id: 1,
       name: $localize`:@@dashboards.health.vitaminD:Vitamin D`,
-      dose: $localize`:@@dashboards.health.n1000IuMorning:${count(1000)}:amount: IU, morning`,
+      dose: $localize`:@@dashboards.health.n1000IuMorning:${this.f.count(1000)}:amount: IU, morning`,
       taken: true,
     },
     {
       id: 2,
       name: $localize`:@@dashboards.health.omega3:Omega-3`,
-      dose: $localize`:@@dashboards.health.n1CapsuleLunch:${count(1)}:amount: capsule, lunch`,
+      dose: $localize`:@@dashboards.health.n1CapsuleLunch:${this.f.count(1)}:amount: capsule, lunch`,
       taken: true,
     },
     {
       id: 3,
       name: $localize`:@@dashboards.health.magnesium:Magnesium`,
-      dose: $localize`:@@dashboards.health.n200MgEvening:${count(200)}:amount: mg, evening`,
+      dose: $localize`:@@dashboards.health.n200MgEvening:${this.f.count(200)}:amount: mg, evening`,
       taken: false,
     },
     {
       id: 4,
       name: $localize`:@@dashboards.health.iron:Iron`,
-      dose: $localize`:@@dashboards.health.n14MgEvening:${count(14)}:amount: mg, evening`,
+      dose: $localize`:@@dashboards.health.n14MgEvening:${this.f.count(14)}:amount: mg, evening`,
       taken: false,
     },
   ]);
@@ -428,7 +420,7 @@ export class HealthPage {
     () => this.meds().filter((med) => med.taken).length,
   );
   private readonly initialsOf = initials;
-  private readonly bpmOf = (value: number) => `${count(value)} bpm`;
+  private readonly bpmOf = (value: number) => `${this.f.count(value)} bpm`;
 
   private toggle(id: number): void {
     this.meds.update((meds) =>

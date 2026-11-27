@@ -44,7 +44,7 @@ import {
   type ProductCategory,
 } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { count, money } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { CartStore, ProductStore } from './shop-store';
 
@@ -93,7 +93,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
       <a scLink variant="outline" routerLink="/apps/ecommerce/checkout">
         <svg siShoppingCartIcon></svg>
         <ng-container i18n="@@ecommerce.shop.cart">Cart</ng-container>
-        <span scBadge>{{ countOf(cart.count()) }}</span>
+        <span scBadge>{{ f.count(cart.count()) }}</span>
         <span i18n="@@ecommerce.shop.items" class="sr-only">items</span>
       </a>
     </app-page-header>
@@ -123,7 +123,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
           <div scSeparator></div>
           <div class="flex flex-col gap-3">
             <label i18n="@@ecommerce.shop.upTo" scLabel for="max-price"
-              >Up to {{ moneyOf(maxPrice()) }}</label
+              >Up to {{ f.money(maxPrice()) }}</label
             >
             <input
               scSlider
@@ -178,7 +178,7 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
             class="text-muted-foreground text-sm"
             aria-live="polite"
           >
-            {{ countOf(shown().length) }} products
+            {{ f.count(shown().length) }} products
           </span>
           <div scNativeSelectContainer class="ms-auto w-48">
             <select
@@ -271,17 +271,17 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
                   >
                     <svg siStarIcon class="size-4 fill-current"></svg>
                     <ng-container i18n="@@ecommerce.shop.reviews"
-                      >{{ countOf(product.rating) }} ·
-                      {{ countOf(product.reviews) }} reviews</ng-container
+                      >{{ f.count(product.rating) }} ·
+                      {{ f.count(product.reviews) }} reviews</ng-container
                     >
                   </span>
                   <div class="mt-auto flex items-center gap-2 pt-2">
                     <span class="font-semibold tabular-nums">{{
-                      moneyOf(product.price)
+                      f.money(product.price)
                     }}</span>
                     @if (product.listPrice) {
                       <s class="text-muted-foreground text-sm tabular-nums">{{
-                        moneyOf(product.listPrice)
+                        f.money(product.listPrice)
                       }}</s>
                     }
                     <button
@@ -325,8 +325,9 @@ type Sort = 'newest' | 'price-asc' | 'price-desc' | 'rating';
   encapsulation: ViewEncapsulation.None,
 })
 export class ShopPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -361,7 +362,6 @@ export class ShopPage {
     };
     return [...list].sort(by[this.sort()]);
   });
-  private readonly moneyOf = money;
 
   private toggleCategory(category: ProductCategory): void {
     this.chosen.update((set) => {

@@ -47,7 +47,7 @@ import {
 import { PEOPLE } from '../../data/people';
 import { PRODUCTS, thumbOf } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { count, initials, money, wholeMoney } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { CartStore, ProductStore } from './shop-store';
 
@@ -144,7 +144,7 @@ const REVIEWS = [
                   i18n="@@ecommerce.productDetail.inStock"
                   scBadge
                   variant="outline"
-                  >{{ countOf(product.stock) }} in stock</span
+                  >{{ f.count(product.stock) }} in stock</span
                 >
               } @else {
                 <span
@@ -159,17 +159,17 @@ const REVIEWS = [
             <span class="text-muted-foreground flex items-center gap-1 text-sm">
               <svg siStarIcon class="size-4 fill-current"></svg>
               <ng-container i18n="@@ecommerce.productDetail.reviews"
-                >{{ countOf(product.rating) }} ·
-                {{ countOf(product.reviews) }} reviews</ng-container
+                >{{ f.count(product.rating) }} ·
+                {{ f.count(product.reviews) }} reviews</ng-container
               >
             </span>
             <div class="flex items-baseline gap-3">
               <span class="text-3xl font-semibold tabular-nums">{{
-                moneyOf(product.price)
+                f.money(product.price)
               }}</span>
               @if (product.listPrice) {
                 <s class="text-muted-foreground tabular-nums">{{
-                  moneyOf(product.listPrice)
+                  f.money(product.listPrice)
                 }}</s>
               }
             </div>
@@ -259,13 +259,13 @@ const REVIEWS = [
                 <svg siTruckIcon></svg>
                 <ng-container
                   i18n="@@ecommerce.productDetail.freeDeliveryOver100"
-                  >Free delivery over {{ wholeMoneyOf(100) }}</ng-container
+                  >Free delivery over {{ f.wholeMoney(100) }}</ng-container
                 >
               </li>
               <li class="flex items-center gap-2">
                 <svg siShieldCheckIcon></svg>
                 <ng-container i18n="@@ecommerce.productDetail.n30DayReturns"
-                  >{{ countOf(30) }}-day returns</ng-container
+                  >{{ f.count(30) }}-day returns</ng-container
                 >
               </li>
             </ul>
@@ -289,7 +289,7 @@ const REVIEWS = [
                 scTabsTab
                 value="reviews"
               >
-                Reviews ({{ countOf(reviews.length) }})
+                Reviews ({{ f.count(reviews.length) }})
               </button>
             </div>
             <div scTabsPanel value="description">
@@ -330,7 +330,7 @@ const REVIEWS = [
                         >
                           <svg siStarIcon class="size-3.5 fill-current"></svg>
                           <ng-container i18n="@@ecommerce.productDetail.of5"
-                            >{{ countOf(review.rating) }} of 5 ·
+                            >{{ f.count(review.rating) }} of 5 ·
                             {{ review.date }}</ng-container
                           >
                         </span>
@@ -369,7 +369,7 @@ const REVIEWS = [
                 <span class="flex flex-col">
                   <span class="text-sm font-medium">{{ item.name }}</span>
                   <span class="text-muted-foreground text-sm tabular-nums">{{
-                    moneyOf(item.price)
+                    f.money(item.price)
                   }}</span>
                 </span>
               </a>
@@ -397,11 +397,11 @@ const REVIEWS = [
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductDetailPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly wholeMoneyOf = wholeMoney;
 
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -439,7 +439,6 @@ export class ProductDetailPage {
     ...r,
     person: PEOPLE.find((p) => p.id === r.personId) ?? PEOPLE[0],
   }));
-  private readonly moneyOf = money;
   private readonly initialsOf = initials;
   private readonly thumbOf = thumbOf;
 

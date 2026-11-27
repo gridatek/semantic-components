@@ -39,7 +39,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { PRODUCT_CATEGORIES, type Product, thumbOf } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { count, day, money } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { ProductStore } from './shop-store';
 
@@ -216,7 +216,7 @@ import { ProductStore } from './shop-store';
                     </div>
                   </td>
                   <td scTableCell>{{ labelOf(product.category) }}</td>
-                  <td scTableCell>{{ dayOf(product.added) }}</td>
+                  <td scTableCell>{{ f.day(product.added) }}</td>
                   <td scTableCell>
                     @if (product.stock === 0) {
                       <span
@@ -230,16 +230,16 @@ import { ProductStore } from './shop-store';
                         i18n="@@ecommerce.productList.low"
                         scBadge
                         variant="outline"
-                        >Low · {{ countOf(product.stock) }}</span
+                        >Low · {{ f.count(product.stock) }}</span
                       >
                     } @else {
                       <span scBadge variant="secondary">{{
-                        countOf(product.stock)
+                        f.count(product.stock)
                       }}</span>
                     }
                   </td>
                   <td scTableCell class="text-end tabular-nums">
-                    {{ moneyOf(product.price) }}
+                    {{ f.money(product.price) }}
                   </td>
                   <td scTableCell>
                     <div class="flex justify-end gap-1">
@@ -297,8 +297,9 @@ import { ProductStore } from './shop-store';
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductListPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -331,8 +332,6 @@ export class ProductListPage {
       !this.allSelected() &&
       this.shown().some((p) => this.selected().has(p.id)),
   );
-  private readonly moneyOf = money;
-  private readonly dayOf = day;
   private readonly thumbOf = thumbOf;
 
   private toggle(id: number): void {

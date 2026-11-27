@@ -27,7 +27,7 @@ import {
 } from '@semantic-components/ui/charts';
 import { PageHeader } from '../../layout/page-header';
 import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
-import { axisLabel, count } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 
 /** Visitors by month and device: the charts' shared series. */
 const MONTHS = [
@@ -94,11 +94,13 @@ const CARD_IMPORTS = [
 
 /** Each page's data: fresh copies (a chart takes mutable rows). */
 abstract class ChartPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  protected readonly f = injectFormats();
   /** The donut's centre word: SVG text, so not an i18n element. */
   private readonly visitorsLabel = $localize`:@@charts.chartPages.visitors:Visitors`;
   private readonly months = MONTHS.map((row) => ({
     ...row,
-    month: axisLabel(row.month),
+    month: this.f.axisLabel(row.month),
   }));
   private readonly browsers = BROWSERS.map((row) => ({ ...row }));
   private readonly devices = DEVICES;
@@ -664,7 +666,7 @@ export class BarChartsPage extends ChartPage {
                   text-anchor="middle"
                   class="fill-foreground text-3xl font-bold"
                 >
-                  {{ countOf(total) }}
+                  {{ f.count(total) }}
                 </text>
                 <text
                   text-anchor="middle"
@@ -715,7 +717,6 @@ export class BarChartsPage extends ChartPage {
 })
 export class PieChartsPage extends ChartPage {
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

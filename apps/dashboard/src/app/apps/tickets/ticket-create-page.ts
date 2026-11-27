@@ -31,7 +31,7 @@ import {
 import { SiCheckIcon, SiChevronDownIcon } from '@semantic-icons/lucide-icons';
 import { AGENTS, TICKET_STATUSES, type TicketStatus } from '../../data/tickets';
 import { PageHeader } from '../../layout/page-header';
-import { today } from '../../shared/format';
+import { today } from '../../shared/formats';
 import { TicketsStore } from '../../shared/stores';
 
 /** Create Ticket: what, for whom, its status; back to the list once created. */

@@ -2,7 +2,7 @@ import { Service, computed, signal } from '@angular/core';
 import { BLOG_POSTS, type BlogPost, slugOf } from '../data/blog';
 import { NOTES, type Note, type NoteColor } from '../data/notes';
 import { TICKETS, type Ticket } from '../data/tickets';
-import { now } from './format';
+import { now } from './formats';
 
 /** The blog's posts, in memory: what the screens add, edit and delete. */
 @Service()

@@ -36,7 +36,7 @@ import {
 } from '@semantic-components/ui';
 import { SiCheckIcon } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
-import { count, wholeMoney } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 
 const EMPTY = {
   account: { email: '', password: '' },
@@ -114,7 +114,7 @@ const EMPTY = {
                     @if (s1.status() === 'complete') {
                       <svg siCheckIcon></svg>
                     } @else {
-                      {{ countOf(1) }}
+                      {{ f.count(1) }}
                     }
                   </span>
                   <span
@@ -137,7 +137,7 @@ const EMPTY = {
                     @if (s2.status() === 'complete') {
                       <svg siCheckIcon></svg>
                     } @else {
-                      {{ countOf(2) }}
+                      {{ f.count(2) }}
                     }
                   </span>
                   <span
@@ -160,7 +160,7 @@ const EMPTY = {
                     @if (s3.status() === 'complete') {
                       <svg siCheckIcon></svg>
                     } @else {
-                      {{ countOf(3) }}
+                      {{ f.count(3) }}
                     }
                   </span>
                   <span
@@ -256,7 +256,7 @@ const EMPTY = {
                         <span
                           i18n="@@forms.formWizard.perMonth"
                           class="text-muted-foreground font-normal"
-                          >{{ wholeMoneyOf(p.price) }} / month</span
+                          >{{ f.wholeMoney(p.price) }} / month</span
                         >
                       </label>
                     }
@@ -325,11 +325,11 @@ const EMPTY = {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormWizardPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly wholeMoneyOf = wholeMoney;
 
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

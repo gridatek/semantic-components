@@ -16,7 +16,7 @@ import {
   ScSeparator,
   ScToaster,
 } from '@semantic-components/ui';
-import { count } from '../shared/format';
+import { injectFormats } from '../shared/formats';
 
 /** Boxed Two Steps: the code sent to the phone. */
 @Component({
@@ -58,7 +58,7 @@ import { count } from '../shared/format';
         >
           <div scField class="w-fit">
             <label i18n="@@auth.twoSteps.typeYour6DigitsSecurity" scLabel
-              >Type your {{ countOf(6) }} digits security code</label
+              >Type your {{ f.count(6) }} digits security code</label
             >
             <div
               scOtpInput
@@ -110,8 +110,9 @@ import { count } from '../shared/format';
   encapsulation: ViewEncapsulation.None,
 })
 export class TwoStepsPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly router = inject(Router);
   private readonly toaster = inject(ScToaster);

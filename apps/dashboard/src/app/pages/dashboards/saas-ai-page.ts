@@ -66,15 +66,7 @@ import {
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { ChartTooltip } from '../../shared/chart-parts';
-import {
-  axisLabel,
-  compact,
-  compactMoney,
-  count,
-  day,
-  initials,
-  money,
-} from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 const MRR = [
@@ -306,7 +298,7 @@ const SIGNUPS = [
               <g scChartCursor />
               <g scChartArea key="mrr" curve="monotone" />
             </svg>
-            <app-chart-tooltip [format]="moneyOf" />
+            <app-chart-tooltip [format]="f.money" />
           </div>
         </div>
       </div>
@@ -354,8 +346,8 @@ const SIGNUPS = [
             <div scProgress [value]="model.tokens" [max]="model.quota">
               <span scProgressLabel>{{ model.name }}</span>
               <span i18n="@@dashboards.saasAi.mM" scProgressValueText
-                >{{ compactOf(model.tokens * 1e6) }} /
-                {{ compactOf(model.quota * 1e6) }}</span
+                >{{ f.compact(model.tokens * 1e6) }} /
+                {{ f.compact(model.quota * 1e6) }}</span
               >
               <div scProgressTrack><div scProgressRange></div></div>
             </div>
@@ -420,9 +412,9 @@ const SIGNUPS = [
                       }}</span>
                     </td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ moneyOf(signup.mrr) }}
+                      {{ f.money(signup.mrr) }}
                     </td>
-                    <td scTableCell>{{ dayOf(signup.date) }}</td>
+                    <td scTableCell>{{ f.day(signup.date) }}</td>
                   </tr>
                 }
               </tbody>
@@ -478,8 +470,9 @@ const SIGNUPS = [
   encapsulation: ViewEncapsulation.None,
 })
 export class SaasAiPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -492,14 +485,14 @@ export class SaasAiPage {
   private readonly question = signal('');
   private readonly mrr = MRR.map((row) => ({
     ...row,
-    month: axisLabel(row.month),
+    month: this.f.axisLabel(row.month),
   }));
   private readonly plans = PLANS.map((row) => ({
     ...row,
     plan: label(row.plan),
   }));
   private readonly totalAccounts = computed(() =>
-    compact(PLANS.reduce((sum, row) => sum + row.accounts, 0)),
+    this.f.compact(PLANS.reduce((sum, row) => sum + row.accounts, 0)),
   );
   private readonly models = MODELS;
   private readonly signups = SIGNUPS.map((signup) => ({
@@ -515,11 +508,8 @@ export class SaasAiPage {
       color: 'var(--chart-3)',
     },
   };
-  private readonly moneyOf = money;
-  private readonly compactOf = compact;
-  private readonly dayOf = day;
   private readonly initialsOf = initials;
-  private readonly shortMoney = (value: number) => compactMoney(value);
+  private readonly shortMoney = (value: number) => this.f.compactMoney(value);
 
   /** Takes the question to the AI chat. */
   private ask(event: Event): void {

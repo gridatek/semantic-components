@@ -57,14 +57,7 @@ import {
 import { PEOPLE } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
 import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
-import {
-  axisLabel,
-  count,
-  hour,
-  initials,
-  monthDay,
-  percent,
-} from '../../shared/format';
+import { type AppFormats, initials, injectFormats } from '../../shared/formats';
 
 const ATTENDANCE = [
   { day: 'Mon', present: 1162, absent: 78 },
@@ -137,8 +130,8 @@ const STUDENTS = [
 const NOTICES = [
   {
     title: $localize`:@@dashboards.school.scienceFair:Science fair`,
-    text: () =>
-      $localize`:@@dashboards.school.projectsGoUpInThe:Projects go up in the gym on Friday; parents welcome from ${hour(15)}:time:.`,
+    text: (f: AppFormats) =>
+      $localize`:@@dashboards.school.projectsGoUpInThe:Projects go up in the gym on Friday; parents welcome from ${f.hour(15)}:time:.`,
     at: '2026-04-24',
     status: 'complete' as const,
   },
@@ -156,8 +149,8 @@ const NOTICES = [
   },
   {
     title: $localize`:@@dashboards.school.sportsDay:Sports day`,
-    text: () =>
-      $localize`:@@dashboards.school.onTheFieldFrom9:On the field from ${hour(9)}:time:; bring water and a hat.`,
+    text: (f: AppFormats) =>
+      $localize`:@@dashboards.school.onTheFieldFrom9:On the field from ${f.hour(9)}:time:; bring water and a hat.`,
     at: '2026-05-22',
     status: 'upcoming' as const,
   },
@@ -253,7 +246,7 @@ const NOTICES = [
         </dt>
         <dd appStatCardValue [value]="86"></dd>
         <dd i18n="@@dashboards.school.n144StudentsEach" appStatCardDescription>
-          {{ countOf(14.4) }} students each
+          {{ f.count(14.4) }} students each
         </dd>
       </dl>
       <dl appStatCard>
@@ -265,7 +258,7 @@ const NOTICES = [
         </dt>
         <dd appStatCardValue [value]="48"></dd>
         <dd i18n="@@dashboards.school.across4Grades" appStatCardDescription>
-          across {{ countOf(4) }} grades
+          across {{ f.count(4) }} grades
         </dd>
       </dl>
       <dl appStatCard>
@@ -343,7 +336,7 @@ const NOTICES = [
                   scItemMedia
                   class="bg-muted flex size-10 flex-col items-center justify-center rounded-md text-xs leading-tight font-medium"
                 >
-                  {{ monthDayOf(exam.date) }}
+                  {{ f.monthDay(exam.date) }}
                 </div>
                 <div scItemBody>
                   <div scItemTitle>{{ exam.subject }}</div>
@@ -421,10 +414,10 @@ const NOTICES = [
                       }}</span>
                     </td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ countOf(student.average) }}
+                      {{ f.count(student.average) }}
                     </td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ percentOf(student.attendance) }}
+                      {{ f.percent(student.attendance) }}
                     </td>
                   </tr>
                 }
@@ -464,6 +457,8 @@ const NOTICES = [
   encapsulation: ViewEncapsulation.None,
 })
 export class SchoolPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     dashboards: $localize`:@@dashboards.school.dashboards:Dashboards`,
@@ -472,7 +467,7 @@ export class SchoolPage {
 
   private readonly attendance = ATTENDANCE.map((row) => ({
     ...row,
-    day: axisLabel(row.day),
+    day: this.f.axisLabel(row.day),
   }));
   private readonly attendanceConfig: ScChartConfig = {
     present: {
@@ -492,17 +487,15 @@ export class SchoolPage {
   private readonly notices = computed(() =>
     NOTICES.map((notice) => ({
       ...notice,
-      text: typeof notice.text === 'function' ? notice.text() : notice.text,
+      text:
+        typeof notice.text === 'function' ? notice.text(this.f) : notice.text,
       at: Temporal.PlainDate.from(notice.at),
     })),
   );
-  private readonly countOf = count;
-  private readonly percentOf = percent;
-  private readonly monthDayOf = monthDay;
 
   /** A grade, its number in the user's numbering system. */
   private gradeOf(grade: number): string {
-    return $localize`:@@dashboards.school.gradeN:Grade ${count(grade)}:grade:`;
+    return $localize`:@@dashboards.school.gradeN:Grade ${this.f.count(grade)}:grade:`;
   }
   private readonly initialsOf = initials;
 }

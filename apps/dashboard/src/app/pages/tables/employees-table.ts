@@ -51,7 +51,7 @@ import {
   SiChevronsUpDownIcon,
 } from '@semantic-icons/lucide-icons';
 import { EMPLOYEES, type Employee } from '../../data/tables';
-import { count, initials, money } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 const features = tableFeatures({
@@ -199,7 +199,7 @@ const columns = columnHelper.columns([
                     {{ labelOf(row.original.department) }}
                   </td>
                   <td scDataTableCell class="tabular-nums">
-                    {{ salaryOf(row.original.salary) }}
+                    {{ f.money(row.original.salary) }}
                   </td>
                   <td scDataTableCell>
                     <span
@@ -242,8 +242,8 @@ const columns = columnHelper.columns([
             class="text-sm font-medium"
             aria-live="polite"
           >
-            Page {{ countOf(pagination.currentPage()) }} of
-            {{ countOf(pagination.totalPages()) }}
+            Page {{ f.count(pagination.currentPage()) }} of
+            {{ f.count(pagination.totalPages()) }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
@@ -295,8 +295,9 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class EmployeesTable {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   private readonly table = injectTable(() => ({
@@ -308,5 +309,4 @@ export class EmployeesTable {
   }));
 
   private readonly initialsOf = initials;
-  private readonly salaryOf = money;
 }

@@ -35,7 +35,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { TICKET_STATUSES, type TicketStatus } from '../../data/tickets';
 import { PageHeader } from '../../layout/page-header';
-import { count, day } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { TicketsStore } from '../../shared/stores';
 
@@ -98,7 +98,7 @@ type Filter = 'All' | TicketStatus;
             (click)="active.set(filter.value)"
           >
             <span class="text-2xl font-semibold tabular-nums">{{
-              countOf(filter.count)
+              f.count(filter.count)
             }}</span>
             <span class="text-muted-foreground text-sm">{{
               filter.label
@@ -175,7 +175,7 @@ type Filter = 'All' | TicketStatus;
                       >{{ labelOf(ticket.status) }}</span
                     >
                   </td>
-                  <td scTableCell>{{ dayOf(ticket.date) }}</td>
+                  <td scTableCell>{{ f.day(ticket.date) }}</td>
                   <td scTableCell class="text-end">
                     <button
                       scButton
@@ -212,8 +212,9 @@ type Filter = 'All' | TicketStatus;
   encapsulation: ViewEncapsulation.None,
 })
 export class TicketsPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -255,8 +256,6 @@ export class TicketsPage {
           ticket.agent.toLowerCase().includes(query),
       );
   });
-
-  private readonly dayOf = day;
 
   private remove(id: number): void {
     this.store.remove(id);

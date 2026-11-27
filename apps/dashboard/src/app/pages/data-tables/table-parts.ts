@@ -15,7 +15,7 @@ import {
   SiChevronsUpDownIcon,
 } from '@semantic-icons/lucide-icons';
 import { type StaffMember, statusBadge } from '../../data/staff';
-import { day, initials, money } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 /** A column's header that sorts it: its name and an arrow for the direction. */
@@ -77,10 +77,10 @@ export class SortHeader {
         </span>
       }
       @case ('salary') {
-        <span class="tabular-nums">{{ moneyOf(member().salary) }}</span>
+        <span class="tabular-nums">{{ f.money(member().salary) }}</span>
       }
       @case ('joined') {
-        {{ dayOf(member().joined) }}
+        {{ f.day(member().joined) }}
       }
       @case ('status') {
         <span scBadge [variant]="badgeOf(member().status)">{{
@@ -96,13 +96,13 @@ export class SortHeader {
   encapsulation: ViewEncapsulation.None,
 })
 export class StaffCell {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   private readonly labelOf = label;
   readonly column = input.required<string>();
   readonly member = input.required<StaffMember>();
 
   private readonly initialsOf = initials;
-  private readonly moneyOf = money;
-  private readonly dayOf = day;
   private readonly badgeOf = statusBadge;
 
   private text(): string {

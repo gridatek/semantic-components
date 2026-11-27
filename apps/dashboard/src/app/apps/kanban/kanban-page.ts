@@ -39,7 +39,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { PEOPLE, type Person } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { count, day, initials } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 type ColumnId = 'todo' | 'progress' | 'review' | 'done';
@@ -212,7 +212,7 @@ const BOARD: ScSortableGroupValue<Task> = {
               {{ column.title }}
             </h2>
             <span class="text-muted-foreground text-xs tabular-nums">{{
-              countOf(kanban.items(column.id).length)
+              f.count(kanban.items(column.id).length)
             }}</span>
             <button
               scButton
@@ -272,7 +272,7 @@ const BOARD: ScSortableGroupValue<Task> = {
                     class="text-muted-foreground flex items-center gap-1 text-xs"
                   >
                     <svg siCalendarIcon class="size-3.5"></svg>
-                    {{ dayOf(task.due) }}
+                    {{ f.day(task.due) }}
                   </span>
                   <div scAvatarGroup class="ms-auto">
                     @for (person of task.people; track person.id) {
@@ -367,8 +367,9 @@ const BOARD: ScSortableGroupValue<Task> = {
   encapsulation: ViewEncapsulation.None,
 })
 export class KanbanPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -414,7 +415,6 @@ export class KanbanPage {
     required(path.title);
     required(path.due);
   });
-  private readonly dayOf = day;
   private readonly initialsOf = initials;
 
   private startAdding(column: ColumnId): void {

@@ -50,14 +50,7 @@ import {
 } from '../../components/stat-card';
 import { PageHeader } from '../../layout/page-header';
 import { ChartLegend, ChartTooltip } from '../../shared/chart-parts';
-import {
-  LOCALE,
-  axisLabel,
-  compact,
-  count,
-  duration,
-  percent,
-} from '../../shared/format';
+import { LOCALE, injectFormats } from '../../shared/formats';
 
 type Range = '7d' | '30d' | '90d';
 
@@ -241,7 +234,7 @@ const COUNTRIES = [
           >
           <svg siClockIcon appStatCardIcon></svg>
         </dt>
-        <dd appStatCardValue>{{ durationOf({ minutes: 3, seconds: 42 }) }}</dd>
+        <dd appStatCardValue>{{ f.duration({ minutes: 3, seconds: 42 }) }}</dd>
         <dd
           appStatCardChange
           [value]="0.046"
@@ -277,21 +270,21 @@ const COUNTRIES = [
                 scToggleGroupItem
                 value="7d"
               >
-                {{ countOf(7) }} days
+                {{ f.count(7) }} days
               </button>
               <button
                 i18n="@@dashboards.analytics.n30Days"
                 scToggleGroupItem
                 value="30d"
               >
-                {{ countOf(30) }} days
+                {{ f.count(30) }} days
               </button>
               <button
                 i18n="@@dashboards.analytics.n90Days"
                 scToggleGroupItem
                 value="90d"
               >
-                {{ countOf(90) }} days
+                {{ f.count(90) }} days
               </button>
             </div>
           </div>
@@ -420,13 +413,13 @@ const COUNTRIES = [
                   <tr scTableRow>
                     <td scTableCell class="font-medium">{{ page.path }}</td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ countOf(page.views) }}
+                      {{ f.count(page.views) }}
                     </td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ countOf(page.unique) }}
+                      {{ f.count(page.unique) }}
                     </td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ percentOf(page.bounce) }}
+                      {{ f.percent(page.bounce) }}
                     </td>
                   </tr>
                 }
@@ -449,7 +442,7 @@ const COUNTRIES = [
           @for (country of countries; track country.name) {
             <div scProgress [value]="country.share * 100">
               <span scProgressLabel>{{ country.name }}</span>
-              <span scProgressValueText>{{ percentOf(country.share) }}</span>
+              <span scProgressValueText>{{ f.percent(country.share) }}</span>
               <div scProgressTrack><div scProgressRange></div></div>
             </div>
           }
@@ -461,6 +454,8 @@ const COUNTRIES = [
   encapsulation: ViewEncapsulation.None,
 })
 export class AnalyticsPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** The donut's centre word: SVG text, so not an i18n element. */
   private readonly visitsLabel = $localize`:@@dashboards.analytics.visits:Visits`;
   /** The template's words that sit in bindings, translated. */
@@ -471,11 +466,14 @@ export class AnalyticsPage {
 
   private readonly range = signal<Range>('90d');
   private readonly traffic = computed(() =>
-    TRAFFIC[this.range()].map((row) => ({ ...row, date: axisLabel(row.date) })),
+    TRAFFIC[this.range()].map((row) => ({
+      ...row,
+      date: this.f.axisLabel(row.date),
+    })),
   );
   private readonly sources = SOURCES.map((row) => ({ ...row }));
   private readonly totalVisits = computed(() =>
-    compact(SOURCES.reduce((sum, row) => sum + row.visits, 0)),
+    this.f.compact(SOURCES.reduce((sum, row) => sum + row.visits, 0)),
   );
   private readonly pages = PAGES;
   private readonly countries = COUNTRIES;
@@ -512,9 +510,6 @@ export class AnalyticsPage {
       color: 'var(--chart-5)',
     },
   };
-  private readonly countOf = count;
-  private readonly durationOf = duration;
-  private readonly percentOf = percent;
 
   private choose(value: readonly string[]): void {
     const next = value[0];

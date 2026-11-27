@@ -45,7 +45,7 @@ import {
   SiTrendingUpIcon,
 } from '@semantic-icons/lucide-icons';
 import { SALES, SALES_PERIODS, type SalesPeriod } from '../../data/dashboard';
-import { change, compact, count, money, monthDay } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 /** Sales Overview: new and existing users over a period, as two lines. */
@@ -148,9 +148,9 @@ import { label } from '../../shared/labels';
             class="flex flex-wrap items-baseline gap-2"
           >
             <span class="text-2xl font-semibold tabular-nums">{{
-              moneyOf(12450)
+              f.money(12450)
             }}</span>
-            <span scBadge variant="secondary">{{ changeOf(0.22) }}</span>
+            <span scBadge variant="secondary">{{ f.change(0.22) }}</span>
             <span class="text-muted-foreground text-sm">vs last month</span>
           </div>
         </div>
@@ -183,7 +183,7 @@ import { label } from '../../shared/labels';
                   >
                     <span scChartTooltipIndicator></span>
                     <span scChartTooltipName>{{ item.name }}</span>
-                    <span scChartTooltipValue>{{ countOf(item.value) }}k</span>
+                    <span scChartTooltipValue>{{ f.count(item.value) }}k</span>
                   </div>
                 }
               </div>
@@ -205,10 +205,8 @@ import { label } from '../../shared/labels';
   encapsulation: ViewEncapsulation.None,
 })
 export class SalesOverview {
-  /** In the user's numbering system. */
-  private readonly countOf = count;
-  private readonly moneyOf = money;
-  private readonly changeOf = change;
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -222,7 +220,7 @@ export class SalesOverview {
   private readonly data = computed(() =>
     SALES[this.period()].map((point) => ({
       ...point,
-      date: monthDay(point.date),
+      date: this.f.monthDay(point.date),
     })),
   );
   private readonly config: ScChartConfig = {
@@ -240,7 +238,7 @@ export class SalesOverview {
   private readonly everyOther = (date: string, index: number) =>
     this.data().length > 10 && index % 3 !== 0 ? '' : date;
   /** Thousands on the axis: 10 → 10K. */
-  private readonly thousands = (value: number) => compact(value * 1000);
+  private readonly thousands = (value: number) => this.f.compact(value * 1000);
 
   private choose(value: unknown): void {
     if (SALES_PERIODS.includes(value as SalesPeriod))

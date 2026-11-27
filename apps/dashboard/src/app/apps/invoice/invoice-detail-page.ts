@@ -34,7 +34,7 @@ import {
   SiPrinterIcon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
-import { count, day, money, percent } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import {
   InvoiceStore,
@@ -170,11 +170,11 @@ import {
               <dt i18n="@@invoice.detail.issued" class="text-muted-foreground">
                 Issued
               </dt>
-              <dd>{{ dayOf(invoice.issued) }}</dd>
+              <dd>{{ f.day(invoice.issued) }}</dd>
               <dt i18n="@@invoice.detail.due" class="text-muted-foreground">
                 Due
               </dt>
-              <dd>{{ dayOf(invoice.due) }}</dd>
+              <dd>{{ f.day(invoice.due) }}</dd>
             </dl>
           </div>
 
@@ -213,13 +213,13 @@ import {
                   <tr scTableRow>
                     <td scTableCell>{{ line.description }}</td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ countOf(line.quantity) }}
+                      {{ f.count(line.quantity) }}
                     </td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ moneyOf(line.price) }}
+                      {{ f.money(line.price) }}
                     </td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ moneyOf(line.quantity * line.price) }}
+                      {{ f.money(line.quantity * line.price) }}
                     </td>
                   </tr>
                 }
@@ -235,7 +235,7 @@ import {
                     Subtotal
                   </td>
                   <td scTableCell class="text-end tabular-nums">
-                    {{ moneyOf(subtotal()) }}
+                    {{ f.money(subtotal()) }}
                   </td>
                 </tr>
                 <tr scTableRow>
@@ -245,10 +245,10 @@ import {
                     colspan="3"
                     class="text-end"
                   >
-                    Tax ({{ percentOf(invoice.taxRate / 100) }})
+                    Tax ({{ f.percent(invoice.taxRate / 100) }})
                   </td>
                   <td scTableCell class="text-end tabular-nums">
-                    {{ moneyOf(total() - subtotal()) }}
+                    {{ f.money(total() - subtotal()) }}
                   </td>
                 </tr>
                 <tr scTableRow>
@@ -261,7 +261,7 @@ import {
                     Total
                   </td>
                   <td scTableCell class="text-end font-semibold tabular-nums">
-                    {{ moneyOf(total()) }}
+                    {{ f.money(total()) }}
                   </td>
                 </tr>
               </tfoot>
@@ -292,11 +292,11 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class InvoiceDetailPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly percentOf = percent;
 
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -320,8 +320,6 @@ export class InvoiceDetailPage {
     const invoice = this.invoice();
     return invoice ? totalOf(invoice) : 0;
   });
-  private readonly dayOf = day;
-  private readonly moneyOf = money;
   private readonly badgeOf = invoiceBadge;
 
   private markPaid(): void {

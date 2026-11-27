@@ -22,7 +22,7 @@ import {
 } from '@semantic-components/ui';
 import { SiSearchIcon } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
-import { count } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 type Category = 'Communication' | 'Project management' | 'Marketing';
@@ -167,7 +167,7 @@ const INTEGRATIONS: readonly Integration[] = [
       <span
         i18n="@@integrations.connected"
         class="text-muted-foreground ms-auto text-sm"
-        >{{ countOf(connectedCount()) }} connected</span
+        >{{ f.count(connectedCount()) }} connected</span
       >
     </div>
 
@@ -231,8 +231,9 @@ const INTEGRATIONS: readonly Integration[] = [
   encapsulation: ViewEncapsulation.None,
 })
 export class IntegrationsPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */

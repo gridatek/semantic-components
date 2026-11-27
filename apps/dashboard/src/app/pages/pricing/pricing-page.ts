@@ -26,15 +26,15 @@ import {
 } from '@semantic-components/ui';
 import { SiCheckIcon, SiMinusIcon } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
-import { count, wholeMoney } from '../../shared/format';
+import { type AppFormats, injectFormats } from '../../shared/formats';
 
-const plans = () => [
+const plans = (f: AppFormats) => [
   {
     name: $localize`:@@pricing.starter:Starter`,
     monthly: 19,
     text: $localize`:@@pricing.forOnePersonAndA:For one person and a first dashboard.`,
     features: [
-      $localize`:@@pricing.n1User:${count(1)}:count: user`,
+      $localize`:@@pricing.n1User:${f.count(1)}:count: user`,
       $localize`:@@pricing.allDashboards:All dashboards`,
       $localize`:@@pricing.chartsAndTables:Charts and tables`,
       $localize`:@@pricing.emailSupport:Email support`,
@@ -46,7 +46,7 @@ const plans = () => [
     monthly: 49,
     text: $localize`:@@pricing.forAGrowingProductAnd:For a growing product and its apps.`,
     features: [
-      $localize`:@@pricing.n5Users:${count(5)}:count: users`,
+      $localize`:@@pricing.n5Users:${f.count(5)}:count: users`,
       $localize`:@@pricing.everythingInStarter:Everything in Starter`,
       $localize`:@@pricing.allApps:All apps`,
       $localize`:@@pricing.prioritySupport:Priority support`,
@@ -67,13 +67,15 @@ const plans = () => [
   },
 ];
 
-const compare = (): readonly {
+const compare = (
+  f: AppFormats,
+): readonly {
   feature: string;
   plans: readonly (boolean | string)[];
 }[] => [
   {
     feature: $localize`:@@pricing.users:Users`,
-    plans: [count(1), count(5), $localize`:@@pricing.unlimited:Unlimited`],
+    plans: [f.count(1), f.count(5), $localize`:@@pricing.unlimited:Unlimited`],
   },
   {
     feature: $localize`:@@pricing.dashboards:Dashboards`,
@@ -140,7 +142,7 @@ const compare = (): readonly {
         Plans for every size
       </h2>
       <p i18n="@@pricing.startFreeFor14Days" class="text-muted-foreground">
-        Start free for {{ countOf(14) }} days. No card needed.
+        Start free for {{ f.count(14) }} days. No card needed.
       </p>
       <div class="flex items-center gap-3">
         <span i18n="@@pricing.monthly" class="text-sm font-medium"
@@ -157,7 +159,7 @@ const compare = (): readonly {
         />
         <span i18n="@@pricing.yearly" class="text-sm font-medium">Yearly</span>
         <span i18n="@@pricing.n2MonthsFree" scBadge variant="secondary"
-          >{{ countOf(2) }} months free</span
+          >{{ f.count(2) }} months free</span
         >
       </div>
     </div>
@@ -181,7 +183,7 @@ const compare = (): readonly {
           <div scCardBody class="flex flex-1 flex-col gap-6">
             <p>
               <span class="text-4xl font-semibold tabular-nums">{{
-                wholeMoneyOf(price(plan.monthly))
+                f.wholeMoney(price(plan.monthly))
               }}</span>
               <span class="text-muted-foreground">
                 {{ yearly() ? t.perYear : t.perMonth }}</span
@@ -263,11 +265,11 @@ const compare = (): readonly {
   encapsulation: ViewEncapsulation.None,
 })
 export class PricingPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly wholeMoneyOf = wholeMoney;
 
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -278,8 +280,8 @@ export class PricingPage {
   };
 
   private readonly toaster = inject(ScToaster);
-  private readonly plans = computed(plans);
-  private readonly compare = computed(compare);
+  private readonly plans = computed(() => plans(this.f));
+  private readonly compare = computed(() => compare(this.f));
   private readonly yearly = signal(false);
 
   /** A year is ten months. */

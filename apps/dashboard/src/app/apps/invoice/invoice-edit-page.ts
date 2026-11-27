@@ -40,7 +40,7 @@ import {
   SiTrash2Icon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
-import { count, money } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import {
   INVOICE_STATUSES,
@@ -159,7 +159,7 @@ interface Draft {
               class="grid items-end gap-3 sm:grid-cols-[1fr_6rem_8rem_8rem_auto]"
             >
               <legend i18n="@@invoice.edit.item" class="sr-only">
-                Item {{ countOf(i + 1) }}
+                Item {{ f.count(i + 1) }}
               </legend>
               <div scField>
                 <label i18n="@@invoice.edit.description" scLabel
@@ -179,7 +179,7 @@ interface Draft {
                 class="flex h-9 items-center justify-end text-sm tabular-nums"
               >
                 {{
-                  moneyOf(draft().lines[i].quantity * draft().lines[i].price)
+                  f.money(draft().lines[i].quantity * draft().lines[i].price)
                 }}
               </div>
               <button
@@ -192,7 +192,7 @@ interface Draft {
               >
                 <svg siTrash2Icon></svg>
                 <span i18n="@@invoice.edit.removeItem" class="sr-only"
-                  >Remove item {{ countOf(i + 1) }}</span
+                  >Remove item {{ f.count(i + 1) }}</span
                 >
               </button>
             </fieldset>
@@ -212,14 +212,14 @@ interface Draft {
             <dt i18n="@@invoice.edit.subtotal" class="text-muted-foreground">
               Subtotal
             </dt>
-            <dd class="text-end tabular-nums">{{ moneyOf(subtotal()) }}</dd>
+            <dd class="text-end tabular-nums">{{ f.money(subtotal()) }}</dd>
             <dt i18n="@@invoice.edit.tax" class="text-muted-foreground">Tax</dt>
             <dd class="text-end tabular-nums">
-              {{ moneyOf(total() - subtotal()) }}
+              {{ f.money(total() - subtotal()) }}
             </dd>
             <dt i18n="@@invoice.edit.total" class="font-semibold">Total</dt>
             <dd class="text-end font-semibold tabular-nums">
-              {{ moneyOf(total()) }}
+              {{ f.money(total()) }}
             </dd>
           </dl>
         </div>
@@ -256,8 +256,9 @@ interface Draft {
   encapsulation: ViewEncapsulation.None,
 })
 export class InvoiceEditPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -313,7 +314,6 @@ export class InvoiceEditPage {
   });
   private readonly subtotal = computed(() => subtotalOf(this.draft()));
   private readonly total = computed(() => totalOf(this.draft()));
-  private readonly moneyOf = money;
 
   private addLine(): void {
     this.draft.update((d) => ({

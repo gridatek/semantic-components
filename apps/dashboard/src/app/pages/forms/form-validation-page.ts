@@ -30,7 +30,7 @@ import {
   ScToaster,
 } from '@semantic-components/ui';
 import { PageHeader } from '../../layout/page-header';
-import { count } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 
 const EMPTY = {
   username: '',
@@ -100,7 +100,7 @@ const EMPTY = {
                 i18n="@@forms.formValidation.n3OrMoreLettersNumbers"
                 scFieldDescription
               >
-                {{ countOf(3) }} or more letters, numbers or underscores.
+                {{ f.count(3) }} or more letters, numbers or underscores.
               </p>
               <div scFieldErrors></div>
             </div>
@@ -118,7 +118,7 @@ const EMPTY = {
               <label i18n="@@forms.formValidation.age" scLabel>Age</label>
               <input scInput type="number" [formField]="signupForm.age" />
               <p i18n="@@forms.formValidation.from18To120" scFieldDescription>
-                From {{ countOf(18) }} to {{ countOf(120) }}.
+                From {{ f.count(18) }} to {{ f.count(120) }}.
               </p>
               <div scFieldErrors></div>
             </div>
@@ -143,7 +143,7 @@ const EMPTY = {
                 i18n="@@forms.formValidation.n8OrMoreCharactersOne"
                 scFieldDescription
               >
-                {{ countOf(8) }} or more characters, one of them a number.
+                {{ f.count(8) }} or more characters, one of them a number.
               </p>
               <div scFieldErrors></div>
             </div>
@@ -193,8 +193,9 @@ const EMPTY = {
   encapsulation: ViewEncapsulation.None,
 })
 export class FormValidationPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

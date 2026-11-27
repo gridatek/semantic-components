@@ -21,7 +21,7 @@ import {
 import { SiPencilIcon, SiTrash2Icon } from '@semantic-icons/lucide-icons';
 import { PROJECT_ROWS, type Priority } from '../../data/tables';
 import { PageHeader } from '../../layout/page-header';
-import { compactMoney, initials } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { EmployeesTable } from './employees-table';
 
@@ -146,7 +146,7 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
                       }}</span>
                     </td>
                     <td scTableCell class="text-end tabular-nums">
-                      {{ compactMoneyOf(row.budget) }}
+                      {{ f.compactMoney(row.budget) }}
                     </td>
                     @if (table.kind !== 'basic') {
                       <td scTableCell class="text-end">
@@ -177,8 +177,9 @@ type Kind = 'basic' | 'hover' | 'striped' | 'checkbox';
   encapsulation: ViewEncapsulation.None,
 })
 export class TablesPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly compactMoneyOf = compactMoney;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */

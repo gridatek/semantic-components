@@ -60,7 +60,7 @@ import {
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 import { PageHeader } from '../../layout/page-header';
-import { count } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 
 /** The form page: every kind of input. */
 @Component({
@@ -222,7 +222,7 @@ import { count } from '../../shared/format';
                 <div scInputGroupAddon><svg siCreditCardIcon></svg></div>
               </div>
               <p i18n="@@form.n16DigitsNoSpaces" scFieldDescription>
-                {{ countOf(16) }} digits, no spaces.
+                {{ f.count(16) }} digits, no spaces.
               </p>
             </div>
           </div>
@@ -424,8 +424,9 @@ import { count } from '../../shared/format';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

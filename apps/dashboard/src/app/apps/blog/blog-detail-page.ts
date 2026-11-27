@@ -40,7 +40,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import type { BlogComment } from '../../data/blog';
 import { PageHeader } from '../../layout/page-header';
-import { count, day, initials, today } from '../../shared/format';
+import { initials, injectFormats, today } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { BlogStore } from '../../shared/stores';
 
@@ -135,23 +135,23 @@ import { BlogStore } from '../../shared/stores';
                 </span>
                 {{ post.author.name }}
               </span>
-              <span>{{ dayOf(post.date) }}</span>
+              <span>{{ f.day(post.date) }}</span>
               <span class="flex items-center gap-1.5">
                 <svg siEyeIcon></svg
                 ><ng-container i18n="@@blog.detail.views"
-                  >{{ countOf(post.views) }} views</ng-container
+                  >{{ f.count(post.views) }} views</ng-container
                 >
               </span>
               <span class="flex items-center gap-1.5">
                 <svg siShare2Icon></svg
                 ><ng-container i18n="@@blog.detail.shares"
-                  >{{ countOf(post.shares) }} shares</ng-container
+                  >{{ f.count(post.shares) }} shares</ng-container
                 >
               </span>
               <span class="flex items-center gap-1.5">
                 <svg siMessageCircleIcon></svg
                 ><ng-container i18n="@@blog.detail.comments"
-                  >{{ countOf(comments().length) }} comments</ng-container
+                  >{{ f.count(comments().length) }} comments</ng-container
                 >
               </span>
             </div>
@@ -163,7 +163,7 @@ import { BlogStore } from '../../shared/stores';
         <div scCard>
           <div scCardHeader>
             <h2 i18n="@@blog.detail.comments2" scCardTitle>
-              Comments ({{ countOf(comments().length) }})
+              Comments ({{ f.count(comments().length) }})
             </h2>
           </div>
           <div scCardBody class="flex flex-col gap-6">
@@ -223,7 +223,7 @@ import { BlogStore } from '../../shared/stores';
             <p class="text-sm">
               <span class="font-medium">{{ comment.author.name }}</span>
               <span class="text-muted-foreground">
-                · {{ dayOf(comment.date) }}</span
+                · {{ f.day(comment.date) }}</span
               >
             </p>
             <p class="text-sm">{{ comment.text }}</p>
@@ -260,6 +260,8 @@ import { BlogStore } from '../../shared/stores';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogDetailPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -283,8 +285,6 @@ export class BlogDetailPage {
   });
 
   private readonly initialsOf = initials;
-  private readonly dayOf = day;
-  private readonly countOf = count;
 
   private addComment(event: Event): void {
     event.preventDefault();

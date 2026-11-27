@@ -54,7 +54,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { PEOPLE, type Person } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { initials } from '../../shared/format';
+import { initials } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 interface Contact extends Person {

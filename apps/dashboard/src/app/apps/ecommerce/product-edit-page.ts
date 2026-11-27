@@ -35,7 +35,7 @@ import {
 import { SiChevronDownIcon, SiUploadIcon } from '@semantic-icons/lucide-icons';
 import { PRODUCT_CATEGORIES, type ProductCategory } from '../../data/products';
 import { PageHeader } from '../../layout/page-header';
-import { count, today } from '../../shared/format';
+import { injectFormats, today } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { ProductStore } from './shop-store';
 
@@ -144,7 +144,7 @@ interface Draft {
                   i18n="@@ecommerce.productEdit.n0WhenNotOnSale"
                   scFieldDescription
                 >
-                  {{ countOf(0) }} when not on sale.
+                  {{ f.count(0) }} when not on sale.
                 </p>
               </div>
               <div scField>
@@ -258,8 +258,9 @@ interface Draft {
   encapsulation: ViewEncapsulation.None,
 })
 export class ProductEditPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */

@@ -75,7 +75,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ME } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { count, unit, wholeMoney } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 
 /** Account Settings (Pro): the account, security, notifications, billing. */
 @Component({
@@ -182,7 +182,7 @@ import { count, unit, wholeMoney } from '../../shared/format';
                       i18n="@@accountSettings.jpgOrPngUpTo"
                       class="text-muted-foreground text-sm"
                     >
-                      JPG or PNG, up to {{ unitOf(800, 'kilobyte') }}.
+                      JPG or PNG, up to {{ f.unit(800, 'kilobyte') }}.
                     </p>
                   </div>
                   <div scFieldGroup class="grid gap-4 md:grid-cols-2">
@@ -345,7 +345,7 @@ import { count, unit, wholeMoney } from '../../shared/format';
                     i18n="@@accountSettings.atLeast8Characters"
                     scCardDescription
                   >
-                    At least {{ countOf(8) }} characters
+                    At least {{ f.count(8) }} characters
                   </p>
                 </div>
                 <div scCardBody>
@@ -546,7 +546,7 @@ import { count, unit, wholeMoney } from '../../shared/format';
                 >
                   <span class="text-3xl font-semibold">Pro</span>
                   <span class="text-muted-foreground"
-                    >{{ wholeMoneyOf(49) }} / month</span
+                    >{{ f.wholeMoney(49) }} / month</span
                   >
                 </div>
               </div>
@@ -644,14 +644,13 @@ import { count, unit, wholeMoney } from '../../shared/format';
   encapsulation: ViewEncapsulation.None,
 })
 export class AccountSettingsPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly wholeMoneyOf = wholeMoney;
 
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** In the user's numbering system. */
-  private readonly unitOf = unit;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

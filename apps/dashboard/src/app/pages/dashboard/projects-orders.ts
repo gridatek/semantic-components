@@ -35,7 +35,7 @@ import {
   SiChevronsUpDownIcon,
 } from '@semantic-icons/lucide-icons';
 import { ORDERS, type Order, type OrderStatus } from '../../data/dashboard';
-import { day, initials, money } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 const features = tableFeatures({
@@ -165,10 +165,10 @@ const columns = columnHelper.columns([
                     </span>
                   </td>
                   <td scDataTableCell class="tabular-nums">
-                    {{ priceOf(row.original.price) }}
+                    {{ f.money(row.original.price) }}
                   </td>
                   <td scDataTableCell>
-                    {{ dayOf(row.original.deadline) }}
+                    {{ f.day(row.original.deadline) }}
                   </td>
                 </tr>
               }
@@ -182,6 +182,8 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class ProjectsOrders {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   private readonly labelOf = label;
   private readonly table = injectTable(() => ({
     features,
@@ -191,8 +193,6 @@ export class ProjectsOrders {
   }));
 
   private readonly initialsOf = initials;
-  private readonly priceOf = money;
-  private readonly dayOf = day;
 
   private badge(status: OrderStatus): ScBadgeVariants['variant'] {
     if (status === 'Delivered') return 'default';

@@ -52,7 +52,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import type { BlogPost } from '../../data/blog';
 import { PageHeader } from '../../layout/page-header';
-import { count, day } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { BlogStore } from '../../shared/stores';
 
@@ -227,10 +227,10 @@ const columns = columnHelper.columns([
                     >
                   </td>
                   <td scDataTableCell>
-                    {{ dayOf(row.original.date) }}
+                    {{ f.day(row.original.date) }}
                   </td>
                   <td scDataTableCell class="tabular-nums">
-                    {{ countOf(row.original.views) }}
+                    {{ f.count(row.original.views) }}
                   </td>
                   <td scDataTableCell class="text-end whitespace-nowrap">
                     <a
@@ -295,8 +295,8 @@ const columns = columnHelper.columns([
             class="text-sm font-medium"
             aria-live="polite"
           >
-            Page {{ countOf(pagination.currentPage()) }} of
-            {{ countOf(pagination.totalPages()) }}
+            Page {{ f.count(pagination.currentPage()) }} of
+            {{ f.count(pagination.totalPages()) }}
           </span>
           <ul scPaginationList>
             <li scPaginationItem>
@@ -324,6 +324,8 @@ const columns = columnHelper.columns([
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogManagePage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -341,9 +343,6 @@ export class BlogManagePage {
     getRowId: (post) => post.id,
     initialState: { pagination: { pageIndex: 0, pageSize: 6 } },
   }));
-
-  private readonly dayOf = day;
-  private readonly countOf = count;
 
   private remove(post: BlogPost): void {
     this.store.remove(post.id);

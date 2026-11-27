@@ -68,7 +68,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { STAFF, type StaffMember } from '../../data/staff';
 import { PageHeader } from '../../layout/page-header';
-import { count, money, percent } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 import { StaffCell } from './table-parts';
 
@@ -200,8 +200,8 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
             class="text-muted-foreground text-sm"
             aria-live="polite"
           >
-            {{ countOf(table.getSelectedRowModel().rows.length) }} of
-            {{ countOf(table.getRowModel().rows.length) }} selected
+            {{ f.count(table.getSelectedRowModel().rows.length) }} of
+            {{ f.count(table.getRowModel().rows.length) }} selected
           </p>
           <button
             scButton
@@ -223,8 +223,9 @@ const selectHelper = createColumnHelper<typeof selectFeatures, StaffMember>();
   encapsulation: ViewEncapsulation.None,
 })
 export class RowSelectionTablePage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -533,7 +534,7 @@ export class ColumnVisibilityTablePage {
           class="text-end text-sm"
         >
           Total payroll:
-          <span class="font-semibold tabular-nums">{{ moneyOf(total()) }}</span>
+          <span class="font-semibold tabular-nums">{{ f.money(total()) }}</span>
         </p>
       </div>
     </div>
@@ -542,6 +543,8 @@ export class ColumnVisibilityTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class EditableTablePage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -553,7 +556,6 @@ export class EditableTablePage {
   };
 
   private readonly data = signal(STAFF.slice(0, 8).map((m) => ({ ...m })));
-  private readonly moneyOf = money;
 
   private total(): number {
     return this.data().reduce((sum, m) => sum + m.salary, 0);
@@ -663,7 +665,7 @@ export class EditableTablePage {
                       <svg siGripVerticalIcon class="size-4"></svg>
                     </span>
                   </td>
-                  <td scTableCell class="tabular-nums">{{ countOf(i + 1) }}</td>
+                  <td scTableCell class="tabular-nums">{{ f.count(i + 1) }}</td>
                   <td scTableCell>
                     <app-staff-cell column="name" [member]="member" />
                   </td>
@@ -715,8 +717,9 @@ export class EditableTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class DragDropTablePage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */
@@ -845,7 +848,7 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
                     {{ labelOf(row.original.department) }}
                   </td>
                   <td scDataTableCell class="tabular-nums">
-                    {{ countOf(row.original.projects.length) }}
+                    {{ f.count(row.original.projects.length) }}
                   </td>
                 </tr>
                 @if (row.getIsExpanded()) {
@@ -860,7 +863,7 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
                           <div scProgress [value]="project.progress">
                             <span scProgressLabel>{{ project.name }}</span>
                             <span scProgressValueText>{{
-                              percentOf(project.progress / 100)
+                              f.percent(project.progress / 100)
                             }}</span>
                             <div scProgressTrack>
                               <div scProgressRange></div>
@@ -882,11 +885,11 @@ const expandHelper = createColumnHelper<typeof expandFeatures, StaffMember>();
   encapsulation: ViewEncapsulation.None,
 })
 export class ExpandingTablePage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly percentOf = percent;
 
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   private readonly labelOf = label;
   /** The template's words that sit in bindings, translated. */

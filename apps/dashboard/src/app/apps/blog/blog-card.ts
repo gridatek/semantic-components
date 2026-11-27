@@ -17,7 +17,7 @@ import {
 import { SiEyeIcon, SiMessageCircleIcon } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
 import type { BlogPost } from '../../data/blog';
-import { count, day, initials } from '../../shared/format';
+import { initials, injectFormats } from '../../shared/formats';
 import { label } from '../../shared/labels';
 
 /**
@@ -72,17 +72,17 @@ import { label } from '../../shared/labels';
           >
             <span class="flex items-center gap-1.5">
               <svg siEyeIcon></svg>
-              {{ countOf(post().views)
+              {{ f.count(post().views)
               }}<span i18n="@@blog.card.views" class="sr-only"> views</span>
             </span>
             <span class="flex items-center gap-1.5">
               <svg siMessageCircleIcon></svg>
-              {{ countOf(post().comments.length)
+              {{ f.count(post().comments.length)
               }}<span i18n="@@blog.card.comments" class="sr-only">
                 comments</span
               >
             </span>
-            <span class="ms-auto">{{ dayOf(post().date) }}</span>
+            <span class="ms-auto">{{ f.day(post().date) }}</span>
           </div>
         </div>
       </div>
@@ -92,6 +92,8 @@ import { label } from '../../shared/labels';
   encapsulation: ViewEncapsulation.None,
 })
 export class BlogCard {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   private readonly labelOf = label;
   readonly post = input.required<BlogPost>();
   readonly featured = input(false, { transform: booleanAttribute });
@@ -104,6 +106,4 @@ export class BlogCard {
     ),
   );
   private readonly initialsOf = initials;
-  private readonly countOf = count;
-  private readonly dayOf = day;
 }

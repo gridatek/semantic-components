@@ -42,7 +42,7 @@ import {
 import { Swatch } from '../../components/swatch';
 import { NOTE_COLORS, type NoteColor } from '../../data/notes';
 import { PageHeader } from '../../layout/page-header';
-import { dayTime } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { NotesStore } from '../../shared/stores';
 
 /** Notes: the list, a search, the chosen note to edit, its colour. */
@@ -189,7 +189,7 @@ import { NotesStore } from '../../shared/stores';
                       note.text
                     }}</span>
                     <span class="text-muted-foreground text-xs">{{
-                      when(note.date)
+                      f.dayTime(note.date)
                     }}</span>
                   </span>
                 </span>
@@ -210,7 +210,9 @@ import { NotesStore } from '../../shared/stores';
         @if (selected(); as note) {
           <div scCardBody class="flex h-full flex-col gap-4">
             <div class="flex flex-wrap items-center justify-between gap-3">
-              <p class="text-muted-foreground text-sm">{{ when(note.date) }}</p>
+              <p class="text-muted-foreground text-sm">
+                {{ f.dayTime(note.date) }}
+              </p>
               <button
                 scButton
                 variant="outline"
@@ -266,6 +268,8 @@ import { NotesStore } from '../../shared/stores';
   encapsulation: ViewEncapsulation.None,
 })
 export class NotesPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
     notes: $localize`:@@notes.notes:Notes`,
@@ -304,8 +308,6 @@ export class NotesPage {
     required(path.text);
   });
   private readonly draftColor = signal<NoteColor>('primary');
-
-  private readonly when = dayTime;
 
   private startAdding(): void {
     this.draft.set({ text: '' });

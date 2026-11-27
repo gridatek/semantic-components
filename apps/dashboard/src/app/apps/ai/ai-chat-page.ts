@@ -44,7 +44,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { ME } from '../../data/people';
 import { PageHeader } from '../../layout/page-header';
-import { count } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 
 interface ChatMessage {
   readonly id: string;
@@ -163,7 +163,7 @@ const FALLBACK = $localize`:@@ai.chat.goodQuestionInThisDemo:Good question. In t
                 <div scItemBody>
                   <div scItemTitle>{{ chat.title }}</div>
                   <p i18n="@@ai.chat.messages" scItemDescription>
-                    {{ countOf(chat.messages.length) }} messages
+                    {{ f.count(chat.messages.length) }} messages
                   </p>
                 </div>
               </button>
@@ -322,8 +322,9 @@ const FALLBACK = $localize`:@@ai.chat.goodQuestionInThisDemo:Good question. In t
   encapsulation: ViewEncapsulation.None,
 })
 export class AiChatPage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {

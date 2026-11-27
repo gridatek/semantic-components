@@ -60,7 +60,7 @@ import {
 } from '@semantic-icons/lucide-icons';
 import { STAFF, type StaffMember } from '../../data/staff';
 import { PageHeader } from '../../layout/page-header';
-import { count } from '../../shared/format';
+import { injectFormats } from '../../shared/formats';
 import { SortHeader, StaffCell } from './table-parts';
 
 const features = tableFeatures({
@@ -328,8 +328,8 @@ export class SortingTablePage {
           class="text-muted-foreground text-sm"
           aria-live="polite"
         >
-          {{ countOf(table.getFilteredRowModel().rows.length) }} of
-          {{ countOf(total) }} people
+          {{ f.count(table.getFilteredRowModel().rows.length) }} of
+          {{ f.count(total) }} people
         </p>
       </div>
     </div>
@@ -338,8 +338,9 @@ export class SortingTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class FilteringTablePage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
@@ -398,7 +399,7 @@ export class FilteringTablePage {
       <div scCardHeader>
         <h2 i18n="@@dataTables.queryTables.team" scCardTitle>Team</h2>
         <p i18n="@@dataTables.queryTables.peopleAPageAtA" scCardDescription>
-          {{ countOf(total) }} people, a page at a time
+          {{ f.count(total) }} people, a page at a time
         </p>
       </div>
       <div
@@ -466,7 +467,7 @@ export class FilteringTablePage {
               >
                 @for (n of sizes; track n) {
                   <option scNativeSelectOption [value]="n">
-                    {{ countOf(n) }}
+                    {{ f.count(n) }}
                   </option>
                 }
               </select>
@@ -486,8 +487,8 @@ export class FilteringTablePage {
               class="text-sm font-medium"
               aria-live="polite"
             >
-              Page {{ countOf(pagination.currentPage()) }} of
-              {{ countOf(pagination.totalPages()) }}
+              Page {{ f.count(pagination.currentPage()) }} of
+              {{ f.count(pagination.totalPages()) }}
             </span>
             <ul scPaginationList>
               <li scPaginationItem>
@@ -540,8 +541,9 @@ export class FilteringTablePage {
   encapsulation: ViewEncapsulation.None,
 })
 export class PaginationTablePage {
+  /** Figures as the library writes them (the dashboard's choices). */
+  private readonly f = injectFormats();
   /** In the user's numbering system. */
-  private readonly countOf = count;
 
   /** The template's words that sit in bindings, translated. */
   private readonly t = {
