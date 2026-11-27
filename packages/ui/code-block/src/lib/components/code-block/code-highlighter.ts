@@ -48,9 +48,16 @@ const aliases: Record<string, string> = {
   zsh: 'bash',
 };
 
+/**
+ * The one Shiki of the process — on the server, every request makes a new
+ * app (and its providers): a Shiki each made hundreds, never freed, the
+ * server slower request by request. Highlighting keeps nothing of a
+ * request; its languages load once, for all.
+ */
+let shiki: Promise<HighlighterCore> | undefined;
+
 /** Shiki (core, its JavaScript engine), GitHub light (high contrast) and dark (default; plain dark's comments are below 4.5:1): their tokens 4.5:1 on the code's background — loaded on the first block. */
 function shikiHighlighter(): ScCodeHighlighter {
-  let shiki: Promise<HighlighterCore> | undefined;
   const load = () =>
     (shiki ??= Promise.all([
       import('shiki/core'),

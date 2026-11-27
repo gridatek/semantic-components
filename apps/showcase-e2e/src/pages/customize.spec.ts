@@ -50,17 +50,21 @@ test.describe('Customize Page', () => {
       page.getByRole('link', { name: 'email settings' }),
     ).toBeVisible(shown);
     // Every link of the page's content that would leave for the home page.
+    // As long as the page's first look: a read waits for WebKit's main thread,
+    // busy on this page for seconds on CI.
     await expect
-      .poll(() =>
-        page
-          .locator('main a[href]')
-          .evaluateAll((links) =>
-            (links as HTMLAnchorElement[])
-              .filter((a) => a.pathname === '/')
-              .map(
-                (a) => `${a.textContent?.trim()} (${a.getAttribute('href')})`,
-              ),
-          ),
+      .poll(
+        () =>
+          page
+            .locator('main a[href]')
+            .evaluateAll((links) =>
+              (links as HTMLAnchorElement[])
+                .filter((a) => a.pathname === '/')
+                .map(
+                  (a) => `${a.textContent?.trim()} (${a.getAttribute('href')})`,
+                ),
+            ),
+        shown,
       )
       .toEqual([]);
   });

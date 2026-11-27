@@ -216,4 +216,7 @@ jobs:
           path: |
             dist/.playwright/apps/showcase-e2e/
             dist/ssr-*.log
+          # Two paths: the artifact starts at dist/, where .playwright is hidden —
+          # skipped by default, the failures' traces lost with it.
+          include-hidden-files: true
           retention-days: 7
