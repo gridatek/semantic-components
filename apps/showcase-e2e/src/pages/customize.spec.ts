@@ -109,6 +109,59 @@ test.describe('Customize Page', () => {
     expect(messages).toEqual([]);
   });
 
+  test('Live Audio Waveform: draws while on screen, the page idle otherwise', async ({
+    page,
+  }) => {
+    // Every animation frame asked for, counted.
+    await page.addInitScript(() => {
+      const w = window as unknown as { frames: number };
+      w.frames = 0;
+      const ask = window.requestAnimationFrame.bind(window);
+      window.requestAnimationFrame = (callback) => {
+        w.frames++;
+        return ask(callback);
+      };
+    });
+    const frames = () =>
+      page.evaluate(() => (window as unknown as { frames: number }).frames);
+    await page.goto('/customize');
+    const waveform = page.getByRole('img', { name: 'Processing audio' });
+    await expect(waveform).toBeAttached(shown);
+    await expect(waveform).not.toBeInViewport();
+    // Off screen, still processing: no frame drawn (a page of thousands of
+    // elements laid out each frame froze WebKit on a busy runner). Once the
+    // charts' entrance has played: a second with the page's own frames once
+    // in a while, not one a frame.
+    await expect
+      .poll(async () => {
+        const before = await frames();
+        await page.waitForTimeout(1000); // eslint-disable-line playwright/no-wait-for-timeout
+        return (await frames()) - before;
+      }, shown)
+      .toBeLessThan(5);
+    // On screen: the wave moves.
+    await waveform.scrollIntoViewIfNeeded();
+    await expect
+      .poll(async () => {
+        const before = await frames();
+        await page.waitForTimeout(500); // eslint-disable-line playwright/no-wait-for-timeout
+        return (await frames()) - before;
+      }, shown)
+      .toBeGreaterThan(5);
+    await expect
+      .poll(() =>
+        waveform.locator('canvas').evaluate((canvas: HTMLCanvasElement) => {
+          const ctx = canvas.getContext('2d');
+          if (!ctx || !canvas.width) return 0;
+          const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          let painted = 0;
+          for (let i = 3; i < data.length; i += 4) if (data[i]) painted++;
+          return painted;
+        }),
+      )
+      .toBeGreaterThan(0);
+  });
+
   test('no accessibility violations, light and dark', async ({ page }) => {
     // The largest page, checked twice: more than 30 s on CI in Firefox and
     // WebKit (slow there, above).

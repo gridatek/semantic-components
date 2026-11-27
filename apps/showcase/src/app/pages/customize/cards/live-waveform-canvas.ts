@@ -55,6 +55,14 @@ export class LiveWaveformCanvas {
   private audio: AudioContext | null = null;
   private stream: MediaStream | null = null;
   private frame = 0;
+  /** On screen: drawn only then. */
+  private visible = false;
+  /** The canvas's size, from its observer: no layout read each frame. */
+  private width = 0;
+  private height = 0;
+  /** The bars' colour, read once a second (a mode switched): not each frame. */
+  private color = '';
+  private colorAt = -Infinity;
 
   constructor() {
     // The microphone, opened while active.
@@ -68,14 +76,30 @@ export class LiveWaveformCanvas {
       this.bars = [];
       this.history = [];
     });
+    // Listening or processing again: the wave moves (if on screen).
+    effect(() => {
+      if (this.active() || this.processing()) this.start();
+    });
+    // The page laid out once a frame for its size, and drew off screen: a
+    // page of thousands of elements froze WebKit on a busy runner.
+    let observers: { disconnect(): void }[] = [];
     afterNextRender(() => {
-      const loop = (now: number) => {
-        this.draw(now);
-        this.frame = requestAnimationFrame(loop);
-      };
-      this.frame = requestAnimationFrame(loop);
+      const host = this.host.nativeElement;
+      const resize = new ResizeObserver(([entry]) => {
+        this.width = entry.contentRect.width;
+        this.height = entry.contentRect.height;
+        this.start();
+      });
+      const intersection = new IntersectionObserver(([entry]) => {
+        this.visible = entry.isIntersecting;
+        if (this.visible) this.start();
+      });
+      resize.observe(this.canvas().nativeElement);
+      intersection.observe(host);
+      observers = [resize, intersection];
     });
     inject(DestroyRef).onDestroy(() => {
+      observers.forEach((observer) => observer.disconnect());
       // A frame only if one was asked for — never on the server, which has none.
       if (this.frame) cancelAnimationFrame(this.frame);
       this.closeMic();
@@ -118,10 +142,31 @@ export class LiveWaveformCanvas {
     this.analyser = null;
   }
 
+  /** Frames from now on, while on screen and something to draw. */
+  private start(): void {
+    if (this.frame || !this.visible || !this.width) return;
+    const loop = (now: number) => {
+      if (now - this.colorAt > 1000) {
+        this.color = getComputedStyle(this.host.nativeElement).color;
+        this.colorAt = now;
+      }
+      this.draw(now);
+      this.frame =
+        this.visible &&
+        (this.active() ||
+          this.processing() ||
+          this.bars.length > 0 ||
+          this.history.length > 0)
+          ? requestAnimationFrame(loop)
+          : 0;
+    };
+    this.frame = requestAnimationFrame(loop);
+  }
+
   /** The levels for this frame, then the bars drawn. */
   private draw(now: number): void {
     const canvas = this.canvas().nativeElement;
-    const rect = canvas.getBoundingClientRect();
+    const rect = { width: this.width, height: this.height };
     const dpr = window.devicePixelRatio || 1;
     if (canvas.width !== Math.round(rect.width * dpr)) {
       canvas.width = Math.round(rect.width * dpr);
@@ -186,7 +231,7 @@ export class LiveWaveformCanvas {
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, rect.width, rect.height);
-    ctx.fillStyle = getComputedStyle(this.host.nativeElement).color;
+    ctx.fillStyle = this.color;
     const middle = rect.height / 2;
     const bar = (x: number, value: number) => {
       const height = Math.max(MIN_BAR, value * rect.height * 0.8);
