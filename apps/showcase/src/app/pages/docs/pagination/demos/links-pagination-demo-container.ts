@@ -38,8 +38,9 @@ import {
 
 /**
  * Links: each page has its own URL (?page=2), the page read from it. The
- * hrefs are yours — here routerLinks; the fragment brings the list back
- * into view.
+ * hrefs are yours — here routerLinks; none at an end (Previous on the first
+ * page, Next on the last), not one to the page you are on. The fragment
+ * brings the list back into view.
  */
 @Component({
   selector: 'app-links-pagination-demo',
@@ -70,10 +71,8 @@ import {
         <li scPaginationItem>
           <a
             scPaginationPrevious
-            routerLink="."
-            [queryParams]="{
-              page: pagination.previousPage() ?? pagination.currentPage(),
-            }"
+            [routerLink]="pagination.previousPage() === null ? null : '.'"
+            [queryParams]="{ page: pagination.previousPage() }"
             fragment="links-results"
           >
             <svg siChevronLeftIcon data-icon="inline-start"></svg>
@@ -108,10 +107,8 @@ import {
         <li scPaginationItem>
           <a
             scPaginationNext
-            routerLink="."
-            [queryParams]="{
-              page: pagination.nextPage() ?? pagination.currentPage(),
-            }"
+            [routerLink]="pagination.nextPage() === null ? null : '.'"
+            [queryParams]="{ page: pagination.nextPage() }"
             fragment="links-results"
           >
             <span class="sr-only sm:not-sr-only">Next</span>

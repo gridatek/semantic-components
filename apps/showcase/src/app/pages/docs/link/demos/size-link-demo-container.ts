@@ -27,17 +27,36 @@ import { SiArrowUpRightIcon } from '@semantic-icons/lucide-icons';
   imports: [ScLink, SiArrowUpRightIcon],
   template: \`
     <div class="flex flex-wrap items-center gap-2">
-      <a scLink variant="outline" size="xs" href="/docs/components/button"
+      <a
+        scLink
+        variant="outline"
+        size="xs"
+        href="/docs/components/button#size-xs"
         >Extra Small</a
       >
-      <a scLink variant="outline" size="sm" href="/docs/components/button"
+      <a
+        scLink
+        variant="outline"
+        size="sm"
+        href="/docs/components/button#size-sm"
         >Small</a
       >
-      <a scLink variant="outline" href="/docs/components/button">Default</a>
-      <a scLink variant="outline" size="lg" href="/docs/components/button"
+      <a scLink variant="outline" href="/docs/components/button#size-default"
+        >Default</a
+      >
+      <a
+        scLink
+        variant="outline"
+        size="lg"
+        href="/docs/components/button#size-lg"
         >Large</a
       >
-      <a scLink variant="outline" size="icon" href="/docs/components/button">
+      <a
+        scLink
+        variant="outline"
+        size="icon"
+        href="/docs/components/button#size-icon"
+      >
         <svg siArrowUpRightIcon></svg>
         <span class="sr-only">Button docs</span>
       </a>

@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ScKbd, ScLink, ScTypeset } from '@semantic-components/ui';
+import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import { ComponentBadges } from '../../../components/component-badges/component-badges';
 import { EntryInstall } from '../../../components/entry-install/entry-install';
@@ -23,7 +23,6 @@ import { RtlDataTableDemoContainer } from './demos/rtl-data-table-demo-container
     PinnedDataTableDemoContainer,
     RtlDataTableDemoContainer,
     ScKbd,
-    ScLink,
     TocHeading,
     ComponentBadges,
     ScTypeset,

@@ -33,10 +33,18 @@ import { ScBadge, ScButton } from '@semantic-components/ui';
   template: \`
     <article class="typeset w-full max-w-prose">
       <nav class="not-typeset flex gap-4 text-sm" aria-label="Blog">
-        <a routerLink="." class="text-muted-foreground hover:text-foreground">
+        <a
+          routerLink="."
+          fragment="blog"
+          class="text-muted-foreground hover:text-foreground"
+        >
           Blog
         </a>
-        <a routerLink="." class="text-muted-foreground hover:text-foreground">
+        <a
+          routerLink="."
+          fragment="archive"
+          class="text-muted-foreground hover:text-foreground"
+        >
           Archive
         </a>
       </nav>

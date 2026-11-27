@@ -46,7 +46,12 @@ import {
   template: \`
     <div class="flex w-full max-w-md flex-col gap-6">
       <div scItemGroup class="gap-4">
-        <a scItem variant="outline" routerLink="." fragment="image">
+        <a
+          scItem
+          variant="outline"
+          routerLink="."
+          fragment="midnight-city-lights"
+        >
           <div scItemMedia variant="image" class="relative">
             <img ngSrc="/images/gallery/cafe-thumb.jpg" fill alt="" />
           </div>
@@ -58,7 +63,12 @@ import {
             <p scItemDescription>3:45</p>
           </div>
         </a>
-        <a scItem variant="outline" routerLink="." fragment="image">
+        <a
+          scItem
+          variant="outline"
+          routerLink="."
+          fragment="coffee-shop-conversations"
+        >
           <div scItemMedia variant="image" class="relative">
             <img ngSrc="/images/gallery/summit-thumb.jpg" fill alt="" />
           </div>
@@ -70,7 +80,7 @@ import {
             <p scItemDescription>4:05</p>
           </div>
         </a>
-        <a scItem variant="outline" routerLink="." fragment="image">
+        <a scItem variant="outline" routerLink="." fragment="digital-rain">
           <div scItemMedia variant="image" class="relative">
             <img ngSrc="/images/gallery/forest-thumb.jpg" fill alt="" />
           </div>

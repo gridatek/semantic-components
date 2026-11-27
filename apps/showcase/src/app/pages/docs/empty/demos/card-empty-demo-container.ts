@@ -75,7 +75,7 @@ import { SiArrowUpRightIcon, SiFolderIcon } from '@semantic-icons/lucide-icons';
               scLink
               variant="link"
               routerLink="."
-              fragment="card"
+              fragment="learn-more"
               class="text-muted-foreground"
             >
               Learn more <svg siArrowUpRightIcon></svg>

@@ -34,9 +34,9 @@ import { ScLink } from '@semantic-components/ui';
       </p>
       <p class="text-muted-foreground">
         By continuing, you agree to our
-        <a scLink href="/docs/components/link">Terms of Service</a>
+        <a scLink href="/docs/components/link#terms">Terms of Service</a>
         and
-        <a scLink href="/docs/components/link">Privacy Policy</a>.
+        <a scLink href="/docs/components/link#privacy">Privacy Policy</a>.
       </p>
     </div>
   \`,
