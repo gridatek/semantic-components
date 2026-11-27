@@ -43,6 +43,7 @@ const CIRCUMFERENCE = 2 * Math.PI * 42.5;
               <a
                 scItem
                 routerLink="."
+                [fragment]="item.name"
                 size="xs"
                 class="px-0 group-hover/item-group:bg-transparent"
               >

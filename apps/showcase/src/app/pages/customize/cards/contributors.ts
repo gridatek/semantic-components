@@ -51,7 +51,11 @@ import {
         </ul>
       </div>
       <div scCardFooter>
-        <a routerLink="." class="text-sm underline underline-offset-4">
+        <a
+          routerLink="."
+          fragment="810-contributors"
+          class="text-sm underline underline-offset-4"
+        >
           + 810 contributors
         </a>
       </div>

@@ -80,7 +80,9 @@ import { SiMinusIcon, SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
             </div>
           </div>
           <p scFieldDescription>
-            <a routerLink=".">I no longer have access to this email address.</a>
+            <a routerLink="." fragment="i-no-longer-have"
+              >I no longer have access to this email address.</a
+            >
           </p>
           <p scFieldErrors></p>
         </div>
@@ -91,6 +93,7 @@ import { SiMinusIcon, SiRefreshCwIcon } from '@semantic-icons/lucide-icons';
           Having trouble signing in?
           <a
             routerLink="."
+            fragment="contact-support"
             class="hover:text-primary underline underline-offset-4"
             >Contact support</a
           >

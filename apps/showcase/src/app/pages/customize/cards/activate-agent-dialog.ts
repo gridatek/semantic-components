@@ -47,11 +47,17 @@ import { SiCircleCheckIcon } from '@semantic-icons/lucide-icons';
         <h2 scCardTitle>Ship faster &amp; safer with Vercel Agent</h2>
         <p scCardDescription>
           Your use is subject to Vercel's
-          <a routerLink="." class="underline underline-offset-4"
+          <a
+            routerLink="."
+            fragment="public-beta-agreement"
+            class="underline underline-offset-4"
             >Public Beta Agreement</a
           >
           and
-          <a routerLink="." class="underline underline-offset-4"
+          <a
+            routerLink="."
+            fragment="ai-product-terms"
+            class="underline underline-offset-4"
             >AI Product Terms</a
           >.
         </p>

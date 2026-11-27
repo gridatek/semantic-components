@@ -28,6 +28,7 @@ import { SiPauseIcon, SiPlayIcon } from '@semantic-icons/lucide-icons';
             <a
               scLink
               routerLink="."
+              [fragment]="brand"
               class="text-muted-foreground hover:text-foreground text-xl font-semibold whitespace-nowrap no-underline"
             >
               {{ brand }}

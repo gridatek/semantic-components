@@ -208,8 +208,7 @@ const STYLES: { name: ScStyleName; description: string }[] = [
           <li>
             A style is set when the app starts: switching one means reloading.
             To change only a few classes, spread a style and replace its keys —
-            see
-            <a scLink routerLink="/docs/guides/custom-style">Custom style</a>.
+            Make your own, above, shows how.
           </li>
         </ul>
       </section>

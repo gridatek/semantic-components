@@ -79,20 +79,8 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
       <!-- Desktop Navigation -->
       <nav scNavigationMenu aria-label="Main">
         <ul scNavigationMenuList>
-          <!-- Only where the bar has room for it: the logo leads home too. -->
-          <li scNavigationMenuItem [class]="homeItemClass">
-            <a
-              scNavigationMenuLink
-              routerLink="/"
-              routerLinkActive
-              [routerLinkActiveOptions]="{ exact: true }"
-              #homeRla="routerLinkActive"
-              [active]="homeRla.isActive"
-            >
-              Home
-            </a>
-          </li>
-
+          <!-- No Home: the logo leads home (beside it, a second link to the
+               same page — WAVE's redundant link). -->
           <li scNavigationMenuItem>
             <a
               scNavigationMenuLink
@@ -397,13 +385,6 @@ export default class Navbar {
     : 'max-xl:hidden';
 
   /**
-   * Home and Get Started, in the bar from 1280px — the logo leads home,
-   * Documentation to getting started. In every style: lyra and mira fit them
-   * at 1024px by a few pixels only, not with CI's fonts and a longer star
-   * count (2026-11-19).
-   */
-  private readonly homeItemClass = 'max-xl:hidden';
-  /**
    * AI Elements and Charts: hidden below 1024px in vega, maia, luma and sera,
    * whose wider buttons and text don't fit there with a three-digit star count
    * (measured 2026-11-19); the mobile menu and Documentation lead to them.
@@ -425,7 +406,15 @@ export default class Navbar {
       ? 'hidden md:inline-flex xl:hidden'
       : 'hidden md:inline-flex lg:hidden';
 
-  private readonly getStartedClass = 'hidden xl:inline-flex';
+  /**
+   * Get Started, in the bar from 1280px (Documentation leads there too): lyra
+   * and mira fit it at 1024px by a few pixels only, not with CI's fonts and a
+   * longer star count (2026-11-19). Not on the landing page (`app-home`),
+   * whose hero has one: two links in a row to one page (WAVE's redundant
+   * link). By CSS: the same on the server and in the browser.
+   */
+  private readonly getStartedClass =
+    'hidden xl:inline-flex [:root:has(app-home)_&]:hidden';
 
   private readonly componentsService = inject(ComponentsService);
   private readonly featuredComponents = computed(() =>

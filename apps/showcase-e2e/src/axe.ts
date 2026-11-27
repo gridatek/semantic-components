@@ -93,6 +93,37 @@ export async function expectNoA11yViolations(
   }
   expect(results.violations.filter((v) => v.nodes.length)).toEqual([]);
   expect(await orphanLabels(page)).toEqual([]);
+  expect(await redundantLinks(page)).toEqual([]);
+}
+
+/**
+ * Adjacent links to one URL (WAVE's "Redundant link"), as `"first" and
+ * "second": url`: two tab stops, read twice, for one place — keep one link,
+ * or give a placeholder its own fragment. Shown links only, in the page's
+ * order: what is hidden (another width's link), inert or aria-hidden is left
+ * out, and what an editor holds (`contenteditable`: its links are text there,
+ * no tab stops — an editor beside the view of its content).
+ */
+export async function redundantLinks(page: Page): Promise<string[]> {
+  return page.locator('a[href]').evaluateAll((all) => {
+    const shown = (all as HTMLAnchorElement[]).filter(
+      (a) =>
+        a.getClientRects().length > 0 &&
+        !a.closest('[inert], [aria-hidden="true"], [contenteditable="true"]'),
+    );
+    const name = (a: HTMLAnchorElement) =>
+      (a.getAttribute('aria-label') ?? a.textContent ?? '')
+        .trim()
+        .replace(/\s+/g, ' ')
+        .slice(0, 40);
+    return shown.flatMap((a, i) =>
+      i > 0 && a.href === shown[i - 1].href
+        ? [
+            `"${name(shown[i - 1])}" and "${name(a)}": ${a.getAttribute('href')}`,
+          ]
+        : [],
+    );
+  });
 }
 
 /**

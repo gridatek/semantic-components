@@ -92,6 +92,7 @@ interface ScFileTreeItem {
           scLink
           variant="link"
           routerLink="."
+          [fragment]="item.name"
           size="sm"
           class="text-foreground w-full justify-start gap-2"
         >

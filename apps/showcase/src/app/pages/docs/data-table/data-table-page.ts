@@ -74,10 +74,9 @@ import { RtlDataTableDemoContainer } from './demos/rtl-data-table-demo-container
       <section class="space-y-4">
         <h2 scTypeset appToc>TanStack Table</h2>
         <p>
-          <a scLink href="https://tanstack.com/table">TanStack Table</a>
-          keeps the state — sorting, filters, selection, the page, the columns
-          shown and pinned — and these parts render it and send your clicks
-          back. Register the features of the parts you use with
+          TanStack Table keeps the state — sorting, filters, selection, the
+          page, the columns shown and pinned — and these parts render it and
+          send your clicks back. Register the features of the parts you use with
           <code scTypeset>tableFeatures()</code>: TanStack only gives a table
           the methods of its features. The parts are typed structurally, so they
           don&apos;t pin a TanStack version.

@@ -73,7 +73,7 @@ import {
         <nav scBreadcrumb aria-label="Payments path">
           <ol scBreadcrumbList>
             <li scBreadcrumbItem>
-              <a scBreadcrumbLink routerLink=".">Home</a>
+              <a scBreadcrumbLink routerLink="." fragment="home">Home</a>
             </li>
             <li scBreadcrumbSeparator><svg siChevronRightIcon></svg></li>
             <li scBreadcrumbItem>
@@ -105,7 +105,12 @@ import {
       <div scCardBody>
         <div scItemGroup role="list">
           <div role="listitem" class="w-full">
-            <a scItem variant="muted" routerLink=".">
+            <a
+              scItem
+              variant="muted"
+              routerLink="."
+              fragment="change-transfer-limit-adjust"
+            >
               <div scItemMedia variant="icon"><svg siSettingsIcon></svg></div>
               <div scItemBody>
                 <div scItemTitle>Change transfer limit</div>
@@ -120,7 +125,12 @@ import {
             </a>
           </div>
           <div role="listitem" class="w-full">
-            <a scItem variant="muted" routerLink=".">
+            <a
+              scItem
+              variant="muted"
+              routerLink="."
+              fragment="scheduled-transfers-set-up"
+            >
               <div scItemMedia variant="icon"><svg siCalendarIcon></svg></div>
               <div scItemBody>
                 <div scItemTitle>Scheduled transfers</div>
@@ -135,7 +145,12 @@ import {
             </a>
           </div>
           <div role="listitem" class="w-full">
-            <a scItem variant="muted" routerLink=".">
+            <a
+              scItem
+              variant="muted"
+              routerLink="."
+              fragment="recurring-card-payments-manage"
+            >
               <div scItemMedia variant="icon"><svg siRefreshCwIcon></svg></div>
               <div scItemBody>
                 <div scItemTitle>Recurring card payments</div>

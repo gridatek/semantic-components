@@ -29,6 +29,7 @@ import {
         <p scCardDescription class="mt-3 text-sm leading-relaxed">
           <a
             routerLink="."
+            fragment="over-time"
             class="hover:text-primary underline underline-offset-4"
             >Over time</a
           >, this smooths out the average cost of your investments. When prices

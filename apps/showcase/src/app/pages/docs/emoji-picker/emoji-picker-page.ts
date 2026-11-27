@@ -53,15 +53,7 @@ import { TriggerEmojiPickerDemoContainer } from './demos/trigger-emoji-picker-de
             rel="noopener noreferrer"
             class="font-medium underline underline-offset-4"
             >Frimousse</a
-          >; the data is
-          <a
-            href="https://emojibase.dev"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="font-medium underline underline-offset-4"
-          >
-            Emojibase&apos;s</a
-          >, bundled with your app.
+          >; the data is Emojibase&apos;s (below), bundled with your app.
         </p>
         <app-component-badges path="emoji-picker" />
       </div>

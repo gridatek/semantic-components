@@ -152,3 +152,32 @@ for (const style of STYLES) {
     }
   });
 }
+
+test('the logo is the one link home: no Home beside it (WAVE: redundant link)', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 800 });
+  await page.goto('/');
+  const banner = page.getByRole('banner');
+  await expect(
+    banner.getByRole('link', { name: 'Semantic Components' }),
+  ).toHaveAttribute('href', '/');
+  await expect(banner.locator('a[href="/"]')).toHaveCount(1);
+});
+
+test("the landing page: one Get Started, the hero's — not the header's beside it (WAVE: redundant link); elsewhere the header's", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 800 });
+  const getStarted = page.getByRole('link', { name: 'Get Started' });
+  await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await expect(getStarted).toHaveCount(1);
+  await expect(
+    page.getByRole('banner').getByRole('link', { name: 'Get Started' }),
+  ).toBeHidden();
+  await page.goto('/components');
+  await expect(
+    page.getByRole('banner').getByRole('link', { name: 'Get Started' }),
+  ).toBeVisible();
+});

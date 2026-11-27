@@ -66,6 +66,7 @@ import {
               <label scLabel>Current Password</label>
               <a
                 routerLink="."
+                fragment="forgot"
                 class="text-muted-foreground hover:text-foreground text-xs font-medium tracking-wider uppercase"
                 >Forgot?</a
               >
@@ -83,7 +84,13 @@ import {
           <svg siLockIcon></svg>
           Update Security
         </button>
-        <a scItem variant="muted" routerLink="." class="w-full">
+        <a
+          scItem
+          variant="muted"
+          routerLink="."
+          fragment="danger-zone-archive-account"
+          class="w-full"
+        >
           <div scItemMedia variant="icon">
             <svg siCircleAlertIcon class="text-destructive"></svg>
           </div>

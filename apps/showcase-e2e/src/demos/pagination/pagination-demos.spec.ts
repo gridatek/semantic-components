@@ -157,8 +157,11 @@ test('Links: each follows its own href; the page read from the URL', async ({
   // The hrefs are the consumer's, not "#".
   await expect(link('2')).toHaveAttribute('href', /[?&]page=2#links-results$/);
   await expect(link('1')).toHaveAttribute('aria-current', 'page');
-  await expectLooksDisabled(link('Previous'));
-  await expect(link('Previous')).toHaveAttribute('tabindex', '-1');
+  // Disabled on the first page: no href — no link to the page it is on
+  // (beside 1, a redundant link).
+  const previous = nav.locator('[scPaginationPrevious]');
+  await expectLooksDisabled(previous);
+  await expect(previous).not.toHaveAttribute('href');
 
   await link('2').click();
   await expect(page).toHaveURL(/[?&]page=2#links-results$/);
@@ -172,7 +175,9 @@ test('Links: each follows its own href; the page read from the URL', async ({
   // Past the last page: kept to the last.
   await page.goto(`${demo('links')}?page=99`);
   await expect(link('10')).toHaveAttribute('aria-current', 'page');
-  await expectLooksDisabled(link('Next'));
+  const next = nav.locator('[scPaginationNext]');
+  await expectLooksDisabled(next);
+  await expect(next).not.toHaveAttribute('href');
 });
 
 test('Disabled: a disabled page is not followed', async ({ page }) => {

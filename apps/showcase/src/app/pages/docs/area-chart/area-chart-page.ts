@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ScKbd, ScTypeset } from '@semantic-components/ui';
 import { Anatomy } from '../../../components/anatomy/anatomy';
 import {
@@ -22,7 +21,6 @@ import { StackedAreaChartDemoContainer } from './demos/stacked-area-chart-demo-c
     AreaChartUsageDemoContainer,
     Anatomy,
     ApiTable,
-    RouterLink,
     RtlAreaChartDemoContainer,
     InteractiveAreaChartDemoContainer,
     StackedAreaChartDemoContainer,
@@ -109,13 +107,7 @@ import { StackedAreaChartDemoContainer } from './demos/stacked-area-chart-demo-c
         <h2 scTypeset appToc>API reference</h2>
         <p>
           The series&apos; inputs. The chart, its plot, axes, tooltip and legend
-          are on the
-          <a
-            routerLink="/docs/charts/chart"
-            class="underline underline-offset-4"
-            >Chart</a
-          >
-          page.
+          are on the Chart page, the one before this.
         </p>
         <app-api-table label="ScChartArea inputs" [inputs]="inputs" />
       </section>
