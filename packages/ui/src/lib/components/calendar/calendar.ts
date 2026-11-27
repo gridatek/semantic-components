@@ -23,6 +23,7 @@ import {
   type ScFirstDayOfWeek,
   injectDisplayLocale,
   ɵchosenFirstDayOfWeek,
+  ɵkeepDigitOrder,
   ɵweekStart,
 } from '../../utils';
 import { ScCalendarDay } from './calendar-day';
@@ -213,16 +214,25 @@ export class ScCalendar implements FormValueControl<ScCalendarValue> {
   /** The user's first day, once chosen: before the part's. */
   private readonly chosenWeekStart = ɵchosenFirstDayOfWeek();
 
-  /** What is shown: the month(s), the year, or the years. */
-  readonly heading = computed(() => {
+  /**
+   * What is shown: the month(s), the year, or the years — in the user's
+   * digits, kept in order (a span between two Arabic-Indic years).
+   */
+  readonly heading = computed(() =>
+    ɵkeepDigitOrder(this.displayLocale(), this.written()),
+  );
+  private readonly written = computed(() => {
     const locale = this.displayLocale();
     const view = this.view();
     const first = this.first();
+    // A year as a year: no grouping (2026, not 2,026).
+    const year = (value: number) =>
+      new Intl.NumberFormat(locale, { useGrouping: false }).format(value);
     if (view === 'year') {
       const start = this.decadeStart();
-      return `${start} – ${start + 11}`;
+      return `${year(start)} – ${year(start + 11)}`;
     }
-    if (view === 'month') return String(first.year);
+    if (view === 'month') return year(first.year);
     const months = this.months();
     const last = months[months.length - 1];
     const label = (month: Temporal.PlainYearMonth) =>

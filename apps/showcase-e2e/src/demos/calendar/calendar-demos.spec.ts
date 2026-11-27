@@ -439,3 +439,46 @@ test("The user's numbering system (kept as a cookie): the days and the heading i
     /[0-9]/,
   );
 });
+
+test("The user's numbering system: the months view's year and the years view's span in Arabic digits, in order", async ({
+  page,
+  baseURL,
+}) => {
+  await page.context().addCookies([
+    {
+      name: 'sc-numbering-system',
+      value: 'arab',
+      url: baseURL ?? 'http://localhost:4200',
+    },
+  ]);
+  await page.clock.setFixedTime('2026-10-22T10:00:00');
+  await page.goto('/demos/calendar/calendar-usage-demo');
+  const heading = page.locator('[scCalendarHeading]').first();
+  // The left-to-right mark after a run (kept in order) is invisible.
+  await expect(heading).toHaveText(/^October ٢٠٢٦\u200E?$/);
+  // Zoomed out: the months, under their year.
+  await heading.click();
+  await expect(heading).toHaveText(/^٢٠٢٦\u200E?$/);
+  // The years: twelve, from the first to the last — in the user's digits,
+  // drawn first to last (the span's dash between two Arabic numbers).
+  await heading.click();
+  await expect(heading).toContainText('٢٠١٦');
+  await expect(heading).toContainText('٢٠٢٧');
+  const [from, to] = await heading.evaluate((button) => {
+    const walker = document.createTreeWalker(button, NodeFilter.SHOW_TEXT);
+    const at = (part: string) => {
+      for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+        const start = (node as Text).data.indexOf(part);
+        if (start < 0) continue;
+        const range = document.createRange();
+        range.setStart(node, start);
+        range.setEnd(node, start + part.length);
+        walker.currentNode = button;
+        return range.getBoundingClientRect().left;
+      }
+      return NaN;
+    };
+    return [at('٢٠١٦'), at('٢٠٢٧')];
+  });
+  expect(from).toBeLessThan(to);
+});
