@@ -63,7 +63,9 @@ import { SizeRatingDemoContainer } from './demos/size-rating-demo-container';
         <h2 scTypeset appToc>Accessibility</h2>
         <ul class="list-disc space-y-2 ps-6">
           <li>
-            WAI-ARIA&apos;s rating slider: one tab stop.
+            WAI-ARIA&apos;s rating slider: one tab stop, a native range input
+            out of sight (its focus ring on the stars). In a field it takes the
+            field&apos;s id: the label ties to it by <code scTypeset>for</code>.
             <kbd scKbd>→</kbd> and <kbd scKbd>↑</kbd> raise it by its step,
             <kbd scKbd>←</kbd> and <kbd scKbd>↓</kbd> lower it (mirrored right
             to left), <kbd scKbd>Home</kbd> and <kbd scKbd>End</kbd> go to the

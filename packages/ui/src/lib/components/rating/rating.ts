@@ -11,16 +11,19 @@ import {
   model,
   output,
   signal,
+  viewChild,
 } from '@angular/core';
 import type { FormValueControl } from '@angular/forms/signals';
 import { cn } from 'cn';
 import { bindInput, injectDisplayLocale } from '../../utils';
-import { ScField, ɵregisterFieldControl } from '../field';
+import { ScField } from '../field';
 import { ScRatingIcon } from './rating-icon';
 
 /**
  * A rating: WAI-ARIA's rating slider — one value, `null` while not rated,
- * up to `count` stars. Whole or part stars (`step`), read out by your
+ * up to `count` stars. The slider is a native range input, visually hidden
+ * (in a field, the field's id: its label ties to it by `for`); the stars are
+ * drawn beside it, pressed with a pointer. Whole or part stars (`step`), read out by your
  * `valueText` ("3.5 out of 5 stars"). Read-only, it is an image named by
  * that text, for any score (4.2). It draws the stars: your icon
  * (`<ng-template scRatingIcon>`), twice each — empty, and full over it up to the
@@ -31,6 +34,26 @@ import { ScRatingIcon } from './rating-icon';
   exportAs: 'scRating',
   imports: [NgTemplateOutlet],
   template: `
+    @if (!readonly()) {
+      <input
+        #slider
+        type="range"
+        class="sr-only"
+        [attr.id]="field?.id() ?? null"
+        min="0"
+        [max]="count()"
+        [step]="step()"
+        [value]="value() ?? 0"
+        [disabled]="disabled()"
+        [attr.aria-label]="ariaLabelInput() || null"
+        [attr.aria-valuetext]="text() || null"
+        [attr.aria-required]="required() || null"
+        [attr.aria-invalid]="(touched() && invalid()) || null"
+        [attr.aria-describedby]="ariaDescribedBy()"
+        (keydown)="onKeydown($event)"
+        (input)="onInput($event)"
+      />
+    }
     @for (star of stars(); track star) {
       <span
         data-slot="rating-item"
@@ -55,23 +78,10 @@ import { ScRatingIcon } from './rating-icon';
   encapsulation: ViewEncapsulation.None,
   host: {
     'data-slot': 'rating',
-    '[attr.role]': "readonly() ? 'img' : 'slider'",
-    '[attr.tabindex]': 'readonly() ? null : disabled() ? -1 : 0',
-    // Named by the label of the field it is in (`<field id>-label`); read-only,
-    // by its value text.
-    '[attr.aria-labelledby]':
-      '!readonly() && field ? field.id() + "-label" : null',
+    // Read-only: an image named by its value text. Else the slider inside.
+    '[attr.role]': "readonly() ? 'img' : null",
     '[attr.aria-label]': 'ariaLabel()',
-    '[attr.aria-valuemin]': 'readonly() ? null : 0',
-    '[attr.aria-valuemax]': 'readonly() ? null : count()',
-    '[attr.aria-valuenow]': 'readonly() ? null : (value() ?? 0)',
-    '[attr.aria-valuetext]': 'readonly() ? null : text() || null',
-    '[attr.aria-disabled]': 'disabled() || null',
-    '[attr.aria-required]': 'required() || null',
-    '[attr.aria-invalid]': '(touched() && invalid()) || null',
-    '[attr.aria-describedby]': 'ariaDescribedBy()',
     '[class]': 'class()',
-    '(keydown)': 'onKeydown($event)',
     '(pointermove)': 'onPointerMove($event)',
     '(pointerleave)': 'preview.set(null)',
     '(click)': 'onClick($event)',
@@ -138,9 +148,11 @@ export class ScRating implements FormValueControl<number | null> {
   });
 
   // Read-only: named by its value text (an image's name is what it shows).
-  private readonly ariaLabel = computed(
-    () => (this.readonly() ? this.text() : '') || this.ariaLabelInput() || null,
+  private readonly ariaLabel = computed(() =>
+    this.readonly() ? this.text() || this.ariaLabelInput() || null : null,
   );
+  /** The slider: a native range input, out of sight. */
+  private readonly slider = viewChild<ElementRef<HTMLInputElement>>('slider');
 
   private readonly ariaDescribedBy = computed(
     () =>
@@ -155,7 +167,8 @@ export class ScRating implements FormValueControl<number | null> {
 
   private readonly class = computed(() =>
     cn(
-      'text-primary inline-flex w-fit items-center gap-0.5 rounded-sm outline-none focus-visible:ring-3 focus-visible:ring-ring/50',
+      // The slider's focus ring, on the stars.
+      'text-primary relative inline-flex w-fit items-center gap-0.5 rounded-sm outline-none has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50',
       this.interactive() && 'cursor-pointer touch-manipulation',
       this.disabled() && 'opacity-50',
       this.classInput(),
@@ -179,7 +192,7 @@ export class ScRating implements FormValueControl<number | null> {
 
   /** Focuses it — Signal Forms does, to show an invalid field. */
   focus(options?: FocusOptions): void {
-    this.element.focus(options);
+    this.slider()?.nativeElement.focus(options);
   }
 
   private set(score: number | null): void {
@@ -191,6 +204,19 @@ export class ScRating implements FormValueControl<number | null> {
     const decimals = (String(step).split('.')[1] ?? '').length;
     const clamped = Math.min(this.count(), Math.max(step, score));
     this.value.set(Number(clamped.toFixed(decimals)));
+  }
+
+  /**
+   * A change the keys above don't make (Page Up and Down, a screen reader's
+   * increment): the slider's value, as a score — 0 is none, if it can be taken
+   * back, else the lowest. The slider then shows the score.
+   */
+  private onInput(event: Event): void {
+    const slider = event.target as HTMLInputElement;
+    const value = slider.valueAsNumber;
+    if (value > 0) this.set(value);
+    else this.set(this.deselectable() ? null : this.step());
+    slider.value = String(this.value() ?? 0);
   }
 
   private onKeydown(event: KeyboardEvent): void {
@@ -240,7 +266,7 @@ export class ScRating implements FormValueControl<number | null> {
     if (score === null) return;
     this.preview.set(null);
     this.set(this.deselectable() && score === this.value() ? null : score);
-    this.element.focus({ preventScroll: true });
+    this.focus({ preventScroll: true });
   }
 
   /** The score under the pointer: its star, and how far across it (by the step). */
@@ -264,8 +290,6 @@ export class ScRating implements FormValueControl<number | null> {
   }
 
   constructor() {
-    // Named by its field's label: no `for` at it, a click on it focuses it.
-    ɵregisterFieldControl();
     // The field it is in follows it (`data-disabled`, `data-invalid`).
     const field = this.field;
     if (field) {
