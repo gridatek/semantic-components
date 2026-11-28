@@ -83,6 +83,7 @@ Focus crosses months by itself: the shown months follow it.
 ## Accessibility
 
 - Each month is a `grid` named by its month; column headers say the days in full; each day says its full date ("Wednesday, October 14, 2026").
+- The months and years views are grids too (named by the year, by the span), built of `div`s (`row`, `gridcell`), not a table: they have no column names to give, and a table without header cells is a layout table to WAVE.
 - Today is `aria-current="date"`; picked days `aria-selected`; unpicked-able ones `aria-disabled`.
 - The heading is said when it changes (a polite live region).
 - It is a `group`: name it (`aria-label` or `aria-labelledby`).

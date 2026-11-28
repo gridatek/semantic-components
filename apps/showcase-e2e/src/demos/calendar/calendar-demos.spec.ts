@@ -89,13 +89,22 @@ test.describe('Single', () => {
     await expect(heading(page)).toHaveText('October 2026');
   });
 
-  test('views: months, then years — picked back down', async ({ page }) => {
+  test('views: months, then years — picked back down; each a grid of divs, not a table (no column names to give: a layout table to WAVE)', async ({
+    page,
+  }) => {
     await page.getByRole('button', { name: 'October 2026' }).click();
     const months = page.locator('[data-slot="calendar-cell-month"]');
     await expect(months).toHaveCount(12);
     await expect(heading(page)).toHaveText('2026');
+    const monthGrid = page.getByRole('grid', { name: '2026' });
+    await expect(monthGrid).toHaveJSProperty('tagName', 'DIV');
+    await expect(monthGrid.getByRole('row')).toHaveCount(4);
+    await expect(monthGrid.getByRole('gridcell')).toHaveCount(12);
     await page.getByRole('button', { name: '2026' }).click();
     await expect(heading(page)).toHaveText('2016 – 2027');
+    const yearGrid = page.getByRole('grid', { name: '2016 – 2027' });
+    await expect(yearGrid).toHaveJSProperty('tagName', 'DIV');
+    await expect(yearGrid.getByRole('gridcell')).toHaveCount(12);
     await page.getByRole('button', { name: 'Next years' }).click();
     await page
       .locator('[data-slot="calendar-cell-year"]', { hasText: '2030' })
