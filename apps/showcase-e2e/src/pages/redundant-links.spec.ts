@@ -3,11 +3,12 @@ import { redundantLinks } from '../axe';
 
 /**
  * Adjacent links to the same URL (WAVE's "Redundant link"): two tab stops,
- * read twice, for one place. The page-level helper checks it; what isn't
- * shown (another width's link, an inert or hidden part) is left out. Plain
- * markup: no app.
+ * read twice, for one place. The page-level helper checks it — hidden
+ * links too, as WAVE reads the HTML (one link per width, the other hidden,
+ * is two). Left out: an inert part, an editor's content. Plain markup: no
+ * app.
  */
-test('two shown links in a row to one URL are found; with another link between, one hidden, or one in an editor (no tab stop), not', async ({
+test("two links in a row to one URL are found, a hidden one too (another width's); with another link between, inert, or in an editor (no tab stop), not", async ({
   page,
 }) => {
   await page.setContent(`
@@ -23,5 +24,6 @@ test('two shown links in a row to one URL are found; with another link between, 
   `);
   expect(await redundantLinks(page)).toEqual([
     '"Docs" and "Read the docs": /docs',
+    '"C" and "C, another width": /c',
   ]);
 });

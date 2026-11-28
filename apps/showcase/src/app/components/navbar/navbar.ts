@@ -204,22 +204,9 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           <svg siSearchIcon></svg>
           <span class="sr-only">Search</span>
         </button>
-        <a
-          scLink
-          variant="ghost"
-          href="https://github.com/gridatek/semantic-components"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hidden gap-1 md:inline-flex"
-        >
-          <svg siGithubIcon></svg>
-          <span class="sr-only">GitHub</span>
-          @if (starCount()) {
-            <span class="text-muted-foreground w-fit text-xs tabular-nums">
-              {{ starCount() }}
-            </span>
-          }
-        </a>
+        <!-- One link at every width (two, one hidden per width, were a
+             redundant link to WAVE): an icon on a phone, its star count
+             beside it from 768px. -->
         <a
           scLink
           variant="ghost"
@@ -227,10 +214,17 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           href="https://github.com/gridatek/semantic-components"
           target="_blank"
           rel="noopener noreferrer"
-          class="md:hidden"
+          class="md:w-auto md:gap-1 md:px-2.5"
         >
           <svg siGithubIcon></svg>
           <span class="sr-only">GitHub</span>
+          @if (starCount()) {
+            <span
+              class="text-muted-foreground hidden w-fit text-xs tabular-nums md:inline"
+            >
+              {{ starCount() }}
+            </span>
+          }
         </a>
         <!-- No Get Started button: Documentation leads there — one link to
              a page in the bar (WAVE's redundant link). -->

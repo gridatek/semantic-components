@@ -99,17 +99,16 @@ export async function expectNoA11yViolations(
 /**
  * Adjacent links to one URL (WAVE's "Redundant link"), as `"first" and
  * "second": url`: two tab stops, read twice, for one place — keep one link,
- * or give a placeholder its own fragment. Shown links only, in the page's
- * order: what is hidden (another width's link), inert or aria-hidden is left
- * out, and what an editor holds (`contenteditable`: its links are text there,
- * no tab stops — an editor beside the view of its content).
+ * or give a placeholder its own fragment. In the page's order, hidden links
+ * too, as WAVE reads the HTML: one link per width, the other hidden, is two
+ * (the header's GitHub link). Left out: what is inert, and what an editor
+ * holds (`contenteditable`: its links are text there, no tab stops — an
+ * editor beside the view of its content).
  */
 export async function redundantLinks(page: Page): Promise<string[]> {
   return page.locator('a[href]').evaluateAll((all) => {
     const shown = (all as HTMLAnchorElement[]).filter(
-      (a) =>
-        a.getClientRects().length > 0 &&
-        !a.closest('[inert], [aria-hidden="true"], [contenteditable="true"]'),
+      (a) => !a.closest('[inert], [contenteditable="true"]'),
     );
     const name = (a: HTMLAnchorElement) =>
       (a.getAttribute('aria-label') ?? a.textContent ?? '')

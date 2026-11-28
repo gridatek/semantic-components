@@ -213,3 +213,21 @@ test('no :has() on the root in the stylesheets: re-checked on every change in th
   });
   expect(rules).toEqual([]);
 });
+
+test('one GitHub link in the header, at every width: its star count from 768px (WAVE: redundant link — hidden links count)', async ({
+  page,
+}) => {
+  const github = page.getByRole('banner').getByRole('link', { name: /GitHub/ });
+  for (const width of [390, 1280]) {
+    await page.setViewportSize({ width, height: 800 });
+    await page.goto('/');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    // In the HTML, shown or not.
+    await expect(
+      page
+        .getByRole('banner')
+        .locator('a[href="https://github.com/gridatek/semantic-components"]'),
+    ).toHaveCount(1);
+    await expect(github).toBeVisible();
+  }
+});
