@@ -181,3 +181,29 @@ test("the landing page: one Get Started, the hero's — not the header's beside 
     page.getByRole('banner').getByRole('link', { name: 'Get Started' }),
   ).toBeVisible();
 });
+
+test('no :has() on the root in the stylesheets: re-checked on every change in the page, it froze the heaviest pages (charts) on CI', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  const rules = await page.evaluate(() => {
+    const found: string[] = [];
+    const walk = (list: CSSRuleList) => {
+      for (const rule of Array.from(list)) {
+        const text = (rule as CSSStyleRule).selectorText ?? '';
+        if (text.includes(':root:has(')) found.push(text);
+        if ('cssRules' in rule) walk((rule as CSSGroupingRule).cssRules);
+      }
+    };
+    for (const sheet of Array.from(document.styleSheets)) {
+      try {
+        walk(sheet.cssRules);
+      } catch {
+        // Another origin's sheet: not ours.
+      }
+    }
+    return found;
+  });
+  expect(rules).toEqual([]);
+});

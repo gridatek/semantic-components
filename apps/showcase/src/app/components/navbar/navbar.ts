@@ -1,4 +1,5 @@
 import { injectFormatForDisplay } from '@tanstack/angular-hotkeys';
+import { Location } from '@angular/common';
 import {
   Component,
   ViewEncapsulation,
@@ -6,7 +7,13 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import {
   ScButton,
   ScHeader,
@@ -32,6 +39,7 @@ import {
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
+import { filter, map } from 'rxjs';
 import { docsPath } from '../../data/components';
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
@@ -236,7 +244,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
         <a
           scLink
           variant="button"
-          [class]="getStartedClass"
+          [class]="getStartedClass()"
           routerLink="/docs/overview/get-started"
         >
           Get Started
@@ -409,12 +417,26 @@ export default class Navbar {
   /**
    * Get Started, in the bar from 1280px (Documentation leads there too): lyra
    * and mira fit it at 1024px by a few pixels only, not with CI's fonts and a
-   * longer star count (2026-11-19). Not on the landing page (`app-home`),
-   * whose hero has one: two links in a row to one page (WAVE's redundant
-   * link). By CSS: the same on the server and in the browser.
+   * longer star count (2026-11-19). Not on the landing page, whose hero has
+   * one: two links in a row to one page (WAVE's redundant link). Read from
+   * the URL — the server's request too, so both render alike — not by CSS:
+   * `:root:has(app-home)` was re-checked on every change in the page and
+   * froze the heaviest ones (charts) on CI.
    */
-  private readonly getStartedClass =
-    'hidden xl:inline-flex [:root:has(app-home)_&]:hidden';
+  private readonly getStartedClass = computed(() =>
+    this.onLanding() ? 'hidden' : 'hidden xl:inline-flex',
+  );
+  private readonly onLanding = (() => {
+    const location = inject(Location);
+    const landing = () => location.path().split(/[?#]/)[0] === '';
+    return toSignal(
+      inject(Router).events.pipe(
+        filter((event) => event instanceof NavigationEnd),
+        map(landing),
+      ),
+      { initialValue: landing() },
+    );
+  })();
 
   private readonly componentsService = inject(ComponentsService);
   private readonly featuredComponents = computed(() =>
