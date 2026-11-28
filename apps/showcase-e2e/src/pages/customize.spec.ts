@@ -317,3 +317,16 @@ test('Cover Art: its file input has one label, the drop area (WAVE: multiple for
     ),
   ).toEqual(['Choose cover art']);
 });
+
+test('Recent Transactions: a data table — its column names in a header row, out of sight (WAVE: layout table)', async ({
+  page,
+}) => {
+  await page.goto('/customize');
+  const table = page.getByRole('region', { name: 'Recent transactions' });
+  await expect(table.getByRole('columnheader')).toHaveText(
+    ['Type', 'Merchant', 'Date', 'Amount', 'Actions'],
+    { timeout: 30_000 },
+  );
+  // Out of sight: the card looks as before.
+  await expect(table.locator('thead')).toHaveClass(/\bsr-only\b/);
+});

@@ -96,6 +96,25 @@ export async function expectNoA11yViolations(
   expect(await redundantLinks(page)).toEqual([]);
   expect(await formLabelProblems(page)).toEqual([]);
   expect(await smallText(page)).toEqual([]);
+  expect(await layoutTables(page)).toEqual([]);
+}
+
+/**
+ * WAVE's "Layout table", as `table#id: first text`: a table with no header
+ * cell (`<th>`). A table holds data, and data has column names: a header
+ * row — visually hidden (`<thead class="sr-only">`) if the look has none.
+ */
+export async function layoutTables(page: Page): Promise<string[]> {
+  return page
+    .locator('table')
+    .evaluateAll((tables) =>
+      tables
+        .filter((table) => !table.querySelector('th'))
+        .map(
+          (table) =>
+            `table${table.id ? '#' + table.id : ''}: ${(table.querySelector('td')?.textContent ?? '').trim().slice(0, 40)}`,
+        ),
+    );
 }
 
 /**

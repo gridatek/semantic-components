@@ -78,6 +78,17 @@ import {
           aria-label="Recent transactions"
         >
           <table scTable>
+            <!-- A data table: its column names, out of sight (the card shows
+                 none). Without a header cell it is a layout table to WAVE. -->
+            <thead class="sr-only">
+              <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Merchant</th>
+                <th scope="col">Date</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
             <tbody scTableBody>
               @for (t of transactions; track t.name) {
                 <tr scTableRow>
