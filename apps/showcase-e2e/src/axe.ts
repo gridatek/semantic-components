@@ -102,7 +102,8 @@ export async function expectNoA11yViolations(
  * WAVE's "Very small text", as `<size>: <text>`: visible text of 10px or
  * less — `aria-hidden` text too, it is still seen. 11px is the floor
  * (`text-[0.6875rem]`): smaller isn't readable for many, whatever a
- * reference does. Left out: what isn't shown, and a drawing's text (SVG).
+ * reference does. Left out: what isn't shown, a drawing's text (SVG), and a
+ * PDF page's text layer (pdf.js: its words, transparent, at the page's zoom).
  */
 export async function smallText(page: Page): Promise<string[]> {
   return page.evaluate(() => {
@@ -114,7 +115,12 @@ export async function smallText(page: Page): Promise<string[]> {
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
       const text = node.textContent?.trim();
       const element = node.parentElement;
-      if (!text || !element || element.closest('svg, script, style')) continue;
+      if (
+        !text ||
+        !element ||
+        element.closest('svg, script, style, .textLayer')
+      )
+        continue;
       if (!element.getClientRects().length) continue;
       const style = getComputedStyle(element);
       if (style.visibility === 'hidden') continue;
