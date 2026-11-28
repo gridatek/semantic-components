@@ -20,7 +20,7 @@ In a field it names the field's control by itself:
 </div>
 ```
 
-A custom control — a select's or a combobox's trigger, a date or time input, a listbox, a segmented control, a token input, a color picker — registers itself with its field: the control is named by the label (`aria-labelledby`), and a click on the label focuses the control — a group's first focusable part — without pressing or opening it. A `for` ties only to a native element: the label points it at the native element the control names — a select's or a combobox's trigger (a `button`, with the field's id), a date or time input's first part (`<field id>-first`; a date range input's, its start's) — and has none for a listbox, a segmented control, a token input, a color picker. (A rating's slider is a native range input: a native control, the field's id.) A control of yours passes it as `labelFor` to `ɵregisterFieldControl()`:
+A custom control — a select's or a combobox's trigger, a date or time input, a listbox, a segmented control, a token input, a color picker — registers itself with its field: the control is named by the label (`aria-labelledby`), and a click on the label focuses the control — a group's first focusable part — without pressing or opening it. A `for` ties only to a native element: the label points it at the native element the control names — a select's or a combobox's trigger (a `button`, with the field's id), a date or time input's first part (`<field id>-first`; a date range input's, its start's) — and has none for a segmented control, a token input, a color picker. A control with no native element at all takes a `<div scLabel>` instead (the Listbox: a `<label>` there would be an orphaned form label to WAVE): the same pattern — its id, a `for` at the control (the field's id), which a `div` ignores — the control named by its `aria-labelledby`, a click on it focusing the control. Use a `div` only when nothing better ties the label. (A rating's slider is a native range input: a native control, the field's id.) A control of yours passes it as `labelFor` to `ɵregisterFieldControl()`:
 
 ```html
 <div scField>
@@ -45,10 +45,10 @@ Around a field, it is a choice card — the whole card picks:
 
 ## Parts
 
-| Part          | Selector         | What it does                                                                                                                                                                              |
-| ------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ScLabel`     | `label[scLabel]` | The style's `label` look; in a field, or around one, its `field` look too (choice card: border, corners, padding, focus ring, tint when checked). `for`, `id`: from the field when in one |
-| `ScLabelText` | `[scLabelText]`  | A label's text inside another label (a switch's), so there is never a label in a label                                                                                                    |
+| Part          | Selector                                                                         | What it does                                                                                                                                                                              |
+| ------------- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ScLabel`     | `label[scLabel]`, `div[scLabel]` (a control with no native element: the Listbox) | The style's `label` look; in a field, or around one, its `field` look too (choice card: border, corners, padding, focus ring, tint when checked). `for`, `id`: from the field when in one |
+| `ScLabelText` | `[scLabelText]`                                                                  | A label's text inside another label (a switch's), so there is never a label in a label                                                                                                    |
 
 ## Keyboard and screen readers
 

@@ -37,7 +37,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   template: `
     <form [formRoot]="orderForm" class="grid w-56 gap-3">
       <div scField>
-        <label scLabel>Toppings</label>
+        <div scLabel>Toppings</div>
         <div scListbox multiple [formField]="orderForm.toppings">
           @for (item of items; track item.value) {
             <div scListboxItem [value]="item.value">

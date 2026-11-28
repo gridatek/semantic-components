@@ -25,7 +25,7 @@ import { SiCheckIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div dir="rtl" lang="ar" class="w-56">
       <div scField>
-        <label scLabel>الإضافة</label>
+        <div scLabel>الإضافة</div>
         <div scListbox [(value)]="topping">
           @for (item of items; track item.value) {
             <div scListboxItem [value]="item.value">

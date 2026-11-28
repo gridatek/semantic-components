@@ -22,7 +22,7 @@ The list holds options, groups and separators only: buttons, a search, an empty 
 
 ```html
 <div scField>
-  <label scLabel>Topping</label>
+  <div scLabel>Topping</div>
   <div scListbox [formField]="form.topping">
     @for (item of toppings; track item.value) {
     <div scListboxItem [value]="item.value">

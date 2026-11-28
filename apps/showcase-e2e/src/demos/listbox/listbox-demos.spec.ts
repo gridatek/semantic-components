@@ -37,6 +37,29 @@ test.describe('Usage', () => {
     await expect(option(page, 'Basil')).toBeFocused();
   });
 
+  test("its label: a div — a <label> ties only to a native control, and a list has none (WAVE's orphaned form label) — with the same `for`, naming the list; a click on it focuses the chosen option", async ({
+    page,
+  }) => {
+    const label = page.locator('[scLabel]', { hasText: 'Topping' });
+    await expect(label).toHaveJSProperty('tagName', 'DIV');
+    await expect(label).toHaveAttribute(
+      'for',
+      (await list(page).getAttribute('id')) ?? '',
+    );
+    await expect(page.getByRole('listbox', { name: 'Topping' })).toBeVisible();
+    // No <label> on the page tied to nothing.
+    expect(
+      await page
+        .locator('label')
+        .evaluateAll(
+          (labels) =>
+            (labels as HTMLLabelElement[]).filter((l) => !l.control).length,
+        ),
+    ).toBe(0);
+    await label.click();
+    await expect(option(page, 'Basil')).toBeFocused();
+  });
+
   test('selection follows focus: arrows, End, typing', async ({ page }) => {
     await focus(option(page, 'Basil'));
     await press(page, 'ArrowDown');

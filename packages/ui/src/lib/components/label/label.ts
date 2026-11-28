@@ -1,5 +1,6 @@
 import {
   Directive,
+  ElementRef,
   computed,
   contentChild,
   inject,
@@ -19,9 +20,14 @@ import { SC_FIELD } from '../field';
  * (a select's or a combobox's trigger: `for` ties only to a native element),
  * and a click on the label focuses that control (a group's first focusable
  * part) without pressing it.
+ *
+ * A control with no native element to tie to (a listbox) takes a `div`: a
+ * `<label>` there would be orphaned (WAVE). It keeps the label's pattern —
+ * the same id, and a `for` at the control (the field's id), though a `div`'s
+ * `for` does nothing: the control is named by its `aria-labelledby`.
  */
 @Directive({
-  selector: 'label[scLabel]',
+  selector: 'label[scLabel], div[scLabel]',
   host: {
     'data-slot': 'label',
     '[attr.id]': 'id()',
@@ -32,6 +38,9 @@ import { SC_FIELD } from '../field';
 })
 export class ScLabel {
   private readonly styles = injectStyle().label;
+  /** A `div`, for a control with no native element to tie to. */
+  private readonly div =
+    inject<ElementRef<HTMLElement>>(ElementRef).nativeElement.tagName === 'DIV';
   private readonly field = inject(SC_FIELD, { optional: true });
   /** A field it wraps: a choice card. */
   private readonly wrapped = contentChild(SC_FIELD);
@@ -55,7 +64,9 @@ export class ScLabel {
     if (this.forInput()) return this.forInput();
     if (!this.field) return null;
     const control = this.field.customControl();
-    return control ? control.labelFor() : this.field.id();
+    if (!control) return this.field.id();
+    // A div keeps the pattern: at the control, the field's id.
+    return control.labelFor() ?? (this.div ? this.field.id() : null);
   });
 
   /**
