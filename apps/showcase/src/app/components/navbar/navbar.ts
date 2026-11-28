@@ -1,5 +1,4 @@
 import { injectFormatForDisplay } from '@tanstack/angular-hotkeys';
-import { Location } from '@angular/common';
 import {
   Component,
   ViewEncapsulation,
@@ -7,13 +6,7 @@ import {
   inject,
   input,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import {
-  NavigationEnd,
-  Router,
-  RouterLink,
-  RouterLinkActive,
-} from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   ScButton,
   ScHeader,
@@ -39,7 +32,6 @@ import {
   SiXIcon,
 } from '@semantic-icons/lucide-icons';
 import { cn } from 'cn';
-import { filter, map } from 'rxjs';
 import { docsPath } from '../../data/components';
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { ComponentsService } from '../../services/components-service';
@@ -240,15 +232,8 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
           <svg siGithubIcon></svg>
           <span class="sr-only">GitHub</span>
         </a>
-        <!-- Only where the bar has room for it: Documentation leads there too. -->
-        <a
-          scLink
-          variant="button"
-          [class]="getStartedClass()"
-          routerLink="/docs/overview/get-started"
-        >
-          Get Started
-        </a>
+        <!-- No Get Started button: Documentation leads there — one link to
+             a page in the bar (WAVE's redundant link). -->
         <app-theme-menu />
         <button scHeaderMobileMenuToggle class="-me-2">
           @if (header.mobileMenuOpen()) {
@@ -413,30 +398,6 @@ export default class Navbar {
     this.style === 'sera'
       ? 'hidden md:inline-flex xl:hidden'
       : 'hidden md:inline-flex lg:hidden';
-
-  /**
-   * Get Started, in the bar from 1280px (Documentation leads there too): lyra
-   * and mira fit it at 1024px by a few pixels only, not with CI's fonts and a
-   * longer star count (2026-11-19). Not on the landing page, whose hero has
-   * one: two links in a row to one page (WAVE's redundant link). Read from
-   * the URL — the server's request too, so both render alike — not by CSS:
-   * `:root:has(app-home)` was re-checked on every change in the page and
-   * froze the heaviest ones (charts) on CI.
-   */
-  private readonly getStartedClass = computed(() =>
-    this.onLanding() ? 'hidden' : 'hidden xl:inline-flex',
-  );
-  private readonly onLanding = (() => {
-    const location = inject(Location);
-    const landing = () => location.path().split(/[?#]/)[0] === '';
-    return toSignal(
-      inject(Router).events.pipe(
-        filter((event) => event instanceof NavigationEnd),
-        map(landing),
-      ),
-      { initialValue: landing() },
-    );
-  })();
 
   private readonly componentsService = inject(ComponentsService);
   private readonly featuredComponents = computed(() =>

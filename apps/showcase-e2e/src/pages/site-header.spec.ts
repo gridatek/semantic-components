@@ -165,21 +165,27 @@ test('the logo is the one link home: no Home beside it (WAVE: redundant link)', 
   await expect(banner.locator('a[href="/"]')).toHaveCount(1);
 });
 
-test("the landing page: one Get Started, the hero's — not the header's beside it (WAVE: redundant link); elsewhere the header's", async ({
+test('no Get Started in the header, on any page: Documentation leads there — one link to a page in the bar (WAVE: redundant link)', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 800 });
-  const getStarted = page.getByRole('link', { name: 'Get Started' });
-  await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
-  await expect(getStarted).toHaveCount(1);
-  await expect(
-    page.getByRole('banner').getByRole('link', { name: 'Get Started' }),
-  ).toBeHidden();
-  await page.goto('/components');
-  await expect(
-    page.getByRole('banner').getByRole('link', { name: 'Get Started' }),
-  ).toBeVisible();
+  // In the HTML at all: WAVE reads hidden links too.
+  const inHeader = () =>
+    page
+      .getByRole('banner')
+      .locator('a')
+      .evaluateAll(
+        (links) =>
+          links.filter((a) => a.textContent?.includes('Get Started')).length,
+      );
+  for (const path of ['/', '/components']) {
+    await page.goto(path);
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    expect(await inHeader()).toBe(0);
+    await expect(
+      page.getByRole('banner').getByRole('link', { name: 'Documentation' }),
+    ).toHaveAttribute('href', '/docs/overview/get-started');
+  }
 });
 
 test('no :has() on the root in the stylesheets: re-checked on every change in the page, it froze the heaviest pages (charts) on CI', async ({
