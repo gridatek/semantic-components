@@ -51,7 +51,10 @@ import { ɵregisterFieldControl } from '../field';
   },
 })
 export class ScDateRangeInput implements FormValueControl<ScCalendarRange | null> {
-  private readonly field = ɵregisterFieldControl();
+  /** Named by its field's label: the `for` at its start's first part (`<id>-first`). */
+  private readonly field = ɵregisterFieldControl({
+    labelFor: () => (this.id() ? `${this.id()}-first` : null),
+  });
   /** A Date Range Picker it is in: the value and the limits are its. */
   private readonly picker = inject(SC_DATE_INPUT_HOST, {
     optional: true,

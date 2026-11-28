@@ -108,9 +108,10 @@ export class ScComboboxTrigger {
     // another control: the phone input's country picker): no `for` at it —
     // a label's click would press the button — and a click on the label
     // focuses it without opening it.
-    this.field = ɵregisterFieldControl(
-      () => !this.besideInput() && !!this.root.labelId(),
-    );
+    this.field = ɵregisterFieldControl({
+      when: () => !this.besideInput() && !!this.root.labelId(),
+      labelFor: () => this.fieldId(),
+    });
     inject(DestroyRef).onDestroy(() => this.root.triggerElement.set(undefined));
   }
 

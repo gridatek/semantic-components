@@ -48,33 +48,48 @@ export interface ScFieldContext {
   control: WritableSignal<unknown>;
   /**
    * A custom control named by the field's label (`aria-labelledby`): a
-   * group, a listbox, a slider, a trigger — no native input for its `for`.
-   * The label then has no `for`, and a click on it focuses this element.
+   * group, a listbox, a slider, a trigger. The label's `for` is its
+   * `labelFor` (a native element in it: a trigger button, a date's first
+   * part), or none; a click on the label focuses it.
    */
-  customControl: WritableSignal<HTMLElement | null>;
+  customControl: WritableSignal<ScFieldCustomControl | null>;
+}
+
+/** A field's custom control (see `ScFieldContext.customControl`). */
+export interface ScFieldCustomControl {
+  element: HTMLElement;
+  /** The id of the native element the label's `for` points to, if any. */
+  labelFor: () => string | null;
 }
 
 export const SC_FIELD = new InjectionToken<ScFieldContext>('SC_FIELD');
 
 /**
  * Called in a custom control's constructor: in a field, registers its element
- * as the field's custom control — named by the field's label, which points
- * no `for` at it and, clicked, focuses it. `when`: only while it holds (a
- * combobox trigger beside an input is not the one named). Returns the field.
+ * as the field's custom control — named by the field's label, which, clicked,
+ * focuses it. `labelFor`: the id of a native element in it for the label's
+ * `for` (a trigger button, a date's first part) — none for a group or a
+ * listbox, which a `for` can't reach. `when`: only while it holds (a
+ * combobox trigger beside an input, a date input that is a range's end, are
+ * not the ones named). Returns the field.
  */
 export function ɵregisterFieldControl(
-  when?: () => boolean,
+  options: { when?: () => boolean; labelFor?: () => string | null } = {},
 ): ScFieldContext | null {
   const field = inject(SC_FIELD, { optional: true });
   if (!field) return null;
-  const element = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+  const control: ScFieldCustomControl = {
+    element: inject<ElementRef<HTMLElement>>(ElementRef).nativeElement,
+    labelFor: options.labelFor ?? (() => null),
+  };
   const release = () => {
-    if (untracked(field.customControl) === element)
+    if (untracked(field.customControl) === control)
       field.customControl.set(null);
   };
+  const when = options.when;
   if (when)
-    effect(() => (when() ? field.customControl.set(element) : release()));
-  else field.customControl.set(element);
+    effect(() => (when() ? field.customControl.set(control) : release()));
+  else field.customControl.set(control);
   inject(DestroyRef).onDestroy(release);
   return field;
 }
@@ -118,7 +133,7 @@ export class ScField implements ScFieldContext {
   /** The control that registered itself (see ScFieldContext). */
   readonly control = signal<unknown>(null);
   /** The custom control named by its label (see ScFieldContext). */
-  readonly customControl = signal<HTMLElement | null>(null);
+  readonly customControl = signal<ScFieldCustomControl | null>(null);
   readonly classInput = input<string>('', { alias: 'class' });
   readonly orientation = input<ScFieldVariants['orientation']>('vertical');
   readonly invalidInput = input<boolean>(false, { alias: 'invalid' });

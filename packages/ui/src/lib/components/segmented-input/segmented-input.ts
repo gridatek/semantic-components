@@ -149,7 +149,10 @@ export const SC_SEGMENTED_INPUT_TEMPLATE = `
   },
 })
 export abstract class ScSegmentedInput<V> {
-  protected readonly field = ɵregisterFieldControl();
+  protected readonly field = ɵregisterFieldControl({
+    when: () => this.ɵnamedByField(),
+    labelFor: () => this.ɵfirstPartId(),
+  });
   private readonly ariaLabel = inject(new HostAttributeToken('aria-label'), {
     optional: true,
   });
@@ -363,6 +366,25 @@ export abstract class ScSegmentedInput<V> {
       .find((input) => !part || input.dataset['type'] === part)
       ?.focus(options);
   }
+
+  /**
+   * Named by its field's label (the label's `for` at its first part); not a
+   * date range input's end, whose range is.
+   */
+  protected ɵnamedByField(): boolean {
+    return true;
+  }
+
+  /** Its first part, in the locale's order: the field's label points to it. */
+  readonly ɵfirstPart = computed(
+    () =>
+      this.segments().find((segment) => segment.type !== 'literal')?.type ??
+      null,
+  );
+  /** That part's id: `<id>-first`. */
+  readonly ɵfirstPartId = computed(() =>
+    this.id() ? `${this.id()}-first` : null,
+  );
 
   /** The part a segment edits (the template's context types it loosely). */
   private partOf(segment: ScDateTimeSegmentData): ScDateTimePart {

@@ -27,6 +27,19 @@ test.describe('Usage', () => {
     await expect.poll(() => shown(end(page, 'Check-out'))).toBe('11/06/2026');
   });
 
+  test("its label, tied by `for` to the start's first part; a click on it focuses that part", async ({
+    page,
+  }) => {
+    const label = page.locator('label[scLabel]', { hasText: 'Stay' });
+    const first = end(page, 'Check-in').getByRole('spinbutton').first();
+    expect(
+      await label.evaluate((l: HTMLLabelElement) => l.control?.id ?? null),
+    ).toBe(await first.getAttribute('id'));
+    await expect(first).toHaveAttribute('id', /.+/);
+    await label.click();
+    await expect(first).toBeFocused();
+  });
+
   test('typed straight through: the start, then on into the end', async ({
     page,
   }) => {

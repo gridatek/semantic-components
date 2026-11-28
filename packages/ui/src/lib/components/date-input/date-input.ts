@@ -72,6 +72,11 @@ export class ScDateInput
     () => this.disabled() || !!this.picker?.disabled(),
   );
 
+  /** A date range input's end: the range is named by the field, not it. */
+  protected override ɵnamedByField(): boolean {
+    return !this.part();
+  }
+
   override readonly id = computed(
     () =>
       this.idInput() ||

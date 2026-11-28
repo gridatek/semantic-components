@@ -23,12 +23,19 @@ test.describe('Usage', () => {
   });
 });
 
-test('its label names the group (no `for`: a group is no native control); a click on the label focuses its first part', async ({
+test('its label names the group, tied by `for` to its first part (a native input: WAVE reads it so); a click on the label focuses that part', async ({
   page,
 }) => {
   await page.goto(demo('date-input-usage'));
   const label = page.locator('label[scLabel]', { hasText: 'Birthday' });
-  await expect(label).not.toHaveAttribute('for');
+  await expect(page.getByRole('group', { name: 'Birthday' })).toBeVisible();
+  expect(
+    await label.evaluate(
+      (l: HTMLLabelElement) => l.control?.getAttribute('data-type') ?? null,
+    ),
+  ).toBe('month');
+  // The part keeps its own name.
+  await expect(part(page, 'month')).toHaveAccessibleName(/month/i);
   await label.click();
   await expect(part(page, 'month')).toBeFocused();
 });

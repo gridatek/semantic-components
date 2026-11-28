@@ -28,6 +28,8 @@ import { SC_SEGMENTED_INPUT, type ScDateTimePart } from './segmented-input';
     spellcheck: 'false',
     'data-slot': 'date-time-segment',
     '[attr.data-type]': 'type()',
+    // The first part: what its field's label points to.
+    '[attr.id]': 'id()',
     '[attr.data-empty]': 'empty() || null',
     '[attr.inputmode]': 'inputMode()',
     '[attr.placeholder]': 'placeholder()',
@@ -78,6 +80,10 @@ export class ScDateTimeSegment {
     this.owner.ɵvalueText(this.type()),
   );
   private readonly describedBy = computed(() => this.owner.ɵdescribedBy());
+  /** The first part's id (`<input id>-first`): what its field's label points to. */
+  private readonly id = computed(() =>
+    this.owner.ɵfirstPart() === this.type() ? this.owner.ɵfirstPartId() : null,
+  );
 
   private readonly class = computed(() =>
     cn(

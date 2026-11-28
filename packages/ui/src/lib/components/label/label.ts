@@ -47,23 +47,25 @@ export class ScLabel {
   );
 
   /**
-   * Its own `for`, else the field's control: a native one, or a custom one
-   * that is a `button` (a select's trigger, which takes the field's id). None
-   * for a custom control that is no labelable element (a group, a listbox).
+   * Its own `for`, else the field's control: a native one (the field's id),
+   * or the native element a custom one names (its trigger button, its first
+   * part) — none for a group or a listbox, which a `for` can't reach.
    */
   private readonly for = computed(() => {
     if (this.forInput()) return this.forInput();
     if (!this.field) return null;
     const control = this.field.customControl();
-    return !control || control.tagName === 'BUTTON' ? this.field.id() : null;
+    return control ? control.labelFor() : this.field.id();
   });
 
   /**
-   * A field's custom control: focused on a click, as a native label's — a
-   * `for` at a button would press it (open the list): that is cancelled.
+   * A field's custom control: focused on a click, as a native label's — what
+   * a `for` passes on (a press on a trigger, opening its list) cancelled.
    */
   private focusCustomControl(event: Event): void {
-    const control = this.forInput() ? null : this.field?.customControl();
+    const control = this.forInput()
+      ? null
+      : this.field?.customControl()?.element;
     if (!control) return;
     event.preventDefault();
     const focusable = (element: HTMLElement) =>

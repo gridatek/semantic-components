@@ -46,7 +46,9 @@ export class ScSelectTrigger {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
   private readonly styles = injectStyle().select;
-  private readonly field = ɵregisterFieldControl();
+  private readonly field = ɵregisterFieldControl({
+    labelFor: () => this.field?.id() ?? null,
+  });
 
   readonly classInput = input<string>('', { alias: 'class' });
   readonly idInput = input(inject(_IdGenerator).getId('sc-select-trigger-'), {

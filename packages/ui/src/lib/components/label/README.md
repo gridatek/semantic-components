@@ -20,7 +20,7 @@ In a field it names the field's control by itself:
 </div>
 ```
 
-A custom control — a select's or a combobox's trigger, a date or time input, a listbox, a rating, a segmented control, a token input, a color picker — registers itself with its field: the control is named by the label (`aria-labelledby`), and a click on the label focuses the control — a group's first focusable part — without pressing or opening it. A `for` ties only to a native element: the label keeps it for a trigger that is a `button` (a select's, a combobox's: it takes the field's id), and has none for a group, a listbox, a slider:
+A custom control — a select's or a combobox's trigger, a date or time input, a listbox, a rating, a segmented control, a token input, a color picker — registers itself with its field: the control is named by the label (`aria-labelledby`), and a click on the label focuses the control — a group's first focusable part — without pressing or opening it. A `for` ties only to a native element: the label points it at the native element the control names — a select's or a combobox's trigger (a `button`, with the field's id), a date or time input's first part (`<field id>-first`; a date range input's, its start's) — and has none for a listbox, a rating, a segmented control, a token input, a color picker. A control of yours passes it as `labelFor` to `ɵregisterFieldControl()`:
 
 ```html
 <div scField>
