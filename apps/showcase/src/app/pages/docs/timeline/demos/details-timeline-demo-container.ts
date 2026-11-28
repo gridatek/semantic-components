@@ -7,7 +7,7 @@ import { DetailsTimelineDemo } from './details-timeline-demo';
   imports: [DemoContainer, DetailsTimelineDemo],
   template: `
     <app-demo-container
-      title="Details"
+      title="Collapsible changes"
       [code]="code"
       demoUrl="/demos/timeline/details-timeline-demo"
     >

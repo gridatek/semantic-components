@@ -39,11 +39,13 @@ import { DocsNavService } from '../../services/docs-nav-service';
 import { GithubService } from '../../services/github-service';
 import { styleFrom } from '../../styles';
 import { Logo } from '../logo/logo';
+import { PageName } from '../page-name/page-name';
 import { ThemeMenu } from '../theme-menu/theme-menu';
 
 @Component({
   selector: 'app-navbar',
   imports: [
+    PageName,
     ScButton,
     RouterLink,
     RouterLinkActive,
@@ -330,7 +332,7 @@ import { ThemeMenu } from '../theme-menu/theme-menu';
                     #pageRla="routerLinkActive"
                     [active]="pageRla.isActive"
                   >
-                    {{ page.name }}
+                    <span app-page-name [name]="page.name"></span>
                   </a>
                 </li>
               }

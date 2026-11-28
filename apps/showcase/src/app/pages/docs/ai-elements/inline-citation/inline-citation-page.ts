@@ -32,8 +32,8 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
         <h2 scTypeset appToc>Usage</h2>
         <app-inline-citation-usage-demo-container />
         <p>
-          A <a scLink routerLink="/docs/components/link">Link</a> in a small
-          secondary button look, with a
+          A <a scLink routerLink="/docs/components/link">Link component</a> in a
+          small secondary button look, with a
           <a scLink routerLink="/docs/components/preview-card">Preview Card</a>
           of the page. To list the sources after the reply, use
           <a scLink routerLink="/docs/ai-elements/sources">Sources</a>.
@@ -68,7 +68,8 @@ import { RtlInlineCitationDemoContainer } from './demos/rtl-inline-citation-demo
         <p>
           See the
           <a scLink routerLink="/docs/components/preview-card">Preview Card</a>
-          and the <a scLink routerLink="/docs/components/link">Link</a>.
+          and the
+          <a scLink routerLink="/docs/components/link">Link component</a>.
         </p>
       </section>
     </div>

@@ -7,7 +7,7 @@ import { DetailsPlanDemo } from './details-plan-demo';
   imports: [DemoContainer, DetailsPlanDemo],
   template: `
     <app-demo-container
-      title="Details"
+      title="Description"
       demoUrl="/demos/ai-elements/details-plan-demo"
       [code]="code"
     >

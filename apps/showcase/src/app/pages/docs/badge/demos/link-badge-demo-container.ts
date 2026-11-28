@@ -7,7 +7,7 @@ import { LinkBadgeDemo } from './link-badge-demo';
   imports: [DemoContainer, LinkBadgeDemo],
   template: `
     <app-demo-container
-      title="Link"
+      title="As a link"
       demoUrl="/demos/badge/link-badge-demo"
       [code]="code"
     >

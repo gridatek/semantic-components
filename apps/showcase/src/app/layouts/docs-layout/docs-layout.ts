@@ -63,6 +63,7 @@ import {
 import { cn } from 'cn';
 import { filter, map } from 'rxjs';
 import { Logo } from '../../components/logo/logo';
+import { PageName } from '../../components/page-name/page-name';
 import { PageNav } from '../../components/page-nav/page-nav';
 import { ThemeMenu } from '../../components/theme-menu/theme-menu';
 import { Toc } from '../../components/toc/toc';
@@ -89,6 +90,7 @@ const GROUP_PAGES: Partial<Record<string, string>> = {
 @Component({
   selector: 'app-docs-layout',
   imports: [
+    PageName,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
@@ -221,7 +223,7 @@ const GROUP_PAGES: Partial<Record<string, string>> = {
                             #pageRla="routerLinkActive"
                             [active]="pageRla.isActive"
                           >
-                            <span>{{ page.name }}</span>
+                            <span app-page-name [name]="page.name"></span>
                           </a>
                         </li>
                       }
@@ -260,7 +262,7 @@ const GROUP_PAGES: Partial<Record<string, string>> = {
                             #pageRla="routerLinkActive"
                             [active]="pageRla.isActive"
                           >
-                            <span>{{ page.name }}</span>
+                            <span app-page-name [name]="page.name"></span>
                           </a>
                         </li>
                       }
@@ -299,7 +301,7 @@ const GROUP_PAGES: Partial<Record<string, string>> = {
                             #pageRla="routerLinkActive"
                             [active]="pageRla.isActive"
                           >
-                            <span>{{ page.name }}</span>
+                            <span app-page-name [name]="page.name"></span>
                           </a>
                         </li>
                       }
@@ -337,7 +339,7 @@ const GROUP_PAGES: Partial<Record<string, string>> = {
                             #rla="routerLinkActive"
                             [active]="rla.isActive"
                           >
-                            <span>{{ item.name }}</span>
+                            <span app-page-name [name]="item.name"></span>
                           </a>
                         </li>
                       }
@@ -376,7 +378,7 @@ const GROUP_PAGES: Partial<Record<string, string>> = {
                               #chartRla="routerLinkActive"
                               [active]="chartRla.isActive"
                             >
-                              <span>{{ item.name }}</span>
+                              <span app-page-name [name]="item.name"></span>
                             </a>
                           </li>
                         }
@@ -416,7 +418,7 @@ const GROUP_PAGES: Partial<Record<string, string>> = {
                               #utilRla="routerLinkActive"
                               [active]="utilRla.isActive"
                             >
-                              <span>{{ item.name }}</span>
+                              <span app-page-name [name]="item.name"></span>
                             </a>
                           </li>
                         }
@@ -468,7 +470,7 @@ const GROUP_PAGES: Partial<Record<string, string>> = {
                               #recipeRla="routerLinkActive"
                               [active]="recipeRla.isActive"
                             >
-                              <span>{{ item.name }}</span>
+                              <span app-page-name [name]="item.name"></span>
                             </a>
                           </li>
                         }
@@ -508,7 +510,7 @@ const GROUP_PAGES: Partial<Record<string, string>> = {
                             #pageRla="routerLinkActive"
                             [active]="pageRla.isActive"
                           >
-                            <span>{{ page.name }}</span>
+                            <span app-page-name [name]="page.name"></span>
                           </a>
                         </li>
                       }

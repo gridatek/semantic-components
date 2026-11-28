@@ -13,6 +13,7 @@ import {
   SiArrowRightIcon,
 } from '@semantic-icons/lucide-icons';
 import { filter, map } from 'rxjs';
+import { PageName } from '../page-name/page-name';
 
 /** A docs page, as the sidebar lists it. */
 export interface PageNavItem {
@@ -26,7 +27,7 @@ export interface PageNavItem {
  */
 @Component({
   selector: 'app-page-nav',
-  imports: [RouterLink, ScLink, SiArrowLeftIcon, SiArrowRightIcon],
+  imports: [PageName, RouterLink, ScLink, SiArrowLeftIcon, SiArrowRightIcon],
   template: `
     @if (previous() || next()) {
       <nav
@@ -36,7 +37,7 @@ export interface PageNavItem {
         @if (previous(); as page) {
           <a scLink variant="secondary" size="sm" [routerLink]="page.path">
             <svg siArrowLeftIcon class="rtl:rotate-180"></svg>
-            {{ page.name }}
+            <span app-page-name [name]="page.name"></span>
           </a>
         }
         @if (next(); as page) {
@@ -47,7 +48,7 @@ export interface PageNavItem {
             class="ms-auto"
             [routerLink]="page.path"
           >
-            {{ page.name }}
+            <span app-page-name [name]="page.name"></span>
             <svg siArrowRightIcon class="rtl:rotate-180"></svg>
           </a>
         }

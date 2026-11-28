@@ -7,7 +7,7 @@ import { LinkTraceDemo } from './link-trace-demo';
   imports: [DemoContainer, LinkTraceDemo],
   template: `
     <app-demo-container
-      title="Link"
+      title="As a link"
       demoUrl="/demos/trace/link-trace-demo"
       [code]="code"
     >

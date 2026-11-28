@@ -19,6 +19,7 @@ import {
 } from '@angular/router';
 import { cn } from 'cn';
 import { filter } from 'rxjs';
+import { PageName } from '../../components/page-name/page-name';
 import { Toc } from '../../components/toc/toc';
 import { TocService } from '../../components/toc/toc-service';
 import { docsPath } from '../../data/components';
@@ -26,7 +27,7 @@ import { ComponentsService } from '../../services/components-service';
 
 @Component({
   selector: 'app-components-layout',
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, Toc],
+  imports: [PageName, RouterLink, RouterLinkActive, RouterOutlet, Toc],
   template: `
     <div class="flex min-h-screen">
       <!-- Left Sidebar -->
@@ -42,7 +43,7 @@ import { ComponentsService } from '../../services/components-service';
               routerLinkActive="bg-accent text-accent-foreground"
               class="hover:bg-accent hover:text-accent-foreground block rounded-md px-3 py-2 text-sm transition-colors"
             >
-              {{ item.name }}
+              <span app-page-name [name]="item.name"></span>
             </a>
           }
         </nav>

@@ -54,7 +54,8 @@ import {
         fragment="usage"
         class="text-muted-foreground"
       >
-        Learn More <svg siArrowUpRightIcon></svg>
+        Learn More <span class="sr-only">about projects</span>
+        <svg siArrowUpRightIcon></svg>
       </a>
     </div>
   `,

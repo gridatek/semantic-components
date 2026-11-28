@@ -58,7 +58,8 @@ import { SiArrowUpRightIcon, SiFolderIcon } from '@semantic-icons/lucide-icons';
               fragment="learn-more"
               class="text-muted-foreground"
             >
-              Learn more <svg siArrowUpRightIcon></svg>
+              Learn more <span class="sr-only">about projects</span>
+              <svg siArrowUpRightIcon></svg>
             </a>
           </div>
         </div>

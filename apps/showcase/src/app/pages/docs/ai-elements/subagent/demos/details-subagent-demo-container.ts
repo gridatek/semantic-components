@@ -7,7 +7,7 @@ import { DetailsSubagentDemo } from './details-subagent-demo';
   imports: [DemoContainer, DetailsSubagentDemo],
   template: `
     <app-demo-container
-      title="Details"
+      title="Task and tools"
       demoUrl="/demos/ai-elements/details-subagent-demo"
       [code]="code"
     >

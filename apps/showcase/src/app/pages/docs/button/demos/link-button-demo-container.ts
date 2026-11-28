@@ -7,7 +7,7 @@ import { LinkButtonDemo } from './link-button-demo';
   imports: [DemoContainer, LinkButtonDemo],
   template: `
     <app-demo-container
-      title="Link"
+      title="Link variant"
       demoUrl="/demos/button/link-button-demo"
       [code]="code"
     >

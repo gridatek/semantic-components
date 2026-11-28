@@ -97,6 +97,33 @@ export async function expectNoA11yViolations(
   expect(await formLabelProblems(page)).toEqual([]);
   expect(await smallText(page)).toEqual([]);
   expect(await layoutTables(page)).toEqual([]);
+  expect(await vagueLinks(page)).toEqual([]);
+}
+
+/**
+ * WAVE's "Suspicious link text": links whose whole text — an `sr-only` part
+ * included — says nothing out of context ("Learn more", "click here",
+ * "Details"), as a screen reader's list of links reads them. Fix: name where
+ * it goes, the extra words in an `sr-only` span if the look keeps it short.
+ * "Link" alone too, the Link component's page among them: its entries say
+ * "Link component" to screen readers.
+ */
+export async function vagueLinks(page: Page): Promise<string[]> {
+  return page.locator('a[href]').evaluateAll((links) => {
+    const vague =
+      /^(click here|here|click|more|read more|learn more|more info|more information|continue|link|this|this page|go|details|view|view more|see more|info)\.?$/i;
+    return [
+      ...new Set(
+        links
+          .map((a) =>
+            (a.getAttribute('aria-label') ?? a.textContent ?? '')
+              .replace(/\s+/g, ' ')
+              .trim(),
+          )
+          .filter((text) => vague.test(text)),
+      ),
+    ];
+  });
 }
 
 /**

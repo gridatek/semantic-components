@@ -34,11 +34,13 @@ import {
 import { cn } from 'cn';
 import { CommandPaletteService } from '../../services/command-palette-service';
 import { DocsNavService } from '../../services/docs-nav-service';
+import { PageName } from '../page-name/page-name';
 
 /** The docs' search (Ctrl+K, ⌘K on a Mac): the sidebar's pages, in its groups, by name or description. */
 @Component({
   selector: 'app-command-palette',
   imports: [
+    PageName,
     RouterLink,
     ScCommand,
     ScCommandDialog,
@@ -104,7 +106,7 @@ import { DocsNavService } from '../../services/docs-nav-service';
                           <svg siBoxIcon></svg>
                         }
                       }
-                      <span>{{ page.name }}</span>
+                      <span app-page-name [name]="page.name"></span>
                     </a>
                   }
                 </div>

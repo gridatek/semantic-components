@@ -36,7 +36,8 @@ test('Variants: seven links, seven looks', async ({ page }) => {
   const links = page.getByRole('link');
   await expect(links).toHaveText([
     'Default',
-    'Link',
+    // "variant" for screen readers: "Link" alone is a vague link text.
+    'Link variant',
     'Button',
     'Outline',
     'Secondary',
