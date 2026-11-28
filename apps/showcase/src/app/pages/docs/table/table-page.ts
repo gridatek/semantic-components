@@ -58,6 +58,20 @@ import { TableUsageDemoContainer } from './demos/table-usage-demo-container';
         <h2 scTypeset appToc>Notes</h2>
         <ul class="list-disc space-y-2 ps-6">
           <li>
+            A table holds data, and data has column names: give it a header row,
+            visually hidden when the look shows none (<code scTypeset
+              >&lt;thead scTableHeader class="sr-only"&gt;</code
+            >). Without header cells it is a layout table to checkers such as
+            WAVE, and screen readers lose the column names. Rows of things that
+            aren't data (recent activity, a feed) are a list: an
+            <a scLink routerLink="/docs/components/item">Item</a> group (<code
+              scTypeset
+              >role="list"</code
+            >). A grid with no column names to give is
+            <code scTypeset>div</code>s with ARIA roles, not a table (the
+            Calendar's months view).
+          </li>
+          <li>
             The container scrolls a wide table sideways instead of the page.
             Make it focusable and name it (<code scTypeset
               >tabindex="0" role="region" aria-label</code

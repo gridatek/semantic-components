@@ -41,6 +41,19 @@ test.describe('Table Page', () => {
     await expect(page).toHaveURL(/\/docs\/components\/data-table$/);
   });
 
+  test('Notes: a table always has a header row (hidden when the look shows none); rows that are no data are a list, the Item', async ({
+    page,
+  }) => {
+    await page.goto('/docs/components/table');
+    const notes = page
+      .locator('section')
+      .filter({ has: page.getByRole('heading', { name: 'Notes' }) });
+    await expect(notes).toContainText('layout table');
+    await expect(notes).toContainText('sr-only');
+    await notes.getByRole('link', { name: 'Item', exact: true }).click();
+    await expect(page).toHaveURL(/\/docs\/components\/item$/);
+  });
+
   test('the page fits a phone, its tables scrolling in their own box @mobile', async ({
     page,
   }) => {

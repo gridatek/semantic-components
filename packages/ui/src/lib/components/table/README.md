@@ -39,6 +39,7 @@ A table of data: the native table elements, in the look of the app's style. For 
 shadcn's parts, each a directive on the native element, so the table stays a table to screen readers. shadcn's `Table` renders its scrolling wrapper itself; here it is a part of its own (`scTableContainer`), since a directive on `table` cannot add one.
 
 - The caption names the table; header cells name their columns (`scope="row"` for a row's).
+- A table holds data, and data has column names: always a header row, visually hidden when the look shows none (`<thead scTableHeader class="sr-only">`). Without header cells it is a layout table to checkers such as WAVE, and screen readers lose the column names. Rows of things that aren't data (recent activity, a feed) are a list: an Item group (`scItemGroup`, `role="list"`). A grid with no column names to give is `div`s with ARIA roles, not a table (the Calendar's months and years views).
 - The container scrolls a wide table sideways instead of the page. When it may scroll, make it focusable and name it (`tabindex="0" role="region" aria-label="…"`) so the keyboard reaches what is hidden.
 - A row is highlighted on hover, while it holds an expanded control (`aria-expanded`, an open menu) and with `data-state="selected"`.
 - Align numbers with `text-end`: it follows the reading direction.
