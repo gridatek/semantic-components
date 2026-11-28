@@ -51,7 +51,7 @@ import {
           </div>
           <ng-template scCalendarDay let-day let-outside="outside">
             @if (!outside) {
-              <span class="text-[0.625rem] opacity-70">{{ price(day) }}</span>
+              <span class="text-[0.6875rem] opacity-70">{{ price(day) }}</span>
             }
           </ng-template>
         </div>

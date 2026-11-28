@@ -81,7 +81,7 @@ import {
             >
               <g
                 scChartCategoryAxis
-                class="text-[10px]"
+                class="text-[0.6875rem]"
                 [tickFormatter]="initial"
               />
               <g scChartBar key="amount" corners="end" />

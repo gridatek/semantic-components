@@ -157,7 +157,7 @@ interface Task {
                     }}
                   </time>
                   <span scAvatar class="size-6">
-                    <span scAvatarFallback class="text-[0.625rem]">{{
+                    <span scAvatarFallback class="text-[0.6875rem]">{{
                       task.owner.initials
                     }}</span>
                   </span>

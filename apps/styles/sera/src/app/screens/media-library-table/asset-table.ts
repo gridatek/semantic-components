@@ -180,7 +180,7 @@ const PAGE_SIZE = 8;
                       }
                       @if (asset.duration) {
                         <span
-                          class="bg-foreground/90 text-background absolute end-1 bottom-1 px-1 text-[0.5rem] font-semibold tracking-wider"
+                          class="bg-foreground/90 text-background absolute end-1 bottom-1 px-1 text-[0.6875rem] font-semibold tracking-wider"
                         >
                           {{ asset.duration }}
                         </span>
@@ -214,7 +214,7 @@ const PAGE_SIZE = 8;
                     <span
                       scBadge
                       variant="outline"
-                      class="border px-2 py-0.5 text-[0.625rem]"
+                      class="border px-2 py-0.5 text-[0.6875rem]"
                     >
                       {{ asset.type }}
                     </span>

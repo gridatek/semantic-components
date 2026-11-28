@@ -110,7 +110,7 @@ const PAGE_SIZE = 8;
                 <span
                   scBadge
                   variant="outline"
-                  class="bg-background absolute end-2 top-2 border px-2 py-1 text-[0.625rem]"
+                  class="bg-background absolute end-2 top-2 border px-2 py-1 text-[0.6875rem]"
                 >
                   {{ asset.type }}
                 </span>
@@ -146,7 +146,7 @@ const PAGE_SIZE = 8;
               <div class="flex flex-col gap-0.5 px-0.5">
                 <p class="line-clamp-1 text-sm font-medium">{{ asset.name }}</p>
                 <p
-                  class="text-muted-foreground text-[0.625rem] font-semibold tracking-wider uppercase"
+                  class="text-muted-foreground text-[0.6875rem] font-semibold tracking-wider uppercase"
                 >
                   {{ asset.date }} · {{ asset.size }}
                 </p>

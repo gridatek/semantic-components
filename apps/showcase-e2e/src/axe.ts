@@ -95,6 +95,35 @@ export async function expectNoA11yViolations(
   expect(await orphanLabels(page)).toEqual([]);
   expect(await redundantLinks(page)).toEqual([]);
   expect(await formLabelProblems(page)).toEqual([]);
+  expect(await smallText(page)).toEqual([]);
+}
+
+/**
+ * WAVE's "Very small text", as `<size>: <text>`: visible text of 10px or
+ * less — `aria-hidden` text too, it is still seen. 11px is the floor
+ * (`text-[0.6875rem]`): smaller isn't readable for many, whatever a
+ * reference does. Left out: what isn't shown, and a drawing's text (SVG).
+ */
+export async function smallText(page: Page): Promise<string[]> {
+  return page.evaluate(() => {
+    const found = new Set<string>();
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+    );
+    for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+      const text = node.textContent?.trim();
+      const element = node.parentElement;
+      if (!text || !element || element.closest('svg, script, style')) continue;
+      if (!element.getClientRects().length) continue;
+      const style = getComputedStyle(element);
+      if (style.visibility === 'hidden') continue;
+      const size = parseFloat(style.fontSize);
+      if (size <= 10)
+        found.add(`${Math.round(size * 100) / 100}px: ${text.slice(0, 40)}`);
+    }
+    return [...found];
+  });
 }
 
 /**

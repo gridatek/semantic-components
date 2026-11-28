@@ -7,7 +7,7 @@ export const message: ScMessageStyles = {
   content:
     'flex w-full min-w-0 flex-col gap-2 wrap-break-word group-data-[align=end]/message:*:data-slot:self-end',
   header:
-    'flex max-w-full min-w-0 items-center px-2.5 text-[0.625rem] font-medium text-muted-foreground group-has-data-[variant=ghost]/message:px-0',
+    'flex max-w-full min-w-0 items-center px-2.5 text-[0.6875rem] font-medium text-muted-foreground group-has-data-[variant=ghost]/message:px-0',
   footer:
-    'flex max-w-full min-w-0 items-center px-2.5 text-[0.625rem] font-medium text-muted-foreground group-has-data-[variant=ghost]/message:px-0 group-data-[align=end]/message:justify-end',
+    'flex max-w-full min-w-0 items-center px-2.5 text-[0.6875rem] font-medium text-muted-foreground group-has-data-[variant=ghost]/message:px-0 group-data-[align=end]/message:justify-end',
 };

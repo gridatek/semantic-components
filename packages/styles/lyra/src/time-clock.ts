@@ -5,6 +5,6 @@ import type { ScTimeClockStyles } from '@semantic-components/styles';
 export const timeClock: ScTimeClockStyles = {
   face: 'size-56 bg-muted',
   number: 'text-xs',
-  numberInner: 'text-[0.625rem]',
+  numberInner: 'text-[0.6875rem]',
   time: 'text-2xl font-medium',
 };

@@ -34,7 +34,7 @@ import { styleFrom } from '../../../styles';
                 [style.--color]="'var(' + variable + ')'"
               ></div>
               <span
-                class="hidden max-w-full truncate font-mono text-[0.60rem] md:block"
+                class="hidden max-w-full truncate font-mono text-[0.6875rem] md:block"
                 >{{ variable }}</span
               >
             </li>

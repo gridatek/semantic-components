@@ -6,7 +6,7 @@ import type { ScQuestionnaireStyles } from '@semantic-components/styles';
 export const questionnaire: ScQuestionnaireStyles = {
   root: 'flex w-full min-w-0 flex-col gap-4',
   progress:
-    'min-h-[1lh] w-fit min-w-[14ch] text-[0.625rem] font-medium text-muted-foreground tabular-nums',
+    'min-h-[1lh] w-fit min-w-[14ch] text-[0.6875rem] font-medium text-muted-foreground tabular-nums',
   item: 'flex min-w-0 flex-col gap-3 border-0 p-0 outline-none',
   title:
     'font-heading text-sm font-semibold text-pretty [&:not(:has(~[data-slot=questionnaire-description]))]:mb-3',

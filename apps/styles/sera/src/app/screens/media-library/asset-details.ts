@@ -114,7 +114,7 @@ const TYPE_LABEL: Record<AssetType, string> = {
         <dl class="flex flex-col gap-5 text-sm">
           <div class="flex flex-col gap-1.5">
             <dt
-              class="text-muted-foreground text-[0.625rem] font-semibold tracking-widest uppercase"
+              class="text-muted-foreground text-[0.6875rem] font-semibold tracking-widest uppercase"
             >
               Asset Type
             </dt>
@@ -123,7 +123,7 @@ const TYPE_LABEL: Record<AssetType, string> = {
           <div class="grid grid-cols-2 gap-4">
             <div class="flex flex-col gap-1.5">
               <dt
-                class="text-muted-foreground text-[0.625rem] font-semibold tracking-widest uppercase"
+                class="text-muted-foreground text-[0.6875rem] font-semibold tracking-widest uppercase"
               >
                 Dimensions
               </dt>
@@ -131,7 +131,7 @@ const TYPE_LABEL: Record<AssetType, string> = {
             </div>
             <div class="flex flex-col gap-1.5">
               <dt
-                class="text-muted-foreground text-[0.625rem] font-semibold tracking-widest uppercase"
+                class="text-muted-foreground text-[0.6875rem] font-semibold tracking-widest uppercase"
               >
                 File Size
               </dt>
@@ -143,7 +143,7 @@ const TYPE_LABEL: Record<AssetType, string> = {
         <div class="flex flex-col gap-3">
           <div class="flex items-center justify-between">
             <h3
-              class="text-muted-foreground text-[0.625rem] font-semibold tracking-widest uppercase"
+              class="text-muted-foreground text-[0.6875rem] font-semibold tracking-widest uppercase"
             >
               Tags
             </h3>
@@ -193,7 +193,7 @@ const TYPE_LABEL: Record<AssetType, string> = {
         <div scSeparator></div>
         <div class="flex flex-col gap-3">
           <h3
-            class="text-muted-foreground text-[0.625rem] font-semibold tracking-widest uppercase"
+            class="text-muted-foreground text-[0.6875rem] font-semibold tracking-widest uppercase"
           >
             Used In
           </h3>
