@@ -17,7 +17,9 @@ import { SC_TREE } from './tree-tokens';
  * An item's checkbox, on an `scCheckbox` in its row (`checkable` tree):
  * ticked, empty, or half-ticked while only some of what it holds is. The item
  * says it (`aria-checked`) and Space checks it: the box is out of the tab
- * order and hidden from screen readers.
+ * order and hidden from screen readers — named by its item all the same
+ * (`aria-labelledby`): a form control with no label is one to WAVE, hidden
+ * or not.
  *
  * ```html
  * <input type="checkbox" scCheckbox scTreeItemCheckbox />
@@ -28,6 +30,7 @@ import { SC_TREE } from './tree-tokens';
   host: {
     tabindex: '-1',
     'aria-hidden': 'true',
+    '[attr.aria-labelledby]': 'itemId()',
     '[class]': 'class()',
     '(click)': 'onClick($event)',
     // A press doesn't focus it (hidden from screen readers): the item
@@ -43,6 +46,8 @@ export class ScTreeItemCheckbox {
   readonly classInput = input<string>('', { alias: 'class' });
 
   private readonly class = computed(() => cn(this.classInput()));
+  /** Its item's id: what names it. */
+  private readonly itemId = computed(() => this.item.ariaItem.id());
 
   constructor() {
     this.item.checkbox =

@@ -1,9 +1,11 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import {
   DestroyRef,
   Directive,
   ElementRef,
   HostAttributeToken,
   computed,
+  effect,
   inject,
   input,
 } from '@angular/core';
@@ -17,6 +19,9 @@ import { ScFileInput } from './file-input';
  * Opens the file picker: the way in, by pointer and keyboard. In a field, the
  * first trigger takes the field's id — its label opens the picker — and is
  * named by the label and its own text ("Proof of address, Browse files").
+ * The first trigger also names the hidden native picker (`aria-labelledby`):
+ * a form control with no label is one to WAVE, hidden or not — as Zag's
+ * file upload names its hidden input.
  */
 @Directive({
   selector: 'button[scFileInputTrigger]',
@@ -50,12 +55,15 @@ export class ScFileInputTrigger {
   private readonly first = computed(
     () => !!this.field && this.root.ɵtrigger() === this.element,
   );
+  private readonly ownId = inject(_IdGenerator).getId('sc-file-input-trigger-');
+  /** In a field, the first one: the field's id (its label's `for`). */
   private readonly id = computed(() =>
-    this.first() ? (this.field?.id() ?? null) : null,
+    this.first() ? (this.field?.id() ?? this.ownId) : this.ownId,
   );
   private readonly labelledBy = computed(() => {
+    if (!this.first()) return null;
     const id = this.id();
-    return id && !this.ariaLabel ? `${id}-label ${id}` : null;
+    return !this.ariaLabel ? `${id}-label ${id}` : null;
   });
   private readonly describedBy = computed(() =>
     this.first() ? this.field?.descriptionIds().join(' ') || null : null,
@@ -70,9 +78,16 @@ export class ScFileInputTrigger {
 
   constructor() {
     if (!this.root.ɵtrigger()) this.root.ɵtrigger.set(this.element);
-    inject(DestroyRef).onDestroy(() => {
+    // The first one names the picker.
+    effect(() => {
       if (this.root.ɵtrigger() === this.element)
+        this.root.ɵtriggerId.set(this.id());
+    });
+    inject(DestroyRef).onDestroy(() => {
+      if (this.root.ɵtrigger() === this.element) {
         this.root.ɵtrigger.set(undefined);
+        this.root.ɵtriggerId.set(null);
+      }
     });
   }
 }

@@ -304,3 +304,16 @@ test.describe('Customize Page', () => {
     await expect(tooltip).toContainText('84%');
   });
 });
+
+test('Cover Art: its file input has one label, the drop area (WAVE: multiple form labels)', async ({
+  page,
+}) => {
+  await page.goto('/customize');
+  const input = page.locator('#preview-cover-art');
+  await expect(input).toBeAttached({ timeout: 30_000 });
+  expect(
+    await input.evaluate((el: HTMLInputElement) =>
+      [...(el.labels ?? [])].map((l) => l.textContent?.trim()),
+    ),
+  ).toEqual(['Choose cover art']);
+});

@@ -49,9 +49,14 @@ import { SiCloudUploadIcon } from '@semantic-icons/lucide-icons';
             <div scEmptyDescription>PNG, JPG, PDF up to 10MB</div>
           </div>
           <div scEmptyBody>
-            <button scButton (click)="file.click()">Browse Files</button>
+            <button scButton id="file-upload-browse" (click)="file.click()">
+              Browse Files
+            </button>
+            <!-- Hidden, opened by the button, and named by it: a form control
+                 with no label is one to WAVE, hidden or not. -->
             <input
               #file
+              aria-labelledby="file-upload-browse"
               type="file"
               multiple
               accept="image/png,image/jpeg,application/pdf"

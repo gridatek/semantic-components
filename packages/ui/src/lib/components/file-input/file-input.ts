@@ -41,6 +41,7 @@ import {
       hidden
       tabindex="-1"
       aria-hidden="true"
+      [attr.aria-labelledby]="pickerLabelledBy()"
       [multiple]="multiple() || directory()"
       [attr.accept]="acceptAttribute()"
       [attr.capture]="captureAttribute()"
@@ -101,6 +102,9 @@ export class ScFileInput implements FormValueControl<File[]> {
 
   /** The trigger that takes the field's id: the label opens the picker. */
   readonly ɵtrigger = signal<HTMLElement | undefined>(undefined);
+  /** That trigger's id: what names the hidden picker. */
+  readonly ɵtriggerId = signal<string | null>(null);
+  private readonly pickerLabelledBy = this.ɵtriggerId.asReadonly();
   private readonly picker =
     viewChild.required<ElementRef<HTMLInputElement>>('picker');
 

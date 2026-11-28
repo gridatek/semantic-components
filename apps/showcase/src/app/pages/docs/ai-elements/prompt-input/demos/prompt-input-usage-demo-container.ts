@@ -116,8 +116,11 @@ const efforts = [
   ],
   template: \`
     <form [formRoot]="composer" class="mx-auto w-full max-w-lg py-6">
+      <!-- Hidden, opened by the attach button, and named by it: a form
+           control with no label is one to WAVE, hidden or not. -->
       <input
         #picker
+        aria-labelledby="prompt-input-attach"
         type="file"
         multiple
         class="sr-only"
@@ -159,6 +162,7 @@ const efforts = [
             size="icon-sm"
             variant="outline"
             class="rounded-full"
+            id="prompt-input-attach"
             (click)="picker.click()"
           >
             <svg siPlusIcon></svg>

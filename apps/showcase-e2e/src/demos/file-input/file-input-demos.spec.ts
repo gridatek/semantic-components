@@ -107,6 +107,33 @@ test.describe('Usage', () => {
   });
 });
 
+test('the hidden picker named by its trigger (WAVE: a form control with no label, hidden ones too)', async ({
+  page,
+}) => {
+  await page.goto(demo('file-input-usage'));
+  const trigger = page.getByRole('button', { name: /Browse files/ });
+  await expect(trigger).toHaveAttribute('id', /.+/);
+  await expect(picker(page)).toHaveAttribute(
+    'aria-labelledby',
+    (await trigger.getAttribute('id')) ?? '',
+  );
+});
+
+test("in a field: the trigger takes the field's id — the label ties to it by `for` — and names the picker", async ({
+  page,
+}) => {
+  await page.goto(demo('form-file-input'));
+  const trigger = page.getByRole('button', { name: /Browse files/ });
+  await expect(trigger).toHaveAttribute('id', /.+/);
+  const id = await trigger.getAttribute('id');
+  await expect(picker(page)).toHaveAttribute('aria-labelledby', id ?? '');
+  expect(
+    await page
+      .locator('label[scLabel]', { hasText: 'Proof of address' })
+      .evaluate((l: HTMLLabelElement) => l.control?.id ?? null),
+  ).toBe(id);
+});
+
 test('Upload button: one file, its name; a new one replaces it', async ({
   page,
 }) => {

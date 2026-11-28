@@ -65,7 +65,7 @@ A trigger alone is an upload button; the dropzone and the list are optional.
 ## Accessibility
 
 - The trigger is the way in; the dropzone is not a control and not a Tab stop. In a field, the first trigger takes the field's id: the label opens the picker and, with the trigger's text, names it.
-- The native picker is hidden, out of the Tab order and the accessibility tree.
+- The native picker is hidden, out of the Tab order and the accessibility tree — and still named, by the first trigger (`aria-labelledby`; every trigger has an id: in a field the field's, else its own). A form control with no label is an error to WAVE, hidden or not; Zag's file upload (Ark UI, Chakra) names its hidden input the same way. React Aria's `FileTrigger` leaves it unnamed; MUI puts it inside a `<label>` styled as a button.
 - The list is one Tab stop; its items are focusable and read as what they hold. Name the list and each remove button.
 - `scFileInputStatus`: what was added, removed, kept out — your words.
 

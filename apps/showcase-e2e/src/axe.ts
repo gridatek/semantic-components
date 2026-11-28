@@ -94,6 +94,37 @@ export async function expectNoA11yViolations(
   expect(results.violations.filter((v) => v.nodes.length)).toEqual([]);
   expect(await orphanLabels(page)).toEqual([]);
   expect(await redundantLinks(page)).toEqual([]);
+  expect(await formLabelProblems(page)).toEqual([]);
+}
+
+/**
+ * WAVE's "Missing form label" and "Multiple form labels", as `no label: …`
+ * and `two labels: …`: a form control (an input, a select, a textarea) with
+ * no name — no label, `aria-label` or `aria-labelledby` — hidden ones too
+ * (axe skips them; WAVE reads the HTML: a file input's native picker), and
+ * one with more than one label. Left out: hidden inputs (`type="hidden"`),
+ * buttons, what is inert, and an editor's content.
+ */
+export async function formLabelProblems(page: Page): Promise<string[]> {
+  return page.locator('input, select, textarea').evaluateAll((controls) =>
+    (controls as HTMLInputElement[])
+      .filter(
+        (control) =>
+          !['hidden', 'button', 'submit', 'reset', 'image'].includes(
+            control.type,
+          ) && !control.closest('[inert], [contenteditable="true"]'),
+      )
+      .flatMap((control) => {
+        const html = control.outerHTML.replace(/\s+/g, ' ').slice(0, 160);
+        const labels = control.labels?.length ?? 0;
+        if (labels > 1) return [`two labels: ${html}`];
+        const named =
+          labels > 0 ||
+          !!control.getAttribute('aria-label')?.trim() ||
+          !!control.getAttribute('aria-labelledby')?.trim();
+        return named ? [] : [`no label: ${html}`];
+      }),
+  );
 }
 
 /**

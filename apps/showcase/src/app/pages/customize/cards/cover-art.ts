@@ -24,12 +24,13 @@ import { SiImageIcon } from '@semantic-icons/lucide-icons';
   template: `
     <div scCard>
       <div scCardBody class="flex flex-col gap-3">
-        <label
-          for="preview-cover-art"
+        <!-- A title, not a second label: the drop area is the input's one
+             label (two would be WAVE's multiple form labels). -->
+        <p
           class="text-muted-foreground text-center text-xs tracking-wider uppercase"
         >
           Cover Art
-        </label>
+        </p>
         <div scItem variant="outline" class="aspect-square">
           <label
             for="preview-cover-art"

@@ -178,7 +178,10 @@ import { ValidationFileInputDemoContainer } from './demos/validation-file-input-
           </li>
           <li>
             The native picker is hidden from the Tab order and from screen
-            readers.
+            readers, and named by the first trigger (<code scTypeset
+              >aria-labelledby</code
+            >): a form control with no label is an error to checkers such as
+            WAVE, hidden or not.
           </li>
           <li>
             Name the list, and each remove button after its file; the remove
